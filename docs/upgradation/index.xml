@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – Upgrade</title>
-    <link>https://dell.github.io/docs/upgradation/</link>
+    <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/</link>
     <description>Recent content in Upgrade on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://dell.github.io/docs/upgradation/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/storage-plugin-docs/docs/upgradation/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/powerflex/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/powerflex/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerflex/</guid>
       <description>
         
         
@@ -58,10 +58,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/powermax/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/powermax/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powermax/</guid>
       <description>
         
         
@@ -113,10 +113,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/isilon/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/isilon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/isilon/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/isilon/</guid>
       <description>
         
         
@@ -152,10 +152,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/powerstore/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/powerstore/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerstore/</guid>
       <description>
         
         
@@ -175,10 +175,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: Unity</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/unity/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/unity/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/unity/</guid>
       <description>
         
         

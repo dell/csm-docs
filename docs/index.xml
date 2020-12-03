@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – Documentation</title>
-    <link>https://dell.github.io/docs/</link>
+    <link>https://dell.github.io/storage-plugin-docs/docs/</link>
     <description>Recent content in Documentation on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://dell.github.io/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/storage-plugin-docs/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Getting Started</title>
-      <link>https://dell.github.io/docs/grasp/start/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/grasp/start/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/grasp/start/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/grasp/start/</guid>
       <description>
         
         
@@ -34,10 +34,10 @@
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/powerflex/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/powerflex/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerflex/</guid>
       <description>
         
         
@@ -77,10 +77,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/powermax/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/powermax/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powermax/</guid>
       <description>
         
         
@@ -132,10 +132,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/isilon/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/isilon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/isilon/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/isilon/</guid>
       <description>
         
         
@@ -171,10 +171,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/powerstore/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/powerstore/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerstore/</guid>
       <description>
         
         
@@ -194,10 +194,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: Unity</title>
-      <link>https://dell.github.io/docs/upgradation/drivers/unity/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/upgradation/drivers/unity/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/unity/</guid>
       <description>
         
         
@@ -217,10 +217,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: OperatorHub.io</title>
-      <link>https://dell.github.io/docs/partners/operator/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/partners/operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/partners/operator/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/partners/operator/</guid>
       <description>
         
         
@@ -229,15 +229,15 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Search DellEMC in storage category in Operatorhub.io.
-&lt;img src=&#34;https://dell.github.io/images/ophub1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/ophub1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Click DellEMC Operator.
-&lt;img src=&#34;https://dell.github.io/images/ophub2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/ophub2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Check the desired version is selected and click &lt;em&gt;Install&lt;/em&gt;.  Follow the provided instructions.
-&lt;img src=&#34;https://dell.github.io/images/ophub3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/ophub3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -246,10 +246,10 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
     
     <item>
       <title>Docs: Red Hat OpenShift</title>
-      <link>https://dell.github.io/docs/partners/redhat/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/partners/redhat/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/partners/redhat/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/partners/redhat/</guid>
       <description>
         
         
@@ -258,23 +258,23 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
 &lt;p&gt;&lt;strong&gt;TODO:&lt;/strong&gt; Fill in more detailed steps, reuse screenshots&lt;/p&gt;
 &lt;h2 id=&#34;redhat-openshift-ui&#34;&gt;Redhat OpenShift UI&lt;/h2&gt;
 &lt;p&gt;Type &amp;ldquo;Dell&amp;rdquo; in the operator hub section, to install Dell CSI Operator
-&lt;img src=&#34;https://dell.github.io/images/openshift1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/openshift1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Check the installed dell CSI Operator, under Installed Operstor section
-&lt;img src=&#34;https://dell.github.io/images/openshift3.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/openshift3.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Chose the particular project, under Project subheading
-&lt;img src=&#34;https://dell.github.io/images/openshift2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/openshift2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;You can also check the list of pods available and create one
-&lt;img src=&#34;https://dell.github.io/images/openshift1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/openshift1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>Docs: Docker EE</title>
-      <link>https://dell.github.io/docs/partners/docker/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/partners/docker/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/partners/docker/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/partners/docker/</guid>
       <description>
         
         
@@ -283,19 +283,19 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
 &lt;p&gt;On UCP based clusters, kubectl may not be installed by default, it is important that kubectl is installed prior to the installation of the driver.&lt;/p&gt;
 &lt;p&gt;The worker nodes on UCP backed clusters may run any of the OSs which we support with upstream clusters.&lt;/p&gt;
 &lt;h2 id=&#34;docker-ee-ui-examples&#34;&gt;Docker EE UI Examples&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://dell.github.io/images/first.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://dell.github.io/images/second.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://dell.github.io/images/third.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/first.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/second.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/third.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>Docs: Operator</title>
-      <link>https://dell.github.io/docs/release/operator/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/release/operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/release/operator/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/release/operator/</guid>
       <description>
         
         
@@ -327,10 +327,10 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>https://dell.github.io/docs/features/powerflex/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/features/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/features/powerflex/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/features/powerflex/</guid>
       <description>
         
         
@@ -598,10 +598,10 @@ controller:
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>https://dell.github.io/docs/installation/helm/powerflex/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/powerflex/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerflex/</guid>
       <description>
         
         
@@ -786,7 +786,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;controller&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the &lt;a href=&#34;https://dell.github.io/docs/features/powerflex/&#34;&gt;Features section&lt;/a&gt; for Powerflex specifics.&lt;/td&gt;
+&lt;td&gt;This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powerflex/&#34;&gt;Features section&lt;/a&gt; for Powerflex specifics.&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -873,16 +873,16 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>https://dell.github.io/docs/installation/operator/powerflex/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/operator/powerflex/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerflex/</guid>
       <description>
         
         
         &lt;h2 id=&#34;installing-powerflex-csi-driver-via-operator&#34;&gt;Installing PowerFlex CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerFlex can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites:&lt;/h3&gt;
@@ -1037,10 +1037,10 @@ echo -n &amp;quot;mypassword&amp;quot; | base64
     
     <item>
       <title>Docs: Test PowerFlex CSI Driver</title>
-      <link>https://dell.github.io/docs/installation/test/powerflex/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/test/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/test/powerflex/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/test/powerflex/</guid>
       <description>
         
         
@@ -1161,10 +1161,10 @@ spec:
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>https://dell.github.io/docs/release/powerflex/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/release/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/release/powerflex/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/release/powerflex/</guid>
       <description>
         
         
@@ -1201,10 +1201,10 @@ spec:
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>https://dell.github.io/docs/troubleshooting/powerflex/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/troubleshooting/powerflex/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerflex/</guid>
       <description>
         
         
@@ -1252,10 +1252,10 @@ spec:
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>https://dell.github.io/docs/features/powermax/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/features/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/features/powermax/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/features/powermax/</guid>
       <description>
         
         
@@ -1591,10 +1591,10 @@ aware volume provisioning has been provided in the &lt;code&gt;csi-powermax/helm
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>https://dell.github.io/docs/installation/helm/powermax/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/powermax/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax/</guid>
       <description>
         
         
@@ -1909,21 +1909,21 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>https://dell.github.io/docs/installation/operator/powermax/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/operator/powermax/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powermax/</guid>
       <description>
         
         
         &lt;h2 id=&#34;installing-powermax-csi-driver-via-operator&#34;&gt;Installing PowerMax CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerMax can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator doesn’t use any Helm charts and the installation &amp;amp; configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h3&gt;
 &lt;h4 id=&#34;create-secret-for-client-side-tls-verification-optional&#34;&gt;Create secret for client side TLS verification (Optional)&lt;/h4&gt;
-&lt;p&gt;Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. Please refer detailed documentation on how to create this secret &lt;a href=&#34;https://dell.github.io/docs/installation/helm/powermax.md#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. Please refer detailed documentation on how to create this secret &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax.md#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Create namespace:
@@ -2020,7 +2020,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_DRIVER_NAME&lt;/td&gt;
-&lt;td&gt;Set custom CSI driver name. For more details on this feature review related &lt;a href=&#34;https://dell.github.io/docs/features/powermax/#custom-driver-name-experimental-feature&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Set custom CSI driver name. For more details on this feature review related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax/#custom-driver-name-experimental-feature&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -2050,7 +2050,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_ISCSI_ENABLE_CHAP&lt;/td&gt;
-&lt;td&gt;Enable ISCSI CHAP authentication. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/docs/features/powermax/#iscsi-chap&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Enable ISCSI CHAP authentication. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax/#iscsi-chap&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
@@ -2092,7 +2092,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;allowedTopologies:key&lt;/td&gt;
-&lt;td&gt;This is to enable topology to allow pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/docs/features/powermax.md#topology-support&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;This is to enable topology to allow pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax.md#topology-support&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;&amp;ldquo;000000000001&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
@@ -2102,7 +2102,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;li&gt;Execute the following command to create PowerMax custom resource:&lt;code&gt;kubectl create -f &amp;lt;input_sample_file.yaml&amp;gt;&lt;/code&gt;. The above command will deploy the CSI-PowerMax driver.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;csi-powermax-reverseproxy&#34;&gt;CSI PowerMax ReverseProxy&lt;/h3&gt;
-&lt;p&gt;CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/docs/features/powermax.md#csi-powermax-reverse-proxy&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax.md#csi-powermax-reverse-proxy&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When you install CSI PowerMax ReverseProxy, dell-csi-operator is going to create a Deployment and ClusterIP service as part of the installation&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; - If you wish to use the ReverseProxy with CSI PowerMax driver, the ReverseProxy service should be created before you install the CSIPowerMax driver.&lt;/p&gt;
 &lt;h4 id=&#34;pre-requisites&#34;&gt;Pre-requisites&lt;/h4&gt;
@@ -2159,10 +2159,10 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
     
     <item>
       <title>Docs: Test PowerMax CSI Driver</title>
-      <link>https://dell.github.io/docs/installation/test/powermax/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/test/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/test/powermax/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/test/powermax/</guid>
       <description>
         
         
@@ -2245,10 +2245,10 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>https://dell.github.io/docs/release/powermax/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/release/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/release/powermax/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/release/powermax/</guid>
       <description>
         
         
@@ -2287,10 +2287,10 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>https://dell.github.io/docs/troubleshooting/powermax/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/troubleshooting/powermax/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powermax/</guid>
       <description>
         
         
@@ -2326,10 +2326,10 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>https://dell.github.io/docs/features/powerscale/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/features/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/features/powerscale/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/features/powerscale/</guid>
       <description>
         
         
@@ -2596,10 +2596,10 @@ In case of a failure, one of the standby pods becomes active and takes the posit
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>https://dell.github.io/docs/installation/helm/isilon/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/isilon/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/</guid>
       <description>
         
         
@@ -2889,16 +2889,16 @@ If this secret is an empty secret, then the validation of the certificate fails,
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>https://dell.github.io/docs/installation/operator/isilon/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/operator/isilon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/operator/isilon/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/operator/isilon/</guid>
       <description>
         
         
         &lt;h2 id=&#34;installing-powerscale-csi-driver-via-operator&#34;&gt;Installing PowerScale CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerScale can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;listing-installed-drivers-with-the-csi-isilon-crd&#34;&gt;Listing installed drivers with the CSI Isilon CRD&lt;/h3&gt;
@@ -3042,10 +3042,10 @@ This command will deploy the CSI-PowerScale driver.&lt;/li&gt;
     
     <item>
       <title>Docs: Test PowerScale CSI Driver</title>
-      <link>https://dell.github.io/docs/installation/test/powerscale/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/test/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/test/powerscale/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/test/powerscale/</guid>
       <description>
         
         
@@ -3126,10 +3126,10 @@ kubectl get pvc
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>https://dell.github.io/docs/release/powerscale/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/release/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/release/powerscale/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/release/powerscale/</guid>
       <description>
         
         
@@ -3193,10 +3193,10 @@ kubectl get pvc
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>https://dell.github.io/docs/troubleshooting/powerscale/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/troubleshooting/powerscale/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerscale/</guid>
       <description>
         
         
@@ -3211,16 +3211,16 @@ kubectl get pvc
     
     <item>
       <title>Docs: Powerscale</title>
-      <link>https://dell.github.io/docs/archives/powerscale/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/archives/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/archives/powerscale/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/archives/powerscale/</guid>
       <description>
         
         
         &lt;h2 id=&#34;v13&#34;&gt;v1.3&lt;/h2&gt;
-&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/pdf/RN_isilon.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/pdf/PG_isilon.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/storage-plugin-docs/pdf/RN_isilon.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/storage-plugin-docs/pdf/PG_isilon.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;v12&#34;&gt;v1.2&lt;/h2&gt;
 
       </description>
@@ -3228,10 +3228,10 @@ kubectl get pvc
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>https://dell.github.io/docs/features/powerstore/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/features/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/features/powerstore/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/features/powerstore/</guid>
       <description>
         
         
@@ -3576,10 +3576,10 @@ To configure use &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;code&gt;toleratio
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>https://dell.github.io/docs/installation/helm/powerstore/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/powerstore/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerstore/</guid>
       <description>
         
         
@@ -3825,16 +3825,16 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>https://dell.github.io/docs/installation/operator/powerstore/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/operator/powerstore/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerstore/</guid>
       <description>
         
         
         &lt;h2 id=&#34;installing-powerstore-csi-driver-via-operator&#34;&gt;Installing PowerStore CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerStore can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator doesn’t use any Helm charts and the installation &amp;amp; configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
@@ -3931,10 +3931,10 @@ echo -n &amp;quot;mypassword&amp;quot; | base64
     
     <item>
       <title>Docs: Test PowerStore CSI Driver</title>
-      <link>https://dell.github.io/docs/installation/test/powerstore/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/test/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/test/powerstore/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/test/powerstore/</guid>
       <description>
         
         
@@ -3967,10 +3967,10 @@ storage classes, and automatically mounts them to the pod. Note that nfs storage
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>https://dell.github.io/docs/release/powerstore/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/release/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/release/powerstore/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/release/powerstore/</guid>
       <description>
         
         
@@ -4010,10 +4010,10 @@ storage classes, and automatically mounts them to the pod. Note that nfs storage
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>https://dell.github.io/docs/troubleshooting/powerstore/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/troubleshooting/powerstore/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerstore/</guid>
       <description>
         
         
@@ -4041,10 +4041,10 @@ storage classes, and automatically mounts them to the pod. Note that nfs storage
     
     <item>
       <title>Docs: Quick video lessons</title>
-      <link>https://dell.github.io/docs/grasp/video/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/grasp/video/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/grasp/video/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/grasp/video/</guid>
       <description>
         
         
@@ -4066,10 +4066,10 @@ storage classes, and automatically mounts them to the pod. Note that nfs storage
     
     <item>
       <title>Docs: Unity</title>
-      <link>https://dell.github.io/docs/features/unity/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/features/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/features/unity/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/features/unity/</guid>
       <description>
         
         
@@ -4410,10 +4410,10 @@ To do that you will need to use &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;co
     
     <item>
       <title>Docs: Unity</title>
-      <link>https://dell.github.io/docs/installation/helm/unity/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/unity/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/unity/</guid>
       <description>
         
         
@@ -4856,16 +4856,16 @@ Use the following command to replace the secret
     
     <item>
       <title>Docs: Unity</title>
-      <link>https://dell.github.io/docs/installation/operator/unity/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/operator/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/operator/unity/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/operator/unity/</guid>
       <description>
         
         
         &lt;h2 id=&#34;installing-unity-csi-driver-via-operator&#34;&gt;Installing Unity CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC Unity can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
@@ -5037,10 +5037,10 @@ Use the following command to replace the secret
     
     <item>
       <title>Docs: Test Unity CSI Driver</title>
-      <link>https://dell.github.io/docs/installation/test/unity/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/test/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/test/unity/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/test/unity/</guid>
       <description>
         
         
@@ -5072,10 +5072,10 @@ Use the following command to replace the secret
     
     <item>
       <title>Docs: Unity</title>
-      <link>https://dell.github.io/docs/release/unity/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/release/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/release/unity/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/release/unity/</guid>
       <description>
         
         
@@ -5126,10 +5126,10 @@ Use the following command to replace the secret
     
     <item>
       <title>Docs: Unity</title>
-      <link>https://dell.github.io/docs/troubleshooting/unity/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/troubleshooting/unity/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/unity/</guid>
       <description>
         
         
