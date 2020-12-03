@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – Troubleshooting</title>
-    <link>/docs/troubleshooting/</link>
+    <link>https://dell.github.io/docs/troubleshooting/</link>
     <description>Recent content in Troubleshooting on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="/docs/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/docs/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>/docs/troubleshooting/powerflex/</link>
+      <link>https://dell.github.io/docs/troubleshooting/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/troubleshooting/powerflex/</guid>
+      <guid>https://dell.github.io/docs/troubleshooting/powerflex/</guid>
       <description>
         
         
@@ -66,10 +66,10 @@
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>/docs/troubleshooting/powermax/</link>
+      <link>https://dell.github.io/docs/troubleshooting/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/troubleshooting/powermax/</guid>
+      <guid>https://dell.github.io/docs/troubleshooting/powermax/</guid>
       <description>
         
         
@@ -105,10 +105,10 @@
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>/docs/troubleshooting/powerscale/</link>
+      <link>https://dell.github.io/docs/troubleshooting/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/troubleshooting/powerscale/</guid>
+      <guid>https://dell.github.io/docs/troubleshooting/powerscale/</guid>
       <description>
         
         
@@ -123,10 +123,10 @@
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>/docs/troubleshooting/powerstore/</link>
+      <link>https://dell.github.io/docs/troubleshooting/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/troubleshooting/powerstore/</guid>
+      <guid>https://dell.github.io/docs/troubleshooting/powerstore/</guid>
       <description>
         
         
@@ -154,10 +154,10 @@
     
     <item>
       <title>Docs: Unity</title>
-      <link>/docs/troubleshooting/unity/</link>
+      <link>https://dell.github.io/docs/troubleshooting/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/troubleshooting/unity/</guid>
+      <guid>https://dell.github.io/docs/troubleshooting/unity/</guid>
       <description>
         
         

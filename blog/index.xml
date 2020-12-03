@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – Blog</title>
-    <link>/blog/</link>
+    <link>https://dell.github.io/blog/</link>
     <description>Recent content in Blog on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: CSI drivers Volume expansion and beta Snapshot support update !</title>
-      <link>/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</link>
+      <link>https://dell.github.io/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</guid>
+      <guid>https://dell.github.io/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</guid>
       <description>
         
         
@@ -135,10 +135,10 @@ The version 1.1 is not  available yet in &lt;a href=&#34;https://operatorhub.io/
     
     <item>
       <title>Blog: June 2020 Dell storage enablers big update !</title>
-      <link>/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</link>
+      <link>https://dell.github.io/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</link>
       <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</guid>
+      <guid>https://dell.github.io/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</guid>
       <description>
         
         
@@ -181,10 +181,10 @@ The version 1.1 is not  available yet in &lt;a href=&#34;https://operatorhub.io/
     
     <item>
       <title>Blog: Anthos 1.3 Qualification for PowerMax</title>
-      <link>/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</link>
+      <link>https://dell.github.io/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</link>
       <pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</guid>
+      <guid>https://dell.github.io/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</guid>
       <description>
         
         

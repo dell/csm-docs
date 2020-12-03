@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – Installation</title>
-    <link>/docs/installation/</link>
+    <link>https://dell.github.io/docs/installation/</link>
     <description>Recent content in Installation on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="/docs/installation/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/docs/installation/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: CSI Driver installation using Helm</title>
-      <link>/docs/installation/helm/</link>
+      <link>https://dell.github.io/docs/installation/helm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/installation/helm/</guid>
+      <guid>https://dell.github.io/docs/installation/helm/</guid>
       <description>
         
         
@@ -51,10 +51,10 @@
     
     <item>
       <title>Docs: Dell CSI Operator Installation Process</title>
-      <link>/docs/installation/operator/</link>
+      <link>https://dell.github.io/docs/installation/operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/installation/operator/</guid>
+      <guid>https://dell.github.io/docs/installation/operator/</guid>
       <description>
         
         
@@ -89,7 +89,7 @@
 
 
 &lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;/docs/installation/operator/non-olm-1_hubed218f9b8f0561db6687b1d7e94564b_353937_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1006&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/docs/installation/operator/non-olm-1_hubed218f9b8f0561db6687b1d7e94564b_353937_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1006&#34;&gt;
 	
 &lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Run the command &amp;lsquo;oc get pods&amp;rsquo; to validate the install completed
@@ -103,7 +103,7 @@
 
 
 &lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 3510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;/docs/installation/operator/non-olm-2_huf4405aa1524950a96c6019bf9f4df9b0_257760_3500x800_resize_q75_catmullrom.jpg&#34; width=&#34;3500&#34; height=&#34;800&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/docs/installation/operator/non-olm-2_huf4405aa1524950a96c6019bf9f4df9b0_257760_3500x800_resize_q75_catmullrom.jpg&#34; width=&#34;3500&#34; height=&#34;800&#34;&gt;
 	
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -118,10 +118,10 @@
     
     <item>
       <title>Docs: Offline Installation of Dell EMC CSI Storage Providers</title>
-      <link>/docs/installation/offline/</link>
+      <link>https://dell.github.io/docs/installation/offline/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/installation/offline/</guid>
+      <guid>https://dell.github.io/docs/installation/offline/</guid>
       <description>
         
         
@@ -348,10 +348,10 @@ Preparing a offline bundle for installation
     
     <item>
       <title>Docs: Test Drivers</title>
-      <link>/docs/installation/test/</link>
+      <link>https://dell.github.io/docs/installation/test/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/installation/test/</guid>
+      <guid>https://dell.github.io/docs/installation/test/</guid>
       <description>
         
         
