@@ -1,0 +1,92 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Our Ecosystem Partners</title>
+    <link>/docs/partners/</link>
+    <description>Recent content in Our Ecosystem Partners on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/docs/partners/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: OperatorHub.io</title>
+      <link>/docs/partners/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/partners/operator/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Users can install the Dell CSI Operator via OperatorHub.io on Kubernetes. The following outlines the process to do so:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Search DellEMC in storage category in Operatorhub.io.
+&lt;img src=&#34;/images/ophub1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click DellEMC Operator.
+&lt;img src=&#34;/images/ophub2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Check the desired version is selected and click &lt;em&gt;Install&lt;/em&gt;.  Follow the provided instructions.
+&lt;img src=&#34;/images/ophub3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Red Hat OpenShift</title>
+      <link>/docs/partners/redhat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/partners/redhat/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Users can install the certified Dell CSI Operator via the OpenShift UI. The following outlines the process to do so:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;TODO:&lt;/strong&gt; Fill in more detailed steps, reuse screenshots&lt;/p&gt;
+&lt;h2 id=&#34;redhat-openshift-ui&#34;&gt;Redhat OpenShift UI&lt;/h2&gt;
+&lt;p&gt;Type &amp;ldquo;Dell&amp;rdquo; in the operator hub section, to install Dell CSI Operator
+&lt;img src=&#34;/images/openshift1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Check the installed dell CSI Operator, under Installed Operstor section
+&lt;img src=&#34;/images/openshift3.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Chose the particular project, under Project subheading
+&lt;img src=&#34;/images/openshift2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;You can also check the list of pods available and create one
+&lt;img src=&#34;/images/openshift1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Docker EE</title>
+      <link>/docs/partners/docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/partners/docker/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The Dell CSI Drivers support Docker Enterprise Edition (EE) &amp;amp; deployment on clusters bootstrapped with UCP (Universal Control Plane).&lt;/p&gt;
+&lt;p&gt;The installation process for the driver on such clusters remains the same as the installation process on upstream clusters.&lt;/p&gt;
+&lt;p&gt;On UCP based clusters, kubectl may not be installed by default, it is important that kubectl is installed prior to the installation of the driver.&lt;/p&gt;
+&lt;p&gt;The worker nodes on UCP backed clusters may run any of the OSs which we support with upstream clusters.&lt;/p&gt;
+&lt;h2 id=&#34;docker-ee-ui-examples&#34;&gt;Docker EE UI Examples&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/images/first.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/second.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/third.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

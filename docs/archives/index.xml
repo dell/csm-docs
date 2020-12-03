@@ -1,0 +1,34 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Archives</title>
+    <link>/docs/archives/</link>
+    <description>Recent content in Archives on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/docs/archives/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Powerscale</title>
+      <link>/docs/archives/powerscale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/archives/powerscale/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;v13&#34;&gt;v1.3&lt;/h2&gt;
+&lt;p&gt;-&lt;a href=&#34;/pdf/RN_isilon.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;/pdf/PG_isilon.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;v12&#34;&gt;v1.2&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
