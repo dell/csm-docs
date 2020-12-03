@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – CSI Driver installation using Helm</title>
-    <link>https://dell.github.io/docs/installation/helm/</link>
+    <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/</link>
     <description>Recent content in CSI Driver installation using Helm on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://dell.github.io/docs/installation/helm/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/storage-plugin-docs/docs/installation/helm/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>https://dell.github.io/docs/installation/helm/powerflex/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/powerflex/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerflex/</guid>
       <description>
         
         
@@ -203,7 +203,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;controller&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the &lt;a href=&#34;https://dell.github.io/docs/features/powerflex/&#34;&gt;Features section&lt;/a&gt; for Powerflex specifics.&lt;/td&gt;
+&lt;td&gt;This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powerflex/&#34;&gt;Features section&lt;/a&gt; for Powerflex specifics.&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -290,10 +290,10 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>https://dell.github.io/docs/installation/helm/powermax/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/powermax/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax/</guid>
       <description>
         
         
@@ -608,10 +608,10 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>https://dell.github.io/docs/installation/helm/isilon/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/isilon/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/</guid>
       <description>
         
         
@@ -901,10 +901,10 @@ If this secret is an empty secret, then the validation of the certificate fails,
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>https://dell.github.io/docs/installation/helm/powerstore/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/powerstore/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerstore/</guid>
       <description>
         
         
@@ -1150,10 +1150,10 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
     
     <item>
       <title>Docs: Unity</title>
-      <link>https://dell.github.io/docs/installation/helm/unity/</link>
+      <link>https://dell.github.io/storage-plugin-docs/docs/installation/helm/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/docs/installation/helm/unity/</guid>
+      <guid>https://dell.github.io/storage-plugin-docs/docs/installation/helm/unity/</guid>
       <description>
         
         
