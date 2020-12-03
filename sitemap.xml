@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/docs/grasp/start/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/dell-csi-driver/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/upgradation/drivers/powerflex/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/upgradation/drivers/powermax/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/upgradation/drivers/isilon/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/upgradation/drivers/powerstore/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/upgradation/drivers/unity/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/helm/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/partners/operator/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/partners/redhat/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/uninstall/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/upgradation/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/features/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/operator/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/troubleshooting/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/release/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/grasp/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/partners/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/news/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/archives/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/partners/docker/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/offline/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/release/operator/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/features/powerflex/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/helm/powerflex/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/operator/powerflex/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/test/powerflex/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/release/powerflex/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/troubleshooting/powerflex/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/features/powermax/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/helm/powermax/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/operator/powermax/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/test/powermax/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/release/powermax/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/troubleshooting/powermax/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/features/powerscale/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/helm/isilon/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/operator/isilon/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/test/powerscale/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/release/powerscale/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/troubleshooting/powerscale/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/archives/powerscale/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/features/powerstore/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/helm/powerstore/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/operator/powerstore/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/test/powerstore/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/release/powerstore/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/troubleshooting/powerstore/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/grasp/video/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/search/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/test/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/features/unity/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/helm/unity/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/operator/unity/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/installation/test/unity/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/release/unity/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/docs/troubleshooting/unity/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+</urlset>

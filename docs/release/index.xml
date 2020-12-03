@@ -1,0 +1,298 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Release Notes</title>
+    <link>/docs/release/</link>
+    <description>Recent content in Release Notes on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/docs/release/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Operator</title>
+      <link>/docs/release/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/release/operator/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;release-notes---dell-csi-operator-120&#34;&gt;Release Notes - Dell CSI Operator 1.2.0&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There is a delay in Operator 1.2.0 certification hence it will not be visible in OperatorHub.io and Red Hat OpenShift certified catalogue.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for OpenShift 4.5, 4.6 with RHEL and CoreOS worker nodes&lt;/li&gt;
+&lt;li&gt;Migrated to Operator SDK 1.0&lt;/li&gt;
+&lt;li&gt;Added support for Ubuntu 20.04&lt;/li&gt;
+&lt;li&gt;Added support for Controller high availability (multiple-controllers)&lt;/li&gt;
+&lt;li&gt;Added Topology support&lt;/li&gt;
+&lt;li&gt;Added support for CSI Ephemeral Inline Volumes&lt;/li&gt;
+&lt;li&gt;Added support for mount options&lt;/li&gt;
+&lt;li&gt;Enhanced support for Docker EE 3.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h2&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h2 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h2&gt;
+&lt;p&gt;There are no Known issues in this release.&lt;/p&gt;
+&lt;h2 id=&#34;support&#34;&gt;Support&lt;/h2&gt;
+&lt;p&gt;The Dell CSI Operator image is available on Dockerhub and is officially supported by Dell EMC.
+For any CSI operator and driver issues, questions or feedback, join the &lt;a href=&#34;https://www.dell.com/community/Containers/bd-p/Containers&#34;&gt;Dell EMC Container community&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: PowerFlex</title>
+      <link>/docs/release/powerflex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/release/powerflex/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v130&#34;&gt;Release Notes - CSI PowerFlex v1.3.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for OpenShift 4.5/4.6 with RHEL and CoreOS worker nodes&lt;/li&gt;
+&lt;li&gt;Added automatic SDC deployment on OpenShift CoreOS nodes&lt;/li&gt;
+&lt;li&gt;Added support for Red Hat Enterprise Linux (RHEL) 7.9&lt;/li&gt;
+&lt;li&gt;Added support for Ubuntu 20.04&lt;/li&gt;
+&lt;li&gt;Added support for volume cloning&lt;/li&gt;
+&lt;li&gt;Added support for Controller high availability (multiple-controllers)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Slow volume attached/detach&lt;/td&gt;
+&lt;td&gt;If your Kubernetes 1.17 or 1.18 cluster has a lot of VolumeAttachment objects, the attach/detach operations will be very slow. This is a known issue and affects all CSI plugins. It is tracked here: CSI VolumeAttachment slows pod startup time. To get around this problem you can upgrade to latest Kubernetes/OpenShift patches, which contains a partial fix: 1.17.8+, 1.18.5+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: PowerMax</title>
+      <link>/docs/release/powermax/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/release/powermax/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-powermax-v150&#34;&gt;Release Notes - CSI PowerMax v1.5.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for OpenShift 4.5/4.6 with RHEL and CoreOS worker nodes&lt;/li&gt;
+&lt;li&gt;Added support for Red Hat Enterprise Linux (RHEL) 7.9&lt;/li&gt;
+&lt;li&gt;Added support for Ubuntu 20.04&lt;/li&gt;
+&lt;li&gt;Added support for Docker EE 3.1&lt;/li&gt;
+&lt;li&gt;Added support for Controller high availability (multiple-controllers)&lt;/li&gt;
+&lt;li&gt;Added support for Topology&lt;/li&gt;
+&lt;li&gt;Added support for mount options&lt;/li&gt;
+&lt;li&gt;Changed driver base image to UBI 8.x&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Slow volume attached/detach&lt;/td&gt;
+&lt;td&gt;If your Kubernetes 1.17 or 1.18 cluster has a lot of VolumeAttachment objects, the attach/detach operations will be very slow. This is a known issue and affects all CSI plugins. It is tracked here: CSI VolumeAttachment slows pod startup time. To get around this problem you can upgrade to latest Kubernetes/OpenShift patches, which contains a partial fix: 1.17.8+, 1.18.5+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: PowerScale</title>
+      <link>/docs/release/powerscale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/release/powerscale/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v140&#34;&gt;Release Notes - CSI Driver for PowerScale v1.4.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for OpenShift 4.6 with RHEL and CoreOS worker nodes&lt;/li&gt;
+&lt;li&gt;Added support for Red Hat Enterprise Linux (RHEL) 7.9&lt;/li&gt;
+&lt;li&gt;Added support for Ubuntu 20.04&lt;/li&gt;
+&lt;li&gt;Added support for Controller high availability (multiple-controllers)&lt;/li&gt;
+&lt;li&gt;Added Topology support&lt;/li&gt;
+&lt;li&gt;Added support for CSI Ephemeral Inline Volumes&lt;/li&gt;
+&lt;li&gt;Added support for mount options&lt;/li&gt;
+&lt;li&gt;Enhancements to volume creation from data source&lt;/li&gt;
+&lt;li&gt;Enhanced support for Docker EE 3.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Problem summary&lt;/th&gt;
+&lt;th&gt;Found in version&lt;/th&gt;
+&lt;th&gt;Resolved in version&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;POD creation fails in OpenShift and Kubernetes environments, if hostname is not an FQDN&lt;/td&gt;
+&lt;td&gt;v1.3.0&lt;/td&gt;
+&lt;td&gt;v1.4.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When creating volume from a snapshot or volume from volume, the owner of the new files or folders that are copied from the source snapshot is the Isilon user who is specified in secret.yaml. So the original owner of a file or folder might not be the owner of the newly created file or folder.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;v1.4.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Resolution or workaround, if known&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Creating snapshot fails if the parameter IsiPath in volume snapshot class and related storage class are not the same. The driver uses the incorrect IsiPath parameter and tries to locate the source volume due to the inconsistency.&lt;/td&gt;
+&lt;td&gt;Ensure IsiPath in VolumeSnapshotClass yaml and related storageClass yaml are the same.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;While deleting a volume, if there are files or folders created on the volume that are owned by different users. If the Isilon credentials used are for a nonprivileged Isilon user, the delete volume action fails. It is due to the limitation in Linux permission control.&lt;/td&gt;
+&lt;td&gt;To perform the delete volume action, the user account must be assigned a role that has the privilege ISI_PRIV_IFS_RESTORE. The user account must have the following set of privileges to ensure that all the CSI Isilon driver capabilities work properly:&lt;br&gt; * ISI_PRIV_LOGIN_PAPI&lt;br&gt; * ISI_PRIV_NFS&lt;br&gt; * ISI_PRIV_QUOTA&lt;br&gt; * ISI_PRIV_SNAPSHOT&lt;br&gt; * ISI_PRIV_IFS_RESTORE&lt;br&gt; * ISI_PRIV_NS_IFS_ACCESS&lt;br&gt; * ISI_PRIV_LOGIN_SSH&lt;br&gt; In some cases, ISI_PRIV_BACKUP is also required, for example, when files owned by other users have mode bits set to 700.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: PowerStore</title>
+      <link>/docs/release/powerstore/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/release/powerstore/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v120&#34;&gt;Release Notes - CSI PowerStore v1.2.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for OpenShift 4.5/4.6 with RHEL and CoreOS worker nodes&lt;/li&gt;
+&lt;li&gt;Added support for Red Hat Enterprise Linux (RHEL) 7.9&lt;/li&gt;
+&lt;li&gt;Added support for Ubuntu 20.04&lt;/li&gt;
+&lt;li&gt;Added support for Docker EE 3.1&lt;/li&gt;
+&lt;li&gt;Added support for Controller high availability (multiple-controllers)&lt;/li&gt;
+&lt;li&gt;Added support for Topology&lt;/li&gt;
+&lt;li&gt;Added support for ephemeral volumes&lt;/li&gt;
+&lt;li&gt;Added support for mount options&lt;/li&gt;
+&lt;li&gt;Changed driver base image to UBI 8.x&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Slow volume attached/detach&lt;/td&gt;
+&lt;td&gt;If your Kubernetes 1.17 or 1.18 cluster has a lot of VolumeAttachment objects, the attach/detach operations will be very slow. This is a known issue and affects all CSI plugins. It is tracked here: CSI VolumeAttachment slows pod startup time. To get around this problem you can upgrade to latest Kubernetes/OpenShift patches, which contains a partial fix: 1.17.8+, 1.18.5+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Unity</title>
+      <link>/docs/release/unity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/release/unity/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-unity-v140&#34;&gt;Release Notes - CSI Unity v1.4.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for OpenShift 4.5/4.6 with RHEL and CoreOS worker nodes&lt;/li&gt;
+&lt;li&gt;Added support for Controller high availability (multiple-controllers)&lt;/li&gt;
+&lt;li&gt;Added support for Ubuntu 20.04&lt;/li&gt;
+&lt;li&gt;Added support for Red Hat Enterprise Linux (RHEL) 7.9&lt;/li&gt;
+&lt;li&gt;Added support for Docker EE 3.1&lt;/li&gt;
+&lt;li&gt;Added support for Topology&lt;/li&gt;
+&lt;li&gt;Added support for ephemeral volumes&lt;/li&gt;
+&lt;li&gt;Added raw-block volume creation capability for iSCSI and FC based volumes.&lt;/li&gt;
+&lt;li&gt;Added support for Mount options&lt;/li&gt;
+&lt;li&gt;Changed driver base image to UBI 8.x&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Source NFS PVC cannot be deleted if cloned NFS PVC exists.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Topology related node labels are not removed automatically.&lt;/td&gt;
+&lt;td&gt;Currently, when the driver is uninstalled, topology related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released we need to manually remove the node labels mentioned here &lt;a href=&#34;https://github.com/dell/csi-unity#known-issues&#34;&gt;https://github.com/dell/csi-unity#known-issues&lt;/a&gt; (Point 1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dynamic array detection will not work in Topology based environment&lt;/td&gt;
+&lt;td&gt;Whenever a new array is added or removed, then the driver should be restarted with the below command only if the &lt;strong&gt;topology-based storage classes&lt;/strong&gt; are used. Otherwise, the driver will automatically detect the newly added or removed arrays &lt;a href=&#34;https://github.com/dell//csi-unity#known-issues&#34;&gt;https://github.com/dell//csi-unity#known-issues&lt;/a&gt; (Point 2)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If source PVC is deleted when cloned PVC exists, then source PVC will be deleted in cluster but on array it will still be present and marked for deletion.&lt;/td&gt;
+&lt;td&gt;All the cloned PVC should be deleted in order to delete the source PVC from array.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
