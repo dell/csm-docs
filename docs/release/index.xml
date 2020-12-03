@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – Release Notes</title>
-    <link>/docs/release/</link>
+    <link>https://dell.github.io/docs/release/</link>
     <description>Recent content in Release Notes on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="/docs/release/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/docs/release/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Operator</title>
-      <link>/docs/release/operator/</link>
+      <link>https://dell.github.io/docs/release/operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/release/operator/</guid>
+      <guid>https://dell.github.io/docs/release/operator/</guid>
       <description>
         
         
@@ -50,10 +50,10 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
     
     <item>
       <title>Docs: PowerFlex</title>
-      <link>/docs/release/powerflex/</link>
+      <link>https://dell.github.io/docs/release/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/release/powerflex/</guid>
+      <guid>https://dell.github.io/docs/release/powerflex/</guid>
       <description>
         
         
@@ -90,10 +90,10 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
     
     <item>
       <title>Docs: PowerMax</title>
-      <link>/docs/release/powermax/</link>
+      <link>https://dell.github.io/docs/release/powermax/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/release/powermax/</guid>
+      <guid>https://dell.github.io/docs/release/powermax/</guid>
       <description>
         
         
@@ -132,10 +132,10 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
     
     <item>
       <title>Docs: PowerScale</title>
-      <link>/docs/release/powerscale/</link>
+      <link>https://dell.github.io/docs/release/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/release/powerscale/</guid>
+      <guid>https://dell.github.io/docs/release/powerscale/</guid>
       <description>
         
         
@@ -199,10 +199,10 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
     
     <item>
       <title>Docs: PowerStore</title>
-      <link>/docs/release/powerstore/</link>
+      <link>https://dell.github.io/docs/release/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/release/powerstore/</guid>
+      <guid>https://dell.github.io/docs/release/powerstore/</guid>
       <description>
         
         
@@ -242,10 +242,10 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
     
     <item>
       <title>Docs: Unity</title>
-      <link>/docs/release/unity/</link>
+      <link>https://dell.github.io/docs/release/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/release/unity/</guid>
+      <guid>https://dell.github.io/docs/release/unity/</guid>
       <description>
         
         
