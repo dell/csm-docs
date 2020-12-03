@@ -1,0 +1,28 @@
+---
+title: Unity
+description: Release notes for Unity CSI driver
+---
+## Release Notes - CSI Unity v1.4.0
+
+### New Features/Changes
+- Added support for OpenShift 4.5/4.6 with RHEL and CoreOS worker nodes
+- Added support for Controller high availability (multiple-controllers)
+- Added support for Ubuntu 20.04
+- Added support for Red Hat Enterprise Linux (RHEL) 7.9
+- Added support for Docker EE 3.1
+- Added support for Topology
+- Added support for ephemeral volumes
+- Added raw-block volume creation capability for iSCSI and FC based volumes.
+- Added support for Mount options
+- Changed driver base image to UBI 8.x
+
+### Fixed Issues
+- Source NFS PVC cannot be deleted if cloned NFS PVC exists.
+
+### Known Issues
+
+| Issue                                                        | Workaround                                                   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Topology related node labels are not removed automatically.  | Currently, when the driver is uninstalled, topology related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released we need to manually remove the node labels mentioned here https://github.com/dell/csi-unity#known-issues (Point 1) |
+| Dynamic array detection will not work in Topology based environment | Whenever a new array is added or removed, then the driver should be restarted with the below command only if the **topology-based storage classes** are used. Otherwise, the driver will automatically detect the newly added or removed arrays https://github.com/dell//csi-unity#known-issues (Point 2) |
+| If source PVC is deleted when cloned PVC exists, then source PVC will be deleted in cluster but on array it will still be present and marked for deletion. | All the cloned PVC should be deleted in order to delete the source PVC from array. |
