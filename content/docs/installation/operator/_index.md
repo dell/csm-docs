@@ -8,8 +8,8 @@ description: >
 
 The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
 
-- For installing via OperatorHub.io on Kubernetes, go to the [OperatorHub page](/docs/partners/operator/).
-- For installing via OpenShift with the certified Operator, go to the [OpenShift page](/docs/partners/redhat/).
+- For installing via OperatorHub.io on Kubernetes, go to the [OperatorHub page](../../partners/operator/).
+- For installing via OpenShift with the certified Operator, go to the [OpenShift page](../../partners/redhat/).
 - For installing manually, follow the instructions below.
 
 ### Manual Installation
