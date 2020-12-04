@@ -283,7 +283,7 @@ The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart.
 
 Starting with the v1.1.0 release of the Dell CSI Operator, a new Custom Resource Definition can be used to install CSI PowerMax Reverse Proxy.
 
-This Custom Resource has to be created in the same namespace as the CSI PowerMax driver and it has to be created before the driver Custom Resource. To use the service, the driver Custom Resource manifest must be configured with the service name "powermax-reverseproxy". For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the [Dell CSI Operator documentation](../installation/operator/_index.md).
+This Custom Resource has to be created in the same namespace as the CSI PowerMax driver and it has to be created before the driver Custom Resource. To use the service, the driver Custom Resource manifest must be configured with the service name "powermax-reverseproxy". For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the [Dell CSI Operator documentation](../../installation/operator).
 
 ## User-friendly hostnames
 

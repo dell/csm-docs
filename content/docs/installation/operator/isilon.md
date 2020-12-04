@@ -8,7 +8,7 @@ description: >
 
 The CSI Driver for Dell EMC PowerScale can be installed via the Dell CSI Operator.
 
-To deploy the Operator, follow the instructions available [here](/content/docs/installation/operator/).
+To deploy the Operator, follow the instructions available [here](../).
 
 There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.
 
