@@ -5,22 +5,38 @@ weight: 3
 description: >
   Installing the certified Dell CSI Operator on OpenShift
 ---
-Users can install the certified Dell CSI Operator via the OpenShift UI. The following outlines the process to do so:
+The Dell EMC CSI Drivers support Red Hat OpenShift.  Please see the [Supported Platforms](../../dell-csi-driver/#supported-platforms) table for more details. 
+
+The CSI drivers can be installed via Helm charts or Dell CSI Operator.  The Dell CSI Operator allows for easy installation of the driver via the Openshift UI. The process to install the Operator via the OpenShift UI can be found below.
+
+## Install Operator via the OpenShift UI
 
 **Steps**
 
-**TODO:** Fill in more detailed steps, reuse screenshots
+1. Type "Dell" in the OperatorHub section under Operators, to get the list of available Dell CSI Operators.
+![](/images/oc1.PNG)
 
-## Redhat OpenShift UI
-Type "Dell" in the operator hub section, to install Dell CSI Operator
-![](/images/openshift1.jpg)
+2. Check the version you want to install from the list, you can check the details by clicking it.
+![](/images/oc2.PNG)
 
-Check the installed dell CSI Operator, under Installed Operstor section
-![](/images/openshift3.jpg)
+3. Once selected, click "Install" to proceed with installation process.
+![](/images/oc3.PNG)
 
-Chose the particular project, under Project subheading
-![](/images/openshift2.jpg)
+4. You can verify the list of available operators by selecting "Installed Operator" section.
+![](/images/oc4.PNG)
 
-You can also check the list of pods available and create one
-![](/images/openshift1.jpg)
+5. Select the Dell CSI Operator to get further description.
+![](/images/oc5.PNG)
 
+## Install CSI Drivers via Operator
+
+**Steps**
+
+1. Select the particular CSI driver which you want to install, as seen in step 5 above. In this example, CSI Unity is selected.
+![](/images/driver1.PNG)
+
+2. After clicking "Create CSIUnity" option in above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the [driver install pages for the Dell CSI Operator](../../installation/operator/#driver-install-via-dell-csi-operator) for information on the parameters.
+![](/images/driver2.PNG)
+
+3. You can check the driver installed and node and controller pods running in the Pods section under Workloads.
+![](/images/driver3.png)

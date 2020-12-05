@@ -7,7 +7,7 @@ description: >
 
 The CSI Driver for Dell EMC PowerStore can be installed via the Dell CSI Operator.
 
-To deploy the Operator, follow the instructions available [here](/content/docs/installation/operator/).
+To deploy the Operator, follow the instructions available [here](../).
 
 There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator doesn’t use any Helm charts and the installation & configuration parameters will be slightly different from the ones specified via the Helm installer.
 
