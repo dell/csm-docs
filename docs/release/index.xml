@@ -22,11 +22,11 @@
       <description>
         
         
-        &lt;h1 id=&#34;release-notes---dell-csi-operator-120&#34;&gt;Release Notes - Dell CSI Operator 1.2.0&lt;/h1&gt;
+        &lt;h2 id=&#34;release-notes---dell-csi-operator-120&#34;&gt;Release Notes - Dell CSI Operator 1.2.0&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There is a delay in Operator 1.2.0 certification hence it will not be visible in OperatorHub.io and Red Hat OpenShift certified catalogue.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Added support for OpenShift 4.5, 4.6 with RHEL and CoreOS worker nodes&lt;/li&gt;
 &lt;li&gt;Migrated to Operator SDK 1.0&lt;/li&gt;
@@ -34,14 +34,12 @@
 &lt;li&gt;Added support for Controller high availability (multiple-controllers)&lt;/li&gt;
 &lt;li&gt;Added Topology support&lt;/li&gt;
 &lt;li&gt;Added support for CSI Ephemeral Inline Volumes&lt;/li&gt;
-&lt;li&gt;Added support for mount options&lt;/li&gt;
-&lt;li&gt;Enhanced support for Docker EE 3.1&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h2&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
-&lt;h2 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h2&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no Known issues in this release.&lt;/p&gt;
-&lt;h2 id=&#34;support&#34;&gt;Support&lt;/h2&gt;
+&lt;h3 id=&#34;support&#34;&gt;Support&lt;/h3&gt;
 &lt;p&gt;The Dell CSI Operator image is available on Dockerhub and is officially supported by Dell EMC.
 For any CSI operator and driver issues, questions or feedback, join the &lt;a href=&#34;https://www.dell.com/community/Containers/bd-p/Containers&#34;&gt;Dell EMC Container community&lt;/a&gt;.&lt;/p&gt;
 
@@ -123,6 +121,10 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
 &lt;tr&gt;
 &lt;td&gt;Slow volume attached/detach&lt;/td&gt;
 &lt;td&gt;If your Kubernetes 1.17 or 1.18 cluster has a lot of VolumeAttachment objects, the attach/detach operations will be very slow. This is a known issue and affects all CSI plugins. It is tracked here: CSI VolumeAttachment slows pod startup time. To get around this problem you can upgrade to latest Kubernetes/OpenShift patches, which contains a partial fix: 1.17.8+, 1.18.5+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete Volume fails with error message: volume is part of masking view&lt;/td&gt;
+&lt;td&gt;This issue is due to limitations in Unisphere and occurs when Unisphere is overloaded. Currently, there is no workaround for this but can be avoided by making sure Unisphere is not overloaded during such operations. The Unisphere team is assessing a fix for this in a future Unisphere release&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

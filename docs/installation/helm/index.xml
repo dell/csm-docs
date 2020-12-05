@@ -203,7 +203,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;controller&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powerflex/&#34;&gt;Features section&lt;/a&gt; for Powerflex specifics.&lt;/td&gt;
+&lt;td&gt;This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the &lt;a href=&#34;../../../features/powerflex/&#34;&gt;Features section&lt;/a&gt; for Powerflex specifics.&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -275,7 +275,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
-&lt;p&gt;As part of the driver installation, a set of storage classes are created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
+&lt;p&gt;As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;StorageClass&lt;/code&gt; object in Kubernetes is immutable and can&amp;rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
 In preparation for that, starting in Q4 of 2020, an annotation &lt;code&gt;&amp;quot;helm.sh/resource-policy&amp;quot;: keep&lt;/code&gt; is applied to the storage classes created by the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
@@ -593,7 +593,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;li&gt;This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The &lt;code&gt;verify.sh&lt;/code&gt; script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the &lt;code&gt;--skip-verify-node&lt;/code&gt; option&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
-&lt;p&gt;As part of the driver installation, a set of storage classes are created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
+&lt;p&gt;As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;StorageClass&lt;/code&gt; object in Kubernetes is immutable and can&amp;rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
 In preparation for that, starting in Q4 of 2020, an annotation &lt;code&gt;&amp;quot;helm.sh/resource-policy&amp;quot;: keep&lt;/code&gt; is applied to the storage classes created by the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
@@ -895,6 +895,16 @@ If this secret is an empty secret, then the validation of the certificate fails,
 &lt;li&gt;To create the secret, run &lt;code&gt;kubectl create secret generic isilon-certs --from-file=ca_cert.pem -n isilon&lt;/code&gt;
  &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
+&lt;p&gt;As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;StorageClass&lt;/code&gt; object in Kubernetes is immutable and can&amp;rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
+In preparation for that, starting in Q4 of 2020, an annotation &lt;code&gt;&amp;quot;helm.sh/resource-policy&amp;quot;: keep&lt;/code&gt; is applied to the storage classes created by the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
+This annotation has been applied to give you an opportunity to keep using  these storage classes even with a future release of the driver. In case you wish to not use these storage classes, you will need to delete them by using the &lt;code&gt;kubectl delete storageclass&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;: If you uninstall the driver and reinstall it, you can still face errors if any update in the &lt;code&gt;values.yaml&lt;/code&gt; file leads to an update of the storage class(es):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    Error: cannot patch &amp;quot;&amp;lt;sc-name&amp;gt;&amp;quot; with kind StorageClass: StorageClass.storage.k8s.io &amp;quot;&amp;lt;sc-name&amp;gt;&amp;quot; is invalid: parameters: Forbidden: updates to parameters are forbidden
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In case you want to make such updates, make sure to delete the existing storage classes using the &lt;code&gt;kubectl delete storageclass&lt;/code&gt; command.&lt;br&gt;
+Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&amp;rsquo;t be able to provision new PVCs until at least one storage class is newly created.&lt;/p&gt;
 
       </description>
     </item>
@@ -1135,7 +1145,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
-&lt;p&gt;As part of the driver installation, a set of storage classes are created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
+&lt;p&gt;As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;StorageClass&lt;/code&gt; object in Kubernetes is immutable and can&amp;rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
 In preparation for that, starting in Q4 of 2020, an annotation &lt;code&gt;&amp;quot;helm.sh/resource-policy&amp;quot;: keep&lt;/code&gt; is applied to the storage classes created by the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.

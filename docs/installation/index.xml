@@ -77,6 +77,9 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note-&lt;/strong&gt; For more insights or detailed pre-requisites refer &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;https://github.com/dell/dell-csi-operator&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;steps&#34;&gt;Steps&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;Dell CSI Operator repository&lt;/a&gt;&lt;/li&gt;
@@ -109,7 +112,6 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;openshift1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;driver-install-via-dell-csi-operator&#34;&gt;Driver Install via Dell CSI Operator&lt;/h2&gt;
 &lt;p&gt;For information on how to install the CSI drivers via the Dell CSI Operator, please refer to the sub-pages below for each driver.&lt;/p&gt;
 

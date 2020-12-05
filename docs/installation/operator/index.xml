@@ -24,7 +24,7 @@
         
         &lt;h2 id=&#34;installing-powerflex-csi-driver-via-operator&#34;&gt;Installing PowerFlex CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerFlex can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites:&lt;/h3&gt;
@@ -188,12 +188,12 @@ echo -n &amp;quot;mypassword&amp;quot; | base64
         
         &lt;h2 id=&#34;installing-powermax-csi-driver-via-operator&#34;&gt;Installing PowerMax CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerMax can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator doesn’t use any Helm charts and the installation &amp;amp; configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h3&gt;
-&lt;h4 id=&#34;create-secret-for-client-side-tls-verification-optional&#34;&gt;Create secret for client side TLS verification (Optional)&lt;/h4&gt;
-&lt;p&gt;Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. Please refer detailed documentation on how to create this secret &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax.md#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;create-secret-for-client-side-tls-verification-optional&#34;&gt;Create secret for client-side TLS verification (Optional)&lt;/h4&gt;
+&lt;p&gt;Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. Please refer detailed documentation on how to create this secret &lt;a href=&#34;../../helm/powermax#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Create namespace:
@@ -236,7 +236,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;replicas&lt;/td&gt;
-&lt;td&gt;Controls the amount of controller pods you deploy. If controller pods is greater than number of available nodes, excess pods will become stuck in pending. Defaults is 2 which allows for Controller high availability.&lt;/td&gt;
+&lt;td&gt;Controls the amount of controller Pods you deploy. If controller Pods are greater than number of available nodes, excess Pods will become stuck in pending. Defaults is 2 which allows for Controller high availability.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;/tr&gt;
@@ -248,7 +248,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_K8S_CLUSTER_PREFIX&lt;/td&gt;
-&lt;td&gt;Define a prefix that is appended onto all resources created in the Array; unique per K8s/CSI deployment; max length - 3 characters&lt;/td&gt;
+&lt;td&gt;Define a prefix that is appended onto all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;XYZ&lt;/td&gt;
 &lt;/tr&gt;
@@ -266,13 +266,13 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_PORTGROUPS&lt;/td&gt;
-&lt;td&gt;List of comma separated port groups (ISCSI only). Example: &amp;ldquo;PortGroup1,PortGroup2&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;List of comma-separated port groups (ISCSI only). Example: &amp;ldquo;PortGroup1,PortGroup2&amp;rdquo;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_ARRAYS&lt;/td&gt;
-&lt;td&gt;List of comma separated array id(s) which will be managed by the driver&lt;/td&gt;
+&lt;td&gt;List of comma-separated array id(s) which will be managed by the driver&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -290,19 +290,19 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_DRIVER_NAME&lt;/td&gt;
-&lt;td&gt;Set custom CSI driver name. For more details on this feature review related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax/#custom-driver-name-experimental-feature&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Set custom CSI driver name. For more details on this feature review related &lt;a href=&#34;../../../features/powermax/#custom-driver-name-experimental-feature&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_IG_NODENAME_TEMPLATE&lt;/td&gt;
-&lt;td&gt;Template used for creating Hosts on PowerMax. Example: &amp;ldquo;a-b-c-%foo%-xyz&amp;rdquo; where the text between % symbols(foo) is replaced by actual host name&lt;/td&gt;
+&lt;td&gt;Template used for creating hosts on PowerMax. Example: &amp;ldquo;a-b-c-%foo%-xyz&amp;rdquo; where the text between the % symbols(foo) is replaced by the actual host name&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_IG_MODIFY_HOSTNAME&lt;/td&gt;
-&lt;td&gt;Determines if node plugin can rename any existing Host on PowerMax array. Use it along with node name template to rename existing Hosts&lt;/td&gt;
+&lt;td&gt;Determines if node plugin can rename any existing host on the PowerMax array. Use it with the node name template to rename the existing hosts&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
@@ -320,7 +320,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_ISCSI_ENABLE_CHAP&lt;/td&gt;
-&lt;td&gt;Enable ISCSI CHAP authentication. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax/#iscsi-chap&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Enable ISCSI CHAP authentication. For more details on this feature review the related &lt;a href=&#34;../../../features/powermax/#iscsi-chap&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
@@ -356,13 +356,13 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;allowVolumeExpansion&lt;/td&gt;
-&lt;td&gt;Once the allowed topology is modified in storage class, pods/and volumes will always be scheduled on nodes that have access to the storage&lt;/td&gt;
+&lt;td&gt;After the allowed topology is modified in storage class, pods/and volumes will always be scheduled on nodes that have access to the storage&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;allowedTopologies:key&lt;/td&gt;
-&lt;td&gt;This is to enable topology to allow pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax.md#topology-support&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;This is to enable topology to allow pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature review the related &lt;a href=&#34;../../../features/powermax#topology-support&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;&amp;ldquo;000000000001&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
@@ -372,11 +372,11 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;li&gt;Execute the following command to create PowerMax custom resource:&lt;code&gt;kubectl create -f &amp;lt;input_sample_file.yaml&amp;gt;&lt;/code&gt;. The above command will deploy the CSI-PowerMax driver.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;csi-powermax-reverseproxy&#34;&gt;CSI PowerMax ReverseProxy&lt;/h3&gt;
-&lt;p&gt;CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax.md#csi-powermax-reverse-proxy&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature review the related &lt;a href=&#34;../../../features/powermax#csi-powermax-reverse-proxy&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When you install CSI PowerMax ReverseProxy, dell-csi-operator is going to create a Deployment and ClusterIP service as part of the installation&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; - If you wish to use the ReverseProxy with CSI PowerMax driver, the ReverseProxy service should be created before you install the CSIPowerMax driver.&lt;/p&gt;
 &lt;h4 id=&#34;pre-requisites&#34;&gt;Pre-requisites&lt;/h4&gt;
-&lt;p&gt;Create a TLS secret which holds a SSL certificate &amp;amp; a private key which is required by the reverse proxy server.
+&lt;p&gt;Create a TLS secret which holds a SSL certificate and a private key which is required by the reverse proxy server.
 Use a tool like &lt;code&gt;openssl&lt;/code&gt; to generate this secret using the example below:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    openssl genrsa -out tls.key 2048
     openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
@@ -384,12 +384,12 @@ Use a tool like &lt;code&gt;openssl&lt;/code&gt; to generate this secret using t
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;set-the-following-parameters-in-the-csi-powermaxreverseproxy-spec&#34;&gt;Set the following parameters in the CSI PowerMaxReverseProxy Spec&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;tlsSecret&lt;/strong&gt; : Provide the name of the TLS secret. If using the above example, it should be set to &lt;code&gt;revproxy-certs&lt;/code&gt;&lt;br&gt;
 &lt;strong&gt;config&lt;/strong&gt; : This section contains the details of the Reverse Proxy configuration&lt;br&gt;
-&lt;strong&gt;mode&lt;/strong&gt; : This value is set to &lt;code&gt;Linked&lt;/code&gt; by default. Don&amp;rsquo;t change this value&lt;br&gt;
+&lt;strong&gt;mode&lt;/strong&gt; : This value is set to &lt;code&gt;Linked&lt;/code&gt; by default. Do not change this value&lt;br&gt;
 &lt;strong&gt;linkConfig&lt;/strong&gt; : This section contains the configuration of the &lt;code&gt;Linked&lt;/code&gt; mode&lt;br&gt;
 &lt;strong&gt;primary&lt;/strong&gt; : This section holds details for the primary Unisphere which the Reverse Proxy will connect to
 &lt;strong&gt;backup&lt;/strong&gt; : This optional section holds details for a backup Unisphere which the Reverse Proxy can connect to if Primary Unisphere is unreachable&lt;br&gt;
 &lt;strong&gt;url&lt;/strong&gt; : URL of the Unisphere server
-&lt;strong&gt;skipCertificateValidation&lt;/strong&gt;: This setting determines if the client side Unisphere certificate validation is required
+&lt;strong&gt;skipCertificateValidation&lt;/strong&gt;: This setting determines if the client-side Unisphere certificate validation is required
 &lt;strong&gt;certSecret&lt;/strong&gt;: Secret name which holds the CA certificates which was used to sign Unisphere SSL certificates. Mandatory if skipCertificateValidation is set to &lt;code&gt;false&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Here is a sample manifest with each field annotated. A copy of this manifest is provided in the &lt;code&gt;samples&lt;/code&gt; folder&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;apiVersion: storage.dell.com/v1
@@ -415,8 +415,8 @@ spec:
         url: https://0.0.0.0:8443 #Unisphere URL
         skipCertificateValidation: true
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;installation&#34;&gt;Installation&lt;/h4&gt;
-&lt;p&gt;Copy the sample file - &lt;code&gt;powermax_reverseproxy.yaml&lt;/code&gt; from the &lt;code&gt;samples&lt;/code&gt; folder or use the sample available in the &lt;code&gt;OperatorHub&lt;/code&gt; GUI&lt;br&gt;
-Edit and input all required parameters and then use the &lt;code&gt;OperatorHub&lt;/code&gt; GUI or run the following command to install the CSI PowerMax Reverse Proxy service&lt;/p&gt;
+&lt;p&gt;Copy the sample file - &lt;code&gt;powermax_reverseproxy.yaml&lt;/code&gt; from the &lt;code&gt;samples&lt;/code&gt; folder or use the sample available in the &lt;code&gt;OperatorHub&lt;/code&gt; UI&lt;br&gt;
+Edit and input all required parameters and then use the &lt;code&gt;OperatorHub&lt;/code&gt; UI or run the following command to install the CSI PowerMax Reverse Proxy service&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl create -f powermax_reverseproxy.yaml
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can query for the deployment and service created as part of the installation using the following commands:&lt;/p&gt;
@@ -438,7 +438,7 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
         
         &lt;h2 id=&#34;installing-powerscale-csi-driver-via-operator&#34;&gt;Installing PowerScale CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerScale can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;listing-installed-drivers-with-the-csi-isilon-crd&#34;&gt;Listing installed drivers with the CSI Isilon CRD&lt;/h3&gt;
@@ -591,7 +591,7 @@ This command will deploy the CSI-PowerScale driver.&lt;/li&gt;
         
         &lt;h2 id=&#34;installing-powerstore-csi-driver-via-operator&#34;&gt;Installing PowerStore CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerStore can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator doesn’t use any Helm charts and the installation &amp;amp; configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
@@ -697,7 +697,7 @@ echo -n &amp;quot;mypassword&amp;quot; | base64
         
         &lt;h2 id=&#34;installing-unity-csi-driver-via-operator&#34;&gt;Installing Unity CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC Unity can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;

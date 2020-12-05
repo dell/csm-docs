@@ -240,6 +240,8 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
 &lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/ophub3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;install-csi-drivers-via-operator&#34;&gt;Install CSI Drivers via Operator&lt;/h2&gt;
+&lt;p&gt;Proceed to &lt;a href=&#34;../../installation/operator/#driver-install-via-dell-csi-operator&#34;&gt;this link&lt;/a&gt; for further installing the driver using Operator&lt;/p&gt;
 
       </description>
     </item>
@@ -253,18 +255,48 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
       <description>
         
         
-        &lt;p&gt;Users can install the certified Dell CSI Operator via the OpenShift UI. The following outlines the process to do so:&lt;/p&gt;
+        &lt;p&gt;The Dell EMC CSI Drivers support Red Hat OpenShift.  Please see the &lt;a href=&#34;../../dell-csi-driver/#supported-platforms&#34;&gt;Supported Platforms&lt;/a&gt; table for more details.&lt;/p&gt;
+&lt;p&gt;The CSI drivers can be installed via Helm charts or Dell CSI Operator.  The Dell CSI Operator allows for easy installation of the driver via the Openshift UI. The process to install the Operator via the OpenShift UI can be found below.&lt;/p&gt;
+&lt;h2 id=&#34;install-operator-via-the-openshift-ui&#34;&gt;Install Operator via the OpenShift UI&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;TODO:&lt;/strong&gt; Fill in more detailed steps, reuse screenshots&lt;/p&gt;
-&lt;h2 id=&#34;redhat-openshift-ui&#34;&gt;Redhat OpenShift UI&lt;/h2&gt;
-&lt;p&gt;Type &amp;ldquo;Dell&amp;rdquo; in the operator hub section, to install Dell CSI Operator
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/openshift1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Check the installed dell CSI Operator, under Installed Operstor section
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/openshift3.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Chose the particular project, under Project subheading
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/openshift2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;You can also check the list of pods available and create one
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/openshift1.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Type &amp;ldquo;Dell&amp;rdquo; in the OperatorHub section under Operators, to get the list of available Dell CSI Operators.
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/oc1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Check the version you want to install from the list, you can check the details by clicking it.
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/oc2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once selected, click &amp;ldquo;Install&amp;rdquo; to proceed with installation process.
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/oc3.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can verify the list of available operators by selecting &amp;ldquo;Installed Operator&amp;rdquo; section.
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/oc4.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select the Dell CSI Operator to get further description.
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/oc5.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;install-csi-drivers-via-operator&#34;&gt;Install CSI Drivers via Operator&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Select the particular CSI driver which you want to install, as seen in step 5 above. In this example, CSI Unity is selected.
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/driver1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After clicking &amp;ldquo;Create CSIUnity&amp;rdquo; option in above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the &lt;a href=&#34;../../installation/operator/#driver-install-via-dell-csi-operator&#34;&gt;driver install pages for the Dell CSI Operator&lt;/a&gt; for information on the parameters.
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/driver2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can check the driver installed and node and controller pods running in the Pods section under Workloads.
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/images/driver3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 
       </description>
     </item>
@@ -278,8 +310,8 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
       <description>
         
         
-        &lt;p&gt;The Dell CSI Drivers support Docker Enterprise Edition (EE) &amp;amp; deployment on clusters bootstrapped with UCP (Universal Control Plane).&lt;/p&gt;
-&lt;p&gt;The installation process for the driver on such clusters remains the same as the installation process on upstream clusters.&lt;/p&gt;
+        &lt;p&gt;The Dell CSI Drivers support Docker Enterprise Edition (EE) and deployment on clusters bootstrapped with Docker Universal Control Plane (UCP).&lt;/p&gt;
+&lt;p&gt;The installation process for the drivers on such clusters remains the same as the installation process on regular Kubernetes clusters.&lt;/p&gt;
 &lt;p&gt;On UCP based clusters, kubectl may not be installed by default, it is important that kubectl is installed prior to the installation of the driver.&lt;/p&gt;
 &lt;p&gt;The worker nodes on UCP backed clusters may run any of the OSs which we support with upstream clusters.&lt;/p&gt;
 &lt;h2 id=&#34;docker-ee-ui-examples&#34;&gt;Docker EE UI Examples&lt;/h2&gt;
@@ -299,11 +331,11 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
       <description>
         
         
-        &lt;h1 id=&#34;release-notes---dell-csi-operator-120&#34;&gt;Release Notes - Dell CSI Operator 1.2.0&lt;/h1&gt;
+        &lt;h2 id=&#34;release-notes---dell-csi-operator-120&#34;&gt;Release Notes - Dell CSI Operator 1.2.0&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There is a delay in Operator 1.2.0 certification hence it will not be visible in OperatorHub.io and Red Hat OpenShift certified catalogue.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Added support for OpenShift 4.5, 4.6 with RHEL and CoreOS worker nodes&lt;/li&gt;
 &lt;li&gt;Migrated to Operator SDK 1.0&lt;/li&gt;
@@ -311,14 +343,12 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
 &lt;li&gt;Added support for Controller high availability (multiple-controllers)&lt;/li&gt;
 &lt;li&gt;Added Topology support&lt;/li&gt;
 &lt;li&gt;Added support for CSI Ephemeral Inline Volumes&lt;/li&gt;
-&lt;li&gt;Added support for mount options&lt;/li&gt;
-&lt;li&gt;Enhanced support for Docker EE 3.1&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h2&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
-&lt;h2 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h2&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no Known issues in this release.&lt;/p&gt;
-&lt;h2 id=&#34;support&#34;&gt;Support&lt;/h2&gt;
+&lt;h3 id=&#34;support&#34;&gt;Support&lt;/h3&gt;
 &lt;p&gt;The Dell CSI Operator image is available on Dockerhub and is officially supported by Dell EMC.
 For any CSI operator and driver issues, questions or feedback, join the &lt;a href=&#34;https://www.dell.com/community/Containers/bd-p/Containers&#34;&gt;Dell EMC Container community&lt;/a&gt;.&lt;/p&gt;
 
@@ -786,7 +816,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;controller&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powerflex/&#34;&gt;Features section&lt;/a&gt; for Powerflex specifics.&lt;/td&gt;
+&lt;td&gt;This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the &lt;a href=&#34;../../../features/powerflex/&#34;&gt;Features section&lt;/a&gt; for Powerflex specifics.&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -858,7 +888,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
-&lt;p&gt;As part of the driver installation, a set of storage classes are created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
+&lt;p&gt;As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;StorageClass&lt;/code&gt; object in Kubernetes is immutable and can&amp;rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
 In preparation for that, starting in Q4 of 2020, an annotation &lt;code&gt;&amp;quot;helm.sh/resource-policy&amp;quot;: keep&lt;/code&gt; is applied to the storage classes created by the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
@@ -882,7 +912,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
         
         &lt;h2 id=&#34;installing-powerflex-csi-driver-via-operator&#34;&gt;Installing PowerFlex CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerFlex can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites:&lt;/h3&gt;
@@ -1466,7 +1496,7 @@ key=tls.key
 &lt;p&gt;The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. If it is enabled (using the &lt;code&gt;enabled&lt;/code&gt; parameter in the csireverseproxy section of the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; file), the install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.&lt;/p&gt;
 &lt;h3 id=&#34;using-dell-csi-operator&#34;&gt;Using Dell CSI Operator&lt;/h3&gt;
 &lt;p&gt;Starting with the v1.1.0 release of the Dell CSI Operator, a new Custom Resource Definition can be used to install CSI PowerMax Reverse Proxy.&lt;/p&gt;
-&lt;p&gt;This Custom Resource has to be created in the same namespace as the CSI PowerMax driver and it has to be created before the driver Custom Resource. To use the service, the driver Custom Resource manifest must be configured with the service name &amp;ldquo;powermax-reverseproxy&amp;rdquo;. For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the &lt;a href=&#34;../installation/operator/_index.md&#34;&gt;Dell CSI Operator documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This Custom Resource has to be created in the same namespace as the CSI PowerMax driver and it has to be created before the driver Custom Resource. To use the service, the driver Custom Resource manifest must be configured with the service name &amp;ldquo;powermax-reverseproxy&amp;rdquo;. For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the &lt;a href=&#34;../../installation/operator&#34;&gt;Dell CSI Operator documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;user-friendly-hostnames&#34;&gt;User-friendly hostnames&lt;/h2&gt;
 &lt;p&gt;Users can set a value for the &lt;code&gt;nodeNameTemplate&lt;/code&gt; in &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; during the installation of the driver so that the driver can use this value to decide the name format of hosts to create or update in the PowerMax array for the nodes in a Kubernetes cluster. The hostname value in nodeNameTemplate should always be contained between two &amp;lsquo;%&amp;rsquo; characters. String prefixing first &amp;lsquo;%&amp;rsquo; and string suffixing second &amp;lsquo;%&amp;rsquo; is used as is before and after every node identifier.&lt;/p&gt;
 &lt;p&gt;Also, there is a new setting, &lt;code&gt;modifyHostName&lt;/code&gt;, which could be set to &lt;code&gt;true&lt;/code&gt; if you want the driver to rename the existing Hosts/IG for the host initiators on the PowerMax array. The new name uses the default naming convention (&lt;code&gt;csi-&amp;lt;ClusterPrefix&amp;gt;-&amp;lt;HostName&amp;gt;*&lt;/code&gt;) or the &lt;code&gt;nodeNameTemplate&lt;/code&gt; if it was specified.&lt;/p&gt;
@@ -1894,7 +1924,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;li&gt;This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The &lt;code&gt;verify.sh&lt;/code&gt; script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the &lt;code&gt;--skip-verify-node&lt;/code&gt; option&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
-&lt;p&gt;As part of the driver installation, a set of storage classes are created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
+&lt;p&gt;As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;StorageClass&lt;/code&gt; object in Kubernetes is immutable and can&amp;rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
 In preparation for that, starting in Q4 of 2020, an annotation &lt;code&gt;&amp;quot;helm.sh/resource-policy&amp;quot;: keep&lt;/code&gt; is applied to the storage classes created by the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
@@ -1918,12 +1948,12 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
         
         &lt;h2 id=&#34;installing-powermax-csi-driver-via-operator&#34;&gt;Installing PowerMax CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerMax can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator doesn’t use any Helm charts and the installation &amp;amp; configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h3&gt;
-&lt;h4 id=&#34;create-secret-for-client-side-tls-verification-optional&#34;&gt;Create secret for client side TLS verification (Optional)&lt;/h4&gt;
-&lt;p&gt;Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. Please refer detailed documentation on how to create this secret &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax.md#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;create-secret-for-client-side-tls-verification-optional&#34;&gt;Create secret for client-side TLS verification (Optional)&lt;/h4&gt;
+&lt;p&gt;Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. Please refer detailed documentation on how to create this secret &lt;a href=&#34;../../helm/powermax#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Create namespace:
@@ -1966,7 +1996,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;replicas&lt;/td&gt;
-&lt;td&gt;Controls the amount of controller pods you deploy. If controller pods is greater than number of available nodes, excess pods will become stuck in pending. Defaults is 2 which allows for Controller high availability.&lt;/td&gt;
+&lt;td&gt;Controls the amount of controller Pods you deploy. If controller Pods are greater than number of available nodes, excess Pods will become stuck in pending. Defaults is 2 which allows for Controller high availability.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;/tr&gt;
@@ -1978,7 +2008,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_K8S_CLUSTER_PREFIX&lt;/td&gt;
-&lt;td&gt;Define a prefix that is appended onto all resources created in the Array; unique per K8s/CSI deployment; max length - 3 characters&lt;/td&gt;
+&lt;td&gt;Define a prefix that is appended onto all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;XYZ&lt;/td&gt;
 &lt;/tr&gt;
@@ -1996,13 +2026,13 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_PORTGROUPS&lt;/td&gt;
-&lt;td&gt;List of comma separated port groups (ISCSI only). Example: &amp;ldquo;PortGroup1,PortGroup2&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;List of comma-separated port groups (ISCSI only). Example: &amp;ldquo;PortGroup1,PortGroup2&amp;rdquo;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_ARRAYS&lt;/td&gt;
-&lt;td&gt;List of comma separated array id(s) which will be managed by the driver&lt;/td&gt;
+&lt;td&gt;List of comma-separated array id(s) which will be managed by the driver&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -2020,19 +2050,19 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_DRIVER_NAME&lt;/td&gt;
-&lt;td&gt;Set custom CSI driver name. For more details on this feature review related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax/#custom-driver-name-experimental-feature&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Set custom CSI driver name. For more details on this feature review related &lt;a href=&#34;../../../features/powermax/#custom-driver-name-experimental-feature&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_IG_NODENAME_TEMPLATE&lt;/td&gt;
-&lt;td&gt;Template used for creating Hosts on PowerMax. Example: &amp;ldquo;a-b-c-%foo%-xyz&amp;rdquo; where the text between % symbols(foo) is replaced by actual host name&lt;/td&gt;
+&lt;td&gt;Template used for creating hosts on PowerMax. Example: &amp;ldquo;a-b-c-%foo%-xyz&amp;rdquo; where the text between the % symbols(foo) is replaced by the actual host name&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_IG_MODIFY_HOSTNAME&lt;/td&gt;
-&lt;td&gt;Determines if node plugin can rename any existing Host on PowerMax array. Use it along with node name template to rename existing Hosts&lt;/td&gt;
+&lt;td&gt;Determines if node plugin can rename any existing host on the PowerMax array. Use it with the node name template to rename the existing hosts&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
@@ -2050,7 +2080,7 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;X_CSI_POWERMAX_ISCSI_ENABLE_CHAP&lt;/td&gt;
-&lt;td&gt;Enable ISCSI CHAP authentication. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax/#iscsi-chap&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Enable ISCSI CHAP authentication. For more details on this feature review the related &lt;a href=&#34;../../../features/powermax/#iscsi-chap&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
@@ -2086,13 +2116,13 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;allowVolumeExpansion&lt;/td&gt;
-&lt;td&gt;Once the allowed topology is modified in storage class, pods/and volumes will always be scheduled on nodes that have access to the storage&lt;/td&gt;
+&lt;td&gt;After the allowed topology is modified in storage class, pods/and volumes will always be scheduled on nodes that have access to the storage&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;allowedTopologies:key&lt;/td&gt;
-&lt;td&gt;This is to enable topology to allow pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax.md#topology-support&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;This is to enable topology to allow pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature review the related &lt;a href=&#34;../../../features/powermax#topology-support&#34;&gt;documentation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;&amp;ldquo;000000000001&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
@@ -2102,11 +2132,11 @@ echo -n &amp;quot;mychapsecret&amp;quot; | base64
 &lt;li&gt;Execute the following command to create PowerMax custom resource:&lt;code&gt;kubectl create -f &amp;lt;input_sample_file.yaml&amp;gt;&lt;/code&gt;. The above command will deploy the CSI-PowerMax driver.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;csi-powermax-reverseproxy&#34;&gt;CSI PowerMax ReverseProxy&lt;/h3&gt;
-&lt;p&gt;CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature review the related &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/docs/features/powermax.md#csi-powermax-reverse-proxy&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature review the related &lt;a href=&#34;../../../features/powermax#csi-powermax-reverse-proxy&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When you install CSI PowerMax ReverseProxy, dell-csi-operator is going to create a Deployment and ClusterIP service as part of the installation&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; - If you wish to use the ReverseProxy with CSI PowerMax driver, the ReverseProxy service should be created before you install the CSIPowerMax driver.&lt;/p&gt;
 &lt;h4 id=&#34;pre-requisites&#34;&gt;Pre-requisites&lt;/h4&gt;
-&lt;p&gt;Create a TLS secret which holds a SSL certificate &amp;amp; a private key which is required by the reverse proxy server.
+&lt;p&gt;Create a TLS secret which holds a SSL certificate and a private key which is required by the reverse proxy server.
 Use a tool like &lt;code&gt;openssl&lt;/code&gt; to generate this secret using the example below:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    openssl genrsa -out tls.key 2048
     openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
@@ -2114,12 +2144,12 @@ Use a tool like &lt;code&gt;openssl&lt;/code&gt; to generate this secret using t
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;set-the-following-parameters-in-the-csi-powermaxreverseproxy-spec&#34;&gt;Set the following parameters in the CSI PowerMaxReverseProxy Spec&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;tlsSecret&lt;/strong&gt; : Provide the name of the TLS secret. If using the above example, it should be set to &lt;code&gt;revproxy-certs&lt;/code&gt;&lt;br&gt;
 &lt;strong&gt;config&lt;/strong&gt; : This section contains the details of the Reverse Proxy configuration&lt;br&gt;
-&lt;strong&gt;mode&lt;/strong&gt; : This value is set to &lt;code&gt;Linked&lt;/code&gt; by default. Don&amp;rsquo;t change this value&lt;br&gt;
+&lt;strong&gt;mode&lt;/strong&gt; : This value is set to &lt;code&gt;Linked&lt;/code&gt; by default. Do not change this value&lt;br&gt;
 &lt;strong&gt;linkConfig&lt;/strong&gt; : This section contains the configuration of the &lt;code&gt;Linked&lt;/code&gt; mode&lt;br&gt;
 &lt;strong&gt;primary&lt;/strong&gt; : This section holds details for the primary Unisphere which the Reverse Proxy will connect to
 &lt;strong&gt;backup&lt;/strong&gt; : This optional section holds details for a backup Unisphere which the Reverse Proxy can connect to if Primary Unisphere is unreachable&lt;br&gt;
 &lt;strong&gt;url&lt;/strong&gt; : URL of the Unisphere server
-&lt;strong&gt;skipCertificateValidation&lt;/strong&gt;: This setting determines if the client side Unisphere certificate validation is required
+&lt;strong&gt;skipCertificateValidation&lt;/strong&gt;: This setting determines if the client-side Unisphere certificate validation is required
 &lt;strong&gt;certSecret&lt;/strong&gt;: Secret name which holds the CA certificates which was used to sign Unisphere SSL certificates. Mandatory if skipCertificateValidation is set to &lt;code&gt;false&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Here is a sample manifest with each field annotated. A copy of this manifest is provided in the &lt;code&gt;samples&lt;/code&gt; folder&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;apiVersion: storage.dell.com/v1
@@ -2145,8 +2175,8 @@ spec:
         url: https://0.0.0.0:8443 #Unisphere URL
         skipCertificateValidation: true
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;installation&#34;&gt;Installation&lt;/h4&gt;
-&lt;p&gt;Copy the sample file - &lt;code&gt;powermax_reverseproxy.yaml&lt;/code&gt; from the &lt;code&gt;samples&lt;/code&gt; folder or use the sample available in the &lt;code&gt;OperatorHub&lt;/code&gt; GUI&lt;br&gt;
-Edit and input all required parameters and then use the &lt;code&gt;OperatorHub&lt;/code&gt; GUI or run the following command to install the CSI PowerMax Reverse Proxy service&lt;/p&gt;
+&lt;p&gt;Copy the sample file - &lt;code&gt;powermax_reverseproxy.yaml&lt;/code&gt; from the &lt;code&gt;samples&lt;/code&gt; folder or use the sample available in the &lt;code&gt;OperatorHub&lt;/code&gt; UI&lt;br&gt;
+Edit and input all required parameters and then use the &lt;code&gt;OperatorHub&lt;/code&gt; UI or run the following command to install the CSI PowerMax Reverse Proxy service&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl create -f powermax_reverseproxy.yaml
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can query for the deployment and service created as part of the installation using the following commands:&lt;/p&gt;
@@ -2175,16 +2205,16 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
 &lt;li&gt;Snapshot test&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;volume-test&#34;&gt;Volume test&lt;/h4&gt;
-&lt;p&gt;Procedure to perform a volume test.&lt;/p&gt;
+&lt;p&gt;Use this procedure to perform a volume test.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Create a namespace with the name &lt;em&gt;test&lt;/em&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Run the &lt;code&gt;cd csi-powermax/test/helm&lt;/code&gt; command to go to the &lt;code&gt;csi-powermax/test/helm&lt;/code&gt; directory, which contains the &lt;code&gt;starttest.sh&lt;/code&gt; and the &lt;em&gt;2vols&lt;/em&gt; directories.&lt;/p&gt;
+&lt;p&gt;Run the &lt;code&gt;cd csi-powermax/test/helm&lt;/code&gt; command to go to the &lt;code&gt;csi-powermax/test/helm&lt;/code&gt; directory, which contains the &lt;code&gt;starttest.sh&lt;/code&gt; script and the &lt;em&gt;2vols&lt;/em&gt; directories.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Run the starttest.sh script and provide it a test name. The following is a sample command that can be used to run the &lt;em&gt;2vols&lt;/em&gt; test: &lt;code&gt;./starttest.sh -t 2vols -n test&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Run the starttest.sh script and provide it with a test name. The following is a sample command that can be used to run the &lt;em&gt;2vols&lt;/em&gt; test: &lt;code&gt;./starttest.sh -t 2vols -n test&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This script installs a helm chart that creates a Pod with a container, creates two PVCs, and mounts them into the created container. You can now log in to the newly created container and check the mounts.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -2192,10 +2222,10 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;: Helm tests have been designed assuming users are using the default storageclass names (powermax and powermax-xfs). If your storageclass names differ from the default values, such as when deploying with the Operator, update the templates in &lt;em&gt;2vols&lt;/em&gt; accordingly (located in &lt;code&gt;test/helm/2vols/templates/&lt;/code&gt; directory). You can use &lt;code&gt;kubectl get sc&lt;/code&gt; to check for the storageclass names.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;: Helm tests have been designed assuming that users are using the default storageclass names (powermax and powermax-xfs). If your storageclass names differ from the default values, such as when deploying with the Operator, update the templates in &lt;em&gt;2vols&lt;/em&gt; accordingly (located in &lt;code&gt;test/helm/2vols/templates/&lt;/code&gt; directory). You can use &lt;code&gt;kubectl get sc&lt;/code&gt; to check for the storageclass names.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4 id=&#34;volume-clone-test&#34;&gt;Volume clone test&lt;/h4&gt;
-&lt;p&gt;Procedure to perform volume clone test.&lt;/p&gt;
+&lt;p&gt;Use this procedure to perform a volume clone test.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Create a namespace with the name &lt;em&gt;test&lt;/em&gt;.&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;cd csi-powermax/test/helm&lt;/code&gt; command to go to the &lt;code&gt;csi-powermax/test/helm&lt;/code&gt; directory, which contains the &lt;code&gt;volumeclonetest.sh&lt;/code&gt; script.&lt;/li&gt;
@@ -2209,10 +2239,10 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
 &lt;li&gt;Finally, it cleans up all the resources that are created as part of the test.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;snapshot-test&#34;&gt;Snapshot test&lt;/h4&gt;
-&lt;p&gt;Procedure to perform snapshot test.&lt;/p&gt;
+&lt;p&gt;Use this procedure to perform a snapshot test.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Create a namespace with the name &lt;em&gt;test&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;Run the &lt;code&gt;cd csi-powermax/test/helm&lt;/code&gt; command to go to the &lt;code&gt;csi-powermax/test/helm&lt;/code&gt; directory, which contains the &lt;code&gt;snaprestoretest.sh&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Run the &lt;code&gt;cd csi-powermax/test/helm&lt;/code&gt; command to go to the &lt;code&gt;csi-powermax/test/helm&lt;/code&gt; directory, which contains the &lt;code&gt;snaprestoretest.sh&lt;/code&gt;script.&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;snaprestoretest.sh&lt;/code&gt; script by running the command : &lt;code&gt;bash snaprestoretest.sh&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This script does the following:&lt;/p&gt;
@@ -2223,18 +2253,18 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
 &lt;li&gt;Cleans up all the resources that were created as part of the test.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;: This test has been designed assuming users are using the snapshot class name &lt;code&gt;powermax-snapclass&lt;/code&gt; which is created by the Helm-based installer. If you have an operator-based deployment, the name of the snapshot class will differ. You must update the snapshot class name in the file &lt;code&gt;betaSnap1.yaml&lt;/code&gt; present in the &lt;code&gt;test/helm&lt;/code&gt; folder based on your method of deployment. To get a list of volume snapshot classes, run the command - &lt;code&gt;kubectl get volumesnapshotclass&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;: This test has been designed assuming that users are using the snapshot class name &lt;code&gt;powermax-snapclass&lt;/code&gt; which is created by the Helm-based installer. If you have an operator-based deployment, the name of the snapshot class will differ. You must update the snapshot class name in the file &lt;code&gt;betaSnap1.yaml&lt;/code&gt; present in the &lt;code&gt;test/helm&lt;/code&gt; folder based on your method of deployment. To get a list of volume snapshot classes, run the command - &lt;code&gt;kubectl get volumesnapshotclass&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4 id=&#34;volume-expansion-test&#34;&gt;Volume Expansion test&lt;/h4&gt;
-&lt;p&gt;Procedure to perform volume expansion test&lt;/p&gt;
+&lt;p&gt;Use this procedure to perform a volume expansion test.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Create a namespace with the name &lt;em&gt;test&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;Run the &lt;code&gt;cd csi-powermax/test/helm&lt;/code&gt; command to go to the &lt;code&gt;csi-powermax/test/helm&lt;/code&gt; directory, which contains the &lt;code&gt;volumeexpansiontest.sh&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Run the &lt;code&gt;cd csi-powermax/test/helm&lt;/code&gt; command to go to the &lt;code&gt;csi-powermax/test/helm&lt;/code&gt; directory, which contains the &lt;code&gt;volumeexpansiontest.sh&lt;/code&gt;script.&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;volumeexpansiontest.sh&lt;/code&gt; script by running the command : &lt;code&gt;bash volumeexpansiontest.sh&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This script does the following:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Installs a helm chart that creates a pod with a container, creates one PVC and mounts it into the created container&lt;/li&gt;
+&lt;li&gt;Installs a helm chart that creates a Pod with a container, creates one PVC and mounts it into the created container&lt;/li&gt;
 &lt;li&gt;Writes some data to the PVC&lt;/li&gt;
 &lt;li&gt;After that, it calculates the checksum of the written data, expands the PVC and then recalculates the checksum&lt;/li&gt;
 &lt;li&gt;Cleans up all the resources that were created as part of the test&lt;/li&gt;
@@ -2278,6 +2308,10 @@ kubectl get svc -n &amp;lt;namespace&amp;gt;
 &lt;tr&gt;
 &lt;td&gt;Slow volume attached/detach&lt;/td&gt;
 &lt;td&gt;If your Kubernetes 1.17 or 1.18 cluster has a lot of VolumeAttachment objects, the attach/detach operations will be very slow. This is a known issue and affects all CSI plugins. It is tracked here: CSI VolumeAttachment slows pod startup time. To get around this problem you can upgrade to latest Kubernetes/OpenShift patches, which contains a partial fix: 1.17.8+, 1.18.5+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete Volume fails with error message: volume is part of masking view&lt;/td&gt;
+&lt;td&gt;This issue is due to limitations in Unisphere and occurs when Unisphere is overloaded. Currently, there is no workaround for this but can be avoided by making sure Unisphere is not overloaded during such operations. The Unisphere team is assessing a fix for this in a future Unisphere release&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2883,6 +2917,16 @@ If this secret is an empty secret, then the validation of the certificate fails,
 &lt;li&gt;To create the secret, run &lt;code&gt;kubectl create secret generic isilon-certs --from-file=ca_cert.pem -n isilon&lt;/code&gt;
  &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
+&lt;p&gt;As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;StorageClass&lt;/code&gt; object in Kubernetes is immutable and can&amp;rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
+In preparation for that, starting in Q4 of 2020, an annotation &lt;code&gt;&amp;quot;helm.sh/resource-policy&amp;quot;: keep&lt;/code&gt; is applied to the storage classes created by the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
+This annotation has been applied to give you an opportunity to keep using  these storage classes even with a future release of the driver. In case you wish to not use these storage classes, you will need to delete them by using the &lt;code&gt;kubectl delete storageclass&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;: If you uninstall the driver and reinstall it, you can still face errors if any update in the &lt;code&gt;values.yaml&lt;/code&gt; file leads to an update of the storage class(es):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    Error: cannot patch &amp;quot;&amp;lt;sc-name&amp;gt;&amp;quot; with kind StorageClass: StorageClass.storage.k8s.io &amp;quot;&amp;lt;sc-name&amp;gt;&amp;quot; is invalid: parameters: Forbidden: updates to parameters are forbidden
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In case you want to make such updates, make sure to delete the existing storage classes using the &lt;code&gt;kubectl delete storageclass&lt;/code&gt; command.&lt;br&gt;
+Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&amp;rsquo;t be able to provision new PVCs until at least one storage class is newly created.&lt;/p&gt;
 
       </description>
     </item>
@@ -2898,7 +2942,7 @@ If this secret is an empty secret, then the validation of the certificate fails,
         
         &lt;h2 id=&#34;installing-powerscale-csi-driver-via-operator&#34;&gt;Installing PowerScale CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerScale can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;listing-installed-drivers-with-the-csi-isilon-crd&#34;&gt;Listing installed drivers with the CSI Isilon CRD&lt;/h3&gt;
@@ -3201,27 +3245,24 @@ kubectl get pvc
         
         
         &lt;p&gt;Here are some installation failures that might be encountered and how to mitigate them.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver &lt;strong&gt;cannot authenticate&lt;/strong&gt; (check your secret&amp;rsquo;s username and password).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver failed to connect to the Isilon because it &lt;strong&gt;couldn&amp;rsquo;t verify the certificates&lt;/strong&gt;, then check the isilon-certs secret and ensure it is not empty and it has the valid certificates. Set &lt;code&gt;isiInsecure: &amp;quot;true&amp;quot;&lt;/code&gt; for insecure connection. SSL validation is recommended in production environment.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Powerscale</title>
-      <link>https://dell.github.io/storage-plugin-docs/docs/archives/powerscale/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/storage-plugin-docs/docs/archives/powerscale/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;v13&#34;&gt;v1.3&lt;/h2&gt;
-&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/storage-plugin-docs/pdf/RN_isilon.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/storage-plugin-docs/pdf/PG_isilon.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;v12&#34;&gt;v1.2&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Symptoms&lt;/th&gt;
+&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver &lt;strong&gt;cannot authenticate&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Check your secret&amp;rsquo;s username and password&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver failed to connect to the Isilon because it &lt;strong&gt;couldn&amp;rsquo;t verify the certificates&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Check the isilon-certs secret and ensure it is not empty and it has the valid certificates. Set &lt;code&gt;isiInsecure: &amp;quot;true&amp;quot;&lt;/code&gt; for insecure connection. SSL validation is recommended in production environment.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
       </description>
     </item>
@@ -3810,7 +3851,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
-&lt;p&gt;As part of the driver installation, a set of storage classes are created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
+&lt;p&gt;As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;StorageClass&lt;/code&gt; object in Kubernetes is immutable and can&amp;rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
 In preparation for that, starting in Q4 of 2020, an annotation &lt;code&gt;&amp;quot;helm.sh/resource-policy&amp;quot;: keep&lt;/code&gt; is applied to the storage classes created by the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
@@ -3834,7 +3875,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
         
         &lt;h2 id=&#34;installing-powerstore-csi-driver-via-operator&#34;&gt;Installing PowerStore CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC PowerStore can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator doesn’t use any Helm charts and the installation &amp;amp; configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
@@ -4865,7 +4906,7 @@ Use the following command to replace the secret
         
         &lt;h2 id=&#34;installing-unity-csi-driver-via-operator&#34;&gt;Installing Unity CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;The CSI Driver for Dell EMC Unity can be installed via the Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;https://dell.github.io/storage-plugin-docs/content/docs/installation/operator/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To deploy the Operator, follow the instructions available &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
