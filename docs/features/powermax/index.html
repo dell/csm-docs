@@ -12,10 +12,10 @@
 <meta property="og:description" content="Code features for PowerMax Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/features/powermax/" />
-<meta property="article:modified_time" content="2020-12-03T07:41:57-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2020-12-04T15:19:03-05:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Code features for PowerMax Driver">
-<meta itemprop="dateModified" content="2020-12-03T07:41:57-05:00" />
+<meta itemprop="dateModified" content="2020-12-04T15:19:03-05:00" />
 <meta itemprop="wordCount" content="2921">
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.41ccd08bbef2f1da498f5f45c095b4df.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.3a3fb5ec11a9ae09d8dfa91da2113643.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.41ccd08bbef2f1da498f5f45c095b4df.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.3a3fb5ec11a9ae09d8dfa91da2113643.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -824,14 +824,6 @@
       
       
       
-      
-        
-          
-          
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsarchivespowerscale" href="/storage-plugin-docs/docs/archives/powerscale/">Powerscale</a>
-        
-      
-      
     </li>
   </ul>
 </ul>
@@ -1155,7 +1147,7 @@ key=tls.key
 <p>The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. If it is enabled (using the <code>enabled</code> parameter in the csireverseproxy section of the <code>my-powermax-settings.yaml</code> file), the install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.</p>
 <h3 id="using-dell-csi-operator">Using Dell CSI Operator</h3>
 <p>Starting with the v1.1.0 release of the Dell CSI Operator, a new Custom Resource Definition can be used to install CSI PowerMax Reverse Proxy.</p>
-<p>This Custom Resource has to be created in the same namespace as the CSI PowerMax driver and it has to be created before the driver Custom Resource. To use the service, the driver Custom Resource manifest must be configured with the service name &ldquo;powermax-reverseproxy&rdquo;. For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the <a href="../installation/operator/_index.md">Dell CSI Operator documentation</a>.</p>
+<p>This Custom Resource has to be created in the same namespace as the CSI PowerMax driver and it has to be created before the driver Custom Resource. To use the service, the driver Custom Resource manifest must be configured with the service name &ldquo;powermax-reverseproxy&rdquo;. For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the <a href="../../installation/operator">Dell CSI Operator documentation</a>.</p>
 <h2 id="user-friendly-hostnames">User-friendly hostnames</h2>
 <p>Users can set a value for the <code>nodeNameTemplate</code> in <code>my-powermax-settings.yaml</code> during the installation of the driver so that the driver can use this value to decide the name format of hosts to create or update in the PowerMax array for the nodes in a Kubernetes cluster. The hostname value in nodeNameTemplate should always be contained between two &lsquo;%&rsquo; characters. String prefixing first &lsquo;%&rsquo; and string suffixing second &lsquo;%&rsquo; is used as is before and after every node identifier.</p>
 <p>Also, there is a new setting, <code>modifyHostName</code>, which could be set to <code>true</code> if you want the driver to rename the existing Hosts/IG for the host initiators on the PowerMax array. The new name uses the default naming convention (<code>csi-&lt;ClusterPrefix&gt;-&lt;HostName&gt;*</code>) or the <code>nodeNameTemplate</code> if it was specified.</p>
@@ -1300,7 +1292,7 @@ aware volume provisioning has been provided in the <code>csi-powermax/helm/sampl
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" href="https://github.com/google/docsy">
+    <a class="text-white" target="_blank" href="https://github.com/dell/storage-plugin-docs">
       <i class="fab fa-github"></i>
     </a>
   </li>

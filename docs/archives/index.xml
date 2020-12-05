@@ -13,22 +13,5 @@
       
     
     
-    <item>
-      <title>Docs: Powerscale</title>
-      <link>https://dell.github.io/storage-plugin-docs/docs/archives/powerscale/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/storage-plugin-docs/docs/archives/powerscale/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;v13&#34;&gt;v1.3&lt;/h2&gt;
-&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/storage-plugin-docs/pdf/RN_isilon.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/storage-plugin-docs/pdf/PG_isilon.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;v12&#34;&gt;v1.2&lt;/h2&gt;
-
-      </description>
-    </item>
-    
   </channel>
 </rss>

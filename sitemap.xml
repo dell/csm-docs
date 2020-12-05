@@ -9,7 +9,7 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/dell-csi-driver/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -49,12 +49,12 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/partners/operator/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/partners/redhat/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -74,17 +74,17 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:36:20-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/release/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -124,7 +124,7 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/archives/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -139,7 +139,7 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/partners/docker/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -149,7 +149,7 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/release/operator/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -159,12 +159,12 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerflex/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerflex/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -184,27 +184,27 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/features/powermax/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powermax/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/test/powermax/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/release/powermax/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -219,12 +219,12 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/isilon/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -239,12 +239,7 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerscale/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/archives/powerscale/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -254,12 +249,12 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerstore/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerstore/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
@@ -304,7 +299,7 @@
   
   <url>
     <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/unity/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
   </url>
   
   <url>
