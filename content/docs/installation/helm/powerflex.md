@@ -136,7 +136,7 @@ The common snapshot controller must be installed only once in the cluster irresp
 | name| Defines the name of the Kubernetes storage class that the Helm charts will create. For example, the   _vxflexos_ base name will be used to generate names such as _vxflexos_ and   _vxflexos-xfs_.  | No | "vxflexos" |
 | isDefault | Sets the newly created storage class as default for Kubernetes. Set this value to `true` only if you expect   PowerFlex to be your principle storage provider, as it will be used in PersitentVolumeClaims where no storageclass is provided. After installation, you can add custom storage classes, if desired. | No | TRUE |
 | reclaimPolicy | Defines whether the volumes will be retained or deleted when the assigned pod is destroyed. The valid values for this variable are `Retain` or `Delete`.| No | "Delete"|
-| **controller**| This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](/docs/features/powerflex/) for Powerflex specifics. |  - |  - |
+| **controller**| This section allows configuration of controller specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](../../../features/powerflex/) for Powerflex specifics. |  - |  - |
 | nodeSelector | Defines what nodes would be selected for pods of controller deployment. Leave as blank to use all nodes. Uncomment this section to deploy on master nodes exclusively. | No | " " |
 | tolerations| Defines tolerations that would be applied to controller deployment. Leave as blank to install controller on worker nodes only. If deploying on master nodes is desired, uncomment out this section. | No | " "|
 | **monitor**| This section allows configuration of the SDC monitoring pod. |  - |  -   |
@@ -155,7 +155,7 @@ The common snapshot controller must be installed only once in the cluster irresp
    - *WARNING*: Before utilizing mount options, you must first be fully aware of the potential impact and understand your environment's requirements for the specified option.
 
 ## Storage Classes
-As part of the driver installation, a set of storage classes are created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays. 
+As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays. 
 
 The `StorageClass` object in Kubernetes is immutable and can't be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
 In preparation for that, starting in Q4 of 2020, an annotation `"helm.sh/resource-policy": keep` is applied to the storage classes created by the `dell-csi-helm-installer`.

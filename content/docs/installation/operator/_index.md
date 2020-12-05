@@ -23,6 +23,8 @@ Dell CSI Operator has been tested and qualified with
    - Beta VolumeSnapshot CRDs (can be installed using the Operator installation script)
    - External Volume Snapshot Controller
 
+> **Note-** For more insights or detailed pre-requisites refer https://github.com/dell/dell-csi-operator
+
 #### Steps
 
 1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator)
@@ -32,6 +34,5 @@ Dell CSI Operator has been tested and qualified with
     - Should be able to see the operator related pod on default namespace
 {{< imgproc non-olm-2.jpg Resize "3500x800" >}}{{< /imgproc >}}
 
-![](openshift1.jpg)
 ## Driver Install via Dell CSI Operator
 For information on how to install the CSI drivers via the Dell CSI Operator, please refer to the sub-pages below for each driver.
