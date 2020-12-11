@@ -96,8 +96,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snaps
    | accessZone | The Access Zone where the Volume would be created | false | System |
    | AzServiceIP | Access Zone service IP if different from isiIP, specify here and refer in storageClass | false |  |
    | rootClientEnabled |  When a PVC is being created, it takes the storage class' value of "storageclass.rootClientEnabled"| false | false |
-   | volumeBindingMode |  Controls when volume binding and dynamic provisioning should occur | true | WaitForFirstConsumer |
-   | allowedTopologies |  Controls scheduling of pods on worker nodes matching topology keys | true | csi-isilon.dellemc.com/{{ IsilonIP }}: csi-isilon.dellemc.com |
    | ***Controller parameters*** | Set nodeSelector and tolerations for controller |
    | nodeSelector | Define nodeSelector for the controllers, if required | false | |
    | tolerations | Define tolerations for the controllers, if required | false | |
