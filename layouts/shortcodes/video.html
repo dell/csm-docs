@@ -1,0 +1,3 @@
+<video controls preload='metadata' width="{{ .Get "width" }}" height="{{ .Get "height" }}" onclick='(function(el){ if(el.paused) el.play(); else el.pause() })(this)'>
+  <source src="{{ .Get "src" }}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+</video>

@@ -85,8 +85,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snaps
    | verbose | Indicates what content of the OneFS REST API message should be logged in debug level logs | false | 1 |
    | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be  enabled.| false | true |
    | noProbeOnStart | Indicates whether the controller/node should probe during initialization | false | false |
-   | isiPath | The default base path for the volumes to be created, this will be used if a storage class does not have the IsiPath parameter specified| false
-   | /ifs/data/csi |
+   | isiPath | The default base path for the volumes to be created, this will be used if a storage class does not have the IsiPath parameter specified| false | /ifs/data/csi |
    | autoProbe |  Enable auto probe. | false | true |
    | nfsV3 | Specify whether to set the version to v3 when mounting an NFS export. If the value is "false", then the default version supported will be used (that is, the mount command will not explicitly specify "-o vers=3" option). This flag has now been deprecated and will be removed in a future release. Use the StorageClass.mountOptions if you want to specify 'vers=3' as a mount option. | false | false |
    | enableCustomTopology | Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish connection to Array. This requires enableCustomTopology to be enabled. | false | false |

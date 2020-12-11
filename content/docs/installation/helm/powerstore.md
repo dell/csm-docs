@@ -71,7 +71,7 @@ Set up Linux multipathing as follows:
 
 ### Configure Mount Propagation on Container Runtime 
 
-It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerMax.  The following is instruction on how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.
+It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerStore.  The following is instruction on how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.
 
 **Steps**
 
