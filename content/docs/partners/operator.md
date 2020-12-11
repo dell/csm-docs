@@ -20,4 +20,3 @@ Users can install the Dell CSI Operator via OperatorHub.io on Kubernetes. The fo
 ## Install CSI Drivers via Operator
 
 Proceed to [this link](../../installation/operator/#driver-install-via-dell-csi-operator) for further installing the driver using Operator
-
