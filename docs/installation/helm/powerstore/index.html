@@ -13,11 +13,11 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerstore/" />
-<meta property="article:modified_time" content="2020-12-04T15:19:03-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2020-12-11T15:59:45+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing PowerStore CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2020-12-04T15:19:03-05:00" />
+<meta itemprop="dateModified" content="2020-12-11T15:59:45&#43;05:30" />
 <meta itemprop="wordCount" content="1742">
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.3a3fb5ec11a9ae09d8dfa91da2113643.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.221bf9bfe7429f746786737b7890fedc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.3a3fb5ec11a9ae09d8dfa91da2113643.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.221bf9bfe7429f746786737b7890fedc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -365,7 +365,7 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/docs/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Test Drivers</a>
+    <a  href="/storage-plugin-docs/docs/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Testing Drivers</a>
   </li>
   <ul>
     <li class="collapse " id="storage-plugin-docsdocsinstallationtest">
@@ -993,7 +993,7 @@ PowerStore.</p>
 <li>Ensure that the multipath command for <code>multipath.conf</code> is available on all Kubernetes nodes.</li>
 </ul>
 <h3 id="configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</h3>
-<p>It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerMax.  The following is instruction on how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.</p>
+<p>It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerStore.  The following is instruction on how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.</p>
 <p><strong>Steps</strong></p>
 <ol>
 <li>Edit the service section of <code>/etc/systemd/system/multi-user.target.wants/docker.service</code> file to add the following lines:

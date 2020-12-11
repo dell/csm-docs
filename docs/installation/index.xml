@@ -41,6 +41,10 @@
 &lt;td&gt;&lt;code&gt;helm&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;Helm v3 is used as the deployment tool for Charts. Go &lt;a href=&#34;https://helm.sh/docs/intro/install/&#34;&gt;here&lt;/a&gt; to install Helm 3.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;sshpass&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;sshpass is used to check certain pre-requisities in worker nodes (in chosen drivers).&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;br&gt;
@@ -349,7 +353,7 @@ Preparing a offline bundle for installation
     </item>
     
     <item>
-      <title>Docs: Test Drivers</title>
+      <title>Docs: Testing Drivers</title>
       <link>https://dell.github.io/storage-plugin-docs/docs/installation/test/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
