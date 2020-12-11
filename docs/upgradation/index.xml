@@ -121,15 +121,9 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
         
         
         &lt;p&gt;You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;h2 id=&#34;upgrade-driver-from-version-v1301-to-v14&#34;&gt;Upgrade Driver from version v1.3.0.1 to v1.4&lt;/h2&gt;
+&lt;h2 id=&#34;upgrade-driver-from-version-v130v1301-to-v140&#34;&gt;Upgrade Driver from version v1.3.0/v1.3.0.1 to v1.4.0&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Upgrade the Kubernetes to Kubernetes 1.17.x version first before upgrading CSI driver.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Uninstall CSI Driver for DELL EMC PowerScale v1.3.0.&lt;/p&gt;
-&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Verify that all pre-requisites to install CSI Driver for DELL EMC PowerScale v1.4.0 are fulfilled.&lt;/p&gt;
 &lt;/li&gt;
@@ -140,8 +134,8 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
 &lt;p&gt;Change to directory dell-csi-helm-installer to install the DELL EMC PowerScale &lt;code&gt;cd dell-csi-helm-installer&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Install the CSI Driver for DELL EMC PowerScale v1.4.0 using following command:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Upgrade the CSI Driver for DELL EMC PowerScale v1.4.0 using following command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;upgrade-using-dell-csi-operator&#34;&gt;Upgrade using Dell CSI Operator:&lt;/h2&gt;

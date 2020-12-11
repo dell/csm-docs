@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dell Technologies – Test Drivers</title>
+    <title>Dell Technologies – Testing Drivers</title>
     <link>https://dell.github.io/storage-plugin-docs/docs/installation/test/</link>
-    <description>Recent content in Test Drivers on Dell Technologies</description>
+    <description>Recent content in Testing Drivers on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://dell.github.io/storage-plugin-docs/docs/installation/test/index.xml" rel="self" type="application/rss+xml" />

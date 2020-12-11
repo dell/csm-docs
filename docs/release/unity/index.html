@@ -12,11 +12,11 @@
 <meta property="og:description" content="Release notes for Unity CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/release/unity/" />
-<meta property="article:modified_time" content="2020-12-03T07:41:57-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2020-12-11T17:58:44+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Release notes for Unity CSI driver">
-<meta itemprop="dateModified" content="2020-12-03T07:41:57-05:00" />
-<meta itemprop="wordCount" content="243">
+<meta itemprop="dateModified" content="2020-12-11T17:58:44&#43;05:30" />
+<meta itemprop="wordCount" content="461">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.3a3fb5ec11a9ae09d8dfa91da2113643.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.221bf9bfe7429f746786737b7890fedc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.3a3fb5ec11a9ae09d8dfa91da2113643.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.221bf9bfe7429f746786737b7890fedc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -362,7 +362,7 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/docs/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Test Drivers</a>
+    <a  href="/storage-plugin-docs/docs/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Testing Drivers</a>
   </li>
   <ul>
     <li class="collapse " id="storage-plugin-docsdocsinstallationtest">
@@ -944,6 +944,18 @@
 <tr>
 <td>If source PVC is deleted when cloned PVC exists, then source PVC will be deleted in cluster but on array it will still be present and marked for deletion.</td>
 <td>All the cloned PVC should be deleted in order to delete the source PVC from array.</td>
+</tr>
+<tr>
+<td>PVC creation fails on a fresh cluster with <strong>iSCSI</strong> and <strong>NFS</strong> protocols alone enabled with error <strong>failed to provision volume with StorageClass &ldquo;unity-iscsi&rdquo;: error generating accessibility requirements: no available topology found</strong>.</td>
+<td>This is because iSCSI initiator login takes longer than the node pod startup time. This can be overcome by bouncing the node pods in the cluster using the below command the driver pods with <code>kubectl get pods -n unity --no-headers=true</code></td>
+</tr>
+<tr>
+<td>PVC creation fails on a cluster with only <strong>NFS</strong> protocol enabled with error <strong>failed to provision volume with StorageClass &ldquo;unity-nfs&rdquo;: error generating accessibility requirements: no available topology found</strong>.</td>
+<td>For NFS volume and pod creation to succeed there must be minimum one worker node with iSCSI support and with a successful iSCSI login in to the array. Following commands can be used as a reference (which should be executed on worker node with iSCSI support) <code>iscsiadm -m discovery -t st -p &lt;iscsi-interface-ip&gt;</code> <code>iscsiadm -m node -T &lt;target-iqn&gt; -l</code></td>
+</tr>
+<tr>
+<td>On deleting pods sometimes the corresponding <code>volumeattachment</code> will not get removed. This issue is intermittent and happens with one specific protocol (FC, iSCSI or NFS) based StorageClasses. This issue occurs across Kubernetes versions 1.18 and 1.19 and both versions of OpenShift (4.5/4.6).</td>
+<td>On deleting the stale <code>volumeattachment</code> manually, Controller Unpublish gets invoked and then the corresponding PVCs can be deleted.</td>
 </tr>
 </tbody>
 </table>
