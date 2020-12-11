@@ -85,8 +85,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snaps
    | verbose | Indicates what content of the OneFS REST API message should be logged in debug level logs | false | 1 |
    | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be  enabled.| false | true |
    | noProbeOnStart | Indicates whether the controller/node should probe during initialization | false | false |
-   | isiPath | The default base path for the volumes to be created, this will be used if a storage class does not have the IsiPath parameter specified| false
-   | /ifs/data/csi |
+   | isiPath | The default base path for the volumes to be created, this will be used if a storage class does not have the IsiPath parameter specified| false | /ifs/data/csi |
    | autoProbe |  Enable auto probe. | false | true |
    | nfsV3 | Specify whether to set the version to v3 when mounting an NFS export. If the value is "false", then the default version supported will be used (that is, the mount command will not explicitly specify "-o vers=3" option). This flag has now been deprecated and will be removed in a future release. Use the StorageClass.mountOptions if you want to specify 'vers=3' as a mount option. | false | false |
    | enableCustomTopology | Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish connection to Array. This requires enableCustomTopology to be enabled. | false | false |
@@ -97,8 +96,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snaps
    | accessZone | The Access Zone where the Volume would be created | false | System |
    | AzServiceIP | Access Zone service IP if different from isiIP, specify here and refer in storageClass | false |  |
    | rootClientEnabled |  When a PVC is being created, it takes the storage class' value of "storageclass.rootClientEnabled"| false | false |
-   | volumeBindingMode |  Controls when volume binding and dynamic provisioning should occur | true | WaitForFirstConsumer |
-   | allowedTopologies |  Controls scheduling of pods on worker nodes matching topology keys | true | csi-isilon.dellemc.com/{{ IsilonIP }}: csi-isilon.dellemc.com |
    | ***Controller parameters*** | Set nodeSelector and tolerations for controller |
    | nodeSelector | Define nodeSelector for the controllers, if required | false | |
    | tolerations | Define tolerations for the controllers, if required | false | |

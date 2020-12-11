@@ -313,30 +313,51 @@ When “enableCustomTopology” is set to “true”, CSI driver fetches custom 
 
 ### Topology Usage
    
-In order to utilize the Topology feature the default storage classes are modified to specify the volumeBindingMode as WaitForFirstConsumer and to specify the desired topology labels within allowedTopologies field as part of default storage class ensures that pod scheduling takes advantage of the topology and be guaranteed that the node selected has access to provisioned volumes. 
+To utilize the Topology feature, create a custom `StorageClass` with `volumeBindingMode` set to `WaitForFirstConsumer` and specify the desired topology labels within `allowedTopologies` field of this custom storage class. This ensures that Pod scheduling takes advantage of the topology and the selected node has access to provisioned volumes. 
   
 **Storage Class Example with Topology Support:**
  
 ```yaml
-apiVersion: v1
-items:
-- allowVolumeExpansion: true
-  allowedTopologies:
+# This is a sample manifest for utilizing the topology feature and mount options.
+# PVCs created using this storage class will be scheduled 
+# only on the nodes with access to Isilon
+
+# Change all instances of <ISILON_IP> to the IP of the PowerScale OneFS API server
+
+# Provide mount options through "mountOptions" attribute 
+# to create PVCs with mount options.
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: isilon
+provisioner: csi-isilon.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  AccessZone: System
+  IsiPath: "/ifs/data/csi"
+  # AccessZone groupnet service IP. Update AzServiceIP in values.yaml if different than isiIP.
+  #AzServiceIP : 192.168.2.1
+  # When a PVC is being created, it takes the storage class' value of "storageclass.rootClientEnabled", 
+  # which  determines, when a node mounts the PVC, in NodeStageVolume, whether to add the k8s node to 
+  # the "Root clients" field (when true) or "Clients" field (when false) of the NFS export 
+  RootClientEnabled: "false"
+
+# volumeBindingMode controls when volume binding and dynamic provisioning should occur.
+# Immediate mode indicates that volume binding and dynamic provisioning occurs once the PersistentVolumeClaim is created
+# WaitForFirstConsumer mode will delay the binding and provisioning of a PersistentVolume
+# until a Pod using the PersistentVolumeClaim is created
+volumeBindingMode: WaitForFirstConsumer
+# allowedTopologies helps scheduling pod on worker nodes which matches all of below expressions
+# If enableCustomTopology is set to true in helm values.yaml, then do not specify allowedTopologies
+allowedTopologies:
   - matchLabelExpressions:
-    - key: csi-isilon.dellemc.com/XX.XX.XX.XX
-      values:
-      - csi-isilon.dellemc.com
-  apiVersion: storage.k8s.io/v1
-  kind: StorageClass
-    name: Isilon
-  parameters:
-    AccessZone: System
-    AzServiceIP: XX.XX.XX.XX
-    IsiPath: /ifs/data/csi
-    RootClientEnabled: "false"
-  provisioner: csi-isilon.dellemc.com
-  reclaimPolicy: Delete
-  volumeBindingMode: WaitForFirstConsumer
+      - key: csi-isilon.dellemc.com/<ISILON_IP>
+        values:
+          - csi-isilon.dellemc.com
+
+mountOptions: ["<mountOption1>", "<mountOption2>", ..., "<mountOptionN>"]
 
 ```
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
