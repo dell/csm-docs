@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerflex/" />
-<meta property="article:modified_time" content="2020-12-04T15:19:03-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2020-12-18T11:32:22+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing PowerFlex CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2020-12-04T15:19:03-05:00" />
-<meta itemprop="wordCount" content="2129">
+<meta itemprop="dateModified" content="2020-12-18T11:32:22&#43;05:30" />
+<meta itemprop="wordCount" content="2137">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.221bf9bfe7429f746786737b7890fedc.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.992e405a155416a898d8a7ead17cf84d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.221bf9bfe7429f746786737b7890fedc.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.992e405a155416a898d8a7ead17cf84d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1013,10 +1013,11 @@ These values can be obtained using base64 encoding as described in the following
 </code></pre></div><p>where <em>myusername</em> &amp; <em>mypassword</em> are credentials for a user with PowerFlex priviledges.</p>
 </li>
 <li>Create the secret by running <code>kubectl create -f secret.yaml</code></li>
-<li>If installing on OpenShift/RHCOS nodes,
+<li>If not using automated SDC deployment, create a dummy SDC repo secret file:  <code>kubectl create -f sdc-repo-secret.yaml</code></li>
+<li>If using automated SDC deployment:
 <ul>
 <li>Check the SDC container image is the correct version for your version of PowerFlex.</li>
-<li>If using the optional SDC repo mirror, you need to create a secret for the repo credentials and provide the URL for the repo.
+<li>Create a secret for the SDC repo credentials and provide the URL for the repo.
 <ul>
 <li>To create the secret, you must update the details in helm/sdc-repo-secret.yaml file and running <code>kubectl create -f sdc-repo-secret.yaml</code>.</li>
 <li>To set the repo URL, you must set the <code>repoUrl</code> parameter in the <code>myvalues.yaml</code> file.</li>

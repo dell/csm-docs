@@ -112,10 +112,11 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;where &lt;em&gt;myusername&lt;/em&gt; &amp;amp; &lt;em&gt;mypassword&lt;/em&gt; are credentials for a user with PowerFlex priviledges.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;Create the secret by running &lt;code&gt;kubectl create -f secret.yaml&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;If installing on OpenShift/RHCOS nodes,
+&lt;li&gt;If not using automated SDC deployment, create a dummy SDC repo secret file:  &lt;code&gt;kubectl create -f sdc-repo-secret.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;If using automated SDC deployment:
 &lt;ul&gt;
 &lt;li&gt;Check the SDC container image is the correct version for your version of PowerFlex.&lt;/li&gt;
-&lt;li&gt;If using the optional SDC repo mirror, you need to create a secret for the repo credentials and provide the URL for the repo.
+&lt;li&gt;Create a secret for the SDC repo credentials and provide the URL for the repo.
 &lt;ul&gt;
 &lt;li&gt;To create the secret, you must update the details in helm/sdc-repo-secret.yaml file and running &lt;code&gt;kubectl create -f sdc-repo-secret.yaml&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;To set the repo URL, you must set the &lt;code&gt;repoUrl&lt;/code&gt; parameter in the &lt;code&gt;myvalues.yaml&lt;/code&gt; file.&lt;/li&gt;
