@@ -114,15 +114,16 @@ The common snapshot controller must be installed only once in the cluster irresp
     ```
    where *myusername* & *mypassword* are credentials for a user with PowerFlex priviledges.
 5. Create the secret by running `kubectl create -f secret.yaml` 
-6. If installing on OpenShift/RHCOS nodes, 
+6. If not using automated SDC deployment, create a dummy SDC repo secret file:  `kubectl create -f sdc-repo-secret.yaml`
+7. If using automated SDC deployment:
    - Check the SDC container image is the correct version for your version of PowerFlex. 
-   - If using the optional SDC repo mirror, you need to create a secret for the repo credentials and provide the URL for the repo. 
+   - Create a secret for the SDC repo credentials and provide the URL for the repo. 
      - To create the secret, you must update the details in helm/sdc-repo-secret.yaml file and running `kubectl create -f sdc-repo-secret.yaml`. 
      - To set the repo URL, you must set the `repoUrl` parameter in the `myvalues.yaml` file.
-7. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the top-level helm directory.  This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the value for these parameters as they must be entered in the `myvalues.yaml` file.
+8. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the top-level helm directory.  This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the value for these parameters as they must be entered in the `myvalues.yaml` file.
     - *NOTE:* Your SDC might have multiple VxFlex OS systems registered. Ensure that you choose the correct values.
-8. Copy the default values.yaml file `cd helm && cp csi-vxflexos/values.yaml myvalues.yaml`
-9. Edit the newly created values file and provide values for the following parameters `vi myvalues.yaml`:
+9. Copy the default values.yaml file `cd helm && cp csi-vxflexos/values.yaml myvalues.yaml`
+10. Edit the newly created values file and provide values for the following parameters `vi myvalues.yaml`:
 
 | Parameter  | Description | Required | Default |
 |------------|-------------|----------|---------|
