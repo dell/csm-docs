@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/unity/" />
-<meta property="article:modified_time" content="2020-12-03T07:41:57-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-01-16T00:35:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Installing Unity CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2020-12-03T07:41:57-05:00" />
-<meta itemprop="wordCount" content="1831">
+<meta itemprop="dateModified" content="2021-01-16T00:35:03&#43;05:30" />
+<meta itemprop="wordCount" content="1846">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.992e405a155416a898d8a7ead17cf84d.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.992e405a155416a898d8a7ead17cf84d.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1262,12 +1262,15 @@ The driver will continue to use previous values in case of an error found in the
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
 </code></pre></div><ul>
-<li><a href="https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster">Volume snapshot controller</a></li>
+<li>
+<p><a href="https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster">Volume snapshot controller</a></p>
+<ul>
+<li>The manifests available on GitHub install v3.0.2 of the snapshotter image - <a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.2</a></li>
+<li>Dell recommends using v3.0.2 image of the snapshot-controller - <a href="https://quay.io/repository/k8scsi/snapshot-controller?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/snapshot-controller:v3.0.2</a></li>
 </ul>
-<pre><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml   
-</code></pre><pre><code>       After executing these commands, a snapshot-controller pod should be up and running.
-</code></pre>
+<p>After executing these commands, a snapshot-controller pod should be up and running.</p>
+</li>
+</ul>
 </li>
 </ul>
 </li>
@@ -1400,7 +1403,7 @@ Use the following command to replace the secret
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2020 The Dell Technologies All Rights Reserved</small>
+        <small class="text-white">&copy; 2021 The Dell Technologies All Rights Reserved</small>
         <small class="ml-1"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank">Privacy Policy</a></small>
 	
 		

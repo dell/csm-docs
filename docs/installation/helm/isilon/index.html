@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/" />
-<meta property="article:modified_time" content="2020-12-11T17:58:44+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-01-16T00:35:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing PowerScale CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2020-12-11T17:58:44&#43;05:30" />
-<meta itemprop="wordCount" content="1544">
+<meta itemprop="dateModified" content="2021-01-16T00:35:03&#43;05:30" />
+<meta itemprop="wordCount" content="1559">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.992e405a155416a898d8a7ead17cf84d.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.992e405a155416a898d8a7ead17cf84d.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -977,9 +977,11 @@ systemctl restart docker
 <h3 id="install-snapshot-beta-crds">Install Snapshot Beta CRDs</h3>
 <p>To install snapshot CRDs specify <code>--snapshot-crd</code> flag to driver installation script <code>dell-csi-helm-installer/csi-install.sh</code> during driver installation.</p>
 <p><a href="https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster">Install Common Snapshot Controller</a>, if not already installed for the cluster.</p>
-<pre><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml
-</code></pre><h2 id="install-csi-driver-for-powerscale">Install CSI Driver for PowerScale</h2>
+<ul>
+<li>The manifests available on GitHub install v3.0.2 of the snapshotter image - <a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.2</a></li>
+<li>Dell recommends using v3.0.2 image of the snapshot-controller - <a href="https://quay.io/repository/k8scsi/snapshot-controller?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/snapshot-controller:v3.0.2</a></li>
+</ul>
+<h2 id="install-csi-driver-for-powerscale">Install CSI Driver for PowerScale</h2>
 <p><strong>Before you begin</strong></p>
 <ul>
 <li>You must clone the source code from <a href="https://github.com/dell/csi-isilon">git repository</a>.</li>
@@ -1249,7 +1251,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2020 The Dell Technologies All Rights Reserved</small>
+        <small class="text-white">&copy; 2021 The Dell Technologies All Rights Reserved</small>
         <small class="ml-1"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank">Privacy Policy</a></small>
 	
 		
