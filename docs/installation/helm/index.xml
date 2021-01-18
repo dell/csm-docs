@@ -659,9 +659,11 @@ systemctl restart docker
 &lt;h3 id=&#34;install-snapshot-beta-crds&#34;&gt;Install Snapshot Beta CRDs&lt;/h3&gt;
 &lt;p&gt;To install snapshot CRDs specify &lt;code&gt;--snapshot-crd&lt;/code&gt; flag to driver installation script &lt;code&gt;dell-csi-helm-installer/csi-install.sh&lt;/code&gt; during driver installation.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster&#34;&gt;Install Common Snapshot Controller&lt;/a&gt;, if not already installed for the cluster.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;install-csi-driver-for-powerscale&#34;&gt;Install CSI Driver for PowerScale&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The manifests available on GitHub install v3.0.2 of the snapshotter image - &lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.2&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v3.0.2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Dell recommends using v3.0.2 image of the snapshot-controller - &lt;a href=&#34;https://quay.io/repository/k8scsi/snapshot-controller?tag=v3.0.2&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/snapshot-controller:v3.0.2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;install-csi-driver-for-powerscale&#34;&gt;Install CSI Driver for PowerScale&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Before you begin&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;You must clone the source code from &lt;a href=&#34;https://github.com/dell/csi-isilon&#34;&gt;git repository&lt;/a&gt;.&lt;/li&gt;
@@ -1488,12 +1490,15 @@ The driver will continue to use previous values in case of an error found in the
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster&#34;&gt;Volume snapshot controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster&#34;&gt;Volume snapshot controller&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The manifests available on GitHub install v3.0.2 of the snapshotter image - &lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.2&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v3.0.2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Dell recommends using v3.0.2 image of the snapshot-controller - &lt;a href=&#34;https://quay.io/repository/k8scsi/snapshot-controller?tag=v3.0.2&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/snapshot-controller:v3.0.2&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml   
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;       After executing these commands, a snapshot-controller pod should be up and running.
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After executing these commands, a snapshot-controller pod should be up and running.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
