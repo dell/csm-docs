@@ -85,7 +85,7 @@ For detailed PowerFlex installation procedure, see the _Dell EMC PowerFlex Deplo
 #### Volume Snapshot CRD's
 The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on [Github](https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd).
 
-You can also install the CRDs by supplying the option _\-\-snapshot-crd_ while installing the driver using the `csi-install.sh` script. If you are installing the driver using the Dell CSI Operator, there is a helper script provided to install the snapshot CRDs - `scripts/install_snap_crds.sh`.
+You can also install the CRDs by supplying the option _\-\-snapshot-crd_ while installing the driver using the `csi-install.sh` script.
 
 #### Volume Snapshot Controller
 

@@ -6,7 +6,7 @@ tags:
 weight: 1
 Description: Upgrade PowerScale CSI driver
 ---
-You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.
+You can upgrade the CSI Driver for Dell EMC PowerScale using Helm or Dell CSI Operator.
 
 ## Upgrade Driver from version v1.3.0/v1.3.0.1 to v1.4.0
 **Steps**
