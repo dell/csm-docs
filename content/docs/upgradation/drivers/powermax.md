@@ -15,7 +15,7 @@ You can upgrade the CSI Driver for Dell EMC PowerMax using Helm or Dell CSI Oper
 **Steps**
 1. Run `git clone https://github.com/dell/csi-powermax.git` to clone the git repository and get the v1.5 driver.
 2. Update values file as needed.
-2. Run the `csi-install` script with the option _--upgrade_ by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade`.
+2. Run the `csi-install` script with the option _\-\-upgrade_ by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade`.
 
 ## Update Driver from pre-v1.4 to v1.5 using Helm
 
@@ -38,7 +38,7 @@ A rolling upgrade of the driver from an older version to v1.4 is not supported b
 *NOTE:*
 - If you are upgrading from a driver version which was installed using Helm v2, ensure that you install Helm3 before installing the driver.
 - Installation of the CSI Driver for Dell EMC PowerMax version 1.5 driver is not supported on Kubernetes upstream clusters running Kubernetes version 1.16 or lower. You must upgrade your cluster to 1.17, 1.18, or 1.19 before attempting to install the new version of the driver.
-- To update any installation parameter after the driver has been installed, change the `my-powermax-settings.yaml` file and run the install script with the option _--upgrade_, for example: `./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml –upgrade`.
+- To update any installation parameter after the driver has been installed, change the `my-powermax-settings.yaml` file and run the install script with the option _\-\-upgrade_, for example: `./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml –upgrade`.
 
 ## Upgrade using Dell CSI Operator:
 

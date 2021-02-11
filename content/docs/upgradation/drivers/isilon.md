@@ -10,10 +10,10 @@ You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operato
 
 ## Upgrade Driver from version v1.3.0/v1.3.0.1 to v1.4.0
 **Steps**
-1. Verify that all pre-requisites to install CSI Driver for DELL EMC PowerScale v1.4.0 are fulfilled.
+1. Verify that all pre-requisites to install CSI Driver for Dell EMC PowerScale v1.4.0 are fulfilled.
 2. Clone the repository https://github.com/dell/csi-powerscale , copy the helm/csi-isilon/values.yaml into a new location with name say my-isilon-settings.yaml, to customize settings for installation. Edit my-isilon-settings.yaml as per the requirements.
-3. Change to directory dell-csi-helm-installer to install the DELL EMC PowerScale `cd dell-csi-helm-installer`
-4. Upgrade the CSI Driver for DELL EMC PowerScale v1.4.0 using following command:
+3. Change to directory dell-csi-helm-installer to install the Dell EMC PowerScale `cd dell-csi-helm-installer`
+4. Upgrade the CSI Driver for Dell EMC PowerScale v1.4.0 using following command:
 
    `./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade`
 

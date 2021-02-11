@@ -198,15 +198,15 @@ Procedure
         * [Install Snapshot Beta CRDs using the following command](<https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster>)
           
      ```shell script
-     kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
-     kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
-     kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
+     kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.3/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+     kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.3/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+     kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.3/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
      ```
       
      * [Volume snapshot controller](<https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster>)
      
-       - The manifests available on GitHub install v3.0.2 of the snapshotter image - [quay.io/k8scsi/csi-snapshotter:v3.0.2](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.2&tab=tags)
-       - Dell recommends using v3.0.2 image of the snapshot-controller - [quay.io/k8scsi/snapshot-controller:v3.0.2](https://quay.io/repository/k8scsi/snapshot-controller?tag=v3.0.2&tab=tags)
+       - The manifests available on GitHub install v3.0.3 of the snapshotter image - [quay.io/k8scsi/csi-snapshotter:v3.0.3](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.3&tab=tags)
+       - Dell recommends using v3.0.3 image of the snapshot-controller - [quay.io/k8scsi/snapshot-controller:v3.0.3](https://quay.io/repository/k8scsi/snapshot-controller?tag=v3.0.3&tab=tags)
 
 		After executing these commands, a snapshot-controller pod should be up and running.
 

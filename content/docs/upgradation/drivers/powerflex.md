@@ -15,7 +15,7 @@ You can upgrade the CSI Driver for Dell EMC PowerFlex using Helm or Dell CSI Ope
 **Steps**
 1. Run `git clone https://github.com/dell/csi-powerflex.git` to clone the git repository and get the v1.3 driver.
 2. Update values file as needed.
-2. Run the `csi-install` script with the option _--upgrade_ by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade`.
+2. Run the `csi-install` script with the option _\-\-upgrade_ by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade`.
 
 ## Update Driver from pre-v1.2 to v1.3 using Helm
 A direct upgrade of the driver from an older version pre-v1.2 to version 1.3 is not supported because of breaking changes in Kubernetes APIs in the migration from alpha snapshots to beta snapshots. In order to update the driver in this situation you need to remove alpha snapshot related artifacts.
@@ -35,7 +35,7 @@ A direct upgrade of the driver from an older version pre-v1.2 to version 1.3 is 
 *NOTE:*
 - If you are upgrading from a driver version which was installed using Helm v2, ensure that you install Helm3 before installing the driver.
 - Installation of the CSI Driver for Dell EMC PowerFlex version 1.3 driver is not supported on Kubernetes upstream clusters running version 1.16. You must upgrade your cluster to 1.17, 1.18, or 1.19 before attempting to install the new version of the driver.
-- To update any installation parameter after the driver has been installed, change the `myvalues.yaml` file and run the install script with the option _--upgrade_, for example: `./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade`.
+- To update any installation parameter after the driver has been installed, change the `myvalues.yaml` file and run the install script with the option _\-\-upgrade_, for example: `./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade`.
 
 ## Upgrade using Dell CSI Operator:
 

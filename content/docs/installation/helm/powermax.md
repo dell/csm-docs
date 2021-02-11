@@ -109,9 +109,9 @@ Set up Linux multipathing as follows:
 ### Volume Snapshot requirements
 
 #### Volume Snapshot CRDs
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on [Github](https://github.com/kubernetes-csi/external-snapshotter/tree/release-2.1/config/crd).
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on [Github](https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd).
 
-Alternately, you can install the CRDs by supplying the option _--snapshot-crd_ while installing the driver using the `csi-install.sh` script. 
+Alternately, you can install the CRDs by supplying the option _\-\-snapshot-crd_ while installing the driver using the `csi-install.sh` script. 
 
 #### Volume Snapshot Controller
 
@@ -119,11 +119,11 @@ Starting with the beta Volume Snapshots, the CSI external-snapshotter sidecar is
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests available on [GitHub](https://github.com/kubernetes-csi/external-snapshotter/tree/release-2.1/deploy/kubernetes/snapshot-controller).
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests available on [GitHub](https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller).
 
 *NOTE:*
-- The manifests available on the GitHub repository for snapshot controller will install v3.0.2 of the snapshotter controller - (k8s.gcr.io/sig-storage/snapshot-controller:v3.0.2)
-- Dell EMC recommends using the v3.0.2 image of the CSI external snapshotter - (k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.2)
+- The manifests available on the GitHub repository for snapshot controller will install v3.0.3 of the snapshotter controller - (k8s.gcr.io/sig-storage/snapshot-controller:v3.0.3)
+- Dell EMC recommends using the v3.0.3 image of the CSI external snapshotter - (k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.3)
 - The CSI external-snapshotter sidecar is still installed with the driver and does not involve any extra configuration.
 
 ## Install the Driver
