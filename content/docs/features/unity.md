@@ -7,13 +7,13 @@ Description: Code features for Unity Driver
 
 Create a file `simple.yaml` using sample yaml files located at tests/sample.yaml
 
-This command will create a statefulset that consumes three volumes of default storage classes
+The following command creates a statefulset that consumes three volumes of default storage classes:
 
 ```bash
 kubectl create -f tests/sample.yaml
 ```
 
-After executing this command 3 PVC and statefulset will be created in the `test-unity` namespace.
+After executing this command 3 PVC and statefulset are created in the `test-unity` namespace.
 You can check created PVCs by running `kubectl get pvc -n test-unity` and check statefulset's pods by running `kubectl get pods -n test-unity`command.
 Pod should be `Ready` and `Running`.
 
@@ -99,35 +99,22 @@ spec:
 
 ## Volume Snapshot Feature
 
-The CSI Unity driver version 1.3 and later supports managing beta snapshots. 
+The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes version 1.17 and generally available (v1) in Kubernetes version 1.20. 
 
-To use Volume Snapshots, ensure the following components have been deployed to your cluster:
+The CSI Unity driver version 1.5 supports v1beta1 snapshots on Kubernetes 1.18/1.19 and v1 snapshots on Kubernetes 1.20.
 
+In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
 - Kubernetes Volume Snaphshot CRDs
 - Volume Snapshot Controller
 
-You can install them by copy pasting the following commands (Copy entire thing in one shot and paste it in terminal): 
-
-```bash
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml &&
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml &&
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml &&
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml &&
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.2/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml   
-```
-
-> For general use, update the snapshot controller YAMLs with an appropriate namespace before installing. For
-> example, on a Vanilla Kubernetes cluster, update the namespace from default to kube-system before issuing the
-> kubectl create command.
-
 ### Volume Snapshot Class
 
-During the installation of the CSI Unity driver version 1.3 and later, a Volume Snapshot Class is created using the new v1beta1 snapshot APIs. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.
+During the installation of CSI Unity 1.5 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.
 
-Following is the manifest for the Volume Snapshot Class created during installation:
+Following is the manifest for a Volume Snapshot Class created during installation:
 
 ```yaml
-apiVersion: snapshot.storage.k8s.io/v1beta1
+apiVersion: snapshot.storage.k8s.io/v1 #For beta snapshots the apiVersion will be snapshot.storage.k8s.io/v1beta1
 kind: VolumeSnapshotClass
 metadata:
   name: unity-snapclass
@@ -137,10 +124,10 @@ deletionPolicy: Delete
 
 ### Create Volume Snapshot
 
-The following is a sample manifest for creating a Volume Snapshot using the **v1beta1** snapshot APIs:
+The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs:
 
 ```yaml
-apiVersion: snapshot.storage.k8s.io/v1beta1
+apiVersion: snapshot.storage.k8s.io/v1 #For beta snapshots the apiVersion will be snapshot.storage.k8s.io/v1beta1
 kind: VolumeSnapshot
 metadata:
   name: pvol0-snap
@@ -231,48 +218,51 @@ spec:
 
 ## Raw block support
 
-The CSI Unity driver version 1.3 and later supports managing Raw Block volumes.
-
-Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a
-`volumeClaimTemplate` specifying a `volumeMode: Block`. An example configuration is outlined here:
-
-```yaml
-apiVersion: apps/v1
-kind: StatefulSet
+The CSI Unity driver supports Raw Block Volumes from v1.4 onwards.
+	Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. An example configuration is outlined here:
+	
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-    name: unitytest
-    namespace: {{ .Values.namespace }}
+  name: rawblockpvc
+  namespace: default
 spec:
-    ...
-        spec:
-            ...
-            containers:
-              - name: test
-                ...
-                volumeDevices:
-                  - devicePath: "/dev/data0"
-                    name: pvol
-    volumeClaimTemplates:
-      - metadata:
-            name: pvol
-        spec:
-        accessModes:
-          - ReadWriteOnce
-        volumeMode: Block
-        storageClassName: unity
-        resources:
-            requests:
-                storage: 8Gi
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Block  
+  resources:
+        requests:
+          storage: 5Gi
+  storageClassName: unity-iscsi
+	  
 ```
 
-Allowable access modes are `ReadWriteOnce`, `ReadWriteMany`, and for block devices that have been previously initialized,
-`ReadOnlyMany`.
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rawblockpod
+  namespace: default
+spec:
+  containers:
+    - name: task-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeDevices:
+        - devicePath: /usr/share/nginx/html/device
+          name: nov-eleventh-1-pv-storage
+  volumes:
+    - name: nov-eleventh-1-pv-storage
+      persistentVolumeClaim:
+        claimName: rawblockpvc
+    
+```
 
-Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node's file system.
-The driver does not format or check the format of any file system on the block device. Raw Block volumes do support online
-Volume Expansion, but it is up to the application to manage reconfiguring the file system (if any) to the new size.
-
-Note: Raw block volume creation supports only for **FC** and **iSCSI** protocols
+Access modes allowed are ReadWriteOnce and ReadWriteMany. Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node's file system. The driver does not format or check the format of any file system on the block device. 
+Raw Block volumes do support online Volume Expansion, but it is up to the application to manage reconfiguring the file system (if any) to the new size. Access mode ReadOnlyMany is not supported with raw block since we cannot restrict volumes to be readonly from Unity.
 
 For additional information, see the [kubernetes](https://kubernetes.io/DOCS/CONCEPTS/STORAGE/PERSISTENT-VOLUMES/#RAW-BLOCK-VOLUME-SUPPORT) website.
 
@@ -351,7 +341,7 @@ spec:
         size: "10Gi"
 ```
 
-This manifest will create a pod and attach newly created ephemeral inline CSI volume to it. 
+This manifest creates a pod and attach newly created ephemeral inline CSI volume to it. 
 
 To create `NFS` volume you need to provide `nasName:` parameters that points to the name of your NAS Server in pod manifest like so
 
@@ -372,7 +362,7 @@ The CSI Unity driver version 1.4 introduces controller HA feature. Instead of St
 
 By default number of replicas set to 2, you can set `controllerCount` parameter to 1 in `myvalues.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change `replicas` parameter in `spec.driver` section in your Unity Custom Resource.
 
-When multiple replicas of controller pods are in cluster each sidecar (Attacher, Provisioner, Resizer and Snapshotter) tries to get a lease so only one instance of each sidecar would be active in the cluster at a time. 
+When multiple replicas of controller pods are in cluster each sidecar (Attacher, Provisioner, Resizer and Snapshotter) tries to get a lease so only one instance of each sidecar is active in the cluster at a time. 
 
 ### Driver pod placement
 
@@ -420,7 +410,7 @@ This Topology support does not include customer defined topology, users cannot c
 
 ### Topology Usage
 
-To use the Topology feature user can install driver by setting `createStorageClassesWithTopology` to true in the `myvalues.yaml` which will create default storage classes by adding topology keys (based on the arrays specified in `myvalues.yaml`) and with `WaitForFirstConsumer` binding mode. 
+To use the Topology feature, user can install driver by setting `createStorageClassesWithTopology` to true in the `myvalues.yaml` which will create default storage classes by adding topology keys (based on the arrays specified in `myvalues.yaml`) and with `WaitForFirstConsumer` binding mode. 
 
 Another option is the user can create custom storage classes on their own by specifying the valid topology keys and binding mode.
 
@@ -449,3 +439,26 @@ You can check what labels your nodes contain by running `kubectl get nodes --sho
 >Note that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for topology feature to work properly.
 
 For any additional information about topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
+
+## Support for Docker EE
+
+The CSI Driver for Dell EMC Unity supports Docker EE and deployment on clusters bootstrapped with UCP (Universal Control Plane).
+
+*UCP version 3.3.3 supports Kubernetes 1.18 and CSI driver can be installed on UCP 3.3 with Helm. 
+
+The installation process for the driver on such clusters remains the same as the installation process on upstream clusters.
+
+On UCP based clusters, `kubectl` may not be installed by default, it is important that [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is installed prior to the installation of the driver.
+
+The worker nodes in UCP backed clusters may run any of the OSs which we support with upstream clusters.
+
+
+## Support for SLES 15 SP2
+
+The CSI Driver for Dell EMC Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
+
+ - open-iscsi ***open-iscsi is required in order to make use of iSCSI protocol for provisioning**
+ - nfs-utils ***nfs-utils is required in order to make use of NFS protocol for provisioning**
+ - multipath-tools ***multipath-tools is required in order to make use of FC and iSCSI protocols for provisioning***
+
+  After installing open-iscsi, ensure "iscsi" and "iscsid" services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are must for provisioning with iSCSI protocol to work.
