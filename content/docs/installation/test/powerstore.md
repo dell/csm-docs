@@ -5,7 +5,8 @@ description: Tests to validate PowerStore CSI Driver installation
 ---
 
 In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default ext4, xfs and nfs
-storage classes, and automatically mounts them to the pod. Note that nfs storage class is optional and will not be created if you haven't turned it on in `myvalues.yaml`.
+storage classes and automatically mounts them to the pod.
+>It assumes that you've created the same basic three storage classes from `helm/samples/storageclass` folder without changing their names. If you've created different storage classes please edit `tests/simple/simple.yaml` and change `PersistentVolumeClaim` definitions to point to correct storage classes.
 
 **Steps**
 

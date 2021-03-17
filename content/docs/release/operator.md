@@ -3,9 +3,9 @@ title: Operator
 description: Release notes for Dell CSI Operator
 ---
 
-## Release Notes - Dell CSI Operator 1.2.0
+## Release Notes - Dell CSI Operator 1.3.0
 
->**Note:** There is a delay in Operator 1.2.0 certification hence it will not be visible in Red Hat OpenShift certified catalogue immediately after release on GitHub.
+>**Note:** There will be a delay in certification of Dell CSI Operator 1.3.0 and it will not be available for download from the Red Hat OpenShift certified catalog. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.3.0 release.
 
 ### New Features/Changes
 - Added support for OpenShift 4.5, 4.6 with RHEL and CoreOS worker nodes
@@ -20,7 +20,9 @@ description: Release notes for Dell CSI Operator
 There are no fixed issues in this release.
 
 ### Known Issues
-There are no Known issues in this release.
+| Issue | Workaround |
+|-------|------------|
+| A warning message will be listed in the events for StorageClasses if the driver is not upgraded after an operator upgrade. This happens because of the fix provided by Kubernetes in 1.20 for one of the known [issue](https://github.com/kubernetes/kubernetes/issues/65200). | StorageClasses will get updated automatically after 45 mins if there is no driver upgrade, after an operator upgrade. |
 
 ### Support
 The Dell CSI Operator image is available on Dockerhub and is officially supported by Dell EMC.
