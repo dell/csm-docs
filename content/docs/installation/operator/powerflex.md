@@ -14,9 +14,9 @@ There are sample manifests provided which can be edited to do an easy installati
 Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.
 
 ### Prerequisites:
-#### Automated SDC Deployment for Operator 
-- This applies to OpenShift with RHCOS Nodes and Kubernetes with Fedora CoreOS Nodes Only.
-- This feature deploys the sdc kernel modules on CoreOS nodes with the help of an init container.
+#### SDC Deployment for Operator 
+- This feature deploys the sdc kernel modules on all nodes with the help of an init container.
+- For non supported verisons of the OS also do the manual SDC deployment steps given below. Refer https://hub.docker.com/r/dellemc/sdc for supported versions.
 - **Required:** MDM value should be provided in CR file for the sdc init container to work. MDM provided in CR file will be overrided by config.json secret given below
 - **Note:** To use a sdc-binary module from customer ftp site:
   - Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:
@@ -57,6 +57,18 @@ Kubernetes Operators make it easy to deploy and manage entire lifecycle of compl
           - name: MDM
             value: "10.xx.xx.xx,10.xx.xx.xx"
 ```  
+
+### Manual SDC Deployment
+
+For detailed PowerFlex installation procedure, see the _Dell EMC PowerFlex Deployment Guide_. Install the PowerFlex SDC as follows:
+
+**Steps**
+
+1. Download the PowerFlex SDC from [Dell EMC Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
+2. Export the shell variable _MDM_IP_ in a comma-separated list using `export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx`, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.
+3. Install the SDC per the _Dell EMC PowerFlex Deployment Guide_:
+    - For Red Hat Enterprise Linux and Cent OS, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
+4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
 ### Install Driver
 
