@@ -14,7 +14,7 @@ Test the deployment workflow of a simple pod on PowerScale storage.
 
 1. **Creating a storage class:**
 
-   Create a file `storageclass.yaml` using sample yaml file located at test/sample_files/storageclass
+   Create a file `storageclass.yaml` using sample yaml file located at helm/samples/storageclass
 
    Execute the following command to create storage class:
    ```
@@ -68,6 +68,7 @@ Test the deployment workflow of a simple pod on PowerScale storage.
       as its default snapshot class. 
     * You can see its definition using `kubectl get volumesnapshotclasses isilon-snapclass -o yaml`.
     * The IsiPath of default isilon-snapclass is /ifs/data/csi. If user wants different path, she has to create custom volumesnapshot class with required IsiPath in parameters section.
+    * Sample volumesnapshotclass file is present under helm/samples/volumesnapshotclass
 
 5. **Create Volume from Snapshot**
 

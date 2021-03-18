@@ -5,7 +5,7 @@ description: >
   Installing PowerFlex CSI Driver via Helm
 ---
 
-The CSI Driver for Dell EMC PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, please review the script [documentation](https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell EMC PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, please review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_ in the namespace `vxflexos`:
 - CSI Driver for Dell EMC PowerFlex
@@ -48,11 +48,15 @@ It is required to configure mount propagation on your container runtime on all K
 
 **Steps**
 
-1. Edit the service section of `/etc/systemd/system/multi-user.target.wants/docker.service` file to add the following lines:
+1. The service section of `/etc/systemd/system/multi-user.target.wants/docker.service` needs to be edited in a few places. First, the `Requires` entry under the `[Unit]` header needs have `docker.service` added to it, as shown. Second, `MountFlags=shared` needs to be added under the `[Service]` header.
    ```bash
-   docker.service
-   [Service]...
-   MountFlags=shared
+    [Unit]
+    ...
+    Requires=docker.socket containerd.service docker.service
+
+    [Service]
+    ...
+    MountFlags=shared
    ```
 2. Restart the docker service with `systemctl daemon-reload` and `systemctl restart docker` on all the nodes.
 
@@ -66,7 +70,7 @@ The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storag
 
 The automated deployment of the SDC runs by default when installing the driver. It installs an SDC container to facilitate the installation. More details on how the automatic SDC deployment works can be found in the Feature section of this site on the PowerFlex page.  
 
-**Optional:** For a typical install, you will pull SDC kernel modules from the Dell EMC ftp site, which is setup by default. Some users might want to mirror this repository to a local location. The PowerFlex KB article (https://support.emc.com/kb/000184206) has instructions on how to do this. 
+**Optional:** For a typical install, you will pull SDC kernel modules from the Dell EMC ftp site, which is setup by default. Some users might want to mirror this repository to a local location. The PowerFlex KB article (https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for) has instructions on how to do this. 
 
 #### Manual SDC Deployment
 
@@ -112,7 +116,7 @@ The common snapshot controller must be installed only once in the cluster irresp
 
 3. Check `helm/csi-vxflexos/driver-image.yaml` and confirm the driver image points to new image.
 
-4. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the top-level helm directory.  This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the value for these parameters as they must be entered in the `config.json` file.
+4. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the top-level helm directory.  This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the value for these parameters as they must be entered in the `config.json` file in the top-level directory.
 
 5. Prepare the config.json for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.
 
@@ -199,7 +203,7 @@ The common snapshot controller must be installed only once in the cluster irresp
 
 ## Storage Classes
 
-Starting in CSI PowerFlex v1.4, `dell-csi-helm-installer` will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `helm/samples` folder. Please use these samples to create new storage classes to provision storage. See this [note](../../../../v1/installation/helm/powermax/#storage-classes) for the driving reason behind this change.
+Starting in CSI PowerFlex v1.4, `dell-csi-helm-installer` will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `helm/samples` folder. Please use these samples to create new storage classes to provision storage. See this [note](../../../../v1/installation/helm/powermax/) for the driving reason behind this change.
 
 ### What happens to my existing storage classes?
 

@@ -77,12 +77,12 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | ServiceLevel | Service Level | No | Bronze |
    | FsType | File System type (xfs/ext4) | xfs |
    | allowVolumeExpansion | After the allowed topology is modified in storage class, Pods/and volumes will always be scheduled on nodes that have access to the storage | No | false |
-   | allowedTopologies:key | This is to enable topology to allow Pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature see the related [documentation](../../features/powermax#topology-support) | No | "000000000001" | 
+   | allowedTopologies:key | This is to enable topology to allow Pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature see the related [documentation](../../../features/powermax#topology-support) | No | "000000000001" | 
 5.  Execute the following command to create PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 
 ### CSI PowerMax ReverseProxy
 
-CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature see the related [documentation](../../features/powermax#csi-powermax-reverse-proxy).
+CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature see the related [documentation](../../../features/powermax#csi-powermax-reverse-proxy).
 
 When you install CSI PowerMax ReverseProxy, dell-csi-operator will create a Deployment and ClusterIP service as part of the installation
 
