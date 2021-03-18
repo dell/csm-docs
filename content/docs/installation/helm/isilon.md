@@ -3,7 +3,7 @@ title: PowerScale
 description: >
   Installing PowerScale CSI Driver via Helm
 ---
-The CSI Driver for Dell EMC PowerScale can be deployed by using the provided Helm v3 charts in upstream Kubernetes. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell EMC PowerScale can be deployed by using the provided Helm v3 charts in upstream Kubernetes. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_:
 - CSI Driver for PowerScale
@@ -176,3 +176,28 @@ Storage Classes are an essential Kubernetes construct for Storage provisioning. 
 https://kubernetes.io/docs/concepts/storage/storage-classes/
 
 Starting from v1.5 of the driver, Storage Classes would no longer be created along with the installation of the driver.
+A wide set of annotated storage class manifests have been provided in the helm/samples/storageclass folder. Please use these samples to create new storage classes to provision storage.
+
+Starting in CSI PowerScale v1.5, `dell-csi-helm-installer` will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `helm/samples/storageclass` folder. Please use these samples to create new storage classes to provision storage.
+
+### What happens to my existing storage classes?
+
+*Upgrading from CSI PowerScale v1.4 driver*
+The storage classes created as part of the installation have an annotation - "helm.sh/resource-policy": keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so. Since in CSI-PowerScale 1.5 Multi array is supported. The existing storage class (of 1.4) should be treated as default storage class.
+
+*Upgrading from an older version of the driver*
+It is strongly recommended to upgrade older versions of CSI-PowerScale to CSI-PowerScale 1.4 before upgrading to 1.5.
+
+**Steps to create storage class:**
+There are samples storage class yaml files available under `helm/samples/storageclass`.  These can be copied and modified as needed.
+
+*NOTE*:
+- At least one storage class is required for one array.
+- If you uninstall the driver and reinstall it, you can still face errors if any update in the `values.yaml` file leads to an update of the storage class(es):
+
+```
+    Error: cannot patch "<sc-name>" with kind StorageClass: StorageClass.storage.k8s.io "<sc-name>" is invalid: parameters: Forbidden: updates to parameters are forbidden
+```
+
+In case you want to make such updates, ensure to delete the existing storage classes using the `kubectl delete storageclass` command.  
+Deleting a storage class has no impact on a running Pod with mounted PVCs. You will not be able to provision new PVCs until at least one storage class is newly created.
