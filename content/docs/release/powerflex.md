@@ -10,7 +10,7 @@ description: Release notes for PowerFlex CSI driver
 - Added support for OpenShift 4.7 with RHEL and CoreOS worker nodes
 - Added support for Red Hat Enterprise Linux (RHEL) 8.3
 - Added support for Fedora CoreOS
-- Added automatic SDC deployment on Fedora CoreOS nodes
+- Added SDC deployment on Fedora CoreOS nodes
 - Added support for Ephemeral Inline Volume
 - Added support multi-mount volumes
 - Added support for managing multiple PowerFlex arrays from one driver

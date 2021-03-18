@@ -64,11 +64,17 @@ It is required to configure mount propagation on your container runtime on all K
 
 ### Install PowerFlex Storage Data Client
 
-The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all worker nodes. If installing on Fedora CoreOS (FCOS) with Kubernetes or Red Hat CoreOS (RHCOS) nodes on OpenShift you can install using the automated SDC deployment feature. If installing on non-RHCOS nodes, you must install SDC manually.
+The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run node portion of CSI driver. 
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment, 
+currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS). 
+On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below.
+Refer https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 
-#### Automatic SDC Deployment
+#### SDC Deployment
 
-The automated deployment of the SDC runs by default when installing the driver. It installs an SDC container to facilitate the installation. More details on how the automatic SDC deployment works can be found in the Feature section of this site on the PowerFlex page.  
+The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run node portion of CSI driver. SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment, currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS). 
+
+On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer https://hub.docker.com/r/dellemc/sdc for your OS versions.
 
 **Optional:** For a typical install, you will pull SDC kernel modules from the Dell EMC ftp site, which is setup by default. Some users might want to mirror this repository to a local location. The PowerFlex KB article (https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for) has instructions on how to do this. 
 

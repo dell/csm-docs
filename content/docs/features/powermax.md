@@ -19,29 +19,30 @@ In order to use Volume Snapshots, ensure the following components have been depl
 
 During the installation of the CSI PowerMax 1.6 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class you will need and there is no need to create any other Volume Snapshot Class. 
 
-<TODO - update latest>
-The following is the manifest for the Volume Snapshot Class created during installation (using the default driver name):
+The following is the manifest for the Volume Snapshot Class created during installation (using the default driver name):   
 ```
-apiVersion: snapshot.storage.k8s.io/v1beta1
+apiVersion: snapshot.storage.k8s.io/v1
 deletionPolicy: Delete
 kind: VolumeSnapshotClass
 metadata:
   name: powermax-snapclass
 driver: csi-powermax.dellemc.com
-```
+
+```  
+*Note*: The apiVersion for VolumeSnapshotClass object created on clusters running Kubernetes versions < 1.20 will be v1beta1  
+
 ### Creating Volume Snapshots
-<TODO - update latest>
-The following is a sample manifest for creating a Volume Snapshot using the **v1beta1** snapshot APIs:
+The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs:
 ```
-apiVersion: snapshot.storage.k8s.io/v1beta1
+apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
-  name: pmax-snapshot-demo
-  namespace: test
+  name: pvol0-snap1
 spec:
   volumeSnapshotClassName: powermax-snapclass
   source:
-    persistentVolumeClaimName: pmax-pvc-demo
+    persistentVolumeClaimName: pvol0
+
 ```
 
 After the VolumeSnapshot has been successfully created by the CSI PowerMax driver, a VolumeSnapshotContent object is automatically created. When the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.

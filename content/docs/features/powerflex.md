@@ -18,29 +18,34 @@ In order to use Volume Snapshots, ensure the following components are deployed t
 
 During the installation of CSI PowerFlex 1.4 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.
 
-<TODO - update latest>
 Following is the manifest for the Volume Snapshot Class created during installation: 
 ```
+{{- if eq .Values.kubeversion  "v1.20" }}
+apiVersion: snapshot.storage.k8s.io/v1
+{{- else }}
 apiVersion: snapshot.storage.k8s.io/v1beta1
+{{- end}}
 kind: VolumeSnapshotClass
 metadata:
   name: vxflexos-snapclass
 driver: csi-vxflexos.dellemc.com
 deletionPolicy: Delete
+
 ```
 ### Create Volume Snapshot
-<TODO - update latest>
+
 The following is a sample manifest for creating a Volume Snapshot using the **v1beta1** snapshot APIs:
 ```
 apiVersion: snapshot.storage.k8s.io/v1beta1
 kind: VolumeSnapshot
 metadata:
-  name: pvol0-snap
+  name: pvol0-snap1
   namespace: helmtest-vxflexos
 spec:
   volumeSnapshotClassName: vxflexos-snapclass
   source:
-    persistentVolumeClaimName: pvol
+    persistentVolumeClaimName: pvol0
+
 ```
 Once the VolumeSnapshot is successfully created by the CSI PowerFlex driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.
 
@@ -320,13 +325,14 @@ controller:
 ```
 For configuring Controller HA on the Dell CSI Operator, please refer to the Dell CSI Operator documentation.
 
-## Automated SDC Deployment
+## SDC Deployment
 
-The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Red Hat CoreOS (RHCOS) nodes in an OpenShift cluster. Only RHCOS is supported at this time. The deployment of the SDC kernel module on RHCOS nodes is done via an init container. Automated installation is supported in both via Helm and Dell CSI Operator based installs. The following describes further details of this feature:
+The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run node portion of CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platform which support automatic SDC deployment, currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS). On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer https://hub.docker.com/r/dellemc/sdc for your OS versions.
 
-- On RHCOS nodes, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the node. If there is a SDC kernel module installed then the version is checked and updated.
+- On Kubernetes nodes which run node portion of CSI driver, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the nodes with OS version which supports automatic SDC deployment . If there is a SDC kernel module installed then the version is checked and updated.
 - Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.
-- On non-RHCOS nodes, the SDC init container skips installing and you can see this mentioned in the logs by running `kubectl logs` on the node for SDC
+- On nodes which do not support automatic SDC deployment by SDC init container, manuall installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
+  Refer https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 - There is no automated uninstall of SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from node. 
 
 
