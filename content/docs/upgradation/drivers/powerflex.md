@@ -14,7 +14,7 @@ You can upgrade the CSI Driver for Dell EMC PowerFlex using Helm or Dell CSI Ope
 **Steps**
 1. Run `git clone https://github.com/dell/csi-powerflex.git` to clone the git repository and get the v1.4 driver.
 2. You need to create config.json with configuration of your system.
-   Check this section in installation documentation:  [Install the Driver](../../../docs/installation/helm/powerflex.md#install-the-driver)
+   Check this section in installation documentation:  [Install the Driver](../../../installation/helm/powerflex#install-the-driver)
    You must set the only system managed in v1.3/v1.2 driver as default in config.json in v1.4 so that the driver know the existing volumes belong to that system.
 3. Update values file as needed.
 4. Run the `csi-install` script with the option _\-\-upgrade_ by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade`.

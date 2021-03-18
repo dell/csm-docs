@@ -5,7 +5,7 @@ description: >
   Installing PowerFlex CSI Driver via Helm
 ---
 
-The CSI Driver for Dell EMC PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, please review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell EMC PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, please review the script [documentation](https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_ in the namespace `vxflexos`:
 - CSI Driver for Dell EMC PowerFlex
