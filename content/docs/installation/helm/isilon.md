@@ -3,7 +3,7 @@ title: PowerScale
 description: >
   Installing PowerScale CSI Driver via Helm
 ---
-The CSI Driver for Dell EMC PowerScale can be deployed by using the provided Helm v3 charts in upstream Kubernetes. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell EMC PowerScale can be deployed by using the provided Helm v3 charts in upstream Kubernetes. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_:
 - CSI Driver for PowerScale
