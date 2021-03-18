@@ -12,7 +12,7 @@ The following are the drivers provided for the Dell storage family:
 | Release/Drivers | PowerScale/Isilon | Unity | PowerStore | PowerFlex/VxFlex OS | PowerMax |
 | - | :-: | :-: | :-: | :-: | :-: |
 | Current | v1.5  | v1.5 | v1.3 | v1.4 | v1.6 |
-| [Previous](/v1/) | v1.4 |  v1.4 | v1.2 | v1.3 | v1.5 |
+| [Previous](../../v1/) | v1.4 |  v1.4 | v1.2 | v1.3 | v1.5 |
 | [Older](../archives/) | v1.3 |  v1.3 | v1.1 | v1.2 | v1.4 |
 
 ## Architecture
