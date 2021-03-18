@@ -99,7 +99,7 @@ spec:
 
 ## Volume Snapshot Feature
 
-The CSI Unity driver version 1.3 and later supports managing beta snapshots. 
+The CSI Unity driver version 1.4 and later supports managing beta snapshots. 
 
 To use Volume Snapshots, ensure the following components have been deployed to your cluster:
 
