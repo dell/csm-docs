@@ -121,7 +121,7 @@ status:
     storage: 8Gi
   phase: Bound
 ```
-*NOTE:* Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the closest multiple of 8.
+*NOTE:* Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the next highest multiple of 8.
 
 ## Volume Cloning Feature
 The CSI PowerFlex driver version 1.3 and later support volume cloning. This feature allows specifying existing PVCs in the _dataSource_ field to indicate a user would like to clone a Volume.
@@ -341,15 +341,15 @@ To manage multiple arrays you need to create an array connection configuration t
 
 There is a sample json file under the top directory named `config.json` with the following content:
 
-```json
+```
 [
     {
         "username": "admin",				# username for connecting to API
         "password": "password",				# password for connecting to API
-        "systemID": "ID1",				    # system ID for system
-        "endpoint": "http://127.0.0.1",		 # full URL path to the PowerFlex API
-        "insecure": true,				    # use insecure connection or not
-        "isDefault": true,				    # treat current array as default (would be used by storage class without arrayIP parameter)
+        "systemID": "ID1",				# system ID for system
+        "endpoint": "http://127.0.0.1",		        # full URL path to the PowerFlex API
+        "insecure": true,				# use insecure connection or not
+        "isDefault": true,				# treat current array as default (would be used by storage class without arrayIP parameter)
         "mdm": "10.0.0.1,10.0.0.2"			# MDM IP for the system
     },
     {

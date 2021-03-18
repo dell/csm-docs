@@ -140,7 +140,7 @@ The mount propagation in Docker must be configured on all Kubernetes nodes befor
     ```
     kubectl create -f emptysecret.yaml
     ```
-7.  Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace isilon --values ../helm/myvalues.yaml`
+7.  Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml`
 
 ## Certificate validation for OneFS REST API calls 
 
