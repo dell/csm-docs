@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerScale CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/isilon/" />
-<meta property="article:modified_time" content="2021-03-18T20:05:36+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-03-19T17:44:38+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Upgrade PowerScale CSI driver">
-<meta itemprop="dateModified" content="2021-03-18T20:05:36&#43;05:30" />
-<meta itemprop="wordCount" content="144">
+<meta itemprop="dateModified" content="2021-03-19T17:44:38&#43;05:30" />
+<meta itemprop="wordCount" content="266">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b2272722ef344d45915906dbe5e4a390.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b2272722ef344d45915906dbe5e4a390.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -974,7 +974,20 @@
 </li>
 </ol>
 <h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
-<p>Follow the instructions for upgrade on the Dell CSI Operator <a href="https://github.com/dell/dell-csi-operator">GitHub</a> page.</p>
+<p>To upgrade the driver from csi-PowerScale v1.4 to csi-PowerScale v1.5 (OpenShift 4.6) :</p>
+<ol>
+<li>Clone operator version 1.3.0</li>
+<li>Execute <code>bash scripts/install.sh --upgrade</code>  .This command will install latest version of operator.</li>
+<li>Uninstall the existing driver by executing the command <code>kubectl delete -f &lt;driver.yaml&gt;</code> with appropriate yaml file used for csi-powerscale 1.4 installation.</li>
+<li>Delete the existing secrets (both isilon-creds and isilon-certs)</li>
+<li>Create new isilon-creds secret in the latest csi-PowerScale format. For additional information, refer <a href="./../../../installation/helm/isilon/#install-csi-driver-for-powerscale">here</a></li>
+<li>Create new isilon-certs secret. Make sure the name of new secret is isilon-certs-0. For additional information, refer <a href="./../../../installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls">here</a></li>
+<li>Furnish the sample CR yaml according to your environment.</li>
+<li>Install csi-PowerScale driver 1.5 by executing the following command:
+<code>kubectl create -f &lt;furnished-cr.yaml&gt;</code></li>
+</ol>
+<p>The above said steps are for Operator which was deployed in non-olm way.</p>
+<p>For additional information, refer Dell CSI Operator <a href="https://github.com/dell/dell-csi-operator">GitHub</a> page.</p>
 
 	
 	

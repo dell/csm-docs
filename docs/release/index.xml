@@ -28,7 +28,8 @@
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for OpenShift 4.5, 4.6 with RHEL and CoreOS worker nodes&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift 4.6, 4.7 with RHEL and CoreOS worker nodes&lt;/li&gt;
+&lt;li&gt;Added support for Upstream Kubernetes cluster v1.18, v1.19, v1.20&lt;/li&gt;
 &lt;li&gt;Migrated to Operator SDK 1.0&lt;/li&gt;
 &lt;li&gt;Added support for CSI Ephemeral Inline Volumes&lt;/li&gt;
 &lt;li&gt;Changed driver controller installation from &lt;em&gt;StatefulSet&lt;/em&gt; to &lt;em&gt;Deployment&lt;/em&gt;&lt;/li&gt;
@@ -157,15 +158,15 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
         &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v150&#34;&gt;Release Notes - CSI Driver for PowerScale v1.5.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;Added support for Kubernetes 1.20&lt;/li&gt;
 &lt;li&gt;Added support for OpenShift 4.7 with RHEL and CoreOS worker nodes&lt;/li&gt;
 &lt;li&gt;Added support for Red Hat Enterprise Linux (RHEL) 8.x&lt;/li&gt;
 &lt;li&gt;Added multi-cluster support through single instance of driver installation&lt;/li&gt;
 &lt;li&gt;Added support for custom networks for NFS I/O traffic&lt;/li&gt;
-&lt;li&gt;Added support for mount options&lt;/li&gt;
-&lt;li&gt;SSH permissions are no longer required. You can safely revoke the privilege ISI_PRIV_LOGIN_SSH for the CSI driver user&lt;/li&gt;
+&lt;li&gt;SSH permissions are no longer required. You can safely revoke the privilege ISI_PRIV_LOGIN_SSH for the CSI driver user.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;p&gt;There are no Fixed issues in this release.&lt;/p&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -252,21 +253,22 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
       <description>
         
         
-        &lt;h1 id=&#34;release-notes---csi-unity-v150&#34;&gt;Release Notes - CSI Unity v1.5.0&lt;/h1&gt;
-&lt;h2 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-unity-v150&#34;&gt;Release Notes - CSI Unity v1.5.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for OpenShift 4.6/4.7 with RHEL and CoreOS worker nodes&lt;/li&gt;
+&lt;li&gt;Added support for Kubernetes v1.20&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift 4.7 with RHEL and CoreOS worker nodes&lt;/li&gt;
 &lt;li&gt;Changed driver base image to UBI 8.x&lt;/li&gt;
 &lt;li&gt;Added support for Red Hat Enterprise Linux (RHEL) 8.3&lt;/li&gt;
 &lt;li&gt;Qualified with Docker - UCP 3.3.5&lt;/li&gt;
 &lt;li&gt;Added support for SLES 15SP2&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h2&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Raw-Block volume with accessmode RWX can be mounted to multiple nodes.&lt;/li&gt;
 &lt;li&gt;PVC creation fails on a cluster with only NFS protocol enabled by adding topology keys for NFS protocol.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h2&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
