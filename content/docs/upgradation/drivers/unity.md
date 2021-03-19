@@ -14,14 +14,16 @@ Preparing myvalues.yaml is the same as explained in install section.
 
 To upgrade the driver from csi-unity v1.4 to csi-unity 1.5 (across K8S 1.18, K8S 1.19, K8S 1.20).
 
-1. Get the latest csi-unity 1.4 code from Github.
-2. Create myvalues.yaml according to csi-unity 1.4 .
+1. Get the latest csi-unity 1.5 code from Github.
+2. Create myvalues.yaml according to csi-unity 1.5 .
 3. Delete the existing default storage classes of csi-unity 1.4 .
-4. Navigate to common-helm-installer folder and copy the myvalues.yaml file here and execute the following command:
+4. Clone the repository https://github.com/dell/csi-unity , copy the helm/csi-unity/values.yaml to the new location 
+   csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.
+5. Navigate to common-helm-installer folder and execute the following command:
    `./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade`
 6. If the value of 'createStorageClassesWithTopology' is set to "true" in myvalues.yaml , then 
 
-   - Check the default storage classes of iSCSI and FC protocols , VolumeBindingMode should be 'WaitForFirstConsumer' .
+   - Check the default storage classes, VolumeBindingMode should be 'WaitForFirstConsumer'.
 
 **Note:** User has to re-create existing custom-storage classes (if any) according to latest (v1.5) format.
 

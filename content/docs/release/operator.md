@@ -8,7 +8,8 @@ description: Release notes for Dell CSI Operator
 >**Note:** There will be a delay in certification of Dell CSI Operator 1.3.0 and it will not be available for download from the Red Hat OpenShift certified catalog. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.3.0 release.
 
 ### New Features/Changes
-- Added support for OpenShift 4.5, 4.6 with RHEL and CoreOS worker nodes
+- Added support for OpenShift 4.6, 4.7 with RHEL and CoreOS worker nodes
+- Added support for Upstream Kubernetes cluster v1.18, v1.19, v1.20
 - Migrated to Operator SDK 1.0
 - Added support for CSI Ephemeral Inline Volumes
 - Changed driver controller installation from _StatefulSet_ to _Deployment_
