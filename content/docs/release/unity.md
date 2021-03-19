@@ -2,20 +2,22 @@
 title: Unity
 description: Release notes for Unity CSI driver
 ---
-# Release Notes - CSI Unity v1.5.0
 
-## New Features/Changes
-- Added support for OpenShift 4.6/4.7 with RHEL and CoreOS worker nodes
+## Release Notes - CSI Unity v1.5.0
+
+### New Features/Changes
+- Added support for Kubernetes v1.20
+- Added support for OpenShift 4.7 with RHEL and CoreOS worker nodes
 - Changed driver base image to UBI 8.x
 - Added support for Red Hat Enterprise Linux (RHEL) 8.3
 - Qualified with Docker - UCP 3.3.5
 - Added support for SLES 15SP2
 
-## Fixed Issues
+### Fixed Issues
 - Raw-Block volume with accessmode RWX can be mounted to multiple nodes.
 - PVC creation fails on a cluster with only NFS protocol enabled by adding topology keys for NFS protocol.
 
-## Known Issues
+### Known Issues
 
 | Issue                                                        | Workaround                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |

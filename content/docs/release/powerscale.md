@@ -6,16 +6,16 @@ description: Release notes for PowerScale CSI driver
 ## Release Notes - CSI Driver for PowerScale v1.5.0
 
 ### New Features/Changes
+- Added support for Kubernetes 1.20
 - Added support for OpenShift 4.7 with RHEL and CoreOS worker nodes
 - Added support for Red Hat Enterprise Linux (RHEL) 8.x
 - Added multi-cluster support through single instance of driver installation
 - Added support for custom networks for NFS I/O traffic
-- Added support for mount options
-- SSH permissions are no longer required. You can safely revoke the privilege ISI_PRIV_LOGIN_SSH for the CSI driver user
+- SSH permissions are no longer required. You can safely revoke the privilege ISI_PRIV_LOGIN_SSH for the CSI driver user.
 
 ### Fixed Issues
 
-There are no fixed issues in this release.
+There are no Fixed issues in this release.
 
 ### Known Issues
    | Issue | Resolution or workaround, if known |

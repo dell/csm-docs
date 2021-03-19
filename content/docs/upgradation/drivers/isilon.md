@@ -27,4 +27,18 @@ You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operato
 
 ## Upgrade using Dell CSI Operator:
 
-Follow the instructions for upgrade on the Dell CSI Operator [GitHub](https://github.com/dell/dell-csi-operator) page.
+To upgrade the driver from csi-PowerScale v1.4 to csi-PowerScale v1.5 (OpenShift 4.6) :
+
+1. Clone operator version 1.3.0
+2. Execute `bash scripts/install.sh --upgrade`  .This command will install latest version of operator.
+3. Uninstall the existing driver by executing the command `kubectl delete -f <driver.yaml>` with appropriate yaml file used for csi-powerscale 1.4 installation.
+4. Delete the existing secrets (both isilon-creds and isilon-certs)
+5. Create new isilon-creds secret in the latest csi-PowerScale format. For additional information, refer [here](./../../../installation/helm/isilon/#install-csi-driver-for-powerscale) 
+6. Create new isilon-certs secret. Make sure the name of new secret is isilon-certs-0. For additional information, refer [here](./../../../installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls)
+7. Furnish the sample CR yaml according to your environment.
+8. Install csi-PowerScale driver 1.5 by executing the following command:
+   `kubectl create -f <furnished-cr.yaml>`
+   
+The above said steps are for Operator which was deployed in non-olm way. 
+
+For additional information, refer Dell CSI Operator [GitHub](https://github.com/dell/dell-csi-operator) page.
