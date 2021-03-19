@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade Unity CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/unity/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-03-19T17:44:38+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Upgrade Unity CSI driver">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="209">
+<meta itemprop="dateModified" content="2021-03-19T17:44:38&#43;05:30" />
+<meta itemprop="wordCount" content="224">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b2272722ef344d45915906dbe5e4a390.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b2272722ef344d45915906dbe5e4a390.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -960,22 +960,26 @@
 <p>To upgrade the driver from csi-unity v1.4 to csi-unity 1.5 (across K8S 1.18, K8S 1.19, K8S 1.20).</p>
 <ol>
 <li>
-<p>Get the latest csi-unity 1.4 code from Github.</p>
+<p>Get the latest csi-unity 1.5 code from Github.</p>
 </li>
 <li>
-<p>Create myvalues.yaml according to csi-unity 1.4 .</p>
+<p>Create myvalues.yaml according to csi-unity 1.5 .</p>
 </li>
 <li>
 <p>Delete the existing default storage classes of csi-unity 1.4 .</p>
 </li>
 <li>
-<p>Navigate to common-helm-installer folder and copy the myvalues.yaml file here and execute the following command:
+<p>Clone the repository <a href="https://github.com/dell/csi-unity">https://github.com/dell/csi-unity</a> , copy the helm/csi-unity/values.yaml to the new location
+csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.</p>
+</li>
+<li>
+<p>Navigate to common-helm-installer folder and execute the following command:
 <code>./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade</code></p>
 </li>
 <li>
 <p>If the value of &lsquo;createStorageClassesWithTopology&rsquo; is set to &ldquo;true&rdquo; in myvalues.yaml , then</p>
 <ul>
-<li>Check the default storage classes of iSCSI and FC protocols , VolumeBindingMode should be &lsquo;WaitForFirstConsumer&rsquo; .</li>
+<li>Check the default storage classes, VolumeBindingMode should be &lsquo;WaitForFirstConsumer&rsquo;.</li>
 </ul>
 </li>
 </ol>
