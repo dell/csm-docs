@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/operator/isilon/" />
-<meta property="article:modified_time" content="2020-12-04T15:19:03-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing PowerScale CSI Driver via Operator
 ">
-<meta itemprop="dateModified" content="2020-12-04T15:19:03-05:00" />
-<meta itemprop="wordCount" content="420">
+<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
+<meta itemprop="wordCount" content="480">
 
 
 
@@ -31,8 +31,8 @@
 
 
 
-<link rel="preload" href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
+<link href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -280,6 +280,14 @@
   <ul>
     <li class="collapse show" id="storage-plugin-docsdocsinstallationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsinstallationoperatorinstalldriver" href="/storage-plugin-docs/docs/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -473,6 +481,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriversoperator" href="/storage-plugin-docs/docs/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriverspowerflex" href="/storage-plugin-docs/docs/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -597,6 +613,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocstroubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocstroubleshootingoperator" href="/storage-plugin-docs/docs/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -751,6 +775,31 @@
           
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsgraspvideo" href="/storage-plugin-docs/docs/grasp/video/">Quick video lessons</a>
         
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsdocsconcepts">
+      
       
       
     </li>
@@ -928,29 +977,46 @@
 <code>kubectl get csiisilon --all-namespaces</code></p>
 <h3 id="install-driver">Install Driver</h3>
 <ol>
-<li>Create namespace
-Run <code>kubectl create namespace isilon</code> to create the isilon namespace.</li>
-<li>Create <em>isilon-creds</em>
-Create a file called isilon-creds.yaml with the following content:
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Secret<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>isilon-creds<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>isilon<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Opaque<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># set username to the base64 encoded username</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;base64<span style="color:#f8f8f8;text-decoration:underline"> </span>username<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic"> # set password to the base64 encoded password</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;base64<span style="color:#f8f8f8;text-decoration:underline"> </span>password&gt;<span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>Replace the values for the username and password parameters. These values can be optioned using base64 encoding as described in the following example:</p>
-<pre><code>echo -n &quot;myusername&quot; | base64
-echo -n &quot;mypassword&quot; | base64
-</code></pre><p>Run <code>kubectl create -f isilon-creds.yaml</code> command to create the secret.</p>
+<li>
+<p>Create namespace
+Run <code>kubectl create namespace isilon</code> to create the isilon namespace. Note that the namespace can be any user defined name , in this example, we assume that the namespace is &lsquo;isilon&rsquo;.</p>
 </li>
-<li>Create a CR (Custom Resource) for PowerScale using the sample files provided
-<a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a>.</li>
-<li>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
+<li>
+<p>Create <em>isilon-creds</em>
+Create a json file called isilon-creds.json with the following content:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">  <span style="color:#000;font-weight:bold">{</span>
+<span style="color:#204a87;font-weight:bold">&#34;isilonClusters&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
+<span style="color:#000;font-weight:bold">{</span>
+<span style="color:#204a87;font-weight:bold">&#34;clusterName&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;cluster1&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;user&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;isiIP&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;1.2.3.4&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;isDefaultCluster&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span>
+<span style="color:#000;font-weight:bold">},</span>
+<span style="color:#000;font-weight:bold">{</span>
+<span style="color:#204a87;font-weight:bold">&#34;clusterName&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;cluster2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;user&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;isiIP&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;1.2.3.5&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;isiPort&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;8080&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;isiInsecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#204a87;font-weight:bold">&#34;isiPath&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;/ifs/data/csi&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">}</span>
+ <span style="color:#000;font-weight:bold">]</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>Replace the values for the given keys as per your environment. This username / password value need not be encoded. You can refer [here](../../helm/isilon/#Install CSI Driver for PowerScale) for more information about isilon secret parameters.</p>
+</li>
+<li>
+<p>Create isilon-certs-<n> secret
+Please refer <a href="../../helm/isilon/#certificate-validation-for-onefs-rest-api-calls">this section</a> for creating cert-secrets.
+Run <code>kubectl create -f isilon-creds.yaml</code> command to create the secret.</p>
+</li>
+<li>
+<p>Create a CR (Custom Resource) for PowerScale using the sample files provided
+<a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a>.</p>
+</li>
+<li>
+<p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:</p>
 <table>
 <thead>
 <tr>
@@ -1054,9 +1120,11 @@ echo -n &quot;mypassword&quot; | base64
 </tbody>
 </table>
 </li>
-<li>Execute the following command to create PowerScale custom resource:
+<li>
+<p>Execute the following command to create PowerScale custom resource:
 <code>kubectl create -f &lt;input_sample_file.yaml&gt;</code> .
-This command will deploy the CSI-PowerScale driver.</li>
+This command will deploy the CSI-PowerScale driver in the namespace specified in input yaml file.</p>
+</li>
 </ol>
 
 	

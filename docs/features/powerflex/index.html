@@ -12,11 +12,11 @@
 <meta property="og:description" content="Code features for PowerFlex Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/features/powerflex/" />
-<meta property="article:modified_time" content="2020-12-03T07:41:57-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-03-19T00:44:02+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Code features for PowerFlex Driver">
-<meta itemprop="dateModified" content="2020-12-03T07:41:57-05:00" />
-<meta itemprop="wordCount" content="1653">
+<meta itemprop="dateModified" content="2021-03-19T00:44:02&#43;05:30" />
+<meta itemprop="wordCount" content="2165">
 
 
 
@@ -28,8 +28,8 @@
 
 
 
-<link rel="preload" href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
+<link href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -277,6 +277,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocsinstallationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsinstallationoperatorinstalldriver" href="/storage-plugin-docs/docs/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -470,6 +478,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriversoperator" href="/storage-plugin-docs/docs/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriverspowerflex" href="/storage-plugin-docs/docs/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -594,6 +610,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocstroubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocstroubleshootingoperator" href="/storage-plugin-docs/docs/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -768,6 +792,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsdocsconcepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/docs/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -865,7 +914,14 @@
       </ul>
     </li>
     <li><a href="#controller-ha">Controller HA</a></li>
-    <li><a href="#automated-sdc-deployment">Automated SDC Deployment</a></li>
+    <li><a href="#sdc-deployment">SDC Deployment</a></li>
+    <li><a href="#multiarray-support">Multiarray Support</a>
+      <ul>
+        <li><a href="#creating-array-configuration">Creating array configuration</a></li>
+        <li><a href="#creating-storage-classes">Creating storage classes</a></li>
+      </ul>
+    </li>
+    <li><a href="#ephemeral-inline-volume">Ephemeral Inline Volume</a></li>
   </ul>
 </nav>
 
@@ -917,33 +973,39 @@
 
 	       
 	<h2 id="volume-snapshot-feature">Volume Snapshot Feature</h2>
-<p>The CSI PowerFlex driver version 1.2 and later support beta snapshots. Earlier versions of the driver supported alpha snapshots.</p>
-<p>Volume Snapshots feature in Kubernetes has moved to beta in Kubernetes version 1.17. It was an alpha feature in earlier releases (1.13 onwards). The snapshot API version has changed from v1alpha1 to v1beta1 with this migration.</p>
+<p>The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes 1.17 and is generally available (v1) in Kubernetes version 1.20.</p>
+<p>The CSI PowerFlex driver version 1.4 supports v1beta1 snapshots on Kubernetes 1.18/1.19 and v1 snapshots on Kubernetes 1.20.</p>
 <p>In order to use Volume Snapshots, ensure the following components are deployed to your cluster:</p>
 <ul>
 <li>Kubernetes Volume Snaphshot CRDs</li>
 <li>Volume Snapshot Controller</li>
 </ul>
 <h3 id="volume-snapshot-class">Volume Snapshot Class</h3>
-<p>During the installation of CSI PowerFlex 1.3 driver, a Volume Snapshot Class is created using the new v1beta1 snapshot APIs. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.</p>
+<p>During the installation of CSI PowerFlex 1.4 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.</p>
 <p>Following is the manifest for the Volume Snapshot Class created during installation:</p>
-<pre><code>apiVersion: snapshot.storage.k8s.io/v1beta1
+<pre><code>{{- if eq .Values.kubeversion  &quot;v1.20&quot; }}
+apiVersion: snapshot.storage.k8s.io/v1
+{{- else }}
+apiVersion: snapshot.storage.k8s.io/v1beta1
+{{- end}}
 kind: VolumeSnapshotClass
 metadata:
   name: vxflexos-snapclass
 driver: csi-vxflexos.dellemc.com
 deletionPolicy: Delete
+
 </code></pre><h3 id="create-volume-snapshot">Create Volume Snapshot</h3>
 <p>The following is a sample manifest for creating a Volume Snapshot using the <strong>v1beta1</strong> snapshot APIs:</p>
 <pre><code>apiVersion: snapshot.storage.k8s.io/v1beta1
 kind: VolumeSnapshot
 metadata:
-  name: pvol0-snap
+  name: pvol0-snap1
   namespace: helmtest-vxflexos
 spec:
   volumeSnapshotClassName: vxflexos-snapclass
   source:
-    persistentVolumeClaimName: pvol
+    persistentVolumeClaimName: pvol0
+
 </code></pre><p>Once the VolumeSnapshot is successfully created by the CSI PowerFlex driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the <em>readyToUse</em> field set to <em>true</em> , it is available for use.</p>
 <p>Following is the relevant section of VolumeSnapshot object status:</p>
 <pre><code>status:
@@ -971,7 +1033,7 @@ spec:
 </code></pre><h2 id="volume-expansion-feature">Volume Expansion Feature</h2>
 <p>The CSI PowerFlex driver version 1.2 and later support expansion of Persistent Volumes. This expansion is done online, that is, when PVC is attached to a node.</p>
 <p>To use this feature, the storage class used to create the PVC must have the attribute <em>allowVolumeExpansion</em> set to <em>true</em>. The storage classes created during the installation (both using Helm or dell-csi-operator) have the <em>allowVolumeExpansion</em> set to <em>true</em> by default.</p>
-<p>In case you are creating more storage classes, make sure that this attribute is set to <em>true</em> if you wish to expand any Persistent Volumes created using these new storage classes.</p>
+<p>In case you are creating more storage classes, ensure that this attribute is set to <em>true</em> if you wish to expand any Persistent Volumes created using these new storage classes.</p>
 <p>Following is a sample manifest for a storage class which allows for Volume Expansion:</p>
 <pre><code>apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -1006,7 +1068,7 @@ status:
   capacity:
     storage: 8Gi
   phase: Bound
-</code></pre><p><em>NOTE:</em> Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the closest multiple of 8.</p>
+</code></pre><p><em>NOTE:</em> Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the next highest multiple of 8.</p>
 <h2 id="volume-cloning-feature">Volume Cloning Feature</h2>
 <p>The CSI PowerFlex driver version 1.3 and later support volume cloning. This feature allows specifying existing PVCs in the <em>dataSource</em> field to indicate a user would like to clone a Volume.</p>
 <p>The source PVC must be bound and available (not in use). Source and destination PVC must be in the same namespace and have the same Storage Class.</p>
@@ -1078,7 +1140,7 @@ spec:
 <li>The PowerFlex SDC may not be installed or running on some nodes.</li>
 <li>Users have chosen to restrict the nodes on which the CSI driver is deployed.</li>
 </ul>
-<p>This Topology support does not include customer defined topology, users cannot create their own labels for nodes and storage classed and expect the labels to be honored by the driver.</p>
+<p>This Topology support does not include customer defined topology, users cannot create their own labels for nodes and storage classes and expect the labels to be honored by the driver.</p>
 <h3 id="topology-usage">Topology Usage</h3>
 <p>To utilize the Topology feature, the storage classes are modified to specify the <em>volumeBindingMode</em> as <em>WaitForFirstConsumer</em> and to specify the desired topology labels within <em>allowedTopologies</em>. This ensures that pod scheduling takes advantage of the topology and be guaranteed that the node selected has access to provisioned volumes.</p>
 <p>Storage Class Example with Topology Support:</p>
@@ -1107,7 +1169,7 @@ allowedTopologies:
     values:
     - csi-vxflexos.dellemc.com
 </code></pre><p>For additional information, see the <a href="https://kubernetes-csi.github.io/docs/topology.html">Kubernetes Topology documentation</a>.</p>
-<p><em>NOTE</em> In the manifest file of the Dell CSI operator, topology can be enabled by specifying the system name or <em>systemid</em> in the allowed topologies field. <em>Volumebindingmode</em> is also set to <em>WaitForFirstConsumer</em> by default.</p>
+<p><em>NOTE</em>: In the manifest file of the Dell CSI operator, topology can be enabled by specifying the system name or <em>systemid</em> in the allowed topologies field. <em>Volumebindingmode</em> is also set to <em>WaitForFirstConsumer</em> by default.</p>
 <h2 id="controller-ha">Controller HA</h2>
 <p>The CSI PowerFlex driver version 1.3 and later support multiple controller pods. A Controller pod can be assigned to a worker node or a master node, as long as no other controller pod is currently assigned to the node. To control the number of controller pods, edit:</p>
 <pre><code>controllerCount: 2
@@ -1115,7 +1177,7 @@ allowedTopologies:
 <blockquote>
 <p><em>NOTE:</em> If controller count is greater than the number of available nodes, excess controller pods will be stuck in pending state.</p>
 </blockquote>
-<p>If you&rsquo;re using the Dell CSI Operator, the value to adjust is:</p>
+<p>If you are using the Dell CSI Operator, the value to adjust is:</p>
 <pre><code>replicas: 1  
 </code></pre><p>in your driver yaml in config/samples/</p>
 <p>If you want to specify where controller pods get assigned, make the following edits to your values file (helm install):</p>
@@ -1166,14 +1228,92 @@ controller:
      operator: &quot;Exists&quot;
      effect: &quot;NoSchedule&quot;
 </code></pre><p>For configuring Controller HA on the Dell CSI Operator, please refer to the Dell CSI Operator documentation.</p>
-<h2 id="automated-sdc-deployment">Automated SDC Deployment</h2>
-<p>The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Red Hat CoreOS (RHCOS) nodes in an OpenShift cluster. Only RHCOS is supported at this time. The deployment of the SDC kernel module on RHCOS nodes is done via an init container. Automated installation is supported in both via Helm and Dell CSI Operator based installs. The following describes further details of this feature:</p>
+<h2 id="sdc-deployment">SDC Deployment</h2>
+<p>The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run node portion of CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platform which support automatic SDC deployment, currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS). On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for your OS versions.</p>
 <ul>
-<li>On RHCOS nodes, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the node. If there is a SDC kernel module installed then the version is checked and updated.</li>
+<li>On Kubernetes nodes which run node portion of CSI driver, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the nodes with OS version which supports automatic SDC deployment . If there is a SDC kernel module installed then the version is checked and updated.</li>
 <li>Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.</li>
-<li>On non-RHCOS nodes, the SDC init container skips installing and you can see this mentioned in the logs by running <code>kubectl logs</code> on the node for SDC</li>
+<li>On nodes which do not support automatic SDC deployment by SDC init container, manuall installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
+Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported OS versions.</li>
 <li>There is no automated uninstall of SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from node.</li>
 </ul>
+<h2 id="multiarray-support">Multiarray Support</h2>
+<p>The CSI PowerFlex driver version 1.4 adds support for managing multiple PowerFlex arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations.</p>
+<p>To manage multiple arrays you need to create an array connection configuration that lists multiple arrays.</p>
+<h3 id="creating-array-configuration">Creating array configuration</h3>
+<p>There is a sample json file under the top directory named <code>config.json</code> with the following content:</p>
+<pre><code>[
+    {
+        &quot;username&quot;: &quot;admin&quot;,				# username for connecting to API
+        &quot;password&quot;: &quot;password&quot;,				# password for connecting to API
+        &quot;systemID&quot;: &quot;ID1&quot;,				# system ID for system
+        &quot;endpoint&quot;: &quot;http://127.0.0.1&quot;,		        # full URL path to the PowerFlex API
+        &quot;insecure&quot;: true,				# use insecure connection or not
+        &quot;isDefault&quot;: true,				# treat current array as default (would be used by storage class without arrayIP parameter)
+        &quot;mdm&quot;: &quot;10.0.0.1,10.0.0.2&quot;			# MDM IP for the system
+    },
+    {
+        &quot;username&quot;: &quot;admin&quot;,
+        &quot;password&quot;: &quot;password&quot;,
+        &quot;systemID&quot;: &quot;ID2&quot;,
+        &quot;endpoint&quot;: &quot;https://127.0.0.2&quot;,
+        &quot;insecure&quot;: true,
+        &quot;mdm&quot;: &quot;10.0.0.3,10.0.0.4&quot;
+    }
+]
+</code></pre><p>Here we specify that we want CSI driver to manage two arrays: one with an IP <code>127.0.0.1</code> and the other with an IP <code>127.0.0.2</code>.</p>
+<p>To use this config we need to create a Kubernetes secret from it. To do so run the following command:</p>
+<p><code>kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.json</code></p>
+<h3 id="creating-storage-classes">Creating storage classes</h3>
+<p>To be able to provision Kubernetes volumes using a specific array we need to create corresponding storage classes.</p>
+<p>Find the sample yaml files under <code>helm/samples/storageclass</code>. Edit <code>storageclass.yaml</code> if you want <code>ext4</code> filesystem, and use <code>storageclass-xfs.yaml</code> if you want <code>xfs</code> filesystem. Replace <code>&lt;STORAGE_POOL&gt;</code> with the storage pool you have, and replace <code>&lt;SYSTEM_ID&gt;</code> with the system ID you have.</p>
+<p>Then we need to apply storage classes to Kubernetes using <code>kubectl</code>:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f storageclass.yaml
+</code></pre></div><p>After that, you can use the storage class for the corresponding array.</p>
+<h2 id="ephemeral-inline-volume">Ephemeral Inline Volume</h2>
+<p>The CSI PowerFlex driver version 1.4 supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification.</p>
+<p>At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.</p>
+<p>The following is a sample manifest (found in csi-vxflexos/test/helm/ephemeral) for creating ephemeral volume in pod manifest with CSI PowerFlex driver.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Pod<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>my-csi-app-inline-volumes<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">containers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>my-frontend<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>busybox<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">command</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sleep&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;100000&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeMounts</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">mountPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/data0&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>my-csi-volume<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">mountPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/data1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>my-csi-volume-xfs<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">volumes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>my-csi-volume<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">csi</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>csi-vxflexos.dellemc.com<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fsType</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;ext4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">volumeName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;my-csi-volume&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;8Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">storagepool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sample<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sample<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>my-csi-volume-xfs<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">csi</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>csi-vxflexos.dellemc.com<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fsType</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;xfs&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">volumeName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;my-csi-volume-xfs&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">storagepool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sample<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sample<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>This manifest will create a pod and attach two newly created ephemeral inline csi volumes to it, one ext4 and the other xfs.<br>
+To run the corresponding helm test, go to csi-vxflexos/test/helm/ephemeral and fill in the values for storagepool and systemID in sample.yaml.<br>
+Then run:</p>
+<pre><code>./testEphemeral.sh
+</code></pre><p>this test will deploy the pod with two ephemeral volumes, and write some data to them before deleting the pod.<br>
+When creating ephemeral volumes, it is important to specify the following within the volumeAttributes section: volumeName, size, storagepool, and if you want to use a non-default array, systemID.</p>
 
 	
 	

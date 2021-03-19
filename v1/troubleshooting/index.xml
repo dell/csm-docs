@@ -1,0 +1,202 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Troubleshooting</title>
+    <link>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/</link>
+    <description>Recent content in Troubleshooting on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/storage-plugin-docs/v1/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1: PowerFlex</title>
+      <link>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerflex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerflex/</guid>
+      <description>
+        
+        
+        &lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Symptoms&lt;/th&gt;
+&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;The installation fails with the following error message: &lt;br /&gt;&lt;code&gt;Node xxx does not have the SDC installed&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that needs to pull an image of the driver.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When you run the command &lt;code&gt;kubectl describe pods vxflexos-controller-0 –n vxflexos&lt;/code&gt;, the system indicates that the driver image could not be loaded.&lt;/td&gt;
+&lt;td&gt;- If on Kubernetes, edit the &lt;code&gt;daemon.json&lt;/code&gt; file found in the registry location and add &lt;br /&gt;&lt;code&gt;{ &amp;quot;insecure-registries&amp;quot; :[ &amp;quot;hostname.cloudapp.net:5000&amp;quot; ] }&lt;/code&gt;&lt;br /&gt;- If on OpenShift, run the command &lt;code&gt;oc edit image.config.openshift.io/cluster&lt;/code&gt; and add registries to yaml file that is displayed when you run the command.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs -n vxflexos vxflexos-controller-0&lt;/code&gt; driver logs shows that the driver is not authenticated.&lt;/td&gt;
+&lt;td&gt;Check the username, password, and the gateway IP address for the PowerFlex system.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs vxflexos-controller-0 -n vxflexos driver&lt;/code&gt; logs shows that the system ID is incorrect.&lt;/td&gt;
+&lt;td&gt;Use the &lt;code&gt;get_vxflexos_info.sh&lt;/code&gt; to find the correct system ID. Add the system ID to &lt;code&gt;myvalues.yaml&lt;/code&gt; script.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Defcontext mount option seems to be ignored, volumes still are not being labeled correctly.&lt;/td&gt;
+&lt;td&gt;Ensure SElinux is enabled on worker node, and ensure your container run time manager is properly configured to be&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;utilized with SElinux.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Mount options that interact with SElinux are not working (like defcontext).&lt;/td&gt;
+&lt;td&gt;Check that your container orchestrator is properly configured to work with SElinux.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: PowerMax</title>
+      <link>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powermax/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powermax/</guid>
+      <description>
+        
+        
+        &lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Symptoms&lt;/th&gt;
+&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Warning about feature gates&lt;/td&gt;
+&lt;td&gt;Double check that you have applied all the features to the indicated processes. Restart kubelet when remediated.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;kubectl describe pod powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt;&lt;/code&gt; indicates the driver image could not be loaded&lt;/td&gt;
+&lt;td&gt;You may need to put an insecure-registries entry in &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt; or login to the docker registry&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;kubectl logs powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt; driver&lt;/code&gt; logs shows the driver cannot authenticate&lt;/td&gt;
+&lt;td&gt;Check your secret’s username and password&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;kubectl logs powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt; driver&lt;/code&gt; logs shows the driver failed to connect to the U4P because it couldn’t verify the certificates&lt;/td&gt;
+&lt;td&gt;Check the powermax-certs secret and ensure it is not empty or it has the valid certificates&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: PowerScale</title>
+      <link>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerscale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerscale/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Here are some installation failures that might be encountered and how to mitigate them.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Symptoms&lt;/th&gt;
+&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver &lt;strong&gt;cannot authenticate&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Check your secret&amp;rsquo;s username and password&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver failed to connect to the Isilon because it &lt;strong&gt;couldn&amp;rsquo;t verify the certificates&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Check the isilon-certs secret and ensure it is not empty and it has the valid certificates. Set &lt;code&gt;isiInsecure: &amp;quot;true&amp;quot;&lt;/code&gt; for insecure connection. SSL validation is recommended in production environment.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: PowerStore</title>
+      <link>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerstore/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerstore/</guid>
+      <description>
+        
+        
+        &lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Symptoms&lt;/th&gt;
+&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;When you run the command &lt;code&gt;kubectl describe pods powerstore-controller-&amp;lt;suffix&amp;gt; –n csi-powerstore&lt;/code&gt;, the system indicates that the driver image could not be loaded.&lt;/td&gt;
+&lt;td&gt;- If on Kubernetes, edit the daemon.json file found in the registry location and add &lt;code&gt;{ &amp;quot;insecure-registries&amp;quot; :[ &amp;quot;hostname.cloudapp.net:5000&amp;quot; ] }&lt;/code&gt; &lt;br&gt; - If on OpenShift, run the command &lt;code&gt;oc edit image.config.openshift.io/cluster&lt;/code&gt; and add registries to yaml file that is displayed when you run the command.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs -n csi-powerstore powerstore-node-&amp;lt;suffix&amp;gt;&lt;/code&gt; driver logs shows that the driver can&amp;rsquo;t connect to PowerStore API.&lt;/td&gt;
+&lt;td&gt;Check if you&amp;rsquo;ve created secret with correct credentials&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Unity</title>
+      <link>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/unity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/unity/</guid>
+      <description>
+        
+        
+        &lt;hr&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Symptoms&lt;/th&gt;
+&lt;th&gt;Prevention, Resolution or Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;When you run the command &lt;code&gt;kubectl describe pods unity-controller-&amp;lt;suffix&amp;gt; –n unity&lt;/code&gt;, the system indicates that the driver image could not be loaded.&lt;/td&gt;
+&lt;td&gt;You may need to put an insecure-registries entry in &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt; or login to the docker registry&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs -n unity unity-node-&amp;lt;suffix&amp;gt;&lt;/code&gt; driver logs shows that the driver can&amp;rsquo;t connect to Unity - Authentication failure.&lt;/td&gt;
+&lt;td&gt;Check if you&amp;rsquo;ve created secret with correct credentials&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerflex/" />
-<meta property="article:modified_time" content="2020-12-04T15:19:03-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-03-19T00:44:02+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing PowerFlex CSI Driver via Operator
 ">
-<meta itemprop="dateModified" content="2020-12-04T15:19:03-05:00" />
-<meta itemprop="wordCount" content="682">
+<meta itemprop="dateModified" content="2021-03-19T00:44:02&#43;05:30" />
+<meta itemprop="wordCount" content="1020">
 
 
 
@@ -31,8 +31,8 @@
 
 
 
-<link rel="preload" href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
+<link href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -280,6 +280,14 @@
   <ul>
     <li class="collapse show" id="storage-plugin-docsdocsinstallationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsinstallationoperatorinstalldriver" href="/storage-plugin-docs/docs/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -473,6 +481,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriversoperator" href="/storage-plugin-docs/docs/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriverspowerflex" href="/storage-plugin-docs/docs/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -597,6 +613,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocstroubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocstroubleshootingoperator" href="/storage-plugin-docs/docs/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -771,6 +795,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsdocsconcepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/docs/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -855,6 +904,7 @@
     <li><a href="#installing-powerflex-csi-driver-via-operator">Installing PowerFlex CSI Driver via Operator</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites:</a></li>
+        <li><a href="#manual-sdc-deployment">Manual SDC Deployment</a></li>
         <li><a href="#install-driver">Install Driver</a></li>
       </ul>
     </li>
@@ -919,63 +969,166 @@
 
 	       
 	<h2 id="installing-powerflex-csi-driver-via-operator">Installing PowerFlex CSI Driver via Operator</h2>
-<p>The CSI Driver for Dell EMC PowerFlex can be installed via the Dell CSI Operator.</p>
+<p>The CSI Driver for Dell EMC PowerFlex v1.4.0 can be installed via the Dell CSI Operator.</p>
 <p>To deploy the Operator, follow the instructions available <a href="../">here</a>.</p>
 <p>There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.</p>
 <p>Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
 <h3 id="prerequisites">Prerequisites:</h3>
-<h4 id="automated-sdc-deployment-for-operator">Automated SDC Deployment for Operator</h4>
+<h4 id="sdc-deployment-for-operator">SDC Deployment for Operator</h4>
 <ul>
-<li>This applies to OpenShift with RHCOS Nodes <strong><em>Only</em></strong>.</li>
-<li>This feature deploys the sdc kernel modules on CoreOS nodes with the help of an init container.</li>
-<li><strong>Required:</strong> MDM value need to be provided in CR file for the sdc init container to work. Expect error if not in proper format.</li>
-<li>To use a specific image from ftp site, pass in repo url, repo password and repo username.
+<li>This feature deploys the sdc kernel modules on all nodes with the help of an init container.</li>
+<li>For non supported verisons of the OS also do the manual SDC deployment steps given below. Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported versions.</li>
+<li><strong>Required:</strong> MDM value should be provided in CR file for the sdc init container to work. MDM provided in CR file will be overrided by config.json secret given below</li>
+<li><strong>Note:</strong> To use a sdc-binary module from customer ftp site:
 <ul>
-<li>Repo username and repo password are to be encrypted by a secret and passed in.</li>
-<li>Create secret for FTP side by using the command <code>kubectl create -f sdc-repo-secret.yaml</code>.</li>
+<li>Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:</li>
 </ul>
 </li>
+</ul>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">     </span>echo<span style="color:#f8f8f8;text-decoration:underline"> </span>-n<span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;credential&gt;|<span style="color:#f8f8f8;text-decoration:underline"> </span>base64<span style="color:#f8f8f8;text-decoration:underline"> </span>-i<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>secret sample to use:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sdc-repo-creds<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>vxflexos<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Opaque<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#8f5902;font-style:italic"># set username to the base64 encoded username, sdc default is</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">         </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;username<span style="color:#f8f8f8;text-decoration:underline"> </span>in<span style="color:#f8f8f8;text-decoration:underline"> </span>base64<span style="color:#8f5902;font-style:italic">&gt;
+</span><span style="color:#8f5902;font-style:italic">       # set password to the base64 encoded password, sdc default is</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">         </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;password<span style="color:#f8f8f8;text-decoration:underline"> </span>in<span style="color:#f8f8f8;text-decoration:underline"> </span>base64&gt;<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><ul>
+<li>Create secret for FTP side by using the command <code>kubectl create -f sdc-repo-secret.yaml</code>.</li>
 <li>Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml.</li>
 </ul>
-<h5 id="example-cr--configsamplesvxflexos_v130_ops_46yamlhttpsgithubcomdelldell-csi-operatorblobmastersamplesvxflexos_v130_ops_46yaml">Example CR:  <a href="https://github.com/dell/dell-csi-operator/blob/master/samples/vxflexos_v130_ops_46.yaml">config/samples/vxflexos_v130_ops_46.yaml</a></h5>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#sideCars:</span><span style="color:#f8f8f8;text-decoration:underline">
+<h5 id="example-cr--configsamplesvxflex_v140_ops_46yamlhttpsgithubcomdelldell-csi-operatorblobmastersamplesvxflex_v140_ops_46yaml">Example CR:  <a href="https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v140_ops_46.yaml">config/samples/vxflex_v140_ops_46.yaml</a></h5>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">sideCars</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Uncomment the following section if you want to run the monitoring sidecar</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#  - name: sdc-monitor</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#    envs:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#    - name: HOST_PID</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#      value: &#34;1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sdc-monitor<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">envs</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>HOST_PID<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>MDM<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.xx.xx.xx,10.xx.xx.xx&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">initContainers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>dellemc/sdc<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">3.6.0.176-3.5.1000.176</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>dellemc/sdc<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">3.5.1.1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">imagePullPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>IfNotPresent<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sdc<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">envs</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">          </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>MDM<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.xx.xx.xx,10.xx.xx.xx&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><h3 id="install-driver">Install Driver</h3>
+</span></code></pre></div><h3 id="manual-sdc-deployment">Manual SDC Deployment</h3>
+<p>For detailed PowerFlex installation procedure, see the <em>Dell EMC PowerFlex Deployment Guide</em>. Install the PowerFlex SDC as follows:</p>
+<p><strong>Steps</strong></p>
 <ol>
-<li>Create namespace:
-Run <code>kubectl create namespace &lt;driver-namespace&gt;</code> command using the desired name to create the namespace.</li>
-<li>Create PowerFlex credentials:
-Create a file called vxflexos-creds.yaml with the following content
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Secret<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>vxflexos-creds<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#8f5902;font-style:italic"># Replace driver-namespace with the namespace where driver is being deployed</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;driver-namespace<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">     type: Opaque</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#8f5902;font-style:italic"># set username to the base64 encoded username</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;base64<span style="color:#f8f8f8;text-decoration:underline"> </span>username<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">       # set password to the base64 encoded password</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;base64<span style="color:#f8f8f8;text-decoration:underline"> </span>password&gt;<span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>Replace the values for the username and password parameters. These values can be optioned using base64 encoding as described in the following example:</p>
-<pre><code>echo -n &quot;myusername&quot; | base64
-echo -n &quot;mypassword&quot; | base64
-</code></pre><p>Run <code>kubectl create -f vxflexos-creds.yaml</code> command to create the secret.</p>
+<li>Download the PowerFlex SDC from <a href="https://www.dell.com/support">Dell EMC Online support</a>. The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.</li>
+<li>Export the shell variable <em>MDM_IP</em> in a comma-separated list using <code>export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx</code>, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.</li>
+<li>Install the SDC per the <em>Dell EMC PowerFlex Deployment Guide</em>:
+<ul>
+<li>For Red Hat Enterprise Linux and Cent OS, run <code>rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm</code>, where * is the SDC name corresponding to the PowerFlex installation version.</li>
+</ul>
 </li>
-<li>Create a Custom Resource (CR) for PowerFlex using the sample files provided    <a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a> .</li>
-<li>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
+<li>To add more MDM_IP for multi-array support, run <code>/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx</code></li>
+</ol>
+<h3 id="install-driver">Install Driver</h3>
+<ol>
+<li>
+<p>Create namespace:
+Run <code>kubectl create namespace &lt;driver-namespace&gt;</code> command using the desired name to create the namespace.</p>
+</li>
+<li>
+<p>Prepare the config.json for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>Username for accessing PowerFlex system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Password for accessing PowerFlex system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>systemID</td>
+<td>System name/ID of PowerFlex system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>endpoint</td>
+<td>REST API gateway HTTPS endpoint for PowerFlex system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>insecure</td>
+<td>Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>isDefault</td>
+<td>An array having isDefault=true is for backward compatibility. This parameter should occur once in the list</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>mdm</td>
+<td>mdm defines the MDM(s) that SDC should register with on start. This should be an list of MDM IP addresses or hostnames separated by comma</td>
+<td>true</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Example: config.json</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#000;font-weight:bold">[</span>
+    <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ID1&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;http://127.0.0.1&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;insecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;isDefault&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;mdm&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;10.0.0.1,10.0.0.2&#34;</span>
+    <span style="color:#000;font-weight:bold">},</span>
+    <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ID2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://127.0.0.2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;insecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;mdm&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span>
+    <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">]</span>
+</code></pre></div><p>After editing the file, run the following command to create a secret called <code>vxflexos-config</code>
+<code>kubectl create secret generic vxflexos-config -n &lt;driver-namespace&gt; --from-file=config=config.json</code></p>
+<p>Use the following command to replace or update the secret:</p>
+<p><code>kubectl create secret generic vxflexos-config -n &lt;driver-namespace&gt; --from-file=config=config.json -o yaml --dry-run=client | kubectl replace -f -</code></p>
+<p><em>Note:</em></p>
+<ul>
+<li>The user needs to validate the JSON syntax and array related key/values while replacing the vxflexos-creds secret.</li>
+<li>If you update the secret, you must reinstall the driver.</li>
+<li>System ID, MDM configuration etc. now are taken directly from config.json. MDM provided in the input_sample_file.yaml will be overided with MDM values in config.json.</li>
+</ul>
+</li>
+<li>
+<p>Create a Custom Resource (CR) for PowerFlex using the sample files provided    <a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a> .</p>
+</li>
+<li>
+<p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:</p>
 <table>
 <thead>
 <tr>
@@ -988,7 +1141,7 @@ echo -n &quot;mypassword&quot; | base64
 <tbody>
 <tr>
 <td>replicas</td>
-<td>Controls the amount of controller pods you deploy. If controller pods is greater than number of available nodes, excess pods will become stuck in pending. Defaults is 2 which allows for Controller high availability.</td>
+<td>Controls the amount of controller pods you deploy. If the number of controller pods are greater than number of available nodes, excess pods will become stay in a pending state. Defaults is 2 which allows for Controller high availability.</td>
 <td>Yes</td>
 <td>2</td>
 </tr>
@@ -997,24 +1150,6 @@ echo -n &quot;mypassword&quot; | base64
 <td></td>
 <td></td>
 <td></td>
-</tr>
-<tr>
-<td>X_CSI_VXFLEXOS_SYSTEMNAME</td>
-<td>Defines the name of the PowerFlex system from which volumes will be provisioned. This must either be set to the PowerFlex system name or system ID</td>
-<td>Yes</td>
-<td>systemname</td>
-</tr>
-<tr>
-<td>X_CSI_VXFLEXOS_ENDPOINT</td>
-<td>Defines the PowerFlex REST API endpoint, with full URL, typically leveraging HTTPS. You must set this for your PowerFlex installations REST gateway</td>
-<td>Yes</td>
-<td>https://127.0.0.1</td>
-</tr>
-<tr>
-<td>CSI_ENDPOINT</td>
-<td>The UNIX socket address for handling gRPC calls</td>
-<td>No</td>
-<td>/var/run/csi/csi.sock</td>
 </tr>
 <tr>
 <td>X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT</td>
@@ -1031,6 +1166,12 @@ echo -n &quot;mypassword&quot; | base64
 <tr>
 <td>X_CSI_DEBUG</td>
 <td>To enable debug mode</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>X_CSI_ALLOW_RWO_MULTI_POD_ACCESS</td>
+<td>Setting allowRWOMultiPodAccess to &ldquo;true&rdquo; will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk.</td>
 <td>No</td>
 <td>false</td>
 </tr>
@@ -1067,7 +1208,9 @@ echo -n &quot;mypassword&quot; | base64
 </tbody>
 </table>
 </li>
-<li>Execute the <code>kubectl create -f &lt;input_sample_file.yaml&gt;</code> command to create PowerFlex custom resource. This command will deploy the CSI-PowerFlex driver.</li>
+<li>
+<p>Execute the <code>kubectl create -f &lt;input_sample_file.yaml&gt;</code> command to create PowerFlex custom resource. This command will deploy the CSI-PowerFlex driver.</p>
+</li>
 </ol>
 
 	

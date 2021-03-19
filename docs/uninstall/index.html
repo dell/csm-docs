@@ -23,8 +23,8 @@
 
 
 
-<link rel="preload" href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
+<link href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -87,7 +87,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -119,7 +119,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -272,6 +272,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocsinstallationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsinstallationoperatorinstalldriver" href="/storage-plugin-docs/docs/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -465,6 +473,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriversoperator" href="/storage-plugin-docs/docs/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriverspowerflex" href="/storage-plugin-docs/docs/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -589,6 +605,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocstroubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocstroubleshootingoperator" href="/storage-plugin-docs/docs/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -763,6 +787,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsdocsconcepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/docs/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -887,8 +936,8 @@
      
 	
 	<h2 id="uninstall-a-dell-csi-driver-installed-via-helm">Uninstall a Dell CSI driver installed via Helm</h2>
-<p>To uninstall a driver, the <code>csi-uninstall.sh</code> script provides a handy wrapper around the <code>helm</code> utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the PowerScale driver:</p>
-<pre><code>./csi-uninstall.sh --namespace isilon/&lt;driver-namespace&gt;
+<p>To uninstall a driver, the <code>csi-uninstall.sh</code> script provides a handy wrapper around the <code>helm</code> utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the driver:</p>
+<pre><code>./csi-uninstall.sh --namespace &lt;driver-namespace&gt;
 </code></pre><p>For usage information:</p>
 <pre><code>[dell-csi-helm-installer]# ./csi-uninstall.sh -h
 Help for ./csi-uninstall.sh
@@ -903,9 +952,9 @@ Options:
 </code></pre><h2 id="uninstall-a-dell-csi-driver-installed-via-dell-csi-operator">Uninstall a Dell CSI driver installed via Dell CSI Operator</h2>
 <p>For uninstalling any CSI drivers deployed the Dell CSI Operator, just delete the respective Custom Resources.<br>
 This can be done using OperatorHub GUI by deleting the CR or via kubectl.</p>
-<p>For example - To uninstall a PowerFlex driver installed via the operator, delete the Custom Resource(CR)</p>
+<p>For example - To uninstall the driver installed via the operator, delete the Custom Resource(CR)</p>
 <pre><code># Replace driver-name and driver-namespace with their respective values
-$ kubectl delete vxflexos/&lt;driver-name&gt; -n &lt;driver-namespace&gt;
+$ kubectl delete &lt;driver-name&gt; -n &lt;driver-namespace&gt;
 </code></pre>
         <div class="section-index">
     
@@ -914,6 +963,14 @@ $ kubectl delete vxflexos/&lt;driver-name&gt; -n &lt;driver-namespace&gt;
     
     
     <hr class="panel-line">
+        
+            
+        
+            
+        
+            
+        
+            
         
             
         

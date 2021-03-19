@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerScale CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/isilon/" />
-<meta property="article:modified_time" content="2020-12-11T15:59:45+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-03-18T20:05:36+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Upgrade PowerScale CSI driver">
-<meta itemprop="dateModified" content="2020-12-11T15:59:45&#43;05:30" />
-<meta itemprop="wordCount" content="113">
+<meta itemprop="dateModified" content="2021-03-18T20:05:36&#43;05:30" />
+<meta itemprop="wordCount" content="144">
 
 
 
@@ -28,8 +28,8 @@
 
 
 
-<link rel="preload" href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
+<link href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -277,6 +277,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocsinstallationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsinstallationoperatorinstalldriver" href="/storage-plugin-docs/docs/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -470,6 +478,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriversoperator" href="/storage-plugin-docs/docs/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriverspowerflex" href="/storage-plugin-docs/docs/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -594,6 +610,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocstroubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocstroubleshootingoperator" href="/storage-plugin-docs/docs/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -768,6 +792,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsdocsconcepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/docs/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -849,7 +898,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#upgrade-driver-from-version-v130v1301-to-v140">Upgrade Driver from version v1.3.0/v1.3.0.1 to v1.4.0</a></li>
+    <li><a href="#upgrade-driver-from-version-v140-to-v150">Upgrade Driver from version v1.4.0 to v1.5.0</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
   </ul>
 </nav>
@@ -902,20 +951,25 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.</p>
-<h2 id="upgrade-driver-from-version-v130v1301-to-v140">Upgrade Driver from version v1.3.0/v1.3.0.1 to v1.4.0</h2>
+<h2 id="upgrade-driver-from-version-v140-to-v150">Upgrade Driver from version v1.4.0 to v1.5.0</h2>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Verify that all pre-requisites to install CSI Driver for DELL EMC PowerScale v1.4.0 are fulfilled.</p>
+<p>Verify that all pre-requisites to install CSI Driver for Dell EMC PowerScale v1.5.0 are fulfilled (including change in secret formats).</p>
+<pre><code>  1.1 Delete the existing secrets (isilon-creds and isilon-certs)
+
+  1.2 Create new secrets (isilon-creds and isilon-certs-0) in the format specified by csi-powerscale 1.5. 
+</code></pre>
+<p>Refer Installation section <a href="./../../../installation/helm/isilon/#install-csi-driver-for-powerscale">here</a>.</p>
 </li>
 <li>
 <p>Clone the repository <a href="https://github.com/dell/csi-powerscale">https://github.com/dell/csi-powerscale</a> , copy the helm/csi-isilon/values.yaml into a new location with name say my-isilon-settings.yaml, to customize settings for installation. Edit my-isilon-settings.yaml as per the requirements.</p>
 </li>
 <li>
-<p>Change to directory dell-csi-helm-installer to install the DELL EMC PowerScale <code>cd dell-csi-helm-installer</code></p>
+<p>Change to directory dell-csi-helm-installer to install the Dell EMC PowerScale <code>cd dell-csi-helm-installer</code></p>
 </li>
 <li>
-<p>Upgrade the CSI Driver for DELL EMC PowerScale v1.4.0 using following command:</p>
+<p>Upgrade the CSI Driver for Dell EMC PowerScale v1.5.0 using following command:</p>
 <p><code>./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade</code></p>
 </li>
 </ol>
