@@ -21,31 +21,39 @@ User can query for csi-powerscale driver using the following command:
 ### Install Driver
 
 1. Create namespace
-   Run `kubectl create namespace isilon` to create the isilon namespace.
+   Run `kubectl create namespace isilon` to create the isilon namespace. Note that the namespace can be any user defined name , in this example, we assume that the namespace is 'isilon'.
 2. Create *isilon-creds*
-   Create a file called isilon-creds.yaml with the following content:
-     ```yaml
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: isilon-creds
-      namespace: isilon
-    type: Opaque
-    data:
-      # set username to the base64 encoded username
-      username: <base64 username>
-      # set password to the base64 encoded password
-      password: <base64 password>
+   Create a json file called isilon-creds.json with the following content:
+     ```json
+       {
+   "isilonClusters": [
+   {
+   "clusterName": "cluster1",
+   "username": "user",
+   "password": "password",
+   "isiIP": "1.2.3.4",
+   "isDefaultCluster": true
+   },
+   {
+   "clusterName": "cluster2",
+   "username": "user",
+   "password": "password",
+   "isiIP": "1.2.3.5",
+   "isiPort": "8080",
+   "isiInsecure": true,
+   "isiPath": "/ifs/data/csi",
+    }
+      ]
+   }
     ```
-   Replace the values for the username and password parameters. These values can be optioned using base64 encoding as described in the following example:
-   ```
-   echo -n "myusername" | base64
-   echo -n "mypassword" | base64
-   ```
+   Replace the values for the given keys as per your environment. This username / password value need not be encoded. You can refer [here](../../helm/isilon/#Install CSI Driver for PowerScale) for more information about isilon secret parameters.
+
+3. Create isilon-certs-<n> secret
+      Please refer [this section](../../helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets. 
    Run `kubectl create -f isilon-creds.yaml` command to create the secret.
-3. Create a CR (Custom Resource) for PowerScale using the sample files provided 
+4. Create a CR (Custom Resource) for PowerScale using the sample files provided 
    [here](https://github.com/dell/dell-csi-operator/tree/master/samples).
-4. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
+5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
    
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -64,6 +72,6 @@ User can query for csi-powerscale driver using the following command:
    | ***Node parameters*** |
    | X_CSI_ISILON_NFS_V3 | Set the version to v3 when mounting an NFS export. If the value is "false", then the default version supported will be used | Yes | |
    | X_CSI_MODE   | Driver starting mode  | No | node |
-5.  Execute the following command to create PowerScale custom resource:
+6.  Execute the following command to create PowerScale custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
-    This command will deploy the CSI-PowerScale driver.
+    This command will deploy the CSI-PowerScale driver in the namespace specified in input yaml file.

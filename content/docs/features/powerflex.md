@@ -6,9 +6,9 @@ Description: Code features for PowerFlex Driver
 
 ## Volume Snapshot Feature
 
-The CSI PowerFlex driver version 1.2 and later support beta snapshots. Earlier versions of the driver supported alpha snapshots.
+The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes 1.17 and is generally available (v1) in Kubernetes version 1.20. 
 
-Volume Snapshots feature in Kubernetes has moved to beta in Kubernetes version 1.17. It was an alpha feature in earlier releases (1.13 onwards). The snapshot API version has changed from v1alpha1 to v1beta1 with this migration.
+The CSI PowerFlex driver version 1.4 supports v1beta1 snapshots on Kubernetes 1.18/1.19 and v1 snapshots on Kubernetes 1.20.
 
 In order to use Volume Snapshots, ensure the following components are deployed to your cluster:
 - Kubernetes Volume Snaphshot CRDs
@@ -16,16 +16,21 @@ In order to use Volume Snapshots, ensure the following components are deployed t
 
 ### Volume Snapshot Class
 
-During the installation of CSI PowerFlex 1.3 driver, a Volume Snapshot Class is created using the new v1beta1 snapshot APIs. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.
+During the installation of CSI PowerFlex 1.4 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.
 
-Following is the manifest for the Volume Snapshot Class created during installation:
+Following is the manifest for the Volume Snapshot Class created during installation: 
 ```
+{{- if eq .Values.kubeversion  "v1.20" }}
+apiVersion: snapshot.storage.k8s.io/v1
+{{- else }}
 apiVersion: snapshot.storage.k8s.io/v1beta1
+{{- end}}
 kind: VolumeSnapshotClass
 metadata:
   name: vxflexos-snapclass
 driver: csi-vxflexos.dellemc.com
 deletionPolicy: Delete
+
 ```
 ### Create Volume Snapshot
 
@@ -34,12 +39,13 @@ The following is a sample manifest for creating a Volume Snapshot using the **v1
 apiVersion: snapshot.storage.k8s.io/v1beta1
 kind: VolumeSnapshot
 metadata:
-  name: pvol0-snap
+  name: pvol0-snap1
   namespace: helmtest-vxflexos
 spec:
   volumeSnapshotClassName: vxflexos-snapclass
   source:
-    persistentVolumeClaimName: pvol
+    persistentVolumeClaimName: pvol0
+
 ```
 Once the VolumeSnapshot is successfully created by the CSI PowerFlex driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.
 
@@ -79,7 +85,7 @@ The CSI PowerFlex driver version 1.2 and later support expansion of Persistent V
 
 To use this feature, the storage class used to create the PVC must have the attribute _allowVolumeExpansion_ set to _true_. The storage classes created during the installation (both using Helm or dell-csi-operator) have the _allowVolumeExpansion_ set to _true_ by default.
 
-In case you are creating more storage classes, make sure that this attribute is set to _true_ if you wish to expand any Persistent Volumes created using these new storage classes.
+In case you are creating more storage classes, ensure that this attribute is set to _true_ if you wish to expand any Persistent Volumes created using these new storage classes.
 
 Following is a sample manifest for a storage class which allows for Volume Expansion:
 ```
@@ -120,7 +126,7 @@ status:
     storage: 8Gi
   phase: Bound
 ```
-*NOTE:* Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the closest multiple of 8.
+*NOTE:* Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the next highest multiple of 8.
 
 ## Volume Cloning Feature
 The CSI PowerFlex driver version 1.3 and later support volume cloning. This feature allows specifying existing PVCs in the _dataSource_ field to indicate a user would like to clone a Volume.
@@ -209,7 +215,7 @@ The CSI PowerFlex driver version 1.2 and later support Topology which forces vol
 - The PowerFlex SDC may not be installed or running on some nodes.
 - Users have chosen to restrict the nodes on which the CSI driver is deployed.
 
-This Topology support does not include customer defined topology, users cannot create their own labels for nodes and storage classed and expect the labels to be honored by the driver.
+This Topology support does not include customer defined topology, users cannot create their own labels for nodes and storage classes and expect the labels to be honored by the driver.
 
 ### Topology Usage
 
@@ -244,19 +250,19 @@ allowedTopologies:
 ```
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
-*NOTE* In the manifest file of the Dell CSI operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
+*NOTE*: In the manifest file of the Dell CSI operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
 
 ## Controller HA   
 
 The CSI PowerFlex driver version 1.3 and later support multiple controller pods. A Controller pod can be assigned to a worker node or a master node, as long as no other controller pod is currently assigned to the node. To control the number of controller pods, edit:
 ```
 controllerCount: 2
-```  
+```
 in your values file to the desired number of controller pods. By default, the driver will deploy with two controller pods, each   assigned to a different worker node. 
 
 > *NOTE:* If controller count is greater than the number of available nodes, excess controller pods will be stuck in pending state. 
 
-If you're using the Dell CSI Operator, the value to adjust is:  
+If you are using the Dell CSI Operator, the value to adjust is:  
 ```  
 replicas: 1  
 ```
@@ -280,7 +286,7 @@ controller:
   # - key: "node-role.kubernetes.io/master"
   #   operator: "Exists"
   #   effect: "NoSchedule"
-```  
+```
 To assign controller pods to master and worker nodes:  
 ```
 # "controller" allows to configure controller specific parameters
@@ -298,7 +304,7 @@ controller:
      operator: "Exists"
      effect: "NoSchedule"
 
-```  
+```
 
 To assign controller pods to master nodes only:  
 ```  
@@ -316,18 +322,126 @@ controller:
    - key: "node-role.kubernetes.io/master"
      operator: "Exists"
      effect: "NoSchedule"
-```    
+```
 For configuring Controller HA on the Dell CSI Operator, please refer to the Dell CSI Operator documentation.
 
+## SDC Deployment
 
-## Automated SDC Deployment
+The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run node portion of CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platform which support automatic SDC deployment, currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS). On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer https://hub.docker.com/r/dellemc/sdc for your OS versions.
 
-The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Red Hat CoreOS (RHCOS) nodes in an OpenShift cluster. Only RHCOS is supported at this time. The deployment of the SDC kernel module on RHCOS nodes is done via an init container. Automated installation is supported in both via Helm and Dell CSI Operator based installs. The following describes further details of this feature:
-
-- On RHCOS nodes, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the node. If there is a SDC kernel module installed then the version is checked and updated.
+- On Kubernetes nodes which run node portion of CSI driver, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the nodes with OS version which supports automatic SDC deployment . If there is a SDC kernel module installed then the version is checked and updated.
 - Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.
-- On non-RHCOS nodes, the SDC init container skips installing and you can see this mentioned in the logs by running `kubectl logs` on the node for SDC
+- On nodes which do not support automatic SDC deployment by SDC init container, manuall installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
+  Refer https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 - There is no automated uninstall of SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from node. 
+
+
+
+## Multiarray Support
+
+The CSI PowerFlex driver version 1.4 adds support for managing multiple PowerFlex arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations.
+
+To manage multiple arrays you need to create an array connection configuration that lists multiple arrays.
+
+### Creating array configuration
+
+There is a sample json file under the top directory named `config.json` with the following content:
+
+```
+[
+    {
+        "username": "admin",				# username for connecting to API
+        "password": "password",				# password for connecting to API
+        "systemID": "ID1",				# system ID for system
+        "endpoint": "http://127.0.0.1",		        # full URL path to the PowerFlex API
+        "insecure": true,				# use insecure connection or not
+        "isDefault": true,				# treat current array as default (would be used by storage class without arrayIP parameter)
+        "mdm": "10.0.0.1,10.0.0.2"			# MDM IP for the system
+    },
+    {
+        "username": "admin",
+        "password": "password",
+        "systemID": "ID2",
+        "endpoint": "https://127.0.0.2",
+        "insecure": true,
+        "mdm": "10.0.0.3,10.0.0.4"
+    }
+]
+```
+
+Here we specify that we want CSI driver to manage two arrays: one with an IP `127.0.0.1` and the other with an IP `127.0.0.2`.
+
+To use this config we need to create a Kubernetes secret from it. To do so run the following command:
+
+`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.json`
+
+### Creating storage classes 
+
+To be able to provision Kubernetes volumes using a specific array we need to create corresponding storage classes.
+
+Find the sample yaml files under `helm/samples/storageclass`. Edit `storageclass.yaml` if you want `ext4` filesystem, and use `storageclass-xfs.yaml` if you want `xfs` filesystem. Replace `<STORAGE_POOL>` with the storage pool you have, and replace `<SYSTEM_ID>` with the system ID you have. 
+
+Then we need to apply storage classes to Kubernetes using `kubectl`:
+
+```bash
+kubectl create -f storageclass.yaml
+```
+
+After that, you can use the storage class for the corresponding array.
+
+## Ephemeral Inline Volume
+
+The CSI PowerFlex driver version 1.4 supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
+
+At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.
+
+The following is a sample manifest (found in csi-vxflexos/test/helm/ephemeral) for creating ephemeral volume in pod manifest with CSI PowerFlex driver.
+
+```yaml
+kind: Pod
+apiVersion: v1
+metadata:
+  name: my-csi-app-inline-volumes
+spec:
+  containers:
+    - name: my-frontend
+      image: busybox
+      command: [ "sleep", "100000" ]
+      volumeMounts:
+      - mountPath: "/data0"
+        name: my-csi-volume
+      - mountPath: "/data1"
+        name: my-csi-volume-xfs
+  volumes:
+  - name: my-csi-volume
+    csi:
+      driver: csi-vxflexos.dellemc.com
+      fsType: "ext4"
+      volumeAttributes:
+        volumeName: "my-csi-volume"
+        size: "8Gi"
+        storagepool: sample
+        systemID: sample
+  - name: my-csi-volume-xfs
+    csi:
+      driver: csi-vxflexos.dellemc.com
+      fsType: "xfs"
+      volumeAttributes:
+        volumeName: "my-csi-volume-xfs"
+        size: "10Gi"
+        storagepool: sample
+        systemID: sample
+
+```
+
+This manifest will create a pod and attach two newly created ephemeral inline csi volumes to it, one ext4 and the other xfs.  
+To run the corresponding helm test, go to csi-vxflexos/test/helm/ephemeral and fill in the values for storagepool and systemID in sample.yaml.  
+Then run:
+````
+./testEphemeral.sh
+````  
+this test will deploy the pod with two ephemeral volumes, and write some data to them before deleting the pod.   
+When creating ephemeral volumes, it is important to specify the following within the volumeAttributes section: volumeName, size, storagepool, and if you want to use a non-default array, systemID.  
 
 
 
