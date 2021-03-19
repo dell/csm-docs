@@ -238,27 +238,34 @@ spec:
 &lt;p&gt;Test the deployment workflow of a simple pod on PowerScale storage.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Creating a storage class:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Create a file &lt;code&gt;storageclass.yaml&lt;/code&gt; using sample yaml file located at helm/samples/storageclass&lt;/p&gt;
+&lt;p&gt;Execute the following command to create storage class:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl create -f $PWD/storageclass.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Result: After executing the above command storage class will be created in the default namespace, and the user can see the storage class by executing &lt;code&gt;kubectl get sc&lt;/code&gt;.
+Note: Verify system for the new storage class.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Creating a volume:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Create a file &lt;code&gt;pvc.yaml&lt;/code&gt; using sample yaml files located at test/sample_files/&lt;/p&gt;
-&lt;p&gt;Execute the following command to create volume&lt;/p&gt;
+&lt;p&gt;Execute the following command to create volume:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl create -f $PWD/pvc.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Result: After executing the above command PVC will be created in the default namespace, and the user can see the pvc by executing &lt;code&gt;kubectl get pvc&lt;/code&gt;.
-Note: Verify system for the new volume&lt;/p&gt;
+Note: Verify system for the new volume. Note that the status of the volume can be either Bound or Pending depending on the VolumeBindingMode specified on storage class.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Attach the volume to Host&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;To attach a volume to a host, create a new application(Pod) and use the PVC created above in the Pod. This scenario is explained using the Nginx application. Create &lt;code&gt;nginx.yaml&lt;/code&gt;
 using sample yaml files located at test/sample_files/.&lt;/p&gt;
-&lt;p&gt;Execute the following command to mount the volume to Kubernetes node&lt;/p&gt;
+&lt;p&gt;Execute the following command to mount the volume to Kubernetes node:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl create -f $PWD/nginx.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Result: After executing the above command, new nginx pod will be successfully created and started in the default namespace.
 Note: Verify PowerScale system for host to be part of clients/rootclients field of export created for volume and used by nginx application.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Create Snapshot&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The following procedure will create a snapshot of the volume in the container using VolumeSnapshot objects defined in snap.yaml. The sample file for snapshot creation is located
-at test/sample_files/&lt;/p&gt;
-&lt;p&gt;Execute the following command to create snapshot&lt;/p&gt;
+&lt;p&gt;The following procedure will create a snapshot of the volume in the container using VolumeSnapshot objects defined in snap.yaml. The sample file for snapshot creation is located at test/sample_files/&lt;/p&gt;
+&lt;p&gt;Execute the following command to create snapshot:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl create -f $PWD/snap.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The spec.source section contains the volume that will be snapped in the default namespace. For example, if the volume to be snapped is testvolclaim1, then the created snapshot is named testvolclaim1-snap1. Verify the PowerScale system for newly created snapshot.&lt;/p&gt;
 &lt;p&gt;Note:&lt;/p&gt;
@@ -267,33 +274,35 @@ at test/sample_files/&lt;/p&gt;
 &lt;li&gt;Notice that this VolumeSnapshot class has a reference to a snapshotClassName:isilon-snapclass. The CSI Driver for PowerScale installation creates this class
 as its default snapshot class.&lt;/li&gt;
 &lt;li&gt;You can see its definition using &lt;code&gt;kubectl get volumesnapshotclasses isilon-snapclass -o yaml&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The IsiPath of default isilon-snapclass is /ifs/data/csi. If user wants different path, she has to create custom volumesnapshot class with required IsiPath in parameters section.&lt;/li&gt;
+&lt;li&gt;Sample volumesnapshotclass file is present under helm/samples/volumesnapshotclass&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Create Volume from Snapshot&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;The following procedure will create a new volume from a given snapshot which is specified in spec dataSource field.&lt;/p&gt;
 &lt;p&gt;The sample file for volume creation from snapshot is located under test/sample_files/&lt;/p&gt;
-&lt;p&gt;Execute the following command to create snapshot&lt;/p&gt;
+&lt;p&gt;Execute the following command to create snapshot:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl create -f $PWD/volume_from_snap.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Verify the PowerScale system for newly created volume from snapshot.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Delete Snapshot&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Execute the following commands to delete the snapshot&lt;/p&gt;
+&lt;p&gt;Execute the following commands to delete the snapshot:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl get volumesnapshot
-kubectl delete volumesnapshot testvolclaim1-snap1
+kubectl delete volumesnapshot pvcsnap
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Create new volume from existing volume(volume clone)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;The following procedure will create a new volume from another existing volume which is specified in spec dataSource field.&lt;/p&gt;
 &lt;p&gt;The sample file for volume creation from volume is located at test/sample_files/&lt;/p&gt;
-&lt;p&gt;Execute the following command to create snapshot&lt;/p&gt;
+&lt;p&gt;Execute the following command to create snapshot:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl create -f $PWD/volume_from_volume.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Verify the PowerScale system for new created volume from volume.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;To Unattach the volume from Host&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Delete the nginx application to unattach the volume from host&lt;/p&gt;
+&lt;p&gt;Delete the nginx application to unattach the volume from host:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl delete -f nginx.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -317,7 +326,10 @@ kubectl get pvc
         
         
         &lt;p&gt;In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default ext4, xfs and nfs
-storage classes, and automatically mounts them to the pod. Note that nfs storage class is optional and will not be created if you haven&amp;rsquo;t turned it on in &lt;code&gt;myvalues.yaml&lt;/code&gt;.&lt;/p&gt;
+storage classes and automatically mounts them to the pod.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It assumes that you&amp;rsquo;ve created the same basic three storage classes from &lt;code&gt;helm/samples/storageclass&lt;/code&gt; folder without changing their names. If you&amp;rsquo;ve created different storage classes please edit &lt;code&gt;tests/simple/simple.yaml&lt;/code&gt; and change &lt;code&gt;PersistentVolumeClaim&lt;/code&gt; definitions to point to correct storage classes.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;To run this test, run the kubectl command from the root directory of the repository:
@@ -364,7 +376,7 @@ storage classes, and automatically mounts them to the pod. Note that nfs storage
 &lt;li&gt;
 &lt;p&gt;Check if the pod is created and Ready and Running by running:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl get all -n test-unity
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If it&amp;rsquo;s in CrashLoopback state then the driver installation wasn&amp;rsquo;t successful. Check the logs of the node and the controller.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If it is in CrashLoopback state then the driver installation was not successful. Check the logs of the node and the controller.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Go into the created container and verify that everything is mounted correctly.&lt;/p&gt;

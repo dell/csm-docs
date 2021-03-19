@@ -12,11 +12,11 @@
 <meta property="og:description" content="Tests to validate PowerScale CSI Driver installation" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/test/powerscale/" />
-<meta property="article:modified_time" content="2020-12-03T07:41:57-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-03-18T19:10:04+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Test PowerScale CSI Driver">
 <meta itemprop="description" content="Tests to validate PowerScale CSI Driver installation">
-<meta itemprop="dateModified" content="2020-12-03T07:41:57-05:00" />
-<meta itemprop="wordCount" content="496">
+<meta itemprop="dateModified" content="2021-03-18T19:10:04&#43;05:30" />
+<meta itemprop="wordCount" content="612">
 
 
 
@@ -28,8 +28,8 @@
 
 
 
-<link rel="preload" href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
+<link href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -277,6 +277,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocsinstallationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsinstallationoperatorinstalldriver" href="/storage-plugin-docs/docs/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -470,6 +478,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriversoperator" href="/storage-plugin-docs/docs/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriverspowerflex" href="/storage-plugin-docs/docs/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -594,6 +610,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocstroubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocstroubleshootingoperator" href="/storage-plugin-docs/docs/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -768,6 +792,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsdocsconcepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/docs/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -910,27 +959,34 @@
 <p>Test the deployment workflow of a simple pod on PowerScale storage.</p>
 <ol>
 <li>
+<p><strong>Creating a storage class:</strong></p>
+<p>Create a file <code>storageclass.yaml</code> using sample yaml file located at helm/samples/storageclass</p>
+<p>Execute the following command to create storage class:</p>
+<pre><code>kubectl create -f $PWD/storageclass.yaml
+</code></pre><p>Result: After executing the above command storage class will be created in the default namespace, and the user can see the storage class by executing <code>kubectl get sc</code>.
+Note: Verify system for the new storage class.</p>
+</li>
+<li>
 <p><strong>Creating a volume:</strong></p>
 <p>Create a file <code>pvc.yaml</code> using sample yaml files located at test/sample_files/</p>
-<p>Execute the following command to create volume</p>
+<p>Execute the following command to create volume:</p>
 <pre><code>kubectl create -f $PWD/pvc.yaml
 </code></pre><p>Result: After executing the above command PVC will be created in the default namespace, and the user can see the pvc by executing <code>kubectl get pvc</code>.
-Note: Verify system for the new volume</p>
+Note: Verify system for the new volume. Note that the status of the volume can be either Bound or Pending depending on the VolumeBindingMode specified on storage class.</p>
 </li>
 <li>
 <p><strong>Attach the volume to Host</strong></p>
 <p>To attach a volume to a host, create a new application(Pod) and use the PVC created above in the Pod. This scenario is explained using the Nginx application. Create <code>nginx.yaml</code>
 using sample yaml files located at test/sample_files/.</p>
-<p>Execute the following command to mount the volume to Kubernetes node</p>
+<p>Execute the following command to mount the volume to Kubernetes node:</p>
 <pre><code>kubectl create -f $PWD/nginx.yaml
 </code></pre><p>Result: After executing the above command, new nginx pod will be successfully created and started in the default namespace.
 Note: Verify PowerScale system for host to be part of clients/rootclients field of export created for volume and used by nginx application.</p>
 </li>
 <li>
 <p><strong>Create Snapshot</strong></p>
-<p>The following procedure will create a snapshot of the volume in the container using VolumeSnapshot objects defined in snap.yaml. The sample file for snapshot creation is located
-at test/sample_files/</p>
-<p>Execute the following command to create snapshot</p>
+<p>The following procedure will create a snapshot of the volume in the container using VolumeSnapshot objects defined in snap.yaml. The sample file for snapshot creation is located at test/sample_files/</p>
+<p>Execute the following command to create snapshot:</p>
 <pre><code>kubectl create -f $PWD/snap.yaml
 </code></pre><p>The spec.source section contains the volume that will be snapped in the default namespace. For example, if the volume to be snapped is testvolclaim1, then the created snapshot is named testvolclaim1-snap1. Verify the PowerScale system for newly created snapshot.</p>
 <p>Note:</p>
@@ -939,33 +995,35 @@ at test/sample_files/</p>
 <li>Notice that this VolumeSnapshot class has a reference to a snapshotClassName:isilon-snapclass. The CSI Driver for PowerScale installation creates this class
 as its default snapshot class.</li>
 <li>You can see its definition using <code>kubectl get volumesnapshotclasses isilon-snapclass -o yaml</code>.</li>
+<li>The IsiPath of default isilon-snapclass is /ifs/data/csi. If user wants different path, she has to create custom volumesnapshot class with required IsiPath in parameters section.</li>
+<li>Sample volumesnapshotclass file is present under helm/samples/volumesnapshotclass</li>
 </ul>
 </li>
 <li>
 <p><strong>Create Volume from Snapshot</strong></p>
 <p>The following procedure will create a new volume from a given snapshot which is specified in spec dataSource field.</p>
 <p>The sample file for volume creation from snapshot is located under test/sample_files/</p>
-<p>Execute the following command to create snapshot</p>
+<p>Execute the following command to create snapshot:</p>
 <pre><code>kubectl create -f $PWD/volume_from_snap.yaml
 </code></pre><p>Verify the PowerScale system for newly created volume from snapshot.</p>
 </li>
 <li>
 <p><strong>Delete Snapshot</strong></p>
-<p>Execute the following commands to delete the snapshot</p>
+<p>Execute the following commands to delete the snapshot:</p>
 <pre><code>kubectl get volumesnapshot
-kubectl delete volumesnapshot testvolclaim1-snap1
+kubectl delete volumesnapshot pvcsnap
 </code></pre></li>
 <li>
 <p><strong>Create new volume from existing volume(volume clone)</strong></p>
 <p>The following procedure will create a new volume from another existing volume which is specified in spec dataSource field.</p>
 <p>The sample file for volume creation from volume is located at test/sample_files/</p>
-<p>Execute the following command to create snapshot</p>
+<p>Execute the following command to create snapshot:</p>
 <pre><code>kubectl create -f $PWD/volume_from_volume.yaml
 </code></pre><p>Verify the PowerScale system for new created volume from volume.</p>
 </li>
 <li>
 <p><strong>To Unattach the volume from Host</strong></p>
-<p>Delete the nginx application to unattach the volume from host</p>
+<p>Delete the nginx application to unattach the volume from host:</p>
 <p><code>kubectl delete -f nginx.yaml</code></p>
 </li>
 <li>

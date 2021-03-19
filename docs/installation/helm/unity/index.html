@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/unity/" />
-<meta property="article:modified_time" content="2021-01-16T00:35:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Installing Unity CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-01-16T00:35:03&#43;05:30" />
-<meta itemprop="wordCount" content="1846">
+<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
+<meta itemprop="wordCount" content="2441">
 
 
 
@@ -31,8 +31,8 @@
 
 
 
-<link rel="preload" href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/storage-plugin-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
+<link href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.4e7e53e0ef2975e0a941f5da04474edd.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.a9b5f1869d9221b2f14f08935cb9779e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -280,6 +280,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocsinstallationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsinstallationoperatorinstalldriver" href="/storage-plugin-docs/docs/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -473,6 +481,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriversoperator" href="/storage-plugin-docs/docs/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocsupgradationdriverspowerflex" href="/storage-plugin-docs/docs/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -597,6 +613,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsdocstroubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocstroubleshootingoperator" href="/storage-plugin-docs/docs/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -771,6 +795,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/docs/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsdocsconcepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/docs/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -864,6 +913,8 @@
     </li>
     <li><a href="#install-csi-driver">Install CSI Driver</a></li>
     <li><a href="#certificate-validation-for-unisphere-rest-api-calls">Certificate validation for Unisphere REST API calls</a></li>
+    <li><a href="#storage-classes">Storage Classes</a></li>
+    <li><a href="#dynamically-update-the-unity-creds-secrets">Dynamically update the unity-creds secrets</a></li>
   </ul>
 </nav>
 
@@ -942,7 +993,7 @@
 <p>Before you install CSI Driver for Unity, verify the requirements that are mentioned in this topic are installed and configured.</p>
 <h3 id="requirements">Requirements</h3>
 <ul>
-<li>Install Kubernetes</li>
+<li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
 <li>Configure Docker service</li>
 <li>Install Helm v3</li>
 <li>To use FC protocol, host must be zoned with Unity array</li>
@@ -959,7 +1010,7 @@
 <span style="color:#000">MountFlags</span><span style="color:#ce5c00;font-weight:bold">=</span>shared
 </code></pre></div></li>
 <li>
-<p>Restart the Docker service with systemctl daemon-reload and</p>
+<p>Restart the Docker service with following commands:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">systemctl daemon-reload
 systemctl restart docker
 </code></pre></div></li>
@@ -969,8 +1020,8 @@ systemctl restart docker
 <p><em>Before you begin</em></p>
 <ul>
 <li>You must have the downloaded files, including the Helm chart from the source <a href="https://github.com/dell/csi-unity">git repository</a>, ready for this procedure.</li>
-<li>In the top-level dell-csi-helm-installer directory, there should be two scripts, <em>csi-install.sh</em> and <em>csi-uninstall.sh</em>. These scripts handle some of the pre and post operations that cannot be performed in the helm chart, such as creating Custom Resource Definitions (CRDs), if needed.</li>
-<li>Make sure &ldquo;unity&rdquo; namespace exists in kubernetes cluster. Use <code>kubectl create namespace unity</code> command to create the namespace, if the namespace is not present.</li>
+<li>In the top-level dell-csi-helm-installer directory, there should be two scripts, <em>csi-install.sh</em> and <em>csi-uninstall.sh</em>.</li>
+<li>Ensure &ldquo;unity&rdquo; namespace exists in kubernetes cluster. Use <code>kubectl create namespace unity</code> command to create the namespace, if the namespace is not present.</li>
 </ul>
 <p>Procedure</p>
 <ol>
@@ -1039,6 +1090,12 @@ systemctl restart docker
 <td>createStorageClassesWithTopology</td>
 <td>Flag to enable or disable topology.</td>
 <td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>allowRWOMultiPodAccess</td>
+<td>Flag to enable multiple pods use the same pvc on the same node with RWO access mode.</td>
+<td>false</td>
 <td>false</td>
 </tr>
 <tr>
@@ -1133,7 +1190,27 @@ systemctl restart docker
 </tr>
 </tbody>
 </table>
-<p><strong>Note</strong>: User should provide all boolean values with double quotes. This applicable only for myvalues.yaml. Example: &ldquo;true&rdquo;/&ldquo;false&rdquo;.</p>
+<p><strong>Note</strong>:</p>
+<ul>
+<li>
+<p>User should provide all boolean values with double quotes. This applicable only for myvalues.yaml. Example: &ldquo;true&rdquo;/&ldquo;false&rdquo;</p>
+</li>
+<li>
+<p>controllerCount parameter value should be &lt;= number of nodes in the kubernetes cluster else install script fails.</p>
+</li>
+<li>
+<p>&lsquo;createStorageClassesWithTopology&rsquo; key  is applicable  only in the helm based installation but not with the operator based installation. In operator based installation, however user can create custom storage class with topology related key/values.</p>
+</li>
+<li>
+<p>User can create separate storage class (with topology related keys) by referring to existing default storageclasses.</p>
+</li>
+<li>
+<p>Host IO Limit must have a minimum bandwidth of 1 MBPS to discover the volumes on node successfully.</p>
+</li>
+<li>
+<p>User must not change the value of allowRWOMultiPodAccess to true unless intended to use the feature and is aware of the consequences. Enabling multiple pods access the same pvc with RWO access mode on the same node might cause data to be overwritten and therefore leading to data loss in some cases.</p>
+</li>
+</ul>
 <p>Example <em>myvalues.yaml</em></p>
 <pre><code>csiDebug: &quot;true&quot;
 volumeNamePrefix : csivol
@@ -1143,6 +1220,7 @@ certSecretCount: 1
 syncNodeInfoInterval: 5
 controllerCount: 2
 createStorageClassesWithTopology: true
+allowRWOMultiPodAccess: false
 storageClassProtocols:
    - protocol: &quot;FC&quot;
    - protocol: &quot;iSCSI&quot;
@@ -1209,7 +1287,7 @@ The following table lists driver configuration parameters for multiple storage a
 </tr>
 <tr>
 <td>insecure</td>
-<td>&ldquo;unityInsecure&rdquo; determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface If it is set to false, then a secret unity-certs has to be created with a X.509 certificate of CA which signed the Unisphere certificate</td>
+<td>&ldquo;unityInsecure&rdquo; determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with a X.509 certificate of CA which signed the Unisphere certificate</td>
 <td>true</td>
 <td>true</td>
 </tr>
@@ -1242,43 +1320,41 @@ The following table lists driver configuration parameters for multiple storage a
      ]
    }
 </code></pre><p><code>kubectl create secret generic unity-creds -n unity --from-file=config=secret.json</code></p>
-<p>Use the following command to replace or update the secret</p>
+<p>Use the following command to replace or update the secret:</p>
 <p><code>kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run | kubectl replace -f -</code></p>
 <p><strong>Note</strong>: The user needs to validate the JSON syntax and array related key/values while replacing the unity-creds secret.
 The driver will continue to use previous values in case of an error found in the JSON file.</p>
 <p><strong>Note</strong>: &ldquo;isDefaultArray&rdquo; parameter in values.yaml and secret.json should match each other.</p>
 </li>
 <li>
-<p>Setup for snapshots</p>
-<p>The Kubernetes Volume Snapshot feature is now beta in Kubernetes v1.17.</p>
+<p>Setup for snapshots.</p>
+<p>The Kubernetes Volume Snapshot feature is beta in Kubernetes v1.18 and v1.19 and move to GA in v1.20.</p>
 <ul>
+<li>The following section summarizes the changes in the <strong><a href="https://kubernetes.io/blog/2020/12/10/kubernetes-1.20-volume-snapshot-moves-to-ga/">GA</a></strong></li>
+</ul>
+<p>In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster.</p>
+<ol>
 <li>
-<p>The following section summarizes the changes in the <strong><a href="https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/">beta</a></strong> release.</p>
-<p>To use the Kubernetes Volume Snapshot feature, ensure the following components have been deployed on your Kubernetes cluster.</p>
-<ul>
-<li><a href="https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster">Install Snapshot Beta CRDs using the following command</a></li>
-</ul>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-2.0/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
-</code></pre></div><ul>
+<p>Install Snapshot CRDs:</p>
+<p>For Kubernetes 1.18 and 1.19, Snapshot CRDs versioned  3.0.3 must be installed.
+<strong><a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd">CRDs</a></strong></p>
+<p>For Kubernetes 1.20 , Snapshot CRDs versioned 4.0.0 must be installed.
+<strong><a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd">CRDs</a></strong></p>
+</li>
 <li>
-<p><a href="https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster">Volume snapshot controller</a></p>
-<ul>
-<li>The manifests available on GitHub install v3.0.2 of the snapshotter image - <a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.2</a></li>
-<li>Dell recommends using v3.0.2 image of the snapshot-controller - <a href="https://quay.io/repository/k8scsi/snapshot-controller?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/snapshot-controller:v3.0.2</a></li>
-</ul>
-<p>After executing these commands, a snapshot-controller pod should be up and running.</p>
+<p>Install Snapshot Controller:</p>
+<p>For Kubernetes 1.18 and 1.19, Snapshot Controller versioned 3.0.3 must be installed.
+<strong><a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller">Controller</a></strong></p>
+<p>For Kubernetes 1.20, Snapshot Controller versioned 4.0.0 must be installed.<br>
+<strong><a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller">Controller</a></strong></p>
 </li>
-</ul>
-</li>
-</ul>
+</ol>
 </li>
 <li>
 <p>Run the <code>./csi-install.sh --namespace unity --values ./myvalues.yaml</code> command to proceed with the installation.</p>
-<p>A successful installation should emit messages that look similar to the following samples:</p>
+<p>A successful installation must display messages that look similar to the following samples:</p>
 <pre><code>------------------------------------------------------
-&gt; Installing CSI Driver: csi-unity on 1.19
+&gt; Installing CSI Driver: csi-unity on 1.20
 ------------------------------------------------------
 ------------------------------------------------------
 &gt; Checking to see if CSI Driver is already installed
@@ -1286,11 +1362,11 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snaps
 ------------------------------------------------------
 &gt; Verifying Kubernetes and driver configuration
 ------------------------------------------------------
-|- Kubernetes Version: 1.18
+|- Kubernetes Version: 1.20
 |
-|- Driver: csi-unity
+|- Driver: csi-unity                                                
 |
-|- Verifying Kubernetes versions
+|- Verifying Kubernetes versions                                    
   |
   |--&gt; Verifying minimum Kubernetes version                         Success
   |
@@ -1302,39 +1378,48 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snaps
 |
 |- Verifying that required secrets have been created                Success
 |
-|- Verifying snapshot support
+|- Verifying alpha snapshot resources                               
   |
-  |--&gt; Verifying that beta snapshot CRDs are available              Success
+  |--&gt; Verifying that alpha snapshot CRDs are not installed         Success
+|
+|- Verifying sshpass installation..                                 |
+|- Verifying iSCSI installation                                     
+Enter the root password of 10.**.**.**: 
+   
+Enter the root password of 10.**.**.**: 
+Success
+|
+|- Verifying snapshot support                                       
   |
-  |--&gt; Verifying that beta snapshot controller is available         Success
+  |--&gt; Verifying that snapshot CRDs are available                   Success
+  |
+  |--&gt; Verifying that the snapshot controller is available          Success
 |
 |- Verifying helm version                                           Success
-
+   
 ------------------------------------------------------
-&gt; Verification Complete
+&gt; Verification Complete - Success
 ------------------------------------------------------
 |
 |- Installing Driver                                                Success
   |
-  |--&gt; Waiting for statefulset unity-controller to be ready         Success
+  |--&gt; Waiting for Deployment unity-controller to be ready          Success
   |
-  |--&gt; Waiting for daemonset unity-node to be ready                 Success
+  |--&gt; Waiting for DaemonSet unity-node to be ready                 Success
 ------------------------------------------------------
 &gt; Operation complete
 ------------------------------------------------------
-</code></pre><p>Results:
-At the end of the script statefulset unity-controller and daemonset unity-node is ready, execute command <strong>kubectl get pods -n unity</strong> to get the status of the pods and you will see the following:</p>
+</code></pre><p>Results
+At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command <strong>kubectl get pods -n unity</strong> to get the status of the pods and you will see the following:</p>
 <ul>
-<li>unity-controller-xxxx with 5/5 containers ready, and status displayed as Running.</li>
+<li>One or more Unity Controller (based on controllerCount) with 5/5 containers ready, and status displayed as Running.</li>
+<li>Agent pods with 2/2 containers and the status displayed as Running.</li>
 </ul>
+<p>Finally, the script creates storageclasses such as, &ldquo;unity&rdquo;. Additional storage classes can be created for different combinations of file system types and Unity storage pools.</p>
+<p>The script also creates one or more volumesnapshotclasses based on number of arrays . &ldquo;unity-snapclass&rdquo; will be the volumesnapshotclass for default array. The output will be similar to following:</p>
+<p><code>[root@host ~]# kubectl get volumesnapshotclass NAME                             AGE unity-apm***********-snapclass   12m unity-snapclass                  12m</code></p>
 </li>
 </ol>
-<ul>
-<li>
-<p>Agent pods with 2/2 containers and the status displayed as Running.</p>
-<p>Finally, the script creates storageclasses such as, &ldquo;unity&rdquo;. Additional storage classes can be created for different combinations of file system types and Unity storage pools. The script also creates volumesnapshotclass &ldquo;unity-snapclass&rdquo;.</p>
-</li>
-</ul>
 <h2 id="certificate-validation-for-unisphere-rest-api-calls">Certificate validation for Unisphere REST API calls</h2>
 <p>This topic provides details about setting up the certificate validation for the CSI Driver for Dell EMC Unity.</p>
 <p><em>Before you begin</em></p>
@@ -1351,15 +1436,30 @@ At the end of the script statefulset unity-controller and daemonset unity-node i
 <li>To fetch the certificate, run the following command.
 <code>openssl s_client -showcerts -connect &lt;Unisphere IP:Port&gt; &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; ca_cert_0.pem</code>
 Example: openssl s_client -showcerts -connect 1.1.1.1:443 &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; ca_cert_0.pem</li>
-<li>Run the following command to create the cert secret with index &lsquo;0&rsquo;
+<li>Run the following command to create the cert secret with index &lsquo;0&rsquo;:
 <code>kubectl create secret generic unity-certs-0 --from-file=cert-0=ca_cert_0.pem -n unity</code>
-Use the following command to replace the secret
+Use the following command to replace the secret:
 <code>kubectl create secret generic unity-certs-0 -n unity --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -</code></li>
 <li>Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: unity-certs-1, unity-certs-2, etc)</li>
 </ol>
 <p><strong>Note</strong>: &ldquo;unity&rdquo; is the namespace for helm based installation but namespace can be user defined in operator based installation.</p>
 <p><strong>Note</strong>: User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to kubernetes secret size limitation.</p>
 <p><strong>Note</strong>: Whenever certSecretCount parameter changes in myvalues.yaml user needs to uninstall and install the driver.</p>
+<h2 id="storage-classes">Storage Classes</h2>
+<p>As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.</p>
+<p>The StorageClass object in Kubernetes is immutable and cannot be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes. In preparation for that, starting from CSI Unity v1.5, an annotation &ldquo;helm.sh/resource-policy&rdquo;: keep is applied to the storage classes created by the dell-csi-helm-installer.</p>
+<p>Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled. This annotation has been applied to give you an opportunity to keep using these storage classes even with a future release of the driver. In case you wish to not use these storage classes, you will need to delete them by using the kubectl delete storageclass command.</p>
+<p><strong>Note</strong>: If you uninstall the driver and reinstall it, you can still face errors if any update in the values.yaml file leads to an update of the storage class(es):</p>
+<pre><code>Error: cannot patch &quot;&lt;sc-name&gt;&quot; with kind StorageClass: StorageClass.storage.k8s.io &quot;&lt;sc-name&gt;&quot; is invalid: parameters: Forbidden: updates to parameters are forbidden
+	
+</code></pre><p>In case you want to make such updates, ensure to delete the existing storage classes using the kubectl delete storageclass command.
+Deleting a storage class has no impact on a running Pod with mounted PVCs. You will not be able to provision new PVCs until at least one storage class is newly created.</p>
+<h2 id="dynamically-update-the-unity-creds-secrets">Dynamically update the unity-creds secrets</h2>
+<p>Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the &ldquo;Host&rdquo; information in an array.
+User can update secret using the following command:</p>
+<pre><code>`kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f - `
+</code></pre>
+<p><strong>Note</strong>: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.</p>
 
 	
 	

@@ -14,6 +14,44 @@
     
     
     <item>
+      <title>Docs: Dell CSI Operator</title>
+      <link>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/operator/</guid>
+      <description>
+        
+        
+        &lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Before installing the drivers, Dell CSI Operator tries to validate the Custom Resource being created. If some mandatory environment variables are missing or there is a type mismatch, then the Operator will report an error during the reconciliation attempts.&lt;br&gt;
+Because of this, the status of the Custom Resource will change to &amp;ldquo;Failed&amp;rdquo; and the error captured in the &amp;ldquo;ErrorMessage&amp;rdquo; field in the status.&lt;br&gt;
+For e.g. - If the PowerMax driver was installed in the namespace test-powermax and has the name powermax, then run the command &lt;code&gt;kubectl get csipowermax/powermax -n test-powermax -o yaml&lt;/code&gt; to get the Custom Resource details.&lt;br&gt;
+If there was an error while installing the driver, then you would see a status like this -&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;status:
+  status:
+    errorMessage: mandatory Env - X_CSI_K8S_CLUSTER_PREFIX not specified in user spec
+    state: Failed
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The state of the Custom Resource can also change to &lt;code&gt;Failed&lt;/code&gt; because of any other prohibited updates or any failure while installing the driver. In order to recover from this failure,
+fix the error in the manifest and update/patch the Custom Resource&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After an update to the driver, the controller pod may not have the latest desired specification&lt;br&gt;
+The above happens when the controller pod was in a failed state before applying the update. Even though the Dell CSI Operator updates the pod template specification for the StatefulSet, the StatefulSet controller does not apply the update to the pod. This happens because of the unique nature of StatefulSets where the controller tries to retain the last known working state.&lt;/p&gt;
+&lt;p&gt;To get around this problem, the Dell CSI Operator forces an update of the pod specification by deleting the older pod. In case the Dell CSI Operator fails to do so, delete the controller pod to force an update of the controller pod specification&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The Status of the CSI Driver Custom Resource shows the state of the driver pods after installation. This state will not be updated automatically if there are any changes to the driver pods outside any Operator operations
+At times because of inconsistencies in fetching data from the Kubernetes cache, state of some driver pods may not be updated correctly in the status. To force an update of the state, you can update
+the Custom Resource forcefully by setting forceUpdate to true. If all the driver pods are in &lt;code&gt;Available&lt;/code&gt; State, then the state of the Custom Resource will be updated as &lt;code&gt;Running&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: PowerFlex</title>
       <link>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -48,15 +86,15 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Defcontext mount option seems to be ignored, volumes still are not being labeled correctly.&lt;/td&gt;
-&lt;td&gt;Ensure SElinux is enabled on worker node, and ensure your container run time manager is properly configured to be&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;utilized with SElinux.&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Ensure SElinux is enabled on worker node, and ensure your container run time manager is properly configured to be utilized with SElinux.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Mount options that interact with SElinux are not working (like defcontext).&lt;/td&gt;
 &lt;td&gt;Check that your container orchestrator is properly configured to work with SElinux.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Installation of the driver on Kubernetes v1.20 fails with the following error: &lt;br /&gt;&lt;code&gt;Error: unable to build kubernetes objects from release manifest: unable to recognize &amp;quot;&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes v1.20 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20 (v1 snapshots) install CRDs from v4.0.0, see the &lt;a href=&#34;../../docs/installation/helm/powerflex.md#volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -123,11 +161,15 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver &lt;strong&gt;cannot authenticate&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Check your secret&amp;rsquo;s username and password&lt;/td&gt;
+&lt;td&gt;Check your secret&amp;rsquo;s username and password for corresponding cluster&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver failed to connect to the Isilon because it &lt;strong&gt;couldn&amp;rsquo;t verify the certificates&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Check the isilon-certs secret and ensure it is not empty and it has the valid certificates. Set &lt;code&gt;isiInsecure: &amp;quot;true&amp;quot;&lt;/code&gt; for insecure connection. SSL validation is recommended in production environment.&lt;/td&gt;
+&lt;td&gt;Check the isilon-certs-&lt;n&gt; secret and ensure it is not empty and it has the valid certificates. Set &lt;code&gt;isiInsecure: &amp;quot;true&amp;quot;&lt;/code&gt; for insecure connection. SSL validation is recommended in production environment.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs isilon-controller-0 -n isilon -c driver&lt;/code&gt; logs shows the driver error: &lt;strong&gt;create volume failed, Access denied. create directory as requested&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;This situation can happen when the user who created the base path is different from the user configured for the driver. Make sure the user used to deploy CSI-Driver must have enough rights on the base path (i.e. isiPath) to perform all operations.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -160,6 +202,10 @@
 &lt;td&gt;The &lt;code&gt;kubectl logs -n csi-powerstore powerstore-node-&amp;lt;suffix&amp;gt;&lt;/code&gt; driver logs shows that the driver can&amp;rsquo;t connect to PowerStore API.&lt;/td&gt;
 &lt;td&gt;Check if you&amp;rsquo;ve created secret with correct credentials&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Installation of the driver on Kubernetes v1.20 fails with the following error: &lt;br /&gt;&lt;code&gt;Error: unable to build kubernetes objects from release manifest: unable to recognize &amp;quot;&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes v1.20 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20 (v1 snapshots) install CRDs from v4.0.0, see the &lt;a href=&#34;../../installation/helm/powerstore/#volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -190,7 +236,11 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;The &lt;code&gt;kubectl logs -n unity unity-node-&amp;lt;suffix&amp;gt;&lt;/code&gt; driver logs shows that the driver can&amp;rsquo;t connect to Unity - Authentication failure.&lt;/td&gt;
-&lt;td&gt;Check if you&amp;rsquo;ve created secret with correct credentials&lt;/td&gt;
+&lt;td&gt;Check if you have created secret with correct credentials&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Installation of the driver on Kubernetes v1.20 fails with the following error: &lt;br /&gt;&lt;code&gt;Error: unable to build kubernetes objects from release manifest: unable to recognize &amp;quot;&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes v1.20 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20 (v1 snapshots) install CRDs from v4.0.0, see point 6 &lt;a href=&#34;../../../docs/installation/helm/unity/#install-csi-driver&#34;&gt;here&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

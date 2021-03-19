@@ -1,0 +1,369 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Installation</title>
+    <link>https://dell.github.io/storage-plugin-docs/v1/installation/</link>
+    <description>Recent content in Installation on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/storage-plugin-docs/v1/installation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1: CSI Driver installation using Helm</title>
+      <link>https://dell.github.io/storage-plugin-docs/v1/installation/helm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/v1/installation/helm/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section provides the details and instructions on how to install the Dell EMC CSI drivers using the provided Helm charts and the Dell CSI Helm Installer.&lt;/p&gt;
+&lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
+&lt;p&gt;Installing any of the Dell EMC CSI Drivers using Helm requires a few utilities to be installed on the system running the installation.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Dependency&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;kubectl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubectl is used to validate that the Kubernetes system meets the requirements of the driver.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;helm&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Helm v3 is used as the deployment tool for Charts. Go &lt;a href=&#34;https://helm.sh/docs/intro/install/&#34;&gt;here&lt;/a&gt; to install Helm 3.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;sshpass&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;sshpass is used to check certain pre-requisities in worker nodes (in chosen drivers).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;br&gt;
+&lt;strong&gt;Note:&lt;/strong&gt; To use these tools, a valid &lt;code&gt;KUBECONFIG&lt;/code&gt; is required. Ensure that either a valid configuration is in the default location, or, that the &lt;code&gt;KUBECONFIG&lt;/code&gt; environment variable points to a valid configuration before using these tools.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Dell CSI Operator Installation Process</title>
+      <link>https://dell.github.io/storage-plugin-docs/v1/installation/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/v1/installation/operator/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;For installing via OperatorHub.io on Kubernetes, go to the &lt;a href=&#34;../../partners/operator/&#34;&gt;OperatorHub page&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;For installing via OpenShift with the certified Operator, go to the &lt;a href=&#34;../../partners/redhat/&#34;&gt;OpenShift page&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;For installing manually, follow the instructions below.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;manual-installation&#34;&gt;Manual Installation&lt;/h3&gt;
+&lt;h4 id=&#34;pre-requisites&#34;&gt;Pre-requisites&lt;/h4&gt;
+&lt;p&gt;Dell CSI Operator has been tested and qualified with&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Upstream Kubernetes cluster v1.17, v1.18, v1.19&lt;/li&gt;
+&lt;li&gt;OpenShift Clusters 4.5, 4.6 with RHEL 7.x &amp;amp; RHCOS worker nodes&lt;/li&gt;
+&lt;li&gt;For upstream k8s clusters, make sure to install
+&lt;ul&gt;
+&lt;li&gt;Beta VolumeSnapshot CRDs (can be installed using the Operator installation script)&lt;/li&gt;
+&lt;li&gt;External Volume Snapshot Controller&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note-&lt;/strong&gt; For more insights or detailed pre-requisites refer &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;https://github.com/dell/dell-csi-operator&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;steps&#34;&gt;Steps&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;Dell CSI Operator repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Run &amp;lsquo;bash scripts/install.sh&amp;rsquo; to install the operator
+
+
+
+
+
+
+
+&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/v1/installation/operator/non-olm-1_hubed218f9b8f0561db6687b1d7e94564b_353937_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1006&#34;&gt;
+	
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Run the command &amp;lsquo;oc get pods&amp;rsquo; to validate the install completed
+&lt;ul&gt;
+&lt;li&gt;Should be able to see the operator related pod on default namespace
+
+
+
+
+
+
+
+&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 3510px&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/v1/installation/operator/non-olm-2_huf4405aa1524950a96c6019bf9f4df9b0_257760_3500x800_resize_q75_catmullrom.jpg&#34; width=&#34;3500&#34; height=&#34;800&#34;&gt;
+	
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;driver-install-via-dell-csi-operator&#34;&gt;Driver Install via Dell CSI Operator&lt;/h2&gt;
+&lt;p&gt;For information on how to install the CSI drivers via the Dell CSI Operator, please refer to the sub-pages below for each driver.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Offline Installation of Dell EMC CSI Storage Providers</title>
+      <link>https://dell.github.io/storage-plugin-docs/v1/installation/offline/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/v1/installation/offline/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script can be used to create a package usable for offline installation of the Dell EMC CSI Storage Providers, via either Helm
+or the Dell CSI Operator.&lt;/p&gt;
+&lt;p&gt;This includes the following drivers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-vxflexos&#34;&gt;PowerFlex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-powermax&#34;&gt;PowerMax&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-powerscale&#34;&gt;PowerScale&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-powerstore&#34;&gt;PowerStore&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;Unity&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As well as the Dell CSI Operator&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;Dell CSI Operator&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
+&lt;p&gt;Multiple linux based systems may be required to create and process an offline bundle for use.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One linux based system, with internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes &lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt; to pull and save container images to file.&lt;/li&gt;
+&lt;li&gt;One linux based system, with access to an image registry, to invoke a script that uses &lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt; to restore container images from file and push them to a registry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If one linux system has both internet access and access to an internal registry, that system can be used for both steps.&lt;/p&gt;
+&lt;p&gt;Preparing an offline bundle requires the following utilities:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Dependency&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt; will be used to pull images from public image registries, tag them, and push them to a private registry.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;One of these will be required on both the system building the offline bundle as well as the system preparing for installation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Tested version(s) are &lt;code&gt;docker&lt;/code&gt; 19.03+ and &lt;code&gt;podman&lt;/code&gt; 1.6.4+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;git&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;git&lt;/code&gt; will be used to manually clone one of the above repos in order to create and offline bundle.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;This is only needed on the system preparing the offline bundle.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Tested version(s) are &lt;code&gt;git&lt;/code&gt; 1.8+ but any version should work.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;workflow&#34;&gt;Workflow&lt;/h2&gt;
+&lt;p&gt;To perform an offline installation of a driver or the Operator, the following steps should be performed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Build an offline bundle&lt;/li&gt;
+&lt;li&gt;Unpacking an offline bundle and preparing for installation&lt;/li&gt;
+&lt;li&gt;Perform either a Helm installation or Operator installation&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;building-an-offline-bundle&#34;&gt;Building an offline bundle&lt;/h3&gt;
+&lt;p&gt;This needs to be performed on a linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.&lt;/p&gt;
+&lt;p&gt;The build an offline bundle, the following steps are needed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Perform a &lt;code&gt;git clone&lt;/code&gt; of the desired repository. For a helm based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned&lt;/li&gt;
+&lt;li&gt;Run the &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script with an argument of &lt;code&gt;-c&lt;/code&gt; in order to create an offline bundle&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;For Helm installs, the &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script will be found in the &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; directory&lt;/li&gt;
+&lt;li&gt;For Operator installs, the &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script will be found in the &lt;code&gt;scripts&lt;/code&gt; directory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The script will perform the following steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Determine required images by parsing either the driver Helm charts (if run from a cloned CSI Driver git repository) or the Dell CSI Operator configuration files (if run from a clone of the Dell CSI Operator repository)&lt;/li&gt;
+&lt;li&gt;Perform an image &lt;code&gt;pull&lt;/code&gt; of each image required&lt;/li&gt;
+&lt;li&gt;Save all required images to a file by running &lt;code&gt;docker save&lt;/code&gt; or &lt;code&gt;podman save&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Build a &lt;code&gt;tar.gz&lt;/code&gt; file containing the images as well as files required to installer the driver and/or Operator&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.&lt;/p&gt;
+&lt;p&gt;For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# git clone https://github.com/dell/dell-csi-operator.git
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# cd dell-csi-operator
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[user@system /home/user/dell-csi-operator]# scripts/csi-offline-bundle.sh -c
+*
+* Building image manifest file
+
+*
+* Pulling container images
+
+   dellemc/csi-isilon:v1.2.0
+   dellemc/csi-isilon:v1.3.0.000R
+   dellemc/csipowermax-reverseproxy:v1.0.0.000R
+   dellemc/csi-powermax:v1.2.0.000R
+   dellemc/csi-powermax:v1.4.0.000R
+   dellemc/csi-powerstore:v1.1.0.000R
+   dellemc/csi-unity:v1.3.0.000R
+   dellemc/csi-vxflexos:v1.1.5.000R
+   dellemc/csi-vxflexos:v1.2.0.000R
+   dellemc/dell-csi-operator:v1.1.0.000R
+   quay.io/k8scsi/csi-attacher:v2.0.0
+   quay.io/k8scsi/csi-attacher:v2.2.0
+   quay.io/k8scsi/csi-node-driver-registrar:v1.2.0
+   quay.io/k8scsi/csi-provisioner:v1.4.0
+   quay.io/k8scsi/csi-provisioner:v1.6.0
+   quay.io/k8scsi/csi-resizer:v0.5.0
+   quay.io/k8scsi/csi-snapshotter:v2.1.1
+
+*
+* Saving images
+
+*
+* Copying necessary files
+
+ /dell/git/dell-csi-operator/config
+ /dell/git/dell-csi-operator/deploy
+ /dell/git/dell-csi-operator/samples
+ /dell/git/dell-csi-operator/scripts
+ /dell/git/dell-csi-operator/README.md
+ /dell/git/dell-csi-operator/LICENSE
+
+*
+* Compressing release
+
+dell-csi-operator-bundle/
+dell-csi-operator-bundle/samples/
+...
+&amp;lt;listing of files included in bundle&amp;gt;
+...
+dell-csi-operator-bundle/LICENSE
+dell-csi-operator-bundle/README.md
+
+*
+* Complete
+
+Offline bundle file is: /dell/git/dell-csi-operator/dell-csi-operator-bundle.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;unpacking-an-offline-bundle-and-preparing-for-installation&#34;&gt;Unpacking an offline bundle and preparing for installation&lt;/h3&gt;
+&lt;p&gt;This needs to be performed on a linux system with access to an image registry that will host container images. If the registry requires &lt;code&gt;login&lt;/code&gt;, that should be done before proceeding.&lt;/p&gt;
+&lt;p&gt;To prepare for driver or Operator installation, the following steps need to be performed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Copy the offline bundle file to a system with access to an image registry available to your Kubernetes/OpenShift cluster&lt;/li&gt;
+&lt;li&gt;Expand the bundle file by running &lt;code&gt;tar xvfz &amp;lt;filename&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run the &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script and supply the &lt;code&gt;-p&lt;/code&gt; option as well as the path to the internal registry with the &lt;code&gt;-r&lt;/code&gt; option&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The script will then perform the following steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Load the required container images into the local system&lt;/li&gt;
+&lt;li&gt;Tag the images according to the user supplied registry information&lt;/li&gt;
+&lt;li&gt;Push the newly tagged images to the registry&lt;/li&gt;
+&lt;li&gt;Modify the Helm charts or Operator configuration to refer to the newly tagged/pushed images&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An example of preparing the bundle for installation (192.168.75.40:5000 refers to a image registry accessible to Kubernetes/OpenShift):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /tmp]# tar xvfz dell-csi-operator-bundle.tar.gz
+dell-csi-operator-bundle/
+dell-csi-operator-bundle/samples/
+...
+&amp;lt;listing of files included in bundle&amp;gt;
+...
+dell-csi-operator-bundle/LICENSE
+dell-csi-operator-bundle/README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[user@anothersystem /tmp]# cd dell-csi-operator-bundle
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[user@anothersystem /tmp/dell-csi-operator-bundle]# scripts/csi-offline-bundle.sh -p -r 192.168.75.40:5000/operator
+Preparing a offline bundle for installation
+
+*
+* Loading docker images
+
+
+*
+* Tagging and pushing images
+
+   dellemc/csi-isilon:v1.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-isilon:v1.2.0
+   dellemc/csi-isilon:v1.3.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-isilon:v1.3.0.000R
+   dellemc/csipowermax-reverseproxy:v1.0.0.000R -&amp;gt; 192.168.75.40:5000/operator/csipowermax-reverseproxy:v1.0.0.000R
+   dellemc/csi-powermax:v1.2.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powermax:v1.2.0.000R
+   dellemc/csi-powermax:v1.4.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powermax:v1.4.0.000R
+   dellemc/csi-powerstore:v1.1.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powerstore:v1.1.0.000R
+   dellemc/csi-unity:v1.3.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-unity:v1.3.0.000R
+   dellemc/csi-vxflexos:v1.1.5.000R -&amp;gt; 192.168.75.40:5000/operator/csi-vxflexos:v1.1.5.000R
+   dellemc/csi-vxflexos:v1.2.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-vxflexos:v1.2.0.000R
+   dellemc/dell-csi-operator:v1.1.0.000R -&amp;gt; 192.168.75.40:5000/operator/dell-csi-operator:v1.1.0.000R
+   quay.io/k8scsi/csi-attacher:v2.0.0 -&amp;gt; 192.168.75.40:5000/operator/csi-attacher:v2.0.0
+   quay.io/k8scsi/csi-attacher:v2.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-attacher:v2.2.0
+   quay.io/k8scsi/csi-node-driver-registrar:v1.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-node-driver-registrar:v1.2.0
+   quay.io/k8scsi/csi-provisioner:v1.4.0 -&amp;gt; 192.168.75.40:5000/operator/csi-provisioner:v1.4.0
+   quay.io/k8scsi/csi-provisioner:v1.6.0 -&amp;gt; 192.168.75.40:5000/operator/csi-provisioner:v1.6.0
+   quay.io/k8scsi/csi-resizer:v0.5.0 -&amp;gt; 192.168.75.40:5000/operator/csi-resizer:v0.5.0
+   quay.io/k8scsi/csi-snapshotter:v2.1.1 -&amp;gt; 192.168.75.40:5000/operator/csi-snapshotter:v2.1.1
+
+*
+* Preparing operator files within /tmp/dell-csi-operator-bundle
+
+   changing: dellemc/csi-isilon:v1.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-isilon:v1.2.0
+   changing: dellemc/csi-isilon:v1.3.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-isilon:v1.3.0.000R
+   changing: dellemc/csipowermax-reverseproxy:v1.0.0.000R -&amp;gt; 192.168.75.40:5000/operator/csipowermax-reverseproxy:v1.0.0.000R
+   changing: dellemc/csi-powermax:v1.2.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powermax:v1.2.0.000R
+   changing: dellemc/csi-powermax:v1.4.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powermax:v1.4.0.000R
+   changing: dellemc/csi-powerstore:v1.1.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powerstore:v1.1.0.000R
+   changing: dellemc/csi-unity:v1.3.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-unity:v1.3.0.000R
+   changing: dellemc/csi-vxflexos:v1.1.5.000R -&amp;gt; 192.168.75.40:5000/operator/csi-vxflexos:v1.1.5.000R
+   changing: dellemc/csi-vxflexos:v1.2.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-vxflexos:v1.2.0.000R
+   changing: dellemc/dell-csi-operator:v1.1.0.000R -&amp;gt; 192.168.75.40:5000/operator/dell-csi-operator:v1.1.0.000R
+   changing: quay.io/k8scsi/csi-attacher:v2.0.0 -&amp;gt; 192.168.75.40:5000/operator/csi-attacher:v2.0.0
+   changing: quay.io/k8scsi/csi-attacher:v2.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-attacher:v2.2.0
+   changing: quay.io/k8scsi/csi-node-driver-registrar:v1.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-node-driver-registrar:v1.2.0
+   changing: quay.io/k8scsi/csi-provisioner:v1.4.0 -&amp;gt; 192.168.75.40:5000/operator/csi-provisioner:v1.4.0
+   changing: quay.io/k8scsi/csi-provisioner:v1.6.0 -&amp;gt; 192.168.75.40:5000/operator/csi-provisioner:v1.6.0
+   changing: quay.io/k8scsi/csi-resizer:v0.5.0 -&amp;gt; 192.168.75.40:5000/operator/csi-resizer:v0.5.0
+   changing: quay.io/k8scsi/csi-snapshotter:v2.1.1 -&amp;gt; 192.168.75.40:5000/operator/csi-snapshotter:v2.1.1
+
+*
+* Complete
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;perform-either-a-helm-installation-or-operator-installation&#34;&gt;Perform either a Helm installation or Operator installation&lt;/h3&gt;
+&lt;p&gt;Now that the required images have been made available and the Helm Charts/Operator configuration updated, installation can proceed by following the usual installation procedure as documented.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Testing Drivers</title>
+      <link>https://dell.github.io/storage-plugin-docs/v1/installation/test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/storage-plugin-docs/v1/installation/test/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
