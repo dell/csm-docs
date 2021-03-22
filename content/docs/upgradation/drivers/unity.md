@@ -8,7 +8,10 @@ Description: Upgrade Unity CSI driver
 ---
 
 You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.
-### Using Helm:
+
+**Note:** While upgrading the driver via helm or operator, controllerCount variable in myvalues.yaml must be at most one less than the number of worker nodes.
+
+### Using Helm
 
 Preparing myvalues.yaml is the same as explained in install section.
 
@@ -27,10 +30,7 @@ To upgrade the driver from csi-unity v1.4 to csi-unity 1.5 (across K8S 1.18, K8S
 
 **Note:** User has to re-create existing custom-storage classes (if any) according to latest (v1.5) format.
 
-**Note:** While upgrading the driver, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
-
-
-### Using Operator:
+### Using Operator
    To upgrade the driver from csi-unity v1.4 to csi-unity v1.5 (OpenShift 4.6) :   
 
 1. Clone operator version 1.3.0
