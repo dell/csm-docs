@@ -90,7 +90,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b2272722ef344d45915906dbe5e4a390.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -122,7 +122,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b2272722ef344d45915906dbe5e4a390.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1123,8 +1123,13 @@ List of CRDs which are installed in API Group <code>storage.dell.com</code></p>
 <h3 id="pre-requisites-for-upstream-kubernetes-clusters">Pre-requisites for upstream Kubernetes Clusters</h3>
 <p>On upstream Kubernetes clusters, make sure to install</p>
 <ul>
-<li>Beta VolumeSnapshot CRDs (can be installed using the Operator installation script)</li>
-<li>External Volume Snapshot Controller</li>
+<li>VolumeSnapshot CRDs
+<ul>
+<li>On clusters running v1.20, make sure to install v1 VolumeSnapshot CRDs</li>
+<li>On clusters running v1.18 &amp; v1.19, make sure to install v1beta1 VolumeSnapshot CRDs</li>
+</ul>
+</li>
+<li>External Volume Snapshot Controller with correct version</li>
 </ul>
 <h3 id="pre-requisites-for-red-hat-openshift-clusters">Pre-requisites for Red Hat OpenShift Clusters</h3>
 <h4 id="iscsi">iSCSI</h4>

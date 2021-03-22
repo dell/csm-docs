@@ -223,8 +223,13 @@ List of CRDs which are installed in API Group &lt;code&gt;storage.dell.com&lt;/c
 &lt;h3 id=&#34;pre-requisites-for-upstream-kubernetes-clusters&#34;&gt;Pre-requisites for upstream Kubernetes Clusters&lt;/h3&gt;
 &lt;p&gt;On upstream Kubernetes clusters, make sure to install&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Beta VolumeSnapshot CRDs (can be installed using the Operator installation script)&lt;/li&gt;
-&lt;li&gt;External Volume Snapshot Controller&lt;/li&gt;
+&lt;li&gt;VolumeSnapshot CRDs
+&lt;ul&gt;
+&lt;li&gt;On clusters running v1.20, make sure to install v1 VolumeSnapshot CRDs&lt;/li&gt;
+&lt;li&gt;On clusters running v1.18 &amp;amp; v1.19, make sure to install v1beta1 VolumeSnapshot CRDs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;External Volume Snapshot Controller with correct version&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;pre-requisites-for-red-hat-openshift-clusters&#34;&gt;Pre-requisites for Red Hat OpenShift Clusters&lt;/h3&gt;
 &lt;h4 id=&#34;iscsi&#34;&gt;iSCSI&lt;/h4&gt;
