@@ -80,8 +80,10 @@ For installation of the supported drivers, a `CustomResource` has to be created 
 
 ### Pre-requisites for upstream Kubernetes Clusters
 On upstream Kubernetes clusters, make sure to install
-* Beta VolumeSnapshot CRDs (can be installed using the Operator installation script)
-* External Volume Snapshot Controller
+* VolumeSnapshot CRDs
+  * On clusters running v1.20, make sure to install v1 VolumeSnapshot CRDs
+  * On clusters running v1.18 & v1.19, make sure to install v1beta1 VolumeSnapshot CRDs
+* External Volume Snapshot Controller with correct version
 
 ### Pre-requisites for Red Hat OpenShift Clusters
 #### iSCSI
