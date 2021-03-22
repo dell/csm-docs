@@ -22,14 +22,14 @@
       <description>
         
         
-        &lt;p&gt;If you are upgrading the Dell CSI Operator from v1.2.0 to v1.3.0, then follow the instructions below. If you are trying to upgrade the Operator from an older version, please refer the instructions [here](#Upgrade Operator from version older than v1.2.0 to v1.3.0)&lt;/p&gt;
+        &lt;p&gt;If you are upgrading the Dell CSI Operator from v1.1.0 or v1.2.0 to v1.3.0, then follow the instructions below. If you are trying to upgrade the Operator from an older version, please refer the instructions &lt;a href=&#34;#upgrade-operator-from-version-older-than-v110-to-v130&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;using-installation-script&#34;&gt;Using Installation Script&lt;/h3&gt;
 &lt;p&gt;Run the following command to upgrade the operator from v1.2.0 release&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ bash scripts/install.sh --upgrade
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;using-olm&#34;&gt;Using OLM&lt;/h3&gt;
 &lt;p&gt;The upgrade of the Dell CSI Operator is done via Operator Lifecycle Manager.
 If the &lt;code&gt;InstallPlan&lt;/code&gt; for the Operator subscription is set to &lt;code&gt;Automatic&lt;/code&gt;, the operator will be automatically upgraded to the new version. If the &lt;code&gt;InstallPlan&lt;/code&gt; is set to &lt;code&gt;Manual&lt;/code&gt;, then a Cluster Administrator would need to approve the upgrade.&lt;/p&gt;
-&lt;h3 id=&#34;upgrade-operator-from-version-older-than-v120-to-v130&#34;&gt;Upgrade Operator from version older than v1.2.0 to v1.3.0&lt;/h3&gt;
+&lt;h3 id=&#34;upgrade-operator-from-version-older-than-v110-to-v130&#34;&gt;Upgrade Operator from version older than v1.1.0 to v1.3.0&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Uninstall the old version of the Operator&lt;/li&gt;
 &lt;li&gt;If required, upgrade your cluster to a supported version&lt;/li&gt;
@@ -251,7 +251,8 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
         
         
         &lt;p&gt;You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;h3 id=&#34;using-helm&#34;&gt;Using Helm:&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm or operator, controllerCount variable in myvalues.yaml must be at most one less than the number of worker nodes.&lt;/p&gt;
+&lt;h3 id=&#34;using-helm&#34;&gt;Using Helm&lt;/h3&gt;
 &lt;p&gt;Preparing myvalues.yaml is the same as explained in install section.&lt;/p&gt;
 &lt;p&gt;To upgrade the driver from csi-unity v1.4 to csi-unity 1.5 (across K8S 1.18, K8S 1.19, K8S 1.20).&lt;/p&gt;
 &lt;ol&gt;
@@ -280,8 +281,7 @@ csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize sett
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; User has to re-create existing custom-storage classes (if any) according to latest (v1.5) format.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
-&lt;h3 id=&#34;using-operator&#34;&gt;Using Operator:&lt;/h3&gt;
+&lt;h3 id=&#34;using-operator&#34;&gt;Using Operator&lt;/h3&gt;
 &lt;p&gt;To upgrade the driver from csi-unity v1.4 to csi-unity v1.5 (OpenShift 4.6) :&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;

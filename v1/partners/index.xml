@@ -60,23 +60,23 @@
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Type &amp;ldquo;Dell&amp;rdquo; in the OperatorHub section under Operators, to get the list of available Dell CSI Operators.
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/oc1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/v1_images/oc1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Check the version you want to install from the list, you can check the details by clicking it.
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/oc2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/v1_images/oc2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Once selected, click &amp;ldquo;Install&amp;rdquo; to proceed with installation process.
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/oc3.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/v1_images/oc3.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;You can verify the list of available operators by selecting &amp;ldquo;Installed Operator&amp;rdquo; section.
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/oc4.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/v1_images/oc4.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Select the Dell CSI Operator to get further description.
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/oc5.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/v1_images/oc5.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;install-csi-drivers-via-operator&#34;&gt;Install CSI Drivers via Operator&lt;/h2&gt;
@@ -84,15 +84,15 @@
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Select the particular CSI driver which you want to install, as seen in step 5 above. In this example, CSI Unity is selected.
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/driver1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/v1_images/driver1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;After clicking &amp;ldquo;Create CSIUnity&amp;rdquo; option in above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the &lt;a href=&#34;../../installation/operator/#driver-install-via-dell-csi-operator&#34;&gt;driver install pages for the Dell CSI Operator&lt;/a&gt; for information on the parameters.
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/driver2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/v1_images/driver2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;You can check the driver installed and node and controller pods running in the Pods section under Workloads.
-&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/driver3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/v1_images/driver3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 

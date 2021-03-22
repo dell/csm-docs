@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade Unity CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/unity/" />
-<meta property="article:modified_time" content="2021-03-19T17:44:38+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-03-22T19:07:13+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Upgrade Unity CSI driver">
-<meta itemprop="dateModified" content="2021-03-19T17:44:38&#43;05:30" />
-<meta itemprop="wordCount" content="224">
+<meta itemprop="dateModified" content="2021-03-22T19:07:13&#43;05:30" />
+<meta itemprop="wordCount" content="228">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b2272722ef344d45915906dbe5e4a390.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b2272722ef344d45915906dbe5e4a390.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -900,8 +900,8 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#using-helm">Using Helm:</a></li>
-        <li><a href="#using-operator">Using Operator:</a></li>
+        <li><a href="#using-helm">Using Helm</a></li>
+        <li><a href="#using-operator">Using Operator</a></li>
       </ul>
     </li>
   </ul>
@@ -955,7 +955,8 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.</p>
-<h3 id="using-helm">Using Helm:</h3>
+<p><strong>Note:</strong> While upgrading the driver via helm or operator, controllerCount variable in myvalues.yaml must be at most one less than the number of worker nodes.</p>
+<h3 id="using-helm">Using Helm</h3>
 <p>Preparing myvalues.yaml is the same as explained in install section.</p>
 <p>To upgrade the driver from csi-unity v1.4 to csi-unity 1.5 (across K8S 1.18, K8S 1.19, K8S 1.20).</p>
 <ol>
@@ -984,8 +985,7 @@ csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize sett
 </li>
 </ol>
 <p><strong>Note:</strong> User has to re-create existing custom-storage classes (if any) according to latest (v1.5) format.</p>
-<p><strong>Note:</strong> While upgrading the driver, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
-<h3 id="using-operator">Using Operator:</h3>
+<h3 id="using-operator">Using Operator</h3>
 <p>To upgrade the driver from csi-unity v1.4 to csi-unity v1.5 (OpenShift 4.6) :</p>
 <ol>
 <li>
