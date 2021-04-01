@@ -84,6 +84,7 @@ It is required to configure mount propagation on your container runtime on all K
    ```
 2. Restart the docker service with `systemctl daemon-reload` and `systemctl restart docker` on all the nodes.
 
+*NOTE:* Some distribution, like Ubuntu, already has _MountFlags_ set by default.
 
 ### Volume Snapshot Requirements
 
@@ -182,7 +183,7 @@ The storage classes created as part of the installation have an annotation - "he
 *Upgrading from an older version of the driver*
 The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation "helm.sh/resource-policy": keep before performing an upgrade.
 
-*Note:* If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.
+*NOTE:* If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.
 
 **Steps to create storage class:**
 
@@ -207,4 +208,4 @@ allowedTopologies:
 kubectl create -f <path_to_storageclass_file>
 ```
 
-*Note:* Deleting a storage class has no impact on a running Pod with mounted PVCs. You won't be able to provision new PVCs until at least one storage class is newly created.
+*NOTE:* Deleting a storage class has no impact on a running Pod with mounted PVCs. You won't be able to provision new PVCs until at least one storage class is newly created.

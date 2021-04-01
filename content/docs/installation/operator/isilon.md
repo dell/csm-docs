@@ -25,28 +25,28 @@ User can query for csi-powerscale driver using the following command:
 2. Create *isilon-creds*
    Create a json file called isilon-creds.json with the following content:
      ```json
-       {
-   "isilonClusters": [
-   {
-   "clusterName": "cluster1",
-   "username": "user",
-   "password": "password",
-   "isiIP": "1.2.3.4",
-   "isDefaultCluster": true
-   },
-   {
-   "clusterName": "cluster2",
-   "username": "user",
-   "password": "password",
-   "isiIP": "1.2.3.5",
-   "isiPort": "8080",
-   "isiInsecure": true,
-   "isiPath": "/ifs/data/csi",
-    }
-      ]
-   }
+      {
+         "isilonClusters": [
+            {
+               "clusterName": "cluster1",
+               "username": "user",
+               "password": "password",
+               "isiIP": "1.2.3.4",
+               "isDefaultCluster": true
+            },
+            {
+               "clusterName": "cluster2",
+               "username": "user",
+               "password": "password",
+               "isiIP": "1.2.3.5",
+               "isiPort": "8080",
+               "isiInsecure": true,
+               "isiPath": "/ifs/data/csi"
+            }
+         ]
+      }
     ```
-   Replace the values for the given keys as per your environment. This username / password value need not be encoded. You can refer [here](../../helm/isilon/#Install CSI Driver for PowerScale) for more information about isilon secret parameters.
+   Replace the values for the given keys as per your environment. This username / password value need not be encoded. You can refer [here](../../helm/isilon/#install-csi-driver-for-powerscale) for more information about isilon secret parameters.
 
 3. Create isilon-certs-<n> secret
       Please refer [this section](../../helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets. 

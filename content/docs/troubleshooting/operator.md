@@ -8,7 +8,7 @@ description: Troubleshooting Dell CSI Operator
 Because of this, the status of the Custom Resource will change to "Failed" and the error captured in the "ErrorMessage" field in the status.  
 For e.g. - If the PowerMax driver was installed in the namespace test-powermax and has the name powermax, then run the command `kubectl get csipowermax/powermax -n test-powermax -o yaml` to get the Custom Resource details.  
 If there was an error while installing the driver, then you would see a status like this -
-  ```
+  ```yaml
   status:
     status:
       errorMessage: mandatory Env - X_CSI_K8S_CLUSTER_PREFIX not specified in user spec
