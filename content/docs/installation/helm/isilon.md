@@ -22,13 +22,13 @@ Before you install CSI Driver for PowerScale, verify the requirements that are m
 
 #### Requirements
 
-* Install Kubernetes or OpenShift  (see [supported versions](../../../dell-csi-driver/))
+* Install Kubernetes (see [supported versions](../../../dell-csi-driver/))
 * Configure Docker service
 * Install Helm v3
 * Install volume snapshot components
 * Deploy PowerScale driver using Helm
 
-**Note:** There is no feature gate that needs to be set explicitly for CSI drivers version 1.17 and later. All the required feature gates are either beta/GA.
+**NOTE:** There is no feature gate that needs to be set explicitly for CSI drivers version 1.17 and later. All the required feature gates are either beta/GA.
 
 ## Configure Docker service
 
@@ -47,6 +47,7 @@ The mount propagation in Docker must be configured on all Kubernetes nodes befor
     systemctl daemon-reload
     systemctl restart docker
     ```
+*NOTE:* Some distribution, like Ubuntu, already has _MountFlags_ set by default.
 
 ## Install volume snapshot components
 
@@ -70,7 +71,7 @@ The mount propagation in Docker must be configured on all Kubernetes nodes befor
 **Steps**
 
 1. Collect information from the PowerScale Systems like IP address,IsiPath, username and password. Make a note of the value for these parameters as they must be entered in the *secret.json*.
-2. Copy the helm/csi-isilon/values.yaml into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
+2. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
 3. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
    found in the  [`values.yaml`](https://github.com/dell/csi-powerscale/blob/master/helm/csi-isilon/values.yaml) file in this repository.
@@ -96,18 +97,18 @@ The mount propagation in Docker must be configured on all Kubernetes nodes befor
    | nodeSelector | Define nodeSelector for the controllers, if required | false | |
    | tolerations | Define tolerations for the controllers, if required | false | |
 
-   **Notes:**
+   **NOTES**
 
-   1. User should provide all boolean values with double quotes. This applicable only for my-isilon-settings.yaml. Example: "true"/"false"
-   2. ControllerCount parameter value should not exceed number of nodes in the kubernetes cluster. Otherwise some of the controller pods will be in "Pending" state till new nodes are available for scheduling. The installer will exit with a WARNING on the same.
-   3. Whenever certSecretCount parameter changes in myvalues.yaml user needs to reinstall the driver.
+   1. User should provide all boolean values with double quotes. This applicable only for *my-isilon-settings.yaml*. Example: "true"/"false"
+   2. ControllerCount parameter value should not exceed number of nodes in the Kubernetes cluster. Otherwise some of the controller pods will be in "Pending" state till new nodes are available for scheduling. The installer will exit with a WARNING on the same.
+   3. Whenever *certSecretCount* parameter changes in *myvalues.yaml* user needs to reinstall the driver.
    
 4. Create namespace
     Run `kubectl create namespace isilon` to create the *isilon* namespace. Specify the same namespace name while installing the driver. 
 
-    **Note:** CSI PowerScale also supports installation of driver in custom namespace.
+    **NOTE:** CSI PowerScale also supports installation of driver in custom namespace.
     
-5. Create a secret file for the OneFS credentials by editing the secret.json present under helm directory. This secret.json can be used for adding the credentials of one or more OneFS storage arrays.The following table lists driver configuration parameters for a single storage array.
+5. Create a secret file for the OneFS credentials by editing the *secret.json* present under helm directory. This *secret.json* can be used for adding the credentials of one or more OneFS storage arrays.The following table lists driver configuration parameters for a single storage array.
    
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -121,7 +122,7 @@ The mount propagation in Docker must be configured on all Kubernetes nodes befor
    | isiInsecure | "isiInsecure" specifies whether the PowerScale OneFS API server's certificate chain and host name should be verified. | false | false |
    | isiPath | The base path for the volumes to be created. Note: isiPath value provided in the storage class will take the highest precedence while creating PVC | true | - |
 
-   The username specified in secret.yaml must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:
+   The username specified in *secret.json* must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:
     ```
    ISI_PRIV_LOGIN_PAPI
    ISI_PRIV_NFS
@@ -130,10 +131,13 @@ The mount propagation in Docker must be configured on all Kubernetes nodes befor
    ISI_PRIV_IFS_RESTORE
    ISI_PRIV_NS_IFS_ACCESS
     ```
-   **Notes:**
 
-   1. If any key/value is present in both secret.json and my-isilon-settings.yaml , then the values provided secret.json will take precedence.
-   2. If any key/value is present in both my-isilon-settings.yaml/secret.json and storageClass, then the values provided in storageClass parameters will take precedence.
+    After editing the file, run the following command to create a secret called `isilon-creds`
+    `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json`
+
+   **NOTES:**
+   1. If any key/value is present in both *secret.json* and *my-isilon-settings.yaml*, then the values provided *secret.json* will take precedence.
+   2. If any key/value is present in both *my-isilon-settings.yaml/secret.json* and storageClass, then the values provided in storageClass parameters will take precedence.
    3. User has to validate the JSON syntax and array related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the JSON file.
    
 6. Install OneFS CA certificates by following the instructions from next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and empty secret should be created for the successful CSI Driver for Dell EMC Powerscale installation.
@@ -158,7 +162,7 @@ If the 'isiInsecure' parameter is set to false and a previous installation attem
 2. To create the certs secret, run `kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon`  
 3. Use the following command to replace the secret `kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -`
 
-**Notes:**
+**NOTES:**
 1. The OneFS IP can be with or without port , depends upon the configuration of OneFS API server.
 2. Above said commands is based on the namespace 'isilon'
 3. It is highly recommended that ca_cert.pem file(s) having the naming convention as ca_cert_number.pem (example: ca_cert_0, ca_cert_1), where this number starts from 0 and grows as number of OneFS arrays grows.
@@ -166,7 +170,7 @@ If the 'isiInsecure' parameter is set to false and a previous installation attem
 
 ### Dynamic update of array details via secret.json
 
-CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now user can link the single CSI Driver to multiple OneFS Clusters by updating secret.json. User can now update the isilon-creds secret by editing the secret.json and executing following command:
+CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now user can link the single CSI Driver to multiple OneFS Clusters by updating *secret.json*. User can now update the isilon-creds secret by editing the *secret.json* and executing following command:
 
 `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f -`
 &nbsp;
@@ -176,7 +180,7 @@ Storage Classes are an essential Kubernetes construct for Storage provisioning. 
 https://kubernetes.io/docs/concepts/storage/storage-classes/
 
 Starting from v1.5 of the driver, Storage Classes would no longer be created along with the installation of the driver.
-A wide set of annotated storage class manifests have been provided in the helm/samples/storageclass folder. Please use these samples to create new storage classes to provision storage.
+A wide set of annotated storage class manifests have been provided in the [helm/samples/storageclass folder](https://github.com/dell/csi-powerscale/tree/master/helm/samples/storageclass). Please use these samples to create new storage classes to provision storage.
 
 Starting in CSI PowerScale v1.5, `dell-csi-helm-installer` will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `helm/samples/storageclass` folder. Please use these samples to create new storage classes to provision storage.
 

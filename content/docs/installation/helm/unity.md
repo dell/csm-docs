@@ -25,11 +25,12 @@ Before you install CSI Driver for Unity, verify the requirements that are mentio
 
 ### Requirements
 
-* Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/))
+* Install Kubernetes (see [supported versions](../../../dell-csi-driver/))
 * Configure Docker service
 * Install Helm v3
 * To use FC protocol, host must be zoned with Unity array
-* To use iSCSI and NFS protocol, iSCSI initiator and NFS utility packages need to be installed
+* To use iSCSI protocol, iSCSI initiator utils packages needs to be installed
+* To use NFS protocol, NFS utility packages needs to be installed
 
 ## Configure Docker service
 
@@ -119,7 +120,7 @@ Procedure
 
    Example *myvalues.yaml*
    
-    ```
+    ```yaml
     csiDebug: "true"
     volumeNamePrefix : csivol
     snapNamePrefix: csi-snap
@@ -169,7 +170,7 @@ Procedure
     | isDefaultArray | An array having isDefaultArray=true is for backward compatibility. This parameter should occur once in the list. | false | false |
     
     Example: secret.json
-    ```json5
+    ```json
        {
          "storageArrayList": [
            {

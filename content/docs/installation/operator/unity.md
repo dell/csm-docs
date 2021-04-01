@@ -63,7 +63,7 @@ Please refer detailed documentation on how to create this secret [here](../../he
 
 If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml
 
-```
+```yaml
   apiVersion: v1
   kind: Secret
   metadata:

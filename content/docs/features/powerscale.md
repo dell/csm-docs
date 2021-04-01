@@ -424,19 +424,4 @@ The worker nodes in UCP backed clusters may run any of the OSs which we support 
 
 When allowedNetworks is specified for using custom networks to handle NFS traffic, and a user already
 has workloads scheduled, there is a possibility that it might lead to backwards compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.
-Also, previous workload will still be using default network and not custom networks, for previous workloads
-to use custom networks recreation of pods required.
-
-## Node IP ConfigMap
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: nodeip-cfg
-  namespace: isilon
-data:
-  entrypoint.sh.erb: |
-    #!/bin/sh
-    export X_CSI_NODE_IP=<%= %x@ip -4 addr show dev <custom_interface_name> | grep inet@[/inet\s+(\d+(\.\d+){3})/,1] %>
-    exec "/csi-isilon"
-```
+Also, previous workload will still be using default network and not custom networks, for previous workloads to use custom networks recreation of pods required.

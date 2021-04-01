@@ -60,7 +60,7 @@ It is required to configure mount propagation on your container runtime on all K
    ```
 2. Restart the docker service with `systemctl daemon-reload` and `systemctl restart docker` on all the nodes.
 
-*Note:* Some distribution, like Ubuntu, already has _MountFlags_ set by default.
+*NOTE:* Some distribution, like Ubuntu, already has _MountFlags_ set by default.
 
 ### Install PowerFlex Storage Data Client
 
@@ -167,7 +167,7 @@ The common snapshot controller must be installed only once in the cluster irresp
 
     `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.json -o yaml --dry-run=client | kubectl replace -f -`
 
-    *Note:* 
+    *NOTE:* 
 
     - The user needs to validate the JSON syntax and array related key/values while replacing the vxflexos-creds secret.
     - If you update the secret, you will have to reinstall the driver.
@@ -198,7 +198,7 @@ The common snapshot controller must be installed only once in the cluster irresp
 
 11. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`
 
-*NOTE:* 
+*NOTE:*
 
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
 - This script runs `verify-csi-vxflexos.sh` script that is present in the same directory. It will validate MDM IP(s) in `vxflexos-config` secret and creates a new field consumed by init container and sdc-monitor container
