@@ -124,20 +124,20 @@ It should be set separately in the controller and node sections if you want sepa
 Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet  
 
 Here is a sample specification annotated with comments to explain each field
-```
+```yaml
 apiVersion: storage.dell.com/v1
-kind: CSIPowerMax <- Type of the driver
+kind: CSIPowerMax          # Type of the driver
 metadata:
-  name: test-powermax <- Name of the driver
-  namespace: test-powermax <- Namespace where driver is installed
+  name: test-powermax      # Name of the driver
+  namespace: test-powermax # Namespace where driver is installed
 spec:
   driver:
     # Used to specify configuration version
-    configVersion: v3 <- Refer the table containing the full list of supported drivers to find the appropriate config version 
+    configVersion: v3      # Refer the table containing the full list of supported drivers to find the appropriate config version
     replicas: 1
-    forceUpdate: false <- Set to true in case you want to force an update of driver status
-    common: <- All common specification
-      image: "dellemc/csi-powermax:v1.4.0.000R" <- driver image for a particular release
+    forceUpdate: false     # Set to true in case you want to force an update of driver status
+    common:                # All common specification
+      image: "dellemc/csi-powermax:v1.4.0.000R"   #driver image for a particular release
       imagePullPolicy: IfNotPresent
       envs:
         - name: X_CSI_POWERMAX_ENDPOINT

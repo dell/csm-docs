@@ -221,7 +221,7 @@ spec:
 The CSI Unity driver supports Raw Block Volumes from v1.4 onwards.
 	Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. An example configuration is outlined here:
 	
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -238,7 +238,7 @@ spec:
 	  
 ```
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -457,8 +457,8 @@ The worker nodes in UCP backed clusters may run any of the OSs which we support 
 
 The CSI Driver for Dell EMC Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
 
- - open-iscsi ***open-iscsi is required in order to make use of iSCSI protocol for provisioning**
- - nfs-utils ***nfs-utils is required in order to make use of NFS protocol for provisioning**
- - multipath-tools ***multipath-tools is required in order to make use of FC and iSCSI protocols for provisioning***
+ - open-iscsi **open-iscsi is required in order to make use of iSCSI protocol for provisioning**
+ - nfs-utils **nfs-utils is required in order to make use of NFS protocol for provisioning**
+ - multipath-tools **multipath-tools is required in order to make use of FC and iSCSI protocols for provisioning**
 
-  After installing open-iscsi, ensure "iscsi" and "iscsid" services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are must for provisioning with iSCSI protocol to work.
+  After installing open-iscsi, ensure "iscsi" and "iscsid" services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with iSCSI protocol to work.

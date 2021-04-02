@@ -67,8 +67,8 @@ Test the deployment workflow of a simple pod on PowerScale storage.
     * Notice that this VolumeSnapshot class has a reference to a snapshotClassName:isilon-snapclass. The CSI Driver for PowerScale installation creates this class 
       as its default snapshot class. 
     * You can see its definition using `kubectl get volumesnapshotclasses isilon-snapclass -o yaml`.
-    * The IsiPath of default isilon-snapclass is /ifs/data/csi. If user wants different path, she has to create custom volumesnapshot class with required IsiPath in parameters section.
-    * Sample volumesnapshotclass file is present under helm/samples/volumesnapshotclass
+    * The value of IsiPath in default VolumeSnapshotClass is taken from values.yaml. If user wants different path, she has to create custom volumesnapshot class with required IsiPath in parameters section.
+    * Sample VolumeSnapshotClass file is present under helm/samples/volumesnapshotclass
 
 5. **Create Volume from Snapshot**
 

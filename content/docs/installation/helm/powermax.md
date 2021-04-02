@@ -95,6 +95,8 @@ You must configure mount propagation on your container runtime on all Kubernetes
 2. Restart the docker service with `systemctl daemon-reload` and `systemctl restart docker` on all the nodes.
 2. Restart the docker service with systemctl daemon-reload and systemctl restart docker on all the nodes.
 
+*NOTE:* Some distribution, like Ubuntu, already has _MountFlags_ set by default.
+
 ### Linux multipathing requirements
 
 CSI Driver for Dell EMC PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.

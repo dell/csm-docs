@@ -33,7 +33,7 @@ driver: csi-powermax.dellemc.com
 
 ### Creating Volume Snapshots
 The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs:
-```
+```yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -48,7 +48,7 @@ spec:
 After the VolumeSnapshot has been successfully created by the CSI PowerMax driver, a VolumeSnapshotContent object is automatically created. When the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.
 
 The following is the relevant section of VolumeSnapshot object status:
-```
+```yaml
 status:
   boundVolumeSnapshotContentName: snapcontent-5a8334d2-eb40-4917-83a2-98f238c4bda
   creationTime: "2020-07-16T08:42:12Z"
@@ -58,7 +58,7 @@ status:
 ### Creating PVCs with VolumeSnapshots as Source
 
 The following is a sample manifest for creating a PVC with a VolumeSnapshot as a source:
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -80,7 +80,7 @@ spec:
 ### Creating PVCs with PVCs as source
 
 This is a sample manifest for creating a PVC with another PVC as a source:
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -167,7 +167,7 @@ If you are creating more storage classes, ensure that this attribute is set to `
 
 This is a sample manifest for a storage class which allows for Volume Expansion.
 
-```
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -186,7 +186,7 @@ parameters:
 
 To resize a PVC, edit the existing PVC spec and set `spec.resources.requests.storage` to the intended size. For example, if you have a PVC - pmax-pvc-demo of size 5 Gi, then you can resize it to 10 Gi by updating the PVC.
 
-```
+```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -209,7 +209,7 @@ Starting in v1.4, CSI PowerMax driver supports raw block volumes.
 
 Raw Block volumes are created using the volumeDevices list in the Pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. An example configuration is outlined here:
 
-```
+```yaml
 kind: StatefulSet
 apiVersion: apps/v1
 metadata:
@@ -268,7 +268,7 @@ The certificate and key are provided to the proxy via a Kubernetes TLS secret (i
 
 Here is an example to generate a private key and use that to sign an SSL certificate using the openssl tool:
 
-```
+```bash
 openssl genrsa -out tls.key 2048
 openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
 kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
@@ -326,13 +326,13 @@ If you want to apply `nodeSelectors` and `tolerations` for the controller Pods, 
 
 Here are some examples:   
 * To schedule controller Pods to worker nodes only (Default):
-```
+```yaml
 controller:
   nodeSelector:
   tolerations:
 ```  
 * Set the following values for controller Pods to tolerate the taint `NoSchedule` on master nodes:
-```
+```yaml
 controller:
   nodeSelector:
   tolerations:
@@ -341,7 +341,7 @@ controller:
      effect: "NoSchedule"
 ```  
 * Set the following values for controller pods to be only scheduled on nodes labelled as `master` (*node-role.kubernetes.io/master*):
-```  
+```yaml
 controller:
   nodeSelector:
      node-role.kubernetes.io/master: ""
@@ -354,7 +354,7 @@ controller:
 If you want to apply `nodeSelectors` and `tolerations` for the node Pods, edit the  `node` section in the `values` file.  
 The `values` file already includes a set of default `tolerations` and you can add and remove tolerations to this list
 
-```  
+```yaml
 # "node" allows to configure node specific parameters
 node:
   # "node.nodeSelector" defines what nodes would be selected for Pods of node daemonset
@@ -398,7 +398,7 @@ To use the Topology feature, the storage classes must be modified as follows:
 * _allowedTopologies_ should be set to one or more topology keys described in the previous section
 
 For example, a PVC created using the following storage class will **always** be scheduled on nodes which have FC connectivity to the PowerMax array `000000000001`
-```
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
