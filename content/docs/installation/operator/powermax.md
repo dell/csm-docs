@@ -110,7 +110,7 @@ Use a tool such as `openssl` to generate this secret using the example below:
 **certSecret**: Secret name which holds the CA certificates which was used to sign Unisphere SSL certificates. Mandatory if skipCertificateValidation is set to `false`
 
 Here is a sample manifest with each field annotated. A copy of this manifest is provided in the `samples` folder
-```
+```yaml
 apiVersion: storage.dell.com/v1
 kind: CSIPowerMaxRevProxy
 metadata:

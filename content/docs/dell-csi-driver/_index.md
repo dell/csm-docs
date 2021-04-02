@@ -24,9 +24,9 @@ The following are the drivers provided for the Dell storage family:
 ### Supported Platforms
 {{<table "table table-striped table-bordered table-sm">}}
 
-| Features      |     PowerMax     | PowerFlex/VxFlex OS |&emsp;&emsp; Unity| PowerScale/Isilon |    PowerStore    |
+| |     PowerMax     | PowerFlex/VxFlex OS |&emsp;&emsp; Unity| PowerScale/Isilon |    PowerStore    |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Storage Array |5978.479.479, 5978.669.669|    3.5.x    | OE 5.0.2, 5.0.3, 5.0.4, 5.0.5, 5.0.6 | OneFS 8.1, 8.2, 9.0, 9.1 | 1.0.x |
+| Storage Array |5978.479.479, 5978.669.669, Unisphere 9.1, 9.2|    3.5.x    | OE 5.0.2, 5.0.3, 5.0.4, 5.0.5, 5.0.6 | OneFS 8.1, 8.2, 9.0, 9.1 | 1.0.x |
 | Kubernetes    | 1.18, 1.19, 1.20 |  1.18, 1.19, 1.20   | 1.18, 1.19, 1.20 |  1.18, 1.19, 1.20 | 1.18, 1.19, 1.20 |
 | RHEL          |   7.8, 7.9, 8.3  |    7.8, 7.9, 8.3    |   7.8, 7.9, 8.3  |   7.8, 7.9, 8.3   |   7.8, 7.9, 8.3  |
 | Ubuntu        |       20.04      |        20.04        |       20.04      |       20.04       |       20.04      |

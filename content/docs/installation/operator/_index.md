@@ -59,9 +59,9 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 #### Steps
 
 1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator)
-2. Run 'bash scripts/install.sh' to install the operator
+2. Run `bash scripts/install.sh` to install the operator
 {{< imgproc non-olm-1.jpg Resize "2500x" >}}{{< /imgproc >}}
-3. Run the command 'oc get pods' to validate the install completed, should be able to see the operator related pod on default namespace
+3. Run the command `oc get pods` to validate the install completed, should be able to see the operator related pod on default namespace
 {{< imgproc non-olm-2.jpg Resize "3500x800" >}}{{< /imgproc >}}
 
 ## Custom Resource Definitions
@@ -90,7 +90,7 @@ On upstream Kubernetes clusters, make sure to install
 If you are installing a CSI driver which is going to use iSCSI as the transport protocol, please follow the following instructions.  
 In Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
 
-```
+```yaml
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
@@ -133,7 +133,7 @@ blacklist {
 }' | base64 -w0`
 
 Use the base64 encoded string output in the following `MachineConfig` yaml file (under source section)
-```
+```yaml
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:

@@ -36,5 +36,5 @@ For example - To uninstall the driver installed via the operator, delete the Cus
 
 ```
 # Replace driver-name and driver-namespace with their respective values
-$ kubectl delete <driver-name> -n <driver-namespace>
+kubectl delete <driver-name> -n <driver-namespace>
 ```
