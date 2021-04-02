@@ -251,8 +251,8 @@ kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
         
         
         &lt;p&gt;You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm or operator, controllerCount variable in myvalues.yaml must be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;h3 id=&#34;using-helm&#34;&gt;Using Helm&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;p&gt;Preparing myvalues.yaml is the same as explained in install section.&lt;/p&gt;
 &lt;p&gt;To upgrade the driver from csi-unity v1.4 to csi-unity 1.5 (across K8S 1.18, K8S 1.19, K8S 1.20).&lt;/p&gt;
 &lt;ol&gt;
@@ -282,6 +282,7 @@ csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize sett
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; User has to re-create existing custom-storage classes (if any) according to latest (v1.5) format.&lt;/p&gt;
 &lt;h3 id=&#34;using-operator&#34;&gt;Using Operator&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;p&gt;To upgrade the driver from csi-unity v1.4 to csi-unity v1.5 (OpenShift 4.6) :&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;

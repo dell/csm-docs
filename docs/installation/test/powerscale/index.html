@@ -12,11 +12,11 @@
 <meta property="og:description" content="Tests to validate PowerScale CSI Driver installation" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/test/powerscale/" />
-<meta property="article:modified_time" content="2021-03-18T19:10:04+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Test PowerScale CSI Driver">
 <meta itemprop="description" content="Tests to validate PowerScale CSI Driver installation">
-<meta itemprop="dateModified" content="2021-03-18T19:10:04&#43;05:30" />
-<meta itemprop="wordCount" content="612">
+<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
+<meta itemprop="wordCount" content="616">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -995,8 +995,8 @@ Note: Verify PowerScale system for host to be part of clients/rootclients field 
 <li>Notice that this VolumeSnapshot class has a reference to a snapshotClassName:isilon-snapclass. The CSI Driver for PowerScale installation creates this class
 as its default snapshot class.</li>
 <li>You can see its definition using <code>kubectl get volumesnapshotclasses isilon-snapclass -o yaml</code>.</li>
-<li>The IsiPath of default isilon-snapclass is /ifs/data/csi. If user wants different path, she has to create custom volumesnapshot class with required IsiPath in parameters section.</li>
-<li>Sample volumesnapshotclass file is present under helm/samples/volumesnapshotclass</li>
+<li>The value of IsiPath in default VolumeSnapshotClass is taken from values.yaml. If user wants different path, she has to create custom volumesnapshot class with required IsiPath in parameters section.</li>
+<li>Sample VolumeSnapshotClass file is present under helm/samples/volumesnapshotclass</li>
 </ul>
 </li>
 <li>

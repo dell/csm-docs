@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting Dell CSI Operator" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/troubleshooting/operator/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Dell CSI Operator">
 <meta itemprop="description" content="Troubleshooting Dell CSI Operator">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="395">
+<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
+<meta itemprop="wordCount" content="382">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -950,11 +950,11 @@
 Because of this, the status of the Custom Resource will change to &ldquo;Failed&rdquo; and the error captured in the &ldquo;ErrorMessage&rdquo; field in the status.<br>
 For e.g. - If the PowerMax driver was installed in the namespace test-powermax and has the name powermax, then run the command <code>kubectl get csipowermax/powermax -n test-powermax -o yaml</code> to get the Custom Resource details.<br>
 If there was an error while installing the driver, then you would see a status like this -</p>
-<pre><code>status:
-  status:
-    errorMessage: mandatory Env - X_CSI_K8S_CLUSTER_PREFIX not specified in user spec
-    state: Failed
-</code></pre><p>The state of the Custom Resource can also change to <code>Failed</code> because of any other prohibited updates or any failure while installing the driver. In order to recover from this failure,
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">status</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">status</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">errorMessage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>mandatory<span style="color:#f8f8f8;text-decoration:underline"> </span>Env<span style="color:#f8f8f8;text-decoration:underline"> </span>- X_CSI_K8S_CLUSTER_PREFIX<span style="color:#f8f8f8;text-decoration:underline"> </span>not<span style="color:#f8f8f8;text-decoration:underline"> </span>specified<span style="color:#f8f8f8;text-decoration:underline"> </span>in<span style="color:#f8f8f8;text-decoration:underline"> </span>user<span style="color:#f8f8f8;text-decoration:underline"> </span>spec<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">state</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Failed<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>The state of the Custom Resource can also change to <code>Failed</code> because of any other prohibited updates or any failure while installing the driver. In order to recover from this failure,
 fix the error in the manifest and update/patch the Custom Resource</p>
 </li>
 <li>

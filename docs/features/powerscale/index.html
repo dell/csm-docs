@@ -12,11 +12,11 @@
 <meta property="og:description" content="Code features for PowerScale Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/features/powerscale/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Code features for PowerScale Driver">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="1902">
+<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
+<meta itemprop="wordCount" content="1895">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -918,7 +918,6 @@
     </li>
     <li><a href="#support-for-docker-ee">Support for Docker EE</a></li>
     <li><a href="#support-custom-networks-for-nfs-io-traffic">Support custom networks for NFS I/O traffic</a></li>
-    <li><a href="#node-ip-configmap">Node IP ConfigMap</a></li>
   </ul>
 </nav>
 
@@ -1304,20 +1303,8 @@ In case of a failure, one of the standby pods becomes active and takes the posit
 <h2 id="support-custom-networks-for-nfs-io-traffic">Support custom networks for NFS I/O traffic</h2>
 <p>When allowedNetworks is specified for using custom networks to handle NFS traffic, and a user already
 has workloads scheduled, there is a possibility that it might lead to backwards compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.
-Also, previous workload will still be using default network and not custom networks, for previous workloads
-to use custom networks recreation of pods required.</p>
-<h2 id="node-ip-configmap">Node IP ConfigMap</h2>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>ConfigMap<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nodeip-cfg<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>isilon<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">entrypoint.sh.erb</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">|
-</span><span style="color:#8f5902;font-style:italic">    #!/bin/sh</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>export<span style="color:#f8f8f8;text-decoration:underline"> </span>X_CSI_NODE_IP=&lt;%=<span style="color:#f8f8f8;text-decoration:underline"> </span>%x@ip<span style="color:#f8f8f8;text-decoration:underline"> </span>-<span style="color:#0000cf;font-weight:bold">4</span><span style="color:#f8f8f8;text-decoration:underline"> </span>addr<span style="color:#f8f8f8;text-decoration:underline"> </span>show<span style="color:#f8f8f8;text-decoration:underline"> </span>dev<span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;custom_interface_name&gt;<span style="color:#f8f8f8;text-decoration:underline"> </span>|<span style="color:#f8f8f8;text-decoration:underline"> </span>grep<span style="color:#f8f8f8;text-decoration:underline"> </span>inet@<span style="color:#000;font-weight:bold">[</span>/inet\s+(\d+(\.\d+){<span style="color:#0000cf;font-weight:bold">3</span>})/<span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline"> </span>%<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">    exec &#34;/csi-isilon&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div>
+Also, previous workload will still be using default network and not custom networks, for previous workloads to use custom networks recreation of pods required.</p>
+
 	
 	
 

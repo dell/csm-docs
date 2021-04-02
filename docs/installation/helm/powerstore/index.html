@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerstore/" />
-<meta property="article:modified_time" content="2021-03-18T16:24:42+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing PowerStore CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-03-18T16:24:42&#43;05:30" />
-<meta itemprop="wordCount" content="1876">
+<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
+<meta itemprop="wordCount" content="1887">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1057,6 +1057,7 @@ PowerStore.</p>
 </code></pre></div></li>
 <li>Restart the docker service with <code>systemctl daemon-reload</code> and <code>systemctl restart docker</code> on all the nodes.</li>
 </ol>
+<p><em>NOTE:</em> Some distribution, like Ubuntu, already has <em>MountFlags</em> set by default.</p>
 <h3 id="volume-snapshot-requirements">Volume Snapshot Requirements</h3>
 <h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
 <p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github.</p>
@@ -1240,7 +1241,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 The storage classes created as part of the installation have an annotation - &ldquo;helm.sh/resource-policy&rdquo;: keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.</p>
 <p><em>Upgrading from an older version of the driver</em>
 The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation &ldquo;helm.sh/resource-policy&rdquo;: keep before performing an upgrade.</p>
-<p><em>Note:</em> If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
+<p><em>NOTE:</em> If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
 <p><strong>Steps to create storage class:</strong></p>
 <p>There are samples storage class yaml files available under <code>helm/samples/storageclass</code>.  These can be copied and modified as needed.</p>
 <ol>
@@ -1262,7 +1263,7 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 <li>Create your storage class by using <code>kubectl</code>:</li>
 </ol>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f &lt;path_to_storageclass_file&gt;
-</code></pre></div><p><em>Note:</em> Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&rsquo;t be able to provision new PVCs until at least one storage class is newly created.</p>
+</code></pre></div><p><em>NOTE:</em> Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&rsquo;t be able to provision new PVCs until at least one storage class is newly created.</p>
 
 	
 	
