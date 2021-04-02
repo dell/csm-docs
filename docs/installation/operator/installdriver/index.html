@@ -16,15 +16,15 @@ Sample manifest files for each driver CustomResourceDefintion have been provided
  sample/powermax_v140_k8s_117.yaml* &lt;- To install CSI PowerMax driver v1.4.0 on a Kubernetes 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/operator/installdriver/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="">
 <meta itemprop="description" content="Installing CSI Driver via Operator CSI Drivers can be installed by creating a CustomResource object in your cluster.
 Sample manifest files for each driver CustomResourceDefintion have been provided in the samples folder to help with the installation of the drivers. These files follow the naming convention
 {driver name}_{driver version}_k8s_{k8 version}.yaml  Or
 {driver name}_{driver version}_ops_{OpenShift version}.yaml  For e.g.
  sample/powermax_v140_k8s_117.yaml* &lt;- To install CSI PowerMax driver v1.4.0 on a Kubernetes 1.">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="1638">
+<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
+<meta itemprop="wordCount" content="1584">
 
 
 
@@ -104,7 +104,7 @@ Sample manifest files for each driver CustomResourceDefintion have been provided
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -136,7 +136,7 @@ Sample manifest files for each driver CustomResourceDefintion have been provided
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1105,34 +1105,34 @@ It should be set separately in the controller and node sections if you want sepa
 <p><strong>nodeSelector</strong>
 Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet</p>
 <p>Here is a sample specification annotated with comments to explain each field</p>
-<pre><code>apiVersion: storage.dell.com/v1
-kind: CSIPowerMax &lt;- Type of the driver
-metadata:
-  name: test-powermax &lt;- Name of the driver
-  namespace: test-powermax &lt;- Namespace where driver is installed
-spec:
-  driver:
-    # Used to specify configuration version
-    configVersion: v3 &lt;- Refer the table containing the full list of supported drivers to find the appropriate config version 
-    replicas: 1
-    forceUpdate: false &lt;- Set to true in case you want to force an update of driver status
-    common: &lt;- All common specification
-      image: &quot;dellemc/csi-powermax:v1.4.0.000R&quot; &lt;- driver image for a particular release
-      imagePullPolicy: IfNotPresent
-      envs:
-        - name: X_CSI_POWERMAX_ENDPOINT
-          value: &quot;https://0.0.0.0:8443/&quot;
-        - name: X_CSI_K8S_CLUSTER_PREFIX
-          value: &quot;XYZ&quot;
-    storageClass:
-      - name: bronze
-        default: true
-        reclaimPolicy: Delete
-        parameters:
-          SYMID: &quot;000000000001&quot;
-          SRP: DEFAULT_SRP
-          ServiceLevel: Bronze
-</code></pre><p>You can set the field <em><strong>replicas</strong></em> to a higher number than <code>1</code> for the latest driver versions.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>storage.dell.com/v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>CSIPowerMax<span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#8f5902;font-style:italic"># Type of the driver</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>test-powermax<span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#8f5902;font-style:italic"># Name of the driver</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>test-powermax<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Namespace where driver is installed</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Used to specify configuration version</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v3<span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#8f5902;font-style:italic"># Refer the table containing the full list of supported drivers to find the appropriate config version</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">replicas</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">forceUpdate</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic"># Set to true in case you want to force an update of driver status</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">common</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">                </span><span style="color:#8f5902;font-style:italic"># All common specification</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;dellemc/csi-powermax:v1.4.0.000R&#34;</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#8f5902;font-style:italic">#driver image for a particular release</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">imagePullPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>IfNotPresent<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">envs</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>X_CSI_POWERMAX_ENDPOINT<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://0.0.0.0:8443/&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>X_CSI_K8S_CLUSTER_PREFIX<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;XYZ&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storageClass</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>bronze<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">default</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">reclaimPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Delete<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">parameters</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">SYMID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;000000000001&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">SRP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>DEFAULT_SRP<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">ServiceLevel</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Bronze<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>You can set the field <em><strong>replicas</strong></em> to a higher number than <code>1</code> for the latest driver versions.</p>
 <p>Note - The <code>image</code> field should point to the correct image tag for version of the driver you are installing.<br>
 For e.g. - If you wish to install v1.4 of the CSI PowerMax driver, use the image tag <code>dellemc/csi-powermax:v1.4.0.000R</code></p>
 <p>Note - The name of the Storage Class or the Volume Snapshot Class (which are created in the Kubernetes/OpenShift cluster) is created using the name of the driver and the name provided for these classes in the manifest. This is done in order to ensure that these names are unique if there are multiple drivers installed in the same cluster.<br>

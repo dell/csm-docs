@@ -68,7 +68,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Restart the docker service with &lt;code&gt;systemctl daemon-reload&lt;/code&gt; and &lt;code&gt;systemctl restart docker&lt;/code&gt; on all the nodes.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; Some distribution, like Ubuntu, already has &lt;em&gt;MountFlags&lt;/em&gt; set by default.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt; Some distribution, like Ubuntu, already has &lt;em&gt;MountFlags&lt;/em&gt; set by default.&lt;/p&gt;
 &lt;h3 id=&#34;install-powerflex-storage-data-client&#34;&gt;Install PowerFlex Storage Data Client&lt;/h3&gt;
 &lt;p&gt;The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run node portion of CSI driver.
 SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment,
@@ -215,7 +215,7 @@ Refer &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hub.d
 &lt;code&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.json&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Use the following command to replace or update the secret:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.json -o yaml --dry-run=client | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The user needs to validate the JSON syntax and array related key/values while replacing the vxflexos-creds secret.&lt;/li&gt;
 &lt;li&gt;If you update the secret, you will have to reinstall the driver.&lt;/li&gt;
@@ -455,6 +455,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You w
 &lt;li&gt;Restart the docker service with &lt;code&gt;systemctl daemon-reload&lt;/code&gt; and &lt;code&gt;systemctl restart docker&lt;/code&gt; on all the nodes.&lt;/li&gt;
 &lt;li&gt;Restart the docker service with systemctl daemon-reload and systemctl restart docker on all the nodes.&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt; Some distribution, like Ubuntu, already has &lt;em&gt;MountFlags&lt;/em&gt; set by default.&lt;/p&gt;
 &lt;h3 id=&#34;linux-multipathing-requirements&#34;&gt;Linux multipathing requirements&lt;/h3&gt;
 &lt;p&gt;CSI Driver for Dell EMC PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.&lt;/p&gt;
 &lt;p&gt;Set up Linux multipathing as follows:&lt;/p&gt;
@@ -724,13 +725,13 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 &lt;p&gt;Before you install CSI Driver for PowerScale, verify the requirements that are mentioned in this topic are installed and configured.&lt;/p&gt;
 &lt;h4 id=&#34;requirements&#34;&gt;Requirements&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;Install Kubernetes or OpenShift  (see &lt;a href=&#34;../../../dell-csi-driver/&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Install Kubernetes (see &lt;a href=&#34;../../../dell-csi-driver/&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;Configure Docker service&lt;/li&gt;
 &lt;li&gt;Install Helm v3&lt;/li&gt;
 &lt;li&gt;Install volume snapshot components&lt;/li&gt;
 &lt;li&gt;Deploy PowerScale driver using Helm&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There is no feature gate that needs to be set explicitly for CSI drivers version 1.17 and later. All the required feature gates are either beta/GA.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; There is no feature gate that needs to be set explicitly for CSI drivers version 1.17 and later. All the required feature gates are either beta/GA.&lt;/p&gt;
 &lt;h2 id=&#34;configure-docker-service&#34;&gt;Configure Docker service&lt;/h2&gt;
 &lt;p&gt;The mount propagation in Docker must be configured on all Kubernetes nodes before installing CSI Driver for PowerScale.&lt;/p&gt;
 &lt;h3 id=&#34;procedure&#34;&gt;Procedure&lt;/h3&gt;
@@ -745,6 +746,7 @@ MountFlags=shared
 systemctl restart docker
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt; Some distribution, like Ubuntu, already has &lt;em&gt;MountFlags&lt;/em&gt; set by default.&lt;/p&gt;
 &lt;h2 id=&#34;install-volume-snapshot-components&#34;&gt;Install volume snapshot components&lt;/h2&gt;
 &lt;h3 id=&#34;install-snapshot-crds&#34;&gt;Install Snapshot CRDs&lt;/h3&gt;
 &lt;ul&gt;
@@ -768,7 +770,7 @@ systemctl restart docker
 &lt;p&gt;Collect information from the PowerScale Systems like IP address,IsiPath, username and password. Make a note of the value for these parameters as they must be entered in the &lt;em&gt;secret.json&lt;/em&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Copy the helm/csi-isilon/values.yaml into a new location with name say &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, to customize settings for installation.&lt;/p&gt;
+&lt;p&gt;Copy &lt;em&gt;the helm/csi-isilon/values.yaml&lt;/em&gt; into a new location with name say &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, to customize settings for installation.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; to set the following parameters for your installation:
@@ -894,20 +896,20 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTES&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;User should provide all boolean values with double quotes. This applicable only for my-isilon-settings.yaml. Example: &amp;ldquo;true&amp;rdquo;/&amp;ldquo;false&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;ControllerCount parameter value should not exceed number of nodes in the kubernetes cluster. Otherwise some of the controller pods will be in &amp;ldquo;Pending&amp;rdquo; state till new nodes are available for scheduling. The installer will exit with a WARNING on the same.&lt;/li&gt;
-&lt;li&gt;Whenever certSecretCount parameter changes in myvalues.yaml user needs to reinstall the driver.&lt;/li&gt;
+&lt;li&gt;User should provide all boolean values with double quotes. This applicable only for &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;. Example: &amp;ldquo;true&amp;rdquo;/&amp;ldquo;false&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;ControllerCount parameter value should not exceed number of nodes in the Kubernetes cluster. Otherwise some of the controller pods will be in &amp;ldquo;Pending&amp;rdquo; state till new nodes are available for scheduling. The installer will exit with a WARNING on the same.&lt;/li&gt;
+&lt;li&gt;Whenever &lt;em&gt;certSecretCount&lt;/em&gt; parameter changes in &lt;em&gt;myvalues.yaml&lt;/em&gt; user needs to reinstall the driver.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create namespace
 Run &lt;code&gt;kubectl create namespace isilon&lt;/code&gt; to create the &lt;em&gt;isilon&lt;/em&gt; namespace. Specify the same namespace name while installing the driver.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSI PowerScale also supports installation of driver in custom namespace.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; CSI PowerScale also supports installation of driver in custom namespace.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Create a secret file for the OneFS credentials by editing the secret.json present under helm directory. This secret.json can be used for adding the credentials of one or more OneFS storage arrays.The following table lists driver configuration parameters for a single storage array.&lt;/p&gt;
+&lt;p&gt;Create a secret file for the OneFS credentials by editing the &lt;em&gt;secret.json&lt;/em&gt; present under helm directory. This &lt;em&gt;secret.json&lt;/em&gt; can be used for adding the credentials of one or more OneFS storage arrays.The following table lists driver configuration parameters for a single storage array.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -974,17 +976,19 @@ Run &lt;code&gt;kubectl create namespace isilon&lt;/code&gt; to create the &lt;e
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;The username specified in secret.yaml must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:&lt;/p&gt;
+&lt;p&gt;The username specified in &lt;em&gt;secret.json&lt;/em&gt; must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ISI_PRIV_LOGIN_PAPI
 ISI_PRIV_NFS
 ISI_PRIV_QUOTA
 ISI_PRIV_SNAPSHOT
 ISI_PRIV_IFS_RESTORE
 ISI_PRIV_NS_IFS_ACCESS
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After editing the file, run the following command to create a secret called &lt;code&gt;isilon-creds&lt;/code&gt;
+&lt;code&gt;kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTES:&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;If any key/value is present in both secret.json and my-isilon-settings.yaml , then the values provided secret.json will take precedence.&lt;/li&gt;
-&lt;li&gt;If any key/value is present in both my-isilon-settings.yaml/secret.json and storageClass, then the values provided in storageClass parameters will take precedence.&lt;/li&gt;
+&lt;li&gt;If any key/value is present in both &lt;em&gt;secret.json&lt;/em&gt; and &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, then the values provided &lt;em&gt;secret.json&lt;/em&gt; will take precedence.&lt;/li&gt;
+&lt;li&gt;If any key/value is present in both &lt;em&gt;my-isilon-settings.yaml/secret.json&lt;/em&gt; and storageClass, then the values provided in storageClass parameters will take precedence.&lt;/li&gt;
 &lt;li&gt;User has to validate the JSON syntax and array related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the JSON file.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
@@ -1008,7 +1012,7 @@ If this secret is an empty secret, then the validation of the certificate fails,
 &lt;li&gt;To create the certs secret, run &lt;code&gt;kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Use the following command to replace the secret &lt;code&gt;kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTES:&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;The OneFS IP can be with or without port , depends upon the configuration of OneFS API server.&lt;/li&gt;
 &lt;li&gt;Above said commands is based on the namespace &amp;lsquo;isilon&amp;rsquo;&lt;/li&gt;
@@ -1016,14 +1020,14 @@ If this secret is an empty secret, then the validation of the certificate fails,
 &lt;li&gt;The cert secret created out of these pem files should have the naming convention as isilon-certs-number (example: isilon-certs-0, isilon-certs-1 etc.); The number should start from zero and should grow in incremental order. The number of the secrets created out of pem files should match certSecretCount value in myvalues.yaml or my-isilon-settings.yaml.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;dynamic-update-of-array-details-via-secretjson&#34;&gt;Dynamic update of array details via secret.json&lt;/h3&gt;
-&lt;p&gt;CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now user can link the single CSI Driver to multiple OneFS Clusters by updating secret.json. User can now update the isilon-creds secret by editing the secret.json and executing following command:&lt;/p&gt;
+&lt;p&gt;CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now user can link the single CSI Driver to multiple OneFS Clusters by updating &lt;em&gt;secret.json&lt;/em&gt;. User can now update the isilon-creds secret by editing the &lt;em&gt;secret.json&lt;/em&gt; and executing following command:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f -&lt;/code&gt;
  &lt;/p&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
 &lt;p&gt;Storage Classes are an essential Kubernetes construct for Storage provisioning. To know more about Storage Classes, please refer:
 &lt;a href=&#34;https://kubernetes.io/docs/concepts/storage/storage-classes/&#34;&gt;https://kubernetes.io/docs/concepts/storage/storage-classes/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Starting from v1.5 of the driver, Storage Classes would no longer be created along with the installation of the driver.
-A wide set of annotated storage class manifests have been provided in the helm/samples/storageclass folder. Please use these samples to create new storage classes to provision storage.&lt;/p&gt;
+A wide set of annotated storage class manifests have been provided in the &lt;a href=&#34;https://github.com/dell/csi-powerscale/tree/master/helm/samples/storageclass&#34;&gt;helm/samples/storageclass folder&lt;/a&gt;. Please use these samples to create new storage classes to provision storage.&lt;/p&gt;
 &lt;p&gt;Starting in CSI PowerScale v1.5, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the &lt;code&gt;helm/samples/storageclass&lt;/code&gt; folder. Please use these samples to create new storage classes to provision storage.&lt;/p&gt;
 &lt;h3 id=&#34;what-happens-to-my-existing-storage-classes&#34;&gt;What happens to my existing storage classes?&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;Upgrading from CSI PowerScale v1.4 driver&lt;/em&gt;
@@ -1133,6 +1137,7 @@ PowerStore.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Restart the docker service with &lt;code&gt;systemctl daemon-reload&lt;/code&gt; and &lt;code&gt;systemctl restart docker&lt;/code&gt; on all the nodes.&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt; Some distribution, like Ubuntu, already has &lt;em&gt;MountFlags&lt;/em&gt; set by default.&lt;/p&gt;
 &lt;h3 id=&#34;volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/h3&gt;
 &lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
 &lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github.&lt;/p&gt;
@@ -1316,7 +1321,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 The storage classes created as part of the installation have an annotation - &amp;ldquo;helm.sh/resource-policy&amp;rdquo;: keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Upgrading from an older version of the driver&lt;/em&gt;
 The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation &amp;ldquo;helm.sh/resource-policy&amp;rdquo;: keep before performing an upgrade.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt; If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps to create storage class:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;There are samples storage class yaml files available under &lt;code&gt;helm/samples/storageclass&lt;/code&gt;.  These can be copied and modified as needed.&lt;/p&gt;
 &lt;ol&gt;
@@ -1338,7 +1343,7 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 &lt;li&gt;Create your storage class by using &lt;code&gt;kubectl&lt;/code&gt;:&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl create -f &amp;lt;path_to_storageclass_file&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&amp;rsquo;t be able to provision new PVCs until at least one storage class is newly created.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt; Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&amp;rsquo;t be able to provision new PVCs until at least one storage class is newly created.&lt;/p&gt;
 
       </description>
     </item>
@@ -1370,11 +1375,12 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 &lt;p&gt;Before you install CSI Driver for Unity, verify the requirements that are mentioned in this topic are installed and configured.&lt;/p&gt;
 &lt;h3 id=&#34;requirements&#34;&gt;Requirements&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../dell-csi-driver/&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Install Kubernetes (see &lt;a href=&#34;../../../dell-csi-driver/&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;Configure Docker service&lt;/li&gt;
 &lt;li&gt;Install Helm v3&lt;/li&gt;
 &lt;li&gt;To use FC protocol, host must be zoned with Unity array&lt;/li&gt;
-&lt;li&gt;To use iSCSI and NFS protocol, iSCSI initiator and NFS utility packages need to be installed&lt;/li&gt;
+&lt;li&gt;To use iSCSI protocol, iSCSI initiator utils packages needs to be installed&lt;/li&gt;
+&lt;li&gt;To use NFS protocol, NFS utility packages needs to be installed&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;configure-docker-service&#34;&gt;Configure Docker service&lt;/h2&gt;
 &lt;p&gt;The mount propagation in Docker must be configured on all Kubernetes nodes before installing CSI Driver for Unity.&lt;/p&gt;
@@ -1589,39 +1595,39 @@ systemctl restart docker
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Example &lt;em&gt;myvalues.yaml&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;csiDebug: &amp;quot;true&amp;quot;
-volumeNamePrefix : csivol
-snapNamePrefix: csi-snap
-imagePullPolicy: Always
-certSecretCount: 1
-syncNodeInfoInterval: 5
-controllerCount: 2
-createStorageClassesWithTopology: true
-allowRWOMultiPodAccess: false
-storageClassProtocols:
-   - protocol: &amp;quot;FC&amp;quot;
-   - protocol: &amp;quot;iSCSI&amp;quot;
-   - protocol: &amp;quot;NFS&amp;quot;
-storageArrayList:
-   - name: &amp;quot;APM00******1&amp;quot;
-     isDefaultArray: &amp;quot;true&amp;quot;
-     storageClass:
-       storagePool: pool_1
-       FsType: ext4
-       nasServer: &amp;quot;nas_1&amp;quot;
-       thinProvisioned: &amp;quot;true&amp;quot;
-       isDataReductionEnabled: true
-       hostIOLimitName: &amp;quot;value_from_array&amp;quot;
-       tieringPolicy: &amp;quot;2&amp;quot;
-     snapshotClass:
-       retentionDuration: &amp;quot;2:2:23:45&amp;quot;
-   - name: &amp;quot;APM001******2&amp;quot;
-     storageClass:
-       storagePool: pool_1
-       reclaimPolicy: Delete
-       hostIoSize: &amp;quot;8192&amp;quot;
-       nasServer: &amp;quot;nasserver_2&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csiDebug&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeNamePrefix &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;csivol&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapNamePrefix&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;csi-snap&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Always&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;certSecretCount&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;syncNodeInfoInterval&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controllerCount&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;createStorageClassesWithTopology&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allowRWOMultiPodAccess&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageClassProtocols&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protocol&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;FC&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protocol&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;iSCSI&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protocol&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;NFS&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageArrayList&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;APM00******1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isDefaultArray&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageClass&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storagePool&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;pool_1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;FsType&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;ext4&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nasServer&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;nas_1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;thinProvisioned&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isDataReductionEnabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;hostIOLimitName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;value_from_array&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tieringPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshotClass&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;retentionDuration&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2:2:23:45&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;APM001******2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageClass&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storagePool&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;pool_1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;reclaimPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Delete&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;hostIoSize&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;8192&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nasServer&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;nasserver_2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create an empty secret by navigating to helm folder that contains emptysecret.yaml file and running the kubectl create -f emptysecret.yaml command.&lt;/p&gt;
 &lt;/li&gt;
@@ -1677,26 +1683,26 @@ The following table lists driver configuration parameters for multiple storage a
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Example: secret.json&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-json5&#34; data-lang=&#34;json5&#34;&gt;   {
-     &amp;quot;storageArrayList&amp;quot;: [
-       {
-         &amp;quot;username&amp;quot;: &amp;quot;user&amp;quot;,
-         &amp;quot;password&amp;quot;: &amp;quot;password&amp;quot;,
-         &amp;quot;restGateway&amp;quot;: &amp;quot;https://10.1.1.1&amp;quot;,
-         &amp;quot;arrayId&amp;quot;: &amp;quot;APM00******1&amp;quot;,
-         &amp;quot;insecure&amp;quot;: true,
-         &amp;quot;isDefaultArray&amp;quot;: true
-       },
-       {
-         &amp;quot;username&amp;quot;: &amp;quot;user&amp;quot;,
-         &amp;quot;password&amp;quot;: &amp;quot;password&amp;quot;,
-         &amp;quot;restGateway&amp;quot;: &amp;quot;https://10.1.1.2&amp;quot;,
-         &amp;quot;arrayId&amp;quot;: &amp;quot;APM00******2&amp;quot;,
-         &amp;quot;insecure&amp;quot;: true
-       }
-     ]
-   }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;kubectl create secret generic unity-creds -n unity --from-file=config=secret.json&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;   &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+     &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;storageArrayList&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
+       &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;username&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;user&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;restGateway&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://10.1.1.1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;arrayId&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;APM00******1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;insecure&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;isDefaultArray&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;
+       &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+       &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;username&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;user&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;restGateway&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://10.1.1.2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;arrayId&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;APM00******2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;insecure&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;
+       &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+     &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
+   &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;kubectl create secret generic unity-creds -n unity --from-file=config=secret.json&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Use the following command to replace or update the secret:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The user needs to validate the JSON syntax and array related key/values while replacing the unity-creds secret.

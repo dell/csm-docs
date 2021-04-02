@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/operator/unity/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Installing Unity CSI Driver via Operator
 ">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="609">
+<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
+<meta itemprop="wordCount" content="595">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1054,15 +1054,15 @@ The driver will continue to use previous values in case of an error found in the
 <h4 id="create-secret-for-client-side-tls-verification">Create secret for client side TLS verification</h4>
 <p>Please refer detailed documentation on how to create this secret <a href="../../helm/unity/#certificate-validation-for-unisphere-rest-api-calls">here</a></p>
 <p>If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml</p>
-<pre><code>  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: unity-certs-0
-    namespace: unity
-  type: Opaque
-  data:
-    cert-0: &quot;&quot;
-</code></pre><p>Execute command: <code>kubectl create -f empty-secret.yaml</code></p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>unity-certs<span style="color:#0000cf;font-weight:bold">-0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>unity<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Opaque<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">cert-0</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>Execute command: <code>kubectl create -f empty-secret.yaml</code></p>
 <h3 id="modifyset-the-following-optional-environment-variables">Modify/Set the following <em>optional</em> environment variables</h3>
 <p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity driver and their default values:</p>
 <table>

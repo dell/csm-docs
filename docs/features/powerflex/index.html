@@ -12,10 +12,10 @@
 <meta property="og:description" content="Code features for PowerFlex Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/features/powerflex/" />
-<meta property="article:modified_time" content="2021-03-19T00:44:02+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Code features for PowerFlex Driver">
-<meta itemprop="dateModified" content="2021-03-19T00:44:02&#43;05:30" />
+<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
 <meta itemprop="wordCount" content="2165">
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.92d542575fc4d67b4eed3717ddc3b40b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1242,26 +1242,26 @@ Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/de
 <p>To manage multiple arrays you need to create an array connection configuration that lists multiple arrays.</p>
 <h3 id="creating-array-configuration">Creating array configuration</h3>
 <p>There is a sample json file under the top directory named <code>config.json</code> with the following content:</p>
-<pre><code>[
-    {
-        &quot;username&quot;: &quot;admin&quot;,				# username for connecting to API
-        &quot;password&quot;: &quot;password&quot;,				# password for connecting to API
-        &quot;systemID&quot;: &quot;ID1&quot;,				# system ID for system
-        &quot;endpoint&quot;: &quot;http://127.0.0.1&quot;,		        # full URL path to the PowerFlex API
-        &quot;insecure&quot;: true,				# use insecure connection or not
-        &quot;isDefault&quot;: true,				# treat current array as default (would be used by storage class without arrayIP parameter)
-        &quot;mdm&quot;: &quot;10.0.0.1,10.0.0.2&quot;			# MDM IP for the system
-    },
-    {
-        &quot;username&quot;: &quot;admin&quot;,
-        &quot;password&quot;: &quot;password&quot;,
-        &quot;systemID&quot;: &quot;ID2&quot;,
-        &quot;endpoint&quot;: &quot;https://127.0.0.2&quot;,
-        &quot;insecure&quot;: true,
-        &quot;mdm&quot;: &quot;10.0.0.3,10.0.0.4&quot;
-    }
-]
-</code></pre><p>Here we specify that we want CSI driver to manage two arrays: one with an IP <code>127.0.0.1</code> and the other with an IP <code>127.0.0.2</code>.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#000;font-weight:bold">[</span>
+    <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#000;font-weight:bold">,</span>             <span style="color:#a40000">#</span> <span style="color:#a40000">username</span> <span style="color:#a40000">for</span> <span style="color:#a40000">connecting</span> <span style="color:#a40000">to</span> <span style="color:#a40000">API</span>
+        <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>          <span style="color:#a40000">#</span> <span style="color:#a40000">password</span> <span style="color:#a40000">for</span> <span style="color:#a40000">connecting</span> <span style="color:#a40000">to</span> <span style="color:#a40000">API</span>
+        <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ID1&#34;</span><span style="color:#000;font-weight:bold">,</span>				       <span style="color:#a40000">#</span> <span style="color:#a40000">system</span> <span style="color:#a40000">ID</span> <span style="color:#a40000">for</span> <span style="color:#a40000">system</span>
+        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;http://127.0.0.1&#34;</span><span style="color:#000;font-weight:bold">,</span>  <span style="color:#a40000">#</span> <span style="color:#a40000">full</span> <span style="color:#a40000">URL</span> <span style="color:#a40000">path</span> <span style="color:#a40000">to</span> <span style="color:#a40000">the</span> <span style="color:#a40000">PowerFlex</span> <span style="color:#a40000">API</span>
+        <span style="color:#204a87;font-weight:bold">&#34;insecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>                <span style="color:#a40000">#</span> <span style="color:#a40000">use</span> <span style="color:#a40000">insecure</span> <span style="color:#a40000">connection</span> <span style="color:#a40000">or</span> <span style="color:#a40000">not</span>
+        <span style="color:#204a87;font-weight:bold">&#34;isDefault&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>               <span style="color:#a40000">#</span> <span style="color:#a40000">treat</span> <span style="color:#a40000">current</span> <span style="color:#a40000">array</span> <span style="color:#a40000">as</span> <span style="color:#a40000">default</span> <span style="color:#a40000">(would</span> <span style="color:#a40000">be</span> <span style="color:#a40000">used</span> <span style="color:#a40000">by</span> <span style="color:#a40000">storage</span> <span style="color:#a40000">class</span> <span style="color:#a40000">without</span> <span style="color:#a40000">arrayIP</span> <span style="color:#a40000">parameter)</span>
+        <span style="color:#204a87;font-weight:bold">&#34;mdm&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;10.0.0.1,10.0.0.2&#34;</span>       <span style="color:#a40000">#</span> <span style="color:#a40000">MDM</span> <span style="color:#a40000">IP</span> <span style="color:#a40000">for</span> <span style="color:#a40000">the</span> <span style="color:#a40000">system</span>
+    <span style="color:#000;font-weight:bold">},</span>
+    <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ID2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://127.0.0.2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;insecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;mdm&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span>
+    <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">]</span>
+</code></pre></div><p>Here we specify that we want CSI driver to manage two arrays: one with an IP <code>127.0.0.1</code> and the other with an IP <code>127.0.0.2</code>.</p>
 <p>To use this config we need to create a Kubernetes secret from it. To do so run the following command:</p>
 <p><code>kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.json</code></p>
 <h3 id="creating-storage-classes">Creating storage classes</h3>
