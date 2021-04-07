@@ -12,11 +12,11 @@
 <meta property="og:description" content="Release notes for PowerMax CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/release/powermax/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-06T18:57:40+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Release notes for PowerMax CSI driver">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="173">
+<meta itemprop="dateModified" content="2021-04-06T18:57:40&#43;05:30" />
+<meta itemprop="wordCount" content="210">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7a46d9b66f2baa4d6e1a8cda7627f2db.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7a46d9b66f2baa4d6e1a8cda7627f2db.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -981,6 +981,10 @@
 <tr>
 <td>Delete Volume fails with error message: volume is part of masking view</td>
 <td>This issue is due to limitations in Unisphere and occurs when Unisphere is overloaded. Currently, there is no workaround for this but can be avoided by making sure Unisphere is not overloaded during such operations. The Unisphere team is assessing a fix for this in a future Unisphere release</td>
+</tr>
+<tr>
+<td>Driver installation warning: <strong>&ldquo;OpenShift version 4.7, is newer than the version that has been tested. Latest tested version is: 4.6&rdquo;</strong></td>
+<td>Ignore this warning and continue with the installation. v1.6.0 release of the driver supports OpenShift 4.6/4.7 .</td>
 </tr>
 </tbody>
 </table>
