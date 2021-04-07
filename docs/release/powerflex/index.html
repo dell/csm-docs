@@ -12,11 +12,11 @@
 <meta property="og:description" content="Release notes for PowerFlex CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/release/powerflex/" />
-<meta property="article:modified_time" content="2021-03-19T00:44:02+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-06T18:57:40+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Release notes for PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2021-03-19T00:44:02&#43;05:30" />
-<meta itemprop="wordCount" content="144">
+<meta itemprop="dateModified" content="2021-04-06T18:57:40&#43;05:30" />
+<meta itemprop="wordCount" content="180">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7a46d9b66f2baa4d6e1a8cda7627f2db.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.2b7de8943f65bf362de78bb52bd51aa8.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7a46d9b66f2baa4d6e1a8cda7627f2db.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -982,6 +982,10 @@
 <tr>
 <td>Slow volume attached/detach</td>
 <td>If your Kubernetes 1.18 cluster has a lot of VolumeAttachment objects, the attach/detach operations will be very slow. This is a known issue and affects all CSI plugins. It is tracked here: CSI VolumeAttachment slows pod startup time. To get around this problem you can upgrade to latest Kubernetes/OpenShift patches, which contains a partial fix: 1.18.5+</td>
+</tr>
+<tr>
+<td>Installation warning: <strong>&ldquo;OpenShift version 4.7, is newer than the version that has been tested. Latest tested version is: 4.6&rdquo;</strong></td>
+<td>Ignore this warning and continue with the installation. v1.4.0 release of the driver supports OpenShift 4.6/4.7 .</td>
 </tr>
 </tbody>
 </table>
