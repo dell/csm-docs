@@ -24,4 +24,4 @@ There are no fixed issues in this release.
 | Issue | Workaround |
 |-------|------------|
 | Slow volume attached/detach | If your Kubernetes 1.18 cluster has a lot of VolumeAttachment objects, the attach/detach operations will be very slow. This is a known issue and affects all CSI plugins. It is tracked here: CSI VolumeAttachment slows pod startup time. To get around this problem you can upgrade to latest Kubernetes/OpenShift patches, which contains a partial fix: 1.18.5+|
-| Installation warning: **"OpenShift version 4.7, is newer than the version that has been tested. Latest tested version is: 4.6"** | Ignore this warning and continue with the installation. v1.4.0 release of the driver supports OpenShift 4.6/4.7 . |
+| Installation warning: **"OpenShift version 4.7, is newer than the version that has been tested. Latest tested version is: 4.6"** | Ignore this warning and continue with the installation. v1.4.0 release of the driver supports OpenShift 4.6/4.7 . | 
