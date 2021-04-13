@@ -202,7 +202,10 @@ The common snapshot controller must be installed only once in the cluster irresp
 
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
 - This script runs `verify-csi-vxflexos.sh` script that is present in the same directory. It will validate MDM IP(s) in `vxflexos-config` secret and creates a new field consumed by init container and sdc-monitor container
-- This script also runs the `verify.sh` script. You will be prompted to enter the credentials for each of the Kubernetes nodes. The `verify.sh` script needs the credentials to check if SDC has been configured on all nodes. If it is not your first time installation and you have not updated your `vxflexos-config` secret, you can skip the verification step by specifying the `--skip-verify-node` option.
+- This script also runs the `verify.sh` script. You will be prompted to enter the credentials for each of the Kubernetes nodes. 
+  The `verify.sh` script needs the credentials to check if SDC has been configured on all nodes. 
+- It is mandatory to run the first installation and installation after changes to MDM configuration in `vxflexos-config` secret
+  **without** skipping the verification. After that you can use `--skip-verify-node` or `--skip-verify` .
 - (Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver. 
    - Mount options are specified in storageclass yaml under _mountOptions_. 
    - *WARNING*: Before utilizing mount options, you must first be fully aware of the potential impact and understand your environment's requirements for the specified option.
