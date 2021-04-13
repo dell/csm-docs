@@ -58,7 +58,7 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 
 #### Steps
 
-1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator)
+1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator). Skip this step for Offline Install. And continue using workspace created by untar of dell-csi-operator-bundle.tar.gz.
 2. Run `bash scripts/install.sh` to install the operator
 {{< imgproc non-olm-1.jpg Resize "2500x" >}}{{< /imgproc >}}
 3. Run the command `oc get pods` to validate the install completed, should be able to see the operator related pod on default namespace

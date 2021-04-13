@@ -22,7 +22,7 @@ Before you install CSI Driver for PowerScale, verify the requirements that are m
 
 #### Requirements
 
-* Install Kubernetes (see [supported versions](../../../dell-csi-driver/))
+* Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/))
 * Configure Docker service
 * Install Helm v3
 * Install volume snapshot components
@@ -133,7 +133,7 @@ The mount propagation in Docker must be configured on all Kubernetes nodes befor
     ```
 
     After editing the file, run the following command to create a secret called `isilon-creds`
-    `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json`
+    <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json`
 
    **NOTES:**
    1. If any key/value is present in both *secret.json* and *my-isilon-settings.yaml*, then the values provided *secret.json* will take precedence.
@@ -145,6 +145,7 @@ The mount propagation in Docker must be configured on all Kubernetes nodes befor
     kubectl create -f emptysecret.yaml
     ```
 7.  Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml`
+8.  In the case of OpenShift, the driver installation will fail because of a lack of privileges over clusterRole. To resolve this issue the command `oc adm policy add-scc-to-user privileged -z isilon-node -n isilon` and re-install the driver. This solution will be added in next release.
 
 ## Certificate validation for OneFS REST API calls 
 
@@ -160,7 +161,7 @@ If the 'isiInsecure' parameter is set to false and a previous installation attem
 
 1. To fetch the certificate, run `openssl s_client -showcerts -connect [OneFS IP] </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem`
 2. To create the certs secret, run `kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon`  
-3. Use the following command to replace the secret `kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -`
+3. Use the following command to replace the secret <br/> `kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -`
 
 **NOTES:**
 1. The OneFS IP can be with or without port , depends upon the configuration of OneFS API server.

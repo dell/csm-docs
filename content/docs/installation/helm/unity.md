@@ -25,7 +25,7 @@ Before you install CSI Driver for Unity, verify the requirements that are mentio
 
 ### Requirements
 
-* Install Kubernetes (see [supported versions](../../../dell-csi-driver/))
+* Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/))
 * Configure Docker service
 * Install Helm v3
 * To use FC protocol, host must be zoned with Unity array
@@ -59,7 +59,7 @@ Install CSI Driver for Unity using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity), ready for this procedure.
+ * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with command ```git clone https://github.com/dell/csi-unity.git```, ready for this procedure.
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, *csi-install.sh* and *csi-uninstall.sh*.
  * Ensure "unity" namespace exists in kubernetes cluster. Use `kubectl create namespace unity` command to create the namespace, if the namespace is not present.
    
@@ -69,7 +69,7 @@ Procedure
 
 1. Collect information from the Unity Systems like Unique ArrayId, IP address, username  and password. Make a note of the value for these parameters as they must be entered in the secret.json and myvalues.yaml file.
 
-2. Copy the csi-unity/values.yaml into a file named myvalues.yaml in the same directory of csi-install.sh, to customize settings for installation.
+2. Copy the helm/csi-unity/values.yaml into a file named myvalues.yaml in the same directory of csi-install.sh, to customize settings for installation.
 
 3. Edit myvalues.yaml to set the following parameters for your installation:
    
@@ -155,7 +155,7 @@ Procedure
            nasServer: "nasserver_2"
     ```
    
-4. Create an empty secret by navigating to helm folder that contains emptysecret.yaml file and running the kubectl create -f emptysecret.yaml command.
+4. Create an empty secret with file helm/emptysecret.yaml file by running the ```kubectl create -f helm/emptysecret.yaml``` command.
 
 5. Prepare the secret.json for driver configuration.
     The following table lists driver configuration parameters for multiple storage arrays.
