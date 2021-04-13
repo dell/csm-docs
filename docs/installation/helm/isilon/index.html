@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/" />
-<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-13T01:41:05+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing PowerScale CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
-<meta itemprop="wordCount" content="2008">
+<meta itemprop="dateModified" content="2021-04-13T01:41:05&#43;05:30" />
+<meta itemprop="wordCount" content="2055">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7a46d9b66f2baa4d6e1a8cda7627f2db.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.1c46e6a98ac9b7d46c57c3875d7db7d8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7a46d9b66f2baa4d6e1a8cda7627f2db.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.1c46e6a98ac9b7d46c57c3875d7db7d8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1007,7 +1007,7 @@
 <p>Before you install CSI Driver for PowerScale, verify the requirements that are mentioned in this topic are installed and configured.</p>
 <h4 id="requirements">Requirements</h4>
 <ul>
-<li>Install Kubernetes (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
+<li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
 <li>Configure Docker service</li>
 <li>Install Helm v3</li>
 <li>Install volume snapshot components</li>
@@ -1266,7 +1266,7 @@ ISI_PRIV_SNAPSHOT
 ISI_PRIV_IFS_RESTORE
 ISI_PRIV_NS_IFS_ACCESS
 </code></pre><p>After editing the file, run the following command to create a secret called <code>isilon-creds</code>
-<code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json</code></p>
+<br/> <code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json</code></p>
 <p><strong>NOTES:</strong></p>
 <ol>
 <li>If any key/value is present in both <em>secret.json</em> and <em>my-isilon-settings.yaml</em>, then the values provided <em>secret.json</em> will take precedence.</li>
@@ -1281,6 +1281,9 @@ ISI_PRIV_NS_IFS_ACCESS
 <li>
 <p>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml</code></p>
 </li>
+<li>
+<p>In the case of OpenShift, the driver installation will fail because of a lack of privileges over clusterRole. To resolve this issue the command <code>oc adm policy add-scc-to-user privileged -z isilon-node -n isilon</code> and re-install the driver. This solution will be added in next release.</p>
+</li>
 </ol>
 <h2 id="certificate-validation-for-onefs-rest-api-calls">Certificate validation for OneFS REST API calls</h2>
 <p>The CSI driver exposes an install parameter &lsquo;isiInsecure&rsquo; which determines if the driver
@@ -1292,7 +1295,7 @@ If this secret is an empty secret, then the validation of the certificate fails,
 <ol>
 <li>To fetch the certificate, run <code>openssl s_client -showcerts -connect [OneFS IP] &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; ca_cert_0.pem</code></li>
 <li>To create the certs secret, run <code>kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon</code></li>
-<li>Use the following command to replace the secret <code>kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -</code></li>
+<li>Use the following command to replace the secret <br/> <code>kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -</code></li>
 </ol>
 <p><strong>NOTES:</strong></p>
 <ol>

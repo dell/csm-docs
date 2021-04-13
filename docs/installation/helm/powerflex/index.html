@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerflex/" />
-<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-04-13T01:41:05+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing PowerFlex CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
-<meta itemprop="wordCount" content="2229">
+<meta itemprop="dateModified" content="2021-04-13T01:41:05&#43;05:30" />
+<meta itemprop="wordCount" content="2233">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7a46d9b66f2baa4d6e1a8cda7627f2db.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.1c46e6a98ac9b7d46c57c3875d7db7d8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7a46d9b66f2baa4d6e1a8cda7627f2db.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.1c46e6a98ac9b7d46c57c3875d7db7d8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1286,7 +1286,10 @@ Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/de
 <ul>
 <li>For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.</li>
 <li>This script runs <code>verify-csi-vxflexos.sh</code> script that is present in the same directory. It will validate MDM IP(s) in <code>vxflexos-config</code> secret and creates a new field consumed by init container and sdc-monitor container</li>
-<li>This script also runs the <code>verify.sh</code> script. You will be prompted to enter the credentials for each of the Kubernetes nodes. The <code>verify.sh</code> script needs the credentials to check if SDC has been configured on all nodes. If it is not your first time installation and you have not updated your <code>vxflexos-config</code> secret, you can skip the verification step by specifying the <code>--skip-verify-node</code> option.</li>
+<li>This script also runs the <code>verify.sh</code> script. You will be prompted to enter the credentials for each of the Kubernetes nodes.
+The <code>verify.sh</code> script needs the credentials to check if SDC has been configured on all nodes.</li>
+<li>It is mandatory to run the first installation and installation after changes to MDM configuration in <code>vxflexos-config</code> secret
+<strong>without</strong> skipping the verification. After that you can use <code>--skip-verify-node</code> or <code>--skip-verify</code> .</li>
 <li>(Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver.
 <ul>
 <li>Mount options are specified in storageclass yaml under <em>mountOptions</em>.</li>
