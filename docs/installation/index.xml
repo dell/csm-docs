@@ -181,7 +181,7 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 &lt;h3 id=&#34;manual-installation&#34;&gt;Manual Installation&lt;/h3&gt;
 &lt;h4 id=&#34;steps&#34;&gt;Steps&lt;/h4&gt;
 &lt;ol&gt;
-&lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;Dell CSI Operator repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;Dell CSI Operator repository&lt;/a&gt;. Skip this step for Offline Install. And continue using workspace created by untar of dell-csi-operator-bundle.tar.gz.&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;bash scripts/install.sh&lt;/code&gt; to install the operator
 
 
