@@ -17,7 +17,8 @@ Kubernetes Operators make it easy to deploy and manage entire lifecycle of compl
 #### SDC Deployment for Operator 
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - For non supported verisons of the OS also do the manual SDC deployment steps given below. Refer https://hub.docker.com/r/dellemc/sdc for supported versions.
-- **Required:** MDM value should be provided in CR file for the sdc init container to work. MDM provided in CR file will be overrided by config.json secret given below
+- **Note:** When driver is created, MDM value for initContainers in driver CR is set by operator from mdm attributes in driver configuration file, 
+  config.json. Example of config.json is below in this document. Do not set MDM value for initContainers in driver CR file manually.
 - **Note:** To use a sdc-binary module from customer ftp site:
   - Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:
  ```yaml
@@ -48,14 +49,14 @@ Kubernetes Operators make it easy to deploy and manage entire lifecycle of compl
         - name: HOST_PID
           value: "1"
         - name: MDM
-          value: "10.xx.xx.xx,10.xx.xx.xx"
+          value: ""
     initContainers:
       - image: dellemc/sdc:3.5.1.1
         imagePullPolicy: IfNotPresent
         name: sdc
         envs:
           - name: MDM
-            value: "10.xx.xx.xx,10.xx.xx.xx"
+            value: ""
 ```  
 
 ### Manual SDC Deployment
