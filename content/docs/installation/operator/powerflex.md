@@ -49,7 +49,7 @@ Kubernetes Operators make it easy to deploy and manage entire lifecycle of compl
         - name: HOST_PID
           value: "1"
         - name: MDM
-          value: "10.xx.xx.xx,10.xx.xx.xx"
+          value: ""
     initContainers:
       - image: dellemc/sdc:3.5.1.1
         imagePullPolicy: IfNotPresent
