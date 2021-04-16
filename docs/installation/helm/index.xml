@@ -1384,8 +1384,8 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 &lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../dell-csi-driver/&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;Configure Docker service&lt;/li&gt;
 &lt;li&gt;Install Helm v3&lt;/li&gt;
-&lt;li&gt;To use FC protocol, host must be zoned with Unity array&lt;/li&gt;
-&lt;li&gt;To use iSCSI protocol, iSCSI initiator utils packages needs to be installed&lt;/li&gt;
+&lt;li&gt;To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured&lt;/li&gt;
+&lt;li&gt;To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured&lt;/li&gt;
 &lt;li&gt;To use NFS protocol, NFS utility packages needs to be installed&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;configure-docker-service&#34;&gt;Configure Docker service&lt;/h2&gt;
