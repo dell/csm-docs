@@ -28,8 +28,8 @@ Before you install CSI Driver for Unity, verify the requirements that are mentio
 * Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/))
 * Configure Docker service
 * Install Helm v3
-* To use FC protocol, host must be zoned with Unity array
-* To use iSCSI protocol, iSCSI initiator utils packages needs to be installed
+* To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured
+* To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured 
 * To use NFS protocol, NFS utility packages needs to be installed
 
 ## Configure Docker service
