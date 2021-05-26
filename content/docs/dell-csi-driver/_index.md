@@ -35,7 +35,7 @@ The following are the drivers provided for the Dell storage family:
 | Fedora Core OS|        no        |          5.10        |        no        |         no        |        no        |
 | OpenShift     |     4.6, 4.7     |       4.6, 4.7      |     4.6, 4.7     |      4.6, 4.7     |     4.6, 4.7     |
 | Docker EE     |        3.1       |         3.1         |        3.1       |         3.1       |        3.1       |
-| Google Anthos |        1.5       |          no         |        no        |         no        |        1.5       |
+| Google Anthos |        1.5       |          1.5         |        no        |         no        |        1.5       |
 {{</table>}}
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
