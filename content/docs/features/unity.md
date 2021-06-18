@@ -5,7 +5,7 @@ Description: Code features for Unity Driver
 
 ## Creating volumes and consuming them
 
-Create a file `simple.yaml` using sample yaml files located at tests/sample.yaml
+Create a file `sample.yaml` using sample yaml files located at test/sample.yaml
 
 The following command creates a statefulset that consumes three volumes of default storage classes:
 
@@ -14,10 +14,10 @@ kubectl create -f tests/sample.yaml
 ```
 
 After executing this command 3 PVC and statefulset are created in the `test-unity` namespace.
-You can check created PVCs by running `kubectl get pvc -n test-unity` and check statefulset's pods by running `kubectl get pods -n test-unity`command.
-Pod should be `Ready` and `Running`.
+You can check created PVCs by running `kubectl get pvc -n test-unity` and check statefulset's pods by running `kubectl get pods -n test-unity` command.
+The pod should be `Ready` and `Running`.
 
-> If Pod is in CrashLoopback or PVCs is in Pending state then driver installation is not successful, check logs of node and controller.
+> If Pod is in CrashLoopback or PVCs is in a Pending state then driver installation is not successful, check logs of node and controller.
 
 ## Deleting volumes
 
@@ -31,7 +31,7 @@ kubectl delete -f tests/sample.yaml
 
 You can use existent volumes from Unity array as Persistent Volumes in your Kubernetes, to do that you must perform the following steps:
 
-1. Open your volume in Unity Management UI (unisphere), and take a note of volume-id. The `volume-id` looks like `csiunity-xxxxx` and CLI ID looks like `sv_xxxx`.
+1. Open your volume in Unity Management UI (Unisphere), and take a note of volume-id. The `volume-id` looks like `csiunity-xxxxx` and CLI ID looks like `sv_xxxx`.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
 
 ```yaml
@@ -99,17 +99,17 @@ spec:
 
 ## Volume Snapshot Feature
 
-The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes version 1.17 and generally available (v1) in Kubernetes version 1.20. 
+The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes version 1.17 and generally available (v1) in Kubernetes version >=1.20. 
 
-The CSI Unity driver version 1.5 supports v1beta1 snapshots on Kubernetes 1.18/1.19 and v1 snapshots on Kubernetes 1.20.
+The CSI Unity driver version 1.5 supports v1beta1 snapshots on Kubernetes 1.19 and v1 snapshots on Kubernetes 1.20 and 1.21.
 
 In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
-- Kubernetes Volume Snaphshot CRDs
+- Kubernetes Volume Snapshot CRDs
 - Volume Snapshot Controller
 
 ### Volume Snapshot Class
 
-During the installation of CSI Unity 1.5 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.
+During the installation of the CSI Unity 1.5 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.
 
 Following is the manifest for a Volume Snapshot Class created during installation:
 
@@ -138,7 +138,7 @@ spec:
     persistentVolumeClaimName: pvol
 ```
 
-Once the VolumeSnapshot is successfully created by the CSI Unity driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.
+Once the VolumeSnapshot is successfully created by the CSI Unity driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_, it is available for use.
 
 Following is the relevant section of VolumeSnapshot object status:
 
@@ -176,11 +176,9 @@ spec:
 
 The CSI Unity driver version 1.3 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).
 
-To use this feature, the storage class that is used to create the PVC must have the attribute `allowVolumeExpansion` set to true. The storage classes created during the installation (both using Helm or dell-csi-operator) have the `allowVolumeExpansion` set to true by default.
+To use this feature, the storage class that is used to create the PVC must have the attribute `allowVolumeExpansion` set to true.
 
-If you are creating more storage classes, ensure that this attribute is set to true to expand any PVs created using these new storage classes.
-
-The following is a sample manifest for a storage class which allows for Volume Expansion:
+The following is a sample manifest for a storage class that allows for Volume Expansion:
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -218,8 +216,8 @@ spec:
 
 ## Raw block support
 
-The CSI Unity driver supports Raw Block Volumes from v1.4 onwards.
-	Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. An example configuration is outlined here:
+The CSI Unity driver version 1.4 and later supports Raw Block Volumes.
+	Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. The following is an example configuration:
 	
 ```yaml
 apiVersion: v1
@@ -258,13 +256,13 @@ spec:
     - name: nov-eleventh-1-pv-storage
       persistentVolumeClaim:
         claimName: rawblockpvc
-    
 ```
 
 Access modes allowed are ReadWriteOnce and ReadWriteMany. Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node's file system. The driver does not format or check the format of any file system on the block device. 
-Raw Block volumes do support online Volume Expansion, but it is up to the application to manage reconfiguring the file system (if any) to the new size. Access mode ReadOnlyMany is not supported with raw block since we cannot restrict volumes to be readonly from Unity.
 
-For additional information, see the [kubernetes](https://kubernetes.io/DOCS/CONCEPTS/STORAGE/PERSISTENT-VOLUMES/#RAW-BLOCK-VOLUME-SUPPORT) website.
+Raw Block volumes support online Volume Expansion, but it is up to the application to manage to reconfigure the file system (if any) to the new size. Access mode ReadOnlyMany is not supported with raw block since we cannot restrict volumes to be readonly from Unity.
+
+For additional information, see the [kubernetes](https://kubernetes.io/DOCS/CONCEPTS/STORAGE/PERSISTENT-VOLUMES/#volume-mode) website.
 
 
 ## Volume Cloning Feature
@@ -339,11 +337,17 @@ spec:
       fsType: "ext4"
       volumeAttributes:
         size: "10Gi"
+        arrayId: APM************
+        protocol: iSCSI
+        thinProvisioned: "true"
+        isDataReductionEnabled: "false"
+        tieringPolicy: "1"
+        storagePool: pool_2
 ```
 
-This manifest creates a pod and attach newly created ephemeral inline CSI volume to it. 
+This manifest creates a pod and attaches a newly created ephemeral inline CSI volume to it. 
 
-To create `NFS` volume you need to provide `nasName:` parameters that points to the name of your NAS Server in pod manifest like so
+To create `NFS` volume you need to provide `nasName:` parameters that point to the name of your NAS Server in pod manifest like so
 
 ```yaml
   volumes:
@@ -358,11 +362,11 @@ To create `NFS` volume you need to provide `nasName:` parameters that points to 
 
 ## Controller HA
 
-The CSI Unity driver version 1.4 introduces controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
+The CSI Unity driver version 1.4 introduces the controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
 
-By default number of replicas set to 2, you can set `controllerCount` parameter to 1 in `myvalues.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change `replicas` parameter in `spec.driver` section in your Unity Custom Resource.
+By default, number of replicas is set to 2, you can set the `controllerCount` parameter to 1 in `myvalues.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change the `replicas` parameter in the `spec.driver` section in your Unity Custom Resource.
 
-When multiple replicas of controller pods are in cluster each sidecar (Attacher, Provisioner, Resizer and Snapshotter) tries to get a lease so only one instance of each sidecar is active in the cluster at a time. 
+When multiple replicas of controller pods are in a cluster each sidecar (Attacher, Provisioner, Resizer, and Snapshotter) tries to get a lease so only one instance of each sidecar is active in the cluster at a time. 
 
 ### Driver pod placement
 
@@ -400,19 +404,17 @@ controller:
      effect: "NoSchedule"
 ```
 
-As said before you can configure where node driver pods would be assigned in the similar way in `node` section of `myvalues.yaml`
+As said before you can configure where node driver pods would be assigned in a similar way in the `node` section of `myvalues.yaml`
 
 ## Topology
 
 The CSI Unity driver version 1.4 supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.
 
-This Topology support does not include customer defined topology, users cannot create their own labels for nodes, they should use whatever labels are returned by driver and applied automatically by Kubernetes on its nodes.
+This Topology support does not include customer-defined topology, users cannot create their own labels for nodes, they should use whatever labels are returned by the driver and applied automatically by Kubernetes on its nodes.
 
 ### Topology Usage
 
-To use the Topology feature, user can install driver by setting `createStorageClassesWithTopology` to true in the `myvalues.yaml` which will create default storage classes by adding topology keys (based on the arrays specified in `myvalues.yaml`) and with `WaitForFirstConsumer` binding mode. 
-
-Another option is the user can create custom storage classes on their own by specifying the valid topology keys and binding mode.
+User can create custom storage classes on their own by specifying the valid topology keys and binding mode.
 
 The following is one of example storage class manifest: 
 
@@ -432,26 +434,13 @@ allowedTopologies:
           - "true"
 ```
 
-This example will match all nodes where driver has a connection to Unity array with array ID mentioned via Fiber Channel. Similarly by replacing `fc` with `iscsi` in the key will check for iSCSI connectivity with the node.
+This example matches all nodes where the driver has a connection to the Unity array with array ID mentioned via Fiber Channel. Similarly, by replacing `fc` with `iscsi` in the key checks for iSCSI connectivity with the node.
 
 You can check what labels your nodes contain by running `kubectl get nodes --show-labels` command.
 
->Note that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for topology feature to work properly.
+>Note that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for the topology feature to work properly.
 
-For any additional information about topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
-
-## Support for Docker EE
-
-The CSI Driver for Dell EMC Unity supports Docker EE and deployment on clusters bootstrapped with UCP (Universal Control Plane).
-
-*UCP version 3.3.3 supports Kubernetes 1.18 and CSI driver can be installed on UCP 3.3 with Helm. 
-
-The installation process for the driver on such clusters remains the same as the installation process on upstream clusters.
-
-On UCP based clusters, `kubectl` may not be installed by default, it is important that [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is installed prior to the installation of the driver.
-
-The worker nodes in UCP backed clusters may run any of the OSs which we support with upstream clusters.
-
+For any additional information about the topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
 ## Support for SLES 15 SP2
 
@@ -461,4 +450,19 @@ The CSI Driver for Dell EMC Unity requires the following set of packages install
  - nfs-utils **nfs-utils is required in order to make use of NFS protocol for provisioning**
  - multipath-tools **multipath-tools is required in order to make use of FC and iSCSI protocols for provisioning**
 
-  After installing open-iscsi, ensure "iscsi" and "iscsid" services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with iSCSI protocol to work.
+  After installing open-iscsi, ensure "iscsi" and "iscsid" services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with the iSCSI protocol to work.
+
+## Volume Limit
+The CSI Driver for Dell EMC Unity allows users to specify the maximum number of Unity volumes that can be used in a node.
+
+The user can set the volume limit for a node by creating a node label `max-unity-volumes-per-node` and specifying the volume limit for that node.
+<br/> `kubectl label node <node_name> max-unity-volumes-per-node=<volume_limit>`
+
+The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxUnityVolumesPerNode` attribute in secret.json or secret.yaml file.
+
+>**NOTE:** <br>To reflect the changes after setting the value either via node label or in secret.json/secret.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod`. <br><br> If the value is set both by node label and secret.json/secret.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the secret.json/secret.yaml value. <br><br>The default value of `maxUnityVolumesPerNode` is 0. <br><br>If `maxUnityVolumesPerNode` is set to zero, then CO SHALL decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxUnityVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-unity-volumes-per-node` is not set.
+
+## Log Levels
+The CSI Driver for Dell EMC Unity allows users to configure different log levels using **logLevel** parameter. 
+
+The **logLevel** parameter needs to be configured in unity-creds secret created from secret.json or secret.yaml. The supported log levels are Info/Debug/Warn/Error. The default level is Info if logLevel is not configured by the user. The parameter can be changed dynamically without the need of driver re-installation or restart.
