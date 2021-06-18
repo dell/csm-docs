@@ -1,6 +1,6 @@
 ---
 title: Quick video lessons
-Description: short videos to quickly grasp the concepts
+Description: Short videos to quickly grasp the concepts
 ---
 
 ## Getting started with Kubernetes on Dell EMC Storage 
