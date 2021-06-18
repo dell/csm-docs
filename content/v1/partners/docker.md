@@ -13,8 +13,8 @@ The worker nodes on UCP backed clusters may run any of the OSs which we support 
 
 ## Docker EE UI Examples
 
-![](/storage-plugin-docs/images/first.png)
+![](/storage-plugin-docs/images/v1_images/first.png)
 
-![](/storage-plugin-docs/images/second.png)
+![](/storage-plugin-docs/images/v1_images/second.png)
 
-![](/storage-plugin-docs/images/third.png)
+![](/storage-plugin-docs/images/v1_images/third.png)

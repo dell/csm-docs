@@ -3,12 +3,23 @@ title: PowerScale
 Description: Code features for PowerScale Driver
 ---
 
+## Multicluster support
+
+You can connect single CSI-PowerScale driver with multiple PowerScale clusters.
+Pre-Requisistes:
+
+1. Creation of secret.json with credentials related to one or more Clusters.
+2. Creation of (at least) one Custom Storage classes for each non-default clusters.
+3. Creation of custom-volumesnapshot classes, if corresponding isiPaths differ in custom storage classes.
+4. Inclusion of cluster name in volume handle, if you want to provision existing static volumes.
+
 ## Consuming existing volumes with static provisioning
 
 You can use existent volumes from PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
 
 1. Open your volume in One FS, and take a note of volume-id.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
+3. In the following example, the PowerScale cluster accessZone is assumed as 'System', cluster name is assumed as 'pscale-cluster' and volume's internal name as 'isilonvol'. The volume-handle shoulb be in the format of <volume_name>=_=_=<export_id>=_=_=<zone>=_=_=<cluster_name>
 
 ```yaml
 apiVersion: v1
@@ -29,7 +40,7 @@ spec:
         Path: "/ifs/data/csi/isilonvol"
         Name: "isilonvol"
         AzServiceIP: 'XX.XX.XX.XX'
-    volumeHandle: isilonvol=_=_=652=_=_=System
+    volumeHandle: isilonvol=_=_=652=_=_=System=_=_=pscale-cluster
   claimRef:
     name: isilonstaticpvc
     namespace: default
@@ -91,20 +102,49 @@ In order to use Volume Snapshots, ensure the following components have been depl
 
 ### Volume Snapshot Class
 
-During the installation of CSI PowerScale driver version 1.3 and later, a Volume Snapshot Class is created using the new v1beta1 snapshot APIs. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.
+During the installation of CSI PowerScale driver version 1.3 and later, a Volume Snapshot Class is created using the new recommended snapshot APIs (depends upon Kubernetes version). This is the Volume Snapshot Class created for the default isiPath provided in my-isilon-settings.yaml (which is created based on values.yaml). For additional custom storage classes, separate custom volume snapshot class should be created (only if the isiPath is different from default storage class).
 
-Following is the manifest for the Volume Snapshot Class created during installation:
+Following are the manifests for the Volume Snapshot Class created during installation:
 
+1. VolumeSnapshotClass - v1
 ```yaml
+# For kubernetes version 20 (v1 snaps)
+# This is a sample manifest for creating snapshotclass with IsiPath other than default
+# pvc is created with sc which has some different IsiPath e.g. /ifs/custom
+# to create a snapshot for this pvc volumesnapshotclass must also be initilized with same IsiPath (i.e. /ifs/custom ) to work snapshot feature
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: "isilon-snapclass-custom"
+driver: csi-isilon.dellemc.com
+#The deletionPolicy of a volume snapshot class can either be Retain or Delete
+#If the deletionPolicy is Delete, then the underlying storage snapshot is deleted along with the VolumeSnapshotContent object.
+#If the deletionPolicy is Retain, then both the underlying snapshot and VolumeSnapshotContent remain
+deletionPolicy: Delete
+parameters:
+  #IsiPath should match with respective storageClass IsiPath
+  IsiPath: "/ifs/custom"
+```
+2. VolumeSnapshotClass - beta
+```yaml
+# For kubernetes version 18 and 19 (beta snaps)
+# This is a sample manifest for creating snapshotclass with IsiPath other than default
+# pvc is created with sc which has some different IsiPath e.g. /ifs/custom
+# to create a snapshot for this pvc volumesnapshotclass must also be initilized with same IsiPath (i.e. /ifs/custom ) to work snapshot feature
 apiVersion: snapshot.storage.k8s.io/v1beta1
 kind: VolumeSnapshotClass
 metadata:
-  name: isilon-snapclass
+name: "isilon-snapclass-custom"
 driver: csi-isilon.dellemc.com
+#The deletionPolicy of a volume snapshot class can either be Retain or Delete
+#If the deletionPolicy is Delete, then the underlying storage snapshot is deleted along with the VolumeSnapshotContent object.
+#If the deletionPolicy is Retain, then both the underlying snapshot and VolumeSnapshotContent remain
 deletionPolicy: Delete
-```
-
+parameters:
+#IsiPath should match with respective storageClass IsiPath
+IsiPath: "/ifs/custom"
 ### Create Volume Snapshot
+```
 
 The following is a sample manifest for creating a Volume Snapshot using the **v1beta1** snapshot APIs:
 
@@ -174,6 +214,7 @@ metadata:
 provisioner: "csi-isilon.dellemc.com"
 reclaimPolicy: Delete
 parameters:
+  ClusterName: <clusterName specified in secret.json>
   AccessZone: System
   isiPath: "/ifs/data/csi"
   AzServiceIP : 'XX.XX.XX.XX'
@@ -286,17 +327,18 @@ spec:
       image: busybox
       command: [ "sleep", "100000" ]
       volumeMounts:
-      - mountPath: "/data"
-        name: my-csi-volume
+        - mountPath: "/data"
+          name: my-csi-volume
   volumes:
-  - name: my-csi-volume
-    csi:
-      driver: csi-isilon.dellemc.com
-      volumeAttributes:
-        size: "2Gi"
+    - name: my-csi-volume
+      csi:
+        driver: csi-isilon.dellemc.com
+        volumeAttributes:
+          size: "2Gi"
+          ClusterName: "cluster1"
 ```
 
-This manifest will create a pod and attach newly created ephemeral inline csi volume to it.
+This manifest creates a pod in given cluster and attach newly created ephemeral inline csi volume to it.
 
 ## Topology
 ### Topology Support
@@ -310,6 +352,8 @@ The CSI PowerScale driver may not be installed or running on some nodes where Us
 We support CustomTopology which enables users to apply labels for nodes - "csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com" and expect the labels to be honored by the driver.
   
 When “enableCustomTopology” is set to “true”, CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and use them to initialize node pod with custom PowerScale FQDN/IP.
+**Note:** Only a single cluster can be configured as part of secret.json for custom topology.
+
 
 ### Topology Usage
    
@@ -343,6 +387,10 @@ parameters:
   # which  determines, when a node mounts the PVC, in NodeStageVolume, whether to add the k8s node to 
   # the "Root clients" field (when true) or "Clients" field (when false) of the NFS export 
   RootClientEnabled: "false"
+  # Name of PowerScale cluster where pv will be provisioned
+  # This name should match with name of one of the cluster configs in isilon-creds secret
+  # If this parameter is not specified, then default cluster config in isilon-creds secret will be considered if available
+  #ClusterName: "<cluster_name>"
 
 # volumeBindingMode controls when volume binding and dynamic provisioning should occur.
 # Immediate mode indicates that volume binding and dynamic provisioning occurs once the PersistentVolumeClaim is created
@@ -358,6 +406,22 @@ allowedTopologies:
           - csi-isilon.dellemc.com
 
 mountOptions: ["<mountOption1>", "<mountOption2>", ..., "<mountOptionN>"]
-
 ```
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
+
+## Support for Docker EE
+
+The CSI Driver for Dell EMC PowerScale supports Docker EE and deployment on clusters bootstrapped with UCP (Universal Control Plane) 3.3.5.
+*UCP version 3.3.5 supports kubernetes 1.20 and CSI driver can be installed on UCP 3.3.5 with Helm.
+
+The installation process for the driver on such clusters remains the same as the installation process on upstream clusters.
+
+On UCP based clusters, kubectl may not be installed by default, it is important that [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is installed prior to the installation of the driver.
+
+The worker nodes in UCP backed clusters may run any of the OSs which we support with upstream clusters.
+
+## Support custom networks for NFS I/O traffic
+
+When allowedNetworks is specified for using custom networks to handle NFS traffic, and a user already
+has workloads scheduled, there is a possibility that it might lead to backwards compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.
+Also, previous workload will still be using default network and not custom networks, for previous workloads to use custom networks recreation of pods required.

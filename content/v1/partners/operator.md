@@ -9,13 +9,13 @@ Users can install the Dell CSI Operator via OperatorHub.io on Kubernetes. The fo
 
 **Steps**
 1. Search DellEMC in storage category in Operatorhub.io.
-![](/storage-plugin-docs/images/ophub1.png)
+![](/storage-plugin-docs/images/v1_images/ophub1.png)
 
 2. Click DellEMC Operator.
-![](/storage-plugin-docs/images/ophub2.png)
+![](/storage-plugin-docs/images/v1_images/ophub2.png)
 
 3. Check the desired version is selected and click _Install_.  Follow the provided instructions.
-![](/storage-plugin-docs/images/ophub3.png)
+![](/storage-plugin-docs/images/v1_images/ophub3.png)
 
 ## Install CSI Drivers via Operator
 
