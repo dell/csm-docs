@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/operator/unity/" />
-<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Installing Unity CSI Driver via Operator
 ">
-<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
-<meta itemprop="wordCount" content="595">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="428">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -847,7 +847,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -905,8 +921,6 @@
       <ul>
         <li><a href="#pre-requisites">Pre-requisites</a></li>
         <li><a href="#modifyset-the-following-optional-environment-variables">Modify/Set the following <em>optional</em> environment variables</a></li>
-        <li><a href="#storageclass-parameters">StorageClass Parameters</a></li>
-        <li><a href="#snapshotclass-parameters">SnapshotClass parameters</a></li>
         <li><a href="#example-cr-for-unity">Example CR for Unity</a></li>
       </ul>
     </li>
@@ -988,13 +1002,13 @@ The following table lists driver configuration parameters for multiple storage a
 <tbody>
 <tr>
 <td>username</td>
-<td>Username for accessing unity system</td>
+<td>Username for accessing Unity system</td>
 <td>true</td>
 <td>-</td>
 </tr>
 <tr>
 <td>password</td>
-<td>Password for accessing unity system</td>
+<td>Password for accessing Unity system</td>
 <td>true</td>
 <td>-</td>
 </tr>
@@ -1006,7 +1020,7 @@ The following table lists driver configuration parameters for multiple storage a
 </tr>
 <tr>
 <td>arrayId</td>
-<td>ArrayID for unity system</td>
+<td>ArrayID for Unity system</td>
 <td>true</td>
 <td>-</td>
 </tr>
@@ -1088,18 +1102,6 @@ The driver will continue to use previous values in case of an error found in the
 <td>/var/run/csi/csi.sock</td>
 </tr>
 <tr>
-<td>X_CSI_DEBUG</td>
-<td>To enable debug mode</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>GOUNITY_DEBUG</td>
-<td>To enable debug mode for gounity library</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
 <td>X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS</td>
 <td>Flag to enable multiple pods use the same pvc on the same node with RWO access mode</td>
 <td>No</td>
@@ -1140,93 +1142,6 @@ The driver will continue to use previous values in case of an error found in the
 <td>Path to which the driver will chroot before running any iscsi commands.</td>
 <td>No</td>
 <td>/noderoot</td>
-</tr>
-</tbody>
-</table>
-<h3 id="storageclass-parameters">StorageClass Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>storagePool</td>
-<td>Unity Storage Pool CLI ID to use with in the Kubernetes storage class</td>
-<td>true</td>
-<td>-</td>
-</tr>
-<tr>
-<td>thinProvisioned</td>
-<td>To set volume thinProvisioned</td>
-<td>false</td>
-<td>&ldquo;true&rdquo;</td>
-</tr>
-<tr>
-<td>isDataReductionEnabled</td>
-<td>To set volume data reduction</td>
-<td>false</td>
-<td>&ldquo;false&rdquo;</td>
-</tr>
-<tr>
-<td>volumeTieringPolicy</td>
-<td>To set volume tiering policy</td>
-<td>false</td>
-<td>0</td>
-</tr>
-<tr>
-<td>FsType</td>
-<td>Block volume related parameter. To set File system type. Possible values are ext3,ext4,xfs. Supported for FC/iSCSI protocol only.</td>
-<td>false</td>
-<td>ext4</td>
-</tr>
-<tr>
-<td>hostIOLimitName</td>
-<td>Block volume related parameter.  To set unity host IO limit. Supported for FC/iSCSI protocol only.</td>
-<td>false</td>
-<td>&quot;&rdquo;</td>
-</tr>
-<tr>
-<td>nasServer</td>
-<td>NFS related parameter. NAS Server CLI ID for filesystem creation.</td>
-<td>true</td>
-<td>&quot;&rdquo;</td>
-</tr>
-<tr>
-<td>hostIoSize</td>
-<td>NFS related parameter. To set filesystem host IO Size.</td>
-<td>false</td>
-<td>&ldquo;8192&rdquo;</td>
-</tr>
-<tr>
-<td>reclaimPolicy</td>
-<td>What should happen when a volume is removed</td>
-<td>false</td>
-<td>Delete</td>
-</tr>
-</tbody>
-</table>
-<h3 id="snapshotclass-parameters">SnapshotClass parameters</h3>
-<p>Following parameters are not present in values.yaml in the Helm based installer</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>snapshotRetentionDuration</td>
-<td>TO set snapshot retention duration. Format:&ldquo;1:23:52:50&rdquo; (number of days:hours:minutes:sec)</td>
-<td>false</td>
-<td>&quot;&rdquo;</td>
 </tr>
 </tbody>
 </table>

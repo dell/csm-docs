@@ -12,11 +12,11 @@
 <meta property="og:description" content="Tests to validate PowerFlex CSI Driver installation" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v1/installation/test/powerflex/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Test PowerFlex CSI Driver">
 <meta itemprop="description" content="Tests to validate PowerFlex CSI Driver installation">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="1047">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="985">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -278,6 +278,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -471,6 +479,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -595,6 +611,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -749,6 +773,31 @@
           
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1graspvideo" href="/storage-plugin-docs/v1/grasp/video/">Quick video lessons</a>
         
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsv1concepts">
+      
       
       
     </li>
@@ -941,20 +990,20 @@ Normal Started 38s kubelet, k8s113a-10-247-102-215.lss.emc.com Started container
 <ol>
 <li>The <em>2vols</em> helm chart contains two PersistentVolumeClaim definitions, one in <code>pvc0.yaml</code> , and the other in <code>pvc1.yaml</code>. They are referenced by the <code>test.yaml</code> which creates the pod. The contents of the <code>Pvc0.yaml</code> file are described below:</li>
 </ol>
-<pre><code>kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: pvol
-  namespace: helmtest-vxflexos
-spec:
-  accessModes:
-  - ReadWriteOnce
-  volumeMode: Filesystem
-  resources:
-    requests:
-      storage: 8Gi
-  storageClassName: vxflexos
-</code></pre><ol start="2">
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>PersistentVolumeClaim<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>pvol<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>helmtest-vxflexos<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">accessModes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>- ReadWriteOnce<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">volumeMode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Filesystem<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>8Gi<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>vxflexos<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><ol start="2">
 <li>The <em>volumeMode: Filesystem</em> requires a mounted file system, and the <em>resources.requests.storage</em> of 8Gi requires an 8 GB file. In this case, the <em>storageClassName: vxflexos</em> directs the system to use one of the pre-defined storage classes created by the CSI Driver for Dell EMC PowerFlex installation process. This step yields a mounted <em>ext4</em> file system. You can see the storage class definitions in the PowerFlex installation helm chart files <em>storageclass.yaml</em> and <em>storageclass-xfs.yaml</em>.</li>
 <li>If you compare <em>pvol0.yaml</em> and <em>pvol1.yaml</em> , you will find that the latter uses a different storage class; <em>vxflexos-xfs</em>. This class gives you an <em>xfs</em> file system.</li>
 <li>To see the volumes you created, run kubectl get persistentvolumeclaim –n helmtest-vxflexos and kubectl describe persistentvolumeclaim –n helmtest-vxflexos.
@@ -973,17 +1022,17 @@ spec:
 <li>Run <code>sh snaptest.sh</code> to start the test.</li>
 </ol>
 <p>This will create a snapshot of each of the volumes in the container using <em>VolumeSnapshot</em> objects defined in <code>snap1.yaml</code> and <code>snap2.yaml</code>. The following are the contents of <code>snap1.yaml</code>:</p>
-<pre><code>apiVersion: snapshot.storage.k8s.io/v1alpha1
-kind: VolumeSnapshot
-metadata:
-  name: pvol0-snap
-  namespace: helmtest-vxflexos
-spec:
-  snapshotClassName: vxflexos-snapclass
-  source:
-    name: pvol
-    kind: PersistentVolumeClaim
-</code></pre><p><strong>Results</strong></p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>snapshot.storage.k8s.io/v1alpha1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>VolumeSnapshot<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>pvol0-snap<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>helmtest-vxflexos<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">snapshotClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>vxflexos-snapclass<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>pvol<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>PersistentVolumeClaim<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p><strong>Results</strong></p>
 <p>The <code>snaptest.sh</code> script will create a snapshot using the definitions in the <code>snap1.yaml</code> file. The <em>spec.source</em> section contains the volume that will be snapped. For example, if the volume to be snapped is <em>pvol0</em> , then the created snapshot is named <em>pvol0-snap</em>.</p>
 <p><em>NOTE:</em> The <code>snaptest.sh</code> shell script creates the snapshots, describes them, and then deletes them. You can see your snapshots using <code>kubectl get volumesnapshot -n test</code>.</p>
 <p>Notice that this <em>VolumeSnapshot</em> class has a reference to a <em>snapshotClassName: vxflexos-snapclass</em>. The CSI Driver for Dell EMC PowerFlex installation creates this class as its default snapshot class. You can see its definition in the installation directory file <code>volumesnapshotclass.yaml</code>.</p>
@@ -1007,23 +1056,23 @@ spec:
 <li>The snapshot is taken using <code>snap1.yaml</code>.</li>
 <li><em>Helm</em> is called to upgrade the deployment with a new definition, which is found in the <em>2vols+restore</em> directory. The <code>csi-vxflexos/test/helm/2vols+restore/templates</code> directory contains the newly created <code>createFromSnap.yaml</code> file. The script then creates a <em>PersistentVolumeClaim</em> , which is a volume that is dynamically created from the snapshot. Then the helm deployment is upgraded to contain the newly created third volume. In other words, when the <code>snaprestoretest.sh</code> creates a new volume with data from the snapshot, the restore operation is tested. The contents of the <code>createFromSnap.yaml</code> are described below:</li>
 </ol>
-<pre><code>apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: restorepvc
-  namespace: helmtest-vxflexos
-spec:
-  storageClassName: vxflexos
-  dataSource:
-    name: pvol0-snap
-    kind: VolumeSnapshot
-    apiGroup: snapshot.storage.k8s.io
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 8Gi
-</code></pre><p><em>NOTE:</em> The <em>spec.dataSource</em> clause, specifies a source <em>VolumeSnapshot</em> named <em>pvol0-snap1</em> which matches the snapshot&rsquo;s name in <code>snap1.yaml</code>.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>PersistentVolumeClaim<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>restorepvc<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>helmtest-vxflexos<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>vxflexos<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">dataSource</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>pvol0-snap<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>VolumeSnapshot<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">apiGroup</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>snapshot.storage.k8s.io<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">accessModes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- ReadWriteOnce<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>8Gi<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p><em>NOTE:</em> The <em>spec.dataSource</em> clause, specifies a source <em>VolumeSnapshot</em> named <em>pvol0-snap1</em> which matches the snapshot&rsquo;s name in <code>snap1.yaml</code>.</p>
 
 	
 	

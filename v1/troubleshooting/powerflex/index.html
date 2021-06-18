@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting PowerFlex Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerflex/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Troubleshooting PowerFlex Driver">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="231">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="287">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -278,6 +278,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -471,6 +479,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -595,6 +611,14 @@
   <ul>
     <li class="collapse show" id="storage-plugin-docsv1troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -769,6 +793,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsv1concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -921,15 +970,15 @@
 </tr>
 <tr>
 <td>Defcontext mount option seems to be ignored, volumes still are not being labeled correctly.</td>
-<td>Ensure SElinux is enabled on worker node, and ensure your container run time manager is properly configured to be</td>
-</tr>
-<tr>
-<td>utilized with SElinux.</td>
-<td></td>
+<td>Ensure SElinux is enabled on worker node, and ensure your container run time manager is properly configured to be utilized with SElinux.</td>
 </tr>
 <tr>
 <td>Mount options that interact with SElinux are not working (like defcontext).</td>
 <td>Check that your container orchestrator is properly configured to work with SElinux.</td>
+</tr>
+<tr>
+<td>Installation of the driver on Kubernetes v1.20 fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
+<td>Kubernetes v1.20 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20 (v1 snapshots) install CRDs from v4.0.0, see the <a href="../../docs/installation/helm/powerflex.md#volume-snapshot-requirements">Volume Snapshot Requirements</a></td>
 </tr>
 </tbody>
 </table>

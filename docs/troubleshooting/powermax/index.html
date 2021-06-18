@@ -12,10 +12,10 @@
 <meta property="og:description" content="Troubleshooting PowerMax Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powermax/" />
-<meta property="article:modified_time" content="2020-12-03T07:41:57-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Troubleshooting PowerMax Driver">
-<meta itemprop="dateModified" content="2020-12-03T07:41:57-05:00" />
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
 <meta itemprop="wordCount" content="112">
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -844,7 +844,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -960,11 +976,11 @@
 <td>You may need to put an insecure-registries entry in <code>/etc/docker/daemon.json</code> or login to the docker registry</td>
 </tr>
 <tr>
-<td><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt; driver</code> logs shows the driver cannot authenticate</td>
+<td><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt; driver</code> logs show the driver cannot authenticate</td>
 <td>Check your secret’s username and password</td>
 </tr>
 <tr>
-<td><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt; driver</code> logs shows the driver failed to connect to the U4P because it couldn’t verify the certificates</td>
+<td><code>kubectl logs powermax-controller-&lt;xyz&gt; –n &lt;namespace&gt; driver</code> logs show the driver failed to connect to the U4P because it couldn’t verify the certificates</td>
 <td>Check the powermax-certs secret and ensure it is not empty or it has the valid certificates</td>
 </tr>
 </tbody>

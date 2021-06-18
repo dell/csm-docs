@@ -90,7 +90,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -276,6 +276,14 @@
   <ul>
     <li class="collapse show" id="storage-plugin-docsv1installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -469,6 +477,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -593,6 +609,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -767,6 +791,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsv1concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -848,12 +897,22 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#installation">Installation</a>
       <ul>
+        <li></li>
+        <li><a href="#installation-using-operator-lifecycle-manager">Installation Using Operator Lifecycle Manager</a></li>
         <li><a href="#manual-installation">Manual Installation</a></li>
       </ul>
     </li>
-    <li><a href="#driver-install-via-dell-csi-operator">Driver Install via Dell CSI Operator</a></li>
+    <li><a href="#custom-resource-definitions">Custom Resource Definitions</a></li>
+    <li><a href="#pre-requisites-for-installation-of-the-csi-drivers">Pre-Requisites for installation of the CSI Drivers</a>
+      <ul>
+        <li><a href="#pre-requisites-for-upstream-kubernetes-clusters">Pre-requisites for upstream Kubernetes Clusters</a></li>
+        <li><a href="#pre-requisites-for-red-hat-openshift-clusters">Pre-requisites for Red Hat OpenShift Clusters</a></li>
+      </ul>
+    </li>
+    <li><a href="#replacing-csi-operator-with-dell-csi-operator">Replacing CSI Operator with Dell CSI Operator</a></li>
+    <li><a href="#install-csi-driver">Install CSI Driver</a></li>
   </ul>
 </nav>
 
@@ -905,31 +964,126 @@
      
 	
 	<p>The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.</p>
-<ul>
-<li>For installing via OperatorHub.io on Kubernetes, go to the <a href="../../partners/operator/">OperatorHub page</a>.</li>
-<li>For installing via OpenShift with the certified Operator, go to the <a href="../../partners/redhat/">OpenShift page</a>.</li>
-<li>For installing manually, follow the instructions below.</li>
-</ul>
-<h3 id="manual-installation">Manual Installation</h3>
-<h4 id="pre-requisites">Pre-requisites</h4>
+<h2 id="installation">Installation</h2>
 <p>Dell CSI Operator has been tested and qualified with</p>
 <ul>
-<li>Upstream Kubernetes cluster v1.17, v1.18, v1.19</li>
-<li>OpenShift Clusters 4.5, 4.6 with RHEL 7.x &amp; RHCOS worker nodes</li>
-<li>For upstream k8s clusters, make sure to install
+<li>Upstream Kubernetes or OpenShift (see <a href="../../dell-csi-driver/">supported versions</a>)</li>
+</ul>
+<h4 id="before-you-begin">Before you begin</h4>
+<p>If you have installed an old version of the <code>dell-csi-operator</code> which was available with the name <em>CSI Operator</em>, please refer this <a href="#replacing-csi-operator-with-dell-csi-operator">section</a> before continuing.</p>
+<h4 id="full-list-of-csi-drivers-and-versions-supported-by-the-dell-csi-operator">Full list of CSI Drivers and versions supported by the Dell CSI Operator</h4>
+<table>
+<thead>
+<tr>
+<th>CSI Driver</th>
+<th>Version</th>
+<th>ConfigVersion</th>
+<th>Kubernetes Version</th>
+<th>OpenShift Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSI PowerMax</td>
+<td>1.5</td>
+<td>v4</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.4, 4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI PowerMax</td>
+<td>1.6</td>
+<td>v5</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+<tr>
+<td>CSI PowerFlex</td>
+<td>1.3</td>
+<td>v3</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.4, 4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI PowerFlex</td>
+<td>1.4</td>
+<td>v4</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+<tr>
+<td>CSI PowerScale</td>
+<td>1.4</td>
+<td>v4</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.4, 4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI PowerScale</td>
+<td>1.5</td>
+<td>v5</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+<tr>
+<td>CSI Unity</td>
+<td>1.4</td>
+<td>v3</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.4, 4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI Unity</td>
+<td>1.5</td>
+<td>v4</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+<tr>
+<td>CSI PowerStore</td>
+<td>1.2</td>
+<td>v2</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI PowerStore</td>
+<td>1.3</td>
+<td>v3</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+</tbody>
+</table>
+</br>
+<p><strong>Dell CSI Operator can be installed via OLM (Operator Lifecycle Manager) and manual installation.</strong></p>
+<h3 id="installation-using-operator-lifecycle-manager">Installation Using Operator Lifecycle Manager</h3>
+<p><code>dell-csi-operator</code> can be installed using Operator Lifecycle Manager (OLM) on upstream Kubernetes clusters &amp; Red Hat OpenShift Clusters.<br>
+The installation process involves creation of a <code>Subscription</code> object either via the <em>OperatorHub</em> UI or using <code>kubectl/oc</code>. While creating the <code>Subscription</code> you can set the Approval strategy for the <code>InstallPlan</code> for the Operator to -</p>
 <ul>
-<li>Beta VolumeSnapshot CRDs (can be installed using the Operator installation script)</li>
-<li>External Volume Snapshot Controller</li>
+<li><em>Automatic</em> - If you want the Operator to be automatically installed or upgraded (once an upgrade becomes available)</li>
+<li><em>Manual</em> - If you want a Cluster Administrator to manually review and approve the <code>InstallPlan</code> for installation/upgrades</li>
 </ul>
-</li>
+<h4 id="pre-requisite-for-installation-with-olm">Pre-Requisite for installation with OLM</h4>
+<p>Please run the following commands for creating the required <code>ConfigMap</code> before installing the <code>dell-csi-operator</code> using OLM.</p>
+<pre><code>$ git clone github.com/dell/dell-csi-operator
+$ cd dell-csi-operator
+$ tar -czf config.tar.gz driverconfig/
+# Replace operator-namespace in the below command with the actual namespace where the operator will be deployed by OLM
+$ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n &lt;operator-namespace&gt;
+</code></pre><h5 id="upstream-kubernetes">Upstream Kubernetes</h5>
+<ul>
+<li>For installing via OperatorHub.io on Kubernetes, go to the <a href="../../partners/operator/">OperatorHub page</a>.</li>
 </ul>
-<blockquote>
-<p><strong>Note-</strong> For more insights or detailed pre-requisites refer <a href="https://github.com/dell/dell-csi-operator">https://github.com/dell/dell-csi-operator</a></p>
-</blockquote>
+<h5 id="red-hat-openshift-clusters">Red Hat OpenShift Clusters</h5>
+<ul>
+<li>For installing via OpenShift with the Operator, go to the <a href="../../partners/redhat/">OpenShift page</a>.</li>
+</ul>
+<h3 id="manual-installation">Manual Installation</h3>
 <h4 id="steps">Steps</h4>
 <ol>
-<li>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a></li>
-<li>Run &lsquo;bash scripts/install.sh&rsquo; to install the operator
+<li>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a>. Skip this step for Offline Install. And continue using workspace created by untar of dell-csi-operator-bundle.tar.gz.</li>
+<li>Run <code>bash scripts/install.sh</code> to install the operator
 
 
 
@@ -941,9 +1095,7 @@
 	<img class="card-img-top" src="/storage-plugin-docs/v1/installation/operator/non-olm-1_hubed218f9b8f0561db6687b1d7e94564b_353937_2500x0_resize_q75_catmullrom.jpg" width="2500" height="1006">
 	
 </div></li>
-<li>Run the command &lsquo;oc get pods&rsquo; to validate the install completed
-<ul>
-<li>Should be able to see the operator related pod on default namespace
+<li>Run the command <code>oc get pods</code> to validate the install completed, should be able to see the operator related pod on default namespace
 
 
 
@@ -955,11 +1107,116 @@
 	<img class="card-img-top" src="/storage-plugin-docs/v1/installation/operator/non-olm-2_huf4405aa1524950a96c6019bf9f4df9b0_257760_3500x800_resize_q75_catmullrom.jpg" width="3500" height="800">
 	
 </div></li>
+</ol>
+<h2 id="custom-resource-definitions">Custom Resource Definitions</h2>
+<p>As part of the Dell CSI Operator installation, a CRD representing each driver installation is also installed.<br>
+List of CRDs which are installed in API Group <code>storage.dell.com</code></p>
+<ul>
+<li>csipowermax</li>
+<li>csiunity</li>
+<li>csivxflexos</li>
+<li>csiisilon</li>
+<li>csipowerstore</li>
+<li>csipowermaxrevproxy</li>
+</ul>
+<p>For installation of the supported drivers, a <code>CustomResource</code> has to be created in your cluster.</p>
+<h2 id="pre-requisites-for-installation-of-the-csi-drivers">Pre-Requisites for installation of the CSI Drivers</h2>
+<h3 id="pre-requisites-for-upstream-kubernetes-clusters">Pre-requisites for upstream Kubernetes Clusters</h3>
+<p>On upstream Kubernetes clusters, make sure to install</p>
+<ul>
+<li>VolumeSnapshot CRDs
+<ul>
+<li>On clusters running v1.20, make sure to install v1 VolumeSnapshot CRDs</li>
+<li>On clusters running v1.18 &amp; v1.19, make sure to install v1beta1 VolumeSnapshot CRDs</li>
 </ul>
 </li>
+<li>External Volume Snapshot Controller with correct version</li>
+</ul>
+<h3 id="pre-requisites-for-red-hat-openshift-clusters">Pre-requisites for Red Hat OpenShift Clusters</h3>
+<h4 id="iscsi">iSCSI</h4>
+<p>If you are installing a CSI driver which is going to use iSCSI as the transport protocol, please follow the following instructions.<br>
+In Red Hat OpenShift clusters, you can create a <code>MachineConfig</code> object using the console or <code>oc</code> to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a <code>MachineConfig</code> object:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>machineconfiguration.openshift.io/v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>MachineConfig<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-iscsid<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>worker<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2.2.0</span><span style="color:#f8f8f8;text-decoration:underline">  
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;iscsid.service&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>Once the <code>MachineConfig</code> object has been deployed, CoreOS will ensure that <code>iscsid.service</code> starts automatically.</p>
+<p>Alternatively, you can check the status of iSCSI service by entering the following command on each worker node in the cluster:</p>
+<p><code>sudo systemctl status iscsid</code></p>
+<p>The service should be up and running (i.e. should be in active state).</p>
+<p>If the <code>iscsid.service</code> is not running, then perform the following steps on each worker node in the cluster</p>
+<ol>
+<li><code>Login</code> to worker nodes and check if the file /etc/iscsi/initiatorname.iscsi has been created properly</li>
+<li>If the file doesn&rsquo;t exist or it doesn&rsquo;t contain a valid ISCSI IQN, then make sure it exists with valid entries</li>
+<li>Ensure that iscsid service is running - Enable <code>sudo systemctl enable iscsid</code> &amp; restart <code>sudo systemctl restart iscsid</code> iscsid if necessary.
+Note: If your worker nodes are running on Red Hat CoreOS , you can refer the URL <a href="https://coreos.com/os/docs/latest/iscsi.html#enable-automatic-iscsi-login-at-boot">https://coreos.com/os/docs/latest/iscsi.html#enable-automatic-iscsi-login-at-boot</a> for additional information.</li>
 </ol>
-<h2 id="driver-install-via-dell-csi-operator">Driver Install via Dell CSI Operator</h2>
-<p>For information on how to install the CSI drivers via the Dell CSI Operator, please refer to the sub-pages below for each driver.</p>
+<h4 id="multipath">MultiPath</h4>
+<p>If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - <em>multipathd</em>, please follow the below instructions</p>
+<p>To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.</p>
+<p><code>echo 'defaults { user_friendly_names yes find_multipaths yes } blacklist { }' | base64 -w0</code></p>
+<p>Use the base64 encoded string output in the following <code>MachineConfig</code> yaml file (under source section)</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>machineconfiguration.openshift.io/v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>MachineConfig<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>workers-multipath-conf-default<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>worker<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2.2.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">files</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>data<span style="color:#000;font-weight:bold">:</span>text/plain;charset=utf<span style="color:#0000cf;font-weight:bold">-8</span>;base64<span style="color:#000;font-weight:bold">,</span>ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">verification</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">filesystem</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>root<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">400</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/etc/multipath.conf<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>After deploying this<code>MachineConfig</code> object, CoreOS will start multipath service automatically.<br>
+Alternatively you can check the status of multipath service by entering the following command in each worker nodes.<br>
+<code>sudo multipath -ll</code></p>
+<p>If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+<code>sudo /sbin/mpathconf –-enable --with_multipathd y</code></p>
+<p>Finally , you have to restart the service by providing the command
+<code>sudo systemctl restart multipathd</code></p>
+<p>For additional information refer official documentation of multipath configuration.</p>
+<h2 id="replacing-csi-operator-with-dell-csi-operator">Replacing CSI Operator with Dell CSI Operator</h2>
+<p><code>Dell CSI Operator</code> was previously available, with the name <code>CSI Operator</code>, for both manual and OLM installation.<br>
+<code>CSI Operator</code> has been discontinued and has been renamed to <code>Dell CSI Operator</code>.  This is just a name change and as a result,
+the Kubernetes resources created as part of the Operator deployment will use the name <code>dell-csi-operator</code> instead of <code>csi-operator</code>.</p>
+<p>Before proceeding with the installation of the new <code>Dell CSI Operator</code>, any existing <code>CSI Operator</code> installation has to be completely
+removed from the cluster.</p>
+<p>Note - This <strong>doesn&rsquo;t</strong> impact any of the CSI Drivers which have been installed in the cluster</p>
+<p>If the old <code>CSI Operator</code> was installed manually, then run the following command from the root of the repository which was used
+originally for installation</p>
+<pre><code>bash scripts/undeploy.sh
+</code></pre>
+<p>If you don&rsquo;t have the original repository available, then run the following commands</p>
+<pre><code>git clone https://github.com/dell/dell-csi-operator.git
+cd dell-csi-operator
+git checkout csi-operator-v1.0.0
+bash scripts/undeploy.sh
+</code></pre>
+<p>Note - Once you have removed the old <code>CSI Operator</code>, then for installing the new <code>Dell CSI Operator</code>, you will need to pull/checkout the latest code</p>
+<p>If you had installed old CSI Operator using OLM, then please follow un-installation instructions provided by OperatorHub. This will mostly involve:</p>
+<pre><code>* Deleting the CSI Operator Subscription  
+* Deleting the CSI Operator CSV  
+</code></pre>
+<h2 id="install-csi-driver">Install CSI Driver</h2>
+<p>To install CSI drivers using Dell CSI Operator, please refer <a href="./installdriver">here</a></p>
+<p><strong>NOTE:</strong> For more information on pre-requisites and parameters, please refer to the sub-pages below for each driver.</p>
 
         <div class="section-index">
     
@@ -1005,6 +1262,21 @@
         
             
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+                    </h5>
+                    <p></p>
+                </div>
             
         
             

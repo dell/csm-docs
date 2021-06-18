@@ -87,7 +87,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -119,7 +119,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -839,7 +839,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -941,7 +957,7 @@
 	<h1>Introduction</h1>
      
 	
-	<p>The CSI Drivers by Dell EMC implement an interface between <a href="https://kubernetes-csi.github.io/docs/">CSI</a> (CSI spec v1.2) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.</p>
+	<p>The CSI Drivers by Dell EMC implement an interface between <a href="https://kubernetes-csi.github.io/docs/">CSI</a> (CSI spec v1.3) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.</p>
 <p>The following are the drivers provided for the Dell storage family:</p>
 <table>
 <thead>
@@ -957,6 +973,14 @@
 <tbody>
 <tr>
 <td>Current</td>
+<td align="center">v1.6</td>
+<td align="center">v1.6</td>
+<td align="center">v1.4</td>
+<td align="center">v1.5</td>
+<td align="center">v1.7</td>
+</tr>
+<tr>
+<td><a href="../../v1/">Previous</a></td>
 <td align="center">v1.5</td>
 <td align="center">v1.5</td>
 <td align="center">v1.3</td>
@@ -964,7 +988,7 @@
 <td align="center">v1.6</td>
 </tr>
 <tr>
-<td><a href="../../v1/">Previous</a></td>
+<td><a href="../../v2/">Older</a></td>
 <td align="center">v1.4</td>
 <td align="center">v1.4</td>
 <td align="center">v1.2</td>
@@ -972,7 +996,7 @@
 <td align="center">v1.5</td>
 </tr>
 <tr>
-<td><a href="../archives/">Older</a></td>
+<td><a href="../archives/">Archives</a></td>
 <td align="center">v1.3</td>
 <td align="center">v1.3</td>
 <td align="center">v1.1</td>
@@ -995,7 +1019,7 @@
 <tr>
 <th></th>
 <th align="center">PowerMax</th>
-<th align="center">PowerFlex/VxFlex OS</th>
+<th align="center">PowerFlex</th>
 <th align="center">   Unity</th>
 <th align="center">PowerScale/Isilon</th>
 <th align="center">PowerStore</th>
@@ -1004,34 +1028,34 @@
 <tbody>
 <tr>
 <td>Storage Array</td>
-<td align="center">5978.479.479, 5978.669.669, Unisphere 9.1, 9.2</td>
-<td align="center">3.5.x</td>
-<td align="center">OE 5.0.2, 5.0.3, 5.0.4, 5.0.5, 5.0.6</td>
+<td align="center">5978.479.479, 5978.669.669, Unisphere 9.2</td>
+<td align="center">3.5.x, 3.6.x</td>
+<td align="center">5.0.3, 5.0.4, 5.0.5, 5.0.6, 5.0.7</td>
 <td align="center">OneFS 8.1, 8.2, 9.0, 9.1</td>
-<td align="center">1.0.x</td>
+<td align="center">1.0.x, 2.0.x</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
-<td align="center">1.18, 1.19, 1.20</td>
-<td align="center">1.18, 1.19, 1.20</td>
-<td align="center">1.18, 1.19, 1.20</td>
-<td align="center">1.18, 1.19, 1.20</td>
-<td align="center">1.18, 1.19, 1.20</td>
+<td align="center">1.19, 1.20, 1.21</td>
+<td align="center">1.19, 1.20, 1.21</td>
+<td align="center">1.19, 1.20, 1.21</td>
+<td align="center">1.19, 1.20, 1.21</td>
+<td align="center">1.19, 1.20, 1.21</td>
 </tr>
 <tr>
 <td>RHEL</td>
-<td align="center">7.8, 7.9, 8.3</td>
-<td align="center">7.8, 7.9, 8.3</td>
-<td align="center">7.8, 7.9, 8.3</td>
-<td align="center">7.8, 7.9, 8.3</td>
-<td align="center">7.8, 7.9, 8.3</td>
+<td align="center">7.x,8.x</td>
+<td align="center">7.x,8.x</td>
+<td align="center">7.x,8.x</td>
+<td align="center">7.x,8.x</td>
+<td align="center">7.x,8.x</td>
 </tr>
 <tr>
 <td>Ubuntu</td>
 <td align="center">20.04</td>
 <td align="center">20.04</td>
-<td align="center">20.04</td>
-<td align="center">20.04</td>
+<td align="center">18.04, 20.04</td>
+<td align="center">18.04, 20.04</td>
 <td align="center">20.04</td>
 </tr>
 <tr>
@@ -1047,40 +1071,56 @@
 <td align="center">no</td>
 <td align="center">15SP2</td>
 <td align="center">15SP2</td>
-<td align="center">no</td>
-<td align="center">no</td>
+<td align="center">15SP2</td>
+<td align="center">15SP2</td>
 </tr>
 <tr>
 <td>Fedora Core OS</td>
 <td align="center">no</td>
-<td align="center">5.10</td>
+<td align="center">5.x</td>
 <td align="center">no</td>
 <td align="center">no</td>
 <td align="center">no</td>
 </tr>
 <tr>
 <td>OpenShift</td>
-<td align="center">4.6, 4.7</td>
-<td align="center">4.6, 4.7</td>
-<td align="center">4.6, 4.7</td>
-<td align="center">4.6, 4.7</td>
-<td align="center">4.6, 4.7</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
 </tr>
 <tr>
-<td>Docker EE</td>
-<td align="center">3.1</td>
-<td align="center">3.1</td>
-<td align="center">3.1</td>
-<td align="center">3.1</td>
-<td align="center">3.1</td>
+<td>MKE</td>
+<td align="center">3.4.0</td>
+<td align="center">3.4.0</td>
+<td align="center">3.4.0</td>
+<td align="center">3.4.0</td>
+<td align="center">3.4.0</td>
 </tr>
 <tr>
 <td>Google Anthos</td>
-<td align="center">1.5</td>
+<td align="center">1.6</td>
 <td align="center">1.6</td>
 <td align="center">no</td>
 <td align="center">no</td>
-<td align="center">1.5</td>
+<td align="center">1.7</td>
+</tr>
+<tr>
+<td>VMware Tanzu</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>RKE</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+<td align="center">no</td>
 </tr>
 </tbody>
 </table>
@@ -1194,7 +1234,7 @@
 </tr>
 <tr>
 <td>Multi-array</td>
-<td align="center">yes (via Unisphere)</td>
+<td align="center">yes</td>
 <td align="center">yes</td>
 <td align="center">yes</td>
 <td align="center">yes</td>
@@ -1290,6 +1330,10 @@
     
     
     <hr class="panel-line">
+        
+            
+        
+            
         
             
         

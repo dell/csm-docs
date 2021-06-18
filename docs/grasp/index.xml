@@ -22,11 +22,11 @@
       <description>
         
         
-        &lt;p&gt;What is a container : &lt;a href=&#34;https://www.docker.com/resources/what-container&#34;&gt;https://www.docker.com/resources/what-container&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;What is container orchestration : &lt;a href=&#34;https://www.infoworld.com/article/3268073/what-is-kubernetes-container-orchestration-explained.html&#34;&gt;https://www.infoworld.com/article/3268073/what-is-kubernetes-container-orchestration-explained.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Kubernetes (k8s) : &lt;a href=&#34;https://kubernetes.io/&#34;&gt;https://kubernetes.io/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Docker : &lt;a href=&#34;https://www.docker.com/&#34;&gt;https://www.docker.com/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Understanding CSI : &lt;a href=&#34;https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b&#34;&gt;https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;What is a container: &lt;a href=&#34;https://www.docker.com/resources/what-container&#34;&gt;https://www.docker.com/resources/what-container&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What is container orchestration: &lt;a href=&#34;https://www.infoworld.com/article/3268073/what-is-kubernetes-container-orchestration-explained.html&#34;&gt;https://www.infoworld.com/article/3268073/what-is-kubernetes-container-orchestration-explained.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Kubernetes (k8s): &lt;a href=&#34;https://kubernetes.io/&#34;&gt;https://kubernetes.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Docker: &lt;a href=&#34;https://www.docker.com/&#34;&gt;https://www.docker.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Understanding CSI: &lt;a href=&#34;https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b&#34;&gt;https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;How to write a CSI plugin: &lt;a href=&#34;https://arslan.io/2018/06/21/how-to-write-a-container-storage-interface-csi-plugin/&#34;&gt;https://arslan.io/2018/06/21/how-to-write-a-container-storage-interface-csi-plugin/&lt;/a&gt;&lt;/p&gt;
 
       </description>

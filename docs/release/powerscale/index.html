@@ -12,11 +12,11 @@
 <meta property="og:description" content="Release notes for PowerScale CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/release/powerscale/" />
-<meta property="article:modified_time" content="2021-04-06T18:57:40+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Release notes for PowerScale CSI driver">
-<meta itemprop="dateModified" content="2021-04-06T18:57:40&#43;05:30" />
-<meta itemprop="wordCount" content="432">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="421">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -844,7 +844,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -898,7 +914,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csi-driver-for-powerscale-v150">Release Notes - CSI Driver for PowerScale v1.5.0</a>
+    <li><a href="#release-notes---csi-driver-for-powerscale-v160">Release Notes - CSI Driver for PowerScale v1.6.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -955,18 +971,20 @@
 	<h1>PowerScale</h1>
 
 	       
-	<h2 id="release-notes---csi-driver-for-powerscale-v150">Release Notes - CSI Driver for PowerScale v1.5.0</h2>
+	<h2 id="release-notes---csi-driver-for-powerscale-v160">Release Notes - CSI Driver for PowerScale v1.6.0</h2>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
-<li>Added support for Kubernetes 1.20</li>
-<li>Added support for OpenShift 4.7 with RHEL and CoreOS worker nodes</li>
-<li>Added support for Red Hat Enterprise Linux (RHEL) 8.x</li>
-<li>Added multi-cluster support through single instance of driver installation</li>
-<li>Added support for custom networks for NFS I/O traffic</li>
-<li>SSH permissions are no longer required. You can safely revoke the privilege ISI_PRIV_LOGIN_SSH for the CSI driver user.</li>
+<li>Added support for Kubernetes 1.21.</li>
+<li>Added support for Red Hat Enterprise Linux (RHEL) 8.4.</li>
+<li>Added support for CSI Spec 1.3.</li>
+<li>Added support for Volume Limit.</li>
+<li>Added support for node selector functionality to helm template.</li>
+<li>Added support for secret in YAML format.</li>
+<li>Added support for Dynamic log level changes.</li>
+<li>Added support to make dnsPolicy of node component configurable via Helm</li>
 </ul>
 <h3 id="fixed-issues">Fixed Issues</h3>
-<p>There are no Fixed issues in this release.</p>
+<p>There are no fixed issues in this release.</p>
 <h3 id="known-issues">Known Issues</h3>
 <table>
 <thead>
@@ -977,7 +995,7 @@
 </thead>
 <tbody>
 <tr>
-<td>Creating snapshot fails if the parameter IsiPath in volume snapshot class and related storage class are not the same. The driver uses the incorrect IsiPath parameter and tries to locate the source volume due to the inconsistency.</td>
+<td>Creating snapshot fails if the parameter IsiPath in volume snapshot class and related storage class is not the same. The driver uses the incorrect IsiPath parameter and tries to locate the source volume due to the inconsistency.</td>
 <td>Ensure IsiPath in VolumeSnapshotClass yaml and related storageClass yaml are the same.</td>
 </tr>
 <tr>
@@ -985,16 +1003,16 @@
 <td>To perform the delete volume action, the user account must be assigned a role that has the privilege ISI_PRIV_IFS_RESTORE. The user account must have the following set of privileges to ensure that all the CSI Isilon driver capabilities work properly:<br> * ISI_PRIV_LOGIN_PAPI<br> * ISI_PRIV_NFS<br> * ISI_PRIV_QUOTA<br> * ISI_PRIV_SNAPSHOT<br> * ISI_PRIV_IFS_RESTORE<br> * ISI_PRIV_NS_IFS_ACCESS<br> In some cases, ISI_PRIV_BACKUP is also required, for example, when files owned by other users have mode bits set to 700.</td>
 </tr>
 <tr>
-<td>If hostname is mapped to loopback IP in /etc/hosts file, and pods are created using 1.3.0.1 release, after upgrade to 1.4.0 there is a possibility of &ldquo;localhost&rdquo; as stale entry in export</td>
-<td>We recommend you not to map hostname to loopback IP in /etc/hosts file</td>
+<td>If the hostname is mapped to loopback IP in /etc/hosts file, and pods are created using 1.3.0.1 release, after upgrade to 1.4.0 there is a possibility of &ldquo;localhost&rdquo; as a stale entry in export</td>
+<td>We recommend you not to map a hostname to loopback IP in /etc/hosts file</td>
 </tr>
 <tr>
-<td>If the length of the nodeID exceeds 128 characters, driver fails to update CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn&rsquo;t allow nodeID to be greater than 128 characters.</td>
-<td>The CSI PowerScale driver uses the hostname for building the nodeID which is set in CSINode resource object, hence we recommend not having very long hostnames in order to avoid this issue. This current limitation of 128 characters is likely to be relaxed in future kubernetes versions as per this issue in the community: <a href="https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581">https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581</a></td>
+<td>If the length of the nodeID exceeds 128 characters, the driver fails to update the CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn&rsquo;t allow nodeID to be greater than 128 characters.</td>
+<td>The CSI PowerScale driver uses the hostname for building the nodeID which is set in the CSINode resource object, hence we recommend not having very long hostnames in order to avoid this issue. This current limitation of 128 characters is likely to be relaxed in future Kubernetes versions as per this issue in the community: <a href="https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581">https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581</a></td>
 </tr>
 <tr>
-<td>Driver installation warning: <strong>&ldquo;OpenShift version 4.7, is newer than the version that has been tested. Latest tested version is: 4.6&rdquo;</strong></td>
-<td>Ignore this warning and continue with the installation. v1.5.0 release of the driver supports OpenShift 4.6/4.7 .</td>
+<td>CSI Driver installation fails with the error message &ldquo;error getting FQDN&rdquo;.</td>
+<td>Map IP address of host with its FQDN in /etc/hosts file.</td>
 </tr>
 </tbody>
 </table>

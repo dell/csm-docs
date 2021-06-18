@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting PowerScale Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerscale/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Troubleshooting PowerScale Driver">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="92">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="160">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -278,6 +278,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -471,6 +479,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -595,6 +611,14 @@
   <ul>
     <li class="collapse show" id="storage-plugin-docsv1troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -769,6 +793,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsv1concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -906,11 +955,15 @@
 <tbody>
 <tr>
 <td>The <code>kubectl logs isilon-controller-0 -n isilon -c driver</code> logs shows the driver <strong>cannot authenticate</strong></td>
-<td>Check your secret&rsquo;s username and password</td>
+<td>Check your secret&rsquo;s username and password for corresponding cluster</td>
 </tr>
 <tr>
 <td>The <code>kubectl logs isilon-controller-0 -n isilon -c driver</code> logs shows the driver failed to connect to the Isilon because it <strong>couldn&rsquo;t verify the certificates</strong></td>
-<td>Check the isilon-certs secret and ensure it is not empty and it has the valid certificates. Set <code>isiInsecure: &quot;true&quot;</code> for insecure connection. SSL validation is recommended in production environment.</td>
+<td>Check the isilon-certs-<n> secret and ensure it is not empty and it has the valid certificates. Set <code>isiInsecure: &quot;true&quot;</code> for insecure connection. SSL validation is recommended in production environment.</td>
+</tr>
+<tr>
+<td>The <code>kubectl logs isilon-controller-0 -n isilon -c driver</code> logs shows the driver error: <strong>create volume failed, Access denied. create directory as requested</strong></td>
+<td>This situation can happen when the user who created the base path is different from the user configured for the driver. Make sure the user used to deploy CSI-Driver must have enough rights on the base path (i.e. isiPath) to perform all operations.</td>
 </tr>
 </tbody>
 </table>

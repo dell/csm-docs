@@ -12,11 +12,11 @@
 <meta property="og:description" content="Release notes for Dell CSI Operator" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/release/operator/" />
-<meta property="article:modified_time" content="2021-03-19T17:44:38+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Operator">
 <meta itemprop="description" content="Release notes for Dell CSI Operator">
-<meta itemprop="dateModified" content="2021-03-19T17:44:38&#43;05:30" />
-<meta itemprop="wordCount" content="227">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="191">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -844,7 +844,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -898,7 +914,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---dell-csi-operator-130">Release Notes - Dell CSI Operator 1.3.0</a>
+    <li><a href="#release-notes---dell-csi-operator-140">Release Notes - Dell CSI Operator 1.4.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -956,20 +972,17 @@
 	<h1>Operator</h1>
 
 	       
-	<h2 id="release-notes---dell-csi-operator-130">Release Notes - Dell CSI Operator 1.3.0</h2>
+	<h2 id="release-notes---dell-csi-operator-140">Release Notes - Dell CSI Operator 1.4.0</h2>
 <blockquote>
-<p><strong>Note:</strong> There will be a delay in certification of Dell CSI Operator 1.3.0 and it will not be available for download from the Red Hat OpenShift certified catalog. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.3.0 release.</p>
+<p><strong>Note:</strong> There will be a delay in certification of Dell CSI Operator 1.4.0 and it will not be available for download from the Red Hat OpenShift certified catalog. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.4.0 release.</p>
 </blockquote>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
-<li>Added support for OpenShift 4.6, 4.7 with RHEL and CoreOS worker nodes</li>
-<li>Added support for Upstream Kubernetes cluster v1.18, v1.19, v1.20</li>
-<li>Migrated to Operator SDK 1.0</li>
-<li>Added support for CSI Ephemeral Inline Volumes</li>
-<li>Changed driver controller installation from <em>StatefulSet</em> to <em>Deployment</em></li>
-<li>Added Support for multiple replicas for driver controller <em>Deployment</em></li>
-<li>Added Support for setting volumeBindingMode for Storage Classes</li>
-<li>Added Support for setting topology keys for Storage Classes</li>
+<li>Added support for Kubernetes v1.21</li>
+<li>Deprecated support for Kubernetes v1.18</li>
+<li>Migrated to Operator SDK v1.5.0</li>
+<li>Deprecated Storage Class Creation and Support</li>
+<li>Deprecated Volume Snapshot Class Creation and Support</li>
 </ul>
 <h3 id="fixed-issues">Fixed Issues</h3>
 <p>There are no fixed issues in this release.</p>
@@ -983,8 +996,8 @@
 </thead>
 <tbody>
 <tr>
-<td>A warning message will be listed in the events for StorageClasses if the driver is not upgraded after an operator upgrade. This happens because of the fix provided by Kubernetes in 1.20 for one of the known <a href="https://github.com/kubernetes/kubernetes/issues/65200">issue</a>.</td>
-<td>StorageClasses will get updated automatically after 45 mins if there is no driver upgrade, after an operator upgrade.</td>
+<td>A warning message will be listed in the events for cluster scoped objects if the driver is not upgraded after an operator upgrade. This happens because of the fix provided by Kubernetes in 1.20 for one of the known <a href="https://github.com/kubernetes/kubernetes/issues/65200">issue</a>.</td>
+<td>After an operator upgrade, the objects will get updated automatically after 45 mins in case of no driver upgrade.</td>
 </tr>
 </tbody>
 </table>

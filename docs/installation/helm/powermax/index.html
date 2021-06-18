@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax/" />
-<meta property="article:modified_time" content="2021-04-02T01:16:18+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing PowerMax CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-04-02T01:16:18&#43;05:30" />
-<meta itemprop="wordCount" content="2243">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="2855">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -847,7 +847,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -907,16 +923,24 @@
         <li><a href="#fibre-channel-requirements">Fibre Channel Requirements</a></li>
         <li><a href="#iscsi-requirements">iSCSI Requirements</a></li>
         <li><a href="#certificate-validation-for-unisphere-rest-api-calls">Certificate validation for Unisphere REST API calls</a></li>
-        <li><a href="#ports-in-port-group">Ports in port group</a></li>
+        <li><a href="#ports-in-the-port-group">Ports in the port group</a></li>
         <li><a href="#configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</a></li>
         <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
-        <li><a href="#volume-snapshot-requirements">Volume Snapshot Requirements</a></li>
+        <li><a href="#optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</a></li>
       </ul>
     </li>
     <li><a href="#install-the-driver">Install the Driver</a></li>
     <li><a href="#storage-classes">Storage Classes</a>
       <ul>
         <li><a href="#what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</a></li>
+      </ul>
+    </li>
+    <li><a href="#volume-snapshot-class">Volume Snapshot Class</a></li>
+    <li><a href="#sample-values-file">Sample values file</a>
+      <ul>
+        <li><a href="#csi-powermax-driver-without-proxy">CSI PowerMax driver without Proxy</a></li>
+        <li><a href="#csi-powermax-driver-with-proxy-in-linked-mode">CSI PowerMax driver with Proxy in Linked mode</a></li>
+        <li><a href="#csi-powermax-driver-with-proxy-in-standalone-mode">CSI PowerMax driver with Proxy in StandAlone mode</a></li>
       </ul>
     </li>
   </ul>
@@ -980,15 +1004,16 @@
 
 	       
 	<p>The CSI Driver for Dell EMC PowerMax can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, see the script <a href="https://github.com/dell/csi-powermax/tree/master/dell-csi-helm-installer">documentation</a>.</p>
-<p>The controller section of the Helm chart installs the following components in a <em>Deployment</em> in the <code>powermax</code> namespace:</p>
+<p>The controller section of the Helm chart installs the following components in a <em>Deployment</em> in the specified namespace:</p>
 <ul>
 <li>CSI Driver for Dell EMC PowerMax</li>
 <li>Kubernetes External Provisioner, which provisions the volumes</li>
 <li>Kubernetes External Attacher, which attaches the volumes to the containers</li>
 <li>Kubernetes External Snapshotter, which provides snapshot support</li>
 <li>Kubernetes External Resizer, which resizes the volume</li>
+<li>CSI PowerMax ReverseProxy (optional)</li>
 </ul>
-<p>The node section of the Helm chart installs the following component in a <em>DaemonSet</em> in the namespace <code>powermax</code>:</p>
+<p>The node section of the Helm chart installs the following component in a <em>DaemonSet</em> in the specified namespace:</p>
 <ul>
 <li>CSI Driver for Dell EMC PowerMax</li>
 <li>Kubernetes Node Registrar, which handles the driver registration</li>
@@ -1001,9 +1026,9 @@
 <li>Fibre Channel requirements</li>
 <li>iSCSI requirements</li>
 <li>Certificate validation for Unisphere REST API calls</li>
-<li>Configure Mount propagation on container runtime (that is, Docker)</li>
+<li>Configure Mount propagation on container runtime</li>
 <li>Linux multipathing requirements</li>
-<li>Volume Snapshot requirements</li>
+<li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
 </ul>
 <h3 id="install-helm-3">Install Helm 3</h3>
 <p>Install Helm 3 on the master node before you install the CSI Driver for Dell EMC PowerMax.</p>
@@ -1024,7 +1049,7 @@
 <li>Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.</li>
 <li>Kubernetes nodes should have access (network connectivity) to an iSCSI director on the Dell EMC PowerMax array that has IP interfaces. Manually create IP routes for each node that connects to the Dell EMC PowerMax if required.</li>
 <li>Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell EMC PowerMax array.</li>
-<li>The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell EMC PowerMax array. All the port groups names supplied to the driver must exist on each Dell EMC PowerMax with the same name.</li>
+<li>The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell EMC PowerMax array. All the port group names supplied to the driver must exist on each Dell EMC PowerMax with the same name.</li>
 </ul>
 <p>For information about configuring iSCSI, see <em>Dell EMC PowerMax documentation</em> on Dell EMC Support.</p>
 <h3 id="certificate-validation-for-unisphere-rest-api-calls">Certificate validation for Unisphere REST API calls</h3>
@@ -1034,14 +1059,14 @@
 <p>If the Unisphere certificate is self-signed or if you are using an embedded Unisphere, then perform the following steps:</p>
 <ol>
 <li>
-<p>To fetch the certificate, run <code>openssl s_client -showcerts -connect [Unisphere IP]:8443 &lt;/dev/null&gt; /dev/null | openssl x509 -outform PEM &gt; ca_cert.pem</code></p>
+<p>To fetch the certificate, run <code>openssl s_client -showcerts -connect [Unisphere IP]:8443 &lt;/dev/null 2&gt; /dev/null | openssl x509 -outform PEM &gt; ca_cert.pem</code></p>
 <p><em>NOTE</em>: The IP address varies for each user.</p>
 </li>
 <li>
 <p>To create the secret, run <code>kubectl create secret generic powermax-certs --from-file=ca_cert.pem -n powermax</code></p>
 </li>
 </ol>
-<h3 id="ports-in-port-group">Ports in port group</h3>
+<h3 id="ports-in-the-port-group">Ports in the port group</h3>
 <p>There are no restrictions around how many ports can be present in the iSCSI port groups provided to the driver.</p>
 <p>The same applies to Fibre Channel where there are no restrictions on the number of FA directors a host HBA can be zoned to. See the best practices for host connectivity to Dell EMC PowerMax to ensure that you have multiple paths to your data volumes.</p>
 <h3 id="configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</h3>
@@ -1066,48 +1091,64 @@
 <li>Enable multipathing using <code>mpathconf --enable --with_multipathd y</code></li>
 <li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
 </ul>
-<h3 id="volume-snapshot-requirements">Volume Snapshot Requirements</h3>
-<h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
+<h3 id="optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</h3>
+<p>Applicable only if you decided to enable snapshot feature in <code>values.yaml</code></p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
 <p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github.</p>
 <ul>
-<li>If on Kubernetes 1.18/1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd">v3.0.3</a></li>
-<li>If on Kubernetes 1.20 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd">v4.0.0</a></li>
+<li>If on Kubernetes 1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd">v3.0.x</a></li>
+<li>If on Kubernetes 1.20/1.21 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd">v4.0.x</a></li>
 </ul>
 <h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
-<p>Starting with beta Volume Snapshots in Kubernetes 1.17, the CSI external-snapshotter sidecar is split into two controllers:</p>
+<p>The CSI external-snapshotter sidecar is split into two controllers to support beta Volume snapshots in Kubernetes 1.17 or later:</p>
 <ul>
 <li>A common snapshot controller</li>
 <li>A CSI external-snapshotter sidecar</li>
 </ul>
-<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available:</p>
+<p>The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available:</p>
 <ul>
-<li>If on Kubernetes 1.18/1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller">v3.0.3</a></li>
-<li>If on Kubernetes 1.20 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller">v4.0.0</a></li>
+<li>If on Kubernetes 1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller">v3.0.x</a></li>
+<li>If on Kubernetes 1.20 and 1.21 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller">v4.0.x</a></li>
 </ul>
 <p><em>NOTE:</em></p>
 <ul>
 <li>The manifests available on GitHub install the snapshotter image:
 <ul>
-<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.3&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.3</a></li>
-<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v4.0.0</a></li>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.3&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.x</a></li>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v4.0.x</a></li>
 </ul>
 </li>
+<li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
+</ul>
+<h4 id="installation-example">Installation example</h4>
+<p>You can install CRDs and the default snapshot controller by running the following commands:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/kubernetes-csi/external-snapshotter/
+<span style="color:#204a87">cd</span> ./external-snapshotter
+git checkout release-&lt;your-version&gt;
+kubectl create -f client/config/crd
+kubectl create -f deploy/kubernetes/snapshot-controller
+</code></pre></div><p><em>NOTE:</em></p>
+<ul>
+<li>It is recommended to use 3.0.x version of snapshotter/snapshot-controller when using Kubernetes v1.19</li>
+<li>When using Kubernetes 1.20/1.21 it is recommended to use 4.0.x version of snapshotter/snapshot-controller.</li>
 <li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
 </ul>
 <h2 id="install-the-driver">Install the Driver</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone https://github.com/dell/csi-powermax.git</code> to clone the git repository.  This will include the Helm charts and dell-csi-helm-installer scripts.</li>
+<li>Run <code>git clone https://github.com/dell/csi-powermax.git</code> to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.</li>
 <li>Ensure that you have created a namespace where you want to install the driver. You can run <code>kubectl create namespace powermax</code> to create a new one</li>
-<li>Edit the `helm/secret.yaml file, point to the correct namespace and replace the values for the username and password parameters.
+<li>Edit the `helm/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;myusername&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
 <span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;mypassword&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
-</code></pre></div><p>where <em>myusername</em> and <em>mypassword</em> are credentials for a user with PowerMax priviledges.</p>
+</code></pre></div><p>where <em>myusername</em> and <em>mypassword</em> are credentials for a user with PowerMax privileges.</p>
 </li>
-<li>Create the secret by running <code>kubectl create -f helm/secret.yaml</code></li>
+<li>Create the secret by running <code>kubectl create -f helm/secret.yaml</code>.</li>
 <li>If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - <em>csireverseproxy-tls-secret</em> which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.</li>
-<li>Copy the default values.yaml file `cd helm &amp;&amp; cp csi-powermax/values.yaml my-powermax-settings.yaml</li>
+<li>Copy the default values.yaml file <code>cd helm &amp;&amp; cp csi-powermax/values.yaml my-powermax-settings.yaml</code></li>
 <li>Edit the newly created file and provide values for the following parameters <code>vi my-powermax-settings.yaml</code></li>
 </ol>
 <table>
@@ -1121,14 +1162,8 @@ These values can be obtained using base64 encoding as described in the following
 </thead>
 <tbody>
 <tr>
-<td>unisphere</td>
-<td>Specifies the URL of the Unisphere for PowerMax server. If using the CSI PowerMax Reverse Proxy, leave this value unchanged at https://127.0.0.1:8443.</td>
-<td>Yes</td>
-<td>&ldquo;https://127.0.0.1:8443&rdquo;</td>
-</tr>
-<tr>
 <td>clusterPrefix</td>
-<td>Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this   prefix is three characters.</td>
+<td>Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters.</td>
 <td>Yes</td>
 <td>&ldquo;ABC&rdquo;</td>
 </tr>
@@ -1169,18 +1204,6 @@ These values can be obtained using base64 encoding as described in the following
 <td>&ldquo;PortGroup1, PortGroup2, PortGroup3&rdquo;</td>
 </tr>
 <tr>
-<td>arrayWhitelist</td>
-<td>List of comma-separated array IDs. If this parameter remains empty, the driver manages all the arrays that are managed by the Unisphere instance that is configured for the driver.  Specify the IDs of the arrays that you want to manage, using the driver.</td>
-<td>No</td>
-<td>Empty</td>
-</tr>
-<tr>
-<td>symmetrixID</td>
-<td>Specify a Dell EMC PowerMax array that the driver manages. This value is used to create a default storage class.</td>
-<td>Yes</td>
-<td>&ldquo;000000000000&rdquo;</td>
-</tr>
-<tr>
 <td>storageResourcePool</td>
 <td>This parameter must mention one of the SRPs on the PowerMax array that the symmetrixID specifies. This value is used to create the default storage class.</td>
 <td>Yes</td>
@@ -1206,43 +1229,67 @@ These values can be obtained using base64 encoding as described in the following
 </tr>
 <tr>
 <td>nodeNameTemplate</td>
-<td>Used to specify a template which will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, then leave this value empty.</td>
+<td>Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.</td>
 <td>No</td>
 <td>Empty</td>
 </tr>
 <tr>
-<td><strong>csireverseproxy</strong></td>
-<td>This section refers to configuration options for CSI PowerMax Reverse Proxy</td>
+<td><strong>global</strong></td>
+<td>This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy</td>
 <td>-</td>
 <td>-</td>
 </tr>
 <tr>
-<td>enabled</td>
-<td>Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.<br><strong>NOTE:</strong> If not enabled, then there is no requirement to configure any of the following values.</td>
+<td>defaultCredentialsSecret</td>
+<td>This secret name refers to:<br> 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.<br>2. The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>3. The default Unisphere credentials if credentialsSecret is not specified for a management server.</td>
+<td>Yes</td>
+<td>powermax-creds</td>
+</tr>
+<tr>
+<td>storageArrays</td>
+<td>This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>storageArrayId</td>
+<td>This refers to PowerMax Symmetrix ID.</td>
+<td>Yes</td>
+<td>000000000001</td>
+</tr>
+<tr>
+<td>endpoint</td>
+<td>This refers to the URL of the Unisphere server managing <em>storageArrayId</em></td>
+<td>Yes if Reverse Proxy mode is <em>StandAlone</em></td>
+<td><a href="https://primary-1.unisphe.re">https://primary-1.unisphe.re</a>:8443</td>
+</tr>
+<tr>
+<td>backupEndpoint</td>
+<td>This refers to the URL of the backup Unisphere server managing <em>storageArrayId</em>, if Reverse Proxy is installed in <em>StandAlone</em> mode.</td>
 <td>No</td>
-<td>&ldquo;False&rdquo;</td>
+<td><a href="https://backup-1.unisphe.re">https://backup-1.unisphe.re</a>:8443</td>
 </tr>
 <tr>
-<td>port</td>
-<td>Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation</td>
+<td>managementServers</td>
+<td>This section refers to the list of configurations for Unisphere servers managing powermax arrays.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>endpoint</td>
+<td>This refers to the URL of the Unisphere server</td>
+<td>Yes</td>
+<td><a href="https://primary-1.unisphe.re">https://primary-1.unisphe.re</a>:8443</td>
+</tr>
+<tr>
+<td>credentialsSecret</td>
+<td>This refers to the user credentials for <em>endpoint</em></td>
 <td>No</td>
-<td>2222</td>
-</tr>
-<tr>
-<td>primary</td>
-<td>Mandatory section for Reverse Proxy</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>unisphere</td>
-<td>This must specify the URL of the Unisphere for PowerMax server</td>
-<td>Yes, if using Reverse Proxy</td>
-<td>&ldquo;https://0.0.0.0:8443&rdquo;</td>
+<td>primary-1-secret</td>
 </tr>
 <tr>
 <td>skipCertificateValidation</td>
-<td>This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates. It is set to true by default.</td>
+<td>This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.</td>
 <td>No</td>
 <td>&ldquo;True&rdquo;</td>
 </tr>
@@ -1253,28 +1300,76 @@ These values can be obtained using base64 encoding as described in the following
 <td>Empty</td>
 </tr>
 <tr>
-<td>backup</td>
-<td>Optional section for Reverse Proxy. Specify Unisphere server address which the Reverse Proxy can fall back to if the primary Unisphere is unreachable or unresponsive.<br><strong>NOTE:</strong> If you do not want to specify a backup Unisphere server, then remove the backup section from the file</td>
+<td>limits</td>
+<td>This refers to various limits for Reverse Proxy</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td>maxActiveRead</td>
+<td>This refers to the maximum concurrent READ request handled by the reverse proxy.</td>
+<td>No</td>
+<td>5</td>
+</tr>
+<tr>
+<td>maxActiveWrite</td>
+<td>This refers to the maximum concurrent WRITE request handled by the reverse proxy.</td>
+<td>No</td>
+<td>4</td>
+</tr>
+<tr>
+<td>maxOutStandingRead</td>
+<td>This refers to maximum queued READ request when reverse proxy receives more than <em>maxActiveRead</em> requests.</td>
+<td>No</td>
+<td>50</td>
+</tr>
+<tr>
+<td>maxOutStandingWrite</td>
+<td>This refers to maximum queued WRITE request when reverse proxy receives more than <em>maxActiveWrite</em> requests.</td>
+<td>No</td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>csireverseproxy</strong></td>
+<td>This section refers to the configuration options for CSI PowerMax Reverse Proxy</td>
 <td>-</td>
 <td>-</td>
 </tr>
 <tr>
-<td>unisphere</td>
-<td>Specify the IP address of the Unisphere for PowerMax server which manages the arrays being used by the CSI driver</td>
+<td>enabled</td>
+<td>Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.<br><strong>NOTE:</strong> If not enabled, then there is no requirement to configure any of the following values.</td>
 <td>No</td>
-<td>&ldquo;https://0.0.0.0:8443&rdquo;</td>
+<td>&ldquo;False&rdquo;</td>
 </tr>
 <tr>
-<td>skipCertificateValidation</td>
-<td>This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates. It is set to true by default.</td>
-<td>No</td>
+<td>image</td>
+<td>This refers to the image of the CSI Powermax Reverse Proxy container.</td>
+<td>Yes</td>
+<td>dellemc/csipowermax-reverseproxy:v1.3.0</td>
+</tr>
+<tr>
+<td>tlsSecret</td>
+<td>This refers to the TLS secret of the Reverse Proxy Server.</td>
+<td>Yes</td>
+<td>csirevproxy-tls-secret</td>
+</tr>
+<tr>
+<td>deployAsSidecar</td>
+<td>If set to <em>true</em>, the Reverse Proxy is installed as a sidecar to the driver&rsquo;s controller pod otherwise it is installed as a separate deployment.</td>
+<td>Yes</td>
 <td>&ldquo;True&rdquo;</td>
 </tr>
 <tr>
-<td>certSecret</td>
-<td>The name of the secret in the same namespace containing the CA certificates of the Unisphere server</td>
-<td>No</td>
-<td>Empty</td>
+<td>port</td>
+<td>Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation</td>
+<td>Yes</td>
+<td>2222</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>This refers to the installation mode of Reverse Proxy. It can be set to:<br> 1. <em>Linked</em>: In this mode, the Reverse Proxy communicates with a primary or a backup Unisphere managing the same set of arrays.<br>2. <em>StandAlone</em>: In this mode, the Reverse Proxy communicates with multiple arrays managed by different Unispheres.</td>
+<td>Yes</td>
+<td>&ldquo;StandAlone&rdquo;</td>
 </tr>
 </tbody>
 </table>
@@ -1284,17 +1379,113 @@ These values can be obtained using base64 encoding as described in the following
 <p><em>Note:</em></p>
 <ul>
 <li>For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.</li>
+<li>There are a set of samples provided <a href="#sample-values-file">here</a> to help you configure the driver with reverse proxy</li>
 <li>This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The <code>verify.sh</code> script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the <code>--skip-verify-node</code> option</li>
 </ul>
 <h2 id="storage-classes">Storage Classes</h2>
-<p>Starting in CSI PowerMax v1.6, <code>dell-csi-helm-installer</code> will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests has been provided in the <code>helm/samples</code> folder. Please use these samples to create new storage classes to provision storage.
-See this <a href="../../../../v1/installation/helm/powermax/#storage-classes">note</a> for the driving reason behind this change.</p>
+<p>Starting CSI PowerMax v1.6, <code>dell-csi-helm-installer</code> will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests has been provided in the <code>helm/samples/storageclass</code> folder. Please use these samples to create new storage classes to provision storage.
+See this <a href="../../../../v2/installation/helm/powermax/#storage-classes">note</a> for the driving reason behind this change.</p>
 <h3 id="what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</h3>
 <p><em>Upgrading from CSI PowerMax v1.5 driver</em>
 The storage classes created as part of the installation have an annotation - &ldquo;helm.sh/resource-policy&rdquo;: keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.</p>
 <p><em>Upgrading from an older version of the driver</em>
 The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation &ldquo;helm.sh/resource-policy&rdquo;: keep before performing an upgrade.</p>
 <p><em>Note:</em> If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
+<h2 id="volume-snapshot-class">Volume Snapshot Class</h2>
+<p>Starting CSI PowerMax v1.7, <code>dell-csi-helm-installer</code> will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the <em>helm/samples/</em> folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.</p>
+<h2 id="sample-values-file">Sample values file</h2>
+<p>The following sections have useful snippets from <code>values.yaml</code> file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes</p>
+<h3 id="csi-powermax-driver-without-proxy">CSI PowerMax driver without Proxy</h3>
+<p>In this mode, the CSI PowerMax driver can only connect to a single <code>Unisphere</code> server. So, you just specify a list of storage arrays
+and the address of the <code>Unisphere</code> server</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">global</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">defaultCredentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>powermax-creds<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageArrays</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">storageArrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;000000000001&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">storageArrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;000000000002&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">managementServers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//unisphere-address<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><blockquote>
+<p>Note: If you provide multiple endpoints in the list of management servers, the installer will only use the first server in the list</p>
+</blockquote>
+<h3 id="csi-powermax-driver-with-proxy-in-linked-mode">CSI PowerMax driver with Proxy in Linked mode</h3>
+<p>In this mode, the CSI PowerMax ReverseProxy just acts as a <code>passthrough</code> for the RESTAPI calls and only provides limited functionality
+like rate limiting, backup Unisphere server. The CSI PowerMax driver is still responsible for the authentication with the Unisphere server.</p>
+<p>The first endpoint in the list of management servers is the primary Unisphere server and if you provide a second endpoint, then
+it will be considered as the backup Unisphere&rsquo;s endpoint.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">global</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">defaultCredentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>powermax-creds<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageArrays</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">storageArrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;000000000001&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">storageArrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;000000000002&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">managementServers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//primary-unisphere<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">certSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>primary-cert<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">limits</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxActiveRead</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">5</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxActiveWrite</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">4</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxOutStandingRead</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">50</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxOutStandingWrite</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">50</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//backup-unisphere<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#Optional</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#8f5902;font-style:italic"># &#34;csireverseproxy&#34; refers to the subchart csireverseproxy</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">csireverseproxy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Set enabled to true if you want to use proxy</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>dellemc/csipowermax-reverseproxy<span style="color:#000;font-weight:bold">:</span>v1<span style="color:#0000cf;font-weight:bold">.3.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">tlsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>csirevproxy-tls-secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">deployAsSidecar</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2222</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Linked<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><blockquote>
+<p>Note: Since the driver is still responsible for authentication when used with Proxy in <code>Linked</code> mode, the credentials for both
+primary and backup Unisphere need to be the same.</p>
+</blockquote>
+<h3 id="csi-powermax-driver-with-proxy-in-standalone-mode">CSI PowerMax driver with Proxy in StandAlone mode</h3>
+<p>This is the most advanced configuration which provides you the capability to connect to Multiple Unisphere servers.
+You can specify primary &amp; backup Unisphere servers for each storage array. In case you have different credentials for your Unisphere servers, you can also specify different credential secrets.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">global</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">defaultCredentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>powermax-creds<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageArrays</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">storageArrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;000000000001&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//primary<span style="color:#0000cf;font-weight:bold">-1.</span>unisphe.re<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">backupEndpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//backup<span style="color:#0000cf;font-weight:bold">-1.</span>unisphe.re<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">storageArrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;000000000002&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//primary<span style="color:#0000cf;font-weight:bold">-2.</span>unisphe.re<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">backupEndpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//backup<span style="color:#0000cf;font-weight:bold">-2.</span>unisphe.re<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">managementServers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//primary<span style="color:#0000cf;font-weight:bold">-1.</span>unisphe.re<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>primary<span style="color:#0000cf;font-weight:bold">-1</span>-secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">certSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>primary-cert<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">limits</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxActiveRead</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">5</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxActiveWrite</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">4</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxOutStandingRead</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">50</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">maxOutStandingWrite</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">50</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//backup<span style="color:#0000cf;font-weight:bold">-1.</span>unisphe.re<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>backup<span style="color:#0000cf;font-weight:bold">-1</span>-secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//primary<span style="color:#0000cf;font-weight:bold">-2.</span>unisphe.re<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>primary<span style="color:#0000cf;font-weight:bold">-2</span>-secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//backup<span style="color:#0000cf;font-weight:bold">-2.</span>unisphe.re<span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">credentialsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>backup<span style="color:#0000cf;font-weight:bold">-2</span>-secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#8f5902;font-style:italic"># &#34;csireverseproxy&#34; refers to the subchart csireverseproxy</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">csireverseproxy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Set enabled to true if you want to use proxy</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>dellemc/csipowermax-reverseproxy<span style="color:#000;font-weight:bold">:</span>v1<span style="color:#0000cf;font-weight:bold">.3.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">tlsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>csirevproxy-tls-secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">deployAsSidecar</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2222</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>StandAlone<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><blockquote>
+<p>Note: If the credential secret is missing from any management server details, the installer will try to use the defaultCredentialsSecret</p>
+</blockquote>
 
 	
 	
