@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade Dell CSI Operator" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/operator/" />
-<meta property="article:modified_time" content="2021-03-22T19:07:13+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Dell CSI Operator">
 <meta itemprop="description" content="Upgrade Dell CSI Operator">
-<meta itemprop="dateModified" content="2021-03-22T19:07:13&#43;05:30" />
-<meta itemprop="wordCount" content="144">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="103">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -844,7 +844,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -902,7 +918,6 @@
       <ul>
         <li><a href="#using-installation-script">Using Installation Script</a></li>
         <li><a href="#using-olm">Using OLM</a></li>
-        <li><a href="#upgrade-operator-from-version-older-than-v110-to-v130">Upgrade Operator from version older than v1.1.0 to v1.3.0</a></li>
       </ul>
     </li>
   </ul>
@@ -955,19 +970,14 @@
 	<h1>Dell CSI Operator</h1>
 
 	       
-	<p>If you are upgrading the Dell CSI Operator from v1.1.0 or v1.2.0 to v1.3.0, then follow the instructions below. If you are trying to upgrade the Operator from an older version, please refer the instructions <a href="#upgrade-operator-from-version-older-than-v110-to-v130">here</a></p>
+	<p>To upgrade Dell CSI Operator from v1.2.0 or v1.3.0 to v1.4.0, perform the following steps.</p>
 <h3 id="using-installation-script">Using Installation Script</h3>
-<p>Run the following command to upgrade the operator from v1.2.0 release</p>
+<p>Run the following command to upgrade the operator from the v1.2.0 release</p>
 <pre><code>$ bash scripts/install.sh --upgrade
 </code></pre><h3 id="using-olm">Using OLM</h3>
 <p>The upgrade of the Dell CSI Operator is done via Operator Lifecycle Manager.
 If the <code>InstallPlan</code> for the Operator subscription is set to <code>Automatic</code>, the operator will be automatically upgraded to the new version. If the <code>InstallPlan</code> is set to <code>Manual</code>, then a Cluster Administrator would need to approve the upgrade.</p>
-<h3 id="upgrade-operator-from-version-older-than-v110-to-v130">Upgrade Operator from version older than v1.1.0 to v1.3.0</h3>
-<ul>
-<li>Uninstall the old version of the Operator</li>
-<li>If required, upgrade your cluster to a supported version</li>
-<li>Follow the installation instructions to install the v1.3.0 of the Operator <a href="../../../installation/operator">here</a></li>
-</ul>
+<p><strong>NOTE</strong>: The recommended version of OLM for Upstream Kubernetes is <strong><code>v0.17.0</code></strong> when upgrading operator to <code>v1.4.0</code>.</p>
 
 	
 	

@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v1/installation/helm/isilon/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing PowerScale CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="1559">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="2055">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -281,6 +281,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -474,6 +482,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -598,6 +614,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -772,6 +796,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsv1concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -865,16 +914,22 @@
     </li>
     <li><a href="#install-volume-snapshot-components">Install volume snapshot components</a>
       <ul>
-        <li><a href="#install-snapshot-beta-crds">Install Snapshot Beta CRDs</a></li>
+        <li><a href="#install-snapshot-crds">Install Snapshot CRDs</a></li>
+        <li><a href="#install-snapshot-controller">Install Snapshot Controller</a></li>
       </ul>
     </li>
     <li><a href="#install-csi-driver-for-powerscale">Install CSI Driver for PowerScale</a></li>
     <li><a href="#certificate-validation-for-onefs-rest-api-calls">Certificate validation for OneFS REST API calls</a>
       <ul>
         <li><a href="#procedure-1">Procedure</a></li>
+        <li><a href="#dynamic-update-of-array-details-via-secretjson">Dynamic update of array details via secret.json</a></li>
       </ul>
     </li>
-    <li><a href="#storage-classes">Storage Classes</a></li>
+    <li><a href="#storage-classes">Storage Classes</a>
+      <ul>
+        <li><a href="#what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -935,7 +990,7 @@
 	<h1>PowerScale</h1>
 
 	       
-	<p>The CSI Driver for Dell EMC PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer">documentation</a>.</p>
+	<p>The CSI Driver for Dell EMC PowerScale can be deployed by using the provided Helm v3 charts in upstream Kubernetes. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer">documentation</a>.</p>
 <p>The controller section of the Helm chart installs the following components in a <em>Deployment</em>:</p>
 <ul>
 <li>CSI Driver for PowerScale</li>
@@ -953,13 +1008,13 @@
 <p>Before you install CSI Driver for PowerScale, verify the requirements that are mentioned in this topic are installed and configured.</p>
 <h4 id="requirements">Requirements</h4>
 <ul>
-<li>Install Kubernetes.</li>
+<li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
 <li>Configure Docker service</li>
 <li>Install Helm v3</li>
 <li>Install volume snapshot components</li>
 <li>Deploy PowerScale driver using Helm</li>
 </ul>
-<p><strong>Note:</strong> There is no feature gate that needs to be set explicitly for CSI drivers version 1.17 and later. All the required feature gates are either beta/GA.</p>
+<p><strong>NOTE:</strong> There is no feature gate that needs to be set explicitly for CSI drivers version 1.17 and later. All the required feature gates are either beta/GA.</p>
 <h2 id="configure-docker-service">Configure Docker service</h2>
 <p>The mount propagation in Docker must be configured on all Kubernetes nodes before installing CSI Driver for PowerScale.</p>
 <h3 id="procedure">Procedure</h3>
@@ -969,32 +1024,36 @@
 ...
 MountFlags=shared
 </code></pre></li>
-<li>Restart the Docker service with systemctl daemon-reload and
+<li>Restart the Docker service with the following commands:
 <pre><code>systemctl daemon-reload
 systemctl restart docker
 </code></pre></li>
 </ol>
+<p><em>NOTE:</em> Some distribution, like Ubuntu, already has <em>MountFlags</em> set by default.</p>
 <h2 id="install-volume-snapshot-components">Install volume snapshot components</h2>
-<h3 id="install-snapshot-beta-crds">Install Snapshot Beta CRDs</h3>
-<p>To install snapshot CRDs specify <code>--snapshot-crd</code> flag to driver installation script <code>dell-csi-helm-installer/csi-install.sh</code> during driver installation.</p>
-<p><a href="https://kubernetes.io/blog/2019/12/09/kubernetes-1-17-feature-cis-volume-snapshot-beta/#how-do-i-deploy-support-for-volume-snapshots-on-my-kubernetes-cluster">Install Common Snapshot Controller</a>, if not already installed for the cluster.</p>
+<h3 id="install-snapshot-crds">Install Snapshot CRDs</h3>
 <ul>
-<li>The manifests available on GitHub install v3.0.2 of the snapshotter image - <a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.2</a></li>
-<li>Dell recommends using v3.0.2 image of the snapshot-controller - <a href="https://quay.io/repository/k8scsi/snapshot-controller?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/snapshot-controller:v3.0.2</a></li>
+<li>For Kubernetes 1.18 and 1.19, SnapShot CRDs versioned  3.0.3 (<a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd">https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd</a>), must be installed.</li>
+<li>For Kubernetes 1.20, SnapShot CRDs versioned 4.0.0 (<a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd">https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd</a>) must be installed.</li>
+</ul>
+<h3 id="install-snapshot-controller">Install Snapshot Controller</h3>
+<ul>
+<li>For Kubernetes 1.18 and 1.19, Snapshot controller versioned 3.0.3 (<a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller">https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller</a>) must be installed.</li>
+<li>For Kubernetes 1.20, Snapshot controller versioned 4.0.0 (<a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller">https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller</a>) must be installed.</li>
 </ul>
 <h2 id="install-csi-driver-for-powerscale">Install CSI Driver for PowerScale</h2>
 <p><strong>Before you begin</strong></p>
 <ul>
 <li>You must clone the source code from <a href="https://github.com/dell/csi-isilon">git repository</a>.</li>
-<li>In the <code>dell-csi-helm-installer</code> directory, there should be two shell scripts, <em>csi-install.sh</em> and <em>csi-uninstall.sh</em>. These scripts handle some of the pre and post operations that cannot be performed in the helm chart.</li>
+<li>In the <code>dell-csi-helm-installer</code> directory, there will be two shell scripts, <em>csi-install.sh</em> and <em>csi-uninstall.sh</em>. These scripts handle some of the pre and post operations that cannot be performed in the helm chart.</li>
 </ul>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Collect information from the PowerScale Systems like IP address, username and password. Make a note of the value for these parameters as they must be entered in the <em>secret.yaml</em> and values file.</p>
+<p>Collect information from the PowerScale Systems like IP address,IsiPath, username and password. Make a note of the value for these parameters as they must be entered in the <em>secret.json</em>.</p>
 </li>
 <li>
-<p>Copy the helm/csi-isilon/values.yaml into a new location with name say <em>my-isilon-settings.yaml</em>, to customize settings for installation.</p>
+<p>Copy <em>the helm/csi-isilon/values.yaml</em> into a new location with name say <em>my-isilon-settings.yaml</em>, to customize settings for installation.</p>
 </li>
 <li>
 <p>Edit <em>my-isilon-settings.yaml</em> to set the following parameters for your installation:
@@ -1011,10 +1070,10 @@ found in the  <a href="https://github.com/dell/csi-powerscale/blob/master/helm/c
 </thead>
 <tbody>
 <tr>
-<td>isiIP</td>
-<td>&ldquo;isiIP&rdquo; defines the HTTPs endpoint of the PowerScale OneFS API server</td>
+<td>certSecretCount</td>
+<td>Represents number of certificate secrets, which user is going to create for ssl authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1</td>
 <td>true</td>
-<td>-</td>
+<td>1</td>
 </tr>
 <tr>
 <td>isiPort</td>
@@ -1023,8 +1082,14 @@ found in the  <a href="https://github.com/dell/csi-powerscale/blob/master/helm/c
 <td>8080</td>
 </tr>
 <tr>
+<td>allowedNetworks</td>
+<td>&ldquo;allowedNetworks&rdquo; defines list of networks which can be used for NFS I/O traffic, CIDR format must be used</td>
+<td>false</td>
+<td>-</td>
+</tr>
+<tr>
 <td>isiInsecure</td>
-<td>&ldquo;isiInsecure&rdquo; specifies whether the PowerScale OneFS API server&rsquo;s certificate chain and host name should be verified.</td>
+<td>&ldquo;isiInsecure&rdquo; specifies whether the PowerScale OneFS API server&rsquo;s certificate chain and host name must be verified. This value will affect the default storage class implementation</td>
 <td>false</td>
 <td>true</td>
 </tr>
@@ -1095,48 +1160,6 @@ found in the  <a href="https://github.com/dell/csi-powerscale/blob/master/helm/c
 <td>false</td>
 </tr>
 <tr>
-<td><em><strong>Storage Class parameters</strong></em></td>
-<td>Following parameters are related to Storage Class</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>name</td>
-<td>&ldquo;storageClass.name&rdquo; defines the name of the storage class to be defined.</td>
-<td>false</td>
-<td>isilon</td>
-</tr>
-<tr>
-<td>isDefault</td>
-<td>&ldquo;storageClass.isDefault&rdquo; defines whether the primary storage class should be the default.</td>
-<td>false</td>
-<td>true</td>
-</tr>
-<tr>
-<td>reclaimPolicy</td>
-<td>&ldquo;storageClass.reclaimPolicy&rdquo; defines what will happen when a volume is removed from the Kubernetes API. Valid values are &ldquo;Retain&rdquo; and &ldquo;Delete&rdquo;.</td>
-<td>false</td>
-<td>Delete</td>
-</tr>
-<tr>
-<td>accessZone</td>
-<td>The Access Zone where the Volume would be created</td>
-<td>false</td>
-<td>System</td>
-</tr>
-<tr>
-<td>AzServiceIP</td>
-<td>Access Zone service IP if different from isiIP, specify here and refer in storageClass</td>
-<td>false</td>
-<td></td>
-</tr>
-<tr>
-<td>rootClientEnabled</td>
-<td>When a PVC is being created, it takes the storage class&rsquo; value of &ldquo;storageclass.rootClientEnabled&rdquo;</td>
-<td>false</td>
-<td>false</td>
-</tr>
-<tr>
 <td><em><strong>Controller parameters</strong></em></td>
 <td>Set nodeSelector and tolerations for controller</td>
 <td></td>
@@ -1156,35 +1179,111 @@ found in the  <a href="https://github.com/dell/csi-powerscale/blob/master/helm/c
 </tr>
 </tbody>
 </table>
-<p><strong>Note:</strong> User should provide all boolean values with double quotes. This is applicable only for <em>my-isilon-settings.yaml</em>. Example: &ldquo;true&rdquo;/&ldquo;false&rdquo;<br>
-<strong>Note:</strong> controllerCount parameter value should not exceed number of nodes in the kubernetes cluster. Otherwise some of the controller pods will be in &ldquo;Pending&rdquo; state till new nodes are available for scheduling. The installer will exit with a WARNING on the same.</p>
+<p><strong>NOTES</strong></p>
+<ol>
+<li>User should provide all boolean values with double quotes. This applicable only for <em>my-isilon-settings.yaml</em>. Example: &ldquo;true&rdquo;/&ldquo;false&rdquo;</li>
+<li>ControllerCount parameter value should not exceed number of nodes in the Kubernetes cluster. Otherwise some of the controller pods will be in &ldquo;Pending&rdquo; state till new nodes are available for scheduling. The installer will exit with a WARNING on the same.</li>
+<li>Whenever <em>certSecretCount</em> parameter changes in <em>myvalues.yaml</em> user needs to reinstall the driver.</li>
+</ol>
 </li>
 <li>
 <p>Create namespace
 Run <code>kubectl create namespace isilon</code> to create the <em>isilon</em> namespace. Specify the same namespace name while installing the driver.</p>
-<p><strong>Note:</strong> CSI PowerScale also supports installation of driver in custom namespace.</p>
+<p><strong>NOTE:</strong> CSI PowerScale also supports installation of driver in custom namespace.</p>
 </li>
 <li>
-<p>Create a secret file for the OneFS credentials by editing the secret.yaml present under helm directory. Replace the values for the username and password parameters.
-Use the following command to convert username/password to base64 encoded string:</p>
-<pre><code>echo -n 'admin' | base64
-echo -n 'password' | base64 
-</code></pre><p>Run <code>kubectl create -f secret.yaml</code> to create the secret.</p>
-<p><strong>Note:</strong> The username specified in secret.yaml must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:</p>
+<p>Create a secret file for the OneFS credentials by editing the <em>secret.json</em> present under helm directory. This <em>secret.json</em> can be used for adding the credentials of one or more OneFS storage arrays.The following table lists driver configuration parameters for a single storage array.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isiIP</td>
+<td>&ldquo;isiIP&rdquo; defines the HTTPs endpoint of the PowerScale OneFS API server</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>clusterName</td>
+<td>PoweScale cluster against which volume CRUD operations are performed through this secret. This is a logical name.</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Username for accessing PowerScale OneFS system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Password for accessing PowerScale OneFS system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>isDefaultCluster</td>
+<td>defines whether this storage array should be the default.This entry should be present only for one OneFS array and that array will be marked default for existing volumes.</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td><em><strong>Optional parameters</strong></em></td>
+<td>Following parameters are Optional, if provided , will override default values of values.yaml</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>isiPort</td>
+<td>isiPort defines the HTTPs port number of the PowerScale OneFS API server</td>
+<td>false</td>
+<td>-</td>
+</tr>
+<tr>
+<td>isiInsecure</td>
+<td>&ldquo;isiInsecure&rdquo; specifies whether the PowerScale OneFS API server&rsquo;s certificate chain and host name should be verified.</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>isiPath</td>
+<td>The base path for the volumes to be created. Note: isiPath value provided in the storage class will take the highest precedence while creating PVC</td>
+<td>true</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>The username specified in <em>secret.json</em> must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:</p>
 <pre><code>ISI_PRIV_LOGIN_PAPI
 ISI_PRIV_NFS
 ISI_PRIV_QUOTA
 ISI_PRIV_SNAPSHOT
 ISI_PRIV_IFS_RESTORE
 ISI_PRIV_NS_IFS_ACCESS
-ISI_PRIV_LOGIN_SSH
-</code></pre></li>
+</code></pre><p>After editing the file, run the following command to create a secret called <code>isilon-creds</code>
+<br/> <code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json</code></p>
+<p><strong>NOTES:</strong></p>
+<ol>
+<li>If any key/value is present in both <em>secret.json</em> and <em>my-isilon-settings.yaml</em>, then the values provided <em>secret.json</em> will take precedence.</li>
+<li>If any key/value is present in both <em>my-isilon-settings.yaml/secret.json</em> and storageClass, then the values provided in storageClass parameters will take precedence.</li>
+<li>User has to validate the JSON syntax and array related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the JSON file.</li>
+</ol>
+</li>
 <li>
 <p>Install OneFS CA certificates by following the instructions from next section, if you want to validate OneFS API server&rsquo;s certificates. If not, create an empty secret using the following command and empty secret should be created for the successful CSI Driver for Dell EMC Powerscale installation.</p>
 <pre><code>kubectl create -f emptysecret.yaml
 </code></pre></li>
 <li>
-<p>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace isilon --values ../helm/myvalues.yaml</code></p>
+<p>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml</code></p>
+</li>
+<li>
+<p>In the case of OpenShift, the driver installation will fail because of a lack of privileges over clusterRole. To resolve this issue the command <code>oc adm policy add-scc-to-user privileged -z isilon-node -n isilon</code> and re-install the driver. This solution will be added in next release.</p>
 </li>
 </ol>
 <h2 id="certificate-validation-for-onefs-rest-api-calls">Certificate validation for OneFS REST API calls</h2>
@@ -1195,20 +1294,42 @@ If this secret is an empty secret, then the validation of the certificate fails,
 <p>If the &lsquo;isiInsecure&rsquo; parameter is set to false and a previous installation attempt to create the empty secret, then this secret must be deleted and re-created using the CA certs. If the OneFS certificate is self-signed, then perform the following steps:</p>
 <h3 id="procedure-1">Procedure</h3>
 <ol>
-<li>To fetch the certificate, run <code>openssl s_client -showcerts -connect [OneFS IP] &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; ca_cert.pem</code></li>
-<li>To create the secret, run <code>kubectl create secret generic isilon-certs --from-file=ca_cert.pem -n isilon</code>
- </li>
+<li>To fetch the certificate, run <code>openssl s_client -showcerts -connect [OneFS IP] &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; ca_cert_0.pem</code></li>
+<li>To create the certs secret, run <code>kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon</code></li>
+<li>Use the following command to replace the secret <br/> <code>kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -</code></li>
 </ol>
+<p><strong>NOTES:</strong></p>
+<ol>
+<li>The OneFS IP can be with or without port , depends upon the configuration of OneFS API server.</li>
+<li>Above said commands is based on the namespace &lsquo;isilon&rsquo;</li>
+<li>It is highly recommended that ca_cert.pem file(s) having the naming convention as ca_cert_number.pem (example: ca_cert_0, ca_cert_1), where this number starts from 0 and grows as number of OneFS arrays grows.</li>
+<li>The cert secret created out of these pem files should have the naming convention as isilon-certs-number (example: isilon-certs-0, isilon-certs-1 etc.); The number should start from zero and should grow in incremental order. The number of the secrets created out of pem files should match certSecretCount value in myvalues.yaml or my-isilon-settings.yaml.</li>
+</ol>
+<h3 id="dynamic-update-of-array-details-via-secretjson">Dynamic update of array details via secret.json</h3>
+<p>CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now user can link the single CSI Driver to multiple OneFS Clusters by updating <em>secret.json</em>. User can now update the isilon-creds secret by editing the <em>secret.json</em> and executing following command:</p>
+<p><code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f -</code>
+ </p>
 <h2 id="storage-classes">Storage Classes</h2>
-<p>As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.</p>
-<p>The <code>StorageClass</code> object in Kubernetes is immutable and can&rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
-In preparation for that, starting in Q4 of 2020, an annotation <code>&quot;helm.sh/resource-policy&quot;: keep</code> is applied to the storage classes created by the <code>dell-csi-helm-installer</code>.</p>
-<p>Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
-This annotation has been applied to give you an opportunity to keep using  these storage classes even with a future release of the driver. In case you wish to not use these storage classes, you will need to delete them by using the <code>kubectl delete storageclass</code> command.</p>
-<p><em>NOTE</em>: If you uninstall the driver and reinstall it, you can still face errors if any update in the <code>values.yaml</code> file leads to an update of the storage class(es):</p>
+<p>Storage Classes are an essential Kubernetes construct for Storage provisioning. To know more about Storage Classes, please refer:
+<a href="https://kubernetes.io/docs/concepts/storage/storage-classes/">https://kubernetes.io/docs/concepts/storage/storage-classes/</a></p>
+<p>Starting from v1.5 of the driver, Storage Classes would no longer be created along with the installation of the driver.
+A wide set of annotated storage class manifests have been provided in the <a href="https://github.com/dell/csi-powerscale/tree/master/helm/samples/storageclass">helm/samples/storageclass folder</a>. Please use these samples to create new storage classes to provision storage.</p>
+<p>Starting in CSI PowerScale v1.5, <code>dell-csi-helm-installer</code> will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the <code>helm/samples/storageclass</code> folder. Please use these samples to create new storage classes to provision storage.</p>
+<h3 id="what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</h3>
+<p><em>Upgrading from CSI PowerScale v1.4 driver</em>
+The storage classes created as part of the installation have an annotation - &ldquo;helm.sh/resource-policy&rdquo;: keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so. Since in CSI-PowerScale 1.5 Multi array is supported. The existing storage class (of 1.4) should be treated as default storage class.</p>
+<p><em>Upgrading from an older version of the driver</em>
+It is strongly recommended to upgrade older versions of CSI-PowerScale to CSI-PowerScale 1.4 before upgrading to 1.5.</p>
+<p><strong>Steps to create storage class:</strong>
+There are samples storage class yaml files available under <code>helm/samples/storageclass</code>.  These can be copied and modified as needed.</p>
+<p><em>NOTE</em>:</p>
+<ul>
+<li>At least one storage class is required for one array.</li>
+<li>If you uninstall the driver and reinstall it, you can still face errors if any update in the <code>values.yaml</code> file leads to an update of the storage class(es):</li>
+</ul>
 <pre><code>    Error: cannot patch &quot;&lt;sc-name&gt;&quot; with kind StorageClass: StorageClass.storage.k8s.io &quot;&lt;sc-name&gt;&quot; is invalid: parameters: Forbidden: updates to parameters are forbidden
-</code></pre><p>In case you want to make such updates, make sure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.<br>
-Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&rsquo;t be able to provision new PVCs until at least one storage class is newly created.</p>
+</code></pre><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.<br>
+Deleting a storage class has no impact on a running Pod with mounted PVCs. You will not be able to provision new PVCs until at least one storage class is newly created.</p>
 
 	
 	

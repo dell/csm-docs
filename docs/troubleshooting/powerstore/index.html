@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting PowerStore Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerstore/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Troubleshooting PowerStore Driver">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="153">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="154">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -844,7 +844,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -956,12 +972,12 @@
 <td>- If on Kubernetes, edit the daemon.json file found in the registry location and add <code>{ &quot;insecure-registries&quot; :[ &quot;hostname.cloudapp.net:5000&quot; ] }</code> <br> - If on OpenShift, run the command <code>oc edit image.config.openshift.io/cluster</code> and add registries to yaml file that is displayed when you run the command.</td>
 </tr>
 <tr>
-<td>The <code>kubectl logs -n csi-powerstore powerstore-node-&lt;suffix&gt;</code> driver logs shows that the driver can&rsquo;t connect to PowerStore API.</td>
-<td>Check if you&rsquo;ve created secret with correct credentials</td>
+<td>The <code>kubectl logs -n csi-powerstore powerstore-node-&lt;suffix&gt;</code> driver logs show that the driver can&rsquo;t connect to PowerStore API.</td>
+<td>Check if you&rsquo;ve created a secret with correct credentials</td>
 </tr>
 <tr>
-<td>Installation of the driver on Kubernetes v1.20 fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
-<td>Kubernetes v1.20 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20 (v1 snapshots) install CRDs from v4.0.0, see the <a href="../../installation/helm/powerstore/#volume-snapshot-requirements">Volume Snapshot Requirements</a></td>
+<td>Installation of the driver on Kubernetes v1.20/1.21 fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
+<td>Kubernetes v1.20/1.21 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20/1.21 (v1 snapshots) install CRDs from v4.0.0, see the <a href="../../installation/helm/powerstore/#volume-snapshot-requirements">Volume Snapshot Requirements</a></td>
 </tr>
 </tbody>
 </table>

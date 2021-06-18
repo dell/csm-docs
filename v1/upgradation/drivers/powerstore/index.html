@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerStore CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v1/upgradation/drivers/powerstore/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Upgrade PowerStore CSI driver">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="80">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="269">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -278,6 +278,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -471,6 +479,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -595,6 +611,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -769,6 +793,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsv1concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -850,7 +899,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#update-driver-from-v11-to-v12-using-helm">Update Driver from v1.1 to v1.2 using Helm</a></li>
+    <li><a href="#update-driver-from-v12-to-v13-using-helm">Update Driver from v1.2 to v1.3 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
   </ul>
 </nav>
@@ -903,12 +952,39 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell EMC PowerStore using Helm or Dell CSI Operator.</p>
-<h2 id="update-driver-from-v11-to-v12-using-helm">Update Driver from v1.1 to v1.2 using Helm</h2>
+<h2 id="update-driver-from-v12-to-v13-using-helm">Update Driver from v1.2 to v1.3 using Helm</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the v1.2 driver.</li>
-<li>Update values file as needed.</li>
-<li>Run the <code>csi-install</code> script with the option <em>&ndash;upgrade</em> by running: <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade</code>.</li>
+<li>
+<p>Run <code>git clone https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the v1.3 driver.</p>
+</li>
+<li>
+<p>Edit <code>helm/config.yaml</code> file and configure connection information for your PowerStore arrays changing following parameters:</p>
+<ul>
+<li><em>endpoint</em>: defines the full URL path to the PowerStore API.</li>
+<li><em>username</em>, <em>password</em>: defines credentials for connecting to array.</li>
+<li><em>insecure</em>: defines if we should use insecure connection or not.</li>
+<li><em>default</em>: defines if we should treat the current array as a default.</li>
+<li><em>block-protocol</em>: defines what SCSI transport protocol we must use (FC, ISCSI, None, or auto).</li>
+<li><em>nas-name</em>: defines what NAS should be used for NFS volumes.</li>
+</ul>
+<p>Add more blocks similar to above for each PowerStore array if necessary.</p>
+</li>
+<li>
+<p>(optional) create new storage classes using ones from <code>helm/samples/storageclass</code> folder as an example and apply them to the Kubernetes cluster by running <code>kubectl create -f &lt;path_to_storageclass_file&gt;</code></p>
+<blockquote>
+<p>Storage classes created by v1.2 driver will not be deleted, v1.3 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.2 in your cluster then be sure to include same array you have used for v1.2 driver and make it default in <code>config.yaml</code> file.</p>
+</blockquote>
+</li>
+<li>
+<p>Create the secret by running <code>sed &quot;s/CONFIG_YAML/`cat helm/config.yaml | base64 -w0`/g&quot; helm/secret.yaml | kubectl apply -f -</code></p>
+</li>
+<li>
+<p>Update values file as needed.</p>
+</li>
+<li>
+<p>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running: <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade</code>.</p>
+</li>
 </ol>
 <h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
 <p>Follow the instructions for upgrade on the Dell CSI Operator <a href="https://github.com/dell/dell-csi-operator">GitHub</a> page.</p>

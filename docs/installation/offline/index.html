@@ -87,7 +87,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -119,7 +119,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -839,7 +839,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -966,12 +982,12 @@ or the Dell CSI Operator.</p>
 <li><a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator</a></li>
 </ul>
 <h2 id="dependencies">Dependencies</h2>
-<p>Multiple linux based systems may be required to create and process an offline bundle for use.</p>
+<p>Multiple Linux-based systems may be required to create and process an offline bundle for use.</p>
 <ul>
-<li>One linux based system, with internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes <code>docker</code> or <code>podman</code> to pull and save container images to file.</li>
-<li>One linux based system, with access to an image registry, to invoke a script that uses <code>docker</code> or <code>podman</code> to restore container images from file and push them to a registry</li>
+<li>One Linux-based system, with internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes <code>docker</code> or <code>podman</code> to pull and save container images to file.</li>
+<li>One Linux-based system, with access to an image registry, to invoke a script that uses <code>docker</code> or <code>podman</code> to restore container images from file and push them to a registry</li>
 </ul>
-<p>If one linux system has both internet access and access to an internal registry, that system can be used for both steps.</p>
+<p>If one Linux system has both internet access and access to an internal registry, that system can be used for both steps.</p>
 <p>Preparing an offline bundle requires the following utilities:</p>
 <table>
 <thead>
@@ -995,7 +1011,7 @@ or the Dell CSI Operator.</p>
 </tr>
 <tr>
 <td><code>git</code></td>
-<td><code>git</code> will be used to manually clone one of the above repos in order to create and offline bundle.</td>
+<td><code>git</code> will be used to manually clone one of the above repositories in order to create an offline bundle.</td>
 </tr>
 <tr>
 <td></td>
@@ -1015,10 +1031,10 @@ or the Dell CSI Operator.</p>
 <li>Perform either a Helm installation or Operator installation using the files obtained after unpacking in Step 2</li>
 </ol>
 <h3 id="building-an-offline-bundle">Building an offline bundle</h3>
-<p>This needs to be performed on a linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.</p>
+<p>This needs to be performed on a Linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.</p>
 <p>To build an offline bundle, the following steps are needed:</p>
 <ol>
-<li>Perform a <code>git clone</code> of the desired repository. For a helm based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned</li>
+<li>Perform a <code>git clone</code> of the desired repository. For a helm-based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned</li>
 <li>Run the <code>csi-offline-bundle.sh</code> script with an argument of <code>-c</code> in order to create an offline bundle</li>
 </ol>
 <ul>
@@ -1090,8 +1106,8 @@ dell-csi-operator-bundle/README.md
 
 Offline bundle file is: /dell/git/dell-csi-operator/dell-csi-operator-bundle.tar.gz
 </code></pre><h3 id="unpacking-the-offline-bundle-and-preparing-for-installation">Unpacking the offline bundle and preparing for installation</h3>
-<p>This needs to be performed on a linux system with access to an image registry that will host container images. If the registry requires <code>login</code>, that should be done before proceeding.</p>
-<p>To prepare for driver or Operator installation, the following steps need to be performed:</p>
+<p>This needs to be performed on a Linux system with access to an image registry that will host container images. If the registry requires <code>login</code>, that should be done before proceeding.</p>
+<p>To prepare for the driver or Operator installation, the following steps need to be performed:</p>
 <ol>
 <li>Copy the offline bundle file created from the previous step to a system with access to an image registry available to your Kubernetes/OpenShift cluster</li>
 <li>Expand the bundle file by running <code>tar xvfz &lt;filename&gt;</code></li>
@@ -1100,11 +1116,11 @@ Offline bundle file is: /dell/git/dell-csi-operator/dell-csi-operator-bundle.tar
 <p>The script will then perform the following steps:</p>
 <ul>
 <li>Load the required container images into the local system</li>
-<li>Tag the images according to the user supplied registry information</li>
+<li>Tag the images according to the user-supplied registry information</li>
 <li>Push the newly tagged images to the registry</li>
 <li>Modify the Helm charts or Operator configuration to refer to the newly tagged/pushed images</li>
 </ul>
-<p>An example of preparing the bundle for installation (192.168.75.40:5000 refers to a image registry accessible to Kubernetes/OpenShift):</p>
+<p>An example of preparing the bundle for installation (192.168.75.40:5000 refers to an image registry accessible to Kubernetes/OpenShift):</p>
 <pre><code>[user@anothersystem /tmp]# tar xvfz dell-csi-operator-bundle.tar.gz
 dell-csi-operator-bundle/
 dell-csi-operator-bundle/samples/
@@ -1115,7 +1131,7 @@ dell-csi-operator-bundle/LICENSE
 dell-csi-operator-bundle/README.md
 </code></pre><pre><code>[user@anothersystem /tmp]# cd dell-csi-operator-bundle
 </code></pre><pre><code>[user@anothersystem /tmp/dell-csi-operator-bundle]# scripts/csi-offline-bundle.sh -p -r 192.168.75.40:5000/operator
-Preparing a offline bundle for installation
+Preparing an offline bundle for installation
 
 *
 * Loading docker images
@@ -1168,7 +1184,12 @@ Preparing a offline bundle for installation
 
 </code></pre><h3 id="perform-either-a-helm-installation-or-operator-installation">Perform either a Helm installation or Operator installation</h3>
 <p>Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via <a href="../helm">Helm</a> or <a href="../operator/#manual-installation">Operator</a>.</p>
-<p><em>NOTE:</em> Installation should be done using the files that was obtained after unpacking the bundle as the image tags in the manifests are modifed to point to the internal registry.</p>
+<p><em>NOTES:</em></p>
+<ol>
+<li>Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.</li>
+<li>Installation should be done using the files that are obtained after unpacking the offline bundle (dell-csi-operator-bundle.tar.gz) as the image tags in the manifests are modified to point to the internal registry.</li>
+<li>Offline bundle installs operator in <code>default</code> namespace via install.sh script. Make sure that the current context in kubeconfig file has the namespace set to <code>default</code>.</li>
+</ol>
 
         <div class="section-index">
     
@@ -1177,6 +1198,10 @@ Preparing a offline bundle for installation
     
     
     <hr class="panel-line">
+        
+            
+        
+            
         
             
         

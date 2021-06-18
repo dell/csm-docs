@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v1/installation/operator/unity/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Installing Unity CSI Driver via Operator
 ">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="454">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="595">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -281,6 +281,14 @@
   <ul>
     <li class="collapse show" id="storage-plugin-docsv1installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -474,6 +482,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -598,6 +614,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -772,6 +796,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsv1concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -853,9 +902,13 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#installing-unity-csi-driver-via-operator">Installing Unity CSI Driver via Operator</a>
+    <li><a href="#csi-unity">CSI Unity</a>
       <ul>
-        <li><a href="#install-driver">Install Driver</a></li>
+        <li><a href="#pre-requisites">Pre-requisites</a></li>
+        <li><a href="#modifyset-the-following-optional-environment-variables">Modify/Set the following <em>optional</em> environment variables</a></li>
+        <li><a href="#storageclass-parameters">StorageClass Parameters</a></li>
+        <li><a href="#snapshotclass-parameters">SnapshotClass parameters</a></li>
+        <li><a href="#example-cr-for-unity">Example CR for Unity</a></li>
       </ul>
     </li>
   </ul>
@@ -918,31 +971,268 @@
 	<h1>Unity</h1>
 
 	       
-	<h2 id="installing-unity-csi-driver-via-operator">Installing Unity CSI Driver via Operator</h2>
-<p>The CSI Driver for Dell EMC Unity can be installed via the Dell CSI Operator.</p>
-<p>To deploy the Operator, follow the instructions available <a href="../">here</a>.</p>
-<p>There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.</p>
-<p>Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
-<h3 id="install-driver">Install Driver</h3>
-<ol>
-<li>
-<p>Create namespace run <code>kubectl create namespace test-unity</code> to create the a namespace called test-unity. It can be any user-defined name.</p>
-</li>
-<li>
-<p>Create <em>unity-creds</em></p>
-<p>Create secret mentioned in <a href="https://github.com/dell/csi-unity#install-csi-driver-for-unity">Install csi-driver</a> section. The secret should be created in user-defined namespace (test-unity, in this case)</p>
-</li>
-<li>
-<p>Create certificate secrets</p>
-<p>As part of the CSI driver installation, the CSI driver requires a secret with the name unity-certs-0 to unity-certs-n in the user-defined namespace (test-unity, in this case) Create certificate procedure explained in the <a href="https://github.com/dell/csi-unity#certificate-validation-for-unisphere-rest-api-calls">link</a></p>
-<p><strong>Note</strong>: <em>&lsquo;certSecretCount&rsquo;</em> parameter is not required for operator. Based on secret name pattern (unity-certs-*) operator reads all the secrets. Secret name suffix should have 0 to N order to read the secrets. Secrets will not be considered, if any number missing in suffix.</p>
-<p>Example: If unity-certs-0, unity-certs-1, unity-certs-3 are present in the namespace, then only first two secrets are considered for SSL verification.</p>
-</li>
-<li>
-<p>Create a CR (Custom Resource) for unity using the sample provided below</p>
-</li>
-</ol>
-<p>Create a new file <code>csiunity.yaml</code> by referring the following content. Replace the given sample values according to your environment. You can find may CRDs under deploy/crds folder when you install dell-csi-operator</p>
+	<h2 id="csi-unity">CSI Unity</h2>
+<h3 id="pre-requisites">Pre-requisites</h3>
+<h4 id="create-secret-to-store-unity-credentials">Create secret to store Unity credentials</h4>
+<p>Create a namespace called unity (it can be any user-defined name; But commands in this section assumes that the namespace is unity)
+Prepare the secret.json for driver configuration.
+The following table lists driver configuration parameters for multiple storage arrays.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>Username for accessing unity system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Password for accessing unity system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>restGateway</td>
+<td>REST API gateway HTTPS endpoint Unity system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>arrayId</td>
+<td>ArrayID for unity system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>insecure</td>
+<td>&ldquo;unityInsecure&rdquo; determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface If it is set to false, then a secret unity-certs has to be created with a X.509 certificate of CA which signed the Unisphere certificate</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>isDefaultArray</td>
+<td>An array having isDefaultArray=true is for backward compatibility. This parameter should occur once in the list.</td>
+<td>false</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>Ex: secret.json</p>
+<pre><code class="language-json5" data-lang="json5">
+   {
+     &quot;storageArrayList&quot;: [
+       {
+         &quot;username&quot;: &quot;user&quot;,
+         &quot;password&quot;: &quot;password&quot;,
+         &quot;restGateway&quot;: &quot;https://10.1.1.1&quot;,
+         &quot;arrayId&quot;: &quot;APM00******1&quot;,
+         &quot;insecure&quot;: true,
+         &quot;isDefaultArray&quot;: true
+       },
+       {
+         &quot;username&quot;: &quot;user&quot;,
+         &quot;password&quot;: &quot;password&quot;,
+         &quot;restGateway&quot;: &quot;https://10.1.1.2&quot;,
+         &quot;arrayId&quot;: &quot;APM00******2&quot;,
+         &quot;insecure&quot;: true
+       }
+     ]
+   }
+  
+</code></pre><p><code>kubectl create secret generic unity-creds -n unity --from-file=config=secret.json</code></p>
+<p>Use the following command to replace or update the secret</p>
+<p><code>kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run | kubectl replace -f -</code></p>
+<p><strong>Note</strong>: The user needs to validate the JSON syntax and array related key/values while replacing the unity-creds secret.
+The driver will continue to use previous values in case of an error found in the JSON file.</p>
+<h4 id="create-secret-for-client-side-tls-verification">Create secret for client side TLS verification</h4>
+<p>Please refer detailed documentation on how to create this secret <a href="../../helm/unity/#certificate-validation-for-unisphere-rest-api-calls">here</a></p>
+<p>If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>unity-certs<span style="color:#0000cf;font-weight:bold">-0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>unity<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Opaque<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">cert-0</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>Execute command: <code>kubectl create -f empty-secret.yaml</code></p>
+<h3 id="modifyset-the-following-optional-environment-variables">Modify/Set the following <em>optional</em> environment variables</h3>
+<p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity driver and their default values:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em><strong>Common parameters for node and controller</strong></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CSI_ENDPOINT</td>
+<td>Specifies the HTTP endpoint for Unity.</td>
+<td>No</td>
+<td>/var/run/csi/csi.sock</td>
+</tr>
+<tr>
+<td>X_CSI_DEBUG</td>
+<td>To enable debug mode</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>GOUNITY_DEBUG</td>
+<td>To enable debug mode for gounity library</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS</td>
+<td>Flag to enable multiple pods use the same pvc on the same node with RWO access mode</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td><em><strong>Controller parameters</strong></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>X_CSI_MODE</td>
+<td>Driver starting mode</td>
+<td>No</td>
+<td>controller</td>
+</tr>
+<tr>
+<td>X_CSI_UNITY_AUTOPROBE</td>
+<td>To enable auto probing for driver</td>
+<td>No</td>
+<td>true</td>
+</tr>
+<tr>
+<td><em><strong>Node parameters</strong></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>X_CSI_MODE</td>
+<td>Driver starting mode</td>
+<td>No</td>
+<td>node</td>
+</tr>
+<tr>
+<td>X_CSI_ISCSI_CHROOT</td>
+<td>Path to which the driver will chroot before running any iscsi commands.</td>
+<td>No</td>
+<td>/noderoot</td>
+</tr>
+</tbody>
+</table>
+<h3 id="storageclass-parameters">StorageClass Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>storagePool</td>
+<td>Unity Storage Pool CLI ID to use with in the Kubernetes storage class</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>thinProvisioned</td>
+<td>To set volume thinProvisioned</td>
+<td>false</td>
+<td>&ldquo;true&rdquo;</td>
+</tr>
+<tr>
+<td>isDataReductionEnabled</td>
+<td>To set volume data reduction</td>
+<td>false</td>
+<td>&ldquo;false&rdquo;</td>
+</tr>
+<tr>
+<td>volumeTieringPolicy</td>
+<td>To set volume tiering policy</td>
+<td>false</td>
+<td>0</td>
+</tr>
+<tr>
+<td>FsType</td>
+<td>Block volume related parameter. To set File system type. Possible values are ext3,ext4,xfs. Supported for FC/iSCSI protocol only.</td>
+<td>false</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>hostIOLimitName</td>
+<td>Block volume related parameter.  To set unity host IO limit. Supported for FC/iSCSI protocol only.</td>
+<td>false</td>
+<td>&quot;&rdquo;</td>
+</tr>
+<tr>
+<td>nasServer</td>
+<td>NFS related parameter. NAS Server CLI ID for filesystem creation.</td>
+<td>true</td>
+<td>&quot;&rdquo;</td>
+</tr>
+<tr>
+<td>hostIoSize</td>
+<td>NFS related parameter. To set filesystem host IO Size.</td>
+<td>false</td>
+<td>&ldquo;8192&rdquo;</td>
+</tr>
+<tr>
+<td>reclaimPolicy</td>
+<td>What should happen when a volume is removed</td>
+<td>false</td>
+<td>Delete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="snapshotclass-parameters">SnapshotClass parameters</h3>
+<p>Following parameters are not present in values.yaml in the Helm based installer</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>snapshotRetentionDuration</td>
+<td>TO set snapshot retention duration. Format:&ldquo;1:23:52:50&rdquo; (number of days:hours:minutes:sec)</td>
+<td>false</td>
+<td>&quot;&rdquo;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-cr-for-unity">Example CR for Unity</h3>
+<p>Refer samples from <a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a>. Below is an example CR:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>storage.dell.com/v1<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>CSIUnity<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -950,14 +1240,16 @@
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>test-unity<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v3<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v4<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">replicas</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">common</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;dellemc/csi-unity:v1.4.0.000R&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;dellemc/csi-unity:v1.5.0&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">imagePullPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>IfNotPresent<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">envs</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>X_CSI_UNITY_DEBUG<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;true&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">sideCars</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>provisioner<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">args</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;--volume-name-prefix=csiunity&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1003,90 +1295,7 @@
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>test-snap<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">parameters</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">retentionDuration</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><ol>
-<li>
-<p>Execute the following command to create unity custom resource <code>kubectl create -f csiunity.yaml</code>. This command will deploy the csi-unity driver in the test-unity namespace.</p>
-</li>
-<li>
-<p>Any deployment error can be found out by logging the operator pod which is in default namespace (example, kubectl logs dell-csi-operator-64c58559f6-cbgv7)</p>
-</li>
-<li>
-<p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity driver and their default values:</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><em><strong>Common parameters for node and controller</strong></em></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CSI_ENDPOINT</td>
-<td>Specifies the HTTP endpoint for Unity.</td>
-<td>No</td>
-<td>/var/run/csi/csi.sock</td>
-</tr>
-<tr>
-<td>X_CSI_DEBUG</td>
-<td>To enable debug mode</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>GOUNITY_DEBUG</td>
-<td>To enable debug mode for gounity library</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td><em><strong>Controller parameters</strong></em></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>X_CSI_MODE</td>
-<td>Driver starting mode</td>
-<td>No</td>
-<td>controller</td>
-</tr>
-<tr>
-<td>X_CSI_UNITY_AUTOPROBE</td>
-<td>To enable auto probing for driver</td>
-<td>No</td>
-<td>true</td>
-</tr>
-<tr>
-<td><em><strong>Node parameters</strong></em></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>X_CSI_MODE</td>
-<td>Driver starting mode</td>
-<td>No</td>
-<td>node</td>
-</tr>
-<tr>
-<td>X_CSI_ISCSI_CHROOT</td>
-<td>Path to which the driver will chroot before running any iscsi commands.</td>
-<td>No</td>
-<td>/noderoot</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ol>
-
+</span></code></pre></div>
 	
 	
 

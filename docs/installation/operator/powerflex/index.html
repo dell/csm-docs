@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerflex/" />
-<meta property="article:modified_time" content="2021-04-16T18:14:04+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing PowerFlex CSI Driver via Operator
 ">
-<meta itemprop="dateModified" content="2021-04-16T18:14:04&#43;05:30" />
-<meta itemprop="wordCount" content="1035">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="927">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -847,7 +847,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -969,18 +985,18 @@
 
 	       
 	<h2 id="installing-powerflex-csi-driver-via-operator">Installing PowerFlex CSI Driver via Operator</h2>
-<p>The CSI Driver for Dell EMC PowerFlex v1.4.0 can be installed via the Dell CSI Operator.</p>
+<p>The CSI Driver for Dell EMC PowerFlex can be installed via the Dell CSI Operator.</p>
 <p>To deploy the Operator, follow the instructions available <a href="../">here</a>.</p>
 <p>There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.</p>
-<p>Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
+<p>Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
 <h3 id="prerequisites">Prerequisites:</h3>
 <h4 id="sdc-deployment-for-operator">SDC Deployment for Operator</h4>
 <ul>
 <li>This feature deploys the sdc kernel modules on all nodes with the help of an init container.</li>
-<li>For non supported verisons of the OS also do the manual SDC deployment steps given below. Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported versions.</li>
-<li><strong>Note:</strong> When driver is created, MDM value for initContainers in driver CR is set by operator from mdm attributes in driver configuration file,
-config.json. Example of config.json is below in this document. Do not set MDM value for initContainers in driver CR file manually.</li>
-<li><strong>Note:</strong> To use a sdc-binary module from customer ftp site:
+<li>For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported versions.</li>
+<li><strong>Note:</strong> When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
+config.json. An example of config.json is below in this document. Do not set MDM value for initContainers in the driver CR file manually.</li>
+<li><strong>Note:</strong> To use an sdc-binary module from customer ftp site:
 <ul>
 <li>Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:</li>
 </ul>
@@ -1003,7 +1019,7 @@ config.json. Example of config.json is below in this document. Do not set MDM va
 <li>Create secret for FTP side by using the command <code>kubectl create -f sdc-repo-secret.yaml</code>.</li>
 <li>Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml.</li>
 </ul>
-<h5 id="example-cr--configsamplesvxflex_v140_ops_46yamlhttpsgithubcomdelldell-csi-operatorblobmastersamplesvxflex_v140_ops_46yaml">Example CR:  <a href="https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v140_ops_46.yaml">config/samples/vxflex_v140_ops_46.yaml</a></h5>
+<h5 id="example-cr--configsamplesvxflex_v140_ops_46yamlhttpsgithubcomdelldell-csi-operatorblobmastersamplesvxflex_140_ops_46yaml">Example CR:  <a href="https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_140_ops_46.yaml">config/samples/vxflex_v140_ops_46.yaml</a></h5>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">sideCars</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Uncomment the following section if you want to run the monitoring sidecar</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sdc-monitor<span style="color:#f8f8f8;text-decoration:underline">
@@ -1027,7 +1043,7 @@ config.json. Example of config.json is below in this document. Do not set MDM va
 <li>Export the shell variable <em>MDM_IP</em> in a comma-separated list using <code>export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx</code>, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.</li>
 <li>Install the SDC per the <em>Dell EMC PowerFlex Deployment Guide</em>:
 <ul>
-<li>For Red Hat Enterprise Linux and Cent OS, run <code>rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm</code>, where * is the SDC name corresponding to the PowerFlex installation version.</li>
+<li>For Red Hat Enterprise Linux and CentOS, run <code>rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm</code>, where * is the SDC name corresponding to the PowerFlex installation version.</li>
 </ul>
 </li>
 <li>To add more MDM_IP for multi-array support, run <code>/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx</code></li>
@@ -1088,7 +1104,7 @@ Run <code>kubectl create namespace &lt;driver-namespace&gt;</code> command using
 </tr>
 <tr>
 <td>mdm</td>
-<td>mdm defines the MDM(s) that SDC should register with on start. This should be an list of MDM IP addresses or hostnames separated by comma</td>
+<td>mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma</td>
 <td>true</td>
 <td>-</td>
 </tr>
@@ -1100,7 +1116,7 @@ Run <code>kubectl create namespace &lt;driver-namespace&gt;</code> command using
         <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#000;font-weight:bold">,</span>
         <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
         <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ID1&#34;</span><span style="color:#000;font-weight:bold">,</span>
-        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;http://127.0.0.1&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://127.0.0.1&#34;</span><span style="color:#000;font-weight:bold">,</span>
         <span style="color:#204a87;font-weight:bold">&#34;insecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
         <span style="color:#204a87;font-weight:bold">&#34;isDefault&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
         <span style="color:#204a87;font-weight:bold">&#34;mdm&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;10.0.0.1,10.0.0.2&#34;</span>
@@ -1120,13 +1136,13 @@ Run <code>kubectl create namespace &lt;driver-namespace&gt;</code> command using
 <p><code>kubectl create secret generic vxflexos-config -n &lt;driver-namespace&gt; --from-file=config=config.json -o yaml --dry-run=client | kubectl replace -f -</code></p>
 <p><em>Note:</em></p>
 <ul>
-<li>The user needs to validate the JSON syntax and array related key/values while replacing the vxflexos-creds secret.</li>
+<li>The user needs to validate the JSON syntax and array-related key/values while replacing the vxflexos-creds secret.</li>
 <li>If you update the secret, you must reinstall the driver.</li>
-<li>System ID, MDM configuration etc. now are taken directly from config.json. MDM provided in the input_sample_file.yaml will be overided with MDM values in config.json.</li>
+<li>System ID, MDM configuration, etc. now are taken directly from config.json. MDM provided in the input_sample_file.yaml will be overidden with MDM values in config.json.</li>
 </ul>
 </li>
 <li>
-<p>Create a Custom Resource (CR) for PowerFlex using the sample files provided    <a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a> .</p>
+<p>Create a Custom Resource (CR) for PowerFlex using the sample files provided    <a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a>.</p>
 </li>
 <li>
 <p>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:</p>
@@ -1142,7 +1158,7 @@ Run <code>kubectl create namespace &lt;driver-namespace&gt;</code> command using
 <tbody>
 <tr>
 <td>replicas</td>
-<td>Controls the amount of controller pods you deploy. If the number of controller pods are greater than number of available nodes, excess pods will become stay in a pending state. Defaults is 2 which allows for Controller high availability.</td>
+<td>Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability.</td>
 <td>Yes</td>
 <td>2</td>
 </tr>
@@ -1175,36 +1191,6 @@ Run <code>kubectl create namespace &lt;driver-namespace&gt;</code> command using
 <td>Setting allowRWOMultiPodAccess to &ldquo;true&rdquo; will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk.</td>
 <td>No</td>
 <td>false</td>
-</tr>
-<tr>
-<td><em><strong>StorageClass parameters</strong></em></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>storagePool</td>
-<td>Defines the PowerFlex storage pool from which this driver will provision volumes. You must set this for the primary storage pool to be used</td>
-<td>Yes</td>
-<td>pool1</td>
-</tr>
-<tr>
-<td>allowVolumeExpansion</td>
-<td>Once the allowed topology is modified in storage class, pods/and volumes will always be scheduled on nodes that have access to the storage</td>
-<td>No</td>
-<td>true</td>
-</tr>
-<tr>
-<td>allowedTopologies:key</td>
-<td>This is to enable topology to allow pods/and volumes to always be scheduled on nodes that have access to the storage. You need to replace the X_CSI_VXFLEXOS_SYSTEMNAME in the key with the actual systemname value</td>
-<td>No</td>
-<td>X_CSI_VXFLEXOS_SYSTEMNAME</td>
-</tr>
-<tr>
-<td>initContainers:value</td>
-<td>Set the MDM IP&rsquo;s here if installing on CoreOS to enable automatic SDC installation</td>
-<td>Yes (OpenShift)</td>
-<td>&ldquo;10.xx.xx.xx,10.xx.xx.xx&rdquo;</td>
 </tr>
 </tbody>
 </table>

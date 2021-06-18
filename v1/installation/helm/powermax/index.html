@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v1/installation/helm/powermax/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing PowerMax CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="2349">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="2243">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -281,6 +281,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -474,6 +482,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -598,6 +614,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -772,6 +796,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsv1concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -862,11 +911,15 @@
         <li><a href="#ports-in-port-group">Ports in port group</a></li>
         <li><a href="#configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</a></li>
         <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
-        <li><a href="#volume-snapshot-requirements">Volume Snapshot requirements</a></li>
+        <li><a href="#volume-snapshot-requirements">Volume Snapshot Requirements</a></li>
       </ul>
     </li>
     <li><a href="#install-the-driver">Install the Driver</a></li>
-    <li><a href="#storage-classes">Storage Classes</a></li>
+    <li><a href="#storage-classes">Storage Classes</a>
+      <ul>
+        <li><a href="#what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -927,7 +980,7 @@
 	<h1>PowerMax</h1>
 
 	       
-	<p>The CSI Driver for Dell EMC PowerMax can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer">documentation</a>.</p>
+	<p>The CSI Driver for Dell EMC PowerMax can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, see the script <a href="https://github.com/dell/csi-powermax/tree/master/dell-csi-helm-installer">documentation</a>.</p>
 <p>The controller section of the Helm chart installs the following components in a <em>Deployment</em> in the <code>powermax</code> namespace:</p>
 <ul>
 <li>CSI Driver for Dell EMC PowerMax</li>
@@ -944,7 +997,7 @@
 <h2 id="prerequisites">Prerequisites</h2>
 <p>The following requirements must be met before installing the CSI Driver for Dell EMC PowerMax:</p>
 <ul>
-<li>Install Kubernetes (1.17, 1.18, 1.19) or OpenShift (4.5 or 4.6)</li>
+<li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
 <li>Install Helm 3</li>
 <li>Fibre Channel requirements</li>
 <li>iSCSI requirements</li>
@@ -962,7 +1015,7 @@
 <ul>
 <li>Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.</li>
 <li>Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.</li>
-<li>If number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.</li>
+<li>If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.</li>
 </ul>
 <h3 id="iscsi-requirements">iSCSI Requirements</h3>
 <p>The CSI Driver for Dell EMC PowerMax supports iSCSI connectivity. These requirements are applicable for the nodes that use iSCSI initiator to connect to the PowerMax arrays.</p>
@@ -1004,45 +1057,57 @@
 <li>Restart the docker service with <code>systemctl daemon-reload</code> and <code>systemctl restart docker</code> on all the nodes.</li>
 <li>Restart the docker service with systemctl daemon-reload and systemctl restart docker on all the nodes.</li>
 </ol>
+<p><em>NOTE:</em> Some distribution, like Ubuntu, already has <em>MountFlags</em> set by default.</p>
 <h3 id="linux-multipathing-requirements">Linux multipathing requirements</h3>
 <p>CSI Driver for Dell EMC PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.</p>
 <p>Set up Linux multipathing as follows:</p>
 <ul>
-<li>All the nodes must have <em>Device Mapper Multipathing</em> package installed.<br>
+<li>All the nodes must have the <em>Device Mapper Multipathing</em> package installed.<br>
 <em>NOTE:</em> When this package is installed it creates a multipath configuration file which is located at <code>/etc/multipath.conf</code>. Please ensure that this file always exists.</li>
 <li>Enable multipathing using <code>mpathconf --enable --with_multipathd y</code></li>
 <li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
 </ul>
-<h3 id="volume-snapshot-requirements">Volume Snapshot requirements</h3>
-<h4 id="volume-snapshot-crds">Volume Snapshot CRDs</h4>
-<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/release-2.1/config/crd">Github</a>.</p>
-<p>Alternately, you can install the CRDs by supplying the option <em>&ndash;snapshot-crd</em> while installing the driver using the <code>csi-install.sh</code> script.</p>
+<h3 id="volume-snapshot-requirements">Volume Snapshot Requirements</h3>
+<h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
+<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github.</p>
+<ul>
+<li>If on Kubernetes 1.18/1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd">v3.0.3</a></li>
+<li>If on Kubernetes 1.20 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd">v4.0.0</a></li>
+</ul>
 <h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
-<p>Starting with the beta Volume Snapshots, the CSI external-snapshotter sidecar is split into two controllers:</p>
+<p>Starting with beta Volume Snapshots in Kubernetes 1.17, the CSI external-snapshotter sidecar is split into two controllers:</p>
 <ul>
 <li>A common snapshot controller</li>
 <li>A CSI external-snapshotter sidecar</li>
 </ul>
-<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests available on <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/release-2.1/deploy/kubernetes/snapshot-controller">GitHub</a>.</p>
+<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available:</p>
+<ul>
+<li>If on Kubernetes 1.18/1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller">v3.0.3</a></li>
+<li>If on Kubernetes 1.20 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller">v4.0.0</a></li>
+</ul>
 <p><em>NOTE:</em></p>
 <ul>
-<li>The manifests available on the GitHub repository for snapshot controller will install v3.0.2 of the snapshotter controller - (k8s.gcr.io/sig-storage/snapshot-controller:v3.0.2)</li>
-<li>Dell EMC recommends using the v3.0.2 image of the CSI external snapshotter - (k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.2)</li>
-<li>The CSI external-snapshotter sidecar is still installed with the driver and does not involve any extra configuration.</li>
+<li>The manifests available on GitHub install the snapshotter image:
+<ul>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.3&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.3</a></li>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v4.0.0</a></li>
+</ul>
+</li>
+<li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
 </ul>
 <h2 id="install-the-driver">Install the Driver</h2>
 <p><strong>Steps</strong></p>
 <ol>
 <li>Run <code>git clone https://github.com/dell/csi-powermax.git</code> to clone the git repository.  This will include the Helm charts and dell-csi-helm-installer scripts.</li>
 <li>Ensure that you have created a namespace where you want to install the driver. You can run <code>kubectl create namespace powermax</code> to create a new one</li>
-<li>Edit the `helm/secret.yaml, point to the correct namespace and replace the values for the username and password parameters.
+<li>Edit the `helm/secret.yaml file, point to the correct namespace and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;myusername&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
 <span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;mypassword&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
 </code></pre></div><p>where <em>myusername</em> and <em>mypassword</em> are credentials for a user with PowerMax priviledges.</p>
 </li>
 <li>Create the secret by running <code>kubectl create -f helm/secret.yaml</code></li>
-<li>If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - <em>csireverseproxy-tls-secret</em> which holds a SSL certificate and the corresponding private key in the namespace where you are installing the driver.</li>
+<li>If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - <em>csireverseproxy-tls-secret</em> which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.</li>
 <li>Copy the default values.yaml file `cd helm &amp;&amp; cp csi-powermax/values.yaml my-powermax-settings.yaml</li>
 <li>Edit the newly created file and provide values for the following parameters <code>vi my-powermax-settings.yaml</code></li>
 </ol>
@@ -1118,7 +1183,7 @@ These values can be obtained using base64 encoding as described in the following
 </tr>
 <tr>
 <td>storageResourcePool</td>
-<td>Must mention one of the SRPs on  the PowerMax array that the symmetrixID specifies. This value is used to create the default storage class.</td>
+<td>This parameter must mention one of the SRPs on the PowerMax array that the symmetrixID specifies. This value is used to create the default storage class.</td>
 <td>Yes</td>
 <td>&ldquo;SRP_1&rdquo;</td>
 </tr>
@@ -1202,7 +1267,7 @@ These values can be obtained using base64 encoding as described in the following
 </tr>
 <tr>
 <td>skipCertificateValidation</td>
-<td>This parameter should be set to false if you want to do client side TLS verification of Unisphere for PowerMax SSL certificates. It is set to true by default.</td>
+<td>This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates. It is set to true by default.</td>
 <td>No</td>
 <td>&ldquo;True&rdquo;</td>
 </tr>
@@ -1219,19 +1284,18 @@ These values can be obtained using base64 encoding as described in the following
 </ol>
 <p><em>Note:</em></p>
 <ul>
-<li>For detailed instructions on how to run the install scripts, refer to the readme document in the dell-csi-helm-installer folder.</li>
+<li>For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.</li>
 <li>This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The <code>verify.sh</code> script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the <code>--skip-verify-node</code> option</li>
 </ul>
 <h2 id="storage-classes">Storage Classes</h2>
-<p>As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.</p>
-<p>The <code>StorageClass</code> object in Kubernetes is immutable and can&rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
-In preparation for that, starting in Q4 of 2020, an annotation <code>&quot;helm.sh/resource-policy&quot;: keep</code> is applied to the storage classes created by the <code>dell-csi-helm-installer</code>.</p>
-<p>Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
-This annotation has been applied to give you an opportunity to keep using  these storage classes even with a future release of the driver. In case you wish to not use these storage classes, you will need to delete them by using the <code>kubectl delete storageclass</code> command.</p>
-<p><em>NOTE</em>: If you uninstall the driver and reinstall it, you can still face errors if any update in the <code>values.yaml</code> file leads to an update of the storage class(es):</p>
-<pre><code>    Error: cannot patch &quot;&lt;sc-name&gt;&quot; with kind StorageClass: StorageClass.storage.k8s.io &quot;&lt;sc-name&gt;&quot; is invalid: parameters: Forbidden: updates to parameters are forbidden
-</code></pre><p>In case you want to make such updates, make sure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.<br>
-Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&rsquo;t be able to provision new PVCs until at least one storage class is newly created.</p>
+<p>Starting in CSI PowerMax v1.6, <code>dell-csi-helm-installer</code> will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests has been provided in the <code>helm/samples</code> folder. Please use these samples to create new storage classes to provision storage.
+See this <a href="../../../../v1/installation/helm/powermax/#storage-classes">note</a> for the driving reason behind this change.</p>
+<h3 id="what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</h3>
+<p><em>Upgrading from CSI PowerMax v1.5 driver</em>
+The storage classes created as part of the installation have an annotation - &ldquo;helm.sh/resource-policy&rdquo;: keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.</p>
+<p><em>Upgrading from an older version of the driver</em>
+The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation &ldquo;helm.sh/resource-policy&rdquo;: keep before performing an upgrade.</p>
+<p><em>Note:</em> If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
 
 	
 	

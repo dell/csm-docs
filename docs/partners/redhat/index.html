@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/partners/redhat/" />
-<meta property="article:modified_time" content="2021-03-22T19:07:13+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Red Hat OpenShift">
 <meta itemprop="description" content="Installing the certified Dell CSI Operator on OpenShift
 ">
-<meta itemprop="dateModified" content="2021-03-22T19:07:13&#43;05:30" />
-<meta itemprop="wordCount" content="216">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="219">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -847,7 +847,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -958,43 +974,39 @@
 <h2 id="install-operator-via-the-openshift-ui">Install Operator via the OpenShift UI</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>
-<p>Type &ldquo;Dell&rdquo; in the OperatorHub section under Operators, to get the list of available Dell CSI Operators.
-<img src="/storage-plugin-docs/images/oc1.PNG" alt=""></p>
-</li>
-<li>
-<p>Check the version you want to install from the list, you can check the details by clicking it.
-<img src="/storage-plugin-docs/images/oc2.PNG" alt=""></p>
-</li>
-<li>
-<p>Once selected, click &ldquo;Install&rdquo; to proceed with installation process.
-<img src="/storage-plugin-docs/images/oc3.PNG" alt=""></p>
-</li>
-<li>
-<p>You can verify the list of available operators by selecting &ldquo;Installed Operator&rdquo; section.
-<img src="/storage-plugin-docs/images/oc4.PNG" alt=""></p>
-</li>
-<li>
-<p>Select the Dell CSI Operator to get further description.
-<img src="/storage-plugin-docs/images/oc5.PNG" alt=""></p>
-</li>
+<li>Type &ldquo;Dell&rdquo; in the OperatorHub section under Operators, to get the list of available Dell CSI Operators.</li>
 </ol>
+<p><img src="/storage-plugin-docs/images/oc1.PNG" alt=""></p>
+<ol start="2">
+<li>Check the version you want to install from the list, you can check the details by clicking it.</li>
+</ol>
+<p><img src="/storage-plugin-docs/images/oc2.PNG" alt=""></p>
+<ol start="3">
+<li>Once selected, click &ldquo;Install&rdquo; to proceed with the installation process.</li>
+</ol>
+<p><img src="/storage-plugin-docs/images/oc3.PNG" alt=""></p>
+<ol start="4">
+<li>You can verify the list of available operators by selecting the &ldquo;Installed Operator&rdquo; section.</li>
+</ol>
+<p><img src="/storage-plugin-docs/images/oc4.PNG" alt=""></p>
+<ol start="5">
+<li>Select the Dell CSI Operator for further details.</li>
+</ol>
+<p><img src="/storage-plugin-docs/images/oc5.PNG" alt=""></p>
 <h2 id="install-csi-drivers-via-operator">Install CSI Drivers via Operator</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>
-<p>Select the particular CSI driver which you want to install, as seen in step 5 above. In this example, CSI Unity is selected.
-<img src="/storage-plugin-docs/images/driver1.PNG" alt=""></p>
-</li>
-<li>
-<p>After clicking &ldquo;Create CSIUnity&rdquo; option in above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the <a href="../../installation/operator/#install-csi-driver">driver install pages for the Dell CSI Operator</a> for information on the parameters.
-<img src="/storage-plugin-docs/images/driver2.PNG" alt=""></p>
-</li>
-<li>
-<p>You can check the driver installed and node and controller pods running in the Pods section under Workloads.
-<img src="/storage-plugin-docs/images/driver3.png" alt=""></p>
-</li>
+<li>Select the particular CSI driver which you want to install, as seen in step 5 above. In this example, CSI Unity is selected.</li>
 </ol>
+<p><img src="/storage-plugin-docs/images/driver1.PNG" alt=""></p>
+<ol start="2">
+<li>After clicking the &ldquo;Create CSIUnity&rdquo; option in the above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the <a href="../../installation/operator/#install-csi-driver">driver install pages for the Dell CSI Operator</a> for information on the parameters.</li>
+</ol>
+<p><img src="/storage-plugin-docs/images/driver2.PNG" alt=""></p>
+<ol start="3">
+<li>You can check the driver installed and node and controller pods running in the Pods section under Workloads.</li>
+</ol>
+<p><img src="/storage-plugin-docs/images/driver3.png" alt=""></p>
 
 	
 	

@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade Unity CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v1/upgradation/drivers/unity/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Upgrade Unity CSI driver">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="80">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="251">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -278,6 +278,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -471,6 +479,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -595,6 +611,14 @@
   <ul>
     <li class="collapse " id="storage-plugin-docsv1troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -769,6 +793,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="storage-plugin-docsv1concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/storage-plugin-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -850,8 +899,12 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#update-driver-from-v13-to-v14-using-helm">Update Driver from v1.3 to v1.4 using Helm</a></li>
-    <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
+    <li>
+      <ul>
+        <li><a href="#using-helm">Using Helm</a></li>
+        <li><a href="#using-operator">Using Operator</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -903,15 +956,55 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.</p>
-<h2 id="update-driver-from-v13-to-v14-using-helm">Update Driver from v1.3 to v1.4 using Helm</h2>
-<p><strong>Steps</strong></p>
+<h3 id="using-helm">Using Helm</h3>
+<p><strong>Note:</strong> While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
+<p>Preparing myvalues.yaml is the same as explained in install section.</p>
+<p>To upgrade the driver from csi-unity v1.4 to csi-unity 1.5 (across K8S 1.18, K8S 1.19, K8S 1.20).</p>
 <ol>
-<li>Run <code>git clone https://github.com/dell/csi-unity.git</code> to clone the git repository and get the v1.3 driver.</li>
-<li>Update values file as needed.</li>
-<li>Run the <code>csi-install</code> script with the option <em>&ndash;upgrade</em> by running: <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace unity --values ./my-values.yaml --upgrade</code>.</li>
+<li>
+<p>Get the latest csi-unity 1.5 code from Github.</p>
+</li>
+<li>
+<p>Create myvalues.yaml according to csi-unity 1.5 .</p>
+</li>
+<li>
+<p>Delete the existing default storage classes of csi-unity 1.4 .</p>
+</li>
+<li>
+<p>Clone the repository <a href="https://github.com/dell/csi-unity">https://github.com/dell/csi-unity</a> , copy the helm/csi-unity/values.yaml to the new location
+csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.</p>
+</li>
+<li>
+<p>Navigate to common-helm-installer folder and execute the following command:
+<code>./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade</code></p>
+</li>
+<li>
+<p>If the value of &lsquo;createStorageClassesWithTopology&rsquo; is set to &ldquo;true&rdquo; in myvalues.yaml , then</p>
+<ul>
+<li>Check the default storage classes, VolumeBindingMode should be &lsquo;WaitForFirstConsumer&rsquo;.</li>
+</ul>
+</li>
 </ol>
-<h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
-<p>Follow the instructions for upgrade on the Dell CSI Operator <a href="https://github.com/dell/dell-csi-operator">GitHub</a> page.</p>
+<p><strong>Note:</strong> User has to re-create existing custom-storage classes (if any) according to latest (v1.5) format.</p>
+<h3 id="using-operator">Using Operator</h3>
+<p><strong>Note:</strong> While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.</p>
+<p>To upgrade the driver from csi-unity v1.4 to csi-unity v1.5 (OpenShift 4.6) :</p>
+<ol>
+<li>
+<p>Clone operator version 1.3.0</p>
+</li>
+<li>
+<p>Execute <code>bash scripts/install.sh --upgrade</code>
+This command will install latest version of operator.</p>
+</li>
+<li>
+<p>Furnish the sample CR yaml according to your environment.</p>
+</li>
+<li>
+<p>For upgrading the csi-unity driver execute the following command:</p>
+<p><code>kubectl apply -f &lt;furnished-cr.yaml&gt;</code></p>
+</li>
+</ol>
 
 	
 	

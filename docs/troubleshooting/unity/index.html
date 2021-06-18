@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting Unity Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/troubleshooting/unity/" />
-<meta property="article:modified_time" content="2021-03-18T01:03:08+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Troubleshooting Unity Driver">
-<meta itemprop="dateModified" content="2021-03-18T01:03:08&#43;05:30" />
-<meta itemprop="wordCount" content="126">
+<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
+<meta itemprop="wordCount" content="179">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.b195954295d78ffccad3bf1251f9641b.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -844,7 +844,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersdocker" href="/storage-plugin-docs/docs/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnersrancher" href="/storage-plugin-docs/docs/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsdocspartnerstanzu" href="/storage-plugin-docs/docs/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -957,12 +973,16 @@
 <td>You may need to put an insecure-registries entry in <code>/etc/docker/daemon.json</code> or login to the docker registry</td>
 </tr>
 <tr>
-<td>The <code>kubectl logs -n unity unity-node-&lt;suffix&gt;</code> driver logs shows that the driver can&rsquo;t connect to Unity - Authentication failure.</td>
-<td>Check if you have created secret with correct credentials</td>
+<td>The <code>kubectl logs -n unity unity-node-&lt;suffix&gt;</code> driver logs show that the driver can&rsquo;t connect to Unity - Authentication failure.</td>
+<td>Check if you have created a secret with correct credentials</td>
 </tr>
 <tr>
-<td>Installation of the driver on Kubernetes v1.20 fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
-<td>Kubernetes v1.20 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20 (v1 snapshots) install CRDs from v4.0.0, see point 6 <a href="../../../docs/installation/helm/unity/#install-csi-driver">here</a></td>
+<td>Installation of the driver on Kubernetes v1.20/1.21 fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
+<td>Kubernetes v1.20/1.21 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20/1.21 (v1 snapshots) install CRDs from v4.0.0, see point 6 <a href="../../../docs/installation/helm/unity/#install-csi-driver">here</a></td>
+</tr>
+<tr>
+<td><code>fsGroup</code> specified in pod spec is not reflected in files or directories at mounted path of volume.</td>
+<td>fsType of PVC must be set for fsGroup to work. fsType can be specified while creating a storage class. For NFS protocol, fsType can be specified as <code>nfs</code>. fsGroup doesn&rsquo;t work for ephemeral inline volumes.</td>
 </tr>
 </tbody>
 </table>
