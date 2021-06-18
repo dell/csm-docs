@@ -54,8 +54,8 @@ spec:
   storageClassName: vxflexos
 ```
 
-2. The _volumeMode: Filesystem_ requires a mounted file system, and the _resources.requests.storage_ of 8Gi requires an 8 GB file. In this case, the _storageClassName: vxflexos_ directs the system to use one of the pre-defined storage classes created by the CSI Driver for Dell EMC PowerFlex installation process. This step yields a mounted _ext4_ file system. You can see the storage class definitions in the PowerFlex installation helm chart files _storageclass.yaml_ and _storageclass-xfs.yaml_.
-3. If you compare _pvol0.yaml_ and _pvol1.yaml_ , you will find that the latter uses a different storage class; _vxflexos-xfs_. This class gives you an _xfs_ file system.
+2. The _volumeMode: Filesystem_ requires a mounted file system, and the _resources.requests.storage_ of 8Gi requires an 8 GB file. In this case, the _storageClassName: vxflexos_ directs the system to use one of the pre-defined storage classes created by the CSI Driver for the Dell EMC PowerFlex installation process. This step yields a mounted _ext4_ file system. You can see the storage class definitions in the PowerFlex installation helm chart files _storageclass.yaml_ and _storageclass-xfs.yaml_.
+3. If you compare _pvol0.yaml_ and _pvol1.yaml_, you will find that the latter uses a different storage class; _vxflexos-xfs_. This class gives you an _xfs_ file system.
 4. To see the volumes you created, run kubectl get persistentvolumeclaim –n helmtest-vxflexos and kubectl describe persistentvolumeclaim –n helmtest-vxflexos.
 *NOTE:* For more information about Kubernetes objects like _StatefulSet_ and _PersistentVolumeClaim_ see [Kubernetes documentation: Concepts](https://kubernetes.io/docs/concepts/).
 
@@ -67,31 +67,33 @@ Test the workflow for snapshot creation.
 
 1. Start the _2vols_ container and leave it running.
     - Helm tests are designed assuming users are using the default _storageclass_ names (_vxflexos_ and _vxflexos-xfs_). If your _storageclass_ names differ from the default values, such as when deploying with the Operator, update the templates in 2vols accordingly (located in `test/helm/2vols/templates` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
-    - Helm tests are designed assuming users are using the default _snapshotclass_ name. If your _snapshotclass_ names differ from the default values, update `snap1.yaml` and `snap2.yaml` accordingly.
+    - Helm tests are designed assuming users are using the default _snapshotclass_ name. If your _snapshotclass_ names differ from the default values, update `betasnap1.yaml` and `betasnap2.yaml` accordingly.
 2. Run `sh snaptest.sh` to start the test.
 
-This will create a snapshot of each of the volumes in the container using _VolumeSnapshot_ objects defined in `snap1.yaml` and `snap2.yaml`. The following are the contents of `snap1.yaml`:
+This will create a snapshot of each of the volumes in the container using _VolumeSnapshot_ objects defined in `betasnap1.yaml` and `betasnap2.yaml`. The following are the contents of `betasnap1.yaml`:
 
 ```yaml
-apiVersion: snapshot.storage.k8s.io/v1alpha1
+apiVersion: snapshot.storage.k8s.io/v1beta1
 kind: VolumeSnapshot
 metadata:
-  name: pvol0-snap
+  name: pvol0-snap1
   namespace: helmtest-vxflexos
 spec:
-  snapshotClassName: vxflexos-snapclass
+  volumeSnapshotClassName: vxflexos-snapclass
   source:
-    name: pvol
-    kind: PersistentVolumeClaim
+    persistentVolumeClaimName: pvol0
 ```
+
+> *NOTE:* apiVersion in both betasnap yamls must match apiVersion in vxflexos-snapclass, if version in vxflexos-snapclass is v1, adjust apiVersion like so: `apiVersion: snapshot.storage.k8s.io/v1` in betasnap1.yaml and betasnap2.yaml 
 
 **Results**
 
-The `snaptest.sh` script will create a snapshot using the definitions in the `snap1.yaml` file. The _spec.source_ section contains the volume that will be snapped. For example, if the volume to be snapped is _pvol0_ , then the created snapshot is named _pvol0-snap_.
+The `snaptest.sh` script will create a snapshot using the definitions in the `betasnap1.yaml` file. The _spec.source_ section contains the volume that will be snapped. For example, if the volume to be snapped is _pvol0_, then the created snapshot is named _pvol0-snap1_.
 
-*NOTE:* The `snaptest.sh` shell script creates the snapshots, describes them, and then deletes them. You can see your snapshots using `kubectl get volumesnapshot -n test`.
+*NOTE:* The `snaptest.sh` shell script creates the snapshots, describes them, and then deletes them. You can see your snapshots using `kubectl get volumesnapshot -n helmtest-vxflexos`.
 
-Notice that this _VolumeSnapshot_ class has a reference to a _snapshotClassName: vxflexos-snapclass_. The CSI Driver for Dell EMC PowerFlex installation creates this class as its default snapshot class. You can see its definition in the installation directory file `volumesnapshotclass.yaml`.
+Notice that this _VolumeSnapshot_ class has a reference to a _snapshotClassName: vxflexos-snapclass_. The CSI Driver for Dell EMC PowerFlex installation does not create this class. You will need
+to create instance of _VolumeSnapshotClass_ from one of default samples in `helm/samples/volumesnapshotclass' directory.
 
 ## Test restoring from a snapshot
 
@@ -103,19 +105,21 @@ Ensure that you have stopped any previous test instance before performing this p
 
 **Steps**
 
+> *NOTE:* apiVersion in both betasnap yamls must match apiVersion in vxflexos-snapclass, if version in vxflexos-snapclass is v1, adjust apiVersion like so: `apiVersion: snapshot.storage.k8s.io/v1`
+
 1. Run `sh snaprestoretest.sh` to start the test.
 
-This script deploys the _2vols_ example, creates a snap of _pvol0_, and then updates the deployed helm chart from the updateddirectory _2vols+restore_. This then adds an additional volume that is created from the snapshot.
+This script deploys the _2vols_ example, creates a snap of _pvol0_, and then updates the deployed helm chart from the updated directory _2vols+restore_. This then adds an additional volume that is created from the snapshot.
 
 *NOTE:*
 - Helm tests are designed assuming users are using the default _storageclass_ names (_vxflexos_ and _vxflexos-xfs_). If your _storageclass_ names differ from the default values, such as when deploying with the Dell CSI Operator, update the templates for snap restore tests accordingly (located in `test/helm/2vols+restore/template` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
-- Helm tests are designed assuming users are using the default _snapshotclass_ name. If your _snapshotclass_ names differ from the default values, update `snap1.yaml` and `snap2.yaml` accordingly.
+- Helm tests are designed assuming users are using the default _snapshotclass_ name. If your _snapshotclass_ names differ from the default values, update `betasnap1.yaml` and `betasnap2.yaml` accordingly.
 
 **Results**
 
 An outline of this workflow is described below:
-1. The snapshot is taken using `snap1.yaml`.
-2. _Helm_ is called to upgrade the deployment with a new definition, which is found in the _2vols+restore_ directory. The `csi-vxflexos/test/helm/2vols+restore/templates` directory contains the newly created `createFromSnap.yaml` file. The script then creates a _PersistentVolumeClaim_ , which is a volume that is dynamically created from the snapshot. Then the helm deployment is upgraded to contain the newly created third volume. In other words, when the `snaprestoretest.sh` creates a new volume with data from the snapshot, the restore operation is tested. The contents of the `createFromSnap.yaml` are described below:
+1. The snapshot is taken using `betasnap1.yaml`.
+2. _Helm_ is called to upgrade the deployment with a new definition, which is found in the _2vols+restore_ directory. The `csi-vxflexos/test/helm/2vols+restore/templates` directory contains the newly created `createFromSnap.yaml` file. The script then creates a _PersistentVolumeClaim_, which is a volume that is dynamically created from the snapshot. Then the helm deployment is upgraded to contain the newly created third volume. In other words, when the `snaprestoretest.sh` creates a new volume with data from the snapshot, the restore operation is tested. The contents of the `createFromSnap.yaml` are described below:
 
 ```yaml
 apiVersion: v1
@@ -126,7 +130,7 @@ metadata:
 spec:
   storageClassName: vxflexos
   dataSource:
-    name: pvol0-snap
+    name: pvol0-snap1
     kind: VolumeSnapshot
     apiGroup: snapshot.storage.k8s.io
   accessModes:
@@ -136,4 +140,4 @@ spec:
       storage: 8Gi
 ```
 
-*NOTE:* The _spec.dataSource_ clause, specifies a source _VolumeSnapshot_ named _pvol0-snap1_ which matches the snapshot's name in `snap1.yaml`.
+*NOTE:* The _spec.dataSource_ clause, specifies a source _VolumeSnapshot_ named _pvol0-snap1_ which matches the snapshot's name in `betasnap1.yaml`.

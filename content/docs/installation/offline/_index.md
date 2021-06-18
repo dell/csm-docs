@@ -19,11 +19,11 @@ As well as the Dell CSI Operator
 
 ## Dependencies
 
-Multiple linux based systems may be required to create and process an offline bundle for use.
-* One linux based system, with internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes `docker` or `podman` to pull and save container images to file.
-* One linux based system, with access to an image registry, to invoke a script that uses `docker` or `podman` to restore container images from file and push them to a registry
+Multiple Linux-based systems may be required to create and process an offline bundle for use.
+* One Linux-based system, with internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes `docker` or `podman` to pull and save container images to file.
+* One Linux-based system, with access to an image registry, to invoke a script that uses `docker` or `podman` to restore container images from file and push them to a registry
 
-If one linux system has both internet access and access to an internal registry, that system can be used for both steps.
+If one Linux system has both internet access and access to an internal registry, that system can be used for both steps.
 
 Preparing an offline bundle requires the following utilities:
 
@@ -32,7 +32,7 @@ Preparing an offline bundle requires the following utilities:
 | `docker` or `podman`  | `docker` or `podman` will be used to pull images from public image registries, tag them, and push them to a private registry.  |
 |                       | One of these will be required on both the system building the offline bundle as well as the system preparing for installation. |
 |                       | Tested version(s) are `docker` 19.03+ and `podman` 1.6.4+
-| `git`                 | `git` will be used to manually clone one of the above repos in order to create and offline bundle.
+| `git`                 | `git` will be used to manually clone one of the above repositories in order to create an offline bundle.
 |                       | This is only needed on the system preparing the offline bundle.
 |                       | Tested version(s) are `git` 1.8+ but any version should work.
 
@@ -45,10 +45,10 @@ To perform an offline installation of a driver or the Operator, the following st
 
 ### Building an offline bundle
 
-This needs to be performed on a linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.
+This needs to be performed on a Linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.
 
 To build an offline bundle, the following steps are needed:
-1. Perform a `git clone` of the desired repository. For a helm based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned
+1. Perform a `git clone` of the desired repository. For a helm-based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned
 2. Run the `csi-offline-bundle.sh` script with an argument of `-c` in order to create an offline bundle
   - For Helm installs, the `csi-offline-bundle.sh` script will be found in the `dell-csi-helm-installer` directory
   - For Operator installs, the `csi-offline-bundle.sh` script will be found in the `scripts` directory
@@ -126,21 +126,21 @@ Offline bundle file is: /dell/git/dell-csi-operator/dell-csi-operator-bundle.tar
 
 ### Unpacking the offline bundle and preparing for installation
 
-This needs to be performed on a linux system with access to an image registry that will host container images. If the registry requires `login`, that should be done before proceeding.
+This needs to be performed on a Linux system with access to an image registry that will host container images. If the registry requires `login`, that should be done before proceeding.
 
-To prepare for driver or Operator installation, the following steps need to be performed:
+To prepare for the driver or Operator installation, the following steps need to be performed:
 1. Copy the offline bundle file created from the previous step to a system with access to an image registry available to your Kubernetes/OpenShift cluster
 2. Expand the bundle file by running `tar xvfz <filename>`
 3. Run the `csi-offline-bundle.sh` script and supply the `-p` option as well as the path to the internal registry with the `-r` option
 
 The script will then perform the following steps:
   - Load the required container images into the local system
-  - Tag the images according to the user supplied registry information
+  - Tag the images according to the user-supplied registry information
   - Push the newly tagged images to the registry
   - Modify the Helm charts or Operator configuration to refer to the newly tagged/pushed images
 
 
-An example of preparing the bundle for installation (192.168.75.40:5000 refers to a image registry accessible to Kubernetes/OpenShift):
+An example of preparing the bundle for installation (192.168.75.40:5000 refers to an image registry accessible to Kubernetes/OpenShift):
 ```
 [user@anothersystem /tmp]# tar xvfz dell-csi-operator-bundle.tar.gz
 dell-csi-operator-bundle/
@@ -156,7 +156,7 @@ dell-csi-operator-bundle/README.md
 ```
 ```
 [user@anothersystem /tmp/dell-csi-operator-bundle]# scripts/csi-offline-bundle.sh -p -r 192.168.75.40:5000/operator
-Preparing a offline bundle for installation
+Preparing an offline bundle for installation
 
 *
 * Loading docker images
@@ -213,4 +213,7 @@ Preparing a offline bundle for installation
 
 Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via [Helm](../helm) or [Operator](../operator/#manual-installation).
 
-*NOTE:* Installation should be done using the files that was obtained after unpacking the bundle as the image tags in the manifests are modifed to point to the internal registry. 
+*NOTES:* 
+1. Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.
+2. Installation should be done using the files that are obtained after unpacking the offline bundle (dell-csi-operator-bundle.tar.gz) as the image tags in the manifests are modified to point to the internal registry. 
+3. Offline bundle installs operator in `default` namespace via install.sh script. Make sure that the current context in kubeconfig file has the namespace set to `default`.
