@@ -26,32 +26,11 @@ Before you install CSI Driver for Unity, verify the requirements that are mentio
 ### Requirements
 
 * Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/))
-* Configure Docker service
 * Install Helm v3
 * To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured
 * To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured 
 * To use NFS protocol, NFS utility packages needs to be installed
-
-## Configure Docker service
-
-The mount propagation in Docker must be configured on all Kubernetes nodes before installing CSI Driver for Unity.
-
-### Procedure
-
-1. Edit the service section of */etc/systemd/system/multi-user.target.wants/docker.service* file as follows:
-
-    ```bash
-    [Service]
-    ...
-    MountFlags=shared
-    ```
-    
-2. Restart the Docker service with the following commands:
-
-    ```bash
-    systemctl daemon-reload
-    systemctl restart docker
-    ```
+* Mount propagation is enabled on container runtime that is being used
 
 ## Install CSI Driver
 
