@@ -181,6 +181,10 @@ For any CSI operator and driver issues, questions or feedback, join the &lt;a hr
 &lt;td&gt;CSI Driver installation fails with the error message &amp;ldquo;error getting FQDN&amp;rdquo;.&lt;/td&gt;
 &lt;td&gt;Map IP address of host with its FQDN in /etc/hosts file.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Driver node pod is in &amp;ldquo;CrashLoopBackOff&amp;rdquo; as &amp;ldquo;Node ID&amp;rdquo; generated is not with proper FQDN.&lt;/td&gt;
+&lt;td&gt;This might be due to &amp;ldquo;dnsPolicy&amp;rdquo; implemented on the driver node pod which may differ with different networks.                                                                                                                                  &lt;br&gt;&lt;br&gt; 1.This parameter is configurable in the helm installer and the user can try with different &amp;ldquo;dnsPolicy&amp;rdquo; according to her environment.  (values.yaml).                                                                                               &lt;br&gt;&lt;br&gt; 2. In the case of Operator installations, this parameter is not configurable at present and will be available coming release. To overcome this issue, try to use appropriate &amp;ldquo;dnsPolicy&amp;rdquo; ( ClusterFirst / ClusterFirstWithHostNet ) by patching Isilon node pods.                                       &lt;br&gt;&lt;br&gt; Example : kubectl patch daemonset isilon-node -n isilon -p &amp;lsquo;{&amp;ldquo;spec&amp;rdquo;: {&amp;ldquo;template&amp;rdquo;: {&amp;ldquo;spec&amp;rdquo;:{&amp;ldquo;dnsPolicy&amp;rdquo;: &amp;ldquo;ClusterFirst&amp;rdquo;}}}}&amp;rsquo;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 

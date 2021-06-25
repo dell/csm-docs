@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/unity/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-25T15:43:47+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Installing Unity CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="2924">
+<meta itemprop="dateModified" content="2021-06-25T15:43:47&#43;05:30" />
+<meta itemprop="wordCount" content="2885">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -922,11 +922,6 @@
         <li><a href="#requirements">Requirements</a></li>
       </ul>
     </li>
-    <li><a href="#configure-docker-service">Configure Docker service</a>
-      <ul>
-        <li><a href="#procedure">Procedure</a></li>
-      </ul>
-    </li>
     <li><a href="#install-csi-driver">Install CSI Driver</a>
       <ul>
         <li></li>
@@ -1018,28 +1013,12 @@
 <h3 id="requirements">Requirements</h3>
 <ul>
 <li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
-<li>Configure Docker service</li>
 <li>Install Helm v3</li>
 <li>To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured</li>
 <li>To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured</li>
 <li>To use NFS protocol, NFS utility packages needs to be installed</li>
+<li>Mount propagation is enabled on container runtime that is being used</li>
 </ul>
-<h2 id="configure-docker-service">Configure Docker service</h2>
-<p>The mount propagation in Docker must be configured on all Kubernetes nodes before installing CSI Driver for Unity.</p>
-<h3 id="procedure">Procedure</h3>
-<ol>
-<li>
-<p>Edit the service section of <em>/etc/systemd/system/multi-user.target.wants/docker.service</em> file as follows:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ce5c00;font-weight:bold">[</span>Service<span style="color:#ce5c00;font-weight:bold">]</span>
-...
-<span style="color:#000">MountFlags</span><span style="color:#ce5c00;font-weight:bold">=</span>shared
-</code></pre></div></li>
-<li>
-<p>Restart the Docker service with the following commands:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">systemctl daemon-reload
-systemctl restart docker
-</code></pre></div></li>
-</ol>
 <h2 id="install-csi-driver">Install CSI Driver</h2>
 <p>Install CSI Driver for Unity using this procedure.</p>
 <p><em>Before you begin</em></p>
