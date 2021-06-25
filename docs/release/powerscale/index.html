@@ -12,11 +12,11 @@
 <meta property="og:description" content="Release notes for PowerScale CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/release/powerscale/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-25T15:43:47+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Release notes for PowerScale CSI driver">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="421">
+<meta itemprop="dateModified" content="2021-06-25T15:43:47&#43;05:30" />
+<meta itemprop="wordCount" content="527">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1013,6 +1013,10 @@
 <tr>
 <td>CSI Driver installation fails with the error message &ldquo;error getting FQDN&rdquo;.</td>
 <td>Map IP address of host with its FQDN in /etc/hosts file.</td>
+</tr>
+<tr>
+<td>Driver node pod is in &ldquo;CrashLoopBackOff&rdquo; as &ldquo;Node ID&rdquo; generated is not with proper FQDN.</td>
+<td>This might be due to &ldquo;dnsPolicy&rdquo; implemented on the driver node pod which may differ with different networks.                                                                                                                                  <br><br> 1.This parameter is configurable in the helm installer and the user can try with different &ldquo;dnsPolicy&rdquo; according to her environment.  (values.yaml).                                                                                               <br><br> 2. In the case of Operator installations, this parameter is not configurable at present and will be available coming release. To overcome this issue, try to use appropriate &ldquo;dnsPolicy&rdquo; ( ClusterFirst / ClusterFirstWithHostNet ) by patching Isilon node pods.                                       <br><br> Example : kubectl patch daemonset isilon-node -n isilon -p &lsquo;{&ldquo;spec&rdquo;: {&ldquo;template&rdquo;: {&ldquo;spec&rdquo;:{&ldquo;dnsPolicy&rdquo;: &ldquo;ClusterFirst&rdquo;}}}}&rsquo;</td>
 </tr>
 </tbody>
 </table>

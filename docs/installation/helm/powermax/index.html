@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-25T15:43:47+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing PowerMax CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="2855">
+<meta itemprop="dateModified" content="2021-06-25T15:43:47&#43;05:30" />
+<meta itemprop="wordCount" content="2747">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -924,7 +924,6 @@
         <li><a href="#iscsi-requirements">iSCSI Requirements</a></li>
         <li><a href="#certificate-validation-for-unisphere-rest-api-calls">Certificate validation for Unisphere REST API calls</a></li>
         <li><a href="#ports-in-the-port-group">Ports in the port group</a></li>
-        <li><a href="#configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</a></li>
         <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
         <li><a href="#optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</a></li>
       </ul>
@@ -1026,7 +1025,7 @@
 <li>Fibre Channel requirements</li>
 <li>iSCSI requirements</li>
 <li>Certificate validation for Unisphere REST API calls</li>
-<li>Configure Mount propagation on container runtime</li>
+<li>Mount propagation is enabled on container runtime that is being used</li>
 <li>Linux multipathing requirements</li>
 <li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
 </ul>
@@ -1069,19 +1068,6 @@
 <h3 id="ports-in-the-port-group">Ports in the port group</h3>
 <p>There are no restrictions around how many ports can be present in the iSCSI port groups provided to the driver.</p>
 <p>The same applies to Fibre Channel where there are no restrictions on the number of FA directors a host HBA can be zoned to. See the best practices for host connectivity to Dell EMC PowerMax to ensure that you have multiple paths to your data volumes.</p>
-<h3 id="configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</h3>
-<p>You must configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerMax.  The following steps explain how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.</p>
-<p><strong>Steps</strong></p>
-<ol>
-<li>Edit the service section of <code>/etc/systemd/system/multi-user.target.wants/docker.service</code> file to add the following lines:
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker.service
-<span style="color:#ce5c00;font-weight:bold">[</span>Service<span style="color:#ce5c00;font-weight:bold">]</span>...
-<span style="color:#000">MountFlags</span><span style="color:#ce5c00;font-weight:bold">=</span>shared
-</code></pre></div></li>
-<li>Restart the docker service with <code>systemctl daemon-reload</code> and <code>systemctl restart docker</code> on all the nodes.</li>
-<li>Restart the docker service with systemctl daemon-reload and systemctl restart docker on all the nodes.</li>
-</ol>
-<p><em>NOTE:</em> Some distribution, like Ubuntu, already has <em>MountFlags</em> set by default.</p>
 <h3 id="linux-multipathing-requirements">Linux multipathing requirements</h3>
 <p>CSI Driver for Dell EMC PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.</p>
 <p>Set up Linux multipathing as follows:</p>

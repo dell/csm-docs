@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerstore/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-25T15:43:47+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing PowerStore CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="2002">
+<meta itemprop="dateModified" content="2021-06-25T15:43:47&#43;05:30" />
+<meta itemprop="wordCount" content="1906">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -923,7 +923,6 @@
         <li><a href="#fibre-channel-requirements">Fibre Channel requirements</a></li>
         <li><a href="#set-up-the-iscsi-initiator">Set up the iSCSI Initiator</a></li>
         <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
-        <li><a href="#configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</a></li>
         <li><a href="#optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</a></li>
       </ul>
     </li>
@@ -1023,7 +1022,7 @@
 </blockquote>
 <ul>
 <li>Linux native multipathing requirements</li>
-<li>Configure Mount propagation on container runtime</li>
+<li>Mount propagation is enabled on container runtime that is being used</li>
 <li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
 <li>Nonsecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location.</li>
 <li>You can access your cluster with kubectl and helm.</li>
@@ -1066,18 +1065,6 @@ PowerStore.</p>
 <li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
 <li>Ensure that the multipath command for <code>multipath.conf</code> is available on all Kubernetes nodes.</li>
 </ul>
-<h3 id="configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</h3>
-<p>It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerStore.  The following is instruction on how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.</p>
-<p><strong>Steps</strong></p>
-<ol>
-<li>Edit the service section of <code>/etc/systemd/system/multi-user.target.wants/docker.service</code> file to add the following lines:
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker.service
-<span style="color:#ce5c00;font-weight:bold">[</span>Service<span style="color:#ce5c00;font-weight:bold">]</span>...
-<span style="color:#000">MountFlags</span><span style="color:#ce5c00;font-weight:bold">=</span>shared
-</code></pre></div></li>
-<li>Restart the docker service with <code>systemctl daemon-reload</code> and <code>systemctl restart docker</code> on all the nodes.</li>
-</ol>
-<p><em>NOTE:</em> Some distribution, like Ubuntu, already has <em>MountFlags</em> set by default.</p>
 <h3 id="optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</h3>
 <p>Applicable only if you decided to enable snapshot feature in <code>values.yaml</code></p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">

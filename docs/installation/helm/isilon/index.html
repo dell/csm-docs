@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-06-25T15:43:47+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing PowerScale CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="2538">
+<meta itemprop="dateModified" content="2021-06-25T15:43:47&#43;05:30" />
+<meta itemprop="wordCount" content="2442">
 
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.ec1725ac6774fbcaaf0db7c543624979.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -920,7 +920,6 @@
     <li><a href="#prerequisites">Prerequisites</a>
       <ul>
         <li><a href="#install-helm-30">Install Helm 3.0</a></li>
-        <li><a href="#configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</a></li>
         <li><a href="#optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</a></li>
       </ul>
     </li>
@@ -1020,25 +1019,13 @@
 <ul>
 <li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
 <li>Install Helm 3</li>
-<li>Configure Mount propagation on container runtime</li>
+<li>Mount propagation is enabled on container runtime that is being used</li>
 <li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
 </ul>
 <h3 id="install-helm-30">Install Helm 3.0</h3>
-<p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerStore.</p>
+<p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerScale.</p>
 <p><strong>Steps</strong></p>
 <p>Run the <code>curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash</code> command to install Helm 3.0.</p>
-<h3 id="configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</h3>
-<p>It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerStore.  The following is instruction on how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.</p>
-<p><strong>Steps</strong></p>
-<ol>
-<li>Edit the service section of <code>/etc/systemd/system/multi-user.target.wants/docker.service</code> file to add the following lines:
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker.service
-<span style="color:#ce5c00;font-weight:bold">[</span>Service<span style="color:#ce5c00;font-weight:bold">]</span>...
-<span style="color:#000">MountFlags</span><span style="color:#ce5c00;font-weight:bold">=</span>shared
-</code></pre></div></li>
-<li>Restart the docker service with <code>systemctl daemon-reload</code> and <code>systemctl restart docker</code> on all the nodes.</li>
-</ol>
-<p><em>NOTE:</em> Some distribution, like Ubuntu, already has <em>MountFlags</em> set by default.</p>
 <h3 id="optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</h3>
 <p>Applicable only if you decided to enable snapshot feature in <code>values.yaml</code></p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1090,7 +1077,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 <p>Run <code>git clone https://github.com/dell/csi-powerscale.git</code> to clone the git repository.</p>
 </li>
 <li>
-<p>Ensure that you have created namespace where you want to install the driver. You can run <code>kubectl create namespace csi-powerscale</code> to create a new one. The use of &ldquo;csi-powerstore&rdquo;  as the namespace is just an example. You can choose any name for the namespace.</p>
+<p>Ensure that you have created namespace where you want to install the driver. You can run <code>kubectl create namespace isilon</code> to create a new one. The use of &ldquo;isilon&rdquo;  as the namespace is just an example. You can choose any name for the namespace.</p>
 </li>
 <li>
 <p>Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the <em>secret.json</em>.</p>
