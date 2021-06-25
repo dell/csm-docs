@@ -2,9 +2,7 @@
 ---
 title: "Documentation"
 linkTitle: "Documentation"
-weight: 20
-menu:
-  main:
-    weight: 20
 ---
+
+*NOTE:* This doc version is no longer supported by us. You can check our [latest version](/docs/)
 
