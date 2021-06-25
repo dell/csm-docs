@@ -27,7 +27,7 @@ The following requirements must be met before installing the CSI Driver for Dell
 - Fibre Channel requirements
 - iSCSI requirements
 - Certificate validation for Unisphere REST API calls
-- Configure Mount propagation on container runtime
+- Mount propagation is enabled on container runtime that is being used
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 
@@ -80,23 +80,6 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
 There are no restrictions around how many ports can be present in the iSCSI port groups provided to the driver.
 
 The same applies to Fibre Channel where there are no restrictions on the number of FA directors a host HBA can be zoned to. See the best practices for host connectivity to Dell EMC PowerMax to ensure that you have multiple paths to your data volumes.
-
-### Configure Mount Propagation on Container Runtime 
-
-You must configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerMax.  The following steps explain how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.
-
-**Steps**
-
-1. Edit the service section of `/etc/systemd/system/multi-user.target.wants/docker.service` file to add the following lines:
-   ```bash
-   docker.service
-   [Service]...
-   MountFlags=shared
-   ```
-2. Restart the docker service with `systemctl daemon-reload` and `systemctl restart docker` on all the nodes.
-2. Restart the docker service with systemctl daemon-reload and systemctl restart docker on all the nodes.
-
-*NOTE:* Some distribution, like Ubuntu, already has _MountFlags_ set by default.
 
 ### Linux multipathing requirements
 

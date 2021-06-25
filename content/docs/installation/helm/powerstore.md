@@ -27,7 +27,7 @@ The following are requirements to be met before installing the CSI Driver for De
 
 > If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group
 - Linux native multipathing requirements
-- Configure Mount propagation on container runtime
+- Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - Nonsecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location.
 - You can access your cluster with kubectl and helm.
@@ -71,22 +71,6 @@ Set up Linux multipathing as follows:
 - Enable multipathing using the `mpathconf --enable --with_multipathd y` command.
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
-
-### Configure Mount Propagation on Container Runtime 
-
-It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerStore.  The following is instruction on how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.
-
-**Steps**
-
-1. Edit the service section of `/etc/systemd/system/multi-user.target.wants/docker.service` file to add the following lines:
-   ```bash
-   docker.service
-   [Service]...
-   MountFlags=shared
-   ```
-2. Restart the docker service with `systemctl daemon-reload` and `systemctl restart docker` on all the nodes.
-
-*NOTE:* Some distribution, like Ubuntu, already has _MountFlags_ set by default.
 
 ### (Optional) Volume Snapshot Requirements
 

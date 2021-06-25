@@ -24,7 +24,7 @@ The following are requirements that must be met before installing the CSI Driver
 - Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/#features-and-capabilities))
 - Install Helm 3
 - Enable Zero Padding on PowerFlex
-- Configure Mount propagation on container runtime
+- Mount propagation is enabled on container runtime that is being used
 - Install PowerFlex Storage Data Client 
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - A user must exist on the array with a role _>= FrontEndConfigure_
@@ -41,28 +41,6 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell E
 ### Enable Zero Padding on PowerFlex
 
 Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see [Dell EMC PowerFlex documentation](https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html).
-
-### Configure Mount Propagation on Container Runtime 
-
-It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerFlex. The following are instructions on how to do this with Docker. If you use another container runtime, follow the recommended instructions from the vendor to configure mount propagation.
-
-**Steps**
-
-1. The service section of `/etc/systemd/system/multi-user.target.wants/docker.service` needs to be edited in a few places. 
-- The `Requires` entry under the `[Unit]` header needs to have `docker.service` added to it.
-- The `MountFlags=shared` needs to be added under the `[Service]` header. 
-   ```bash
-    [Unit]
-    ...
-    Requires=docker.socket containerd.service docker.service
-
-    [Service]
-    ...
-    MountFlags=shared
-   ```
-2. Restart the docker service with `systemctl daemon-reload` and `systemctl restart docker` on all the nodes.
-
-*NOTE:* Some distribution, like Ubuntu, already has _MountFlags_ set by default.
 
 ### Install PowerFlex Storage Data Client
 

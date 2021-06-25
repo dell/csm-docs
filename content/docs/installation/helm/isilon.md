@@ -21,32 +21,16 @@ The node section of the Helm chart installs the following component in a _Daemon
 The following are requirements to be met before installing the CSI Driver for Dell EMC PowerScale:
 - Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/))
 - Install Helm 3
-- Configure Mount propagation on container runtime
+- Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 
 ### Install Helm 3.0
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerStore.
+Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerScale.
 
 **Steps**
 
   Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
-
-### Configure Mount Propagation on Container Runtime 
-
-It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerStore.  The following is instruction on how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.
-
-**Steps**
-
-1. Edit the service section of `/etc/systemd/system/multi-user.target.wants/docker.service` file to add the following lines:
-   ```bash
-   docker.service
-   [Service]...
-   MountFlags=shared
-   ```
-2. Restart the docker service with `systemctl daemon-reload` and `systemctl restart docker` on all the nodes.
-
-*NOTE:* Some distribution, like Ubuntu, already has _MountFlags_ set by default.
 
 ### (Optional) Volume Snapshot Requirements
 
@@ -97,7 +81,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 **Steps**
 1. Run `git clone https://github.com/dell/csi-powerscale.git` to clone the git repository.
-2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerscale` to create a new one. The use of "csi-powerstore"  as the namespace is just an example. You can choose any name for the namespace.
+2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.json*.
 4. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
 5. Edit *my-isilon-settings.yaml* to set the following parameters for your installation:
