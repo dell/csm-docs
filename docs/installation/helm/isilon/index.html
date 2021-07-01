@@ -13,11 +13,11 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/" />
-<meta property="article:modified_time" content="2021-06-25T15:43:47+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-07-01T19:13:06+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing PowerScale CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-06-25T15:43:47&#43;05:30" />
+<meta itemprop="dateModified" content="2021-07-01T19:13:06&#43;05:30" />
 <meta itemprop="wordCount" content="2442">
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1017,7 +1017,7 @@
 <h2 id="prerequisites">Prerequisites</h2>
 <p>The following are requirements to be met before installing the CSI Driver for Dell EMC PowerScale:</p>
 <ul>
-<li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
+<li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/#features-and-capabilities">supported versions</a>)</li>
 <li>Install Helm 3</li>
 <li>Mount propagation is enabled on container runtime that is being used</li>
 <li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
@@ -1418,7 +1418,7 @@ It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 
 </code></pre><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.<br>
 Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.</p>
 <h2 id="volume-snapshot-class">Volume Snapshot Class</h2>
-<p>Starting CSI PowerMax v1.7, <code>dell-csi-helm-installer</code> will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the <em>helm/samples/</em> folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.</p>
+<p>Starting CSI PowerScale v1.6, <code>dell-csi-helm-installer</code> will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the <em>helm/samples/</em> folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.</p>
 <h3 id="what-happens-to-my-existing-volume-snapshot-classes">What happens to my existing Volume Snapshot Classes?</h3>
 <p><em>Upgrading from CSI PowerScale v1.5 driver</em>
 The existing volume snapshot class will be retained.</p>

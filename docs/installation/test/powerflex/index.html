@@ -12,11 +12,11 @@
 <meta property="og:description" content="Tests to validate PowerFlex CSI Driver installation" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/test/powerflex/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-07-01T19:13:06+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Test PowerFlex CSI Driver">
 <meta itemprop="description" content="Tests to validate PowerFlex CSI Driver installation">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="1037">
+<meta itemprop="dateModified" content="2021-07-01T19:13:06&#43;05:30" />
+<meta itemprop="wordCount" content="994">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -987,7 +987,7 @@
 <p><strong>Steps</strong></p>
 <ol>
 <li>Navigate to the test/helm directory, which contains the <code>starttest.sh</code> and the <em>2vols</em> directories. This directory contains a simple Helm chart that will deploy a pod that uses two PowerFlex volumes.
-<em>NOTE:</em> Helm tests are designed assuming users are using the default <em>storageclass</em> names (<em>vxflexos</em> and <em>vxflexos-xfs</em>). If your <em>storageclass</em> names differ from the default values, such as when deploying with the Dell CSI Operator, please update the templates in 2vols accordingly (located in <code>test/helm/2vols/templates</code> directory). You can use <code>kubectl get sc</code> to check for the <em>storageclass</em> names.</li>
+<em>NOTE:</em> Helm tests are designed assuming users are using the <em>storageclass</em> names (<em>vxflexos</em> and <em>vxflexos-xfs</em>). If your <em>storageclass</em> names differ from these values, please update the templates in 2vols accordingly (located in <code>test/helm/2vols/templates</code> directory). You can use <code>kubectl get sc</code> to check for the <em>storageclass</em> names.</li>
 <li>Run <code>sh starttest.sh 2vols</code> to deploy the pod. You should see the following:</li>
 </ol>
 <pre><code>Normal Pulled  38s kubelet, k8s113a-10-247-102-215.lss.emc.com Successfully pulled image &quot;docker.io/centos:latest&quot;
@@ -1019,7 +1019,7 @@ Normal Started 38s kubelet, k8s113a-10-247-102-215.lss.emc.com Started container
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>8Gi<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>vxflexos<span style="color:#f8f8f8;text-decoration:underline">
 </span></code></pre></div><ol start="2">
-<li>The <em>volumeMode: Filesystem</em> requires a mounted file system, and the <em>resources.requests.storage</em> of 8Gi requires an 8 GB file. In this case, the <em>storageClassName: vxflexos</em> directs the system to use one of the pre-defined storage classes created by the CSI Driver for the Dell EMC PowerFlex installation process. This step yields a mounted <em>ext4</em> file system. You can see the storage class definitions in the PowerFlex installation helm chart files <em>storageclass.yaml</em> and <em>storageclass-xfs.yaml</em>.</li>
+<li>The <em>volumeMode: Filesystem</em> requires a mounted file system, and the <em>resources.requests.storage</em> of 8Gi requires an 8 GB file. In this case, the <em>storageClassName: vxflexos</em> directs the system to use a storage class named <em>vxflexos</em>. This step yields a mounted <em>ext4</em> file system. You can create the <em>vxflexos</em> and <em>vxflexos-xfs</em> storage classes by using the yamls located in helm/samples/storageclass.</li>
 <li>If you compare <em>pvol0.yaml</em> and <em>pvol1.yaml</em>, you will find that the latter uses a different storage class; <em>vxflexos-xfs</em>. This class gives you an <em>xfs</em> file system.</li>
 <li>To see the volumes you created, run kubectl get persistentvolumeclaim –n helmtest-vxflexos and kubectl describe persistentvolumeclaim –n helmtest-vxflexos.
 <em>NOTE:</em> For more information about Kubernetes objects like <em>StatefulSet</em> and <em>PersistentVolumeClaim</em> see <a href="https://kubernetes.io/docs/concepts/">Kubernetes documentation: Concepts</a>.</li>
@@ -1030,8 +1030,8 @@ Normal Started 38s kubelet, k8s113a-10-247-102-215.lss.emc.com Started container
 <ol>
 <li>Start the <em>2vols</em> container and leave it running.
 <ul>
-<li>Helm tests are designed assuming users are using the default <em>storageclass</em> names (<em>vxflexos</em> and <em>vxflexos-xfs</em>). If your <em>storageclass</em> names differ from the default values, such as when deploying with the Operator, update the templates in 2vols accordingly (located in <code>test/helm/2vols/templates</code> directory). You can use <code>kubectl get sc</code> to check for the <em>storageclass</em> names.</li>
-<li>Helm tests are designed assuming users are using the default <em>snapshotclass</em> name. If your <em>snapshotclass</em> names differ from the default values, update <code>betasnap1.yaml</code> and <code>betasnap2.yaml</code> accordingly.</li>
+<li>Helm tests are designed assuming users are using the  <em>storageclass</em> names (<em>vxflexos</em> and <em>vxflexos-xfs</em>). If your <em>storageclass</em> names differ from these values, update the templates in 2vols accordingly (located in <code>test/helm/2vols/templates</code> directory). You can use <code>kubectl get sc</code> to check for the <em>storageclass</em> names.</li>
+<li>Helm tests are designed assuming users are using the <em>snapshotclass</em> name: <em>vxflexos-snapclass</em> If your <em>snapshotclass</em> name differs from the default values, update <code>betasnap1.yaml</code> and <code>betasnap2.yaml</code> accordingly.</li>
 </ul>
 </li>
 <li>Run <code>sh snaptest.sh</code> to start the test.</li>
@@ -1047,7 +1047,7 @@ Normal Started 38s kubelet, k8s113a-10-247-102-215.lss.emc.com Started container
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">persistentVolumeClaimName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>pvol0<span style="color:#f8f8f8;text-decoration:underline">
 </span></code></pre></div><blockquote>
-<p><em>NOTE:</em> apiVersion in both betasnap yamls must match apiVersion in vxflexos-snapclass, if version in vxflexos-snapclass is v1, adjust apiVersion like so: <code>apiVersion: snapshot.storage.k8s.io/v1</code> in betasnap1.yaml and betasnap2.yaml</p>
+<p><em>NOTE:</em> apiVersion in both betasnap yamls must match apiVersion in your VolumeSnapshotClass, if version in VolumeSnapshotClass is v1, adjust apiVersion like so: <code>apiVersion: snapshot.storage.k8s.io/v1</code> in betasnap1.yaml and betasnap2.yaml</p>
 </blockquote>
 <p><strong>Results</strong></p>
 <p>The <code>snaptest.sh</code> script will create a snapshot using the definitions in the <code>betasnap1.yaml</code> file. The <em>spec.source</em> section contains the volume that will be snapped. For example, if the volume to be snapped is <em>pvol0</em>, then the created snapshot is named <em>pvol0-snap1</em>.</p>
@@ -1060,7 +1060,7 @@ to create instance of <em>VolumeSnapshotClass</em> from one of default samples i
 <p>Ensure that you have stopped any previous test instance before performing this procedure.</p>
 <p><strong>Steps</strong></p>
 <blockquote>
-<p><em>NOTE:</em> apiVersion in both betasnap yamls must match apiVersion in vxflexos-snapclass, if version in vxflexos-snapclass is v1, adjust apiVersion like so: <code>apiVersion: snapshot.storage.k8s.io/v1</code></p>
+<p><em>NOTE:</em> apiVersion in both betasnap yamls must match apiVersion in your VolumeSnapshotClass, if version in vxflexos-snapclass is v1, adjust apiVersion like so: <code>apiVersion: snapshot.storage.k8s.io/v1</code></p>
 </blockquote>
 <ol>
 <li>Run <code>sh snaprestoretest.sh</code> to start the test.</li>
@@ -1068,8 +1068,8 @@ to create instance of <em>VolumeSnapshotClass</em> from one of default samples i
 <p>This script deploys the <em>2vols</em> example, creates a snap of <em>pvol0</em>, and then updates the deployed helm chart from the updated directory <em>2vols+restore</em>. This then adds an additional volume that is created from the snapshot.</p>
 <p><em>NOTE:</em></p>
 <ul>
-<li>Helm tests are designed assuming users are using the default <em>storageclass</em> names (<em>vxflexos</em> and <em>vxflexos-xfs</em>). If your <em>storageclass</em> names differ from the default values, such as when deploying with the Dell CSI Operator, update the templates for snap restore tests accordingly (located in <code>test/helm/2vols+restore/template</code> directory). You can use <code>kubectl get sc</code> to check for the <em>storageclass</em> names.</li>
-<li>Helm tests are designed assuming users are using the default <em>snapshotclass</em> name. If your <em>snapshotclass</em> names differ from the default values, update <code>betasnap1.yaml</code> and <code>betasnap2.yaml</code> accordingly.</li>
+<li>Helm tests are designed assuming users are using the <em>storageclass</em> names (<em>vxflexos</em> and <em>vxflexos-xfs</em>). If your <em>storageclass</em> names differ from these values, update the templates for snap restore tests accordingly (located in <code>test/helm/2vols+restore/template</code> directory). You can use <code>kubectl get sc</code> to check for the <em>storageclass</em> names.</li>
+<li>Helm tests are designed assuming users are using the <em>snapshotclass</em> name: <em>vxflexos-snapclass</em> If your <em>snapshotclass</em> name differs from the default values, update <code>betasnap1.yaml</code> and <code>betasnap2.yaml</code> accordingly.</li>
 </ul>
 <p><strong>Results</strong></p>
 <p>An outline of this workflow is described below:</p>

@@ -446,7 +446,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;li&gt;Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell EMC PowerMax array.&lt;/li&gt;
 &lt;li&gt;The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell EMC PowerMax array. All the port group names supplied to the driver must exist on each Dell EMC PowerMax with the same name.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;For information about configuring iSCSI, see &lt;em&gt;Dell EMC PowerMax documentation&lt;/em&gt; on Dell EMC Support.&lt;/p&gt;
+&lt;p&gt;For more information about configuring iSCSI, you can refer &lt;a href=&#34;https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf&#34;&gt;Dell EMC Host Connectivity guide&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;certificate-validation-for-unisphere-rest-api-calls&#34;&gt;Certificate validation for Unisphere REST API calls&lt;/h3&gt;
 &lt;p&gt;As part of the CSI driver installation, the CSI driver requires a secret with the name &lt;em&gt;powermax-certs&lt;/em&gt; present in the namespace &lt;em&gt;powermax&lt;/em&gt;. This secret contains the X509 certificates of the CA which signed the Unisphere SSL certificate in PEM format. This secret is mounted as a volume in the driver container. In earlier releases, if the install script did not find the secret, it created an empty secret with the same name. From the 1.2.0 release, the secret volume has been made optional. The install script no longer attempts to create an empty secret.&lt;/p&gt;
 &lt;p&gt;The CSI driver exposes an install parameter &lt;code&gt;skipCertificateValidation&lt;/code&gt; which determines if the driver performs client-side verification of the Unisphere certificates. The &lt;code&gt;skipCertificateValidation&lt;/code&gt; parameter is set to &lt;em&gt;true&lt;/em&gt; by default, and the driver does not verify the Unisphere certificates.&lt;/p&gt;
@@ -898,7 +898,7 @@ You can specify primary &amp;amp; backup Unisphere servers for each storage arra
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;The following are requirements to be met before installing the CSI Driver for Dell EMC PowerScale:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../dell-csi-driver/&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../dell-csi-driver/#features-and-capabilities&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;Install Helm 3&lt;/li&gt;
 &lt;li&gt;Mount propagation is enabled on container runtime that is being used&lt;/li&gt;
 &lt;li&gt;If using Snapshot feature, satisfy all Volume Snapshot requirements&lt;/li&gt;
@@ -1299,7 +1299,7 @@ It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In case you want to make such updates, ensure to delete the existing storage classes using the &lt;code&gt;kubectl delete storageclass&lt;/code&gt; command.&lt;br&gt;
 Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.&lt;/p&gt;
 &lt;h2 id=&#34;volume-snapshot-class&#34;&gt;Volume Snapshot Class&lt;/h2&gt;
-&lt;p&gt;Starting CSI PowerMax v1.7, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the &lt;em&gt;helm/samples/&lt;/em&gt; folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.&lt;/p&gt;
+&lt;p&gt;Starting CSI PowerScale v1.6, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the &lt;em&gt;helm/samples/&lt;/em&gt; folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.&lt;/p&gt;
 &lt;h3 id=&#34;what-happens-to-my-existing-volume-snapshot-classes&#34;&gt;What happens to my existing Volume Snapshot Classes?&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;Upgrading from CSI PowerScale v1.5 driver&lt;/em&gt;
 The existing volume snapshot class will be retained.&lt;/p&gt;
@@ -1634,7 +1634,7 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 &lt;p&gt;Before you install CSI Driver for Unity, verify the requirements that are mentioned in this topic are installed and configured.&lt;/p&gt;
 &lt;h3 id=&#34;requirements&#34;&gt;Requirements&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../dell-csi-driver/&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../dell-csi-driver/#features-and-capabilities&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;Install Helm v3&lt;/li&gt;
 &lt;li&gt;To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured&lt;/li&gt;
 &lt;li&gt;To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured&lt;/li&gt;
@@ -1646,24 +1646,24 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 &lt;p&gt;&lt;em&gt;Before you begin&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;You must have the downloaded files, including the Helm chart from the source &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;git repository&lt;/a&gt; with the command &lt;code&gt;git clone https://github.com/dell/csi-unity.git&lt;/code&gt;, ready for this procedure.&lt;/li&gt;
-&lt;li&gt;In the top-level dell-csi-helm-installer directory, there should be two scripts, &lt;em&gt;csi-install.sh&lt;/em&gt; and &lt;em&gt;csi-uninstall.sh&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;Ensure &amp;ldquo;unity&amp;rdquo; namespace exists in Kubernetes cluster. Use the &lt;code&gt;kubectl create namespace unity&lt;/code&gt; command to create the namespace if the namespace is not present.&lt;/li&gt;
+&lt;li&gt;In the top-level dell-csi-helm-installer directory, there should be two scripts, &lt;code&gt;csi-install.sh&lt;/code&gt; and &lt;code&gt;csi-uninstall.sh&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Ensure &lt;em&gt;unity&lt;/em&gt; namespace exists in Kubernetes cluster. Use the &lt;code&gt;kubectl create namespace unity&lt;/code&gt; command to create the namespace if the namespace is not present.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Procedure&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Collect information from the Unity Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the secret.json or secret.yaml and myvalues.yaml file.&lt;/p&gt;
+&lt;p&gt;Collect information from the Unity Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the &lt;code&gt;secret.json&lt;/code&gt; or &lt;code&gt;secret.yaml&lt;/code&gt; and &lt;code&gt;myvalues.yaml&lt;/code&gt; file.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;ArrayId corrsponds to the serial number of Unity array.&lt;/li&gt;
+&lt;li&gt;ArrayId corresponds to the serial number of Unity array.&lt;/li&gt;
 &lt;li&gt;Unity Array username must have role as Storage Administrator to be able to perform CRUD operations.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Copy the helm/csi-unity/values.yaml into a file named myvalues.yaml in the same directory of csi-install.sh, to customize settings for installation.&lt;/p&gt;
+&lt;p&gt;Copy the &lt;code&gt;helm/csi-unity/values.yaml&lt;/code&gt; into a file named &lt;code&gt;myvalues.yaml&lt;/code&gt; in the same directory of &lt;code&gt;csi-install.sh&lt;/code&gt;, to customize settings for installation.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Edit myvalues.yaml to set the following parameters for your installation:&lt;/p&gt;
+&lt;p&gt;Edit &lt;code&gt;myvalues.yaml&lt;/code&gt; to set the following parameters for your installation:&lt;/p&gt;
 &lt;p&gt;The following table lists the primary configurable parameters of the Unity driver chart and their default values. More detailed information can be found in the &lt;a href=&#34;https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1722,13 +1722,13 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;User should provide all boolean values with double-quotes. This applies only for myvalues.yaml. Example: &amp;ldquo;true&amp;rdquo;/&amp;ldquo;false&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;User should provide all boolean values with double-quotes. This applies only for &lt;code&gt;myvalues.yaml&lt;/code&gt;. Example: &amp;ldquo;true&amp;rdquo;/&amp;ldquo;false&amp;rdquo;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;controllerCount parameter value should be &amp;lt;= number of nodes in the kubernetes cluster else install script fails.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;User can a create separate StorageClass (with topology-related keys) by referring to existing default storage classes.&lt;/p&gt;
+&lt;p&gt;User can a create separate &lt;em&gt;StorageClass&lt;/em&gt; (with topology-related keys) by referring to existing default storage classes.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Host IO Limit must have a minimum bandwidth of 1 MBPS to discover the volumes on node successfully.&lt;/p&gt;
@@ -1736,7 +1736,7 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 &lt;li&gt;
 &lt;p&gt;User must not change the value of allowRWOMultiPodAccess to true unless intended to use the feature and is aware of the consequences. Enabling multiple pods to access the same PVC with RWO access mode on the same node might cause data to be overwritten and therefore leading to data loss in some cases.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Parameters allowRWOMultiPodAccess and syncNodeInfoInterval have been deprecated from myvalues.yaml and are removed from myvalues.yaml in a future releases. They can be configured in secret.json or secret.yaml as they facilitate the user to dynamically change these values without the need for driver re-installation.&lt;/li&gt;
+&lt;li&gt;Parameters allowRWOMultiPodAccess and syncNodeInfoInterval have been deprecated from &lt;code&gt;myvalues.yaml&lt;/code&gt; and are removed from &lt;code&gt;myvalues.yaml&lt;/code&gt; in a future releases. They can be configured in &lt;code&gt;secret.json&lt;/code&gt; or &lt;code&gt;secret.yaml&lt;/code&gt; as they facilitate the user to dynamically change these values without the need for driver re-installation.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1751,10 +1751,10 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;syncNodeInfoInterval&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;For certificate validation of Unisphere REST API calls refer &lt;a href=&#34;#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;. Otherwise, create an empty secret with file helm/emptysecret.yaml file by running the &lt;code&gt;kubectl create -f helm/emptysecret.yaml&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;For certificate validation of Unisphere REST API calls refer &lt;a href=&#34;#certificate-validation-for-unisphere-rest-api-calls&#34;&gt;here&lt;/a&gt;. Otherwise, create an empty secret with file &lt;code&gt;helm/emptysecret.yaml&lt;/code&gt; file by running the &lt;code&gt;kubectl create -f helm/emptysecret.yaml&lt;/code&gt; command.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Prepare the secret.json for driver configuration.
+&lt;p&gt;Prepare the &lt;code&gt;secret.json&lt;/code&gt; or &lt;code&gt;secret.yaml&lt;/code&gt;  for driver configuration.
 The following table lists driver configuration parameters for multiple storage arrays.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1852,13 +1852,13 @@ The following table lists driver configuration parameters for multiple storage a
       &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;syncNodeInfoTimeInterval&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
       &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;maxUnityVolumesPerNode&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;
    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Use the following command to create a new secret unity-creds from secret.json file.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Use the following command to create a new secret unity-creds from &lt;code&gt;secret.json&lt;/code&gt; file.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic unity-creds -n unity --from-file=config=secret.json&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Use the following command to replace or update the secret:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The user needs to validate the JSON syntax and array-related key/values while replacing the unity-creds secret.
 The driver will continue to use previous values in case of an error found in the JSON file.&lt;/p&gt;
-&lt;p&gt;Alternatively, users can configure and use secret.yaml for driver configuration. The parameters remain the same as in the above table and below is a sample of secret.yaml. Samples of both secret.json and secret.yaml are available in the directory &lt;code&gt;csi-unity/helm/samples&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Alternatively, users can configure and use &lt;code&gt;secret.yaml&lt;/code&gt; for driver configuration. The parameters remain the same as in the above table and below is a sample of &lt;code&gt;secret.yaml&lt;/code&gt;. Samples of both &lt;code&gt;secret.json&lt;/code&gt; and &lt;code&gt;secret.yaml&lt;/code&gt; are available in the directory &lt;code&gt;csi-unity/helm/samples&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Example: secret.yaml&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;logLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Info&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;syncNodeInfoInterval&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                                   
@@ -1871,27 +1871,33 @@ The driver will continue to use previous values in case of an error found in the
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://10.1.1.1/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;skipCertificateValidation&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isDefault&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;arrayId&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;APM00******2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;username&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;user&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;password&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://10.1.1.2/&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;skipCertificateValidation&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;``
-Use the following command to create a new secret unity-creds from secret.yaml file.&lt;/p&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;``&lt;/p&gt;
+&lt;p&gt;Use the following command to create a new secret unity-creds from secret.yaml file.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Use the following command to replace or update the secret:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml --dry-run | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; * &amp;quot;restGateway&amp;quot; parameter has been changed to &amp;quot;endpoint&amp;quot; as restgateway is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of &amp;quot;restGateway&amp;quot; or &amp;quot;endpoint&amp;quot; for now. The driver would return an error if both parameters are used.
-
- * &amp;quot;insecure&amp;quot; parameter has been changed to &amp;quot;skipCertificateValidation&amp;quot; as insecure is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of &amp;quot;insecure&amp;quot; or &amp;quot;skipCertificateValidation&amp;quot; for now. The driver would return an error if both parameters are used.
-
- * &amp;quot;isDefaultArray&amp;quot; parameter has been changed to &amp;quot;isDefault&amp;quot; as isDefaultArray is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of &amp;quot;isDefaultArray&amp;quot; or &amp;quot;isDefault&amp;quot; for now. The driver would return error if both parameters are used.
-
- * Parameters &amp;quot;allowRWOMultiPodAccess&amp;quot; and &amp;quot;syncNodeInfoTimeInterval&amp;quot; have been enabled for configuration in secret.json or secret.yaml and this helps users to dynamically change these values without the need for driver re-installation. If these parameters are specified in myvalues.yaml as well as here then the values from secret.json / secret.yaml takes precedence and they will reflect in the driver after unity-creds secret is updated.
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;restGateway&amp;rdquo; parameter has been changed to &amp;ldquo;endpoint&amp;rdquo; as restgateway is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of &amp;ldquo;restGateway&amp;rdquo; or &amp;ldquo;endpoint&amp;rdquo; for now. The driver would return an error if both parameters are used.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;insecure&amp;rdquo; parameter has been changed to &amp;ldquo;skipCertificateValidation&amp;rdquo; as insecure is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of &amp;ldquo;insecure&amp;rdquo; or &amp;ldquo;skipCertificateValidation&amp;rdquo; for now. The driver would return an error if both parameters are used.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;isDefaultArray&amp;rdquo; parameter has been changed to &amp;ldquo;isDefault&amp;rdquo; as isDefaultArray is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of &amp;ldquo;isDefaultArray&amp;rdquo; or &amp;ldquo;isDefault&amp;rdquo; for now. The driver would return error if both parameters are used.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Parameters &amp;ldquo;allowRWOMultiPodAccess&amp;rdquo; and &amp;ldquo;syncNodeInfoTimeInterval&amp;rdquo; have been enabled for configuration in secret.json or secret.yaml and this helps users to dynamically change these values without the need for driver re-installation. If these parameters are specified in &lt;code&gt;myvalues.yaml&lt;/code&gt; as well as here then the values from secret.json / secret.yaml takes precedence and they will reflect in the driver after unity-creds secret is updated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Setup for snapshots.&lt;/p&gt;
@@ -1920,7 +1926,7 @@ Applicable only if you decided to enable snapshot feature in &lt;code&gt;values.
 &lt;li&gt;If on Kubernetes 1.19 (beta snapshots) use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller&#34;&gt;v3.0.x&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;If on Kubernetes 1.20 and 1.21 (v1 snapshots) use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller&#34;&gt;v4.0.x&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The manifests available on GitHub install the snapshotter image:
 &lt;ul&gt;
@@ -1937,7 +1943,7 @@ Applicable only if you decided to enable snapshot feature in &lt;code&gt;values.
 git checkout release-&amp;lt;your-version&amp;gt;
 kubectl create -f client/config/crd
 kubectl create -f deploy/kubernetes/snapshot-controller
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;It is recommended to use 3.0.x version of snapshotter/snapshot-controller when using Kubernetes 1.19&lt;/li&gt;
 &lt;li&gt;When using Kubernetes 1.20/1.21 it is recommended to use 4.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
@@ -2003,8 +2009,8 @@ Success
 ------------------------------------------------------
 &amp;gt; Operation complete
 ------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Results
-At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command &lt;strong&gt;kubectl get pods -n unity&lt;/strong&gt; to get the status of the pods and you will see the following:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Results:&lt;/p&gt;
+&lt;p&gt;At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command &lt;code&gt;kubectl get pods -n unity&lt;/code&gt; to get the status of the pods and you will see the following:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;One or more Unity Controller (based on controllerCount) with 5/5 containers ready, and status displayed as Running.&lt;/li&gt;
 &lt;li&gt;Agent pods with 2/2 containers and the status displayed as Running.&lt;/li&gt;
@@ -2026,23 +2032,33 @@ At the end of the script unity-controller Deployment and DaemonSet unity-node wi
 &lt;p&gt;If the storageArrayList[i].insecure parameter set to false and a previous installation attempt created the empty secret, then this secret must be deleted and re-created using the CA certs.&lt;/p&gt;
 &lt;p&gt;If the Unisphere certificate is self-signed or if you are using an embedded Unisphere, then perform the following steps.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;To fetch the certificate, run the following command.
+&lt;li&gt;
+&lt;p&gt;To fetch the certificate, run the following command.
 &lt;code&gt;openssl s_client -showcerts -connect &amp;lt;Unisphere IP:Port&amp;gt; &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM &amp;gt; ca_cert_0.pem&lt;/code&gt;
-Example: openssl s_client -showcerts -connect 1.1.1.1:443 &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM &amp;gt; ca_cert_0.pem&lt;/li&gt;
-&lt;li&gt;Run the following command to create the cert secret with index &amp;lsquo;0&amp;rsquo;:
+Example: openssl s_client -showcerts -connect 1.1.1.1:443 &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM &amp;gt; ca_cert_0.pem&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command to create the cert secret with index &amp;lsquo;0&amp;rsquo;:
 &lt;code&gt;kubectl create secret generic unity-certs-0 --from-file=cert-0=ca_cert_0.pem -n unity&lt;/code&gt;
 Use the following command to replace the secret:
-&lt;code&gt;kubectl create secret generic unity-certs-0 -n unity --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: unity-certs-1, unity-certs-2, etc)&lt;/li&gt;
+&lt;code&gt;kubectl create secret generic unity-certs-0 -n unity --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: unity-certs-1, unity-certs-2, etc)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;unity&amp;rdquo; is the namespace for helm-based installation but namespace can be user-defined in operator-based installation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to Kubernetes secret size limitation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Whenever certSecretCount parameter changes in &lt;code&gt;myvalues.yaml&lt;/code&gt; user needs to uninstall and install the driver.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;**Note**: 
-
-    * &amp;quot;unity&amp;quot; is the namespace for helm-based installation but namespace can be user-defined in operator-based installation.
-
-    * User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to Kubernetes secret size limitation.
-
-    * Whenever certSecretCount parameter changes in myvalues.yaml user needs to uninstall and install the driver.
-&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
 &lt;p&gt;Storage Classes are an essential Kubernetes construct for Storage provisioning. To know more about Storage Classes, refer to &lt;a href=&#34;https://kubernetes.io/docs/concepts/storage/storage-classes/&#34;&gt;https://kubernetes.io/docs/concepts/storage/storage-classes/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;A wide set of annotated storage class manifests have been provided in the &lt;a href=&#34;https://github.com/dell/csi-unity/tree/master/helm/samples/storageclass&#34;&gt;helm/samples/storageclass folder&lt;/a&gt;. Use these samples to create new storage classes to provision storage.&lt;/p&gt;
@@ -2065,7 +2081,7 @@ There are samples storage class yaml files available under &lt;code&gt;helm/samp
 &lt;li&gt;Edit &lt;code&gt;storageclass.kubernetes.io/is-default-class&lt;/code&gt; to true if you want to set it as default, otherwise false.&lt;/li&gt;
 &lt;li&gt;Save the file and create it by using &lt;code&gt;kubectl create -f unity-&amp;lt;ARRAY_ID&amp;gt;-fc.yaml&lt;/code&gt; or &lt;code&gt;kubectl create -f unity-&amp;lt;ARRAY_ID&amp;gt;-iscsi.yaml&lt;/code&gt; or &lt;code&gt;kubectl create -f unity-&amp;lt;ARRAY_ID&amp;gt;-nfs.yaml&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;At least one storage class is required for one array.&lt;/li&gt;
 &lt;li&gt;If you uninstall the driver and reinstall it, you can still face errors if any update in the &lt;code&gt;values.yaml&lt;/code&gt; file leads to an update of the storage class(es):&lt;/li&gt;
@@ -2076,9 +2092,8 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;h2 id=&#34;dynamically-update-the-unity-creds-secrets&#34;&gt;Dynamically update the unity-creds secrets&lt;/h2&gt;
 &lt;p&gt;Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the &amp;ldquo;Host&amp;rdquo; information in an array.
 User can update secret using the following command:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;`kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f - `
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.&lt;/p&gt;
 
       </description>
     </item>

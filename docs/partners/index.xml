@@ -82,7 +82,7 @@
 &lt;/ol&gt;
 &lt;p&gt;&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/driver1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;After clicking the &amp;ldquo;Create CSIUnity&amp;rdquo; option in the above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the &lt;a href=&#34;../../installation/operator/#install-csi-driver&#34;&gt;driver install pages for the Dell CSI Operator&lt;/a&gt; for information on the parameters.&lt;/li&gt;
+&lt;li&gt;After clicking the &amp;ldquo;Create CSIUnity&amp;rdquo; option in the above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the &lt;a href=&#34;../../installation/operator/#installing-csi-driver-via-operator&#34;&gt;driver install pages for the Dell CSI Operator&lt;/a&gt; for information on the parameters.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/driver2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
@@ -105,7 +105,7 @@
         &lt;p&gt;The Dell CSI Drivers support Docker Enterprise Edition (EE) and deployment on clusters bootstrapped with Mirantis Kubernetes Engine (MKE).&lt;/p&gt;
 &lt;p&gt;The installation process for the drivers on such clusters remains the same as the installation process on regular Kubernetes clusters.&lt;/p&gt;
 &lt;p&gt;On MKE-based clusters, kubectl may not be installed by default, it is important that kubectl is installed prior to the installation of the driver.&lt;/p&gt;
-&lt;p&gt;The worker nodes on MKE-backed clusters may run any of the OSs which we support with upstream clusters.&lt;/p&gt;
+&lt;p&gt;The worker nodes on MKE-backed clusters may run any of the OS which we support with upstream clusters.&lt;/p&gt;
 &lt;h2 id=&#34;mke-ui-examples&#34;&gt;MKE UI Examples&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/first.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/images/second.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
