@@ -267,7 +267,7 @@ For additional information, see the [kubernetes](https://kubernetes.io/DOCS/CONC
 
 ## Volume Cloning Feature
 
-The CSI Unity driver version 1.3 supports volume cloning. This allows specifying existing PVCs in the _dataSource_ field to indicate a user would like to clone a Volume.
+The CSI Unity driver version 1.3 and later supports volume cloning. This allows specifying existing PVCs in the _dataSource_ field to indicate a user would like to clone a Volume.
 
 Source and destination PVC must be in the same namespace and have the same Storage Class.
 
@@ -311,7 +311,7 @@ spec:
 
 ## Ephemeral Inline Volume
 
-The CSI Unity driver version 1.4 supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
+The CSI Unity driver version 1.4 and later supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
 
 At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.
 
@@ -362,7 +362,7 @@ To create `NFS` volume you need to provide `nasName:` parameters that point to t
 
 ## Controller HA
 
-The CSI Unity driver version 1.4 introduces the controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
+The CSI Unity driver version 1.4 and later supports the controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
 
 By default, number of replicas is set to 2, you can set the `controllerCount` parameter to 1 in `myvalues.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change the `replicas` parameter in the `spec.driver` section in your Unity Custom Resource.
 
@@ -408,7 +408,7 @@ As said before you can configure where node driver pods would be assigned in a s
 
 ## Topology
 
-The CSI Unity driver version 1.4 supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.
+The CSI Unity driver version 1.4 and later supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.
 
 This Topology support does not include customer-defined topology, users cannot create their own labels for nodes, they should use whatever labels are returned by the driver and applied automatically by Kubernetes on its nodes.
 

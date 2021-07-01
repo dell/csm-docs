@@ -25,7 +25,7 @@ Before you install CSI Driver for Unity, verify the requirements that are mentio
 
 ### Requirements
 
-* Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/))
+* Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/#features-and-capabilities))
 * Install Helm v3
 * To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured
 * To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured 
@@ -39,22 +39,22 @@ Install CSI Driver for Unity using this procedure.
 *Before you begin*
 
  * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone https://github.com/dell/csi-unity.git```, ready for this procedure.
- * In the top-level dell-csi-helm-installer directory, there should be two scripts, *csi-install.sh* and *csi-uninstall.sh*.
- * Ensure "unity" namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
+ * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
+ * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
    
 
 Procedure
 
-1. Collect information from the Unity Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the secret.json or secret.yaml and myvalues.yaml file.
+1. Collect information from the Unity Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the `secret.json` or `secret.yaml` and `myvalues.yaml` file.
 
     **Note**: 
-      * ArrayId corrsponds to the serial number of Unity array.
+      * ArrayId corresponds to the serial number of Unity array.
       * Unity Array username must have role as Storage Administrator to be able to perform CRUD operations.
 
-2. Copy the helm/csi-unity/values.yaml into a file named myvalues.yaml in the same directory of csi-install.sh, to customize settings for installation.
+2. Copy the `helm/csi-unity/values.yaml` into a file named `myvalues.yaml` in the same directory of `csi-install.sh`, to customize settings for installation.
 
-3. Edit myvalues.yaml to set the following parameters for your installation:
+3. Edit `myvalues.yaml` to set the following parameters for your installation:
    
     The following table lists the primary configurable parameters of the Unity driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml) file in this repository.
     
@@ -71,17 +71,17 @@ Procedure
 
     **Note**: 
     
-      * User should provide all boolean values with double-quotes. This applies only for myvalues.yaml. Example: "true"/"false"
+      * User should provide all boolean values with double-quotes. This applies only for `myvalues.yaml`. Example: "true"/"false"
         
       * controllerCount parameter value should be <= number of nodes in the kubernetes cluster else install script fails.
         
-      * User can a create separate StorageClass (with topology-related keys) by referring to existing default storage classes.
+      * User can a create separate _StorageClass_ (with topology-related keys) by referring to existing default storage classes.
 
       * Host IO Limit must have a minimum bandwidth of 1 MBPS to discover the volumes on node successfully.
       
       * User must not change the value of allowRWOMultiPodAccess to true unless intended to use the feature and is aware of the consequences. Enabling multiple pods to access the same PVC with RWO access mode on the same node might cause data to be overwritten and therefore leading to data loss in some cases.
 	  
-	    * Parameters allowRWOMultiPodAccess and syncNodeInfoInterval have been deprecated from myvalues.yaml and are removed from myvalues.yaml in a future releases. They can be configured in secret.json or secret.yaml as they facilitate the user to dynamically change these values without the need for driver re-installation.
+	    * Parameters allowRWOMultiPodAccess and syncNodeInfoInterval have been deprecated from `myvalues.yaml` and are removed from `myvalues.yaml` in a future releases. They can be configured in `secret.json` or `secret.yaml` as they facilitate the user to dynamically change these values without the need for driver re-installation.
     
 
    Example *myvalues.yaml*
@@ -97,9 +97,9 @@ Procedure
     syncNodeInfoInterval: 5
     ```
    
-4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file helm/emptysecret.yaml file by running the ```kubectl create -f helm/emptysecret.yaml``` command.
+4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `helm/emptysecret.yaml` file by running the `kubectl create -f helm/emptysecret.yaml` command.
 
-5. Prepare the secret.json for driver configuration.
+5. Prepare the `secret.json` or `secret.yaml`  for driver configuration.
     The following table lists driver configuration parameters for multiple storage arrays.
     
     | Parameter | Description | Required | Default |
@@ -142,7 +142,7 @@ Procedure
        }
     ```
     
-	Use the following command to create a new secret unity-creds from secret.json file.
+	Use the following command to create a new secret unity-creds from `secret.json` file.
 	
     `kubectl create secret generic unity-creds -n unity --from-file=config=secret.json`
     
@@ -154,47 +154,48 @@ Procedure
     The driver will continue to use previous values in case of an error found in the JSON file.
 	
 	
-	Alternatively, users can configure and use secret.yaml for driver configuration. The parameters remain the same as in the above table and below is a sample of secret.yaml. Samples of both secret.json and secret.yaml are available in the directory `csi-unity/helm/samples`.
+	Alternatively, users can configure and use `secret.yaml` for driver configuration. The parameters remain the same as in the above table and below is a sample of `secret.yaml`. Samples of both `secret.json` and `secret.yaml` are available in the directory `csi-unity/helm/samples`.
 	
 	Example: secret.yaml
 	```yaml
-	logLevel: "Info"
-	syncNodeInfoInterval: 15                                   
-	allowRWOMultiPodAccess: "false"                                  
-	maxUnityVolumesPerNode: 0
-	storageArrayList:
-	- arrayId: "APM00******1"
-	  username: "user"
-	  password: "password"
-	  endpoint: "https://10.1.1.1/"
-	  skipCertificateValidation: true
-	  isDefault: true
-   
-	- arrayId: "APM00******2"
-	  username: "user"
-	  password: "password"
-	  endpoint: "https://10.1.1.2/"
-	  skipCertificateValidation: true
-	
+    logLevel: "Info"
+    syncNodeInfoInterval: 15                                   
+    allowRWOMultiPodAccess: "false"                                  
+    maxUnityVolumesPerNode: 0
+    storageArrayList:
+    - arrayId: "APM00******1"
+      username: "user"
+      password: "password"
+      endpoint: "https://10.1.1.1/"
+      skipCertificateValidation: true
+      isDefault: true
+    
+    - arrayId: "APM00******2"
+      username: "user"
+      password: "password"
+      endpoint: "https://10.1.1.2/"
+      skipCertificateValidation: true
+
 	```
+
 	Use the following command to create a new secret unity-creds from secret.yaml file.
 	
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
+    ```kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml```
     
     Use the following command to replace or update the secret:
     
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml --dry-run | kubectl replace -f -`
+    ```kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml --dry-run | kubectl replace -f -```
 	
     
-	**Note**: 
+      **Note:**
+      
+      * "restGateway" parameter has been changed to "endpoint" as restgateway is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of "restGateway" or "endpoint" for now. The driver would return an error if both parameters are used.
     
-		* "restGateway" parameter has been changed to "endpoint" as restgateway is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of "restGateway" or "endpoint" for now. The driver would return an error if both parameters are used.
-	
-		* "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
-	
-		* "isDefaultArray" parameter has been changed to "isDefault" as isDefaultArray is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of "isDefaultArray" or "isDefault" for now. The driver would return error if both parameters are used.
-	
-		* Parameters "allowRWOMultiPodAccess" and "syncNodeInfoTimeInterval" have been enabled for configuration in secret.json or secret.yaml and this helps users to dynamically change these values without the need for driver re-installation. If these parameters are specified in myvalues.yaml as well as here then the values from secret.json / secret.yaml takes precedence and they will reflect in the driver after unity-creds secret is updated.
+      * "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
+    
+      * "isDefaultArray" parameter has been changed to "isDefault" as isDefaultArray is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of "isDefaultArray" or "isDefault" for now. The driver would return error if both parameters are used.
+    
+      * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoTimeInterval" have been enabled for configuration in secret.json or secret.yaml and this helps users to dynamically change these values without the need for driver re-installation. If these parameters are specified in `myvalues.yaml` as well as here then the values from secret.json / secret.yaml takes precedence and they will reflect in the driver after unity-creds secret is updated.
 
 6. Setup for snapshots.
          
@@ -224,7 +225,7 @@ Procedure
     - If on Kubernetes 1.19 (beta snapshots) use [v3.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller)
     - If on Kubernetes 1.20 and 1.21 (v1 snapshots) use [v4.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller)
 
-    *NOTE:*
+    **Note**:
     - The manifests available on GitHub install the snapshotter image: 
       - [quay.io/k8scsi/csi-snapshotter:v3.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.3&tab=tags)
       - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
@@ -241,7 +242,7 @@ Procedure
     kubectl create -f deploy/kubernetes/snapshot-controller
     ```
 
-    *NOTE:*
+    **Note**:
     - It is recommended to use 3.0.x version of snapshotter/snapshot-controller when using Kubernetes 1.19
     - When using Kubernetes 1.20/1.21 it is recommended to use 4.0.x version of snapshotter/snapshot-controller.
     - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
@@ -309,8 +310,9 @@ Procedure
     > Operation complete
     ------------------------------------------------------
     ```
-    Results
-    At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command **kubectl get pods -n unity** to get the status of the pods and you will see the following:
+    Results:
+
+    At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command `kubectl get pods -n unity` to get the status of the pods and you will see the following:
     
     * One or more Unity Controller (based on controllerCount) with 5/5 containers ready, and status displayed as Running.
     * Agent pods with 2/2 containers and the status displayed as Running.
@@ -355,13 +357,14 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
           `kubectl create secret generic unity-certs-0 -n unity --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -` 
    3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: unity-certs-1, unity-certs-2, etc)
 
-	**Note**: 
+
+	  **Note:**
 	
 		* "unity" is the namespace for helm-based installation but namespace can be user-defined in operator-based installation.
 
 		* User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to Kubernetes secret size limitation.
 
-		* Whenever certSecretCount parameter changes in myvalues.yaml user needs to uninstall and install the driver.
+		* Whenever certSecretCount parameter changes in `myvalues.yaml` user needs to uninstall and install the driver.
 
 
 ## Storage Classes
@@ -394,7 +397,7 @@ There are samples storage class yaml files available under `helm/samples/storage
 9. Save the file and create it by using `kubectl create -f unity-<ARRAY_ID>-fc.yaml` or `kubectl create -f unity-<ARRAY_ID>-iscsi.yaml` or `kubectl create -f unity-<ARRAY_ID>-nfs.yaml`
 
 
-*NOTE*:
+**Note**: 
 - At least one storage class is required for one array.
 - If you uninstall the driver and reinstall it, you can still face errors if any update in the `values.yaml` file leads to an update of the storage class(es):
 
@@ -410,7 +413,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the "Host" information in an array.
 User can update secret using the following command:
-
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f - `
-
+```
+    kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f -
+```
 **Note**: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.

@@ -6,7 +6,8 @@ Description: Code features for PowerScale Driver
 ## Multicluster support
 
 You can connect a single CSI-PowerScale driver with multiple PowerScale clusters.
-Pre-Requisites:
+
+**Pre-Requisites:**
 
 1. Creation of secret.json or secret.yaml with credentials related to one or more Clusters.
 2. Creation of (at least) one Storage class for each cluster.
@@ -123,7 +124,7 @@ In order to use Volume Snapshots, ensure the following components have been depl
 
 During the installation of CSI PowerScale driver version 1.6, no default Volume Snapshot Class will get created.
 
-Following are the manifests for the Volume Snapshot Class created during installation:
+Following are the manifests for the Volume Snapshot Class:
 
 1. VolumeSnapshotClass - v1
 ```yaml
@@ -250,7 +251,7 @@ spec:
     storageClassName: isilon-expand-sc
 ```
 
-The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.
+>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.
 
 
 ## Volume Cloning Feature
@@ -315,7 +316,7 @@ If you are using the `dell-csi-operator`, adjust the following value in your Cus
 ```
 replicas: 2  
 ```
-For more details about configuring Controller HA using the Dell CSI Operator, refer to the Dell CSI Operator documentation.
+For more details about configuring Controller HA using the Dell CSI Operator, refer to the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).
 
 ## Ephemeral Inline Volume
 
@@ -363,6 +364,7 @@ The CSI PowerScale driver may not be installed or running on some nodes where Us
 We support CustomTopology which enables users to apply labels for nodes - "csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com" and expect the labels to be honored by the driver.
   
 When “enableCustomTopology” is set to “true”, the CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and use them to initialize node pod with custom PowerScale FQDN/IP.
+
 **Note:** Only a single cluster can be configured as part of secret.json for custom topology.
 
 
@@ -370,7 +372,7 @@ When “enableCustomTopology” is set to “true”, the CSI driver fetches cus
    
 To utilize the Topology feature, create a custom `StorageClass` with `volumeBindingMode` set to `WaitForFirstConsumer` and specify the desired topology labels within `allowedTopologies` field of this custom storage class. This ensures that the Pod schedule takes advantage of the topology and the selected node has access to provisioned volumes. 
 
-**Note: ** Whenever a new storage cluster is being added in secret, even though it is dynamic, the new storage cluster IP address-related label is not added to worker nodes dynamically. The user has to spin off (bounce) driver-related pods (controller and node pods) in order to apply newly added information to be reflected in worker nodes.
+**Note:** Whenever a new storage cluster is being added in secret, even though it is dynamic, the new storage cluster IP address-related label is not added to worker nodes dynamically. The user has to spin off (bounce) driver-related pods (controller and node pods) in order to apply newly added information to be reflected in worker nodes.
   
 **Storage Class Example with Topology Support:**
  

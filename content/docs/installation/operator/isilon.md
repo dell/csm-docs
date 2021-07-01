@@ -109,5 +109,5 @@ User can query for CSI-PowerScale driver using the following command:
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
     
 **Note** : 
-   1. Storage class and VolumeSnapshotClass will **not** be created as part of CSI-PowerScale 1.6 driver deployment. The user has to create Storageclass and Volume Snapshot Class.
+   1. From CSI-PowerScale v1.6.0 and higher, Storage class and VolumeSnapshotClass will **not** be created as part of driver deployment. The user has to create Storageclass and Volume Snapshot Class.
    2. Node selector and node tolerations can be added in both controller parameters and node parameters section, based on the need.
