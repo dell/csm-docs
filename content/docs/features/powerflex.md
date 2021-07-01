@@ -88,7 +88,8 @@ spec:
 
 This feature extends CSI specification to add the capability to create crash-consistent snapshots of a group of volumes. 
 PowerFlex driver implements this extension in v1.5. 
-This feature is currently in Technical Preview. To use this feature users have to deploy csi-volumegroupsnapshotter side-car as part of the PowerFlex driver.
+This feature is currently in Technical Preview. To use this feature users have to deploy csi-volumegroupsnapshotter side-car as part of the PowerFlex driver.  
+More details can be found here: [dell-csi-volumegroup-snapshotter](https://github.com/dell/csi-volumegroup-snapshotter).
 
 ## Volume Expansion Feature
 

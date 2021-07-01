@@ -41,7 +41,7 @@ The CSI drivers can be installed via Helm charts or Dell CSI Operator.  The Dell
 
 ![](/storage-plugin-docs/images/driver1.PNG)
 
-2. After clicking the "Create CSIUnity" option in the above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the [driver install pages for the Dell CSI Operator](../../installation/operator/#install-csi-driver) for information on the parameters.
+2. After clicking the "Create CSIUnity" option in the above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the [driver install pages for the Dell CSI Operator](../../installation/operator/#installing-csi-driver-via-operator) for information on the parameters.
 
 ![](/storage-plugin-docs/images/driver2.PNG)
 

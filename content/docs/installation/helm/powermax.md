@@ -58,7 +58,7 @@ Set up the iSCSI initiators as follows:
 - Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell EMC PowerMax array.
 - The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell EMC PowerMax array. All the port group names supplied to the driver must exist on each Dell EMC PowerMax with the same name.
 
-For information about configuring iSCSI, see _Dell EMC PowerMax documentation_ on Dell EMC Support.
+For more information about configuring iSCSI, you can refer [Dell EMC Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
 
 ### Certificate validation for Unisphere REST API calls
 
