@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting PowerScale Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerscale/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-07-01T19:13:06+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Troubleshooting PowerScale Driver">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="249">
+<meta itemprop="dateModified" content="2021-07-01T19:13:06&#43;05:30" />
+<meta itemprop="wordCount" content="594">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -983,6 +983,26 @@
 <tr>
 <td>Volume/filesystem is allowed to mount by any host in the network, though that host is not a part of the export of that particular volume under /ifs directory</td>
 <td>&ldquo;Dell EMC PowerScale: OneFS NFS Design Considerations and Best Practices&rdquo;: <br> There is a default shared directory (ifs) of OneFS, which lets clients running Windows, UNIX, Linux, or Mac OS X access the same directories and files. It is recommended to disable the ifs shared directory in a production environment and create dedicated NFS exports and SMB shares for your workload.</td>
+</tr>
+<tr>
+<td>Creating snapshot fails if the parameter IsiPath in volume snapshot class and related storage class is not the same. The driver uses the incorrect IsiPath parameter and tries to locate the source volume due to the inconsistency.</td>
+<td>Ensure IsiPath in VolumeSnapshotClass yaml and related storageClass yaml are the same.</td>
+</tr>
+<tr>
+<td>While deleting a volume, if there are files or folders created on the volume that are owned by different users. If the Isilon credentials used are for a nonprivileged Isilon user, the delete volume action fails. It is due to the limitation in Linux permission control.</td>
+<td>To perform the delete volume action, the user account must be assigned a role that has the privilege ISI_PRIV_IFS_RESTORE. The user account must have the following set of privileges to ensure that all the CSI Isilon driver capabilities work properly:<br> * ISI_PRIV_LOGIN_PAPI<br> * ISI_PRIV_NFS<br> * ISI_PRIV_QUOTA<br> * ISI_PRIV_SNAPSHOT<br> * ISI_PRIV_IFS_RESTORE<br> * ISI_PRIV_NS_IFS_ACCESS<br> In some cases, ISI_PRIV_BACKUP is also required, for example, when files owned by other users have mode bits set to 700.</td>
+</tr>
+<tr>
+<td>If the hostname is mapped to loopback IP in /etc/hosts file, and pods are created using 1.3.0.1 release, after upgrade to 1.4.0 there is a possibility of &ldquo;localhost&rdquo; as a stale entry in export</td>
+<td>Recommended setup: User should not map a hostname to loopback IP in /etc/hosts file</td>
+</tr>
+<tr>
+<td>CSI Driver installation fails with the error message &ldquo;error getting FQDN&rdquo;.</td>
+<td>Map IP address of host with its FQDN in /etc/hosts file.</td>
+</tr>
+<tr>
+<td>Driver node pod is in &ldquo;CrashLoopBackOff&rdquo; as &ldquo;Node ID&rdquo; generated is not with proper FQDN.</td>
+<td>This might be due to &ldquo;dnsPolicy&rdquo; implemented on the driver node pod which may differ with different networks.                                                                                                                                  <br><br> 1.This parameter is configurable in the helm installer and the user can try with different &ldquo;dnsPolicy&rdquo; according to the environment.  (values.yaml).                                                                                               <br><br> 2. In the case of Operator installation, this parameter is not configurable at present and will be available in upcoming release. To overcome this issue, try to use appropriate &ldquo;dnsPolicy&rdquo; ( ClusterFirst / ClusterFirstWithHostNet ) by patching Isilon node pods.                                       <br><br> Example : kubectl patch daemonset isilon-node -n isilon -p &lsquo;{&ldquo;spec&rdquo;: {&ldquo;template&rdquo;: {&ldquo;spec&rdquo;:{&ldquo;dnsPolicy&rdquo;: &ldquo;ClusterFirst&rdquo;}}}}&rsquo;</td>
 </tr>
 </tbody>
 </table>

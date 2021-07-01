@@ -66,7 +66,7 @@
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Dell CSI Operator has been tested and qualified with&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Upstream Kubernetes or OpenShift (see &lt;a href=&#34;../../dell-csi-driver/&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Upstream Kubernetes or OpenShift (see &lt;a href=&#34;../../dell-csi-driver/#features-and-capabilities&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h4&gt;
 &lt;p&gt;If you have installed an old version of the &lt;code&gt;dell-csi-operator&lt;/code&gt; which was available with the name &lt;em&gt;CSI Operator&lt;/em&gt;, please refer to this &lt;a href=&#34;#replacing-csi-operator-with-dell-csi-operator&#34;&gt;section&lt;/a&gt; before continuing.&lt;/p&gt;
@@ -224,7 +224,7 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 &lt;li&gt;Run &lt;code&gt;bash scripts/install.sh&lt;/code&gt; to install the operator.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;NOTE: Starting with Dell CSI Operator v1.4.0 and higher, the operator would install to the &amp;lsquo;dell-csi-operator&amp;rsquo; namespace by default.
+&lt;p&gt;NOTE: Dell CSI Operator version 1.4.0 and higher would install to the &amp;lsquo;dell-csi-operator&amp;rsquo; namespace by default.
 Any existing installations of Dell CSI Operator (v1.2.0 or later) installed using &lt;code&gt;install.sh&lt;/code&gt; to the &amp;lsquo;default&amp;rsquo; or &amp;lsquo;dell-csi-operator&amp;rsquo; namespace can be upgraded to the new version by running &lt;code&gt;install.sh --upgrade&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -494,7 +494,7 @@ For e.g. - If you wish to install v1.4 of the CSI PowerMax driver, use the image
 &lt;li&gt;An uninstall and followed by an install of the driver would also result in &lt;code&gt;StorageClass&lt;/code&gt; and &lt;code&gt;VolumeSnapshotClass&lt;/code&gt; getting deleted and not getting created again.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; For more information on pre-requisites and parameters, please refer to the sub-pages below for each driver.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Starting with Dell CSI Operator v1.4.0 and higher, Storage Classes and Volume Snapshot Classes would no longer be created during the installation of the driver via an operator.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Storage Classes and Volume Snapshot Classes would no longer be created during the installation of the driver via an operator from v1.4.0 and higher.&lt;/p&gt;
 
       </description>
     </item>
@@ -600,23 +600,42 @@ or the Dell CSI Operator.&lt;/p&gt;
 *
 * Pulling container images
 
-   dellemc/csi-isilon:v1.2.0
-   dellemc/csi-isilon:v1.3.0.000R
-   dellemc/csipowermax-reverseproxy:v1.0.0.000R
-   dellemc/csi-powermax:v1.2.0.000R
-   dellemc/csi-powermax:v1.4.0.000R
-   dellemc/csi-powerstore:v1.1.0.000R
-   dellemc/csi-unity:v1.3.0.000R
-   dellemc/csi-vxflexos:v1.1.5.000R
-   dellemc/csi-vxflexos:v1.2.0.000R
-   dellemc/dell-csi-operator:v1.1.0.000R
-   quay.io/k8scsi/csi-attacher:v2.0.0
-   quay.io/k8scsi/csi-attacher:v2.2.0
-   quay.io/k8scsi/csi-node-driver-registrar:v1.2.0
-   quay.io/k8scsi/csi-provisioner:v1.4.0
-   quay.io/k8scsi/csi-provisioner:v1.6.0
-   quay.io/k8scsi/csi-resizer:v0.5.0
-   quay.io/k8scsi/csi-snapshotter:v2.1.1
+   dellemc/csi-isilon:v1.4.0.000R
+   dellemc/csi-isilon:v1.5.0
+   dellemc/csi-isilon:v1.6.0
+   dellemc/csipowermax-reverseproxy:v1.3.0
+   dellemc/csi-powermax:v1.5.0.000R
+   dellemc/csi-powermax:v1.6.0
+   dellemc/csi-powermax:v1.7.0
+   dellemc/csi-powerstore:v1.2.0.000R
+   dellemc/csi-powerstore:v1.3.0
+   dellemc/csi-powerstore:v1.4.0
+   dellemc/csi-unity:v1.4.0.000R
+   dellemc/csi-unity:v1.5.0
+   dellemc/csi-unity:v1.6.0
+   dellemc/csi-vxflexos:v1.3.0.000R
+   dellemc/csi-vxflexos:v1.4.0
+   dellemc/csi-vxflexos:v1.5.0
+   dellemc/dell-csi-operator:v1.4.0
+   dellemc/sdc:3.5.1.1
+   dellemc/sdc:3.5.1.1-1
+   docker.io/busybox:1.32.0
+   k8s.gcr.io/sig-storage/csi-attacher:v3.0.0
+   k8s.gcr.io/sig-storage/csi-attacher:v3.1.0
+   k8s.gcr.io/sig-storage/csi-attacher:v3.2.1
+   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.0.1
+   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.1.0
+   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0
+   k8s.gcr.io/sig-storage/csi-provisioner:v2.0.2
+   k8s.gcr.io/sig-storage/csi-provisioner:v2.1.0
+   k8s.gcr.io/sig-storage/csi-provisioner:v2.2.1
+   k8s.gcr.io/sig-storage/csi-resizer:v1.2.0
+   k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.2
+   k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.3
+   k8s.gcr.io/sig-storage/csi-snapshotter:v4.0.0
+   k8s.gcr.io/sig-storage/csi-snapshotter:v4.1.0
+   quay.io/k8scsi/csi-resizer:v1.0.0
+   quay.io/k8scsi/csi-resizer:v1.1.0
 
 *
 * Saving images
@@ -681,44 +700,82 @@ Preparing an offline bundle for installation
 *
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v1.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-isilon:v1.2.0
-   dellemc/csi-isilon:v1.3.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-isilon:v1.3.0.000R
-   dellemc/csipowermax-reverseproxy:v1.0.0.000R -&amp;gt; 192.168.75.40:5000/operator/csipowermax-reverseproxy:v1.0.0.000R
-   dellemc/csi-powermax:v1.2.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powermax:v1.2.0.000R
-   dellemc/csi-powermax:v1.4.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powermax:v1.4.0.000R
-   dellemc/csi-powerstore:v1.1.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powerstore:v1.1.0.000R
-   dellemc/csi-unity:v1.3.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-unity:v1.3.0.000R
-   dellemc/csi-vxflexos:v1.1.5.000R -&amp;gt; 192.168.75.40:5000/operator/csi-vxflexos:v1.1.5.000R
-   dellemc/csi-vxflexos:v1.2.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-vxflexos:v1.2.0.000R
-   dellemc/dell-csi-operator:v1.1.0.000R -&amp;gt; 192.168.75.40:5000/operator/dell-csi-operator:v1.1.0.000R
-   quay.io/k8scsi/csi-attacher:v2.0.0 -&amp;gt; 192.168.75.40:5000/operator/csi-attacher:v2.0.0
-   quay.io/k8scsi/csi-attacher:v2.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-attacher:v2.2.0
-   quay.io/k8scsi/csi-node-driver-registrar:v1.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-node-driver-registrar:v1.2.0
-   quay.io/k8scsi/csi-provisioner:v1.4.0 -&amp;gt; 192.168.75.40:5000/operator/csi-provisioner:v1.4.0
-   quay.io/k8scsi/csi-provisioner:v1.6.0 -&amp;gt; 192.168.75.40:5000/operator/csi-provisioner:v1.6.0
-   quay.io/k8scsi/csi-resizer:v0.5.0 -&amp;gt; 192.168.75.40:5000/operator/csi-resizer:v0.5.0
-   quay.io/k8scsi/csi-snapshotter:v2.1.1 -&amp;gt; 192.168.75.40:5000/operator/csi-snapshotter:v2.1.1
+   dellemc/csi-isilon:v1.4.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.4.0.000R
+   dellemc/csi-isilon:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.5.0
+   dellemc/csi-isilon:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.6.0
+   dellemc/csipowermax-reverseproxy:v1.3.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csipowermax-reverseproxy:v1.3.0
+   dellemc/csi-powermax:v1.5.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.5.0.000R
+   dellemc/csi-powermax:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.6.0
+   dellemc/csi-powermax:v1.7.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.7.0
+   dellemc/csi-powerstore:v1.2.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.2.0.000R
+   dellemc/csi-powerstore:v1.3.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.3.0
+   dellemc/csi-powerstore:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.4.0
+   dellemc/csi-unity:v1.4.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.4.0.000R
+   dellemc/csi-unity:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.5.0
+   dellemc/csi-unity:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.6.0
+   dellemc/csi-vxflexos:v1.3.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.3.0.000R
+   dellemc/csi-vxflexos:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.4.0
+   dellemc/csi-vxflexos:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.5.0
+   dellemc/dell-csi-operator:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/dell-csi-operator:v1.4.0
+   dellemc/sdc:3.5.1.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/sdc:3.5.1.1
+   dellemc/sdc:3.5.1.1-1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/sdc:3.5.1.1-1
+   docker.io/busybox:1.32.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/busybox:1.32.0
+   k8s.gcr.io/sig-storage/csi-attacher:v3.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.0.0
+   k8s.gcr.io/sig-storage/csi-attacher:v3.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.1.0
+   k8s.gcr.io/sig-storage/csi-attacher:v3.2.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.2.1
+   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.0.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.0.1
+   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.1.0
+   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.2.0
+   k8s.gcr.io/sig-storage/csi-provisioner:v2.0.2 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.0.2
+   k8s.gcr.io/sig-storage/csi-provisioner:v2.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.1.0
+   k8s.gcr.io/sig-storage/csi-provisioner:v2.2.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.2.1
+   k8s.gcr.io/sig-storage/csi-resizer:v1.2.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.2.0
+   k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.2 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v3.0.2
+   k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.3 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v3.0.3
+   k8s.gcr.io/sig-storage/csi-snapshotter:v4.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v4.0.0
+   k8s.gcr.io/sig-storage/csi-snapshotter:v4.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v4.1.0
+   quay.io/k8scsi/csi-resizer:v1.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.0.0
+   quay.io/k8scsi/csi-resizer:v1.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.1.0
 
 *
 * Preparing operator files within /tmp/dell-csi-operator-bundle
 
-   changing: dellemc/csi-isilon:v1.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-isilon:v1.2.0
-   changing: dellemc/csi-isilon:v1.3.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-isilon:v1.3.0.000R
-   changing: dellemc/csipowermax-reverseproxy:v1.0.0.000R -&amp;gt; 192.168.75.40:5000/operator/csipowermax-reverseproxy:v1.0.0.000R
-   changing: dellemc/csi-powermax:v1.2.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powermax:v1.2.0.000R
-   changing: dellemc/csi-powermax:v1.4.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powermax:v1.4.0.000R
-   changing: dellemc/csi-powerstore:v1.1.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-powerstore:v1.1.0.000R
-   changing: dellemc/csi-unity:v1.3.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-unity:v1.3.0.000R
-   changing: dellemc/csi-vxflexos:v1.1.5.000R -&amp;gt; 192.168.75.40:5000/operator/csi-vxflexos:v1.1.5.000R
-   changing: dellemc/csi-vxflexos:v1.2.0.000R -&amp;gt; 192.168.75.40:5000/operator/csi-vxflexos:v1.2.0.000R
-   changing: dellemc/dell-csi-operator:v1.1.0.000R -&amp;gt; 192.168.75.40:5000/operator/dell-csi-operator:v1.1.0.000R
-   changing: quay.io/k8scsi/csi-attacher:v2.0.0 -&amp;gt; 192.168.75.40:5000/operator/csi-attacher:v2.0.0
-   changing: quay.io/k8scsi/csi-attacher:v2.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-attacher:v2.2.0
-   changing: quay.io/k8scsi/csi-node-driver-registrar:v1.2.0 -&amp;gt; 192.168.75.40:5000/operator/csi-node-driver-registrar:v1.2.0
-   changing: quay.io/k8scsi/csi-provisioner:v1.4.0 -&amp;gt; 192.168.75.40:5000/operator/csi-provisioner:v1.4.0
-   changing: quay.io/k8scsi/csi-provisioner:v1.6.0 -&amp;gt; 192.168.75.40:5000/operator/csi-provisioner:v1.6.0
-   changing: quay.io/k8scsi/csi-resizer:v0.5.0 -&amp;gt; 192.168.75.40:5000/operator/csi-resizer:v0.5.0
-   changing: quay.io/k8scsi/csi-snapshotter:v2.1.1 -&amp;gt; 192.168.75.40:5000/operator/csi-snapshotter:v2.1.1
+   changing: dellemc/csi-isilon:v1.4.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.4.0.000R
+   changing: dellemc/csi-isilon:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.5.0
+   changing: dellemc/csi-isilon:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.6.0
+   changing: dellemc/csipowermax-reverseproxy:v1.3.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csipowermax-reverseproxy:v1.3.0
+   changing: dellemc/csi-powermax:v1.5.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.5.0.000R
+   changing: dellemc/csi-powermax:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.6.0
+   changing: dellemc/csi-powermax:v1.7.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.7.0
+   changing: dellemc/csi-powerstore:v1.2.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.2.0.000R
+   changing: dellemc/csi-powerstore:v1.3.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.3.0
+   changing: dellemc/csi-powerstore:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.4.0
+   changing: dellemc/csi-unity:v1.4.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.4.0.000R
+   changing: dellemc/csi-unity:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.5.0
+   changing: dellemc/csi-unity:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.6.0
+   changing: dellemc/csi-vxflexos:v1.3.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.3.0.000R
+   changing: dellemc/csi-vxflexos:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.4.0
+   changing: dellemc/csi-vxflexos:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.5.0
+   changing: dellemc/dell-csi-operator:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/dell-csi-operator:v1.4.0
+   changing: dellemc/sdc:3.5.1.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/sdc:3.5.1.1
+   changing: dellemc/sdc:3.5.1.1-1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/sdc:3.5.1.1-1
+   changing: docker.io/busybox:1.32.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/busybox:1.32.0
+   changing: k8s.gcr.io/sig-storage/csi-attacher:v3.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.0.0
+   changing: k8s.gcr.io/sig-storage/csi-attacher:v3.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.1.0
+   changing: k8s.gcr.io/sig-storage/csi-attacher:v3.2.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.2.1
+   changing: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.0.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.0.1
+   changing: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.1.0
+   changing: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.2.0
+   changing: k8s.gcr.io/sig-storage/csi-provisioner:v2.0.2 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.0.2
+   changing: k8s.gcr.io/sig-storage/csi-provisioner:v2.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.1.0
+   changing: k8s.gcr.io/sig-storage/csi-provisioner:v2.2.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.2.1
+   changing: k8s.gcr.io/sig-storage/csi-resizer:v1.2.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.2.0
+   changing: k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.2 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v3.0.2
+   changing: k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.3 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v3.0.3
+   changing: k8s.gcr.io/sig-storage/csi-snapshotter:v4.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v4.0.0
+   changing: k8s.gcr.io/sig-storage/csi-snapshotter:v4.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v4.1.0
+   changing: quay.io/k8scsi/csi-resizer:v1.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.0.0
+   changing: quay.io/k8scsi/csi-resizer:v1.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.1.0
 
 *
 * Complete

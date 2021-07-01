@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerScale CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/isilon/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-07-01T19:13:06+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Upgrade PowerScale CSI driver">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="210">
+<meta itemprop="dateModified" content="2021-07-01T19:13:06&#43;05:30" />
+<meta itemprop="wordCount" content="206">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -975,7 +975,7 @@
 <ul>
 <li>Delete the existing secret (isilon-creds and isilon-certs-0)</li>
 <li>Create new secrets (isilon-creds and isilon-certs-0)
-Refer Installation section <a href="./../../../installation/helm/isilon/#install-csi-driver-for-powerscale">here</a>.</li>
+Refer Installation section <a href="./../../../installation/helm/isilon/#install-the-driver">here</a>.</li>
 </ul>
 </li>
 <li>
@@ -993,9 +993,17 @@ Refer Installation section <a href="./../../../installation/helm/isilon/#install
 <p>To upgrade the driver from version 1.5.0 to 1.6.0:</p>
 <p>Note: It is highly recommended to take <em>Backup of existing storage class definition and volumesnapshot class definition, yaml files</em> before the upgrade.</p>
 <ol>
-<li>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a>.</li>
-<li>Execute <code>bash scripts/install.sh --upgrade</code>  . This command will install the latest version of the operator.
-Note: Starting with Dell CSI Operator version 1.4.0 and higher, the operator would install to the &lsquo;dell-csi-operator&rsquo; namespace by default.</li>
+<li>
+<p>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a>.</p>
+</li>
+<li>
+<p>Execute <code>bash scripts/install.sh --upgrade</code>  . This command will install the latest version of the operator.</p>
+</li>
+</ol>
+<blockquote>
+<p>Note: Dell CSI Operator version 1.4.0 and higher would install to the &lsquo;dell-csi-operator&rsquo; namespace by default.</p>
+</blockquote>
+<ol start="3">
 <li>To upgrade the driver, refer <a href="./../../../installation/operator/#update-csi-drivers">here</a>.</li>
 </ol>
 

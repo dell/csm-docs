@@ -13,11 +13,11 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax/" />
-<meta property="article:modified_time" content="2021-06-25T15:43:47+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-07-01T19:13:06+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing PowerMax CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-06-25T15:43:47&#43;05:30" />
+<meta itemprop="dateModified" content="2021-07-01T19:13:06&#43;05:30" />
 <meta itemprop="wordCount" content="2747">
 
 
@@ -95,7 +95,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1050,7 +1050,7 @@
 <li>Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell EMC PowerMax array.</li>
 <li>The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell EMC PowerMax array. All the port group names supplied to the driver must exist on each Dell EMC PowerMax with the same name.</li>
 </ul>
-<p>For information about configuring iSCSI, see <em>Dell EMC PowerMax documentation</em> on Dell EMC Support.</p>
+<p>For more information about configuring iSCSI, you can refer <a href="https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf">Dell EMC Host Connectivity guide</a>.</p>
 <h3 id="certificate-validation-for-unisphere-rest-api-calls">Certificate validation for Unisphere REST API calls</h3>
 <p>As part of the CSI driver installation, the CSI driver requires a secret with the name <em>powermax-certs</em> present in the namespace <em>powermax</em>. This secret contains the X509 certificates of the CA which signed the Unisphere SSL certificate in PEM format. This secret is mounted as a volume in the driver container. In earlier releases, if the install script did not find the secret, it created an empty secret with the same name. From the 1.2.0 release, the secret volume has been made optional. The install script no longer attempts to create an empty secret.</p>
 <p>The CSI driver exposes an install parameter <code>skipCertificateValidation</code> which determines if the driver performs client-side verification of the Unisphere certificates. The <code>skipCertificateValidation</code> parameter is set to <em>true</em> by default, and the driver does not verify the Unisphere certificates.</p>

@@ -12,11 +12,11 @@
 <meta property="og:description" content="Code features for PowerScale Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/features/powerscale/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-07-01T19:13:06+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Code features for PowerScale Driver">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="1940">
+<meta itemprop="dateModified" content="2021-07-01T19:13:06&#43;05:30" />
+<meta itemprop="wordCount" content="1937">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.766e950b695e6719c64f47bc3cb3df72.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5a70c79a06320326db5f92529e4d04eb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -988,8 +988,8 @@
 
 	       
 	<h2 id="multicluster-support">Multicluster support</h2>
-<p>You can connect a single CSI-PowerScale driver with multiple PowerScale clusters.
-Pre-Requisites:</p>
+<p>You can connect a single CSI-PowerScale driver with multiple PowerScale clusters.</p>
+<p><strong>Pre-Requisites:</strong></p>
 <ol>
 <li>Creation of secret.json or secret.yaml with credentials related to one or more Clusters.</li>
 <li>Creation of (at least) one Storage class for each cluster.</li>
@@ -1091,7 +1091,7 @@ kubectl create command.</p>
 </blockquote>
 <h3 id="volume-snapshot-class">Volume Snapshot Class</h3>
 <p>During the installation of CSI PowerScale driver version 1.6, no default Volume Snapshot Class will get created.</p>
-<p>Following are the manifests for the Volume Snapshot Class created during installation:</p>
+<p>Following are the manifests for the Volume Snapshot Class:</p>
 <ol>
 <li>VolumeSnapshotClass - v1</li>
 </ol>
@@ -1191,7 +1191,9 @@ kubectl create command.</p>
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>30Gi<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Updated size from 3Gi to 30Gi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>isilon-expand-sc<span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.</p>
+</span></code></pre></div><blockquote>
+<p>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.</p>
+</blockquote>
 <h2 id="volume-cloning-feature">Volume Cloning Feature</h2>
 <p>The CSI PowerScale driver version 1.3 and later supports volume cloning. This allows specifying existing PVCs in the <em>dataSource</em> field to indicate a user would like to clone a Volume.</p>
 <p>Source and destination PVC must be in the same namespace and have the same Storage Class.</p>
@@ -1236,7 +1238,7 @@ In case of a failure, one of the standby pods becomes active and takes the posit
 </blockquote>
 <p>If you are using the <code>dell-csi-operator</code>, adjust the following value in your Custom Resource manifest</p>
 <pre><code>replicas: 2  
-</code></pre><p>For more details about configuring Controller HA using the Dell CSI Operator, refer to the Dell CSI Operator documentation.</p>
+</code></pre><p>For more details about configuring Controller HA using the Dell CSI Operator, refer to the <a href="../../installation/operator/#custom-resource-specification">Dell CSI Operator documentation</a>.</p>
 <h2 id="ephemeral-inline-volume">Ephemeral Inline Volume</h2>
 <p>The CSI PowerScale driver version 1.4.0 and later supports CSI ephemeral inline volumes.</p>
 <p>This feature serves as use cases for data volumes whose content and lifecycle are tied to a pod. For example, a driver might populate a volume with dynamically created secrets that are specific to the application running in the pod. Such volumes need to be created together with a pod and can be deleted as part of pod termination (ephemeral). They get defined as part of the pod spec (inline).</p>
@@ -1268,11 +1270,11 @@ In case of a failure, one of the standby pods becomes active and takes the posit
 <p>This covers use cases where:</p>
 <p>The CSI PowerScale driver may not be installed or running on some nodes where Users have chosen to restrict the nodes on accessing the PowerScale storage array.</p>
 <p>We support CustomTopology which enables users to apply labels for nodes - &ldquo;csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com&rdquo; and expect the labels to be honored by the driver.</p>
-<p>When “enableCustomTopology” is set to “true”, the CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and use them to initialize node pod with custom PowerScale FQDN/IP.
-<strong>Note:</strong> Only a single cluster can be configured as part of secret.json for custom topology.</p>
+<p>When “enableCustomTopology” is set to “true”, the CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and use them to initialize node pod with custom PowerScale FQDN/IP.</p>
+<p><strong>Note:</strong> Only a single cluster can be configured as part of secret.json for custom topology.</p>
 <h3 id="topology-usage">Topology Usage</h3>
 <p>To utilize the Topology feature, create a custom <code>StorageClass</code> with <code>volumeBindingMode</code> set to <code>WaitForFirstConsumer</code> and specify the desired topology labels within <code>allowedTopologies</code> field of this custom storage class. This ensures that the Pod schedule takes advantage of the topology and the selected node has access to provisioned volumes.</p>
-<p>**Note: ** Whenever a new storage cluster is being added in secret, even though it is dynamic, the new storage cluster IP address-related label is not added to worker nodes dynamically. The user has to spin off (bounce) driver-related pods (controller and node pods) in order to apply newly added information to be reflected in worker nodes.</p>
+<p><strong>Note:</strong> Whenever a new storage cluster is being added in secret, even though it is dynamic, the new storage cluster IP address-related label is not added to worker nodes dynamically. The user has to spin off (bounce) driver-related pods (controller and node pods) in order to apply newly added information to be reflected in worker nodes.</p>
 <p><strong>Storage Class Example with Topology Support:</strong></p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#8f5902;font-style:italic"># This is a sample manifest for utilizing the topology feature and mount options.</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#8f5902;font-style:italic"># PVCs created using this storage class will be scheduled </span><span style="color:#f8f8f8;text-decoration:underline">
