@@ -102,60 +102,22 @@ metadata:
   namespace: test-unity
 spec:
   driver:
-    configVersion: v4
+    configVersion: v5
     replicas: 2
     common:
-      image: "dellemc/csi-unity:v1.5.0"
+      image: "dellemc/csi-unity:v1.6.0"
       imagePullPolicy: IfNotPresent
       envs:
       - name: X_CSI_UNITY_DEBUG
         value: "true"
       - name: X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS
         value: "false"
+      - name: X_CSI_MAX_VOLUMES_PER_NODE
+        value: "0"
     sideCars:
       - name: provisioner
-        args: ["--volume-name-prefix=csiunity"]
-    storageClass:
-    - name: virt2016****-fc
-      default: true
-      reclaimPolicy: "Delete"
-      allowVolumeExpansion: true
-      parameters:
-        storagePool: pool_1
-        arrayId: "VIRT2016****"
-        protocol: "FC"
-    - name: virt2017****-iscsi
-      reclaimPolicy: "Delete"
-      allowVolumeExpansion: true
-      parameters:
-        storagePool: pool_1
-        arrayId: "VIRT2017****"
-        protocol: "iSCSI"
-    - name: virt2017****-nfs
-      reclaimPolicy: "Delete"
-      allowVolumeExpansion: true
-      parameters:
-        storagePool: pool_1
-        arrayId: "VIRT2017****"
-        protocol: "NFS"
-        hostIoSize: "8192"
-        nasServer: nas_1
-    - name: virt2017****-iscsi-topology
-      reclaimPolicy: "Delete"
-      allowVolumeExpansion: true
-      volumeBindingMode: WaitForFirstConsumer
-      allowedTopologies:
-      - matchLabelExpressions:
-          - key: csi-unity.dellemc.com/virt2017****-iscsi
-            values:
-              - "true"
-      parameters:
-        storagePool: pool_1
-        arrayId: "VIRT2017****"
-        protocol: "iSCSI"
-    snapshotClass:
-      - name: test-snap
-        parameters:
-          retentionDuration: ""
+        args: ["--volume-name-prefix=csiunity","--default-fstype=ext4"]
+      - name: snapshotter
+        args: ["--snapshot-name-prefix=csiunitysnap"]
 ```
 

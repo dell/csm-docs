@@ -21,7 +21,7 @@ The `starttest.sh` script is located in the `csi-vxflexos/test/helm` directory. 
 **Steps**
 
 1. Navigate to the test/helm directory, which contains the `starttest.sh` and the _2vols_ directories. This directory contains a simple Helm chart that will deploy a pod that uses two PowerFlex volumes.
-*NOTE:* Helm tests are designed assuming users are using the default _storageclass_ names (_vxflexos_ and _vxflexos-xfs_). If your _storageclass_ names differ from the default values, such as when deploying with the Dell CSI Operator, please update the templates in 2vols accordingly (located in `test/helm/2vols/templates` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
+*NOTE:* Helm tests are designed assuming users are using the _storageclass_ names (_vxflexos_ and _vxflexos-xfs_). If your _storageclass_ names differ from these values, please update the templates in 2vols accordingly (located in `test/helm/2vols/templates` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
 2. Run `sh starttest.sh 2vols` to deploy the pod. You should see the following:
 ```
 Normal Pulled  38s kubelet, k8s113a-10-247-102-215.lss.emc.com Successfully pulled image "docker.io/centos:latest"
@@ -54,7 +54,7 @@ spec:
   storageClassName: vxflexos
 ```
 
-2. The _volumeMode: Filesystem_ requires a mounted file system, and the _resources.requests.storage_ of 8Gi requires an 8 GB file. In this case, the _storageClassName: vxflexos_ directs the system to use one of the pre-defined storage classes created by the CSI Driver for the Dell EMC PowerFlex installation process. This step yields a mounted _ext4_ file system. You can see the storage class definitions in the PowerFlex installation helm chart files _storageclass.yaml_ and _storageclass-xfs.yaml_.
+2. The _volumeMode: Filesystem_ requires a mounted file system, and the _resources.requests.storage_ of 8Gi requires an 8 GB file. In this case, the _storageClassName: vxflexos_ directs the system to use a storage class named _vxflexos_. This step yields a mounted _ext4_ file system. You can create the _vxflexos_ and _vxflexos-xfs_ storage classes by using the yamls located in helm/samples/storageclass.  
 3. If you compare _pvol0.yaml_ and _pvol1.yaml_, you will find that the latter uses a different storage class; _vxflexos-xfs_. This class gives you an _xfs_ file system.
 4. To see the volumes you created, run kubectl get persistentvolumeclaim –n helmtest-vxflexos and kubectl describe persistentvolumeclaim –n helmtest-vxflexos.
 *NOTE:* For more information about Kubernetes objects like _StatefulSet_ and _PersistentVolumeClaim_ see [Kubernetes documentation: Concepts](https://kubernetes.io/docs/concepts/).
@@ -66,8 +66,8 @@ Test the workflow for snapshot creation.
 **Steps**
 
 1. Start the _2vols_ container and leave it running.
-    - Helm tests are designed assuming users are using the default _storageclass_ names (_vxflexos_ and _vxflexos-xfs_). If your _storageclass_ names differ from the default values, such as when deploying with the Operator, update the templates in 2vols accordingly (located in `test/helm/2vols/templates` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
-    - Helm tests are designed assuming users are using the default _snapshotclass_ name. If your _snapshotclass_ names differ from the default values, update `betasnap1.yaml` and `betasnap2.yaml` accordingly.
+    - Helm tests are designed assuming users are using the  _storageclass_ names (_vxflexos_ and _vxflexos-xfs_). If your _storageclass_ names differ from these values, update the templates in 2vols accordingly (located in `test/helm/2vols/templates` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
+    - Helm tests are designed assuming users are using the _snapshotclass_ name: _vxflexos-snapclass_ If your _snapshotclass_ name differs from the default values, update `betasnap1.yaml` and `betasnap2.yaml` accordingly.
 2. Run `sh snaptest.sh` to start the test.
 
 This will create a snapshot of each of the volumes in the container using _VolumeSnapshot_ objects defined in `betasnap1.yaml` and `betasnap2.yaml`. The following are the contents of `betasnap1.yaml`:
@@ -84,7 +84,7 @@ spec:
     persistentVolumeClaimName: pvol0
 ```
 
-> *NOTE:* apiVersion in both betasnap yamls must match apiVersion in vxflexos-snapclass, if version in vxflexos-snapclass is v1, adjust apiVersion like so: `apiVersion: snapshot.storage.k8s.io/v1` in betasnap1.yaml and betasnap2.yaml 
+> *NOTE:* apiVersion in both betasnap yamls must match apiVersion in your VolumeSnapshotClass, if version in VolumeSnapshotClass is v1, adjust apiVersion like so: `apiVersion: snapshot.storage.k8s.io/v1` in betasnap1.yaml and betasnap2.yaml 
 
 **Results**
 
@@ -105,15 +105,15 @@ Ensure that you have stopped any previous test instance before performing this p
 
 **Steps**
 
-> *NOTE:* apiVersion in both betasnap yamls must match apiVersion in vxflexos-snapclass, if version in vxflexos-snapclass is v1, adjust apiVersion like so: `apiVersion: snapshot.storage.k8s.io/v1`
+> *NOTE:* apiVersion in both betasnap yamls must match apiVersion in your VolumeSnapshotClass, if version in vxflexos-snapclass is v1, adjust apiVersion like so: `apiVersion: snapshot.storage.k8s.io/v1`
 
 1. Run `sh snaprestoretest.sh` to start the test.
 
 This script deploys the _2vols_ example, creates a snap of _pvol0_, and then updates the deployed helm chart from the updated directory _2vols+restore_. This then adds an additional volume that is created from the snapshot.
 
 *NOTE:*
-- Helm tests are designed assuming users are using the default _storageclass_ names (_vxflexos_ and _vxflexos-xfs_). If your _storageclass_ names differ from the default values, such as when deploying with the Dell CSI Operator, update the templates for snap restore tests accordingly (located in `test/helm/2vols+restore/template` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
-- Helm tests are designed assuming users are using the default _snapshotclass_ name. If your _snapshotclass_ names differ from the default values, update `betasnap1.yaml` and `betasnap2.yaml` accordingly.
+- Helm tests are designed assuming users are using the _storageclass_ names (_vxflexos_ and _vxflexos-xfs_). If your _storageclass_ names differ from these values, update the templates for snap restore tests accordingly (located in `test/helm/2vols+restore/template` directory). You can use `kubectl get sc` to check for the _storageclass_ names.
+- Helm tests are designed assuming users are using the _snapshotclass_ name: _vxflexos-snapclass_ If your _snapshotclass_ name differs from the default values, update `betasnap1.yaml` and `betasnap2.yaml` accordingly.
 
 **Results**
 

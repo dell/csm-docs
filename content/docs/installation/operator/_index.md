@@ -11,7 +11,7 @@ The Dell CSI Operator is a Kubernetes Operator, which can be used to install and
 
 ## Installation
 Dell CSI Operator has been tested and qualified with 
-- Upstream Kubernetes or OpenShift (see [supported versions](../../dell-csi-driver/))
+- Upstream Kubernetes or OpenShift (see [supported versions](../../dell-csi-driver/#features-and-capabilities))
 
 #### Before you begin
 If you have installed an old version of the `dell-csi-operator` which was available with the name _CSI Operator_, please refer to this [section](#replacing-csi-operator-with-dell-csi-operator) before continuing.
@@ -68,7 +68,7 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
 1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator). 
 2. Run `bash scripts/install.sh` to install the operator.
->NOTE: Starting with Dell CSI Operator v1.4.0 and higher, the operator would install to the 'dell-csi-operator' namespace by default.
+>NOTE: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
 Any existing installations of Dell CSI Operator (v1.2.0 or later) installed using `install.sh` to the 'default' or 'dell-csi-operator' namespace can be upgraded to the new version by running `install.sh --upgrade`.
 
 {{< imgproc non-olm-1.jpg Resize "2500x" >}}{{< /imgproc >}}
@@ -361,4 +361,5 @@ You should not provide any `StorageClass` or `VolumeSnapshotClass` details durin
 
 **NOTE:** For more information on pre-requisites and parameters, please refer to the sub-pages below for each driver.
 
-**NOTE:** Starting with Dell CSI Operator v1.4.0 and higher, Storage Classes and Volume Snapshot Classes would no longer be created during the installation of the driver via an operator.
+**NOTE:** Storage Classes and Volume Snapshot Classes would no longer be created during the installation of the driver via an operator from v1.4.0 and higher.
+

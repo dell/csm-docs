@@ -19,7 +19,7 @@ The node section of the Helm chart installs the following component in a _Daemon
 ## Prerequisites
 
 The following are requirements to be met before installing the CSI Driver for Dell EMC PowerScale:
-- Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/))
+- Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/#features-and-capabilities))
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
@@ -225,7 +225,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 ## Volume Snapshot Class
 
-Starting CSI PowerMax v1.7, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _helm/samples/_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
+Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _helm/samples/_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
 ### What happens to my existing Volume Snapshot Classes?
 *Upgrading from CSI PowerScale v1.5 driver*

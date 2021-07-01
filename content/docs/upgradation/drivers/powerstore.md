@@ -34,6 +34,6 @@ You can upgrade the CSI Driver for Dell EMC PowerStore using Helm or Dell CSI Op
 
 2. Execute `bash scripts/install.sh --upgrade`
 This command will install the latest version of the operator.
->Note: Starting with Dell CSI Operator v1.4.0 and higher, the operator would install to the 'dell-csi-operator' namespace by default.
+>Note: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
 
 3. To upgrade the drive, refer [here](./../../../installation/operator/#update-csi-drivers).

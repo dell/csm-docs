@@ -9,7 +9,7 @@ The installation process for the drivers on such clusters remains the same as th
 
 On MKE-based clusters, kubectl may not be installed by default, it is important that kubectl is installed prior to the installation of the driver.
 
-The worker nodes on MKE-backed clusters may run any of the OSs which we support with upstream clusters.
+The worker nodes on MKE-backed clusters may run any of the OS which we support with upstream clusters.
 
 ## MKE UI Examples
 
