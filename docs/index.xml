@@ -3853,6 +3853,10 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;td&gt;ISI_PRIV_NS_IFS_ACCESS&lt;/td&gt;
 &lt;td&gt;Read Only&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ISI_PRIV_IFS_BACKUP&lt;/td&gt;
+&lt;td&gt;Read Only&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/li&gt;
