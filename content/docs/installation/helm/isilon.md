@@ -147,6 +147,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | ISI_PRIV_SNAPSHOT | Read Write |
    | ISI_PRIV_IFS_RESTORE | Read Only |
    | ISI_PRIV_NS_IFS_ACCESS | Read Only |
+   | ISI_PRIV_IFS_BACKUP | Read Only |
 
 If user creates secret.json, then after editing the file, run the following command to create a secret called 'isilon-creds'
     <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json`  
