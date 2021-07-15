@@ -34,11 +34,11 @@ The following are the drivers provided for the Dell storage family:
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
 | SLES          |        no        |        15SP2        |       15SP2      |         15SP2     |       15SP2      |
 | Fedora Core OS|        no        |         5.x       |        no        |         no        |        no        |
-| OpenShift     | 4.6, 4.6 EUS, 4.7|       4.6, 4.6 EUS, 4.7      |    4.6, 4.6 EUS, 4.7     |   4.6, 4.6 EUS, 4.7   |  4.6, 4.6 EUS, 4.7 |
-| MKE      |       3.4.0      |        3.4.0        |       3.4.0      |        3.4.0      |        3.4.0     |
+| Red Hat OpenShift     | 4.6, 4.6 EUS, 4.7|       4.6, 4.6 EUS, 4.7      |    4.6, 4.6 EUS, 4.7     |   4.6, 4.6 EUS, 4.7   |  4.6, 4.6 EUS, 4.7 |
+| Mirantis Kubernetes Engine      |       3.4.0      |        3.4.0        |       3.4.0      |        3.4.0      |        3.4.0     |
 | Google Anthos |        1.6       |          1.6        |        no        |         no        |        1.7       |
 | VMware Tanzu  |        no        |          no         |        yes       |         yes       |       no         |
-| RKE           |        no        |          yes         |        yes       |         no       |       no         |
+| Rancher Kubernetes Engine           |        no        |          yes         |        yes       |         no       |       no         |
 {{</table>}}
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
