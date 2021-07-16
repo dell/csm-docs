@@ -450,3 +450,27 @@ Similarly, users can define the tolerations based on various conditions like mem
 ## Dynamic log level change
 
 Log levels (debug, info, error, warning) were controlled only in my-isilon-settings.yaml which required restarting of csi-driver. Now the control has been transferred to secret definition (secret.json or secret.yaml). Changing the Log level in secret dynamically changes the log levels in controller and node logs.
+
+## Usage of SmartQuotas to Limit Storage Consumption
+
+CSI driver for Dell EMC Isilon handles capacity limiting using SmartQuotas feature.
+
+To use the SmartQuotas feature user can specify the boolean value 'enableQuota' in myvalues.yaml or my-isilon-settings.yaml.
+
+Let us assume the user creates a PVC with 3 Gi of storage and 'SmartQuotas' have already been enabled in PowerScale Cluster.
+
+- When 'enableQuota' is set to 'true'
+    - The driver sets the hard limit of the PVC to 3Gi.
+    - The user adds data of 2Gi to the above said PVC (by logging into POD). It works as expected.
+    - The user tries to add 2Gi more data.
+    - Driver doesn't allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.
+    - The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.
+    - User retries adding 2Gi more data (which has been errored out previously).
+    - The driver accepts the data.
+    
+- When 'enableQuota' is set to 'false'
+    - Driver doesn't set any hard limit against the PVC created.
+    - The user adds data of 2Gi to the above said PVC, which is having the size 3Gi (by logging into POD). It works as expected.
+    - The user tries to add 2Gi more data. Now the total size of data is 4Gi.
+    - Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)
+    - The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.
