@@ -3487,6 +3487,34 @@ has workloads scheduled, there is a possibility that it might lead to backward c
 &lt;p&gt;Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations&#34;&gt;https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations&lt;/a&gt; for more information.&lt;/p&gt;
 &lt;h2 id=&#34;dynamic-log-level-change&#34;&gt;Dynamic log level change&lt;/h2&gt;
 &lt;p&gt;Log levels (debug, info, error, warning) were controlled only in my-isilon-settings.yaml which required restarting of csi-driver. Now the control has been transferred to secret definition (secret.json or secret.yaml). Changing the Log level in secret dynamically changes the log levels in controller and node logs.&lt;/p&gt;
+&lt;h2 id=&#34;usage-of-smartquotas-to-limit-storage-consumption&#34;&gt;Usage of SmartQuotas to Limit Storage Consumption&lt;/h2&gt;
+&lt;p&gt;CSI driver for Dell EMC Isilon handles capacity limiting using SmartQuotas feature.&lt;/p&gt;
+&lt;p&gt;To use the SmartQuotas feature user can specify the boolean value &amp;lsquo;enableQuota&amp;rsquo; in myvalues.yaml or my-isilon-settings.yaml.&lt;/p&gt;
+&lt;p&gt;Let us assume the user creates a PVC with 3 Gi of storage and &amp;lsquo;SmartQuotas&amp;rsquo; have already been enabled in PowerScale Cluster.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;When &amp;lsquo;enableQuota&amp;rsquo; is set to &amp;lsquo;true&amp;rsquo;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The driver sets the hard limit of the PVC to 3Gi.&lt;/li&gt;
+&lt;li&gt;The user adds data of 2Gi to the above said PVC (by logging into POD). It works as expected.&lt;/li&gt;
+&lt;li&gt;The user tries to add 2Gi more data.&lt;/li&gt;
+&lt;li&gt;Driver doesn&amp;rsquo;t allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.&lt;/li&gt;
+&lt;li&gt;The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.&lt;/li&gt;
+&lt;li&gt;User retries adding 2Gi more data (which has been errored out previously).&lt;/li&gt;
+&lt;li&gt;The driver accepts the data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When &amp;lsquo;enableQuota&amp;rsquo; is set to &amp;lsquo;false&amp;rsquo;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Driver doesn&amp;rsquo;t set any hard limit against the PVC created.&lt;/li&gt;
+&lt;li&gt;The user adds data of 2Gi to the above said PVC, which is having the size 3Gi (by logging into POD). It works as expected.&lt;/li&gt;
+&lt;li&gt;The user tries to add 2Gi more data. Now the total size of data is 4Gi.&lt;/li&gt;
+&lt;li&gt;Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)&lt;/li&gt;
+&lt;li&gt;The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>

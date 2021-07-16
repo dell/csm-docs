@@ -12,11 +12,11 @@
 <meta property="og:description" content="Code features for PowerScale Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/storage-plugin-docs/docs/features/powerscale/" />
-<meta property="article:modified_time" content="2021-07-01T19:13:06+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-07-16T11:52:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Code features for PowerScale Driver">
-<meta itemprop="dateModified" content="2021-07-01T19:13:06&#43;05:30" />
-<meta itemprop="wordCount" content="1937">
+<meta itemprop="dateModified" content="2021-07-16T11:52:03&#43;05:30" />
+<meta itemprop="wordCount" content="2199">
 
 
 
@@ -92,7 +92,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7172dbe00f04f9da30ab01d0bf07f805.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5d133afd40f40089f89b14536b87c5d3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.7172dbe00f04f9da30ab01d0bf07f805.json"
+  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5d133afd40f40089f89b14536b87c5d3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -937,6 +937,7 @@
     <li><a href="#volume-limit">Volume Limit</a></li>
     <li><a href="#node-selector-in-helm-template">Node selector in helm template</a></li>
     <li><a href="#dynamic-log-level-change">Dynamic log level change</a></li>
+    <li><a href="#usage-of-smartquotas-to-limit-storage-consumption">Usage of SmartQuotas to Limit Storage Consumption</a></li>
   </ul>
 </nav>
 
@@ -1338,6 +1339,34 @@ has workloads scheduled, there is a possibility that it might lead to backward c
 <p>Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations">https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations</a> for more information.</p>
 <h2 id="dynamic-log-level-change">Dynamic log level change</h2>
 <p>Log levels (debug, info, error, warning) were controlled only in my-isilon-settings.yaml which required restarting of csi-driver. Now the control has been transferred to secret definition (secret.json or secret.yaml). Changing the Log level in secret dynamically changes the log levels in controller and node logs.</p>
+<h2 id="usage-of-smartquotas-to-limit-storage-consumption">Usage of SmartQuotas to Limit Storage Consumption</h2>
+<p>CSI driver for Dell EMC Isilon handles capacity limiting using SmartQuotas feature.</p>
+<p>To use the SmartQuotas feature user can specify the boolean value &lsquo;enableQuota&rsquo; in myvalues.yaml or my-isilon-settings.yaml.</p>
+<p>Let us assume the user creates a PVC with 3 Gi of storage and &lsquo;SmartQuotas&rsquo; have already been enabled in PowerScale Cluster.</p>
+<ul>
+<li>
+<p>When &lsquo;enableQuota&rsquo; is set to &lsquo;true&rsquo;</p>
+<ul>
+<li>The driver sets the hard limit of the PVC to 3Gi.</li>
+<li>The user adds data of 2Gi to the above said PVC (by logging into POD). It works as expected.</li>
+<li>The user tries to add 2Gi more data.</li>
+<li>Driver doesn&rsquo;t allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.</li>
+<li>The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.</li>
+<li>User retries adding 2Gi more data (which has been errored out previously).</li>
+<li>The driver accepts the data.</li>
+</ul>
+</li>
+<li>
+<p>When &lsquo;enableQuota&rsquo; is set to &lsquo;false&rsquo;</p>
+<ul>
+<li>Driver doesn&rsquo;t set any hard limit against the PVC created.</li>
+<li>The user adds data of 2Gi to the above said PVC, which is having the size 3Gi (by logging into POD). It works as expected.</li>
+<li>The user tries to add 2Gi more data. Now the total size of data is 4Gi.</li>
+<li>Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)</li>
+<li>The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.</li>
+</ul>
+</li>
+</ul>
 
 	
 	
