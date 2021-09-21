@@ -6,46 +6,49 @@ Description: Code features for PowerMax Driver
 
 ## Volume Snapshot Feature
 
-The CSI PowerMax driver supports beta snapshots. Driver versions prior to version 1.4 supported alpha snapshots.
 
-The Volume Snapshots feature in Kubernetes has moved to beta in Kubernetes version 1.17. It was an alpha feature in earlier releases (1.13 onwards). The snapshot API version has changed from v1alpha1 to v1beta1 with this migration.
+The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes version 1.17 and was generally available (v1) in Kubernetes version 1.20.
+
+The CSI PowerMax driver version 1.6 supports v1beta1 snapshots on Kubernetes 1.18/1.19 and v1 snapshots on Kubernetes 1.20.
 
 In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
-- Kubernetes Volume Snaphshot CRDs
+- Kubernetes Volume Snapshot CRDs
 - Volume Snapshot Controller
 
 ### Volume Snapshot Class
 
-Starting CSI PowerMax 1.4 driver, a Volume Snapshot Class is created using the new v1beta1 snapshot APIs. This is the only Volume Snapshot Class you will need and there is no need to create any other Volume Snapshot Class. 
+During the installation of the CSI PowerMax 1.6 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class you will need and there is no need to create any other Volume Snapshot Class. 
 
-Following is the manifest for the Volume Snapshot Class created during installation (using the default driver name):
+The following is the manifest for the Volume Snapshot Class created during installation (using the default driver name):   
 ```
-apiVersion: snapshot.storage.k8s.io/v1beta1
+apiVersion: snapshot.storage.k8s.io/v1
 deletionPolicy: Delete
 kind: VolumeSnapshotClass
 metadata:
   name: powermax-snapclass
 driver: csi-powermax.dellemc.com
-```
-### Creating Volume Snapshots
 
-The following is a sample manifest for creating a Volume Snapshot using the **v1beta1** snapshot APIs:
-```
-apiVersion: snapshot.storage.k8s.io/v1beta1
+```  
+*Note*: The apiVersion for VolumeSnapshotClass object created on clusters running Kubernetes versions < 1.20 will be v1beta1  
+
+### Creating Volume Snapshots
+The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs:
+```yaml
+apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
-  name: pmax-snapshot-demo
-  namespace: test
+  name: pvol0-snap1
 spec:
   volumeSnapshotClassName: powermax-snapclass
   source:
-    persistentVolumeClaimName: pmax-pvc-demo
+    persistentVolumeClaimName: pvol0
+
 ```
 
-Once the VolumeSnapshot has been successfully created by the CSI PowerMax driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.
+After the VolumeSnapshot has been successfully created by the CSI PowerMax driver, a VolumeSnapshotContent object is automatically created. When the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.
 
-Following is the relevant section of VolumeSnapshot object status:
-```
+The following is the relevant section of VolumeSnapshot object status:
+```yaml
 status:
   boundVolumeSnapshotContentName: snapcontent-5a8334d2-eb40-4917-83a2-98f238c4bda
   creationTime: "2020-07-16T08:42:12Z"
@@ -55,7 +58,7 @@ status:
 ### Creating PVCs with VolumeSnapshots as Source
 
 The following is a sample manifest for creating a PVC with a VolumeSnapshot as a source:
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -77,7 +80,7 @@ spec:
 ### Creating PVCs with PVCs as source
 
 This is a sample manifest for creating a PVC with another PVC as a source:
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -116,9 +119,9 @@ Where <host IQN> is the name of the iSCSI initiator of a host IQN, and <CHAP sec
 
 With unidirectional CHAP, the PowerMax array challenges the host initiator during the initial link negotiation process and expects to receive a valid credential and CHAP secret in response.
 
-When challenged, the host initiator transmits a CHAP credential and CHAP secret to the storage array. The storage array looks for this credential and CHAP secret which stored in the host initiator initiator group. When a positive authentication occurs, the PowerMax array sends an acceptance message to the host. However, if the PowerMax array fails to find any record of the credential/secret pair, it sends a rejection message, and the link is closed.
+When challenged, the host initiator transmits a CHAP credential and CHAP secret to the storage array. The storage array looks for this credential and CHAP secret which stored in the host initiator group. When a positive authentication occurs, the PowerMax array sends an acceptance message to the host. However, if the PowerMax array fails to find any record of the credential/secret pair, it sends a rejection message, and the link is closed.
 
-## Custom Driver Name (Experimental feature)
+## Custom Driver Name (experimental feature)
 
 With version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell EMC PowerMax in the same Kubernetes/OpenShift cluster.
 
@@ -156,7 +159,7 @@ To install multiple CSI drivers, follow these steps:
 
 ## Volume expansion
 
-Starting with v1.4, the CSI PowerMax driver supports expansion of Persistent Volumes (PVs). This expansion is done online, that is, when the PVC is attached to any node.
+Starting in v1.4, the CSI PowerMax driver supports expansion of Persistent Volumes (PVs). This expansion is done online, that is, when the PVC is attached to any node.
 
 To use this feature, the storage class that is used to create the PVC must have the attribute `allowVolumeExpansion` set to `true`. The storage classes created during the installation (both using Helm or dell-csi-operator) have the `allowVolumeExpansion` set to `true` by default.
 
@@ -164,7 +167,7 @@ If you are creating more storage classes, ensure that this attribute is set to `
 
 This is a sample manifest for a storage class which allows for Volume Expansion.
 
-```
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -181,9 +184,9 @@ parameters:
   ServiceLevel: "Bronze"
 ```
 
-To resize a PVC, edit the existing PVC spec and set `spec.resources.requests.storage` to the intended size. For example, if you have a PVC - pmax-pvc-demo of size 5Gi, then you can resize it to 10 Gi by updating the PVC.
+To resize a PVC, edit the existing PVC spec and set `spec.resources.requests.storage` to the intended size. For example, if you have a PVC - pmax-pvc-demo of size 5 Gi, then you can resize it to 10 Gi by updating the PVC.
 
-```
+```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -202,11 +205,11 @@ spec:
 
 ## Raw block support
 
-Starting v1.4, CSI PowerMax driver supports raw block volumes.
+Starting in v1.4, CSI PowerMax driver supports raw block volumes.
 
 Raw Block volumes are created using the volumeDevices list in the Pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. An example configuration is outlined here:
 
-```
+```yaml
 kind: StatefulSet
 apiVersion: apps/v1
 metadata:
@@ -265,7 +268,7 @@ The certificate and key are provided to the proxy via a Kubernetes TLS secret (i
 
 Here is an example to generate a private key and use that to sign an SSL certificate using the openssl tool:
 
-```
+```bash
 openssl genrsa -out tls.key 2048
 openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
 kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
@@ -297,39 +300,39 @@ For example, if `nodeNameTemplate` is _abc-%foo%-hostname_ and nodename is _work
 
 ## Controller HA
 
-Starting with version 1.5, the CSI PowerMax driver supports running multiple replicas of controller pod. At any time, only one controller pod is active(leader), and the rest are on standby. In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`. Additionally by leveraging `pod anti-affinity`, no two controller pods are ever scheduled on the same node.
+Starting with version 1.5, the CSI PowerMax driver supports running multiple replicas of controller Pod. At any time, only one controller Pod is active(leader), and the rest are on standby. In case of a failure, one of the standby Pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`. Additionally by leveraging `pod anti-affinity`, no two controller Pods are ever scheduled on the same node.
 
-To increase or decrease the number of controller pods, edit the following value in `values.yaml` file:
+To increase or decrease the number of controller Pods, edit the following value in `values.yaml` file:
 ```
 controllerCount: 2
 ```  
-> *NOTE:* The default value for controllerCount is 2. We recommend to not change this unless really required.
-> Also, if controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in Pending state  
+> *NOTE:* The default value for controllerCount is 2. We recommend not changing this unless it is really necessary.
+> Also, if the controller count is greater than the number of available nodes (where the Pods can be scheduled), some controller Pods will remain in the Pending state  
    
-If you're using the `dell-csi-operator`, adjust the following value in your Custom Resource manifest
+If you are using the `dell-csi-operator`, adjust the following value in your Custom Resource manifest
 ```  
 replicas: 2  
 ```
 
-For more details about configuring Controller HA using the Dell CSI Operator, please refer to the Dell CSI Operator documentation.
+For more details about configuring Controller HA using the Dell CSI Operator, see the Dell CSI Operator documentation.
 
 ## NodeSelectors and Tolerations
 
-Starting with version 1.5, the CSI PowerMax driver helm installer allows you to specify a set of `nodeSelectors` and `tolerations` which can be applied on the driver controller `Deployment` & driver node `Daemonset`. There are two new sections in the `values` file - `controller` & `node` - where you can specify these values separately for the controller and node pods. 
+Starting with version 1.5, the CSI PowerMax driver helm installer allows you to specify a set of `nodeSelectors` and `tolerations` which can be applied on the driver controller `Deployment` and driver node `Daemonset`. There are two new sections in the `values` file - `controller` and `node` - where you can specify these values separately for the controller and node Pods. 
 
 ### controller
 
-If you want to apply `nodeSelectors` & `tolerations` for the controller pods, edit the  `controller` section in the `values` file.  
+If you want to apply `nodeSelectors` and `tolerations` for the controller Pods, edit the  `controller` section in the `values` file.  
 
 Here are some examples:   
-* To schedule controller pods to worker nodes only (Default):
-```
+* To schedule controller Pods to worker nodes only (Default):
+```yaml
 controller:
   nodeSelector:
   tolerations:
 ```  
-* Set the following values for controller pods to tolerate the taint `NoSchedule` on master nodes:
-```
+* Set the following values for controller Pods to tolerate the taint `NoSchedule` on master nodes:
+```yaml
 controller:
   nodeSelector:
   tolerations:
@@ -338,7 +341,7 @@ controller:
      effect: "NoSchedule"
 ```  
 * Set the following values for controller pods to be only scheduled on nodes labelled as `master` (*node-role.kubernetes.io/master*):
-```  
+```yaml
 controller:
   nodeSelector:
      node-role.kubernetes.io/master: ""
@@ -348,13 +351,13 @@ controller:
      effect: "NoSchedule"
 ```
 ### node
-If you want to apply `nodeSelectors` & `tolerations` for the node pods, edit the  `node` section in the `values` file.  
-The `values` file already includes a set of default `tolerations` and you can add/remove tolerations to this list
+If you want to apply `nodeSelectors` and `tolerations` for the node Pods, edit the  `node` section in the `values` file.  
+The `values` file already includes a set of default `tolerations` and you can add and remove tolerations to this list
 
-```  
+```yaml
 # "node" allows to configure node specific parameters
 node:
-  # "node.nodeSelector" defines what nodes would be selected for pods of node daemonset
+  # "node.nodeSelector" defines what nodes would be selected for Pods of node daemonset
   # Leave as blank to use all nodes
   nodeSelector:
   #   node-role.kubernetes.io/master: ""
@@ -376,9 +379,9 @@ node:
 
 ## Topology Support
 
-Starting from version 1.5, the CSI PowerMax driver supports Topology aware Volume Provisioning which helps Kubernetes scheduler place PVCs on worker nodes which have access to backend storage. When used in conjunction with `nodeSelectors` which can be specified for the driver node pods, it provides an effective way to provision applications on nodes which have access to the PowerMax array.
+Starting from version 1.5, the CSI PowerMax driver supports topology-aware volume provisioning which helps Kubernetes scheduler place PVCs on worker nodes which have access to backend storage. When used with `nodeSelectors` which can be specified for the driver node Pods, it provides an effective way to provision applications on nodes which have access to the PowerMax array.
 
-After a successful installation of the driver, if a node pod is running successfully on a worker node, the following topology keys are created for a specific PowerMax array:
+After a successful installation of the driver, if a node Pod is running successfully on a worker node, the following topology keys are created for a specific PowerMax array:
 * `csi-powermax.dellemc.com/\<array-id\>`
 * If the worker node has Fibre Channel connectivity to the PowerMax array -
 `csi-powermax.dellemc.com/\<array-id\>.fc`
@@ -387,15 +390,15 @@ After a successful installation of the driver, if a node pod is running successf
 
 The values for all these keys are always set to the name of the provisioner which is usually `csi-powermax.dellemc.com`.
 
-> *NOTE:* The Topology support does not include any customer defined topology i.e. users cannot create their own labels for nodes and storage classes and expect the labels to be honored by the driver.
+> *NOTE:* The Topology support does not include any customer-defined topology, that is, users cannot create their own labels for nodes and storage classes and expect the labels to be honored by the driver.
 
 ### Topology Usage
-In order to utilize the Topology feature, the storage classes must be modified as follows:  
+To use the Topology feature, the storage classes must be modified as follows:  
 * _volumeBindingMode_ must be set to `WaitForFirstConsumer`
 * _allowedTopologies_ should be set to one or more topology keys described in the previous section
 
-For e.g. - A PVC created using the following storage class will **always** be scheduled on nodes which have FC connectivity to the PowerMax array `000000000001`
-```
+For example, a PVC created using the following storage class will **always** be scheduled on nodes which have FC connectivity to the PowerMax array `000000000001`
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -422,7 +425,7 @@ In the above example if you remove the entry for the key `csi-powermax.dellemc.c
 on any worker node with access to the PowerMax array `000000000001` irrespective of the transport protocol
 
 > *NOTE:* The storage classes created during the driver installation (via Helm) do not contain any topology keys and have the volumeBindingMode set to Immediate. A set of sample storage class definitions to enable topology
-> aware volume provisioning has been provided in the `csi-powermax/helm/samples/storageclass` folder 
+>-aware volume provisioning has been provided in the `csi-powermax/helm/samples/storageclass` folder 
 
 For additional information on how to use _Topology aware Volume Provisioning_, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 

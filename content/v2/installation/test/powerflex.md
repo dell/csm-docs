@@ -38,7 +38,7 @@ Normal Started 38s kubelet, k8s113a-10-247-102-215.lss.emc.com Started container
 
 An outline of this workflow is described below:
 1. The _2vols_ helm chart contains two PersistentVolumeClaim definitions, one in `pvc0.yaml` , and the other in `pvc1.yaml`. They are referenced by the `test.yaml` which creates the pod. The contents of the `Pvc0.yaml` file are described below:
-```
+```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -53,6 +53,7 @@ spec:
       storage: 8Gi
   storageClassName: vxflexos
 ```
+
 2. The _volumeMode: Filesystem_ requires a mounted file system, and the _resources.requests.storage_ of 8Gi requires an 8 GB file. In this case, the _storageClassName: vxflexos_ directs the system to use one of the pre-defined storage classes created by the CSI Driver for Dell EMC PowerFlex installation process. This step yields a mounted _ext4_ file system. You can see the storage class definitions in the PowerFlex installation helm chart files _storageclass.yaml_ and _storageclass-xfs.yaml_.
 3. If you compare _pvol0.yaml_ and _pvol1.yaml_ , you will find that the latter uses a different storage class; _vxflexos-xfs_. This class gives you an _xfs_ file system.
 4. To see the volumes you created, run kubectl get persistentvolumeclaim –n helmtest-vxflexos and kubectl describe persistentvolumeclaim –n helmtest-vxflexos.
@@ -71,7 +72,7 @@ Test the workflow for snapshot creation.
 
 This will create a snapshot of each of the volumes in the container using _VolumeSnapshot_ objects defined in `snap1.yaml` and `snap2.yaml`. The following are the contents of `snap1.yaml`:
 
-```
+```yaml
 apiVersion: snapshot.storage.k8s.io/v1alpha1
 kind: VolumeSnapshot
 metadata:
@@ -116,7 +117,7 @@ An outline of this workflow is described below:
 1. The snapshot is taken using `snap1.yaml`.
 2. _Helm_ is called to upgrade the deployment with a new definition, which is found in the _2vols+restore_ directory. The `csi-vxflexos/test/helm/2vols+restore/templates` directory contains the newly created `createFromSnap.yaml` file. The script then creates a _PersistentVolumeClaim_ , which is a volume that is dynamically created from the snapshot. Then the helm deployment is upgraded to contain the newly created third volume. In other words, when the `snaprestoretest.sh` creates a new volume with data from the snapshot, the restore operation is tested. The contents of the `createFromSnap.yaml` are described below:
 
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
