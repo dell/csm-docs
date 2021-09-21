@@ -163,7 +163,7 @@ enable = false
         desc = "Development takes place here!"
 [[params.links.developer]]
 	name = "Slack"
-	url = "https://dellcustomer.slack.com/archives/C01CY517PU4"
+	url = "http://del.ly/Slack_request"
 	icon = "fab fa-slack"
         desc = "Chat with other project developers"
 #[[params.links.developer]]
