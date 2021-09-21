@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – Blog</title>
-    <link>https://dell.github.io/storage-plugin-docs/blog/</link>
+    <link>https://dell.github.io/csm-docs/blog/</link>
     <description>Recent content in Blog on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://dell.github.io/storage-plugin-docs/blog/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/csm-docs/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: Google Anthos announcements</title>
-      <link>https://dell.github.io/storage-plugin-docs/blog/2020/10/30/google-anthos-announcements/</link>
+      <link>https://dell.github.io/csm-docs/blog/2020/10/30/google-anthos-announcements/</link>
       <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/blog/2020/10/30/google-anthos-announcements/</guid>
+      <guid>https://dell.github.io/csm-docs/blog/2020/10/30/google-anthos-announcements/</guid>
       <description>
         
         
@@ -59,14 +59,14 @@
 &lt;p&gt;Thanks to the CSI driver can take full advantage of your Fiber Channel infrastructure and PowerMax end-to-end NVMe capability on Anthos bare metal. That type of architecture fits well with IO intensive workload and business critical application, often tight to transactional data.&lt;/p&gt;
 &lt;p&gt;Checkout the installation process in video:&lt;/p&gt;
 &lt;video controls preload=&#39;metadata&#39; width=&#34;800&#34; height=&#34;auto&#34; onclick=&#39;(function(el){ if(el.paused) el.play(); else el.pause() })(this)&#39;&gt;
-  &lt;source src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/videos/anthos-bm-0.6-powermax.mp4&#34; type=&#39;video/mp4; codecs=&#34;avc1.42E01E, mp4a.40.2&#34;&#39;&gt;
+  &lt;source src=&#34;https://dell.github.io/csm-docs/csm-docs/videos/anthos-bm-0.6-powermax.mp4&#34; type=&#39;video/mp4; codecs=&#34;avc1.42E01E, mp4a.40.2&#34;&#39;&gt;
 &lt;/video&gt;
 
 &lt;h2 id=&#34;powerstore&#34;&gt;PowerStore&lt;/h2&gt;
 &lt;p&gt;The save level of service is given to PowerStore with a full support for Anthos bare metal.&lt;/p&gt;
 &lt;p&gt;Checkout the installation process in video:&lt;/p&gt;
 &lt;video controls preload=&#39;metadata&#39; width=&#34;800&#34; height=&#34;auto&#34; onclick=&#39;(function(el){ if(el.paused) el.play(); else el.pause() })(this)&#39;&gt;
-  &lt;source src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/videos/anthos-bm-0.6-powerstore.mp4&#34; type=&#39;video/mp4; codecs=&#34;avc1.42E01E, mp4a.40.2&#34;&#39;&gt;
+  &lt;source src=&#34;https://dell.github.io/csm-docs/csm-docs/videos/anthos-bm-0.6-powerstore.mp4&#34; type=&#39;video/mp4; codecs=&#34;avc1.42E01E, mp4a.40.2&#34;&#39;&gt;
 &lt;/video&gt;
 
 &lt;h2 id=&#34;asdf-bmctlhttpsgithubcomcoulofasdf-bmctl&#34;&gt;&lt;a href=&#34;https://github.com/coulof/asdf-bmctl&#34;&gt;asdf-bmctl&lt;/a&gt;&lt;/h2&gt;
@@ -88,10 +88,10 @@
     
     <item>
       <title>Blog: CSI drivers Volume expansion and beta Snapshot support update !</title>
-      <link>https://dell.github.io/storage-plugin-docs/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</link>
+      <link>https://dell.github.io/csm-docs/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</link>
       <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</guid>
+      <guid>https://dell.github.io/csm-docs/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</guid>
       <description>
         
         
@@ -208,10 +208,10 @@ The version 1.1 is not  available yet in &lt;a href=&#34;https://operatorhub.io/
     
     <item>
       <title>Blog: June 2020 Dell storage enablers big update !</title>
-      <link>https://dell.github.io/storage-plugin-docs/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</link>
+      <link>https://dell.github.io/csm-docs/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</link>
       <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</guid>
+      <guid>https://dell.github.io/csm-docs/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</guid>
       <description>
         
         
@@ -254,10 +254,10 @@ The version 1.1 is not  available yet in &lt;a href=&#34;https://operatorhub.io/
     
     <item>
       <title>Blog: Anthos 1.3 Qualification for PowerMax</title>
-      <link>https://dell.github.io/storage-plugin-docs/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</link>
+      <link>https://dell.github.io/csm-docs/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</link>
       <pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</guid>
+      <guid>https://dell.github.io/csm-docs/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</guid>
       <description>
         
         

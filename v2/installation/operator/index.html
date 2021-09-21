@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.72.0" /><link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/storage-plugin-docs/v2/installation/operator/index.xml">
+<meta name="generator" content="Hugo 0.72.0" /><link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v2/installation/operator/index.xml">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
-<link rel="icon" type="image/png" href="/storage-plugin-docs/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 
 <title>Dell CSI Operator Installation Process | Dell Technologies</title><meta property="og:title" content="Dell CSI Operator Installation Process" />
 <meta property="og:description" content="Installation of Dell EMC CSI drivers using Dell CSI Operator
 " />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v2/installation/operator/" />
+<meta property="og:url" content="https://dell.github.io/csm-docs/v2/installation/operator/" />
 <meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Dell CSI Operator Installation Process">
 <meta itemprop="description" content="Installation of Dell EMC CSI drivers using Dell CSI Operator
@@ -26,8 +26,8 @@
 
 
 
-<link rel="preload" href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
-<link href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
+<link href="/csm-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -48,7 +48,7 @@
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
-        <a class="navbar-brand" href="/storage-plugin-docs/">
+        <a class="navbar-brand" href="/csm-docs/">
 		<span class="navbar-logo"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1017 132"><defs><style>.cls-1{fill:#fff}</style></defs><title>DellTech_Logo_Prm_Wht_rgb</title><path class="cls-1" d="M1015 84.89c0-12.23-6.8-17.66-20.39-20.38s-21.73-4.08-21.73-13.58c0-6.8 5.44-10.87 15-10.87 12.22.0 16.3 5.43 16.3 12.22l1.36 1.36h5.43l1.37-1.36c0-13.58-10.88-19-24.46-19-15 0-23.1 8.15-23.1 17.67.0 10.86 8.15 16.3 21.73 19s20.38 4.08 20.38 15c0 6.79-4.07 12.23-17.66 12.23-12.22.0-17.66-6.8-17.66-15l-1.35-1.36h-5.44l-1.35 1.36c0 12.23 9.5 21.74 25.8 21.74 17.66.0 25.82-8.15 25.82-19M956.58 71.31l1.36-1.37V65.87c0-19-10.87-32.61-29.89-32.61s-29.89 13.59-29.89 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38l-1.36-1.36h-5.43l-1.36 1.36c-2.72 8.15-8.16 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H907.67l-1.36-1.36c0-9.51 5.44-23.09 21.74-23.09s21.74 13.58 21.74 23.09zm-59.78 36.68V36l-1.36-1.35h-5.43L880.5 36v65.22l1.36 1.36h5.43zm0-78.8V14.24l-1.36-1.36h-5.43l-1.36 1.36v8.15l1.36 1.36h5.43zM837 97.12c-13.59.0-21.74-9.52-21.74-28.53S823.44 40.06 837 40.06s21.73 9.5 21.73 28.53S850.61 97.12 837 97.12M858.76 93c0 17.66-4.07 31.25-20.38 31.25-12.22.0-16.3-5.44-17.66-12.23l-1.35-1.36h-5.44l-1.36 1.36c1.36 10.87 9.51 19 25.81 19 17.67.0 28.53-10.87 28.53-38V36l-1.35-1.35h-4.08L860.12 36l-1.36 8.16H857.4c-2.71-5.43-9.5-10.87-21.74-10.87-19 0-28.53 15-28.53 35.33s9.52 35.32 28.53 35.32c12.24.0 19-5.43 21.74-10.87zm-88.3-53c13.58.0 23.09 10.87 23.09 28.53S784 97.12 770.46 97.12s-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32s-13.59-35.33-31.25-35.33-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-40.76-2.72V8.81l-1.36-1.36h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43zM680.8 40.06c13.58.0 23.09 10.87 23.09 28.53s-9.51 28.53-23.09 28.53-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32S698.46 33.26 680.8 33.26s-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-39.4-2.72V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.67 4.08-21.74 10.87h-1.36L592.49 36l-1.36-1.35h-4.08L585.7 36v65.22l1.35 1.36h5.44l1.36-1.36V64.51c0-15 6.79-24.45 21.73-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.37 1.36H640zm-69.29.0V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.66 4.08-21.74 10.87h-1.36V8.81L523.2 7.45h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43l1.36-1.36V64.51c0-15 6.8-24.45 21.74-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.36 1.36h5.44zM455.28 68.59c0-19 9.5-28.53 23.09-28.53s19 8.15 20.38 16.29l1.35 1.37h5.44l1.36-1.37c-1.36-13.58-12.23-23.09-28.53-23.09-17.66.0-31.24 10.87-31.24 35.33s13.58 35.32 31.24 35.32c16.3.0 27.17-9.51 28.53-23.1l-1.36-1.36H500.1l-1.35 1.36C497.39 89 492 97.12 478.37 97.12s-23.09-9.52-23.09-28.53m-14.95 2.72 1.36-1.37V65.87c0-19-10.87-32.61-29.9-32.61s-29.88 13.59-29.88 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38L439 82.17h-5.43l-1.36 1.36c-2.72 8.15-8.15 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H391.42l-1.36-1.36c0-9.51 5.44-23.09 21.73-23.09s21.75 13.58 21.75 23.09zM395.57 12.88V8.81l-1.36-1.36H323.56L322.2 8.81v4.07l1.36 1.36h29.89l1.36 1.36v85.59l1.36 1.36h5.43l1.36-1.36V15.6l1.36-1.36h29.89z"/><path class="cls-1" d="M322.2 83.65v18.9H260.85V7.45h21.6v76.2zM38.55 102.55A47.57 47.57.0 0084.58 67l53.8 42 53.77-42v35.56H253.5V83.65H213.75V7.45h-21.6V43L140.58 83.3l-11.54-9L153.73 55l26.89-21L165.27 22 113.69 62.3l-11.53-9L153.73 13 138.38 1 84.58 43a47.57 47.57.0 00-46-35.58H0v95.1zM21.6 83.65V26.35H38.55c14.33.0 26 12.83 26 28.65S52.88 83.65 38.55 83.65z"/></svg></span>
 	</a>
 	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
@@ -62,7 +62,7 @@
 				
 				
 				
-				<a class="nav-link" href="/storage-plugin-docs/docs/" ><span>Documentation</span></a>
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell EMC Container Storage Modules (CSM)</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -72,9 +72,35 @@
 				
 				
 				
-				<a class="nav-link" href="/storage-plugin-docs/blog/" ><span>Blog</span></a>
+				<a class="nav-link" href="/csm-docs/blog/" ><span>Blog</span></a>
 			</li>
 			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/dell/csm" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			<li class="nav-item dropdown d-none d-lg-block">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	Releases
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	
+</div>
+
+			</li>
 			
 			
 		</ul>
@@ -90,7 +116,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5d133afd40f40089f89b14536b87c5d3.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.25bba4d294290e4e650e12a7c14bf91f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -99,7 +125,7 @@
 </nav>
 
     </header>
-    <h3> This doc version is no longer supported by us. You can check our <a href="/storage-plugin-docs/docs">latest version </a></h3>
+    <h3> This doc version is no longer supported by us. You can check our <a href="/csm-docs/docs">latest version </a></h3>
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
@@ -123,7 +149,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5d133afd40f40089f89b14536b87c5d3.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.25bba4d294290e4e650e12a7c14bf91f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,10 +171,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
+    <a  href="/csm-docs/v2/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
   </li>
   <ul>
-    <li class="collapse show" id="storage-plugin-docsv2">
+    <li class="collapse show" id="csm-docsv2">
       
       
       
@@ -163,10 +189,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/dell-csi-driver/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Introduction</a>
+    <a  href="/csm-docs/v2/dell-csi-driver/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Introduction</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2dell-csi-driver">
+    <li class="collapse " id="csm-docsv2dell-csi-driver">
       
       
       
@@ -188,10 +214,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/installation/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Installation</a>
+    <a  href="/csm-docs/v2/installation/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Installation</a>
   </li>
   <ul>
-    <li class="collapse show" id="storage-plugin-docsv2installation">
+    <li class="collapse show" id="csm-docsv2installation">
       
       
       
@@ -206,10 +232,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/installation/helm/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using Helm</a>
+    <a  href="/csm-docs/v2/installation/helm/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using Helm</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2installationhelm">
+    <li class="collapse " id="csm-docsv2installationhelm">
       
       
       
@@ -217,7 +243,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationhelmpowerflex" href="/storage-plugin-docs/v2/installation/helm/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationhelmpowerflex" href="/csm-docs/v2/installation/helm/powerflex/">PowerFlex</a>
         
       
       
@@ -225,7 +251,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationhelmpowermax" href="/storage-plugin-docs/v2/installation/helm/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationhelmpowermax" href="/csm-docs/v2/installation/helm/powermax/">PowerMax</a>
         
       
       
@@ -233,7 +259,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationhelmisilon" href="/storage-plugin-docs/v2/installation/helm/isilon/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationhelmisilon" href="/csm-docs/v2/installation/helm/isilon/">PowerScale</a>
         
       
       
@@ -241,7 +267,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationhelmpowerstore" href="/storage-plugin-docs/v2/installation/helm/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationhelmpowerstore" href="/csm-docs/v2/installation/helm/powerstore/">PowerStore</a>
         
       
       
@@ -249,7 +275,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationhelmunity" href="/storage-plugin-docs/v2/installation/helm/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationhelmunity" href="/csm-docs/v2/installation/helm/unity/">Unity</a>
         
       
       
@@ -271,10 +297,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/installation/operator/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using Operator</a>
+    <a  href="/csm-docs/v2/installation/operator/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using Operator</a>
   </li>
   <ul>
-    <li class="collapse show" id="storage-plugin-docsv2installationoperator">
+    <li class="collapse show" id="csm-docsv2installationoperator">
       
       
       
@@ -282,7 +308,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationoperatorpowerflex" href="/storage-plugin-docs/v2/installation/operator/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationoperatorinstalldriver" href="/csm-docs/v2/installation/operator/installdriver/"></a>
         
       
       
@@ -290,7 +316,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationoperatorpowermax" href="/storage-plugin-docs/v2/installation/operator/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationoperatorpowerflex" href="/csm-docs/v2/installation/operator/powerflex/">PowerFlex</a>
         
       
       
@@ -298,7 +324,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationoperatorisilon" href="/storage-plugin-docs/v2/installation/operator/isilon/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationoperatorpowermax" href="/csm-docs/v2/installation/operator/powermax/">PowerMax</a>
         
       
       
@@ -306,7 +332,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationoperatorpowerstore" href="/storage-plugin-docs/v2/installation/operator/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationoperatorisilon" href="/csm-docs/v2/installation/operator/isilon/">PowerScale</a>
         
       
       
@@ -314,7 +340,15 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationoperatorunity" href="/storage-plugin-docs/v2/installation/operator/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationoperatorpowerstore" href="/csm-docs/v2/installation/operator/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationoperatorunity" href="/csm-docs/v2/installation/operator/unity/">Unity</a>
         
       
       
@@ -336,10 +370,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/installation/offline/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Offline Installer</a>
+    <a  href="/csm-docs/v2/installation/offline/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Offline Installer</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2installationoffline">
+    <li class="collapse " id="csm-docsv2installationoffline">
       
       
       
@@ -361,10 +395,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Testing Drivers</a>
+    <a  href="/csm-docs/v2/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Testing Drivers</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2installationtest">
+    <li class="collapse " id="csm-docsv2installationtest">
       
       
       
@@ -372,7 +406,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationtestpowerflex" href="/storage-plugin-docs/v2/installation/test/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationtestpowerflex" href="/csm-docs/v2/installation/test/powerflex/">PowerFlex</a>
         
       
       
@@ -380,7 +414,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationtestpowermax" href="/storage-plugin-docs/v2/installation/test/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationtestpowermax" href="/csm-docs/v2/installation/test/powermax/">PowerMax</a>
         
       
       
@@ -388,7 +422,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationtestpowerscale" href="/storage-plugin-docs/v2/installation/test/powerscale/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationtestpowerscale" href="/csm-docs/v2/installation/test/powerscale/">PowerScale</a>
         
       
       
@@ -396,7 +430,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationtestpowerstore" href="/storage-plugin-docs/v2/installation/test/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationtestpowerstore" href="/csm-docs/v2/installation/test/powerstore/">PowerStore</a>
         
       
       
@@ -404,7 +438,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2installationtestunity" href="/storage-plugin-docs/v2/installation/test/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2installationtestunity" href="/csm-docs/v2/installation/test/unity/">Unity</a>
         
       
       
@@ -433,10 +467,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/uninstall/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Uninstallation</a>
+    <a  href="/csm-docs/v2/uninstall/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Uninstallation</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2uninstall">
+    <li class="collapse " id="csm-docsv2uninstall">
       
       
       
@@ -458,10 +492,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/upgradation/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Upgrade</a>
+    <a  href="/csm-docs/v2/upgradation/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Upgrade</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2upgradation">
+    <li class="collapse " id="csm-docsv2upgradation">
       
       
       
@@ -469,7 +503,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2upgradationdriverspowerflex" href="/storage-plugin-docs/v2/upgradation/drivers/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2upgradationdriversoperator" href="/csm-docs/v2/upgradation/drivers/operator/">Dell CSI Operator</a>
         
       
       
@@ -477,7 +511,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2upgradationdriverspowermax" href="/storage-plugin-docs/v2/upgradation/drivers/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2upgradationdriverspowerflex" href="/csm-docs/v2/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
       
@@ -485,7 +519,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2upgradationdriversisilon" href="/storage-plugin-docs/v2/upgradation/drivers/isilon/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2upgradationdriverspowermax" href="/csm-docs/v2/upgradation/drivers/powermax/">PowerMax</a>
         
       
       
@@ -493,7 +527,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2upgradationdriverspowerstore" href="/storage-plugin-docs/v2/upgradation/drivers/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2upgradationdriversisilon" href="/csm-docs/v2/upgradation/drivers/isilon/">PowerScale</a>
         
       
       
@@ -501,7 +535,15 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2upgradationdriversunity" href="/storage-plugin-docs/v2/upgradation/drivers/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2upgradationdriverspowerstore" href="/csm-docs/v2/upgradation/drivers/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2upgradationdriversunity" href="/csm-docs/v2/upgradation/drivers/unity/">Unity</a>
         
       
       
@@ -523,10 +565,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/features/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Features</a>
+    <a  href="/csm-docs/v2/features/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Features</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2features">
+    <li class="collapse " id="csm-docsv2features">
       
       
       
@@ -534,7 +576,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2featurespowerflex" href="/storage-plugin-docs/v2/features/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2featurespowerflex" href="/csm-docs/v2/features/powerflex/">PowerFlex</a>
         
       
       
@@ -542,7 +584,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2featurespowermax" href="/storage-plugin-docs/v2/features/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2featurespowermax" href="/csm-docs/v2/features/powermax/">PowerMax</a>
         
       
       
@@ -550,7 +592,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2featurespowerscale" href="/storage-plugin-docs/v2/features/powerscale/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2featurespowerscale" href="/csm-docs/v2/features/powerscale/">PowerScale</a>
         
       
       
@@ -558,7 +600,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2featurespowerstore" href="/storage-plugin-docs/v2/features/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2featurespowerstore" href="/csm-docs/v2/features/powerstore/">PowerStore</a>
         
       
       
@@ -566,7 +608,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2featuresunity" href="/storage-plugin-docs/v2/features/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2featuresunity" href="/csm-docs/v2/features/unity/">Unity</a>
         
       
       
@@ -588,10 +630,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
+    <a  href="/csm-docs/v2/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2troubleshooting">
+    <li class="collapse " id="csm-docsv2troubleshooting">
       
       
       
@@ -599,7 +641,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2troubleshootingpowerflex" href="/storage-plugin-docs/v2/troubleshooting/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2troubleshootingoperator" href="/csm-docs/v2/troubleshooting/operator/">Dell CSI Operator</a>
         
       
       
@@ -607,7 +649,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2troubleshootingpowermax" href="/storage-plugin-docs/v2/troubleshooting/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2troubleshootingpowerflex" href="/csm-docs/v2/troubleshooting/powerflex/">PowerFlex</a>
         
       
       
@@ -615,7 +657,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2troubleshootingpowerscale" href="/storage-plugin-docs/v2/troubleshooting/powerscale/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2troubleshootingpowermax" href="/csm-docs/v2/troubleshooting/powermax/">PowerMax</a>
         
       
       
@@ -623,7 +665,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2troubleshootingpowerstore" href="/storage-plugin-docs/v2/troubleshooting/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2troubleshootingpowerscale" href="/csm-docs/v2/troubleshooting/powerscale/">PowerScale</a>
         
       
       
@@ -631,7 +673,15 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2troubleshootingunity" href="/storage-plugin-docs/v2/troubleshooting/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2troubleshootingpowerstore" href="/csm-docs/v2/troubleshooting/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2troubleshootingunity" href="/csm-docs/v2/troubleshooting/unity/">Unity</a>
         
       
       
@@ -653,10 +703,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/release/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Release Notes</a>
+    <a  href="/csm-docs/v2/release/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Release Notes</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2release">
+    <li class="collapse " id="csm-docsv2release">
       
       
       
@@ -664,7 +714,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2releaseoperator" href="/storage-plugin-docs/v2/release/operator/">Operator</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2releaseoperator" href="/csm-docs/v2/release/operator/">Operator</a>
         
       
       
@@ -672,7 +722,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2releasepowerflex" href="/storage-plugin-docs/v2/release/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2releasepowerflex" href="/csm-docs/v2/release/powerflex/">PowerFlex</a>
         
       
       
@@ -680,7 +730,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2releasepowermax" href="/storage-plugin-docs/v2/release/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2releasepowermax" href="/csm-docs/v2/release/powermax/">PowerMax</a>
         
       
       
@@ -688,7 +738,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2releasepowerscale" href="/storage-plugin-docs/v2/release/powerscale/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2releasepowerscale" href="/csm-docs/v2/release/powerscale/">PowerScale</a>
         
       
       
@@ -696,7 +746,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2releasepowerstore" href="/storage-plugin-docs/v2/release/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2releasepowerstore" href="/csm-docs/v2/release/powerstore/">PowerStore</a>
         
       
       
@@ -704,7 +754,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2releaseunity" href="/storage-plugin-docs/v2/release/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2releaseunity" href="/csm-docs/v2/release/unity/">Unity</a>
         
       
       
@@ -726,10 +776,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/grasp/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Learn</a>
+    <a  href="/csm-docs/v2/grasp/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Learn</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2grasp">
+    <li class="collapse " id="csm-docsv2grasp">
       
       
       
@@ -737,7 +787,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2graspstart" href="/storage-plugin-docs/v2/grasp/start/">Getting Started</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2graspstart" href="/csm-docs/v2/grasp/start/">Getting Started</a>
         
       
       
@@ -745,7 +795,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2graspvideo" href="/storage-plugin-docs/v2/grasp/video/">Quick video lessons</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2graspvideo" href="/csm-docs/v2/grasp/video/">Quick video lessons</a>
         
       
       
@@ -767,10 +817,35 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
+    <a  href="/csm-docs/v2/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2partners">
+    <li class="collapse " id="csm-docsv2concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2partners">
       
       
       
@@ -778,7 +853,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2partnersoperator" href="/storage-plugin-docs/v2/partners/operator/">OperatorHub.io</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersoperator" href="/csm-docs/v2/partners/operator/">OperatorHub.io</a>
         
       
       
@@ -786,7 +861,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2partnersredhat" href="/storage-plugin-docs/v2/partners/redhat/">Red Hat OpenShift</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersredhat" href="/csm-docs/v2/partners/redhat/">Red Hat OpenShift</a>
         
       
       
@@ -794,7 +869,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv2partnersdocker" href="/storage-plugin-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
         
       
       
@@ -816,10 +891,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v2/archives/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Archives</a>
+    <a  href="/csm-docs/v2/archives/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Archives</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv2archives">
+    <li class="collapse " id="csm-docsv2archives">
       
       
       
@@ -848,12 +923,22 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#installation">Installation</a>
       <ul>
+        <li></li>
+        <li><a href="#installation-using-operator-lifecycle-manager">Installation Using Operator Lifecycle Manager</a></li>
         <li><a href="#manual-installation">Manual Installation</a></li>
       </ul>
     </li>
-    <li><a href="#driver-install-via-dell-csi-operator">Driver Install via Dell CSI Operator</a></li>
+    <li><a href="#custom-resource-definitions">Custom Resource Definitions</a></li>
+    <li><a href="#pre-requisites-for-installation-of-the-csi-drivers">Pre-Requisites for installation of the CSI Drivers</a>
+      <ul>
+        <li><a href="#pre-requisites-for-upstream-kubernetes-clusters">Pre-requisites for upstream Kubernetes Clusters</a></li>
+        <li><a href="#pre-requisites-for-red-hat-openshift-clusters">Pre-requisites for Red Hat OpenShift Clusters</a></li>
+      </ul>
+    </li>
+    <li><a href="#replacing-csi-operator-with-dell-csi-operator">Replacing CSI Operator with Dell CSI Operator</a></li>
+    <li><a href="#install-csi-driver">Install CSI Driver</a></li>
   </ul>
 </nav>
 
@@ -879,21 +964,21 @@
 
 
 <li class="breadcrumb-item" >
-	<a href="https://dell.github.io/storage-plugin-docs/v2/">Documentation</a>
+	<a href="https://dell.github.io/csm-docs/v2/">Documentation</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item" >
-	<a href="https://dell.github.io/storage-plugin-docs/v2/installation/">Installation</a>
+	<a href="https://dell.github.io/csm-docs/v2/installation/">Installation</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://dell.github.io/storage-plugin-docs/v2/installation/operator/">Using Operator</a>
+	<a href="https://dell.github.io/csm-docs/v2/installation/operator/">Using Operator</a>
 </li>
 
 	</ol>
@@ -905,31 +990,126 @@
      
 	
 	<p>The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.</p>
-<ul>
-<li>For installing via OperatorHub.io on Kubernetes, go to the <a href="../../partners/operator/">OperatorHub page</a>.</li>
-<li>For installing via OpenShift with the certified Operator, go to the <a href="../../partners/redhat/">OpenShift page</a>.</li>
-<li>For installing manually, follow the instructions below.</li>
-</ul>
-<h3 id="manual-installation">Manual Installation</h3>
-<h4 id="pre-requisites">Pre-requisites</h4>
+<h2 id="installation">Installation</h2>
 <p>Dell CSI Operator has been tested and qualified with</p>
 <ul>
-<li>Upstream Kubernetes cluster v1.17, v1.18, v1.19</li>
-<li>OpenShift Clusters 4.5, 4.6 with RHEL 7.x &amp; RHCOS worker nodes</li>
-<li>For upstream k8s clusters, make sure to install
+<li>Upstream Kubernetes or OpenShift (see <a href="../../dell-csi-driver/">supported versions</a>)</li>
+</ul>
+<h4 id="before-you-begin">Before you begin</h4>
+<p>If you have installed an old version of the <code>dell-csi-operator</code> which was available with the name <em>CSI Operator</em>, please refer this <a href="#replacing-csi-operator-with-dell-csi-operator">section</a> before continuing.</p>
+<h4 id="full-list-of-csi-drivers-and-versions-supported-by-the-dell-csi-operator">Full list of CSI Drivers and versions supported by the Dell CSI Operator</h4>
+<table>
+<thead>
+<tr>
+<th>CSI Driver</th>
+<th>Version</th>
+<th>ConfigVersion</th>
+<th>Kubernetes Version</th>
+<th>OpenShift Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSI PowerMax</td>
+<td>1.5</td>
+<td>v4</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.4, 4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI PowerMax</td>
+<td>1.6</td>
+<td>v5</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+<tr>
+<td>CSI PowerFlex</td>
+<td>1.3</td>
+<td>v3</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.4, 4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI PowerFlex</td>
+<td>1.4</td>
+<td>v4</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+<tr>
+<td>CSI PowerScale</td>
+<td>1.4</td>
+<td>v4</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.4, 4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI PowerScale</td>
+<td>1.5</td>
+<td>v5</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+<tr>
+<td>CSI Unity</td>
+<td>1.4</td>
+<td>v3</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.4, 4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI Unity</td>
+<td>1.5</td>
+<td>v4</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+<tr>
+<td>CSI PowerStore</td>
+<td>1.2</td>
+<td>v2</td>
+<td>1.17, 1.18, 1.19</td>
+<td>4.5, 4.6</td>
+</tr>
+<tr>
+<td>CSI PowerStore</td>
+<td>1.3</td>
+<td>v3</td>
+<td>1.18, 1.19, 1.20</td>
+<td>4.6, 4.7</td>
+</tr>
+</tbody>
+</table>
+</br>
+<p><strong>Dell CSI Operator can be installed via OLM (Operator Lifecycle Manager) and manual installation.</strong></p>
+<h3 id="installation-using-operator-lifecycle-manager">Installation Using Operator Lifecycle Manager</h3>
+<p><code>dell-csi-operator</code> can be installed using Operator Lifecycle Manager (OLM) on upstream Kubernetes clusters &amp; Red Hat OpenShift Clusters.<br>
+The installation process involves creation of a <code>Subscription</code> object either via the <em>OperatorHub</em> UI or using <code>kubectl/oc</code>. While creating the <code>Subscription</code> you can set the Approval strategy for the <code>InstallPlan</code> for the Operator to -</p>
 <ul>
-<li>Beta VolumeSnapshot CRDs (can be installed using the Operator installation script)</li>
-<li>External Volume Snapshot Controller</li>
+<li><em>Automatic</em> - If you want the Operator to be automatically installed or upgraded (once an upgrade becomes available)</li>
+<li><em>Manual</em> - If you want a Cluster Administrator to manually review and approve the <code>InstallPlan</code> for installation/upgrades</li>
 </ul>
-</li>
+<h4 id="pre-requisite-for-installation-with-olm">Pre-Requisite for installation with OLM</h4>
+<p>Please run the following commands for creating the required <code>ConfigMap</code> before installing the <code>dell-csi-operator</code> using OLM.</p>
+<pre><code>$ git clone github.com/dell/dell-csi-operator
+$ cd dell-csi-operator
+$ tar -czf config.tar.gz driverconfig/
+# Replace operator-namespace in the below command with the actual namespace where the operator will be deployed by OLM
+$ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n &lt;operator-namespace&gt;
+</code></pre><h5 id="upstream-kubernetes">Upstream Kubernetes</h5>
+<ul>
+<li>For installing via OperatorHub.io on Kubernetes, go to the <a href="../../partners/operator/">OperatorHub page</a>.</li>
 </ul>
-<blockquote>
-<p><strong>Note-</strong> For more insights or detailed pre-requisites refer <a href="https://github.com/dell/dell-csi-operator">https://github.com/dell/dell-csi-operator</a></p>
-</blockquote>
+<h5 id="red-hat-openshift-clusters">Red Hat OpenShift Clusters</h5>
+<ul>
+<li>For installing via OpenShift with the Operator, go to the <a href="../../partners/redhat/">OpenShift page</a>.</li>
+</ul>
+<h3 id="manual-installation">Manual Installation</h3>
 <h4 id="steps">Steps</h4>
 <ol>
-<li>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a></li>
-<li>Run &lsquo;bash scripts/install.sh&rsquo; to install the operator
+<li>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a>. Skip this step for Offline Install. And continue using workspace created by untar of dell-csi-operator-bundle.tar.gz.</li>
+<li>Run <code>bash scripts/install.sh</code> to install the operator
 
 
 
@@ -938,12 +1118,10 @@
 
 
 <div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
-	<img class="card-img-top" src="/storage-plugin-docs/v2/installation/operator/non-olm-1_hubed218f9b8f0561db6687b1d7e94564b_353937_2500x0_resize_q75_catmullrom.jpg" width="2500" height="1006">
+	<img class="card-img-top" src="/csm-docs/v2/installation/operator/non-olm-1_hubed218f9b8f0561db6687b1d7e94564b_353937_2500x0_resize_q75_catmullrom.jpg" width="2500" height="1006">
 	
 </div></li>
-<li>Run the command &lsquo;oc get pods&rsquo; to validate the install completed
-<ul>
-<li>Should be able to see the operator related pod on default namespace
+<li>Run the command <code>oc get pods</code> to validate the install completed, should be able to see the operator related pod on default namespace
 
 
 
@@ -952,14 +1130,119 @@
 
 
 <div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 3510px">
-	<img class="card-img-top" src="/storage-plugin-docs/v2/installation/operator/non-olm-2_huf4405aa1524950a96c6019bf9f4df9b0_257760_3500x800_resize_q75_catmullrom.jpg" width="3500" height="800">
+	<img class="card-img-top" src="/csm-docs/v2/installation/operator/non-olm-2_huf4405aa1524950a96c6019bf9f4df9b0_257760_3500x800_resize_q75_catmullrom.jpg" width="3500" height="800">
 	
 </div></li>
+</ol>
+<h2 id="custom-resource-definitions">Custom Resource Definitions</h2>
+<p>As part of the Dell CSI Operator installation, a CRD representing each driver installation is also installed.<br>
+List of CRDs which are installed in API Group <code>storage.dell.com</code></p>
+<ul>
+<li>csipowermax</li>
+<li>csiunity</li>
+<li>csivxflexos</li>
+<li>csiisilon</li>
+<li>csipowerstore</li>
+<li>csipowermaxrevproxy</li>
+</ul>
+<p>For installation of the supported drivers, a <code>CustomResource</code> has to be created in your cluster.</p>
+<h2 id="pre-requisites-for-installation-of-the-csi-drivers">Pre-Requisites for installation of the CSI Drivers</h2>
+<h3 id="pre-requisites-for-upstream-kubernetes-clusters">Pre-requisites for upstream Kubernetes Clusters</h3>
+<p>On upstream Kubernetes clusters, make sure to install</p>
+<ul>
+<li>VolumeSnapshot CRDs
+<ul>
+<li>On clusters running v1.20, make sure to install v1 VolumeSnapshot CRDs</li>
+<li>On clusters running v1.18 &amp; v1.19, make sure to install v1beta1 VolumeSnapshot CRDs</li>
 </ul>
 </li>
+<li>External Volume Snapshot Controller with correct version</li>
+</ul>
+<h3 id="pre-requisites-for-red-hat-openshift-clusters">Pre-requisites for Red Hat OpenShift Clusters</h3>
+<h4 id="iscsi">iSCSI</h4>
+<p>If you are installing a CSI driver which is going to use iSCSI as the transport protocol, please follow the following instructions.<br>
+In Red Hat OpenShift clusters, you can create a <code>MachineConfig</code> object using the console or <code>oc</code> to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a <code>MachineConfig</code> object:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>machineconfiguration.openshift.io/v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>MachineConfig<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">99</span>-iscsid<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>worker<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2.2.0</span><span style="color:#f8f8f8;text-decoration:underline">  
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">systemd</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">units</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;iscsid.service&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>Once the <code>MachineConfig</code> object has been deployed, CoreOS will ensure that <code>iscsid.service</code> starts automatically.</p>
+<p>Alternatively, you can check the status of iSCSI service by entering the following command on each worker node in the cluster:</p>
+<p><code>sudo systemctl status iscsid</code></p>
+<p>The service should be up and running (i.e. should be in active state).</p>
+<p>If the <code>iscsid.service</code> is not running, then perform the following steps on each worker node in the cluster</p>
+<ol>
+<li><code>Login</code> to worker nodes and check if the file /etc/iscsi/initiatorname.iscsi has been created properly</li>
+<li>If the file doesn&rsquo;t exist or it doesn&rsquo;t contain a valid ISCSI IQN, then make sure it exists with valid entries</li>
+<li>Ensure that iscsid service is running - Enable <code>sudo systemctl enable iscsid</code> &amp; restart <code>sudo systemctl restart iscsid</code> iscsid if necessary.
+Note: If your worker nodes are running on Red Hat CoreOS , you can refer the URL <a href="https://coreos.com/os/docs/latest/iscsi.html#enable-automatic-iscsi-login-at-boot">https://coreos.com/os/docs/latest/iscsi.html#enable-automatic-iscsi-login-at-boot</a> for additional information.</li>
 </ol>
-<h2 id="driver-install-via-dell-csi-operator">Driver Install via Dell CSI Operator</h2>
-<p>For information on how to install the CSI drivers via the Dell CSI Operator, please refer to the sub-pages below for each driver.</p>
+<h4 id="multipath">MultiPath</h4>
+<p>If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - <em>multipathd</em>, please follow the below instructions</p>
+<p>To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.</p>
+<p><code>echo 'defaults { user_friendly_names yes find_multipaths yes } blacklist { }' | base64 -w0</code></p>
+<p>Use the base64 encoded string output in the following <code>MachineConfig</code> yaml file (under source section)</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>machineconfiguration.openshift.io/v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>MachineConfig<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>workers-multipath-conf-default<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">machineconfiguration.openshift.io/role</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>worker<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ignition</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2.2.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">files</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">contents</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>data<span style="color:#000;font-weight:bold">:</span>text/plain;charset=utf<span style="color:#0000cf;font-weight:bold">-8</span>;base64<span style="color:#000;font-weight:bold">,</span>ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">verification</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">filesystem</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>root<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">400</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/etc/multipath.conf<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>After deploying this<code>MachineConfig</code> object, CoreOS will start multipath service automatically.<br>
+Alternatively you can check the status of multipath service by entering the following command in each worker nodes.<br>
+<code>sudo multipath -ll</code></p>
+<p>If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+<code>sudo /sbin/mpathconf –-enable --with_multipathd y</code></p>
+<p>Finally , you have to restart the service by providing the command
+<code>sudo systemctl restart multipathd</code></p>
+<p>For additional information refer official documentation of multipath configuration.</p>
+<h2 id="replacing-csi-operator-with-dell-csi-operator">Replacing CSI Operator with Dell CSI Operator</h2>
+<p><code>Dell CSI Operator</code> was previously available, with the name <code>CSI Operator</code>, for both manual and OLM installation.<br>
+<code>CSI Operator</code> has been discontinued and has been renamed to <code>Dell CSI Operator</code>.  This is just a name change and as a result,
+the Kubernetes resources created as part of the Operator deployment will use the name <code>dell-csi-operator</code> instead of <code>csi-operator</code>.</p>
+<p>Before proceeding with the installation of the new <code>Dell CSI Operator</code>, any existing <code>CSI Operator</code> installation has to be completely
+removed from the cluster.</p>
+<p>Note - This <strong>doesn&rsquo;t</strong> impact any of the CSI Drivers which have been installed in the cluster</p>
+<p>If the old <code>CSI Operator</code> was installed manually, then run the following command from the root of the repository which was used
+originally for installation</p>
+<pre><code>bash scripts/undeploy.sh
+</code></pre>
+<p>If you don&rsquo;t have the original repository available, then run the following commands</p>
+<pre><code>git clone https://github.com/dell/dell-csi-operator.git
+cd dell-csi-operator
+git checkout csi-operator-v1.0.0
+bash scripts/undeploy.sh
+</code></pre>
+<p>Note - Once you have removed the old <code>CSI Operator</code>, then for installing the new <code>Dell CSI Operator</code>, you will need to pull/checkout the latest code</p>
+<p>If you had installed old CSI Operator using OLM, then please follow un-installation instructions provided by OperatorHub. This will mostly involve:</p>
+<pre><code>* Deleting the CSI Operator Subscription  
+* Deleting the CSI Operator CSV  
+</code></pre>
+<h2 id="install-csi-driver">Install CSI Driver</h2>
+<p>To install CSI drivers using Dell CSI Operator, please refer <a href="./installdriver">here</a></p>
+<p><strong>NOTE:</strong> For more information on pre-requisites and parameters, please refer to the sub-pages below for each driver.</p>
 
         <div class="section-index">
     
@@ -1012,6 +1295,21 @@
             
         
             
+                <div class="entry">
+                    <h5>
+                        <a href="/csm-docs/v2/installation/operator/installdriver/"></a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
             
         
@@ -1024,7 +1322,7 @@
             
                 <div class="entry">
                     <h5>
-                        <a href="/storage-plugin-docs/v2/installation/operator/powerflex/">PowerFlex</a>
+                        <a href="/csm-docs/v2/installation/operator/powerflex/">PowerFlex</a>
                     </h5>
                     <p>Installing PowerFlex CSI Driver via Operator</p>
                 </div>
@@ -1043,7 +1341,7 @@
             
                 <div class="entry">
                     <h5>
-                        <a href="/storage-plugin-docs/v2/installation/operator/powermax/">PowerMax</a>
+                        <a href="/csm-docs/v2/installation/operator/powermax/">PowerMax</a>
                     </h5>
                     <p>Installing PowerMax CSI Driver via Operator</p>
                 </div>
@@ -1062,7 +1360,7 @@
             
                 <div class="entry">
                     <h5>
-                        <a href="/storage-plugin-docs/v2/installation/operator/isilon/">PowerScale</a>
+                        <a href="/csm-docs/v2/installation/operator/isilon/">PowerScale</a>
                     </h5>
                     <p>Installing PowerScale CSI Driver via Operator</p>
                 </div>
@@ -1081,7 +1379,7 @@
             
                 <div class="entry">
                     <h5>
-                        <a href="/storage-plugin-docs/v2/installation/operator/powerstore/">PowerStore</a>
+                        <a href="/csm-docs/v2/installation/operator/powerstore/">PowerStore</a>
                     </h5>
                     <p>Installing PowerStore CSI Driver via Operator</p>
                 </div>
@@ -1104,7 +1402,7 @@
             
                 <div class="entry">
                     <h5>
-                        <a href="/storage-plugin-docs/v2/installation/operator/unity/">Unity</a>
+                        <a href="/csm-docs/v2/installation/operator/unity/">Unity</a>
                     </h5>
                     <p>Installing Unity CSI Driver via Operator</p>
                 </div>
@@ -1144,13 +1442,13 @@
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" href="https://github.com/dell/storage-plugin-docs">
+    <a class="text-white" target="_blank" href="https://github.com/dell/csm">
       <i class="fab fa-github"></i>
     </a>
   </li>
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
-    <a class="text-white" target="_blank" href="https://dellcustomer.slack.com/archives/C01CY517PU4">
+    <a class="text-white" target="_blank" href="http://del.ly/Slack_request">
       <i class="fab fa-slack"></i>
     </a>
   </li>
@@ -1185,7 +1483,7 @@
 
 
 
-<script src="/storage-plugin-docs/js/main.min.664f21bf5eb0c31ebc661e2616e6c63e0448cec6d5636d869957be423c3cb952.js" integrity="sha256-Zk8hv16wwx68Zh4mFubGPgRIzsbVY22GmVe&#43;Qjw8uVI=" crossorigin="anonymous"></script>
+<script src="/csm-docs/js/main.min.664f21bf5eb0c31ebc661e2616e6c63e0448cec6d5636d869957be423c3cb952.js" integrity="sha256-Zk8hv16wwx68Zh4mFubGPgRIzsbVY22GmVe&#43;Qjw8uVI=" crossorigin="anonymous"></script>
 
 
 

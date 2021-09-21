@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – Learn</title>
-    <link>https://dell.github.io/storage-plugin-docs/v1/grasp/</link>
+    <link>https://dell.github.io/csm-docs/v1/grasp/</link>
     <description>Recent content in Learn on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://dell.github.io/storage-plugin-docs/v1/grasp/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/csm-docs/v1/grasp/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,18 +15,18 @@
     
     <item>
       <title>V1: Getting Started</title>
-      <link>https://dell.github.io/storage-plugin-docs/v1/grasp/start/</link>
+      <link>https://dell.github.io/csm-docs/v1/grasp/start/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/v1/grasp/start/</guid>
+      <guid>https://dell.github.io/csm-docs/v1/grasp/start/</guid>
       <description>
         
         
-        &lt;p&gt;What is a container : &lt;a href=&#34;https://www.docker.com/resources/what-container&#34;&gt;https://www.docker.com/resources/what-container&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;What is container orchestration : &lt;a href=&#34;https://www.infoworld.com/article/3268073/what-is-kubernetes-container-orchestration-explained.html&#34;&gt;https://www.infoworld.com/article/3268073/what-is-kubernetes-container-orchestration-explained.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Kubernetes (k8s) : &lt;a href=&#34;https://kubernetes.io/&#34;&gt;https://kubernetes.io/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Docker : &lt;a href=&#34;https://www.docker.com/&#34;&gt;https://www.docker.com/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Understanding CSI : &lt;a href=&#34;https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b&#34;&gt;https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;What is a container: &lt;a href=&#34;https://www.docker.com/resources/what-container&#34;&gt;https://www.docker.com/resources/what-container&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What is container orchestration: &lt;a href=&#34;https://www.infoworld.com/article/3268073/what-is-kubernetes-container-orchestration-explained.html&#34;&gt;https://www.infoworld.com/article/3268073/what-is-kubernetes-container-orchestration-explained.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Kubernetes (k8s): &lt;a href=&#34;https://kubernetes.io/&#34;&gt;https://kubernetes.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Docker: &lt;a href=&#34;https://www.docker.com/&#34;&gt;https://www.docker.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Understanding CSI: &lt;a href=&#34;https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b&#34;&gt;https://medium.com/google-cloud/understanding-the-container-storage-interface-csi-ddbeb966a3b&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;How to write a CSI plugin: &lt;a href=&#34;https://arslan.io/2018/06/21/how-to-write-a-container-storage-interface-csi-plugin/&#34;&gt;https://arslan.io/2018/06/21/how-to-write-a-container-storage-interface-csi-plugin/&lt;/a&gt;&lt;/p&gt;
 
       </description>
@@ -34,10 +34,10 @@
     
     <item>
       <title>V1: Quick video lessons</title>
-      <link>https://dell.github.io/storage-plugin-docs/v1/grasp/video/</link>
+      <link>https://dell.github.io/csm-docs/v1/grasp/video/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/v1/grasp/video/</guid>
+      <guid>https://dell.github.io/csm-docs/v1/grasp/video/</guid>
       <description>
         
         
