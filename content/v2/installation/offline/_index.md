@@ -40,14 +40,14 @@ Preparing an offline bundle requires the following utilities:
 
 To perform an offline installation of a driver or the Operator, the following steps should be performed:
 1. Build an offline bundle
-2. Unpacking an offline bundle and preparing for installation
-3. Perform either a Helm installation or Operator installation
+2. Unpacking the offline bundle created in Step 1 and preparing for installation
+3. Perform either a Helm installation or Operator installation using the files obtained after unpacking in Step 2 
 
 ### Building an offline bundle
 
 This needs to be performed on a linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.
 
-The build an offline bundle, the following steps are needed:
+To build an offline bundle, the following steps are needed:
 1. Perform a `git clone` of the desired repository. For a helm based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned
 2. Run the `csi-offline-bundle.sh` script with an argument of `-c` in order to create an offline bundle
   - For Helm installs, the `csi-offline-bundle.sh` script will be found in the `dell-csi-helm-installer` directory
@@ -124,12 +124,12 @@ dell-csi-operator-bundle/README.md
 Offline bundle file is: /dell/git/dell-csi-operator/dell-csi-operator-bundle.tar.gz
 ```
 
-### Unpacking an offline bundle and preparing for installation
+### Unpacking the offline bundle and preparing for installation
 
 This needs to be performed on a linux system with access to an image registry that will host container images. If the registry requires `login`, that should be done before proceeding.
 
 To prepare for driver or Operator installation, the following steps need to be performed:
-1. Copy the offline bundle file to a system with access to an image registry available to your Kubernetes/OpenShift cluster
+1. Copy the offline bundle file created from the previous step to a system with access to an image registry available to your Kubernetes/OpenShift cluster
 2. Expand the bundle file by running `tar xvfz <filename>`
 3. Run the `csi-offline-bundle.sh` script and supply the `-p` option as well as the path to the internal registry with the `-r` option
 
@@ -211,4 +211,6 @@ Preparing a offline bundle for installation
 
 ### Perform either a Helm installation or Operator installation
 
-Now that the required images have been made available and the Helm Charts/Operator configuration updated, installation can proceed by following the usual installation procedure as documented.
+Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via [Helm](../helm) or [Operator](../operator/#manual-installation).
+
+*NOTE:* Installation should be done using the files that was obtained after unpacking the bundle as the image tags in the manifests are modifed to point to the internal registry. 

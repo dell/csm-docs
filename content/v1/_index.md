@@ -3,6 +3,6 @@
 title: "Documentation"
 linkTitle: "Documentation"
 ---
-
-*NOTE:* This doc version is no longer supported by us. You can check our [latest version](/storage-plugin-docs/)
-
+{{% pageinfo color="primary" %}}
+This document version is no longer actively maintained. The site that you are currently viewing is an archived snapshot. For up-to-date documentation, see the [latest version](/csm-docs/)
+{{% /pageinfo %}}

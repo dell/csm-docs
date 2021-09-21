@@ -51,14 +51,14 @@ Thanks to the CSI driver can take full advantage of your Fiber Channel infrastru
 
 Checkout the installation process in video:
 
-{{< video src="/storage-plugin-docs/videos/anthos-bm-0.6-powermax.mp4" width="800" height=auto >}}
+{{< video src="/csm-docs/videos/anthos-bm-0.6-powermax.mp4" width="800" height=auto >}}
 
 ## PowerStore
 The save level of service is given to PowerStore with a full support for Anthos bare metal.
 
 Checkout the installation process in video:
 
-{{< video  src="/storage-plugin-docs/videos/anthos-bm-0.6-powerstore.mp4"  width="800" height=auto >}}
+{{< video  src="/csm-docs/videos/anthos-bm-0.6-powerstore.mp4"  width="800" height=auto >}}
 
 ## [asdf-bmctl](https://github.com/coulof/asdf-bmctl)
 During the qualification process I had to juggle with at least 3 different versions of the Anthos bare metal installer.
