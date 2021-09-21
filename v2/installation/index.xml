@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dell Technologies – Installation</title>
-    <link>https://dell.github.io/storage-plugin-docs/v2/installation/</link>
+    <link>https://dell.github.io/csm-docs/v2/installation/</link>
     <description>Recent content in Installation on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://dell.github.io/storage-plugin-docs/v2/installation/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://dell.github.io/csm-docs/v2/installation/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>V2: CSI Driver installation using Helm</title>
-      <link>https://dell.github.io/storage-plugin-docs/v2/installation/helm/</link>
+      <link>https://dell.github.io/csm-docs/v2/installation/helm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/v2/installation/helm/</guid>
+      <guid>https://dell.github.io/csm-docs/v2/installation/helm/</guid>
       <description>
         
         
@@ -55,39 +55,134 @@
     
     <item>
       <title>V2: Dell CSI Operator Installation Process</title>
-      <link>https://dell.github.io/storage-plugin-docs/v2/installation/operator/</link>
+      <link>https://dell.github.io/csm-docs/v2/installation/operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/v2/installation/operator/</guid>
+      <guid>https://dell.github.io/csm-docs/v2/installation/operator/</guid>
       <description>
         
         
         &lt;p&gt;The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;For installing via OperatorHub.io on Kubernetes, go to the &lt;a href=&#34;../../partners/operator/&#34;&gt;OperatorHub page&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;For installing via OpenShift with the certified Operator, go to the &lt;a href=&#34;../../partners/redhat/&#34;&gt;OpenShift page&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;For installing manually, follow the instructions below.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;manual-installation&#34;&gt;Manual Installation&lt;/h3&gt;
-&lt;h4 id=&#34;pre-requisites&#34;&gt;Pre-requisites&lt;/h4&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Dell CSI Operator has been tested and qualified with&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Upstream Kubernetes cluster v1.17, v1.18, v1.19&lt;/li&gt;
-&lt;li&gt;OpenShift Clusters 4.5, 4.6 with RHEL 7.x &amp;amp; RHCOS worker nodes&lt;/li&gt;
-&lt;li&gt;For upstream k8s clusters, make sure to install
+&lt;li&gt;Upstream Kubernetes or OpenShift (see &lt;a href=&#34;../../dell-csi-driver/&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h4&gt;
+&lt;p&gt;If you have installed an old version of the &lt;code&gt;dell-csi-operator&lt;/code&gt; which was available with the name &lt;em&gt;CSI Operator&lt;/em&gt;, please refer this &lt;a href=&#34;#replacing-csi-operator-with-dell-csi-operator&#34;&gt;section&lt;/a&gt; before continuing.&lt;/p&gt;
+&lt;h4 id=&#34;full-list-of-csi-drivers-and-versions-supported-by-the-dell-csi-operator&#34;&gt;Full list of CSI Drivers and versions supported by the Dell CSI Operator&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CSI Driver&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;ConfigVersion&lt;/th&gt;
+&lt;th&gt;Kubernetes Version&lt;/th&gt;
+&lt;th&gt;OpenShift Version&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerMax&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;v4&lt;/td&gt;
+&lt;td&gt;1.17, 1.18, 1.19&lt;/td&gt;
+&lt;td&gt;4.4, 4.5, 4.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerMax&lt;/td&gt;
+&lt;td&gt;1.6&lt;/td&gt;
+&lt;td&gt;v5&lt;/td&gt;
+&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
+&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerFlex&lt;/td&gt;
+&lt;td&gt;1.3&lt;/td&gt;
+&lt;td&gt;v3&lt;/td&gt;
+&lt;td&gt;1.17, 1.18, 1.19&lt;/td&gt;
+&lt;td&gt;4.4, 4.5, 4.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerFlex&lt;/td&gt;
+&lt;td&gt;1.4&lt;/td&gt;
+&lt;td&gt;v4&lt;/td&gt;
+&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
+&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerScale&lt;/td&gt;
+&lt;td&gt;1.4&lt;/td&gt;
+&lt;td&gt;v4&lt;/td&gt;
+&lt;td&gt;1.17, 1.18, 1.19&lt;/td&gt;
+&lt;td&gt;4.4, 4.5, 4.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerScale&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;v5&lt;/td&gt;
+&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
+&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI Unity&lt;/td&gt;
+&lt;td&gt;1.4&lt;/td&gt;
+&lt;td&gt;v3&lt;/td&gt;
+&lt;td&gt;1.17, 1.18, 1.19&lt;/td&gt;
+&lt;td&gt;4.4, 4.5, 4.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI Unity&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;v4&lt;/td&gt;
+&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
+&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerStore&lt;/td&gt;
+&lt;td&gt;1.2&lt;/td&gt;
+&lt;td&gt;v2&lt;/td&gt;
+&lt;td&gt;1.17, 1.18, 1.19&lt;/td&gt;
+&lt;td&gt;4.5, 4.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerStore&lt;/td&gt;
+&lt;td&gt;1.3&lt;/td&gt;
+&lt;td&gt;v3&lt;/td&gt;
+&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
+&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/br&gt;
+&lt;p&gt;&lt;strong&gt;Dell CSI Operator can be installed via OLM (Operator Lifecycle Manager) and manual installation.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;installation-using-operator-lifecycle-manager&#34;&gt;Installation Using Operator Lifecycle Manager&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;dell-csi-operator&lt;/code&gt; can be installed using Operator Lifecycle Manager (OLM) on upstream Kubernetes clusters &amp;amp; Red Hat OpenShift Clusters.&lt;br&gt;
+The installation process involves creation of a &lt;code&gt;Subscription&lt;/code&gt; object either via the &lt;em&gt;OperatorHub&lt;/em&gt; UI or using &lt;code&gt;kubectl/oc&lt;/code&gt;. While creating the &lt;code&gt;Subscription&lt;/code&gt; you can set the Approval strategy for the &lt;code&gt;InstallPlan&lt;/code&gt; for the Operator to -&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Beta VolumeSnapshot CRDs (can be installed using the Operator installation script)&lt;/li&gt;
-&lt;li&gt;External Volume Snapshot Controller&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Automatic&lt;/em&gt; - If you want the Operator to be automatically installed or upgraded (once an upgrade becomes available)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Manual&lt;/em&gt; - If you want a Cluster Administrator to manually review and approve the &lt;code&gt;InstallPlan&lt;/code&gt; for installation/upgrades&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
+&lt;h4 id=&#34;pre-requisite-for-installation-with-olm&#34;&gt;Pre-Requisite for installation with OLM&lt;/h4&gt;
+&lt;p&gt;Please run the following commands for creating the required &lt;code&gt;ConfigMap&lt;/code&gt; before installing the &lt;code&gt;dell-csi-operator&lt;/code&gt; using OLM.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git clone github.com/dell/dell-csi-operator
+$ cd dell-csi-operator
+$ tar -czf config.tar.gz driverconfig/
+# Replace operator-namespace in the below command with the actual namespace where the operator will be deployed by OLM
+$ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n &amp;lt;operator-namespace&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;upstream-kubernetes&#34;&gt;Upstream Kubernetes&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;For installing via OperatorHub.io on Kubernetes, go to the &lt;a href=&#34;../../partners/operator/&#34;&gt;OperatorHub page&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note-&lt;/strong&gt; For more insights or detailed pre-requisites refer &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;https://github.com/dell/dell-csi-operator&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;h5 id=&#34;red-hat-openshift-clusters&#34;&gt;Red Hat OpenShift Clusters&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;For installing via OpenShift with the Operator, go to the &lt;a href=&#34;../../partners/redhat/&#34;&gt;OpenShift page&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;manual-installation&#34;&gt;Manual Installation&lt;/h3&gt;
 &lt;h4 id=&#34;steps&#34;&gt;Steps&lt;/h4&gt;
 &lt;ol&gt;
-&lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;Dell CSI Operator repository&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Run &amp;lsquo;bash scripts/install.sh&amp;rsquo; to install the operator
+&lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;Dell CSI Operator repository&lt;/a&gt;. Skip this step for Offline Install. And continue using workspace created by untar of dell-csi-operator-bundle.tar.gz.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;bash scripts/install.sh&lt;/code&gt; to install the operator
 
 
 
@@ -96,12 +191,10 @@
 
 
 &lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/v2/installation/operator/non-olm-1_hubed218f9b8f0561db6687b1d7e94564b_353937_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1006&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v2/installation/operator/non-olm-1_hubed218f9b8f0561db6687b1d7e94564b_353937_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1006&#34;&gt;
 	
 &lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;Run the command &amp;lsquo;oc get pods&amp;rsquo; to validate the install completed
-&lt;ul&gt;
-&lt;li&gt;Should be able to see the operator related pod on default namespace
+&lt;li&gt;Run the command &lt;code&gt;oc get pods&lt;/code&gt; to validate the install completed, should be able to see the operator related pod on default namespace
 
 
 
@@ -110,24 +203,129 @@
 
 
 &lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 3510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/storage-plugin-docs/storage-plugin-docs/v2/installation/operator/non-olm-2_huf4405aa1524950a96c6019bf9f4df9b0_257760_3500x800_resize_q75_catmullrom.jpg&#34; width=&#34;3500&#34; height=&#34;800&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v2/installation/operator/non-olm-2_huf4405aa1524950a96c6019bf9f4df9b0_257760_3500x800_resize_q75_catmullrom.jpg&#34; width=&#34;3500&#34; height=&#34;800&#34;&gt;
 	
 &lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h2&gt;
+&lt;p&gt;As part of the Dell CSI Operator installation, a CRD representing each driver installation is also installed.&lt;br&gt;
+List of CRDs which are installed in API Group &lt;code&gt;storage.dell.com&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;csipowermax&lt;/li&gt;
+&lt;li&gt;csiunity&lt;/li&gt;
+&lt;li&gt;csivxflexos&lt;/li&gt;
+&lt;li&gt;csiisilon&lt;/li&gt;
+&lt;li&gt;csipowerstore&lt;/li&gt;
+&lt;li&gt;csipowermaxrevproxy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For installation of the supported drivers, a &lt;code&gt;CustomResource&lt;/code&gt; has to be created in your cluster.&lt;/p&gt;
+&lt;h2 id=&#34;pre-requisites-for-installation-of-the-csi-drivers&#34;&gt;Pre-Requisites for installation of the CSI Drivers&lt;/h2&gt;
+&lt;h3 id=&#34;pre-requisites-for-upstream-kubernetes-clusters&#34;&gt;Pre-requisites for upstream Kubernetes Clusters&lt;/h3&gt;
+&lt;p&gt;On upstream Kubernetes clusters, make sure to install&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VolumeSnapshot CRDs
+&lt;ul&gt;
+&lt;li&gt;On clusters running v1.20, make sure to install v1 VolumeSnapshot CRDs&lt;/li&gt;
+&lt;li&gt;On clusters running v1.18 &amp;amp; v1.19, make sure to install v1beta1 VolumeSnapshot CRDs&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;External Volume Snapshot Controller with correct version&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pre-requisites-for-red-hat-openshift-clusters&#34;&gt;Pre-requisites for Red Hat OpenShift Clusters&lt;/h3&gt;
+&lt;h4 id=&#34;iscsi&#34;&gt;iSCSI&lt;/h4&gt;
+&lt;p&gt;If you are installing a CSI driver which is going to use iSCSI as the transport protocol, please follow the following instructions.&lt;br&gt;
+In Red Hat OpenShift clusters, you can create a &lt;code&gt;MachineConfig&lt;/code&gt; object using the console or &lt;code&gt;oc&lt;/code&gt; to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a &lt;code&gt;MachineConfig&lt;/code&gt; object:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;machineconfiguration.openshift.io/v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;MachineConfig&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;99&lt;/span&gt;-iscsid&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;machineconfiguration.openshift.io/role&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;worker&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ignition&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;version&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2.2.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;systemd&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;units&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;iscsid.service&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the &lt;code&gt;MachineConfig&lt;/code&gt; object has been deployed, CoreOS will ensure that &lt;code&gt;iscsid.service&lt;/code&gt; starts automatically.&lt;/p&gt;
+&lt;p&gt;Alternatively, you can check the status of iSCSI service by entering the following command on each worker node in the cluster:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo systemctl status iscsid&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The service should be up and running (i.e. should be in active state).&lt;/p&gt;
+&lt;p&gt;If the &lt;code&gt;iscsid.service&lt;/code&gt; is not running, then perform the following steps on each worker node in the cluster&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Login&lt;/code&gt; to worker nodes and check if the file /etc/iscsi/initiatorname.iscsi has been created properly&lt;/li&gt;
+&lt;li&gt;If the file doesn&amp;rsquo;t exist or it doesn&amp;rsquo;t contain a valid ISCSI IQN, then make sure it exists with valid entries&lt;/li&gt;
+&lt;li&gt;Ensure that iscsid service is running - Enable &lt;code&gt;sudo systemctl enable iscsid&lt;/code&gt; &amp;amp; restart &lt;code&gt;sudo systemctl restart iscsid&lt;/code&gt; iscsid if necessary.
+Note: If your worker nodes are running on Red Hat CoreOS , you can refer the URL &lt;a href=&#34;https://coreos.com/os/docs/latest/iscsi.html#enable-automatic-iscsi-login-at-boot&#34;&gt;https://coreos.com/os/docs/latest/iscsi.html#enable-automatic-iscsi-login-at-boot&lt;/a&gt; for additional information.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;driver-install-via-dell-csi-operator&#34;&gt;Driver Install via Dell CSI Operator&lt;/h2&gt;
-&lt;p&gt;For information on how to install the CSI drivers via the Dell CSI Operator, please refer to the sub-pages below for each driver.&lt;/p&gt;
+&lt;h4 id=&#34;multipath&#34;&gt;MultiPath&lt;/h4&gt;
+&lt;p&gt;If you are installing a CSI Driver which requires the installation of the Linux native Multipath software - &lt;em&gt;multipathd&lt;/em&gt;, please follow the below instructions&lt;/p&gt;
+&lt;p&gt;To enable multipathd on RedHat CoreOS nodes you need to prepare a working configuration encoded in base64.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo &#39;defaults { user_friendly_names yes find_multipaths yes } blacklist { }&#39; | base64 -w0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Use the base64 encoded string output in the following &lt;code&gt;MachineConfig&lt;/code&gt; yaml file (under source section)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;machineconfiguration.openshift.io/v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;MachineConfig&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;workers-multipath-conf-default&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;machineconfiguration.openshift.io/role&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;worker&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ignition&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;version&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2.2.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;files&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;contents&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;source&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;data&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;text/plain;charset=utf&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;-8&lt;/span&gt;;base64&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;ZGVmYXVsdHMgewp1c2VyX2ZyaWVuZGx5X25hbWVzIHllcwpmaW5kX211bHRpcGF0aHMgeWVzCn0KCmJsYWNrbGlzdCB7Cn0K&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;verification&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;filesystem&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;root&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;400&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/etc/multipath.conf&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After deploying this&lt;code&gt;MachineConfig&lt;/code&gt; object, CoreOS will start multipath service automatically.&lt;br&gt;
+Alternatively you can check the status of multipath service by entering the following command in each worker nodes.&lt;br&gt;
+&lt;code&gt;sudo multipath -ll&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the above command is not successful, ensure that the /etc/multipath.conf file is present and configured properly. Once the file has been configured correctly, enable the multipath service by running the following command:
+&lt;code&gt;sudo /sbin/mpathconf –-enable --with_multipathd y&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Finally , you have to restart the service by providing the command
+&lt;code&gt;sudo systemctl restart multipathd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;For additional information refer official documentation of multipath configuration.&lt;/p&gt;
+&lt;h2 id=&#34;replacing-csi-operator-with-dell-csi-operator&#34;&gt;Replacing CSI Operator with Dell CSI Operator&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Dell CSI Operator&lt;/code&gt; was previously available, with the name &lt;code&gt;CSI Operator&lt;/code&gt;, for both manual and OLM installation.&lt;br&gt;
+&lt;code&gt;CSI Operator&lt;/code&gt; has been discontinued and has been renamed to &lt;code&gt;Dell CSI Operator&lt;/code&gt;.  This is just a name change and as a result,
+the Kubernetes resources created as part of the Operator deployment will use the name &lt;code&gt;dell-csi-operator&lt;/code&gt; instead of &lt;code&gt;csi-operator&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Before proceeding with the installation of the new &lt;code&gt;Dell CSI Operator&lt;/code&gt;, any existing &lt;code&gt;CSI Operator&lt;/code&gt; installation has to be completely
+removed from the cluster.&lt;/p&gt;
+&lt;p&gt;Note - This &lt;strong&gt;doesn&amp;rsquo;t&lt;/strong&gt; impact any of the CSI Drivers which have been installed in the cluster&lt;/p&gt;
+&lt;p&gt;If the old &lt;code&gt;CSI Operator&lt;/code&gt; was installed manually, then run the following command from the root of the repository which was used
+originally for installation&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bash scripts/undeploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&amp;rsquo;t have the original repository available, then run the following commands&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/dell/dell-csi-operator.git
+cd dell-csi-operator
+git checkout csi-operator-v1.0.0
+bash scripts/undeploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note - Once you have removed the old &lt;code&gt;CSI Operator&lt;/code&gt;, then for installing the new &lt;code&gt;Dell CSI Operator&lt;/code&gt;, you will need to pull/checkout the latest code&lt;/p&gt;
+&lt;p&gt;If you had installed old CSI Operator using OLM, then please follow un-installation instructions provided by OperatorHub. This will mostly involve:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* Deleting the CSI Operator Subscription  
+* Deleting the CSI Operator CSV  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;install-csi-driver&#34;&gt;Install CSI Driver&lt;/h2&gt;
+&lt;p&gt;To install CSI drivers using Dell CSI Operator, please refer &lt;a href=&#34;./installdriver&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; For more information on pre-requisites and parameters, please refer to the sub-pages below for each driver.&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>V2: Offline Installation of Dell EMC CSI Storage Providers</title>
-      <link>https://dell.github.io/storage-plugin-docs/v2/installation/offline/</link>
+      <link>https://dell.github.io/csm-docs/v2/installation/offline/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/v2/installation/offline/</guid>
+      <guid>https://dell.github.io/csm-docs/v2/installation/offline/</guid>
       <description>
         
         
@@ -191,12 +389,12 @@ or the Dell CSI Operator.&lt;/p&gt;
 &lt;p&gt;To perform an offline installation of a driver or the Operator, the following steps should be performed:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Build an offline bundle&lt;/li&gt;
-&lt;li&gt;Unpacking an offline bundle and preparing for installation&lt;/li&gt;
-&lt;li&gt;Perform either a Helm installation or Operator installation&lt;/li&gt;
+&lt;li&gt;Unpacking the offline bundle created in Step 1 and preparing for installation&lt;/li&gt;
+&lt;li&gt;Perform either a Helm installation or Operator installation using the files obtained after unpacking in Step 2&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;building-an-offline-bundle&#34;&gt;Building an offline bundle&lt;/h3&gt;
 &lt;p&gt;This needs to be performed on a linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.&lt;/p&gt;
-&lt;p&gt;The build an offline bundle, the following steps are needed:&lt;/p&gt;
+&lt;p&gt;To build an offline bundle, the following steps are needed:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Perform a &lt;code&gt;git clone&lt;/code&gt; of the desired repository. For a helm based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script with an argument of &lt;code&gt;-c&lt;/code&gt; in order to create an offline bundle&lt;/li&gt;
@@ -269,11 +467,11 @@ dell-csi-operator-bundle/README.md
 * Complete
 
 Offline bundle file is: /dell/git/dell-csi-operator/dell-csi-operator-bundle.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;unpacking-an-offline-bundle-and-preparing-for-installation&#34;&gt;Unpacking an offline bundle and preparing for installation&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;unpacking-the-offline-bundle-and-preparing-for-installation&#34;&gt;Unpacking the offline bundle and preparing for installation&lt;/h3&gt;
 &lt;p&gt;This needs to be performed on a linux system with access to an image registry that will host container images. If the registry requires &lt;code&gt;login&lt;/code&gt;, that should be done before proceeding.&lt;/p&gt;
 &lt;p&gt;To prepare for driver or Operator installation, the following steps need to be performed:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Copy the offline bundle file to a system with access to an image registry available to your Kubernetes/OpenShift cluster&lt;/li&gt;
+&lt;li&gt;Copy the offline bundle file created from the previous step to a system with access to an image registry available to your Kubernetes/OpenShift cluster&lt;/li&gt;
 &lt;li&gt;Expand the bundle file by running &lt;code&gt;tar xvfz &amp;lt;filename&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script and supply the &lt;code&gt;-p&lt;/code&gt; option as well as the path to the internal registry with the &lt;code&gt;-r&lt;/code&gt; option&lt;/li&gt;
 &lt;/ol&gt;
@@ -347,17 +545,18 @@ Preparing a offline bundle for installation
 * Complete
 
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;perform-either-a-helm-installation-or-operator-installation&#34;&gt;Perform either a Helm installation or Operator installation&lt;/h3&gt;
-&lt;p&gt;Now that the required images have been made available and the Helm Charts/Operator configuration updated, installation can proceed by following the usual installation procedure as documented.&lt;/p&gt;
+&lt;p&gt;Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via &lt;a href=&#34;../helm&#34;&gt;Helm&lt;/a&gt; or &lt;a href=&#34;../operator/#manual-installation&#34;&gt;Operator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt; Installation should be done using the files that was obtained after unpacking the bundle as the image tags in the manifests are modifed to point to the internal registry.&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>V2: Testing Drivers</title>
-      <link>https://dell.github.io/storage-plugin-docs/v2/installation/test/</link>
+      <link>https://dell.github.io/csm-docs/v2/installation/test/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/storage-plugin-docs/v2/installation/test/</guid>
+      <guid>https://dell.github.io/csm-docs/v2/installation/test/</guid>
       <description>
         
         

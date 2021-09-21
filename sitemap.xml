@@ -3,933 +3,1468 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/operator/</loc>
+    <loc>https://dell.github.io/csm-docs/docs/deployment/csmapi/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/upgradation/drivers/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/upgradation/drivers/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/deployment/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/authorization/design/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/design/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/resiliency/design/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/grasp/start/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/upgradation/drivers/operator/</loc>
+    <loc>https://dell.github.io/csm-docs/v1/grasp/start/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/grasp/start/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/grasp/start/</loc>
+    <loc>https://dell.github.io/csm-docs/v3/grasp/start/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/dell-csi-driver/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/dell-csi-driver/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/dell-csi-driver/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/features/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/upgradation/drivers/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/upgradation/drivers/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/upgradation/drivers/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/metrics/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/features/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/upgradation/drivers/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/upgradation/drivers/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/upgradation/drivers/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/features/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/upgradation/drivers/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/upgradation/drivers/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/upgradation/drivers/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/features/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/upgradation/drivers/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/upgradation/drivers/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/upgradation/drivers/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/metrics/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/features/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/upgradation/drivers/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/upgradation/drivers/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/upgradation/drivers/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/architecture/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/authorization/deployment/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/deployment/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/faq/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/deployment/installation/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/grasp/start/</loc>
+    <loc>https://dell.github.io/csm-docs/v3/installation/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/metrics/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/authorization/uninstallation/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/resiliency/uninstallation/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/resiliency/usecases/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/helm/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/helm/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/helm/</loc>
+    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/helm/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/authorization/cli/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/cluster-topologies/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/deployment/configmap-secrets/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/deployment/csmcli/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/deployment/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/resiliency/deployment/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/deployment/helm/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/deployment/online/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/deployment/offline/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/partners/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/partners/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/partners/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/partners/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/partners/redhat/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/partners/redhat/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/partners/redhat/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/partners/redhat/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/uninstall/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/uninstall/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/uninstall/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/uninstall/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/uninstall/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/upgradation/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/upgradation/</loc>
     <lastmod>2021-03-18T01:03:08+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/grasp/start/</loc>
+    <loc>https://dell.github.io/csm-docs/v2/upgradation/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/dell-csi-driver/</loc>
-    <lastmod>2021-07-16T02:05:18-04:00</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/upgradation/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/dell-csi-driver/</loc>
-    <lastmod>2021-06-25T15:43:47+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/authorization/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/dell-csi-driver/</loc>
-    <lastmod>2021-06-25T15:43:47+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/replication/disaster-recovery/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerflex/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/features/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/upgradation/drivers/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/upgradation/drivers/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powermax/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/upgradation/drivers/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/upgradation/drivers/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/isilon/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/upgradation/drivers/isilon/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/upgradation/drivers/isilon/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/powerstore/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/upgradation/drivers/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/upgradation/drivers/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/upgradation/drivers/unity/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/upgradation/drivers/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/upgradation/drivers/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/</loc>
+    <loc>https://dell.github.io/csm-docs/v1/features/</loc>
     <lastmod>2021-03-18T01:03:08+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/</loc>
+    <loc>https://dell.github.io/csm-docs/v2/features/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/features/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/helm/</loc>
+    <loc>https://dell.github.io/csm-docs/docs/replication/deployment/install-repctl/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/authorization/troubleshooting/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/deployment/troubleshooting/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/troubleshooting/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/resiliency/troubleshooting/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/high-availability/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/observability/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/deployment/storageclasses/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/troubleshooting/</loc>
     <lastmod>2021-03-18T01:03:08+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/helm/</loc>
+    <loc>https://dell.github.io/csm-docs/v2/troubleshooting/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/partners/operator/</loc>
+    <loc>https://dell.github.io/csm-docs/v3/troubleshooting/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/monitoring/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/deployment/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/release/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/release/</loc>
+    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/release/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/partners/operator/</loc>
+    <loc>https://dell.github.io/csm-docs/v3/release/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/replication-actions/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/resiliency/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/grasp/</loc>
+    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/grasp/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/partners/operator/</loc>
+    <loc>https://dell.github.io/csm-docs/v3/grasp/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/deployment/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/tools/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/snapshots/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/troubleshooting/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/concepts/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/concepts/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/partners/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/partners/</loc>
+    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/partners/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/partners/redhat/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/partners/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/partners/redhat/</loc>
-    <lastmod>2021-03-22T19:07:13+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/grasp/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/partners/redhat/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/troubleshooting/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/uninstall/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/support/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/uninstall/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/uninstall/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/upgradation/</loc>
+    <loc>https://dell.github.io/csm-docs/blog/news/</loc>
     <lastmod>2020-12-03T07:41:57-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/upgradation/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/blog/2020/10/30/google-anthos-announcements/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/upgradation/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/features/</loc>
+    <loc>https://dell.github.io/csm-docs/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</loc>
     <lastmod>2020-12-03T07:41:57-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/features/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/features/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/operator/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/operator/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/</loc>
-    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/troubleshooting/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/release/</loc>
-    <lastmod>2020-12-04T15:19:03-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/release/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/release/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/grasp/</loc>
+    <loc>https://dell.github.io/csm-docs/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</loc>
     <lastmod>2020-12-03T07:41:57-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/grasp/</loc>
+    <loc>https://dell.github.io/csm-docs/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/operator/installdriver/</loc>
+    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/operator/installdriver/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/archives/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/archives/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/archives/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/archives/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/blog/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/troubleshooting/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/troubleshooting/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/partners/docker/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/partners/docker/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/partners/docker/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/partners/docker/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/offline/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/offline/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/offline/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/offline/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/release/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/release/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/release/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/release/operator/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/operator/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/test/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/release/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/features/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/helm/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/operator/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/test/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/release/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/troubleshooting/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/features/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/helm/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/operator/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/test/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/release/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/troubleshooting/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/features/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/helm/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/operator/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/test/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/release/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/troubleshooting/powerflex/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/operator/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/test/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/release/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/features/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/helm/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/operator/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/test/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/release/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/troubleshooting/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/features/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/helm/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/operator/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/test/powermax/</loc>
+    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/release/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/troubleshooting/powermax/</loc>
+    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/features/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/helm/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/operator/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/test/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/release/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/troubleshooting/powermax/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/helm/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/operator/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/test/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/release/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/features/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/helm/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/operator/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/test/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/release/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/troubleshooting/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/features/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/helm/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/operator/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/test/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/release/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/troubleshooting/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/features/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/helm/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/operator/isilon/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/test/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/release/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/troubleshooting/powerscale/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/operator/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/test/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/features/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/helm/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/operator/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/test/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/release/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/troubleshooting/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/features/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/helm/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/operator/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/installation/test/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/release/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/troubleshooting/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/features/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/helm/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/operator/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/installation/test/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/release/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/troubleshooting/powerstore/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/grasp/video/</loc>
+    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/grasp/video/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v2/grasp/video/</loc>
+    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v3/grasp/video/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/partners/rancher/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/partners/rancher/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/search/</loc>
+    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/test/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/v1/installation/test/</loc>
     <lastmod>2021-03-18T01:03:08+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/grasp/</loc>
+    <loc>https://dell.github.io/csm-docs/v2/installation/test/</loc>
     <lastmod>2021-06-18T13:39:03+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/concepts/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/concepts/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/partners/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/partners/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/partners/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/blog/news/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/blog/2020/10/30/google-anthos-announcements/</loc>
-    <lastmod>2020-12-11T15:59:45+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/blog/2020/09/28/csi-drivers-volume-expansion-and-beta-snapshot-support-update/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/blog/2020/06/15/june-2020-dell-storage-enablers-big-update/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/blog/2020/05/27/anthos-1.3-qualification-for-powermax/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/installdriver/</loc>
-    <lastmod>2021-04-02T01:16:18+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/operator/installdriver/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/archives/</loc>
-    <lastmod>2020-12-05T13:38:20-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/archives/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/archives/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/blog/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/operator/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/operator/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/</loc>
-    <lastmod>2020-12-11T18:11:30+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/partners/docker/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/partners/docker/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/</loc>
-    <lastmod>2021-06-25T15:43:47+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/</loc>
-    <lastmod>2021-06-25T15:43:47+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/partners/docker/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/offline/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/offline/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/offline/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/release/operator/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/release/operator/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/release/operator/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/features/powerflex/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerflex/</loc>
-    <lastmod>2021-06-25T15:43:47+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/test/powerflex/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/release/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerflex/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/features/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/helm/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/operator/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/test/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/release/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/features/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/helm/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/operator/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/test/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/release/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/troubleshooting/powerflex/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/features/powermax/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powermax/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/test/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/release/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/features/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/helm/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/operator/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/test/powermax/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/release/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powermax/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/features/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/helm/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/operator/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/test/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/release/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/troubleshooting/powermax/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/features/powerscale/</loc>
-    <lastmod>2021-07-16T11:52:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/isilon/</loc>
-    <lastmod>2021-07-07T12:30:48+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/isilon/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/test/powerscale/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/release/powerscale/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerscale/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/features/powerscale/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/helm/isilon/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/operator/isilon/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/test/powerscale/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/release/powerscale/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerscale/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/features/powerscale/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/helm/isilon/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/operator/isilon/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/test/powerscale/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/release/powerscale/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/troubleshooting/powerscale/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/features/powerstore/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/powerstore/</loc>
-    <lastmod>2021-06-25T15:43:47+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/test/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/release/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/powerstore/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/features/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/helm/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/operator/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/test/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/release/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/features/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/helm/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/operator/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/test/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/release/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/troubleshooting/powerstore/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/grasp/video/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/grasp/video/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/installation/test/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/grasp/video/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/helm/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/partners/rancher/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/operator/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/search/</loc>
-    <lastmod>2020-12-03T07:41:57-05:00</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/test/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/test/</loc>
-    <lastmod>2020-12-11T15:59:45+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/release/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/test/</loc>
-    <lastmod>2021-03-18T01:03:08+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/test/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v1/features/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/features/unity/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v1/installation/helm/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/helm/unity/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v1/installation/operator/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/operator/unity/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v1/installation/test/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/installation/test/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v1/release/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/release/unity/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v1/troubleshooting/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/troubleshooting/unity/</loc>
-    <lastmod>2021-07-01T19:13:06+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v2/features/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/features/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v2/installation/helm/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/helm/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v2/installation/operator/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/operator/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v2/installation/test/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/installation/test/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v2/release/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/release/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v2/troubleshooting/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v1/troubleshooting/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/features/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/features/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/installation/helm/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/helm/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/installation/operator/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/operator/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/installation/test/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/installation/test/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/release/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/release/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v3/troubleshooting/unity/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/v2/troubleshooting/unity/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/docs/csidriver/partners/tanzu/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://dell.github.io/storage-plugin-docs/docs/partners/tanzu/</loc>
-    <lastmod>2021-06-18T13:39:03+05:30</lastmod>
+    <loc>https://dell.github.io/csm-docs/v1/partners/tanzu/</loc>
+    <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url>
   
 </urlset>

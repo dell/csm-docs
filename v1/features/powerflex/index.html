@@ -6,17 +6,17 @@
 <meta name="generator" content="Hugo 0.72.0" /><META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
-<link rel="icon" type="image/png" href="/storage-plugin-docs/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 
 <title>PowerFlex | Dell Technologies</title><meta property="og:title" content="PowerFlex" />
 <meta property="og:description" content="Code features for PowerFlex Driver" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://dell.github.io/storage-plugin-docs/v1/features/powerflex/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="og:url" content="https://dell.github.io/csm-docs/v1/features/powerflex/" />
+<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Code features for PowerFlex Driver">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="2165">
+<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
+<meta itemprop="wordCount" content="2473">
 
 
 
@@ -28,8 +28,8 @@
 
 
 
-<link rel="preload" href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
-<link href="/storage-plugin-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" as="style">
+<link href="/csm-docs/scss/main.min.3011491d21ab91352e3e45bb211e969f3729963f1a8f20361dbdb7430e40188c.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -50,7 +50,7 @@
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
-        <a class="navbar-brand" href="/storage-plugin-docs/">
+        <a class="navbar-brand" href="/csm-docs/">
 		<span class="navbar-logo"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1017 132"><defs><style>.cls-1{fill:#fff}</style></defs><title>DellTech_Logo_Prm_Wht_rgb</title><path class="cls-1" d="M1015 84.89c0-12.23-6.8-17.66-20.39-20.38s-21.73-4.08-21.73-13.58c0-6.8 5.44-10.87 15-10.87 12.22.0 16.3 5.43 16.3 12.22l1.36 1.36h5.43l1.37-1.36c0-13.58-10.88-19-24.46-19-15 0-23.1 8.15-23.1 17.67.0 10.86 8.15 16.3 21.73 19s20.38 4.08 20.38 15c0 6.79-4.07 12.23-17.66 12.23-12.22.0-17.66-6.8-17.66-15l-1.35-1.36h-5.44l-1.35 1.36c0 12.23 9.5 21.74 25.8 21.74 17.66.0 25.82-8.15 25.82-19M956.58 71.31l1.36-1.37V65.87c0-19-10.87-32.61-29.89-32.61s-29.89 13.59-29.89 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38l-1.36-1.36h-5.43l-1.36 1.36c-2.72 8.15-8.16 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H907.67l-1.36-1.36c0-9.51 5.44-23.09 21.74-23.09s21.74 13.58 21.74 23.09zm-59.78 36.68V36l-1.36-1.35h-5.43L880.5 36v65.22l1.36 1.36h5.43zm0-78.8V14.24l-1.36-1.36h-5.43l-1.36 1.36v8.15l1.36 1.36h5.43zM837 97.12c-13.59.0-21.74-9.52-21.74-28.53S823.44 40.06 837 40.06s21.73 9.5 21.73 28.53S850.61 97.12 837 97.12M858.76 93c0 17.66-4.07 31.25-20.38 31.25-12.22.0-16.3-5.44-17.66-12.23l-1.35-1.36h-5.44l-1.36 1.36c1.36 10.87 9.51 19 25.81 19 17.67.0 28.53-10.87 28.53-38V36l-1.35-1.35h-4.08L860.12 36l-1.36 8.16H857.4c-2.71-5.43-9.5-10.87-21.74-10.87-19 0-28.53 15-28.53 35.33s9.52 35.32 28.53 35.32c12.24.0 19-5.43 21.74-10.87zm-88.3-53c13.58.0 23.09 10.87 23.09 28.53S784 97.12 770.46 97.12s-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32s-13.59-35.33-31.25-35.33-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-40.76-2.72V8.81l-1.36-1.36h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43zM680.8 40.06c13.58.0 23.09 10.87 23.09 28.53s-9.51 28.53-23.09 28.53-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32S698.46 33.26 680.8 33.26s-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-39.4-2.72V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.67 4.08-21.74 10.87h-1.36L592.49 36l-1.36-1.35h-4.08L585.7 36v65.22l1.35 1.36h5.44l1.36-1.36V64.51c0-15 6.79-24.45 21.73-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.37 1.36H640zm-69.29.0V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.66 4.08-21.74 10.87h-1.36V8.81L523.2 7.45h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43l1.36-1.36V64.51c0-15 6.8-24.45 21.74-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.36 1.36h5.44zM455.28 68.59c0-19 9.5-28.53 23.09-28.53s19 8.15 20.38 16.29l1.35 1.37h5.44l1.36-1.37c-1.36-13.58-12.23-23.09-28.53-23.09-17.66.0-31.24 10.87-31.24 35.33s13.58 35.32 31.24 35.32c16.3.0 27.17-9.51 28.53-23.1l-1.36-1.36H500.1l-1.35 1.36C497.39 89 492 97.12 478.37 97.12s-23.09-9.52-23.09-28.53m-14.95 2.72 1.36-1.37V65.87c0-19-10.87-32.61-29.9-32.61s-29.88 13.59-29.88 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38L439 82.17h-5.43l-1.36 1.36c-2.72 8.15-8.15 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H391.42l-1.36-1.36c0-9.51 5.44-23.09 21.73-23.09s21.75 13.58 21.75 23.09zM395.57 12.88V8.81l-1.36-1.36H323.56L322.2 8.81v4.07l1.36 1.36h29.89l1.36 1.36v85.59l1.36 1.36h5.43l1.36-1.36V15.6l1.36-1.36h29.89z"/><path class="cls-1" d="M322.2 83.65v18.9H260.85V7.45h21.6v76.2zM38.55 102.55A47.57 47.57.0 0084.58 67l53.8 42 53.77-42v35.56H253.5V83.65H213.75V7.45h-21.6V43L140.58 83.3l-11.54-9L153.73 55l26.89-21L165.27 22 113.69 62.3l-11.53-9L153.73 13 138.38 1 84.58 43a47.57 47.57.0 00-46-35.58H0v95.1zM21.6 83.65V26.35H38.55c14.33.0 26 12.83 26 28.65S52.88 83.65 38.55 83.65z"/></svg></span>
 	</a>
 	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
@@ -64,7 +64,7 @@
 				
 				
 				
-				<a class="nav-link" href="/storage-plugin-docs/docs/" ><span>Documentation</span></a>
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell EMC Container Storage Modules (CSM)</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -74,9 +74,35 @@
 				
 				
 				
-				<a class="nav-link" href="/storage-plugin-docs/blog/" ><span>Blog</span></a>
+				<a class="nav-link" href="/csm-docs/blog/" ><span>Blog</span></a>
 			</li>
 			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/dell/csm" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			<li class="nav-item dropdown d-none d-lg-block">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	Releases
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	
+</div>
+
+			</li>
 			
 			
 		</ul>
@@ -92,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5d133afd40f40089f89b14536b87c5d3.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.25bba4d294290e4e650e12a7c14bf91f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -101,7 +127,7 @@
 </nav>
 
     </header>
-    <h3> This doc version is no longer supported by us. You can check our <a href="/storage-plugin-docs/docs">latest version </a></h3>
+    <h3> This doc version is no longer supported by us. You can check our <a href="/csm-docs/docs">latest version </a></h3>
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
@@ -125,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/storage-plugin-docs/offline-search-index.5d133afd40f40089f89b14536b87c5d3.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.25bba4d294290e4e650e12a7c14bf91f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -147,10 +173,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
+    <a  href="/csm-docs/v1/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
   </li>
   <ul>
-    <li class="collapse show" id="storage-plugin-docsv1">
+    <li class="collapse show" id="csm-docsv1">
       
       
       
@@ -165,10 +191,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/dell-csi-driver/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Introduction</a>
+    <a  href="/csm-docs/v1/dell-csi-driver/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Introduction</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1dell-csi-driver">
+    <li class="collapse " id="csm-docsv1dell-csi-driver">
       
       
       
@@ -190,10 +216,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/installation/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Installation</a>
+    <a  href="/csm-docs/v1/installation/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Installation</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1installation">
+    <li class="collapse " id="csm-docsv1installation">
       
       
       
@@ -208,10 +234,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/installation/helm/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using Helm</a>
+    <a  href="/csm-docs/v1/installation/helm/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using Helm</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1installationhelm">
+    <li class="collapse " id="csm-docsv1installationhelm">
       
       
       
@@ -219,7 +245,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationhelmpowerflex" href="/storage-plugin-docs/v1/installation/helm/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationhelmpowerflex" href="/csm-docs/v1/installation/helm/powerflex/">PowerFlex</a>
         
       
       
@@ -227,7 +253,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationhelmpowermax" href="/storage-plugin-docs/v1/installation/helm/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationhelmpowermax" href="/csm-docs/v1/installation/helm/powermax/">PowerMax</a>
         
       
       
@@ -235,7 +261,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationhelmisilon" href="/storage-plugin-docs/v1/installation/helm/isilon/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationhelmisilon" href="/csm-docs/v1/installation/helm/isilon/">PowerScale</a>
         
       
       
@@ -243,7 +269,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationhelmpowerstore" href="/storage-plugin-docs/v1/installation/helm/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationhelmpowerstore" href="/csm-docs/v1/installation/helm/powerstore/">PowerStore</a>
         
       
       
@@ -251,7 +277,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationhelmunity" href="/storage-plugin-docs/v1/installation/helm/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationhelmunity" href="/csm-docs/v1/installation/helm/unity/">Unity</a>
         
       
       
@@ -273,10 +299,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/installation/operator/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using Operator</a>
+    <a  href="/csm-docs/v1/installation/operator/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using Operator</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1installationoperator">
+    <li class="collapse " id="csm-docsv1installationoperator">
       
       
       
@@ -284,7 +310,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorinstalldriver" href="/storage-plugin-docs/v1/installation/operator/installdriver/"></a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationoperatorinstalldriver" href="/csm-docs/v1/installation/operator/installdriver/"></a>
         
       
       
@@ -292,7 +318,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorpowerflex" href="/storage-plugin-docs/v1/installation/operator/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationoperatorpowerflex" href="/csm-docs/v1/installation/operator/powerflex/">PowerFlex</a>
         
       
       
@@ -300,7 +326,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorpowermax" href="/storage-plugin-docs/v1/installation/operator/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationoperatorpowermax" href="/csm-docs/v1/installation/operator/powermax/">PowerMax</a>
         
       
       
@@ -308,7 +334,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorisilon" href="/storage-plugin-docs/v1/installation/operator/isilon/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationoperatorisilon" href="/csm-docs/v1/installation/operator/isilon/">PowerScale</a>
         
       
       
@@ -316,7 +342,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorpowerstore" href="/storage-plugin-docs/v1/installation/operator/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationoperatorpowerstore" href="/csm-docs/v1/installation/operator/powerstore/">PowerStore</a>
         
       
       
@@ -324,7 +350,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationoperatorunity" href="/storage-plugin-docs/v1/installation/operator/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationoperatorunity" href="/csm-docs/v1/installation/operator/unity/">Unity</a>
         
       
       
@@ -346,10 +372,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/installation/offline/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Offline Installer</a>
+    <a  href="/csm-docs/v1/installation/offline/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Offline Installer</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1installationoffline">
+    <li class="collapse " id="csm-docsv1installationoffline">
       
       
       
@@ -371,10 +397,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Testing Drivers</a>
+    <a  href="/csm-docs/v1/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Testing Drivers</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1installationtest">
+    <li class="collapse " id="csm-docsv1installationtest">
       
       
       
@@ -382,7 +408,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationtestpowerflex" href="/storage-plugin-docs/v1/installation/test/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationtestpowerflex" href="/csm-docs/v1/installation/test/powerflex/">PowerFlex</a>
         
       
       
@@ -390,7 +416,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationtestpowermax" href="/storage-plugin-docs/v1/installation/test/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationtestpowermax" href="/csm-docs/v1/installation/test/powermax/">PowerMax</a>
         
       
       
@@ -398,7 +424,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationtestpowerscale" href="/storage-plugin-docs/v1/installation/test/powerscale/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationtestpowerscale" href="/csm-docs/v1/installation/test/powerscale/">PowerScale</a>
         
       
       
@@ -406,7 +432,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationtestpowerstore" href="/storage-plugin-docs/v1/installation/test/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationtestpowerstore" href="/csm-docs/v1/installation/test/powerstore/">PowerStore</a>
         
       
       
@@ -414,7 +440,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1installationtestunity" href="/storage-plugin-docs/v1/installation/test/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1installationtestunity" href="/csm-docs/v1/installation/test/unity/">Unity</a>
         
       
       
@@ -443,10 +469,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/uninstall/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Uninstallation</a>
+    <a  href="/csm-docs/v1/uninstall/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Uninstallation</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1uninstall">
+    <li class="collapse " id="csm-docsv1uninstall">
       
       
       
@@ -468,10 +494,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/upgradation/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Upgrade</a>
+    <a  href="/csm-docs/v1/upgradation/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Upgrade</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1upgradation">
+    <li class="collapse " id="csm-docsv1upgradation">
       
       
       
@@ -479,7 +505,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversoperator" href="/storage-plugin-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1upgradationdriversoperator" href="/csm-docs/v1/upgradation/drivers/operator/">Dell CSI Operator</a>
         
       
       
@@ -487,7 +513,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerflex" href="/storage-plugin-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1upgradationdriverspowerflex" href="/csm-docs/v1/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
       
@@ -495,7 +521,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowermax" href="/storage-plugin-docs/v1/upgradation/drivers/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1upgradationdriverspowermax" href="/csm-docs/v1/upgradation/drivers/powermax/">PowerMax</a>
         
       
       
@@ -503,7 +529,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversisilon" href="/storage-plugin-docs/v1/upgradation/drivers/isilon/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1upgradationdriversisilon" href="/csm-docs/v1/upgradation/drivers/isilon/">PowerScale</a>
         
       
       
@@ -511,7 +537,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriverspowerstore" href="/storage-plugin-docs/v1/upgradation/drivers/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1upgradationdriverspowerstore" href="/csm-docs/v1/upgradation/drivers/powerstore/">PowerStore</a>
         
       
       
@@ -519,7 +545,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1upgradationdriversunity" href="/storage-plugin-docs/v1/upgradation/drivers/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1upgradationdriversunity" href="/csm-docs/v1/upgradation/drivers/unity/">Unity</a>
         
       
       
@@ -541,10 +567,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/features/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Features</a>
+    <a  href="/csm-docs/v1/features/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Features</a>
   </li>
   <ul>
-    <li class="collapse show" id="storage-plugin-docsv1features">
+    <li class="collapse show" id="csm-docsv1features">
       
       
       
@@ -552,7 +578,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page  active" id="m-storage-plugin-docsv1featurespowerflex" href="/storage-plugin-docs/v1/features/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page  active" id="m-csm-docsv1featurespowerflex" href="/csm-docs/v1/features/powerflex/">PowerFlex</a>
         
       
       
@@ -560,7 +586,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1featurespowermax" href="/storage-plugin-docs/v1/features/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1featurespowermax" href="/csm-docs/v1/features/powermax/">PowerMax</a>
         
       
       
@@ -568,7 +594,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1featurespowerscale" href="/storage-plugin-docs/v1/features/powerscale/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1featurespowerscale" href="/csm-docs/v1/features/powerscale/">PowerScale</a>
         
       
       
@@ -576,7 +602,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1featurespowerstore" href="/storage-plugin-docs/v1/features/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1featurespowerstore" href="/csm-docs/v1/features/powerstore/">PowerStore</a>
         
       
       
@@ -584,7 +610,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1featuresunity" href="/storage-plugin-docs/v1/features/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1featuresunity" href="/csm-docs/v1/features/unity/">Unity</a>
         
       
       
@@ -606,10 +632,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
+    <a  href="/csm-docs/v1/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1troubleshooting">
+    <li class="collapse " id="csm-docsv1troubleshooting">
       
       
       
@@ -617,7 +643,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingoperator" href="/storage-plugin-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1troubleshootingoperator" href="/csm-docs/v1/troubleshooting/operator/">Dell CSI Operator</a>
         
       
       
@@ -625,7 +651,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingpowerflex" href="/storage-plugin-docs/v1/troubleshooting/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1troubleshootingpowerflex" href="/csm-docs/v1/troubleshooting/powerflex/">PowerFlex</a>
         
       
       
@@ -633,7 +659,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingpowermax" href="/storage-plugin-docs/v1/troubleshooting/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1troubleshootingpowermax" href="/csm-docs/v1/troubleshooting/powermax/">PowerMax</a>
         
       
       
@@ -641,7 +667,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingpowerscale" href="/storage-plugin-docs/v1/troubleshooting/powerscale/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1troubleshootingpowerscale" href="/csm-docs/v1/troubleshooting/powerscale/">PowerScale</a>
         
       
       
@@ -649,7 +675,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingpowerstore" href="/storage-plugin-docs/v1/troubleshooting/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1troubleshootingpowerstore" href="/csm-docs/v1/troubleshooting/powerstore/">PowerStore</a>
         
       
       
@@ -657,7 +683,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1troubleshootingunity" href="/storage-plugin-docs/v1/troubleshooting/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1troubleshootingunity" href="/csm-docs/v1/troubleshooting/unity/">Unity</a>
         
       
       
@@ -679,10 +705,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/release/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Release Notes</a>
+    <a  href="/csm-docs/v1/release/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Release Notes</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1release">
+    <li class="collapse " id="csm-docsv1release">
       
       
       
@@ -690,7 +716,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1releaseoperator" href="/storage-plugin-docs/v1/release/operator/">Operator</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1releaseoperator" href="/csm-docs/v1/release/operator/">Operator</a>
         
       
       
@@ -698,7 +724,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1releasepowerflex" href="/storage-plugin-docs/v1/release/powerflex/">PowerFlex</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1releasepowerflex" href="/csm-docs/v1/release/powerflex/">PowerFlex</a>
         
       
       
@@ -706,7 +732,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1releasepowermax" href="/storage-plugin-docs/v1/release/powermax/">PowerMax</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1releasepowermax" href="/csm-docs/v1/release/powermax/">PowerMax</a>
         
       
       
@@ -714,7 +740,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1releasepowerscale" href="/storage-plugin-docs/v1/release/powerscale/">PowerScale</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1releasepowerscale" href="/csm-docs/v1/release/powerscale/">PowerScale</a>
         
       
       
@@ -722,7 +748,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1releasepowerstore" href="/storage-plugin-docs/v1/release/powerstore/">PowerStore</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1releasepowerstore" href="/csm-docs/v1/release/powerstore/">PowerStore</a>
         
       
       
@@ -730,7 +756,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1releaseunity" href="/storage-plugin-docs/v1/release/unity/">Unity</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1releaseunity" href="/csm-docs/v1/release/unity/">Unity</a>
         
       
       
@@ -752,10 +778,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/grasp/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Learn</a>
+    <a  href="/csm-docs/v1/grasp/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Learn</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1grasp">
+    <li class="collapse " id="csm-docsv1grasp">
       
       
       
@@ -763,7 +789,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1graspstart" href="/storage-plugin-docs/v1/grasp/start/">Getting Started</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1graspstart" href="/csm-docs/v1/grasp/start/">Getting Started</a>
         
       
       
@@ -771,7 +797,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1graspvideo" href="/storage-plugin-docs/v1/grasp/video/">Quick video lessons</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1graspvideo" href="/csm-docs/v1/grasp/video/">Quick video lessons</a>
         
       
       
@@ -793,10 +819,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+    <a  href="/csm-docs/v1/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1concepts">
+    <li class="collapse " id="csm-docsv1concepts">
       
       
       
@@ -818,10 +844,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
+    <a  href="/csm-docs/v1/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1partners">
+    <li class="collapse " id="csm-docsv1partners">
       
       
       
@@ -829,7 +855,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1partnersoperator" href="/storage-plugin-docs/v1/partners/operator/">OperatorHub.io</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1partnersoperator" href="/csm-docs/v1/partners/operator/">OperatorHub.io</a>
         
       
       
@@ -837,7 +863,7 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1partnersredhat" href="/storage-plugin-docs/v1/partners/redhat/">Red Hat OpenShift</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1partnersredhat" href="/csm-docs/v1/partners/redhat/">Red Hat OpenShift</a>
         
       
       
@@ -845,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-storage-plugin-docsv1partnersdocker" href="/storage-plugin-docs/v1/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1partnersdocker" href="/csm-docs/v1/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1partnersrancher" href="/csm-docs/v1/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1partnerstanzu" href="/csm-docs/v1/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -867,10 +909,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/storage-plugin-docs/v1/archives/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Archives</a>
+    <a  href="/csm-docs/v1/archives/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Archives</a>
   </li>
   <ul>
-    <li class="collapse " id="storage-plugin-docsv1archives">
+    <li class="collapse " id="csm-docsv1archives">
       
       
       
@@ -906,9 +948,11 @@
         <li><a href="#creating-pvcs-with-volume-snapshots-as-source">Creating PVCs with Volume Snapshots as Source</a></li>
       </ul>
     </li>
+    <li><a href="#create-consistent-snapshot-of-group-of-volumes">Create Consistent Snapshot of Group of Volumes</a></li>
     <li><a href="#volume-expansion-feature">Volume Expansion Feature</a></li>
     <li><a href="#volume-cloning-feature">Volume Cloning Feature</a></li>
     <li><a href="#raw-block-support">Raw Block Support</a></li>
+    <li><a href="#custom-file-system-format-options">Custom File System Format Options</a></li>
     <li><a href="#topology-support">Topology Support</a>
       <ul>
         <li><a href="#topology-usage">Topology Usage</a></li>
@@ -923,6 +967,7 @@
       </ul>
     </li>
     <li><a href="#ephemeral-inline-volume">Ephemeral Inline Volume</a></li>
+    <li><a href="#dynamic-logging-configuration">Dynamic Logging Configuration</a></li>
   </ul>
 </nav>
 
@@ -948,21 +993,21 @@
 
 
 <li class="breadcrumb-item" >
-	<a href="https://dell.github.io/storage-plugin-docs/v1/">Documentation</a>
+	<a href="https://dell.github.io/csm-docs/v1/">Documentation</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item" >
-	<a href="https://dell.github.io/storage-plugin-docs/v1/features/">Features</a>
+	<a href="https://dell.github.io/csm-docs/v1/features/">Features</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://dell.github.io/storage-plugin-docs/v1/features/powerflex/">PowerFlex</a>
+	<a href="https://dell.github.io/csm-docs/v1/features/powerflex/">PowerFlex</a>
 </li>
 
 	</ol>
@@ -974,16 +1019,17 @@
 
 	       
 	<h2 id="volume-snapshot-feature">Volume Snapshot Feature</h2>
-<p>The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes 1.17 and is generally available (v1) in Kubernetes version 1.20.</p>
-<p>The CSI PowerFlex driver version 1.4 supports v1beta1 snapshots on Kubernetes 1.18/1.19 and v1 snapshots on Kubernetes 1.20.</p>
+<p>The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes 1.17 and is generally available (v1) in Kubernetes version &gt;=1.20.</p>
+<p>The CSI PowerFlex driver version 1.5 supports v1beta1 snapshots on Kubernetes 1.19 and v1 snapshots on Kubernetes 1.20 and 1.21.</p>
 <p>In order to use Volume Snapshots, ensure the following components are deployed to your cluster:</p>
 <ul>
 <li>Kubernetes Volume Snaphshot CRDs</li>
 <li>Volume Snapshot Controller</li>
 </ul>
 <h3 id="volume-snapshot-class">Volume Snapshot Class</h3>
-<p>During the installation of CSI PowerFlex 1.4 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.</p>
-<p>Following is the manifest for the Volume Snapshot Class created during installation:</p>
+<p>Before PowerFlex driver v1.5, the installation of the driver created default instance of VolumeSnapshotClass.
+API version of this VolumeSnapshotClass instance was defined based on Kubernetes version, as below:</p>
+<p>Following is the manifest for the Volume Snapshot Class created during installation, prior to PowerFlex driver v1.5:</p>
 <pre><code>{{- if eq .Values.kubeversion  &quot;v1.20&quot; }}
 apiVersion: snapshot.storage.k8s.io/v1
 {{- else }}
@@ -995,7 +1041,10 @@ metadata:
 driver: csi-vxflexos.dellemc.com
 deletionPolicy: Delete
 
-</code></pre><h3 id="create-volume-snapshot">Create Volume Snapshot</h3>
+</code></pre><p>Installation of PowerFlex driver v1.5 does not create VolumeSnapshotClass. You can find samples of default v1beta1 and v1
+VolumeSnapshotClass instances in <code>helm/samples/volumesnapshotclass</code> directory. There are two samples, one for v1beta1 version and
+the other for v1 snapshot version. If needed, install appropriate default sample, based on the version of snapshot CRDs in your cluster.</p>
+<h3 id="create-volume-snapshot">Create Volume Snapshot</h3>
 <p>The following is a sample manifest for creating a Volume Snapshot using the <strong>v1beta1</strong> snapshot APIs:</p>
 <pre><code>apiVersion: snapshot.storage.k8s.io/v1beta1
 kind: VolumeSnapshot
@@ -1007,7 +1056,7 @@ spec:
   source:
     persistentVolumeClaimName: pvol0
 
-</code></pre><p>Once the VolumeSnapshot is successfully created by the CSI PowerFlex driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the <em>readyToUse</em> field set to <em>true</em> , it is available for use.</p>
+</code></pre><p>Once the VolumeSnapshot is successfully created by the CSI PowerFlex driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the <em>readyToUse</em> field set to <em>true</em>, it is available for use.</p>
 <p>Following is the relevant section of VolumeSnapshot object status:</p>
 <pre><code>status:
   boundVolumeSnapshotContentName: snapcontent-5a8334d2-eb40-4917-83a2-98f238c4bda
@@ -1031,11 +1080,15 @@ spec:
   resources:
     requests:
       storage: 8Gi
-</code></pre><h2 id="volume-expansion-feature">Volume Expansion Feature</h2>
-<p>The CSI PowerFlex driver version 1.2 and later support expansion of Persistent Volumes. This expansion is done online, that is, when PVC is attached to a node.</p>
-<p>To use this feature, the storage class used to create the PVC must have the attribute <em>allowVolumeExpansion</em> set to <em>true</em>. The storage classes created during the installation (both using Helm or dell-csi-operator) have the <em>allowVolumeExpansion</em> set to <em>true</em> by default.</p>
-<p>In case you are creating more storage classes, ensure that this attribute is set to <em>true</em> if you wish to expand any Persistent Volumes created using these new storage classes.</p>
-<p>Following is a sample manifest for a storage class which allows for Volume Expansion:</p>
+</code></pre><h2 id="create-consistent-snapshot-of-group-of-volumes">Create Consistent Snapshot of Group of Volumes</h2>
+<p>This feature extends CSI specification to add the capability to create crash-consistent snapshots of a group of volumes.
+PowerFlex driver implements this extension in v1.5.
+This feature is currently in Technical Preview. To use this feature users have to deploy csi-volumegroupsnapshotter side-car as part of the PowerFlex driver.<br>
+More details can be found here: <a href="https://github.com/dell/csi-volumegroup-snapshotter">dell-csi-volumegroup-snapshotter</a>.</p>
+<h2 id="volume-expansion-feature">Volume Expansion Feature</h2>
+<p>The CSI PowerFlex driver version 1.2 and later support expansion of Persistent Volumes. This expansion is done online, which is when PVC is attached to a node.</p>
+<p>To use this feature, the storage class used to create the PVC must have the attribute <em>allowVolumeExpansion</em> set to <em>true</em>.</p>
+<p>Following is a sample manifest for a storage class that allows for Volume Expansion:</p>
 <pre><code>apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -1069,11 +1122,13 @@ status:
   capacity:
     storage: 8Gi
   phase: Bound
-</code></pre><p><em>NOTE:</em> Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the next highest multiple of 8.</p>
+</code></pre><blockquote>
+<p><em>NOTE:</em> Kubernetes Volume Expansion feature cannot be used to shrink a volume and volumes cannot be expanded to a value that is not a multiple of 8. If attempted, the driver will round up. For example, if the above PVC was edited to have a size of 20 Gb, the size would actually be expanded to 24 Gb, the next highest multiple of 8.</p>
+</blockquote>
 <h2 id="volume-cloning-feature">Volume Cloning Feature</h2>
 <p>The CSI PowerFlex driver version 1.3 and later support volume cloning. This feature allows specifying existing PVCs in the <em>dataSource</em> field to indicate a user would like to clone a Volume.</p>
 <p>The source PVC must be bound and available (not in use). Source and destination PVC must be in the same namespace and have the same Storage Class.</p>
-<p>To clone a volume, you should first have an existing pvc, for example, pvol0:</p>
+<p>To clone a volume, you must first have an existing pvc, for example, pvol0:</p>
 <pre><code>kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -1132,18 +1187,43 @@ spec:
         resources:
           requests:
           storage: 8Gi
-</code></pre><p>Allowable access modes are <em>ReadWriteOnce</em> , <em>ReadWriteMany</em> , and for block devices that have been previously initialized, <em>ReadOnlyMany</em>.</p>
-<p>Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node&rsquo;s file system. The driver does not format or check the format of any file system on the block device. Raw Block volumes do support online Volume Expansion, but it is up to the application to manage reconfiguring the file system (if any) to the new size.</p>
-<p>For additional information, see the <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#raw-block-volume-support">Kubernetes Raw Block Volume Support documentation</a>.</p>
+</code></pre><p>Allowable access modes are <em>ReadWriteOnce</em>, <em>ReadWriteMany</em>, and for block devices that have been previously initialized, <em>ReadOnlyMany</em>.</p>
+<p>Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node&rsquo;s file system. The driver does not format or check the format of any file system on the block device. Raw Block volumes do support online Volume Expansion, but it is up to the application to manage to reconfigure the file system (if any) to the new size.</p>
+<p>For additional information, see the <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode">Kubernetes Raw Block Volume Support documentation</a>.</p>
+<h2 id="custom-file-system-format-options">Custom File System Format Options</h2>
+<p>The CSI PowerFlex driver version 1.5 supports additional mkfs format options. A user is able to specify additional format options as needed for the driver. Format options are specified in storageclass yaml under <em>mkfsFormatOption</em> as in the following example:</p>
+<pre><code>apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: vxflexos
+  annotations:
+    storageclass.kubernetes.io/is-default-class: &quot;true&quot;
+provisioner: csi-vxflexos.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  storagepool: &lt;STORAGE_POOL&gt; # Insert Storage pool
+  systemID: &lt;SYSTEM_ID&gt; # Insert System ID
+  mkfsFormatOption: &quot;&lt;mkfs_format_option&gt;&quot; # Insert file system format option
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+- matchLabelExpressions:
+  - key: csi-vxflexos.dellemc.com/&lt;SYSTEM_ID&gt; # Insert System ID
+    values:
+    - csi-vxflexos.dellemc.com
+
+</code></pre><ul>
+<li><em>WARNING</em>: Before utilizing format options, you must first be fully aware of the potential impact and understand your environment&rsquo;s requirements for the specified option.</li>
+</ul>
 <h2 id="topology-support">Topology Support</h2>
-<p>The CSI PowerFlex driver version 1.2 and later support Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where:</p>
+<p>The CSI PowerFlex driver version 1.2 and later supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where:</p>
 <ul>
 <li>The PowerFlex SDC may not be installed or running on some nodes.</li>
 <li>Users have chosen to restrict the nodes on which the CSI driver is deployed.</li>
 </ul>
-<p>This Topology support does not include customer defined topology, users cannot create their own labels for nodes and storage classes and expect the labels to be honored by the driver.</p>
+<p>This Topology support does not include customer-defined topology, users cannot create their own labels for nodes and storage classes and expect the labels to be honored by the driver.</p>
 <h3 id="topology-usage">Topology Usage</h3>
-<p>To utilize the Topology feature, the storage classes are modified to specify the <em>volumeBindingMode</em> as <em>WaitForFirstConsumer</em> and to specify the desired topology labels within <em>allowedTopologies</em>. This ensures that pod scheduling takes advantage of the topology and be guaranteed that the node selected has access to provisioned volumes.</p>
+<p>To utilize the Topology feature, the storage classes are modified to specify the <em>volumeBindingMode</em> as <em>WaitForFirstConsumer</em> and to specify the desired topology labels within <em>allowedTopologies</em>. This ensures that the pod schedule takes advantage of the topology and be guaranteed that the node selected has access to provisioned volumes.</p>
 <p>Storage Class Example with Topology Support:</p>
 <pre><code>apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -1170,13 +1250,15 @@ allowedTopologies:
     values:
     - csi-vxflexos.dellemc.com
 </code></pre><p>For additional information, see the <a href="https://kubernetes-csi.github.io/docs/topology.html">Kubernetes Topology documentation</a>.</p>
+<blockquote>
 <p><em>NOTE</em>: In the manifest file of the Dell CSI operator, topology can be enabled by specifying the system name or <em>systemid</em> in the allowed topologies field. <em>Volumebindingmode</em> is also set to <em>WaitForFirstConsumer</em> by default.</p>
+</blockquote>
 <h2 id="controller-ha">Controller HA</h2>
 <p>The CSI PowerFlex driver version 1.3 and later support multiple controller pods. A Controller pod can be assigned to a worker node or a master node, as long as no other controller pod is currently assigned to the node. To control the number of controller pods, edit:</p>
 <pre><code>controllerCount: 2
-</code></pre><p>in your values file to the desired number of controller pods. By default, the driver will deploy with two controller pods, each   assigned to a different worker node.</p>
+</code></pre><p>in your values file to the desired number of controller pods. By default, the driver will deploy with two controller pods, each assigned to a different worker node.</p>
 <blockquote>
-<p><em>NOTE:</em> If controller count is greater than the number of available nodes, excess controller pods will be stuck in pending state.</p>
+<p><em>NOTE:</em> If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state.</p>
 </blockquote>
 <p>If you are using the Dell CSI Operator, the value to adjust is:</p>
 <pre><code>replicas: 1  
@@ -1192,7 +1274,7 @@ controller:
   #   node-role.kubernetes.io/master: &quot;&quot;
 
   # &quot;controller.tolerations&quot; defines tolerations that would be applied to controller deployment
-  # Leave as blank to install controller on worker nodes
+  # Leave as blank to install the controller on worker nodes
   tolerations:
   # - key: &quot;node-role.kubernetes.io/master&quot;
   #   operator: &quot;Exists&quot;
@@ -1207,7 +1289,7 @@ controller:
   #   node-role.kubernetes.io/master: &quot;&quot;
 
   # &quot;controller.tolerations&quot; defines tolerations that would be applied to controller deployment
-  # Leave as blank to install controller on worker nodes
+  # Leave as blank to install the controller on worker nodes
   tolerations:
    - key: &quot;node-role.kubernetes.io/master&quot;
      operator: &quot;Exists&quot;
@@ -1230,41 +1312,35 @@ controller:
      effect: &quot;NoSchedule&quot;
 </code></pre><p>For configuring Controller HA on the Dell CSI Operator, please refer to the Dell CSI Operator documentation.</p>
 <h2 id="sdc-deployment">SDC Deployment</h2>
-<p>The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run node portion of CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platform which support automatic SDC deployment, currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS). On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for your OS versions.</p>
+<p>The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run the node portion of the CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platform which support automatic SDC deployment, currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS). On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for your OS versions.</p>
 <ul>
-<li>On Kubernetes nodes which run node portion of CSI driver, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the nodes with OS version which supports automatic SDC deployment . If there is a SDC kernel module installed then the version is checked and updated.</li>
+<li>On Kubernetes nodes which run the node portion of the CSI driver, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the nodes with OS version which supports automatic SDC deployment. If there is an SDC kernel module installed then the version is checked and updated.</li>
 <li>Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.</li>
-<li>On nodes which do not support automatic SDC deployment by SDC init container, manuall installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
-Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported OS versions.</li>
-<li>There is no automated uninstall of SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from node.</li>
+<li>On nodes that do not support automatic SDC deployment by SDC init container, manual installation steps must be followed. The SDC init container skips installing and you can see this mentioned in the logs by running kubectl logs on the node for SDC.
+Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported OS versions.</li>
+<li>There is no automated uninstallation of the SDC kernel module. Follow PowerFlex SDC documentation to manually uninstall the SDC driver from the node.</li>
 </ul>
 <h2 id="multiarray-support">Multiarray Support</h2>
-<p>The CSI PowerFlex driver version 1.4 adds support for managing multiple PowerFlex arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations.</p>
+<p>The CSI PowerFlex driver version 1.5 adds support for managing multiple PowerFlex arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations.</p>
 <p>To manage multiple arrays you need to create an array connection configuration that lists multiple arrays.</p>
 <h3 id="creating-array-configuration">Creating array configuration</h3>
-<p>There is a sample json file under the top directory named <code>config.json</code> with the following content:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#000;font-weight:bold">[</span>
-    <span style="color:#000;font-weight:bold">{</span>
-        <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#000;font-weight:bold">,</span>             <span style="color:#a40000">#</span> <span style="color:#a40000">username</span> <span style="color:#a40000">for</span> <span style="color:#a40000">connecting</span> <span style="color:#a40000">to</span> <span style="color:#a40000">API</span>
-        <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>          <span style="color:#a40000">#</span> <span style="color:#a40000">password</span> <span style="color:#a40000">for</span> <span style="color:#a40000">connecting</span> <span style="color:#a40000">to</span> <span style="color:#a40000">API</span>
-        <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ID1&#34;</span><span style="color:#000;font-weight:bold">,</span>				       <span style="color:#a40000">#</span> <span style="color:#a40000">system</span> <span style="color:#a40000">ID</span> <span style="color:#a40000">for</span> <span style="color:#a40000">system</span>
-        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;http://127.0.0.1&#34;</span><span style="color:#000;font-weight:bold">,</span>  <span style="color:#a40000">#</span> <span style="color:#a40000">full</span> <span style="color:#a40000">URL</span> <span style="color:#a40000">path</span> <span style="color:#a40000">to</span> <span style="color:#a40000">the</span> <span style="color:#a40000">PowerFlex</span> <span style="color:#a40000">API</span>
-        <span style="color:#204a87;font-weight:bold">&#34;insecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>                <span style="color:#a40000">#</span> <span style="color:#a40000">use</span> <span style="color:#a40000">insecure</span> <span style="color:#a40000">connection</span> <span style="color:#a40000">or</span> <span style="color:#a40000">not</span>
-        <span style="color:#204a87;font-weight:bold">&#34;isDefault&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>               <span style="color:#a40000">#</span> <span style="color:#a40000">treat</span> <span style="color:#a40000">current</span> <span style="color:#a40000">array</span> <span style="color:#a40000">as</span> <span style="color:#a40000">default</span> <span style="color:#a40000">(would</span> <span style="color:#a40000">be</span> <span style="color:#a40000">used</span> <span style="color:#a40000">by</span> <span style="color:#a40000">storage</span> <span style="color:#a40000">class</span> <span style="color:#a40000">without</span> <span style="color:#a40000">arrayIP</span> <span style="color:#a40000">parameter)</span>
-        <span style="color:#204a87;font-weight:bold">&#34;mdm&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;10.0.0.1,10.0.0.2&#34;</span>       <span style="color:#a40000">#</span> <span style="color:#a40000">MDM</span> <span style="color:#a40000">IP</span> <span style="color:#a40000">for</span> <span style="color:#a40000">the</span> <span style="color:#a40000">system</span>
-    <span style="color:#000;font-weight:bold">},</span>
-    <span style="color:#000;font-weight:bold">{</span>
-        <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#000;font-weight:bold">,</span>
-        <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
-        <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ID2&#34;</span><span style="color:#000;font-weight:bold">,</span>
-        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://127.0.0.2&#34;</span><span style="color:#000;font-weight:bold">,</span>
-        <span style="color:#204a87;font-weight:bold">&#34;insecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
-        <span style="color:#204a87;font-weight:bold">&#34;mdm&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span>
-    <span style="color:#000;font-weight:bold">}</span>
-<span style="color:#000;font-weight:bold">]</span>
-</code></pre></div><p>Here we specify that we want CSI driver to manage two arrays: one with an IP <code>127.0.0.1</code> and the other with an IP <code>127.0.0.2</code>.</p>
-<p>To use this config we need to create a Kubernetes secret from it. To do so run the following command:</p>
-<p><code>kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.json</code></p>
+<p>There is a sample yaml file under the top directory named <code>config.yaml</code> with the following content:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">   </span>- <span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                   </span><span style="color:#8f5902;font-style:italic"># username for connecting to API</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                </span><span style="color:#8f5902;font-style:italic"># password for connecting to API</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;ID1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                     </span><span style="color:#8f5902;font-style:italic"># system ID for system</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://127.0.0.1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#8f5902;font-style:italic"># full URL path to the PowerFlex API</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic"># skip array certificate validation or not</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">isDefault</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">                     </span><span style="color:#8f5902;font-style:italic"># treat current array as default (would be used by storage class without arrayIP parameter)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">mdm</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.0.0.1,10.0.0.2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#8f5902;font-style:italic"># MDM IPs for the system</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span>- <span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Password123&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;ID2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://127.0.0.2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">mdm</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>Here we specify that we want the CSI driver to manage two arrays: one with an IP <code>127.0.0.1</code> and the other with an IP <code>127.0.0.2</code>.</p>
+<p>To use this config we need to create a Kubernetes secret from it. To do so, run the following command:</p>
+<p><code>kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml</code></p>
 <h3 id="creating-storage-classes">Creating storage classes</h3>
 <p>To be able to provision Kubernetes volumes using a specific array we need to create corresponding storage classes.</p>
 <p>Find the sample yaml files under <code>helm/samples/storageclass</code>. Edit <code>storageclass.yaml</code> if you want <code>ext4</code> filesystem, and use <code>storageclass-xfs.yaml</code> if you want <code>xfs</code> filesystem. Replace <code>&lt;STORAGE_POOL&gt;</code> with the storage pool you have, and replace <code>&lt;SYSTEM_ID&gt;</code> with the system ID you have.</p>
@@ -1272,7 +1348,7 @@ Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/de
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f storageclass.yaml
 </code></pre></div><p>After that, you can use the storage class for the corresponding array.</p>
 <h2 id="ephemeral-inline-volume">Ephemeral Inline Volume</h2>
-<p>The CSI PowerFlex driver version 1.4 supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification.</p>
+<p>Starting from version 1.4, CSI PowerFlex driver supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification.</p>
 <p>At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.</p>
 <p>The following is a sample manifest (found in csi-vxflexos/test/helm/ephemeral) for creating ephemeral volume in pod manifest with CSI PowerFlex driver.</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Pod<span style="color:#f8f8f8;text-decoration:underline">
@@ -1309,12 +1385,27 @@ Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/de
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">storagepool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sample<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>sample<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>This manifest will create a pod and attach two newly created ephemeral inline csi volumes to it, one ext4 and the other xfs.<br>
+</span></code></pre></div><p>This manifest creates a pod and attach two newly created ephemeral inline csi volumes to it, one ext4 and the other xfs.<br>
 To run the corresponding helm test, go to csi-vxflexos/test/helm/ephemeral and fill in the values for storagepool and systemID in sample.yaml.<br>
 Then run:</p>
 <pre><code>./testEphemeral.sh
-</code></pre><p>this test will deploy the pod with two ephemeral volumes, and write some data to them before deleting the pod.<br>
+</code></pre><p>this test deploys the pod with two ephemeral volumes, and write some data to them before deleting the pod.<br>
 When creating ephemeral volumes, it is important to specify the following within the volumeAttributes section: volumeName, size, storagepool, and if you want to use a non-default array, systemID.</p>
+<h2 id="dynamic-logging-configuration">Dynamic Logging Configuration</h2>
+<p>This feature is introduced in version 1.5, CSI Driver for PowerFlex now supports dynamic logging configuration.</p>
+<p>To accomplish this, we utilize two fields in logConfig.yaml: LOG_LEVEL and LOG_FORMAT.</p>
+<pre><code>LOG_LEVEL: minimum level that the driver will log  
+LOG_FORMAT: format the driver should log in, either text or JSON      
+</code></pre><blockquote>
+<p><em>NOTE:</em> To see the available options for LOG_LEVEL, consult: <a href="https://github.com/sirupsen/logrus#level-logging">https://github.com/sirupsen/logrus#level-logging</a></p>
+</blockquote>
+<p>If the configmap does not exist yet, simply edit logConfig.yaml, changing the values for LOG_LEVEL and LOG_FORMAT as you see fit.</p>
+<p>If the configmap already exists, you can use this command to edit the configmap:<br>
+<code>kubectl edit configmap -n vxflexos driver-config</code></p>
+<p>or you could edit logConfig.yaml, and use this command:<br>
+<code>kubectl apply -f logConfig.yaml</code></p>
+<p>and then make the necessary adjustments for LOG_LEVEL and LOG_FORMAT.<br>
+If LOG_LEVEL or LOG_FORMAT are set to options outside of what is supported, the driver will use the default values of &ldquo;info&rdquo; and &ldquo;text&rdquo; .</p>
 
 	
 	
@@ -1341,13 +1432,13 @@ When creating ephemeral volumes, it is important to specify the following within
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" href="https://github.com/dell/storage-plugin-docs">
+    <a class="text-white" target="_blank" href="https://github.com/dell/csm">
       <i class="fab fa-github"></i>
     </a>
   </li>
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
-    <a class="text-white" target="_blank" href="https://dellcustomer.slack.com/archives/C01CY517PU4">
+    <a class="text-white" target="_blank" href="http://del.ly/Slack_request">
       <i class="fab fa-slack"></i>
     </a>
   </li>
@@ -1382,7 +1473,7 @@ When creating ephemeral volumes, it is important to specify the following within
 
 
 
-<script src="/storage-plugin-docs/js/main.min.664f21bf5eb0c31ebc661e2616e6c63e0448cec6d5636d869957be423c3cb952.js" integrity="sha256-Zk8hv16wwx68Zh4mFubGPgRIzsbVY22GmVe&#43;Qjw8uVI=" crossorigin="anonymous"></script>
+<script src="/csm-docs/js/main.min.664f21bf5eb0c31ebc661e2616e6c63e0448cec6d5636d869957be423c3cb952.js" integrity="sha256-Zk8hv16wwx68Zh4mFubGPgRIzsbVY22GmVe&#43;Qjw8uVI=" crossorigin="anonymous"></script>
 
 
 
