@@ -14,7 +14,7 @@ The following are the drivers provided for the Dell storage family:
 | Current version | v1.4  | v1.4 | v1.2 | v1.3 | v1.5 |
 | [Older Versions](../archives/) | v1.3 |  v1.3 | v1.1 | v1.2 | v1.4 |
 
-*NOTE:* This doc version is no longer supported by us. You can check our [latest version](/storage-plugin-docs/)
+*NOTE:* This doc version is no longer supported by us. You can check our [latest version](/csm-docs/)
 
 ## Architecture
 
