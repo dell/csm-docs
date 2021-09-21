@@ -5,21 +5,22 @@ Description: Code features for PowerScale Driver
 
 ## Multicluster support
 
-You can connect single CSI-PowerScale driver with multiple PowerScale clusters.
-Pre-Requisistes:
+You can connect a single CSI-PowerScale driver with multiple PowerScale clusters.
 
-1. Creation of secret.json with credentials related to one or more Clusters.
-2. Creation of (at least) one Custom Storage classes for each non-default clusters.
-3. Creation of custom-volumesnapshot classes, if corresponding isiPaths differ in custom storage classes.
+**Pre-Requisites:**
+
+1. Creation of secret.json or secret.yaml with credentials related to one or more Clusters.
+2. Creation of (at least) one Storage class for each cluster.
+3. Creation of custom-volumesnapshot classes with proper isiPath matching corresponding storage classes.
 4. Inclusion of cluster name in volume handle, if you want to provision existing static volumes.
 
 ## Consuming existing volumes with static provisioning
 
-You can use existent volumes from PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
+You can use existent volumes from the PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
 
 1. Open your volume in One FS, and take a note of volume-id.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
-3. In the following example, the PowerScale cluster accessZone is assumed as 'System', cluster name is assumed as 'pscale-cluster' and volume's internal name as 'isilonvol'. The volume-handle shoulb be in the format of <volume_name>=_=_=<export_id>=_=_=<zone>=_=_=<cluster_name>
+3. In the following example, the PowerScale cluster accessZone is assumed as 'System', storage class as 'isilon', cluster name as 'pscale-cluster' and volume's internal name as 'isilonvol'. The volume-handle should be in the format of <volume_name>=_=_=<export_id>=_=_=<zone>=_=_=<cluster_name>
 
 ```yaml
 apiVersion: v1
@@ -87,13 +88,32 @@ spec:
 
 5. After the pod becomes `Ready` and `Running`, you can start to use this pod and volume.
 
+## PVC Creation Feature
+
+Following yaml content can be used to create a PVC without referring any PV.
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: testvolume
+  namespace: default
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+        requests:
+          storage: 5Gi
+  storageClassName: isilon           
+```
+
 ## Volume Snapshot Feature
 
 The CSI PowerScale driver version 1.3 and later supports managing beta snapshots. 
 
 In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
 
-- Kubernetes Volume Snaphshot CRDs
+- Kubernetes Volume Snapshot CRDs
 - Volume Snapshot Controller
 
 > For general use, update the snapshot controller YAMLs with an appropriate namespace before installing. For
@@ -102,20 +122,17 @@ In order to use Volume Snapshots, ensure the following components have been depl
 
 ### Volume Snapshot Class
 
-During the installation of CSI PowerScale driver version 1.3 and later, a Volume Snapshot Class is created using the new recommended snapshot APIs (depends upon Kubernetes version). This is the Volume Snapshot Class created for the default isiPath provided in my-isilon-settings.yaml (which is created based on values.yaml). For additional custom storage classes, separate custom volume snapshot class should be created (only if the isiPath is different from default storage class).
+During the installation of CSI PowerScale driver version 1.6, no default Volume Snapshot Class will get created.
 
-Following are the manifests for the Volume Snapshot Class created during installation:
+Following are the manifests for the Volume Snapshot Class:
 
 1. VolumeSnapshotClass - v1
 ```yaml
-# For kubernetes version 20 (v1 snaps)
-# This is a sample manifest for creating snapshotclass with IsiPath other than default
-# pvc is created with sc which has some different IsiPath e.g. /ifs/custom
-# to create a snapshot for this pvc volumesnapshotclass must also be initilized with same IsiPath (i.e. /ifs/custom ) to work snapshot feature
+# For kubernetes version 20 and above (v1 snaps)
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
-  name: "isilon-snapclass-custom"
+  name: "isilon-snapclass"
 driver: csi-isilon.dellemc.com
 #The deletionPolicy of a volume snapshot class can either be Retain or Delete
 #If the deletionPolicy is Delete, then the underlying storage snapshot is deleted along with the VolumeSnapshotContent object.
@@ -123,18 +140,15 @@ driver: csi-isilon.dellemc.com
 deletionPolicy: Delete
 parameters:
   #IsiPath should match with respective storageClass IsiPath
-  IsiPath: "/ifs/custom"
+  IsiPath: "/ifs/data/csi"
 ```
 2. VolumeSnapshotClass - beta
 ```yaml
 # For kubernetes version 18 and 19 (beta snaps)
-# This is a sample manifest for creating snapshotclass with IsiPath other than default
-# pvc is created with sc which has some different IsiPath e.g. /ifs/custom
-# to create a snapshot for this pvc volumesnapshotclass must also be initilized with same IsiPath (i.e. /ifs/custom ) to work snapshot feature
 apiVersion: snapshot.storage.k8s.io/v1beta1
 kind: VolumeSnapshotClass
 metadata:
-name: "isilon-snapclass-custom"
+name: "isilon-snapclass"
 driver: csi-isilon.dellemc.com
 #The deletionPolicy of a volume snapshot class can either be Retain or Delete
 #If the deletionPolicy is Delete, then the underlying storage snapshot is deleted along with the VolumeSnapshotContent object.
@@ -142,11 +156,11 @@ driver: csi-isilon.dellemc.com
 deletionPolicy: Delete
 parameters:
 #IsiPath should match with respective storageClass IsiPath
-IsiPath: "/ifs/custom"
+IsiPath: "/ifs/data/csi"
 ### Create Volume Snapshot
 ```
 
-The following is a sample manifest for creating a Volume Snapshot using the **v1beta1** snapshot APIs:
+The following is a sample manifest for creating a Volume Snapshot using the **v1beta1** snapshot APIs; The following snippet assumes that the persistent volume claim name is testvolume.
 
 ```yaml  
 apiVersion: snapshot.storage.k8s.io/v1beta1
@@ -157,7 +171,7 @@ metadata:
 spec:
   volumeSnapshotClassName: isilon-snapclass
   source:
-    persistentVolumeClaimName: autotestvolume
+    persistentVolumeClaimName: testvolume
 ```
 
 Once the VolumeSnapshot has been successfully created by the CSI PowerScale driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.
@@ -184,7 +198,7 @@ metadata:
 spec:
   storageClassName: isilon
   dataSource:
-    name: newsnap
+    name: pvcsnap
     kind: VolumeSnapshot
     apiGroup: snapshot.storage.k8s.io
   accessModes:
@@ -196,13 +210,11 @@ spec:
 
 ## Volume Expansion
 
-The CSI PowerScale driver version 1.3 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).
+The CSI PowerScale driver version 1.2 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).
 
-To use this feature, the storage class that is used to create the PVC must have the attribute `allowVolumeExpansion` set to true. The storage classes created during the installation (both using Helm or dell-csi-operator) have the `allowVolumeExpansion` set to true by default.
+To use this feature, the storage class that is used to create the PVC must have the attribute `allowVolumeExpansion` set to true.
 
-If you are creating more storage classes, ensure that this attribute is set to true to expand any PVs created using these new storage classes.
-
-The following is a sample manifest for a storage class which allows for Volume Expansion:
+The following is a sample manifest for a storage class that allows for Volume Expansion:
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -229,7 +241,7 @@ To resize a PVC, edit the existing PVC spec and set spec.resources.requests.stor
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    name: isilon-pvc-demo
+    name: isilon-pvc-expansion-demo
 spec:
     accessModes:
       - ReadWriteOnce
@@ -248,7 +260,7 @@ The CSI PowerScale driver version 1.3 and later supports volume cloning. This al
 
 Source and destination PVC must be in the same namespace and have the same Storage Class.
 
-To clone a volume, you should first have an existing PVC:
+To clone a volume, you must first have an existing PVC:
 
 ```yaml
 apiVersion: v1
@@ -291,26 +303,26 @@ spec:
 The CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of controller pod. At any time, only one controller pod is active(leader), and the rest are on standby.
 In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`.
 
-Additionally by leveraging `pod anti-affinity`, no two controller pods are ever scheduled on the same node.
+Additionally by leveraging `pod anti-affinity`, no two-controller pods are ever scheduled on the same node.
 
 To increase or decrease the number of controller pods, edit the following value in `myvalues.yaml` file:
 ```
 controllerCount: 2
 ```
 
->**NOTE:** The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in Pending state.
+>**NOTE:** The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.
 
 If you are using the `dell-csi-operator`, adjust the following value in your Custom Resource manifest
 ```
 replicas: 2  
 ```
-For more details about configuring Controller HA using the Dell CSI Operator, refer to the Dell CSI Operator documentation.
+For more details about configuring Controller HA using the Dell CSI Operator, refer to the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).
 
 ## Ephemeral Inline Volume
 
 The CSI PowerScale driver version 1.4.0 and later supports CSI ephemeral inline volumes.
 
-This feature serves use cases for data volumes whose content and lifecycle are tied to a pod. For example, a driver might populate a volume with dynamically created secrets that are specific to the application running in the pod. Such volumes need to be created together with a pod and can be deleted as part of pod termination (ephemeral). They get defined as part of the pod spec (inline).
+This feature serves as use cases for data volumes whose content and lifecycle are tied to a pod. For example, a driver might populate a volume with dynamically created secrets that are specific to the application running in the pod. Such volumes need to be created together with a pod and can be deleted as part of pod termination (ephemeral). They get defined as part of the pod spec (inline).
  
 At runtime, nested inline volumes follow the lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.
  
@@ -338,12 +350,12 @@ spec:
           ClusterName: "cluster1"
 ```
 
-This manifest creates a pod in given cluster and attach newly created ephemeral inline csi volume to it.
+This manifest creates a pod in a given cluster and attaches a newly created ephemeral inline CSI volume to it.
 
 ## Topology
 ### Topology Support
 
-The CSI PowerScale driver version 1.4.0 and later supports Topology by default which forces volumes to be placed on worker nodes that have connectivity to the backend storage, as a result of which the nodes which have access to PowerScale Array are appropriately labelled. The driver leverages these labels to ensure that the driver components (controller, node) are spawned only on nodes wherein these labels exist. 
+The CSI PowerScale driver version 1.4.0 and later supports Topology by default which forces volumes to be placed on worker nodes that have connectivity to the backend storage, as a result of which the nodes which have access to PowerScale Array are appropriately labeled. The driver leverages these labels to ensure that the driver components (controller, node) are spawned only on nodes wherein these labels exist. 
   
 This covers use cases where:
  
@@ -351,13 +363,16 @@ The CSI PowerScale driver may not be installed or running on some nodes where Us
 
 We support CustomTopology which enables users to apply labels for nodes - "csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com" and expect the labels to be honored by the driver.
   
-When “enableCustomTopology” is set to “true”, CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and use them to initialize node pod with custom PowerScale FQDN/IP.
+When “enableCustomTopology” is set to “true”, the CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and use them to initialize node pod with custom PowerScale FQDN/IP.
+
 **Note:** Only a single cluster can be configured as part of secret.json for custom topology.
 
 
 ### Topology Usage
    
-To utilize the Topology feature, create a custom `StorageClass` with `volumeBindingMode` set to `WaitForFirstConsumer` and specify the desired topology labels within `allowedTopologies` field of this custom storage class. This ensures that Pod scheduling takes advantage of the topology and the selected node has access to provisioned volumes. 
+To utilize the Topology feature, create a custom `StorageClass` with `volumeBindingMode` set to `WaitForFirstConsumer` and specify the desired topology labels within `allowedTopologies` field of this custom storage class. This ensures that the Pod schedule takes advantage of the topology and the selected node has access to provisioned volumes. 
+
+**Note:** Whenever a new storage cluster is being added in secret, even though it is dynamic, the new storage cluster IP address-related label is not added to worker nodes dynamically. The user has to spin off (bounce) driver-related pods (controller and node pods) in order to apply newly added information to be reflected in worker nodes.
   
 **Storage Class Example with Topology Support:**
  
@@ -397,7 +412,7 @@ parameters:
 # WaitForFirstConsumer mode will delay the binding and provisioning of a PersistentVolume
 # until a Pod using the PersistentVolumeClaim is created
 volumeBindingMode: WaitForFirstConsumer
-# allowedTopologies helps scheduling pod on worker nodes which matches all of below expressions
+# allowedTopologies helps scheduling pod on worker nodes which match all of below expressions
 # If enableCustomTopology is set to true in helm values.yaml, then do not specify allowedTopologies
 allowedTopologies:
   - matchLabelExpressions:
@@ -409,19 +424,53 @@ mountOptions: ["<mountOption1>", "<mountOption2>", ..., "<mountOptionN>"]
 ```
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
-## Support for Docker EE
-
-The CSI Driver for Dell EMC PowerScale supports Docker EE and deployment on clusters bootstrapped with UCP (Universal Control Plane) 3.3.5.
-*UCP version 3.3.5 supports kubernetes 1.20 and CSI driver can be installed on UCP 3.3.5 with Helm.
-
-The installation process for the driver on such clusters remains the same as the installation process on upstream clusters.
-
-On UCP based clusters, kubectl may not be installed by default, it is important that [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is installed prior to the installation of the driver.
-
-The worker nodes in UCP backed clusters may run any of the OSs which we support with upstream clusters.
-
 ## Support custom networks for NFS I/O traffic
 
 When allowedNetworks is specified for using custom networks to handle NFS traffic, and a user already
-has workloads scheduled, there is a possibility that it might lead to backwards compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.
-Also, previous workload will still be using default network and not custom networks, for previous workloads to use custom networks recreation of pods required.
+has workloads scheduled, there is a possibility that it might lead to backward compatibility issues. For example, ControllerUnPublish might not be able to completely remove clients from the NFS exports of previously created pods.
+
+Also, the previous workload will still be using the default network and not custom networks. For previous workloads to use custom networks, the recreation of pods is required.
+
+## Volume Limit
+The CSI Driver for Dell EMC PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.
+
+The user can set the volume limit for a node by creating a node label `max-isilon-volumes-per-node` and specifying the volume limit for that node.
+<br/> `kubectl label node <node_name> max-isilon-volumes-per-node=<volume_limit>`
+
+The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxIsilonVolumesPerNode` attribute in values.yaml.
+
+>**NOTE:** <br>The default value of `maxIsilonVolumesPerNode` is 0. <br>If `maxIsilonVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxIsilonVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-isilon-volumes-per-node` is not set.
+
+## Node selector in helm template
+
+Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world.)For more information, refer to https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector 
+  
+Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations for more information.  
+
+## Dynamic log level change
+
+Log levels (debug, info, error, warning) were controlled only in my-isilon-settings.yaml which required restarting of csi-driver. Now the control has been transferred to secret definition (secret.json or secret.yaml). Changing the Log level in secret dynamically changes the log levels in controller and node logs.
+
+## Usage of SmartQuotas to Limit Storage Consumption
+
+CSI driver for Dell EMC Isilon handles capacity limiting using SmartQuotas feature.
+
+To use the SmartQuotas feature user can specify the boolean value 'enableQuota' in myvalues.yaml or my-isilon-settings.yaml.
+
+Let us assume the user creates a PVC with 3 Gi of storage and 'SmartQuotas' have already been enabled in PowerScale Cluster.
+
+- When 'enableQuota' is set to 'true'
+    - The driver sets the hard limit of the PVC to 3Gi.
+    - The user adds data of 2Gi to the above said PVC (by logging into POD). It works as expected.
+    - The user tries to add 2Gi more data.
+    - Driver doesn't allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.
+    - The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.
+    - User retries adding 2Gi more data (which has been errored out previously).
+    - The driver accepts the data.
+    
+- When 'enableQuota' is set to 'false'
+    - Driver doesn't set any hard limit against the PVC created.
+    - The user adds data of 2Gi to the above said PVC, which is having the size 3Gi (by logging into POD). It works as expected.
+    - The user tries to add 2Gi more data. Now the total size of data is 4Gi.
+    - Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)
+    - The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.

@@ -13,12 +13,13 @@ kubectl create -f tests/simple/simple.yaml
 ```
 After executing this command 3 PVC and statefulset are created in the `testpowerstore` namespace.
 You can check created PVCs by running `kubectl get pvc -n testpowerstore` and check statefulset's pods by running `kubectl get pods -n testpowerstore`
-Pod should be `Ready` and `Running`
-> If Pod is in CrashLoopback or PVCs is in Pending state then driver installation is not successful, check logs of node and controller
+
+The pod must be `Ready` and `Running`
+> If Pod is in CrashLoopback or PVCs is in a Pending state then driver installation is not successful, check logs of node and controller.
 
 ## Deleting volumes
 
-To delete volumes, pod and statefulset run
+To delete volumes, pod and statefulset run, use the command:
 ```bash
 kubectl delete -f tests/simple/simple.yaml
 ```
@@ -85,62 +86,55 @@ spec:
 
 ## Volume Snapshot Feature
 
-The CSI PowerStore driver version 1.1 and later supports managing beta snapshots. 
- 
-To use Volume Snapshots, ensure the following components have been deployed to your cluster:
-- Kubernetes Volume Snaphshot CRDs
+The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes version 1.17 and was generally available (v1) in Kubernetes version >= 1.20.
+
+The CSI PowerStore driver version 1.4 supports v1beta1 snapshots on Kubernetes 1.19 and v1 snapshots on Kubernetes 1.20/1.21.
+
+In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
+- Kubernetes Volume Snapshot CRDs
 - Volume Snapshot Controller
+- Volume Snapshot Class
 
-You can install them by running the following commands: 
-```bash
-git clone https://github.com/kubernetes-csi/external-snapshotter/
-cd ./external-snapshotter
-git checkout release-<your-version>
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
-```
+>Note: From v1.4, the CSI PowerStore driver installation process will no longer create VolumeSnapshotClass. 
+> If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the _helm/samples_ folder
 
-> For general use, update the snapshot controller YAMLs with an appropriate namespace before installing. For
-example, on a Vanilla Kubernetes cluster, update the namespace from default to kube-system before issuing the
-kubectl create command.
-
-### Volume Snapshot Class
-
-During the installation of CSI PowerStore driver version 1.1 and later, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.
-
-Following is the manifest for the Volume Snapshot Class created during installation:
+### Creating Volume Snapshots
+The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs:
 ```yaml
-apiVersion: snapshot.storage.k8s.io/v1 # or v1beta1, depends on your k8s version
-kind: VolumeSnapshotClass
-metadata:
-  name: powerstore-snapshot
-driver: csi-powerstore.dellemc.com
-deletionPolicy: Delete
-```
-
-### Create Volume Snapshot
-
-The following is a sample manifest for creating a Volume Snapshot using the **v1** (or **v1beta1**) snapshot APIs:
-```yaml
-apiVersion: snapshot.storage.k8s.io/v1 # or v1beta1, depends on your k8s version
+apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
-  name: pvol0-snap
-  namespace: testpowerstore
+  name: pvol0-snap1
 spec:
-  volumeSnapshotClassName: powerstore-snapshot
+  volumeSnapshotClassName: powerstore-snapclass
   source:
-    persistentVolumeClaimName: pvol
-```
-Once the VolumeSnapshot is successfully created by the CSI PowerStore driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.
+    persistentVolumeClaimName: pvol0
 
-Following is the relevant section of VolumeSnapshot object status:
+```
+
+After the VolumeSnapshot has been successfully created by the CSI PowerStore driver, a VolumeSnapshotContent object is automatically created. When the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_, it is available for use.
+
+The following is the relevant section of VolumeSnapshot object status:
 ```yaml
 status:
   boundVolumeSnapshotContentName: snapcontent-5a8334d2-eb40-4917-83a2-98f238c4bda
   creationTime: "2020-07-16T08:42:12Z"
   readyToUse: true
 ```
+
+### Snapshot feature is optional for the installation
+
+CSI PowerStore driver version 1.4 makes the snapshot feature optional for the installation.
+
+To enable or disable this feature, specify the following in `values.yaml`
+```yaml
+snapshot:
+  enable: true
+```
+
+External Snapshotter and its CRDs are not installed even if the Snapshot feature is enabled. These have to be installed manually before the installation.
+
+Disabling the Snapshot feature will opt out of the snapshotter sidecar from the installation.
 
 ### Creating PVCs with Volume Snapshots as Source
 
@@ -166,7 +160,7 @@ spec:
 ```
 
 ## iSCSI CHAP
-The CSI PowerStore driver Version 1.3.0 extends Challenge Handshake Authentication Protocol (CHAP) support by adding automatic credentials generation.
+The CSI PowerStore driver Version 1.3.0 and later extends Challenge Handshake Authentication Protocol (CHAP) support by adding automatic credentials generation.
 
 This means that you no longer need to provide chapsecret/chapuser credentials, they will be automatically generated by the driver for each host. 
 
@@ -174,17 +168,15 @@ To enable this feature you need to set `connection.enableCHAP` to `true` when in
 
 The driver uses the generated chapsecret to configure the iSCSI node database on each node with iSCSI access.
 
-When creating new host on powerstore array driver will populate host chap credentials with generated values. When re-using already existing hosts driver should override existing CHAP credentials with newly generated ones. 
+When creating a new host on powerstore array driver will populate host chap credentials with generated values. When re-using already existing hosts driver must override existing CHAP credentials with newly generated ones. 
 
 ## Volume Expansion
 
 The CSI PowerStore driver version 1.1 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PV is attached to a node) or offline (for example, when a PV is not attached to any node).
 
-To use this feature, the storage class that is used to create the PV must have the attribute `allowVolumeExpansion` set to true. The storage classes created during the installation (both using Helm or dell-csi-operator) have the `allowVolumeExpansion` set to true by default.
+To use this feature, the storage class that is used to create the PV must have the attribute `allowVolumeExpansion` set to true.
 
-If you are creating more storage classes, ensure that this attribute is set to true to expand any PVs created using these new storage classes.
-
-The following is a sample manifest for a storage class which allows for Volume Expansion:
+The following is a sample manifest for a storage class that allows for Volume Expansion:
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -259,7 +251,7 @@ Allowable access modes are `ReadWriteOnce`, `ReadWriteMany`, and for block devic
 
 Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node's file system.
 The driver does not format or check the format of any file system on the block device. Raw Block volumes do support online
-Volume Expansion, but it is up to the application to manage reconfiguring the file system (if any) to the new size.
+Volume Expansion, but it is up to the application to manage to reconfigure the file system (if any) to the new size.
 
 For additional information, see the [kubernetes](https://kubernetes.io/DOCS/CONCEPTS/STORAGE/PERSISTENT-VOLUMES/#RAW-BLOCK-VOLUME-SUPPORT) website.
 
@@ -269,7 +261,7 @@ The CSI PowerStore driver version 1.1 and later supports volume cloning. This al
 
 Source and destination PVC must be in the same namespace and have the same Storage Class.
 
-To clone a volume, you should first have an existing pvc, for example, pvol0:
+To clone a volume, you must first have an existing pvc, for example, pvol0:
 ```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -307,7 +299,7 @@ spec:
 
 ## Ephemeral Inline Volume
 
-The CSI PowerStore driver version 1.2 supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
+The CSI PowerStore driver version 1.2 and later supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
 
 At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.
 
@@ -335,9 +327,9 @@ spec:
         size: "20Gi"
 ```
 
-This manifest creates a pod and attach newly created ephemeral inline csi volume to it. 
+This manifest creates a pod and attaches a newly created ephemeral inline CSI volume to it. 
 
-To create `NFS` volume you need to provide `nasName:` parameters that points to the name of your NAS Server in pod manifest like so
+To create `NFS` volume you need to provide `nasName:` parameters that point to the name of your NAS Server in pod manifest like so
 
 ```yaml
   volumes:
@@ -352,15 +344,15 @@ To create `NFS` volume you need to provide `nasName:` parameters that points to 
 
 ## Controller HA
 
- The CSI PowerStore driver version 1.2 introduces controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
+ The CSI PowerStore driver version 1.2 and later introduces the controller HA feature. Instead of StatefulSet, controller pods are deployed as a Deployment.
 
 By default number of replicas is set to 2, you can set `controller.replicas` parameter to 1 in `my-powerstore-settings.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change `replicas` parameter in `spec.driver` section in your PowerStore Custom Resource.
 
-When multiple replicas of controller pods are in cluster, each sidecar (attacher, provisioner, resizer, snapshotter) tries to get a lease so only one instance of each sidecar would be active in the cluster at a time. 
+When multiple replicas of controller pods are in the cluster, each sidecar (attacher, provisioner, resizer, snapshotter) tries to get a lease so only one instance of each sidecar would be active in the cluster at a time. 
 
 ### Driver pod placement
 
-You can configure where driver controller and worker pods should be placed. 
+You can configure where driver controller and worker pods must be placed. 
 To configure use `nodeSelector` and `tolerations` mechanisms you can configure in your `my-powerstore-settings.yaml`
 
 For example, you can specify `tolerations` to assign driver controller pods on controller nodes too:
@@ -392,13 +384,13 @@ controller:
      effect: "NoSchedule"
 ```
 
-As mentioned earlier, you can configure where node driver pods would be assinged in the similar way in `node` section of `my-powerstore-settings.yaml`
+As mentioned earlier, you can configure where node driver pods would be assigned in the similar way in `node` section of `my-powerstore-settings.yaml`
 
 ## Topology
 
 The CSI PowerStore driver version 1.2 and later supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.
 
-This Topology support does not include customer defined topology, users cannot create their own labels for nodes, they should use whatever labels are returned by driver and applied automatically by Kubernetes on its nodes.
+This Topology support does not include customer-defined topology, users cannot create their own labels for nodes, they must use whatever labels are returned by the driver and applied automatically by Kubernetes on its nodes.
 
 ### Topology Usage
 
@@ -421,43 +413,45 @@ allowedTopologies:
           - "true"
 ```
 
-This example matches all nodes where driver has a connection to PowerStore with IP of `127.0.0.1` via FibreChannel. Similar examples can be found in mentioned folder for NFS and iSCSI.
+This example matches all nodes where the driver has a connection to PowerStore with an IP of `127.0.0.1` via FibreChannel. Similar examples can be found in mentioned folder for NFS and iSCSI.
 
 You can check what labels your nodes contain by running `kubectl get nodes --show-labels`
 
->Notice that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for topology feature to work.
+>Notice that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for the topology feature to work.
 
-For any additional information about topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
+For any additional information about the topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
 
 ## Reuse PowerStore hostname 
 
-The CSI PowerStore driver version 1.2 and later can automatically detect if the current node was already registered as Host on storage array before. It will check if Host initiators and node initiators (FC or iSCSI) match. If they do, the driver will not create a new storage class and will take the existing name of the Host as nodeID.
+The CSI PowerStore driver version 1.2 and later can automatically detect if the current node was already registered as a Host on the storage array before. It will check if Host initiators and node initiators (FC or iSCSI) match. If they do, the driver will not create a new storage class and will take the existing name of the Host as nodeID.
 
 ## Multiarray support 
 
-The CSI PowerStore driver version 1.3.0 adds support for managing multiple PowerStore arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations. 
+The CSI PowerStore driver version 1.3.0 and later support managing multiple PowerStore arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations. 
 
 To manage multiple arrays you need to create an array connection configuration that lists multiple arrays.
 
 ### Creating array configuration 
 
 Create a file called `config.yaml` and populate it with the following content
-
+    
 ```yaml
    arrays:
       - endpoint: "https://10.0.0.1/api/rest"     # full URL path to the PowerStore API
+        globalID: "unique"                        # global ID to identify array
         username: "user"                          # username for connecting to API
         password: "password"                      # password for connecting to API
-        insecure: true                            # use insecure connection or not
+        skipCertificateValidation: true                            # use insecure connection or not
         default: true                             # treat current array as a default (would be used by storage classes without arrayIP parameter)
-        block-protocol: "ISCSI"                    # what SCSI transport protocol use on node side (FC, ISCSI, None, or auto)
-        nas-name: "nas-server"                    # what NAS should be used for NFS volumes
-      - endpoint: "https://10.0.0.2/api/rest"     
+        blockProtocol: "ISCSI"                    # what SCSI transport protocol use on node side (FC, ISCSI, None, or auto)
+        nasName: "nas-server"                    # what NAS must be used for NFS volumes
+      - endpoint: "https://10.0.0.2/api/rest"
+        globalID: "unique" 
         username: "user"                          
-        password: "password"                      
-        insecure: true                           
-        block-protocol: "FC"                    
+        password: "password"
+        skipCertificateValidation: true                           
+        blockProtocol: "FC"                    
 ```
 
 Here we specify that we want to CSI driver to manage two arrays: one with an IP `10.0.0.1` and the other with an IP `10.0.0.2`, we want to connect to the first array with `iSCSI` protocol and with `FC` to the second array. Also, we want to be able to create NFS-based volume so we provide the name of the NAS to the first array.  
@@ -496,7 +490,7 @@ reclaimPolicy: Delete
 allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 parameters:
-  arrayIP: "10.0.0.1"
+  arrayID: "GlobalUniqueID"
   FsType: "ext4"
 ---
 apiVersion: storage.k8s.io/v1
@@ -508,7 +502,7 @@ reclaimPolicy: Delete
 allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 parameters:
-  arrayIP: "10.0.0.2"
+  arrayID: "GlobalUniqueID"
   FsType: "xfs"
 ```
 
@@ -519,31 +513,66 @@ Then we need to apply storage classes to Kubernetes using `kubectl`:
 kubectl create -f storageclass.yaml
 ```
 
-After that, you can use `powerstore-1` storage class to create volumes on first array and `powerstore-2` storage class to create volumes on the second array. 
+After that, you can use `powerstore-1` storage class to create volumes on the first array and `powerstore-2` storage class to create volumes on the second array. 
 
 ## Dynamic secret change detection 
 
-CSI PowerStore driver version 1.3.0 adds the ability to detect changes to array configuration Kubernetes secret. This essentially means that you can change credentials for your PowerStore arrays in-flight (without restarting the driver). 
+CSI PowerStore driver version 1.3.0 and later supports the ability to detect changes to array configuration Kubernetes secret. This essentially means that you can change credentials for your PowerStore arrays in-flight (without restarting the driver). 
 
 To do so just change your configuration file `config.yaml` and apply it again using the following command:
 ```bash
 sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
 ```
 
-After Kubernetes remounts secret to driver containers (this usually takes around one minute), a driver should detect the change and start using this new configuration information. 
+After Kubernetes remounts secret to driver containers (this usually takes around one minute), a driver must detect the change and start using this new configuration information. 
 
 
 ## Configuring custom access to NFS exports
 
-CSI PowerStore driver Version 1.3.0 adds the ability to configure NFS access to nodes that use dedicated storage networks. 
+CSI PowerStore driver Version 1.3.0 and later supports the ability to configure NFS access to nodes that use dedicated storage networks. 
 
 To enable this feature you need to specify `externalAccess` parameter in your helm `values.yaml` file or `X_CSI_POWERSTORE_EXTERNAL_ACCESS` variable when creating CustomResource using an operator. 
 
-The value of that parameter will be added as an additional entry to NFS Export host access. 
+The value of that parameter is added as an additional entry to NFS Export host access. 
 
 For example the following notation:
 ```yaml
 externalAccess: "10.0.0.0/24"
 ``` 
 
-This would mean that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
+This means that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
+
+
+## Array identification based on GlobalID
+
+CSI PowerStore driver version 1.4.0 slightly changes the way arrays are being identified in runtime.
+In previous versions of the driver, a management IP address was used to identify an array. The address change could lead to an invalid state of PV.
+From version 1.4.0 a unique GlobalID string is used for an array identification.
+It has to be specified in `config.yaml` and in Storage Classes. 
+
+The change provides backward compatibility with previously created PVs. 
+However, to provision new volumes, make sure to delete old Storage Classes and create new ones with `arrayID` instead of `arrayIP` specified.
+
+> NOTE: It is recommended to migrate the PVs to new identifiers before changing management IPs of storage systems. The recommended way to do it is to clone the existing volume and delete the old one. The cloned volume will automatically switch to using globalID instead of management IP.
+
+## Root squashing 
+
+CSI PowerStore driver version 1.4.0 allows users to enable root squashing for NFS volumes provisioned by the driver. 
+
+Root squashing rule prevents root users on NFS clients from exercising root privileges on the NFS server.
+
+To enable this rule, you need to set parameter `allowRoot` to `false` in your NFS storage class. 
+
+Your storage class definition must look similar to this:
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+...
+parameters:
+  ...
+  allowRoot: "false"  # enables or disables root squashing
+```
+
+> The 1.4 version of the driver also enables any container user, to have full access to provisioned NFS volume, in earlier versions only `root` user had access
+

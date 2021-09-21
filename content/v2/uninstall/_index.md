@@ -7,10 +7,10 @@ description: Methods to uninstall Dell CSI driver
 
 ## Uninstall a Dell CSI driver installed via Helm
 
-To uninstall a driver, the `csi-uninstall.sh` script provides a handy wrapper around the `helm` utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the PowerScale driver:
+To uninstall a driver, the `csi-uninstall.sh` script provides a handy wrapper around the `helm` utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the driver:
 
 ```
-./csi-uninstall.sh --namespace isilon/<driver-namespace>
+./csi-uninstall.sh --namespace <driver-namespace>
 ```
 
 For usage information:
@@ -32,9 +32,9 @@ Options:
 For uninstalling any CSI drivers deployed the Dell CSI Operator, just delete the respective Custom Resources.  
 This can be done using OperatorHub GUI by deleting the CR or via kubectl.
     
-For example - To uninstall a PowerFlex driver installed via the operator, delete the Custom Resource(CR)
+For example - To uninstall the driver installed via the operator, delete the Custom Resource(CR)
 
 ```
 # Replace driver-name and driver-namespace with their respective values
-$ kubectl delete vxflexos/<driver-name> -n <driver-namespace>
+kubectl delete <driver-name> -n <driver-namespace>
 ```

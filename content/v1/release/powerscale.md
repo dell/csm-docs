@@ -3,25 +3,23 @@ title: PowerScale
 description: Release notes for PowerScale CSI driver
 ---
 
-## Release Notes - CSI Driver for PowerScale v1.5.0
+## Release Notes - CSI Driver for PowerScale v1.6.0
 
 ### New Features/Changes
-- Added support for Kubernetes 1.20
-- Added support for OpenShift 4.7 with RHEL and CoreOS worker nodes
-- Added support for Red Hat Enterprise Linux (RHEL) 8.x
-- Added multi-cluster support through single instance of driver installation
-- Added support for custom networks for NFS I/O traffic
-- SSH permissions are no longer required. You can safely revoke the privilege ISI_PRIV_LOGIN_SSH for the CSI driver user.
+- Added support for Kubernetes 1.21.
+- Added support for Red Hat Enterprise Linux (RHEL) 8.4.
+- Added support for CSI Spec 1.3.
+- Added support for Volume Limit.
+- Added support for node selector functionality to helm template.
+- Added support for secret in YAML format.
+- Added support for Dynamic log level changes.
+- Added support to make dnsPolicy of node component configurable via Helm
 
 ### Fixed Issues
 
-There are no Fixed issues in this release.
+There are no fixed issues in this release.
 
 ### Known Issues
-   | Issue | Resolution or workaround, if known |
-   | ----- | ---------------------------------- |
-   | Creating snapshot fails if the parameter IsiPath in volume snapshot class and related storage class are not the same. The driver uses the incorrect IsiPath parameter and tries to locate the source volume due to the inconsistency. | Ensure IsiPath in VolumeSnapshotClass yaml and related storageClass yaml are the same. |
-   | While deleting a volume, if there are files or folders created on the volume that are owned by different users. If the Isilon credentials used are for a nonprivileged Isilon user, the delete volume action fails. It is due to the limitation in Linux permission control. | To perform the delete volume action, the user account must be assigned a role that has the privilege ISI_PRIV_IFS_RESTORE. The user account must have the following set of privileges to ensure that all the CSI Isilon driver capabilities work properly:<br> * ISI_PRIV_LOGIN_PAPI<br> * ISI_PRIV_NFS<br> * ISI_PRIV_QUOTA<br> * ISI_PRIV_SNAPSHOT<br> * ISI_PRIV_IFS_RESTORE<br> * ISI_PRIV_NS_IFS_ACCESS<br> In some cases, ISI_PRIV_BACKUP is also required, for example, when files owned by other users have mode bits set to 700. |
-   | If hostname is mapped to loopback IP in /etc/hosts file, and pods are created using 1.3.0.1 release, after upgrade to 1.4.0 there is a possibility of "localhost" as stale entry in export | We recommend you not to map hostname to loopback IP in /etc/hosts file |
-   | If the length of the nodeID exceeds 128 characters, driver fails to update CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn't allow nodeID to be greater than 128 characters. | The CSI PowerScale driver uses the hostname for building the nodeID which is set in CSINode resource object, hence we recommend not having very long hostnames in order to avoid this issue. This current limitation of 128 characters is likely to be relaxed in future kubernetes versions as per this issue in the community: https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581 |
-   | Driver installation warning: **"OpenShift version 4.7, is newer than the version that has been tested. Latest tested version is: 4.6"** | Ignore this warning and continue with the installation. v1.5.0 release of the driver supports OpenShift 4.6/4.7 . |
+| Issue                                                        | Resolution or workaround, if known                           |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| If the length of the nodeID exceeds 128 characters, the driver fails to update the CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn't allow nodeID to be greater than 128 characters. | The CSI PowerScale driver uses the hostname for building the nodeID which is set in the CSINode resource object, hence we recommend not having very long hostnames in order to avoid this issue. This current limitation of 128 characters is likely to be relaxed in future Kubernetes versions as per this issue in the community: https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581 |
