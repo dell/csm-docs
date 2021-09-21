@@ -1,4 +1,4 @@
-baseURL = "https://dell.github.io/storage-plugin-docs/"
+baseURL = "https://dell.github.io/csm-docs/"
 title = "Dell Technologies"
 canonifyURLs = false
 
@@ -57,7 +57,7 @@ anchor = "smart"
 [languages]
 [languages.en]
 title = "Dell Technologies"
-description = "Dell Technologies CSI documentation pages"
+description = "Dell EMC Container Storage Modules documentation pages"
 languageName ="English"
 
 [markup]
@@ -112,7 +112,7 @@ offlineSearch = true
 # User interface configuration
 [params.ui]
 # Enable to show the side bar menu in its compact state.
-sidebar_menu_compact = false
+sidebar_menu_compact = true
 #  Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
 #  Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
@@ -171,4 +171,23 @@ enable = false
 #	url = "https://example.org/mail"
 #	icon = "fa fa-envelope"
 #        desc = "Discuss development issues around the project"
+[[params.versions]]
+  version = "Current"
+  url = "https://dell.github.io/csm-docs/docs/"
 
+[[params.versions]]
+  version = "Previous"
+  url = "https://dell.github.io/csm-docs/v1"
+
+[[params.versions]]
+  version = "Older"
+  url = "https://dell.github.io/csm-docs/v2"
+
+[[params.versions]]
+  version = "Archives"
+  url = "https://dell.github.io/csm-docs/v3"  
+
+[[menu.main]]
+    name = "GitHub"
+    weight = 50
+    url = "https://github.com/dell/csm"
