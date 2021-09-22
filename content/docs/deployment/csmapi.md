@@ -5,4 +5,4 @@ weight: 1
 description: Reference for the CSM REST API
 ---
 
-{{< swaggerui src="/openapi/swagger.yaml" >}}
+{{< swaggerui src="../swagger.yaml" >}}
