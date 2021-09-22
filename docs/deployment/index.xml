@@ -27,7 +27,7 @@
 &lt;script&gt;
 window.onload = function() {
   const ui = SwaggerUIBundle({
-    url: &#34;/openapi/swagger.yaml&#34;,
+    url: &#34;../swagger.yaml&#34;,
     dom_id: &#39;#ohpen_swagger_ui&#39;,
     presets: [
       SwaggerUIBundle.presets.apis,
