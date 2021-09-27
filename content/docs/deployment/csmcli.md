@@ -125,6 +125,15 @@ You can now add storage endpoints, array type and its unique id
 ./csm add storage --endpoint <storage-array-endpoint> --storage-type <storage-array-type> --unique-id <storage-array-unique-id> --username <storage-array-username>
 ```
 
+The optional `--meta-data` flag can be used to provide additional meta-data for the storage system that is used when creating Secrets for the CSI Driver. These fields include:
+ - isDefault: Set to true if this storage system is used as default for multi-array configuration
+ - skipCertificateValidation: Set to true to skip certificate validation
+ - mdmId: Comma separated list of MDM IPs for PowerFlex
+ - nasName: NAS Name for PowerStore
+ - blockProtocol: Block Protocol for PowerStore
+ - port: Port for PowerScale
+ - portGroups: Comma separated list of port group names for PowerMax
+
 ### Create an Application
 
 You may now create an application depending on the specific use case. Below are the common use cases:

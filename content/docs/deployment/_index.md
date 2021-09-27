@@ -5,7 +5,7 @@ description: Deployment of CSM for Replication
 weight: 2
 ---
 
-The recommended approach for deploying Container Storage Modules (CSM) is by using the CSM Installer.  The CSM installer simplifies the deployment and management of Dell EMC Container Storage Modules and CSI Drivers to provide persistent storage for your containerized workloads.
+The recommended approach for deploying Container Storage Modules (CSM) is by using the CSM Installer.  The CSM Installer simplifies the deployment and management of Dell EMC Container Storage Modules and CSI Drivers to provide persistent storage for your containerized workloads.
 
 The CSM Installer must first be deployed in a Kubernetes environment using Helm.  After which, the CSM Installer can be used through the following interfaces:
 - [CSM CLI](./csmcli)
@@ -17,6 +17,8 @@ Alternatively, the Container Storage Modules and the required CSI Drivers can ea
 - [Dell EMC Container Storage Module for Authorization](../authorization/deployment)
 - [Dell EMC Container Storage Module for Resiliency](../resiliency/deployment)
 - [Dell EMC Container Storage Module for Replication](../replication/deployment)
+
+> __Note__: The CSM Installer supports installing Dell EMC Container Storage Modules and CSI Drivers in environments that do not have any existing deployments of CSM or CSI Drivers. The CSM Installer does not support the upgrade of existing CSM or CSI Driver deployments.
 
 ## How to Deploy the Container Storage Modules Installer
 
