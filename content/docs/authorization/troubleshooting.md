@@ -12,6 +12,20 @@ Description: >
 
 ---
 
+### Retrieve CSM Authorization Server Logs
+
+To retrieve logs from services on the CSM Authorization Server, run the following command (e.g proxy-server logs):
+
+```
+$ k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
+```
+
+For OPA related logs, run:
+
+```
+$ k3s kubectl logs deploy/proxy-server -n karavi -c opa
+```
+
 ### Running "karavictl inject" leaves the vxflexos-controller in a "Pending" state
 This situation may occur when the number of vxflexos-controller pods that are deployed is equal to the number of schedulable nodes.
 ```
