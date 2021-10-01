@@ -12,6 +12,7 @@ Description: >
 3. [How can I create a ServiceMonitor object for Prometheus if I'm using Rancher monitoring stack?](#how-can-i-create-a-servicemonitor-object-for-prometheus-if-im-using-rancher-monitoring-stack)
 4. [How can I debug and troubleshoot issues with Kubernetes?](#how-can-i-debug-and-troubleshoot-issues-with-kubernetes)
 5. [How can I troubleshoot latency problems with CSM for Observability?](#how-can-i-troubleshoot-latency-problems-with-csm-for-observability)
+6. [Why does the Observability installation timeout with pods stuck in 'ContainerCreating'/'CrashLoopBackOff'/'Error' stage?](#why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage)
 
 ### Why do I see a certificate problem when accessing the topology service outside of my Kubernetes cluster?
 
@@ -222,3 +223,41 @@ The ServiceMonitor allows us to define how a set of services should be monitored
 ### How can I troubleshoot latency problems with CSM for Observability?
 
 CSM for Observability is instrumented to report trace data to [Zipkin](https://zipkin.io/).  Please see [Tracing](../deployment/#tracing) for more information on enabling tracing for CSM for Observability.
+
+### Why does the Observability installation timeout with pods stuck in 'ContainerCreating'/'CrashLoopBackOff'/'Error' stage?
+
+Check the pods in the CSM for Observability namespace. If the pod starting with 'karavi-observability-cert-manager-cainjector-*' is in 'CrashLoopBackOff' or 'Error" stage with a number of restarts, check if the logs for that pod show the below error:
+```console
+kubectl logs -n $namespace $cert-manager-cainjector-podname
+error registering secret controller: no matches for kind "MutatingWebhookConfiguration" in version "admissionregistration.k8s.io/v1beta1"
+```
+
+If the Kubernetes cluster version is 1.22.2 (or higher), this error is due to an incompatible [cert-manager](https://github.com/jetstack/cert-manager) version. Please upgrade cert-manager to version 1.5.3 (or higher) to fix this issue, using the following instructions:
+
+Clone the Dell helm-charts repository to update the karavi-observability Helm chart:
+```console
+git clone https://github.com/dell/helm-charts.git
+cd helm-charts/charts/karavi-observability/
+```
+
+Update Charts.yaml to the new cert-manager version:
+```console
+ dependencies:
+ - name: cert-manager
+   version: 1.5.3
+```
+
+Add the following settings to the values.yaml file (any other settings that were modified for the helm install should remain unchanged):
+```console
+cert-manager:
+  startupapicheck:
+    enabled: false
+    serviceAccount:
+      create: false
+```
+
+Upgrade to the new Helm chart using the command below from the helm-charts/charts/karavi-observability directory:
+```console
+$ helm upgrade --values values.yaml karavi-observability . -n $namespace
+```
+Ignore any certificate failures returned by the upgrade command, and wait till the cert-manager and karavi observability pods refresh to 'Running' state.
