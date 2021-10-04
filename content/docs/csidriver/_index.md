@@ -24,7 +24,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 | Fedora Core OS|        no        |         5.x       |        no        |         no        |        no        |
 | Red Hat OpenShift | 4.6 EUS, 4.7, 4.8 |   4.6 EUS, 4.7, 4.8 |    4.6 EUS, 4.7, 4.8     |   4.6 EUS, 4.7, 4.8   |  4.6 EUS, 4.7, 4.8 |
 | Mirantis Kubernetes Engine |       3.4.x      |        3.4.x        |       3.4.x     |        3.4.x      |        3.4.x     |
-| Google Anthos |        1.6       |          1.6        |        no        |         no        |        1.7       |
+| Google Anthos |        1.6       |          1.8        |        no        |         no        |        1.7       |
 | VMware Tanzu  |        no        |          no      |        NFS     |         NFS    |      NFS      |
 | Rancher Kubernetes Engine |       yes      |          yes         |        yes       |         yes |      yes     |
 {{</table>}}
