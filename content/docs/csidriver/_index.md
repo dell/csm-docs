@@ -31,7 +31,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
-| Features | PowerMax | PowerFlex/<br>VxFlexOS | &emsp;&emsp; Unity  | PowerScale/<br>Isilon | PowerStore |
+| Features | PowerMax | PowerFlex | &emsp;&emsp; Unity  | PowerScale | PowerStore |
 |--------------------------|:--------:|:------------------:|:---------:|:-----------------:|:----------:|
 | CSI Specification        | v1.3     | v1.3| v1.3      | v1.4  | v1.3       |
 | Static Provisioning      | yes      | yes| yes   | yes | yes  |
@@ -55,7 +55,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 {{</table>}}
 ### Backend Storage Details
 {{<table "table table-striped table-bordered table-sm">}}
-| Features      | PowerMax         | VxFlexOS/PowerFlex | &emsp;&emsp;Unity | Isilon/PowerScale| PowerStore       |
+| Features      | PowerMax         | PowerFlex | &emsp;&emsp;Unity | PowerScale| PowerStore       |
 |---------------|:----------------:|:------------------:|:----------------:|:----------------:|:----------------:|
 | Fibre Channel | yes              | N/A                | yes              | N/A              | yes              |
 | iSCSI         | yes              | N/A                | yes              | N/A              | yes              |
