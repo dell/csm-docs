@@ -16,7 +16,7 @@ applications in case of both planned and unplanned migration.
 CSM for Replication provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerScale/Isilon | Unity | PowerStore | PowerFlex/VxFlex OS | PowerMax |
+| Capability | PowerScale | Unity | PowerStore | PowerFlex | PowerMax |
 | - | :-: | :-: | :-: | :-: | :-: |
 | Replicate data using native storage array based replication | no | no | yes | no | yes |
 | Create `PersistentVolume` objects in the cluster representing the replicated volume | no |  no | yes | no | yes |

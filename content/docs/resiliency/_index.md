@@ -26,7 +26,7 @@ Accordingly, CSM for Resiliency is adapted to and qualified with each CSI driver
 CSM for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerScale/Isilon | Unity | PowerStore | PowerFlex/VxFlex OS | PowerMax |
+| Capability | PowerScale | Unity | PowerStore | PowerFlex | PowerMax |
 | - | :-: | :-: | :-: | :-: | :-: |
 | Detect pod failures for the following failure types - Node failure, K8S Control Plane Network failure, Array I/O Network failure | no  | yes | no | yes | no |
 | Cleanup pod artifacts from failed nodes | no |  yes | no | yes | no |
