@@ -31,11 +31,11 @@ CSM for Observability provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability | PowerMax | PowerFlex | Unity | PowerScale | PowerStore |
 | - | :-: | :-: | :-: | :-: | :-: |
-| Collect and expose Volume Metrics via the OpenTelemetry Collector | no  | yes | no | no | yes |
+| Collect and expose Volume Metrics via the OpenTelemetry Collector | no | yes | no | no | yes |
 | Collect and expose File System Metrics via the OpenTelemetry Collector | no |  no | no | no | yes |
 | Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | no |  yes | no | no | no |
-| Collect and expose filesystem capacity metrics via the OpenTelemetry Collector | no |  no | no | no | yes |
-| Collect and expose block storage capacity metrics via the OpenTelemetry Collector | no |  yes | no | no | yes |
+| Collect and expose filesystem capacity metrics via the OpenTelemetry Collector | no | no | no | no | yes |
+| Collect and expose block storage capacity metrics via the OpenTelemetry Collector | no | yes | no | no | yes |
 | Non-disruptive config changes | no |  yes | no | no | yes |
 | Non-disruptive log level changes | no |  yes | no | no | yes |
 | Grafana Dashboards for displaying metrics and topology data | no |  yes | no | no | yes |
