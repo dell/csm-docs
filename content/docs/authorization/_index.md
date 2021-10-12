@@ -44,7 +44,7 @@ __NOTE:__ PowerScale OneFS implements its own form of Role-Based Access Control 
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex | PowerScale |
 |---------------|:----------------:|:-------------------:|:----------------:|
-| Storage Array |5978.479.479, 5978.669.669, Unisphere 9.2|    3.5.x, 3.6.x    | OneFS 8.1, 8.2, 9.0, 9.1, 9.2 |
+| Storage Array |5978.479.479, 5978.669.669, 5978.711.711, Unisphere 9.2|    3.5.x, 3.6.x    | OneFS 8.1, 8.2, 9.0, 9.1, 9.2 |
 {{</table>}}
 
 ## Supported CSI Drivers
