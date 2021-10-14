@@ -4298,7 +4298,17 @@ Enter user&#39;s password:
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;add-a-storage-system&#34;&gt;Add a Storage System&lt;/h3&gt;
 &lt;p&gt;You can now add storage endpoints, array type and its unique id&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;./csm add storage --endpoint &amp;lt;storage-array-endpoint&amp;gt; --storage-type &amp;lt;storage-array-type&amp;gt; --unique-id &amp;lt;storage-array-unique-id&amp;gt; --username &amp;lt;storage-array-username&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;create-an-application&#34;&gt;Create an Application&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The optional &lt;code&gt;--meta-data&lt;/code&gt; flag can be used to provide additional meta-data for the storage system that is used when creating Secrets for the CSI Driver. These fields include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;isDefault: Set to true if this storage system is used as default for multi-array configuration&lt;/li&gt;
+&lt;li&gt;skipCertificateValidation: Set to true to skip certificate validation&lt;/li&gt;
+&lt;li&gt;mdmId: Comma separated list of MDM IPs for PowerFlex&lt;/li&gt;
+&lt;li&gt;nasName: NAS Name for PowerStore&lt;/li&gt;
+&lt;li&gt;blockProtocol: Block Protocol for PowerStore&lt;/li&gt;
+&lt;li&gt;port: Port for PowerScale&lt;/li&gt;
+&lt;li&gt;portGroups: Comma separated list of port group names for PowerMax&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;create-an-application&#34;&gt;Create an Application&lt;/h3&gt;
 &lt;p&gt;You may now create an application depending on the specific use case. Below are the common use cases:&lt;/p&gt;
 &lt;details&gt;
    &lt;summary&gt;CSI Driver&lt;/summary&gt;
@@ -5370,7 +5380,12 @@ information
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-inject-leaves-the-isilon-controller-in-a-pending-state&#34;&gt;Running &lt;code&gt;karavictl inject&lt;/code&gt; leaves the isilon-controller in a &lt;code&gt;Pending&lt;/code&gt; state&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;running-karavictl-inject-leaves-the-vxflexos-controller-in-a-pending-state&#34;&gt;Running &amp;ldquo;karavictl inject&amp;rdquo; leaves the vxflexos-controller in a &amp;ldquo;Pending&amp;rdquo; state&lt;/h3&gt;
+&lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
+&lt;p&gt;To retrieve logs from services on the CSM Authorization Server, run the following command (e.g proxy-server logs):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For OPA related logs, run:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ k3s kubectl logs deploy/proxy-server -n karavi -c opa
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;running-karavictl-inject-leaves-the-vxflexos-controller-in-a-pending-state&#34;&gt;Running &amp;ldquo;karavictl inject&amp;rdquo; leaves the vxflexos-controller in a &amp;ldquo;Pending&amp;rdquo; state&lt;/h3&gt;
 &lt;p&gt;This situation may occur when the number of vxflexos-controller pods that are deployed is equal to the number of schedulable nodes.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ kubectl get pods -n vxflexos                                                                  
 

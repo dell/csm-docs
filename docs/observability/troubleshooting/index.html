@@ -116,7 +116,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.d32ae5ee970891cc289000f9bcb17007.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6926ad445bc4e94f17aa6f01e50e877d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -148,7 +148,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.d32ae5ee970891cc289000f9bcb17007.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6926ad445bc4e94f17aa6f01e50e877d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1544,6 +1544,7 @@
         <li><a href="#how-can-i-create-a-servicemonitor-object-for-prometheus-if-im-using-rancher-monitoring-stack">How can I create a ServiceMonitor object for Prometheus if I&rsquo;m using Rancher monitoring stack?</a></li>
         <li><a href="#how-can-i-debug-and-troubleshoot-issues-with-kubernetes">How can I debug and troubleshoot issues with Kubernetes?</a></li>
         <li><a href="#how-can-i-troubleshoot-latency-problems-with-csm-for-observability">How can I troubleshoot latency problems with CSM for Observability?</a></li>
+        <li><a href="#why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage">Why does the Observability installation timeout with pods stuck in &lsquo;ContainerCreating&rsquo;/&lsquo;CrashLoopBackOff&rsquo;/&lsquo;Error&rsquo; stage?</a></li>
       </ul>
     </li>
   </ul>
@@ -1603,6 +1604,7 @@
 <li><a href="#how-can-i-create-a-servicemonitor-object-for-prometheus-if-im-using-rancher-monitoring-stack">How can I create a ServiceMonitor object for Prometheus if I&rsquo;m using Rancher monitoring stack?</a></li>
 <li><a href="#how-can-i-debug-and-troubleshoot-issues-with-kubernetes">How can I debug and troubleshoot issues with Kubernetes?</a></li>
 <li><a href="#how-can-i-troubleshoot-latency-problems-with-csm-for-observability">How can I troubleshoot latency problems with CSM for Observability?</a></li>
+<li><a href="#why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage">Why does the Observability installation timeout with pods stuck in &lsquo;ContainerCreating&rsquo;/&lsquo;CrashLoopBackOff&rsquo;/&lsquo;Error&rsquo; stage?</a></li>
 </ol>
 <h3 id="why-do-i-see-a-certificate-problem-when-accessing-the-topology-service-outside-of-my-kubernetes-cluster">Why do I see a certificate problem when accessing the topology service outside of my Kubernetes cluster?</h3>
 <p>This issue can arise when the topology service manifest is updated to expose the service as NodePort and a client makes a request to the service. Karavi-toplogy is configured with a self-signed or custom certificate and when a client does not recognize a server&rsquo;s certificate, it shows an error and pings the server(karavi-topology) with the error.  You would see the issue when accessing the service through a browser or curl:</p>
@@ -1771,6 +1773,27 @@ kubectl logs -n $namespace $pod $container &gt; $logFileName
 </ul>
 <h3 id="how-can-i-troubleshoot-latency-problems-with-csm-for-observability">How can I troubleshoot latency problems with CSM for Observability?</h3>
 <p>CSM for Observability is instrumented to report trace data to <a href="https://zipkin.io/">Zipkin</a>.  Please see <a href="../deployment/#tracing">Tracing</a> for more information on enabling tracing for CSM for Observability.</p>
+<h3 id="why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage">Why does the Observability installation timeout with pods stuck in &lsquo;ContainerCreating&rsquo;/&lsquo;CrashLoopBackOff&rsquo;/&lsquo;Error&rsquo; stage?</h3>
+<p>Check the pods in the CSM for Observability namespace. If the pod starting with &lsquo;karavi-observability-cert-manager-cainjector-*&rsquo; is in &lsquo;CrashLoopBackOff&rsquo; or &lsquo;Error&rdquo; stage with a number of restarts, check if the logs for that pod show the below error:</p>
+<pre><code class="language-console" data-lang="console">kubectl logs -n $namespace $cert-manager-cainjector-podname
+error registering secret controller: no matches for kind &quot;MutatingWebhookConfiguration&quot; in version &quot;admissionregistration.k8s.io/v1beta1&quot;
+</code></pre><p>If the Kubernetes cluster version is 1.22.2 (or higher), this error is due to an incompatible <a href="https://github.com/jetstack/cert-manager">cert-manager</a> version. Please upgrade cert-manager to version 1.5.3 (or higher) to fix this issue, using the following instructions:</p>
+<p>Clone the Dell helm-charts repository to update the karavi-observability Helm chart:</p>
+<pre><code class="language-console" data-lang="console">git clone https://github.com/dell/helm-charts.git
+cd helm-charts/charts/karavi-observability/
+</code></pre><p>Update Charts.yaml to the new cert-manager version:</p>
+<pre><code class="language-console" data-lang="console"> dependencies:
+ - name: cert-manager
+   version: 1.5.3
+</code></pre><p>Add the following settings to the values.yaml file (any other settings that were modified for the helm install should remain unchanged):</p>
+<pre><code class="language-console" data-lang="console">cert-manager:
+  startupapicheck:
+    enabled: false
+    serviceAccount:
+      create: false
+</code></pre><p>Upgrade to the new Helm chart using the command below from the helm-charts/charts/karavi-observability directory:</p>
+<pre><code class="language-console" data-lang="console">$ helm upgrade --values values.yaml karavi-observability . -n $namespace
+</code></pre><p>Ignore any certificate failures returned by the upgrade command, and wait till the cert-manager and karavi observability pods refresh to &lsquo;Running&rsquo; state.</p>
 
         <div class="section-index">
     
