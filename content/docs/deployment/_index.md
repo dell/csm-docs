@@ -145,7 +145,7 @@ When a new version of the CSM Installer helm chart is available, the following s
 helm repo update
 ```
 
-2. Follow step `a` if certificates were used during initial installation of the helm chart or step `b` if certificates were not used:
+2. Follow step `a` if certificates were used during the initial installation of the helm chart or step `b` if certificates were not used:
 
 a) Upgrade the helm chart, specifying the certificates used during initial installation:
 ```
