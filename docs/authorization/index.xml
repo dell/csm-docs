@@ -1089,7 +1089,12 @@ data:
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-inject-leaves-the-isilon-controller-in-a-pending-state&#34;&gt;Running &lt;code&gt;karavictl inject&lt;/code&gt; leaves the isilon-controller in a &lt;code&gt;Pending&lt;/code&gt; state&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;running-karavictl-inject-leaves-the-vxflexos-controller-in-a-pending-state&#34;&gt;Running &amp;ldquo;karavictl inject&amp;rdquo; leaves the vxflexos-controller in a &amp;ldquo;Pending&amp;rdquo; state&lt;/h3&gt;
+&lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
+&lt;p&gt;To retrieve logs from services on the CSM Authorization Server, run the following command (e.g proxy-server logs):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For OPA related logs, run:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ k3s kubectl logs deploy/proxy-server -n karavi -c opa
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;running-karavictl-inject-leaves-the-vxflexos-controller-in-a-pending-state&#34;&gt;Running &amp;ldquo;karavictl inject&amp;rdquo; leaves the vxflexos-controller in a &amp;ldquo;Pending&amp;rdquo; state&lt;/h3&gt;
 &lt;p&gt;This situation may occur when the number of vxflexos-controller pods that are deployed is equal to the number of schedulable nodes.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ kubectl get pods -n vxflexos                                                                  
 
