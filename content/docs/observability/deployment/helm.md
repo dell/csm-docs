@@ -116,29 +116,3 @@ $ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE]
  ```
 
 __Note__: You can use the default [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml)
-
-## Upgrading using the Helm Chart
-
-To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.
-
-```console
-helm repo update
-```
-
-Check if the latest Helm chart version is available:
-
-```console
-helm search repo dell
-NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-dell/karavi-observability       1.0.1           1.0.0           CSM for Observability is part of the [Container...
-```
-
->Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See [Prerequisites](#prerequisites) for location of CRDs.
-
-Upgrade to the latest CSM for Observability release:
-
-```console
-$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
-```
-
-The [configuration](#configuration) section above lists all the parameters that can be configured using the values.yaml file.
