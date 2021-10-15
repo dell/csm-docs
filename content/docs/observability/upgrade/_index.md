@@ -37,4 +37,4 @@ Upgrade to the latest CSM for Observability release:
 $ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
 ```
 
-The [configuration](#configuration) section above lists all the parameters that can be configured using the values.yaml file.
+The [configuration](../deployment/helm#configuration) section lists all the parameters that can be configured using the values.yaml file.
