@@ -376,6 +376,32 @@ The ConfigMap to edit will have this pattern: &lt;storage&gt;-config-params (e.g
     </item>
     
     <item>
+      <title>Docs: Upgrade</title>
+      <link>https://dell.github.io/csm-docs/docs/resiliency/upgrade/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/resiliency/upgrade/</guid>
+      <description>
+        
+        
+        &lt;p&gt;CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a &lt;em&gt;helm chart&lt;/em&gt; or by the &lt;em&gt;Dell CSI Operator&lt;/em&gt;. Currently, only &lt;em&gt;Helm chart&lt;/em&gt; upgrade is supported for CSM for Resiliency.&lt;/p&gt;
+&lt;p&gt;For information on the PowerFlex CSI driver upgrade process, see &lt;a href=&#34;../../csidriver/upgradation/drivers/powerflex&#34;&gt;PowerFlex CSI Driver&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For information on the Unity CSI driver upgrade process, see &lt;a href=&#34;../../csidriver/upgradation/drivers/unity&#34;&gt;Unity CSI Driver&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;helm-chart-upgrade&#34;&gt;Helm Chart Upgrade&lt;/h2&gt;
+&lt;p&gt;To upgrade CSM for Resiliency with the driver, the following steps are required.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: These steps refer to the values file and &lt;code&gt;csi-install.sh&lt;/code&gt; script that were used during initial installation of the Dell CSI driver.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Update the podmon.image value in the values files to reference the new podmon image.&lt;/li&gt;
+&lt;li&gt;Run the csi-install script with the option &amp;ndash;upgrade by running: &lt;code&gt;cd ../dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Troubleshooting</title>
       <link>https://dell.github.io/csm-docs/docs/resiliency/troubleshooting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
