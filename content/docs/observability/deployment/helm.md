@@ -14,7 +14,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 - The cert-manager CustomResourceDefinition resources are created.
 
     ```console
-    $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml
+    $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
     ```
 
 ## Copy the CSI Driver Secret
@@ -136,7 +136,7 @@ dell/karavi-observability       1.0.1           1.0.0           CSM for Observab
 Upgrade to the latest CSM for Observability release:
 
 ```console
-$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability . -n $namespace
+$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
 ```
 
 The [configuration](#configuration) section above lists all the parameters that can be configured using the values.yaml file.
