@@ -43,7 +43,7 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax | PowerStore |
 |---------------|:-------------------:|:----------------:|
-| Storage Array | 5978.479.479, 5978.669.669, Unisphere 9.2 | 1.0.x, 2.0.x |
+| Storage Array | 5978.479.479, 5978.669.669, 5978.711.711, Unisphere 9.2 | 1.0.x, 2.0.x |
 {{</table>}}
 
 ## Supported CSI Drivers
