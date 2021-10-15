@@ -30,7 +30,7 @@ helm repo add dell https://dell.github.io/helm-charts
 
 **If securing the API service and database, following steps 2 to 4 to generate the certificates, or skip to step 5 to deploy without certificates**
 
-2. From the `helm` directory, generate self-signed certificates using the following commands:
+2. Generate self-signed certificates using the following commands:
 
 ```
 mkdir api-certs
@@ -52,7 +52,7 @@ openssl x509 -req -days 365 -in api-certs/cert.csr -CA api-certs/ca.crt \
 curl https://binaries.cockroachdb.com/cockroach-v21.1.8.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v21.1.8.linux-amd64/cockroach /usr/local/bin/
 ```
 
-4. From the `helm` directory, generate the certificates required for the cockroach-db service:
+4. Generate the certificates required for the cockroach-db service:
 ```
 mkdir db-certs
 
@@ -89,7 +89,7 @@ adminPassword:
 
 6. Follow step `a` if certificates are being used or step `b` if certificates are not being used:
 
-a) From the `helm` directory, install the helm chart, specifying the certificates generated in the previous steps:
+a) Install the helm chart, specifying the certificates generated in the previous steps:
 ```
 helm install -n csm-installer --create-namespace \
    --set-file serviceCertificate=api-certs/cert.crt \
@@ -136,3 +136,36 @@ helm install -n csm-installer --create-namespace \
 | `dbVolumeDirectory` | Directory on the worker node to use for the Persistent Volume | `/var/lib/cockroachdb` |
 | `api_server_ip`     | If using Swagger, set to public IP or host of the CSM Installer API service | `localhost` | 
 
+## How to Upgrade the Container Storage Modules Installer
+
+When a new version of the CSM Installer helm chart is available, the following steps can be used to upgrade to the latest version.
+
+1. Update the helm repository.
+```
+helm repo update
+```
+
+2. Follow step `a` if certificates were used during the initial installation of the helm chart or step `b` if certificates were not used:
+
+a) Upgrade the helm chart, specifying the certificates used during initial installation:
+```
+helm upgrade -n csm-installer \
+   --set-file serviceCertificate=api-certs/cert.crt \
+   --set-file servicePrivateKey=api-certs/cert.key \
+   --set-file databaseCertificate=db-certs/node.crt \
+   --set-file databasePrivateKey=db-certs/node.key \
+   --set-file dbClientCertificate=db-certs/client.root.crt \
+   --set-file dbClientPrivateKey=db-certs/client.root.key \
+   --set-file caCrt=db-certs/ca.crt \
+   -f values.yaml \
+   csm-installer dell/csm-installer
+```
+
+b) If not deploying with certificates, execute the following command:
+```
+helm upgrade -n csm-installer \
+   --set-string scheme=http \
+   --set-string dbSSLEnabled="false" \
+   -f values.yaml \
+   csm-installer dell/csm-installer
+```
