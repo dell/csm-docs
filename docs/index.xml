@@ -4889,19 +4889,6 @@ The ConfigMap to edit will have this pattern: &lt;storage&gt;-config-params (e.g
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace -f values.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You can use the default &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;values.yaml&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;upgrading-using-the-helm-chart&#34;&gt;Upgrading using the Helm Chart&lt;/h2&gt;
-&lt;p&gt;To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;helm repo update
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Check if the latest Helm chart version is available:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;helm search repo dell
-NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-dell/karavi-observability       1.0.1           1.0.0           CSM for Observability is part of the [Container...
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See &lt;a href=&#34;#prerequisites&#34;&gt;Prerequisites&lt;/a&gt; for location of CRDs.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Upgrade to the latest CSM for Observability release:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;a href=&#34;#configuration&#34;&gt;configuration&lt;/a&gt; section above lists all the parameters that can be configured using the values.yaml file.&lt;/p&gt;
 
       </description>
     </item>
