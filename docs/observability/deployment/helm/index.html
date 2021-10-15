@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/observability/deployment/helm/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-10-15T02:25:13-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Helm">
 <meta itemprop="description" content="Dell EMC Container Storage Modules (CSM) for Observability Helm deployment
 ">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="759">
+<meta itemprop="dateModified" content="2021-10-15T02:25:13-04:00" />
+<meta itemprop="wordCount" content="851">
 
 
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e4595841c6c523d49c5de50c9ab88c45.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.12c845ce00221159134af657ebf09a29.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e4595841c6c523d49c5de50c9ab88c45.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.12c845ce00221159134af657ebf09a29.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1551,6 +1551,7 @@
     <li><a href="#add-the-repo">Add the Repo</a></li>
     <li><a href="#installing-the-chart">Installing the Chart</a></li>
     <li><a href="#configuration">Configuration</a></li>
+    <li><a href="#upgrading-using-the-helm-chart">Upgrading using the Helm Chart</a></li>
   </ul>
 </nav>
 
@@ -1857,6 +1858,16 @@
 </code></pre><p>Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example:</p>
 <pre><code class="language-console" data-lang="console">$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace -f values.yaml
 </code></pre><p><strong>Note</strong>: You can use the default <a href="https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml">values.yaml</a></p>
+<h2 id="upgrading-using-the-helm-chart">Upgrading using the Helm Chart</h2>
+<p>To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.</p>
+<pre><code class="language-console" data-lang="console">helm repo update
+</code></pre><p>Check if the latest Helm chart version is available:</p>
+<pre><code class="language-console" data-lang="console">helm search repo dell
+NAME                            CHART VERSION   APP VERSION     DESCRIPTION
+dell/karavi-observability       1.0.1           1.0.0           CSM for Observability is part of the [Container...
+</code></pre><p>Upgrade to the latest CSM for Observability release:</p>
+<pre><code class="language-console" data-lang="console">$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability . -n $namespace
+</code></pre><p>The <a href="#configuration">configuration</a> section above lists all the parameters that can be configured using the values.yaml file.</p>
 
 	
 	

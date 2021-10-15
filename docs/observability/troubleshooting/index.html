@@ -116,7 +116,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e4595841c6c523d49c5de50c9ab88c45.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.12c845ce00221159134af657ebf09a29.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -148,7 +148,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e4595841c6c523d49c5de50c9ab88c45.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.12c845ce00221159134af657ebf09a29.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1777,23 +1777,7 @@ kubectl logs -n $namespace $pod $container &gt; $logFileName
 <p>Check the pods in the CSM for Observability namespace. If the pod starting with &lsquo;karavi-observability-cert-manager-cainjector-*&rsquo; is in &lsquo;CrashLoopBackOff&rsquo; or &lsquo;Error&rdquo; stage with a number of restarts, check if the logs for that pod show the below error:</p>
 <pre><code class="language-console" data-lang="console">kubectl logs -n $namespace $cert-manager-cainjector-podname
 error registering secret controller: no matches for kind &quot;MutatingWebhookConfiguration&quot; in version &quot;admissionregistration.k8s.io/v1beta1&quot;
-</code></pre><p>If the Kubernetes cluster version is 1.22.2 (or higher), this error is due to an incompatible <a href="https://github.com/jetstack/cert-manager">cert-manager</a> version. Please upgrade cert-manager to version 1.5.3 (or higher) to fix this issue, using the following instructions:</p>
-<p>Clone the Dell helm-charts repository to update the karavi-observability Helm chart:</p>
-<pre><code class="language-console" data-lang="console">git clone https://github.com/dell/helm-charts.git
-cd helm-charts/charts/karavi-observability/
-</code></pre><p>Update Charts.yaml to the new cert-manager version:</p>
-<pre><code class="language-console" data-lang="console"> dependencies:
- - name: cert-manager
-   version: 1.5.3
-</code></pre><p>Add the following settings to the values.yaml file (any other settings that were modified for the helm install should remain unchanged):</p>
-<pre><code class="language-console" data-lang="console">cert-manager:
-  startupapicheck:
-    enabled: false
-    serviceAccount:
-      create: false
-</code></pre><p>Upgrade to the new Helm chart using the command below from the helm-charts/charts/karavi-observability directory:</p>
-<pre><code class="language-console" data-lang="console">$ helm upgrade --values values.yaml karavi-observability . -n $namespace
-</code></pre><p>Ignore any certificate failures returned by the upgrade command, and wait till the cert-manager and karavi observability pods refresh to &lsquo;Running&rsquo; state.</p>
+</code></pre><p>If the Kubernetes cluster version is 1.22.2 (or higher), this error is due to an incompatible <a href="https://github.com/jetstack/cert-manager">cert-manager</a> version. Please upgrade to the latest CSM for Observability release (v1.0.1 or higher).</p>
 
         <div class="section-index">
     
