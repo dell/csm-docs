@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/observability/deployment/helm/" />
-<meta property="article:modified_time" content="2021-10-15T13:06:31-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-10-15T16:02:34-03:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Helm">
 <meta itemprop="description" content="Dell EMC Container Storage Modules (CSM) for Observability Helm deployment
 ">
-<meta itemprop="dateModified" content="2021-10-15T13:06:31-04:00" />
-<meta itemprop="wordCount" content="851">
+<meta itemprop="dateModified" content="2021-10-15T16:02:34-03:00" />
+<meta itemprop="wordCount" content="878">
 
 
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2650bfd47e1db955cbf6c936e4f87fa.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4bb63329876e19dca9fd3aff0e83f8fe.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2650bfd47e1db955cbf6c936e4f87fa.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4bb63329876e19dca9fd3aff0e83f8fe.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1396,6 +1396,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsdocsresiliencyupgrade" href="/csm-docs/docs/resiliency/upgrade/">Upgrade</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsdocsresiliencytroubleshooting" href="/csm-docs/docs/resiliency/troubleshooting/">Troubleshooting</a>
         
       
@@ -1865,7 +1873,10 @@
 <pre><code class="language-console" data-lang="console">helm search repo dell
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
 dell/karavi-observability       1.0.1           1.0.0           CSM for Observability is part of the [Container...
-</code></pre><p>Upgrade to the latest CSM for Observability release:</p>
+</code></pre><blockquote>
+<p>Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See <a href="#prerequisites">Prerequisites</a> for location of CRDs.</p>
+</blockquote>
+<p>Upgrade to the latest CSM for Observability release:</p>
 <pre><code class="language-console" data-lang="console">$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
 </code></pre><p>The <a href="#configuration">configuration</a> section above lists all the parameters that can be configured using the values.yaml file.</p>
 

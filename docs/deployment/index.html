@@ -113,7 +113,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2650bfd47e1db955cbf6c936e4f87fa.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4bb63329876e19dca9fd3aff0e83f8fe.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,7 +145,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2650bfd47e1db955cbf6c936e4f87fa.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4bb63329876e19dca9fd3aff0e83f8fe.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1388,6 +1388,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsdocsresiliencyupgrade" href="/csm-docs/docs/resiliency/upgrade/">Upgrade</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsdocsresiliencytroubleshooting" href="/csm-docs/docs/resiliency/troubleshooting/">Troubleshooting</a>
         
       
@@ -1776,6 +1784,9 @@ adminPassword:
 </table>
 <h2 id="how-to-upgrade-the-container-storage-modules-installer">How to Upgrade the Container Storage Modules Installer</h2>
 <p>When a new version of the CSM Installer helm chart is available, the following steps can be used to upgrade to the latest version.</p>
+<blockquote>
+<p>Note: Upgrading the CSM Installer does not upgrade the Dell EMC CSI Drivers or modules that were previously deployed with the installer. The CSM Installer does not support upgrading of the Dell EMC CSI Drivers or modules. The Dell EMC CSI Drivers and modules must be deleted and re-deployed using the latest CSM Installer in order to get the most recent version of the Dell EMC CSI Driver and modules.</p>
+</blockquote>
 <ol>
 <li>Update the helm repository.</li>
 </ol>
@@ -1891,6 +1902,8 @@ adminPassword:
                     </h5>
                     <p>Dell EMC Container Storage Modules (CSM) Command Line Interface(CLI) Deployment and Management</p>
                 </div>
+            
+        
             
         
             
