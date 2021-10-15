@@ -140,6 +140,8 @@ helm install -n csm-installer --create-namespace \
 
 When a new version of the CSM Installer helm chart is available, the following steps can be used to upgrade to the latest version.
 
+>Note: Upgrading the CSM Installer does not upgrade the Dell EMC CSI Drivers or modules that were previously deployed with the installer. The CSM Installer does not support upgrading of the Dell EMC CSI Drivers or modules. The Dell EMC CSI Drivers and modules must be deleted and re-deployed using the latest CSM Installer in order to get the most recent version of the Dell EMC CSI Driver and modules.
+
 1. Update the helm repository.
 ```
 helm repo update

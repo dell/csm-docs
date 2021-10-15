@@ -133,6 +133,8 @@ NAME                            CHART VERSION   APP VERSION     DESCRIPTION
 dell/karavi-observability       1.0.1           1.0.0           CSM for Observability is part of the [Container...
 ```
 
+>Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See [Prerequisites](#prerequisites) for location of CRDs.
+
 Upgrade to the latest CSM for Observability release:
 
 ```console
