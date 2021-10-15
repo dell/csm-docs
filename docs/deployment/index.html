@@ -113,7 +113,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.12c845ce00221159134af657ebf09a29.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b342afd09ab0d4f1fca9bee2ea3b8830.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,7 +145,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.12c845ce00221159134af657ebf09a29.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b342afd09ab0d4f1fca9bee2ea3b8830.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1538,6 +1538,7 @@
         <li><a href="#configuration">Configuration</a></li>
       </ul>
     </li>
+    <li><a href="#how-to-upgrade-the-container-storage-modules-installer">How to Upgrade the Container Storage Modules Installer</a></li>
   </ul>
 </nav>
 
@@ -1602,7 +1603,7 @@
 <pre><code>helm repo add dell https://dell.github.io/helm-charts
 </code></pre><p><strong>If securing the API service and database, following steps 2 to 4 to generate the certificates, or skip to step 5 to deploy without certificates</strong></p>
 <ol start="2">
-<li>From the <code>helm</code> directory, generate self-signed certificates using the following commands:</li>
+<li>Generate self-signed certificates using the following commands:</li>
 </ol>
 <pre><code>mkdir api-certs
 
@@ -1621,7 +1622,7 @@ openssl x509 -req -days 365 -in api-certs/cert.csr -CA api-certs/ca.crt \
 </ol>
 <pre><code>curl https://binaries.cockroachdb.com/cockroach-v21.1.8.linux-amd64.tgz | tar -xz &amp;&amp; sudo cp -i cockroach-v21.1.8.linux-amd64/cockroach /usr/local/bin/
 </code></pre><ol start="4">
-<li>From the <code>helm</code> directory, generate the certificates required for the cockroach-db service:</li>
+<li>Generate the certificates required for the cockroach-db service:</li>
 </ol>
 <pre><code>mkdir db-certs
 
@@ -1651,7 +1652,7 @@ adminPassword:
 </code></pre><ol start="6">
 <li>Follow step <code>a</code> if certificates are being used or step <code>b</code> if certificates are not being used:</li>
 </ol>
-<p>a) From the <code>helm</code> directory, install the helm chart, specifying the certificates generated in the previous steps:</p>
+<p>a) Install the helm chart, specifying the certificates generated in the previous steps:</p>
 <pre><code>helm install -n csm-installer --create-namespace \
    --set-file serviceCertificate=api-certs/cert.crt \
    --set-file servicePrivateKey=api-certs/cert.key \
@@ -1773,7 +1774,33 @@ adminPassword:
 </tr>
 </tbody>
 </table>
-
+<h2 id="how-to-upgrade-the-container-storage-modules-installer">How to Upgrade the Container Storage Modules Installer</h2>
+<p>When a new version of the CSM Installer helm chart is available, the following steps can be used to upgrade to the latest version.</p>
+<ol>
+<li>Update the helm repository.</li>
+</ol>
+<pre><code>helm repo update
+</code></pre><ol start="2">
+<li>Follow step <code>a</code> if certificates were used during the initial installation of the helm chart or step <code>b</code> if certificates were not used:</li>
+</ol>
+<p>a) Upgrade the helm chart, specifying the certificates used during initial installation:</p>
+<pre><code>helm upgrade -n csm-installer \
+   --set-file serviceCertificate=api-certs/cert.crt \
+   --set-file servicePrivateKey=api-certs/cert.key \
+   --set-file databaseCertificate=db-certs/node.crt \
+   --set-file databasePrivateKey=db-certs/node.key \
+   --set-file dbClientCertificate=db-certs/client.root.crt \
+   --set-file dbClientPrivateKey=db-certs/client.root.key \
+   --set-file caCrt=db-certs/ca.crt \
+   -f values.yaml \
+   csm-installer dell/csm-installer
+</code></pre><p>b) If not deploying with certificates, execute the following command:</p>
+<pre><code>helm upgrade -n csm-installer \
+   --set-string scheme=http \
+   --set-string dbSSLEnabled=&quot;false&quot; \
+   -f values.yaml \
+   csm-installer dell/csm-installer
+</code></pre>
         <div class="section-index">
     
     
