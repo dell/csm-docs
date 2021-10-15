@@ -30,7 +30,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The cert-manager CustomResourceDefinition resources are created.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;copy-the-csi-driver-secret&#34;&gt;Copy the CSI Driver Secret&lt;/h2&gt;
@@ -276,7 +276,7 @@
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
 dell/karavi-observability       1.0.1           1.0.0           CSM for Observability is part of the [Container...
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Upgrade to the latest CSM for Observability release:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability . -n $namespace
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;a href=&#34;#configuration&#34;&gt;configuration&lt;/a&gt; section above lists all the parameters that can be configured using the values.yaml file.&lt;/p&gt;
 
       </description>

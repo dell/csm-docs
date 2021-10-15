@@ -13,11 +13,11 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/observability/deployment/helm/" />
-<meta property="article:modified_time" content="2021-10-15T02:25:13-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-10-15T13:06:31-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Helm">
 <meta itemprop="description" content="Dell EMC Container Storage Modules (CSM) for Observability Helm deployment
 ">
-<meta itemprop="dateModified" content="2021-10-15T02:25:13-04:00" />
+<meta itemprop="dateModified" content="2021-10-15T13:06:31-04:00" />
 <meta itemprop="wordCount" content="851">
 
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b342afd09ab0d4f1fca9bee2ea3b8830.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2650bfd47e1db955cbf6c936e4f87fa.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b342afd09ab0d4f1fca9bee2ea3b8830.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2650bfd47e1db955cbf6c936e4f87fa.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1620,7 +1620,7 @@
 </li>
 <li>
 <p>The cert-manager CustomResourceDefinition resources are created.</p>
-<pre><code class="language-console" data-lang="console">$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml
+<pre><code class="language-console" data-lang="console">$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
 </code></pre></li>
 </ul>
 <h2 id="copy-the-csi-driver-secret">Copy the CSI Driver Secret</h2>
@@ -1866,7 +1866,7 @@
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
 dell/karavi-observability       1.0.1           1.0.0           CSM for Observability is part of the [Container...
 </code></pre><p>Upgrade to the latest CSM for Observability release:</p>
-<pre><code class="language-console" data-lang="console">$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability . -n $namespace
+<pre><code class="language-console" data-lang="console">$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
 </code></pre><p>The <a href="#configuration">configuration</a> section above lists all the parameters that can be configured using the values.yaml file.</p>
 
 	
