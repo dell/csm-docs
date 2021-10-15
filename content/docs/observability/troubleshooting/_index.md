@@ -232,32 +232,4 @@ kubectl logs -n $namespace $cert-manager-cainjector-podname
 error registering secret controller: no matches for kind "MutatingWebhookConfiguration" in version "admissionregistration.k8s.io/v1beta1"
 ```
 
-If the Kubernetes cluster version is 1.22.2 (or higher), this error is due to an incompatible [cert-manager](https://github.com/jetstack/cert-manager) version. Please upgrade cert-manager to version 1.5.3 (or higher) to fix this issue, using the following instructions:
-
-Clone the Dell helm-charts repository to update the karavi-observability Helm chart:
-```console
-git clone https://github.com/dell/helm-charts.git
-cd helm-charts/charts/karavi-observability/
-```
-
-Update Charts.yaml to the new cert-manager version:
-```console
- dependencies:
- - name: cert-manager
-   version: 1.5.3
-```
-
-Add the following settings to the values.yaml file (any other settings that were modified for the helm install should remain unchanged):
-```console
-cert-manager:
-  startupapicheck:
-    enabled: false
-    serviceAccount:
-      create: false
-```
-
-Upgrade to the new Helm chart using the command below from the helm-charts/charts/karavi-observability directory:
-```console
-$ helm upgrade --values values.yaml karavi-observability . -n $namespace
-```
-Ignore any certificate failures returned by the upgrade command, and wait till the cert-manager and karavi observability pods refresh to 'Running' state.
+If the Kubernetes cluster version is 1.22.2 (or higher), this error is due to an incompatible [cert-manager](https://github.com/jetstack/cert-manager) version. Please upgrade to the latest CSM for Observability release (v1.0.1 or higher).
