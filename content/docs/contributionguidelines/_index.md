@@ -7,7 +7,7 @@ Description: >
 ---
 
 
-CSM Docs is an open source project and  we thrive to build a welcoming and open community for anyone who wants to use the project or contribute to it.
+CSM Docs is an open-source project and we thrive to build a welcoming and open community for anyone who wants to use the project or contribute to it.
 
 ### Contributing to CSM Docs
 
@@ -19,7 +19,7 @@ You can contribute to this project in several ways. Here are some examples:
 * Report an issue.
 * Feature requests.
 
-CSM docs resides in <https://github.com/dell/csm-docs>. 
+CSM docs reside in <https://github.com/dell/csm-docs>. 
 
 CSM project resides in <https://github.com/dell/csm>.
 
@@ -29,14 +29,14 @@ CSM project resides in <https://github.com/dell/csm>.
 * Commit directly.
 * Compromise backward compatibility.
 * Disrespect your Community Team members. 
-* Forget to keep thing simple.
+* Forget to keep things simple.
 
 #### Do
 
 * Keep it simple.
 * Good work, your best every time.
 * Squash your commits, avoid merges.
-* Keep an open communication with other Committers.
+* Keep open communication with other Committers.
 * Ask questions.
 * Test your changes locally and make sure it is not breaking anything.
 
@@ -58,9 +58,9 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
 |  Feature     |  feature-9-olp-support            |  "9" referring to GitHub issue ID         |
 |  Bug Fix     |  bugfix-110-remove-docker-compose |  "110" referring to GitHub issue ID       |
 
-> Feature branch will always be merged to the release branch . Bug Fix can be merged to either main or release branch.
+> Feature branch will always be merged to the release branch. Bug Fix can be merged to either the main or release branch.
 
-#### Steps for working on a main branch
+#### Steps for working on the main branch
 
 1. Fork the repository.
 2. Create a branch off of the main branch. The branch name should follow [branch naming convention](#branch-naming-convention).
@@ -82,16 +82,16 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
 
 ### Previewing your changes
 - Install [latest Hugo version extended version](https://github.com/gohugoio/hugo/releases). 
-    > Note: Please note we have to  install extended version.
-- Create a local copy of csm-docs repository using `git clone`. 
+    > Note: Please note we have to install an extended version.
+- Create a local copy of the csm-docs repository using `git clone`. 
 - Update docsy submodules inside themes folder using `git submodule update --recursive --init`
-- Change to csm-docs folder and run 
+- Change to the csm-docs folder and run 
     ```
     hugo server 
     ```    
-    By default local changes will be reflected at http://localhost:1313/. Hugo will watch for changes to the content and automatically refreshes the site.
+    By default, local changes will be reflected at http://localhost:1313/. Hugo will watch for changes to the content and automatically refreshes the site.
   > Note: To bind it to different server address use `hugo server --bind 0.0.0.0`, default is 127.0.0.1
-- After testing the changes locally, raise a pull request after editing the pages and pushing it to github. 
+- After testing the changes locally, raise a pull request after editing the pages and pushing it to GitHub. 
 
 ### Community guidelines
 
@@ -102,13 +102,13 @@ This project follows https://github.com/dell/csm/blob/main/docs/CODE_OF_CONDUCT.
 #### Linking the URLs
 
 Hardcoded relative links like `[troubleshooting observability](../../observability/troubleshooting.md)` will behave unexpectedly compared to how they would work on our local file system. 
-To avoid broken links in the portal, use regular relative URLs in links which will be left unchanged by Hugo.
+To avoid broken links in the portal, use regular relative URLs in links that will be left unchanged by Hugo.
 
 #### Style guide
 
-- Use sentence case wherever applicable
-- Use numbered list for items in sequential order and bulletins for the other list
-- Check for grammar and spellings.
-- Embed the code with in backticks. 
-- Use only high resolution images.
+- Use sentence case wherever applicable.
+- Use the numbered lists for items in sequential order and bulletins for the other lists.
+- Check for grammar and spelling.
+- Embed the code within backticks. 
+- Use only high-resolution images.
 
