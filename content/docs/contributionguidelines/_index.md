@@ -96,3 +96,19 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
 ### Community guidelines
 
 This project follows https://github.com/dell/csm/blob/main/docs/CODE_OF_CONDUCT.md.
+
+### Best Practices
+
+#### Linking the URLs
+
+Hardcoded relative links like `[troubleshooting observability](../../observability/troubleshooting.md)` will behave unexpectedly compared to how they would work on our local file system. 
+To avoid broken links in the portal, use regular relative URLs in links which will be left unchanged by Hugo.
+
+#### Style guide
+
+- Use sentence case wherever applicable
+- Use numbered list for items in sequential order and bulletins for the other list
+- Check for grammar and spellings.
+- Embed the code with in backticks. 
+- Use only high resolution images.
+
