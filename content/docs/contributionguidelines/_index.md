@@ -59,8 +59,8 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
 3. Make your changes and commit them to your branch.
 4. If other code changes have merged into the upstream main branch, perform a rebase of those changes into your branch.
 5. Test your changes [locally](#previewing-your-changes)
-5. Open a [pull request](https://github.com/dell/csm/pulls) between your branch and the upstream main branch.
-6. Once your pull request has merged with the required approvals, your branch can be deleted.
+6. Open a [pull request](https://github.com/dell/csm/pulls) between your branch and the upstream main branch.
+7. Once your pull request has merged with the required approvals, your branch can be deleted.
 
 #### Steps for working on a release branch
 
@@ -68,18 +68,18 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
 2. Create a branch off of the release branch. The branch name should follow [branch naming convention](#branch-naming-convention).
 3. Make your changes and commit them to your branch.
 4. If other code changes have merged into the upstream release branch, perform a rebase of those changes into your branch.
-5. Open a [pull request](https://github.com/dell/csm/pulls) between your branch and the upstream release branch.
-6. Once your pull request has merged with the required approvals, your branch can be deleted.
+5. Test your changes [locally](#previewing-your-changes)
+6. Open a [pull request](https://github.com/dell/csm/pulls) between your branch and the upstream release branch.
+7. Once your pull request has merged with the required approvals, your branch can be deleted.
 
 ### Previewing your changes
 - Install [latest Hugo version extended version](https://github.com/gohugoio/hugo/releases). 
-    >Note: Please note we have to  install extended version.    -
+    >Note: Please note we have to  install extended version.
 - Create a local copy of csm-docs repository using `git clone`. 
 - Update docsy submodules inside themes folder using `git submodule update --recursive --init`
 - Change to csm-docs folder and run 
     ```
     hugo server 
-
     ```    
     By default local changes will be reflected at http://localhost:1313/. Hugo will watch for changes to the content and automatically refreshes the site.
   >Note: To bind it to different server address use `hugo server --bind 0.0.0.0`, default is 127.0.0.1
