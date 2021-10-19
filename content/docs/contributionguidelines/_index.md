@@ -11,6 +11,14 @@ CSM Docs is an open source project and  we thrive to build a welcoming and open 
 
 ### Contributing to CSM Docs
 
+Become one of the contributors to this project! 
+
+You can contribute to this project in several ways. Here are some examples:
+
+* Contribute to the CSM documentation.
+* Report an issue.
+* Feature requests.
+
 CSM docs resides in <https://github.com/dell/csm-docs>. 
 
 CSM project resides in <https://github.com/dell/csm>.
@@ -74,7 +82,7 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
 
 ### Previewing your changes
 - Install [latest Hugo version extended version](https://github.com/gohugoio/hugo/releases). 
-    >Note: Please note we have to  install extended version.
+    > Note: Please note we have to  install extended version.
 - Create a local copy of csm-docs repository using `git clone`. 
 - Update docsy submodules inside themes folder using `git submodule update --recursive --init`
 - Change to csm-docs folder and run 
@@ -82,7 +90,7 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
     hugo server 
     ```    
     By default local changes will be reflected at http://localhost:1313/. Hugo will watch for changes to the content and automatically refreshes the site.
-  >Note: To bind it to different server address use `hugo server --bind 0.0.0.0`, default is 127.0.0.1
+  > Note: To bind it to different server address use `hugo server --bind 0.0.0.0`, default is 127.0.0.1
 - After testing the changes locally, raise a pull request after editing the pages and pushing it to github. 
 
 ### Community guidelines
