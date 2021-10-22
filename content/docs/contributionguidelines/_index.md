@@ -67,7 +67,7 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
 3. Make your changes and commit them to your branch.
 4. If other code changes have merged into the upstream main branch, perform a rebase of those changes into your branch.
 5. Test your changes [locally](#previewing-your-changes)
-6. Open a [pull request](https://github.com/dell/csm/pulls) between your branch and the upstream main branch.
+6. Open a [pull request](https://github.com/dell/csm-docs/pulls) between your branch and the upstream main branch.
 7. Once your pull request has merged with the required approvals, your branch can be deleted.
 
 #### Steps for working on a release branch
@@ -77,7 +77,7 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
 3. Make your changes and commit them to your branch.
 4. If other code changes have merged into the upstream release branch, perform a rebase of those changes into your branch.
 5. Test your changes [locally](#previewing-your-changes)
-6. Open a [pull request](https://github.com/dell/csm/pulls) between your branch and the upstream release branch.
+6. Open a [pull request](https://github.com/dell/csm-docs/pulls) between your branch and the upstream release branch.
 7. Once your pull request has merged with the required approvals, your branch can be deleted.
 
 ### Previewing your changes
