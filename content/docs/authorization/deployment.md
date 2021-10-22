@@ -200,28 +200,75 @@ There are currently 2 ways of doing this:
 
 Given a setup where Kubernetes, a storage system, CSI driver(s), and CSM for Authorization are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:
 
-Run the following commands on the CSI Driver host
+1. Create the secret token in the namespace of the driver.
 
-   ```console
-    # Specify Authorization host address. NOTE: this is not the same as IP
-    export AuthorizationHost=""
-
-    echo === Applying token token ===
-    # It is assumed that array type powermax has the namespace "powermax" and powerflex has the namepace "vxflexos"
+    ```console
+    # It is assumed that array type powermax has the namespace "powermax", powerflex has the namepace "vxflexos", and powerscale has the namespace "isilon".
     kubectl apply -f /tmp/token.yaml -n powermax
     kubectl apply -f /tmp/token.yaml -n vxflexos
-
-    echo === injecting sidecar in all CSI driver hosts that token has been applied to === 
-    sudo curl -k https://${AuthorizationHost}/install | sh
-    
-    # NOTE: you can also query parameters("namespace" and "proxy-port") with the curl url if you desire a specific behavior.
-    # 1) For instance, if you want to inject into just powermax, you can run
-    #    sudo curl -k https://${AuthorizationHost}/install?namespace=powermax | sh
-    # 2) If you want to specify the proxy-port for powermax to be 900001, you can run
-    #    sudo curl -k https://${AuthorizationHost}/install?proxy-port=powermax:900001 | sh
-    # 3) You can mix behaviors
-    #    sudo curl -k https://${AuthorizationHost}/install?namespace=powermax&proxy-port=powermax:900001&namespace=vxflexos | sh
+    kubectl apply -f /tmp/token.yaml -n isilon
    ```
+
+2. Edit following parameters in samples/secret/karavi-authorization-config.yaml file and update/add connection information for one or more backend storage arrays.
+
+  | Parameter | Description | Required | Default |
+   | --------- | ----------- | -------- |-------- |
+   | username | Username for connecting to PowerScale OneFS API server. This parameter is not used. | No | - |
+   | password | Password for connecting to PowerScale OneFS API server. This parameter is not used. | No | - |
+   | intendedEndpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
+   | endpoint | HTTPS localhost endpoint that the authorization sidecar will listen on. | Yes | https://localhost:9400 |
+   | systemID | System ID of the backend storage array. | Yes | " " |
+   | insecure | A boolean that enable/disable certificate validation of the backend storage array. This parameter is not used. | No | true |
+   | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
+
+  <br/>
+   Create karavi-authorization-config secret using the following command:
+  <br/> `kubectl -n <driver_namespace> create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.yaml -o yaml --dry-run=client | kubectl apply -f -`
+
+   *NOTE:* 
+   - For PowerScale, the *systemID* will be the *clusterName* of the array. 
+   - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
+  
+3. Create the driver secret as you would normally excpet update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password.
+
+#### PowerScale
+
+Edit following parameters in csi-powerscale/samples/secret/secret.yaml file and update/add connection information for communicating with the sidecar.
+
+   | Parameter | Description | Required | Default |
+   | --------- | ----------- | -------- |-------- |
+   | clusterName | Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret. | Yes | - |
+   | username | Username for connecting to PowerScale OneFS API server. Keep this as the default value. | Yes | - |
+   | password | Password for connecting to PowerScale OneFS API server. Keep this as the default value. | Yes | - |
+   | endpoint | HTTPS endpoint of the PowerScale OneFS API server. Keep this as the default value. | Yes | localhost |
+   | mountEndpoint | IP address or FQDN of the PowerScale OneFS API server. | Yes | 10.0.0.1 |
+   | isDefault | Indicates if this is a default cluster (would be used by storage classes without ClusterName parameter). Only one of the cluster config should be marked as default. | No | false |
+   | ***Optional parameters*** | Following parameters are Optional. If specified will override default values from values.yaml. |
+   | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. | No | default value from values.yaml |
+   | endpointPort | Specify the HTTPs port number of the PowerScale OneFS API server. The value specified here, or from values.yaml, must match the port that was specified in the *endpoint* parameter in the karavi-authorization-config secret. | No | default value from values.yaml |
+   | isiPath | The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute. | No | default value from values.yaml |
+
+Create isilon-creds secret using the following command:
+  <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
+   
+   *NOTE:* 
+   - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
+   - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
+   - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
+
+4. Create the proxy-server-root-certificate secret.
+
+If running in *insecure* mode, create the secret with empty data:
+
+  ```console
+  kubectl -n <namespace> create secret generic proxy-server-root-certificate --from-literal=rootCertificate.pem= -o yaml --dry-run=client | k apply -f -
+  ```
+
+Otherwise, create the proxy-server-root-certificate secret with the appropriate file:
+
+  ```console
+  kubectl -n <namespace> create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | k apply -f -
+  ```
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
