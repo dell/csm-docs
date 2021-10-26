@@ -112,9 +112,9 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
 
-3. Check `helm/csi-vxflexos/driver-image.yaml` and confirm the driver image points to a new image.
+3. Check `helm/csi-vxflexos/values.yaml` and confirm the driver image points to a new image.
 
-4. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the top-level helm directory.  This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the value for these parameters as they must be entered in the `config.yaml` file in the samples directory.
+4. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the scripts directory.  This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the value for these parameters as they must be entered in the `config.yaml` file in the samples directory.
 
 5. Prepare the samples/config.yaml for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.
 
@@ -223,7 +223,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | image | image for podmon. | No | " " |
 
 
-10. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`
+10. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml` or install helm charts without shell scripts by following README.md in helm folder.
 
  *NOTE:*
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
