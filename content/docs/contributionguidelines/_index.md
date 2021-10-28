@@ -55,6 +55,7 @@ The CSM documentation portal follows a release branch strategy where a branch is
 |--------------|-----------------------------------|-------------------------------------------|
 |  main        |  main                             |                                           |
 |  Release     |  release-1.0                      |  hotfix: release-1.1 patch: release-1.0.1 |
+|  Feature     |  feature-9-olp-support            |  "9" referring to GitHub issue ID         |
 |  Bug Fix     |  bugfix-110-remove-docker-compose |  "110" referring to GitHub issue ID       |
 
 #### Steps for working on the main branch
