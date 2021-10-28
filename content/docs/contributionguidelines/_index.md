@@ -58,9 +58,6 @@ CSM documentation portal follows a scaled trunk branching strategy where short-l
 |  Feature     |  feature-9-olp-support            |  "9" referring to GitHub issue ID         |
 |  Bug Fix     |  bugfix-110-remove-docker-compose |  "110" referring to GitHub issue ID       |
 
-> Feature branch will always be merged to the release branch. Bug Fix can be merged to either the main or release branch.
-> Features can span over multiple branches, `main` may contain partial features until all related features branches are merged.
-
 #### Steps for working on the main branch
 
 1. Fork the repository.
