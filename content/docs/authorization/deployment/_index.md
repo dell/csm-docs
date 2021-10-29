@@ -224,41 +224,31 @@ Given a setup where Kubernetes, a storage system, CSI driver(s), and CSM for Aut
 
 
 Create the karavi-authorization-config secret using the following command:
-```console
-$ kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
-```
+  ```console
+  kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
+  ```
 >Note:  
-   - For PowerScale, the *systemID* will be the *clusterName* of the array. 
-   - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
-  
-3. Create the driver secret as you would normally excpet update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password.
+> - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
+> - For PowerScale, the *systemID* will be the *clusterName* of the array. 
+> - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
 
+#### PowerMax
+#### PowerFlex
 #### PowerScale
 
-Edit following parameters in csi-powerscale/samples/secret/secret.yaml file and update/add connection information for communicating with the sidecar.
+Please refer to setp 6 in the [installation steps for PowerScale](../../csidriver/installation/helm/isilon) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
 
-   | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |
-   | clusterName | Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret. | Yes | - |
-   | username | Username for connecting to PowerScale OneFS API server. Keep this as the default value. Authorization will disregard this. | Yes | - |
-   | password | Password for connecting to PowerScale OneFS API server. Keep this as the default value. | Yes | - |
-   | endpoint | HTTPS endpoint of the PowerScale OneFS API server. Keep this as the default value. | Yes | localhost |
-   | mountEndpoint | IP address or FQDN of the PowerScale OneFS API server. | Yes | 10.0.0.1 |
-   | isDefault | Indicates if this is a default cluster (would be used by storage classes without ClusterName parameter). Only one of the cluster config should be marked as default. | No | false |
-   | ***Optional parameters*** | Following parameters are Optional. If specified will override default values from values.yaml. |
-   | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. | No | default value from values.yaml |
-   | endpointPort | Specify the HTTPs port number of the PowerScale OneFS API server. The value specified here, or from values.yaml, must match the port that was specified in the *endpoint* parameter in the karavi-authorization-config secret. | No | default value from values.yaml |
-   | isiPath | The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute. | No | default value from values.yaml |
-
-Create isilon-creds secret using the following command:
-  <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
+1. Create isilon-creds secret using the following command:
+  ```console
+  kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -
+  ```
    
-   *NOTE:* 
-   - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
-   - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
-   - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
+>Note:
+> - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and *storageClass*, then the values provided in storageClass parameters take precedence.
+> - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
+> - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
 
-4. Create the proxy-server-root-certificate secret.
+2. Create the proxy-server-root-certificate secret.
 
 If running in *insecure* mode, create the secret with empty data:
 
