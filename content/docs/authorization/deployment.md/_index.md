@@ -19,7 +19,7 @@ The CSM for Authorization proxy server requires a Linux host with the following 
 
 ## Deploying the CSM Authorization Proxy Server
 
-The first part deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator. 
+The first part to deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator. 
 
 The CSM for Authorization proxy server is installed using a single binary installer.
 
@@ -72,7 +72,7 @@ A Storage Administrator can execute the installer or rpm package as a root user 
 
 2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS_host_name` is also required. All traffic from `grpc.DNS_host_name` needs to be routed to `DNS_host_name` address, this can be configured by adding a new DNS entry for `grpc.DNS_host_name` or providing a temporary path in the `/etc/hosts` file.  
 
-    **NOTE:** The certificate provided in `crtFile` should be valid for both the `DNS_host_name` and the `grpc.DNS_host_name` address.  
+>Note: The certificate provided in `crtFile` should be valid for both the `DNS_host_name` and the `grpc.DNS_host_name` address.  
 
     For example, create the certificate config file with alternate names (to include example.com and grpc.example.com) and then create the .crt file:  
 
@@ -130,8 +130,8 @@ Run the following commands on the Authorization proxy server:
   export DriverHostVMPassword=""
   export DriverHostVMUser=""
 
-  # Specify Authorization host address. NOTE: this is not the same as IP
-  export AuthorizationHost=""
+  # Specify Authorization proxy host address. NOTE: this is not the same as IP
+  export AuthorizationProxyHost=""
 
   echo === Creating Storage(s) ===
   # Add array1 to authorization
@@ -153,7 +153,7 @@ Run the following commands on the Authorization proxy server:
             --insecure
     
   echo === Creating Tenant ===
-  karavictl tenant create -n $TenantName --insecure --addr "grpc.${AuthorizationHost}"
+  karavictl tenant create -n $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}"
 
   echo === Creating Role ===
   karavictl role create \
@@ -161,7 +161,7 @@ Run the following commands on the Authorization proxy server:
            --role=${RoleName}=${Array2Type}=${Array2SystemID}=${Array2Pool}=${RoleQuota}   
 
   echo === === Binding Role ===
-  karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure --addr "grpc.${AuthorizationHost}"
+  karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure --addr "grpc.${AuthorizationProxyHost}"
   ```
 
 ### Generate a Token
@@ -170,27 +170,27 @@ After creating the role bindings, the next logical step is to generate the acces
 
   ```
   echo === Generating token ===
-  karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationHost}" | jq -r '.Token' > token.yaml
+  karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > token.yaml
 
   echo === Copy token to Driver Host ===
   sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
   ```
   
-**Note:** The sample above copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
+>Note: The sample above copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
 
 ### Copy the karavictl Binary to the Kubernetes Master Node
 
-The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node where Kubernetes tenant admins so they configure the Dell EMC CSI driver with CSM for Authorization.
+The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so they can configure the Dell EMC CSI driver with CSM for Authorization.
 
 ```
 sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
 ```
 
-**Note:** The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.
+>Note: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.
 
 ## Configuring a Dell EMC CSI Driver with CSM for Authorization
 
-The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../authorization#supported-csi-drivers). This is controlled by the Kubernetes tenant admin.
+The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
 There are currently 2 ways of doing this:  
 - Using the [CSM Installer](../../deployment) (*Recommended installation method*)
@@ -209,23 +209,25 @@ Given a setup where Kubernetes, a storage system, CSI driver(s), and CSM for Aut
     kubectl apply -f /tmp/token.yaml -n isilon
    ```
 
-2. Edit following parameters in samples/secret/karavi-authorization-config.yaml file and update/add connection information for one or more backend storage arrays.
+2. Edit the following parameters in samples/secret/karavi-authorization-config.json file in the CSI driver and update/add connection information for one or more backend storage arrays.
+>Note: In CSI PowerFlex, edit the following parameters in samples/karavi-authorization-config.json
 
   | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
-   | username | Username for connecting to PowerScale OneFS API server. This parameter is not used. | No | - |
-   | password | Password for connecting to PowerScale OneFS API server. This parameter is not used. | No | - |
+   | username | Username for connecting to the backend storage array. This parameter is ignored. | No | - |
+   | password | Password for connecting to to the backend storage array. This parameter is ignored. | No | - |
    | intendedEndpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
    | endpoint | HTTPS localhost endpoint that the authorization sidecar will listen on. | Yes | https://localhost:9400 |
    | systemID | System ID of the backend storage array. | Yes | " " |
-   | insecure | A boolean that enable/disable certificate validation of the backend storage array. This parameter is not used. | No | true |
+   | insecure | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
    | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
 
-  <br/>
-   Create karavi-authorization-config secret using the following command:
-  <br/> `kubectl -n <driver_namespace> create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.yaml -o yaml --dry-run=client | kubectl apply -f -`
 
-   *NOTE:* 
+Create the karavi-authorization-config secret using the following command:
+```console
+$ kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
+```
+>Note:  
    - For PowerScale, the *systemID* will be the *clusterName* of the array. 
    - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
   
@@ -238,7 +240,7 @@ Edit following parameters in csi-powerscale/samples/secret/secret.yaml file and 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | clusterName | Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret. | Yes | - |
-   | username | Username for connecting to PowerScale OneFS API server. Keep this as the default value. | Yes | - |
+   | username | Username for connecting to PowerScale OneFS API server. Keep this as the default value. Authorization will disregard this. | Yes | - |
    | password | Password for connecting to PowerScale OneFS API server. Keep this as the default value. | Yes | - |
    | endpoint | HTTPS endpoint of the PowerScale OneFS API server. Keep this as the default value. | Yes | localhost |
    | mountEndpoint | IP address or FQDN of the PowerScale OneFS API server. | Yes | 10.0.0.1 |
@@ -302,7 +304,7 @@ Replace the data in `config.yaml` under the `data` field with your new, encoded 
 
 __Note:__ If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so:
 
-`karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationHost}" | jq -r '.Token' > kubectl -n $namespace apply -f -`
+`karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > kubectl -n $namespace apply -f -`
 
 ## CSM for Authorization Proxy Server Dynamic Configuration Settings
 

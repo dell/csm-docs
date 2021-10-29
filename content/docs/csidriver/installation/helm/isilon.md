@@ -113,7 +113,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | isiPath | Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
-   | **authorization** | [Authorization](../../../../authorization) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   | **authorization** | [Authorization](../../../../authorization/deployment.md) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
    | enabled                  | A boolean that enable/disable authorization feature. |  No      |   false   |
    | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
    | proxyHost | Hostname of the csm-authorization server. | No | " " |
