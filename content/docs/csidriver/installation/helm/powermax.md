@@ -204,7 +204,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_| Yes if Reverse Proxy mode is _StandAlone_ | https://primary-1.unisphe.re:8443 |
 | backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode.| No | https://backup-1.unisphe.re:8443 |
 | managementServers | This section refers to the list of configurations for Unisphere servers managing powermax arrays.| - | - |
-| endpoint | This refers to the URL of the Unisphere server | Yes | https://primary-1.unisphe.re:8443 |
+| endpoint | This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on | Yes | https://primary-1.unisphe.re:8443 |
 | credentialsSecret| This refers to the user credentials for _endpoint_ | No| primary-1-secret|
 | skipCertificateValidation | This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.| No | "True"       |
 | certSecret    |  The name of the secret in the same namespace containing the CA certificates of the Unisphere server | Yes, if skipCertificateValidation is set to false | Empty|
@@ -220,6 +220,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
 | mode | This refers to the installation mode of Reverse Proxy. It can be set to:<br> 1. _Linked_: In this mode, the Reverse Proxy communicates with a primary or a backup Unisphere managing the same set of arrays.<br>2. _StandAlone_: In this mode, the Reverse Proxy communicates with multiple arrays managed by different Unispheres.| Yes | "StandAlone" |
+| **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerMax. | - | - |
+| enabled                  | A boolean that enable/disable authorization feature. |  No      |   false   |
+| sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
+| proxyHost | Hostname of the csm-authorization server. | No | Empty |
+| insecure | A boolean that enable/disable certificate validation of the csm-authorization server. | No | true |
 
 8. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml`
 
@@ -227,6 +232,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 - For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.
 - There are a set of samples provided [here](#sample-values-file) to help you configure the driver with reverse proxy
 - This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The `verify.sh` script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the `--skip-verify-node` option
+- In order to enable authorization, there should be an authorization proxy server already installed. 
 
 ## Storage Classes
 

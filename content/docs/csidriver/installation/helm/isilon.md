@@ -113,17 +113,17 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | isiPath | Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
-   | **authorization** | [Authorization](../../../../authorization/deployment.md) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
    | enabled                  | A boolean that enable/disable authorization feature. |  No      |   false   |
    | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
-   | proxyHost | Hostname of the csm-authorization server. | No | " " |
+   | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | insecure | A boolean that enable/disable certificate validation of the csm-authorization server. | No | true |
    
    *NOTE:* 
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
-   
+   - In order to enable authorization, there should be an authorization proxy server already installed.
     
 6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters.
    

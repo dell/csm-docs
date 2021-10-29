@@ -210,7 +210,6 @@ Given a setup where Kubernetes, a storage system, CSI driver(s), and CSM for Aut
    ```
 
 2. Edit the following parameters in samples/secret/karavi-authorization-config.json file in the CSI driver and update/add connection information for one or more backend storage arrays.
->Note: In CSI PowerFlex, edit the following parameters in samples/karavi-authorization-config.json
 
   | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -224,24 +223,25 @@ Given a setup where Kubernetes, a storage system, CSI driver(s), and CSM for Aut
 
 
 Create the karavi-authorization-config secret using the following command:
-  ```console
-  kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
-  ```
+
+`kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
+
 >Note:  
 > - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
 > - For PowerScale, the *systemID* will be the *clusterName* of the array. 
-> - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
+>   - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
 
-#### PowerMax
-#### PowerFlex
+3. Create the proxy-server-root-certificate secret. Follow the [steps](#powerscale) below if you're configuring PowerScale with the authorization sidecar.
+
+    `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-literal=rootCertificate.pem= -o yaml --dry-run=client | k apply -f -`
+
 #### PowerScale
 
-Please refer to setp 6 in the [installation steps for PowerScale](../../csidriver/installation/helm/isilon) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
+Please refer to step 6 in the [installation steps for PowerScale](../../csidriver/installation/helm/isilon) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
 
 1. Create isilon-creds secret using the following command:
-  ```console
-  kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -
-  ```
+
+    `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
    
 >Note:
 > - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and *storageClass*, then the values provided in storageClass parameters take precedence.
@@ -250,17 +250,13 @@ Please refer to setp 6 in the [installation steps for PowerScale](../../csidrive
 
 2. Create the proxy-server-root-certificate secret.
 
-If running in *insecure* mode, create the secret with empty data:
+    If running in *insecure* mode, create the secret with empty data:
 
-  ```console
-  kubectl -n <namespace> create secret generic proxy-server-root-certificate --from-literal=rootCertificate.pem= -o yaml --dry-run=client | k apply -f -
-  ```
+      `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-literal=rootCertificate.pem= -o yaml --dry-run=client | k apply -f -`
 
-Otherwise, create the proxy-server-root-certificate secret with the appropriate file:
+    Otherwise, create the proxy-server-root-certificate secret with the appropriate file:
 
-  ```console
-  kubectl -n <namespace> create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | k apply -f -
-  ```
+      `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | k apply -f -`
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
