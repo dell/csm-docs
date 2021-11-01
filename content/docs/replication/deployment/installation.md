@@ -53,7 +53,7 @@ This script will do the following:
 2. Install `dell-replication-controller`
 
 
-After the installation ConfigMap will consist only logLevel field, to add the rest configuration to the cluster do the following:
+After the installation ConfigMap will consist of only the `logLevel` field, to add the rest configuration to the cluster do the following:
 * Update the configuration in `deploy/config.yaml` after going through the guide [here](../configmap-secrets)
 * Run the following commands to update and complete the installation
 ```shell
