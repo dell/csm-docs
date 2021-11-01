@@ -28,7 +28,7 @@ make build
 ### Installing CSM Replication Controller
 You can use one of the following methods to install CSM Replication Controller
 * Using repctl
-* Installation script
+* Installation script (Helm chart)
 
 We recommend using repctl for the installation as it simplifies the installation workflow. This process also helps configure `repctl`
 for future use during management operations.
@@ -42,19 +42,18 @@ Repeat the following steps on all clusters where you want to configure replicati
 ```shell
 git clone github.com/dell/csm-replication
 cd csm-replication
-# Modify deploy/config.yaml as per your cluster configuration (optional)
-bash scripts/install.sh
+kubectl create ns dell-replication-controller
+# Copy and  modify values.yaml file if you wish to customize your deployment in any way
+cp ../helm/csm-replication/values.yaml ./myvalues.yaml
+bash scripts/install.sh --values ./myvalues.yaml
 ```
 
 This script will do the following:
 1. Install `DellCSIReplicationGroup` CRD in your cluster
-2. Create a namespace `dell-replication-controller`
-3. Install `dell-replication-controller`
+2. Install `dell-replication-controller`
 
-During the installation process, you will be prompted to create secrets to connect to
-other clusters. You can choose to create secrets at this time or even postpone this activity for later.
 
-If you choose to update the configuration post installation, then do the following:
+After the installation ConfigMap will consist only logLevel field, to add the rest configuration to the cluster do the following:
 * Update the configuration in `deploy/config.yaml` after going through the guide [here](../configmap-secrets)
 * Run the following commands to update and complete the installation
 ```shell

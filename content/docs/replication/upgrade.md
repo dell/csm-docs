@@ -8,7 +8,7 @@ description: >
 
 CSM Replication module consists of two components: 
 * CSM Replication sidecar (installed along with the driver) 
-* CSM Replication controller. 
+* CSM Replication controller
 
 Those two components should be upgraded separately. When upgrading them ensure that you use same versions for both sidecar and
 controller, because different versions could be incompatible with each other. 
@@ -36,8 +36,10 @@ This option will only work if you have previously installed replication with hel
 
 **Steps**
 1. Update the `image` value in the values files to reference the new CSM Replication sidecar image or use new version of csm-replication helm chart
-2. Run the install script with the option `--upgrade` by running: `cd ./scripts && ./install.sh --namespace dell-replication-controller --values ./myvalues.yaml --upgrade`
+2. Run the install script with the option `--upgrade` by running: `cd ./scripts && ./install.sh --values ./myvalues.yaml --upgrade`
 3. Run the same command on second Kubernetes cluster if you use multi-cluster replication topology
+
+> Note: Upgrade won't override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using kubectl edit cm -n dell-replication-controller dell-replication-controller-config
 
 
 
