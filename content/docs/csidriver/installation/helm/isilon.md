@@ -114,10 +114,10 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
    | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
-   | enabled                  | A boolean that enable/disable authorization feature. |  No      |   false   |
+   | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
    | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
-   | insecure | A boolean that enable/disable certificate validation of the csm-authorization server. | No | true |
+   | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
    
    *NOTE:* 
 

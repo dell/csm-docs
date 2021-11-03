@@ -19,7 +19,7 @@ The CSM for Authorization proxy server requires a Linux host with the following 
 
 ## Deploying the CSM Authorization Proxy Server
 
-The first part to deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator. 
+The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator. 
 
 The CSM for Authorization proxy server is installed using a single binary installer.
 
@@ -72,7 +72,7 @@ A Storage Administrator can execute the installer or rpm package as a root user 
 
 2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS_host_name` is also required. All traffic from `grpc.DNS_host_name` needs to be routed to `DNS_host_name` address, this can be configured by adding a new DNS entry for `grpc.DNS_host_name` or providing a temporary path in the `/etc/hosts` file.  
 
->Note: The certificate provided in `crtFile` should be valid for both the `DNS_host_name` and the `grpc.DNS_host_name` address.  
+>__Note__: The certificate provided in `crtFile` should be valid for both the `DNS_host_name` and the `grpc.DNS_host_name` address.  
 
     For example, create the certificate config file with alternate names (to include example.com and grpc.example.com) and then create the .crt file:  
 
@@ -176,29 +176,25 @@ After creating the role bindings, the next logical step is to generate the acces
   sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
   ```
   
->Note: The sample above copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
+>__Note__: The sample above copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
 
 ### Copy the karavictl Binary to the Kubernetes Master Node
 
-The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so they can configure the Dell EMC CSI driver with CSM for Authorization.
+The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell EMC CSI driver with CSM for Authorization.
 
 ```
 sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
 ```
 
->Note: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.
+>__Note__: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.
 
 ## Configuring a Dell EMC CSI Driver with CSM for Authorization
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
-There are currently 2 ways of doing this:  
-- Using the [CSM Installer](../../deployment) (*Recommended installation method*)
-- Manually by following the steps [below](#configuring-a-dell-emc-csi-driver)
-
 ### Configuring a Dell EMC CSI Driver
 
-Given a setup where Kubernetes, a storage system, CSI driver(s), and CSM for Authorization are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:
+Given a setup where Kubernetes, a storage system, CSI driver(s), and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:
 
 1. Create the secret token in the namespace of the driver.
 
@@ -209,7 +205,7 @@ Given a setup where Kubernetes, a storage system, CSI driver(s), and CSM for Aut
     kubectl apply -f /tmp/token.yaml -n isilon
    ```
 
-2. Edit the following parameters in samples/secret/karavi-authorization-config.json file in the CSI driver and update/add connection information for one or more backend storage arrays.
+2. Edit the following parameters in samples/secret/karavi-authorization-config.json file in [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples), [CSI PowerMax](https://github.com/dell/csi-powermax/tree/main/samples/secret), or [CSI PowerScale](https://github.com/dell/csi-powerscale/tree/main/samples/secret) driver and update/add connection information for one or more backend storage arrays.
 
   | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -226,7 +222,7 @@ Create the karavi-authorization-config secret using the following command:
 
 `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
 
->Note:  
+>__Note__:  
 > - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
 > - For PowerScale, the *systemID* will be the *clusterName* of the array. 
 >   - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
@@ -256,7 +252,7 @@ Please refer to step 6 in the [installation steps for PowerScale](../../csidrive
 
     `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
    
->Note:
+>__Note__:
 > - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and *storageClass*, then the values provided in storageClass parameters take precedence.
 > - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
 > - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
@@ -291,7 +287,7 @@ Copy the new, encoded data and edit the `karavi-config-secret` with the new data
 
 Replace the data in `config.yaml` under the `data` field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.
 
-__Note:__ If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so:
+>__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so:
 
 `karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > kubectl -n $namespace apply -f -`
 

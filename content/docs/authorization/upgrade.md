@@ -7,9 +7,15 @@ description: >
 ---
 
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:
-- Upgrading the CSM for Authorization proxy host
+- Upgrading the CSM for Authorization proxy server
 - Upgrading the Dell EMC CSI drivers with CSM for Authorization enabled
+
+### Upgrading CSM for Authorization proxy server
 
 ### Upgrading Dell EMC CSI Driver(s) with CSM for Authorization enabled
 
-Given a setup where the CSM for Authorization proxy host is already upgraded to the latest version, follow the [upgrade instructions](../../csidriver/upgradation/) for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar
+Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar
+
+- [Upgrade PowerFlex CSI driver](../../csidriver/upgradation/drivers/powerflex/#update-driver-from-v14v15-to-v20-using-helm)
+- [Upgrade PowerMax CSI driver](../../csidriver/upgradation/drivers/powermax/#update-driver-from-v17-to-v20-using-helm)
+- [Upgrade PowerScale CSI driver](../../csidriver/upgradation/drivers/isilon/#upgrade-driver-from-version-160-to-200)

@@ -226,10 +226,10 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | enabled                  | A boolean that enable/disable podmon feature. |  No      |   false   |
 | image | image for podmon. | No | " " |
 | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
-| enabled                  | A boolean that enable/disable authorization feature. |  No      |   false   |
+| enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
 | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
-| insecure | A boolean that enable/disable certificate validation of the csm-authorization server. | No | true |
+| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
 
 
 10. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`
