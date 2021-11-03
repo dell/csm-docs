@@ -47,7 +47,7 @@ We use GitHub pull requests for this purpose.
 
 ### Branching strategy
 
-CSM documentation portal follows a scaled trunk branching strategy where short-lived branches are created off of the main branch. When coding is complete, the branch is merged back into main after being approved in a pull request code review.
+The CSM documentation portal follows a release branch strategy where a branch is created for each release and all documentation changes made for a release are done on that branch. The release branch is then merged into the main branch at the time of the release. In some situations it may be sufficient to merge a non-release branch to main if it fixes some issue in the documentation for the current released version.
 
 #### Branch Naming Convention
 
