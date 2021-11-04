@@ -238,7 +238,7 @@ Create the karavi-authorization-config secret using the following command:
       `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | k apply -f -`
 
 
->__Note__: Follow the steps below for additional configurations to [CSI PowerFlex](#powerflex) or [CSI PowerScale](#powerscale) to work with the Authorization sidecar.
+>__Note__: Follow the steps below for additional configurations to [CSI PowerFlex](#powerflex) and [CSI PowerScale](#powerscale). No additional configuration is required for the CSI PowerMax driver.
 #### PowerFlex
 
 Please refer to step 5 in the [installation steps for PowerFlex](../../csidriver/installation/helm/powerflex) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
