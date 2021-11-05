@@ -28,6 +28,7 @@ The following are requirements that must be met before installing the CSI Driver
 - Install PowerFlex Storage Data Client 
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - A user must exist on the array with a role _>= FrontEndConfigure_
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 
 
 ### Install Helm 3.0

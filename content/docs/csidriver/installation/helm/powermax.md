@@ -30,6 +30,7 @@ The following requirements must be met before installing CSI Driver for Dell EMC
 - Mount propagation is enabled on container runtime that is being used
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 
 ### Install Helm 3
 
