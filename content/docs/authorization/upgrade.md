@@ -16,6 +16,6 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar
 
-- [Upgrade PowerFlex CSI driver](../../csidriver/upgradation/drivers/powerflex/#update-driver-from-v14v15-to-v20-using-helm)
-- [Upgrade PowerMax CSI driver](../../csidriver/upgradation/drivers/powermax/#update-driver-from-v17-to-v20-using-helm)
-- [Upgrade PowerScale CSI driver](../../csidriver/upgradation/drivers/isilon/#upgrade-driver-from-version-160-to-200)
+- [Upgrade PowerFlex CSI driver](../../csidriver/upgradation/drivers/powerflex/)
+- [Upgrade PowerMax CSI driver](../../csidriver/upgradation/drivers/powermax/)
+- [Upgrade PowerScale CSI driver](../../csidriver/upgradation/drivers/isilon/)
