@@ -39,7 +39,9 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
           password: <password in base64>
 ```  
   - Create secret for FTP side by using the command `kubectl create -f sdc-repo-secret.yaml`.
-- Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml. Please note that you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. Not filling in these values will cause an error, so please leave this commented out if you don't intend on using it.
+  - Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml. Please note the following: 
+    - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
+    - **If not using sidecar**, please leave this commented out -- otherwise, the empty fields will cause errors.
 ##### Example CR:  [config/samples/vxflex_v200_ops_47.yaml](https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v200_ops_47.yaml)
 ```yaml
         sideCars:
