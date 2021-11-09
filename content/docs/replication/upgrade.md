@@ -42,7 +42,7 @@ This option will only work if you have previously installed replication with hel
 
 ### Upgrading with repctl
 
-> Note: These steps assume that you already have `repctl` configured to use correct clusters, if you don't know how to do that please refer to [installing with repctl](./deployment/install-repctl.md) 
+> Note: These steps assume that you already have `repctl` configured to use correct clusters, if you don't know how to do that please refer to [installing with repctl](../deployment/install-repctl) 
 
 **Steps**
 1. Find a new version of deployment manifest that can be found in `deploy/controller.yaml`, with newer `image` pointing to the version of CSM Replication controller you want to upgrade to 
