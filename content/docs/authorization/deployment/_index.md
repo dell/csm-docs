@@ -231,11 +231,11 @@ Create the karavi-authorization-config secret using the following command:
 
     If running in *insecure* mode, create the secret with empty data:
 
-      `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-literal=rootCertificate.pem= -o yaml --dry-run=client | k apply -f -`
+      `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-literal=rootCertificate.pem= -o yaml --dry-run=client | kubectl apply -f -`
 
     Otherwise, create the proxy-server-root-certificate secret with the appropriate file:
 
-      `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | k apply -f -`
+      `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -`
 
 
 >__Note__: Follow the steps below for additional configurations to [CSI PowerFlex](#powerflex) and [CSI PowerScale](#powerscale). No additional configuration is required for the CSI PowerMax driver.
@@ -255,7 +255,7 @@ Please refer to step 6 in the [installation steps for PowerScale](../../csidrive
     `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
    
 >__Note__:
-> - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and *storageClass*, then the values provided in storageClass parameters take precedence.
+> - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
 > - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
 > - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
 
