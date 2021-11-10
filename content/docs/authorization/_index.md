@@ -61,6 +61,14 @@ CSM for Authorization supports the following CSI drivers and versions.
 __Note:__ If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver's controller pod.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
+## Authorization Components Support Matrix
+CSM for Authorization consists of 2 components - the Authorization sidecar and the Authorization proxy server.  It is important that the version of the Authorization sidecar image maps to a supported version of the Authorization proxy server.
+
+{{<table "table table-striped table-bordered table-sm">}}
+| Authorization Sidecar Image Tag | Authorization Proxy Server Version |
+| ------------------------------- | ---------------------------------- |
+| dellemc/csm-authorization-sidecar:v1.0.0 | v1.0.0, v1.1.0 |
+{{</table>}}
 ## Roles and Responsibilities
 
 The CSM for Authorization CLI can be executed in the context of the following roles:

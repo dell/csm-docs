@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting"
 linkTitle: "Troubleshooting"
-weight: 4
+weight: 5
 Description: >
   Troubleshooting guide
 ---

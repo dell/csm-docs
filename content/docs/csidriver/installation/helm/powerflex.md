@@ -28,6 +28,7 @@ The following are requirements that must be met before installing the CSI Driver
 - Install PowerFlex Storage Data Client 
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - A user must exist on the array with a role _>= FrontEndConfigure_
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 
 
 ### Install Helm 3.0
@@ -120,11 +121,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
     | Parameter | Description                                                  | Required | Default |
     | --------- | ------------------------------------------------------------ | -------- | ------- |
-    | username  | Username for accessing PowerFlex system.                      | true     | -       |
-    | password  | Password for accessing PowerFlex system.                      | true     | -       |
+    | username  | Username for accessing PowerFlex system. If authorization is enabled, username will be ignored.                       | true     | -       |
+    | password  | Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.                     | true     | -       |
     | systemID  | System name/ID of PowerFlex system.                           | true     | -       |
     | allSystemNames | List of previous names of powerflex array if used for PV create     | false    | -       |
-    | endpoint  | REST API gateway HTTPS endpoint for PowerFlex system.         | true     | -       |
+    | endpoint  | REST API gateway HTTPS endpoint for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on          | true     | -       |
     | skipCertificateValidation  | Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface. | true     | true    |
     | isDefault | An array having isDefault=true is for backward compatibility. This parameter should occur once in the list. | false    | false   |
     | mdm       | mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
@@ -133,14 +134,18 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
     ```yaml
      # Username for accessing PowerFlex system.	
+     # If authorization is enabled, username will be ignored.
    - username: "admin"
      # Password for accessing PowerFlex system.	
+     # If authorization is enabled, password will be ignored.
      password: "password"
      # System name/ID of PowerFlex system.	
      systemID: "ID1"
      # Previous names of PowerFlex system if used for PV.
      allSystemNames: "pflex-1,pflex-2"
      # REST API gateway HTTPS endpoint for PowerFlex system.
+     # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
+     # the authorization sidecar will listen on
      endpoint: "https://127.0.0.1"
      # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
      # Allowed values: true or false
@@ -221,6 +226,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | **podmon**               | Podmon is an optional feature under development and tech preview. Enable this feature only after contact support for additional information.  |  -        |  -       |
 | enabled                  | A boolean that enable/disable podmon feature. |  No      |   false   |
 | image | image for podmon. | No | " " |
+| **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
+| enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
+| sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
+| proxyHost | Hostname of the csm-authorization server. | No | Empty |
+| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
 
 
 10. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`

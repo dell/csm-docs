@@ -23,6 +23,7 @@ The following are requirements to be met before installing the CSI Driver for De
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 
 ### Install Helm 3.0
 
@@ -113,12 +114,17 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | isiPath | Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
+   | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
+   | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
+   | proxyHost | Hostname of the csm-authorization server. | No | Empty |
+   | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
    
    *NOTE:* 
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
-   
+   - In order to enable authorization, there should be an authorization proxy server already installed.
     
 6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters.
    
@@ -154,7 +160,7 @@ Create isilon-creds secret using the following command:
    - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
    - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
-   - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
+   - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../authorization) is enabled.
    
 7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell EMC PowerScale.
     ```
