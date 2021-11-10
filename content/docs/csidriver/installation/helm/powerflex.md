@@ -223,7 +223,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | image | image for podmon. | No | " " |
 
 
-10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml` or helm install charts without shell scripts refer to helm/README.md for details.
+10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml` or for helm install charts without shell scripts refer to helm/README.md for details.
 
  *NOTE:*
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
