@@ -18,7 +18,6 @@ To update the rpm package on the system, run the below command:
 
 ```
 rpm -Uvh karavi-authorization-<new_version>.x86_64.rpm --nopreun --nopostun
-
 ```
 
 To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:
@@ -27,7 +26,6 @@ To verify that the new version of the rpm is installed and K3s has been updated,
 rpm -qa | grep karavi
 k3s kubectl version
 ``` 
-
 
 >__Note__: The above steps manage install and upgrade of all dependencies that are required by the CSM for Authorization proxy server. 
 
