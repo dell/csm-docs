@@ -497,6 +497,26 @@ or you could edit logConfig.yaml, and use this command:
 `kubectl apply -f logConfig.yaml`  
 
 and then make the necessary adjustments for LOG_LEVEL and LOG_FORMAT.  
-If LOG_LEVEL or LOG_FORMAT are set to options outside of what is supported, the driver will use the default values of "info" and "text" . 
+If LOG_LEVEL or LOG_FORMAT are set to options outside of what is supported, the driver will use the default values of "info" and "text" .   
 
+## Volume Health Monitoring 
 
+Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.  
+
+To accomplish this, the driver utilizes the sidecar, external-health-monitor. When driver detects a volume condition is abnormal, the sidecar will report an event to the corresponding PVC. For example, in this event from `kubectl describe pvc -n <ns>` we can see that the underlying volume was deleted from the PowerFlex array:
+```
+Events:
+  Type     Reason                     Age                 From                                                         Message
+  ----     ------                     ----                ----                                                         ------
+  Warning  VolumeConditionAbnormal    32s                 csi-pv-monitor-controller-csi-vxflexos.dellemc.com           Volume is not found at 2021-11-03 20:31:04
+
+```  
+If the feature gate CSIVolumeHealth is set to true, events will also be reported to pods that have abnormal volumes. In these two events from `kubectl describe pods -n <ns>`, we can see that this pod has two abnormal volumes: one volume was unmounted outside of Kubernetes, while another was deleted from PowerFlex array.
+```
+Events:
+  Type     Reason                     Age                 From         Message
+  ----     ------                     ----                ----         ------
+Warning  VolumeConditionAbnormal      35s (x9 over 12m)  kubelet       Volume vol4: volPath: /var/.../rhel-705f0dcbf1/mount is not mounted: <nil>
+Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vol2: Volume is not found by node driver at 2021-11-11 02:04:49
+
+```
