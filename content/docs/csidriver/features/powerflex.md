@@ -576,3 +576,28 @@ and then make the necessary adjustments for CSI_LOG_LEVEL and CSI_LOG_FORMAT.
 If either option is set to a value outside of what is supported, the driver will use the default values of "debug" and "text" . 
 
 
+## Single Pod Access Mode for PersistentVolumes
+
+Kubernetes v1.22 introduced a new `ReadWriteOncePod` access mode for PersistentVolumes and PersistentVolumeClaims. With this alpha feature, Kubernetes allows you to restrict volume access to a single pod in the cluster.
+
+To use this feature you need to enable the ReadWriteOncePod feature gate for `kube-apiserver`, `kube-scheduler`, and `kubelet` by setting command line arguments:
+
+```
+--feature-gates="...,ReadWriteOncePod=true"
+```
+
+Then you can create a new PVC with the access mode. This allows only a single pod to access single-writer-only:
+
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: single-writer-only
+spec:
+  accessModes:
+  - ReadWriteOncePod # Allow only a single pod to access single-writer-only.
+  resources:
+    requests:
+      storage: 1Gi
+```
+
