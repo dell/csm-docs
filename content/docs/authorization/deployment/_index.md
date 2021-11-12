@@ -194,7 +194,7 @@ The second part of CSM for Authorization deployment is to configure one or more 
 
 ### Configuring a Dell EMC CSI Driver
 
-Given a setup where Kubernetes, a storage system, CSI driver(s), and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:
+Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:
 
 1. Create the secret token in the namespace of the driver.
 
@@ -205,7 +205,7 @@ Given a setup where Kubernetes, a storage system, CSI driver(s), and the CSM for
     kubectl apply -f /tmp/token.yaml -n isilon
    ```
 
-2. Edit the following parameters in samples/secret/karavi-authorization-config.json file in [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples), [CSI PowerMax](https://github.com/dell/csi-powermax/tree/main/samples/secret), or [CSI PowerScale](https://github.com/dell/csi-powerscale/tree/main/samples/secret) driver and update/add connection information for one or more backend storage arrays.
+2. Edit the following parameters in samples/secret/karavi-authorization-config.json file in [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples), [CSI PowerMax](https://github.com/dell/csi-powermax/tree/main/samples/secret), or [CSI PowerScale](https://github.com/dell/csi-powerscale/tree/main/samples/secret) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
   | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -238,27 +238,53 @@ Create the karavi-authorization-config secret using the following command:
       `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -`
 
 
->__Note__: Follow the steps below for additional configurations to [CSI PowerFlex](#powerflex) and [CSI PowerScale](#powerscale). No additional configuration is required for the CSI PowerMax driver.
+>__Note__: Follow the steps below for additional configurations to one or more of the supported CSI drivers. 
 #### PowerFlex
 
-Please refer to step 5 in the [installation steps for PowerFlex](../../csidriver/installation/helm/powerflex) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
+Please refer to step 5 in the [installation steps for PowerFlex](../../csidriver/installation/helm/powerflex) to edit the parameters in samples/config.yaml file to communicate with the sidecar.
 
-1. Create vxflexos-config secret using the following command:
+1. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
+
+2. Create vxflexos-config secret using the following command:
+
     `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl apply -f -`
+
+Please refer to step 9 in the [installation steps for PowerFlex](../../csidriver/installation/helm/powerflex) to edit the parameters in *myvalues.yaml* file to communicate with the sidecar.
+
+3. Enable CSM for Authorization and provide *proxyHost* address 
+
+4. Install the CSI PowerFlex driver
+#### PowerMax
+
+Please refer to step 7 in the [installation steps for PowerMax](../../csidriver/installation/helm/powermax) to edit the parameters in *my-powermax-settings.yaml* to communicate with the sidecar. 
+
+1. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
+
+2. Enable CSM for Authorization and provide *proxyHost* address
+
+3. Install the CSI PowerMax driver
 
 #### PowerScale
 
+Please refer to step 5 in the [installation steps for PowerScale](../../csidriver/installation/helm/isilon) to edit the parameters in *my-isilon-settings.yaml* to communicate with the sidecar. 
+
+1. Update *endpointPort* to match the endpoint port number set in samples/secret/karavi-authorization-config.json
+
+>__Note__: In *my-isilon-settings.yaml*, endpointPort acts as a default value. If endpointPort is not specified in *my-isilon-settings.yaml*, then it should be specified in the *endpoint* parameter of samples/secret/secret.yaml.
+
+2. Enable CSM for Authorization and provide *proxyHost* address 
+
 Please refer to step 6 in the [installation steps for PowerScale](../../csidriver/installation/helm/isilon) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
 
-1. Create isilon-creds secret using the following command:
+3. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
+
+>__Note__: Only add the endpoint port if it has not been set in *my-isilon-settings.yaml*.
+
+4. Create the isilon-creds secret using the following command:
 
     `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
    
->__Note__:
-> - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
-> - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
-> - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
-
+5. Install the CSI PowerScale driver
 ## Updating CSM for Authorization Proxy Server Configuration
 
 CSM for Authorization has a subset of configuration parameters that can be updated dynamically:
