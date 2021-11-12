@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerFlex CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powerflex/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-11-12T14:24:27+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Upgrade PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="298">
+<meta itemprop="dateModified" content="2021-11-12T14:24:27&#43;05:30" />
+<meta itemprop="wordCount" content="300">
 
 
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.553c8c2a6b5bb78b7266a386908c2995.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a4d2572639d1cd82c8be32ed945c8904.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.553c8c2a6b5bb78b7266a386908c2995.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a4d2572639d1cd82c8be32ed945c8904.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1662,7 +1662,7 @@
 <h2 id="update-driver-from-v14v15-to-v20-using-helm">Update Driver from v1.4/v1.5 to v2.0 using Helm</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone https://github.com/dell/csi-powerflex.git</code> to clone the git repository and get the v2.0 driver.</li>
+<li>Run <code>git clone -b v2.0.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository and get the v2.0 driver.</li>
 <li>You need to create config.yaml with the configuration of your system.
 Check this section in installation documentation:  <a href="../../../installation/helm/powerflex#install-the-driver">Install the Driver</a>
 You must set the only system managed in v1.4/v1.5 driver as default in config.json in v2.0 so that the driver knows the existing volumes belong to that system.</li>
