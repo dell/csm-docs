@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerMax CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powermax/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-11-12T14:24:27+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Upgrade PowerMax CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="164">
+<meta itemprop="dateModified" content="2021-11-12T14:24:27&#43;05:30" />
+<meta itemprop="wordCount" content="166">
 
 
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.553c8c2a6b5bb78b7266a386908c2995.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a4d2572639d1cd82c8be32ed945c8904.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.553c8c2a6b5bb78b7266a386908c2995.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a4d2572639d1cd82c8be32ed945c8904.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1662,7 +1662,7 @@
 <h2 id="update-driver-from-v17-to-v20-using-helm">Update Driver from v1.7 to v2.0 using Helm</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone https://github.com/dell/csi-powermax.git</code> to clone the git repository and get the v2.0 driver.</li>
+<li>Run <code>git clone -b v2.0.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository and get the v2.0 driver.</li>
 <li>Update the values file as needed.</li>
 <li>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running: <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade</code>.</li>
 </ol>

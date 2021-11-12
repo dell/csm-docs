@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade Unity CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/unity/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-11-12T14:24:27+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Upgrade Unity CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="250">
+<meta itemprop="dateModified" content="2021-11-12T14:24:27&#43;05:30" />
+<meta itemprop="wordCount" content="254">
 
 
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.553c8c2a6b5bb78b7266a386908c2995.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a4d2572639d1cd82c8be32ed945c8904.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.553c8c2a6b5bb78b7266a386908c2995.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a4d2572639d1cd82c8be32ed945c8904.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1670,7 +1670,7 @@
 <ol>
 <li>Get the latest csi-unity 2.0 code from Github.</li>
 <li>Create myvalues.yaml according to csi-unity 2.0 .</li>
-<li>Clone the repository <a href="https://github.com/dell/csi-unity">https://github.com/dell/csi-unity</a> , copy the helm/csi-unity/values.yaml to the new location
+<li>Clone the repository using <code>git clone -b v2.0.0 https://github.com/dell/csi-unity.git</code>, copy the helm/csi-unity/values.yaml to the new location
 csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.</li>
 <li>Navigate to common-helm-installer folder and execute the following command:
 <code>./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade</code></li>

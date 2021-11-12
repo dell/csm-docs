@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerStore CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powerstore/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-11-12T14:24:27+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Upgrade PowerStore CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="363">
+<meta itemprop="dateModified" content="2021-11-12T14:24:27&#43;05:30" />
+<meta itemprop="wordCount" content="365">
 
 
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.553c8c2a6b5bb78b7266a386908c2995.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a4d2572639d1cd82c8be32ed945c8904.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.553c8c2a6b5bb78b7266a386908c2995.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a4d2572639d1cd82c8be32ed945c8904.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1664,7 +1664,7 @@
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the v2.0 driver.</p>
+<p>Run <code>git clone -b v2.0.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the v2.0 driver.</p>
 </li>
 <li>
 <p>Edit <code>helm/config.yaml</code> file and configure connection information for your PowerStore arrays changing the following parameters:</p>
