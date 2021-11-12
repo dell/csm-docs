@@ -27,7 +27,7 @@ kubectl delete -f tests/simple/simple.yaml
 You can use existent volumes from PowerStore array as Persistent Volumes in your Kubernetes, perform the following steps:
 
 1. Open your volume in PowerStore Management UI, and take a note of volume-id. The volume link must look similar to `https://<powerstore.api.ip>/#/storage/volumes/0055558c-5ae1-4ed1-b421-6f5a9475c19f/capacity`, where the `volume-id` is `0055558c-5ae1-4ed1-b421-6f5a9475c19f`.
-2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
+2. Create PersistentVolume and use this volume-id in volumeHandle in format <volume-id/globalID/protocol> in the manifest. Modify other parameters according to your needs.
 ```yaml
 apiVersion: v1
 kind: PersistentVolume
@@ -40,7 +40,7 @@ spec:
         storage: 30Gi
     csi:
         driver: csi-powerstore.dellemc.com
-        volumeHandle: 0055558c-5ae1-4ed1-b421-6f5a9475c19f
+        volumeHandle: 0055558c-5ae1-4ed1-b421-6f5a9475c19f/unique/scsi
     persistentVolumeReclaimPolicy: Retain
     storageClassName: powerstore
     volumeMode: Filesystem
@@ -334,6 +334,7 @@ spec:
       fsType: "ext4"
       volumeAttributes:
         size: "20Gi"
+        arrayID: "unique"
 ```
 
 This manifest will create a pod and attach newly created ephemeral inline csi volume to it. 
