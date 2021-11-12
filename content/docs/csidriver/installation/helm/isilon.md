@@ -107,7 +107,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | tolerations | Define tolerations for the node daemonset, if required | No | |
    | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
    | ***PLATFORM ATTRIBUTES*** | | | |   
-   | endpointPort | Define the HTTPs port number of the PowerScale OneFS API server. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
+   | endpointPort | Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret. | No | true |
    | isiAccessZone | Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same. | No | System |
    | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.| No | true |   
@@ -133,7 +133,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | clusterName | Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret. | Yes | - |
    | username | username for connecting to PowerScale OneFS API server | Yes | - |
    | password | password for connecting to PowerScale OneFS API server | Yes | - |
-   | endpoint | HTTPS endpoint of the PowerScale OneFS API server | Yes | - |
+   | endpoint | HTTPS endpoint of the PowerScale OneFS API server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on | Yes | - |
    | isDefault | Indicates if this is a default cluster (would be used by storage classes without ClusterName parameter). Only one of the cluster config should be marked as default. | No | false |
    | ***Optional parameters*** | Following parameters are Optional. If specified will override default values from values.yaml. |
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. | No | default value from values.yaml |
