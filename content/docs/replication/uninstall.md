@@ -35,4 +35,4 @@ kubectl delete -f deploy/controller.yaml
 ## Uninstalling the replication sidecar
 
 
-To uninstall the replication sidecar you need to uninstall the CSI Driver, please you the [uninstall](../../csidriver/uninstall) page of the driver
+To uninstall the replication sidecar you need to uninstall the CSI Driver, please view the [uninstall](../../csidriver/uninstall) page of the driver
