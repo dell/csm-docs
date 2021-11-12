@@ -577,28 +577,23 @@ If either option is set to a value outside of what is supported, the driver will
 
 ## Volume Health Monitoring 
 
-## Single Pod Access Mode for PersistentVolumes
+> *NOTE*: This feature requires the alpha feature gate, CSIVolumeHealth to be set to true. If the feature gate is on, and you want to use this feature,
+> ensure the proper values are enabled in your values file. See the values table in the installation doc for more details. 
 
-Kubernetes v1.22 introduced a new `ReadWriteOncePod` access mode for PersistentVolumes and PersistentVolumeClaims. With this alpha feature, Kubernetes allows you to restrict volume access to a single pod in the cluster.
+Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.  
 
-To use this feature you need to enable the ReadWriteOncePod feature gate for `kube-apiserver`, `kube-scheduler`, and `kubelet` by setting command line arguments:
-
+To accomplish this, the driver utilizes the external-health-monitor sidecar. When driver detects a volume condition is abnormal, the sidecar will report an event to the corresponding PVC. For example, in this event from `kubectl describe pvc -n <ns>` we can see that the underlying volume was deleted from the PowerFlex array:
 ```
---feature-gates="...,ReadWriteOncePod=true"
+Events:
+  Type     Reason                     Age                 From                                                         Message
+  ----     ------                     ----                ----                                                         ------
+  Warning  VolumeConditionAbnormal    32s                 csi-pv-monitor-controller-csi-vxflexos.dellemc.com           Volume is not found at 2021-11-03 20:31:04
+```  
+Events will also be reported to pods that have abnormal volumes. In these two events from `kubectl describe pods -n <ns>`, we can see that this pod has two abnormal volumes: one volume was unmounted outside of Kubernetes, while another was deleted from PowerFlex array.
 ```
-
-Then you can create a new PVC with the access mode. This allows only a single pod to access single-writer-only:
-
-```yaml
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: single-writer-only
-spec:
-  accessModes:
-  - ReadWriteOncePod # Allow only a single pod to access single-writer-only.
-  resources:
-    requests:
-      storage: 1Gi
+Events:
+  Type     Reason                     Age                 From         Message
+  ----     ------                     ----                ----         ------
+Warning  VolumeConditionAbnormal      35s (x9 over 12m)  kubelet       Volume vol4: volPath: /var/.../rhel-705f0dcbf1/mount is not mounted: <nil>
+Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vol2: Volume is not found by node driver at 2021-11-11 02:04:49
 ```
-
