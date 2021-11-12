@@ -156,6 +156,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
 | kubeletConfigDir | Defines kubelet config path for cluster | Yes | "/var/lib/kubelet" |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
+| volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
 | connection.enableCHAP   | Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
 | controller.controllerCount     | Defines number of replicas of controller deployment | Yes | 2 |
 | controller.volumeNamePrefix | Defines the string added to each volume that the CSI driver creates | No | "csivol" |
