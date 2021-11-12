@@ -16,7 +16,7 @@ To uninstall the common replication controller you can use script `uninstall.sh`
 ./uninstall.sh 
 ```
 
-This script will automatically detect how current version is installed (with repctl or with helm) and use correct method to delete it. 
+This script will automatically detect how current version is installed (with repctl or with helm) and use the correct method to delete it. 
 
 You can also manually uninstall replication controller using method that depends on how you installed replication controller.
 
