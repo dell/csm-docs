@@ -19,7 +19,7 @@ To upgrade the driver from csi-unity v1.6 to csi-unity 2.0 (across K8S 1.20, K8S
 
 1. Get the latest csi-unity 2.0 code from Github.
 2. Create myvalues.yaml according to csi-unity 2.0 .
-3. Clone the repository https://github.com/dell/csi-unity , copy the helm/csi-unity/values.yaml to the new location 
+3. Clone the repository using `git clone -b v2.0.0 https://github.com/dell/csi-unity.git`, copy the helm/csi-unity/values.yaml to the new location 
    csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.
 4. Navigate to common-helm-installer folder and execute the following command:
    `./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade`

@@ -14,7 +14,7 @@ You can upgrade the CSI Driver for Dell EMC PowerStore using Helm or Dell CSI Op
 Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
 
 **Steps**
-1. Run `git clone https://github.com/dell/csi-powerstore.git` to clone the git repository and get the v2.0 driver.
+1. Run `git clone -b v2.0.0 https://github.com/dell/csi-powerstore.git` to clone the git repository and get the v2.0 driver.
 2. Edit `helm/config.yaml` file and configure connection information for your PowerStore arrays changing the following parameters:
     - *endpoint*: defines the full URL path to the PowerStore API.
     - *globalID*: specifies what storage cluster the driver should use  

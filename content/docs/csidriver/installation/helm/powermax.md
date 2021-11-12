@@ -160,7 +160,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 **Steps**
 
-1. Run `git clone https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.0.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
