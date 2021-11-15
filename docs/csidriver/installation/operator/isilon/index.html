@@ -13,11 +13,11 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/operator/isilon/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-11-15T15:09:02+01:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing CSI Driver for PowerScale via Operator
 ">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
+<meta itemprop="dateModified" content="2021-11-15T15:09:02&#43;01:00" />
 <meta itemprop="wordCount" content="907">
 
 
@@ -1695,7 +1695,7 @@
 <p>2.1   Create a yaml file called secret.yaml with the following content:</p>
 <pre><code> isilonClusters:
     # logical name of PowerScale Cluster
- - clusterName: &quot;cluster1&quot;
+  - clusterName: &quot;cluster1&quot;
 
     # username for connecting to PowerScale OneFS API server
     # Default value: None
@@ -1738,7 +1738,7 @@
     # Examples: &quot;0777&quot;, &quot;777&quot;, &quot;0755&quot;
     # isiVolumePathPermissions: &quot;0777&quot;
 
- - clusterName: &quot;cluster2&quot;
+  - clusterName: &quot;cluster2&quot;
     username: &quot;user&quot;
     password: &quot;password&quot;
     endpoint: &quot;1.2.3.4&quot;

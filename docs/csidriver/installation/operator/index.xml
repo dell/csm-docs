@@ -643,7 +643,7 @@ only present with &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/li&gt;
 &lt;p&gt;2.1   Create a yaml file called secret.yaml with the following content:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt; isilonClusters:
     # logical name of PowerScale Cluster
- - clusterName: &amp;quot;cluster1&amp;quot;
+  - clusterName: &amp;quot;cluster1&amp;quot;
 
     # username for connecting to PowerScale OneFS API server
     # Default value: None
@@ -686,7 +686,7 @@ only present with &lt;code&gt;dell-csi-helm-installer&lt;/code&gt;.&lt;/li&gt;
     # Examples: &amp;quot;0777&amp;quot;, &amp;quot;777&amp;quot;, &amp;quot;0755&amp;quot;
     # isiVolumePathPermissions: &amp;quot;0777&amp;quot;
 
- - clusterName: &amp;quot;cluster2&amp;quot;
+  - clusterName: &amp;quot;cluster2&amp;quot;
     username: &amp;quot;user&amp;quot;
     password: &amp;quot;password&amp;quot;
     endpoint: &amp;quot;1.2.3.4&amp;quot;
