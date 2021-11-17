@@ -192,7 +192,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 8. If you are using a custom image, check the `version` and `driverRepository` fields in `myvalues.yaml` to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: `<driverRepository>/csi-vxflexos:v<version>`
 
-8. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here:
+9. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here:
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
@@ -235,7 +235,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
 
 
-9. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
+10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
 
  *NOTE:*
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
