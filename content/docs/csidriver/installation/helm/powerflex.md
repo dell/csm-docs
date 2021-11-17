@@ -235,7 +235,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
 
 
-10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. Alternately, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
+10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
 
  *NOTE:*
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
