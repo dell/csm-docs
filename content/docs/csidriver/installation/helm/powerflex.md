@@ -115,7 +115,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 3. Check `helm/csi-vxflexos/values.yaml` and confirm the driver image points to a new image.
 
-4. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the scripts directory. This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the values for these parameters as they must be entered into `samples/config.yaml`.
+4. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the `scripts` directory. This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the values for these parameters as they must be entered into `samples/config.yaml`.
 
 5. Prepare `samples/config.yaml` for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.
 
