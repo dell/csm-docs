@@ -113,9 +113,9 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
 
-3. Check `helm/csi-vxflexos/driver-image.yaml` and confirm the driver image points to a new image.
+3. Check `helm/csi-vxflexos/values.yaml` and confirm the driver image points to a new image.
 
-4. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the top-level helm directory.  This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the value for these parameters as they must be entered in the `config.yaml` file in the samples directory.
+4. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the scripts directory. This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the value for these parameters as they must be entered in the `config.yaml` file in the samples directory.
 
 5. Prepare the samples/config.yaml for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.
 
@@ -197,6 +197,8 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
 | version | Set to verify the values file version matches driver version. | Yes | 2.0.0 |
+| driverRepository | Set to give the repository containing the driver image. | Yes | dellemc |
+| powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | No | dellemc/sdc:3.6 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
 | logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
 | logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
@@ -233,7 +235,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
 
 
-10. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`
+10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml` or for helm install charts without shell scripts refer to helm/README.md for details.
 
  *NOTE:*
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
