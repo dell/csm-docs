@@ -12,7 +12,6 @@ description: Release notes for PowerFlex CSI driver
 - Added support for PV/PVC metrics.
 - Added support for CSM Authorization sidecar via Helm.
 - Added v1 extensions to vg snaphot from v1alpha2.
-- Added support for CSM Authorization sidecar via Helm.
 - Added support to update helm charts to do a helm install without shell scripts.
 - Added health monitor interval for controlling the monitor interval.
 
