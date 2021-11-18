@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting PowerFlex Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerflex/" />
-<meta property="article:modified_time" content="2021-11-18T10:40:16-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-11-18T15:39:44-05:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Troubleshooting PowerFlex Driver">
-<meta itemprop="dateModified" content="2021-11-18T10:40:16-05:00" />
-<meta itemprop="wordCount" content="474">
+<meta itemprop="dateModified" content="2021-11-18T15:39:44-05:00" />
+<meta itemprop="wordCount" content="444">
 
 
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.bcd1307446067ee0b51a6a364472120d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.bcd1307446067ee0b51a6a364472120d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1662,10 +1662,6 @@
 <tr>
 <td>The installation fails with the following error message: <br /><code>Node xxx does not have the SDC installed</code></td>
 <td>Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver.</td>
-</tr>
-<tr>
-<td>The standalone Helm chart installation fails with <code>Error: couldn't find key MDM in Secret vxflexos/vxflexos-config</code></td>
-<td>Make sure that you have ssh keys set up between the master and worker nodes.</td>
 </tr>
 <tr>
 <td>When you run the command <code>kubectl describe pods vxflexos-controller-* –n vxflexos</code>, the system indicates that the driver image could not be loaded.</td>
