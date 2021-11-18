@@ -13,7 +13,7 @@ You can upgrade the CSI Driver for Dell EMC PowerScale using Helm or Dell CSI Op
 **Note:** While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
 
 **Steps**
-1. Verify that all pre-requisites to install CSI Driver for Dell EMC PowerScale version 2.1.0 are fulfilled. Note that change in secret format should be taken care.
+1. Verify that all pre-requisites to install CSI Driver for Dell EMC PowerScale version 2.1.0 are fulfilled. Note that change in secret format should be implemented.
       - Delete the existing secret (isilon-creds and isilon-certs-0)
       - Create new secrets (isilon-creds and isilon-certs-0)
       Refer Installation section [here](./../../../installation/helm/isilon/#install-the-driver).
