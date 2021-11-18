@@ -71,6 +71,10 @@
 &lt;td&gt;Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;The standalone Helm chart installation fails with &lt;code&gt;Error: couldn&#39;t find key MDM in Secret vxflexos/vxflexos-config&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Make sure that you have ssh keys set up between the master and worker nodes.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;When you run the command &lt;code&gt;kubectl describe pods vxflexos-controller-* –n vxflexos&lt;/code&gt;, the system indicates that the driver image could not be loaded.&lt;/td&gt;
 &lt;td&gt;- If on Kubernetes, edit the &lt;code&gt;daemon.json&lt;/code&gt; file found in the registry location and add &lt;br /&gt;&lt;code&gt;{ &amp;quot;insecure-registries&amp;quot; :[ &amp;quot;hostname.cloudapp.net:5000&amp;quot; ] }&lt;/code&gt;&lt;br /&gt;- If on OpenShift, run the command &lt;code&gt;oc edit image.config.openshift.io/cluster&lt;/code&gt; and add registries to yaml file that is displayed when you run the command.&lt;/td&gt;
 &lt;/tr&gt;
