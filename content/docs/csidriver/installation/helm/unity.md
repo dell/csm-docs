@@ -38,7 +38,7 @@ Install CSI Driver for Unity using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.0.0 https://github.com/dell/csi-unity.git```, ready for this procedure.
+ * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone https://github.com/dell/csi-unity.git```, ready for this procedure.
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
