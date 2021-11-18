@@ -18,12 +18,12 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 ## CSM Supported Modules and Dell EMC CSI Drivers
 
-| Modules/Drivers | CSM 1.0 | [Previous](../v1/) | [Older](../v2/) | [Archives](../v3) | 
+| Modules/Drivers | CSM 1.1 | [CSM 1.0](../v1/) | [Older](../v2/) | [Archives](../v3) | 
 | - | :-: | :-: | :-: | :-: |
-| Authorization | 1.0 | - | - | - |
-| Observability | 1.0 | - | - | - |
-| Replication | 1.0 | - | - | - |
-| Resiliency | 1.0 | - | - | - |
+| Authorization | 1.1 | 1.0 | - | - |
+| Observability | 1.0 | 1.0 | - | - |
+| Replication | 1.1 | 1.0 | - | - |
+| Resiliency | 1.0 | 1.0 | - | - |
 | CSI Driver for PowerScale | v2.1 | v2.0 | v1.6 | v1.5 | 
 | CSI Driver for Unity | v2.1 | v2.0 | v1.6 | v1.5 |
 | CSI Driver for PowerStore | v2.1 | v2.0 | v1.4 | v1.3 |
