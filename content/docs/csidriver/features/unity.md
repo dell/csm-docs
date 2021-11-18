@@ -599,7 +599,7 @@ spec:
 ```
 
 With the usage shown in the example, the user will be able to create NFS pod with PVC using the NAS and the Pool associated with the added Tenants specified in SC.
-Note: Current feature supports **ONLY single Tenant** for all the nodes in the cluster.
+>Note: Current feature supports **ONLY single Tenant** for all the nodes in the cluster.
 User may expect an error if PVC is created from the NAS server whose pool is mapped to the different tenant not associated with this SC.
 
 For operator based installation, mention the TENANT_NAME in configmap as shown in the following example:
@@ -618,4 +618,4 @@ data:
     SYNC_NODE_INFO_TIME_INTERVAL: "0"
     TENANT_NAME: ""
 ```
-Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is same across Unity instances.
+>Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is same across Unity instances.
