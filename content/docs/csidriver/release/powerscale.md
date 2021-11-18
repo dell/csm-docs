@@ -3,20 +3,15 @@ title: PowerScale
 description: Release notes for PowerScale CSI driver
 ---
 
-## Release Notes - CSI Driver for PowerScale v2.0.0
+## Release Notes - CSI Driver for PowerScale v2.1.0
 
 ### New Features/Changes
-- Added support for Kubernetes v1.22.
-- Added support for OpenShift v4.8.
-- Added support for CSI Spec v1.4. 
-- Added support for session-based authentication.
-- Added support for consistent config parameters across CSI drivers.
-- Added support for configurable security permissions for volume.
-- Added the ability to enable/disable installation of resizer sidecar with driver installation.
-- Added the ability to enable/disable installation of snapshotter sidecar with driver installation.
-- Added support to make dnsPolicy of node component configurable via Operator as well.
-- Added the ability to configure kubelet directory path.
-- Updated support for dynamic logging configuration.
+
+- Added support for OpenShift v4.9.
+- Added support for CSI spec 1.5.
+- Added support for new access modes in CSI Spec 1.5.
+- Added support for PV/PVC metrics.
+- Added ability to accept leader election timeout flags.
 
 ### Fixed Issues
 

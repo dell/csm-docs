@@ -6,7 +6,7 @@ description: About Dell EMC CSI Drivers
 weight: 3
 ---
 
-The CSI Drivers by Dell EMC implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.3) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.
+The CSI Drivers by Dell EMC implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.5) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.
 
 ![CSI Architecture](Architecture_Diagram.png)
 
@@ -22,7 +22,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
 | SLES          |        15SP2        |        15SP2        |       15SP2      |         15SP2     |       15SP2      |
 | Fedora Core OS|        no        |         5.x       |        no        |         no        |        no        |
-| Red Hat OpenShift | 4.6 EUS, 4.7, 4.8 |   4.6 EUS, 4.7, 4.8 |    4.6 EUS, 4.7, 4.8     |   4.6 EUS, 4.7, 4.8   |  4.6 EUS, 4.7, 4.8 |
+| Red Hat OpenShift | 4.8, 4.8 EUS, 4.9  |   4.8, 4.8 EUS, 4.9 |    4.8, 4.8 EUS, 4.9     |   4.8, 4.8 EUS, 4.9   |  4.8, 4.8 EUS, 4.9 |
 | Mirantis Kubernetes Engine |       3.4.x      |        3.4.x        |       3.4.x     |        3.4.x      |        3.4.x     |
 | Google Anthos |        1.6       |          1.8        |        no        |         no        |        1.7       |
 | VMware Tanzu  |        no        |          no      |        NFS     |         NFS    |      NFS      |
@@ -33,7 +33,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 {{<table "table table-striped table-bordered table-sm">}}
 | Features | PowerMax | PowerFlex | &emsp;&emsp; Unity  | PowerScale | PowerStore |
 |--------------------------|:--------:|:------------------:|:---------:|:-----------------:|:----------:|
-| CSI Specification        | v1.3     | v1.3| v1.3      | v1.4  | v1.3       |
+| CSI Specification        | v1.5     | v1.5| v1.5      | v1.5  | v1.5       |
 | Static Provisioning      | yes      | yes| yes   | yes | yes  |
 | Dynamic Provisioning     | yes      | yes| yes   | yes | yes  |
 | Expand Persistent Volume | yes      | yes| yes   | yes | yes  |

@@ -24,8 +24,8 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | Observability | 1.0 | - | - | - |
 | Replication | 1.0 | - | - | - |
 | Resiliency | 1.0 | - | - | - |
-| CSI Driver for PowerScale | v2.0 | v1.6 | v1.5 | v1.4 | 
-| CSI Driver for Unity | v2.0 | v1.6 | v1.5 | v1.3 |
-| CSI Driver for PowerStore | v2.0 | v1.4 | v1.3 | v1.2 |
-| CSI Driver for PowerFlex | v2.0 | v1.5 | v1.4 | v1.3 |
-| CSI Driver for PowerMax | v2.0 | v1.7 | v1.6 | v1.5 |
+| CSI Driver for PowerScale | v2.1 | v2.0 | v1.6 | v1.5 | 
+| CSI Driver for Unity | v2.1 | v2.0 | v1.6 | v1.5 |
+| CSI Driver for PowerStore | v2.1 | v2.0 | v1.4 | v1.3 |
+| CSI Driver for PowerFlex | v2.1 | v2.0 | v1.5 | v1.4 |
+| CSI Driver for PowerMax | v2.1 | v2.0 | v1.7 | v1.6 |
