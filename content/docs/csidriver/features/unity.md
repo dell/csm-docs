@@ -618,3 +618,4 @@ data:
     SYNC_NODE_INFO_TIME_INTERVAL: "0"
     TENANT_NAME: ""
 ```
+Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is same across Unity instances.
