@@ -496,7 +496,7 @@ kubectl edit configmap -n unity unity-config-params
 
 ## Tenancy support for Unity NFS
 
-The CSI Unity driver version 2.1.0 (and later versions) support the Tenancy feature of Unity such that the user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.
+The CSI Unity driver version 2.1.0 (and later versions) supports the Tenancy feature of Unity such that the user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.
 
 Prerequisites (to be manually created in Unity Array) before the driver installation:
 * Create Tenants
@@ -598,9 +598,9 @@ spec:
             claimName: pvcname
 ```
 
-With the usage shown in the example, the user will be able to create NFS pod with PVC using the NAS and the Pool associated with the added Tenants specified in SC.
+With the usage shown in the example, the user will be able to create an NFS pod with PVC using the NAS and the Pool associated with the added Tenants specified in SC.
 >Note: Current feature supports **ONLY single Tenant** for all the nodes in the cluster.
-User may expect an error if PVC is created from the NAS server whose pool is mapped to the different tenant not associated with this SC.
+Users may expect an error if PVC is created from the NAS server whose pool is mapped to the different tenants not associated with this SC.
 
 For operator based installation, mention the TENANT_NAME in configmap as shown in the following example:
 Example *configmap.yaml*
@@ -618,4 +618,4 @@ data:
     SYNC_NODE_INFO_TIME_INTERVAL: "0"
     TENANT_NAME: ""
 ```
->Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is same across Unity instances.
+>Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is the same across Unity instances.
