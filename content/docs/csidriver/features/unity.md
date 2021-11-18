@@ -106,7 +106,7 @@ In order to use Volume Snapshots, ensure the following components have been depl
 
 ### Volume Snapshot Class
 
-During the installation of the CSI Unity 2.0 driver, a Volume Snapshot Class is not created and need to create  Volume Snapshot Class.
+During the installation of the CSI Unity 2.0 driver and higher, a Volume Snapshot Class is not created and need to create  Volume Snapshot Class.
 
 Following is the manifest to create Volume Snapshot Class :
 
