@@ -52,6 +52,8 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
           value: "1"
         - name: MDM
           value: ""
+      - name: external-health-monitor
+        args: ["--monitor-interval=60s"]
     initContainers:
       - image: dellemc/sdc:3.6
         imagePullPolicy: IfNotPresent
@@ -171,7 +173,7 @@ For detailed PowerFlex installation procedure, see the _Dell EMC PowerFlex Deplo
                 value: "true"
               - name: X_CSI_ALLOW_RWO_MULTI_POD_ACCESS
                 value: "false"
-          #sideCars:
+          sideCars:
           # Uncomment the following section if you want to run the monitoring sidecar
           #  - name: sdc-monitor
           #    envs:
@@ -179,6 +181,8 @@ For detailed PowerFlex installation procedure, see the _Dell EMC PowerFlex Deplo
           #      value: "1"
           #    - name: MDM
           #      value: ""
+             - name: external-health-monitor
+               args: ["--monitor-interval=60s"]
           initContainers:
             - image: dellemc/sdc:3.6
               imagePullPolicy: IfNotPresent
