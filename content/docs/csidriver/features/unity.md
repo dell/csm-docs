@@ -496,15 +496,16 @@ kubectl edit configmap -n unity unity-config-params
 
 ## Tenancy support for Unity NFS
 
-The CSI Unity driver version 2.1.0 and later support Tenancy feature of Unity such that user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.
+The CSI Unity driver version 2.1.0 (and later versions) support the Tenancy feature of Unity such that the user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.
+
 Prerequisites (to be manually created in Unity Array) before the driver installation:
 * Create Tenants
 * Create Pools
 * Create NAS Servers with Tenant and Pool mapping
 
-Following example describes the usage of Tenant in the NFS pod creation:
+The following example describes the usage of Tenant in the NFS pod creation:
 
-Install the csi driver using myvalues.yaml with the TenantName as below:
+Install the csi driver using myvalues.yaml with the TenantName as follows:
 Example *myvalues.yaml*   
 ```yaml
 logLevel: "info"
@@ -518,7 +519,7 @@ snapshot:
 tenantName: "tenant3"
 ```
 
-Create storageclass with NAS-Server and the Storage-Pool associated with TenantName as below:
+Create storageclass with NAS-Server and the Storage-Pool associated with TenantName as follows:
 Example *storageclass.yaml*   
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -542,7 +543,7 @@ parameters:
     allowVolumeExpansion: true
 ```
 
-Create the pod and pvc as below:
+Create the pod and pvc as follows:
 Example *pvc.yaml*
 ```yaml
 kind: PersistentVolumeClaim
@@ -597,11 +598,11 @@ spec:
             claimName: pvcname
 ```
 
-With above usage, user will be able to create NFS pod with PVC using the NAS and the Pool associated with the added Tenants specified in SC.
+With the usage shown in the example, the user will be able to create NFS pod with PVC using the NAS and the Pool associated with the added Tenants specified in SC.
 Note: Current feature supports **ONLY single Tenant** for all the nodes in the cluster.
-User may expect error if PVC is created from the NAS server whose pool is mapped to the different tenant not associated with this SC.
+User may expect an error if PVC is created from the NAS server whose pool is mapped to the different tenant not associated with this SC.
 
-For operator based installation mention the TENANT_NAME in configmap as shown below:
+For operator based installation, mention the TENANT_NAME in configmap as shown in the following example:
 Example *configmap.yaml*
 ```yaml
 apiVersion: v1
