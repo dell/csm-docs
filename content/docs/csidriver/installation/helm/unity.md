@@ -38,7 +38,7 @@ Install CSI Driver for Unity using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone https://github.com/dell/csi-unity.git```, ready for this procedure.
+ * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.0.0 https://github.com/dell/csi-unity.git```, ready for this procedure.
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
@@ -81,7 +81,7 @@ Procedure
     | ***node*** | Allows configuration of the node-specific parameters.| - | - |
     | tolerations | Define tolerations for the node daemonset, if required | No | |
     | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-
+    | tenantName | Tenant name added while adding host entry to the array | No |  |
 
 
     **Note**: 

@@ -494,3 +494,127 @@ kubectl edit configmap -n unity unity-config-params
 
 >Note: Prior to CSI Driver for unity version 2.0.0, the log level was allowed to be updated dynamically through `logLevel` attribute in the secret object.
 
+## Tenancy support for Unity NFS
+
+The CSI Unity driver version 2.1.0 (and later versions) support the Tenancy feature of Unity such that the user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.
+
+Prerequisites (to be manually created in Unity Array) before the driver installation:
+* Create Tenants
+* Create Pools
+* Create NAS Servers with Tenant and Pool mapping
+
+The following example describes the usage of Tenant in the NFS pod creation:
+
+Install the csi driver using myvalues.yaml with the TenantName as follows:
+Example *myvalues.yaml*   
+```yaml
+logLevel: "info"
+certSecretCount: 1
+kubeletConfigDir: /var/lib/kubelet
+controller:
+    controllerCount: 2
+    volumeNamePrefix : csivol
+snapshot:
+    snapNamePrefix: csi-snap
+tenantName: "tenant3"
+```
+
+Create storageclass with NAS-Server and the Storage-Pool associated with TenantName as follows:
+Example *storageclass.yaml*   
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+    annotations:
+        storageclass.beta.kubernetes.io/is-default-class: "false"
+    name: unity-nfs
+parameters:
+    arrayId: "APM0***XXXXXX"
+    hostIoSize: "16384"
+    isDataReductionEnabled: "false"
+    storagePool: pool_7
+    thinProvisioned: "true"
+    tieringPolicy: "0"
+    protocol: "NFS"
+    nasServer: "nas_5"
+    provisioner: csi-unity.dellemc.com
+    reclaimPolicy: Delete
+    volumeBindingMode: WaitForFirstConsumer
+    allowVolumeExpansion: true
+```
+
+Create the pod and pvc as follows:
+Example *pvc.yaml*
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+    name: pvcname
+    namespace: nginx
+spec:
+    accessModes:
+    - ReadWriteOnce
+ 	volumeMode: Filesystem
+ 	resources:
+  		requests:
+  		storage: 2Gi
+  	storageClassName: unity-nfs
+```
+
+Example *pod.yaml*
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: podname
+  namespace: nginx
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: podname
+  template: 
+    metadata: 
+      labels: 
+        app: podname
+    spec: 
+      containers: 
+        - 
+          args: 
+            - "-c"
+            - "while true; do dd if=/dev/urandom of=/data0/foo bs=1M count=1;done"
+          command: 
+            - /bin/bash
+          image: "docker.io/centos:latest"
+          name: test
+          volumeMounts: 
+            - 
+              mountPath: /data0
+              name: pvcname
+      volumes: 
+        - 
+          name: pvolx0
+          persistentVolumeClaim: 
+            claimName: pvcname
+```
+
+With the usage shown in the example, the user will be able to create NFS pod with PVC using the NAS and the Pool associated with the added Tenants specified in SC.
+Note: Current feature supports **ONLY single Tenant** for all the nodes in the cluster.
+User may expect an error if PVC is created from the NAS server whose pool is mapped to the different tenant not associated with this SC.
+
+For operator based installation, mention the TENANT_NAME in configmap as shown in the following example:
+Example *configmap.yaml*
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unity-config-params
+  namespace: test-unity
+data:
+  driver-config-params.yaml: |
+    CSI_LOG_LEVEL: "info"
+    ALLOW_RWO_MULTIPOD_ACCESS: "false"
+    MAX_UNITY_VOLUMES_PER_NODE: "0"
+    SYNC_NODE_INFO_TIME_INTERVAL: "0"
+    TENANT_NAME: ""
+```
