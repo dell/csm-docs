@@ -7,7 +7,6 @@ description: Troubleshooting PowerFlex Driver
 | Symptoms | Prevention, Resolution or Workaround |
 |------------|--------------|
 | The installation fails with the following error message: <br />```Node xxx does not have the SDC installed```| Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver. |
-| The standalone Helm chart installation fails with `Error: couldn't find key MDM in Secret vxflexos/vxflexos-config` | Make sure that you have ssh keys set up between the master and worker nodes. |
 | When you run the command `kubectl describe pods vxflexos-controller-* –n vxflexos`, the system indicates that the driver image could not be loaded. | - If on Kubernetes, edit the `daemon.json` file found in the registry location and add <br />```{ "insecure-registries" :[ "hostname.cloudapp.net:5000" ] }```<br />- If on OpenShift, run the command `oc edit image.config.openshift.io/cluster` and add registries to yaml file that is displayed when you run the command. |
 |The `kubectl logs -n vxflexos vxflexos-controller-* driver` logs show that the driver is not authenticated.| Check the username, password, and the gateway IP address for the PowerFlex system.|
 |The `kubectl logs vxflexos-controller-* -n vxflexos driver` logs show that the system ID is incorrect.| Use the `get_vxflexos_info.sh` to find the correct system ID. Add the system ID to `myvalues.yaml` script.|
