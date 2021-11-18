@@ -494,17 +494,17 @@ kubectl edit configmap -n unity unity-config-params
 
 >Note: Prior to CSI Driver for unity version 2.0.0, the log level was allowed to be updated dynamically through `logLevel` attribute in the secret object.
 
-###Tenancy support for Unity NFS :
+##Tenancy support for Unity NFS
 
 The CSI Unity driver version 2.1.0 and later support Tenancy feature of Unity such that user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.
 Prerequisites (to be manually created in Unity Array) before the driver installation:
-Create Tenants
-Create Pools
-Create NAS Servers with Tenant and Pool mapping
+*Create Tenants
+*Create Pools
+*Create NAS Servers with Tenant and Pool mapping
 
 Following example describes the usage of Tenant in the NFS pod creation:
 
-Install the csi driver using bellow myvalues.yaml format mentioning the tenantName
+Install the csi driver using below myvalues.yaml format mentioning the TenantName
 Example *myvalues.yaml*   
 ```yaml
 logLevel: "info"
@@ -518,7 +518,7 @@ snapshot:
 tenantName: "tenant3"
 ```
 
-Create  storage class using bellow mentioned format using  Nas and the Pool associated with tenant Name
+Create  storage class using below mentioned format with NAS and the Pool associated with TenantName
 Example *storageclass.yaml*   
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -598,7 +598,7 @@ spec:
 ```
 
 With above usage, user will be able to create NFS pod with PVC using the NAS and the Pool associated with the added Tenants specified in SC.
-Note: Current feature supports ONLY single Tenant for all the nodes in the cluster.
+Note: Current feature supports **ONLY single Tenant** for all the nodes in the cluster.
 User may expect error if PVC is created from the NAS server whose pool is mapped to the different tenant not associated with this SC.
 
 For operator based installation mention the TENANT_NAME in configmap as shown bellow:
