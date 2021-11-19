@@ -162,12 +162,13 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | controller.snapshot.enabled | Allows to enable/disable snapshotter sidecar with driver installation for snapshot feature | No | "true" |
 | controller.snapshot.snapNamePrefix | Defines prefix to apply to the names of a created snapshots | No | "csisnap" |
 | controller.resizer.enabled | Allows to enable/disable resizer sidecar with driver installation for volume expansion feature | No | "true" |
-| controller.healthMonitor.volumeHealthMonitorInterval | Allows to enable/disable volume health monitor | No | false |
+| controller.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | controller.healthMonitor.volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
 | controller.nodeSelector | Defines what nodes would be selected for pods of controller deployment | Yes | " " |
 | controller.tolerations  | Defines tolerations that would be applied to controller deployment | Yes | " " |
 | node.nodeNamePrefix | Defines the string added to each node that the CSI driver registers | No | "csi-node" |
 | node.nodeIDPath | Defines a path to file with a unique identifier identifying the node in the Kubernetes cluster| No | "/etc/machine-id" |
+| node.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 
