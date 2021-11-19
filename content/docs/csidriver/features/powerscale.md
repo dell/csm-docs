@@ -527,6 +527,16 @@ In the case of operator-based installation, default permission for powerscale di
 
 Other ways of configuring powerscale volume permissions remain the same as helm-based installation.
 
+
+## PV/PVC Metrics
+
+CSI Driver for Dell EMC PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes. 
+For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.
+
+### This feature can be enabled
+1. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.   
+2. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file and by enabling the alpha feature gate `CSIVolumeHealth`.
+
 ## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)
 
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerScale 2.1.0 and Kubernetes version 1.22+.

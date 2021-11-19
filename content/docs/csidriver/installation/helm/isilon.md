@@ -100,12 +100,15 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
    | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
    | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
+   | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume status, volume condition | Yes | false |
+   | healthMonitor.interval | Interval of monitoring volume health condition | Yes | 60s |
    | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
    | tolerations | Define tolerations for the controller deployment, if required | No | |
    | ***node*** | Configure node pod specific parameters | | |
    | nodeSelector | Define node selection constraints for pods of node daemonset | No | |
    | tolerations | Define tolerations for the node daemonset, if required | No | |
    | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | Yes | false |
    | ***PLATFORM ATTRIBUTES*** | | | |   
    | endpointPort | Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret. | No | true |
