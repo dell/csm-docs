@@ -527,3 +527,10 @@ In the case of operator-based installation, default permission for powerscale di
 
 Other ways of configuring powerscale volume permissions remain the same as helm-based installation.
 
+## PV/PVC Metrics
+
+CSI Driver for Dell EMC Powerscale 2.1.0 and above supports volume health monitoring.This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. 
+For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.
+
+To accomplish this, the driver utilizes the external-health-monitor sidecar. When driver detects a volume condition is abnormal, the sidecar will report an event to the corresponding PVC. 
+To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To set interval of monitoring volume health condition, set the parameter `volumeHealthMonitorInterval`.

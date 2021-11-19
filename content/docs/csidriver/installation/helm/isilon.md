@@ -93,6 +93,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | imagePullPolicy | Defines the policy to determine if the image should be pulled prior to starting the container | Yes | IfNotPresent |
    | verbose | Indicates what content of the OneFS REST API message should be logged in debug level logs | Yes | 1 |
    | kubeletConfigDir | Specify kubelet config dir path | Yes | "/var/lib/kubelet" |
+   | volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
    | enableCustomTopology | Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish a connection to Array. This requires enableCustomTopology to be enabled. | No | false |
    | ***controller*** | Configure controller pod specific parameters | | |
    | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
