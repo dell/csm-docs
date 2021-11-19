@@ -31,7 +31,7 @@ CSM for Replication provides the following capabilities:
 | COP/OS | PowerMax | PowerStore |
 |-|-|-|
 | Kubernetes    | 1.20, 1.21, 1.22 | 1.20, 1.21, 1.22 |
-| Red Hat OpenShift | 4.8 | 4.8 |
+| Red Hat OpenShift | x | 4.8 | 
 | RHEL          |     7.x, 8.x      |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |     7.8, 7.9     |
 | Ubuntu        |       20.04      |       20.04      |
