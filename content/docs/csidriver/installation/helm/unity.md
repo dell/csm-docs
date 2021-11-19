@@ -81,7 +81,7 @@ Procedure
     | ***node*** | Allows configuration of the node-specific parameters.| - | - |
     | tolerations | Define tolerations for the node daemonset, if required | No | |
     | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-
+    | tenantName | Tenant name added while adding host entry to the array | No |  |
 
 
     **Note**: 

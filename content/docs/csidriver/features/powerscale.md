@@ -527,6 +527,7 @@ In the case of operator-based installation, default permission for powerscale di
 
 Other ways of configuring powerscale volume permissions remain the same as helm-based installation.
 
+
 ## PV/PVC Metrics
 
 CSI Driver for Dell EMC PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. 
@@ -534,3 +535,29 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 
 To accomplish this, the driver utilizes the external-health-monitor sidecar. When the driver detects a volume condition is abnormal, the sidecar will report an event to the corresponding PVC. 
 To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To set the interval of monitoring volume health condition, set the parameter `volumeHealthMonitorInterval`.
+
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)
+
+Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerScale 2.1.0 and Kubernetes version 1.22+.
+
+To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
+`--feature-gates="...,ReadWriteOncePod=true"`
+
+### Creating a PersistentVolumeClaim
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: single-writer-only
+spec:
+  accessModes:
+  - ReadWriteOncePod # the volume can be mounted as read-write by a single pod across the whole cluster
+  resources:
+    requests:
+      storage: 1Gi
+```
+
+When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
+
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
+
