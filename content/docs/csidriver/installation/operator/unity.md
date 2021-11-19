@@ -119,6 +119,7 @@ data:
     ALLOW_RWO_MULTIPOD_ACCESS: "false"
     MAX_UNITY_VOLUMES_PER_NODE: "0"
     SYNC_NODE_INFO_TIME_INTERVAL: "0"
+    TENANT_NAME: ""
 ```
 
 ## Dynamic Logging Configuration
