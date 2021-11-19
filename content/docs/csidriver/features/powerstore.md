@@ -637,4 +637,4 @@ spec:
       storage: 5Gi
 ```
 
-Note: The access more ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported kubernetes versions.
+Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported kubernetes versions.
