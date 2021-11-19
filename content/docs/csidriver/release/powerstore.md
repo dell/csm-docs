@@ -10,7 +10,8 @@ description: Release notes for PowerStore CSI driver
 - Added support for OpenShift v4.9.
 - Added support for CSI spec 1.5.
 - Added support for new access modes in CSI Spec 1.5.
-- Added support for PV/PVC metrics.
+- Added support for PV/PVC metrics. 
+- Added support for volume health monitoring.
 
 ### Fixed Issues
 

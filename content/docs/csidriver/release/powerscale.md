@@ -12,6 +12,8 @@ description: Release notes for PowerScale CSI driver
 - Added support for new access modes in CSI Spec 1.5.
 - Added support for PV/PVC metrics.
 - Added ability to accept leader election timeout flags.
+- Added support for Dell EMC PowerScale 9.3.
+- Added support for volume health monitoring.
 
 ### Fixed Issues
 

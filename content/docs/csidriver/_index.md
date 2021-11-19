@@ -20,7 +20,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 | RHEL          |     7.x,8.x      |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.x,8.x      |
 | Ubuntu        |       20.04      |       20.04         |       18.04, 20.04      |        18.04, 20.04      |          20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
-| SLES          |        15SP2        |        15SP2        |       15SP2      |         15SP2     |       15SP2      |
+| SLES          |        15SP3        |        15SP3        |       15SP3      |         15SP3     |       15SP3      |
 | Fedora Core OS|        no        |         5.x       |        no        |         no        |        no        |
 | Red Hat OpenShift | 4.8, 4.8 EUS, 4.9  |   4.8, 4.8 EUS, 4.9 |    4.8, 4.8 EUS, 4.9     |   4.8, 4.8 EUS, 4.9   |  4.8, 4.8 EUS, 4.9 |
 | Mirantis Kubernetes Engine |       3.4.x      |        3.4.x        |       3.4.x     |        3.4.x      |        3.4.x     |
@@ -40,7 +40,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 | Create VolumeSnapshot    | yes      | yes| yes   | yes | yes  |
 | Create Volume from Snapshot | yes   | yes| yes   | yes | yes  |
 | Delete Snapshot          | yes      | yes| yes   | yes | yes  |
-| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)         | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX<br>(Raw block) | RWO<br>RWO/<br>RWX/<br>ROX<br>(Raw block) | RWO<br>(FC/iSCSI)<br>RWO/RWX<br>(RawBlock)<br>RWO/RWX/ROX<br>(NFS) | RWO/RWX/ROX | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX<br>(RawBlock, NFS) |
+| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)         | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(Raw block) | RWO<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(Raw block) | RWO<br>(FC/iSCSI)<br>RWO/RWX/<br>RWOP<br>(RawBlock)<br>RWO/RWX/ROX/<br>RWOP<br>(NFS) | RWO/RWX/ROX/<br> RWOP | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(RawBlock, NFS) |
 | CSI Volume Cloning       | yes      | yes | yes   | yes | yes |
 | CSI Raw Block Volume     | yes      | yes | yes   | no  | yes |
 | CSI Ephemeral Volume     | no       | yes | yes   | yes | yes |

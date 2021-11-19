@@ -12,7 +12,8 @@ description: Release notes for Unity CSI driver
 - Added support for new access modes in CSI Spec 1.5.
 - Added support for PV/PVC metrics.
 - Added NFS support for PVC metrics in controller.
-- Added ability to associate a tenant with storage volumes. 
+- Added ability to associate a tenant with storage volumes. - 
+- Added support for volume health monitoring.
 
 ### Fixed Issues
 
