@@ -470,6 +470,34 @@ The user will be able to install the driver and able to create pods.
 
 This feature is introduced in CSI Driver for unity version 2.0.0. 
 
+## Single Pod Access Mode for PersistentVolumes
+CSI Driver for Unity now supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity allows to restrict volume access to a single pod in the cluster
+
+Prerequisites
+1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as the ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is only supported for CSI volumes. You can enable the feature by setting command line arguments:
+`--feature-gates="...,ReadWriteOncePod=true"`
+2. Create a PVC with access mode set to ReadWriteOncePod like shown in the sample below
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: single-writer-only
+spec:
+  accessModes:
+  - ReadWriteOncePod # Allow only a single pod to access single-writer-only.
+  resources:
+    requests:
+      storage: 1Gi
+```
+
+## Volume Health Monitoring
+CSI Driver for Unity now supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments `--feature-gates="...,CSIVolumeHealth=true"`.  
+This feature:
+1. Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc `kubectl describe pvc <pvc name> -n <namespace>`
+2. Collects the volume stats. We can see the volume usage in the node logs `kubectl logs <nodepod> -n <namespacename> -c driver`
+By default this is disabled in CSI Driver for Unity. You will have to set the `volumeHealthMonitor.enable` flag for controller, node or for both in `values.yaml` to get the volume stats and volume condition.
+
+
 ### Helm based installation
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver. 
 
