@@ -577,6 +577,9 @@ If either option is set to a value outside of what is supported, the driver will
 
 ## Volume Health Monitoring 
 
+> *NOTE*: This feature requires the alpha feature gate, CSIVolumeHealth to be set to true. If the feature gate is on, and you want to use this feature,
+> ensure the proper values are enabled in your values file. See the values table in the installation doc for more details. 
+
 Starting in version 2.1, CSI Driver for PowerFlex now supports volume health monitoring. This allows Kubernetes to report on the condition of the underlying volumes via events when a volume condition is abnormal. For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.  
 
 To accomplish this, the driver utilizes the external-health-monitor sidecar. When driver detects a volume condition is abnormal, the sidecar will report an event to the corresponding PVC. For example, in this event from `kubectl describe pvc -n <ns>` we can see that the underlying volume was deleted from the PowerFlex array:
@@ -586,7 +589,7 @@ Events:
   ----     ------                     ----                ----                                                         ------
   Warning  VolumeConditionAbnormal    32s                 csi-pv-monitor-controller-csi-vxflexos.dellemc.com           Volume is not found at 2021-11-03 20:31:04
 ```  
-If the alpha feature gate CSIVolumeHealth is set to true, events will also be reported to pods that have abnormal volumes. In these two events from `kubectl describe pods -n <ns>`, we can see that this pod has two abnormal volumes: one volume was unmounted outside of Kubernetes, while another was deleted from PowerFlex array.
+Events will also be reported to pods that have abnormal volumes. In these two events from `kubectl describe pods -n <ns>`, we can see that this pod has two abnormal volumes: one volume was unmounted outside of Kubernetes, while another was deleted from PowerFlex array.
 ```
 Events:
   Type     Reason                     Age                 From         Message

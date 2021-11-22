@@ -156,17 +156,19 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
 | kubeletConfigDir | Defines kubelet config path for cluster | Yes | "/var/lib/kubelet" |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
-| volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
 | connection.enableCHAP   | Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
 | controller.controllerCount     | Defines number of replicas of controller deployment | Yes | 2 |
 | controller.volumeNamePrefix | Defines the string added to each volume that the CSI driver creates | No | "csivol" |
 | controller.snapshot.enabled | Allows to enable/disable snapshotter sidecar with driver installation for snapshot feature | No | "true" |
 | controller.snapshot.snapNamePrefix | Defines prefix to apply to the names of a created snapshots | No | "csisnap" |
 | controller.resizer.enabled | Allows to enable/disable resizer sidecar with driver installation for volume expansion feature | No | "true" |
+| controller.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| controller.healthMonitor.volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
 | controller.nodeSelector | Defines what nodes would be selected for pods of controller deployment | Yes | " " |
 | controller.tolerations  | Defines tolerations that would be applied to controller deployment | Yes | " " |
 | node.nodeNamePrefix | Defines the string added to each node that the CSI driver registers | No | "csi-node" |
 | node.nodeIDPath | Defines a path to file with a unique identifier identifying the node in the Kubernetes cluster| No | "/etc/machine-id" |
+| node.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 
