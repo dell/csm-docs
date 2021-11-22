@@ -76,7 +76,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ## Install the Driver
 
 **Steps**
-1. Run `git clone https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
 4. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
@@ -211,11 +211,8 @@ The CSI driver for Dell EMC PowerScale version 1.5 and later, `dell-csi-helm-ins
 
 ### What happens to my existing storage classes?
 
-*Upgrading from CSI PowerScale v1.6 driver*
+*Upgrading from CSI PowerScale v2.0 driver*
 The storage classes created as part of the installation have an annotation - "helm.sh/resource-policy": keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.
-
-*Upgrading from an older version of the driver*
-It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 before upgrading to 2.0.
 
 *NOTE*:
 - At least one storage class is required for one array.
@@ -236,9 +233,9 @@ Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volu
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerScale v1.6 driver*:
+*Upgrading from CSI PowerScale v2.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 before upgrading to 2.0.
+It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.1.
 

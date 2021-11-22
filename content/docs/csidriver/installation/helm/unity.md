@@ -38,7 +38,7 @@ Install CSI Driver for Unity using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone https://github.com/dell/csi-unity.git```, ready for this procedure.
+ * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.1.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
@@ -336,11 +336,11 @@ For CSI Driver for Unity version 1.6 and later, `dell-csi-helm-installer` does n
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI Unity v1.6 driver*:
+*Upgrading from CSI Unity v2.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 before upgrading to 2.0.
+It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 or higher, before upgrading to 2.1.
 
 ## Storage Classes
 
@@ -348,7 +348,7 @@ Storage Classes are an essential Kubernetes construct for Storage provisioning. 
 
 A wide set of annotated storage class manifests have been provided in the [samples/storageclass](https://github.com/dell/csi-unity/tree/master/samples/storageclass) folder. Use these samples to create new storage classes to provision storage.
 
-For CSI Driver for Unity version 2.0, a wide set of annotated storage class manifests have been provided in the `csi-unity/samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
+For CSI Driver for Unity, a wide set of annotated storage class manifests have been provided in the `csi-unity/samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
 
 ### What happens to my existing storage classes?
 

@@ -3,18 +3,17 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.0.0
+## Release Notes - CSI PowerFlex v2.1.0
 
 ### New Features/Changes
-- Added support for Kubernetes v1.22.
-- Added support for OpenShift v4.8.
-- Added support for dynamic multi-array configuration.
-- Added certificate validation for PowerFlex Gateway REST API calls.
-- Aligned configuration parameters with those in other CSI drivers in effort to have consistent config experience across drivers.
-- Added the ability to configure kubelet directory path.
-- Added the ability to enable/disable installation of resizer sidecar with driver installation.
-- Added the ability to enable/disable installation of snapshotter sidecar with driver installation.
-- Added the ability to use system names instead of system IDs in config files.
+- Added support for OpenShift v4.9.
+- Added support for CSI spec 1.5.
+- Added support for new access modes in CSI Spec 1.5.
+- Added support for PV/PVC metrics.
+- Added support for CSM Authorization sidecar via Helm.
+- Added v1 extensions to vg snaphot from v1alpha2.
+- Added support to update helm charts to do a helm install without shell scripts.
+- Added support for volume health monitoring.
 
 ### Fixed Issues
 

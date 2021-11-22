@@ -109,7 +109,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ## Install the Driver
 
 **Steps**
-1. Run `git clone https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
 
@@ -181,7 +181,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
     - Old `json` format of the array configuration file is still supported in this release. If you already have your configuration in `json` format, you may continue to maintain it or you may transfer this configuration to `yaml`
     format and replace/update the secret.  
     - "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
-    - Please note that log configuration parameters from v1.5 will no longer work in v2.0. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
+    - Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
     
 5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features.  
 
@@ -338,8 +338,8 @@ Support for v1beta1 snapshots is being discontinued in this release.
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerFlex v1.5 driver*:
+*Upgrading from CSI PowerFlex v2.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 before upgrading to 2.0.
+It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.1.

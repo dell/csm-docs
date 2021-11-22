@@ -127,20 +127,6 @@ The common snapshot controller must be installed only once in the cluster, irres
   [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
-### (Optional) Replication feature Requirements
-
-Applicable only if you decided to enable the Replication feature in `values.yaml`
-
-```yaml
-replication:
-  enabled: true
-```
-#### Replication CRD's
-
-The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
-
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
-
 #### Installation example 
 
 You can install CRDs and the default snapshot controller by running the following commands:
@@ -156,12 +142,25 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 - It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
+### (Optional) Replication feature Requirements
+
+Applicable only if you decided to enable the Replication feature in `values.yaml`
+
+```yaml
+replication:
+  enabled: true
+```
+#### Replication CRD's
+
+The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
+
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
 
 ## Install the Driver
 
 **Steps**
 
-1. Run `git clone https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -251,11 +250,11 @@ Starting with CSI PowerMax v1.7, `dell-csi-helm-installer` will not create any V
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerMax v1.7 driver*:
+*Upgrading from CSI PowerMax v2.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 before upgrading to 2.0.
+It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 or higher, before upgrading to 2.1.
 
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes

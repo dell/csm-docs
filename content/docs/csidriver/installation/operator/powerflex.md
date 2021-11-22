@@ -160,7 +160,7 @@ For detailed PowerFlex installation procedure, see the _Dell EMC PowerFlex Deplo
           dnsPolicy: ClusterFirstWithHostNet
           forceUpdate: false
           common:
-            image: "dellemc/csi-vxflexos:v2.0.0"
+            image: "dellemc/csi-vxflexos:v2.1.0"
             imagePullPolicy: IfNotPresent
             envs:
               - name: X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT

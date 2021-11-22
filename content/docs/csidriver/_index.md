@@ -6,7 +6,7 @@ description: About Dell EMC CSI Drivers
 weight: 3
 ---
 
-The CSI Drivers by Dell EMC implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.3) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.
+The CSI Drivers by Dell EMC implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.5) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.
 
 ![CSI Architecture](Architecture_Diagram.png)
 
@@ -20,9 +20,9 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 | RHEL          |     7.x,8.x      |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.x,8.x      |
 | Ubuntu        |       20.04      |       20.04         |       18.04, 20.04      |        18.04, 20.04      |          20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
-| SLES          |        15SP2        |        15SP2        |       15SP2      |         15SP2     |       15SP2      |
+| SLES          |        15SP3        |        15SP3        |       15SP3      |         15SP3     |       15SP3      |
 | Fedora Core OS|        no        |         5.x       |        no        |         no        |        no        |
-| Red Hat OpenShift | 4.6 EUS, 4.7, 4.8 |   4.6 EUS, 4.7, 4.8 |    4.6 EUS, 4.7, 4.8     |   4.6 EUS, 4.7, 4.8   |  4.6 EUS, 4.7, 4.8 |
+| Red Hat OpenShift | 4.8, 4.8 EUS, 4.9  |   4.8, 4.8 EUS, 4.9 |    4.8, 4.8 EUS, 4.9     |   4.8, 4.8 EUS, 4.9   |  4.8, 4.8 EUS, 4.9 |
 | Mirantis Kubernetes Engine |       3.4.x      |        3.4.x        |       3.4.x     |        3.4.x      |        3.4.x     |
 | Google Anthos |        1.6       |          1.8        |        no        |         no        |        1.7       |
 | VMware Tanzu  |        no        |          no      |        NFS     |         NFS    |      NFS      |
@@ -33,14 +33,14 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 {{<table "table table-striped table-bordered table-sm">}}
 | Features | PowerMax | PowerFlex | &emsp;&emsp; Unity  | PowerScale | PowerStore |
 |--------------------------|:--------:|:------------------:|:---------:|:-----------------:|:----------:|
-| CSI Specification        | v1.3     | v1.3| v1.3      | v1.4  | v1.3       |
+| CSI Specification        | v1.5     | v1.5| v1.5      | v1.5  | v1.5       |
 | Static Provisioning      | yes      | yes| yes   | yes | yes  |
 | Dynamic Provisioning     | yes      | yes| yes   | yes | yes  |
 | Expand Persistent Volume | yes      | yes| yes   | yes | yes  |
 | Create VolumeSnapshot    | yes      | yes| yes   | yes | yes  |
 | Create Volume from Snapshot | yes   | yes| yes   | yes | yes  |
 | Delete Snapshot          | yes      | yes| yes   | yes | yes  |
-| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)         | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX<br>(Raw block) | RWO<br>RWO/<br>RWX/<br>ROX<br>(Raw block) | RWO<br>(FC/iSCSI)<br>RWO/RWX<br>(RawBlock)<br>RWO/RWX/ROX<br>(NFS) | RWO/RWX/ROX | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX<br>(RawBlock, NFS) |
+| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)         | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(Raw block) | RWO<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(Raw block) | RWO<br>(FC/iSCSI)<br>RWO/RWX/<br>RWOP<br>(RawBlock)<br>RWO/RWX/ROX/<br>RWOP<br>(NFS) | RWO/RWX/ROX/<br> RWOP | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(RawBlock, NFS) |
 | CSI Volume Cloning       | yes      | yes | yes   | yes | yes |
 | CSI Raw Block Volume     | yes      | yes | yes   | no  | yes |
 | CSI Ephemeral Volume     | no       | yes | yes   | yes | yes |

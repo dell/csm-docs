@@ -87,7 +87,7 @@ spec:
 
 ## Volume Snapshot Feature
 
-The CSI PowerStore driver version 2.0.0 supports v1 snapshots.
+The CSI PowerStore driver version 2.0.0 and higher supports v1 snapshots.
 
 In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
 - Kubernetes Volume Snapshot CRDs

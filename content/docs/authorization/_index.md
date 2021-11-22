@@ -34,7 +34,7 @@ __NOTE:__ PowerScale OneFS implements its own form of Role-Based Access Control 
 | COP/OS | Supported Versions |
 |-|-|
 | Kubernetes    | 1.20, 1.21, 1.22 |
-| Red Hat OpenShift | 4.7, 4.8 |
+| Red Hat OpenShift | 4.8, 4.9|
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
 {{</table>}}
@@ -53,9 +53,9 @@ CSM for Authorization supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
-| CSI Driver for Dell EMC PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 |
-| CSI Driver for Dell EMC PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0 |
-| CSI Driver for Dell EMC PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0 |
+| CSI Driver for Dell EMC PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0,v2.1 |
+| CSI Driver for Dell EMC PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0,v2.1 |
+| CSI Driver for Dell EMC PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0,v2.1 |
 {{</table>}}
 
 __Note:__ If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver's controller pod.

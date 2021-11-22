@@ -123,7 +123,7 @@ In order to use Volume Snapshots, ensure the following components have been depl
 
 ### Volume Snapshot Class
 
-During the installation of CSI PowerScale driver version 2.0, no default Volume Snapshot Class will get created.
+During the installation of CSI PowerScale driver version 2.0 and higher, no default Volume Snapshot Class will get created.
 
 Following are the manifests for the Volume Snapshot Class:
 
@@ -519,7 +519,7 @@ The permissions present in values.yaml are the default for all cluster config.
 
 If the volume permission is not present in storage class then secrets are considered and if it is not present even in secrets then values.yaml is considered.
 
->**Note:** <br>For volume creation from source (volume from snapshot/volume from volume) permissions are inherited from source. <br><br>Create myvalues.yaml/my-isilon-settings.yaml and storage class according to csi-powerscale 2.0
+>**Note:** <br>For volume creation from source (volume from snapshot/volume from volume) permissions are inherited from source. <br><br>Create myvalues.yaml/my-isilon-settings.yaml and storage class accordingly.
 
 ### Operator based installation
 
