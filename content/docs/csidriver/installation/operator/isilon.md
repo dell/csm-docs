@@ -31,7 +31,7 @@ User can query for CSI-PowerScale driver using the following command:
      ```
       isilonClusters:
          # logical name of PowerScale Cluster
-       - clusterName: "cluster1"
+      - clusterName: "cluster1"
 
          # username for connecting to PowerScale OneFS API server
          # Default value: None
@@ -74,7 +74,7 @@ User can query for CSI-PowerScale driver using the following command:
          # Examples: "0777", "777", "0755"
          # isiVolumePathPermissions: "0777"
 
-       - clusterName: "cluster2"
+      - clusterName: "cluster2"
          username: "user"
          password: "password"
          endpoint: "1.2.3.4"
