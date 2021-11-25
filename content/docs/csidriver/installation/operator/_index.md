@@ -271,15 +271,15 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
    under controller should be set to true as seen below and to get the volume stats `value` under node should be set to true.
     i. add controller and node section as bellow:
 ```yaml
-   controller:
-   envs:
-    - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
-      value: "true"
-      dnsPolicy: ClusterFirstWithHostNet
-      node:
+    controller:
       envs:
-    - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
-      value: "true"
+        - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+          value: "true"
+    dnsPolicy: ClusterFirstWithHostNet
+    node:
+      envs:
+        - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+          value: "true"
 ```
    ii. update the sidecar versions:
 ```yaml
