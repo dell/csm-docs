@@ -267,51 +267,52 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
 **NOTES:** 
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
-   To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state `value` 
-   under controller should be set to true as seen below and to get the volume stats `value` under node should be set to true.
+   To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
+   external-health-monitor sidecar in the sidecar section and `value`under controller set to true and the `value` under node set 
+   to true as shown below:
     i. add controller and node section as bellow:
-```yaml
-    controller:
-      envs:
-        - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
-          value: "true"
-    dnsPolicy: ClusterFirstWithHostNet
-    node:
-      envs:
-        - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
-          value: "true"
-```
-   ii. update the sidecar versions:
-```yaml
-    sideCars:
-    - args:
-      - --volume-name-prefix=csiunity
-      - --default-fstype=ext4
-      image: k8s.gcr.io/sig-storage/csi-provisioner:v3.0.0
-      imagePullPolicy: IfNotPresent
-      name: provisioner
-    - args:
-      - --snapshot-name-prefix=csiunitysnap
-      image: k8s.gcr.io/sig-storage/csi-snapshotter:v4.2.1
-      imagePullPolicy: IfNotPresent
-      name: snapshotter
-    - args:
-      - --monitor-interval=60s
-      image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.4.0
-      imagePullPolicy: IfNotPresent
-      name: external-health-monitor
-    - image: k8s.gcr.io/sig-storage/csi-attacher:v3.3.0
-      imagePullPolicy: IfNotPresent
-      name: attacher
-    - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.3.0
-      imagePullPolicy: IfNotPresent
-      name: registrar
-    - image: k8s.gcr.io/sig-storage/csi-resizer:v1.3.0
-      imagePullPolicy: IfNotPresent
-      name: resizer
-
-```
-4. Configmap needs to be created with command `kubectl create -f configmap.yaml` using following yaml file.
+    ```yaml
+        controller:
+          envs:
+            - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+              value: "true"
+        dnsPolicy: ClusterFirstWithHostNet
+        node:
+          envs:
+            - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+              value: "true"
+    ```
+   ii. update the sidecar versions and Add external-health-monitor sidecar to enable health monitor of CSI volumes from Controller plugin:
+    ```yaml
+        sideCars:
+        - args:
+          - --volume-name-prefix=csiunity
+          - --default-fstype=ext4
+          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.0.0
+          imagePullPolicy: IfNotPresent
+          name: provisioner
+        - args:
+          - --snapshot-name-prefix=csiunitysnap
+          image: k8s.gcr.io/sig-storage/csi-snapshotter:v4.2.1
+          imagePullPolicy: IfNotPresent
+          name: snapshotter
+        - args:
+          - --monitor-interval=60s
+          image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.4.0
+          imagePullPolicy: IfNotPresent
+          name: external-health-monitor
+        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.3.0
+          imagePullPolicy: IfNotPresent
+          name: attacher
+        - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.3.0
+          imagePullPolicy: IfNotPresent
+          name: registrar
+        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.3.0
+          imagePullPolicy: IfNotPresent
+          name: resizer
+    
+    ```
+3. Configmap needs to be created with command `kubectl create -f configmap.yaml` using following yaml file.
 ```yaml
 kind: ConfigMap
 metadata:
