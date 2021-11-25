@@ -286,7 +286,7 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
             - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
               value: "true"
     ```
-   ii. Update the sidecar versions and add external-health-monitor sidecar if you want to enable health monitor of CSI volumes from Controller plugin.:
+   ii. Update the sidecar versions and add external-health-monitor sidecar if you want to enable health monitor of CSI volumes from Controller plugin:
     ```yaml
         sideCars:
         - args:
@@ -314,7 +314,6 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
         - image: k8s.gcr.io/sig-storage/csi-resizer:v1.3.0
           imagePullPolicy: IfNotPresent
           name: resizer
-    
     ```
 3. Configmap needs to be created with command `kubectl create -f configmap.yaml` using following yaml file.
 ```yaml
