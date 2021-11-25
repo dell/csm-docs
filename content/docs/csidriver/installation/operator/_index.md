@@ -266,6 +266,10 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
 
 **NOTES:** 
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
+   ```yaml
+      driver:
+        configVersion: v2.1.0
+   ```
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
    external-health-monitor sidecar in the sidecar section and `value`under controller set to true and the `value` under node set 
