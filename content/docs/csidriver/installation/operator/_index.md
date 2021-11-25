@@ -266,25 +266,62 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
 
 **NOTES:** 
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
-2. The parameter "dnsPolicy: ClusterFirstWithHostNet" should be added as follows:
-```
-driver:
-    configVersion: v5
-    replicas: 2
-    dnsPolicy: ClusterFirstWithHostNet
-    common:
-```
-3. Configmap needs to be created with command `kubectl create -f configmap.yaml` using following yaml file.
+2. The parameter for volume health minitor should be added as follows:
+   i. add controller and node as bellow:
 ```yaml
-apiVersion: v1
+   controller:
+   envs:
+    - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+      value: "true"
+      dnsPolicy: ClusterFirstWithHostNet
+      node:
+      envs:
+    - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+      value: "true"
+```
+   ii. update the sidecar versions:
+```yaml
+    sideCars:
+    - args:
+      - --volume-name-prefix=csiunity
+      - --default-fstype=ext4
+      image: k8s.gcr.io/sig-storage/csi-provisioner:v3.0.0
+      imagePullPolicy: IfNotPresent
+      name: provisioner
+    - args:
+      - --snapshot-name-prefix=csiunitysnap
+      image: k8s.gcr.io/sig-storage/csi-snapshotter:v4.2.1
+      imagePullPolicy: IfNotPresent
+      name: snapshotter
+    - args:
+      - --monitor-interval=60s
+      image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.4.0
+      imagePullPolicy: IfNotPresent
+      name: external-health-monitor
+    - image: k8s.gcr.io/sig-storage/csi-attacher:v3.3.0
+      imagePullPolicy: IfNotPresent
+      name: attacher
+    - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.3.0
+      imagePullPolicy: IfNotPresent
+      name: registrar
+    - image: k8s.gcr.io/sig-storage/csi-resizer:v1.3.0
+      imagePullPolicy: IfNotPresent
+      name: resizer
+
+```
+4. Configmap needs to be created with command `kubectl create -f configmap.yaml` using following yaml file.
+```yaml
 kind: ConfigMap
 metadata:
-  name: powerstore-config-params
-  namespace: csi-powerstore
+  name: unity-config-params
+  namespace: test-unity
 data:
   driver-config-params.yaml: |
-    CSI_LOG_LEVEL: "debug"
-    CSI_LOG_FORMAT: "JSON"
+    CSI_LOG_LEVEL: "info"
+    ALLOW_RWO_MULTIPOD_ACCESS: "false"
+    MAX_UNITY_VOLUMES_PER_NODE: "0"
+    SYNC_NODE_INFO_TIME_INTERVAL: "0"
+    TENANT_NAME: ""
 ```
 
 **NOTE:** `Replicas` in the driver CR file should not be greater than or equal to the number of worker nodes when upgrading the driver. If the `Replicas` count is not less than the worker node count, some of the driver controller pods would land in a pending state, and upgrade will not be successful. Driver controller pods go in a pending state because they have anti-affinity to each other and cannot be scheduled on nodes where there is a driver controller pod already running. Refer to https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity for more details.
