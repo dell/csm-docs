@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://dell.github.io/csm-docs/"
 title = "Dell Technologies"
 canonifyURLs = false
 
