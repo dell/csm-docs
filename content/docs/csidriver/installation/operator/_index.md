@@ -274,7 +274,7 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
    external-health-monitor sidecar in the sidecar section and `value`under controller set to true and the `value` under node set 
    to true as shown below:
-    i. add controller and node section as bellow:
+    i. Add controller and node section as below:
     ```yaml
         controller:
           envs:
@@ -286,7 +286,7 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
             - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
               value: "true"
     ```
-   ii. update the sidecar versions and Add external-health-monitor sidecar to enable health monitor of CSI volumes from Controller plugin:
+   ii. Update the sidecar versions and Add external-health-monitor sidecar to enable health monitor of CSI volumes from Controller plugin:
     ```yaml
         sideCars:
         - args:
