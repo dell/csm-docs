@@ -138,3 +138,38 @@ kubectl edit configmap -n unity unity-config-params
   1. Prior to CSI Driver for unity version 2.0.0, the log level was allowed to be updated dynamically through `logLevel` attribute in the secret object.
   2. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
   3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+
+## Volume Health Monitoring
+This feature is introduced in CSI Driver for unity version 2.1.0.
+
+### Operator based installation
+
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+To enable this feature, we will have to add the below block to the driver manifest before installing the driver. This ensures to install external health monitor sidecar. To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
+```
+      # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
+      # Also set the env variable controller.envs.X_CSI_ENABLE_VOL_HEALTH_MONITOR  to "true".
+      # - name: external-health-monitor
+      #   args: ["--monitor-interval=60s"]
+
+    controller:
+      envs:
+      # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition.
+      # Install the 'external-health-monitor' sidecar accordingly.
+      # Allowed values:
+      #   true: enable checking of health condition of CSI volumes
+      #   false: disable checking of health condition of CSI volumes
+      # Default value: false
+      - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+        value: "false"
+
+    node:
+      envs:
+        # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+        - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+          value: "false"
+```
