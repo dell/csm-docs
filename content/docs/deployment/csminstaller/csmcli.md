@@ -1,7 +1,7 @@
 ---
 title : CSM CLI
 linktitle: CSM CLI
-weight: 3
+weight: 2
 description: >
   Dell EMC Container Storage Modules (CSM) Command Line Interface(CLI) Deployment and Management
 ---

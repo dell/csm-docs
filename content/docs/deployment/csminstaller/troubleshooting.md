@@ -1,17 +1,19 @@
 ---
 title: "Troubleshooting"
 linkTitle: "Troubleshooting"
-weight: 4
+weight: 3
 Description: >
   Troubleshooting guide
 ---
 
 ## Frequently Asked Questions
-1. [Why does the installation fail due to an invalid cipherKey value?](#why-does-the-installation-fail-due-to-an-invalid-cipherkey-value)
-2. [Why does the cluster-init pod show the error "cluster has already been initialized"?](#why-does-the-cluster-init-pod-show-the-error-cluster-has-already-been-initialized)
-3. [Why does the precheck fail when creating an application?](#why-does-the-precheck-fail-when-creating-an-application)
-4. [How can I view detailed logs for the CSM Installer?](#how-can-i-view-detailed-logs-for-the-csm-installer)
-5. [After deleting an application, why can't I re-create the same application?](#after-deleting-an-application-why-cant-i-re-create-the-same-application)
+
+  - [Why does the installation fail due to an invalid cipherKey value?](#why-does-the-installation-fail-due-to-an-invalid-cipherkey-value)
+  - [Why does the cluster-init pod show the error "cluster has already been initialized"?](#why-does-the-cluster-init-pod-show-the-error-cluster-has-already-been-initialized)
+  - [Why does the precheck fail when creating an application?](#why-does-the-precheck-fail-when-creating-an-application)
+  - [How can I view detailed logs for the CSM Installer?](#how-can-i-view-detailed-logs-for-the-csm-installer)
+  - [After deleting an application, why can't I re-create the same application?](#after-deleting-an-application-why-cant-i-re-create-the-same-application)
+  - [How can I upgrade CSM if I've used the CSM Installer to deploy CSM 1.0?](#how-can-i-upgrade-csm-if-ive-used-the-csm-installer-to-deploy-csm-10)
 
 ### Why does the installation fail due to an invalid cipherKey value?
 The `cipherKey` value used during deployment of the CSM Installer must be exactly 32 characters in length and contained within quotes.
@@ -39,3 +41,9 @@ kubectl logs -f -n <namespace> deploy/dell-csm-installer
 
 ### After deleting an application, why can't I re-create the same application?
 After deleting an application using the `csm delete application` command, the namespace and other non-application resources including Secrets are not deleted from the cluster. This is to prevent removing any resources that may not have been created by the CSM Installer. The namespace must be manually deleted before attempting to re-create the same application using the CSM Installer.
+
+### How can I upgrade CSM if I've used the CSM Installer to deploy CSM 1.0?
+The CSM Installer currently does not support upgrade.  If you used the CSM Installer to deploy CSM 1.0 you will need to perform the following steps to upgrade:
+1. Using the CSM installer, [delete](../csmcli#delete-applicationtask) any driver/module applications that were installed (ex: `csm delete application --name <created-application-name>`). 
+2. Uninstall the CSM Installer (ex: helm delete -n <namespace> <csm-installer-app-name> )
+3. Follow the deployment instructions [here](../../) to redeploy the CSI driver and modules.
