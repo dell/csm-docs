@@ -28,4 +28,4 @@ There are no fixed issues in this release.
 
 ### Note:
 
-- This release we have added support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode, however, these features will not be available in Openshift environment as Openshift doesn't allow enabling of alpha features through feature-gates for Production Grade clusters.
+- Support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

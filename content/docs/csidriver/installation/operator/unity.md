@@ -145,7 +145,7 @@ This feature is introduced in CSI Driver for unity version 2.1.0.
 ### Operator based installation
 
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
-To enable this feature, we will have to add the below block to the driver manifest before installing the driver. This ensures to install external health monitor sidecar. To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external health monitor sidecar. To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
 ```
       # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
       # Also set the env variable controller.envs.X_CSI_ENABLE_VOL_HEALTH_MONITOR  to "true".
