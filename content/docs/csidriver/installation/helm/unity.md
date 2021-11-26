@@ -71,7 +71,7 @@ Procedure
     | podmon.enabled | service to monitor failing jobs and notify | false | - |
     | podmon.image| pod man image name | false | - |
     | **controller** | Allows configuration of the controller-specific parameters.| - | - |
-    | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
+    | controllerCount | Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
     | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
     | snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
     | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
