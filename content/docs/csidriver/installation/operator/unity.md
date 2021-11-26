@@ -154,14 +154,14 @@ To enable this feature, add the below block to the driver manifest before instal
 
     controller:
       envs:
-      # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition.
-      # Install the 'external-health-monitor' sidecar accordingly.
-      # Allowed values:
-      #   true: enable checking of health condition of CSI volumes
-      #   false: disable checking of health condition of CSI volumes
-      # Default value: false
-      - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
-        value: "false"
+        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from Controller plugin- volume status, volume condition.
+        # Install the 'external-health-monitor' sidecar accordingly.
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
+          value: "false"
 
     node:
       envs:
