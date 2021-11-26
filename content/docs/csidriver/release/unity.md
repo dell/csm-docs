@@ -26,5 +26,4 @@ description: Release notes for Unity CSI driver
 
 ### Note:
 
-- This release we have added support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode, however, these features will not be available in Openshift environment as 
-Openshift doesn't allow enabling of alpha features through feature-gates for Production Grade clusters.
+- This release we have added support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode, however, these features will not be available in Openshift environment as Openshift doesn't allow enabling of alpha features through feature-gates for Production Grade clusters.

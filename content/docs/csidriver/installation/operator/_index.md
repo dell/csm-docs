@@ -21,7 +21,7 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
 | CSI PowerMax       | 1.7       | v6             | 1.19, 1.20, 1.21     | 4.6, 4.7              |
 | CSI PowerMax       | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
-| CSI PowerMax       | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.9              |
+| CSI PowerMax       | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9              |
 | CSI PowerFlex      | 1.5       | v5             | 1.19, 1.20, 1.21     | 4.6, 4.7              |
 | CSI PowerFlex      | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
 | CSI PowerFlex      | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.9              |
