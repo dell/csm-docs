@@ -8,6 +8,40 @@ description: >
 
 The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
 
+## Prerequisites
+
+#### Volume Snapshot CRD's
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd)
+
+#### Volume Snapshot Controller
+The CSI external-snapshotter sidecar is split into two controllers:
+- A common snapshot controller
+- A CSI external-snapshotter sidecar
+
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller)
+
+*NOTE:*
+- The manifests available on GitHub install the snapshotter image:
+    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
+- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+
+#### Installation example
+
+You can install CRDs and the default snapshot controller by running the following commands:
+```bash
+git clone https://github.com/kubernetes-csi/external-snapshotter/
+cd ./external-snapshotter
+git checkout release-<your-version>
+kubectl create -f client/config/crd
+kubectl create -f deploy/kubernetes/snapshot-controller
+```
+
+*NOTE:*
+- It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+
+
+**Dell CSI Operator can be installed via OLM (Operator Lifecycle Manager) and manual installation.**
 
 ## Installation
 Dell CSI Operator has been tested and qualified with 
@@ -37,8 +71,6 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 
 </br>
 
-**Dell CSI Operator can be installed via OLM (Operator Lifecycle Manager) and manual installation.**
-
 ### Installation Using Operator Lifecycle Manager
 `dell-csi-operator` can be installed using Operator Lifecycle Manager (OLM) on upstream Kubernetes clusters & Red Hat OpenShift Clusters.  
 The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the Operator to - 
@@ -66,14 +98,15 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 #### Steps
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
-1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator). 
-2. Run `bash scripts/install.sh` to install the operator.
+1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator).
+2. git checkout dell-csi-operator-<your-version>
+3. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
 Any existing installations of Dell CSI Operator (v1.2.0 or later) installed using `install.sh` to the 'default' or 'dell-csi-operator' namespace can be upgraded to the new version by running `install.sh --upgrade`.
 
 {{< imgproc non-olm-1.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-3. Run the command `oc get pods -n dell-csi-operator` to validate the install. If completed successfully, you should be able to see the operator-related pod in the 'dell-csi-operator' namespace.
+4. Run the command `oc get pods -n dell-csi-operator` to validate the installation. If completed successfully, you should be able to see the operator-related pod in the 'dell-csi-operator' namespace.
 
 {{< imgproc non-olm-2.jpg Resize "3500x800" >}}{{< /imgproc >}}
 
@@ -263,6 +296,7 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     ```
     and modify the installation
 * Modify the API object in-place via `kubectl patch`
+* Modify the API object via `kubectl apply -f <file>` . Refer [here](https://github.com/dell/dell-csi-operator/tree/master/samples) to create a CR (Custom Resource) using the sample files provided.
 
 **NOTES:** 
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
