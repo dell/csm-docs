@@ -41,8 +41,6 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 
-**Dell CSI Operator can be installed via OLM (Operator Lifecycle Manager) and manual installation.**
-
 ## Installation
 Dell CSI Operator has been tested and qualified with 
 - Upstream Kubernetes or OpenShift (see [supported versions](../../../csidriver/#features-and-capabilities))
@@ -70,6 +68,8 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 | CSI PowerStore     | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 
 </br>
+
+**Dell CSI Operator can be installed via OLM (Operator Lifecycle Manager) and manual installation.**
 
 ### Installation Using Operator Lifecycle Manager
 `dell-csi-operator` can be installed using Operator Lifecycle Manager (OLM) on upstream Kubernetes clusters & Red Hat OpenShift Clusters.  
