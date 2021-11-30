@@ -38,7 +38,6 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 *NOTE:*
 - It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 
 ## Installation
@@ -296,7 +295,6 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     ```
     and modify the installation
 * Modify the API object in-place via `kubectl patch`
-* Modify the API object via `kubectl apply -f <file>` . Refer [here](https://github.com/dell/dell-csi-operator/tree/master/samples) to create a CR (Custom Resource) using the sample files provided.
 
 **NOTES:** 
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
