@@ -4,13 +4,13 @@ linktitle: Unity
 description: Tests to validate Unity CSI Driver installation
 ---
 
-In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default NFS and iSCSI and FC storage classes, and automatically mounts them to the pod.
+In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default NFS and iSCSI and FC storage classes and automatically mounts them to the pod.
 
 **Steps**
 
 1. To run this test, run the kubectl command from the root directory of the repository:
    ```bash
-   kubectl create -f ./tests/sample.yaml
+   kubectl create -f ./test/sample.yaml
    ```
 You can find all the created resources in `test-unity` namespace.
 
@@ -24,5 +24,5 @@ You can find all the created resources in `test-unity` namespace.
 
 4. After verifying, you can uninstall the testing PVCs and StatefulSet.
    ```bash
-   kubectl delete -f ./tests/sample.yaml
+   kubectl delete -f ./test/sample.yaml
    ```

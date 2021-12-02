@@ -18,7 +18,7 @@ You can find all the created resources in `test-unity` namespace.
    ```bash
    kubectl get all -n test-unity
    ```
-   If it's in CrashLoopback state then the driver installation wasn't successful. Check the logs of the node and the controller.
+   If it is in CrashLoopback state then the driver installation was not successful. Check the logs of the node and the controller.
 
 3. Go into the created container and verify that everything is mounted correctly.
 
