@@ -71,7 +71,6 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 *NOTE:*
 - It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 ## Install the Driver
 
@@ -167,7 +166,7 @@ Create isilon-creds secret using the following command:
    
 7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell EMC PowerScale.
     ```
-    kubectl create -f emptysecret.yaml
+    kubectl create -f empty-secret.yaml
     ```
    This command will create a new secret called `isilon-certs-0` in isilon namespace.
    
