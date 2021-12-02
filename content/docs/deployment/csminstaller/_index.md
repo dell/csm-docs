@@ -80,6 +80,9 @@ cockroach cert list --certs-dir=db-certs/
 ```
 
 5. Create a values.yaml file that contains JWT, Cipher key, and Admin username and password of CSM Installer that are required by the installer during helm installation. See the [Configuration](#configuration) section for other values that can be set during helm installation.
+
+> __Note__: `jwtKey`  will be used as a shared secret in HMAC algorithm for generating jwt token, `cipherKey` will be used as a symmetric key in AES cipher for encryption of storage system credentials. Those parameters are arbitrary, and you can set them to whatever you like. Just ensure that `cipherKey` is exactly 32 characters long.
+
 ```
 # string of any length 
 jwtKey:
