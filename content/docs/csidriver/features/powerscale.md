@@ -404,6 +404,7 @@ allowedTopologies:
         values:
           - csi-isilon.dellemc.com
 
+#To mount volume with NFSv4, specify mount option vers=4. Make sure NFSv4 is enabled on the Isilon Cluster
 mountOptions: ["<mountOption1>", "<mountOption2>", ..., "<mountOptionN>"]
 ```
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
