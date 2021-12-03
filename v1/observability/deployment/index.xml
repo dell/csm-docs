@@ -1,0 +1,564 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Deployment</title>
+    <link>https://dell.github.io/csm-docs/v1/observability/deployment/</link>
+    <description>Recent content in Deployment on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v1/observability/deployment/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1: Helm</title>
+      <link>https://dell.github.io/csm-docs/v1/observability/deployment/helm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/observability/deployment/helm/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The Container Storage Modules (CSM) for Observability Helm chart bootstraps an Observability deployment on a Kubernetes cluster using the Helm package manager.&lt;/p&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;a href=&#34;../../../csidriver/#features-and-capabilities&#34;&gt;supported&lt;/a&gt; CSI Driver is deployed&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The cert-manager CustomResourceDefinition resources are created.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;copy-the-csi-driver-secret&#34;&gt;Copy the CSI Driver Secret&lt;/h2&gt;
+&lt;p&gt;Copy the config Secret from the Dell CSI Driver namespace into the namespace where CSM for Observability is deployed.&lt;/p&gt;
+&lt;h3 id=&#34;powerflex&#34;&gt;PowerFlex&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The target namespace must exist before executing this command.&lt;/p&gt;
+&lt;h3 id=&#34;powerstore&#34;&gt;PowerStore&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The target namespace must exist before executing this command.&lt;/p&gt;
+&lt;h2 id=&#34;add-the-repo&#34;&gt;Add the Repo&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm repo add dell https://dell.github.io/helm-charts
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;installing-the-chart&#34;&gt;Installing the Chart&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;a href=&#34;#configuration&#34;&gt;configuration&lt;/a&gt; section below lists all the parameters that can be configured during installation&lt;/p&gt;
+&lt;h2 id=&#34;configuration&#34;&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;The following table lists the configurable parameters of the CSM for Observability Helm chart and their default values.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviTopology.image&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Location of the csm-topology Docker image&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dellemc/csm-topology:v1.0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviTopology.enabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable the CSM for Observability Topology service&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviTopology.provisionerNames&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Provisioner Names used to filter the Persistent Volumes created on the Kubernetes cluster (must be a comma-separated list)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt; csi-vxflexos.dellemc.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviTopology.service.type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes service type&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ClusterIP&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviTopology.certificateFile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Optional valid CA public certificate file that will be used to deploy the Topology service. Must use domain name &amp;lsquo;karavi-topology&amp;rsquo;.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviTopology.privateKeyFile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Optional public certificate&amp;rsquo;s associated private key file that will be used to deploy the Topology service. Must use domain name &amp;lsquo;karavi-topology&amp;rsquo;.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviTopology.logLevel&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;INFO&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviTopology.logFormat&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Output logs in the specified format (Valid values: text, json)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;text&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;otelCollector.certificateFile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Optional valid CA public certificate file that will be used to deploy the OpenTelemetry Collector. Must use domain name &amp;lsquo;otel-collector&amp;rsquo;.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;otelCollector.privateKeyFile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Optional public certificate&amp;rsquo;s associated private key file that will be used to deploy the OpenTelemetry Collector. Must use domain name &amp;lsquo;otel-collector&amp;rsquo;.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;otelCollector.service.type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes service type&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ClusterIP&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.image&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CSM Metrics for PowerFlex Service image&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dellemc/csm-metrics-powerflex:v1.0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.enabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable CSM Metrics for PowerFlex service&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.collectorAddr&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Metrics Collector accessible from the Kubernetes cluster&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;otel-collector:55680&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.provisionerNames&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Provisioner Names used to filter for determining PowerFlex SDC nodes( Must be a Comma-separated list)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt; csi-vxflexos.dellemc.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.sdcPollFrequencySeconds&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The polling frequency (in seconds) to gather SDC metrics&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.volumePollFrequencySeconds&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The polling frequency (in seconds) to gather volume metrics&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.storageClassPoolPollFrequencySeconds&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The polling frequency (in seconds) to gather storage class/pool metrics&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.concurrentPowerflexQueries&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The number of simultaneous metrics queries to make to Powerflex(MUST be less than 10; otherwise, several request errors from Powerflex will ensue.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.sdcMetricsEnabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable PowerFlex SDC Metrics Collection&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.volumeMetricsEnabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable PowerFlex Volume Metrics Collection&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.storageClassPoolMetricsEnabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable PowerFlex  Storage Class/Pool Metrics Collection&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.endpoint&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Endpoint for pod leader election&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;karavi-metrics-powerflex&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.service.type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes service type&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ClusterIP&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.logLevel&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;INFO&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerflex.logFormat&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Output logs in the specified format (Valid values: text, json)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;text&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.image&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CSM Metrics for PowerStore Service image&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dellemc/csm-metrics-powerstore:v1.0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.enabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable CSM Metrics for PowerStore service&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.collectorAddr&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Metrics Collector accessible from the Kubernetes cluster&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;otel-collector:55680&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.provisionerNames&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Provisioner Names used to filter for determining PowerStore volumes (must be a Comma-separated list)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;csi-powerstore.dellemc.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.volumePollFrequencySeconds&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The polling frequency (in seconds) to gather volume metrics&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.concurrentPowerflexQueries&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The number of simultaneous metrics queries to make to PowerStore (must be less than 10; otherwise, several request errors from PowerStore will ensue.)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.volumeMetricsEnabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable PowerStore Volume Metrics Collection&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.endpoint&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Endpoint for pod leader election&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;karavi-metrics-powerstore&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.service.type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes service type&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ClusterIP&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.logLevel&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;INFO&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.logFormat&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Output logs in the specified format (Valid values: text, json)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;text&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.zipkin.uri&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;URI of a Zipkin instance where tracing data can be forwarded&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.zipkin.serviceName&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Service name used for Zipkin tracing data&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;metrics-powerstore&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.zipkin.probability&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Specify each parameter using the &amp;lsquo;&amp;ndash;set key=value[,key=value]&amp;rsquo; and/or &amp;lsquo;&amp;ndash;set-file key=value[,key=value] arguments to &amp;lsquo;helm install&amp;rsquo;. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace \
+    --set-file karaviTopology.certificateFile=&amp;lt;location-of-karavi-topology-certificate-file&amp;gt; \
+    --set-file karaviTopology.privateKeyFile=&amp;lt;location-of-karavi-topology-private-key-file&amp;gt; \
+    --set-file otelCollector.certificateFile=&amp;lt;location-of-otel-collector-certificate-file&amp;gt; \
+    --set-file otelCollector.privateKeyFile=&amp;lt;location-of-otel-collector-private-key-file&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace -f values.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You can use the default &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;values.yaml&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Installer</title>
+      <link>https://dell.github.io/csm-docs/v1/observability/deployment/online/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/observability/deployment/online/</guid>
+      <description>
+        
+        
+        &lt;!--
+Copyright (c) 2020 Dell Inc., or its subsidiaries. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+--&gt;
+&lt;p&gt;The Container Storage Modules (CSM) for Observability installer bootstraps Helm to create a more simplified and robust deployment option that does the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Verifies CSM for Observability is not yet installed&lt;/li&gt;
+&lt;li&gt;Verifies the Kubernetes/Openshift versions are supported&lt;/li&gt;
+&lt;li&gt;Verifies the Helm version is supported&lt;/li&gt;
+&lt;li&gt;Adds the Dell Helm chart repository&lt;/li&gt;
+&lt;li&gt;Refreshes the Helm chart repositories to download any recent changes&lt;/li&gt;
+&lt;li&gt;Creates the CSM namespace (if not already created)&lt;/li&gt;
+&lt;li&gt;Copies the secrets from the CSI driver namespaces into the CSM namespace (if not already copied)&lt;/li&gt;
+&lt;li&gt;Installs the CertManager CRDs (if not already installed)&lt;/li&gt;
+&lt;li&gt;Installs the CSM for Observability Helm chart&lt;/li&gt;
+&lt;li&gt;Waits for the CSM for Observability pods to become ready&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If the Authorization module is enabled for the CSI drivers installed in the same Kubernetes cluster, the installer will perform the current steps to enable CSM for Observability to use the same Authorization instance:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Verifies the &lt;code&gt;karavictl&lt;/code&gt; binary is available.&lt;/li&gt;
+&lt;li&gt;Verifies the appropriate Secret exists in the CSI driver namespace.&lt;/li&gt;
+&lt;li&gt;Queries the CSI driver environment to get references to the Authorization module sidecar-proxy Docker image and URL of the proxy server.&lt;/li&gt;
+&lt;li&gt;Updates the CSM for Observability deployment to use the existing Authorization instance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;online-installer&#34;&gt;Online Installer&lt;/h2&gt;
+&lt;p&gt;The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.&lt;/p&gt;
+&lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
+&lt;p&gt;A Linux-based system, with internet access, will be used to execute the script to install CSM for Observability into a Kubernetes/Openshift environment that also has internet access.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Dependency&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;kubectl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;kubectl&lt;/code&gt; will be used to verify the Kubernetes/OpenShift environment&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;helm&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;helm&lt;/code&gt; will be used to install the CSM for Observability helm chart&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;jq&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;jq&lt;/code&gt; will be used to parse the CSM for Authorization configuration file during installation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;installer-usage&#34;&gt;Installer Usage&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;[user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh --help
+
+Help for ./karavi-observability-install.sh
+
+Usage: ./karavi-observability-install.sh mode options...
+Mode:
+  install                                                     Installs Karavi Observability and enables Karavi Authorization if already installed
+  enable-authorization                                        Updates existing installation of Karavi Observability with Karavi Authorization
+Options:
+  Required
+  --namespace[=]&amp;lt;namespace&amp;gt;                                   Namespace where Karavi Observability will be installed
+  Optional
+  --auth-image-addr                                           Docker registry location of the Karavi Authorization sidecar proxy image
+  --auth-proxy-host                                           Host address of the Karavi Authorization proxy server
+  --csi-powerflex-namespace[=]&amp;lt;csi powerflex namespace&amp;gt;       Namespace where CSI PowerFlex is installed, default is &#39;vxflexos&#39;
+  --set-file                                                  Set values from files used during helm installation (can be specified multiple times)
+  --skip-verify                                               Skip verification of the environment
+  --values[=]&amp;lt;values.yaml&amp;gt;                                    Values file, which defines configuration values
+  --verbose                                                   Display verbose logging
+  --version[=]&amp;lt;helm chart version&amp;gt;                            Helm chart version to install, default value will be latest
+  --help                                                      Help
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSM for Authorization currently does not support the Observability module for PowerStore.  Therefore setting &lt;code&gt;enable-authorization&lt;/code&gt; is not supported in this case.&lt;/p&gt;
+&lt;h3 id=&#34;executing-the-installer&#34;&gt;Executing the Installer&lt;/h3&gt;
+&lt;p&gt;To perform an online installation of CSM for Observability, the following steps should be performed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Clone the GitHub repository:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@system /home/user]# git clone https://github.com/dell/karavi-observability.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Change to the installer directory:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@system /home/user]# cd karavi-observability/installer
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Execute the installation script.
+The following example will install CSM for Observability into the CSM namespace.&lt;/p&gt;
+&lt;p&gt;A sample values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;. This can be copied into a file named &lt;code&gt;myvalues.yaml&lt;/code&gt; and modified accordingly for the installer command below. Configuration options are outlined in the &lt;a href=&#34;../helm#configuration&#34;&gt;Helm chart deployment section&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
+---------------------------------------------------------------------------------
+&amp;gt; Installing Karavi Observability in namespace karavi on 1.19
+---------------------------------------------------------------------------------
+|
+|- Karavi Observability is not installed                            Success
+|
+|- Karavi Authorization will be enabled during installation
+|
+|- Verifying Kubernetes versions
+  |
+  |--&amp;gt; Verifying minimum Kubernetes version                         Success
+  |
+  |--&amp;gt; Verifying maximum Kubernetes version                         Success
+|
+|- Verifying helm version                                           Success
+|
+|- Configure helm chart repository
+  |
+  |--&amp;gt; Adding helm repository https://dell.github.io/helm-charts    Success
+  |
+  |--&amp;gt; Updating helm repositories                                   Success
+|
+|- Creating namespace karavi                                        Success
+|
+|- Copying Secret from vxflexos to karavi                           Success
+|
+|- Installing CertManager CRDs                                      Success
+|
+|- Installing Karavi Observability helm chart                       Success
+|
+|- Waiting for pods in namespace karavi to be ready                 Success
+|
+|- Copying Secret from vxflexos to karavi                           Success
+|
+|- Enabling Karavi Authorization for Karavi Observability           Success
+|
+|- Waiting for pods in namespace karavi to be ready                 Success
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Offline Installer</title>
+      <link>https://dell.github.io/csm-docs/v1/observability/deployment/offline/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/observability/deployment/offline/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The following instructions can be followed when a Helm chart will be installed in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.&lt;/p&gt;
+&lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
+&lt;p&gt;Multiple Linux-based systems may be required to create and process an offline bundle for use.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One Linux-based system, with internet access, will be used to create the bundle. This involves the user invoking a script that utilizes &lt;code&gt;docker&lt;/code&gt; to pull and save container images to file.&lt;/li&gt;
+&lt;li&gt;One Linux-based system, with access to an image registry, to invoke a script that uses &lt;code&gt;docker&lt;/code&gt; to restore container images from file and push them to a registry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If one Linux system has both internet access and access to an internal registry, that system can be used for both steps.&lt;/p&gt;
+&lt;p&gt;Preparing an offline bundle requires the following utilities:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Dependency&lt;/th&gt;
+&lt;th&gt;Usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt; will be used to pull images from public image registries, tag them, and push them to a private registry.&lt;br&gt;Required on both the system building the offline bundle as well as the system preparing for installation. &lt;br&gt;Tested version is &lt;code&gt;docker&lt;/code&gt; 18.09&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;executing-the-installer&#34;&gt;Executing the Installer&lt;/h3&gt;
+&lt;p&gt;To perform an offline installation of a Helm chart, the following steps should be performed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Build an offline bundle.&lt;/li&gt;
+&lt;li&gt;Unpack the offline bundle and prepare for installation.&lt;/li&gt;
+&lt;li&gt;Perform a Helm installation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;build-the-offline-bundle&#34;&gt;Build the Offline Bundle&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the &lt;code&gt;offline-installer.sh&lt;/code&gt; script to a local Linux system using &lt;code&gt;curl&lt;/code&gt; or &lt;code&gt;wget&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# curl https://raw.githubusercontent.com/dell/karavi-observability/main/installer/offline-installer.sh --output offline-installer.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;or&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# wget -O offline-installer.sh https://raw.githubusercontent.com/dell/karavi-observability/main/installer/offline-installer.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set the file as executable.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# chmod +x offline-installer.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Build the bundle by providing the Helm chart name as the argument:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# ./offline-installer.sh -c dell/karavi-observability
+
+*
+* Adding Helm repository https://dell.github.io/helm-charts
+
+
+*
+* Downloading Helm chart dell/karavi-observability to directory /home/user/offline-karavi-observability-bundle/helm-original
+
+
+*
+* Downloading and saving Docker images
+
+  dellemc/csm-topology:v0.3.0
+  dellemc/csm-metrics-powerflex:v0.3.0
+  otel/opentelemetry-collector:0.9.0
+  nginxinc/nginx-unprivileged:1.18
+
+*
+* Compressing offline-karavi-observability-bundle.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;unpack-the-offline-bundle&#34;&gt;Unpack the Offline Bundle&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the bundle file to another Linux system that has access to the internal Docker registry and that can install the Helm chart. From that Linux system, unpack the bundle.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# tar -xzf offline-karavi-observability-bundle.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Change directory into the new directory created from unpacking the bundle:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# cd offline-karavi-observability-bundle
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Prepare the bundle by providing the internal Docker registry URL.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle]# ./offline-installer.sh -p &amp;lt;my-registry&amp;gt;:5000
+     
+*
+* Loading, tagging, and pushing Docker images to registry &amp;lt;my-registry&amp;gt;:5000/
+
+  dellemc/csm-topology:v0.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v0.3.0
+  dellemc/csm-metrics-powerflex:v0.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v0.3.0
+  otel/opentelemetry-collector:0.9.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/opentelemetry-collector:0.9.0
+  nginxinc/nginx-unprivileged:1.18 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/nginx-unprivileged:1.18
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;perform-helm-installation&#34;&gt;Perform Helm installation&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Change directory to &lt;code&gt;helm&lt;/code&gt; which contains the updated Helm chart directory:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle]# cd helm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install necessary cert-manager CustomResourceDefinitions provided:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl apply --validate=false -f cert-manager.crds.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the CSI Driver Secret(s)&lt;/p&gt;
+&lt;p&gt;Copy the CSI Driver Secret from the namespace where CSI Driver is installed to the namespace where CSM for Observability is to be installed.&lt;/p&gt;
+&lt;p&gt;CSI Driver for PowerFlex:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;CSI Driver for PowerStore&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now that the required images have been made available and the Helm chart&amp;rsquo;s configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart&amp;rsquo;s repository.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Optionally, you could provide your own &lt;a href=&#34;../helm/#configuration&#34;&gt;configurations&lt;/a&gt;. A sample values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm install -n install-namespace app-name karavi-observability
+
+NAME: app-name
+LAST DEPLOYED: Fri Nov  6 08:48:13 2020
+NAMESPACE: install-namespace
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(Optional) The following steps can be performed to enable CSM for Observability to use an existing instance of Authorization for accessing the REST API for the given storage systems.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSM for Authorization currently does not support the Observability module for PowerStore.&lt;/p&gt;
+&lt;p&gt;Copy the proxy Secret into the CSM for Observability namespace:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Use &lt;code&gt;karavictl&lt;/code&gt; to update the Observability module deployment to use the Authorization module. Required parameters are the location of the sidecar-proxy Docker image and the URL of the Authorization module proxy. If the Authorization module was installed using certificates, the flags &lt;code&gt;--insecure=false&lt;/code&gt; and &lt;code&gt;--root-certificate &amp;lt;location-of-root-certificate&amp;gt;&lt;/code&gt; must be also be provided. If certificates were not provided during installation, the flag &lt;code&gt;--insecure=true&lt;/code&gt; must be provided.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secrets,deployments -n [CSM_NAMESPACE] -o yaml | karavictl inject --insecure=false --root-certificate &amp;lt;location-of-root-certificate&amp;gt; --image-addr &amp;lt;sidecar-proxy-image-location&amp;gt; --proxy-host &amp;lt;proxy-host&amp;gt; | kubectl apply -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

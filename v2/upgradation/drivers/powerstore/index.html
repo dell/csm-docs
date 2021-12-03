@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerStore CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/upgradation/drivers/powerstore/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Upgrade PowerStore CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="269">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="303">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -925,7 +941,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#update-driver-from-v12-to-v13-using-helm">Update Driver from v1.2 to v1.3 using Helm</a></li>
+    <li><a href="#update-driver-from-v13-to-v14-using-helm">Update Driver from v1.3 to v1.4 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
   </ul>
 </nav>
@@ -978,14 +994,14 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell EMC PowerStore using Helm or Dell CSI Operator.</p>
-<h2 id="update-driver-from-v12-to-v13-using-helm">Update Driver from v1.2 to v1.3 using Helm</h2>
+<h2 id="update-driver-from-v13-to-v14-using-helm">Update Driver from v1.3 to v1.4 using Helm</h2>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the v1.3 driver.</p>
+<p>Run <code>git clone https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the v1.4 driver.</p>
 </li>
 <li>
-<p>Edit <code>helm/config.yaml</code> file and configure connection information for your PowerStore arrays changing following parameters:</p>
+<p>Edit <code>helm/config.yaml</code> file and configure connection information for your PowerStore arrays changing the following parameters:</p>
 <ul>
 <li><em>endpoint</em>: defines the full URL path to the PowerStore API.</li>
 <li><em>username</em>, <em>password</em>: defines credentials for connecting to array.</li>
@@ -999,7 +1015,7 @@
 <li>
 <p>(optional) create new storage classes using ones from <code>helm/samples/storageclass</code> folder as an example and apply them to the Kubernetes cluster by running <code>kubectl create -f &lt;path_to_storageclass_file&gt;</code></p>
 <blockquote>
-<p>Storage classes created by v1.2 driver will not be deleted, v1.3 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.2 in your cluster then be sure to include same array you have used for v1.2 driver and make it default in <code>config.yaml</code> file.</p>
+<p>Storage classes created by v1.3 driver will not be deleted, v1.4 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.3 in your cluster then be sure to include the same array you have used for the v1.3 driver and make it default in the <code>config.yaml</code> file.</p>
 </blockquote>
 </li>
 <li>
@@ -1013,7 +1029,21 @@
 </li>
 </ol>
 <h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
-<p>Follow the instructions for upgrade on the Dell CSI Operator <a href="https://github.com/dell/dell-csi-operator">GitHub</a> page.</p>
+<ol>
+<li>
+<p>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a>.</p>
+</li>
+<li>
+<p>Execute <code>bash scripts/install.sh --upgrade</code>
+This command will install the latest version of the operator.</p>
+</li>
+</ol>
+<blockquote>
+<p>Note: Dell CSI Operator version 1.4.0 and higher would install to the &lsquo;dell-csi-operator&rsquo; namespace by default.</p>
+</blockquote>
+<ol start="3">
+<li>To upgrade the drive, refer <a href="./../../../installation/operator/#update-csi-drivers">here</a>.</li>
+</ol>
 
 	
 	

@@ -87,7 +87,7 @@
 &lt;img src=&#34;../driver1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;After clicking &amp;ldquo;Create CSIUnity&amp;rdquo; option in above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the &lt;a href=&#34;../../installation/operator/#driver-install-via-dell-csi-operator&#34;&gt;driver install pages for the Dell CSI Operator&lt;/a&gt; for information on the parameters.
+&lt;p&gt;After clicking &amp;ldquo;Create CSIUnity&amp;rdquo; option in above snippet, you can set relevant parameters in your yaml file, as shown below.  Refer to the &lt;a href=&#34;../../installation/operator/#install-csi-driver&#34;&gt;driver install pages for the Dell CSI Operator&lt;/a&gt; for information on the parameters.
 &lt;img src=&#34;../driver2.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;

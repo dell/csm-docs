@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/installation/operator/powermax/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing PowerMax CSI Driver via Operator
 ">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="1235">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="1196">
 
 
 
@@ -95,13 +95,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -154,7 +154,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -307,6 +307,14 @@
   <ul>
     <li class="collapse show" id="csm-docsv3installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3installationoperatorinstalldriver" href="/csm-docs/v3/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -500,6 +508,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriversoperator" href="/csm-docs/v3/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriverspowerflex" href="/csm-docs/v3/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -624,6 +640,14 @@
   <ul>
     <li class="collapse " id="csm-docsv3troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3troubleshootingoperator" href="/csm-docs/v3/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -798,6 +822,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/csm-docs/v3/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -950,10 +999,10 @@
 <p>The CSI Driver for Dell EMC PowerMax can be installed via the Dell CSI Operator.</p>
 <p>To deploy the Operator, follow the instructions available <a href="../">here</a>.</p>
 <p>There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.</p>
-<p>Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
+<p>Kubernetes Operators make it easy to deploy and manage entire the lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
 <h3 id="prerequisite">Prerequisite</h3>
 <h4 id="create-secret-for-client-side-tls-verification-optional">Create secret for client-side TLS verification (Optional)</h4>
-<p>Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. Please refer detailed documentation on how to create this secret <a href="../../helm/powermax#certificate-validation-for-unisphere-rest-api-calls">here</a>.</p>
+<p>Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret <a href="../helm/powermax#certificate-validation-for-unisphere-rest-api-calls">here</a>.</p>
 <h3 id="install-driver">Install Driver</h3>
 <ol>
 <li>Create namespace:
@@ -980,7 +1029,7 @@ echo -n &quot;mypassword&quot; | base64
 # If mychapsecret is the ISCSI CHAP secret
 echo -n &quot;mychapsecret&quot; | base64
 
-</code></pre><p>Run <code>kubectl create -f powermax-creds.yaml</code> command to create the secret.</p>
+</code></pre><p>Run the <code>kubectl create -f powermax-creds.yaml</code> command to create the secret.</p>
 </li>
 <li>Create a Custom Resource (CR) for PowerMax using the sample files provided <a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a>.</li>
 <li>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerMax driver and their default values:
@@ -996,7 +1045,7 @@ echo -n &quot;mychapsecret&quot; | base64
 <tbody>
 <tr>
 <td>replicas</td>
-<td>Controls the amount of controller Pods you deploy. If controller Pods are greater than number of available nodes, excess Pods will become stuck in pending. Defaults is 2 which allows for Controller high availability.</td>
+<td>Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability.</td>
 <td>Yes</td>
 <td>2</td>
 </tr>
@@ -1008,7 +1057,7 @@ echo -n &quot;mychapsecret&quot; | base64
 </tr>
 <tr>
 <td>X_CSI_K8S_CLUSTER_PREFIX</td>
-<td>Define a prefix that is appended onto all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters</td>
+<td>Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters</td>
 <td>Yes</td>
 <td>XYZ</td>
 </tr>
@@ -1050,7 +1099,7 @@ echo -n &quot;mychapsecret&quot; | base64
 </tr>
 <tr>
 <td>X_CSI_POWERMAX_DRIVER_NAME</td>
-<td>Set custom CSI driver name. For more details on this feature review related <a href="../../../features/powermax/#custom-driver-name-experimental-feature">documentation</a></td>
+<td>Set custom CSI driver name. For more details on this feature see the related <a href="../../../features/powermax/#custom-driver-name-experimental-feature">documentation</a></td>
 <td>No</td>
 <td>-</td>
 </tr>
@@ -1062,7 +1111,7 @@ echo -n &quot;mychapsecret&quot; | base64
 </tr>
 <tr>
 <td>X_CSI_IG_MODIFY_HOSTNAME</td>
-<td>Determines if node plugin can rename any existing host on the PowerMax array. Use it with the node name template to rename the existing hosts</td>
+<td>Determines if the node plugin can rename any existing host on the PowerMax array. Use it with the node name template to rename the existing hosts</td>
 <td>No</td>
 <td>false</td>
 </tr>
@@ -1080,7 +1129,7 @@ echo -n &quot;mychapsecret&quot; | base64
 </tr>
 <tr>
 <td>X_CSI_POWERMAX_ISCSI_ENABLE_CHAP</td>
-<td>Enable ISCSI CHAP authentication. For more details on this feature review the related <a href="../../../features/powermax/#iscsi-chap">documentation</a></td>
+<td>Enable ISCSI CHAP authentication. For more details on this feature see the related <a href="../../../features/powermax/#iscsi-chap">documentation</a></td>
 <td>No</td>
 <td>false</td>
 </tr>
@@ -1116,13 +1165,13 @@ echo -n &quot;mychapsecret&quot; | base64
 </tr>
 <tr>
 <td>allowVolumeExpansion</td>
-<td>After the allowed topology is modified in storage class, pods/and volumes will always be scheduled on nodes that have access to the storage</td>
+<td>After the allowed topology is modified in storage class, Pods/and volumes will always be scheduled on nodes that have access to the storage</td>
 <td>No</td>
 <td>false</td>
 </tr>
 <tr>
 <td>allowedTopologies:key</td>
-<td>This is to enable topology to allow pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature review the related <a href="../../../features/powermax#topology-support">documentation</a></td>
+<td>This is to enable topology to allow Pods/and volumes to always be scheduled on nodes that have access to the storage. You need to specify the PowerMax array ID and append .fc or .iscsi at the end of it to specify a protocol. For more details on this feature see the related <a href="../../../features/powermax#topology-support">documentation</a></td>
 <td>No</td>
 <td>&ldquo;000000000001&rdquo;</td>
 </tr>
@@ -1132,12 +1181,12 @@ echo -n &quot;mychapsecret&quot; | base64
 <li>Execute the following command to create PowerMax custom resource:<code>kubectl create -f &lt;input_sample_file.yaml&gt;</code>. The above command will deploy the CSI-PowerMax driver.</li>
 </ol>
 <h3 id="csi-powermax-reverseproxy">CSI PowerMax ReverseProxy</h3>
-<p>CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature review the related <a href="../../../features/powermax#csi-powermax-reverse-proxy">documentation</a>.</p>
-<p>When you install CSI PowerMax ReverseProxy, dell-csi-operator is going to create a Deployment and ClusterIP service as part of the installation</p>
-<p><strong>Note</strong> - If you wish to use the ReverseProxy with CSI PowerMax driver, the ReverseProxy service should be created before you install the CSIPowerMax driver.</p>
+<p>CSI PowerMax ReverseProxy is an optional component which can be installed along with the CSI PowerMax driver. For more details on this feature see the related <a href="../../../features/powermax#csi-powermax-reverse-proxy">documentation</a>.</p>
+<p>When you install CSI PowerMax ReverseProxy, dell-csi-operator will create a Deployment and ClusterIP service as part of the installation</p>
+<p><strong>Note</strong> - To use the ReverseProxy with CSI PowerMax driver, the ReverseProxy service should be created before you install the CSIPowerMax driver.</p>
 <h4 id="pre-requisites">Pre-requisites</h4>
 <p>Create a TLS secret which holds a SSL certificate and a private key which is required by the reverse proxy server.
-Use a tool like <code>openssl</code> to generate this secret using the example below:</p>
+Use a tool such as <code>openssl</code> to generate this secret using the example below:</p>
 <pre><code>    openssl genrsa -out tls.key 2048
     openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
     kubectl create secret -n powermax tls revproxy-certs --cert=tls.crt --key=tls.key
@@ -1147,36 +1196,36 @@ Use a tool like <code>openssl</code> to generate this secret using the example b
 <strong>mode</strong> : This value is set to <code>Linked</code> by default. Do not change this value<br>
 <strong>linkConfig</strong> : This section contains the configuration of the <code>Linked</code> mode<br>
 <strong>primary</strong> : This section holds details for the primary Unisphere which the Reverse Proxy will connect to
-<strong>backup</strong> : This optional section holds details for a backup Unisphere which the Reverse Proxy can connect to if Primary Unisphere is unreachable<br>
+<strong>backup</strong> : This optional section holds details for a backup Unisphere which the Reverse Proxy can connect to if the primary Unisphere is unreachable<br>
 <strong>url</strong> : URL of the Unisphere server
 <strong>skipCertificateValidation</strong>: This setting determines if the client-side Unisphere certificate validation is required
 <strong>certSecret</strong>: Secret name which holds the CA certificates which was used to sign Unisphere SSL certificates. Mandatory if skipCertificateValidation is set to <code>false</code></p>
 <p>Here is a sample manifest with each field annotated. A copy of this manifest is provided in the <code>samples</code> folder</p>
-<pre><code>apiVersion: storage.dell.com/v1
-kind: CSIPowerMaxRevProxy
-metadata:
-  name: powermax-reverseproxy # &lt;- Name of the CSIPowerMaxRevProxy object
-  namespace: test-powermax # &lt;- Set the namespace to where you will install the CSI PowerMax driver
-spec:
-  # Image for CSI PowerMax ReverseProxy
-  image: dellemc/csipowermax-reverseproxy:v1.0.0.000R # &lt;- CSI PowerMax Reverse Proxy image 
-  imagePullPolicy: Always
-  # TLS secret which contains SSL certificate and private key for the Reverse Proxy server
-  tlsSecret: csirevproxy-tls-secret
-  config:
-    # Mode for the proxy - only supported mode for now is &quot;Linked&quot;
-    mode: Linked
-    linkConfig:
-      primary:
-        url: https://0.0.0.0:8443 #Unisphere URL
-        skipCertificateValidation: true # This setting determines if client side Unisphere certificate validation is to be skipped
-        certSecret: &quot;&quot; # Provide this value if skipCertificateValidation is set to false
-      backup: # This is an optional field and lets you configure a backup unisphere which can be used by proxy server
-        url: https://0.0.0.0:8443 #Unisphere URL
-        skipCertificateValidation: true
-</code></pre><h4 id="installation">Installation</h4>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>storage.dell.com/v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>CSIPowerMaxRevProxy<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>powermax-reverseproxy<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># &lt;- Name of the CSIPowerMaxRevProxy object</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>test-powermax<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># &lt;- Set the namespace to where you will install the CSI PowerMax driver</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Image for CSI PowerMax ReverseProxy</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>dellemc/csipowermax-reverseproxy<span style="color:#000;font-weight:bold">:</span>v1<span style="color:#0000cf;font-weight:bold">.0.0</span>.000R<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># &lt;- CSI PowerMax Reverse Proxy image </span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">imagePullPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Always<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># TLS secret which contains SSL certificate and private key for the Reverse Proxy server</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">tlsSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>csirevproxy-tls-secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Mode for the proxy - only supported mode for now is &#34;Linked&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Linked<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">linkConfig</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">primary</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">url</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//<span style="color:#0000cf;font-weight:bold">0.0.0.0</span><span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#Unisphere URL</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># This setting determines if client side Unisphere certificate validation is to be skipped</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">certSecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Provide this value if skipCertificateValidation is set to false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">backup</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># This is an optional field and lets you configure a backup unisphere which can be used by proxy server</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">url</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>https<span style="color:#000;font-weight:bold">:</span>//<span style="color:#0000cf;font-weight:bold">0.0.0.0</span><span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">8443</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#Unisphere URL</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><h4 id="installation">Installation</h4>
 <p>Copy the sample file - <code>powermax_reverseproxy.yaml</code> from the <code>samples</code> folder or use the sample available in the <code>OperatorHub</code> UI<br>
-Edit and input all required parameters and then use the <code>OperatorHub</code> UI or run the following command to install the CSI PowerMax Reverse Proxy service</p>
+Edit and input all required parameters and then use the <code>OperatorHub</code> UI or run the following command to install the CSI PowerMax Reverse Proxy service:</p>
 <pre><code>kubectl create -f powermax_reverseproxy.yaml
 </code></pre>
 <p>You can query for the deployment and service created as part of the installation using the following commands:</p>

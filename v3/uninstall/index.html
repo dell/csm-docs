@@ -87,13 +87,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -113,7 +113,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -146,7 +146,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -299,6 +299,14 @@
   <ul>
     <li class="collapse " id="csm-docsv3installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3installationoperatorinstalldriver" href="/csm-docs/v3/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -492,6 +500,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriversoperator" href="/csm-docs/v3/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriverspowerflex" href="/csm-docs/v3/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -616,6 +632,14 @@
   <ul>
     <li class="collapse " id="csm-docsv3troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3troubleshootingoperator" href="/csm-docs/v3/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -790,6 +814,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/csm-docs/v3/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -914,8 +963,8 @@
      
 	
 	<h2 id="uninstall-a-dell-csi-driver-installed-via-helm">Uninstall a Dell CSI driver installed via Helm</h2>
-<p>To uninstall a driver, the <code>csi-uninstall.sh</code> script provides a handy wrapper around the <code>helm</code> utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the PowerScale driver:</p>
-<pre><code>./csi-uninstall.sh --namespace isilon/&lt;driver-namespace&gt;
+<p>To uninstall a driver, the <code>csi-uninstall.sh</code> script provides a handy wrapper around the <code>helm</code> utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the driver:</p>
+<pre><code>./csi-uninstall.sh --namespace &lt;driver-namespace&gt;
 </code></pre><p>For usage information:</p>
 <pre><code>[dell-csi-helm-installer]# ./csi-uninstall.sh -h
 Help for ./csi-uninstall.sh
@@ -930,9 +979,9 @@ Options:
 </code></pre><h2 id="uninstall-a-dell-csi-driver-installed-via-dell-csi-operator">Uninstall a Dell CSI driver installed via Dell CSI Operator</h2>
 <p>For uninstalling any CSI drivers deployed the Dell CSI Operator, just delete the respective Custom Resources.<br>
 This can be done using OperatorHub GUI by deleting the CR or via kubectl.</p>
-<p>For example - To uninstall a PowerFlex driver installed via the operator, delete the Custom Resource(CR)</p>
+<p>For example - To uninstall the driver installed via the operator, delete the Custom Resource(CR)</p>
 <pre><code># Replace driver-name and driver-namespace with their respective values
-$ kubectl delete vxflexos/&lt;driver-name&gt; -n &lt;driver-namespace&gt;
+kubectl delete &lt;driver-name&gt; -n &lt;driver-namespace&gt;
 </code></pre>
         <div class="section-index">
     
@@ -941,6 +990,14 @@ $ kubectl delete vxflexos/&lt;driver-name&gt; -n &lt;driver-namespace&gt;
     
     
     <hr class="panel-line">
+        
+            
+        
+            
+        
+            
+        
+            
         
             
         
