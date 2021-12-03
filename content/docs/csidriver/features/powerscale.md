@@ -403,7 +403,8 @@ allowedTopologies:
       - key: csi-isilon.dellemc.com/<ISILON_IP>
         values:
           - csi-isilon.dellemc.com
-
+# specify additional mount options for when a Persistent Volume is being mounted on a node.
+# To mount volume with NFSv4, specify mount option vers=4. Make sure NFSv4 is enabled on the Isilon Cluster.
 mountOptions: ["<mountOption1>", "<mountOption2>", ..., "<mountOptionN>"]
 ```
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
