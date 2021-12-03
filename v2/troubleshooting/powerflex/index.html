@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting PowerFlex Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/troubleshooting/powerflex/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Troubleshooting PowerFlex Driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="287">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="314">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -980,31 +996,35 @@
 <tbody>
 <tr>
 <td>The installation fails with the following error message: <br /><code>Node xxx does not have the SDC installed</code></td>
-<td>Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that needs to pull an image of the driver.</td>
+<td>Install the PowerFlex SDC on listed nodes. The SDC must be installed on all the nodes that need to pull an image of the driver.</td>
 </tr>
 <tr>
 <td>When you run the command <code>kubectl describe pods vxflexos-controller-0 –n vxflexos</code>, the system indicates that the driver image could not be loaded.</td>
 <td>- If on Kubernetes, edit the <code>daemon.json</code> file found in the registry location and add <br /><code>{ &quot;insecure-registries&quot; :[ &quot;hostname.cloudapp.net:5000&quot; ] }</code><br />- If on OpenShift, run the command <code>oc edit image.config.openshift.io/cluster</code> and add registries to yaml file that is displayed when you run the command.</td>
 </tr>
 <tr>
-<td>The <code>kubectl logs -n vxflexos vxflexos-controller-0</code> driver logs shows that the driver is not authenticated.</td>
+<td>The <code>kubectl logs -n vxflexos vxflexos-controller-0</code> driver logs show that the driver is not authenticated.</td>
 <td>Check the username, password, and the gateway IP address for the PowerFlex system.</td>
 </tr>
 <tr>
-<td>The <code>kubectl logs vxflexos-controller-0 -n vxflexos driver</code> logs shows that the system ID is incorrect.</td>
+<td>The <code>kubectl logs vxflexos-controller-0 -n vxflexos driver</code> logs show that the system ID is incorrect.</td>
 <td>Use the <code>get_vxflexos_info.sh</code> to find the correct system ID. Add the system ID to <code>myvalues.yaml</code> script.</td>
 </tr>
 <tr>
 <td>Defcontext mount option seems to be ignored, volumes still are not being labeled correctly.</td>
-<td>Ensure SElinux is enabled on worker node, and ensure your container run time manager is properly configured to be utilized with SElinux.</td>
+<td>Ensure SElinux is enabled on a worker node, and ensure your container run time manager is properly configured to be utilized with SElinux.</td>
 </tr>
 <tr>
 <td>Mount options that interact with SElinux are not working (like defcontext).</td>
 <td>Check that your container orchestrator is properly configured to work with SElinux.</td>
 </tr>
 <tr>
-<td>Installation of the driver on Kubernetes v1.20 fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
-<td>Kubernetes v1.20 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20 (v1 snapshots) install CRDs from v4.0.0, see the <a href="../../docs/installation/helm/powerflex.md#volume-snapshot-requirements">Volume Snapshot Requirements</a></td>
+<td>Installation of the driver on Kubernetes v1.20/v1.21 fails with the following error: <br /><code>Error: unable to build kubernetes objects from release manifest: unable to recognize &quot;&quot;: no matches for kind &quot;VolumeSnapshotClass&quot; in version &quot;snapshot.storage.k8s.io/v1&quot;</code></td>
+<td>Kubernetes v1.20/v1.21 requires v1 version of snapshot CRDs.  If on Kubernetes 1.20/1.21 (v1 snapshots) install CRDs from v4.0.0, see the <a href="../../installation/helm/powerflex/#optional-volume-snapshot-requirements">Volume Snapshot Requirements</a></td>
+</tr>
+<tr>
+<td>Driver pods are not ready, with the error message: <code>MountVolume.SetUp failed for volume &quot;log-config&quot; : configmap &quot;driver-config&quot; not found</code></td>
+<td>Create the configmap: <code> kubectl create -f logConfig.yaml</code></td>
 </tr>
 </tbody>
 </table>

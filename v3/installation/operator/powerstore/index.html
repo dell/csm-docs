@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/installation/operator/powerstore/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing PowerStore CSI Driver via Operator
 ">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="434">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="572">
 
 
 
@@ -95,13 +95,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -154,7 +154,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -307,6 +307,14 @@
   <ul>
     <li class="collapse show" id="csm-docsv3installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3installationoperatorinstalldriver" href="/csm-docs/v3/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -500,6 +508,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriversoperator" href="/csm-docs/v3/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriverspowerflex" href="/csm-docs/v3/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -624,6 +640,14 @@
   <ul>
     <li class="collapse " id="csm-docsv3troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3troubleshootingoperator" href="/csm-docs/v3/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -798,6 +822,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/csm-docs/v3/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -947,33 +996,48 @@
 	<h2 id="installing-powerstore-csi-driver-via-operator">Installing PowerStore CSI Driver via Operator</h2>
 <p>The CSI Driver for Dell EMC PowerStore can be installed via the Dell CSI Operator.</p>
 <p>To deploy the Operator, follow the instructions available <a href="../">here</a>.</p>
-<p>There are sample manifests provided which can be edited to do an easy installation of the driver. Please note that the deployment of the driver using the operator doesn’t use any Helm charts and the installation &amp; configuration parameters will be slightly different from the ones specified via the Helm installer.</p>
+<p>There are sample manifests provided which can be edited to do an easy installation of the driver.
+Note: The deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.</p>
 <p>Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
 <h3 id="install-driver">Install Driver</h3>
 <ol>
-<li>Create namespace:
-Run <code>kubectl create namespace &lt;driver-namespace&gt;</code> using the desired name to create the namespace.</li>
-<li>Create PowerStore credentials:
-Create a file called powerstore-creds.yaml with the following content
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Secret<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>powerstore-creds<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#8f5902;font-style:italic"># Replace driver-namespace with the namespace where driver is being deployed</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;driver-namespace<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">     type: Opaque</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#8f5902;font-style:italic"># set username to the base64 encoded username</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;base64<span style="color:#f8f8f8;text-decoration:underline"> </span>username<span style="color:#8f5902;font-style:italic">&gt;
-</span><span style="color:#8f5902;font-style:italic">       # set password to the base64 encoded password</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;base64<span style="color:#f8f8f8;text-decoration:underline"> </span>password&gt;<span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>Replace the values for the username and password parameters. These values can be optioned using base64 encoding as described in the following example:</p>
-<pre><code>echo -n &quot;myusername&quot; | base64
-echo -n &quot;mypassword&quot; | base64
-</code></pre><p>Run <code>kubectl create -f powerstore-creds.yaml</code> command to create the secret.</p>
+<li>
+<p>Create namespace:</p>
+<p>Run <code>kubectl create namespace &lt;driver-namespace&gt;</code> using the desired name to create the namespace.</p>
 </li>
-<li>Create a Custom Resource (CR) for PowerStore using the sample files provided    <a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a>.</li>
-<li>Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
+<li>
+<p>Create PowerStore array connection config:</p>
+<p>Create a file called <code>config.yaml</code> with the following content</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">arrays</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span>- <span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://10.0.0.1/api/rest&#34;</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#8f5902;font-style:italic"># full URL path to the PowerStore API</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;user&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                          </span><span style="color:#8f5902;font-style:italic"># username for connecting to API</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                      </span><span style="color:#8f5902;font-style:italic"># password for connecting to API</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">insecure</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">                            </span><span style="color:#8f5902;font-style:italic"># use insecure connection or not</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">default</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">                             </span><span style="color:#8f5902;font-style:italic"># treat current array as a default (would be used by storage classes without arrayIP parameter)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">block-protocol</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;auto&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                    </span><span style="color:#8f5902;font-style:italic"># what SCSI transport protocol use on node side (FC, ISCSI, None, or auto)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">nas-name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;nas-server&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                    </span><span style="color:#8f5902;font-style:italic"># what NAS should be used for NFS volumes</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>Change the parameters with relevant values for your PowerStore array.</p>
+<p>Add more blocks similar to above for each PowerStore array if necessary.</p>
+</li>
+<li>
+<p>Create Kubernetes secret:</p>
+<p>Create a file called <code>secret.yaml</code> in same folder as <code>config.yaml</code> with following content</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Secret<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>powerstore-config<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>&lt;driver-namespace&gt;<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Opaque<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>CONFIG_YAML<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>Combine both files and create Kubernetes secret by running following command:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed <span style="color:#4e9a06">&#34;s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g&#34;</span> secret.yaml <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
+</code></pre></div></li>
+<li>
+<p>Create a Custom Resource (CR) for PowerStore using the sample files provided    <a href="https://github.com/dell/dell-csi-operator/tree/master/samples">here</a>.</p>
+</li>
+<li>
+<p>Users must configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:</p>
 <table>
 <thead>
 <tr>
@@ -986,27 +1050,21 @@ echo -n &quot;mypassword&quot; | base64
 <tbody>
 <tr>
 <td>replicas</td>
-<td>Controls the amount of controller pods you deploy. If controller pods is greater than number of available nodes, excess pods will become stuck in pending. Defaults is 2 which allows for Controller high availability.</td>
+<td>Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be pending state till new nodes are available for scheduling. Default is 2 which allows for Controller high availability.</td>
 <td>Yes</td>
 <td>2</td>
+</tr>
+<tr>
+<td>namespace</td>
+<td>Specifies namespace where the drive will be installed</td>
+<td>Yes</td>
+<td>&ldquo;test-powerstore&rdquo;</td>
 </tr>
 <tr>
 <td><em><strong>Common parameters for node and controller</strong></em></td>
 <td></td>
 <td></td>
 <td></td>
-</tr>
-<tr>
-<td>X_CSI_POWERSTORE_ENDPOINT</td>
-<td>Must provide a PowerStore HTTPS API url</td>
-<td>Yes</td>
-<td>https://127.0.0.1/api/rest</td>
-</tr>
-<tr>
-<td>X_CSI_TRANSPORT_PROTOCOL</td>
-<td>Choose what transport protocol to use (ISCSI, FC, auto or None)</td>
-<td>Yes</td>
-<td>auto</td>
 </tr>
 <tr>
 <td>X_CSI_POWERSTORE_NODE_NAME_PREFIX</td>
@@ -1016,15 +1074,51 @@ echo -n &quot;mypassword&quot; | base64
 </tr>
 <tr>
 <td>X_CSI_FC_PORTS_FILTER_FILE_PATH</td>
-<td>To set path to the file which provide list of WWPN which should be used by the driver for FC connection on this node</td>
+<td>To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node</td>
 <td>No</td>
 <td>&ldquo;/etc/fc-ports-filter&rdquo;</td>
+</tr>
+<tr>
+<td><em><strong>Controller parameters</strong></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>X_CSI_POWERSTORE_EXTERNAL_ACCESS</td>
+<td>allows specifying  additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries</td>
+<td>No</td>
+<td>&quot; &quot;</td>
+</tr>
+<tr>
+<td><em><strong>Node parameters</strong></em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>X_CSI_POWERSTORE_ENABLE_CHAP</td>
+<td>Set to true if you want to enable iSCSI CHAP feature</td>
+<td>No</td>
+<td>false</td>
 </tr>
 <tr>
 <td><em><strong>StorageClass parameters</strong></em></td>
 <td></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td>FsType</td>
+<td>Specifies what filesystem type driver should use, possible variants <code>ext4</code>, <code>xfs</code>, <code>nfs</code></td>
+<td>No</td>
+<td>&ldquo;ext4&rdquo;</td>
+</tr>
+<tr>
+<td>arrayIP</td>
+<td>Specifies what array driver should use to provision volumes</td>
+<td>No</td>
+<td>&ldquo;default&rdquo;</td>
 </tr>
 <tr>
 <td>allowedTopologies:key</td>
@@ -1035,7 +1129,12 @@ echo -n &quot;mypassword&quot; | base64
 </tbody>
 </table>
 </li>
-<li>Execute the following command to create PowerStore custom resource:<code>kubectl create -f &lt;input_sample_file.yaml&gt;</code>. The above command will deploy the CSI-PowerStore driver.</li>
+<li>
+<p>Execute the following command to create PowerStore custom resource:<code>kubectl create -f &lt;input_sample_file.yaml&gt;</code>. The above command will deploy the CSI-PowerStore driver.</p>
+<ul>
+<li>After that the driver should be installed, you can check the condition of driver pods by running <code>kubectl get all -n &lt;driver-namespace&gt;</code></li>
+</ul>
+</li>
 </ol>
 
 	

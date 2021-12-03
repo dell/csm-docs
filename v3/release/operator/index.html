@@ -12,11 +12,11 @@
 <meta property="og:description" content="Release notes for Dell CSI Operator" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/release/operator/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Operator">
 <meta itemprop="description" content="Release notes for Dell CSI Operator">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="146">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="227">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -304,6 +304,14 @@
   <ul>
     <li class="collapse " id="csm-docsv3installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3installationoperatorinstalldriver" href="/csm-docs/v3/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -497,6 +505,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriversoperator" href="/csm-docs/v3/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriverspowerflex" href="/csm-docs/v3/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -621,6 +637,14 @@
   <ul>
     <li class="collapse " id="csm-docsv3troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3troubleshootingoperator" href="/csm-docs/v3/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -795,6 +819,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/csm-docs/v3/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -876,7 +925,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---dell-csi-operator-120">Release Notes - Dell CSI Operator 1.2.0</a>
+    <li><a href="#release-notes---dell-csi-operator-130">Release Notes - Dell CSI Operator 1.3.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -934,13 +983,14 @@
 	<h1>Operator</h1>
 
 	       
-	<h2 id="release-notes---dell-csi-operator-120">Release Notes - Dell CSI Operator 1.2.0</h2>
+	<h2 id="release-notes---dell-csi-operator-130">Release Notes - Dell CSI Operator 1.3.0</h2>
 <blockquote>
-<p><strong>Note:</strong> There is a delay in Operator 1.2.0 certification hence it will not be visible in Red Hat OpenShift certified catalogue immediately after release on GitHub.</p>
+<p><strong>Note:</strong> There will be a delay in certification of Dell CSI Operator 1.3.0 and it will not be available for download from the Red Hat OpenShift certified catalog. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.3.0 release.</p>
 </blockquote>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
-<li>Added support for OpenShift 4.5, 4.6 with RHEL and CoreOS worker nodes</li>
+<li>Added support for OpenShift 4.6, 4.7 with RHEL and CoreOS worker nodes</li>
+<li>Added support for Upstream Kubernetes cluster v1.18, v1.19, v1.20</li>
 <li>Migrated to Operator SDK 1.0</li>
 <li>Added support for CSI Ephemeral Inline Volumes</li>
 <li>Changed driver controller installation from <em>StatefulSet</em> to <em>Deployment</em></li>
@@ -951,7 +1001,20 @@
 <h3 id="fixed-issues">Fixed Issues</h3>
 <p>There are no fixed issues in this release.</p>
 <h3 id="known-issues">Known Issues</h3>
-<p>There are no Known issues in this release.</p>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Workaround</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A warning message will be listed in the events for StorageClasses if the driver is not upgraded after an operator upgrade. This happens because of the fix provided by Kubernetes in 1.20 for one of the known <a href="https://github.com/kubernetes/kubernetes/issues/65200">issue</a>.</td>
+<td>StorageClasses will get updated automatically after 45 mins if there is no driver upgrade, after an operator upgrade.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="support">Support</h3>
 <p>The Dell CSI Operator image is available on Dockerhub and is officially supported by Dell EMC.
 For any CSI operator and driver issues, questions or feedback, join the <a href="https://www.dell.com/community/Containers/bd-p/Containers">Dell EMC Container community</a>.</p>

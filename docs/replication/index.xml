@@ -521,8 +521,10 @@ and managing replicated resources between multiple Kubernetes clusters.&lt;/p&gt
 clusters, you can do that using &lt;code&gt;cluster add&lt;/code&gt; command&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl cluster add -f &amp;lt;config-file&amp;gt; -n &amp;lt;name&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can view clusters that are currently being managed by &lt;code&gt;repctl&lt;/code&gt;
-by running &lt;code&gt;cluster list&lt;/code&gt; command&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl cluster list
+by running &lt;code&gt;cluster get&lt;/code&gt; command&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl cluster get
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Or, alternatively, using &lt;code&gt;get cluster&lt;/code&gt; command&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl get cluster
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Also, you can inject information about all of your current clusters as
 config maps into the same clusters, so it can be used by &lt;code&gt;dell-csi-replicator&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl cluster inject
@@ -530,13 +532,13 @@ config maps into the same clusters, so it can be used by &lt;code&gt;dell-csi-re
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl cluster inject --use-sa
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;querying-resources&#34;&gt;Querying Resources&lt;/h3&gt;
 &lt;p&gt;After adding clusters you want to manage with &lt;code&gt;repctl&lt;/code&gt; you can query
-resources from multiple clusters at once using &lt;code&gt;list&lt;/code&gt; command.&lt;/p&gt;
+resources from multiple clusters at once using &lt;code&gt;get&lt;/code&gt; command.&lt;/p&gt;
 &lt;p&gt;For example, this command will list all storage classes in all clusters
 that currently are being managed by &lt;code&gt;repctl&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl list storageclasses --all
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl get storageclasses --all
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you want to query some particular clusters you can do that by specifying
 &lt;code&gt;clusters&lt;/code&gt; flag&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl list pv --clusters cluster-1,cluster-3
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl get pv --clusters cluster-1,cluster-3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All other different flags for querying resources you can check using
 included into the tool help flag &lt;code&gt;-h&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;creating-resources&#34;&gt;Creating Resources&lt;/h3&gt;
@@ -571,35 +573,39 @@ Name of StorageClass resource that created as &amp;ldquo;target&amp;rdquo; will 
 &lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can be used to execute various replication actions on ReplicationGroups.&lt;/p&gt;
 &lt;h4 id=&#34;failover&#34;&gt;Failover&lt;/h4&gt;
 &lt;p&gt;This command will perform a planned &lt;code&gt;failover&lt;/code&gt; to a cluster or an RG.&lt;/p&gt;
-&lt;p&gt;When working with multiple clusters, you can perform failover by specifying the target &lt;em&gt;cluster ID&lt;/em&gt;. To do that use &lt;code&gt;--to-cluster &amp;lt;targetClusterID&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failover --to-cluster cluster2
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform failover by specifying the target &lt;em&gt;replication group ID&lt;/em&gt;. To do that use &lt;code&gt;--to-rg &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl failover --to-rg &amp;lt;rg-id&amp;gt;
+&lt;p&gt;When working with multiple clusters, you can perform failover by specifying the target &lt;em&gt;cluster ID&lt;/em&gt;. To do that use &lt;code&gt;--target &amp;lt;targetClusterID&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failover --target &amp;lt;tgt-cluster-id&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform failover by specifying the target &lt;em&gt;replication group ID&lt;/em&gt;. To do that use &lt;code&gt;--target &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failover --target &amp;lt;tgt-rg-id&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In both scenarios &lt;code&gt;repctl&lt;/code&gt; will patch the CR at the source site with action &lt;strong&gt;FAILOVER_REMOTE&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;You can also provide &lt;code&gt;--unplanned&lt;/code&gt; parameter, then &lt;code&gt;repctl&lt;/code&gt; will perform an unplanned failover to a given cluster or an RG, instead of &lt;strong&gt;FAILOVER_REMOTE&lt;/strong&gt; &lt;code&gt;repctl&lt;/code&gt; will patch CR at target cluster with action &lt;strong&gt;UNPLANNED_FAILOVER_LOCAL&lt;/strong&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;reprotect&#34;&gt;Reprotect&lt;/h4&gt;
 &lt;p&gt;This command will perform a &lt;code&gt;reprotect&lt;/code&gt; at the specified cluster or the RG.&lt;/p&gt;
-&lt;p&gt;When working with multiple clusters, you can perform reprotect by specifying the &lt;em&gt;cluster ID&lt;/em&gt;. To do that use &lt;code&gt;--to-cluster &amp;lt;clusterID&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; reprotect --to-cluster cluster1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform reprotect by specifying the &lt;em&gt;replication group ID&lt;/em&gt;. To do that use &lt;code&gt;--to-rg &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl reprotect  --to-rg &amp;lt;rg-id&amp;gt;
+&lt;p&gt;When working with multiple clusters, you can perform reprotect by specifying the &lt;em&gt;cluster ID&lt;/em&gt;. To do that use &lt;code&gt;--at &amp;lt;clusterID&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; reprotect --at &amp;lt;tgt-cluster-id&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform reprotect by specifying the &lt;em&gt;replication group ID&lt;/em&gt;. To do that use &lt;code&gt;--rg &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; reprotect 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In both scenarios &lt;code&gt;repctl&lt;/code&gt; will patch the CR at the source site with action &lt;strong&gt;REPROTECT_LOCAL&lt;/strong&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;failback&#34;&gt;Failback&lt;/h4&gt;
 &lt;p&gt;This command will perform a planned &lt;code&gt;failback&lt;/code&gt; to a cluster or an RG.&lt;/p&gt;
-&lt;p&gt;When working with multiple clusters, you can perform failback by specifying the &lt;em&gt;cluster ID&lt;/em&gt;, to do that use &lt;code&gt;--to-cluster &amp;lt;clusterID&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failback --to-cluster cluster1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform failback by specifying the &lt;em&gt;replication group ID&lt;/em&gt;. To do that use &lt;code&gt;--to-rg &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl failback --to-rg &amp;lt;rg-id&amp;gt;
+&lt;p&gt;When working with multiple clusters, you can perform failback by specifying the &lt;em&gt;cluster ID&lt;/em&gt;, to do that use &lt;code&gt;--target &amp;lt;clusterID&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failback --target &amp;lt;tgt-cluster-id&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform failback by specifying the &lt;em&gt;replication group ID&lt;/em&gt;. To do that use &lt;code&gt;--target &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failback --target &amp;lt;tgt-rg-id&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In both scenarios &lt;code&gt;repctl&lt;/code&gt; will patch the CR at the source site with action &lt;strong&gt;FAILBACK_LOCAL&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;You can also provide &lt;code&gt;--discard&lt;/code&gt; parameter, then &lt;code&gt;repctl&lt;/code&gt; will perform a failback but discard any writes at target, instead of &lt;strong&gt;FAILBACK_LOCAL&lt;/strong&gt; &lt;code&gt;repctl&lt;/code&gt; will patch CR at target cluster with action &lt;strong&gt;ACTION_FAILBACK_DISCARD_CHANGES_LOCAL&lt;/strong&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;swap&#34;&gt;Swap&lt;/h4&gt;
 &lt;p&gt;This command will perform a &lt;code&gt;swap&lt;/code&gt; at a specified cluster or an RG.&lt;/p&gt;
-&lt;p&gt;When working with multiple clusters, you can perform swap by specifying the &lt;em&gt;cluster ID&lt;/em&gt;. To do that use &lt;code&gt;--to-cluster &amp;lt;clusterID&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; swap --to-cluster cluster1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform swap by specifying the &lt;em&gt;replication group ID&lt;/em&gt;. To do that use &lt;code&gt;--to-rg &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl swap --to-rg &amp;lt;rg-id&amp;gt;
+&lt;p&gt;When working with multiple clusters, you can perform swap by specifying the &lt;em&gt;cluster ID&lt;/em&gt;. To do that use &lt;code&gt;--at &amp;lt;clusterID&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; swap --at &amp;lt;tgt-cluster-id&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When working with replication within a single cluster, you can perform swap by specifying the &lt;em&gt;replication group ID&lt;/em&gt;. To do that use &lt;code&gt;--rg &amp;lt;rg-id&amp;gt;&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; swap
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;repctl will patch CR at the source cluster with action &lt;code&gt;SWAP_LOCAL&lt;/code&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;maintenance-actions&#34;&gt;Maintenance Actions&lt;/h4&gt;
+&lt;h4 id=&#34;wait-for-completion&#34;&gt;Wait For Completion&lt;/h4&gt;
+&lt;p&gt;When executing actions you can provide &lt;code&gt;--wait&lt;/code&gt; argument to make &lt;code&gt;repctl&lt;/code&gt; wait for completion of specified action.&lt;/p&gt;
+&lt;p&gt;For example when executing &lt;code&gt;failover&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; failover --target &amp;lt;tgt-cluster-id&amp;gt; --wait
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;maintenance-actions&#34;&gt;Maintenance Actions&lt;/h4&gt;
 &lt;p&gt;You can also use &lt;code&gt;exec&lt;/code&gt; command to execute maintenance actions such as &lt;code&gt;suspend&lt;/code&gt;, &lt;code&gt;resume&lt;/code&gt;, and &lt;code&gt;sync&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;For single or multi-cluster config:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./repctl --rg &amp;lt;rg-id&amp;gt; &lt;span style=&#34;color:#204a87&#34;&gt;exec&lt;/span&gt; -a &amp;lt;ACTION&amp;gt;
@@ -650,8 +656,101 @@ Name of StorageClass resource that created as &amp;ldquo;target&amp;rdquo; will 
 &lt;td&gt;You&amp;rsquo;ve created PersistentVolumeClaim using replication enabled StorageClass but don&amp;rsquo;t see any RGs created in the source cluster.&lt;/td&gt;
 &lt;td&gt;Check annotations of created PersistentVolumeClaim. If it doesn&amp;rsquo;t have &lt;code&gt;annotations&lt;/code&gt; that start with &lt;code&gt;replication.storage.dell.com&lt;/code&gt; then please wait for a couple of minutes for them to be added and RG to be created.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When installing common replication controller using helm you see an error that states &lt;code&gt;invalid ownership metadata&lt;/code&gt; and &lt;code&gt;missing key &amp;quot;app.kubernetes.io/managed-by&amp;quot;: must be set to &amp;quot;Helm&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;This means that you haven&amp;rsquo;t fully deleted the previous release, you can fix it by either deleting entire manifest by using &lt;code&gt;kubectl delete -f deploy/controller.yaml&lt;/code&gt; or manually deleting conflicting resources (ClusterRoles, ClusterRoleBinding, etc.)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PV and/or PVCs are not being created at the source/target cluster. If you check the controller&amp;rsquo;s logs you can see &lt;code&gt;no such host&lt;/code&gt; errors&lt;/td&gt;
+&lt;td&gt;Make sure cluster-1&amp;rsquo;s API is pingable from cluster-2 and vice versa. If one of your clusters is OpenShift located in a private network and needs records in /etc/hosts - &lt;code&gt;exec&lt;/code&gt; into controller pod and modify &lt;code&gt;/etc/hosts&lt;/code&gt; manually.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Upgrade</title>
+      <link>https://dell.github.io/csm-docs/docs/replication/upgrade/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/replication/upgrade/</guid>
+      <description>
+        
+        
+        &lt;p&gt;CSM Replication module consists of two components:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CSM Replication sidecar (installed along with the driver)&lt;/li&gt;
+&lt;li&gt;CSM Replication controller&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Those two components should be upgraded separately. When upgrading them ensure that you use the same versions for both sidecar and
+controller, because different versions could be incompatible with each other.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: While upgrading the module via helm, the &lt;code&gt;replicas&lt;/code&gt; variable in &lt;code&gt;myvalues.yaml&lt;/code&gt; can be at most one less than the number of worker nodes.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;updating-csm-replication-sidecar&#34;&gt;Updating CSM Replication sidecar&lt;/h2&gt;
+&lt;p&gt;To upgrade the CSM Replication sidecar that is installed along with the driver, the following steps are required.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: These steps refer to the values file and &lt;code&gt;csi-install.sh&lt;/code&gt; script that was used during the initial installation of the Dell CSI driver.
+&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Update the &lt;code&gt;controller.replication.image&lt;/code&gt; value in the values files to reference the new CSM Replication sidecar image.&lt;/li&gt;
+&lt;li&gt;Run the csi-install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running: &lt;code&gt;cd ../dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace &amp;lt;your-namespace&amp;gt; --values ./myvalues.yaml --upgrade&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;updating-csm-replication-controller&#34;&gt;Updating CSM Replication controller&lt;/h2&gt;
+&lt;h3 id=&#34;upgrading-with-helm&#34;&gt;Upgrading with Helm&lt;/h3&gt;
+&lt;p&gt;This option will only work if you have previously installed replication with helm chart available since version 1.1. If you used simple manifest or &lt;code&gt;repctl&lt;/code&gt; please use &lt;a href=&#34;#upgrading-with-repctl&#34;&gt;upgrading with repctl&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Update the &lt;code&gt;image&lt;/code&gt; value in the values files to reference the new CSM Replication sidecar image or use a new version of the csm-replication helm chart&lt;/li&gt;
+&lt;li&gt;Run the install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running: &lt;code&gt;cd ./scripts &amp;amp;&amp;amp; ./install.sh --values ./myvalues.yaml --upgrade&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Upgrade won&amp;rsquo;t override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using &lt;code&gt;kubectl edit cm -n dell-replication-controller dell-replication-controller-config&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;upgrading-with-repctl&#34;&gt;Upgrading with repctl&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: These steps assume that you already have &lt;code&gt;repctl&lt;/code&gt; configured to use correct clusters, if you don&amp;rsquo;t know how to do that please refer to &lt;a href=&#34;../deployment/install-repctl&#34;&gt;installing with repctl&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Find a new version of deployment manifest that can be found in &lt;code&gt;deploy/controller.yaml&lt;/code&gt;, with newer &lt;code&gt;image&lt;/code&gt; pointing to the version of CSM Replication controller you want to upgrade to&lt;/li&gt;
+&lt;li&gt;Apply said manifest using the usual &lt;code&gt;repctl create&lt;/code&gt; command like so
+&lt;code&gt;./repctl create -f ./deploy/controller.yaml&lt;/code&gt;. The output should have this line &lt;code&gt;Successfully updated existing deployment: dell-replication-controller-manager&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Check if everything is OK by querying your Kubernetes clusters using &lt;code&gt;kubectl&lt;/code&gt; like this &lt;code&gt;kubectl get pods -n dell-replication-controller&lt;/code&gt;, your pods should READY and RUNNING&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Uninstall</title>
+      <link>https://dell.github.io/csm-docs/docs/replication/uninstall/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/replication/uninstall/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication.&lt;/p&gt;
+&lt;h2 id=&#34;uninstalling-common-replication-controller&#34;&gt;Uninstalling common replication controller&lt;/h2&gt;
+&lt;p&gt;To uninstall the common replication controller you can use script &lt;code&gt;uninstall.sh&lt;/code&gt; located in &lt;code&gt;scripts&lt;/code&gt; folder:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./uninstall.sh 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This script will automatically detect how current version is installed (with repctl or with helm) and use the correct method to delete it.&lt;/p&gt;
+&lt;p&gt;You can also manually uninstall replication controller using method that depends on how you installed replication controller.&lt;/p&gt;
+&lt;p&gt;If replication controller was installed using &lt;code&gt;helm&lt;/code&gt; use this command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;helm delete -n dell-replication-controller replication
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you used &lt;code&gt;controller.yaml&lt;/code&gt; manifest with either &lt;code&gt;kubectl&lt;/code&gt; or &lt;code&gt;repctl&lt;/code&gt; use this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete -f deploy/controller.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;NOTE: Be sure to run chosen command on all clusters where you want to uninstall replication controller.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;uninstalling-the-replication-sidecar&#34;&gt;Uninstalling the replication sidecar&lt;/h2&gt;
+&lt;p&gt;To uninstall the replication sidecar you need to uninstall the CSI Driver, please view the &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; page of the driver.&lt;/p&gt;
 
       </description>
     </item>

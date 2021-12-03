@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerScale CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/upgradation/drivers/isilon/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Upgrade PowerScale CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="266">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="206">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -925,7 +941,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#upgrade-driver-from-version-v140-to-v150">Upgrade Driver from version v1.4.0 to v1.5.0</a></li>
+    <li><a href="#upgrade-driver-from-version-150-to-160">Upgrade Driver from version 1.5.0 to 1.6.0</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
   </ul>
 </nav>
@@ -977,44 +993,46 @@
 	<h1>PowerScale</h1>
 
 	       
-	<p>You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.</p>
-<h2 id="upgrade-driver-from-version-v140-to-v150">Upgrade Driver from version v1.4.0 to v1.5.0</h2>
+	<p>You can upgrade the CSI Driver for Dell EMC PowerScale using Helm or Dell CSI Operator.</p>
+<h2 id="upgrade-driver-from-version-150-to-160">Upgrade Driver from version 1.5.0 to 1.6.0</h2>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Verify that all pre-requisites to install CSI Driver for Dell EMC PowerScale v1.5.0 are fulfilled (including change in secret formats).</p>
-<pre><code>  1.1 Delete the existing secrets (isilon-creds and isilon-certs)
-
-  1.2 Create new secrets (isilon-creds and isilon-certs-0) in the format specified by csi-powerscale 1.5. 
-</code></pre>
-<p>Refer Installation section <a href="./../../../installation/helm/isilon/#install-csi-driver-for-powerscale">here</a>.</p>
+<p>Verify that all pre-requisites to install CSI Driver for Dell EMC PowerScale version 1.6.0 are fulfilled. Note that change in secret format should be taken care.</p>
+<ul>
+<li>Delete the existing secret (isilon-creds and isilon-certs-0)</li>
+<li>Create new secrets (isilon-creds and isilon-certs-0)
+Refer Installation section <a href="./../../../installation/helm/isilon/#install-the-driver">here</a>.</li>
+</ul>
 </li>
 <li>
-<p>Clone the repository <a href="https://github.com/dell/csi-powerscale">https://github.com/dell/csi-powerscale</a> , copy the helm/csi-isilon/values.yaml into a new location with name say my-isilon-settings.yaml, to customize settings for installation. Edit my-isilon-settings.yaml as per the requirements.</p>
+<p>Clone the repository <a href="https://github.com/dell/csi-powerscale">https://github.com/dell/csi-powerscale</a> , copy the helm/csi-isilon/values.yaml into a new location with a custom name say <em>my-isilon-settings.yaml</em>, to customize settings for installation. Edit <em>my-isilon-settings.yaml</em> as per the requirements.</p>
 </li>
 <li>
 <p>Change to directory dell-csi-helm-installer to install the Dell EMC PowerScale <code>cd dell-csi-helm-installer</code></p>
 </li>
 <li>
-<p>Upgrade the CSI Driver for Dell EMC PowerScale v1.5.0 using following command:</p>
+<p>Upgrade the CSI Driver for Dell EMC PowerScale version 1.6.0 using following command:</p>
 <p><code>./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade</code></p>
 </li>
 </ol>
 <h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
-<p>To upgrade the driver from csi-PowerScale v1.4 to csi-PowerScale v1.5 (OpenShift 4.6) :</p>
+<p>To upgrade the driver from version 1.5.0 to 1.6.0:</p>
+<p>Note: It is highly recommended to take <em>Backup of existing storage class definition and volumesnapshot class definition, yaml files</em> before the upgrade.</p>
 <ol>
-<li>Clone operator version 1.3.0</li>
-<li>Execute <code>bash scripts/install.sh --upgrade</code>  .This command will install latest version of operator.</li>
-<li>Uninstall the existing driver by executing the command <code>kubectl delete -f &lt;driver.yaml&gt;</code> with appropriate yaml file used for csi-powerscale 1.4 installation.</li>
-<li>Delete the existing secrets (both isilon-creds and isilon-certs)</li>
-<li>Create new isilon-creds secret in the latest csi-PowerScale format. For additional information, refer <a href="./../../../installation/helm/isilon/#install-csi-driver-for-powerscale">here</a></li>
-<li>Create new isilon-certs secret. Make sure the name of new secret is isilon-certs-0. For additional information, refer <a href="./../../../installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls">here</a></li>
-<li>Furnish the sample CR yaml according to your environment.</li>
-<li>Install csi-PowerScale driver 1.5 by executing the following command:
-<code>kubectl create -f &lt;furnished-cr.yaml&gt;</code></li>
+<li>
+<p>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a>.</p>
+</li>
+<li>
+<p>Execute <code>bash scripts/install.sh --upgrade</code>  . This command will install the latest version of the operator.</p>
+</li>
 </ol>
-<p>The above said steps are for Operator which was deployed in non-olm way.</p>
-<p>For additional information, refer Dell CSI Operator <a href="https://github.com/dell/dell-csi-operator">GitHub</a> page.</p>
+<blockquote>
+<p>Note: Dell CSI Operator version 1.4.0 and higher would install to the &lsquo;dell-csi-operator&rsquo; namespace by default.</p>
+</blockquote>
+<ol start="3">
+<li>To upgrade the driver, refer <a href="./../../../installation/operator/#update-csi-drivers">here</a>.</li>
+</ol>
 
 	
 	

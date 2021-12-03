@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting PowerScale Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/troubleshooting/powerscale/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Troubleshooting PowerScale Driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="92">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="160">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -304,6 +304,14 @@
   <ul>
     <li class="collapse " id="csm-docsv3installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3installationoperatorinstalldriver" href="/csm-docs/v3/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -497,6 +505,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriversoperator" href="/csm-docs/v3/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriverspowerflex" href="/csm-docs/v3/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -621,6 +637,14 @@
   <ul>
     <li class="collapse show" id="csm-docsv3troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3troubleshootingoperator" href="/csm-docs/v3/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -795,6 +819,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/csm-docs/v3/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -932,11 +981,15 @@
 <tbody>
 <tr>
 <td>The <code>kubectl logs isilon-controller-0 -n isilon -c driver</code> logs shows the driver <strong>cannot authenticate</strong></td>
-<td>Check your secret&rsquo;s username and password</td>
+<td>Check your secret&rsquo;s username and password for corresponding cluster</td>
 </tr>
 <tr>
 <td>The <code>kubectl logs isilon-controller-0 -n isilon -c driver</code> logs shows the driver failed to connect to the Isilon because it <strong>couldn&rsquo;t verify the certificates</strong></td>
-<td>Check the isilon-certs secret and ensure it is not empty and it has the valid certificates. Set <code>isiInsecure: &quot;true&quot;</code> for insecure connection. SSL validation is recommended in production environment.</td>
+<td>Check the isilon-certs-<n> secret and ensure it is not empty and it has the valid certificates. Set <code>isiInsecure: &quot;true&quot;</code> for insecure connection. SSL validation is recommended in production environment.</td>
+</tr>
+<tr>
+<td>The <code>kubectl logs isilon-controller-0 -n isilon -c driver</code> logs shows the driver error: <strong>create volume failed, Access denied. create directory as requested</strong></td>
+<td>This situation can happen when the user who created the base path is different from the user configured for the driver. Make sure the user used to deploy CSI-Driver must have enough rights on the base path (i.e. isiPath) to perform all operations.</td>
 </tr>
 </tbody>
 </table>

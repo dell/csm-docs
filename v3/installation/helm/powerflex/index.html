@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/installation/helm/powerflex/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing PowerFlex CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="2137">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="2233">
 
 
 
@@ -95,13 +95,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -154,7 +154,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -307,6 +307,14 @@
   <ul>
     <li class="collapse " id="csm-docsv3installationoperator">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3installationoperatorinstalldriver" href="/csm-docs/v3/installation/operator/installdriver/"></a>
+        
       
       
       
@@ -500,6 +508,14 @@
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriversoperator" href="/csm-docs/v3/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3upgradationdriverspowerflex" href="/csm-docs/v3/upgradation/drivers/powerflex/">PowerFlex</a>
         
       
@@ -624,6 +640,14 @@
   <ul>
     <li class="collapse " id="csm-docsv3troubleshooting">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3troubleshootingoperator" href="/csm-docs/v3/troubleshooting/operator/">Dell CSI Operator</a>
+        
       
       
       
@@ -798,6 +822,31 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/concepts/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Concepts</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3concepts">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/csm-docs/v3/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
   </li>
   <ul>
@@ -885,11 +934,15 @@
         <li><a href="#enable-zero-padding-on-powerflex">Enable Zero Padding on PowerFlex</a></li>
         <li><a href="#configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</a></li>
         <li><a href="#install-powerflex-storage-data-client">Install PowerFlex Storage Data Client</a></li>
-        <li><a href="#volume-snapshot-requirements">Volume Snapshot requirements</a></li>
+        <li><a href="#volume-snapshot-requirements">Volume Snapshot Requirements</a></li>
       </ul>
     </li>
     <li><a href="#install-the-driver">Install the Driver</a></li>
-    <li><a href="#storage-classes">Storage Classes</a></li>
+    <li><a href="#storage-classes">Storage Classes</a>
+      <ul>
+        <li><a href="#what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -950,7 +1003,7 @@
 	<h1>PowerFlex</h1>
 
 	       
-	<p>The CSI Driver for Dell EMC PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, please review the script <a href="https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer">documentation</a>.</p>
+	<p>The CSI Driver for Dell EMC PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, please review the script <a href="https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer">documentation</a>.</p>
 <p>The controller section of the Helm chart installs the following components in a <em>Deployment</em> in the namespace <code>vxflexos</code>:</p>
 <ul>
 <li>CSI Driver for Dell EMC PowerFlex</li>
@@ -965,12 +1018,12 @@
 <li>Kubernetes Node Registrar, which handles the driver registration</li>
 </ul>
 <h2 id="prerequisites">Prerequisites</h2>
-<p>The following are requirements must be met before installing the CSI Driver for Dell EMC PowerFlex:</p>
+<p>The following are requirements that must be met before installing the CSI Driver for Dell EMC PowerFlex:</p>
 <ul>
-<li>Install Kubernetes (1.17, 1.18, 1.19) or OpenShift (4.5 or 4.6)</li>
+<li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
 <li>Install Helm 3</li>
 <li>Enable Zero Padding on PowerFlex</li>
-<li>Configure Mount propagation on container runtime (i.e. Docker)</li>
+<li>Configure Mount propagation on container runtime (example: Docker)</li>
 <li>Install PowerFlex Storage Data Client</li>
 <li>Volume Snapshot requirements</li>
 <li>A user must exist on the array with a role <em>&gt;= FrontEndConfigure</em></li>
@@ -985,20 +1038,29 @@
 <p>It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerFlex. The following is instruction on how to do this with Docker. If you use another container runtime, follow the recommended instructions from the vendor to configure mount propagation.</p>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Edit the service section of <code>/etc/systemd/system/multi-user.target.wants/docker.service</code> file to add the following lines:
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker.service
-<span style="color:#ce5c00;font-weight:bold">[</span>Service<span style="color:#ce5c00;font-weight:bold">]</span>...
-<span style="color:#000">MountFlags</span><span style="color:#ce5c00;font-weight:bold">=</span>shared
+<li>The service section of <code>/etc/systemd/system/multi-user.target.wants/docker.service</code> needs to be edited in a few places. First, the <code>Requires</code> entry under the <code>[Unit]</code> header needs have <code>docker.service</code> added to it, as shown. Second, <code>MountFlags=shared</code> needs to be added under the <code>[Service]</code> header.
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> <span style="color:#ce5c00;font-weight:bold">[</span>Unit<span style="color:#ce5c00;font-weight:bold">]</span>
+ ...
+ <span style="color:#000">Requires</span><span style="color:#ce5c00;font-weight:bold">=</span>docker.socket containerd.service docker.service
+
+ <span style="color:#ce5c00;font-weight:bold">[</span>Service<span style="color:#ce5c00;font-weight:bold">]</span>
+ ...
+ <span style="color:#000">MountFlags</span><span style="color:#ce5c00;font-weight:bold">=</span>shared
 </code></pre></div></li>
 <li>Restart the docker service with <code>systemctl daemon-reload</code> and <code>systemctl restart docker</code> on all the nodes.</li>
 </ol>
-<p><strong>Note</strong>: Some distribution, like Ubuntu, already has <em>MountFlags</em> set by default</p>
+<p><em>NOTE:</em> Some distribution, like Ubuntu, already has <em>MountFlags</em> set by default.</p>
 <h3 id="install-powerflex-storage-data-client">Install PowerFlex Storage Data Client</h3>
-<p>The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all worker nodes. If installing on Red Hat CoreOS (RHCOS) nodes on OpenShift you can install using the automated SDC deployment feature. If installing on non-RHCOS nodes, you must install SDC manually.</p>
-<h4 id="automatic-sdc-deployment">Automatic SDC Deployment</h4>
-<p>The automated deployment of the SDC runs by default when installing the driver. It installs an SDC container to faciliate the installation. While the install is automated there are a few configuration options for this feature. Those are referenced in the <strong>Install the Driver</strong> section. More details on how the automatic SDC deployment works can be found in the Feature section of this site on the PowerFlex page.</p>
-<p><strong>Optional:</strong> For a typical install, you will pull SDC kernel modules from the Dell EMC ftp site, which is setup by default. Some users might want to mirror this repository to a local location. The PowerFlex documentation has instructions on how to do this. If a mirror is used, you need to create an SDC repo secret for managing the credentials to the mirror. Details on how to create the secret are in the <strong>Install the Driver</strong> section.</p>
-<h4 id="manually-sdc-deployment">Manually SDC Deployment</h4>
+<p>The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run node portion of CSI driver.
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment,
+currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS).
+On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below.
+Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported OS versions.</p>
+<h4 id="sdc-deployment">SDC Deployment</h4>
+<p>The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run node portion of CSI driver. SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment, currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS).</p>
+<p>On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for your OS versions.</p>
+<p><strong>Optional:</strong> For a typical install, you will pull SDC kernel modules from the Dell EMC ftp site, which is setup by default. Some users might want to mirror this repository to a local location. The PowerFlex KB article (<a href="https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for">https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for</a>) has instructions on how to do this.</p>
+<h4 id="manual-sdc-deployment">Manual SDC Deployment</h4>
 <p>For detailed PowerFlex installation procedure, see the <em>Dell EMC PowerFlex Deployment Guide</em>. Install the PowerFlex SDC as follows:</p>
 <p><strong>Steps</strong></p>
 <ol>
@@ -1009,56 +1071,150 @@
 <li>For Red Hat Enterprise Linux and Cent OS, run <code>rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm</code>, where * is the SDC name corresponding to the PowerFlex installation version.</li>
 </ul>
 </li>
+<li>To add more MDM_IP for multi-array support, run <code>/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx</code></li>
 </ol>
-<h3 id="volume-snapshot-requirements">Volume Snapshot requirements</h3>
+<h3 id="volume-snapshot-requirements">Volume Snapshot Requirements</h3>
 <h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
-<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.2/client/config/crd">Github</a>.</p>
-<p>You can also install the CRDs by supplying the option <em>&ndash;snapshot-crd</em> while installing the driver using the <code>csi-install.sh</code> script. If you are installing the driver using the Dell CSI Operator, there is a helper script provided to install the snapshot CRDs - <code>scripts/install_snap_crds.sh</code>.</p>
+<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github.</p>
+<ul>
+<li>If on Kubernetes 1.18/1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd">v3.0.3</a></li>
+<li>If on Kubernetes 1.20 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd">v4.0.0</a></li>
+</ul>
 <h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
 <p>Starting with beta Volume Snapshots in Kubernetes 1.17, the CSI external-snapshotter sidecar is split into two controllers:</p>
 <ul>
 <li>A common snapshot controller</li>
 <li>A CSI external-snapshotter sidecar</li>
 </ul>
-<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests available on <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.2/deploy/kubernetes/snapshot-controller">GitHub</a>.</p>
+<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available:</p>
+<ul>
+<li>If on Kubernetes 1.18/1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller">v3.0.3</a></li>
+<li>If on Kubernetes 1.20 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller">v4.0.0</a></li>
+</ul>
 <p><em>NOTE:</em></p>
 <ul>
-<li>The manifests available on GitHub install v3.0.2 of the snapshotter image - <a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.2</a></li>
-<li>Dell recommends using v3.0.2 image of the snapshot-controller - <a href="https://quay.io/repository/k8scsi/snapshot-controller?tag=v3.0.2&amp;tab=tags">quay.io/k8scsi/snapshot-controller:v3.0.2</a></li>
+<li>The manifests available on GitHub install the snapshotter image:
+<ul>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.3&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.3</a></li>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v4.0.0</a></li>
+</ul>
+</li>
 <li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
 </ul>
 <h2 id="install-the-driver">Install the Driver</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</li>
-<li>Ensure that you have created namespace where you want to install the driver. You can run <code>kubectl create namespace vxflexos</code> to create a new one.</li>
-<li>Check helm/csi-vxflexos/driver-image.yaml and confirm the driver image points to new image.</li>
-<li>Edit the <code>helm/secret.yaml</code>, point to correct namespace and replace the values for the username and password parameters.
-These values can be obtained using base64 encoding as described in the following example:
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;myusername&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
-<span style="color:#204a87">echo</span> -n <span style="color:#4e9a06">&#34;mypassword&#34;</span> <span style="color:#000;font-weight:bold">|</span> base64
-</code></pre></div><p>where <em>myusername</em> &amp; <em>mypassword</em> are credentials for a user with PowerFlex priviledges.</p>
+<li>
+<p>Run <code>git clone https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
 </li>
-<li>Create the secret by running <code>kubectl create -f secret.yaml</code></li>
-<li>If not using automated SDC deployment, create a dummy SDC repo secret file:  <code>kubectl create -f sdc-repo-secret.yaml</code></li>
-<li>If using automated SDC deployment:
+<li>
+<p>Ensure that you have created namespace where you want to install the driver. You can run <code>kubectl create namespace vxflexos</code> to create a new one.</p>
+</li>
+<li>
+<p>Check <code>helm/csi-vxflexos/driver-image.yaml</code> and confirm the driver image points to new image.</p>
+</li>
+<li>
+<p>Collect information from the PowerFlex SDC by executing the <code>get_vxflexos_info.sh</code> script located in the top-level helm directory.  This script shows the <em>VxFlex OS system ID</em> and <em>MDM IP</em> addresses. Make a note of the value for these parameters as they must be entered in the <code>config.json</code> file in the top-level directory.</p>
+</li>
+<li>
+<p>Prepare the config.json for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>Username for accessing PowerFlex system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Password for accessing PowerFlex system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>systemID</td>
+<td>System name/ID of PowerFlex system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>endpoint</td>
+<td>REST API gateway HTTPS endpoint for PowerFlex system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>insecure</td>
+<td>Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>isDefault</td>
+<td>An array having isDefault=true is for backward compatibility. This parameter should occur once in the list</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>mdm</td>
+<td>mdm defines the MDM(s) that SDC should register with on start. This should be an list of MDM IP addresses or hostnames separated by comma</td>
+<td>true</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Example: config.json</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#000;font-weight:bold">[</span>
+    <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ID1&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;http://127.0.0.1&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;insecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;isDefault&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;mdm&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;10.0.0.1,10.0.0.2&#34;</span>
+    <span style="color:#000;font-weight:bold">},</span>
+    <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;systemID&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;ID2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;https://127.0.0.2&#34;</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;insecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">&#34;mdm&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span>
+    <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">]</span>
+</code></pre></div><p>After editing the file, run the following command to create a secret called <code>vxflexos-config</code>
+<code>kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.json</code></p>
+<p>Use the following command to replace or update the secret:</p>
+<p><code>kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.json -o yaml --dry-run=client | kubectl replace -f -</code></p>
+<p><em>NOTE:</em></p>
+<ul>
+<li>The user needs to validate the JSON syntax and array related key/values while replacing the vxflexos-creds secret.</li>
+<li>If you update the secret, you will have to reinstall the driver.</li>
+<li>System ID, MDM configuration etc. now are taken directly from config.json, and no longer the values file.</li>
+</ul>
+</li>
+<li>
+<p>If using automated SDC deployment:</p>
 <ul>
 <li>Check the SDC container image is the correct version for your version of PowerFlex.</li>
-<li>Create a secret for the SDC repo credentials and provide the URL for the repo.
-<ul>
-<li>To create the secret, you must update the details in helm/sdc-repo-secret.yaml file and running <code>kubectl create -f sdc-repo-secret.yaml</code>.</li>
-<li>To set the repo URL, you must set the <code>repoUrl</code> parameter in the <code>myvalues.yaml</code> file.</li>
 </ul>
 </li>
-</ul>
+<li>
+<p>Copy the default values.yaml file <code>cd helm &amp;&amp; cp csi-vxflexos/values.yaml myvalues.yaml</code></p>
 </li>
-<li>Collect information from the PowerFlex SDC by executing the <code>get_vxflexos_info.sh</code> script located in the top-level helm directory.  This script shows the <em>VxFlex OS system ID</em> and <em>MDM IP</em> addresses. Make a note of the value for these parameters as they must be entered in the <code>myvalues.yaml</code> file.
-<ul>
-<li><em>NOTE:</em> Your SDC might have multiple VxFlex OS systems registered. Ensure that you choose the correct values.</li>
-</ul>
+<li>
+<p>Edit the newly created values file and provide values for the following parameters <code>vi myvalues.yaml</code>:</p>
 </li>
-<li>Copy the default values.yaml file <code>cd helm &amp;&amp; cp csi-vxflexos/values.yaml myvalues.yaml</code></li>
-<li>Edit the newly created values file and provide values for the following parameters <code>vi myvalues.yaml</code>:</li>
 </ol>
 <table>
 <thead>
@@ -1071,26 +1227,8 @@ These values can be obtained using base64 encoding as described in the following
 </thead>
 <tbody>
 <tr>
-<td>systemName</td>
-<td>Set to the PowerFlex/VxFlex OS system name or system ID to be used with the driver.</td>
-<td>Yes</td>
-<td>&ldquo;systemname&rdquo;</td>
-</tr>
-<tr>
-<td>restGateway</td>
-<td>Set to the URL of your system’s REST API Gateway. You can obtain this value from the PowerFlex administrator.</td>
-<td>Yes</td>
-<td>&ldquo;https://123.0.0.1&rdquo;</td>
-</tr>
-<tr>
-<td>storagePool</td>
-<td>Set to a default (existing) storage pool name in your PowerFlex/VxFlex OS system.</td>
-<td>Yes</td>
-<td>&ldquo;sp&rdquo;</td>
-</tr>
-<tr>
 <td>volumeNamePrefix</td>
-<td>Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is   servicing several different Kubernetes installations or users, these prefixes help you distinguish them.</td>
+<td>Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them.</td>
 <td>No</td>
 <td>&ldquo;k8s&rdquo;</td>
 </tr>
@@ -1107,28 +1245,10 @@ These values can be obtained using base64 encoding as described in the following
 <td>FALSE</td>
 </tr>
 <tr>
-<td><strong>StorageClass</strong></td>
-<td>Helm charts create a Kubernetes StorageClass while deploying CSI Driver for Dell EMC PowerFlex. This section   includes relevant variables.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>name</td>
-<td>Defines the name of the Kubernetes storage class that the Helm charts will create. For example, the   <em>vxflexos</em> base name will be used to generate names such as <em>vxflexos</em> and   <em>vxflexos-xfs</em>.</td>
+<td>allowRWOMultiPodAccess</td>
+<td>Setting allowRWOMultiPodAccess to &ldquo;true&rdquo; will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk.</td>
 <td>No</td>
-<td>&ldquo;vxflexos&rdquo;</td>
-</tr>
-<tr>
-<td>isDefault</td>
-<td>Sets the newly created storage class as default for Kubernetes. Set this value to <code>true</code> only if you expect   PowerFlex to be your principle storage provider, as it will be used in PersitentVolumeClaims where no storageclass is provided. After installation, you can add custom storage classes, if desired.</td>
-<td>No</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>reclaimPolicy</td>
-<td>Defines whether the volumes will be retained or deleted when the assigned pod is destroyed. The valid values for this variable are <code>Retain</code> or <code>Delete</code>.</td>
-<td>No</td>
-<td>&ldquo;Delete&rdquo;</td>
+<td>FALSE</td>
 </tr>
 <tr>
 <td><strong>controller</strong></td>
@@ -1173,29 +1293,30 @@ These values can be obtained using base64 encoding as described in the following
 <td>TRUE</td>
 </tr>
 <tr>
-<td><strong>sdcKernelMirror</strong></td>
-<td>[RHCOS only] The PowerFlex SDC may need to pull a new module that is known to work with newer Linux kernels. The default location of this mirror os at ftp.emc.com. The PowerFlex documentation has instructions for methods to mirror this repository to a local location if necessary.</td>
+<td><strong>podmon</strong></td>
+<td>Podmon is an optional feature under development and tech preview. Enable this feature only after contact support for additional information</td>
 <td>-</td>
 <td>-</td>
 </tr>
 <tr>
-<td>repoUrl</td>
-<td>Set the URL of the ftp mirror containing SDC kernel modules. Only ftp locations are allowed. A blank string signifies the default mirror, which is &ldquo;<a href="ftp://ftp.emc.com">ftp://ftp.emc.com</a>&rdquo;.</td>
+<td>enabled</td>
+<td></td>
 <td>No</td>
-<td>&quot; &quot;</td>
-</tr>
-<tr>
-<td>11. Install the driver using <code>csi-install.sh</code> bash script by running <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml</code></td>
-<td></td>
-<td></td>
-<td></td>
+<td>FALSE</td>
 </tr>
 </tbody>
 </table>
+<ol start="11">
+<li>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml</code></li>
+</ol>
 <p><em>NOTE:</em></p>
 <ul>
 <li>For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.</li>
-<li>This script also runs the verify.sh script that is present in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The <code>verify.sh</code> script needs the credentials to check if SDC has been configured on all nodes. You can also skip the verification step by specifiying the <code>--skip-verify-node</code> option.</li>
+<li>This script runs <code>verify-csi-vxflexos.sh</code> script that is present in the same directory. It will validate MDM IP(s) in <code>vxflexos-config</code> secret and creates a new field consumed by init container and sdc-monitor container</li>
+<li>This script also runs the <code>verify.sh</code> script. You will be prompted to enter the credentials for each of the Kubernetes nodes.
+The <code>verify.sh</code> script needs the credentials to check if SDC has been configured on all nodes.</li>
+<li>It is mandatory to run the first installation and installation after changes to MDM configuration in <code>vxflexos-config</code> secret
+<strong>without</strong> skipping the verification. After that you can use <code>--skip-verify-node</code> or <code>--skip-verify</code> .</li>
 <li>(Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver.
 <ul>
 <li>Mount options are specified in storageclass yaml under <em>mountOptions</em>.</li>
@@ -1204,15 +1325,30 @@ These values can be obtained using base64 encoding as described in the following
 </li>
 </ul>
 <h2 id="storage-classes">Storage Classes</h2>
-<p>As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.</p>
-<p>The <code>StorageClass</code> object in Kubernetes is immutable and can&rsquo;t be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes.
-In preparation for that, starting in Q4 of 2020, an annotation <code>&quot;helm.sh/resource-policy&quot;: keep</code> is applied to the storage classes created by the <code>dell-csi-helm-installer</code>.</p>
-<p>Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled.
-This annotation has been applied to give you an opportunity to keep using  these storage classes even with a future release of the driver. In case you wish to not use these storage classes, you will need to delete them by using the <code>kubectl delete storageclass</code> command.</p>
-<p><em>NOTE</em>: If you uninstall the driver and reinstall it, you can still face errors if any update in the <code>values.yaml</code> file leads to an update of the storage class(es):</p>
+<p>Starting in CSI PowerFlex v1.4, <code>dell-csi-helm-installer</code> will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the <code>helm/samples</code> folder. Please use these samples to create new storage classes to provision storage. See this <a href="../../../../v1/installation/helm/powermax/">note</a> for the driving reason behind this change.</p>
+<h3 id="what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</h3>
+<p><em>Upgrading from CSI PowerFlex v1.4 driver</em>
+The storage classes created as part of the installation have an annotation - &ldquo;helm.sh/resource-policy&rdquo;: keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.</p>
+<p><em>Upgrading from an older version of the driver</em>
+The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation &ldquo;helm.sh/resource-policy&rdquo;: keep before performing an upgrade.</p>
+<p><em>NOTE:</em> If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
+<p><strong>Steps to create storage class:</strong>
+There are samples storage class yaml files available under <code>helm/samples/storageclass</code>.  These can be copied and modified as needed.</p>
+<ol>
+<li>Edit <code>storageclass.yaml</code> if you need ext4 filesystem and <code>storageclass-xfs.yaml</code> if you want xfs filesystem</li>
+<li>Replace <code>&lt;STORAGE_POOL&gt;</code> with the storage pool you have</li>
+<li>Replace <code>&lt;SYSTEM_ID&gt;</code> with the system ID you have. Note there are two appearances in the file</li>
+<li>Edit <code>storageclass.kubernetes.io/is-default-class</code> to true if you want to set it as default, otherwise false.</li>
+<li>Save the file and create it by using <code>kubectl create -f storageclass.yaml</code> or <code>kubectl create -f storageclass-xfs.yaml</code></li>
+</ol>
+<p><em>NOTE</em>:</p>
+<ul>
+<li>At least one storage class is required for one array.</li>
+<li>If you uninstall the driver and reinstall it, you can still face errors if any update in the <code>values.yaml</code> file leads to an update of the storage class(es):</li>
+</ul>
 <pre><code>    Error: cannot patch &quot;&lt;sc-name&gt;&quot; with kind StorageClass: StorageClass.storage.k8s.io &quot;&lt;sc-name&gt;&quot; is invalid: parameters: Forbidden: updates to parameters are forbidden
-</code></pre><p>In case you want to make such updates, make sure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.<br>
-Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&rsquo;t be able to provision new PVCs until at least one storage class is newly created.</p>
+</code></pre><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.<br>
+Deleting a storage class has no impact on a running Pod with mounted PVCs. You will not be able to provision new PVCs until at least one storage class is newly created.</p>
 
 	
 	

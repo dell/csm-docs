@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/installation/operator/isilon/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing PowerScale CSI Driver via Operator
 ">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="476">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="758">
 
 
 
@@ -95,13 +95,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -154,7 +154,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -874,7 +874,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -997,20 +1013,21 @@
 	<h2 id="installing-powerscale-csi-driver-via-operator">Installing PowerScale CSI Driver via Operator</h2>
 <p>The CSI Driver for Dell EMC PowerScale can be installed via the Dell CSI Operator.</p>
 <p>To deploy the Operator, follow the instructions available <a href="../">here</a>.</p>
-<p>There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the ones specified via the Helm installer.</p>
-<p>Kubernetes Operators make it easy to deploy and manage entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
+<p>There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.</p>
+<p>Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
+<p><strong>Note</strong>: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerScale via Operator.</p>
 <h3 id="listing-installed-drivers-with-the-csi-isilon-crd">Listing installed drivers with the CSI Isilon CRD</h3>
-<p>User can query for csi-powerscale driver using the following command:
+<p>User can query for CSI-PowerScale driver using the following command:
 <code>kubectl get csiisilon --all-namespaces</code></p>
 <h3 id="install-driver">Install Driver</h3>
 <ol>
 <li>
-<p>Create namespace
-Run <code>kubectl create namespace isilon</code> to create the isilon namespace. Note that the namespace can be any user defined name , in this example, we assume that the namespace is &lsquo;isilon&rsquo;.</p>
+<p>Create namespace.</p>
+<p>Execute <code>kubectl create namespace isilon</code> to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &lsquo;isilon&rsquo;.</p>
 </li>
 <li>
-<p>Create <em>isilon-creds</em>
-Create a json file called isilon-creds.json with the following content:</p>
+<p>Create <em>isilon-creds</em> secret by first creating secret.json or secret.yaml file.</p>
+<p>2.1   Create a json file called secret.json with the following content:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> <span style="color:#000;font-weight:bold">{</span>
     <span style="color:#204a87;font-weight:bold">&#34;isilonClusters&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
        <span style="color:#000;font-weight:bold">{</span>
@@ -1024,19 +1041,41 @@ Create a json file called isilon-creds.json with the following content:</p>
           <span style="color:#204a87;font-weight:bold">&#34;clusterName&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;cluster2&#34;</span><span style="color:#000;font-weight:bold">,</span>
           <span style="color:#204a87;font-weight:bold">&#34;username&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;user&#34;</span><span style="color:#000;font-weight:bold">,</span>
           <span style="color:#204a87;font-weight:bold">&#34;password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#000;font-weight:bold">,</span>
-          <span style="color:#204a87;font-weight:bold">&#34;isiIP&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;1.2.3.5&#34;</span><span style="color:#000;font-weight:bold">,</span>
+          <span style="color:#204a87;font-weight:bold">&#34;endpoint&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;1.2.3.5&#34;</span><span style="color:#000;font-weight:bold">,</span>
           <span style="color:#204a87;font-weight:bold">&#34;isiPort&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;8080&#34;</span><span style="color:#000;font-weight:bold">,</span>
-          <span style="color:#204a87;font-weight:bold">&#34;isiInsecure&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+          <span style="color:#204a87;font-weight:bold">&#34;skipCertificateValidation&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">,</span>
+          <span style="color:#204a87;font-weight:bold">&#34;isDefault&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">,</span>
           <span style="color:#204a87;font-weight:bold">&#34;isiPath&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;/ifs/data/csi&#34;</span>
        <span style="color:#000;font-weight:bold">}</span>
     <span style="color:#000;font-weight:bold">]</span>
  <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><p>Replace the values for the given keys as per your environment. This username / password value need not be encoded. You can refer <a href="../../helm/isilon/#install-csi-driver-for-powerscale">here</a> for more information about isilon secret parameters.</p>
+</code></pre></div><p>Replace the values for the given keys as per your environment. This username/password value need not be encoded. You can refer <a href="../../helm/isilon/#install-csi-driver-for-powerscale">here</a> for more information about these isilon secret parameters. After creating the secret.json, the following command can be used to create the secret,<br>
+<code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.json</code></p>
+<p>2.2. Alternately user can create a secret.yaml file in the following format and replace the values for the given keys as per your environment. The command</p>
+<p><code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml</code> would be needed to create secret.</p>
+<pre><code>isilonClusters:
+- clusterName: &quot;cluster1&quot;         # logical name of PowerScale Cluster
+   username: &quot;user&quot;                # username for connecting to PowerScale OneFS API server
+   password: &quot;password&quot;            # password for connecting to PowerScale OneFS API server
+   endpoint: &quot;1.2.3.4&quot;             # HTTPS endpoint of the PowerScale OneFS API server
+   isDefault: true                 # default cluster 
+   skipCertificateValidation: true # indicates if client side validation of server's SSL certificate can be skipped
+   isiPath: &quot;/ifs/data/csi&quot;        # base path for the volume(directory) to be created on PowerScale
+
+- clusterName: &quot;cluster2&quot;
+   username: &quot;user&quot;
+   password: &quot;password&quot;
+   endpoint: &quot;1.2.3.4&quot;
+   isiPort: &quot;8080&quot;
+
+logLevel: &quot;debug&quot; # CSI log level; valid log levels- &quot;error&quot;, &quot;warn&quot;/&quot;warning&quot;, &quot;info&quot;, &quot;debug&quot;
+
+</code></pre><p>After creating the above file, the user can use the following command to create a secret object,<br>
+<code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml</code></p>
 </li>
 <li>
-<p>Create isilon-certs-<n> secret
-Please refer <a href="../../helm/isilon/#certificate-validation-for-onefs-rest-api-calls">this section</a> for creating cert-secrets.
-Run <code>kubectl create -f isilon-creds.yaml</code> command to create the secret.</p>
+<p>Create isilon-certs-n secret.
+Please refer <a href="../../helm/isilon/#certificate-validation-for-onefs-rest-api-calls">this section</a> for creating cert-secrets.</p>
 </li>
 <li>
 <p>Create a CR (Custom Resource) for PowerScale using the sample files provided
@@ -1067,18 +1106,6 @@ Run <code>kubectl create -f isilon-creds.yaml</code> command to create the secre
 <td>/var/run/csi/csi.sock</td>
 </tr>
 <tr>
-<td>X_CSI_DEBUG</td>
-<td>To enable debug mode</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>X_CSI_ISI_ENDPOINT</td>
-<td>HTTPs endpoint of the PowerScale OneFS API server</td>
-<td>Yes</td>
-<td></td>
-</tr>
-<tr>
 <td>X_CSI_ISI_INSECURE</td>
 <td>Specifies whether SSL security needs to be enabled for communication between PowerScale and CSI Driver</td>
 <td>No</td>
@@ -1091,6 +1118,12 @@ Run <code>kubectl create -f isilon-creds.yaml</code> command to create the secre
 <td></td>
 </tr>
 <tr>
+<td>X_CSI_ALLOWED_NETWORKS</td>
+<td>Custom networks for PowerScale export. List of networks that can be used for NFS I/O traffic, CIDR format should be used</td>
+<td>No</td>
+<td>empty</td>
+</tr>
+<tr>
 <td>X_CSI_ISI_AUTOPROBE</td>
 <td>To enable auto probing for driver</td>
 <td>No</td>
@@ -1099,6 +1132,12 @@ Run <code>kubectl create -f isilon-creds.yaml</code> command to create the secre
 <tr>
 <td>X_CSI_ISILON_NO_PROBE_ON_START</td>
 <td>Indicates whether the controller/node should probe during initialization</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>X_CSI_MAX_VOLUMES_PER_NODE</td>
+<td>Specify the default value for the maximum number of volumes that the controller can publish to the node</td>
 <td>Yes</td>
 <td></td>
 </tr>
@@ -1150,8 +1189,13 @@ Run <code>kubectl create -f isilon-creds.yaml</code> command to create the secre
 <li>
 <p>Execute the following command to create PowerScale custom resource:
 <code>kubectl create -f &lt;input_sample_file.yaml&gt;</code> .
-This command will deploy the CSI-PowerScale driver in the namespace specified in input yaml file.</p>
+This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.</p>
 </li>
+</ol>
+<p><strong>Note</strong> :</p>
+<ol>
+<li>From CSI-PowerScale v1.6.0 and higher, Storage class and VolumeSnapshotClass will <strong>not</strong> be created as part of driver deployment. The user has to create Storageclass and Volume Snapshot Class.</li>
+<li>Node selector and node tolerations can be added in both controller parameters and node parameters section, based on the need.</li>
 </ol>
 
 	

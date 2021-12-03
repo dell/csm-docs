@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade PowerFlex CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/upgradation/drivers/powerflex/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Upgrade PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="371">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="256">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -925,8 +941,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#update-driver-from-v12v13-to-v14-using-helm">Update Driver from v1.2/v1.3 to v1.4 using Helm</a></li>
-    <li><a href="#update-driver-from-pre-v12-to-v14-using-helm">Update Driver from pre-v1.2 to v1.4 using Helm</a></li>
+    <li><a href="#update-driver-from-v13v14-to-v15-using-helm">Update Driver from v1.3/v1.4 to v1.5 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
   </ul>
 </nav>
@@ -979,38 +994,38 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell EMC PowerFlex using Helm or Dell CSI Operator.</p>
-<h2 id="update-driver-from-v12v13-to-v14-using-helm">Update Driver from v1.2/v1.3 to v1.4 using Helm</h2>
+<h2 id="update-driver-from-v13v14-to-v15-using-helm">Update Driver from v1.3/v1.4 to v1.5 using Helm</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone https://github.com/dell/csi-powerflex.git</code> to clone the git repository and get the v1.4 driver.</li>
-<li>You need to create config.json with configuration of your system.
+<li>Run <code>git clone https://github.com/dell/csi-powerflex.git</code> to clone the git repository and get the v1.5 driver.</li>
+<li>You need to create config.json with the configuration of your system.
 Check this section in installation documentation:  <a href="../../../installation/helm/powerflex#install-the-driver">Install the Driver</a>
-You must set the only system managed in v1.3/v1.2 driver as default in config.json in v1.4 so that the driver know the existing volumes belong to that system.</li>
+You must set the only system managed in v1.4/v1.3 driver as default in config.json in v1.5 so that the driver knows the existing volumes belong to that system.</li>
 <li>Update values file as needed.</li>
 <li>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running: <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade</code>.</li>
 </ol>
-<h2 id="update-driver-from-pre-v12-to-v14-using-helm">Update Driver from pre-v1.2 to v1.4 using Helm</h2>
-<p>A direct upgrade of the driver from an older version pre-v1.2 to version 1.4 is not supported because of breaking changes in Kubernetes APIs in the migration from alpha snapshots to beta snapshots. In order to update the driver in this situation you need to remove alpha snapshot related artifacts.</p>
-<p><strong>Steps</strong></p>
-<ol>
-<li>Before deleting the alpha snapshot CRDs, ensure that their version is v1alpha1 by examining the output of the <code>kubectl get crd</code> command.</li>
-<li>Delete any VolumeSnapshotClass present in the cluster.</li>
-<li>Delete all the alpha snapshot CRDs from the cluster by running the following commands:
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete crd volumesnapshotclasses.snapshot.storage.k8s.io
-kubectl delete crd volumesnapshotcontents.snapshot.storage.k8s.io
-kubectl delete crd volumesnapshots.snapshot.storage.k8s.io
-</code></pre></div></li>
-<li>Uninstall the driver using the <code>csi-uninstall.sh</code> script by running the command: <code>./csi-uninstall.sh --namespace vxflexos</code>.</li>
-<li>Install the driver using the steps described in the Installation Using Helm section for the CSI PowerFlex driver.</li>
-</ol>
 <p><em>NOTE:</em></p>
 <ul>
-<li>If you are upgrading from a driver version which was installed using Helm v2, ensure that you install Helm3 before installing the driver.</li>
-<li>Installation of the CSI Driver for Dell EMC PowerFlex version 1.4 driver is not supported on Kubernetes upstream clusters running version 1.17. You must upgrade your cluster to 1.18, 1.19, or 1.20 before attempting to install the new version of the driver.</li>
+<li>If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.</li>
+<li>Installation of the CSI Driver for Dell EMC PowerFlex version 1.5 driver is not supported on Kubernetes upstream clusters running version 1.17. You must upgrade your cluster to 1.19, 1.20, or 1.21 before attempting to install the new version of the driver.</li>
 <li>To update any installation parameter after the driver has been installed, change the <code>myvalues.yaml</code> file and run the install script with the option <em>--upgrade</em>, for example: <code>./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade</code>.</li>
 </ul>
 <h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
-<p>Follow the instructions for upgrade on the Dell CSI Operator <a href="https://github.com/dell/dell-csi-operator">GitHub</a> page.</p>
+<ol>
+<li>
+<p>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a>.</p>
+</li>
+<li>
+<p>Execute <code>bash scripts/install.sh --upgrade</code>
+This command will install the latest version of the operator.</p>
+</li>
+</ol>
+<blockquote>
+<p>Note: Dell CSI Operator version 1.4.0 and higher would install to the &lsquo;dell-csi-operator&rsquo; namespace by default.</p>
+</blockquote>
+<ol start="3">
+<li>To upgrade the driver, refer <a href="./../../../installation/operator/#update-csi-drivers">here</a>.</li>
+</ol>
 
 	
 	

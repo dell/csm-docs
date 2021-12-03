@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/installation/helm/powerstore/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing PowerStore CSI Driver via Helm
 ">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="1887">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="1906">
 
 
 
@@ -95,13 +95,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -154,7 +154,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -874,7 +874,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -934,8 +950,7 @@
         <li><a href="#fibre-channel-requirements">Fibre Channel requirements</a></li>
         <li><a href="#set-up-the-iscsi-initiator">Set up the iSCSI Initiator</a></li>
         <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
-        <li><a href="#configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</a></li>
-        <li><a href="#volume-snapshot-requirements">Volume Snapshot Requirements</a></li>
+        <li><a href="#optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</a></li>
       </ul>
     </li>
     <li><a href="#install-the-driver">Install the Driver</a></li>
@@ -944,6 +959,7 @@
         <li><a href="#what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</a></li>
       </ul>
     </li>
+    <li><a href="#volume-snapshot-class">Volume Snapshot Class</a></li>
   </ul>
 </nav>
 
@@ -1005,15 +1021,15 @@
 
 	       
 	<p>The CSI Driver for Dell EMC PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer">documentation</a>.</p>
-<p>The controller section of the Helm chart installs the following components in a <em>Deployment</em> in the namespace <code>csi-powerstore</code>:</p>
+<p>The controller section of the Helm chart installs the following components in a <em>Deployment</em> in the specified namespace:</p>
 <ul>
 <li>CSI Driver for Dell EMC PowerStore</li>
 <li>Kubernetes External Provisioner, which provisions the volumes</li>
 <li>Kubernetes External Attacher, which attaches the volumes to the containers</li>
-<li>Kubernetes External Snapshotter, which provides snapshot support</li>
+<li>(Optional) Kubernetes External Snapshotter, which provides snapshot support</li>
 <li>Kubernetes External Resizer, which resizes the volume</li>
 </ul>
-<p>The node section of the Helm chart installs the following component in a <em>DaemonSet</em> in the namespace <code>csi-powerstore</code>:</p>
+<p>The node section of the Helm chart installs the following component in a <em>DaemonSet</em> in the specified namespace:</p>
 <ul>
 <li>CSI Driver for Dell EMC PowerStore</li>
 <li>Kubernetes Node Registrar, which handles the driver registration</li>
@@ -1021,37 +1037,40 @@
 <h2 id="prerequisites">Prerequisites</h2>
 <p>The following are requirements to be met before installing the CSI Driver for Dell EMC PowerStore:</p>
 <ul>
-<li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/">supported versions</a>)</li>
+<li>Install Kubernetes or OpenShift (see <a href="../../../dell-csi-driver/#features-and-capabilities">supported versions</a>)</li>
 <li>Install Helm 3</li>
 <li>If you plan to use either the Fibre Channel or iSCSI protocol, refer to either <em>Fibre Channel requirements</em> or <em>Set up the iSCSI Initiator</em> sections below. You can use NFS volumes without FC or iSCSI configuration.</li>
 </ul>
 <blockquote>
 <p>You can use either the Fibre Channel or iSCSI protocol, but you do not need both.</p>
 </blockquote>
+<blockquote>
+<p>If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group</p>
+</blockquote>
 <ul>
 <li>Linux native multipathing requirements</li>
-<li>Configure Mount propagation on container runtime (i.e. Docker)</li>
-<li>Volume Snapshot requirements</li>
-<li>The nonsecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location.</li>
+<li>Mount propagation is enabled on container runtime that is being used</li>
+<li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
+<li>Nonsecure registries are defined in Docker or other container runtimes, for CSI drivers that are hosted in a non-secure location.</li>
 <li>You can access your cluster with kubectl and helm.</li>
 <li>Ensure that your nodes support mounting NFS volumes.</li>
 </ul>
 <h3 id="install-helm-30">Install Helm 3.0</h3>
-<p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerFlex.</p>
+<p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerStore.</p>
 <p><strong>Steps</strong></p>
 <p>Run the <code>curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash</code> command to install Helm 3.0.</p>
 <h3 id="fibre-channel-requirements">Fibre Channel requirements</h3>
 <p>Dell EMC PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
 following requirement is met before you install the CSI Driver for Dell EMC PowerStore:</p>
 <ul>
-<li>Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be done.</li>
+<li>Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.</li>
 </ul>
 <h3 id="set-up-the-iscsi-initiator">Set up the iSCSI Initiator</h3>
-<p>The CSI Driver for Dell EMC PowerStore v1.3 supports iSCSI connectivity.</p>
+<p>The CSI Driver for Dell EMC PowerStore v1.4 supports iSCSI connectivity.</p>
 <p>If you use the iSCSI protocol, set up the iSCSI initiators as follows:</p>
 <ul>
 <li>Ensure that the iSCSI initiators are available on both Controller and Worker nodes.</li>
-<li>Kubernetes nodes must have access (network connectivity) to an iSCSI director on the Dell EMC PowerStore array that
+<li>Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell EMC PowerStore array that
 has IP interfaces. Manually create IP routes for each node that connects to the Dell EMC PowerStore.</li>
 <li>All Kubernetes nodes must have the <em>iscsi-initiator-utils</em> package for CentOS/RHEL or <em>open-iscsi</em> package for Ubuntu installed, and the <em>iscsid</em> service must be enabled and running.
 To do this, run the <code>systemctl enable --now iscsid</code> command.</li>
@@ -1073,24 +1092,15 @@ PowerStore.</p>
 <li>Enable <code>user_friendly_names</code> and <code>find_multipaths</code> in the <code>multipath.conf</code> file.</li>
 <li>Ensure that the multipath command for <code>multipath.conf</code> is available on all Kubernetes nodes.</li>
 </ul>
-<h3 id="configure-mount-propagation-on-container-runtime">Configure Mount Propagation on Container Runtime</h3>
-<p>It is required to configure mount propagation on your container runtime on all Kubernetes nodes before installing the CSI Driver for Dell EMC PowerStore.  The following is instruction on how to do this with Docker.  If you use another container runtime please follow the recommended instructions from the vendor to configure mount propagation.</p>
-<p><strong>Steps</strong></p>
-<ol>
-<li>Edit the service section of <code>/etc/systemd/system/multi-user.target.wants/docker.service</code> file to add the following lines:
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker.service
-<span style="color:#ce5c00;font-weight:bold">[</span>Service<span style="color:#ce5c00;font-weight:bold">]</span>...
-<span style="color:#000">MountFlags</span><span style="color:#ce5c00;font-weight:bold">=</span>shared
-</code></pre></div></li>
-<li>Restart the docker service with <code>systemctl daemon-reload</code> and <code>systemctl restart docker</code> on all the nodes.</li>
-</ol>
-<p><em>NOTE:</em> Some distribution, like Ubuntu, already has <em>MountFlags</em> set by default.</p>
-<h3 id="volume-snapshot-requirements">Volume Snapshot Requirements</h3>
-<h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
+<h3 id="optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</h3>
+<p>Applicable only if you decided to enable snapshot feature in <code>values.yaml</code></p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
 <p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github.</p>
 <ul>
-<li>If on Kubernetes 1.18/1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd">v3.0.3</a></li>
-<li>If on Kubernetes 1.20 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd">v4.0.0</a></li>
+<li>If on Kubernetes 1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd">v3.0.x</a></li>
+<li>If on Kubernetes 1.20/1.21 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd">v4.0.x</a></li>
 </ul>
 <h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
 <p>The beta Volume Snapshots in Kubernetes version 1.17 and later, the CSI external-snapshotter sidecar is split into two controllers:</p>
@@ -1100,15 +1110,15 @@ PowerStore.</p>
 </ul>
 <p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available:</p>
 <ul>
-<li>If on Kubernetes 1.18/1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller">v3.0.3</a></li>
-<li>If on Kubernetes 1.20 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller">v4.0.0</a></li>
+<li>If on Kubernetes 1.19 (beta snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller">v3.0.x</a></li>
+<li>If on Kubernetes 1.20 and 1.21 (v1 snapshots) use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller">v4.0.x</a></li>
 </ul>
 <p><em>NOTE:</em></p>
 <ul>
 <li>The manifests available on GitHub install the snapshotter image:
 <ul>
-<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.3&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.3</a></li>
-<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v4.0.0</a></li>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.3&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v3.0.x</a></li>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v4.0.x</a></li>
 </ul>
 </li>
 <li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
@@ -1122,8 +1132,8 @@ kubectl create -f client/config/crd
 kubectl create -f deploy/kubernetes/snapshot-controller
 </code></pre></div><p><em>NOTE:</em></p>
 <ul>
-<li>It is recommended to use v3.0.3 version of snapshotter/snapshot-controller when using Kubernetes v1.18, v1.19</li>
-<li>When using Kubernetes v1.20 it is recommended to use v4.0.0 version of snapshotter/snapshot-controller.</li>
+<li>It is recommended to use 3.0.x version of snapshotter/snapshot-controller when using Kubernetes 1.19</li>
+<li>When using Kubernetes 1.20/1.21 it is recommended to use 4.0.x version of snapshotter/snapshot-controller.</li>
 <li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
 </ul>
 <h2 id="install-the-driver">Install the Driver</h2>
@@ -1133,7 +1143,8 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 <p>Run <code>git clone https://github.com/dell/csi-powerstore.git</code> to clone the git repository.</p>
 </li>
 <li>
-<p>Ensure that you have created namespace where you want to install the driver. You can run <code>kubectl create namespace csi-powerstore</code> to create a new one.</p>
+<p>Ensure that you have created namespace where you want to install the driver. You can run <code>kubectl create namespace csi-powerstore</code> to create a new one. &ldquo;csi-powerstore&rdquo; is just an example. You can choose any name for the namespace.
+But make sure to align to the same namespace during the whole installation.</p>
 </li>
 <li>
 <p>Check <code>helm/csi-powerstore/driver-image.yaml</code> and confirm the driver image points to new image.</p>
@@ -1145,18 +1156,19 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 <p>Edit <code>helm/config.yaml</code> file and configure connection information for your PowerStore arrays changing following parameters:</p>
 <ul>
 <li><em>endpoint</em>: defines the full URL path to the PowerStore API.</li>
+<li><em>globalID</em>: specifies what storage cluster the driver should use</li>
 <li><em>username</em>, <em>password</em>: defines credentials for connecting to array.</li>
-<li><em>insecure</em>: defines if we should use insecure connection or not.</li>
-<li><em>default</em>: defines if we should treat the current array as a default.</li>
-<li><em>block-protocol</em>: defines what SCSI transport protocol we should use (FC, ISCSI, None, or auto).</li>
-<li><em>nas-name</em>: defines what NAS should be used for NFS volumes.</li>
+<li><em>skipCertificateValidation</em>: defines if we should use insecure connection or not.</li>
+<li><em>isDefault</em>: defines if we should treat the current array as a default.</li>
+<li><em>blockProtocol</em>: defines what SCSI transport protocol we should use (FC, ISCSI, None, or auto).</li>
+<li><em>nasName</em>: defines what NAS should be used for NFS volumes.</li>
 </ul>
 <p>Add more blocks similar to above for each PowerStore array if necessary.</p>
 </li>
 <li>
 <p>Create storage classes using ones from <code>helm/samples/storageclass</code> folder as an example and apply them to the Kubernetes cluster by running <code>kubectl create -f &lt;path_to_storageclass_file&gt;</code></p>
 <blockquote>
-<p>If you do not specify <code>arrayIP</code> parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.</p>
+<p>If you do not specify <code>arrayID</code> parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.</p>
 </blockquote>
 </li>
 <li>
@@ -1262,11 +1274,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 </li>
 </ul>
 <h2 id="storage-classes">Storage Classes</h2>
-<p>The CSI driver for Dell EMC PowerStore version 1.3 and later, <code>dell-csi-helm-installer</code> will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the <code>helm/samples</code> folder. Please use these samples to create new storage classes to provision storage. See this <a href="../../../../v1/installation/helm/powerstore/#storage-classes">note</a> for the driving reason behind this change.</p>
+<p>The CSI driver for Dell EMC PowerStore version 1.3 and later, <code>dell-csi-helm-installer</code> does not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the <code>helm/samples</code> folder. Use these samples to create new storage classes to provision storage. See this <a href="../../../../v2/installation/helm/powerstore/#storage-classes">note</a> for the driving reason behind this change.</p>
 <h3 id="what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</h3>
-<p><em>Upgrading from CSI PowerStore v1.2 driver</em>
+<p><em>Upgrading from CSI PowerStore v1.2 driver:</em>
 The storage classes created as part of the installation have an annotation - &ldquo;helm.sh/resource-policy&rdquo;: keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.</p>
-<p><em>Upgrading from an older version of the driver</em>
+<p><em>Upgrading from an older version of the driver:</em>
 The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation &ldquo;helm.sh/resource-policy&rdquo;: keep before performing an upgrade.</p>
 <p><em>NOTE:</em> If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
 <p><strong>Steps to create storage class:</strong></p>
@@ -1275,8 +1287,8 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 <li>Edit the sample storage class yaml file and update following parameters:</li>
 </ol>
 <ul>
-<li><em>arrayIP</em>: specifies what array driver should use to provision volumes, if not specified driver will use array specified as <code>default</code> in <code>helm/config.yaml</code></li>
-<li><em>FsType</em>: specifies what filesystem type driver should use, possible variants <code>ext4</code>, <code>xfs</code>, <code>nfs</code>, if not specified driver will use <code>ext4</code> by default</li>
+<li><em>arrayID</em>: specifies what storage cluster the driver should use, if not specified driver will use storage cluster specified as <code>default</code> in <code>helm/config.yaml</code></li>
+<li><em>FsType</em>: specifies what filesystem type driver should use, possible variants <code>ext4</code>, <code>xfs</code>, <code>nfs</code>, if not specified driver will use <code>ext4</code> by default.</li>
 <li><em>allowedTopologies</em> (Optional): If you want you can also add topology constraints.</li>
 </ul>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">allowedTopologies</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1290,7 +1302,9 @@ The storage classes will be deleted if you upgrade the driver. If you wish to co
 <li>Create your storage class by using <code>kubectl</code>:</li>
 </ol>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f &lt;path_to_storageclass_file&gt;
-</code></pre></div><p><em>NOTE:</em> Deleting a storage class has no impact on a running Pod with mounted PVCs. You won&rsquo;t be able to provision new PVCs until at least one storage class is newly created.</p>
+</code></pre></div><p><em>NOTE:</em> Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.</p>
+<h2 id="volume-snapshot-class">Volume Snapshot Class</h2>
+<p>Starting CSI PowerStore v1.4, <code>dell-csi-helm-installer</code> will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the <em>helm/samples/</em> folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.</p>
 
 	
 	

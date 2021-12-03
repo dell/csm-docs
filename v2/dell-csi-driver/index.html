@@ -87,13 +87,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -113,7 +113,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -146,7 +146,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -866,7 +866,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -968,7 +984,7 @@
 	<h1>Introduction</h1>
      
 	
-	<p>The CSI Drivers by Dell EMC implement an interface between <a href="https://kubernetes-csi.github.io/docs/">CSI</a> (CSI spec v1.2) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.</p>
+	<p>The CSI Drivers by Dell EMC implement an interface between <a href="https://kubernetes-csi.github.io/docs/">CSI</a> (CSI spec v1.3) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.</p>
 <p>The following are the drivers provided for the Dell storage family:</p>
 <table>
 <thead>
@@ -984,6 +1000,14 @@
 <tbody>
 <tr>
 <td>Current</td>
+<td align="center">v1.6</td>
+<td align="center">v1.6</td>
+<td align="center">v1.4</td>
+<td align="center">v1.5</td>
+<td align="center">v1.7</td>
+</tr>
+<tr>
+<td><a href="../../v1/">Previous</a></td>
 <td align="center">v1.5</td>
 <td align="center">v1.5</td>
 <td align="center">v1.3</td>
@@ -991,7 +1015,7 @@
 <td align="center">v1.6</td>
 </tr>
 <tr>
-<td><a href="../../v2/">Previous</a></td>
+<td><a href="../../v2/">Older</a></td>
 <td align="center">v1.4</td>
 <td align="center">v1.4</td>
 <td align="center">v1.2</td>
@@ -999,7 +1023,7 @@
 <td align="center">v1.5</td>
 </tr>
 <tr>
-<td><a href="../archives/">Older</a></td>
+<td><a href="../archives/">Archives</a></td>
 <td align="center">v1.3</td>
 <td align="center">v1.3</td>
 <td align="center">v1.1</td>
@@ -1008,7 +1032,6 @@
 </tr>
 </tbody>
 </table>
-<p><em>NOTE:</em> This doc version is no longer supported by us. You can check our <a href="/csm-docs/">latest version</a></p>
 <h2 id="architecture">Architecture</h2>
 <p><img src="Architecture_Diagram.png" alt="Architecture"></p>
 <h2 id="features-and-capabilities">Features and capabilities</h2>
@@ -1023,7 +1046,7 @@
 <tr>
 <th></th>
 <th align="center">PowerMax</th>
-<th align="center">PowerFlex/VxFlex OS</th>
+<th align="center">PowerFlex</th>
 <th align="center">   Unity</th>
 <th align="center">PowerScale/Isilon</th>
 <th align="center">PowerStore</th>
@@ -1032,34 +1055,34 @@
 <tbody>
 <tr>
 <td>Storage Array</td>
-<td align="center">5978.479.479, 5978.669.669, Unisphere 9.1, 9.2</td>
-<td align="center">3.5.x</td>
-<td align="center">OE 5.0.2, 5.0.3, 5.0.4, 5.0.5, 5.0.6</td>
+<td align="center">5978.479.479, 5978.669.669, Unisphere 9.2</td>
+<td align="center">3.5.x, 3.6.x</td>
+<td align="center">5.0.3, 5.0.4, 5.0.5, 5.0.6, 5.0.7</td>
 <td align="center">OneFS 8.1, 8.2, 9.0, 9.1</td>
-<td align="center">1.0.x</td>
+<td align="center">1.0.x, 2.0.x</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
-<td align="center">1.18, 1.19, 1.20</td>
-<td align="center">1.18, 1.19, 1.20</td>
-<td align="center">1.18, 1.19, 1.20</td>
-<td align="center">1.18, 1.19, 1.20</td>
-<td align="center">1.18, 1.19, 1.20</td>
+<td align="center">1.19, 1.20, 1.21</td>
+<td align="center">1.19, 1.20, 1.21</td>
+<td align="center">1.19, 1.20, 1.21</td>
+<td align="center">1.19, 1.20, 1.21</td>
+<td align="center">1.19, 1.20, 1.21</td>
 </tr>
 <tr>
 <td>RHEL</td>
-<td align="center">7.8, 7.9, 8.3</td>
-<td align="center">7.8, 7.9, 8.3</td>
-<td align="center">7.8, 7.9, 8.3</td>
-<td align="center">7.8, 7.9, 8.3</td>
-<td align="center">7.8, 7.9, 8.3</td>
+<td align="center">7.x,8.x</td>
+<td align="center">7.x,8.x</td>
+<td align="center">7.x,8.x</td>
+<td align="center">7.x,8.x</td>
+<td align="center">7.x,8.x</td>
 </tr>
 <tr>
 <td>Ubuntu</td>
 <td align="center">20.04</td>
 <td align="center">20.04</td>
-<td align="center">20.04</td>
-<td align="center">20.04</td>
+<td align="center">18.04, 20.04</td>
+<td align="center">18.04, 20.04</td>
 <td align="center">20.04</td>
 </tr>
 <tr>
@@ -1075,40 +1098,56 @@
 <td align="center">no</td>
 <td align="center">15SP2</td>
 <td align="center">15SP2</td>
-<td align="center">no</td>
-<td align="center">no</td>
+<td align="center">15SP2</td>
+<td align="center">15SP2</td>
 </tr>
 <tr>
 <td>Fedora Core OS</td>
 <td align="center">no</td>
-<td align="center">5.10</td>
+<td align="center">5.x</td>
 <td align="center">no</td>
 <td align="center">no</td>
 <td align="center">no</td>
 </tr>
 <tr>
-<td>OpenShift</td>
-<td align="center">4.6, 4.7</td>
-<td align="center">4.6, 4.7</td>
-<td align="center">4.6, 4.7</td>
-<td align="center">4.6, 4.7</td>
-<td align="center">4.6, 4.7</td>
+<td>Red Hat OpenShift</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
+<td align="center">4.6, 4.6 EUS, 4.7</td>
 </tr>
 <tr>
-<td>Docker EE</td>
-<td align="center">3.1</td>
-<td align="center">3.1</td>
-<td align="center">3.1</td>
-<td align="center">3.1</td>
-<td align="center">3.1</td>
+<td>Mirantis Kubernetes Engine</td>
+<td align="center">3.4.0</td>
+<td align="center">3.4.0</td>
+<td align="center">3.4.0</td>
+<td align="center">3.4.0</td>
+<td align="center">3.4.0</td>
 </tr>
 <tr>
 <td>Google Anthos</td>
-<td align="center">1.5</td>
+<td align="center">1.6</td>
 <td align="center">1.6</td>
 <td align="center">no</td>
 <td align="center">no</td>
-<td align="center">1.5</td>
+<td align="center">1.7</td>
+</tr>
+<tr>
+<td>VMware Tanzu</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>Rancher Kubernetes Engine</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+<td align="center">no</td>
 </tr>
 </tbody>
 </table>
@@ -1222,7 +1261,7 @@
 </tr>
 <tr>
 <td>Multi-array</td>
-<td align="center">yes (via Unisphere)</td>
+<td align="center">yes</td>
 <td align="center">yes</td>
 <td align="center">yes</td>
 <td align="center">yes</td>
@@ -1318,6 +1357,10 @@
     
     
     <hr class="panel-line">
+        
+            
+        
+            
         
             
         

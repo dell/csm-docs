@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade Unity CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/upgradation/drivers/unity/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Upgrade Unity CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="251">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="250">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -984,52 +1000,39 @@
 	<p>You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.</p>
 <h3 id="using-helm">Using Helm</h3>
 <p><strong>Note:</strong> While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
-<p>Preparing myvalues.yaml is the same as explained in install section.</p>
-<p>To upgrade the driver from csi-unity v1.4 to csi-unity 1.5 (across K8S 1.18, K8S 1.19, K8S 1.20).</p>
+<p>Preparing myvalues.yaml is the same as explained in the install section.</p>
+<p>To upgrade the driver from csi-unity v1.5 to csi-unity 1.6 (across K8S 1.19, K8S 1.20, K8S 1.21).</p>
 <ol>
-<li>
-<p>Get the latest csi-unity 1.5 code from Github.</p>
-</li>
-<li>
-<p>Create myvalues.yaml according to csi-unity 1.5 .</p>
-</li>
-<li>
-<p>Delete the existing default storage classes of csi-unity 1.4 .</p>
-</li>
-<li>
-<p>Clone the repository <a href="https://github.com/dell/csi-unity">https://github.com/dell/csi-unity</a> , copy the helm/csi-unity/values.yaml to the new location
-csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.</p>
-</li>
-<li>
-<p>Navigate to common-helm-installer folder and execute the following command:
-<code>./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade</code></p>
-</li>
-<li>
-<p>If the value of &lsquo;createStorageClassesWithTopology&rsquo; is set to &ldquo;true&rdquo; in myvalues.yaml , then</p>
-<ul>
-<li>Check the default storage classes, VolumeBindingMode should be &lsquo;WaitForFirstConsumer&rsquo;.</li>
-</ul>
-</li>
+<li>Get the latest csi-unity 1.6 code from Github.</li>
+<li>Create myvalues.yaml according to csi-unity 1.6 .</li>
+<li>Clone the repository <a href="https://github.com/dell/csi-unity">https://github.com/dell/csi-unity</a> , copy the helm/csi-unity/values.yaml to the new location
+csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.</li>
+<li>Navigate to common-helm-installer folder and execute the following command:
+<code>./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade</code></li>
 </ol>
-<p><strong>Note:</strong> User has to re-create existing custom-storage classes (if any) according to latest (v1.5) format.</p>
+<p><strong>Note:</strong></p>
+<ol>
+<li>User has to re-create existing custom-storage classes (if any) according to the latest (v1.6) format.</li>
+<li>User has to create Volumesnapshotclass after upgrade for taking Snapshots.</li>
+<li>Secret.json/Secret.yaml files can be updated according to Multiarray Normalization parameters only after upgrading the driver.</li>
+</ol>
 <h3 id="using-operator">Using Operator</h3>
 <p><strong>Note:</strong> While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.</p>
-<p>To upgrade the driver from csi-unity v1.4 to csi-unity v1.5 (OpenShift 4.6) :</p>
+<p>To upgrade the driver from csi-unity v1.5 to csi-unity v1.6 (OpenShift 4.6/4.7) :</p>
 <ol>
 <li>
-<p>Clone operator version 1.3.0</p>
+<p>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a>.</p>
 </li>
 <li>
 <p>Execute <code>bash scripts/install.sh --upgrade</code>
-This command will install latest version of operator.</p>
+This command will install the latest version of the operator.</p>
 </li>
-<li>
-<p>Furnish the sample CR yaml according to your environment.</p>
-</li>
-<li>
-<p>For upgrading the csi-unity driver execute the following command:</p>
-<p><code>kubectl apply -f &lt;furnished-cr.yaml&gt;</code></p>
-</li>
+</ol>
+<blockquote>
+<p>Note: Dell CSI Operator version 1.4.0 and higher would install to the &lsquo;dell-csi-operator&rsquo; namespace by default.</p>
+</blockquote>
+<ol start="3">
+<li>To upgrade the driver, refer <a href="./../../../installation/operator/#update-csi-drivers">here</a>.</li>
 </ol>
 
 	

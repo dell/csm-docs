@@ -12,11 +12,11 @@
 <meta property="og:description" content="Tests to validate PowerMax CSI Driver installation" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/installation/test/powermax/" />
-<meta property="article:modified_time" content="2021-06-18T13:39:03+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Test PowerMax CSI Driver">
 <meta itemprop="description" content="Tests to validate PowerMax CSI Driver installation">
-<meta itemprop="dateModified" content="2021-06-18T13:39:03&#43;05:30" />
-<meta itemprop="wordCount" content="769">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="726">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -982,7 +998,7 @@
 	       
 	<p>This section provides multiple methods to test driver functionality in your environment. The tests are validated using bash as the default shell.</p>
 <p><strong>Note</strong>: To run the test for CSI Driver for Dell EMC PowerMax, install Helm 3.</p>
-<p>The <em>csi-powermax</em> repository includes examples of how you can use the CSI Driver for Dell EMC PowerMax. These examples automate the creation of Pods using the default storage classes that were created during installation. The shell scripts are used to automate the installation and uninstallation of helm charts for the creation of Pods with different number of volumes. To test the installation of the CSI driver, perform these tests:</p>
+<p>The <em>csi-powermax</em> repository includes examples of how you can use the CSI Driver for Dell EMC PowerMax. The shell scripts are used to automate the installation and uninstallation of helm charts for the creation of Pods with a different number of volumes in a given namespace using the storageclass provided. To test the installation of the CSI driver, perform these tests:</p>
 <ul>
 <li>Volume clone test</li>
 <li>Volume test</li>
@@ -998,28 +1014,28 @@
 <p>Run the <code>cd csi-powermax/test/helm</code> command to go to the <code>csi-powermax/test/helm</code> directory, which contains the <code>starttest.sh</code> script and the <em>2vols</em> directories.</p>
 </li>
 <li>
-<p>Run the starttest.sh script and provide it with a test name. The following is a sample command that can be used to run the <em>2vols</em> test: <code>./starttest.sh -t 2vols -n test</code></p>
+<p>Run the starttest.sh script and provide it with a test name. The following is a sample command that can be used to run the <em>2vols</em> test: <code>./starttest.sh -t 2vols -n &lt;test_namespace&gt; -s &lt;storageclass-name&gt;</code></p>
 <p>This script installs a helm chart that creates a Pod with a container, creates two PVCs, and mounts them into the created container. You can now log in to the newly created container and check the mounts.</p>
 </li>
 <li>
-<p>Run the <code>./stoptest.sh -t 2vols -n test</code> script to stop the test. This script deletes the Pods and the PVCs created during the test and uninstalls the helm chart.</p>
+<p>Run the <code>/stoptest.sh -t 2vols -n &lt;test_namespace&gt;</code> script to stop the test. This script deletes the Pods and the PVCs created during the test and uninstalls the helm chart.</p>
 </li>
 </ol>
 <blockquote>
-<p><em>NOTE</em>: Helm tests have been designed assuming that users are using the default storageclass names (powermax and powermax-xfs). If your storageclass names differ from the default values, such as when deploying with the Operator, update the templates in <em>2vols</em> accordingly (located in <code>test/helm/2vols/templates/</code> directory). You can use <code>kubectl get sc</code> to check for the storageclass names.</p>
+<p><em>NOTE</em>: Helm tests have been designed assuming that users are created storageclass names like <storageclass-name> and <storageclass-name-xfs>. You can use <code>kubectl get sc</code> to check for the storageclass names.</p>
 </blockquote>
 <h4 id="volume-clone-test">Volume clone test</h4>
 <p>Use this procedure to perform a volume clone test.</p>
 <ol>
 <li>Create a namespace with the name <em>test</em>.</li>
 <li>Run the <code>cd csi-powermax/test/helm</code> command to go to the <code>csi-powermax/test/helm</code> directory, which contains the <code>volumeclonetest.sh</code> script.</li>
-<li>Run the <code>volumeclonetest.sh</code> script using the following command: <code>bash volumeclonetest.sh</code></li>
+<li>Run the <code>volumeclonetest.sh</code> script using the following command: <code>bash volumeclonetest.sh -n &lt;test_namespace&gt; -s &lt;storageclass-name&gt;</code></li>
 </ol>
 <p>This script does the following:</p>
 <ul>
 <li>Installs a helm chart that creates a Pod with a container, creates two PVCs, and mounts them into the created container.</li>
 <li>Then it creates a file on one of the PVCs and calculates its checksum.</li>
-<li>After that, it uses that PVC as the data source to create a new PVC and mounts it on the same container. It checks if the file that existed in the source PVC also exists in the new PVC, calculates its checksum and compares it to the checksum previously calculated.</li>
+<li>After that, it uses that PVC as the data source to create a new PVC and mounts it on the same container. It checks if the file that existed in the source PVC also exists in the new PVC, calculates its checksum, and compares it to the checksum previously calculated.</li>
 <li>Finally, it cleans up all the resources that are created as part of the test.</li>
 </ul>
 <h4 id="snapshot-test">Snapshot test</h4>
@@ -1027,30 +1043,30 @@
 <ol>
 <li>Create a namespace with the name <em>test</em>.</li>
 <li>Run the <code>cd csi-powermax/test/helm</code> command to go to the <code>csi-powermax/test/helm</code> directory, which contains the <code>snaprestoretest.sh</code>script.</li>
-<li>Run the <code>snaprestoretest.sh</code> script by running the command : <code>bash snaprestoretest.sh</code></li>
+<li>Run the <code>snaprestoretest.sh</code> script by running the command : <code>bash snaprestoretest.sh -n &lt;test_namespace&gt; -s &lt;storageclass-name&gt;</code></li>
 </ol>
 <p>This script does the following:</p>
 <ul>
 <li>Installs a helm chart that creates a Pod with a container, creates two PVCs, and mounts them into the created container.</li>
 <li>Writes some data to one of the PVCs.</li>
-<li>After that, it creates a snapshot on that PVC and uses it as a data source to create a new PVC. It mounts the newly created PVC to the container created earlier and then lists the contents of the source and the target PVCs.</li>
+<li>After that, it creates a snapshot of that PVC and uses it as a data source to create a new PVC. It mounts the newly created PVC to the container created earlier and then lists the contents of the source and the target PVCs.</li>
 <li>Cleans up all the resources that were created as part of the test.</li>
 </ul>
 <blockquote>
-<p><em>NOTE</em>: This test has been designed assuming that users are using the snapshot class name <code>powermax-snapclass</code> which is created by the Helm-based installer. If you have an operator-based deployment, the name of the snapshot class will differ. You must update the snapshot class name in the file <code>betaSnap1.yaml</code> present in the <code>test/helm</code> folder based on your method of deployment. To get a list of volume snapshot classes, run the command - <code>kubectl get volumesnapshotclass</code></p>
+<p><em>NOTE</em>: This test has been designed assuming that users are using the snapshot class name <code>powermax-snapclass</code>. You must update the snapshot class name in the file <code>betaSnap1.yaml/snap1.yaml</code> present in the test/helm folder based on your method of deployment. To get a list of volume snapshot classes, run the command - <code>kubectl get volumesnapshotclass</code></p>
 </blockquote>
 <h4 id="volume-expansion-test">Volume Expansion test</h4>
 <p>Use this procedure to perform a volume expansion test.</p>
 <ol>
 <li>Create a namespace with the name <em>test</em></li>
 <li>Run the <code>cd csi-powermax/test/helm</code> command to go to the <code>csi-powermax/test/helm</code> directory, which contains the <code>volumeexpansiontest.sh</code>script.</li>
-<li>Run the <code>volumeexpansiontest.sh</code> script by running the command : <code>bash volumeexpansiontest.sh</code></li>
+<li>Run the <code>volumeexpansiontest.sh</code> script by running the command : <code>bash volumeexpansiontest.sh -n &lt;test_namespace&gt; -s &lt;storageclass-name&gt;</code></li>
 </ol>
 <p>This script does the following:</p>
 <ul>
-<li>Installs a helm chart that creates a Pod with a container, creates one PVC and mounts it into the created container</li>
+<li>Installs a helm chart that creates a Pod with a container, creates one PVC, and mounts it into the created container</li>
 <li>Writes some data to the PVC</li>
-<li>After that, it calculates the checksum of the written data, expands the PVC and then recalculates the checksum</li>
+<li>After that, it calculates the checksum of the written data, expands the PVC, and then recalculates the checksum</li>
 <li>Cleans up all the resources that were created as part of the test</li>
 </ul>
 

@@ -12,10 +12,10 @@
 <meta property="og:description" content="Troubleshooting Dell CSI Operator" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/troubleshooting/operator/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Dell CSI Operator">
 <meta itemprop="description" content="Troubleshooting Dell CSI Operator">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
 <meta itemprop="wordCount" content="382">
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -973,26 +989,24 @@
 	<hr>
 <ul>
 <li>
-<p>Before installing the drivers, Dell CSI Operator tries to validate the Custom Resource being created. If some mandatory environment variables are missing or there is a type mismatch, then the Operator will report an error during the reconciliation attempts.<br>
-Because of this, the status of the Custom Resource will change to &ldquo;Failed&rdquo; and the error captured in the &ldquo;ErrorMessage&rdquo; field in the status.<br>
-For e.g. - If the PowerMax driver was installed in the namespace test-powermax and has the name powermax, then run the command <code>kubectl get csipowermax/powermax -n test-powermax -o yaml</code> to get the Custom Resource details.<br>
-If there was an error while installing the driver, then you would see a status like this -</p>
+<p>Before installing the drivers, Dell CSI Operator tries to validate the Custom Resource being created. If some mandatory environment variables are missing or there is a type mismatch, then the Operator will report an error during the reconciliation attempts.</p>
+<p>Because of this, the status of the Custom Resource will change to &ldquo;Failed&rdquo; and the error captured in the &ldquo;ErrorMessage&rdquo; field in the status.</p>
+<p>For example - If the PowerMax driver was installed in the namespace test-powermax and has the name powermax, then run the command <code>kubectl get csipowermax/powermax -n test-powermax -o yaml</code> to get the Custom Resource details.</p>
+<p>If there was an error while installing the driver, then you would see a status like this:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">status</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">status</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">errorMessage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>mandatory<span style="color:#f8f8f8;text-decoration:underline"> </span>Env<span style="color:#f8f8f8;text-decoration:underline"> </span>- X_CSI_K8S_CLUSTER_PREFIX<span style="color:#f8f8f8;text-decoration:underline"> </span>not<span style="color:#f8f8f8;text-decoration:underline"> </span>specified<span style="color:#f8f8f8;text-decoration:underline"> </span>in<span style="color:#f8f8f8;text-decoration:underline"> </span>user<span style="color:#f8f8f8;text-decoration:underline"> </span>spec<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">state</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Failed<span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>The state of the Custom Resource can also change to <code>Failed</code> because of any other prohibited updates or any failure while installing the driver. In order to recover from this failure,
-fix the error in the manifest and update/patch the Custom Resource</p>
+</span></code></pre></div><p>The state of the Custom Resource can also change to <code>Failed</code> because of any other prohibited updates or any failure while installing the driver. In order to recover from this failure, fix the error in the manifest and update/patch the Custom Resource</p>
 </li>
 <li>
-<p>After an update to the driver, the controller pod may not have the latest desired specification<br>
-The above happens when the controller pod was in a failed state before applying the update. Even though the Dell CSI Operator updates the pod template specification for the StatefulSet, the StatefulSet controller does not apply the update to the pod. This happens because of the unique nature of StatefulSets where the controller tries to retain the last known working state.</p>
+<p>After an update to the driver, the controller pod may not have the latest desired specification.</p>
+<p>This happens when the controller pod was in a failed state before applying the update. Even though the Dell CSI Operator updates the pod template specification for the StatefulSet, the StatefulSet controller does not apply the update to the pod. This happens because of the unique nature of StatefulSets where the controller tries to retain the last known working state.</p>
 <p>To get around this problem, the Dell CSI Operator forces an update of the pod specification by deleting the older pod. In case the Dell CSI Operator fails to do so, delete the controller pod to force an update of the controller pod specification</p>
 </li>
 <li>
-<p>The Status of the CSI Driver Custom Resource shows the state of the driver pods after installation. This state will not be updated automatically if there are any changes to the driver pods outside any Operator operations
-At times because of inconsistencies in fetching data from the Kubernetes cache, state of some driver pods may not be updated correctly in the status. To force an update of the state, you can update
-the Custom Resource forcefully by setting forceUpdate to true. If all the driver pods are in <code>Available</code> State, then the state of the Custom Resource will be updated as <code>Running</code></p>
+<p>The Status of the CSI Driver Custom Resource shows the state of the driver pods after installation. This state will not be updated automatically if there are any changes to the driver pods outside any Operator operations.</p>
+<p>At times because of inconsistencies in fetching data from the Kubernetes cache, the state of some driver pods may not be updated correctly in the status. To force an update of the state, you can update the Custom Resource forcefully by setting forceUpdate to true. If all the driver pods are in the <code>Available</code> State, then the state of the Custom Resource will be updated as <code>Running</code></p>
 </li>
 </ul>
 

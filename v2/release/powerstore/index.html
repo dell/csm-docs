@@ -12,11 +12,11 @@
 <meta property="og:description" content="Release notes for PowerStore CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/release/powerstore/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Release notes for PowerStore CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="195">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="90">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -925,7 +941,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csi-powerstore-v130">Release Notes - CSI PowerStore v1.3.0</a>
+    <li><a href="#release-notes---csi-powerstore-v140">Release Notes - CSI PowerStore v1.4.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -982,39 +998,21 @@
 	<h1>PowerStore</h1>
 
 	       
-	<h2 id="release-notes---csi-powerstore-v130">Release Notes - CSI PowerStore v1.3.0</h2>
+	<h2 id="release-notes---csi-powerstore-v140">Release Notes - CSI PowerStore v1.4.0</h2>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
-<li>Added support for Kubernetes v1.20</li>
+<li>Added support for Kubernetes v1.21</li>
 <li>Added support for OpenShift 4.7 with RHEL and CoreOS worker nodes</li>
-<li>Added support for Red Hat Enterprise Linux (RHEL) 8.3</li>
-<li>Added support for managing multiple PowerStore arrays from one driver</li>
-<li>Added support for configuring custom IPs/sub-networks for NFS exports</li>
-<li>Added support for automatic generation of CHAP credentials</li>
-<li>Changed code structure of the project</li>
-<li>Removed storage classes from helm template</li>
+<li>Added support for SLES 15.2 and RHEL 8.4 as a host operating system</li>
+<li>Added support for enabling root-squashing for NFS shares</li>
+<li>Added support for disabling snapshot feature during installation</li>
+<li>Added the ability to configure nasName per Storage Class</li>
+<li>Refactored configuration files to use more generic naming</li>
 </ul>
 <h3 id="fixed-issues">Fixed Issues</h3>
 <p>There are no fixed issues in this release.</p>
 <h3 id="known-issues">Known Issues</h3>
-<table>
-<thead>
-<tr>
-<th>Issue</th>
-<th>Workaround</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Slow volume attached/detach</td>
-<td>If your Kubernetes 1.17 or 1.18 cluster has a lot of VolumeAttachment objects, the attach/detach operations will be very slow. This is a known issue and affects all CSI plugins. It is tracked here: CSI VolumeAttachment slows pod startup time. To get around this problem you can upgrade to latest Kubernetes/OpenShift patches, which contains a partial fix: 1.17.8+, 1.18.5+</td>
-</tr>
-<tr>
-<td>Topology related node labels are not removed automatically.</td>
-<td>Currently, when the driver is uninstalled, topology related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released you need to manually remove the node labels</td>
-</tr>
-</tbody>
-</table>
+<p>There are no known issues in this release.</p>
 
 	
 	

@@ -12,11 +12,11 @@
 <meta property="og:description" content="Release notes for Unity CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/release/unity/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Release notes for Unity CSI driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="439">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="168">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -925,7 +941,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csi-unity-v150">Release Notes - CSI Unity v1.5.0</a>
+    <li><a href="#release-notes---csi-unity-v160">Release Notes - CSI Unity v1.6.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -982,20 +998,22 @@
 	<h1>Unity</h1>
 
 	       
-	<h2 id="release-notes---csi-unity-v150">Release Notes - CSI Unity v1.5.0</h2>
+	<h2 id="release-notes---csi-unity-v160">Release Notes - CSI Unity v1.6.0</h2>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
-<li>Added support for Kubernetes v1.20</li>
-<li>Added support for OpenShift 4.7 with RHEL and CoreOS worker nodes</li>
-<li>Changed driver base image to UBI 8.x</li>
-<li>Added support for Red Hat Enterprise Linux (RHEL) 8.3</li>
-<li>Qualified with Docker - UCP 3.3.5</li>
-<li>Added support for SLES 15SP2</li>
+<li>Added support for Kubernetes v1.21</li>
+<li>Added support for Red Hat Enterprise Linux (RHEL) 8.4</li>
+<li>Added support for MKE 3.4.0</li>
+<li>Added support for RKE v1.2.8</li>
+<li>Added support for VMware Tanzu</li>
+<li>Added support for CSI Spec 1.3</li>
+<li>Added Volume limit feature</li>
+<li>Added support for secret in YAML format</li>
+<li>Added support for Dynamic log level changes</li>
 </ul>
 <h3 id="fixed-issues">Fixed Issues</h3>
 <ul>
-<li>Raw-Block volume with accessmode RWX can be mounted to multiple nodes.</li>
-<li>PVC creation fails on a cluster with only NFS protocol enabled by adding topology keys for NFS protocol.</li>
+<li>The flag allowRWOMultiPodAccess: false is not applicable for Raw Block volumes and the driver allows the creation of multiple pods on the same node with RWO access mode.</li>
 </ul>
 <h3 id="known-issues">Known Issues</h3>
 <table>
@@ -1007,32 +1025,8 @@
 </thead>
 <tbody>
 <tr>
-<td>Topology related node labels are not removed automatically.</td>
-<td>Currently, when the driver is uninstalled, topology related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released we need to manually remove the node labels mentioned here <a href="https://github.com/dell/csi-unity#known-issues">https://github.com/dell/csi-unity#known-issues</a> (Point 1)</td>
-</tr>
-<tr>
-<td>Dynamic array detection will not work in Topology based environment</td>
-<td>Whenever a new array is added or removed, then the driver should be restarted with the below command only if the <strong>topology-based storage classes</strong> are used. Otherwise, the driver will automatically detect the newly added or removed arrays <a href="https://github.com/dell//csi-unity#known-issues">https://github.com/dell//csi-unity#known-issues</a> (Point 2)</td>
-</tr>
-<tr>
-<td>If source PVC is deleted when cloned PVC exists, then source PVC will be deleted in cluster but on array it will still be present and marked for deletion.</td>
-<td>All the cloned pvc should be deleted in order to delete the source pvc from array.</td>
-</tr>
-<tr>
-<td>PVC creation fails on a fresh cluster with <strong>iSCSI</strong> and <strong>NFS</strong> protocols alone enabled with error <strong>failed to provision volume with StorageClass &ldquo;unity-iscsi&rdquo;: error generating accessibility requirements: no available topology found</strong>.</td>
-<td>This is because iSCSI initiator login takes longer than the node pod startup time. This can be overcome by bouncing the node pods in the cluster using the below command the driver pods with <code>kubectl get pods -n unity --no-headers=true</code></td>
-</tr>
-<tr>
-<td>On deleting pods sometimes the corresponding &lsquo;volumeattachment&rsquo; will not get removed. This issue is intermittent and happens with one specific protocol (FC, iSCSI or NFS) based storageclasses. This issue occurs across kubernetes versions 1.18 and 1.19 and both versions of OpenShift (4.5/4.6).</td>
-<td>On deleting the stale volumeattachment manually, Controller Unpublish gets invoked and then the corresponding PVCs can be deleted.</td>
-</tr>
-<tr>
-<td>The flag allowRWOMultiPodAccess:false is not applicable for Raw Block volumes and the driver allows creation of multiple pods on the same node with RWO access mode.</td>
-<td>Workaround not necessary as this issue does not block any usecase.</td>
-</tr>
-<tr>
-<td>Driver installation warning: <strong>&ldquo;OpenShift version 4.7, is newer than the version that has been tested. Latest tested version is: 4.6&rdquo;</strong></td>
-<td>Ignore this warning and continue with the installation. v1.5.0 release of the driver supports OpenShift 4.6/4.7 .</td>
+<td>Topology-related node labels are not removed automatically.</td>
+<td>Currently, when the driver is uninstalled, topology-related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released, remove the labels manually after the driver un-installation using command <strong>kubectl label node &lt;node_name&gt; <label1>- <label2>- &hellip;</strong> Example: <strong>kubectl label node <hostname> csi-unity.dellemc.com/array123-iscsi-</strong> Note: there must be - at the end of each label to remove it.</td>
 </tr>
 </tbody>
 </table>

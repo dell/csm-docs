@@ -12,11 +12,11 @@
 <meta property="og:description" content="Code features for Unity Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/features/unity/" />
-<meta property="article:modified_time" content="2021-09-21T21:01:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Code features for Unity Driver">
-<meta itemprop="dateModified" content="2021-09-21T21:01:25&#43;05:30" />
-<meta itemprop="wordCount" content="1696">
+<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
+<meta itemprop="wordCount" content="1815">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.1)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">Previous</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.0</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Older</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">Previous</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Archives</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">Older</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fe718a2a88a5a7d0a3440c0bde447b9d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.50256c0d013f6d1f45709e2a14e9c4e3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -871,7 +871,23 @@
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">Docker EE</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersdocker" href="/csm-docs/v2/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnersrancher" href="/csm-docs/v2/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2partnerstanzu" href="/csm-docs/v2/partners/tanzu/">VMware Tanzu</a>
         
       
       
@@ -949,8 +965,9 @@
         <li><a href="#topology-usage">Topology Usage</a></li>
       </ul>
     </li>
-    <li><a href="#support-for-docker-ee">Support for Docker EE</a></li>
     <li><a href="#support-for-sles-15-sp2">Support for SLES 15 SP2</a></li>
+    <li><a href="#volume-limit">Volume Limit</a></li>
+    <li><a href="#log-levels">Log Levels</a></li>
   </ul>
 </nav>
 
@@ -1002,14 +1019,14 @@
 
 	       
 	<h2 id="creating-volumes-and-consuming-them">Creating volumes and consuming them</h2>
-<p>Create a file <code>simple.yaml</code> using sample yaml files located at tests/sample.yaml</p>
+<p>Create a file <code>sample.yaml</code> using sample yaml files located at test/sample.yaml</p>
 <p>The following command creates a statefulset that consumes three volumes of default storage classes:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f tests/sample.yaml
 </code></pre></div><p>After executing this command 3 PVC and statefulset are created in the <code>test-unity</code> namespace.
-You can check created PVCs by running <code>kubectl get pvc -n test-unity</code> and check statefulset&rsquo;s pods by running <code>kubectl get pods -n test-unity</code>command.
-Pod should be <code>Ready</code> and <code>Running</code>.</p>
+You can check created PVCs by running <code>kubectl get pvc -n test-unity</code> and check statefulset&rsquo;s pods by running <code>kubectl get pods -n test-unity</code> command.
+The pod should be <code>Ready</code> and <code>Running</code>.</p>
 <blockquote>
-<p>If Pod is in CrashLoopback or PVCs is in Pending state then driver installation is not successful, check logs of node and controller.</p>
+<p>If Pod is in CrashLoopback or PVCs is in a Pending state then driver installation is not successful, check logs of node and controller.</p>
 </blockquote>
 <h2 id="deleting-volumes">Deleting volumes</h2>
 <p>To delete volumes, pod and statefulset run the command</p>
@@ -1017,7 +1034,7 @@ Pod should be <code>Ready</code> and <code>Running</code>.</p>
 </code></pre></div><h2 id="consuming-existing-volumes-with-static-provisioning">Consuming existing volumes with static provisioning</h2>
 <p>You can use existent volumes from Unity array as Persistent Volumes in your Kubernetes, to do that you must perform the following steps:</p>
 <ol>
-<li>Open your volume in Unity Management UI (unisphere), and take a note of volume-id. The <code>volume-id</code> looks like <code>csiunity-xxxxx</code> and CLI ID looks like <code>sv_xxxx</code>.</li>
+<li>Open your volume in Unity Management UI (Unisphere), and take a note of volume-id. The <code>volume-id</code> looks like <code>csiunity-xxxxx</code> and CLI ID looks like <code>sv_xxxx</code>.</li>
 <li>Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.</li>
 </ol>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
@@ -1078,15 +1095,15 @@ Pod should be <code>Ready</code> and <code>Running</code>.</p>
 <li>After the pod becomes <code>Ready</code> and <code>Running</code>, you can start to use this pod and volume.</li>
 </ol>
 <h2 id="volume-snapshot-feature">Volume Snapshot Feature</h2>
-<p>The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes version 1.17 and generally available (v1) in Kubernetes version 1.20.</p>
-<p>The CSI Unity driver version 1.5 supports v1beta1 snapshots on Kubernetes 1.18/1.19 and v1 snapshots on Kubernetes 1.20.</p>
+<p>The Volume Snapshot feature was introduced in alpha (v1alpha1) in Kubernetes 1.13 and then moved to beta (v1beta1) in Kubernetes version 1.17 and generally available (v1) in Kubernetes version &gt;=1.20.</p>
+<p>The CSI Unity driver version 1.5 supports v1beta1 snapshots on Kubernetes 1.19 and v1 snapshots on Kubernetes 1.20 and 1.21.</p>
 <p>In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:</p>
 <ul>
-<li>Kubernetes Volume Snaphshot CRDs</li>
+<li>Kubernetes Volume Snapshot CRDs</li>
 <li>Volume Snapshot Controller</li>
 </ul>
 <h3 id="volume-snapshot-class">Volume Snapshot Class</h3>
-<p>During the installation of CSI Unity 1.5 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.</p>
+<p>During the installation of the CSI Unity 1.5 driver, a Volume Snapshot Class is created. This is the only Volume Snapshot Class required and there is no need to create any other Volume Snapshot Class.</p>
 <p>Following is the manifest for a Volume Snapshot Class created during installation:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>snapshot.storage.k8s.io/v1<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#For beta snapshots the apiVersion will be snapshot.storage.k8s.io/v1beta1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>VolumeSnapshotClass<span style="color:#f8f8f8;text-decoration:underline">
@@ -1105,7 +1122,7 @@ Pod should be <code>Ready</code> and <code>Running</code>.</p>
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">volumeSnapshotClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>unity-snapclass<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">persistentVolumeClaimName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>pvol<span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>Once the VolumeSnapshot is successfully created by the CSI Unity driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the <em>readyToUse</em> field set to <em>true</em> , it is available for use.</p>
+</span></code></pre></div><p>Once the VolumeSnapshot is successfully created by the CSI Unity driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the <em>readyToUse</em> field set to <em>true</em>, it is available for use.</p>
 <p>Following is the relevant section of VolumeSnapshot object status:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">status</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">boundVolumeSnapshotContentName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>snapcontent-xxxxxxxxxxxxx<span style="color:#f8f8f8;text-decoration:underline">
@@ -1131,9 +1148,8 @@ Pod should be <code>Ready</code> and <code>Running</code>.</p>
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>8Gi<span style="color:#f8f8f8;text-decoration:underline">
 </span></code></pre></div><h2 id="volume-expansion">Volume Expansion</h2>
 <p>The CSI Unity driver version 1.3 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).</p>
-<p>To use this feature, the storage class that is used to create the PVC must have the attribute <code>allowVolumeExpansion</code> set to true. The storage classes created during the installation (both using Helm or dell-csi-operator) have the <code>allowVolumeExpansion</code> set to true by default.</p>
-<p>If you are creating more storage classes, ensure that this attribute is set to true to expand any PVs created using these new storage classes.</p>
-<p>The following is a sample manifest for a storage class which allows for Volume Expansion:</p>
+<p>To use this feature, the storage class that is used to create the PVC must have the attribute <code>allowVolumeExpansion</code> set to true.</p>
+<p>The following is a sample manifest for a storage class that allows for Volume Expansion:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>storage.k8s.io/v1<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>StorageClass<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1163,8 +1179,8 @@ Pod should be <code>Ready</code> and <code>Running</code>.</p>
 <p>The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.</p>
 </blockquote>
 <h2 id="raw-block-support">Raw block support</h2>
-<p>The CSI Unity driver supports Raw Block Volumes from v1.4 onwards.
-Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. An example configuration is outlined here:</p>
+<p>The CSI Unity driver version 1.4 and later supports Raw Block Volumes.
+Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. The following is an example configuration:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>PersistentVolumeClaim<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1198,12 +1214,11 @@ Raw Block volumes are created using the volumeDevices list in the pod template s
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nov-eleventh<span style="color:#0000cf;font-weight:bold">-1</span>-pv-storage<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">persistentVolumeClaim</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">claimName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>rawblockpvc<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    
-</span></code></pre></div><p>Access modes allowed are ReadWriteOnce and ReadWriteMany. Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node&rsquo;s file system. The driver does not format or check the format of any file system on the block device.
-Raw Block volumes do support online Volume Expansion, but it is up to the application to manage reconfiguring the file system (if any) to the new size. Access mode ReadOnlyMany is not supported with raw block since we cannot restrict volumes to be readonly from Unity.</p>
-<p>For additional information, see the <a href="https://kubernetes.io/DOCS/CONCEPTS/STORAGE/PERSISTENT-VOLUMES/#RAW-BLOCK-VOLUME-SUPPORT">kubernetes</a> website.</p>
+</span></code></pre></div><p>Access modes allowed are ReadWriteOnce and ReadWriteMany. Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node&rsquo;s file system. The driver does not format or check the format of any file system on the block device.</p>
+<p>Raw Block volumes support online Volume Expansion, but it is up to the application to manage to reconfigure the file system (if any) to the new size. Access mode ReadOnlyMany is not supported with raw block since we cannot restrict volumes to be readonly from Unity.</p>
+<p>For additional information, see the <a href="https://kubernetes.io/DOCS/CONCEPTS/STORAGE/PERSISTENT-VOLUMES/#volume-mode">kubernetes</a> website.</p>
 <h2 id="volume-cloning-feature">Volume Cloning Feature</h2>
-<p>The CSI Unity driver version 1.3 supports volume cloning. This allows specifying existing PVCs in the <em>dataSource</em> field to indicate a user would like to clone a Volume.</p>
+<p>The CSI Unity driver version 1.3 and later supports volume cloning. This allows specifying existing PVCs in the <em>dataSource</em> field to indicate a user would like to clone a Volume.</p>
 <p>Source and destination PVC must be in the same namespace and have the same Storage Class.</p>
 <p>To clone a volume, you should first have an existing PVC, example: vol0:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>PersistentVolumeClaim<span style="color:#f8f8f8;text-decoration:underline">
@@ -1236,7 +1251,7 @@ Raw Block volumes do support online Volume Expansion, but it is up to the applic
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>8Gi<span style="color:#f8f8f8;text-decoration:underline">
 </span></code></pre></div><h2 id="ephemeral-inline-volume">Ephemeral Inline Volume</h2>
-<p>The CSI Unity driver version 1.4 supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification.</p>
+<p>The CSI Unity driver version 1.4 and later supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification.</p>
 <p>At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.</p>
 <p>The following is a sample manifest for creating ephemeral volume in pod manifest with CSI Unity driver.</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Pod<span style="color:#f8f8f8;text-decoration:underline">
@@ -1258,8 +1273,14 @@ Raw Block volumes do support online Volume Expansion, but it is up to the applic
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">fsType</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;ext4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumeAttributes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>This manifest creates a pod and attach newly created ephemeral inline CSI volume to it.</p>
-<p>To create <code>NFS</code> volume you need to provide <code>nasName:</code> parameters that points to the name of your NAS Server in pod manifest like so</p>
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">arrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>APM<span style="color:#8f5902;font-style:italic">************</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">protocol</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>iSCSI<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">thinProvisioned</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;true&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">isDataReductionEnabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">tieringPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">storagePool</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>pool_2<span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>This manifest creates a pod and attaches a newly created ephemeral inline CSI volume to it.</p>
+<p>To create <code>NFS</code> volume you need to provide <code>nasName:</code> parameters that point to the name of your NAS Server in pod manifest like so</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">volumes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>volume<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">csi</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1269,9 +1290,9 @@ Raw Block volumes do support online Volume Expansion, but it is up to the applic
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;20Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">nasName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;csi-nas-name&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></code></pre></div><h2 id="controller-ha">Controller HA</h2>
-<p>The CSI Unity driver version 1.4 introduces controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.</p>
-<p>By default number of replicas set to 2, you can set <code>controllerCount</code> parameter to 1 in <code>myvalues.yaml</code> if you want to disable controller HA for your installation. When installing via Operator you can change <code>replicas</code> parameter in <code>spec.driver</code> section in your Unity Custom Resource.</p>
-<p>When multiple replicas of controller pods are in cluster each sidecar (Attacher, Provisioner, Resizer and Snapshotter) tries to get a lease so only one instance of each sidecar is active in the cluster at a time.</p>
+<p>The CSI Unity driver version 1.4 and later supports the controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.</p>
+<p>By default, number of replicas is set to 2, you can set the <code>controllerCount</code> parameter to 1 in <code>myvalues.yaml</code> if you want to disable controller HA for your installation. When installing via Operator you can change the <code>replicas</code> parameter in the <code>spec.driver</code> section in your Unity Custom Resource.</p>
+<p>When multiple replicas of controller pods are in a cluster each sidecar (Attacher, Provisioner, Resizer, and Snapshotter) tries to get a lease so only one instance of each sidecar is active in the cluster at a time.</p>
 <h3 id="driver-pod-placement">Driver pod placement</h3>
 <p>You can configure where driver controller and worker pods should be placed.
 To do that you will need to use <code>nodeSelector</code> and <code>tolerations</code> mechanisms you can configure in your <code>myvalues.yaml</code></p>
@@ -1298,13 +1319,12 @@ To do that you will need to use <code>nodeSelector</code> and <code>tolerations<
 </span><span style="color:#f8f8f8;text-decoration:underline">   </span>- <span style="color:#204a87;font-weight:bold">key</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;node-role.kubernetes.io/master&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">operator</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Exists&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">effect</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;NoSchedule&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>As said before you can configure where node driver pods would be assigned in the similar way in <code>node</code> section of <code>myvalues.yaml</code></p>
+</span></code></pre></div><p>As said before you can configure where node driver pods would be assigned in a similar way in the <code>node</code> section of <code>myvalues.yaml</code></p>
 <h2 id="topology">Topology</h2>
-<p>The CSI Unity driver version 1.4 supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.</p>
-<p>This Topology support does not include customer defined topology, users cannot create their own labels for nodes, they should use whatever labels are returned by driver and applied automatically by Kubernetes on its nodes.</p>
+<p>The CSI Unity driver version 1.4 and later supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.</p>
+<p>This Topology support does not include customer-defined topology, users cannot create their own labels for nodes, they should use whatever labels are returned by the driver and applied automatically by Kubernetes on its nodes.</p>
 <h3 id="topology-usage">Topology Usage</h3>
-<p>To use the Topology feature, user can install driver by setting <code>createStorageClassesWithTopology</code> to true in the <code>myvalues.yaml</code> which will create default storage classes by adding topology keys (based on the arrays specified in <code>myvalues.yaml</code>) and with <code>WaitForFirstConsumer</code> binding mode.</p>
-<p>Another option is the user can create custom storage classes on their own by specifying the valid topology keys and binding mode.</p>
+<p>User can create custom storage classes on their own by specifying the valid topology keys and binding mode.</p>
 <p>The following is one of example storage class manifest:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>storage.k8s.io/v1<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>StorageClass<span style="color:#f8f8f8;text-decoration:underline">
@@ -1319,18 +1339,12 @@ To do that you will need to use <code>nodeSelector</code> and <code>tolerations<
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">key</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>csi-unity.dellemc.com/&lt;array_id&gt;-fc<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">values</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">          </span>- <span style="color:#4e9a06">&#34;true&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>This example will match all nodes where driver has a connection to Unity array with array ID mentioned via Fiber Channel. Similarly by replacing <code>fc</code> with <code>iscsi</code> in the key will check for iSCSI connectivity with the node.</p>
+</span></code></pre></div><p>This example matches all nodes where the driver has a connection to the Unity array with array ID mentioned via Fiber Channel. Similarly, by replacing <code>fc</code> with <code>iscsi</code> in the key checks for iSCSI connectivity with the node.</p>
 <p>You can check what labels your nodes contain by running <code>kubectl get nodes --show-labels</code> command.</p>
 <blockquote>
-<p>Note that <code>volumeBindingMode:</code> is set to <code>WaitForFirstConsumer</code> this is required for topology feature to work properly.</p>
+<p>Note that <code>volumeBindingMode:</code> is set to <code>WaitForFirstConsumer</code> this is required for the topology feature to work properly.</p>
 </blockquote>
-<p>For any additional information about topology, see the <a href="https://kubernetes-csi.github.io/docs/topology.html">Kubernetes Topology documentation</a>.</p>
-<h2 id="support-for-docker-ee">Support for Docker EE</h2>
-<p>The CSI Driver for Dell EMC Unity supports Docker EE and deployment on clusters bootstrapped with UCP (Universal Control Plane).</p>
-<p>*UCP version 3.3.3 supports Kubernetes 1.18 and CSI driver can be installed on UCP 3.3 with Helm.</p>
-<p>The installation process for the driver on such clusters remains the same as the installation process on upstream clusters.</p>
-<p>On UCP based clusters, <code>kubectl</code> may not be installed by default, it is important that <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a> is installed prior to the installation of the driver.</p>
-<p>The worker nodes in UCP backed clusters may run any of the OSs which we support with upstream clusters.</p>
+<p>For any additional information about the topology, see the <a href="https://kubernetes-csi.github.io/docs/topology.html">Kubernetes Topology documentation</a>.</p>
 <h2 id="support-for-sles-15-sp2">Support for SLES 15 SP2</h2>
 <p>The CSI Driver for Dell EMC Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.</p>
 <ul>
@@ -1338,7 +1352,18 @@ To do that you will need to use <code>nodeSelector</code> and <code>tolerations<
 <li>nfs-utils <strong>nfs-utils is required in order to make use of NFS protocol for provisioning</strong></li>
 <li>multipath-tools <strong>multipath-tools is required in order to make use of FC and iSCSI protocols for provisioning</strong></li>
 </ul>
-<p>After installing open-iscsi, ensure &ldquo;iscsi&rdquo; and &ldquo;iscsid&rdquo; services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with iSCSI protocol to work.</p>
+<p>After installing open-iscsi, ensure &ldquo;iscsi&rdquo; and &ldquo;iscsid&rdquo; services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with the iSCSI protocol to work.</p>
+<h2 id="volume-limit">Volume Limit</h2>
+<p>The CSI Driver for Dell EMC Unity allows users to specify the maximum number of Unity volumes that can be used in a node.</p>
+<p>The user can set the volume limit for a node by creating a node label <code>max-unity-volumes-per-node</code> and specifying the volume limit for that node.
+<br/> <code>kubectl label node &lt;node_name&gt; max-unity-volumes-per-node=&lt;volume_limit&gt;</code></p>
+<p>The user can also set the volume limit for all the nodes in the cluster by specifying the same to <code>maxUnityVolumesPerNode</code> attribute in secret.json or secret.yaml file.</p>
+<blockquote>
+<p><strong>NOTE:</strong> <br>To reflect the changes after setting the value either via node label or in secret.json/secret.yaml file, user has to bounce the driver controller and node pods using the command <code>kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod</code>. <br><br> If the value is set both by node label and secret.json/secret.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the secret.json/secret.yaml value. <br><br>The default value of <code>maxUnityVolumesPerNode</code> is 0. <br><br>If <code>maxUnityVolumesPerNode</code> is set to zero, then CO SHALL decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxUnityVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-unity-volumes-per-node</code> is not set.</p>
+</blockquote>
+<h2 id="log-levels">Log Levels</h2>
+<p>The CSI Driver for Dell EMC Unity allows users to configure different log levels using <strong>logLevel</strong> parameter.</p>
+<p>The <strong>logLevel</strong> parameter needs to be configured in unity-creds secret created from secret.json or secret.yaml. The supported log levels are Info/Debug/Warn/Error. The default level is Info if logLevel is not configured by the user. The parameter can be changed dynamically without the need of driver re-installation or restart.</p>
 
 	
 	
