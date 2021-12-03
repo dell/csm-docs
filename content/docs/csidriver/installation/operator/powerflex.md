@@ -39,8 +39,10 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
           password: <password in base64>
 ```  
   - Create secret for FTP side by using the command `kubectl create -f sdc-repo-secret.yaml`.
-- Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml.
-##### Example CR:  [config/samples/vxflex_v210_ops_48.yaml](https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v210_ops_48.yaml)
+  - Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml. Please note the following: 
+    - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
+    - **If not using sidecar**, please leave this commented out -- otherwise, the empty fields will cause errors.
+##### Example CR:  [config/samples/vxflex_v200_ops_47.yaml](https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v200_ops_47.yaml)
 ```yaml
         sideCars:
     # Comment the following section if you don't want to run the monitoring sidecar
@@ -161,7 +163,7 @@ For detailed PowerFlex installation procedure, see the _Dell EMC PowerFlex Deplo
           dnsPolicy: ClusterFirstWithHostNet
           forceUpdate: false
           common:
-            image: "dellemc/csi-vxflexos:v2.0.0"
+            image: "dellemc/csi-vxflexos:v2.1.0"
             imagePullPolicy: IfNotPresent
             envs:
               - name: X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT

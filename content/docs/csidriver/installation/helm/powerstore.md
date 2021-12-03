@@ -129,7 +129,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.0.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Check `helm/csi-powerstore/driver-image.yaml` and confirm the driver image points to new image.
@@ -162,10 +162,13 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | controller.snapshot.enabled | Allows to enable/disable snapshotter sidecar with driver installation for snapshot feature | No | "true" |
 | controller.snapshot.snapNamePrefix | Defines prefix to apply to the names of a created snapshots | No | "csisnap" |
 | controller.resizer.enabled | Allows to enable/disable resizer sidecar with driver installation for volume expansion feature | No | "true" |
+| controller.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| controller.healthMonitor.volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
 | controller.nodeSelector | Defines what nodes would be selected for pods of controller deployment | Yes | " " |
 | controller.tolerations  | Defines tolerations that would be applied to controller deployment | Yes | " " |
 | node.nodeNamePrefix | Defines the string added to each node that the CSI driver registers | No | "csi-node" |
 | node.nodeIDPath | Defines a path to file with a unique identifier identifying the node in the Kubernetes cluster| No | "/etc/machine-id" |
+| node.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 
@@ -222,11 +225,11 @@ Starting CSI PowerStore v1.4, `dell-csi-helm-installer` will not create any Volu
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerStore v1.4 driver*:
+*Upgrading from CSI PowerStore v2.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4 before upgrading to 2.0.
+It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4 or higher, before upgrading to 2.1.
 
 ## Dynamically update the powerstore secrets 
 

@@ -25,33 +25,12 @@ Before you install CSI Driver for Unity, verify the requirements that are mentio
 
 ### Requirements
 
-* Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/))
-* Configure Docker service
+* Install Kubernetes or OpenShift (see [supported versions](../../../dell-csi-driver/#features-and-capabilities))
 * Install Helm v3
 * To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured
 * To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured 
 * To use NFS protocol, NFS utility packages needs to be installed
-
-## Configure Docker service
-
-The mount propagation in Docker must be configured on all Kubernetes nodes before installing CSI Driver for Unity.
-
-### Procedure
-
-1. Edit the service section of */etc/systemd/system/multi-user.target.wants/docker.service* file as follows:
-
-    ```bash
-    [Service]
-    ...
-    MountFlags=shared
-    ```
-    
-2. Restart the Docker service with following commands:
-
-    ```bash
-    systemctl daemon-reload
-    systemctl restart docker
-    ```
+* Mount propagation is enabled on container runtime that is being used
 
 ## Install CSI Driver
 
@@ -59,63 +38,50 @@ Install CSI Driver for Unity using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with command ```git clone https://github.com/dell/csi-unity.git```, ready for this procedure.
- * In the top-level dell-csi-helm-installer directory, there should be two scripts, *csi-install.sh* and *csi-uninstall.sh*.
- * Ensure "unity" namespace exists in kubernetes cluster. Use `kubectl create namespace unity` command to create the namespace, if the namespace is not present.
+ * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone https://github.com/dell/csi-unity.git```, ready for this procedure.
+ * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
+ * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
    
 
 Procedure
 
-1. Collect information from the Unity Systems like Unique ArrayId, IP address, username  and password. Make a note of the value for these parameters as they must be entered in the secret.json and myvalues.yaml file.
+1. Collect information from the Unity Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the `secret.json` or `secret.yaml` and `myvalues.yaml` file.
 
-2. Copy the helm/csi-unity/values.yaml into a file named myvalues.yaml in the same directory of csi-install.sh, to customize settings for installation.
+    **Note**: 
+      * ArrayId corresponds to the serial number of Unity array.
+      * Unity Array username must have role as Storage Administrator to be able to perform CRUD operations.
 
-3. Edit myvalues.yaml to set the following parameters for your installation:
+2. Copy the `helm/csi-unity/values.yaml` into a file named `myvalues.yaml` in the same directory of `csi-install.sh`, to customize settings for installation.
+
+3. Edit `myvalues.yaml` to set the following parameters for your installation:
    
-    The following table lists the primary configurable parameters of the Unity driver chart and their default values. More detailed information can be found in the [`values.yaml`](helm/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml) file in this repository.
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
-    | certSecretCount | Represents number of certificate secrets, which user is going to create for ssl authentication. (unity-cert-0..unity-cert-n). Minimum value should be 1 | false | 1 |
-    | syncNodeInfoInterval | Time interval to add node info to array. Default 15 minutes. Minimum value should be 1 minute | false | 15 |
-    | controllerCount | Controller replication count to maintain high availability | yes | 2 |
-    | volumeNamePrefix | String to prepend to any volumes created by the driver | false | csivol |
-    | snapNamePrefix | String to prepend to any snapshot created by the driver | false | csi-snap |
-    | csiDebug |  To set the debug log policy for CSI driver | false | "false" |
+    | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
+    | controllerCount | Controller replication count to maintain high availability. | yes | 2 |
+    | volumeNamePrefix | String to prepend to any volumes created by the driver. | false | csivol |
+    | snapNamePrefix | String to prepend to any snapshot created by the driver. | false | csi-snap |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | false | IfNotPresent |
-    | createStorageClassesWithTopology | Flag to enable or disable topology. | true | false |
-    | allowRWOMultiPodAccess | Flag to enable multiple pods use the same pvc on the same node with RWO access mode. | false | false |
-    | ***Storage Array List*** | Following parameters is a list of parameters to provide multiple storage arrays |||
-    | storageArrayList[i].name | Name of the storage class to be defined. A suffix of ArrayId and protocol will be added to the name. No suffix will be added to default array. | false | unity |
-    | storageArrayList[i].isDefaultArray | To handle the existing volumes created in csi-unity v1.0, 1.1 and 1.1.0.1. The user needs to provide "isDefaultArray": true in secret.json. This entry should be present only for one array and that array will be marked default for existing volumes. | false | "false" |
-    | ***Storage Class parameters*** | Following parameters are not present in values.yaml |||
-    | storageArrayList[i].storageClass.storagePool | Unity Storage Pool CLI ID to use with in the Kubernetes storage class | true | - |
-    | storageArrayList[i].storageClass.thinProvisioned | To set volume thinProvisioned | false | "true" |
-    | storageArrayList[i].storageClass.isDataReductionEnabled | To set volume data reduction | false | "false" |
-    | storageArrayList[i].storageClass.volumeTieringPolicy | To set volume tiering policy | false | 0 |
-    | storageArrayList[i].storageClass.FsType | Block volume related parameter. To set File system type. Possible values are ext3,ext4,xfs. Supported for FC/iSCSI protocol only. | false | ext4 |
-    | storageArrayList[i].storageClass.hostIOLimitName | Block volume related parameter.  To set unity host IO limit. Supported for FC/iSCSI protocol only. | false | "" |
-    | storageArrayList[i].storageClass.nasServer | NFS related parameter. NAS Server CLI ID for filesystem creation. | true | "" |
-    | storageArrayList[i].storageClass.hostIoSize | NFS related parameter. To set filesystem host IO Size. | false | "8192" |
-    | storageArrayList[i].storageClass.reclaimPolicy | What should happen when a volume is removed | false | Delete |
-    | ***Snapshot Class parameters*** | Following parameters are not present in values.yaml  |||
-    | storageArrayList[i] .snapshotClass.retentionDuration | TO set snapshot retention duration. Format:"1:23:52:50" (number of days:hours:minutes:sec)| false | "" |
+    | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | false | false |
+	| syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
    
 
     **Note**: 
     
-      * User should provide all boolean values with double quotes. This applicable only for myvalues.yaml. Example: "true"/"false"
+      * User should provide all boolean values with double-quotes. This applies only for `myvalues.yaml`. Example: "true"/"false"
         
       * controllerCount parameter value should be <= number of nodes in the kubernetes cluster else install script fails.
         
-      * 'createStorageClassesWithTopology' key  is applicable  only in the helm based installation but not with the operator based installation. In operator based installation, however user can create custom storage class with topology related key/values.
-        
-      * User can create separate storage class (with topology related keys) by referring to existing default storageclasses.
+      * User can a create separate _StorageClass_ (with topology-related keys) by referring to existing default storage classes.
 
       * Host IO Limit must have a minimum bandwidth of 1 MBPS to discover the volumes on node successfully.
       
-      * User must not change the value of allowRWOMultiPodAccess to true unless intended to use the feature and is aware of the consequences. Enabling multiple pods access the same pvc with RWO access mode on the same node might cause data to be overwritten and therefore leading to data loss in some cases.
+      * User must not change the value of allowRWOMultiPodAccess to true unless intended to use the feature and is aware of the consequences. Enabling multiple pods to access the same PVC with RWO access mode on the same node might cause data to be overwritten and therefore leading to data loss in some cases.
+	  
+	    * Parameters allowRWOMultiPodAccess and syncNodeInfoInterval have been deprecated from `myvalues.yaml` and are removed from `myvalues.yaml` in a future releases. They can be configured in `secret.json` or `secret.yaml` as they facilitate the user to dynamically change these values without the need for driver re-installation.
     
 
    Example *myvalues.yaml*
@@ -126,48 +92,28 @@ Procedure
     snapNamePrefix: csi-snap
     imagePullPolicy: Always
     certSecretCount: 1
-    syncNodeInfoInterval: 5
     controllerCount: 2
-    createStorageClassesWithTopology: true
     allowRWOMultiPodAccess: false
-    storageClassProtocols:
-       - protocol: "FC"
-       - protocol: "iSCSI"
-       - protocol: "NFS"
-    storageArrayList:
-       - name: "APM00******1"
-         isDefaultArray: "true"
-         storageClass:
-           storagePool: pool_1
-           FsType: ext4
-           nasServer: "nas_1"
-           thinProvisioned: "true"
-           isDataReductionEnabled: true
-           hostIOLimitName: "value_from_array"
-           tieringPolicy: "2"
-         snapshotClass:
-           retentionDuration: "2:2:23:45"
-       - name: "APM001******2"
-         storageClass:
-           storagePool: pool_1
-           reclaimPolicy: Delete
-           hostIoSize: "8192"
-           nasServer: "nasserver_2"
+    syncNodeInfoInterval: 5
     ```
    
-4. Create an empty secret with file helm/emptysecret.yaml file by running the ```kubectl create -f helm/emptysecret.yaml``` command.
+4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `helm/emptysecret.yaml` file by running the `kubectl create -f helm/emptysecret.yaml` command.
 
-5. Prepare the secret.json for driver configuration.
+5. Prepare the `secret.json` or `secret.yaml`  for driver configuration.
     The following table lists driver configuration parameters for multiple storage arrays.
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
-    | username | Username for accessing unity system  | true | - |
-    | password | Password for accessing unity system  | true | - |
-    | restGateway | REST API gateway HTTPS endpoint Unity system| true | - |
-    | arrayId | ArrayID for unity system | true | - |
-    | insecure | "unityInsecure" determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with a X.509 certificate of CA which signed the Unisphere certificate | true | true |
-    | isDefaultArray | An array having isDefaultArray=true is for backward compatibility. This parameter should occur once in the list. | false | false |
+    | storageArrayList.username | Username for accessing Unity system  | true | - |
+    | storageArrayList.password | Password for accessing Unity system  | true | - |
+    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity system| true | - |
+    | storageArrayList.arrayId | ArrayID for Unity system | true | - |
+    | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | true | true |
+    | storageArrayList.isDefault | An array having isDefault=true or isDefaultArray=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | false | false |
+	| logLevel | This parameter is used to set the logging level in the driver. Log level can be Info/Debug/Warn/Error. | false | Info |
+	| allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | false | false |
+	| syncNodeInfoInterval | Time interval to add node info to array. Default 15 minutes. Minimum value should be 1 minute. | false | 15 |
+	| maxUnityVolumesPerNode | The maximum number of volumes that can be provisioned to a single node beyond which the driver would return an error on a provisioning request. Default value 0 stands for unlimited volumes. | false | 0 |
     
     Example: secret.json
     ```json
@@ -176,57 +122,132 @@ Procedure
            {
              "username": "user",
              "password": "password",
-             "restGateway": "https://10.1.1.1",
+             "endpoint": "https://10.1.1.1",
              "arrayId": "APM00******1",
-             "insecure": true,
+             "skipCertificateValidation": true,
              "isDefaultArray": true
            },
            {
              "username": "user",
              "password": "password",
-             "restGateway": "https://10.1.1.2",
+             "endpoint": "https://10.1.1.2",
              "arrayId": "APM00******2",
-             "insecure": true
+             "skipCertificateValidation": true
            }
-         ]
+         ],
+		  "logLevel": "Info",
+		  "allowRWOMultiPodAccess": false,
+		  "syncNodeInfoTimeInterval": 15,
+		  "maxUnityVolumesPerNode": 0
        }
     ```
     
+	Use the following command to create a new secret unity-creds from `secret.json` file.
+	
     `kubectl create secret generic unity-creds -n unity --from-file=config=secret.json`
     
     Use the following command to replace or update the secret:
     
     `kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run | kubectl replace -f -`
     
-    **Note**: The user needs to validate the JSON syntax and array related key/values while replacing the unity-creds secret.
+    **Note**: The user needs to validate the JSON syntax and array-related key/values while replacing the unity-creds secret.
     The driver will continue to use previous values in case of an error found in the JSON file.
+	
+	
+	Alternatively, users can configure and use `secret.yaml` for driver configuration. The parameters remain the same as in the above table and below is a sample of `secret.yaml`. Samples of both `secret.json` and `secret.yaml` are available in the directory `csi-unity/helm/samples`.
+	
+	Example: secret.yaml
+	```yaml
+    logLevel: "Info"
+    syncNodeInfoInterval: 15                                   
+    allowRWOMultiPodAccess: "false"                                  
+    maxUnityVolumesPerNode: 0
+    storageArrayList:
+    - arrayId: "APM00******1"
+      username: "user"
+      password: "password"
+      endpoint: "https://10.1.1.1/"
+      skipCertificateValidation: true
+      isDefault: true
     
-    **Note**: "isDefaultArray" parameter in values.yaml and secret.json should match each other. 
+    - arrayId: "APM00******2"
+      username: "user"
+      password: "password"
+      endpoint: "https://10.1.1.2/"
+      skipCertificateValidation: true
+
+	```
+
+	Use the following command to create a new secret unity-creds from secret.yaml file.
+	
+    ```kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml```
+    
+    Use the following command to replace or update the secret:
+    
+    ```kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml --dry-run | kubectl replace -f -```
+	
+    
+      **Note:**
+      
+      * "restGateway" parameter has been changed to "endpoint" as restgateway is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of "restGateway" or "endpoint" for now. The driver would return an error if both parameters are used.
+    
+      * "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
+    
+      * "isDefaultArray" parameter has been changed to "isDefault" as isDefaultArray is deprecated and will be removed from use in secret.json or secret.yaml in a future release. Users can continue to use any one of "isDefaultArray" or "isDefault" for now. The driver would return error if both parameters are used.
+    
+      * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoTimeInterval" have been enabled for configuration in secret.json or secret.yaml and this helps users to dynamically change these values without the need for driver re-installation. If these parameters are specified in `myvalues.yaml` as well as here then the values from secret.json / secret.yaml takes precedence and they will reflect in the driver after unity-creds secret is updated.
 
 6. Setup for snapshots.
          
-   The Kubernetes Volume Snapshot feature is beta in Kubernetes v1.18 and v1.19 and move to GA in v1.20.
+   The Kubernetes Volume Snapshot feature is beta in Kubernetes 1.19 and moved to GA in >=v1.20.
 
    * The following section summarizes the changes in the **[GA](<https://kubernetes.io/blog/2020/12/10/kubernetes-1.20-volume-snapshot-moves-to-ga/>)** 
+   Applicable only if you decided to enable snapshot feature in `values.yaml`
 
-   In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster.
+    ```yaml
+    snapshot:
+    enabled: true
+    ```
 
-    1. Install Snapshot CRDs: 
-   
-          For Kubernetes 1.18 and 1.19, Snapshot CRDs versioned  3.0.3 must be installed.
-          **[CRDs](<https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd>)**
+   In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster
 
-          For Kubernetes 1.20 , Snapshot CRDs versioned 4.0.0 must be installed.
-          **[CRDs](<https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd>)**
+    #### Volume Snapshot CRD's
+    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github.
+    - If on Kubernetes 1.19 (beta snapshots) use [v3.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/client/config/crd)
+    - If on Kubernetes 1.20/1.21 (v1 snapshots) use [v4.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/client/config/crd)
 
-    2. Install Snapshot Controller:
-   
-          For Kubernetes 1.18 and 1.19, Snapshot Controller versioned 3.0.3 must be installed.
-          **[Controller](https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller)**
-          
-          For Kubernetes 1.20, Snapshot Controller versioned 4.0.0 must be installed.   
-          **[Controller](<https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller>)**
-          
+    #### Volume Snapshot Controller
+    The beta Volume Snapshots in Kubernetes version 1.17 and later, the CSI external-snapshotter sidecar is split into two controllers:
+    - A common snapshot controller
+    - A CSI external-snapshotter sidecar
+
+    The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available:
+    - If on Kubernetes 1.19 (beta snapshots) use [v3.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v3.0.3/deploy/kubernetes/snapshot-controller)
+    - If on Kubernetes 1.20 and 1.21 (v1 snapshots) use [v4.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.0.0/deploy/kubernetes/snapshot-controller)
+
+    **Note**:
+    - The manifests available on GitHub install the snapshotter image: 
+      - [quay.io/k8scsi/csi-snapshotter:v3.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v3.0.3&tab=tags)
+      - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
+    - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+
+    #### Installation example 
+
+    You can install CRDs and default snapshot controller by running following commands:
+    ```bash
+    git clone https://github.com/kubernetes-csi/external-snapshotter/
+    cd ./external-snapshotter
+    git checkout release-<your-version>
+    kubectl create -f client/config/crd
+    kubectl create -f deploy/kubernetes/snapshot-controller
+    ```
+
+    **Note**:
+    - It is recommended to use 3.0.x version of snapshotter/snapshot-controller when using Kubernetes 1.19
+    - When using Kubernetes 1.20/1.21 it is recommended to use 4.0.x version of snapshotter/snapshot-controller.
+    - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+
+              
 
 7. Run the `./csi-install.sh --namespace unity --values ./myvalues.yaml` command to proceed with the installation.
 
@@ -289,15 +310,14 @@ Procedure
     > Operation complete
     ------------------------------------------------------
     ```
-    Results
-    At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command **kubectl get pods -n unity** to get the status of the pods and you will see the following:
+    Results:
+
+    At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command `kubectl get pods -n unity` to get the status of the pods and you will see the following:
     
     * One or more Unity Controller (based on controllerCount) with 5/5 containers ready, and status displayed as Running.
     * Agent pods with 2/2 containers and the status displayed as Running.
     
-    Finally, the script creates storageclasses such as, "unity". Additional storage classes can be created for different combinations of file system types and Unity storage pools. 
-    
-    The script also creates one or more volumesnapshotclasses based on number of arrays . "unity-snapclass" will be the volumesnapshotclass for default array. The output will be similar to following:
+    The script also creates one or more volumesnapshotclasses based on the number of arrays . "unity-snapclass" will be the volumesnapshotclass for the default array. The output will be similar to the following:
     
     `[root@host ~]# kubectl get volumesnapshotclass
     NAME                             AGE
@@ -310,7 +330,7 @@ This topic provides details about setting up the certificate validation for the 
 
 *Before you begin*
 
-As part of the CSI driver installation, the CSI driver requires a secret with the name unity-certs-0 to unity-certs-n based on ".Values.certSecretCount" parameter present in the namespace unity.
+As part of the CSI driver installation, the CSI driver requires a secret with the name unity-certs-0 to unity-certs-n based on the ".Values.certSecretCount" parameter present in the namespace unity.
 
 This secret contains the X509 certificates of the CA which signed the Unisphere SSL certificate in PEM format.
 
@@ -322,7 +342,7 @@ The storageArrayList[i].insecure parameter set to true by default, and the drive
 
 If the storageArrayList[i].insecure set to false, then the secret unity-certs-n must contain the CA certificate for Unisphere.
 
-If this secret is empty secret, then the validation of the certificate fails, and the driver fails to start.
+If this secret is an empty secret, then the validation of the certificate fails, and the driver fails to start.
 
 If the storageArrayList[i].insecure parameter set to false and a previous installation attempt created the empty secret, then this secret must be deleted and re-created using the CA certs.
 
@@ -337,35 +357,63 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
           `kubectl create secret generic unity-certs-0 -n unity --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -` 
    3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: unity-certs-1, unity-certs-2, etc)
 
-**Note**: "unity" is the namespace for helm based installation but namespace can be user defined in operator based installation.
 
-**Note**: User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to kubernetes secret size limitation.
+	  **Note:**
+	
+		* "unity" is the namespace for helm-based installation but namespace can be user-defined in operator-based installation.
 
-**Note**: Whenever certSecretCount parameter changes in myvalues.yaml user needs to uninstall and install the driver.
+		* User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to Kubernetes secret size limitation.
+
+		* Whenever certSecretCount parameter changes in `myvalues.yaml` user needs to uninstall and install the driver.
+
 
 ## Storage Classes
 
-As part of the driver installation, a set of storage classes is created along with the driver pods. This is done to demonstrate how storage classes need to be created to consume storage from Dell EMC storage arrays.
+Storage Classes are an essential Kubernetes construct for Storage provisioning. To know more about Storage Classes, refer to https://kubernetes.io/docs/concepts/storage/storage-classes/
 
-The StorageClass object in Kubernetes is immutable and cannot be modified once created. It creates challenges when we need to change or update a parameter, for example when a version of the driver introduces new configurable parameters for the storage classes. To avoid issues during upgrades, future releases of the drivers will have the installation separated from the creation of Storage Classes. In preparation for that, starting from CSI Unity v1.5, an annotation "helm.sh/resource-policy": keep is applied to the storage classes created by the dell-csi-helm-installer.
+A wide set of annotated storage class manifests have been provided in the [helm/samples/storageclass folder](https://github.com/dell/csi-unity/tree/master/helm/samples/storageclass). Use these samples to create new storage classes to provision storage.
 
-Because of this annotation, these storage classes are not going to be deleted even after the driver has been uninstalled. This annotation has been applied to give you an opportunity to keep using these storage classes even with a future release of the driver. In case you wish to not use these storage classes, you will need to delete them by using the kubectl delete storageclass command.
+For CSI Driver for Unity version 1.6 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `csi-unity/helm/samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
 
-**Note**: If you uninstall the driver and reinstall it, you can still face errors if any update in the values.yaml file leads to an update of the storage class(es):
+### What happens to my existing storage classes?
+
+*Upgrading from CSI Unity v1.5 driver*
+The storage classes created as part of the installation have an annotation - "helm.sh/resource-policy": keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.
+
+*Upgrading from an older version of the driver*
+It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.5 before upgrading to 1.6.
+
+**Steps to create storage class:**
+There are samples storage class yaml files available under `helm/samples/storageclass`.  These can be copied and modified as needed.
+
+1. Pick any of `unity-fc.yaml`, `unity-iscsi.yaml` or `unity-nfs.yaml`
+2. Copy the file as `unity-<ARRAY_ID>-fc.yaml`, `unity-<ARRAY_ID>-iscsi.yaml` or `unity-<ARRAY_ID>-nfs.yaml`
+3. Replace `<ARRAY_ID>` with the Array Id of the Unity Array to be used
+4. Replace `<STORAGE_POOL>` with the storage pool you have
+5. Replace `<TIERING_POLICY>` with the Tiering policy that is to be used for provisioning
+6. Replace `<HOST_IO_LIMIT_NAME>` with the Host IO Limit Name that is to be used for provisioning
+7. Replace `<mountOption1>` with the necessary mount options. If not required, this can be removed from the storage class
+8. Edit `storageclass.kubernetes.io/is-default-class` to true if you want to set it as default, otherwise false. 
+9. Save the file and create it by using `kubectl create -f unity-<ARRAY_ID>-fc.yaml` or `kubectl create -f unity-<ARRAY_ID>-iscsi.yaml` or `kubectl create -f unity-<ARRAY_ID>-nfs.yaml`
+
+
+**Note**: 
+- At least one storage class is required for one array.
+- If you uninstall the driver and reinstall it, you can still face errors if any update in the `values.yaml` file leads to an update of the storage class(es):
 
 ```
-Error: cannot patch "<sc-name>" with kind StorageClass: StorageClass.storage.k8s.io "<sc-name>" is invalid: parameters: Forbidden: updates to parameters are forbidden
-	
+    Error: cannot patch "<sc-name>" with kind StorageClass: StorageClass.storage.k8s.io "<sc-name>" is invalid: parameters: Forbidden: updates to parameters are forbidden
 ```
 
-In case you want to make such updates, ensure to delete the existing storage classes using the kubectl delete storageclass command.
-Deleting a storage class has no impact on a running Pod with mounted PVCs. You will not be able to provision new PVCs until at least one storage class is newly created.
+In case you want to make such updates, ensure to delete the existing storage classes using the `kubectl delete storageclass` command.  
+Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.
+
 
 ## Dynamically update the unity-creds secrets
 
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the "Host" information in an array.
 User can update secret using the following command:
-
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f - `
-
+```
+    kubectl create secret generic unity-creds -n unity --from-file=config=secret.json -o yaml --dry-run=client | kubectl replace -f -
+```
 **Note**: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.

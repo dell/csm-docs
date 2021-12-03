@@ -30,3 +30,5 @@ spec:
 ```
 
 After the VolumeSnapshot has been successfully created by the CSI driver, a VolumeSnapshotContent object is automatically created. When the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_, it is available for use.
+
+>Note: VolumeSnapshots can be listed using the command `kubectl get volumesnapshot -n <namespace>`
