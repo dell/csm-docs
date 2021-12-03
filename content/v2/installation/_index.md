@@ -8,4 +8,4 @@ tags:
  - csi-driver
 ---
 
-Installation information for all the drivers can be found in the individual drivers page in this section
+Installation information for all the drivers can be found on the individual driver's page in this section

@@ -28,6 +28,7 @@ The following are requirements that must be met before installing the CSI Driver
 - Install PowerFlex Storage Data Client 
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - A user must exist on the array with a role _>= FrontEndConfigure_
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 
 
 ### Install Helm 3.0
@@ -108,23 +109,21 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.0.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
 
-3. Check `helm/csi-vxflexos/driver-image.yaml` and confirm the driver image points to a new image.
+3. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the `scripts` directory. This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the values for these parameters as they must be entered into `samples/config.yaml`.
 
-4. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the top-level helm directory.  This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the value for these parameters as they must be entered in the `config.yaml` file in the samples directory.
-
-5. Prepare the samples/config.yaml for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.
+4. Prepare `samples/config.yaml` for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.
 
     | Parameter | Description                                                  | Required | Default |
     | --------- | ------------------------------------------------------------ | -------- | ------- |
-    | username  | Username for accessing PowerFlex system.                      | true     | -       |
-    | password  | Password for accessing PowerFlex system.                      | true     | -       |
+    | username  | Username for accessing PowerFlex system. If authorization is enabled, username will be ignored.                       | true     | -       |
+    | password  | Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.                     | true     | -       |
     | systemID  | System name/ID of PowerFlex system.                           | true     | -       |
     | allSystemNames | List of previous names of powerflex array if used for PV create     | false    | -       |
-    | endpoint  | REST API gateway HTTPS endpoint for PowerFlex system.         | true     | -       |
+    | endpoint  | REST API gateway HTTPS endpoint for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on          | true     | -       |
     | skipCertificateValidation  | Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface. | true     | true    |
     | isDefault | An array having isDefault=true is for backward compatibility. This parameter should occur once in the list. | false    | false   |
     | mdm       | mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
@@ -133,14 +132,18 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
     ```yaml
      # Username for accessing PowerFlex system.	
+     # If authorization is enabled, username will be ignored.
    - username: "admin"
      # Password for accessing PowerFlex system.	
+     # If authorization is enabled, password will be ignored.
      password: "password"
      # System name/ID of PowerFlex system.	
      systemID: "ID1"
      # Previous names of PowerFlex system if used for PV.
      allSystemNames: "pflex-1,pflex-2"
      # REST API gateway HTTPS endpoint for PowerFlex system.
+     # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
+     # the authorization sidecar will listen on
      endpoint: "https://127.0.0.1"
      # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
      # Allowed values: true or false
@@ -178,36 +181,43 @@ kubectl create -f deploy/kubernetes/snapshot-controller
     - Old `json` format of the array configuration file is still supported in this release. If you already have your configuration in `json` format, you may continue to maintain it or you may transfer this configuration to `yaml`
     format and replace/update the secret.  
     - "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
-    - Please note that log configuration parameters from v1.5 will no longer work in v2.0. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
+    - Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
     
-6. Default logging options are set during helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features.  
+5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features.  
 
-7. If using automated SDC deployment:
+6. If using automated SDC deployment:
    - Check the SDC container image is the correct version for your version of PowerFlex. 
    
-8. Copy the default values.yaml file `cd helm && cp csi-vxflexos/values.yaml myvalues.yaml`
+7. Copy the default values.yaml file `cd helm && cp csi-vxflexos/values.yaml myvalues.yaml`
 
-9. Edit the newly created values file and provide values for the following parameters `vi myvalues.yaml`:
+8. If you are using a custom image, check the `version` and `driverRepository` fields in `myvalues.yaml` to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: `<driverRepository>/csi-vxflexos:v<version>`
+
+9. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here:
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| version | Set to verify the values file version matches driver version. | Yes | 2.0.0 |
+| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.0.0 |
+| driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
+| powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | No | dellemc/sdc:3.6 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
 | logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
 | logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
 | kubeletConfigDir | kubelet config directory path. Ensure that the config.yaml file is present at this path. | Yes | /var/lib/kubelet |
 | defaultFsType | Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs. | Yes | ext4 |
-| imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never. | Yes | IfNotPresent |
+| imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never. | Yes | IfNotPresent | 
 | enablesnapshotcgdelete | A boolean that, when enabled, will delete all snapshots in a consistency group everytime a snap in the group is deleted. | Yes | false |
 | enablelistvolumesnapshot | A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise. | Yes | false |
 | allowRWOMultiPodAccess | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | Yes | false |
-| **controller**           | This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](../../../features/powerflex#controller-ha) for Powerflex specifics.                                                                                                             | -        | -       |
+| **controller**           | This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](../../../features/powerflex#controller-ha) for Powerflex specifics.              | -        | -       |
 | volumeNamePrefix | Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them. | Yes | "k8s" |
 | controllerCount | Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the "controller" section in your values.yaml. For more details on the new controller pod configurations, see the [Features section](../../../features/powerflex#controller-ha) for Powerflex specifics. | Yes | 2 |
 | snapshot.enabled | A boolean that enable/disable volume snapshot feature. | No | true |
 | resizer.enabled | A boolean that enable/disable volume expansion feature. | No | true |
 | nodeSelector             | Defines what nodes would be selected for pods of controller deployment. Leave as blank to use all nodes. Uncomment this section to deploy on master nodes exclusively.                                                                                                                                                                                                                                         | Yes     | " "     |
 | tolerations              | Defines tolerations that would be applied to controller deployment. Leave as blank to install the controller on worker nodes only. If deploying on master nodes is desired, uncomment out this section.                                                                                                                                                                                                            | Yes     | " "     |
+| **healthMonitor** |  This section configures the optional deployment of the external health monitor sidecar, for controller side volume health monitoring. | - | - |
+| enabled | Enable/Disable deployment of external health monitor sidecar. | No | false |
+| volumeHealthMonitorInterval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)| No | 60s |
 | **node** | This section allows the configuration of node-specific parameters. | - | - |
 | nodeSelector | Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
 | tolerations | Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
@@ -215,15 +225,22 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | enabled                  | Set to enable the usage of the monitoring pod.                                                                                                                                                                                                                                                                                                                                                                | Yes     | false |
 | hostNetwork              | Set whether the monitor pod should run on the host network or not.                                                                                                                                                                                                                                                                                                                                            | Yes     | true |
 | hostPID                  | Set whether the monitor pod should run in the host namespace or not.                                                                                                                                                                                                                                                                                                                                          | Yes     | true |
+| **healthMonitor** | This section configures node side volume health monitoring | - | -|
+| enabled| Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | **vgsnapshotter** | This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.  | - | - |
 | enabled | A boolean that enable/disable vg snapshotter feature. | No | false |
 | image | Image for vg snapshotter. | No | " " |
 | **podmon**               | Podmon is an optional feature under development and tech preview. Enable this feature only after contact support for additional information.  |  -        |  -       |
 | enabled                  | A boolean that enable/disable podmon feature. |  No      |   false   |
 | image | image for podmon. | No | " " |
+| **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
+| enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
+| sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
+| proxyHost | Hostname of the csm-authorization server. | No | Empty |
+| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
 
 
-10. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`
+10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
 
  *NOTE:*
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
@@ -273,9 +290,9 @@ If the gateway certificate is self-signed or if you are using an embedded gatewa
 3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: vxflexos-certs-1, vxflexos-certs-2, etc)
 
 
-*Note:*
+*Notes:*
 	
-- "vxflexos" is the namespace for helm-based installation but namespace can be user-defined in operator-based installation.
+- "vxflexos" is the namespace for Helm-based installation but namespace can be user-defined in operator-based installation.
 - User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to Kubernetes secret size limitation.
 - Whenever certSecretCount parameter changes in `myvalues.yaml` user needs to uninstall and install the driver.
 - Updating vxflexos-certs-n secrets is a manual process, unlike vxflexos-config. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
@@ -321,8 +338,8 @@ Support for v1beta1 snapshots is being discontinued in this release.
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerFlex v1.5 driver*:
+*Upgrading from CSI PowerFlex v2.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 before upgrading to 2.0.
+It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.1.
