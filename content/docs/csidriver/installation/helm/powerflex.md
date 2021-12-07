@@ -46,8 +46,8 @@ Verify that zero padding is enabled on the PowerFlex storage pools that will be 
 ### Install PowerFlex Storage Data Client
 
 The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver. 
-SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment, 
-currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS). 
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment;
+currently only Red Hat CoreOS (RHCOS). 
 On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps [below](#manual-sdc-deployment).
 Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 
