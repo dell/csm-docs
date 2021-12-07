@@ -40,7 +40,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 | Create VolumeSnapshot    | yes      | yes| yes   | yes | yes  |
 | Create Volume from Snapshot | yes   | yes| yes   | yes | yes  |
 | Delete Snapshot          | yes      | yes| yes   | yes | yes  |
-| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)         | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(Raw block) | RWO<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(Raw block) | RWO/RWOP<br>(FC/iSCSI)<br>RWO/RWX/<br>RWOP<br>(RawBlock)<br>RWO/RWX/ROX/<br>RWOP<br>(NFS) | RWO/RWX/ROX/<br> RWOP | RWO/RWOP<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(RawBlock, NFS) |
+| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)         | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX<br>(Raw block) | RWO<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(Raw block) | RWO/RWOP<br>(FC/iSCSI)<br>RWO/RWX/<br>RWOP<br>(RawBlock)<br>RWO/RWX/ROX/<br>RWOP<br>(NFS) | RWO/RWX/ROX/<br> RWOP | RWO/RWOP<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(RawBlock, NFS) |
 | CSI Volume Cloning       | yes      | yes | yes   | yes | yes |
 | CSI Raw Block Volume     | yes      | yes | yes   | no  | yes |
 | CSI Ephemeral Volume     | no       | yes | yes   | yes | yes |
