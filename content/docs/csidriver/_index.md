@@ -21,7 +21,6 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 | Ubuntu        |       20.04      |       20.04         |       18.04, 20.04      |        18.04, 20.04      |          20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
 | SLES          |        15SP3        |        15SP3        |       15SP3      |         15SP3     |       15SP3      |
-| Fedora Core OS|        no        |         5.x       |        no        |         no        |        no        |
 | Red Hat OpenShift | 4.8, 4.8 EUS, 4.9  |   4.8, 4.8 EUS, 4.9 |    4.8, 4.8 EUS, 4.9     |   4.8, 4.8 EUS, 4.9   |  4.8, 4.8 EUS, 4.9 |
 | Mirantis Kubernetes Engine |       3.4.x      |        3.4.x        |       3.4.x     |        3.4.x      |        3.4.x     |
 | Google Anthos |        1.6       |          1.8        |        no        |         1.9        |        1.9       |
