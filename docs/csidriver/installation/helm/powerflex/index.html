@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerflex/" />
-<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2021-12-08T08:54:04-05:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing the CSI Driver for PowerFlex via Helm
 ">
-<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
-<meta itemprop="wordCount" content="3305">
+<meta itemprop="dateModified" content="2021-12-08T08:54:04-05:00" />
+<meta itemprop="wordCount" content="3302">
 
 
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.8d999f61c419104831f8158bb21b5d66.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.662e89c7b3cc822b02a9adffd26c9de8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.8d999f61c419104831f8158bb21b5d66.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.662e89c7b3cc822b02a9adffd26c9de8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1764,8 +1764,8 @@
 <p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html">Dell EMC PowerFlex documentation</a>.</p>
 <h3 id="install-powerflex-storage-data-client">Install PowerFlex Storage Data Client</h3>
 <p>The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
-SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment,
-currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS).
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment;
+currently only Red Hat CoreOS (RHCOS).
 On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps <a href="#manual-sdc-deployment">below</a>.
 Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported OS versions.</p>
 <p><strong>Optional:</strong> For a typical install, you will pull SDC kernel modules from the Dell EMC FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The <a href="https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for">PowerFlex KB article</a> has instructions on how to do this.</p>

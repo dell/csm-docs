@@ -56,8 +56,8 @@
 &lt;p&gt;Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see &lt;a href=&#34;https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html&#34;&gt;Dell EMC PowerFlex documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;install-powerflex-storage-data-client&#34;&gt;Install PowerFlex Storage Data Client&lt;/h3&gt;
 &lt;p&gt;The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
-SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment,
-currently Fedora CoreOS (FCOS) and Red Hat CoreOS (RHCOS).
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment;
+currently only Red Hat CoreOS (RHCOS).
 On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps &lt;a href=&#34;#manual-sdc-deployment&#34;&gt;below&lt;/a&gt;.
 Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hub.docker.com/r/dellemc/sdc&lt;/a&gt; for supported OS versions.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt; For a typical install, you will pull SDC kernel modules from the Dell EMC FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The &lt;a href=&#34;https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for&#34;&gt;PowerFlex KB article&lt;/a&gt; has instructions on how to do this.&lt;/p&gt;
