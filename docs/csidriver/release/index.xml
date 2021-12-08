@@ -73,7 +73,8 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;li&gt;Added support for CSM Authorization sidecar via Helm.&lt;/li&gt;
 &lt;li&gt;Added v1 extensions to vg snaphot from v1alpha2.&lt;/li&gt;
 &lt;li&gt;Added support to update helm charts to do a helm install without shell scripts.&lt;/li&gt;
-&lt;li&gt;Added support for volume health monitoring.&lt;/li&gt;
+&lt;li&gt;Added support for volume health monitoring&lt;/li&gt;
+&lt;li&gt;Removed support for Fedora CoreOS&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
