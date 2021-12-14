@@ -68,10 +68,11 @@ You can also use a single stretched Kubernetes cluster for protecting your appli
 the objects still exist in pairs.
 
 ### What it does not do
-* Replicate application manifests within/across clusters
-* Stop applications before the planned/unplanned migration
-* Start applications after the migration
-* Replicate `PersistentVolumeClaim` objects within/across clusters
+* Replicate application manifests within/across clusters.
+* Stop applications before the planned/unplanned migration.
+* Start applications after the migration.
+* Replicate `PersistentVolumeClaim` objects within/across clusters.
+* Replication with METRO mode does not need Replicator sidecar and common controller.
 
 ### CSM for Replication Module Capabilities
 
