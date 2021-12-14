@@ -103,7 +103,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ```
 
 *NOTE:*
-- When using Kubernetes 1.20/1.21/1.22 it is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+- When using Kubernetes 1.21/1.22/1.23 it is recommended to use 4.2.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 ## Install the Driver

@@ -3,13 +3,10 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.1.0
+## Release Notes - CSI PowerMax v2.2.0
 
 ### New Features/Changes
-- Added support for OpenShift v4.9.
-- Added support for CSI spec 1.5.
-- Added v2 suffix to the module names.
-- Added support for CSM Authorization sidecar via Helm 
+- Added support for Kubernetes 1.23.
 
 ### Fixed Issues
 There are no fixed issues in this release.
