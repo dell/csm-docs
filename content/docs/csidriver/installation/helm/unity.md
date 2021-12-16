@@ -233,7 +233,7 @@ Procedure
     A successful installation must display messages that look similar to the following samples:
     ```
     ------------------------------------------------------
-    > Installing CSI Driver: csi-unity on 1.20
+    > Installing CSI Driver: csi-unity on 1.22
     ------------------------------------------------------
     ------------------------------------------------------
     > Checking to see if CSI Driver is already installed
@@ -241,52 +241,52 @@ Procedure
     ------------------------------------------------------
     > Verifying Kubernetes and driver configuration
     ------------------------------------------------------
-    |- Kubernetes Version: 1.20
+    |- Kubernetes Version: 1.22
     |
     |- Driver: csi-unity                                                
     |
-    |- Verifying Kubernetes versions                                    
-      |
-      |--> Verifying minimum Kubernetes version                         Success
-      |
-      |--> Verifying maximum Kubernetes version                         Success
+    |- Verifying Kubernetes version                                     
     |
-    |- Verifying that required namespaces have been created             Success
+    |--> Verifying minimum Kubernetes version                         Success
     |
-    |- Verifying that required secrets have been created                Success
+    |--> Verifying maximum Kubernetes version                         Success
     |
-    |- Verifying that required secrets have been created                Success
+    |- Verifying that required namespaces have been created           Success
+    |
+    |- Verifying that required secrets have been created              Success
+    |
+    |- Verifying that required secrets have been created              Success
     |
     |- Verifying alpha snapshot resources                               
-      |
-      |--> Verifying that alpha snapshot CRDs are not installed         Success
+    |
+    |--> Verifying that alpha snapshot CRDs are not installed         Success
     |
     |- Verifying sshpass installation..                                 |
     |- Verifying iSCSI installation                                     
-    Enter the root password of 10.**.**.**: 
+    Enter the root password of 10.**.**.**:
     
-    Enter the root password of 10.**.**.**: 
+    Enter the root password of 10.**.**.**:
     Success
     |
     |- Verifying snapshot support                                       
-      |
-      |--> Verifying that snapshot CRDs are available                   Success
-      |
-      |--> Verifying that the snapshot controller is available          Success
     |
-    |- Verifying helm version                                           Success
+    |--> Verifying that snapshot CRDs are available                   Success
     |
-    |- Verifying helm values version                                    Success
+    |--> Verifying that the snapshot controller is available          Success
+    |
+    |- Verifying helm version                                         Success
+    |
+    |- Verifying helm values version                                  Success
     
     ------------------------------------------------------
     > Verification Complete - Success
     ------------------------------------------------------
     |
-    |- Installing Driver                                                Success
-      |
-      |--> Waiting for Deployment unity-controller to be ready          Success
-      |
-      |--> Waiting for DaemonSet unity-node to be ready                 Success
+    |- Installing Driver                                              Success
+    |
+    |--> Waiting for Deployment unity-controller to be ready          Success
+    |
+    |--> Waiting for DaemonSet unity-node to be ready                 Success
     ------------------------------------------------------
     > Operation complete
     ------------------------------------------------------
