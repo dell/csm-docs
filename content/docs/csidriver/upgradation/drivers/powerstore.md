@@ -35,10 +35,6 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
 
 Note: While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
 
-1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator).
+1. Please upgrade the Dell CSI Operator by following [here](./../operator).
+2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).
 
-2. Execute `bash scripts/install.sh --upgrade`
-This command will install the latest version of the operator.
->Note: Dell CSI Operator version 1.5.0 and higher would install to the 'dell-csi-operator' namespace by default.
-
-3. To upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).
