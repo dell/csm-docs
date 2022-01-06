@@ -45,7 +45,6 @@ A Storage Administrator can execute the installer or rpm package as a root user 
     ```json
     {
       "web": {
-        "sidecarproxyaddr": "docker_registry/sidecar-proxy:latest",
         "jwtsigningsecret": "secret"
       },
       "proxy": {
@@ -225,8 +224,7 @@ Create the karavi-authorization-config secret using the following command:
 >__Note__:  
 > - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
 > - For PowerScale, the *systemID* will be the *clusterName* of the array. 
->   - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
-
+>   - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 3. Create the proxy-server-root-certificate secret.
 
     If running in *insecure* mode, create the secret with empty data:
