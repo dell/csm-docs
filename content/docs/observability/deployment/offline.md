@@ -125,6 +125,8 @@ To perform an offline installation of a Helm chart, the following steps should b
     [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
+    If CSM-Authorization is enabled, perform the additional steps at [Copy the CSI Driver Entities](../helm/#copy-the-csi-driver-entities) to create the required Secrets and ConfigMap and fill in the authorization parameters in the values.yaml.
+
     CSI Driver for PowerStore
     ```
     [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
@@ -145,17 +147,4 @@ To perform an offline installation of a Helm chart, the following steps should b
     TEST SUITE: None
 
     ```
-
-5. (Optional) The following steps can be performed to enable CSM for Observability to use an existing instance of Authorization for accessing the REST API for the given storage systems.
-
-    **Note:** CSM for Authorization currently does not support the Observability module for PowerStore.
-
-    Copy the proxy Secret into the CSM for Observability namespace:
-    ```
-    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
-    ```
-
-    Use `karavictl` to update the Observability module deployment to use the Authorization module. Required parameters are the location of the sidecar-proxy Docker image and the URL of the Authorization module proxy. If the Authorization module was installed using certificates, the flags `--insecure=false` and `--root-certificate <location-of-root-certificate>` must be also be provided. If certificates were not provided during installation, the flag `--insecure=true` must be provided.
-    ```
-    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secrets,deployments -n [CSM_NAMESPACE] -o yaml | karavictl inject --insecure=false --root-certificate <location-of-root-certificate> --image-addr <sidecar-proxy-image-location> --proxy-host <proxy-host> | kubectl apply -f -
-    ```
+    
