@@ -13,7 +13,9 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 ## Helm Chart Upgrade
 
-CSM for Observability Helm upgrade supports [Helm](../deployment/helm), [Online Installer](../deployment/online), and [Offline Installer](../deployment/offline) deployments. To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.
+CSM for Observability Helm upgrade supports [Helm](../deployment/helm), [Online Installer](../deployment/online), and [Offline Installer](../deployment/offline) deployments. 
+
+To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.
 
 ```
 helm repo update
@@ -32,7 +34,13 @@ dell/karavi-observability       1.0.1           1.0.0           CSM for Observab
 Upgrade to the latest CSM for Observability release:
 
 ```
-$ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
+Upgrade Helm and Online Installer deployments:
+
+  $ helm upgrade --version $latest_chart_version --values values.yaml karavi-observability dell/karavi-observability -n $namespace
+
+Upgrade Offline Installer deployment:
+
+  $ helm upgrade --version $latest_chart_version karavi-observability dell/karavi-observability -n $namespace
 ```
 
 The [configuration](../deployment/helm#configuration) section lists all the parameters that can be configured using the `values.yaml` file.
@@ -71,4 +79,4 @@ CSM for Observability online installer upgrade can be used if the initial deploy
     |- Upgrading Karavi Observability helm chart                        Success
     |
     |- Waiting for pods in namespace karavi to be ready                 Success
-    ```
+    ``` 
