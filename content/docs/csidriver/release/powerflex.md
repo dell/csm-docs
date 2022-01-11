@@ -3,7 +3,7 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.1.0
+## Release Notes - CSI PowerFlex v2.2.0
 
 ### New Features/Changes
 - Added support for OpenShift v4.9.
@@ -15,6 +15,7 @@ description: Release notes for PowerFlex CSI driver
 - Added support to update helm charts to do a helm install without shell scripts.
 - Added support for volume health monitoring
 - Removed support for Fedora CoreOS 
+- Added support for Kubernetes 1.23.
 
 ### Fixed Issues
 

@@ -30,7 +30,7 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | PowerMax | PowerStore |
 |-|-|-|
-| Kubernetes    | 1.20, 1.21, 1.22 | 1.20, 1.21, 1.22 |
+| Kubernetes    | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 |
 | Red Hat OpenShift | X | 4.8, 4.9 |
 | RHEL          |     7.x, 8.x      |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |     7.8, 7.9     |
@@ -91,7 +91,7 @@ The following matrix provides a list of all supported versions for each Dell EMC
 
 | Platforms | PowerMax | PowerStore |
 | -------- | --------- | --------- |
-| Kubernetes | 1.20, 1.21, 1.22  | 1.20, 1.21, 1.22 |
+| Kubernetes | 1.21, 1.22, 1.23  | 1.21, 1.22, 1.23 |
 | CSI Driver | 2.x | 2.x |
 
 For compatibility with storage arrays please refer to corresponding [CSI drivers](../csidriver/#features-and-capabilities)
