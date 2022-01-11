@@ -47,7 +47,7 @@ The [configuration](../deployment/helm#configuration) section lists all the para
 
 ## Online Installer Upgrade
 
-CSM for Observability online installer upgrade can be used if the initial deployment was performed using the [Online Installer](../deployment/online) or the [Helm chart](../deployment/helm).
+CSM for Observability online installer upgrade can be used if the initial deployment was performed using the [Online Installer](../deployment/online) or [Helm](../deployment/helm).
 
 1. Change to the installer directory:
     ```
