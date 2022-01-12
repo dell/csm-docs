@@ -59,6 +59,7 @@ Usage: ./karavi-observability-install.sh mode options...
 Mode:
   install                                                     Installs Karavi Observability and enables Karavi Authorization if already installed
   enable-authorization                                        Updates existing installation of Karavi Observability with Karavi Authorization
+  upgrade                                                     Upgrades existing installation of Karavi Observability to the latest release
 Options:
   Required
   --namespace[=]<namespace>                                   Namespace where Karavi Observability will be installed
