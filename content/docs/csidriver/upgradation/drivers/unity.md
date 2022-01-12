@@ -9,6 +9,11 @@ Description: Upgrade Unity CSI driver
 
 You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.
 
+**Note:**
+1. User has to re-create existing custom-storage classes (if any) according to the latest format.
+2. User has to create Volumesnapshotclass after upgrade for taking Snapshots.
+3. Secret.yaml files can be updated according to Multiarray Normalization parametes only after upgrading the driver.
+ 
 ### Using Helm
 
 **Note:** While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
@@ -22,11 +27,6 @@ To upgrade the driver from csi-unity v2.0 to csi-unity 2.1
 3. Copy the helm/csi-unity/values.yaml to the new location csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.
 4. Navigate to common-helm-installer folder and execute the following command:
    `./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade`
-   
-**Note:** 
-1. User has to re-create existing custom-storage classes (if any) according to the latest format.
-2. User has to create Volumesnapshotclass after upgrade for taking Snapshots.
-3. Secret.yaml files can be updated according to Multiarray Normalization parameters only after upgrading the driver.  
 
 ### Using Operator
 
