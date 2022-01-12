@@ -21,7 +21,6 @@ You can upgrade the CSI Driver for Dell EMC PowerScale using Helm or Dell CSI Op
 
 
 ## Upgrade using Dell CSI Operator:
-
 **Notes:**
 1. While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
 2. Upgrading the Operator does not upgrade the CSI Driver.
