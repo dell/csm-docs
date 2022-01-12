@@ -13,20 +13,18 @@ You can upgrade the CSI Driver for Dell EMC PowerScale using Helm or Dell CSI Op
 **Note:** While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
 
 **Steps**
-1. Verify that all pre-requisites to install CSI Driver for Dell EMC PowerScale version 2.1.0 are fulfilled. Note that change in secret format should be implemented.
-      - Delete the existing secret (isilon-creds and isilon-certs-0)
-      - Create new secrets (isilon-creds and isilon-certs-0)
-      Refer Installation section [here](./../../../installation/helm/isilon/#install-the-driver).
-2. Clone the repository using `git clone -b v2.1.0 https://github.com/dell/csi-powerscale.git`, copy the helm/csi-isilon/values.yaml into a new location with a custom name say _my-isilon-settings.yaml_, to customize settings for installation. Edit _my-isilon-settings.yaml_ as per the requirements.
-3. Change to directory dell-csi-helm-installer to install the Dell EMC PowerScale `cd dell-csi-helm-installer`
-4. Upgrade the CSI Driver for Dell EMC PowerScale version 2.1.0 using following command:
+1. Clone the repository using `git clone -b v2.1.0 https://github.com/dell/csi-powerscale.git`, copy the helm/csi-isilon/values.yaml into a new location with a custom name say _my-isilon-settings.yaml_, to customize settings for installation. Edit _my-isilon-settings.yaml_ as per the requirements.
+2. Change to directory dell-csi-helm-installer to install the Dell EMC PowerScale `cd dell-csi-helm-installer`
+3. Upgrade the CSI Driver for Dell EMC PowerScale version 2.1.0 using following command:
 
    `./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade`
 
 
 ## Upgrade using Dell CSI Operator:
 
-**Note:** While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
+**Notes:**
+1. While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
+2. Upgrading the Operator does not upgrade the CSI Driver.
 
 To upgrade the driver from version 2.0.0 to 2.1.0:
 

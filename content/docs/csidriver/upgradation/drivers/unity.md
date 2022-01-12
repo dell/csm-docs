@@ -30,7 +30,9 @@ To upgrade the driver from csi-unity v2.0 to csi-unity 2.1
 
 ### Using Operator
 
-**Note:** While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.  
+**Notes:**
+1. While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
+2. Upgrading the Operator does not upgrade the CSI Driver.
 
 To upgrade the driver from csi-unity v2.0 to csi-unity v2.1 :   
 

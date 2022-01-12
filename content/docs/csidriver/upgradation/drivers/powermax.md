@@ -22,6 +22,7 @@ You can upgrade CSI Driver for Dell EMC PowerMax using Helm or Dell CSI Operator
 - To update any installation parameter after the driver has been installed, change the `my-powermax-settings.yaml` file and run the install script with the option _\-\-upgrade_, for example: `./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml –upgrade`.
 
 ## Upgrade using Dell CSI Operator:
+**Note:** Upgrading the Operator does not upgrade the CSI Driver.
 
 1. Please upgrade the Dell CSI Operator by following [here](./../operator).
 2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).

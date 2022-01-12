@@ -33,7 +33,10 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
 
 ## Upgrade using Dell CSI Operator:
 
-Note: While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
+**Notes:**
+1. While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
+2. Upgrading the Operator does not upgrade the CSI Driver.
+
 
 1. Please upgrade the Dell CSI Operator by following [here](./../operator).
 2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).

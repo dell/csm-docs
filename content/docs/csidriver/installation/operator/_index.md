@@ -295,7 +295,11 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     ```
     and modify the installation.[ The usual fields to edit is the version of drivers and side cars and the env variables].
 * Modify the API object in-place via `kubectl patch` command. 
-* To create patch file or edit deployments, refer [here](https://github.com/dell/dell-csi-operator/tree/master/samples) for driver version & env variables and [here](https://github.com/dell/dell-csi-operator/tree/master/driverconfig/config.yaml) for version of side-cars.
+
+To create patch file or edit deployments, refer [here](https://github.com/dell/dell-csi-operator/tree/master/samples) for driver version & env variables and [here](https://github.com/dell/dell-csi-operator/tree/master/driverconfig/config.yaml) for version of side-cars.
+Latest versions of drivers could have additional env variable or sidecars.
+
+The below notes explain some of general items to take care of.
 
 **NOTES:** 
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
