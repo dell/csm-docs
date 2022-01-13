@@ -45,7 +45,6 @@ A Storage Administrator can execute the installer or rpm package as a root user 
     ```json
     {
       "web": {
-        "sidecarproxyaddr": "docker_registry/sidecar-proxy:latest",
         "jwtsigningsecret": "secret"
       },
       "proxy": {
@@ -225,8 +224,7 @@ Create the karavi-authorization-config secret using the following command:
 >__Note__:  
 > - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
 > - For PowerScale, the *systemID* will be the *clusterName* of the array. 
->   - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
-
+>   - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 3. Create the proxy-server-root-certificate secret.
 
     If running in *insecure* mode, create the secret with empty data:
@@ -270,7 +268,9 @@ Please refer to step 5 in the [installation steps for PowerScale](../../csidrive
 
 1. Update *endpointPort* to match the endpoint port number set in samples/secret/karavi-authorization-config.json
 
->__Note__: In *my-isilon-settings.yaml*, endpointPort acts as a default value. If endpointPort is not specified in *my-isilon-settings.yaml*, then it should be specified in the *endpoint* parameter of samples/secret/secret.yaml.
+*Notes:*
+> - In *my-isilon-settings.yaml*, endpointPort acts as a default value. If endpointPort is not specified in *my-isilon-settings.yaml*, then it should be specified in the *endpoint* parameter of samples/secret/secret.yaml.
+> - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 
 2. Enable CSM for Authorization and provide *proxyHost* address 
 
@@ -294,7 +294,6 @@ CSM for Authorization has a subset of configuration parameters that can be updat
 | certificate.crtFile | String | "" |Path to the host certificate file |
 | certificate.keyFile | String | "" |Path to the host private key file |
 | certificate.rootCertificate | String | "" |Path to the root CA file  |
-| web.sidecarproxyaddr | String |"127.0.0.1:5000/sidecar-proxy:latest" |Docker registry address of the CSM for Authorization sidecar-proxy |
 | web.jwtsigningsecret | String | "secret" |The secret used to sign JWT tokens | 
 
 Updating configuration parameters can be done by editing the `karavi-config-secret` on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so: 

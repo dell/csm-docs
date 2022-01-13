@@ -65,7 +65,7 @@ Prerequisites for deploying the Dell EMC CSI drivers can be found here:
 No, all the modules have been designed to work inside Kubernetes with Dell EMC CSI drivers.
 
 ### Should I install the module in the same namespace as the driver or another?
-It is recommended to install CSM for Observability in a namespace separate from the Dell EMC CSI drivers because it works across multiple drivers.  All other modules either run as standalone or are injected into the Dell EMC CSI driver as a sidecar.
+It is recommended to install CSM for Observability in a namespace separate from the Dell EMC CSI drivers because it works across multiple drivers.  All other modules either run as standalone or with the Dell EMC CSI driver as a sidecar.
 
 ### Which Kubernetes distributions are supported?
 The supported Kubernetes distributions for Container Storage Modules are documented:

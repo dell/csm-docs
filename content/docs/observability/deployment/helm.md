@@ -17,7 +17,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
     $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
     ```
 
-## Copy the CSI Driver Secret
+## Copy the CSI Driver Entities
 
 Copy the config Secret from the Dell CSI Driver namespace into the namespace where CSM for Observability is deployed.
 
@@ -26,6 +26,20 @@ Copy the config Secret from the Dell CSI Driver namespace into the namespace whe
 ```console
 $ kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
 ```
+
+If CSM-Authorization is enabled, perform the following steps.
+
+Copy the driver configuration parameters ConfigMap into the namespace where CSM for Observability is deployed.
+
+```
+$ kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+```
+
+Create the `karavi-authorization-config` Secret by following step 2 in [Configuring a Dell EMC CSI Driver](../../../authorization/deployment/#configuring-a-dell-emc-csi-driver) but use the [CSM_NAMESPACE].
+
+Create the `proxy-server-root-certificate` Secret by following step 3 in [Configuring a Dell EMC CSI Driver](../../../authorization/deployment#configuring-a-dell-emc-csi-driver) but use the [CSM_NAMESPACE].
+
+Generate a token and apply it to the [CSM_NAMESPACE] by following [Generate a Token](../../../authorization/deployment/#generate-a-token).
 
 __Note__: The target namespace must exist before executing this command.
 
@@ -76,6 +90,9 @@ The following table lists the configurable parameters of the CSM for Observabili
 | `karaviMetricsPowerflex.volumePollFrequencySeconds` | The polling frequency (in seconds) to gather volume metrics | `10` |
 | `karaviMetricsPowerflex.storageClassPoolPollFrequencySeconds` | The polling frequency (in seconds) to gather storage class/pool metrics | `10` |
 | `karaviMetricsPowerflex.concurrentPowerflexQueries` | The number of simultaneous metrics queries to make to Powerflex(MUST be less than 10; otherwise, several request errors from Powerflex will ensue. | `10` |
+| `karaviMetricsPowerflex.authorization.enabled` | [Authorization](../../../authorization) is an optional feature to apply credential shielding of the backend PowerFlex. | `false` |
+| `karaviMetricsPowerflex.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
+| `karaviMetricsPowerflex.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
 | `karaviMetricsPowerflex.sdcMetricsEnabled` | Enable PowerFlex SDC Metrics Collection | `true` |
 | `karaviMetricsPowerflex.volumeMetricsEnabled` | Enable PowerFlex Volume Metrics Collection | `true` |
 | `karaviMetricsPowerflex.storageClassPoolMetricsEnabled` | Enable PowerFlex  Storage Class/Pool Metrics Collection | `true` |
