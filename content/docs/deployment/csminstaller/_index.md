@@ -5,6 +5,8 @@ description: Container Storage Modules Installer
 weight: 1
 ---
 
+>>**Note: The CSM Installer only supports installation of CSM 1.0 Modules and CSI Drivers in environments that do not have any existing deployments of CSM or CSI Drivers. The CSM Installer does not support the upgrade of existing CSM or CSI Driver deployments.**
+
 The CSM (Container Storage Modules) Installer simplifies the deployment and management of Dell EMC Container Storage Modules and CSI Drivers to provide persistent storage for your containerized workloads.
 
 ## CSM Installer Supported Modules and Dell EMC CSI Drivers
@@ -20,8 +22,6 @@ The CSM (Container Storage Modules) Installer simplifies the deployment and mana
 | CSI Driver for PowerStore | v2.0 |
 | CSI Driver for PowerFlex | v2.0 |
 | CSI Driver for PowerMax | v2.0 |
-
-**Note:** The CSM Installer supports installation of CSM 1.0 Modules and CSI Drivers in environments that do not have any existing deployments of CSM or CSI Drivers. The CSM Installer does not support the upgrade of existing CSM or CSI Driver deployments.
 
 The CSM Installer must first be deployed in a Kubernetes environment using Helm.  After which, the CSM Installer can be used through the following interfaces:
 - [CSM CLI](./csmcli)
