@@ -84,7 +84,7 @@ spec:
 
 This feature extends CSI specification to add the capability to create crash-consistent snapshots of a group of volumes. This feature is available as a technical preview. To use this feature, users have to deploy the csi-volumegroupsnapshotter side-car as part of the PowerFlex driver. Once the sidecar has been deployed, users can make snapshots by using yaml files such as this one:
 ```
-apiVersion: volumegroup.storage.dell.com/v1alpha2
+apiVersion: volumegroup.storage.dell.com/v1
 kind: DellCsiVolumeGroupSnapshot
 metadata:
   # Name must be 13 characters or less in length
