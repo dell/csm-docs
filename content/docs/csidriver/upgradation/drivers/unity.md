@@ -12,7 +12,7 @@ You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operato
 **Note:**
 1. User has to re-create existing custom-storage classes (if any) according to the latest format.
 2. User has to create Volumesnapshotclass after upgrade for taking Snapshots.
-3. Secret.yaml files can be updated according to Multiarray Normalization parametes only after upgrading the driver.
+3. Secret.yaml files can be updated according to Multiarray normalization parameters only after upgrading the driver.
  
 ### Using Helm
 
