@@ -19,8 +19,6 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 >Note: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
 
 ### Using OLM
-This is usually on OpenShift Platforms where OLM manages the operator upgrade.
-
 The upgrade of the Dell CSI Operator is done via Operator Lifecycle Manager.
 
 The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role while upgrading dell-csi-operator on OpenShift. This option can be set during installation of dell-csi-operator on OpenShift via the console and can be either set to `Manual` or `Automatic`.
