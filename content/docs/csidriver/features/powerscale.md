@@ -192,7 +192,7 @@ spec:
       storage: 5Gi
 ```
 
->Starting from CSI PowerScale driver version 2.2, it is allowed to create PersistentVolumeClaim from VolumeSnapshot with different isi paths i.e., isi paths of the new volume and the VolumeSnapshot can be different.
+> Starting from CSI PowerScale driver version 2.2, it is allowed to create PersistentVolumeClaim from VolumeSnapshot with different isi paths i.e., isi paths of the new volume and the VolumeSnapshot can be different.
 
 ## Volume Expansion
 
