@@ -90,7 +90,7 @@ Use this procedure to consume existing volumes with static provisioning.
 
 1. Open your Unisphere for Powermax, and take a note of volume-id.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
-3. In the following example, storage class is assumed as 'powermax', cluster prefix as 'ABC' and volume's internal name as '00001', array ID as '000000000001', volume ID as '1abc23456'. The volume-handle should be in the format of csi-<clusterPrefix>-<volumeNamePrefix>-<id>-<arrayID>-<volumeID>
+3. In the following example, storage class is assumed as 'powermax', cluster prefix as 'ABC' and volume's internal name as '00001', array ID as '000000000001', volume ID as '1abc23456'. The volume-handle should be in the format of `csi`-`clusterPrefix`-`volumeNamePrefix`-`id`-`arrayID`-`volumeID`.
 
 ```yaml
 apiVersion: v1
