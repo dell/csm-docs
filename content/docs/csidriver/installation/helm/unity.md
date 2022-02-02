@@ -250,7 +250,7 @@ Procedure
     |
     |- Verifying that required secrets have been created              Success
     |
-    |- Verifying that required secrets have been created              Success
+    |- Verifying that optional secrets have been created              Success
     |
     |- Verifying alpha snapshot resources                               
     |
