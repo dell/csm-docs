@@ -31,7 +31,7 @@ The Container Storage Modules (CSM) for Observability installer bootstraps Helm 
 If the Authorization module is enabled for the CSI drivers installed in the same Kubernetes cluster, the installer will perform the current steps to enable CSM for Observability to use the same Authorization instance:
 - Verifies the `karavictl` binary is available.
 - Verifies the appropriate Secrets and ConfigMap exist in the CSI driver namespace.
-- Enabled during the initial installation of CSM for Observability or updates the CSM for Observability deployment to use the existing Authorization instance.
+- Updates the CSM for Observability deployment to use the existing Authorization instance if not already enabled during the initial installation of CSM for Observability.
 
 ## Online Installer
 
