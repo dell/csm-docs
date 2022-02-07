@@ -248,6 +248,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 - This install script also runs the `verify.sh` script. You will be prompted to enter the credentials for each of the Kubernetes nodes. 
   The `verify.sh` script needs the credentials to check if SDC has been configured on all nodes. 
 - It is mandatory to run install script after changes to MDM configuration in `vxflexos-config` secret. Refer [dynamic-array-configuration](../../../features/powerflex#dynamic-array-configuration)
+- If a complex Kubernetes version is being used (e.g. `v1.21.3-mirantis-1`) then you must go into `helm/csi-vxflexos/Chart.yaml` and replace the standard `kubeVersion` check with the commented-out alternative. Please beware that this will also allow the use of pre-release alpha and beta versions of Kubernetes, which is not supported.
   
 - (Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver. 
    - Mount options are specified in storageclass yaml under _mkfsFormatOption_. 
