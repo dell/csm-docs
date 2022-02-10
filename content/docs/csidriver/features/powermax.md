@@ -458,3 +458,7 @@ To update the log level dynamically, the user has to edit the ConfigMap `powerma
 ```
 kubectl edit configmap -n powermax powermax-config-params
 ```  
+
+## PV/PVC Metrics
+
+CSI Driver for Dell EMC PowerMax 2.2.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.volumeHealthMonitorInterval parameter.
