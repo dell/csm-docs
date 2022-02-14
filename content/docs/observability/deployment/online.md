@@ -92,6 +92,11 @@ To perform an online installation of CSM for Observability, the following steps 
     The following example will install CSM for Observability into the CSM namespace.
 
     A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../helm#configuration).
+
+    __Note:__ 
+    - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
+    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability. 
+
     ```
     [user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
     ---------------------------------------------------------------------------------

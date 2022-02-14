@@ -125,7 +125,15 @@ To perform an offline installation of a Helm chart, the following steps should b
     [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-    If CSM-Authorization is enabled, perform the additional steps at [Copy the CSI Driver Entities](../helm/#copy-the-csi-driver-entities) to create the required Secrets and ConfigMap and fill in the authorization parameters in the values.yaml.
+    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-emc-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform the following steps:
+
+    ```
+    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+    ```
+
+    ```
+    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+    ```
 
     CSI Driver for PowerStore
     ```
@@ -134,7 +142,10 @@ To perform an offline installation of a Helm chart, the following steps should b
 
 4. Now that the required images have been made available and the Helm chart's configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart's repository.
 
-    **Note:** Optionally, you could provide your own [configurations](../helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
+    **Note:** 
+    - Optionally, you could provide your own [configurations](../helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
+    - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
+    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured. 
 
     ```
     [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm install -n install-namespace app-name karavi-observability
