@@ -10,60 +10,54 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
 ## Prerequisites
 
-- A [supported](../../../csidriver/#features-and-capabilities) CSI Driver is deployed 
-- The cert-manager CustomResourceDefinition resources are created.
+- A [supported](../../#supported-csi-drivers) Dell CSI Driver is deployed 
+
+## Install the CSM for Observability Helm Chart
+**Steps**
+1. Create a namespace where you want to install the module `kubectl create namespace karavi`
+
+2. Install cert-manager CRDs `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml`
+
+3. Add the Dell Helm Charts repo `helm repo add dell https://dell.github.io/helm-charts`
+
+4. Copy only the deployed CSI driver entities to the Observability namespace
+    #### PowerFlex
+
+    1. Copy the config Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:
+
+        `kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -`
+
+    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-emc-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform the following steps:
+
+    2. Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the CSM for Observability namespace:
+    
+        `kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -`
+
+    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:
+
+        `kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -`
+
+    #### PowerStore
+
+    1. Copy the config Secret from the CSI PowerStore namespace into the CSM for Observability namespace:
+
+        `kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -`
+
+5. Configure the [parameters](#configuration) and install the CSM for Observability Helm Chart
+
+    A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly. 
+
+    `helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] -f myvalues.yaml`
+
+    Alternatively, you can specify each parameter using the '--set key=value[,key=value]' and/or '--set-file key=value[,key=value] arguments to 'helm install'. For example:
 
     ```console
-    $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
+    $ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
+        --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
+        --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
+        --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
+        --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
     ```
-
-## Copy the CSI Driver Entities
-
-Copy the config Secret from the Dell CSI Driver namespace into the namespace where CSM for Observability is deployed.
-
-### PowerFlex
-
-```console
-$ kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
-```
-
-If CSM-Authorization is enabled, perform the following steps.
-
-Copy the driver configuration parameters ConfigMap into the namespace where CSM for Observability is deployed.
-
-```
-$ kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
-```
-
-Create the `karavi-authorization-config` Secret by following step 2 in [Configuring a Dell EMC CSI Driver](../../../authorization/deployment/#configuring-a-dell-emc-csi-driver) but use the [CSM_NAMESPACE].
-
-Create the `proxy-server-root-certificate` Secret by following step 3 in [Configuring a Dell EMC CSI Driver](../../../authorization/deployment#configuring-a-dell-emc-csi-driver) but use the [CSM_NAMESPACE].
-
-Generate a token and apply it to the [CSM_NAMESPACE] by following [Generate a Token](../../../authorization/deployment/#generate-a-token).
-
-__Note__: The target namespace must exist before executing this command.
-
-### PowerStore
-
-```console
-$ kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
-```
-
-__Note__: The target namespace must exist before executing this command.
-
-## Add the Repo
-
-```console
-$ helm repo add dell https://dell.github.io/helm-charts
-```
-
-## Installing the Chart
-
-```console
-$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace
-```
-
-The [configuration](#configuration) section below lists all the parameters that can be configured during installation
 
 ## Configuration
 
@@ -114,22 +108,3 @@ The following table lists the configurable parameters of the CSM for Observabili
 | `karaviMetricsPowerstore.zipkin.uri` | URI of a Zipkin instance where tracing data can be forwarded | |
 | `karaviMetricsPowerstore.zipkin.serviceName` | Service name used for Zipkin tracing data | `metrics-powerstore`|
 | `karaviMetricsPowerstore.zipkin.probability` | Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0) | `0` |
-
-
-Specify each parameter using the '--set key=value[,key=value]' and/or '--set-file key=value[,key=value] arguments to 'helm install'. For example:
-
-```console
-$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace \
-    --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
-    --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
-    --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
-    --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
-```
-
-Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example:
-
-```console
-$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace -f values.yaml
- ```
-
-__Note__: You can use the default [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml)
