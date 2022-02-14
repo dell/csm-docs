@@ -65,9 +65,9 @@ After the installation ConfigMap will consist of only the `logLevel` field, to a
 The following CSI drivers support replication:
 1. CSI driver for PowerMax
 2. CSI driver for PowerStore
+3. CSI driver for PowerScale
 
-Please follow the steps outlined [here](../powermax) for enabling replication for PowerMax & [here](../powerstore) for PowerStore during
-the driver installation.
+Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../powerstore) or [PowerScale](../powerscale) pages during the driver installation.
 
 >Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the CSM Replication controller installation process.
 
