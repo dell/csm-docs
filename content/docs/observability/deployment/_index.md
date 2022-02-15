@@ -12,7 +12,7 @@ CSM for Observability can be deployed in one of three ways:
 - [CSM for Observability Installer](./online)
 - [CSM for Observability Offline Installer](./offline)
 
-## Prerequisites 
+## Prerequisites
 
 - Helm 3.3
 - The deployment of one or more [supported](../#supported-csi-drivers) Dell EMC CSI drivers
@@ -30,7 +30,7 @@ These components must be deployed according to the specifications defined below.
 
 ### Prometheus
 
-The Prometheus service should be running on the same Kubernetes cluster as the CSM for Observability services. As part of the CSM for Observability deployment, the OpenTelemetry Collector gets deployed.  The OpenTelemetry Collector is what CSM for Observability pushes metrics so that the metrics can be consumed by Prometheus.  This means that Prometheus must be configured to scrape the metrics data from the OpenTelemetry Collector.
+The Prometheus service should be running on the same Kubernetes cluster as the CSM for Observability services. As part of the CSM for Observability deployment, the OpenTelemetry Collector gets deployed. The OpenTelemetry Collector is what CSM for Observability pushes metrics so that the metrics can be consumed by Prometheus.  This means that Prometheus must be configured to scrape the metrics data from the OpenTelemetry Collector.
 
 | Supported Version | Image                   | Helm Chart                                                   |
 | ----------------- | ----------------------- | ------------------------------------------------------------ |
@@ -61,24 +61,22 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
       enabled: true
       image:
         repository: quay.io/prometheus/prometheus
-        tag: v2.22.0
+        tag: v2.23.0
         pullPolicy: IfNotPresent
       persistentVolume:
         enabled: false
       service:
         type: NodePort
         servicePort: 9090
-    serverFiles:
-      prometheus.yml:
-        scrape_configs:
-          - job_name: 'karavi-metrics-powerflex'
-            scrape_interval: 5s
-            scheme: https
-            static_configs:
-              - targets: ['otel-collector:8443']
-            tls_config:
-              insecure_skip_verify: true
-    ```
+    extraScrapeConfigs: |
+    - job_name: 'karavi-metrics-powerflex'
+      scrape_interval: 5s
+      scheme: https
+      static_configs:
+        - targets: ['otel-collector:8443']
+      tls_config:
+        insecure_skip_verify: true
+   ```
 
 2. If using Rancher, create a ServiceMonitor.
 
@@ -191,7 +189,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
 
 2. Create a values file.
 
-    Create a Config file named `grafana-configmap.yaml` The file should look like this:
+    Create a Config file named `grafana-values.yaml` The file should look like this:
 
     ```yaml
     # grafana-values.yaml 

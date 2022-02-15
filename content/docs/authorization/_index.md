@@ -27,7 +27,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 | Ability to shield storage credentials from Kubernetes administrators ensuring credentials are only handled by storage admins | Yes | Yes | Yes | No | No |
 {{</table>}}
 
-__NOTE:__ PowerScale OneFS implements its own form of Role-Based Access Control (RBAC). CSM for Authorization does not enforce any role-based restrictions for PowerScale. To configure RBAC for PowerScale, refer to the PowerScale OneFS [documentation](https://www.dell.com/support/home/en-us/product-support/product/isilon-onefs/docs).
+**NOTE:** PowerScale OneFS implements its own form of Role-Based Access Control (RBAC). CSM for Authorization does not enforce any role-based restrictions for PowerScale. To configure RBAC for PowerScale, refer to the PowerScale OneFS [documentation](https://www.dell.com/support/home/en-us/product-support/product/isilon-onefs/docs).
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 {{<table "table table-striped table-bordered table-sm">}}
@@ -57,6 +57,9 @@ CSM for Authorization supports the following CSI drivers and versions.
 | CSI Driver for Dell EMC PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0,v2.1 |
 | CSI Driver for Dell EMC PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0,v2.1 |
 {{</table>}}
+
+**NOTE:** If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver's controller pod.
+To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
 ## Authorization Components Support Matrix
 CSM for Authorization consists of 2 components - the Authorization sidecar and the Authorization proxy server.  It is important that the version of the Authorization sidecar image maps to a supported version of the Authorization proxy server.
