@@ -12,11 +12,6 @@ CSM for Observability can be deployed in one of three ways:
 - [CSM for Observability Installer](./online)
 - [CSM for Observability Offline Installer](./offline)
 
-## Prerequisites 
-
-- Helm 3.3
-- The deployment of one or more [supported](../#supported-csi-drivers) Dell EMC CSI drivers
-
 ## Post Installation Dependencies
 
 The following third-party components are required in the same Kubernetes cluster where CSM for Observability has been deployed:

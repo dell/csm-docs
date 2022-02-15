@@ -33,6 +33,11 @@ If the Authorization module is enabled for the CSI drivers installed in the same
 - Verifies the appropriate Secrets and ConfigMap exist in the CSI driver namespace.
 - Updates the CSM for Observability deployment to use the existing Authorization instance if not already enabled during the initial installation of CSM for Observability.
 
+## Prerequisites 
+
+- Helm 3.3
+- The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
+
 ## Online Installer
 
 The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.

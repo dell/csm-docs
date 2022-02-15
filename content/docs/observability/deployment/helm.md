@@ -10,7 +10,8 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
 ## Prerequisites
 
-- A [supported](../../#supported-csi-drivers) Dell CSI Driver is deployed 
+- Helm 3.3
+- The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
 
 ## Install the CSM for Observability Helm Chart
 **Steps**
@@ -47,11 +48,13 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 
     A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly. 
 
-    `helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] -f myvalues.yaml`
-
     __Note:__ 
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
     - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for CSM Observability. 
+
+    ```console
+    $ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] -f myvalues.yaml
+    ```
 
     Alternatively, you can specify each parameter using the '--set key=value[,key=value]' and/or '--set-file key=value[,key=value] arguments to 'helm install'. For example:
 

@@ -8,6 +8,11 @@ description: >
 
 The following instructions can be followed when a Helm chart will be installed in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.
 
+## Prerequisites 
+
+- Helm 3.3
+- The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
+
 ### Dependencies
 
 Multiple Linux-based systems may be required to create and process an offline bundle for use.
