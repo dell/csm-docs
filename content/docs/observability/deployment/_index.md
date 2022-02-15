@@ -25,7 +25,7 @@ These components must be deployed according to the specifications defined below.
 
 ### Prometheus
 
-The Prometheus service should be running on the same Kubernetes cluster as the CSM for Observability services. As part of the CSM for Observability deployment, the OpenTelemetry Collector gets deployed.  The OpenTelemetry Collector is what CSM for Observability pushes metrics so that the metrics can be consumed by Prometheus.  This means that Prometheus must be configured to scrape the metrics data from the OpenTelemetry Collector.
+The Prometheus service should be running on the same Kubernetes cluster as the CSM for Observability services. As part of the CSM for Observability deployment, the OpenTelemetry Collector gets deployed. CSM for Observability pushes metrics to the OpenTelemetry Collector where the metrics are consumed by Prometheus. Prometheus must be configured to scrape the metrics data from the OpenTelemetry Collector.
 
 | Supported Version | Image                   | Helm Chart                                                   |
 | ----------------- | ----------------------- | ------------------------------------------------------------ |
@@ -33,7 +33,7 @@ The Prometheus service should be running on the same Kubernetes cluster as the C
 
 **Note**: It is the user's responsibility to provide persistent storage for Prometheus if they want to preserve historical data.
 
-#### Prometheus Deployment
+#### Prometheus Helm Deployment 
 
 Here is a sample minimal configuration for Prometheus. Please note that the configuration below uses insecure skip verify. If you wish to properly configure TLS, you will need to provide a ca_file in the Prometheus configuration. The certificate provided as part of the CSM for Observability deployment should be signed by this same CA. For more information about Prometheus configuration, see [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration).
 
@@ -111,7 +111,7 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
     On your terminal, run the command below:
 
     ```terminal
-    helm install prometheus prometheus-community/prometheus -n [CSM_NAMESPACE] --create-namespace -f prometheus-values.yaml
+    helm install prometheus prometheus-community/prometheus -n [CSM_NAMESPACE] -f prometheus-values.yaml
     ```
 
 ### Grafana
