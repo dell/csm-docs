@@ -18,8 +18,9 @@ The following third-party components are required in the same Kubernetes cluster
 
 * [Prometheus](#prometheus)
 * [Grafana](#grafana)
+* [Other Deployment Methods](#other-deployment-methods)
 
-These components must be deployed according to the specifications defined below.
+There are various ways to deploy these components. We recommend following the Helm deployments according to the specifications defined below. 
 
 **Tip**: CSM for Observability must be deployed first. Once the module has been deployed, you can proceed to deploying/configuring Prometheus and Grafana.
 
@@ -150,7 +151,7 @@ Settings for the Grafana SimpleJson data source:
 | With CA Cert        | Enabled (If using CA certificate) |
 
 
-#### Grafana Deployment
+#### Grafana Helm Deployment
 
 Below are the steps to deploy a new Grafana instance into your Kubernetes cluster:
 
@@ -266,6 +267,11 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     ```terminal
     helm install grafana grafana/grafana -n [CSM_NAMESPACE] -f grafana-values.yaml
     ```
+
+### Other Deployment Methods
+
+- [Grafana Labs Operator Deployment](https://grafana.com/docs/grafana-cloud/kubernetes/prometheus/prometheus_operator/)
+- [Rancher Monitoring and Alerting Deployment](https://rancher.com/docs/rancher/v2.6/en/monitoring-alerting/)
 
 ## Importing CSM for Observability Dashboards
 
