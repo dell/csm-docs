@@ -25,10 +25,8 @@ You can upgrade the CSI Driver for Dell EMC PowerFlex using Helm or Dell CSI Ope
 - The logging configuration from v1.5 will not work in v2.1, since the log configuration parameters are now set in the values.yaml file located at helm/csi-vxflexos/values.yaml. Please set the logging configuration parameters in the values.yaml file.
 
 ## Upgrade using Dell CSI Operator:
-1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator). 
+**Note:** Upgrading the Operator does not upgrade the CSI Driver.
 
-2. Execute `bash scripts/install.sh --upgrade`
-This command will install the latest version of the operator.
->Note: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
+1. Please upgrade the Dell CSI Operator by following [here](./../operator).
+2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).
 
-3. To upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).

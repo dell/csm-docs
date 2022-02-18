@@ -8,7 +8,6 @@ description: >
 
 CSM for Observability can be deployed in one of three ways:  
 
-- [CSM Installer](../../deployment) (*Recommended installation method*)
 - [Helm](./helm)
 - [CSM for Observability Installer](./online)
 - [CSM for Observability Offline Installer](./offline)

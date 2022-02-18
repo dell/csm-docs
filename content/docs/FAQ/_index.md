@@ -15,7 +15,6 @@ weight: 2
 - [Should I install the module in the same namespace as the driver or another?](#should-i-install-the-module-in-the-same-namespace-as-the-driver-or-another)
 - [Which Kubernetes distributions are supported?](#which-kubernetes-distributions-are-supported)
 - [How do I get a list of Container Storage Modules deployed in my cluster with their versions?](#how-do-i-get-a-list-of-container-storage-modules-deployed-in-my-cluster-with-their-versions)
-- [Does the CSM Installer provide full Container Storage Modules functionality for all products?](#does-the-csm-installer-provide-full-container-storage-modules-functionality-for-all-products)
 - [Do all Container Storage Modules need to be the same version, or can I mix and match?](#do-all-container-storage-modules-need-to-be-the-same-version-or-can-i-mix-and-match)
 - [Can I run Container Storage Modules in a production environment?](#can-i-run-container-storage-modules-in-a-production-environment)
 - [Is Dell Container Storage Modules (CSM) supported by Dell Technologies?](#is-dell-container-storage-modules-csm-supported-by-dell-technologies)
@@ -39,7 +38,6 @@ Please see module and the respectice CSI driver version available for each array
 | Observability v1.0| ✔️              | ❌              | ✔️               | ❌            | ❌            |
 | Replication   v1.1| ❌             | ❌              | ✔️               | ✔️             | ❌            |
 | Resilency     v1.0| ✔️              | ❌              | ❌              | ❌            | ✔️             |
-| CSM Installer v1.0| ✔️              | ✔️               | ✔️               | ✔️             | ✔️             |
 
 ### What are the prerequisites for deploying Container Storage Modules?
 Prerequisites can be found on the respective module deployment pages:
@@ -67,7 +65,7 @@ Prerequisites for deploying the Dell EMC CSI drivers can be found here:
 No, all the modules have been designed to work inside Kubernetes with Dell EMC CSI drivers.
 
 ### Should I install the module in the same namespace as the driver or another?
-It is recommended to install CSM for Observability in a namespace separate from the Dell EMC CSI drivers because it works across multiple drivers.  All other modules either run as standalone or are injected into the Dell EMC CSI driver as a sidecar.
+It is recommended to install CSM for Observability in a namespace separate from the Dell EMC CSI drivers because it works across multiple drivers.  All other modules either run as standalone or with the Dell EMC CSI driver as a sidecar.
 
 ### Which Kubernetes distributions are supported?
 The supported Kubernetes distributions for Container Storage Modules are documented:
@@ -88,9 +86,6 @@ Or if you know the namespace:
 kubectl get deployment,daemonset -o wide -n {{namespace}}
 ```
 
-### Does the CSM Installer provide full Container Storage Modules functionality for all products?
-The CSM Installer supports the installation of all the Container Storage Modules and Dell EMC CSI drivers.
-
 ### Do all Container Storage Modules need to be the same version, or can I mix and match?
 It is advised to comply with the support matrices (links below) and not deviate from it with mixed versions.
 - [Dell EMC Container Storage Module for Authorization](../authorization/#supported-operating-systemscontainer-orchestrator-platforms)
@@ -98,8 +93,6 @@ It is advised to comply with the support matrices (links below) and not deviate 
 - [Dell EMC Container Storage Module for Replication](../replication/#supported-operating-systemscontainer-orchestrator-platforms)
 - [Dell EMC Container Storage Module for Resiliency](../resiliency/#supported-operating-systemscontainer-orchestrator-platforms)
 - [Dell EMC CSI Drivers](../csidriver/#supported-operating-systemscontainer-orchestrator-platforms).
-
-The CSM installer module will help to stay aligned with compatible versions during the first install and future upgrades.
 
 ### Can I run Container Storage Modules in a production environment?
 As of CSM 1.0, the Container Storage Modules are GA and ready for production systems.

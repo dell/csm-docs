@@ -33,7 +33,7 @@ __NOTE:__ PowerScale OneFS implements its own form of Role-Based Access Control 
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes    | 1.20, 1.21, 1.22 |
+| Kubernetes    | 1.21, 1.22, 1.23 |
 | Red Hat OpenShift | 4.8, 4.9|
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
@@ -57,9 +57,6 @@ CSM for Authorization supports the following CSI drivers and versions.
 | CSI Driver for Dell EMC PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0,v2.1 |
 | CSI Driver for Dell EMC PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0,v2.1 |
 {{</table>}}
-
-__Note:__ If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver's controller pod.
-To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
 ## Authorization Components Support Matrix
 CSM for Authorization consists of 2 components - the Authorization sidecar and the Authorization proxy server.  It is important that the version of the Authorization sidecar image maps to a supported version of the Authorization proxy server.

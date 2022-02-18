@@ -66,7 +66,7 @@ methods supported by the Storage Array itself, e.g. Basic authentication over TL
 
 ### Sidecar Proxy
 
-The CSM for Authorization Sidecar Proxy is a sidecar container that gets "injected" into the CSI Driver's Pod. It acts as a proxy and forwards all requests to a
+The CSM for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver's Pod. It acts as a proxy and forwards all requests to a
 CSM Authorization Server.
 
 The [CSI Driver section](#csi-driver) noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the CSM for Authorization
@@ -85,9 +85,6 @@ Inbound requests are expected to originate from the CSM for Authorization Sideca
 ### CSM for Authorization CLI
 
 The [*karavictl*](../cli) CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running CSM for Authorization Server.
-
-Additionally, *karavictl* provides functionality for supporting the sidecar proxy injection mechanism mentioned above. Injection is discussed in more detail later
-on in this document.
 
 ### Storage Array
 

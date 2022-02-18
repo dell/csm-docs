@@ -3,17 +3,11 @@ title: PowerScale
 description: Release notes for PowerScale CSI driver
 ---
 
-## Release Notes - CSI Driver for PowerScale v2.1.0
+## Release Notes - CSI Driver for PowerScale v2.2.0
 
 ### New Features/Changes
 
-- Added support for OpenShift v4.9.
-- Added support for CSI spec 1.5.
-- Added support for new access modes in CSI Spec 1.5.
-- Added support for PV/PVC metrics.
-- Added ability to accept leader election timeout flags.
-- Added support for Dell EMC PowerScale 9.3.
-- Added support for volume health monitoring.
+- Added support for Kubernetes 1.23.
 
 ### Fixed Issues
 

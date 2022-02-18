@@ -14,54 +14,54 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 
 ### Supported Operating Systems/Container Orchestrator Platforms
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerMax         | PowerFlex |&emsp;&emsp; Unity| PowerScale |    PowerStore    |
+|               | PowerMax         | PowerFlex           | Unity            | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Kubernetes    | 1.20, 1.21, 1.22 |   1.20, 1.21, 1.22   |  1.20, 1.21, 1.22 |   1.20, 1.21, 1.22  | 1.20, 1.21, 1.22 |
+| Kubernetes    | 1.21, 1.22, 1.23 |   1.21, 1.22, 1.23  | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23  | 1.21, 1.22, 1.23 |
 | RHEL          |     7.x,8.x      |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.x,8.x      |
-| Ubuntu        |       20.04      |       20.04         |       18.04, 20.04      |        18.04, 20.04      |          20.04     |
+| Ubuntu        |       20.04      |       20.04         |  18.04, 20.04    | 18.04, 20.04      |        20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
-| SLES          |        15SP3        |        15SP3        |       15SP3      |         15SP3     |       15SP3      |
-| Red Hat OpenShift | 4.8, 4.8 EUS, 4.9  |   4.8, 4.8 EUS, 4.9 |    4.8, 4.8 EUS, 4.9     |   4.8, 4.8 EUS, 4.9   |  4.8, 4.8 EUS, 4.9 |
-| Mirantis Kubernetes Engine |       3.4.x      |        3.4.x        |       3.4.x     |        3.4.x      |        3.4.x     |
-| Google Anthos |        1.6       |          1.8        |        no        |         1.9        |        1.9       |
-| VMware Tanzu  |        no        |          no      |        NFS     |         NFS    |      NFS      |
-| Rancher Kubernetes Engine |       yes      |          yes         |        yes       |         yes |      yes     |
+| SLES          |        15SP3     |        15SP3        |       15SP3      |         15SP3     |       15SP3      |
+| Red Hat OpenShift | 4.8, 4.8 EUS, 4.9  | 4.8, 4.8 EUS, 4.9 | 4.8, 4.8 EUS, 4.9 | 4.8, 4.8 EUS, 4.9 |  4.8, 4.8 EUS, 4.9 |
+| Mirantis Kubernetes Engine | 3.4.x |      3.4.x        |       3.4.x      |        3.4.x      |        3.4.x     |
+| Google Anthos |        1.6       |          1.8        |        no        |         1.9       |        1.9       |
+| VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS         |
+| Rancher Kubernetes Engine | yes  |          yes        |        yes       |         yes       |      yes         |
 {{</table>}}
 
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
-| Features | PowerMax | PowerFlex | &emsp;&emsp; Unity  | PowerScale | PowerStore |
-|--------------------------|:--------:|:------------------:|:---------:|:-----------------:|:----------:|
-| CSI Specification        | v1.5     | v1.5| v1.5      | v1.5  | v1.5       |
-| Static Provisioning      | yes      | yes| yes   | yes | yes  |
-| Dynamic Provisioning     | yes      | yes| yes   | yes | yes  |
-| Expand Persistent Volume | yes      | yes| yes   | yes | yes  |
-| Create VolumeSnapshot    | yes      | yes| yes   | yes | yes  |
-| Create Volume from Snapshot | yes   | yes| yes   | yes | yes  |
-| Delete Snapshot          | yes      | yes| yes   | yes | yes  |
-| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)         | RWO<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX<br>(Raw block) | RWO<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(Raw block) | RWO/RWOP<br>(FC/iSCSI)<br>RWO/RWX/<br>RWOP<br>(RawBlock)<br>RWO/RWX/ROX/<br>RWOP<br>(NFS) | RWO/RWX/ROX/<br> RWOP | RWO/RWOP<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(RawBlock, NFS) |
-| CSI Volume Cloning       | yes      | yes | yes   | yes | yes |
-| CSI Raw Block Volume     | yes      | yes | yes   | no  | yes |
-| CSI Ephemeral Volume     | no       | yes | yes   | yes | yes |
-| Topology                 | yes      | yes | yes   | yes | yes |
-| Multi-array              | yes  | yes  | yes | yes | yes     |
-| Volume Health Monitoring | no   | yes  | yes | yes | yes     |
+| Features                 | PowerMax | PowerFlex | Unity  | PowerScale | PowerStore |
+|--------------------------|:--------:|:---------:|:------:|:----------:|:----------:|
+| CSI Specification        | v1.5     | v1.5      | v1.5   | v1.5       | v1.5       |
+| Static Provisioning      | yes      | yes       | yes    | yes        | yes        |
+| Dynamic Provisioning     | yes      | yes       | yes    | yes        | yes        |
+| Expand Persistent Volume | yes      | yes       | yes    | yes        | yes        |
+| Create VolumeSnapshot    | yes      | yes       | yes    | yes        | yes        |
+| Create Volume from Snapshot | yes   | yes       | yes    | yes        | yes        |
+| Delete Snapshot          | yes      | yes       | yes    | yes        | yes        |
+| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)| RWO/ROX<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) | RWO/RWX/ROX/RWOP | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) |
+| CSI Volume Cloning       | yes      | yes       | yes    | yes        | yes        |
+| CSI Raw Block Volume     | yes      | yes       | yes    | no         | yes        |
+| CSI Ephemeral Volume     | no       | yes       | yes    | yes        | yes        |
+| Topology                 | yes      | yes       | yes    | yes        | yes        |
+| Multi-array              | yes      | yes       | yes    | yes        | yes        |
+| Volume Health Monitoring | no       | yes       | yes    | yes        | yes        |
 {{</table>}}
 ### Supported Storage Platforms
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerMax         | PowerFlex |&emsp;&emsp; Unity| PowerScale |    PowerStore    |
-|---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Storage Array |5978.479.479, 5978.669.669, 5978.711.711, Unisphere 9.2|    3.5.x, 3.6.x    | 5.0.5, 5.0.6, 5.0.7, 5.1.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 1.0.x, 2.0.x |
+|               | PowerMax                                                | PowerFlex        | Unity                      | PowerScale                         |    PowerStore    |
+|---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
+| Storage Array |5978.479.479, 5978.669.669, 5978.711.711<br>Unisphere 9.2|    3.5.x, 3.6.x  | 5.0.5, 5.0.6, 5.0.7, 5.1.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 1.0.x, 2.0.x     |
 {{</table>}}
 ### Backend Storage Details
 {{<table "table table-striped table-bordered table-sm">}}
-| Features      | PowerMax         | PowerFlex | &emsp;&emsp;Unity | PowerScale| PowerStore       |
+| Features      | PowerMax         | PowerFlex          | Unity            | PowerScale       | PowerStore       |
 |---------------|:----------------:|:------------------:|:----------------:|:----------------:|:----------------:|
 | Fibre Channel | yes              | N/A                | yes              | N/A              | yes              |
 | iSCSI         | yes              | N/A                | yes              | N/A              | yes              |
 | NFS           | N/A              | N/A                | yes              | yes              | yes              |
 | Other         | N/A              | ScaleIO protocol   | N/A              | N/A              | N/A              |
-| Supported FS  | ext4 / xfs       | ext4 / xfs         | ext3 / ext4 / xfs / NFS | NFS       | ext3 / ext4 / xfs / NFS       |
-| Thin / Thick provisioning | Thin  | Thin               | Thin/Thick              | N/A              | Thin              |
+| Supported FS  | ext4 / xfs       | ext4 / xfs         | ext3 / ext4 / xfs / NFS | NFS       | ext3 / ext4 / xfs / NFS |
+| Thin / Thick provisioning | Thin  | Thin              | Thin/Thick       | N/A              | Thin             |
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 {{</table>}}
