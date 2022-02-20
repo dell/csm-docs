@@ -9,6 +9,7 @@ description: Release notes for PowerMax CSI driver
 - Added support for new access modes in CSI Spec 1.5.
 - Added support for PV/PVC metrics.
 - Added support for Kubernetes 1.23.
+- Added support for new access modes in CSI Spec 1.5.
 
 ### Fixed Issues
 There are no fixed issues in this release.
