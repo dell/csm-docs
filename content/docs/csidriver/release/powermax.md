@@ -6,6 +6,8 @@ description: Release notes for PowerMax CSI driver
 ## Release Notes - CSI PowerMax v2.2.0
 
 ### New Features/Changes
+- Added support for new access modes in CSI Spec 1.5.
+- Added support for PV/PVC metrics.
 - Added support for Kubernetes 1.23.
 
 ### Fixed Issues
