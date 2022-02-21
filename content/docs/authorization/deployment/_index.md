@@ -27,20 +27,24 @@ The CSM for Authorization proxy server is installed using a single binary instal
 
 The easiest way to obtain the single binary installer RPM is directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.  
 
-The single binary installer can also be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
+Alternatively, the single binary installer can be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
 
 ```
 make dist build-installer rpm
 ```
 
-The `build-installer` step creates a binary at `bin/deploy` and embeds all components required for installation. The `rpm` step generates an RPM package and stores it at `deploy/rpm/x86_64/`.
+The `build-installer` step creates a binary at `karavi-authorization/bin/deploy` and embeds all components required for installation. The `rpm` step generates an RPM package and stores it at `karavi-authorization/deploy/rpm/x86_64/`.
 This allows CSM for Authorization to be installed in network-restricted environments.
 
 A Storage Administrator can execute the installer or rpm package as a root user or via `sudo`.
 
 ### Installing the RPM
 
-1. Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location `$HOME/.karavi/config.json` having the following contents:
+1. Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location `$HOME/.karavi/config.json` having the following contents: 
+
+    ```console
+    [user@system /home/user]#  vi .karavi/config.json
+    ```
 
     ```json
     {
@@ -62,27 +66,30 @@ A Storage Administrator can execute the installer or rpm package as a root user 
       "hostName": "DNS_host_name"
     }
     ```
+>__Note__:
+- `DNS_host_name` refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running `nslookup <IP_address>`
+- There are a number of ways to create certificates. In a production environment, certificates are usually created and managed by an IT administrator. Otherwise, certificates can be created using OpenSSL.
 
-    In the above template, `DNS_host_name` refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running the below command on the system:
+2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS_host_name` is also required. All traffic from `grpc.DNS_host_name` needs to be routed to `DNS_host_name` address, this can be configured by adding a new DNS entry for `grpc.DNS_host_name` or providing a temporary path in the systems `/etc/hosts` file. 
 
+    ```json
+      {
+        "hostName": 
+          "DNS_host_name",
+          "grpc.DNS_host_name"
+      }
     ```
-    nslookup <IP_address>
+
+    The certificate provided in `crtFile` should be valid for both the `DNS_host_name` and the `grpc.DNS_host_name` address. For example, create the certificate config file with alternate names (to include DNS_host_name and grpc.DNS_host_name) and then create the .crt file: 
+
+    ```console
+    CN = DNS_host_name
+    subjectAltName = @alt_names
+    [alt_names]
+    DNS.1 = grpc.DNS_host_name.com
+
+    $ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out DNS_host_name.com.crt -days 365 -sha256
     ```
-
-2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS_host_name` is also required. All traffic from `grpc.DNS_host_name` needs to be routed to `DNS_host_name` address, this can be configured by adding a new DNS entry for `grpc.DNS_host_name` or providing a temporary path in the `/etc/hosts` file.  
-
->__Note__: The certificate provided in `crtFile` should be valid for both the `DNS_host_name` and the `grpc.DNS_host_name` address.  
-
-    For example, create the certificate config file with alternate names (to include example.com and grpc.example.com) and then create the .crt file:  
-
-        ```
-        CN = example.com
-        subjectAltName = @alt_names
-        [alt_names]
-        DNS.1 = grpc.example.com
-
-        openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out example.com.crt -days 365 -sha256
-        ```
 
 3. To install the rpm package on the system, run the below command:
 
