@@ -16,7 +16,7 @@ the respective CSM Replication Controllers.
 
 >Important: Direct network visibility between clusters required for CSM-Replication to work.
 > Cluster-1's API URL has to be pingable from cluster-2 pods and vice versa. If private networks are used and/or DNS is not set up properly - you may need to modify `/etc/hosts` file from within controller's pod.
-> This can be achieved by using helm installation method. Refer to the [link](../insttallation#)
+> This can be achieved by using helm installation method. Refer to the [link](../installation/#using-the-installation-script)
 
 
 >Note: If you are using a single stretched cluster, then you can skip all the following steps
