@@ -29,6 +29,7 @@ podmon:
       - "--csisock=unix:/var/run/csi/csi.sock"
       - "--labelvalue=csi-vxflexos"
       - "--mode=controller"
+      - "--skipArrayConnectionValidation=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
   node:
     args:
@@ -55,7 +56,7 @@ To install CSM for Resiliency with the driver, the following changes are require
 | mode | Required | Must be set to "controller" for controller-podmon and "node" for node-podmon. | controller & node |
 | csisock | Required | This should be left as set in the helm template for the driver. For controller: <br> `-csisock=unix:/var/run/csi/csi.sock` <br> For node it will vary depending on the driver's identity: <br> `-csisock=unix:/var/lib/kubelet/plugins`<br>`/vxflexos.emc.dell.com/csi_sock` | controller & node |
 | leaderelection | Required | Boolean value that should be set true for controller and false for node. The default value is true. | controller & node |
-| skipArrayConnectionValidation | Optional | Boolean value that if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod. | controller |
+| skipArrayConnectionValidation | Optional | Boolean value that if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod. If set to true will cause controllerPodCleanup on K8S Control Plane failure (kubelet service down). | controller |
 | labelKey | Optional | String value that sets the label key used to denote pods to be monitored by CSM for Resiliency. It will make life easier if this key is the same for all driver types, and drivers are differentiated by different labelValues (see below). If the label keys are the same across all drivers you can do `kubectl get pods -A -l labelKey` to find all the CSM for Resiliency protected pods. labelKey defaults to "podmon.dellemc.com/driver". | controller & node |
 | labelValue | Required | String that sets the value that denotes pods to be monitored by CSM for Resiliency. This must be specific for each driver. Defaults to "csi-vxflexos" for CSI Driver for Dell EMC PowerFlex and "csi-unity" for CSI Driver for Dell EMC Unity | controller & node |
 | arrayConnectivityPollRate | Optional | The minimum polling rate in seconds to determine if the array has connectivity to a node. Should not be set to less than 5 seconds. See the specific section for each array type for additional guidance. | controller |
@@ -79,6 +80,7 @@ podmon:
       - "-mode=controller"
       - "-arrayConnectivityPollRate=5"
       - "-arrayConnectivityConnectionLossThreshold=3"
+      - "--skipArrayConnectionValidation=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
   node:
     args:
@@ -104,6 +106,7 @@ podmon:
        - "-labelvalue=csi-unity"
        - "-driverPath=csi-unity.dellemc.com"
        - "-mode=controller"
+       - "--skipArrayConnectionValidation=false"
        - "--driver-config-params=/unity-config/driver-config-params.yaml"
    node:
      args:
@@ -135,7 +138,7 @@ This is a list of parameters that can be adjusted for CSM for Resiliency:
 | PODMON_NODE_LOG_LEVEL | String | "debug" |Logging level for the node podmon sidecar. Standard values: 'info', 'error', 'warning', 'debug', 'trace' |
 | PODMON_ARRAY_CONNECTIVITY_POLL_RATE | Integer (>0) | 15 |An interval in seconds to poll the underlying array | 
 | PODMON_ARRAY_CONNECTIVITY_CONNECTION_LOSS_THRESHOLD | Integer (>0) | 3 |A value representing the number of failed connection poll intervals before marking the array connectivity as lost |
-| PODMON_SKIP_ARRAY_CONNECTION_VALIDATION | Boolean | false |Flag to disable the array connectivity check |
+| PODMON_SKIP_ARRAY_CONNECTION_VALIDATION | Boolean | false |Flag to disable the array connectivity check, set to true for NoSchedule or NoExecute taint due to K8S Control Plane failure (kubelet failure) |
 
 Here is an example of the parameters:
 
