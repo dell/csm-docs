@@ -12,25 +12,21 @@ CSM for Observability can be deployed in one of three ways:
 - [CSM for Observability Installer](./online)
 - [CSM for Observability Offline Installer](./offline)
 
-## Prerequisites
-
-- Helm 3.3
-- The deployment of one or more [supported](../#supported-csi-drivers) Dell EMC CSI drivers
-
 ## Post Installation Dependencies
 
 The following third-party components are required in the same Kubernetes cluster where CSM for Observability has been deployed:
 
 * [Prometheus](#prometheus)
 * [Grafana](#grafana)
+* [Other Deployment Methods](#other-deployment-methods)
 
-These components must be deployed according to the specifications defined below.
+There are various ways to deploy these components. We recommend following the Helm deployments according to the specifications defined below. 
 
 **Tip**: CSM for Observability must be deployed first. Once the module has been deployed, you can proceed to deploying/configuring Prometheus and Grafana.
 
 ### Prometheus
 
-The Prometheus service should be running on the same Kubernetes cluster as the CSM for Observability services. As part of the CSM for Observability deployment, the OpenTelemetry Collector gets deployed. The OpenTelemetry Collector is what CSM for Observability pushes metrics so that the metrics can be consumed by Prometheus.  This means that Prometheus must be configured to scrape the metrics data from the OpenTelemetry Collector.
+The Prometheus service should be running on the same Kubernetes cluster as the CSM for Observability services. As part of the CSM for Observability deployment, the OpenTelemetry Collector gets deployed. CSM for Observability pushes metrics to the OpenTelemetry Collector where the metrics are consumed by Prometheus. Prometheus must be configured to scrape the metrics data from the OpenTelemetry Collector.
 
 | Supported Version | Image                   | Helm Chart                                                   |
 | ----------------- | ----------------------- | ------------------------------------------------------------ |
@@ -38,7 +34,7 @@ The Prometheus service should be running on the same Kubernetes cluster as the C
 
 **Note**: It is the user's responsibility to provide persistent storage for Prometheus if they want to preserve historical data.
 
-#### Prometheus Deployment
+#### Prometheus Helm Deployment 
 
 Here is a sample minimal configuration for Prometheus. Please note that the configuration below uses insecure skip verify. If you wish to properly configure TLS, you will need to provide a ca_file in the Prometheus configuration. The certificate provided as part of the CSM for Observability deployment should be signed by this same CA. For more information about Prometheus configuration, see [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration).
 
@@ -114,7 +110,7 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
     On your terminal, run the command below:
 
     ```terminal
-    helm install prometheus prometheus-community/prometheus -n [CSM_NAMESPACE] --create-namespace -f prometheus-values.yaml
+    helm install prometheus prometheus-community/prometheus -n [CSM_NAMESPACE] -f prometheus-values.yaml
     ```
 
 ### Grafana
@@ -153,7 +149,7 @@ Settings for the Grafana SimpleJson data source:
 | With CA Cert        | Enabled (If using CA certificate) |
 
 
-#### Grafana Deployment
+#### Grafana Helm Deployment
 
 Below are the steps to deploy a new Grafana instance into your Kubernetes cluster:
 
@@ -269,6 +265,11 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     ```terminal
     helm install grafana grafana/grafana -n [CSM_NAMESPACE] -f grafana-values.yaml
     ```
+
+### Other Deployment Methods
+
+- [Grafana Labs Operator Deployment](https://grafana.com/docs/grafana-cloud/kubernetes/prometheus/prometheus_operator/)
+- [Rancher Monitoring and Alerting Deployment](https://rancher.com/docs/rancher/v2.6/en/monitoring-alerting/)
 
 ## Importing CSM for Observability Dashboards
 

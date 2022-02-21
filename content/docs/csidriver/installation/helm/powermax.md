@@ -160,7 +160,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -192,11 +192,14 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
 | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
 | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
+| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| healthMonitor.volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
 | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
 | tolerations | Define tolerations for the controller deployment, if required | No | |
 | **node** | Allows configuration of the node-specific parameters.| - | - |
 | tolerations | Add tolerations as per requirement | No | - |
 | nodeSelector | Add node selectors as per requirement | No | - |
+| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy | - | - |
 |defaultCredentialsSecret| This secret name refers to:<br> 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.<br>2. The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>3. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
@@ -250,11 +253,11 @@ Starting with CSI PowerMax v1.7, `dell-csi-helm-installer` will not create any V
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerMax v2.0 driver*:
+*Upgrading from CSI PowerMax v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 or higher, before upgrading to 2.1.
+It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 or higher, before upgrading to 2.2.
 
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes
