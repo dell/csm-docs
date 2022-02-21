@@ -90,8 +90,7 @@ You can create them manually or with help from `repctl`.
 
 #### Manual Storage Class Creation
 
-You can find sample replication enabled storage class in the driver repository
-at `./samples/storageclass/isilon-replication.yaml`.
+You can find sample replication enabled storage class in the driver repository [here](https://github.com/dell/csi-powerscale/blob/main/samples/storageclass/isilon-replication.yaml).
 
 It will look like this:
 ```yaml
@@ -139,7 +138,7 @@ After figuring out how storage classes would look, you just need to go and apply
 (using a single storage class configuration) in one command.
 
 To create storage classes with `repctl` you need to fill up the config with necessary information.
-You can find an example in `repctl/examples/powerscale_example_values.yaml`, copy it, and modify it to your needs.
+You can find an example [here](https://github.com/dell/csm-replication/blob/main/repctl/examples/powerscale_example_values.yaml), copy it, and modify it to your needs.
 
 If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.
 

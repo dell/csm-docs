@@ -84,7 +84,7 @@ You can create them manually or with help from `repctl`.
 #### Manual Storage Class Creation
 
 You can find sample replication enabled storage class in the driver repository
-at `./samples/storageclass/powerstore-replication.yaml`.
+[here](https://github.com/dell/csi-powerstore/blob/main/samples/storageclass/powerstore-replication.yaml).
 
 It will look like this:
 ```yaml
@@ -179,7 +179,7 @@ your Kubernetes clusters with `kubectl`.
 (using a single storage class configuration) in one command.
 
 To create storage classes with `repctl` you need to fill up the config with necessary information.
-You can find an example in `repctl/examples/powerstore_example_values.yaml`, copy it, and modify it to your needs.
+You can find an example in [here](https://github.com/dell/csm-replication/blob/main/repctl/examples/powerstore_example_values.yaml), copy it, and modify it to your needs.
 
 If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.
 
