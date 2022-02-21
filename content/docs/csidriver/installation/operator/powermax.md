@@ -198,8 +198,8 @@ metadata:
   namespace: test-powermax
 spec:
   driver:
-    # Config version for CSI PowerMax v2.1.0 driver
-    configVersion: v2.1.0
+    # Config version for CSI PowerMax v2.2.0 driver
+    configVersion: v2.2.0
     # replica: Define the number of PowerMax controller nodes
     # to deploy to the Kubernetes release
     # Allowed values: n, where n > 0
@@ -208,8 +208,8 @@ spec:
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      # Image for CSI PowerMax driver v2.1.0
-      image: dellemc/csi-powermax:v2.1.0
+      # Image for CSI PowerMax driver v2.2.0
+      image: dellemc/csi-powermax:v2.2.0
       # imagePullPolicy: Policy to determine if the image should be pulled prior to starting the container.
       # Allowed values:
       #  Always: Always pull the image.
@@ -299,3 +299,29 @@ Note:
     only present with `dell-csi-helm-installer`.
  - `Kubelet config dir path` is not yet configurable in case of Operator based driver installation.
  - Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
+
+## Volume Health Monitoring
+This feature is introduced in CSI Driver for PowerMax version 2.2.0.
+
+### Operator based installation
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external health monitor sidecar. To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
+   
+     # Install the 'external-health-monitor' sidecar accordingly.
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
+          value: "false"
+    node:
+      envs:
+        # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+        - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+          value: "false"
+```
