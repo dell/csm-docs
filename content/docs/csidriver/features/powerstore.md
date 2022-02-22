@@ -576,6 +576,32 @@ parameters:
 
 > The 1.4 version and later of the driver also enables any container user, to have full access to provisioned NFS volume, in earlier versions only `root` user had access
 
+
+## POSIX and NFSv4 ACLs 
+
+CSI PowerStore driver version 2.2.0 and later allows users to set user-defined permissions on NFS target mount directory using POSIX mode bits or NFSv4 ACLs. 
+
+NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. Please ensure the order when providing the NFSv4 ACLs. 
+
+To use this feature, provide permissions in `nfsAcls` parameter in values.yaml, secrets or NFS storage class. 
+
+For example: 
+
+1. POSIX mode bits
+
+```yaml
+nfsAcls: "0755"
+```
+
+2. NFSv4 ACLs 
+
+```yaml
+nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@domain.com:rxtncy"
+``` 
+
+If no values are specified, default value of "0777" is set.
+
+
 ## Dynamic Logging Configuration
 
 This feature is introduced in CSI Driver for PowerStore version 2.0.0. 
