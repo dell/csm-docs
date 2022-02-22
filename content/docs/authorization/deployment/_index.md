@@ -42,10 +42,6 @@ A Storage Administrator can execute the installer or rpm package as a root user 
 
 1. Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location `$HOME/.karavi/config.json` having the following contents: 
 
-    ```console
-    [user@system /home/user]#  vi .karavi/config.json
-    ```
-
     ```json
     {
       "web": {
