@@ -7,11 +7,9 @@ description: >
 ---
 ## Enabling Replication in CSI PowerScale
 
-For the Container Storage Modules (CSM) for Replication sidecar container to work properly it needs to be installed
-alongside CSI driver that supports replication `dell-csi-extensions` calls.
+Container Storage Modules (CSM) Replication sidecar is a helper container that is installed alongside a CSI driver to facilitate replication functionality. Such CSI drivers must implement `dell-csi-extensions` calls.
 
-CSI driver for Dell EMC PowerScale supports necessary extension calls from `dell-csi-extensions` and to be able to
-provision replicated volumes you would need to do the steps described in the following sections.
+CSI driver for Dell PowerScale supports necessary extension calls from `dell-csi-extensions`. To be able to provision replicated volumes you would need to do the steps described in the following sections.
 
 ### Before Installation
 
