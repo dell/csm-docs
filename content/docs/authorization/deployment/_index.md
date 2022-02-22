@@ -81,25 +81,18 @@ A Storage Administrator can execute the installer or rpm package as a root user 
 
 2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS-hostname` is also required. All traffic from `grpc.DNS-hostname` needs to be routed to `DNS-hostname` address, this can be configured by adding a new DNS entry for `grpc.DNS-hostname` or providing a temporary path in the systems `/etc/hosts` file. 
 
-    ```json
-      {
-        "hostname": [
-          "DNS-hostname",
-          "grpc.DNS-hostname"
-        ]
-      }
-    ```
+>__Note__: The certificate provided in `crtFile` should be valid for both the `DNS-hostname` and the `grpc.DNS-hostname` address. 
 
-    The certificate provided in `crtFile` should be valid for both the `DNS-hostname` and the `grpc.DNS-hostname` address. For example, create the certificate config file with alternate names (to include DNS-hostname and grpc.DNS-hostname) and then create the .crt file: 
+    For example, create the certificate config file with alternate names (to include DNS-hostname and grpc.DNS-hostname) and then create the .crt file: 
 
-    ```console
-    CN = DNS-hostname
-    subjectAltName = @alt_names
-    [alt_names]
-    DNS.1 = grpc.DNS-hostname.com
+      ```
+      CN = DNS-hostname
+      subjectAltName = @alt_names
+      [alt_names]
+      DNS.1 = grpc.DNS-hostname.com
 
-    $ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out DNS-hostname.com.crt -days 365 -sha256
-    ```
+      $ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out DNS-hostname.com.crt -days 365 -sha256
+      ```
 
 3. To install the rpm package on the system, run the below command:
 
