@@ -5,7 +5,7 @@ weight: 7
 description: >
   Enabling Replication feature for CSI PowerScale
 ---
-## Enabling Replication In CSI PowerScale
+## Enabling Replication in CSI PowerScale
 
 For the Container Storage Modules (CSM) for Replication sidecar container to work properly it needs to be installed
 alongside CSI driver that supports replication `dell-csi-extensions` calls.
@@ -24,7 +24,7 @@ The current implementation supports one-to-one replication so you need to ensure
 
 If you wish to use `SyncIQ` encryption you should ensure that you've added server certificate first by navigating to `Data protection->SyncIQ->Settings`. 
 
-After adding the certificate you can choose to use it by checking `Encrypt SyncIQ connection` and choosing it from the dropdown. 
+After adding the certificate, you can choose to use it by checking `Encrypt SyncIQ connection` from the dropdown. 
 
 After that, you can add similar certificates of other arrays in `SyncIQ->Certificates`, ensure you've added the certificate of the array you want to replicate to. 
 
@@ -52,7 +52,7 @@ If you don't have something installed or something is out-of-place, please refer
 
 ### Installing Driver With Replication Module
 
-To install the driver with replication enabled you need to ensure you have set
+To install the driver with replication enabled, you need to ensure you have set
 helm parameter `controller.replication.enabled` in your copy of example `values.yaml` file
 (usually called `my-isilon-settings.yaml`, `myvalues.yaml` etc.).
 
@@ -72,21 +72,21 @@ controller:
 ```
 You can leave other parameters like `image`, `replicationContextPrefix`, and `replicationPrefix` as they are.
 
-After enabling the replication module you can continue to install the CSI driver for PowerScale following usual installation procedure, just ensure you've added necessary array connection information to secret.
+After enabling the replication module, you can continue to install the CSI driver for PowerScale following the usual installation procedure. Just ensure you've added the necessary array connection information to secret.
 
 ##### SyncIQ encryption
 
-If you plan to use encryption you need to set `replicationCertificateID` in array connection secret. To check the ID of the certificate for the cluster you can navigate `Data protection->SyncIQ->Settings` find your certificate in `Server Certificates` section and push `View/Edit` button, it will open a dialog that should contain `Id` field. Use the value of that field to set `replicationCertificateID`.
+If you plan to use encryption, you need to set `replicationCertificateID` in array connection secret. To check the ID of the certificate for the cluster, you can navigate `Data protection->SyncIQ->Settings` find your certificate in `Server Certificates` section and push `View/Edit` button; it will open a dialog that should contain `Id` field. Use the value of that field to set `replicationCertificateID`.
 
-> **_NOTE:_** you need to install your driver on ALL clusters where you want to use replication, and from each cluster both arrays should be accessible.
+> **_NOTE:_** you need to install your driver on ALL clusters where you want to use replication, and from each cluster both arrays must be accessible.
 
 
 ### Creating Storage Classes
 
-To be able to provision replicated volumes you need to create properly configured storage classes on both source and target clusters.
+To provision replicated volumes, you need to create adequately configured storage classes on both source and target clusters.
 
-A pair of storage classes on the source and target clusters would be essentially `mirrored` copies of one another.
-You can create them manually or with help from `repctl`.
+A pair of storage classes on the source, and target clusters would be essentially `mirrored` copies of one another.
+You can create them manually or with the help of `repctl`.
 
 #### Manual Storage Class Creation
 
@@ -132,7 +132,7 @@ Let's go through each parameter and what it means:
 
 After figuring out how storage classes would look, you just need to go and apply them to your Kubernetes clusters with `kubectl`.
 
-#### Storage Class Creation With repctl
+#### Storage Class creation with `repctl`
 
 `repctl` can simplify storage class creation by creating a pair of mirrored storage classes in both clusters
 (using a single storage class configuration) in one command.
@@ -142,7 +142,7 @@ You can find an example [here](https://github.com/dell/csm-replication/blob/main
 
 If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.
 
-Let's use the same example from manual installation and see how config would look like
+Let's use the same example from manual installation and see how config would look like:
 ```yaml
 sourceClusterID: "source"
 targetClusterID: "target"
@@ -162,7 +162,7 @@ parameters:
     target: "cluster-2"
 ```
 
-After preparing the config you can apply it to both clusters with repctl. Just make sure you've added your clusters to repctl via the `add` command before.
+After preparing the config, you can apply it to both clusters with `repctl`. Just make sure you've added your clusters to `repctl` via the `add` command before.
 
 To create storage classes just run `./repctl create sc --from-config <config-file>` and storage classes would be applied to both clusters.
 
@@ -170,7 +170,7 @@ After creating storage classes you can make sure they are in place by using `./r
 
 ### Provisioning Replicated Volumes
 
-After installing the driver and creating storage classes you are good to create volumes using newly
+After installing the driver and creating storage classes, you are good to create volumes using newly
 created storage classes.
 
 On your source cluster, create a PersistentVolumeClaim using one of the replication enabled Storage Classes.
