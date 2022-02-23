@@ -70,3 +70,16 @@ Use this procedure to perform a volume expansion test.
   - Writes some data to the PVC
   - After that, it calculates the checksum of the written data, expands the PVC, and then recalculates the checksum
   - Cleans up all the resources that were created as part of the test
+
+### Setting Application Prefix 
+
+Application prefix is the name of the application that can be used to group the PowerMax volumes. We can use it while naming storage group. To set the application prefix for PowerMax, please refer to the sample storage class https://github.com/dell/csi-powermax/blob/main/samples/storageclass/powermax.yaml.
+
+```yaml
+# Name of application to be used to group volumes
+  # This is used in naming storage group
+  # Optional: true, Default value: None
+  # Examples: APP, app, sanity, tests
+  ApplicationPrefix: <application prefix>  
+```
+>Note: Supported length of storage group for PowerMax is 64 characters. Storage group name is of the format "csi-`clusterprefix`-`application prefix`-`SLO name`-`SRP name`-SG". Based on the other inputs like clusterprefix,SLO name and SRP name maximum length of the ApplicationPrefix can vary.
