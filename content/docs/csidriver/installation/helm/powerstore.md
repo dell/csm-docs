@@ -22,7 +22,7 @@ The node section of the Helm chart installs the following component in a _Daemon
 The following are requirements to be met before installing the CSI Driver for Dell EMC PowerStore:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
-- If you plan to use either the Fibre Channel or iSCSI protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ sections below. You can use NFS volumes without FC or iSCSI configuration.
+- If you plan to use either the Fibre Channel, iSCSI or NVMe protocol, refer to either _Fibre Channel requirements_, _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC or iSCSI configuration.
 > You can use either the Fibre Channel or iSCSI protocol, but you do not need both.
 
 > If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group
@@ -60,6 +60,19 @@ To do this, run the `systemctl enable --now iscsid` command.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 
 For information about configuring iSCSI, see _Dell EMC PowerStore documentation_ on Dell EMC Support.
+
+
+### Set up the NVMe Initiator
+The CSI Driver for Dell EMC Powerstore 2.2 and higher support NVMe connectivity.
+
+If you use the NVMe/TCP protocol, set up the NVMe initiators as follows:
+- Ensure that the NVMe initiators are available on the controller and node pods.
+- Kubernetes nodes must have access (network connectivity) to an NVMe port on the Dell EMC Powerstore array that
+has NVMe/TCP IP interfaces. 
+- We require the NVMe management command line interface (nvme-cli) to configure, edit, view, or start the NVMe client and target.
+You can install nvme-cli by running `apt install nvme-cli` on Ubuntu and `yum install nvme-cli` on Rhel/CentOS.
+- Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP
+The modules can be loaded using `modprobe nvme` and `modprobe nvme_tcp`.
 
 ### Linux multipathing requirements
 Dell EMC PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell EMC
@@ -139,7 +152,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     - *username*, *password*: defines credentials for connecting to array.
     - *skipCertificateValidation*: defines if we should use insecure connection or not.
     - *isDefault*: defines if we should treat the current array as a default.
-    - *blockProtocol*: defines what SCSI transport protocol we should use (FC, ISCSI, None, or auto).
+    - *blockProtocol*: defines what SCSI transport protocol we should use (FC, ISCSI, NVMETCP, None, or auto).
     - *nasName*: defines what NAS should be used for NFS volumes.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
@@ -206,7 +219,7 @@ There are samples storage class yaml files available under `samples/storageclass
 allowedTopologies:
   - matchLabelExpressions: 
       - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
-# replace "-iscsi" with "-fc" or "-nfs" at the end to use FC or NFS enabled hosts
+# replace "-iscsi" with "-fc", "-nvme" or "-nfs" at the end to use FC, NVME, or NFS enabled hosts
 # replace "12.34.56.78" with PowerStore endpoint IP
         values:
           - "true"
