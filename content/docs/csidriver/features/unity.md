@@ -190,7 +190,7 @@ provisioner: csi-unity.dellemc.com
 reclaimPolicy: Delete
 allowVolumeExpansion: true # Set this attribute to true if you plan to expand any PVCs created using this storage class
 parameters:
-    FsType: xfs
+    csi.storage.k8s.io/fstype: xfs
 ```
 
 To resize a PVC, edit the existing PVC spec and set spec.resources.requests.storage to the intended size. For example, if you have a PVC unity-pvc-demo of size 3Gi, then you can resize it to 30Gi by updating the PVC.
@@ -353,7 +353,7 @@ To create `NFS` volume you need to provide `nasName:` parameters that point to t
   - name: volume
     csi:
       driver: csi-unity.dellemc.com
-      fsType: "nfs"
+      csi.storage.k8s.io/fstype: "nfs"
       volumeAttributes:
         size: "20Gi"
         nasName: "csi-nas-name"
