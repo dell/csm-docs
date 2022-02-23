@@ -118,19 +118,19 @@ Procedure
     maxUnityVolumesPerNode: 0
     ```
    
-4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `helm/emptysecret.yaml` file by running the `kubectl create -f helm/emptysecret.yaml` command.
+4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `csi-unity/samples/secret/emptysecret.yaml` file by running the `kubectl create -f csi-unity/samples/secret/emptysecret.yaml` command.
 
 5. Prepare the `secret.yaml`  for driver configuration.
     The following table lists driver configuration parameters for multiple storage arrays.
     
-    | Parameter | Description | Required | Default |
-    | --------- | ----------- | -------- |-------- |
-    | storageArrayList.username | Username for accessing Unity system  | true | - |
-    | storageArrayList.password | Password for accessing Unity system  | true | - |
-    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity system| true | - |
-    | storageArrayList.arrayId | ArrayID for Unity system | true | - |
+    | Parameter                 | Description                         | Required | Default |
+    | ------------------------- | ----------------------------------- | -------- |-------- |
+    | storageArrayList.username | Username for accessing Unity system | true     | -       |
+    | storageArrayList.password | Password for accessing Unity system | true     | -       |
+    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity system| true | -   |
+    | storageArrayList.arrayId  | ArrayID for Unity system            | true     | -       |
     | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | true | true |
-    | storageArrayList.isDefault | An array having isDefault=true or isDefaultArray=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | false | false |
+    | storageArrayList.isDefault| An array having isDefault=true or isDefaultArray=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | false | false |
 
 
     Example: secret.yaml
@@ -205,11 +205,6 @@ Procedure
     - A CSI external-snapshotter sidecar
 
     Use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller) for the installation.
-
-    **Note**:
-    - The manifests available on GitHub install the snapshotter image: 
-      - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
-    - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
     #### Installation example 
 
@@ -360,7 +355,7 @@ Upgrading from an older version of the driver: The storage classes will be delet
 >Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.
 
 **Steps to create storage class:**
-There are samples storage class yaml files available under `helm/samples/storageclass`.  These can be copied and modified as needed.
+There are samples storage class yaml files available under `csi-unity/samples/storageclass`.  These can be copied and modified as needed.
 
 1. Pick any of `unity-fc.yaml`, `unity-iscsi.yaml` or `unity-nfs.yaml`
 2. Copy the file as `unity-<ARRAY_ID>-fc.yaml`, `unity-<ARRAY_ID>-iscsi.yaml` or `unity-<ARRAY_ID>-nfs.yaml`
