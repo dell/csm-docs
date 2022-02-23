@@ -57,24 +57,22 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
       enabled: true
       image:
         repository: quay.io/prometheus/prometheus
-        tag: v2.22.0
+        tag: v2.23.0
         pullPolicy: IfNotPresent
       persistentVolume:
         enabled: false
       service:
         type: NodePort
         servicePort: 9090
-    serverFiles:
-      prometheus.yml:
-        scrape_configs:
-          - job_name: 'karavi-metrics-powerflex'
-            scrape_interval: 5s
-            scheme: https
-            static_configs:
-              - targets: ['otel-collector:8443']
-            tls_config:
-              insecure_skip_verify: true
-    ```
+    extraScrapeConfigs: |
+    - job_name: 'karavi-metrics-powerflex'
+      scrape_interval: 5s
+      scheme: https
+      static_configs:
+        - targets: ['otel-collector:8443']
+      tls_config:
+        insecure_skip_verify: true
+   ```
 
 2. If using Rancher, create a ServiceMonitor.
 
@@ -187,7 +185,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
 
 2. Create a values file.
 
-    Create a Config file named `grafana-configmap.yaml` The file should look like this:
+    Create a Config file named `grafana-values.yaml` The file should look like this:
 
     ```yaml
     # grafana-values.yaml 

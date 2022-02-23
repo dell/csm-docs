@@ -10,7 +10,8 @@ Description: >
 
 User applications can have problems if you want their Pods to be resilient to node failure. This is especially true of those deployed with StatefulSets that use PersistentVolumeClaims. Kubernetes guarantees that there will never be two copies of the same StatefulSet Pod running at the same time and accessing storage. Therefore, it does not clean up StatefulSet Pods if the node executing them fails.
  
-For the complete discussion and rationale, go to https://github.com/kubernetes/community and search for the pod-safety.md file (path: contributors/design-proposals/storage/pod-safety.md).
+For the complete discussion and rationale, you can read the [pod-safety design proposal](https://github.com/kubernetes/design-proposals-archive/blob/main/storage/pod-safety.md).
+
 For more background on the forced deletion of Pods in a StatefulSet, please visit [Force Delete StatefulSet Pods](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#:~:text=In%20normal%20operation%20of%20a,1%20are%20alive%20and%20ready).
 
 ## CSM for Resiliency High-Level Description
@@ -26,29 +27,29 @@ Accordingly, CSM for Resiliency is adapted to and qualified with each CSI driver
 CSM for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerScale | Unity | PowerStore | PowerFlex | PowerMax |
-| - | :-: | :-: | :-: | :-: | :-: |
-| Detect pod failures for the following failure types - Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | no  | yes | no | yes | no |
-| Cleanup pod artifacts from failed nodes | no |  yes | no | yes | no |
-| Revoke PV access from failed nodes | no |  yes | no | yes | no |
+| Capability                              | PowerScale | Unity | PowerStore | PowerFlex | PowerMax |
+| --------------------------------------- | :--------: | :---: | :--------: | :-------: | :------: |
+| Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | no  | yes | no | yes | no |
+| Cleanup pod artifacts from failed nodes | no         | yes   | no         | yes       | no       |
+| Revoke PV access from failed nodes      | no         | yes   | no         | yes       | no       |
 {{</table>}}
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| COP/OS | Supported Versions |
-|-|-|
-| Kubernetes    | 1.21, 1.22, 1.23 |
-| Red Hat OpenShift | 4.8, 4.9 |
-| RHEL          |     7.x, 8.x      |
-| CentOS        |     7.8, 7.9     |
+| COP/OS     | Supported Versions |
+| ---------- | :----------------: |
+| Kubernetes | 1.21, 1.22, 1.23   |
+| Red Hat OpenShift | 4.8, 4.9    |
+| RHEL       |     7.x, 8.x       |
+| CentOS     |     7.8, 7.9       |
 {{</table>}}
 
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex | Unity |
-|---------------|:-------------------:|:----------------:|
+|               | PowerFlex    | Unity                      |
+| ------------- | :----------: | :------------------------: |
 | Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0 |
 {{</table>}}
 
@@ -56,10 +57,10 @@ CSM for Resiliency provides the following capabilities:
 
 CSM for Resiliency supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
-| Storage Array | CSI Driver | Supported Versions |
-| ------------- | ---------- | ------------------ |
+| Storage Array                     | CSI Driver   | Supported Versions |
+| --------------------------------- | :----------: | :----------------: |
 | CSI Driver for Dell EMC PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0,v2.1 |
-| CSI Driver for Dell EMC Unity | [csi-unity](https://github.com/dell/csi-unity) | v2.0,v2.1 |
+| CSI Driver for Dell EMC Unity     | [csi-unity](https://github.com/dell/csi-unity)         | v2.0,v2.1 |
 {{</table>}}
 
 ### PowerFlex Support

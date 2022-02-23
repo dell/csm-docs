@@ -9,7 +9,7 @@ weight: 2
 - [Where do I start with Dell Container Storage Modules (CSM)?](#where-do-i-start-with-dell-container-storage-modules-csm)
 - [Is the Container Storage Module XYZ available for my array?](#is-the-container-storage-module-xyz-available-for-my-array)
 - [What are the prerequisites for deploying Container Storage Modules?](#what-are-the-prerequisites-for-deploying-container-storage-modules)
-- [How do I uninstall or disable a Container Storage Module?](#how-do-i-uninstall-or-a-disable-a-module)
+- [How do I uninstall or disable a module?](#how-do-i-uninstall-or-disable-a-module)
 - [How do I troubleshoot Container Storage Modules?](#how-do-i-troubleshoot-container-storage-modules)
 - [Can I use the CSM functionality like Prometheus collection or Authorization quotas for my non-Kubernetes storage clients?](#can-i-use-the-csm-functionality-like-prometheus-collection-or-authorization-quotas-for-my-non-kubernetes-storage-clients)
 - [Should I install the module in the same namespace as the driver or another?](#should-i-install-the-module-in-the-same-namespace-as-the-driver-or-another)
@@ -49,7 +49,7 @@ Prerequisites can be found on the respective module deployment pages:
 Prerequisites for deploying the Dell EMC CSI drivers can be found here:
 - [Dell EMC CSI Drivers Deployment](../csidriver/installation/)
 
-### How do I uninstall or a disable a module?
+### How do I uninstall or disable a module?
 - [Dell EMC Container Storage Module for Authorization](../authorization/uninstallation/)
 - [Dell EMC Container Storage Module for Observability](../observability/uninstall/)
 - [Dell EMC Container Storage Module for Resiliency](../resiliency/uninstallation/)
@@ -108,4 +108,4 @@ Yes!
 All Container Storage Modules are released as open-source projects under Apache-2.0 License. You are free to contribute directly following the [contribution guidelines](https://github.com/dell/csm/blob/main/docs/CONTRIBUTING.md), fork the projects, modify them, and of course share feedback or open tickets ;-)
 
 ### What is coming next?
-This is just the beginning of the journey for Dell Container Storage Modules, and there is a full roadmap with more to come, which you can check under the [GithHub Milestones](https://github.com/dell/csm/milestones) page.
+This is just the beginning of the journey for Dell Container Storage Modules, and there is a full roadmap with more to come, which you can check under the [GitHub Milestones](https://github.com/dell/csm/milestones) page.

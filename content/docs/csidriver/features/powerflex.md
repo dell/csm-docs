@@ -93,9 +93,9 @@ spec:
   # Add fields here
   driverName: "csi-vxflexos.dellemc.com"
   # defines how to process VolumeSnapshot members when volume group snapshot is deleted
-  # "retain" - keep VolumeSnapshot instances
-  # "delete" - delete VolumeSnapshot instances
-  memberReclaimPolicy: "retain"
+  # "Retain" - keep VolumeSnapshot instances
+  # "Delete" - delete VolumeSnapshot instances
+  memberReclaimPolicy: "Retain"
   volumesnapshotclass: "vxflexos-snapclass"
   pvcLabel: "vgs-snap-label"
   # pvcList:
