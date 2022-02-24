@@ -12,11 +12,11 @@
 <meta property="og:description" content="Code features for PowerStore Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/features/powerstore/" />
-<meta property="article:modified_time" content="2021-12-03T13:03:43-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-02-24T16:06:47+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Code features for PowerStore Driver">
-<meta itemprop="dateModified" content="2021-12-03T13:03:43-04:00" />
-<meta itemprop="wordCount" content="2818">
+<meta itemprop="dateModified" content="2022-02-24T16:06:47&#43;05:30" />
+<meta itemprop="wordCount" content="2903">
 
 
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5b8db0da2ac55df490847699c947a82a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7c1d60774ebd38fd7e8ae17579d5adb6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5b8db0da2ac55df490847699c947a82a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7c1d60774ebd38fd7e8ae17579d5adb6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1673,6 +1673,7 @@
     <li><a href="#configuring-custom-access-to-nfs-exports">Configuring custom access to NFS exports</a></li>
     <li><a href="#array-identification-based-on-globalid">Array identification based on GlobalID</a></li>
     <li><a href="#root-squashing">Root squashing</a></li>
+    <li><a href="#posix-and-nfsv4-acls">POSIX and NFSv4 ACLs</a></li>
     <li><a href="#dynamic-logging-configuration">Dynamic Logging Configuration</a>
       <ul>
         <li><a href="#helm-based-installation">Helm based installation</a></li>
@@ -2164,6 +2165,20 @@ However, to provision new volumes, make sure to delete old Storage Classes and c
 </span></code></pre></div><blockquote>
 <p>The 1.4 version and later of the driver also enables any container user, to have full access to provisioned NFS volume, in earlier versions only <code>root</code> user had access</p>
 </blockquote>
+<h2 id="posix-and-nfsv4-acls">POSIX and NFSv4 ACLs</h2>
+<p>CSI PowerStore driver version 2.2.0 and later allows users to set user-defined permissions on NFS target mount directory using POSIX mode bits or NFSv4 ACLs.</p>
+<p>NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. Please ensure the order when providing the NFSv4 ACLs.</p>
+<p>To use this feature, provide permissions in <code>nfsAcls</code> parameter in values.yaml, secrets or NFS storage class.</p>
+<p>For example:</p>
+<ol>
+<li>POSIX mode bits</li>
+</ol>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">nfsAcls</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;0755&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><ol start="2">
+<li>NFSv4 ACLs</li>
+</ol>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">nfsAcls</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@domain.com:rxtncy&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>If no values are specified, default value of &ldquo;0777&rdquo; is set.</p>
 <h2 id="dynamic-logging-configuration">Dynamic Logging Configuration</h2>
 <p>This feature is introduced in CSI Driver for PowerStore version 2.0.0.</p>
 <h3 id="helm-based-installation">Helm based installation</h3>
