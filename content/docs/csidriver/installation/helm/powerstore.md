@@ -141,8 +141,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
     - *isDefault*: defines if we should treat the current array as a default.
     - *blockProtocol*: defines what SCSI transport protocol we should use (FC, ISCSI, None, or auto).
     - *nasName*: defines what NAS should be used for NFS volumes.
-	- *nfsAcls* (Optional): defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory.
-	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only.
+    - *nfsAcls* (Optional): defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory.
+	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only . 
     
     Add more blocks similar to above for each PowerStore array if necessary. 
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
