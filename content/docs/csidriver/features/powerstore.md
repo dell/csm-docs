@@ -646,7 +646,7 @@ CSI Driver for Dell EMC Powerstore 2.2.0 and above supports NVMe/TCP provisionin
 
 Prerequisites
 
-1. We require the NVMe management command line interface (nvme-cli) to configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+1. The driver requires NVMe management command line interface (nvme-cli) in order to configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
 `sudo apt install nvme-cli`
 
 2. Modules including the nvme, nvme_core, nvme_fabrics and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands.
