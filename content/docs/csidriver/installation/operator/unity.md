@@ -19,7 +19,7 @@ The following table lists driver configuration parameters for multiple storage a
 | password | Password for accessing Unity system  | true | - |
 | restGateway | REST API gateway HTTPS endpoint Unity system| true | - |
 | arrayId | ArrayID for Unity system | true | - |
-| isDefaultArray | An array having isDefaultArray=true is for backward compatibility. This parameter should occur once in the list. | false | false |
+| isDefaultArray | An array having isDefaultArray=true is for backward compatibility. This parameter should occur once in the list. | true | - |
 
 Ex: secret.yaml
 
@@ -118,7 +118,7 @@ data:
     CSI_LOG_LEVEL: "info"
     ALLOW_RWO_MULTIPOD_ACCESS: "false"
     MAX_UNITY_VOLUMES_PER_NODE: "0"
-    SYNC_NODE_INFO_TIME_INTERVAL: "0"
+    SYNC_NODE_INFO_TIME_INTERVAL: "15"
     TENANT_NAME: ""
 ```
 
