@@ -8,7 +8,7 @@ description: Release notes for PowerScale CSI driver
 ### New Features/Changes
 
 - Added support for Kubernetes 1.23.
-- Added support for fsGroup policy.
+- Added support for fsGroupPolicy.
 - Added support for session based authentication along with basic authentication for PowerScale.
 
 ### Fixed Issues
