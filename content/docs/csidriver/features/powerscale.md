@@ -580,4 +580,6 @@ None: CSI Driver doesn't support these operations and volume will be mounted wit
 
 fsGroupPolicy will be default to "ReadWriteOnceWithFSType", keeping the previous behavior.
 
-Note: FSGroupPolicy may not work as expected with "root_squash", to get the desired behavior "no_root_squash" has to be enabled.
+Note: 
+1. Volume ownership and permissions change would be taken care by kubernetes based on the FSGroupPolicy mode set in the CSI Driver. [here](https://kubernetes-csi.github.io/docs/support-fsgroup.html#csi-volume-fsgroup-policy).
+2. FSGroupPolicy may not work as expected with "root_squash", to get the desired behavior "no_root_squash" has to be enabled. 
