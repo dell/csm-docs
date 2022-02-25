@@ -8,7 +8,7 @@ description: Release notes for PowerStore CSI driver
 ### New Features/Changes
 
 - Added support for Kubernetes 1.23.
-- Added support to configure FSGroupPolicy
+- Added support to configure FSGroupPolicy.
 
 ### Fixed Issues
 
@@ -23,4 +23,4 @@ There are no fixed issues in this release.
 
 ### Note:
 
-- Support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
+- Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

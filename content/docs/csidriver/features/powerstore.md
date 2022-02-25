@@ -638,3 +638,33 @@ spec:
 ```
 
 >Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.
+
+## POSIX and NFSv4 ACLs
+
+CSI PowerStore driver version 2.2.0 and later allows users to set user-defined permissions on NFS target mount directory using POSIX mode bits or NFSv4 ACLs.
+
+NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. Please ensure the order when providing the NFSv4 ACLs.
+
+To use this feature, provide permissions in `nfsAcls` parameter in values.yaml, secrets or NFS storage class.
+
+For example:
+
+1. POSIX mode bits
+
+```yaml
+nfsAcls: "0755"
+```
+
+2. NFSv4 ACLs
+
+```yaml
+nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@domain.com:rxtncy"
+```
+
+>Note: If no values are specified, default value of "0777" will be set.
+
+
+## NVMe/TCP Support
+
+CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as `NVMeTCP`. 
+In case blockProtocol is specified as `auto`, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then FC gets the highest priority followed by iSCSI and then NVMeTCP.

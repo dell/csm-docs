@@ -61,6 +61,17 @@ To do this, run the `systemctl enable --now iscsid` command.
 
 For information about configuring iSCSI, see _Dell EMC PowerStore documentation_ on Dell EMC Support.
 
+
+### Set up the NVMe/TCP Initiator
+
+If you want to use the protocol, set up the NVMe/TCP initiators as follows
+- The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+`sudo apt install nvme-cli`
+
+- Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands.
+```modprobe nvme
+   modprobe nvme-tcp```
+
 ### Linux multipathing requirements
 Dell EMC PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell EMC
 PowerStore.
@@ -139,8 +150,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
     - *username*, *password*: defines credentials for connecting to array.
     - *skipCertificateValidation*: defines if we should use insecure connection or not.
     - *isDefault*: defines if we should treat the current array as a default.
-    - *blockProtocol*: defines what SCSI transport protocol we should use (FC, ISCSI, None, or auto).
+    - *blockProtocol*: defines what SCSI transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).
     - *nasName*: defines what NAS should be used for NFS volumes.
+	- *nfsAcls* (Optional): defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory.
+	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
@@ -156,6 +169,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
 | kubeletConfigDir | Defines kubelet config path for cluster | Yes | "/var/lib/kubelet" |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
+| nfsAcls | Defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 | connection.enableCHAP   | Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
 | controller.controllerCount     | Defines number of replicas of controller deployment | Yes | 2 |
 | controller.volumeNamePrefix | Defines the string added to each volume that the CSI driver creates | No | "csivol" |
