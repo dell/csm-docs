@@ -136,36 +136,36 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-name: powermaxtest
-namespace: test
+    name: powermaxtest
+    namespace: test
 ---
 kind: StatefulSet
 apiVersion: apps/v1
 metadata:
-name: powermaxtest
-namespace: test
+    name: powermaxtest
+    namespace: test
 spec:
-selector:
-matchLabels:
-app: powermaxtest
-serviceName: staticprovisioning
-template:
-metadata:
-labels:
-app: powermaxtest
-spec:
-serviceAccount: powermaxtest
-containers:
-- name: test
-image: docker.io/centos:latest
-command: [ "/bin/sleep", "3600" ]
-volumeMounts:
-- mountPath: "/data"
-name: pvc
-volumes:
-- name: pvc
-persistentVolumeClaim:
-claimName: pvc
+    selector:
+        matchLabels:
+          app: powermaxtest
+    serviceName: staticprovisioning
+    template:
+      metadata:
+        labels:
+          app: powermaxtest
+      spec:
+        serviceAccount: powermaxtest
+        containers:
+          - name: test
+            image: docker.io/centos:latest
+            command: [ "/bin/sleep", "3600" ]
+            volumeMounts:
+              - mountPath: "/data"
+                name: pvc
+        volumes:
+          - name: pvc
+            persistentVolumeClaim:
+              claimName: pvc
 ```
 
 5. After the pod becomes `Ready` and `Running`, you can start to use this pod and volume.
