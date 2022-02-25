@@ -64,7 +64,7 @@ For information about configuring iSCSI, see _Dell EMC PowerStore documentation_
 
 ### Set up the NVMeTCP Initiator
 
-If you use the NVMe/TCP protocol, set up the NVMe initiator:
+If you want to use the NVMe/TCP protocol, set up the NVMe initiator as follows
 - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
 `sudo apt install nvme-cli`
 

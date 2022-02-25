@@ -638,3 +638,9 @@ spec:
 ```
 
 >Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.
+
+
+## NVMe/TCP Support
+
+CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as `NVMeTCP`.
+In case blockProtocol is specified as `auto`, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then FC gets the highest priority followed by iSCSI and then NVMeTCP.
