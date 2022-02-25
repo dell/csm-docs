@@ -24,9 +24,9 @@ If you wish to use `SyncIQ` encryption you should ensure that you've added a ser
 
 After adding the certificate, you can choose to use it by checking `Encrypt SyncIQ connection` from the dropdown. 
 
-After that, you can add similar certificates of other arrays in `SyncIQ->Certificates`, and ensure you've added the certificate of the array you want to replicate to. 
+After that, you can add similar certificates of other arrays in `SyncIQ-> Certificates`, and ensure you've added the certificate of the array you want to replicate to. 
 
-Similar steps should be done in reverse direction, so `array-1` has the `array-2` certificate visible in `SyncIQ->Certificates` tab and `array-2` has the `array-1` certificate visible in it's own `SyncIQ->Certificates` tab. 
+Similar steps should be done in the reverse direction, so `array-1` has the `array-2` certificate visible in `SyncIQ-> Certificates` tab and `array-2` has the `array-1` certificate visible in its own `SyncIQ->Certificates` tab. 
 
 #### In Kubernetes
 Ensure you installed CRDs and replication controller in your clusters.
@@ -42,8 +42,8 @@ To verify you have everything in order you can execute the following commands:
     ```shell
     kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
     ```
-  `data` field should be properly populated with cluster id of your choosing and, if using multi-cluster
-  installation, your `targets:` parameter should be populated by list of target clusters IDs.
+  `data` field should be properly populated with cluster-id of your choosing and, if using multi-cluster
+  installation, your `targets:` parameter should be populated by a list of target clusters IDs.
 
 
 If you don't have something installed or something is out-of-place, please refer to installation instructions in [installation-repctl](../install-repctl) or [installation](../installation).
@@ -74,7 +74,7 @@ After enabling the replication module, you can continue to install the CSI drive
 
 ##### SyncIQ encryption
 
-If you plan to use encryption, you need to set `replicationCertificateID` in the array connection secret. To check the ID of the certificate for the cluster, you can navigate to `Data protection->SyncIQ->Settings,` find your certificate in `Server Certificates` section,  and then push the `View/Edit` button. It will open a dialog that should contain the  `Id` field. Use the value of that field to set `replicationCertificateID`.
+If you plan to use encryption, you need to set `replicationCertificateID` in the array connection secret. To check the ID of the certificate for the cluster, you can navigate to `Data protection->SyncIQ->Settings,` find your certificate in the `Server Certificates` section and then push the `View/Edit` button. It will open a dialog that should contain the  `Id` field. Use the value of that field to set `replicationCertificateID`.
 
 > **_NOTE:_** you need to install your driver on ALL clusters where you want to use replication. Both arrays must be accessible from each cluster. 
 
@@ -115,18 +115,18 @@ parameters:
 ```
 
 Let's go through each parameter and what it means:
-* `replication.storage.dell.com/isReplicationEnabled` if set to `true` will mark this storage class as replication enabled,
+* `replication.storage.dell.com/isReplicationEnabled` if set to `true`, will mark this storage class as replication enabled,
   just leave it as `true`.
 * `replication.storage.dell.com/remoteStorageClassName` points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.
-* `replication.storage.dell.com/remoteClusterID` represents ID of a remote cluster. It is the same id you put in the replication controller config map.
+* `replication.storage.dell.com/remoteClusterID` represents the ID of a remote cluster. It is the same id you put in the replication controller config map.
 * `replication.storage.dell.com/remoteSystem` is the name of the remote system that should match whatever `clusterName` you called it in `isilon-creds` secret.
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is measured in units of time, that may be lost due to a failure.
 * `replication.storage.dell.com/ignoreNamespaces`, if set to `true` PowerScale driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.
 * `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them.
 * `Accesszone` is the name of the access zone a volume can be created in
-* `IsiPath` is the base path for the volumes to be created on PowerScale cluster
-* `RootClientEnabled` determines wheter driver should enable root squashing or not
-* `ClusterName` name of PowerScale cluster, where pv will be provisioned, specfied as it was listed in `isilon-creds` secret.
+* `IsiPath` is the base path for the volumes to be created on the PowerScale cluster
+* `RootClientEnabled` determines whether the driver should enable root squashing or not
+* `ClusterName` name of PowerScale cluster, where PV will be provisioned, specified as it was listed in `isilon-creds` secret.
 
 After figuring out how storage classes would look, you just need to go and apply them to your Kubernetes clusters with `kubectl`.
 
@@ -140,7 +140,7 @@ You can find an example [here](https://github.com/dell/csm-replication/blob/main
 
 If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.
 
-Let's use the same example from manual installation and see how config would look like:
+Let's use the same example from manual installation and see what config would look like:
 ```yaml
 sourceClusterID: "source"
 targetClusterID: "target"
@@ -171,8 +171,8 @@ After creating storage classes you can make sure they are in place by using `./r
 After installing the driver and creating storage classes, you are good to create volumes using newly
 created storage classes.
 
-On your source cluster, create a PersistentVolumeClaim using one of the replication enabled Storage Classes.
-The CSI PowerScale driver will create a volume on the array, and add it to a VolumeGroup and configure replication
+On your source cluster, create a PersistentVolumeClaim using one of the replication-enabled Storage Classes.
+The CSI PowerScale driver will create a volume on the array, add it to a VolumeGroup and configure replication
 using the parameters provided in the replication enabled Storage Class.
 
 ### Supported Replication Actions
