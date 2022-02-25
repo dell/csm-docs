@@ -8,7 +8,7 @@ description: Release notes for PowerStore CSI driver
 ### New Features/Changes
 
 - Added support for Kubernetes 1.23.
-- Added support to configure FSGroupPolicy.
+- Added support to configure fsGroupPolicy.
 
 ### Fixed Issues
 
