@@ -2361,7 +2361,20 @@ However, to provision new volumes, make sure to delete old Storage Classes and c
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.&lt;/p&gt;
 &lt;/blockquote&gt;
-
+&lt;h2 id=&#34;nvmetcp-support&#34;&gt;NVMe/TCP Support&lt;/h2&gt;
+&lt;p&gt;CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as &lt;code&gt;NVMeTCP&lt;/code&gt;. In case blockProtocol is specified as &lt;code&gt;auto&lt;/code&gt;, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then FC gets the highest priority followed by iSCSI and then NVMeTCP.&lt;/p&gt;
+&lt;p&gt;Prerequisites&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+&lt;code&gt;sudo apt install nvme-cli&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-modprobe&#34; data-lang=&#34;modprobe&#34;&gt;   modprobe nvme-tcp```
+&lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
     
