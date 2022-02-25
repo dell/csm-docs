@@ -61,6 +61,18 @@ To do this, run the `systemctl enable --now iscsid` command.
 
 For information about configuring iSCSI, see _Dell EMC PowerStore documentation_ on Dell EMC Support.
 
+
+
+### Set up the NVMe Initiator
+
+If you want to use the NVMe protocol, set up the iSCSI initiators as follows:
+- The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+`sudo apt install nvme-cli`
+
+- Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands.
+```modprobe nvme
+   modprobe nvme-tcp```
+
 ### Linux multipathing requirements
 Dell EMC PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell EMC
 PowerStore.
@@ -139,7 +151,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     - *username*, *password*: defines credentials for connecting to array.
     - *skipCertificateValidation*: defines if we should use insecure connection or not.
     - *isDefault*: defines if we should treat the current array as a default.
-    - *blockProtocol*: defines what SCSI transport protocol we should use (FC, ISCSI, None, or auto).
+    - *blockProtocol*: defines what SCSI transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).
     - *nasName*: defines what NAS should be used for NFS volumes.
 	- *nfsAcls* (Optional): defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory.
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only.
