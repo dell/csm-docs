@@ -20,9 +20,8 @@ This scenario is the choice when you want to try your disaster recovery plan or 
     b. Execute "reprotect" action on selected ReplicationGroup which will resume the replication from new "source"
     
         ./repctl --rg rg-id reprotect --to-cluster new-source-cluster-name
-    <br> <br>
-    ![state_changes1](../state_changes1.png)
-    <br> <br>
+
+![state_changes1](../state_changes1.png)
 
 ### Unplanned Migration to the target cluster/array
 This scenario is the choice when you lost a site.
@@ -41,9 +40,7 @@ This scenario is the choice when you lost a site.
     
         ./repctl --rg rg-id reprotect --to-cluster new-source-cluster-name
         
-    <br> <br>
-    ![state_changes2](../state_changes2.png) 
-    <br> <br>
+![state_changes2](../state_changes2.png) 
       
 
 >Note: When users do Failover and Failback, the tests pods on the source cluster may go "CrashLoopOff" state since it will try to remount the same volume which is already mounted. To get around this problem bring down the number of replicas to 0 and then after that is done, bring it up to 1.

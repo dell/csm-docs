@@ -171,6 +171,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
+| fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
 
 8. Install the driver using `csi-install.sh` bash script by running `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 

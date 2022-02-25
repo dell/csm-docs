@@ -7,11 +7,9 @@ description: >
 ---
 ## Enabling Replication In CSI PowerStore
 
-For the Container Storage Modules (CSM) for Replication sidecar container to work properly it needs to be installed
-alongside CSI driver that supports replication `dell-csi-extensions` calls.
+Container Storage Modules (CSM) Replication sidecar is a helper container that is installed alongside a CSI driver to facilitate replication functionality. Such CSI drivers must implement `dell-csi-extensions` calls.
 
-CSI driver for Dell EMC PowerStore supports necessary extension calls from `dell-csi-extensions` and to be able to
-provision replicated volumes you would need to do the steps described in the following sections.
+CSI driver for Dell PowerStore supports necessary extension calls from `dell-csi-extensions`. To be able to provision replicated volumes you would need to do the steps described in the following sections.
 
 ### Before Installation
 
@@ -84,7 +82,7 @@ You can create them manually or with help from `repctl`.
 #### Manual Storage Class Creation
 
 You can find sample replication enabled storage class in the driver repository
-at `./samples/storageclass/powerstore-replication.yaml`.
+[here](https://github.com/dell/csi-powerstore/blob/main/samples/storageclass/powerstore-replication.yaml).
 
 It will look like this:
 ```yaml
@@ -179,7 +177,7 @@ your Kubernetes clusters with `kubectl`.
 (using a single storage class configuration) in one command.
 
 To create storage classes with `repctl` you need to fill up the config with necessary information.
-You can find an example in `repctl/examples/powerstore_example_values.yaml`, copy it, and modify it to your needs.
+You can find an example in [here](https://github.com/dell/csm-replication/blob/main/repctl/examples/powerstore_example_values.yaml), copy it, and modify it to your needs.
 
 If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.
 
