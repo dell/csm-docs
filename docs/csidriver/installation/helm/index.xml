@@ -1990,6 +1990,12 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only .&lt
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fsGroupPolicy&lt;/td&gt;
+&lt;td&gt;Defines which FS Group policy mode to be used, Supported modes &lt;code&gt;None, File and ReadWriteOnceWithFSType&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;ReadWriteOnceWithFSType&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;ol start=&#34;8&#34;&gt;
