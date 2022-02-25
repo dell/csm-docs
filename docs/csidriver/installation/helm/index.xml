@@ -1833,8 +1833,6 @@ But make sure to align to the same namespace during the whole installation.&lt;/
 &lt;li&gt;&lt;em&gt;isDefault&lt;/em&gt;: defines if we should treat the current array as a default.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;blockProtocol&lt;/em&gt;: defines what SCSI transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;nasName&lt;/em&gt;: defines what NAS should be used for NFS volumes.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;nfsAcls&lt;/em&gt; (Optional): defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory.
-NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only .&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Add more blocks similar to above for each PowerStore array if necessary.&lt;/p&gt;
 &lt;/li&gt;
@@ -1893,12 +1891,6 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only .&lt
 &lt;td&gt;Policy to determine if the image should be pulled prior to starting the container.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;&amp;ldquo;IfNotPresent&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;nfsAcls&lt;/td&gt;
-&lt;td&gt;Defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;0777&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;connection.enableCHAP&lt;/td&gt;
@@ -1989,12 +1981,6 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only .&lt
 &lt;td&gt;Defines tolerations that would be applied to node daemonset&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;fsGroupPolicy&lt;/td&gt;
-&lt;td&gt;Defines which FS Group policy mode to be used, Supported modes &lt;code&gt;None, File and ReadWriteOnceWithFSType&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;ReadWriteOnceWithFSType&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
