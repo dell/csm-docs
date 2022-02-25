@@ -28,28 +28,31 @@ Any action with the __LOCAL__ suffix means, do this action for the local site. A
 
 For e.g. - 
 * If the CR at `Hopkinton` is patched with action FAILOVER_REMOTE, it means that the driver will attempt to `Fail Over` to __Durham__ which is the remote site. 
-* If the CR at `Durham` is patched with action FAILOVER_LOCAL, it means that the driver will attempt to `Fail over` to __Durham__ which is the local site.
+* If the CR at `Durham` is patched with action FAILOVER_LOCAL, it means that the driver will attempt to `Fail Over` to __Durham__ which is the local site.
 * If the CR at `Durham` is patched with REPROTECT_LOCAL, it means that the driver will `Re-protect` the volumes at __Durham__ which is the local site.
 
 The following table lists details of what actions should be used in different Disaster Recovery workflows & the equivalent operation done on the storage array:
 
-| Workflow | Actions | PowerMax | PowerStore |
-| ----------- | --------- | -------------- | ---------- |
-| Planned Migration | FAILOVER_LOCAL<br>FAILOVER_REMOTE | symrdf failover -swap | FAILOVER (no REPROTECT after FAILOVER) |
-| Reprotect | REPROTECT_LOCAL <br> REPROTECT_REMOTE | symrdf resume/est | REPROTECT |
-| Unplanned Migration | UNPLANNED_FAILOVER_LOCAL <br> UNPLANNED_FAILOVER_REMOTE | symrdf failover -force | FAILOVER (at target site) |
+{{<table "table table-striped table-bordered table-sm">}}
+| Workflow            | Actions                             | PowerMax              | PowerStore                             | PowerScale                                     |
+| ------------------- | ----------------------------------- | --------------------- | -------------------------------------- | ---------------------------------------------- |
+| Planned Migration   | FAILOVER_LOCAL<br>FAILOVER_REMOTE   | symrdf failover -swap | FAILOVER (no REPROTECT after FAILOVER) | allow_writes on target, disable local policy   |
+| Reprotect           | REPROTECT_LOCAL<br>REPROTECT_REMOTE | symrdf resume/est     | REPROTECT                              | enable local policy, disallow_writes on remote | 
+| Unplanned Migration | UNPLANNED_FAILOVER_LOCAL<br>UNPLANNED_FAILOVER_REMOTE | symrdf failover -force | FAILOVER (at target site) | break association on target              |
+{{</table>}}
 
 ### Maintenance Actions
 These actions can be run at any site and are used to change the replication link state for maintenance activities.
 The following table lists the supported maintenance actions and the equivalent operation done on the storage arrays
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Action    |      Description       |     PowerMax      |      PowerStore   |
-|-----------|------------------------|-------------------|-------------------|
-| SUSPEND   | Temporarily suspend <br> replication | symrdf suspend | PAUSE |
-| RESUME    | Resume replication | symrdf resume | RESUME |
-| SYNC      | Synchronize all changes <br> from source to target | symrdf establish | SYNCHRONIZE NOW |
+| Action    | Description                          | PowerMax       | PowerStore | PowerScale           |
+|-----------|--------------------------------------|----------------|------------|----------------------|
+| SUSPEND   | Temporarily suspend <br> replication | symrdf suspend | PAUSE      | disable local policy |
+| RESUME    | Resume replication                   | symrdf resume  | RESUME     | enable local policy  |
+| SYNC      | Synchronize all changes <br> from source to target | symrdf establish | SYNCHRONIZE NOW | start syncIQ job |
 {{</table>}}
+
 ### How to perform actions
 We strongly recommend using `repctl` to perform any actions on `DellCSIReplicationGroup` objects. You can find detailed steps [here](../tools/#executing-actions)
 

@@ -30,7 +30,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
         password: "password"                      # password for connecting to API
         skipCertificateValidation: true           # indicates if client side validation of (management)server's certificate can be skipped
         isDefault: true                           # treat current array as a default (would be used by storage classes without arrayID parameter)
-        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, None, or auto)
+        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
         nasName: "nas-server"                     # what NAS should be used for NFS volumes
    ```
    Change the parameters with relevant values for your PowerStore array. 
@@ -62,11 +62,13 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
    | --------- | ----------- | -------- |-------- |
    | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be pending state till new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
    | namespace | Specifies namespace where the drive will be installed | Yes | "test-powerstore" |
+   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
    | ***Common parameters for node and controller*** |
    | X_CSI_POWERSTORE_NODE_NAME_PREFIX | Prefix to add to each node registered by the CSI driver | Yes | "csi-node" 
    | X_CSI_FC_PORTS_FILTER_FILE_PATH | To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
    | ***Controller parameters*** |
    | X_CSI_POWERSTORE_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | " "|
+   | X_CSI_NFS_ACLS | Defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
    | ***Node parameters*** |
    | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false | 
 6.  Execute the following command to create PowerStore custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerStore driver.
