@@ -136,8 +136,8 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-    name: powermaxtest
-    namespace: test
+  name: powermaxtest
+  namespace: test
 ---
 kind: StatefulSet
 apiVersion: apps/v1
@@ -169,3 +169,5 @@ spec:
 ```
 
 5. After the pod becomes `Ready` and `Running`, you can start to use this pod and volume.
+
+>Note: CSI driver for PowerMax will create the necessary objects like Storage group, HostID and Masking View. They must not be created manually.
