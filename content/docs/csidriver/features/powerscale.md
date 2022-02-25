@@ -565,3 +565,19 @@ When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode rest
 
 To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
 
+## FSGroupPolicy
+
+FSGroupPolicy is made configurable via CSI Driver for Dell EMC PowerScale 2.2.0 and above, supports modifying a volume's ownership or permissions when the volume is being mounted.
+
+It supports three different modes:
+- ReadWriteOnceWithFSType
+- File
+- None
+
+ReadWriteOnceWithFSType: Volume ownership and permissions should be modified to match the pod's security policy only if the "fsType" is defined and the persistent volume's accessModes contains "ReadWriteOnce".
+File: Volume ownership and permissions change supported via CSI Driver and kubernetes may use fsGroup to change permissions and ownership of the volume to match user requested fsGroup in the pod's SecurityPolicy regardless of the fsType or access mode.
+None: CSI Driver doesn't support these operations and volume will be mounted with no modifications.
+
+fsGroupPolicy will be default to "ReadWriteOnceWithFSType", keeping the previous behavior.
+
+Note: FSGroupPolicy may not work as expected with "root_squash", to get the desired behavior "no_root_squash" has to be enabled.
