@@ -67,6 +67,7 @@ CSM for Authorization consists of 2 components - the Authorization sidecar and t
 {{<table "table table-striped table-bordered table-sm">}}
 | Authorization Sidecar Image Tag | Authorization Proxy Server Version |
 | ------------------------------- | ---------------------------------- |
+| dellemc/csm-authorization-sidecar:v1.0.0 | v1.0.0, v1.1.0 |
 | dellemc/csm-authorization-sidecar:v1.2.0 | v1.0.0, v1.1.0, v1.2.0 |
 {{</table>}}
 ## Roles and Responsibilities
