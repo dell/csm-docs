@@ -18,14 +18,14 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 ## CSM Supported Modules and Dell EMC CSI Drivers
 
-| Modules/Drivers | CSM 1.2 | [CSM 1.1](../v1/) | [CSM 1.0](../v2/) | [Older](../v3) | 
+| Modules/Drivers | CSM 1.2 | [CSM 1.1](../v1/) | [CSM 1.0.1](../v1/) | [CSM 1.0](../v2/) | 
 | - | :-: | :-: | :-: | :-: |
-| Authorization | 1.2 | 1.1 | 1.0 | - |
-| Observability | 1.0 | 1.0 | 1.0 | - |
-| Replication | 1.2 | 1.1 | 1.0 | - |
-| Resiliency | 1.2 | 1.0.1 | 1.0 | - |
-| CSI Driver for PowerScale | v2.2 | v2.1 | v2.0 | v1.6 | 
-| CSI Driver for Unity | v2.2 | v2.1 | v2.0 | v1.6 |
-| CSI Driver for PowerStore | v2.2 | v2.1 | v2.0 | v1.4 |
-| CSI Driver for PowerFlex | v2.2 | v2.1 | v2.0 | v1.5 |
-| CSI Driver for PowerMax | v2.2 | v2.1 | v2.0 | v1.7 |
+| Authorization | 1.2 | 1.1 | 1.0 | 1.0 |
+| Observability | 1.1 | 1.0.1 | 1.0.1 | 1.0 |
+| Replication | 1.2 | 1.1 | 1.0 | 1.0 |
+| Resiliency | 1.1 | 1.0.1 | 1.0.1 | 1.0 |
+| CSI Driver for PowerScale | v2.2 | v2.1 | v2.0 | v2.0 | 
+| CSI Driver for Unity | v2.2 | v2.1 | v2.0 | v2.0 |
+| CSI Driver for PowerStore | v2.2 | v2.1 | v2.0 | v2.0 |
+| CSI Driver for PowerFlex | v2.2 | v2.1 | v2.0 | v2.0 |
+| CSI Driver for PowerMax | v2.2 | v2.1 | v2.0 | v2.0 |

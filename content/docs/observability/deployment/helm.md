@@ -11,7 +11,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 ## Prerequisites
 
 - Helm 3.3
-- The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
+- The deployment of one or more [supported](../../#supported-csi-drivers) Dell CSI drivers
 
 ## Install the CSM for Observability Helm Chart
 **Steps**

@@ -43,7 +43,7 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax | PowerStore | PowerScale |
 |---------------|:-------------------:|:----------------:|:----------------:|
-| Storage Array | 5978.479.479, 5978.669.669, 5978.711.711, Unisphere 9.2 | 1.0.x, 2.0.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 |
+| Storage Array | 5978.479.479, 5978.711.711, Unisphere 9.2 | 1.0.x, 2.0.x, 2.1.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -54,7 +54,7 @@ CSM for Replication supports the following CSI drivers and versions.
 | ------------- | ---------- | ------------------ |
 | CSI Driver for Dell EMC PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0, v2.1, v2.2 |
 | CSI Driver for Dell EMC PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0, v2.1, v2.2 |
-| CSI Driver for Dell EMC PowerScale | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.2 |
+| CSI Driver for Dell EMC PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.2 |
 {{</table>}}
 
 ## Details

@@ -44,7 +44,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex | PowerScale |
 |---------------|:----------------:|:-------------------:|:----------------:|
-| Storage Array |5978.479.479, 5978.669.669, 5978.711.711, Unisphere 9.2|    3.5.x, 3.6.x    | OneFS 8.1, 8.2, 9.0, 9.1, 9.2 |
+| Storage Array |5978.479.479, 5978.711.711, Unisphere 9.2|    3.5.x, 3.6.x    | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -53,9 +53,9 @@ CSM for Authorization supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
-| CSI Driver for Dell EMC PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0,v2.1 |
-| CSI Driver for Dell EMC PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0,v2.1 |
-| CSI Driver for Dell EMC PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0,v2.1 |
+| CSI Driver for Dell EMC PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0,v2.1, v2.2 |
+| CSI Driver for Dell EMC PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0,v2.1 ,v2.2|
+| CSI Driver for Dell EMC PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0,v2.1, v2.2 |
 {{</table>}}
 
 **NOTE:** If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver's controller pod.
@@ -67,7 +67,7 @@ CSM for Authorization consists of 2 components - the Authorization sidecar and t
 {{<table "table table-striped table-bordered table-sm">}}
 | Authorization Sidecar Image Tag | Authorization Proxy Server Version |
 | ------------------------------- | ---------------------------------- |
-| dellemc/csm-authorization-sidecar:v1.0.0 | v1.0.0, v1.1.0 |
+| dellemc/csm-authorization-sidecar:v1.2.0 | v1.0.0, v1.1.0, v1.2.0 |
 {{</table>}}
 ## Roles and Responsibilities
 
