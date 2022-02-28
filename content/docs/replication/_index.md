@@ -31,7 +31,7 @@ CSM for Replication provides the following capabilities:
 | COP/OS | PowerMax | PowerStore |
 |-|-|-|
 | Kubernetes    | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 |
-| Red Hat OpenShift | X | 4.8, 4.9 |
+| Red Hat OpenShift | 4.8, 4.9 | 4.8, 4.9 |
 | RHEL          |     7.x, 8.x      |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |     7.8, 7.9     |
 | Ubuntu        |       20.04      |       20.04      |
@@ -52,8 +52,8 @@ CSM for Replication supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
-| CSI Driver for Dell EMC PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0, v2.1 |
-| CSI Driver for Dell EMC PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0, v2.1 |
+| CSI Driver for Dell EMC PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0, v2.1, v2.2 |
+| CSI Driver for Dell EMC PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0, v2.1, v2.2 |
 {{</table>}}
 
 ## Details
