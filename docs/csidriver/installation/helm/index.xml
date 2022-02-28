@@ -1831,7 +1831,7 @@ But make sure to align to the same namespace during the whole installation.&lt;/
 &lt;li&gt;&lt;em&gt;username&lt;/em&gt;, &lt;em&gt;password&lt;/em&gt;: defines credentials for connecting to array.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;skipCertificateValidation&lt;/em&gt;: defines if we should use insecure connection or not.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;isDefault&lt;/em&gt;: defines if we should treat the current array as a default.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;blockProtocol&lt;/em&gt;: defines what SCSI transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;blockProtocol&lt;/em&gt;: defines what SCSI transport protocol we should use (FC, ISCSI, None, or auto).&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;nasName&lt;/em&gt;: defines what NAS should be used for NFS volumes.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Add more blocks similar to above for each PowerStore array if necessary.&lt;/p&gt;
