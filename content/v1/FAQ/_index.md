@@ -33,13 +33,13 @@ The umbrella repository for every Dell Container Storage Module is: [https://git
 ### Is the Container Storage Module XYZ available for my array?
 Please see module and the respectice CSI driver version available for each array:
 
-| CSM Module        | CSI PowerFlex v2.0 | CSI PowerScale v2.0 | CSI PowerStore v2.0 | CSI PowerMax v2.0 | CSI Unity XT v2.0    |
+| CSM Module        | CSI PowerFlex v2.2 | CSI PowerScale v2.2 | CSI PowerStore v2.2 | CSI PowerMax v2.2 | CSI Unity XT v2.2    |
 | ----------------- | -------------- | --------------- | --------------- | ------------- | --------------- |
-| Authorization v1.0| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
+| Authorization v1.2| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
 | Observability v1.0| ✔️              | ❌              | ✔️               | ❌            | ❌            |
-| Replication   v1.0| ❌             | ❌              | ✔️               | ✔️             | ❌            |
-| Resilency     v1.0| ✔️              | ❌              | ❌              | ❌            | ✔️             |
-| CSM Installer v1.0| ✔️              | ✔️               | ✔️               | ✔️             | ✔️             |
+| Replication   v1.2| ❌             | ✔️              | ✔️               | ✔️             | ❌            |
+| Resilency     v1.2| ✔️              | ❌              | ❌              | ❌            | ✔️             |
+| CSM Installer v1.0.1| ✔️              | ✔️               | ✔️               | ✔️             | ✔️             |
 
 ### What are the prerequisites for deploying Container Storage Modules?
 Prerequisites can be found on the respective module deployment pages:

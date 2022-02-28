@@ -50,7 +50,7 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerFlex    | Unity                      |
 | ------------- | :----------: | :------------------------: |
-| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0 |
+| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 |
 {{</table>}}
 
 ## Supported CSI Drivers
