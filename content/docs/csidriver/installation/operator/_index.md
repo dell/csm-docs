@@ -126,8 +126,7 @@ For installation of the supported drivers, a `CustomResource` has to be created 
 ### Pre-requisites for upstream Kubernetes Clusters
 On upstream Kubernetes clusters, make sure to install
 * VolumeSnapshot CRDs
-  * On clusters running v1.20,v1.21 & v1.22, make sure to install v1 VolumeSnapshot CRDs
-  * On clusters running v1.19, make sure to install v1beta1 VolumeSnapshot CRDs
+  * On clusters running v1.21,v1.22 & v1.23, make sure to install v1 VolumeSnapshot CRDs
 * External Volume Snapshot Controller with the correct version
 
 ### Pre-requisites for Red Hat OpenShift Clusters
@@ -251,8 +250,8 @@ Or
 
     {driver name}_{driver version}_ops_{OpenShift version}.yaml
 For e.g.
-* sample/powermax_v140_k8s_117.yaml* <- To install CSI PowerMax driver v1.4.0 on a Kubernetes 1.17 cluster  
-* sample/powermax_v140_ops_46.yaml* <- To install CSI PowerMax driver v1.4.0 on an OpenShift 4.6 cluster
+* samples/powermax_v220_k8s_123.yaml* <- To install CSI PowerMax driver v2.2.0 on a Kubernetes 1.23 cluster  
+* samples/powermax_v220_ops_49.yaml* <- To install CSI PowerMax driver v2.2.0 on an OpenShift 4.9 cluster
 
 Copy the correct sample file and edit the mandatory & any optional parameters specific to your driver installation by following the instructions [here](#modify-the-driver-specification)  
 >NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available [here](#custom-resource-specification). Please make sure to read through and understand the various fields.

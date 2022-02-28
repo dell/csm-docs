@@ -109,7 +109,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
 
@@ -334,13 +334,10 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
-*NOTE* 
-Support for v1beta1 snapshots is being discontinued in this release.
-
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerFlex v2.0 driver*:
+*Upgrading from CSI PowerFlex v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.1.
+It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.2.
