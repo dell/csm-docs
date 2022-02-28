@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/operator/powerstore/" />
-<meta property="article:modified_time" content="2022-02-25T11:43:29+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-02-28T11:52:02+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing CSI Driver for PowerStore via Operator
 ">
-<meta itemprop="dateModified" content="2022-02-25T11:43:29&#43;05:30" />
-<meta itemprop="wordCount" content="653">
+<meta itemprop="dateModified" content="2022-02-28T11:52:02&#43;05:30" />
+<meta itemprop="wordCount" content="652">
 
 
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e565a54de224bc8dd6234741f92177c9.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5b8db0da2ac55df490847699c947a82a.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e565a54de224bc8dd6234741f92177c9.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5b8db0da2ac55df490847699c947a82a.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1742,7 +1742,7 @@ Note: The deployment of the driver using the operator does not use any Helm char
 </span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                      </span><span style="color:#8f5902;font-style:italic"># password for connecting to API</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">           </span><span style="color:#8f5902;font-style:italic"># indicates if client side validation of (management)server&#39;s certificate can be skipped</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">isDefault</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">                           </span><span style="color:#8f5902;font-style:italic"># treat current array as a default (would be used by storage classes without arrayID parameter)</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">blockProtocol</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;auto&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                     </span><span style="color:#8f5902;font-style:italic"># what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">blockProtocol</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;auto&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                     </span><span style="color:#8f5902;font-style:italic"># what SCSI transport protocol use on node side (FC, ISCSI, None, or auto)</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">nasName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;nas-server&#34;</span><span style="color:#f8f8f8;text-decoration:underline">                     </span><span style="color:#8f5902;font-style:italic"># what NAS should be used for NFS volumes</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></code></pre></div><p>Change the parameters with relevant values for your PowerStore array.</p>
 <p>Add more blocks similar to above for each PowerStore array if necessary.</p>
