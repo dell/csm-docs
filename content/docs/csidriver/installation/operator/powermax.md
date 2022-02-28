@@ -313,15 +313,17 @@ To enable this feature, add the below block to the driver manifest before instal
         #   true: enable checking of health condition of CSI volumes
         #   false: disable checking of health condition of CSI volumes
         # Default value: false
-        - name: X_CSI_HEALTH_MONITOR_ENABLED
-          value: "false"
-    node:
-      envs:
-        # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+     controller:
+       envs:
+         - name: X_CSI_HEALTH_MONITOR_ENABLED
+           value: "true"
+     node:
+       envs:
+        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
         # Allowed values:
         #   true: enable checking of health condition of CSI volumes
         #   false: disable checking of health condition of CSI volumes
         # Default value: false
-        - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
-          value: "false"
+         - name: X_CSI_HEALTH_MONITOR_ENABLED
+           value: "true"
 ```

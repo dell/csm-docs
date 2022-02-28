@@ -193,7 +193,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
 | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
 | healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
-| healthMonitor.volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
+| healthMonitor.interval | Interval of monitoring volume health condition | No | 60s |
 | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
 | tolerations | Define tolerations for the controller deployment, if required | No | |
 | **node** | Allows configuration of the node-specific parameters.| - | - |
