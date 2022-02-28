@@ -30,7 +30,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
         password: "password"                      # password for connecting to API
         skipCertificateValidation: true           # indicates if client side validation of (management)server's certificate can be skipped
         isDefault: true                           # treat current array as a default (would be used by storage classes without arrayID parameter)
-        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
+        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, None, or auto)
         nasName: "nas-server"                     # what NAS should be used for NFS volumes
    ```
    Change the parameters with relevant values for your PowerStore array. 
