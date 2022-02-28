@@ -235,7 +235,7 @@ Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volu
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerScale v2.0 driver*:
+*Upgrading from CSI PowerScale v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:

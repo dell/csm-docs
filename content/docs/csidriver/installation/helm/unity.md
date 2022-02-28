@@ -334,11 +334,11 @@ For CSI Driver for Unity version 1.6 and later, `dell-csi-helm-installer` does n
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI Unity v2.0 driver*:
+*Upgrading from CSI Unity v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 or higher, before upgrading to 2.1.
+It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 or higher, before upgrading to 2.2.
 
 ## Storage Classes
 
