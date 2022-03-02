@@ -72,6 +72,20 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 *NOTE:*
 - It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
 
+### (Optional) Replication feature Requirements
+
+Applicable only if you decided to enable the Replication feature in `values.yaml`
+
+```yaml
+replication:
+  enabled: true
+```
+#### Replication CRD's
+
+The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
+
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
+
 ## Install the Driver
 
 **Steps**
