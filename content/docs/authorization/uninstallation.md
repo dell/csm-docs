@@ -3,7 +3,7 @@ title: Uninstallation
 linktitle: Uninstallation 
 weight: 2
 description: >
-  Dell EMC Container Storage Modules (CSM) for Authorization Uninstallation
+  Dell Container Storage Modules (CSM) for Authorization Uninstallation
 ---
 
 This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization. 

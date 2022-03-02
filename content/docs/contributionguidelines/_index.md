@@ -3,7 +3,7 @@ title: "Contribution Guidelines"
 linkTitle: "Contribution Guidelines"
 weight: 12
 Description: >
-  Dell EMC Container Storage Modules (CSM) docs Contribution Guidelines
+  Dell Container Storage Modules (CSM) docs Contribution Guidelines
 ---
 
 

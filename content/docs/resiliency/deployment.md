@@ -3,7 +3,7 @@ title: Deployment
 linktitle: Deployment 
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Resiliency installation
+  Dell Container Storage Modules (CSM) for Resiliency installation
 ---
 
 CSM for Resiliency is installed as part of the Dell CSI driver installation. The drivers can be installed either by a _helm chart_ or by the _Dell CSI Operator_. Currently, only _Helm chart_ installation is supported.
@@ -58,7 +58,7 @@ To install CSM for Resiliency with the driver, the following changes are require
 | leaderelection | Required | Boolean value that should be set true for controller and false for node. The default value is true. | controller & node |
 | skipArrayConnectionValidation | Optional | Boolean value that if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod. If set to true will cause controllerPodCleanup on K8S Control Plane failure (kubelet service down). | controller |
 | labelKey | Optional | String value that sets the label key used to denote pods to be monitored by CSM for Resiliency. It will make life easier if this key is the same for all driver types, and drivers are differentiated by different labelValues (see below). If the label keys are the same across all drivers you can do `kubectl get pods -A -l labelKey` to find all the CSM for Resiliency protected pods. labelKey defaults to "podmon.dellemc.com/driver". | controller & node |
-| labelValue | Required | String that sets the value that denotes pods to be monitored by CSM for Resiliency. This must be specific for each driver. Defaults to "csi-vxflexos" for CSI Driver for Dell EMC PowerFlex and "csi-unity" for CSI Driver for Dell EMC Unity | controller & node |
+| labelValue | Required | String that sets the value that denotes pods to be monitored by CSM for Resiliency. This must be specific for each driver. Defaults to "csi-vxflexos" for CSI Driver for Dell PowerFlex and "csi-unity" for CSI Driver for Dell Unity | controller & node |
 | arrayConnectivityPollRate | Optional | The minimum polling rate in seconds to determine if the array has connectivity to a node. Should not be set to less than 5 seconds. See the specific section for each array type for additional guidance. | controller |
 | arrayConnectivityConnectionLossThreshold | Optional | Gives the number of failed connection polls that will be deemed to indicate array connectivity loss. Should not be set to less than 3. See the specific section for each array type for additional guidance. | controller |
 | driver-config-params | Required | String that set the path to a file containing configuration parameter(for instance, Log levels) for a driver.  | controller & node |

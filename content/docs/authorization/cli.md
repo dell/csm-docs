@@ -3,7 +3,7 @@ title: CLI
 linktitle: CLI 
 weight: 4
 description: >
-  Dell EMC Container Storage Modules (CSM) for Authorization CLI
+  Dell Container Storage Modules (CSM) for Authorization CLI
 ---
 
 karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
@@ -47,7 +47,7 @@ karavictl is used to interact with CSM Authorization Server
 
 ##### Synopsis
 
-karavictl provides security, RBAC, and quota limits for accessing Dell EMC
+karavictl provides security, RBAC, and quota limits for accessing Dell
 storage products from Kubernetes clusters
 
 ##### Options

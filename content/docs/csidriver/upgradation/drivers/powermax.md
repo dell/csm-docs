@@ -8,7 +8,7 @@ weight: 1
 Description: Upgrade PowerMax CSI driver
 ---
 
-You can upgrade CSI Driver for Dell EMC PowerMax using Helm or Dell CSI Operator.
+You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.
 
 ## Update Driver from v2.1 to v2.2 using Helm
 

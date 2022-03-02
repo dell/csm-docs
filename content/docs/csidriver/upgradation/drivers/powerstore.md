@@ -7,7 +7,7 @@ weight: 1
 Description: Upgrade PowerStore CSI driver
 ---
 
-You can upgrade the CSI Driver for Dell EMC PowerStore using Helm or Dell CSI Operator.
+You can upgrade the CSI Driver for Dell PowerStore using Helm or Dell CSI Operator.
 
 ## Update Driver from v2.1 to v2.2 using Helm
 

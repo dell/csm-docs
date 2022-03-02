@@ -6,7 +6,7 @@ description: >
   DellCSIReplicationGroup Actions
 ---
 
-You can exercise native replication control operations from Dell EMC storage arrays by performing "Actions" on the replicated group of volumes using the DellCSIReplicationGroup object. 
+You can exercise native replication control operations from Dell storage arrays by performing "Actions" on the replicated group of volumes using the DellCSIReplicationGroup object. 
 
 You can patch the DellCSIReplicationGroup Custom Resource and set the action field in the spec to one of the allowed values (refer to tables in this document).
 

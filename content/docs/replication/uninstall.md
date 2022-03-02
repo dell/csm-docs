@@ -3,7 +3,7 @@ title: Uninstall
 linktitle: Uninstall 
 weight: 10
 description: >
-  Dell EMC Container Storage Modules (CSM) for Replication Uninstallation
+  Dell Container Storage Modules (CSM) for Replication Uninstallation
 ---
 
 This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication. 

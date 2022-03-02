@@ -45,7 +45,7 @@ Prerequisites can be found on the respective module deployment pages:
 - [Dell Container Storage Module for Resiliency Deployment](../resiliency/deployment/)
 - [Dell Container Storage Module for Replication Deployment](../replication/deployment/installation/#before-you-begin)
 
-Prerequisites for deploying the Dell EMC CSI drivers can be found here:
+Prerequisites for deploying the Dell CSI drivers can be found here:
 - [Dell CSI Drivers Deployment](../csidriver/installation/)
 
 ### How do I uninstall or disable a module?
@@ -61,7 +61,7 @@ Prerequisites for deploying the Dell EMC CSI drivers can be found here:
 - [Dell Container Storage Module for Resiliency](../resiliency/troubleshooting/)
 
 ### Can I use the CSM functionality like Prometheus collection or Authorization quotas for my non-Kubernetes storage clients?
-No, all the modules have been designed to work inside Kubernetes with Dell EMC CSI drivers.
+No, all the modules have been designed to work inside Kubernetes with Dell CSI drivers.
 
 ### Should I install the module in the same namespace as the driver or another?
 It is recommended to install CSM for Observability in a namespace separate from the Dell CSI drivers because it works across multiple drivers.  All other modules either run as standalone or with the Dell CSI driver as a sidecar.
@@ -73,7 +73,7 @@ The supported Kubernetes distributions for Container Storage Modules are documen
 - [Dell Container Storage Module for Replication](../replication/#supported-operating-systemscontainer-orchestrator-platforms)
 - [Dell Container Storage Module for Resiliency](../resiliency/#supported-operating-systemscontainer-orchestrator-platforms)
 
-The supported distros for the Dell EMC CSI Drivers are located [here](../csidriver/#supported-operating-systemscontainer-orchestrator-platforms).
+The supported distros for the Dell CSI Drivers are located [here](../csidriver/#supported-operating-systemscontainer-orchestrator-platforms).
 
 ### How do I get a list of Container Storage Modules deployed in my cluster with their versions?
 The easiest way to find the module version is to check the image tag for the module. For all the namespaces you can execute the following:

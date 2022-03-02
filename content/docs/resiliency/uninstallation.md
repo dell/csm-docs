@@ -3,7 +3,7 @@ title: Uninstallation
 linktitle: Uninstallation 
 weight: 2
 description: >
-  Dell EMC Container Storage Modules (CSM) for Resiliency Uninstallation
+  Dell Container Storage Modules (CSM) for Resiliency Uninstallation
 ---
 
 This section outlines the uninstallation steps for Container Storage Modules (CSM) for Resiliency. 

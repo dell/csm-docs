@@ -5,7 +5,7 @@ description: >
 ---
 ## Installing CSI Driver for PowerStore via Operator
 
-The CSI Driver for Dell EMC PowerStore can be installed via the Dell CSI Operator.
+The CSI Driver for Dell PowerStore can be installed via the Dell CSI Operator.
 
 To deploy the Operator, follow the instructions available [here](../).
 

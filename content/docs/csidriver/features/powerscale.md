@@ -426,7 +426,7 @@ For a cluster with multiple network interfaces and if a user wants to segregate 
 
 
 ## Volume Limit
-The CSI Driver for Dell EMC PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.
+The CSI Driver for Dell PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.
 
 The user can set the volume limit for a node by creating a node label `max-isilon-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-isilon-volumes-per-node=<volume_limit>`
@@ -443,7 +443,7 @@ Similarly, users can define the tolerations based on various conditions like mem
 
 ## Usage of SmartQuotas to Limit Storage Consumption
 
-CSI driver for Dell EMC Isilon handles capacity limiting using SmartQuotas feature.
+CSI driver for Dell Isilon handles capacity limiting using SmartQuotas feature.
 
 To use the SmartQuotas feature user can specify the boolean value 'enableQuota' in myvalues.yaml or my-isilon-settings.yaml.
 
@@ -496,7 +496,7 @@ kubectl edit configmap -n isilon isilon-config-params
 
 ## NAT Support
 
-CSI Driver for Dell EMC PowerScale is supported in the NAT environment.
+CSI Driver for Dell PowerScale is supported in the NAT environment.
 
 ## Configurable permissions for volume directory
 
@@ -533,7 +533,7 @@ Other ways of configuring powerscale volume permissions remain the same as helm-
 
 ## PV/PVC Metrics
 
-CSI Driver for Dell EMC PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes. 
+CSI Driver for Dell PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes. 
 For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.
 
 ### This feature can be enabled

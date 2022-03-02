@@ -3,7 +3,7 @@ title: Helm
 linktitle: Helm
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Helm deployment
+  Dell Container Storage Modules (CSM) for Observability Helm deployment
 ---
 
 The Container Storage Modules (CSM) for Observability Helm chart bootstraps an Observability deployment on a Kubernetes cluster using the Helm package manager.

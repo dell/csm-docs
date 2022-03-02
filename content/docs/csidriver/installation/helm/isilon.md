@@ -3,7 +3,7 @@ title: PowerScale
 description: >
   Installing CSI Driver for PowerScale via Helm
 ---
-The CSI Driver for Dell EMC PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
 - CSI Driver for PowerScale
@@ -18,7 +18,7 @@ The node section of the Helm chart installs the following component in a _Daemon
 
 ## Prerequisites
 
-The following are requirements to be met before installing the CSI Driver for Dell EMC PowerScale:
+The following are requirements to be met before installing the CSI Driver for Dell PowerScale:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
@@ -27,7 +27,7 @@ The following are requirements to be met before installing the CSI Driver for De
 
 ### Install Helm 3.0
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerScale.
+Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerScale.
 
 **Steps**
 
@@ -167,7 +167,7 @@ Create isilon-creds secret using the following command:
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
    - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../authorization) is enabled.
    
-7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell EMC PowerScale.
+7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell PowerScale.
     ```
     kubectl create -f empty-secret.yaml
     ```
@@ -199,7 +199,7 @@ If the 'skipCertificateValidation' parameter is set to false and a previous inst
 
 ### Dynamic update of array details via secret.yaml
 
-CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating *secret.yaml*. Users can now update the isilon-creds secret by editing the *secret.yaml* and executing the following command
+CSI Driver for Dell PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating *secret.yaml*. Users can now update the isilon-creds secret by editing the *secret.yaml* and executing the following command
 
 `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
 
@@ -209,7 +209,7 @@ CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now 
 
 ## Storage Classes
 
-The CSI driver for Dell EMC PowerScale version 1.5 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A sample storage class manifest is available at `samples/storageclass/isilon.yaml`. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.    
+The CSI driver for Dell PowerScale version 1.5 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A sample storage class manifest is available at `samples/storageclass/isilon.yaml`. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.    
 
 ### What happens to my existing storage classes?
 

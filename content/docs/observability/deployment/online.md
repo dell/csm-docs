@@ -3,7 +3,7 @@ title: Installer
 linktitle: Installer
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Installer
+  Dell Container Storage Modules (CSM) for Observability Installer
 ---
 
 <!--

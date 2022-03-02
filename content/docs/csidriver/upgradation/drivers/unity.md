@@ -7,7 +7,7 @@ weight: 1
 Description: Upgrade Unity CSI driver
 ---
 
-You can upgrade the CSI Driver for Dell EMC Unity using Helm or Dell CSI Operator.
+You can upgrade the CSI Driver for Dell Unity using Helm or Dell CSI Operator.
 
 **Note:**
 1. User has to re-create existing custom-storage classes (if any) according to the latest format.

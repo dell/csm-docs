@@ -604,14 +604,14 @@ kubectl edit configmap -n csi-powerstore powerstore-config-params
 
 ## NAT Support
 
-CSI Driver for Dell EMC Powerstore is supported in the NAT environment for NFS protocol.
+CSI Driver for Dell Powerstore is supported in the NAT environment for NFS protocol.
 
 The user will be able to install the driver and able to create pods.
 
 
 ## PV/PVC Metrics
 
-CSI Driver for Dell EMC Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.volumeHealthMonitorInterval parameter.
+CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.volumeHealthMonitorInterval parameter.
 
 
 ## Single Pod Access Mode for PersistentVolumes

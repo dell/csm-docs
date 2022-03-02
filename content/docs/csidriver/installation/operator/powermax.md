@@ -6,7 +6,7 @@ description: >
 
 ## Installing CSI Driver for PowerMax via Operator
 
-CSI Driver for Dell EMC PowerMax can be installed via the Dell CSI Operator.
+CSI Driver for Dell PowerMax can be installed via the Dell CSI Operator.
 
 To deploy the Operator, follow the instructions available [here](../).
 

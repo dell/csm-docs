@@ -5,22 +5,22 @@ description: >
   Installing the CSI Driver for PowerFlex via Helm
 ---
 
-The CSI Driver for Dell EMC PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
-- CSI Driver for Dell EMC PowerFlex
+- CSI Driver for Dell PowerFlex
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - Kubernetes External Snapshotter, which provides snapshot support
 - Kubernetes External Resizer, which resizes the volume
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
-- CSI Driver for Dell EMC PowerFlex
+- CSI Driver for Dell PowerFlex
 - Kubernetes Node Registrar, which handles the driver registration
 
 ## Prerequisites
 
-The following are requirements that must be met before installing the CSI Driver for Dell EMC PowerFlex:
+The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
 - Enable Zero Padding on PowerFlex
@@ -33,7 +33,7 @@ The following are requirements that must be met before installing the CSI Driver
 
 ### Install Helm 3.0
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerFlex.
+Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerFlex.
 
 **Steps**
 
@@ -41,7 +41,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell E
 
 ### Enable Zero Padding on PowerFlex
 
-Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see [Dell EMC PowerFlex documentation](https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html).
+Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see [Dell PowerFlex documentation](https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html).
 
 ### Install PowerFlex Storage Data Client
 
@@ -51,17 +51,17 @@ currently only Red Hat CoreOS (RHCOS).
 On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps [below](#manual-sdc-deployment).
 Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 
-**Optional:** For a typical install, you will pull SDC kernel modules from the Dell EMC FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The [PowerFlex KB article](https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for) has instructions on how to do this. 
+**Optional:** For a typical install, you will pull SDC kernel modules from the Dell FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The [PowerFlex KB article](https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for) has instructions on how to do this. 
 
 #### Manual SDC Deployment
 
-For detailed PowerFlex installation procedure, see the [Dell EMC PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC as follows:
+For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC as follows:
 
 **Steps**
 
-1. Download the PowerFlex SDC from [Dell EMC Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
+1. Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
 2. Export the shell variable _MDM_IP_ in a comma-separated list using `export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx`, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.
-3. Install the SDC per the _Dell EMC PowerFlex Deployment Guide_:
+3. Install the SDC per the _Dell PowerFlex Deployment Guide_:
     - For Red Hat Enterprise Linux and CentOS, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
 4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
@@ -256,7 +256,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 ## Certificate validation for PowerFlex Gateway REST API calls 
 
-This topic provides details about setting up the certificate for the CSI Driver for Dell EMC PowerFlex.
+This topic provides details about setting up the certificate for the CSI Driver for Dell PowerFlex.
 
 *Before you begin*
 

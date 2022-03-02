@@ -2,11 +2,11 @@
 ---
 title: "CSI Drivers"
 linkTitle: "CSI Drivers"
-description: About Dell EMC CSI Drivers 
+description: About Dell CSI Drivers 
 weight: 3
 ---
 
-The CSI Drivers by Dell EMC implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.5) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.
+The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.5) enabled Container Orchestrator (CO) and Dell Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.
 
 ![CSI Architecture](Architecture_Diagram.png)
 

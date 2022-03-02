@@ -3,7 +3,7 @@ title: Design
 linktitle: Design
 weight: 1
 description: >
-  Dell EMC Container Storage Modules (CSM) for Authorization design
+  Dell Container Storage Modules (CSM) for Authorization design
 ---
 
 Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.
@@ -56,7 +56,7 @@ The mechanism for managing this storage would utilize a CSI Driver.
 
 ### CSI Driver
 
-A CSI Driver supports the Container Service Interface (CSI) specification. Dell EMC provides customers with CSI Drivers for its various storage arrays.
+A CSI Driver supports the Container Service Interface (CSI) specification. Dell provides customers with CSI Drivers for its various storage arrays.
 CSM for Authorization intends to support a majority, if not all, of these drivers.
 
 A CSI Driver will typically be configured to communicate directly to its intended storage array and as such will be limited in using only the authentication
@@ -88,7 +88,7 @@ The [*karavictl*](../cli) CLI (Command Line Interface) application allows Storag
 
 ### Storage Array
 
-A Storage Array is typically considered to be one of the various Dell EMC storage offerings, e.g. Dell EMC PowerFlex which is supported by CSM for Authorization
+A Storage Array is typically considered to be one of the various Dell storage offerings, e.g. Dell PowerFlex which is supported by CSM for Authorization
 today.  Support for more Storage Arrays will come in the future.
 
 ## How it Works

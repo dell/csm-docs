@@ -1,7 +1,7 @@
 
 ---
-title: "Dell EMC Container Storage Modules (CSM)"
-linkTitle: "Dell EMC Container Storage Modules (CSM)"
+title: "Dell Container Storage Modules (CSM)"
+linkTitle: "Dell Container Storage Modules (CSM)"
 weight: 20
 menu:
   main:
@@ -16,7 +16,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 <img src="csm_diagram.jpg" alt="CSM Diagram" width="800"/>
 
-## CSM Supported Modules and Dell EMC CSI Drivers
+## CSM Supported Modules and Dell CSI Drivers
 
 | Modules/Drivers | CSM 1.2 | [CSM 1.1](../v1/) | [CSM 1.0.1](../v1/) | [CSM 1.0](../v2/) | 
 | - | :-: | :-: | :-: | :-: |

@@ -18,5 +18,5 @@ There are no fixed issues in this release.
 There are no known issues in this release.
 
 ### Support
-The Dell CSI Operator image is available on Dockerhub and is officially supported by Dell EMC.
+The Dell CSI Operator image is available on Dockerhub and is officially supported by Dell.
 For any CSI operator and driver issues, questions or feedback, please follow our [support process](../../../support/).

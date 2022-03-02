@@ -3,7 +3,7 @@ title: Uninstallation
 linktitle: Uninstallation
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Uninstallation
+  Dell Container Storage Modules (CSM) for Observability Uninstallation
 ---
 
 This section outlines the uninstallation steps for Container Storage Modules (CSM) for Observability.
