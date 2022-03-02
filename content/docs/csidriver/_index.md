@@ -39,13 +39,13 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Create VolumeSnapshot    | yes      | yes       | yes    | yes        | yes        |
 | Create Volume from Snapshot | yes   | yes       | yes    | yes        | yes        |
 | Delete Snapshot          | yes      | yes       | yes    | yes        | yes        |
-| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)| RWO/ROX<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) | RWO/RWX/ROX/<br>RWOP | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) |
+| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)| RWO/<br>RWOP(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP(Raw block) | RWO/ROX/RWOP<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) | RWO/RWX/ROX/<br>RWOP | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) |
 | CSI Volume Cloning       | yes      | yes       | yes    | yes        | yes        |
 | CSI Raw Block Volume     | yes      | yes       | yes    | no         | yes        |
 | CSI Ephemeral Volume     | no       | yes       | yes    | yes        | yes        |
 | Topology                 | yes      | yes       | yes    | yes        | yes        |
 | Multi-array              | yes      | yes       | yes    | yes        | yes        |
-| Volume Health Monitoring | no       | yes       | yes    | yes        | yes        |
+| Volume Health Monitoring | yes      | yes       | yes    | yes        | yes        |
 {{</table>}}
 ### Supported Storage Platforms
 {{<table "table table-striped table-bordered table-sm">}}
