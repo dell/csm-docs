@@ -6,7 +6,7 @@ tags:
 weight: 1
 Description: Upgrade PowerScale CSI driver
 ---
-You can upgrade the CSI Driver for Dell EMC PowerScale using Helm or Dell CSI Operator.
+You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSI Operator.
 
 ## Upgrade Driver from version 2.1.0 to 2.2.0 using Helm
 
@@ -14,8 +14,8 @@ You can upgrade the CSI Driver for Dell EMC PowerScale using Helm or Dell CSI Op
 
 **Steps**
 1. Clone the repository using `git clone -b v2.2.0 https://github.com/dell/csi-powerscale.git`, copy the helm/csi-isilon/values.yaml into a new location with a custom name say _my-isilon-settings.yaml_, to customize settings for installation. Edit _my-isilon-settings.yaml_ as per the requirements.
-2. Change to directory dell-csi-helm-installer to install the Dell EMC PowerScale `cd dell-csi-helm-installer`
-3. Upgrade the CSI Driver for Dell EMC PowerScale version 2.1.0 using following command:
+2. Change to directory dell-csi-helm-installer to install the Dell PowerScale `cd dell-csi-helm-installer`
+3. Upgrade the CSI Driver for Dell PowerScale version 2.1.0 using following command:
 
    `./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade`
 
@@ -25,7 +25,7 @@ You can upgrade the CSI Driver for Dell EMC PowerScale using Helm or Dell CSI Op
 1. While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
 2. Upgrading the Operator does not upgrade the CSI Driver.
 
-To upgrade the driver from version 2.1.0 to 2.2.0:
+To upgrade the driver:
 
 1. Please upgrade the Dell CSI Operator by following [here](./../operator).
 2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).

@@ -5,7 +5,7 @@ description: >
 ---
 ## Installing CSI Driver for PowerFlex via Operator
 
-The CSI Driver for Dell EMC PowerFlex can be installed via the Dell CSI Operator.
+The CSI Driver for Dell PowerFlex can be installed via the Dell CSI Operator.
 
 To deploy the Operator, follow the instructions available [here](../).
 
@@ -66,13 +66,13 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
 
 ### Manual SDC Deployment
 
-For detailed PowerFlex installation procedure, see the _Dell EMC PowerFlex Deployment Guide_. Install the PowerFlex SDC as follows:
+For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deployment Guide_. Install the PowerFlex SDC as follows:
 
 **Steps**
 
-1. Download the PowerFlex SDC from [Dell EMC Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
+1. Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
 2. Export the shell variable _MDM_IP_ in a comma-separated list using `export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx`, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.
-3. Install the SDC per the _Dell EMC PowerFlex Deployment Guide_:
+3. Install the SDC per the _Dell PowerFlex Deployment Guide_:
     - For Red Hat Enterprise Linux and CentOS, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
 4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 

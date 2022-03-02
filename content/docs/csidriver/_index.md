@@ -2,11 +2,11 @@
 ---
 title: "CSI Drivers"
 linkTitle: "CSI Drivers"
-description: About Dell EMC CSI Drivers 
+description: About Dell Technologies (Dell) CSI Drivers 
 weight: 3
 ---
 
-The CSI Drivers by Dell EMC implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.5) enabled Container Orchestrator (CO) and Dell EMC Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.
+The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.5) enabled Container Orchestrator (CO) and Dell Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.
 
 ![CSI Architecture](Architecture_Diagram.png)
 
@@ -39,7 +39,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 | Create VolumeSnapshot    | yes      | yes       | yes    | yes        | yes        |
 | Create Volume from Snapshot | yes   | yes       | yes    | yes        | yes        |
 | Delete Snapshot          | yes      | yes       | yes    | yes        | yes        |
-| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)| RWO/ROX<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) | RWO/RWX/ROX/RWOP | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) |
+| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)| RWO/ROX<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) | RWO/RWX/ROX/<br>RWOP | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) |
 | CSI Volume Cloning       | yes      | yes       | yes    | yes        | yes        |
 | CSI Raw Block Volume     | yes      | yes       | yes    | no         | yes        |
 | CSI Ephemeral Volume     | no       | yes       | yes    | yes        | yes        |
@@ -51,7 +51,7 @@ The CSI Drivers by Dell EMC implement an interface between [CSI](https://kuberne
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax                                                | PowerFlex        | Unity                      | PowerScale                         |    PowerStore    |
 |---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
-| Storage Array |5978.479.479, 5978.669.669, 5978.711.711<br>Unisphere 9.2|    3.5.x, 3.6.x  | 5.0.5, 5.0.6, 5.0.7, 5.1.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 1.0.x, 2.0.x     |
+| Storage Array |5978.479.479, 5978.711.711<br>Unisphere 9.2|    3.5.x, 3.6.x  | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 1.0.x, 2.0.x     |
 {{</table>}}
 ### Backend Storage Details
 {{<table "table table-striped table-bordered table-sm">}}

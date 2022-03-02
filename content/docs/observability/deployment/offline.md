@@ -3,7 +3,7 @@ title: Offline Installer
 linktitle: Offline Installer
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Offline Installer
+  Dell Container Storage Modules (CSM) for Observability Offline Installer
 ---
 
 The following instructions can be followed when a Helm chart will be installed in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.

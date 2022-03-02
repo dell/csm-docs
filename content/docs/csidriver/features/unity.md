@@ -443,7 +443,7 @@ For any additional information about the topology, see the [Kubernetes Topology 
 
 ## Support for SLES 15 SP2
 
-The CSI Driver for Dell EMC Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
+The CSI Driver for Dell Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
 
  - open-iscsi **open-iscsi is required in order to make use of iSCSI protocol for provisioning**
  - nfs-utils **nfs-utils is required in order to make use of NFS protocol for provisioning**
@@ -452,7 +452,7 @@ The CSI Driver for Dell EMC Unity requires the following set of packages install
   After installing open-iscsi, ensure "iscsi" and "iscsid" services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with the iSCSI protocol to work.
 
 ## Volume Limit
-The CSI Driver for Dell EMC Unity allows users to specify the maximum number of Unity volumes that can be used in a node.
+The CSI Driver for Dell Unity allows users to specify the maximum number of Unity volumes that can be used in a node.
 
 The user can set the volume limit for a node by creating a node label `max-unity-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-unity-volumes-per-node=<volume_limit>`
@@ -462,7 +462,7 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 >**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxUnityVolumesPerNode` is 0. <br><br>If `maxUnityVolumesPerNode` is set to zero, then CO SHALL decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxUnityVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-unity-volumes-per-node` is not set.
 
 ## NAT Support
-CSI Driver for Dell EMC Unity is supported in the NAT environment for NFS protocol.
+CSI Driver for Dell Unity is supported in the NAT environment for NFS protocol.
 
 The user will be able to install the driver and able to create pods.
 

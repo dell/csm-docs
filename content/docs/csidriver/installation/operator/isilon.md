@@ -6,7 +6,7 @@ description: >
 
 ## Installing CSI Driver for PowerScale via Operator
 
-The CSI Driver for Dell EMC PowerScale can be installed via the Dell CSI Operator.
+The CSI Driver for Dell PowerScale can be installed via the Dell CSI Operator.
 
 To deploy the Operator, follow the instructions available [here](../).
 

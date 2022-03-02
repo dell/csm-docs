@@ -8,6 +8,7 @@ description: Release notes for Unity CSI driver
 ### New Features/Changes
 
 - Added support for Kubernetes 1.23.
+- Added support for Standalone Helm Charts.
 
 ### Fixed Issues
 
@@ -22,4 +23,4 @@ description: Release notes for Unity CSI driver
 
 ### Note:
 
-- Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
+- Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

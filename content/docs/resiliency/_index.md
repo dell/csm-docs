@@ -3,10 +3,10 @@ title: "Resiliency"
 linkTitle: "Resiliency"
 weight: 6
 Description: >
-  Dell EMC Container Storage Modules (CSM) for Resiliency
+  Dell Container Storage Modules (CSM) for Resiliency
 ---
 
-[Container Storage Modules](https://github.com/dell/csm) (CSM) for Resiliency is part of the  open-source suite of Kubernetes storage enablers for Dell EMC products.
+[Container Storage Modules](https://github.com/dell/csm) (CSM) for Resiliency is part of the  open-source suite of Kubernetes storage enablers for Dell products.
 
 User applications can have problems if you want their Pods to be resilient to node failure. This is especially true of those deployed with StatefulSets that use PersistentVolumeClaims. Kubernetes guarantees that there will never be two copies of the same StatefulSet Pod running at the same time and accessing storage. Therefore, it does not clean up StatefulSet Pods if the node executing them fails.
  
@@ -50,7 +50,7 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerFlex    | Unity                      |
 | ------------- | :----------: | :------------------------: |
-| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0 |
+| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -59,8 +59,8 @@ CSM for Resiliency supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array                     | CSI Driver   | Supported Versions |
 | --------------------------------- | :----------: | :----------------: |
-| CSI Driver for Dell EMC PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0,v2.1 |
-| CSI Driver for Dell EMC Unity     | [csi-unity](https://github.com/dell/csi-unity)         | v2.0,v2.1 |
+| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0, v2.1, v2.2 |
+| CSI Driver for Dell Unity     | [csi-unity](https://github.com/dell/csi-unity)         | v2.0, v2.1, v2.2 |
 {{</table>}}
 
 ### PowerFlex Support
@@ -74,10 +74,10 @@ PowerFlex is a highly scalable array that is very well suited to Kubernetes depl
 
 ### Unity Support
 
-Dell EMC Unity is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity systems are designed for all-Flash, deliver the best value in the market, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition. 
+Dell Unity is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity systems are designed for all-Flash, deliver the best value in the market, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition. 
 
 * Unity (purpose-built): A modern midrange storage solution, engineered from the groundup to meet market demands for Flash, affordability and incredible simplicity. The Unity Family is available in 12 All Flash models and 12 Hybrid models.
-* VxBlock (converged): Unity storage options are also available in Dell EMC VxBlock System 1000.
+* VxBlock (converged): Unity storage options are also available in Dell VxBlock System 1000.
 * UnityVSA (virtual): The Unity Virtual Storage Appliance (VSA) allows the advanced unified storage and data management features of the Unity family to be easily deployed on VMware ESXi servers, for a ‘software defined’ approach. UnityVSA is available in two editions:
   * Community Edition is a free downloadable 4 TB solution recommended for nonproduction use.
   * Professional Edition is a licensed subscription-based offering available at capacity levels of 10 TB, 25 TB, and 50 TB. The subscription includes access to online support resources, EMC Secure Remote Services (ESRS), and on-call software- and systems-related support.
@@ -109,7 +109,7 @@ The following provisioning types are supported and have been tested:
 
 * ReadWriteMany volumes. This may have issues if a node has multiple pods accessing the same volumes. In any case once pod cleanup fences the volumes on a node, they will no longer be available to any pods using those volumes on that node. We will endeavor to support this in the future.
 
-* Multiple instances of the same driver type (for example two CSI driver for Dell EMC PowerFlex deployments.)
+* Multiple instances of the same driver type (for example two CSI driver for Dell PowerFlex deployments.)
 
 ## Deploying and Managing Applications Protected by CSM for Resiliency
 

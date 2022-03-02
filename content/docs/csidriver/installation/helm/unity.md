@@ -4,7 +4,7 @@ description: >
   Installing CSI Driver for Unity via Helm
 ---
 
-The CSI Driver for Dell EMC Unity can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell Unity can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_:
 
@@ -298,7 +298,7 @@ Procedure
 
 ## Certificate validation for Unisphere REST API calls 
 
-This topic provides details about setting up the certificate validation for the CSI Driver for Dell EMC Unity.
+This topic provides details about setting up the certificate validation for the CSI Driver for Dell Unity.
 
 *Before you begin*
 
@@ -336,11 +336,11 @@ For CSI Driver for Unity version 1.6 and later, `dell-csi-helm-installer` does n
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI Unity v2.0 driver*:
+*Upgrading from CSI Unity v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 or higher, before upgrading to 2.1.
+It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 or higher, before upgrading to 2.2.
 
 ## Storage Classes
 

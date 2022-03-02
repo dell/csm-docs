@@ -3,7 +3,7 @@ title: Deployment
 linktitle: Deployment 
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Deployment
+  Dell Container Storage Modules (CSM) for Observability Deployment
 ---
 
 CSM for Observability can be deployed in one of three ways:  
@@ -281,7 +281,7 @@ Once Grafana is properly configured, you can import the pre-built observability 
 | [PowerFlex: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/volume_io_metrics.json) | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume |
 | [PowerFlex: Storage Pool Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/storage_consumption.json) | Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct. |
 | [PowerStore: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/volume_io_metrics.json) | *As of Release 0.4.0:* Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume |
-| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json) | Provides visibility into Dell EMC CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json) | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
 
 ## Dynamic Configuration
 
@@ -398,7 +398,7 @@ In this case, all storage system requests made by CSM for Observability will be 
     ```
 
 #### Update Storage Systems
-If the list of storage systems managed by a Dell EMC CSI Driver have changed, the following steps can be performed to update CSM for Observability to reference the updated systems:
+If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update CSM for Observability to reference the updated systems:
 
 1. Delete the current `karavi-authorization-config` Secret from the CSM namespace.
     ```console
@@ -414,26 +414,26 @@ If the list of storage systems managed by a Dell EMC CSI Driver have changed, th
 
 In this case all storage system requests made by CSM for Observability will not be routed through the Authorization module. The following must be performed:
 
-#### CSI Driver for Dell EMC PowerFlex
+#### CSI Driver for Dell PowerFlex
 
 1. Delete the current `vxflexos-config` Secret from the CSM namespace.
     ```console
     $ kubectl delete secret vxflexos-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `vxflexos-config` Secret from the CSI Driver for Dell EMC PowerFlex namespace to the CSM namespace.
+2. Copy the `vxflexos-config` Secret from the CSI Driver for Dell PowerFlex namespace to the CSM namespace.
     ```console
     $ kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-### CSI Driver for Dell EMC PowerStore
+### CSI Driver for Dell PowerStore
 
 1. Delete the current `powerstore-config` Secret from the CSM namespace.
     ```console
     $ kubectl delete secret powerstore-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `powerstore-config` Secret from the CSI Driver for Dell EMC PowerStore namespace to the CSM namespace.
+2. Copy the `powerstore-config` Secret from the CSI Driver for Dell PowerStore namespace to the CSM namespace.
     ```console
     $ kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```

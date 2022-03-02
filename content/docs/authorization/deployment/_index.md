@@ -3,12 +3,12 @@ title: Deployment
 linktitle: Deployment 
 weight: 2
 description: >
-  Dell EMC Container Storage Modules (CSM) for Authorization deployment
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization deployment
 ---
 
 This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:
 - Deploying the CSM for Authorization proxy server, to be controlled by storage administrators
-- Configuring one to many [supported](../../authorization#supported-csi-drivers) Dell EMC CSI drivers with CSM for Authorization
+- Configuring one to many [supported](../../authorization#supported-csi-drivers) Dell CSI drivers with CSM for Authorization
 
 ## Prerequisites
 
@@ -188,7 +188,7 @@ After creating the role bindings, the next logical step is to generate the acces
 
 ### Copy the karavictl Binary to the Kubernetes Master Node
 
-The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell EMC CSI driver with CSM for Authorization.
+The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell CSI driver with CSM for Authorization.
 
 ```
 sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
@@ -196,11 +196,11 @@ sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
 
 >__Note__: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.
 
-## Configuring a Dell EMC CSI Driver with CSM for Authorization
+## Configuring a Dell CSI Driver with CSM for Authorization
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
-### Configuring a Dell EMC CSI Driver
+### Configuring a Dell CSI Driver
 
 Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:
 

@@ -6,7 +6,7 @@ description: >
   Installation of CSI drivers using Dell CSI Operator
 ---
 
-The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
+The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
 
 ## Prerequisites
 
@@ -126,8 +126,7 @@ For installation of the supported drivers, a `CustomResource` has to be created 
 ### Pre-requisites for upstream Kubernetes Clusters
 On upstream Kubernetes clusters, make sure to install
 * VolumeSnapshot CRDs
-  * On clusters running v1.20,v1.21 & v1.22, make sure to install v1 VolumeSnapshot CRDs
-  * On clusters running v1.19, make sure to install v1beta1 VolumeSnapshot CRDs
+  * On clusters running v1.21,v1.22 & v1.23, make sure to install v1 VolumeSnapshot CRDs
 * External Volume Snapshot Controller with the correct version
 
 ### Pre-requisites for Red Hat OpenShift Clusters
@@ -251,8 +250,8 @@ Or
 
     {driver name}_{driver version}_ops_{OpenShift version}.yaml
 For e.g.
-* sample/powermax_v140_k8s_117.yaml* <- To install CSI PowerMax driver v1.4.0 on a Kubernetes 1.17 cluster  
-* sample/powermax_v140_ops_46.yaml* <- To install CSI PowerMax driver v1.4.0 on an OpenShift 4.6 cluster
+* samples/powermax_v220_k8s_123.yaml* <- To install CSI PowerMax driver v2.2.0 on a Kubernetes 1.23 cluster  
+* samples/powermax_v220_ops_49.yaml* <- To install CSI PowerMax driver v2.2.0 on an OpenShift 4.9 cluster
 
 Copy the correct sample file and edit the mandatory & any optional parameters specific to your driver installation by following the instructions [here](#modify-the-driver-specification)  
 >NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available [here](#custom-resource-specification). Please make sure to read through and understand the various fields.
@@ -443,7 +442,7 @@ Note - The `image` field should point to the correct image tag for version of th
 For e.g. - If you wish to install v1.4 of the CSI PowerMax driver, use the image tag `dellemc/csi-powermax:v1.4.0.000R`
 
 ### SideCars
-Although the sidecars field in the driver specification is optional, it is **strongly** recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell EMC support.
+Although the sidecars field in the driver specification is optional, it is **strongly** recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell support.
 
 ### Modify the driver specification
 * Choose the correct configVersion. Refer the table containing the full list of supported drivers and versions.

@@ -6,9 +6,9 @@ description: Tests to validate PowerMax CSI Driver installation
 
 This section provides multiple methods to test driver functionality in your environment. The tests are validated using bash as the default shell.
 
-**Note**: To run the test for CSI Driver for Dell EMC PowerMax, install Helm 3.
+**Note**: To run the test for CSI Driver for Dell PowerMax, install Helm 3.
 
-The _csi-powermax_ repository includes examples of how you can use CSI Driver for Dell EMC PowerMax. The shell scripts are used to automate the installation and uninstallation of helm charts for the creation of Pods with a different number of volumes in a given namespace using the storageclass provided. To test the installation of the CSI driver, perform these tests:
+The _csi-powermax_ repository includes examples of how you can use CSI Driver for Dell PowerMax. The shell scripts are used to automate the installation and uninstallation of helm charts for the creation of Pods with a different number of volumes in a given namespace using the storageclass provided. To test the installation of the CSI driver, perform these tests:
 - Volume clone test
 - Volume test
 - Snapshot test

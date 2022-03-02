@@ -3,7 +3,7 @@ title: Upgrade
 linktitle: Upgrade 
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Upgrade
+  Dell Container Storage Modules (CSM) for Observability Upgrade
 ---
 
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Observability. CSM for Observability upgrade can be achieved in one of two ways:
