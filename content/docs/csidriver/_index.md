@@ -2,7 +2,7 @@
 ---
 title: "CSI Drivers"
 linkTitle: "CSI Drivers"
-description: About Dell CSI Drivers 
+description: About Dell Technologies (Dell) CSI Drivers 
 weight: 3
 ---
 

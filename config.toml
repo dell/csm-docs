@@ -57,7 +57,7 @@ anchor = "smart"
 [languages]
 [languages.en]
 title = "Dell Technologies"
-description = "Dell Container Storage Modules documentation pages"
+description = "Dell Technologies (Dell) Container Storage Modules documentation pages"
 languageName ="English"
 
 [markup]

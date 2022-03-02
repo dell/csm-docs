@@ -3,7 +3,7 @@ title: Upgrade
 linktitle: Upgrade 
 weight: 3
 description: >
-  Upgrade Dell Container Storage Modules (CSM) for Authorization
+  Upgrade Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization
 ---
 
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:

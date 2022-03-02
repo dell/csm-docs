@@ -3,7 +3,7 @@ title: "Authorization"
 linkTitle: "Authorization"
 weight: 4
 Description: >
-  Dell Container Storage Modules (CSM) for Authorization
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization
 ---
 
 [Container Storage Modules](https://github.com/dell/csm) (CSM) for Authorization is part of the  open-source suite of Kubernetes storage enablers for Dell products. 

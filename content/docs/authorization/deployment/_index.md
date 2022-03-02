@@ -3,7 +3,7 @@ title: Deployment
 linktitle: Deployment 
 weight: 2
 description: >
-  Dell Container Storage Modules (CSM) for Authorization deployment
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization deployment
 ---
 
 This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:

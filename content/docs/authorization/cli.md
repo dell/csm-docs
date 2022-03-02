@@ -3,7 +3,7 @@ title: CLI
 linktitle: CLI 
 weight: 4
 description: >
-  Dell Container Storage Modules (CSM) for Authorization CLI
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
 ---
 
 karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
