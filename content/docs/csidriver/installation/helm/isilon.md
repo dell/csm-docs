@@ -24,6 +24,7 @@ The following are requirements to be met before installing the CSI Driver for De
 - Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
+- If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../replication/deployment/) first
 
 ### Install Helm 3.0
 
@@ -118,6 +119,9 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | healthMonitor.interval | Interval of monitoring volume health condition | Yes | 60s |
    | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
    | tolerations | Define tolerations for the controller deployment, if required | No | |
+   | leader-election-lease-duration | Time duration for one of the controller pods to be a leader | No | 20s |
+   | leader-election-renew-deadline   | Time duration for the selection of leader to expire  | No | 15s |
+   | leader-election-retry-period   | Time duration post which an attempt is made to become leader  | No | 5s |
    | ***node*** | Configure node pod specific parameters | | |
    | nodeSelector | Define node selection constraints for pods of node daemonset | No | |
    | tolerations | Define tolerations for the node daemonset, if required | No | |
@@ -227,7 +231,7 @@ The CSI driver for Dell PowerScale version 1.5 and later, `dell-csi-helm-install
 
 ### What happens to my existing storage classes?
 
-*Upgrading from CSI PowerScale v2.1 driver*
+*Upgrading from CSI PowerScale v2.1 driver*:
 The storage classes created as part of the installation have an annotation - "helm.sh/resource-policy": keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.
 
 *NOTE*:
