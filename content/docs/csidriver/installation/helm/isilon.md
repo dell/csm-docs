@@ -119,9 +119,9 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | healthMonitor.interval | Interval of monitoring volume health condition | Yes | 60s |
    | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
    | tolerations | Define tolerations for the controller deployment, if required | No | |
-   | leader-election-lease-duration | Time duration for one of the controller pods to be a leader | No | 20s |
-   | leader-election-renew-deadline   | Time duration for the selection of leader to expire  | No | 15s |
-   | leader-election-retry-period   | Time duration post which an attempt is made to become leader  | No | 5s |
+   | leader-election-lease-duration | Duration, that non-leader candidates will wait to force acquire leadership | No | 20s |
+   | leader-election-renew-deadline   | Duration, that the acting leader will retry refreshing leadership before giving up  | No | 15s |
+   | leader-election-retry-period   | Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |
    | ***node*** | Configure node pod specific parameters | | |
    | nodeSelector | Define node selection constraints for pods of node daemonset | No | |
    | tolerations | Define tolerations for the node daemonset, if required | No | |

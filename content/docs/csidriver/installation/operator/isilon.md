@@ -134,9 +134,9 @@ User can query for CSI-PowerScale driver using the following command:
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
    | ***Side car parameters*** |
-   | leader-election-lease-duration | Time duration for one of the controller pods to be a leader | No | 20s |
-   | leader-election-renew-deadline   | Time duration for the selection of leader to expire  | No | 15s |
-   | leader-election-retry-period   | Time duration post which an attempt is made to become leaders  | No | 5s |   
+   | leader-election-lease-duration | Duration, that non-leader candidates will wait to force acquire leadership | No | 20s |
+   | leader-election-renew-deadline   | Duration, that the acting leader will retry refreshing leadership before giving up  | No | 15s |
+   | leader-election-retry-period   | Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |   
 
 6.  Execute the following command to create PowerScale custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
