@@ -1,5 +1,5 @@
 ---
-title: "Dell CSI Operator Installation Process"
+title: "CSI Driver installation using Dell CSI Operator"
 linkTitle: "Using Operator"
 weight: 4
 description: >

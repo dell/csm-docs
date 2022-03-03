@@ -340,6 +340,7 @@ To create `NFS` volume you need to provide `nasName:` parameters that point to t
       volumeAttributes:
         size: "20Gi"
         nasName: "csi-nas-name"
+		nfsAcls: "0777"
 ```
 
 ## Controller HA
@@ -413,7 +414,7 @@ allowedTopologies:
           - "true"
 ```
 
-This example matches all nodes where the driver has a connection to PowerStore with an IP of `127.0.0.1` via FibreChannel. Similar examples can be found in mentioned folder for NFS and iSCSI.
+This example matches all nodes where the driver has a connection to PowerStore with an IP of `127.0.0.1` via FibreChannel. Similar examples can be found in mentioned folder for NFS, iSCSI and NVMe.
 
 You can check what labels your nodes contain by running `kubectl get nodes --show-labels`
 
@@ -424,7 +425,7 @@ For any additional information about the topology, see the [Kubernetes Topology 
 
 ## Reuse PowerStore hostname 
 
-The CSI PowerStore driver version 1.2 and later can automatically detect if the current node was already registered as a Host on the storage array before. It will check if Host initiators and node initiators (FC or iSCSI) match. If they do, the driver will not create a new host and will take the existing name of the Host as nodeID.
+The CSI PowerStore driver version 1.2 and later can automatically detect if the current node was already registered as a Host on the storage array before. It will check if Host initiators and node initiators (FC, iSCSI or NVMe) match. If they do, the driver will not create a new host and will take the existing name of the Host as nodeID.
 
 ## Multiarray support 
 
@@ -444,8 +445,10 @@ Create a file called `config.yaml` and populate it with the following content
         password: "password"                      # password for connecting to API
         skipCertificateValidation: true                            # use insecure connection or not
         default: true                             # treat current array as a default (would be used by storage classes without arrayIP parameter)
-        blockProtocol: "ISCSI"                    # what SCSI transport protocol use on node side (FC, ISCSI, None, or auto)
-        nasName: "nas-server"                    # what NAS must be used for NFS volumes
+        blockProtocol: "ISCSI"                    # what transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
+        nasName: "nas-server"                     # what NAS must be used for NFS volumes
+		nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
+	                                              # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
       - endpoint: "https://10.0.0.2/api/rest"
         globalID: "unique" 
         username: "user"                          
@@ -639,7 +642,7 @@ spec:
 
 >Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.
 
-## POSIX and NFSv4 ACLs
+## POSIX mode bits and NFSv4 ACLs
 
 CSI PowerStore driver version 2.2.0 and later allows users to set user-defined permissions on NFS target mount directory using POSIX mode bits or NFSv4 ACLs.
 
@@ -662,9 +665,12 @@ nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@doma
 ```
 
 >Note: If no values are specified, default value of "0777" will be set.
+>POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
 
 
 ## NVMe/TCP Support
 
 CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as `NVMeTCP`. 
 In case blockProtocol is specified as `auto`, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then FC gets the highest priority followed by iSCSI and then NVMeTCP.
+
+>Note: NVMe/TCP is not supported on RHEL 7.x versions. 
