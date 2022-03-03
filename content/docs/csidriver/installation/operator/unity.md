@@ -111,7 +111,6 @@ spec:
       # Also set the env variable controller.envs.X_CSI_ENABLE_VOL_HEALTH_MONITOR  to "true".
       # - name: external-health-monitor
       #   args: ["--monitor-interval=60s"]  
-        
 
     controller:
        envs:
