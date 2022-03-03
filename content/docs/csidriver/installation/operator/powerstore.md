@@ -32,8 +32,8 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
         isDefault: true                           # treat current array as a default (would be used by storage classes without arrayID parameter)
         blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
         nasName: "nas-server"                     # what NAS should be used for NFS volumes
-		nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
-	                                              # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
+        nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
+                                                  # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
    ```
    Change the parameters with relevant values for your PowerStore array. 
 

@@ -340,7 +340,7 @@ To create `NFS` volume you need to provide `nasName:` parameters that point to t
       volumeAttributes:
         size: "20Gi"
         nasName: "csi-nas-name"
-		nfsAcls: "0777"
+        nfsAcls: "0777"
 ```
 
 ## Controller HA
@@ -447,8 +447,8 @@ Create a file called `config.yaml` and populate it with the following content
         default: true                             # treat current array as a default (would be used by storage classes without arrayIP parameter)
         blockProtocol: "ISCSI"                    # what transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
         nasName: "nas-server"                     # what NAS must be used for NFS volumes
-		nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
-	                                              # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
+        nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
+                                                  # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
       - endpoint: "https://10.0.0.2/api/rest"
         globalID: "unique" 
         username: "user"                          
