@@ -95,18 +95,82 @@ metadata:
   namespace: test-unity
 spec:
   driver:
-    configVersion: v2.0.0
+    configVersion: v2.2.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      image: "dellemc/csi-unity:v2.0.0"
+      image: "dellemc/csi-unity:v2.2.0"
       imagePullPolicy: IfNotPresent
     sideCars:
       - name: provisioner
         args: ["--volume-name-prefix=csiunity","--default-fstype=ext4"]
       - name: snapshotter
         args: ["--snapshot-name-prefix=csiunitysnap"]
+      # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
+      # Also set the env variable controller.envs.X_CSI_ENABLE_VOL_HEALTH_MONITOR  to "true".
+      # - name: external-health-monitor
+      #   args: ["--monitor-interval=60s"]  
+        
+
+    controller:
+       envs:
+          # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition.
+          # Install the 'external-health-monitor' sidecar accordingly.
+          # Allowed values:
+          #   true: enable checking of health condition of CSI volumes
+          #   false: disable checking of health condition of CSI volumes
+          # Default value: false
+          - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+            value: "false"
+
+       # nodeSelector: Define node selection constraints for controller pods.
+       # For the pod to be eligible to run on a node, the node must have each
+       # of the indicated key-value pairs as labels.
+       # Leave as blank to consider all nodes
+       # Allowed values: map of key-value pairs
+       # Default value: None
+       # Examples:
+       #   node-role.kubernetes.io/master: ""
+       nodeSelector:
+       #   node-role.kubernetes.io/master: ""
+
+       # tolerations: Define tolerations for the controllers, if required.
+       # Leave as blank to install controller on worker nodes
+       # Default value: None
+       tolerations:
+       #  - key: "node-role.kubernetes.io/master"
+       #    operator: "Exists"
+       #    effect: "NoSchedule"
+
+    node:
+       envs:
+          # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+          # Allowed values:
+          #   true: enable checking of health condition of CSI volumes
+          #   false: disable checking of health condition of CSI volumes
+          # Default value: false
+          - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+            value: "false"
+       # nodeSelector: Define node selection constraints for node pods.
+       # For the pod to be eligible to run on a node, the node must have each
+       # of the indicated key-value pairs as labels.
+       # Leave as blank to consider all nodes
+       # Allowed values: map of key-value pairs
+       # Default value: None
+       # Examples:
+       #   node-role.kubernetes.io/master: ""
+       nodeSelector:
+       #   node-role.kubernetes.io/master: ""
+
+       # tolerations: Define tolerations for the controllers, if required.
+       # Leave as blank to install controller on worker nodes
+       # Default value: None
+       tolerations:
+       #  - key: "node-role.kubernetes.io/master"
+       #    operator: "Exists"
+       #    effect: "NoSchedule"
+
 ---
 apiVersion: v1
 kind: ConfigMap
