@@ -414,6 +414,9 @@ It should be set separately in the controller and node sections if you want sepa
 **nodeSelector**
 Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet  
 
+**fsGroupPolicy**
+Defines which FS Group policy mode to be used, Supported modes: None, File and ReadWriteOnceWithFSType 
+
 Here is a sample specification annotated with comments to explain each field
 ```yaml
 apiVersion: storage.dell.com/v1
