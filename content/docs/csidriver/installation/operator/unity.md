@@ -41,7 +41,7 @@ Ex: secret.yaml
   
 ```
 
-`kubectl create secret generic unity-creds -n unity --from-file=config=secret.secret`
+`kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
 
 Use the following command to replace or update the secret
 
