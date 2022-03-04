@@ -83,7 +83,6 @@ Procedure
     | healthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
     | healthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
     | ***node*** | Allows configuration of the node-specific parameters.| - | - |
-    | tolerations | Define tolerations for the node daemonset, if required | No | |
     | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
     | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
