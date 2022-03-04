@@ -147,6 +147,11 @@ To enable this feature, add the below block to the driver manifest before instal
 health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
 volume stats value under node should be set to true.
    ```yaml
+ sideCars:
+   # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
+   # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED to "true".
+   - name: external-health-monitor
+     args: ["--monitor-interval=60s"]
  controller:
    envs:
 	 # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from Controller plugin- volume status, volume condition.

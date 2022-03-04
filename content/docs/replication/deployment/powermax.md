@@ -230,7 +230,7 @@ added your clusters to repctl via the `add` command before.
 To create storage classes just run `./repctl create sc --from-config <config-file>` and storage classes
 would be applied to both clusters.
 
-After creating storage classes you can make sure they are in place by using `./repctl list storageclasses` command.
+After creating storage classes you can make sure they are in place by using `./repctl get storageclasses` command.
 
 ### Provisioning Replicated Volumes
 
