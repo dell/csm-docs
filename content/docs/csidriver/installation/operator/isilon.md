@@ -130,9 +130,11 @@ User can query for CSI-PowerScale driver using the following command:
    | X_CSI_ISI_ACCESS_ZONE | Name of the access zone a volume can be created in | No | System |
    | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | | 
    | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
+   | X_CSI_HEALTH_MONITOR_ENABLED | Install the 'external-health-monitor' sidecar | No | false |
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
+   | X_CSI_HEALTH_MONITOR_ENABLED | Install the 'external-health-monitor' sidecar | No | false |
    | ***Side car parameters*** |
    | leader-election-lease-duration | Duration, that non-leader candidates will wait to force acquire leadership | No | 20s |
    | leader-election-renew-deadline   | Duration, that the acting leader will retry refreshing leadership before giving up  | No | 15s |
@@ -149,11 +151,12 @@ User can query for CSI-PowerScale driver using the following command:
    4. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
 
 ## Volume Health Monitoring
-Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+This feature is introduced in CSI Driver for unity version 2.1.0.
 
-To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
-health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
-volume stats value under node should be set to true.
+### Operator based installation
+
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external health monitor sidecar. To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
 
    ```yaml
     # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.

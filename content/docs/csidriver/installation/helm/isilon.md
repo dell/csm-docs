@@ -59,6 +59,36 @@ The common snapshot controller must be installed only once in the cluster irresp
    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
+## Volume Health Monitoring
+
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.
+   ```yaml
+controller:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+    # healthMonitorInterval: Interval of monitoring volume health condition
+    # Allowed values: Number followed by unit (s,m,h)
+    # Examples: 60s, 5m, 1h
+    # Default value: 60s
+    interval: 60s
+node:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+   ```
+
 #### Installation example 
 
 You can install CRDs and the default snapshot controller by running the following commands:
