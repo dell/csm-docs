@@ -124,13 +124,20 @@ User can query for CSI-PowerScale driver using the following command:
    | X_CSI_ISI_AUTOPROBE | To enable auto probing for driver | No | true |
    | X_CSI_ISI_NO_PROBE_ON_START | Indicates whether the controller/node should probe during initialization | Yes | |
    | X_CSI_ISI_VOLUME_PATH_PERMISSIONS | The permissions for isi volume directory path | Yes | 0777 |
+   | X_CSI_ISI_AUTH_TYPE | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication | No | 0 |
    | ***Controller parameters*** |
    | X_CSI_MODE   | Driver starting mode  | No | controller |
    | X_CSI_ISI_ACCESS_ZONE | Name of the access zone a volume can be created in | No | System |
-   | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | |
+   | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | | 
+   | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
-   | X_CSI_MODE   | Driver starting mode  | No | node |   
+   | X_CSI_MODE   | Driver starting mode  | No | node |
+   | ***Side car parameters*** |
+   | leader-election-lease-duration | Duration, that non-leader candidates will wait to force acquire leadership | No | 20s |
+   | leader-election-renew-deadline   | Duration, that the acting leader will retry refreshing leadership before giving up  | No | 15s |
+   | leader-election-retry-period   | Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |   
+
 6.  Execute the following command to create PowerScale custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
@@ -140,3 +147,36 @@ User can query for CSI-PowerScale driver using the following command:
    2. Node selector and node tolerations can be added in both controller parameters and node parameters section, based on the need.
    3. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    4. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+
+## Volume Health Monitoring
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.
+
+   ```yaml
+    # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
+      # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED  to "true".
+      # - name: external-health-monitor
+      #   args: ["--monitor-interval=60s"]
+      
+    # Install the 'external-health-monitor' sidecar accordingly.
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: false
+     controller:
+   envs:
+     - name: X_CSI_HEALTH_MONITOR_ENABLED
+       value: "true"
+ node:
+   envs:
+    # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: false
+     - name: X_CSI_HEALTH_MONITOR_ENABLED
+       value: "true"
+   ```
