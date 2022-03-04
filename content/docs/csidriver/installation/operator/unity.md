@@ -108,7 +108,7 @@ spec:
       - name: snapshotter
         args: ["--snapshot-name-prefix=csiunitysnap"]
       # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
-      # Also set the env variable controller.envs.X_CSI_ENABLE_VOL_HEALTH_MONITOR  to "true".
+      # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED  to "true".
       # - name: external-health-monitor
       #   args: ["--monitor-interval=60s"]  
 
@@ -120,7 +120,7 @@ spec:
           #   true: enable checking of health condition of CSI volumes
           #   false: disable checking of health condition of CSI volumes
           # Default value: false
-          - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+          - name: X_CSI_HEALTH_MONITOR_ENABLED
             value: "false"
 
        # nodeSelector: Define node selection constraints for controller pods.
@@ -144,12 +144,12 @@ spec:
 
     node:
        envs:
-          # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+          # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
           # Allowed values:
           #   true: enable checking of health condition of CSI volumes
           #   false: disable checking of health condition of CSI volumes
           # Default value: false
-          - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+          - name: X_CSI_HEALTH_MONITOR_ENABLED
             value: "false"
        # nodeSelector: Define node selection constraints for node pods.
        # For the pod to be eligible to run on a node, the node must have each
@@ -228,11 +228,11 @@ To enable this feature, add the below block to the driver manifest before instal
 
     node:
       envs:
-        # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
         # Allowed values:
         #   true: enable checking of health condition of CSI volumes
         #   false: disable checking of health condition of CSI volumes
         # Default value: false
-        - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
           value: "false"
 ```

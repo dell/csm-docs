@@ -66,7 +66,7 @@ Procedure
     | logLevel | LogLevel is used to set the logging level of the driver | true | info |
     | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | false | false |
     | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-	  | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
+    | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
     | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | false | 0 |
     | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
@@ -80,13 +80,14 @@ Procedure
     | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
     | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
     | tolerations | Define tolerations for the controller deployment, if required | No | |
-    | volumeHealthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
-    | volumeHealthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
+    | healthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
+    | healthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
     | ***node*** | Allows configuration of the node-specific parameters.| - | - |
-    | tolerations | Define tolerations for the node daemonset, if required | No | |
     | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-    | volumeHealthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
+    | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
+    | nodeSelector | Define node selection constraints for pods of node deployment | No | |
+    | tolerations | Define tolerations for the node deployment, if required | No | |
 
 
     **Note**: 
