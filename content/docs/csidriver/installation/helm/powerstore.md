@@ -71,7 +71,7 @@ If you want to use the protocol, set up the NVMe/TCP initiators as follows:
 - Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
 ```bash
 modprobe nvme
-modprobe nvme-tcp
+modprobe nvme_tcp
 ```
 
 ### Linux multipathing requirements
