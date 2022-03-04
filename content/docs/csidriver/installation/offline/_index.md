@@ -63,13 +63,13 @@ The resulting offline bundle file can be copied to another machine, if necessary
 
 For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:
 ```
-[user@anothersystem /home/user]# git clone https://github.com/dell/dell-csi-operator.git
+git clone https://github.com/dell/dell-csi-operator.git
 ```
 ```
-[user@anothersystem /home/user]# cd dell-csi-operator
+cd dell-csi-operator
 ```
 ```
-[user@system /home/user/dell-csi-operator]# scripts/csi-offline-bundle.sh -c
+scripts/csi-offline-bundle.sh -c
 *
 * Building image manifest file
 
@@ -161,7 +161,7 @@ The script will then perform the following steps:
 
 An example of preparing the bundle for installation (192.168.75.40:5000 refers to an image registry accessible to Kubernetes/OpenShift):
 ```
-[user@anothersystem /tmp]# tar xvfz dell-csi-operator-bundle.tar.gz
+tar xvfz dell-csi-operator-bundle.tar.gz
 dell-csi-operator-bundle/
 dell-csi-operator-bundle/samples/
 ...
@@ -171,10 +171,10 @@ dell-csi-operator-bundle/LICENSE
 dell-csi-operator-bundle/README.md
 ```
 ```
-[user@anothersystem /tmp]# cd dell-csi-operator-bundle
+cd dell-csi-operator-bundle
 ```
 ```
-[user@anothersystem /tmp/dell-csi-operator-bundle]# scripts/csi-offline-bundle.sh -p -r 192.168.75.40:5000/operator
+scripts/csi-offline-bundle.sh -p -r 192.168.75.40:5000/operator
 Preparing an offline bundle for installation
 
 *

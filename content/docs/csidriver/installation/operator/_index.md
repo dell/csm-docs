@@ -305,7 +305,7 @@ The below notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.1.0
+        configVersion: v2.2.0
    ```
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
@@ -315,12 +315,12 @@ The below notes explain some of the general items to take care of.
     ```yaml
         controller:
           envs:
-            - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+            - name: X_CSI_HEALTH_MONITOR_ENABLED
               value: "true"
         dnsPolicy: ClusterFirstWithHostNet
         node:
           envs:
-            - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+            - name: X_CSI_HEALTH_MONITOR_ENABLED
               value: "true"
     ```
    ii. Update the sidecar versions and add external-health-monitor sidecar if you want to enable health monitor of CSI volumes from Controller plugin:
@@ -329,7 +329,7 @@ The below notes explain some of the general items to take care of.
         - args:
           - --volume-name-prefix=csiunity
           - --default-fstype=ext4
-          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.0.0
+          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.1.0
           imagePullPolicy: IfNotPresent
           name: provisioner
         - args:
@@ -342,13 +342,13 @@ The below notes explain some of the general items to take care of.
           image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.4.0
           imagePullPolicy: IfNotPresent
           name: external-health-monitor
-        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.3.0
+        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.4.0
           imagePullPolicy: IfNotPresent
           name: attacher
-        - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.3.0
+        - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.0
           imagePullPolicy: IfNotPresent
           name: registrar
-        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.3.0
+        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.4.0
           imagePullPolicy: IfNotPresent
           name: resizer
     ```

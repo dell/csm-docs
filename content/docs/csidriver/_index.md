@@ -22,7 +22,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
 | SLES          |        15SP3     |        15SP3        |       15SP3      |         15SP3     |       15SP3      |
 | Red Hat OpenShift | 4.8, 4.8 EUS, 4.9  | 4.8, 4.8 EUS, 4.9 | 4.8, 4.8 EUS, 4.9 | 4.8, 4.8 EUS, 4.9 |  4.8, 4.8 EUS, 4.9 |
-| Mirantis Kubernetes Engine | 3.4.x |      3.4.x        |       3.4.x      |        3.4.x      |        3.4.x     |
+| Mirantis Kubernetes Engine | 3.4.x |      3.4.x        |       3.5.x      |        3.4.x      |        3.4.x     |
 | Google Anthos |        1.6       |          1.8        |        no        |         1.9       |        1.9       |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS         |
 | Rancher Kubernetes Engine | yes  |          yes        |        yes       |         yes       |      yes         |
@@ -51,7 +51,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax                                                | PowerFlex        | Unity                      | PowerScale                         |    PowerStore    |
 |---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
-| Storage Array |5978.479.479, 5978.711.711<br>Unisphere 9.2|    3.5.x, 3.6.x  | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 1.0.x, 2.0.x, 2.1.x     |
+| Storage Array |5978.479.479, 5978.711.711<br>Unisphere 9.2|    3.5.x, 3.6.x  | 5.0.7, 5.1.0, 5.1.2 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 1.0.x, 2.0.x, 2.1.x     |
 {{</table>}}
 ### Backend Storage Details
 {{<table "table table-striped table-bordered table-sm">}}

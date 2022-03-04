@@ -190,7 +190,7 @@ provisioner: csi-unity.dellemc.com
 reclaimPolicy: Delete
 allowVolumeExpansion: true # Set this attribute to true if you plan to expand any PVCs created using this storage class
 parameters:
-    csi.storage.k8s.io/fstype: xfs
+    csi.storage.k8s.io/fstype: "xfs"
 ```
 
 To resize a PVC, edit the existing PVC spec and set spec.resources.requests.storage to the intended size. For example, if you have a PVC unity-pvc-demo of size 3Gi, then you can resize it to 30Gi by updating the PVC.
@@ -361,7 +361,7 @@ To create `NFS` volume you need to provide `nasName:` parameters that point to t
 
 ## Controller HA
 
-The CSI Unity driver version 1.4 and later supports the controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
+The CSI Unity driver supports controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
 
 By default, number of replicas is set to 2, you can set the `controllerCount` parameter to 1 in `myvalues.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change the `replicas` parameter in the `spec.driver` section in your Unity Custom Resource.
 
@@ -407,7 +407,7 @@ As said before you can configure where node driver pods would be assigned in a s
 
 ## Topology
 
-The CSI Unity driver version 1.4 and later supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.
+The CSI Unity driver supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.
 
 This Topology support does not include customer-defined topology, users cannot create their own labels for nodes, they should use whatever labels are returned by the driver and applied automatically by Kubernetes on its nodes.
 
@@ -459,16 +459,12 @@ The user can set the volume limit for a node by creating a node label `max-unity
 
 The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxUnityVolumesPerNode` attribute in values.yaml file.
 
->**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxUnityVolumesPerNode` is 0. <br><br>If `maxUnityVolumesPerNode` is set to zero, then CO SHALL decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxUnityVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-unity-volumes-per-node` is not set.
+>**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxUnityVolumesPerNode` is 0. <br><br>If `maxUnityVolumesPerNode` is set to zero, then Container Orchestration decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxUnityVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-unity-volumes-per-node` is not set.
 
 ## NAT Support
 CSI Driver for Dell Unity is supported in the NAT environment for NFS protocol.
 
 The user will be able to install the driver and able to create pods.
-
-## Dynamic Logging Configuration
-
-This feature is introduced in CSI Driver for unity version 2.0.0. 
 
 ## Single Pod Access Mode for PersistentVolumes
 CSI Driver for Unity now supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity allows to restrict volume access to a single pod in the cluster
@@ -497,6 +493,8 @@ This feature:
 2. Collects the volume stats. We can see the volume usage in the node logs `kubectl logs <nodepod> -n <namespacename> -c driver`
 By default this is disabled in CSI Driver for Unity. You will have to set the `volumeHealthMonitor.enable` flag for controller, node or for both in `values.yaml` to get the volume stats and volume condition.
 
+## Dynamic Logging Configuration
+This feature is introduced in CSI Driver for unity version 2.0.0.
 
 ### Helm based installation
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver. 

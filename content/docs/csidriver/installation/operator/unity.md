@@ -81,9 +81,11 @@ Users should configure the parameters in CR. The following table lists the prima
    | ***Controller parameters***                     |                                                              |          |                       |
    | X_CSI_MODE                                      | Driver starting mode                                         | No       | controller            |
    | X_CSI_UNITY_AUTOPROBE                           | To enable auto probing for driver                            | No       | true                  |
+   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Controller plugin     | No       |            |
    | ***Node parameters***                           |                                                              |          |                       |
    | X_CSI_MODE                                      | Driver starting mode                                         | No       | node                  |
    | X_CSI_ISCSI_CHROOT                              | Path to which the driver will chroot before running any iscsi commands. | No       | /noderoot             |
+   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Node plugin | No      |          |            |
 
 ### Example CR for Unity
 Refer samples from [here](https://github.com/dell/dell-csi-operator/tree/master/samples). Below is an example CR:
@@ -107,15 +109,14 @@ spec:
         args: ["--volume-name-prefix=csiunity","--default-fstype=ext4"]
       - name: snapshotter
         args: ["--snapshot-name-prefix=csiunitysnap"]
-      # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
-      # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED  to "true".
+      # Enable/Disable health monitor of CSI volumes from node plugin. Provides details of volume usage.
       # - name: external-health-monitor
       #   args: ["--monitor-interval=60s"]  
 
     controller:
        envs:
-          # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition.
-          # Install the 'external-health-monitor' sidecar accordingly.
+          # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from Controller plugin. Provides details of volume status and volume condition.
+          # As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar
           # Allowed values:
           #   true: enable checking of health condition of CSI volumes
           #   false: disable checking of health condition of CSI volumes

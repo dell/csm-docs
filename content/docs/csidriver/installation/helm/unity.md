@@ -13,6 +13,7 @@ The controller section of the Helm chart installs the following components in a 
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - Kubernetes External Snapshotter, which provides snapshot support
 - Kubernetes External Resizer, which resizes the volume
+- Kubernetes External health monitor, which provides volume health status
 
 The node section of the Helm chart installs the following component in a _DaemonSet_:
 
@@ -72,6 +73,7 @@ Procedure
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
     | podmon.enabled | service to monitor failing jobs and notify | false | - |
     | podmon.image| pod man image name | false | - |
+    | tenantName | Tenant name added while adding host entry to the array | No |  |
     | **controller** | Allows configuration of the controller-specific parameters.| - | - |
     | controllerCount | Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
     | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
@@ -85,7 +87,6 @@ Procedure
     | ***node*** | Allows configuration of the node-specific parameters.| - | - |
     | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
     | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
-    | tenantName | Tenant name added while adding host entry to the array | No |  |
     | nodeSelector | Define node selection constraints for pods of node deployment | No | |
     | tolerations | Define tolerations for the node deployment, if required | No | |
 
@@ -185,7 +186,7 @@ Procedure
        ```
     
       **Note:**
-      * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoTimeInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
+      * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 
 6. Setup for snapshots.
          
