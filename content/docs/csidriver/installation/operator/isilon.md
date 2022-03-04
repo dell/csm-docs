@@ -130,7 +130,7 @@ User can query for CSI-PowerScale driver using the following command:
    | X_CSI_ISI_ACCESS_ZONE | Name of the access zone a volume can be created in | No | System |
    | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | | 
    | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
-   | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin. Provides details of volume status and volume condition | No | false |
+   | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin. Provides details of volume status and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No | false |
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
