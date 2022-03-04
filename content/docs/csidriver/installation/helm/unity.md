@@ -66,7 +66,7 @@ Procedure
     | logLevel | LogLevel is used to set the logging level of the driver | true | info |
     | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | false | false |
     | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-      | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
+    | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
     | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | false | 0 |
     | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
