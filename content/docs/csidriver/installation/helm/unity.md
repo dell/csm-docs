@@ -80,12 +80,12 @@ Procedure
     | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
     | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
     | tolerations | Define tolerations for the controller deployment, if required | No | |
-    | volumeHealthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
-    | volumeHealthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
+    | healthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
+    | healthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
     | ***node*** | Allows configuration of the node-specific parameters.| - | - |
     | tolerations | Define tolerations for the node daemonset, if required | No | |
     | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-    | volumeHealthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
+    | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
     | nodeSelector | Define node selection constraints for pods of node deployment | No | |
     | tolerations | Define tolerations for the node deployment, if required | No | |
