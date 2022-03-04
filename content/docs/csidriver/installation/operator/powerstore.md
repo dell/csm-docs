@@ -157,6 +157,11 @@ volume stats value under node should be set to true.
 	 # Default value: false
 	 - name: X_CSI_HEALTH_MONITOR_ENABLED
 	   value: "false"
+   sideCars:
+      # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
+      # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED to "true".
+      # - name: external-health-monitor
+      #   args: ["--monitor-interval=60s"]
  node:
    envs:
      # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin- volume usage, volume condition
