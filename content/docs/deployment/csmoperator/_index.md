@@ -64,15 +64,6 @@ The installation process involves the creation of a `Subscription` object either
 
 **NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
 
-#### Pre-Requisite for installation with OLM
-Please run the following commands for creating the required `ConfigMap` before installing the `dell-csi-operator` using OLM.  
-```
-$ git clone https://github.com/dell/dell-csi-operator.git
-$ cd dell-csi-operator
-$ tar -czf config.tar.gz driverconfig/
-# Replace operator-namespace in the below command with the actual namespace where the operator will be deployed by OLM
-$ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n <operator-namespace>
-```
 ##### Upstream Kubernetes
 - For installing via OperatorHub.io on Kubernetes, go to the [OperatorHub page](../../partners/operator/).
 ##### Red Hat OpenShift Clusters
@@ -84,11 +75,10 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
 1. Clone the [Dell CSM Operator repository](https://github.com/dell/csm-operator).
-2. git checkout dell-csi-operator-<your-version>
-3. Run `bash scripts/install.sh` to install the operator.
+2. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSM Operator will install to the 'dell-csm-operator' namespace by default.
 
-4. Run the command `oc get pods -n dell-csi-operator` to validate the installation. If completed successfully, you should be able to see the operator-related pod in the 'dell-csi-operator' namespace.
+3. Run the command `oc get pods -n dell-csm-operator` to validate the installation. If completed successfully, you should be able to see the operator-related pod in the 'dell-csi-operator' namespace.
 
 ## Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.  

@@ -16,7 +16,6 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
 
 ### Install Authorization
 
-1. TODO: Create secret for the Authorization sidecar and detail how to use it in step 2 below when deploying the driver+authorization
+1. Create the required Secrets as documented in the [Helm chart procedure](../../../../authorization/deployment/#configuring-a-dell-csi-driver).
 
 2. Follow the steps to install a Dell CSI Driver. If Authorization is supported, the module section in the ContainerStorageModule CR can be updated to enable Authorization.
-
