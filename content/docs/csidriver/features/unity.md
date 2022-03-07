@@ -215,7 +215,7 @@ spec:
 
 ## Raw block support
 
-The CSI Unity driver version 1.4 and later supports Raw Block Volumes.
+The CSI Unity driver supports Raw Block Volumes.
 	Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. The following is an example configuration:
 	
 ```yaml
@@ -310,7 +310,7 @@ spec:
 
 ## Ephemeral Inline Volume
 
-The CSI Unity driver version 1.4 and later supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
+The CSI Unity driver supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
 
 At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.
 
@@ -440,16 +440,6 @@ You can check what labels your nodes contain by running `kubectl get nodes --sho
 >Note that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for the topology feature to work properly.
 
 For any additional information about the topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
-
-## Support for SLES 15 SP2
-
-The CSI Driver for Dell Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
-
- - open-iscsi **open-iscsi is required in order to make use of iSCSI protocol for provisioning**
- - nfs-utils **nfs-utils is required in order to make use of NFS protocol for provisioning**
- - multipath-tools **multipath-tools is required in order to make use of FC and iSCSI protocols for provisioning**
-
-  After installing open-iscsi, ensure "iscsi" and "iscsid" services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with the iSCSI protocol to work.
 
 ## Volume Limit
 The CSI Driver for Dell Unity allows users to specify the maximum number of Unity volumes that can be used in a node.
