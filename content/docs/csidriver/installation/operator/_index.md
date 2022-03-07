@@ -76,7 +76,7 @@ The installation process involves the creation of a `Subscription` object either
 * _Automatic_ - If you want the Operator to be automatically installed or upgraded (once an upgrade becomes available)
 * _Manual_ - If you want a Cluster Administrator to manually review and approve the `InstallPlan` for installation/upgrades
 
-**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
+**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
 
 #### Pre-Requisite for installation with OLM
 Please run the following commands for creating the required `ConfigMap` before installing the `dell-csi-operator` using OLM.  
