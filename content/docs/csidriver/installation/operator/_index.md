@@ -210,36 +210,6 @@ Finally, you have to restart the service by providing the command
 
 For additional information refer to official documentation of the multipath configuration.
 
-## Replacing CSI Operator with Dell CSI Operator
-`Dell CSI Operator` was previously available, with the name `CSI Operator`, for both manual and OLM installation.  
-`CSI Operator` has been discontinued and has been renamed to `Dell CSI Operator`.  This is just a name change and as a result,
-the Kubernetes resources created as part of the Operator deployment will use the name `dell-csi-operator` instead of `csi-operator`.
-
-Before proceeding with the installation of the new `Dell CSI Operator`, any existing `CSI Operator` installation has to be completely 
-removed from the cluster.
-
-Note - This **doesn't** impact any of the CSI Drivers which have been installed in the cluster
-
-If the old `CSI Operator` was installed manually, then run the following command from the root of the repository which was used 
-originally for installation
-
-    bash scripts/undeploy.sh
-
-If you don't have the original repository available, then run the following commands
-
-    git clone https://github.com/dell/dell-csi-operator.git
-    cd dell-csi-operator
-    git checkout csi-operator-v1.0.0
-    bash scripts/undeploy.sh
-
-Note - Once you have removed the old `CSI Operator`, then for installing the new `Dell CSI Operator`, you will need to pull/checkout the latest code
-
-If you had installed the old CSI Operator using OLM, then please follow the uninstallation instructions provided by OperatorHub. This will mostly involve:
-
-    * Deleting the CSI Operator Subscription  
-    * Deleting the CSI Operator CSV  
-
-
 ## Installing CSI Driver via Operator
 CSI Drivers can be installed by creating a `CustomResource` object in your cluster.
 
