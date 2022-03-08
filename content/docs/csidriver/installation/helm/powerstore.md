@@ -11,7 +11,7 @@ The controller section of the Helm chart installs the following components in a 
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - (Optional) Kubernetes External Snapshotter, which provides snapshot support
-- Kubernetes External Resizer, which resizes the volume
+- (Optional) Kubernetes External Resizer, which resizes the volume
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
 - CSI Driver for Dell PowerStore
@@ -22,8 +22,8 @@ The node section of the Helm chart installs the following component in a _Daemon
 The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
-- If you plan to use either the Fibre Channel or iSCSI protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ sections below. You can use NFS volumes without FC or iSCSI configuration.
-> You can use either the Fibre Channel or iSCSI protocol, but you do not need both.
+- If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe/TCP Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP configuration.
+> You can use either the Fibre Channel or iSCSI or NVMe/TCP protocol, but you do not need all the three.
 
 > If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group
 - Linux native multipathing requirements
@@ -64,13 +64,15 @@ For information about configuring iSCSI, see _Dell PowerStore documentation_ on 
 
 ### Set up the NVMe/TCP Initiator
 
-If you want to use the protocol, set up the NVMe/TCP initiators as follows
+If you want to use the protocol, set up the NVMe/TCP initiators as follows:
 - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
 `sudo apt install nvme-cli`
 
-- Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands.
-```modprobe nvme
-   modprobe nvme-tcp```
+- Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
+```bash
+modprobe nvme
+modprobe nvme_tcp
+```
 
 ### Linux multipathing requirements
 Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
@@ -93,7 +95,7 @@ snapshot:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd) for the installation.
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd) for the installation.
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
@@ -101,12 +103,44 @@ The CSI external-snapshotter sidecar is split into two controllers:
 - A CSI external-snapshotter sidecar
 
 The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available:
-Use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller) for the installation.
+Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller) for the installation.
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+
+## Volume Health Monitoring
+
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.
+   ```yaml
+controller:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+
+    # healthMonitorInterval: Interval of monitoring volume health condition
+    # Allowed values: Number followed by unit (s,m,h)
+    # Examples: 60s, 5m, 1h
+    # Default value: 60s
+    volumeHealthMonitorInterval: 60s
+
+node:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+   ```
 
 #### Installation example 
 
@@ -120,7 +154,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ```
 
 *NOTE:*
-- It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is installed along with the driver and does not involve any extra configuration.
 
 ### (Optional) Replication feature Requirements
@@ -150,10 +184,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
     - *username*, *password*: defines credentials for connecting to array.
     - *skipCertificateValidation*: defines if we should use insecure connection or not.
     - *isDefault*: defines if we should treat the current array as a default.
-    - *blockProtocol*: defines what SCSI transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).
+    - *blockProtocol*: defines what transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).
     - *nasName*: defines what NAS should be used for NFS volumes.
-	- *nfsAcls* (Optional): defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory.
-	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only.
+	- *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
+	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
@@ -169,7 +203,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
 | kubeletConfigDir | Defines kubelet config path for cluster | Yes | "/var/lib/kubelet" |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
-| nfsAcls | Defines permissions - POSIX or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
+| nfsAcls | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 | connection.enableCHAP   | Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
 | controller.controllerCount     | Defines number of replicas of controller deployment | Yes | 2 |
 | controller.volumeNamePrefix | Defines the string added to each volume that the CSI driver creates | No | "csivol" |
@@ -215,13 +249,14 @@ There are samples storage class yaml files available under `samples/storageclass
 
 1. Edit the sample storage class yaml file and update following parameters: 
 - *arrayID*: specifies what storage cluster the driver should use, if not specified driver will use storage cluster specified as `default` in `samples/secret/secret.yaml`
-- *FsType*: specifies what filesystem type driver should use, possible variants `ext4`, `xfs`, `nfs`, if not specified driver will use `ext4` by default.
+- *FsType*: specifies what filesystem type driver should use, possible variants `ext3`, `ext4`, `xfs`, `nfs`, if not specified driver will use `ext4` by default.
+- *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 - *allowedTopologies* (Optional): If you want you can also add topology constraints.
 ```yaml
 allowedTopologies:
   - matchLabelExpressions: 
       - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
-# replace "-iscsi" with "-fc" or "-nfs" at the end to use FC or NFS enabled hosts
+# replace "-iscsi" with "-fc", "-nvme" or "-nfs" at the end to use FC, NVMe or NFS enabled hosts
 # replace "12.34.56.78" with PowerStore endpoint IP
         values:
           - "true"

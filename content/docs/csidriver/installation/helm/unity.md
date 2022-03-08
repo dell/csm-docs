@@ -13,6 +13,7 @@ The controller section of the Helm chart installs the following components in a 
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - Kubernetes External Snapshotter, which provides snapshot support
 - Kubernetes External Resizer, which resizes the volume
+- Kubernetes External Health Monitor, which provides volume health status
 
 The node section of the Helm chart installs the following component in a _DaemonSet_:
 
@@ -66,12 +67,13 @@ Procedure
     | logLevel | LogLevel is used to set the logging level of the driver | true | info |
     | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | false | false |
     | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-	  | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
+    | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
     | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | false | 0 |
     | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
     | podmon.enabled | service to monitor failing jobs and notify | false | - |
     | podmon.image| pod man image name | false | - |
+    | tenantName | Tenant name added while adding host entry to the array | No |  |
     | **controller** | Allows configuration of the controller-specific parameters.| - | - |
     | controllerCount | Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
     | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
@@ -80,13 +82,13 @@ Procedure
     | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
     | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
     | tolerations | Define tolerations for the controller deployment, if required | No | |
-    | volumeHealthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
-    | volumeHealthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
+    | healthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
+    | healthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
     | ***node*** | Allows configuration of the node-specific parameters.| - | - |
-    | tolerations | Define tolerations for the node daemonset, if required | No | |
     | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-    | volumeHealthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
-    | tenantName | Tenant name added while adding host entry to the array | No |  |
+    | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
+    | nodeSelector | Define node selection constraints for pods of node deployment | No | |
+    | tolerations | Define tolerations for the node deployment, if required | No | |
 
 
     **Note**: 
@@ -184,7 +186,7 @@ Procedure
        ```
     
       **Note:**
-      * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoTimeInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
+      * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 
 6. Setup for snapshots.
          
@@ -199,14 +201,14 @@ Procedure
    In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster
 
     #### Volume Snapshot CRD's
-    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd) for the installation.
+    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd) for the installation.
 
     #### Volume Snapshot Controller
     The CSI external-snapshotter sidecar is split into two controllers:
     - A common snapshot controller
     - A CSI external-snapshotter sidecar
 
-    Use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller) for the installation.
+    Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller) for the installation.
 
     #### Installation example 
 
@@ -220,7 +222,7 @@ Procedure
     ```
 
     **Note**:
-    - It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+    - It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
     - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
               

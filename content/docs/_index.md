@@ -20,12 +20,12 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 | Modules/Drivers | CSM 1.2 | [CSM 1.1](../v1/) | [CSM 1.0.1](../v1/) | [CSM 1.0](../v2/) | 
 | - | :-: | :-: | :-: | :-: |
-| Authorization | 1.2 | 1.1 | 1.0 | 1.0 |
-| Observability | 1.1 | 1.0.1 | 1.0.1 | 1.0 |
-| Replication | 1.2 | 1.1 | 1.0 | 1.0 |
-| Resiliency | 1.1 | 1.0.1 | 1.0.1 | 1.0 |
-| CSI Driver for PowerScale | v2.2 | v2.1 | v2.0 | v2.0 | 
-| CSI Driver for Unity | v2.2 | v2.1 | v2.0 | v2.0 |
-| CSI Driver for PowerStore | v2.2 | v2.1 | v2.0 | v2.0 |
-| CSI Driver for PowerFlex | v2.2 | v2.1 | v2.0 | v2.0 |
-| CSI Driver for PowerMax | v2.2 | v2.1 | v2.0 | v2.0 |
+| [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar) | 1.2 | 1.1 | 1.0 | 1.0 |
+| [Observability](https://hub.docker.com/r/dellemc/csm-topology) | 1.1 | 1.0.1 | 1.0.1 | 1.0 |
+| [Replication](https://hub.docker.com/r/dellemc/dell-csi-replicator) | 1.2 | 1.1 | 1.0 | 1.0 |
+| [Resiliency](https://hub.docker.com/r/dellemc/podmon) | 1.1 | 1.0.1 | 1.0.1 | 1.0 |
+| [CSI Driver for PowerScale](https://hub.docker.com/r/dellemc/csi-isilon/tags) | v2.2 | v2.1 | v2.0 | v2.0 | 
+| [CSI Driver for Unity](https://hub.docker.com/r/dellemc/csi-unity/tags) | v2.2 | v2.1 | v2.0 | v2.0 |
+| [CSI Driver for PowerStore](https://hub.docker.com/r/dellemc/csi-powerstore/tags) | v2.2 | v2.1 | v2.0 | v2.0 |
+| [CSI Driver for PowerFlex](https://hub.docker.com/r/dellemc/csi-vxflexos/tags) | v2.2 | v2.1 | v2.0 | v2.0 |
+| [CSI Driver for PowerMax](https://hub.docker.com/r/dellemc/csi-powermax/tags) | v2.2 | v2.1 | v2.0 | v2.0 |

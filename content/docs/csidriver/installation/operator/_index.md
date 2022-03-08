@@ -1,5 +1,5 @@
 ---
-title: "Dell CSI Operator Installation Process"
+title: "CSI Driver installation using Dell CSI Operator"
 linkTitle: "Using Operator"
 weight: 4
 description: >
@@ -11,18 +11,18 @@ The Dell CSI Operator is a Kubernetes Operator, which can be used to install and
 ## Prerequisites
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image:
-    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
+    - [quay.io/k8scsi/csi-snapshotter:v5.0.1](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v5.0.1&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 #### Installation example
@@ -37,7 +37,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ```
 
 *NOTE:*
-- It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
 
 
 ## Installation
@@ -76,7 +76,7 @@ The installation process involves the creation of a `Subscription` object either
 * _Automatic_ - If you want the Operator to be automatically installed or upgraded (once an upgrade becomes available)
 * _Manual_ - If you want a Cluster Administrator to manually review and approve the `InstallPlan` for installation/upgrades
 
-**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
+**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
 
 #### Pre-Requisite for installation with OLM
 Please run the following commands for creating the required `ConfigMap` before installing the `dell-csi-operator` using OLM.  
@@ -98,8 +98,9 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
 1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator).
-2. git checkout dell-csi-operator-<your-version>
-3. Run `bash scripts/install.sh` to install the operator.
+2. cd dell-csi-operator
+3. git checkout dell-csi-operator-`your-version'
+4. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
 Any existing installations of Dell CSI Operator (v1.2.0 or later) installed using `install.sh` to the 'default' or 'dell-csi-operator' namespace can be upgraded to the new version by running `install.sh --upgrade`.
 
@@ -209,36 +210,6 @@ Finally, you have to restart the service by providing the command
 
 For additional information refer to official documentation of the multipath configuration.
 
-## Replacing CSI Operator with Dell CSI Operator
-`Dell CSI Operator` was previously available, with the name `CSI Operator`, for both manual and OLM installation.  
-`CSI Operator` has been discontinued and has been renamed to `Dell CSI Operator`.  This is just a name change and as a result,
-the Kubernetes resources created as part of the Operator deployment will use the name `dell-csi-operator` instead of `csi-operator`.
-
-Before proceeding with the installation of the new `Dell CSI Operator`, any existing `CSI Operator` installation has to be completely 
-removed from the cluster.
-
-Note - This **doesn't** impact any of the CSI Drivers which have been installed in the cluster
-
-If the old `CSI Operator` was installed manually, then run the following command from the root of the repository which was used 
-originally for installation
-
-    bash scripts/undeploy.sh
-
-If you don't have the original repository available, then run the following commands
-
-    git clone https://github.com/dell/dell-csi-operator.git
-    cd dell-csi-operator
-    git checkout csi-operator-v1.0.0
-    bash scripts/undeploy.sh
-
-Note - Once you have removed the old `CSI Operator`, then for installing the new `Dell CSI Operator`, you will need to pull/checkout the latest code
-
-If you had installed the old CSI Operator using OLM, then please follow the uninstallation instructions provided by OperatorHub. This will mostly involve:
-
-    * Deleting the CSI Operator Subscription  
-    * Deleting the CSI Operator CSV  
-
-
 ## Installing CSI Driver via Operator
 CSI Drivers can be installed by creating a `CustomResource` object in your cluster.
 
@@ -304,7 +275,7 @@ The below notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.1.0
+        configVersion: v2.2.0
    ```
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
@@ -314,12 +285,12 @@ The below notes explain some of the general items to take care of.
     ```yaml
         controller:
           envs:
-            - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+            - name: X_CSI_HEALTH_MONITOR_ENABLED
               value: "true"
         dnsPolicy: ClusterFirstWithHostNet
         node:
           envs:
-            - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+            - name: X_CSI_HEALTH_MONITOR_ENABLED
               value: "true"
     ```
    ii. Update the sidecar versions and add external-health-monitor sidecar if you want to enable health monitor of CSI volumes from Controller plugin:
@@ -328,12 +299,12 @@ The below notes explain some of the general items to take care of.
         - args:
           - --volume-name-prefix=csiunity
           - --default-fstype=ext4
-          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.0.0
+          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.1.0
           imagePullPolicy: IfNotPresent
           name: provisioner
         - args:
           - --snapshot-name-prefix=csiunitysnap
-          image: k8s.gcr.io/sig-storage/csi-snapshotter:v4.2.1
+          image: k8s.gcr.io/sig-storage/csi-snapshotter:v5.0.1
           imagePullPolicy: IfNotPresent
           name: snapshotter
         - args:
@@ -341,13 +312,13 @@ The below notes explain some of the general items to take care of.
           image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.4.0
           imagePullPolicy: IfNotPresent
           name: external-health-monitor
-        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.3.0
+        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.4.0
           imagePullPolicy: IfNotPresent
           name: attacher
-        - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.3.0
+        - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.0
           imagePullPolicy: IfNotPresent
           name: registrar
-        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.3.0
+        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.4.0
           imagePullPolicy: IfNotPresent
           name: resizer
     ```
@@ -362,7 +333,7 @@ data:
     CSI_LOG_LEVEL: "info"
     ALLOW_RWO_MULTIPOD_ACCESS: "false"
     MAX_UNITY_VOLUMES_PER_NODE: "0"
-    SYNC_NODE_INFO_TIME_INTERVAL: "0"
+    SYNC_NODE_INFO_TIME_INTERVAL: "15"
     TENANT_NAME: ""
 ```
 
@@ -413,6 +384,9 @@ It should be set separately in the controller and node sections if you want sepa
 
 **nodeSelector**
 Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet  
+
+**fsGroupPolicy**
+Defines which FS Group policy mode to be used, Supported modes: None, File and ReadWriteOnceWithFSType 
 
 Here is a sample specification annotated with comments to explain each field
 ```yaml

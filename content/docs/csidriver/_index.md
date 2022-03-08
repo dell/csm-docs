@@ -22,7 +22,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
 | SLES          |        15SP3     |        15SP3        |       15SP3      |         15SP3     |       15SP3      |
 | Red Hat OpenShift | 4.8, 4.8 EUS, 4.9  | 4.8, 4.8 EUS, 4.9 | 4.8, 4.8 EUS, 4.9 | 4.8, 4.8 EUS, 4.9 |  4.8, 4.8 EUS, 4.9 |
-| Mirantis Kubernetes Engine | 3.4.x |      3.4.x        |       3.4.x      |        3.4.x      |        3.4.x     |
+| Mirantis Kubernetes Engine | 3.4.x |      3.4.x        |       3.5.x      |        3.4.x      |        3.4.x     |
 | Google Anthos |        1.6       |          1.8        |        no        |         1.9       |        1.9       |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS         |
 | Rancher Kubernetes Engine | yes  |          yes        |        yes       |         yes       |      yes         |
@@ -32,26 +32,25 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:------:|:----------:|:----------:|
-| CSI Specification        | v1.5     | v1.5      | v1.5   | v1.5       | v1.5       |
 | Static Provisioning      | yes      | yes       | yes    | yes        | yes        |
 | Dynamic Provisioning     | yes      | yes       | yes    | yes        | yes        |
 | Expand Persistent Volume | yes      | yes       | yes    | yes        | yes        |
 | Create VolumeSnapshot    | yes      | yes       | yes    | yes        | yes        |
 | Create Volume from Snapshot | yes   | yes       | yes    | yes        | yes        |
 | Delete Snapshot          | yes      | yes       | yes    | yes        | yes        |
-| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)| RWO/ROX<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) | RWO/RWX/ROX/<br>RWOP | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) |
+| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)| RWO/<br>RWOP(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP(Raw block) | RWO/ROX/RWOP<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) | RWO/RWX/ROX/<br>RWOP | RWO/RWOP<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(RawBlock, NFS) |
 | CSI Volume Cloning       | yes      | yes       | yes    | yes        | yes        |
 | CSI Raw Block Volume     | yes      | yes       | yes    | no         | yes        |
 | CSI Ephemeral Volume     | no       | yes       | yes    | yes        | yes        |
 | Topology                 | yes      | yes       | yes    | yes        | yes        |
 | Multi-array              | yes      | yes       | yes    | yes        | yes        |
-| Volume Health Monitoring | no       | yes       | yes    | yes        | yes        |
+| Volume Health Monitoring | yes      | yes       | yes    | yes        | yes        |
 {{</table>}}
 ### Supported Storage Platforms
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax                                                | PowerFlex        | Unity                      | PowerScale                         |    PowerStore    |
 |---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
-| Storage Array |5978.479.479, 5978.711.711<br>Unisphere 9.2|    3.5.x, 3.6.x  | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 1.0.x, 2.0.x     |
+| Storage Array |5978.479.479, 5978.711.711<br>Unisphere 9.2|    3.5.x, 3.6.x  | 5.0.7, 5.1.0, 5.1.2 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 1.0.x, 2.0.x, 2.1.x     |
 {{</table>}}
 ### Backend Storage Details
 {{<table "table table-striped table-bordered table-sm">}}
