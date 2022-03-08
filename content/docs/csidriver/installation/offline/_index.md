@@ -43,6 +43,8 @@ To perform an offline installation of a driver or the Operator, the following st
 2. Unpacking the offline bundle created in Step 1 and preparing for installation
 3. Perform either a Helm installation or Operator installation using the files obtained after unpacking in Step 2 
 
+**NOTE:** It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).
+
 ### Building an offline bundle
 
 This needs to be performed on a Linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.
@@ -184,7 +186,7 @@ Preparing an offline bundle for installation
 *
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v1.4.0.000R -> amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.4.0.000R
+   dellemc/csi-isilon:v1.4.0.000R -> localregistry:5000/csi-operator/csi-isilon:v1.4.0.000R
    dellemc/csi-isilon:v1.5.0 -> amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.5.0
    dellemc/csi-isilon:v1.6.0 -> amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.6.0
    dellemc/csipowermax-reverseproxy:v1.3.0 -> amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csipowermax-reverseproxy:v1.3.0

@@ -13,7 +13,7 @@ The controller section of the Helm chart installs the following components in a 
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - Kubernetes External Snapshotter, which provides snapshot support
 - Kubernetes External Resizer, which resizes the volume
-- Kubernetes External health monitor, which provides volume health status
+- Kubernetes External Health Monitor, which provides volume health status
 
 The node section of the Helm chart installs the following component in a _DaemonSet_:
 

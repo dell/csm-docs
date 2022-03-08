@@ -449,7 +449,7 @@ The user can set the volume limit for a node by creating a node label `max-unity
 
 The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxUnityVolumesPerNode` attribute in values.yaml file.
 
->**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxUnityVolumesPerNode` is 0. <br><br>If `maxUnityVolumesPerNode` is set to zero, then Container Orchestration decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxUnityVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-unity-volumes-per-node` is not set.
+>**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxUnityVolumesPerNode` is 0. <br><br>If `maxUnityVolumesPerNode` is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxUnityVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-unity-volumes-per-node` is not set.
 
 ## NAT Support
 CSI Driver for Dell Unity is supported in the NAT environment for NFS protocol.
@@ -457,7 +457,7 @@ CSI Driver for Dell Unity is supported in the NAT environment for NFS protocol.
 The user will be able to install the driver and able to create pods.
 
 ## Single Pod Access Mode for PersistentVolumes
-CSI Driver for Unity now supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity allows to restrict volume access to a single pod in the cluster
+CSI Driver for Unity supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity allows to restrict volume access to a single pod in the cluster
 
 Prerequisites
 1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as the ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is only supported for CSI volumes. You can enable the feature by setting command line arguments:
@@ -477,11 +477,11 @@ spec:
 ```
 
 ## Volume Health Monitoring
-CSI Driver for Unity now supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments `--feature-gates="...,CSIVolumeHealth=true"`.  
+CSI Driver for Unity supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments `--feature-gates="...,CSIVolumeHealth=true"`.  
 This feature:
 1. Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc `kubectl describe pvc <pvc name> -n <namespace>`
 2. Collects the volume stats. We can see the volume usage in the node logs `kubectl logs <nodepod> -n <namespacename> -c driver`
-By default this is disabled in CSI Driver for Unity. You will have to set the `volumeHealthMonitor.enable` flag for controller, node or for both in `values.yaml` to get the volume stats and volume condition.
+By default this is disabled in CSI Driver for Unity. You will have to set the `healthMonitor.enable` flag for controller, node or for both in `values.yaml` to get the volume stats and volume condition.
 
 ## Dynamic Logging Configuration
 This feature is introduced in CSI Driver for unity version 2.0.0.

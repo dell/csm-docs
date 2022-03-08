@@ -98,7 +98,7 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
 1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator).
-2. cd ./dell-csi-operator
+2. cd dell-csi-operator
 3. git checkout dell-csi-operator-<your-version>
 4. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
@@ -333,7 +333,7 @@ data:
     CSI_LOG_LEVEL: "info"
     ALLOW_RWO_MULTIPOD_ACCESS: "false"
     MAX_UNITY_VOLUMES_PER_NODE: "0"
-    SYNC_NODE_INFO_TIME_INTERVAL: "0"
+    SYNC_NODE_INFO_TIME_INTERVAL: "15"
     TENANT_NAME: ""
 ```
 
