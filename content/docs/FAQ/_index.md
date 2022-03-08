@@ -38,7 +38,6 @@ Please see module and the respectice CSI driver version available for each array
 | Observability v1.1| ✔️              | ❌              | ✔️               | ❌            | ❌            |
 | Replication   v1.2| ❌             | ✔️              | ✔️               | ✔️             | ❌            |
 | Resilency     v1.1| ✔️              | ❌              | ❌              | ❌            | ✔️             |
-| CSM Installer v1.0|✔️               | ✔️              | ✔️               | ✔️             | ✔️             |
   
 ### What are the prerequisites for deploying Container Storage Modules?
 Prerequisites can be found on the respective module deployment pages:
