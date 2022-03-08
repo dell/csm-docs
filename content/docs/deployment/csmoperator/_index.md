@@ -21,15 +21,29 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 
 ### Manual Installation
 
-#### On an environment without OLM
-
-#### On an environment with OLM
-
+#### Operator Installation on an environment without OLM
 1. Clone the [Dell CSM Operator repository](https://github.com/dell/csm-operator).
 2. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSM Operator will install to the 'dell-csm-operator' namespace by default.
 
-3. Run the command `oc get pods -n dell-csm-operator` to validate the installation. If completed successfully, you should be able to see the operator-related pod in the 'dell-csm-operator' namespace.
+{{< imgproc install.jpg Resize "2500x" >}}{{< /imgproc >}}
+
+3. Run the command `kubectl get pods -n dell-csm-operator` to validate the installation. If completed successfully, you should be able to see the operator-related pod in the 'dell-csm-operator' namespace.
+
+{{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
+   
+#### Operator Installation on an environment with OLM
+1. Clone the [Dell CSM Operator repository](https://github.com/dell/csm-operator).
+2. Run `bash scripts/install_olm.sh` to install the operator.
+>NOTE: Dell CSM Operator will install to the 'test-csm-operator-olm' namespace by default.
+
+{{< imgproc install_olm.jpg Resize "2500x" >}}{{< /imgproc >}}
+
+3. Once installation completes, run the command `kubectl get pods -n test-csm-operator-olm` to validate the installation. If completed successfully, 
+   you should be able to see the operator-related pods in the `test-csm-operator-olm` namespace. Also, you can see a `dell-csm-operator` CSV with the status 'Succeeded'
+   created in the namespace `test-csm-operator-olm`.
+   
+{{< imgproc install_olm_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
 
 ### Installation Using Operator Lifecycle Manager
 `dell-csm-operator` can be installed using Operator Lifecycle Manager (OLM) on upstream Kubernetes clusters & Red Hat OpenShift Clusters.  
@@ -45,10 +59,21 @@ The installation process involves the creation of a `Subscription` object either
 - For installing via OpenShift with the Operator, go to the [OpenShift page](../../partners/redhat/).
 
 ### Upgrade
-### Uninstall
-#### On an environment without OLM
+To upgrade an existing CSM operator, run `bash scripts/install.sh --upgrade`. This will upgrade existing CRDs and Operator objects.
+Manual upgrade is not supported for Operator installed in OLM environment.
 
-#### On an environment with OLM
+{{< imgproc upgrade.jpg Resize "2500x" >}}{{< /imgproc >}}
+
+### Uninstall
+#### Operator Uninstallation on an environment without OLM
+To uninstall a CSM operator, run `bash scripts/uninstall.sh`. This will uninstall the operator in `dell-csm-operator` namespace.
+
+{{< imgproc uninstall.jpg Resize "2500x" >}}{{< /imgproc >}}
+
+#### Operator Uninstallation on an environment with OLM
+To uninstall a CSM operator installed with OLM run `bash scripts/uninstall_olm.sh`. This will uninstall the operator in  `test-csm-operator-olm` namespace.
+
+{{< imgproc uninstall_olm.jpg Resize "2500x" >}}{{< /imgproc >}}
 
 ## Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.  
@@ -136,7 +161,7 @@ Note: If your worker nodes are running Red Hat CoreOS, make sure that automatic 
 
 ## Installing CSI Driver via Operator
 
-Link 
+[PowerScale Driver](/csmoperator/drivers/powerscale.md)
 
 **Note**: If you are using an OLM based installation, the example manifests are available in the `OperatorHub` UI.
 You can edit these manifests and install the driver using the `OperatorHub` UI.
