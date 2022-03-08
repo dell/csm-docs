@@ -146,9 +146,8 @@ User can query for CSI-PowerScale driver using the following command:
     
 **Note** : 
    1. From CSI-PowerScale v1.6.0 and higher, Storage class and VolumeSnapshotClass will **not** be created as part of driver deployment. The user has to create Storageclass and Volume Snapshot Class.
-   2. Node selector and node tolerations can be added in both controller parameters and node parameters section, based on the need.
-   3. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   4. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+   2. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
+   3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
 
 ## Volume Health Monitoring
 This feature is introduced in CSI Driver for unity version 2.1.0.
