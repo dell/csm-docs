@@ -13,7 +13,9 @@ The controller section of the Helm chart installs the following components in a 
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - Kubernetes External Snapshotter, which provides snapshot support
 - Kubernetes External Resizer, which resizes the volume
-- CSI PowerMax ReverseProxy (optional)
+- (optional) Kubernetes External health monitor, which provides volume health status
+- (optional) CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance
+- (optional) Dell CSI Replicator, which provides Replication capability. 
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
 - CSI Driver for Dell PowerMax

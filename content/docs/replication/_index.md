@@ -97,6 +97,11 @@ The following matrix provides a list of all supported versions for each Dell Sto
 | Kubernetes | 1.21, 1.22, 1.23  | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 |
 | CSI Driver | 2.x | 2.x | 2.2+ | 
 
+| Platforms | PowerMax | PowerStore | PowerScale |
+| -------- | --------- | ---------- | ---------- |
+| RedHat Openshift |4.8, 4.9 | 4.8, 4.9 | 4.8, 4.9 |
+| CSI Driver | 2.2+ | 2.x | 2.2+ |
+
 For compatibility with storage arrays please refer to corresponding [CSI drivers](../csidriver/#features-and-capabilities)
 
 ### QuickStart
