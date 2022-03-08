@@ -58,8 +58,10 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
    ```
    
 4. Create a Custom Resource (CR) for PowerStore using the sample files provided    [here](https://github.com/dell/dell-csi-operator/tree/master/samples). 
-   Below is a sample CR:
-   ```yaml
+
+Below is a sample CR:
+
+```yaml
 apiVersion: storage.dell.com/v1
 kind: CSIPowerStore
 metadata:
@@ -120,7 +122,7 @@ data:
   driver-config-params.yaml: |
     CSI_LOG_LEVEL: "debug"
     CSI_LOG_FORMAT: "JSON"
-   ```
+```
 
 5. Users must configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
    
