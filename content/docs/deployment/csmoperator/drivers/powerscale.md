@@ -1,10 +1,10 @@
 ---
 title: PowerScale
 description: >
-  Installing CSI Driver for PowerScale via Operator
+  Installing CSI Driver for PowerScale via CSM Operator
 ---
 
-## Installing CSI Driver for PowerScale via Operator
+## Installing CSI Driver for PowerScale via CSM Operator
 
 The CSM Driver for Dell EMC PowerScale can be installed via the Dell CSM Operator.
 
