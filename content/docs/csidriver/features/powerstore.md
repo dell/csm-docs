@@ -674,3 +674,5 @@ CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. T
 In case blockProtocol is specified as `auto`, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then FC gets the highest priority followed by iSCSI and then NVMeTCP.
 
 >Note: NVMe/TCP is not supported on RHEL 7.x versions. 
+>NVMe/TCP requires PowerStore Malka (2.1) or above.
+
