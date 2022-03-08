@@ -5,6 +5,10 @@ description: Container Storage Modules Installer
 weight: 1
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Installer is currently deprecated and will no longer be supported as of CSM v1.4.0
+{{% /pageinfo %}}
+
 >>**Note: The CSM Installer only supports installation of CSM 1.0 Modules and CSI Drivers in environments that do not have any existing deployments of CSM or CSI Drivers. The CSM Installer does not support the upgrade of existing CSM or CSI Driver deployments.**
 
 The CSM (Container Storage Modules) Installer simplifies the deployment and management of Dell Container Storage Modules and CSI Drivers to provide persistent storage for your containerized workloads.
