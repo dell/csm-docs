@@ -1,7 +1,7 @@
 ---
 title: CLI
 linktitle: CLI 
-weight: 3
+weight: 4
 description: >
   Dell EMC Container Storage Modules (CSM) for Authorization CLI
 ---
