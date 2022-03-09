@@ -52,9 +52,9 @@ The above event shows dellem/csi-isilon does not exist, to resolve this user can
 
 To get details of driver installation: `kubectl logs <dell-csm-operator-controller-manager-pod> -n dell-csm-operator`.
 
-Typical reasons for errors : 
-	- Incorrect driver version 
-	- Incorrect driver type
-	- Incorrect driver Spec env, args for containers
-	- Incorrect RBAC permissions
+Typical reasons for errors:
+* Incorrect driver version 
+* Incorrect driver type
+* Incorrect driver Spec env, args for containers
+* Incorrect RBAC permissions
 	
