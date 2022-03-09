@@ -1,7 +1,7 @@
 ---
 title: "Deprecation Policy"
 linkTitle: "Deprecation Policy"
-weight: 13
+weight: 1
 Description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) Deprecation Policy
 ---
