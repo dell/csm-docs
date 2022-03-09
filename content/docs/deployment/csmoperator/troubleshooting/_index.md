@@ -25,4 +25,29 @@ kubectl logs <csm-operator-controller-podname> -n <namespace>
 ```
 
 ### My Dell CSI Driver install failed. How do I fix it?
-TODO
+Describe the current state by issuing: 
+`kubectl describe csm <custom-resource-name> -n <namespace>`
+
+In the output refer to the status and events section. If status shows pods that are in the failed state, refer to the CSI Driver Troubleshooting guide.
+
+Example:
+```
+Status:
+	Controller Status:
+	Available: 1
+	Desired: 2
+	Failed: 1
+	Node Status:
+	Available: 1
+	Desired: 2
+	Failed: 1
+	State: Failed
+
+Events
+	Warning Updated 67s (x15 over 2m4s) csm (combined from similar events): at 1646848059520359167 Pod error details ControllerError: ErrImagePull= pull access denied for dellem/csi-isilon, repository does not exist or may require 'docker login': denied: requested access to the resource is denied, Daemonseterror: ErrImagePull= pull access denied for dellem/csi-isilon, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+```
+
+The above event shows dellem/csi-isilon does not exist, to resolve this user can kubectl edit the csm and update to correct image.
+
+
+To view logs: `kubectl logs <dell-csm-operator-controller-manager-pod> -n dell-csm-operator` 
