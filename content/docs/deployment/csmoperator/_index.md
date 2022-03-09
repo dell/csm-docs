@@ -124,41 +124,6 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 - It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
 
 
-#### iSCSI
-If you are installing a CSI driver which is going to use iSCSI as the transport protocol, please follow the following instructions.  
-In Red Hat OpenShift clusters, you can create a `MachineConfig` object using the console or `oc` to ensure that the iSCSI daemon starts on all the Red Hat CoreOS nodes. Here is an example of a `MachineConfig` object:
-
-```yaml
-apiVersion: machineconfiguration.openshift.io/v1
-kind: MachineConfig
-metadata:
-  name: 99-iscsid
-  labels:
-    machineconfiguration.openshift.io/role: worker
-spec:
-  config:
-    ignition:
-      version: 2.2.0  
-    systemd:
-      units:
-      - name: "iscsid.service"
-        enabled: true
-```
-Once the `MachineConfig` object has been deployed, CoreOS will ensure that `iscsid.service` starts automatically.
-
-Alternatively, you can check the status of the iSCSI service by entering the following command on each worker node in the cluster:
-
-`sudo systemctl status iscsid`
-
-The service should be up and running (i.e. should be active state).
-
-If the `iscsid.service` is not running, then perform the following steps on each worker node in the cluster
-1. `Login` to worker nodes and check if the file /etc/iscsi/initiatorname.iscsi has been created properly
-2. If the file doesn't exist or it doesn't contain a valid ISCSI IQN, then make sure it exists with valid entries
-3. Ensure that iscsid service is running - Enable ```sudo systemctl enable iscsid``` & restart ```sudo systemctl restart iscsid``` iscsid if necessary. 
-Note: If your worker nodes are running Red Hat CoreOS, make sure that automatic ISCSI login at boot is configured. Please contact RedHat for more details.
-
-
 ## Installing CSI Driver via Operator
 
 [PowerScale Driver](drivers/powerscale)
