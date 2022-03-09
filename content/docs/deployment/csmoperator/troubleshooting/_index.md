@@ -1,9 +1,9 @@
 ---
 title: "Troubleshooting"
 linkTitle: "Troubleshooting"
-weight: 3
 Description: >
-  Troubleshooting guide
+  Troubleshooting guide  for Dell CSM Operator
+weight: 3
 ---
 
 ## Frequently Asked Questions
@@ -22,6 +22,5 @@ The Dell CSM Operator is not fully compliant with the OperatorHub React UI eleme
 ### How can I view detailed logs for the CSM Operator?
 Detailed logs of the CSM Operator can be displayed using the following command:
 ```
-kubectl logs <csm-opertaor-controller-podname> -n <namespace>
+kubectl logs <csm-operator-controller-podname> -n <namespace>
 ```
-
