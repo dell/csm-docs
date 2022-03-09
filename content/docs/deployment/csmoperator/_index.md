@@ -95,23 +95,34 @@ Each CSI Driver and CSM Module installation is represented by a Custom Resource.
 The specification for the Custom Resource is the same for all the drivers.Below is a list of all the mandatory and optional fields in the Custom Resource specification
 
 #### Mandatory fields
+
 **configVersion** - Configuration version - refer [here](#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csm-operator) for appropriate config version                 
-**replicas**  - Number of replicas for controller plugin - must be set to 1 for all drivers  
-**dnsPolicy** - Determines the dnsPolicy for the node daemonset. Accepted values are `Default`, `ClusterFirst`, `ClusterFirstWithHostNet`, `None`
-**common** - This field is mandatory and is used to specify common properties for both controller and the node plugin
+**replicas**  - Number of replicas for controller plugin - must be set to 1 for all drivers.
+
+**dnsPolicy** - Determines the dnsPolicy for the node daemonset. Accepted values are `Default`, `ClusterFirst`, `ClusterFirstWithHostNet`, `None`.
+
+**common** - This field is mandatory and is used to specify common properties for both controller and the node plugin.
+
 * image - driver container image
 * imagePullPolicy - Image Pull Policy of the driver image
 * envs - List of environment variables and their values
-#### Optional fields
-**controller** - List of environment variables and values which are applicable only for controller  
-**node** - List of environment variables and values which are applicable only for node  
-**sideCars** - Specification for CSI sidecar containers.  
-**authSecret** - Name of the secret holding credentials for use by the driver. If not specified, the default secret *-creds must exist in the same namespace as driver  
-**tlsCertSecret** - Name of the TLS cert secret for use by the driver. If not specified, a secret *-certs must exist in the namespace as driver
-**tolerations** - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them
-**nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet  
 
-_**Note:**_ The `image` field should point to the correct image tag for version of the driver you are installing.  
+#### Optional fields
+**controller** - List of environment variables and values which are applicable only for controller.
+
+**node** - List of environment variables and values which are applicable only for node.
+
+**sideCars** - Specification for CSI sidecar containers.  
+
+**authSecret** - Name of the secret holding credentials for use by the driver. If not specified, the default secret *-creds must exist in the same namespace as driver.
+
+**tlsCertSecret** - Name of the TLS cert secret for use by the driver. If not specified, a secret *-certs must exist in the namespace as driver.
+
+**tolerations** - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them.
+
+**nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet. 
+
+>**Note:** The `image` field should point to the correct image tag for version of the driver you are installing.  
 
 ### Supported CSI Drivers
 
