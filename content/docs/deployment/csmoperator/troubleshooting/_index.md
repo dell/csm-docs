@@ -34,13 +34,13 @@ Example:
 ```
 Status:
 	Controller Status:
-	Available: 1
+	Available: 0
 	Desired: 2
-	Failed: 1
+	Failed: 2
 	Node Status:
-	Available: 1
+	Available: 0
 	Desired: 2
-	Failed: 1
+	Failed: 2
 	State: Failed
 
 Events
@@ -50,4 +50,11 @@ Events
 The above event shows dellem/csi-isilon does not exist, to resolve this user can kubectl edit the csm and update to correct image.
 
 
-To view logs: `kubectl logs <dell-csm-operator-controller-manager-pod> -n dell-csm-operator` 
+To get details of driver installation: `kubectl logs <dell-csm-operator-controller-manager-pod> -n dell-csm-operator`.
+
+Typical reasons for errors : 
+	- Incorrect driver version 
+	- Incorrect driver type
+	- Incorrect driver Spec env, args for containers
+	- Incorrect RBAC permissions
+	
