@@ -96,7 +96,8 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 
 #### Mandatory fields
 
-**configVersion** - Configuration version - refer [here](#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csm-operator) for appropriate config version                 
+**configVersion** - Configuration version - refer [here](#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csm-operator) for appropriate config version.
+
 **replicas**  - Number of replicas for controller plugin - must be set to 1 for all drivers.
 
 **dnsPolicy** - Determines the dnsPolicy for the node daemonset. Accepted values are `Default`, `ClusterFirst`, `ClusterFirstWithHostNet`, `None`.
@@ -108,6 +109,7 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 * envs - List of environment variables and their values
 
 #### Optional fields
+
 **controller** - List of environment variables and values which are applicable only for controller.
 
 **node** - List of environment variables and values which are applicable only for node.
