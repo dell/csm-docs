@@ -13,7 +13,7 @@ Description: >
   - [How can I view detailed logs for the CSM Operator?](#how-can-i-view-detailed-logs-for-the-csm-operator)
 
 ### Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?
-The Dell CSM Operator can't manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Dell CSM Operator
+The Dell CSM Operator is unable to manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Dell CSM Operator
 
 
 ### Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?
