@@ -1,5 +1,6 @@
 ---
 title: PowerScale
+linkTitle: "PowerScale"
 description: >
   Installing Dell CSI Driver for PowerScale via Dell CSM Operator
 ---

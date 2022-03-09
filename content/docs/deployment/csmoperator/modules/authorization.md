@@ -1,5 +1,6 @@
 ---
 title: Authorization
+linkTitle: "Authorization"
 description: >
   Installing Authorization via Dell CSM Operator
 ---
