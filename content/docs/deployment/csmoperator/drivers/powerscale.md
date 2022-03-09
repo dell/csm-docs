@@ -8,7 +8,7 @@ description: >
 
 The CSM Driver for Dell PowerScale can be installed via the Dell CSM Operator.
 
-To deploy the Operator, follow the instructions available [here](../).
+To deploy the Operator, follow the instructions available [here](../..).
 
 There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
@@ -92,7 +92,7 @@ User can query for all Dell CSI drivers using the following command:
    The driver will continue to use previous values in case of an error found in the YAML file.
            
 3. Create isilon-certs-n secret.
-      Please refer [this section](../../helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
+      Please refer [this section](../../../../csidriver/installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
 
       If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml
 

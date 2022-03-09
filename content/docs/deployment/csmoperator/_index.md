@@ -161,7 +161,7 @@ Note: If your worker nodes are running Red Hat CoreOS, make sure that automatic 
 
 ## Installing CSI Driver via Operator
 
-[PowerScale Driver](/csmoperator/drivers/powerscale.md)
+[PowerScale Driver](drivers/powerscale)
 
 **Note**: If you are using an OLM based installation, the example manifests are available in the `OperatorHub` UI.
 You can edit these manifests and install the driver using the `OperatorHub` UI.
@@ -180,7 +180,6 @@ Once the driver Custom Resource has been created, you can verify the installatio
 If the driver-namespace was set to _test-powerscale_, and the name of the driver is _powerscale_, then run the command `kubectl get csipowerscale/powerscale -n test-powerscale -o yaml` to get the details of the Custom Resource.
 
 Note: If the _state_ of the `CustomResource` is _Running_ then all the driver pods have been successfully installed. If the _state_ is _SuccessFul_, then it means the driver deployment was successful but some driver pods may not be in a _Running_ state.
-Please refer to the _Troubleshooting_ section [here](../../troubleshooting/operator) if you encounter any issues during installation.
 
 ## Update CSI Drivers
 The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –
