@@ -6,23 +6,19 @@ Description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) Deprecation Policy
 ---
 
-Deprecation policy for Dell Container Storage Modules (CSM) is in place to help users prevent any disruptive incidents from occurring. We aim to provide appropriate notice when CLI elements, APIs, features, or behaviors are slated to be removed.
+The Deprecation policy for Dell Container Storage Modules (CSM) is in place to help users prevent any disruptive incidents from occurring. We aim to provide appropriate notice when CLI elements, APIs, features, or behaviors are slated to be removed.
 
 ### Deprecating a CLI Element
 
 This captures situations when a flag or command is removed from a CLI.
 
-CLI elements must function after their announced deprecation for no less than:
-
-**Generally Available (GA): 2 releases - major or minor release versions**
+CLI elements must function after their announced deprecation for no less than two releases. This includes when the releases become Generally Available (GA), including both major or minor release versions. 
 
 When deprecating a CLI command, a warning message must be displayed each time the command is used.  This warning message should capture the deprecation details along with the release in which the command that is being deprecated will be removed.
 
 ### Deprecating an API, Feature, or Behavior
 
-CSM features must function after their announced deprecation for no less than:
-
-**Generally Available (GA): 2 releases - major or minor release versions**
+CSM features must function after their announced deprecation for no less than two releases. This includes when the releases become Generally Available (GA), including both major or minor release versions. 
 
 ### Tech Previews
 
