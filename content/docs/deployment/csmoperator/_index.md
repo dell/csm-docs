@@ -201,7 +201,7 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 * Updating the image of the driver
 
 ## Limitations
-* The Dell CSM Operator can't manage any existing driver installed using Helm charts or the CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the operator based deployment, uninstall the driver and then redeploy the driver following the installation procedure described above
+* The Dell CSM Operator can't manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the operator based deployment, uninstall the driver and then redeploy the driver following the installation procedure described above
 * The Dell CSM Operator is not fully compliant with the OperatorHub React UI elements and some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use kubectl/oc commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Dell CSM Operator
 
 
