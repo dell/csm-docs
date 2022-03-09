@@ -105,7 +105,7 @@ User can query for all Dell CSI drivers using the following command:
       Execute command: ```kubectl create -f empty-secret.yaml```
 
 4. Create a CR (Custom Resource) for PowerScale using the sample files provided 
-   [here](https://github.com/dell/csm-operator/tree/master/samples).
+   [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
 
 5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
 
@@ -131,6 +131,8 @@ User can query for all Dell CSI drivers using the following command:
 6.  Execute the following command to create PowerScale custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
+
+7.  [Verify the CSI Driver installation](../../#verifying-the-driver-installation)
     
 **Note** : 
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.

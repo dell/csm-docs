@@ -39,13 +39,14 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 1. Clone the [Dell CSM Operator repository](https://github.com/dell/csm-operator).
 2. `cd csm-operator`
-3. Run `bash scripts/install.sh` to install the operator.
+3. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
+4. Run `bash scripts/install.sh` to install the operator.
 
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.
 
 {{< imgproc install.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-4. Run the command `kubectl get pods -n dell-csm-operator` to validate the installation. If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
+5. Run the command `kubectl get pods -n dell-csm-operator` to validate the installation. If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
 
 {{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
    
@@ -170,13 +171,10 @@ Once the driver `Custom Resource (CR)` is created, you can verify the installati
 
 *  Check if ContainerStorageModule CR is created successfully using the command below:
     ```
-    $ kubectl get csm -n <driver-namespace>
+    $ kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
     ```
-* Check the status of the CR to verify if the driver installation is successful.
+* Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](./troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
-If the driver namespace is set to _test-powerscale_ and the name of the driver is _powerscale_, then run the command `kubectl get csipowerscale/powerscale -n test-powerscale -o yaml` to get the details of the CR.
-
->**Note**: If the _state_ of the CR is `Running` then all the driver pods have been successfully installed. If the _state_ is `Successful`, then it means the driver deployment is successful but some driver pods may not be in `Running` state.
 
 ### Update CSI Drivers
 The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include:
@@ -190,9 +188,19 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
     and modify the installation
 * Modify the API object in-place via `kubectl patch`
 
-### Supported modifications
+#### Supported modifications
 * Changing environment variable values for driver
 * Updating the image of the driver
+
+### Uninstall CSI Driver
+The CSI Drivers and CSM Modules can be uninstalled by deleting the Custom Resource.
+
+For e.g.
+```
+$ kubectl delete csm/powerscale -n <driver-namespace>
+```
+
+By default, the `forceRemoveDriver` option is set to `true` which will uninstall the CSI Driver and CSM Modules when the Custom Resource is deleted. Setting this option to `false` is not recommended.
 
 ### SideCars
 Although the sidecars field in the driver specification is optional, it is **strongly** recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell support.
