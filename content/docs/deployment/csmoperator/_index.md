@@ -34,9 +34,11 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 ### Manual Installation
 
 #### Operator Installation on a cluster without OLM
+
 1. Clone the [Dell CSM Operator repository](https://github.com/dell/csm-operator).
 2. `cd csm-operator`
 3. Run `bash scripts/install.sh` to install the operator.
+
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.
 
 {{< imgproc install.jpg Resize "2500x" >}}{{< /imgproc >}}
@@ -62,7 +64,8 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 ##### Upstream Kubernetes
 For installing via OperatorHub.io on Kubernetes, go to the [OperatorHub page](../../csidriver/partners/operator/).
-_**NOTE**_: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
+
+>**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
 
 ##### Red Hat OpenShift Clusters:
 For installing via OpenShift with the Operator, go to the [OpenShift page](../../csidriver/partners/redhat/).
@@ -170,7 +173,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 Refer [PowerScale Driver](drivers/powerscale) to install the driver via Operator
 
-**Note**: If you are using an OLM based installation, example manifests are available in `OperatorHub` UI.
+>**Note**: If you are using an OLM based installation, example manifests are available in `OperatorHub` UI.
 You can edit these manifests and install the driver using the `OperatorHub` UI.
 
 ### Verifying the driver installation
@@ -184,7 +187,7 @@ Once the driver `Custom Resource (CR)` is created, you can verify the installati
 
 If the driver namespace is set to _test-powerscale_ and the name of the driver is _powerscale_, then run the command `kubectl get csipowerscale/powerscale -n test-powerscale -o yaml` to get the details of the CR.
 
-_**Note**_: If the _state_ of the CR is `Running` then all the driver pods have been successfully installed. If the _state_ is `Successful`, then it means the driver deployment is successful but some driver pods may not be in `Running` state.
+>**Note**: If the _state_ of the CR is `Running` then all the driver pods have been successfully installed. If the _state_ is `Successful`, then it means the driver deployment is successful but some driver pods may not be in `Running` state.
 
 ### Update CSI Drivers
 The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include:
