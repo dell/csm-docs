@@ -1,18 +1,15 @@
 ---
 title: PowerScale
 description: >
-  Installing CSI Driver for PowerScale via CSM Operator
+  Installing Dell CSI Driver for PowerScale via Dell CSM Operator
 ---
 
-## Installing CSI Driver for PowerScale via CSM Operator
+## Installing CSI Driver for PowerScale via Dell CSM Operator
 
-The CSM Driver for Dell PowerScale can be installed via the Dell CSM Operator.
+The CSI Driver for Dell PowerScale can be installed via the Dell CSM Operator.
+To deploy the Operator, follow the instructions available [here](../../#installation).
 
-To deploy the Operator, follow the instructions available [here](../..).
-
-There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
-
-Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.
+Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
 **Note**: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerScale via Operator.
 
@@ -23,10 +20,9 @@ User can query for all Dell CSI drivers using the following command:
 ### Install Driver
 
 1. Create namespace.
-     
    Execute `kubectl create namespace test-isilon` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-isilon'.
+
 2. Create *isilon-creds* secret by using secret.yaml file format only.
-  
    2.1   Create a yaml file called secret.yaml with the following content:
      ```
       isilonClusters:
@@ -110,6 +106,7 @@ User can query for all Dell CSI drivers using the following command:
 
 4. Create a CR (Custom Resource) for PowerScale using the sample files provided 
    [here](https://github.com/dell/csm-operator/tree/master/samples).
+
 5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
 
    | Parameter | Description | Required | Default |
@@ -129,12 +126,12 @@ User can query for all Dell CSI drivers using the following command:
    | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | |
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
-   | X_CSI_MODE   | Driver starting mode  | No | node |   
+   | X_CSI_MODE   | Driver starting mode  | No | node | 
+
 6.  Execute the following command to create PowerScale custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
     
 **Note** : 
-   1. Node selector and node tolerations can be added in both controller parameters and node parameters section, based on the need.
-   2. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+   1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
+   2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 

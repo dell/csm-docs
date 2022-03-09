@@ -108,11 +108,8 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 **sideCars** - Specification for CSI sidecar containers.  
 **authSecret** - Name of the secret holding credentials for use by the driver. If not specified, the default secret *-creds must exist in the same namespace as driver  
 **tlsCertSecret** - Name of the TLS cert secret for use by the driver. If not specified, a secret *-certs must exist in the namespace as driver
-**tolerations**
-List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet  
-It should be set separately in the controller and node sections if you want separate set of tolerations for them
-**nodeSelector**
-Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet  
+**tolerations** - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them
+**nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet  
 
 _**Note:**_ The `image` field should point to the correct image tag for version of the driver you are installing.  
 
@@ -124,9 +121,9 @@ _**Note:**_ The `image` field should point to the correct image tag for version 
 
 ### Pre-requisites for installation of the CSI Drivers
 
-On upstream Kubernetes clusters, make sure to install
+On Upstream Kubernetes clusters, make sure to install
 * VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs
-* External Volume Snapshot Controller with the correct version
+* External Volume Snapshot Controller
 
 #### Volume Snapshot CRD's
 The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available [here](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
@@ -166,7 +163,7 @@ You can edit these manifests and install the driver using the `OperatorHub` UI.
 ### Verifying the driver installation
 Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
 
-*  Check if ContainerStorageModule CR got created successfully using the command below:
+*  Check if ContainerStorageModule CR is created successfully using the command below:
     ```
     $ kubectl get csm -n <driver-namespace>
     ```
@@ -200,7 +197,7 @@ The CSM Operator can optionally enable modules that are supported by the specifi
 
 ### Supported CSM Modules
 
-| CSM Modules       | Version    | ConfigVersion  |
+| CSM Modules        | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
 | CSM Authorization  | 1.2.0     | v1.2.0         |
 

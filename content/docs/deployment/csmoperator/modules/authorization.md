@@ -1,21 +1,19 @@
 ---
 title: Authorization
 description: >
-  Installing Authorization via Operator
+  Installing Authorization via Dell CSM Operator
 ---
 
-## Installing Authorization via Operator
+## Installing Authorization via Dell CSM Operator
 
-The Authorization module can be installed via the Dell CSM Operator for supported Dell CSI Drivers.
+The Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
 
-To deploy the Operator, follow the instructions available [here](../..).
+To deploy the Dell CSM Operator, follow the instructions available [here](../../#installation).
 
-There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
-
-Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.
+There are [sample manifests](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale.yaml) provided which can be edited to do an easy installation of the driver along with the module.
 
 ### Install Authorization
 
 1. Create the required Secrets as documented in the [Helm chart procedure](../../../../authorization/deployment/#configuring-a-dell-csi-driver).
 
-2. Follow the steps to install a Dell CSI Driver via the CSM Operator. If Authorization is supported, the module section in the ContainerStorageModule CR can be updated to enable Authorization.
+2. Follow the instructions available [here](../../drivers/powerscale/#install-driver) to install the Dell CSI Driver via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable Authorization.
