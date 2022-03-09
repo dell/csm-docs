@@ -1,7 +1,8 @@
 ---
 title: "Troubleshooting"
 linkTitle: "Troubleshooting"
-description: Troubleshooting guide for Dell CSM Operator
+Description: >
+  Troubleshooting guide  for Dell CSM Operator
 weight: 3
 ---
 
