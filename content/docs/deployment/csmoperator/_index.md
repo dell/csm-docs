@@ -61,11 +61,11 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
 
 ##### Upstream Kubernetes
-For installing via OperatorHub.io on Kubernetes, go to the [OperatorHub page](../../partners/operator/).
+For installing via OperatorHub.io on Kubernetes, go to the [OperatorHub page](../../csidriver/partners/operator/).
 _**NOTE**_: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
 
 ##### Red Hat OpenShift Clusters:
-For installing via OpenShift with the Operator, go to the [OpenShift page](../../partners/redhat/).
+For installing via OpenShift with the Operator, go to the [OpenShift page](../../csidriver/partners/redhat/).
 
 
 The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the operator to: 
