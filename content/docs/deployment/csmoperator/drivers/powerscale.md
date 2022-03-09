@@ -22,8 +22,7 @@ User can query for all Dell CSI drivers using the following command:
 1. Create namespace.
    Execute `kubectl create namespace test-isilon` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-isilon'.
 
-2. Create *isilon-creds* secret by using secret.yaml file format only.
-   2.1   Create a yaml file called secret.yaml with the following content:
+2. Create *isilon-creds* secret by creating a yaml file called secret.yaml with the following content:
      ```
       isilonClusters:
          # logical name of PowerScale Cluster

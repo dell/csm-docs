@@ -59,17 +59,10 @@ Dell CSM Operator can be installed manually or via Operator Hub.
    
 {{< imgproc install_olm_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-### Installation via Operator Hub
-`dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
-
-##### Upstream Kubernetes
-For installing via OperatorHub.io on Kubernetes, go to the [OperatorHub page](../../csidriver/partners/operator/).
-
 >**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
 
-##### Red Hat OpenShift Clusters:
-For installing via OpenShift with the Operator, go to the [OpenShift page](../../csidriver/partners/redhat/).
-
+### Installation via Operator Hub
+`dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
 
 The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the operator to: 
 * _Automatic_ - If you want the operator to be automatically installed or upgraded (once an upgrade is available).
@@ -128,12 +121,6 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 **nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet. 
 
 >**Note:** The `image` field should point to the correct image tag for version of the driver you are installing.  
-
-### Supported CSI Drivers
-
-| CSI Driver         | Version   | ConfigVersion  |
-| ------------------ | --------- | -------------- |
-| CSI PowerScale     | 2.2.0     | v2.2.0         |
 
 ### Pre-requisites for installation of the CSI Drivers
 
@@ -209,14 +196,4 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 Although the sidecars field in the driver specification is optional, it is **strongly** recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell support.
 
 ## Modules
-The CSM Operator can optionally enable modules that are supported by the specific Dell CSI driver. By default, the modules are disabled but they can be enabled by setting the `enabled` flag to true and setting any other configuration options for the given module. 
-
-### Supported CSM Modules
-
-| CSM Modules        | Version   | ConfigVersion  |
-| ------------------ | --------- | -------------- |
-| CSM Authorization  | 1.2.0     | v1.2.0         |
-
-## Limitations
-* The Dell CSM Operator can't manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the operator based deployment, uninstall the driver and then redeploy the driver following the installation procedure described above
-* The Dell CSM Operator is not fully compliant with the OperatorHub React UI elements.Due to this, some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use `kubectl/oc` commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Dell CSM Operator.
+The CSM Operator can optionally enable modules that are supported by the specific Dell CSI driver. By default, the modules are disabled but they can be enabled by setting the `enabled` flag to true and setting any other configuration options for the given module.
