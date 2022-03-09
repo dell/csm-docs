@@ -5,7 +5,7 @@ description: Container Storage Modules Operator
 weight: 1
 ---
 
->>NOTE: The CSM Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.
+>>NOTE: The Dell CSM Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.
 
 The Dell CSM Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
@@ -15,6 +15,18 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 | Kubernetes Version   | OpenShift Version   |
 | -------------------- | ------------------- |
 | 1.21, 1.22, 1.23     | 4.8, 4.9            |
+
+## Supported CSI Drivers
+
+| CSI Driver         | Version   | ConfigVersion  |
+| ------------------ | --------- | -------------- |
+| CSI PowerScale     | 2.2.0     | v2.2.0         |
+
+## Supported CSM Modules
+
+| CSM Modules        | Version   | ConfigVersion  |
+| ------------------ | --------- | -------------- |
+| CSM Authorization  | 1.2.0     | v1.2.0         |
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
@@ -71,18 +83,18 @@ To uninstall a CSM operator installed with OLM run `bash scripts/uninstall_olm.s
 
 {{< imgproc uninstall_olm.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-## Custom Resource Definitions
+### Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.  
 `containerstoragemodule` CRD is installed in API Group `storage.dell.com`.
 
 Drivers and modules can be installed by creating a `customResource`.
 
-## Custom Resource Specification
+### Custom Resource Specification
 Each CSI Driver and CSM Module installation is represented by a Custom Resource.  
 
 The specification for the Custom Resource is the same for all the drivers.Below is a list of all the mandatory and optional fields in the Custom Resource specification
 
-### Mandatory fields
+#### Mandatory fields
 **configVersion** - Configuration version - refer [here](#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csm-operator) for appropriate config version                 
 **replicas**  - Number of replicas for controller plugin - must be set to 1 for all drivers  
 **dnsPolicy** - Determines the dnsPolicy for the node daemonset. Accepted values are `Default`, `ClusterFirst`, `ClusterFirstWithHostNet`, `None`
@@ -90,7 +102,7 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 * image - driver container image
 * imagePullPolicy - Image Pull Policy of the driver image
 * envs - List of environment variables and their values
-### Optional fields
+#### Optional fields
 **controller** - List of environment variables and values which are applicable only for controller  
 **node** - List of environment variables and values which are applicable only for node  
 **sideCars** - Specification for CSI sidecar containers.  
@@ -104,13 +116,13 @@ Used to specify node selectors for the driver StatefulSet/Deployment and DaemonS
 
 _**Note:**_ The `image` field should point to the correct image tag for version of the driver you are installing.  
 
-## Supported CSI Drivers
+### Supported CSI Drivers
 
 | CSI Driver         | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
 | CSI PowerScale     | 2.2.0     | v2.2.0         |
 
-## Pre-requisites for installation of the CSI Drivers
+### Pre-requisites for installation of the CSI Drivers
 
 On upstream Kubernetes clusters, make sure to install
 * VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs
@@ -141,10 +153,8 @@ git checkout release-<your-version>
 kubectl create -f client/config/crd
 kubectl create -f deploy/kubernetes/snapshot-controller
 ```
-
 *NOTE:*
 - It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
-
 
 ## Installing CSI Driver via Operator
 
@@ -166,7 +176,7 @@ If the driver namespace is set to _test-powerscale_ and the name of the driver i
 
 _**Note**_: If the _state_ of the CR is `Running` then all the driver pods have been successfully installed. If the _state_ is `Successful`, then it means the driver deployment is successful but some driver pods may not be in `Running` state.
 
-## Update CSI Drivers
+### Update CSI Drivers
 The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include:
 
 * Modifying the installation directly via `kubectl edit`
@@ -185,7 +195,7 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 ### SideCars
 Although the sidecars field in the driver specification is optional, it is **strongly** recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell support.
 
-### Modules
+## Modules
 The CSM Operator can optionally enable modules that are supported by the specific Dell CSI driver. By default, the modules are disabled but they can be enabled by setting the `enabled` flag to true and setting any other configuration options for the given module. 
 
 ### Supported CSM Modules
