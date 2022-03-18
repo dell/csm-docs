@@ -7,7 +7,7 @@ description: Release notes for PowerFlex CSI driver
 
 ### New Features/Changes
 - Added support for Kubernetes 1.23.
-- Added support for Standalone Helm Charts.
+- Added support for Amazon Elastic Kubernetes Service Anywhere.
 
 ### Fixed Issues
 
