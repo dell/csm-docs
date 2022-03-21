@@ -42,3 +42,7 @@ The script collects the following information:
 * For each namespace containing protected pods, the recent events logged in that namespace.
 
 After successful execution of the script, it will deposit a file similar to driver.logs.20210319_1407.tgz in the current directory. Please submit that file with any [issues](https://github.com/dell/csm/issues).
+
+## Actions to take during failure to clean pod resources completely
+
+The node-podmon cleanup algorithm purposefully will not remove the node taint until all the protected volumes have been cleaned up from the node. This works well if the node fault lasts long enough that controller-podmon can evacuate all the protected pods from the node. However, if the failure is short-lived, and controller-podmon does not clean up all the protected pods on the node, or if for some reason node-podmon cannot clean a pod completely, the taint is left on the node, and manual intervention is required. The required intervention is for the operator to reboot the node, which will ensure that no zombie pods survive. Upon seeing the reboot, node-podmon will then remove the taint.
