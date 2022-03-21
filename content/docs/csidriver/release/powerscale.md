@@ -14,7 +14,7 @@ description: Release notes for PowerScale CSI driver
 
 ### Fixed Issues
 
-There are no fixed issues in this release.
+- CSI Driver installation fails with the error message "error getting FQDN".
 
 ### Known Issues
 | Issue                                                                                                                                                                                                                               | Resolution or workaround, if known                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
