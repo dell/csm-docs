@@ -42,7 +42,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
   - Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml. Please note the following: 
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
     - **If not using sidecar**, please leave this commented out -- otherwise, the empty fields will cause errors.
-##### Example CR:  [config/samples/vxflex_v200_ops_47.yaml](https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v200_ops_47.yaml)
+##### Example CR:  [config/samples/vxflex_v220_ops_48.yaml](https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v220_ops_48.yaml)
 ```yaml
         sideCars:
     # Comment the following section if you don't want to run the monitoring sidecar
@@ -136,6 +136,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
     *Note:* 
     
       - System ID, MDM configuration, etc. now are taken directly from config.yaml. MDM provided in the input_sample_file.yaml will be overidden with MDM values in config.yaml.
+      - Please provide MDM values in input_sample_file.yaml so that it will be overidden by default value.
 
 3. Create a Custom Resource (CR) for PowerFlex using the sample files provided    [here](https://github.com/dell/dell-csi-operator/tree/master/samples).
 4. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
@@ -152,61 +153,123 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
     - Example CR for PowerFlex Driver
       ```yaml
       apiVersion: storage.dell.com/v1
-      kind: CSIVXFlexOS
-      metadata:
-        name: test-vxflexos
-        namespace: test-vxflexos
-      spec:
-        driver:
-          configVersion: v6
-          replicas: 1
-          dnsPolicy: ClusterFirstWithHostNet
-          forceUpdate: false
-          common:
-            image: "dellemc/csi-vxflexos:v2.1.0"
-            imagePullPolicy: IfNotPresent
-            envs:
-              - name: X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT
-                value: "false"
-              - name: X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE
-                value: "false"
-              - name: X_CSI_DEBUG
-                value: "true"
-              - name: X_CSI_ALLOW_RWO_MULTI_POD_ACCESS
-                value: "false"
-          sideCars:
-          # Uncomment the following section if you want to run the monitoring sidecar
-          #  - name: sdc-monitor
-          #    envs:
-          #    - name: HOST_PID
-          #      value: "1"
-          #    - name: MDM
-          #      value: ""
-             - name: external-health-monitor
-               args: ["--monitor-interval=60s"]
-          initContainers:
-            - image: dellemc/sdc:3.6
-              imagePullPolicy: IfNotPresent
-              name: sdc
-              envs:
-                - name: MDM
-                  value: "10.x.x.x,10.x.x.x"  #provide MDM value
-      ---
-      apiVersion: v1
-      kind: ConfigMap
-      metadata:
-        name: vxflexos-config-params
-        namespace: test-vxflexos
-      data:
-        driver-config-params.yaml: |
-          CSI_LOG_LEVEL: "debug"
-          CSI_LOG_FORMAT: "TEXT"
+kind: CSIVXFlexOS
+metadata:
+  name: test-vxflexos
+  namespace: test-vxflexos
+spec:
+  driver:
+    configVersion: v2.2.0
+    replicas: 1
+    dnsPolicy: ClusterFirstWithHostNet
+    forceUpdate: false
+    common:
+      image: "dellemc/csi-vxflexos:v2.2.0"
+      imagePullPolicy: IfNotPresent
+      envs:
+        - name: X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT
+          value: "false"
+        - name: X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE
+          value: "false"
+        - name: X_CSI_DEBUG
+          value: "true"
+        - name: X_CSI_ALLOW_RWO_MULTI_POD_ACCESS
+          value: "false"
+    sideCars:
+    # comment the following section if you don't want to run the monitoring sidecar
+      - name: sdc-monitor
+        envs:
+        - name: HOST_PID
+          value: "1"
+        - name: MDM
+          value: ""
+          
+      # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
+      # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED  to "true".
+      # - name: external-health-monitor
+      #   args: ["--monitor-interval=60s"]
+
+    controller:
+      envs:
+        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from Controller plugin - volume condition.
+        # Install the 'external-health-monitor' sidecar accordingly.
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
+          value: "false"
+
+    node:
+      envs:
+        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
+          value: "false"
+
+    initContainers:
+      - image: dellemc/sdc:3.6
+        imagePullPolicy: IfNotPresent
+        name: sdc
+        envs:
+          - name: MDM
+            value: "10.xx.xx.xx,10.xx.xx.xx"  #provide MDM value
+
+    ---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: vxflexos-config-params
+      namespace: test-vxflexos
+    data:
+      driver-config-params.yaml: |
+        CSI_LOG_LEVEL: "debug"
+        CSI_LOG_FORMAT: "TEXT"
       ```
  ### Pre-Requisite for installation with OLM
      Please run the following commands for creating the required ConfigMap before installing the dell-csi-operator using OLM.
      
+   ```yaml
        1. git clone https://github.com/dell/dell-csi-operator.git 
        2. cd dell-csi-operator 
        3. tar -czf config.tar.gz driverconfig/ 
        # Replace operator-namespace in the below command with the actual namespace where the operator will be deployed by OLM 
        4. kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n <operator-namespace>
+   ```
+
+## Volume Health Monitoring 
+   Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+   
+   To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+   health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+   volume stats value under node should be set to true.
+   
+   ```yaml
+    # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
+      # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED  to "true".
+      # - name: external-health-monitor
+      #   args: ["--monitor-interval=60s"]
+      
+    # Install the 'external-health-monitor' sidecar accordingly.
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: false
+     controller:
+   envs:
+     - name: X_CSI_HEALTH_MONITOR_ENABLED
+       value: "true"
+ node:
+   envs:
+    # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: false
+     - name: X_CSI_HEALTH_MONITOR_ENABLED
+       value: "true"
+   ```
+   
