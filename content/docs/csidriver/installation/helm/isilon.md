@@ -3,7 +3,7 @@ title: PowerScale
 description: >
   Installing CSI Driver for PowerScale via Helm
 ---
-The CSI Driver for Dell EMC PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
 - CSI Driver for PowerScale
@@ -18,16 +18,17 @@ The node section of the Helm chart installs the following component in a _Daemon
 
 ## Prerequisites
 
-The following are requirements to be met before installing the CSI Driver for Dell EMC PowerScale:
+The following are requirements to be met before installing the CSI Driver for Dell PowerScale:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
+- If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../replication/deployment/) first
 
 ### Install Helm 3.0
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerScale.
+Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerScale.
 
 **Steps**
 
@@ -44,19 +45,49 @@ controller:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image:
    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+
+## Volume Health Monitoring
+
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.
+   ```yaml
+controller:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+    # healthMonitorInterval: Interval of monitoring volume health condition
+    # Allowed values: Number followed by unit (s,m,h)
+    # Examples: 60s, 5m, 1h
+    # Default value: 60s
+    interval: 60s
+node:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+   ```
 
 #### Installation example 
 
@@ -70,12 +101,26 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ```
 
 *NOTE:*
-- It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+
+### (Optional) Replication feature Requirements
+
+Applicable only if you decided to enable the Replication feature in `values.yaml`
+
+```yaml
+replication:
+  enabled: true
+```
+#### Replication CRD's
+
+The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
+
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
 
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
 4. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
@@ -93,6 +138,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | verbose | Indicates what content of the OneFS REST API message should be logged in debug level logs | Yes | 1 |
    | kubeletConfigDir | Specify kubelet config dir path | Yes | "/var/lib/kubelet" |
    | enableCustomTopology | Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish a connection to Array. This requires enableCustomTopology to be enabled. | No | false |
+   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
    | ***controller*** | Configure controller pod specific parameters | | |
    | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
    | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
@@ -103,6 +149,9 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | healthMonitor.interval | Interval of monitoring volume health condition | Yes | 60s |
    | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
    | tolerations | Define tolerations for the controller deployment, if required | No | |
+   | leader-election-lease-duration | Duration, that non-leader candidates will wait to force acquire leadership | No | 20s |
+   | leader-election-renew-deadline   | Duration, that the acting leader will retry refreshing leadership before giving up  | No | 15s |
+   | leader-election-retry-period   | Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |
    | ***node*** | Configure node pod specific parameters | | |
    | nodeSelector | Define node selection constraints for pods of node daemonset | No | |
    | tolerations | Define tolerations for the node daemonset, if required | No | |
@@ -111,6 +160,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | ***PLATFORM ATTRIBUTES*** | | | |   
    | endpointPort | Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret. | No | true |
+   | isiAuthType | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication | No | 0 |
    | isiAccessZone | Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same. | No | System |
    | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.| No | true |   
    | isiPath | Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
@@ -121,7 +171,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
-   
+
    *NOTE:* 
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
@@ -141,6 +191,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. | No | default value from values.yaml |
    | endpointPort | Specify the HTTPs port number of the PowerScale OneFS API server | No | default value from values.yaml |
    | isiPath | The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute. | No | default value from values.yaml |
+   | mountEndpoint | Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if [CSM-Authorization](https://github.com/dell/karavi-authorization) is enabled. | No | - |
 
    The username specified in *secret.yaml* must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:
      
@@ -164,7 +215,7 @@ Create isilon-creds secret using the following command:
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
    - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../authorization) is enabled.
    
-7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell EMC PowerScale.
+7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell PowerScale.
     ```
     kubectl create -f empty-secret.yaml
     ```
@@ -196,7 +247,7 @@ If the 'skipCertificateValidation' parameter is set to false and a previous inst
 
 ### Dynamic update of array details via secret.yaml
 
-CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating *secret.yaml*. Users can now update the isilon-creds secret by editing the *secret.yaml* and executing the following command
+CSI Driver for Dell PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating *secret.yaml*. Users can now update the isilon-creds secret by editing the *secret.yaml* and executing the following command
 
 `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
 
@@ -206,11 +257,11 @@ CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now 
 
 ## Storage Classes
 
-The CSI driver for Dell EMC PowerScale version 1.5 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A sample storage class manifest is available at `samples/storageclass/isilon.yaml`. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.    
+The CSI driver for Dell PowerScale version 1.5 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A sample storage class manifest is available at `samples/storageclass/isilon.yaml`. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.    
 
 ### What happens to my existing storage classes?
 
-*Upgrading from CSI PowerScale v2.0 driver*
+*Upgrading from CSI PowerScale v2.1 driver*:
 The storage classes created as part of the installation have an annotation - "helm.sh/resource-policy": keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.
 
 *NOTE*:
@@ -232,9 +283,9 @@ Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volu
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerScale v2.0 driver*:
+*Upgrading from CSI PowerScale v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.1.
+It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.2.
 
