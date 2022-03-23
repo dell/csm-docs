@@ -3,14 +3,13 @@ title: Operator
 description: Release notes for Dell CSI Operator
 ---
 
-## Release Notes - Dell CSI Operator 1.5.0
+## Release Notes - Dell CSI Operator 1.6.0
 
->**Note:** There will be a delay in certification of Dell CSI Operator 1.5.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.5.0 release.
+>**Note:** There will be a delay in certification of Dell CSI Operator 1.6.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.6.0 release.
 
 ### New Features/Changes
 
-- Added support for Kubernetes v1.22
-- Added support for OpenShift v4.8.
+- Added support for OpenShift v4.9.
 
 ### Fixed Issues
 There are no fixed issues in this release.

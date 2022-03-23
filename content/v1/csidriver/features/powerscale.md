@@ -123,7 +123,7 @@ In order to use Volume Snapshots, ensure the following components have been depl
 
 ### Volume Snapshot Class
 
-During the installation of CSI PowerScale driver version 2.0, no default Volume Snapshot Class will get created.
+During the installation of CSI PowerScale driver version 2.0 and higher, no default Volume Snapshot Class will get created.
 
 Following are the manifests for the Volume Snapshot Class:
 
@@ -403,7 +403,8 @@ allowedTopologies:
       - key: csi-isilon.dellemc.com/<ISILON_IP>
         values:
           - csi-isilon.dellemc.com
-
+# specify additional mount options for when a Persistent Volume is being mounted on a node.
+# To mount volume with NFSv4, specify mount option vers=4. Make sure NFSv4 is enabled on the Isilon Cluster.
 mountOptions: ["<mountOption1>", "<mountOption2>", ..., "<mountOptionN>"]
 ```
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
@@ -519,11 +520,46 @@ The permissions present in values.yaml are the default for all cluster config.
 
 If the volume permission is not present in storage class then secrets are considered and if it is not present even in secrets then values.yaml is considered.
 
->**Note:** <br>For volume creation from source (volume from snapshot/volume from volume) permissions are inherited from source. <br><br>Create myvalues.yaml/my-isilon-settings.yaml and storage class according to csi-powerscale 2.0
+>**Note:** <br>For volume creation from source (volume from snapshot/volume from volume) permissions are inherited from source. <br><br>Create myvalues.yaml/my-isilon-settings.yaml and storage class accordingly.
 
 ### Operator based installation
 
 In the case of operator-based installation, default permission for powerscale directory is present in the samples file.
 
 Other ways of configuring powerscale volume permissions remain the same as helm-based installation.
+
+
+## PV/PVC Metrics
+
+CSI Driver for Dell EMC PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes. 
+For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.
+
+### This feature can be enabled
+1. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.   
+2. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file and by enabling the alpha feature gate `CSIVolumeHealth`.
+
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)
+
+Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerScale 2.1.0 and Kubernetes version 1.22+.
+
+To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
+`--feature-gates="...,ReadWriteOncePod=true"`
+
+### Creating a PersistentVolumeClaim
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: single-writer-only
+spec:
+  accessModes:
+  - ReadWriteOncePod # the volume can be mounted as read-write by a single pod across the whole cluster
+  resources:
+    requests:
+      storage: 1Gi
+```
+
+When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
+
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
 

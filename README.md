@@ -8,9 +8,9 @@ You may obtain a copy of the License at
     http://www.apache.org/licenses/LICENSE-2.0
 -->
 
-# Dell EMC Container Storage Modules (CSM)
+# Dell Technologies (Dell) Container Storage Modules (CSM)
 
-Dell EMC Container Storage Modules (CSM) is an open-source suite of Kubernetes storage enablers for Dell EMC products.
+Dell Technologies (Dell) Container Storage Modules (CSM) is an open-source suite of Kubernetes storage enablers for Dell products.
 
 ## Table of Contents
 
@@ -27,19 +27,19 @@ Dell EMC Container Storage Modules (CSM) is an open-source suite of Kubernetes s
 * [About](#about)
 
 ## Container Storage Modules - Components
-* [Dell EMC Container Storage Modules (CSM) for Authorization](https://github.com/dell/karavi-authorization)
-* [Dell EMC Container Storage Modules (CSM) for Observability](https://github.com/dell/karavi-observability)
-* [Dell EMC Container Storage Modules (CSM) for Replication](https://github.com/dell/csm-replication)
-* [Dell EMC Container Storage Modules (CSM) for Resiliency](https://github.com/dell/karavi-resiliency)
-* [Dell EMC Container Storage Modules (CSM) for Volume Group Snapshotter](https://github.com/dell/csi-volumegroup-snapshotter)
-* [CSI Driver for Dell EMC PowerFlex](https://github.com/dell/csi-powerflex)
-* [CSI Driver for Dell EMC PowerMax](https://github.com/dell/csi-powermax)
-* [CSI Driver for Dell EMC PowerScale](https://github.com/dell/csi-powerscale)
-* [CSI Driver for Dell EMC PowerStore](https://github.com/dell/csi-powerstore)
-* [CSI Driver for Dell EMC Unity](https://github.com/dell/csi-unity)
+* [Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization](https://github.com/dell/karavi-authorization)
+* [Dell Technologies (Dell) Container Storage Modules (CSM) for Observability](https://github.com/dell/karavi-observability)
+* [Dell Technologies (Dell) Container Storage Modules (CSM) for Replication](https://github.com/dell/csm-replication)
+* [Dell Technologies (Dell) Container Storage Modules (CSM) for Resiliency](https://github.com/dell/karavi-resiliency)
+* [Dell Technologies (Dell) Container Storage Modules (CSM) for Volume Group Snapshotter](https://github.com/dell/csi-volumegroup-snapshotter)
+* [CSI Driver for Dell PowerFlex](https://github.com/dell/csi-powerflex)
+* [CSI Driver for Dell PowerMax](https://github.com/dell/csi-powermax)
+* [CSI Driver for Dell PowerScale](https://github.com/dell/csi-powerscale)
+* [CSI Driver for Dell PowerStore](https://github.com/dell/csi-powerstore)
+* [CSI Driver for Dell Unity](https://github.com/dell/csi-unity)
 
 ## About
 
-Dell EMC Container Storage Modules (CSM) is 100% open source and community-driven. All components are available
+Dell Technologies (Dell) Container Storage Modules (CSM) is 100% open source and community-driven. All components are available
 under [Apache 2 License](https://www.apache.org/licenses/LICENSE-2.0.html) on
 GitHub.

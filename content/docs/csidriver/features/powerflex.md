@@ -7,7 +7,7 @@ Description: Code features for PowerFlex Driver
 
 ## Volume Snapshot Feature
 
-The CSI PowerFlex driver version 2.0 and higher supports v1 snapshots on Kubernetes 1.20/1.21/1.22.
+The CSI PowerFlex driver version 2.0 and higher supports v1 snapshots on Kubernetes 1.21/1.22/1.23.
 
 In order to use Volume Snapshots, ensure the following components are deployed to your cluster:
 - Kubernetes Volume Snapshot CRDs
@@ -84,26 +84,25 @@ spec:
 
 This feature extends CSI specification to add the capability to create crash-consistent snapshots of a group of volumes. This feature is available as a technical preview. To use this feature, users have to deploy the csi-volumegroupsnapshotter side-car as part of the PowerFlex driver. Once the sidecar has been deployed, users can make snapshots by using yaml files such as this one:
 ```
-apiVersion: volumegroup.storage.dell.com/v1alpha2
+apiVersion: volumegroup.storage.dell.com/v1
 kind: DellCsiVolumeGroupSnapshot
 metadata:
-  # Name must be 13 characters or less in length
   name: "vg-snaprun1"
   namespace: "helmtest-vxflexos"
 spec:
   # Add fields here
   driverName: "csi-vxflexos.dellemc.com"
   # defines how to process VolumeSnapshot members when volume group snapshot is deleted
-  # "retain" - keep VolumeSnapshot instances
-  # "delete" - delete VolumeSnapshot instances
-  memberReclaimPolicy: "retain"
+  # "Retain" - keep VolumeSnapshot instances
+  # "Delete" - delete VolumeSnapshot instances
+  memberReclaimPolicy: "Retain"
   volumesnapshotclass: "vxflexos-snapclass"
   pvcLabel: "vgs-snap-label"
   # pvcList:
   #   - "pvcName1"
   #   - "pvcName2"
 ```
-In the metadata section, the name is limited to 13 characters because the snapshotter will append a timestamp to it. Additionally, the pvcLabel field specifies a label that must be present in PVCs that are to be snapshotted. Here is a sample of that portion of a .yaml for a PVC:
+The pvcLabel field specifies a label that must be present in PVCs that are to be snapshotted. Here is a sample of that portion of a .yaml for a PVC:
 ```
 metadata:
   name: pvol0

@@ -6,7 +6,7 @@ description: >
 
 ## Installing CSI Driver for PowerMax via Operator
 
-CSI Driver for Dell EMC PowerMax can be installed via the Dell CSI Operator.
+CSI Driver for Dell PowerMax can be installed via the Dell CSI Operator.
 
 To deploy the Operator, follow the instructions available [here](../).
 
@@ -28,17 +28,17 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    Create a file called powermax-creds.yaml with the following content:
      ```yaml
         apiVersion: v1
-	      kind: Secret
-	      metadata:
+          kind: Secret
+          metadata:
           name: powermax-creds
-	        # Replace driver-namespace with the namespace where driver is being deployed
-	        namespace: <driver-namespace>
-	      type: Opaque
-	      data:
-	        # set username to the base64 encoded username
-	        username: <base64 username>
-	        # set password to the base64 encoded password
-	        password: <base64 password>
+            # Replace driver-namespace with the namespace where driver is being deployed
+            namespace: <driver-namespace>
+          type: Opaque
+          data:
+            # set username to the base64 encoded username
+            username: <base64 username>
+            # set password to the base64 encoded password
+            password: <base64 password>
           # Uncomment the following key if you wish to use ISCSI CHAP authentication (v1.3.0 onwards)
           # chapsecret: <base64 CHAP secret>
      ```
@@ -65,10 +65,11 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_MANAGED_ARRAYS | List of comma-separated array ID(s) which will be managed by the driver | Yes | - |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME | Name of CSI PowerMax ReverseProxy service. Leave blank if not using reverse proxy | No | - |
    | X_CSI_GRPC_MAX_THREADS | Number of concurrent grpc requests allowed per client | No | 4 |
-| X_CSI_POWERMAX_DRIVER_NAME | Set custom CSI driver name. For more details on this feature see the related [documentation](../../../features/powermax/#custom-driver-name) | No | - |
-| ***Node parameters***|
+   | X_CSI_POWERMAX_DRIVER_NAME | Set custom CSI driver name. For more details on this feature see the related [documentation](../../../features/powermax/#custom-driver-name) | No | - |
+   | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No | false |
+   | ***Node parameters***|
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
-5.  Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
+5. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 
 ### CSI PowerMax ReverseProxy
 
@@ -198,8 +199,8 @@ metadata:
   namespace: test-powermax
 spec:
   driver:
-    # Config version for CSI PowerMax v2.1.0 driver
-    configVersion: v2.1.0
+    # Config version for CSI PowerMax v2.2.0 driver
+    configVersion: v2.2.0
     # replica: Define the number of PowerMax controller nodes
     # to deploy to the Kubernetes release
     # Allowed values: n, where n > 0
@@ -208,8 +209,8 @@ spec:
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      # Image for CSI PowerMax driver v2.1.0
-      image: dellemc/csi-powermax:v2.1.0
+      # Image for CSI PowerMax driver v2.2.0
+      image: dellemc/csi-powermax:v2.2.0
       # imagePullPolicy: Policy to determine if the image should be pulled prior to starting the container.
       # Allowed values:
       #  Always: Always pull the image.
@@ -223,54 +224,70 @@ spec:
         # Examples: "000000000001", "000000000002"
         - name: X_CSI_MANAGED_ARRAYS
           value: "000000000000,000000000001"
-          # X_CSI_POWERMAX_ENDPOINT: Address of the Unisphere server that is managing the PowerMax arrays
-          # Default value: None
-          # Example: https://0.0.0.1:8443
+        # X_CSI_POWERMAX_ENDPOINT: Address of the Unisphere server that is managing the PowerMax arrays
+        # Default value: None
+        # Example: https://0.0.0.1:8443
         - name: X_CSI_POWERMAX_ENDPOINT
           value: "https://0.0.0.0:8443/"
-          # X_CSI_K8S_CLUSTER_PREFIX: Define a prefix that is appended onto
-          # all resources created in the Array
-          # This should be unique per K8s/CSI deployment
-          # maximum length of this value is 3 characters
-          # Default value: None
-          # Examples: "XYZ", "EMC"
-		       # Examples: "XYZ", "EMC"
+        # X_CSI_K8S_CLUSTER_PREFIX: Define a prefix that is appended onto
+        # all resources created in the Array
+        # This should be unique per K8s/CSI deployment
+        # maximum length of this value is 3 characters
+        # Default value: None
+        # Examples: "XYZ", "EMC"
         - name: X_CSI_K8S_CLUSTER_PREFIX
           value: "XYZ"
-          # X_CSI_POWERMAX_PORTGROUPS: Define the set of existing port groups that the driver will use.
-          # It is a comma separated list of portgroup names.
-          # Required only in case of iSCSI port groups
-          # Allowed values: iSCSI Port Group names
-          # Default value: None
-          # Examples: "pg1", "pg1, pg2"
+        # X_CSI_POWERMAX_PORTGROUPS: Define the set of existing port groups that the driver will use.
+        # It is a comma separated list of portgroup names.
+        # Required only in case of iSCSI port groups
+        # Allowed values: iSCSI Port Group names
+        # Default value: None
+        # Examples: "pg1", "pg1, pg2"
         - name: "X_CSI_POWERMAX_PORTGROUPS"
           value: ""
-          # "X_CSI_TRANSPORT_PROTOCOL" can be "FC" or "FIBRE" for fibrechannel,
-          # "ISCSI" for iSCSI, or "" for autoselection.
-          # Allowed values:
-          #   "FC"    - Fiber Channel protocol
-          #   "FIBER" - Fiber Channel protocol
-          #   "ISCSI" - iSCSI protocol
-          #   ""      - Automatic selection of transport protocol
-          # Default value: "" <empty>
+        # "X_CSI_TRANSPORT_PROTOCOL" can be "FC" or "FIBRE" for fibrechannel,
+        # "ISCSI" for iSCSI, or "" for autoselection.
+        # Allowed values:
+        #   "FC"    - Fiber Channel protocol
+        #   "FIBER" - Fiber Channel protocol
+        #   "ISCSI" - iSCSI protocol
+        #   ""      - Automatic selection of transport protocol
+        # Default value: "" <empty>
         - name: "X_CSI_TRANSPORT_PROTOCOL"
           value: ""
-          # X_CSI_POWERMAX_PROXY_SERVICE_NAME: Refers to the name of the proxy service in kubernetes
-          # Set this to "powermax-reverseproxy" if you are installing the proxy
-          # Allowed values: "powermax-reverseproxy"
-          # default values: "" <empty>
+        # X_CSI_POWERMAX_PROXY_SERVICE_NAME: Refers to the name of the proxy service in kubernetes
+        # Set this to "powermax-reverseproxy" if you are installing the proxy
+        # Allowed values: "powermax-reverseproxy"
+        # default values: "" <empty>
         - name: "X_CSI_POWERMAX_PROXY_SERVICE_NAME"
           value: ""
-          # X_CSI_GRPC_MAX_THREADS: Defines the maximum number of concurrent grpc requests.
-          # Set this value to a higher number (max 50) if you are using the proxy
-          # Allowed values: n, where n > 4
-          # default values: None
+        # X_CSI_GRPC_MAX_THREADS: Defines the maximum number of concurrent grpc requests.
+        # Set this value to a higher number (max 50) if you are using the proxy
+        # Allowed values: n, where n > 4
+        # default values: None
         - name: "X_CSI_GRPC_MAX_THREADS"
           value: "4"
 
-  node:
+    sideCars:
+      # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
+      # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED to "true" for controller plugin.
+      # Also set the env variable node.envs.X_CSI_HEALTH_MONITOR_ENABLED to "true" for node plugin.
+      #- name: external-health-monitor
+      #  args: ["--monitor-interval=300s"]
+
+    controller:
       envs:
-        # X_CSI_POWERMAX_ISCSI_ENABLE_CHAP: Determine if the driver is going to configure
+        # X_CSI_HEALTH_MONITOR_ENABLED: Determines if the controller plugin will monitor health of CSI volumes- volume status, volume condition
+        # Install the 'external-health-monitor' sidecar accordingly.
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
+          value: "false"
+    node:
+      envs:
+        # X_CSI_POWERMAX_ISCSI_ENABLE_CHAP: Determine if the node plugin is going to configure
         # ISCSI node databases on the nodes with the CHAP credentials
         # If enabled, the CHAP secret must be provided in the credentials secret
         # and set to the key "chapsecret"
@@ -279,6 +296,13 @@ spec:
         #   "false" - CHAP is disabled
         # Default value: "false"
         - name: "X_CSI_POWERMAX_ISCSI_ENABLE_CHAP"
+          value: "false"
+        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin- volume usage, volume condition
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
           value: "false"
 ---
 apiVersion: v1
@@ -299,3 +323,32 @@ Note:
     only present with `dell-csi-helm-installer`.
  - `Kubelet config dir path` is not yet configurable in case of Operator based driver installation.
  - Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
+
+## Volume Health Monitoring
+This feature is introduced in CSI Driver for PowerMax version 2.2.0.
+
+### Operator based installation
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+
+To enable this feature, set  `X_CSI_HEALTH_MONITOR_ENABLED` to `true` in the driver manifest under controller and node section. Also, install the `external-health-monitor` from `sideCars` section for controller plugin.
+To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
+   
+     # Install the 'external-health-monitor' sidecar accordingly.
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+     controller:
+       envs:
+         - name: X_CSI_HEALTH_MONITOR_ENABLED
+           value: "true"
+     node:
+       envs:
+        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: false
+         - name: X_CSI_HEALTH_MONITOR_ENABLED
+           value: "true"
+```

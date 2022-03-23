@@ -3,7 +3,7 @@ title: CLI
 linktitle: CLI 
 weight: 4
 description: >
-  Dell EMC Container Storage Modules (CSM) for Authorization CLI
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
 ---
 
 karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
@@ -15,7 +15,6 @@ If you feel that something is unclear or missing in this document, please open u
 | - | - |
 | [karavictl](#karavictl) | karavictl is used to interact with CSM Authorization Server |
 | [karavictl cluster-info](#karavictl-cluster-info) | Display the state of resources within the cluster |
-| [karavictl inject](#karavictl-inject) | Inject the sidecar proxy into a CSI driver pod |
 | [karavictl generate](#karavictl-generate) | Generate resources for use with CSM |
 | [karavictl generate token](#karavictl-generate-token) | Generate tokens |
 | [karavictl role](#karavictl-role) | Manage role |
@@ -48,7 +47,7 @@ karavictl is used to interact with CSM Authorization Server
 
 ##### Synopsis
 
-karavictl provides security, RBAC, and quota limits for accessing Dell EMC
+karavictl provides security, RBAC, and quota limits for accessing Dell
 storage products from Kubernetes clusters
 
 ##### Options
@@ -106,60 +105,6 @@ proxy-server           1/1     1            1           59m
 redis-commander        1/1     1            1           59m
 ```
 
-
-
----
-
-
-
-### karavictl inject
-
-Inject the sidecar proxy into a CSI driver pod
-
-##### Synopsis
-
-Injects the sidecar proxy into a CSI driver pod.
-
-You can inject resources coming from stdin.
-
-```
-karavictl inject [flags]
-```
-
-##### Options
-
-```
-  -h, --help                help for inject
-      --image-addr string   Help message for image-addr
-      --proxy-host string   Help message for proxy-host
-```
-
-##### Options inherited from parent commands
-
-```
-      --config string   config file (default is $HOME/.karavictl.yaml)
-```
-
-##### Examples:
-
-Inject into an existing vxflexos CSI driver
-```
-kubectl get secrets,deployments,daemonsets -n vxflexos -o yaml \
-   | karavictl inject --image-addr [IMAGE_REPO]:5000/sidecar-proxy:latest --proxy-host [PROXY_HOST_IP] \
-   | kubectl apply -f -
-```
-
-##### Output
-
-```
-$ kubectl get secrets,deployments,daemonsets -n vxflexos -o yaml \
-| karavictl inject --image-addr [IMAGE_REPO]:5000/sidecar-proxy:latest --proxy-host [PROXY_HOST_IP] \
-| kubectl apply -f -
-
-secret/karavi-authorization-config created
-deployment.apps/vxflexos-controller configured
-daemonset.apps/vxflexos-node configured
-```
 
 
 ---

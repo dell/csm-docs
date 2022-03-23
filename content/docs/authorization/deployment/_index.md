@@ -3,12 +3,12 @@ title: Deployment
 linktitle: Deployment 
 weight: 2
 description: >
-  Dell EMC Container Storage Modules (CSM) for Authorization deployment
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization deployment
 ---
 
 This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:
 - Deploying the CSM for Authorization proxy server, to be controlled by storage administrators
-- Configuring one to many [supported](../../authorization#supported-csi-drivers) Dell EMC CSI drivers with CSM for Authorization
+- Configuring one to many [supported](../../authorization#supported-csi-drivers) Dell CSI drivers with CSM for Authorization
 
 ## Prerequisites
 
@@ -27,32 +27,31 @@ The CSM for Authorization proxy server is installed using a single binary instal
 
 The easiest way to obtain the single binary installer RPM is directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.  
 
-The single binary installer can also be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
+Alternatively, the single binary installer can be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
 
 ```
 make dist build-installer rpm
 ```
 
-The `build-installer` step creates a binary at `bin/deploy` and embeds all components required for installation. The `rpm` step generates an RPM package and stores it at `deploy/rpm/x86_64/`.
+The `build-installer` step creates a binary at `karavi-authorization/bin/deploy` and embeds all components required for installation. The `rpm` step generates an RPM package and stores it at `karavi-authorization/deploy/rpm/x86_64/`.
 This allows CSM for Authorization to be installed in network-restricted environments.
 
 A Storage Administrator can execute the installer or rpm package as a root user or via `sudo`.
 
 ### Installing the RPM
 
-1. Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location `$HOME/.karavi/config.json` having the following contents:
+1. Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location `$HOME/.karavi/config.json` having the following contents: 
 
     ```json
     {
       "web": {
-        "sidecarproxyaddr": "docker_registry/sidecar-proxy:latest",
         "jwtsigningsecret": "secret"
       },
       "proxy": {
         "host": ":8080"
       },
       "zipkin": {
-        "collectoruri": "http://DNS_host_name:9411/api/v2/spans",
+        "collectoruri": "http://DNS-hostname:9411/api/v2/spans",
         "probability": 1
       },
       "certificate": {
@@ -60,30 +59,36 @@ A Storage Administrator can execute the installer or rpm package as a root user 
         "crtFile": "path_to_host_cert_file",
         "rootCertificate": "path_to_root_CA_file"
       },
-      "hostName": "DNS_host_name"
+      "hostname": "DNS-hostname"
     }
     ```
 
-    In the above template, `DNS_host_name` refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running the below command on the system:
+    In an instance where a secure deployment is not required, an insecure deployment is possible. Please note that self-signed certificates will be created for you using cert-manager to allow TLS encryption for communication on the CSM for Authorization proxy server. However, this is not recommended for production environments. For an insecure deployment, the json file in the location `$HOME/.karavi/config.json` only requires the following contents:
 
+    ```json
+    {
+      "hostname": "DNS-hostname"
+    }
     ```
-    nslookup <IP_address>
-    ```
 
-2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS_host_name` is also required. All traffic from `grpc.DNS_host_name` needs to be routed to `DNS_host_name` address, this can be configured by adding a new DNS entry for `grpc.DNS_host_name` or providing a temporary path in the `/etc/hosts` file.  
+>__Note__:
+> - `DNS-hostname` refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running `nslookup <IP_address>`
+> - There are a number of ways to create certificates. In a production environment, certificates are usually created and managed by an IT administrator. Otherwise, certificates can be created using OpenSSL.
 
->__Note__: The certificate provided in `crtFile` should be valid for both the `DNS_host_name` and the `grpc.DNS_host_name` address.  
+2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS-hostname` is also required. All traffic from `grpc.DNS-hostname` needs to be routed to `DNS-hostname` address, this can be configured by adding a new DNS entry for `grpc.DNS-hostname` or providing a temporary path in the systems `/etc/hosts` file. 
 
-    For example, create the certificate config file with alternate names (to include example.com and grpc.example.com) and then create the .crt file:  
+>__Note__: The certificate provided in `crtFile` should be valid for both the `DNS-hostname` and the `grpc.DNS-hostname` address. 
 
-        ```
-        CN = example.com
-        subjectAltName = @alt_names
-        [alt_names]
-        DNS.1 = grpc.example.com
+    For example, create the certificate config file with alternate names (to include DNS-hostname and grpc.DNS-hostname) and then create the .crt file: 
 
-        openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out example.com.crt -days 365 -sha256
-        ```
+      ```
+      CN = DNS-hostname
+      subjectAltName = @alt_names
+      [alt_names]
+      DNS.1 = grpc.DNS-hostname.com
+
+      $ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out DNS-hostname.com.crt -days 365 -sha256
+      ```
 
 3. To install the rpm package on the system, run the below command:
 
@@ -102,6 +107,7 @@ The storage administrator must first configure the proxy server with the followi
 - Bind roles to tenants
 
 Run the following commands on the Authorization proxy server:
+>__Note__: The `--insecure` flag is only necessary if certificates were not provided in `$HOME/.karavi/config.json`.
 
   ```console
   # Specify any desired name
@@ -168,6 +174,10 @@ Run the following commands on the Authorization proxy server:
 
 After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
 
+>__Note__: 
+> - The `--insecure` flag is only necessary if certificates were not provided in `$HOME/.karavi/config.json`.
+> - This sample copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
+
   ```
   echo === Generating token ===
   karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > token.yaml
@@ -175,12 +185,10 @@ After creating the role bindings, the next logical step is to generate the acces
   echo === Copy token to Driver Host ===
   sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
   ```
-  
->__Note__: The sample above copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
 
 ### Copy the karavictl Binary to the Kubernetes Master Node
 
-The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell EMC CSI driver with CSM for Authorization.
+The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell CSI driver with CSM for Authorization.
 
 ```
 sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
@@ -188,11 +196,11 @@ sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
 
 >__Note__: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.
 
-## Configuring a Dell EMC CSI Driver with CSM for Authorization
+## Configuring a Dell CSI Driver with CSM for Authorization
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
-### Configuring a Dell EMC CSI Driver
+### Configuring a Dell CSI Driver
 
 Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:
 
@@ -225,8 +233,7 @@ Create the karavi-authorization-config secret using the following command:
 >__Note__:  
 > - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
 > - For PowerScale, the *systemID* will be the *clusterName* of the array. 
->   - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
-
+>   - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 3. Create the proxy-server-root-certificate secret.
 
     If running in *insecure* mode, create the secret with empty data:
@@ -270,7 +277,9 @@ Please refer to step 5 in the [installation steps for PowerScale](../../csidrive
 
 1. Update *endpointPort* to match the endpoint port number set in samples/secret/karavi-authorization-config.json
 
->__Note__: In *my-isilon-settings.yaml*, endpointPort acts as a default value. If endpointPort is not specified in *my-isilon-settings.yaml*, then it should be specified in the *endpoint* parameter of samples/secret/secret.yaml.
+*Notes:*
+> - In *my-isilon-settings.yaml*, endpointPort acts as a default value. If endpointPort is not specified in *my-isilon-settings.yaml*, then it should be specified in the *endpoint* parameter of samples/secret/secret.yaml.
+> - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 
 2. Enable CSM for Authorization and provide *proxyHost* address 
 
@@ -294,7 +303,6 @@ CSM for Authorization has a subset of configuration parameters that can be updat
 | certificate.crtFile | String | "" |Path to the host certificate file |
 | certificate.keyFile | String | "" |Path to the host private key file |
 | certificate.rootCertificate | String | "" |Path to the root CA file  |
-| web.sidecarproxyaddr | String |"127.0.0.1:5000/sidecar-proxy:latest" |Docker registry address of the CSM for Authorization sidecar-proxy |
 | web.jwtsigningsecret | String | "secret" |The secret used to sign JWT tokens | 
 
 Updating configuration parameters can be done by editing the `karavi-config-secret` on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so: 
@@ -315,7 +323,7 @@ Copy the new, encoded data and edit the `karavi-config-secret` with the new data
 
 Replace the data in `config.yaml` under the `data` field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.
 
->__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so:
+>__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is only necessary if certificates were not provided in `$HOME/.karavi/config.json`
 
 `karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > kubectl -n $namespace apply -f -`
 
