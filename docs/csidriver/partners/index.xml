@@ -51,7 +51,7 @@
       <description>
         
         
-        &lt;p&gt;The Dell EMC CSI Drivers support Red Hat OpenShift.  Please see the &lt;a href=&#34;../../#features-and-capabilities&#34;&gt;Supported Platforms&lt;/a&gt; table for more details.&lt;/p&gt;
+        &lt;p&gt;The Dell CSI Drivers support Red Hat OpenShift.  Please see the &lt;a href=&#34;../../#features-and-capabilities&#34;&gt;Supported Platforms&lt;/a&gt; table for more details.&lt;/p&gt;
 &lt;p&gt;The CSI drivers can be installed via Helm charts or Dell CSI Operator.  The Dell CSI Operator allows for easy installation of the driver via the Openshift UI. The process to install the Operator via the OpenShift UI can be found below.&lt;/p&gt;
 &lt;h2 id=&#34;install-operator-via-the-openshift-ui&#34;&gt;Install Operator via the OpenShift UI&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
@@ -140,7 +140,7 @@
       <description>
         
         
-        &lt;p&gt;The CSI Driver for Dell EMC Unity and PowerScale supports VMware Tanzu and deployment of these Tanzu clusters is done using the VMware Tanzu supervisor cluster and supervisor namespace.&lt;/p&gt;
+        &lt;p&gt;The CSI Driver for Dell Unity and PowerScale supports VMware Tanzu and deployment of these Tanzu clusters is done using the VMware Tanzu supervisor cluster and supervisor namespace.&lt;/p&gt;
 &lt;p&gt;Currently, VMware Tanzu with normal configuration(without NAT) supports Kubernetes 1.20 and higher.
 The CSI driver can be installed on  this cluster using Helm. Installation of CSI drivers in Tanzu via Operator has not been qualified.&lt;/p&gt;
 &lt;p&gt;To login to the Tanzu cluster, download kubectl and kubectl vsphere binaries to any of the system&lt;/p&gt;

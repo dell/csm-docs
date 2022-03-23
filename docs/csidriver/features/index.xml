@@ -23,7 +23,7 @@
         
         
         &lt;h2 id=&#34;volume-snapshot-feature&#34;&gt;Volume Snapshot Feature&lt;/h2&gt;
-&lt;p&gt;The CSI PowerFlex driver version 2.0 and higher supports v1 snapshots on Kubernetes 1.20/1.21/1.22.&lt;/p&gt;
+&lt;p&gt;The CSI PowerFlex driver version 2.0 and higher supports v1 snapshots on Kubernetes 1.21/1.22/1.23.&lt;/p&gt;
 &lt;p&gt;In order to use Volume Snapshots, ensure the following components are deployed to your cluster:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Kubernetes Volume Snapshot CRDs&lt;/li&gt;
@@ -80,25 +80,24 @@ spec:
       storage: 8Gi
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;create-consistent-snapshot-of-group-of-volumes&#34;&gt;Create Consistent Snapshot of Group of Volumes&lt;/h2&gt;
 &lt;p&gt;This feature extends CSI specification to add the capability to create crash-consistent snapshots of a group of volumes. This feature is available as a technical preview. To use this feature, users have to deploy the csi-volumegroupsnapshotter side-car as part of the PowerFlex driver. Once the sidecar has been deployed, users can make snapshots by using yaml files such as this one:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;apiVersion: volumegroup.storage.dell.com/v1alpha2
+&lt;pre&gt;&lt;code&gt;apiVersion: volumegroup.storage.dell.com/v1
 kind: DellCsiVolumeGroupSnapshot
 metadata:
-  # Name must be 13 characters or less in length
   name: &amp;quot;vg-snaprun1&amp;quot;
   namespace: &amp;quot;helmtest-vxflexos&amp;quot;
 spec:
   # Add fields here
   driverName: &amp;quot;csi-vxflexos.dellemc.com&amp;quot;
   # defines how to process VolumeSnapshot members when volume group snapshot is deleted
-  # &amp;quot;retain&amp;quot; - keep VolumeSnapshot instances
-  # &amp;quot;delete&amp;quot; - delete VolumeSnapshot instances
-  memberReclaimPolicy: &amp;quot;retain&amp;quot;
+  # &amp;quot;Retain&amp;quot; - keep VolumeSnapshot instances
+  # &amp;quot;Delete&amp;quot; - delete VolumeSnapshot instances
+  memberReclaimPolicy: &amp;quot;Retain&amp;quot;
   volumesnapshotclass: &amp;quot;vxflexos-snapclass&amp;quot;
   pvcLabel: &amp;quot;vgs-snap-label&amp;quot;
   # pvcList:
   #   - &amp;quot;pvcName1&amp;quot;
   #   - &amp;quot;pvcName2&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In the metadata section, the name is limited to 13 characters because the snapshotter will append a timestamp to it. Additionally, the pvcLabel field specifies a label that must be present in PVCs that are to be snapshotted. Here is a sample of that portion of a .yaml for a PVC:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The pvcLabel field specifies a label that must be present in PVCs that are to be snapshotted. Here is a sample of that portion of a .yaml for a PVC:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;metadata:
   name: pvol0
   namespace: helmtest-vxflexos
@@ -591,7 +590,7 @@ To enable CHAP authentication:&lt;/p&gt;
 &lt;p&gt;With unidirectional CHAP, the PowerMax array challenges the host initiator during the initial link negotiation process and expects to receive a valid credential and CHAP secret in response.&lt;/p&gt;
 &lt;p&gt;When challenged, the host initiator transmits a CHAP credential and CHAP secret to the storage array. The storage array looks for this credential and CHAP secret which is stored in the host initiator group. When a positive authentication occurs, the PowerMax array sends an acceptance message to the host. However, if the PowerMax array fails to find any record of the credential/secret pair, it sends a rejection message, and the link is closed.&lt;/p&gt;
 &lt;h2 id=&#34;custom-driver-name&#34;&gt;Custom Driver Name&lt;/h2&gt;
-&lt;p&gt;With version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell EMC PowerMax in the same Kubernetes/OpenShift cluster.&lt;/p&gt;
+&lt;p&gt;With version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.&lt;/p&gt;
 &lt;p&gt;To use this feature, set the following values under &lt;code&gt;customDriverName&lt;/code&gt; in &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Value: Set this to the custom name of the driver.&lt;/li&gt;
@@ -605,7 +604,7 @@ The driver helm chart installation uses the values above to:&lt;/li&gt;
 &lt;p&gt;For example, if the driver name is set to &lt;em&gt;driver&lt;/em&gt; and it is installed in the namespace &lt;em&gt;powermax&lt;/em&gt;, then the name that is used for the driver (and the provisioner/snapshotter) is &lt;code&gt;powermax.driver.dellemc.com&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;: If not enabled, the name is set to &lt;code&gt;csi-powermax.dellemc.com&lt;/code&gt; by default (without any namespace prefix).&lt;/p&gt;
 &lt;h3 id=&#34;install-multiple-drivers&#34;&gt;Install multiple drivers&lt;/h3&gt;
-&lt;p&gt;To install multiple CSI Drivers for Dell EMC PowerMax in a single Kubernetes cluster, you can take advantage of the custom driver name feature. There are a few important restrictions that should be strictly adhered to:&lt;/p&gt;
+&lt;p&gt;To install multiple CSI Drivers for Dell PowerMax in a single Kubernetes cluster, you can take advantage of the custom driver name feature. There are a few important restrictions that should be strictly adhered to:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Only one driver can be installed in a single namespace&lt;/li&gt;
 &lt;li&gt;Different drivers should not connect to a single Unisphere server&lt;/li&gt;
@@ -848,7 +847,26 @@ on any worker node with access to the PowerMax array &lt;code&gt;000000000001&lt
 &lt;p&gt;As part of driver installation, a ConfigMap with the name &lt;code&gt;powermax-config-params&lt;/code&gt; is created using the manifest located in the sample file. This ConfigMap contains an attribute &lt;code&gt;CSI_LOG_LEVEL&lt;/code&gt; which specifies the current log level of the CSI driver. To set the default/initial log level the user can set this field during driver installation.&lt;/p&gt;
 &lt;p&gt;To update the log level dynamically, the user has to edit the ConfigMap &lt;code&gt;powermax-config-params&lt;/code&gt; and update &lt;code&gt;CSI_LOG_LEVEL&lt;/code&gt; to the desired log level.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl edit configmap -n powermax powermax-config-params
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h2&gt;
+&lt;p&gt;CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.&lt;/p&gt;
+&lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes--readwriteoncepod-alpha-feature&#34;&gt;Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)&lt;/h2&gt;
+&lt;p&gt;Use &lt;code&gt;ReadWriteOncePod(RWOP)&lt;/code&gt; access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerMax 2.2.0+ and Kubernetes version 1.22+.&lt;/p&gt;
+&lt;p&gt;To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
+&lt;code&gt;--feature-gates=&amp;quot;...,ReadWriteOncePod=true&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;creating-a-persistentvolumeclaim&#34;&gt;Creating a PersistentVolumeClaim&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;PersistentVolumeClaim&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;single-writer-only&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;accessModes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- ReadWriteOncePod&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# the volume can be mounted as read-write by a single pod across the whole cluster&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;resources&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;requests&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;1Gi&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When this feature is enabled, the existing &lt;code&gt;ReadWriteOnce(RWO)&lt;/code&gt; access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.&lt;/p&gt;
+&lt;p&gt;To migrate existing PersistentVolumes to use &lt;code&gt;ReadWriteOncePod&lt;/code&gt;, please follow the instruction from &lt;a href=&#34;https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
       </description>
     </item>
     
@@ -969,7 +987,7 @@ kubectl create command.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;VolumeSnapshotClass&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# For kubernetes version 20 and above (v1 snaps)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;snapshot.storage.k8s.io/v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;VolumeSnapshotClass&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -1016,7 +1034,10 @@ kubectl create command.&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;resources&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;requests&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;5Gi&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;volume-expansion&#34;&gt;Volume Expansion&lt;/h2&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Starting from CSI PowerScale driver version 2.2, it is allowed to create PersistentVolumeClaim from VolumeSnapshot with different isi paths i.e., isi paths of the new volume and the VolumeSnapshot can be different.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;volume-expansion&#34;&gt;Volume Expansion&lt;/h2&gt;
 &lt;p&gt;The CSI PowerScale driver version 1.2 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).&lt;/p&gt;
 &lt;p&gt;To use this feature, the storage class that is used to create the PVC must have the attribute &lt;code&gt;allowVolumeExpansion&lt;/code&gt; set to true.&lt;/p&gt;
 &lt;p&gt;The following is a sample manifest for a storage class that allows for Volume Expansion:&lt;/p&gt;
@@ -1188,7 +1209,7 @@ communication (same IP/fqdn as k8s node) by default.&lt;/p&gt;
 &lt;p&gt;For a cluster with multiple network interfaces and if a user wants to segregate k8s traffic from NFS traffic; you can use the &lt;code&gt;allowedNetworks&lt;/code&gt; option.
 &lt;code&gt;allowedNetworks&lt;/code&gt; takes CIDR addresses as a parameter to match the IPs to be picked up by the driver to allow and route NFS traffic.&lt;/p&gt;
 &lt;h2 id=&#34;volume-limit&#34;&gt;Volume Limit&lt;/h2&gt;
-&lt;p&gt;The CSI Driver for Dell EMC PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.&lt;/p&gt;
+&lt;p&gt;The CSI Driver for Dell PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.&lt;/p&gt;
 &lt;p&gt;The user can set the volume limit for a node by creating a node label &lt;code&gt;max-isilon-volumes-per-node&lt;/code&gt; and specifying the volume limit for that node.
 &lt;br/&gt; &lt;code&gt;kubectl label node &amp;lt;node_name&amp;gt; max-isilon-volumes-per-node=&amp;lt;volume_limit&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;The user can also set the volume limit for all the nodes in the cluster by specifying the same to &lt;code&gt;maxIsilonVolumesPerNode&lt;/code&gt; attribute in values.yaml.&lt;/p&gt;
@@ -1199,7 +1220,7 @@ communication (same IP/fqdn as k8s node) by default.&lt;/p&gt;
 &lt;p&gt;Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world.)For more information, refer to &lt;a href=&#34;https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector&#34;&gt;https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations&#34;&gt;https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations&lt;/a&gt; for more information.&lt;/p&gt;
 &lt;h2 id=&#34;usage-of-smartquotas-to-limit-storage-consumption&#34;&gt;Usage of SmartQuotas to Limit Storage Consumption&lt;/h2&gt;
-&lt;p&gt;CSI driver for Dell EMC Isilon handles capacity limiting using SmartQuotas feature.&lt;/p&gt;
+&lt;p&gt;CSI driver for Dell Isilon handles capacity limiting using SmartQuotas feature.&lt;/p&gt;
 &lt;p&gt;To use the SmartQuotas feature user can specify the boolean value &amp;lsquo;enableQuota&amp;rsquo; in myvalues.yaml or my-isilon-settings.yaml.&lt;/p&gt;
 &lt;p&gt;Let us assume the user creates a PVC with 3 Gi of storage and &amp;lsquo;SmartQuotas&amp;rsquo; have already been enabled in PowerScale Cluster.&lt;/p&gt;
 &lt;ul&gt;
@@ -1243,7 +1264,7 @@ communication (same IP/fqdn as k8s node) by default.&lt;/p&gt;
 &lt;p&gt;Note: Prior to CSI Driver for PowerScale version 2.0.0, the log level was allowed to be updated dynamically through &lt;code&gt;logLevel&lt;/code&gt; attribute in the secret object.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;nat-support&#34;&gt;NAT Support&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Dell EMC PowerScale is supported in the NAT environment.&lt;/p&gt;
+&lt;p&gt;CSI Driver for Dell PowerScale is supported in the NAT environment.&lt;/p&gt;
 &lt;h2 id=&#34;configurable-permissions-for-volume-directory&#34;&gt;Configurable permissions for volume directory&lt;/h2&gt;
 &lt;p&gt;This feature is introduced in CSI Driver for PowerScale version 2.0.0&lt;/p&gt;
 &lt;h3 id=&#34;helm-based-installation-1&#34;&gt;Helm based installation&lt;/h3&gt;
@@ -1268,7 +1289,7 @@ communication (same IP/fqdn as k8s node) by default.&lt;/p&gt;
 &lt;p&gt;In the case of operator-based installation, default permission for powerscale directory is present in the samples file.&lt;/p&gt;
 &lt;p&gt;Other ways of configuring powerscale volume permissions remain the same as helm-based installation.&lt;/p&gt;
 &lt;h2 id=&#34;pvpvc-metrics&#34;&gt;PV/PVC Metrics&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Dell EMC PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes.
+&lt;p&gt;CSI Driver for Dell PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes.
 For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.&lt;/p&gt;
 &lt;h3 id=&#34;this-feature-can-be-enabled&#34;&gt;This feature can be enabled&lt;/h3&gt;
 &lt;ol&gt;
@@ -1276,7 +1297,7 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 &lt;li&gt;For node plugin, by setting attribute &lt;code&gt;node.healthMonitor.enabled&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in &lt;code&gt;values.yaml&lt;/code&gt; file and by enabling the alpha feature gate &lt;code&gt;CSIVolumeHealth&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes--readwriteoncepod-alpha-feature&#34;&gt;Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)&lt;/h2&gt;
-&lt;p&gt;Use &lt;code&gt;ReadWriteOncePod(RWOP)&lt;/code&gt; access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerScale 2.1.0 and Kubernetes version 1.22+.&lt;/p&gt;
+&lt;p&gt;Use &lt;code&gt;ReadWriteOncePod(RWOP)&lt;/code&gt; access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerScale 2.1.0+ and Kubernetes version 1.22+.&lt;/p&gt;
 &lt;p&gt;To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
 &lt;code&gt;--feature-gates=&amp;quot;...,ReadWriteOncePod=true&amp;quot;&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;creating-a-persistentvolumeclaim&#34;&gt;Creating a PersistentVolumeClaim&lt;/h3&gt;
@@ -1571,6 +1592,7 @@ Volume Expansion, but it is up to the application to manage to reconfigure the f
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeAttributes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;20Gi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nasName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;csi-nas-name&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nfsAcls&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0777&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;controller-ha&#34;&gt;Controller HA&lt;/h2&gt;
 &lt;p&gt;The CSI PowerStore driver version 1.2 and later introduces the controller HA feature. Instead of StatefulSet, controller pods are deployed as a Deployment.&lt;/p&gt;
 &lt;p&gt;By default number of replicas is set to 2, you can set &lt;code&gt;controller.replicas&lt;/code&gt; parameter to 1 in &lt;code&gt;my-powerstore-settings.yaml&lt;/code&gt; if you want to disable controller HA for your installation. When installing via Operator you can change &lt;code&gt;replicas&lt;/code&gt; parameter in &lt;code&gt;spec.driver&lt;/code&gt; section in your PowerStore Custom Resource.&lt;/p&gt;
@@ -1621,14 +1643,14 @@ To configure use &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;code&gt;toleratio
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;csi-powerstore.dellemc.com/&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;127.0.0.1&lt;/span&gt;-fc&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;values&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This example matches all nodes where the driver has a connection to PowerStore with an IP of &lt;code&gt;127.0.0.1&lt;/code&gt; via FibreChannel. Similar examples can be found in mentioned folder for NFS and iSCSI.&lt;/p&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This example matches all nodes where the driver has a connection to PowerStore with an IP of &lt;code&gt;127.0.0.1&lt;/code&gt; via FibreChannel. Similar examples can be found in mentioned folder for NFS, iSCSI and NVMe.&lt;/p&gt;
 &lt;p&gt;You can check what labels your nodes contain by running &lt;code&gt;kubectl get nodes --show-labels&lt;/code&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Notice that &lt;code&gt;volumeBindingMode:&lt;/code&gt; is set to &lt;code&gt;WaitForFirstConsumer&lt;/code&gt; this is required for the topology feature to work.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;For any additional information about the topology, see the &lt;a href=&#34;https://kubernetes-csi.github.io/docs/topology.html&#34;&gt;Kubernetes Topology documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;reuse-powerstore-hostname&#34;&gt;Reuse PowerStore hostname&lt;/h2&gt;
-&lt;p&gt;The CSI PowerStore driver version 1.2 and later can automatically detect if the current node was already registered as a Host on the storage array before. It will check if Host initiators and node initiators (FC or iSCSI) match. If they do, the driver will not create a new host and will take the existing name of the Host as nodeID.&lt;/p&gt;
+&lt;p&gt;The CSI PowerStore driver version 1.2 and later can automatically detect if the current node was already registered as a Host on the storage array before. It will check if Host initiators and node initiators (FC, iSCSI or NVMe) match. If they do, the driver will not create a new host and will take the existing name of the Host as nodeID.&lt;/p&gt;
 &lt;h2 id=&#34;multiarray-support&#34;&gt;Multiarray support&lt;/h2&gt;
 &lt;p&gt;The CSI PowerStore driver version 1.3.0 and later support managing multiple PowerStore arrays from the single driver instance. This feature is enabled by default and integrated to even single instance installations.&lt;/p&gt;
 &lt;p&gt;To manage multiple arrays you need to create an array connection configuration that lists multiple arrays.&lt;/p&gt;
@@ -1641,8 +1663,10 @@ To configure use &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;code&gt;toleratio
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;password&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                      &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# password for connecting to API&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;skipCertificateValidation&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                            &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# use insecure connection or not&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                             &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# treat current array as a default (would be used by storage classes without arrayIP parameter)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;blockProtocol&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ISCSI&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# what SCSI transport protocol use on node side (FC, ISCSI, None, or auto)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nasName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;nas-server&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# what NAS must be used for NFS volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;blockProtocol&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ISCSI&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# what transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nasName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;nas-server&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                     &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# what NAS must be used for NFS volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nfsAcls&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0777&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                           &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                                                  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://10.0.0.2/api/rest&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;globalID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;unique&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;username&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;user&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                          
@@ -1741,10 +1765,10 @@ However, to provision new volumes, make sure to delete old Storage Classes and c
 &lt;p&gt;To update the log level dynamically user has to edit the ConfigMap &lt;code&gt;powerstore-config-params&lt;/code&gt; and update &lt;code&gt;CSI_LOG_LEVEL&lt;/code&gt; to the desired log level and &lt;code&gt;CSI_LOG_FORMAT&lt;/code&gt; to the desired log format.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl edit configmap -n csi-powerstore powerstore-config-params
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;nat-support&#34;&gt;NAT Support&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Dell EMC Powerstore is supported in the NAT environment for NFS protocol.&lt;/p&gt;
+&lt;p&gt;CSI Driver for Dell Powerstore is supported in the NAT environment for NFS protocol.&lt;/p&gt;
 &lt;p&gt;The user will be able to install the driver and able to create pods.&lt;/p&gt;
 &lt;h2 id=&#34;pvpvc-metrics&#34;&gt;PV/PVC Metrics&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Dell EMC Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.volumeHealthMonitorInterval parameter.&lt;/p&gt;
+&lt;p&gt;CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.volumeHealthMonitorInterval parameter.&lt;/p&gt;
 &lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes&#34;&gt;Single Pod Access Mode for PersistentVolumes&lt;/h2&gt;
 &lt;p&gt;Starting from version 2.1, CSI Driver for Powerstore now supports a new access mode &lt;code&gt;ReadWriteOncePod&lt;/code&gt; for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Powerstore allows restricting volume access to a single pod in the cluster and within a worker node.&lt;/p&gt;
 &lt;p&gt;Prerequisites&lt;/p&gt;
@@ -1769,6 +1793,30 @@ However, to provision new volumes, make sure to delete old Storage Classes and c
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;5Gi&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;posix-mode-bits-and-nfsv4-acls&#34;&gt;POSIX mode bits and NFSv4 ACLs&lt;/h2&gt;
+&lt;p&gt;CSI PowerStore driver version 2.2.0 and later allows users to set user-defined permissions on NFS target mount directory using POSIX mode bits or NFSv4 ACLs.&lt;/p&gt;
+&lt;p&gt;NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. Please ensure the order when providing the NFSv4 ACLs.&lt;/p&gt;
+&lt;p&gt;To use this feature, provide permissions in &lt;code&gt;nfsAcls&lt;/code&gt; parameter in values.yaml, secrets or NFS storage class.&lt;/p&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;POSIX mode bits&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nfsAcls&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0755&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;NFSv4 ACLs&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nfsAcls&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@domain.com:rxtncy&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: If no values are specified, default value of &amp;ldquo;0777&amp;rdquo; will be set.
+POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;nvmetcp-support&#34;&gt;NVMe/TCP Support&lt;/h2&gt;
+&lt;p&gt;CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as &lt;code&gt;NVMeTCP&lt;/code&gt;.
+In case blockProtocol is specified as &lt;code&gt;auto&lt;/code&gt;, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then FC gets the highest priority followed by iSCSI and then NVMeTCP.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: NVMe/TCP is not supported on RHEL 7.x versions and CoreOS.
+NVMe/TCP is supported with Powerstore 2.1 and above.&lt;/p&gt;
 &lt;/blockquote&gt;
 
       </description>
@@ -1925,7 +1973,7 @@ For CSI Driver for Unity version 1.6 and later, &lt;code&gt;dell-csi-helm-instal
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;reclaimPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Delete&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allowVolumeExpansion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Set this attribute to true if you plan to expand any PVCs created using this storage class&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;parameters&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;FsType&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;xfs&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csi.storage.k8s.io/fstype&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;xfs&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To resize a PVC, edit the existing PVC spec and set spec.resources.requests.storage to the intended size. For example, if you have a PVC unity-pvc-demo of size 3Gi, then you can resize it to 30Gi by updating the PVC.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;PersistentVolumeClaim&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -1944,7 +1992,7 @@ For CSI Driver for Unity version 1.6 and later, &lt;code&gt;dell-csi-helm-instal
 &lt;p&gt;The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;raw-block-support&#34;&gt;Raw block support&lt;/h2&gt;
-&lt;p&gt;The CSI Unity driver version 1.4 and later supports Raw Block Volumes.
+&lt;p&gt;The CSI Unity driver supports Raw Block Volumes.
 Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. The following is an example configuration:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;PersistentVolumeClaim&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -2016,7 +2064,7 @@ Raw Block volumes are created using the volumeDevices list in the pod template s
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;requests&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;8Gi&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ephemeral-inline-volume&#34;&gt;Ephemeral Inline Volume&lt;/h2&gt;
-&lt;p&gt;The CSI Unity driver version 1.4 and later supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification.&lt;/p&gt;
+&lt;p&gt;The CSI Unity driver supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification.&lt;/p&gt;
 &lt;p&gt;At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.&lt;/p&gt;
 &lt;p&gt;The following is a sample manifest for creating ephemeral volume in pod manifest with CSI Unity driver.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Pod&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -2050,12 +2098,12 @@ Raw Block volumes are created using the volumeDevices list in the pod template s
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;volume&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csi&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;csi-unity.dellemc.com&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;fsType&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;nfs&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csi.storage.k8s.io/fstype&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;nfs&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeAttributes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;20Gi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nasName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;csi-nas-name&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;controller-ha&#34;&gt;Controller HA&lt;/h2&gt;
-&lt;p&gt;The CSI Unity driver version 1.4 and later supports the controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.&lt;/p&gt;
+&lt;p&gt;The CSI Unity driver supports controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.&lt;/p&gt;
 &lt;p&gt;By default, number of replicas is set to 2, you can set the &lt;code&gt;controllerCount&lt;/code&gt; parameter to 1 in &lt;code&gt;myvalues.yaml&lt;/code&gt; if you want to disable controller HA for your installation. When installing via Operator you can change the &lt;code&gt;replicas&lt;/code&gt; parameter in the &lt;code&gt;spec.driver&lt;/code&gt; section in your Unity Custom Resource.&lt;/p&gt;
 &lt;p&gt;When multiple replicas of controller pods are in a cluster each sidecar (Attacher, Provisioner, Resizer, and Snapshotter) tries to get a lease so only one instance of each sidecar is active in the cluster at a time.&lt;/p&gt;
 &lt;h3 id=&#34;driver-pod-placement&#34;&gt;Driver pod placement&lt;/h3&gt;
@@ -2086,7 +2134,7 @@ To do that you will need to use &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;co
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;effect&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;NoSchedule&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As said before you can configure where node driver pods would be assigned in a similar way in the &lt;code&gt;node&lt;/code&gt; section of &lt;code&gt;myvalues.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;topology&#34;&gt;Topology&lt;/h2&gt;
-&lt;p&gt;The CSI Unity driver version 1.4 and later supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.&lt;/p&gt;
+&lt;p&gt;The CSI Unity driver supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.&lt;/p&gt;
 &lt;p&gt;This Topology support does not include customer-defined topology, users cannot create their own labels for nodes, they should use whatever labels are returned by the driver and applied automatically by Kubernetes on its nodes.&lt;/p&gt;
 &lt;h3 id=&#34;topology-usage&#34;&gt;Topology Usage&lt;/h3&gt;
 &lt;p&gt;User can create custom storage classes on their own by specifying the valid topology keys and binding mode.&lt;/p&gt;
@@ -2110,29 +2158,19 @@ To do that you will need to use &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;co
 &lt;p&gt;Note that &lt;code&gt;volumeBindingMode:&lt;/code&gt; is set to &lt;code&gt;WaitForFirstConsumer&lt;/code&gt; this is required for the topology feature to work properly.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;For any additional information about the topology, see the &lt;a href=&#34;https://kubernetes-csi.github.io/docs/topology.html&#34;&gt;Kubernetes Topology documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;support-for-sles-15-sp2&#34;&gt;Support for SLES 15 SP2&lt;/h2&gt;
-&lt;p&gt;The CSI Driver for Dell EMC Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;open-iscsi &lt;strong&gt;open-iscsi is required in order to make use of iSCSI protocol for provisioning&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;nfs-utils &lt;strong&gt;nfs-utils is required in order to make use of NFS protocol for provisioning&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;multipath-tools &lt;strong&gt;multipath-tools is required in order to make use of FC and iSCSI protocols for provisioning&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;After installing open-iscsi, ensure &amp;ldquo;iscsi&amp;rdquo; and &amp;ldquo;iscsid&amp;rdquo; services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with the iSCSI protocol to work.&lt;/p&gt;
 &lt;h2 id=&#34;volume-limit&#34;&gt;Volume Limit&lt;/h2&gt;
-&lt;p&gt;The CSI Driver for Dell EMC Unity allows users to specify the maximum number of Unity volumes that can be used in a node.&lt;/p&gt;
+&lt;p&gt;The CSI Driver for Dell Unity allows users to specify the maximum number of Unity volumes that can be used in a node.&lt;/p&gt;
 &lt;p&gt;The user can set the volume limit for a node by creating a node label &lt;code&gt;max-unity-volumes-per-node&lt;/code&gt; and specifying the volume limit for that node.
 &lt;br/&gt; &lt;code&gt;kubectl label node &amp;lt;node_name&amp;gt; max-unity-volumes-per-node=&amp;lt;volume_limit&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;The user can also set the volume limit for all the nodes in the cluster by specifying the same to &lt;code&gt;maxUnityVolumesPerNode&lt;/code&gt; attribute in values.yaml file.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;br&gt;To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command &lt;code&gt;kubectl get pods -n unity --no-headers=true | awk &#39;/unity-/{print $1}&#39;| xargs kubectl delete -n unity pod&lt;/code&gt;. &lt;br&gt;&lt;br&gt; If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. &lt;br&gt;&lt;br&gt;The default value of &lt;code&gt;maxUnityVolumesPerNode&lt;/code&gt; is 0. &lt;br&gt;&lt;br&gt;If &lt;code&gt;maxUnityVolumesPerNode&lt;/code&gt; is set to zero, then CO SHALL decide how many volumes of this type can be published by the controller to the node.&lt;br&gt;&lt;br&gt;The volume limit specified to &lt;code&gt;maxUnityVolumesPerNode&lt;/code&gt; attribute is applicable to all the nodes in the cluster for which node label &lt;code&gt;max-unity-volumes-per-node&lt;/code&gt; is not set.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;br&gt;To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command &lt;code&gt;kubectl get pods -n unity --no-headers=true | awk &#39;/unity-/{print $1}&#39;| xargs kubectl delete -n unity pod&lt;/code&gt;. &lt;br&gt;&lt;br&gt; If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. &lt;br&gt;&lt;br&gt;The default value of &lt;code&gt;maxUnityVolumesPerNode&lt;/code&gt; is 0. &lt;br&gt;&lt;br&gt;If &lt;code&gt;maxUnityVolumesPerNode&lt;/code&gt; is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.&lt;br&gt;&lt;br&gt;The volume limit specified to &lt;code&gt;maxUnityVolumesPerNode&lt;/code&gt; attribute is applicable to all the nodes in the cluster for which node label &lt;code&gt;max-unity-volumes-per-node&lt;/code&gt; is not set.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;nat-support&#34;&gt;NAT Support&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Dell EMC Unity is supported in the NAT environment for NFS protocol.&lt;/p&gt;
+&lt;p&gt;CSI Driver for Dell Unity is supported in the NAT environment for NFS protocol.&lt;/p&gt;
 &lt;p&gt;The user will be able to install the driver and able to create pods.&lt;/p&gt;
-&lt;h2 id=&#34;dynamic-logging-configuration&#34;&gt;Dynamic Logging Configuration&lt;/h2&gt;
-&lt;p&gt;This feature is introduced in CSI Driver for unity version 2.0.0.&lt;/p&gt;
 &lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes&#34;&gt;Single Pod Access Mode for PersistentVolumes&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Unity now supports a new accessmode &lt;code&gt;ReadWriteOncePod&lt;/code&gt; for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity allows to restrict volume access to a single pod in the cluster&lt;/p&gt;
+&lt;p&gt;CSI Driver for Unity supports a new accessmode &lt;code&gt;ReadWriteOncePod&lt;/code&gt; for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity allows to restrict volume access to a single pod in the cluster&lt;/p&gt;
 &lt;p&gt;Prerequisites&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as the ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is only supported for CSI volumes. You can enable the feature by setting command line arguments:
@@ -2150,13 +2188,15 @@ To do that you will need to use &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;co
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;requests&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;1Gi&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Unity now supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments &lt;code&gt;--feature-gates=&amp;quot;...,CSIVolumeHealth=true&amp;quot;&lt;/code&gt;.&lt;br&gt;
+&lt;p&gt;CSI Driver for Unity supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments &lt;code&gt;--feature-gates=&amp;quot;...,CSIVolumeHealth=true&amp;quot;&lt;/code&gt;.&lt;br&gt;
 This feature:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc &lt;code&gt;kubectl describe pvc &amp;lt;pvc name&amp;gt; -n &amp;lt;namespace&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Collects the volume stats. We can see the volume usage in the node logs &lt;code&gt;kubectl logs &amp;lt;nodepod&amp;gt; -n &amp;lt;namespacename&amp;gt; -c driver&lt;/code&gt;
-By default this is disabled in CSI Driver for Unity. You will have to set the &lt;code&gt;volumeHealthMonitor.enable&lt;/code&gt; flag for controller, node or for both in &lt;code&gt;values.yaml&lt;/code&gt; to get the volume stats and volume condition.&lt;/li&gt;
+By default this is disabled in CSI Driver for Unity. You will have to set the &lt;code&gt;healthMonitor.enable&lt;/code&gt; flag for controller, node or for both in &lt;code&gt;values.yaml&lt;/code&gt; to get the volume stats and volume condition.&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;dynamic-logging-configuration&#34;&gt;Dynamic Logging Configuration&lt;/h2&gt;
+&lt;p&gt;This feature is introduced in CSI Driver for unity version 2.0.0.&lt;/p&gt;
 &lt;h3 id=&#34;helm-based-installation&#34;&gt;Helm based installation&lt;/h3&gt;
 &lt;p&gt;As part of driver installation, a ConfigMap with the name &lt;code&gt;unity-config-params&lt;/code&gt; is created, which contains an attribute &lt;code&gt;CSI_LOG_LEVEL&lt;/code&gt; which specifies the current log level of CSI driver.&lt;/p&gt;
 &lt;p&gt;Users can set the default log level by specifying log level to &lt;code&gt;logLevel&lt;/code&gt; attribute in values.yaml during driver installation.&lt;/p&gt;
@@ -2278,7 +2318,7 @@ Example &lt;em&gt;configmap.yaml&lt;/em&gt;&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    CSI_LOG_LEVEL: &amp;#34;info&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ALLOW_RWO_MULTIPOD_ACCESS&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;MAX_UNITY_VOLUMES_PER_NODE&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;SYNC_NODE_INFO_TIME_INTERVAL&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;SYNC_NODE_INFO_TIME_INTERVAL&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;15&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;TENANT_NAME&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is the same across Unity instances.&lt;/p&gt;

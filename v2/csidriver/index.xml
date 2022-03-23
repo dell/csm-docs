@@ -1,0 +1,165 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – CSI Drivers</title>
+    <link>https://dell.github.io/csm-docs/v2/csidriver/</link>
+    <description>Recent content in CSI Drivers on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v2/csidriver/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V2: Installation</title>
+      <link>https://dell.github.io/csm-docs/v2/csidriver/installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/csidriver/installation/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Installation information for all the drivers/modules can be found on the individual driver&amp;rsquo;s page in this section&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Uninstallation</title>
+      <link>https://dell.github.io/csm-docs/v2/csidriver/uninstall/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/csidriver/uninstall/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;uninstall-a-csi-driver-installed-via-helm&#34;&gt;Uninstall a CSI driver installed via Helm&lt;/h2&gt;
+&lt;p&gt;To uninstall a driver, the &lt;code&gt;csi-uninstall.sh&lt;/code&gt; script provides a handy wrapper around the &lt;code&gt;helm&lt;/code&gt; utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the driver:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./csi-uninstall.sh --namespace &amp;lt;driver-namespace&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For usage information:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[dell-csi-helm-installer]# ./csi-uninstall.sh -h
+Help for ./csi-uninstall.sh
+
+Usage: ./csi-uninstall.sh options...
+Options:
+  Required
+  --namespace[=]&amp;lt;namespace&amp;gt;  Kubernetes namespace to uninstall the CSI driver from
+  Optional
+  --release[=]&amp;lt;helm release&amp;gt; Name to register with helm, default value will match the driver name
+  -h                         Help
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uninstall-a-csi-driver-installed-via-dell-csi-operator&#34;&gt;Uninstall a CSI driver installed via Dell CSI Operator&lt;/h2&gt;
+&lt;p&gt;For uninstalling any CSI drivers deployed by the Dell CSI Operator, just delete the respective Custom Resources.&lt;br&gt;
+This can be done using OperatorHub GUI by deleting the CR or via kubectl.&lt;/p&gt;
+&lt;p&gt;For example - To uninstall the driver installed via the operator, delete the Custom Resource(CR)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Replace driver-type, driver-name and driver-namespace with their respective values
+kubectl delete &amp;lt;driver-type&amp;gt;/&amp;lt;driver-name&amp;gt; -n &amp;lt;driver-namespace&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Upgrade</title>
+      <link>https://dell.github.io/csm-docs/v2/csidriver/upgradation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/csidriver/upgradation/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Features</title>
+      <link>https://dell.github.io/csm-docs/v2/csidriver/features/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/csidriver/features/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Troubleshooting</title>
+      <link>https://dell.github.io/csm-docs/v2/csidriver/troubleshooting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/csidriver/troubleshooting/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Release Notes</title>
+      <link>https://dell.github.io/csm-docs/v2/csidriver/release/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/csidriver/release/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Our Ecosystem Partners</title>
+      <link>https://dell.github.io/csm-docs/v2/csidriver/partners/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/csidriver/partners/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Archives</title>
+      <link>https://dell.github.io/csm-docs/v2/csidriver/archives/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/csidriver/archives/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;powerscale&#34;&gt;PowerScale&lt;/h2&gt;
+&lt;h3 id=&#34;v13&#34;&gt;v1.3&lt;/h3&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/RN_isilon.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/PG_isilon.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;v12&#34;&gt;v1.2&lt;/h3&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/RN_isilon_2.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/PG_isilon_2.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;powermax&#34;&gt;PowerMax&lt;/h2&gt;
+&lt;h3 id=&#34;v14&#34;&gt;v1.4&lt;/h3&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/RN_powermax.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/PG_powermax.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;powerflex&#34;&gt;PowerFlex&lt;/h2&gt;
+&lt;h3 id=&#34;v12-1&#34;&gt;v1.2&lt;/h3&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/RN_vxflex.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/PG_vxflex.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;powerstore&#34;&gt;PowerStore&lt;/h2&gt;
+&lt;h3 id=&#34;v11&#34;&gt;v1.1&lt;/h3&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/RN_powerstore.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/PG_powerstore.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;unity&#34;&gt;Unity&lt;/h2&gt;
+&lt;h3 id=&#34;v13-1&#34;&gt;v1.3&lt;/h3&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/RN_unity.pdf&#34;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;-&lt;a href=&#34;https://dell.github.io/csm-docs/pdf/PG_unity.pdf&#34;&gt;Product Guide&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

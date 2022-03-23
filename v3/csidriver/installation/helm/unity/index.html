@@ -1,0 +1,2283 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.72.0" /><META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
+
+<title>Unity | Dell Technologies</title><meta property="og:title" content="Unity" />
+<meta property="og:description" content="Installing CSI Driver for Unity via Helm
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/installation/helm/unity/" />
+<meta property="article:modified_time" content="2022-03-23T08:15:39-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta itemprop="name" content="Unity">
+<meta itemprop="description" content="Installing CSI Driver for Unity via Helm
+">
+<meta itemprop="dateModified" content="2022-03-23T08:15:39-04:00" />
+<meta itemprop="wordCount" content="2520">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unity"/>
+<meta name="twitter:description" content="Installing CSI Driver for Unity via Helm
+"/>
+
+
+
+
+
+<link rel="preload" href="/csm-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
+<link href="/csm-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
+
+
+
+
+  </head>
+  <body class="td-page"> 
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/csm-docs/">
+		<span class="navbar-logo"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1017 132"><defs><style>.cls-1{fill:#fff}</style></defs><title>DellTech_Logo_Prm_Wht_rgb</title><path class="cls-1" d="M1015 84.89c0-12.23-6.8-17.66-20.39-20.38s-21.73-4.08-21.73-13.58c0-6.8 5.44-10.87 15-10.87 12.22.0 16.3 5.43 16.3 12.22l1.36 1.36h5.43l1.37-1.36c0-13.58-10.88-19-24.46-19-15 0-23.1 8.15-23.1 17.67.0 10.86 8.15 16.3 21.73 19s20.38 4.08 20.38 15c0 6.79-4.07 12.23-17.66 12.23-12.22.0-17.66-6.8-17.66-15l-1.35-1.36h-5.44l-1.35 1.36c0 12.23 9.5 21.74 25.8 21.74 17.66.0 25.82-8.15 25.82-19M956.58 71.31l1.36-1.37V65.87c0-19-10.87-32.61-29.89-32.61s-29.89 13.59-29.89 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38l-1.36-1.36h-5.43l-1.36 1.36c-2.72 8.15-8.16 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H907.67l-1.36-1.36c0-9.51 5.44-23.09 21.74-23.09s21.74 13.58 21.74 23.09zm-59.78 36.68V36l-1.36-1.35h-5.43L880.5 36v65.22l1.36 1.36h5.43zm0-78.8V14.24l-1.36-1.36h-5.43l-1.36 1.36v8.15l1.36 1.36h5.43zM837 97.12c-13.59.0-21.74-9.52-21.74-28.53S823.44 40.06 837 40.06s21.73 9.5 21.73 28.53S850.61 97.12 837 97.12M858.76 93c0 17.66-4.07 31.25-20.38 31.25-12.22.0-16.3-5.44-17.66-12.23l-1.35-1.36h-5.44l-1.36 1.36c1.36 10.87 9.51 19 25.81 19 17.67.0 28.53-10.87 28.53-38V36l-1.35-1.35h-4.08L860.12 36l-1.36 8.16H857.4c-2.71-5.43-9.5-10.87-21.74-10.87-19 0-28.53 15-28.53 35.33s9.52 35.32 28.53 35.32c12.24.0 19-5.43 21.74-10.87zm-88.3-53c13.58.0 23.09 10.87 23.09 28.53S784 97.12 770.46 97.12s-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32s-13.59-35.33-31.25-35.33-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-40.76-2.72V8.81l-1.36-1.36h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43zM680.8 40.06c13.58.0 23.09 10.87 23.09 28.53s-9.51 28.53-23.09 28.53-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32S698.46 33.26 680.8 33.26s-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-39.4-2.72V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.67 4.08-21.74 10.87h-1.36L592.49 36l-1.36-1.35h-4.08L585.7 36v65.22l1.35 1.36h5.44l1.36-1.36V64.51c0-15 6.79-24.45 21.73-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.37 1.36H640zm-69.29.0V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.66 4.08-21.74 10.87h-1.36V8.81L523.2 7.45h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43l1.36-1.36V64.51c0-15 6.8-24.45 21.74-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.36 1.36h5.44zM455.28 68.59c0-19 9.5-28.53 23.09-28.53s19 8.15 20.38 16.29l1.35 1.37h5.44l1.36-1.37c-1.36-13.58-12.23-23.09-28.53-23.09-17.66.0-31.24 10.87-31.24 35.33s13.58 35.32 31.24 35.32c16.3.0 27.17-9.51 28.53-23.1l-1.36-1.36H500.1l-1.35 1.36C497.39 89 492 97.12 478.37 97.12s-23.09-9.52-23.09-28.53m-14.95 2.72 1.36-1.37V65.87c0-19-10.87-32.61-29.9-32.61s-29.88 13.59-29.88 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38L439 82.17h-5.43l-1.36 1.36c-2.72 8.15-8.15 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H391.42l-1.36-1.36c0-9.51 5.44-23.09 21.73-23.09s21.75 13.58 21.75 23.09zM395.57 12.88V8.81l-1.36-1.36H323.56L322.2 8.81v4.07l1.36 1.36h29.89l1.36 1.36v85.59l1.36 1.36h5.43l1.36-1.36V15.6l1.36-1.36h29.89z"/><path class="cls-1" d="M322.2 83.65v18.9H260.85V7.45h21.6v76.2zM38.55 102.55A47.57 47.57.0 0084.58 67l53.8 42 53.77-42v35.56H253.5V83.65H213.75V7.45h-21.6V43L140.58 83.3l-11.54-9L153.73 55l26.89-21L165.27 22 113.69 62.3l-11.53-9L153.73 13 138.38 1 84.58 43a47.57 47.57.0 00-46-35.58H0v95.1zM21.6 83.65V26.35H38.55c14.33.0 26 12.83 26 28.65S52.88 83.65 38.55 83.65z"/></svg></span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/csm-docs/blog/" ><span>Blog</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/dell/csm" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			<li class="nav-item dropdown d-none d-lg-block">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	Releases
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.2)</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.1</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.0.1</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0</a>
+	
+</div>
+
+			</li>
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+</div>
+</nav>
+
+    </header>
+    <h3> This doc version is no longer supported by us. You can check our <a href="/csm-docs/docs">latest version </a></h3>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center d-lg-none">
+    
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="csm-docsv3">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/deployment/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Deployment</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3deployment">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3deploymentcsmapi" href="/csm-docs/v3/deployment/csmapi/">CSM REST API</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3deploymentcsmcli" href="/csm-docs/v3/deployment/csmcli/">CSM CLI</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3deploymenttroubleshooting" href="/csm-docs/v3/deployment/troubleshooting/">Troubleshooting</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/faq/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">FAQ</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3faq">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">CSI Drivers</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="csm-docsv3csidriver">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/installation/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Installation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="csm-docsv3csidriverinstallation">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/installation/helm/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using Helm</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="csm-docsv3csidriverinstallationhelm">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationhelmpowerflex" href="/csm-docs/v3/csidriver/installation/helm/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationhelmpowermax" href="/csm-docs/v3/csidriver/installation/helm/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationhelmisilon" href="/csm-docs/v3/csidriver/installation/helm/isilon/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationhelmpowerstore" href="/csm-docs/v3/csidriver/installation/helm/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page  active" id="m-csm-docsv3csidriverinstallationhelmunity" href="/csm-docs/v3/csidriver/installation/helm/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/installation/operator/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using Operator</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidriverinstallationoperator">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationoperatorpowerflex" href="/csm-docs/v3/csidriver/installation/operator/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationoperatorpowermax" href="/csm-docs/v3/csidriver/installation/operator/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationoperatorisilon" href="/csm-docs/v3/csidriver/installation/operator/isilon/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationoperatorpowerstore" href="/csm-docs/v3/csidriver/installation/operator/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationoperatorunity" href="/csm-docs/v3/csidriver/installation/operator/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/installation/offline/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Offline Installer</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidriverinstallationoffline">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Testing Drivers</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidriverinstallationtest">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationtestpowerflex" href="/csm-docs/v3/csidriver/installation/test/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationtestpowermax" href="/csm-docs/v3/csidriver/installation/test/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationtestpowerscale" href="/csm-docs/v3/csidriver/installation/test/powerscale/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationtestpowerstore" href="/csm-docs/v3/csidriver/installation/test/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverinstallationtestunity" href="/csm-docs/v3/csidriver/installation/test/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/uninstall/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Uninstallation</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidriveruninstall">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/upgradation/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Upgrade</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidriverupgradation">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverupgradationdriversoperator" href="/csm-docs/v3/csidriver/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverupgradationdriverspowerflex" href="/csm-docs/v3/csidriver/upgradation/drivers/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverupgradationdriverspowermax" href="/csm-docs/v3/csidriver/upgradation/drivers/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverupgradationdriversisilon" href="/csm-docs/v3/csidriver/upgradation/drivers/isilon/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverupgradationdriverspowerstore" href="/csm-docs/v3/csidriver/upgradation/drivers/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverupgradationdriversunity" href="/csm-docs/v3/csidriver/upgradation/drivers/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/features/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Features</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidriverfeatures">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverfeaturespowerflex" href="/csm-docs/v3/csidriver/features/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverfeaturespowermax" href="/csm-docs/v3/csidriver/features/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverfeaturespowerscale" href="/csm-docs/v3/csidriver/features/powerscale/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverfeaturespowerstore" href="/csm-docs/v3/csidriver/features/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverfeaturesunity" href="/csm-docs/v3/csidriver/features/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidrivertroubleshooting">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidrivertroubleshootingoperator" href="/csm-docs/v3/csidriver/troubleshooting/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidrivertroubleshootingpowerflex" href="/csm-docs/v3/csidriver/troubleshooting/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidrivertroubleshootingpowermax" href="/csm-docs/v3/csidriver/troubleshooting/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidrivertroubleshootingpowerscale" href="/csm-docs/v3/csidriver/troubleshooting/powerscale/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidrivertroubleshootingpowerstore" href="/csm-docs/v3/csidriver/troubleshooting/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidrivertroubleshootingunity" href="/csm-docs/v3/csidriver/troubleshooting/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/release/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Release Notes</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidriverrelease">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverreleaseoperator" href="/csm-docs/v3/csidriver/release/operator/">Operator</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverreleasepowerflex" href="/csm-docs/v3/csidriver/release/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverreleasepowermax" href="/csm-docs/v3/csidriver/release/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverreleasepowerscale" href="/csm-docs/v3/csidriver/release/powerscale/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverreleasepowerstore" href="/csm-docs/v3/csidriver/release/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverreleaseunity" href="/csm-docs/v3/csidriver/release/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidriverpartners">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverpartnersoperator" href="/csm-docs/v3/csidriver/partners/operator/">OperatorHub.io</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverpartnersredhat" href="/csm-docs/v3/csidriver/partners/redhat/">Red Hat OpenShift</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverpartnersdocker" href="/csm-docs/v3/csidriver/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverpartnersrancher" href="/csm-docs/v3/csidriver/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3csidriverpartnerstanzu" href="/csm-docs/v3/csidriver/partners/tanzu/">VMware Tanzu</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/csidriver/archives/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Archives</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3csidriverarchives">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/authorization/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Authorization</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3authorization">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3authorizationdesign" href="/csm-docs/v3/authorization/design/">Design</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3authorizationdeployment" href="/csm-docs/v3/authorization/deployment/">Deployment</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3authorizationuninstallation" href="/csm-docs/v3/authorization/uninstallation/">Uninstallation</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3authorizationcli" href="/csm-docs/v3/authorization/cli/">CLI</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3authorizationtroubleshooting" href="/csm-docs/v3/authorization/troubleshooting/">Troubleshooting</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/observability/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Observability</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3observability">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/observability/design/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Design</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3observabilitydesign">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/observability/metrics/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Metrics</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3observabilitymetrics">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3observabilitymetricspowerflex" href="/csm-docs/v3/observability/metrics/powerflex/">PowerFlex Metrics</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3observabilitymetricspowerstore" href="/csm-docs/v3/observability/metrics/powerstore/">PowerStore Metrics</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/observability/deployment/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Deployment</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3observabilitydeployment">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3observabilitydeploymenthelm" href="/csm-docs/v3/observability/deployment/helm/">Helm</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3observabilitydeploymentonline" href="/csm-docs/v3/observability/deployment/online/">Installer</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3observabilitydeploymentoffline" href="/csm-docs/v3/observability/deployment/offline/">Offline Installer</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/observability/uninstall/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Uninstallation</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3observabilityuninstall">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/observability/upgrade/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Upgrade</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3observabilityupgrade">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/observability/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3observabilitytroubleshooting">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/replication/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Replication</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3replication">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/replication/deployment/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Deployment</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3replicationdeployment">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationdeploymentinstallation" href="/csm-docs/v3/replication/deployment/installation/">Installation</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationdeploymentconfigmap-secrets" href="/csm-docs/v3/replication/deployment/configmap-secrets/">ConfigMap &amp; Secrets</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationdeploymentinstall-repctl" href="/csm-docs/v3/replication/deployment/install-repctl/">Installation using repctl</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationdeploymentstorageclasses" href="/csm-docs/v3/replication/deployment/storageclasses/">Storage Class</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationdeploymentpowermax" href="/csm-docs/v3/replication/deployment/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationdeploymentpowerstore" href="/csm-docs/v3/replication/deployment/powerstore/">PowerStore</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationarchitecture" href="/csm-docs/v3/replication/architecture/">Architecture</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationcluster-topologies" href="/csm-docs/v3/replication/cluster-topologies/">Cluster Topologies</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationdisaster-recovery" href="/csm-docs/v3/replication/disaster-recovery/">Disaster Recovery</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationhigh-availability" href="/csm-docs/v3/replication/high-availability/">High Availability</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationmonitoring" href="/csm-docs/v3/replication/monitoring/">Monitoring</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationreplication-actions" href="/csm-docs/v3/replication/replication-actions/">Replication Actions</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationtools" href="/csm-docs/v3/replication/tools/">Tools</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3replicationtroubleshooting" href="/csm-docs/v3/replication/troubleshooting/">Troubleshooting</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/resiliency/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Resiliency</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3resiliency">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3resiliencydesign" href="/csm-docs/v3/resiliency/design/">Design</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3resiliencyuninstallation" href="/csm-docs/v3/resiliency/uninstallation/">Uninstallation</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3resiliencyusecases" href="/csm-docs/v3/resiliency/usecases/">Use Cases</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3resiliencydeployment" href="/csm-docs/v3/resiliency/deployment/">Deployment</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3resiliencyupgrade" href="/csm-docs/v3/resiliency/upgrade/">Upgrade</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3resiliencytroubleshooting" href="/csm-docs/v3/resiliency/troubleshooting/">Troubleshooting</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/snapshots/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Snapshots</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3snapshots">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/grasp/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Learn</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3grasp">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3graspstart" href="/csm-docs/v3/grasp/start/">Getting Started</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv3graspvideo" href="/csm-docs/v3/grasp/video/">Quick video lessons</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3troubleshooting">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/support/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Support</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3support">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v3/contributionguidelines/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Contribution Guidelines</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv3contributionguidelines">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li><a href="#requirements">Requirements</a></li>
+      </ul>
+    </li>
+    <li><a href="#install-csi-driver">Install CSI Driver</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#certificate-validation-for-unisphere-rest-api-calls">Certificate validation for Unisphere REST API calls</a></li>
+    <li><a href="#volume-snapshot-class">Volume Snapshot Class</a>
+      <ul>
+        <li><a href="#what-happens-to-my-existing-volume-snapshot-classes">What happens to my existing Volume Snapshot Classes?</a></li>
+      </ul>
+    </li>
+    <li><a href="#storage-classes">Storage Classes</a>
+      <ul>
+        <li><a href="#what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</a></li>
+      </ul>
+    </li>
+    <li><a href="#dynamically-update-the-unity-creds-secrets">Dynamically update the unity-creds secrets</a></li>
+    <li><a href="#dynamic-logging-configuration">Dynamic Logging Configuration</a>
+      <ul>
+        <li><a href="#helm-based-installation">Helm based installation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+          </div> 
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+           
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://dell.github.io/csm-docs/v3/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://dell.github.io/csm-docs/v3/csidriver/">CSI Drivers</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://dell.github.io/csm-docs/v3/csidriver/installation/">Installation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://dell.github.io/csm-docs/v3/csidriver/installation/helm/">Using Helm</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://dell.github.io/csm-docs/v3/csidriver/installation/helm/unity/">Unity</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>Unity</h1>
+
+	       
+	<p>The CSI Driver for Dell EMC Unity can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer">documentation</a>.</p>
+<p>The controller section of the Helm chart installs the following components in a <em>Deployment</em>:</p>
+<ul>
+<li>CSI Driver for Unity</li>
+<li>Kubernetes External Provisioner, which provisions the volumes</li>
+<li>Kubernetes External Attacher, which attaches the volumes to the containers</li>
+<li>Kubernetes External Snapshotter, which provides snapshot support</li>
+<li>Kubernetes External Resizer, which resizes the volume</li>
+</ul>
+<p>The node section of the Helm chart installs the following component in a <em>DaemonSet</em>:</p>
+<ul>
+<li>CSI Driver for Unity</li>
+<li>Kubernetes Node Registrar, which handles the driver registration</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before you install CSI Driver for Unity, verify the requirements that are mentioned in this topic are installed and configured.</p>
+<h3 id="requirements">Requirements</h3>
+<ul>
+<li>Install Kubernetes or OpenShift (see <a href="../../../../csidriver/#features-and-capabilities">supported versions</a>)</li>
+<li>Install Helm v3</li>
+<li>To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured</li>
+<li>To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured</li>
+<li>To use NFS protocol, NFS utility packages needs to be installed</li>
+<li>Mount propagation is enabled on container runtime that is being used</li>
+</ul>
+<h2 id="install-csi-driver">Install CSI Driver</h2>
+<p>Install CSI Driver for Unity using this procedure.</p>
+<p><em>Before you begin</em></p>
+<ul>
+<li>You must have the downloaded files, including the Helm chart from the source <a href="https://github.com/dell/csi-unity">git repository</a> with the command <code>git clone -b v2.0.0 https://github.com/dell/csi-unity.git</code>, ready for this procedure.</li>
+<li>In the top-level dell-csi-helm-installer directory, there should be two scripts, <code>csi-install.sh</code> and <code>csi-uninstall.sh</code>.</li>
+<li>Ensure <em>unity</em> namespace exists in Kubernetes cluster. Use the <code>kubectl create namespace unity</code> command to create the namespace if the namespace is not present.</li>
+</ul>
+<p>Procedure</p>
+<ol>
+<li>
+<p>Collect information from the Unity Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the  <code>secret.yaml</code> and <code>myvalues.yaml</code> file.</p>
+<p><strong>Note</strong>:</p>
+<ul>
+<li>ArrayId corresponds to the serial number of Unity array.</li>
+<li>Unity Array username must have role as Storage Administrator to be able to perform CRUD operations.</li>
+</ul>
+</li>
+<li>
+<p>Copy the <code>helm/csi-unity/values.yaml</code> into a file named <code>myvalues.yaml</code> in the same directory of <code>csi-install.sh</code>, to customize settings for installation.</p>
+</li>
+<li>
+<p>Edit <code>myvalues.yaml</code> to set the following parameters for your installation:</p>
+<p>The following table lists the primary configurable parameters of the Unity driver chart and their default values. More detailed information can be found in the <a href="https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml"><code>values.yaml</code></a> file in this repository.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>version</td>
+<td>helm version</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>logLevel</td>
+<td>LogLevel is used to set the logging level of the driver</td>
+<td>true</td>
+<td>info</td>
+</tr>
+<tr>
+<td>allowRWOMultiPodAccess</td>
+<td>Flag to enable multiple pods to use the same PVC on the same node with RWO access mode.</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>kubeletConfigDir</td>
+<td>Specify kubelet config dir path</td>
+<td>Yes</td>
+<td>/var/lib/kubelet</td>
+</tr>
+<tr>
+<td>syncNodeInfoInterval</td>
+<td>Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute.</td>
+<td>false</td>
+<td>15</td>
+</tr>
+<tr>
+<td>maxUnityVolumesPerNode</td>
+<td>Maximum number of volumes that controller can publish to the node.</td>
+<td>false</td>
+<td>0</td>
+</tr>
+<tr>
+<td>certSecretCount</td>
+<td>Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1.</td>
+<td>false</td>
+<td>1</td>
+</tr>
+<tr>
+<td>imagePullPolicy</td>
+<td>The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists.</td>
+<td>Yes</td>
+<td>IfNotPresent</td>
+</tr>
+<tr>
+<td>podmon.enabled</td>
+<td>service to monitor failing jobs and notify</td>
+<td>false</td>
+<td>-</td>
+</tr>
+<tr>
+<td>podmon.image</td>
+<td>pod man image name</td>
+<td>false</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>controller</strong></td>
+<td>Allows configuration of the controller-specific parameters.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>controllerCount</td>
+<td>Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release</td>
+<td>Yes</td>
+<td>2</td>
+</tr>
+<tr>
+<td>volumeNamePrefix</td>
+<td>Defines a string prefix for the names of PersistentVolumes created</td>
+<td>Yes</td>
+<td>&ldquo;k8s&rdquo;</td>
+</tr>
+<tr>
+<td>snapshot.enabled</td>
+<td>Enable/Disable volume snapshot feature</td>
+<td>Yes</td>
+<td>true</td>
+</tr>
+<tr>
+<td>snapshot.snapNamePrefix</td>
+<td>Defines a string prefix for the names of the Snapshots created</td>
+<td>Yes</td>
+<td>&ldquo;snapshot&rdquo;</td>
+</tr>
+<tr>
+<td>resizer.enabled</td>
+<td>Enable/Disable volume expansion feature</td>
+<td>Yes</td>
+<td>true</td>
+</tr>
+<tr>
+<td>nodeSelector</td>
+<td>Define node selection constraints for pods of controller deployment</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>tolerations</td>
+<td>Define tolerations for the controller deployment, if required</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><em><strong>node</strong></em></td>
+<td>Allows configuration of the node-specific parameters.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>tolerations</td>
+<td>Define tolerations for the node daemonset, if required</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>dnsPolicy</td>
+<td>Define the DNS Policy of the Node service</td>
+<td>Yes</td>
+<td>ClusterFirstWithHostNet</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>:</p>
+<ul>
+<li>
+<p>User should provide all boolean values with double-quotes. This applies only for <code>myvalues.yaml</code>. Example: &ldquo;true&rdquo;/&ldquo;false&rdquo;</p>
+</li>
+<li>
+<p>controllerCount parameter value should be &lt;= number of nodes in the kubernetes cluster else install script fails.</p>
+</li>
+<li>
+<p>User can a create separate <em>StorageClass</em> (with topology-related keys) by referring to existing default storage classes.</p>
+</li>
+<li>
+<p>Host IO Limit must have a minimum bandwidth of 1 MBPS to discover the volumes on node successfully.</p>
+</li>
+<li>
+<p>User must not change the value of allowRWOMultiPodAccess to true unless intended to use the feature and is aware of the consequences. Enabling multiple pods to access the same PVC with RWO access mode on the same node might cause data to be overwritten and therefore leading to data loss in some cases.</p>
+</li>
+</ul>
+<p>Example <em>myvalues.yaml</em></p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">logLevel</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;info&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">imagePullPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Always<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">certSecretCount</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kubeletConfigDir</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/var/lib/kubelet<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">controller</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">controllerCount</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">volumeNamePrefix </span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>csivol<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">snapNamePrefix</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>csi-snap<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">resizer</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">allowRWOMultiPodAccess</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">syncNodeInfoInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">5</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">maxUnityVolumesPerNode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div></li>
+<li>
+<p>For certificate validation of Unisphere REST API calls refer <a href="#certificate-validation-for-unisphere-rest-api-calls">here</a>. Otherwise, create an empty secret with file <code>helm/emptysecret.yaml</code> file by running the <code>kubectl create -f helm/emptysecret.yaml</code> command.</p>
+</li>
+<li>
+<p>Prepare the <code>secret.yaml</code>  for driver configuration.
+The following table lists driver configuration parameters for multiple storage arrays.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>storageArrayList.username</td>
+<td>Username for accessing Unity system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>storageArrayList.password</td>
+<td>Password for accessing Unity system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>storageArrayList.endpoint</td>
+<td>REST API gateway HTTPS endpoint Unity system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>storageArrayList.arrayId</td>
+<td>ArrayID for Unity system</td>
+<td>true</td>
+<td>-</td>
+</tr>
+<tr>
+<td>storageArrayList.skipCertificateValidation</td>
+<td>&ldquo;skipCertificateValidation &quot; determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate.</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>storageArrayList.isDefault</td>
+<td>An array having isDefault=true or isDefaultArray=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list.</td>
+<td>false</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>Example: secret.yaml</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageArrayList</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">arrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;APM00******1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;user&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://10.1.1.1/&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">isDefault</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">arrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;APM00******2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;user&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://10.1.1.2/&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>Use the following command to create a new secret unity-creds from <code>secret.yaml</code> file.</p>
+<p><code>kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml</code></p>
+<p>Use the following command to replace or update the secret:</p>
+<p><code>kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -</code></p>
+<p><strong>Note</strong>: The user needs to validate the yaml syntax and array-related key/values while replacing the unity-creds secret.
+The driver will continue to use previous values in case of an error found in the yaml file.</p>
+<p>Alternatively, users can configure and use <code>secret.yaml</code> for driver configuration. The parameters remain the same as in the above table and below is a sample of <code>secret.yaml</code>. Samples of  <code>secret.yaml</code> is available in the directory <code>csi-unity/samples/secret/ </code>.</p>
+<p>Example: secret.yaml</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">storageArrayList</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>- <span style="color:#204a87;font-weight:bold">arrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;APM00******1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;user&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://10.1.1.1/&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">isDefault</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   
+</span><span style="color:#f8f8f8;text-decoration:underline"></span>- <span style="color:#204a87;font-weight:bold">arrayId</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;APM00******2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;user&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://10.1.1.2/&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span>```<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">**Note:**</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>*<span style="color:#f8f8f8;text-decoration:underline"> </span>Parameters<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;allowRWOMultiPodAccess&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span>and<span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;syncNodeInfoTimeInterval&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span>have<span style="color:#f8f8f8;text-decoration:underline"> </span>been<span style="color:#f8f8f8;text-decoration:underline"> </span>enabled<span style="color:#f8f8f8;text-decoration:underline"> </span>for<span style="color:#f8f8f8;text-decoration:underline"> </span>configuration<span style="color:#f8f8f8;text-decoration:underline"> </span>in<span style="color:#f8f8f8;text-decoration:underline"> </span>values.yaml<span style="color:#f8f8f8;text-decoration:underline"> </span>and<span style="color:#f8f8f8;text-decoration:underline"> </span>this<span style="color:#f8f8f8;text-decoration:underline"> </span>helps<span style="color:#f8f8f8;text-decoration:underline"> </span>users<span style="color:#f8f8f8;text-decoration:underline"> </span>to<span style="color:#f8f8f8;text-decoration:underline"> </span>dynamically<span style="color:#f8f8f8;text-decoration:underline"> </span>change<span style="color:#f8f8f8;text-decoration:underline"> </span>these<span style="color:#f8f8f8;text-decoration:underline"> </span>values<span style="color:#f8f8f8;text-decoration:underline"> </span>without<span style="color:#f8f8f8;text-decoration:underline"> </span>the<span style="color:#f8f8f8;text-decoration:underline"> </span>need<span style="color:#f8f8f8;text-decoration:underline"> </span>for<span style="color:#f8f8f8;text-decoration:underline"> </span>driver<span style="color:#f8f8f8;text-decoration:underline"> </span>re-installation.<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div></li>
+<li>
+<p>Setup for snapshots.</p>
+<p>Applicable only if you decided to enable snapshot feature in <code>values.yaml</code></p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">controller</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster</p>
+<h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
+<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd">v4.2.x</a> for the installation.</p>
+<h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
+<p>The CSI external-snapshotter sidecar is split into two controllers:</p>
+<ul>
+<li>A common snapshot controller</li>
+<li>A CSI external-snapshotter sidecar</li>
+</ul>
+<p>Use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller">v4.2.x</a> for the installation.</p>
+<p><strong>Note</strong>:</p>
+<ul>
+<li>The manifests available on GitHub install the snapshotter image:
+<ul>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v4.0.x</a></li>
+</ul>
+</li>
+<li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
+</ul>
+<h4 id="installation-example">Installation example</h4>
+<p>You can install CRDs and default snapshot controller by running following commands:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/kubernetes-csi/external-snapshotter/
+<span style="color:#204a87">cd</span> ./external-snapshotter
+git checkout release-&lt;your-version&gt;
+kubectl create -f client/config/crd
+kubectl create -f deploy/kubernetes/snapshot-controller
+</code></pre></div><p><strong>Note</strong>:</p>
+<ul>
+<li>It is recommended to use 4.2.x version of snapshotter/snapshot-controller.</li>
+<li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
+</ul>
+</li>
+<li>
+<p>Run the <code>./csi-install.sh --namespace unity --values ./myvalues.yaml</code> command to proceed with the installation.</p>
+<p>A successful installation must display messages that look similar to the following samples:</p>
+<pre><code>------------------------------------------------------
+&gt; Installing CSI Driver: csi-unity on 1.20
+------------------------------------------------------
+------------------------------------------------------
+&gt; Checking to see if CSI Driver is already installed
+------------------------------------------------------
+------------------------------------------------------
+&gt; Verifying Kubernetes and driver configuration
+------------------------------------------------------
+|- Kubernetes Version: 1.20
+|
+|- Driver: csi-unity                                                
+|
+|- Verifying Kubernetes versions                                    
+  |
+  |--&gt; Verifying minimum Kubernetes version                         Success
+  |
+  |--&gt; Verifying maximum Kubernetes version                         Success
+|
+|- Verifying that required namespaces have been created             Success
+|
+|- Verifying that required secrets have been created                Success
+|
+|- Verifying that required secrets have been created                Success
+|
+|- Verifying alpha snapshot resources                               
+  |
+  |--&gt; Verifying that alpha snapshot CRDs are not installed         Success
+|
+|- Verifying sshpass installation..                                 |
+|- Verifying iSCSI installation                                     
+Enter the root password of 10.**.**.**: 
+   
+Enter the root password of 10.**.**.**: 
+Success
+|
+|- Verifying snapshot support                                       
+  |
+  |--&gt; Verifying that snapshot CRDs are available                   Success
+  |
+  |--&gt; Verifying that the snapshot controller is available          Success
+|
+|- Verifying helm version                                           Success
+|
+|- Verifying helm values version                                    Success
+   
+------------------------------------------------------
+&gt; Verification Complete - Success
+------------------------------------------------------
+|
+|- Installing Driver                                                Success
+  |
+  |--&gt; Waiting for Deployment unity-controller to be ready          Success
+  |
+  |--&gt; Waiting for DaemonSet unity-node to be ready                 Success
+------------------------------------------------------
+&gt; Operation complete
+------------------------------------------------------
+</code></pre><p>Results:</p>
+<p>At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command <code>kubectl get pods -n unity</code> to get the status of the pods and you will see the following:</p>
+<ul>
+<li>One or more Unity Controller (based on controllerCount) with 5/5 containers ready, and status displayed as Running.</li>
+<li>Agent pods with 2/2 containers and the status displayed as Running.</li>
+</ul>
+</li>
+</ol>
+<h2 id="certificate-validation-for-unisphere-rest-api-calls">Certificate validation for Unisphere REST API calls</h2>
+<p>This topic provides details about setting up the certificate validation for the CSI Driver for Dell EMC Unity.</p>
+<p><em>Before you begin</em></p>
+<p>As part of the CSI driver installation, the CSI driver requires a secret with the name unity-certs-0 to unity-certs-n based on the &ldquo;.Values.certSecretCount&rdquo; parameter present in the namespace unity.</p>
+<p>This secret contains the X509 certificates of the CA which signed the Unisphere SSL certificate in PEM format.</p>
+<p>If the install script does not find the secret, it creates one empty secret with the name unity-certs-0.</p>
+<p>If this secret is an empty secret, then the validation of the certificate fails, and the driver fails to start.</p>
+<p>If the Unisphere certificate is self-signed or if you are using an embedded Unisphere, then perform the following steps.</p>
+<ol>
+<li>
+<p>To fetch the certificate, run the following command.
+<code>openssl s_client -showcerts -connect &lt;Unisphere IP:Port&gt; &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; ca_cert_0.pem</code>
+Example: openssl s_client -showcerts -connect 1.1.1.1:443 &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; ca_cert_0.pem</p>
+</li>
+<li>
+<p>Run the following command to create the cert secret with index &lsquo;0&rsquo;:
+<code>kubectl create secret generic unity-certs-0 --from-file=cert-0=ca_cert_0.pem -n unity</code>
+Use the following command to replace the secret:
+<code>kubectl create secret generic unity-certs-0 -n unity --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -</code></p>
+</li>
+<li>
+<p>Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: unity-certs-1, unity-certs-2, etc)</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>
+<p>&ldquo;unity&rdquo; is the namespace for helm-based installation but namespace can be user-defined in operator-based installation.</p>
+</li>
+<li>
+<p>User can add multiple certificates in the same secret. The certificate file should not exceed more than 1Mb due to Kubernetes secret size limitation.</p>
+</li>
+<li>
+<p>Whenever certSecretCount parameter changes in <code>myvalues.yaml</code> user needs to uninstall and install the driver.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="volume-snapshot-class">Volume Snapshot Class</h2>
+<p>For CSI Driver for Unity version 1.6 and later, <code>dell-csi-helm-installer</code> does not create any Volume Snapshot  classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the <code>csi-unity/samples/volumesnapshotclass/</code> folder. Use these samples to create new Volume Snapshot to provision storage.</p>
+<h3 id="what-happens-to-my-existing-volume-snapshot-classes">What happens to my existing Volume Snapshot Classes?</h3>
+<p><em>Upgrading from CSI Unity v1.6 driver</em>:
+The existing volume snapshot class will be retained.</p>
+<p><em>Upgrading from an older version of the driver</em>:
+It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 before upgrading to 2.0.</p>
+<h2 id="storage-classes">Storage Classes</h2>
+<p>Storage Classes are an essential Kubernetes construct for Storage provisioning. To know more about Storage Classes, refer to <a href="https://kubernetes.io/docs/concepts/storage/storage-classes/">https://kubernetes.io/docs/concepts/storage/storage-classes/</a></p>
+<p>A wide set of annotated storage class manifests have been provided in the <a href="https://github.com/dell/csi-unity/tree/master/samples/storageclass">samples/storageclass</a> folder. Use these samples to create new storage classes to provision storage.</p>
+<p>For CSI Driver for Unity version 2.0, a wide set of annotated storage class manifests have been provided in the <code>csi-unity/samples/storageclass</code> folder. Use these samples to create new storage classes to provision storage.</p>
+<h3 id="what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</h3>
+<p>Upgrading from an older version of the driver: The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation “helm.sh/resource-policy”: keep before performing an upgrade.</p>
+<blockquote>
+<p>Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
+</blockquote>
+<p><strong>Steps to create storage class:</strong>
+There are samples storage class yaml files available under <code>helm/samples/storageclass</code>.  These can be copied and modified as needed.</p>
+<ol>
+<li>Pick any of <code>unity-fc.yaml</code>, <code>unity-iscsi.yaml</code> or <code>unity-nfs.yaml</code></li>
+<li>Copy the file as <code>unity-&lt;ARRAY_ID&gt;-fc.yaml</code>, <code>unity-&lt;ARRAY_ID&gt;-iscsi.yaml</code> or <code>unity-&lt;ARRAY_ID&gt;-nfs.yaml</code></li>
+<li>Replace <code>&lt;ARRAY_ID&gt;</code> with the Array Id of the Unity Array to be used</li>
+<li>Replace <code>&lt;STORAGE_POOL&gt;</code> with the storage pool you have</li>
+<li>Replace <code>&lt;TIERING_POLICY&gt;</code> with the Tiering policy that is to be used for provisioning</li>
+<li>Replace <code>&lt;HOST_IO_LIMIT_NAME&gt;</code> with the Host IO Limit Name that is to be used for provisioning</li>
+<li>Replace <code>&lt;mountOption1&gt;</code> with the necessary mount options. If not required, this can be removed from the storage class</li>
+<li>Edit <code>storageclass.kubernetes.io/is-default-class</code> to true if you want to set it as default, otherwise false.</li>
+<li>Save the file and create it by using <code>kubectl create -f unity-&lt;ARRAY_ID&gt;-fc.yaml</code> or <code>kubectl create -f unity-&lt;ARRAY_ID&gt;-iscsi.yaml</code> or <code>kubectl create -f unity-&lt;ARRAY_ID&gt;-nfs.yaml</code></li>
+</ol>
+<p><strong>Note</strong>:</p>
+<ul>
+<li>At least one storage class is required for one array.</li>
+<li>If you uninstall the driver and reinstall it, you can still face errors if any update in the <code>values.yaml</code> file leads to an update of the storage class(es):</li>
+</ul>
+<pre><code>    Error: cannot patch &quot;&lt;sc-name&gt;&quot; with kind StorageClass: StorageClass.storage.k8s.io &quot;&lt;sc-name&gt;&quot; is invalid: parameters: Forbidden: updates to parameters are forbidden
+</code></pre><p>In case you want to make such updates, ensure to delete the existing storage classes using the <code>kubectl delete storageclass</code> command.<br>
+Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.</p>
+<h2 id="dynamically-update-the-unity-creds-secrets">Dynamically update the unity-creds secrets</h2>
+<p>Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the &ldquo;Host&rdquo; information in an array.
+User can update secret using the following command:</p>
+<pre><code>    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+</code></pre><p><strong>Note</strong>: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.</p>
+<h2 id="dynamic-logging-configuration">Dynamic Logging Configuration</h2>
+<p>This feature is introduced in CSI Driver for unity version 2.0.0.</p>
+<h3 id="helm-based-installation">Helm based installation</h3>
+<p>As part of driver installation, a ConfigMap with the name <code>unity-config-params</code> is created, which contains an attribute <code>CSI_LOG_LEVEL</code> which specifies the current log level of CSI driver.</p>
+<p>Users can set the default log level by specifying log level to <code>logLevel</code> attribute in values.yaml during driver installation.</p>
+<p>To change the log level dynamically to a different value user can edit the same values.yaml, and run the following command</p>
+<pre><code>cd dell-csi-helm-installer
+./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade
+</code></pre><p>Note: myvalues.yaml is a values.yaml file which user has used for driver installation.</p>
+
+	
+	
+
+</div>
+
+
+          </main>
+        </div>
+      </div>
+    
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" href="https://github.com/dell/csm">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
+    <a class="text-white" target="_blank" href="http://del.ly/Slack_request">
+      <i class="fab fa-slack"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2022 The Dell Technologies All Rights Reserved</small>
+        <small class="ml-1"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank">Privacy Policy</a></small>
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+<script src="/csm-docs/js/main.min.664f21bf5eb0c31ebc661e2616e6c63e0448cec6d5636d869957be423c3cb952.js" integrity="sha256-Zk8hv16wwx68Zh4mFubGPgRIzsbVY22GmVe&#43;Qjw8uVI=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

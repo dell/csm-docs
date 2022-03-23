@@ -22,14 +22,13 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---dell-csi-operator-150&#34;&gt;Release Notes - Dell CSI Operator 1.5.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---dell-csi-operator-160&#34;&gt;Release Notes - Dell CSI Operator 1.6.0&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There will be a delay in certification of Dell CSI Operator 1.5.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.5.0 release.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There will be a delay in certification of Dell CSI Operator 1.6.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.6.0 release.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes v1.22&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift v4.8.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.9.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
@@ -64,23 +63,40 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v200&#34;&gt;Release Notes - CSI PowerFlex v2.0.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v210&#34;&gt;Release Notes - CSI PowerFlex v2.1.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift v4.8.&lt;/li&gt;
-&lt;li&gt;Added support for dynamic multi-array configuration.&lt;/li&gt;
-&lt;li&gt;Added certificate validation for PowerFlex Gateway REST API calls.&lt;/li&gt;
-&lt;li&gt;Aligned configuration parameters with those in other CSI drivers in effort to have consistent config experience across drivers.&lt;/li&gt;
-&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
-&lt;li&gt;Added the ability to use system names instead of system IDs in config files.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.9.&lt;/li&gt;
+&lt;li&gt;Added support for CSI spec 1.5.&lt;/li&gt;
+&lt;li&gt;Added support for new access modes in CSI Spec 1.5.&lt;/li&gt;
+&lt;li&gt;Added support for PV/PVC metrics.&lt;/li&gt;
+&lt;li&gt;Added support for CSM Authorization sidecar via Helm.&lt;/li&gt;
+&lt;li&gt;Added v1 extensions to vg snaphot from v1alpha2.&lt;/li&gt;
+&lt;li&gt;Added support to update helm charts to do a helm install without shell scripts.&lt;/li&gt;
+&lt;li&gt;Added support for volume health monitoring&lt;/li&gt;
+&lt;li&gt;Removed support for Fedora CoreOS&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.&lt;/td&gt;
+&lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>
@@ -94,17 +110,13 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powermax-v200&#34;&gt;Release Notes - CSI PowerMax v2.0.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powermax-v210&#34;&gt;Release Notes - CSI PowerMax v2.1.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift v4.8.&lt;/li&gt;
-&lt;li&gt;Added support for RKE v1.2.8.&lt;/li&gt;
-&lt;li&gt;Added support for consistent config parameters across CSI drivers.&lt;/li&gt;
-&lt;li&gt;Added the ability to change log level and log format of CSI driver and change them dynamically.&lt;/li&gt;
-&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.9.&lt;/li&gt;
+&lt;li&gt;Added support for CSI spec 1.5.&lt;/li&gt;
+&lt;li&gt;Added v2 suffix to the module names.&lt;/li&gt;
+&lt;li&gt;Added support for CSM Authorization sidecar via Helm&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
@@ -144,20 +156,16 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v200&#34;&gt;Release Notes - CSI Driver for PowerScale v2.0.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v210&#34;&gt;Release Notes - CSI Driver for PowerScale v2.1.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift v4.8.&lt;/li&gt;
-&lt;li&gt;Added support for CSI Spec v1.4.&lt;/li&gt;
-&lt;li&gt;Added support for session-based authentication.&lt;/li&gt;
-&lt;li&gt;Added support for consistent config parameters across CSI drivers.&lt;/li&gt;
-&lt;li&gt;Added support for configurable security permissions for volume.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
-&lt;li&gt;Added support to make dnsPolicy of node component configurable via Operator as well.&lt;/li&gt;
-&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
-&lt;li&gt;Updated support for dynamic logging configuration.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.9.&lt;/li&gt;
+&lt;li&gt;Added support for CSI spec 1.5.&lt;/li&gt;
+&lt;li&gt;Added support for new access modes in CSI Spec 1.5.&lt;/li&gt;
+&lt;li&gt;Added support for PV/PVC metrics.&lt;/li&gt;
+&lt;li&gt;Added ability to accept leader election timeout flags.&lt;/li&gt;
+&lt;li&gt;Added support for Dell EMC PowerScale 9.3.&lt;/li&gt;
+&lt;li&gt;Added support for volume health monitoring.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
@@ -178,8 +186,16 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;td&gt;If some older NFS exports /terminated worker nodes still in NFS export client list, CSI driver tries to add a new worker node it fails (For RWX volume).&lt;/td&gt;
 &lt;td&gt;User need to manually clean the export client list from old entries to make successful additon of new worker nodes.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.&lt;/td&gt;
+&lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>
@@ -193,21 +209,36 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v200&#34;&gt;Release Notes - CSI PowerStore v2.0.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v210&#34;&gt;Release Notes - CSI PowerStore v2.1.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift 4.8.&lt;/li&gt;
-&lt;li&gt;Added the ability to change log level and log format of CSI driver and change them dynamically.&lt;/li&gt;
-&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
-&lt;li&gt;Added support for consistent config parameters across CSI drivers.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.9.&lt;/li&gt;
+&lt;li&gt;Added support for CSI spec 1.5.&lt;/li&gt;
+&lt;li&gt;Added support for new access modes in CSI Spec 1.5.&lt;/li&gt;
+&lt;li&gt;Added support for PV/PVC metrics.&lt;/li&gt;
+&lt;li&gt;Added support for volume health monitoring.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Resolution or workaround, if known&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation&lt;/td&gt;
+&lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt; &lt;br&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>
@@ -221,16 +252,14 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-unity-v200&#34;&gt;Release Notes - CSI Unity v2.0.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-unity-v210&#34;&gt;Release Notes - CSI Unity v2.1.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
-&lt;li&gt;Added support for Openshift 4.8.&lt;/li&gt;
-&lt;li&gt;Added the ability to change log level and log format of CSI driver and change them dynamically.&lt;/li&gt;
-&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
-&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
-&lt;li&gt;Added support for consistent config parameters across CSI drivers.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.9.&lt;/li&gt;
+&lt;li&gt;Added support for CSI spec 1.5.&lt;/li&gt;
+&lt;li&gt;Added support for new access modes in CSI Spec 1.5.&lt;/li&gt;
+&lt;li&gt;Added ability to associate a tenant with storage volumes. -&lt;/li&gt;
+&lt;li&gt;Added support for volume health monitoring.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
@@ -250,8 +279,16 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;td&gt;NFS Clone - Resize of the snapshot is not supported by Unity Platform.&lt;/td&gt;
 &lt;td&gt;Currently, when the driver takes a clone of NFS volume, it succeeds. But when the user tries to resize the NFS volumesnapshot, the driver will throw an error. The user should never try to resize the cloned NFS volume.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.&lt;/td&gt;
+&lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>

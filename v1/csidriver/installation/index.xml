@@ -62,6 +62,36 @@
         
         
         &lt;p&gt;The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.&lt;/p&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
+&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:&lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd&#34;&gt;v4.2.x&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
+&lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A common snapshot controller&lt;/li&gt;
+&lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller&#34;&gt;v4.2.x&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The manifests available on GitHub install the snapshotter image:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v4.0.x&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
+&lt;p&gt;You can install CRDs and the default snapshot controller by running the following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
+&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
+git checkout release-&amp;lt;your-version&amp;gt;
+kubectl create -f client/config/crd
+kubectl create -f deploy/kubernetes/snapshot-controller
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It is recommended to use 4.2.x version of snapshotter/snapshot-controller.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Dell CSI Operator has been tested and qualified with&lt;/p&gt;
 &lt;ul&gt;
@@ -83,13 +113,6 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerMax&lt;/td&gt;
-&lt;td&gt;1.6&lt;/td&gt;
-&lt;td&gt;v5&lt;/td&gt;
-&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerMax&lt;/td&gt;
 &lt;td&gt;1.7&lt;/td&gt;
 &lt;td&gt;v6&lt;/td&gt;
 &lt;td&gt;1.19, 1.20, 1.21&lt;/td&gt;
@@ -103,11 +126,11 @@
 &lt;td&gt;4.6 EUS, 4.7, 4.8&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;1.4&lt;/td&gt;
-&lt;td&gt;v4&lt;/td&gt;
-&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;td&gt;CSI PowerMax&lt;/td&gt;
+&lt;td&gt;2.1.0&lt;/td&gt;
+&lt;td&gt;v2.1.0&lt;/td&gt;
+&lt;td&gt;1.20, 1.21, 1.22&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerFlex&lt;/td&gt;
@@ -124,11 +147,11 @@
 &lt;td&gt;4.6 EUS, 4.7, 4.8&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;1.5&lt;/td&gt;
-&lt;td&gt;v5&lt;/td&gt;
-&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;td&gt;CSI PowerFlex&lt;/td&gt;
+&lt;td&gt;2.1.0&lt;/td&gt;
+&lt;td&gt;v2.1.0&lt;/td&gt;
+&lt;td&gt;1.20, 1.21, 1.22&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
@@ -145,11 +168,11 @@
 &lt;td&gt;4.6 EUS, 4.7, 4.8&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI Unity&lt;/td&gt;
-&lt;td&gt;1.5&lt;/td&gt;
-&lt;td&gt;v4&lt;/td&gt;
-&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;td&gt;CSI PowerScale&lt;/td&gt;
+&lt;td&gt;2.1.0&lt;/td&gt;
+&lt;td&gt;v2.1.0&lt;/td&gt;
+&lt;td&gt;1.20, 1.21, 1.22&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI Unity&lt;/td&gt;
@@ -166,11 +189,11 @@
 &lt;td&gt;4.6 EUS, 4.7, 4.8&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI PowerStore&lt;/td&gt;
-&lt;td&gt;1.3&lt;/td&gt;
-&lt;td&gt;v3&lt;/td&gt;
-&lt;td&gt;1.18, 1.19, 1.20&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;td&gt;CSI Unity&lt;/td&gt;
+&lt;td&gt;2.1.0&lt;/td&gt;
+&lt;td&gt;v2.1.0&lt;/td&gt;
+&lt;td&gt;1.20, 1.21, 1.22&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerStore&lt;/td&gt;
@@ -185,6 +208,13 @@
 &lt;td&gt;v2.0.0&lt;/td&gt;
 &lt;td&gt;1.20, 1.21, 1.22&lt;/td&gt;
 &lt;td&gt;4.6 EUS, 4.7, 4.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerStore&lt;/td&gt;
+&lt;td&gt;2.1.0&lt;/td&gt;
+&lt;td&gt;v2.1.0&lt;/td&gt;
+&lt;td&gt;1.20, 1.21, 1.22&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -220,6 +250,7 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 &lt;/blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;Dell CSI Operator repository&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;git checkout dell-csi-operator-&lt;your-version&gt;&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;bash scripts/install.sh&lt;/code&gt; to install the operator.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
@@ -237,8 +268,8 @@ Any existing installations of Dell CSI Operator (v1.2.0 or later) installed usin
 	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/operator/non-olm-1_hu3a291ce9bebde0ed63d4ea6dfde899af_206872_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1349&#34;&gt;
 	
 &lt;/div&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;Run the command &lt;code&gt;oc get pods -n dell-csi-operator&lt;/code&gt; to validate the install. If completed successfully, you should be able to see the operator-related pod in the &amp;lsquo;dell-csi-operator&amp;rsquo; namespace.&lt;/li&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Run the command &lt;code&gt;oc get pods -n dell-csi-operator&lt;/code&gt; to validate the installation. If completed successfully, you should be able to see the operator-related pod in the &amp;lsquo;dell-csi-operator&amp;rsquo; namespace.&lt;/li&gt;
 &lt;/ol&gt;
 
 
@@ -409,26 +440,65 @@ $ kubectl edit csiunity/unity -n &amp;lt;driver-namespace&amp;gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;NOTES:&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field if required.&lt;/li&gt;
-&lt;li&gt;The parameter &amp;ldquo;dnsPolicy: ClusterFirstWithHostNet&amp;rdquo; should be added as follows:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;driver:
-    configVersion: v5
-    replicas: 2
-    dnsPolicy: ClusterFirstWithHostNet
-    common:
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field if required.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v2&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.1.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add
+external-health-monitor sidecar in the sidecar section and &lt;code&gt;value&lt;/code&gt;under controller set to true and the &lt;code&gt;value&lt;/code&gt; under node set
+to true as shown below:
+i. Add controller and node section as below:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;envs&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;X_CSI_ENABLE_VOL_HEALTH_MONITOR&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dnsPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;ClusterFirstWithHostNet&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;envs&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;X_CSI_ENABLE_VOL_HEALTH_MONITOR&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ii. Update the sidecar versions and add external-health-monitor sidecar if you want to enable health monitor of CSI volumes from Controller plugin:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sideCars&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- --volume-name-prefix=csiunity&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- --default-fstype=ext4&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-provisioner&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v3&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.0.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;provisioner&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- --snapshot-name-prefix=csiunitysnap&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-snapshotter&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v4&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.2.1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;snapshotter&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- --monitor-interval=60s&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v0&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.4.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;external-health-monitor&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-attacher&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v3&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.3.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;attacher&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-node-driver-registrar&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v2&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.3.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;registrar&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-resizer&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v1&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.3.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;resizer&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Configmap needs to be created with command &lt;code&gt;kubectl create -f configmap.yaml&lt;/code&gt; using following yaml file.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;ConfigMap&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;ConfigMap&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;powerstore-config-params&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;csi-powerstore&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;unity-config-params&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;test-unity&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver-config-params.yaml&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;|
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    CSI_LOG_LEVEL: &amp;#34;debug&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;CSI_LOG_FORMAT&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;JSON&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    CSI_LOG_LEVEL: &amp;#34;info&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ALLOW_RWO_MULTIPOD_ACCESS&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;MAX_UNITY_VOLUMES_PER_NODE&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;SYNC_NODE_INFO_TIME_INTERVAL&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;TENANT_NAME&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;code&gt;Replicas&lt;/code&gt; in the driver CR file should not be greater than or equal to the number of worker nodes when upgrading the driver. If the &lt;code&gt;Replicas&lt;/code&gt; count is not less than the worker node count, some of the driver controller pods would land in a pending state, and upgrade will not be successful. Driver controller pods go in a pending state because they have anti-affinity to each other and cannot be scheduled on nodes where there is a driver controller pod already running. Refer to &lt;a href=&#34;https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity&#34;&gt;https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity&lt;/a&gt; for more details.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Do not try to update the operator by modifying the original &lt;code&gt;CustomResource&lt;/code&gt; manifest file and running the &lt;code&gt;kubectl apply -f&lt;/code&gt; command. As part of the driver installation, the Operator sets some annotations on the &lt;code&gt;CustomResource&lt;/code&gt; object which are further utilized in some workflows (like detecting upgrade of drivers). If you run the &lt;code&gt;kubectl apply -f&lt;/code&gt; command to update the driver, these annotations are overwritten and this may lead to failures.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; From v1.4.0 onwards, Dell CSI Operator does not support the creation of &lt;code&gt;StorageClass&lt;/code&gt; and &lt;code&gt;VolumeSnapshotClass&lt;/code&gt; objects. Although these fields are still present in the various driver &lt;code&gt;CustomResourceDefinitions&lt;/code&gt;, they would be ignored by the operator. These fields will be removed from the &lt;code&gt;CustomResourceDefinitions&lt;/code&gt; in a future release. If &lt;code&gt;StorageClass&lt;/code&gt; and &lt;code&gt;VolumeSnapshotClass&lt;/code&gt; need to be retained,  you should upgrade the driver as per the recommended way noted above.
@@ -496,7 +566,7 @@ Used to specify node selectors for the driver StatefulSet/Deployment and DaemonS
 &lt;p&gt;Note - The &lt;code&gt;image&lt;/code&gt; field should point to the correct image tag for version of the driver you are installing.&lt;br&gt;
 For e.g. - If you wish to install v1.4 of the CSI PowerMax driver, use the image tag &lt;code&gt;dellemc/csi-powermax:v1.4.0.000R&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;sidecars&#34;&gt;SideCars&lt;/h3&gt;
-&lt;p&gt;Although the sidecars field in the driver specification is optional, it is &lt;strong&gt;strongly&lt;/strong&gt; recommended to not modify any details related to sidecars provided (if present) in the sample manifests. Any modifications to this should be only done after consulting with Dell EMC support.&lt;/p&gt;
+&lt;p&gt;Although the sidecars field in the driver specification is optional, it is &lt;strong&gt;strongly&lt;/strong&gt; recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell EMC support.&lt;/p&gt;
 &lt;h3 id=&#34;modify-the-driver-specification&#34;&gt;Modify the driver specification&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Choose the correct configVersion. Refer the table containing the full list of supported drivers and versions.&lt;/li&gt;
