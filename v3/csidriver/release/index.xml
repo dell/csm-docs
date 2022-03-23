@@ -1,0 +1,260 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Release Notes</title>
+    <link>https://dell.github.io/csm-docs/v3/csidriver/release/</link>
+    <description>Recent content in Release Notes on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v3/csidriver/release/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V3: Operator</title>
+      <link>https://dell.github.io/csm-docs/v3/csidriver/release/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/csidriver/release/operator/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---dell-csi-operator-150&#34;&gt;Release Notes - Dell CSI Operator 1.5.0&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There will be a delay in certification of Dell CSI Operator 1.5.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.5.0 release.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for Kubernetes v1.22&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.8.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;A warning message will be listed in the events for cluster scoped objects if the driver is not upgraded after an operator upgrade. This happens because of the fix provided by Kubernetes in 1.20 for one of the known &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/65200&#34;&gt;issue&lt;/a&gt;.&lt;/td&gt;
+&lt;td&gt;After an operator upgrade, the objects will get updated automatically after 45 mins in case of no driver upgrade.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;support&#34;&gt;Support&lt;/h3&gt;
+&lt;p&gt;The Dell CSI Operator image is available on Dockerhub and is officially supported by Dell EMC.
+For any CSI operator and driver issues, questions or feedback, please follow our &lt;a href=&#34;../../../support/&#34;&gt;support process&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V3: PowerFlex</title>
+      <link>https://dell.github.io/csm-docs/v3/csidriver/release/powerflex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/csidriver/release/powerflex/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v200&#34;&gt;Release Notes - CSI PowerFlex v2.0.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.8.&lt;/li&gt;
+&lt;li&gt;Added support for dynamic multi-array configuration.&lt;/li&gt;
+&lt;li&gt;Added certificate validation for PowerFlex Gateway REST API calls.&lt;/li&gt;
+&lt;li&gt;Aligned configuration parameters with those in other CSI drivers in effort to have consistent config experience across drivers.&lt;/li&gt;
+&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added the ability to use system names instead of system IDs in config files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V3: PowerMax</title>
+      <link>https://dell.github.io/csm-docs/v3/csidriver/release/powermax/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/csidriver/release/powermax/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-powermax-v200&#34;&gt;Release Notes - CSI PowerMax v2.0.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.8.&lt;/li&gt;
+&lt;li&gt;Added support for RKE v1.2.8.&lt;/li&gt;
+&lt;li&gt;Added support for consistent config parameters across CSI drivers.&lt;/li&gt;
+&lt;li&gt;Added the ability to change log level and log format of CSI driver and change them dynamically.&lt;/li&gt;
+&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete Volume fails with the error message: volume is part of masking view&lt;/td&gt;
+&lt;td&gt;This issue is due to limitations in Unisphere and occurs when Unisphere is overloaded. Currently, there is no workaround for this but it can be avoided by ensuring that Unisphere is not overloaded during such operations. The Unisphere team is assessing a fix for this in a future Unisphere release&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Getting initiators list fails with context deadline error&lt;/td&gt;
+&lt;td&gt;The following error can occur during the driver installation if a large number of initiators are present on the array. There is no workaround for this but it can be avoided by deleting stale initiators on the array&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unable to update Host: A problem occurred modifying the host resource&lt;/td&gt;
+&lt;td&gt;This issue occurs when the nodes do not have unique hostnames or when an IP address/FQDN with same sub-domains are used as hostnames. The workaround is to use unique hostnames or FQDN with unique sub-domains&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V3: PowerScale</title>
+      <link>https://dell.github.io/csm-docs/v3/csidriver/release/powerscale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/csidriver/release/powerscale/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v200&#34;&gt;Release Notes - CSI Driver for PowerScale v2.0.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift v4.8.&lt;/li&gt;
+&lt;li&gt;Added support for CSI Spec v1.4.&lt;/li&gt;
+&lt;li&gt;Added support for session-based authentication.&lt;/li&gt;
+&lt;li&gt;Added support for consistent config parameters across CSI drivers.&lt;/li&gt;
+&lt;li&gt;Added support for configurable security permissions for volume.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added support to make dnsPolicy of node component configurable via Operator as well.&lt;/li&gt;
+&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
+&lt;li&gt;Updated support for dynamic logging configuration.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Resolution or workaround, if known&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;If the length of the nodeID exceeds 128 characters, the driver fails to update the CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn&amp;rsquo;t allow nodeID to be greater than 128 characters.&lt;/td&gt;
+&lt;td&gt;The CSI PowerScale driver uses the hostname for building the nodeID which is set in the CSINode resource object, hence we recommend not having very long hostnames in order to avoid this issue. This current limitation of 128 characters is likely to be relaxed in future Kubernetes versions as per this issue in the community: &lt;a href=&#34;https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581&#34;&gt;https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver/issues/581&lt;/a&gt; &lt;br&gt;&lt;br&gt; &lt;strong&gt;Note:&lt;/strong&gt; In kubernetes 1.22 this limit has been relaxed to 192 characters.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If some older NFS exports /terminated worker nodes still in NFS export client list, CSI driver tries to add a new worker node it fails (For RWX volume).&lt;/td&gt;
+&lt;td&gt;User need to manually clean the export client list from old entries to make successful additon of new worker nodes.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V3: PowerStore</title>
+      <link>https://dell.github.io/csm-docs/v3/csidriver/release/powerstore/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/csidriver/release/powerstore/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v200&#34;&gt;Release Notes - CSI PowerStore v2.0.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift 4.8.&lt;/li&gt;
+&lt;li&gt;Added the ability to change log level and log format of CSI driver and change them dynamically.&lt;/li&gt;
+&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added support for consistent config parameters across CSI drivers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V3: Unity</title>
+      <link>https://dell.github.io/csm-docs/v3/csidriver/release/unity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/csidriver/release/unity/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csi-unity-v200&#34;&gt;Release Notes - CSI Unity v2.0.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for Kubernetes v1.22.&lt;/li&gt;
+&lt;li&gt;Added support for Openshift 4.8.&lt;/li&gt;
+&lt;li&gt;Added the ability to change log level and log format of CSI driver and change them dynamically.&lt;/li&gt;
+&lt;li&gt;Added the ability to configure kubelet directory path.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of resizer sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added the ability to enable/disable installation of snapshotter sidecar with driver installation.&lt;/li&gt;
+&lt;li&gt;Added support for consistent config parameters across CSI drivers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Topology-related node labels are not removed automatically.&lt;/td&gt;
+&lt;td&gt;Currently, when the driver is uninstalled, topology-related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released, remove the labels manually after the driver un-installation using command &lt;strong&gt;kubectl label node &amp;lt;node_name&amp;gt; &lt;label1&gt;- &lt;label2&gt;- &amp;hellip;&lt;/strong&gt; Example: &lt;strong&gt;kubectl label node &lt;hostname&gt; csi-unity.dellemc.com/array123-iscsi-&lt;/strong&gt; Note: there must be - at the end of each label to remove it.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;NFS Clone - Resize of the snapshot is not supported by Unity Platform.&lt;/td&gt;
+&lt;td&gt;Currently, when the driver takes a clone of NFS volume, it succeeds. But when the user tries to resize the NFS volumesnapshot, the driver will throw an error. The user should never try to resize the cloned NFS volume.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

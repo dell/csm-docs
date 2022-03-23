@@ -1,0 +1,245 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Metrics</title>
+    <link>https://dell.github.io/csm-docs/v3/observability/metrics/</link>
+    <description>Recent content in Metrics on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v3/observability/metrics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V3: PowerFlex Metrics</title>
+      <link>https://dell.github.io/csm-docs/v3/observability/metrics/powerflex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/observability/metrics/powerflex/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section outlines the metrics collected by the Container Storage Modules (CSM) Observability module for PowerFlex. The &lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex&#34;&gt;Grafana reference dashboards&lt;/a&gt; for PowerFlex metrics can be uploaded to your Grafana instance.&lt;/p&gt;
+&lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
+&lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by export node and volume.&lt;/p&gt;
+&lt;p&gt;To disable these metrics, set the &lt;code&gt;sdc_metrics_enabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_export_node_read_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The export node read bandwidth (MB/s) within PowerFlex system&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_export_node_write_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The export node write bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_export_node_read_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete read operations within PowerFlex system by the export node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_export_node_write_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete write operations within PowerFlex system by the export host&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_export_node_read_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of read operations performed by an export node (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_export_node_write_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of write operations performed by an export node (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_volume_read_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The volume read bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_volume_write_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The volume write bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_volume_read_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete read operations to a volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_volume_write_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete write operations to a volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_volume_read_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of read operations performed against a volume (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_volume_write_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of write operations performed against a volume (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
+&lt;p&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/p&gt;
+&lt;p&gt;To disable these metrics, set the &lt;code&gt;storage_class_pool_metrics_enabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_storage_pool_total_logical_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;The logical capacity (size) of a storage pool (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_storage_pool_logical_capacity_available_gigabytes&lt;/td&gt;
+&lt;td&gt;The capacity available for use (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_storage_pool_logical_capacity_in_use_gigabytes&lt;/td&gt;
+&lt;td&gt;The logical capacity of a storage pool in use (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerflex_storage_pool_logical_provisioned_gigabytes&lt;/td&gt;
+&lt;td&gt;The total size of volumes (thick and thin) provisioned in a storage pool (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V3: PowerStore Metrics</title>
+      <link>https://dell.github.io/csm-docs/v3/observability/metrics/powerstore/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/observability/metrics/powerstore/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section outlines the metrics collected by the Container Storage Modules (CSM) Observability module for PowerStore. The &lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore&#34;&gt;Grafana reference dashboards&lt;/a&gt; for PowerStore metrics can be uploaded to your Grafana instance.&lt;/p&gt;
+&lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
+&lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by export node and volume.&lt;/p&gt;
+&lt;p&gt;To disable these metrics, set the &lt;code&gt;karaviMetricsPowerstore.volumeMetricsEnabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_volume_read_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The volume read bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_volume_write_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The volume write bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_volume_read_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete read operations to a volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_volume_write_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete write operations to a volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_volume_read_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of read operations performed against a volume (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_volume_write_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of write operations performed against a volume (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_filesystem_read_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The filesystem read bandwidth MB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_filesystem_write_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The filesystem write bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_filesystem_read_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of read operations performed against a filesystem (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_filesystem_write_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of write operations performed against a filesystem (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_filesystem_read_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete read operations to a filesystem&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_filesystem_write_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete write operations to a filesystem&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
+&lt;p&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/p&gt;
+&lt;p&gt;To disable these metrics, set the &lt;code&gt;enable_powerstore_metrics&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_array_logical_provisioned_megabytes&lt;/td&gt;
+&lt;td&gt;Total provisioned logical storage on a given array managed by CSI driver&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_array_logical_used_megabytes&lt;/td&gt;
+&lt;td&gt;Total used logical storage on a given array&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_storage_class_logical_provisioned_megabytes&lt;/td&gt;
+&lt;td&gt;Total provisioned logical storage for a given storage class&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_storage_class_logical_used_megabytes&lt;/td&gt;
+&lt;td&gt;Total used logical storage for a given storage class&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_volume_logical_provisioned_megabytes&lt;/td&gt;
+&lt;td&gt;Logical provisioned storage for a volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_volume_logical_used_megabytes&lt;/td&gt;
+&lt;td&gt;Logical used storage for a volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_filesystem_logical_provisioned_megabytes&lt;/td&gt;
+&lt;td&gt;Logical provisioned storage for a filesystem&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerstore_filesystem_logical_used_megabytes&lt;/td&gt;
+&lt;td&gt;Logical used storage for a filesystem&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

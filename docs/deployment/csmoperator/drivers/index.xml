@@ -1,0 +1,246 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – CSI Drivers</title>
+    <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/</link>
+    <description>Recent content in CSI Drivers on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: PowerScale</title>
+      <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerscale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerscale/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;installing-csi-driver-for-powerscale-via-dell-csm-operator&#34;&gt;Installing CSI Driver for PowerScale via Dell CSM Operator&lt;/h2&gt;
+&lt;p&gt;The CSI Driver for Dell PowerScale can be installed via the Dell CSM Operator.
+To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerScale via Operator.&lt;/p&gt;
+&lt;h3 id=&#34;listing-installed-drivers-with-the-containerstoragemodule-crd&#34;&gt;Listing installed drivers with the ContainerStorageModule CRD&lt;/h3&gt;
+&lt;p&gt;User can query for all Dell CSI drivers using the following command:
+&lt;code&gt;kubectl get csm --all-namespaces&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;install-driver&#34;&gt;Install Driver&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create namespace.
+Execute &lt;code&gt;kubectl create namespace test-isilon&lt;/code&gt; to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &amp;lsquo;test-isilon&amp;rsquo;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create &lt;em&gt;isilon-creds&lt;/em&gt; secret by creating a yaml file called secret.yaml with the following content:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; isilonClusters:
+    # logical name of PowerScale Cluster
+  - clusterName: &amp;quot;cluster1&amp;quot;
+
+    # username for connecting to PowerScale OneFS API server
+    # Default value: None
+    username: &amp;quot;user&amp;quot;
+
+    # password for connecting to PowerScale OneFS API server
+    password: &amp;quot;password&amp;quot;
+
+    # HTTPS endpoint of the PowerScale OneFS API server
+    # Default value: None
+    # Examples: &amp;quot;1.2.3.4&amp;quot;, &amp;quot;https://1.2.3.4&amp;quot;, &amp;quot;https://abc.myonefs.com&amp;quot;
+    endpoint: &amp;quot;1.2.3.4&amp;quot;
+
+    # Is this a default cluster (would be used by storage classes without ClusterName parameter)
+    # Allowed values:
+    #   true: mark this cluster config as default
+    #   false: mark this cluster config as not default
+    # Default value: false
+    isDefault: true
+
+    # Specify whether the PowerScale OneFS API server&#39;s certificate chain and host name should be verified.
+    # Allowed values:
+    #   true: skip OneFS API server&#39;s certificate verification
+    #   false: verify OneFS API server&#39;s certificates
+    # Default value: default value specified in values.yaml
+    # skipCertificateValidation: true
+
+    # The base path for the volumes to be created on PowerScale cluster
+    # This will be used if a storage class does not have the IsiPath parameter specified.
+    # Ensure that this path exists on PowerScale cluster.
+    # Allowed values: unix absolute path
+    # Default value: default value specified in values.yaml
+    # Examples: &amp;quot;/ifs/data/csi&amp;quot;, &amp;quot;/ifs/engineering&amp;quot;
+    # isiPath: &amp;quot;/ifs/data/csi&amp;quot;
+
+    # The permissions for isi volume directory path
+    # This will be used if a storage class does not have the IsiVolumePathPermissions parameter specified.
+    # Allowed values: valid octal mode number
+    # Default value: &amp;quot;0777&amp;quot;
+    # Examples: &amp;quot;0777&amp;quot;, &amp;quot;777&amp;quot;, &amp;quot;0755&amp;quot;
+    # isiVolumePathPermissions: &amp;quot;0777&amp;quot;
+
+  - clusterName: &amp;quot;cluster2&amp;quot;
+    username: &amp;quot;user&amp;quot;
+    password: &amp;quot;password&amp;quot;
+    endpoint: &amp;quot;1.2.3.4&amp;quot;
+    endpointPort: &amp;quot;8080&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,&lt;br&gt;
+&lt;code&gt;kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Use the following command to replace or update the secret&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
+The driver will continue to use previous values in case of an error found in the YAML file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create isilon-certs-n secret.
+Please refer &lt;a href=&#34;../../../../csidriver/installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls&#34;&gt;this section&lt;/a&gt; for creating cert-secrets.&lt;/p&gt;
+&lt;p&gt;If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Secret&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;isilon-certs&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;-0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;isilon&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Opaque&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-0&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Execute command: &lt;code&gt;kubectl create -f empty-secret.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a CR (Custom Resource) for PowerScale using the sample files provided
+&lt;a href=&#34;https://github.com/dell/csm-operator/tree/master/samples&#34;&gt;here&lt;/a&gt;. This file can be modified to use custom parameters if needed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;dnsPolicy&lt;/td&gt;
+&lt;td&gt;Determines the DNS Policy of the Node service&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;ClusterFirstWithHostNet&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;em&gt;&lt;strong&gt;Common parameters for node and controller&lt;/strong&gt;&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI_ENDPOINT&lt;/td&gt;
+&lt;td&gt;The UNIX socket address for handling gRPC calls&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;/var/run/csi/csi.sock&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_ISI_SKIP_CERTIFICATE_VALIDATION&lt;/td&gt;
+&lt;td&gt;Specifies whether SSL security needs to be enabled for communication between PowerScale and CSI Driver&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_ISI_PATH&lt;/td&gt;
+&lt;td&gt;Base path for the volumes to be created&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_ALLOWED_NETWORKS&lt;/td&gt;
+&lt;td&gt;Custom networks for PowerScale export. List of networks that can be used for NFS I/O traffic, CIDR format should be used&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;empty&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_ISI_AUTOPROBE&lt;/td&gt;
+&lt;td&gt;To enable auto probing for driver&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_ISI_NO_PROBE_ON_START&lt;/td&gt;
+&lt;td&gt;Indicates whether the controller/node should probe during initialization&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_ISI_VOLUME_PATH_PERMISSIONS&lt;/td&gt;
+&lt;td&gt;The permissions for isi volume directory path&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;0777&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;em&gt;&lt;strong&gt;Controller parameters&lt;/strong&gt;&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_MODE&lt;/td&gt;
+&lt;td&gt;Driver starting mode&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;controller&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_ISI_ACCESS_ZONE&lt;/td&gt;
+&lt;td&gt;Name of the access zone a volume can be created in&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;System&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_ISI_QUOTA_ENABLED&lt;/td&gt;
+&lt;td&gt;To enable SmartQuotas&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;em&gt;&lt;strong&gt;Node parameters&lt;/strong&gt;&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_MAX_VOLUMES_PER_NODE&lt;/td&gt;
+&lt;td&gt;Specify the default value for the maximum number of volumes that the controller can publish to the node&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X_CSI_MODE&lt;/td&gt;
+&lt;td&gt;Driver starting mode&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Execute the following command to create PowerScale custom resource:
+&lt;code&gt;kubectl create -f &amp;lt;input_sample_file.yaml&amp;gt;&lt;/code&gt; .
+This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;../../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&amp;ldquo;Kubelet config dir path&amp;rdquo; is not yet configurable in case of Operator based driver installation.&lt;/li&gt;
+&lt;li&gt;Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,450 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Resiliency</title>
+    <link>https://dell.github.io/csm-docs/v2/resiliency/</link>
+    <description>Recent content in Resiliency on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v2/resiliency/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V2: Design</title>
+      <link>https://dell.github.io/csm-docs/v2/resiliency/design/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/resiliency/design/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section covers CSM for Resiliency&amp;rsquo;s design.  The detail is sufficient that you should be able to understand what CSM for Resiliency is designed to do in various situations and how it works. CSM for Resiliency is deployed as a sidecar named &lt;em&gt;podmon&lt;/em&gt; with a CSI driver in both the controller pods and node pods. These are referred to as controller-podmon and node-podmon respectively.&lt;/p&gt;
+&lt;p&gt;Generally controller-podmon and the driver controller pods are deployed using a Deployment.
+The Deployments support one or multiple replicas for High Availability and use a standard K8S leader election protocol so that only one controller
+is active at a time (as does the driver and all the controller sidecars.)
+The controller deployment also supports a Node Selector that allows the controllers to be placed on K8S Manager (non Worker) nodes.&lt;/p&gt;
+&lt;p&gt;Node-podmon and the driver node pods are deployed in a DaemonSet, with a Pod deployed on every K8S Worker Node.&lt;/p&gt;
+&lt;h2 id=&#34;controller-podmon&#34;&gt;Controller-Podmon&lt;/h2&gt;
+&lt;p&gt;Controller-podmon is responsible for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Setting up a Watch for CSM for Resiliency labeled pods, and if a Pod is Initialized but Not Ready and resident on a Node with a NoSchedule or NoExecute taint, calling &lt;em&gt;controllerCleanupPod&lt;/em&gt; to cleanup the pod so that a replacement pod can be scheduled.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Periodically polling the arrays to see if it has connectivity to the nodes that are hosting CSM for Resiliency labeled pods (if enabled.) If an array has lost connectivity to a node hosting CSM for Resiliency labeled pods using that array, &lt;em&gt;controllerCleanupPod&lt;/em&gt; is invoked to cleanup the pods that have lost I/O connectivity.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tainting nodes that have failed so that a) no further pods will get scheduled to them until they are returned to service, and b) podmon-node upon seeing the taint will invoke
+the cleanup operations to make sure any zombie pods (pods that have been replaced) cannot write to the volumes they were using.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If a CSM for Resiliency labeled pod enters a CrashLoopBackOff state, deleting that pod so it can be replaced.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;ControllerCleanupPod&lt;/em&gt; cleans up the pod by taking the following actions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The VolumeAttachments (VAs) are loaded, and all VAs belonging to the pod being cleaned up are identified. The PVs for each VolumeAttachment are identified and used to get the Volume Handle (array identifier for the volume.)&lt;/li&gt;
+&lt;li&gt;If enabled, the array is queried if any of the volumes to the pod are still doing I/O. If so, cleanup is aborted.&lt;/li&gt;
+&lt;li&gt;The pod&amp;rsquo;s volumes are &amp;ldquo;fenced&amp;rdquo; from the node the pod resides on to prevent any potential I/O from a zombie pod. This is done by calling the CSI ControllerUnpublishVolume call for each of the volumes.&lt;/li&gt;
+&lt;li&gt;A taint is applied to the node to keep any new pods from being scheduled to the node. If the replacement pod were to get scheduled to the same node as a zombie pod, they might both gain access to the volume concurrently causing corruption.&lt;/li&gt;
+&lt;li&gt;The VolumeAttachments for the pod is deleted. This is necessary so the replacement pod to be created can attach the volumes.&lt;/li&gt;
+&lt;li&gt;The pod is forcibly deleted so that a StatefulSet controller which created the pod is free to create a replacement pod.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;node-podmon&#34;&gt;Node-Podmon&lt;/h2&gt;
+&lt;p&gt;Node-podmon has the following responsibilities:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Establishing a pod watch which is used to maintain a list of pods executing on this node that may need to be cleaned up. The list includes information about each Mount volume or Block volume used by the pod including the volume handle, volume name, private mount path, and mount path in the pod.&lt;/li&gt;
+&lt;li&gt;Periodically (every 30 seconds) polling to see if controller-podmon has applied a taint to the node. If so, node-podmon calls &lt;em&gt;nodeModeCleanupPod&lt;/em&gt; for each pod to clean up any remnants of the pod (which is potentially a zombie pod.)&lt;/li&gt;
+&lt;li&gt;If all pods have been successfully cleaned up, and there are no labeled pods on this node still existing, only then will node-podmon remove the taint placed on the node by controller-podmon.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;NodeModeCleanupPod&lt;/em&gt; cleans up the pod remnants by taking the following actions for each volume used by the pod:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Calling NodeUnpublishVolume to unpublish the volume from the pod.&lt;/li&gt;
+&lt;li&gt;Unmounting and deleting the target path for the volume.&lt;/li&gt;
+&lt;li&gt;Calling NodeUnstageVolume to unpublish the volume from the node.&lt;/li&gt;
+&lt;li&gt;Unmounting and deleting the staging path for the volume.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;design-limitations&#34;&gt;Design Limitations&lt;/h2&gt;
+&lt;p&gt;There are some limitations with the current design. Some might be able to be addressed in the future- others are inherent in the approach.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The design relies on the array&amp;rsquo;s ability to revoke access to a volume for a particular node for the fencing operation. The granularity of access control for a volume is per node. Consequently, it isn&amp;rsquo;t possible to revoke access from one pod on a node while retaining access to another pod on the same node if we cannot communicate with the node.
+The implications of this are that if more than one pod on a node is sharing the same volume(s), they all must be protected by CSM for Resiliency, and they all must be cleaned up by controller-podmon if the node fails. If only some of the pods are cleaned up, the other pods will lose access to the volumes shared with pods that have been cleaned, so those pods should also fail.&lt;/li&gt;
+&lt;li&gt;The node-podmon cleanup algorithm purposefully will not remove the node taint until all the protected volumes have been cleaned up from the node. This works well if the node fault lasts long enough that controller-podmon can evacuate all the protected pods from the node. However, if the failure is short-lived, and controller-podmon does not clean up all the protected pods on the node, or if for some reason node-podmon cannot clean a pod completely, the taint is left on the node, and manual intervention is required. The required intervention is for the operator to reboot the node, which will ensure that no zombie pods survive. Upon seeing the reboot, node-podmon will then remove the taint.&lt;/li&gt;
+&lt;li&gt;If the node failure is short-lived and controller-podmon has not evacuated some of the protected pods on the node, they may try and restart on the same pod. This has been observed to cause such pods to go into CrashLoopBackoff. We are currently considering solutions to this problem.&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Uninstallation</title>
+      <link>https://dell.github.io/csm-docs/v2/resiliency/uninstallation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/resiliency/uninstallation/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Resiliency.&lt;/p&gt;
+&lt;h2 id=&#34;uninstalling-the-sidecar-in-the-csi-driver&#34;&gt;Uninstalling the sidecar in the CSI Driver&lt;/h2&gt;
+&lt;p&gt;To uninstall the sidecar in the CSI Driver, &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../deployment&#34;&gt;reinstall&lt;/a&gt; the driver with the &lt;code&gt;podmon&lt;/code&gt; feature disabled.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Use Cases</title>
+      <link>https://dell.github.io/csm-docs/v2/resiliency/usecases/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/resiliency/usecases/</guid>
+      <description>
+        
+        
+        &lt;p&gt;CSM for Resiliency is primarily designed to detect pod failures due to some kind of node failure or node communication failure. The diagram below shows the hardware environment that is assumed in the design.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../resiliency_model.jpg&#34; alt=&#34;CSM for Resiliency Hardware Model&#34;&gt;&lt;/p&gt;
+&lt;p&gt;A Kubernetes Control Plane is assumed to exist that provides the K8S API service used by CSM for Resiliency. There is an arbitrary number of worker nodes (two are shown in the diagram) that
+are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p&gt;
+&lt;p&gt;The worker nodes (e.g. Node1 and Node2) can run a mix of CSM for Resiliency monitored Application Pods as well as unmonitored Application Pods.  Monitored Pods are designated by a specific label that is applied to each monitored pod. The label key and value are configurable for each driver type when CSM for Resiliency is installed and &lt;em&gt;must&lt;/em&gt; be unique for each driver instance.&lt;/p&gt;
+&lt;p&gt;The Worker Nodes are assumed to also have a connection to a Storage System Array (such as PowerFlex.) It is often preferred that a separate network be used for storage access from the network used by the K8S control plane, and CSM for Resiliency takes advantage of the separate networks when available.&lt;/p&gt;
+&lt;h2 id=&#34;anti-use-cases&#34;&gt;Anti Use-Cases&lt;/h2&gt;
+&lt;p&gt;CSM for Resiliency does not generally try to handle any of the following errors:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Failure of the Kubernetes control plane, the &lt;em&gt;etcd&lt;/em&gt; database used by Kubernetes, or the like. Kubernetes is generally designed to provide a highly available container orchestration system, and it is assumed clients follow the standard and/or best practices in configuring their Kubernetes deployments.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CSM for Resiliency is generally not designed to take action upon a failure solely of the Application Pod(s). Applications are still responsible for detecting and providing recovery mechanisms should their application fail. There are some specific recommendations for applications to be monitored by CSM for Resiliency that are described later.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;failure-model&#34;&gt;Failure Model&lt;/h2&gt;
+&lt;p&gt;CSM for Resiliency&amp;rsquo;s design is focused on detecting the following types of hardware failures, and when they occur, moving protected pods to hardware that is functioning correctly:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Node failure. Node failure is defined to be similar to a Power Failure to the node which causes it to cease operation. This is differentiated from Node Communication Failures which require different treatments. Node failures are generally discovered by receipt of a Node event with a NoSchedule or NoExecute taint, or detection of such a taint when retrieving the Node via the K8S API.&lt;/p&gt;
+&lt;p&gt;Generally, it is difficult to distinguish from the outside if a node is truly down (not executing) versus if it has lost connectivity on all its interfaces. (We might add capabilities in the future to query BIOS interfaces such as iDRAC, or perhaps periodically writing to file systems mounted in node-podmon to detect I/O failures, in order to get additional insight as to node status.) However, if the node has simply lost all outside communication paths, the protected pods are possibly still running. We refer to these pods as &amp;ldquo;zombie pods&amp;rdquo;. CSM for Resiliency is designed to deal with zombie pods in a way that prevents them from interfering with replacement pods it may have made by fencing the failed nodes and when communication is re-established to the node, going through a cleaning procedure to remove the zombie pod artifacts before allowing the node to go back into service.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;K8S Control Plane Network Failure. Control Plane Network Failure often has the same K8S failure signature (the node is tainted with NoSchedule or NoExecute). However, if there is a separate Array I/O interface, CSM for Resiliency can often detect that the Array I/O Network may be active even though the Control Plane Network is down.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Array I/O Network failure is detected by polling the array to determine if the array has a healthy connection to the node. The capabilities to do this vary greatly by array and communication protocol type (Fibre Channel, iSCSI, NFS, NVMe, or PowerFlex SDC IP protocol). By monitoring the Array I/O Network separately from the Control Plane Network, CSM for Resiliency has two different indicators of whether the node is healthy or not.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Deployment</title>
+      <link>https://dell.github.io/csm-docs/v2/resiliency/deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/resiliency/deployment/</guid>
+      <description>
+        
+        
+        &lt;p&gt;CSM for Resiliency is installed as part of the Dell CSI driver installation. The drivers can be installed either by a &lt;em&gt;helm chart&lt;/em&gt; or by the &lt;em&gt;Dell CSI Operator&lt;/em&gt;. Currently, only &lt;em&gt;Helm chart&lt;/em&gt; installation is supported.&lt;/p&gt;
+&lt;p&gt;For information on the PowerFlex CSI driver, see &lt;a href=&#34;https://github.com/dell/csi-powerflex&#34;&gt;PowerFlex CSI Driver&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For information on the Unity CSI driver, see &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;Unity CSI Driver&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Configure all the helm chart parameters described below before installing the drivers.&lt;/p&gt;
+&lt;h2 id=&#34;helm-chart-installation&#34;&gt;Helm Chart Installation&lt;/h2&gt;
+&lt;p&gt;The drivers that support Helm chart installation allow CSM for Resiliency to be &lt;em&gt;optionally&lt;/em&gt; installed by variables in the chart. There is a &lt;em&gt;podmon&lt;/em&gt; block specified in the &lt;em&gt;values.yaml&lt;/em&gt; file of the chart that will look similar to the text below by default:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Podmon is an optional feature under development and tech preview.
+# Enable this feature only after contact support for additional information
+podmon:
+  enabled: true
+  image: dellemc/podmon:v1.0.0
+  controller:
+    args:
+      - &amp;quot;--csisock=unix:/var/run/csi/csi.sock&amp;quot;
+      - &amp;quot;--labelvalue=csi-vxflexos&amp;quot;
+      - &amp;quot;--mode=controller&amp;quot;
+      - &amp;quot;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;quot;
+  node:
+    args:
+      - &amp;quot;--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock&amp;quot;
+      - &amp;quot;--labelvalue=csi-vxflexos&amp;quot;
+      - &amp;quot;--mode=node&amp;quot;
+      - &amp;quot;--leaderelection=false&amp;quot;
+      - &amp;quot;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To install CSM for Resiliency with the driver, the following changes are required:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Enable CSM for Resiliency by changing the podmon.enabled boolean to true. This will enable both controller-podmon and node-podmon.&lt;/li&gt;
+&lt;li&gt;Specify the podmon image to be used as podmon.image.&lt;/li&gt;
+&lt;li&gt;Specify arguments to controller-podmon in the podmon.controller.args block. See &amp;ldquo;Podmon Arguments&amp;rdquo; below. Note that some arguments are required. Note that the arguments supplied to controller-podmon are different from those supplied to node-podmon.&lt;/li&gt;
+&lt;li&gt;Specify arguments to node-podmon in the podmon.node.args block. See &amp;ldquo;Podmon Arguments&amp;rdquo; below. Note that some arguments are required. Note that the arguments supplied to controller-podmon are different from those supplied to node-podmon.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;podmon-arguments&#34;&gt;Podmon Arguments&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Argument&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Applicability&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;enabled&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;td&gt;Boolean &amp;ldquo;true&amp;rdquo; enables CSM for Resiliency installation with the driver in a helm installation.&lt;/td&gt;
+&lt;td&gt;top level&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;image&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;td&gt;Must be set to a repository where the podmon image can be pulled.&lt;/td&gt;
+&lt;td&gt;controller &amp;amp; node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mode&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;td&gt;Must be set to &amp;ldquo;controller&amp;rdquo; for controller-podmon and &amp;ldquo;node&amp;rdquo; for node-podmon.&lt;/td&gt;
+&lt;td&gt;controller &amp;amp; node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;csisock&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;td&gt;This should be left as set in the helm template for the driver. For controller: &lt;br&gt; &lt;code&gt;-csisock=unix:/var/run/csi/csi.sock&lt;/code&gt; &lt;br&gt; For node it will vary depending on the driver&amp;rsquo;s identity: &lt;br&gt; &lt;code&gt;-csisock=unix:/var/lib/kubelet/plugins&lt;/code&gt;&lt;br&gt;&lt;code&gt;/vxflexos.emc.dell.com/csi_sock&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;controller &amp;amp; node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;leaderelection&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;td&gt;Boolean value that should be set true for controller and false for node. The default value is true.&lt;/td&gt;
+&lt;td&gt;controller &amp;amp; node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;skipArrayConnectionValidation&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;td&gt;Boolean value that if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod.&lt;/td&gt;
+&lt;td&gt;controller&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;labelKey&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;td&gt;String value that sets the label key used to denote pods to be monitored by CSM for Resiliency. It will make life easier if this key is the same for all driver types, and drivers are differentiated by different labelValues (see below). If the label keys are the same across all drivers you can do &lt;code&gt;kubectl get pods -A -l labelKey&lt;/code&gt; to find all the CSM for Resiliency protected pods. labelKey defaults to &amp;ldquo;podmon.dellemc.com/driver&amp;rdquo;.&lt;/td&gt;
+&lt;td&gt;controller &amp;amp; node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;labelValue&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;td&gt;String that sets the value that denotes pods to be monitored by CSM for Resiliency. This must be specific for each driver. Defaults to &amp;ldquo;csi-vxflexos&amp;rdquo; for CSI Driver for Dell EMC PowerFlex and &amp;ldquo;csi-unity&amp;rdquo; for CSI Driver for Dell EMC Unity&lt;/td&gt;
+&lt;td&gt;controller &amp;amp; node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;arrayConnectivityPollRate&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;td&gt;The minimum polling rate in seconds to determine if the array has connectivity to a node. Should not be set to less than 5 seconds. See the specific section for each array type for additional guidance.&lt;/td&gt;
+&lt;td&gt;controller&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;arrayConnectivityConnectionLossThreshold&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;td&gt;Gives the number of failed connection polls that will be deemed to indicate array connectivity loss. Should not be set to less than 3. See the specific section for each array type for additional guidance.&lt;/td&gt;
+&lt;td&gt;controller&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;driver-config-params&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;td&gt;String that set the path to a file containing configuration parameter(for instance, Log levels) for a driver.&lt;/td&gt;
+&lt;td&gt;controller &amp;amp; node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;powerflex-specific-recommendations&#34;&gt;PowerFlex Specific Recommendations&lt;/h2&gt;
+&lt;p&gt;PowerFlex supports a very robust array connection validation mechanism that can detect changes in connectivity in about two seconds and can detect whether I/O has occurred over a five-second sample. For that reason it is recommended to set &amp;ldquo;skipArrayConnectionValidation=false&amp;rdquo; (which is the default) and to set &amp;ldquo;arrayConnectivityPollRate=5&amp;rdquo; (5 seconds) and &amp;ldquo;arrayConnectivityConnectionLossThreshold=3&amp;rdquo; to 3 or more.&lt;/p&gt;
+&lt;p&gt;Here is a typical installation used for testing:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;podmon&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;dellemc/podmon&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-csisock=unix:/var/run/csi/csi.sock&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-labelvalue=csi-vxflexos&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-mode=controller&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-arrayConnectivityPollRate=5&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-arrayConnectivityConnectionLossThreshold=3&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-labelvalue=csi-vxflexos&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-mode=node&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-leaderelection=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;unity-specific-recommendations&#34;&gt;Unity Specific Recommendations&lt;/h2&gt;
+&lt;p&gt;Here is a typical installation used for testing:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;podmon&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;dellemc/podmon&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-csisock=unix:/var/run/csi/csi.sock&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-labelvalue=csi-unity&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-driverPath=csi-unity.dellemc.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-mode=controller&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/unity-config/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-csisock=unix:/var/lib/kubelet/plugins/unity.emc.dell.com/csi_sock&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-labelvalue=csi-unity&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-driverPath=csi-unity.dellemc.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-mode=node&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-leaderelection=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/unity-config/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;dynamic-parameters&#34;&gt;Dynamic parameters&lt;/h2&gt;
+&lt;p&gt;CSM for Resiliency has configuration parameters that can be updated dynamically, such as the logging level and format. This can be
+done by editing the DellEMC CSI Driver&amp;rsquo;s parameters ConfigMap. The ConfigMap can be queried using kubectl.
+For example, the DellEMC Powerflex CSI Driver ConfigMaps can be found using the following command: &lt;code&gt;kubectl get -n vxflexos configmap&lt;/code&gt;.
+The ConfigMap to edit will have this pattern: &lt;storage&gt;-config-params (e.g., &lt;code&gt;vxflexos-config-params&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;To update or add parameters, you can use the &lt;code&gt;kubectl edit&lt;/code&gt; command. For example, &lt;code&gt;kubectl edit -n vxflexos configmap vxflexos-config-params&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This is a list of parameters that can be adjusted for CSM for Resiliency:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;PODMON_CONTROLLER_LOG_FORMAT&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;text&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Logging format output for the controller podmon sidecar. Should be &amp;ldquo;text&amp;rdquo; or &amp;ldquo;json&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PODMON_CONTROLLER_LOG_LEVEL&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;debug&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Logging level for the controller podmon sidecar. Standard values: &amp;lsquo;info&amp;rsquo;, &amp;lsquo;error&amp;rsquo;, &amp;lsquo;warning&amp;rsquo;, &amp;lsquo;debug&amp;rsquo;, &amp;lsquo;trace&amp;rsquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PODMON_NODE_LOG_FORMAT&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;text&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Logging format output for the node podmon sidecar. Should be &amp;ldquo;text&amp;rdquo; or &amp;ldquo;json&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PODMON_NODE_LOG_LEVEL&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;debug&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Logging level for the node podmon sidecar. Standard values: &amp;lsquo;info&amp;rsquo;, &amp;lsquo;error&amp;rsquo;, &amp;lsquo;warning&amp;rsquo;, &amp;lsquo;debug&amp;rsquo;, &amp;lsquo;trace&amp;rsquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PODMON_ARRAY_CONNECTIVITY_POLL_RATE&lt;/td&gt;
+&lt;td&gt;Integer (&amp;gt;0)&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;An interval in seconds to poll the underlying array&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PODMON_ARRAY_CONNECTIVITY_CONNECTION_LOSS_THRESHOLD&lt;/td&gt;
+&lt;td&gt;Integer (&amp;gt;0)&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;A value representing the number of failed connection poll intervals before marking the array connectivity as lost&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PODMON_SKIP_ARRAY_CONNECTION_VALIDATION&lt;/td&gt;
+&lt;td&gt;Boolean&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;td&gt;Flag to disable the array connectivity check&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Here is an example of the parameters:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;PODMON_CONTROLLER_LOG_FORMAT&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;text&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;PODMON_CONTROLLER_LOG_LEVEL&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;info&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;PODMON_NODE_LOG_FORMAT&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;text&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;PODMON_NODE_LOG_LEVEL&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;info&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;PODMON_ARRAY_CONNECTIVITY_POLL_RATE&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;20&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;PODMON_ARRAY_CONNECTIVITY_CONNECTION_LOSS_THRESHOLD&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;PODMON_SKIP_ARRAY_CONNECTION_VALIDATION&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Upgrade</title>
+      <link>https://dell.github.io/csm-docs/v2/resiliency/upgrade/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/resiliency/upgrade/</guid>
+      <description>
+        
+        
+        &lt;p&gt;CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a &lt;em&gt;helm chart&lt;/em&gt; or by the &lt;em&gt;Dell CSI Operator&lt;/em&gt;. Currently, only &lt;em&gt;Helm chart&lt;/em&gt; upgrade is supported for CSM for Resiliency.&lt;/p&gt;
+&lt;p&gt;For information on the PowerFlex CSI driver upgrade process, see &lt;a href=&#34;../../csidriver/upgradation/drivers/powerflex&#34;&gt;PowerFlex CSI Driver&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For information on the Unity CSI driver upgrade process, see &lt;a href=&#34;../../csidriver/upgradation/drivers/unity&#34;&gt;Unity CSI Driver&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;helm-chart-upgrade&#34;&gt;Helm Chart Upgrade&lt;/h2&gt;
+&lt;p&gt;To upgrade CSM for Resiliency with the driver, the following steps are required.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: These steps refer to the values file and &lt;code&gt;csi-install.sh&lt;/code&gt; script that were used during initial installation of the Dell CSI driver.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Update the podmon.image value in the values files to reference the new podmon image.&lt;/li&gt;
+&lt;li&gt;Run the csi-install script with the option &amp;ndash;upgrade by running: &lt;code&gt;cd ../dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V2: Troubleshooting</title>
+      <link>https://dell.github.io/csm-docs/v2/resiliency/troubleshooting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/resiliency/troubleshooting/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Some tools have been provided in the &lt;a href=&#34;https://github.com/dell/karavi-resiliency/blob/main/tools&#34;&gt;tools&lt;/a&gt; directory that will help you understand the system&amp;rsquo;s state and facilitate troubleshooting.
+If you experience a problem with CSM for Resiliency it is important you provide us with as much information as possible so that we can diagnose the issue and improve CSM for Resiliency. Some tools have been provided in the &lt;a href=&#34;https://github.com/dell/karavi-resiliency/blob/main/tools&#34;&gt;tools&lt;/a&gt; directory that will help you understand the system&amp;rsquo;s state and facilitate sending us the logs and other information needed to diagnose a problem.&lt;/p&gt;
+&lt;h2 id=&#34;monitoring-protected-pods-and-node-status&#34;&gt;Monitoring Protected Pods and Node Status&lt;/h2&gt;
+&lt;p&gt;There are two tools for monitoring the status of protected pods and nodes.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;https://github.com/dell/karavi-resiliency/blob/main/tools/mon.sh&#34;&gt;mon.sh&lt;/a&gt; script displays the following information every 5 seconds:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The date and time.&lt;/li&gt;
+&lt;li&gt;A list of the nodes and their status.&lt;/li&gt;
+&lt;li&gt;A list of the taints applied to each node.&lt;/li&gt;
+&lt;li&gt;A list of the leases in the CSI driver&amp;rsquo;s namespace. (Edit the script to change the CSI driver namespace if necessary. It defaults to vxflexos as the driver namespace.)&lt;/li&gt;
+&lt;li&gt;A list of the CSI driver pods and their status (defaults to vxflexos namespace.)&lt;/li&gt;
+&lt;li&gt;A list of the protected pods and their status. (Edit the script if you do not use the default podmon label key.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For systems with many protected pods, the &lt;a href=&#34;https://github.com/dell/karavi-resiliency/blob/main/tools/monx.sh&#34;&gt;monx.sh&lt;/a&gt; may provide a more usable output format. It displays the following fields every 5 seconds:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The date and time.&lt;/li&gt;
+&lt;li&gt;A list of the nodes and their status.&lt;/li&gt;
+&lt;li&gt;A list of the taints applied to each node.&lt;/li&gt;
+&lt;li&gt;A summary for each node hosting protected pods of the number of pods in various states such as the Running, Creating, and Error states. (Edit the script if you do not use the default podmon label key.)&lt;/li&gt;
+&lt;li&gt;A list of the protected pods not in the Running state.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;collecting-logs&#34;&gt;Collecting Logs&lt;/h2&gt;
+&lt;p&gt;If you have a problem with CSM for Resiliency it&amp;rsquo;s best to collect the logs to help with diagnosis.  This tool can also be used to collect logs to submit as part of an &lt;a href=&#34;https://github.com/dell/csm/issues&#34;&gt;issue&lt;/a&gt; to help us diagnose. Please use the &lt;a href=&#34;https://github.com/dell/karavi-resiliency/blob/main/tools/collect_logs.sh&#34;&gt;collect_logs.sh&lt;/a&gt;. Type &amp;ldquo;collect_logs.sh &amp;ndash;help&amp;rdquo; for help on the arguments.&lt;/p&gt;
+&lt;p&gt;The script collects the following information:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A list of the driver pods.&lt;/li&gt;
+&lt;li&gt;A list of the protected pods.&lt;/li&gt;
+&lt;li&gt;The podmon container logs for each of the driver pods.&lt;/li&gt;
+&lt;li&gt;The driver container logs for each of the driver pods.&lt;/li&gt;
+&lt;li&gt;For each namespace containing protected pods, the recent events logged in that namespace.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After successful execution of the script, it will deposit a file similar to driver.logs.20210319_1407.tgz in the current directory. Please submit that file with any &lt;a href=&#34;https://github.com/dell/csm/issues&#34;&gt;issues&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
