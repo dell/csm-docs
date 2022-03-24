@@ -3,14 +3,10 @@ title: PowerScale
 description: Release notes for PowerScale CSI driver
 ---
 
-## Release Notes - CSI Driver for PowerScale v2.2.0
+## Release Notes - CSI Driver for PowerScale v2.3.0
 
 ### New Features/Changes
 
-- Added support for Replication.
-- Added support for Kubernetes 1.23.
-- Added support to configure fsGroupPolicy.
-- Added support for session based authentication along with basic authentication for PowerScale.
 
 ### Fixed Issues
 

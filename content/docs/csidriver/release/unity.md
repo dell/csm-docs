@@ -3,12 +3,10 @@ title: Unity
 description: Release notes for Unity CSI driver
 ---
 
-## Release Notes - CSI Unity v2.2.0
+## Release Notes - CSI Unity v2.3.0
 
 ### New Features/Changes
 
-- Added support for Kubernetes 1.23.
-- Added support for Standalone Helm Charts.
 
 ### Fixed Issues
 
