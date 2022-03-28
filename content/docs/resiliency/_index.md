@@ -59,8 +59,8 @@ CSM for Resiliency supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array                     | CSI Driver   | Supported Versions |
 | --------------------------------- | :----------: | :----------------: |
-| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0, v2.1, v2.2 |
-| CSI Driver for Dell Unity     | [csi-unity](https://github.com/dell/csi-unity)         | v2.0, v2.1, v2.2 |
+| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
+| CSI Driver for Dell Unity     | [csi-unity](https://github.com/dell/csi-unity)         | v2.0 + |
 {{</table>}}
 
 ### PowerFlex Support

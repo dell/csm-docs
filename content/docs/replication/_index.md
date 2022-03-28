@@ -50,11 +50,11 @@ CSM for Replication provides the following capabilities:
 
 CSM for Replication supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
-| Storage Array                  | CSI Driver                                               | Supported Versions |
-| ------------------------------ | -------------------------------------------------------- | ------------------ |
-| CSI Driver for Dell PowerMax   | [csi-powermax](https://github.com/dell/csi-powermax)     | v2.0, v2.1, v2.2   |
-| CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0, v2.1, v2.2   |
-| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.2               |
+| Storage Array | CSI Driver | Supported Versions |
+| ------------- | ---------- | ------------------ |
+| CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0 + |
+| CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0 + |
+| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.2 + |
 {{</table>}}
 
 ## Details

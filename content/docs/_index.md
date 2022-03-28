@@ -18,7 +18,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 ## CSM Supported Modules and Dell CSI Drivers
 
-| Modules/Drivers | CSM 1.2.1 | [CSM 1.2](../v1/) | [CSM 1.1](../v1/) | [CSM 1.0.1](../v2/) | 
+| Modules/Drivers | CSM 1.3 | [CSM 1.2.1](../v1/) | [CSM 1.2](../v1/) | [CSM 1.1](../v2/) | 
 | - | :-: | :-: | :-: | :-: |
 | [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar) | 1.2 | 1.2 | 1.1 | 1.0 |
 | [Observability](https://hub.docker.com/r/dellemc/csm-topology) | 1.1.1 | 1.1 | 1.0.1 | 1.0.1  |
