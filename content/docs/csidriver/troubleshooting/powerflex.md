@@ -19,7 +19,6 @@ description: Troubleshooting PowerFlex Driver
 | When you run the command `kubectl apply -f snapclass-v1.yaml`, you get the error `error: unable to recognize "snapclass-v1.yaml": no matches for kind "VolumeSnapshotClass" in version "snapshot.storage.k8s.io/v1"` | Check to make sure that the v1 snapshotter CRDs are installed, and not the v1beta1 CRDs, which are no longer supported. |
 | The controller pod is stuck and producing errors such as" `Failed to watch *v1.VolumeSnapshotContent: failed to list *v1.VolumeSnapshotContent: the server could not find the requested resource (get volumesnapshotcontents.snapshot.storage.k8s.io)` | Make sure that v1 snapshotter CRDs and v1 snapclass are installed, and not v1beta1, which is no longer supported. |
 | Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: `Error: UPGRADE FAILED: chart requires kubeVersion: >= 1.21.0 <= 1.23.0 which is incompatible with Kubernetes V1.21.11-mirantis-1` | If you are using an extended Kubernetes version, please see the helm Chart at `helm/csi-vxflexos/Chart.yaml` and use the alternate `kubeVersion` check that is provided in the comments. *Please note* that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported. |
-| Volume metrics are missing | Enable [Volume Health Monitoring](../../features/powerflex#volume-health-monitoring) |
 
 >*Note*: `vxflexos-controller-*` is the controller pod that acquires leader lease
 

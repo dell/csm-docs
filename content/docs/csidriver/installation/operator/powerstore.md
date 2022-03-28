@@ -69,13 +69,13 @@ metadata:
   namespace: test-powerstore
 spec:
   driver:
-    configVersion: v2.3.0
+    configVersion: v2.2.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     fsGroupPolicy: ReadWriteOnceWithFSType
     common:
-      image: "dellemc/csi-powerstore:v2.3.0"
+      image: "dellemc/csi-powerstore:v2.2.0"
       imagePullPolicy: IfNotPresent
       envs:
         - name: X_CSI_POWERSTORE_NODE_NAME_PREFIX
