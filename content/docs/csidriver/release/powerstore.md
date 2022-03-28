@@ -3,14 +3,11 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.2.0
+## Release Notes - CSI PowerStore v2.3.0
 
 ### New Features/Changes
 
-- Added support for NVMe/TCP protocol.
-- Added support for Kubernetes 1.23.
-- Added support to configure fsGroupPolicy.
-- Added support for configuring permissions using POSIX mode bits and NFSv4 ACLs on NFS mount directory. 
+
 
 ### Fixed Issues
 

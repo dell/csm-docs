@@ -3,12 +3,10 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.2.0
+## Release Notes - CSI PowerMax v2.3.0
 
 ### New Features/Changes
-- Added support for new access modes in CSI Spec 1.5.
-- Added support for Volume Health Monitoring.
-- Added support for Kubernetes 1.23.
+- Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.
 
 ### Fixed Issues
 There are no fixed issues in this release.

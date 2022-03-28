@@ -32,7 +32,7 @@ The umbrella repository for every Dell Container Storage Module is: [https://git
 ### Is the Container Storage Module XYZ available for my array?
 Please see module and the respectice CSI driver version available for each array:
 
-| CSM Module        | CSI PowerFlex v2.2 | CSI PowerScale v2.2 | CSI PowerStore v2.2 | CSI PowerMax v2.2 | CSI Unity XT v2.2    |
+| CSM Module        | CSI PowerFlex v2.3 | CSI PowerScale v2.3 | CSI PowerStore v2.3 | CSI PowerMax v2.3 | CSI Unity XT v2.3    |
 | ----------------- | -------------- | --------------- | --------------- | ------------- | --------------- |
 | Authorization v1.2| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
 | Observability v1.1| ✔️              | ❌              | ✔️               | ❌            | ❌            |

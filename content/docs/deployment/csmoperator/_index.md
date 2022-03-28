@@ -22,13 +22,13 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 
 | CSI Driver         | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
-| CSI PowerScale     | 2.2.0     | v2.2.0         |
+| CSI PowerScale     | 2.2.0 +   |   v2.2.0  +    |
 
 ## Supported CSM Modules
 
 | CSM Modules        | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
-| CSM Authorization  | 1.2.0     | v1.2.0         |
+| CSM Authorization  | 1.2.0 +   | v1.2.0 +       |
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
