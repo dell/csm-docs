@@ -13,11 +13,11 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powermax/" />
-<meta property="article:modified_time" content="2022-03-28T09:11:55-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-03-28T18:44:11+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing CSI Driver for PowerMax via Helm
 ">
-<meta itemprop="dateModified" content="2022-03-28T09:11:55-04:00" />
+<meta itemprop="dateModified" content="2022-03-28T18:44:11&#43;05:30" />
 <meta itemprop="wordCount" content="3052">
 
 
@@ -95,13 +95,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.2)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.0.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0</a>
 	
 </div>
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2039,7 +2039,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 <h2 id="install-the-driver">Install the Driver</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone -b v2.3.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.</li>
+<li>Run <code>git clone -b v2.2.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.</li>
 <li>Ensure that you have created a namespace where you want to install the driver. You can run <code>kubectl create namespace powermax</code> to create a new one</li>
 <li>Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:

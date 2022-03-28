@@ -113,7 +113,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created a namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create a new one.&lt;/p&gt;
@@ -750,7 +750,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;h2 id=&#34;install-the-driver&#34;&gt;Install the Driver&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
 &lt;li&gt;Ensure that you have created a namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace powermax&lt;/code&gt; to create a new one&lt;/li&gt;
 &lt;li&gt;Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
@@ -1316,7 +1316,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created the namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace isilon&lt;/code&gt; to create a new one. The use of &amp;ldquo;isilon&amp;rdquo;  as the namespace is just an example. You can choose any name for the namespace.&lt;/p&gt;
@@ -1948,7 +1948,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace csi-powerstore&lt;/code&gt; to create a new one. &amp;ldquo;csi-powerstore&amp;rdquo; is just an example. You can choose any name for the namespace.
@@ -2244,7 +2244,7 @@ It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 
 &lt;p&gt;Install CSI Driver for Unity using this procedure.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Before you begin&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;You must have the downloaded files, including the Helm chart from the source &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;git repository&lt;/a&gt; with the command &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-unity.git&lt;/code&gt;, as a pre-requisite for running this procedure.&lt;/li&gt;
+&lt;li&gt;You must have the downloaded files, including the Helm chart from the source &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;git repository&lt;/a&gt; with the command &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-unity.git&lt;/code&gt;, as a pre-requisite for running this procedure.&lt;/li&gt;
 &lt;li&gt;In the top-level dell-csi-helm-installer directory, there should be two scripts, &lt;code&gt;csi-install.sh&lt;/code&gt; and &lt;code&gt;csi-uninstall.sh&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Ensure &lt;em&gt;unity&lt;/em&gt; namespace exists in Kubernetes cluster. Use the &lt;code&gt;kubectl create namespace unity&lt;/code&gt; command to create the namespace if the namespace is not present.&lt;/li&gt;
 &lt;/ul&gt;

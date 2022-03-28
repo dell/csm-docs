@@ -118,10 +118,6 @@
 &lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: &lt;code&gt;Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.21.0 &amp;lt;= 1.23.0 which is incompatible with Kubernetes V1.21.11-mirantis-1&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;If you are using an extended Kubernetes version, please see the helm Chart at &lt;code&gt;helm/csi-vxflexos/Chart.yaml&lt;/code&gt; and use the alternate &lt;code&gt;kubeVersion&lt;/code&gt; check that is provided in the comments. &lt;em&gt;Please note&lt;/em&gt; that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Volume metrics are missing&lt;/td&gt;
-&lt;td&gt;Enable &lt;a href=&#34;../../features/powerflex#volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
