@@ -20,9 +20,9 @@ You can upgrade the CSI Driver for Dell Unity using Helm or Dell CSI Operator.
 
 Preparing myvalues.yaml is the same as explained in the install section.
 
-To upgrade the driver from csi-unity v2.2 to csi-unity 2.3
+To upgrade the driver from csi-unity v2.1 to csi-unity 2.2
 
-1. Get the latest csi-unity 2.3 code from Github using using `git clone -b v2.3.0 https://github.com/dell/csi-unity.git`.
+1. Get the latest csi-unity 2.2 code from Github using using `git clone -b v2.2.0 https://github.com/dell/csi-unity.git`.
 2. Create myvalues.yaml.
 3. Copy the helm/csi-unity/values.yaml to the new location csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.
 4. Navigate to common-helm-installer folder and execute the following command:
