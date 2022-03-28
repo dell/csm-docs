@@ -3,9 +3,11 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.3.0
+## Release Notes - CSI PowerFlex v2.2.0
 
 ### New Features/Changes
+- Added support for Kubernetes 1.23.
+- Added support for Amazon Elastic Kubernetes Service Anywhere.
 
 ### Fixed Issues
 
