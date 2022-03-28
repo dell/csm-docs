@@ -12,10 +12,10 @@
 <meta property="og:description" content="Upgrade PowerStore CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powerstore/" />
-<meta property="article:modified_time" content="2022-03-23T08:15:39-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-03-28T09:11:55-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Upgrade PowerStore CSI driver">
-<meta itemprop="dateModified" content="2022-03-23T08:15:39-04:00" />
+<meta itemprop="dateModified" content="2022-03-28T09:11:55-04:00" />
 <meta itemprop="wordCount" content="397">
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.2)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.0.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0.1</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1811,7 +1811,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#update-driver-from-v21-to-v22-using-helm">Update Driver from v2.1 to v2.2 using Helm</a></li>
+    <li><a href="#update-driver-from-v22-to-v23-using-helm">Update Driver from v2.2 to v2.3 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
   </ul>
 </nav>
@@ -1874,12 +1874,12 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell PowerStore using Helm or Dell CSI Operator.</p>
-<h2 id="update-driver-from-v21-to-v22-using-helm">Update Driver from v2.1 to v2.2 using Helm</h2>
+<h2 id="update-driver-from-v22-to-v23-using-helm">Update Driver from v2.2 to v2.3 using Helm</h2>
 <p>Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.2.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the driver.</p>
+<p>Run <code>git clone -b v2.3.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the driver.</p>
 </li>
 <li>
 <p>Edit <code>helm/config.yaml</code> file and configure connection information for your PowerStore arrays changing the following parameters:</p>
