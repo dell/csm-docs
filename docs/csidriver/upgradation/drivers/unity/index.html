@@ -12,10 +12,10 @@
 <meta property="og:description" content="Upgrade Unity CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/unity/" />
-<meta property="article:modified_time" content="2022-03-28T09:11:55-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-03-28T18:44:11+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Unity">
 <meta itemprop="description" content="Upgrade Unity CSI driver">
-<meta itemprop="dateModified" content="2022-03-28T09:11:55-04:00" />
+<meta itemprop="dateModified" content="2022-03-28T18:44:11&#43;05:30" />
 <meta itemprop="wordCount" content="216">
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.2)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.0.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1887,9 +1887,9 @@
 <h3 id="using-helm">Using Helm</h3>
 <p><strong>Note:</strong> While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <p>Preparing myvalues.yaml is the same as explained in the install section.</p>
-<p>To upgrade the driver from csi-unity v2.2 to csi-unity 2.3</p>
+<p>To upgrade the driver from csi-unity v2.1 to csi-unity 2.2</p>
 <ol>
-<li>Get the latest csi-unity 2.3 code from Github using using <code>git clone -b v2.3.0 https://github.com/dell/csi-unity.git</code>.</li>
+<li>Get the latest csi-unity 2.2 code from Github using using <code>git clone -b v2.2.0 https://github.com/dell/csi-unity.git</code>.</li>
 <li>Create myvalues.yaml.</li>
 <li>Copy the helm/csi-unity/values.yaml to the new location csi-unity/dell-csi-helm-installer with name say myvalues.yaml, to customize settings for installation edit myvalues.yaml as per the requirements.</li>
 <li>Navigate to common-helm-installer folder and execute the following command:

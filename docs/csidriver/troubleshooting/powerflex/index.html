@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting PowerFlex Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerflex/" />
-<meta property="article:modified_time" content="2022-03-28T09:11:55-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-03-28T18:44:11+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Troubleshooting PowerFlex Driver">
-<meta itemprop="dateModified" content="2022-03-28T09:11:55-04:00" />
-<meta itemprop="wordCount" content="568">
+<meta itemprop="dateModified" content="2022-03-28T18:44:11&#43;05:30" />
+<meta itemprop="wordCount" content="560">
 
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.2)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.0.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1925,10 +1925,6 @@
 <tr>
 <td>Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: <code>Error: UPGRADE FAILED: chart requires kubeVersion: &gt;= 1.21.0 &lt;= 1.23.0 which is incompatible with Kubernetes V1.21.11-mirantis-1</code></td>
 <td>If you are using an extended Kubernetes version, please see the helm Chart at <code>helm/csi-vxflexos/Chart.yaml</code> and use the alternate <code>kubeVersion</code> check that is provided in the comments. <em>Please note</em> that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.</td>
-</tr>
-<tr>
-<td>Volume metrics are missing</td>
-<td>Enable <a href="../../features/powerflex#volume-health-monitoring">Volume Health Monitoring</a></td>
 </tr>
 </tbody>
 </table>

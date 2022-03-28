@@ -12,10 +12,10 @@
 <meta property="og:description" content="Upgrade PowerScale CSI driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/isilon/" />
-<meta property="article:modified_time" content="2022-03-28T09:11:55-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-03-28T18:44:11+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Upgrade PowerScale CSI driver">
-<meta itemprop="dateModified" content="2022-03-28T09:11:55-04:00" />
+<meta itemprop="dateModified" content="2022-03-28T18:44:11&#43;05:30" />
 <meta itemprop="wordCount" content="171">
 
 
@@ -92,13 +92,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.2)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.0.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0</a>
 	
 </div>
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.dd37461610831d0488373df962fa27ff.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1c9a6e031c0dbb5297b86ec66a0cae16.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1811,7 +1811,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#upgrade-driver-from-version-220-to-230-using-helm">Upgrade Driver from version 2.2.0 to 2.3.0 using Helm</a></li>
+    <li><a href="#upgrade-driver-from-version-210-to-220-using-helm">Upgrade Driver from version 2.1.0 to 2.2.0 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
   </ul>
 </nav>
@@ -1874,12 +1874,12 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSI Operator.</p>
-<h2 id="upgrade-driver-from-version-220-to-230-using-helm">Upgrade Driver from version 2.2.0 to 2.3.0 using Helm</h2>
+<h2 id="upgrade-driver-from-version-210-to-220-using-helm">Upgrade Driver from version 2.1.0 to 2.2.0 using Helm</h2>
 <p><strong>Note:</strong> While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Clone the repository using <code>git clone -b v2.3.0 https://github.com/dell/csi-powerscale.git</code>, copy the helm/csi-isilon/values.yaml into a new location with a custom name say <em>my-isilon-settings.yaml</em>, to customize settings for installation. Edit <em>my-isilon-settings.yaml</em> as per the requirements.</p>
+<p>Clone the repository using <code>git clone -b v2.2.0 https://github.com/dell/csi-powerscale.git</code>, copy the helm/csi-isilon/values.yaml into a new location with a custom name say <em>my-isilon-settings.yaml</em>, to customize settings for installation. Edit <em>my-isilon-settings.yaml</em> as per the requirements.</p>
 </li>
 <li>
 <p>Change to directory dell-csi-helm-installer to install the Dell PowerScale <code>cd dell-csi-helm-installer</code></p>

@@ -351,8 +351,8 @@ adminPassword:
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.2.0 +&lt;/td&gt;
-&lt;td&gt;v2.2.0  +&lt;/td&gt;
+&lt;td&gt;2.2.0&lt;/td&gt;
+&lt;td&gt;v2.2.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -368,8 +368,8 @@ adminPassword:
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSM Authorization&lt;/td&gt;
-&lt;td&gt;1.2.0 +&lt;/td&gt;
-&lt;td&gt;v1.2.0 +&lt;/td&gt;
+&lt;td&gt;1.2.0&lt;/td&gt;
+&lt;td&gt;v1.2.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
