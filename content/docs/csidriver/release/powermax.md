@@ -7,6 +7,8 @@ description: Release notes for PowerMax CSI driver
 
 ### New Features/Changes
 - Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.
+- Added support for Standalone Helm Charts.
+- Removed beta volumesnapshotclass sample files.
 
 ### Fixed Issues
 There are no fixed issues in this release.
