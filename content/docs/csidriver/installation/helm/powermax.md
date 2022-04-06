@@ -232,12 +232,17 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
 
 8. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml`
+9. Or you can also install the driver using standalone helm chart using the command `helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax`
 
 *Note:* 
 - For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.
 - There are a set of samples provided [here](#sample-values-file) to help you configure the driver with reverse proxy
 - This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The `verify.sh` script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the `--skip-verify-node` option
 - In order to enable authorization, there should be an authorization proxy server already installed. 
+- PowerMax Array username must have role as `StorageAdmin` to be able to perform CRUD operations.
+- If the user is using complex K8s version like “v1.22.3-mirantis-1”, use below kubeVersion check in [helm Chart](https://github.com/dell/csi-powermax/blob/main/helm/csi-powermax/Chart.yaml) file. kubeVersion: “>= 1.22.0-0 < 1.25.0-0”.
+- User should provide all boolean values with double-quotes. This applies only for values.yaml. Example: “true”/“false”.
+- controllerCount parameter value should be <= number of nodes in the kubernetes cluster else install script fails.
 
 ## Storage Classes
 
