@@ -7,6 +7,7 @@ description: Release notes for PowerScale CSI driver
 
 ### New Features/Changes
 
+- Removed beta volumesnapshotclass sample files.
 
 ### Fixed Issues
 
