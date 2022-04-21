@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerflex/" />
-<meta property="article:modified_time" content="2022-03-28T18:44:11+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-04-21T10:42:58+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing the CSI Driver for PowerFlex via Helm
 ">
-<meta itemprop="dateModified" content="2022-03-28T18:44:11&#43;05:30" />
-<meta itemprop="wordCount" content="3365">
+<meta itemprop="dateModified" content="2022-04-21T10:42:58&#43;05:30" />
+<meta itemprop="wordCount" content="3375">
 
 
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.bacc8eb8d9f625ea6fbcda92ed104868.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3c1b6dd0efb9c7fd6be51b4ad8bfafaa.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.bacc8eb8d9f625ea6fbcda92ed104868.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3c1b6dd0efb9c7fd6be51b4ad8bfafaa.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1984,8 +1984,8 @@ Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/kubernetes-csi/external-snapshotter/
 <span style="color:#204a87">cd</span> ./external-snapshotter
 git checkout release-&lt;your-version&gt;
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
+kubectl kustomize client/config/crd <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
 </code></pre></div><p><em>NOTE:</em></p>
 <ul>
 <li>When using Kubernetes 1.21/1.22/1.23 it is recommended to use 5.0.x version of snapshotter/snapshot-controller.</li>

@@ -102,8 +102,8 @@ Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hu
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
 &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
 git checkout release-&amp;lt;your-version&amp;gt;
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
+kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;When using Kubernetes 1.21/1.22/1.23 it is recommended to use 5.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
@@ -733,8 +733,8 @@ no_path_retry 10
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
 &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
 git checkout release-&amp;lt;your-version&amp;gt;
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
+kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;It is recommended to use 5.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
@@ -1299,8 +1299,8 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
 &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
 git checkout release-&amp;lt;your-version&amp;gt;
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
+kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;It is recommended to use 5.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
@@ -1930,8 +1930,8 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
 &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
 git checkout release-&amp;lt;your-version&amp;gt;
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
+kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;It is recommended to use 5.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
@@ -2585,8 +2585,8 @@ The driver will continue to use previous values in case of an error found in the
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
 &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
 git checkout release-&amp;lt;your-version&amp;gt;
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
+kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;It is recommended to use 5.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
