@@ -9,6 +9,7 @@ description: Release notes for PowerMax CSI driver
 - Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.
 - Added support for Standalone Helm Charts.
 - Removed beta volumesnapshotclass sample files.
+- Added mapping of PV/PVC to namespace.
 
 ### Fixed Issues
 There are no fixed issues in this release.
@@ -24,4 +25,4 @@ There are no fixed issues in this release.
 
 ### Note:
 
-- Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
+- Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
