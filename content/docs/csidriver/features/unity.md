@@ -185,7 +185,7 @@ kind: StorageClass
 metadata:
     name: unity-expand-sc
     annotations:
-        storageclass.beta.kubernetes.io/is-default-class: false
+        storageclass.kubernetes.io/is-default-class: false
 provisioner: csi-unity.dellemc.com
 reclaimPolicy: Delete
 allowVolumeExpansion: true # Set this attribute to true if you plan to expand any PVCs created using this storage class
@@ -542,7 +542,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
     annotations:
-        storageclass.beta.kubernetes.io/is-default-class: "false"
+        storageclass.kubernetes.io/is-default-class: "false"
     name: unity-nfs
 parameters:
     arrayId: "APM0***XXXXXX"

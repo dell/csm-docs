@@ -290,7 +290,7 @@ metadata:
   annotations:
     meta.helm.sh/release-name: vxflexos
     meta.helm.sh/release-namespace: vxflexos
-    storageclass.beta.kubernetes.io/is-default-class: "true"
+    storageclass.kubernetes.io/is-default-class: "true"
   creationTimestamp: "2020-05-27T13:24:55Z"
   labels:
     app.kubernetes.io/managed-by: Helm

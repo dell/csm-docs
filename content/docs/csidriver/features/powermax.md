@@ -176,7 +176,7 @@ kind: StorageClass
 metadata:
   name: powermax-expand-sc
   annotations:
-    storageclass.beta.kubernetes.io/is-default-class: false
+    storageclass.kubernetes.io/is-default-class: false
 provisioner: csi-powermax.dellemc.com
 reclaimPolicy: Delete
 allowVolumeExpansion: true #Set this attribute to true if you plan to expand any PVCs
