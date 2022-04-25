@@ -208,7 +208,7 @@ kind: StorageClass
 metadata:
   name: isilon-expand-sc
   annotations:
-    storageclass.beta.kubernetes.io/is-default-class: "false"
+    storageclass.kubernetes.io/is-default-class: "false"
 provisioner: "csi-isilon.dellemc.com"
 reclaimPolicy: Delete
 parameters:
