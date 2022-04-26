@@ -298,7 +298,7 @@ Procedure
     * Agent pods with 2/2 containers and the status displayed as Running.
 
 **Note**:
-   To install nightly or latest csi driver build using bash script use the bellow command:
+   To install nightly or latest csi driver build using bash script use the below command:
       `/csi-install.sh --namespace unity --values ./myvalues.yaml --version nightly/latest`
 
 8. You can also install the driver using standalone helm chart using the command `helm install --values  myvalues.yaml --namespace unity unity ./csi-unity`
