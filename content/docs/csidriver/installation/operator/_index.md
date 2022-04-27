@@ -50,21 +50,21 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 #### Full list of CSI Drivers and versions supported by the Dell CSI Operator
 | CSI Driver         | Version   | ConfigVersion  | Kubernetes Version   | OpenShift Version     |
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
-| CSI PowerMax       | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
 | CSI PowerMax       | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerMax       | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI PowerFlex      | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
+| CSI PowerMax       | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerFlex      | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerFlex      | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI PowerScale     | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
+| CSI PowerFlex      | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerScale     | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerScale     | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI Unity          | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
+| CSI PowerScale     | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI Unity          | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI Unity          | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI PowerStore     | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
+| CSI Unity          | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerStore     | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerStore     | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
+| CSI PowerStore     | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 
 </br>
 
@@ -275,7 +275,7 @@ The below notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.2.0
+        configVersion: v2.3.0
    ```
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
