@@ -188,6 +188,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | skipCertificateValidation | Skip client-side TLS verification of Unisphere certificates | No | "True" |
 | transportProtocol  | Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.| No | Empty|
 | nodeNameTemplate | Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.  | No | Empty|
+| fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
 | **controller** | Allows configuration of the controller-specific parameters.| - | - |
 | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
 | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
