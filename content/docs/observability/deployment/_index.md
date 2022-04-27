@@ -119,7 +119,7 @@ The Grafana dashboards require Grafana to be deployed in the same Kubernetes clu
 
 | Supported Version | Helm Chart                                                |
 | ----------------- | --------------------------------------------------------- |
-| 8.4.6       | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
+| 8.5.0      | [Grafana Helm chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) |
 
 Grafana must be configured with the following data sources/plugins:
 
@@ -191,7 +191,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     # grafana-values.yaml 
     image:
       repository: grafana/grafana
-      tag: 8.4.6
+      tag: 8.5.0
       sha: ""
       pullPolicy: IfNotPresent
     service:
