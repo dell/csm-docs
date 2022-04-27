@@ -301,7 +301,15 @@ Procedure
    To install nightly or latest csi driver build using bash script use the below command:
       `/csi-install.sh --namespace unity --values ./myvalues.yaml --version nightly/latest`
 
-8. You can also install the driver using standalone helm chart using the command `helm install --values  myvalues.yaml --namespace unity unity ./csi-unity`
+8. You can also install the driver using standalone helm chart by running helm install command, first using the --dry-run flag to 
+   confirm various parameters are as desired. Once the parameters are validated, run the command without the --dry-run flag.
+   Note: The below example assumes that the user is at repo root helm folder i.e csi-unity/helm.
+
+   Syntax: helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>
+   <namespace> - namespace of the driver installation. 
+   <name of secret> - unity in case of unity-creds and unity-certs-0 secrets.
+   <helmPath> - Path of the helm directory.
+   e.g: helm install --dry-run --values ./csi-unity/myvalues.yaml --namespace unity unity ./csi-unity
 
 
 ## Certificate validation for Unisphere REST API calls 
