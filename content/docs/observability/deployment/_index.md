@@ -227,7 +227,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
         - name: Prometheus
           type: prometheus
           access: proxy
-          url: 'http://[PROMETHEUS_IP]:9090'
+          url: 'http://prometheus-server:9090'
           isDefault: null
           version: 1
           editable: true
