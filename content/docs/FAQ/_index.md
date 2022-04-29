@@ -7,7 +7,6 @@ weight: 2
 
 - [What are Dell Container Storage Modules (CSM)? How different is it from a CSI driver?](#what-are-dell-container-storage-modules-csm-how-different-is-it-from-a-csi-driver)
 - [Where do I start with Dell Container Storage Modules (CSM)?](#where-do-i-start-with-dell-container-storage-modules-csm)
-- [Is the Container Storage Module XYZ available for my array?](#is-the-container-storage-module-xyz-available-for-my-array)
 - [What are the prerequisites for deploying Container Storage Modules?](#what-are-the-prerequisites-for-deploying-container-storage-modules)
 - [How do I uninstall or disable a module?](#how-do-i-uninstall-or-disable-a-module)
 - [How do I troubleshoot Container Storage Modules?](#how-do-i-troubleshoot-container-storage-modules)
@@ -29,16 +28,6 @@ The main goal with CSM modules is to expose storage array enterprise features di
 ### Where do I start with Dell Container Storage Modules (CSM)?
 The umbrella repository for every Dell Container Storage Module is: [https://github.com/dell/csm](https://github.com/dell/csm).
 
-### Is the Container Storage Module XYZ available for my array?
-Please see module and the respectice CSI driver version available for each array:
-
-| CSM Module        | CSI PowerFlex v2.2 | CSI PowerScale v2.2 | CSI PowerStore v2.2 | CSI PowerMax v2.2 | CSI Unity XT v2.2    |
-| ----------------- | -------------- | --------------- | --------------- | ------------- | --------------- |
-| Authorization v1.2| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
-| Observability v1.1| ✔️              | ❌              | ✔️               | ❌            | ❌            |
-| Replication   v1.2| ❌             | ✔️              | ✔️               | ✔️             | ❌            |
-| Resilency     v1.1| ✔️              | ❌              | ❌              | ❌            | ✔️             |
-  
 ### What are the prerequisites for deploying Container Storage Modules?
 Prerequisites can be found on the respective module deployment pages:
 - [Dell Container Storage Module for Observability Deployment](../observability/deployment/#prerequisites)
