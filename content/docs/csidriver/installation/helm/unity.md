@@ -45,7 +45,7 @@ Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-hel
 ### Fibre Channel requirements
 
 Dell Unity supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
-following requirement is met before you install the CSI Driver for Dell PowerStore:
+following requirement is met before you install the CSI Driver for Dell Unity:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
 
