@@ -33,6 +33,55 @@ Before you install CSI Driver for Unity, verify the requirements that are mentio
 * To use NFS protocol, NFS utility packages needs to be installed
 * Mount propagation is enabled on container runtime that is being used
 
+### Install Helm 3.0
+
+Install Helm 3.0 on the master node before you install the CSI Driver for Dell Unity.
+
+**Steps**
+
+Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
+
+
+### Fibre Channel requirements
+
+Dell Unity supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
+following requirement is met before you install the CSI Driver for Dell PowerStore:
+- Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
+
+
+### Set up the iSCSI Initiator
+The CSI Driver for Dell unity supports iSCSI connectivity.
+
+If you use the iSCSI protocol, set up the iSCSI initiators as follows:
+- Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
+- Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell Unity array that
+  has IP interfaces. Manually create IP routes for each node that connects to the Dell Unity.
+- All Kubernetes nodes must have the _iscsi-initiator-utils_ package for CentOS/RHEL or _open-iscsi_ package for Ubuntu installed, and the _iscsid_ service must be enabled and running.
+  To do this, run the `systemctl enable --now iscsid` command.
+- Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
+
+For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+
+### Linux multipathing requirements
+Dell Unity supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
+Unity.
+
+Set up Linux multipathing as follows:
+- Ensure that all nodes have the _Device Mapper Multipathing_ package installed.
+> You can install it by running `yum install device-mapper-multipath` on CentOS or `apt install multipath-tools` on Ubuntu. This package should create a multipath configuration file located in `/etc/multipath.conf`.
+- Enable multipathing using the `mpathconf --enable --with_multipathd y` command.
+- Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
+- Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
+
+As a best practice, use the following options to help the operating system and the mulitpathing software detect path changes efficiently:
+```text
+path_grouping_policy multibus
+path_checker tur
+features "1 queue_if_no_path"
+path_selector "round-robin 0"
+no_path_retry 10
+```
+
 ## Install CSI Driver
 
 Install CSI Driver for Unity using this procedure.
