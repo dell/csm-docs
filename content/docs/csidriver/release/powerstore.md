@@ -7,7 +7,8 @@ description: Release notes for PowerStore CSI driver
 
 ### New Features/Changes
 
-
+1. Volume Group Snapshot
+2. Foothills Prime support - Latest version of Powerstore array
 
 ### Fixed Issues
 
