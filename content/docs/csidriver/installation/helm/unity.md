@@ -50,7 +50,7 @@ following requirement is met before you install the CSI Driver for Dell Unity:
 
 
 ### Set up the iSCSI Initiator
-The CSI Driver for Dell unity supports iSCSI connectivity.
+The CSI Driver for Dell Unity supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
 - Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
