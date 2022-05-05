@@ -113,7 +113,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4ad7495fba3fdaad69a15d1d350c8071.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.cc0615187d79af5d17ed60f2bcc8b4c7.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,7 +145,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4ad7495fba3fdaad69a15d1d350c8071.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.cc0615187d79af5d17ed60f2bcc8b4c7.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1810,7 +1810,6 @@
       <ul>
         <li><a href="#what-are-dell-container-storage-modules-csm-how-different-is-it-from-a-csi-driver">What are Dell Container Storage Modules (CSM)? How different is it from a CSI driver?</a></li>
         <li><a href="#where-do-i-start-with-dell-container-storage-modules-csm">Where do I start with Dell Container Storage Modules (CSM)?</a></li>
-        <li><a href="#is-the-container-storage-module-xyz-available-for-my-array">Is the Container Storage Module XYZ available for my array?</a></li>
         <li><a href="#what-are-the-prerequisites-for-deploying-container-storage-modules">What are the prerequisites for deploying Container Storage Modules?</a></li>
         <li><a href="#how-do-i-uninstall-or-disable-a-module">How do I uninstall or disable a module?</a></li>
         <li><a href="#how-do-i-troubleshoot-container-storage-modules">How do I troubleshoot Container Storage Modules?</a></li>
@@ -1868,7 +1867,6 @@
 	<ul>
 <li><a href="#what-are-dell-container-storage-modules-csm-how-different-is-it-from-a-csi-driver">What are Dell Container Storage Modules (CSM)? How different is it from a CSI driver?</a></li>
 <li><a href="#where-do-i-start-with-dell-container-storage-modules-csm">Where do I start with Dell Container Storage Modules (CSM)?</a></li>
-<li><a href="#is-the-container-storage-module-xyz-available-for-my-array">Is the Container Storage Module XYZ available for my array?</a></li>
 <li><a href="#what-are-the-prerequisites-for-deploying-container-storage-modules">What are the prerequisites for deploying Container Storage Modules?</a></li>
 <li><a href="#how-do-i-uninstall-or-disable-a-module">How do I uninstall or disable a module?</a></li>
 <li><a href="#how-do-i-troubleshoot-container-storage-modules">How do I troubleshoot Container Storage Modules?</a></li>
@@ -1887,54 +1885,6 @@
 <p>The main goal with CSM modules is to expose storage array enterprise features directly within Kubernetes so developers are empowered to leverage them for their deployment in a seamless way.</p>
 <h3 id="where-do-i-start-with-dell-container-storage-modules-csm">Where do I start with Dell Container Storage Modules (CSM)?</h3>
 <p>The umbrella repository for every Dell Container Storage Module is: <a href="https://github.com/dell/csm">https://github.com/dell/csm</a>.</p>
-<h3 id="is-the-container-storage-module-xyz-available-for-my-array">Is the Container Storage Module XYZ available for my array?</h3>
-<p>Please see module and the respectice CSI driver version available for each array:</p>
-<table>
-<thead>
-<tr>
-<th>CSM Module</th>
-<th>CSI PowerFlex v2.2</th>
-<th>CSI PowerScale v2.2</th>
-<th>CSI PowerStore v2.2</th>
-<th>CSI PowerMax v2.2</th>
-<th>CSI Unity XT v2.2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Authorization v1.2</td>
-<td>✔️</td>
-<td>✔️</td>
-<td>❌</td>
-<td>✔️</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>Observability v1.1</td>
-<td>✔️</td>
-<td>❌</td>
-<td>✔️</td>
-<td>❌</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>Replication   v1.2</td>
-<td>❌</td>
-<td>✔️</td>
-<td>✔️</td>
-<td>✔️</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>Resilency     v1.1</td>
-<td>✔️</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✔️</td>
-</tr>
-</tbody>
-</table>
 <h3 id="what-are-the-prerequisites-for-deploying-container-storage-modules">What are the prerequisites for deploying Container Storage Modules?</h3>
 <p>Prerequisites can be found on the respective module deployment pages:</p>
 <ul>
