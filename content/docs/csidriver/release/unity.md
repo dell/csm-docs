@@ -9,7 +9,7 @@ description: Release notes for Unity CSI driver
 
 
 ### Fixed Issues
-
+CSM Resiliency: Occasional failure unmounting Unity volume for raw block devices via iSCSI.
 
 ### Known Issues
 
