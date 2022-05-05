@@ -30,7 +30,7 @@ The Prometheus service should be running on the same Kubernetes cluster as the C
 
 | Supported Version | Image                   | Helm Chart                                                   |
 | ----------------- | ----------------------- | ------------------------------------------------------------ |
-| 2.22.0           | prom/prometheus:v2.22.0 | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
+| 2.23.0           | prom/prometheus:v2.23.0 | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
 
 **Note**: It is the user's responsibility to provide persistent storage for Prometheus if they want to preserve historical data.
 
@@ -65,13 +65,13 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
         type: NodePort
         servicePort: 9090
     extraScrapeConfigs: |
-    - job_name: 'karavi-metrics-powerflex'
-      scrape_interval: 5s
-      scheme: https
-      static_configs:
-        - targets: ['otel-collector:8443']
-      tls_config:
-        insecure_skip_verify: true
+      - job_name: 'karavi-metrics-[CSI-DRIVER]'
+        scrape_interval: 5s
+        scheme: https
+        static_configs:
+          - targets: ['otel-collector:8443']
+        tls_config:
+          insecure_skip_verify: true
    ```
 
 2. If using Rancher, create a ServiceMonitor.
@@ -227,7 +227,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
         - name: Prometheus
           type: prometheus
           access: proxy
-          url: 'http://prometheus:9090'
+          url: 'http://prometheus-server:9090'
           isDefault: null
           version: 1
           editable: true
