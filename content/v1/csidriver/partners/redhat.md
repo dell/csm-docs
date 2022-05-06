@@ -5,7 +5,7 @@ weight: 3
 description: >
   Installing the certified Dell CSI Operator on OpenShift
 ---
-The Dell EMC CSI Drivers support Red Hat OpenShift.  Please see the [Supported Platforms](../../#features-and-capabilities) table for more details. 
+The Dell CSI Drivers support Red Hat OpenShift.  Please see the [Supported Platforms](../../#features-and-capabilities) table for more details. 
 
 The CSI drivers can be installed via Helm charts or Dell CSI Operator.  The Dell CSI Operator allows for easy installation of the driver via the Openshift UI. The process to install the Operator via the OpenShift UI can be found below.
 

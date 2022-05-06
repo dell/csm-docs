@@ -3,21 +3,22 @@ title: "Resiliency"
 linkTitle: "Resiliency"
 weight: 6
 Description: >
-  Dell EMC Container Storage Modules (CSM) for Resiliency
+  Dell Container Storage Modules (CSM) for Resiliency
 ---
 
-[Container Storage Modules](https://github.com/dell/csm) (CSM) for Resiliency is part of the  open-source suite of Kubernetes storage enablers for Dell EMC products.
+[Container Storage Modules](https://github.com/dell/csm) (CSM) for Resiliency is part of the  open-source suite of Kubernetes storage enablers for Dell products.
 
 User applications can have problems if you want their Pods to be resilient to node failure. This is especially true of those deployed with StatefulSets that use PersistentVolumeClaims. Kubernetes guarantees that there will never be two copies of the same StatefulSet Pod running at the same time and accessing storage. Therefore, it does not clean up StatefulSet Pods if the node executing them fails.
  
-For the complete discussion and rationale, go to https://github.com/kubernetes/community and search for the pod-safety.md file (path: contributors/design-proposals/storage/pod-safety.md).
+For the complete discussion and rationale, you can read the [pod-safety design proposal](https://github.com/kubernetes/design-proposals-archive/blob/main/storage/pod-safety.md).
+
 For more background on the forced deletion of Pods in a StatefulSet, please visit [Force Delete StatefulSet Pods](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#:~:text=In%20normal%20operation%20of%20a,1%20are%20alive%20and%20ready).
 
 ## CSM for Resiliency High-Level Description
 
 CSM for Resiliency is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures. The first component of the Resiliency module is a pod monitor that is specifically designed to protect stateful applications from various failures. It is not a standalone application, but rather is deployed as a _sidecar_ to CSI (Container Storage Interface) drivers, in both the driver's controller pods and the driver's node pods. Deploying CSM for Resiliency as a sidecar allows it to make direct requests to the driver through the Unix domain socket that Kubernetes sidecars use to make CSI requests.
 
-Some of the methods CSM for Resiliency invokes in the driver are standard CSI methods, such as NodeUnpublishVolume, NodeUnstageVolume, and ControllerUnpublishVolume. CSM for Resiliency also uses proprietary calls that are not part of the standard CSI specification. Currently, there is only one, ValidateVolumeHostConnectivity that returns information on whether a host is connected to the storage system and/or whether any I/O activity has happened in the recent past from a list of specified volumes. This allows CSM for Resiliency to make more accurate determinations about the state of the system and its persistent volumes.
+Some of the methods CSM for Resiliency invokes in the driver are standard CSI methods, such as NodeUnpublishVolume, NodeUnstageVolume, and ControllerUnpublishVolume. CSM for Resiliency also uses proprietary calls that are not part of the standard CSI specification. Currently, there is only one, ValidateVolumeHostConnectivity that returns information on whether a host is connected to the storage system and/or whether any I/O activity has happened in the recent past from a list of specified volumes. This allows CSM for Resiliency to make more accurate determinations about the state of the system and its persistent volumes. CSM for Resiliency is designed to adhere to pod affinity settings of pods.
 
 Accordingly, CSM for Resiliency is adapted to and qualified with each CSI driver it is to be used with. Different storage systems have different nuances and characteristics that CSM for Resiliency must take into account.
 
@@ -26,40 +27,40 @@ Accordingly, CSM for Resiliency is adapted to and qualified with each CSI driver
 CSM for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerScale | Unity | PowerStore | PowerFlex | PowerMax |
-| - | :-: | :-: | :-: | :-: | :-: |
-| Detect pod failures for the following failure types - Node failure, K8S Control Plane Network failure, Array I/O Network failure | no  | yes | no | yes | no |
-| Cleanup pod artifacts from failed nodes | no |  yes | no | yes | no |
-| Revoke PV access from failed nodes | no |  yes | no | yes | no |
+| Capability                              | PowerScale | Unity | PowerStore | PowerFlex | PowerMax |
+| --------------------------------------- | :--------: | :---: | :--------: | :-------: | :------: |
+| Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | no  | yes | no | yes | no |
+| Cleanup pod artifacts from failed nodes | no         | yes   | no         | yes       | no       |
+| Revoke PV access from failed nodes      | no         | yes   | no         | yes       | no       |
 {{</table>}}
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| COP/OS | Supported Versions |
-|-|-|
-| Kubernetes    | 1.20, 1.21, 1.22 |
-| Red Hat OpenShift | 4.8, 4.9 |
-| RHEL          |     7.x, 8.x      |
-| CentOS        |     7.8, 7.9     |
+| COP/OS     | Supported Versions |
+| ---------- | :----------------: |
+| Kubernetes | 1.21, 1.22, 1.23   |
+| Red Hat OpenShift | 4.8, 4.9    |
+| RHEL       |     7.x, 8.x       |
+| CentOS     |     7.8, 7.9       |
 {{</table>}}
 
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex | Unity |
-|---------------|:-------------------:|:----------------:|
-| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0 |
+|               | PowerFlex    | Unity                      |
+| ------------- | :----------: | :------------------------: |
+| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 |
 {{</table>}}
 
 ## Supported CSI Drivers
 
-CSM for Authorization supports the following CSI drivers and versions.
+CSM for Resiliency supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
-| Storage Array | CSI Driver | Supported Versions |
-| ------------- | ---------- | ------------------ |
-| CSI Driver for Dell EMC PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0,v2.1 |
-| CSI Driver for Dell EMC Unity | [csi-unity](https://github.com/dell/csi-unity) | v2.0,v2.1 |
+| Storage Array                     | CSI Driver   | Supported Versions |
+| --------------------------------- | :----------: | :----------------: |
+| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0, v2.1, v2.2 |
+| CSI Driver for Dell Unity     | [csi-unity](https://github.com/dell/csi-unity)         | v2.0, v2.1, v2.2 |
 {{</table>}}
 
 ### PowerFlex Support
@@ -73,10 +74,10 @@ PowerFlex is a highly scalable array that is very well suited to Kubernetes depl
 
 ### Unity Support
 
-Dell EMC Unity is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity systems are designed for all-Flash, deliver the best value in the market, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition. 
+Dell Unity is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity systems are designed for all-Flash, deliver the best value in the market, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition. 
 
 * Unity (purpose-built): A modern midrange storage solution, engineered from the groundup to meet market demands for Flash, affordability and incredible simplicity. The Unity Family is available in 12 All Flash models and 12 Hybrid models.
-* VxBlock (converged): Unity storage options are also available in Dell EMC VxBlock System 1000.
+* VxBlock (converged): Unity storage options are also available in Dell VxBlock System 1000.
 * UnityVSA (virtual): The Unity Virtual Storage Appliance (VSA) allows the advanced unified storage and data management features of the Unity family to be easily deployed on VMware ESXi servers, for a ‘software defined’ approach. UnityVSA is available in two editions:
   * Community Edition is a free downloadable 4 TB solution recommended for nonproduction use.
   * Professional Edition is a licensed subscription-based offering available at capacity levels of 10 TB, 25 TB, and 50 TB. The subscription includes access to online support resources, EMC Secure Remote Services (ESRS), and on-call software- and systems-related support.
@@ -108,7 +109,7 @@ The following provisioning types are supported and have been tested:
 
 * ReadWriteMany volumes. This may have issues if a node has multiple pods accessing the same volumes. In any case once pod cleanup fences the volumes on a node, they will no longer be available to any pods using those volumes on that node. We will endeavor to support this in the future.
 
-* Multiple instances of the same driver type (for example two CSI driver for Dell EMC PowerFlex deployments.)
+* Multiple instances of the same driver type (for example two CSI driver for Dell PowerFlex deployments.)
 
 ## Deploying and Managing Applications Protected by CSM for Resiliency
 

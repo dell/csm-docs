@@ -3,7 +3,7 @@ title: Installer
 linktitle: Installer
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Installer
+  Dell Container Storage Modules (CSM) for Observability Installer
 ---
 
 <!--
@@ -30,9 +30,13 @@ The Container Storage Modules (CSM) for Observability installer bootstraps Helm 
 
 If the Authorization module is enabled for the CSI drivers installed in the same Kubernetes cluster, the installer will perform the current steps to enable CSM for Observability to use the same Authorization instance:
 - Verifies the `karavictl` binary is available.
-- Verifies the appropriate Secret exists in the CSI driver namespace.
-- Queries the CSI driver environment to get references to the Authorization module sidecar-proxy Docker image and URL of the proxy server.
-- Updates the CSM for Observability deployment to use the existing Authorization instance.
+- Verifies the appropriate Secrets and ConfigMap exist in the CSI driver namespace.
+- Updates the CSM for Observability deployment to use the existing Authorization instance if not already enabled during the initial installation of CSM for Observability.
+
+## Prerequisites 
+
+- Helm 3.3
+- The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
 
 ## Online Installer
 
@@ -59,12 +63,11 @@ Usage: ./karavi-observability-install.sh mode options...
 Mode:
   install                                                     Installs Karavi Observability and enables Karavi Authorization if already installed
   enable-authorization                                        Updates existing installation of Karavi Observability with Karavi Authorization
+  upgrade                                                     Upgrades existing installation of Karavi Observability to the latest release
 Options:
   Required
   --namespace[=]<namespace>                                   Namespace where Karavi Observability will be installed
   Optional
-  --auth-image-addr                                           Docker registry location of the Karavi Authorization sidecar proxy image
-  --auth-proxy-host                                           Host address of the Karavi Authorization proxy server
   --csi-powerflex-namespace[=]<csi powerflex namespace>       Namespace where CSI PowerFlex is installed, default is 'vxflexos'
   --set-file                                                  Set values from files used during helm installation (can be specified multiple times)
   --skip-verify                                               Skip verification of the environment
@@ -94,10 +97,15 @@ To perform an online installation of CSM for Observability, the following steps 
     The following example will install CSM for Observability into the CSM namespace.
 
     A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../helm#configuration).
+
+    __Note:__ 
+    - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
+    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability. 
+
     ```
     [user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
     ---------------------------------------------------------------------------------
-    > Installing Karavi Observability in namespace karavi on 1.19
+    > Installing Karavi Observability in namespace karavi on 1.21
     ---------------------------------------------------------------------------------
     |
     |- Karavi Observability is not installed                            Success
@@ -120,17 +128,23 @@ To perform an online installation of CSM for Observability, the following steps 
     |
     |- Creating namespace karavi                                        Success
     |
+    |- CSI Driver for PowerFlex is installed                            Success
+    |
     |- Copying Secret from vxflexos to karavi                           Success
+    |
+    |- CSI Driver for PowerStore is installed                           Success
+    |
+    |- Copying Secret from powerstore to karavi                         Success
     |
     |- Installing CertManager CRDs                                      Success
     |
+    |- Enabling Karavi Authorization for Karavi Observability
+      |
+      |--> Copying ConfigMap from vxflexos to karavi                    Success
+      |
+      |--> Copying Karavi Authorization Secrets from vxflexos to karavi Success
+    |
     |- Installing Karavi Observability helm chart                       Success
-    |
-    |- Waiting for pods in namespace karavi to be ready                 Success
-    |
-    |- Copying Secret from vxflexos to karavi                           Success
-    |
-    |- Enabling Karavi Authorization for Karavi Observability           Success
     |
     |- Waiting for pods in namespace karavi to be ready                 Success
     ```
