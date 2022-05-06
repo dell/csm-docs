@@ -6,6 +6,7 @@ description: Release notes for PowerFlex CSI driver
 ## Release Notes - CSI PowerFlex v2.3.0
 
 ### New Features/Changes
+- Added support to configure fsGroupPolicy
 
 ### Fixed Issues
 
