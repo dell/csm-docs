@@ -1,24 +1,24 @@
 ---
-title: Unity
+title: Unity XT
 description: >
-  Installing CSI Driver for Unity via Operator
+  Installing CSI Driver for Unity XT via Operator
 ---
 
 
 
-## CSI Driver for Unity
+## CSI Driver for Unity XT
 ### Pre-requisites
-#### Create secret to store Unity credentials
+#### Create secret to store Unity XT credentials
 Create a namespace called unity (it can be any user-defined name; But commands in this section assumes that the namespace is unity)
 Prepare the secret.yaml for driver configuration.
 The following table lists driver configuration parameters for multiple storage arrays.
 
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
-| username | Username for accessing Unity system  | true | - |
-| password | Password for accessing Unity system  | true | - |
-| restGateway | REST API gateway HTTPS endpoint Unity system| true | - |
-| arrayId | ArrayID for Unity system | true | - |
+| username | Username for accessing Unity XT system  | true | - |
+| password | Password for accessing Unity XT system  | true | - |
+| restGateway | REST API gateway HTTPS endpoint Unity XT system| true | - |
+| arrayId | ArrayID for Unity XT system | true | - |
 | isDefaultArray | An array having isDefaultArray=true is for backward compatibility. This parameter should occur once in the list. | true | - |
 
 Ex: secret.yaml
@@ -76,7 +76,7 @@ Users should configure the parameters in CR. The following table lists the prima
    | Parameter                                       | Description                                                  | Required | Default               |
    | ----------------------------------------------- | ------------------------------------------------------------ | -------- | --------------------- |
    | ***Common parameters for node and controller*** |                                                              |          |                       |
-   | CSI_ENDPOINT                                    | Specifies the HTTP endpoint for Unity.                       | No       | /var/run/csi/csi.sock |
+   | CSI_ENDPOINT                                    | Specifies the HTTP endpoint for Unity XT.                       | No       | /var/run/csi/csi.sock |
    | X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS | Flag to enable multiple pods use the same pvc on the same node with RWO access mode | No | false |
    | ***Controller parameters***                     |                                                              |          |                       |
    | X_CSI_MODE                                      | Driver starting mode                                         | No       | controller            |
@@ -87,7 +87,7 @@ Users should configure the parameters in CR. The following table lists the prima
    | X_CSI_ISCSI_CHROOT                              | Path to which the driver will chroot before running any iscsi commands. | No       | /noderoot             |
    | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Node plugin | No      |          |            |
 
-### Example CR for Unity
+### Example CR for Unity XT
 Refer samples from [here](https://github.com/dell/dell-csi-operator/tree/master/samples). Below is an example CR:
 ```yaml
 apiVersion: storage.dell.com/v1
@@ -188,8 +188,6 @@ data:
 
 ## Dynamic Logging Configuration
 
-This feature is introduced in CSI Driver for unity version 2.0.0. 
-
 ### Operator based installation
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
@@ -199,12 +197,12 @@ kubectl edit configmap -n unity unity-config-params
 ```  
 
 **Note** : 
-  1. Prior to CSI Driver for unity version 2.0.0, the log level was allowed to be updated dynamically through `logLevel` attribute in the secret object.
+  1. The log level is not allowed to be updated dynamically through `logLevel` attribute in the secret object.
   2. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
   3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
 
 ## Volume Health Monitoring
-This feature is introduced in CSI Driver for unity version 2.1.0.
+This feature is introduced in CSI Driver for Unity XT version 2.1.0.
 
 ### Operator based installation
 

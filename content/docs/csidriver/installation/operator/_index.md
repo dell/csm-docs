@@ -52,19 +52,19 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
 | CSI PowerMax       | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerMax       | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI PowerMax       | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.9, 4.10             |
+| CSI PowerMax       | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerFlex      | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerFlex      | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI PowerFlex      | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.9, 4.10             |
+| CSI PowerFlex      | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerScale     | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerScale     | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI PowerScale     | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.9, 4.10             |
-| CSI Unity          | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
-| CSI Unity          | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI Unity          | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.9, 4.10             |
+| CSI PowerScale     | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI Unity XT       | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
+| CSI Unity XT       | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
+| CSI Unity XT       | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerStore     | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerStore     | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI PowerStore     | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.9, 4.10             |
+| CSI PowerStore     | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 
 </br>
 
@@ -127,7 +127,7 @@ For installation of the supported drivers, a `CustomResource` has to be created 
 ### Pre-requisites for upstream Kubernetes Clusters
 On upstream Kubernetes clusters, make sure to install
 * VolumeSnapshot CRDs
-  * On clusters running v1.21,v1.22 & v1.23, make sure to install v1 VolumeSnapshot CRDs
+  * On clusters running v1.22,v1.23 & v1.24, make sure to install v1 VolumeSnapshot CRDs
 * External Volume Snapshot Controller with the correct version
 
 ### Pre-requisites for Red Hat OpenShift Clusters
@@ -258,9 +258,9 @@ If you are installing the latest versions of the CSI drivers, the driver control
 The CSI Drivers installed by the Dell CSI Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –
 
 * Modifying the installation directly via `kubectl edit`
-    For e.g. - If the name of the installed unity driver is unity, then run
+    For e.g. - If the name of the installed Unity XT driver is unity, then run
     ```
-    # Replace driver-namespace with the namespace where the Unity driver is installed
+    # Replace driver-namespace with the namespace where the Unity XT driver is installed
     $ kubectl edit csiunity/unity -n <driver-namespace>
     ```
     and modify the installation. The usual fields to edit are the version of drivers and sidecars and the env variables.
@@ -349,7 +349,7 @@ data:
 * Adding (supported) environment variables
 * Updating the image of the driver
 ## Limitations
-* The Dell CSI Operator can't manage any existing driver installed using Helm charts. If you already have installed one of the DellEMC CSI driver in your cluster and  want to use the operator based deployment, uninstall the driver and then redeploy the driver following the installation procedure described above
+* The Dell CSI Operator can't manage any existing driver installed using Helm charts. If you already have installed one of the Dell CSI driver in your cluster and  want to use the operator based deployment, uninstall the driver and then redeploy the driver following the installation procedure described above
 * The Dell CSI Operator is not fully compliant with the OperatorHub React UI elements and some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use kubectl/oc commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Dell CSI Operator
 
 
