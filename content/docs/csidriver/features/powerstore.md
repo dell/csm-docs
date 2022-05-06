@@ -680,6 +680,4 @@ In case blockProtocol is specified as `auto`, the driver will be able to find th
 
 CSI Driver for Dell Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). To enable this feature one must enable snapshot feature
 
->Note: 
->
->1. Volume group cannot be seen from the Kubernetes level as of now only volume group snapshots can be viewed as a CRD
+>Note: Volume group cannot be seen from the Kubernetes level as of now only volume group snapshots can be viewed as a CRD
