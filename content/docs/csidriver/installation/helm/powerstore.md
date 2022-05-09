@@ -191,7 +191,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     
     Add more blocks similar to above for each PowerStore array if necessary. 
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
-    
+   
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
 7. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml`
@@ -221,6 +221,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+| controller.vgsnapshot.enabled | To enable or disable the volume group snapshot feature | No | "true" |
 
 8. Install the driver using `csi-install.sh` bash script by running `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
