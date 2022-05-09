@@ -7,6 +7,8 @@ description: Release notes for PowerFlex CSI driver
 
 ### New Features/Changes
 
+- Removed beta volumesnapshotclass sample files.
+
 ### Fixed Issues
 
 There are no fixed issues in this release.
