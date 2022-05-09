@@ -541,7 +541,7 @@ The value of that parameter is added as an additional entry to NFS Export host a
 For example the following notation:
 ```yaml
 externalAccess: "10.0.0.0/24"
-``` 
+```
 
 This means that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
 
@@ -675,3 +675,9 @@ In case blockProtocol is specified as `auto`, the driver will be able to find th
 
 >Note: NVMe/TCP is not supported on RHEL 7.x versions and CoreOS. 
 >NVMe/TCP is supported with Powerstore 2.1 and above.
+
+## Volume group snapshot Support
+
+CSI Driver for Dell Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). To enable this feature one must enable snapshot feature
+
+>Note: Volume group cannot be seen from the Kubernetes level as of now only volume group snapshots can be viewed as a CRD

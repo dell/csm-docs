@@ -7,7 +7,7 @@ description: Release notes for PowerStore CSI driver
 
 ### New Features/Changes
 
-
+- Support Volume Group Snapshots
 
 ### Fixed Issues
 
