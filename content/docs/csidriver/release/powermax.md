@@ -10,6 +10,7 @@ description: Release notes for PowerMax CSI driver
 - Added support for Standalone Helm Charts.
 - Removed beta volumesnapshotclass sample files.
 - Added mapping of PV/PVC to namespace.
+- Added support to configure fsGroupPolicy.
 
 ### Fixed Issues
 There are no fixed issues in this release.
