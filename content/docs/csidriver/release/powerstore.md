@@ -8,6 +8,7 @@ description: Release notes for PowerStore CSI driver
 ### New Features/Changes
 
 - Support Volume Group Snapshots
+- Removed beta volumesnapshotclass sample files.
 
 ### Fixed Issues
 

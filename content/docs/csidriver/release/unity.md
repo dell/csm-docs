@@ -5,6 +5,8 @@ description: Release notes for Unity CSI driver
 
 ## Release Notes - CSI Unity v2.3.0
 
+- Removed beta volumesnapshotclass sample files.
+
 ### New Features/Changes
 
 
