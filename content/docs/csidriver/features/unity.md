@@ -171,7 +171,7 @@ spec:
 
 ## Volume Expansion
 
-The CSI Unity XT driver version 1.3 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).
+The CSI Unity XT driver supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).
 
 To use this feature, the storage class that is used to create the PVC must have the attribute `allowVolumeExpansion` set to true.
 
@@ -264,7 +264,7 @@ For additional information, see the [kubernetes](https://kubernetes.io/DOCS/CONC
 
 ## Volume Cloning Feature
 
-The CSI Unity XT driver version 1.3 and later supports volume cloning. This allows specifying existing PVCs in the _dataSource_ field to indicate a user would like to clone a Volume.
+The CSI Unity XT driver supports volume cloning. This allows specifying existing PVCs in the _dataSource_ field to indicate a user would like to clone a Volume.
 
 Source and destination PVC must be in the same namespace and have the same Storage Class.
 
