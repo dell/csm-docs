@@ -11,6 +11,7 @@ description: Release notes for PowerMax CSI driver
 - Removed beta volumesnapshotclass sample files.
 - Added mapping of PV/PVC to namespace.
 - Added support to configure fsGroupPolicy.
+- Added support to filter topology keys based on user inputs.
 
 ### Fixed Issues
 There are no fixed issues in this release.
