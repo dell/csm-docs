@@ -507,7 +507,7 @@ kubectl edit configmap -n unity unity-config-params
 
 ## Tenancy support for Unity XT NFS
 
-The CSI Unity XT driver version 2.1.0 (and later versions) supports the Tenancy feature of Unity XT such that the user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.
+The CSI Unity XT driver version v2.1.0 (and later versions) supports the Tenancy feature of Unity XT such that the user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.
 
 Prerequisites (to be manually created in Unity XT Array) before the driver installation:
 * Create Tenants
