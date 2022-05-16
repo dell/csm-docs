@@ -28,7 +28,7 @@ CSM for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability                              | PowerScale | Unity XT | PowerStore | PowerFlex | PowerMax |
-| --------------------------------------- | :--------: | :---: | :--------: | :-------: | :------: |
+| --------------------------------------- | :--------: | :------: | :--------: | :-------: | :------: |
 | Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | no  | yes | no | yes | no |
 | Cleanup pod artifacts from failed nodes | no         | yes   | no         | yes       | no       |
 | Revoke PV access from failed nodes      | no         | yes   | no         | yes       | no       |
