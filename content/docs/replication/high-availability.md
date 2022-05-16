@@ -45,9 +45,8 @@ parameters:
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 ```
-<br>
 
-> Note: User can create volumes in different namespaces using same RDF group `replication.storage.dell.com/RdfGroup`.
+> Note: Different namespaces can share the same RDF group for creating volumes.
 
 
 ### Snapshots on SRDF Metro volumes
