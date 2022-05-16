@@ -74,6 +74,7 @@ the objects still exist in pairs.
 * Start applications after the migration.
 * Replicate `PersistentVolumeClaim` objects within/across clusters.
 * Replication with METRO mode does not need Replicator sidecar and common controller.
+* Different namespaces cannot share the same RDF group for creating volumes with ASYNC mode for PowerMax.
 
 ### CSM for Replication Module Capabilities
 
