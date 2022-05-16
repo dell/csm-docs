@@ -45,6 +45,10 @@ parameters:
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 ```
+<br>
+
+> Note: User can create volumes in different namespaces using same RDF group `replication.storage.dell.com/RdfGroup`.
+
 
 ### Snapshots on SRDF Metro volumes
 A snapshot can be created on either of the volumes in the metro volume pair depending on the parameters in the `VolumeSnapshotClass`.

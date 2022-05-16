@@ -12,6 +12,7 @@ description: Release notes for PowerMax CSI driver
 - Added mapping of PV/PVC to namespace.
 - Added support to configure fsGroupPolicy.
 - Added support to filter topology keys based on user inputs.
+- Added support to protect volumes from multiple namespaces using single METRO RDF group
 
 ### Fixed Issues
 There are no fixed issues in this release.
