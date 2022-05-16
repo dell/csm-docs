@@ -203,6 +203,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | tolerations | Add tolerations as per requirement | No | - |
 | nodeSelector | Add node selectors as per requirement | No | - |
 | healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy | - | - |
 |defaultCredentialsSecret| This secret name refers to:<br> 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.<br>2. The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>3. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |

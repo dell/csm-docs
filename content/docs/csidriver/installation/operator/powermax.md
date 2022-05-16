@@ -70,6 +70,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No | false |
    | ***Node parameters***|
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
+   | X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disabe topology control. It filter out arrays, and associated transport protocol available to each node and create topology keys based on any such user input. | No | false |
 5. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 
 ### CSI PowerMax ReverseProxy
@@ -305,6 +306,14 @@ spec:
         # Default value: false
         - name: X_CSI_HEALTH_MONITOR_ENABLED
           value: "false"
+        # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
+        # if enabled, user can create custom topology keys by editing node-topology-config configmap.
+        # Allowed values:
+        #   true: enable the filtration based on config map
+        #   false: disable the filtration based on config map
+        # Default value: false
+        - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
+          value: "false"
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -315,13 +324,57 @@ data:
   driver-config-params.yaml: |
     CSI_LOG_LEVEL: "debug"
     CSI_LOG_FORMAT: "JSON"
-
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-topology-config
+  namespace: test-powermax
+data:
+  topologyConfig.yaml: |
+    # allowedConnections contains a list of (node, array and protocol) info for user allowed configuration
+    # For any given storage array ID and protocol on a Node, topology keys will be created for just those pair and
+    # every other configuration is ignored
+    # Please refer to the doc website about a detailed explanation of each configuration parameter
+    # and the various possible inputs
+    allowedConnections:
+      # nodeName: Name of the node on which user wants to apply given rules
+      # Allowed values:
+      # nodeName - name of a specific node
+      # * -  all the nodes
+      # Examples: "node1", "*"
+      - nodeName: "node1"
+        # rules is a list of 'StorageArrayID:TransportProtocol' pair. ':' is required between both value
+        # Allowed values:
+        # StorageArrayID:
+        #   - SymmetrixID : for specific storage array
+        #   - "*" :- for all the arrays connected to the node
+        # TransportProtocol:
+        #   - FC : Fibre Channel protocol
+        #   - ISCSI : iSCSI protocol
+        #   - "*" - for all the possible Transport Protocol
+        # Examples: "000000000001:FC", "000000000002:*", "*:FC", "*:*"
+        rules:
+          - "000000000001:FC"
+          - "000000000002:FC"
+      - nodeName: "*"
+        rules:
+          - "000000000002:FC"
+    # deniedConnections contains a list of (node, array and protocol) info for denied configurations by user
+    # For any given storage array ID and protocol on a Node, topology keys will be created for every other configuration but
+    # not these input pairs
+    deniedConnections:
+      - nodeName: "node2"
+        rules:
+          - "000000000002:*"
+      - nodeName: "node3"
+        rules:
+          - "*:*"
 ```
 
 
 Note: 
- - `dell-csi-operator` does not support the installation of CSI PowerMax ReverseProxy as a sidecar to the controller Pod. This facility is
-    only present with `dell-csi-helm-installer`.
+ - `dell-csi-operator` does not support the installation of CSI PowerMax ReverseProxy as a sidecar to the controller Pod. This facility is only present with `dell-csi-helm-installer`.
  - `Kubelet config dir path` is not yet configurable in case of Operator based driver installation.
  - Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
 
@@ -333,7 +386,7 @@ Volume Health Monitoring feature is optional and by default this feature is disa
 
 To enable this feature, set  `X_CSI_HEALTH_MONITOR_ENABLED` to `true` in the driver manifest under controller and node section. Also, install the `external-health-monitor` from `sideCars` section for controller plugin.
 To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
-   
+```   
      # Install the 'external-health-monitor' sidecar accordingly.
         # Allowed values:
         #   true: enable checking of health condition of CSI volumes
@@ -353,3 +406,39 @@ To get the volume health state `value` under controller should be set to true as
          - name: X_CSI_HEALTH_MONITOR_ENABLED
            value: "true"
 ```
+
+## Support for custom topology keys 
+
+This feature is introduced in CSI Driver for PowerMax version 2.3.0.
+
+### Operator based installation
+
+Support for custom topology keys is optional and by default this feature is disabled for drivers when installed via operator.
+
+X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol. If enabled, user can create custom topology keys by editing node-topology-config configmap.
+
+1. To enable this feature, set  `X_CSI_TOPOLOGY_CONTROL_ENABLED` to `true` in the driver manifest under node section. 
+
+```
+   # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
+        # if enabled, user can create custom topology keys by editing node-topology-config configmap.
+        # Allowed values:
+        #   true: enable the filtration based on config map
+        #   false: disable the filtration based on config map
+        # Default value: false
+        - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
+          value: "false"
+```
+2. Edit the sample config map "node-topology-config" present in [sample CRD](#sample--crd-file-for--powermax) with appropriate values:
+
+   | Parameter | Description  |  
+   |-----------|--------------|
+   | allowedConnections | List of node, array and protocol info for user allowed configuration |  
+   | allowedConnections.nodeName | Name of the node on which user wants to apply given rules |
+   | allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+   | deniedConnections | List of node, array and protocol info for user denied configuration |  
+   | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
+   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+<br>
+   
+ >Note: Name of the configmap should always be `node-topology-config`.
