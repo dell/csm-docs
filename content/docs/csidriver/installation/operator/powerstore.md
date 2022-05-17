@@ -177,7 +177,7 @@ volume stats value under node should be set to true.
 
 ## Dynamic Logging Configuration
 
-This feature is introduced in CSI Driver for Unity XT version 2.0.0. 
+This feature is introduced in CSI Driver for PowerStore version 2.0.0. 
 
 ### Operator based installation
 As part of driver installation, a ConfigMap with the name `powerstore-config-params` is created using the manifest located in the sample file. This ConfigMap contains attributes `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver and `CSI_LOG_FORMAT` which specifies the current log format of the CSI driver. To set the default/initial log level user can set this field during driver installation.

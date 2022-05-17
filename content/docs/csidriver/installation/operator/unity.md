@@ -73,19 +73,19 @@ Execute command: ```kubectl create -f empty-secret.yaml```
 
 Users should configure the parameters in CR. The following table lists the primary configurable parameters of the Unity driver and their default values:
 
-   | Parameter                                       | Description                                                  | Required | Default               |
-   | ----------------------------------------------- | ------------------------------------------------------------ | -------- | --------------------- |
-   | ***Common parameters for node and controller*** |                                                              |          |                       |
-   | CSI_ENDPOINT                                    | Specifies the HTTP endpoint for Unity XT.                       | No       | /var/run/csi/csi.sock |
-   | X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS | Flag to enable multiple pods use the same pvc on the same node with RWO access mode | No | false |
-   | ***Controller parameters***                     |                                                              |          |                       |
-   | X_CSI_MODE                                      | Driver starting mode                                         | No       | controller            |
-   | X_CSI_UNITY_AUTOPROBE                           | To enable auto probing for driver                            | No       | true                  |
-   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Controller plugin     | No       |            |
-   | ***Node parameters***                           |                                                              |          |                       |
-   | X_CSI_MODE                                      | Driver starting mode                                         | No       | node                  |
-   | X_CSI_ISCSI_CHROOT                              | Path to which the driver will chroot before running any iscsi commands. | No       | /noderoot             |
-   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Node plugin | No      |          |            |
+   | Parameter                                       | Description                                                                 | Required | Default               |
+   | ----------------------------------------------- | --------------------------------------------------------------------------- | -------- | --------------------- |
+   | ***Common parameters for node and controller*** |                                                                             |          |                       |
+   | CSI_ENDPOINT                                    | Specifies the HTTP endpoint for Unity XT.                                   | No       | /var/run/csi/csi.sock |
+   | X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS              | Flag to enable multiple pods use same pvc on same node with RWO access mode | No       | false                 |
+   | ***Controller parameters***                     |                                                                             |          |                       |
+   | X_CSI_MODE                                      | Driver starting mode                                                        | No       | controller            |
+   | X_CSI_UNITY_AUTOPROBE                           | To enable auto probing for driver                                           | No       | true                  |
+   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Controller plugin         | No       |                       |
+   | ***Node parameters***                           |                                                                             |          |                       |
+   | X_CSI_MODE                                      | Driver starting mode                                                        | No       | node                  |
+   | X_CSI_ISCSI_CHROOT                              | Path to which the driver will chroot before running any iscsi commands      | No       | /noderoot             |
+   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Node plugin               | No       |                       |
 
 ### Example CR for Unity XT
 Refer samples from [here](https://github.com/dell/dell-csi-operator/tree/master/samples). Below is an example CR:
