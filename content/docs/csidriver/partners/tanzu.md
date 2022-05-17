@@ -3,7 +3,7 @@ title: "VMware Tanzu"
 Description: "About VMware Tanzu basic" 
 ---
  
-The CSI Driver for Dell Unity and PowerScale supports VMware Tanzu and deployment of these Tanzu clusters is done using the VMware Tanzu supervisor cluster and supervisor namespace.
+The CSI Driver for Dell Unity XT and PowerScale supports VMware Tanzu and deployment of these Tanzu clusters is done using the VMware Tanzu supervisor cluster and supervisor namespace.
 
 Currently, VMware Tanzu with normal configuration(without NAT) supports Kubernetes 1.20 and higher. 
 The CSI driver can be installed on  this cluster using Helm. Installation of CSI drivers in Tanzu via Operator has not been qualified.

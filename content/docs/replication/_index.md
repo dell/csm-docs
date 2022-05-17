@@ -16,7 +16,7 @@ applications in case of both planned and unplanned migration.
 CSM for Replication provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerScale | Unity | PowerStore | PowerFlex | PowerMax |
+| Capability | PowerScale | Unity XT | PowerStore | PowerFlex | PowerMax |
 | - | :-: | :-: | :-: | :-: | :-: |
 | Replicate data using native storage array based replication | yes | no | yes | no | yes |
 | Create `PersistentVolume` objects in the cluster representing the replicated volume | yes |  no | yes | no | yes |
@@ -82,7 +82,7 @@ the objects still exist in pairs.
 CSM for Replication provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
+| Capability | PowerMax | PowerStore | PowerScale | PowerFlex | Unity XT |
 | ---------| -------- | -------- | -------- | -------- | -------- |
 | Asynchronous replication of PVs accross K8s clusters    | yes | yes | yes | no  | no  |
 | Synchronous replication of PVs accross K8s clusters     | yes | no  | no  | no  | no  |

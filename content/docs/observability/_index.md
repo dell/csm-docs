@@ -29,7 +29,7 @@ CSM for Observability is composed of several services, each living in its own Gi
 CSM for Observability provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerMax | PowerFlex | Unity | PowerScale | PowerStore |
+| Capability | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 | - | :-: | :-: | :-: | :-: | :-: |
 | Collect and expose Volume Metrics via the OpenTelemetry Collector | no | yes | no | no | yes |
 | Collect and expose File System Metrics via the OpenTelemetry Collector | no |  no | no | no | yes |
