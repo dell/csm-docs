@@ -1,14 +1,14 @@
 ---
-title: Unity
+title: Unity XT
 description: >
-  Installing CSI Driver for Unity via Helm
+  Installing CSI Driver for Unity XT via Helm
 ---
 
-The CSI Driver for Dell Unity can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell Unity XT can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_:
 
-- CSI Driver for Unity
+- CSI Driver for Unity XT
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - Kubernetes External Snapshotter, which provides snapshot support
@@ -17,18 +17,18 @@ The controller section of the Helm chart installs the following components in a 
 
 The node section of the Helm chart installs the following component in a _DaemonSet_:
 
-- CSI Driver for Unity
+- CSI Driver for Unity XT
 - Kubernetes Node Registrar, which handles the driver registration
 
 ## Prerequisites
 
-Before you install CSI Driver for Unity, verify the requirements that are mentioned in this topic are installed and configured.
+Before you install CSI Driver for Unity XT, verify the requirements that are mentioned in this topic are installed and configured.
 
 ### Requirements
 
 * Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 * Install Helm v3
-* To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured
+* To use FC protocol, the host must be zoned with Unity XT array and Multipath needs to be configured
 * To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured 
 * To use NFS protocol, NFS utility packages needs to be installed
 * Mount propagation is enabled on container runtime that is being used
@@ -84,7 +84,7 @@ no_path_retry 10
 
 ## Install CSI Driver
 
-Install CSI Driver for Unity using this procedure.
+Install CSI Driver for Unity XT using this procedure.
 
 *Before you begin*
 
@@ -96,19 +96,19 @@ Install CSI Driver for Unity using this procedure.
 
 Procedure
 
-1. Collect information from the Unity Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the  `secret.yaml` and `myvalues.yaml` file.
+1. Collect information from the Unity XT Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the  `secret.yaml` and `myvalues.yaml` file.
 
     **Note**: 
-      * ArrayId corresponds to the serial number of Unity array.
-      * Unity Array username must have role as Storage Administrator to be able to perform CRUD operations.
+      * ArrayId corresponds to the serial number of Unity XT array.
+      * Unity XT Array username must have role as Storage Administrator to be able to perform CRUD operations.
       * If the user is using complex K8s version like "v1.21.3-mirantis-1", use below kubeVersion check in helm/csi-unity/Chart.yaml file.
-            kubeVersion: ">= 1.21.0-0 < 1.24.0-0"
+            kubeVersion: ">= 1.21.0-0 < 1.25.0-0"
 
 2. Copy the `helm/csi-unity/values.yaml` into a file named `myvalues.yaml` in the same directory of `csi-install.sh`, to customize settings for installation.
 
 3. Edit `myvalues.yaml` to set the following parameters for your installation:
    
-    The following table lists the primary configurable parameters of the Unity driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml) file in this repository.
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
@@ -176,12 +176,12 @@ Procedure
 5. Prepare the `secret.yaml`  for driver configuration.
     The following table lists driver configuration parameters for multiple storage arrays.
     
-    | Parameter                 | Description                         | Required | Default |
-    | ------------------------- | ----------------------------------- | -------- |-------- |
-    | storageArrayList.username | Username for accessing Unity system | true     | -       |
-    | storageArrayList.password | Password for accessing Unity system | true     | -       |
-    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity system| true | -   |
-    | storageArrayList.arrayId  | ArrayID for Unity system            | true     | -       |
+    | Parameter                 | Description                                    | Required | Default |
+    | ------------------------- | ---------------------------------------------- | -------- |-------- |
+    | storageArrayList.username | Username for accessing Unity XT system         | true     | -       |
+    | storageArrayList.password | Password for accessing Unity XT system         | true     | -       |
+    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity XT system| true     | -       |
+    | storageArrayList.arrayId  | ArrayID for Unity XT system                    | true     | -       |
     | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | true | true |
     | storageArrayList.isDefault| An array having isDefault=true or isDefaultArray=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | true | - |
 
@@ -343,7 +343,7 @@ Procedure
 
     At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command `kubectl get pods -n unity` to get the status of the pods and you will see the following:
     
-    * One or more Unity Controller (based on controllerCount) with 5/5 containers ready, and status displayed as Running.
+    * One or more Unity XT Controller (based on controllerCount) with 5/5 containers ready, and status displayed as Running.
     * Agent pods with 2/2 containers and the status displayed as Running.
 
 **Note**:
@@ -363,7 +363,7 @@ Procedure
 
 ## Certificate validation for Unisphere REST API calls 
 
-This topic provides details about setting up the certificate validation for the CSI Driver for Dell Unity.
+This topic provides details about setting up the certificate validation for the CSI Driver for Dell Unity XT.
 
 *Before you begin*
 
@@ -397,15 +397,15 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
 
 ## Volume Snapshot Class
 
-For CSI Driver for Unity version 1.6 and later, `dell-csi-helm-installer` does not create any Volume Snapshot  classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `csi-unity/samples/volumesnapshotclass/` folder. Use these samples to create new Volume Snapshot to provision storage.
+A wide set of annotated storage class manifests have been provided in the `csi-unity/samples/volumesnapshotclass/` folder. Use these samples to create new Volume Snapshot to provision storage.
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI Unity v2.1 driver*:
+*Upgrading from CSI Unity XT v2.1.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 or higher, before upgrading to 2.2.
+It is strongly recommended to upgrade the earlier versions of CSI Unity XT to v1.6.0 or higher, before upgrading to v2.3.0.
 
 ## Storage Classes
 
@@ -413,7 +413,7 @@ Storage Classes are an essential Kubernetes construct for Storage provisioning. 
 
 A wide set of annotated storage class manifests have been provided in the [samples/storageclass](https://github.com/dell/csi-unity/tree/master/samples/storageclass) folder. Use these samples to create new storage classes to provision storage.
 
-For CSI Driver for Unity, a wide set of annotated storage class manifests have been provided in the `csi-unity/samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
+For CSI Driver for Unity XT, a wide set of annotated storage class manifests have been provided in the `csi-unity/samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
 
 ### What happens to my existing storage classes?
 
@@ -456,9 +456,7 @@ User can update secret using the following command:
 ```
 **Note**: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
 
-## Dynamic Logging Configuration
-
-This feature is introduced in CSI Driver for unity version 2.0.0. 
+## Dynamic Logging Configuration 
 
 ### Helm based installation
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver. 

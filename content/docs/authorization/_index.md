@@ -20,7 +20,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 
 ## CSM for Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
-| Feature | PowerFlex | PowerMax | PowerScale | Unity | PowerStore |
+| Feature | PowerFlex | PowerMax | PowerScale | Unity XT | PowerStore |
 | - | - | - | - | - | - |
 | Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage | Yes | Yes | No (natively supported) | No | No |
 | Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | Yes | Yes | No (natively supported) | No | No |

@@ -27,8 +27,8 @@ Accordingly, CSM for Resiliency is adapted to and qualified with each CSI driver
 CSM for Resiliency provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability                              | PowerScale | Unity | PowerStore | PowerFlex | PowerMax |
-| --------------------------------------- | :--------: | :---: | :--------: | :-------: | :------: |
+| Capability                              | PowerScale | Unity XT | PowerStore | PowerFlex | PowerMax |
+| --------------------------------------- | :--------: | :------: | :--------: | :-------: | :------: |
 | Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | no  | yes | no | yes | no |
 | Cleanup pod artifacts from failed nodes | no         | yes   | no         | yes       | no       |
 | Revoke PV access from failed nodes      | no         | yes   | no         | yes       | no       |
@@ -48,7 +48,7 @@ CSM for Resiliency provides the following capabilities:
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex    | Unity                      |
+|               | PowerFlex    | Unity XT                   |
 | ------------- | :----------: | :------------------------: |
 | Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 |
 {{</table>}}
@@ -59,8 +59,8 @@ CSM for Resiliency supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array                     | CSI Driver   | Supported Versions |
 | --------------------------------- | :----------: | :----------------: |
-| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
-| CSI Driver for Dell Unity     | [csi-unity](https://github.com/dell/csi-unity)         | v2.0 + |
+| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0.0 + |
+| CSI Driver for Dell Unity XT  | [csi-unity](https://github.com/dell/csi-unity)         | v2.0.0 + |
 {{</table>}}
 
 ### PowerFlex Support
@@ -72,17 +72,17 @@ PowerFlex is a highly scalable array that is very well suited to Kubernetes depl
 * Low latency REST API supports fast CSI provisioning and de-provisioning operations.
 * A proprietary network protocol provided by the SDC component that can run over the same IP interface as the K8S control plane or over a separate IP interface for Array I/O.
 
-### Unity Support
+### Unity XT Support
 
-Dell Unity is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity systems are designed for all-Flash, deliver the best value in the market, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition. 
+Dell Unity XT is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity XT systems are designed for all-Flash, deliver the best value in the market, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition. 
 
-* Unity (purpose-built): A modern midrange storage solution, engineered from the groundup to meet market demands for Flash, affordability and incredible simplicity. The Unity Family is available in 12 All Flash models and 12 Hybrid models.
-* VxBlock (converged): Unity storage options are also available in Dell VxBlock System 1000.
-* UnityVSA (virtual): The Unity Virtual Storage Appliance (VSA) allows the advanced unified storage and data management features of the Unity family to be easily deployed on VMware ESXi servers, for a ‘software defined’ approach. UnityVSA is available in two editions:
+* Unity XT (purpose-built): A modern midrange storage solution, engineered from the groundup to meet market demands for Flash, affordability and incredible simplicity. The Unity XT Family is available in 12 All Flash models and 12 Hybrid models.
+* VxBlock (converged): Unity XT storage options are also available in Dell VxBlock System 1000.
+* UnityVSA (virtual): The Unity XT Virtual Storage Appliance (VSA) allows the advanced unified storage and data management features of the Unity XT family to be easily deployed on VMware ESXi servers, for a ‘software defined’ approach. UnityVSA is available in two editions:
   * Community Edition is a free downloadable 4 TB solution recommended for nonproduction use.
   * Professional Edition is a licensed subscription-based offering available at capacity levels of 10 TB, 25 TB, and 50 TB. The subscription includes access to online support resources, EMC Secure Remote Services (ESRS), and on-call software- and systems-related support.
 
-All three deployment options, i.e. Unity, UnityVSA, and Unity-based VxBlock, enjoy one architecture, one interface with consistent features and rich data services.
+All three deployment options, i.e. Unity XT, UnityVSA, and Unity-based VxBlock, enjoy one architecture, one interface with consistent features and rich data services.
 
 ## Limitations and Exclusions
 
