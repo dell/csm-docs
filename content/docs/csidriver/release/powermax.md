@@ -13,6 +13,7 @@ description: Release notes for PowerMax CSI driver
 - Added support to configure fsGroupPolicy.
 - Added support to filter topology keys based on user inputs.
 - Added support for SRDF Metro group sharing multiple namespaces.
+- Added support for Kubernetes 1.24.
 
 ### Fixed Issues
 There are no fixed issues in this release.
