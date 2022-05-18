@@ -681,3 +681,67 @@ In case blockProtocol is specified as `auto`, the driver will be able to find th
 CSI Driver for Dell Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). To enable this feature one must enable snapshot feature
 
 >Note: Volume group cannot be seen from the Kubernetes level as of now only volume group snapshots can be viewed as a CRD
+
+## Configurable Volume Attributes (Optional)
+
+The CSI PowerStore driver version 2.3.0 and above supports Configurable volume atttributes. 
+
+PowerStore array provides a set of optional volume creation attributes. These attributes can be configured for the volume (block and NFS) at the time of creation through PowerStore CSI driver. 
+These attributes can be specified as labels in PVC yaml file. The following is a sample manifest for creating volume with some of the configurable volume attributes. 
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc1
+  namespace: default
+  labels:
+    description: DB-volume
+	appliance_id: A1
+	volume_group_id: f5f9dbbd-d12f-463e-becb-2e6d0a85405e
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+        requests:
+          storage: 8Gi
+  storageClassName: powerstore-ext4
+
+```
+
+>Note: Default description value is <pvc-name>-<pvc-namespace>. 
+
+The following is the list of all the attribtues supported by PowerStore CSI driver: 
+
+1. Block Volume Attributes: 
+
+| No. | Volume Attributes |
+| --- | --- |
+| 1. | description |
+| 2. | appliance_id |
+| 3. | volume_group_id |
+| 4. | protection_policy_id |
+| 5. | performance_policy_id |
+| 6. | app_type |
+| 7. | app_type_other |
+
+2. NFS Volume Attributes: 
+
+| No. | Volume Attributes |
+| --- | --- |
+| 1. | description |
+| 2. | config_type |
+| 3. | access_policy |
+| 4. | locking_policy |
+| 5. | folder_rename_policy |
+| 6. | is_async_mtime_enabled |
+| 7. | protection_policy_id |
+| 8. | file_events_publishing_mode |
+| 9. | host_io_size |
+| 10. | flr_attributes.flr_create.mode |
+| 11. | flr_attributes.flr_create.default_retention |
+| 12. | flr_attributes.flr_create.minimum_retention |
+| 13. | flr_attributes.flr_create.maximum_retention |
+
+>Note: Refer to the PowerStore array specification for the allowed values for each attribute, at https://<array-ip>/swaggerui/. 
+>Make sure that the attributes specified are supported by the version of PowerStore array used. 
