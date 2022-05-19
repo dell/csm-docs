@@ -668,10 +668,18 @@ nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@doma
 >POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
 
 
-## NVMe/TCP Support
+## NVMe Support
 
+**NVMe/TCP Support**
 CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as `NVMeTCP`. 
-In case blockProtocol is specified as `auto`, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then FC gets the highest priority followed by iSCSI and then NVMeTCP.
 
 >Note: NVMe/TCP is not supported on RHEL 7.x versions and CoreOS. 
 >NVMe/TCP is supported with Powerstore 2.1 and above.
+
+
+**NVMe/FC Support**
+CSI Driver for Dell Powerstore 2.3.0 and above supports NVMe/FC provisioning. To enable NVMe/FC provisioning, blockProtocol on secret should be specified as `NVMeFC`.
+>Note: NVMe/FC is supported with Powerstore 3.0 and above.
+
+
+>Note: In case blockProtocol is specified as `auto`, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then NVMeFC gets the highest priority followed by NVMeTCP, then FC and then iSCSI.
