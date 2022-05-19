@@ -30,8 +30,8 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS        | PowerMax         | PowerStore       | PowerScale |
 |---------------|------------------|------------------|------------|
-| Kubernetes    | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 |
-| Red Hat OpenShift | 4.8, 4.9     | 4.8, 4.9         | 4.8, 4.9   |
+| Kubernetes    | 1.22, 1.23, 1.24 | 1.22, 1.23, 1.24 | 1.22, 1.23, 1.24 |
+| Red Hat OpenShift | 4.9, 4.10    | 4.9, 4.10        | 4.9, 4.10  |
 | RHEL          |     7.x, 8.x     |     7.x, 8.x     |  7.x, 8.x  |
 | CentOS        |     7.8, 7.9     |     7.8, 7.9     | 7.8, 7.9   |
 | Ubuntu        |       20.04      |       20.04      | 20.04      |
@@ -96,9 +96,9 @@ The following matrix provides a list of all supported versions for each Dell Sto
 
 | Platforms  | PowerMax          | PowerStore       | PowerScale       |
 | ---------- | ----------------- | ---------------- | ---------------- |
-| Kubernetes | 1.21, 1.22, 1.23  | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 |
-| RedHat Openshift |4.8, 4.9     | 4.8, 4.9         | 4.8, 4.9         |
-| CSI Driver | 2.x               | 2.x              | 2.2+             |
+| Kubernetes | 1.22, 1.23, 1.24  | 1.22, 1.23, 1.24 | 1.22, 1.23, 1.24 |
+| RedHat Openshift |4.9, 4.10    | 4.9, 4.10        | 4.9, 4.10        |
+| CSI Driver | 2.x(k8s), <br> 2.2+(OpenShift)| 2.x              | 2.2+             |
 
 For compatibility with storage arrays please refer to corresponding [CSI drivers](../csidriver/#features-and-capabilities)
 
