@@ -713,35 +713,21 @@ spec:
 
 The following is the list of all the attribtues supported by PowerStore CSI driver: 
 
-1. Block Volume Attributes: 
-
-| No. | Volume Attributes |
+| Block Volume | NFS Volume |
 | --- | --- |
-| 1. | description |
-| 2. | appliance_id |
-| 3. | volume_group_id |
-| 4. | protection_policy_id |
-| 5. | performance_policy_id |
-| 6. | app_type |
-| 7. | app_type_other |
-
-2. NFS Volume Attributes: 
-
-| No. | Volume Attributes |
-| --- | --- |
-| 1. | description |
-| 2. | config_type |
-| 3. | access_policy |
-| 4. | locking_policy |
-| 5. | folder_rename_policy |
-| 6. | is_async_mtime_enabled |
-| 7. | protection_policy_id |
-| 8. | file_events_publishing_mode |
-| 9. | host_io_size |
-| 10. | flr_attributes.flr_create.mode |
-| 11. | flr_attributes.flr_create.default_retention |
-| 12. | flr_attributes.flr_create.minimum_retention |
-| 13. | flr_attributes.flr_create.maximum_retention |
+| description | description |
+| appliance_id | config_type |
+| volume_group_id | access_policy |
+| protection_policy_id | locking_policy |
+| performance_policy_id | folder_rename_policy |
+| app_type | is_async_mtime_enabled |
+| app_type_other | protection_policy_id |
+|  | file_events_publishing_mode |
+|  | host_io_size |
+|  | flr_attributes.flr_create.mode |
+|  | flr_attributes.flr_create.default_retention |
+|  | flr_attributes.flr_create.minimum_retention |
+|  | flr_attributes.flr_create.maximum_retention |
 
 >Note: Refer to the PowerStore array specification for the allowed values for each attribute, at https://<array-ip>/swaggerui/. 
 >Make sure that the attributes specified are supported by the version of PowerStore array used. 
