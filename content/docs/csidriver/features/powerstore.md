@@ -709,25 +709,13 @@ spec:
 
 ```
 
->Note: Default description value is <pvc-name>-<pvc-namespace>. 
+>Note: Default description value is `pvcName-pvcNamespace`. 
 
 The following is the list of all the attribtues supported by PowerStore CSI driver: 
 
 | Block Volume | NFS Volume |
 | --- | --- |
-| description | description |
-| appliance_id | config_type |
-| volume_group_id | access_policy |
-| protection_policy_id | locking_policy |
-| performance_policy_id | folder_rename_policy |
-| app_type | is_async_mtime_enabled |
-| app_type_other | protection_policy_id |
-|  | file_events_publishing_mode |
-|  | host_io_size |
-|  | flr_attributes.flr_create.mode |
-|  | flr_attributes.flr_create.default_retention |
-|  | flr_attributes.flr_create.minimum_retention |
-|  | flr_attributes.flr_create.maximum_retention |
+| description <br /> appliance_id <br /> volume_group_id <br /> protection_policy_id <br /> performance_policy_id <br /> app_type <br /> app_type_other | description <br /> config_type <br /> access_policy <br /> locking_policy <br /> folder_rename_policy <br /> is_async_mtime_enabled <br /> protection_policy_id <br /> file_events_publishing_mode <br /> host_io_size <br /> flr_attributes.flr_create.mode <br /> flr_attributes.flr_create.default_retention <br /> flr_attributes.flr_create.maximum_retention <br /> flr_attributes.flr_create.minimum_retention |
 
->Note: Refer to the PowerStore array specification for the allowed values for each attribute, at https://<array-ip>/swaggerui/. 
+>Note: Refer to the PowerStore array specification for the allowed values for each attribute, at `https://<array-ip>/swaggerui/`. 
 >Make sure that the attributes specified are supported by the version of PowerStore array used. 
