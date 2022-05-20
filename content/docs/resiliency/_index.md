@@ -29,9 +29,9 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability                              | PowerScale | Unity XT | PowerStore | PowerFlex | PowerMax |
 | --------------------------------------- | :--------: | :------: | :--------: | :-------: | :------: |
-| Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | no  | yes | no | yes | no |
-| Cleanup pod artifacts from failed nodes | no         | yes   | no         | yes       | no       |
-| Revoke PV access from failed nodes      | no         | yes   | no         | yes       | no       |
+| Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | yes  | yes | no | yes | no |
+| Cleanup pod artifacts from failed nodes | yes         | yes   | no         | yes       | no       |
+| Revoke PV access from failed nodes      | yes         | yes   | no         | yes       | no       |
 {{</table>}}
 
 ## Supported Operating Systems/Container Orchestrator Platforms
@@ -61,6 +61,7 @@ CSM for Resiliency supports the following CSI drivers and versions.
 | --------------------------------- | :----------: | :----------------: |
 | CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0.0 + |
 | CSI Driver for Dell Unity XT  | [csi-unity](https://github.com/dell/csi-unity)         | v2.0.0 + |
+| CSI Driver for Dell PowerScale  | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.3.0 + |
 {{</table>}}
 
 ### PowerFlex Support
@@ -83,6 +84,14 @@ Dell Unity XT is targeted for midsized deployments, remote or branch offices, an
   * Professional Edition is a licensed subscription-based offering available at capacity levels of 10 TB, 25 TB, and 50 TB. The subscription includes access to online support resources, EMC Secure Remote Services (ESRS), and on-call software- and systems-related support.
 
 All three deployment options, i.e. Unity XT, UnityVSA, and Unity-based VxBlock, enjoy one architecture, one interface with consistent features and rich data services.
+
+### PowerScale Support
+
+PowerScale is a highly scalable NFS array that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerScale leverages the following PowerScale features:
+
+* Detection of Array I/O Network Connectivity status changes.
+* A robust mechanism to detect if Nodes are actively doing I/O to volumes.
+* Low latency REST API supports fast CSI provisioning and de-provisioning operations.
 
 ## Limitations and Exclusions
 
