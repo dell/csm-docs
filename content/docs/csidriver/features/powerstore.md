@@ -719,5 +719,6 @@ The following is the list of all the attribtues supported by PowerStore CSI driv
 
 <br>  
 
->Note: Refer to the PowerStore array specification for the allowed values for each attribute, at `https://<array-ip>/swaggerui/`. 
+**Note:**
+>Refer to the PowerStore array specification for the allowed values for each attribute, at `https://<array-ip>/swaggerui/`. 
 >Make sure that the attributes specified are supported by the version of PowerStore array used. 
