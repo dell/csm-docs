@@ -62,17 +62,22 @@ To do this, run the `systemctl enable --now iscsid` command.
 For information about configuring iSCSI, see _Dell PowerStore documentation_ on Dell Support.
 
 
-### Set up the NVMe/TCP Initiator
+### Set up the NVMe Initiator
 
-If you want to use the protocol, set up the NVMe/TCP initiators as follows:
+If you want to use the protocol, set up the NVMe initiators as follows:
 - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
 `sudo apt install nvme-cli`
 
+**Requirements for NVMeTCP**
 - Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
 ```bash
 modprobe nvme
 modprobe nvme_tcp
 ```
+
+**Requirements for NVMeFC**
+- NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
+
 
 ### Linux multipathing requirements
 Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
@@ -184,7 +189,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     - *username*, *password*: defines credentials for connecting to array.
     - *skipCertificateValidation*: defines if we should use insecure connection or not.
     - *isDefault*: defines if we should treat the current array as a default.
-    - *blockProtocol*: defines what transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).
+    - *blockProtocol*: defines what transport protocol we should use (FC, ISCSI, NVMeTCP, NVMeFC, None, or auto).
     - *nasName*: defines what NAS should be used for NFS volumes.
 	- *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
@@ -258,7 +263,7 @@ There are samples storage class yaml files available under `samples/storageclass
 allowedTopologies:
   - matchLabelExpressions: 
       - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
-# replace "-iscsi" with "-fc", "-nvme" or "-nfs" at the end to use FC, NVMe or NFS enabled hosts
+# replace "-iscsi" with "-fc", "-nvmetcp" or "-nvmefc" or "-nfs" at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts
 # replace "12.34.56.78" with PowerStore endpoint IP
         values:
           - "true"

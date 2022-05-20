@@ -62,6 +62,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Fibre Channel | yes              | N/A                | yes              | N/A              | yes              |
 | iSCSI         | yes              | N/A                | yes              | N/A              | yes              |
 | NVMeTCP       | N/A              | N/A                | N/A              | N/A              | yes              |
+| NVMeFC        | N/A              | N/A                | N/A              | N/A              | yes              |
 | NFS           | N/A              | N/A                | yes              | yes              | yes              |
 | Other         | N/A              | ScaleIO protocol   | N/A              | N/A              | N/A              |
 | Supported FS  | ext4 / xfs       | ext4 / xfs         | ext3 / ext4 / xfs / NFS | NFS       | ext3 / ext4 / xfs / NFS |
