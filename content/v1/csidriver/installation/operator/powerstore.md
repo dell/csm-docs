@@ -5,7 +5,7 @@ description: >
 ---
 ## Installing CSI Driver for PowerStore via Operator
 
-The CSI Driver for Dell EMC PowerStore can be installed via the Dell CSI Operator.
+The CSI Driver for Dell PowerStore can be installed via the Dell CSI Operator.
 
 To deploy the Operator, follow the instructions available [here](../).
 
@@ -30,8 +30,10 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
         password: "password"                      # password for connecting to API
         skipCertificateValidation: true           # indicates if client side validation of (management)server's certificate can be skipped
         isDefault: true                           # treat current array as a default (would be used by storage classes without arrayID parameter)
-        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, None, or auto)
+        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
         nasName: "nas-server"                     # what NAS should be used for NFS volumes
+        nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
+                                                  # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
    ```
    Change the parameters with relevant values for your PowerStore array. 
 
@@ -56,21 +58,122 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
    ```
    
 4. Create a Custom Resource (CR) for PowerStore using the sample files provided    [here](https://github.com/dell/dell-csi-operator/tree/master/samples). 
+
+Below is a sample CR:
+
+```yaml
+apiVersion: storage.dell.com/v1
+kind: CSIPowerStore
+metadata:
+  name: test-powerstore
+  namespace: test-powerstore
+spec:
+  driver:
+    configVersion: v2.2.0
+    replicas: 2
+    dnsPolicy: ClusterFirstWithHostNet
+    forceUpdate: false
+    fsGroupPolicy: ReadWriteOnceWithFSType
+    common:
+      image: "dellemc/csi-powerstore:v2.2.0"
+      imagePullPolicy: IfNotPresent
+      envs:
+        - name: X_CSI_POWERSTORE_NODE_NAME_PREFIX
+          value: "csi"
+        - name: X_CSI_FC_PORTS_FILTER_FILE_PATH
+          value: "/etc/fc-ports-filter"
+    sideCars:
+      - name: external-health-monitor
+        args: ["--monitor-interval=60s"]
+
+    controller:
+      envs:
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
+          value: "false"
+        - name: X_CSI_NFS_ACLS
+          value: "0777"
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      tolerations:
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
+          effect: "NoSchedule"
+
+    node:
+      envs:
+        - name: "X_CSI_POWERSTORE_ENABLE_CHAP"
+          value: "true"
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
+          value: "false"
+      nodeSelector:
+        node-role.kubernetes.io/worker: ""
+
+      tolerations:
+        - key: "node-role.kubernetes.io/worker"
+          operator: "Exists"
+          effect: "NoSchedule"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: powerstore-config-params
+  namespace: test-powerstore
+data:
+  driver-config-params.yaml: |
+    CSI_LOG_LEVEL: "debug"
+    CSI_LOG_FORMAT: "JSON"
+```
+
 5. Users must configure the parameters in CR. The following table lists the primary configurable parameters of the PowerStore driver and their default values:
    
-   | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |
-   | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be pending state till new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
-   | namespace | Specifies namespace where the drive will be installed | Yes | "test-powerstore" |
-   | ***Common parameters for node and controller*** |
-   | X_CSI_POWERSTORE_NODE_NAME_PREFIX | Prefix to add to each node registered by the CSI driver | Yes | "csi-node" 
-   | X_CSI_FC_PORTS_FILTER_FILE_PATH | To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
-   | ***Controller parameters*** |
-   | X_CSI_POWERSTORE_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | " "|
-   | ***Node parameters*** |
-   | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false | 
+| Parameter | Description | Required | Default |
+| --------- | ----------- | -------- |-------- |
+| replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be pending state till new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
+| namespace | Specifies namespace where the drive will be installed | Yes | "test-powerstore" |
+| fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No |"ReadWriteOnceWithFSType"|
+| ***Common parameters for node and controller*** |
+| X_CSI_POWERSTORE_NODE_NAME_PREFIX | Prefix to add to each node registered by the CSI driver | Yes | "csi-node" 
+| X_CSI_FC_PORTS_FILTER_FILE_PATH | To set path to the file which provides a list of WWPN which should be used by the driver for FC connection on this node | No | "/etc/fc-ports-filter" |
+| ***Controller parameters*** |
+| X_CSI_POWERSTORE_EXTERNAL_ACCESS | allows specifying additional entries for hostAccess of NFS volumes. Both single IP address and subnet are valid entries | No | " "|
+| X_CSI_NFS_ACLS | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
+| ***Node parameters*** |
+| X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false | 
 6.  Execute the following command to create PowerStore custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerStore driver.
       - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n <driver-namespace>`
+
+## Volume Health Monitoring
+
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.
+   ```yaml
+ sideCars:
+   # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
+   # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED to "true".
+   - name: external-health-monitor
+     args: ["--monitor-interval=60s"]
+ controller:
+   envs:
+	 # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from Controller plugin- volume status, volume condition.
+	 # Install the 'external-health-monitor' sidecar accordingly.
+	 # Allowed values:
+	 #   true: enable checking of health condition of CSI volumes
+	 #   false: disable checking of health condition of CSI volumes
+	 # Default value: false
+	 - name: X_CSI_HEALTH_MONITOR_ENABLED
+	   value: "false"
+ node:
+   envs:
+     # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin- volume usage, volume condition
+     # Allowed values:
+     #   true: enable checking of health condition of CSI volumes
+     #   false: disable checking of health condition of CSI volumes
+     # Default value: false
+     - name: X_CSI_HEALTH_MONITOR_ENABLED
+       value: "false"
+   ```
 
 ## Dynamic Logging Configuration
 
@@ -85,4 +188,4 @@ kubectl edit configmap -n csi-powerstore powerstore-config-params
 ```
 **Note** : 
   1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-  2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+  2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.

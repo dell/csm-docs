@@ -7,8 +7,7 @@ description: Installation of CSM for Replication using repctl
 
 ## Install Replication Walkthrough
 
-Here are simple steps on how you can start using Container Storage Modules (CSM) for Replication with
-help from `repctl`
+You can start using Container Storage Modules (CSM) for Replication with help from `repctl` using these simple steps:
 
 1. Prepare admin Kubernetes clusters configs
 2. Add admin configs as clusters to `repctl`
@@ -43,3 +42,6 @@ help from `repctl`
       ```shell
       ./repctl create pvc --rg <rg-name> -t <target-namespace> --dry-run=false
       ```
+
+
+> Note: all `repctl` output is saved alongside with `repctl` binary in the `repctl.log` file and can be attached to any installation troubleshooting requests 

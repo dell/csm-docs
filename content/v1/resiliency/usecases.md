@@ -36,3 +36,5 @@ CSM for Resiliency's design is focused on detecting the following types of hardw
 2. K8S Control Plane Network Failure. Control Plane Network Failure often has the same K8S failure signature (the node is tainted with NoSchedule or NoExecute). However, if there is a separate Array I/O interface, CSM for Resiliency can often detect that the Array I/O Network may be active even though the Control Plane Network is down. 
 
 3. Array I/O Network failure is detected by polling the array to determine if the array has a healthy connection to the node. The capabilities to do this vary greatly by array and communication protocol type (Fibre Channel, iSCSI, NFS, NVMe, or PowerFlex SDC IP protocol). By monitoring the Array I/O Network separately from the Control Plane Network, CSM for Resiliency has two different indicators of whether the node is healthy or not.
+
+4. K8S Control Plane Failure. Control Plane Failure is defined as failure of kubelet in a given node. K8S Control Plane failures are generally discovered by receipt of a Node event with a NoSchedule or NoExecute taint, or detection of such a taint when retrieving the Node via the K8S API.
