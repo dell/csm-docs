@@ -150,7 +150,7 @@ User can query for CSI-PowerScale driver using the following command:
    3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
 
 ## Volume Health Monitoring
-This feature is introduced in CSI Driver for Unity XT version 2.1.0.
+This feature is introduced in CSI Driver for PowerScale version 2.1.0.
 
 ### Operator based installation
 
