@@ -275,7 +275,7 @@ Create the karavi-authorization-config secret using the following command:
 >__Note__: Follow the steps below for additional configurations to one or more of the supported CSI drivers. 
 #### PowerFlex
 
-Please refer to step 5 in the [installation steps for PowerFlex](../../csidriver/installation/helm/powerflex) to edit the parameters in samples/config.yaml file to communicate with the sidecar.
+Please refer to step 5 in the [installation steps for PowerFlex](../../../csidriver/installation/helm/powerflex) to edit the parameters in samples/config.yaml file to communicate with the sidecar.
 
 1. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
 
@@ -283,14 +283,14 @@ Please refer to step 5 in the [installation steps for PowerFlex](../../csidriver
 
     `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl apply -f -`
 
-Please refer to step 9 in the [installation steps for PowerFlex](../../csidriver/installation/helm/powerflex) to edit the parameters in *myvalues.yaml* file to communicate with the sidecar.
+Please refer to step 9 in the [installation steps for PowerFlex](../../../csidriver/installation/helm/powerflex) to edit the parameters in *myvalues.yaml* file to communicate with the sidecar.
 
 3. Enable CSM for Authorization and provide *proxyHost* address 
 
 4. Install the CSI PowerFlex driver
 #### PowerMax
 
-Please refer to step 7 in the [installation steps for PowerMax](../../csidriver/installation/helm/powermax) to edit the parameters in *my-powermax-settings.yaml* to communicate with the sidecar. 
+Please refer to step 7 in the [installation steps for PowerMax](../../../csidriver/installation/helm/powermax) to edit the parameters in *my-powermax-settings.yaml* to communicate with the sidecar. 
 
 1. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
 
@@ -300,7 +300,7 @@ Please refer to step 7 in the [installation steps for PowerMax](../../csidriver/
 
 #### PowerScale
 
-Please refer to step 5 in the [installation steps for PowerScale](../../csidriver/installation/helm/isilon) to edit the parameters in *my-isilon-settings.yaml* to communicate with the sidecar. 
+Please refer to step 5 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in *my-isilon-settings.yaml* to communicate with the sidecar. 
 
 1. Update *endpointPort* to match the endpoint port number set in samples/secret/karavi-authorization-config.json
 
@@ -310,7 +310,7 @@ Please refer to step 5 in the [installation steps for PowerScale](../../csidrive
 
 2. Enable CSM for Authorization and provide *proxyHost* address 
 
-Please refer to step 6 in the [installation steps for PowerScale](../../csidriver/installation/helm/isilon) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
+Please refer to step 6 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
 
 3. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
 
