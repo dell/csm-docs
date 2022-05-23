@@ -3,20 +3,14 @@ title: Deployment
 linktitle: Deployment 
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Deployment
+  Dell Container Storage Modules (CSM) for Observability Deployment
 ---
 
 CSM for Observability can be deployed in one of three ways:  
 
-- [CSM Installer](../../deployment) (*Recommended installation method*)
 - [Helm](./helm)
 - [CSM for Observability Installer](./online)
 - [CSM for Observability Offline Installer](./offline)
-
-## Prerequisites 
-
-- Helm 3.3
-- The deployment of one or more [supported](../#supported-csi-drivers) Dell EMC CSI drivers
 
 ## Post Installation Dependencies
 
@@ -24,22 +18,23 @@ The following third-party components are required in the same Kubernetes cluster
 
 * [Prometheus](#prometheus)
 * [Grafana](#grafana)
+* [Other Deployment Methods](#other-deployment-methods)
 
-These components must be deployed according to the specifications defined below.
+There are various ways to deploy these components. We recommend following the Helm deployments according to the specifications defined below. 
 
 **Tip**: CSM for Observability must be deployed first. Once the module has been deployed, you can proceed to deploying/configuring Prometheus and Grafana.
 
 ### Prometheus
 
-The Prometheus service should be running on the same Kubernetes cluster as the CSM for Observability services. As part of the CSM for Observability deployment, the OpenTelemetry Collector gets deployed.  The OpenTelemetry Collector is what CSM for Observability pushes metrics so that the metrics can be consumed by Prometheus.  This means that Prometheus must be configured to scrape the metrics data from the OpenTelemetry Collector.
+The Prometheus service should be running on the same Kubernetes cluster as the CSM for Observability services. As part of the CSM for Observability deployment, the OpenTelemetry Collector gets deployed. CSM for Observability pushes metrics to the OpenTelemetry Collector where the metrics are consumed by Prometheus. Prometheus must be configured to scrape the metrics data from the OpenTelemetry Collector.
 
 | Supported Version | Image                   | Helm Chart                                                   |
 | ----------------- | ----------------------- | ------------------------------------------------------------ |
-| 2.22.0           | prom/prometheus:v2.22.0 | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
+| 2.23.0           | prom/prometheus:v2.23.0 | [Prometheus Helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) |  
 
 **Note**: It is the user's responsibility to provide persistent storage for Prometheus if they want to preserve historical data.
 
-#### Prometheus Deployment
+#### Prometheus Helm Deployment 
 
 Here is a sample minimal configuration for Prometheus. Please note that the configuration below uses insecure skip verify. If you wish to properly configure TLS, you will need to provide a ca_file in the Prometheus configuration. The certificate provided as part of the CSM for Observability deployment should be signed by this same CA. For more information about Prometheus configuration, see [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration).
 
@@ -62,24 +57,22 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
       enabled: true
       image:
         repository: quay.io/prometheus/prometheus
-        tag: v2.22.0
+        tag: v2.23.0
         pullPolicy: IfNotPresent
       persistentVolume:
         enabled: false
       service:
         type: NodePort
         servicePort: 9090
-    serverFiles:
-      prometheus.yml:
-        scrape_configs:
-          - job_name: 'karavi-metrics-powerflex'
-            scrape_interval: 5s
-            scheme: https
-            static_configs:
-              - targets: ['otel-collector:8443']
-            tls_config:
-              insecure_skip_verify: true
-    ```
+    extraScrapeConfigs: |
+      - job_name: 'karavi-metrics-[CSI-DRIVER]'
+        scrape_interval: 5s
+        scheme: https
+        static_configs:
+          - targets: ['otel-collector:8443']
+        tls_config:
+          insecure_skip_verify: true
+   ```
 
 2. If using Rancher, create a ServiceMonitor.
 
@@ -117,7 +110,7 @@ Here is a sample minimal configuration for Prometheus. Please note that the conf
     On your terminal, run the command below:
 
     ```terminal
-    helm install prometheus prometheus-community/prometheus -n [CSM_NAMESPACE] --create-namespace -f prometheus-values.yaml
+    helm install prometheus prometheus-community/prometheus -n [CSM_NAMESPACE] -f prometheus-values.yaml
     ```
 
 ### Grafana
@@ -156,7 +149,7 @@ Settings for the Grafana SimpleJson data source:
 | With CA Cert        | Enabled (If using CA certificate) |
 
 
-#### Grafana Deployment
+#### Grafana Helm Deployment
 
 Below are the steps to deploy a new Grafana instance into your Kubernetes cluster:
 
@@ -192,7 +185,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
 
 2. Create a values file.
 
-    Create a Config file named `grafana-configmap.yaml` The file should look like this:
+    Create a Config file named `grafana-values.yaml` The file should look like this:
 
     ```yaml
     # grafana-values.yaml 
@@ -234,7 +227,7 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
         - name: Prometheus
           type: prometheus
           access: proxy
-          url: 'http://prometheus:9090'
+          url: 'http://prometheus-server:9090'
           isDefault: null
           version: 1
           editable: true
@@ -273,6 +266,11 @@ Below are the steps to deploy a new Grafana instance into your Kubernetes cluste
     helm install grafana grafana/grafana -n [CSM_NAMESPACE] -f grafana-values.yaml
     ```
 
+### Other Deployment Methods
+
+- [Grafana Labs Operator Deployment](https://grafana.com/docs/grafana-cloud/kubernetes/prometheus/prometheus_operator/)
+- [Rancher Monitoring and Alerting Deployment](https://rancher.com/docs/rancher/v2.6/en/monitoring-alerting/)
+
 ## Importing CSM for Observability Dashboards
 
 Once Grafana is properly configured, you can import the pre-built observability dashboards. Log into Grafana and click the + icon in the side menu. Then click Import. From here you can upload the JSON files or paste the JSON text directly into the text area.  Below are the locations of the dashboards that can be imported:
@@ -283,7 +281,7 @@ Once Grafana is properly configured, you can import the pre-built observability 
 | [PowerFlex: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/volume_io_metrics.json) | Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume |
 | [PowerFlex: Storage Pool Consumption By CSI Driver](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/storage_consumption.json) | Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct. |
 | [PowerStore: I/O Performance by Provisioned Volume](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/volume_io_metrics.json) | *As of Release 0.4.0:* Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume |
-| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json) | Provides visibility into Dell EMC CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
+| [CSI Driver Provisioned Volume Topology](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json) | Provides visibility into Dell CSI (Container Storage Interface) driver provisioned volume characteristics in Kubernetes correlated with volumes on the storage system. |
 
 ## Dynamic Configuration
 
@@ -400,7 +398,7 @@ In this case, all storage system requests made by CSM for Observability will be 
     ```
 
 #### Update Storage Systems
-If the list of storage systems managed by a Dell EMC CSI Driver have changed, the following steps can be performed to update CSM for Observability to reference the updated systems:
+If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update CSM for Observability to reference the updated systems:
 
 1. Delete the current `karavi-authorization-config` Secret from the CSM namespace.
     ```console
@@ -416,26 +414,26 @@ If the list of storage systems managed by a Dell EMC CSI Driver have changed, th
 
 In this case all storage system requests made by CSM for Observability will not be routed through the Authorization module. The following must be performed:
 
-#### CSI Driver for Dell EMC PowerFlex
+#### CSI Driver for Dell PowerFlex
 
 1. Delete the current `vxflexos-config` Secret from the CSM namespace.
     ```console
     $ kubectl delete secret vxflexos-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `vxflexos-config` Secret from the CSI Driver for Dell EMC PowerFlex namespace to the CSM namespace.
+2. Copy the `vxflexos-config` Secret from the CSI Driver for Dell PowerFlex namespace to the CSM namespace.
     ```console
     $ kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-### CSI Driver for Dell EMC PowerStore
+### CSI Driver for Dell PowerStore
 
 1. Delete the current `powerstore-config` Secret from the CSM namespace.
     ```console
     $ kubectl delete secret powerstore-config -n [CSM_NAMESPACE]
     ```
 
-2. Copy the `powerstore-config` Secret from the CSI Driver for Dell EMC PowerStore namespace to the CSM namespace.
+2. Copy the `powerstore-config` Secret from the CSI Driver for Dell PowerStore namespace to the CSM namespace.
     ```console
     $ kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```

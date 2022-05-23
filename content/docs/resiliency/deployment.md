@@ -12,6 +12,8 @@ For information on the PowerFlex CSI driver, see [PowerFlex CSI Driver](https://
 
 For information on the Unity XT CSI driver, see [Unity XT CSI Driver](https://github.com/dell/csi-unity).
 
+For information on the PowerScale CSI driver, see [PowerScale CSI Driver](https://github.com/dell/csi-powerscale).
+
 Configure all the helm chart parameters described below before installing the drivers.
 
 ## Helm Chart Installation
@@ -31,6 +33,7 @@ podmon:
       - "--mode=controller"
       - "--skipArrayConnectionValidation=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
   node:
     args:
       - "--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
@@ -38,6 +41,7 @@ podmon:
       - "--mode=node"
       - "--leaderelection=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
 
 ```
 
@@ -59,7 +63,7 @@ To install CSM for Resiliency with the driver, the following changes are require
 | skipArrayConnectionValidation | Optional | Boolean value that if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod. If set to true will cause controllerPodCleanup on K8S Control Plane failure (kubelet service down). | controller |
 | labelKey | Optional | String value that sets the label key used to denote pods to be monitored by CSM for Resiliency. It will make life easier if this key is the same for all driver types, and drivers are differentiated by different labelValues (see below). If the label keys are the same across all drivers you can do `kubectl get pods -A -l labelKey` to find all the CSM for Resiliency protected pods. labelKey defaults to "podmon.dellemc.com/driver". | controller & node |
 | labelValue | Required | String that sets the value that denotes pods to be monitored by CSM for Resiliency. This must be specific for each driver. Defaults to "csi-vxflexos" for CSI Driver for Dell PowerFlex and "csi-unity" for CSI Driver for Dell Unity XT | controller & node |
-| arrayConnectivityPollRate | Optional | The minimum polling rate in seconds to determine if the array has connectivity to a node. Should not be set to less than 5 seconds. See the specific section for each array type for additional guidance. | controller |
+| arrayConnectivityPollRate | Optional | The minimum polling rate in seconds to determine if the array has connectivity to a node. Should not be set to less than 5 seconds. See the specific section for each array type for additional guidance. | controller & node |
 | arrayConnectivityConnectionLossThreshold | Optional | Gives the number of failed connection polls that will be deemed to indicate array connectivity loss. Should not be set to less than 3. See the specific section for each array type for additional guidance. | controller |
 | driver-config-params | Required | String that set the path to a file containing configuration parameter(for instance, Log levels) for a driver.  | controller & node |
 
@@ -82,6 +86,7 @@ podmon:
       - "-arrayConnectivityConnectionLossThreshold=3"
       - "--skipArrayConnectionValidation=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
   node:
     args:
       - "-csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
@@ -89,6 +94,7 @@ podmon:
       - "-mode=node"
       - "-leaderelection=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
 
 ```
 
@@ -108,6 +114,7 @@ podmon:
        - "-mode=controller"
        - "--skipArrayConnectionValidation=false"
        - "--driver-config-params=/unity-config/driver-config-params.yaml"
+       - "--driverPodLabelValue=dell-storage"
    node:
      args:
        - "-csisock=unix:/var/lib/kubelet/plugins/unity.emc.dell.com/csi_sock"
@@ -116,7 +123,38 @@ podmon:
        - "-mode=node"
        - "-leaderelection=false"
        - "--driver-config-params=/unity-config/driver-config-params.yaml"
+       - "--driverPodLabelValue=dell-storage"
 
+```
+
+## PowerScale Specific Recommendations
+
+Here is a typical installation used for testing:
+
+```yaml
+podmon:
+  image: dellemc/podmon
+  enabled: true
+  controller:
+    args:
+      - "-csisock=unix:/var/run/csi/csi.sock"
+      - "--labelvalue=csi-isilon"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-isilon.dellemc.com"
+      - "--mode=controller"
+      - "--skipArrayConnectionValidation=false"
+      - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
+  node:
+    args:
+      - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
+      - "--labelvalue=csi-isilon"
+      - "--arrayConnectivityPollRate=60"
+      - "--driverPath=csi-isilon.dellemc.com"
+      - "--mode=node"
+      - "--leaderelection=false"
+      - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
 ```
 
 ## Dynamic parameters

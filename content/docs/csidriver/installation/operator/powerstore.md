@@ -30,7 +30,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
         password: "password"                      # password for connecting to API
         skipCertificateValidation: true           # indicates if client side validation of (management)server's certificate can be skipped
         isDefault: true                           # treat current array as a default (would be used by storage classes without arrayID parameter)
-        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
+        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, NVMeFC, None, or auto)
         nasName: "nas-server"                     # what NAS should be used for NFS volumes
         nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
                                                   # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.

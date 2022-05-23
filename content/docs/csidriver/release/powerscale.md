@@ -8,10 +8,11 @@ description: Release notes for PowerScale CSI driver
 ### New Features/Changes
 
 - Removed beta volumesnapshotclass sample files.
+- Added support for Kubernetes 1.24.
+- Added support to increase volume path limit.
 
 ### Fixed Issues
 
-- CSI Driver installation fails with the error message "error getting FQDN".
 
 ### Known Issues
 | Issue                                                                                                                                                                                                                               | Resolution or workaround, if known                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
