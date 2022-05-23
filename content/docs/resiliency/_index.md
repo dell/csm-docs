@@ -37,12 +37,12 @@ CSM for Resiliency provides the following capabilities:
 ## Supported Operating Systems/Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| COP/OS     | Supported Versions |
-| ---------- | :----------------: |
-| Kubernetes | 1.21, 1.22, 1.23   |
-| Red Hat OpenShift | 4.8, 4.9    |
-| RHEL       |     7.x, 8.x       |
-| CentOS     |     7.8, 7.9       |
+| COP/OS            | Supported Versions |
+| ----------------- | :----------------: |
+| Kubernetes        | 1.22, 1.23, 1.24   |
+| Red Hat OpenShift | 4.8, 4.9, 4.10     |
+| RHEL              |     7.x, 8.x       |
+| CentOS            |     7.8, 7.9       |
 {{</table>}}
 
 ## Supported Storage Platforms
