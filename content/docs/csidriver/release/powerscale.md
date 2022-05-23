@@ -10,6 +10,7 @@ description: Release notes for PowerScale CSI driver
 - Removed beta volumesnapshotclass sample files.
 - Added support for Kubernetes 1.24.
 - Added support to increase volume path limit.
+- Added support for OpenShift 4.10.
 
 ### Fixed Issues
 
