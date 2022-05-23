@@ -33,8 +33,8 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes    | 1.21, 1.22, 1.23 |
-| Red Hat OpenShift | 4.8, 4.9|
+| Kubernetes    | 1.21, 1.22, 1.23, 1.24 |
+| Red Hat OpenShift | 4.9, 4.10|
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
 {{</table>}}
@@ -68,7 +68,7 @@ CSM for Authorization consists of 2 components - the Authorization sidecar and t
 | Authorization Sidecar Image Tag | Authorization Proxy Server Version |
 | ------------------------------- | ---------------------------------- |
 | dellemc/csm-authorization-sidecar:v1.0.0 | v1.0.0, v1.1.0 |
-| dellemc/csm-authorization-sidecar:v1.2.0 | v1.1.0, v1.2.0 |
+| dellemc/csm-authorization-sidecar:v1.2.0 | v1.1.0, v1.2.0, v1.3.0 |
 {{</table>}}
 ## Roles and Responsibilities
 

@@ -36,6 +36,7 @@ If you feel that something is unclear or missing in this document, please open u
 | [karavictl tenant get](#karavictl-tenant-get) | Get a tenant resource within CSM |
 | [karavictl tenant list](#karavictl-tenant-list) | Lists tenant resources within CSM |
 | [karavictl tenant get](#karavictl-tenant-get) | Get a tenant resource within CSM |
+| [karavictl tenant revoke](#karavictl-tenant-revoke) | Get a tenant resource within CSM |
 | [karavictl tenant delete](#karavictl-tenant-delete) | Deletes a tenant resource within CSM |
 
 
@@ -951,6 +952,44 @@ $ karavictl tenant list
 }
 
 ```
+
+
+
+---
+
+
+
+### karavictl tenant revoke
+
+Revokes access for a tenant
+
+##### Synopsis
+
+Revokes access to storage resources for a tenant
+
+```
+karavictl tenant revoke [flags]
+```
+
+##### Options
+
+```
+  -h, --help   help for create
+  -n, --name string   Tenant name
+```
+
+##### Options inherited from parent commands
+
+```
+      --addr string     Address of the server (default "localhost:443")
+      --config string   config file (default is $HOME/.karavictl.yaml)
+```
+
+##### Output
+```
+$ karavictl tenant revoke --name Alice
+```
+On success, there will be no output.
 
 
 

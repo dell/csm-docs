@@ -46,8 +46,8 @@ CSM for Observability provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes    | 1.21, 1.22, 1.23 |
-| Red Hat OpenShift | 4.8, 4.9 |
+| Kubernetes    | 1.21, 1.22, 1.23, 1.24 |
+| Red Hat OpenShift | 4.9, 4.10 |
 | Rancher Kubernetes Engine | yes | 
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
@@ -79,7 +79,7 @@ CSM for Observability provides Kubernetes administrators with the topology data 
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Namespace                  | The namespace associated with the persistent volume claim                                                                                          |
 | Persistent Volume          | The name of the persistent volume                                                                                                                  |
-| Status                     | The status of the persistent volume. "Released" indicating the persistent volume has a claim. "Bound" indicating the persistent volume has a claim |
+| Status                     | The status of the persistent volume. "Released" indicating the persistent volume does not have a claim. "Bound" indicating the persistent volume has a claim |
 | Persistent Volume Claim    | The name of the persistent volume claim associated with the persistent volume                                                                      |
 | CSI Driver                 | The name of the CSI driver that was responsible for provisioning the volume on the storage system                                                  |
 | Created                    | The date the persistent volume was created                                                                                                         |
