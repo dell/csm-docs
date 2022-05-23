@@ -178,35 +178,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 | Parameter | Description  | Required   | Default  |
 |-----------|--------------|------------|----------|
-| kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-| imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
-| clusterPrefix | Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters. | Yes  | "ABC" |
-| logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
-| logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
-| kubeletConfigDir | kubelet config directory path. Ensure that the config.yaml file is present at this path. | Yes | /var/lib/kubelet |
-| defaultFsType | Used to set the default FS type for external provisioner | Yes | ext4 |
-| portGroups | List of comma-separated port group names. Any port group that is specified here must be present on all the arrays that the driver manages.     | For iSCSI Only | "PortGroup1, PortGroup2, PortGroup3" |
-| skipCertificateValidation | Skip client-side TLS verification of Unisphere certificates | No | "True" |
-| transportProtocol  | Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.| No | Empty|
-| nodeNameTemplate | Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.  | No | Empty|
-| fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
-| images | Defines the container image, used for the driver container.  | Yes | driverRepository: dellemc |
-| **controller** | Allows configuration of the controller-specific parameters.| - | - |
-| controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
-| volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
-| snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
-| snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
-| resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
-| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
-| healthMonitor.interval | Interval of monitoring volume health condition | No | 60s |
-| nodeSelector | Define node selection constraints for pods of controller deployment | No | |
-| tolerations | Define tolerations for the controller deployment, if required | No | |
-| **node** | Allows configuration of the node-specific parameters.| - | - |
-| tolerations | Add tolerations as per requirement | No | - |
-| nodeSelector | Add node selectors as per requirement | No | - |
-| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
-| topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy | - | - |
 |defaultCredentialsSecret| This secret name refers to:<br> 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.<br>2. The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>3. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
@@ -223,6 +194,36 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | maxActiveWrite | This refers to the maximum concurrent WRITE request handled by the reverse proxy.| No | 4 |
 | maxOutStandingRead | This refers to maximum queued READ request when reverse proxy receives more than _maxActiveRead_ requests. | No | 50 |
 | maxOutStandingWrite| This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.| No | 50 | 
+| kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
+| imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
+| clusterPrefix | Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters. | Yes  | "ABC" |
+| logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
+| logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
+| kubeletConfigDir | kubelet config directory path. Ensure that the config.yaml file is present at this path. | Yes | /var/lib/kubelet |
+| defaultFsType | Used to set the default FS type for external provisioner | Yes | ext4 |
+| portGroups | List of comma-separated port group names. Any port group that is specified here must be present on all the arrays that the driver manages.     | For iSCSI Only | "PortGroup1, PortGroup2, PortGroup3" |
+| skipCertificateValidation | Skip client-side TLS verification of Unisphere certificates | No | "True" |
+| transportProtocol  | Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.| No | Empty|
+| nodeNameTemplate | Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.  | No | Empty|
+| fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
+| images | Defines the container images used by the driver.  | - | - |
+| driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
+| **controller** | Allows configuration of the controller-specific parameters.| - | - |
+| controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
+| volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
+| snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
+| snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
+| resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
+| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| healthMonitor.interval | Interval of monitoring volume health condition | No | 60s |
+| nodeSelector | Define node selection constraints for pods of controller deployment | No | |
+| tolerations | Define tolerations for the controller deployment, if required | No | |
+| **node** | Allows configuration of the node-specific parameters.| - | - |
+| tolerations | Add tolerations as per requirement | No | - |
+| nodeSelector | Add node selectors as per requirement | No | - |
+| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
 | enabled |  Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.<br>**NOTE:** If not enabled, then there is no requirement to configure any of the following values. | No | "False" |
 | image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.1.0 |
