@@ -182,7 +182,7 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 * Modifying the installation directly via `kubectl edit`
     For example - If the name of the installed PowerScale driver is powerscale, then run
     ```
-    # Replace driver-name with the driver name and driver-namespace with the namespace where the PowerScale driver is installed
+    # Replace driver-namespace with the namespace where the PowerScale driver is installed
     $ kubectl edit csm/powerscale -n <driver-namespace>
     ```
     and modify the installation
