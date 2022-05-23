@@ -115,7 +115,7 @@ metadata:
   namespace: test-powermax # <- Set the namespace to where you will install the CSI PowerMax driver
 spec:
   # Image for CSI PowerMax ReverseProxy
-  image: dellemc/csipowermax-reverseproxy:v1.4.0 # <- CSI PowerMax Reverse Proxy image
+  image: dellemc/csipowermax-reverseproxy:v2.1.0 # <- CSI PowerMax Reverse Proxy image
   imagePullPolicy: Always
   # TLS secret which contains SSL certificate and private key for the Reverse Proxy server
   tlsSecret: csirevproxy-tls-secret

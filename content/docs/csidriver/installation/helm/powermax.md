@@ -181,14 +181,17 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
 | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
 | clusterPrefix | Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters. | Yes  | "ABC" |
+| logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
+| logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
+| kubeletConfigDir | kubelet config directory path. Ensure that the config.yaml file is present at this path. | Yes | /var/lib/kubelet |
 | defaultFsType | Used to set the default FS type for external provisioner | Yes | ext4 |
 | portGroups | List of comma-separated port group names. Any port group that is specified here must be present on all the arrays that the driver manages.     | For iSCSI Only | "PortGroup1, PortGroup2, PortGroup3" |
-| storageResourcePool | This parameter must mention one of the SRPs on the PowerMax array that the symmetrixID specifies. This value is used to create the default storage class. | Yes| "SRP_1" |
-| serviceLevel  | This parameter must mention one of the Service Levels on the PowerMax array. This value is used to create the default storage class.   | Yes| "Bronze"     |
 | skipCertificateValidation | Skip client-side TLS verification of Unisphere certificates | No | "True" |
 | transportProtocol  | Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.| No | Empty|
 | nodeNameTemplate | Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.  | No | Empty|
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
+| images | Defines the container image, used for the driver container.  | Yes | driverRepository: dellemc |
 | **controller** | Allows configuration of the controller-specific parameters.| - | - |
 | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
 | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
@@ -222,7 +225,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | maxOutStandingWrite| This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.| No | 50 | 
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
 | enabled |  Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.<br>**NOTE:** If not enabled, then there is no requirement to configure any of the following values. | No | "False" |
-| image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v1.4.0 |
+| image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.1.0 |
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
@@ -232,6 +235,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
+| **replication** | [Replication](../../../../replication/deployment) is an optional feature to enable replication & disaster recovery capabilities of PowerMax to Kubernetes clusters.| - | - |
+| enabled                  | A boolean that enables/disables replication feature. |  No      |   false   |
+| image | Image for dell-csi-replicator sidecar. | No | " " |
+| replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
+| replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
 
 8. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml`
 9. Or you can also install the driver using standalone helm chart using the command `helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax`
@@ -245,6 +253,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 - If the user is using complex K8s version like “v1.22.3-mirantis-1”, use below kubeVersion check in [helm Chart](https://github.com/dell/csi-powermax/blob/main/helm/csi-powermax/Chart.yaml) file. kubeVersion: “>= 1.22.0-0 < 1.25.0-0”.
 - User should provide all boolean values with double-quotes. This applies only for values.yaml. Example: “true”/“false”.
 - controllerCount parameter value should be <= number of nodes in the kubernetes cluster else install script fails.
+- Endpoint should not have any special character at the end apart from port number.
 
 ## Storage Classes
 

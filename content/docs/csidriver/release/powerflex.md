@@ -8,6 +8,8 @@ description: Release notes for PowerFlex CSI driver
 ### New Features/Changes
 
 - Removed beta volumesnapshotclass sample files.
+- Added support for Kubernetes 1.24.
+- Added support for OpenShift 4.10.
 
 ### Fixed Issues
 

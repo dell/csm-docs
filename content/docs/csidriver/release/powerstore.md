@@ -7,9 +7,11 @@ description: Release notes for PowerStore CSI driver
 
 ### New Features/Changes
 
-- Support Volume Group Snapshots
+- Support Volume Group Snapshots.
 - Removed beta volumesnapshotclass sample files.
-- Support Configurable Volume Attributes
+- Support Configurable Volume Attributes.
+- Added support for Kubernetes 1.24.
+- Added support for OpenShift 4.10.
 
 ### Fixed Issues
 
