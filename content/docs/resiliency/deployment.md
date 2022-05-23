@@ -33,6 +33,7 @@ podmon:
       - "--mode=controller"
       - "--skipArrayConnectionValidation=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
   node:
     args:
       - "--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
@@ -40,6 +41,7 @@ podmon:
       - "--mode=node"
       - "--leaderelection=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
 
 ```
 
@@ -84,6 +86,7 @@ podmon:
       - "-arrayConnectivityConnectionLossThreshold=3"
       - "--skipArrayConnectionValidation=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
   node:
     args:
       - "-csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
@@ -91,6 +94,7 @@ podmon:
       - "-mode=node"
       - "-leaderelection=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
 
 ```
 
@@ -110,6 +114,7 @@ podmon:
        - "-mode=controller"
        - "--skipArrayConnectionValidation=false"
        - "--driver-config-params=/unity-config/driver-config-params.yaml"
+       - "--driverPodLabelValue=dell-storage"
    node:
      args:
        - "-csisock=unix:/var/lib/kubelet/plugins/unity.emc.dell.com/csi_sock"
@@ -118,6 +123,7 @@ podmon:
        - "-mode=node"
        - "-leaderelection=false"
        - "--driver-config-params=/unity-config/driver-config-params.yaml"
+       - "--driverPodLabelValue=dell-storage"
 
 ```
 
@@ -138,6 +144,7 @@ podmon:
       - "--mode=controller"
       - "--skipArrayConnectionValidation=false"
       - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
   node:
     args:
       - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
@@ -147,6 +154,7 @@ podmon:
       - "--mode=node"
       - "--leaderelection=false"
       - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+      - "--driverPodLabelValue=dell-storage"
 ```
 
 ## Dynamic parameters
