@@ -1,6 +1,6 @@
 ---
 title: Deployment
-linkTitle: Deployment
+linktitle: Deployment
 weight: 2
 description: Methods to install CSM Authorization
 tags: 
