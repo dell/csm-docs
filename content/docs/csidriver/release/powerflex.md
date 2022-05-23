@@ -8,10 +8,12 @@ description: Release notes for PowerFlex CSI driver
 ### New Features/Changes
 
 - Removed beta volumesnapshotclass sample files.
+- Fixed handling of idempotent snapshots 
 
 ### Fixed Issues
 
-There are no fixed issues in this release.
+-  Added label to driver node pod for Resiliency protection
+-  Updated values file to use patched image of vg-snapshotter 
 
 ### Known Issues
 
