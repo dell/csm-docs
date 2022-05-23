@@ -3,15 +3,12 @@ title: Unity
 description: Release notes for Unity CSI driver
 ---
 
-## Release Notes - CSI Unity v2.1.0
+## Release Notes - CSI Unity v2.2.0
 
 ### New Features/Changes
 
-- Added support for OpenShift v4.9.
-- Added support for CSI spec 1.5.
-- Added support for new access modes in CSI Spec 1.5.
-- Added ability to associate a tenant with storage volumes. - 
-- Added support for volume health monitoring.
+- Added support for Kubernetes 1.23.
+- Added support for Standalone Helm Charts.
 
 ### Fixed Issues
 
@@ -26,4 +23,4 @@ description: Release notes for Unity CSI driver
 
 ### Note:
 
-- Support for kurbernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
+- Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

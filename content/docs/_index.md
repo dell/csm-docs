@@ -18,14 +18,14 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 ## CSM Supported Modules and Dell CSI Drivers
 
-| Modules/Drivers | CSM 1.3 | [CSM 1.2](../v1/) | [CSM 1.1](../v2/) | [CSM 1.0.1](../v3/) | 
+| Modules/Drivers | CSM 1.3 | [CSM 1.2.1](../v1/) | [CSM 1.2](../v2/) | [CSM 1.1](../v3/) | 
 | - | :-: | :-: | :-: | :-: |
-| [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar) | v1.2.0 | v1.2.0 | v1.1.0 | v1.0.0 |
-| [Observability](https://hub.docker.com/r/dellemc/csm-topology) | v1.1.0 | v1.1.0 | v1.0.1 | v1.0.1 |
-| [Replication](https://hub.docker.com/r/dellemc/dell-csi-replicator) | v1.2.0 | v1.2.0 | v1.1.0 | v1.0.0 |
-| [Resiliency](https://hub.docker.com/r/dellemc/podmon) | v1.1.0 | v1.1.0 | v1.0.1 | v1.0.1 |
-| [CSI Driver for PowerScale](https://hub.docker.com/r/dellemc/csi-isilon/tags) | v2.3.0 | v2.2.0 | v2.1.0 | v2.0.0 | 
-| [CSI Driver for Unity XT](https://hub.docker.com/r/dellemc/csi-unity/tags) | v2.3.0 | v2.2.0 | v2.1.0 | v2.0.0 |
-| [CSI Driver for PowerStore](https://hub.docker.com/r/dellemc/csi-powerstore/tags) | v2.3.0 | v2.2.0 | v2.1.0| v2.0.0 |
-| [CSI Driver for PowerFlex](https://hub.docker.com/r/dellemc/csi-vxflexos/tags) | v2.3.0 | v2.2.0 | v2.1.0 | v2.0.0 |
-| [CSI Driver for PowerMax](https://hub.docker.com/r/dellemc/csi-powermax/tags) | v2.3.0 | v2.2.0 | v2.1.0 | v2.0.0 |
+| [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar) | v1.2.0 | v1.2.0 | v1.2.0 | v1.1.0 |
+| [Observability](https://hub.docker.com/r/dellemc/csm-topology) | v1.1.1 | v1.1.1 | v1.1.0 | v1.0.1 |
+| [Replication](https://hub.docker.com/r/dellemc/dell-csi-replicator) | v1.3.0 | v1.2.0 | v1.2.0 | v1.1.0 |
+| [Resiliency](https://hub.docker.com/r/dellemc/podmon) | v1.1.0 | v1.1.0 | v1.1.0 | v1.0.1 |
+| [CSI Driver for PowerScale](https://hub.docker.com/r/dellemc/csi-isilon/tags) | v2.3.0 | v2.2.0 | v2.2.0 | v2.1.0 | 
+| [CSI Driver for Unity XT](https://hub.docker.com/r/dellemc/csi-unity/tags) | v2.3.0 | v2.2.0 | v2.2.0 | v2.1.0 |
+| [CSI Driver for PowerStore](https://hub.docker.com/r/dellemc/csi-powerstore/tags) | v2.3.0 | v2.2.0 | v2.2.0| v2.1.0 |
+| [CSI Driver for PowerFlex](https://hub.docker.com/r/dellemc/csi-vxflexos/tags) | v2.3.0 | v2.2.0 | v2.2.0 | v2.1.0 |
+| [CSI Driver for PowerMax](https://hub.docker.com/r/dellemc/csi-powermax/tags) | v2.3.0 | v2.2.0 | v2.2.0 | v2.1.0 |
