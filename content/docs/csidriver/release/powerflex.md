@@ -12,7 +12,7 @@ description: Release notes for PowerFlex CSI driver
 
 ### Fixed Issues
 
--  Add label to driver node pod for Resiliency protection
+-  Added label to driver node pod for Resiliency protection
 -  Updated values file to use patched image of vg-snapshotter 
 
 ### Known Issues
