@@ -185,12 +185,12 @@ kind: StorageClass
 metadata:
     name: unity-expand-sc
     annotations:
-        storageclass.beta.kubernetes.io/is-default-class: false
+        storageclass.kubernetes.io/is-default-class: false
 provisioner: csi-unity.dellemc.com
 reclaimPolicy: Delete
 allowVolumeExpansion: true # Set this attribute to true if you plan to expand any PVCs created using this storage class
 parameters:
-    FsType: xfs
+    csi.storage.k8s.io/fstype: "xfs"
 ```
 
 To resize a PVC, edit the existing PVC spec and set spec.resources.requests.storage to the intended size. For example, if you have a PVC unity-pvc-demo of size 3Gi, then you can resize it to 30Gi by updating the PVC.
@@ -215,7 +215,7 @@ spec:
 
 ## Raw block support
 
-The CSI Unity driver version 1.4 and later supports Raw Block Volumes.
+The CSI Unity driver supports Raw Block Volumes.
 	Raw Block volumes are created using the volumeDevices list in the pod template spec with each entry accessing a volumeClaimTemplate specifying a volumeMode: Block. The following is an example configuration:
 	
 ```yaml
@@ -310,7 +310,7 @@ spec:
 
 ## Ephemeral Inline Volume
 
-The CSI Unity driver version 1.4 and later supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
+The CSI Unity driver supports ephemeral inline CSI volumes. This feature allows CSI volumes to be specified directly in the pod specification. 
 
 At runtime, nested inline volumes follow the ephemeral lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.
 
@@ -353,7 +353,7 @@ To create `NFS` volume you need to provide `nasName:` parameters that point to t
   - name: volume
     csi:
       driver: csi-unity.dellemc.com
-      fsType: "nfs"
+      csi.storage.k8s.io/fstype: "nfs"
       volumeAttributes:
         size: "20Gi"
         nasName: "csi-nas-name"
@@ -361,7 +361,7 @@ To create `NFS` volume you need to provide `nasName:` parameters that point to t
 
 ## Controller HA
 
-The CSI Unity driver version 1.4 and later supports the controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
+The CSI Unity driver supports controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
 
 By default, number of replicas is set to 2, you can set the `controllerCount` parameter to 1 in `myvalues.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change the `replicas` parameter in the `spec.driver` section in your Unity Custom Resource.
 
@@ -407,7 +407,7 @@ As said before you can configure where node driver pods would be assigned in a s
 
 ## Topology
 
-The CSI Unity driver version 1.4 and later supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.
+The CSI Unity driver supports Topology which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This covers use cases where users have chosen to restrict the nodes on which the CSI driver is deployed.
 
 This Topology support does not include customer-defined topology, users cannot create their own labels for nodes, they should use whatever labels are returned by the driver and applied automatically by Kubernetes on its nodes.
 
@@ -441,37 +441,23 @@ You can check what labels your nodes contain by running `kubectl get nodes --sho
 
 For any additional information about the topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
-## Support for SLES 15 SP2
-
-The CSI Driver for Dell EMC Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
-
- - open-iscsi **open-iscsi is required in order to make use of iSCSI protocol for provisioning**
- - nfs-utils **nfs-utils is required in order to make use of NFS protocol for provisioning**
- - multipath-tools **multipath-tools is required in order to make use of FC and iSCSI protocols for provisioning**
-
-  After installing open-iscsi, ensure "iscsi" and "iscsid" services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with the iSCSI protocol to work.
-
 ## Volume Limit
-The CSI Driver for Dell EMC Unity allows users to specify the maximum number of Unity volumes that can be used in a node.
+The CSI Driver for Dell Unity allows users to specify the maximum number of Unity volumes that can be used in a node.
 
 The user can set the volume limit for a node by creating a node label `max-unity-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-unity-volumes-per-node=<volume_limit>`
 
 The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxUnityVolumesPerNode` attribute in values.yaml file.
 
->**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxUnityVolumesPerNode` is 0. <br><br>If `maxUnityVolumesPerNode` is set to zero, then CO SHALL decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxUnityVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-unity-volumes-per-node` is not set.
+>**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n unity --no-headers=true | awk '/unity-/{print $1}'| xargs kubectl delete -n unity pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxUnityVolumesPerNode` is 0. <br><br>If `maxUnityVolumesPerNode` is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxUnityVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-unity-volumes-per-node` is not set.
 
 ## NAT Support
-CSI Driver for Dell EMC Unity is supported in the NAT environment for NFS protocol.
+CSI Driver for Dell Unity is supported in the NAT environment for NFS protocol.
 
 The user will be able to install the driver and able to create pods.
 
-## Dynamic Logging Configuration
-
-This feature is introduced in CSI Driver for unity version 2.0.0. 
-
 ## Single Pod Access Mode for PersistentVolumes
-CSI Driver for Unity now supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity allows to restrict volume access to a single pod in the cluster
+CSI Driver for Unity supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity allows to restrict volume access to a single pod in the cluster
 
 Prerequisites
 1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as the ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is only supported for CSI volumes. You can enable the feature by setting command line arguments:
@@ -491,12 +477,14 @@ spec:
 ```
 
 ## Volume Health Monitoring
-CSI Driver for Unity now supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments `--feature-gates="...,CSIVolumeHealth=true"`.  
+CSI Driver for Unity supports volume health monitoring. This is an alpha feature and requires feature gate to be enabled by setting command line arguments `--feature-gates="...,CSIVolumeHealth=true"`.  
 This feature:
 1. Reports on the condition of the underlying volumes via events when a volume condition is abnormal. We can watch the events on the describe of pvc `kubectl describe pvc <pvc name> -n <namespace>`
 2. Collects the volume stats. We can see the volume usage in the node logs `kubectl logs <nodepod> -n <namespacename> -c driver`
-By default this is disabled in CSI Driver for Unity. You will have to set the `volumeHealthMonitor.enable` flag for controller, node or for both in `values.yaml` to get the volume stats and volume condition.
+By default this is disabled in CSI Driver for Unity. You will have to set the `healthMonitor.enable` flag for controller, node or for both in `values.yaml` to get the volume stats and volume condition.
 
+## Dynamic Logging Configuration
+This feature is introduced in CSI Driver for unity version 2.0.0.
 
 ### Helm based installation
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver. 
@@ -554,7 +542,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
     annotations:
-        storageclass.beta.kubernetes.io/is-default-class: "false"
+        storageclass.kubernetes.io/is-default-class: "false"
     name: unity-nfs
 parameters:
     arrayId: "APM0***XXXXXX"
@@ -643,7 +631,7 @@ data:
     CSI_LOG_LEVEL: "info"
     ALLOW_RWO_MULTIPOD_ACCESS: "false"
     MAX_UNITY_VOLUMES_PER_NODE: "0"
-    SYNC_NODE_INFO_TIME_INTERVAL: "0"
+    SYNC_NODE_INFO_TIME_INTERVAL: "15"
     TENANT_NAME: ""
 ```
 >Note: csi-unity supports Tenancy in multi-array setup, provided the TenantName is the same across Unity instances.

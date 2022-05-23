@@ -23,6 +23,7 @@ The following are requirements to be met before installing the CSI Driver for De
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 
 ### Install Helm 3.0
 
@@ -70,12 +71,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 *NOTE:*
 - It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.0.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
 4. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
@@ -99,26 +99,34 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
    | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
    | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
+   | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume status, volume condition | Yes | false |
+   | healthMonitor.interval | Interval of monitoring volume health condition | Yes | 60s |
    | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
    | tolerations | Define tolerations for the controller deployment, if required | No | |
    | ***node*** | Configure node pod specific parameters | | |
    | nodeSelector | Define node selection constraints for pods of node daemonset | No | |
    | tolerations | Define tolerations for the node daemonset, if required | No | |
    | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | Yes | false |
    | ***PLATFORM ATTRIBUTES*** | | | |   
-   | endpointPort | Define the HTTPs port number of the PowerScale OneFS API server. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
+   | endpointPort | Define the HTTPs port number of the PowerScale OneFS API server. If authorization is enabled, endpointPort should be the HTTPS localhost port that the authorization sidecar will listen on. This value acts as a default value for endpointPort, if not specified for a cluster config in secret. | No | 8080 |
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret. | No | true |
    | isiAccessZone | Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same. | No | System |
    | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.| No | true |   
    | isiPath | Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
+   | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
+   | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
+   | proxyHost | Hostname of the csm-authorization server. | No | Empty |
+   | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
    
    *NOTE:* 
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
-   
+   - In order to enable authorization, there should be an authorization proxy server already installed.
     
 6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters.
    
@@ -127,7 +135,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
    | clusterName | Logical name of PoweScale cluster against which volume CRUD operations are performed through this secret. | Yes | - |
    | username | username for connecting to PowerScale OneFS API server | Yes | - |
    | password | password for connecting to PowerScale OneFS API server | Yes | - |
-   | endpoint | HTTPS endpoint of the PowerScale OneFS API server | Yes | - |
+   | endpoint | HTTPS endpoint of the PowerScale OneFS API server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on | Yes | - |
    | isDefault | Indicates if this is a default cluster (would be used by storage classes without ClusterName parameter). Only one of the cluster config should be marked as default. | No | false |
    | ***Optional parameters*** | Following parameters are Optional. If specified will override default values from values.yaml. |
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. | No | default value from values.yaml |
@@ -154,11 +162,11 @@ Create isilon-creds secret using the following command:
    - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
    - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
-   - The *isilon-creds* secret has a *mountEndpoint* parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with [CSM-Authorization](https://github.com/dell/karavi-authorization).
+   - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../authorization) is enabled.
    
 7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell EMC PowerScale.
     ```
-    kubectl create -f emptysecret.yaml
+    kubectl create -f empty-secret.yaml
     ```
    This command will create a new secret called `isilon-certs-0` in isilon namespace.
    
@@ -202,11 +210,8 @@ The CSI driver for Dell EMC PowerScale version 1.5 and later, `dell-csi-helm-ins
 
 ### What happens to my existing storage classes?
 
-*Upgrading from CSI PowerScale v1.6 driver*
+*Upgrading from CSI PowerScale v2.0 driver*
 The storage classes created as part of the installation have an annotation - "helm.sh/resource-policy": keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.
-
-*Upgrading from an older version of the driver*
-It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 before upgrading to 2.0.
 
 *NOTE*:
 - At least one storage class is required for one array.
@@ -227,9 +232,9 @@ Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volu
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerScale v1.6 driver*:
+*Upgrading from CSI PowerScale v2.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 before upgrading to 2.0.
+It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.1.
 

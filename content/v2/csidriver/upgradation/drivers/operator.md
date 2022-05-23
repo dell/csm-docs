@@ -6,7 +6,7 @@ tags:
 weight: 1
 Description: Upgrade Dell CSI Operator
 ---
-To upgrade Dell CSI Operator from v1.2.0/v1.3.0 to v1.4.0/v1.5.0, perform the following steps.
+To upgrade Dell CSI Operator from v1.2.0/v1.3.0 to v1.4.0/v1.5.0/v1.6.0, perform the following steps.
 
 ### Using Installation Script
 Run the following command to upgrade the operator
