@@ -139,6 +139,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | kubeletConfigDir | Specify kubelet config dir path | Yes | "/var/lib/kubelet" |
    | enableCustomTopology | Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish a connection to Array. This requires enableCustomTopology to be enabled. | No | false |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   | podmonAPIPort | Defines the port which csi-driver will use within the cluster to support podmon | No | 8083 |
+   | maxPathLen | Defines the maximum length of path for a volume | No | 128 |
    | ***controller*** | Configure controller pod specific parameters | | |
    | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
    | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
@@ -171,6 +173,9 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
+   | **podmon**               | Podmon is an optional feature under development and tech preview. Enable this feature only after contact support for additional information.  |  -        |  -       |
+   | enabled                  | A boolean that enable/disable podmon feature. |  No      |   false   |
+   | image | image for podmon. | No | " " |
 
    *NOTE:* 
 
