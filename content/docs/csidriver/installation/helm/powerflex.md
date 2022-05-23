@@ -153,7 +153,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
   # needed for backwards compatibility
   # only one array is allowed to have this set to true 
   # Default value: false
-  isDefault: true
+  isDefault: false
   # defines the MDM(s) that SDC should register with on start.
   # Allowed values:  a list of IP addresses or hostnames separated by comma.
   # Default value: none 
@@ -163,6 +163,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
   systemID: "ID2"
   endpoint: "https://127.0.0.2"
   skipCertificateValidation: true 
+  isDefault: true 
   mdm: "10.0.0.3,10.0.0.4"
 ```
 
