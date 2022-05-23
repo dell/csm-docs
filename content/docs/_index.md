@@ -30,8 +30,6 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | [CSI Driver for PowerFlex](https://hub.docker.com/r/dellemc/csi-vxflexos/tags) | v2.3.0 | v2.2.0 | v2.2.0 | v2.1.0 |
 | [CSI Driver for PowerMax](https://hub.docker.com/r/dellemc/csi-powermax/tags) | v2.3.0 | v2.2.0 | v2.2.0 | v2.1.0 |
 
-
-
 ## CSM Modules Support Matrix for Dell CSI Drivers 
 
 | CSM Module        | CSI PowerFlex v2.3.0 | CSI PowerScale v2.3.0 | CSI PowerStore v2.3.0 | CSI PowerMax v2.3.0 | CSI Unity XT v2.3.0    |
