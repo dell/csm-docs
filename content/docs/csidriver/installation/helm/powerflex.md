@@ -131,33 +131,6 @@ kubectl create -f deploy/kubernetes/snapshot-controller
     Example: `samples/config.yaml`
 
 ```yaml
-  # Username for accessing PowerFlex system.
-  # If authorization is enabled, username will be ignored.
-- username: "admin"
-  # Password for accessing PowerFlex system.
-  # If authorization is enabled, password will be ignored.
-  password: "password"
-  # System name/ID of PowerFlex system.	
-  systemID: "ID1"
-  # Previous names used in secret of PowerFlex system.
-  allSystemNames: "pflex-1,pflex-2"
-  # REST API gateway HTTPS endpoint for PowerFlex system.
-  # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
-  # the authorization sidecar will listen on
-  endpoint: "https://127.0.0.1"
-  # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
-  # Allowed values: true or false
-  # Default value: true
-  skipCertificateValidation: true 
-  # indicates if this array is the default array
-  # needed for backwards compatibility
-  # only one array is allowed to have this set to true 
-  # Default value: false
-  isDefault: false
-  # defines the MDM(s) that SDC should register with on start.
-  # Allowed values:  a list of IP addresses or hostnames separated by comma.
-  # Default value: none 
-  mdm: "10.0.0.1,10.0.0.2"
 - username: "admin"
   password: "Password123"
   systemID: "ID2"
@@ -166,6 +139,8 @@ kubectl create -f deploy/kubernetes/snapshot-controller
   isDefault: true 
   mdm: "10.0.0.3,10.0.0.4"
 ```
+ *NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.* 
+
 
     After editing the file, run the following command to create a secret called `vxflexos-config`:
     
