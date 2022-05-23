@@ -79,7 +79,7 @@ CSM for Observability provides Kubernetes administrators with the topology data 
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Namespace                  | The namespace associated with the persistent volume claim                                                                                          |
 | Persistent Volume          | The name of the persistent volume                                                                                                                  |
-| Status                     | The status of the persistent volume. "Released" indicating the persistent volume does not have a claim. "Bound" indicating the persistent volume has a claim |
+| Status                     | The status of the persistent volume. "Released" indicates the persistent volume does not have a claim. "Bound" indicates the persistent volume has a claim |
 | Persistent Volume Claim    | The name of the persistent volume claim associated with the persistent volume                                                                      |
 | CSI Driver                 | The name of the CSI driver that was responsible for provisioning the volume on the storage system                                                  |
 | Created                    | The date the persistent volume was created                                                                                                         |
