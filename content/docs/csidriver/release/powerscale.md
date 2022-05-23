@@ -13,6 +13,7 @@ description: Release notes for PowerScale CSI driver
 
 ### Fixed Issues
 
+There are no fixed issues in this release.
 
 ### Known Issues
 | Issue                                                                                                                                                                                                                               | Resolution or workaround, if known                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
