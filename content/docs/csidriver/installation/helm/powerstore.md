@@ -78,6 +78,8 @@ modprobe nvme_tcp
 **Requirements for NVMeFC**
 - NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
+*NOTE:*
+- Do not load the nvme_tcp module for NVMeFC
 
 ### Linux multipathing requirements
 Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
