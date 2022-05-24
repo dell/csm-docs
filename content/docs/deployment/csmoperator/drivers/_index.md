@@ -41,7 +41,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 ## Installing CSI Driver via Operator
 
-Refer [PowerScale Driver](drivers/powerscale) to install the driver via Operator
+Refer [PowerScale Driver](../drivers/powerscale) to install the driver via Operator
 
 >**Note**: If you are using an OLM based installation, example manifests are available in `OperatorHub` UI.
 You can edit these manifests and install the driver using the `OperatorHub` UI.
@@ -53,7 +53,7 @@ Once the driver `Custom Resource (CR)` is created, you can verify the installati
     ```
     $ kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
     ```
-* Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](./troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
+* Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
 
 
 ### Update CSI Drivers
