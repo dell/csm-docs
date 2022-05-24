@@ -15,6 +15,7 @@ description: Release notes for PowerMax CSI driver
 - Added support for SRDF Metro group sharing multiple namespaces.
 - Added support for Kubernetes 1.24.
 - Added support for OpenShift 4.10.
+- Added support to convert replicated volume to non-replicated volume and vice versa for Sync and Async modes.
 
 ### Fixed Issues
 There are no fixed issues in this release.
