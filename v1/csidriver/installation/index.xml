@@ -53,7 +53,7 @@
     </item>
     
     <item>
-      <title>V1: Dell CSI Operator Installation Process</title>
+      <title>V1: CSI Driver installation using Dell CSI Operator</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/installation/operator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -61,22 +61,22 @@
       <description>
         
         
-        &lt;p&gt;The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.&lt;/p&gt;
+        &lt;p&gt;The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:&lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd&#34;&gt;v4.2.x&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:&lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd&#34;&gt;v5.0.x&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
 &lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;A common snapshot controller&lt;/li&gt;
 &lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller&#34;&gt;v4.2.x&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller&#34;&gt;v5.0.x&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The manifests available on GitHub install the snapshotter image:
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v4.0.x&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v5.0.1&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v5.0.1&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
@@ -90,7 +90,7 @@ kubectl create -f client/config/crd
 kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It is recommended to use 4.2.x version of snapshotter/snapshot-controller.&lt;/li&gt;
+&lt;li&gt;It is recommended to use 5.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Dell CSI Operator has been tested and qualified with&lt;/p&gt;
@@ -113,13 +113,6 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerMax&lt;/td&gt;
-&lt;td&gt;1.7&lt;/td&gt;
-&lt;td&gt;v6&lt;/td&gt;
-&lt;td&gt;1.19, 1.20, 1.21&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerMax&lt;/td&gt;
 &lt;td&gt;2.0.0&lt;/td&gt;
 &lt;td&gt;v2.0.0&lt;/td&gt;
 &lt;td&gt;1.20, 1.21, 1.22&lt;/td&gt;
@@ -133,11 +126,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;1.5&lt;/td&gt;
-&lt;td&gt;v5&lt;/td&gt;
-&lt;td&gt;1.19, 1.20, 1.21&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;td&gt;CSI PowerMax&lt;/td&gt;
+&lt;td&gt;2.2.0&lt;/td&gt;
+&lt;td&gt;v2.2.0&lt;/td&gt;
+&lt;td&gt;1.21, 1.22, 1.23&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerFlex&lt;/td&gt;
@@ -154,11 +147,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;1.6&lt;/td&gt;
-&lt;td&gt;v6&lt;/td&gt;
-&lt;td&gt;1.19, 1.20, 1.21&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;td&gt;CSI PowerFlex&lt;/td&gt;
+&lt;td&gt;2.2.0&lt;/td&gt;
+&lt;td&gt;v2.2.0&lt;/td&gt;
+&lt;td&gt;1.21, 1.22, 1.23&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
@@ -175,11 +168,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI Unity&lt;/td&gt;
-&lt;td&gt;1.6&lt;/td&gt;
-&lt;td&gt;v5&lt;/td&gt;
-&lt;td&gt;1.19, 1.20, 1.21&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;td&gt;CSI PowerScale&lt;/td&gt;
+&lt;td&gt;2.2.0&lt;/td&gt;
+&lt;td&gt;v2.2.0&lt;/td&gt;
+&lt;td&gt;1.21, 1.22, 1.23&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI Unity&lt;/td&gt;
@@ -196,11 +189,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI PowerStore&lt;/td&gt;
-&lt;td&gt;1.4&lt;/td&gt;
-&lt;td&gt;v4&lt;/td&gt;
-&lt;td&gt;1.19, 1.20, 1.21&lt;/td&gt;
-&lt;td&gt;4.6, 4.7&lt;/td&gt;
+&lt;td&gt;CSI Unity&lt;/td&gt;
+&lt;td&gt;2.2.0&lt;/td&gt;
+&lt;td&gt;v2.2.0&lt;/td&gt;
+&lt;td&gt;1.21, 1.22, 1.23&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerStore&lt;/td&gt;
@@ -214,6 +207,13 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;td&gt;2.1.0&lt;/td&gt;
 &lt;td&gt;v2.1.0&lt;/td&gt;
 &lt;td&gt;1.20, 1.21, 1.22&lt;/td&gt;
+&lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerStore&lt;/td&gt;
+&lt;td&gt;2.2.0&lt;/td&gt;
+&lt;td&gt;v2.2.0&lt;/td&gt;
+&lt;td&gt;1.21, 1.22, 1.23&lt;/td&gt;
 &lt;td&gt;4.8, 4.8 EUS, 4.9&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -227,7 +227,7 @@ The installation process involves the creation of a &lt;code&gt;Subscription&lt;
 &lt;li&gt;&lt;em&gt;Automatic&lt;/em&gt; - If you want the Operator to be automatically installed or upgraded (once an upgrade becomes available)&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;Manual&lt;/em&gt; - If you want a Cluster Administrator to manually review and approve the &lt;code&gt;InstallPlan&lt;/code&gt; for installation/upgrades&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.2&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;pre-requisite-for-installation-with-olm&#34;&gt;Pre-Requisite for installation with OLM&lt;/h4&gt;
 &lt;p&gt;Please run the following commands for creating the required &lt;code&gt;ConfigMap&lt;/code&gt; before installing the &lt;code&gt;dell-csi-operator&lt;/code&gt; using OLM.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ git clone https://github.com/dell/dell-csi-operator.git
@@ -250,7 +250,8 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 &lt;/blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/dell-csi-operator&#34;&gt;Dell CSI Operator repository&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;git checkout dell-csi-operator-&lt;your-version&gt;&lt;/li&gt;
+&lt;li&gt;cd dell-csi-operator&lt;/li&gt;
+&lt;li&gt;git checkout dell-csi-operator-`your-version&amp;rsquo;&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;bash scripts/install.sh&lt;/code&gt; to install the operator.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
@@ -265,7 +266,7 @@ Any existing installations of Dell CSI Operator (v1.2.0 or later) installed usin
 
 
 &lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/operator/non-olm-1_hu3a291ce9bebde0ed63d4ea6dfde899af_206872_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1349&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/csidriver/installation/operator/non-olm-1_huaf31b511a477f907d9b0d23ca14fcbe0_117473_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;2162&#34;&gt;
 	
 &lt;/div&gt;
 &lt;ol start=&#34;4&#34;&gt;
@@ -300,8 +301,7 @@ List of CRDs which are installed in API Group &lt;code&gt;storage.dell.com&lt;/c
 &lt;ul&gt;
 &lt;li&gt;VolumeSnapshot CRDs
 &lt;ul&gt;
-&lt;li&gt;On clusters running v1.20,v1.21 &amp;amp; v1.22, make sure to install v1 VolumeSnapshot CRDs&lt;/li&gt;
-&lt;li&gt;On clusters running v1.19, make sure to install v1beta1 VolumeSnapshot CRDs&lt;/li&gt;
+&lt;li&gt;On clusters running v1.21,v1.22 &amp;amp; v1.23, make sure to install v1 VolumeSnapshot CRDs&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;External Volume Snapshot Controller with the correct version&lt;/li&gt;
@@ -366,28 +366,6 @@ Alternatively, you can check the status of the multipath service by entering the
 &lt;p&gt;Finally, you have to restart the service by providing the command
 &lt;code&gt;sudo systemctl restart multipathd&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;For additional information refer to official documentation of the multipath configuration.&lt;/p&gt;
-&lt;h2 id=&#34;replacing-csi-operator-with-dell-csi-operator&#34;&gt;Replacing CSI Operator with Dell CSI Operator&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;Dell CSI Operator&lt;/code&gt; was previously available, with the name &lt;code&gt;CSI Operator&lt;/code&gt;, for both manual and OLM installation.&lt;br&gt;
-&lt;code&gt;CSI Operator&lt;/code&gt; has been discontinued and has been renamed to &lt;code&gt;Dell CSI Operator&lt;/code&gt;.  This is just a name change and as a result,
-the Kubernetes resources created as part of the Operator deployment will use the name &lt;code&gt;dell-csi-operator&lt;/code&gt; instead of &lt;code&gt;csi-operator&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Before proceeding with the installation of the new &lt;code&gt;Dell CSI Operator&lt;/code&gt;, any existing &lt;code&gt;CSI Operator&lt;/code&gt; installation has to be completely
-removed from the cluster.&lt;/p&gt;
-&lt;p&gt;Note - This &lt;strong&gt;doesn&amp;rsquo;t&lt;/strong&gt; impact any of the CSI Drivers which have been installed in the cluster&lt;/p&gt;
-&lt;p&gt;If the old &lt;code&gt;CSI Operator&lt;/code&gt; was installed manually, then run the following command from the root of the repository which was used
-originally for installation&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bash scripts/undeploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&amp;rsquo;t have the original repository available, then run the following commands&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/dell/dell-csi-operator.git
-cd dell-csi-operator
-git checkout csi-operator-v1.0.0
-bash scripts/undeploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note - Once you have removed the old &lt;code&gt;CSI Operator&lt;/code&gt;, then for installing the new &lt;code&gt;Dell CSI Operator&lt;/code&gt;, you will need to pull/checkout the latest code&lt;/p&gt;
-&lt;p&gt;If you had installed the old CSI Operator using OLM, then please follow the uninstallation instructions provided by OperatorHub. This will mostly involve:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* Deleting the CSI Operator Subscription  
-* Deleting the CSI Operator CSV  
-&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;installing-csi-driver-via-operator&#34;&gt;Installing CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;CSI Drivers can be installed by creating a &lt;code&gt;CustomResource&lt;/code&gt; object in your cluster.&lt;/p&gt;
 &lt;p&gt;Sample manifest files for each driver &lt;code&gt;CustomResourceDefintion&lt;/code&gt; have been provided in the &lt;code&gt;samples&lt;/code&gt; folder to help with the installation of the drivers.
@@ -399,8 +377,8 @@ These files follow the naming convention&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For e.g.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;sample/powermax_v140_k8s_117.yaml* &amp;lt;- To install CSI PowerMax driver v1.4.0 on a Kubernetes 1.17 cluster&lt;/li&gt;
-&lt;li&gt;sample/powermax_v140_ops_46.yaml* &amp;lt;- To install CSI PowerMax driver v1.4.0 on an OpenShift 4.6 cluster&lt;/li&gt;
+&lt;li&gt;samples/powermax_v220_k8s_123.yaml* &amp;lt;- To install CSI PowerMax driver v2.2.0 on a Kubernetes 1.23 cluster&lt;/li&gt;
+&lt;li&gt;samples/powermax_v220_ops_49.yaml* &amp;lt;- To install CSI PowerMax driver v2.2.0 on an OpenShift 4.9 cluster&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Copy the correct sample file and edit the mandatory &amp;amp; any optional parameters specific to your driver installation by following the instructions &lt;a href=&#34;#modify-the-driver-specification&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -434,15 +412,18 @@ Please refer to the &lt;em&gt;Troubleshooting&lt;/em&gt; section &lt;a href=&#34
 For e.g. - If the name of the installed unity driver is unity, then run
 &lt;pre&gt;&lt;code&gt;# Replace driver-namespace with the namespace where the Unity driver is installed
 $ kubectl edit csiunity/unity -n &amp;lt;driver-namespace&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and modify the installation&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and modify the installation. The usual fields to edit are the version of drivers and sidecars and the env variables.&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;Modify the API object in-place via &lt;code&gt;kubectl patch&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Modify the API object in place via &lt;code&gt;kubectl patch&lt;/code&gt; command.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;To create patch file or edit deployments, refer &lt;a href=&#34;https://github.com/dell/dell-csi-operator/tree/master/samples&#34;&gt;here&lt;/a&gt; for driver version &amp;amp; env variables and &lt;a href=&#34;https://github.com/dell/dell-csi-operator/tree/master/driverconfig/config.yaml&#34;&gt;here&lt;/a&gt; for version of side-cars.
+The latest versions of drivers could have additional env variables or sidecars.&lt;/p&gt;
+&lt;p&gt;The below notes explain some of the general items to take care of.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;NOTES:&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field if required.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v2&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.1.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;v2&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.2.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
 To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add
@@ -451,24 +432,24 @@ to true as shown below:
 i. Add controller and node section as below:
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;envs&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;X_CSI_ENABLE_VOL_HEALTH_MONITOR&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;X_CSI_HEALTH_MONITOR_ENABLED&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dnsPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;ClusterFirstWithHostNet&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;envs&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;X_CSI_ENABLE_VOL_HEALTH_MONITOR&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;X_CSI_HEALTH_MONITOR_ENABLED&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ii. Update the sidecar versions and add external-health-monitor sidecar if you want to enable health monitor of CSI volumes from Controller plugin:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sideCars&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- --volume-name-prefix=csiunity&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- --default-fstype=ext4&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-provisioner&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v3&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.0.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-provisioner&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v3&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.1.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;provisioner&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- --snapshot-name-prefix=csiunitysnap&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-snapshotter&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v4&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.2.1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-snapshotter&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v5&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.0.1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;snapshotter&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -476,13 +457,13 @@ i. Add controller and node section as below:
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v0&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.4.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;external-health-monitor&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-attacher&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v3&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.3.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-attacher&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v3&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.4.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;attacher&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-node-driver-registrar&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v2&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.3.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-node-driver-registrar&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v2&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.5.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;registrar&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-resizer&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v1&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.3.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;k8s.gcr.io/sig-storage/csi-resizer&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v1&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.4.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;IfNotPresent&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;resizer&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
@@ -497,7 +478,7 @@ i. Add controller and node section as below:
 &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;    CSI_LOG_LEVEL: &amp;#34;info&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ALLOW_RWO_MULTIPOD_ACCESS&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;MAX_UNITY_VOLUMES_PER_NODE&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;SYNC_NODE_INFO_TIME_INTERVAL&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;SYNC_NODE_INFO_TIME_INTERVAL&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;15&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;TENANT_NAME&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;code&gt;Replicas&lt;/code&gt; in the driver CR file should not be greater than or equal to the number of worker nodes when upgrading the driver. If the &lt;code&gt;Replicas&lt;/code&gt; count is not less than the worker node count, some of the driver controller pods would land in a pending state, and upgrade will not be successful. Driver controller pods go in a pending state because they have anti-affinity to each other and cannot be scheduled on nodes where there is a driver controller pod already running. Refer to &lt;a href=&#34;https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity&#34;&gt;https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity&lt;/a&gt; for more details.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Do not try to update the operator by modifying the original &lt;code&gt;CustomResource&lt;/code&gt; manifest file and running the &lt;code&gt;kubectl apply -f&lt;/code&gt; command. As part of the driver installation, the Operator sets some annotations on the &lt;code&gt;CustomResource&lt;/code&gt; object which are further utilized in some workflows (like detecting upgrade of drivers). If you run the &lt;code&gt;kubectl apply -f&lt;/code&gt; command to update the driver, these annotations are overwritten and this may lead to failures.&lt;/p&gt;
@@ -542,6 +523,8 @@ List of tolerations which should be applied to the driver StatefulSet/Deployment
 It should be set separately in the controller and node sections if you want separate set of tolerations for them&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;nodeSelector&lt;/strong&gt;
 Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;fsGroupPolicy&lt;/strong&gt;
+Defines which FS Group policy mode to be used, Supported modes: None, File and ReadWriteOnceWithFSType&lt;/p&gt;
 &lt;p&gt;Here is a sample specification annotated with comments to explain each field&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;storage.dell.com/v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;CSIPowerMax&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Type of the driver&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -566,7 +549,7 @@ Used to specify node selectors for the driver StatefulSet/Deployment and DaemonS
 &lt;p&gt;Note - The &lt;code&gt;image&lt;/code&gt; field should point to the correct image tag for version of the driver you are installing.&lt;br&gt;
 For e.g. - If you wish to install v1.4 of the CSI PowerMax driver, use the image tag &lt;code&gt;dellemc/csi-powermax:v1.4.0.000R&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;sidecars&#34;&gt;SideCars&lt;/h3&gt;
-&lt;p&gt;Although the sidecars field in the driver specification is optional, it is &lt;strong&gt;strongly&lt;/strong&gt; recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell EMC support.&lt;/p&gt;
+&lt;p&gt;Although the sidecars field in the driver specification is optional, it is &lt;strong&gt;strongly&lt;/strong&gt; recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell support.&lt;/p&gt;
 &lt;h3 id=&#34;modify-the-driver-specification&#34;&gt;Modify the driver specification&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Choose the correct configVersion. Refer the table containing the full list of supported drivers and versions.&lt;/li&gt;
@@ -592,7 +575,7 @@ For e.g. - If you wish to install v1.4 of the CSI PowerMax driver, use the image
     </item>
     
     <item>
-      <title>V1: Offline Installation of Dell EMC CSI Storage Providers</title>
+      <title>V1: Offline Installation of Dell CSI Storage Providers</title>
       <link>https://dell.github.io/csm-docs/v1/csidriver/installation/offline/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -600,7 +583,7 @@ For e.g. - If you wish to install v1.4 of the CSI PowerMax driver, use the image
       <description>
         
         
-        &lt;p&gt;The &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script can be used to create a package usable for offline installation of the Dell EMC CSI Storage Providers, via either Helm
+        &lt;p&gt;The &lt;code&gt;csi-offline-bundle.sh&lt;/code&gt; script can be used to create a package usable for offline installation of the Dell CSI Storage Providers, via either Helm
 or the Dell CSI Operator.&lt;/p&gt;
 &lt;p&gt;This includes the following drivers:&lt;/p&gt;
 &lt;ul&gt;
@@ -663,6 +646,7 @@ or the Dell CSI Operator.&lt;/p&gt;
 &lt;li&gt;Unpacking the offline bundle created in Step 1 and preparing for installation&lt;/li&gt;
 &lt;li&gt;Perform either a Helm installation or Operator installation using the files obtained after unpacking in Step 2&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).&lt;/p&gt;
 &lt;h3 id=&#34;building-an-offline-bundle&#34;&gt;Building an offline bundle&lt;/h3&gt;
 &lt;p&gt;This needs to be performed on a Linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.&lt;/p&gt;
 &lt;p&gt;To build an offline bundle, the following steps are needed:&lt;/p&gt;
@@ -683,80 +667,69 @@ or the Dell CSI Operator.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.&lt;/p&gt;
 &lt;p&gt;For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# git clone https://github.com/dell/dell-csi-operator.git
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# cd dell-csi-operator
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[user@system /home/user/dell-csi-operator]# scripts/csi-offline-bundle.sh -c
-*
-* Building image manifest file
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/dell/dell-csi-operator.git
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;cd dell-csi-operator
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[root@user scripts]# ./csi-offline-bundle.sh -c
 
 *
-* Pulling container images
+* Pulling and saving container images
 
-   dellemc/csi-isilon:v1.4.0.000R
-   dellemc/csi-isilon:v1.5.0
-   dellemc/csi-isilon:v1.6.0
-   dellemc/csipowermax-reverseproxy:v1.3.0
-   dellemc/csi-powermax:v1.5.0.000R
-   dellemc/csi-powermax:v1.6.0
-   dellemc/csi-powermax:v1.7.0
-   dellemc/csi-powerstore:v1.2.0.000R
-   dellemc/csi-powerstore:v1.3.0
-   dellemc/csi-powerstore:v1.4.0
-   dellemc/csi-unity:v1.4.0.000R
-   dellemc/csi-unity:v1.5.0
-   dellemc/csi-unity:v1.6.0
-   dellemc/csi-vxflexos:v1.3.0.000R
-   dellemc/csi-vxflexos:v1.4.0
-   dellemc/csi-vxflexos:v1.5.0
-   dellemc/dell-csi-operator:v1.4.0
+   dellemc/csi-isilon:v2.0.0
+   dellemc/csi-isilon:v2.1.0
+   dellemc/csipowermax-reverseproxy:v1.4.0
+   dellemc/csi-powermax:v2.0.0
+   dellemc/csi-powermax:v2.1.0
+   dellemc/csi-powerstore:v2.0.0
+   dellemc/csi-powerstore:v2.1.0
+   dellemc/csi-unity:v2.0.0
+   dellemc/csi-unity:v2.1.0
+   localregistry:5028/csi-unity/csi-unity:20220303110841
+   dellemc/csi-vxflexos:v2.0.0
+   dellemc/csi-vxflexos:v2.1.0
+   localregistry:5035/csi-operator/dell-csi-operator:v1.7.0
    dellemc/sdc:3.5.1.1
    dellemc/sdc:3.5.1.1-1
+   dellemc/sdc:3.6
    docker.io/busybox:1.32.0
-   k8s.gcr.io/sig-storage/csi-attacher:v3.0.0
-   k8s.gcr.io/sig-storage/csi-attacher:v3.1.0
-   k8s.gcr.io/sig-storage/csi-attacher:v3.2.1
-   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.0.1
-   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.1.0
-   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0
-   k8s.gcr.io/sig-storage/csi-provisioner:v2.0.2
-   k8s.gcr.io/sig-storage/csi-provisioner:v2.1.0
-   k8s.gcr.io/sig-storage/csi-provisioner:v2.2.1
-   k8s.gcr.io/sig-storage/csi-resizer:v1.2.0
-   k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.2
-   k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.3
-   k8s.gcr.io/sig-storage/csi-snapshotter:v4.0.0
-   k8s.gcr.io/sig-storage/csi-snapshotter:v4.1.0
-   quay.io/k8scsi/csi-resizer:v1.0.0
-   quay.io/k8scsi/csi-resizer:v1.1.0
-
-*
-* Saving images
+   ...
+   ...
 
 *
 * Copying necessary files
 
- /dell/git/dell-csi-operator/config
- /dell/git/dell-csi-operator/deploy
- /dell/git/dell-csi-operator/samples
- /dell/git/dell-csi-operator/scripts
- /dell/git/dell-csi-operator/README.md
- /dell/git/dell-csi-operator/LICENSE
+   /root/dell-csi-operator/driverconfig
+   /root/dell-csi-operator/deploy
+   /root/dell-csi-operator/samples
+   /root/dell-csi-operator/scripts
+   /root/dell-csi-operator/OLM.md
+   /root/dell-csi-operator/README.md
+   /root/dell-csi-operator/LICENSE
 
 *
 * Compressing release
 
-dell-csi-operator-bundle/
-dell-csi-operator-bundle/samples/
-...
-&amp;lt;listing of files included in bundle&amp;gt;
-...
-dell-csi-operator-bundle/LICENSE
-dell-csi-operator-bundle/README.md
+   dell-csi-operator-bundle/
+   dell-csi-operator-bundle/driverconfig/
+   dell-csi-operator-bundle/driverconfig/config.yaml
+   dell-csi-operator-bundle/driverconfig/isilon_v200_v119.json
+   dell-csi-operator-bundle/driverconfig/isilon_v200_v120.json
+   dell-csi-operator-bundle/driverconfig/isilon_v200_v121.json
+   dell-csi-operator-bundle/driverconfig/isilon_v200_v122.json
+   dell-csi-operator-bundle/driverconfig/isilon_v210_v120.json
+   dell-csi-operator-bundle/driverconfig/isilon_v210_v121.json
+   dell-csi-operator-bundle/driverconfig/isilon_v210_v122.json
+   dell-csi-operator-bundle/driverconfig/isilon_v220_v121.json
+   dell-csi-operator-bundle/driverconfig/isilon_v220_v122.json
+   dell-csi-operator-bundle/driverconfig/isilon_v220_v123.json
+   dell-csi-operator-bundle/driverconfig/powermax_v200_v119.json
+   ...
+   ...
 
 *
 * Complete
 
-Offline bundle file is: /dell/git/dell-csi-operator/dell-csi-operator-bundle.tar.gz
+Offline bundle file is: /root/dell-csi-operator/dell-csi-operator-bundle.tar.gz
+
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;unpacking-the-offline-bundle-and-preparing-for-installation&#34;&gt;Unpacking the offline bundle and preparing for installation&lt;/h3&gt;
 &lt;p&gt;This needs to be performed on a Linux system with access to an image registry that will host container images. If the registry requires &lt;code&gt;login&lt;/code&gt;, that should be done before proceeding.&lt;/p&gt;
 &lt;p&gt;To prepare for the driver or Operator installation, the following steps need to be performed:&lt;/p&gt;
@@ -773,7 +746,7 @@ Offline bundle file is: /dell/git/dell-csi-operator/dell-csi-operator-bundle.tar
 &lt;li&gt;Modify the Helm charts or Operator configuration to refer to the newly tagged/pushed images&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;An example of preparing the bundle for installation (192.168.75.40:5000 refers to an image registry accessible to Kubernetes/OpenShift):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /tmp]# tar xvfz dell-csi-operator-bundle.tar.gz
+&lt;pre&gt;&lt;code&gt;tar xvfz dell-csi-operator-bundle.tar.gz
 dell-csi-operator-bundle/
 dell-csi-operator-bundle/samples/
 ...
@@ -781,97 +754,85 @@ dell-csi-operator-bundle/samples/
 ...
 dell-csi-operator-bundle/LICENSE
 dell-csi-operator-bundle/README.md
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[user@anothersystem /tmp]# cd dell-csi-operator-bundle
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[user@anothersystem /tmp/dell-csi-operator-bundle]# scripts/csi-offline-bundle.sh -p -r 192.168.75.40:5000/operator
-Preparing an offline bundle for installation
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;cd dell-csi-operator-bundle
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[root@user scripts]# ./csi-offline-bundle.sh -p -r localregistry:5000/csi-operator
+Preparing a offline bundle for installation
 
 *
 * Loading docker images
 
+   5b1fa8e3e100: Loading layer [==================================================&amp;gt;]  3.697MB/3.697MB
+   e20ed4c73206: Loading layer [==================================================&amp;gt;]  17.22MB/17.22MB
+   Loaded image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.0
+   d72a74c56330: Loading layer [==================================================&amp;gt;]  3.031MB/3.031MB
+   f2d2ab12e2a7: Loading layer [==================================================&amp;gt;]  48.08MB/48.08MB
+   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v2.0.2
+   417cb9b79ade: Loading layer [==================================================&amp;gt;]  3.062MB/3.062MB
+   61fefb35ccee: Loading layer [==================================================&amp;gt;]  16.88MB/16.88MB
+   Loaded image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0
+   7a5b9c0b4b14: Loading layer [==================================================&amp;gt;]  3.031MB/3.031MB
+   1555ad6e2d44: Loading layer [==================================================&amp;gt;]  49.86MB/49.86MB
+   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v2.1.0
+   2de1422d5d2d: Loading layer [==================================================&amp;gt;]  54.56MB/54.56MB
+   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v2.2.1
+   25a1c1010608: Loading layer [==================================================&amp;gt;]  54.54MB/54.54MB
+   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v2.2.2
+   07363fa84210: Loading layer [==================================================&amp;gt;]  3.062MB/3.062MB
+   5227e51ea570: Loading layer [==================================================&amp;gt;]  54.92MB/54.92MB
+   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v3.0.0
+   cfb5cbeabdb2: Loading layer [==================================================&amp;gt;]  55.38MB/55.38MB
+   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v3.1.0
+   ...
+   ...
 
 *
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v1.4.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.4.0.000R
-   dellemc/csi-isilon:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.5.0
-   dellemc/csi-isilon:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.6.0
-   dellemc/csipowermax-reverseproxy:v1.3.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csipowermax-reverseproxy:v1.3.0
-   dellemc/csi-powermax:v1.5.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.5.0.000R
-   dellemc/csi-powermax:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.6.0
-   dellemc/csi-powermax:v1.7.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.7.0
-   dellemc/csi-powerstore:v1.2.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.2.0.000R
-   dellemc/csi-powerstore:v1.3.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.3.0
-   dellemc/csi-powerstore:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.4.0
-   dellemc/csi-unity:v1.4.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.4.0.000R
-   dellemc/csi-unity:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.5.0
-   dellemc/csi-unity:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.6.0
-   dellemc/csi-vxflexos:v1.3.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.3.0.000R
-   dellemc/csi-vxflexos:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.4.0
-   dellemc/csi-vxflexos:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.5.0
-   dellemc/dell-csi-operator:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/dell-csi-operator:v1.4.0
-   dellemc/sdc:3.5.1.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/sdc:3.5.1.1
-   dellemc/sdc:3.5.1.1-1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/sdc:3.5.1.1-1
-   docker.io/busybox:1.32.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/busybox:1.32.0
-   k8s.gcr.io/sig-storage/csi-attacher:v3.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.0.0
-   k8s.gcr.io/sig-storage/csi-attacher:v3.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.1.0
-   k8s.gcr.io/sig-storage/csi-attacher:v3.2.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.2.1
-   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.0.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.0.1
-   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.1.0
-   k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.2.0
-   k8s.gcr.io/sig-storage/csi-provisioner:v2.0.2 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.0.2
-   k8s.gcr.io/sig-storage/csi-provisioner:v2.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.1.0
-   k8s.gcr.io/sig-storage/csi-provisioner:v2.2.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.2.1
-   k8s.gcr.io/sig-storage/csi-resizer:v1.2.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.2.0
-   k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.2 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v3.0.2
-   k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.3 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v3.0.3
-   k8s.gcr.io/sig-storage/csi-snapshotter:v4.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v4.0.0
-   k8s.gcr.io/sig-storage/csi-snapshotter:v4.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v4.1.0
-   quay.io/k8scsi/csi-resizer:v1.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.0.0
-   quay.io/k8scsi/csi-resizer:v1.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.1.0
+   localregistry:5035/csi-operator/dell-csi-operator:v1.7.0 -&amp;gt; localregistry:5000/csi-operator/dell-csi-operator:v1.7.0
+   dellemc/csi-isilon:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-isilon:v2.0.0
+   dellemc/csi-isilon:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-isilon:v2.1.0
+   dellemc/csipowermax-reverseproxy:v1.4.0 -&amp;gt; localregistry:5000/csi-operator/csipowermax-reverseproxy:v1.4.0
+   dellemc/csi-powermax:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.0.0
+   dellemc/csi-powermax:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.1.0
+   dellemc/csi-powerstore:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.0.0
+   dellemc/csi-powerstore:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.1.0
+   dellemc/csi-unity:nightly -&amp;gt; localregistry:5000/csi-operator/csi-unity:nightly
+   dellemc/csi-unity:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.0.0
+   dellemc/csi-unity:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.1.0
+   dellemc/csi-vxflexos:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.0.0
+   dellemc/csi-vxflexos:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.1.0
+   dellemc/sdc:3.5.1.1 -&amp;gt; localregistry:5000/csi-operator/sdc:3.5.1.1
+   dellemc/sdc:3.5.1.1-1 -&amp;gt; localregistry:5000/csi-operator/sdc:3.5.1.1-1
+   dellemc/sdc:3.6 -&amp;gt; localregistry:5000/csi-operator/sdc:3.6
+   docker.io/busybox:1.32.0 -&amp;gt; localregistry:5000/csi-operator/busybox:1.32.0
+   ...
+   ...
 
 *
-* Preparing operator files within /tmp/dell-csi-operator-bundle
+* Preparing operator files within /root/dell-csi-operator-bundle
 
-   changing: dellemc/csi-isilon:v1.4.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.4.0.000R
-   changing: dellemc/csi-isilon:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.5.0
-   changing: dellemc/csi-isilon:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-isilon:v1.6.0
-   changing: dellemc/csipowermax-reverseproxy:v1.3.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csipowermax-reverseproxy:v1.3.0
-   changing: dellemc/csi-powermax:v1.5.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.5.0.000R
-   changing: dellemc/csi-powermax:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.6.0
-   changing: dellemc/csi-powermax:v1.7.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powermax:v1.7.0
-   changing: dellemc/csi-powerstore:v1.2.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.2.0.000R
-   changing: dellemc/csi-powerstore:v1.3.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.3.0
-   changing: dellemc/csi-powerstore:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-powerstore:v1.4.0
-   changing: dellemc/csi-unity:v1.4.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.4.0.000R
-   changing: dellemc/csi-unity:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.5.0
-   changing: dellemc/csi-unity:v1.6.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-unity:v1.6.0
-   changing: dellemc/csi-vxflexos:v1.3.0.000R -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.3.0.000R
-   changing: dellemc/csi-vxflexos:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.4.0
-   changing: dellemc/csi-vxflexos:v1.5.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-vxflexos:v1.5.0
-   changing: dellemc/dell-csi-operator:v1.4.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/dell-csi-operator:v1.4.0
-   changing: dellemc/sdc:3.5.1.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/sdc:3.5.1.1
-   changing: dellemc/sdc:3.5.1.1-1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/sdc:3.5.1.1-1
-   changing: docker.io/busybox:1.32.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/busybox:1.32.0
-   changing: k8s.gcr.io/sig-storage/csi-attacher:v3.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.0.0
-   changing: k8s.gcr.io/sig-storage/csi-attacher:v3.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.1.0
-   changing: k8s.gcr.io/sig-storage/csi-attacher:v3.2.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-attacher:v3.2.1
-   changing: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.0.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.0.1
-   changing: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.1.0
-   changing: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-node-driver-registrar:v2.2.0
-   changing: k8s.gcr.io/sig-storage/csi-provisioner:v2.0.2 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.0.2
-   changing: k8s.gcr.io/sig-storage/csi-provisioner:v2.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.1.0
-   changing: k8s.gcr.io/sig-storage/csi-provisioner:v2.2.1 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-provisioner:v2.2.1
-   changing: k8s.gcr.io/sig-storage/csi-resizer:v1.2.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.2.0
-   changing: k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.2 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v3.0.2
-   changing: k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.3 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v3.0.3
-   changing: k8s.gcr.io/sig-storage/csi-snapshotter:v4.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v4.0.0
-   changing: k8s.gcr.io/sig-storage/csi-snapshotter:v4.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-snapshotter:v4.1.0
-   changing: quay.io/k8scsi/csi-resizer:v1.0.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.0.0
-   changing: quay.io/k8scsi/csi-resizer:v1.1.0 -&amp;gt; amaas-eos-mw1.cec.lab.emc.com:5028/csi-operator/csi-resizer:v1.1.0
-
+   changing: localregistry:5000/csi-operator/dell-csi-operator:v1.7.0 -&amp;gt; localregistry:5000/csi-operator/dell-csi-operator:v1.7.0
+   changing: dellemc/csi-isilon:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-isilon:v2.0.0
+   changing: dellemc/csi-isilon:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-isilon:v2.1.0
+   changing: dellemc/csipowermax-reverseproxy:v1.4.0 -&amp;gt; localregistry:5000/csi-operator/csipowermax-reverseproxy:v1.4.0
+   changing: dellemc/csi-powermax:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.0.0
+   changing: dellemc/csi-powermax:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.1.0
+   changing: dellemc/csi-powerstore:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.0.0
+   changing: dellemc/csi-powerstore:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.1.0
+   changing: dellemc/csi-unity:nightly -&amp;gt; localregistry:5000/csi-operator/csi-unity:nightly
+   changing: dellemc/csi-unity:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.0.0
+   changing: dellemc/csi-unity:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.1.0
+   changing: dellemc/csi-vxflexos:v2.0.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.0.0
+   changing: dellemc/csi-vxflexos:v2.1.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.1.0
+   changing: dellemc/sdc:3.5.1.1 -&amp;gt; localregistry:5000/csi-operator/sdc:3.5.1.1
+   changing: dellemc/sdc:3.5.1.1-1 -&amp;gt; localregistry:5000/csi-operator/sdc:3.5.1.1-1
+   changing: dellemc/sdc:3.6 -&amp;gt; localregistry:5000/csi-operator/sdc:3.6
+   changing: docker.io/busybox:1.32.0 -&amp;gt; localregistry:5000/csi-operator/busybox:1.32.0
+   ...
+   ...
+ 
 *
 * Complete
-
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;perform-either-a-helm-installation-or-operator-installation&#34;&gt;Perform either a Helm installation or Operator installation&lt;/h3&gt;
 &lt;p&gt;Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via &lt;a href=&#34;../helm&#34;&gt;Helm&lt;/a&gt; or &lt;a href=&#34;../operator/#manual-installation&#34;&gt;Operator&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTES:&lt;/em&gt;&lt;/p&gt;

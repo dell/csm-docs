@@ -59,13 +59,13 @@
 The mechanism for managing this storage would utilize a CSI Driver.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Architecture Invariant&lt;/strong&gt;: We assume there may be many Kubernetes clusters, potentially containing multiple CSI Drivers each with their own Sidecar Proxy.&lt;/p&gt;
 &lt;h3 id=&#34;csi-driver&#34;&gt;CSI Driver&lt;/h3&gt;
-&lt;p&gt;A CSI Driver supports the Container Service Interface (CSI) specification. Dell EMC provides customers with CSI Drivers for its various storage arrays.
+&lt;p&gt;A CSI Driver supports the Container Service Interface (CSI) specification. Dell provides customers with CSI Drivers for its various storage arrays.
 CSM for Authorization intends to support a majority, if not all, of these drivers.&lt;/p&gt;
 &lt;p&gt;A CSI Driver will typically be configured to communicate directly to its intended storage array and as such will be limited in using only the authentication
 methods supported by the Storage Array itself, e.g. Basic authentication over TLS.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Architecture Invariant&lt;/strong&gt;: We try to avoid having to make any code changes to the CSI Driver when adding support for it. Any CSI Driver should ideally not be aware that it is communicating to the Sidecar Proxy.&lt;/p&gt;
 &lt;h3 id=&#34;sidecar-proxy&#34;&gt;Sidecar Proxy&lt;/h3&gt;
-&lt;p&gt;The CSM for Authorization Sidecar Proxy is a sidecar container that gets &amp;ldquo;injected&amp;rdquo; into the CSI Driver&amp;rsquo;s Pod. It acts as a proxy and forwards all requests to a
+&lt;p&gt;The CSM for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver&amp;rsquo;s Pod. It acts as a proxy and forwards all requests to a
 CSM Authorization Server.&lt;/p&gt;
 &lt;p&gt;The &lt;a href=&#34;#csi-driver&#34;&gt;CSI Driver section&lt;/a&gt; noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the CSM for Authorization
 Sidecar Proxy is able to override the Authorization HTTP header for outbound requests to use Bearer tokens. Such tokens are managed by CSM for Authorization as will
@@ -79,10 +79,8 @@ be described later in this document.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;csm-for-authorization-cli&#34;&gt;CSM for Authorization CLI&lt;/h3&gt;
 &lt;p&gt;The &lt;a href=&#34;../cli&#34;&gt;&lt;em&gt;karavictl&lt;/em&gt;&lt;/a&gt; CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running CSM for Authorization Server.&lt;/p&gt;
-&lt;p&gt;Additionally, &lt;em&gt;karavictl&lt;/em&gt; provides functionality for supporting the sidecar proxy injection mechanism mentioned above. Injection is discussed in more detail later
-on in this document.&lt;/p&gt;
 &lt;h3 id=&#34;storage-array&#34;&gt;Storage Array&lt;/h3&gt;
-&lt;p&gt;A Storage Array is typically considered to be one of the various Dell EMC storage offerings, e.g. Dell EMC PowerFlex which is supported by CSM for Authorization
+&lt;p&gt;A Storage Array is typically considered to be one of the various Dell storage offerings, e.g. Dell PowerFlex which is supported by CSM for Authorization
 today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
 &lt;h2 id=&#34;how-it-works&#34;&gt;How it Works&lt;/h2&gt;
 &lt;p&gt;CSM for Authorization intends to override the existing authorization methods between a CSI Driver and its Storage Array. This may be desirable for several reasons, if:&lt;/p&gt;
@@ -256,7 +254,7 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
 &lt;li&gt;200 GB local storage&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;deploying-the-csm-authorization-proxy-server&#34;&gt;Deploying the CSM Authorization Proxy Server&lt;/h2&gt;
-&lt;p&gt;The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.&lt;/p&gt;
+&lt;p&gt;The first part deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.&lt;/p&gt;
 &lt;p&gt;The CSM for Authorization proxy server is installed using a single binary installer.&lt;/p&gt;
 &lt;h3 id=&#34;single-binary-installer&#34;&gt;Single Binary Installer&lt;/h3&gt;
 &lt;p&gt;The easiest way to obtain the single binary installer RPM is directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
@@ -293,21 +291,280 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;In order to configure secure grpc connectivity, an additional subdomain in the format &lt;code&gt;grpc.DNS_host_name&lt;/code&gt; is also required. All traffic from &lt;code&gt;grpc.DNS_host_name&lt;/code&gt; needs to be routed to &lt;code&gt;DNS_host_name&lt;/code&gt; address, this can be configured by adding a new DNS entry for &lt;code&gt;grpc.DNS_host_name&lt;/code&gt; or providing a temporary path in the &lt;code&gt;/etc/hosts&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The certificate provided in &lt;code&gt;crtFile&lt;/code&gt; should be valid for both the &lt;code&gt;DNS_host_name&lt;/code&gt; and the &lt;code&gt;grpc.DNS_host_name&lt;/code&gt; address.&lt;/p&gt;
+&lt;p&gt;For example, create the certificate config file with alternate names (to include example.com and grpc.example.com) and then create the .crt file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; ```
+ CN = example.com
+ subjectAltName = @alt_names
+ [alt_names]
+ DNS.1 = grpc.example.com
+
+ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out example.com.crt -days 365 -sha256
+ ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To install the rpm package on the system, run the below command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;rpm -ivh &amp;lt;rpm_file_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After installation, application data will be stored on the system under &lt;code&gt;/var/lib/rancher/k3s/storage/&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;configuring-the-csm-for-authorization-proxy-server&#34;&gt;Configuring the CSM for Authorization Proxy Server&lt;/h2&gt;
+&lt;p&gt;The storage administrator must first configure the proxy server with the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Storage systems&lt;/li&gt;
+&lt;li&gt;Tenants&lt;/li&gt;
+&lt;li&gt;Roles&lt;/li&gt;
+&lt;li&gt;Bind roles to tenants&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Run the following commands on the Authorization proxy server:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;# Specify any desired name
+export RoleName=&amp;quot;&amp;quot;
+export RoleQuota=&amp;quot;&amp;quot;
+export TenantName=&amp;quot;&amp;quot;
+
+# Specify info about Array1
+export Array1Type=&amp;quot;&amp;quot;
+export Array1SystemID=&amp;quot;&amp;quot;
+export Array1User=&amp;quot;&amp;quot;
+export Array1Password=&amp;quot;&amp;quot;
+export Array1Pool=&amp;quot;&amp;quot;
+export Array1Endpoint=&amp;quot;&amp;quot;
+
+# Specify info about Array2
+export Array2Type=&amp;quot;&amp;quot;
+export Array2SystemID=&amp;quot;&amp;quot;
+export Array2User=&amp;quot;&amp;quot;
+export Array2Password=&amp;quot;&amp;quot;
+export Array2Pool=&amp;quot;&amp;quot;
+export Array2Endpoint=&amp;quot;&amp;quot;
+
+# Specify IPs
+export DriverHostVMIP=&amp;quot;&amp;quot; 
+export DriverHostVMPassword=&amp;quot;&amp;quot;
+export DriverHostVMUser=&amp;quot;&amp;quot;
+
+# Specify Authorization host address. NOTE: this is not the same as IP
+export AuthorizationHost=&amp;quot;&amp;quot;
+
+echo === Creating Storage(s) ===
+# Add array1 to authorization
+karavictl storage create \
+          --type ${Array1Type} \
+          --endpoint  ${Array1Endpoint} \
+          --system-id ${Array1SystemID} \
+          --user ${Array1User} \
+                --password ${Array1Password} \
+          --insecure
+
+# Add array2 to authorization
+ karavictl storage create \
+          --type ${Array2Type} \
+          --endpoint  ${Array2Endpoint} \
+          --system-id ${Array2SystemID} \
+          --user ${Array2User} \
+                --password ${Array2Password} \
+          --insecure
+  
+echo === Creating Tenant ===
+karavictl tenant create -n $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationHost}&amp;quot;
+
+echo === Creating Role ===
+karavictl role create \
+         --role=${RoleName}=${Array1Type}=${Array1SystemID}=${Array1Pool}=${RoleQuota} \
+         --role=${RoleName}=${Array2Type}=${Array2SystemID}=${Array2Pool}=${RoleQuota}   
+
+echo === === Binding Role ===
+karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure --addr &amp;quot;grpc.${AuthorizationHost}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;generate-a-token&#34;&gt;Generate a Token&lt;/h3&gt;
+&lt;p&gt;After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo === Generating token ===
+karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationHost}&amp;quot; | jq -r &#39;.Token&#39; &amp;gt; token.yaml
+
+echo === Copy token to Driver Host ===
+sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The sample above copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.&lt;/p&gt;
+&lt;h3 id=&#34;copy-the-karavictl-binary-to-the-kubernetes-master-node&#34;&gt;Copy the karavictl Binary to the Kubernetes Master Node&lt;/h3&gt;
+&lt;p&gt;The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node where Kubernetes tenant admins so they configure the Dell EMC CSI driver with CSM for Authorization.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.&lt;/p&gt;
+&lt;h2 id=&#34;configuring-a-dell-emc-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell EMC CSI Driver with CSM for Authorization&lt;/h2&gt;
+&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt;. This is controlled by the Kubernetes tenant admin.&lt;/p&gt;
+&lt;p&gt;There are currently 2 ways of doing this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Using the &lt;a href=&#34;../../deployment&#34;&gt;CSM Installer&lt;/a&gt; (&lt;em&gt;Recommended installation method&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;Manually by following the steps &lt;a href=&#34;#configuring-a-dell-emc-csi-driver&#34;&gt;below&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;configuring-a-dell-emc-csi-driver&#34;&gt;Configuring a Dell EMC CSI Driver&lt;/h3&gt;
+&lt;p&gt;Given a setup where Kubernetes, a storage system, CSI driver(s), and CSM for Authorization are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:&lt;/p&gt;
+&lt;p&gt;Run the following commands on the CSI Driver host&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt; # Specify Authorization host address. NOTE: this is not the same as IP
+ export AuthorizationHost=&amp;quot;&amp;quot;
+
+ echo === Applying token token ===
+ # It is assumed that array type powermax has the namespace &amp;quot;powermax&amp;quot; and powerflex has the namepace &amp;quot;vxflexos&amp;quot;
+ kubectl apply -f /tmp/token.yaml -n powermax
+ kubectl apply -f /tmp/token.yaml -n vxflexos
+
+ echo === injecting sidecar in all CSI driver hosts that token has been applied to === 
+ sudo curl -k https://${AuthorizationHost}/install | sh
+ 
+ # NOTE: you can also query parameters(&amp;quot;namespace&amp;quot; and &amp;quot;proxy-port&amp;quot;) with the curl url if you desire a specific behavior.
+ # 1) For instance, if you want to inject into just powermax, you can run
+ #    sudo curl -k https://${AuthorizationHost}/install?namespace=powermax | sh
+ # 2) If you want to specify the proxy-port for powermax to be 900001, you can run
+ #    sudo curl -k https://${AuthorizationHost}/install?proxy-port=powermax:900001 | sh
+ # 3) You can mix behaviors
+ #    sudo curl -k https://${AuthorizationHost}/install?namespace=powermax&amp;amp;proxy-port=powermax:900001&amp;amp;namespace=vxflexos | sh
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;updating-csm-for-authorization-proxy-server-configuration&#34;&gt;Updating CSM for Authorization Proxy Server Configuration&lt;/h2&gt;
+&lt;p&gt;CSM for Authorization has a subset of configuration parameters that can be updated dynamically:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;certificate.crtFile&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Path to the host certificate file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;certificate.keyFile&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Path to the host private key file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;certificate.rootCertificate&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Path to the root CA file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;web.sidecarproxyaddr&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;127.0.0.1:5000/sidecar-proxy:latest&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Docker registry address of the CSM for Authorization sidecar-proxy&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;web.jwtsigningsecret&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;secret&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;The secret used to sign JWT tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Updating configuration parameters can be done by editing the &lt;code&gt;karavi-config-secret&lt;/code&gt; on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;k3s kubectl -n karavi get secret/karavi-config-secret&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To update or add parameters, you must edit the base64 encoded data in the secret. The&lt;code&gt; karavi-config-secret&lt;/code&gt; data can be decoded like so:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;k3s kubectl -n karavi get secret/karavi-config-secret -o yaml | grep config.yaml | head -n 1 | awk &#39;{print $2}&#39; | base64 -d&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Save the output to a file or copy it to an editor to make changes. Once you are done with the changes, you must encode the data to base64. If your changes are in a file, you can encode it like so:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cat &amp;lt;file&amp;gt; | base64&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Copy the new, encoded data and edit the &lt;code&gt;karavi-config-secret&lt;/code&gt; with the new data. Run this command to edit the secret:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;k3s kubectl -n karavi edit secret/karavi-config-secret&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Replace the data in &lt;code&gt;config.yaml&lt;/code&gt; under the &lt;code&gt;data&lt;/code&gt; field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you are updating the signing secret, the tenants need to be updated with new tokens via the &lt;code&gt;karavictl generate token&lt;/code&gt; command like so:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationHost}&amp;quot; | jq -r &#39;.Token&#39; &amp;gt; kubectl -n $namespace apply -f -&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;csm-for-authorization-proxy-server-dynamic-configuration-settings&#34;&gt;CSM for Authorization Proxy Server Dynamic Configuration Settings&lt;/h2&gt;
+&lt;p&gt;Some settings are not stored in the &lt;code&gt;karavi-config-secret&lt;/code&gt; but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM for Authorization logging settings during runtime, run the below command on the K3s cluster, make your changes, and save the updated configmap data.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;k3s kubectl -n karavi edit configmap/csm-config-params
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/&amp;lt;release_name&amp;gt;-config-params
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Using PowerFlex as an example, &lt;code&gt;kubectl -n vxflexos edit configmap/vxflexos-config-params&lt;/code&gt; can be used to update the logging level of the sidecar-proxy and the driver.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Deployment</title>
+      <link>https://dell.github.io/csm-docs/v1/authorization/deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/authorization/deployment/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Deploying the CSM for Authorization proxy server, to be controlled by storage administrators&lt;/li&gt;
+&lt;li&gt;Configuring one to many &lt;a href=&#34;../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers with CSM for Authorization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;The CSM for Authorization proxy server requires a Linux host with the following minimum resource allocations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;32 GB of memory&lt;/li&gt;
+&lt;li&gt;4 CPU&lt;/li&gt;
+&lt;li&gt;200 GB local storage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;deploying-the-csm-authorization-proxy-server&#34;&gt;Deploying the CSM Authorization Proxy Server&lt;/h2&gt;
+&lt;p&gt;The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.&lt;/p&gt;
+&lt;p&gt;The CSM for Authorization proxy server is installed using a single binary installer.&lt;/p&gt;
+&lt;h3 id=&#34;single-binary-installer&#34;&gt;Single Binary Installer&lt;/h3&gt;
+&lt;p&gt;The easiest way to obtain the single binary installer RPM is directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
+&lt;p&gt;Alternatively, the single binary installer can be built from source by cloning the &lt;a href=&#34;https://github.com/dell/karavi-authorization&#34;&gt;GitHub repository&lt;/a&gt; and using the following Makefile targets to build the installer:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;make dist build-installer rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;build-installer&lt;/code&gt; step creates a binary at &lt;code&gt;karavi-authorization/bin/deploy&lt;/code&gt; and embeds all components required for installation. The &lt;code&gt;rpm&lt;/code&gt; step generates an RPM package and stores it at &lt;code&gt;karavi-authorization/deploy/rpm/x86_64/&lt;/code&gt;.
+This allows CSM for Authorization to be installed in network-restricted environments.&lt;/p&gt;
+&lt;p&gt;A Storage Administrator can execute the installer or rpm package as a root user or via &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;installing-the-rpm&#34;&gt;Installing the RPM&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt; having the following contents:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;web&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;jwtsigningsecret&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;secret&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;proxy&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;host&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;:8080&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;zipkin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;collectoruri&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;http://DNS-hostname:9411/api/v2/spans&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;probability&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;
+  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;certificate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;keyFile&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_private_key_file&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;crtFile&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_host_cert_file&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;rootCertificate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_root_CA_file&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hostname&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;DNS-hostname&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In an instance where a secure deployment is not required, an insecure deployment is possible. Please note that self-signed certificates will be created for you using cert-manager to allow TLS encryption for communication on the CSM for Authorization proxy server. However, this is not recommended for production environments. For an insecure deployment, the json file in the location &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt; only requires the following contents:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hostname&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;DNS-hostname&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The certificate provided in &lt;code&gt;crtFile&lt;/code&gt; should be valid for both the &lt;code&gt;DNS_host_name&lt;/code&gt; and the &lt;code&gt;grpc.DNS_host_name&lt;/code&gt; address.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;DNS-hostname&lt;/code&gt; refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running &lt;code&gt;nslookup &amp;lt;IP_address&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;There are a number of ways to create certificates. In a production environment, certificates are usually created and managed by an IT administrator. Otherwise, certificates can be created using OpenSSL.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;For example, create the certificate config file with alternate names (to include example.com and grpc.example.com) and then create the .crt file:  
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;In order to configure secure grpc connectivity, an additional subdomain in the format &lt;code&gt;grpc.DNS-hostname&lt;/code&gt; is also required. All traffic from &lt;code&gt;grpc.DNS-hostname&lt;/code&gt; needs to be routed to &lt;code&gt;DNS-hostname&lt;/code&gt; address, this can be configured by adding a new DNS entry for &lt;code&gt;grpc.DNS-hostname&lt;/code&gt; or providing a temporary path in the systems &lt;code&gt;/etc/hosts&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The certificate provided in &lt;code&gt;crtFile&lt;/code&gt; should be valid for both the &lt;code&gt;DNS-hostname&lt;/code&gt; and the &lt;code&gt;grpc.DNS-hostname&lt;/code&gt; address.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;For example, create the certificate config file with alternate names (to include DNS-hostname and grpc.DNS-hostname) and then create the .crt file: 
 
-    ```
-    CN = example.com
-    subjectAltName = @alt_names
-    [alt_names]
-    DNS.1 = grpc.example.com
+  ```
+  CN = DNS-hostname
+  subjectAltName = @alt_names
+  [alt_names]
+  DNS.1 = grpc.DNS-hostname.com
 
-    openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out example.com.crt -days 365 -sha256
-    ```
+  $ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out DNS-hostname.com.crt -days 365 -sha256
+  ```
 &lt;/code&gt;&lt;/pre&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
@@ -327,6 +584,9 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;li&gt;Bind roles to tenants&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Run the following commands on the Authorization proxy server:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The &lt;code&gt;--insecure&lt;/code&gt; flag is only necessary if certificates were not provided in &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;# Specify any desired name
 export RoleName=&amp;quot;&amp;quot;
 export RoleQuota=&amp;quot;&amp;quot;
@@ -387,23 +647,27 @@ echo === === Binding Role ===
 karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;generate-a-token&#34;&gt;Generate a Token&lt;/h3&gt;
 &lt;p&gt;After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;--insecure&lt;/code&gt; flag is only necessary if certificates were not provided in &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;This sample copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;pre&gt;&lt;code&gt;echo === Generating token ===
 karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot; | jq -r &#39;.Token&#39; &amp;gt; token.yaml
 
 echo === Copy token to Driver Host ===
 sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The sample above copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;copy-the-karavictl-binary-to-the-kubernetes-master-node&#34;&gt;Copy the karavictl Binary to the Kubernetes Master Node&lt;/h3&gt;
-&lt;p&gt;The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell EMC CSI driver with CSM for Authorization.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;copy-the-karavictl-binary-to-the-kubernetes-master-node&#34;&gt;Copy the karavictl Binary to the Kubernetes Master Node&lt;/h3&gt;
+&lt;p&gt;The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell CSI driver with CSM for Authorization.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
 &lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;configuring-a-dell-emc-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell EMC CSI Driver with CSM for Authorization&lt;/h2&gt;
+&lt;h2 id=&#34;configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/h2&gt;
 &lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant admin.&lt;/p&gt;
-&lt;h3 id=&#34;configuring-a-dell-emc-csi-driver&#34;&gt;Configuring a Dell EMC CSI Driver&lt;/h3&gt;
+&lt;h3 id=&#34;configuring-a-dell-csi-driver&#34;&gt;Configuring a Dell CSI Driver&lt;/h3&gt;
 &lt;p&gt;Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -479,7 +743,7 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;li&gt;Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password&lt;/li&gt;
 &lt;li&gt;For PowerScale, the &lt;em&gt;systemID&lt;/em&gt; will be the &lt;em&gt;clusterName&lt;/em&gt; of the array.
 &lt;ul&gt;
-&lt;li&gt;The &lt;em&gt;isilon-creds&lt;/em&gt; secret has a &lt;em&gt;mountEndpoint&lt;/em&gt; parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with &lt;a href=&#34;https://github.com/dell/karavi-authorization&#34;&gt;CSM-Authorization&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;isilon-creds&lt;/em&gt; secret has a &lt;em&gt;mountEndpoint&lt;/em&gt; parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -534,8 +798,12 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;ol&gt;
 &lt;li&gt;Update &lt;em&gt;endpointPort&lt;/em&gt; to match the endpoint port number set in samples/secret/karavi-authorization-config.json&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;Notes:&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, endpointPort acts as a default value. If endpointPort is not specified in &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, then it should be specified in the &lt;em&gt;endpoint&lt;/em&gt; parameter of samples/secret/secret.yaml.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, endpointPort acts as a default value. If endpointPort is not specified in &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, then it should be specified in the &lt;em&gt;endpoint&lt;/em&gt; parameter of samples/secret/secret.yaml.&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;isilon-creds&lt;/em&gt; secret has a &lt;em&gt;mountEndpoint&lt;/em&gt; parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;Enable CSM for Authorization and provide &lt;em&gt;proxyHost&lt;/em&gt; address&lt;/li&gt;
@@ -587,12 +855,6 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;td&gt;Path to the root CA file&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;web.sidecarproxyaddr&lt;/td&gt;
-&lt;td&gt;String&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;127.0.0.1:5000/sidecar-proxy:latest&amp;rdquo;&lt;/td&gt;
-&lt;td&gt;Docker registry address of the CSM for Authorization sidecar-proxy&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;web.jwtsigningsecret&lt;/td&gt;
 &lt;td&gt;String&lt;/td&gt;
 &lt;td&gt;&amp;ldquo;secret&amp;rdquo;&lt;/td&gt;
@@ -610,7 +872,7 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;p&gt;&lt;code&gt;k3s kubectl -n karavi edit secret/karavi-config-secret&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Replace the data in &lt;code&gt;config.yaml&lt;/code&gt; under the &lt;code&gt;data&lt;/code&gt; field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are updating the signing secret, the tenants need to be updated with new tokens via the &lt;code&gt;karavictl generate token&lt;/code&gt; command like so:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are updating the signing secret, the tenants need to be updated with new tokens via the &lt;code&gt;karavictl generate token&lt;/code&gt; command like so. The &lt;code&gt;--insecure&lt;/code&gt; flag is only necessary if certificates were not provided in &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot; | jq -r &#39;.Token&#39; &amp;gt; kubectl -n $namespace apply -f -&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;csm-for-authorization-proxy-server-dynamic-configuration-settings&#34;&gt;CSM for Authorization Proxy Server Dynamic Configuration Settings&lt;/h2&gt;
@@ -654,7 +916,7 @@ kubectl apply -f /tmp/token.yaml -n isilon
         &lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Upgrading the CSM for Authorization proxy server&lt;/li&gt;
-&lt;li&gt;Upgrading the Dell EMC CSI drivers with CSM for Authorization enabled&lt;/li&gt;
+&lt;li&gt;Upgrading the Dell CSI drivers with CSM for Authorization enabled&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h3&gt;
 &lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -666,7 +928,7 @@ k3s kubectl version
 &lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The above steps manage install and upgrade of all dependencies that are required by the CSM for Authorization proxy server.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&#34;upgrading-dell-emc-csi-drivers-with-csm-for-authorization-enabled&#34;&gt;Upgrading Dell EMC CSI Driver(s) with CSM for Authorization enabled&lt;/h3&gt;
+&lt;h3 id=&#34;upgrading-dell-csi-drivers-with-csm-for-authorization-enabled&#34;&gt;Upgrading Dell CSI Driver(s) with CSM for Authorization enabled&lt;/h3&gt;
 &lt;p&gt;Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;../../csidriver/upgradation/drivers/powerflex/&#34;&gt;Upgrade PowerFlex CSI driver&lt;/a&gt;&lt;/li&gt;
@@ -709,10 +971,6 @@ This document outlines all karavictl commands, their intended use, options that 
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-cluster-info&#34;&gt;karavictl cluster-info&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Display the state of resources within the cluster&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;#karavictl-inject&#34;&gt;karavictl inject&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Inject the sidecar proxy into a CSI driver pod&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-generate&#34;&gt;karavictl generate&lt;/a&gt;&lt;/td&gt;
@@ -808,7 +1066,7 @@ This document outlines all karavictl commands, their intended use, options that 
 &lt;h3 id=&#34;karavictl&#34;&gt;karavictl&lt;/h3&gt;
 &lt;p&gt;karavictl is used to interact with CSM Authorization Server&lt;/p&gt;
 &lt;h5 id=&#34;synopsis&#34;&gt;Synopsis&lt;/h5&gt;
-&lt;p&gt;karavictl provides security, RBAC, and quota limits for accessing Dell EMC
+&lt;p&gt;karavictl provides security, RBAC, and quota limits for accessing Dell
 storage products from Kubernetes clusters&lt;/p&gt;
 &lt;h5 id=&#34;options&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
@@ -836,61 +1094,35 @@ redis-primary          1/1     1            1           59m
 proxy-server           1/1     1            1           59m
 redis-commander        1/1     1            1           59m
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
-&lt;h3 id=&#34;karavictl-inject&#34;&gt;karavictl inject&lt;/h3&gt;
-&lt;p&gt;Inject the sidecar proxy into a CSI driver pod&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-2&#34;&gt;Synopsis&lt;/h5&gt;
-&lt;p&gt;Injects the sidecar proxy into a CSI driver pod.&lt;/p&gt;
-&lt;p&gt;You can inject resources coming from stdin.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;karavictl inject [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-2&#34;&gt;Options&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;  -h, --help                help for inject
-      --image-addr string   Help message for image-addr
-      --proxy-host string   Help message for proxy-host
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-1&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;examples&#34;&gt;Examples:&lt;/h5&gt;
-&lt;p&gt;Inject into an existing vxflexos CSI driver&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kubectl get secrets,deployments,daemonsets -n vxflexos -o yaml \
-   | karavictl inject --image-addr [IMAGE_REPO]:5000/sidecar-proxy:latest --proxy-host [PROXY_HOST_IP] \
-   | kubectl apply -f -
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-2&#34;&gt;Output&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get secrets,deployments,daemonsets -n vxflexos -o yaml \
-| karavictl inject --image-addr [IMAGE_REPO]:5000/sidecar-proxy:latest --proxy-host [PROXY_HOST_IP] \
-| kubectl apply -f -
-
-secret/karavi-authorization-config created
-deployment.apps/vxflexos-controller configured
-daemonset.apps/vxflexos-node configured
-&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-generate&#34;&gt;karavictl generate&lt;/h3&gt;
 &lt;p&gt;Generate resources for use with CSM&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-3&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-2&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Generates resources for use with CSM&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl generate [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-3&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-2&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for generate
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-2&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-1&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-3&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-2&#34;&gt;Output&lt;/h5&gt;
 &lt;p&gt;Outputs help text&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-generate-token&#34;&gt;karavictl generate token&lt;/h3&gt;
 &lt;p&gt;Generate tokens&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-4&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-3&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Generate tokens for use with the CSI Driver when in proxy mode
 The tokens are output as a Kubernetes Secret resource, so the results may
 be piped directly to kubectl:&lt;/p&gt;
 &lt;p&gt;Example: karavictl generate token | kubectl apply -f -&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl generate token [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-4&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-3&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --addr string            host:port address (default &amp;quot;grpc.gatekeeper.cluster:443&amp;quot;)
       --from-config string     File providing self-generated token information
   -h, --help                   help for token
       --tenant                 Tenant name 
       --shared-secret string   Shared secret for token signing
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-3&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-2&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-4&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-3&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl generate token --shared-secret supersecret
 
 apiVersion: v1
@@ -907,26 +1139,26 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;role-commands&#34;&gt;Role Commands&lt;/h2&gt;
 &lt;h3 id=&#34;karavictl-role&#34;&gt;karavictl role&lt;/h3&gt;
 &lt;p&gt;Manage roles&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-5&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-4&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Manage roles&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl role [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-5&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-4&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for role
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-4&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-3&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-5&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-4&#34;&gt;Output&lt;/h5&gt;
 &lt;p&gt;Outputs help text&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-get&#34;&gt;karavictl role get&lt;/h3&gt;
 &lt;p&gt;Get role&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-6&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-5&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Get role&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl role get [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-6&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-5&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for get
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-5&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-4&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-6&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-5&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl role get CSISilver
 
 {
@@ -942,14 +1174,14 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-list&#34;&gt;karavictl role list&lt;/h3&gt;
 &lt;p&gt;List roles&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-7&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-6&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;List roles&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl role list [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-7&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-6&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for list
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-6&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-5&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-7&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-6&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl role list
 
 {
@@ -979,10 +1211,10 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-create&#34;&gt;karavictl role create&lt;/h3&gt;
 &lt;p&gt;Create one or more CSM roles&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-8&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-7&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Creates one or more CSM roles&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl role create [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-8&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-7&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -f, --from-file string   role data from a file
       --role strings       role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
   -h, --help               help for create
@@ -990,9 +1222,9 @@ data:
 &lt;ul&gt;
 &lt;li&gt;For PowerScale, set the &lt;code&gt;quota&lt;/code&gt; to 0 as CSM for Authorization does not enforce quota limits.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h5 id=&#34;options-inherited-from-parent-commands-7&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;h5 id=&#34;options-inherited-from-parent-commands-6&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-8&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-7&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl role create --from-file roles.json
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
 &lt;p&gt;Alternatively, you can create a role in-line using:&lt;/p&gt;
@@ -1000,16 +1232,16 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-update&#34;&gt;karavictl role update&lt;/h3&gt;
 &lt;p&gt;Update one or more CSM roles&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-9&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-8&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Updates one or more CSM roles&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl role update [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-9&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-8&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -f, --from-file string   role data from a file
       --role strings       role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
   -h, --help               help for update
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-8&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-7&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-9&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-8&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl role update --from-file roles.json
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the update occurred.&lt;/p&gt;
 &lt;p&gt;Alternatively, you can update existing roles in-line using:&lt;/p&gt;
@@ -1017,69 +1249,69 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-delete&#34;&gt;karavictl role delete&lt;/h3&gt;
 &lt;p&gt;Delete role&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-10&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-9&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Delete role&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl role delete &amp;lt;role-name&amp;gt; [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-10&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-9&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for delete
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-9&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-8&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-10&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-9&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl role delete CSISilver
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-rolebinding&#34;&gt;karavictl rolebinding&lt;/h3&gt;
 &lt;p&gt;Manage role bindings&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-11&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-10&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Management for role bindings&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl rolebinding [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-11&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-10&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for rolebinding
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-10&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-9&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-11&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-10&#34;&gt;Output&lt;/h5&gt;
 &lt;p&gt;Outputs help text&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-rolebinding-create&#34;&gt;karavictl rolebinding create&lt;/h3&gt;
 &lt;p&gt;Create a rolebinding between role and tenant&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-12&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-11&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Creates a rolebinding between role and tenant&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl rolebinding create [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-12&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-11&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for create
   -r, --role string     Role name
   -t, --tenant string   Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-11&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-10&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;quot;localhost:443&amp;quot;)
       --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-12&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-11&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl rolebinding create --role CSISilver --tenant Alice
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the rolebinding creation occurred.&lt;/p&gt;
 &lt;h2 id=&#34;storage-commands&#34;&gt;Storage Commands&lt;/h2&gt;
 &lt;h3 id=&#34;karavictl-storage&#34;&gt;karavictl storage&lt;/h3&gt;
 &lt;p&gt;Manage storage systems&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-13&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-12&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Manages storage systems&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl storage [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-13&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-12&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for storage
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-12&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-11&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-13&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-12&#34;&gt;Output&lt;/h5&gt;
 &lt;p&gt;Outputs help text&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-storage-get&#34;&gt;karavictl storage get&lt;/h3&gt;
 &lt;p&gt;Get details on a registered storage system.&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-14&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-13&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Gets details on a registered storage system.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl storage get [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-14&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-13&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help               help for get
   -s, --system-id string   System identifier (default &amp;quot;systemid&amp;quot;)
   -t, --type string        Type of storage system (&amp;quot;powerflex&amp;quot;, &amp;quot;powermax&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-13&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-12&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-14&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-13&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl storage get --type powerflex --system-id 3000000000011111
 {
   &amp;quot;User&amp;quot;: &amp;quot;admin&amp;quot;,
@@ -1090,14 +1322,14 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-storage-list&#34;&gt;karavictl storage list&lt;/h3&gt;
 &lt;p&gt;List registered storage systems.&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-15&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-14&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Lists registered storage systems.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl storage list [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-15&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-14&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for list
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-14&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-13&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-15&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-14&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl storage list
 
 {
@@ -1115,10 +1347,10 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-storage-create&#34;&gt;karavictl storage create&lt;/h3&gt;
 &lt;p&gt;Create and register a storage system.&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-16&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-15&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Creates and registers a storage system.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl storage create [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-16&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-15&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -e, --endpoint string    Endpoint of REST API gateway
   -h, --help               help for create
   -i, --insecure           Insecure skip verify
@@ -1126,18 +1358,18 @@ data:
   -s, --system-id string   System identifier (default &amp;quot;systemid&amp;quot;)
   -t, --type string        Type of storage system (&amp;quot;powerflex&amp;quot;, &amp;quot;powermax&amp;quot;)
   -u, --user string        Username (default &amp;quot;admin&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-15&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-14&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-16&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-15&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl storage create --endpoint https://1.1.1.1 --insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-storage-update&#34;&gt;karavictl storage update&lt;/h3&gt;
 &lt;p&gt;Update a registered storage system.&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-17&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-16&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Updates a registered storage system.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl storage update [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-17&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-16&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -e, --endpoint string    Endpoint of REST API gateway
   -h, --help               help for update
   -i, --insecure           Insecure skip verify
@@ -1145,44 +1377,59 @@ data:
   -s, --system-id string   System identifier (default &amp;quot;systemid&amp;quot;)
   -t, --type string        Type of storage system (&amp;quot;powerflex&amp;quot;, &amp;quot;powermax&amp;quot;)
   -u, --user string        Username (default &amp;quot;admin&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-16&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-15&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-17&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-16&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl storage update --endpoint https://1.1.1.1 --insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the update occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-storage-delete&#34;&gt;karavictl storage delete&lt;/h3&gt;
 &lt;p&gt;Delete a registered storage system.&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-18&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-17&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Deletes a registered storage system.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl storage delete [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-18&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-17&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help               help for delete
   -s, --system-id string   System identifier (default &amp;quot;systemid&amp;quot;)
   -t, --type string        Type of storage system (&amp;quot;powerflex&amp;quot;, &amp;quot;powermax&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-17&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-16&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-18&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-17&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl storage delete --type powerflex --system-id 3000000000011111
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
 &lt;h2 id=&#34;tenant-commands&#34;&gt;Tenant Commands&lt;/h2&gt;
 &lt;h3 id=&#34;karavictl-tenant&#34;&gt;karavictl tenant&lt;/h3&gt;
 &lt;p&gt;Manage tenants&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-19&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-18&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Management fortenants&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl tenant [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-19&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-18&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for tenant
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-18&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-17&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-19&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-18&#34;&gt;Output&lt;/h5&gt;
 &lt;p&gt;Outputs help text&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-tenant-create&#34;&gt;karavictl tenant create&lt;/h3&gt;
 &lt;p&gt;Create a tenant resource within CSM&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-20&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-19&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Creates a tenant resource within CSM&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl tenant create [flags]
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-19&#34;&gt;Options&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;  -h, --help   help for create
+  -n, --name string   Tenant name
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-18&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;quot;localhost:443&amp;quot;)
+      --config string   config file (default is $HOME/.karavictl.yaml)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-19&#34;&gt;Output&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;$ karavictl tenant create --name Alice
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-tenant-get&#34;&gt;karavictl tenant get&lt;/h3&gt;
+&lt;p&gt;Get a tenant resource within CSM&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-20&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Gets a tenant resource within CSM&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;karavictl tenant get [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-20&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for create
   -n, --name string   Tenant name
@@ -1190,21 +1437,6 @@ data:
 &lt;pre&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;quot;localhost:443&amp;quot;)
       --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-20&#34;&gt;Output&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;$ karavictl tenant create --name Alice
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;karavictl-tenant-get&#34;&gt;karavictl tenant get&lt;/h3&gt;
-&lt;p&gt;Get a tenant resource within CSM&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-21&#34;&gt;Synopsis&lt;/h5&gt;
-&lt;p&gt;Gets a tenant resource within CSM&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;karavictl tenant get [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-21&#34;&gt;Options&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;  -h, --help   help for create
-  -n, --name string   Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-20&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;quot;localhost:443&amp;quot;)
-      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-21&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl tenant get --name Alice
 
 {
@@ -1214,15 +1446,15 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-tenant-list&#34;&gt;karavictl tenant list&lt;/h3&gt;
 &lt;p&gt;Lists tenant resources within CSM&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-22&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-21&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Lists tenant resources within CSM&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl tenant list [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-22&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-21&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for create
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-21&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-20&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;quot;localhost:443&amp;quot;)
       --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-22&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-21&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl tenant list
 
 {
@@ -1236,16 +1468,16 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-tenant-delete&#34;&gt;karavictl tenant delete&lt;/h3&gt;
 &lt;p&gt;Deletes a tenant resource within CSM&lt;/p&gt;
-&lt;h5 id=&#34;synopsis-23&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;h5 id=&#34;synopsis-22&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Deletes a tenant resource within CSM&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;karavictl tenant delete [flags]
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-23&#34;&gt;Options&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-22&#34;&gt;Options&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;  -h, --help   help for create
   -n, --name string   Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-22&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-21&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;quot;localhost:443&amp;quot;)
       --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-23&#34;&gt;Output&lt;/h5&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-22&#34;&gt;Output&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl tenant delete --name Alice
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
 
@@ -1262,9 +1494,6 @@ data:
         
         
         &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#running-karavictl-inject-leaves-the-vxflexos-controller-in-a-pending-state&#34;&gt;Running &lt;code&gt;karavictl inject&lt;/code&gt; leaves the vxflexos-controller in a &lt;code&gt;Pending&lt;/code&gt; state&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#running-karavictl-inject-leaves-the-powermax-controller-in-a-pending-state&#34;&gt;Running &lt;code&gt;karavictl inject&lt;/code&gt; leaves the powermax-controller in a &lt;code&gt;Pending&lt;/code&gt; state&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#running-karavictl-inject-leaves-the-isilon-controller-in-a-pending-state&#34;&gt;Running &lt;code&gt;karavictl inject&lt;/code&gt; leaves the isilon-controller in a &lt;code&gt;Pending&lt;/code&gt; state&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &lt;code&gt;karavictl tenant&lt;/code&gt; commands result in an HTTP 504 error&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
@@ -1273,178 +1502,7 @@ data:
 &lt;pre&gt;&lt;code&gt;$ k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For OPA related logs, run:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ k3s kubectl logs deploy/proxy-server -n karavi -c opa
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;running-karavictl-inject-leaves-the-vxflexos-controller-in-a-pending-state&#34;&gt;Running &amp;ldquo;karavictl inject&amp;rdquo; leaves the vxflexos-controller in a &amp;ldquo;Pending&amp;rdquo; state&lt;/h3&gt;
-&lt;p&gt;This situation may occur when the number of vxflexos-controller pods that are deployed is equal to the number of schedulable nodes.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get pods -n vxflexos                                                                  
-
-NAME                                   READY   STATUS    RESTARTS   AGE
-vxflexos-controller-696cc5945f-4t94d   0/6     Pending   0          3m2s
-vxflexos-controller-75cdcbc5db-k25zx   5/5     Running   0          3m41s
-vxflexos-controller-75cdcbc5db-nkxqh   5/5     Running   0          3m42s
-vxflexos-node-mjc74                    3/3     Running   0          2m44s
-vxflexos-node-zgswp                    3/3     Running   0          2m44s
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;To resolve this issue, we need to temporarily reduce the number of replicas that the driver deployment is using.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Edit the deployment&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl edit -n vxflexos deploy/vxflexos-controller
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Find &lt;code&gt;replicas&lt;/code&gt; under the &lt;code&gt;spec&lt;/code&gt; section of the deployment manifest.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Reduce the number of &lt;code&gt;replicas&lt;/code&gt; by 1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Save the file&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Confirm that the updated controller pods have been deployed&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get pods -n vxflexos                                                                  
-
-NAME                                   READY   STATUS    RESTARTS   AGE
-vxflexos-controller-696cc5945f-4t94d   6/6     Running   0          4m41s
-vxflexos-node-mjc74                    3/3     Running   0          3m44s
-vxflexos-node-zgswp                    3/3     Running   0          3m44s
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Edit the deployment again&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Find &lt;code&gt;replicas&lt;/code&gt; under the &lt;code&gt;spec&lt;/code&gt; section of the deployment manifest.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Increase the number of &lt;code&gt;replicas&lt;/code&gt; by 1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Save the file&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Confirm that the updated controller pods have been deployed&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get pods -n vxflexos                                                                  
-
-NAME                                   READY   STATUS    RESTARTS   AGE
-vxflexos-controller-696cc5945f-4t94d   6/6     Running   0          5m41s
-vxflexos-controller-696cc5945f-6xxhb   6/6     Running   0          5m41s
-vxflexos-node-mjc74                    3/3     Running   0          4m44s
-vxflexos-node-zgswp                    3/3     Running   0          4m44s
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;running-karavictl-inject-leaves-the-powermax-controller-in-a-pending-state&#34;&gt;Running &amp;ldquo;karavictl inject&amp;rdquo; leaves the powermax-controller in a &amp;ldquo;Pending&amp;rdquo; state&lt;/h3&gt;
-&lt;p&gt;This situation may occur when the number of powermax-controller pods that are deployed is equal to the number of schedulable nodes.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get pods -n powermax                                                                
-
-NAME                                   READY   STATUS    RESTARTS   AGE
-powermax-controller-58d8779f5d-v7t56   0/6     Pending   0          25s
-powermax-controller-78f749847-jqphx    5/5     Running   0          10m
-powermax-controller-78f749847-w6vp5    5/5     Running   0          10m
-powermax-node-gx5pk                    3/3     Running   0          21s
-powermax-node-k5gwc                    3/3     Running   0          17s
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;To resolve this issue, we need to temporarily reduce the number of replicas that the driver deployment is using.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Edit the deployment&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl edit -n powermax deploy/powermax-controller
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Find &lt;code&gt;replicas&lt;/code&gt; under the &lt;code&gt;spec&lt;/code&gt; section of the deployment manifest.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Reduce the number of &lt;code&gt;replicas&lt;/code&gt; by 1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Save the file&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Confirm that the updated controller pods have been deployed&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get pods -n powermax
-NAME                                   READY   STATUS    RESTARTS   AGE     
-powermax-controller-58d8779f5d-cqx8d   6/6     Running   0          22s 
-powermax-node-gx5pk                    3/3     Running   3          8m3s    
-powermax-node-k5gwc                    3/3     Running   3          7m59s
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Edit the deployment again&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Find &lt;code&gt;replicas&lt;/code&gt; under the &lt;code&gt;spec&lt;/code&gt; section of the deployment manifest.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Increase the number of &lt;code&gt;replicas&lt;/code&gt; by 1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Save the file&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Confirm that the updated controller pods have been deployed&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get pods -n powermax
-NAME                                   READY   STATUS    RESTARTS   AGE
-powermax-controller-58d8779f5d-cqx8d   6/6     Running   0          22s
-powermax-controller-58d8779f5d-v7t56   6/6     Running   22         8m7s
-powermax-node-gx5pk                    3/3     Running   3          8m3s
-powermax-node-k5gwc                    3/3     Running   3          7m59s
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;running-karavictl-inject-leaves-the-isilon-controller-in-a-pending-state&#34;&gt;Running &amp;ldquo;karavictl inject&amp;rdquo; leaves the isilon-controller in a &amp;ldquo;Pending&amp;rdquo; state&lt;/h3&gt;
-&lt;p&gt;This situation may occur when the number of Isilon controller pods that are deployed is equal to the number of schedulable nodes.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get pods -n isilon                                                                 
-
-NAME                                 READY   STATUS    RESTARTS   AGE
-isilon-controller-58d8779f5d-v7t56   0/6     Pending   0          25s
-isilon-controller-78f749847-jqphx    5/5     Running   0          10m
-isilon-controller-78f749847-w6vp5    5/5     Running   0          10m
-isilon-node-gx5pk                    3/3     Running   0          21s
-isilon-node-k5gwc                    3/3     Running   0          17s
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;To resolve this issue, we need to temporarily reduce the number of replicas that the driver deployment is using.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Edit the deployment&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl edit -n &amp;lt;namespace&amp;gt; deploy/isilon-controller
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Find &lt;code&gt;replicas&lt;/code&gt; under the &lt;code&gt;spec&lt;/code&gt; section of the deployment manifest.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Reduce the number of &lt;code&gt;replicas&lt;/code&gt; by 1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Save the file&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Confirm that the updated controller pods have been deployed&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get pods -n isilon                                                                  
-
-NAME                                   READY   STATUS    RESTARTS   AGE
-isilon-controller-696cc5945f-4t94d   6/6     Running   0          4m41s
-isilon-node-mjc74                    3/3     Running   0          3m44s
-isilon-node-zgswp                    3/3     Running   0          3m44s
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Edit the deployment again&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Find &lt;code&gt;replicas&lt;/code&gt; under the &lt;code&gt;spec&lt;/code&gt; section of the deployment manifest.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Increase the number of &lt;code&gt;replicas&lt;/code&gt; by 1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Save the file&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Confirm that the updated controller pods have been deployed&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ kubectl get pods -n isilon
-NAME                                   READY   STATUS    RESTARTS   AGE
-isilon-controller-58d8779f5d-cqx8d   6/6     Running   0          22s
-isilon-controller-58d8779f5d-v7t56   6/6     Running   22         8m7s
-isilon-node-gx5pk                    3/3     Running   3          8m3s
-isilon-node-k5gwc                    3/3     Running   3          7m59s
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &amp;ldquo;karavictl tenant&amp;rdquo; commands result in an HTTP 504 error&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &amp;ldquo;karavictl tenant&amp;rdquo; commands result in an HTTP 504 error&lt;/h3&gt;
 &lt;p&gt;This situation may occur if there are Iptables or other firewall rules preventing communication with the provided &lt;code&gt;&amp;lt;grpc-address&amp;gt;&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ karavictl tenant list --addr &amp;lt;grpc-address&amp;gt;
 {
