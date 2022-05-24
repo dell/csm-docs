@@ -86,6 +86,7 @@ To uninstall a CSM operator installed with OLM run `bash scripts/uninstall_olm.s
 Dell CSM Operator can be upgraded in 2 ways:
 
 1.Using script (for non-OLM based installation)
+
 2.Using Operator Lifecycle Manager (OLM)
 
 #### Using Installation Script
@@ -93,6 +94,7 @@ Dell CSM Operator can be upgraded in 2 ways:
 2. `cd csm-operator`
 3. git checkout -b 'csm-operator-version'
 4. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
+
 >Note: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
 
 #### Using OLM
