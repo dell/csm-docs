@@ -683,7 +683,7 @@ CSI Driver for Dell Powerstore 2.3.0 and above supports NVMe/FC provisioning. To
 
 ## Volume group snapshot Support
 
-CSI Driver for Dell Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). More information can be found here: [Volume Group Snapshotter](#volume-group-snapshots).
+CSI Driver for Dell Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). More information can be found here: [Volume Group Snapshotter](../../../snapshots/volume-group-snapshots/).
 
 ## Configurable Volume Attributes (Optional)
 

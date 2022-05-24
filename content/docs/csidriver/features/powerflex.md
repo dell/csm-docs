@@ -82,7 +82,7 @@ spec:
 
 ## Create Consistent Snapshot of Group of Volumes
 
-This feature extends CSI specification to add the capability to create crash-consistent snapshots of a group of volumes. This feature is available as a technical preview. To use this feature, users have to deploy the csi-volumegroupsnapshotter side-car as part of the PowerFlex driver. Once the sidecar has been deployed, users can make snapshots by using yaml files, More information can be found here: [Volume Group Snapshotter](#volume-group-snapshots).
+This feature extends CSI specification to add the capability to create crash-consistent snapshots of a group of volumes. This feature is available as a technical preview. To use this feature, users have to deploy the csi-volumegroupsnapshotter side-car as part of the PowerFlex driver. Once the sidecar has been deployed, users can make snapshots by using yaml files, More information can be found here: [Volume Group Snapshotter](../../../snapshots/volume-group-snapshots/).
 
 ## Volume Expansion Feature
 
