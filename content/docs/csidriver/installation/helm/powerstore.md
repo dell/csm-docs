@@ -280,15 +280,15 @@ kubectl create -f <path_to_storageclass_file>
 
 ## Volume Snapshot Class
 
-Starting CSI PowerStore v1.4, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
+Starting CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerStore v2.1 driver*:
+*Upgrading from CSI PowerStore v2.1.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4 or higher, before upgrading to 2.2.
+It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4.0 or higher, before upgrading to 2.3.0.
 
 ## Dynamically update the powerstore secrets 
 
