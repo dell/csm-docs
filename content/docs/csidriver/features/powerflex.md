@@ -7,7 +7,7 @@ Description: Code features for PowerFlex Driver
 
 ## Volume Snapshot Feature
 
-The CSI PowerFlex driver version 2.0 and higher supports v1 snapshots.
+The CSI PowerFlex driver versions 2.0 and higher support v1 snapshots.
 
 In order to use Volume Snapshots, ensure the following components are deployed to your cluster:
 - Kubernetes Volume Snapshot CRDs
