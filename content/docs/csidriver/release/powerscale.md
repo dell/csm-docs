@@ -11,6 +11,7 @@ description: Release notes for PowerScale CSI driver
 - Added support for Kubernetes 1.24.
 - Added support to increase volume path limit.
 - Added support for OpenShift 4.10.
+- Added support for CSM Resiliency sidecar via Helm.
 
 ### Fixed Issues
 
