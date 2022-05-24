@@ -6,7 +6,7 @@ description: >
   Migrating Volumes Between Storage Classes
 ---
 
-You can migrate existing, already provisioned, volumes to another storage class by using volume migration feature. 
+You can migrate existing pre-provisioned volumes to another storage class by using volume migration feature. 
 
 As of CSM 1.3 two versions of migration supported: 
 - To replicated storage class from NON replicated one
@@ -31,7 +31,7 @@ migration:
 
 To trigger migration procedure, you need to patch existing PersistentVolume with migration annotation (by default `migration.storage.dell.com/migrate-to`) and in value of said annotation specify StorageClass name you want to migrate to. 
 
-For example, if have PV named `test-pv` already provisioned and we want to migrate it to replicated storage class named `powermax-replication` we can run:
+For example, if we have PV named `test-pv` already provisioned and we want to migrate it to replicated storage class named `powermax-replication` we can run:
 
 ```shell
 kubectl patch pv test-pv -p '{"metadata": {"annotations":{"migration.storage.dell.com/migrate-to":"powermax-replication"}}}'
@@ -58,7 +58,7 @@ Replication Groups in CSM Replication can be made namespaced, meaning that one S
 
 When just setting one annotation `migration.storage.dell.com/migrate-to` migrated volume is assumed to be used in same namespace as original PV and it's PVC and in case of being migrated to replication enabled storage class will be inserted in namespaced Replication Group inside PVC namespace. 
 
-However, you can define for what namespace migrated volume should use by setting `migration.storage.dell.com/namespace`, you can use same annotation in scenario where you only have statically provisioned PV, don't have it bound to any PVC and want to migrate it to another storage class
+However, you can define in which namespace migrated volume must be used after migration by setting `migration.storage.dell.com/namespace`, you can use same annotation in scenario where you only have statically provisioned PV, don't have it bound to any PVC and want to migrate it to another storage class
 
 
 ## Non Disruptive Migration
@@ -87,7 +87,7 @@ kubectl delete sts <sts-name> -n <ns-name> --cascade=orphan
 kubectl apply -f sts-manifest.yaml
 ```
 
-5. Find a PVC and pod of one replica of StatefulSet delete PVC first and Pod after it
+5. Find a PVC and pod of one replica of StatefulSet delete PVCs first and Pod after it
 ```shell
 kubectl delete pvc <pvc-name> -n <ns-name>
 ```
