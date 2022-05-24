@@ -3,10 +3,15 @@ title: Offline Installer
 linktitle: Offline Installer
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Offline Installer
+  Dell Container Storage Modules (CSM) for Observability Offline Installer
 ---
 
 The following instructions can be followed when a Helm chart will be installed in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.
+
+## Prerequisites 
+
+- Helm 3.3
+- The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
 
 ### Dependencies
 
@@ -125,6 +130,16 @@ To perform an offline installation of a Helm chart, the following steps should b
     [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
+    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-emc-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform the following steps:
+
+    ```
+    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+    ```
+
+    ```
+    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+    ```
+
     CSI Driver for PowerStore
     ```
     [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
@@ -132,7 +147,10 @@ To perform an offline installation of a Helm chart, the following steps should b
 
 4. Now that the required images have been made available and the Helm chart's configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart's repository.
 
-    **Note:** Optionally, you could provide your own [configurations](../helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
+    **Note:** 
+    - Optionally, you could provide your own [configurations](../helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
+    - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
+    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured. 
 
     ```
     [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm install -n install-namespace app-name karavi-observability
@@ -145,17 +163,4 @@ To perform an offline installation of a Helm chart, the following steps should b
     TEST SUITE: None
 
     ```
-
-5. (Optional) The following steps can be performed to enable CSM for Observability to use an existing instance of Authorization for accessing the REST API for the given storage systems.
-
-    **Note:** CSM for Authorization currently does not support the Observability module for PowerStore.
-
-    Copy the proxy Secret into the CSM for Observability namespace:
-    ```
-    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
-    ```
-
-    Use `karavictl` to update the Observability module deployment to use the Authorization module. Required parameters are the location of the sidecar-proxy Docker image and the URL of the Authorization module proxy. If the Authorization module was installed using certificates, the flags `--insecure=false` and `--root-certificate <location-of-root-certificate>` must be also be provided. If certificates were not provided during installation, the flag `--insecure=true` must be provided.
-    ```
-    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secrets,deployments -n [CSM_NAMESPACE] -o yaml | karavictl inject --insecure=false --root-certificate <location-of-root-certificate> --image-addr <sidecar-proxy-image-location> --proxy-host <proxy-host> | kubectl apply -f -
-    ```
+    

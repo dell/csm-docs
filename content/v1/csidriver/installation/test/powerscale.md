@@ -6,7 +6,7 @@ description: Tests to validate PowerScale CSI Driver installation
 
 This section provides multiple methods to test driver functionality in your environment.
 
-**Note**: To run the test for CSI Driver for Dell EMC PowerScale, install Helm 3.
+**Note**: To run the test for CSI Driver for Dell PowerScale, install Helm 3.
 
 ## Test deploying a simple pod with PowerScale storage
 
