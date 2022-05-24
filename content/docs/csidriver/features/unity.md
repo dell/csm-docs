@@ -144,7 +144,7 @@ status:
   readyToUse: true
 ```
 Note : 
-A  set of annotated volume snapshot class manifests have been provided in the `csi-unity/samples/volumesnapshotclass/` folder. Use these samples to create new Volume Snapshot to provision storage.
+A  set of annotated volume snapshot class manifests have been provided in the  [csi-unity/samples/volumesnapshotclass/](https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass) folder. Use these samples to create new Volume Snapshot to provision storage.
 
 ### Creating PVCs with Volume Snapshots as Source
 
