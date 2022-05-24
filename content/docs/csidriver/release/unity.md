@@ -5,10 +5,9 @@ description: Release notes for Unity XT CSI driver
 
 ## Release Notes - CSI Unity XT v2.3.0
 
-- Removed beta volumesnapshotclass sample files.
-
 ### New Features/Changes
 
+- Removed beta volumesnapshotclass sample files.
 
 ### Fixed Issues
 CSM Resiliency: Occasional failure unmounting Unity volume for raw block devices via iSCSI.
