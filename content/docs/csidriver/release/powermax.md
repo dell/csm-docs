@@ -14,6 +14,7 @@ description: Release notes for PowerMax CSI driver
 - Added support to filter topology keys based on user inputs.
 - Added support for SRDF Metro group sharing multiple namespaces.
 - Added support for Kubernetes 1.24.
+- Added support for OpenShift 4.10.
 
 ### Fixed Issues
 There are no fixed issues in this release.

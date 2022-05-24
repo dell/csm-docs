@@ -9,7 +9,8 @@ description: Release notes for Dell CSI Operator
 
 ### New Features/Changes
 
-- Added support for Kubernetes 1.23.
+- Added support for Kubernetes 1.24.
+- Added support for OpenShift 4.10.
 
 ### Fixed Issues
 There are no fixed issues in this release.
