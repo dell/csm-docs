@@ -3,7 +3,7 @@ title: "Troubleshooting"
 linkTitle: "Troubleshooting"
 weight: 10
 Description: >
-  Dell EMC Container Storage Modules (CSM) troubleshooting information
+  Dell Container Storage Modules (CSM) troubleshooting information
 ---
 
 Troubleshooting links for Container Storage Modules:

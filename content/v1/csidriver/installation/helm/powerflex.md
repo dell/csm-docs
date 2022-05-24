@@ -5,22 +5,22 @@ description: >
   Installing the CSI Driver for PowerFlex via Helm
 ---
 
-The CSI Driver for Dell EMC PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
-- CSI Driver for Dell EMC PowerFlex
+- CSI Driver for Dell PowerFlex
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - Kubernetes External Snapshotter, which provides snapshot support
 - Kubernetes External Resizer, which resizes the volume
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
-- CSI Driver for Dell EMC PowerFlex
+- CSI Driver for Dell PowerFlex
 - Kubernetes Node Registrar, which handles the driver registration
 
 ## Prerequisites
 
-The following are requirements that must be met before installing the CSI Driver for Dell EMC PowerFlex:
+The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
 - Enable Zero Padding on PowerFlex
@@ -33,7 +33,7 @@ The following are requirements that must be met before installing the CSI Driver
 
 ### Install Helm 3.0
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerFlex.
+Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerFlex.
 
 **Steps**
 
@@ -41,7 +41,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell E
 
 ### Enable Zero Padding on PowerFlex
 
-Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see [Dell EMC PowerFlex documentation](https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html).
+Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see [Dell PowerFlex documentation](https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html).
 
 ### Install PowerFlex Storage Data Client
 
@@ -51,17 +51,17 @@ currently only Red Hat CoreOS (RHCOS).
 On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps [below](#manual-sdc-deployment).
 Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 
-**Optional:** For a typical install, you will pull SDC kernel modules from the Dell EMC FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The [PowerFlex KB article](https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for) has instructions on how to do this. 
+**Optional:** For a typical install, you will pull SDC kernel modules from the Dell FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The [PowerFlex KB article](https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for) has instructions on how to do this. 
 
 #### Manual SDC Deployment
 
-For detailed PowerFlex installation procedure, see the [Dell EMC PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC as follows:
+For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deployment Guide](https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html). Install the PowerFlex SDC as follows:
 
 **Steps**
 
-1. Download the PowerFlex SDC from [Dell EMC Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
+1. Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
 2. Export the shell variable _MDM_IP_ in a comma-separated list using `export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx`, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.
-3. Install the SDC per the _Dell EMC PowerFlex Deployment Guide_:
+3. Install the SDC per the _Dell PowerFlex Deployment Guide_:
     - For Red Hat Enterprise Linux and CentOS, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
 4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`
 
@@ -77,14 +77,14 @@ controller:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
@@ -98,18 +98,18 @@ You can install CRDs and default snapshot controller by running following comman
 git clone https://github.com/kubernetes-csi/external-snapshotter/
 cd ./external-snapshotter
 git checkout release-<your-version>
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
+kubectl kustomize client/config/crd | kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
 ```
 
 *NOTE:*
-- When using Kubernetes 1.20/1.21/1.22 it is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+- When using Kubernetes 1.21/1.22/1.23 it is recommended to use 5.0.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
 
@@ -182,7 +182,9 @@ kubectl create -f deploy/kubernetes/snapshot-controller
     format and replace/update the secret.  
     - "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
     - Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
-    
+    - If the user is using complex K8s version like "v1.21.3-mirantis-1", use below kubeVersion check in helm/csi-unity/Chart.yaml file.
+           kubeVersion: ">= 1.21.0-0 < 1.24.0-0"
+
 5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features.  
 
 6. If using automated SDC deployment:
@@ -248,6 +250,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 - This install script also runs the `verify.sh` script. You will be prompted to enter the credentials for each of the Kubernetes nodes. 
   The `verify.sh` script needs the credentials to check if SDC has been configured on all nodes. 
 - It is mandatory to run install script after changes to MDM configuration in `vxflexos-config` secret. Refer [dynamic-array-configuration](../../../features/powerflex#dynamic-array-configuration)
+- If an extended Kubernetes version is being used (e.g. `v1.21.3-mirantis-1`) and is failing the version check in Helm even though it falls in the allowed range, then you must go into `helm/csi-vxflexos/Chart.yaml` and replace the standard `kubeVersion` check with the commented-out alternative. *Please note* that this will also allow the use of pre-release alpha and beta versions of Kubernetes, which is not supported.
   
 - (Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver. 
    - Mount options are specified in storageclass yaml under _mkfsFormatOption_. 
@@ -255,7 +258,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 ## Certificate validation for PowerFlex Gateway REST API calls 
 
-This topic provides details about setting up the certificate for the CSI Driver for Dell EMC PowerFlex.
+This topic provides details about setting up the certificate for the CSI Driver for Dell PowerFlex.
 
 *Before you begin*
 
@@ -333,13 +336,10 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
-*NOTE* 
-Support for v1beta1 snapshots is being discontinued in this release.
-
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerFlex v2.0 driver*:
+*Upgrading from CSI PowerFlex v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.1.
+It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.2.

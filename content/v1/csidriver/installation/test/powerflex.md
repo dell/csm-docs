@@ -6,7 +6,7 @@ description: Tests to validate PowerFlex CSI Driver installation
 
 This section provides multiple methods to test driver functionality in your environment.
 
-**Note**: To run the test for CSI Driver for Dell EMC PowerFlex, install Helm 3.
+**Note**: To run the test for CSI Driver for Dell PowerFlex, install Helm 3.
 
 ## Test deploying a simple pod with PowerFlex storage
 
@@ -91,7 +91,7 @@ The `snaptest.sh` script will create a snapshot using the definitions in the `sn
 
 *NOTE:* The `snaptest.sh` shell script creates the snapshots, describes them, and then deletes them. You can see your snapshots using `kubectl get volumesnapshot -n helmtest-vxflexos`.
 
-Notice that this _VolumeSnapshot_ class has a reference to a _snapshotClassName: vxflexos-snapclass_. The CSI Driver for Dell EMC PowerFlex installation does not create this class. You will need
+Notice that this _VolumeSnapshot_ class has a reference to a _snapshotClassName: vxflexos-snapclass_. The CSI Driver for Dell PowerFlex installation does not create this class. You will need
 to create instance of _VolumeSnapshotClass_ from one of default samples in `samples/volumesnapshotclass' directory.
 
 ## Test restoring from a snapshot

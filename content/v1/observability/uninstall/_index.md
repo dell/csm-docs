@@ -3,7 +3,7 @@ title: Uninstallation
 linktitle: Uninstallation
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Uninstallation
+  Dell Container Storage Modules (CSM) for Observability Uninstallation
 ---
 
 This section outlines the uninstallation steps for Container Storage Modules (CSM) for Observability.
@@ -18,5 +18,5 @@ $ helm delete karavi-observability --namespace [CSM_NAMESPACE]
 You may also want to uninstall the CRDs created for cert-manager.
 
 ```console
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
+$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml
 ```

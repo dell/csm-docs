@@ -47,6 +47,12 @@ kubectl create ns dell-replication-controller
 cp ../helm/csm-replication/values.yaml ./myvalues.yaml
 bash scripts/install.sh --values ./myvalues.yaml
 ```
+>Note: Current installation method allows you to specify custom `<FQDN>:<IP>` entry to be appended to controller's `/etc/hosts` file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server's address.
+> The feature can be enabled by modifying `values.yaml`.
+>``` hostAliases:
+> enableHostAliases: true
+> hostName: "foo.bar"
+> ip: "10.10.10.10"
 
 This script will do the following:
 1. Install `DellCSIReplicationGroup` CRD in your cluster
@@ -65,9 +71,9 @@ After the installation ConfigMap will consist of only the `logLevel` field, to a
 The following CSI drivers support replication:
 1. CSI driver for PowerMax
 2. CSI driver for PowerStore
+3. CSI driver for PowerScale
 
-Please follow the steps outlined [here](../powermax) for enabling replication for PowerMax & [here](../powerstore) for PowerStore during
-the driver installation.
+Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../powerstore) or [PowerScale](../powerscale) pages during the driver installation.
 
 >Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the CSM Replication controller installation process.
 

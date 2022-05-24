@@ -3,7 +3,7 @@ title: Upgrade
 linktitle: Upgrade 
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Resiliency upgrade
+  Dell Container Storage Modules (CSM) for Resiliency upgrade
 ---
 
 CSM for Resiliency can be upgraded as part of the Dell CSI driver upgrade process. The drivers can be upgraded either by a _helm chart_ or by the _Dell CSI Operator_. Currently, only _Helm chart_ upgrade is supported for CSM for Resiliency.
