@@ -397,7 +397,7 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
 
 ## Volume Snapshot Class
 
-A wide set of annotated storage class manifests have been provided in the `csi-unity/samples/volumesnapshotclass/` folder. Use these samples to create new Volume Snapshot to provision storage.
+A wide set of annotated storage class manifests have been provided in the [csi-unity/samples/volumesnapshotclass/](https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass) folder. Use these samples to create new Volume Snapshot to provision storage.
 
 ### What happens to my existing Volume Snapshot Classes?
 
