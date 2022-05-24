@@ -25,7 +25,7 @@ The drivers that support Helm chart installation allow CSM for Resiliency to be 
 # Enable this feature only after contact support for additional information
 podmon:
   enabled: true
-  image: dellemc/podmon:v1.1.0
+  image: dellemc/podmon:v1.2.0
   controller:
     args:
       - "--csisock=unix:/var/run/csi/csi.sock"
@@ -79,20 +79,20 @@ podmon:
   enabled: true
   controller:
     args:
-      - "-csisock=unix:/var/run/csi/csi.sock"
-      - "-labelvalue=csi-vxflexos"
-      - "-mode=controller"
-      - "-arrayConnectivityPollRate=5"
-      - "-arrayConnectivityConnectionLossThreshold=3"
+      - "--csisock=unix:/var/run/csi/csi.sock"
+      - "--labelvalue=csi-vxflexos"
+      - "--mode=controller"
+      - "--arrayConnectivityPollRate=5"
+      - "--arrayConnectivityConnectionLossThreshold=3"
       - "--skipArrayConnectionValidation=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
       - "--driverPodLabelValue=dell-storage"
   node:
     args:
-      - "-csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
-      - "-labelvalue=csi-vxflexos"
-      - "-mode=node"
-      - "-leaderelection=false"
+      - "--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
+      - "--labelvalue=csi-vxflexos"
+      - "--mode=node"
+      - "--leaderelection=false"
       - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
       - "--driverPodLabelValue=dell-storage"
 
@@ -108,20 +108,20 @@ podmon:
    enabled: true
    controller:
      args:
-       - "-csisock=unix:/var/run/csi/csi.sock"
-       - "-labelvalue=csi-unity"
-       - "-driverPath=csi-unity.dellemc.com"
-       - "-mode=controller"
+       - "--csisock=unix:/var/run/csi/csi.sock"
+       - "--labelvalue=csi-unity"
+       - "--driverPath=csi-unity.dellemc.com"
+       - "--mode=controller"
        - "--skipArrayConnectionValidation=false"
        - "--driver-config-params=/unity-config/driver-config-params.yaml"
        - "--driverPodLabelValue=dell-storage"
    node:
      args:
-       - "-csisock=unix:/var/lib/kubelet/plugins/unity.emc.dell.com/csi_sock"
-       - "-labelvalue=csi-unity"
-       - "-driverPath=csi-unity.dellemc.com"
-       - "-mode=node"
-       - "-leaderelection=false"
+       - "--csisock=unix:/var/lib/kubelet/plugins/unity.emc.dell.com/csi_sock"
+       - "--labelvalue=csi-unity"
+       - "--driverPath=csi-unity.dellemc.com"
+       - "--mode=node"
+       - "--leaderelection=false"
        - "--driver-config-params=/unity-config/driver-config-params.yaml"
        - "--driverPodLabelValue=dell-storage"
 
@@ -137,7 +137,7 @@ podmon:
   enabled: true
   controller:
     args:
-      - "-csisock=unix:/var/run/csi/csi.sock"
+      - "--csisock=unix:/var/run/csi/csi.sock"
       - "--labelvalue=csi-isilon"
       - "--arrayConnectivityPollRate=60"
       - "--driverPath=csi-isilon.dellemc.com"

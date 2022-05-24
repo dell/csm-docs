@@ -37,20 +37,20 @@ CSM for Resiliency provides the following capabilities:
 ## Supported Operating Systems/Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| COP/OS     | Supported Versions |
-| ---------- | :----------------: |
-| Kubernetes | 1.21, 1.22, 1.23   |
-| Red Hat OpenShift | 4.8, 4.9    |
-| RHEL       |     7.x, 8.x       |
-| CentOS     |     7.8, 7.9       |
+| COP/OS            | Supported Versions |
+| ----------------- | :----------------: |
+| Kubernetes        | 1.22, 1.23, 1.24   |
+| Red Hat OpenShift |     4.9, 4.10      |
+| RHEL              |     7.x, 8.x       |
+| CentOS            |     7.8, 7.9       |
 {{</table>}}
 
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex    | Unity XT                   |
-| ------------- | :----------: | :------------------------: |
-| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 |
+|               | PowerFlex    | Unity XT                          | PowerScale                              |
+| ------------- | :----------: | :-------------------------------: | :-------------------------------------: |
+| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 |
 {{</table>}}
 
 ## Supported CSI Drivers
