@@ -106,7 +106,7 @@ You can use `repctl` CLI tool to help you simplify running migration specific co
 
 ### Single PV
 
-In most basic form repctl can do the same as kubectl, for example, mirating single PV from our example will look like: 
+In most basic form repctl can do the same as kubectl, for example, migrating single PV from our example will look like: 
 
 ```shell
 ./repctl migrate pv test-pv --to-sc powermax-replication
