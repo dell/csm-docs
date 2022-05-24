@@ -8,8 +8,12 @@ Description: >
 
 ## Release Notes - CSM Resiliency 1.2.0
 
+- Added support for PowerScale CSI Driver.
+
 ### New Features/Changes
 
 ### Fixed Issues
+
+- Resiliency protection on driver node pods, see [CSI node failure protection](https://github.com/dell/csm/issues/145).
 
 ### Known Issues
