@@ -80,6 +80,10 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;The &lt;code&gt;kubectl logs vxflexos-controller-* -n vxflexos driver&lt;/code&gt; logs show that the system ID is incorrect.&lt;/td&gt;
+&lt;td&gt;Use the &lt;code&gt;get_vxflexos_info.sh&lt;/code&gt; to find the correct system ID.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs vxflexos-controller-* -n vxflexos driver&lt;/code&gt; logs show that the system ID is incorrect.&lt;/td&gt;
 &lt;td&gt;Use the &lt;code&gt;get_vxflexos_info.sh&lt;/code&gt; to find the correct system ID. Add the system ID to &lt;code&gt;myvalues.yaml&lt;/code&gt; script.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -298,10 +302,6 @@
 &lt;tr&gt;
 &lt;td&gt;PVC creation fails on a fresh cluster with &lt;strong&gt;iSCSI&lt;/strong&gt; and &lt;strong&gt;NFS&lt;/strong&gt; protocols alone enabled with error &lt;strong&gt;failed to provision volume with StorageClass &amp;ldquo;unity-iscsi&amp;rdquo;: error generating accessibility requirements: no available topology found&lt;/strong&gt;.&lt;/td&gt;
 &lt;td&gt;This is because iSCSI initiator login takes longer than the node pod startup time. This can be overcome by bouncing the node pods in the cluster using the below command the driver pods with &lt;strong&gt;kubectl get pods -n unity &amp;ndash;no-headers=true | awk &amp;lsquo;/unity-/{print $1}&#39;| xargs kubectl delete -n unity pod&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;On deleting pods sometimes the corresponding &amp;lsquo;volumeattachment&amp;rsquo; will not get removed. This issue is intermittent and happens with one specific protocol (FC, iSCSI, or NFS) based storageclasses. This issue occurs in Kubernetes versions 1.19 and both versions of OpenShift (4.5/4.6).&lt;/td&gt;
-&lt;td&gt;On deleting the stale volumeattachment manually, Controller Unpublish gets invoked and then the corresponding PVCs can be deleted.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
