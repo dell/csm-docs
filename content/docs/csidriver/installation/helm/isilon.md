@@ -25,6 +25,7 @@ The following are requirements to be met before installing the CSI Driver for De
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../replication/deployment/) first
+- If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../resiliency/deployment/) first
 
 ### Install Helm 3.0
 
@@ -266,7 +267,7 @@ The CSI driver for Dell PowerScale version 1.5 and later, `dell-csi-helm-install
 
 ### What happens to my existing storage classes?
 
-*Upgrading from CSI PowerScale v2.1 driver*:
+*Upgrading from CSI PowerScale v2.2 driver*:
 The storage classes created as part of the installation have an annotation - "helm.sh/resource-policy": keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.
 
 *NOTE*:
@@ -288,7 +289,7 @@ Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volu
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerScale v2.1 driver*:
+*Upgrading from CSI PowerScale v2.2 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
