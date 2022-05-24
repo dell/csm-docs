@@ -16,6 +16,27 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
 
 ### Prerequisite
 
+#### Fibre Channel Requirements
+
+CSI Driver for Dell PowerMax supports Fibre Channel communication. Ensure that the following requirements are met before you install CSI Driver:
+- Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.
+- Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
+- If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.
+
+#### iSCSI Requirements
+
+The CSI Driver for Dell PowerMax supports iSCSI connectivity. These requirements are applicable for the nodes that use iSCSI initiator to connect to the PowerMax arrays.
+
+Set up the iSCSI initiators as follows:
+- All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed.
+- Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
+- Kubernetes nodes should have access (network connectivity) to an iSCSI director on the Dell PowerMax array that has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerMax if required.
+- Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell PowerMax array.
+- The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.
+
+For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+
+
 #### Create secret for client-side TLS verification (Optional)
 Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../helm/powermax#certificate-validation-for-unisphere-rest-api-calls).
 
