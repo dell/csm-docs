@@ -338,8 +338,8 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerFlex v2.1 driver*:
+*Upgrading from CSI PowerFlex v2.2 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.2.
+It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.3.
