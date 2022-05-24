@@ -221,14 +221,13 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | enabled | Enable/Disable deployment of external health monitor sidecar. | No | false |
 | volumeHealthMonitorInterval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)| No | 60s |
 | **node** | This section allows the configuration of node-specific parameters. | - | - |
+| healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | nodeSelector | Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
 | tolerations | Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
 | **monitor**              | This section allows the configuration of the SDC monitoring pod.                                                                                                                                                                                                                                                                                                                                                  | -        | -       |
 | enabled                  | Set to enable the usage of the monitoring pod.                                                                                                                                                                                                                                                                                                                                                                | Yes     | false |
 | hostNetwork              | Set whether the monitor pod should run on the host network or not.                                                                                                                                                                                                                                                                                                                                            | Yes     | true |
 | hostPID                  | Set whether the monitor pod should run in the host namespace or not.                                                                                                                                                                                                                                                                                                                                          | Yes     | true |
-| **healthMonitor** | This section configures node side volume health monitoring | - | -|
-| enabled| Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | **vgsnapshotter** | This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.  | - | - |
 | enabled | A boolean that enable/disable vg snapshotter feature. | No | false |
 | image | Image for vg snapshotter. | No | " " |
@@ -338,8 +337,8 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerFlex v2.1 driver*:
+*Upgrading from CSI PowerFlex v2.2 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.2.
+It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.3.
