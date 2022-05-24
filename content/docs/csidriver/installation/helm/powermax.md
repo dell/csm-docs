@@ -236,6 +236,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
+| **migration** | [Migration](../../../../replication/migrating-volumes) is an optional feature to enable migration between storage classes | - | - |
+| enabled                  | A boolean that enables/disables migration feature. |  No      |   false   |
+| image | Image for dell-csi-migrator sidecar. | No | " " |
+| migrationPrefix | enables migration sidecar to read required information from the storage class fields | No | migration.storage.dell.com |
 | **replication** | [Replication](../../../../replication/deployment) is an optional feature to enable replication & disaster recovery capabilities of PowerMax to Kubernetes clusters.| - | - |
 | enabled                  | A boolean that enables/disables replication feature. |  No      |   false   |
 | image | Image for dell-csi-replicator sidecar. | No | " " |

@@ -69,3 +69,12 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Thin / Thick provisioning | Thin  | Thin              | Thin/Thick       | N/A              | Thin             |
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 {{</table>}}
+
+## CSM Modules Support Matrix for Dell CSI Drivers 
+
+| CSM Module        | CSI PowerFlex v2.3.0 | CSI PowerScale v2.3.0 | CSI PowerStore v2.3.0 | CSI PowerMax v2.3.0 | CSI Unity XT v2.3.0    |
+| ----------------- | -------------- | --------------- | --------------- | ------------- | --------------- |
+| Authorization v1.2| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
+| Observability v1.1.1| ✔️              | ❌              | ✔️               | ❌            | ❌            |
+| Replication   v1.3| ❌             | ✔️              | ✔️               | ✔️             | ❌            |
+| Resilency     v1.2| ✔️              | ✔️              | ❌              | ❌            | ✔️             |
