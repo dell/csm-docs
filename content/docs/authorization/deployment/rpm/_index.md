@@ -17,6 +17,10 @@ The CSM for Authorization proxy server requires a Linux host with the following 
 - 4 CPU
 - 200 GB local storage
 
+These packages need to be installed on the Linux host:
+- container-selinux
+- https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm
+
 ## Deploying the CSM Authorization Proxy Server
 
 The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator. 

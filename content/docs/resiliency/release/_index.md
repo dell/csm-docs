@@ -9,6 +9,7 @@ Description: >
 ## Release Notes - CSM Resiliency 1.2.0
 
 - Added support for PowerScale CSI Driver.
+- Support for node taint whe driver pod is unhealthy
 
 ### New Features/Changes
 
