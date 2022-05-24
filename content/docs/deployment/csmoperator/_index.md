@@ -83,9 +83,9 @@ To uninstall a CSM operator installed with OLM run `bash scripts/uninstall_olm.s
 {{< imgproc uninstall_olm.jpg Resize "2500x" >}}{{< /imgproc >}}
 
 ### To upgrade Dell CSM Operator, perform the following steps.
-Dell CSM Operator can be upgraded based on the supported platforms in one of the 2 ways:
-1.	Using script (for non-OLM based installation)
-2.	Using Operator Lifecycle Manager (OLM)
+Dell CSM Operator can be upgraded in 2 ways:
+1.Using script (for non-OLM based installation)
+2.Using Operator Lifecycle Manager (OLM)
 
 #### Using Installation Script
 1. Clone the [Dell CSM Operator repository](https://github.com/dell/csm-operator).
@@ -101,7 +101,7 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 - If the **`Update approval`** is set to `Automatic`, OpenShift automatically detects whenever the latest version of dell-csm-operator is available in the **`Operator hub`**, and upgrades it to the latest available version.
 - If the upgrade policy is set to `Manual`, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the **`Installed Operators`** section of the OpenShift console. Clicking on the hyperlink to `Approve` the installation would trigger the dell-csi-operator upgrade process.
 
-**NOTE**: The recommended version of OLM for Upstream Kubernetes is **`v0.18.3`** when upgrading operator to `v0.2.0`.
+**NOTE**: The recommended version of OLM for Upstream Kubernetes is **`v0.18.3`**.
 
 ### Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.  
