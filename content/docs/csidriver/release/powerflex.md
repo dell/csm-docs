@@ -6,8 +6,7 @@ description: Release notes for PowerFlex CSI driver
 ## Release Notes - CSI PowerFlex v2.3.0
 
 ### New Features/Changes
-- Added support to configure fsGroupPolicy
-
+- Added support to configure fsGroupPolicy.
 - Removed beta volumesnapshotclass sample files.
 - Added support for Kubernetes 1.24.
 - Added support for OpenShift 4.10.
