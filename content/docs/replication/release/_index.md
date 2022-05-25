@@ -3,7 +3,7 @@ title: "Release notes"
 linkTitle: "Release notes"
 weight: 9
 Description: >
-  Dell Container Storage Modules (CSM) release notes for authorization
+  Dell Container Storage Modules (CSM) release notes for replication
 ---
 
 ## Release Notes - CSM Replication 1.3.0
