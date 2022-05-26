@@ -47,3 +47,5 @@ metadata:
 More details about the installation and use of the VolumeGroup Snapshotter can be found here: [dell-csi-volumegroup-snapshotter](https://github.com/dell/csi-volumegroup-snapshotter).
 
 >Note: Volume group cannot be seen from the Kubernetes level as of now only volume group snapshots can be viewed as a CRD
+
+>Volume Group Snapshots feature is supported with Helm.
