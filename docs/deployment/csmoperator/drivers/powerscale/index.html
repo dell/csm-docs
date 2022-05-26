@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerscale/" />
-<meta property="article:modified_time" content="2022-03-23T08:15:39-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-05-26T16:49:02-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerScale via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2022-03-23T08:15:39-04:00" />
-<meta itemprop="wordCount" content="821">
+<meta itemprop="dateModified" content="2022-05-26T16:49:02-04:00" />
+<meta itemprop="wordCount" content="827">
 
 
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2cea9595072256580193746711738595.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6179d2508ea545a0d14adb04748cd580.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.2cea9595072256580193746711738595.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6179d2508ea545a0d14adb04748cd580.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -323,6 +323,14 @@
           
           
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsdocsdeploymentcsmoperatormodulesauthorization" href="/csm-docs/docs/deployment/csmoperator/modules/authorization/">Authorization</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication" href="/csm-docs/docs/deployment/csmoperator/modules/replication/">Replication</a>
         
       
       
@@ -1817,6 +1825,7 @@
     <li><a href="#installing-csi-driver-for-powerscale-via-dell-csm-operator">Installing CSI Driver for PowerScale via Dell CSM Operator</a>
       <ul>
         <li><a href="#listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</a></li>
+        <li><a href="#prerequisite">Prerequisite</a></li>
         <li><a href="#install-driver">Install Driver</a></li>
       </ul>
     </li>
@@ -1898,7 +1907,7 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <h3 id="listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</h3>
 <p>User can query for all Dell CSI drivers using the following command:
 <code>kubectl get csm --all-namespaces</code></p>
-<h3 id="install-driver">Install Driver</h3>
+<h3 id="prerequisite">Prerequisite</h3>
 <ol>
 <li>
 <p>Create namespace.
@@ -1976,6 +1985,12 @@ Please refer <a href="../../../../csidriver/installation/helm/isilon/#certificat
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">cert-0</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></code></pre></div><p>Execute command: <code>kubectl create -f empty-secret.yaml</code></p>
+</li>
+</ol>
+<h3 id="install-driver">Install Driver</h3>
+<ol>
+<li>
+<p>Follow all the <a href="#prerequisite">prerequisites</a> above</p>
 </li>
 <li>
 <p>Create a CR (Custom Resource) for PowerScale using the sample files provided

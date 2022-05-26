@@ -484,7 +484,7 @@
   
   <url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/</loc>
-    <lastmod>2022-03-23T08:15:39-04:00</lastmod>
+    <lastmod>2022-05-26T16:49:02-04:00</lastmod>
   </url>
   
   <url>
@@ -1694,7 +1694,7 @@
   
   <url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization/</loc>
-    <lastmod>2022-03-23T08:15:39-04:00</lastmod>
+    <lastmod>2022-05-26T16:49:02-04:00</lastmod>
   </url>
   
   <url>
@@ -2034,7 +2034,7 @@
   
   <url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerscale/</loc>
-    <lastmod>2022-03-23T08:15:39-04:00</lastmod>
+    <lastmod>2022-05-26T16:49:02-04:00</lastmod>
   </url>
   
   <url>
@@ -2235,6 +2235,11 @@
   <url>
     <loc>https://dell.github.io/csm-docs/v3/grasp/video/</loc>
     <lastmod>2022-03-23T08:15:39-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/replication/</loc>
+    <lastmod>2022-05-26T16:49:02-04:00</lastmod>
   </url>
   
   <url>
