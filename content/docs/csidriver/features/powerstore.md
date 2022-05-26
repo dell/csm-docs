@@ -678,6 +678,7 @@ CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. T
 **NVMeFC Support**
 CSI Driver for Dell Powerstore 2.3.0 and above supports NVMe/FC provisioning. To enable NVMe/FC provisioning, blockProtocol on secret should be specified as `NVMeFC`.
 >NVMe/FC is supported with Powerstore 3.0 and above.
+
 >This feature is supported only on helm installation.
 
 >Note: 
@@ -727,4 +728,5 @@ The following is the list of all the attribtues supported by PowerStore CSI driv
 **Note:**
 >Refer to the PowerStore array specification for the allowed values for each attribute, at `https://<array-ip>/swaggerui/`. 
 >Make sure that the attributes specified are supported by the version of PowerStore array used. 
+
 >This feature is supported only on helm installation.
