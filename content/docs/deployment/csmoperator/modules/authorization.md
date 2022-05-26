@@ -9,10 +9,6 @@ description: >
 
 The Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
 
-To deploy the Dell CSM Operator, follow the instructions available [here](../../#installation).
-
-There are [sample manifests](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale.yaml) provided which can be edited to do an easy installation of the driver along with the module.
-
 ### Install Authorization
 
 1. Create the required Secrets as documented in the [Helm chart procedure](../../../../authorization/deployment/#configuring-a-dell-csi-driver).
