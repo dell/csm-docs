@@ -48,4 +48,4 @@ More details about the installation and use of the VolumeGroup Snapshotter can b
 
 >Note: Volume group cannot be seen from the Kubernetes level as of now only volume group snapshots can be viewed as a CRD
 
->This feature is supported only on helm installation.
+>Volume Group Snapshots feature is supported with Helm.
