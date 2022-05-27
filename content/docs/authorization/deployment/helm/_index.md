@@ -5,7 +5,7 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment
 ---
 
-CSM Authorization can be installed by using the provided Helm v3 charts on both Kubernetes and OpenShift platforms. 
+CSM Authorization can be installed by using the provided Helm v3 charts on both Kubernetes platforms. 
 
 The following CSM Authorization components are installed in the specified namespace:
 - proxy-service, which forwards requests from the CSI Driver to the backend storage array
