@@ -151,7 +151,7 @@ Run the following commands on the Authorization proxy server:
             --system-id ${Array1SystemID} \
             --user ${Array1User} \
 			      --password ${Array1Password} \
-            --insecure
+            --array-insecure
   
   # Add array2 to authorization
    karavictl storage create \
@@ -160,7 +160,7 @@ Run the following commands on the Authorization proxy server:
             --system-id ${Array2SystemID} \
             --user ${Array2User} \
 			      --password ${Array2Password} \
-            --insecure
+            --array-insecure
     
   echo === Creating Tenant ===
   karavictl tenant create -n $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}"
