@@ -43,7 +43,7 @@ The following third-party components are optionally installed in the specified n
 
     After editing the file, run the following command to create a secret called `karavi-config-secret`:
     
-    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config=samples/csm-authorization/config.yaml`
+    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml`
 
     Use the following command to replace or update the secret:
 
