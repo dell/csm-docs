@@ -158,6 +158,8 @@ To install multiple CSI drivers, follow these steps:
 
 Starting in v1.4, the CSI PowerMax driver supports the expansion of Persistent Volumes (PVs). This expansion is done online, which is when the PVC is attached to any node.
 
+>Note: This feature is not supported for replicated volumes.
+
 To use this feature, enable in `values.yaml`
 
 ```yaml

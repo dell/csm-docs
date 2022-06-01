@@ -71,6 +71,8 @@ Use this procedure to perform a volume expansion test.
   - After that, it calculates the checksum of the written data, expands the PVC, and then recalculates the checksum
   - Cleans up all the resources that were created as part of the test
 
+>Note: This is not applicable for replicated volumes.
+
 ### Setting Application Prefix 
 
 Application prefix is the name of the application that can be used to group the PowerMax volumes. We can use it while naming storage group. To set the application prefix for PowerMax, please refer to the sample storage class https://github.com/dell/csi-powermax/blob/main/samples/storageclass/powermax.yaml.
