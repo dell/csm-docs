@@ -37,6 +37,6 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | CSM Module        | CSI PowerFlex v2.3.0 | CSI PowerScale v2.3.0 | CSI PowerStore v2.3.0 | CSI PowerMax v2.3.0 | CSI Unity XT v2.3.0    |
 | ----------------- | -------------- | --------------- | --------------- | ------------- | --------------- |
 | Authorization v1.2| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
-| Observability v1.1.1| ✔️              | ❌              | ✔️               | ❌            | ❌            |
+| Observability v1.2| ✔️              | ❌              | ✔️               | ❌            | ❌            |
 | Replication   v1.3| ❌             | ✔️              | ✔️               | ✔️             | ❌            |
 | Resilency     v1.2| ✔️              | ✔️              | ❌              | ❌            | ✔️             |
