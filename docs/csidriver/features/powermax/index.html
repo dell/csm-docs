@@ -12,11 +12,11 @@
 <meta property="og:description" content="Code features for PowerMax Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/features/powermax/" />
-<meta property="article:modified_time" content="2022-04-25T10:01:20+02:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-06-03T16:05:02+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Code features for PowerMax Driver">
-<meta itemprop="dateModified" content="2022-04-25T10:01:20&#43;02:00" />
-<meta itemprop="wordCount" content="2952">
+<meta itemprop="dateModified" content="2022-06-03T16:05:02&#43;05:30" />
+<meta itemprop="wordCount" content="2968">
 
 
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.6179d2508ea545a0d14adb04748cd580.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.acebd530787fc930884143f3f56b9806.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.6179d2508ea545a0d14adb04748cd580.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.acebd530787fc930884143f3f56b9806.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1987,6 +1987,7 @@ If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using t
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>8Gi<span style="color:#f8f8f8;text-decoration:underline">
 </span></code></pre></div><h3 id="creating-pvcs-with-pvcs-as-source">Creating PVCs with PVCs as source</h3>
+<p>This is not supported for replicated volumes.</p>
 <p>This is a sample manifest for creating a PVC with another PVC as a source:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>PersistentVolumeClaim<span style="color:#f8f8f8;text-decoration:underline">
@@ -2054,6 +2055,9 @@ The driver helm chart installation uses the values above to:</li>
 </ol>
 <h2 id="volume-expansion">Volume expansion</h2>
 <p>Starting in v1.4, the CSI PowerMax driver supports the expansion of Persistent Volumes (PVs). This expansion is done online, which is when the PVC is attached to any node.</p>
+<blockquote>
+<p>Note: This feature is not supported for replicated volumes.</p>
+</blockquote>
 <p>To use this feature, enable in <code>values.yaml</code></p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">resizer</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
