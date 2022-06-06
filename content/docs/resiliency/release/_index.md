@@ -13,8 +13,10 @@ Description: >
 
 ### New Features/Changes
 
+- Resiliency protection on driver node pods, see [CSI node failure protection](https://github.com/dell/csm/issues/145).
+
 ### Fixed Issues
 
-- Resiliency protection on driver node pods, see [CSI node failure protection](https://github.com/dell/csm/issues/145).
+- Occasional failure unmounting Unity volume for raw block devices via iSCSI, see [unmounting Unity volume](https://github.com/dell/csm/issues/237).
 
 ### Known Issues
