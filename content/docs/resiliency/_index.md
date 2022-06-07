@@ -106,7 +106,7 @@ The following provisioning types are supported and have been tested:
 * Use of the above volumes with Pods created by StatefulSets.
 * Up to 12 or so protected pods on a given node.
 * Failing up to 3 nodes at a time in 9 worker node clusters, or failing 1 node at a time in smaller clusters. Application recovery times are dependent on the number of pods that need to be moved as a result of the failure. See the section on "Testing and Performance" for some of the details.
-* Multi-array are supported. In case of CSI Driver PowerScale and CSI Driver Unity, if any one of the array is not connected, the array connectivity will be false. For CSI Driver Powerflex connectivity will be determined by connection to default array.
+* Multi-array are supported. In case of CSI Driver for PowerScale and CSI Driver for Unity, if any one of the array is not connected, the array connectivity will be false. CSI Driver for Powerflex connectivity will be determined by connection to default array.
 
 ### Not Tested But Assumed to Work
 
