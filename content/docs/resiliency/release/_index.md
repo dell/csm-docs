@@ -14,6 +14,7 @@ Description: >
 ### New Features/Changes
 
 - Resiliency protection on driver node pods, see [CSI node failure protection](https://github.com/dell/csm/issues/145).
+- Resiliency support for CSI Driver PowerScale, see [Support for CSI Driver PowerScale](https://github.com/dell/csm/issues/262).
 
 ### Fixed Issues
 
