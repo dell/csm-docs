@@ -34,7 +34,6 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 | COP/OS | Supported Versions |
 |-|-|
 | Kubernetes    | 1.22, 1.23, 1.24 |
-| Red Hat OpenShift | 4.9, 4.10|
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
 {{</table>}}
