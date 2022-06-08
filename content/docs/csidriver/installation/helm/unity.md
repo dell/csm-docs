@@ -35,7 +35,7 @@ Before you install CSI Driver for Unity XT, verify the requirements that are men
 
 ### Install Helm 3.0
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell Unity.
+Install Helm 3.0 on the master node before you install the CSI Driver for Dell Unity XT.
 
 **Steps**
 
@@ -44,18 +44,18 @@ Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-hel
 
 ### Fibre Channel requirements
 
-Dell Unity supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
-following requirement is met before you install the CSI Driver for Dell Unity:
+Dell Unity XT supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
+following requirement is met before you install the CSI Driver for Dell Unity XT:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
 
 ### Set up the iSCSI Initiator
-The CSI Driver for Dell Unity supports iSCSI connectivity.
+The CSI Driver for Dell Unity XT supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
 - Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
-- Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell Unity array that
-  has IP interfaces. Manually create IP routes for each node that connects to the Dell Unity.
+- Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell Unity XT array that
+  has IP interfaces. Manually create IP routes for each node that connects to the Dell Unity XT.
 - All Kubernetes nodes must have the _iscsi-initiator-utils_ package for CentOS/RHEL or _open-iscsi_ package for Ubuntu installed, and the _iscsid_ service must be enabled and running.
   To do this, run the `systemctl enable --now iscsid` command.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
@@ -63,8 +63,8 @@ If you use the iSCSI protocol, set up the iSCSI initiators as follows:
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
 
 ### Linux multipathing requirements
-Dell Unity supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
-Unity.
+Dell Unity XT supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
+Unity XT.
 
 Set up Linux multipathing as follows:
 - Ensure that all nodes have the _Device Mapper Multipathing_ package installed.
@@ -354,7 +354,7 @@ Procedure
    confirm various parameters are as desired. Once the parameters are validated, run the command without the --dry-run flag.
    Note: The below example assumes that the user is at repo root helm folder i.e csi-unity/helm.
 
-   Syntax: helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>
+   **Syntax**: helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>
    <namespace> - namespace of the driver installation. 
    <name of secret> - unity in case of unity-creds and unity-certs-0 secrets.
    <helmPath> - Path of the helm directory.

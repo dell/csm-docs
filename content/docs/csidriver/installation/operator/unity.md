@@ -115,8 +115,8 @@ spec:
 
     controller:
        envs:
-          # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from Controller plugin. Provides details of volume status and volume condition.
-          # As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar
+          # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor  of CSI volumes from Controller plugin - volume condition.
+          # Install the 'external-health-monitor' sidecar accordingly.
           # Allowed values:
           #   true: enable checking of health condition of CSI volumes
           #   false: disable checking of health condition of CSI volumes
@@ -130,16 +130,16 @@ spec:
        # Leave as blank to consider all nodes
        # Allowed values: map of key-value pairs
        # Default value: None
-       # Examples:
-       #   node-role.kubernetes.io/master: ""
        nodeSelector:
-       #   node-role.kubernetes.io/master: ""
+       # Uncomment if nodes you wish to use have the node-role.kubernetes. io/control-plane taint
+       #  node-role.kubernetes.io/control-plane: ""
 
        # tolerations: Define tolerations for the controllers, if required.
        # Leave as blank to install controller on worker nodes
        # Default value: None
        tolerations:
-       #  - key: "node-role.kubernetes.io/master"
+       # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+       #  - key: "node-role.kubernetes.io/control-plane"
        #    operator: "Exists"
        #    effect: "NoSchedule"
 
@@ -158,18 +158,26 @@ spec:
        # Leave as blank to consider all nodes
        # Allowed values: map of key-value pairs
        # Default value: None
-       # Examples:
-       #   node-role.kubernetes.io/master: ""
        nodeSelector:
-       #   node-role.kubernetes.io/master: ""
+       # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+       #  node-role.kubernetes.io/control-plane: ""
 
-       # tolerations: Define tolerations for the controllers, if required.
-       # Leave as blank to install controller on worker nodes
+       # tolerations: Define tolerations for the node daemonset, if required.
        # Default value: None
        tolerations:
-       #  - key: "node-role.kubernetes.io/master"
+       # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+       #  - key: "node-role.kubernetes.io/control-plane"
        #    operator: "Exists"
        #    effect: "NoSchedule"
+       #  - key: "node.kubernetes.io/memory-pressure"
+       #    operator: "Exists"
+       #    effect: "NoExecute"
+       #  - key: "node.kubernetes.io/disk-pressure"
+       #    operator: "Exists"
+       #    effect: "NoExecute"
+       #  - key: "node.kubernetes.io/network-unavailable"
+       #    operator: "Exists"
+       #    effect: "NoExecute"
 
 ---
 apiVersion: v1
