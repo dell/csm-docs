@@ -10,8 +10,7 @@ Description: >
 
 ### New Features/Changes
 
-- Support for CSI Driver for PowerScale.
-- Support for node taint when driver pod is unhealthy
+- Support for node taint when driver pod is unhealthy.
 - Resiliency protection on driver node pods, see [CSI node failure protection](https://github.com/dell/csm/issues/145).
 - Resiliency support for CSI Driver for PowerScale, see [CSI Driver for PowerScale](https://github.com/dell/csm/issues/262).
 
