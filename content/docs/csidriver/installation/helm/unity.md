@@ -343,7 +343,7 @@ Procedure
 
     At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command `kubectl get pods -n unity` to get the status of the pods and you will see the following:
     
-    * One or more Unity XT Controller (based on controllerCount) with 5/5 containers ready, and status displayed as Running.
+    * One or more Unity XT Controllers (based on controllerCount) with 5/5 containers ready, and status displayed as Running.
     * Agent pods with 2/2 containers and the status displayed as Running.
 
 **Note**:
@@ -363,7 +363,7 @@ Procedure
 
 ## Certificate validation for Unisphere REST API calls 
 
-This topic provides details about setting up the certificate validation for the CSI Driver for Dell Unity XT.
+This topic provides details about setting up the Dell Unity XT certificate validation for the CSI Driver.
 
 *Before you begin*
 
@@ -413,7 +413,7 @@ Storage Classes are an essential Kubernetes construct for Storage provisioning. 
 
 A wide set of annotated storage class manifests have been provided in the [samples/storageclass](https://github.com/dell/csi-unity/tree/master/samples/storageclass) folder. Use these samples to create new storage classes to provision storage.
 
-For CSI Driver for Unity XT, a wide set of annotated storage class manifests have been provided in the `csi-unity/samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
+For the Unity XT CSI Driver, a wide set of annotated storage class manifests have been provided in the `csi-unity/samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
 
 ### What happens to my existing storage classes?
 
