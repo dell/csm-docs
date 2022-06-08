@@ -346,18 +346,18 @@ Procedure
     * One or more Unity XT Controllers (based on controllerCount) with 5/5 containers ready, and status displayed as Running.
     * Agent pods with 2/2 containers and the status displayed as Running.
 
-**Note**:
-   To install nightly or latest csi driver build using bash script use the below command:
-      `/csi-install.sh --namespace unity --values ./myvalues.yaml --version nightly/latest`
+    **Note**:
+    To install nightly or latest csi driver build using bash script use the below command:
+    `/csi-install.sh --namespace unity --values ./myvalues.yaml --version nightly/latest`
 
 8. You can also install the driver using standalone helm chart by running helm install command, first using the --dry-run flag to 
    confirm various parameters are as desired. Once the parameters are validated, run the command without the --dry-run flag.
    Note: The below example assumes that the user is at repo root helm folder i.e csi-unity/helm.
 
-   **Syntax**: helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>
-   <namespace> - namespace of the driver installation. 
-   <name of secret> - unity in case of unity-creds and unity-certs-0 secrets.
-   <helmPath> - Path of the helm directory.
+   **Syntax**:`helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>` <br/>
+   `<namespace>` - namespace of the driver installation.  <br/>
+   `<name of secret>` - unity in case of unity-creds and unity-certs-0 secrets. <br/>
+   `<helmPath>` - Path of the helm directory. <br/>
    e.g: helm install --dry-run --values ./csi-unity/myvalues.yaml --namespace unity unity ./csi-unity
 
 
