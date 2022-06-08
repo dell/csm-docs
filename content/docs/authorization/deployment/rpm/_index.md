@@ -27,6 +27,8 @@ The first part of deploying CSM for Authorization is installing the proxy server
 
 The CSM for Authorization proxy server is installed using a single binary installer.
 
+If CSM for Authorization is being installed on a system where SELinux is enabled, you must ensure the proper SELinux policies have been installed.
+
 ### Single Binary Installer
 
 The easiest way to obtain the single binary installer RPM is directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.  
@@ -102,6 +104,8 @@ A Storage Administrator can execute the installer or rpm package as a root user 
 
 4. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 
+If errors occur during installation, review the [Troubleshooting](../../troubleshooting) section.
+
 ## Configuring the CSM for Authorization Proxy Server
 
 The storage administrator must first configure the proxy server with the following:
@@ -151,7 +155,7 @@ Run the following commands on the Authorization proxy server:
             --system-id ${Array1SystemID} \
             --user ${Array1User} \
 			      --password ${Array1Password} \
-            --insecure
+            --array-insecure
   
   # Add array2 to authorization
    karavictl storage create \
@@ -160,7 +164,7 @@ Run the following commands on the Authorization proxy server:
             --system-id ${Array2SystemID} \
             --user ${Array2User} \
 			      --password ${Array2Password} \
-            --insecure
+            --array-insecure
     
   echo === Creating Tenant ===
   karavictl tenant create -n $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}"

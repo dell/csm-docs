@@ -5,7 +5,7 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment
 ---
 
-CSM Authorization can be installed by using the provided Helm v3 charts on both Kubernetes and OpenShift platforms. 
+CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms. 
 
 The following CSM Authorization components are installed in the specified namespace:
 - proxy-service, which forwards requests from the CSI Driver to the backend storage array
@@ -43,7 +43,7 @@ The following third-party components are optionally installed in the specified n
 
     After editing the file, run the following command to create a secret called `karavi-config-secret`:
     
-    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config=samples/csm-authorization/config.yaml`
+    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml`
 
     Use the following command to replace or update the secret:
 
