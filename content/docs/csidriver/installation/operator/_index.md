@@ -258,7 +258,7 @@ If you are installing the latest versions of the CSI drivers, the driver control
 The CSI Drivers installed by the Dell CSI Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –
 
 * Modifying the installation directly via `kubectl edit`
-    For e.g. - If the name of the installed Unity XT driver is unity, then run
+    For example - If the name of the installed Unity XT driver is unity, then run
     ```
     # Replace driver-namespace with the namespace where the Unity XT driver is installed
     $ kubectl edit csiunity/unity -n <driver-namespace>
@@ -349,7 +349,7 @@ data:
 * Adding (supported) environment variables
 * Updating the image of the driver
 ## Limitations
-* The Dell CSI Operator can't manage any existing driver installed using Helm charts. If you already have installed one of the Dell CSI driver in your cluster and  want to use the operator based deployment, uninstall the driver and then redeploy the driver following the installation procedure described above
+* The Dell CSI Operator can't manage any existing driver installed using Helm charts. If you already have installed one of the Dell CSI drivers in your cluster and  want to use the operator based deployment, uninstall the driver and then redeploy the driver following the installation procedure described above
 * The Dell CSI Operator is not fully compliant with the OperatorHub React UI elements and some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use kubectl/oc commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Dell CSI Operator
 
 

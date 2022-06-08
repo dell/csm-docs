@@ -257,7 +257,7 @@ spec:
 
 Access modes allowed are ReadWriteOnce and ReadWriteMany. Raw Block volumes are presented as a block device to the pod by using a bind mount to a block device in the node's file system. The driver does not format or check the format of any file system on the block device. 
 
-Raw Block volumes support online Volume Expansion, but it is up to the application to manage to reconfigure the file system (if any) to the new size. Access mode ReadOnlyMany is not supported with raw block since we cannot restrict volumes to be readonly from Unity XT.
+Raw Block volumes support online Volume Expansion, but it is up to the application to manage and reconfigure the file system (if any) to the new size. Access mode ReadOnlyMany is not supported with raw block since we cannot restrict volumes to be readonly from Unity XT.
 
 For additional information, see the [kubernetes](https://kubernetes.io/DOCS/CONCEPTS/STORAGE/PERSISTENT-VOLUMES/#volume-mode) website.
 
@@ -361,7 +361,7 @@ To create `NFS` volume you need to provide `nasName:` parameters that point to t
 
 The CSI Unity XT driver supports controller HA feature. Instead of StatefulSet controller pods deployed as a Deployment.
 
-By default, number of replicas is set to 2, you can set the `controllerCount` parameter to 1 in `myvalues.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change the `replicas` parameter in the `spec.driver` section in your Unity XT Custom Resource.
+By default, the number of replicas is set to 2. You can set the controllerCount parameter to 1 in myvalues.yaml if you want to disable controller HA for your installation. When installing via Operator, you can change the replicas parameter in the spec.driver section in your Unity XT Custom Resource.
 
 When multiple replicas of controller pods are in a cluster each sidecar (Attacher, Provisioner, Resizer, and Snapshotter) tries to get a lease so only one instance of each sidecar is active in the cluster at a time. 
 
@@ -455,7 +455,7 @@ CSI Driver for Dell Unity XT is supported in the NAT environment for NFS protoco
 The user will be able to install the driver and able to create pods.
 
 ## Single Pod Access Mode for PersistentVolumes
-CSI Driver for Unity XT supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity XT allows to restrict volume access to a single pod in the cluster
+CSI Driver for Unity XT supports a new accessmode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Unity XT restricts volume access to a single pod in the cluster
 
 Prerequisites
 1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as the ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is only supported for CSI volumes. You can enable the feature by setting command line arguments:

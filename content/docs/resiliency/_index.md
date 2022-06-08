@@ -75,15 +75,15 @@ PowerFlex is a highly scalable array that is very well suited to Kubernetes depl
 
 ### Unity XT Support
 
-Dell Unity XT is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity XT systems are designed for all-Flash, deliver the best value in the market, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition. 
+Dell Unity XT is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads.Unity XT systems are designed to deliver the best value in the market. They support all-Flash, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition.
 
 * Unity XT (purpose-built): A modern midrange storage solution, engineered from the groundup to meet market demands for Flash, affordability and incredible simplicity. The Unity XT Family is available in 12 All Flash models and 12 Hybrid models.
 * VxBlock (converged): Unity XT storage options are also available in Dell VxBlock System 1000.
-* UnityVSA (virtual): The Unity XT Virtual Storage Appliance (VSA) allows the advanced unified storage and data management features of the Unity XT family to be easily deployed on VMware ESXi servers, for a ‘software defined’ approach. UnityVSA is available in two editions:
+* UnityVSA (virtual): The Unity XT Virtual Storage Appliance (VSA) allows the advanced unified storage and data management features of the Unity XT family to be easily deployed on VMware ESXi servers. This allows for a ‘software defined’ approach. UnityVSA is available in two editions:
   * Community Edition is a free downloadable 4 TB solution recommended for nonproduction use.
   * Professional Edition is a licensed subscription-based offering available at capacity levels of 10 TB, 25 TB, and 50 TB. The subscription includes access to online support resources, EMC Secure Remote Services (ESRS), and on-call software- and systems-related support.
 
-All three deployment options, i.e. Unity XT, UnityVSA, and Unity-based VxBlock, enjoy one architecture, one interface with consistent features and rich data services.
+All three deployment options, Unity XT, UnityVSA, and Unity-based VxBlock, enjoy one architecture, one interface with consistent features and rich data services.
 
 ### PowerScale Support
 
