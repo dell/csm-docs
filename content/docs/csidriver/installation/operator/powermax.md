@@ -87,12 +87,55 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_MANAGED_ARRAYS | List of comma-separated array ID(s) which will be managed by the driver | Yes | - |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME | Name of CSI PowerMax ReverseProxy service. Leave blank if not using reverse proxy | No | - |
    | X_CSI_GRPC_MAX_THREADS | Number of concurrent grpc requests allowed per client | No | 4 |
+   | X_CSI_IG_MODIFY_HOSTNAME | Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format. | No | false |
+   | X_CSI_IG_NODENAME_TEMPLATE | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster. | No | - |
    | X_CSI_POWERMAX_DRIVER_NAME | Set custom CSI driver name. For more details on this feature see the related [documentation](../../../features/powermax/#custom-driver-name) | No | - |
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No | false |
    | ***Node parameters***|
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disabe topology control. It filter out arrays, and associated transport protocol available to each node and create topology keys based on any such user input. | No | false |
 5. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
+
+**Note** - If CSI driver is getting installed using OCP UI , create below two configmap manually using the command `oc create -f <configfilenamw>`
+1. Configmap name powermax-config-params
+     ```yaml
+	apiVersion: v1
+	kind: ConfigMap
+	metadata:
+  	  name: powermax-config-params
+  	  namespace: test-powermax
+	data:
+  	  driver-config-params.yaml: |
+    	    CSI_LOG_LEVEL: "debug"
+    	    CSI_LOG_FORMAT: "JSON"
+     ```
+ 2. Configmap name node-topology-config
+     ```yaml
+        apiVersion: v1
+	kind: ConfigMap
+	metadata:
+  	  name: node-topology-config
+  	  namespace: test-powermax
+	data:
+  	  topologyConfig.yaml: |
+	    allowedConnections:
+      	      - nodeName: "node1"
+                rules:
+                  - "000000000001:FC"
+                  - "000000000002:FC"
+              - nodeName: "*"
+                rules:
+                  - "000000000002:FC"
+            deniedConnections:
+              - nodeName: "node2"
+                rules:
+                  - "000000000002:*"
+              - nodeName: "node3"
+                rules:
+                  - "*:*"
+     ```
+
+
 
 ### CSI PowerMax ReverseProxy
 
