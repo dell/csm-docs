@@ -100,26 +100,25 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 1. Configmap name powermax-config-params
      ```yaml
 	apiVersion: v1
-	kind: ConfigMap
-	metadata:
-  	  name: powermax-config-params
-  	  namespace: test-powermax
-	data:
-  	  driver-config-params.yaml: |
-    	    CSI_LOG_LEVEL: "debug"
-    	    CSI_LOG_FORMAT: "JSON"
+        kind: ConfigMap
+        metadata:
+          name: powermax-config-params
+          namespace: test-powermax
+        data:
+          driver-config-params.yaml: |
+            CSI_LOG_LEVEL: "debug"
+            CSI_LOG_FORMAT: "JSON"
      ```
  2. Configmap name node-topology-config
      ```yaml
-        apiVersion: v1
-	kind: ConfigMap
-	metadata:
-  	  name: node-topology-config
-  	  namespace: test-powermax
-	data:
-  	  topologyConfig.yaml: |
-	    allowedConnections:
-      	      - nodeName: "node1"
+        kind: ConfigMap
+        metadata:
+          name: node-topology-config
+          namespace: test-powermax
+        data:
+          topologyConfig.yaml: |
+            allowedConnections:
+              - nodeName: "node1"
                 rules:
                   - "000000000001:FC"
                   - "000000000002:FC"
@@ -133,6 +132,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
               - nodeName: "node3"
                 rules:
                   - "*:*"
+      
      ```
 
 
