@@ -205,6 +205,9 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | skipCertificateValidation | Skip client-side TLS verification of Unisphere certificates | No | "True" |
 | transportProtocol  | Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.| No | Empty|
 | nodeNameTemplate | Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.  | No | Empty|
+| modifyHostName | Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format. | No | false |
+| powerMaxDebug | Enables low level and http traffic logging between the CSI driver and Unisphere. Don't enable this unless asked to do so by the support team. | No | false |
+| enableCHAP | Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key "chapsecret" | No | false |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
 | version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
 | images | Defines the container images used by the driver.  | - | - |
