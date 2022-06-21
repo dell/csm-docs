@@ -37,4 +37,4 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | Authorization v1.2| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
 | Observability v1.2| ✔️              | ❌              | ✔️               | ❌            | ❌            |
 | Replication   v1.3| ❌             | ✔️              | ✔️               | ✔️             | ❌            |
-| Resilency     v1.2| ✔️              | ✔️              | ❌              | ❌            | ✔️             |
+| Resiliency     v1.2| ✔️              | ✔️              | ❌              | ❌            | ✔️             |
