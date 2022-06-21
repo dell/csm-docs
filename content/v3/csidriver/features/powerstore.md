@@ -29,7 +29,7 @@ kubectl delete -f tests/simple/simple.yaml
 You can use existent volumes from PowerStore array as Persistent Volumes in your Kubernetes, perform the following steps:
 
 1. Open your volume in PowerStore Management UI, and take a note of volume-id. The volume link must look similar to `https://<powerstore.api.ip>/#/storage/volumes/0055558c-5ae1-4ed1-b421-6f5a9475c19f/capacity`, where the `volume-id` is `0055558c-5ae1-4ed1-b421-6f5a9475c19f`.
-2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
+2. Create PersistentVolume and use this volume-id in volumeHandle in format <volume-id/globalID/protocol> in the manifest. Modify other parameters according to your needs.
 ```yaml
 apiVersion: v1
 kind: PersistentVolume
@@ -42,7 +42,7 @@ spec:
         storage: 30Gi
     csi:
         driver: csi-powerstore.dellemc.com
-        volumeHandle: 0055558c-5ae1-4ed1-b421-6f5a9475c19f
+        volumeHandle: 0055558c-5ae1-4ed1-b421-6f5a9475c19f/unique/scsi
     persistentVolumeReclaimPolicy: Retain
     storageClassName: powerstore
     volumeMode: Filesystem
@@ -87,7 +87,7 @@ spec:
 
 ## Volume Snapshot Feature
 
-The CSI PowerStore driver version 2.0.0 supports v1 snapshots.
+The CSI PowerStore driver version 2.0.0 and higher supports v1 snapshots.
 
 In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
 - Kubernetes Volume Snapshot CRDs
@@ -324,6 +324,7 @@ spec:
       fsType: "ext4"
       volumeAttributes:
         size: "20Gi"
+        arrayID: "unique"
 ```
 
 This manifest creates a pod and attaches a newly created ephemeral inline CSI volume to it. 
@@ -606,3 +607,34 @@ kubectl edit configmap -n csi-powerstore powerstore-config-params
 CSI Driver for Dell EMC Powerstore is supported in the NAT environment for NFS protocol.
 
 The user will be able to install the driver and able to create pods.
+
+
+## PV/PVC Metrics
+
+CSI Driver for Dell EMC Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.volumeHealthMonitorInterval parameter.
+
+
+## Single Pod Access Mode for PersistentVolumes
+
+Starting from version 2.1, CSI Driver for Powerstore now supports a new access mode `ReadWriteOncePod` for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Powerstore allows restricting volume access to a single pod in the cluster and within a worker node.
+
+Prerequisites
+
+1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is supported only for CSI volumes. You can enable the feature by setting command-line argument:
+`--feature-gates="...,ReadWriteOncePod=true"`
+
+2. Create a PVC with access mode set to ReadWriteOncePod like shown in the sample below
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: single-node-single-writer
+spec:
+  accessModes:
+  - ReadWriteOncePod # Allow only a single pod to access single-node-single-writer
+  resources:
+    requests:
+      storage: 5Gi
+```
+
+>Note: The access mode ReadWriteOnce allows multiple pods to access a single volume within a single worker node and the behavior is consistent across all supported Kubernetes versions.

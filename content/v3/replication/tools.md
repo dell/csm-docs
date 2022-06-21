@@ -23,11 +23,16 @@ clusters, you can do that using `cluster add` command
 ```
 
 You can view clusters that are currently being managed by `repctl`
-by running `cluster list` command
-
+by running `cluster get` command
 ```shell
-./repctl cluster list
+./repctl cluster get
 ```
+
+Or, alternatively, using `get cluster` command
+```shell
+./repctl get cluster
+```
+
 
 Also, you can inject information about all of your current clusters as
 config maps into the same clusters, so it can be used by `dell-csi-replicator`
@@ -45,20 +50,20 @@ You can also generate kubeconfigs from existing replication service accounts and
 ### Querying Resources
 
 After adding clusters you want to manage with `repctl` you can query
-resources from multiple clusters at once using `list` command. 
+resources from multiple clusters at once using `get` command. 
 
 For example, this command will list all storage classes in all clusters
 that currently are being managed by `repctl`
 
 ```shell
-./repctl list storageclasses --all
+./repctl get storageclasses --all
 ```
 
 If you want to query some particular clusters you can do that by specifying
 `clusters` flag
 
 ```shell
-./repctl list pv --clusters cluster-1,cluster-3
+./repctl get pv --clusters cluster-1,cluster-3
 ```
 
 All other different flags for querying resources you can check using
@@ -116,16 +121,16 @@ Name of StorageClass resource that created as "target" will be appended with `-t
 
 This command will perform a planned `failover` to a cluster or an RG.
 
-When working with multiple clusters, you can perform failover by specifying the target _cluster ID_. To do that use `--to-cluster <targetClusterID>` parameter.
+When working with multiple clusters, you can perform failover by specifying the target _cluster ID_. To do that use `--target <targetClusterID>` parameter.
 
 ```shell
-./repctl --rg <rg-id> failover --to-cluster cluster2
+./repctl --rg <rg-id> failover --target <tgt-cluster-id>
 ```
 
-When working with replication within a single cluster, you can perform failover by specifying the target _replication group ID_. To do that use `--to-rg <rg-id>` parameter.
+When working with replication within a single cluster, you can perform failover by specifying the target _replication group ID_. To do that use `--target <rg-id>` parameter.
 
 ```shell
-./repctl failover --to-rg <rg-id>
+./repctl --rg <rg-id> failover --target <tgt-rg-id>
 ```
 
 In both scenarios `repctl` will patch the CR at the source site with action **FAILOVER_REMOTE**.
@@ -136,16 +141,16 @@ You can also provide `--unplanned` parameter, then `repctl` will perform an unpl
 
 This command will perform a `reprotect` at the specified cluster or the RG.
 
-When working with multiple clusters, you can perform reprotect by specifying the _cluster ID_. To do that use `--to-cluster <clusterID>` parameter.
+When working with multiple clusters, you can perform reprotect by specifying the _cluster ID_. To do that use `--at <clusterID>` parameter.
 
 ```shell
-./repctl --rg <rg-id> reprotect --to-cluster cluster1
+./repctl --rg <rg-id> reprotect --at <tgt-cluster-id>
 ```
 
-When working with replication within a single cluster, you can perform reprotect by specifying the _replication group ID_. To do that use `--to-rg <rg-id>` parameter.
+When working with replication within a single cluster, you can perform reprotect by specifying the _replication group ID_. To do that use `--rg <rg-id>` parameter.
 
 ```shell
-./repctl reprotect  --to-rg <rg-id>
+./repctl --rg <rg-id> reprotect 
 ```
 
 In both scenarios `repctl` will patch the CR at the source site with action **REPROTECT_LOCAL**.
@@ -154,16 +159,16 @@ In both scenarios `repctl` will patch the CR at the source site with action **RE
 
 This command will perform a planned `failback` to a cluster or an RG.
 
-When working with multiple clusters, you can perform failback by specifying the _cluster ID_, to do that use `--to-cluster <clusterID>` parameter.
+When working with multiple clusters, you can perform failback by specifying the _cluster ID_, to do that use `--target <clusterID>` parameter.
 
 ```shell
-./repctl --rg <rg-id> failback --to-cluster cluster1
+./repctl --rg <rg-id> failback --target <tgt-cluster-id>
 ```
 
-When working with replication within a single cluster, you can perform failback by specifying the _replication group ID_. To do that use `--to-rg <rg-id>` parameter.
+When working with replication within a single cluster, you can perform failback by specifying the _replication group ID_. To do that use `--target <rg-id>` parameter.
 
 ```shell
-./repctl failback --to-rg <rg-id>
+./repctl --rg <rg-id> failback --target <tgt-rg-id>
 ```
 
 In both scenarios `repctl` will patch the CR at the source site with action **FAILBACK_LOCAL**.
@@ -174,20 +179,29 @@ You can also provide `--discard` parameter, then `repctl` will perform a failbac
 
 This command will perform a `swap` at a specified cluster or an RG.
 
-When working with multiple clusters, you can perform swap by specifying the _cluster ID_. To do that use `--to-cluster <clusterID>` parameter.
+When working with multiple clusters, you can perform swap by specifying the _cluster ID_. To do that use `--at <clusterID>` parameter.
 
 ```shell
-./repctl --rg <rg-id> swap --to-cluster cluster1
+./repctl --rg <rg-id> swap --at <tgt-cluster-id>
 ```
 
-When working with replication within a single cluster, you can perform swap by specifying the _replication group ID_. To do that use `--to-rg <rg-id>` parameter.
+When working with replication within a single cluster, you can perform swap by specifying the _replication group ID_. To do that use `--rg <rg-id>` parameter.
 
 ```shell
-./repctl swap --to-rg <rg-id>
+./repctl --rg <rg-id> swap
 ```
 
 repctl will patch CR at the source cluster with action `SWAP_LOCAL`.
 
+
+#### Wait For Completion 
+
+When executing actions you can provide `--wait` argument to make `repctl` wait for completion of specified action.
+
+For example when executing `failover`: 
+```shell
+./repctl --rg <rg-id> failover --target <tgt-cluster-id> --wait
+```
 
 #### Maintenance Actions
 
