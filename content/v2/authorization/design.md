@@ -3,7 +3,7 @@ title: Design
 linktitle: Design
 weight: 1
 description: >
-  Dell EMC Container Storage Modules (CSM) for Authorization design
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization design
 ---
 
 Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.
@@ -56,7 +56,7 @@ The mechanism for managing this storage would utilize a CSI Driver.
 
 ### CSI Driver
 
-A CSI Driver supports the Container Service Interface (CSI) specification. Dell EMC provides customers with CSI Drivers for its various storage arrays.
+A CSI Driver supports the Container Service Interface (CSI) specification. Dell provides customers with CSI Drivers for its various storage arrays.
 CSM for Authorization intends to support a majority, if not all, of these drivers.
 
 A CSI Driver will typically be configured to communicate directly to its intended storage array and as such will be limited in using only the authentication
@@ -66,7 +66,7 @@ methods supported by the Storage Array itself, e.g. Basic authentication over TL
 
 ### Sidecar Proxy
 
-The CSM for Authorization Sidecar Proxy is a sidecar container that gets "injected" into the CSI Driver's Pod. It acts as a proxy and forwards all requests to a
+The CSM for Authorization Sidecar Proxy is deployed as a sidecar in the CSI Driver's Pod. It acts as a proxy and forwards all requests to a
 CSM Authorization Server.
 
 The [CSI Driver section](#csi-driver) noted the limitation of a CSI Driver using Storage Array supported authentication methods only. By nature of being a proxy, the CSM for Authorization
@@ -86,12 +86,9 @@ Inbound requests are expected to originate from the CSM for Authorization Sideca
 
 The [*karavictl*](../cli) CLI (Command Line Interface) application allows Storage Admins to manage and interact with a running CSM for Authorization Server.
 
-Additionally, *karavictl* provides functionality for supporting the sidecar proxy injection mechanism mentioned above. Injection is discussed in more detail later
-on in this document.
-
 ### Storage Array
 
-A Storage Array is typically considered to be one of the various Dell EMC storage offerings, e.g. Dell EMC PowerFlex which is supported by CSM for Authorization
+A Storage Array is typically considered to be one of the various Dell storage offerings, e.g. Dell PowerFlex which is supported by CSM for Authorization
 today.  Support for more Storage Arrays will come in the future.
 
 ## How it Works

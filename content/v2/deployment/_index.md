@@ -6,8 +6,8 @@ weight: 1
 ---
 
 The Container Storage Modules and the required CSI Drivers can each be deployed following the links below:
-- [Dell EMC CSI Drivers Installation](../csidriver/installation)
-- [Dell EMC Container Storage Module for Observability](../observability/deployment)
-- [Dell EMC Container Storage Module for Authorization](../authorization/deployment)
-- [Dell EMC Container Storage Module for Resiliency](../resiliency/deployment)
-- [Dell EMC Container Storage Module for Replication](../replication/deployment)
+- [Dell CSI Drivers Installation](../csidriver/installation)
+- [Dell Container Storage Module for Observability](../observability/deployment)
+- [Dell Container Storage Module for Authorization](../authorization/deployment)
+- [Dell Container Storage Module for Resiliency](../resiliency/deployment)
+- [Dell Container Storage Module for Replication](../replication/deployment)

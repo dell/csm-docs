@@ -6,9 +6,9 @@ description: Tests to validate PowerMax CSI Driver installation
 
 This section provides multiple methods to test driver functionality in your environment. The tests are validated using bash as the default shell.
 
-**Note**: To run the test for CSI Driver for Dell EMC PowerMax, install Helm 3.
+**Note**: To run the test for CSI Driver for Dell PowerMax, install Helm 3.
 
-The _csi-powermax_ repository includes examples of how you can use CSI Driver for Dell EMC PowerMax. The shell scripts are used to automate the installation and uninstallation of helm charts for the creation of Pods with a different number of volumes in a given namespace using the storageclass provided. To test the installation of the CSI driver, perform these tests:
+The _csi-powermax_ repository includes examples of how you can use CSI Driver for Dell PowerMax. The shell scripts are used to automate the installation and uninstallation of helm charts for the creation of Pods with a different number of volumes in a given namespace using the storageclass provided. To test the installation of the CSI driver, perform these tests:
 - Volume clone test
 - Volume test
 - Snapshot test
@@ -83,3 +83,91 @@ Application prefix is the name of the application that can be used to group the 
   ApplicationPrefix: <application prefix>  
 ```
 >Note: Supported length of storage group for PowerMax is 64 characters. Storage group name is of the format "csi-`clusterprefix`-`application prefix`-`SLO name`-`SRP name`-SG". Based on the other inputs like clusterprefix,SLO name and SRP name maximum length of the ApplicationPrefix can vary.
+
+## Consuming existing volumes with static provisioning
+
+Use this procedure to consume existing volumes with static provisioning.
+
+1. Open your Unisphere for Powermax, and take a note of volume-id.
+2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
+3. In the following example, storage class is assumed as 'powermax', cluster prefix as 'ABC' and volume's internal name as '00001', array ID as '000000000001', volume ID as '1abc23456'. The volume-handle should be in the format of `csi`-`clusterPrefix`-`volumeNamePrefix`-`id`-`arrayID`-`volumeID`.
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvol
+  namespace: test  
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 8Gi
+  csi:
+    driver: csi-powermax.dellemc.com
+    volumeHandle: csi-ABC-pmax-1abc23456-000000000001-00001
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: powermax
+  volumeMode: Filesystem
+```
+
+3. Create PersistentVolumeClaim to use this PersistentVolume.
+
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc
+  namespace: test
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: powermax
+  volumeMode: Filesystem
+  volumeName: pvol         
+```
+
+4. Then use this PVC as a volume in a pod.
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: powermaxtest
+  namespace: test
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: powermaxtest
+  namespace: test
+spec:
+  selector:
+    matchLabels:
+     app: powermaxtest
+  serviceName: staticprovisioning
+  template:
+   metadata:
+    labels:
+     app: powermaxtest
+   spec:
+    serviceAccount: powermaxtest
+    containers:
+     - name: test 
+      image: docker.io/centos:latest
+      command: [ "/bin/sleep", "3600" ]
+      volumeMounts:
+       - mountPath: "/data"
+        name: pvc
+    volumes:
+     - name: pvc
+      persistentVolumeClaim:
+       claimName: pvc
+```
+
+5. After the pod becomes `Ready` and `Running`, you can start to use this pod and volume.
+
+>Note: CSI driver for PowerMax will create the necessary objects like Storage group, HostID and Masking View. They must not be created manually.
