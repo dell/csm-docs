@@ -19,7 +19,7 @@ The following table lists driver configuration parameters for multiple storage a
 | password | Password for accessing Unity system  | true | - |
 | restGateway | REST API gateway HTTPS endpoint Unity system| true | - |
 | arrayId | ArrayID for Unity system | true | - |
-| isDefaultArray | An array having isDefaultArray=true is for backward compatibility. This parameter should occur once in the list. | false | false |
+| isDefaultArray | An array having isDefaultArray=true is for backward compatibility. This parameter should occur once in the list. | true | - |
 
 Ex: secret.yaml
 
@@ -41,7 +41,7 @@ Ex: secret.yaml
   
 ```
 
-`kubectl create secret generic unity-creds -n unity --from-file=config=secret.secret`
+`kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
 
 Use the following command to replace or update the secret
 
@@ -81,9 +81,11 @@ Users should configure the parameters in CR. The following table lists the prima
    | ***Controller parameters***                     |                                                              |          |                       |
    | X_CSI_MODE                                      | Driver starting mode                                         | No       | controller            |
    | X_CSI_UNITY_AUTOPROBE                           | To enable auto probing for driver                            | No       | true                  |
+   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Controller plugin     | No       |            |
    | ***Node parameters***                           |                                                              |          |                       |
    | X_CSI_MODE                                      | Driver starting mode                                         | No       | node                  |
    | X_CSI_ISCSI_CHROOT                              | Path to which the driver will chroot before running any iscsi commands. | No       | /noderoot             |
+   | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Node plugin | No      |          |            |
 
 ### Example CR for Unity
 Refer samples from [here](https://github.com/dell/dell-csi-operator/tree/master/samples). Below is an example CR:
@@ -95,18 +97,80 @@ metadata:
   namespace: test-unity
 spec:
   driver:
-    configVersion: v2.0.0
+    configVersion: v2.2.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      image: "dellemc/csi-unity:v2.0.0"
+      image: "dellemc/csi-unity:v2.2.0"
       imagePullPolicy: IfNotPresent
     sideCars:
       - name: provisioner
         args: ["--volume-name-prefix=csiunity","--default-fstype=ext4"]
       - name: snapshotter
         args: ["--snapshot-name-prefix=csiunitysnap"]
+      # Enable/Disable health monitor of CSI volumes from node plugin. Provides details of volume usage.
+      # - name: external-health-monitor
+      #   args: ["--monitor-interval=60s"]  
+
+    controller:
+       envs:
+          # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from Controller plugin. Provides details of volume status and volume condition.
+          # As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar
+          # Allowed values:
+          #   true: enable checking of health condition of CSI volumes
+          #   false: disable checking of health condition of CSI volumes
+          # Default value: false
+          - name: X_CSI_HEALTH_MONITOR_ENABLED
+            value: "false"
+
+       # nodeSelector: Define node selection constraints for controller pods.
+       # For the pod to be eligible to run on a node, the node must have each
+       # of the indicated key-value pairs as labels.
+       # Leave as blank to consider all nodes
+       # Allowed values: map of key-value pairs
+       # Default value: None
+       # Examples:
+       #   node-role.kubernetes.io/master: ""
+       nodeSelector:
+       #   node-role.kubernetes.io/master: ""
+
+       # tolerations: Define tolerations for the controllers, if required.
+       # Leave as blank to install controller on worker nodes
+       # Default value: None
+       tolerations:
+       #  - key: "node-role.kubernetes.io/master"
+       #    operator: "Exists"
+       #    effect: "NoSchedule"
+
+    node:
+       envs:
+          # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+          # Allowed values:
+          #   true: enable checking of health condition of CSI volumes
+          #   false: disable checking of health condition of CSI volumes
+          # Default value: false
+          - name: X_CSI_HEALTH_MONITOR_ENABLED
+            value: "false"
+       # nodeSelector: Define node selection constraints for node pods.
+       # For the pod to be eligible to run on a node, the node must have each
+       # of the indicated key-value pairs as labels.
+       # Leave as blank to consider all nodes
+       # Allowed values: map of key-value pairs
+       # Default value: None
+       # Examples:
+       #   node-role.kubernetes.io/master: ""
+       nodeSelector:
+       #   node-role.kubernetes.io/master: ""
+
+       # tolerations: Define tolerations for the controllers, if required.
+       # Leave as blank to install controller on worker nodes
+       # Default value: None
+       tolerations:
+       #  - key: "node-role.kubernetes.io/master"
+       #    operator: "Exists"
+       #    effect: "NoSchedule"
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -118,7 +182,7 @@ data:
     CSI_LOG_LEVEL: "info"
     ALLOW_RWO_MULTIPOD_ACCESS: "false"
     MAX_UNITY_VOLUMES_PER_NODE: "0"
-    SYNC_NODE_INFO_TIME_INTERVAL: "0"
+    SYNC_NODE_INFO_TIME_INTERVAL: "15"
     TENANT_NAME: ""
 ```
 
@@ -165,11 +229,11 @@ To enable this feature, add the below block to the driver manifest before instal
 
     node:
       envs:
-        # X_CSI_ENABLE_VOL_HEALTH_MONITOR: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
+        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin - volume usage
         # Allowed values:
         #   true: enable checking of health condition of CSI volumes
         #   false: disable checking of health condition of CSI volumes
         # Default value: false
-        - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+        - name: X_CSI_HEALTH_MONITOR_ENABLED
           value: "false"
 ```

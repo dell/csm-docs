@@ -4,26 +4,26 @@ description: >
   Installing CSI Driver for PowerStore via Helm
 ---
 
-The CSI Driver for Dell EMC PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
-- CSI Driver for Dell EMC PowerStore
+- CSI Driver for Dell PowerStore
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - (Optional) Kubernetes External Snapshotter, which provides snapshot support
-- Kubernetes External Resizer, which resizes the volume
+- (Optional) Kubernetes External Resizer, which resizes the volume
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
-- CSI Driver for Dell EMC PowerStore
+- CSI Driver for Dell PowerStore
 - Kubernetes Node Registrar, which handles the driver registration
 
 ## Prerequisites
 
-The following are requirements to be met before installing the CSI Driver for Dell EMC PowerStore:
+The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
-- If you plan to use either the Fibre Channel or iSCSI protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ sections below. You can use NFS volumes without FC or iSCSI configuration.
-> You can use either the Fibre Channel or iSCSI protocol, but you do not need both.
+- If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe/TCP Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP configuration.
+> You can use either the Fibre Channel or iSCSI or NVMe/TCP protocol, but you do not need all the three.
 
 > If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group
 - Linux native multipathing requirements
@@ -35,7 +35,7 @@ The following are requirements to be met before installing the CSI Driver for De
 
 ### Install Helm 3.0
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerStore.
+Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerStore.
 
 **Steps**
 
@@ -43,26 +43,39 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell E
 
 ### Fibre Channel requirements
 
-Dell EMC PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
-following requirement is met before you install the CSI Driver for Dell EMC PowerStore:
+Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
+following requirement is met before you install the CSI Driver for Dell PowerStore:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
 
 
 ### Set up the iSCSI Initiator
-The CSI Driver for Dell EMC PowerStore v1.4 and higher supports iSCSI connectivity.
+The CSI Driver for Dell PowerStore v1.4 and higher supports iSCSI connectivity.
 
 If you use the iSCSI protocol, set up the iSCSI initiators as follows:
 - Ensure that the iSCSI initiators are available on both Controller and Worker nodes.
-- Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell EMC PowerStore array that
-has IP interfaces. Manually create IP routes for each node that connects to the Dell EMC PowerStore.
+- Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell PowerStore array that
+has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerStore.
 - All Kubernetes nodes must have the _iscsi-initiator-utils_ package for CentOS/RHEL or _open-iscsi_ package for Ubuntu installed, and the _iscsid_ service must be enabled and running.
 To do this, run the `systemctl enable --now iscsid` command.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 
-For information about configuring iSCSI, see _Dell EMC PowerStore documentation_ on Dell EMC Support.
+For information about configuring iSCSI, see _Dell PowerStore documentation_ on Dell Support.
+
+
+### Set up the NVMe/TCP Initiator
+
+If you want to use the protocol, set up the NVMe/TCP initiators as follows:
+- The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+`sudo apt install nvme-cli`
+
+- Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
+```bash
+modprobe nvme
+modprobe nvme_tcp
+```
 
 ### Linux multipathing requirements
-Dell EMC PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell EMC
+Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.
 
 Set up Linux multipathing as follows:
@@ -82,7 +95,7 @@ snapshot:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd) for the installation.
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd) for the installation.
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
@@ -90,12 +103,44 @@ The CSI external-snapshotter sidecar is split into two controllers:
 - A CSI external-snapshotter sidecar
 
 The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available:
-Use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller) for the installation.
+Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller) for the installation.
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+
+## Volume Health Monitoring
+
+Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.
+   ```yaml
+controller:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+
+    # healthMonitorInterval: Interval of monitoring volume health condition
+    # Allowed values: Number followed by unit (s,m,h)
+    # Examples: 60s, 5m, 1h
+    # Default value: 60s
+    volumeHealthMonitorInterval: 60s
+
+node:
+  healthMonitor:
+    # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
+    # Allowed values:
+    #   true: enable checking of health condition of CSI volumes
+    #   false: disable checking of health condition of CSI volumes
+    # Default value: None
+    enabled: false
+   ```
 
 #### Installation example 
 
@@ -104,12 +149,12 @@ You can install CRDs and default snapshot controller by running following comman
 git clone https://github.com/kubernetes-csi/external-snapshotter/
 cd ./external-snapshotter
 git checkout release-<your-version>
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
+kubectl kustomize client/config/crd | kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
 ```
 
 *NOTE:*
-- It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is installed along with the driver and does not involve any extra configuration.
 
 ### (Optional) Replication feature Requirements
@@ -129,7 +174,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Check `helm/csi-powerstore/driver-image.yaml` and confirm the driver image points to new image.
@@ -139,8 +184,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
     - *username*, *password*: defines credentials for connecting to array.
     - *skipCertificateValidation*: defines if we should use insecure connection or not.
     - *isDefault*: defines if we should treat the current array as a default.
-    - *blockProtocol*: defines what SCSI transport protocol we should use (FC, ISCSI, None, or auto).
+    - *blockProtocol*: defines what transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).
     - *nasName*: defines what NAS should be used for NFS volumes.
+	- *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
+	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
@@ -157,6 +204,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
 | kubeletConfigDir | Defines kubelet config path for cluster | Yes | "/var/lib/kubelet" |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. | Yes | "IfNotPresent" |
+| nfsAcls | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 | connection.enableCHAP   | Defines whether the driver should use CHAP for iSCSI connections or not | No | False |
 | controller.controllerCount     | Defines number of replicas of controller deployment | Yes | 2 |
 | controller.volumeNamePrefix | Defines the string added to each volume that the CSI driver creates | No | "csivol" |
@@ -172,6 +220,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
+| fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
 
 8. Install the driver using `csi-install.sh` bash script by running `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
@@ -187,7 +236,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 ## Storage Classes
 
-The CSI driver for Dell EMC PowerStore version 1.3 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
+The CSI driver for Dell PowerStore version 1.3 and later, `dell-csi-helm-installer` does not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the `samples/storageclass` folder. Use these samples to create new storage classes to provision storage.
 
 ### What happens to my existing storage classes?
 
@@ -201,13 +250,14 @@ There are samples storage class yaml files available under `samples/storageclass
 
 1. Edit the sample storage class yaml file and update following parameters: 
 - *arrayID*: specifies what storage cluster the driver should use, if not specified driver will use storage cluster specified as `default` in `samples/secret/secret.yaml`
-- *FsType*: specifies what filesystem type driver should use, possible variants `ext4`, `xfs`, `nfs`, if not specified driver will use `ext4` by default.
+- *FsType*: specifies what filesystem type driver should use, possible variants `ext3`, `ext4`, `xfs`, `nfs`, if not specified driver will use `ext4` by default.
+- *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 - *allowedTopologies* (Optional): If you want you can also add topology constraints.
 ```yaml
 allowedTopologies:
   - matchLabelExpressions: 
       - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
-# replace "-iscsi" with "-fc" or "-nfs" at the end to use FC or NFS enabled hosts
+# replace "-iscsi" with "-fc", "-nvme" or "-nfs" at the end to use FC, NVMe or NFS enabled hosts
 # replace "12.34.56.78" with PowerStore endpoint IP
         values:
           - "true"
@@ -226,11 +276,11 @@ Starting CSI PowerStore v1.4, `dell-csi-helm-installer` will not create any Volu
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerStore v2.0 driver*:
+*Upgrading from CSI PowerStore v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4 or higher, before upgrading to 2.1.
+It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4 or higher, before upgrading to 2.2.
 
 ## Dynamically update the powerstore secrets 
 

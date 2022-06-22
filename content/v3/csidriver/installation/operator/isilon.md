@@ -24,7 +24,7 @@ User can query for CSI-PowerScale driver using the following command:
 
 1. Create namespace.
      
-   Execute `kubectl create namespace isilon` to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'isilon'.
+   Execute `kubectl create namespace test-isilon` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-isilon'.
 2. Create *isilon-creds* secret by using secret.yaml file format only.
   
    2.1   Create a yaml file called secret.yaml with the following content:

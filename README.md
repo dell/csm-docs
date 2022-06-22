@@ -36,7 +36,7 @@ Dell Technologies (Dell) Container Storage Modules (CSM) is an open-source suite
 * [CSI Driver for Dell PowerMax](https://github.com/dell/csi-powermax)
 * [CSI Driver for Dell PowerScale](https://github.com/dell/csi-powerscale)
 * [CSI Driver for Dell PowerStore](https://github.com/dell/csi-powerstore)
-* [CSI Driver for Dell Unity](https://github.com/dell/csi-unity)
+* [CSI Driver for Dell Unity XT](https://github.com/dell/csi-unity)
 
 ## About
 

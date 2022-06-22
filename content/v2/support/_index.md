@@ -3,7 +3,7 @@ title: "Support"
 linkTitle: "Support"
 weight: 11
 Description: >
-  Dell EMC Container Storage Modules (CSM) support
+  Dell Container Storage Modules (CSM) support
 ---
 
 For all your support needs or to follow the latest ongoing discussions and updates, join our Slack group. Click [Here](http://del.ly/Slack_request) to request your invite.

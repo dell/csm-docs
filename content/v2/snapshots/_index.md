@@ -3,7 +3,7 @@ title: "Snapshots"
 linkTitle: "Snapshots"
 weight: 8
 Description: >
-  Snapshot module of Dell EMC CSI drivers
+  Snapshot module of Dell CSI drivers
 ---
 ## Volume Snapshot Feature
 

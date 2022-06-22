@@ -16,6 +16,27 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
 
 ### Prerequisite
 
+#### Fibre Channel Requirements
+
+CSI Driver for Dell PowerMax supports Fibre Channel communication. Ensure that the following requirements are met before you install CSI Driver:
+- Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.
+- Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
+- If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.
+
+#### iSCSI Requirements
+
+The CSI Driver for Dell PowerMax supports iSCSI connectivity. These requirements are applicable for the nodes that use iSCSI initiator to connect to the PowerMax arrays.
+
+Set up the iSCSI initiators as follows:
+- All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed.
+- Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
+- Kubernetes nodes should have access (network connectivity) to an iSCSI director on the Dell PowerMax array that has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerMax if required.
+- Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell PowerMax array.
+- The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.
+
+For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+
+
 #### Create secret for client-side TLS verification (Optional)
 Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../helm/powermax#certificate-validation-for-unisphere-rest-api-calls).
 
@@ -57,6 +78,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | replicas | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability. | Yes | 2 |
+   | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
    | ***Common parameters for node and controller*** |
    | X_CSI_K8S_CLUSTER_PREFIX | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters | Yes | XYZ |
    | X_CSI_POWERMAX_ENDPOINT | IP address of the Unisphere for PowerMax | Yes | https://0.0.0.0:8443 |
@@ -65,11 +87,55 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_MANAGED_ARRAYS | List of comma-separated array ID(s) which will be managed by the driver | Yes | - |
    | X_CSI_POWERMAX_PROXY_SERVICE_NAME | Name of CSI PowerMax ReverseProxy service. Leave blank if not using reverse proxy | No | - |
    | X_CSI_GRPC_MAX_THREADS | Number of concurrent grpc requests allowed per client | No | 4 |
+   | X_CSI_IG_MODIFY_HOSTNAME | Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format. | No | false |
+   | X_CSI_IG_NODENAME_TEMPLATE | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster. | No | - |
    | X_CSI_POWERMAX_DRIVER_NAME | Set custom CSI driver name. For more details on this feature see the related [documentation](../../../features/powermax/#custom-driver-name) | No | - |
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No | false |
    | ***Node parameters***|
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
+   | X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input. | No | false |
 5. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
+
+**Note** - If CSI driver is getting installed using OCP UI , create these two configmaps manually using the command `oc create -f <configfilename>`
+1. Configmap name powermax-config-params
+     ```yaml
+	apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: powermax-config-params
+          namespace: test-powermax
+        data:
+          driver-config-params.yaml: |
+            CSI_LOG_LEVEL: "debug"
+            CSI_LOG_FORMAT: "JSON"
+     ```
+ 2. Configmap name node-topology-config
+     ```yaml
+        kind: ConfigMap
+        metadata:
+          name: node-topology-config
+          namespace: test-powermax
+        data:
+          topologyConfig.yaml: |
+            allowedConnections:
+              - nodeName: "node1"
+                rules:
+                  - "000000000001:FC"
+                  - "000000000002:FC"
+              - nodeName: "*"
+                rules:
+                  - "000000000002:FC"
+            deniedConnections:
+              - nodeName: "node2"
+                rules:
+                  - "000000000002:*"
+              - nodeName: "node3"
+                rules:
+                  - "*:*"
+      
+     ```
+
+
 
 ### CSI PowerMax ReverseProxy
 
@@ -113,7 +179,7 @@ metadata:
   namespace: test-powermax # <- Set the namespace to where you will install the CSI PowerMax driver
 spec:
   # Image for CSI PowerMax ReverseProxy
-  image: dellemc/csipowermax-reverseproxy:v1.4.0 # <- CSI PowerMax Reverse Proxy image
+  image: dellemc/csipowermax-reverseproxy:v2.1.0 # <- CSI PowerMax Reverse Proxy image
   imagePullPolicy: Always
   # TLS secret which contains SSL certificate and private key for the Reverse Proxy server
   tlsSecret: csirevproxy-tls-secret
@@ -199,8 +265,8 @@ metadata:
   namespace: test-powermax
 spec:
   driver:
-    # Config version for CSI PowerMax v2.2.0 driver
-    configVersion: v2.2.0
+    # Config version for CSI PowerMax v2.3.0 driver
+    configVersion: v2.3.0
     # replica: Define the number of PowerMax controller nodes
     # to deploy to the Kubernetes release
     # Allowed values: n, where n > 0
@@ -209,8 +275,8 @@ spec:
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      # Image for CSI PowerMax driver v2.2.0
-      image: dellemc/csi-powermax:v2.2.0
+      # Image for CSI PowerMax driver v2.3.0
+      image: dellemc/csi-powermax:v2.3.0
       # imagePullPolicy: Policy to determine if the image should be pulled prior to starting the container.
       # Allowed values:
       #  Always: Always pull the image.
@@ -304,6 +370,14 @@ spec:
         # Default value: false
         - name: X_CSI_HEALTH_MONITOR_ENABLED
           value: "false"
+        # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
+        # if enabled, user can create custom topology keys by editing node-topology-config configmap.
+        # Allowed values:
+        #   true: enable the filtration based on config map
+        #   false: disable the filtration based on config map
+        # Default value: false
+        - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
+          value: "false"
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -314,13 +388,57 @@ data:
   driver-config-params.yaml: |
     CSI_LOG_LEVEL: "debug"
     CSI_LOG_FORMAT: "JSON"
-
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-topology-config
+  namespace: test-powermax
+data:
+  topologyConfig.yaml: |
+    # allowedConnections contains a list of (node, array and protocol) info for user allowed configuration
+    # For any given storage array ID and protocol on a Node, topology keys will be created for just those pair and
+    # every other configuration is ignored
+    # Please refer to the doc website about a detailed explanation of each configuration parameter
+    # and the various possible inputs
+    allowedConnections:
+      # nodeName: Name of the node on which user wants to apply given rules
+      # Allowed values:
+      # nodeName - name of a specific node
+      # * -  all the nodes
+      # Examples: "node1", "*"
+      - nodeName: "node1"
+        # rules is a list of 'StorageArrayID:TransportProtocol' pair. ':' is required between both value
+        # Allowed values:
+        # StorageArrayID:
+        #   - SymmetrixID : for specific storage array
+        #   - "*" :- for all the arrays connected to the node
+        # TransportProtocol:
+        #   - FC : Fibre Channel protocol
+        #   - ISCSI : iSCSI protocol
+        #   - "*" - for all the possible Transport Protocol
+        # Examples: "000000000001:FC", "000000000002:*", "*:FC", "*:*"
+        rules:
+          - "000000000001:FC"
+          - "000000000002:FC"
+      - nodeName: "*"
+        rules:
+          - "000000000002:FC"
+    # deniedConnections contains a list of (node, array and protocol) info for denied configurations by user
+    # For any given storage array ID and protocol on a Node, topology keys will be created for every other configuration but
+    # not these input pairs
+    deniedConnections:
+      - nodeName: "node2"
+        rules:
+          - "000000000002:*"
+      - nodeName: "node3"
+        rules:
+          - "*:*"
 ```
 
 
 Note: 
- - `dell-csi-operator` does not support the installation of CSI PowerMax ReverseProxy as a sidecar to the controller Pod. This facility is
-    only present with `dell-csi-helm-installer`.
+ - `dell-csi-operator` does not support the installation of CSI PowerMax ReverseProxy as a sidecar to the controller Pod. This facility is only present with `dell-csi-helm-installer`.
  - `Kubelet config dir path` is not yet configurable in case of Operator based driver installation.
  - Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
 
@@ -332,7 +450,7 @@ Volume Health Monitoring feature is optional and by default this feature is disa
 
 To enable this feature, set  `X_CSI_HEALTH_MONITOR_ENABLED` to `true` in the driver manifest under controller and node section. Also, install the `external-health-monitor` from `sideCars` section for controller plugin.
 To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
-   
+```   
      # Install the 'external-health-monitor' sidecar accordingly.
         # Allowed values:
         #   true: enable checking of health condition of CSI volumes
@@ -352,3 +470,39 @@ To get the volume health state `value` under controller should be set to true as
          - name: X_CSI_HEALTH_MONITOR_ENABLED
            value: "true"
 ```
+
+## Support for custom topology keys 
+
+This feature is introduced in CSI Driver for PowerMax version 2.3.0.
+
+### Operator based installation
+
+Support for custom topology keys is optional and by default this feature is disabled for drivers when installed via operator.
+
+X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol. If enabled, user can create custom topology keys by editing node-topology-config configmap.
+
+1. To enable this feature, set  `X_CSI_TOPOLOGY_CONTROL_ENABLED` to `true` in the driver manifest under node section. 
+
+```
+   # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
+        # if enabled, user can create custom topology keys by editing node-topology-config configmap.
+        # Allowed values:
+        #   true: enable the filtration based on config map
+        #   false: disable the filtration based on config map
+        # Default value: false
+        - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
+          value: "false"
+```
+2. Edit the sample config map "node-topology-config" present in [sample CRD](#sample--crd-file-for--powermax) with appropriate values:
+
+   | Parameter | Description  |  
+   |-----------|--------------|
+   | allowedConnections | List of node, array and protocol info for user allowed configuration |  
+   | allowedConnections.nodeName | Name of the node on which user wants to apply given rules |
+   | allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+   | deniedConnections | List of node, array and protocol info for user denied configuration |  
+   | deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
+   | deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+<br>
+   
+ >Note: Name of the configmap should always be `node-topology-config`.

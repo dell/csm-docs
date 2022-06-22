@@ -3,7 +3,7 @@ title: PowerStore Metrics
 linktitle: PowerStore Metrics
 weight: 1
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability PowerStore Metrics
+  Dell Container Storage Modules (CSM) for Observability PowerStore Metrics
 ---
 
 This section outlines the metrics collected by the Container Storage Modules (CSM) Observability module for PowerStore. The [Grafana reference dashboards](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore) for PowerStore metrics can be uploaded to your Grafana instance.

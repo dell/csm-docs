@@ -198,8 +198,8 @@ metadata:
   namespace: test-powermax
 spec:
   driver:
-    # Config version for CSI PowerMax v2.0.0 driver
-    configVersion: v2.0.0
+    # Config version for CSI PowerMax v2.1.0 driver
+    configVersion: v2.1.0
     # replica: Define the number of PowerMax controller nodes
     # to deploy to the Kubernetes release
     # Allowed values: n, where n > 0
@@ -208,8 +208,8 @@ spec:
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      # Image for CSI PowerMax driver v2.0.0
-      image: dellemc/csi-powermax:v2.0.0
+      # Image for CSI PowerMax driver v2.1.0
+      image: dellemc/csi-powermax:v2.1.0
       # imagePullPolicy: Policy to determine if the image should be pulled prior to starting the container.
       # Allowed values:
       #  Always: Always pull the image.

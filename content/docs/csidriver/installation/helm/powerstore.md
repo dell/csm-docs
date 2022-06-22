@@ -62,17 +62,24 @@ To do this, run the `systemctl enable --now iscsid` command.
 For information about configuring iSCSI, see _Dell PowerStore documentation_ on Dell Support.
 
 
-### Set up the NVMe/TCP Initiator
+### Set up the NVMe Initiator
 
-If you want to use the protocol, set up the NVMe/TCP initiators as follows:
+If you want to use the protocol, set up the NVMe initiators as follows:
 - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
 `sudo apt install nvme-cli`
 
+**Requirements for NVMeTCP**
 - Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
 ```bash
 modprobe nvme
 modprobe nvme_tcp
 ```
+
+**Requirements for NVMeFC**
+- NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
+
+*NOTE:*
+- Do not load the nvme_tcp module for NVMeFC
 
 ### Linux multipathing requirements
 Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
@@ -174,7 +181,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.3.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Check `helm/csi-powerstore/driver-image.yaml` and confirm the driver image points to new image.
@@ -184,14 +191,14 @@ CRDs should be configured during replication prepare stage with repctl as descri
     - *username*, *password*: defines credentials for connecting to array.
     - *skipCertificateValidation*: defines if we should use insecure connection or not.
     - *isDefault*: defines if we should treat the current array as a default.
-    - *blockProtocol*: defines what transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).
+    - *blockProtocol*: defines what transport protocol we should use (FC, ISCSI, NVMeTCP, NVMeFC, None, or auto).
     - *nasName*: defines what NAS should be used for NFS volumes.
 	- *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
-    
+   
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
 7. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml`
@@ -221,6 +228,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+| controller.vgsnapshot.enabled | To enable or disable the volume group snapshot feature | No | "true" |
 
 8. Install the driver using `csi-install.sh` bash script by running `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
@@ -257,7 +265,7 @@ There are samples storage class yaml files available under `samples/storageclass
 allowedTopologies:
   - matchLabelExpressions: 
       - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
-# replace "-iscsi" with "-fc", "-nvme" or "-nfs" at the end to use FC, NVMe or NFS enabled hosts
+# replace "-iscsi" with "-fc", "-nvmetcp" or "-nvmefc" or "-nfs" at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts
 # replace "12.34.56.78" with PowerStore endpoint IP
         values:
           - "true"
@@ -272,15 +280,15 @@ kubectl create -f <path_to_storageclass_file>
 
 ## Volume Snapshot Class
 
-Starting CSI PowerStore v1.4, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
+Starting CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerStore v2.1 driver*:
+*Upgrading from CSI PowerStore v2.1.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4 or higher, before upgrading to 2.2.
+It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4.0 or higher, before upgrading to 2.3.0.
 
 ## Dynamically update the powerstore secrets 
 

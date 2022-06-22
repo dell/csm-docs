@@ -22,7 +22,7 @@ The CSM (Container Storage Modules) Installer simplifies the deployment and mana
 | Replication | 1.0 |
 | Resiliency | 1.0 |
 | CSI Driver for PowerScale | v2.0 | 
-| CSI Driver for Unity | v2.0 |
+| CSI Driver for Unity XT | v2.0 |
 | CSI Driver for PowerStore | v2.0 |
 | CSI Driver for PowerFlex | v2.0 |
 | CSI Driver for PowerMax | v2.0 |

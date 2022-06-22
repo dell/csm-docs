@@ -3,9 +3,9 @@ title : CSM CLI
 linktitle: CSM CLI
 weight: 2
 description: >
-  Dell EMC Container Storage Modules (CSM) Command Line Interface(CLI) Deployment and Management
+  Dell Container Storage Modules (CSM) Command Line Interface(CLI) Deployment and Management
 ---
-`csm` is a command-line client for installation of Dell EMC Container Storage Modules and CSI Drivers for Kubernetes clusters.
+`csm` is a command-line client for installation of Dell Container Storage Modules and CSI Drivers for Kubernetes clusters.
 
 ## Pre-requisites
 
@@ -83,7 +83,7 @@ To change password follow below command
 
 ### View Supported Platforms
 
-You can now view the supported Dell emcCSI Drivers
+You can now view the supported DellCSI Drivers
 
 ```console
 ./csm get supported-drivers
@@ -192,9 +192,9 @@ See the individual steps for configuaration file pre-requisites for CSM Observab
 </details>
 
 <details>
-   <summary>CSI Driver for Dell EMC PowerMax with reverse proxy module</summary>
+   <summary>CSI Driver for Dell PowerMax with reverse proxy module</summary>
    
-   To deploy CSI Driver for Dell EMC PowerMax with reverse proxy module, first upload reverse proxy tls crt and tls key via [adding configuration file](#upload-configuration-files). Then, use the below command to create application:
+   To deploy CSI Driver for Dell PowerMax with reverse proxy module, first upload reverse proxy tls crt and tls key via [adding configuration file](#upload-configuration-files). Then, use the below command to create application:
 
 ```console
 ./csm create application --clustername <created-cluster-name> \
@@ -208,7 +208,7 @@ See the individual steps for configuaration file pre-requisites for CSM Observab
 <details>
    <summary>CSI Driver with replication module</summary>
    
-   To deploy CSI driver with replication module, first add a target cluster through [adding cluster](#add-a-cluster). Then, use the below command(this command is an example to deploy CSI Driver for Dell EMC PowerStore with replication module) to create application::
+   To deploy CSI driver with replication module, first add a target cluster through [adding cluster](#add-a-cluster). Then, use the below command(this command is an example to deploy CSI Driver for Dell PowerStore with replication module) to create application::
 
 ```console
 ./csm create application --clustername <created-cluster-name> \

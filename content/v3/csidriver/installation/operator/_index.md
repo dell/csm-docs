@@ -8,6 +8,37 @@ description: >
 
 The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell EMC for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
 
+## Prerequisites
+
+#### Volume Snapshot CRD's
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd)
+
+#### Volume Snapshot Controller
+The CSI external-snapshotter sidecar is split into two controllers:
+- A common snapshot controller
+- A CSI external-snapshotter sidecar
+
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller)
+
+*NOTE:*
+- The manifests available on GitHub install the snapshotter image:
+    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
+- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+
+#### Installation example
+
+You can install CRDs and the default snapshot controller by running the following commands:
+```bash
+git clone https://github.com/kubernetes-csi/external-snapshotter/
+cd ./external-snapshotter
+git checkout release-<your-version>
+kubectl create -f client/config/crd
+kubectl create -f deploy/kubernetes/snapshot-controller
+```
+
+*NOTE:*
+- It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+
 
 ## Installation
 Dell CSI Operator has been tested and qualified with 
@@ -19,21 +50,21 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 #### Full list of CSI Drivers and versions supported by the Dell CSI Operator
 | CSI Driver         | Version   | ConfigVersion  | Kubernetes Version   | OpenShift Version     |
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
-| CSI PowerMax       | 1.6       | v5             | 1.18, 1.19, 1.20     | 4.6, 4.7              |
 | CSI PowerMax       | 1.7       | v6             | 1.19, 1.20, 1.21     | 4.6, 4.7              |
 | CSI PowerMax       | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
-| CSI PowerFlex      | 1.4       | v4             | 1.18, 1.19, 1.20     | 4.6, 4.7              |
+| CSI PowerMax       | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerFlex      | 1.5       | v5             | 1.19, 1.20, 1.21     | 4.6, 4.7              |
 | CSI PowerFlex      | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
-| CSI PowerScale     | 1.5       | v5             | 1.18, 1.19, 1.20     | 4.6, 4.7              |
+| CSI PowerFlex      | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerScale     | 1.6       | v6             | 1.19, 1.20, 1.21     | 4.6, 4.7              |
 | CSI PowerScale     | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
-| CSI Unity          | 1.5       | v4             | 1.18, 1.19, 1.20     | 4.6, 4.7              |
+| CSI PowerScale     | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI Unity          | 1.6       | v5             | 1.19, 1.20, 1.21     | 4.6, 4.7              |
 | CSI Unity          | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
-| CSI PowerStore     | 1.3       | v3             | 1.18, 1.19, 1.20     | 4.6, 4.7              |
+| CSI Unity          | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerStore     | 1.4       | v4             | 1.19, 1.20, 1.21     | 4.6, 4.7              |
 | CSI PowerStore     | 2.0.0     | v2.0.0         | 1.20, 1.21, 1.22     | 4.6 EUS, 4.7, 4.8     |
+| CSI PowerStore     | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 
 </br>
 
@@ -66,14 +97,15 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 #### Steps
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
-1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator). 
-2. Run `bash scripts/install.sh` to install the operator.
+1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator).
+2. git checkout dell-csi-operator-<your-version>
+3. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
 Any existing installations of Dell CSI Operator (v1.2.0 or later) installed using `install.sh` to the 'default' or 'dell-csi-operator' namespace can be upgraded to the new version by running `install.sh --upgrade`.
 
 {{< imgproc non-olm-1.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-3. Run the command `oc get pods -n dell-csi-operator` to validate the install. If completed successfully, you should be able to see the operator-related pod in the 'dell-csi-operator' namespace.
+4. Run the command `oc get pods -n dell-csi-operator` to validate the installation. If completed successfully, you should be able to see the operator-related pod in the 'dell-csi-operator' namespace.
 
 {{< imgproc non-olm-2.jpg Resize "3500x800" >}}{{< /imgproc >}}
 
@@ -266,25 +298,68 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
 
 **NOTES:** 
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
-2. The parameter "dnsPolicy: ClusterFirstWithHostNet" should be added as follows:
-```
-driver:
-    configVersion: v5
-    replicas: 2
-    dnsPolicy: ClusterFirstWithHostNet
-    common:
-```
+   ```yaml
+      driver:
+        configVersion: v2.1.0
+   ```
+2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
+   To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
+   external-health-monitor sidecar in the sidecar section and `value`under controller set to true and the `value` under node set 
+   to true as shown below:
+    i. Add controller and node section as below:
+    ```yaml
+        controller:
+          envs:
+            - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+              value: "true"
+        dnsPolicy: ClusterFirstWithHostNet
+        node:
+          envs:
+            - name: X_CSI_ENABLE_VOL_HEALTH_MONITOR
+              value: "true"
+    ```
+   ii. Update the sidecar versions and add external-health-monitor sidecar if you want to enable health monitor of CSI volumes from Controller plugin:
+    ```yaml
+        sideCars:
+        - args:
+          - --volume-name-prefix=csiunity
+          - --default-fstype=ext4
+          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.0.0
+          imagePullPolicy: IfNotPresent
+          name: provisioner
+        - args:
+          - --snapshot-name-prefix=csiunitysnap
+          image: k8s.gcr.io/sig-storage/csi-snapshotter:v4.2.1
+          imagePullPolicy: IfNotPresent
+          name: snapshotter
+        - args:
+          - --monitor-interval=60s
+          image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.4.0
+          imagePullPolicy: IfNotPresent
+          name: external-health-monitor
+        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.3.0
+          imagePullPolicy: IfNotPresent
+          name: attacher
+        - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.3.0
+          imagePullPolicy: IfNotPresent
+          name: registrar
+        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.3.0
+          imagePullPolicy: IfNotPresent
+          name: resizer
+    ```
 3. Configmap needs to be created with command `kubectl create -f configmap.yaml` using following yaml file.
 ```yaml
-apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: powerstore-config-params
-  namespace: csi-powerstore
+  name: unity-config-params
+  namespace: test-unity
 data:
   driver-config-params.yaml: |
-    CSI_LOG_LEVEL: "debug"
-    CSI_LOG_FORMAT: "JSON"
+    CSI_LOG_LEVEL: "info"
+    ALLOW_RWO_MULTIPOD_ACCESS: "false"
+    MAX_UNITY_VOLUMES_PER_NODE: "0"
+    SYNC_NODE_INFO_TIME_INTERVAL: "0"
+    TENANT_NAME: ""
 ```
 
 **NOTE:** `Replicas` in the driver CR file should not be greater than or equal to the number of worker nodes when upgrading the driver. If the `Replicas` count is not less than the worker node count, some of the driver controller pods would land in a pending state, and upgrade will not be successful. Driver controller pods go in a pending state because they have anti-affinity to each other and cannot be scheduled on nodes where there is a driver controller pod already running. Refer to https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity for more details.
@@ -363,7 +438,7 @@ Note - The `image` field should point to the correct image tag for version of th
 For e.g. - If you wish to install v1.4 of the CSI PowerMax driver, use the image tag `dellemc/csi-powermax:v1.4.0.000R`
 
 ### SideCars
-Although the sidecars field in the driver specification is optional, it is **strongly** recommended to not modify any details related to sidecars provided (if present) in the sample manifests. Any modifications to this should be only done after consulting with Dell EMC support.
+Although the sidecars field in the driver specification is optional, it is **strongly** recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell EMC support.
 
 ### Modify the driver specification
 * Choose the correct configVersion. Refer the table containing the full list of supported drivers and versions.

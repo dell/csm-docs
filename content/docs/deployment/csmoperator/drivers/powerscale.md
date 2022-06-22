@@ -137,7 +137,7 @@ User can query for all Dell CSI drivers using the following command:
     ```kubectl create -f <input_sample_file.yaml>``` .
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
-5.  [Verify the CSI Driver installation](../../#verifying-the-driver-installation)
+7.  [Verify the CSI Driver installation](../drivers/_index.md#verifying-the-driver-installation)
     
 **Note** : 
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.

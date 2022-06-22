@@ -47,7 +47,7 @@ CSM for Observability provides the following capabilities:
 | COP/OS | Supported Versions |
 |-|-|
 | Kubernetes    | 1.20, 1.21, 1.22 |
-| Red Hat OpenShift | 4.7, 4.8 |
+| Red Hat OpenShift | 4.8, 4.9 |
 | Rancher Kubernetes Engine | yes | 
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
@@ -67,8 +67,8 @@ CSM for Observability supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
-| CSI Driver for Dell EMC PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 |
-| CSI Driver for Dell EMC PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0 |
+| CSI Driver for Dell EMC PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0,v2.1 |
+| CSI Driver for Dell EMC PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0,v2.1 |
 {{</table>}}
 
 ## Topology Data

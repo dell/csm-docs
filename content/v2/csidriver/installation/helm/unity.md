@@ -4,7 +4,7 @@ description: >
   Installing CSI Driver for Unity via Helm
 ---
 
-The CSI Driver for Dell EMC Unity can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
+The CSI Driver for Dell Unity can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_:
 
@@ -13,6 +13,7 @@ The controller section of the Helm chart installs the following components in a 
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - Kubernetes External Snapshotter, which provides snapshot support
 - Kubernetes External Resizer, which resizes the volume
+- Kubernetes External Health Monitor, which provides volume health status
 
 The node section of the Helm chart installs the following component in a _DaemonSet_:
 
@@ -38,7 +39,7 @@ Install CSI Driver for Unity using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.1.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
+ * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.2.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
@@ -51,6 +52,8 @@ Procedure
     **Note**: 
       * ArrayId corresponds to the serial number of Unity array.
       * Unity Array username must have role as Storage Administrator to be able to perform CRUD operations.
+      * If the user is using complex K8s version like "v1.21.3-mirantis-1", use below kubeVersion check in helm/csi-unity/Chart.yaml file.
+            kubeVersion: ">= 1.21.0-0 < 1.24.0-0"
 
 2. Copy the `helm/csi-unity/values.yaml` into a file named `myvalues.yaml` in the same directory of `csi-install.sh`, to customize settings for installation.
 
@@ -64,12 +67,13 @@ Procedure
     | logLevel | LogLevel is used to set the logging level of the driver | true | info |
     | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | false | false |
     | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-	  | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
+    | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
     | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | false | 0 |
     | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
     | podmon.enabled | service to monitor failing jobs and notify | false | - |
     | podmon.image| pod man image name | false | - |
+    | tenantName | Tenant name added while adding host entry to the array | No |  |
     | **controller** | Allows configuration of the controller-specific parameters.| - | - |
     | controllerCount | Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
     | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
@@ -78,13 +82,13 @@ Procedure
     | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
     | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
     | tolerations | Define tolerations for the controller deployment, if required | No | |
-    | volumeHealthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
-    | volumeHealthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
+    | healthMonitor.enabled | Enable/Disable deployment of external health monitor sidecar for controller side volume health monitoring. | No | false |
+    | healthMonitor.interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h) | No | 60s |
     | ***node*** | Allows configuration of the node-specific parameters.| - | - |
-    | tolerations | Define tolerations for the node daemonset, if required | No | |
     | dnsPolicy | Define the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
-    | volumeHealthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
-    | tenantName | Tenant name added while adding host entry to the array | No |  |
+    | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
+    | nodeSelector | Define node selection constraints for pods of node deployment | No | |
+    | tolerations | Define tolerations for the node deployment, if required | No | |
 
 
     **Note**: 
@@ -118,19 +122,19 @@ Procedure
     maxUnityVolumesPerNode: 0
     ```
    
-4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `helm/emptysecret.yaml` file by running the `kubectl create -f helm/emptysecret.yaml` command.
+4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `csi-unity/samples/secret/emptysecret.yaml` file by running the `kubectl create -f csi-unity/samples/secret/emptysecret.yaml` command.
 
 5. Prepare the `secret.yaml`  for driver configuration.
     The following table lists driver configuration parameters for multiple storage arrays.
     
-    | Parameter | Description | Required | Default |
-    | --------- | ----------- | -------- |-------- |
-    | storageArrayList.username | Username for accessing Unity system  | true | - |
-    | storageArrayList.password | Password for accessing Unity system  | true | - |
-    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity system| true | - |
-    | storageArrayList.arrayId | ArrayID for Unity system | true | - |
+    | Parameter                 | Description                         | Required | Default |
+    | ------------------------- | ----------------------------------- | -------- |-------- |
+    | storageArrayList.username | Username for accessing Unity system | true     | -       |
+    | storageArrayList.password | Password for accessing Unity system | true     | -       |
+    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity system| true | -   |
+    | storageArrayList.arrayId  | ArrayID for Unity system            | true     | -       |
     | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | true | true |
-    | storageArrayList.isDefault | An array having isDefault=true or isDefaultArray=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | false | false |
+    | storageArrayList.isDefault| An array having isDefault=true or isDefaultArray=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | true | - |
 
 
     Example: secret.yaml
@@ -182,7 +186,7 @@ Procedure
        ```
     
       **Note:**
-      * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoTimeInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
+      * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 
 6. Setup for snapshots.
          
@@ -197,19 +201,14 @@ Procedure
    In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster
 
     #### Volume Snapshot CRD's
-    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd) for the installation.
+    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd) for the installation.
 
     #### Volume Snapshot Controller
     The CSI external-snapshotter sidecar is split into two controllers:
     - A common snapshot controller
     - A CSI external-snapshotter sidecar
 
-    Use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller) for the installation.
-
-    **Note**:
-    - The manifests available on GitHub install the snapshotter image: 
-      - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
-    - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+    Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller) for the installation.
 
     #### Installation example 
 
@@ -218,12 +217,12 @@ Procedure
     git clone https://github.com/kubernetes-csi/external-snapshotter/
     cd ./external-snapshotter
     git checkout release-<your-version>
-    kubectl create -f client/config/crd
-    kubectl create -f deploy/kubernetes/snapshot-controller
+    kubectl kustomize client/config/crd | kubectl create -f -
+    kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
     ```
 
     **Note**:
-    - It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+    - It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
     - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
               
@@ -233,7 +232,7 @@ Procedure
     A successful installation must display messages that look similar to the following samples:
     ```
     ------------------------------------------------------
-    > Installing CSI Driver: csi-unity on 1.20
+    > Installing CSI Driver: csi-unity on 1.22
     ------------------------------------------------------
     ------------------------------------------------------
     > Checking to see if CSI Driver is already installed
@@ -241,52 +240,52 @@ Procedure
     ------------------------------------------------------
     > Verifying Kubernetes and driver configuration
     ------------------------------------------------------
-    |- Kubernetes Version: 1.20
+    |- Kubernetes Version: 1.22
     |
     |- Driver: csi-unity                                                
     |
-    |- Verifying Kubernetes versions                                    
-      |
-      |--> Verifying minimum Kubernetes version                         Success
-      |
-      |--> Verifying maximum Kubernetes version                         Success
+    |- Verifying Kubernetes version                                     
     |
-    |- Verifying that required namespaces have been created             Success
+    |--> Verifying minimum Kubernetes version                         Success
     |
-    |- Verifying that required secrets have been created                Success
+    |--> Verifying maximum Kubernetes version                         Success
     |
-    |- Verifying that required secrets have been created                Success
+    |- Verifying that required namespaces have been created           Success
+    |
+    |- Verifying that required secrets have been created              Success
+    |
+    |- Verifying that optional secrets have been created              Success
     |
     |- Verifying alpha snapshot resources                               
-      |
-      |--> Verifying that alpha snapshot CRDs are not installed         Success
+    |
+    |--> Verifying that alpha snapshot CRDs are not installed         Success
     |
     |- Verifying sshpass installation..                                 |
     |- Verifying iSCSI installation                                     
-    Enter the root password of 10.**.**.**: 
+    Enter the root password of 10.**.**.**:
     
-    Enter the root password of 10.**.**.**: 
+    Enter the root password of 10.**.**.**:
     Success
     |
     |- Verifying snapshot support                                       
-      |
-      |--> Verifying that snapshot CRDs are available                   Success
-      |
-      |--> Verifying that the snapshot controller is available          Success
     |
-    |- Verifying helm version                                           Success
+    |--> Verifying that snapshot CRDs are available                   Success
     |
-    |- Verifying helm values version                                    Success
+    |--> Verifying that the snapshot controller is available          Success
+    |
+    |- Verifying helm version                                         Success
+    |
+    |- Verifying helm values version                                  Success
     
     ------------------------------------------------------
     > Verification Complete - Success
     ------------------------------------------------------
     |
-    |- Installing Driver                                                Success
-      |
-      |--> Waiting for Deployment unity-controller to be ready          Success
-      |
-      |--> Waiting for DaemonSet unity-node to be ready                 Success
+    |- Installing Driver                                              Success
+    |
+    |--> Waiting for Deployment unity-controller to be ready          Success
+    |
+    |--> Waiting for DaemonSet unity-node to be ready                 Success
     ------------------------------------------------------
     > Operation complete
     ------------------------------------------------------
@@ -301,7 +300,7 @@ Procedure
 
 ## Certificate validation for Unisphere REST API calls 
 
-This topic provides details about setting up the certificate validation for the CSI Driver for Dell EMC Unity.
+This topic provides details about setting up the certificate validation for the CSI Driver for Dell Unity.
 
 *Before you begin*
 
@@ -339,11 +338,11 @@ For CSI Driver for Unity version 1.6 and later, `dell-csi-helm-installer` does n
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI Unity v2.0 driver*:
+*Upgrading from CSI Unity v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 or higher, before upgrading to 2.1.
+It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 or higher, before upgrading to 2.2.
 
 ## Storage Classes
 
@@ -360,7 +359,7 @@ Upgrading from an older version of the driver: The storage classes will be delet
 >Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.
 
 **Steps to create storage class:**
-There are samples storage class yaml files available under `helm/samples/storageclass`.  These can be copied and modified as needed.
+There are samples storage class yaml files available under `csi-unity/samples/storageclass`.  These can be copied and modified as needed.
 
 1. Pick any of `unity-fc.yaml`, `unity-iscsi.yaml` or `unity-nfs.yaml`
 2. Copy the file as `unity-<ARRAY_ID>-fc.yaml`, `unity-<ARRAY_ID>-iscsi.yaml` or `unity-<ARRAY_ID>-nfs.yaml`

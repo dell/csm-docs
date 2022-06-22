@@ -30,6 +30,7 @@ The following requirements must be met before installing CSI Driver for Dell EMC
 - Mount propagation is enabled on container runtime that is being used
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 
 ### Install Helm 3
 
@@ -126,20 +127,6 @@ The common snapshot controller must be installed only once in the cluster, irres
   [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
-### (Optional) Replication feature Requirements
-
-Applicable only if you decided to enable the Replication feature in `values.yaml`
-
-```yaml
-replication:
-  enabled: true
-```
-#### Replication CRD's
-
-The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
-
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
-
 #### Installation example 
 
 You can install CRDs and the default snapshot controller by running the following commands:
@@ -155,12 +142,25 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 - It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
+### (Optional) Replication feature Requirements
+
+Applicable only if you decided to enable the Replication feature in `values.yaml`
+
+```yaml
+replication:
+  enabled: true
+```
+#### Replication CRD's
+
+The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
+
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
 
 ## Install the Driver
 
 **Steps**
 
-1. Run `git clone -b v2.0.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -201,10 +201,10 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 |defaultCredentialsSecret| This secret name refers to:<br> 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.<br>2. The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>3. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
 | storageArrayId | This refers to PowerMax Symmetrix ID.| Yes | 000000000001|
-| endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_| Yes if Reverse Proxy mode is _StandAlone_ | https://primary-1.unisphe.re:8443 |
-| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode.| No | https://backup-1.unisphe.re:8443 |
+| endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| Yes if Reverse Proxy mode is _StandAlone_ | https://primary-1.unisphe.re:8443 |
+| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| No | https://backup-1.unisphe.re:8443 |
 | managementServers | This section refers to the list of configurations for Unisphere servers managing powermax arrays.| - | - |
-| endpoint | This refers to the URL of the Unisphere server | Yes | https://primary-1.unisphe.re:8443 |
+| endpoint | This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on | Yes | https://primary-1.unisphe.re:8443 |
 | credentialsSecret| This refers to the user credentials for _endpoint_ | No| primary-1-secret|
 | skipCertificateValidation | This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.| No | "True"       |
 | certSecret    |  The name of the secret in the same namespace containing the CA certificates of the Unisphere server | Yes, if skipCertificateValidation is set to false | Empty|
@@ -220,6 +220,11 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
 | mode | This refers to the installation mode of Reverse Proxy. It can be set to:<br> 1. _Linked_: In this mode, the Reverse Proxy communicates with a primary or a backup Unisphere managing the same set of arrays.<br>2. _StandAlone_: In this mode, the Reverse Proxy communicates with multiple arrays managed by different Unispheres.| Yes | "StandAlone" |
+| **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerMax. | - | - |
+| enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
+| sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
+| proxyHost | Hostname of the csm-authorization server. | No | Empty |
+| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
 
 8. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml`
 
@@ -227,6 +232,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 - For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.
 - There are a set of samples provided [here](#sample-values-file) to help you configure the driver with reverse proxy
 - This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The `verify.sh` script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the `--skip-verify-node` option
+- In order to enable authorization, there should be an authorization proxy server already installed. 
 
 ## Storage Classes
 
@@ -244,11 +250,11 @@ Starting with CSI PowerMax v1.7, `dell-csi-helm-installer` will not create any V
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerMax v1.7 driver*:
+*Upgrading from CSI PowerMax v2.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 before upgrading to 2.0.
+It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 or higher, before upgrading to 2.1.
 
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes

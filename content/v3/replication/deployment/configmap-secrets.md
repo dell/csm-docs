@@ -14,6 +14,10 @@ Container Storage Modules (CSM) for Replication Controller requires access to re
 You need to create secrets (using either of the two methods) in each cluster involved in replication and provide their references in `ConfigMap` objects which are used to configure
 the respective CSM Replication Controllers.
 
+>Important: Direct network visibility between clusters required for CSM-Replication to work.
+> Cluster-1's API URL has to be pingable from cluster-2 pods and vice versa. 
+
+
 >Note: If you are using a single stretched cluster, then you can skip all the following steps
 
 ### Inject configuration using repctl

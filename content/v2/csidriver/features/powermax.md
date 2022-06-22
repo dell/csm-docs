@@ -122,7 +122,7 @@ When challenged, the host initiator transmits a CHAP credential and CHAP secret 
 
 ## Custom Driver Name
 
-With version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell EMC PowerMax in the same Kubernetes/OpenShift cluster.
+With version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.
 
 To use this feature, set the following values under `customDriverName` in `my-powermax-settings.yaml`.
 - Value: Set this to the custom name of the driver.
@@ -140,7 +140,7 @@ For example, if the driver name is set to _driver_ and it is installed in the na
 
 ### Install multiple drivers
 
-To install multiple CSI Drivers for Dell EMC PowerMax in a single Kubernetes cluster, you can take advantage of the custom driver name feature. There are a few important restrictions that should be strictly adhered to:
+To install multiple CSI Drivers for Dell PowerMax in a single Kubernetes cluster, you can take advantage of the custom driver name feature. There are a few important restrictions that should be strictly adhered to:
 - Only one driver can be installed in a single namespace
 - Different drivers should not connect to a single Unisphere server
 - Different drivers should not be used to manage a single PowerMax array
@@ -176,7 +176,7 @@ kind: StorageClass
 metadata:
   name: powermax-expand-sc
   annotations:
-    storageclass.beta.kubernetes.io/is-default-class: false
+    storageclass.kubernetes.io/is-default-class: false
 provisioner: csi-powermax.dellemc.com
 reclaimPolicy: Delete
 allowVolumeExpansion: true #Set this attribute to true if you plan to expand any PVCs
@@ -458,3 +458,32 @@ To update the log level dynamically, the user has to edit the ConfigMap `powerma
 ```
 kubectl edit configmap -n powermax powermax-config-params
 ```  
+
+## Volume Health Monitoring
+
+CSI Driver for Dell PowerMax 2.2.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.
+
+## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)
+
+Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerMax 2.2.0+ and Kubernetes version 1.22+.
+
+To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
+`--feature-gates="...,ReadWriteOncePod=true"`
+
+### Creating a PersistentVolumeClaim
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: single-writer-only
+spec:
+  accessModes:
+  - ReadWriteOncePod # the volume can be mounted as read-write by a single pod across the whole cluster
+  resources:
+    requests:
+      storage: 1Gi
+```
+
+When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
+
+To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).

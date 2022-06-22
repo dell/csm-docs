@@ -8,12 +8,12 @@ weight: 1
 Description: Upgrade PowerMax CSI driver
 ---
 
-You can upgrade CSI Driver for Dell EMC PowerMax using Helm or Dell CSI Operator.
+You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.
 
-## Update Driver from v2.0 to v2.1 using Helm
+## Update Driver from v2.1 to v2.2 using Helm
 
 **Steps**
-1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powermax.git` to clone the git repository and get the v2.1 driver.
+1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powermax.git` to clone the git repository and get the v2.2 driver.
 2. Update the values file as needed.
 2. Run the `csi-install` script with the option _\-\-upgrade_ by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade`.
 
@@ -22,11 +22,8 @@ You can upgrade CSI Driver for Dell EMC PowerMax using Helm or Dell CSI Operator
 - To update any installation parameter after the driver has been installed, change the `my-powermax-settings.yaml` file and run the install script with the option _\-\-upgrade_, for example: `./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml –upgrade`.
 
 ## Upgrade using Dell CSI Operator:
+**Note:** Upgrading the Operator does not upgrade the CSI Driver.
 
-1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator).
+1. Please upgrade the Dell CSI Operator by following [here](./../operator).
+2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).
 
-2. Execute `bash scripts/install.sh --upgrade`
-This command installs the latest version of the operator.
->Note: Dell CSI Operator version 1.4.0 and later installs to the 'dell-csi-operator' namespace by default.
-
-3. To upgrade the driver, see [here](./../../../installation/operator/#update-csi-drivers).
