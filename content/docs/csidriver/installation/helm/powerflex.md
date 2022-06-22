@@ -109,7 +109,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.3.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
 
@@ -130,41 +130,17 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 
     Example: `samples/config.yaml`
 
-    ```yaml
-     # Username for accessing PowerFlex system.	
-     # If authorization is enabled, username will be ignored.
-   - username: "admin"
-     # Password for accessing PowerFlex system.	
-     # If authorization is enabled, password will be ignored.
-     password: "password"
-     # System name/ID of PowerFlex system.	
-     systemID: "ID1"
-     # Previous names of PowerFlex system if used for PV.
-     allSystemNames: "pflex-1,pflex-2"
-     # REST API gateway HTTPS endpoint for PowerFlex system.
-     # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
-     # the authorization sidecar will listen on
-     endpoint: "https://127.0.0.1"
-     # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
-     # Allowed values: true or false
-     # Default value: true
-     skipCertificateValidation: true 
-     # indicates if this array is the default array
-     # needed for backwards compatibility
-     # only one array is allowed to have this set to true 
-     # Default value: false
-     isDefault: true
-     # defines the MDM(s) that SDC should register with on start.
-     # Allowed values:  a list of IP addresses or hostnames separated by comma.
-     # Default value: none 
-     mdm: "10.0.0.1,10.0.0.2"
-   - username: "admin"
-     password: "Password123"
-     systemID: "ID2"
-     endpoint: "https://127.0.0.2"
-     skipCertificateValidation: true 
-     mdm: "10.0.0.3,10.0.0.4"
-    ```
+```yaml
+- username: "admin"
+  password: "Password123"
+  systemID: "ID2"
+  endpoint: "https://127.0.0.2"
+  skipCertificateValidation: true 
+  isDefault: true 
+  mdm: "10.0.0.3,10.0.0.4"
+```
+ *NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.* 
+
 
     After editing the file, run the following command to create a secret called `vxflexos-config`:
     
@@ -206,6 +182,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 | logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
 | kubeletConfigDir | kubelet config directory path. Ensure that the config.yaml file is present at this path. | Yes | /var/lib/kubelet |
 | defaultFsType | Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs. | Yes | ext4 |
+| fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes are`None, File, and ReadWriteOnceWithFSType.` | No | "ReadWriteOnceWithFSType" |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never. | Yes | IfNotPresent | 
 | enablesnapshotcgdelete | A boolean that, when enabled, will delete all snapshots in a consistency group everytime a snap in the group is deleted. | Yes | false |
 | enablelistvolumesnapshot | A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise. | Yes | false |
@@ -221,14 +198,13 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 | enabled | Enable/Disable deployment of external health monitor sidecar. | No | false |
 | volumeHealthMonitorInterval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)| No | 60s |
 | **node** | This section allows the configuration of node-specific parameters. | - | - |
+| healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | nodeSelector | Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
 | tolerations | Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
 | **monitor**              | This section allows the configuration of the SDC monitoring pod.                                                                                                                                                                                                                                                                                                                                                  | -        | -       |
 | enabled                  | Set to enable the usage of the monitoring pod.                                                                                                                                                                                                                                                                                                                                                                | Yes     | false |
 | hostNetwork              | Set whether the monitor pod should run on the host network or not.                                                                                                                                                                                                                                                                                                                                            | Yes     | true |
 | hostPID                  | Set whether the monitor pod should run in the host namespace or not.                                                                                                                                                                                                                                                                                                                                          | Yes     | true |
-| **healthMonitor** | This section configures node side volume health monitoring | - | -|
-| enabled| Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | **vgsnapshotter** | This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.  | - | - |
 | enabled | A boolean that enable/disable vg snapshotter feature. | No | false |
 | image | Image for vg snapshotter. | No | " " |
@@ -338,8 +314,8 @@ Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volum
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerFlex v2.1 driver*:
+*Upgrading from CSI PowerFlex v2.2 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.2.
+It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.3.

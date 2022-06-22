@@ -40,6 +40,7 @@ This script does the following:
 - After that, it uses that PVC as the data source to create a new PVC and mounts it on the same container. It checks if the file that existed in the source PVC also exists in the new PVC, calculates its checksum, and compares it to the checksum previously calculated.
 - Finally, it cleans up all the resources that are created as part of the test.
 
+> This is not supported for replicated volumes.
 
 #### Snapshot test
 
@@ -70,6 +71,8 @@ Use this procedure to perform a volume expansion test.
   - Writes some data to the PVC
   - After that, it calculates the checksum of the written data, expands the PVC, and then recalculates the checksum
   - Cleans up all the resources that were created as part of the test
+
+>Note: This is not applicable for replicated volumes.
 
 ### Setting Application Prefix 
 

@@ -3,17 +3,13 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.0.0
+## Release Notes - CSI PowerMax v2.1.0
 
 ### New Features/Changes
-- Added support for Kubernetes v1.22.
-- Added support for OpenShift v4.8.
-- Added support for RKE v1.2.8.
-- Added support for consistent config parameters across CSI drivers.
-- Added the ability to change log level and log format of CSI driver and change them dynamically.
-- Added the ability to configure kubelet directory path.
-- Added the ability to enable/disable installation of resizer sidecar with driver installation.
-- Added the ability to enable/disable installation of snapshotter sidecar with driver installation.
+- Added support for OpenShift v4.9.
+- Added support for CSI spec 1.5.
+- Added v2 suffix to the module names.
+- Added support for CSM Authorization sidecar via Helm 
 
 ### Fixed Issues
 There are no fixed issues in this release.
