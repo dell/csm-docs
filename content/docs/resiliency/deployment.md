@@ -161,7 +161,7 @@ podmon:
 
 CSM for Resiliency has configuration parameters that can be updated dynamically, such as the logging level and format. This can be 
 done by editing the Dell CSI Driver's parameters ConfigMap. The ConfigMap can be queried using kubectl. 
-For example, the Dell Powerflex CSI Driver ConfigMaps can be found using the following command: `kubectl get -n vxflexos configmap`. 
+For example, the Dell Powerflex CSI Driver ConfigMaps can be found using this command: `kubectl get -n vxflexos configmap`. 
 The ConfigMap to edit will have this pattern: <storage>-config-params (e.g., `vxflexos-config-params`).
 
 To update or add parameters, you can use the `kubectl edit` command. For example, `kubectl edit -n vxflexos configmap vxflexos-config-params`.

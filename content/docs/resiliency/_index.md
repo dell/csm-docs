@@ -66,7 +66,7 @@ CSM for Resiliency supports the following CSI drivers and versions.
 
 ### PowerFlex Support
 
-PowerFlex is a highly scalable array that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerFlex leverages the following PowerFlex features:
+PowerFlex is a highly scalable array that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerFlex leverages these PowerFlex features:
 
 * Very quick detection of Array I/O Network Connectivity status changes (generally takes 1-2 seconds for the array to detect changes)
 * A robust mechanism if Nodes are doing I/O to volumes (sampled over a 5-second period).
@@ -75,7 +75,7 @@ PowerFlex is a highly scalable array that is very well suited to Kubernetes depl
 
 ### Unity XT Support
 
-Dell Unity XT is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads.Unity XT systems are designed to deliver the best value in the market. They support all-Flash, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition.
+Dell Unity XT is targeted for midsized deployments, remote or branch offices, and cost-sensitive mixed workloads. Unity XT systems are designed to deliver the best value in the market. They support all-Flash, and are available in purpose-built (all Flash or hybrid Flash), converged deployment options (through VxBlock), and software-defined virtual edition.
 
 * Unity XT (purpose-built): A modern midrange storage solution, engineered from the groundup to meet market demands for Flash, affordability and incredible simplicity. The Unity XT Family is available in 12 All Flash models and 12 Hybrid models.
 * VxBlock (converged): Unity XT storage options are also available in Dell VxBlock System 1000.

@@ -399,7 +399,7 @@ After a successful installation of the driver, if a node Pod is running successf
 
 The values for all these keys are always set to the name of the provisioner which is usually `csi-powermax.dellemc.com`.
 
-Starting from version 2.3.0, topology keys has been enhanced to filter out arrays, and associated transport protocol available to each node and create topology keys based on any such user input.
+Starting from version 2.3.0, topology keys have been enhanced to filter out arrays, associated transport protocol available to each node and create topology keys based on any such user input.
 
 ### Topology Usage
 To use the Topology feature, the storage classes must be modified as follows:  

@@ -39,4 +39,4 @@ CSM for Resiliency's design is focused on detecting the following types of hardw
 
 4. K8S Control Plane Failure. Control Plane Failure is defined as failure of kubelet in a given node. K8S Control Plane failures are generally discovered by receipt of a Node event with a NoSchedule or NoExecute taint, or detection of such a taint when retrieving the Node via the K8S API.
 
-5. CSI Driver node pods. CSM for Resiliency monitors CSI driver node pods and for some reason if CSI Driver node pods fail and enter not Ready state, it will taint the node with NoSchedule value. This will disable kubernetes scheduler to schedule new workloads on the given node, hence avoid workloads that needed CSI Driver pods to be in Ready state.
+5. CSI Driver node pods. CSM for Resiliency monitors CSI driver node pods.If for any reason the CSI Driver node pods fail and enter the Not Ready state, it will taint the node with NoSchedule value. This will disable kubernetes scheduler to schedule new workloads on the given node, hence avoid workloads that needed CSI Driver pods to be in Ready state.

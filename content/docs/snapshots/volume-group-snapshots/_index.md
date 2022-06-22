@@ -13,7 +13,7 @@ In order to use Volume Group Snapshots, ensure the volume snapshot module is ena
 - Volume Snapshot Class
 
 ### Creating Volume Group Snapshots
-The following is a sample manifest for creating a Volume Group Snapshot:
+This is a sample manifest for creating a Volume Group Snapshot:
 ```yaml
 apiVersion: volumegroup.storage.dell.com/v1
 kind: DellCsiVolumeGroupSnapshot

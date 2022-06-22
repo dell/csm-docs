@@ -7,7 +7,7 @@ weight: 1
 
 ## Pre-requisites for installation of the CSI Drivers
 
-On Upstream Kubernetes clusters, make sure to install
+On Upstream Kubernetes clusters, ensure that to install
 * VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs
 * External Volume Snapshot Controller
 

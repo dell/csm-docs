@@ -347,12 +347,12 @@ Procedure
     * Agent pods with 2/2 containers and the status displayed as Running.
 
     **Note**:
-    To install nightly or latest csi driver build using bash script use the below command:
+    To install nightly or latest csi driver build using bash script use this command:
     `/csi-install.sh --namespace unity --values ./myvalues.yaml --version nightly/latest`
 
 8. You can also install the driver using standalone helm chart by running helm install command, first using the --dry-run flag to 
    confirm various parameters are as desired. Once the parameters are validated, run the command without the --dry-run flag.
-   Note: The below example assumes that the user is at repo root helm folder i.e csi-unity/helm.
+   Note: This example assumes that the user is at repo root helm folder i.e csi-unity/helm.
 
    **Syntax**:`helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>` <br/>
    `<namespace>` - namespace of the driver installation.  <br/>
