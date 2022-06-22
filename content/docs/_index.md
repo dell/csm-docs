@@ -20,7 +20,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 | Modules/Drivers | CSM 1.3 | [CSM 1.2.1](../v1/) | [CSM 1.2](../v2/) | [CSM 1.1](../v3/) | 
 | - | :-: | :-: | :-: | :-: |
-| [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar) | v1.2.0 | v1.2.0 | v1.2.0 | v1.1.0 |
+| [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar) | v1.3.0 | v1.2.0 | v1.2.0 | v1.1.0 |
 | [Observability](https://hub.docker.com/r/dellemc/csm-topology) | v1.2.0 | v1.1.1 | v1.1.0 | v1.0.1 |
 | [Replication](https://hub.docker.com/r/dellemc/dell-csi-replicator) | v1.3.0 | v1.2.0 | v1.2.0 | v1.1.0 |
 | [Resiliency](https://hub.docker.com/r/dellemc/podmon) | v1.2.0 | v1.1.0 | v1.1.0 | v1.0.1 |
@@ -34,7 +34,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 | CSM Module        | CSI PowerFlex v2.3.0 | CSI PowerScale v2.3.0 | CSI PowerStore v2.3.0 | CSI PowerMax v2.3.0 | CSI Unity XT v2.3.0    |
 | ----------------- | -------------- | --------------- | --------------- | ------------- | --------------- |
-| Authorization v1.2| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
+| Authorization v1.3| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
 | Observability v1.2| ✔️              | ❌              | ✔️               | ❌            | ❌            |
 | Replication   v1.3| ❌             | ✔️              | ✔️               | ✔️             | ❌            |
 | Resiliency     v1.2| ✔️              | ✔️              | ❌              | ❌            | ✔️             |
