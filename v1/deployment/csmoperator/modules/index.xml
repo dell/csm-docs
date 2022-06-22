@@ -22,18 +22,37 @@
       <description>
         
         
-        &lt;h2 id=&#34;installing-authorization-via-dell-csm-operator&#34;&gt;Installing Authorization via Dell CSM Operator&lt;/h2&gt;
-&lt;p&gt;The Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.&lt;/p&gt;
-&lt;p&gt;To deploy the Dell CSM Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;There are &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale.yaml&#34;&gt;sample manifests&lt;/a&gt; provided which can be edited to do an easy installation of the driver along with the module.&lt;/p&gt;
-&lt;h3 id=&#34;install-authorization&#34;&gt;Install Authorization&lt;/h3&gt;
+        &lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Please note, Dell CSM operator currently ONLY supports deploying CSM Authorization sidecar/container.&lt;/p&gt;
+&lt;h2 id=&#34;pre-requisite&#34;&gt;Pre-requisite&lt;/h2&gt;
+&lt;p&gt;Follow the instructions available in CSM Authorization for &lt;a href=&#34;../../../authorization/deployment/_index.md/#configuring-a-dell-csi-driver&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Replication</title>
+      <link>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/replication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/replication/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Replication sidecar and the complemental CSM Replication controller manager.&lt;/p&gt;
+&lt;h2 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h2&gt;
+&lt;p&gt;To use Replication, you need at least two clusters:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a source cluster which is the main cluster&lt;/li&gt;
+&lt;li&gt;one or more target clusters which will serve as diaster recovery clusters for the main cluster&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To configure all the clusters, follow the steps below:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Create the required Secrets as documented in the &lt;a href=&#34;../../../../authorization/deployment/#configuring-a-dell-csi-driver&#34;&gt;Helm chart procedure&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Follow the instructions available &lt;a href=&#34;../../drivers/powerscale/#install-driver&#34;&gt;here&lt;/a&gt; to install the Dell CSI Driver via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable Authorization.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;On your main cluster, follow the instructions available in CSM Replication for &lt;a href=&#34;../../../replication/deployment/install-repctl.md&#34;&gt;Installation using repctl&lt;/a&gt;. NOTE: On step 4 of the link above, you MUST use the command below to automatically package all clusters&amp;rsquo; &lt;code&gt;.kube&lt;/code&gt; config as a secret:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;  ./repctl cluster inject 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CSM Operator needs this admin configs instead of the service accounts’ configs  to be able to properly manage the target clusters. The default service account that&amp;rsquo;ll be used is the CSM Operator service account.&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following &lt;a href=&#34;../drivers/powerscale.md/#prerequisite&#34;&gt;prerequisites for deploying PowerScale via Dell CSM Operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>

@@ -1,0 +1,43 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – CSM Modules</title>
+    <link>https://dell.github.io/csm-docs/v2/deployment/csmoperator/modules/</link>
+    <description>Recent content in CSM Modules on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v2/deployment/csmoperator/modules/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V2: Authorization</title>
+      <link>https://dell.github.io/csm-docs/v2/deployment/csmoperator/modules/authorization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/deployment/csmoperator/modules/authorization/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;installing-authorization-via-dell-csm-operator&#34;&gt;Installing Authorization via Dell CSM Operator&lt;/h2&gt;
+&lt;p&gt;The Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.&lt;/p&gt;
+&lt;p&gt;To deploy the Dell CSM Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale.yaml&#34;&gt;sample manifests&lt;/a&gt; provided which can be edited to do an easy installation of the driver along with the module.&lt;/p&gt;
+&lt;h3 id=&#34;install-authorization&#34;&gt;Install Authorization&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create the required Secrets as documented in the &lt;a href=&#34;../../../../authorization/deployment/#configuring-a-dell-csi-driver&#34;&gt;Helm chart procedure&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Follow the instructions available &lt;a href=&#34;../../drivers/powerscale/#install-driver&#34;&gt;here&lt;/a&gt; to install the Dell CSI Driver via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable Authorization.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

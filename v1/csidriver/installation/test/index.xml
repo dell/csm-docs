@@ -193,6 +193,9 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;li&gt;After that, it uses that PVC as the data source to create a new PVC and mounts it on the same container. It checks if the file that existed in the source PVC also exists in the new PVC, calculates its checksum, and compares it to the checksum previously calculated.&lt;/li&gt;
 &lt;li&gt;Finally, it cleans up all the resources that are created as part of the test.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This is not supported for replicated volumes.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;snapshot-test&#34;&gt;Snapshot test&lt;/h4&gt;
 &lt;p&gt;Use this procedure to perform a snapshot test.&lt;/p&gt;
 &lt;ol&gt;
@@ -224,6 +227,9 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;li&gt;After that, it calculates the checksum of the written data, expands the PVC, and then recalculates the checksum&lt;/li&gt;
 &lt;li&gt;Cleans up all the resources that were created as part of the test&lt;/li&gt;
 &lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: This is not applicable for replicated volumes.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;setting-application-prefix&#34;&gt;Setting Application Prefix&lt;/h3&gt;
 &lt;p&gt;Application prefix is the name of the application that can be used to group the PowerMax volumes. We can use it while naming storage group. To set the application prefix for PowerMax, please refer to the sample storage class &lt;a href=&#34;https://github.com/dell/csi-powermax/blob/main/samples/storageclass/powermax.yaml&#34;&gt;https://github.com/dell/csi-powermax/blob/main/samples/storageclass/powermax.yaml&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Name of application to be used to group volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;

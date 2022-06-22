@@ -113,7 +113,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span 
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created a namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create a new one.&lt;/p&gt;
@@ -184,55 +184,36 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span 
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Example: &lt;code&gt;samples/config.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Username for accessing PowerFlex system.	&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# If authorization is enabled, username will be ignored.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;username&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Password for accessing PowerFlex system.	&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# If authorization is enabled, password will be ignored.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;password&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# System name/ID of PowerFlex system.	&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;systemID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ID1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Previous names of PowerFlex system if used for PV.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allSystemNames&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;pflex-1,pflex-2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# REST API gateway HTTPS endpoint for PowerFlex system.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# If authorization is enabled, endpoint should be the HTTPS localhost endpoint that &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# the authorization sidecar will listen on&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://127.0.0.1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: true or false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;skipCertificateValidation&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# indicates if this array is the default array&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# needed for backwards compatibility&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# only one array is allowed to have this set to true &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isDefault&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# defines the MDM(s) that SDC should register with on start.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:  a list of IP addresses or hostnames separated by comma.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: none &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mdm&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;10.0.0.1,10.0.0.2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;username&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;password&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Password123&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;systemID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ID2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://127.0.0.2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;skipCertificateValidation&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mdm&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;10.0.0.3,10.0.0.4&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After editing the file, run the following command to create a secret called &lt;code&gt;vxflexos-config&lt;/code&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Use the following command to replace or update the secret:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The user needs to validate the YAML syntax and array-related key/values while replacing the vxflexos-creds secret.&lt;/li&gt;
-&lt;li&gt;If you want to create a new array or update the MDM values in the secret, you will need to reinstall the driver. If you change other details, such as login information, the secret will dynamically update &amp;ndash; see &lt;a href=&#34;../../../features/powerflex#dynamic-array-configuration&#34;&gt;dynamic-array-configuration&lt;/a&gt; for more details.&lt;/li&gt;
-&lt;li&gt;Old &lt;code&gt;json&lt;/code&gt; format of the array configuration file is still supported in this release. If you already have your configuration in &lt;code&gt;json&lt;/code&gt; format, you may continue to maintain it or you may transfer this configuration to &lt;code&gt;yaml&lt;/code&gt;
-format and replace/update the secret.&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;insecure&amp;rdquo; parameter has been changed to &amp;ldquo;skipCertificateValidation&amp;rdquo; as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of &amp;ldquo;insecure&amp;rdquo; or &amp;ldquo;skipCertificateValidation&amp;rdquo; for now. The driver would return an error if both parameters are used.&lt;/li&gt;
-&lt;li&gt;Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the &lt;a href=&#34;../../../features/powerflex#dynamic-logging-configuration&#34;&gt;Dynamic Logging Configuration&lt;/a&gt; section in Features for more information.&lt;/li&gt;
-&lt;li&gt;If the user is using complex K8s version like &amp;ldquo;v1.21.3-mirantis-1&amp;rdquo;, use below kubeVersion check in helm/csi-unity/Chart.yaml file.
-kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.24.0-0&amp;rdquo;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;username&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;password&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Password123&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;systemID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;ID2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;https://127.0.0.2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;skipCertificateValidation&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isDefault&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mdm&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;10.0.0.3,10.0.0.4&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;After editing the file, run the following command to create a secret called `vxflexos-config`:
+
+`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml`
+
+Use the following command to replace or update the secret:
+
+`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+
+*NOTE:* 
+
+- The user needs to validate the YAML syntax and array-related key/values while replacing the vxflexos-creds secret.
+- If you want to create a new array or update the MDM values in the secret, you will need to reinstall the driver. If you change other details, such as login information, the secret will dynamically update -- see [dynamic-array-configuration](../../../features/powerflex#dynamic-array-configuration) for more details.
+- Old `json` format of the array configuration file is still supported in this release. If you already have your configuration in `json` format, you may continue to maintain it or you may transfer this configuration to `yaml`
+format and replace/update the secret.  
+- &amp;quot;insecure&amp;quot; parameter has been changed to &amp;quot;skipCertificateValidation&amp;quot; as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of &amp;quot;insecure&amp;quot; or &amp;quot;skipCertificateValidation&amp;quot; for now. The driver would return an error if both parameters are used.
+- Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
+- If the user is using complex K8s version like &amp;quot;v1.21.3-mirantis-1&amp;quot;, use below kubeVersion check in helm/csi-unity/Chart.yaml file.
+       kubeVersion: &amp;quot;&amp;gt;= 1.21.0-0 &amp;lt; 1.24.0-0&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;Default logging options are set during Helm install. To see possible configuration options, see the &lt;a href=&#34;../../../features/powerflex#dynamic-logging-configuration&#34;&gt;Dynamic Logging Configuration&lt;/a&gt; section in Features.&lt;/p&gt;
 &lt;/li&gt;
@@ -309,6 +290,12 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.24.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;ext4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fsGroupPolicy&lt;/td&gt;
+&lt;td&gt;Defines which FS Group policy mode to be used. Supported modes are&lt;code&gt;None, File, and ReadWriteOnceWithFSType.&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;ReadWriteOnceWithFSType&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;imagePullPolicy&lt;/td&gt;
@@ -401,6 +388,12 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.24.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;healthMonitor.enabled&lt;/td&gt;
+&lt;td&gt;Enable/Disable health monitor of CSI volumes- volume usage, volume condition&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;nodeSelector&lt;/td&gt;
 &lt;td&gt;Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
@@ -435,18 +428,6 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.24.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;Set whether the monitor pod should run in the host namespace or not.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;healthMonitor&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;This section configures node side volume health monitoring&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;enabled&lt;/td&gt;
-&lt;td&gt;Enable/Disable health monitor of CSI volumes- volume usage, volume condition&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;vgsnapshotter&lt;/strong&gt;&lt;/td&gt;
@@ -608,10 +589,10 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;h2 id=&#34;volume-snapshot-class&#34;&gt;Volume Snapshot Class&lt;/h2&gt;
 &lt;p&gt;Starting CSI PowerFlex v1.5, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the &lt;em&gt;samples/&lt;/em&gt; folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.&lt;/p&gt;
 &lt;h3 id=&#34;what-happens-to-my-existing-volume-snapshot-classes&#34;&gt;What happens to my existing Volume Snapshot Classes?&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerFlex v2.1 driver&lt;/em&gt;:
+&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerFlex v2.2 driver&lt;/em&gt;:
 The existing volume snapshot class will be retained.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Upgrading from an older version of the driver&lt;/em&gt;:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.2.&lt;/p&gt;
+It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.3.&lt;/p&gt;
 
       </description>
     </item>
@@ -750,7 +731,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span 
 &lt;h2 id=&#34;install-the-driver&#34;&gt;Install the Driver&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
 &lt;li&gt;Ensure that you have created a namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace powermax&lt;/code&gt; to create a new one&lt;/li&gt;
 &lt;li&gt;Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
@@ -773,150 +754,6 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;kubeletConfigDir&lt;/td&gt;
-&lt;td&gt;Specify kubelet config dir path&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;/var/lib/kubelet&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;imagePullPolicy&lt;/td&gt;
-&lt;td&gt;The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;IfNotPresent&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;clusterPrefix&lt;/td&gt;
-&lt;td&gt;Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;ABC&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;defaultFsType&lt;/td&gt;
-&lt;td&gt;Used to set the default FS type for external provisioner&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;ext4&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;portGroups&lt;/td&gt;
-&lt;td&gt;List of comma-separated port group names. Any port group that is specified here must be present on all the arrays that the driver manages.&lt;/td&gt;
-&lt;td&gt;For iSCSI Only&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;PortGroup1, PortGroup2, PortGroup3&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;storageResourcePool&lt;/td&gt;
-&lt;td&gt;This parameter must mention one of the SRPs on the PowerMax array that the symmetrixID specifies. This value is used to create the default storage class.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;SRP_1&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;serviceLevel&lt;/td&gt;
-&lt;td&gt;This parameter must mention one of the Service Levels on the PowerMax array. This value is used to create the default storage class.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;Bronze&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;skipCertificateValidation&lt;/td&gt;
-&lt;td&gt;Skip client-side TLS verification of Unisphere certificates&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;True&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;transportProtocol&lt;/td&gt;
-&lt;td&gt;Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;Empty&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;nodeNameTemplate&lt;/td&gt;
-&lt;td&gt;Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;Empty&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;controller&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Allows configuration of the controller-specific parameters.&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;controllerCount&lt;/td&gt;
-&lt;td&gt;Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;volumeNamePrefix&lt;/td&gt;
-&lt;td&gt;Defines a string prefix for the names of PersistentVolumes created&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;k8s&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;snapshot.enabled&lt;/td&gt;
-&lt;td&gt;Enable/Disable volume snapshot feature&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;true&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;snapshot.snapNamePrefix&lt;/td&gt;
-&lt;td&gt;Defines a string prefix for the names of the Snapshots created&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;snapshot&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;resizer.enabled&lt;/td&gt;
-&lt;td&gt;Enable/Disable volume expansion feature&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;true&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;healthMonitor.enabled&lt;/td&gt;
-&lt;td&gt;Allows to enable/disable volume health monitor&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;false&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;healthMonitor.interval&lt;/td&gt;
-&lt;td&gt;Interval of monitoring volume health condition&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;60s&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;nodeSelector&lt;/td&gt;
-&lt;td&gt;Define node selection constraints for pods of controller deployment&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;tolerations&lt;/td&gt;
-&lt;td&gt;Define tolerations for the controller deployment, if required&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;node&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Allows configuration of the node-specific parameters.&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;tolerations&lt;/td&gt;
-&lt;td&gt;Add tolerations as per requirement&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;nodeSelector&lt;/td&gt;
-&lt;td&gt;Add node selectors as per requirement&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;healthMonitor.enabled&lt;/td&gt;
-&lt;td&gt;Allows to enable/disable volume health monitor&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;false&lt;/td&gt;
-&lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;global&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy&lt;/td&gt;
@@ -1014,6 +851,204 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;50&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;kubeletConfigDir&lt;/td&gt;
+&lt;td&gt;Specify kubelet config dir path&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;/var/lib/kubelet&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;imagePullPolicy&lt;/td&gt;
+&lt;td&gt;The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;IfNotPresent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;clusterPrefix&lt;/td&gt;
+&lt;td&gt;Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;ABC&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;logLevel&lt;/td&gt;
+&lt;td&gt;CSI driver log level. Allowed values: &amp;ldquo;error&amp;rdquo;, &amp;ldquo;warn&amp;rdquo;/&amp;ldquo;warning&amp;rdquo;, &amp;ldquo;info&amp;rdquo;, &amp;ldquo;debug&amp;rdquo;.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;debug&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;logFormat&lt;/td&gt;
+&lt;td&gt;CSI driver log format. Allowed values: &amp;ldquo;TEXT&amp;rdquo; or &amp;ldquo;JSON&amp;rdquo;.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;TEXT&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;kubeletConfigDir&lt;/td&gt;
+&lt;td&gt;kubelet config directory path. Ensure that the config.yaml file is present at this path.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;/var/lib/kubelet&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;defaultFsType&lt;/td&gt;
+&lt;td&gt;Used to set the default FS type for external provisioner&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;ext4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;portGroups&lt;/td&gt;
+&lt;td&gt;List of comma-separated port group names. Any port group that is specified here must be present on all the arrays that the driver manages.&lt;/td&gt;
+&lt;td&gt;For iSCSI Only&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;PortGroup1, PortGroup2, PortGroup3&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;skipCertificateValidation&lt;/td&gt;
+&lt;td&gt;Skip client-side TLS verification of Unisphere certificates&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;True&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;transportProtocol&lt;/td&gt;
+&lt;td&gt;Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;Empty&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;nodeNameTemplate&lt;/td&gt;
+&lt;td&gt;Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;Empty&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;modifyHostName&lt;/td&gt;
+&lt;td&gt;Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerMaxDebug&lt;/td&gt;
+&lt;td&gt;Enables low level and http traffic logging between the CSI driver and Unisphere. Don&amp;rsquo;t enable this unless asked to do so by the support team.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;enableCHAP&lt;/td&gt;
+&lt;td&gt;Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key &amp;ldquo;chapsecret&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fsGroupPolicy&lt;/td&gt;
+&lt;td&gt;Defines which FS Group policy mode to be used, Supported modes &lt;code&gt;None, File and ReadWriteOnceWithFSType&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;ReadWriteOnceWithFSType&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;version&lt;/td&gt;
+&lt;td&gt;Current version of the driver. Don&amp;rsquo;t modify this value as this value will be used by the install script.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;v2.3.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;images&lt;/td&gt;
+&lt;td&gt;Defines the container images used by the driver.&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;driverRepository&lt;/td&gt;
+&lt;td&gt;Defines the registry of the container image used for the driver.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;dellemc&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;controller&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Allows configuration of the controller-specific parameters.&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;controllerCount&lt;/td&gt;
+&lt;td&gt;Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;volumeNamePrefix&lt;/td&gt;
+&lt;td&gt;Defines a string prefix for the names of PersistentVolumes created&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;k8s&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;snapshot.enabled&lt;/td&gt;
+&lt;td&gt;Enable/Disable volume snapshot feature&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;snapshot.snapNamePrefix&lt;/td&gt;
+&lt;td&gt;Defines a string prefix for the names of the Snapshots created&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;snapshot&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resizer.enabled&lt;/td&gt;
+&lt;td&gt;Enable/Disable volume expansion feature&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;healthMonitor.enabled&lt;/td&gt;
+&lt;td&gt;Allows to enable/disable volume health monitor&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;healthMonitor.interval&lt;/td&gt;
+&lt;td&gt;Interval of monitoring volume health condition&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;60s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;nodeSelector&lt;/td&gt;
+&lt;td&gt;Define node selection constraints for pods of controller deployment&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tolerations&lt;/td&gt;
+&lt;td&gt;Define tolerations for the controller deployment, if required&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;node&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Allows configuration of the node-specific parameters.&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tolerations&lt;/td&gt;
+&lt;td&gt;Add tolerations as per requirement&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;nodeSelector&lt;/td&gt;
+&lt;td&gt;Add node selectors as per requirement&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;healthMonitor.enabled&lt;/td&gt;
+&lt;td&gt;Allows to enable/disable volume health monitor&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;topologyControl.enabled&lt;/td&gt;
+&lt;td&gt;Allows to enable/disable topology control to filter topology keys&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;csireverseproxy&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;This section refers to the configuration options for CSI PowerMax Reverse Proxy&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
@@ -1029,7 +1064,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;image&lt;/td&gt;
 &lt;td&gt;This refers to the image of the CSI Powermax Reverse Proxy container.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;dellemc/csipowermax-reverseproxy:v1.4.0&lt;/td&gt;
+&lt;td&gt;dellemc/csipowermax-reverseproxy:v2.1.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;tlsSecret&lt;/td&gt;
@@ -1085,10 +1120,65 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;migration&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;../../../../replication/migrating-volumes&#34;&gt;Migration&lt;/a&gt; is an optional feature to enable migration between storage classes&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;enabled&lt;/td&gt;
+&lt;td&gt;A boolean that enables/disables migration feature.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;image&lt;/td&gt;
+&lt;td&gt;Image for dell-csi-migrator sidecar.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;migrationPrefix&lt;/td&gt;
+&lt;td&gt;enables migration sidecar to read required information from the storage class fields&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;migration.storage.dell.com&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;replication&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;../../../../replication/deployment&#34;&gt;Replication&lt;/a&gt; is an optional feature to enable replication &amp;amp; disaster recovery capabilities of PowerMax to Kubernetes clusters.&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;enabled&lt;/td&gt;
+&lt;td&gt;A boolean that enables/disables replication feature.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;image&lt;/td&gt;
+&lt;td&gt;Image for dell-csi-replicator sidecar.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;replicationContextPrefix&lt;/td&gt;
+&lt;td&gt;enables side cars to read required information from the volume context&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;powermax&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;replicationPrefix&lt;/td&gt;
+&lt;td&gt;Determine if replication is enabled&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;replication.storage.dell.com&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;ol start=&#34;8&#34;&gt;
 &lt;li&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running &lt;code&gt;cd ../dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Or you can also install the driver using standalone helm chart using the command &lt;code&gt;helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -1096,6 +1186,11 @@ These values can be obtained using base64 encoding as described in the following
 &lt;li&gt;There are a set of samples provided &lt;a href=&#34;#sample-values-file&#34;&gt;here&lt;/a&gt; to help you configure the driver with reverse proxy&lt;/li&gt;
 &lt;li&gt;This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The &lt;code&gt;verify.sh&lt;/code&gt; script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the &lt;code&gt;--skip-verify-node&lt;/code&gt; option&lt;/li&gt;
 &lt;li&gt;In order to enable authorization, there should be an authorization proxy server already installed.&lt;/li&gt;
+&lt;li&gt;PowerMax Array username must have role as &lt;code&gt;StorageAdmin&lt;/code&gt; to be able to perform CRUD operations.&lt;/li&gt;
+&lt;li&gt;If the user is using complex K8s version like “v1.22.3-mirantis-1”, use below kubeVersion check in &lt;a href=&#34;https://github.com/dell/csi-powermax/blob/main/helm/csi-powermax/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; file. kubeVersion: “&amp;gt;= 1.22.0-0 &amp;lt; 1.25.0-0”.&lt;/li&gt;
+&lt;li&gt;User should provide all boolean values with double-quotes. This applies only for values.yaml. Example: “true”/“false”.&lt;/li&gt;
+&lt;li&gt;controllerCount parameter value should be &amp;lt;= number of nodes in the kubernetes cluster else install script fails.&lt;/li&gt;
+&lt;li&gt;Endpoint should not have any special character at the end apart from port number.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
 &lt;p&gt;Starting CSI PowerMax v1.6, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests has been provided in the &lt;code&gt;samples/storageclass&lt;/code&gt; folder. Please use these samples to create new storage classes to provision storage.&lt;/p&gt;
@@ -1105,12 +1200,12 @@ These values can be obtained using base64 encoding as described in the following
 &lt;p&gt;Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;volume-snapshot-class&#34;&gt;Volume Snapshot Class&lt;/h2&gt;
-&lt;p&gt;Starting with CSI PowerMax v1.7, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the &lt;em&gt;samples/volumesnapshotclass&lt;/em&gt; folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.&lt;/p&gt;
+&lt;p&gt;Starting with CSI PowerMax v1.7.0, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the &lt;em&gt;samples/volumesnapshotclass&lt;/em&gt; folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.&lt;/p&gt;
 &lt;h3 id=&#34;what-happens-to-my-existing-volume-snapshot-classes&#34;&gt;What happens to my existing Volume Snapshot Classes?&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerMax v2.1 driver&lt;/em&gt;:
+&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerMax v2.1.0 driver&lt;/em&gt;:
 The existing volume snapshot class will be retained.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Upgrading from an older version of the driver&lt;/em&gt;:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 or higher, before upgrading to 2.2.&lt;/p&gt;
+It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7.0 or higher, before upgrading to 2.3.0.&lt;/p&gt;
 &lt;h2 id=&#34;sample-values-file&#34;&gt;Sample values file&lt;/h2&gt;
 &lt;p&gt;The following sections have useful snippets from &lt;code&gt;values.yaml&lt;/code&gt; file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes&lt;/p&gt;
 &lt;h3 id=&#34;csi-powermax-driver-without-proxy&#34;&gt;CSI PowerMax driver without Proxy&lt;/h3&gt;
@@ -1240,6 +1335,7 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 &lt;li&gt;If using Snapshot feature, satisfy all Volume Snapshot requirements&lt;/li&gt;
 &lt;li&gt;If enabling CSM for Authorization, please refer to the &lt;a href=&#34;../../../../authorization/deployment/&#34;&gt;Authorization deployment steps&lt;/a&gt; first&lt;/li&gt;
 &lt;li&gt;If enabling CSM for Replication, please refer to the &lt;a href=&#34;../../../../replication/deployment/&#34;&gt;Replication deployment steps&lt;/a&gt; first&lt;/li&gt;
+&lt;li&gt;If enabling CSM for Resiliency, please refer to the &lt;a href=&#34;../../../../resiliency/deployment/&#34;&gt;Resiliency deployment steps&lt;/a&gt; first&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;install-helm-30&#34;&gt;Install Helm 3.0&lt;/h3&gt;
 &lt;p&gt;Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerScale.&lt;/p&gt;
@@ -1316,7 +1412,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span 
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created the namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace isilon&lt;/code&gt; to create a new one. The use of &amp;ldquo;isilon&amp;rdquo;  as the namespace is just an example. You can choose any name for the namespace.&lt;/p&gt;
@@ -1394,6 +1490,18 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;td&gt;Defines which FS Group policy mode to be used, Supported modes &lt;code&gt;None, File and ReadWriteOnceWithFSType&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;&amp;ldquo;ReadWriteOnceWithFSType&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;podmonAPIPort&lt;/td&gt;
+&lt;td&gt;Defines the port which csi-driver will use within the cluster to support podmon&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;8083&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;maxPathLen&lt;/td&gt;
+&lt;td&gt;Defines the maximum length of path for a volume&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;192&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;em&gt;&lt;strong&gt;controller&lt;/strong&gt;&lt;/em&gt;&lt;/td&gt;
@@ -1587,6 +1695,24 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;podmon&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Podmon is an optional feature under development and tech preview. Enable this feature only after contact support for additional information.&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;enabled&lt;/td&gt;
+&lt;td&gt;A boolean that enable/disable podmon feature.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;image&lt;/td&gt;
+&lt;td&gt;image for podmon.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
@@ -1756,7 +1882,7 @@ If this secret is an empty secret, then the validation of the certificate fails,
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
 &lt;p&gt;The CSI driver for Dell PowerScale version 1.5 and later, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; does not create any storage classes as part of the driver installation. A sample storage class manifest is available at &lt;code&gt;samples/storageclass/isilon.yaml&lt;/code&gt;. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.&lt;/p&gt;
 &lt;h3 id=&#34;what-happens-to-my-existing-storage-classes&#34;&gt;What happens to my existing storage classes?&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerScale v2.1 driver&lt;/em&gt;:
+&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerScale v2.2 driver&lt;/em&gt;:
 The storage classes created as part of the installation have an annotation - &amp;ldquo;helm.sh/resource-policy&amp;rdquo;: keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;:&lt;/p&gt;
 &lt;ul&gt;
@@ -1772,7 +1898,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;h2 id=&#34;volume-snapshot-class&#34;&gt;Volume Snapshot Class&lt;/h2&gt;
 &lt;p&gt;Starting CSI PowerScale v1.6, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. Sample volume snapshot class manifests are available at &lt;code&gt;samples/volumesnapshotclass/&lt;/code&gt;. Use these sample manifests to create a volumesnapshotclass for creating volume snapshots; uncomment/ update the manifests as per the requirements.&lt;/p&gt;
 &lt;h3 id=&#34;what-happens-to-my-existing-volume-snapshot-classes&#34;&gt;What happens to my existing Volume Snapshot Classes?&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerScale v2.1 driver&lt;/em&gt;:
+&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerScale v2.2 driver&lt;/em&gt;:
 The existing volume snapshot class will be retained.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Upgrading from an older version of the driver&lt;/em&gt;:
 It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.2.&lt;/p&gt;
@@ -1846,20 +1972,27 @@ To do this, run the &lt;code&gt;systemctl enable --now iscsid&lt;/code&gt; comma
 &lt;li&gt;Ensure that the unique initiator name is set in &lt;em&gt;/etc/iscsi/initiatorname.iscsi&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For information about configuring iSCSI, see &lt;em&gt;Dell PowerStore documentation&lt;/em&gt; on Dell Support.&lt;/p&gt;
-&lt;h3 id=&#34;set-up-the-nvmetcp-initiator&#34;&gt;Set up the NVMe/TCP Initiator&lt;/h3&gt;
-&lt;p&gt;If you want to use the protocol, set up the NVMe/TCP initiators as follows:&lt;/p&gt;
+&lt;h3 id=&#34;set-up-the-nvme-initiator&#34;&gt;Set up the NVMe Initiator&lt;/h3&gt;
+&lt;p&gt;If you want to use the protocol, set up the NVMe initiators as follows:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
-&lt;code&gt;sudo apt install nvme-cli&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
+&lt;code&gt;sudo apt install nvme-cli&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Requirements for NVMeTCP&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;modprobe nvme
 modprobe nvme_tcp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;linux-multipathing-requirements&#34;&gt;Linux multipathing requirements&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Requirements for NVMeFC&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Do not load the nvme_tcp module for NVMeFC&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;linux-multipathing-requirements&#34;&gt;Linux multipathing requirements&lt;/h3&gt;
 &lt;p&gt;Dell PowerStore supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
 PowerStore.&lt;/p&gt;
 &lt;p&gt;Set up Linux multipathing as follows:&lt;/p&gt;
@@ -1948,7 +2081,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span 
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace csi-powerstore&lt;/code&gt; to create a new one. &amp;ldquo;csi-powerstore&amp;rdquo; is just an example. You can choose any name for the namespace.
@@ -1965,7 +2098,7 @@ But make sure to align to the same namespace during the whole installation.&lt;/
 &lt;li&gt;&lt;em&gt;username&lt;/em&gt;, &lt;em&gt;password&lt;/em&gt;: defines credentials for connecting to array.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;skipCertificateValidation&lt;/em&gt;: defines if we should use insecure connection or not.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;isDefault&lt;/em&gt;: defines if we should treat the current array as a default.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;blockProtocol&lt;/em&gt;: defines what transport protocol we should use (FC, ISCSI, NVMeTCP, None, or auto).&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;blockProtocol&lt;/em&gt;: defines what transport protocol we should use (FC, ISCSI, NVMeTCP, NVMeFC, None, or auto).&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;nasName&lt;/em&gt;: defines what NAS should be used for NFS volumes.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;nfsAcls&lt;/em&gt; (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.&lt;/li&gt;
@@ -2130,6 +2263,12 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;&amp;ldquo;ReadWriteOnceWithFSType&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;controller.vgsnapshot.enabled&lt;/td&gt;
+&lt;td&gt;To enable or disable the volume group snapshot feature&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;true&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;ol start=&#34;8&#34;&gt;
@@ -2173,7 +2312,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allowedTopologies&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabelExpressions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;csi-powerstore.dellemc.com/&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;12.34.56.78&lt;/span&gt;-iscsi&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# replace &amp;#34;-iscsi&amp;#34; with &amp;#34;-fc&amp;#34;, &amp;#34;-nvme&amp;#34; or &amp;#34;-nfs&amp;#34; at the end to use FC, NVMe or NFS enabled hosts&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# replace &amp;#34;-iscsi&amp;#34; with &amp;#34;-fc&amp;#34;, &amp;#34;-nvmetcp&amp;#34; or &amp;#34;-nvmefc&amp;#34; or &amp;#34;-nfs&amp;#34; at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# replace &amp;#34;12.34.56.78&amp;#34; with PowerStore endpoint IP&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;values&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -2183,12 +2322,12 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl create -f &amp;lt;path_to_storageclass_file&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt; Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.&lt;/p&gt;
 &lt;h2 id=&#34;volume-snapshot-class&#34;&gt;Volume Snapshot Class&lt;/h2&gt;
-&lt;p&gt;Starting CSI PowerStore v1.4, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the &lt;em&gt;samples/volumesnapshotclass&lt;/em&gt; folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.&lt;/p&gt;
+&lt;p&gt;Starting CSI PowerStore v1.4.0, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the &lt;em&gt;samples/volumesnapshotclass&lt;/em&gt; folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.&lt;/p&gt;
 &lt;h3 id=&#34;what-happens-to-my-existing-volume-snapshot-classes&#34;&gt;What happens to my existing Volume Snapshot Classes?&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerStore v2.1 driver&lt;/em&gt;:
+&lt;p&gt;&lt;em&gt;Upgrading from CSI PowerStore v2.1.0 driver&lt;/em&gt;:
 The existing volume snapshot class will be retained.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Upgrading from an older version of the driver&lt;/em&gt;:
-It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4 or higher, before upgrading to 2.2.&lt;/p&gt;
+It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4.0 or higher, before upgrading to 2.3.0.&lt;/p&gt;
 &lt;h2 id=&#34;dynamically-update-the-powerstore-secrets&#34;&gt;Dynamically update the powerstore secrets&lt;/h2&gt;
 &lt;p&gt;Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the “Host” information in an array. User can update secret using the following command:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl create secret generic powerstore-config -n csi-powerstore --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;secret.yaml -o yaml --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;client &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl replace -f -
@@ -2206,7 +2345,7 @@ It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 
     </item>
     
     <item>
-      <title>Docs: Unity</title>
+      <title>Docs: Unity XT</title>
       <link>https://dell.github.io/csm-docs/docs/csidriver/installation/helm/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -2214,10 +2353,10 @@ It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 
       <description>
         
         
-        &lt;p&gt;The CSI Driver for Dell Unity can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script &lt;a href=&#34;https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+        &lt;p&gt;The CSI Driver for Dell Unity XT can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script &lt;a href=&#34;https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The controller section of the Helm chart installs the following components in a &lt;em&gt;Deployment&lt;/em&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;CSI Driver for Unity&lt;/li&gt;
+&lt;li&gt;CSI Driver for Unity XT&lt;/li&gt;
 &lt;li&gt;Kubernetes External Provisioner, which provisions the volumes&lt;/li&gt;
 &lt;li&gt;Kubernetes External Attacher, which attaches the volumes to the containers&lt;/li&gt;
 &lt;li&gt;Kubernetes External Snapshotter, which provides snapshot support&lt;/li&gt;
@@ -2226,38 +2365,81 @@ It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 
 &lt;/ul&gt;
 &lt;p&gt;The node section of the Helm chart installs the following component in a &lt;em&gt;DaemonSet&lt;/em&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;CSI Driver for Unity&lt;/li&gt;
+&lt;li&gt;CSI Driver for Unity XT&lt;/li&gt;
 &lt;li&gt;Kubernetes Node Registrar, which handles the driver registration&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
-&lt;p&gt;Before you install CSI Driver for Unity, verify the requirements that are mentioned in this topic are installed and configured.&lt;/p&gt;
+&lt;p&gt;Before you install CSI Driver for Unity XT, verify the requirements that are mentioned in this topic are installed and configured.&lt;/p&gt;
 &lt;h3 id=&#34;requirements&#34;&gt;Requirements&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../../csidriver/#features-and-capabilities&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;Install Helm v3&lt;/li&gt;
-&lt;li&gt;To use FC protocol, the host must be zoned with Unity array and Multipath needs to be configured&lt;/li&gt;
+&lt;li&gt;To use FC protocol, the host must be zoned with Unity XT array and Multipath needs to be configured&lt;/li&gt;
 &lt;li&gt;To use iSCSI protocol, iSCSI initiator utils packages needs to be installed and Multipath needs to be configured&lt;/li&gt;
 &lt;li&gt;To use NFS protocol, NFS utility packages needs to be installed&lt;/li&gt;
 &lt;li&gt;Mount propagation is enabled on container runtime that is being used&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;install-csi-driver&#34;&gt;Install CSI Driver&lt;/h2&gt;
-&lt;p&gt;Install CSI Driver for Unity using this procedure.&lt;/p&gt;
+&lt;h3 id=&#34;install-helm-30&#34;&gt;Install Helm 3.0&lt;/h3&gt;
+&lt;p&gt;Install Helm 3.0 on the master node before you install the CSI Driver for Dell Unity XT.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Run the &lt;code&gt;curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash&lt;/code&gt; command to install Helm 3.0.&lt;/p&gt;
+&lt;h3 id=&#34;fibre-channel-requirements&#34;&gt;Fibre Channel requirements&lt;/h3&gt;
+&lt;p&gt;Dell Unity XT supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
+following requirement is met before you install the CSI Driver for Dell Unity XT:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;set-up-the-iscsi-initiator&#34;&gt;Set up the iSCSI Initiator&lt;/h3&gt;
+&lt;p&gt;The CSI Driver for Dell Unity XT supports iSCSI connectivity.&lt;/p&gt;
+&lt;p&gt;If you use the iSCSI protocol, set up the iSCSI initiators as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensure that the iSCSI initiators are available on both Controller and Worker nodes.&lt;/li&gt;
+&lt;li&gt;Kubernetes nodes must have access (network connectivity) to an iSCSI port on the Dell Unity XT array that
+has IP interfaces. Manually create IP routes for each node that connects to the Dell Unity XT.&lt;/li&gt;
+&lt;li&gt;All Kubernetes nodes must have the &lt;em&gt;iscsi-initiator-utils&lt;/em&gt; package for CentOS/RHEL or &lt;em&gt;open-iscsi&lt;/em&gt; package for Ubuntu installed, and the &lt;em&gt;iscsid&lt;/em&gt; service must be enabled and running.
+To do this, run the &lt;code&gt;systemctl enable --now iscsid&lt;/code&gt; command.&lt;/li&gt;
+&lt;li&gt;Ensure that the unique initiator name is set in &lt;em&gt;/etc/iscsi/initiatorname.iscsi&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more information about configuring iSCSI, see &lt;a href=&#34;https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf&#34;&gt;Dell Host Connectivity guide&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;linux-multipathing-requirements&#34;&gt;Linux multipathing requirements&lt;/h3&gt;
+&lt;p&gt;Dell Unity XT supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
+Unity XT.&lt;/p&gt;
+&lt;p&gt;Set up Linux multipathing as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensure that all nodes have the &lt;em&gt;Device Mapper Multipathing&lt;/em&gt; package installed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You can install it by running &lt;code&gt;yum install device-mapper-multipath&lt;/code&gt; on CentOS or &lt;code&gt;apt install multipath-tools&lt;/code&gt; on Ubuntu. This package should create a multipath configuration file located in &lt;code&gt;/etc/multipath.conf&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Enable multipathing using the &lt;code&gt;mpathconf --enable --with_multipathd y&lt;/code&gt; command.&lt;/li&gt;
+&lt;li&gt;Enable &lt;code&gt;user_friendly_names&lt;/code&gt; and &lt;code&gt;find_multipaths&lt;/code&gt; in the &lt;code&gt;multipath.conf&lt;/code&gt; file.&lt;/li&gt;
+&lt;li&gt;Ensure that the multipath command for &lt;code&gt;multipath.conf&lt;/code&gt; is available on all Kubernetes nodes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As a best practice, use the following options to help the operating system and the mulitpathing software detect path changes efficiently:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;path_grouping_policy multibus
+path_checker tur
+features &amp;#34;1 queue_if_no_path&amp;#34;
+path_selector &amp;#34;round-robin 0&amp;#34;
+no_path_retry 10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;install-csi-driver&#34;&gt;Install CSI Driver&lt;/h2&gt;
+&lt;p&gt;Install CSI Driver for Unity XT using this procedure.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Before you begin&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;You must have the downloaded files, including the Helm chart from the source &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;git repository&lt;/a&gt; with the command &lt;code&gt;git clone -b v2.2.0 https://github.com/dell/csi-unity.git&lt;/code&gt;, as a pre-requisite for running this procedure.&lt;/li&gt;
+&lt;li&gt;You must have the downloaded files, including the Helm chart from the source &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;git repository&lt;/a&gt; with the command &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-unity.git&lt;/code&gt;, as a pre-requisite for running this procedure.&lt;/li&gt;
 &lt;li&gt;In the top-level dell-csi-helm-installer directory, there should be two scripts, &lt;code&gt;csi-install.sh&lt;/code&gt; and &lt;code&gt;csi-uninstall.sh&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Ensure &lt;em&gt;unity&lt;/em&gt; namespace exists in Kubernetes cluster. Use the &lt;code&gt;kubectl create namespace unity&lt;/code&gt; command to create the namespace if the namespace is not present.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Procedure&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Collect information from the Unity Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the  &lt;code&gt;secret.yaml&lt;/code&gt; and &lt;code&gt;myvalues.yaml&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;Collect information from the Unity XT Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the  &lt;code&gt;secret.yaml&lt;/code&gt; and &lt;code&gt;myvalues.yaml&lt;/code&gt; file.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;ArrayId corresponds to the serial number of Unity array.&lt;/li&gt;
-&lt;li&gt;Unity Array username must have role as Storage Administrator to be able to perform CRUD operations.&lt;/li&gt;
+&lt;li&gt;ArrayId corresponds to the serial number of Unity XT array.&lt;/li&gt;
+&lt;li&gt;Unity XT Array username must have role as Storage Administrator to be able to perform CRUD operations.&lt;/li&gt;
 &lt;li&gt;If the user is using complex K8s version like &amp;ldquo;v1.21.3-mirantis-1&amp;rdquo;, use below kubeVersion check in helm/csi-unity/Chart.yaml file.
-kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.24.0-0&amp;rdquo;&lt;/li&gt;
+kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.25.0-0&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -2265,7 +2447,7 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.24.0-0&amp;rdquo;&lt;/li&g
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit &lt;code&gt;myvalues.yaml&lt;/code&gt; to set the following parameters for your installation:&lt;/p&gt;
-&lt;p&gt;The following table lists the primary configurable parameters of the Unity driver chart and their default values. More detailed information can be found in the &lt;a href=&#34;https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
+&lt;p&gt;The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the &lt;a href=&#34;https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2487,25 +2669,25 @@ The following table lists driver configuration parameters for multiple storage a
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;storageArrayList.username&lt;/td&gt;
-&lt;td&gt;Username for accessing Unity system&lt;/td&gt;
+&lt;td&gt;Username for accessing Unity XT system&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;storageArrayList.password&lt;/td&gt;
-&lt;td&gt;Password for accessing Unity system&lt;/td&gt;
+&lt;td&gt;Password for accessing Unity XT system&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;storageArrayList.endpoint&lt;/td&gt;
-&lt;td&gt;REST API gateway HTTPS endpoint Unity system&lt;/td&gt;
+&lt;td&gt;REST API gateway HTTPS endpoint Unity XT system&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;storageArrayList.arrayId&lt;/td&gt;
-&lt;td&gt;ArrayID for Unity system&lt;/td&gt;
+&lt;td&gt;ArrayID for Unity XT system&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -2594,7 +2776,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span 
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Run the &lt;code&gt;./csi-install.sh --namespace unity --values ./myvalues.yaml&lt;/code&gt; command to proceed with the installation.&lt;/p&gt;
+&lt;p&gt;Run the &lt;code&gt;./csi-install.sh --namespace unity --values ./myvalues.yaml&lt;/code&gt; command to proceed with the installation using bash script.&lt;/p&gt;
 &lt;p&gt;A successful installation must display messages that look similar to the following samples:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;------------------------------------------------------
 &amp;gt; Installing CSI Driver: csi-unity on 1.22
@@ -2657,13 +2839,26 @@ Success
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Results:&lt;/p&gt;
 &lt;p&gt;At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command &lt;code&gt;kubectl get pods -n unity&lt;/code&gt; to get the status of the pods and you will see the following:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;One or more Unity Controller (based on controllerCount) with 5/5 containers ready, and status displayed as Running.&lt;/li&gt;
+&lt;li&gt;One or more Unity XT Controllers (based on controllerCount) with 5/5 containers ready, and status displayed as Running.&lt;/li&gt;
 &lt;li&gt;Agent pods with 2/2 containers and the status displayed as Running.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+To install nightly or latest csi driver build using bash script use this command:
+&lt;code&gt;/csi-install.sh --namespace unity --values ./myvalues.yaml --version nightly/latest&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can also install the driver using standalone helm chart by running helm install command, first using the &amp;ndash;dry-run flag to
+confirm various parameters are as desired. Once the parameters are validated, run the command without the &amp;ndash;dry-run flag.
+Note: This example assumes that the user is at repo root helm folder i.e csi-unity/helm.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Syntax&lt;/strong&gt;:&lt;code&gt;helm install --dry-run --values &amp;lt;myvalues.yaml location&amp;gt; --namespace &amp;lt;namespace&amp;gt; &amp;lt;name of secret&amp;gt; &amp;lt;helmPath&amp;gt;&lt;/code&gt; &lt;br/&gt;
+&lt;code&gt;&amp;lt;namespace&amp;gt;&lt;/code&gt; - namespace of the driver installation.  &lt;br/&gt;
+&lt;code&gt;&amp;lt;name of secret&amp;gt;&lt;/code&gt; - unity in case of unity-creds and unity-certs-0 secrets. &lt;br/&gt;
+&lt;code&gt;&amp;lt;helmPath&amp;gt;&lt;/code&gt; - Path of the helm directory. &lt;br/&gt;
+e.g: helm install &amp;ndash;dry-run &amp;ndash;values ./csi-unity/myvalues.yaml &amp;ndash;namespace unity unity ./csi-unity&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;certificate-validation-for-unisphere-rest-api-calls&#34;&gt;Certificate validation for Unisphere REST API calls&lt;/h2&gt;
-&lt;p&gt;This topic provides details about setting up the certificate validation for the CSI Driver for Dell Unity.&lt;/p&gt;
+&lt;p&gt;This topic provides details about setting up the Dell Unity XT certificate validation for the CSI Driver.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Before you begin&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;As part of the CSI driver installation, the CSI driver requires a secret with the name unity-certs-0 to unity-certs-n based on the &amp;ldquo;.Values.certSecretCount&amp;rdquo; parameter present in the namespace unity.&lt;/p&gt;
 &lt;p&gt;This secret contains the X509 certificates of the CA which signed the Unisphere SSL certificate in PEM format.&lt;/p&gt;
@@ -2699,16 +2894,16 @@ Use the following command to replace the secret:
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;volume-snapshot-class&#34;&gt;Volume Snapshot Class&lt;/h2&gt;
-&lt;p&gt;For CSI Driver for Unity version 1.6 and later, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; does not create any Volume Snapshot  classes as part of the driver installation. A wide set of annotated storage class manifests have been provided in the &lt;code&gt;csi-unity/samples/volumesnapshotclass/&lt;/code&gt; folder. Use these samples to create new Volume Snapshot to provision storage.&lt;/p&gt;
+&lt;p&gt;A wide set of annotated storage class manifests have been provided in the &lt;a href=&#34;https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass&#34;&gt;csi-unity/samples/volumesnapshotclass/&lt;/a&gt; folder. Use these samples to create new Volume Snapshot to provision storage.&lt;/p&gt;
 &lt;h3 id=&#34;what-happens-to-my-existing-volume-snapshot-classes&#34;&gt;What happens to my existing Volume Snapshot Classes?&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Upgrading from CSI Unity v2.1 driver&lt;/em&gt;:
+&lt;p&gt;&lt;em&gt;Upgrading from CSI Unity XT v2.1.0 driver&lt;/em&gt;:
 The existing volume snapshot class will be retained.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Upgrading from an older version of the driver&lt;/em&gt;:
-It is strongly recommended to upgrade the earlier versions of CSI Unity to 1.6 or higher, before upgrading to 2.2.&lt;/p&gt;
+It is strongly recommended to upgrade the earlier versions of CSI Unity XT to v1.6.0 or higher, before upgrading to v2.3.0.&lt;/p&gt;
 &lt;h2 id=&#34;storage-classes&#34;&gt;Storage Classes&lt;/h2&gt;
 &lt;p&gt;Storage Classes are an essential Kubernetes construct for Storage provisioning. To know more about Storage Classes, refer to &lt;a href=&#34;https://kubernetes.io/docs/concepts/storage/storage-classes/&#34;&gt;https://kubernetes.io/docs/concepts/storage/storage-classes/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;A wide set of annotated storage class manifests have been provided in the &lt;a href=&#34;https://github.com/dell/csi-unity/tree/master/samples/storageclass&#34;&gt;samples/storageclass&lt;/a&gt; folder. Use these samples to create new storage classes to provision storage.&lt;/p&gt;
-&lt;p&gt;For CSI Driver for Unity, a wide set of annotated storage class manifests have been provided in the &lt;code&gt;csi-unity/samples/storageclass&lt;/code&gt; folder. Use these samples to create new storage classes to provision storage.&lt;/p&gt;
+&lt;p&gt;For the Unity XT CSI Driver, a wide set of annotated storage class manifests have been provided in the &lt;code&gt;csi-unity/samples/storageclass&lt;/code&gt; folder. Use these samples to create new storage classes to provision storage.&lt;/p&gt;
 &lt;h3 id=&#34;what-happens-to-my-existing-storage-classes&#34;&gt;What happens to my existing storage classes?&lt;/h3&gt;
 &lt;p&gt;Upgrading from an older version of the driver: The storage classes will be deleted if you upgrade the driver. If you wish to continue using those storage classes, you can patch them and apply the annotation “helm.sh/resource-policy”: keep before performing an upgrade.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -2741,7 +2936,6 @@ User can update secret using the following command:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.&lt;/p&gt;
 &lt;h2 id=&#34;dynamic-logging-configuration&#34;&gt;Dynamic Logging Configuration&lt;/h2&gt;
-&lt;p&gt;This feature is introduced in CSI Driver for unity version 2.0.0.&lt;/p&gt;
 &lt;h3 id=&#34;helm-based-installation&#34;&gt;Helm based installation&lt;/h3&gt;
 &lt;p&gt;As part of driver installation, a ConfigMap with the name &lt;code&gt;unity-config-params&lt;/code&gt; is created, which contains an attribute &lt;code&gt;CSI_LOG_LEVEL&lt;/code&gt; which specifies the current log level of CSI driver.&lt;/p&gt;
 &lt;p&gt;Users can set the default log level by specifying log level to &lt;code&gt;logLevel&lt;/code&gt; attribute in values.yaml during driver installation.&lt;/p&gt;

@@ -134,6 +134,9 @@ are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p
 &lt;li&gt;
 &lt;p&gt;Array I/O Network failure is detected by polling the array to determine if the array has a healthy connection to the node. The capabilities to do this vary greatly by array and communication protocol type (Fibre Channel, iSCSI, NFS, NVMe, or PowerFlex SDC IP protocol). By monitoring the Array I/O Network separately from the Control Plane Network, CSM for Resiliency has two different indicators of whether the node is healthy or not.&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;K8S Control Plane Failure. Control Plane Failure is defined as failure of kubelet in a given node. K8S Control Plane failures are generally discovered by receipt of a Node event with a NoSchedule or NoExecute taint, or detection of such a taint when retrieving the Node via the K8S API.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>
@@ -158,12 +161,13 @@ are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p
 # Enable this feature only after contact support for additional information
 podmon:
   enabled: true
-  image: dellemc/podmon:v1.0.0
+  image: dellemc/podmon:v1.1.0
   controller:
     args:
       - &amp;quot;--csisock=unix:/var/run/csi/csi.sock&amp;quot;
       - &amp;quot;--labelvalue=csi-vxflexos&amp;quot;
       - &amp;quot;--mode=controller&amp;quot;
+      - &amp;quot;--skipArrayConnectionValidation=false&amp;quot;
       - &amp;quot;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;quot;
   node:
     args:
@@ -224,7 +228,7 @@ podmon:
 &lt;tr&gt;
 &lt;td&gt;skipArrayConnectionValidation&lt;/td&gt;
 &lt;td&gt;Optional&lt;/td&gt;
-&lt;td&gt;Boolean value that if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod.&lt;/td&gt;
+&lt;td&gt;Boolean value that if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod. If set to true will cause controllerPodCleanup on K8S Control Plane failure (kubelet service down).&lt;/td&gt;
 &lt;td&gt;controller&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -236,7 +240,7 @@ podmon:
 &lt;tr&gt;
 &lt;td&gt;labelValue&lt;/td&gt;
 &lt;td&gt;Required&lt;/td&gt;
-&lt;td&gt;String that sets the value that denotes pods to be monitored by CSM for Resiliency. This must be specific for each driver. Defaults to &amp;ldquo;csi-vxflexos&amp;rdquo; for CSI Driver for Dell EMC PowerFlex and &amp;ldquo;csi-unity&amp;rdquo; for CSI Driver for Dell EMC Unity&lt;/td&gt;
+&lt;td&gt;String that sets the value that denotes pods to be monitored by CSM for Resiliency. This must be specific for each driver. Defaults to &amp;ldquo;csi-vxflexos&amp;rdquo; for CSI Driver for Dell PowerFlex and &amp;ldquo;csi-unity&amp;rdquo; for CSI Driver for Dell Unity&lt;/td&gt;
 &lt;td&gt;controller &amp;amp; node&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -272,6 +276,7 @@ podmon:
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-mode=controller&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-arrayConnectivityPollRate=5&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-arrayConnectivityConnectionLossThreshold=3&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--skipArrayConnectionValidation=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -292,6 +297,7 @@ podmon:
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-labelvalue=csi-unity&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-driverPath=csi-unity.dellemc.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;-mode=controller&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--skipArrayConnectionValidation=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/unity-config/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -359,7 +365,7 @@ The ConfigMap to edit will have this pattern: &lt;storage&gt;-config-params (e.g
 &lt;td&gt;PODMON_SKIP_ARRAY_CONNECTION_VALIDATION&lt;/td&gt;
 &lt;td&gt;Boolean&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
-&lt;td&gt;Flag to disable the array connectivity check&lt;/td&gt;
+&lt;td&gt;Flag to disable the array connectivity check, set to true for NoSchedule or NoExecute taint due to K8S Control Plane failure (kubelet failure)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -442,6 +448,8 @@ If you experience a problem with CSM for Resiliency it is important you provide 
 &lt;li&gt;For each namespace containing protected pods, the recent events logged in that namespace.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;After successful execution of the script, it will deposit a file similar to driver.logs.20210319_1407.tgz in the current directory. Please submit that file with any &lt;a href=&#34;https://github.com/dell/csm/issues&#34;&gt;issues&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;actions-to-take-during-failure-to-clean-pod-resources-completely&#34;&gt;Actions to take during failure to clean pod resources completely&lt;/h2&gt;
+&lt;p&gt;The node-podmon cleanup algorithm purposefully will not remove the node taint until all the protected volumes have been cleaned up from the node. This works well if the node fault lasts long enough that controller-podmon can evacuate all the protected pods from the node. However, if the failure is short-lived, and controller-podmon does not clean up all the protected pods on the node, or if for some reason node-podmon cannot clean a pod completely, the taint is left on the node, and manual intervention is required. The required intervention is for the operator to reboot the node, which will ensure that no zombie pods survive. Upon seeing the reboot, node-podmon will then remove the taint.&lt;/p&gt;
 
       </description>
     </item>
