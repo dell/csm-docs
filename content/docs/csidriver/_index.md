@@ -41,7 +41,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Create VolumeSnapshot    | yes      | yes       | yes       | yes        | yes        |
 | Create Volume from Snapshot | yes   | yes       | yes       | yes        | yes        |
 | Delete Snapshot          | yes      | yes       | yes       | yes        | yes        |
-| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)| **FC/iSCSI:**<br>RWO/<br>RWOP<br>**Raw block:**<br>RWO/<br>RWX/<br>ROX/<br>RWOP | RWO/ROX/RWOP<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) | RWO/RWX/ROX/<br>RWOP | RWO/RWOP<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(RawBlock, NFS) |
+| [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)| **FC/iSCSI:** <br>RWO/<br>RWOP<br> **Raw block:** <br>RWO/<br>RWX/<br>ROX/<br>RWOP | RWO/ROX/RWOP<br><br>RWX (Raw block only) | RWO/ROX/RWOP<br><br>RWX (Raw block & NFS only) | RWO/RWX/ROX/<br>RWOP | RWO/RWOP<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(RawBlock, NFS) |
 | CSI Volume Cloning       | yes      | yes       | yes       | yes        | yes        |
 | CSI Raw Block Volume     | yes      | yes       | yes       | no         | yes        |
 | CSI Ephemeral Volume     | no       | yes       | yes       | yes        | yes        |
