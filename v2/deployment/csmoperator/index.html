@@ -1,0 +1,2566 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.72.0" /><link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v2/deployment/csmoperator/index.xml">
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
+
+<title>CSM Operator | Dell Technologies</title><meta property="og:title" content="CSM Operator" />
+<meta property="og:description" content="Container Storage Modules Operator" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://dell.github.io/csm-docs/v2/deployment/csmoperator/" />
+<meta property="og:site_name" content="Dell Technologies" />
+<meta itemprop="name" content="CSM Operator">
+<meta itemprop="description" content="Container Storage Modules Operator"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSM Operator"/>
+<meta name="twitter:description" content="Container Storage Modules Operator"/>
+
+
+
+
+
+<link rel="preload" href="/csm-docs/scss/main.min.7c9197581bd225d2e7734e85ecdd541db5d95e4159700208b4947ed2f0efd8cd.css" as="style">
+<link href="/csm-docs/scss/main.min.7c9197581bd225d2e7734e85ecdd541db5d95e4159700208b4947ed2f0efd8cd.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
+
+
+
+
+  </head>
+  <body class="td-section"> 
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/csm-docs/">
+		<span class="navbar-logo"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1017 132"><defs><style>.cls-1{fill:#fff}</style></defs><title>DellTech_Logo_Prm_Wht_rgb</title><path class="cls-1" d="M1015 84.89c0-12.23-6.8-17.66-20.39-20.38s-21.73-4.08-21.73-13.58c0-6.8 5.44-10.87 15-10.87 12.22.0 16.3 5.43 16.3 12.22l1.36 1.36h5.43l1.37-1.36c0-13.58-10.88-19-24.46-19-15 0-23.1 8.15-23.1 17.67.0 10.86 8.15 16.3 21.73 19s20.38 4.08 20.38 15c0 6.79-4.07 12.23-17.66 12.23-12.22.0-17.66-6.8-17.66-15l-1.35-1.36h-5.44l-1.35 1.36c0 12.23 9.5 21.74 25.8 21.74 17.66.0 25.82-8.15 25.82-19M956.58 71.31l1.36-1.37V65.87c0-19-10.87-32.61-29.89-32.61s-29.89 13.59-29.89 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38l-1.36-1.36h-5.43l-1.36 1.36c-2.72 8.15-8.16 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H907.67l-1.36-1.36c0-9.51 5.44-23.09 21.74-23.09s21.74 13.58 21.74 23.09zm-59.78 36.68V36l-1.36-1.35h-5.43L880.5 36v65.22l1.36 1.36h5.43zm0-78.8V14.24l-1.36-1.36h-5.43l-1.36 1.36v8.15l1.36 1.36h5.43zM837 97.12c-13.59.0-21.74-9.52-21.74-28.53S823.44 40.06 837 40.06s21.73 9.5 21.73 28.53S850.61 97.12 837 97.12M858.76 93c0 17.66-4.07 31.25-20.38 31.25-12.22.0-16.3-5.44-17.66-12.23l-1.35-1.36h-5.44l-1.36 1.36c1.36 10.87 9.51 19 25.81 19 17.67.0 28.53-10.87 28.53-38V36l-1.35-1.35h-4.08L860.12 36l-1.36 8.16H857.4c-2.71-5.43-9.5-10.87-21.74-10.87-19 0-28.53 15-28.53 35.33s9.52 35.32 28.53 35.32c12.24.0 19-5.43 21.74-10.87zm-88.3-53c13.58.0 23.09 10.87 23.09 28.53S784 97.12 770.46 97.12s-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32s-13.59-35.33-31.25-35.33-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-40.76-2.72V8.81l-1.36-1.36h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43zM680.8 40.06c13.58.0 23.09 10.87 23.09 28.53s-9.51 28.53-23.09 28.53-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32S698.46 33.26 680.8 33.26s-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-39.4-2.72V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.67 4.08-21.74 10.87h-1.36L592.49 36l-1.36-1.35h-4.08L585.7 36v65.22l1.35 1.36h5.44l1.36-1.36V64.51c0-15 6.79-24.45 21.73-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.37 1.36H640zm-69.29.0V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.66 4.08-21.74 10.87h-1.36V8.81L523.2 7.45h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43l1.36-1.36V64.51c0-15 6.8-24.45 21.74-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.36 1.36h5.44zM455.28 68.59c0-19 9.5-28.53 23.09-28.53s19 8.15 20.38 16.29l1.35 1.37h5.44l1.36-1.37c-1.36-13.58-12.23-23.09-28.53-23.09-17.66.0-31.24 10.87-31.24 35.33s13.58 35.32 31.24 35.32c16.3.0 27.17-9.51 28.53-23.1l-1.36-1.36H500.1l-1.35 1.36C497.39 89 492 97.12 478.37 97.12s-23.09-9.52-23.09-28.53m-14.95 2.72 1.36-1.37V65.87c0-19-10.87-32.61-29.9-32.61s-29.88 13.59-29.88 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38L439 82.17h-5.43l-1.36 1.36c-2.72 8.15-8.15 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H391.42l-1.36-1.36c0-9.51 5.44-23.09 21.73-23.09s21.75 13.58 21.75 23.09zM395.57 12.88V8.81l-1.36-1.36H323.56L322.2 8.81v4.07l1.36 1.36h29.89l1.36 1.36v85.59l1.36 1.36h5.43l1.36-1.36V15.6l1.36-1.36h29.89z"/><path class="cls-1" d="M322.2 83.65v18.9H260.85V7.45h21.6v76.2zM38.55 102.55A47.57 47.57.0 0084.58 67l53.8 42 53.77-42v35.56H253.5V83.65H213.75V7.45h-21.6V43L140.58 83.3l-11.54-9L153.73 55l26.89-21L165.27 22 113.69 62.3l-11.53-9L153.73 13 138.38 1 84.58 43a47.57 47.57.0 00-46-35.58H0v95.1zM21.6 83.65V26.35H38.55c14.33.0 26 12.83 26 28.65S52.88 83.65 38.55 83.65z"/></svg></span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/csm-docs/blog/" ><span>Blog</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/dell/csm" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			<li class="nav-item dropdown d-none d-lg-block">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	Releases
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
+	
+</div>
+
+			</li>
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+</div>
+</nav>
+
+    </header>
+    <h3> This doc version is no longer supported by us. You can check our <a href="/csm-docs/docs">latest version </a></h3>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center d-lg-none">
+    
+
+
+
+<input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="csm-docsv2">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/deployment/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Deployment</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="csm-docsv2deployment">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/deployment/csminstaller/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">CSM Installer</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2deploymentcsminstaller">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2deploymentcsminstallercsmapi" href="/csm-docs/v2/deployment/csminstaller/csmapi/">CSM REST API</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2deploymentcsminstallercsmcli" href="/csm-docs/v2/deployment/csminstaller/csmcli/">CSM CLI</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2deploymentcsminstallertroubleshooting" href="/csm-docs/v2/deployment/csminstaller/troubleshooting/">Troubleshooting</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/deployment/csmoperator/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">CSM Operator</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="csm-docsv2deploymentcsmoperator">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/deployment/csmoperator/drivers/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">CSI Drivers</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2deploymentcsmoperatordrivers">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2deploymentcsmoperatordriverspowerscale" href="/csm-docs/v2/deployment/csmoperator/drivers/powerscale/">PowerScale</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/deployment/csmoperator/modules/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">CSM Modules</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2deploymentcsmoperatormodules">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2deploymentcsmoperatormodulesauthorization" href="/csm-docs/v2/deployment/csmoperator/modules/authorization/">Authorization</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/deployment/csmoperator/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2deploymentcsmoperatortroubleshooting">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2deploymentcsmapi" href="/csm-docs/v2/deployment/csmapi/">CSM REST API</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2deploymentcsmcli" href="/csm-docs/v2/deployment/csmcli/">CSM CLI</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2deploymenttroubleshooting" href="/csm-docs/v2/deployment/troubleshooting/">Troubleshooting</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/faq/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">FAQ</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2faq">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">CSI Drivers</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriver">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/installation/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Installation</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverinstallation">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/installation/helm/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using Helm</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverinstallationhelm">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationhelmpowerflex" href="/csm-docs/v2/csidriver/installation/helm/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationhelmpowermax" href="/csm-docs/v2/csidriver/installation/helm/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationhelmisilon" href="/csm-docs/v2/csidriver/installation/helm/isilon/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationhelmpowerstore" href="/csm-docs/v2/csidriver/installation/helm/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationhelmunity" href="/csm-docs/v2/csidriver/installation/helm/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/installation/operator/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using Operator</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverinstallationoperator">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationoperatorpowerflex" href="/csm-docs/v2/csidriver/installation/operator/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationoperatorpowermax" href="/csm-docs/v2/csidriver/installation/operator/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationoperatorisilon" href="/csm-docs/v2/csidriver/installation/operator/isilon/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationoperatorpowerstore" href="/csm-docs/v2/csidriver/installation/operator/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationoperatorunity" href="/csm-docs/v2/csidriver/installation/operator/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/installation/offline/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Offline Installer</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverinstallationoffline">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/installation/test/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Testing Drivers</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverinstallationtest">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationtestpowerflex" href="/csm-docs/v2/csidriver/installation/test/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationtestpowermax" href="/csm-docs/v2/csidriver/installation/test/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationtestpowerscale" href="/csm-docs/v2/csidriver/installation/test/powerscale/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationtestpowerstore" href="/csm-docs/v2/csidriver/installation/test/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverinstallationtestunity" href="/csm-docs/v2/csidriver/installation/test/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/uninstall/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Uninstallation</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriveruninstall">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/upgradation/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Upgrade</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverupgradation">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverupgradationdriversoperator" href="/csm-docs/v2/csidriver/upgradation/drivers/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverupgradationdriverspowerflex" href="/csm-docs/v2/csidriver/upgradation/drivers/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverupgradationdriverspowermax" href="/csm-docs/v2/csidriver/upgradation/drivers/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverupgradationdriversisilon" href="/csm-docs/v2/csidriver/upgradation/drivers/isilon/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverupgradationdriverspowerstore" href="/csm-docs/v2/csidriver/upgradation/drivers/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverupgradationdriversunity" href="/csm-docs/v2/csidriver/upgradation/drivers/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/features/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Features</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverfeatures">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverfeaturespowerflex" href="/csm-docs/v2/csidriver/features/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverfeaturespowermax" href="/csm-docs/v2/csidriver/features/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverfeaturespowerscale" href="/csm-docs/v2/csidriver/features/powerscale/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverfeaturespowerstore" href="/csm-docs/v2/csidriver/features/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverfeaturesunity" href="/csm-docs/v2/csidriver/features/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidrivertroubleshooting">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidrivertroubleshootingoperator" href="/csm-docs/v2/csidriver/troubleshooting/operator/">Dell CSI Operator</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidrivertroubleshootingpowerflex" href="/csm-docs/v2/csidriver/troubleshooting/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidrivertroubleshootingpowermax" href="/csm-docs/v2/csidriver/troubleshooting/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidrivertroubleshootingpowerscale" href="/csm-docs/v2/csidriver/troubleshooting/powerscale/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidrivertroubleshootingpowerstore" href="/csm-docs/v2/csidriver/troubleshooting/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidrivertroubleshootingunity" href="/csm-docs/v2/csidriver/troubleshooting/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/release/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Release Notes</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverrelease">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverreleaseoperator" href="/csm-docs/v2/csidriver/release/operator/">Operator</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverreleasepowerflex" href="/csm-docs/v2/csidriver/release/powerflex/">PowerFlex</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverreleasepowermax" href="/csm-docs/v2/csidriver/release/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverreleasepowerscale" href="/csm-docs/v2/csidriver/release/powerscale/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverreleasepowerstore" href="/csm-docs/v2/csidriver/release/powerstore/">PowerStore</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverreleaseunity" href="/csm-docs/v2/csidriver/release/unity/">Unity</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/partners/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Our Ecosystem Partners</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverpartners">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverpartnersoperator" href="/csm-docs/v2/csidriver/partners/operator/">OperatorHub.io</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverpartnersredhat" href="/csm-docs/v2/csidriver/partners/redhat/">Red Hat OpenShift</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverpartnersdocker" href="/csm-docs/v2/csidriver/partners/docker/">MKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverpartnersrancher" href="/csm-docs/v2/csidriver/partners/rancher/">RKE</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2csidriverpartnerstanzu" href="/csm-docs/v2/csidriver/partners/tanzu/">VMware Tanzu</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/csidriver/archives/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Archives</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2csidriverarchives">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/authorization/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Authorization</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2authorization">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2authorizationdesign" href="/csm-docs/v2/authorization/design/">Design</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2authorizationdeployment" href="/csm-docs/v2/authorization/deployment/">Deployment</a>
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/authorization/deployment/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Deployment</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2authorizationdeployment">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2authorizationuninstallation" href="/csm-docs/v2/authorization/uninstallation/">Uninstallation</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2authorizationupgrade" href="/csm-docs/v2/authorization/upgrade/">Upgrade</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2authorizationcli" href="/csm-docs/v2/authorization/cli/">CLI</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2authorizationtroubleshooting" href="/csm-docs/v2/authorization/troubleshooting/">Troubleshooting</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/observability/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Observability</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2observability">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/observability/design/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Design</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2observabilitydesign">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/observability/metrics/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Metrics</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2observabilitymetrics">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2observabilitymetricspowerflex" href="/csm-docs/v2/observability/metrics/powerflex/">PowerFlex Metrics</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2observabilitymetricspowerstore" href="/csm-docs/v2/observability/metrics/powerstore/">PowerStore Metrics</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/observability/deployment/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Deployment</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2observabilitydeployment">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2observabilitydeploymenthelm" href="/csm-docs/v2/observability/deployment/helm/">Helm</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2observabilitydeploymentonline" href="/csm-docs/v2/observability/deployment/online/">Installer</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2observabilitydeploymentoffline" href="/csm-docs/v2/observability/deployment/offline/">Offline Installer</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/observability/uninstall/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Uninstallation</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2observabilityuninstall">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/observability/upgrade/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Upgrade</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2observabilityupgrade">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/observability/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2observabilitytroubleshooting">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/replication/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Replication</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2replication">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/replication/deployment/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Deployment</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2replicationdeployment">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationdeploymentinstallation" href="/csm-docs/v2/replication/deployment/installation/">Installation</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationdeploymentconfigmap-secrets" href="/csm-docs/v2/replication/deployment/configmap-secrets/">ConfigMap &amp; Secrets</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationdeploymentinstall-repctl" href="/csm-docs/v2/replication/deployment/install-repctl/">Installation using repctl</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationdeploymentstorageclasses" href="/csm-docs/v2/replication/deployment/storageclasses/">Storage Class</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationdeploymentpowermax" href="/csm-docs/v2/replication/deployment/powermax/">PowerMax</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationdeploymentpowerscale" href="/csm-docs/v2/replication/deployment/powerscale/">PowerScale</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationdeploymentpowerstore" href="/csm-docs/v2/replication/deployment/powerstore/">PowerStore</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationarchitecture" href="/csm-docs/v2/replication/architecture/">Architecture</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationcluster-topologies" href="/csm-docs/v2/replication/cluster-topologies/">Cluster Topologies</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationdisaster-recovery" href="/csm-docs/v2/replication/disaster-recovery/">Disaster Recovery</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationhigh-availability" href="/csm-docs/v2/replication/high-availability/">High Availability</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationmonitoring" href="/csm-docs/v2/replication/monitoring/">Monitoring</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationreplication-actions" href="/csm-docs/v2/replication/replication-actions/">Replication Actions</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationtools" href="/csm-docs/v2/replication/tools/">Tools</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationtroubleshooting" href="/csm-docs/v2/replication/troubleshooting/">Troubleshooting</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationupgrade" href="/csm-docs/v2/replication/upgrade/">Upgrade</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2replicationuninstall" href="/csm-docs/v2/replication/uninstall/">Uninstall</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/resiliency/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Resiliency</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2resiliency">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2resiliencydesign" href="/csm-docs/v2/resiliency/design/">Design</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2resiliencyuninstallation" href="/csm-docs/v2/resiliency/uninstallation/">Uninstallation</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2resiliencyusecases" href="/csm-docs/v2/resiliency/usecases/">Use Cases</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2resiliencydeployment" href="/csm-docs/v2/resiliency/deployment/">Deployment</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2resiliencyupgrade" href="/csm-docs/v2/resiliency/upgrade/">Upgrade</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2resiliencytroubleshooting" href="/csm-docs/v2/resiliency/troubleshooting/">Troubleshooting</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/snapshots/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Snapshots</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2snapshots">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/grasp/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Learn</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2grasp">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2graspstart" href="/csm-docs/v2/grasp/start/">Getting Started</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv2graspvideo" href="/csm-docs/v2/grasp/video/">Quick video lessons</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/troubleshooting/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Troubleshooting</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2troubleshooting">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/support/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Support</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2support">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/contributionguidelines/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Contribution Guidelines</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2contributionguidelines">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/policies/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Policies</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2policies">
+      
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/csm-docs/v2/policies/deprecationpolicy/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Deprecation Policy</a>
+  </li>
+  <ul>
+    <li class="collapse " id="csm-docsv2policiesdeprecationpolicy">
+      
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#supported-platforms">Supported Platforms</a></li>
+    <li><a href="#supported-csi-drivers">Supported CSI Drivers</a></li>
+    <li><a href="#supported-csm-modules">Supported CSM Modules</a></li>
+    <li><a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#manual-installation">Manual Installation</a></li>
+        <li><a href="#installation-via-operator-hub">Installation via Operator Hub</a></li>
+        <li><a href="#uninstall">Uninstall</a></li>
+        <li><a href="#custom-resource-definitions">Custom Resource Definitions</a></li>
+        <li><a href="#custom-resource-specification">Custom Resource Specification</a></li>
+        <li><a href="#pre-requisites-for-installation-of-the-csi-drivers">Pre-requisites for installation of the CSI Drivers</a></li>
+      </ul>
+    </li>
+    <li><a href="#installing-csi-driver-via-operator">Installing CSI Driver via Operator</a>
+      <ul>
+        <li><a href="#verifying-the-driver-installation">Verifying the driver installation</a></li>
+        <li><a href="#update-csi-drivers">Update CSI Drivers</a></li>
+        <li><a href="#uninstall-csi-driver">Uninstall CSI Driver</a></li>
+        <li><a href="#sidecars">SideCars</a></li>
+      </ul>
+    </li>
+    <li><a href="#modules">Modules</a></li>
+  </ul>
+</nav>
+
+
+
+
+          </div> 
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+           
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://dell.github.io/csm-docs/v2/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://dell.github.io/csm-docs/v2/deployment/">Deployment</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://dell.github.io/csm-docs/v2/deployment/csmoperator/">CSM Operator</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+<div class="td-content">
+	<h1>CSM Operator</h1>
+     
+	
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>The Dell CSM Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.</p>
+
+</div>
+
+<p>The Dell CSM Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.</p>
+<h2 id="supported-platforms">Supported Platforms</h2>
+<p>Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.</p>
+<table>
+<thead>
+<tr>
+<th>Kubernetes Version</th>
+<th>OpenShift Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.21, 1.22, 1.23</td>
+<td>4.8, 4.9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-csi-drivers">Supported CSI Drivers</h2>
+<table>
+<thead>
+<tr>
+<th>CSI Driver</th>
+<th>Version</th>
+<th>ConfigVersion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSI PowerScale</td>
+<td>2.2.0</td>
+<td>v2.2.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-csm-modules">Supported CSM Modules</h2>
+<table>
+<thead>
+<tr>
+<th>CSM Modules</th>
+<th>Version</th>
+<th>ConfigVersion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSM Authorization</td>
+<td>1.2.0</td>
+<td>v1.2.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="installation">Installation</h2>
+<p>Dell CSM Operator can be installed manually or via Operator Hub.</p>
+<h3 id="manual-installation">Manual Installation</h3>
+<h4 id="operator-installation-on-a-cluster-without-olm">Operator Installation on a cluster without OLM</h4>
+<ol>
+<li>Clone the <a href="https://github.com/dell/csm-operator">Dell CSM Operator repository</a>.</li>
+<li><code>cd csm-operator</code></li>
+<li>(Optional) If using a local Docker image, edit the <code>deploy/operator.yaml</code> file and set the image name for the CSM Operator Deployment.</li>
+<li>Run <code>bash scripts/install.sh</code> to install the operator.</li>
+</ol>
+<blockquote>
+<p>NOTE: Dell CSM Operator will be installed in the <code>dell-csm-operator</code> namespace.</p>
+</blockquote>
+
+
+
+
+
+
+
+<div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
+	<img class="card-img-top" src="/csm-docs/v2/deployment/csmoperator/install_hu65a008b76338bb66f6abc1e8679a223d_170165_2500x0_resize_q75_catmullrom.jpg" width="2500" height="1252">
+	
+</div>
+<ol start="5">
+<li>Run the command <code>kubectl get pods -n dell-csm-operator</code> to validate the installation. If installed successfully, you should be able to see the operator pod in the <code>dell-csm-operator</code> namespace.</li>
+</ol>
+
+
+
+
+
+
+
+<div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
+	<img class="card-img-top" src="/csm-docs/v2/deployment/csmoperator/install_pods_hu22d1b56e0d1995d45d1947c2987829d0_116545_2500x0_resize_q75_catmullrom.jpg" width="2500" height="785">
+	
+</div>
+<h4 id="operator-installation-on-a-cluster-with-olm">Operator Installation on a cluster with OLM</h4>
+<ol>
+<li>Clone the <a href="https://github.com/dell/csm-operator">Dell CSM Operator repository</a>.</li>
+<li><code>cd csm-operator</code></li>
+<li>Run <code>bash scripts/install_olm.sh</code> to install the operator.</li>
+</ol>
+<blockquote>
+<p>NOTE: Dell CSM Operator will get installed in the <code>test-csm-operator-olm</code> namespace.</p>
+</blockquote>
+
+
+
+
+
+
+
+<div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
+	<img class="card-img-top" src="/csm-docs/v2/deployment/csmoperator/install_olm_hu2eedd74f931e8260c860feb0c72f1e62_182304_2500x0_resize_q75_catmullrom.jpg" width="2500" height="1022">
+	
+</div>
+<ol start="4">
+<li>Once installation completes, run the command <code>kubectl get pods -n test-csm-operator-olm</code> to validate the installation. If installed successfully, you should be able to see the operator pods and CSV in the <code>test-csm-operator-olm</code> namespace. The CSV phase will be in <code>Succeeded</code> state.</li>
+</ol>
+
+
+
+
+
+
+
+<div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
+	<img class="card-img-top" src="/csm-docs/v2/deployment/csmoperator/install_olm_pods_huda4520e12712062a7cd7a9d2b5385714_107093_2500x0_resize_q75_catmullrom.jpg" width="2500" height="487">
+	
+</div>
+<blockquote>
+<p><strong>NOTE</strong>: The recommended version of OLM for upstream Kubernetes is <strong><code>v0.18.2</code></strong>.</p>
+</blockquote>
+<h3 id="installation-via-operator-hub">Installation via Operator Hub</h3>
+<p><code>dell-csm-operator</code> can be installed via Operator Hub on upstream Kubernetes clusters &amp; Red Hat OpenShift Clusters.</p>
+<p>The installation process involves the creation of a <code>Subscription</code> object either via the <em>OperatorHub</em> UI or using <code>kubectl/oc</code>. While creating the <code>Subscription</code> you can set the Approval strategy for the <code>InstallPlan</code> for the operator to:</p>
+<ul>
+<li><em>Automatic</em> - If you want the operator to be automatically installed or upgraded (once an upgrade is available).</li>
+<li><em>Manual</em> - If you want a cluster administrator to manually review and approve the <code>InstallPlan</code> for installation/upgrades.</li>
+</ul>
+<h3 id="uninstall">Uninstall</h3>
+<h4 id="operator-uninstallation-on-a-cluster-without-olm">Operator uninstallation on a cluster without OLM</h4>
+<p>To uninstall a CSM operator, run <code>bash scripts/uninstall.sh</code>. This will uninstall the operator in <code>dell-csm-operator</code> namespace.</p>
+
+
+
+
+
+
+
+<div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
+	<img class="card-img-top" src="/csm-docs/v2/deployment/csmoperator/uninstall_hu709274147079b066148e855aef0845a9_110286_2500x0_resize_q75_catmullrom.JPG" width="2500" height="738">
+	
+</div>
+<h4 id="operator-uninstallation-on-a-cluster-with-olm">Operator uninstallation on a cluster with OLM</h4>
+<p>To uninstall a CSM operator installed with OLM run <code>bash scripts/uninstall_olm.sh</code>. This will uninstall the operator in  <code>test-csm-operator-olm</code> namespace.</p>
+
+
+
+
+
+
+
+<div class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: 2510px">
+	<img class="card-img-top" src="/csm-docs/v2/deployment/csmoperator/uninstall_olm_huffe5566d5d7fb4af320bc708dd65cfbb_46203_2500x0_resize_q75_catmullrom.JPG" width="2500" height="504">
+	
+</div>
+<h3 id="custom-resource-definitions">Custom Resource Definitions</h3>
+<p>As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.<br>
+<code>containerstoragemodule</code> CRD is installed in API Group <code>storage.dell.com</code>.</p>
+<p>Drivers and modules can be installed by creating a <code>customResource</code>.</p>
+<h3 id="custom-resource-specification">Custom Resource Specification</h3>
+<p>Each CSI Driver and CSM Module installation is represented by a Custom Resource.</p>
+<p>The specification for the Custom Resource is the same for all the drivers.Below is a list of all the mandatory and optional fields in the Custom Resource specification</p>
+<h4 id="mandatory-fields">Mandatory fields</h4>
+<p><strong>configVersion</strong> - Configuration version - refer <a href="#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csm-operator">here</a> for appropriate config version.</p>
+<p><strong>replicas</strong>  - Number of replicas for controller plugin - must be set to 1 for all drivers.</p>
+<p><strong>dnsPolicy</strong> - Determines the dnsPolicy for the node daemonset. Accepted values are <code>Default</code>, <code>ClusterFirst</code>, <code>ClusterFirstWithHostNet</code>, <code>None</code>.</p>
+<p><strong>common</strong> - This field is mandatory and is used to specify common properties for both controller and the node plugin.</p>
+<ul>
+<li>image - driver container image</li>
+<li>imagePullPolicy - Image Pull Policy of the driver image</li>
+<li>envs - List of environment variables and their values</li>
+</ul>
+<h4 id="optional-fields">Optional fields</h4>
+<p><strong>controller</strong> - List of environment variables and values which are applicable only for controller.</p>
+<p><strong>node</strong> - List of environment variables and values which are applicable only for node.</p>
+<p><strong>sideCars</strong> - Specification for CSI sidecar containers.</p>
+<p><strong>authSecret</strong> - Name of the secret holding credentials for use by the driver. If not specified, the default secret *-creds must exist in the same namespace as driver.</p>
+<p><strong>tlsCertSecret</strong> - Name of the TLS cert secret for use by the driver. If not specified, a secret *-certs must exist in the namespace as driver.</p>
+<p><strong>tolerations</strong> - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them.</p>
+<p><strong>nodeSelector</strong> - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.</p>
+<blockquote>
+<p><strong>Note:</strong> The <code>image</code> field should point to the correct image tag for version of the driver you are installing.</p>
+</blockquote>
+<h3 id="pre-requisites-for-installation-of-the-csi-drivers">Pre-requisites for installation of the CSI Drivers</h3>
+<p>On Upstream Kubernetes clusters, make sure to install</p>
+<ul>
+<li>VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs</li>
+<li>External Volume Snapshot Controller</li>
+</ul>
+<h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
+<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd">here</a></p>
+<h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
+<p>The CSI external-snapshotter sidecar is split into two controllers:</p>
+<ul>
+<li>A common snapshot controller</li>
+<li>A CSI external-snapshotter sidecar</li>
+</ul>
+<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller">here</a></p>
+<p><em>NOTE:</em></p>
+<ul>
+<li>The manifests available on GitHub install the snapshotter image:
+<ul>
+<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v5.0.1&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v5.0.1</a></li>
+</ul>
+</li>
+<li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
+</ul>
+<h4 id="installation-example">Installation example</h4>
+<p>You can install CRDs and the default snapshot controller by running the following commands:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/kubernetes-csi/external-snapshotter/
+<span style="color:#204a87">cd</span> ./external-snapshotter
+git checkout release-&lt;your-version&gt;
+kubectl create -f client/config/crd
+kubectl create -f deploy/kubernetes/snapshot-controller
+</code></pre></div><p><em>NOTE:</em></p>
+<ul>
+<li>It is recommended to use 5.0.x version of snapshotter/snapshot-controller.</li>
+</ul>
+<h2 id="installing-csi-driver-via-operator">Installing CSI Driver via Operator</h2>
+<p>Refer <a href="drivers/powerscale">PowerScale Driver</a> to install the driver via Operator</p>
+<blockquote>
+<p><strong>Note</strong>: If you are using an OLM based installation, example manifests are available in <code>OperatorHub</code> UI.
+You can edit these manifests and install the driver using the <code>OperatorHub</code> UI.</p>
+</blockquote>
+<h3 id="verifying-the-driver-installation">Verifying the driver installation</h3>
+<p>Once the driver <code>Custom Resource (CR)</code> is created, you can verify the installation as mentioned below</p>
+<ul>
+<li>Check if ContainerStorageModule CR is created successfully using the command below:
+<pre><code>$ kubectl get csm/&lt;name-of-custom-resource&gt; -n &lt;driver-namespace&gt; -o yaml
+</code></pre></li>
+<li>Check the status of the CR to verify if the driver installation is in the <code>Succeeded</code> state. If the status is not <code>Succeeded</code>, see the <a href="./troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it">Troubleshooting guide</a> for more information.</li>
+</ul>
+<h3 id="update-csi-drivers">Update CSI Drivers</h3>
+<p>The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include:</p>
+<ul>
+<li>Modifying the installation directly via <code>kubectl edit</code>
+For e.g. - If the name of the installed PowerScale driver is powerscale, then run
+<pre><code># Replace driver-namespace with the namespace where the PowerScale driver is installed
+$ kubectl edit csm/powerscale -n &lt;driver-namespace&gt;
+</code></pre><p>and modify the installation</p>
+</li>
+<li>Modify the API object in-place via <code>kubectl patch</code></li>
+</ul>
+<h4 id="supported-modifications">Supported modifications</h4>
+<ul>
+<li>Changing environment variable values for driver</li>
+<li>Updating the image of the driver</li>
+</ul>
+<h3 id="uninstall-csi-driver">Uninstall CSI Driver</h3>
+<p>The CSI Drivers and CSM Modules can be uninstalled by deleting the Custom Resource.</p>
+<p>For e.g.</p>
+<pre><code>$ kubectl delete csm/powerscale -n &lt;driver-namespace&gt;
+</code></pre><p>By default, the <code>forceRemoveDriver</code> option is set to <code>true</code> which will uninstall the CSI Driver and CSM Modules when the Custom Resource is deleted. Setting this option to <code>false</code> is not recommended.</p>
+<h3 id="sidecars">SideCars</h3>
+<p>Although the sidecars field in the driver specification is optional, it is <strong>strongly</strong> recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell support.</p>
+<h2 id="modules">Modules</h2>
+<p>The CSM Operator can optionally enable modules that are supported by the specific Dell CSI driver. By default, the modules are disabled but they can be enabled by setting the <code>enabled</code> flag to true and setting any other configuration options for the given module.</p>
+
+        <div class="section-index">
+    
+    
+    
+    
+    
+    <hr class="panel-line">
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/csm-docs/v2/deployment/csmoperator/drivers/">CSI Drivers</a>
+                    </h5>
+                    <p>Installation of Dell CSI Drivers using Dell CSM Operator</p>
+                </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/csm-docs/v2/deployment/csmoperator/modules/">CSM Modules</a>
+                    </h5>
+                    <p>Installation of Dell CSM Modules using Dell CSM Operator</p>
+                </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/csm-docs/v2/deployment/csmoperator/troubleshooting/">Troubleshooting</a>
+                    </h5>
+                    <p>Troubleshooting guide  for Dell CSM Operator</p>
+                </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+</div>
+
+	
+        
+	
+
+</div>
+
+          </main>
+        </div>
+      </div>
+    
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" href="https://github.com/dell/csm">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
+    <a class="text-white" target="_blank" href="http://del.ly/Slack_request">
+      <i class="fab fa-slack"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2022 The Dell Technologies All Rights Reserved</small>
+        <small class="ml-1"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank">Privacy Policy</a></small>
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+<script src="/csm-docs/js/main.min.664f21bf5eb0c31ebc661e2616e6c63e0448cec6d5636d869957be423c3cb952.js" integrity="sha256-Zk8hv16wwx68Zh4mFubGPgRIzsbVY22GmVe&#43;Qjw8uVI=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

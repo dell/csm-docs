@@ -1,0 +1,42 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Policies</title>
+    <link>https://dell.github.io/csm-docs/v2/policies/</link>
+    <description>Recent content in Policies on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v2/policies/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V2: Deprecation Policy</title>
+      <link>https://dell.github.io/csm-docs/v2/policies/deprecationpolicy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/policies/deprecationpolicy/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The Deprecation policy for Dell Container Storage Modules (CSM) is in place to help users prevent any disruptive incidents from occurring. We aim to provide appropriate notice when CLI elements, APIs, features, or behaviors are slated to be removed.&lt;/p&gt;
+&lt;h3 id=&#34;deprecating-a-cli-element&#34;&gt;Deprecating a CLI Element&lt;/h3&gt;
+&lt;p&gt;This captures situations when a flag or command is removed from a CLI.&lt;/p&gt;
+&lt;p&gt;CLI elements must function after their announced deprecation for no less than two releases. This includes when the releases become Generally Available (GA), including both major or minor release versions.&lt;/p&gt;
+&lt;p&gt;When deprecating a CLI command, a warning message must be displayed each time the command is used.  This warning message should capture the deprecation details along with the release in which the command that is being deprecated will be removed.&lt;/p&gt;
+&lt;h3 id=&#34;deprecating-an-api-feature-or-behavior&#34;&gt;Deprecating an API, Feature, or Behavior&lt;/h3&gt;
+&lt;p&gt;CSM features must function after their announced deprecation for no less than two releases. This includes when the releases become Generally Available (GA), including both major or minor release versions.&lt;/p&gt;
+&lt;h3 id=&#34;tech-previews&#34;&gt;Tech Previews&lt;/h3&gt;
+&lt;p&gt;Features released as tech preview are not supported and therefore are not intended for production.  No deprecation notice will be required before removing any features/behaviors that are released as tech previews.&lt;/p&gt;
+&lt;h3 id=&#34;required-deprecation-notice&#34;&gt;Required Deprecation Notice&lt;/h3&gt;
+&lt;p&gt;CSM documentation for the release in which the deprecation is being announced must include deprecation details along with the release in which the item(s) being deprecated will be removed.&lt;/p&gt;
+&lt;p&gt;In addition, the changelog and release notes for the release in which the deprecation is being announced must contain a section titled &amp;ldquo;Important Deprecation Information&amp;rdquo;.  In this section, the deprecation details must be provided along with the release in which the item(s) being deprecated will be removed.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

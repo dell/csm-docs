@@ -29,7 +29,7 @@
 &lt;/ol&gt;
 &lt;p&gt;&lt;img src=&#34;../ophub1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;Click DellEMC Operator.&lt;/li&gt;
+&lt;li&gt;Click Dell Operator.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;img src=&#34;../ophub2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
@@ -140,7 +140,7 @@
       <description>
         
         
-        &lt;p&gt;The CSI Driver for Dell Unity and PowerScale supports VMware Tanzu and deployment of these Tanzu clusters is done using the VMware Tanzu supervisor cluster and supervisor namespace.&lt;/p&gt;
+        &lt;p&gt;The CSI Driver for Dell Unity XT and PowerScale supports VMware Tanzu. The deployment of these Tanzu clusters is done using the VMware Tanzu supervisor cluster and the supervisor namespace.&lt;/p&gt;
 &lt;p&gt;Currently, VMware Tanzu with normal configuration(without NAT) supports Kubernetes 1.20 and higher.
 The CSI driver can be installed on  this cluster using Helm. Installation of CSI drivers in Tanzu via Operator has not been qualified.&lt;/p&gt;
 &lt;p&gt;To login to the Tanzu cluster, download kubectl and kubectl vsphere binaries to any of the system&lt;/p&gt;

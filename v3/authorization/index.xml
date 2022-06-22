@@ -486,6 +486,395 @@ sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMI
     </item>
     
     <item>
+      <title>V3: Deployment</title>
+      <link>https://dell.github.io/csm-docs/v3/authorization/deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/authorization/deployment/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Deploying the CSM for Authorization proxy server, to be controlled by storage administrators&lt;/li&gt;
+&lt;li&gt;Configuring one to many &lt;a href=&#34;../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell EMC CSI drivers with CSM for Authorization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;The CSM for Authorization proxy server requires a Linux host with the following minimum resource allocations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;32 GB of memory&lt;/li&gt;
+&lt;li&gt;4 CPU&lt;/li&gt;
+&lt;li&gt;200 GB local storage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;deploying-the-csm-authorization-proxy-server&#34;&gt;Deploying the CSM Authorization Proxy Server&lt;/h2&gt;
+&lt;p&gt;The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.&lt;/p&gt;
+&lt;p&gt;The CSM for Authorization proxy server is installed using a single binary installer.&lt;/p&gt;
+&lt;h3 id=&#34;single-binary-installer&#34;&gt;Single Binary Installer&lt;/h3&gt;
+&lt;p&gt;The easiest way to obtain the single binary installer RPM is directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
+&lt;p&gt;The single binary installer can also be built from source by cloning the &lt;a href=&#34;https://github.com/dell/karavi-authorization&#34;&gt;GitHub repository&lt;/a&gt; and using the following Makefile targets to build the installer:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;make dist build-installer rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;build-installer&lt;/code&gt; step creates a binary at &lt;code&gt;bin/deploy&lt;/code&gt; and embeds all components required for installation. The &lt;code&gt;rpm&lt;/code&gt; step generates an RPM package and stores it at &lt;code&gt;deploy/rpm/x86_64/&lt;/code&gt;.
+This allows CSM for Authorization to be installed in network-restricted environments.&lt;/p&gt;
+&lt;p&gt;A Storage Administrator can execute the installer or rpm package as a root user or via &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;installing-the-rpm&#34;&gt;Installing the RPM&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt; having the following contents:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;web&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;sidecarproxyaddr&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;docker_registry/sidecar-proxy:latest&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;jwtsigningsecret&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;secret&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;proxy&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;host&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;:8080&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;zipkin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;collectoruri&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;http://DNS_host_name:9411/api/v2/spans&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;probability&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;
+  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;certificate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;keyFile&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_private_key_file&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;crtFile&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_host_cert_file&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;rootCertificate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_root_CA_file&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hostName&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;DNS_host_name&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the above template, &lt;code&gt;DNS_host_name&lt;/code&gt; refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running the below command on the system:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nslookup &amp;lt;IP_address&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In order to configure secure grpc connectivity, an additional subdomain in the format &lt;code&gt;grpc.DNS_host_name&lt;/code&gt; is also required. All traffic from &lt;code&gt;grpc.DNS_host_name&lt;/code&gt; needs to be routed to &lt;code&gt;DNS_host_name&lt;/code&gt; address, this can be configured by adding a new DNS entry for &lt;code&gt;grpc.DNS_host_name&lt;/code&gt; or providing a temporary path in the &lt;code&gt;/etc/hosts&lt;/code&gt; file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The certificate provided in &lt;code&gt;crtFile&lt;/code&gt; should be valid for both the &lt;code&gt;DNS_host_name&lt;/code&gt; and the &lt;code&gt;grpc.DNS_host_name&lt;/code&gt; address.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;For example, create the certificate config file with alternate names (to include example.com and grpc.example.com) and then create the .crt file:  
+
+    ```
+    CN = example.com
+    subjectAltName = @alt_names
+    [alt_names]
+    DNS.1 = grpc.example.com
+
+    openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out example.com.crt -days 365 -sha256
+    ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;To install the rpm package on the system, run the below command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;rpm -ivh &amp;lt;rpm_file_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After installation, application data will be stored on the system under &lt;code&gt;/var/lib/rancher/k3s/storage/&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;configuring-the-csm-for-authorization-proxy-server&#34;&gt;Configuring the CSM for Authorization Proxy Server&lt;/h2&gt;
+&lt;p&gt;The storage administrator must first configure the proxy server with the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Storage systems&lt;/li&gt;
+&lt;li&gt;Tenants&lt;/li&gt;
+&lt;li&gt;Roles&lt;/li&gt;
+&lt;li&gt;Bind roles to tenants&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Run the following commands on the Authorization proxy server:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;# Specify any desired name
+export RoleName=&amp;quot;&amp;quot;
+export RoleQuota=&amp;quot;&amp;quot;
+export TenantName=&amp;quot;&amp;quot;
+
+# Specify info about Array1
+export Array1Type=&amp;quot;&amp;quot;
+export Array1SystemID=&amp;quot;&amp;quot;
+export Array1User=&amp;quot;&amp;quot;
+export Array1Password=&amp;quot;&amp;quot;
+export Array1Pool=&amp;quot;&amp;quot;
+export Array1Endpoint=&amp;quot;&amp;quot;
+
+# Specify info about Array2
+export Array2Type=&amp;quot;&amp;quot;
+export Array2SystemID=&amp;quot;&amp;quot;
+export Array2User=&amp;quot;&amp;quot;
+export Array2Password=&amp;quot;&amp;quot;
+export Array2Pool=&amp;quot;&amp;quot;
+export Array2Endpoint=&amp;quot;&amp;quot;
+
+# Specify IPs
+export DriverHostVMIP=&amp;quot;&amp;quot; 
+export DriverHostVMPassword=&amp;quot;&amp;quot;
+export DriverHostVMUser=&amp;quot;&amp;quot;
+
+# Specify Authorization proxy host address. NOTE: this is not the same as IP
+export AuthorizationProxyHost=&amp;quot;&amp;quot;
+
+echo === Creating Storage(s) ===
+# Add array1 to authorization
+karavictl storage create \
+          --type ${Array1Type} \
+          --endpoint  ${Array1Endpoint} \
+          --system-id ${Array1SystemID} \
+          --user ${Array1User} \
+                --password ${Array1Password} \
+          --insecure
+
+# Add array2 to authorization
+ karavictl storage create \
+          --type ${Array2Type} \
+          --endpoint  ${Array2Endpoint} \
+          --system-id ${Array2SystemID} \
+          --user ${Array2User} \
+                --password ${Array2Password} \
+          --insecure
+  
+echo === Creating Tenant ===
+karavictl tenant create -n $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot;
+
+echo === Creating Role ===
+karavictl role create \
+         --role=${RoleName}=${Array1Type}=${Array1SystemID}=${Array1Pool}=${RoleQuota} \
+         --role=${RoleName}=${Array2Type}=${Array2SystemID}=${Array2Pool}=${RoleQuota}   
+
+echo === === Binding Role ===
+karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;generate-a-token&#34;&gt;Generate a Token&lt;/h3&gt;
+&lt;p&gt;After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo === Generating token ===
+karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot; | jq -r &#39;.Token&#39; &amp;gt; token.yaml
+
+echo === Copy token to Driver Host ===
+sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The sample above copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;copy-the-karavictl-binary-to-the-kubernetes-master-node&#34;&gt;Copy the karavictl Binary to the Kubernetes Master Node&lt;/h3&gt;
+&lt;p&gt;The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell EMC CSI driver with CSM for Authorization.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;configuring-a-dell-emc-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell EMC CSI Driver with CSM for Authorization&lt;/h2&gt;
+&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant admin.&lt;/p&gt;
+&lt;h3 id=&#34;configuring-a-dell-emc-csi-driver&#34;&gt;Configuring a Dell EMC CSI Driver&lt;/h3&gt;
+&lt;p&gt;Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create the secret token in the namespace of the driver.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;# It is assumed that array type powermax has the namespace &amp;quot;powermax&amp;quot;, powerflex has the namepace &amp;quot;vxflexos&amp;quot;, and powerscale has the namespace &amp;quot;isilon&amp;quot;.
+kubectl apply -f /tmp/token.yaml -n powermax
+kubectl apply -f /tmp/token.yaml -n vxflexos
+kubectl apply -f /tmp/token.yaml -n isilon
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Edit the following parameters in samples/secret/karavi-authorization-config.json file in &lt;a href=&#34;https://github.com/dell/csi-powerflex/tree/main/samples&#34;&gt;CSI PowerFlex&lt;/a&gt;, &lt;a href=&#34;https://github.com/dell/csi-powermax/tree/main/samples/secret&#34;&gt;CSI PowerMax&lt;/a&gt;, or &lt;a href=&#34;https://github.com/dell/csi-powerscale/tree/main/samples/secret&#34;&gt;CSI PowerScale&lt;/a&gt; driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the &lt;em&gt;endpoint&lt;/em&gt; parameter must be different for each driver.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;username&lt;/td&gt;
+&lt;td&gt;Username for connecting to the backend storage array. This parameter is ignored.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;password&lt;/td&gt;
+&lt;td&gt;Password for connecting to to the backend storage array. This parameter is ignored.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;intendedEndpoint&lt;/td&gt;
+&lt;td&gt;HTTPS REST API endpoint of the backend storage array.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;endpoint&lt;/td&gt;
+&lt;td&gt;HTTPS localhost endpoint that the authorization sidecar will listen on.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;https://localhost:9400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;systemID&lt;/td&gt;
+&lt;td&gt;System ID of the backend storage array.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;insecure&lt;/td&gt;
+&lt;td&gt;A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;isDefault&lt;/td&gt;
+&lt;td&gt;A boolean that indicates if the array is the default array. This parameter is not used.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;default value from values.yaml&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Create the karavi-authorization-config secret using the following command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password&lt;/li&gt;
+&lt;li&gt;For PowerScale, the &lt;em&gt;systemID&lt;/em&gt; will be the &lt;em&gt;clusterName&lt;/em&gt; of the array.
+&lt;ul&gt;
+&lt;li&gt;The &lt;em&gt;isilon-creds&lt;/em&gt; secret has a &lt;em&gt;mountEndpoint&lt;/em&gt; parameter which should not be updated by the user. This parameter is updated and used when the driver has been injected with &lt;a href=&#34;https://github.com/dell/karavi-authorization&#34;&gt;CSM-Authorization&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Create the proxy-server-root-certificate secret.&lt;/p&gt;
+&lt;p&gt;If running in &lt;em&gt;insecure&lt;/em&gt; mode, create the secret with empty data:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-literal=rootCertificate.pem= -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Otherwise, create the proxy-server-root-certificate secret with the appropriate file:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Follow the steps below for additional configurations to one or more of the supported CSI drivers.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;powerflex&#34;&gt;PowerFlex&lt;/h4&gt;
+&lt;p&gt;Please refer to step 5 in the &lt;a href=&#34;../../csidriver/installation/helm/powerflex&#34;&gt;installation steps for PowerFlex&lt;/a&gt; to edit the parameters in samples/config.yaml file to communicate with the sidecar.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Update &lt;em&gt;endpoint&lt;/em&gt; to match the endpoint set in samples/secret/karavi-authorization-config.json&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create vxflexos-config secret using the following command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Please refer to step 9 in the &lt;a href=&#34;../../csidriver/installation/helm/powerflex&#34;&gt;installation steps for PowerFlex&lt;/a&gt; to edit the parameters in &lt;em&gt;myvalues.yaml&lt;/em&gt; file to communicate with the sidecar.&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Enable CSM for Authorization and provide &lt;em&gt;proxyHost&lt;/em&gt; address&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the CSI PowerFlex driver&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;powermax&#34;&gt;PowerMax&lt;/h4&gt;
+&lt;p&gt;Please refer to step 7 in the &lt;a href=&#34;../../csidriver/installation/helm/powermax&#34;&gt;installation steps for PowerMax&lt;/a&gt; to edit the parameters in &lt;em&gt;my-powermax-settings.yaml&lt;/em&gt; to communicate with the sidecar.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Update &lt;em&gt;endpoint&lt;/em&gt; to match the endpoint set in samples/secret/karavi-authorization-config.json&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enable CSM for Authorization and provide &lt;em&gt;proxyHost&lt;/em&gt; address&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the CSI PowerMax driver&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;powerscale&#34;&gt;PowerScale&lt;/h4&gt;
+&lt;p&gt;Please refer to step 5 in the &lt;a href=&#34;../../csidriver/installation/helm/isilon&#34;&gt;installation steps for PowerScale&lt;/a&gt; to edit the parameters in &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; to communicate with the sidecar.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Update &lt;em&gt;endpointPort&lt;/em&gt; to match the endpoint port number set in samples/secret/karavi-authorization-config.json&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, endpointPort acts as a default value. If endpointPort is not specified in &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, then it should be specified in the &lt;em&gt;endpoint&lt;/em&gt; parameter of samples/secret/secret.yaml.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Enable CSM for Authorization and provide &lt;em&gt;proxyHost&lt;/em&gt; address&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Please refer to step 6 in the &lt;a href=&#34;../../csidriver/installation/helm/isilon&#34;&gt;installation steps for PowerScale&lt;/a&gt; to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Update &lt;em&gt;endpoint&lt;/em&gt; to match the endpoint set in samples/secret/karavi-authorization-config.json&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Only add the endpoint port if it has not been set in &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Create the isilon-creds secret using the following command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the CSI PowerScale driver&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;updating-csm-for-authorization-proxy-server-configuration&#34;&gt;Updating CSM for Authorization Proxy Server Configuration&lt;/h2&gt;
+&lt;p&gt;CSM for Authorization has a subset of configuration parameters that can be updated dynamically:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;certificate.crtFile&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Path to the host certificate file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;certificate.keyFile&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Path to the host private key file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;certificate.rootCertificate&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Path to the root CA file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;web.sidecarproxyaddr&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;127.0.0.1:5000/sidecar-proxy:latest&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Docker registry address of the CSM for Authorization sidecar-proxy&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;web.jwtsigningsecret&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;secret&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;The secret used to sign JWT tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Updating configuration parameters can be done by editing the &lt;code&gt;karavi-config-secret&lt;/code&gt; on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;k3s kubectl -n karavi get secret/karavi-config-secret&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To update or add parameters, you must edit the base64 encoded data in the secret. The&lt;code&gt; karavi-config-secret&lt;/code&gt; data can be decoded like so:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;k3s kubectl -n karavi get secret/karavi-config-secret -o yaml | grep config.yaml | head -n 1 | awk &#39;{print $2}&#39; | base64 -d&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Save the output to a file or copy it to an editor to make changes. Once you are done with the changes, you must encode the data to base64. If your changes are in a file, you can encode it like so:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cat &amp;lt;file&amp;gt; | base64&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Copy the new, encoded data and edit the &lt;code&gt;karavi-config-secret&lt;/code&gt; with the new data. Run this command to edit the secret:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;k3s kubectl -n karavi edit secret/karavi-config-secret&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Replace the data in &lt;code&gt;config.yaml&lt;/code&gt; under the &lt;code&gt;data&lt;/code&gt; field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are updating the signing secret, the tenants need to be updated with new tokens via the &lt;code&gt;karavictl generate token&lt;/code&gt; command like so:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot; | jq -r &#39;.Token&#39; &amp;gt; kubectl -n $namespace apply -f -&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;csm-for-authorization-proxy-server-dynamic-configuration-settings&#34;&gt;CSM for Authorization Proxy Server Dynamic Configuration Settings&lt;/h2&gt;
+&lt;p&gt;Some settings are not stored in the &lt;code&gt;karavi-config-secret&lt;/code&gt; but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM for Authorization logging settings during runtime, run the below command on the K3s cluster, make your changes, and save the updated configmap data.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;k3s kubectl -n karavi edit configmap/csm-config-params
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/&amp;lt;release_name&amp;gt;-config-params
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Using PowerFlex as an example, &lt;code&gt;kubectl -n vxflexos edit configmap/vxflexos-config-params&lt;/code&gt; can be used to update the logging level of the sidecar-proxy and the driver.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>V3: Uninstallation</title>
       <link>https://dell.github.io/csm-docs/v3/authorization/uninstallation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -501,6 +890,46 @@ sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMI
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uninstalling-the-sidecar-proxy-in-the-csi-driver&#34;&gt;Uninstalling the sidecar-proxy in the CSI Driver&lt;/h2&gt;
 &lt;p&gt;To uninstall the sidecar-proxy in the CSI Driver, &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../deployment&#34;&gt;reinstall&lt;/a&gt; the driver using the original configuration secret.&lt;/p&gt;
 
+      </description>
+    </item>
+    
+    <item>
+      <title>V3: Upgrade</title>
+      <link>https://dell.github.io/csm-docs/v3/authorization/upgrade/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/authorization/upgrade/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Upgrading the CSM for Authorization proxy server&lt;/li&gt;
+&lt;li&gt;Upgrading the Dell EMC CSI drivers with CSM for Authorization enabled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h3&gt;
+&lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To update the rpm package on the system, run the below command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rpm -Uvh karavi-authorization-&amp;lt;new_version&amp;gt;.x86_64.rpm --nopreun --nopostun
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rpm -qa | grep karavi
+k3s kubectl version
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The above steps manage install and upgrade of all dependencies that are required by the CSM for Authorization proxy server.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;upgrading-dell-emc-csi-drivers-with-csm-for-authorization-enabled&#34;&gt;Upgrading Dell EMC CSI Driver(s) with CSM for Authorization enabled&lt;/h3&gt;
+&lt;p&gt;Given a setup where the CSM for Authorization proxy server is already upgraded to the latest version, follow the upgrade instructions for the applicable CSI Driver(s) to upgrade the driver and the CSM for Authorization sidecar&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../../csidriver/upgradation/drivers/powerflex/&#34;&gt;Upgrade PowerFlex CSI driver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../csidriver/upgradation/drivers/powermax/&#34;&gt;Upgrade PowerMax CSI driver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../csidriver/upgradation/drivers/isilon/&#34;&gt;Upgrade PowerScale CSI driver&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;rollback&#34;&gt;Rollback&lt;/h2&gt;
+&lt;p&gt;This section outlines the rollback steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
+&lt;h3 id=&#34;rollback-csm-for-authorization-proxy-server&#34;&gt;Rollback CSM for Authorization proxy server&lt;/h3&gt;
+&lt;p&gt;To rollback the rpm package on the system, run the below command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rpm -Uvh --oldpackage karavi-authorization-&amp;lt;old_version&amp;gt;.x86_64.rpm --nopreun --nopostun
+&lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
     
@@ -1087,6 +1516,7 @@ data:
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-inject-leaves-the-vxflexos-controller-in-a-pending-state&#34;&gt;Running &lt;code&gt;karavictl inject&lt;/code&gt; leaves the vxflexos-controller in a &lt;code&gt;Pending&lt;/code&gt; state&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-inject-leaves-the-powermax-controller-in-a-pending-state&#34;&gt;Running &lt;code&gt;karavictl inject&lt;/code&gt; leaves the powermax-controller in a &lt;code&gt;Pending&lt;/code&gt; state&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-inject-leaves-the-isilon-controller-in-a-pending-state&#34;&gt;Running &lt;code&gt;karavictl inject&lt;/code&gt; leaves the isilon-controller in a &lt;code&gt;Pending&lt;/code&gt; state&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &lt;code&gt;karavictl tenant&lt;/code&gt; commands result in an HTTP 504 error&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
@@ -1265,6 +1695,16 @@ isilon-node-gx5pk                    3/3     Running   3          8m3s
 isilon-node-k5gwc                    3/3     Running   3          7m59s
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h3 id=&#34;running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &amp;ldquo;karavictl tenant&amp;rdquo; commands result in an HTTP 504 error&lt;/h3&gt;
+&lt;p&gt;This situation may occur if there are Iptables or other firewall rules preventing communication with the provided &lt;code&gt;&amp;lt;grpc-address&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ karavictl tenant list --addr &amp;lt;grpc-address&amp;gt;
+{
+  &amp;quot;ErrorMsg&amp;quot;: &amp;quot;rpc error: code = Unavailable desc = Gateway Timeout: HTTP status code 504; 
+  transport: received the unexpected content-type \&amp;quot;text/plain; charset=utf-8\&amp;quot;&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Consult with your system administrator or Iptables/firewall documentation. If there are rules in place to
+prevent communication with the &lt;code&gt;&amp;lt;grpc-address&amp;gt;&lt;/code&gt;, either new rules must be created or existing rules must be updated.&lt;/p&gt;
 
       </description>
     </item>

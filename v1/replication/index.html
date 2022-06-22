@@ -26,8 +26,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/csm-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.7c9197581bd225d2e7734e85ecdd541db5d95e4159700208b4947ed2f0efd8cd.css" as="style">
+<link href="/csm-docs/scss/main.min.7c9197581bd225d2e7734e85ecdd541db5d95e4159700208b4947ed2f0efd8cd.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -90,13 +90,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.2.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
 	
 </div>
 
@@ -116,7 +116,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.cb52f5c5f023dd8a54b02584d187f9ed.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -149,7 +149,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.cb52f5c5f023dd8a54b02584d187f9ed.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -319,6 +319,14 @@
           
           
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1deploymentcsmoperatormodulesauthorization" href="/csm-docs/v1/deployment/csmoperator/modules/authorization/">Authorization</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1deploymentcsmoperatormodulesreplication" href="/csm-docs/v1/deployment/csmoperator/modules/replication/">Replication</a>
         
       
       
@@ -1935,53 +1943,53 @@ applications in case of both planned and unplanned migration.</p>
 <thead>
 <tr>
 <th>Capability</th>
-<th align="center">PowerScale</th>
-<th align="center">Unity</th>
-<th align="center">PowerStore</th>
-<th align="center">PowerFlex</th>
 <th align="center">PowerMax</th>
+<th align="center">PowerStore</th>
+<th align="center">PowerScale</th>
+<th align="center">PowerFlex</th>
+<th align="center">Unity</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Replicate data using native storage array based replication</td>
 <td align="center">yes</td>
-<td align="center">no</td>
+<td align="center">yes</td>
 <td align="center">yes</td>
 <td align="center">no</td>
-<td align="center">yes</td>
+<td align="center">no</td>
 </tr>
 <tr>
 <td>Create <code>PersistentVolume</code> objects in the cluster representing the replicated volume</td>
 <td align="center">yes</td>
-<td align="center">no</td>
+<td align="center">yes</td>
 <td align="center">yes</td>
 <td align="center">no</td>
-<td align="center">yes</td>
+<td align="center">no</td>
 </tr>
 <tr>
 <td>Create <code>DellCSIReplicationGroup</code> objects in the cluster</td>
 <td align="center">yes</td>
-<td align="center">no</td>
+<td align="center">yes</td>
 <td align="center">yes</td>
 <td align="center">no</td>
-<td align="center">yes</td>
+<td align="center">no</td>
 </tr>
 <tr>
 <td>Failover &amp; Reprotect applications using the replicated volumes</td>
 <td align="center">yes</td>
-<td align="center">no</td>
+<td align="center">yes</td>
 <td align="center">yes</td>
 <td align="center">no</td>
-<td align="center">yes</td>
+<td align="center">no</td>
 </tr>
 <tr>
 <td>Provides a command line utility - <a href="tools">repctl</a> for configuring &amp; managing replication related resources across multiple clusters</td>
 <td align="center">yes</td>
-<td align="center">no</td>
+<td align="center">yes</td>
 <td align="center">yes</td>
 <td align="center">no</td>
-<td align="center">yes</td>
+<td align="center">no</td>
 </tr>
 </tbody>
 </table>
@@ -2142,15 +2150,15 @@ the objects still exist in pairs.</p>
 </thead>
 <tbody>
 <tr>
-<td>Asynchronous replication of PVs accross K8s clusters</td>
+<td>Asynchronous replication of PVs accross or single K8s clusters</td>
 <td>yes</td>
-<td>yes</td>
+<td>yes (block)</td>
 <td>yes</td>
 <td>no</td>
 <td>no</td>
 </tr>
 <tr>
-<td>Synchronous replication of PVs accross K8s clusters</td>
+<td>Synchronous replication of PVs accross or single  K8s clusters</td>
 <td>yes</td>
 <td>no</td>
 <td>no</td>
@@ -2158,10 +2166,10 @@ the objects still exist in pairs.</p>
 <td>no</td>
 </tr>
 <tr>
-<td>Single cluster (stretched) mode replication</td>
+<td>Metro replication single (stretched) cluster</td>
 <td>yes</td>
-<td>yes</td>
-<td>yes</td>
+<td>no</td>
+<td>no</td>
 <td>no</td>
 <td>no</td>
 </tr>
@@ -2196,24 +2204,6 @@ the objects still exist in pairs.</p>
 <td>1.21, 1.22, 1.23</td>
 </tr>
 <tr>
-<td>CSI Driver</td>
-<td>2.x</td>
-<td>2.x</td>
-<td>2.2+</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Platforms</th>
-<th>PowerMax</th>
-<th>PowerStore</th>
-<th>PowerScale</th>
-</tr>
-</thead>
-<tbody>
-<tr>
 <td>RedHat Openshift</td>
 <td>4.8, 4.9</td>
 <td>4.8, 4.9</td>
@@ -2221,7 +2211,7 @@ the objects still exist in pairs.</p>
 </tr>
 <tr>
 <td>CSI Driver</td>
-<td>2.2+</td>
+<td>2.x</td>
 <td>2.x</td>
 <td>2.2+</td>
 </tr>
@@ -2515,6 +2505,8 @@ can exercise the general Disaster Recovery workflows -</p>
                     </h5>
                     <p>Dell Container Storage Modules (CSM) for Replication Uninstallation</p>
                 </div>
+            
+        
             
         
             

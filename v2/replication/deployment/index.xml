@@ -55,7 +55,14 @@ kubectl create ns dell-replication-controller
 &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy and  modify values.yaml file if you wish to customize your deployment in any way&lt;/span&gt;
 cp ../helm/csm-replication/values.yaml ./myvalues.yaml
 bash scripts/install.sh --values ./myvalues.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This script will do the following:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: Current installation method allows you to specify custom &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; entry to be appended to controller&amp;rsquo;s &lt;code&gt;/etc/hosts&lt;/code&gt; file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server&amp;rsquo;s address.
+The feature can be enabled by modifying &lt;code&gt;values.yaml&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-hostAliases:&#34; data-lang=&#34;hostAliases:&#34;&gt;enableHostAliases: true
+hostName: &amp;quot;foo.bar&amp;quot;
+ip: &amp;quot;10.10.10.10&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;p&gt;This script will do the following:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Install &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; CRD in your cluster&lt;/li&gt;
 &lt;li&gt;Install &lt;code&gt;dell-replication-controller&lt;/code&gt;&lt;/li&gt;
@@ -72,9 +79,9 @@ bash scripts/install.sh --values ./myvalues.yaml
 &lt;ol&gt;
 &lt;li&gt;CSI driver for PowerMax&lt;/li&gt;
 &lt;li&gt;CSI driver for PowerStore&lt;/li&gt;
+&lt;li&gt;CSI driver for PowerScale&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Please follow the steps outlined &lt;a href=&#34;../powermax&#34;&gt;here&lt;/a&gt; for enabling replication for PowerMax &amp;amp; &lt;a href=&#34;../powerstore&#34;&gt;here&lt;/a&gt; for PowerStore during
-the driver installation.&lt;/p&gt;
+&lt;p&gt;Please follow the steps outlined in &lt;a href=&#34;../powermax&#34;&gt;PowerMax&lt;/a&gt;, &lt;a href=&#34;../powerstore&#34;&gt;PowerStore&lt;/a&gt; or &lt;a href=&#34;../powerscale&#34;&gt;PowerScale&lt;/a&gt; pages during the driver installation.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the CSM Replication controller installation process.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -119,7 +126,8 @@ CSM Replication controller supports following log levels:&lt;/p&gt;
 the respective CSM Replication Controllers.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Important: Direct network visibility between clusters required for CSM-Replication to work.
-Cluster-1&amp;rsquo;s API URL has to be pingable from cluster-2 pods and vice versa.&lt;/p&gt;
+Cluster-1&amp;rsquo;s API URL has to be pingable from cluster-2 pods and vice versa. If private networks are used and/or DNS is not set up properly - you may need to modify &lt;code&gt;/etc/hosts&lt;/code&gt; file from within controller&amp;rsquo;s pod.
+This can be achieved by using helm installation method. Refer to the &lt;a href=&#34;../installation/#using-the-installation-script&#34;&gt;link&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: If you are using a single stretched cluster, then you can skip all the following steps&lt;/p&gt;
@@ -282,8 +290,7 @@ In case of a single stretched cluster, it should be always set to &lt;code&gt;se
 &lt;p&gt;Note: You still need to create a pair of storage classes even while using a single stretched cluster&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;driver-specific-parameters&#34;&gt;Driver specific parameters&lt;/h3&gt;
-&lt;p&gt;Please refer to the driver specific sections for &lt;a href=&#34;../powermax/#creating-storage-classes&#34;&gt;PowerMax&lt;/a&gt; &amp;amp; &lt;a href=&#34;../powerstore/#creating-storage-classes&#34;&gt;PowerStore&lt;/a&gt; for a detailed
-list of parameters.&lt;/p&gt;
+&lt;p&gt;Please refer to the driver specific sections for &lt;a href=&#34;../powermax/#creating-storage-classes&#34;&gt;PowerMax&lt;/a&gt;, &lt;a href=&#34;../powerstore/#creating-storage-classes&#34;&gt;PowerStore&lt;/a&gt; or &lt;a href=&#34;../powerscale/#creating-storage-classes&#34;&gt;PowerScale&lt;/a&gt; for a detailed list of parameters.&lt;/p&gt;
 &lt;h3 id=&#34;pv-sync-deletion&#34;&gt;PV sync Deletion&lt;/h3&gt;
 &lt;p&gt;The dell-csm-replicator supports &amp;lsquo;sync deletion&amp;rsquo; of replicated PV resources i.e when a replication enabled PV is deleted its corresponding source or target PV can also be deleted.&lt;/p&gt;
 &lt;p&gt;The decision to whether or not sync delete the corresponding PV depends on a Storage Class parameter which can be configured by the user.&lt;/p&gt;
@@ -342,7 +349,7 @@ then the storage class definitions in both the clusters would look like -&lt;/p&
         
         &lt;h2 id=&#34;enabling-replication-in-csi-powermax&#34;&gt;Enabling Replication In CSI PowerMax&lt;/h2&gt;
 &lt;p&gt;Container Storage Modules (CSM) Replication sidecar is a helper container that is installed alongside a CSI driver to facilitate replication functionality. Such CSI drivers must implement &lt;code&gt;dell-csi-extensions&lt;/code&gt; calls.&lt;/p&gt;
-&lt;p&gt;CSI driver for Dell EMC PowerMax supports necessary extension calls from &lt;code&gt;dell-csi-extensions&lt;/code&gt;. To be able to provision replicated volumes you would need to do the steps described in the following sections.&lt;/p&gt;
+&lt;p&gt;CSI driver for Dell PowerMax supports necessary extension calls from &lt;code&gt;dell-csi-extensions&lt;/code&gt;. To be able to provision replicated volumes you would need to do the steps described in the following sections.&lt;/p&gt;
 &lt;h3 id=&#34;before-installation&#34;&gt;Before Installation&lt;/h3&gt;
 &lt;h4 id=&#34;on-storage-array&#34;&gt;On Storage Array&lt;/h4&gt;
 &lt;p&gt;Configure SRDF connection between multiple PowerMax instances. Follow instructions by PowerMax storage for creating the SRDF Groups between a set of arrays.&lt;/p&gt;
@@ -401,8 +408,7 @@ classes on both source and target clusters.&lt;/p&gt;
 &lt;p&gt;Pair of storage classes on the source and target clusters would be essentially &lt;code&gt;mirrored&lt;/code&gt; copies of one another.
 You can create them manually or with help from &lt;code&gt;repctl&lt;/code&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;manual-storage-class-creation&#34;&gt;Manual Storage Class Creation&lt;/h4&gt;
-&lt;p&gt;You can find sample replication enabled storage class in the driver repository
-at &lt;code&gt;./samples/storageclass/powermax_srdf.yaml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can find sample replication enabled storage class in the driver repository &lt;a href=&#34;https://github.com/dell/csi-powermax/blob/main/samples/storageclass/powermax_srdf.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;It will look like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;storage.k8s.io/v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;StorageClass&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -502,7 +508,7 @@ your Kubernetes clusters with &lt;code&gt;kubectl&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can simplify storage class creation by creating a pair of mirrored storage classes in both clusters
 (using a single storage class configuration) in one command.&lt;/p&gt;
 &lt;p&gt;To create storage classes with &lt;code&gt;repctl&lt;/code&gt; you need to fill up the config with necessary information.
-You can find an example in &lt;code&gt;repctl/examples/powermax_example_values.yaml&lt;/code&gt;, copy it, and modify it to your needs.&lt;/p&gt;
+You can find an example &lt;a href=&#34;https://github.com/dell/csm-replication/blob/main/repctl/examples/powermax_example_values.yaml&#34;&gt;here&lt;/a&gt;, copy it, and modify it to your needs.&lt;/p&gt;
 &lt;p&gt;If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s use the same example from manual installation and see how config would look like&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sourceClusterID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -529,7 +535,7 @@ You can find an example in &lt;code&gt;repctl/examples/powermax_example_values.y
 added your clusters to repctl via the &lt;code&gt;add&lt;/code&gt; command before.&lt;/p&gt;
 &lt;p&gt;To create storage classes just run &lt;code&gt;./repctl create sc --from-config &amp;lt;config-file&amp;gt;&lt;/code&gt; and storage classes
 would be applied to both clusters.&lt;/p&gt;
-&lt;p&gt;After creating storage classes you can make sure they are in place by using &lt;code&gt;./repctl list storageclasses&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;After creating storage classes you can make sure they are in place by using &lt;code&gt;./repctl get storageclasses&lt;/code&gt; command.&lt;/p&gt;
 &lt;h3 id=&#34;provisioning-replicated-volumes&#34;&gt;Provisioning Replicated Volumes&lt;/h3&gt;
 &lt;p&gt;After installing the driver and creating storage classes you are good to create volumes using newly
 created storage classes.&lt;/p&gt;
@@ -632,6 +638,162 @@ The storage protection group on the array can be deleted only if it has no volum
     </item>
     
     <item>
+      <title>V2: PowerScale</title>
+      <link>https://dell.github.io/csm-docs/v2/replication/deployment/powerscale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/replication/deployment/powerscale/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;enabling-replication-in-csi-powerscale&#34;&gt;Enabling Replication in CSI PowerScale&lt;/h2&gt;
+&lt;p&gt;Container Storage Modules (CSM) Replication sidecar is a helper container that is installed alongside a CSI driver to facilitate replication functionality. Such CSI drivers must implement &lt;code&gt;dell-csi-extensions&lt;/code&gt; calls.&lt;/p&gt;
+&lt;p&gt;CSI driver for Dell PowerScale supports necessary extension calls from &lt;code&gt;dell-csi-extensions&lt;/code&gt;. To be able to provision replicated volumes you would need to do the steps described in the following sections.&lt;/p&gt;
+&lt;h3 id=&#34;before-installation&#34;&gt;Before Installation&lt;/h3&gt;
+&lt;h4 id=&#34;on-storage-array&#34;&gt;On Storage Array&lt;/h4&gt;
+&lt;p&gt;Ensure that SyncIQ service is enabled on both arrays, you can do that by navigating to &lt;code&gt;SyncIQ&lt;/code&gt; section under &lt;code&gt;Data protection&lt;/code&gt; tab.&lt;/p&gt;
+&lt;p&gt;The current implementation supports one-to-one replication so you need to ensure that one array can reach another and vice versa.&lt;/p&gt;
+&lt;h5 id=&#34;synciq-encryption&#34;&gt;SyncIQ encryption&lt;/h5&gt;
+&lt;p&gt;If you wish to use &lt;code&gt;SyncIQ&lt;/code&gt; encryption you should ensure that you&amp;rsquo;ve added a server certificate first by navigating to &lt;code&gt;Data protection-&amp;gt;SyncIQ-&amp;gt;Settings&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;After adding the certificate, you can choose to use it by checking &lt;code&gt;Encrypt SyncIQ connection&lt;/code&gt; from the dropdown.&lt;/p&gt;
+&lt;p&gt;After that, you can add similar certificates of other arrays in &lt;code&gt;SyncIQ-&amp;gt; Certificates&lt;/code&gt;, and ensure you&amp;rsquo;ve added the certificate of the array you want to replicate to.&lt;/p&gt;
+&lt;p&gt;Similar steps should be done in the reverse direction, so &lt;code&gt;array-1&lt;/code&gt; has the &lt;code&gt;array-2&lt;/code&gt; certificate visible in &lt;code&gt;SyncIQ-&amp;gt; Certificates&lt;/code&gt; tab and &lt;code&gt;array-2&lt;/code&gt; has the &lt;code&gt;array-1&lt;/code&gt; certificate visible in its own &lt;code&gt;SyncIQ-&amp;gt;Certificates&lt;/code&gt; tab.&lt;/p&gt;
+&lt;h4 id=&#34;in-kubernetes&#34;&gt;In Kubernetes&lt;/h4&gt;
+&lt;p&gt;Ensure you installed CRDs and replication controller in your clusters.&lt;/p&gt;
+&lt;p&gt;To verify you have everything in order you can execute the following commands:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Check controller pods
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl get pods -n dell-replication-controller
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Pods should be &lt;code&gt;READY&lt;/code&gt; and &lt;code&gt;RUNNING&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Check that controller config map is properly populated
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;data&lt;/code&gt; field should be properly populated with cluster-id of your choosing and, if using multi-cluster
+installation, your &lt;code&gt;targets:&lt;/code&gt; parameter should be populated by a list of target clusters IDs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you don&amp;rsquo;t have something installed or something is out-of-place, please refer to installation instructions in &lt;a href=&#34;../install-repctl&#34;&gt;installation-repctl&lt;/a&gt; or &lt;a href=&#34;../installation&#34;&gt;installation&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;installing-driver-with-replication-module&#34;&gt;Installing Driver With Replication Module&lt;/h3&gt;
+&lt;p&gt;To install the driver with replication enabled, you need to ensure you have set
+helm parameter &lt;code&gt;controller.replication.enabled&lt;/code&gt; in your copy of example &lt;code&gt;values.yaml&lt;/code&gt; file
+(usually called &lt;code&gt;my-isilon-settings.yaml&lt;/code&gt;, &lt;code&gt;myvalues.yaml&lt;/code&gt; etc.).&lt;/p&gt;
+&lt;p&gt;Here is an example of what that would look like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;...&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# controller: configure controller specific parameters&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;...&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# replication: allows to configure replication&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;dellemc/dell-csi-replicator&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;v1&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;.2.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replicationContextPrefix&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;powerscale&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replicationPrefix&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;replication.storage.dell.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;...&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can leave other parameters like &lt;code&gt;image&lt;/code&gt;, &lt;code&gt;replicationContextPrefix&lt;/code&gt;, and &lt;code&gt;replicationPrefix&lt;/code&gt; as they are.&lt;/p&gt;
+&lt;p&gt;After enabling the replication module, you can continue to install the CSI driver for PowerScale following the usual installation procedure. Just ensure you&amp;rsquo;ve added the necessary array connection information to secret.&lt;/p&gt;
+&lt;h5 id=&#34;synciq-encryption-1&#34;&gt;SyncIQ encryption&lt;/h5&gt;
+&lt;p&gt;If you plan to use encryption, you need to set &lt;code&gt;replicationCertificateID&lt;/code&gt; in the array connection secret. To check the ID of the certificate for the cluster, you can navigate to &lt;code&gt;Data protection-&amp;gt;SyncIQ-&amp;gt;Settings,&lt;/code&gt; find your certificate in the &lt;code&gt;Server Certificates&lt;/code&gt; section and then push the &lt;code&gt;View/Edit&lt;/code&gt; button. It will open a dialog that should contain the  &lt;code&gt;Id&lt;/code&gt; field. Use the value of that field to set &lt;code&gt;replicationCertificateID&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt; you need to install your driver on ALL clusters where you want to use replication. Both arrays must be accessible from each cluster.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;creating-storage-classes&#34;&gt;Creating Storage Classes&lt;/h3&gt;
+&lt;p&gt;To provision replicated volumes, you need to create adequately configured storage classes on both the source and target clusters.&lt;/p&gt;
+&lt;p&gt;A pair of storage classes on the source, and target clusters would be essentially &lt;code&gt;mirrored&lt;/code&gt; copies of one another.
+You can create them manually or with the help of &lt;code&gt;repctl&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;manual-storage-class-creation&#34;&gt;Manual Storage Class Creation&lt;/h4&gt;
+&lt;p&gt;You can find a sample replication enabled storage class in the driver repository &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/main/samples/storageclass/isilon-replication.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It will look like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;storage.k8s.io/v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;StorageClass&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;isilon-replication&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;provisioner&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;csi-isilon.dellemc.com&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;reclaimPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Delete&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allowVolumeExpansion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeBindingMode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Immediate&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;parameters&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/isReplicationEnabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/remoteStorageClassName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;isilon-replication&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/remoteClusterID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;target&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/remoteSystem&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/rpo&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;Five_Minutes&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/ignoreNamespaces&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/volumeGroupPrefix&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;csi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;AccessZone&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;System&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;IsiPath&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/ifs/data/csi&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;RootClientEnabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ClusterName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;cluster&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;-1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Let&amp;rsquo;s go through each parameter and what it means:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;replication.storage.dell.com/isReplicationEnabled&lt;/code&gt; if set to &lt;code&gt;true&lt;/code&gt;, will mark this storage class as replication enabled,
+just leave it as &lt;code&gt;true&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;replication.storage.dell.com/remoteStorageClassName&lt;/code&gt; points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;replication.storage.dell.com/remoteClusterID&lt;/code&gt; represents the ID of a remote cluster. It is the same id you put in the replication controller config map.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;replication.storage.dell.com/remoteSystem&lt;/code&gt; is the name of the remote system that should match whatever &lt;code&gt;clusterName&lt;/code&gt; you called it in &lt;code&gt;isilon-creds&lt;/code&gt; secret.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;replication.storage.dell.com/rpo&lt;/code&gt; is an acceptable amount of data, which is measured in units of time, that may be lost due to a failure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE: Available RPO values &amp;ldquo;Five_Minutes&amp;rdquo;, &amp;ldquo;Fifteen_Minutes&amp;rdquo;, &amp;ldquo;Thirty_Minutes&amp;rdquo;, &amp;ldquo;One_Hour&amp;rdquo;, &amp;ldquo;Six_Hours&amp;rdquo;, &amp;ldquo;Twelve_Hours&amp;rdquo;, &amp;ldquo;One_Day&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;replication.storage.dell.com/ignoreNamespaces&lt;/code&gt;, if set to &lt;code&gt;true&lt;/code&gt; PowerScale driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;replication.storage.dell.com/volumeGroupPrefix&lt;/code&gt; represents what string would be appended to the volume group name to differentiate them.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Accesszone&lt;/code&gt; is the name of the access zone a volume can be created in&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IsiPath&lt;/code&gt; is the base path for the volumes to be created on the PowerScale cluster&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RootClientEnabled&lt;/code&gt; determines whether the driver should enable root squashing or not&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ClusterName&lt;/code&gt; name of PowerScale cluster, where PV will be provisioned, specified as it was listed in &lt;code&gt;isilon-creds&lt;/code&gt; secret.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After figuring out how storage classes would look, you just need to go and apply them to your Kubernetes clusters with &lt;code&gt;kubectl&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;storage-class-creation-with-repctl&#34;&gt;Storage Class creation with &lt;code&gt;repctl&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can simplify storage class creation by creating a pair of mirrored storage classes in both clusters
+(using a single storage class configuration) in one command.&lt;/p&gt;
+&lt;p&gt;To create storage classes with &lt;code&gt;repctl&lt;/code&gt; you need to fill up the config with necessary information.
+You can find an example &lt;a href=&#34;https://github.com/dell/csm-replication/blob/main/repctl/examples/powerscale_example_values.yaml&#34;&gt;here&lt;/a&gt;, copy it, and modify it to your needs.&lt;/p&gt;
+&lt;p&gt;If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s use the same example from manual installation and see what config would look like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sourceClusterID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;source&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;targetClusterID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;target&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;isilon-replication&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;isilon&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;reclaimPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Delete&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replicationPrefix&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;replication.storage.dell.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;parameters&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;rpo&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Five_Minutes&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ignoreNamespaces&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeGroupPrefix&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;csi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;accessZone&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;System&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isiPath&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/ifs/data/csi&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;rootClientEnabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;clusterName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;source&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;target&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;NOTE: both storage classes expected to use access zone with same name&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;After preparing the config, you can apply it to both clusters with &lt;code&gt;repctl&lt;/code&gt;. Before you do this, ensure you&amp;rsquo;ve added your clusters to &lt;code&gt;repctl&lt;/code&gt; via the &lt;code&gt;add&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;To create storage classes just run &lt;code&gt;./repctl create sc --from-config &amp;lt;config-file&amp;gt;&lt;/code&gt; and storage classes would be applied to both clusters.&lt;/p&gt;
+&lt;p&gt;After creating storage classes you can make sure they are in place by using &lt;code&gt;./repctl get storageclasses&lt;/code&gt; command.&lt;/p&gt;
+&lt;h3 id=&#34;provisioning-replicated-volumes&#34;&gt;Provisioning Replicated Volumes&lt;/h3&gt;
+&lt;p&gt;After installing the driver and creating storage classes, you are good to create volumes using newly
+created storage classes.&lt;/p&gt;
+&lt;p&gt;On your source cluster, create a PersistentVolumeClaim using one of the replication-enabled Storage Classes.
+The CSI PowerScale driver will create a volume on the array, add it to a VolumeGroup and configure replication
+using the parameters provided in the replication enabled Storage Class.&lt;/p&gt;
+&lt;h3 id=&#34;supported-replication-actions&#34;&gt;Supported Replication Actions&lt;/h3&gt;
+&lt;p&gt;The CSI PowerScale driver supports the following list of replication actions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;FAILOVER_REMOTE&lt;/li&gt;
+&lt;li&gt;UNPLANNED_FAILOVER_LOCAL&lt;/li&gt;
+&lt;li&gt;REPROTECT_LOCAL&lt;/li&gt;
+&lt;li&gt;SUSPEND&lt;/li&gt;
+&lt;li&gt;RESUME&lt;/li&gt;
+&lt;li&gt;SYNC&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>V2: PowerStore</title>
       <link>https://dell.github.io/csm-docs/v2/replication/deployment/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -641,10 +803,8 @@ The storage protection group on the array can be deleted only if it has no volum
         
         
         &lt;h2 id=&#34;enabling-replication-in-csi-powerstore&#34;&gt;Enabling Replication In CSI PowerStore&lt;/h2&gt;
-&lt;p&gt;For the Container Storage Modules (CSM) for Replication sidecar container to work properly it needs to be installed
-alongside CSI driver that supports replication &lt;code&gt;dell-csi-extensions&lt;/code&gt; calls.&lt;/p&gt;
-&lt;p&gt;CSI driver for Dell EMC PowerStore supports necessary extension calls from &lt;code&gt;dell-csi-extensions&lt;/code&gt; and to be able to
-provision replicated volumes you would need to do the steps described in the following sections.&lt;/p&gt;
+&lt;p&gt;Container Storage Modules (CSM) Replication sidecar is a helper container that is installed alongside a CSI driver to facilitate replication functionality. Such CSI drivers must implement &lt;code&gt;dell-csi-extensions&lt;/code&gt; calls.&lt;/p&gt;
+&lt;p&gt;CSI driver for Dell PowerStore supports necessary extension calls from &lt;code&gt;dell-csi-extensions&lt;/code&gt;. To be able to provision replicated volumes you would need to do the steps described in the following sections.&lt;/p&gt;
 &lt;h3 id=&#34;before-installation&#34;&gt;Before Installation&lt;/h3&gt;
 &lt;h4 id=&#34;on-storage-array&#34;&gt;On Storage Array&lt;/h4&gt;
 &lt;p&gt;Be sure to configure replication between multiple PowerStore instances using instructions provided by
@@ -697,7 +857,7 @@ classes on both source and target clusters.&lt;/p&gt;
 You can create them manually or with help from &lt;code&gt;repctl&lt;/code&gt;.&lt;/p&gt;
 &lt;h4 id=&#34;manual-storage-class-creation&#34;&gt;Manual Storage Class Creation&lt;/h4&gt;
 &lt;p&gt;You can find sample replication enabled storage class in the driver repository
-at &lt;code&gt;./samples/storageclass/powerstore-replication.yaml&lt;/code&gt;.&lt;/p&gt;
+&lt;a href=&#34;https://github.com/dell/csi-powerstore/blob/main/samples/storageclass/powerstore-replication.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;It will look like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;storage.k8s.io/v1&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;StorageClass&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -780,7 +940,7 @@ your Kubernetes clusters with &lt;code&gt;kubectl&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can simplify storage class creation by creating a pair of mirrored storage classes in both clusters
 (using a single storage class configuration) in one command.&lt;/p&gt;
 &lt;p&gt;To create storage classes with &lt;code&gt;repctl&lt;/code&gt; you need to fill up the config with necessary information.
-You can find an example in &lt;code&gt;repctl/examples/powerstore_example_values.yaml&lt;/code&gt;, copy it, and modify it to your needs.&lt;/p&gt;
+You can find an example in &lt;a href=&#34;https://github.com/dell/csm-replication/blob/main/repctl/examples/powerstore_example_values.yaml&#34;&gt;here&lt;/a&gt;, copy it, and modify it to your needs.&lt;/p&gt;
 &lt;p&gt;If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s use the same example from manual installation and see how config would look like&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sourceClusterID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -803,7 +963,7 @@ You can find an example in &lt;code&gt;repctl/examples/powerstore_example_values
 added your clusters to repctl via the &lt;code&gt;add&lt;/code&gt; command before.&lt;/p&gt;
 &lt;p&gt;To create storage classes just run &lt;code&gt;./repctl create sc --from-config &amp;lt;config-file&amp;gt;&lt;/code&gt; and storage classes
 would be applied to both clusters.&lt;/p&gt;
-&lt;p&gt;After creating storage classes you can make sure they are in place by using &lt;code&gt;./repctl list storageclasses&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;After creating storage classes you can make sure they are in place by using &lt;code&gt;./repctl get storageclasses&lt;/code&gt; command.&lt;/p&gt;
 &lt;h3 id=&#34;provisioning-replicated-volumes&#34;&gt;Provisioning Replicated Volumes&lt;/h3&gt;
 &lt;p&gt;After installing the driver and creating storage classes you are good to create volumes using newly
 created storage classes.&lt;/p&gt;

@@ -141,7 +141,7 @@
         
         
         &lt;p&gt;The CSI Driver for Dell EMC Unity and PowerScale supports VMware Tanzu and deployment of these Tanzu clusters is done using the VMware Tanzu supervisor cluster and supervisor namespace.&lt;/p&gt;
-&lt;p&gt;Currently, VMware Tanzu with normal configuration(without NAT) supports Kubernetes 1.20.
+&lt;p&gt;Currently, VMware Tanzu with normal configuration(without NAT) supports Kubernetes 1.20 and higher.
 The CSI driver can be installed on  this cluster using Helm. Installation of CSI drivers in Tanzu via Operator has not been qualified.&lt;/p&gt;
 &lt;p&gt;To login to the Tanzu cluster, download kubectl and kubectl vsphere binaries to any of the system&lt;/p&gt;
 &lt;p&gt;Refer: &lt;a href=&#34;https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-0F6E45C4-3CB1-4562-9370-686668519FCA.html&#34;&gt;https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-0F6E45C4-3CB1-4562-9370-686668519FCA.html&lt;/a&gt;&lt;/p&gt;

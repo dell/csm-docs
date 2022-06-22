@@ -9,30 +9,30 @@
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 
 <title>Authorization | Dell Technologies</title><meta property="og:title" content="Authorization" />
-<meta property="og:description" content="Installing Authorization via Dell CSM Operator
+<meta property="og:description" content="Pre-requisite for Installing Authorization via Dell CSM Operator
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/deployment/csmoperator/modules/authorization/" />
-<meta property="article:modified_time" content="2022-05-24T16:59:37-03:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Authorization">
-<meta itemprop="description" content="Installing Authorization via Dell CSM Operator
+<meta itemprop="description" content="Pre-requisite for Installing Authorization via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2022-05-24T16:59:37-03:00" />
-<meta itemprop="wordCount" content="95">
+<meta itemprop="dateModified" content="2022-06-22T16:36:23&#43;05:30" />
+<meta itemprop="wordCount" content="47">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Authorization"/>
-<meta name="twitter:description" content="Installing Authorization via Dell CSM Operator
+<meta name="twitter:description" content="Pre-requisite for Installing Authorization via Dell CSM Operator
 "/>
 
 
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/csm-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.7c9197581bd225d2e7734e85ecdd541db5d95e4159700208b4947ed2f0efd8cd.css" as="style">
+<link href="/csm-docs/scss/main.min.7c9197581bd225d2e7734e85ecdd541db5d95e4159700208b4947ed2f0efd8cd.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -95,13 +95,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.2.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
 	
 </div>
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.cb52f5c5f023dd8a54b02584d187f9ed.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -154,7 +154,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.cb52f5c5f023dd8a54b02584d187f9ed.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -324,6 +324,14 @@
           
           
           <a class="td-sidebar-link td-sidebar-link__page  active" id="m-csm-docsv1deploymentcsmoperatormodulesauthorization" href="/csm-docs/v1/deployment/csmoperator/modules/authorization/">Authorization</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1deploymentcsmoperatormodulesreplication" href="/csm-docs/v1/deployment/csmoperator/modules/replication/">Replication</a>
         
       
       
@@ -1870,16 +1878,6 @@
 
 
 
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#installing-authorization-via-dell-csm-operator">Installing Authorization via Dell CSM Operator</a>
-      <ul>
-        <li><a href="#install-authorization">Install Authorization</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-
 
 
 
@@ -1947,19 +1945,9 @@
 	<h1>Authorization</h1>
 
 	       
-	<h2 id="installing-authorization-via-dell-csm-operator">Installing Authorization via Dell CSM Operator</h2>
-<p>The Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.</p>
-<p>To deploy the Dell CSM Operator, follow the instructions available <a href="../../#installation">here</a>.</p>
-<p>There are <a href="https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale.yaml">sample manifests</a> provided which can be edited to do an easy installation of the driver along with the module.</p>
-<h3 id="install-authorization">Install Authorization</h3>
-<ol>
-<li>
-<p>Create the required Secrets as documented in the <a href="../../../../authorization/deployment/#configuring-a-dell-csi-driver">Helm chart procedure</a>.</p>
-</li>
-<li>
-<p>Follow the instructions available <a href="../../drivers/powerscale/#install-driver">here</a> to install the Dell CSI Driver via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable Authorization.</p>
-</li>
-</ol>
+	<p>The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Please note, Dell CSM operator currently ONLY supports deploying CSM Authorization sidecar/container.</p>
+<h2 id="pre-requisite">Pre-requisite</h2>
+<p>Follow the instructions available in CSM Authorization for <a href="../../../authorization/deployment/_index.md/#configuring-a-dell-csi-driver">Configuring a Dell CSI Driver with CSM for Authorization</a>.</p>
 
 	
 	

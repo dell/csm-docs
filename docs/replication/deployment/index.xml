@@ -56,11 +56,14 @@ kubectl create ns dell-replication-controller
 cp ../helm/csm-replication/values.yaml ./myvalues.yaml
 bash scripts/install.sh --values ./myvalues.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;Note: Current installation method allows you to specify custom &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; entry to be appended to controller&amp;rsquo;s &lt;code&gt;/etc/hosts&lt;/code&gt; file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server&amp;rsquo;s address.
+&lt;p&gt;Note: Current installation method allows you to specify custom &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; entries to be appended to controller&amp;rsquo;s &lt;code&gt;/etc/hosts&lt;/code&gt; file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server&amp;rsquo;s address.
 The feature can be enabled by modifying &lt;code&gt;values.yaml&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-hostAliases:&#34; data-lang=&#34;hostAliases:&#34;&gt;enableHostAliases: true
-hostName: &amp;quot;foo.bar&amp;quot;
-ip: &amp;quot;10.10.10.10&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-hostAliases:&#34; data-lang=&#34;hostAliases:&#34;&gt;- ip: &amp;quot;10.10.10.10&amp;quot;
+  hostnames: 
+    - &amp;quot;foo.bar&amp;quot;
+- ip: &amp;quot;10.10.10.11&amp;quot;
+  hostnames: 
+    - &amp;quot;foo.baz&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
 &lt;p&gt;This script will do the following:&lt;/p&gt;
 &lt;ol&gt;

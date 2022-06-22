@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/deployment/csmoperator/drivers/powerscale/" />
-<meta property="article:modified_time" content="2022-05-24T16:59:37-03:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerScale via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2022-05-24T16:59:37-03:00" />
-<meta itemprop="wordCount" content="821">
+<meta itemprop="dateModified" content="2022-06-22T16:36:23&#43;05:30" />
+<meta itemprop="wordCount" content="827">
 
 
 
@@ -31,8 +31,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" as="style">
-<link href="/csm-docs/scss/main.min.cbfbd43db7dbcdabe8b8c192af8ac625d7fc097ce24bb87c3dd7d3c4225e3869.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.7c9197581bd225d2e7734e85ecdd541db5d95e4159700208b4947ed2f0efd8cd.css" as="style">
+<link href="/csm-docs/scss/main.min.7c9197581bd225d2e7734e85ecdd541db5d95e4159700208b4947ed2f0efd8cd.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -95,13 +95,13 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.2.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.0.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
 	
 </div>
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.cb52f5c5f023dd8a54b02584d187f9ed.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -154,7 +154,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.cb52f5c5f023dd8a54b02584d187f9ed.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -324,6 +324,14 @@
           
           
           <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1deploymentcsmoperatormodulesauthorization" href="/csm-docs/v1/deployment/csmoperator/modules/authorization/">Authorization</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-csm-docsv1deploymentcsmoperatormodulesreplication" href="/csm-docs/v1/deployment/csmoperator/modules/replication/">Replication</a>
         
       
       
@@ -1875,6 +1883,7 @@
     <li><a href="#installing-csi-driver-for-powerscale-via-dell-csm-operator">Installing CSI Driver for PowerScale via Dell CSM Operator</a>
       <ul>
         <li><a href="#listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</a></li>
+        <li><a href="#prerequisite">Prerequisite</a></li>
         <li><a href="#install-driver">Install Driver</a></li>
       </ul>
     </li>
@@ -1956,7 +1965,7 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <h3 id="listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</h3>
 <p>User can query for all Dell CSI drivers using the following command:
 <code>kubectl get csm --all-namespaces</code></p>
-<h3 id="install-driver">Install Driver</h3>
+<h3 id="prerequisite">Prerequisite</h3>
 <ol>
 <li>
 <p>Create namespace.
@@ -2034,6 +2043,12 @@ Please refer <a href="../../../../csidriver/installation/helm/isilon/#certificat
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">cert-0</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></code></pre></div><p>Execute command: <code>kubectl create -f empty-secret.yaml</code></p>
+</li>
+</ol>
+<h3 id="install-driver">Install Driver</h3>
+<ol>
+<li>
+<p>Follow all the <a href="#prerequisite">prerequisites</a> above</p>
 </li>
 <li>
 <p>Create a CR (Custom Resource) for PowerScale using the sample files provided
