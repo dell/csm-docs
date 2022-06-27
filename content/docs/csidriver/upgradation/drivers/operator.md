@@ -15,7 +15,7 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 ### Using Installation Script
 1. Clone and checkout the required dell-csi-operator version using git clone -b <your-tag-version> https://github.com/dell/dell-csi-operator.git.
 2. cd dell-csi-operator
-4. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
+3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
 >Note: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
 
 ### Using OLM
