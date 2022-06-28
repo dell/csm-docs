@@ -24,7 +24,7 @@ The following third-party components are optionally installed in the specified n
 ## Install CSM Authorization
 
 **Steps**
-1. Run `git clone -b v1.3.0 https://github.com/dell/helm-charts` to clone the git repository.
+1. Run `git clone https://github.com/dell/helm-charts.git` to clone the git repository.
 
 2. Ensure that you have created a namespace where you want to install CSM Authorization. You can run `kubectl create namespace authorization` to create a new one.
 
