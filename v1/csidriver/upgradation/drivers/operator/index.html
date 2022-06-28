@@ -12,11 +12,11 @@
 <meta property="og:description" content="Upgrade Dell CSI Operator" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/csidriver/upgradation/drivers/operator/" />
-<meta property="article:modified_time" content="2022-05-24T16:59:37-03:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-06-28T12:53:49+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Dell CSI Operator">
 <meta itemprop="description" content="Upgrade Dell CSI Operator">
-<meta itemprop="dateModified" content="2022-05-24T16:59:37-03:00" />
-<meta itemprop="wordCount" content="228">
+<meta itemprop="dateModified" content="2022-06-28T12:53:49&#43;05:30" />
+<meta itemprop="wordCount" content="231">
 
 
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6bc4cc59013923178100c3d3bb3d8abc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -151,7 +151,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.24aab9a3823f231861a7ed02fd9ccc36.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6bc4cc59013923178100c3d3bb3d8abc.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1951,9 +1951,8 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 </ol>
 <h3 id="using-installation-script">Using Installation Script</h3>
 <ol>
-<li>Clone the <a href="https://github.com/dell/dell-csi-operator">Dell CSI Operator repository</a>.</li>
+<li>Clone and checkout the required dell-csi-operator version using git clone -b <your-tag-version> <a href="https://github.com/dell/dell-csi-operator.git">https://github.com/dell/dell-csi-operator.git</a>.</li>
 <li>cd dell-csi-operator</li>
-<li>git checkout dell-csi-operator-&lsquo;your-version&rsquo;</li>
 <li>Execute <code>bash scripts/install.sh --upgrade</code>  . This command will install the latest version of the operator.</li>
 </ol>
 <blockquote>
