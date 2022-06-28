@@ -112,7 +112,7 @@ The Karavictl CLI can be obtained directly from the [GitHub repository's release
 
 In order to run `karavictl` commands, the binary needs to exist in your PATH, for example /usr/local/bin.
 
-Karavictl commands and intended use can be found [here](../../cli/) 
+Karavictl commands and intended use can be found [here](../../cli/). 
 
 ## Configuring the CSM Authorization Proxy Server
 
