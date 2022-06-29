@@ -12,11 +12,11 @@
 <meta property="og:description" content="Troubleshooting PowerFlex Driver" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powerflex/" />
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-06-29T08:19:14-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Troubleshooting PowerFlex Driver">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23&#43;05:30" />
-<meta itemprop="wordCount" content="630">
+<meta itemprop="dateModified" content="2022-06-29T08:19:14-04:00" />
+<meta itemprop="wordCount" content="669">
 
 
 
@@ -118,7 +118,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.24dfb759b9286afdfe4a47739656d45d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a87e3898edcf9de0a175dbfc0b4a6272.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.24dfb759b9286afdfe4a47739656d45d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a87e3898edcf9de0a175dbfc0b4a6272.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2149,6 +2149,10 @@
 <tr>
 <td>When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
 <td>This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">https://github.com/kubernetes-csi/external-attacher/issues/215</a>. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.</td>
+</tr>
+<tr>
+<td>CSI-PowerFlex volumes cannot mount; are being recognized as multipath devices</td>
+<td>CSI-PowerFlex does not support multipath; to fix: <br/> 1. Remove any multipath mapping involving a powerflex volume with <code>multipath -f &lt;powerflex volume&gt;</code> <br/> 2. Blacklist CSI-PowerFlex volumes in multipath config file</td>
 </tr>
 </tbody>
 </table>

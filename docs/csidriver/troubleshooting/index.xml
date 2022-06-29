@@ -126,6 +126,10 @@
 &lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
 &lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI-PowerFlex volumes cannot mount; are being recognized as multipath devices&lt;/td&gt;
+&lt;td&gt;CSI-PowerFlex does not support multipath; to fix: &lt;br/&gt; 1. Remove any multipath mapping involving a powerflex volume with &lt;code&gt;multipath -f &amp;lt;powerflex volume&amp;gt;&lt;/code&gt; &lt;br/&gt; 2. Blacklist CSI-PowerFlex volumes in multipath config file&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
