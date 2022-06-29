@@ -90,7 +90,7 @@ The following third-party components are optionally installed in the specified n
  *NOTE*: 
 - The tenant, role, and storage services use GRPC. If the Ingress Controller requires annotations to support GRPC, they must be supplied.
 
-6. Install the driver using `helm`.
+6. Install the driver using `helm`:
 
 To install CSM Authorization with the service Ingresses using your own certificate, run:
 
@@ -105,6 +105,14 @@ To install CSM Authorization with the service Ingresses using a self-signed cert
 ```
 helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization
 ```
+
+## Install Karavictl
+
+The Karavictl CLI can be obtained directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.
+
+In order to run `karavictl` commands, the binary needs to exist in your PATH, for example /usr/local/bin.
+
+Karavictl commands and intended use can be found [here](../../cli/). 
 
 ## Configuring the CSM Authorization Proxy Server
 
