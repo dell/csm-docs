@@ -678,7 +678,7 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;li&gt;The tenant, role, and storage services use GRPC. If the Ingress Controller requires annotations to support GRPC, they must be supplied.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol start=&#34;6&#34;&gt;
-&lt;li&gt;Install the driver using &lt;code&gt;helm&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Install the driver using &lt;code&gt;helm&lt;/code&gt;:&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;To install CSM Authorization with the service Ingresses using your own certificate, run:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization \
@@ -686,7 +686,11 @@ kubectl apply -f /tmp/token.yaml -n isilon
 --set-file authorization.privateKey=&amp;lt;location-of-private-key-file&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To install CSM Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;configuring-the-csm-authorization-proxy-server&#34;&gt;Configuring the CSM Authorization Proxy Server&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;install-karavictl&#34;&gt;Install Karavictl&lt;/h2&gt;
+&lt;p&gt;The Karavictl CLI can be obtained directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
+&lt;p&gt;In order to run &lt;code&gt;karavictl&lt;/code&gt; commands, the binary needs to exist in your PATH, for example /usr/local/bin.&lt;/p&gt;
+&lt;p&gt;Karavictl commands and intended use can be found &lt;a href=&#34;../../cli/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;configuring-the-csm-authorization-proxy-server&#34;&gt;Configuring the CSM Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The storage administrator must first configure the proxy server with the following:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Storage systems&lt;/li&gt;

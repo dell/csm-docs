@@ -116,7 +116,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.acbb6e0f141897932c4432c11a9768e7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24dfb759b9286afdfe4a47739656d45d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -148,7 +148,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.acbb6e0f141897932c4432c11a9768e7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.24dfb759b9286afdfe4a47739656d45d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2026,6 +2026,7 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#install-csm-authorization">Install CSM Authorization</a></li>
+    <li><a href="#install-karavictl">Install Karavictl</a></li>
     <li><a href="#configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</a>
       <ul>
         <li><a href="#configure-storage">Configure Storage</a></li>
@@ -2367,7 +2368,7 @@
 <li>The tenant, role, and storage services use GRPC. If the Ingress Controller requires annotations to support GRPC, they must be supplied.</li>
 </ul>
 <ol start="6">
-<li>Install the driver using <code>helm</code>.</li>
+<li>Install the driver using <code>helm</code>:</li>
 </ol>
 <p>To install CSM Authorization with the service Ingresses using your own certificate, run:</p>
 <pre><code>helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization \
@@ -2375,7 +2376,11 @@
 --set-file authorization.privateKey=&lt;location-of-private-key-file&gt;
 </code></pre><p>To install CSM Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:</p>
 <pre><code>helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization
-</code></pre><h2 id="configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</h2>
+</code></pre><h2 id="install-karavictl">Install Karavictl</h2>
+<p>The Karavictl CLI can be obtained directly from the <a href="https://github.com/dell/karavi-authorization/releases">GitHub repository&rsquo;s releases</a> section.</p>
+<p>In order to run <code>karavictl</code> commands, the binary needs to exist in your PATH, for example /usr/local/bin.</p>
+<p>Karavictl commands and intended use can be found <a href="../../cli/">here</a>.</p>
+<h2 id="configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</h2>
 <p>The storage administrator must first configure the proxy server with the following:</p>
 <ul>
 <li>Storage systems</li>
