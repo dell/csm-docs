@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/authorization/troubleshooting/" />
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-07-04T02:55:14-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Troubleshooting">
 <meta itemprop="description" content="Troubleshooting guide
 ">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23&#43;05:30" />
-<meta itemprop="wordCount" content="289">
+<meta itemprop="dateModified" content="2022-07-04T02:55:14-04:00" />
+<meta itemprop="wordCount" content="956">
 
 
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2ad8006bdb222bd47cdb34d17f33b72.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.c2a48785f65f8babf28898546377445c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2ad8006bdb222bd47cdb34d17f33b72.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.c2a48785f65f8babf28898546377445c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2030,12 +2030,14 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#rpm-deployment">RPM Deployment</a></li>
+    <li><a href="#helm-deployment">Helm Deployment</a>
       <ul>
         <li><a href="#retrieve-csm-authorization-server-logs">Retrieve CSM Authorization Server Logs</a></li>
         <li><a href="#running-karavictl-tenant-commands-result-in-an-http-504-error">Running &ldquo;karavictl tenant&rdquo; commands result in an HTTP 504 error</a></li>
         <li><a href="#installation-fails-to-install-policies">Installation fails to install policies</a></li>
         <li><a href="#after-installation-the-create-pvc-pod-is-in-an-error-state">After installation, the create-pvc Pod is in an Error state</a></li>
+        <li><a href="#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors">The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &ldquo;request denied for path&rdquo; errors</a></li>
       </ul>
     </li>
   </ul>
@@ -2088,10 +2090,15 @@
 	<h1>Troubleshooting</h1>
 
 	       
-	<ul>
+	<h2 id="rpm-deployment">RPM Deployment</h2>
+<ul>
 <li><a href="#running-karavictl-tenant-commands-result-in-an-http-504-error">Running <code>karavictl tenant</code> commands result in an HTTP 504 error</a></li>
 <li><a href="#installation-fails-to-install-policies">Installation fails to install policies</a></li>
 <li><a href="#after-installation-the-create-pvc-pod-is-in-an-error-state">After installation, the create-pvc Pod is in an Error state</a></li>
+</ul>
+<h2 id="helm-deployment">Helm Deployment</h2>
+<ul>
+<li><a href="#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors">The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &ldquo;request denied for path&rdquo; errors</a></li>
 </ul>
 <hr>
 <h3 id="retrieve-csm-authorization-server-logs">Retrieve CSM Authorization Server Logs</h3>
@@ -2126,6 +2133,76 @@ $ /tmp/karavi-installer-2908017483/policy-install.sh
 <p>Run the following commands to allow the PVC to be created:</p>
 <pre><code>$ semanage fcontext -a -t container_file_t  &quot;/var/lib/rancher/k3s/storage(/.*)?&quot;
 $ restorecon -R  /var/lib/rancher/k3s/storage/
+</code></pre><h3 id="the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors">The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &ldquo;request denied for path&rdquo; errors</h3>
+<p>The vxflexos-controller pods will have logs similar to:</p>
+<pre><code>time=&quot;2022-06-30T17:35:03Z&quot; level=error msg=&quot;failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &quot; error=&quot;rpc error: code = Internal desc = Unable to list volumes: request denied for path&quot;
+time=&quot;2022-06-30T17:35:03Z&quot; level=error msg=&quot;array 2d6fb7c6370a990f probe failed: failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &quot;
+...
+time=&quot;2022-06-30T17:35:03Z&quot; level=fatal msg=&quot;grpc failed&quot; error=&quot;rpc error: code = FailedPrecondition desc = All arrays are not working. Could not proceed further: map[2d6fb7c6370a990f:failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path ]&quot;
+</code></pre><p>The vxflexos-node pods will have logs similar to:</p>
+<pre><code>time=&quot;2022-06-30T17:38:32Z&quot; level=error msg=&quot;failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &quot; error=&quot;rpc error: code = Internal desc = Unable to list volumes: request denied for path&quot;
+time=&quot;2022-06-30T17:38:32Z&quot; level=error msg=&quot;array 2d6fb7c6370a990f probe failed: failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path &quot;
+...
+time=&quot;2022-06-30T17:38:32Z&quot; level=fatal msg=&quot;grpc failed&quot; error=&quot;rpc error: code = FailedPrecondition desc = All arrays are not working. Could not proceed further: map[2d6fb7c6370a990f:failed to list vols for array 2d6fb7c6370a990f : rpc error: code = Internal desc = Unable to list volumes: request denied for path ]&quot;
+</code></pre><p>This occurs when the CSM Authorization proxy-server does not allow all driver HTTPS request paths.</p>
+<p><strong>Resolution</strong></p>
+<ol>
+<li>Edit the <code>powerflex-urls</code> configMap in the namespace where CSM Authorization is deployed to allow all request paths by default.</li>
+</ol>
+<pre><code>kubectl -n &lt;namespace&gt; edit configMap powerflex-urls
+</code></pre><p>In the <code>data</code> field, navigate towards the bottom of this field where you see <code>default allow = false</code>. This is highlighted in <strong>bold</strong> in the example below. Replace <code>false</code> with <code>true</code> and save the edit.</p>
+<pre><code>
+data:
+  url.rego: "# Copyright © 2022 Dell Inc., or its subsidiaries. All Rights Reserved.\n#\n#
+    Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not
+    use this file except in compliance with the License.\n# You may obtain a copy
+    of the License at\n#\n#     http:#www.apache.org/licenses/LICENSE-2.0\n#\n# Unless
+    required by applicable law or agreed to in writing, software\n# distributed under
+    the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS
+    OF ANY KIND, either express or implied.\n# See the License for the specific language
+    governing permissions and\n# limitations under the License.\n\npackage karavi.authz.url\n\nallowlist
+    = [\n    \"GET /api/login/\",\n\t\t\"POST /proxy/refresh-token/\",\n\t\t\"GET
+    /api/version/\",\n\t\t\"GET /api/types/System/instances/\",\n\t\t\"GET /api/types/StoragePool/instances/\",\n\t\t\"POST
+    /api/types/Volume/instances/\",\n\t\t\"GET /api/instances/Volume::[a-f0-9]+/$\",\n\t\t\"POST
+    /api/types/Volume/instances/action/queryIdByKey/\",\n\t\t\"GET /api/instances/System::[a-f0-9]+/relationships/Sdc/\",\n\t\t\"GET
+    /api/instances/Sdc::[a-f0-9]+/relationships/Statistics/\",\n\t\t\"GET /api/instances/Sdc::[a-f0-9]+/relationships/Volume/\",\n\t\t\"GET
+    /api/instances/Volume::[a-f0-9]+/relationships/Statistics/\",\n\t\t\"GET /api/instances/StoragePool::[a-f0-9]+/relationships/Statistics/\",\n\t\t\"POST
+    /api/instances/Volume::[a-f0-9]+/action/addMappedSdc/\",\n\t\t\"POST /api/instances/Volume::[a-f0-9]+/action/removeMappedSdc/\",\n\t\t\"POST
+    /api/instances/Volume::[a-f0-9]+/action/removeVolume/\"\n]\n\n<b>default allow =
+    false</b>\nallow {\n\tregex.match(allowlist[_], sprintf(\"%s %s\", [input.method,
+    input.url]))\n}\n"
+</code></pre>
+<p>Edited data:</p>
+<pre><code>
+data:
+  url.rego: "# Copyright © 2022 Dell Inc., or its subsidiaries. All Rights Reserved.\n#\n#
+    Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not
+    use this file except in compliance with the License.\n# You may obtain a copy
+    of the License at\n#\n#     http:#www.apache.org/licenses/LICENSE-2.0\n#\n# Unless
+    required by applicable law or agreed to in writing, software\n# distributed under
+    the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS
+    OF ANY KIND, either express or implied.\n# See the License for the specific language
+    governing permissions and\n# limitations under the License.\n\npackage karavi.authz.url\n\nallowlist
+    = [\n    \"GET /api/login/\",\n\t\t\"POST /proxy/refresh-token/\",\n\t\t\"GET
+    /api/version/\",\n\t\t\"GET /api/types/System/instances/\",\n\t\t\"GET /api/types/StoragePool/instances/\",\n\t\t\"POST
+    /api/types/Volume/instances/\",\n\t\t\"GET /api/instances/Volume::[a-f0-9]+/$\",\n\t\t\"POST
+    /api/types/Volume/instances/action/queryIdByKey/\",\n\t\t\"GET /api/instances/System::[a-f0-9]+/relationships/Sdc/\",\n\t\t\"GET
+    /api/instances/Sdc::[a-f0-9]+/relationships/Statistics/\",\n\t\t\"GET /api/instances/Sdc::[a-f0-9]+/relationships/Volume/\",\n\t\t\"GET
+    /api/instances/Volume::[a-f0-9]+/relationships/Statistics/\",\n\t\t\"GET /api/instances/StoragePool::[a-f0-9]+/relationships/Statistics/\",\n\t\t\"POST
+    /api/instances/Volume::[a-f0-9]+/action/addMappedSdc/\",\n\t\t\"POST /api/instances/Volume::[a-f0-9]+/action/removeMappedSdc/\",\n\t\t\"POST
+    /api/instances/Volume::[a-f0-9]+/action/removeVolume/\"\n]\n\n<b>default allow =
+    true</b>\nallow {\n\tregex.match(allowlist[_], sprintf(\"%s %s\", [input.method,
+    input.url]))\n}\n"
+</code></pre>
+<ol start="2">
+<li>Rollout restart the CSM Authorization proxy-server so the policy change gets applied.</li>
+</ol>
+<pre><code>kubectl -n &lt;namespace&gt; rollout restart deploy/proxy-server
+</code></pre><ol start="3">
+<li>Optionally, rollout restart the CSI Driver for Dell PowerFlex to restart the driver pods. Alternatively, wait for the Kubernetes CrashLoopBackoff behavior to restart the driver.</li>
+</ol>
+<pre><code>kubectl -n &lt;driver-namespace&gt; rollout restart deploy/vxflexos-controller
+kubectl -n &lt;driver-namespace&gt; rollout restart daemonSet/vxflexos-node
 </code></pre>
 	
 	
