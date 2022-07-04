@@ -142,26 +142,25 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
  *NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.* 
 
-
-    After editing the file, run the following command to create a secret called `vxflexos-config`:
+After editing the file, run the below command to create a secret called `vxflexos-config`:
     
     `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml`
 
-    Use the following command to replace or update the secret:
+Use the below command to replace or update the secret:
 
     `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
 
-    *NOTE:* 
+*NOTE:* 
 
-    - The user needs to validate the YAML syntax and array-related key/values while replacing the vxflexos-creds secret.
-    - If you want to create a new array or update the MDM values in the secret, you will need to reinstall the driver. If you change other details, such as login information, the secret will dynamically update -- see [dynamic-array-configuration](../../../features/powerflex#dynamic-array-configuration) for more details.
-    - Old `json` format of the array configuration file is still supported in this release. If you already have your configuration in `json` format, you may continue to maintain it or you may transfer this configuration to `yaml`
-    format and replace/update the secret.  
-    - "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
-    - Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
-    - If the user is using complex K8s version like "v1.21.3-mirantis-1", use below kubeVersion check in helm/csi-unity/Chart.yaml file.
+- The user needs to validate the YAML syntax and array-related key/values while replacing the vxflexos-creds secret.
+- If you want to create a new array or update the MDM values in the secret, you will need to reinstall the driver. If you change other details, such as login information, the secret will dynamically update -- see [dynamic-array-configuration](../../../features/powerflex#dynamic-array-configuration) for more details.
+- Old `json` format of the array configuration file is still supported in this release. If you already have your configuration in `json` format, you may continue to maintain it or you may transfer this configuration to `yaml`format and replace/update the secret.  
+- "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
+- Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
+- If the user is using complex K8s version like "v1.21.3-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
            kubeVersion: ">= 1.21.0-0 < 1.24.0-0"
-
+	   
+	   
 5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features.  
 
 6. If using automated SDC deployment:
