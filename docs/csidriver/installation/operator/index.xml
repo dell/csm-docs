@@ -28,6 +28,9 @@
 &lt;p&gt;There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.&lt;/p&gt;
 &lt;p&gt;Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See &lt;a href=&#34;../../../troubleshooting/powerflex.md&#34;&gt;troubleshooting section&lt;/a&gt; for details&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h4 id=&#34;sdc-deployment-for-operator&#34;&gt;SDC Deployment for Operator&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;This feature deploys the sdc kernel modules on all nodes with the help of an init container.&lt;/li&gt;

@@ -13,12 +13,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/operator/powerflex/" />
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-07-04T02:51:41-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing CSI Driver for PowerFlex via Operator
 ">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23&#43;05:30" />
-<meta itemprop="wordCount" content="1334">
+<meta itemprop="dateModified" content="2022-07-04T02:51:41-04:00" />
+<meta itemprop="wordCount" content="1350">
 
 
 
@@ -121,7 +121,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.c5f70d2f0846a774ab9ef234ec9409a5.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2ad8006bdb222bd47cdb34d17f33b72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,7 +153,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.c5f70d2f0846a774ab9ef234ec9409a5.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d2ad8006bdb222bd47cdb34d17f33b72.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2114,6 +2114,9 @@
 <p>There are sample manifests provided which can be edited to do an easy installation of the driver. Note that the deployment of the driver using the operator does not use any Helm charts. The installation and configuration parameters will be slightly different from the ones specified via the Helm installer.</p>
 <p>Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.</p>
 <h3 id="prerequisites">Prerequisites:</h3>
+<ul>
+<li>If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See <a href="../../../troubleshooting/powerflex.md">troubleshooting section</a> for details</li>
+</ul>
 <h4 id="sdc-deployment-for-operator">SDC Deployment for Operator</h4>
 <ul>
 <li>This feature deploys the sdc kernel modules on all nodes with the help of an init container.</li>
