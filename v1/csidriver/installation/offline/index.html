@@ -113,7 +113,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.a87e3898edcf9de0a175dbfc0b4a6272.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.c5f70d2f0846a774ab9ef234ec9409a5.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -146,7 +146,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.a87e3898edcf9de0a175dbfc0b4a6272.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.c5f70d2f0846a774ab9ef234ec9409a5.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2024,8 +2024,8 @@ or the Dell CSI Operator.</p>
 </ul>
 <p>The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.</p>
 <p>For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:</p>
-<pre><code>git clone https://github.com/dell/dell-csi-operator.git
-</code></pre><pre><code>cd dell-csi-operator
+<pre><code>git clone -b v1.7.0 https://github.com/dell/dell-csi-operator.git
+</code></pre><pre><code>cd dell-csi-operator/scripts
 </code></pre><pre><code>[root@user scripts]# ./csi-offline-bundle.sh -c
 
 *
