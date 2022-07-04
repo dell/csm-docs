@@ -97,7 +97,7 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 #### Steps
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
-1. Clone and checkout the required dell-csi-operator version using git clone -b <your-tag-version> https://github.com/dell/dell-csi-operator.git.
+1. Clone and checkout the required dell-csi-operator version using `git clone -b v1.7.0 https://github.com/dell/dell-csi-operator.git`.
 2. cd dell-csi-operator
 3. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
