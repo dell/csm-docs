@@ -108,9 +108,26 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 ## Install Karavictl
 
-The Karavictl CLI can be obtained directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.
+1. Download the latest release of karavictl
 
-In order to run `karavictl` commands, the binary needs to exist in your PATH, for example /usr/local/bin.
+```
+curl -LO https://github.com/dell/karavi-authorization/releases/latest/download/karavictl
+```
+
+2. Install karavictl
+
+```
+sudo install -o root -g root -m 0755 karavictl /usr/local/bin/karavictl
+```
+
+If you do not have root access on the target system, you can still install karavictl to the ~/.local/bin directory:
+
+```
+chmod +x karavictl
+mkdir -p ~/.local/bin
+mv ./karavictl ~/.local/bin/karavictl
+# and then append (or prepend) ~/.local/bin to $PATH
+```
 
 Karavictl commands and intended use can be found [here](../../cli/). 
 
