@@ -2,7 +2,7 @@
 title: "CSM FAQ"
 linktitle: "FAQ"
 description: Frequently asked questions of Dell Technologies (Dell) Container Storage Modules 
-weight: 2
+weight: 1
 ---
 
 - [What are Dell Container Storage Modules (CSM)? How different is it from a CSI driver?](#what-are-dell-container-storage-modules-csm-how-different-is-it-from-a-csi-driver)
