@@ -1,7 +1,7 @@
 ---
 title: "Contribution Guidelines"
 linkTitle: "Contribution Guidelines"
-weight: 12
+weight: 3
 Description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) docs Contribution Guidelines
 ---

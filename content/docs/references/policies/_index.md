@@ -1,7 +1,7 @@
 ---
 title: "Policies"
 linkTitle: "Policies"
-weight: 13
+weight: 4
 Description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) Policies
 ---
