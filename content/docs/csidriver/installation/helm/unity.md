@@ -170,6 +170,7 @@ Procedure
     allowRWOMultiPodAccess: false
     syncNodeInfoInterval: 5
     maxUnityVolumesPerNode: 0
+    fsGroupPolicy: ReadWriteOneFSType
     ```
    
 4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `csi-unity/samples/secret/emptysecret.yaml` file by running the `kubectl create -f csi-unity/samples/secret/emptysecret.yaml` command.
