@@ -10,6 +10,7 @@ description: Release notes for Unity XT CSI driver
 - Removed beta volumesnapshotclass sample files.
 - Added support for Kubernetes 1.24.
 - Added support for OpenShift 4.10.
+- Added support to configure fsGroupPolicy.
 
 ### Fixed Issues
 CSM Resiliency: Occasional failure unmounting Unity volume for raw block devices via iSCSI.
