@@ -123,6 +123,7 @@ Procedure
     | podmon.enabled | service to monitor failing jobs and notify | false | - |
     | podmon.image| pod man image name | false | - |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
+    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
     | **controller** | Allows configuration of the controller-specific parameters.| - | - |
     | controllerCount | Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
     | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
