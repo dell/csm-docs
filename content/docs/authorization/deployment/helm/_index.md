@@ -44,10 +44,10 @@ The following third-party components are optionally installed in the specified n
     After editing the file, run the following command to create a secret called `karavi-config-secret`:
     
     `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml`
-
+                      
     Use the following command to replace or update the secret:
-
-    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+ 
+    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
    
 4. Copy the default values.yaml file `cp charts/csm-authorization/values.yaml myvalues.yaml`
 
@@ -208,7 +208,7 @@ karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --ad
 Now that the tenant is bound to a role, a JSON Web Token can be generated for the tenant. For example, to generate a token for the `Finance` tenant:
 
 ```
-karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016
+karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016
 
 {
   "Token": "\napiVersion: v1\nkind: Secret\nmetadata:\n  name: proxy-authz-tokens\ntype: Opaque\ndata:\n  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUXhPRFlzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLmJIODN1TldmaHoxc1FVaDcweVlfMlF3N1NTVnEyRzRKeGlyVHFMWVlEMkU=\n  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWXhNallzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkxNbWVUSkZlX2dveXR0V0lUUDc5QWVaTy1kdmN5SHAwNUwyNXAtUm9ZZnM=\n"
@@ -218,7 +218,7 @@ karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-au
 With [jq](https://stedolan.github.io/jq/), you process the above response to filter the secret manifest. For example:
 
 ```
-karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016 | jq -r '.Token'
+karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | jq -r '.Token'
 apiVersion: v1
 kind: Secret
 metadata:
@@ -257,7 +257,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
    | intendedEndpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
    | endpoint | HTTPS localhost endpoint that the authorization sidecar will listen on. | Yes | https://localhost:9400 |
    | systemID | System ID of the backend storage array. | Yes | " " |
-   | insecure | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
+   | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
    | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
 
 
