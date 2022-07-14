@@ -8,17 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bep/tech-doc-hugo.git"
+    "url": "git+https://github.com/dell/csm-docs.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bep/tech-doc-hugo/issues"
+    "url": "https://github.com/dell/csm-docs/issues"
   },
-  "homepage": "https://github.com/bep/tech-doc-hugo#readme",
-  "dependencies": {},
+  "homepage": "https://github.com/dell/csm-docs#readme",
   "devDependencies": {
-    "autoprefixer": "^9.4.6",
-    "postcss-cli": "^5.0.1"
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.3.7",
+    "postcss-cli": "^9.0.2"
   }
 }

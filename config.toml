@@ -4,9 +4,6 @@ canonifyURLs = false
 
 enableRobotsTXT = true
 
-# Hugo allows theme composition (and inheritance). The precedence is from left to right.
-theme = ["docsy"]
-
 staticDir = "static"
 
 # Will give values to .Lastmod etc.
@@ -191,3 +188,17 @@ enable = false
     name = "GitHub"
     weight = 50
     url = "https://github.com/dell/csm"
+
+[module]
+  # uncomment line below for temporary local development of module
+  # replacements = "github.com/google/docsy -> ../../docsy"
+  [module.hugoVersion]
+    extended = true
+    min = "0.75.0"
+  [[module.imports]]
+    path = "github.com/google/docsy"
+    disable = false
+  [[module.imports]]
+    path = "github.com/google/docsy/dependencies"
+    disable = false
+
