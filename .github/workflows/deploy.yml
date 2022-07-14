@@ -19,7 +19,10 @@ jobs:
         with:
           hugo-version: '0.72.0'
           extended: true
-
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ‘1.18.0’
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -38,6 +41,7 @@ jobs:
         run: |
          npm install -D --save autoprefixer
          npm install -D --save postcss-cli
+         npm install -D --save postcss
          hugo
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
