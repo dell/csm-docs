@@ -25,7 +25,7 @@
         &lt;p&gt;To upgrade Dell CSI Operator from v1.2.0/v1.3.0 to v1.4.0/v1.5.0/v1.6.0, perform the following steps.&lt;/p&gt;
 &lt;h3 id=&#34;using-installation-script&#34;&gt;Using Installation Script&lt;/h3&gt;
 &lt;p&gt;Run the following command to upgrade the operator&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ bash scripts/install.sh --upgrade
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ bash scripts/install.sh --upgrade
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;using-olm&#34;&gt;Using OLM&lt;/h3&gt;
 &lt;p&gt;The upgrade of the Dell CSI Operator is done via Operator Lifecycle Manager.
 If the &lt;code&gt;InstallPlan&lt;/code&gt; for the Operator subscription is set to &lt;code&gt;Automatic&lt;/code&gt;, the operator will be automatically upgraded to the new version. If the &lt;code&gt;InstallPlan&lt;/code&gt; is set to &lt;code&gt;Manual&lt;/code&gt;, then a Cluster Administrator would need to approve the upgrade.&lt;/p&gt;

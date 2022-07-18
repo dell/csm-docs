@@ -49,8 +49,8 @@
 &lt;ol&gt;
 &lt;li&gt;On your main cluster, follow the instructions available in CSM Replication for &lt;a href=&#34;../../../replication/deployment/install-repctl.md&#34;&gt;Installation using repctl&lt;/a&gt;. NOTE: On step 4 of the link above, you MUST use the command below to automatically package all clusters&amp;rsquo; &lt;code&gt;.kube&lt;/code&gt; config as a secret:&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;  ./repctl cluster inject 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CSM Operator needs this admin configs instead of the service accounts’ configs  to be able to properly manage the target clusters. The default service account that&amp;rsquo;ll be used is the CSM Operator service account.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ./repctl cluster inject 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CSM Operator needs this admin configs instead of the service accounts’ configs  to be able to properly manage the target clusters. The default service account that&amp;rsquo;ll be used is the CSM Operator service account.&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following &lt;a href=&#34;../drivers/powerscale.md/#prerequisite&#34;&gt;prerequisites for deploying PowerScale via Dell CSM Operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;

@@ -84,9 +84,9 @@
 &lt;p&gt;The supported distros for the Dell CSI Drivers are located &lt;a href=&#34;../csidriver/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;how-do-i-get-a-list-of-container-storage-modules-deployed-in-my-cluster-with-their-versions&#34;&gt;How do I get a list of Container Storage Modules deployed in my cluster with their versions?&lt;/h3&gt;
 &lt;p&gt;The easiest way to find the module version is to check the image tag for the module. For all the namespaces you can execute the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kubectl get pods -A -o jsonpath=&amp;quot;{..image}&amp;quot; | tr -s &#39;[[:space:]]&#39; &#39;\n&#39; | grep &#39;csm\|karavi&#39; | sort | uniq -c
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl get pods -A -o jsonpath=&amp;#34;{..image}&amp;#34; | tr -s &amp;#39;[[:space:]]&amp;#39; &amp;#39;\n&amp;#39; | grep &amp;#39;csm\|karavi&amp;#39; | sort | uniq -c
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Or if you know the namespace:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kubectl get deployment,daemonset -o wide -n {{namespace}}
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl get deployment,daemonset -o wide -n {{namespace}}
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;do-all-container-storage-modules-need-to-be-the-same-version-or-can-i-mix-and-match&#34;&gt;Do all Container Storage Modules need to be the same version, or can I mix and match?&lt;/h3&gt;
 &lt;p&gt;It is advised to comply with the support matrices (links below) and not deviate from it with mixed versions.&lt;/p&gt;
 &lt;ul&gt;
@@ -227,8 +227,8 @@ We use GitHub pull requests for this purpose.&lt;/p&gt;
 &lt;li&gt;Create a local copy of the csm-docs repository using &lt;code&gt;git clone&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Update docsy submodules inside themes folder using &lt;code&gt;git submodule update --recursive --init&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Change to the csm-docs folder and run
-&lt;pre&gt;&lt;code&gt;hugo server 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;By default, local changes will be reflected at http://localhost:1313/. Hugo will watch for changes to the content and automatically refreshes the site.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo server 
+&lt;/code&gt;&lt;/pre&gt;By default, local changes will be reflected at http://localhost:1313/. Hugo will watch for changes to the content and automatically refreshes the site.
 &lt;blockquote&gt;
 &lt;p&gt;Note: To bind it to different server address use &lt;code&gt;hugo server --bind 0.0.0.0&lt;/code&gt;, default is 127.0.0.1&lt;/p&gt;
 &lt;/blockquote&gt;

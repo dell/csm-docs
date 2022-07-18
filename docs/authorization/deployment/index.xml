@@ -46,7 +46,7 @@
 &lt;h3 id=&#34;single-binary-installer&#34;&gt;Single Binary Installer&lt;/h3&gt;
 &lt;p&gt;The easiest way to obtain the single binary installer RPM is directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
 &lt;p&gt;Alternatively, the single binary installer can be built from source by cloning the &lt;a href=&#34;https://github.com/dell/karavi-authorization&#34;&gt;GitHub repository&lt;/a&gt; and using the following Makefile targets to build the installer:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;make dist build-installer rpm
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;make dist build-installer rpm
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;build-installer&lt;/code&gt; step creates a binary at &lt;code&gt;karavi-authorization/bin/deploy&lt;/code&gt; and embeds all components required for installation. The &lt;code&gt;rpm&lt;/code&gt; step generates an RPM package and stores it at &lt;code&gt;karavi-authorization/deploy/rpm/x86_64/&lt;/code&gt;.
 This allows CSM for Authorization to be installed in network-restricted environments.&lt;/p&gt;
 &lt;p&gt;A Storage Administrator can execute the installer or rpm package as a root user or via &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
@@ -54,29 +54,29 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt; having the following contents:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;web&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;jwtsigningsecret&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;secret&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;proxy&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;host&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;:8080&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;zipkin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;collectoruri&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;http://DNS-hostname:9411/api/v2/spans&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;probability&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;certificate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;keyFile&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_private_key_file&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;crtFile&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_host_cert_file&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;rootCertificate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_root_CA_file&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hostname&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;DNS-hostname&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In an instance where a secure deployment is not required, an insecure deployment is possible. Please note that self-signed certificates will be created for you using cert-manager to allow TLS encryption for communication on the CSM for Authorization proxy server. However, this is not recommended for production environments. For an insecure deployment, the json file in the location &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt; only requires the following contents:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hostname&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;DNS-hostname&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;web&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;jwtsigningsecret&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;secret&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;proxy&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;host&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;:8080&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;zipkin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;collectoruri&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;http://DNS-hostname:9411/api/v2/spans&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;probability&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;certificate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;keyFile&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_private_key_file&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;crtFile&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_host_cert_file&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;rootCertificate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;path_to_root_CA_file&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hostname&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;DNS-hostname&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In an instance where a secure deployment is not required, an insecure deployment is possible. Please note that self-signed certificates will be created for you using cert-manager to allow TLS encryption for communication on the CSM for Authorization proxy server. However, this is not recommended for production environments. For an insecure deployment, the json file in the location &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt; only requires the following contents:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;hostname&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;DNS-hostname&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
@@ -105,8 +105,8 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;To install the rpm package on the system, run the below command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;rpm -ivh &amp;lt;rpm_file_name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -ivh &amp;lt;rpm_file_name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;After installation, application data will be stored on the system under &lt;code&gt;/var/lib/rancher/k3s/storage/&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
@@ -124,65 +124,65 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The &lt;code&gt;--insecure&lt;/code&gt; flag is only necessary if certificates were not provided in &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;# Specify any desired name
-export RoleName=&amp;quot;&amp;quot;
-export RoleQuota=&amp;quot;&amp;quot;
-export TenantName=&amp;quot;&amp;quot;
-
-# Specify info about Array1
-export Array1Type=&amp;quot;&amp;quot;
-export Array1SystemID=&amp;quot;&amp;quot;
-export Array1User=&amp;quot;&amp;quot;
-export Array1Password=&amp;quot;&amp;quot;
-export Array1Pool=&amp;quot;&amp;quot;
-export Array1Endpoint=&amp;quot;&amp;quot;
-
-# Specify info about Array2
-export Array2Type=&amp;quot;&amp;quot;
-export Array2SystemID=&amp;quot;&amp;quot;
-export Array2User=&amp;quot;&amp;quot;
-export Array2Password=&amp;quot;&amp;quot;
-export Array2Pool=&amp;quot;&amp;quot;
-export Array2Endpoint=&amp;quot;&amp;quot;
-
-# Specify IPs
-export DriverHostVMIP=&amp;quot;&amp;quot; 
-export DriverHostVMPassword=&amp;quot;&amp;quot;
-export DriverHostVMUser=&amp;quot;&amp;quot;
-
-# Specify Authorization proxy host address. NOTE: this is not the same as IP
-export AuthorizationProxyHost=&amp;quot;&amp;quot;
-
-echo === Creating Storage(s) ===
-# Add array1 to authorization
-karavictl storage create \
-          --type ${Array1Type} \
-          --endpoint  ${Array1Endpoint} \
-          --system-id ${Array1SystemID} \
-          --user ${Array1User} \
-                --password ${Array1Password} \
-          --array-insecure
-
-# Add array2 to authorization
- karavictl storage create \
-          --type ${Array2Type} \
-          --endpoint  ${Array2Endpoint} \
-          --system-id ${Array2SystemID} \
-          --user ${Array2User} \
-                --password ${Array2Password} \
-          --array-insecure
-  
-echo === Creating Tenant ===
-karavictl tenant create -n $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot;
-
-echo === Creating Role ===
-karavictl role create \
-         --role=${RoleName}=${Array1Type}=${Array1SystemID}=${Array1Pool}=${RoleQuota} \
-         --role=${RoleName}=${Array2Type}=${Array2SystemID}=${Array2Pool}=${RoleQuota}   
-
-echo === === Binding Role ===
-karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;generate-a-token&#34;&gt;Generate a Token&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Specify any desired name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export RoleName=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export RoleQuota=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export TenantName=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Specify info about Array1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array1Type=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array1SystemID=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array1User=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array1Password=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array1Pool=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array1Endpoint=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Specify info about Array2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array2Type=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array2SystemID=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array2User=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array2Password=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array2Pool=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export Array2Endpoint=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Specify IPs
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export DriverHostVMIP=&amp;#34;&amp;#34; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export DriverHostVMPassword=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export DriverHostVMUser=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Specify Authorization proxy host address. NOTE: this is not the same as IP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export AuthorizationProxyHost=&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;echo === Creating Storage(s) ===
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Add array1 to authorization
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;karavictl storage create \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --type ${Array1Type} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --endpoint  ${Array1Endpoint} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --system-id ${Array1SystemID} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --user ${Array1User} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  		      --password ${Array1Password} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --array-insecure
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Add array2 to authorization
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt; karavictl storage create \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --type ${Array2Type} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --endpoint  ${Array2Endpoint} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --system-id ${Array2SystemID} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --user ${Array2User} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  		      --password ${Array2Password} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;          --array-insecure
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;echo === Creating Tenant ===
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;karavictl tenant create -n $TenantName --insecure --addr &amp;#34;grpc.${AuthorizationProxyHost}&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;echo === Creating Role ===
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;karavictl role create \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;         --role=${RoleName}=${Array1Type}=${Array1SystemID}=${Array1Pool}=${RoleQuota} \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;         --role=${RoleName}=${Array2Type}=${Array2SystemID}=${Array2Pool}=${RoleQuota}   
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;echo === === Binding Role ===
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure --addr &amp;#34;grpc.${AuthorizationProxyHost}&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;generate-a-token&#34;&gt;Generate a Token&lt;/h3&gt;
 &lt;p&gt;After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
@@ -191,14 +191,14 @@ karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure -
 &lt;li&gt;This sample copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;echo === Generating token ===
-karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot; | jq -r &#39;.Token&#39; &amp;gt; token.yaml
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo === Generating token ===
+karavictl generate token --tenant $TenantName --insecure --addr &amp;#34;grpc.${AuthorizationProxyHost}&amp;#34; | jq -r &amp;#39;.Token&amp;#39; &amp;gt; token.yaml
 
 echo === Copy token to Driver Host ===
 sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;copy-the-karavictl-binary-to-the-kubernetes-master-node&#34;&gt;Copy the karavictl Binary to the Kubernetes Master Node&lt;/h3&gt;
 &lt;p&gt;The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell CSI driver with CSM for Authorization.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
 &lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -209,11 +209,11 @@ sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMI
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Create the secret token in the namespace of the driver.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;# It is assumed that array type powermax has the namespace &amp;quot;powermax&amp;quot;, powerflex has the namepace &amp;quot;vxflexos&amp;quot;, and powerscale has the namespace &amp;quot;isilon&amp;quot;.
-kubectl apply -f /tmp/token.yaml -n powermax
-kubectl apply -f /tmp/token.yaml -n vxflexos
-kubectl apply -f /tmp/token.yaml -n isilon
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; It is assumed that array &lt;span style=&#34;color:#204a87&#34;&gt;type&lt;/span&gt; powermax has the namespace &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;powermax&amp;#34;&lt;/span&gt;, powerflex has the namepace &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;vxflexos&amp;#34;&lt;/span&gt;, and powerscale has the namespace &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;isilon&amp;#34;&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl apply -f /tmp/token.yaml -n powermax
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl apply -f /tmp/token.yaml -n vxflexos
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl apply -f /tmp/token.yaml -n isilon
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit the following parameters in samples/secret/karavi-authorization-config.json file in &lt;a href=&#34;https://github.com/dell/csi-powerflex/tree/main/samples&#34;&gt;CSI PowerFlex&lt;/a&gt;, &lt;a href=&#34;https://github.com/dell/csi-powermax/tree/main/samples/secret&#34;&gt;CSI PowerMax&lt;/a&gt;, or &lt;a href=&#34;https://github.com/dell/csi-powerscale/tree/main/samples/secret&#34;&gt;CSI PowerScale&lt;/a&gt; driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the &lt;em&gt;endpoint&lt;/em&gt; parameter must be different for each driver.&lt;/p&gt;
 &lt;/li&gt;
@@ -396,9 +396,9 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;p&gt;&lt;code&gt;karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot; | jq -r &#39;.Token&#39; &amp;gt; kubectl -n $namespace apply -f -&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;csm-for-authorization-proxy-server-dynamic-configuration-settings&#34;&gt;CSM for Authorization Proxy Server Dynamic Configuration Settings&lt;/h2&gt;
 &lt;p&gt;Some settings are not stored in the &lt;code&gt;karavi-config-secret&lt;/code&gt; but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM for Authorization logging settings during runtime, run the below command on the K3s cluster, make your changes, and save the updated configmap data.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;k3s kubectl -n karavi edit configmap/csm-config-params
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;k3s kubectl -n karavi edit configmap/csm-config-params
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/&amp;lt;release_name&amp;gt;-config-params
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/&amp;lt;release_name&amp;gt;-config-params
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Using PowerFlex as an example, &lt;code&gt;kubectl -n vxflexos edit configmap/vxflexos-config-params&lt;/code&gt; can be used to update the logging level of the sidecar-proxy and the driver.&lt;/p&gt;
 
       </description>
@@ -461,9 +461,9 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;web&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;jwtsigningsecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;randomString123&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After editing the file, run the following command to create a secret called &lt;code&gt;karavi-config-secret&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;web&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;jwtsigningsecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;randomString123&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After editing the file, run the following command to create a secret called &lt;code&gt;karavi-config-secret&lt;/code&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Use the following command to replace or update the secret:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file=config=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
@@ -681,11 +681,11 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;li&gt;Install the driver using &lt;code&gt;helm&lt;/code&gt;:&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;To install CSM Authorization with the service Ingresses using your own certificate, run:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization \
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization \
 --set-file authorization.certificate=&amp;lt;location-of-certificate-file&amp;gt; \
 --set-file authorization.privateKey=&amp;lt;location-of-private-key-file&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To install CSM Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;install-karavictl&#34;&gt;Install Karavictl&lt;/h2&gt;
 &lt;p&gt;The Karavictl CLI can be obtained directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
 &lt;p&gt;In order to run &lt;code&gt;karavictl&lt;/code&gt; commands, the binary needs to exist in your PATH, for example /usr/local/bin.&lt;/p&gt;
@@ -700,7 +700,7 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;/ul&gt;
 &lt;p&gt;This is done using &lt;code&gt;karavictl&lt;/code&gt; to connect to the storage, tenant, and role services. In this example, we will be referencing an installation using &lt;code&gt;csm-authorization.com&lt;/code&gt; as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster&amp;rsquo;s master node.&lt;/p&gt;
 &lt;p&gt;Run &lt;code&gt;kubectl -n authorization get ingress&lt;/code&gt; and &lt;code&gt;kubectl -n authorization get service&lt;/code&gt; to see the Ingress rules for these services and the exposed port for accessing these services via the LoadBalancer. For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# kubectl -n authorization get ingress
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# kubectl -n authorization get ingress
 NAME              CLASS   HOSTS                           ADDRESS   PORTS     AGE
 proxy-server      nginx   csm-authorization.com                     80, 443   86s
 role-service      nginx   role.csm-authorization.com                80, 443   86s
@@ -720,47 +720,47 @@ role-service                                       ClusterIP      10.96.113.230 
 storage-service                                    ClusterIP      10.101.144.37    &amp;lt;none&amp;gt;        50051/TCP                    27s
 tenant-service                                     ClusterIP      10.109.60.141    &amp;lt;none&amp;gt;        50051/TCP                    28s
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On the machine running &lt;code&gt;karavictl&lt;/code&gt;, the &lt;code&gt;/etc/hosts&lt;/code&gt; file needs to be updated with the Ingress hosts for the storage, tenant, and role services. For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;master_node_ip&amp;gt; tenant.csm-authorization.com
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;master_node_ip&amp;gt; tenant.csm-authorization.com
 &amp;lt;master_node_ip&amp;gt; role.csm-authorization.com
 &amp;lt;master_node_ip&amp;gt; storage.csm-authorization.com
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The port that exposes these services is &lt;code&gt;30016&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;configure-storage&#34;&gt;Configure Storage&lt;/h3&gt;
 &lt;p&gt;A &lt;code&gt;storage&lt;/code&gt; entity in CSM Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id 11e4e7d35817bd0f --user admin --password Password123 --insecure --array-insecure --addr storage.csm-authorization.com:30016
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id 11e4e7d35817bd0f --user admin --password Password123 --insecure --array-insecure --addr storage.csm-authorization.com:30016
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The &lt;code&gt;insecure&lt;/code&gt; flag specifies to skip certificate validation when connecting to the CSM Authorization storage service. The &lt;code&gt;array-insecure&lt;/code&gt; flag specifies to skip certificate validation when proxy-service connects to the backend storage array. Run &lt;code&gt;karavictl storage create --help&lt;/code&gt; for help.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;configuring-tenants&#34;&gt;Configuring Tenants&lt;/h3&gt;
 &lt;p&gt;A &lt;code&gt;tenant&lt;/code&gt; is a Kubernetes cluster that a role will be bound to. For example, to create a tenant named &lt;code&gt;Finance&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;karavictl tenant create --name Finance --insecure --addr tenant.csm-authorization.com:30016
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl tenant create --name Finance --insecure --addr tenant.csm-authorization.com:30016
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The &lt;code&gt;insecure&lt;/code&gt; flag specifies to skip certificate validation when connecting to the tenant service. Run &lt;code&gt;karavictl tenant create --help&lt;/code&gt; for help.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;configuring-roles&#34;&gt;Configuring Roles&lt;/h3&gt;
 &lt;p&gt;A &lt;code&gt;role&lt;/code&gt; consists of a name, the storage to use, and the quota limit for the storage pool to be used. For example, to create a role named &lt;code&gt;FinanceRole&lt;/code&gt; using the PowerFlex storage created above with a quota limit of 100GB in storage pool &lt;code&gt;myStoragePool&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=11e4e7d35817bd0f=myStoragePool=100GB
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=11e4e7d35817bd0f=myStoragePool=100GB
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The &lt;code&gt;insecure&lt;/code&gt; flag specifies to skip certificate validation when connecting to the role service. Run &lt;code&gt;karavictl role create --help&lt;/code&gt; for help.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;configuring-role-bindings&#34;&gt;Configuring Role Bindings&lt;/h3&gt;
 &lt;p&gt;A &lt;code&gt;role binding&lt;/code&gt; binds a role to a tenant. For example, to bind the &lt;code&gt;FinanceRole&lt;/code&gt; to the &lt;code&gt;Finance&lt;/code&gt; tenant:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr tenant.csm-authorization.com:30016
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr tenant.csm-authorization.com:30016
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The &lt;code&gt;insecure&lt;/code&gt; flag specifies to skip certificate validation when connecting to the tenant service. Run &lt;code&gt;karavictl rolebinding create --help&lt;/code&gt; for help.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;generating-a-token&#34;&gt;Generating a Token&lt;/h3&gt;
 &lt;p&gt;Now that the tenant is bound to a role, a JSON Web Token can be generated for the tenant. For example, to generate a token for the &lt;code&gt;Finance&lt;/code&gt; tenant:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016
 
 {
-  &amp;quot;Token&amp;quot;: &amp;quot;\napiVersion: v1\nkind: Secret\nmetadata:\n  name: proxy-authz-tokens\ntype: Opaque\ndata:\n  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUXhPRFlzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLmJIODN1TldmaHoxc1FVaDcweVlfMlF3N1NTVnEyRzRKeGlyVHFMWVlEMkU=\n  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWXhNallzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkxNbWVUSkZlX2dveXR0V0lUUDc5QWVaTy1kdmN5SHAwNUwyNXAtUm9ZZnM=\n&amp;quot;
+  &amp;#34;Token&amp;#34;: &amp;#34;\napiVersion: v1\nkind: Secret\nmetadata:\n  name: proxy-authz-tokens\ntype: Opaque\ndata:\n  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUXhPRFlzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLmJIODN1TldmaHoxc1FVaDcweVlfMlF3N1NTVnEyRzRKeGlyVHFMWVlEMkU=\n  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWXhNallzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkxNbWVUSkZlX2dveXR0V0lUUDc5QWVaTy1kdmN5SHAwNUwyNXAtUm9ZZnM=\n&amp;#34;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With &lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;jq&lt;/a&gt;, you process the above response to filter the secret manifest. For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016 | jq -r &#39;.Token&#39;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016 | jq -r &amp;#39;.Token&amp;#39;
 apiVersion: v1
 kind: Secret
 metadata:
@@ -777,11 +777,11 @@ data:
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Apply the secret containing the token data into the driver namespace. It&amp;rsquo;s assumed that the Kubernetes administrator has the token secret manifest saved in &lt;code&gt;/tmp/token.yaml&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;# It is assumed that array type powermax has the namespace &amp;quot;powermax&amp;quot;, powerflex has the namepace &amp;quot;vxflexos&amp;quot;, and powerscale has the namespace &amp;quot;isilon&amp;quot;.
-kubectl apply -f /tmp/token.yaml -n powermax
-kubectl apply -f /tmp/token.yaml -n vxflexos
-kubectl apply -f /tmp/token.yaml -n isilon
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; It is assumed that array &lt;span style=&#34;color:#204a87&#34;&gt;type&lt;/span&gt; powermax has the namespace &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;powermax&amp;#34;&lt;/span&gt;, powerflex has the namepace &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;vxflexos&amp;#34;&lt;/span&gt;, and powerscale has the namespace &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;isilon&amp;#34;&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl apply -f /tmp/token.yaml -n powermax
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl apply -f /tmp/token.yaml -n vxflexos
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;kubectl apply -f /tmp/token.yaml -n isilon
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit the following parameters in samples/secret/karavi-authorization-config.json file in &lt;a href=&#34;https://github.com/dell/csi-powerflex/tree/main/samples&#34;&gt;CSI PowerFlex&lt;/a&gt;, &lt;a href=&#34;https://github.com/dell/csi-powermax/tree/main/samples/secret&#34;&gt;CSI PowerMax&lt;/a&gt;, or &lt;a href=&#34;https://github.com/dell/csi-powerscale/tree/main/samples/secret&#34;&gt;CSI PowerScale&lt;/a&gt; driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the &lt;em&gt;endpoint&lt;/em&gt; parameter must be different for each driver.&lt;/p&gt;
 &lt;/li&gt;
@@ -963,9 +963,9 @@ kubectl apply -f /tmp/token.yaml -n isilon
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;csm-for-authorization-proxy-server-dynamic-configuration-settings&#34;&gt;CSM for Authorization Proxy Server Dynamic Configuration Settings&lt;/h2&gt;
 &lt;p&gt;Some settings are not stored in the &lt;code&gt;karavi-config-secret&lt;/code&gt; but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM Authorization logging settings during runtime, run the below command, make your changes, and save the updated configMap data.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kubectl -n authorization edit configmap/csm-config-params
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl -n authorization edit configmap/csm-config-params
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/&amp;lt;release_name&amp;gt;-config-params
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/&amp;lt;release_name&amp;gt;-config-params
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Using PowerFlex as an example, &lt;code&gt;kubectl -n vxflexos edit configmap/vxflexos-config-params&lt;/code&gt; can be used to update the logging level of the sidecar-proxy and the driver.&lt;/p&gt;
 
       </description>
