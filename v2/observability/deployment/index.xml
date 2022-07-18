@@ -76,14 +76,14 @@
 &lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured in your values file for CSM Observability.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] -f myvalues.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Alternatively, you can specify each parameter using the &amp;lsquo;&amp;ndash;set key=value[,key=value]&amp;rsquo; and/or &amp;lsquo;&amp;ndash;set-file key=value[,key=value] arguments to &amp;lsquo;helm install&amp;rsquo;. For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
-    --set-file karaviTopology.certificateFile=&amp;lt;location-of-karavi-topology-certificate-file&amp;gt; \
-    --set-file karaviTopology.privateKeyFile=&amp;lt;location-of-karavi-topology-private-key-file&amp;gt; \
-    --set-file otelCollector.certificateFile=&amp;lt;location-of-otel-collector-certificate-file&amp;gt; \
-    --set-file otelCollector.privateKeyFile=&amp;lt;location-of-otel-collector-private-key-file&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; helm install karavi-observability dell/karavi-observability -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -f myvalues.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternatively, you can specify each parameter using the &amp;lsquo;&amp;ndash;set key=value[,key=value]&amp;rsquo; and/or &amp;lsquo;&amp;ndash;set-file key=value[,key=value] arguments to &amp;lsquo;helm install&amp;rsquo;. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; helm install karavi-observability dell/karavi-observability -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;    --set-file karaviTopology.certificateFile=&amp;lt;location-of-karavi-topology-certificate-file&amp;gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;    --set-file karaviTopology.privateKeyFile=&amp;lt;location-of-karavi-topology-private-key-file&amp;gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;    --set-file otelCollector.certificateFile=&amp;lt;location-of-otel-collector-certificate-file&amp;gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;    --set-file otelCollector.privateKeyFile=&amp;lt;location-of-otel-collector-private-key-file&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;configuration&#34;&gt;Configuration&lt;/h2&gt;
 &lt;p&gt;The following table lists the configurable parameters of the CSM for Observability Helm chart and their default values.&lt;/p&gt;
@@ -386,7 +386,7 @@ You may obtain a copy of the License at
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;installer-usage&#34;&gt;Installer Usage&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;[user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh --help
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh --help
 
 Help for ./karavi-observability-install.sh
 
@@ -399,7 +399,7 @@ Options:
   Required
   --namespace[=]&amp;lt;namespace&amp;gt;                                   Namespace where Karavi Observability will be installed
   Optional
-  --csi-powerflex-namespace[=]&amp;lt;csi powerflex namespace&amp;gt;       Namespace where CSI PowerFlex is installed, default is &#39;vxflexos&#39;
+  --csi-powerflex-namespace[=]&amp;lt;csi powerflex namespace&amp;gt;       Namespace where CSI PowerFlex is installed, default is &amp;#39;vxflexos&amp;#39;
   --set-file                                                  Set values from files used during helm installation (can be specified multiple times)
   --skip-verify                                               Skip verification of the environment
   --values[=]&amp;lt;values.yaml&amp;gt;                                    Values file, which defines configuration values
@@ -412,11 +412,11 @@ Options:
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Clone the GitHub repository:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@system /home/user]# git clone https://github.com/dell/karavi-observability.git
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@system /home/user]# git clone https://github.com/dell/karavi-observability.git
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Change to the installer directory:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@system /home/user]# cd karavi-observability/installer
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@system /home/user]# cd karavi-observability/installer
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Execute the installation script.
@@ -427,7 +427,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured in &lt;code&gt;myvalues.yaml&lt;/code&gt; for CSM Observability.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;[user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
 ---------------------------------------------------------------------------------
 &amp;gt; Installing Karavi Observability in namespace karavi on 1.21
 ---------------------------------------------------------------------------------
@@ -525,17 +525,17 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the &lt;code&gt;offline-installer.sh&lt;/code&gt; script to a local Linux system using &lt;code&gt;curl&lt;/code&gt; or &lt;code&gt;wget&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# curl https://raw.githubusercontent.com/dell/karavi-observability/main/installer/offline-installer.sh --output offline-installer.sh
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user]# curl https://raw.githubusercontent.com/dell/karavi-observability/main/installer/offline-installer.sh --output offline-installer.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;or&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# wget -O offline-installer.sh https://raw.githubusercontent.com/dell/karavi-observability/main/installer/offline-installer.sh
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user]# wget -O offline-installer.sh https://raw.githubusercontent.com/dell/karavi-observability/main/installer/offline-installer.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Set the file as executable.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# chmod +x offline-installer.sh
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user]# chmod +x offline-installer.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Build the bundle by providing the Helm chart name as the argument:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# ./offline-installer.sh -c dell/karavi-observability
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user]# ./offline-installer.sh -c dell/karavi-observability
 
 *
 * Adding Helm repository https://dell.github.io/helm-charts
@@ -561,16 +561,16 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the bundle file to another Linux system that has access to the internal Docker registry and that can install the Helm chart. From that Linux system, unpack the bundle.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# tar -xzf offline-karavi-observability-bundle.tar.gz
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user]# tar -xzf offline-karavi-observability-bundle.tar.gz
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Change directory into the new directory created from unpacking the bundle:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user]# cd offline-karavi-observability-bundle
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user]# cd offline-karavi-observability-bundle
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Prepare the bundle by providing the internal Docker registry URL.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle]# ./offline-installer.sh -p &amp;lt;my-registry&amp;gt;:5000
-     
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle]# ./offline-installer.sh -p &amp;lt;my-registry&amp;gt;:5000
+
 *
 * Loading, tagging, and pushing Docker images to registry &amp;lt;my-registry&amp;gt;:5000/
 
@@ -584,22 +584,22 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Change directory to &lt;code&gt;helm&lt;/code&gt; which contains the updated Helm chart directory:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle]# cd helm
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle]# cd helm
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install necessary cert-manager CustomResourceDefinitions provided:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl apply --validate=false -f cert-manager.crds.yaml
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl apply --validate=false -f cert-manager.crds.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the CSI Driver Secret(s)&lt;/p&gt;
 &lt;p&gt;Copy the CSI Driver Secret from the namespace where CSI Driver is installed to the namespace where CSM for Observability is to be installed.&lt;/p&gt;
 &lt;p&gt;CSI Driver for PowerFlex:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-emc-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerFlex, perform the following steps:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;CSI Driver for PowerStore&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Now that the required images have been made available and the Helm chart&amp;rsquo;s configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart&amp;rsquo;s repository.&lt;/p&gt;
@@ -609,7 +609,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm install -n install-namespace app-name karavi-observability
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm install -n install-namespace app-name karavi-observability
 
 NAME: app-name
 LAST DEPLOYED: Fri Nov  6 08:48:13 2020
@@ -617,7 +617,6 @@ NAMESPACE: install-namespace
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
 

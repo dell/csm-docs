@@ -38,9 +38,9 @@
         
         &lt;h2 id=&#34;uninstall-a-csi-driver-installed-via-helm&#34;&gt;Uninstall a CSI driver installed via Helm&lt;/h2&gt;
 &lt;p&gt;To uninstall a driver, the &lt;code&gt;csi-uninstall.sh&lt;/code&gt; script provides a handy wrapper around the &lt;code&gt;helm&lt;/code&gt; utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the driver:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;./csi-uninstall.sh --namespace &amp;lt;driver-namespace&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;./csi-uninstall.sh --namespace &amp;lt;driver-namespace&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For usage information:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[dell-csi-helm-installer]# ./csi-uninstall.sh -h
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[dell-csi-helm-installer]# ./csi-uninstall.sh -h
 Help for ./csi-uninstall.sh
 
 Usage: ./csi-uninstall.sh options...
@@ -54,7 +54,7 @@ Options:
 &lt;p&gt;For uninstalling any CSI drivers deployed by the Dell CSI Operator, just delete the respective Custom Resources.&lt;br&gt;
 This can be done using OperatorHub GUI by deleting the CR or via kubectl.&lt;/p&gt;
 &lt;p&gt;For example - To uninstall the driver installed via the operator, delete the Custom Resource(CR)&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# Replace driver-type, driver-name and driver-namespace with their respective values
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Replace driver-type, driver-name and driver-namespace with their respective values
 kubectl delete &amp;lt;driver-type&amp;gt;/&amp;lt;driver-name&amp;gt; -n &amp;lt;driver-namespace&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
       </description>
