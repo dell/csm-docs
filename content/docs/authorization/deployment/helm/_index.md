@@ -164,7 +164,7 @@ The port that exposes these services is `30016`.
 A `storage` entity in CSM Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:
 
 ```
-karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id 11e4e7d35817bd0f --user admin --password Password123 --insecure --array-insecure --addr storage.csm-authorization.com:30016
+karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr storage.csm-authorization.com:30016
 ```
 
  *NOTE*: 
@@ -186,7 +186,7 @@ karavictl tenant create --name Finance --insecure --addr tenant.csm-authorizatio
 A `role` consists of a name, the storage to use, and the quota limit for the storage pool to be used. For example, to create a role named `FinanceRole` using the PowerFlex storage created above with a quota limit of 100GB in storage pool `myStoragePool`:
 
 ```
-karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=11e4e7d35817bd0f=myStoragePool=100GB
+karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
 ```
 
  *NOTE*: 
