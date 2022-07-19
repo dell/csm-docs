@@ -100,7 +100,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.754a2fff0f0cf54ebb83889fb93dd287.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.299beeb41d03766f3a67e3f40c0a50f8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -122,7 +122,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.754a2fff0f0cf54ebb83889fb93dd287.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.299beeb41d03766f3a67e3f40c0a50f8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -749,10 +749,10 @@ This allows CSM for Authorization to be installed in network-restricted environm
 karavictl generate token --tenant $TenantName --insecure --addr &#34;grpc.${AuthorizationProxyHost}&#34; | jq -r &#39;.Token&#39; &gt; token.yaml
 
 echo === Copy token to Driver Host ===
-sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
+sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
 </code></pre><h3 id="copy-the-karavictl-binary-to-the-kubernetes-master-node">Copy the karavictl Binary to the Kubernetes Master Node</h3>
 <p>The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell CSI driver with CSM for Authorization.</p>
-<pre tabindex="0"><code>sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
+<pre tabindex="0"><code>sshpass -p ${DriverHostPassword} scp bin/karavictl root@{DriverHostVMIP}:/tmp/karavictl
 </code></pre><blockquote>
 <p><strong>Note</strong>: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.</p>
 </blockquote>

@@ -195,10 +195,10 @@ This allows CSM for Authorization to be installed in network-restricted environm
 karavictl generate token --tenant $TenantName --insecure --addr &amp;#34;grpc.${AuthorizationProxyHost}&amp;#34; | jq -r &amp;#39;.Token&amp;#39; &amp;gt; token.yaml
 
 echo === Copy token to Driver Host ===
-sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
+sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;copy-the-karavictl-binary-to-the-kubernetes-master-node&#34;&gt;Copy the karavictl Binary to the Kubernetes Master Node&lt;/h3&gt;
 &lt;p&gt;The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell CSI driver with CSM for Authorization.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sshpass -p ${DriverHostPassword} scp bin/karavictl root@{DriverHostVMIP}:/tmp/karavictl
 &lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -726,7 +726,7 @@ tenant-service                                     ClusterIP      10.109.60.141 
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The port that exposes these services is &lt;code&gt;30016&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;configure-storage&#34;&gt;Configure Storage&lt;/h3&gt;
 &lt;p&gt;A &lt;code&gt;storage&lt;/code&gt; entity in CSM Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id 11e4e7d35817bd0f --user admin --password Password123 --insecure --array-insecure --addr storage.csm-authorization.com:30016
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr storage.csm-authorization.com:30016
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The &lt;code&gt;insecure&lt;/code&gt; flag specifies to skip certificate validation when connecting to the CSM Authorization storage service. The &lt;code&gt;array-insecure&lt;/code&gt; flag specifies to skip certificate validation when proxy-service connects to the backend storage array. Run &lt;code&gt;karavictl storage create --help&lt;/code&gt; for help.&lt;/li&gt;
@@ -740,7 +740,7 @@ tenant-service                                     ClusterIP      10.109.60.141 
 &lt;/ul&gt;
 &lt;h3 id=&#34;configuring-roles&#34;&gt;Configuring Roles&lt;/h3&gt;
 &lt;p&gt;A &lt;code&gt;role&lt;/code&gt; consists of a name, the storage to use, and the quota limit for the storage pool to be used. For example, to create a role named &lt;code&gt;FinanceRole&lt;/code&gt; using the PowerFlex storage created above with a quota limit of 100GB in storage pool &lt;code&gt;myStoragePool&lt;/code&gt;:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=11e4e7d35817bd0f=myStoragePool=100GB
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;NOTE&lt;/em&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The &lt;code&gt;insecure&lt;/code&gt; flag specifies to skip certificate validation when connecting to the role service. Run &lt;code&gt;karavictl role create --help&lt;/code&gt; for help.&lt;/li&gt;

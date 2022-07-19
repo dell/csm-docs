@@ -100,7 +100,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.754a2fff0f0cf54ebb83889fb93dd287.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.299beeb41d03766f3a67e3f40c0a50f8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -122,7 +122,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.754a2fff0f0cf54ebb83889fb93dd287.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.299beeb41d03766f3a67e3f40c0a50f8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -887,7 +887,7 @@ tenant-service                                     ClusterIP      10.109.60.141 
 </code></pre><p>The port that exposes these services is <code>30016</code>.</p>
 <h3 id="configure-storage">Configure Storage</h3>
 <p>A <code>storage</code> entity in CSM Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:</p>
-<pre tabindex="0"><code>karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id 11e4e7d35817bd0f --user admin --password Password123 --insecure --array-insecure --addr storage.csm-authorization.com:30016
+<pre tabindex="0"><code>karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr storage.csm-authorization.com:30016
 </code></pre><p><em>NOTE</em>:</p>
 <ul>
 <li>The <code>insecure</code> flag specifies to skip certificate validation when connecting to the CSM Authorization storage service. The <code>array-insecure</code> flag specifies to skip certificate validation when proxy-service connects to the backend storage array. Run <code>karavictl storage create --help</code> for help.</li>
@@ -901,7 +901,7 @@ tenant-service                                     ClusterIP      10.109.60.141 
 </ul>
 <h3 id="configuring-roles">Configuring Roles</h3>
 <p>A <code>role</code> consists of a name, the storage to use, and the quota limit for the storage pool to be used. For example, to create a role named <code>FinanceRole</code> using the PowerFlex storage created above with a quota limit of 100GB in storage pool <code>myStoragePool</code>:</p>
-<pre tabindex="0"><code>karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=11e4e7d35817bd0f=myStoragePool=100GB
+<pre tabindex="0"><code>karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
 </code></pre><p><em>NOTE</em>:</p>
 <ul>
 <li>The <code>insecure</code> flag specifies to skip certificate validation when connecting to the role service. Run <code>karavictl role create --help</code> for help.</li>
