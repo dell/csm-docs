@@ -191,7 +191,7 @@ After creating the role bindings, the next logical step is to generate the acces
   karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > token.yaml
 
   echo === Copy token to Driver Host ===
-  sshpass -p $DriverHostPassword scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
+  sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
   ```
 
 ### Copy the karavictl Binary to the Kubernetes Master Node
@@ -199,7 +199,7 @@ After creating the role bindings, the next logical step is to generate the acces
 The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell CSI driver with CSM for Authorization.
 
 ```
-sshpass -p dangerous scp bin/karavictl root@10.247.96.174:/tmp/karavictl
+sshpass -p ${DriverHostPassword} scp bin/karavictl root@{DriverHostVMIP}:/tmp/karavictl
 ```
 
 >__Note__: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.
