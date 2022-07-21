@@ -146,6 +146,10 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
 &lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;After expanding file system volume , new size is not getting reflected inside the container&lt;/td&gt;
+&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/dell/csm/issues/378&#34;&gt;https://github.com/dell/csm/issues/378&lt;/a&gt; . Workaround : Remount the volumes &lt;br/&gt; 1. Edit the replica count as 0 in application StatefulSet &lt;br /&gt; 2. Change the replica count as 1 for same StatefulSet.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;

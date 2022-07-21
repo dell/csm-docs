@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powermax/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-07-21T11:28:38+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Release notes for PowerMax CSI driver">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="388">
+<meta itemprop="dateModified" content="2022-07-21T11:28:38+05:30" />
+<meta itemprop="wordCount" content="440">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Release notes for PowerMax CSI driver"/>
@@ -100,7 +100,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.299beeb41d03766f3a67e3f40c0a50f8.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.faca2387b7847bbede05a864bb65d532.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -122,7 +122,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.299beeb41d03766f3a67e3f40c0a50f8.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.faca2387b7847bbede05a864bb65d532.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -608,6 +608,10 @@
 <tr>
 <td>When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
 <td>This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">https://github.com/kubernetes-csi/external-attacher/issues/215</a>. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node</td>
+</tr>
+<tr>
+<td>After expanding file system volume , new size is not getting reflected inside the container</td>
+<td>This is a known issue and has been reported at <a href="https://github.com/dell/csm/issues/378">https://github.com/dell/csm/issues/378</a> . Workaround : Remount the volumes <br/> 1. Edit the replica count as 0 in application StatefulSet <br /> 2. Change the replica count as 1 for same StatefulSet.</td>
 </tr>
 </tbody>
 </table>
