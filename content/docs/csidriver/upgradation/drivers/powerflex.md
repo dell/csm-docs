@@ -22,7 +22,19 @@ You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operato
 - If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.
 - To update any installation parameter after the driver has been installed, change the `myvalues.yaml` file and run the install script with the option _\-\-upgrade_, for example: `./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade`.
 - The logging configuration from v1.5 will not work in v2.1, since the log configuration parameters are now set in the values.yaml file located at helm/csi-vxflexos/values.yaml. Please set the logging configuration parameters in the values.yaml file.
-
+- You cannot upgrade between drivers with different fsGroupPolicies. To check the current driver's fsGroupPolicy, use the following command:  
+``` kubectl describe csidriver csi-vxflexos.dellemc.com```   
+and check the "Spec" section:    
+```
+...
+Spec:
+  Attach Required:     true
+  Fs Group Policy:     ReadWriteOnceWithFSType
+  Pod Info On Mount:   true
+  Requires Republish:  false
+  Storage Capacity:    false
+...
+```
 ## Upgrade using Dell CSI Operator:
 **Note:** Upgrading the Operator does not upgrade the CSI Driver.
 
