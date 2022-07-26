@@ -264,10 +264,11 @@ Any existing installations of Dell CSI Operator (v1.2.0 or later) installed usin
 
 
 
-&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
+&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
 	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/docs/csidriver/installation/operator/non-olm-1_huaf31b511a477f907d9b0d23ca14fcbe0_117473_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;2162&#34;&gt;
 	
-&lt;/div&gt;
+&lt;/figure&gt;
+
 &lt;ol start=&#34;4&#34;&gt;
 &lt;li&gt;Run the command &lt;code&gt;oc get pods -n dell-csi-operator&lt;/code&gt; to validate the installation. If completed successfully, you should be able to see the operator-related pod in the &amp;lsquo;dell-csi-operator&amp;rsquo; namespace.&lt;/li&gt;
 &lt;/ol&gt;
@@ -278,10 +279,11 @@ Any existing installations of Dell CSI Operator (v1.2.0 or later) installed usin
 
 
 
-&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 3510px&#34;&gt;
+&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 3510px&#34;&gt;
 	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/docs/csidriver/installation/operator/non-olm-2_hudc21ddef59adb7aa6bbfff1ac2d31fc4_92587_3500x800_resize_q75_catmullrom.jpg&#34; width=&#34;3500&#34; height=&#34;800&#34;&gt;
 	
-&lt;/div&gt;
+&lt;/figure&gt;
+
 &lt;h2 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h2&gt;
 &lt;p&gt;As part of the Dell CSI Operator installation, a CRD representing each driver installation is also installed.&lt;br&gt;
 List of CRDs which are installed in API Group &lt;code&gt;storage.dell.com&lt;/code&gt;&lt;/p&gt;

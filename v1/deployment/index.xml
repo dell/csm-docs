@@ -392,10 +392,11 @@ adminPassword:
 
 
 
-&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
+&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
 	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/install_hu65a008b76338bb66f6abc1e8679a223d_170165_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1252&#34;&gt;
 	
-&lt;/div&gt;
+&lt;/figure&gt;
+
 &lt;ol start=&#34;5&#34;&gt;
 &lt;li&gt;Run the command &lt;code&gt;kubectl get pods -n dell-csm-operator&lt;/code&gt; to validate the installation. If installed successfully, you should be able to see the operator pod in the &lt;code&gt;dell-csm-operator&lt;/code&gt; namespace.&lt;/li&gt;
 &lt;/ol&gt;
@@ -406,10 +407,11 @@ adminPassword:
 
 
 
-&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
+&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
 	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/install_pods_hu22d1b56e0d1995d45d1947c2987829d0_116545_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;785&#34;&gt;
 	
-&lt;/div&gt;
+&lt;/figure&gt;
+
 &lt;h4 id=&#34;operator-installation-on-a-cluster-with-olm&#34;&gt;Operator Installation on a cluster with OLM&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/csm-operator&#34;&gt;Dell CSM Operator repository&lt;/a&gt;.&lt;/li&gt;
@@ -426,10 +428,11 @@ adminPassword:
 
 
 
-&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
+&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
 	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/install_olm_hu2eedd74f931e8260c860feb0c72f1e62_182304_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1022&#34;&gt;
 	
-&lt;/div&gt;
+&lt;/figure&gt;
+
 &lt;ol start=&#34;4&#34;&gt;
 &lt;li&gt;Once installation completes, run the command &lt;code&gt;kubectl get pods -n test-csm-operator-olm&lt;/code&gt; to validate the installation. If installed successfully, you should be able to see the operator pods and CSV in the &lt;code&gt;test-csm-operator-olm&lt;/code&gt; namespace. The CSV phase will be in &lt;code&gt;Succeeded&lt;/code&gt; state.&lt;/li&gt;
 &lt;/ol&gt;
@@ -440,10 +443,11 @@ adminPassword:
 
 
 
-&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
+&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
 	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/install_olm_pods_huda4520e12712062a7cd7a9d2b5385714_107093_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;487&#34;&gt;
 	
-&lt;/div&gt;
+&lt;/figure&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.2&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -464,10 +468,11 @@ adminPassword:
 
 
 
-&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
+&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
 	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/uninstall_hu709274147079b066148e855aef0845a9_110286_2500x0_resize_q75_catmullrom.JPG&#34; width=&#34;2500&#34; height=&#34;738&#34;&gt;
 	
-&lt;/div&gt;
+&lt;/figure&gt;
+
 &lt;h4 id=&#34;operator-uninstallation-on-a-cluster-with-olm&#34;&gt;Operator uninstallation on a cluster with OLM&lt;/h4&gt;
 &lt;p&gt;To uninstall a CSM operator installed with OLM run &lt;code&gt;bash scripts/uninstall_olm.sh&lt;/code&gt;. This will uninstall the operator in  &lt;code&gt;test-csm-operator-olm&lt;/code&gt; namespace.&lt;/p&gt;
 
@@ -477,10 +482,11 @@ adminPassword:
 
 
 
-&lt;div class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
+&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
 	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/uninstall_olm_huffe5566d5d7fb4af320bc708dd65cfbb_46203_2500x0_resize_q75_catmullrom.JPG&#34; width=&#34;2500&#34; height=&#34;504&#34;&gt;
 	
-&lt;/div&gt;
+&lt;/figure&gt;
+
 &lt;h3 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h3&gt;
 &lt;p&gt;As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.&lt;br&gt;
 &lt;code&gt;containerstoragemodule&lt;/code&gt; CRD is installed in API Group &lt;code&gt;storage.dell.com&lt;/code&gt;.&lt;/p&gt;
