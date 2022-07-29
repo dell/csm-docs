@@ -5,7 +5,7 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment
 ---
 
-CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms. 
+CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.
 
 The following CSM Authorization components are installed in the specified namespace:
 - proxy-service, which forwards requests from the CSI Driver to the backend storage array
@@ -13,7 +13,7 @@ The following CSM Authorization components are installed in the specified namesp
 - role-service, which configures roles for tenants to be bound to
 - storage-service, which configures backend storage arrays for the proxy-server to foward requests to
 
-The folloiwng third-party components are installed in the specified namespace:
+The following third-party components are installed in the specified namespace:
 - redis, which stores data regarding tenants and their volume ownership, quota, and revokation status
 - redis-commander, a web management tool for Redis
 
@@ -42,13 +42,13 @@ The following third-party components are optionally installed in the specified n
     ```
 
     After editing the file, run the following command to create a secret called `karavi-config-secret`:
-    
+
     `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml`
 
     Use the following command to replace or update the secret:
 
     `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
-   
+
 4. Copy the default values.yaml file `cp charts/csm-authorization/values.yaml myvalues.yaml`
 
 5. Look over all the fields in `myvalues.yaml` and fill in/adjust any as needed.
@@ -87,7 +87,7 @@ The following third-party components are optionally installed in the specified n
 | redis.images.commander | The image to use for Redis Commander. | Yes | rediscommander/redis-commander:latest |
 | redis.storageClass | The storage class for Redis to use for persistence. If not supplied, the default storage class is used. | No | - |
 
- *NOTE*: 
+ *NOTE*:
 - The tenant, role, and storage services use GRPC. If the Ingress Controller requires annotations to support GRPC, they must be supplied.
 
 6. Install the driver using `helm`:
@@ -112,7 +112,7 @@ The Karavictl CLI can be obtained directly from the [GitHub repository's release
 
 In order to run `karavictl` commands, the binary needs to exist in your PATH, for example /usr/local/bin.
 
-Karavictl commands and intended use can be found [here](../../cli/). 
+Karavictl commands and intended use can be found [here](../../cli/).
 
 ## Configuring the CSM Authorization Proxy Server
 
@@ -167,7 +167,7 @@ A `storage` entity in CSM Authorization consists of the storage type (PowerFlex,
 karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr storage.csm-authorization.com:30016
 ```
 
- *NOTE*: 
+ *NOTE*:
 - The `insecure` flag specifies to skip certificate validation when connecting to the CSM Authorization storage service. The `array-insecure` flag specifies to skip certificate validation when proxy-service connects to the backend storage array. Run `karavictl storage create --help` for help.
 
 ### Configuring Tenants
@@ -178,7 +178,7 @@ A `tenant` is a Kubernetes cluster that a role will be bound to. For example, to
 karavictl tenant create --name Finance --insecure --addr tenant.csm-authorization.com:30016
 ```
 
- *NOTE*: 
+ *NOTE*:
 - The `insecure` flag specifies to skip certificate validation when connecting to the tenant service. Run `karavictl tenant create --help` for help.
 
 ### Configuring Roles
@@ -189,7 +189,7 @@ A `role` consists of a name, the storage to use, and the quota limit for the sto
 karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
 ```
 
- *NOTE*: 
+ *NOTE*:
 - The `insecure` flag specifies to skip certificate validation when connecting to the role service. Run `karavictl role create --help` for help.
 
 ### Configuring Role Bindings
@@ -200,7 +200,7 @@ A `role binding` binds a role to a tenant. For example, to bind the `FinanceRole
 karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr tenant.csm-authorization.com:30016
 ```
 
- *NOTE*: 
+ *NOTE*:
 - The `insecure` flag specifies to skip certificate validation when connecting to the tenant service. Run `karavictl rolebinding create --help` for help.
 
 ### Generating a Token
@@ -231,6 +231,11 @@ data:
 
 This secret must be applied in the driver namespace. Continue reading the next section for configuring the driver to use CSM Authorization.
 
+>__Note__:
+>If you are unable to use [jq](https://stedolan.github.io/jq/) then you can use `sed` to extract the token and convert to the YAML format. You may want to save the output to a file and examine before using in kubectl commands:
+>```
+> karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
+>```
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
@@ -265,9 +270,9 @@ Create the karavi-authorization-config secret using the following command:
 
 `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
 
->__Note__:  
+>__Note__:
 > - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
-> - For PowerScale, the *systemID* will be the *clusterName* of the array. 
+> - For PowerScale, the *systemID* will be the *clusterName* of the array.
 >   - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 3. Create the proxy-server-root-certificate secret.
 
@@ -280,7 +285,7 @@ Create the karavi-authorization-config secret using the following command:
       `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -`
 
 
->__Note__: Follow the steps below for additional configurations to one or more of the supported CSI drivers. 
+>__Note__: Follow the steps below for additional configurations to one or more of the supported CSI drivers.
 #### PowerFlex
 
 Please refer to step 5 in the [installation steps for PowerFlex](../../../csidriver/installation/helm/powerflex) to edit the parameters in samples/config.yaml file to communicate with the sidecar.
@@ -293,12 +298,12 @@ Please refer to step 5 in the [installation steps for PowerFlex](../../../csidri
 
 Please refer to step 9 in the [installation steps for PowerFlex](../../../csidriver/installation/helm/powerflex) to edit the parameters in *myvalues.yaml* file to communicate with the sidecar.
 
-3. Enable CSM for Authorization and provide *proxyHost* address 
+3. Enable CSM for Authorization and provide *proxyHost* address
 
 4. Install the CSI PowerFlex driver
 #### PowerMax
 
-Please refer to step 7 in the [installation steps for PowerMax](../../../csidriver/installation/helm/powermax) to edit the parameters in *my-powermax-settings.yaml* to communicate with the sidecar. 
+Please refer to step 7 in the [installation steps for PowerMax](../../../csidriver/installation/helm/powermax) to edit the parameters in *my-powermax-settings.yaml* to communicate with the sidecar.
 
 1. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
 
@@ -308,7 +313,7 @@ Please refer to step 7 in the [installation steps for PowerMax](../../../csidriv
 
 #### PowerScale
 
-Please refer to step 5 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in *my-isilon-settings.yaml* to communicate with the sidecar. 
+Please refer to step 5 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in *my-isilon-settings.yaml* to communicate with the sidecar.
 
 1. Update *endpointPort* to match the endpoint port number set in samples/secret/karavi-authorization-config.json
 
@@ -316,7 +321,7 @@ Please refer to step 5 in the [installation steps for PowerScale](../../../csidr
 > - In *my-isilon-settings.yaml*, endpointPort acts as a default value. If endpointPort is not specified in *my-isilon-settings.yaml*, then it should be specified in the *endpoint* parameter of samples/secret/secret.yaml.
 > - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 
-2. Enable CSM for Authorization and provide *proxyHost* address 
+2. Enable CSM for Authorization and provide *proxyHost* address
 
 Please refer to step 6 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
 
@@ -327,7 +332,7 @@ Please refer to step 6 in the [installation steps for PowerScale](../../../csidr
 4. Create the isilon-creds secret using the following command:
 
     `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
-   
+
 5. Install the CSI PowerScale driver
 ## Updating CSM for Authorization Proxy Server Configuration
 
@@ -335,9 +340,9 @@ CSM for Authorization has a subset of configuration parameters that can be updat
 
 | Parameter | Type | Default | Description |
 | --------- | ---- | ------- | ----------- |
-| web.jwtsigningsecret | String | "secret" |The secret used to sign JWT tokens | 
+| web.jwtsigningsecret | String | "secret" |The secret used to sign JWT tokens |
 
-Updating configuration parameters can be done by editing the `karavi-config-secret`. The secret can be queried using k3s and kubectl like so: 
+Updating configuration parameters can be done by editing the `karavi-config-secret`. The secret can be queried using k3s and kubectl like so:
 
 `kubectl -n authorization get secret/karavi-config-secret`
 

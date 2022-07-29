@@ -1,6 +1,6 @@
 ---
 title: RPM
-linktitle: RPM 
+linktitle: RPM
 weight: 2
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM deployment
@@ -23,7 +23,7 @@ These packages need to be installed on the Linux host:
 
 ## Deploying the CSM Authorization Proxy Server
 
-The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator. 
+The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.
 
 The CSM for Authorization proxy server is installed using a single binary installer.
 
@@ -31,7 +31,7 @@ If CSM for Authorization is being installed on a system where SELinux is enabled
 
 ### Single Binary Installer
 
-The easiest way to obtain the single binary installer RPM is directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.  
+The easiest way to obtain the single binary installer RPM is directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.
 
 Alternatively, the single binary installer can be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
 
@@ -46,7 +46,7 @@ A Storage Administrator can execute the installer or rpm package as a root user 
 
 ### Installing the RPM
 
-1. Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location `$HOME/.karavi/config.json` having the following contents: 
+1. Before installing the rpm, some network and security configuration inputs need to be provided in json format. The json file should be created in the location `$HOME/.karavi/config.json` having the following contents:
 
     ```json
     {
@@ -81,11 +81,11 @@ A Storage Administrator can execute the installer or rpm package as a root user 
 > - `DNS-hostname` refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running `nslookup <IP_address>`
 > - There are a number of ways to create certificates. In a production environment, certificates are usually created and managed by an IT administrator. Otherwise, certificates can be created using OpenSSL.
 
-2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS-hostname` is also required. All traffic from `grpc.DNS-hostname` needs to be routed to `DNS-hostname` address, this can be configured by adding a new DNS entry for `grpc.DNS-hostname` or providing a temporary path in the systems `/etc/hosts` file. 
+2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS-hostname` is also required. All traffic from `grpc.DNS-hostname` needs to be routed to `DNS-hostname` address, this can be configured by adding a new DNS entry for `grpc.DNS-hostname` or providing a temporary path in the systems `/etc/hosts` file.
 
->__Note__: The certificate provided in `crtFile` should be valid for both the `DNS-hostname` and the `grpc.DNS-hostname` address. 
+>__Note__: The certificate provided in `crtFile` should be valid for both the `DNS-hostname` and the `grpc.DNS-hostname` address.
 
-    For example, create the certificate config file with alternate names (to include DNS-hostname and grpc.DNS-hostname) and then create the .crt file: 
+    For example, create the certificate config file with alternate names (to include DNS-hostname and grpc.DNS-hostname) and then create the .crt file:
 
       ```
       CN = DNS-hostname
@@ -130,7 +130,7 @@ Run the following commands on the Authorization proxy server:
   export Array1Password=""
   export Array1Pool=""
   export Array1Endpoint=""
-  
+
   # Specify info about Array2
   export Array2Type=""
   export Array2SystemID=""
@@ -140,7 +140,7 @@ Run the following commands on the Authorization proxy server:
   export Array2Endpoint=""
 
   # Specify IPs
-  export DriverHostVMIP="" 
+  export DriverHostVMIP=""
   export DriverHostVMPassword=""
   export DriverHostVMUser=""
 
@@ -156,7 +156,7 @@ Run the following commands on the Authorization proxy server:
             --user ${Array1User} \
 			      --password ${Array1Password} \
             --array-insecure
-  
+
   # Add array2 to authorization
    karavictl storage create \
             --type ${Array2Type} \
@@ -165,14 +165,14 @@ Run the following commands on the Authorization proxy server:
             --user ${Array2User} \
 			      --password ${Array2Password} \
             --array-insecure
-    
+
   echo === Creating Tenant ===
   karavictl tenant create -n $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}"
 
   echo === Creating Role ===
   karavictl role create \
            --role=${RoleName}=${Array1Type}=${Array1SystemID}=${Array1Pool}=${RoleQuota} \
-           --role=${RoleName}=${Array2Type}=${Array2SystemID}=${Array2Pool}=${RoleQuota}   
+           --role=${RoleName}=${Array2Type}=${Array2SystemID}=${Array2Pool}=${RoleQuota}
 
   echo === === Binding Role ===
   karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure --addr "grpc.${AuthorizationProxyHost}"
@@ -182,7 +182,7 @@ Run the following commands on the Authorization proxy server:
 
 After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
 
->__Note__: 
+>__Note__:
 > - The `--insecure` flag is only necessary if certificates were not provided in `$HOME/.karavi/config.json`.
 > - This sample copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
 
@@ -191,8 +191,14 @@ After creating the role bindings, the next logical step is to generate the acces
   karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > token.yaml
 
   echo === Copy token to Driver Host ===
-  sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
+  sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml
   ```
+
+>__Note__:
+>If you are unable to use [jq](https://stedolan.github.io/jq/) then you can use `sed` to extract the token and convert to the YAML format:
+>```
+>karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
+>```
 
 ### Copy the karavictl Binary to the Kubernetes Master Node
 
@@ -238,9 +244,9 @@ Create the karavi-authorization-config secret using the following command:
 
 `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
 
->__Note__:  
+>__Note__:
 > - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
-> - For PowerScale, the *systemID* will be the *clusterName* of the array. 
+> - For PowerScale, the *systemID* will be the *clusterName* of the array.
 >   - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 3. Create the proxy-server-root-certificate secret.
 
@@ -253,7 +259,7 @@ Create the karavi-authorization-config secret using the following command:
       `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -`
 
 
->__Note__: Follow the steps below for additional configurations to one or more of the supported CSI drivers. 
+>__Note__: Follow the steps below for additional configurations to one or more of the supported CSI drivers.
 #### PowerFlex
 
 Please refer to step 5 in the [installation steps for PowerFlex](../../../csidriver/installation/helm/powerflex) to edit the parameters in samples/config.yaml file to communicate with the sidecar.
@@ -266,12 +272,12 @@ Please refer to step 5 in the [installation steps for PowerFlex](../../../csidri
 
 Please refer to step 9 in the [installation steps for PowerFlex](../../../csidriver/installation/helm/powerflex) to edit the parameters in *myvalues.yaml* file to communicate with the sidecar.
 
-3. Enable CSM for Authorization and provide *proxyHost* address 
+3. Enable CSM for Authorization and provide *proxyHost* address
 
 4. Install the CSI PowerFlex driver
 #### PowerMax
 
-Please refer to step 7 in the [installation steps for PowerMax](../../../csidriver/installation/helm/powermax) to edit the parameters in *my-powermax-settings.yaml* to communicate with the sidecar. 
+Please refer to step 7 in the [installation steps for PowerMax](../../../csidriver/installation/helm/powermax) to edit the parameters in *my-powermax-settings.yaml* to communicate with the sidecar.
 
 1. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
 
@@ -281,7 +287,7 @@ Please refer to step 7 in the [installation steps for PowerMax](../../../csidriv
 
 #### PowerScale
 
-Please refer to step 5 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in *my-isilon-settings.yaml* to communicate with the sidecar. 
+Please refer to step 5 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in *my-isilon-settings.yaml* to communicate with the sidecar.
 
 1. Update *endpointPort* to match the endpoint port number set in samples/secret/karavi-authorization-config.json
 
@@ -289,7 +295,7 @@ Please refer to step 5 in the [installation steps for PowerScale](../../../csidr
 > - In *my-isilon-settings.yaml*, endpointPort acts as a default value. If endpointPort is not specified in *my-isilon-settings.yaml*, then it should be specified in the *endpoint* parameter of samples/secret/secret.yaml.
 > - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 
-2. Enable CSM for Authorization and provide *proxyHost* address 
+2. Enable CSM for Authorization and provide *proxyHost* address
 
 Please refer to step 6 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
 
@@ -300,7 +306,7 @@ Please refer to step 6 in the [installation steps for PowerScale](../../../csidr
 4. Create the isilon-creds secret using the following command:
 
     `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
-   
+
 5. Install the CSI PowerScale driver
 ## Updating CSM for Authorization Proxy Server Configuration
 
@@ -308,9 +314,9 @@ CSM for Authorization has a subset of configuration parameters that can be updat
 
 | Parameter | Type | Default | Description |
 | --------- | ---- | ------- | ----------- |
-| web.jwtsigningsecret | String | "secret" |The secret used to sign JWT tokens | 
+| web.jwtsigningsecret | String | "secret" |The secret used to sign JWT tokens |
 
-Updating configuration parameters can be done by editing the `karavi-config-secret` on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so: 
+Updating configuration parameters can be done by editing the `karavi-config-secret` on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so:
 
 `k3s kubectl -n karavi get secret/karavi-config-secret`
 
