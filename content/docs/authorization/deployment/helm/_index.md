@@ -232,7 +232,7 @@ data:
 This secret must be applied in the driver namespace. Continue reading the next section for configuring the driver to use CSM Authorization.
 
 >__Note__:
->If you are unable to use [jq](https://stedolan.github.io/jq/) then you can use `sed` to extract the token and convert to the YAML format. You may want to save the output to a file and examine before using in kubectl commands:
+>If you are unable to use [jq](https://stedolan.github.io/jq/), then you can use `sed` to extract the token and convert to the YAML format. You may want to save the output to a file and examine before using it in kubectl commands:
 >```
 > karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
 >```

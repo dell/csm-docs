@@ -195,7 +195,7 @@ After creating the role bindings, the next logical step is to generate the acces
   ```
 
 >__Note__:
->If you are unable to use [jq](https://stedolan.github.io/jq/) then you can use `sed` to extract the token and convert to the YAML format:
+>If you are unable to use [jq](https://stedolan.github.io/jq/), then you can use `sed` to extract the token and convert to the YAML format:
 >```
 >karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
 >```
