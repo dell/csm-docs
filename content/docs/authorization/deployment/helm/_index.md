@@ -215,10 +215,10 @@ karavictl generate token --tenant Finance --insecure --addr tenant.csm-authoriza
 }
 ```
 
-With [jq](https://stedolan.github.io/jq/), you process the above response to filter the secret manifest. For example:
+Process the above response to filter the secret manifest. For example using Python 3 you can run the following:
 
 ```
-karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | jq -r '.Token'
+karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | python3 -c "import json,sys;print(json.load(sys.stdin)['Token'])"
 apiVersion: v1
 kind: Secret
 metadata:
@@ -231,11 +231,6 @@ data:
 
 This secret must be applied in the driver namespace. Continue reading the next section for configuring the driver to use CSM Authorization.
 
->__Note__:
->If you are unable to use [jq](https://stedolan.github.io/jq/), then you can use `sed` to extract the token and convert to the YAML format. You may want to save the output to a file and examine before using it in kubectl commands:
->```
-> karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
->```
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
 The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
