@@ -19,7 +19,19 @@ The CSM for Authorization proxy server requires a Linux host with the following 
 
 These packages need to be installed on the Linux host:
 - container-selinux
-- https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm
+- k3s-selinux-0.4-1
+
+Use the appropriate package manager on the machine to install the packages.
+
+### Example using yum on CentOS/RedHat 7:
+
+yum install -y container-selinux
+yum install -y https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm
+
+### Example using yum on CentOS/RedHat 8:
+
+yum install -y container-selinux
+yum install -y https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm
 
 ## Deploying the CSM Authorization Proxy Server
 
