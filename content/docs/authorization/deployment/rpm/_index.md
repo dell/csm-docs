@@ -39,6 +39,8 @@ yum install -y https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-seli
 
 For environments where `yum` will not work, obtain the supported version of container-selinux for your OS version and install it.
 
+The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [https://centos.pkgs.org/7/centos-extras-x86_64/](https://centos.pkgs.org/7/centos-extras-x86_64/) and [https://centos.pkgs.org/8/centos-appstream-x86_64/](https://centos.pkgs.org/8/centos-appstream-x86_64/), respectively.
+
 The k3s-selinux-0.4-1 RPM can be obtained from [https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm](https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm) or [https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm](https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm) for CentOS/RedHat 7 and 8, respectively. Download the supported version of k3s-selinux-0.4-1 for your OS version and install it.
 
 ## Deploying the CSM Authorization Proxy Server
