@@ -90,7 +90,6 @@ parameters:
   replication.storage.dell.com/remoteStorageClassName: "unity-replication"
   replication.storage.dell.com/remoteClusterID: "target"
   replication.storage.dell.com/remoteSystem: "APM000000002"
-  replication.storage.dell.com/remoteClusterID: "tgt-cluster-id"
   replication.storage.dell.com/rpo: "5"
   replication.storage.dell.com/ignoreNamespaces: "false"
   replication.storage.dell.com/volumeGroupPrefix: "csi"
