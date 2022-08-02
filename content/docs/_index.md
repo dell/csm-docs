@@ -1,7 +1,7 @@
 
 ---
-title: "Dell Technologies (Dell) Container Storage Modules (CSM)"
-linkTitle: "Dell Technologies (Dell) Container Storage Modules (CSM)"
+title: "Container Storage Modules"
+linkTitle: "Container Storage Modules"
 weight: 20
 menu:
   main:
