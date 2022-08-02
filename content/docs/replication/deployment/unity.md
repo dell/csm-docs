@@ -9,7 +9,7 @@ description: >
 
 Container Storage Modules (CSM) Replication sidecar is a helper container that is installed alongside a CSI driver to facilitate replication functionality. Such CSI drivers must implement `dell-csi-extensions` calls.
 
-CSI driver for Dell Unity supports necessary extension calls from `dell-csi-extensions`. To be able to provision replicated volumes you would need to do the steps described in the following sections.
+CSI driver for Dell Unity supports necessary extension calls from `dell-csi-extensions`. To be able to provision replicated volumes you would need to do the steps described in these sections.
 
 ### Before Installation
 
@@ -21,7 +21,7 @@ Unity storage.
 #### In Kubernetes
 Ensure you installed CRDs and replication controller in your clusters.
 
-To verify you have everything in order you can execute the following commands:
+To verify you have everything in order you can execute these commands:
 
 * Check controller pods
     ```shell
