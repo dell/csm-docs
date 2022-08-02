@@ -26,9 +26,9 @@ This document outlines all dellctl commands, their intended use, options that ca
 
 
 ## Installation instructions
-1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.4.0)
-2. Chmod +x dellctl
-3. Move `dellctl` to `/usr/loca/bin` or add `dellctl`'s containing directory path to PATH environment variable.
+1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.4.0).
+2. chmod +x dellctl
+3. Move `dellctl` to `/usr/local/bin` or add `dellctl`'s containing directory path to PATH environment variable.
 4. Run `dellctl --help` to know available commands or run `dellctl command --help` to know more about a specific command.
 
 By default, the `dellctl` runs against local cluster(referenced by `KUBECONFIG` environment variable or by a kube config file present at default location).
@@ -166,8 +166,8 @@ List all clusters currently being managed by dellctl
 ```
 # dellctl cluster get
 CLUSTER ID      VERSION URL
-cluster1        v1.22   https://10.225.7.48:6443
-cluster2        v1.22   https://10.247.103.145:6443
+cluster1        v1.22   https://1.2.3.4:6443
+cluster2        v1.22   https://1.2.3.5:6443
 ```
 
 
