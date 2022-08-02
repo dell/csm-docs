@@ -13,7 +13,7 @@ The following CSM Authorization components are installed in the specified namesp
 - role-service, which configures roles for tenants to be bound to
 - storage-service, which configures backend storage arrays for the proxy-server to foward requests to
 
-The folloiwng third-party components are installed in the specified namespace:
+The following third-party components are installed in the specified namespace:
 - redis, which stores data regarding tenants and their volume ownership, quota, and revokation status
 - redis-commander, a web management tool for Redis
 
@@ -215,10 +215,10 @@ karavictl generate token --tenant Finance --insecure --addr tenant.csm-authoriza
 }
 ```
 
-With [jq](https://stedolan.github.io/jq/), you process the above response to filter the secret manifest. For example:
+Process the above response to filter the secret manifest. For example using sed you can run the following:
 
 ```
-karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | jq -r '.Token'
+karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
 apiVersion: v1
 kind: Secret
 metadata:
