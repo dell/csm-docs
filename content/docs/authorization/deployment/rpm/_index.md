@@ -210,7 +210,7 @@ After creating the role bindings, the next logical step is to generate the acces
 
   ```
   echo === Generating token ===
-  karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > token.yaml
+  karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
 
   echo === Copy token to Driver Host ===
   sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
@@ -352,7 +352,7 @@ Replace the data in `config.yaml` under the `data` field with your new, encoded 
 
 >__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is only necessary if certificates were not provided in `$HOME/.karavi/config.json`
 
-`karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > kubectl -n $namespace apply -f -`
+`karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
 
 ## CSM for Authorization Proxy Server Dynamic Configuration Settings
 
