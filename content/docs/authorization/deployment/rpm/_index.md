@@ -19,7 +19,29 @@ The CSM for Authorization proxy server requires a Linux host with the following 
 
 These packages need to be installed on the Linux host:
 - container-selinux
-- https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm
+- k3s-selinux-0.4-1
+
+Use the appropriate package manager on the machine to install the packages.
+
+### Using yum on CentOS/RedHat 7:
+
+yum install -y container-selinux
+
+yum install -y https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm
+
+### Using yum on CentOS/RedHat 8:
+
+yum install -y container-selinux
+
+yum install -y https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm
+
+### Dark Sites
+
+For environments where `yum` will not work, obtain the supported version of container-selinux for your OS version and install it.
+
+The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [https://centos.pkgs.org/7/centos-extras-x86_64/](https://centos.pkgs.org/7/centos-extras-x86_64/) and [https://centos.pkgs.org/8/centos-appstream-x86_64/](https://centos.pkgs.org/8/centos-appstream-x86_64/), respectively.
+
+The k3s-selinux-0.4-1 RPM can be obtained from [https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm](https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm) or [https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm](https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm) for CentOS/RedHat 7 and 8, respectively. Download the supported version of k3s-selinux-0.4-1 for your OS version and install it.
 
 ## Deploying the CSM Authorization Proxy Server
 
