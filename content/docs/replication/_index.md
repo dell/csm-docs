@@ -22,6 +22,7 @@ CSM for Replication provides the following capabilities:
 | Create `PersistentVolume` objects in the cluster representing the replicated volume | yes      | yes        | yes        | no        | no    |
 | Create `DellCSIReplicationGroup` objects in the cluster                             | yes      | yes        | yes        | no        | no    |
 | Failover & Reprotect applications using the replicated volumes                      | yes      | yes        | yes        | no        | no    |
+| Online Volume Expansion for replicated volumes				       | yes      | no	      | no	   | no	       | no    |
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters | yes | yes | yes | no | no |
 {{</table>}}
 
