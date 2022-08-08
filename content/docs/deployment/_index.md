@@ -1,6 +1,7 @@
 ---
 title: "Deployment"
 linkTitle: "Deployment"
+no_list: true
 description: Deployment of CSM for Replication
 weight: 1
 ---
@@ -16,9 +17,11 @@ The Container Storage Modules along with the required CSI Drivers can each be de
   {{< /card >}}
 {{< /cardpane >}}
 The Container Storage Modules and the required CSI Drivers can each be deployed following the links below:
+
+
 {{< cardpane >}}
   {{< card header="[Dell CSI Drivers Installation via Helm](../csidriver/installation/helm)"
-          footer="Installs [PowerStore](../csidriver/installation/helm/powerstore/) [PowerMax](../csidriver/installation/helm/powermax/) [PowerScale](../csidriver/installation/helm/powerscale/) [PowerFlex](../csidriver/installation/helm/powerflex/) [Unity](../csidriver/installation/helm/unity/)">}}
+          footer="Installs [PowerStore](../csidriver/installation/helm/powerstore/) [PowerMax](../csidriver/installation/helm/powermax/) [PowerScale](../csidriver/installation/helm/isilon/) [PowerFlex](../csidriver/installation/helm/powerflex/) [Unity](../csidriver/installation/helm/unity/)">}}
    Dell CSI Helm installer installs the CSI Driver components using the provided Helm charts.
    [...More on installation instructions](../csidriver/installation/helm)
   {{< /card >}}
@@ -30,7 +33,7 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
 {{< /cardpane >}}
 {{< cardpane >}}
   {{< card header="[Dell CSI Drivers Installation via operator](../csidriver/installation/operator)"
-          footer="Installs [PowerStore](../csidriver/installation/operator/powerstore/) [PowerMax](../csidriver/installation/operator/powermax/) [PowerScale](../csidriver/installation/operator/powerscale/) [PowerFlex](../csidriver/installation/operator/powerflex/) [Unity](../csidriver/installation/operator/unity/)">}}
+          footer="Installs [PowerStore](../csidriver/installation/operator/powerstore/) [PowerMax](../csidriver/installation/operator/powermax/) [PowerScale](../csidriver/installation/operator/isilon/) [PowerFlex](../csidriver/installation/operator/powerflex/) [Unity](../csidriver/installation/operator/unity/)">}}
    Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
    [...More on installation instructions](../csidriver/installation/operator)
   {{< /card >}}
