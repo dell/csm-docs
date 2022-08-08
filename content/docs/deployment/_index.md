@@ -7,6 +7,7 @@ weight: 1
 The Container Storage Modules along with the required CSI Drivers can each be deployed using CSM operator.
 
 >Note: Currently CSM operator is in tech preview and is not supported in production environments.
+
 {{< cardpane >}}
   {{< card header="[**CSM Operator**](csmoperator/)"
           footer="Supports driver [PowerScale](csmoperator/drivers/powerscale/), module [Authorization](csmoperator/modules/authorization/)">}}
@@ -21,18 +22,19 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
    Dell CSI Helm installer installs the CSI Driver components using the provided Helm charts.
    [...More on installation instructions](../csidriver/installation/helm)
   {{< /card >}}
+   {{< card header="[Dell CSI Drivers Installation via offline installer](../csidriver/installation/offline)"
+          footer="[Offline installation for all drivers](../csidriver/installation/offline)">}}
+  Both Helm and Dell CSI opetor supports offline installation of the Dell CSI Storage Providers via `csi-offline-bundle.sh` script by creating a usable package.
+   [...More on installation instructions](../csidriver/installation/offline)
+  {{< /card >}}
+{{< /cardpane >}}
+{{< cardpane >}}
   {{< card header="[Dell CSI Drivers Installation via operator](../csidriver/installation/operator)"
           footer="Installs [PowerStore](../csidriver/installation/operator/powerstore/) [PowerMax](../csidriver/installation/operator/powermax/) [PowerScale](../csidriver/installation/operator/powerscale/) [PowerFlex](../csidriver/installation/operator/powerflex/) [Unity](../csidriver/installation/operator/unity/)">}}
    Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
    [...More on installation instructions](../csidriver/installation/operator)
   {{< /card >}}
-   {{< card header="[Dell CSI Drivers Installation via offline isntaller](../csidriver/installation/offline)"
-          footer="[Offline installation for all drivers](../csidriver/installation/offline)">}}
-      Both Helm and Dell CSI opetor supports offline installation of the Dell CSI Storage Providers via `csi-offline-bundle.sh` script by creating a usable package.
-   [...More on installation instructions](../csidriver/installation/offline)
-  {{< /card >}}
 {{< /cardpane >}}
-
 {{< cardpane >}}
   {{< card header="[Dell Container Storage Module for Observability](../observability/deployment)"
           footer="Installs Observability Module">}}
