@@ -130,7 +130,6 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 
 *NOTE:*
 - It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
-- The CSI external-snapshotter sidecar is installed along with the driver and does not involve any extra configuration.
 
 ### Volume Health Monitoring
 
