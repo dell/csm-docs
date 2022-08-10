@@ -6,7 +6,7 @@ description: >
   Online expansion of replicated volumes
 ---
 
-Starting in v2.4, the CSI PowerMax driver supports the expansion of Replicated Persistent Volumes (PVs). This expansion is done online, which is when the PVC is attached to any node.
+Starting in v2.4.0, the CSI PowerMax driver supports the expansion of Replicated Persistent Volumes (PVs). This expansion is done online, which is when the PVC is attached to any node.
 
 ## Prerequisites
 - To use this feature, enable in values.yaml.
