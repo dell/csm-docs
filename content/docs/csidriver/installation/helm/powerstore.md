@@ -132,21 +132,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 - It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is installed along with the driver and does not involve any extra configuration.
 
-### (Optional) Replication feature Requirements
-
-Applicable only if you decided to enable the Replication feature in `values.yaml`
-
-```yaml
-replication:
-  enabled: true
-```
-#### Replication CRD's
-
-The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
-
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
-
-## Volume Health Monitoring
+### Volume Health Monitoring
 
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
@@ -177,6 +163,20 @@ node:
     # Default value: None
     enabled: false
    ```
+
+### (Optional) Replication feature Requirements
+
+Applicable only if you decided to enable the Replication feature in `values.yaml`
+
+```yaml
+replication:
+  enabled: true
+```
+#### Replication CRD's
+
+The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
+
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
 
 ## Install the Driver
 
