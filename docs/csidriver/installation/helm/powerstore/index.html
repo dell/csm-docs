@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-08-10T16:35:56+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing CSI Driver for PowerStore via Helm
 ">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="2639">
+<meta itemprop="dateModified" content="2022-08-10T16:35:56+05:30" />
+<meta itemprop="wordCount" content="2622">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerStore via Helm
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.faca2387b7847bbede05a864bb65d532.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.faca2387b7847bbede05a864bb65d532.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -518,11 +518,7 @@
         <li><a href="#set-up-the-nvme-initiator">Set up the NVMe Initiator</a></li>
         <li><a href="#linux-multipathing-requirements">Linux multipathing requirements</a></li>
         <li><a href="#optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</a></li>
-      </ul>
-    </li>
-    <li><a href="#volume-health-monitoring">Volume Health Monitoring</a>
-      <ul>
-        <li></li>
+        <li><a href="#volume-health-monitoring">Volume Health Monitoring</a></li>
         <li><a href="#optional-replication-feature-requirements">(Optional) Replication feature Requirements</a></li>
       </ul>
     </li>
@@ -713,7 +709,18 @@ Use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/
 </li>
 <li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
 </ul>
-<h2 id="volume-health-monitoring">Volume Health Monitoring</h2>
+<h4 id="installation-example">Installation example</h4>
+<p>You can install CRDs and default snapshot controller by running these commands:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/kubernetes-csi/external-snapshotter/
+</span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> ./external-snapshotter
+</span></span><span style="display:flex;"><span>git checkout release-&lt;your-version&gt;
+</span></span><span style="display:flex;"><span>kubectl kustomize client/config/crd <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
+</span></span><span style="display:flex;"><span>kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
+</span></span></code></pre></div><p><em>NOTE:</em></p>
+<ul>
+<li>It is recommended to use 5.0.x version of snapshotter/snapshot-controller.</li>
+</ul>
+<h3 id="volume-health-monitoring">Volume Health Monitoring</h3>
 <p>Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
 health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
@@ -741,19 +748,7 @@ volume stats value under node should be set to true.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#   false: disable checking of health condition of CSI volumes</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Default value: None</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><h4 id="installation-example">Installation example</h4>
-<p>You can install CRDs and default snapshot controller by running following commands:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/kubernetes-csi/external-snapshotter/
-</span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> ./external-snapshotter
-</span></span><span style="display:flex;"><span>git checkout release-&lt;your-version&gt;
-</span></span><span style="display:flex;"><span>kubectl kustomize client/config/crd <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
-</span></span><span style="display:flex;"><span>kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
-</span></span></code></pre></div><p><em>NOTE:</em></p>
-<ul>
-<li>It is recommended to use 5.0.x version of snapshotter/snapshot-controller.</li>
-<li>The CSI external-snapshotter sidecar is installed along with the driver and does not involve any extra configuration.</li>
-</ul>
-<h3 id="optional-replication-feature-requirements">(Optional) Replication feature Requirements</h3>
+</span></span></span></code></pre></div><h3 id="optional-replication-feature-requirements">(Optional) Replication feature Requirements</h3>
 <p>Applicable only if you decided to enable the Replication feature in <code>values.yaml</code></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replication</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -789,13 +784,13 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 <p>Add more blocks similar to above for each PowerStore array if necessary.</p>
 </li>
 <li>
+<p>Create the secret by running <code>kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml</code></p>
+</li>
+<li>
 <p>Create storage classes using ones from <code>samples/storageclass</code> folder as an example and apply them to the Kubernetes cluster by running <code>kubectl create -f &lt;path_to_storageclass_file&gt;</code></p>
 <blockquote>
 <p>If you do not specify <code>arrayID</code> parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.</p>
 </blockquote>
-</li>
-<li>
-<p>Create the secret by running <code>kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml</code></p>
 </li>
 <li>
 <p>Copy the default values.yaml file <code>cd dell-csi-helm-installer &amp;&amp; cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml</code></p>

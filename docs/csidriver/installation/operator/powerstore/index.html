@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/operator/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-08-10T16:35:56+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing CSI Driver for PowerStore via Operator
 ">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="1106">
+<meta itemprop="dateModified" content="2022-08-10T16:35:56+05:30" />
+<meta itemprop="wordCount" content="1104">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerStore via Operator
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.faca2387b7847bbede05a864bb65d532.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.faca2387b7847bbede05a864bb65d532.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -763,20 +763,15 @@ Note: The deployment of the driver using the operator does not use any Helm char
 <td>No</td>
 <td>false</td>
 </tr>
-<tr>
-<td>6.  Execute the following command to create PowerStore custom resource:<code>kubectl create -f &lt;input_sample_file.yaml&gt;</code>. The above command will deploy the CSI-PowerStore driver.</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- After that the driver should be installed, you can check the condition of driver pods by running <code>kubectl get all -n &lt;driver-namespace&gt;</code></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
+<ol start="6">
+<li>Execute the following command to create PowerStore custom resource:<code>kubectl create -f &lt;input_sample_file.yaml&gt;</code>. The above command will deploy the CSI-PowerStore driver.
+<ul>
+<li>After that the driver should be installed, you can check the condition of driver pods by running <code>kubectl get all -n &lt;driver-namespace&gt;</code></li>
+</ul>
+</li>
+</ol>
 <h2 id="volume-health-monitoring">Volume Health Monitoring</h2>
 <p>Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external

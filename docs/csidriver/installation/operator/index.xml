@@ -1443,20 +1443,15 @@ Note: The deployment of the driver using the operator does not use any Helm char
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;6.  Execute the following command to create PowerStore custom resource:&lt;code&gt;kubectl create -f &amp;lt;input_sample_file.yaml&amp;gt;&lt;/code&gt;. The above command will deploy the CSI-PowerStore driver.&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;- After that the driver should be installed, you can check the condition of driver pods by running &lt;code&gt;kubectl get all -n &amp;lt;driver-namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;Execute the following command to create PowerStore custom resource:&lt;code&gt;kubectl create -f &amp;lt;input_sample_file.yaml&amp;gt;&lt;/code&gt;. The above command will deploy the CSI-PowerStore driver.
+&lt;ul&gt;
+&lt;li&gt;After that the driver should be installed, you can check the condition of driver pods by running &lt;code&gt;kubectl get all -n &amp;lt;driver-namespace&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h2 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h2&gt;
 &lt;p&gt;Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
