@@ -117,7 +117,21 @@ Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/
    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
-## Volume Health Monitoring
+#### Installation example
+
+You can install CRDs and default snapshot controller by running these commands:
+```bash
+git clone https://github.com/kubernetes-csi/external-snapshotter/
+cd ./external-snapshotter
+git checkout release-<your-version>
+kubectl kustomize client/config/crd | kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
+```
+
+*NOTE:*
+- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+
+### Volume Health Monitoring
 
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
@@ -148,22 +162,6 @@ node:
     # Default value: None
     enabled: false
    ```
-
-#### Installation example 
-
-You can install CRDs and default snapshot controller by running following commands:
-```bash
-git clone https://github.com/kubernetes-csi/external-snapshotter/
-cd ./external-snapshotter
-git checkout release-<your-version>
-kubectl kustomize client/config/crd | kubectl create -f -
-kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
-```
-
-*NOTE:*
-- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
-- The CSI external-snapshotter sidecar is installed along with the driver and does not involve any extra configuration.
-
 ### (Optional) Replication feature Requirements
 
 Applicable only if you decided to enable the Replication feature in `values.yaml`
@@ -197,10 +195,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
-5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
+5. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
+6. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
    
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
-6. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
 7. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml`
 8. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 
