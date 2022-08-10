@@ -119,7 +119,7 @@ Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/
 
 #### Installation example 
 
-You can install CRDs and default snapshot controller by running following commands:
+You can install CRDs and default snapshot controller by running these commands:
 ```bash
 git clone https://github.com/kubernetes-csi/external-snapshotter/
 cd ./external-snapshotter
