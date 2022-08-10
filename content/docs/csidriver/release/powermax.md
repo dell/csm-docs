@@ -6,16 +6,7 @@ description: Release notes for PowerMax CSI driver
 ## Release Notes - CSI PowerMax v2.3.0
 
 ### New Features/Changes
-- Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.
-- Added support for Standalone Helm Charts.
-- Removed beta volumesnapshotclass sample files.
-- Added mapping of PV/PVC to namespace.
-- Added support to configure fsGroupPolicy.
-- Added support to filter topology keys based on user inputs.
-- Added support for SRDF Metro group sharing multiple namespaces.
-- Added support for Kubernetes 1.24.
-- Added support for OpenShift 4.10.
-- Added support to convert replicated volume to non-replicated volume and vice versa for Sync and Async modes.
+- Online volume expansion for replicated volumes.
 
 ### Fixed Issues
 There are no fixed issues in this release.
