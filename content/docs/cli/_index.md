@@ -177,8 +177,8 @@ List all clusters currently being managed by dellctl
 ```
 # dellctl cluster get
 CLUSTER ID      VERSION URL                             UID
-cluster1        v1.22   https://10.225.7.48:6443
-cluster2        v1.22   https://10.247.103.145:6443     035133aa-5b65-4080-a813-34a7abe48180
+cluster1        v1.22   https://1.2.3.4:6443
+cluster2        v1.22   https://1.2.3.5:6443            035133aa-5b65-4080-a813-34a7abe48180
 ```
 
 
