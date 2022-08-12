@@ -93,10 +93,12 @@ Add one or more k8s clusters to be managed by dellctl
 ##### Flags
 
 ```
+Flags:
+  -n, --names strings   cluster names
   -f, --files strings   paths for kube config files
+  -u, --uids strings    uids of the kube-system namespaces in the clusters
       --force           forcefully add cluster
   -h, --help            help for add
-  -n, --names strings   cluster names  
 ```
 
 ##### Output
@@ -105,7 +107,16 @@ Add one or more k8s clusters to be managed by dellctl
 # dellctl cluster add -n cluster1 -f ~/kubeconfigs/cluster1-kubeconfig
  INFO Adding clusters ...
  INFO Cluster: cluster1
- INFO Successfully added cluster cluster1 in /root/.dellctl/clusters folder. 5635 bytes copied
+ INFO Successfully added cluster cluster1 in /root/.dellctl/clusters/cluster1 folder.
+```
+
+Add a cluster with it's uid
+
+```
+# dellctl cluster add -n cluster2 -f ~/kubeconfigs/cluster2-kubeconfig -u "035133aa-5b65-4080-a813-34a7abe48180"
+ INFO Adding clusters ...
+ INFO Cluster: cluster2
+ INFO Successfully added cluster cluster2 in /root/.dellctl/clusters/cluster2 folder.
 ```
 
 
@@ -165,9 +176,9 @@ List all clusters currently being managed by dellctl
 
 ```
 # dellctl cluster get
-CLUSTER ID      VERSION URL
-cluster1        v1.22   https://1.2.3.4:6443
-cluster2        v1.22   https://1.2.3.5:6443
+CLUSTER ID      VERSION URL                             UID
+cluster1        v1.22   https://10.225.7.48:6443
+cluster2        v1.22   https://10.247.103.145:6443     035133aa-5b65-4080-a813-34a7abe48180
 ```
 
 
