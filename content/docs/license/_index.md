@@ -6,10 +6,10 @@ Description: >
   Dell Container Storage Modules (CSM) License
 ---
 
-The tech-preview releases of [Container Storage Modules](https://github.com/dell/csm) for Application Mobility and Encryption require a license. The following section details how to request a license.
+The tech-preview releases of [Container Storage Modules](https://github.com/dell/csm) for Application Mobility and Encryption require a license. This section details how to request a license.
 
 ## Requesting a License
-1. Request a license using the [Container Storage Modules License Request](https://app.smartsheet.com/b/form/5e46fad643874d56b1f9cf4c9f3071fb) by providing the following details:
+1. Request a license using the [Container Storage Modules License Request](https://app.smartsheet.com/b/form/5e46fad643874d56b1f9cf4c9f3071fb) by providing these details:
 - **Full Name**: Full name of the person requesting the license
 - **Email Address**: The license will be emailed to this email address
 - **Company / Organization**: Company or organization where the license will be used
