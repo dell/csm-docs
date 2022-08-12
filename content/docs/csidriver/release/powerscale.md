@@ -3,15 +3,11 @@ title: PowerScale
 description: Release notes for PowerScale CSI driver
 ---
 
-## Release Notes - CSI Driver for PowerScale v2.3.0
+## Release Notes - CSI Driver for PowerScale v2.4.0
 
 ### New Features/Changes
 
-- Removed beta volumesnapshotclass sample files.
-- Added support for Kubernetes 1.24.
-- Added support to increase volume path limit.
-- Added support for OpenShift 4.10.
-- Added support for CSM Resiliency sidecar via Helm.
+- Added support to add client only to root clients when RO volume is created from snapshot and RootClientEnabled is set to true.
 
 ### Fixed Issues
 
