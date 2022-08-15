@@ -22,7 +22,7 @@ description: Troubleshooting PowerFlex Driver
 | Volume metrics are missing | Enable [Volume Health Monitoring](../../features/powerflex#volume-health-monitoring) |
 | When a node goes down, the block volumes attached to the node cannot be attached to another node                                           | This is a known issue and has been reported at https://github.com/kubernetes-csi/external-attacher/issues/215. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node.                   |
 | CSI-PowerFlex volumes cannot mount; are being recognized as multipath devices | CSI-PowerFlex does not support multipath; to fix: <br/> 1. Remove any multipath mapping involving a powerflex volume with `multipath -f <powerflex volume>` <br/> 2. Blacklist CSI-PowerFlex volumes in multipath config file |
- | When attempting a driver upgrade, you see: ```spec.fsGroupPolicy: Invalid value: "xxx": field is immutable``` |  You cannot upgrade between drivers with different fsGroupPolicies. See [upgrade documentation](../../../upgradation/drivers/powerflex.md) for more details | 
+ | When attempting a driver upgrade, you see: ```spec.fsGroupPolicy: Invalid value: "xxx": field is immutable``` |  You cannot upgrade between drivers with different fsGroupPolicies. See [upgrade documentation](../../upgradation/drivers/powerflex) for more details | 
 
 >*Note*: `vxflexos-controller-*` is the controller pod that acquires leader lease
 
