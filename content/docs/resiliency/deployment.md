@@ -21,7 +21,6 @@ Configure all the helm chart parameters described below before installing the dr
 The drivers that support Helm chart installation allow CSM for Resiliency to be _optionally_ installed by variables in the chart. There is a _podmon_ block specified in the _values.yaml_ file of the chart that will look similar to the text below by default:
 
 ```
-# Podmon is an optional feature under development and tech preview.
 # Enable this feature only after contact support for additional information
 podmon:
   enabled: true

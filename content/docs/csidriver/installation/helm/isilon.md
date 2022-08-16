@@ -174,7 +174,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
-   | **podmon**               | Podmon is an optional feature under development and tech preview. Enable this feature only after contact support for additional information.  |  -        |  -       |
+   | **podmon**               | [Podmon](../../../../resiliency/deployment) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    | enabled                  | A boolean that enable/disable podmon feature. |  No      |   false   |
    | image | image for podmon. | No | " " |
 
