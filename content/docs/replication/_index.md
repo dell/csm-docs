@@ -44,7 +44,7 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax            | PowerStore       | PowerScale       |
 |---------------|:-------------------:|:----------------:|:----------------:|
-| Storage Array | 5978.479.479, 5978.711.711, Unisphere 9.2 | 1.0.x, 2.0.x, 2.1.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 |
+| Storage Array | 5978.479.479, 5978.711.711, Unisphere 10.0 | 1.0.x, 2.0.x, 2.1.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 |
 {{</table>}}
 
 ## Supported CSI Drivers
