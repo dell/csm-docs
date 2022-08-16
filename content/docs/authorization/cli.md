@@ -731,7 +731,8 @@ karavictl storage create [flags]
   -e, --endpoint string    Endpoint of REST API gateway
   -h, --help               help for create
   -i, --insecure           Insecure skip verify
-  -p, --password string        Password (default "****")
+  -a, --array-insecure     Array insecure skip verify
+  -p, --password string    Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
   -u, --user string        Username (default "admin")
@@ -746,7 +747,7 @@ karavictl storage create [flags]
 ##### Output
 
 ```
-$ karavictl storage create --endpoint https://1.1.1.1 --insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
+$ karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the creation occurred.
 
@@ -773,6 +774,7 @@ karavictl storage update [flags]
   -e, --endpoint string    Endpoint of REST API gateway
   -h, --help               help for update
   -i, --insecure           Insecure skip verify
+  -a, --array-insecure     Array insecure skip verify
   -p, --pass string        Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
@@ -788,7 +790,7 @@ karavictl storage update [flags]
 ##### Output
 
 ```
-$ karavictl storage update --endpoint https://1.1.1.1 --insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
+$ karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the update occurred.
 
