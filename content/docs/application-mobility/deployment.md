@@ -59,4 +59,4 @@ This table lists the configurable parameters of the Application Mobility Helm ch
 | `velero.initContainers[0].name` |  Name of the Dell Velero plugin.  | `dell-custom-velero-plugin` |
 | `velero.initContainers[0].image` |  Location of the Dell Velero plugin image.  | `dellemc/csm-application-mobility-velero-plugin:v0.1.0` |
 | `velero.initContainers[0].volumeMounts[0].mountPath` |  Mount path of the volume mount.  | `/target` |
-| `velero.initContainers[0].volumeMounts[0].name` |  Name of the volume mount.  | `okygubs` |
+| `velero.initContainers[0].volumeMounts[0].name` |  Name of the volume mount.  | `plugins` |
