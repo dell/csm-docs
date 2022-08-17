@@ -9,9 +9,9 @@ Description: >
 After Application Mobility is installed, the [dellctl CLI](../../cli/) can be used to register clusters and manage backups and restores of applications.
 
 ## Backup and Restore an Application
-The following example details the steps when an application in namespace `demo1` is being backed up and then later restored to either the same cluster or another cluster. In this sample, both Application Mobility and Velero are installed in the `application-mobility` namespace.
+This example details the steps when an application in namespace `demo1` is being backed up and then later restored to either the same cluster or another cluster. In this sample, both Application Mobility and Velero are installed in the `application-mobility` namespace.
 
-1. If Velero is not installed in the default `velero` namespace, set the following environment variable to the namespace where it is installed:
+1. If Velero is not installed in the default `velero` namespace, set this environment variable to the namespace where it is installed:
     ```
     export VELERO_NAMESPACE=application-mobility 
     ```
@@ -34,9 +34,9 @@ The following example details the steps when an application in namespace `demo1`
     ```
 
 ## Clone an Application
-The following example details the steps when an application in namespace `demo1` is cloned from a source cluster to a target cluster in a single operation. In this sample, both Application Mobility and Velero are installed in the `application-mobility` namespace.
+This example details the steps when an application in namespace `demo1` is cloned from a source cluster to a target cluster in a single operation. In this sample, both Application Mobility and Velero are installed in the `application-mobility` namespace.
 
-1. If Velero is not installed in the default `velero` namespace, set the following environment variable to the namespace where it is installed:
+1. If Velero is not installed in the default `velero` namespace, set this environment variable to the namespace where it is installed:
     ```
     export VELERO_NAMESPACE=application-mobility 
     ```

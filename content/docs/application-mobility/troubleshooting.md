@@ -42,7 +42,7 @@ kubectl logs -n $namespace $pod $container > $logFileName
 
 Application Mobility requires a license in order to function. See the [Deployment](../deployment) instructions for steps to request a license.
 
-There will be errors in the logs about the license for the following cases:
+There will be errors in the logs about the license for these cases:
 - License does not exist
 - License is not valid for the current Kubernetes cluster
 - License has expired

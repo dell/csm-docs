@@ -33,7 +33,7 @@ Description: >
 
 ### Configuration
 
-The following table lists the configurable parameters of the Application Mobility Helm chart and their default values.
+This table lists the configurable parameters of the Application Mobility Helm chart and their default values.
 
 | Parameter | Description | Default |
 | - | - | - |
