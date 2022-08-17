@@ -3,16 +3,12 @@ title: "Deployment"
 linkTitle: "Deployment"
 weight: 1
 Description: >
-  Dell Container Storage Modules (CSM) for Application Mobility
+  Deployment for Dell Container Storage Modules (CSM) for Application Mobility
 ---
 
-{{% pageinfo color="primary" %}}
-Application Mobility is currently in tech-preview and is not supported in production environments
-{{% /pageinfo %}}
-
 ## Pre-requisites
-- [Request a License for Application Mobility](../license/)
-- Object store accessible by both the source and target clusters and supported by Restic (https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html)
+- [Request a License for Application Mobility](../../license/)
+- Object store bucket accessible by both the source and target clusters
 
 ## Installation
 1. Create a namespace where Application Mobility will be installed.
@@ -24,14 +20,14 @@ Application Mobility is currently in tech-preview and is not supported in produc
     ```
     kubectl apply -f license.yml
     ```
-1. Add the Dell Helm Charts repo helm repo add dell https://dell.github.io/helm-charts
+1. Add the Dell Helm Charts repository
     ```
     helm repo add dell https://dell.github.io/helm-charts
     ```
-1. Either create a values.yml file or provide the `--set` options to the `helm install` to override default values from the Configuration section.
+1. Either create a values.yml file or provide the `--set` options to the `helm install` to override default values from the [Configuration](#configuration) section.
 1. Install the helm chart
     ```
-    helm install -n application-mobility dell/application-mobility
+    helm install -n application-mobility dell/csm-application-mobility
     ```
 
 
