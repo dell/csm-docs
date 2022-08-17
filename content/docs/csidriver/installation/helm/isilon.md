@@ -26,6 +26,7 @@ The following are requirements to be met before installing the CSI Driver for De
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../replication/deployment/) first
 - If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../resiliency/deployment/) first
+- If enabling Encryption, please refer to the [Encryption deployment steps](../../../../secure/encryption/deployment/) first
 
 ### Install Helm 3.0
 
@@ -175,9 +176,12 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
    | **podmon**               | Podmon is an optional feature under development and tech preview. Enable this feature only after contact support for additional information.  |  -        |  -       |
-   | enabled                  | A boolean that enable/disable podmon feature. |  No      |   false   |
+   | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
    | image | image for podmon. | No | " " |
-
+   | **encryption** | [Encryption](../../../../secure/encryption/deployment) is an optional feature to apply encryption to CSI volumes. | - | - |
+   | enabled        | A boolean that enables/disables Encryption feature. | No | false |
+   | image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.1.0" |
+   
    *NOTE:* 
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
