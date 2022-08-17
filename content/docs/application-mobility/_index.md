@@ -17,8 +17,3 @@ Application Mobility uses [Velero](https://velero.io) and its integration of [Re
 - If [Volume Group Snapshots](../snapshots/volume-group-snapshots/) are enabled on the CSI driver backing the application's Persistent Volumes, crash consistent snapshots of all volumes are used for the backup.
 - If Volume Snapshots are enabled on the Kubernetes cluster and supported by the CSI driver, individual snapshots are used for each Persistent Volume used by the application.
 - If no snapshot options are enabled, default to using full copies of each Persistent Volume used by the application.
-
-
-## Using dellctl
-
-Check the [CLI documentation](../cli/)
