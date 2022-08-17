@@ -5,7 +5,7 @@ description: Release notes for PowerMax CSI driver
 
 ## Release Notes - CSI PowerMax v2.4.0
 
-> Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. 
+> Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0.
 
 ### New Features/Changes
 - Online volume expansion for replicated volumes.
