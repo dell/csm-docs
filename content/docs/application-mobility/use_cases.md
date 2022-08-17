@@ -23,6 +23,7 @@ This example details the steps when an application in namespace `demo1` is being
     ```
     dellctl backup get --namespace application-mobility
     ```
+1. If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See [Changing PV/PVC Storage Classes](#changing-pvpvc-storage-classes).
 1. The application and its data can be restored on either the same cluster or another cluster by referring to the backup name and providing an optional mapping of the original namespace to the target namespace.
     ```
     dellctl restore create restore1 --from-backup backup1 \
@@ -45,6 +46,7 @@ This example details the steps when an application in namespace `demo1` is clone
     dellctl cluster add -n cluster1 -f ~/kubeconfigs/cluster1-kubeconfig
     dellctl cluster add -n cluster2 -f ~/kubeconfigs/cluster2-kubeconfig
     ```
+1. If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See [Changing PV/PVC Storage Classes](#changing-pvpvc-storage-classes).
 1. Create a Backup by providing a name, the included namespace where the application is installed, the source cluster, and the target cluster and namespace mapping where the application will be restored.
     ```
     dellctl backup create backup1 --include-namespaces demo1 --cluster-id cluster1 \
@@ -54,3 +56,18 @@ This example details the steps when an application in namespace `demo1` is clone
     ```
     dellctl backup get --namespace application-mobility
     ```
+
+## Changing PV/PVC Storage Classes
+Create a ConfigMap on the target cluster in the same namespace where Application Mobility is installed. The data field must contain a mapping of source Storage Class name to target Storage Class name. See Velero's documentation for [Changing PV/PVC Storage Classes](https://velero.io/docs/v1.9/restore-reference/#changing-pvpvc-storage-classes) for additional details.
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: change-storage-class-config
+    namespace: <application-mobility-namespace>
+    labels:
+        velero.io/plugin-config: ""
+        velero.io/change-storage-class: RestoreItemAction
+data:
+    <source-storage-class-name>: <target-storage-class-name>
+```
