@@ -256,6 +256,8 @@ karavictl role get [flags]
 
 ```
   -h, --help   help for get
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
@@ -303,6 +305,8 @@ karavictl role list [flags]
 
 ```
   -h, --help   help for list
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
@@ -365,6 +369,8 @@ karavictl role create [flags]
 ```
   -f, --from-file string   role data from a file
       --role strings       role in the form <name>=<type>=<id>=<pool>=<quota>
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
   -h, --help               help for create
 ```
 
@@ -411,6 +417,8 @@ karavictl role update [flags]
 ```
   -f, --from-file string   role data from a file
       --role strings       role in the form <name>=<type>=<id>=<pool>=<quota>
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
   -h, --help               help for update
 ```
 
@@ -452,6 +460,8 @@ karavictl role delete <role-name> [flags]
 
 ```
   -h, --help   help for delete
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
@@ -523,8 +533,9 @@ karavictl rolebinding create [flags]
 
 ```
   -h, --help   help for create
-  -r, --role string     Role name
-  -t, --tenant string   Tenant name
+  -r, --role string       Role name
+  -t, --tenant string     Tenant name
+      --insecure boolean  insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
@@ -562,8 +573,9 @@ karavictl rolebinding delete [flags]
 
 ```
   -h, --help   help for create
-  -r, --role string     Role name
-  -t, --tenant string   Tenant name
+  -r, --role string      Role name
+  -t, --tenant string    Tenant name
+      --insecure boolean insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
@@ -638,6 +650,8 @@ karavictl storage get [flags]
   -h, --help               help for get
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
@@ -680,6 +694,8 @@ karavictl storage list [flags]
 
 ```
   -h, --help   help for list
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
@@ -730,12 +746,13 @@ karavictl storage create [flags]
 ```
   -e, --endpoint string    Endpoint of REST API gateway
   -h, --help               help for create
-  -i, --insecure           Insecure skip verify
   -a, --array-insecure     Array insecure skip verify
   -p, --password string    Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
   -u, --user string        Username (default "admin")
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
@@ -773,12 +790,13 @@ karavictl storage update [flags]
 ```
   -e, --endpoint string    Endpoint of REST API gateway
   -h, --help               help for update
-  -i, --insecure           Insecure skip verify
   -a, --array-insecure     Array insecure skip verify
   -p, --pass string        Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
   -u, --user string        Username (default "admin")
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
@@ -818,6 +836,8 @@ karavictl storage delete [flags]
   -h, --help               help for delete
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
@@ -889,6 +909,7 @@ karavictl tenant create [flags]
 ```
   -h, --help   help for create
   -n, --name string   Tenant name
+      --insecure      insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
@@ -928,6 +949,7 @@ karavictl tenant get [flags]
 ```
   -h, --help   help for create
   -n, --name string   Tenant name
+      --insecure      insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
@@ -971,6 +993,7 @@ karavictl tenant list [flags]
 
 ```
   -h, --help   help for create
+      --insecure      insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
@@ -1018,6 +1041,7 @@ karavictl tenant revoke [flags]
 ```
   -h, --help   help for create
   -n, --name string   Tenant name
+      --insecure      insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
@@ -1056,6 +1080,7 @@ karavictl tenant delete [flags]
 ```
   -h, --help   help for create
   -n, --name string   Tenant name
+      --insecure      insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
