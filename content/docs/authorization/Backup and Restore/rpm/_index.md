@@ -7,12 +7,12 @@ description: >
 
 ## Roles
 
-Role data is stored in a configMap, named `common`, in the underlying `k3s` deployment. This resource can be exported and used to restore role data in Authorization deployments.
+Role data is stored in the `common` Config Map in the underlying `k3s` deployment.
 
 1. Save the role data by saving the `common` configMap to a file.
 
 ```
-k3s kubectl get configMap common -n karavi -o yaml > roles.yaml
+k3s kubectl -n karavi get configMap common -o yaml > roles.yaml
 ```
 
 2. In the deployment of Authorization that you want to restore, delete the existing `common` configMap.
@@ -36,12 +36,12 @@ deployment.apps/proxy-server restarted
 
 ## Storage
 
-Storage data is stored in a secret, named `karavi-storage-secret`, in the underlying `k3s` deployment. This resource can be exported and used to restore storage data in Authorization deployments.
+Storage data is stored in the `karavi-storage-secret` Secret in the underlying `k3s` deployment.
 
 1. Save the storage data by saving the `karavi-storage-secret` secret to a file.
 
 ```
-k3s kubectl get secret karavi-storage-secret -n karavi -o yaml > storage.yaml
+k3s kubectl -n karavi get secret karavi-storage-secret -o yaml > storage.yaml
 ```
 
 2. In the deployment of Authorization that you want to restore, delete the existing `karavi-storage-secret` secret.
@@ -67,7 +67,7 @@ deployment.apps/proxy-server restarted
 
 Redis is used to store application data regarding [tenants, quota, and volume ownership](../../design#quota--volume-ownership). This data is stored on the system under `/var/lib/rancher/k3s/storage/<redis-primary-pv-claim-volume-name>/appendonly.aof`. 
 
-`appendonly.aof` can be copied and used to restore appliation data in Authorization deployments. See the example below.
+`appendonly.aof` can be copied and used to restore this appliation data in Authorization deployments. See the example below.
 
 1. Determine the Persistent Volume related to the `redis-primary-pv-claim` Persistent Volume Claim.
 
