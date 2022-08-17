@@ -146,7 +146,7 @@ pmtu3       podmontest-0   1/1     Running   0          3m6s
 
  CSM for Resiliency may also generate events if it is unable to clean up a pod for some reason. For example, it may not clean up a pod because the pod is still doing I/O to the array.
 
- Similarly, the label selector for csi-powerscale and csi-unity would be as below respectively.
+ Similarly, the label selector for csi-powerscale and csi-unity would be as shown respectively.
  ```
  labelSelector: {map[podmon.dellemc.com/driver:csi-isilon]
  labelSelector: {map[podmon.dellemc.com/driver:csi-unity]

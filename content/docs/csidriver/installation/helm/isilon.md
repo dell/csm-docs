@@ -293,5 +293,5 @@ Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volu
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended upgrading the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.32.
+It is strongly recommended upgrading the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.3.
 
