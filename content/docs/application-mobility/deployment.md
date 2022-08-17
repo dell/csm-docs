@@ -39,7 +39,7 @@ The following table lists the configurable parameters of the Application Mobilit
 | - | - | - |
 | `replicaCount` | Number of replicas for the Application Mobility controllers | `1` |
 | `image.pullPolicy` | Image pull policy for the Application Mobility controller images | `IfNotPresent` |
-| `controller.image` | Location of the csm-application-mobility Docker image | `dell/csm-application-mobility:v0.1.0` |
+| `controller.image` | Location of the csm-application-mobility Docker image | `dell/csm-application-mobility-controller:v0.1.0` |
 | `cert-manager.enabled` |  If set to true, cert-manager will be installed during Application Mobility installation | `false` |
 | `veleroNamespace` |  If Velero is already installed, set to the namespace where Velero is insatlled | `velero` |
 | `licenseName` |  Name of the Secret that contains the License for CSM Application Mobility | `license` |
@@ -54,7 +54,9 @@ The following table lists the configurable parameters of the Application Mobilit
 | `velero.configuration.provider` |  Provider to use for Velero. | `aws` |
 | `velero.configuration.backupStorageLocation.name` |  Name of the backup storage location for Velero. | `default` |
 | `velero.configuration.backupStorageLocation.bucket` |  Name of the object store bucket to use for backups. | `velero-bucket` |
-| `velero.configuration.backupStorageLocation.config.region` |  The region for the object store. | `s3` |
-| `velero.configuration.backupStorageLocation.config.s3ForcePathStyle` |  Force path style. | `true` |
-| `velero.configuration.backupStorageLocation.config.s3Url` |  URL for accessing object store. | `http://10.10.10.10:9000` |
-| `velero.initContainers` |  List of init-containers used as plugins by Velero. (TODO: Add note about dell-velero-plugin image location) | ` ` |
+| `velero.configuration.backupStorageLocation.config` |  Additional provider-specific configuration. See https://velero.io/docs/v1.9/api-types/backupstoragelocation/ for specific details. | ` ` |
+| `velero.initContainers` |  List of plugins used by Velero. Dell Velero plugin is required and plugins for other providers can be added.  | ` ` |
+| `velero.initContainers[0].name` |  Name of the Dell Velero plugin.  | `dell-custom-velero-plugin` |
+| `velero.initContainers[0].image` |  Location of the Dell Velero plugin image.  | `dellemc/csm-application-mobility-velero-plugin:v0.1.0` |
+| `velero.initContainers[0].volumeMounts[0].mountPath` |  Mount path of the volume mount.  | `/target` |
+| `velero.initContainers[0].volumeMounts[0].name` |  Name of the volume mount.  | `okygubs` |
