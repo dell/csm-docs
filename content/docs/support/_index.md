@@ -1,7 +1,7 @@
 ---
 title: "Support"
 linkTitle: "Support"
-weight: 11
+weight: 13
 Description: >
   Dell Container Storage Modules (CSM) support
 ---
