@@ -10,7 +10,7 @@ This section outlines the uninstallation steps for Container Storage Modules (CS
 
 ## Uninstall the CSM for Application Mobility Helm Chart
 
-The command below removes all the Kubernetes components associated with the chart.
+This command removes all the Kubernetes components associated with the chart.
 
 ```
 $ helm delete [APPLICATION_MOBILITY_NAME] --namespace [APPLICATION_MOBILITY_NAMESPACE]
