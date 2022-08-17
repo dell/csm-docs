@@ -209,7 +209,7 @@ Use the below command to replace or update the secret:
 | enabled | A boolean that enable/disable vg snapshotter feature. | No | false |
 | image | Image for vg snapshotter. | No | " " |
 | **podmon**               | [Podmon](../../../../resiliency/deployment) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
-| enabled                  | A boolean that enable/disable podmon feature. |  No      |   false   |
+| enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
 | image | image for podmon. | No | " " |
 | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
