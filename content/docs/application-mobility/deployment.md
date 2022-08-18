@@ -27,7 +27,7 @@ Description: >
 1. Either create a values.yml file or provide the `--set` options to the `helm install` to override default values from the [Configuration](#configuration) section.
 1. Install the helm chart
     ```
-    helm install -n application-mobility dell/csm-application-mobility
+    helm install application-mobility -n application-mobility dell/csm-application-mobility
     ```
 
 
