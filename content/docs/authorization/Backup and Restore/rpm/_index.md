@@ -30,7 +30,7 @@ k3s kubectl apply -f roles.yaml
 4. In the deployment of Authorization that you want to restore, restart the `proxy-server` deployment.
 
 ```
-# k3s kubectl -n karavi rollout restart deploy/proxy-server
+k3s kubectl -n karavi rollout restart deploy/proxy-server
 deployment.apps/proxy-server restarted
 ```
 
@@ -59,7 +59,7 @@ k3s kubectl apply -f storage.yaml
 4. In the deployment of Authorization that you want to restore, restart the `proxy-server` deployment.
 
 ```
-# k3s kubectl -n karavi rollout restart deploy/proxy-server
+k3s kubectl -n karavi rollout restart deploy/proxy-server
 deployment.apps/proxy-server restarted
 ```
 
@@ -67,12 +67,12 @@ deployment.apps/proxy-server restarted
 
 Redis is used to store application data regarding [tenants, quota, and volume ownership](../../design#quota--volume-ownership). This data is stored on the system under `/var/lib/rancher/k3s/storage/<redis-primary-pv-claim-volume-name>/appendonly.aof`. 
 
-`appendonly.aof` can be copied and used to restore this appliation data in Authorization deployments. See the example below.
+`appendonly.aof` can be copied and used to restore this appliation data in Authorization deployments. See the example.
 
 1. Determine the Persistent Volume related to the `redis-primary-pv-claim` Persistent Volume Claim.
 
 ```
-# k3s kubectl -n karavi get pvc
+k3s kubectl -n karavi get pvc
 NAME                     STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 redis-primary-pv-claim   Bound    pvc-12d8cc05-910d-45bd-9f30-f6807b287a69   8Gi        RWO            local-path     65m
 ```
@@ -88,7 +88,7 @@ cp /var/lib/rancher/k3s/storage/pvc-12d8cc05-910d-45bd-9f30-f6807b287a69/appendo
 3. In the deployment of Authorization that you want to restore, determine the Persistent Volume related to the `redis-primary-pv-claim` Persistent Volume Claim.
 
 ```
-# k3s kubectl -n karavi get pvc
+k3s kubectl -n karavi get pvc
 NAME                     STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 redis-primary-pv-claim   Bound    pvc-e7ea31bf-3d79-41fc-88d8-50ba356a298b   8Gi        RWO            local-path     65m
 ```
@@ -104,6 +104,6 @@ cp /path/to/copy/appendonly.aof /var/lib/rancher/k3s/storage/pvc-e7ea31bf-3d79-4
 5. In the deployment of Authorization that you want to restore, restart the `redis-primary` deployment.
 
 ```
-# k3s kubectl -n karavi rollout restart deploy/redis-primary
+k3s kubectl -n karavi rollout restart deploy/redis-primary
 deployment.apps/redis-primary restarted
 ```

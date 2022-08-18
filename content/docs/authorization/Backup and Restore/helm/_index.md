@@ -67,10 +67,10 @@ deployment.apps/proxy-server restarted
 
 Redis is used to store application data regarding [tenants, quota, and volume ownership](../../design#quota--volume-ownership) with the Storage Class specified in the `redis.storageClass` parameter in the values file, or with the default Storage Class if that parameter was not specified. 
 
-The Persistent Volume for Redis is dynamically provisioned by this Storage Class with the `redis-primary-pv-claim` Persistent Volume Claim. See the example below.
+The Persistent Volume for Redis is dynamically provisioned by this Storage Class with the `redis-primary-pv-claim` Persistent Volume Claim. See the example.
 
 ```
-# kubectl get persistentvolume
+kubectl get persistentvolume
 NAME                CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                                      STORAGECLASS    REASON   AGE
 k8s-ab74921ab9      8Gi        RWO            Delete           Bound      authorization/redis-primary-pv-claim       <storage-class>          112m
 ```
