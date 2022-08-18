@@ -3,7 +3,7 @@ title: "Application Mobility"
 linkTitle: "Application Mobility"
 weight: 9
 Description: >
-  Application Mobility for Dell Container Storage Modules (CSM)
+  Application Mobility
 ---
 
 >> NOTE: This tech-preview release is not intended for use in production environment.

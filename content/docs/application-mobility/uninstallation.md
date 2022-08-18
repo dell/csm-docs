@@ -3,12 +3,12 @@ title: Uninstallation
 linktitle: Uninstallation
 weight: 2
 description: >
-  Uninstallation for Dell Container Storage Modules (CSM) for Application Mobility
+  Uninstallation
 ---
 
-This section outlines the uninstallation steps for Container Storage Modules (CSM) for Application Mobility.
+This section outlines the uninstallation steps for Application Mobility.
 
-## Uninstall the CSM for Application Mobility Helm Chart
+## Uninstall the Application Mobility Helm Chart
 
 This command removes all the Kubernetes components associated with the chart.
 

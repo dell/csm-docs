@@ -3,7 +3,7 @@ title: "Use Cases"
 linkTitle: "Use Cases"
 weight: 3
 Description: >
-  Use cases for Dell Container Storage Modules (CSM) for Application Mobility
+  Use Cases
 ---
 
 After Application Mobility is installed, the [dellctl CLI](../../cli/) can be used to register clusters and manage backups and restores of applications.

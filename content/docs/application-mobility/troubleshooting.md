@@ -3,18 +3,18 @@ title: "Troubleshooting"
 linkTitle: "Troubleshooting"
 weight: 4
 Description: >
-  Troubleshooting guide
+  Troubleshooting
 ---
 
 ## Frequently Asked Questions
-1. [How can I diagnose an issue with Container Storage Modules (CSM) for Application Mobility?](#how-can-i-diagnose-an-issue-with-csm-for-observability)
+1. [How can I diagnose an issue with Application Mobility?](#how-can-i-diagnose-an-issue-with-application-mobility)
 2. [How can I view logs?](#how-can-i-view-logs)
 3. [How can I debug and troubleshoot issues with Kubernetes?](#how-can-i-debug-and-troubleshoot-issues-with-kubernetes)
 4. [Why are there error logs about a license?](#why-are-there-error-logs-about-a-license)
 
-### How can I diagnose an issue with CSM for Application Mobility?
+### How can I diagnose an issue with Application Mobility?
 
-Once you have attempted to install CSM for Application Mobility to your Kubernetes or OpenShift cluster, the first step in troubleshooting is locating the problem. 
+Once you have attempted to install Application Mobility to your Kubernetes or OpenShift cluster, the first step in troubleshooting is locating the problem. 
 
 Get information on the state of your Pods.
 ```console
