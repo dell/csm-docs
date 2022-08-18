@@ -7,7 +7,10 @@ description: >
 
 ## Roles
 
+
 Role data is stored in the `common` Config Map.
+
+### Steps to execute in the existing Authorization deployment
 
 1. Save the role data by saving the `common` configMap to a file.
 
@@ -15,19 +18,21 @@ Role data is stored in the `common` Config Map.
 kubectl -n <authorization-namespace> get configMap common -o yaml > roles.yaml
 ```
 
-2. In the deployment of Authorization that you want to restore, delete the existing `common` configMap.
+### Steps to execute in the Authorization deployment to restore
+
+1. Delete the existing `common` configMap.
 
 ```
 kubectl -n <authorization-namespace> delete configMap common
 ```
 
-3. In the deployment of Authorization that you want to restore, apply the file containing the role data created in step 1.
+2. Apply the file containing the backed-up role data.
 
 ```
 kubectl apply -f roles.yaml
 ```
 
-4. In the deployment of Authorization that you want to restore, restart the `proxy-server` deployment.
+3. Restart the `proxy-server` deployment.
 
 ```
 kubectl -n <authorization-namespace> rollout restart deploy/proxy-server
@@ -38,25 +43,29 @@ deployment.apps/proxy-server restarted
 
 Storage data is stored in the `karavi-storage-secret` Secret.
 
+### Steps to execute in the existing Authorization deployment
+
 1. Save the storage data by saving the `karavi-storage-secret` Secret to a file.
 
 ```
 kubectl -n <authorization-namespace> get secret karavi-storage-secret -o yaml > storage.yaml
 ```
 
-2. In the deployment of Authorization that you want to restore, delete the existing `karavi-storage-secret` secret.
+### Steps to execute in the Authorization deployment to restore
+
+1. Delete the existing `karavi-storage-secret` secret.
 
 ```
 kubectl -n <authorization-namespace> delete secret karavi-storage-secret
 ```
 
-3. In the deployment of Authorization that you want to restore, apply the file containing the storage data created in step 1.
+2. Apply the file containing the storage data created in step 1.
 
 ```
 kubectl apply -f storage.yaml
 ```
 
-4. In the deployment of Authorization that you want to restore, restart the `proxy-server` deployment.
+3. Restart the `proxy-server` deployment.
 
 ```
 kubectl -n <authorization-namespace> rollout restart deploy/proxy-server
@@ -75,9 +84,13 @@ NAME                CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM 
 k8s-ab74921ab9      8Gi        RWO            Delete           Bound      authorization/redis-primary-pv-claim       <storage-class>          112m
 ```
 
+### Steps to execute in the existing Authorization deployment
+
 1. Create a backup of this volume, typically via snapshot and/or replication, and create a Persistent Volume Claim using this backup by following the Storage Class's provisioner documentation.
 
-2. Edit the `redis-primary` Deployment to use the Persistent Volume Claim associated with the backup by running:
+### Steps to execute in the Authorization deployment to restore
+
+1. Edit the `redis-primary` Deployment to use the Persistent Volume Claim associated with the backup by running:
 
 `kubectl -n <authorization-namespace> edit deploy/redis-primary`
 
