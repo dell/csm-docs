@@ -1,0 +1,125 @@
+---
+title: "Encryption"
+linkTitle: "Encryption"
+weight: 1
+Description: >
+  CSI Volumes Encryption
+---
+Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.
+
+> **NOTE:** This tech-preview release is not intended for use in production environment.
+
+> **NOTE:** Encryption requires a time-based license to create new encrypted volumes. Request a [trial license](../../license) prior to deployment.
+> 
+> After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.
+
+The volume data is encrypted on the Kubernetes worker host running the application workload, transparently for the application. 
+
+Under the hood, *gocryptfs*, an open-source FUSE based encryptor, is used to encrypt both files content and the names of files and directories.
+
+Files content is encrypted using AES-256-GCM and names are encrypted using AES-256-EME.
+
+*gocryptfs* needs a password to initialize and to unlock the encrypted file system. 
+Encryption generates 32 random bytes for the password and stores them in Hashicorp Vault.
+
+For detailed information on the cryptography behind gocryptfs, see [gocryptfs Cryptography](https://nuetzlich.net/gocryptfs/forward_mode_crypto).
+
+When a CSI Driver is installed with the Encryption feature enabled, two provisioners are registered in the cluster:
+
+#### Provisioner for unencrypted volumes
+
+Provides all regular capabilities supported by the storage driver.
+
+#### Provisioner for encrypted volumes
+
+Effectively proxies the storage driver and adds the encryption capability. The rest of the document relates to this provisioner.
+
+## Capabilities
+
+{{<table "table table-striped table-bordered table-sm">}}
+| Feature | PowerScale |
+| ------- | ---------- |
+| Dynamic provisionings of new volumes | Yes |
+| Static provisioning of new volumes | Yes |
+| Volume snapshot creation | Yes |
+| Volume creation from snapshot | Yes |
+| Volume cloning | Yes |
+| Volume expansion | Yes |
+| Encrypted volume unlocking in a different cluster | Yes |
+| User file and directory names encryption | Yes |
+{{</table>}}
+
+## Limitations
+
+- Only file system volumes are supported.
+- Existing volumes with data cannot be encrypted.<br/>
+  **Workaround:** create a new encrypted volume of the same size and copy/move the data from the original *unencrypted* volume to the new *encrypted* volume.
+- Encryption cannot be disabled in-place.<br/>
+  **Workaround:** create a new unencrypted volume of the same size and copy/move the data from the original *encrypted* volume to the new *unencrypted* volume.
+- Encrypted volume content can be seen in clear text through root access to the worker node or by obtaining shell access into the Encryption driver container.
+- When deployed with PowerScale CSI driver, `controllerCount` has to be set to 1.
+- No other CSM component can be enabled simultaneously with Encryption.
+- The only supported authentication method for Vault is AppRole.
+- Encryption secrets, config maps and encryption related values cannot be updated while the CSI driver is running: 
+the CSI driver must be restarted to pick up the change.
+
+## Supported Operating Systems/Container Orchestrator Platforms
+
+{{<table "table table-striped table-bordered table-sm">}}
+| COP/OS | Supported Versions |
+|-|-|
+| Kubernetes    | 1.22, 1.23, 1.24 |
+| CentOS        |     7.6     |
+{{</table>}}
+
+## Supported Storage Platforms
+
+{{<table "table table-striped table-bordered table-sm">}}
+|               | PowerScale |
+|---------------|------------|
+| Storage Array | OneFS 9.0 |
+{{</table>}}
+
+## Supported CSI Drivers
+
+Encryption supports these CSI drivers and versions:
+{{<table "table table-striped table-bordered table-sm">}}
+| Storage Array | CSI Driver | Supported Versions |
+| ------------- | ---------- | ------------------ |
+| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.4 + |
+{{</table>}}
+
+### PowerScale
+
+When enabling Encryption for PowerScale CSI Driver, make sure these requirements are met:
+- PowerScale CSI Driver uses root credentials for the storage array where encrypted volumes will be placed
+- OneFS NFS export configuration does not have root user mapping enabled
+- All other CSM features like Authorization, Replication, Resiliency are disabled
+- Health Monitor feature is disabled
+- CSI driver `controllerCount` is set to 1
+
+## Hashicorp Vault Support
+
+**Supported Vault version is 1.9.3 and newer.**
+
+Vault server (or cluster) is typically deployed in a dedicated Kubernetes cluster, but for the purpose of Encryption, it can be located anywhere.
+Even the simplest standalone single instance server with in-memory storage will suffice for testing.
+
+> **NOTE:** Properly deployed and configured Vault is crucial for security of the volumes encrypted with Encryption. 
+Please refer to the Hashicorp Vault documentation regarding recommended deployment options.
+
+> **CAUTION:** Compromised Vault server or Vault storage back-end may lead to unauthorized access to the volumes encrypted with Encryption.
+
+> **CAUTION:** Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption. 
+Access to the data will be lost for ever.
+
+Refer to [Vault Configuration section](vault) for minimal configuration steps required to support Encryption and other configuration considerations.
+
+## Kubernetes Worker Hosts Requirements
+
+- Each Kubernetes worker host should have SSH server running.
+- The server should have SSH public key authentication enabled for user *root*. 
+- The server should remain running all the time whenever an application with an encrypted volume is running on the host.
+> **NOTE:** Stopping the SSH server on the worker host makes any encrypted volume attached to this host [inaccessible](troubleshooting#ssh-stopped).
+ 
+
