@@ -41,20 +41,19 @@ This example details the steps when an application in namespace `demo1` is clone
     ```
     export VELERO_NAMESPACE=application-mobility 
     ```
-1. Register both the source and target clusters
+1. Register the target cluster
     ```
-    dellctl cluster add -n cluster1 -f ~/kubeconfigs/cluster1-kubeconfig
-    dellctl cluster add -n cluster2 -f ~/kubeconfigs/cluster2-kubeconfig
+    dellctl cluster add -n targetcluster -f ~/kubeconfigs/target-cluster-kubeconfig
     ```
 1. If the Storage Class name on the target cluster is different than the Storage Class name on the source cluster where the backup was created, a mapping between source and target Storage Class names must be defined. See [Changing PV/PVC Storage Classes](#changing-pvpvc-storage-classes).
-1. Create a Backup by providing a name, the included namespace where the application is installed, the source cluster, and the target cluster and namespace mapping where the application will be restored.
+1. Create a Backup by providing a name, the included namespace where the application is installed, and the target cluster and namespace mapping where the application will be restored.
     ```
-    dellctl backup create backup1 --include-namespaces demo1 --cluster-id cluster1 \
-        --clones "cluster2/demo1:restore-ns2" --namespace application-mobility
+    dellctl backup create backup1 --include-namespaces demo1 --clones "targetcluster/demo1:restore-ns2" \
+        --namespace application-mobility
     ```
-1. Monitor the backup status until it is marked as Completed.
+1. Monitor the restore status on the target cluster until it is marked as Completed.
     ```
-    dellctl backup get --namespace application-mobility
+    dellctl restore get --cluster-id targetcluster --namespace application-mobility
     ```
 
 ## Changing PV/PVC Storage Classes
