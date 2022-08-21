@@ -20,6 +20,21 @@ You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.
 *NOTE:*
 - If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.
 - To update any installation parameter after the driver has been installed, change the `my-powermax-settings.yaml` file and run the install script with the option _\-\-upgrade_, for example: `./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml –upgrade`.
+- You cannot upgrade between drivers with different fsGroupPolicies. To check the current driver's fsGroupPolicy, use this command:
+``` kubectl describe csidriver csi-powermax``` 
+and check the "Spec" section:
+
+```
+...
+Spec:
+  Attach Required:     true
+  Fs Group Policy:     ReadWriteOnceWithFSType
+  Pod Info On Mount:   false
+  Requires Republish:  false
+  Storage Capacity:    false
+...
+
+```
 
 ## Upgrade using Dell CSI Operator:
 **Note:** Upgrading the Operator does not upgrade the CSI Driver.
