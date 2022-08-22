@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-08-23T02:10:19+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Release notes for PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="219">
+<meta itemprop="dateModified" content="2022-08-23T02:10:19+05:30" />
+<meta itemprop="wordCount" content="197">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Release notes for PowerFlex CSI driver"/>
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d22cd8211be83f941f33463d0ab49a5b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d22cd8211be83f941f33463d0ab49a5b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -506,7 +506,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csi-powerflex-v230">Release Notes - CSI PowerFlex v2.3.0</a>
+    <li><a href="#release-notes---csi-powerflex-v240">Release Notes - CSI PowerFlex v2.4.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -566,19 +566,16 @@
 	<h1>PowerFlex</h1>
 
 	       
-	<h2 id="release-notes---csi-powerflex-v230">Release Notes - CSI PowerFlex v2.3.0</h2>
+	<h2 id="release-notes---csi-powerflex-v240">Release Notes - CSI PowerFlex v2.4.0</h2>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
-<li>Added support to configure fsGroupPolicy</li>
-<li>Removed beta volumesnapshotclass sample files.</li>
-<li>Added support for Kubernetes 1.24.</li>
-<li>Added support for OpenShift 4.10.</li>
-<li>Fixed handling of idempotent snapshots.</li>
+<li>Added InstallationID annotation for volume attributes.</li>
+<li>Added optional parameter protectionDomain to storageclass.</li>
+<li>RHEL 8.6 support added</li>
 </ul>
 <h3 id="fixed-issues">Fixed Issues</h3>
 <ul>
-<li>Added label to driver node pod for Resiliency protection.</li>
-<li>Updated values file to use patched image of vg-snapshotter.</li>
+<li>Enhancements to volume group snapshotter.</li>
 </ul>
 <h3 id="known-issues">Known Issues</h3>
 <table>
