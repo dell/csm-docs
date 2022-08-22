@@ -8,10 +8,11 @@ description: Release notes for PowerFlex CSI driver
 ### New Features/Changes
 - Added InstallationID annotation for volume attributes.
 - Added optional parameter protectionDomain to storageclass.
+- RHEL 8.6 support added 
 
 ### Fixed Issues
 
--  Fixed volume group snapshotter idempotency check. 
+- Enhancements to volume group snapshotter. 
 
 ### Known Issues
 
