@@ -13,6 +13,7 @@ description: Release notes for PowerMax CSI driver
 - Removed 9.x Unisphere REST endpoints support.
 - Added 10.0 Unisphere REST endpoints support.
 - Automatic SRDF group creation for PowerMax arrays (Juniper release and above).
+- Added PowerPath for Linux support.
 
 ### Fixed Issues
 There are no fixed issues in this release.
