@@ -3,16 +3,13 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.3.0
+## Release Notes - CSI PowerStore v2.4.0
 
 ### New Features/Changes
 
-- Support Volume Group Snapshots.
-- Removed beta volumesnapshotclass sample files.
-- Support Configurable Volume Attributes.
-- Added support for Kubernetes 1.24.
-- Added support for OpenShift 4.10.
-- Added support for NVMe/FC protocol.
+- Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.
+- Added support for iSCSI in TKG Qualification.
+- Added support for Stand alone Helm Chart.
 
 ### Fixed Issues
 
