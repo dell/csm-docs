@@ -13,7 +13,7 @@ The following CSM Authorization components are installed in the specified namesp
 - role-service, which configures roles for tenants to be bound to
 - storage-service, which configures backend storage arrays for the proxy-server to foward requests to
 
-The folloiwng third-party components are installed in the specified namespace:
+The following third-party components are installed in the specified namespace:
 - redis, which stores data regarding tenants and their volume ownership, quota, and revokation status
 - redis-commander, a web management tool for Redis
 
@@ -47,7 +47,7 @@ The following third-party components are optionally installed in the specified n
 
     Use the following command to replace or update the secret:
 
-    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
    
 4. Copy the default values.yaml file `cp charts/csm-authorization/values.yaml myvalues.yaml`
 
@@ -108,9 +108,26 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 ## Install Karavictl
 
-The Karavictl CLI can be obtained directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.
+1. Download the latest release of karavictl
 
-In order to run `karavictl` commands, the binary needs to exist in your PATH, for example /usr/local/bin.
+```
+curl -LO https://github.com/dell/karavi-authorization/releases/latest/download/karavictl
+```
+
+2. Install karavictl
+
+```
+sudo install -o root -g root -m 0755 karavictl /usr/local/bin/karavictl
+```
+
+If you do not have root access on the target system, you can still install karavictl to the ~/.local/bin directory:
+
+```
+chmod +x karavictl
+mkdir -p ~/.local/bin
+mv ./karavictl ~/.local/bin/karavictl
+# and then append (or prepend) ~/.local/bin to $PATH
+```
 
 Karavictl commands and intended use can be found [here](../../cli/). 
 
@@ -208,17 +225,17 @@ karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --ad
 Now that the tenant is bound to a role, a JSON Web Token can be generated for the tenant. For example, to generate a token for the `Finance` tenant:
 
 ```
-karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016
+karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016
 
 {
   "Token": "\napiVersion: v1\nkind: Secret\nmetadata:\n  name: proxy-authz-tokens\ntype: Opaque\ndata:\n  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUXhPRFlzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLmJIODN1TldmaHoxc1FVaDcweVlfMlF3N1NTVnEyRzRKeGlyVHFMWVlEMkU=\n  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWXhNallzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkxNbWVUSkZlX2dveXR0V0lUUDc5QWVaTy1kdmN5SHAwNUwyNXAtUm9ZZnM=\n"
 }
 ```
 
-With [jq](https://stedolan.github.io/jq/), you process the above response to filter the secret manifest. For example:
+Process the above response to filter the secret manifest. For example using sed you can run the following:
 
 ```
-karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016 | jq -r '.Token'
+karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
 apiVersion: v1
 kind: Secret
 metadata:
@@ -257,7 +274,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
    | intendedEndpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
    | endpoint | HTTPS localhost endpoint that the authorization sidecar will listen on. | Yes | https://localhost:9400 |
    | systemID | System ID of the backend storage array. | Yes | " " |
-   | insecure | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
+   | skipCertificateValidation  | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
    | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
 
 

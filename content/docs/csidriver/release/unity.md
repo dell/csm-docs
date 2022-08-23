@@ -3,13 +3,11 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.3.0
+## Release Notes - CSI Unity XT v2.4.0
 
 ### New Features/Changes
 
-- Removed beta volumesnapshotclass sample files.
-- Added support for Kubernetes 1.24.
-- Added support for OpenShift 4.10.
+- Added support to configure fsGroupPolicy.
 
 ### Fixed Issues
 CSM Resiliency: Occasional failure unmounting Unity volume for raw block devices via iSCSI.
