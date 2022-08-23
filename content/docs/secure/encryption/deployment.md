@@ -3,7 +3,7 @@ title: "Deployment"
 linkTitle: "Deployment"
 weight: 1
 Description: >
-  Deployment.
+  Deployment
 ---
 Encryption is enabled as part of the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
 In the tech preview release, Encryption can only be enabled via Helm chart installation.
@@ -23,8 +23,6 @@ The drivers that support Encryption via Helm chart have an `encryption` block in
 ```yaml
 encryption:
   # enable: Enable/disable volume encryption feature
-  # Encryption cannot be enabled in tandem with resizer or authorization.
-  # Enable this feature only after contact support for additional information.
   enabled: false
 
   # pluginName: The name of the provisioner to use when encryption is enabled.

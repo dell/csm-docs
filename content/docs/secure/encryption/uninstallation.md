@@ -3,7 +3,7 @@ title: "Uninstallation"
 linkTitle: "Uninstallation"
 weight: 2
 Description: >
-  Uninstallation.
+  Uninstallation
 ---
 
 ## Cleanup Kubernetes Worker Hosts

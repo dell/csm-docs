@@ -3,7 +3,7 @@ title: "Troubleshooting"
 linkTitle: "Troubleshooting"
 weight: 4
 Description: >
-  Troubleshooting.
+  Troubleshooting
 ---
 
 ## Logs and Events

@@ -28,11 +28,11 @@ When a CSI Driver is installed with the Encryption feature enabled, two provisio
 
 #### Provisioner for unencrypted volumes
 
-Provides all regular capabilities supported by the storage driver.
+This provisioner belongs to the storage driver and does not depend on the Encryption feature. Use a storage class with this provisioner to create regular unencrypted volumes. 
 
 #### Provisioner for encrypted volumes
 
-Effectively proxies the storage driver and adds the encryption capability. The rest of the document relates to this provisioner.
+This provisioner belongs to Encryption and registers with the name [`encryption.pluginName`](deployment/#helm-chart-values) when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.
 
 ## Capabilities
 
@@ -68,8 +68,10 @@ the CSI driver must be restarted to pick up the change.
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes    | 1.22, 1.23, 1.24 |
-| CentOS        |     7.6     |
+| Kubernetes | 1.22, 1.23, 1.24 |
+| RHEL | 7.9, 8.4 |
+| Ubuntu | 18.04, 20.04 |
+| SLES | 15SP2 |
 {{</table>}}
 
 ## Supported Storage Platforms
@@ -118,8 +120,11 @@ Refer to [Vault Configuration section](vault) for minimal configuration steps re
 ## Kubernetes Worker Hosts Requirements
 
 - Each Kubernetes worker host should have SSH server running.
-- The server should have SSH public key authentication enabled for user *root*. 
-- The server should remain running all the time whenever an application with an encrypted volume is running on the host.
+- SSH server should have SSH public key authentication enabled for user *root*. 
+- SSH server should remain running all the time whenever an application with an encrypted volume is running on the host.
 > **NOTE:** Stopping the SSH server on the worker host makes any encrypted volume attached to this host [inaccessible](troubleshooting#ssh-stopped).
+- Each Kubernetes worker host should have commands `fusermount` and `mound.fuse`. They are pre-installed in most Linux distros.
+To install package *fuse* in Ubuntu/Debian run command similar to `apt install fuse`.
+To install package *fuse* in SUSE run command similar to `zypper install fuse`.
  
 
