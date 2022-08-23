@@ -33,6 +33,7 @@ The following requirements must be met before installing CSI Driver for Dell Pow
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
+- If using Powerpath , install the PowerPath for Linux requirements
 
 ### Install Helm 3
 
@@ -103,6 +104,16 @@ features "1 queue_if_no_path"
 path_selector "round-robin 0"
 no_path_retry 10
 ```
+
+### PowerPath for Linux requirements
+
+CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.
+
+Set up the PowerPath for Linux as follows:
+
+- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell EMC Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
+- Untar the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
+- Start the PowerPath service using `systemctl start PowerPath`
 
 ### (Optional) Volume Snapshot Requirements
 
