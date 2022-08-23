@@ -117,9 +117,7 @@ Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/
    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
-
 #### Installation example
-
 
 You can install CRDs and default snapshot controller by running these commands:
 ```bash
@@ -164,7 +162,6 @@ node:
     # Default value: None
     enabled: false
    ```
-
 ### (Optional) Replication feature Requirements
 
 Applicable only if you decided to enable the Replication feature in `values.yaml`
