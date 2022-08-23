@@ -407,7 +407,7 @@ A wide set of annotated storage class manifests have been provided in the [csi-u
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI Unity XT to v1.6.0 or higher, before upgrading to v2.3.0.
+It is strongly recommended to upgrade the earlier versions of CSI Unity XT to v1.6.0 or higher, before upgrading to v2.4.0.
 
 ## Storage Classes
 
