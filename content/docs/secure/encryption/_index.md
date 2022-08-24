@@ -123,7 +123,7 @@ Refer to [Vault Configuration section](vault) for minimal configuration steps re
 - SSH server should have SSH public key authentication enabled for user *root*. 
 - SSH server should remain running all the time whenever an application with an encrypted volume is running on the host.
 > **NOTE:** Stopping the SSH server on the worker host makes any encrypted volume attached to this host [inaccessible](troubleshooting#ssh-stopped).
-- Each Kubernetes worker host should have commands `fusermount` and `mound.fuse`. They are pre-installed in most Linux distros.
+- Each Kubernetes worker host should have commands `fusermount` and `mount.fuse`. They are pre-installed in most Linux distros.
 To install package *fuse* in Ubuntu/Debian run command similar to `apt install fuse`.
 To install package *fuse* in SUSE run command similar to `zypper install fuse`.
  
