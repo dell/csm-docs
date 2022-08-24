@@ -3,7 +3,7 @@ title: "Vault Configuration"
 linkTitle: "Vault Configuration"
 weight: 3
 Description: >
-  Configuration requirements for Vault server.
+  Configuration requirements for Vault server
 ---
 
 ## Vault Server Installation

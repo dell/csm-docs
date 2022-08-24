@@ -3,7 +3,7 @@ title: "Deployment"
 linkTitle: "Deployment"
 weight: 1
 Description: >
-  Deployment.
+  Deployment
 ---
 Encryption is enabled as part of the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
 In the tech preview release, Encryption can only be enabled via Helm chart installation.
@@ -22,12 +22,10 @@ The drivers that support Encryption via Helm chart have an `encryption` block in
 
 ```yaml
 encryption:
-  # enable: Enable/disable volume encryption feature
-  # Encryption cannot be enabled in tandem with resizer or authorization.
-  # Enable this feature only after contact support for additional information.
+  # enabled: Enable/disable volume encryption feature.
   enabled: false
 
-  # pluginName: The name of the provisioner to use when encryption is enabled.
+  # pluginName: The name of the provisioner to use for encrypted volumes.
   pluginName: "sec-isilon.dellemc.com"
 
   # image: Encryption driver image name.
@@ -37,7 +35,7 @@ encryption:
   imagePullPolicy:
 
   # logLevel: Log level of the encryption driver.
-  # Allowed values: "error", "warning", "info", "debug", "trace"
+  # Allowed values: "error", "warning", "info", "debug", "trace".
   logLevel: "error"
   
   # livenessPort: HTTP liveness probe port number. 
@@ -48,7 +46,7 @@ encryption:
   # extraArgs: Extra command line parameters to pass to the encryption driver.
   # Allowed values:
   # --sharedStorage - may be required by some applications to work properly.
-  # When set, performance is reduced, and hard links cannot be created.
+  # When set, performance is reduced and hard links cannot be created.
   # See the gocryptfs documentation for more details.
   extraArgs: []
 ```
@@ -56,10 +54,10 @@ encryption:
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- | ------- |  
 | enabled | Enable/disable volume encryption feature. | No | false |
-| pluginName | The name of the provisioner to use when encryption is enabled. | No | "sec-isilon.dellemc.com" |
+| pluginName | The name of the provisioner to use for encrypted volumes. | No | "sec-isilon.dellemc.com" |
 | image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.1.0" |
 | imagePullPolicy | If specified, overrides the chart global imagePullPolicy. | No | CSI driver global imagePullPolicy |
-| logLevel | Log level of the encryption driver.<br/>Allowed values: "error", "warning", "info", "debug, `"trace" | No | "error" |
+| logLevel | Log level of the encryption driver.<br/>Allowed values: "error", "warning", "info", "debug, `"trace". | No | "error" |
 | livenessPort | HTTP liveness probe port number. Leave empty to disable the liveness probe. | No | |
 | extraArgs | Extra command line parameters to pass to the encryption driver.<br/>Allowed values:<br/>"\-\-sharedStorage" - may be required by some applications to work properly.<br/>When set, performance is reduced and hard links cannot be created.<br/>See the [gocryptfs documentation](https://github.com/rfjakob/gocryptfs/blob/v2.2.1/Documentation/MANPAGE.md#-sharedstorage) for more details. | No | [] |
 
