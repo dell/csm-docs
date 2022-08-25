@@ -179,7 +179,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.3.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.4.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Check `helm/csi-powerstore/driver-image.yaml` and confirm the driver image points to new image.
@@ -284,11 +284,11 @@ Starting CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Vo
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerStore v2.1.0 driver*:
+*Upgrading from CSI PowerStore v2.3.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4.0 or higher, before upgrading to 2.3.0.
+It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4.0 or higher, before upgrading to 2.4.0.
 
 ## Dynamically update the powerstore secrets 
 
