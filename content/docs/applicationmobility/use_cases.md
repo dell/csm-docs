@@ -6,7 +6,7 @@ Description: >
   Use Cases
 ---
 
-After Application Mobility is installed, the [dellctl CLI](../../cli/) can be used to register clusters and manage backups and restores of applications.
+After Application Mobility is installed, the [dellctl CLI](../../references/cli/) can be used to register clusters and manage backups and restores of applications.
 
 ## Backup and Restore an Application
 This example details the steps when an application in namespace `demo1` is being backed up and then later restored to either the same cluster or another cluster. In this sample, both Application Mobility and Velero are installed in the `application-mobility` namespace.

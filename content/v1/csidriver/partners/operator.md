@@ -12,7 +12,7 @@ Users can install the Dell CSI Operator via [Operatorhub.io](https://operatorhub
 
 ![](../ophub1.png)
 
-2. Click DellEMC Operator.
+2. Click Dell Operator.
 
 ![](../ophub2.png)
 
