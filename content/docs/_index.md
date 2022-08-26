@@ -71,7 +71,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | [Observability](https://hub.docker.com/r/dellemc/csm-topology) | v1.3.0 | v1.2.0 | v1.1.1 | v1.1.0 |
 | [Replication](https://hub.docker.com/r/dellemc/dell-csi-replicator) | v1.3.0 | v1.3.0 | v1.2.0 | v1.2.0 |
 | [Resiliency](https://hub.docker.com/r/dellemc/podmon) | v1.3.0 | v1.2.0 | v1.1.0 | v1.1.0 |
-| Encryption | 0.1.0 | NA | NA | NA | 
+| [Encryption](https://hub.docker.com/r/dellemc/csm-encryption) | 0.1.0 | NA | NA | NA | 
 | Appication Mobility | 0.1.0 | NA | NA | NA |
 | [CSI Driver for PowerScale](https://hub.docker.com/r/dellemc/csi-isilon/tags) | v2.4.0 | v2.3.0 | v2.2.0 | v2.2.0 | 
 | [CSI Driver for Unity XT](https://hub.docker.com/r/dellemc/csi-unity/tags) | v2.4.0 | v2.3.0 | v2.2.0 | v2.2.0 |
