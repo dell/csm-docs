@@ -70,8 +70,7 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
   {{< /card >}}
    {{< card header="[Dell Container Storage Module for Encryption](../secure/encryption/deployment)"
           footer="Installs Encryption Module">}}
-  Encryption is enabled as part of the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
-  In the tech preview release, Encryption can only be enabled via Helm chart installation.
+  Encryption can be _optionally_ installed via the PowerScale CSI driver Helm chart.
    [...More on installation instructions](../secure/encryption//deployment)
   {{< /card >}}
 {{< /cardpane >}}

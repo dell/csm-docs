@@ -17,3 +17,5 @@ Release notes for Container Storage Modules:
 [CSM for Replication](../replication/release)
 
 [CSM for Resiliency](../resiliency/release)
+
+[CSM for Encryption](../secure/encryption/release)
