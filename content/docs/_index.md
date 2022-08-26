@@ -40,6 +40,26 @@ CSM is made up of multiple components including modules (enterprise capabilities
 [...Learn more](observability/)
   {{< /card >}}
 {{< /cardpane >}}
+{{< cardpane >}}
+{{< card header="[Application Mobility](applicationmobility/)"
+          footer="Supports all platforms">}}
+  Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
+  [...Learn more](applicationmobility/)
+  {{< /card >}}
+   {{< card header="[Encryption](secure/encryption)"
+          footer="Supports PowerScale">}}
+  Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.
+   [...Learn more](secure/encryption/)
+  {{< /card >}}
+{{< /cardpane >}}
+{{< cardpane >}}
+   {{< card header="[License](license/)"
+          footer="Required for [Application Mobility](applicationmobility/) & [Encryption](secure/encryption/)">}}
+  The tech-preview releases of Application Mobility and Encryption require a license.
+  Request a license using the [Container Storage Modules License Request](https://app.smartsheet.com/b/form/5e46fad643874d56b1f9cf4c9f3071fb) by providing the requested details.
+   [...Learn more](license/)
+  {{< /card >}}
+{{< /cardpane >}}
 
 <img src="csm_diagram.jpg" alt="CSM Diagram" width="800"/>
 
