@@ -11,7 +11,7 @@ The Container Storage Modules along with the required CSI Drivers can each be de
 
 {{< cardpane >}}
   {{< card header="[**CSM Operator**](csmoperator/)"
-          footer="Supports driver [PowerScale](csmoperator/drivers/powerscale/), module [Authorization](csmoperator/modules/authorization/)">}}
+          footer="Supports driver [PowerScale](csmoperator/drivers/powerscale/), modules [Authorization](csmoperator/modules/authorization/) [Replication](csmoperator/modules/replication/)">}}
   Dell CSM Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 [...More on installation instructions](csmoperator/)
   {{< /card >}}
@@ -60,5 +60,18 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
           footer="Installs Replication Module">}}
   Replication module can be installed by installing repctl,Container Storage Modules (CSM) for Replication Controller,CSI driver after enabling replication.
    [...More on installation instructions](../replication/deployment)
+  {{< /card >}}
+{{< /cardpane >}}
+{{< cardpane >}}
+{{< card header="[Dell Container Storage Module for Application Mobility](../applicationmobility/deployment)"
+          footer="Installs Application Mobility Module">}}
+  Application mobility module can be installed via helm charts. This is a tech preview release and it requires a license for installation.
+  [...More on installation instructions](../applicationmobility/deployment)
+  {{< /card >}}
+   {{< card header="[Dell Container Storage Module for Encryption](../secure/encryption/deployment)"
+          footer="Installs Encryption Module">}}
+  Encryption is enabled as part of the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
+  In the tech preview release, Encryption can only be enabled via Helm chart installation.
+   [...More on installation instructions](../secure/encryption//deployment)
   {{< /card >}}
 {{< /cardpane >}}

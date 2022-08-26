@@ -9,11 +9,11 @@ description: Release notes for PowerMax CSI driver
 
 ### New Features/Changes
 - Online volume expansion for replicated volumes.
-- Added support for PowerMax Juniper release
+- Added support for PowerMaxOS 10.
 - Removed 9.x Unisphere REST endpoints support.
 - Added 10.0 Unisphere REST endpoints support.
-- Automatic SRDF group creation for PowerMax arrays (Juniper release and above).
-- Added PowerPath for Linux support.
+- Automatic SRDF group creation for PowerMax arrays (PowerMaxOS 10 and above).
+- Added PowerPath support.
 
 ### Fixed Issues
 There are no fixed issues in this release.

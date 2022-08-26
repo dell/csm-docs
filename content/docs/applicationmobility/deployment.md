@@ -15,17 +15,17 @@ Description: >
     ```
     kubectl create ns application-mobility
     ```
-1. Edit the license Secret file (see Pre-requisites above) and set the correct namespace (ex: `namespace: application-mobility`)
-1. Create the Secret containing a license file
+2. Edit the license Secret file (see Pre-requisites above) and set the correct namespace (ex: `namespace: application-mobility`)
+3. Create the Secret containing a license file
     ```
     kubectl apply -f license.yml
     ```
-1. Add the Dell Helm Charts repository
+4. Add the Dell Helm Charts repository
     ```
     helm repo add dell https://dell.github.io/helm-charts
     ```
-1. Either create a values.yml file or provide the `--set` options to the `helm install` to override default values from the [Configuration](#configuration) section.
-1. Install the helm chart
+5. Either create a values.yml file or provide the `--set` options to the `helm install` to override default values from the [Configuration](#configuration) section.
+6. Install the helm chart
     ```
     helm install application-mobility -n application-mobility dell/csm-application-mobility
     ```
