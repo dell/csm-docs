@@ -63,15 +63,14 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
-{{< card header="[Dell Container Storage Module for Application Mobility](../applicationmobility/deployment)"
+  {{< card header="[Dell Container Storage Module for Application Mobility](../applicationmobility/deployment)"
           footer="Installs Application Mobility Module">}}
   Application mobility module can be installed via helm charts. This is a tech preview release and it requires a license for installation.
   [...More on installation instructions](../applicationmobility/deployment)
   {{< /card >}}
-   {{< card header="[Dell Container Storage Module for Encryption](../secure/encryption/deployment)"
+  {{< card header="[Dell Container Storage Module for Encryption](../secure/encryption/deployment)"
           footer="Installs Encryption Module">}}
-  Encryption is enabled as part of the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
-  In the tech preview release, Encryption can only be enabled via Helm chart installation.
+  Encryption can be optionally installed via the PowerScale CSI driver Helm chart.
    [...More on installation instructions](../secure/encryption//deployment)
   {{< /card >}}
 {{< /cardpane >}}

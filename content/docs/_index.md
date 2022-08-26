@@ -9,11 +9,11 @@ menu:
 no_list: true
 ---
 
-The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization and, resiliency.
+The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility, encryption, and resiliency.
 
 <img src="csm_hexagon.png" alt="CSM Hex Diagram" width="500"/>
 
-CSM is made up of multiple components including modules (enterprise capabilities), CSI drivers (storage enablement) and, other related applications (deployment, feature controllers, etc).
+CSM is made up of multiple components including modules (enterprise capabilities), CSI drivers (storage enablement), and other related applications (deployment, feature controllers, etc).
 
 {{< cardpane >}}
   {{< card header="[**Authorization**](authorization/)"
@@ -71,8 +71,8 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | [Observability](https://hub.docker.com/r/dellemc/csm-topology) | v1.3.0 | v1.2.0 | v1.1.1 | v1.1.0 |
 | [Replication](https://hub.docker.com/r/dellemc/dell-csi-replicator) | v1.3.0 | v1.3.0 | v1.2.0 | v1.2.0 |
 | [Resiliency](https://hub.docker.com/r/dellemc/podmon) | v1.3.0 | v1.2.0 | v1.1.0 | v1.1.0 |
-| Encryption | NA | NA | NA | 0.1.0 | 
-| Appication Mobility | NA | NA | NA | 0.1.0 |
+| [Encryption](https://hub.docker.com/r/dellemc/csm-encryption) | 0.1.0 | NA | NA | NA | 
+| Appication Mobility | 0.1.0 | NA | NA | NA |
 | [CSI Driver for PowerScale](https://hub.docker.com/r/dellemc/csi-isilon/tags) | v2.4.0 | v2.3.0 | v2.2.0 | v2.2.0 | 
 | [CSI Driver for Unity XT](https://hub.docker.com/r/dellemc/csi-unity/tags) | v2.4.0 | v2.3.0 | v2.2.0 | v2.2.0 |
 | [CSI Driver for PowerStore](https://hub.docker.com/r/dellemc/csi-powerstore/tags) | v2.4.0 | v2.3.0 | v2.2.0| v2.2.0 |
