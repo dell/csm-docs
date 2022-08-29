@@ -41,12 +41,12 @@ CSM is made up of multiple components including modules (enterprise capabilities
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
-{{< card header="[Application Mobility](applicationmobility/)"
+{{< card header="[**Application Mobility**](applicationmobility/)"
           footer="Supports all platforms">}}
   Container Storage Modules for Application Mobility provide Kubernetes administrators the ability to clone their stateful application workloads and application data to other clusters, either on-premise or in the cloud.
   [...Learn more](applicationmobility/)
   {{< /card >}}
-   {{< card header="[Encryption](secure/encryption)"
+   {{< card header="[**Encryption**](secure/encryption)"
           footer="Supports PowerScale">}}
   Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.
    [...Learn more](secure/encryption/)
@@ -71,8 +71,8 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | [Observability](https://hub.docker.com/r/dellemc/csm-topology) | v1.3.0 | v1.2.0 | v1.1.1 | v1.1.0 |
 | [Replication](https://hub.docker.com/r/dellemc/dell-csi-replicator) | v1.3.0 | v1.3.0 | v1.2.0 | v1.2.0 |
 | [Resiliency](https://hub.docker.com/r/dellemc/podmon) | v1.3.0 | v1.2.0 | v1.1.0 | v1.1.0 |
-| [Encryption](https://hub.docker.com/r/dellemc/csm-encryption) | 0.1.0 | NA | NA | NA | 
-| Appication Mobility | 0.1.0 | NA | NA | NA |
+| [Encryption](https://hub.docker.com/r/dellemc/csm-encryption) | v0.1.0 | NA | NA | NA | 
+| [Application Mobility](https://hub.docker.com/r/dellemc/csm-application-mobility-controller) | v0.1.0 | NA | NA | NA |
 | [CSI Driver for PowerScale](https://hub.docker.com/r/dellemc/csi-isilon/tags) | v2.4.0 | v2.3.0 | v2.2.0 | v2.2.0 | 
 | [CSI Driver for Unity XT](https://hub.docker.com/r/dellemc/csi-unity/tags) | v2.4.0 | v2.3.0 | v2.2.0 | v2.2.0 |
 | [CSI Driver for PowerStore](https://hub.docker.com/r/dellemc/csi-powerstore/tags) | v2.4.0 | v2.3.0 | v2.2.0| v2.2.0 |
