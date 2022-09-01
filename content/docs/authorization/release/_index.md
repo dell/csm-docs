@@ -11,7 +11,6 @@ Description: >
 ### New Features/Changes
 
 - CSM 1.4 Release specific changes. ([#350](https://github.com/dell/csm/issues/350))
-- Implementation: enable authorization for csm observability powerscale. ([#413](https://github.com/dell/csm/issues/413))
 - CSM Authorization insecure related entities are renamed to skipCertificateValidation. ([#368](https://github.com/dell/csm/issues/368))
 
 ### Bugs 
