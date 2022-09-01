@@ -7,9 +7,9 @@ description: Release notes for PowerStore CSI driver
 
 ### New Features/Changes
 
-- Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.
-- Added support for iSCSI in TKG Qualification.
-- Added support for Stand alone Helm Chart.
+- [Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype](https://github.com/dell/csm/issues/188)
+- [Added support for iSCSI in TKG Qualification](https://github.com/dell/csm/issues/363)
+- [Added support for Stand alone Helm Chart](https://github.com/dell/csm/issues/355)
 
 ### Fixed Issues
 
