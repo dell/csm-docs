@@ -6,6 +6,8 @@ Description: >
   Volume Group Snapshot module of Dell CSI drivers
 ---
 ## Volume Group Snapshot Feature
+The Dell CSM Volume Group Snapshotter is an operator which extends Kubernetes API to support crash-consistent snapshots of groups of volumes.
+Volume Group Snapshot supports Powerflex and Powerstore driver.
 
 In order to use Volume Group Snapshots, ensure the volume snapshot module is enabled.
 - Kubernetes Volume Snapshot CRDs
@@ -28,6 +30,7 @@ spec:
   # "Delete" - delete VolumeSnapshot instances
   memberReclaimPolicy: "Retain"
   volumesnapshotclass: "<snapshot-class>"
+  timeout: 90sec
   pvcLabel: "vgs-snap-label"
   # pvcList:
   #   - "pvcName1"
