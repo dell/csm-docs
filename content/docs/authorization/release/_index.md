@@ -23,3 +23,5 @@ Description: >
 - Using Authorization without dependency on jq. ([#390](https://github.com/dell/csm/issues/390))
 - Authorization Documentation Improvement. ([#384](https://github.com/dell/csm/issues/384))
 - Unit test failing for csm-authorization. ([#382](https://github.com/dell/csm/issues/382))
+- Karavictl has incorrect permissions after download. ([#360](https://github.com/dell/csm/issues/360 [github.com])) 
+- Helm deployment of Authorization denies a valid request path from csi-powerflex. ([#353](https://github.com/dell/csm/issues/353 [github.com]))
