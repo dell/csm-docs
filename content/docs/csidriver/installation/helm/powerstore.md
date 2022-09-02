@@ -22,8 +22,8 @@ The node section of the Helm chart installs the following component in a _Daemon
 The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
-- If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP protocol or NVMe/FC protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP or NVMe/FC configuration.
-> You can use either the Fibre Channel or iSCSI or NVMe/TCP protocol, but you do not need all the three.
+- If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP or NVMe/FC configuration.
+> You can use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, but you do not need all the four.
 
 > If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group
 - Linux native multipathing requirements
