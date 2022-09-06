@@ -76,7 +76,7 @@ The installation process involves the creation of a `Subscription` object either
 * _Automatic_ - If you want the Operator to be automatically installed or upgraded (once an upgrade becomes available)
 * _Manual_ - If you want a Cluster Administrator to manually review and approve the `InstallPlan` for installation/upgrades
 
-**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
+**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
 
 #### Pre-Requisite for installation with OLM
 Please run the following commands for creating the required `ConfigMap` before installing the `dell-csi-operator` using OLM.  
@@ -298,26 +298,26 @@ The below notes explain some of the general items to take care of.
         - args:
           - --volume-name-prefix=csiunity
           - --default-fstype=ext4
-          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.1.0
+          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.2.0
           imagePullPolicy: IfNotPresent
           name: provisioner
         - args:
           - --snapshot-name-prefix=csiunitysnap
-          image: k8s.gcr.io/sig-storage/csi-snapshotter:v5.0.1
+          image: k8s.gcr.io/sig-storage/csi-snapshotter:v6.0.1
           imagePullPolicy: IfNotPresent
           name: snapshotter
         - args:
           - --monitor-interval=60s
-          image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.5.0
+          image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.6.0
           imagePullPolicy: IfNotPresent
           name: external-health-monitor
-        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.4.0
+        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.5.0
           imagePullPolicy: IfNotPresent
           name: attacher
         - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
           imagePullPolicy: IfNotPresent
           name: registrar
-        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.4.0
+        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.5.0
           imagePullPolicy: IfNotPresent
           name: resizer
     ```

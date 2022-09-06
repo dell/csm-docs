@@ -210,7 +210,6 @@ kubectl edit configmap -n unity unity-config-params
   3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
 
 ## Volume Health Monitoring
-This feature is introduced in CSI Driver for Unity XT version v2.1.0.
 
 ### Operator based installation
 

@@ -63,7 +63,7 @@ Dell CSM Operator can be installed manually or via Operator Hub.
    
 {{< imgproc install_olm_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
 
->**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
+>**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
 
 ### Installation via Operator Hub
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.

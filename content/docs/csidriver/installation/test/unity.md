@@ -28,9 +28,9 @@ You can find all the created resources in `test-unity` namespace.
    kubectl delete -f ./test/sample.yaml
    ```
 
-## Support for SLES 15 SP2
+## Support for SLES 15
 
-The CSI Driver for Dell Unity XT requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
+The CSI Driver for Dell Unity XT requires the following set of packages installed on all worker nodes that run on SLES 15.
 
 - open-iscsi **open-iscsi is required in order to make use of iSCSI protocol for provisioning**
 - nfs-utils **nfs-utils is required in order to make use of NFS protocol for provisioning**

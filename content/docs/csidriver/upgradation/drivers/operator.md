@@ -25,5 +25,5 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
   - If the **`Update approval`** is set to `Automatic`, OpenShift automatically detects whenever the latest version of dell-csi-operator is available in the **`Operator hub`**, and upgrades it to the latest available version.
   - If the upgrade policy is set to `Manual`, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the **`Installed Operators`** section of the OpenShift console. Clicking on the hyperlink to `Approve` the installation would trigger the dell-csi-operator upgrade process.
 
-**NOTE**: The recommended version of OLM for Upstream Kubernetes is **`v0.18.3`** when upgrading operator to `v1.5.0`.
+**NOTE**: The recommended version of OLM for Upstream Kubernetes is **`v0.18.3`** when upgrading operator to `v1.9.0`.
 
