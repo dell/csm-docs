@@ -9,9 +9,6 @@ description: Release notes for Unity XT CSI driver
 
 - [Added support to configure fsGroupPolicy](https://github.com/dell/csm/issues/361)
 
-### Fixed Issues
-`fsGroup` specified in pod spec is not reflected in files or directories at mounted path of volume.
-
 ### Known Issues
 
 | Issue | Workaround |
