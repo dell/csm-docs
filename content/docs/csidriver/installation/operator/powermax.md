@@ -47,7 +47,7 @@ Set up Linux multipathing as follows:
 - Enable multipathing using `mpathconf --enable --with_multipathd y`
 - Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
 
-As a best practice, use the following options to help the operating system and the mulitpathing software detect path changes efficiently:
+As a best practice, use these options to help the operating system and the mulitpathing software detect path changes efficiently:
 ```text
 path_grouping_policy multibus
 path_checker tur
@@ -60,9 +60,9 @@ no_path_retry 10
 
 CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.
 
-Set up the PowerPath for Linux as follows:
+Follow this procedure to set up PowerPath for Linux:
 
-- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell EMC Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
+- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
 - `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
 - Start the PowerPath service using `systemctl start PowerPath`
 

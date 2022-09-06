@@ -111,7 +111,7 @@ CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux Power
 
 Set up the PowerPath for Linux as follows:
 
-- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell EMC Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
+- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
 - `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
 - Start the PowerPath service using `systemctl start PowerPath`
 
@@ -185,7 +185,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 4. Create the secret by running `kubectl create -f samples/secret/secret.yaml`.
 5. If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - _csireverseproxy-tls-secret_ which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.
 6. Copy the default values.yaml file `cd helm && cp csi-powermax/values.yaml my-powermax-settings.yaml`
-7. Ensure the unisphere have 10.0 REST endpoint support.
+7. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
 8. Edit the newly created file and provide values for the following parameters `vi my-powermax-settings.yaml`
 
 | Parameter | Description  | Required   | Default  |
