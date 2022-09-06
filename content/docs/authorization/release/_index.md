@@ -11,7 +11,6 @@ Description: >
 ### New Features/Changes
 
 - CSM 1.4 Release specific changes. ([#350](https://github.com/dell/csm/issues/350))
-- Implementation: enable authorization for csm observability powerscale. ([#413](https://github.com/dell/csm/issues/413))
 - CSM Authorization insecure related entities are renamed to skipCertificateValidation. ([#368](https://github.com/dell/csm/issues/368))
 
 ### Bugs 
@@ -24,3 +23,5 @@ Description: >
 - Using Authorization without dependency on jq. ([#390](https://github.com/dell/csm/issues/390))
 - Authorization Documentation Improvement. ([#384](https://github.com/dell/csm/issues/384))
 - Unit test failing for csm-authorization. ([#382](https://github.com/dell/csm/issues/382))
+- Karavictl has incorrect permissions after download. ([#360](https://github.com/dell/csm/issues/360)) 
+- Helm deployment of Authorization denies a valid request path from csi-powerflex. ([#353](https://github.com/dell/csm/issues/353))
