@@ -30,14 +30,14 @@ There are some important limitations that apply to how CSI PowerMax driver uses 
 #### Automatic creation of SRDF Groups
 CSI Driver for Powermax supports automatic creation of SRDF Groups starting **v2.4.0** with help of **10.0** REST endpoints.
 To use this feature:
-* Remove _replication.storage.dell.com/RemoteRDFGroup_ and replication.storage.dell.com/RDFGroup params from the storage classes before creating first replicated volume.
+* Remove _replication.storage.dell.com/RemoteRDFGroup_ and _replication.storage.dell.com/RDFGroup_ params from the storage classes before creating first replicated volume.
 * Driver will check next available RDF pair and use them to create volumes.
 * This enables customers to use same storage class across namespace to create volume.
 
 Limitation of Auto SRDFG:
 * For Async mode, this feature is supported for namespaces with at most 7 characters. 
 * RDF label used to map namespace with the RDF group has limit of 10 char. 3 char is used for cluster prefix to make RDFG unique across clusters.
-
+* For namespace with more than 7 char, use manual entry of RDF groups in storage class.
 #### In Kubernetes
 Ensure you installed CRDs and replication controller in your clusters.
 
@@ -116,8 +116,8 @@ parameters:
   replication.storage.dell.com/RemoteServiceLevel: <Remote Service Level>
   replication.storage.dell.com/RdfMode: <RdfMode>
   replication.storage.dell.com/Bias: "false"
-  replication.storage.dell.com/RdfGroup: <RdfGroup>
-  replication.storage.dell.com/RemoteRDFGroup: <RemoteRDFGroup>
+  replication.storage.dell.com/RdfGroup: <RdfGroup> # optional
+  replication.storage.dell.com/RemoteRDFGroup: <RemoteRDFGroup> # optional
   replication.storage.dell.com/remoteStorageClassName: <RemoteStorageClassName>
   replication.storage.dell.com/remoteClusterID: <RemoteClusterID>
 ```
