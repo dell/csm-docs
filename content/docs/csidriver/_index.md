@@ -27,7 +27,6 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI         |
 | Rancher Kubernetes Engine | yes  |          yes        |        yes       |         yes       |      yes         |
 | Amazon Elastic Kubernetes Service<br> Anywhere | no  |          yes        |        no       |         no       |      yes      |
-
 {{</table>}}
 
 ### CSI Driver Capabilities
