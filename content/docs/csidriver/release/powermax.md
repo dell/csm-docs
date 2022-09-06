@@ -8,12 +8,12 @@ description: Release notes for PowerMax CSI driver
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0.
 
 ### New Features/Changes
-- Online volume expansion for replicated volumes.
-- Added support for PowerMaxOS 10.
-- Removed 9.x Unisphere REST endpoints support.
-- Added 10.0 Unisphere REST endpoints support.
-- Automatic SRDF group creation for PowerMax arrays (PowerMaxOS 10 and above).
-- Added PowerPath support.
+- [Online volume expansion for replicated volumes.](https://github.com/dell/csm/issues/336)
+- [Added support for PowerMaxOS 10.](https://github.com/dell/csm/issues/389)
+- [Removed 9.x Unisphere REST endpoints support.](https://github.com/dell/csm/issues/389)
+- [Added 10.0 Unisphere REST endpoints support.](https://github.com/dell/csm/issues/389)
+- [Automatic SRDF group creation for PowerMax arrays (PowerMaxOS 10 and above).](https://github.com/dell/csm/issues/411)
+- [Added PowerPath support.](https://github.com/dell/csm/issues/436)
 
 ### Fixed Issues
 There are no fixed issues in this release.
