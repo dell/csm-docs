@@ -88,7 +88,7 @@ Install CSI Driver for Unity XT using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.3.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
+ * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.4.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
@@ -252,14 +252,14 @@ Procedure
    In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster
 
     #### Volume Snapshot CRD's
-    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd) for the installation.
+    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd) for the installation.
 
     #### Volume Snapshot Controller
     The CSI external-snapshotter sidecar is split into two controllers:
     - A common snapshot controller
     - A CSI external-snapshotter sidecar
 
-    Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller) for the installation.
+    Use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller) for the installation.
 
     #### Installation example 
 
@@ -273,7 +273,7 @@ Procedure
     ```
 
     **Note**:
-    - It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+    - It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
     - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
               

@@ -111,8 +111,8 @@ CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux Power
 
 Set up the PowerPath for Linux as follows:
 
-- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell EMC Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
-- Untar the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
+- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
+- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
 - Start the PowerPath service using `systemctl start PowerPath`
 
 ### (Optional) Volume Snapshot Requirements
@@ -125,7 +125,7 @@ snapshot:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers to support Volume snapshots.
@@ -133,7 +133,7 @@ The CSI external-snapshotter sidecar is split into two controllers to support Vo
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
@@ -152,7 +152,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
 
 *NOTE:*
-- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 ### (Optional) Replication feature Requirements
@@ -173,7 +173,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.3.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.4.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -185,7 +185,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
 4. Create the secret by running `kubectl create -f samples/secret/secret.yaml`.
 5. If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - _csireverseproxy-tls-secret_ which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.
 6. Copy the default values.yaml file `cd helm && cp csi-powermax/values.yaml my-powermax-settings.yaml`
-7. Edit the newly created file and provide values for the following parameters `vi my-powermax-settings.yaml`
+7. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
+8. Edit the newly created file and provide values for the following parameters `vi my-powermax-settings.yaml`
 
 | Parameter | Description  | Required   | Default  |
 |-----------|--------------|------------|----------|
@@ -343,7 +344,7 @@ global:
 csireverseproxy:
   # Set enabled to true if you want to use proxy
   enabled: true
-  image: dellemc/csipowermax-reverseproxy:v1.4.0
+  image: dellemc/csipowermax-reverseproxy:v2.3.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222
@@ -391,7 +392,7 @@ global:
 csireverseproxy:
   # Set enabled to true if you want to use proxy
   enabled: true
-  image: dellemc/csipowermax-reverseproxy:v1.4.0
+  image: dellemc/csipowermax-reverseproxy:v2.3.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222

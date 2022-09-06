@@ -78,14 +78,14 @@ controller:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
@@ -104,7 +104,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
 
 *NOTE:*
-- When using Kubernetes 1.21/1.22/1.23 it is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+- When using Kubernetes it is recommended to use 6.0.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 ## Install the Driver
@@ -158,7 +158,7 @@ Use the below command to replace or update the secret:
 - "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
 - Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
 - If the user is using complex K8s version like "v1.21.3-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
-           kubeVersion: ">= 1.21.0-0 < 1.24.0-0"
+           kubeVersion: ">= 1.21.0-0 < 1.25.0-0"
 	   
 	   
 5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features.  
