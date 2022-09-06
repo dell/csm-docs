@@ -252,14 +252,14 @@ Procedure
    In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster
 
     #### Volume Snapshot CRD's
-    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd) for the installation.
+    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd) for the installation.
 
     #### Volume Snapshot Controller
     The CSI external-snapshotter sidecar is split into two controllers:
     - A common snapshot controller
     - A CSI external-snapshotter sidecar
 
-    Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller) for the installation.
+    Use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller) for the installation.
 
     #### Installation example 
 
@@ -273,7 +273,7 @@ Procedure
     ```
 
     **Note**:
-    - It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+    - It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
     - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
               
