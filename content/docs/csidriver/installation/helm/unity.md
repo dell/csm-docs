@@ -401,14 +401,6 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
 
 A wide set of annotated storage class manifests have been provided in the [csi-unity/samples/volumesnapshotclass/](https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass) folder. Use these samples to create new Volume Snapshot to provision storage.
 
-### What happens to my existing Volume Snapshot Classes?
-
-*Upgrading from CSI Unity XT v2.1.0 driver*:
-The existing volume snapshot class will be retained.
-
-*Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI Unity XT to v1.6.0 or higher, before upgrading to v2.4.0.
-
 ## Storage Classes
 
 Storage Classes are an essential Kubernetes construct for Storage provisioning. To know more about Storage Classes, refer to https://kubernetes.io/docs/concepts/storage/storage-classes/
