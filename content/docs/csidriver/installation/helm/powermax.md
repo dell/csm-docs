@@ -289,14 +289,6 @@ Upgrading from an older version of the driver: The storage classes will be delet
 
 Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
-### What happens to my existing Volume Snapshot Classes?
-
-*Upgrading from CSI PowerMax v2.1.0 driver*:
-The existing volume snapshot class will be retained.
-
-*Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7.0 or higher, before upgrading to 2.3.0.
-
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes
 
