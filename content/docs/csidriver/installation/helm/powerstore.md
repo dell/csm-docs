@@ -118,7 +118,6 @@ Use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 #### Installation example
-
 You can install CRDs and default snapshot controller by running these commands:
 ```bash
 git clone https://github.com/kubernetes-csi/external-snapshotter/
