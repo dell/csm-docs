@@ -1,0 +1,270 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – References</title>
+    <link>https://dell.github.io/csm-docs/v1/references/</link>
+    <description>Recent content in References on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v1/references/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1: CSM FAQ</title>
+      <link>https://dell.github.io/csm-docs/v1/references/faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/references/faq/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#what-are-dell-container-storage-modules-csm-how-different-is-it-from-a-csi-driver&#34;&gt;What are Dell Container Storage Modules (CSM)? How different is it from a CSI driver?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#where-do-i-start-with-dell-container-storage-modules-csm&#34;&gt;Where do I start with Dell Container Storage Modules (CSM)?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-are-the-prerequisites-for-deploying-container-storage-modules&#34;&gt;What are the prerequisites for deploying Container Storage Modules?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-uninstall-or-disable-a-module&#34;&gt;How do I uninstall or disable a module?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-troubleshoot-container-storage-modules&#34;&gt;How do I troubleshoot Container Storage Modules?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#can-i-use-the-csm-functionality-like-prometheus-collection-or-authorization-quotas-for-my-non-kubernetes-storage-clients&#34;&gt;Can I use the CSM functionality like Prometheus collection or Authorization quotas for my non-Kubernetes storage clients?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#should-i-install-the-module-in-the-same-namespace-as-the-driver-or-another&#34;&gt;Should I install the module in the same namespace as the driver or another?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#which-kubernetes-distributions-are-supported&#34;&gt;Which Kubernetes distributions are supported?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-get-a-list-of-container-storage-modules-deployed-in-my-cluster-with-their-versions&#34;&gt;How do I get a list of Container Storage Modules deployed in my cluster with their versions?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#do-all-container-storage-modules-need-to-be-the-same-version-or-can-i-mix-and-match&#34;&gt;Do all Container Storage Modules need to be the same version, or can I mix and match?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#can-i-run-container-storage-modules-in-a-production-environment&#34;&gt;Can I run Container Storage Modules in a production environment?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#is-dell-container-storage-modules-csm-supported-by-dell-technologies&#34;&gt;Is Dell Container Storage Modules (CSM) supported by Dell Technologies?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#can-i-modify-a-module-or-contribute-to-the-project&#34;&gt;Can I modify a module or contribute to the project?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-coming-next&#34;&gt;What is coming next?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;what-are-dell-container-storage-modules-csm-how-different-is-it-from-a-csi-driver&#34;&gt;What are Dell Container Storage Modules (CSM)? How different is it from a CSI driver?&lt;/h3&gt;
+&lt;p&gt;Dell &lt;strong&gt;C&lt;/strong&gt;ontainer &lt;strong&gt;S&lt;/strong&gt;torage &lt;strong&gt;M&lt;/strong&gt;odules  are a set of modules that aim to extend features beyond what is available in the &lt;a href=&#34;https://kubernetes-csi.github.io/docs/&#34;&gt;CSI specification&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The main goal with CSM modules is to expose storage array enterprise features directly within Kubernetes so developers are empowered to leverage them for their deployment in a seamless way.&lt;/p&gt;
+&lt;h3 id=&#34;where-do-i-start-with-dell-container-storage-modules-csm&#34;&gt;Where do I start with Dell Container Storage Modules (CSM)?&lt;/h3&gt;
+&lt;p&gt;The umbrella repository for every Dell Container Storage Module is: &lt;a href=&#34;https://github.com/dell/csm&#34;&gt;https://github.com/dell/csm&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;what-are-the-prerequisites-for-deploying-container-storage-modules&#34;&gt;What are the prerequisites for deploying Container Storage Modules?&lt;/h3&gt;
+&lt;p&gt;Prerequisites can be found on the respective module deployment pages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../observability/deployment/#prerequisites&#34;&gt;Dell Container Storage Module for Observability Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../authorization/deployment/#prerequisites&#34;&gt;Dell Container Storage Module for Authorization Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../resiliency/deployment/&#34;&gt;Dell Container Storage Module for Resiliency Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../replication/deployment/installation/#before-you-begin&#34;&gt;Dell Container Storage Module for Replication Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Prerequisites for deploying the Dell CSI drivers can be found here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../csidriver/installation/&#34;&gt;Dell CSI Drivers Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;how-do-i-uninstall-or-disable-a-module&#34;&gt;How do I uninstall or disable a module?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../authorization/uninstallation/&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../observability/uninstall/&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../resiliency/uninstallation/&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;how-do-i-troubleshoot-container-storage-modules&#34;&gt;How do I troubleshoot Container Storage Modules?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../csidriver/troubleshooting/&#34;&gt;Dell CSI Drivers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../authorization/troubleshooting/&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../observability/troubleshooting/&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../replication/troubleshooting/&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../resiliency/troubleshooting/&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;can-i-use-the-csm-functionality-like-prometheus-collection-or-authorization-quotas-for-my-non-kubernetes-storage-clients&#34;&gt;Can I use the CSM functionality like Prometheus collection or Authorization quotas for my non-Kubernetes storage clients?&lt;/h3&gt;
+&lt;p&gt;No, all the modules have been designed to work inside Kubernetes with Dell CSI drivers.&lt;/p&gt;
+&lt;h3 id=&#34;should-i-install-the-module-in-the-same-namespace-as-the-driver-or-another&#34;&gt;Should I install the module in the same namespace as the driver or another?&lt;/h3&gt;
+&lt;p&gt;It is recommended to install CSM for Observability in a namespace separate from the Dell CSI drivers because it works across multiple drivers.  All other modules either run as standalone or with the Dell CSI driver as a sidecar.&lt;/p&gt;
+&lt;h3 id=&#34;which-kubernetes-distributions-are-supported&#34;&gt;Which Kubernetes distributions are supported?&lt;/h3&gt;
+&lt;p&gt;The supported Kubernetes distributions for Container Storage Modules are documented:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../authorization/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../observability/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../replication/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../resiliency/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The supported distros for the Dell CSI Drivers are located &lt;a href=&#34;../csidriver/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;how-do-i-get-a-list-of-container-storage-modules-deployed-in-my-cluster-with-their-versions&#34;&gt;How do I get a list of Container Storage Modules deployed in my cluster with their versions?&lt;/h3&gt;
+&lt;p&gt;The easiest way to find the module version is to check the image tag for the module. For all the namespaces you can execute the following:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl get pods -A -o jsonpath=&amp;#34;{..image}&amp;#34; | tr -s &amp;#39;[[:space:]]&amp;#39; &amp;#39;\n&amp;#39; | grep &amp;#39;csm\|karavi&amp;#39; | sort | uniq -c
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Or if you know the namespace:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl get deployment,daemonset -o wide -n {{namespace}}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;do-all-container-storage-modules-need-to-be-the-same-version-or-can-i-mix-and-match&#34;&gt;Do all Container Storage Modules need to be the same version, or can I mix and match?&lt;/h3&gt;
+&lt;p&gt;It is advised to comply with the support matrices (links below) and not deviate from it with mixed versions.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../authorization/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../observability/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../replication/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../resiliency/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../csidriver/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell CSI Drivers&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;can-i-run-container-storage-modules-in-a-production-environment&#34;&gt;Can I run Container Storage Modules in a production environment?&lt;/h3&gt;
+&lt;p&gt;As of CSM 1.0, the Container Storage Modules are GA and ready for production systems.&lt;/p&gt;
+&lt;h3 id=&#34;is-dell-container-storage-modules-csm-supported-by-dell-technologies&#34;&gt;Is Dell Container Storage Modules (CSM) supported by Dell Technologies?&lt;/h3&gt;
+&lt;p&gt;Yes!&lt;/p&gt;
+&lt;p&gt;If you find an issue, please follow our &lt;a href=&#34;../support/&#34;&gt;support process&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;can-i-modify-a-module-or-contribute-to-the-project&#34;&gt;Can I modify a module or contribute to the project?&lt;/h3&gt;
+&lt;p&gt;Yes!&lt;/p&gt;
+&lt;p&gt;All Container Storage Modules are released as open-source projects under Apache-2.0 License. You are free to contribute directly following the &lt;a href=&#34;https://github.com/dell/csm/blob/main/docs/CONTRIBUTING.md&#34;&gt;contribution guidelines&lt;/a&gt;, fork the projects, modify them, and of course share feedback or open tickets ;-)&lt;/p&gt;
+&lt;h3 id=&#34;what-is-coming-next&#34;&gt;What is coming next?&lt;/h3&gt;
+&lt;p&gt;This is just the beginning of the journey for Dell Container Storage Modules, and there is a full roadmap with more to come, which you can check under the &lt;a href=&#34;https://github.com/dell/csm/milestones&#34;&gt;GitHub Milestones&lt;/a&gt; page.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Learn</title>
+      <link>https://dell.github.io/csm-docs/v1/references/learn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/references/learn/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Contribution Guidelines</title>
+      <link>https://dell.github.io/csm-docs/v1/references/contributionguidelines/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/references/contributionguidelines/</guid>
+      <description>
+        
+        
+        &lt;p&gt;CSM Docs is an open-source project and we thrive to build a welcoming and open community for anyone who wants to use the project or contribute to it.&lt;/p&gt;
+&lt;h3 id=&#34;contributing-to-csm-docs&#34;&gt;Contributing to CSM Docs&lt;/h3&gt;
+&lt;p&gt;Become one of the contributors to this project!&lt;/p&gt;
+&lt;p&gt;You can contribute to this project in several ways. Here are some examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Contribute to the CSM documentation.&lt;/li&gt;
+&lt;li&gt;Report an issue.&lt;/li&gt;
+&lt;li&gt;Feature requests.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;CSM docs reside in &lt;a href=&#34;https://github.com/dell/csm-docs&#34;&gt;https://github.com/dell/csm-docs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;CSM project resides in &lt;a href=&#34;https://github.com/dell/csm&#34;&gt;https://github.com/dell/csm&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;dont&#34;&gt;Don&amp;rsquo;t&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Break the website view.&lt;/li&gt;
+&lt;li&gt;Commit directly.&lt;/li&gt;
+&lt;li&gt;Compromise backward compatibility.&lt;/li&gt;
+&lt;li&gt;Disrespect your Community Team members.&lt;/li&gt;
+&lt;li&gt;Forget to keep things simple.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;do&#34;&gt;Do&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Keep it simple.&lt;/li&gt;
+&lt;li&gt;Good work, your best every time.&lt;/li&gt;
+&lt;li&gt;Squash your commits, avoid merges.&lt;/li&gt;
+&lt;li&gt;Keep open communication with other Committers.&lt;/li&gt;
+&lt;li&gt;Ask questions.&lt;/li&gt;
+&lt;li&gt;Test your changes locally and make sure it is not breaking anything.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;code-reviews&#34;&gt;Code reviews&lt;/h3&gt;
+&lt;p&gt;All submissions, including submissions by project members, require review.
+We use GitHub pull requests for this purpose.&lt;/p&gt;
+&lt;h3 id=&#34;branching-strategy&#34;&gt;Branching strategy&lt;/h3&gt;
+&lt;p&gt;The CSM documentation portal follows a release branch strategy where a branch is created for each release and all documentation changes made for a release are done on that branch. The release branch is then merged into the main branch at the time of the release. In some situations it may be sufficient to merge a non-release branch to main if it fixes some issue in the documentation for the current released version.&lt;/p&gt;
+&lt;h4 id=&#34;branch-naming-convention&#34;&gt;Branch Naming Convention&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Branch Type&lt;/th&gt;
+&lt;th&gt;Example&lt;/th&gt;
+&lt;th&gt;Comment&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;main&lt;/td&gt;
+&lt;td&gt;main&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Release&lt;/td&gt;
+&lt;td&gt;release-1.0&lt;/td&gt;
+&lt;td&gt;hotfix: release-1.1 patch: release-1.0.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Feature&lt;/td&gt;
+&lt;td&gt;feature-9-olp-support&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;9&amp;rdquo; referring to GitHub issue ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Bug Fix&lt;/td&gt;
+&lt;td&gt;bugfix-110-remove-docker-compose&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;110&amp;rdquo; referring to GitHub issue ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;steps-for-working-on-the-main-branch&#34;&gt;Steps for working on the main branch&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Fork the repository.&lt;/li&gt;
+&lt;li&gt;Create a branch off of the main branch. The branch name should follow &lt;a href=&#34;#branch-naming-convention&#34;&gt;branch naming convention&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Make your changes and commit them to your branch.&lt;/li&gt;
+&lt;li&gt;If other code changes have merged into the upstream main branch, perform a rebase of those changes into your branch.&lt;/li&gt;
+&lt;li&gt;Test your changes &lt;a href=&#34;#previewing-your-changes&#34;&gt;locally&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Open a &lt;a href=&#34;https://github.com/dell/csm-docs/pulls&#34;&gt;pull request&lt;/a&gt; between your branch and the upstream main branch.&lt;/li&gt;
+&lt;li&gt;Once your pull request has merged with the required approvals, your branch can be deleted.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;steps-for-working-on-a-release-branch&#34;&gt;Steps for working on a release branch&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Fork the repository.&lt;/li&gt;
+&lt;li&gt;Create a branch off of the release branch. The branch name should follow &lt;a href=&#34;#branch-naming-convention&#34;&gt;branch naming convention&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Make your changes and commit them to your branch.&lt;/li&gt;
+&lt;li&gt;If other code changes have merged into the upstream release branch, perform a rebase of those changes into your branch.&lt;/li&gt;
+&lt;li&gt;Test your changes &lt;a href=&#34;#previewing-your-changes&#34;&gt;locally&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Open a &lt;a href=&#34;https://github.com/dell/csm-docs/pulls&#34;&gt;pull request&lt;/a&gt; between your branch and the upstream release branch.&lt;/li&gt;
+&lt;li&gt;Once your pull request has merged with the required approvals, your branch can be deleted.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;previewing-your-changes&#34;&gt;Previewing your changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://github.com/gohugoio/hugo/releases&#34;&gt;latest Hugo version extended version&lt;/a&gt;.
+&lt;blockquote&gt;
+&lt;p&gt;Note: Please note we have to install an extended version.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;Create a local copy of the csm-docs repository using &lt;code&gt;git clone&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Update docsy submodules inside themes folder using &lt;code&gt;git submodule update --recursive --init&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Change to the csm-docs folder and run
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo server 
+&lt;/code&gt;&lt;/pre&gt;By default, local changes will be reflected at http://localhost:1313/. Hugo will watch for changes to the content and automatically refreshes the site.
+&lt;blockquote&gt;
+&lt;p&gt;Note: To bind it to different server address use &lt;code&gt;hugo server --bind 0.0.0.0&lt;/code&gt;, default is 127.0.0.1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;After testing the changes locally, raise a pull request after editing the pages and pushing it to GitHub.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;community-guidelines&#34;&gt;Community guidelines&lt;/h3&gt;
+&lt;p&gt;This project follows &lt;a href=&#34;https://github.com/dell/csm/blob/main/docs/CODE_OF_CONDUCT.md&#34;&gt;https://github.com/dell/csm/blob/main/docs/CODE_OF_CONDUCT.md&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;best-practices&#34;&gt;Best Practices&lt;/h3&gt;
+&lt;h4 id=&#34;linking-the-urls&#34;&gt;Linking the URLs&lt;/h4&gt;
+&lt;p&gt;Hardcoded relative links like &lt;code&gt;[troubleshooting observability](../../observability/troubleshooting.md)&lt;/code&gt; will behave unexpectedly compared to how they would work on our local file system.
+To avoid broken links in the portal, use regular relative URLs in links that will be left unchanged by Hugo.&lt;/p&gt;
+&lt;h4 id=&#34;style-guide&#34;&gt;Style guide&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Use sentence case wherever applicable.&lt;/li&gt;
+&lt;li&gt;Use the numbered lists for items in sequential order and bulletins for the other lists.&lt;/li&gt;
+&lt;li&gt;Check for grammar and spelling.&lt;/li&gt;
+&lt;li&gt;Embed the code within backticks.&lt;/li&gt;
+&lt;li&gt;Use only high-resolution images.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Policies</title>
+      <link>https://dell.github.io/csm-docs/v1/references/policies/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/references/policies/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

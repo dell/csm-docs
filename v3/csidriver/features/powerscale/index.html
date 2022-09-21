@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.103.1" />
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/features/powerscale/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Code features for PowerScale Driver">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="3212">
+<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
+<meta itemprop="wordCount" content="3230">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Code features for PowerScale Driver"/>
@@ -29,8 +29,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" as="style">
-<link href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" as="style">
+<link href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -60,7 +60,7 @@
 				
 				
 				
-				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Container Storage Modules</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -80,13 +80,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.4)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.3</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2</a>
 	
 </div>
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -149,6 +149,27 @@
   <a href="/csm-docs/v3/deployment/csminstaller/csmcli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallercsmcli"><span class="">CSM CLI</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallertroubleshooting-li">
   <a href="/csm-docs/v3/deployment/csminstaller/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallertroubleshooting"><span class="">Troubleshooting</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatordrivers-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/drivers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatordrivers"><span class="">CSI Drivers</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatordriverspowerscale-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatormodules-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatormodules"><span class="">CSM Modules</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatortroubleshooting-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatortroubleshooting"><span class="">Troubleshooting</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmapi-li">
@@ -183,7 +204,7 @@
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3csidriverinstallationoperator-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/" title="Dell CSI Operator Installation Process" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoperator"><span class="">Using Operator</span></a>
+  <a href="/csm-docs/v3/csidriver/installation/operator/" title="CSI Driver installation using Dell CSI Operator" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoperator"><span class="">Using Operator</span></a>
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowerflex-li">
   <a href="/csm-docs/v3/csidriver/installation/operator/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowerflex"><span class="">PowerFlex</span></a>
@@ -198,7 +219,7 @@
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoffline-li">
-  <a href="/csm-docs/v3/csidriver/installation/offline/" title="Offline Installation of Dell EMC CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoffline"><span class="">Offline Installer</span></a>
+  <a href="/csm-docs/v3/csidriver/installation/offline/" title="Offline Installation of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoffline"><span class="">Offline Installer</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3csidriverinstallationtest-li">
   <a href="/csm-docs/v3/csidriver/installation/test/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationtest"><span class="">Testing Drivers</span></a>
   <ul class="ul-4 foldable">
@@ -371,6 +392,8 @@
   <a href="/csm-docs/v3/replication/deployment/storageclasses/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentstorageclasses"><span class="">Storage Class</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowermax-li">
   <a href="/csm-docs/v3/replication/deployment/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerscale-li">
+  <a href="/csm-docs/v3/replication/deployment/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerstore-li">
   <a href="/csm-docs/v3/replication/deployment/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerstore"><span class="">PowerStore</span></a>
 </li>
@@ -431,6 +454,13 @@
   <a href="/csm-docs/v3/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3support"><span class="">Support</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3contributionguidelines-li">
   <a href="/csm-docs/v3/contributionguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3contributionguidelines"><span class="">Contribution Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3policies-li">
+  <a href="/csm-docs/v3/policies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3policies"><span class="">Policies</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3policiesdeprecationpolicy-li">
+  <a href="/csm-docs/v3/policies/deprecationpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3policiesdeprecationpolicy"><span class="">Deprecation Policy</span></a>
+</li>
+  </ul>
 </li>
   </ul>
 </li>
@@ -661,7 +691,7 @@ kubectl create command.</p>
 <ol>
 <li>VolumeSnapshotClass</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># For kubernetes version 20 and above (v1 snaps)</span><span style="color:#f8f8f8;text-decoration:underline">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">snapshot.storage.k8s.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">VolumeSnapshotClass</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -708,7 +738,10 @@ kubectl create command.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><h2 id="volume-expansion">Volume Expansion</h2>
+</span></span></span></code></pre></div><blockquote>
+<p>Starting from CSI PowerScale driver version 2.2, it is allowed to create PersistentVolumeClaim from VolumeSnapshot with different isi paths i.e., isi paths of the new volume and the VolumeSnapshot can be different.</p>
+</blockquote>
+<h2 id="volume-expansion">Volume Expansion</h2>
 <p>The CSI PowerScale driver version 1.2 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).</p>
 <p>To use this feature, the storage class that is used to create the PVC must have the attribute <code>allowVolumeExpansion</code> set to true.</p>
 <p>The following is a sample manifest for a storage class that allows for Volume Expansion:</p>
@@ -717,7 +750,7 @@ kubectl create command.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">isilon-expand-sc</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">annotations</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storageclass.beta.kubernetes.io/is-default-class</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storageclass.kubernetes.io/is-default-class</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">provisioner</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;csi-isilon.dellemc.com&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">reclaimPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Delete</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">parameters</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -880,7 +913,7 @@ communication (same IP/fqdn as k8s node) by default.</p>
 <p>For a cluster with multiple network interfaces and if a user wants to segregate k8s traffic from NFS traffic; you can use the <code>allowedNetworks</code> option.
 <code>allowedNetworks</code> takes CIDR addresses as a parameter to match the IPs to be picked up by the driver to allow and route NFS traffic.</p>
 <h2 id="volume-limit">Volume Limit</h2>
-<p>The CSI Driver for Dell EMC PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.</p>
+<p>The CSI Driver for Dell PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.</p>
 <p>The user can set the volume limit for a node by creating a node label <code>max-isilon-volumes-per-node</code> and specifying the volume limit for that node.
 <br/> <code>kubectl label node &lt;node_name&gt; max-isilon-volumes-per-node=&lt;volume_limit&gt;</code></p>
 <p>The user can also set the volume limit for all the nodes in the cluster by specifying the same to <code>maxIsilonVolumesPerNode</code> attribute in values.yaml.</p>
@@ -891,7 +924,7 @@ communication (same IP/fqdn as k8s node) by default.</p>
 <p>Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world.)For more information, refer to <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector">https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector</a></p>
 <p>Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations">https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations</a> for more information.</p>
 <h2 id="usage-of-smartquotas-to-limit-storage-consumption">Usage of SmartQuotas to Limit Storage Consumption</h2>
-<p>CSI driver for Dell EMC Isilon handles capacity limiting using SmartQuotas feature.</p>
+<p>CSI driver for Dell Isilon handles capacity limiting using SmartQuotas feature.</p>
 <p>To use the SmartQuotas feature user can specify the boolean value &rsquo;enableQuota&rsquo; in myvalues.yaml or my-isilon-settings.yaml.</p>
 <p>Let us assume the user creates a PVC with 3 Gi of storage and &lsquo;SmartQuotas&rsquo; have already been enabled in PowerScale Cluster.</p>
 <ul>
@@ -935,7 +968,7 @@ communication (same IP/fqdn as k8s node) by default.</p>
 <p>Note: Prior to CSI Driver for PowerScale version 2.0.0, the log level was allowed to be updated dynamically through <code>logLevel</code> attribute in the secret object.</p>
 </blockquote>
 <h2 id="nat-support">NAT Support</h2>
-<p>CSI Driver for Dell EMC PowerScale is supported in the NAT environment.</p>
+<p>CSI Driver for Dell PowerScale is supported in the NAT environment.</p>
 <h2 id="configurable-permissions-for-volume-directory">Configurable permissions for volume directory</h2>
 <p>This feature is introduced in CSI Driver for PowerScale version 2.0.0</p>
 <h3 id="helm-based-installation-1">Helm based installation</h3>
@@ -960,7 +993,7 @@ communication (same IP/fqdn as k8s node) by default.</p>
 <p>In the case of operator-based installation, default permission for powerscale directory is present in the samples file.</p>
 <p>Other ways of configuring powerscale volume permissions remain the same as helm-based installation.</p>
 <h2 id="pvpvc-metrics">PV/PVC Metrics</h2>
-<p>CSI Driver for Dell EMC PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes.
+<p>CSI Driver for Dell PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes.
 For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.</p>
 <h3 id="this-feature-can-be-enabled">This feature can be enabled</h3>
 <ol>
@@ -968,7 +1001,7 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 <li>For node plugin, by setting attribute <code>node.healthMonitor.enabled</code> to <code>true</code> in <code>values.yaml</code> file and by enabling the alpha feature gate <code>CSIVolumeHealth</code>.</li>
 </ol>
 <h2 id="single-pod-access-mode-for-persistentvolumes--readwriteoncepod-alpha-feature">Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)</h2>
-<p>Use <code>ReadWriteOncePod(RWOP)</code> access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is only supported for CSI Driver for PowerScale 2.1.0 and Kubernetes version 1.22+.</p>
+<p>Use <code>ReadWriteOncePod(RWOP)</code> access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerScale 2.1.0+ and Kubernetes version 1.22+.</p>
 <p>To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
 <code>--feature-gates=&quot;...,ReadWriteOncePod=true&quot;</code></p>
 <h3 id="creating-a-persistentvolumeclaim">Creating a PersistentVolumeClaim</h3>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.103.1" />
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/installation/helm/powerflex/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing the CSI Driver for PowerFlex via Helm
 ">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="3347">
+<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
+<meta itemprop="wordCount" content="3420">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Installing the CSI Driver for PowerFlex via Helm
@@ -33,8 +33,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" as="style">
-<link href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" as="style">
+<link href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -64,7 +64,7 @@
 				
 				
 				
-				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Container Storage Modules</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -84,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.4)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.3</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2</a>
 	
 </div>
 
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,6 +153,27 @@
   <a href="/csm-docs/v3/deployment/csminstaller/csmcli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallercsmcli"><span class="">CSM CLI</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallertroubleshooting-li">
   <a href="/csm-docs/v3/deployment/csminstaller/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallertroubleshooting"><span class="">Troubleshooting</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatordrivers-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/drivers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatordrivers"><span class="">CSI Drivers</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatordriverspowerscale-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatormodules-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatormodules"><span class="">CSM Modules</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatortroubleshooting-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatortroubleshooting"><span class="">Troubleshooting</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmapi-li">
@@ -187,7 +208,7 @@
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3csidriverinstallationoperator-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/" title="Dell CSI Operator Installation Process" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoperator"><span class="">Using Operator</span></a>
+  <a href="/csm-docs/v3/csidriver/installation/operator/" title="CSI Driver installation using Dell CSI Operator" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoperator"><span class="">Using Operator</span></a>
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowerflex-li">
   <a href="/csm-docs/v3/csidriver/installation/operator/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowerflex"><span class="">PowerFlex</span></a>
@@ -202,7 +223,7 @@
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3csidriverinstallationoffline-li">
-  <a href="/csm-docs/v3/csidriver/installation/offline/" title="Offline Installation of Dell EMC CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoffline"><span class="">Offline Installer</span></a>
+  <a href="/csm-docs/v3/csidriver/installation/offline/" title="Offline Installation of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoffline"><span class="">Offline Installer</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3csidriverinstallationtest-li">
   <a href="/csm-docs/v3/csidriver/installation/test/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationtest"><span class="">Testing Drivers</span></a>
   <ul class="ul-4 foldable">
@@ -375,6 +396,8 @@
   <a href="/csm-docs/v3/replication/deployment/storageclasses/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentstorageclasses"><span class="">Storage Class</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowermax-li">
   <a href="/csm-docs/v3/replication/deployment/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerscale-li">
+  <a href="/csm-docs/v3/replication/deployment/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerstore-li">
   <a href="/csm-docs/v3/replication/deployment/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerstore"><span class="">PowerStore</span></a>
 </li>
@@ -435,6 +458,13 @@
   <a href="/csm-docs/v3/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3support"><span class="">Support</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3contributionguidelines-li">
   <a href="/csm-docs/v3/contributionguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3contributionguidelines"><span class="">Contribution Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3policies-li">
+  <a href="/csm-docs/v3/policies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3policies"><span class="">Policies</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3policiesdeprecationpolicy-li">
+  <a href="/csm-docs/v3/policies/deprecationpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3policiesdeprecationpolicy"><span class="">Deprecation Policy</span></a>
+</li>
+  </ul>
 </li>
   </ul>
 </li>
@@ -534,10 +564,10 @@
 	<h1>PowerFlex</h1>
 
 	       
-	<p>The CSI Driver for Dell EMC PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer">documentation</a>.</p>
+	<p>The CSI Driver for Dell PowerFlex can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerflex/tree/master/dell-csi-helm-installer">documentation</a>.</p>
 <p>The controller section of the Helm chart installs the following components in a <em>Deployment</em> in the specified namespace:</p>
 <ul>
-<li>CSI Driver for Dell EMC PowerFlex</li>
+<li>CSI Driver for Dell PowerFlex</li>
 <li>Kubernetes External Provisioner, which provisions the volumes</li>
 <li>Kubernetes External Attacher, which attaches the volumes to the containers</li>
 <li>Kubernetes External Snapshotter, which provides snapshot support</li>
@@ -545,11 +575,11 @@
 </ul>
 <p>The node section of the Helm chart installs the following component in a <em>DaemonSet</em> in the specified namespace:</p>
 <ul>
-<li>CSI Driver for Dell EMC PowerFlex</li>
+<li>CSI Driver for Dell PowerFlex</li>
 <li>Kubernetes Node Registrar, which handles the driver registration</li>
 </ul>
 <h2 id="prerequisites">Prerequisites</h2>
-<p>The following are requirements that must be met before installing the CSI Driver for Dell EMC PowerFlex:</p>
+<p>The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:</p>
 <ul>
 <li>Install Kubernetes or OpenShift (see <a href="../../../../csidriver/#features-and-capabilities">supported versions</a>)</li>
 <li>Install Helm 3</li>
@@ -561,25 +591,25 @@
 <li>If enabling CSM for Authorization, please refer to the <a href="../../../../authorization/deployment/">Authorization deployment steps</a> first</li>
 </ul>
 <h3 id="install-helm-30">Install Helm 3.0</h3>
-<p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerFlex.</p>
+<p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerFlex.</p>
 <p><strong>Steps</strong></p>
 <p>Run the <code>curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash</code> command to install Helm 3.0.</p>
 <h3 id="enable-zero-padding-on-powerflex">Enable Zero Padding on PowerFlex</h3>
-<p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html">Dell EMC PowerFlex documentation</a>.</p>
+<p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html">Dell PowerFlex documentation</a>.</p>
 <h3 id="install-powerflex-storage-data-client">Install PowerFlex Storage Data Client</h3>
 <p>The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
 SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment;
 currently only Red Hat CoreOS (RHCOS).
 On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps <a href="#manual-sdc-deployment">below</a>.
 Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported OS versions.</p>
-<p><strong>Optional:</strong> For a typical install, you will pull SDC kernel modules from the Dell EMC FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The <a href="https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for">PowerFlex KB article</a> has instructions on how to do this.</p>
+<p><strong>Optional:</strong> For a typical install, you will pull SDC kernel modules from the Dell FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The <a href="https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for">PowerFlex KB article</a> has instructions on how to do this.</p>
 <h4 id="manual-sdc-deployment">Manual SDC Deployment</h4>
-<p>For detailed PowerFlex installation procedure, see the <a href="https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html">Dell EMC PowerFlex Deployment Guide</a>. Install the PowerFlex SDC as follows:</p>
+<p>For detailed PowerFlex installation procedure, see the <a href="https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html">Dell PowerFlex Deployment Guide</a>. Install the PowerFlex SDC as follows:</p>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Download the PowerFlex SDC from <a href="https://www.dell.com/support">Dell EMC Online support</a>. The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.</li>
+<li>Download the PowerFlex SDC from <a href="https://www.dell.com/support">Dell Online support</a>. The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.</li>
 <li>Export the shell variable <em>MDM_IP</em> in a comma-separated list using <code>export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx</code>, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.</li>
-<li>Install the SDC per the <em>Dell EMC PowerFlex Deployment Guide</em>:
+<li>Install the SDC per the <em>Dell PowerFlex Deployment Guide</em>:
 <ul>
 <li>For Red Hat Enterprise Linux and CentOS, run <code>rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm</code>, where * is the SDC name corresponding to the PowerFlex installation version.</li>
 </ul>
@@ -592,14 +622,14 @@ Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
-<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd">v4.2.x</a></p>
+<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd">v5.0.x</a></p>
 <h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
 <p>The CSI external-snapshotter sidecar is split into two controllers:</p>
 <ul>
 <li>A common snapshot controller</li>
 <li>A CSI external-snapshotter sidecar</li>
 </ul>
-<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available here: <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller">v4.2.x</a></p>
+<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available here: <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller">v5.0.x</a></p>
 <p><em>NOTE:</em></p>
 <ul>
 <li>The manifests available on GitHub install the snapshotter image:
@@ -614,18 +644,18 @@ Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/kubernetes-csi/external-snapshotter/
 </span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> ./external-snapshotter
 </span></span><span style="display:flex;"><span>git checkout release-&lt;your-version&gt;
-</span></span><span style="display:flex;"><span>kubectl create -f client/config/crd
-</span></span><span style="display:flex;"><span>kubectl create -f deploy/kubernetes/snapshot-controller
+</span></span><span style="display:flex;"><span>kubectl kustomize client/config/crd <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
+</span></span><span style="display:flex;"><span>kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
 </span></span></code></pre></div><p><em>NOTE:</em></p>
 <ul>
-<li>When using Kubernetes 1.20/1.21/1.22 it is recommended to use 4.2.x version of snapshotter/snapshot-controller.</li>
+<li>When using Kubernetes 1.21/1.22/1.23 it is recommended to use 5.0.x version of snapshotter/snapshot-controller.</li>
 <li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
 </ul>
 <h2 id="install-the-driver">Install the Driver</h2>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.1.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.2.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>Ensure that you have created a namespace where you want to install the driver. You can run <code>kubectl create namespace vxflexos</code> to create a new one.</p>
@@ -741,6 +771,8 @@ Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r
 format and replace/update the secret.</li>
 <li>&ldquo;insecure&rdquo; parameter has been changed to &ldquo;skipCertificateValidation&rdquo; as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of &ldquo;insecure&rdquo; or &ldquo;skipCertificateValidation&rdquo; for now. The driver would return an error if both parameters are used.</li>
 <li>Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the <a href="../../../features/powerflex#dynamic-logging-configuration">Dynamic Logging Configuration</a> section in Features for more information.</li>
+<li>If the user is using complex K8s version like &ldquo;v1.21.3-mirantis-1&rdquo;, use below kubeVersion check in helm/csi-unity/Chart.yaml file.
+kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.24.0-0&rdquo;</li>
 </ul>
 </li>
 <li>
@@ -1045,6 +1077,9 @@ The <code>verify.sh</code> script needs the credentials to check if SDC has been
 <p>It is mandatory to run install script after changes to MDM configuration in <code>vxflexos-config</code> secret. Refer <a href="../../../features/powerflex#dynamic-array-configuration">dynamic-array-configuration</a></p>
 </li>
 <li>
+<p>If an extended Kubernetes version is being used (e.g. <code>v1.21.3-mirantis-1</code>) and is failing the version check in Helm even though it falls in the allowed range, then you must go into <code>helm/csi-vxflexos/Chart.yaml</code> and replace the standard <code>kubeVersion</code> check with the commented-out alternative. <em>Please note</em> that this will also allow the use of pre-release alpha and beta versions of Kubernetes, which is not supported.</p>
+</li>
+<li>
 <p>(Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver.</p>
 <ul>
 <li>Mount options are specified in storageclass yaml under <em>mkfsFormatOption</em>.</li>
@@ -1053,7 +1088,7 @@ The <code>verify.sh</code> script needs the credentials to check if SDC has been
 </li>
 </ul>
 <h2 id="certificate-validation-for-powerflex-gateway-rest-api-calls">Certificate validation for PowerFlex Gateway REST API calls</h2>
-<p>This topic provides details about setting up the certificate for the CSI Driver for Dell EMC PowerFlex.</p>
+<p>This topic provides details about setting up the certificate for the CSI Driver for Dell PowerFlex.</p>
 <p><em>Before you begin</em></p>
 <p>As part of the CSI driver installation, the CSI driver requires a secret with the name vxflexos-certs-0 to vxflexos-certs-n based on the &ldquo;.Values.certSecretCount&rdquo; parameter present in the namespace vxflexos.</p>
 <p>This secret contains the X509 certificates of the CA which signed PowerFlex gateway SSL certificate in PEM format.</p>
@@ -1114,13 +1149,11 @@ There are samples storage class yaml files available under <code>samples/storage
 Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.</p>
 <h2 id="volume-snapshot-class">Volume Snapshot Class</h2>
 <p>Starting CSI PowerFlex v1.5, <code>dell-csi-helm-installer</code> will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the <em>samples/</em> folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.</p>
-<p><em>NOTE</em>
-Support for v1beta1 snapshots is being discontinued in this release.</p>
 <h3 id="what-happens-to-my-existing-volume-snapshot-classes">What happens to my existing Volume Snapshot Classes?</h3>
-<p><em>Upgrading from CSI PowerFlex v2.0 driver</em>:
+<p><em>Upgrading from CSI PowerFlex v2.1 driver</em>:
 The existing volume snapshot class will be retained.</p>
 <p><em>Upgrading from an older version of the driver</em>:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.1.</p>
+It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.2.</p>
 
 	
 	

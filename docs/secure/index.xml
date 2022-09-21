@@ -1,0 +1,233 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Secure</title>
+    <link>https://dell.github.io/csm-docs/docs/secure/</link>
+    <description>Recent content in Secure on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/docs/secure/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Encryption</title>
+      <link>https://dell.github.io/csm-docs/docs/secure/encryption/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/secure/encryption/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Encryption provides the capability to encrypt user data residing on volumes created by Dell CSI Drivers.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This tech-preview release is not intended for use in production environment.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Encryption requires a time-based license to create new encrypted volumes. Request a &lt;a href=&#34;../../license&#34;&gt;trial license&lt;/a&gt; prior to deployment.&lt;/p&gt;
+&lt;p&gt;After the license expiration, existing encrypted volume can still be unlocked and used, but no new encrypted volumes can be created.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The volume data is encrypted on the Kubernetes worker host running the application workload, transparently for the application.&lt;/p&gt;
+&lt;p&gt;Under the hood, &lt;em&gt;gocryptfs&lt;/em&gt;, an open-source FUSE based encryptor, is used to encrypt both files content and the names of files and directories.&lt;/p&gt;
+&lt;p&gt;Files content is encrypted using AES-256-GCM and names are encrypted using AES-256-EME.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;gocryptfs&lt;/em&gt; needs a password to initialize and to unlock the encrypted file system. 
+Encryption generates 32 random bytes for the password and stores them in Hashicorp Vault.&lt;/p&gt;
+&lt;p&gt;For detailed information on the cryptography behind gocryptfs, see &lt;a href=&#34;https://nuetzlich.net/gocryptfs/forward_mode_crypto&#34;&gt;gocryptfs Cryptography&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When a CSI Driver is installed with the Encryption feature enabled, two provisioners are registered in the cluster:&lt;/p&gt;
+&lt;h4 id=&#34;provisioner-for-unencrypted-volumes&#34;&gt;Provisioner for unencrypted volumes&lt;/h4&gt;
+&lt;p&gt;This provisioner belongs to the storage driver and does not depend on the Encryption feature. Use a storage class with this provisioner to create regular unencrypted volumes.&lt;/p&gt;
+&lt;h4 id=&#34;provisioner-for-encrypted-volumes&#34;&gt;Provisioner for encrypted volumes&lt;/h4&gt;
+&lt;p&gt;This provisioner belongs to Encryption and registers with the name &lt;a href=&#34;deployment/#helm-chart-values&#34;&gt;&lt;code&gt;encryption.pluginName&lt;/code&gt;&lt;/a&gt; when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.&lt;/p&gt;
+&lt;h2 id=&#34;capabilities&#34;&gt;Capabilities&lt;/h2&gt;
+
+
+
+
+
+&lt;table class=&#34;table table-striped table-bordered table-sm&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Feature&lt;/th&gt;
+&lt;th&gt;PowerScale&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Dynamic provisionings of new volumes&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Static provisioning of new volumes&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Volume snapshot creation&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Volume creation from snapshot&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Volume cloning&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Volume expansion&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Encrypted volume unlocking in a different cluster&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;User file and directory names encryption&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;h2 id=&#34;limitations&#34;&gt;Limitations&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Only file system volumes are supported.&lt;/li&gt;
+&lt;li&gt;Existing volumes with data cannot be encrypted.&lt;br/&gt;
+&lt;strong&gt;Workaround:&lt;/strong&gt; create a new encrypted volume of the same size and copy/move the data from the original &lt;em&gt;unencrypted&lt;/em&gt; volume to the new &lt;em&gt;encrypted&lt;/em&gt; volume.&lt;/li&gt;
+&lt;li&gt;Encryption cannot be disabled in-place.&lt;br/&gt;
+&lt;strong&gt;Workaround:&lt;/strong&gt; create a new unencrypted volume of the same size and copy/move the data from the original &lt;em&gt;encrypted&lt;/em&gt; volume to the new &lt;em&gt;unencrypted&lt;/em&gt; volume.&lt;/li&gt;
+&lt;li&gt;Encrypted volume content can be seen in clear text through root access to the worker node or by obtaining shell access into the Encryption driver container.&lt;/li&gt;
+&lt;li&gt;When deployed with PowerScale CSI driver, &lt;code&gt;controllerCount&lt;/code&gt; has to be set to 1.&lt;/li&gt;
+&lt;li&gt;No other CSM component can be enabled simultaneously with Encryption.&lt;/li&gt;
+&lt;li&gt;The only supported authentication method for Vault is AppRole.&lt;/li&gt;
+&lt;li&gt;Encryption secrets, config maps and encryption related values cannot be updated while the CSI driver is running: 
+the CSI driver must be restarted to pick up the change.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Supported Operating Systems/Container Orchestrator Platforms&lt;/h2&gt;
+
+
+
+
+
+&lt;table class=&#34;table table-striped table-bordered table-sm&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;COP/OS&lt;/th&gt;
+&lt;th&gt;Supported Versions&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Kubernetes&lt;/td&gt;
+&lt;td&gt;1.22, 1.23, 1.24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RHEL&lt;/td&gt;
+&lt;td&gt;7.9, 8.4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ubuntu&lt;/td&gt;
+&lt;td&gt;18.04, 20.04&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SLES&lt;/td&gt;
+&lt;td&gt;15SP2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;h2 id=&#34;supported-storage-platforms&#34;&gt;Supported Storage Platforms&lt;/h2&gt;
+
+
+
+
+
+&lt;table class=&#34;table table-striped table-bordered table-sm&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;PowerScale&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Storage Array&lt;/td&gt;
+&lt;td&gt;OneFS 9.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;h2 id=&#34;supported-csi-drivers&#34;&gt;Supported CSI Drivers&lt;/h2&gt;
+&lt;p&gt;Encryption supports these CSI drivers and versions:
+
+
+
+
+
+&lt;table class=&#34;table table-striped table-bordered table-sm&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Storage Array&lt;/th&gt;
+&lt;th&gt;CSI Driver&lt;/th&gt;
+&lt;th&gt;Supported Versions&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI Driver for Dell PowerScale&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csi-powerscale&#34;&gt;csi-powerscale&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;v2.4 +&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;powerscale&#34;&gt;PowerScale&lt;/h3&gt;
+&lt;p&gt;When enabling Encryption for PowerScale CSI Driver, make sure these requirements are met:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PowerScale CSI Driver uses root credentials for the storage array where encrypted volumes will be placed&lt;/li&gt;
+&lt;li&gt;OneFS NFS export configuration does not have root user mapping enabled&lt;/li&gt;
+&lt;li&gt;All other CSM features like Authorization, Replication, Resiliency are disabled&lt;/li&gt;
+&lt;li&gt;Health Monitor feature is disabled&lt;/li&gt;
+&lt;li&gt;CSI driver &lt;code&gt;controllerCount&lt;/code&gt; is set to 1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hashicorp-vault-support&#34;&gt;Hashicorp Vault Support&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Supported Vault version is 1.9.3 and newer.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Vault server (or cluster) is typically deployed in a dedicated Kubernetes cluster, but for the purpose of Encryption, it can be located anywhere.
+Even the simplest standalone single instance server with in-memory storage will suffice for testing.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Properly deployed and configured Vault is crucial for security of the volumes encrypted with Encryption. 
+Please refer to the Hashicorp Vault documentation regarding recommended deployment options.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;CAUTION:&lt;/strong&gt; Compromised Vault server or Vault storage back-end may lead to unauthorized access to the volumes encrypted with Encryption.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;CAUTION:&lt;/strong&gt; Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption. 
+Access to the data will be lost for ever.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Refer to &lt;a href=&#34;vault&#34;&gt;Vault Configuration section&lt;/a&gt; for minimal configuration steps required to support Encryption and other configuration considerations.&lt;/p&gt;
+&lt;h2 id=&#34;kubernetes-worker-hosts-requirements&#34;&gt;Kubernetes Worker Hosts Requirements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Each Kubernetes worker host should have SSH server running.&lt;/li&gt;
+&lt;li&gt;SSH server should have SSH public key authentication enabled for user &lt;em&gt;root&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;SSH server should remain running all the time whenever an application with an encrypted volume is running on the host.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Stopping the SSH server on the worker host makes any encrypted volume attached to this host &lt;a href=&#34;troubleshooting#ssh-stopped&#34;&gt;inaccessible&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Each Kubernetes worker host should have commands &lt;code&gt;fusermount&lt;/code&gt; and &lt;code&gt;mount.fuse&lt;/code&gt;. They are pre-installed in most Linux distros.
+To install package &lt;em&gt;fuse&lt;/em&gt; in Ubuntu/Debian run command similar to &lt;code&gt;apt install fuse&lt;/code&gt;.
+To install package &lt;em&gt;fuse&lt;/em&gt; in SUSE run command similar to &lt;code&gt;zypper install fuse&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

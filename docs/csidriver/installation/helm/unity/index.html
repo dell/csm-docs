@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.103.1" />
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/unity/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="Unity XT">
 <meta itemprop="description" content="Installing CSI Driver for Unity XT via Helm
 ">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="3158">
+<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
+<meta itemprop="wordCount" content="3126">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Unity XT"/>
 <meta name="twitter:description" content="Installing CSI Driver for Unity XT via Helm
@@ -33,8 +33,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" as="style">
-<link href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" as="style">
+<link href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -64,7 +64,7 @@
 				
 				
 				
-				<a class="nav-link active" href="/csm-docs/docs/" ><span class="active">Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+				<a class="nav-link active" href="/csm-docs/docs/" ><span class="active">Container Storage Modules</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -84,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.4)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.3</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2</a>
 	
 </div>
 
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -139,23 +139,12 @@
   <nav class="collapse td-sidebar-nav" id="td-section-nav">
     <ul class="td-sidebar-nav__section pr-md-3 ul-0">
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocs-li">
-  <a href="/csm-docs/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-csm-docsdocs"><span class="">Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+  <a href="/csm-docs/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-csm-docsdocs"><span class="">Container Storage Modules</span></a>
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsdeployment-li">
   <a href="/csm-docs/docs/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsminstaller-li">
-  <a href="/csm-docs/docs/deployment/csminstaller/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstaller"><span class="">CSM Installer</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallercsmapi-li">
-  <a href="/csm-docs/docs/deployment/csminstaller/csmapi/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallercsmapi"><span class="">CSM REST API</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallercsmcli-li">
-  <a href="/csm-docs/docs/deployment/csminstaller/csmcli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallercsmcli"><span class="">CSM CLI</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallertroubleshooting-li">
-  <a href="/csm-docs/docs/deployment/csminstaller/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallertroubleshooting"><span class="">Troubleshooting</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperator-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperator-li">
   <a href="/csm-docs/docs/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordrivers-li">
@@ -252,6 +241,8 @@
   <a href="/csm-docs/docs/csidriver/upgradation/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverupgradationdriverspowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverupgradationdriversunity-li">
   <a href="/csm-docs/docs/csidriver/upgradation/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverupgradationdriversunity"><span class="">Unity XT</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocscsidriverupgradationdriversoffline-li">
+  <a href="/csm-docs/docs/csidriver/upgradation/drivers/offline/" title="Offline Upgrade of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocscsidriverupgradationdriversoffline"><span class="">Offline Upgrade</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocscsidriverfeatures-li">
@@ -325,6 +316,15 @@
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdesign-li">
   <a href="/csm-docs/docs/authorization/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsauthorizationdesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationbackup-and-restore-li">
+  <a href="/csm-docs/docs/authorization/backup-and-restore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationbackup-and-restore"><span class="">Backup and Restore</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationbackup-and-restorehelm-li">
+  <a href="/csm-docs/docs/authorization/backup-and-restore/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationbackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationbackup-and-restorerpm-li">
+  <a href="/csm-docs/docs/authorization/backup-and-restore/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsauthorizationdeployment-li">
   <a href="/csm-docs/docs/authorization/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeployment"><span class="">Deployment</span></a>
   <ul class="ul-3 foldable">
@@ -356,6 +356,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilitymetricspowerflex-li">
   <a href="/csm-docs/docs/observability/metrics/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsobservabilitymetricspowerflex"><span class="">PowerFlex Metrics</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilitymetricspowerscale-li">
+  <a href="/csm-docs/docs/observability/metrics/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsobservabilitymetricspowerscale"><span class="">PowerScale Metrics</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsobservabilitymetricspowerstore-li">
   <a href="/csm-docs/docs/observability/metrics/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsobservabilitymetricspowerstore"><span class="">PowerStore Metrics</span></a>
 </li>
@@ -401,6 +403,8 @@
   <a href="/csm-docs/docs/replication/deployment/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentpowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationdeploymentpowerstore-li">
   <a href="/csm-docs/docs/replication/deployment/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationdeploymentunity-li">
+  <a href="/csm-docs/docs/replication/deployment/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentunity"><span class="">Unity</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationarchitecture-li">
@@ -417,6 +421,8 @@
   <a href="/csm-docs/docs/replication/monitoring/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationmonitoring"><span class="">Monitoring</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationreplication-actions-li">
   <a href="/csm-docs/docs/replication/replication-actions/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationreplication-actions"><span class="">Replication Actions</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationvolume_expansion-li">
+  <a href="/csm-docs/docs/replication/volume_expansion/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationvolume_expansion"><span class="">Volume Expansion</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationtools-li">
   <a href="/csm-docs/docs/replication/tools/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationtools"><span class="">Tools</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationtroubleshooting-li">
@@ -455,16 +461,55 @@
   <a href="/csm-docs/docs/snapshots/volume-group-snapshots/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssnapshotsvolume-group-snapshots"><span class="">Volume Group Snapshots</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsrelease-li">
-  <a href="/csm-docs/docs/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsapplicationmobility-li">
+  <a href="/csm-docs/docs/applicationmobility/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsapplicationmobility"><span class="">Application Mobility</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsapplicationmobilitydeployment-li">
+  <a href="/csm-docs/docs/applicationmobility/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsapplicationmobilitydeployment"><span class="">Deployment</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsapplicationmobilityuninstallation-li">
+  <a href="/csm-docs/docs/applicationmobility/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsapplicationmobilityuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsapplicationmobilityuse_cases-li">
+  <a href="/csm-docs/docs/applicationmobility/use_cases/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsapplicationmobilityuse_cases"><span class="">Use Cases</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsapplicationmobilitytroubleshooting-li">
+  <a href="/csm-docs/docs/applicationmobility/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsapplicationmobilitytroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsapplicationmobilityrelease-li">
+  <a href="/csm-docs/docs/applicationmobility/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsapplicationmobilityrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocssecure-li">
+  <a href="/csm-docs/docs/secure/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssecure"><span class="">Secure</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocssecureencryption-li">
+  <a href="/csm-docs/docs/secure/encryption/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssecureencryption"><span class="">Encryption</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssecureencryptiondeployment-li">
+  <a href="/csm-docs/docs/secure/encryption/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocssecureencryptiondeployment"><span class="">Deployment</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssecureencryptionuninstallation-li">
+  <a href="/csm-docs/docs/secure/encryption/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocssecureencryptionuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssecureencryptionvault-li">
+  <a href="/csm-docs/docs/secure/encryption/vault/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocssecureencryptionvault"><span class="">Vault Configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssecureencryptiontroubleshooting-li">
+  <a href="/csm-docs/docs/secure/encryption/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocssecureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocssecureencryptionrelease-li">
+  <a href="/csm-docs/docs/secure/encryption/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocssecureencryptionrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocstroubleshooting-li">
   <a href="/csm-docs/docs/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocstroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocslicense-li">
+  <a href="/csm-docs/docs/license/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocslicense"><span class="">License</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsrelease-li">
+  <a href="/csm-docs/docs/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsrelease"><span class="">Release notes</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocssupport-li">
   <a href="/csm-docs/docs/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocssupport"><span class="">Support</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsreferences-li">
   <a href="/csm-docs/docs/references/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferences"><span class="">References</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreferencesfaq-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreferencescli-li">
+  <a href="/csm-docs/docs/references/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferencescli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreferencesfaq-li">
   <a href="/csm-docs/docs/references/faq/" title="CSM FAQ" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferencesfaq"><span class="">FAQ</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsreferenceslearn-li">
   <a href="/csm-docs/docs/references/learn/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsreferenceslearn"><span class="">Learn</span></a>
@@ -525,11 +570,7 @@
       </ul>
     </li>
     <li><a href="#certificate-validation-for-unisphere-rest-api-calls">Certificate validation for Unisphere REST API calls</a></li>
-    <li><a href="#volume-snapshot-class">Volume Snapshot Class</a>
-      <ul>
-        <li><a href="#what-happens-to-my-existing-volume-snapshot-classes">What happens to my existing Volume Snapshot Classes?</a></li>
-      </ul>
-    </li>
+    <li><a href="#volume-snapshot-class">Volume Snapshot Class</a></li>
     <li><a href="#storage-classes">Storage Classes</a>
       <ul>
         <li><a href="#what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</a></li>
@@ -575,7 +616,7 @@
             <nav aria-label="breadcrumb" class="td-breadcrumbs">
   <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <a href="https://dell.github.io/csm-docs/docs/">Dell Technologies (Dell) Container Storage Modules (CSM)</a>
+    <a href="https://dell.github.io/csm-docs/docs/">Container Storage Modules</a>
   </li>
   <li class="breadcrumb-item">
     <a href="https://dell.github.io/csm-docs/docs/csidriver/">CSI Drivers</a>
@@ -669,7 +710,7 @@ Unity XT.</p>
 <p>Install CSI Driver for Unity XT using this procedure.</p>
 <p><em>Before you begin</em></p>
 <ul>
-<li>You must have the downloaded files, including the Helm chart from the source <a href="https://github.com/dell/csi-unity">git repository</a> with the command <code>git clone -b v2.3.0 https://github.com/dell/csi-unity.git</code>, as a pre-requisite for running this procedure.</li>
+<li>You must have the downloaded files, including the Helm chart from the source <a href="https://github.com/dell/csi-unity">git repository</a> with the command <code>git clone -b v2.4.0 https://github.com/dell/csi-unity.git</code>, as a pre-requisite for running this procedure.</li>
 <li>In the top-level dell-csi-helm-installer directory, there should be two scripts, <code>csi-install.sh</code> and <code>csi-uninstall.sh</code>.</li>
 <li>Ensure <em>unity</em> namespace exists in Kubernetes cluster. Use the <code>kubectl create namespace unity</code> command to create the namespace if the namespace is not present.</li>
 </ul>
@@ -766,6 +807,12 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.25.0-0&rdquo;</li>
 <td>Tenant name added while adding host entry to the array</td>
 <td>No</td>
 <td></td>
+</tr>
+<tr>
+<td>fsGroupPolicy</td>
+<td>Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code></td>
+<td>No</td>
+<td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
 </tr>
 <tr>
 <td><strong>controller</strong></td>
@@ -893,6 +940,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.25.0-0&rdquo;</li>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">allowRWOMultiPodAccess</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">syncNodeInfoInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">5</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">maxUnityVolumesPerNode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">fsGroupPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ReadWriteOneFSType</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div></li>
 <li>
 <p>For certificate validation of Unisphere REST API calls refer <a href="#certificate-validation-for-unisphere-rest-api-calls">here</a>. Otherwise, create an empty secret with file <code>csi-unity/samples/secret/emptysecret.yaml</code> file by running the <code>kubectl create -f csi-unity/samples/secret/emptysecret.yaml</code> command.</p>
@@ -996,14 +1044,14 @@ The driver will continue to use previous values in case of an error found in the
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster</p>
 <h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
-<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd">v5.0.x</a> for the installation.</p>
+<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd">v6.0.x</a> for the installation.</p>
 <h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
 <p>The CSI external-snapshotter sidecar is split into two controllers:</p>
 <ul>
 <li>A common snapshot controller</li>
 <li>A CSI external-snapshotter sidecar</li>
 </ul>
-<p>Use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller">v5.0.x</a> for the installation.</p>
+<p>Use <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller">v6.0.x</a> for the installation.</p>
 <h4 id="installation-example">Installation example</h4>
 <p>You can install CRDs and default snapshot controller by running following commands:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/kubernetes-csi/external-snapshotter/
@@ -1013,7 +1061,7 @@ The driver will continue to use previous values in case of an error found in the
 </span></span><span style="display:flex;"><span>kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
 </span></span></code></pre></div><p><strong>Note</strong>:</p>
 <ul>
-<li>It is recommended to use 5.0.x version of snapshotter/snapshot-controller.</li>
+<li>It is recommended to use 6.0.x version of snapshotter/snapshot-controller.</li>
 <li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
 </ul>
 </li>
@@ -1137,11 +1185,6 @@ Use the following command to replace the secret:
 </ol>
 <h2 id="volume-snapshot-class">Volume Snapshot Class</h2>
 <p>A wide set of annotated storage class manifests have been provided in the <a href="https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass">csi-unity/samples/volumesnapshotclass/</a> folder. Use these samples to create new Volume Snapshot to provision storage.</p>
-<h3 id="what-happens-to-my-existing-volume-snapshot-classes">What happens to my existing Volume Snapshot Classes?</h3>
-<p><em>Upgrading from CSI Unity XT v2.1.0 driver</em>:
-The existing volume snapshot class will be retained.</p>
-<p><em>Upgrading from an older version of the driver</em>:
-It is strongly recommended to upgrade the earlier versions of CSI Unity XT to v1.6.0 or higher, before upgrading to v2.3.0.</p>
 <h2 id="storage-classes">Storage Classes</h2>
 <p>Storage Classes are an essential Kubernetes construct for Storage provisioning. To know more about Storage Classes, refer to <a href="https://kubernetes.io/docs/concepts/storage/storage-classes/">https://kubernetes.io/docs/concepts/storage/storage-classes/</a></p>
 <p>A wide set of annotated storage class manifests have been provided in the <a href="https://github.com/dell/csi-unity/tree/master/samples/storageclass">samples/storageclass</a> folder. Use these samples to create new storage classes to provision storage.</p>

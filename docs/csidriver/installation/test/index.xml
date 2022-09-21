@@ -494,8 +494,8 @@ storage classes and automatically mounts them to the pod.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete -f ./test/sample.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;support-for-sles-15-sp2&#34;&gt;Support for SLES 15 SP2&lt;/h2&gt;
-&lt;p&gt;The CSI Driver for Dell Unity XT requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.&lt;/p&gt;
+&lt;h2 id=&#34;support-for-sles-15&#34;&gt;Support for SLES 15&lt;/h2&gt;
+&lt;p&gt;The CSI Driver for Dell Unity XT requires these of packages installed on all worker nodes that run on SLES 15.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;open-iscsi &lt;strong&gt;open-iscsi is required in order to make use of iSCSI protocol for provisioning&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;nfs-utils &lt;strong&gt;nfs-utils is required in order to make use of NFS protocol for provisioning&lt;/strong&gt;&lt;/li&gt;

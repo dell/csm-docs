@@ -22,15 +22,10 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---dell-csi-operator-180&#34;&gt;Release Notes - Dell CSI Operator 1.8.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---dell-csi-operator-190&#34;&gt;Release Notes - Dell CSI Operator 1.9.0&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There will be a delay in certification of Dell CSI Operator 1.8.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.8.0 release.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There will be a delay in certification of Dell CSI Operator 1.9.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.9.0 release.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
@@ -51,19 +46,16 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v230&#34;&gt;Release Notes - CSI PowerFlex v2.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v240&#34;&gt;Release Notes - CSI PowerFlex v2.4.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support to configure fsGroupPolicy&lt;/li&gt;
-&lt;li&gt;Removed beta volumesnapshotclass sample files.&lt;/li&gt;
-&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
-&lt;li&gt;Fixed handling of idempotent snapshots.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/415&#34;&gt;Added optional parameter protectionDomain to storageclass&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/434&#34;&gt;Added InstallationID annotation for volume attributes.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;RHEL 8.6 support added&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added label to driver node pod for Resiliency protection.&lt;/li&gt;
-&lt;li&gt;Updated values file to use patched image of vg-snapshotter.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/371&#34;&gt;Enhancements and fixes to volume group snapshotter&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -101,19 +93,18 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powermax-v230&#34;&gt;Release Notes - CSI PowerMax v2.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powermax-v240&#34;&gt;Release Notes - CSI PowerMax v2.4.0&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.&lt;/li&gt;
-&lt;li&gt;Added support for Standalone Helm Charts.&lt;/li&gt;
-&lt;li&gt;Removed beta volumesnapshotclass sample files.&lt;/li&gt;
-&lt;li&gt;Added mapping of PV/PVC to namespace.&lt;/li&gt;
-&lt;li&gt;Added support to configure fsGroupPolicy.&lt;/li&gt;
-&lt;li&gt;Added support to filter topology keys based on user inputs.&lt;/li&gt;
-&lt;li&gt;Added support for SRDF Metro group sharing multiple namespaces.&lt;/li&gt;
-&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
-&lt;li&gt;Added support to convert replicated volume to non-replicated volume and vice versa for Sync and Async modes.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/336&#34;&gt;Online volume expansion for replicated volumes.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/389&#34;&gt;Added support for PowerMaxOS 10.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/389&#34;&gt;Removed 9.x Unisphere REST endpoints support.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/389&#34;&gt;Added 10.0 Unisphere REST endpoints support.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/411&#34;&gt;Automatic SRDF group creation for PowerMax arrays (PowerMaxOS 10 and above).&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/436&#34;&gt;Added PowerPath support.&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
@@ -127,20 +118,8 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Delete Volume fails with the error message: volume is part of masking view&lt;/td&gt;
-&lt;td&gt;This issue is due to limitations in Unisphere and occurs when Unisphere is overloaded. Currently, there is no workaround for this but it can be avoided by ensuring that Unisphere is not overloaded during such operations. The Unisphere team is assessing a fix for this in a future Unisphere release&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Getting initiators list fails with context deadline error&lt;/td&gt;
-&lt;td&gt;The following error can occur during the driver installation if a large number of initiators are present on the array. There is no workaround for this but it can be avoided by deleting stale initiators on the array&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;Unable to update Host: A problem occurred modifying the host resource&lt;/td&gt;
 &lt;td&gt;This issue occurs when the nodes do not have unique hostnames or when an IP address/FQDN with same sub-domains are used as hostnames. The workaround is to use unique hostnames or FQDN with unique sub-domains&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;GetSnapVolumeList fails with context deadline error&lt;/td&gt;
-&lt;td&gt;The following error can occur if a large number of snapshots are present on the array. There is no workaround for this but it can be avoided by deleting unused snapshots on the array&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
@@ -169,14 +148,10 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v230&#34;&gt;Release Notes - CSI Driver for PowerScale v2.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v240&#34;&gt;Release Notes - CSI Driver for PowerScale v2.4.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Removed beta volumesnapshotclass sample files.&lt;/li&gt;
-&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
-&lt;li&gt;Added support to increase volume path limit.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
-&lt;li&gt;Added support for CSM Resiliency sidecar via Helm.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/362&#34;&gt;Added support to add client only to root clients when RO volume is created from snapshot and RootClientEnabled is set to true.&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
@@ -205,6 +180,10 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only&lt;br/&gt;&lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;To get the desired behavior set &amp;ldquo;RootClientEnabled&amp;rdquo; = &amp;ldquo;true&amp;rdquo; in the storage class parameter&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Driver logs shows &amp;ldquo;VendorVersion=2.3.0+dirty&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;Update the driver to csi-powerscale 2.4.0&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
@@ -224,15 +203,12 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v230&#34;&gt;Release Notes - CSI PowerStore v2.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v240&#34;&gt;Release Notes - CSI PowerStore v2.4.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Support Volume Group Snapshots.&lt;/li&gt;
-&lt;li&gt;Removed beta volumesnapshotclass sample files.&lt;/li&gt;
-&lt;li&gt;Support Configurable Volume Attributes.&lt;/li&gt;
-&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
-&lt;li&gt;Added support for NVMe/FC protocol.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/188&#34;&gt;Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/363&#34;&gt;Added support for iSCSI in TKG Qualification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/355&#34;&gt;Added support for Stand alone Helm Chart&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
@@ -280,15 +256,11 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-unity-xt-v230&#34;&gt;Release Notes - CSI Unity XT v2.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-unity-xt-v240&#34;&gt;Release Notes - CSI Unity XT v2.4.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Removed beta volumesnapshotclass sample files.&lt;/li&gt;
-&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/361&#34;&gt;Added support to configure fsGroupPolicy&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;CSM Resiliency: Occasional failure unmounting Unity volume for raw block devices via iSCSI.&lt;/p&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;

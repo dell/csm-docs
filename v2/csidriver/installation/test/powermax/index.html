@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.103.1" />
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/installation/test/powermax/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="Test PowerMax CSI Driver">
 <meta itemprop="description" content="Tests to validate PowerMax CSI Driver installation">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="1083">
+<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
+<meta itemprop="wordCount" content="1098">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Test PowerMax CSI Driver"/>
 <meta name="twitter:description" content="Tests to validate PowerMax CSI Driver installation"/>
@@ -29,8 +29,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" as="style">
-<link href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" as="style">
+<link href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -60,7 +60,7 @@
 				
 				
 				
-				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Container Storage Modules</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -80,13 +80,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.4)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.3</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2</a>
 	
 </div>
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -166,6 +166,8 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization-li">
   <a href="/csm-docs/v2/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesreplication-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatortroubleshooting-li">
@@ -589,6 +591,9 @@
 <li>After that, it uses that PVC as the data source to create a new PVC and mounts it on the same container. It checks if the file that existed in the source PVC also exists in the new PVC, calculates its checksum, and compares it to the checksum previously calculated.</li>
 <li>Finally, it cleans up all the resources that are created as part of the test.</li>
 </ul>
+<blockquote>
+<p>This is not supported for replicated volumes.</p>
+</blockquote>
 <h4 id="snapshot-test">Snapshot test</h4>
 <p>Use this procedure to perform a snapshot test.</p>
 <ol>
@@ -620,6 +625,9 @@
 <li>After that, it calculates the checksum of the written data, expands the PVC, and then recalculates the checksum</li>
 <li>Cleans up all the resources that were created as part of the test</li>
 </ul>
+<blockquote>
+<p>Note: This is not applicable for replicated volumes.</p>
+</blockquote>
 <h3 id="setting-application-prefix">Setting Application Prefix</h3>
 <p>Application prefix is the name of the application that can be used to group the PowerMax volumes. We can use it while naming storage group. To set the application prefix for PowerMax, please refer to the sample storage class <a href="https://github.com/dell/csi-powermax/blob/main/samples/storageclass/powermax.yaml">https://github.com/dell/csi-powermax/blob/main/samples/storageclass/powermax.yaml</a>.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Name of application to be used to group volumes</span><span style="color:#f8f8f8;text-decoration:underline">

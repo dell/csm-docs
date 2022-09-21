@@ -65,7 +65,7 @@
 &lt;td style=&#34;text-align:center&#34;&gt;v2.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;CSI Driver for Unity&lt;/td&gt;
+&lt;td&gt;CSI Driver for Unity XT&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;v2.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -333,8 +333,8 @@ adminPassword:
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;1.21, 1.22, 1.23&lt;/td&gt;
-&lt;td&gt;4.8, 4.9&lt;/td&gt;
+&lt;td&gt;1.22, 1.23, 1.24&lt;/td&gt;
+&lt;td&gt;4.9, 4.10, 4.10 EUS&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -350,8 +350,8 @@ adminPassword:
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.2.0&lt;/td&gt;
-&lt;td&gt;v2.2.0&lt;/td&gt;
+&lt;td&gt;2.2.0 +&lt;/td&gt;
+&lt;td&gt;v2.2.0  +&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -367,8 +367,8 @@ adminPassword:
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSM Authorization&lt;/td&gt;
-&lt;td&gt;1.2.0&lt;/td&gt;
-&lt;td&gt;v1.2.0&lt;/td&gt;
+&lt;td&gt;1.2.0 +&lt;/td&gt;
+&lt;td&gt;v1.2.0 +&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -487,6 +487,28 @@ adminPassword:
 	
 &lt;/figure&gt;
 
+&lt;h3 id=&#34;to-upgrade-dell-csm-operator-perform-the-following-steps&#34;&gt;To upgrade Dell CSM Operator, perform the following steps.&lt;/h3&gt;
+&lt;p&gt;Dell CSM Operator can be upgraded in 2 ways:&lt;/p&gt;
+&lt;p&gt;1.Using script (for non-OLM based installation)&lt;/p&gt;
+&lt;p&gt;2.Using Operator Lifecycle Manager (OLM)&lt;/p&gt;
+&lt;h4 id=&#34;using-installation-script&#34;&gt;Using Installation Script&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/csm-operator&#34;&gt;Dell CSM Operator repository&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;git checkout -b &amp;lsquo;csm-operator-version&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;Execute &lt;code&gt;bash scripts/install.sh --upgrade&lt;/code&gt;  . This command will install the latest version of the operator.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Dell CSM Operator would install to the &amp;lsquo;dell-csm-operator&amp;rsquo; namespace by default.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;using-olm&#34;&gt;Using OLM&lt;/h4&gt;
+&lt;p&gt;The upgrade of the Dell CSM Operator is done via Operator Lifecycle Manager.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;Update approval&lt;/code&gt; (&lt;strong&gt;&lt;code&gt;InstallPlan&lt;/code&gt;&lt;/strong&gt; in OLM terms) strategy plays a role while upgrading dell-csm-operator on OpenShift. This option can be set during installation of dell-csm-operator on OpenShift via the console and can be either set to &lt;code&gt;Manual&lt;/code&gt; or &lt;code&gt;Automatic&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If the &lt;strong&gt;&lt;code&gt;Update approval&lt;/code&gt;&lt;/strong&gt; is set to &lt;code&gt;Automatic&lt;/code&gt;, OpenShift automatically detects whenever the latest version of dell-csm-operator is available in the &lt;strong&gt;&lt;code&gt;Operator hub&lt;/code&gt;&lt;/strong&gt;, and upgrades it to the latest available version.&lt;/li&gt;
+&lt;li&gt;If the upgrade policy is set to &lt;code&gt;Manual&lt;/code&gt;, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the &lt;strong&gt;&lt;code&gt;Installed Operators&lt;/code&gt;&lt;/strong&gt; section of the OpenShift console. Clicking on the hyperlink to &lt;code&gt;Approve&lt;/code&gt; the installation would trigger the dell-csm-operator upgrade process.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for Upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h3&gt;
 &lt;p&gt;As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.&lt;br&gt;
 &lt;code&gt;containerstoragemodule&lt;/code&gt; CRD is installed in API Group &lt;code&gt;storage.dell.com&lt;/code&gt;.&lt;/p&gt;
@@ -515,329 +537,6 @@ adminPassword:
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;code&gt;image&lt;/code&gt; field should point to the correct image tag for version of the driver you are installing.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&#34;pre-requisites-for-installation-of-the-csi-drivers&#34;&gt;Pre-requisites for installation of the CSI Drivers&lt;/h3&gt;
-&lt;p&gt;On Upstream Kubernetes clusters, make sure to install&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;VolumeSnapshot CRDs - Install v1 VolumeSnapshot CRDs&lt;/li&gt;
-&lt;li&gt;External Volume Snapshot Controller&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
-&lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A common snapshot controller&lt;/li&gt;
-&lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The manifests available on GitHub install the snapshotter image:
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v5.0.1&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v5.0.1&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
-&lt;p&gt;You can install CRDs and the default snapshot controller by running the following commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git checkout release-&amp;lt;your-version&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f client/config/crd
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f deploy/kubernetes/snapshot-controller
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It is recommended to use 5.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;installing-csi-driver-via-operator&#34;&gt;Installing CSI Driver via Operator&lt;/h2&gt;
-&lt;p&gt;Refer &lt;a href=&#34;drivers/powerscale&#34;&gt;PowerScale Driver&lt;/a&gt; to install the driver via Operator&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are using an OLM based installation, example manifests are available in &lt;code&gt;OperatorHub&lt;/code&gt; UI.
-You can edit these manifests and install the driver using the &lt;code&gt;OperatorHub&lt;/code&gt; UI.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;verifying-the-driver-installation&#34;&gt;Verifying the driver installation&lt;/h3&gt;
-&lt;p&gt;Once the driver &lt;code&gt;Custom Resource (CR)&lt;/code&gt; is created, you can verify the installation as mentioned below&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Check if ContainerStorageModule CR is created successfully using the command below:
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ kubectl get csm/&amp;lt;name-of-custom-resource&amp;gt; -n &amp;lt;driver-namespace&amp;gt; -o yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;Check the status of the CR to verify if the driver installation is in the &lt;code&gt;Succeeded&lt;/code&gt; state. If the status is not &lt;code&gt;Succeeded&lt;/code&gt;, see the &lt;a href=&#34;./troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it&#34;&gt;Troubleshooting guide&lt;/a&gt; for more information.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;update-csi-drivers&#34;&gt;Update CSI Drivers&lt;/h3&gt;
-&lt;p&gt;The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Modifying the installation directly via &lt;code&gt;kubectl edit&lt;/code&gt;
-For e.g. - If the name of the installed PowerScale driver is powerscale, then run
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Replace driver-namespace with the namespace where the PowerScale driver is installed
-$ kubectl edit csm/powerscale -n &amp;lt;driver-namespace&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;and modify the installation&lt;/li&gt;
-&lt;li&gt;Modify the API object in-place via &lt;code&gt;kubectl patch&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;supported-modifications&#34;&gt;Supported modifications&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;Changing environment variable values for driver&lt;/li&gt;
-&lt;li&gt;Updating the image of the driver&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;uninstall-csi-driver&#34;&gt;Uninstall CSI Driver&lt;/h3&gt;
-&lt;p&gt;The CSI Drivers and CSM Modules can be uninstalled by deleting the Custom Resource.&lt;/p&gt;
-&lt;p&gt;For e.g.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ kubectl delete csm/powerscale -n &amp;lt;driver-namespace&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;By default, the &lt;code&gt;forceRemoveDriver&lt;/code&gt; option is set to &lt;code&gt;true&lt;/code&gt; which will uninstall the CSI Driver and CSM Modules when the Custom Resource is deleted. Setting this option to &lt;code&gt;false&lt;/code&gt; is not recommended.&lt;/p&gt;
-&lt;h3 id=&#34;sidecars&#34;&gt;SideCars&lt;/h3&gt;
-&lt;p&gt;Although the sidecars field in the driver specification is optional, it is &lt;strong&gt;strongly&lt;/strong&gt; recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell support.&lt;/p&gt;
-&lt;h2 id=&#34;modules&#34;&gt;Modules&lt;/h2&gt;
-&lt;p&gt;The CSM Operator can optionally enable modules that are supported by the specific Dell CSI driver. By default, the modules are disabled but they can be enabled by setting the &lt;code&gt;enabled&lt;/code&gt; flag to true and setting any other configuration options for the given module.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>V1: CSM REST API</title>
-      <link>https://dell.github.io/csm-docs/v1/deployment/csmapi/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v1/deployment/csmapi/</guid>
-      <description>
-        
-        
-        
-&lt;div id=&#34;ohpen_swagger_ui&#34;&gt;&lt;/div&gt;	
-&lt;script&gt;
-window.onload = function() {
-  const ui = SwaggerUIBundle({
-    url: &#34;../swagger.yaml&#34;,
-    dom_id: &#39;#ohpen_swagger_ui&#39;,
-    presets: [
-      SwaggerUIBundle.presets.apis,
-      SwaggerUIStandalonePreset
-    ]
-  })
-
-  window.ui = ui
-}
-&lt;/script&gt;		
-
-      </description>
-    </item>
-    
-    <item>
-      <title>V1: CSM CLI</title>
-      <link>https://dell.github.io/csm-docs/v1/deployment/csmcli/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v1/deployment/csmcli/</guid>
-      <description>
-        
-        
-        &lt;p&gt;&lt;code&gt;csm&lt;/code&gt; is a command-line client for installation of Dell EMC Container Storage Modules and CSI Drivers for Kubernetes clusters.&lt;/p&gt;
-&lt;h2 id=&#34;pre-requisites&#34;&gt;Pre-requisites&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;../../deployment&#34;&gt;Deploy the Container Storage Modules Installer&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Download/Install the  &lt;code&gt;csm&lt;/code&gt; binary from Github: &lt;a href=&#34;https://github.com/dell/csm&#34;&gt;https://github.com/dell/csm&lt;/a&gt;. Alternatively, you can build the binary by:
-&lt;ul&gt;
-&lt;li&gt;cloning the &lt;code&gt;csm&lt;/code&gt; repository&lt;/li&gt;
-&lt;li&gt;changing into &lt;code&gt;csm/cmd/csm&lt;/code&gt; directory&lt;/li&gt;
-&lt;li&gt;running &lt;code&gt;make build&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;create a &lt;code&gt;cli_env.sh&lt;/code&gt; file that contains the correct values for the below variables. And export the variables by running &lt;code&gt;source ./cli_env.sh&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Change this to CSM API Server IP
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export API_SERVER_IP=&amp;#34;127.0.0.1&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Change this to CSM API Server Port
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export API_SERVER_PORT=&amp;#34;31313&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; CSM API Server protocol - allowed values are https &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt; http
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export SCHEME=&amp;#34;https&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;#&lt;/span&gt; Path to store JWT &amp;lt;token&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;export AUTH_CONFIG_PATH=&amp;#34;/home/user/installer-token/&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;~$ ./csm -h
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;csm is command line tool for csm application
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;Usage:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  csm [flags]
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  csm [command]
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;Available Commands:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  add          add cluster, configuration or storage
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  approve-task approve task for application
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  authenticate authenticate user
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  change       change - subcommand is password
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  create       create application
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  delete       delete storage, cluster, configuration or application
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  get          get storage, cluster, application, configuration, supported driver, module, storage type
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  help         Help about any command
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  reject-task  reject task for an application
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  update       update storage, configuration or cluster
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;Flags:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;  -h, --help   help for csm-cli
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;Use &amp;#34;csm [command] --help&amp;#34; for more information about a command.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;authenticate-the-user&#34;&gt;Authenticate the User&lt;/h3&gt;
-&lt;p&gt;To begin with, you need to authenticate the user who will be managing the CSM Installer and its components.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm authenticate --username=&amp;lt;admin-username&amp;gt; --password=&amp;lt;admin-password&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Or more securely, run the above command without &lt;code&gt;--password&lt;/code&gt; to be prompted for one&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm authenticate --username=&amp;lt;admin-username&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;Enter user&amp;#39;s password:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;change-password&#34;&gt;Change Password&lt;/h3&gt;
-&lt;p&gt;To change password follow below command&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm change password --username=&amp;lt;admin-username&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;view-supported-platforms&#34;&gt;View Supported Platforms&lt;/h3&gt;
-&lt;p&gt;You can now view the supported Dell emcCSI Drivers&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm get supported-drivers
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also view the supported Modules&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm get supported-modules
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And also view the supported Storage Array Types&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm get supported-storage-arrays
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;add-a-cluster&#34;&gt;Add a Cluster&lt;/h3&gt;
-&lt;p&gt;You can now add a cluster by providing cluster detail name and Kubeconfig path&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm add cluster --clustername &amp;lt;desire-cluster-name&amp;gt; --configfilepath &amp;lt;path-to-kubeconfig&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;upload-configuration-files&#34;&gt;Upload Configuration Files&lt;/h3&gt;
-&lt;p&gt;You can now add a configuration file that can be used for creating application  by providing filename and path&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm add configuration --filename &amp;lt;name-of-the-desire-file&amp;gt; --filepath &amp;lt;path-to-the-desired-file&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;add-a-storage-system&#34;&gt;Add a Storage System&lt;/h3&gt;
-&lt;p&gt;You can now add storage endpoints, array type and its unique id&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm add storage --endpoint &amp;lt;storage-array-endpoint&amp;gt; --storage-type &amp;lt;storage-array-type&amp;gt; --unique-id &amp;lt;storage-array-unique-id&amp;gt; --username &amp;lt;storage-array-username&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The optional &lt;code&gt;--meta-data&lt;/code&gt; flag can be used to provide additional meta-data for the storage system that is used when creating Secrets for the CSI Driver. These fields include:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;isDefault: Set to true if this storage system is used as default for multi-array configuration&lt;/li&gt;
-&lt;li&gt;skipCertificateValidation: Set to true to skip certificate validation&lt;/li&gt;
-&lt;li&gt;mdmId: Comma separated list of MDM IPs for PowerFlex&lt;/li&gt;
-&lt;li&gt;nasName: NAS Name for PowerStore&lt;/li&gt;
-&lt;li&gt;blockProtocol: Block Protocol for PowerStore&lt;/li&gt;
-&lt;li&gt;port: Port for PowerScale&lt;/li&gt;
-&lt;li&gt;portGroups: Comma separated list of port group names for PowerMax&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;create-an-application&#34;&gt;Create an Application&lt;/h3&gt;
-&lt;p&gt;You may now create an application depending on the specific use case. Below are the common use cases:&lt;/p&gt;
-&lt;details&gt;
-   &lt;summary&gt;CSI Driver&lt;/summary&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm create application --clustername &amp;lt;created-cluster-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   --driver-type powerflex:&amp;lt;tag&amp;gt; --name &amp;lt;desired-application-name&amp;gt; \ 
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   --storage-arrays &amp;lt;storage-array-type&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
-&lt;details&gt;
-   &lt;summary&gt;CSI Driver with CSM Authorization&lt;/summary&gt;
-&lt;p&gt;CSM Authorization requires a &lt;code&gt;token.yaml&lt;/code&gt; issued by storage Admin from the CSM Authorization Server, a certificate file, and the &lt;proxyHost-address&gt; of the authorization server. The &lt;code&gt;token.yaml&lt;/code&gt; and &lt;code&gt;cert&lt;/code&gt; should be added by following the steps in &lt;a href=&#34;#upload-configuration-files&#34;&gt;adding configuration file&lt;/a&gt;. CSM Authorization does not yet support all CSI Drivers/platforms(See &lt;a href=&#34;../../authorization/#supported-platforms&#34;&gt;supported platforms documentation&lt;/a&gt; or &lt;a href=&#34;#view-supported-platforms&#34;&gt;supported platforms via CLI&lt;/a&gt;)).
-Finally, run the command below:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm create application --clustername &amp;lt;created-cluster-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--driver-type powerflex:&amp;lt;tag&amp;gt;  --name &amp;lt;desired-application-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--storage-arrays &amp;lt;storage-array-unique-id&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--module-type authorization:&amp;lt;tag&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--module-configuration &amp;#34;karaviAuthorizationProxy.proxyAuthzToken.filename=&amp;lt;filename-for-token&amp;gt;,karaviAuthorizationProxy.rootCertificate.filename=&amp;lt;filename-for-cert&amp;gt;,karaviAuthorizationProxy.proxyHost=&amp;lt;proxyHost-address&amp;gt;&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
-&lt;details&gt;
-   &lt;summary&gt;CSM Observability(Standalone)&lt;/summary&gt;
-&lt;p&gt;CSM Observability depends on driver config secret(s) corresponding to the metric(s) you want to enable. Please see &lt;a href=&#34;../../observability/metrics&#34;&gt;CSM Observability&lt;/a&gt; for all Supported   Metrics. For the sake of demonstration, assuming we want to enable &lt;a href=&#34;../../observability/metrics/powerflex&#34;&gt;CSM Metrics for PowerFlex&lt;/a&gt;, the PowerFlex secret yaml should be added by following the steps in &lt;a href=&#34;#upload-configuration-files&#34;&gt;adding configuration file&lt;/a&gt;.
-Once this is done, run the command below:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm create application --clustername &amp;lt;created-cluster-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--name &amp;lt;desired-application-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--module-type observability:&amp;lt;tag&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--module-configuration &amp;#34;karaviMetricsPowerflex.driverConfig.filename=&amp;lt;filename-for-powerflex-config&amp;gt;,karaviMetricsPowerflex.enabled=true&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
-&lt;details&gt;
-   &lt;summary&gt;CSM Observability(Standalone) with CSM Authorization&lt;/summary&gt;
-&lt;p&gt;See the individual steps for configuaration file pre-requisites for CSM Observability (Standalone) with CSM Authorization&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm create application --clustername &amp;lt;created-cluster-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--name &amp;lt;desired-application-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--module-type &amp;#34;observability:&amp;lt;tag&amp;gt;,authorization:&amp;lt;tag&amp;gt;&amp;#34; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--module-configuration &amp;#34;karaviMetricsPowerflex.driverConfig.filename=&amp;lt;filename-for-powerflex-config&amp;gt;,karaviMetricsPowerflex.enabled=true,karaviAuthorizationProxy.proxyAuthzToken.filename=&amp;lt;filename-for-token&amp;gt;,karaviAuthorizationProxy.rootCertificate.filename=&amp;lt;filename-for-cert&amp;gt;,karaviAuthorizationProxy.proxyHost=&amp;lt;proxyHost-address&amp;gt;&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
-&lt;details&gt;
-   &lt;summary&gt;CSI Driver for Dell EMC PowerMax with reverse proxy module&lt;/summary&gt;
-&lt;p&gt;To deploy CSI Driver for Dell EMC PowerMax with reverse proxy module, first upload reverse proxy tls crt and tls key via &lt;a href=&#34;#upload-configuration-files&#34;&gt;adding configuration file&lt;/a&gt;. Then, use the below command to create application:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm create application --clustername &amp;lt;created-cluster-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   --driver-type powermax:&amp;lt;tag&amp;gt; --name  &amp;lt;desired-application-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   --storage-arrays &amp;lt;powermax-unique-id&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   --module-type reverse-proxy:&amp;lt;tag&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   --module-configuration reverseProxy.tlsSecretKeyFile=&amp;lt;revprotlskey&amp;gt;,reverseProxy.tlsSecretCertFile=&amp;lt;revprotlscert&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
-&lt;details&gt;
-   &lt;summary&gt;CSI Driver with replication module&lt;/summary&gt;
-&lt;p&gt;To deploy CSI driver with replication module, first add a target cluster through &lt;a href=&#34;#add-a-cluster&#34;&gt;adding cluster&lt;/a&gt;. Then, use the below command(this command is an example to deploy CSI Driver for Dell EMC PowerStore with replication module) to create application::&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm create application --clustername &amp;lt;created-cluster-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;     --driver-type powerstore:&amp;lt;tag&amp;gt; --name &amp;lt;desired-application-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	 --storage-arrays &amp;lt;storage-array-unique-id&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	 --module-configuration target_cluster=&amp;lt;created-target-cluster-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	 --module-type replication:&amp;lt;tag&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
-&lt;details&gt;
-   &lt;summary&gt;CSI Driver with other module(s) not covered above&lt;/summary&gt;
-&lt;p&gt;Assuming you want to deploy a driver with &lt;code&gt;module A&lt;/code&gt; and &lt;code&gt;module B&lt;/code&gt;. If they have specific configurations of &lt;code&gt;A.image=&amp;quot;docker:v1&amp;quot;&lt;/code&gt;,&lt;code&gt;A.filename=hello&lt;/code&gt;, and &lt;code&gt;B.namespace=world&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm create application --clustername &amp;lt;created-cluster-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--driver-type powerflex:&amp;lt;tag&amp;gt;  --name &amp;lt;desired-application-name&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--storage-arrays &amp;lt;storage-array-unique-id&amp;gt; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--module-type &amp;#34;module A:&amp;lt;tag&amp;gt;,module B:&amp;lt;tag&amp;gt;&amp;#34; \
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--module-configuration &amp;#34;A.image=docker:v1,A.filename=hello,B.namespace=world&amp;#34;	
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
-&lt;br /&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;--driver-type&lt;/code&gt; and &lt;code&gt;--module-type&lt;/code&gt; flags in create application command MUST match the values from the &lt;a href=&#34;#view-supported-platforms&#34;&gt;supported CSM platforms&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Replication module supports only using a pair of clusters at a time (source and a target/or single cluster) from CSM installer, However &lt;code&gt;repctl&lt;/code&gt; can be used if needed to add multiple pairs of target clusters. Using replication module with other modules during application creation is not yet supported.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;approve-applicationtask&#34;&gt;Approve application/task&lt;/h3&gt;
-&lt;p&gt;You may now approve the task so that you can continue to work with the application&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm approve-task --applicationname &amp;lt;created-application-name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;reject-applicationtask&#34;&gt;Reject application/task&lt;/h3&gt;
-&lt;p&gt;You may want to reject a task or application to discontinue the ongoing process&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm reject-task --applicationname &amp;lt;created-application-name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;delete-applicationtask&#34;&gt;Delete application/task&lt;/h3&gt;
-&lt;p&gt;If you want to delete an application&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm delete application --name &amp;lt;created-application-name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: When deleting an application, the namespace and Secrets are not deleted. These resources need to be deleted manually. See more in &lt;a href=&#34;../troubleshooting#after-deleting-an-application-why-cant-i-re-create-the-same-application&#34;&gt;Troubleshooting&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: All commands and associated syntax can be displayed with -h or &amp;ndash;help&lt;/p&gt;
-&lt;/blockquote&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>V1: Troubleshooting</title>
-      <link>https://dell.github.io/csm-docs/v1/deployment/troubleshooting/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v1/deployment/troubleshooting/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;frequently-asked-questions&#34;&gt;Frequently Asked Questions&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#why-does-the-installation-fail-due-to-an-invalid-cipherkey-value&#34;&gt;Why does the installation fail due to an invalid cipherKey value?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#why-does-the-cluster-init-pod-show-the-error-cluster-has-already-been-initialized&#34;&gt;Why does the cluster-init pod show the error &amp;ldquo;cluster has already been initialized&amp;rdquo;?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#why-does-the-precheck-fail-when-creating-an-application&#34;&gt;Why does the precheck fail when creating an application?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#how-can-i-view-detailed-logs-for-the-csm-installer&#34;&gt;How can I view detailed logs for the CSM Installer?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#after-deleting-an-application-why-cant-i-re-create-the-same-application&#34;&gt;After deleting an application, why can&amp;rsquo;t I re-create the same application?&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;why-does-the-installation-fail-due-to-an-invalid-cipherkey-value&#34;&gt;Why does the installation fail due to an invalid cipherKey value?&lt;/h3&gt;
-&lt;p&gt;The &lt;code&gt;cipherKey&lt;/code&gt; value used during deployment of the CSM Installer must be exactly 32 characters in length and contained within quotes.&lt;/p&gt;
-&lt;h3 id=&#34;why-does-the-cluster-init-pod-show-the-error-cluster-has-already-been-initialized&#34;&gt;Why does the cluster-init pod show the error &amp;ldquo;cluster has already been initialized&amp;rdquo;?&lt;/h3&gt;
-&lt;p&gt;During the initial start-up of the CSM Installer, the database will be initialized by the cluster-init job. If the CSM Installer is uninstalled and then re-installed on the same cluster, this error may be shown due to the Persistent Volume for the database already containing an initialized database. The CSM Installer will function as normal and the cluster-init job can be ignored.&lt;/p&gt;
-&lt;p&gt;If a clean installation of the CSM Installer is required, the &lt;code&gt;dbVolumeDirectory&lt;/code&gt; (default location &lt;code&gt;/var/lib/cockroachdb&lt;/code&gt;) must be deleted from the worker node which is hosting the Persistent Volume. After this directory is deleted, the CSM Installer can be re-installed.&lt;/p&gt;
-&lt;p&gt;Caution: Deleting the &lt;code&gt;dbVolumeDirectory&lt;/code&gt; location will remove any data persisted by the CSM Installer including clusters, storage systems, and installed applications.&lt;/p&gt;
-&lt;h3 id=&#34;why-does-the-precheck-fail-when-creating-an-application&#34;&gt;Why does the precheck fail when creating an application?&lt;/h3&gt;
-&lt;p&gt;Each CSI Driver and CSM Module has required software or CRDs that must be installed before the application can be deployed in the cluster. These prechecks are verified when the &lt;code&gt;csm create application&lt;/code&gt; command is executed. If the error message &amp;ldquo;create application failed&amp;rdquo; is displayed, &lt;a href=&#34;#how-can-i-view-detailed-logs-for-the-csm-installer&#34;&gt;review the CSM Installer logs&lt;/a&gt; to view details about the failed prechecks.&lt;/p&gt;
-&lt;p&gt;If the precheck fails due to required software (e.g. iSCSI, NFS, SDC) not installed on the cluster nodes, follow these steps to address the issue:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Delete the cluster from the CSM Installer using the &lt;code&gt;csm delete cluster&lt;/code&gt; command.&lt;/li&gt;
-&lt;li&gt;Update the nodes in the cluster by installing required software.&lt;/li&gt;
-&lt;li&gt;Add the cluster to the CSM Installer using the &lt;code&gt;csm add cluster&lt;/code&gt; command.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;how-can-i-view-detailed-logs-for-the-csm-installer&#34;&gt;How can I view detailed logs for the CSM Installer?&lt;/h3&gt;
-&lt;p&gt;Detailed logs of the CSM Installer can be displayed using the following command:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl logs -f -n &amp;lt;namespace&amp;gt; deploy/dell-csm-installer
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;after-deleting-an-application-why-cant-i-re-create-the-same-application&#34;&gt;After deleting an application, why can&amp;rsquo;t I re-create the same application?&lt;/h3&gt;
-&lt;p&gt;After deleting an application using the &lt;code&gt;csm delete application&lt;/code&gt; command, the namespace and other non-application resources including Secrets are not deleted from the cluster. This is to prevent removing any resources that may not have been created by the CSM Installer. The namespace must be manually deleted before attempting to re-create the same application using the CSM Installer.&lt;/p&gt;
 
       </description>
     </item>
