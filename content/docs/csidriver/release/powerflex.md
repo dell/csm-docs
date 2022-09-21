@@ -3,19 +3,15 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.3.0
+## Release Notes - CSI PowerFlex v2.4.0
 
 ### New Features/Changes
-- Added support to configure fsGroupPolicy
-- Removed beta volumesnapshotclass sample files.
-- Added support for Kubernetes 1.24.
-- Added support for OpenShift 4.10.
-- Fixed handling of idempotent snapshots.
+- [Added optional parameter protectionDomain to storageclass](https://github.com/dell/csm/issues/415)
+- [Added InstallationID annotation for volume attributes.](https://github.com/dell/csm/issues/434)
+- RHEL 8.6 support added 
 
-### Fixed Issues
-
--  Added label to driver node pod for Resiliency protection.
--  Updated values file to use patched image of vg-snapshotter. 
+### Fixed Issues 
+- [Enhancements and fixes to volume group snapshotter](https://github.com/dell/csm/issues/371)
 
 ### Known Issues
 
