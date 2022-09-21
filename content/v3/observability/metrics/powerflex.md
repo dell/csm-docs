@@ -3,7 +3,7 @@ title: PowerFlex Metrics
 linktitle: PowerFlex Metrics
 weight: 1
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability PowerFlex Metrics
+  Dell Container Storage Modules (CSM) for Observability PowerFlex Metrics
 ---
 
 This section outlines the metrics collected by the Container Storage Modules (CSM) Observability module for PowerFlex. The [Grafana reference dashboards](https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex) for PowerFlex metrics can be uploaded to your Grafana instance.

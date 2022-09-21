@@ -13,6 +13,7 @@ Description: >
 4. [How can I debug and troubleshoot issues with Kubernetes?](#how-can-i-debug-and-troubleshoot-issues-with-kubernetes)
 5. [How can I troubleshoot latency problems with CSM for Observability?](#how-can-i-troubleshoot-latency-problems-with-csm-for-observability)
 6. [Why does the Observability installation timeout with pods stuck in 'ContainerCreating'/'CrashLoopBackOff'/'Error' stage?](#why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage)
+7. [Why do I see FailedMount warnings when describing pods in my cluster?](#why-do-i-see-failedmount-warnings-when-describing-pods-in-my-cluster)
 
 ### Why do I see a certificate problem when accessing the topology service outside of my Kubernetes cluster?
 
@@ -233,3 +234,12 @@ error registering secret controller: no matches for kind "MutatingWebhookConfigu
 ```
 
 If the Kubernetes cluster version is 1.22.2 (or higher), this error is due to an incompatible [cert-manager](https://github.com/jetstack/cert-manager) version. Please upgrade to the latest CSM for Observability release (v1.0.1 or higher).
+
+### Why do I see FailedMount warnings when describing pods in my cluster?
+
+The warning can arise when a self-signed certificate for otel-collector is issued. It takes a few minutes or less for the signed certificate to generate and be consumed in the namespace. Once the certificate is consumed, the FailedMount warnings are resolved and the containers start properly. 
+```console
+[root@:~]$ kubectl describe pod -n $namespace $pod
+MountVolume.SetUp failed for volume "tls-secret" : secret "otel-collector-tls" not found
+Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached volumes=[vxflexos-config-params vxflexos-config tls-secret karavi-metrics-powerflex-configmap kube-api-access-4fqgl karavi-authorization-config proxy-server-root-certificate]: timed out waiting for the condition
+```

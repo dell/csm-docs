@@ -26,6 +26,7 @@ The following are requirements to be met before installing the CSI Driver for De
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../replication/deployment/) first
 - If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../resiliency/deployment/) first
+- If enabling Encryption, please refer to the [Encryption deployment steps](../../../../secure/encryption/deployment/) first
 
 ### Install Helm 3.0
 
@@ -46,14 +47,14 @@ controller:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image:
@@ -102,7 +103,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
 
 *NOTE:*
-- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
 
 ### (Optional) Replication feature Requirements
 
@@ -121,7 +122,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.3.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b v2.4.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
 4. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
@@ -174,10 +175,13 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
-   | **podmon**               | Podmon is an optional feature under development and tech preview. Enable this feature only after contact support for additional information.  |  -        |  -       |
-   | enabled                  | A boolean that enable/disable podmon feature. |  No      |   false   |
+   | **podmon**               | [Podmon](../../../../resiliency/deployment) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
+   | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
    | image | image for podmon. | No | " " |
-
+   | **encryption** | [Encryption](../../../../secure/encryption/deployment) is an optional feature to apply encryption to CSI volumes. | - | - |
+   | enabled        | A boolean that enables/disables Encryption feature. | No | false |
+   | image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.1.0" |
+   
    *NOTE:* 
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
@@ -267,7 +271,7 @@ The CSI driver for Dell PowerScale version 1.5 and later, `dell-csi-helm-install
 
 ### What happens to my existing storage classes?
 
-*Upgrading from CSI PowerScale v2.2 driver*:
+*Upgrading from CSI PowerScale v2.3 driver*:
 The storage classes created as part of the installation have an annotation - "helm.sh/resource-policy": keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.
 
 *NOTE*:
@@ -286,12 +290,4 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 ## Volume Snapshot Class
 
 Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. Sample volume snapshot class manifests are available at `samples/volumesnapshotclass/`. Use these sample manifests to create a volumesnapshotclass for creating volume snapshots; uncomment/ update the manifests as per the requirements.
-
-### What happens to my existing Volume Snapshot Classes?
-
-*Upgrading from CSI PowerScale v2.2 driver*:
-The existing volume snapshot class will be retained.
-
-*Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.2.
 

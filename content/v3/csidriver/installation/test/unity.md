@@ -4,6 +4,7 @@ linktitle: Unity
 description: Tests to validate Unity CSI Driver installation
 ---
 
+## Test deploying a simple Pod and Pvc with Unity storage
 In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default NFS and iSCSI and FC storage classes and automatically mounts them to the pod.
 
 **Steps**
@@ -26,3 +27,13 @@ You can find all the created resources in `test-unity` namespace.
    ```bash
    kubectl delete -f ./test/sample.yaml
    ```
+
+## Support for SLES 15 SP2
+
+The CSI Driver for Dell Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
+
+- open-iscsi **open-iscsi is required in order to make use of iSCSI protocol for provisioning**
+- nfs-utils **nfs-utils is required in order to make use of NFS protocol for provisioning**
+- multipath-tools **multipath-tools is required in order to make use of FC and iSCSI protocols for provisioning**
+
+After installing open-iscsi, ensure "iscsi" and "iscsid" services have been started and /etc/isci/initiatorname.iscsi is created and has the host initiator id. The pre-requisites are mandatory for provisioning with the iSCSI protocol to work.

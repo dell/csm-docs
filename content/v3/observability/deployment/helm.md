@@ -3,53 +3,68 @@ title: Helm
 linktitle: Helm
 weight: 3
 description: >
-  Dell EMC Container Storage Modules (CSM) for Observability Helm deployment
+  Dell Container Storage Modules (CSM) for Observability Helm deployment
 ---
 
 The Container Storage Modules (CSM) for Observability Helm chart bootstraps an Observability deployment on a Kubernetes cluster using the Helm package manager.
 
 ## Prerequisites
 
-- A [supported](../../../csidriver/#features-and-capabilities) CSI Driver is deployed 
-- The cert-manager CustomResourceDefinition resources are created.
+- Helm 3.3
+- The deployment of one or more [supported](../../#supported-csi-drivers) Dell CSI drivers
+
+## Install the CSM for Observability Helm Chart
+**Steps**
+1. Create a namespace where you want to install the module `kubectl create namespace karavi`
+
+2. Install cert-manager CRDs `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml`
+
+3. Add the Dell Helm Charts repo `helm repo add dell https://dell.github.io/helm-charts`
+
+4. Copy only the deployed CSI driver entities to the Observability namespace
+    #### PowerFlex
+
+    1. Copy the config Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:
+
+        `kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -`
+
+    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-emc-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform the following steps:
+
+    2. Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the CSM for Observability namespace:
+    
+        `kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -`
+
+    3. Copy the `karavi-authorization-config`, `proxy-server-root-certificate`, `proxy-authz-tokens` Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:
+
+        `kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -`
+
+    #### PowerStore
+
+    1. Copy the config Secret from the CSI PowerStore namespace into the CSM for Observability namespace:
+
+        `kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -`
+
+5. Configure the [parameters](#configuration) and install the CSM for Observability Helm Chart
+
+    A default values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml) that can be used for installation. This can be copied into a file named `myvalues.yaml` and either used as is or modified accordingly. 
+
+    __Note:__ 
+    - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
+    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for CSM Observability. 
 
     ```console
-    $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
+    $ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] -f myvalues.yaml
     ```
 
-## Copy the CSI Driver Secret
+    Alternatively, you can specify each parameter using the '--set key=value[,key=value]' and/or '--set-file key=value[,key=value] arguments to 'helm install'. For example:
 
-Copy the config Secret from the Dell CSI Driver namespace into the namespace where CSM for Observability is deployed.
-
-### PowerFlex
-
-```console
-$ kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
-```
-
-__Note__: The target namespace must exist before executing this command.
-
-### PowerStore
-
-```console
-$ kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
-```
-
-__Note__: The target namespace must exist before executing this command.
-
-## Add the Repo
-
-```console
-$ helm repo add dell https://dell.github.io/helm-charts
-```
-
-## Installing the Chart
-
-```console
-$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace
-```
-
-The [configuration](#configuration) section below lists all the parameters that can be configured during installation
+    ```console
+    $ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] \
+        --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
+        --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
+        --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
+        --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
+    ```
 
 ## Configuration
 
@@ -76,6 +91,9 @@ The following table lists the configurable parameters of the CSM for Observabili
 | `karaviMetricsPowerflex.volumePollFrequencySeconds` | The polling frequency (in seconds) to gather volume metrics | `10` |
 | `karaviMetricsPowerflex.storageClassPoolPollFrequencySeconds` | The polling frequency (in seconds) to gather storage class/pool metrics | `10` |
 | `karaviMetricsPowerflex.concurrentPowerflexQueries` | The number of simultaneous metrics queries to make to Powerflex(MUST be less than 10; otherwise, several request errors from Powerflex will ensue. | `10` |
+| `karaviMetricsPowerflex.authorization.enabled` | [Authorization](../../../authorization) is an optional feature to apply credential shielding of the backend PowerFlex. | `false` |
+| `karaviMetricsPowerflex.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
+| `karaviMetricsPowerflex.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
 | `karaviMetricsPowerflex.sdcMetricsEnabled` | Enable PowerFlex SDC Metrics Collection | `true` |
 | `karaviMetricsPowerflex.volumeMetricsEnabled` | Enable PowerFlex Volume Metrics Collection | `true` |
 | `karaviMetricsPowerflex.storageClassPoolMetricsEnabled` | Enable PowerFlex  Storage Class/Pool Metrics Collection | `true` |
@@ -97,22 +115,3 @@ The following table lists the configurable parameters of the CSM for Observabili
 | `karaviMetricsPowerstore.zipkin.uri` | URI of a Zipkin instance where tracing data can be forwarded | |
 | `karaviMetricsPowerstore.zipkin.serviceName` | Service name used for Zipkin tracing data | `metrics-powerstore`|
 | `karaviMetricsPowerstore.zipkin.probability` | Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0) | `0` |
-
-
-Specify each parameter using the '--set key=value[,key=value]' and/or '--set-file key=value[,key=value] arguments to 'helm install'. For example:
-
-```console
-$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace \
-    --set-file karaviTopology.certificateFile=<location-of-karavi-topology-certificate-file> \
-    --set-file karaviTopology.privateKeyFile=<location-of-karavi-topology-private-key-file> \
-    --set-file otelCollector.certificateFile=<location-of-otel-collector-certificate-file> \
-    --set-file otelCollector.privateKeyFile=<location-of-otel-collector-private-key-file>
-```
-
-Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example:
-
-```console
-$ helm install karavi-observability dell/karavi-observability -n [CSM_NAMESPACE] --create-namespace -f values.yaml
- ```
-
-__Note__: You can use the default [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml)

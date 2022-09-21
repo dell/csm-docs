@@ -37,9 +37,9 @@ parameters:
   SYMID: '000000000001'
   ServiceLevel: 'Bronze'
   replication.storage.dell.com/IsReplicationEnabled: 'true'
-  replication.storage.dell.com/RdfGroup: '7'
+  replication.storage.dell.com/RdfGroup: '7' # Optional for Auto SRDF group 
   replication.storage.dell.com/RdfMode: 'METRO'
-  replication.storage.dell.com/RemoteRDFGroup: '7'
+  replication.storage.dell.com/RemoteRDFGroup: '7' # Optional for Auto SRDF group
   replication.storage.dell.com/RemoteSYMID: '000000000002'
   replication.storage.dell.com/RemoteServiceLevel: 'Bronze'
 reclaimPolicy: Delete

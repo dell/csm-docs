@@ -1,7 +1,7 @@
 ---
 title: "Release notes"
 linkTitle: "Release notes"
-weight: 10
+weight: 12
 Description: >
   Dell Container Storage Modules (CSM) release notes
 ---
@@ -17,3 +17,7 @@ Release notes for Container Storage Modules:
 [CSM for Replication](../replication/release)
 
 [CSM for Resiliency](../resiliency/release)
+
+[CSM for Encryption](../secure/encryption/release)
+
+[CSM for Application Mobility](../applicationmobility/release)

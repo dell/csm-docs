@@ -5,9 +5,15 @@ description: Container Storage Modules Installer
 weight: 1
 ---
 
-The CSM (Container Storage Modules) Installer simplifies the deployment and management of Dell EMC Container Storage Modules and CSI Drivers to provide persistent storage for your containerized workloads.
+{{% pageinfo color="primary" %}}
+The CSM Installer is currently deprecated and will no longer be supported as of CSM v1.4.0
+{{% /pageinfo %}}
 
-## CSM Installer Supported Modules and Dell EMC CSI Drivers
+>>**Note: The CSM Installer only supports installation of CSM 1.0 Modules and CSI Drivers in environments that do not have any existing deployments of CSM or CSI Drivers. The CSM Installer does not support the upgrade of existing CSM or CSI Driver deployments.**
+
+The CSM (Container Storage Modules) Installer simplifies the deployment and management of Dell Container Storage Modules and CSI Drivers to provide persistent storage for your containerized workloads.
+
+## CSM Installer Supported Modules and Dell CSI Drivers
 
 | Modules/Drivers | CSM 1.0 |
 | - | :-: |
@@ -20,8 +26,6 @@ The CSM (Container Storage Modules) Installer simplifies the deployment and mana
 | CSI Driver for PowerStore | v2.0 |
 | CSI Driver for PowerFlex | v2.0 |
 | CSI Driver for PowerMax | v2.0 |
-
-**Note:** The CSM Installer supports installation of CSM 1.0 Modules and CSI Drivers in environments that do not have any existing deployments of CSM or CSI Drivers. The CSM Installer does not support the upgrade of existing CSM or CSI Driver deployments.
 
 The CSM Installer must first be deployed in a Kubernetes environment using Helm.  After which, the CSM Installer can be used through the following interfaces:
 - [CSM CLI](./csmcli)
@@ -150,7 +154,7 @@ helm install -n csm-installer --create-namespace \
 
 When a new version of the CSM Installer helm chart is available, the following steps can be used to upgrade to the latest version.
 
->Note: Upgrading the CSM Installer does not upgrade the Dell EMC CSI Drivers or modules that were previously deployed with the installer. The CSM Installer does not support upgrading of the Dell EMC CSI Drivers or modules. The Dell EMC CSI Drivers and modules must be deleted and re-deployed using the latest CSM Installer in order to get the most recent version of the Dell EMC CSI Driver and modules.
+>Note: Upgrading the CSM Installer does not upgrade the Dell CSI Drivers or modules that were previously deployed with the installer. The CSM Installer does not support upgrading of the Dell CSI Drivers or modules. The Dell CSI Drivers and modules must be deleted and re-deployed using the latest CSM Installer in order to get the most recent version of the Dell CSI Driver and modules.
 
 1. Update the helm repository.
 ```

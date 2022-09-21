@@ -162,7 +162,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.3.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -178,30 +178,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 | Parameter | Description  | Required   | Default  |
 |-----------|--------------|------------|----------|
-| kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-| imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
-| clusterPrefix | Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters. | Yes  | "ABC" |
-| defaultFsType | Used to set the default FS type for external provisioner | Yes | ext4 |
-| portGroups | List of comma-separated port group names. Any port group that is specified here must be present on all the arrays that the driver manages.     | For iSCSI Only | "PortGroup1, PortGroup2, PortGroup3" |
-| storageResourcePool | This parameter must mention one of the SRPs on the PowerMax array that the symmetrixID specifies. This value is used to create the default storage class. | Yes| "SRP_1" |
-| serviceLevel  | This parameter must mention one of the Service Levels on the PowerMax array. This value is used to create the default storage class.   | Yes| "Bronze"     |
-| skipCertificateValidation | Skip client-side TLS verification of Unisphere certificates | No | "True" |
-| transportProtocol  | Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.| No | Empty|
-| nodeNameTemplate | Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.  | No | Empty|
-| **controller** | Allows configuration of the controller-specific parameters.| - | - |
-| controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
-| volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
-| snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
-| snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
-| resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
-| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
-| healthMonitor.interval | Interval of monitoring volume health condition | No | 60s |
-| nodeSelector | Define node selection constraints for pods of controller deployment | No | |
-| tolerations | Define tolerations for the controller deployment, if required | No | |
-| **node** | Allows configuration of the node-specific parameters.| - | - |
-| tolerations | Add tolerations as per requirement | No | - |
-| nodeSelector | Add node selectors as per requirement | No | - |
-| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy | - | - |
 |defaultCredentialsSecret| This secret name refers to:<br> 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.<br>2. The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>3. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
@@ -218,9 +194,42 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | maxActiveWrite | This refers to the maximum concurrent WRITE request handled by the reverse proxy.| No | 4 |
 | maxOutStandingRead | This refers to maximum queued READ request when reverse proxy receives more than _maxActiveRead_ requests. | No | 50 |
 | maxOutStandingWrite| This refers to maximum queued WRITE request when reverse proxy receives more than _maxActiveWrite_ requests.| No | 50 | 
+| kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
+| imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
+| clusterPrefix | Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters. | Yes  | "ABC" |
+| logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
+| logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
+| kubeletConfigDir | kubelet config directory path. Ensure that the config.yaml file is present at this path. | Yes | /var/lib/kubelet |
+| defaultFsType | Used to set the default FS type for external provisioner | Yes | ext4 |
+| portGroups | List of comma-separated port group names. Any port group that is specified here must be present on all the arrays that the driver manages.     | For iSCSI Only | "PortGroup1, PortGroup2, PortGroup3" |
+| skipCertificateValidation | Skip client-side TLS verification of Unisphere certificates | No | "True" |
+| transportProtocol  | Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.| No | Empty|
+| nodeNameTemplate | Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.  | No | Empty|
+| modifyHostName | Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format. | No | false |
+| powerMaxDebug | Enables low level and http traffic logging between the CSI driver and Unisphere. Don't enable this unless asked to do so by the support team. | No | false |
+| enableCHAP | Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key "chapsecret" | No | false |
+| fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
+| images | Defines the container images used by the driver.  | - | - |
+| driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
+| **controller** | Allows configuration of the controller-specific parameters.| - | - |
+| controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
+| volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
+| snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
+| snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
+| resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
+| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| healthMonitor.interval | Interval of monitoring volume health condition | No | 60s |
+| nodeSelector | Define node selection constraints for pods of controller deployment | No | |
+| tolerations | Define tolerations for the controller deployment, if required | No | |
+| **node** | Allows configuration of the node-specific parameters.| - | - |
+| tolerations | Add tolerations as per requirement | No | - |
+| nodeSelector | Add node selectors as per requirement | No | - |
+| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
 | enabled |  Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.<br>**NOTE:** If not enabled, then there is no requirement to configure any of the following values. | No | "False" |
-| image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v1.4.0 |
+| image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.1.0 |
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
@@ -230,14 +239,29 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
+| **migration** | [Migration](../../../../replication/migrating-volumes) is an optional feature to enable migration between storage classes | - | - |
+| enabled                  | A boolean that enables/disables migration feature. |  No      |   false   |
+| image | Image for dell-csi-migrator sidecar. | No | " " |
+| migrationPrefix | enables migration sidecar to read required information from the storage class fields | No | migration.storage.dell.com |
+| **replication** | [Replication](../../../../replication/deployment) is an optional feature to enable replication & disaster recovery capabilities of PowerMax to Kubernetes clusters.| - | - |
+| enabled                  | A boolean that enables/disables replication feature. |  No      |   false   |
+| image | Image for dell-csi-replicator sidecar. | No | " " |
+| replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
+| replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
 
 8. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml`
+9. Or you can also install the driver using standalone helm chart using the command `helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax`
 
 *Note:* 
 - For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.
 - There are a set of samples provided [here](#sample-values-file) to help you configure the driver with reverse proxy
 - This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The `verify.sh` script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the `--skip-verify-node` option
 - In order to enable authorization, there should be an authorization proxy server already installed. 
+- PowerMax Array username must have role as `StorageAdmin` to be able to perform CRUD operations.
+- If the user is using complex K8s version like “v1.22.3-mirantis-1”, use below kubeVersion check in [helm Chart](https://github.com/dell/csi-powermax/blob/main/helm/csi-powermax/Chart.yaml) file. kubeVersion: “>= 1.22.0-0 < 1.25.0-0”.
+- User should provide all boolean values with double-quotes. This applies only for values.yaml. Example: “true”/“false”.
+- controllerCount parameter value should be <= number of nodes in the kubernetes cluster else install script fails.
+- Endpoint should not have any special character at the end apart from port number.
 
 ## Storage Classes
 
@@ -251,15 +275,15 @@ Upgrading from an older version of the driver: The storage classes will be delet
 
 ## Volume Snapshot Class
 
-Starting with CSI PowerMax v1.7, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
+Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerMax v2.1 driver*:
+*Upgrading from CSI PowerMax v2.1.0 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 or higher, before upgrading to 2.2.
+It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7.0 or higher, before upgrading to 2.3.0.
 
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes

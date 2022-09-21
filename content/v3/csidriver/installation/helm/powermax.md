@@ -5,23 +5,25 @@ description: >
   Installing CSI Driver for PowerMax via Helm
 ---
 
-CSI Driver for Dell EMC PowerMax can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, see the script [documentation](https://github.com/dell/csi-powermax/tree/master/dell-csi-helm-installer).
+CSI Driver for Dell PowerMax can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, see the script [documentation](https://github.com/dell/csi-powermax/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
-- CSI Driver for Dell EMC PowerMax
+- CSI Driver for Dell PowerMax
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
 - Kubernetes External Snapshotter, which provides snapshot support
 - Kubernetes External Resizer, which resizes the volume
-- CSI PowerMax ReverseProxy (optional)
+- (optional) Kubernetes External health monitor, which provides volume health status
+- (optional) CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance
+- (optional) Dell CSI Replicator, which provides Replication capability. 
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
-- CSI Driver for Dell EMC PowerMax
+- CSI Driver for Dell PowerMax
 - Kubernetes Node Registrar, which handles the driver registration
 
 ## Prerequisites
 
-The following requirements must be met before installing CSI Driver for Dell EMC PowerMax:
+The following requirements must be met before installing CSI Driver for Dell PowerMax:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
 - Fibre Channel requirements
@@ -34,7 +36,7 @@ The following requirements must be met before installing CSI Driver for Dell EMC
 
 ### Install Helm 3
 
-Install Helm 3 on the master node before you install CSI Driver for Dell EMC PowerMax.
+Install Helm 3 on the master node before you install CSI Driver for Dell PowerMax.
 
 **Steps**
 
@@ -43,23 +45,23 @@ Install Helm 3 on the master node before you install CSI Driver for Dell EMC Pow
 
 ### Fibre Channel Requirements
 
-CSI Driver for Dell EMC PowerMax supports Fibre Channel communication. Ensure that the following requirements are met before you install CSI Driver:
+CSI Driver for Dell PowerMax supports Fibre Channel communication. Ensure that the following requirements are met before you install CSI Driver:
 - Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port director must be completed.
 - Ensure that the HBA WWNs (initiators) appear on the list of initiators that are logged into the array.
 - If the number of volumes that will be published to nodes is high, then configure the maximum number of LUNs for your HBAs on each node. See the appropriate HBA document to configure the maximum number of LUNs.
 
 ### iSCSI Requirements
 
-The CSI Driver for Dell EMC PowerMax supports iSCSI connectivity. These requirements are applicable for the nodes that use iSCSI initiator to connect to the PowerMax arrays.
+The CSI Driver for Dell PowerMax supports iSCSI connectivity. These requirements are applicable for the nodes that use iSCSI initiator to connect to the PowerMax arrays.
 
 Set up the iSCSI initiators as follows:
 - All Kubernetes nodes must have the _iscsi-initiator-utils_ package installed.
 - Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed.
-- Kubernetes nodes should have access (network connectivity) to an iSCSI director on the Dell EMC PowerMax array that has IP interfaces. Manually create IP routes for each node that connects to the Dell EMC PowerMax if required.
-- Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell EMC PowerMax array.
-- The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell EMC PowerMax array. All the port group names supplied to the driver must exist on each Dell EMC PowerMax with the same name.
+- Kubernetes nodes should have access (network connectivity) to an iSCSI director on the Dell PowerMax array that has IP interfaces. Manually create IP routes for each node that connects to the Dell PowerMax if required.
+- Ensure that the iSCSI initiators on the nodes are not a part of any existing Host (Initiator Group) on the Dell PowerMax array.
+- The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.
 
-For more information about configuring iSCSI, see [Dell EMC Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
 
 ### Certificate validation for Unisphere REST API calls
 
@@ -80,11 +82,11 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
 
 There are no restrictions to how many ports can be present in the iSCSI port groups provided to the driver.
 
-The same applies to Fibre Channel where there are no restrictions on the number of FA directors a host HBA can be zoned to. See the best practices for host connectivity to Dell EMC PowerMax to ensure that you have multiple paths to your data volumes.
+The same applies to Fibre Channel where there are no restrictions on the number of FA directors a host HBA can be zoned to. See the best practices for host connectivity to Dell PowerMax to ensure that you have multiple paths to your data volumes.
 
 ### Linux multipathing requirements
 
-CSI Driver for Dell EMC PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.
+CSI Driver for Dell PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.
 
 Set up Linux multipathing as follows:
 
@@ -112,7 +114,7 @@ snapshot:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers to support Volume snapshots.
@@ -120,7 +122,7 @@ The CSI external-snapshotter sidecar is split into two controllers to support Vo
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v4.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
@@ -134,12 +136,12 @@ You can install CRDs and the default snapshot controller by running the followin
 git clone https://github.com/kubernetes-csi/external-snapshotter/
 cd ./external-snapshotter
 git checkout release-<your-version>
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
+kubectl kustomize client/config/crd | kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
 ```
 
 *NOTE:*
-- It is recommended to use 4.2.x version of snapshotter/snapshot-controller.
+- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 ### (Optional) Replication feature Requirements
@@ -160,7 +162,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.1.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -192,11 +194,14 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | snapshot.enabled | Enable/Disable volume snapshot feature | Yes | true |
 | snapshot.snapNamePrefix | Defines a string prefix for the names of the Snapshots created | Yes | "snapshot" |
 | resizer.enabled | Enable/Disable volume expansion feature | Yes | true |
+| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
+| healthMonitor.interval | Interval of monitoring volume health condition | No | 60s |
 | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
 | tolerations | Define tolerations for the controller deployment, if required | No | |
 | **node** | Allows configuration of the node-specific parameters.| - | - |
 | tolerations | Add tolerations as per requirement | No | - |
 | nodeSelector | Add node selectors as per requirement | No | - |
+| healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy | - | - |
 |defaultCredentialsSecret| This secret name refers to:<br> 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.<br>2. The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>3. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
@@ -250,11 +255,11 @@ Starting with CSI PowerMax v1.7, `dell-csi-helm-installer` will not create any V
 
 ### What happens to my existing Volume Snapshot Classes?
 
-*Upgrading from CSI PowerMax v2.0 driver*:
+*Upgrading from CSI PowerMax v2.1 driver*:
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 or higher, before upgrading to 2.1.
+It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 or higher, before upgrading to 2.2.
 
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes

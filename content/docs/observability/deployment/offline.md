@@ -24,9 +24,9 @@ If one Linux system has both internet access and access to an internal registry,
 
 Preparing an offline bundle requires the following utilities:
 
-| Dependency            | Usage |
-| --------------------- | ----- |
-| `docker`   | `docker` will be used to pull images from public image registries, tag them, and push them to a private registry.<br>Required on both the system building the offline bundle as well as the system preparing for installation. <br>Tested version is `docker` 18.09
+| Dependency | Usage                                                                                                                                                                                                                                                                |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `docker`   | `docker` will be used to pull images from public image registries, tag them, and push them to a private registry.<br>Required on both the system building the offline bundle as well as the system preparing for installation. <br>Tested version is `docker` 18.09+ |
 
 ### Executing the Installer
 
@@ -72,10 +72,12 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Downloading and saving Docker images
 
-      dellemc/csm-topology:v0.3.0
-      dellemc/csm-metrics-powerflex:v0.3.0
-      otel/opentelemetry-collector:0.9.0
-      nginxinc/nginx-unprivileged:1.18
+      dellemc/csm-topology:v1.3.0
+      dellemc/csm-metrics-powerflex:v1.3.0
+      dellemc/csm-metrics-powerstore:v1.3.0
+      dellemc/csm-metrics-powerscale:v1.3.0
+      otel/opentelemetry-collector:0.42.0
+      nginxinc/nginx-unprivileged:1.20
 
     *
     * Compressing offline-karavi-observability-bundle.tar.gz
@@ -103,10 +105,12 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Loading, tagging, and pushing Docker images to registry <my-registry>:5000/
 
-      dellemc/csm-topology:v0.3.0 -> <my-registry>:5000/csm-topology:v0.3.0
-      dellemc/csm-metrics-powerflex:v0.3.0 -> <my-registry>:5000/csm-metrics-powerflex:v0.3.0
-      otel/opentelemetry-collector:0.9.0 -> <my-registry>:5000/opentelemetry-collector:0.9.0
-      nginxinc/nginx-unprivileged:1.18 -> <my-registry>:5000/nginx-unprivileged:1.18
+      dellemc/csm-topology:v1.3.0 -> <my-registry>:5000/csm-topology:v1.3.0
+      dellemc/csm-metrics-powerflex:v1.3.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.3.0
+      dellemc/csm-metrics-powerstore:v1.3.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.3.0
+      dellemc/csm-metrics-powerscale:v1.3.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.3.0
+      otel/opentelemetry-collector:0.42.0 -> <my-registry>:5000/opentelemetry-collector:0.42.0
+      nginxinc/nginx-unprivileged:1.20 -> <my-registry>:5000/nginx-unprivileged:1.20
     ```
 
 ### Perform Helm installation
@@ -145,12 +149,28 @@ To perform an offline installation of a Helm chart, the following steps should b
     [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-4. Now that the required images have been made available and the Helm chart's configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart's repository.
+   CSI Driver for PowerScale:
+   ```
+   [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f - 
+   ```
+
+    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
+
+    ```
+    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap isilon-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
+    ```
+
+    ```
+    [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | sed 's/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f -
+    ``` 
+
+4. Now that the required images have been made available and the Helm chart's configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart's repository.  
 
     **Note:** 
     - Optionally, you could provide your own [configurations](../helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
     - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured. 
+    - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured.
 
     ```
     [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm install -n install-namespace app-name karavi-observability
