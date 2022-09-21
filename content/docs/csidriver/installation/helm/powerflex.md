@@ -312,10 +312,3 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 Starting CSI PowerFlex v1.5, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
-### What happens to my existing Volume Snapshot Classes?
-
-*Upgrading from CSI PowerFlex v2.2 driver*:
-The existing volume snapshot class will be retained.
-
-*Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1.5 or higher, before upgrading to 2.3.
