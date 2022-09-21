@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.103.1" />
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/installation/helm/isilon/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing CSI Driver for PowerScale via Helm
 ">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="2442">
+<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
+<meta itemprop="wordCount" content="2808">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerScale via Helm
@@ -33,8 +33,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" as="style">
-<link href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" as="style">
+<link href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -64,7 +64,7 @@
 				
 				
 				
-				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Container Storage Modules</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -84,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.4)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.3</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2</a>
 	
 </div>
 
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,6 +153,27 @@
   <a href="/csm-docs/v3/deployment/csminstaller/csmcli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallercsmcli"><span class="">CSM CLI</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallertroubleshooting-li">
   <a href="/csm-docs/v3/deployment/csminstaller/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallertroubleshooting"><span class="">Troubleshooting</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatordrivers-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/drivers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatordrivers"><span class="">CSI Drivers</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatordriverspowerscale-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatormodules-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatormodules"><span class="">CSM Modules</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatortroubleshooting-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatortroubleshooting"><span class="">Troubleshooting</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmapi-li">
@@ -187,7 +208,7 @@
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3csidriverinstallationoperator-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/" title="Dell CSI Operator Installation Process" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoperator"><span class="">Using Operator</span></a>
+  <a href="/csm-docs/v3/csidriver/installation/operator/" title="CSI Driver installation using Dell CSI Operator" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoperator"><span class="">Using Operator</span></a>
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowerflex-li">
   <a href="/csm-docs/v3/csidriver/installation/operator/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowerflex"><span class="">PowerFlex</span></a>
@@ -202,7 +223,7 @@
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3csidriverinstallationoffline-li">
-  <a href="/csm-docs/v3/csidriver/installation/offline/" title="Offline Installation of Dell EMC CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoffline"><span class="">Offline Installer</span></a>
+  <a href="/csm-docs/v3/csidriver/installation/offline/" title="Offline Installation of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoffline"><span class="">Offline Installer</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3csidriverinstallationtest-li">
   <a href="/csm-docs/v3/csidriver/installation/test/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationtest"><span class="">Testing Drivers</span></a>
   <ul class="ul-4 foldable">
@@ -375,6 +396,8 @@
   <a href="/csm-docs/v3/replication/deployment/storageclasses/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentstorageclasses"><span class="">Storage Class</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowermax-li">
   <a href="/csm-docs/v3/replication/deployment/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerscale-li">
+  <a href="/csm-docs/v3/replication/deployment/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerstore-li">
   <a href="/csm-docs/v3/replication/deployment/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerstore"><span class="">PowerStore</span></a>
 </li>
@@ -435,6 +458,13 @@
   <a href="/csm-docs/v3/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3support"><span class="">Support</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3contributionguidelines-li">
   <a href="/csm-docs/v3/contributionguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3contributionguidelines"><span class="">Contribution Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3policies-li">
+  <a href="/csm-docs/v3/policies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3policies"><span class="">Policies</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3policiesdeprecationpolicy-li">
+  <a href="/csm-docs/v3/policies/deprecationpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3policiesdeprecationpolicy"><span class="">Deprecation Policy</span></a>
+</li>
+  </ul>
 </li>
   </ul>
 </li>
@@ -463,6 +493,12 @@
       <ul>
         <li><a href="#install-helm-30">Install Helm 3.0</a></li>
         <li><a href="#optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</a></li>
+      </ul>
+    </li>
+    <li><a href="#volume-health-monitoring">Volume Health Monitoring</a>
+      <ul>
+        <li></li>
+        <li><a href="#optional-replication-feature-requirements">(Optional) Replication feature Requirements</a></li>
       </ul>
     </li>
     <li><a href="#install-the-driver">Install the Driver</a></li>
@@ -537,7 +573,7 @@
 	<h1>PowerScale</h1>
 
 	       
-	<p>The CSI Driver for Dell EMC PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer">documentation</a>.</p>
+	<p>The CSI Driver for Dell PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script <a href="https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer">documentation</a>.</p>
 <p>The controller section of the Helm chart installs the following components in a <em>Deployment</em> in the specified namespace:</p>
 <ul>
 <li>CSI Driver for PowerScale</li>
@@ -552,16 +588,17 @@
 <li>Kubernetes Node Registrar, which handles the driver registration</li>
 </ul>
 <h2 id="prerequisites">Prerequisites</h2>
-<p>The following are requirements to be met before installing the CSI Driver for Dell EMC PowerScale:</p>
+<p>The following are requirements to be met before installing the CSI Driver for Dell PowerScale:</p>
 <ul>
 <li>Install Kubernetes or OpenShift (see <a href="../../../../csidriver/#features-and-capabilities">supported versions</a>)</li>
 <li>Install Helm 3</li>
 <li>Mount propagation is enabled on container runtime that is being used</li>
 <li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
 <li>If enabling CSM for Authorization, please refer to the <a href="../../../../authorization/deployment/">Authorization deployment steps</a> first</li>
+<li>If enabling CSM for Replication, please refer to the <a href="../../../../replication/deployment/">Replication deployment steps</a> first</li>
 </ul>
 <h3 id="install-helm-30">Install Helm 3.0</h3>
-<p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell EMC PowerScale.</p>
+<p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerScale.</p>
 <p><strong>Steps</strong></p>
 <p>Run the <code>curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash</code> command to install Helm 3.0.</p>
 <h3 id="optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</h3>
@@ -570,14 +607,14 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
-<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:<a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/client/config/crd">v4.2.x</a></p>
+<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:<a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd">v5.0.x</a></p>
 <h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
 <p>The CSI external-snapshotter sidecar is split into two controllers:</p>
 <ul>
 <li>A common snapshot controller</li>
 <li>A CSI external-snapshotter sidecar</li>
 </ul>
-<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available here: <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v4.2.0/deploy/kubernetes/snapshot-controller">v4.2.x</a></p>
+<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available here: <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller">v5.0.x</a></p>
 <p><em>NOTE:</em></p>
 <ul>
 <li>The manifests available on GitHub install the snapshotter image:
@@ -587,22 +624,55 @@
 </li>
 <li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
 </ul>
-<h4 id="installation-example">Installation example</h4>
+<h2 id="volume-health-monitoring">Volume Health Monitoring</h2>
+<p>Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
+To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">controller</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">healthMonitor</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># enabled: Enable/Disable health monitor of CSI volumes</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Allowed values:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#   true: enable checking of health condition of CSI volumes</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#   false: disable checking of health condition of CSI volumes</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Default value: None</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># healthMonitorInterval: Interval of monitoring volume health condition</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Allowed values: Number followed by unit (s,m,h)</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Examples: 60s, 5m, 1h</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Default value: 60s</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">interval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">60s</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">node</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">healthMonitor</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Allowed values:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#   true: enable checking of health condition of CSI volumes</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#   false: disable checking of health condition of CSI volumes</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Default value: None</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><h4 id="installation-example">Installation example</h4>
 <p>You can install CRDs and the default snapshot controller by running the following commands:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/kubernetes-csi/external-snapshotter/
 </span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> ./external-snapshotter
 </span></span><span style="display:flex;"><span>git checkout release-&lt;your-version&gt;
-</span></span><span style="display:flex;"><span>kubectl create -f client/config/crd
-</span></span><span style="display:flex;"><span>kubectl create -f deploy/kubernetes/snapshot-controller
+</span></span><span style="display:flex;"><span>kubectl kustomize client/config/crd <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
+</span></span><span style="display:flex;"><span>kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
 </span></span></code></pre></div><p><em>NOTE:</em></p>
 <ul>
-<li>It is recommended to use 4.2.x version of snapshotter/snapshot-controller.</li>
+<li>It is recommended to use 5.0.x version of snapshotter/snapshot-controller.</li>
 </ul>
+<h3 id="optional-replication-feature-requirements">(Optional) Replication feature Requirements</h3>
+<p>Applicable only if you decided to enable the Replication feature in <code>values.yaml</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replication</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><h4 id="replication-crds">Replication CRD&rsquo;s</h4>
+<p>The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use <code>csm-replication/deploy/replicationcrds.all.yaml</code> located in the csm-replication git repo for the installation.</p>
+<p>CRDs should be configured during replication prepare stage with repctl as described in <a href="../../../../replication/deployment/install-repctl">install-repctl</a></p>
 <h2 id="install-the-driver">Install the Driver</h2>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.1.0 https://github.com/dell/csi-powerscale.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.2.0 https://github.com/dell/csi-powerscale.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>Ensure that you have created the namespace where you want to install the driver. You can run <code>kubectl create namespace isilon</code> to create a new one. The use of &ldquo;isilon&rdquo;  as the namespace is just an example. You can choose any name for the namespace.</p>
@@ -676,6 +746,12 @@ found in the  <a href="https://github.com/dell/csi-powerscale/blob/master/helm/c
 <td>false</td>
 </tr>
 <tr>
+<td>fsGroupPolicy</td>
+<td>Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code></td>
+<td>No</td>
+<td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+</tr>
+<tr>
 <td><em><strong>controller</strong></em></td>
 <td>Configure controller pod specific parameters</td>
 <td></td>
@@ -736,6 +812,24 @@ found in the  <a href="https://github.com/dell/csi-powerscale/blob/master/helm/c
 <td></td>
 </tr>
 <tr>
+<td>leader-election-lease-duration</td>
+<td>Duration, that non-leader candidates will wait to force acquire leadership</td>
+<td>No</td>
+<td>20s</td>
+</tr>
+<tr>
+<td>leader-election-renew-deadline</td>
+<td>Duration, that the acting leader will retry refreshing leadership before giving up</td>
+<td>No</td>
+<td>15s</td>
+</tr>
+<tr>
+<td>leader-election-retry-period</td>
+<td>Duration, the LeaderElector clients should wait between tries of actions</td>
+<td>No</td>
+<td>5s</td>
+</tr>
+<tr>
 <td><em><strong>node</strong></em></td>
 <td>Configure node pod specific parameters</td>
 <td></td>
@@ -782,6 +876,12 @@ found in the  <a href="https://github.com/dell/csi-powerscale/blob/master/helm/c
 <td>Specify whether the PowerScale OneFS API server&rsquo;s certificate chain and hostname must be verified. This value acts as a default value for skipCertificateValidation, if not specified for a cluster config in secret.</td>
 <td>No</td>
 <td>true</td>
+</tr>
+<tr>
+<td>isiAuthType</td>
+<td>Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication</td>
+<td>No</td>
+<td>0</td>
 </tr>
 <tr>
 <td>isiAccessZone</td>
@@ -918,6 +1018,12 @@ found in the  <a href="https://github.com/dell/csi-powerscale/blob/master/helm/c
 <td>No</td>
 <td>default value from values.yaml</td>
 </tr>
+<tr>
+<td>mountEndpoint</td>
+<td>Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if <a href="https://github.com/dell/karavi-authorization">CSM-Authorization</a> is enabled.</td>
+<td>No</td>
+<td>-</td>
+</tr>
 </tbody>
 </table>
 <p>The username specified in <em>secret.yaml</em> must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:</p>
@@ -972,7 +1078,7 @@ found in the  <a href="https://github.com/dell/csi-powerscale/blob/master/helm/c
 </ul>
 <ol start="7">
 <li>
-<p>Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server&rsquo;s certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell EMC PowerScale.</p>
+<p>Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server&rsquo;s certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell PowerScale.</p>
 <pre tabindex="0"><code>kubectl create -f empty-secret.yaml
 </code></pre><p>This command will create a new secret called <code>isilon-certs-0</code> in isilon namespace.</p>
 </li>
@@ -1000,13 +1106,13 @@ If this secret is an empty secret, then the validation of the certificate fails,
 <li>The cert secret created out of these pem files must have the naming convention as isilon-certs-number (example: isilon-certs-0, isilon-certs-1, and so on.); The number must start from zero and must grow in incremental order. The number of the secrets created out of pem files should match certSecretCount value in myvalues.yaml or my-isilon-settings.yaml.</li>
 </ol>
 <h3 id="dynamic-update-of-array-details-via-secretyaml">Dynamic update of array details via secret.yaml</h3>
-<p>CSI Driver for Dell EMC PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating <em>secret.yaml</em>. Users can now update the isilon-creds secret by editing the <em>secret.yaml</em> and executing the following command</p>
+<p>CSI Driver for Dell PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating <em>secret.yaml</em>. Users can now update the isilon-creds secret by editing the <em>secret.yaml</em> and executing the following command</p>
 <p><code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -</code></p>
 <p><strong>Note</strong>: Updating isilon-certs-x secrets is a manual process, unlike isilon-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.</p>
 <h2 id="storage-classes">Storage Classes</h2>
-<p>The CSI driver for Dell EMC PowerScale version 1.5 and later, <code>dell-csi-helm-installer</code> does not create any storage classes as part of the driver installation. A sample storage class manifest is available at <code>samples/storageclass/isilon.yaml</code>. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.</p>
+<p>The CSI driver for Dell PowerScale version 1.5 and later, <code>dell-csi-helm-installer</code> does not create any storage classes as part of the driver installation. A sample storage class manifest is available at <code>samples/storageclass/isilon.yaml</code>. Use this sample manifest to create a storageclass to provision storage; uncomment/ update the manifest as per the requirements.</p>
 <h3 id="what-happens-to-my-existing-storage-classes">What happens to my existing storage classes?</h3>
-<p><em>Upgrading from CSI PowerScale v2.0 driver</em>
+<p><em>Upgrading from CSI PowerScale v2.1 driver</em>:
 The storage classes created as part of the installation have an annotation - &ldquo;helm.sh/resource-policy&rdquo;: keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.</p>
 <p><em>NOTE</em>:</p>
 <ul>
@@ -1022,10 +1128,10 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 <h2 id="volume-snapshot-class">Volume Snapshot Class</h2>
 <p>Starting CSI PowerScale v1.6, <code>dell-csi-helm-installer</code> will not create any Volume Snapshot Class during the driver installation. Sample volume snapshot class manifests are available at <code>samples/volumesnapshotclass/</code>. Use these sample manifests to create a volumesnapshotclass for creating volume snapshots; uncomment/ update the manifests as per the requirements.</p>
 <h3 id="what-happens-to-my-existing-volume-snapshot-classes">What happens to my existing Volume Snapshot Classes?</h3>
-<p><em>Upgrading from CSI PowerScale v2.0 driver</em>:
+<p><em>Upgrading from CSI PowerScale v2.1 driver</em>:
 The existing volume snapshot class will be retained.</p>
 <p><em>Upgrading from an older version of the driver</em>:
-It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.1.</p>
+It is strongly recommended to upgrade the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.2.</p>
 
 	
 	

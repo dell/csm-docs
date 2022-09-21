@@ -51,7 +51,7 @@ window.onload = function() {
       <description>
         
         
-        &lt;p&gt;&lt;code&gt;csm&lt;/code&gt; is a command-line client for installation of Dell EMC Container Storage Modules and CSI Drivers for Kubernetes clusters.&lt;/p&gt;
+        &lt;p&gt;&lt;code&gt;csm&lt;/code&gt; is a command-line client for installation of Dell Container Storage Modules and CSI Drivers for Kubernetes clusters.&lt;/p&gt;
 &lt;h2 id=&#34;pre-requisites&#34;&gt;Pre-requisites&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;../../deployment&#34;&gt;Deploy the Container Storage Modules Installer&lt;/a&gt;&lt;/li&gt;
@@ -109,7 +109,7 @@ window.onload = function() {
 &lt;p&gt;To change password follow below command&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm change password --username=&amp;lt;admin-username&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;view-supported-platforms&#34;&gt;View Supported Platforms&lt;/h3&gt;
-&lt;p&gt;You can now view the supported Dell emcCSI Drivers&lt;/p&gt;
+&lt;p&gt;You can now view the supported DellCSI Drivers&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm get supported-drivers
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also view the supported Modules&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm get supported-modules
@@ -170,8 +170,8 @@ Once this is done, run the command below:&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	--module-configuration &amp;#34;karaviMetricsPowerflex.driverConfig.filename=&amp;lt;filename-for-powerflex-config&amp;gt;,karaviMetricsPowerflex.enabled=true,karaviAuthorizationProxy.proxyAuthzToken.filename=&amp;lt;filename-for-token&amp;gt;,karaviAuthorizationProxy.rootCertificate.filename=&amp;lt;filename-for-cert&amp;gt;,karaviAuthorizationProxy.proxyHost=&amp;lt;proxyHost-address&amp;gt;&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;details&gt;
-   &lt;summary&gt;CSI Driver for Dell EMC PowerMax with reverse proxy module&lt;/summary&gt;
-&lt;p&gt;To deploy CSI Driver for Dell EMC PowerMax with reverse proxy module, first upload reverse proxy tls crt and tls key via &lt;a href=&#34;#upload-configuration-files&#34;&gt;adding configuration file&lt;/a&gt;. Then, use the below command to create application:&lt;/p&gt;
+   &lt;summary&gt;CSI Driver for Dell PowerMax with reverse proxy module&lt;/summary&gt;
+&lt;p&gt;To deploy CSI Driver for Dell PowerMax with reverse proxy module, first upload reverse proxy tls crt and tls key via &lt;a href=&#34;#upload-configuration-files&#34;&gt;adding configuration file&lt;/a&gt;. Then, use the below command to create application:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm create application --clustername &amp;lt;created-cluster-name&amp;gt; \
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   --driver-type powermax:&amp;lt;tag&amp;gt; --name  &amp;lt;desired-application-name&amp;gt; \
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   --storage-arrays &amp;lt;powermax-unique-id&amp;gt; \
@@ -180,7 +180,7 @@ Once this is done, run the command below:&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;details&gt;
    &lt;summary&gt;CSI Driver with replication module&lt;/summary&gt;
-&lt;p&gt;To deploy CSI driver with replication module, first add a target cluster through &lt;a href=&#34;#add-a-cluster&#34;&gt;adding cluster&lt;/a&gt;. Then, use the below command(this command is an example to deploy CSI Driver for Dell EMC PowerStore with replication module) to create application::&lt;/p&gt;
+&lt;p&gt;To deploy CSI driver with replication module, first add a target cluster through &lt;a href=&#34;#add-a-cluster&#34;&gt;adding cluster&lt;/a&gt;. Then, use the below command(this command is an example to deploy CSI Driver for Dell PowerStore with replication module) to create application::&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;./csm create application --clustername &amp;lt;created-cluster-name&amp;gt; \
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;     --driver-type powerstore:&amp;lt;tag&amp;gt; --name &amp;lt;desired-application-name&amp;gt; \
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;	 --storage-arrays &amp;lt;storage-array-unique-id&amp;gt; \

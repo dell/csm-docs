@@ -3,38 +3,38 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.103.1" />
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 
 <title>Helm | Dell Technologies</title>
-<meta name="description" content="Dell EMC Container Storage Modules (CSM) for Observability Helm deployment
+<meta name="description" content="Dell Container Storage Modules (CSM) for Observability Helm deployment
 ">
 <meta property="og:title" content="Helm" />
-<meta property="og:description" content="Dell EMC Container Storage Modules (CSM) for Observability Helm deployment
+<meta property="og:description" content="Dell Container Storage Modules (CSM) for Observability Helm deployment
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/observability/deployment/helm/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2022-03-23T08:15:39-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="Helm">
-<meta itemprop="description" content="Dell EMC Container Storage Modules (CSM) for Observability Helm deployment
+<meta itemprop="description" content="Dell Container Storage Modules (CSM) for Observability Helm deployment
 ">
-<meta itemprop="dateModified" content="2022-03-23T08:15:39-04:00" />
-<meta itemprop="wordCount" content="759">
+<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
+<meta itemprop="wordCount" content="925">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Helm"/>
-<meta name="twitter:description" content="Dell EMC Container Storage Modules (CSM) for Observability Helm deployment
+<meta name="twitter:description" content="Dell Container Storage Modules (CSM) for Observability Helm deployment
 "/>
 
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" as="style">
-<link href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" as="style">
+<link href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -64,7 +64,7 @@
 				
 				
 				
-				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Container Storage Modules</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -84,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.4)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.3</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2</a>
 	
 </div>
 
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -153,6 +153,27 @@
   <a href="/csm-docs/v3/deployment/csminstaller/csmcli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallercsmcli"><span class="">CSM CLI</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallertroubleshooting-li">
   <a href="/csm-docs/v3/deployment/csminstaller/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallertroubleshooting"><span class="">Troubleshooting</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatordrivers-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/drivers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatordrivers"><span class="">CSI Drivers</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatordriverspowerscale-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatormodules-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatormodules"><span class="">CSM Modules</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatortroubleshooting-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperatortroubleshooting"><span class="">Troubleshooting</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmapi-li">
@@ -187,7 +208,7 @@
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3csidriverinstallationoperator-li">
-  <a href="/csm-docs/v3/csidriver/installation/operator/" title="Dell CSI Operator Installation Process" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoperator"><span class="">Using Operator</span></a>
+  <a href="/csm-docs/v3/csidriver/installation/operator/" title="CSI Driver installation using Dell CSI Operator" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoperator"><span class="">Using Operator</span></a>
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoperatorpowerflex-li">
   <a href="/csm-docs/v3/csidriver/installation/operator/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverinstallationoperatorpowerflex"><span class="">PowerFlex</span></a>
@@ -202,7 +223,7 @@
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverinstallationoffline-li">
-  <a href="/csm-docs/v3/csidriver/installation/offline/" title="Offline Installation of Dell EMC CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoffline"><span class="">Offline Installer</span></a>
+  <a href="/csm-docs/v3/csidriver/installation/offline/" title="Offline Installation of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationoffline"><span class="">Offline Installer</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3csidriverinstallationtest-li">
   <a href="/csm-docs/v3/csidriver/installation/test/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3csidriverinstallationtest"><span class="">Testing Drivers</span></a>
   <ul class="ul-4 foldable">
@@ -375,6 +396,8 @@
   <a href="/csm-docs/v3/replication/deployment/storageclasses/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentstorageclasses"><span class="">Storage Class</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowermax-li">
   <a href="/csm-docs/v3/replication/deployment/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerscale-li">
+  <a href="/csm-docs/v3/replication/deployment/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerstore-li">
   <a href="/csm-docs/v3/replication/deployment/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerstore"><span class="">PowerStore</span></a>
 </li>
@@ -435,6 +458,13 @@
   <a href="/csm-docs/v3/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3support"><span class="">Support</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3contributionguidelines-li">
   <a href="/csm-docs/v3/contributionguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3contributionguidelines"><span class="">Contribution Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3policies-li">
+  <a href="/csm-docs/v3/policies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3policies"><span class="">Policies</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3policiesdeprecationpolicy-li">
+  <a href="/csm-docs/v3/policies/deprecationpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3policiesdeprecationpolicy"><span class="">Deprecation Policy</span></a>
+</li>
+  </ul>
 </li>
   </ul>
 </li>
@@ -460,14 +490,11 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#copy-the-csi-driver-secret">Copy the CSI Driver Secret</a>
+    <li><a href="#install-the-csm-for-observability-helm-chart">Install the CSM for Observability Helm Chart</a>
       <ul>
-        <li><a href="#powerflex">PowerFlex</a></li>
-        <li><a href="#powerstore">PowerStore</a></li>
+        <li></li>
       </ul>
     </li>
-    <li><a href="#add-the-repo">Add the Repo</a></li>
-    <li><a href="#installing-the-chart">Installing the Chart</a></li>
     <li><a href="#configuration">Configuration</a></li>
   </ul>
 </nav>
@@ -524,27 +551,66 @@
 	<p>The Container Storage Modules (CSM) for Observability Helm chart bootstraps an Observability deployment on a Kubernetes cluster using the Helm package manager.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
+<li>Helm 3.3</li>
+<li>The deployment of one or more <a href="../../#supported-csi-drivers">supported</a> Dell CSI drivers</li>
+</ul>
+<h2 id="install-the-csm-for-observability-helm-chart">Install the CSM for Observability Helm Chart</h2>
+<p><strong>Steps</strong></p>
+<ol>
 <li>
-<p>A <a href="../../../csidriver/#features-and-capabilities">supported</a> CSI Driver is deployed</p>
+<p>Create a namespace where you want to install the module <code>kubectl create namespace karavi</code></p>
 </li>
 <li>
-<p>The cert-manager CustomResourceDefinition resources are created.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> kubectl apply --validate<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87">false</span> -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.crds.yaml
-</span></span></code></pre></div></li>
+<p>Install cert-manager CRDs <code>kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml</code></p>
+</li>
+<li>
+<p>Add the Dell Helm Charts repo <code>helm repo add dell https://dell.github.io/helm-charts</code></p>
+</li>
+<li>
+<p>Copy only the deployed CSI driver entities to the Observability namespace</p>
+<h4 id="powerflex">PowerFlex</h4>
+<ol>
+<li>
+<p>Copy the config Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:</p>
+<p><code>kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -</code></p>
+</li>
+</ol>
+<p>If <a href="../../../authorization/deployment/#configuring-a-dell-emc-csi-driver-with-csm-for-authorization">CSM for Authorization is enabled</a> for CSI PowerFlex, perform the following steps:</p>
+<ol start="2">
+<li>
+<p>Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the CSM for Observability namespace:</p>
+<p><code>kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -</code></p>
+</li>
+<li>
+<p>Copy the <code>karavi-authorization-config</code>, <code>proxy-server-root-certificate</code>, <code>proxy-authz-tokens</code> Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:</p>
+<p><code>kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -</code></p>
+</li>
+</ol>
+<h4 id="powerstore">PowerStore</h4>
+<ol>
+<li>
+<p>Copy the config Secret from the CSI PowerStore namespace into the CSM for Observability namespace:</p>
+<p><code>kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Configure the <a href="#configuration">parameters</a> and install the CSM for Observability Helm Chart</p>
+<p>A default values.yaml file is located <a href="https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml">here</a> that can be used for installation. This can be copied into a file named <code>myvalues.yaml</code> and either used as is or modified accordingly.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>The default <code>values.yaml</code> is configured to deploy the CSM for Observability Topology service on install.</li>
+<li>If CSM for Authorization is enabled for CSI PowerFlex, the <code>karaviMetricsPowerflex.authorization</code> parameters must be properly configured in your values file for CSM Observability.</li>
 </ul>
-<h2 id="copy-the-csi-driver-secret">Copy the CSI Driver Secret</h2>
-<p>Copy the config Secret from the Dell CSI Driver namespace into the namespace where CSM for Observability is deployed.</p>
-<h3 id="powerflex">PowerFlex</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> kubectl get secret vxflexos-config -n <span style="color:#ce5c00;font-weight:bold">[</span>CSI_DRIVER_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> -o yaml <span style="color:#000;font-weight:bold">|</span> sed <span style="color:#4e9a06">&#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39;</span> <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
-</span></span></code></pre></div><p><strong>Note</strong>: The target namespace must exist before executing this command.</p>
-<h3 id="powerstore">PowerStore</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> kubectl get secret powerstore-config -n <span style="color:#ce5c00;font-weight:bold">[</span>CSI_DRIVER_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> -o yaml <span style="color:#000;font-weight:bold">|</span> sed <span style="color:#4e9a06">&#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39;</span> <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
-</span></span></code></pre></div><p><strong>Note</strong>: The target namespace must exist before executing this command.</p>
-<h2 id="add-the-repo">Add the Repo</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> helm repo add dell https://dell.github.io/helm-charts
-</span></span></code></pre></div><h2 id="installing-the-chart">Installing the Chart</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> helm install karavi-observability dell/karavi-observability -n <span style="color:#ce5c00;font-weight:bold">[</span>CSM_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> --create-namespace
-</span></span></code></pre></div><p>The <a href="#configuration">configuration</a> section below lists all the parameters that can be configured during installation</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> helm install karavi-observability dell/karavi-observability -n <span style="color:#ce5c00;font-weight:bold">[</span>CSM_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> -f myvalues.yaml
+</span></span></code></pre></div><p>Alternatively, you can specify each parameter using the &lsquo;&ndash;set key=value[,key=value]&rsquo; and/or &lsquo;&ndash;set-file key=value[,key=value] arguments to &lsquo;helm install&rsquo;. For example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> helm install karavi-observability dell/karavi-observability -n <span style="color:#ce5c00;font-weight:bold">[</span>CSM_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span><span style="color:#000;font-style:italic">    --set-file karaviTopology.certificateFile=&lt;location-of-karavi-topology-certificate-file&gt; \
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    --set-file karaviTopology.privateKeyFile=&lt;location-of-karavi-topology-private-key-file&gt; \
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    --set-file otelCollector.certificateFile=&lt;location-of-otel-collector-certificate-file&gt; \
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    --set-file otelCollector.privateKeyFile=&lt;location-of-otel-collector-private-key-file&gt;
+</span></span></span></code></pre></div></li>
+</ol>
 <h2 id="configuration">Configuration</h2>
 <p>The following table lists the configurable parameters of the CSM for Observability Helm chart and their default values.</p>
 <table>
@@ -650,6 +716,21 @@
 <td><code>karaviMetricsPowerflex.concurrentPowerflexQueries</code></td>
 <td>The number of simultaneous metrics queries to make to Powerflex(MUST be less than 10; otherwise, several request errors from Powerflex will ensue.</td>
 <td><code>10</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerflex.authorization.enabled</code></td>
+<td><a href="../../../authorization">Authorization</a> is an optional feature to apply credential shielding of the backend PowerFlex.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerflex.authorization.proxyHost</code></td>
+<td>Hostname of the csm-authorization server.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerflex.authorization.skipCertificateValidation</code></td>
+<td>A boolean that enables/disables certificate validation of the csm-authorization server.</td>
+<td></td>
 </tr>
 <tr>
 <td><code>karaviMetricsPowerflex.sdcMetricsEnabled</code></td>
@@ -758,15 +839,6 @@
 </tr>
 </tbody>
 </table>
-<p>Specify each parameter using the &lsquo;&ndash;set key=value[,key=value]&rsquo; and/or &lsquo;&ndash;set-file key=value[,key=value] arguments to &lsquo;helm install&rsquo;. For example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> helm install karavi-observability dell/karavi-observability -n <span style="color:#ce5c00;font-weight:bold">[</span>CSM_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> --create-namespace <span style="color:#4e9a06">\
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span><span style="color:#000;font-style:italic">    --set-file karaviTopology.certificateFile=&lt;location-of-karavi-topology-certificate-file&gt; \
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    --set-file karaviTopology.privateKeyFile=&lt;location-of-karavi-topology-private-key-file&gt; \
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    --set-file otelCollector.certificateFile=&lt;location-of-otel-collector-certificate-file&gt; \
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    --set-file otelCollector.privateKeyFile=&lt;location-of-otel-collector-private-key-file&gt;
-</span></span></span></code></pre></div><p>Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> helm install karavi-observability dell/karavi-observability -n <span style="color:#ce5c00;font-weight:bold">[</span>CSM_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> --create-namespace -f values.yaml
-</span></span></code></pre></div><p><strong>Note</strong>: You can use the default <a href="https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml">values.yaml</a></p>
 
 	
 	

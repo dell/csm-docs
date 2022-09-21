@@ -279,35 +279,30 @@ created in both &lt;code&gt;source&lt;/code&gt; and &lt;code&gt;target&lt;/code&
 &lt;p&gt;This scenario is the choice when you want to try your disaster recovery plan or you need to switch activities from one site to another.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;a. Execute &amp;quot;failover&amp;quot; action on selected ReplicationGroup using the cluster name
 
-    ./repctl --rg rg-id failover --to-cluster target-cluster-name
+    ./repctl --rg rg-id failover --target target-cluster-name
     
 b. Execute &amp;quot;reprotect&amp;quot; action on selected ReplicationGroup which will resume the replication from new &amp;quot;source&amp;quot;
 
-    ./repctl --rg rg-id reprotect --to-cluster new-source-cluster-name
-&amp;lt;br&amp;gt; &amp;lt;br&amp;gt;
-![state_changes1](../state_changes1.png)
-&amp;lt;br&amp;gt; &amp;lt;br&amp;gt;
+    ./repctl --rg rg-id reprotect --at new-source-cluster-name
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../state_changes1.png&#34; alt=&#34;state_changes1&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;unplanned-migration-to-the-target-clusterarray&#34;&gt;Unplanned Migration to the target cluster/array&lt;/h3&gt;
 &lt;p&gt;This scenario is the choice when you lost a site.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;a. Execute &amp;quot;failover&amp;quot; action on selected ReplicationGroup using the cluster name 
 
-    ./repctl --rg rg-id failover --to-cluster target-cluster-name --unplanned
+    ./repctl --rg rg-id failover --target target-cluster-name --unplanned
 
 b. Execute &amp;quot;swap&amp;quot; action on selected ReplicationGroup which would swap personalities of R1 and R2 (only applicable for PowerMax driver)
 
-    ./repctl --rg rg-id swap --to-cluster target-cluster-name
+    ./repctl --rg rg-id swap --at target-cluster-name
 
 **Note:** Unplanned migration usually happens when the original &amp;quot;source&amp;quot; cluster is unavailable. The following action makes sense when the cluster is back.
 
 c. Execute &amp;quot;reprotect&amp;quot; action on selected ReplicationGroup which will resume the replication.
 
-    ./repctl --rg rg-id reprotect --to-cluster new-source-cluster-name
-    
-&amp;lt;br&amp;gt; &amp;lt;br&amp;gt;
-![state_changes2](../state_changes2.png) 
-&amp;lt;br&amp;gt; &amp;lt;br&amp;gt;
+    ./repctl --rg rg-id reprotect --at new-source-cluster-name
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../state_changes2.png&#34; alt=&#34;state_changes2&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: When users do Failover and Failback, the tests pods on the source cluster may go &amp;ldquo;CrashLoopOff&amp;rdquo; state since it will try to remount the same volume which is already mounted. To get around this problem bring down the number of replicas to 0 and then after that is done, bring it up to 1.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -401,7 +396,7 @@ replicated-rg-240721b0-12fb-4151-8dd8-94794ae2493e   51d     Ready   SUSPENDED  
       <description>
         
         
-        &lt;p&gt;You can exercise native replication control operations from Dell EMC storage arrays by performing &amp;ldquo;Actions&amp;rdquo; on the replicated group of volumes using the DellCSIReplicationGroup object.&lt;/p&gt;
+        &lt;p&gt;You can exercise native replication control operations from Dell storage arrays by performing &amp;ldquo;Actions&amp;rdquo; on the replicated group of volumes using the DellCSIReplicationGroup object.&lt;/p&gt;
 &lt;p&gt;You can patch the DellCSIReplicationGroup Custom Resource and set the action field in the spec to one of the allowed values (refer to tables in this document).&lt;/p&gt;
 &lt;p&gt;When you set the action field in the Custom Resource object, the following happens:&lt;/p&gt;
 &lt;ul&gt;
@@ -420,17 +415,23 @@ There are certain pre-requisites that have to be fulfilled before any action can
 &lt;p&gt;For e.g. -&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;If the CR at &lt;code&gt;Hopkinton&lt;/code&gt; is patched with action FAILOVER_REMOTE, it means that the driver will attempt to &lt;code&gt;Fail Over&lt;/code&gt; to &lt;strong&gt;Durham&lt;/strong&gt; which is the remote site.&lt;/li&gt;
-&lt;li&gt;If the CR at &lt;code&gt;Durham&lt;/code&gt; is patched with action FAILOVER_LOCAL, it means that the driver will attempt to &lt;code&gt;Fail over&lt;/code&gt; to &lt;strong&gt;Durham&lt;/strong&gt; which is the local site.&lt;/li&gt;
+&lt;li&gt;If the CR at &lt;code&gt;Durham&lt;/code&gt; is patched with action FAILOVER_LOCAL, it means that the driver will attempt to &lt;code&gt;Fail Over&lt;/code&gt; to &lt;strong&gt;Durham&lt;/strong&gt; which is the local site.&lt;/li&gt;
 &lt;li&gt;If the CR at &lt;code&gt;Durham&lt;/code&gt; is patched with REPROTECT_LOCAL, it means that the driver will &lt;code&gt;Re-protect&lt;/code&gt; the volumes at &lt;strong&gt;Durham&lt;/strong&gt; which is the local site.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The following table lists details of what actions should be used in different Disaster Recovery workflows &amp;amp; the equivalent operation done on the storage array:&lt;/p&gt;
-&lt;table&gt;
+
+
+
+
+
+&lt;table class=&#34;table table-striped table-bordered table-sm&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Workflow&lt;/th&gt;
 &lt;th&gt;Actions&lt;/th&gt;
 &lt;th&gt;PowerMax&lt;/th&gt;
 &lt;th&gt;PowerStore&lt;/th&gt;
+&lt;th&gt;PowerScale&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
@@ -439,21 +440,26 @@ There are certain pre-requisites that have to be fulfilled before any action can
 &lt;td&gt;FAILOVER_LOCAL&lt;br&gt;FAILOVER_REMOTE&lt;/td&gt;
 &lt;td&gt;symrdf failover -swap&lt;/td&gt;
 &lt;td&gt;FAILOVER (no REPROTECT after FAILOVER)&lt;/td&gt;
+&lt;td&gt;allow_writes on target, disable local policy&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Reprotect&lt;/td&gt;
-&lt;td&gt;REPROTECT_LOCAL &lt;br&gt; REPROTECT_REMOTE&lt;/td&gt;
+&lt;td&gt;REPROTECT_LOCAL&lt;br&gt;REPROTECT_REMOTE&lt;/td&gt;
 &lt;td&gt;symrdf resume/est&lt;/td&gt;
 &lt;td&gt;REPROTECT&lt;/td&gt;
+&lt;td&gt;enable local policy, disallow_writes on remote&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Unplanned Migration&lt;/td&gt;
-&lt;td&gt;UNPLANNED_FAILOVER_LOCAL &lt;br&gt; UNPLANNED_FAILOVER_REMOTE&lt;/td&gt;
+&lt;td&gt;UNPLANNED_FAILOVER_LOCAL&lt;br&gt;UNPLANNED_FAILOVER_REMOTE&lt;/td&gt;
 &lt;td&gt;symrdf failover -force&lt;/td&gt;
 &lt;td&gt;FAILOVER (at target site)&lt;/td&gt;
+&lt;td&gt;break association on target&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+
 &lt;h3 id=&#34;maintenance-actions&#34;&gt;Maintenance Actions&lt;/h3&gt;
 &lt;p&gt;These actions can be run at any site and are used to change the replication link state for maintenance activities.
 The following table lists the supported maintenance actions and the equivalent operation done on the storage arrays&lt;/p&gt;
@@ -469,6 +475,7 @@ The following table lists the supported maintenance actions and the equivalent o
 &lt;th&gt;Description&lt;/th&gt;
 &lt;th&gt;PowerMax&lt;/th&gt;
 &lt;th&gt;PowerStore&lt;/th&gt;
+&lt;th&gt;PowerScale&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
@@ -477,18 +484,21 @@ The following table lists the supported maintenance actions and the equivalent o
 &lt;td&gt;Temporarily suspend &lt;br&gt; replication&lt;/td&gt;
 &lt;td&gt;symrdf suspend&lt;/td&gt;
 &lt;td&gt;PAUSE&lt;/td&gt;
+&lt;td&gt;disable local policy&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;RESUME&lt;/td&gt;
 &lt;td&gt;Resume replication&lt;/td&gt;
 &lt;td&gt;symrdf resume&lt;/td&gt;
 &lt;td&gt;RESUME&lt;/td&gt;
+&lt;td&gt;enable local policy&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;SYNC&lt;/td&gt;
 &lt;td&gt;Synchronize all changes &lt;br&gt; from source to target&lt;/td&gt;
 &lt;td&gt;symrdf establish&lt;/td&gt;
 &lt;td&gt;SYNCHRONIZE NOW&lt;/td&gt;
+&lt;td&gt;start syncIQ job&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

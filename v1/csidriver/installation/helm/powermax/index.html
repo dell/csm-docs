@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.103.1" />
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/csidriver/installation/helm/powermax/" /><meta property="article:section" content="v1" />
 
-<meta property="article:modified_time" content="2022-05-24T16:59:37-03:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing CSI Driver for PowerMax via Helm
 ">
-<meta itemprop="dateModified" content="2022-05-24T16:59:37-03:00" />
-<meta itemprop="wordCount" content="3185">
+<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
+<meta itemprop="wordCount" content="3555">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerMax via Helm
@@ -33,8 +33,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" as="style">
-<link href="/csm-docs/scss/main.min.0ac645b284f3fc8f7adfe6c5a8ab82080c94529842554b9d3932a22fb2669f3b.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" as="style">
+<link href="/csm-docs/scss/main.min.23358862751a1e63419385131dcad04a997acc3040cfa97773fa90e8635490e5.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -64,7 +64,7 @@
 				
 				
 				
-				<a class="nav-link" href="/csm-docs/docs/" ><span>Dell Technologies (Dell) Container Storage Modules (CSM)</span></a>
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Container Storage Modules</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -84,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.3)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.4)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.2.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.3</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2</a>
 	
 </div>
 
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.3298c19ab4b8bb586a73877c9a40664c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.9b933681e4d3faa8d99aee6c980d53d1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -178,16 +178,8 @@
   <a href="/csm-docs/v1/deployment/csmoperator/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1deploymentcsmoperatortroubleshooting"><span class="">Troubleshooting</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmapi-li">
-  <a href="/csm-docs/v1/deployment/csmapi/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmapi"><span class="">CSM REST API</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymentcsmcli-li">
-  <a href="/csm-docs/v1/deployment/csmcli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymentcsmcli"><span class="">CSM CLI</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1deploymenttroubleshooting-li">
-  <a href="/csm-docs/v1/deployment/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1deploymenttroubleshooting"><span class="">Troubleshooting</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1faq-li">
-  <a href="/csm-docs/v1/faq/" title="CSM FAQ" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1faq"><span class="">FAQ</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv1csidriver-li">
   <a href="/csm-docs/v1/csidriver/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1csidriver"><span class="">CSI Drivers</span></a>
   <ul class="ul-2 foldable">
@@ -206,7 +198,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1csidriverinstallationhelmpowerstore-li">
   <a href="/csm-docs/v1/csidriver/installation/helm/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverinstallationhelmpowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1csidriverinstallationhelmunity-li">
-  <a href="/csm-docs/v1/csidriver/installation/helm/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverinstallationhelmunity"><span class="">Unity</span></a>
+  <a href="/csm-docs/v1/csidriver/installation/helm/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverinstallationhelmunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1csidriverinstallationoperator-li">
@@ -221,7 +213,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverinstallationoperatorpowerstore-li">
   <a href="/csm-docs/v1/csidriver/installation/operator/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverinstallationoperatorpowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverinstallationoperatorunity-li">
-  <a href="/csm-docs/v1/csidriver/installation/operator/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverinstallationoperatorunity"><span class="">Unity</span></a>
+  <a href="/csm-docs/v1/csidriver/installation/operator/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverinstallationoperatorunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1csidriverinstallationoffline-li">
@@ -238,7 +230,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverinstallationtestpowerstore-li">
   <a href="/csm-docs/v1/csidriver/installation/test/powerstore/" title="Test PowerStore CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverinstallationtestpowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverinstallationtestunity-li">
-  <a href="/csm-docs/v1/csidriver/installation/test/unity/" title="Test Unity CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverinstallationtestunity"><span class="">Unity</span></a>
+  <a href="/csm-docs/v1/csidriver/installation/test/unity/" title="Test Unity XT CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverinstallationtestunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li>
@@ -259,7 +251,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverupgradationdriverspowerstore-li">
   <a href="/csm-docs/v1/csidriver/upgradation/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverupgradationdriverspowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverupgradationdriversunity-li">
-  <a href="/csm-docs/v1/csidriver/upgradation/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverupgradationdriversunity"><span class="">Unity</span></a>
+  <a href="/csm-docs/v1/csidriver/upgradation/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverupgradationdriversunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1csidriverfeatures-li">
@@ -274,7 +266,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverfeaturespowerstore-li">
   <a href="/csm-docs/v1/csidriver/features/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverfeaturespowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverfeaturesunity-li">
-  <a href="/csm-docs/v1/csidriver/features/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverfeaturesunity"><span class="">Unity</span></a>
+  <a href="/csm-docs/v1/csidriver/features/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverfeaturesunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1csidrivertroubleshooting-li">
@@ -291,7 +283,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidrivertroubleshootingpowerstore-li">
   <a href="/csm-docs/v1/csidriver/troubleshooting/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidrivertroubleshootingpowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidrivertroubleshootingunity-li">
-  <a href="/csm-docs/v1/csidriver/troubleshooting/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidrivertroubleshootingunity"><span class="">Unity</span></a>
+  <a href="/csm-docs/v1/csidriver/troubleshooting/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidrivertroubleshootingunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1csidriverrelease-li">
@@ -308,7 +300,7 @@
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverreleasepowerstore-li">
   <a href="/csm-docs/v1/csidriver/release/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverreleasepowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1csidriverreleaseunity-li">
-  <a href="/csm-docs/v1/csidriver/release/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverreleaseunity"><span class="">Unity</span></a>
+  <a href="/csm-docs/v1/csidriver/release/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverreleaseunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1csidriverpartners-li">
@@ -326,8 +318,6 @@
   <a href="/csm-docs/v1/csidriver/partners/tanzu/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1csidriverpartnerstanzu"><span class="">VMware Tanzu</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1csidriverarchives-li">
-  <a href="/csm-docs/v1/csidriver/archives/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1csidriverarchives"><span class="">Archives</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1authorization-li">
@@ -335,10 +325,15 @@
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationdesign-li">
   <a href="/csm-docs/v1/authorization/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationdesign"><span class="">Design</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationdeployment-li">
-  <a href="/csm-docs/v1/authorization/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationdeployment"><span class="">Deployment</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationdeployment-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1authorizationdeployment-li">
   <a href="/csm-docs/v1/authorization/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationdeployment"><span class="">Deployment</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationdeploymentrpm-li">
+  <a href="/csm-docs/v1/authorization/deployment/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationdeploymentrpm"><span class="">RPM</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationdeploymenthelm-li">
+  <a href="/csm-docs/v1/authorization/deployment/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationdeploymenthelm"><span class="">Helm</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationuninstallation-li">
   <a href="/csm-docs/v1/authorization/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationuninstallation"><span class="">Uninstallation</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationupgrade-li">
@@ -347,6 +342,8 @@
   <a href="/csm-docs/v1/authorization/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationcli"><span class="">CLI</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationtroubleshooting-li">
   <a href="/csm-docs/v1/authorization/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1authorizationtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1authorizationrelease-li">
+  <a href="/csm-docs/v1/authorization/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1authorizationrelease"><span class="">Release notes</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1observability-li">
@@ -380,6 +377,8 @@
   <a href="/csm-docs/v1/observability/upgrade/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1observabilityupgrade"><span class="">Upgrade</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1observabilitytroubleshooting-li">
   <a href="/csm-docs/v1/observability/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1observabilitytroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1observabilityrelease-li">
+  <a href="/csm-docs/v1/observability/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1observabilityrelease"><span class="">Release notes</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1replication-li">
@@ -412,6 +411,8 @@
   <a href="/csm-docs/v1/replication/disaster-recovery/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationdisaster-recovery"><span class="">Disaster Recovery</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationhigh-availability-li">
   <a href="/csm-docs/v1/replication/high-availability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationhigh-availability"><span class="">High Availability</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationmigrating-volumes-li">
+  <a href="/csm-docs/v1/replication/migrating-volumes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationmigrating-volumes"><span class="">Migrating Volumes</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationmonitoring-li">
   <a href="/csm-docs/v1/replication/monitoring/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationmonitoring"><span class="">Monitoring</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationreplication-actions-li">
@@ -420,6 +421,8 @@
   <a href="/csm-docs/v1/replication/tools/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationtools"><span class="">Tools</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationtroubleshooting-li">
   <a href="/csm-docs/v1/replication/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationrelease-li">
+  <a href="/csm-docs/v1/replication/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1replicationrelease"><span class="">Release notes</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationupgrade-li">
   <a href="/csm-docs/v1/replication/upgrade/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1replicationupgrade"><span class="">Upgrade</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1replicationuninstall-li">
@@ -431,6 +434,8 @@
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1resiliencydesign-li">
   <a href="/csm-docs/v1/resiliency/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1resiliencydesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1resiliencyrelease-li">
+  <a href="/csm-docs/v1/resiliency/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1resiliencyrelease"><span class="">Release notes</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1resiliencyuninstallation-li">
   <a href="/csm-docs/v1/resiliency/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1resiliencyuninstallation"><span class="">Uninstallation</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1resiliencyusecases-li">
@@ -443,28 +448,42 @@
   <a href="/csm-docs/v1/resiliency/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1resiliencytroubleshooting"><span class="">Troubleshooting</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1snapshots-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1snapshots-li">
   <a href="/csm-docs/v1/snapshots/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1snapshots"><span class="">Snapshots</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1grasp-li">
-  <a href="/csm-docs/v1/grasp/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1grasp"><span class="">Learn</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1graspstart-li">
-  <a href="/csm-docs/v1/grasp/start/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1graspstart"><span class="">Getting Started</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1graspvideo-li">
-  <a href="/csm-docs/v1/grasp/video/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1graspvideo"><span class="">Quick video lessons</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1snapshotsvolume-group-snapshots-li">
+  <a href="/csm-docs/v1/snapshots/volume-group-snapshots/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1snapshotsvolume-group-snapshots"><span class="">Volume Group Snapshots</span></a>
 </li>
   </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1release-li">
+  <a href="/csm-docs/v1/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1release"><span class="">Release notes</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1troubleshooting-li">
   <a href="/csm-docs/v1/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1troubleshooting"><span class="">Troubleshooting</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1support-li">
   <a href="/csm-docs/v1/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1support"><span class="">Support</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv1contributionguidelines-li">
-  <a href="/csm-docs/v1/contributionguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1contributionguidelines"><span class="">Contribution Guidelines</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1policies-li">
-  <a href="/csm-docs/v1/policies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1policies"><span class="">Policies</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv1references-li">
+  <a href="/csm-docs/v1/references/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1references"><span class="">References</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1policiesdeprecationpolicy-li">
-  <a href="/csm-docs/v1/policies/deprecationpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1policiesdeprecationpolicy"><span class="">Deprecation Policy</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1referencesfaq-li">
+  <a href="/csm-docs/v1/references/faq/" title="CSM FAQ" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1referencesfaq"><span class="">FAQ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1referenceslearn-li">
+  <a href="/csm-docs/v1/references/learn/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1referenceslearn"><span class="">Learn</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1referenceslearnstart-li">
+  <a href="/csm-docs/v1/references/learn/start/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1referenceslearnstart"><span class="">Getting Started</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1referenceslearnvideo-li">
+  <a href="/csm-docs/v1/references/learn/video/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv1referenceslearnvideo"><span class="">Quick video lessons</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1referencescontributionguidelines-li">
+  <a href="/csm-docs/v1/references/contributionguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1referencescontributionguidelines"><span class="">Contribution Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv1referencespolicies-li">
+  <a href="/csm-docs/v1/references/policies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1referencespolicies"><span class="">Policies</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv1referencespoliciesdeprecationpolicy-li">
+  <a href="/csm-docs/v1/references/policies/deprecationpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv1referencespoliciesdeprecationpolicy"><span class="">Deprecation Policy</span></a>
+</li>
+  </ul>
 </li>
   </ul>
 </li>
@@ -701,7 +720,7 @@
 <h2 id="install-the-driver">Install the Driver</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone -b v2.2.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.</li>
+<li>Run <code>git clone -b v2.3.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.</li>
 <li>Ensure that you have created a namespace where you want to install the driver. You can run <code>kubectl create namespace powermax</code> to create a new one</li>
 <li>Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
@@ -723,150 +742,6 @@ These values can be obtained using base64 encoding as described in the following
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>kubeletConfigDir</td>
-<td>Specify kubelet config dir path</td>
-<td>Yes</td>
-<td>/var/lib/kubelet</td>
-</tr>
-<tr>
-<td>imagePullPolicy</td>
-<td>The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists.</td>
-<td>Yes</td>
-<td>IfNotPresent</td>
-</tr>
-<tr>
-<td>clusterPrefix</td>
-<td>Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters.</td>
-<td>Yes</td>
-<td>&ldquo;ABC&rdquo;</td>
-</tr>
-<tr>
-<td>defaultFsType</td>
-<td>Used to set the default FS type for external provisioner</td>
-<td>Yes</td>
-<td>ext4</td>
-</tr>
-<tr>
-<td>portGroups</td>
-<td>List of comma-separated port group names. Any port group that is specified here must be present on all the arrays that the driver manages.</td>
-<td>For iSCSI Only</td>
-<td>&ldquo;PortGroup1, PortGroup2, PortGroup3&rdquo;</td>
-</tr>
-<tr>
-<td>storageResourcePool</td>
-<td>This parameter must mention one of the SRPs on the PowerMax array that the symmetrixID specifies. This value is used to create the default storage class.</td>
-<td>Yes</td>
-<td>&ldquo;SRP_1&rdquo;</td>
-</tr>
-<tr>
-<td>serviceLevel</td>
-<td>This parameter must mention one of the Service Levels on the PowerMax array. This value is used to create the default storage class.</td>
-<td>Yes</td>
-<td>&ldquo;Bronze&rdquo;</td>
-</tr>
-<tr>
-<td>skipCertificateValidation</td>
-<td>Skip client-side TLS verification of Unisphere certificates</td>
-<td>No</td>
-<td>&ldquo;True&rdquo;</td>
-</tr>
-<tr>
-<td>transportProtocol</td>
-<td>Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.</td>
-<td>No</td>
-<td>Empty</td>
-</tr>
-<tr>
-<td>nodeNameTemplate</td>
-<td>Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.</td>
-<td>No</td>
-<td>Empty</td>
-</tr>
-<tr>
-<td><strong>controller</strong></td>
-<td>Allows configuration of the controller-specific parameters.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>controllerCount</td>
-<td>Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release</td>
-<td>Yes</td>
-<td>2</td>
-</tr>
-<tr>
-<td>volumeNamePrefix</td>
-<td>Defines a string prefix for the names of PersistentVolumes created</td>
-<td>Yes</td>
-<td>&ldquo;k8s&rdquo;</td>
-</tr>
-<tr>
-<td>snapshot.enabled</td>
-<td>Enable/Disable volume snapshot feature</td>
-<td>Yes</td>
-<td>true</td>
-</tr>
-<tr>
-<td>snapshot.snapNamePrefix</td>
-<td>Defines a string prefix for the names of the Snapshots created</td>
-<td>Yes</td>
-<td>&ldquo;snapshot&rdquo;</td>
-</tr>
-<tr>
-<td>resizer.enabled</td>
-<td>Enable/Disable volume expansion feature</td>
-<td>Yes</td>
-<td>true</td>
-</tr>
-<tr>
-<td>healthMonitor.enabled</td>
-<td>Allows to enable/disable volume health monitor</td>
-<td>No</td>
-<td>false</td>
-</tr>
-<tr>
-<td>healthMonitor.interval</td>
-<td>Interval of monitoring volume health condition</td>
-<td>No</td>
-<td>60s</td>
-</tr>
-<tr>
-<td>nodeSelector</td>
-<td>Define node selection constraints for pods of controller deployment</td>
-<td>No</td>
-<td></td>
-</tr>
-<tr>
-<td>tolerations</td>
-<td>Define tolerations for the controller deployment, if required</td>
-<td>No</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>node</strong></td>
-<td>Allows configuration of the node-specific parameters.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>tolerations</td>
-<td>Add tolerations as per requirement</td>
-<td>No</td>
-<td>-</td>
-</tr>
-<tr>
-<td>nodeSelector</td>
-<td>Add node selectors as per requirement</td>
-<td>No</td>
-<td>-</td>
-</tr>
-<tr>
-<td>healthMonitor.enabled</td>
-<td>Allows to enable/disable volume health monitor</td>
-<td>No</td>
-<td>false</td>
-</tr>
 <tr>
 <td><strong>global</strong></td>
 <td>This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy</td>
@@ -964,6 +839,204 @@ These values can be obtained using base64 encoding as described in the following
 <td>50</td>
 </tr>
 <tr>
+<td>kubeletConfigDir</td>
+<td>Specify kubelet config dir path</td>
+<td>Yes</td>
+<td>/var/lib/kubelet</td>
+</tr>
+<tr>
+<td>imagePullPolicy</td>
+<td>The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists.</td>
+<td>Yes</td>
+<td>IfNotPresent</td>
+</tr>
+<tr>
+<td>clusterPrefix</td>
+<td>Prefix that is used during the creation of various masking-related entities (Storage Groups, Masking Views, Hosts, and Volume Identifiers) on the array. The value that you specify here must be unique. Ensure that no other CSI PowerMax driver is managing the same arrays that are configured with the same prefix. The maximum length for this prefix is three characters.</td>
+<td>Yes</td>
+<td>&ldquo;ABC&rdquo;</td>
+</tr>
+<tr>
+<td>logLevel</td>
+<td>CSI driver log level. Allowed values: &ldquo;error&rdquo;, &ldquo;warn&rdquo;/&ldquo;warning&rdquo;, &ldquo;info&rdquo;, &ldquo;debug&rdquo;.</td>
+<td>Yes</td>
+<td>&ldquo;debug&rdquo;</td>
+</tr>
+<tr>
+<td>logFormat</td>
+<td>CSI driver log format. Allowed values: &ldquo;TEXT&rdquo; or &ldquo;JSON&rdquo;.</td>
+<td>Yes</td>
+<td>&ldquo;TEXT&rdquo;</td>
+</tr>
+<tr>
+<td>kubeletConfigDir</td>
+<td>kubelet config directory path. Ensure that the config.yaml file is present at this path.</td>
+<td>Yes</td>
+<td>/var/lib/kubelet</td>
+</tr>
+<tr>
+<td>defaultFsType</td>
+<td>Used to set the default FS type for external provisioner</td>
+<td>Yes</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>portGroups</td>
+<td>List of comma-separated port group names. Any port group that is specified here must be present on all the arrays that the driver manages.</td>
+<td>For iSCSI Only</td>
+<td>&ldquo;PortGroup1, PortGroup2, PortGroup3&rdquo;</td>
+</tr>
+<tr>
+<td>skipCertificateValidation</td>
+<td>Skip client-side TLS verification of Unisphere certificates</td>
+<td>No</td>
+<td>&ldquo;True&rdquo;</td>
+</tr>
+<tr>
+<td>transportProtocol</td>
+<td>Set the preferred transport protocol for the Kubernetes cluster which helps the driver choose between FC and iSCSI when a node has both FC and iSCSI connectivity to a PowerMax array.</td>
+<td>No</td>
+<td>Empty</td>
+</tr>
+<tr>
+<td>nodeNameTemplate</td>
+<td>Used to specify a template that will be used by the driver to create Host/IG names on the PowerMax array. To use the default naming convention, leave this value empty.</td>
+<td>No</td>
+<td>Empty</td>
+</tr>
+<tr>
+<td>modifyHostName</td>
+<td>Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format.</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>powerMaxDebug</td>
+<td>Enables low level and http traffic logging between the CSI driver and Unisphere. Don&rsquo;t enable this unless asked to do so by the support team.</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>enableCHAP</td>
+<td>Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key &ldquo;chapsecret&rdquo;</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>fsGroupPolicy</td>
+<td>Defines which FS Group policy mode to be used, Supported modes <code>None, File and ReadWriteOnceWithFSType</code></td>
+<td>No</td>
+<td>&ldquo;ReadWriteOnceWithFSType&rdquo;</td>
+</tr>
+<tr>
+<td>version</td>
+<td>Current version of the driver. Don&rsquo;t modify this value as this value will be used by the install script.</td>
+<td>Yes</td>
+<td>v2.3.0</td>
+</tr>
+<tr>
+<td>images</td>
+<td>Defines the container images used by the driver.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>driverRepository</td>
+<td>Defines the registry of the container image used for the driver.</td>
+<td>Yes</td>
+<td>dellemc</td>
+</tr>
+<tr>
+<td><strong>controller</strong></td>
+<td>Allows configuration of the controller-specific parameters.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>controllerCount</td>
+<td>Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release</td>
+<td>Yes</td>
+<td>2</td>
+</tr>
+<tr>
+<td>volumeNamePrefix</td>
+<td>Defines a string prefix for the names of PersistentVolumes created</td>
+<td>Yes</td>
+<td>&ldquo;k8s&rdquo;</td>
+</tr>
+<tr>
+<td>snapshot.enabled</td>
+<td>Enable/Disable volume snapshot feature</td>
+<td>Yes</td>
+<td>true</td>
+</tr>
+<tr>
+<td>snapshot.snapNamePrefix</td>
+<td>Defines a string prefix for the names of the Snapshots created</td>
+<td>Yes</td>
+<td>&ldquo;snapshot&rdquo;</td>
+</tr>
+<tr>
+<td>resizer.enabled</td>
+<td>Enable/Disable volume expansion feature</td>
+<td>Yes</td>
+<td>true</td>
+</tr>
+<tr>
+<td>healthMonitor.enabled</td>
+<td>Allows to enable/disable volume health monitor</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>healthMonitor.interval</td>
+<td>Interval of monitoring volume health condition</td>
+<td>No</td>
+<td>60s</td>
+</tr>
+<tr>
+<td>nodeSelector</td>
+<td>Define node selection constraints for pods of controller deployment</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>tolerations</td>
+<td>Define tolerations for the controller deployment, if required</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>node</strong></td>
+<td>Allows configuration of the node-specific parameters.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>tolerations</td>
+<td>Add tolerations as per requirement</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td>nodeSelector</td>
+<td>Add node selectors as per requirement</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td>healthMonitor.enabled</td>
+<td>Allows to enable/disable volume health monitor</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>topologyControl.enabled</td>
+<td>Allows to enable/disable topology control to filter topology keys</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
 <td><strong>csireverseproxy</strong></td>
 <td>This section refers to the configuration options for CSI PowerMax Reverse Proxy</td>
 <td>-</td>
@@ -979,7 +1052,7 @@ These values can be obtained using base64 encoding as described in the following
 <td>image</td>
 <td>This refers to the image of the CSI Powermax Reverse Proxy container.</td>
 <td>Yes</td>
-<td>dellemc/csipowermax-reverseproxy:v1.4.0</td>
+<td>dellemc/csipowermax-reverseproxy:v2.1.0</td>
 </tr>
 <tr>
 <td>tlsSecret</td>
@@ -1035,10 +1108,65 @@ These values can be obtained using base64 encoding as described in the following
 <td>No</td>
 <td>true</td>
 </tr>
+<tr>
+<td><strong>migration</strong></td>
+<td><a href="../../../../replication/migrating-volumes">Migration</a> is an optional feature to enable migration between storage classes</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>A boolean that enables/disables migration feature.</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>image</td>
+<td>Image for dell-csi-migrator sidecar.</td>
+<td>No</td>
+<td>&quot; &quot;</td>
+</tr>
+<tr>
+<td>migrationPrefix</td>
+<td>enables migration sidecar to read required information from the storage class fields</td>
+<td>No</td>
+<td>migration.storage.dell.com</td>
+</tr>
+<tr>
+<td><strong>replication</strong></td>
+<td><a href="../../../../replication/deployment">Replication</a> is an optional feature to enable replication &amp; disaster recovery capabilities of PowerMax to Kubernetes clusters.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>A boolean that enables/disables replication feature.</td>
+<td>No</td>
+<td>false</td>
+</tr>
+<tr>
+<td>image</td>
+<td>Image for dell-csi-replicator sidecar.</td>
+<td>No</td>
+<td>&quot; &quot;</td>
+</tr>
+<tr>
+<td>replicationContextPrefix</td>
+<td>enables side cars to read required information from the volume context</td>
+<td>No</td>
+<td>powermax</td>
+</tr>
+<tr>
+<td>replicationPrefix</td>
+<td>Determine if replication is enabled</td>
+<td>No</td>
+<td>replication.storage.dell.com</td>
+</tr>
 </tbody>
 </table>
 <ol start="8">
 <li>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml</code></li>
+<li>Or you can also install the driver using standalone helm chart using the command <code>helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax</code></li>
 </ol>
 <p><em>Note:</em></p>
 <ul>
@@ -1046,6 +1174,11 @@ These values can be obtained using base64 encoding as described in the following
 <li>There are a set of samples provided <a href="#sample-values-file">here</a> to help you configure the driver with reverse proxy</li>
 <li>This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The <code>verify.sh</code> script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the <code>--skip-verify-node</code> option</li>
 <li>In order to enable authorization, there should be an authorization proxy server already installed.</li>
+<li>PowerMax Array username must have role as <code>StorageAdmin</code> to be able to perform CRUD operations.</li>
+<li>If the user is using complex K8s version like “v1.22.3-mirantis-1”, use below kubeVersion check in <a href="https://github.com/dell/csi-powermax/blob/main/helm/csi-powermax/Chart.yaml">helm Chart</a> file. kubeVersion: “&gt;= 1.22.0-0 &lt; 1.25.0-0”.</li>
+<li>User should provide all boolean values with double-quotes. This applies only for values.yaml. Example: “true”/“false”.</li>
+<li>controllerCount parameter value should be &lt;= number of nodes in the kubernetes cluster else install script fails.</li>
+<li>Endpoint should not have any special character at the end apart from port number.</li>
 </ul>
 <h2 id="storage-classes">Storage Classes</h2>
 <p>Starting CSI PowerMax v1.6, <code>dell-csi-helm-installer</code> will not create any storage classes as part of the driver installation. A wide set of annotated storage class manifests has been provided in the <code>samples/storageclass</code> folder. Please use these samples to create new storage classes to provision storage.</p>
@@ -1055,12 +1188,12 @@ These values can be obtained using base64 encoding as described in the following
 <p>Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
 </blockquote>
 <h2 id="volume-snapshot-class">Volume Snapshot Class</h2>
-<p>Starting with CSI PowerMax v1.7, <code>dell-csi-helm-installer</code> will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the <em>samples/volumesnapshotclass</em> folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.</p>
+<p>Starting with CSI PowerMax v1.7.0, <code>dell-csi-helm-installer</code> will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the <em>samples/volumesnapshotclass</em> folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.</p>
 <h3 id="what-happens-to-my-existing-volume-snapshot-classes">What happens to my existing Volume Snapshot Classes?</h3>
-<p><em>Upgrading from CSI PowerMax v2.1 driver</em>:
+<p><em>Upgrading from CSI PowerMax v2.1.0 driver</em>:
 The existing volume snapshot class will be retained.</p>
 <p><em>Upgrading from an older version of the driver</em>:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7 or higher, before upgrading to 2.2.</p>
+It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7.0 or higher, before upgrading to 2.3.0.</p>
 <h2 id="sample-values-file">Sample values file</h2>
 <p>The following sections have useful snippets from <code>values.yaml</code> file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes</p>
 <h3 id="csi-powermax-driver-without-proxy">CSI PowerMax driver without Proxy</h3>

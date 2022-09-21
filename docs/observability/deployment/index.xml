@@ -42,7 +42,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Copy only the deployed CSI driver entities to the Observability namespace&lt;/p&gt;
-&lt;h4 id=&#34;powerflex&#34;&gt;PowerFlex&lt;/h4&gt;
+&lt;h3 id=&#34;powerflex&#34;&gt;PowerFlex&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the config Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:&lt;/p&gt;
@@ -60,11 +60,29 @@
 &lt;p&gt;&lt;code&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4 id=&#34;powerstore&#34;&gt;PowerStore&lt;/h4&gt;
+&lt;h3 id=&#34;powerstore&#34;&gt;PowerStore&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the config Secret from the CSI PowerStore namespace into the CSM for Observability namespace:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;powerscale&#34;&gt;PowerScale&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the config Secret from the CSI PowerScale namespace into the CSM for Observability namespace:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerScale, perform these steps:&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the CSM for Observability namespace:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get configmap isilon-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the &lt;code&gt;karavi-authorization-config&lt;/code&gt;, &lt;code&gt;proxy-server-root-certificate&lt;/code&gt;, &lt;code&gt;proxy-authz-tokens&lt;/code&gt; Secret from the CSI PowerScale namespace into the CSM for Observability namespace:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | sed &#39;s/name: karavi-authorization-config/name: isilon-karavi-authorization-config/&#39; | sed &#39;s/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/&#39; | sed &#39;s/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
@@ -75,6 +93,7 @@
 &lt;ul&gt;
 &lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured in your values file for CSM Observability.&lt;/li&gt;
+&lt;li&gt;If CSM for Authorization is enabled for CSI PowerScale, the &lt;code&gt;karaviMetricsPowerscale.authorization&lt;/code&gt; parameters must be properly configured in your values file for CSM Observability.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; helm install karavi-observability dell/karavi-observability -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -f myvalues.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternatively, you can specify each parameter using the &amp;lsquo;&amp;ndash;set key=value[,key=value]&amp;rsquo; and/or &amp;lsquo;&amp;ndash;set-file key=value[,key=value] arguments to &amp;lsquo;helm install&amp;rsquo;. For example:&lt;/p&gt;
@@ -267,7 +286,7 @@
 &lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.concurrentPowerflexQueries&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.concurrentPowerstoreQueries&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;The number of simultaneous metrics queries to make to PowerStore (must be less than 10; otherwise, several request errors from PowerStore will ensue.)&lt;/td&gt;
 &lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
@@ -310,6 +329,106 @@
 &lt;td&gt;&lt;code&gt;karaviMetricsPowerstore.zipkin.probability&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0)&lt;/td&gt;
 &lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.image&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CSM Metrics for PowerScale Service image&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dellemc/csm-metrics-powerscale:v1.0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.enabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable CSM Metrics for PowerScale service&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.collectorAddr&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Metrics Collector accessible from the Kubernetes cluster&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;otel-collector:55680&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.provisionerNames&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Provisioner Names used to filter for determining PowerScale volumes (must be a Comma-separated list)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;csi-isilon.dellemc.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.capacityMetricsEnabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable PowerScale capacity metric Collection&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.performanceMetricsEnabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable PowerScale performance metric Collection&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.clusterCapacityPollFrequencySeconds&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The polling frequency (in seconds) to gather cluster capacity metrics&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;30&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.clusterPerformancePollFrequencySeconds&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The polling frequency (in seconds) to gather cluster performance metrics&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;20&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.quotaCapacityPollFrequencySeconds&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The polling frequency (in seconds) to gather volume capacity metrics&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;30&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.concurrentPowerscaleQueries&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The number of simultaneous metrics queries to make to PowerScale(MUST be less than 10; otherwise, several request errors from PowerScale will ensue.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.endpoint&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Endpoint for pod leader election&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;karavi-metrics-powerscale&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.service.type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes service type&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ClusterIP&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.logLevel&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;INFO&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.logFormat&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Output logs in the specified format (Valid values: text, json)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;text&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.isiClientOptions.isiSkipCertificateValidation&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Skip OneFS API server&amp;rsquo;s certificates&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.isiClientOptions.isiAuthType&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;0 to enable session-based Authentication; 1 to enables basic Authentication&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.isiClientOptions.isiLogVerbose&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Decide High/Medium/Low content of the OneFS REST API message&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.authorization.enabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;../../../authorization&#34;&gt;Authorization&lt;/a&gt; is an optional feature to apply credential shielding of the backend PowerScale.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.authorization.proxyHost&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Hostname of the csm-authorization server.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.authorization.skipCertificateValidation&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;A boolean that enables/disables certificate validation of the csm-authorization server.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -400,13 +519,15 @@ Options:
   --namespace[=]&amp;lt;namespace&amp;gt;                                   Namespace where Karavi Observability will be installed
   Optional
   --csi-powerflex-namespace[=]&amp;lt;csi powerflex namespace&amp;gt;       Namespace where CSI PowerFlex is installed, default is &amp;#39;vxflexos&amp;#39;
+  --csi-powerstore-namespace[=]&amp;lt;csi powerstore namespace&amp;gt;     Namespace where CSI PowerStore is installed, default is &amp;#39;csi-powerstore&amp;#39;
+  --csi-powerscale-namespace[=]&amp;lt;csi powerscale namespace&amp;gt;     Namespace where CSI PowerScale is installed, default is &amp;#39;isilon&amp;#39;
   --set-file                                                  Set values from files used during helm installation (can be specified multiple times)
   --skip-verify                                               Skip verification of the environment
   --values[=]&amp;lt;values.yaml&amp;gt;                                    Values file, which defines configuration values
   --verbose                                                   Display verbose logging
   --version[=]&amp;lt;helm chart version&amp;gt;                            Helm chart version to install, default value will be latest
   --help                                                      Help
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSM for Authorization currently does not support the Observability module for PowerStore.  Therefore setting &lt;code&gt;enable-authorization&lt;/code&gt; is not supported in this case.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSM for Authorization currently does not support the Observability module for PowerStore. Therefore setting &lt;code&gt;enable-authorization&lt;/code&gt; is not supported in this case.&lt;/p&gt;
 &lt;h3 id=&#34;executing-the-installer&#34;&gt;Executing the Installer&lt;/h3&gt;
 &lt;p&gt;To perform an online installation of CSM for Observability, the following steps should be performed:&lt;/p&gt;
 &lt;ol&gt;
@@ -426,6 +547,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;ul&gt;
 &lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured in &lt;code&gt;myvalues.yaml&lt;/code&gt; for CSM Observability.&lt;/li&gt;
+&lt;li&gt;If CSM for Authorization is enabled for CSI PowerScale, the &lt;code&gt;karaviMetricsPowerscale.authorization&lt;/code&gt; parameters must be properly configured in &lt;code&gt;myvalues.yaml&lt;/code&gt; for CSM Observability.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
 ---------------------------------------------------------------------------------
@@ -510,7 +632,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;docker&lt;/code&gt; will be used to pull images from public image registries, tag them, and push them to a private registry.&lt;br&gt;Required on both the system building the offline bundle as well as the system preparing for installation. &lt;br&gt;Tested version is &lt;code&gt;docker&lt;/code&gt; 18.09&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt; will be used to pull images from public image registries, tag them, and push them to a private registry.&lt;br&gt;Required on both the system building the offline bundle as well as the system preparing for installation. &lt;br&gt;Tested version is &lt;code&gt;docker&lt;/code&gt; 18.09+&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -548,10 +670,12 @@ The following example will install CSM for Observability into the CSM namespace.
 *
 * Downloading and saving Docker images
 
-  dellemc/csm-topology:v0.3.0
-  dellemc/csm-metrics-powerflex:v0.3.0
-  otel/opentelemetry-collector:0.9.0
-  nginxinc/nginx-unprivileged:1.18
+  dellemc/csm-topology:v1.3.0
+  dellemc/csm-metrics-powerflex:v1.3.0
+  dellemc/csm-metrics-powerstore:v1.3.0
+  dellemc/csm-metrics-powerscale:v1.3.0
+  otel/opentelemetry-collector:0.42.0
+  nginxinc/nginx-unprivileged:1.20
 
 *
 * Compressing offline-karavi-observability-bundle.tar.gz
@@ -574,10 +698,12 @@ The following example will install CSM for Observability into the CSM namespace.
 *
 * Loading, tagging, and pushing Docker images to registry &amp;lt;my-registry&amp;gt;:5000/
 
-  dellemc/csm-topology:v0.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v0.3.0
-  dellemc/csm-metrics-powerflex:v0.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v0.3.0
-  otel/opentelemetry-collector:0.9.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/opentelemetry-collector:0.9.0
-  nginxinc/nginx-unprivileged:1.18 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/nginx-unprivileged:1.18
+  dellemc/csm-topology:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.3.0
+  dellemc/csm-metrics-powerflex:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.3.0
+  dellemc/csm-metrics-powerstore:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.3.0
+  dellemc/csm-metrics-powerscale:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.3.0
+  otel/opentelemetry-collector:0.42.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/opentelemetry-collector:0.42.0
+  nginxinc/nginx-unprivileged:1.20 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/nginx-unprivileged:1.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;perform-helm-installation&#34;&gt;Perform Helm installation&lt;/h3&gt;
@@ -600,6 +726,11 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;CSI Driver for PowerStore&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;CSI Driver for PowerScale:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f - 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerScale, perform these steps:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap isilon-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | sed &amp;#39;s/name: karavi-authorization-config/name: isilon-karavi-authorization-config/&amp;#39; | sed &amp;#39;s/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/&amp;#39; | sed &amp;#39;s/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Now that the required images have been made available and the Helm chart&amp;rsquo;s configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart&amp;rsquo;s repository.&lt;/p&gt;
@@ -608,6 +739,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;li&gt;Optionally, you could provide your own &lt;a href=&#34;../helm/#configuration&#34;&gt;configurations&lt;/a&gt;. A sample values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured.&lt;/li&gt;
+&lt;li&gt;If CSM for Authorization is enabled for CSI PowerScale, the &lt;code&gt;karaviMetricsPowerscale.authorization&lt;/code&gt; parameters must be properly configured.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm install -n install-namespace app-name karavi-observability
 

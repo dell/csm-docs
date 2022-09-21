@@ -14,298 +14,6 @@
     
     
     <item>
-      <title>Docs: CSM Installer</title>
-      <link>https://dell.github.io/csm-docs/docs/deployment/csminstaller/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/deployment/csminstaller/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Installer is currently deprecated and will no longer be supported as of CSM v1.4.0&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note: The CSM Installer only supports installation of CSM 1.0 Modules and CSI Drivers in environments that do not have any existing deployments of CSM or CSI Drivers. The CSM Installer does not support the upgrade of existing CSM or CSI Driver deployments.&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The CSM (Container Storage Modules) Installer simplifies the deployment and management of Dell Container Storage Modules and CSI Drivers to provide persistent storage for your containerized workloads.&lt;/p&gt;
-&lt;h2 id=&#34;csm-installer-supported-modules-and-dell-csi-drivers&#34;&gt;CSM Installer Supported Modules and Dell CSI Drivers&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Modules/Drivers&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;CSM 1.0&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Authorization&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Observability&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Replication&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Resiliency&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI Driver for PowerScale&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;v2.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI Driver for Unity XT&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;v2.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI Driver for PowerStore&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;v2.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI Driver for PowerFlex&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;v2.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI Driver for PowerMax&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;v2.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;The CSM Installer must first be deployed in a Kubernetes environment using Helm.  After which, the CSM Installer can be used through the following interfaces:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;./csmcli&#34;&gt;CSM CLI&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./csmapi&#34;&gt;REST API&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;how-to-deploy-the-container-storage-modules-installer&#34;&gt;How to Deploy the Container Storage Modules Installer&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Add the &lt;code&gt;dell&lt;/code&gt; helm repository:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm repo add dell https://dell.github.io/helm-charts
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;If securing the API service and database, following steps 2 to 4 to generate the certificates, or skip to step 5 to deploy without certificates&lt;/strong&gt;&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;Generate self-signed certificates using the following commands:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir api-certs
-
-openssl req \
-    -newkey rsa:4096 -nodes -sha256 -keyout api-certs/ca.key \
-    -x509 -days 365 -out api-certs/ca.crt -subj &amp;#39;/&amp;#39;
-
-openssl req \
-    -newkey rsa:4096 -nodes -sha256 -keyout api-certs/cert.key \
-    -out api-certs/cert.csr -subj &amp;#39;/&amp;#39;
-
-openssl x509 -req -days 365 -in api-certs/cert.csr -CA api-certs/ca.crt \
-    -CAkey api-certs/ca.key -CAcreateserial -out api-certs/cert.crt
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;If required, download the &lt;code&gt;cockroach&lt;/code&gt; binary used to generate certificates for the cockroach-db:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl https://binaries.cockroachdb.com/cockroach-v21.1.8.linux-amd64.tgz | tar -xz &amp;amp;&amp;amp; sudo cp -i cockroach-v21.1.8.linux-amd64/cockroach /usr/local/bin/
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;Generate the certificates required for the cockroach-db service:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir db-certs
-
-cockroach cert create-ca --certs-dir=db-certs --ca-key=db-certs/ca.key
-
-cockroach cert create-node cockroachdb-0.cockroachdb.csm-installer.svc.cluster.local cockroachdb-public cockroachdb-0.cockroachdb --certs-dir=db-certs/ --ca-key=db-certs/ca.key
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In case multiple instances of cockroachdb are required add all nodes names while creating nodes on the certificates&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cockroach cert create-node cockroachdb-0.cockroachdb.csm-installer.svc.cluster.local cockroachdb-1.cockroachdb.csm-installer.svc.cluster.local cockroachdb-2.cockroachdb.csm-installer.svc.cluster.local cockroachdb-public cockroachdb-0.cockroachdb cockroachdb-1.cockroachdb cockroachdb-2.cockroachdb --certs-dir=db-certs/ --ca-key=db-certs/ca.key
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cockroach cert create-client root --certs-dir=db-certs/ --ca-key=db-certs/ca.key
-
-cockroach cert list --certs-dir=db-certs/
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;Create a values.yaml file that contains JWT, Cipher key, and Admin username and password of CSM Installer that are required by the installer during helm installation. See the &lt;a href=&#34;#configuration&#34;&gt;Configuration&lt;/a&gt; section for other values that can be set during helm installation.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: &lt;code&gt;jwtKey&lt;/code&gt;  will be used as a shared secret in HMAC algorithm for generating jwt token, &lt;code&gt;cipherKey&lt;/code&gt; will be used as a symmetric key in AES cipher for encryption of storage system credentials. Those parameters are arbitrary, and you can set them to whatever you like. Just ensure that &lt;code&gt;cipherKey&lt;/code&gt; is exactly 32 characters long.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# string of any length 
-jwtKey:
-
-# string of exactly 32 characters
-cipherKey: &amp;#34;&amp;#34;
-
-# Admin username of CSM Installer
-adminUserName:
-
-# Admin password of CSM Installer
-adminPassword:
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;6&#34;&gt;
-&lt;li&gt;Follow step &lt;code&gt;a&lt;/code&gt; if certificates are being used or step &lt;code&gt;b&lt;/code&gt; if certificates are not being used:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;a) Install the helm chart, specifying the certificates generated in the previous steps:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm install -n csm-installer --create-namespace \
-   --set-file serviceCertificate=api-certs/cert.crt \
-   --set-file servicePrivateKey=api-certs/cert.key \
-   --set-file databaseCertificate=db-certs/node.crt \
-   --set-file databasePrivateKey=db-certs/node.key \
-   --set-file dbClientCertificate=db-certs/client.root.crt \
-   --set-file dbClientPrivateKey=db-certs/client.root.key \
-   --set-file caCrt=db-certs/ca.crt \
-   -f values.yaml \
-   csm-installer dell/csm-installer 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;b) If not deploying with certificates, execute the following command:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm install -n csm-installer --create-namespace \
-   --set-string scheme=http \
-   --set-string dbSSLEnabled=&amp;#34;false&amp;#34; \
-   -f values.yaml \
-   csm-installer dell/csm-installer 
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: In an OpenShift environment, the cockroachdb StatefulSet will run privileged pods so that it can mount the Persistent Volume used for storage. Follow the documentation for your OpenShift version to enable privileged pods.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;configuration&#34;&gt;Configuration&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;csmInstallerCount&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of replicas for the CSM Installer Deployment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;dbInstanceCount&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of replicas for the CSM Database StatefulSet&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;2&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;imagePullPolicy&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image pull policy for the CSM Installer images&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Always&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;host&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Host or IP that will be used to bind to the CSM Installer API service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;0.0.0.0&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;port&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Port that will be used to bind to the CSM Installer API service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;8080&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;scheme&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Scheme used for the CSM Installer API service. Valid values are &lt;code&gt;https&lt;/code&gt; and &lt;code&gt;http&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;https&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;jwtKey&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Key used to sign the JWT token&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;cipherKey&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Key used to encrypt/decrypt user and storage system credentials. Must be 32 characters in length.&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;logLevel&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Log level used for the CSM Installer. Valid values are &lt;code&gt;DEBUG&lt;/code&gt;, &lt;code&gt;INFO&lt;/code&gt;, &lt;code&gt;WARN&lt;/code&gt;, &lt;code&gt;ERROR&lt;/code&gt;, and &lt;code&gt;FATAL&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;INFO&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;dbHost&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Host name of the Cockroach DB instance&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;cockroachdb-public&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;dbPort&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Port number to access the Cockroach DB instance&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;26257&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;dbSSLEnabled&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Enable SSL for the Cockroach DB connectiong&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;installerImage&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Location of the CSM Installer Docker Image&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;dellemc/dell-csm-installer:v1.0.0&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;dataCollectorImage&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Location of the CSM Data Collector Docker Image&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;dellemc/csm-data-collector:v1.0.0&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;adminUserName&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Username to authenticate with the CSM Installer&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;adminPassword&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Password to authenticate with the CSM Installer&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;dbVolumeDirectory&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Directory on the worker node to use for the Persistent Volume&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;/var/lib/cockroachdb&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;api_server_ip&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;If using Swagger, set to public IP or host of the CSM Installer API service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;localhost&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id=&#34;how-to-upgrade-the-container-storage-modules-installer&#34;&gt;How to Upgrade the Container Storage Modules Installer&lt;/h2&gt;
-&lt;p&gt;When a new version of the CSM Installer helm chart is available, the following steps can be used to upgrade to the latest version.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: Upgrading the CSM Installer does not upgrade the Dell CSI Drivers or modules that were previously deployed with the installer. The CSM Installer does not support upgrading of the Dell CSI Drivers or modules. The Dell CSI Drivers and modules must be deleted and re-deployed using the latest CSM Installer in order to get the most recent version of the Dell CSI Driver and modules.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;Update the helm repository.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm repo update
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;Follow step &lt;code&gt;a&lt;/code&gt; if certificates were used during the initial installation of the helm chart or step &lt;code&gt;b&lt;/code&gt; if certificates were not used:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;a) Upgrade the helm chart, specifying the certificates used during initial installation:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm upgrade -n csm-installer \
-   --set-file serviceCertificate=api-certs/cert.crt \
-   --set-file servicePrivateKey=api-certs/cert.key \
-   --set-file databaseCertificate=db-certs/node.crt \
-   --set-file databasePrivateKey=db-certs/node.key \
-   --set-file dbClientCertificate=db-certs/client.root.crt \
-   --set-file dbClientPrivateKey=db-certs/client.root.key \
-   --set-file caCrt=db-certs/ca.crt \
-   -f values.yaml \
-   csm-installer dell/csm-installer
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;b) If not deploying with certificates, execute the following command:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm upgrade -n csm-installer \
-   --set-string scheme=http \
-   --set-string dbSSLEnabled=&amp;#34;false&amp;#34; \
-   -f values.yaml \
-   csm-installer dell/csm-installer
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;how-to-uninstall-the-container-storage-modules-installer&#34;&gt;How to Uninstall the Container Storage Modules Installer&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Delete the Helm chart&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm delete -n csm-installer csm-installer
-&lt;/code&gt;&lt;/pre&gt;
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: CSM Operator</title>
       <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -317,11 +25,11 @@ adminPassword:
         
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The Dell CSM Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.&lt;/p&gt;
+&lt;p&gt;The Dell Container Storage Modules Operator Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.&lt;/p&gt;
 
 &lt;/div&gt;
 
-&lt;p&gt;The Dell CSM Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
+&lt;p&gt;The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
 &lt;h2 id=&#34;supported-platforms&#34;&gt;Supported Platforms&lt;/h2&gt;
 &lt;p&gt;Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.&lt;/p&gt;
 &lt;table&gt;
@@ -369,6 +77,11 @@ adminPassword:
 &lt;td&gt;CSM Authorization&lt;/td&gt;
 &lt;td&gt;1.2.0 +&lt;/td&gt;
 &lt;td&gt;v1.2.0 +&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSM Authorization&lt;/td&gt;
+&lt;td&gt;1.3.0 +&lt;/td&gt;
+&lt;td&gt;v1.3.0 +&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -449,7 +162,7 @@ adminPassword:
 &lt;/figure&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.2&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;installation-via-operator-hub&#34;&gt;Installation via Operator Hub&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;dell-csm-operator&lt;/code&gt; can be installed via Operator Hub on upstream Kubernetes clusters &amp;amp; Red Hat OpenShift Clusters.&lt;/p&gt;

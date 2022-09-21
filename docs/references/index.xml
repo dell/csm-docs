@@ -14,6 +14,334 @@
     
     
     <item>
+      <title>Docs: CLI</title>
+      <link>https://dell.github.io/csm-docs/docs/references/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/references/cli/</guid>
+      <description>
+        
+        
+        &lt;p&gt;dellctl is a common command line interface(CLI) used to interact with and manage your &lt;a href=&#34;https://github.com/dell/csm&#34;&gt;Container Storage Modules&lt;/a&gt; (CSM) resources.
+This document outlines all dellctl commands, their intended use, options that can be provided to alter their execution, and expected output from those commands.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl&#34;&gt;dellctl&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;dellctl is used to interact with Container Storage Modules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-cluster&#34;&gt;dellctl cluster&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Manipulate one or more k8s cluster configurations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-cluster-add&#34;&gt;dellctl cluster add&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Add a k8s cluster to be managed by dellctl&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-cluster-remove&#34;&gt;dellctl cluster remove&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Removes a k8s cluster managed by dellctl&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-cluster-get&#34;&gt;dellctl cluster get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;List all clusters currently being managed by dellctl&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-backup&#34;&gt;dellctl backup&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Allows to manipulate application backups/clones&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-backup-create&#34;&gt;dellctl backup create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Create an application backup/clones&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-backup-delete&#34;&gt;dellctl backup delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Delete application backups&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-backup-get&#34;&gt;dellctl backup get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Get application backups&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-restore&#34;&gt;dellctl restore&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Allows to manipulate application restores&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-restore-create&#34;&gt;dellctl restore create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Restore an application backup&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-restore-delete&#34;&gt;dellctl restore delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Delete application restores&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-restore-get&#34;&gt;dellctl restore get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Get application restores&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;installation-instructions&#34;&gt;Installation instructions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Download &lt;code&gt;dellctl&lt;/code&gt; from &lt;a href=&#34;https://github.com/dell/csm/releases/tag/v1.4.0&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;chmod +x dellctl&lt;/li&gt;
+&lt;li&gt;Move &lt;code&gt;dellctl&lt;/code&gt; to &lt;code&gt;/usr/local/bin&lt;/code&gt; or add &lt;code&gt;dellctl&lt;/code&gt;&amp;rsquo;s containing directory path to PATH environment variable.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;dellctl --help&lt;/code&gt; to know available commands or run &lt;code&gt;dellctl command --help&lt;/code&gt; to know more about a specific command.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;By default, the &lt;code&gt;dellctl&lt;/code&gt; runs against local cluster(referenced by &lt;code&gt;KUBECONFIG&lt;/code&gt; environment variable or by a kube config file present at default location).
+The user can register one or more remote clusters for &lt;code&gt;dellctl&lt;/code&gt;, and run any &lt;code&gt;dellctl&lt;/code&gt; command against these clusters by specifying the registered cluster id to the command.&lt;/p&gt;
+&lt;h2 id=&#34;general-commands&#34;&gt;General Commands&lt;/h2&gt;
+&lt;h3 id=&#34;dellctl&#34;&gt;dellctl&lt;/h3&gt;
+&lt;p&gt;dellctl is a CLI tool for managing Dell Container Storage Resources.&lt;/p&gt;
+&lt;h5 id=&#34;flags&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help      help for dellctl
+  -v, --version   version for dellctl  
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Outputs help text&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-cluster&#34;&gt;dellctl cluster&lt;/h3&gt;
+&lt;p&gt;Allows to manipulate one or more k8s cluster configurations&lt;/p&gt;
+&lt;h5 id=&#34;available-commands&#34;&gt;Available Commands&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  add         Adds a k8s cluster to be managed by dellctl
+  remove      Removes a k8s cluster managed by dellctl
+  get         List all clusters currently being managed by dellctl  
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;flags-1&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for cluster  
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-1&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Outputs help text&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-cluster-add&#34;&gt;dellctl cluster add&lt;/h3&gt;
+&lt;p&gt;Add one or more k8s clusters to be managed by dellctl&lt;/p&gt;
+&lt;h5 id=&#34;flags-2&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Flags:
+  -n, --names strings   cluster names
+  -f, --files strings   paths for kube config files
+  -u, --uids strings    uids of the kube-system namespaces in the clusters
+      --force           forcefully add cluster
+  -h, --help            help for add
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-2&#34;&gt;Output&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl cluster add -n cluster1 -f ~/kubeconfigs/cluster1-kubeconfig
+ INFO Adding clusters ...
+ INFO Cluster: cluster1
+ INFO Successfully added cluster cluster1 in /root/.dellctl/clusters/cluster1 folder.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Add a cluster with it&amp;rsquo;s uid&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl cluster add -n cluster2 -f ~/kubeconfigs/cluster2-kubeconfig -u &amp;#34;035133aa-5b65-4080-a813-34a7abe48180&amp;#34;
+ INFO Adding clusters ...
+ INFO Cluster: cluster2
+ INFO Successfully added cluster cluster2 in /root/.dellctl/clusters/cluster2 folder.
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-cluster-remove&#34;&gt;dellctl cluster remove&lt;/h3&gt;
+&lt;p&gt;Removes a k8s cluster by name from the list of clusters being managed by dellctl&lt;/p&gt;
+&lt;h5 id=&#34;aliases&#34;&gt;Aliases&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  remove, rm
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;flags-3&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help          help for remove
+  -n, --name string   cluster name
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-3&#34;&gt;Output&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl cluster remove -n cluster1
+ INFO Removing cluster with id cluster1
+ INFO Removed cluster with id cluster1
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-cluster-get&#34;&gt;dellctl cluster get&lt;/h3&gt;
+&lt;p&gt;List all clusters currently being managed by dellctl&lt;/p&gt;
+&lt;h5 id=&#34;aliases-1&#34;&gt;Aliases&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  get, ls
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;flags-4&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for get
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-4&#34;&gt;Output&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl cluster get
+CLUSTER ID      VERSION URL                             UID
+cluster1        v1.22   https://1.2.3.4:6443
+cluster2        v1.22   https://1.2.3.5:6443            035133aa-5b65-4080-a813-34a7abe48180
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;commands-related-to-application-mobility-operations&#34;&gt;Commands related to application mobility operations&lt;/h2&gt;
+&lt;h3 id=&#34;dellctl-backup&#34;&gt;dellctl backup&lt;/h3&gt;
+&lt;p&gt;Allows to manipulate application backups/clones&lt;/p&gt;
+&lt;h5 id=&#34;available-commands-1&#34;&gt;Available Commands&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  create      Create an application backup/clones
+  delete      Delete application backups
+  get         Get application backups
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;flags-5&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for backup  
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-5&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Outputs help text&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-backup-create&#34;&gt;dellctl backup create&lt;/h3&gt;
+&lt;p&gt;Create an application backup/clones&lt;/p&gt;
+&lt;h5 id=&#34;flags-6&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --cluster-id string                               Id of the cluster managed by dellctl
+      --exclude-namespaces stringArray                  List of namespace names to exclude from the backup.
+      --include-namespaces stringArray                  List of namespace names to include in the backup (use &amp;#39;*&amp;#39; for all namespaces). (default *)
+      --ttl duration                                    Backup retention period. (default 720h0m0s)
+      --exclude-resources stringArray                   Resources to exclude from the backup, formatted as resource.group, such as storageclasses.storage.k8s.io.
+      --include-resources stringArray                   Resources to include in the backup, formatted as resource.group, such as storageclasses.storage.k8s.io (use &amp;#39;*&amp;#39; for all resources).
+      --backup-location string                          Storage location where k8s resources and application data will be backed up to. (default &amp;#34;default&amp;#34;)
+      --data-mover string                               Data mover to be used to backup application data. (default &amp;#34;Restic&amp;#34;)
+      --include-cluster-resources optionalBool[=true]   Include cluster-scoped resources in the backup
+  -l, --label-selector labelSelector                    Only backup resources matching this label selector. (default &amp;lt;none&amp;gt;)
+  -n, --namespace string                                The namespace in which application mobility service should operate. (default &amp;#34;app-mobility-system&amp;#34;)
+      --clones stringArray                              Creates an application clone into target clusters managed by dellctl. Specify optional namespace mappings where the clone is created. Example: &amp;#39;cluster1/sourceNamespace1:targetNamespace1&amp;#39;, &amp;#39;cluster1/sourceNamespace1:targetNamespace1;cluster2/sourceNamespace2:targetNamespace2&amp;#39;
+  -h, --help                                            help for create
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-6&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Create a backup of the applications running in namespace &lt;code&gt;demo1&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl backup create backup1 --include-namespaces demo1
+ INFO Backup request &amp;#34;backup1&amp;#34; submitted successfully.
+ INFO Run &amp;#39;dellctl backup get backup1&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Create clones of the application running in namespace &lt;code&gt;demo1&lt;/code&gt;, on clusters with id &lt;code&gt;cluster1&lt;/code&gt; and &lt;code&gt;cluster2&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl backup create demo-app-clones --include-namespaces demo1 --clones &amp;#34;cluster1/demo1:restore-ns1&amp;#34; --clones &amp;#34;cluster2/demo1:restore-ns1&amp;#34;
+ INFO Clone request &amp;#34;demo-app-clones&amp;#34; submitted successfully.
+ INFO Run &amp;#39;dellctl backup get demo-app-clones&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Take backup of application running in namespace &lt;code&gt;demo3&lt;/code&gt; on remote cluster with id &lt;code&gt;cluster2&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl backup create backup4 --include-namespaces demo3 --cluster-id cluster2
+ INFO Backup request &amp;#34;backup4&amp;#34; submitted successfully.
+ INFO Run &amp;#39;dellctl backup get backup4&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-backup-delete&#34;&gt;dellctl backup delete&lt;/h3&gt;
+&lt;p&gt;Delete one or more application backups&lt;/p&gt;
+&lt;h5 id=&#34;flags-7&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --all                 Delete all backups
+      --cluster-id string   Id of the cluster managed by dellctl
+      --confirm             Confirm deletion
+  -h, --help                help for delete
+  -n, --namespace string    The namespace in which application mobility service should operate. (default &amp;#34;app-mobility-system&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-7&#34;&gt;Output&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl backup delete backup1
+Are you sure you want to continue (Y/N)? Y
+ INFO Request to delete backup &amp;#34;backup1&amp;#34; submitted successfully.
+ INFO The backup will be fully deleted after all associated data (backup files, pod volume data, restores, velero backup) are removed.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Delete multiple backups&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl backup delete backup1 backup2
+Are you sure you want to continue (Y/N)? Y
+ INFO Request to delete backup &amp;#34;backup1&amp;#34; submitted successfully.
+ INFO The backup will be fully deleted after all associated data (backup files, pod volume data, restores, velero backup) are removed.
+ INFO Request to delete backup &amp;#34;backup2&amp;#34; submitted successfully.
+ INFO The backup will be fully deleted after all associated data (backup files, pod volume data, restores, velero backup) are removed.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Delete all backups without asking for user confirmation&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl backup delete --all --confirm
+ INFO Request to delete backup &amp;#34;backup4&amp;#34; submitted successfully.
+ INFO The backup will be fully deleted after all associated data (backup files, pod volume data, restores, velero backup) are removed.
+ INFO Request to delete backup &amp;#34;demo-app-clones&amp;#34; submitted successfully.
+ INFO The backup will be fully deleted after all associated data (backup files, pod volume data, restores, velero backup) are removed.
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-backup-get&#34;&gt;dellctl backup get&lt;/h3&gt;
+&lt;p&gt;Get application backups&lt;/p&gt;
+&lt;h5 id=&#34;flags-8&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for get
+  -n, --namespace string    The namespace in which application mobility service should operate. (default &amp;#34;app-mobility-system&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-8&#34;&gt;Output&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl backup get
+NAME              STATUS      CREATED                         EXPIRES                         STORAGE LOCATION   DATA MOVER   CLONED   TARGET CLUSTERS
+backup1           Completed   2022-07-27 11:51:00 -0400 EDT   2022-08-26 11:51:00 -0400 EDT   default            Restic       false
+backup2           Completed   2022-07-27 11:59:24 -0400 EDT   2022-08-26 11:59:42 -0400 EDT   default            Restic       false
+backup4           Completed   2022-07-27 12:02:54 -0400 EDT   NA                              default            Restic       false
+demo-app-clones   Restored    2022-07-27 11:53:37 -0400 EDT   2022-08-26 11:53:37 -0400 EDT   default            Restic       true     cluster1, cluster2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Get backups from remote cluster with id &lt;code&gt;cluster2&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl backup get --cluster-id cluster2
+NAME              STATUS      CREATED                         EXPIRES                         STORAGE LOCATION   DATA MOVER   CLONED   TARGET CLUSTERS
+backup1           Completed   2022-07-27 11:52:42 -0400 EDT   NA                              default            Restic       false
+backup2           Completed   2022-07-27 12:02:29 -0400 EDT   NA                              default            Restic       false
+backup4           Completed   2022-07-27 12:01:49 -0400 EDT   2022-08-26 12:01:49 -0400 EDT   default            Restic       false
+demo-app-clones   Completed   2022-07-27 11:54:55 -0400 EDT   NA                              default            Restic       true     cluster1, cluster2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Get backups with their names&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl backup get backup1 demo-app-clones
+NAME              STATUS      CREATED                         EXPIRES                         STORAGE LOCATION   DATA MOVER   CLONED   TARGET CLUSTERS
+backup1           Completed   2022-07-27 11:51:00 -0400 EDT   2022-08-26 11:51:00 -0400 EDT   default            Restic       false
+demo-app-clones   Completed   2022-07-27 11:53:37 -0400 EDT   2022-08-26 11:53:37 -0400 EDT   default            Restic       true     cluster1, cluster2
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-restore&#34;&gt;dellctl restore&lt;/h3&gt;
+&lt;p&gt;Allows to manipulate application restores&lt;/p&gt;
+&lt;h5 id=&#34;available-commands-2&#34;&gt;Available Commands&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  create      Restore an application backup
+  delete      Delete application restores
+  get         Get application restores
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;flags-9&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for restore  
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-9&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Outputs help text&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-restore-create&#34;&gt;dellctl restore create&lt;/h3&gt;
+&lt;p&gt;Restore an application backup&lt;/p&gt;
+&lt;h5 id=&#34;flags-10&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --cluster-id string                               Id of the cluster managed by dellctl
+      --from-backup string                              Backup to restore from
+      --namespace-mappings mapStringString              Map of source namespace names to target namespace names to restore into in the form src1:dst1,src2:dst2,...
+      --exclude-namespaces stringArray                  List of namespace names to exclude from the backup.
+      --include-namespaces stringArray                  List of namespace names to include in the backup (use &amp;#39;*&amp;#39; for all namespaces). (default *)
+      --exclude-resources stringArray                   Resources to exclude from the backup, formatted as resource.group, such as storageclasses.storage.k8s.io.
+      --include-resources stringArray                   Resources to include in the backup, formatted as resource.group, such as storageclasses.storage.k8s.io (use &amp;#39;*&amp;#39; for all resources).
+      --restore-volumes optionalBool[=true]             Whether to restore volumes from snapshots.
+      --include-cluster-resources optionalBool[=true]   Include cluster-scoped resources in the backup
+  -n, --namespace string                                The namespace in which application mobility service should operate. (default &amp;#34;app-mobility-system&amp;#34;)
+  -h, --help                                            help for create
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-10&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Restore application backup &lt;code&gt;backup1&lt;/code&gt; on local cluster in namespace &lt;code&gt;restorens1&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl restore create restore1 --from-backup backup1 --namespace-mappings &amp;#34;demo1:restorens1&amp;#34;
+ INFO Restore request &amp;#34;restore1&amp;#34; submitted successfully.
+ INFO Run &amp;#39;dellctl restore get restore1&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Restore application backup &lt;code&gt;backup1&lt;/code&gt; on remote cluster &lt;code&gt;cluster2&lt;/code&gt; in namespace &lt;code&gt;demo1&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl restore create restore1 --from-backup backup1 --cluster-id cluster2
+ INFO Restore request &amp;#34;restore1&amp;#34; submitted successfully.
+ INFO Run &amp;#39;dellctl restore get restore1&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-restore-delete&#34;&gt;dellctl restore delete&lt;/h3&gt;
+&lt;p&gt;Delete one or more application restores&lt;/p&gt;
+&lt;h5 id=&#34;flags-11&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --all                 Delete all restores
+      --cluster-id string   Id of the cluster managed by dellctl
+      --confirm             Confirm deletion
+  -h, --help                help for delete
+  -n, --namespace string    The namespace in which application mobility service should operate. (default &amp;#34;app-mobility-system&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-11&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Delete a restore created on remote cluster with id &lt;code&gt;cluster2&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl restore delete restore1 --cluster-id cluster2
+Are you sure you want to continue (Y/N)? Y
+ INFO Request to delete restore &amp;#34;restore1&amp;#34; submitted successfully.
+ INFO The restore will be fully deleted after all associated data (restore files, velero restore) are removed.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Delete multiple restores&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl restore delete restore1 restore4
+Are you sure you want to continue (Y/N)? Y
+ INFO Request to delete restore &amp;#34;restore1&amp;#34; submitted successfully.
+ INFO The restore will be fully deleted after all associated data (restore files, velero restore) are removed.
+ INFO Request to delete restore &amp;#34;restore4&amp;#34; submitted successfully.
+ INFO The restore will be fully deleted after all associated data (restore files, velero restore) are removed.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Delete all restores without asking for user confirmation&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl restore delete --all --confirm
+ INFO Request to delete restore &amp;#34;restore1&amp;#34; submitted successfully.
+ INFO The restore will be fully deleted after all associated data (restore files, velero restore) are removed.
+ INFO Request to delete restore &amp;#34;restore2&amp;#34; submitted successfully.
+ INFO The restore will be fully deleted after all associated data (restore files, velero restore) are removed.
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-restore-get&#34;&gt;dellctl restore get&lt;/h3&gt;
+&lt;p&gt;Get application restores&lt;/p&gt;
+&lt;h5 id=&#34;flags-12&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for get
+  -n, --namespace string    The namespace in which application mobility service should operate. (default &amp;#34;app-mobility-system&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-12&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Get all the application restores created on local cluster&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl restore get
+NAME       BACKUP    STATUS      CREATED                         COMPLETED
+restore1   backup1   Completed   2022-07-27 12:35:29 -0400 EDT
+restore4   backup1   Completed   2022-07-27 12:39:42 -0400 EDT
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Get all the application restores created on remote cluster with id &lt;code&gt;cluster2&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl restore get --cluster-id cluster2
+NAME       BACKUP    STATUS      CREATED                         COMPLETED
+restore1   backup1   Completed   2022-07-27 12:38:43 -0400 EDT
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Get restores with their names&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl restore get restore1
+NAME       BACKUP    STATUS      CREATED                         COMPLETED
+restore1   backup1   Completed   2022-07-27 12:35:29 -0400 EDT
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: CSM FAQ</title>
       <link>https://dell.github.io/csm-docs/docs/references/faq/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
