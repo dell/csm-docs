@@ -291,11 +291,3 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. Sample volume snapshot class manifests are available at `samples/volumesnapshotclass/`. Use these sample manifests to create a volumesnapshotclass for creating volume snapshots; uncomment/ update the manifests as per the requirements.
 
-### What happens to my existing Volume Snapshot Classes?
-
-*Upgrading from CSI PowerScale v2.3 driver*:
-The existing volume snapshot class will be retained.
-
-*Upgrading from an older version of the driver*:
-It is strongly recommended upgrading the earlier versions of CSI PowerScale to 1.6 or higher before upgrading to 2.3.
-
