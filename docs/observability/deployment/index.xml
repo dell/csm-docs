@@ -656,7 +656,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user]# chmod +x offline-installer.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Build the bundle by providing the Helm chart name as the argument:&lt;/p&gt;
+&lt;p&gt;Build the bundle by providing the Helm chart name as the argument. Below is a sample output that may be different on your machine.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user]# ./offline-installer.sh -c dell/karavi-observability
 
 *
@@ -673,7 +673,7 @@ The following example will install CSM for Observability into the CSM namespace.
   dellemc/csm-topology:v1.3.0
   dellemc/csm-metrics-powerflex:v1.3.0
   dellemc/csm-metrics-powerstore:v1.3.0
-  dellemc/csm-metrics-powerscale:v1.3.0
+  dellemc/csm-metrics-powerscale:v1.0.0
   otel/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20
 
@@ -692,7 +692,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user]# cd offline-karavi-observability-bundle
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Prepare the bundle by providing the internal Docker registry URL.&lt;/p&gt;
+&lt;p&gt;Prepare the bundle by providing the internal Docker registry URL. Below is a sample output that may be different on your machine.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle]# ./offline-installer.sh -p &amp;lt;my-registry&amp;gt;:5000
 
 *
@@ -701,7 +701,7 @@ The following example will install CSM for Observability into the CSM namespace.
   dellemc/csm-topology:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.3.0
   dellemc/csm-metrics-powerflex:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.3.0
   dellemc/csm-metrics-powerstore:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.3.0
-  dellemc/csm-metrics-powerscale:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.3.0
+  dellemc/csm-metrics-powerscale:v1.0.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.0.0
   otel/opentelemetry-collector:0.42.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/nginx-unprivileged:1.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
