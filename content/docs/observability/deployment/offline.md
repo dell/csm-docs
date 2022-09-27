@@ -56,7 +56,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     [user@anothersystem /home/user]# chmod +x offline-installer.sh
     ```
 
-3. Build the bundle by providing the Helm chart name as the argument:
+3. Build the bundle by providing the Helm chart name as the argument. Below is a sample output that may be different on your machine. 
 
     ```
     [user@anothersystem /home/user]# ./offline-installer.sh -c dell/karavi-observability
@@ -75,7 +75,7 @@ To perform an offline installation of a Helm chart, the following steps should b
       dellemc/csm-topology:v1.3.0
       dellemc/csm-metrics-powerflex:v1.3.0
       dellemc/csm-metrics-powerstore:v1.3.0
-      dellemc/csm-metrics-powerscale:v1.3.0
+      dellemc/csm-metrics-powerscale:v1.0.0
       otel/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.20
 
@@ -97,7 +97,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     [user@anothersystem /home/user]# cd offline-karavi-observability-bundle
     ```
 
-3. Prepare the bundle by providing the internal Docker registry URL.
+3. Prepare the bundle by providing the internal Docker registry URL. Below is a sample output that may be different on your machine.
 
     ```
     [user@anothersystem /home/user/offline-karavi-observability-bundle]# ./offline-installer.sh -p <my-registry>:5000
@@ -108,7 +108,7 @@ To perform an offline installation of a Helm chart, the following steps should b
       dellemc/csm-topology:v1.3.0 -> <my-registry>:5000/csm-topology:v1.3.0
       dellemc/csm-metrics-powerflex:v1.3.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.3.0
       dellemc/csm-metrics-powerstore:v1.3.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.3.0
-      dellemc/csm-metrics-powerscale:v1.3.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.3.0
+      dellemc/csm-metrics-powerscale:v1.0.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.0.0
       otel/opentelemetry-collector:0.42.0 -> <my-registry>:5000/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.20 -> <my-registry>:5000/nginx-unprivileged:1.20
     ```
