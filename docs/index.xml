@@ -3186,10 +3186,10 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;p&gt;Create the secret by running &lt;code&gt;kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Copy the default values.yaml file &lt;code&gt;cp ./helm/csi-powerstore/values.yaml ./dell-csi-helm-installer/my-powerstore-settings.yaml&lt;/code&gt; and update parameters as per the requirement.&lt;/p&gt;
+&lt;p&gt;Copy the default values.yaml file &lt;code&gt;cd dell-csi-helm-installer &amp;amp;&amp;amp; cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml&lt;/code&gt; and update parameters as per the requirement.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Run the &lt;code&gt;csi-install&lt;/code&gt; script with the option &lt;em&gt;--upgrade&lt;/em&gt; by running: &lt;code&gt;./dell-csi-helm-installer/csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Run the &lt;code&gt;csi-install&lt;/code&gt; script with the option &lt;em&gt;--upgrade&lt;/em&gt; by running: &lt;code&gt;./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;upgrade-using-dell-csi-operator&#34;&gt;Upgrade using Dell CSI Operator:&lt;/h2&gt;

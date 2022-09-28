@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-09-28T14:33:36+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Upgrade PowerStore CSI driver">
-<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
-<meta itemprop="wordCount" content="397">
+<meta itemprop="dateModified" content="2022-09-28T14:33:36+05:30" />
+<meta itemprop="wordCount" content="400">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Upgrade PowerStore CSI driver"/>
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.827d129f80d4257944aeb005f5fc4a99.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1cd3e5eae9e918de96db8528e36ca170.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.827d129f80d4257944aeb005f5fc4a99.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1cd3e5eae9e918de96db8528e36ca170.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -638,10 +638,10 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 <p>Create the secret by running <code>kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml</code></p>
 </li>
 <li>
-<p>Copy the default values.yaml file <code>cp ./helm/csi-powerstore/values.yaml ./dell-csi-helm-installer/my-powerstore-settings.yaml</code> and update parameters as per the requirement.</p>
+<p>Copy the default values.yaml file <code>cd dell-csi-helm-installer &amp;&amp; cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml</code> and update parameters as per the requirement.</p>
 </li>
 <li>
-<p>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running: <code>./dell-csi-helm-installer/csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade</code>.</p>
+<p>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running: <code>./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade</code>.</p>
 </li>
 </ol>
 <h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
