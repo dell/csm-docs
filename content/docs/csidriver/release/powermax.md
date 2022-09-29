@@ -10,6 +10,8 @@ description: Release notes for PowerMax CSI driver
 ### New Features/Changes
 - [Added support for Kubernetes 1.25.](https://github.com/dell/csm/issues/478)
 
+>Note: Replication for PowerMax is supported in Kubernetes 1.25.
+
 ### Fixed Issues
 There are no fixed issues in this release.
 
