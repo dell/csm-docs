@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-09-29T12:22:50+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-09-29T16:59:25+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Installing CSI Driver for PowerStore via Helm
 ">
-<meta itemprop="dateModified" content="2022-09-29T12:22:50+05:30" />
+<meta itemprop="dateModified" content="2022-09-29T16:59:25+05:30" />
 <meta itemprop="wordCount" content="2605">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.c8cf90adb6f5fe9e911778531352dd2c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.f1206a1753fec7e1dd86ef1041b9b659.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.c8cf90adb6f5fe9e911778531352dd2c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.f1206a1753fec7e1dd86ef1041b9b659.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -775,11 +775,11 @@ volume stats value under node should be set to true.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Default value: None</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># interval: Interval of monitoring volume health condition</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># volumeHealthMonitorInterval: Interval of monitoring volume health condition</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Allowed values: Number followed by unit (s,m,h)</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Examples: 60s, 5m, 1h</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Default value: 60s</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">interval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">60s</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">volumeHealthMonitorInterval</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">60s</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">node</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">healthMonitor</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -926,7 +926,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 <td>false</td>
 </tr>
 <tr>
-<td>controller.healthMonitor.interval</td>
+<td>controller.healthMonitor.volumeHealthMonitorInterval</td>
 <td>Interval of monitoring volume health condition</td>
 <td>No</td>
 <td>60s</td>
