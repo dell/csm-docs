@@ -150,7 +150,7 @@ controller:
     # Allowed values: Number followed by unit (s,m,h)
     # Examples: 60s, 5m, 1h
     # Default value: 60s
-    volumeHealthMonitorInterval: 60s
+    healthMonitorInterval: 60s
 
 node:
   healthMonitor:
@@ -215,7 +215,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | controller.snapshot.snapNamePrefix | Defines prefix to apply to the names of a created snapshots | No | "csisnap" |
 | controller.resizer.enabled | Allows to enable/disable resizer sidecar with driver installation for volume expansion feature | No | "true" |
 | controller.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
-| controller.healthMonitor.volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
+| controller.healthMonitor.healthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
 | controller.nodeSelector | Defines what nodes would be selected for pods of controller deployment | Yes | " " |
 | controller.tolerations  | Defines tolerations that would be applied to controller deployment | Yes | " " |
 | node.nodeNamePrefix | Defines the string added to each node that the CSI driver registers | No | "csi-node" |
