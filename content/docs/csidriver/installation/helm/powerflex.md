@@ -196,7 +196,7 @@ Use the below command to replace or update the secret:
 | tolerations              | Defines tolerations that would be applied to controller deployment. Leave as blank to install the controller on worker nodes only. If deploying on master nodes is desired, uncomment out this section.                                                                                                                                                                                                            | Yes     | " "     |
 | **healthMonitor** |  This section configures the optional deployment of the external health monitor sidecar, for controller side volume health monitoring. | - | - |
 | enabled | Enable/Disable deployment of external health monitor sidecar. | No | false |
-| volumeHealthMonitorInterval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)| No | 60s |
+| interval | Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)| No | 60s |
 | **node** | This section allows the configuration of node-specific parameters. | - | - |
 | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | nodeSelector | Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
