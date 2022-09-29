@@ -5,7 +5,7 @@ weight: 1
 Description: >
   Deployment
 ---
-Encryption is enabled as part of the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
+Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
 In the tech preview release, Encryption can only be enabled via Helm chart installation.
 
 Except for additional Encryption related configuration outlined on this page, 
