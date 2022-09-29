@@ -9,7 +9,9 @@ Description: >
 ## Release Notes - CSM Replication 1.3.0
 
 ### New Features/Changes
-- Added support for Kubernetes 1.25
+- Added support for Kubernetes 1.24
+- Added support for OpenShift 4.10
+- Added volume upgrade/downgrade functionality for replication volumes
 
 
 ### Fixed Issues
