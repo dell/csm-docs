@@ -50,9 +50,9 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 #### Full list of CSI Drivers and versions supported by the Dell CSI Operator
 | CSI Driver         | Version   | ConfigVersion  | Kubernetes Version   | OpenShift Version     |
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
-| CSI PowerMax       | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
-| CSI PowerMax       | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI PowerMax       | 2.3.0     | v2.3.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerMax       | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI PowerMax       | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerFlex      | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerFlex      | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerFlex      | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
