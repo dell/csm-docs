@@ -67,7 +67,7 @@ To install CSM for Resiliency with the driver, the following changes are require
 | arrayConnectivityPollRate | Optional | The minimum polling rate in seconds to determine if the array has connectivity to a node. Should not be set to less than 5 seconds. See the specific section for each array type for additional guidance. | controller & node |
 | arrayConnectivityConnectionLossThreshold | Optional | Gives the number of failed connection polls that will be deemed to indicate array connectivity loss. Should not be set to less than 3. See the specific section for each array type for additional guidance. | controller |
 | driver-config-params | Required | String that set the path to a file containing configuration parameter(for instance, Log levels) for a driver.  | controller & node |
-| ignoreVolumelessPods | Optional | Boolean value that if set to true will enable CSM for Resiliency to ignore pods without persistent volume attach to the pod. | controller & node |
+| ignoreVolumelessPods | Optional | Boolean value that if set to true will enable CSM for Resiliency to ignore pods without persistent volume attached to the pod. | controller & node |
 
 ## PowerFlex Specific Recommendations
 
