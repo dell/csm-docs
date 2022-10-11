@@ -88,7 +88,7 @@ Install CSI Driver for Unity XT using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.4.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
+ * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.5.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
@@ -102,7 +102,7 @@ Procedure
       * ArrayId corresponds to the serial number of Unity XT array.
       * Unity XT Array username must have role as Storage Administrator to be able to perform CRUD operations.
       * If the user is using complex K8s version like "v1.21.3-mirantis-1", use below kubeVersion check in helm/csi-unity/Chart.yaml file.
-            kubeVersion: ">= 1.21.0-0 < 1.25.0-0"
+            kubeVersion: ">= 1.21.0-0 < 1.26.0-0"
 
 2. Copy the `helm/csi-unity/values.yaml` into a file named `myvalues.yaml` in the same directory of `csi-install.sh`, to customize settings for installation.
 
@@ -283,7 +283,7 @@ Procedure
     A successful installation must display messages that look similar to the following samples:
     ```
     ------------------------------------------------------
-    > Installing CSI Driver: csi-unity on 1.22
+    > Installing CSI Driver: csi-unity on 1.25
     ------------------------------------------------------
     ------------------------------------------------------
     > Checking to see if CSI Driver is already installed
@@ -291,56 +291,57 @@ Procedure
     ------------------------------------------------------
     > Verifying Kubernetes and driver configuration
     ------------------------------------------------------
-    |- Kubernetes Version: 1.22
+    |- Kubernetes Version: 1.25
     |
     |- Driver: csi-unity                                                
     |
     |- Verifying Kubernetes version                                     
+      |
+      |--> Verifying minimum Kubernetes version                         Success
+      |
+      |--> Verifying maximum Kubernetes version                         Success
     |
-    |--> Verifying minimum Kubernetes version                         Success
+    |- Verifying that required namespaces have been created             Success
     |
-    |--> Verifying maximum Kubernetes version                         Success
+    |- Verifying that required secrets have been created                Success
     |
-    |- Verifying that required namespaces have been created           Success
-    |
-    |- Verifying that required secrets have been created              Success
-    |
-    |- Verifying that optional secrets have been created              Success
-    |
-    |- Verifying alpha snapshot resources                               
-    |
-    |--> Verifying that alpha snapshot CRDs are not installed         Success
+    |- Verifying that optional secrets have been created                Success
+      |
+      |- Verifying alpha snapshot resources
+      |
+      |--> Verifying that alpha snapshot CRDs are not installed         Success
     |
     |- Verifying sshpass installation..                                 |
-    |- Verifying iSCSI installation                                     
+    |- Verifying iSCSI installation
     Enter the root password of 10.**.**.**:
     
     Enter the root password of 10.**.**.**:
     Success
     |
-    |- Verifying snapshot support                                       
+    |- Verifying snapshot support
+      |
+      |--> Verifying that snapshot CRDs are available                   Success
+      |
+      |--> Verifying that the snapshot controller is available          Success
     |
-    |--> Verifying that snapshot CRDs are available                   Success
+    |- Verifying helm version                                           Success
     |
-    |--> Verifying that the snapshot controller is available          Success
-    |
-    |- Verifying helm version                                         Success
-    |
-    |- Verifying helm values version                                  Success
-    
+    |- Verifying helm values version                                    Success
+
     ------------------------------------------------------
     > Verification Complete - Success
     ------------------------------------------------------
     |
-    |- Installing Driver                                              Success
-    |
-    |--> Waiting for Deployment unity-controller to be ready          Success
-    |
-    |--> Waiting for DaemonSet unity-node to be ready                 Success
+    |- Installing Driver                                                Success
+      |
+      |--> Waiting for Deployment unity-controller to be ready          Success
+      |
+      |--> Waiting for DaemonSet unity-node to be ready                 Success
     ------------------------------------------------------
     > Operation complete
     ------------------------------------------------------
     ```
+
     Results:
 
     At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command `kubectl get pods -n unity` to get the status of the pods and you will see the following:

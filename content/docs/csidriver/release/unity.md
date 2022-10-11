@@ -3,11 +3,11 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.4.0
+## Release Notes - CSI Unity XT v2.5.0
 
 ### New Features/Changes
 
-- [Added support to configure fsGroupPolicy](https://github.com/dell/csm/issues/361)
+- [Added support to kubernetes 1.25](https://github.com/dell/csm/issues/478)
 
 ### Known Issues
 

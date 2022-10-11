@@ -62,6 +62,7 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 | CSI Unity XT       | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI Unity XT       | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI Unity XT       | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI Unity XT       | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerStore     | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerStore     | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerStore     | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
@@ -97,7 +98,7 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 #### Steps
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
-1. Clone and checkout the required dell-csi-operator version using `git clone -b v1.9.0 https://github.com/dell/dell-csi-operator.git`.
+1. Clone and checkout the required dell-csi-operator version using `git clone -b v1.10.0 https://github.com/dell/dell-csi-operator.git`.
 2. cd dell-csi-operator
 3. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
@@ -126,7 +127,7 @@ For installation of the supported drivers, a `CustomResource` has to be created 
 ### Pre-requisites for upstream Kubernetes Clusters
 On upstream Kubernetes clusters, make sure to install
 * VolumeSnapshot CRDs
-  * On clusters running v1.22,v1.23 & v1.24, make sure to install v1 VolumeSnapshot CRDs
+  * On clusters running v1.23,v1.24 & v1.25, make sure to install v1 VolumeSnapshot CRDs
 * External Volume Snapshot Controller with the correct version
 
 ### Pre-requisites for Red Hat OpenShift Clusters
@@ -274,7 +275,7 @@ The below notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.4.0
+        configVersion: v2.5.0
    ```
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
