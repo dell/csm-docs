@@ -97,12 +97,12 @@ metadata:
   namespace: test-unity
 spec:
   driver:
-    configVersion: v2.4.0
+    configVersion: v2.5.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      image: "dellemc/csi-unity:v2.4.0"
+      image: "dellemc/csi-unity:v2.5.0"
       imagePullPolicy: IfNotPresent
     sideCars:
       - name: provisioner
