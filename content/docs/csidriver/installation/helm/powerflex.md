@@ -124,7 +124,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
     | password  | Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.                     | true     | -       |
     | systemID  | System name/ID of PowerFlex system.                           | true     | -       |
     | allSystemNames | List of previous names of powerflex array if used for PV create     | false    | -       |
-    | endpoint  | REST API gateway HTTPS endpoint for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on          | true     | -       |
+    | endpoint  | REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on          | true     | -       |
     | skipCertificateValidation  | Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface. | true     | true    |
     | isDefault | An array having isDefault=true is for backward compatibility. This parameter should occur once in the list. | false    | false   |
     | mdm       | mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
