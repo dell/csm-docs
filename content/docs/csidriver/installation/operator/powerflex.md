@@ -95,7 +95,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       # System name/ID of PowerFlex system.	
       # Required: true
       systemID: "ID1"
-      # REST API gateway HTTPS endpoint for PowerFlex system.
+      # REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system.
       # Required: true
       endpoint: "https://127.0.0.1"
       # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
