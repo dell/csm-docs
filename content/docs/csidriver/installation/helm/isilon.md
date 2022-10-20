@@ -61,13 +61,29 @@ The common snapshot controller must be installed only once in the cluster irresp
    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
-## Volume Health Monitoring
 
+#### Installation example
+You can install CRDs and the default snapshot controller by running the following commands:
+```bash
+git clone https://github.com/kubernetes-csi/external-snapshotter/
+cd ./external-snapshotter
+git checkout release-<your-version>
+kubectl kustomize client/config/crd | kubectl create -f -
+kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
+```
+
+*NOTE:*
+- It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
+
+### (Optional) Volume Health Monitoring
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
+
+If enabled capacity metrics (used & free capacity, used & free inodes) for PowerScale PV will be expose in Kubernetes metrics API.
+
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
 health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
 volume stats value under node should be set to true.
-   ```yaml
+```yaml
 controller:
   healthMonitor:
     # enabled: Enable/Disable health monitor of CSI volumes
@@ -89,30 +105,16 @@ node:
     #   false: disable checking of health condition of CSI volumes
     # Default value: None
     enabled: false
-   ```
-
-#### Installation example 
-
-You can install CRDs and the default snapshot controller by running the following commands:
-```bash
-git clone https://github.com/kubernetes-csi/external-snapshotter/
-cd ./external-snapshotter
-git checkout release-<your-version>
-kubectl kustomize client/config/crd | kubectl create -f -
-kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
 ```
 
-*NOTE:*
-- It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
-
 ### (Optional) Replication feature Requirements
-
 Applicable only if you decided to enable the Replication feature in `values.yaml`
 
 ```yaml
 replication:
   enabled: true
 ```
+
 #### Replication CRD's
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
@@ -203,18 +205,19 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | isiPath | The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute. | No | default value from values.yaml |
    | mountEndpoint | Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if [CSM-Authorization](https://github.com/dell/karavi-authorization) is enabled. | No | - |
 
+### User privileges
    The username specified in *secret.yaml* must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:
-     
 
-   | Privilege | Type |
-   | --------- | ----- |
-   | ISI_PRIV_LOGIN_PAPI | Read Only |
-   | ISI_PRIV_NFS | Read Write |
-   | ISI_PRIV_QUOTA | Read Write |
-   | ISI_PRIV_SNAPSHOT | Read Write |
-   | ISI_PRIV_IFS_RESTORE | Read Only |
-   | ISI_PRIV_NS_IFS_ACCESS | Read Only |
-   | ISI_PRIV_IFS_BACKUP | Read Only |
+   | Privilege              | Type       |
+   | ---------------------- | ---------- |
+   | ISI_PRIV_LOGIN_PAPI    | Read Only  |
+   | ISI_PRIV_NFS           | Read Write |
+   | ISI_PRIV_QUOTA         | Read Write |
+   | ISI_PRIV_SNAPSHOT      | Read Write |
+   | ISI_PRIV_IFS_RESTORE   | Read Only  |
+   | ISI_PRIV_NS_IFS_ACCESS | Read Only  |
+   | ISI_PRIV_IFS_BACKUP    | Read Only  |
+   | ISI_PRIV_SYNCIQ        | Read Write |
 
 Create isilon-creds secret using the following command:
   <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
