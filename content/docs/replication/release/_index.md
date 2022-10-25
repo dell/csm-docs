@@ -25,6 +25,6 @@ Description: >
 
 | Github ID | Description  |   
 |-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [514](https://github.com/dell/csm/issues/514) | When creating a replicated PV in PowerScale, the replicated PV's AzServiceIP property has the target PowerScale endpoint instead of the one defined in the target Storage class.                            |   
-| [515](https://github.com/dell/csm/issues/515) | If you failover with an application still running and having a mounted the volume, on the target site we cannot mount the PVC due to : "mount.nfs: Stale file handle".                                      |   
-| [518](https://github.com/dell/csm/issues/518) | On CSM for Replication with PowerScale, after a repctl failover to a target cluster, the source directory has been removed from the PowerScale. The PersistentVolume Object is still present in Kubernetes. |   
+| [514](https://github.com/dell/csm/issues/514) | **PowerScale:** When creating a replicated PV in PowerScale, the replicated PV's AzServiceIP property has the target PowerScale endpoint instead of the one defined in the target Storage class.                            |   
+| [515](https://github.com/dell/csm/issues/515) | **PowerScale:** If you failover with an application still running and having a mounted the volume, on the target site we cannot mount the PVC due to : "mount.nfs: Stale file handle".                                      |   
+| [518](https://github.com/dell/csm/issues/518) | **PowerScale:** On CSM for Replication with PowerScale, after a repctl failover to a target cluster, the source directory has been removed from the PowerScale. The PersistentVolume Object is still present in Kubernetes. |   
