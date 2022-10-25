@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0dd38b695b400cb73ef038101b4d6ce9.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0a6302b7f8af078ca15b3701adf89630.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0dd38b695b400cb73ef038101b4d6ce9.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0a6302b7f8af078ca15b3701adf89630.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -592,7 +592,28 @@
 <li>[<code>PowerScale</code>] Deleting RG will break replication link before trying to delete group on array</li>
 </ul>
 <h3 id="known-issues">Known Issues</h3>
-<p>There are no known issues in this release.</p>
+<table>
+<thead>
+<tr>
+<th>Github ID</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/dell/csm/issues/514">514</a></td>
+<td><strong>PowerScale:</strong> When creating a replicated PV in PowerScale, the replicated PV&rsquo;s AzServiceIP property has the target PowerScale endpoint instead of the one defined in the target Storage class.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/dell/csm/issues/515">515</a></td>
+<td><strong>PowerScale:</strong> If you failover with an application still running and the volume mounted on the target site, then we cannot mount the PVC due to : &ldquo;mount.nfs: Stale file handle&rdquo;.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/dell/csm/issues/518">518</a></td>
+<td><strong>PowerScale:</strong> On CSM for Replication with PowerScale, after a repctl failover to a target cluster, the source directory has been removed from the PowerScale. The PersistentVolume Object is still present in Kubernetes.</td>
+</tr>
+</tbody>
+</table>
 
         <div class="section-index">
     
