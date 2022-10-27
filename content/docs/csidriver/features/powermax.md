@@ -56,6 +56,8 @@ status:
 
 ### Creating PVCs with VolumeSnapshots as Source
 
+>Note: This is not supported for metro volumes.
+
 The following is a sample manifest for creating a PVC with a VolumeSnapshot as a source:
 ```yaml
 apiVersion: v1
