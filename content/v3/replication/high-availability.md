@@ -60,3 +60,4 @@ deletionPolicy: Delete
 parameters:
   SYMID: '000000000001'
 ```
+>Note: Restoring snapshots to a metro volume is currently not supported.
