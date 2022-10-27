@@ -32,7 +32,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 IMPORTANT: delete previous v1aplha2 version of CRD and vgs resources created using alpha version.
 	   Snapshots on array will remain if memberReclaimPolicy=retain was used.
 ```
-If you want to install the VGS CRD from a pre-generated yaml, you can do so with the following command (run in top-level folder):
+If you want to install the VGS CRD from a pre-generated yaml, you can do so with this command (run in top-level folder):
 ```
 kubectl apply -f config/crd/vgs-install.yaml
 ```
@@ -41,7 +41,7 @@ If you want to create your own CRD for installation with Kustomize, then the com
 
 ### 3. Deploy VGS in CSI Driver with Helm Chart Parameters
 The drivers that support Helm chart deployment allow the CSM Volume Group Snapshotter to be _optionally_ deployed 
-by variables in the chart. There is a _vgsnapshotter_ block specified in the _values.yaml_ file of the chart that will look similar the text below by default:
+by variables in the chart. There is a _vgsnapshotter_ block specified in the _values.yaml_ file of the chart that will look similar this default text:
 
 ```
 # volume group snapshotter(vgsnapshotter) details
@@ -51,9 +51,9 @@ vgsnapshotter:
   image: 
  
 ```
-To deploy CSM Volume Group Snapshotter with the driver, the following changes are required:
+To deploy CSM Volume Group Snapshotter with the driver, these changes are required:
 1. Enable CSM Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true. 
-2. In the vgsnapshotter.image field, put the location of the image you created following the steps in the build section, or link to one already built (such as the one on DockerHub, `dellemc/csi-volumegroup-snapshotter:v1.2.0`).
+2. In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on DockerHub, `dellemc/csi-volumegroup-snapshotter:v1.2.0`).
 3. Install/upgrade the driver normally. You should now have VGS successfully deployed with the driver!
 
 
