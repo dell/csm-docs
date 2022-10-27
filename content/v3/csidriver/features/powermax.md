@@ -13,8 +13,6 @@ to configure the driver and ReverseProxy, see the relevant section [here](../../
 
 ## Volume Snapshot Feature
 
->Note: This is not supported for metro volumes.
-
 The CSI PowerMax driver version 1.7 and later supports v1 snapshots.
 
 In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
@@ -58,6 +56,8 @@ status:
 
 ### Creating PVCs with VolumeSnapshots as Source
 
+>Note: This is not supported for metro volumes.
+
 The following is a sample manifest for creating a PVC with a VolumeSnapshot as a source:
 ```yaml
 apiVersion: v1
@@ -79,6 +79,8 @@ spec:
 ```
 
 ### Creating PVCs with PVCs as source
+
+>Note: This is not supported for replicated volumes.
 
 This is a sample manifest for creating a PVC with another PVC as a source:
 ```yaml
