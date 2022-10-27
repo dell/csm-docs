@@ -80,7 +80,7 @@ spec:
 
 ### Creating PVCs with PVCs as source
 
-This is not supported for replicated volumes.
+>Note: This is not supported for replicated volumes.
 
 This is a sample manifest for creating a PVC with another PVC as a source:
 ```yaml
