@@ -717,7 +717,7 @@ spec:
 
 >Note: Default description value is `pvcName-pvcNamespace`. 
 
-The following is the list of all the attributes supported by PowerStore CSI driver: 
+This is the list of all the attributes supported by PowerStore CSI driver: 
 
 | Block Volume | NFS Volume |
 | --- | --- |
@@ -735,7 +735,7 @@ The following is the list of all the attributes supported by PowerStore CSI driv
 CSI PowerStore driver version 2.5.0 and above supports Storage Capacity Tracking.
 
 This feature helps the scheduler to make more informed choices about where to start pods which depend on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
-If such a node is not available, the pods stay in Pending state, i.e, not scheduled.
+If such a node is not available, the pods stay in Pending state. This means they are not scheduled.
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
