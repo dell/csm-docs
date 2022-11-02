@@ -717,7 +717,7 @@ spec:
 
 >Note: Default description value is `pvcName-pvcNamespace`. 
 
-The following is the list of all the attribtues supported by PowerStore CSI driver: 
+This is the list of all the attributes supported by PowerStore CSI driver: 
 
 | Block Volume | NFS Volume |
 | --- | --- |
@@ -730,3 +730,17 @@ The following is the list of all the attribtues supported by PowerStore CSI driv
 >Make sure that the attributes specified are supported by the version of PowerStore array used. 
 
 >Configurable Volume Attributes feature is supported with Helm.
+
+## Storage Capacity Tracking
+CSI PowerStore driver version 2.5.0 and above supports Storage Capacity Tracking.
+
+This feature helps the scheduler to make more informed choices about where to start pods which depend on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay in Pending state. This means they are not scheduled.
+
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
+
+The attribute `storageCapacity.enabled` in `my-powerstore-settings.yaml` can be used to enabled/disabled the feature during driver installation .
+To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute.
+
+**Note:**
+>This feature requires kubernetes v1.24 and above and will be automatically disabled in lower version of kubernetes.
