@@ -19,12 +19,19 @@ CSM for Replication provides the following capabilities:
 | Capability                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
 | ----------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
 | Replicate data using native storage array based replication                         | yes      | yes        | yes        | no        | no    |
+| Asynchronous file volume replication                         | yes      | yes        | yes        | no        | no    |
+| Asynchronous block volume replication                         | yes      | no        | n/a        | no        | no    |
+| Synchronous file volume replication                         | yes      | no        | no        | no        | no    |
+| Synchronous block volume replication                         | yes      | no        | n/a        | no        | no    |
+| Active-Active (Metro) block volume replication                         | yes      | no        | n/a        | no        | no    |
+| Active-Active (Metro) file volume replication                         | yes      | no        | no        | no        | no    |
 | Create `PersistentVolume` objects in the cluster representing the replicated volume | yes      | yes        | yes        | no        | no    |
 | Create `DellCSIReplicationGroup` objects in the cluster                             | yes      | yes        | yes        | no        | no    |
 | Failover & Reprotect applications using the replicated volumes                      | yes      | yes        | yes        | no        | no    |
 | Online Volume Expansion for replicated volumes				       | yes      | no	      | no	   | no	       | no    |
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters | yes | yes | yes | no | no |
 {{</table>}}
+
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 
@@ -77,19 +84,6 @@ the objects still exist in pairs.
 * Replication with METRO mode does not need Replicator sidecar and common controller.
 * Different namespaces cannot share the same RDF group for creating volumes with ASYNC mode for PowerMax.
 * Same RDF group cannot be shared across different replication modes for PowerMax.
-
-### CSM for Replication Module Capabilities
-
-CSM for Replication provides the following capabilities:
-
-{{<table "table table-striped table-bordered table-sm">}}
-| Capability                                                      | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
-| ----------------------------------------------------------------| -------- | ---------- | ---------- | --------- | ----- |
-| Asynchronous replication of PVs accross or single K8s clusters  | yes      | yes (block)| yes        | no        | no    |
-| Synchronous replication of PVs accross or single  K8s clusters  | yes      | no         | no         | no        | no    |
-| Metro replication single (stretched) cluster                    | yes      | no         | no         | no        | no    |
-| Replication actions (failover, reprotect)                       | yes      | yes        | yes        | no        | no    |
-{{</table>}}
 
 ### Supported Platforms
 
