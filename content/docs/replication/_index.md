@@ -19,8 +19,8 @@ CSM for Replication provides the following capabilities:
 | Capability                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
 | ----------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
 | Replicate data using native storage array based replication                         | yes      | yes        | yes        | no        | no    |
-| Asynchronous file volume replication                         | yes      | yes        | yes        | no        | no    |
-| Asynchronous block volume replication                         | yes      | no        | n/a        | no        | no    |
+| Asynchronous file volume replication                         | yes      | no        | yes        | no        | no    |
+| Asynchronous block volume replication                         | yes      | yes        | n/a        | no        | no    |
 | Synchronous file volume replication                         | yes      | no        | no        | no        | no    |
 | Synchronous block volume replication                         | yes      | no        | n/a        | no        | no    |
 | Active-Active (Metro) block volume replication                         | yes      | no        | n/a        | no        | no    |
