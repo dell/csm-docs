@@ -7,7 +7,7 @@ description: >
 
 ## Configuring PowerFlex CSI Driver with CSM for Authorization
 
-Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:
+Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow these steps to configure the CSI Drivers to work with the Authorization sidecar:
 
 1. Apply the secret containing the token data into the driver namespace. It's assumed that the Kubernetes administrator has the token secret manifest saved in `/tmp/token.yaml`.
 
@@ -16,7 +16,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     kubectl apply -f /tmp/token.yaml -n vxflexos
    ```
 
-2. Edit the following parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
+2. Edit these parameters in `samples/secret/karavi-authorization-config.json` file in the [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
 
   | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -29,7 +29,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
    | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
 
 
-Create the karavi-authorization-config secret using the following command:
+Create the karavi-authorization-config secret using this command:
 
 `kubectl -n vxflexos create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
 
@@ -50,7 +50,7 @@ Create the karavi-authorization-config secret using the following command:
 
     Update *endpoint* to match the endpoint in `samples/secret/karavi-authorization-config.json`
 
-5. Create the vxflexos-config secret using the following command:
+5. Create the vxflexos-config secret using this command:
 
     `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl apply -f -`
 
