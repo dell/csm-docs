@@ -17,7 +17,7 @@ The storage administrator must first configure the proxy server with the followi
 > - The `RPM deployment` will use the address and port of the server (i.e. grpc.DNS-hostname:443).
 > - The `Helm deployment` will use the address and port of the Ingress hosts for the storage, tenant, and role services.
 
-### Configure Storage
+### Configuring Storage
 
 A `storage` entity in CSM Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:
 

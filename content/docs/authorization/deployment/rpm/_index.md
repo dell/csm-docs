@@ -130,7 +130,7 @@ If errors occur during installation, review the [Troubleshooting](../../troubles
 
 ## Configuring the CSM for Authorization Proxy Server
 
-The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Kubernetes storage administrator.
+The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
 
 Please follow the steps outlined in the [proxy server](../../configuration/proxy-server) configuration.
 
@@ -168,7 +168,7 @@ Replace the data in `config.yaml` under the `data` field with your new, encoded 
 
 >__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is required if certificates were not provided in `$HOME/.karavi/config.json`
 
-`karavictl generate token --tenant $TenantName --insecure --addr grpc.DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
+`karavictl generate token --tenant $TenantName --insecure --addr grpc.DNS-hostname:443 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
 
 ## CSM for Authorization Proxy Server Dynamic Configuration Settings
 

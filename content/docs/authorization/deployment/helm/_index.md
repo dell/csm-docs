@@ -133,7 +133,7 @@ Karavictl commands and intended use can be found [here](../../cli/).
 
 ## Configuring the CSM Authorization Proxy Server
 
-The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Kubernetes storage administrator.
+The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
 
 Configuration is achieved by using `karavictl` to connect to the storage, tenant, and role services. In this example, we will be referencing an installation using `csm-authorization.com` as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster's master node.
 
