@@ -130,107 +130,15 @@ If errors occur during installation, review the [Troubleshooting](../../troubles
 
 ## Configuring the CSM for Authorization Proxy Server
 
-The storage administrator must first configure the proxy server with the following:
-- Storage systems
-- Tenants
-- Roles
-- Bind roles to tenants
+The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Kubernetes storage administrator.
 
-Run the following commands on the Authorization proxy server:
->__Note__: The `--insecure` flag is only necessary if certificates were not provided in `$HOME/.karavi/config.json`.
-
-  ```console
-  # Specify any desired name
-  export RoleName=""
-  export RoleQuota=""
-  export TenantName=""
-
-  # Specify info about Array1
-  export Array1Type=""
-  export Array1SystemID=""
-  export Array1User=""
-  export Array1Password=""
-  export Array1Pool=""
-  export Array1Endpoint=""
-  
-  # Specify info about Array2
-  export Array2Type=""
-  export Array2SystemID=""
-  export Array2User=""
-  export Array2Password=""
-  export Array2Pool=""
-  export Array2Endpoint=""
-
-  # Specify IPs
-  export DriverHostVMIP="" 
-  export DriverHostVMPassword=""
-  export DriverHostVMUser=""
-
-  # Specify Authorization proxy host address. NOTE: this is not the same as IP
-  export AuthorizationProxyHost=""
-
-  echo === Creating Storage(s) ===
-  # Add array1 to authorization
-  karavictl storage create \
-            --type ${Array1Type} \
-            --endpoint  ${Array1Endpoint} \
-            --system-id ${Array1SystemID} \
-            --user ${Array1User} \
-			      --password ${Array1Password} \
-            --array-insecure
-  
-  # Add array2 to authorization
-   karavictl storage create \
-            --type ${Array2Type} \
-            --endpoint  ${Array2Endpoint} \
-            --system-id ${Array2SystemID} \
-            --user ${Array2User} \
-			      --password ${Array2Password} \
-            --array-insecure
-    
-  echo === Creating Tenant ===
-  karavictl tenant create -n $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}"
-
-  echo === Creating Role ===
-  karavictl role create \
-           --role=${RoleName}=${Array1Type}=${Array1SystemID}=${Array1Pool}=${RoleQuota} \
-           --role=${RoleName}=${Array2Type}=${Array2SystemID}=${Array2Pool}=${RoleQuota}   
-
-  echo === === Binding Role ===
-  karavictl rolebinding create --tenant $TenantName  --role $RoleName --insecure --addr "grpc.${AuthorizationProxyHost}"
-  ```
-
-### Generate a Token
-
-After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
-
->__Note__: 
-> - The `--insecure` flag is only necessary if certificates were not provided in `$HOME/.karavi/config.json`.
-> - This sample copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
-
-  ```
-  echo === Generating token ===
-  karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
-
-  echo === Copy token to Driver Host ===
-  sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
-  ```
-
-### Copy the karavictl Binary to the Kubernetes Master Node
-
-The karavictl binary is available from the CSM for Authorization proxy server.  This needs to be copied to the Kubernetes master node for Kubernetes tenant admins so the Kubernetes tenant admins can configure the Dell CSI driver with CSM for Authorization.
-
-```
-sshpass -p ${DriverHostPassword} scp bin/karavictl root@{DriverHostVMIP}:/tmp/karavictl
-```
-
->__Note__: The storage admin is responsible for copying the binary to a location accessible by the Kubernetes tenant admin.
+Please follow the steps outlined in the [proxy server](../../configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
-The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
+The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant administrator.
 
-Please follow the steps outlined in [PowerFlex](../powerflex), [PowerMax](../powermax), or [PowerScale](../powerscale) to configure the CSI Driver to work with the Authorization sidecar.
+Please follow the steps outlined in [PowerFlex](../../configuration/powerflex), [PowerMax](../../configuration/powermax), or [PowerScale](../../configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
 
 ## Updating CSM for Authorization Proxy Server Configuration
 
@@ -258,9 +166,9 @@ Copy the new, encoded data and edit the `karavi-config-secret` with the new data
 
 Replace the data in `config.yaml` under the `data` field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.
 
->__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is only necessary if certificates were not provided in `$HOME/.karavi/config.json`
+>__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is required if certificates were not provided in `$HOME/.karavi/config.json`
 
-`karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
+`karavictl generate token --tenant $TenantName --insecure --addr grpc.DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
 
 ## CSM for Authorization Proxy Server Dynamic Configuration Settings
 

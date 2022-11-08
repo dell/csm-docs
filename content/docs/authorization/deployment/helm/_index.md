@@ -87,8 +87,8 @@ The following third-party components are optionally installed in the specified n
 | redis.images.commander | The image to use for Redis Commander. | Yes | rediscommander/redis-commander:latest |
 | redis.storageClass | The storage class for Redis to use for persistence. If not supplied, the default storage class is used. | No | - |
 
- *NOTE*: 
-- The tenant, role, and storage services use GRPC. If the Ingress Controller requires annotations to support GRPC, they must be supplied.
+>__Note__: 
+> - The tenant, role, and storage services use GRPC. If the Ingress Controller requires annotations to support GRPC, they must be supplied.
 
 6. Install the driver using `helm`:
 
@@ -133,13 +133,9 @@ Karavictl commands and intended use can be found [here](../../cli/).
 
 ## Configuring the CSM Authorization Proxy Server
 
-The storage administrator must first configure the proxy server with the following:
-- Storage systems
-- Tenants
-- Roles
-- Role bindings
+The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Kubernetes storage administrator.
 
-This is done using `karavictl` to connect to the storage, tenant, and role services. In this example, we will be referencing an installation using `csm-authorization.com` as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster's master node.
+Configuration is achieved by using `karavictl` to connect to the storage, tenant, and role services. In this example, we will be referencing an installation using `csm-authorization.com` as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster's master node.
 
 Run `kubectl -n authorization get ingress` and `kubectl -n authorization get service` to see the Ingress rules for these services and the exposed port for accessing these services via the LoadBalancer. For example:
 
@@ -175,78 +171,7 @@ On the machine running `karavictl`, the `/etc/hosts` file needs to be updated wi
 
 The port that exposes these services is `30016`.
 
-
-### Configure Storage
-
-A `storage` entity in CSM Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:
-
-```
-karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr storage.csm-authorization.com:30016
-```
-
- *NOTE*: 
-- The `insecure` flag specifies to skip certificate validation when connecting to the CSM Authorization storage service. The `array-insecure` flag specifies to skip certificate validation when proxy-service connects to the backend storage array. Run `karavictl storage create --help` for help.
-
-### Configuring Tenants
-
-A `tenant` is a Kubernetes cluster that a role will be bound to. For example, to create a tenant named `Finance`:
-
-```
-karavictl tenant create --name Finance --insecure --addr tenant.csm-authorization.com:30016
-```
-
- *NOTE*: 
-- The `insecure` flag specifies to skip certificate validation when connecting to the tenant service. Run `karavictl tenant create --help` for help.
-
-### Configuring Roles
-
-A `role` consists of a name, the storage to use, and the quota limit for the storage pool to be used. For example, to create a role named `FinanceRole` using the PowerFlex storage created above with a quota limit of 100GB in storage pool `myStoragePool`:
-
-```
-karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
-```
-
- *NOTE*: 
-- The `insecure` flag specifies to skip certificate validation when connecting to the role service. Run `karavictl role create --help` for help.
-
-### Configuring Role Bindings
-
-A `role binding` binds a role to a tenant. For example, to bind the `FinanceRole` to the `Finance` tenant:
-
-```
-karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr tenant.csm-authorization.com:30016
-```
-
- *NOTE*: 
-- The `insecure` flag specifies to skip certificate validation when connecting to the tenant service. Run `karavictl rolebinding create --help` for help.
-
-### Generating a Token
-
-Now that the tenant is bound to a role, a JSON Web Token can be generated for the tenant. For example, to generate a token for the `Finance` tenant:
-
-```
-karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016
-
-{
-  "Token": "\napiVersion: v1\nkind: Secret\nmetadata:\n  name: proxy-authz-tokens\ntype: Opaque\ndata:\n  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUXhPRFlzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLmJIODN1TldmaHoxc1FVaDcweVlfMlF3N1NTVnEyRzRKeGlyVHFMWVlEMkU=\n  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWXhNallzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkxNbWVUSkZlX2dveXR0V0lUUDc5QWVaTy1kdmN5SHAwNUwyNXAtUm9ZZnM=\n"
-}
-```
-
-Process the above response to filter the secret manifest. For example using sed you can run the following:
-
-```
-karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
-apiVersion: v1
-kind: Secret
-metadata:
-  name: proxy-authz-tokens
-type: Opaque
-data:
-  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUTFOekVzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLk4tNE42Q1pPbUptcVQtRDF5ZkNGdEZqSmRDRjcxNlh1SXlNVFVyckNOS1U=
-  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWTFNVEVzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkVxb3lXNld5ZEFLdU9mSmtkMkZaMk9TVThZMzlKUFc0YmhfNHc5R05ZNmM=
-```
-
-This secret must be applied in the driver namespace. Continue reading the next section for configuring the driver to use CSM Authorization.
+Please continue following the steps outlined in the [proxy server](../../configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
