@@ -631,3 +631,34 @@ Events:
 Warning  VolumeConditionAbnormal      35s (x9 over 12m)  kubelet       Volume vol4: volPath: /var/.../rhel-705f0dcbf1/mount is not mounted: <nil>
 Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vol2: Volume is not found by node driver at 2021-11-11 02:04:49
 ```
+
+## Set QoS Limits
+Starting in version 2.5, CSI Driver for PowerFlex now supports setting the limits for the bandwidth and IOPS that one SDC generates for the specified volume. This enables the CSI driver to control the quality of service (QoS).
+
+To accomplish this, two new parametrs are introduced in the storage class: bandwidthLimitInKbps and iopsLimit.
+> Ensure that the proper values are enabled in your storage class yaml files. Refer to the [sample storage class yamls](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for more details.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+name: vxflexos
+annotations:
+storageclass.kubernetes.io/is-default-class: "true"
+provisioner: csi-vxflexos.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+storagepool: <STORAGE_POOL> # Insert Storage pool
+systemID: <SYSTEM_ID> # Insert System ID
+bandwidthLimitInKbps: <BANDWIDTH_LIMIT_IN_KBPS> # Insert bandwidth limit in Kbps
+iopsLimit: <IOPS_LIMIT> # Insert iops limit
+csi.storage.k8s.io/fstype: ext4
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+- matchLabelExpressions:
+    - key: csi-vxflexos.dellemc.com/<SYSTEM_ID> # Insert System ID
+      values:
+        - csi-vxflexos.dellemc.com
+```
+Once the volume gets created, the ControllerPublishVolume will set the QoS limits for the volumes mapped to SDC.
