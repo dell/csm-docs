@@ -63,7 +63,7 @@ The common snapshot controller must be installed only once in the cluster irresp
 
 
 #### Installation example
-You can install CRDs and the default snapshot controller by running these following commands:
+You can install CRDs and the default snapshot controller by running these commands:
 ```bash
 git clone https://github.com/kubernetes-csi/external-snapshotter/
 cd ./external-snapshotter
