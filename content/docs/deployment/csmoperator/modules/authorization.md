@@ -154,11 +154,12 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | **cert-manager** | This section configures the enablement of cert-manager. | - | - |
    | enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
 
-4. Execute this command to create Authorization CR:
+4. Execute this command to create the Authorization CR:
 
-    ```kubectl create -f <input_sample_file.yaml>``` .
+    ```kubectl create -f samples/authorization/csm_authorization_proxy_server.yaml```
 
-    This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
+  >__Note__:  
+  > - This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.
 
 5. Create the `karavi-auth-tls` secret using your own certificate or by using a self-signed certificate generated via cert-manager. 
 
