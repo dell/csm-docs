@@ -15,15 +15,15 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl cluster add](#dellctl-cluster-add) | Add a k8s cluster to be managed by dellctl |
 | [dellctl cluster remove](#dellctl-cluster-remove) | Removes a k8s cluster managed by dellctl |
 | [dellctl cluster get](#dellctl-cluster-get) | List all clusters currently being managed by dellctl |
-| [dellctl backup](#dellctl-backup) | Allows to manipulate application backups/clones |
+| [dellctl backup](#dellctl-backup) | Allows you to manipulate application backups/clones |
 | [dellctl backup create](#dellctl-backup-create) | Create an application backup/clones |
 | [dellctl backup delete](#dellctl-backup-delete) | Delete application backups |
 | [dellctl backup get](#dellctl-backup-get) | Get application backups |
-| [dellctl restore](#dellctl-restore) | Allows to manipulate application restores |
+| [dellctl restore](#dellctl-restore) | Allows you to manipulate application restores |
 | [dellctl restore create](#dellctl-restore-create) | Restore an application backup |
 | [dellctl restore delete](#dellctl-restore-delete) | Delete application restores |
 | [dellctl restore get](#dellctl-restore-get) | Get application restores |
-| [dellctl schedule](#dellctl-schedule) | Allows to manipulate schedules |
+| [dellctl schedule](#dellctl-schedule) | Allows you to manipulate schedules |
 | [dellctl schedule create](#dellctl-schedule-create) | Create a schedule |
 | [dellctl schedule create for-backup](#dellctl-schedule-create-for-backup) | Create a schedule for application backups |
 | [dellctl schedule delete](#dellctl-schedule-delete) | Delete schedules |
@@ -65,7 +65,7 @@ Outputs help text
 
 ### dellctl cluster
 
-Allows to manipulate one or more k8s cluster configurations
+Allows you to manipulate one or more k8s cluster configurations
 
 ##### Available Commands
 
@@ -196,7 +196,7 @@ cluster2        v1.22   https://1.2.3.5:6443            035133aa-5b65-4080-a813-
 
 ### dellctl backup
 
-Allows to manipulate application backups/clones
+Allows you to manipulate application backups/clones
 
 ##### Available Commands
 
@@ -378,7 +378,7 @@ demo-app-clones   Completed   2022-07-27 11:53:37 -0400 EDT   2022-08-26 11:53:3
 
 ### dellctl restore
 
-Allows to manipulate application restores
+Allows you to manipulate application restores
 
 ##### Available Commands
 
@@ -546,7 +546,7 @@ restore1   backup1   Completed   2022-07-27 12:35:29 -0400 EDT
 
 ### dellctl schedule
 
-Allows to manipulate schedules
+Allows you to manipulate schedules
 
 ##### Available Commands
 
@@ -559,7 +559,7 @@ Allows to manipulate schedules
 ##### Flags
 
 ```
-  -h, --help   help for schedule  
+  -h, --help   Help for schedule  
 ```
 
 ##### Output
@@ -586,7 +586,7 @@ Create a schedule
 
 ```
       --cluster-id string   Id of the cluster managed by dellctl
-  -h, --help                help for create
+  -h, --help                Help for create
       --name string         Name for the schedule
       --schedule string     A cron expression representing when to create the application backup  
 ```
@@ -619,7 +619,7 @@ Create a schedule for application backups
   -l, --label-selector labelSelector                          Only backup resources matching this label selector. (default <none>)
       --set-owner-references-in-backup optionalBool[=false]   Specifies whether to set OwnerReferences on backups created by this schedule.
   -n, --namespace string                                      The namespace in which application mobility service should operate. (default "app-mobility-system")
-  -h, --help                                                  help for for-backup
+  -h, --help                                                  Help for for-backup
 ```
 
 ##### Global Flags
@@ -672,7 +672,7 @@ Delete one or more schedules
       --all                 Delete all schedules
       --cluster-id string   Id of the cluster managed by dellctl
       --confirm             Confirm deletion
-  -h, --help                help for delete
+  -h, --help                Help for delete
   -n, --namespace string    The namespace in which application mobility service should operate. (default "app-mobility-system")
 ```
 
@@ -716,7 +716,7 @@ Get schedules
 
 ```
       --cluster-id string   Id of the cluster managed by dellctl
-  -h, --help                help for get
+  -h, --help                Help for get
   -n, --namespace string    The namespace in which application mobility service should operate. (default "app-mobility-system")
 ```
 
