@@ -12,7 +12,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 
 ## Features and capabilities
 
-### Supported Operating Systems/Container Orchestrator Platform
+### Supported Operating Systems/Container Orchestrator Platforms
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
