@@ -23,6 +23,11 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl restore create](#dellctl-restore-create) | Restore an application backup |
 | [dellctl restore delete](#dellctl-restore-delete) | Delete application restores |
 | [dellctl restore get](#dellctl-restore-get) | Get application restores |
+| [dellctl schedule](#dellctl-schedule) | Allows to manipulate schedules |
+| [dellctl schedule create](#dellctl-schedule-create) | Create a schedule |
+| [dellctl schedule create for-backup](#dellctl-schedule-create-for-backup) | Create a schedule for application backups |
+| [dellctl schedule delete](#dellctl-schedule-delete) | Delete schedules |
+| [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
 
 
 ## Installation instructions
@@ -531,4 +536,205 @@ Get restores with their names
 # dellctl restore get restore1
 NAME       BACKUP    STATUS      CREATED                         COMPLETED
 restore1   backup1   Completed   2022-07-27 12:35:29 -0400 EDT
+```
+
+
+
+---
+
+
+
+### dellctl schedule
+
+Allows to manipulate schedules
+
+##### Available Commands
+
+```
+  create      Create a schedule
+  delete      Delete schedules
+  get         Get schedules
+```
+
+##### Flags
+
+```
+  -h, --help   help for schedule  
+```
+
+##### Output
+
+Outputs help text
+
+
+
+---
+
+
+
+### dellctl schedule create
+
+Create a schedule
+
+##### Available Commands
+
+```
+  for-backup  Create a schedule for application backups
+```
+
+##### Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for create
+      --name string         Name for the schedule
+      --schedule string     A cron expression representing when to create the application backup  
+```
+
+##### Output
+
+Outputs help text
+
+
+
+---
+
+
+
+### dellctl schedule create for-backup
+
+Create a schedule for application backups
+
+##### Flags
+
+```
+      --exclude-namespaces stringArray                        List of namespace names to exclude from the backup.
+      --include-namespaces stringArray                        List of namespace names to include in the backup (use '*' for all namespaces). (default *)
+      --ttl duration                                          Backup retention period. (default 720h0m0s)
+      --exclude-resources stringArray                         Resources to exclude from the backup, formatted as resource.group, such as storageclasses.storage.k8s.io.
+      --include-resources stringArray                         Resources to include in the backup, formatted as resource.group, such as storageclasses.storage.k8s.io (use '*' for all resources).
+      --backup-location string                                Storage location where k8s resources and application data will be backed up to. (default "default")
+      --data-mover string                                     Data mover to be used to backup application data. (default "Restic")
+      --include-cluster-resources optionalBool[=true]         Include cluster-scoped resources in the backup
+  -l, --label-selector labelSelector                          Only backup resources matching this label selector. (default <none>)
+      --set-owner-references-in-backup optionalBool[=false]   Specifies whether to set OwnerReferences on backups created by this schedule.
+  -n, --namespace string                                      The namespace in which application mobility service should operate. (default "app-mobility-system")
+  -h, --help                                                  help for for-backup
+```
+
+##### Global Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+      --name string         Name for the schedule
+      --schedule string     A cron expression representing when to create the application backup
+```
+
+##### Output
+
+Create a schedule to backup namespace demo, every 1hour
+
+```
+# dellctl schedule create for-backup --name schedule1 --schedule "@every 1h" --include-namespaces demo
+ INFO schedule request "schedule1" submitted successfully.
+ INFO Run 'dellctl schedule get schedule1' for more details.
+```
+
+Create a schedule to backup namespace demo, once a day at midnight and set OwnerReferences on backups created by this schedule
+
+```
+# dellctl schedule create for-backup --name schedule2 --schedule "@daily" --include-namespaces demo --set-owner-references-in-backup
+ INFO schedule request "schedule2" submitted successfully.
+ INFO Run 'dellctl schedule get schedule2' for more details.
+```
+
+Create a schedule to backup namespace demo, at 23:00(11:00 pm) every saturday
+
+```
+# dellctl schedule create for-backup --name schedule3 --schedule "00 23 * * 6" --include-namespaces demo
+ INFO schedule request "schedule3" submitted successfully.
+ INFO Run 'dellctl schedule get schedule3' for more details.
+```
+
+
+
+---
+
+
+
+### dellctl schedule delete
+
+Delete one or more schedules
+
+##### Flags
+
+```
+      --all                 Delete all schedules
+      --cluster-id string   Id of the cluster managed by dellctl
+      --confirm             Confirm deletion
+  -h, --help                help for delete
+  -n, --namespace string    The namespace in which application mobility service should operate. (default "app-mobility-system")
+```
+
+##### Output
+
+Delete a schedule with name
+
+```
+# dellctl schedule delete schedule1
+Are you sure you want to continue (Y/N)? y
+ INFO Request to delete schedule "schedule1" submitted successfully.
+```
+
+Delete multiple schedules
+
+```
+# dellctl schedule delete schedule1 schedule2
+Are you sure you want to continue (Y/N)? y
+ INFO Request to delete schedule "schedule1" submitted successfully.
+ INFO Request to delete schedule "schedule2" submitted successfully.
+```
+
+Delete all schedules without asking for user confirmation
+
+```
+# dellctl schedule delete --confirm --all
+ INFO Request to delete schedule "schedule1" submitted successfully.
+ INFO Request to delete schedule "schedule2" submitted successfully.
+```
+
+
+---
+
+
+
+### dellctl schedule get
+
+Get schedules
+
+##### Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for get
+  -n, --namespace string    The namespace in which application mobility service should operate. (default "app-mobility-system")
+```
+
+##### Output
+
+Get all the application schedules created on local cluster
+
+```
+# dellctl schedule get
+NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAST BACKUP TIME
+schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
+schedule2     Enabled   2022-11-04 08:35:57 +0000 UTC   false    @daily      NA
+```
+
+Get schedules with their names
+
+```
+# dellctl schedule get schedule1
+NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAST BACKUP TIME
+schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
 ```
