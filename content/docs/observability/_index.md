@@ -47,8 +47,8 @@ CSM for Observability provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes    | 1.22, 1.23, 1.24 |
-| Red Hat OpenShift | 4.9, 4.10 |
+| Kubernetes    | 1.22, 1.23, 1.24, 1.25 |
+| Red Hat OpenShift | 4.9, 4.10, 4.11 |
 | Rancher Kubernetes Engine | yes | 
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
@@ -59,7 +59,7 @@ CSM for Observability provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerFlex | PowerStore | PowerScale |
 |---------------|:-------------------:|:----------------:|:----------------:|
-| Storage Array | 3.5.x, 3.6.x | 1.0.x, 2.0.x, 2.1.x, 3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 |
+| Storage Array | 3.5.x, 3.6.x, 4.0 | 1.0.x, 2.0.x, 2.1.x, 3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 |
 {{</table>}}
 
 ## Supported CSI Drivers
