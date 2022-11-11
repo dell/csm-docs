@@ -36,7 +36,7 @@ CSM for Replication provides the following capabilities:
 | RHEL          |     7.x, 8.x     |     7.x, 8.x     |  7.x, 8.x  |
 | CentOS        |     7.8, 7.9     |     7.8, 7.9     | 7.8, 7.9   |
 | Ubuntu        |       20.04      |       20.04      | 20.04      |
-| SLES          |        15SP2     |        15SP2     | 15SP2      |
+| SLES          |        15SP4     |        15SP2     | 15SP2      |
 {{</table>}}
 
 ## Supported Storage Platforms
