@@ -634,8 +634,8 @@ Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vo
 
 ## Set QoS Limits
 Starting in version 2.5, CSI Driver for PowerFlex now supports setting the limits for the bandwidth and IOPS that one SDC generates for the specified volume. This enables the CSI driver to control the quality of service (QoS).
-
-To accomplish this, two new parametrs are introduced in the storage class: bandwidthLimitInKbps and iopsLimit.
+In this release this is supported at the StorageClass level, so once a volume is created QoS Settings can't be adjusted later.
+To accomplish this, two new parameters are introduced in the storage class: bandwidthLimitInKbps and iopsLimit.
 > Ensure that the proper values are enabled in your storage class yaml files. Refer to the [sample storage class yamls](https://github.com/dell/csi-powerflex/tree/main/samples/storageclass) for more details.
 
 ```yaml
