@@ -1,18 +1,18 @@
 ---
-title: PowerScale
-linkTitle: "PowerScale"
+title: PowerFlex
+linkTitle: "PowerFlex"
 description: >
-  Installing Dell CSI Driver for PowerScale via Dell CSM Operator
+  Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
 ---
 
-## Installing CSI Driver for PowerScale via Dell CSM Operator
+## Installing CSI Driver for PowerFlex via Dell CSM Operator
 
-The CSI Driver for Dell PowerScale can be installed via the Dell CSM Operator.
+The CSI Driver for Dell PowerFlex can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available [here](../../#installation).
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-**Note**: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerScale via Operator.
+**Note**: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerFlex via Operator.
 
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using the following command:
@@ -109,10 +109,10 @@ User can query for all Dell CSI drivers using the following command:
 
 1. Follow all the [prerequisites](#prerequisite) above
    
-2. Create a CR (Custom Resource) for PowerScale using the sample files provided 
+2. Create a CR (Custom Resource) for PowerFlex using the sample files provided 
    [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
 
-3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
+3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -133,9 +133,9 @@ User can query for all Dell CSI drivers using the following command:
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node | 
 
-4.  Execute the following command to create PowerScale custom resource:
+4.  Execute the following command to create PowerFlex custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
-    This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
+    This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
     
