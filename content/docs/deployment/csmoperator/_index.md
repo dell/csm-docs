@@ -6,7 +6,7 @@ weight: 1
 ---
 
 {{% pageinfo color="primary" %}}
-The Dell Container Storage Modules Operator Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.
+The Dell Container Storage Modules Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.
 {{% /pageinfo %}}
 
 The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
@@ -14,15 +14,16 @@ The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, w
 ## Supported Platforms
 Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.
 
-| Kubernetes Version   | OpenShift Version   |
-| -------------------- | ------------------- |
-| 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS |
+| Kubernetes Version         | OpenShift Version   |
+| -------------------------- | ------------------- |
+| 1.22, 1.23, 1.24, 1.25     | 4.9, 4.10, 4.10 EUS |
 
 ## Supported CSI Drivers
 
 | CSI Driver         | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
-| CSI PowerScale     | 2.2.0 +   |   v2.2.0  +    |
+| CSI PowerScale     | 2.2.0 +   |   v2.2.0 +     |
+| CSI PowerFlex      | 2.3.0 +   |   v2.3.0 +     |
 
 ## Supported CSM Modules
 
