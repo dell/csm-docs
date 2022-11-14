@@ -150,6 +150,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerFlex driver and their default values:
 
    | Parameter | Description | Required | Default |
+   | --------- | ----------- | -------- |-------- |
    | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability. | Yes | 2 |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
    | ***Common parameters for node and controller*** |
