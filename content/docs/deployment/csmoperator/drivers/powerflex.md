@@ -49,7 +49,7 @@ User can query for all Dell CSI drivers using the following command:
   - Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml. Please note the following: 
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
     - **If not using sidecar**, please leave this commented out -- otherwise, the empty fields will cause errors.
-##### Example CR:  [config/samples/vxflex_v220_ops_48.yaml](https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v220_ops_48.yaml)
+##### Example CR:  [samples/storage_csm_powerflex_v240.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v240.yaml)
 ```yaml
         sideCars:
     # Comment the following section if you don't want to run the monitoring sidecar
