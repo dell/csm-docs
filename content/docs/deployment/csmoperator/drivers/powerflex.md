@@ -18,92 +18,127 @@ Note that the deployment of the driver using the operator does not use any Helm 
 User can query for all Dell CSI drivers using the following command:
 `kubectl get csm --all-namespaces`
 
+### Prerequisites
+- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../troubleshooting/powerflex.md) for details
 
-### Prerequisite
-
-1. Create namespace.
-   Execute `kubectl create namespace test-isilon` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-isilon'.
-
-2. Create *isilon-creds* secret by creating a yaml file called secret.yaml with the following content:
-     ```
-      isilonClusters:
-         # logical name of PowerScale Cluster
-       - clusterName: "cluster1"
-
-         # username for connecting to PowerScale OneFS API server
-         # Default value: None
-         username: "user"
-
-         # password for connecting to PowerScale OneFS API server
-         password: "password"
-
-         # HTTPS endpoint of the PowerScale OneFS API server
-         # Default value: None
-         # Examples: "1.2.3.4", "https://1.2.3.4", "https://abc.myonefs.com"
-         endpoint: "1.2.3.4"
-
-         # Is this a default cluster (would be used by storage classes without ClusterName parameter)
-         # Allowed values:
-         #   true: mark this cluster config as default
-         #   false: mark this cluster config as not default
-         # Default value: false
-         isDefault: true
-
-         # Specify whether the PowerScale OneFS API server's certificate chain and host name should be verified.
-         # Allowed values:
-         #   true: skip OneFS API server's certificate verification
-         #   false: verify OneFS API server's certificates
-         # Default value: default value specified in values.yaml
-         # skipCertificateValidation: true
-
-         # The base path for the volumes to be created on PowerScale cluster
-         # This will be used if a storage class does not have the IsiPath parameter specified.
-         # Ensure that this path exists on PowerScale cluster.
-         # Allowed values: unix absolute path
-         # Default value: default value specified in values.yaml
-         # Examples: "/ifs/data/csi", "/ifs/engineering"
-         # isiPath: "/ifs/data/csi"
-
-         # The permissions for isi volume directory path
-         # This will be used if a storage class does not have the IsiVolumePathPermissions parameter specified.
-         # Allowed values: valid octal mode number
-         # Default value: "0777"
-         # Examples: "0777", "777", "0755"
-         # isiVolumePathPermissions: "0777"
-
-       - clusterName: "cluster2"
-         username: "user"
-         password: "password"
-         endpoint: "1.2.3.4"
-         endpointPort: "8080"
-      ```
-
-   Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,  
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
-
-   Use the following command to replace or update the secret
-
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
-
-   **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
-   The driver will continue to use previous values in case of an error found in the YAML file.
-           
-3. Create isilon-certs-n secret.
-      Please refer [this section](../../../../csidriver/installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
-
-      If certificate validation is skipped, empty secret must be created. To create an empty secret. Ex: empty-secret.yaml
-
-      ```yaml
+#### SDC Deployment for Operator 
+- This feature deploys the sdc kernel modules on all nodes with the help of an init container.
+- For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
+- **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file, 
+  config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
+- **Note:** To use an sdc-binary module from customer ftp site:
+  - Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:
+ ```yaml
+      echo -n <credential>| base64 -i
+``` 
+   secret sample to use:
+ ```yaml
       apiVersion: v1
       kind: Secret
       metadata:
-         name: isilon-certs-0
-         namespace: isilon
+        name: sdc-repo-creds
+        namespace: vxflexos
       type: Opaque
       data:
-         cert-0: ""
-      ```
-      Execute command: ```kubectl create -f empty-secret.yaml```
+        # set username to the base64 encoded username, sdc default is
+          username: <username in base64>
+        # set password to the base64 encoded password, sdc default is
+          password: <password in base64>
+```  
+  - Create secret for FTP side by using the command `kubectl create -f sdc-repo-secret.yaml`.
+  - Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml. Please note the following: 
+    - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
+    - **If not using sidecar**, please leave this commented out -- otherwise, the empty fields will cause errors.
+##### Example CR:  [config/samples/vxflex_v220_ops_48.yaml](https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v220_ops_48.yaml)
+```yaml
+        sideCars:
+    # Comment the following section if you don't want to run the monitoring sidecar
+      - name: sdc-monitor
+        envs:
+        - name: HOST_PID
+          value: "1"
+        - name: MDM
+          value: ""
+      - name: external-health-monitor
+        args: ["--monitor-interval=60s"]
+    initContainers:
+      - image: dellemc/sdc:3.6
+        imagePullPolicy: IfNotPresent
+        name: sdc
+        envs:
+          - name: MDM
+            value: "10.x.x.x,10.x.x.x"
+```  
+ *Note:* Please comment the sdc-monitor sidecar section if you are not using it. Blank values for MDM will result in error. Do not comment the external-health-monitor argument.
+
+#### Manual SDC Deployment
+
+For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deployment Guide_. Install the PowerFlex SDC as follows:
+
+**Steps**
+
+1. Download the PowerFlex SDC from [Dell Online support](https://www.dell.com/support). The filename is EMC-ScaleIO-sdc-*.rpm, where * is the SDC name corresponding to the PowerFlex installation version.
+2. Export the shell variable _MDM_IP_ in a comma-separated list using `export MDM_IP=xx.xxx.xx.xx,xx.xxx.xx.xx`, where xxx represents the actual IP address in your environment. This list contains the IP addresses of the MDMs.
+3. Install the SDC per the _Dell PowerFlex Deployment Guide_:
+    - For Red Hat Enterprise Linux and CentOS, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
+4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`1. Create namespace.
+   Execute `kubectl create namespace test-vxflexos` to create the `test-vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-vxflexos'.
+
+#### Create Secret
+1. Create namespace: 
+   Execute `kubectl create namespace test-vxflexos` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-vxflexos'.
+2. Prepare the config.yaml for driver configuration.
+
+    Example: config.yaml
+
+     ```yaml
+      # Username for accessing PowerFlex system.	
+      # Required: true
+     - username: "admin"
+      # Password for accessing PowerFlex system.	
+      # Required: true
+      password: "password"
+      # System name/ID of PowerFlex system.	
+      # Required: true
+      systemID: "ID1"
+      # REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system.
+      # Required: true
+      endpoint: "https://127.0.0.1"
+      # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
+      # Allowed values: true or false
+      # Required: true
+      # Default value: true
+      skipCertificateValidation: true 
+      # indicates if this array is the default array
+      # needed for backwards compatibility
+      # only one array is allowed to have this set to true 
+      # Required: false
+      # Default value: false
+      isDefault: true
+      # defines the MDM(s) that SDC should register with on start.
+      # Allowed values:  a list of IP addresses or hostnames separated by comma.
+      # Required: true
+      # Default value: none 
+      mdm: "10.0.0.1,10.0.0.2"
+      # Defines all system names used to create powerflex volumes
+      # Required: false
+      # Default value: none
+      AllSystemNames: "name1,name2"
+    - username: "admin"
+      password: "Password123"
+      systemID: "ID2"
+      endpoint: "https://127.0.0.2"
+      skipCertificateValidation: true 
+      mdm: "10.0.0.3,10.0.0.4"
+      AllSystemNames: "name1,name2"
+    ```
+
+    After editing the file, run the following command to create a secret called `vxflexos-config`
+    `kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=config.yaml`
+
+    Use the following command to replace or update the secret:
+
+    `kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -`
 
 ### Install Driver
 
