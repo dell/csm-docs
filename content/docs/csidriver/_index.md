@@ -16,11 +16,11 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Kubernetes    | 1.23, 1.24, 1.25 | 1.22, 1.23, 1.24    | 1.23, 1.24, 1.25 | 1.22, 1.23, 1.24  | 1.23, 1.24, 1.25 |
+| Kubernetes    | 1.23, 1.24, 1.25 | 1.23, 1.24, 1.25    | 1.23, 1.24, 1.25 | 1.22, 1.23, 1.24  | 1.23, 1.24, 1.25 |
 | RHEL          |     7.x,8.x      |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.x,8.x      |
 | Ubuntu        |       20.04      |       20.04         |  18.04, 20.04    | 18.04, 20.04      |        20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
-| SLES          |        15SP4     |        15SP3        |       15SP3      |         15SP3     |       15SP3      |
+| SLES          |        15SP4     |        15SP4        |       15SP3      |         15SP3     |       15SP3      |
 | Red Hat OpenShift | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.9, 4.10, 4.10 EUS | 4.10, 4.10 EUS, 4.11 |
 | Mirantis Kubernetes Engine | 3.5.x |      3.5.x        |       3.5.x      |        3.5.x      |        3.5.x     |
 | Google Anthos |        1.12       |          1.12        |        no        |         1.12       |        1.12       |
