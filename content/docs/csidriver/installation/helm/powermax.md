@@ -259,6 +259,14 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | image | Image for dell-csi-replicator sidecar. | No | " " |
 | replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
 | replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
+| **vSphere**| This section refers to the configuration options for VMware virtualized environment support via RDM  |  -  | - |
+| enabled                  | A boolean that enables/disables VMware virtualized environment support. |  No      |   false   |
+| fcPortGroup                  | Existing portGroup that driver will use for vSphere. |  Yes      |   ""   |
+| fcHostGroup                  | Existing host group that driver will use for vSphere. |  Yes      |   ""   |
+| vCenterHost                  | URL/endpoint of the vCenter where all the ESX are present |  Yes      |   ""   |
+| vCenterUserName                  | Username from the vCenter credentials. |  Yes      |   ""   |
+| vCenterPassword                  | Password from the vCenter credentials. |  Yes      |   ""   |
+
 
 8. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml`
 9. Or you can also install the driver using standalone helm chart using the command `helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax`
@@ -290,22 +298,6 @@ Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any
 
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes
-
-### CSI PowerMax driver without Proxy
-In this mode, the CSI PowerMax driver can only connect to a single `Unisphere` server. So, you just specify a list of storage arrays
-and the address of the `Unisphere` server
-
-```yaml
-global:
-  defaultCredentialsSecret: powermax-creds
-  storageArrays:
-    - storageArrayId: "000000000001"
-    - storageArrayId: "000000000002"
-  managementServers:
-    - endpoint: https://unisphere-address:8443
-```
-
->Note: If you provide multiple endpoints in the list of management servers, the installer will only use the first server in the list
 
 ### CSI PowerMax driver with Proxy in Linked mode
 In this mode, the CSI PowerMax ReverseProxy acts as a `passthrough` for the RESTAPI calls and only provides limited functionality
