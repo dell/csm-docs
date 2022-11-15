@@ -51,25 +51,18 @@ User can query for all Dell CSI drivers using the following command:
     - **If not using sidecar**, please leave this commented out -- otherwise, the empty fields will cause errors.
 ##### Example CR:  [samples/storage_csm_powerflex_v240.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v240.yaml)
 ```yaml
-        sideCars:
-    # Comment the following section if you don't want to run the monitoring sidecar
+    sideCars:
+    # sdc-monitor is disabled by default, due to high CPU usage 
       - name: sdc-monitor
+        enabled: false
+        image: dellemc/sdc:3.6
         envs:
         - name: HOST_PID
           value: "1"
         - name: MDM
-          value: ""
-      - name: external-health-monitor
-        args: ["--monitor-interval=60s"]
-    initContainers:
-      - image: dellemc/sdc:3.6
-        imagePullPolicy: IfNotPresent
-        name: sdc
-        envs:
-          - name: MDM
-            value: "10.x.x.x,10.x.x.x"
+          value: "10.xx.xx.xx,10.xx.xx.xx" #provide MDM value
 ```  
- *Note:* Please comment the sdc-monitor sidecar section if you are not using it. Blank values for MDM will result in error. Do not comment the external-health-monitor argument.
+ *Note:* Please comment the sdc-monitor sidecar section if you are not using it. Blank values for MDM will result in error.
 
 #### Manual SDC Deployment
 
