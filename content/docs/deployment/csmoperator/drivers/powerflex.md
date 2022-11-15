@@ -66,7 +66,7 @@ User can query for all Dell CSI drivers using this command:
 
 #### Manual SDC Deployment
 
-For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deployment Guide_. Install the PowerFlex SDC as follows:
+For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deployment Guide_. Install the PowerFlex SDC using this procedure:
 
 **Steps**
 
