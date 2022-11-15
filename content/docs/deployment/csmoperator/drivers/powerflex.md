@@ -15,7 +15,7 @@ Note that the deployment of the driver using the operator does not use any Helm 
 **Note**: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerFlex via Operator.
 
 ### Listing installed drivers with the ContainerStorageModule CRD
-User can query for all Dell CSI drivers using the following command:
+User can query for all Dell CSI drivers using this command:
 `kubectl get csm --all-namespaces`
 
 ### Prerequisites
