@@ -126,10 +126,10 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       AllSystemNames: "name1,name2"
     ```
 
-    After editing the file, run the following command to create a secret called `vxflexos-config`
+    After editing the file, run this command to create a secret called `vxflexos-config`
     `kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=config.yaml`
 
-    Use the following command to replace or update the secret:
+    Use this command to replace or update the secret:
 
     `kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -`
 
@@ -153,7 +153,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
    | X_CSI_DEBUG | To enable debug mode | No | true |
    | X_CSI_ALLOW_RWO_MULTI_POD_ACCESS | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
 
-4.  Execute the following command to create PowerFlex custom resource:
+4.  Execute this command to create PowerFlex custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
     This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
