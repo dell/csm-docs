@@ -195,10 +195,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
 | storageArrayId | This refers to PowerMax Symmetrix ID.| Yes | 000000000001|
 | endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| Yes if Reverse Proxy mode is _StandAlone_ | https://primary-1.unisphe.re:8443 |
-| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| No | https://backup-1.unisphe.re:8443 |
+| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| Yes | https://backup-1.unisphe.re:8443 |
 | managementServers | This section refers to the list of configurations for Unisphere servers managing powermax arrays.| - | - |
 | endpoint | This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on | Yes | https://primary-1.unisphe.re:8443 |
-| credentialsSecret| This refers to the user credentials for _endpoint_ | No| primary-1-secret|
+| credentialsSecret| This refers to the user credentials for _endpoint_ | Yes| primary-1-secret|
 | skipCertificateValidation | This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.| No | "True"       |
 | certSecret    |  The name of the secret in the same namespace containing the CA certificates of the Unisphere server | Yes, if skipCertificateValidation is set to false | Empty|
 | limits | This refers to various limits for Reverse Proxy | No | - |
@@ -329,7 +329,7 @@ global:
         maxActiveWrite: 4
         maxOutStandingRead: 50
         maxOutStandingWrite: 50
-    - endpoint: https://backup-unisphere:8443 #Optional
+    - endpoint: https://backup-unisphere:8443 
 
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
