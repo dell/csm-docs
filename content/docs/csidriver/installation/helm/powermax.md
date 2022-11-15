@@ -11,10 +11,10 @@ The controller section of the Helm chart installs the following components in a 
 - CSI Driver for Dell PowerMax
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
-- Kubernetes External Snapshotter, which provides snapshot support
+- Kubernetes External Snapshotter, which provides snapshot support- 
+- CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance
 - Kubernetes External Resizer, which resizes the volume
 - (optional) Kubernetes External health monitor, which provides volume health status
-- (optional) CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance
 - (optional) Dell CSI Replicator, which provides Replication capability. 
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
@@ -183,7 +183,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
    where *myusername* and *mypassword* are credentials for a user with PowerMax privileges.
 4. Create the secret by running `kubectl create -f samples/secret/secret.yaml`.
-5. If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - _csireverseproxy-tls-secret_ which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.
+5. Create a TLS secret with the name - _csireverseproxy-tls-secret_ which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.
 6. Copy the default values.yaml file `cd helm && cp csi-powermax/values.yaml my-powermax-settings.yaml`
 7. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
 8. Edit the newly created file and provide values for the following parameters `vi my-powermax-settings.yaml`
@@ -240,7 +240,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
-| enabled |  Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.<br>**NOTE:** If not enabled, then there is no requirement to configure any of the following values. | No | "False" |
 | image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.1.0 |
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
@@ -335,7 +334,6 @@ global:
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
   # Set enabled to true if you want to use proxy
-  enabled: true
   image: dellemc/csipowermax-reverseproxy:v2.3.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
@@ -382,8 +380,6 @@ global:
 
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
-  # Set enabled to true if you want to use proxy
-  enabled: true
   image: dellemc/csipowermax-reverseproxy:v2.3.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
