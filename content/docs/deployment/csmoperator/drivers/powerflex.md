@@ -19,7 +19,7 @@ User can query for all Dell CSI drivers using this command:
 `kubectl get csm --all-namespaces`
 
 ### Prerequisites
-- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../troubleshooting/powerflex.md) for details
+- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../troubleshooting/powerflex) for details
 
 #### SDC Deployment for Operator 
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
@@ -48,7 +48,7 @@ User can query for all Dell CSI drivers using this command:
   - Create secret for FTP side by using the command `kubectl create -f sdc-repo-secret.yaml`.
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note: 
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
-    - **If not using sidecar**, please leave this commented out -- otherwise, the empty fields will cause errors.
+    - **If not using sidecar**, leave the enabled field set to false.
 ##### Example CR:  [samples/storage_csm_powerflex_v240.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v240.yaml)
 ```yaml
     sideCars:
