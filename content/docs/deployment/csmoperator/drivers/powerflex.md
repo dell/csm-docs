@@ -78,7 +78,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 
 #### Create Secret
 1. Create namespace: 
-   Execute `kubectl create namespace test-vxflexos` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-vxflexos'.
+   Execute `kubectl create namespace test-vxflexos` to create the test-vxflexos namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-vxflexos'.
 2. Prepare the config.yaml for driver configuration.
 
     Example: config.yaml
