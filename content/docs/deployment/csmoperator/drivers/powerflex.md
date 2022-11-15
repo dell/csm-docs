@@ -125,12 +125,12 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       AllSystemNames: "name1,name2"
     ```
 
-    After editing the file, run this command to create a secret called `vxflexos-config`
-    `kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=config.yaml`
+    After editing the file, run this command to create a secret called `test-vxflexos-config`. If you are using a different namespace/secret name, just substitute those into the command.
+    `kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml`
 
     Use this command to replace or update the secret:
 
-    `kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+    `kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -`
 
 ### Install Driver
 
