@@ -124,7 +124,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.4.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
+1. Run `git clone -b v2.5.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
 4. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
@@ -134,6 +134,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |  
+   | version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.5.0 |
+| driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
    | logLevel | CSI driver log level | No | "debug" |
    | certSecretCount | Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
    | [allowedNetworks](../../../features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
@@ -189,6 +191,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
    - In order to enable authorization, there should be an authorization proxy server already installed.
+   - If you are using a custom image, check the *version* and *driverRepository* fields in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: <driverRepository>/csi-isilon:v<version>
+   
     
 6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters.
    
