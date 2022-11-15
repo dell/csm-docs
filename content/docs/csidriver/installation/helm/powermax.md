@@ -11,10 +11,10 @@ The controller section of the Helm chart installs the following components in a 
 - CSI Driver for Dell PowerMax
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
-- Kubernetes External Snapshotter, which provides snapshot support
+- Kubernetes External Snapshotter, which provides snapshot support- 
+- CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance
 - Kubernetes External Resizer, which resizes the volume
 - (optional) Kubernetes External health monitor, which provides volume health status
-- (optional) CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance
 - (optional) Dell CSI Replicator, which provides Replication capability. 
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
@@ -183,7 +183,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
    where *myusername* and *mypassword* are credentials for a user with PowerMax privileges.
 4. Create the secret by running `kubectl create -f samples/secret/secret.yaml`.
-5. If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - _csireverseproxy-tls-secret_ which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.
+5. Create a TLS secret with the name - _csireverseproxy-tls-secret_ which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.
 6. Copy the default values.yaml file `cd helm && cp csi-powermax/values.yaml my-powermax-settings.yaml`
 7. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
 8. Edit the newly created file and provide values for the following parameters `vi my-powermax-settings.yaml`
@@ -195,10 +195,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
 | storageArrayId | This refers to PowerMax Symmetrix ID.| Yes | 000000000001|
 | endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| Yes if Reverse Proxy mode is _StandAlone_ | https://primary-1.unisphe.re:8443 |
-| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| No | https://backup-1.unisphe.re:8443 |
+| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| Yes | https://backup-1.unisphe.re:8443 |
 | managementServers | This section refers to the list of configurations for Unisphere servers managing powermax arrays.| - | - |
 | endpoint | This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on | Yes | https://primary-1.unisphe.re:8443 |
-| credentialsSecret| This refers to the user credentials for _endpoint_ | No| primary-1-secret|
+| credentialsSecret| This refers to the user credentials for _endpoint_ | Yes| primary-1-secret|
 | skipCertificateValidation | This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.| No | "True"       |
 | certSecret    |  The name of the secret in the same namespace containing the CA certificates of the Unisphere server | Yes, if skipCertificateValidation is set to false | Empty|
 | limits | This refers to various limits for Reverse Proxy | No | - |
@@ -240,7 +240,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
-| enabled |  Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.<br>**NOTE:** If not enabled, then there is no requirement to configure any of the following values. | No | "False" |
 | image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.1.0 |
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
@@ -330,12 +329,11 @@ global:
         maxActiveWrite: 4
         maxOutStandingRead: 50
         maxOutStandingWrite: 50
-    - endpoint: https://backup-unisphere:8443 #Optional
+    - endpoint: https://backup-unisphere:8443 
 
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
   # Set enabled to true if you want to use proxy
-  enabled: true
   image: dellemc/csipowermax-reverseproxy:v2.3.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
@@ -382,8 +380,6 @@ global:
 
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
-  # Set enabled to true if you want to use proxy
-  enabled: true
   image: dellemc/csipowermax-reverseproxy:v2.3.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
