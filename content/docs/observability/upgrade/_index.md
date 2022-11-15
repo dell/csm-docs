@@ -26,7 +26,7 @@ Check if the latest Helm chart version is available:
 ```
 helm search repo dell
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-dell/karavi-observability       1.0.1           1.0.0           CSM for Observability is part of the [Container...
+dell/karavi-observability       1.3.1           1.3.1           CSM for Observability is part of the [Container...
 ```
 
 >Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See [Prerequisites](../deployment/helm#prerequisites) for location of CRDs.
