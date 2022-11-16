@@ -37,3 +37,7 @@ Remove [the resources that were created in Kubernetes cluster for Encryption](..
 ## Remove Vault Server Configuration
 
 Remove [the configuration created in the Vault server for Encryption](../vault#minimum-server-configuration).
+
+## Remove Rekey Controller
+
+Remove [the configuration created in the Rekey Controller for Encryption](../#rekey-controller-installation).
