@@ -13,7 +13,7 @@ description: Release notes for PowerFlex CSI driver
 - [SLES 15 SP4 support added](https://github.com/dell/csm/issues/539)
 - [OCP 4.11 support added](https://github.com/dell/csm/issues/480)
 - [K8 1.25 support added](https://github.com/dell/csm/issues/478)
-- Added support for PowerFlex storage system v4.0
+- [Added support for PowerFlex storage system v4.0](https://github.com/dell/csm/issues/476)
 
 ### Fixed Issues 
 - [Enhancements and fixes to volume group snapshotter](https://github.com/dell/csm/issues/371)
