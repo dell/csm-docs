@@ -12,6 +12,8 @@ The CSM Encryption Rekey CRD Controller is an optional component that, if instal
 Kubernetes cluster. The Rekey Controller can be installed via the standard Dell Helm Chart repository available 
 at https://github.com/dell/helm-charts.
 
+Dell Helm charts can also be added with the command `helm repo add dell https://dell.github.io/helm-charts`.
+
 A secret of the cluster config must be created with the name ``cluster-kube-config`` typically from the .kube/config. Here is an example:  
 
 ```shell
@@ -58,7 +60,7 @@ port:
 Copy the values.yaml to a local file. Once the CSM Encryption Rekey Controller local values.yaml file has been
 adjusted for the current cluster, deploy the controller by installing the Helm chart. As an example:
 
-``` helm install --values local-values.yaml rekey-controller csm-encryption-rekey-controller```
+``` helm install --values local-values.yaml rekey-controller dell/csm-encryption-rekey-controller```
 
 A rekey-controller pod should now be up and running.
 
