@@ -28,6 +28,8 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl schedule create for-backup](#dellctl-schedule-create-for-backup) | Create a schedule for application backups |
 | [dellctl schedule delete](#dellctl-schedule-delete) | Delete schedules |
 | [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
+| [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
+| [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of a encryption rekey operation |
 
 
 ## Installation instructions
@@ -737,4 +739,46 @@ Get schedules with their names
 # dellctl schedule get schedule1
 NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAST BACKUP TIME
 schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
+```
+
+### dellctl encryption rekey
+
+Encryption rekey with a name for the rekey object and volume name of an encrypted volume
+
+##### Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for get
+```
+
+
+##### Output
+
+
+```
+# dellctl encryption rekey myrekey k8s-5d2cc565d4
+ INFO rekey request "myrekey" submitted successfully for persistent volume "k8s-5d2cc565d4".
+ INFO Run 'dellctl encryption rekey-status myrekey' for more details.
+```
+
+
+### dellctl encryption rekey-status
+
+Encryption rekey status with name of the rekey object
+
+##### Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for get
+```
+
+
+##### Output
+
+
+```
+# dellctl encryption rekey-status myrekey
+ INFO Status of rekey request myrekey = completed
 ```
