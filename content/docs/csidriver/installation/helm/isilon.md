@@ -172,6 +172,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | isiAccessZone | Define the name of the access zone a volume can be created in. If storageclass is missing with AccessZone parameter, then value of isiAccessZone is used for the same. | No | System |
    | enableQuota | Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume. This requires SmartQuotas to be enabled.| No | true |   
    | isiPath | Define the base path for the volumes to be created on PowerScale cluster. This value acts as a default value for isiPath, if not specified for a cluster config in secret| No | /ifs/data/csi |
+   | ignoreUnresolvableHosts | Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | false |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
    | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
@@ -205,6 +206,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | isDefault | Indicates if this is a default cluster (would be used by storage classes without ClusterName parameter). Only one of the cluster config should be marked as default. | No | false |
    | ***Optional parameters*** | Following parameters are Optional. If specified will override default values from values.yaml. |
    | skipCertificateValidation | Specify whether the PowerScale OneFS API server's certificate chain and hostname must be verified. | No | default value from values.yaml |
+   | ignoreUnresolvableHosts | Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | default value from values.yaml |
    | endpointPort | Specify the HTTPs port number of the PowerScale OneFS API server | No | default value from values.yaml |
    | isiPath | The base path for the volumes to be created on PowerScale cluster. Note: IsiPath parameter in storageclass, if present will override this attribute. | No | default value from values.yaml |
    | mountEndpoint | Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if [CSM-Authorization](https://github.com/dell/karavi-authorization) is enabled. | No | - |
