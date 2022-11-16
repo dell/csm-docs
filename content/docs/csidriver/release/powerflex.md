@@ -3,12 +3,17 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.4.0
+## Release Notes - CSI PowerFlex v2.5.0
 
 ### New Features/Changes
-- [Added optional parameter protectionDomain to storageclass](https://github.com/dell/csm/issues/415)
-- [Added InstallationID annotation for volume attributes.](https://github.com/dell/csm/issues/434)
-- RHEL 8.6 support added 
+- [Read Only Block support](https://github.com/dell/csm/issues/509)
+- [Added support for setting QoS limits by CSI-PowerFLex driver](https://github.com/dell/csm/issues/533)
+- [Added support for standardizing helm installation for CSI-PowerFlex driver](https://github.com/dell/csm/issues/494)
+- [Automated SDC deployment on RHEL 7.9 and 8.x](https://github.com/dell/csm/issues/494)
+- [SLES 15 SP4 support added](https://github.com/dell/csm/issues/539)
+- [OCP 4.11 support added](https://github.com/dell/csm/issues/480)
+- [K8 1.25 support added](https://github.com/dell/csm/issues/478)
+- Added support for PowerFlex storage system v4.0
 
 ### Fixed Issues 
 - [Enhancements and fixes to volume group snapshotter](https://github.com/dell/csm/issues/371)
