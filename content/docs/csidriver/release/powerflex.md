@@ -16,7 +16,7 @@ description: Release notes for PowerFlex CSI driver
 - [Added support for PowerFlex storage system v4.0](https://github.com/dell/csm/issues/476)
 
 ### Fixed Issues 
-- [Enhancements and fixes to volume group snapshotter](https://github.com/dell/csm/issues/371)
+- [Fix for volume RO mount option](https://github.com/dell/csm/issues/503)
 
 ### Known Issues
 
