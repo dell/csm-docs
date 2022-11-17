@@ -17,23 +17,18 @@ The CSM for Authorization proxy server requires a Linux host with the following 
 - 4 CPU
 - 200 GB local storage
 
-These packages need to be installed on the Linux host:
+The following package needs to be installed on the Linux host:
 - container-selinux
-- k3s-selinux-0.4-1
 
-Use the appropriate package manager on the machine to install the packages.
+Use the appropriate package manager on the machine to install the package.
 
 ### Using yum on CentOS/RedHat 7:
 
 yum install -y container-selinux
 
-yum install -y https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm
-
 ### Using yum on CentOS/RedHat 8:
 
 yum install -y container-selinux
-
-yum install -y https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm
 
 ### Dark Sites
 
@@ -41,30 +36,28 @@ For environments where `yum` will not work, obtain the supported version of cont
 
 The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [https://centos.pkgs.org/7/centos-extras-x86_64/](https://centos.pkgs.org/7/centos-extras-x86_64/) and [https://centos.pkgs.org/8/centos-appstream-x86_64/](https://centos.pkgs.org/8/centos-appstream-x86_64/), respectively.
 
-The k3s-selinux-0.4-1 RPM can be obtained from [https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm](https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm) or [https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm](https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm) for CentOS/RedHat 7 and 8, respectively. Download the supported version of k3s-selinux-0.4-1 for your OS version and install it.
-
 ## Deploying the CSM Authorization Proxy Server
 
 The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator. 
 
-The CSM for Authorization proxy server is installed using a single binary installer.
+The CSM for Authorization proxy server is installed using a shell script after extracting from a tar archive.
 
 If CSM for Authorization is being installed on a system where SELinux is enabled, you must ensure the proper SELinux policies have been installed.
 
-### Single Binary Installer
+### Shell Script Installer
 
-The easiest way to obtain the single binary installer RPM is directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.  
+The easiest way to obtain the tar archive with the shell script installer is directly from the [GitHub repository's releases](https://github.com/dell/karavi-authorization/releases) section.  
 
-Alternatively, the single binary installer can be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
+Alternatively, the tar archive can be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
 
 ```
-make dist build-installer rpm
+make dist build-installer rpm package
 ```
 
-The `build-installer` step creates a binary at `karavi-authorization/bin/deploy` and embeds all components required for installation. The `rpm` step generates an RPM package and stores it at `karavi-authorization/deploy/rpm/x86_64/`.
+The `build-installer` step creates a binary at `karavi-authorization/bin/deploy` and embeds all components required for installation. The `rpm` step generates an RPM package and stores it at `karavi-authorization/deploy/rpm/x86_64/`. The `package` step bundles the install script, authorization package, pre-downloaded K3s-SELinux packages, and policies folder together for the installation in the `packages/` directory.
 This allows CSM for Authorization to be installed in network-restricted environments.
 
-A Storage Administrator can execute the installer or rpm package as a root user or via `sudo`.
+A Storage Administrator can execute the shell script as a root user or via `sudo`.
 
 ### Installing the RPM
 
@@ -118,13 +111,20 @@ A Storage Administrator can execute the installer or rpm package as a root user 
       $ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out DNS-hostname.com.crt -days 365 -sha256
       ```
 
-3. To install the rpm package on the system, run the below command:
+3. To install the rpm package on the system, you must first extract the contents of the tar file with the command:
 
     ```shell
-    rpm -ivh <rpm_file_name>
+    tar -xvf karavi_authorization_<version>
     ```
 
-4. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
+4. Afterwards, you must enter the extracted folder's directory and run the shell script:
+
+    ```shell
+    cd karavi_authorization_<version>
+    sh install_karavi_auth.sh
+    ```
+
+5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 
 If errors occur during installation, review the [Troubleshooting](../../troubleshooting) section.
 

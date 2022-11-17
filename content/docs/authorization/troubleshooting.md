@@ -58,9 +58,9 @@ View the contents /tmp/policy-install-for-karavi* file listed in the error messa
 ```
 $ cat /tmp/policy-install-for-karavi3163047435
 
-# find the location of the policy-install.sh script located in the file and manually run the script
+# find the location of the policy-install.sh script located in the extracted folder of the tar archive and manually run the script
 
-$ /tmp/karavi-installer-2908017483/policy-install.sh
+$ karavi_authorization_<version>/policy-install.sh
 ```
 
 ### After installation, the create-pvc Pod is in an Error state
