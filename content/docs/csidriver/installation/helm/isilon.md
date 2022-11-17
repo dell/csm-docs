@@ -134,7 +134,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |  
-   | version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.5.0 |
 | driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
    | logLevel | CSI driver log level | No | "debug" |
    | certSecretCount | Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
