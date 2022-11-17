@@ -118,6 +118,10 @@ Access to the data will be lost for ever.
 
 Refer to [Vault Configuration section](vault) for minimal configuration steps required to support Encryption and other configuration considerations.
 
+## Key Rotation (rekey)
+This preview of Encryption includes the ability to change the KEK (Key Encryption Key) of an encrypted volume, an operation commonly known as Shallow Rekey, or 
+Shallow Key Rotation. The KEK is the 256-bit key that encrypts the Data Encryption Key which encrypts the data on the volume. 
+
 ## Kubernetes Worker Hosts Requirements
 
 - Each Kubernetes worker host should have SSH server running.

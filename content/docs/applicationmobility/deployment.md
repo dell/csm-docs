@@ -60,3 +60,4 @@ This table lists the configurable parameters of the Application Mobility Helm ch
 | `velero.initContainers[0].image` |  Location of the Dell Velero plugin image.  | Yes | `dellemc/csm-application-mobility-velero-plugin:v0.1.0` |
 | `velero.initContainers[0].volumeMounts[0].mountPath` |  Mount path of the volume mount.  | Yes | `/target` |
 | `velero.initContainers[0].volumeMounts[0].name` |  Name of the volume mount.  | Yes | `plugins` |
+| `velero.restic.privileged` | If set to true, Restic Pods will be run in privileged mode. Note: Set to true when using Red Hat OpenShift | No | `false` | 
