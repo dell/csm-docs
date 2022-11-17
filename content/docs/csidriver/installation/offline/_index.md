@@ -86,8 +86,9 @@ cd dell-csi-operator/scripts
    dellemc/csi-unity:v2.0.0
    dellemc/csi-unity:v2.1.0
    localregistry:5028/csi-unity/csi-unity:20220303110841
-   dellemc/csi-vxflexos:v2.0.0
-   dellemc/csi-vxflexos:v2.1.0
+   dellemc/csi-vxflexos:v2.3.0
+   dellemc/csi-vxflexos:v2.4.0
+   dellemc/csi-vxflexos:v2.5.0
    localregistry:5035/csi-operator/dell-csi-operator:v1.7.0
    dellemc/sdc:3.5.1.1
    dellemc/sdc:3.5.1.1-1
@@ -209,8 +210,9 @@ Preparing a offline bundle for installation
    dellemc/csi-unity:nightly -> localregistry:5000/csi-operator/csi-unity:nightly
    dellemc/csi-unity:v2.0.0 -> localregistry:5000/csi-operator/csi-unity:v2.0.0
    dellemc/csi-unity:v2.1.0 -> localregistry:5000/csi-operator/csi-unity:v2.1.0
-   dellemc/csi-vxflexos:v2.0.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.0.0
-   dellemc/csi-vxflexos:v2.1.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.1.0
+   dellemc/csi-vxflexos:v2.3.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.3.0
+   dellemc/csi-vxflexos:v2.4.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.4.0
+   dellemc/csi-vxflexos:v2.5.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.5.0
    dellemc/sdc:3.5.1.1 -> localregistry:5000/csi-operator/sdc:3.5.1.1
    dellemc/sdc:3.5.1.1-1 -> localregistry:5000/csi-operator/sdc:3.5.1.1-1
    dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
@@ -232,8 +234,9 @@ Preparing a offline bundle for installation
    changing: dellemc/csi-unity:nightly -> localregistry:5000/csi-operator/csi-unity:nightly
    changing: dellemc/csi-unity:v2.0.0 -> localregistry:5000/csi-operator/csi-unity:v2.0.0
    changing: dellemc/csi-unity:v2.1.0 -> localregistry:5000/csi-operator/csi-unity:v2.1.0
-   changing: dellemc/csi-vxflexos:v2.0.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.0.0
-   changing: dellemc/csi-vxflexos:v2.1.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.1.0
+   changing: dellemc/csi-vxflexos:v2.3.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.3.0
+   changing: dellemc/csi-vxflexos:v2.4.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.4.0
+   changing: dellemc/csi-vxflexos:v2.5.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.5.0
    changing: dellemc/sdc:3.5.1.1 -> localregistry:5000/csi-operator/sdc:3.5.1.1
    changing: dellemc/sdc:3.5.1.1-1 -> localregistry:5000/csi-operator/sdc:3.5.1.1-1
    changing: dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
