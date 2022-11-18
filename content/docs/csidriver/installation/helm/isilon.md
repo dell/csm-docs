@@ -22,6 +22,7 @@ The following are requirements to be met before installing the CSI Driver for De
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
+- `nfs-utils` package must be installed on nodes that will mount volumes
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 - If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../replication/deployment/) first
