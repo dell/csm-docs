@@ -53,15 +53,7 @@ error: failed to install policies (see /tmp/policy-install-for-karavi3163047435)
 
 __Resolution__
 
-View the contents /tmp/policy-install-for-karavi* file listed in the error message. If there is a Permission denied error while running the policy-install.sh script, manually run the script to install policies.
-
-```
-$ cat /tmp/policy-install-for-karavi3163047435
-
-# find the location of the policy-install.sh script located in the extracted folder of the tar archive and manually run the script
-
-$ karavi_authorization_<version>/policy-install.sh
-```
+This issue should only occur with older versions of CSM Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.
 
 ### After installation, the create-pvc Pod is in an Error state
 If SELinux is enabled, the create-pvc Pod may be in an Error state:

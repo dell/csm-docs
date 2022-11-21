@@ -57,7 +57,7 @@ make dist build-installer rpm package
 The `build-installer` step creates a binary at `karavi-authorization/bin/deploy` and embeds all components required for installation. The `rpm` step generates an RPM package and stores it at `karavi-authorization/deploy/rpm/x86_64/`. The `package` step bundles the install script, authorization package, pre-downloaded K3s-SELinux packages, and policies folder together for the installation in the `packages/` directory.
 This allows CSM for Authorization to be installed in network-restricted environments.
 
-A Storage Administrator can execute the shell script as a root user or via `sudo`.
+A Storage Administrator can execute the shell script, install_karavi_auth.sh as a root user or via `sudo`.
 
 ### Installing the RPM
 
