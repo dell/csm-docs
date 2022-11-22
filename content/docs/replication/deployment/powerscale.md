@@ -131,7 +131,7 @@ Let's go through each parameter and what it means:
 > NOTE: Available RPO values "Five_Minutes", "Fifteen_Minutes", "Thirty_Minutes", "One_Hour", "Six_Hours", "Twelve_Hours", "One_Day"
 * `replication.storage.dell.com/ignoreNamespaces`, if set to `true` PowerScale driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.
 * `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them.
-> NOTE: Please configure the VolumeGroupPrefix carefully.  The Name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<System IP Address OR FQDN\>-\<rpo\>\' cannot be           more than 63 characters.
+> NOTE: Please configure the VolumeGroupPrefix carefully.  The Name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<System IP Address OR FQDN\>-\<rpo\>\' cannot be more than 63 characters.
 * `Accesszone` is the name of the access zone a volume can be created in.
 * `AzServiceIP` AccessZone groupnet service IP. It is optional and can be provided if different than the PowerScale cluster endpoint.
 * `IsiPath` is the base path for the volumes to be created on the PowerScale cluster.
