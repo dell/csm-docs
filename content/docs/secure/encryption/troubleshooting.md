@@ -43,27 +43,27 @@ If you run a [test instance of the server in a Docker container](../vault#vault-
 
 ## Typical Failure Reasons
 
-#### Incorrect Vault related configuration
+### Incorrect Vault related configuration
 
 - check [logs](#logs-and-events)
 - check [vault-auth secret](../deployment#secret-vault-auth)
 - check [vault-cert secret](../deployment#secret-vault-cert)
 - check [vault-client-conf config map](../deployment#configmap-vault-client-conf)
 
-#### Incorrect Vault server-side configuration
+### Incorrect Vault server-side configuration
 
 - check [logs](#logs-and-events)
 - check [Vault server configuration](../vault#minimum-server-configuration)
 
-#### Expired AppRole secret ID
+### Expired AppRole secret ID
 
 - [reset the role secret ID](../vault#set-role-id-and-secret-id-to-the-role) 
 
-#### Incorrect CSI driver configuration
+### Incorrect CSI driver configuration
 
 - check the related CSI driver [troubleshooting steps](../../../csidriver/troubleshooting)
 
-#### SSH server is stopped/restarted on the worker host {#ssh-stopped}
+### SSH server is stopped/restarted on the worker host {#ssh-stopped}
 
 This may manifest in:
 - failure to start the CSI driver
@@ -74,7 +74,7 @@ Resolution:
 - check SSH server is running on all worker host
 - stop all workloads that use encrypted volumes on the node, then restart them
 
-#### No license provided, or license expired
+### No license provided, or license expired
 
 This may manifest in:
 - failure to start the CSI driver
@@ -85,7 +85,7 @@ Resolution:
 - check the license is for the cluster on which the encrypted volumes are created
 - check [encryption-license secret](../deployment#secret-encryption-license)
 
-# Typical Rekey Failure reasons
+## Typical Rekey Failure reasons
 If all rekeys in the cluster are failing 
 - check the Rekey controller helm chart values.yaml `provisioner` name against the Dell CSI driver chart `encryption.pluginName`, and ensure they match.
 - check the Rekey controller helm chart values.yaml `port` number against the Dell CSI driver chart `encryption.apiPort`, and ensure they match.

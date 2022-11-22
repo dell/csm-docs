@@ -26,11 +26,11 @@ For detailed information on the cryptography behind gocryptfs, see [gocryptfs Cr
 
 When a CSI Driver is installed with the Encryption feature enabled, two provisioners are registered in the cluster:
 
-#### Provisioner for unencrypted volumes
+**Provisioner for unencrypted volumes**
 
 This provisioner belongs to the storage driver and does not depend on the Encryption feature. Use a storage class with this provisioner to create regular unencrypted volumes. 
 
-#### Provisioner for encrypted volumes
+**Provisioner for encrypted volumes**
 
 This provisioner belongs to Encryption and registers with the name [`encryption.pluginName`](deployment/#helm-chart-values) when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.
 
