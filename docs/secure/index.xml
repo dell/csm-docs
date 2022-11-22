@@ -33,7 +33,7 @@
 &lt;p&gt;The volume data is encrypted on the Kubernetes worker host running the application workload, transparently for the application.&lt;/p&gt;
 &lt;p&gt;Under the hood, &lt;em&gt;gocryptfs&lt;/em&gt;, an open-source FUSE based encryptor, is used to encrypt both files content and the names of files and directories.&lt;/p&gt;
 &lt;p&gt;Files content is encrypted using AES-256-GCM and names are encrypted using AES-256-EME.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;gocryptfs&lt;/em&gt; needs a password to initialize and to unlock the encrypted file system. 
+&lt;p&gt;&lt;em&gt;gocryptfs&lt;/em&gt; needs a password to initialize and to unlock the encrypted file system.
 Encryption generates 32 random bytes for the password and stores them in Hashicorp Vault.&lt;/p&gt;
 &lt;p&gt;For detailed information on the cryptography behind gocryptfs, see &lt;a href=&#34;https://nuetzlich.net/gocryptfs/forward_mode_crypto&#34;&gt;gocryptfs Cryptography&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When a CSI Driver is installed with the Encryption feature enabled, two provisioners are registered in the cluster:&lt;/p&gt;
@@ -102,7 +102,7 @@ Encryption generates 32 random bytes for the password and stores them in Hashico
 &lt;li&gt;When deployed with PowerScale CSI driver, &lt;code&gt;controllerCount&lt;/code&gt; has to be set to 1.&lt;/li&gt;
 &lt;li&gt;No other CSM component can be enabled simultaneously with Encryption.&lt;/li&gt;
 &lt;li&gt;The only supported authentication method for Vault is AppRole.&lt;/li&gt;
-&lt;li&gt;Encryption secrets, config maps and encryption related values cannot be updated while the CSI driver is running: 
+&lt;li&gt;Encryption secrets, config maps and encryption related values cannot be updated while the CSI driver is running:
 the CSI driver must be restarted to pick up the change.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Supported Operating Systems/Container Orchestrator Platforms&lt;/h2&gt;
@@ -200,14 +200,14 @@ the CSI driver must be restarted to pick up the change.&lt;/li&gt;
 &lt;p&gt;Vault server (or cluster) is typically deployed in a dedicated Kubernetes cluster, but for the purpose of Encryption, it can be located anywhere.
 Even the simplest standalone single instance server with in-memory storage will suffice for testing.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Properly deployed and configured Vault is crucial for security of the volumes encrypted with Encryption. 
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Properly deployed and configured Vault is crucial for security of the volumes encrypted with Encryption.
 Please refer to the Hashicorp Vault documentation regarding recommended deployment options.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;CAUTION:&lt;/strong&gt; Compromised Vault server or Vault storage back-end may lead to unauthorized access to the volumes encrypted with Encryption.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;CAUTION:&lt;/strong&gt; Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption. 
+&lt;p&gt;&lt;strong&gt;CAUTION:&lt;/strong&gt; Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption.
 Access to the data will be lost for ever.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Refer to &lt;a href=&#34;vault&#34;&gt;Vault Configuration section&lt;/a&gt; for minimal configuration steps required to support Encryption and other configuration considerations.&lt;/p&gt;

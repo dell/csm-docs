@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.104.3" />
+<meta name="generator" content="Hugo 0.106.0">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/docs/authorization/deployment/rpm/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -560,7 +560,7 @@
     </li>
     <li><a href="#deploying-the-csm-authorization-proxy-server">Deploying the CSM Authorization Proxy Server</a>
       <ul>
-        <li><a href="#single-binary-installer">Single Binary Installer</a></li>
+        <li><a href="#shell-script-installer">Shell Script Installer</a></li>
         <li><a href="#installing-the-rpm">Installing the RPM</a></li>
       </ul>
     </li>
@@ -641,33 +641,29 @@
 <li>4 CPU</li>
 <li>200 GB local storage</li>
 </ul>
-<p>These packages need to be installed on the Linux host:</p>
+<p>The following package needs to be installed on the Linux host:</p>
 <ul>
 <li>container-selinux</li>
-<li>k3s-selinux-0.4-1</li>
 </ul>
-<p>Use the appropriate package manager on the machine to install the packages.</p>
+<p>Use the appropriate package manager on the machine to install the package.</p>
 <h3 id="using-yum-on-centosredhat-7">Using yum on CentOS/RedHat 7:</h3>
 <p>yum install -y container-selinux</p>
-<p>yum install -y <a href="https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm">https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm</a></p>
 <h3 id="using-yum-on-centosredhat-8">Using yum on CentOS/RedHat 8:</h3>
 <p>yum install -y container-selinux</p>
-<p>yum install -y <a href="https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm">https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm</a></p>
 <h3 id="dark-sites">Dark Sites</h3>
 <p>For environments where <code>yum</code> will not work, obtain the supported version of container-selinux for your OS version and install it.</p>
 <p>The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from <a href="https://centos.pkgs.org/7/centos-extras-x86_64/">https://centos.pkgs.org/7/centos-extras-x86_64/</a> and <a href="https://centos.pkgs.org/8/centos-appstream-x86_64/">https://centos.pkgs.org/8/centos-appstream-x86_64/</a>, respectively.</p>
-<p>The k3s-selinux-0.4-1 RPM can be obtained from <a href="https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm">https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm</a> or <a href="https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm">https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm</a> for CentOS/RedHat 7 and 8, respectively. Download the supported version of k3s-selinux-0.4-1 for your OS version and install it.</p>
 <h2 id="deploying-the-csm-authorization-proxy-server">Deploying the CSM Authorization Proxy Server</h2>
 <p>The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.</p>
-<p>The CSM for Authorization proxy server is installed using a single binary installer.</p>
+<p>The CSM for Authorization proxy server is installed using a shell script after extracting from a tar archive.</p>
 <p>If CSM for Authorization is being installed on a system where SELinux is enabled, you must ensure the proper SELinux policies have been installed.</p>
-<h3 id="single-binary-installer">Single Binary Installer</h3>
-<p>The easiest way to obtain the single binary installer RPM is directly from the <a href="https://github.com/dell/karavi-authorization/releases">GitHub repository&rsquo;s releases</a> section.</p>
-<p>Alternatively, the single binary installer can be built from source by cloning the <a href="https://github.com/dell/karavi-authorization">GitHub repository</a> and using the following Makefile targets to build the installer:</p>
-<pre tabindex="0"><code>make dist build-installer rpm
-</code></pre><p>The <code>build-installer</code> step creates a binary at <code>karavi-authorization/bin/deploy</code> and embeds all components required for installation. The <code>rpm</code> step generates an RPM package and stores it at <code>karavi-authorization/deploy/rpm/x86_64/</code>.
+<h3 id="shell-script-installer">Shell Script Installer</h3>
+<p>As of version 1.5.0, the easiest way to obtain the tar archive with the shell script installer is directly from the <a href="https://github.com/dell/karavi-authorization/releases">GitHub repository&rsquo;s releases</a> section.</p>
+<p>Alternatively, the tar archive can be built from source by cloning the <a href="https://github.com/dell/karavi-authorization">GitHub repository</a> and using the following Makefile targets to build the installer:</p>
+<pre tabindex="0"><code>make dist build-installer rpm package
+</code></pre><p>The <code>build-installer</code> step creates a binary at <code>karavi-authorization/bin/deploy</code> and embeds all components required for installation. The <code>rpm</code> step generates an RPM package and stores it at <code>karavi-authorization/deploy/rpm/x86_64/</code>. The <code>package</code> step bundles the install script, authorization package, pre-downloaded K3s-SELinux packages, and policies folder together for the installation in the <code>packages/</code> directory.
 This allows CSM for Authorization to be installed in network-restricted environments.</p>
-<p>A Storage Administrator can execute the installer or rpm package as a root user or via <code>sudo</code>.</p>
+<p>A Storage Administrator can execute the shell script, install_karavi_auth.sh as a root user or via <code>sudo</code>.</p>
 <h3 id="installing-the-rpm">Installing the RPM</h3>
 <ol>
 <li>
@@ -722,8 +718,13 @@ This allows CSM for Authorization to be installed in network-restricted environm
 </code></pre>
 <ol start="3">
 <li>
-<p>To install the rpm package on the system, run the below command:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rpm -ivh &lt;rpm_file_name&gt;
+<p>To install the rpm package on the system, you must first extract the contents of the tar file with the command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tar -xvf karavi_authorization_&lt;version&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>Afterwards, you must enter the extracted folder&rsquo;s directory and run the shell script:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#204a87">cd</span> karavi_authorization_&lt;version&gt;
+</span></span><span style="display:flex;"><span>sh install_karavi_auth.sh
 </span></span></code></pre></div></li>
 <li>
 <p>After installation, application data will be stored on the system under <code>/var/lib/rancher/k3s/storage/</code>.</p>

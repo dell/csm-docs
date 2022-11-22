@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.104.3" />
+<meta name="generator" content="Hugo 0.106.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -617,12 +617,12 @@
 	<h1>Deployment</h1>
 
 	       
-	<p>Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
+	<p>Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator.
 In the tech preview release, Encryption can only be enabled via Helm chart installation.</p>
-<p>Except for additional Encryption related configuration outlined on this page, 
+<p>Except for additional Encryption related configuration outlined on this page,
 the rest of the deployment process is described in the correspondent <a href="../../../csidriver/installation/helm">CSI driver documentation</a>.</p>
 <h2 id="vault-server">Vault Server</h2>
-<p>Hashicorp Vault must be <a href="../vault">pre-configured</a> to support Encryption. The Vault server&rsquo;s IP address and port must be accessible 
+<p>Hashicorp Vault must be <a href="../vault">pre-configured</a> to support Encryption. The Vault server&rsquo;s IP address and port must be accessible
 from the Kubernetes cluster where the CSI driver is to be deployed.</p>
 <h2 id="helm-chart-values">Helm Chart Values</h2>
 <p>The drivers that support Encryption via Helm chart have an <code>encryption</code> block in their <em>values.yaml</em> file that looks like this:</p>
@@ -754,7 +754,7 @@ from the Kubernetes cluster where the CSI driver is to be deployed.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl create secret generic vault-cert -n &lt;driver namespace&gt; <span style="color:#4e9a06">\
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	--from-file<span style="color:#ce5c00;font-weight:bold">=</span>server-ca.crt --from-file<span style="color:#ce5c00;font-weight:bold">=</span>client.crt --from-file<span style="color:#ce5c00;font-weight:bold">=</span>client.key <span style="color:#4e9a06">\
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
-</span></span></code></pre></div><p>In this release, Encryption does not pick up modifications to this secret while the CSI driver is running. 
+</span></span></code></pre></div><p>In this release, Encryption does not pick up modifications to this secret while the CSI driver is running.
 To apply new values in the secret (e.g., to update the client certificate), the CSI driver must be restarted.</p>
 <h3 id="configmap-vault-client-conf">ConfigMap <em>vault-client-conf</em></h3>
 <p>A config map with settings used by Encryption to communicate with the Vault server.</p>

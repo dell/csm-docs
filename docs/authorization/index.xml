@@ -271,7 +271,9 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
         
         &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
 &lt;h2 id=&#34;uninstalling-the-rpm&#34;&gt;Uninstalling the RPM&lt;/h2&gt;
-&lt;p&gt;To uninstall the rpm package on the system, run the below command:&lt;/p&gt;
+&lt;p&gt;To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -e k3s-selinux
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To uninstall the CSM Authorization rpm package on the system, run:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -e &amp;lt;rpm_file_name&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uninstalling-the-sidecar-proxy-in-the-csi-driver&#34;&gt;Uninstalling the sidecar-proxy in the CSI Driver&lt;/h2&gt;
 &lt;p&gt;To uninstall the sidecar-proxy in the CSI Driver, &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../deployment&#34;&gt;reinstall&lt;/a&gt; the driver using the original configuration secret.&lt;/p&gt;
@@ -295,8 +297,8 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h3&gt;
 &lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To update the rpm package on the system, run the below command:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -Uvh karavi-authorization-&amp;lt;new_version&amp;gt;.x86_64.rpm --nopreun --nopostun
+&lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh install_karavi_auth.sh --upgrade
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -qa | grep karavi
 k3s kubectl version
@@ -959,13 +961,8 @@ prevent communication with the &lt;code&gt;&amp;lt;grpc-address&amp;gt;&lt;/code
 &lt;p&gt;If SELinux is enabled, the policies may fail to install:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;error: failed to install policies (see /tmp/policy-install-for-karavi3163047435): exit status 1
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;View the contents /tmp/policy-install-for-karavi* file listed in the error message. If there is a Permission denied error while running the policy-install.sh script, manually run the script to install policies.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat /tmp/policy-install-for-karavi3163047435
-
-# find the location of the policy-install.sh script located in the file and manually run the script
-
-$ /tmp/karavi-installer-2908017483/policy-install.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/h3&gt;
+&lt;p&gt;This issue should only occur with older versions of CSM Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.&lt;/p&gt;
+&lt;h3 id=&#34;after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/h3&gt;
 &lt;p&gt;If SELinux is enabled, the create-pvc Pod may be in an Error state:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kube-system    create-pvc-44a763c7-e70f-4e32-a114-e94615041042   0/1     Error       0          102s
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;

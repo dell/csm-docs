@@ -34,33 +34,29 @@
 &lt;li&gt;4 CPU&lt;/li&gt;
 &lt;li&gt;200 GB local storage&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;These packages need to be installed on the Linux host:&lt;/p&gt;
+&lt;p&gt;The following package needs to be installed on the Linux host:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;container-selinux&lt;/li&gt;
-&lt;li&gt;k3s-selinux-0.4-1&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Use the appropriate package manager on the machine to install the packages.&lt;/p&gt;
+&lt;p&gt;Use the appropriate package manager on the machine to install the package.&lt;/p&gt;
 &lt;h3 id=&#34;using-yum-on-centosredhat-7&#34;&gt;Using yum on CentOS/RedHat 7:&lt;/h3&gt;
 &lt;p&gt;yum install -y container-selinux&lt;/p&gt;
-&lt;p&gt;yum install -y &lt;a href=&#34;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&#34;&gt;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;using-yum-on-centosredhat-8&#34;&gt;Using yum on CentOS/RedHat 8:&lt;/h3&gt;
 &lt;p&gt;yum install -y container-selinux&lt;/p&gt;
-&lt;p&gt;yum install -y &lt;a href=&#34;https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm&#34;&gt;https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;dark-sites&#34;&gt;Dark Sites&lt;/h3&gt;
 &lt;p&gt;For environments where &lt;code&gt;yum&lt;/code&gt; will not work, obtain the supported version of container-selinux for your OS version and install it.&lt;/p&gt;
 &lt;p&gt;The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from &lt;a href=&#34;https://centos.pkgs.org/7/centos-extras-x86_64/&#34;&gt;https://centos.pkgs.org/7/centos-extras-x86_64/&lt;/a&gt; and &lt;a href=&#34;https://centos.pkgs.org/8/centos-appstream-x86_64/&#34;&gt;https://centos.pkgs.org/8/centos-appstream-x86_64/&lt;/a&gt;, respectively.&lt;/p&gt;
-&lt;p&gt;The k3s-selinux-0.4-1 RPM can be obtained from &lt;a href=&#34;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&#34;&gt;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&lt;/a&gt; or &lt;a href=&#34;https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm&#34;&gt;https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm&lt;/a&gt; for CentOS/RedHat 7 and 8, respectively. Download the supported version of k3s-selinux-0.4-1 for your OS version and install it.&lt;/p&gt;
 &lt;h2 id=&#34;deploying-the-csm-authorization-proxy-server&#34;&gt;Deploying the CSM Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.&lt;/p&gt;
-&lt;p&gt;The CSM for Authorization proxy server is installed using a single binary installer.&lt;/p&gt;
+&lt;p&gt;The CSM for Authorization proxy server is installed using a shell script after extracting from a tar archive.&lt;/p&gt;
 &lt;p&gt;If CSM for Authorization is being installed on a system where SELinux is enabled, you must ensure the proper SELinux policies have been installed.&lt;/p&gt;
-&lt;h3 id=&#34;single-binary-installer&#34;&gt;Single Binary Installer&lt;/h3&gt;
-&lt;p&gt;The easiest way to obtain the single binary installer RPM is directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
-&lt;p&gt;Alternatively, the single binary installer can be built from source by cloning the &lt;a href=&#34;https://github.com/dell/karavi-authorization&#34;&gt;GitHub repository&lt;/a&gt; and using the following Makefile targets to build the installer:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;make dist build-installer rpm
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;build-installer&lt;/code&gt; step creates a binary at &lt;code&gt;karavi-authorization/bin/deploy&lt;/code&gt; and embeds all components required for installation. The &lt;code&gt;rpm&lt;/code&gt; step generates an RPM package and stores it at &lt;code&gt;karavi-authorization/deploy/rpm/x86_64/&lt;/code&gt;.
+&lt;h3 id=&#34;shell-script-installer&#34;&gt;Shell Script Installer&lt;/h3&gt;
+&lt;p&gt;As of version 1.5.0, the easiest way to obtain the tar archive with the shell script installer is directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
+&lt;p&gt;Alternatively, the tar archive can be built from source by cloning the &lt;a href=&#34;https://github.com/dell/karavi-authorization&#34;&gt;GitHub repository&lt;/a&gt; and using the following Makefile targets to build the installer:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;make dist build-installer rpm package
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;build-installer&lt;/code&gt; step creates a binary at &lt;code&gt;karavi-authorization/bin/deploy&lt;/code&gt; and embeds all components required for installation. The &lt;code&gt;rpm&lt;/code&gt; step generates an RPM package and stores it at &lt;code&gt;karavi-authorization/deploy/rpm/x86_64/&lt;/code&gt;. The &lt;code&gt;package&lt;/code&gt; step bundles the install script, authorization package, pre-downloaded K3s-SELinux packages, and policies folder together for the installation in the &lt;code&gt;packages/&lt;/code&gt; directory.
 This allows CSM for Authorization to be installed in network-restricted environments.&lt;/p&gt;
-&lt;p&gt;A Storage Administrator can execute the installer or rpm package as a root user or via &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A Storage Administrator can execute the shell script, install_karavi_auth.sh as a root user or via &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;installing-the-rpm&#34;&gt;Installing the RPM&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -115,8 +111,13 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;/code&gt;&lt;/pre&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
-&lt;p&gt;To install the rpm package on the system, run the below command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm -ivh &amp;lt;rpm_file_name&amp;gt;
+&lt;p&gt;To install the rpm package on the system, you must first extract the contents of the tar file with the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -xvf karavi_authorization_&amp;lt;version&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Afterwards, you must enter the extracted folder&amp;rsquo;s directory and run the shell script:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; karavi_authorization_&amp;lt;version&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;After installation, application data will be stored on the system under &lt;code&gt;/var/lib/rancher/k3s/storage/&lt;/code&gt;.&lt;/p&gt;

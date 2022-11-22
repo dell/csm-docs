@@ -245,12 +245,12 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
       <description>
         
         
-        &lt;p&gt;Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator. 
+        &lt;p&gt;Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSI Operator.
 In the tech preview release, Encryption can only be enabled via Helm chart installation.&lt;/p&gt;
-&lt;p&gt;Except for additional Encryption related configuration outlined on this page, 
+&lt;p&gt;Except for additional Encryption related configuration outlined on this page,
 the rest of the deployment process is described in the correspondent &lt;a href=&#34;../../../csidriver/installation/helm&#34;&gt;CSI driver documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;vault-server&#34;&gt;Vault Server&lt;/h2&gt;
-&lt;p&gt;Hashicorp Vault must be &lt;a href=&#34;../vault&#34;&gt;pre-configured&lt;/a&gt; to support Encryption. The Vault server&amp;rsquo;s IP address and port must be accessible 
+&lt;p&gt;Hashicorp Vault must be &lt;a href=&#34;../vault&#34;&gt;pre-configured&lt;/a&gt; to support Encryption. The Vault server&amp;rsquo;s IP address and port must be accessible
 from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
 &lt;h2 id=&#34;helm-chart-values&#34;&gt;Helm Chart Values&lt;/h2&gt;
 &lt;p&gt;The drivers that support Encryption via Helm chart have an &lt;code&gt;encryption&lt;/code&gt; block in their &lt;em&gt;values.yaml&lt;/em&gt; file that looks like this:&lt;/p&gt;
@@ -382,7 +382,7 @@ from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic vault-cert -n &amp;lt;driver namespace&amp;gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	--from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;server-ca.crt --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;client.crt --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;client.key &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	-o yaml --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;client &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In this release, Encryption does not pick up modifications to this secret while the CSI driver is running. 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In this release, Encryption does not pick up modifications to this secret while the CSI driver is running.
 To apply new values in the secret (e.g., to update the client certificate), the CSI driver must be restarted.&lt;/p&gt;
 &lt;h3 id=&#34;configmap-vault-client-conf&#34;&gt;ConfigMap &lt;em&gt;vault-client-conf&lt;/em&gt;&lt;/h3&gt;
 &lt;p&gt;A config map with settings used by Encryption to communicate with the Vault server.&lt;/p&gt;
@@ -4141,7 +4141,9 @@ CSM Replication controller supports following log levels:&lt;/p&gt;
         
         &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
 &lt;h2 id=&#34;uninstalling-the-rpm&#34;&gt;Uninstalling the RPM&lt;/h2&gt;
-&lt;p&gt;To uninstall the rpm package on the system, run the below command:&lt;/p&gt;
+&lt;p&gt;To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -e k3s-selinux
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To uninstall the CSM Authorization rpm package on the system, run:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -e &amp;lt;rpm_file_name&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uninstalling-the-sidecar-proxy-in-the-csi-driver&#34;&gt;Uninstalling the sidecar-proxy in the CSI Driver&lt;/h2&gt;
 &lt;p&gt;To uninstall the sidecar-proxy in the CSI Driver, &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../deployment&#34;&gt;reinstall&lt;/a&gt; the driver using the original configuration secret.&lt;/p&gt;
@@ -5553,8 +5555,8 @@ TEST SUITE: None
 &lt;/ul&gt;
 &lt;h3 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h3&gt;
 &lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To update the rpm package on the system, run the below command:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -Uvh karavi-authorization-&amp;lt;new_version&amp;gt;.x86_64.rpm --nopreun --nopostun
+&lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh install_karavi_auth.sh --upgrade
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -qa | grep karavi
 k3s kubectl version
@@ -5741,7 +5743,7 @@ data:
         &lt;h2 id=&#34;vault-server-installation&#34;&gt;Vault Server Installation&lt;/h2&gt;
 &lt;p&gt;If there is already a Vault server available, skip to &lt;a href=&#34;#minimum-server-configuration&#34;&gt;Minimum Server Configuration&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;If there is no Vault server available to use with Encryption, it can be installed in many ways following &lt;a href=&#34;https://www.vaultproject.io/docs&#34;&gt;Hashicorp Vault documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For testing environment, however, a simple deployment suggested in this section may suffice. 
+&lt;p&gt;For testing environment, however, a simple deployment suggested in this section may suffice.
 It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: With in-memory storage, the encryption keys are permanently destroyed upon the server termination.&lt;/p&gt;
@@ -5759,8 +5761,8 @@ It creates a standalone server with in-memory (non-persistent) storage, running 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	-out server.csr
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create server certificate signed by the CA:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Replace &lt;code&gt;&amp;lt;external IP&amp;gt;&lt;/code&gt; with an IP address by which Encryption can reach the Vault server. 
-This may be the address of the Docker host where the Vault server will be running. 
+&lt;p&gt;Replace &lt;code&gt;&amp;lt;external IP&amp;gt;&lt;/code&gt; with an IP address by which Encryption can reach the Vault server.
+This may be the address of the Docker host where the Vault server will be running.
 The same address should be used for &lt;code&gt;vault_addr&lt;/code&gt; in &lt;a href=&#34;../deployment#configmap-vault-client-conf&#34;&gt;vault-client-conf&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat &amp;gt; cert.ext &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
@@ -5850,16 +5852,16 @@ The same address should be used for &lt;code&gt;vault_addr&lt;/code&gt; in &lt;a
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	sh -c &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;vault server -dev -dev-listen-address 0.0.0.0:8200 -config=server.hcl&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;minimum-server-configuration&#34;&gt;Minimum Server Configuration&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; this configuration is a bare minimum to support Encryption and is not intended for use in production environment. 
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; this configuration is a bare minimum to support Encryption and is not intended for use in production environment.
 Refer to the &lt;a href=&#34;https://www.vaultproject.io/docs&#34;&gt;Hashicorp Vault documentation&lt;/a&gt; for recommended configuration options.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;If a &lt;a href=&#34;#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt; is used, the &lt;code&gt;vault&lt;/code&gt; commands below can be executed in the Vault server container shell.
 To enter the shell, run &lt;code&gt;docker exec -it vault-server sh&lt;/code&gt;. After completing the configuration process, exit the shell by typing &lt;code&gt;exit&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Alternatively, you can &lt;a href=&#34;https://www.vaultproject.io/downloads&#34;&gt;download the vault binary&lt;/a&gt; and run it anywhere. 
+&lt;p&gt;Alternatively, you can &lt;a href=&#34;https://www.vaultproject.io/downloads&#34;&gt;download the vault binary&lt;/a&gt; and run it anywhere.
 It will require two environment variables to communicate with the Vault server:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;VAULT_ADDR&lt;/code&gt; - URL similar to &lt;code&gt;http://127.0.0.1:8200&lt;/code&gt;. You may need to change the address in the URL to the address of 
+&lt;li&gt;&lt;code&gt;VAULT_ADDR&lt;/code&gt; - URL similar to &lt;code&gt;http://127.0.0.1:8200&lt;/code&gt;. You may need to change the address in the URL to the address of
 the Docker host where the server is running.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;VAULT_TOKEN&lt;/code&gt; - Authentication token, e.g. the root token &lt;code&gt;DemoRootToken&lt;/code&gt; used in the &lt;a href=&#34;#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
@@ -5908,7 +5910,7 @@ The expiration time for new secret IDs can be set in &lt;code&gt;secret_id_ttl&l
 &lt;p&gt;Effective client token TTL is determined by the Vault server based on multiple factors which are described in the &lt;a href=&#34;https://www.vaultproject.io/docs/concepts/tokens#token-time-to-live-periodic-tokens-and-explicit-max-ttls&#34;&gt;Vault documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;With the default server settings, role level values control TTL in this way:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;token_explicit_max_ttl=2h&lt;/code&gt; - limits the client token TTL to 2 hours since it was originally issues as a result of login. This is a hard limit.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;token_ttl=30m&lt;/code&gt; - sets the default client token TTL to 30 minutes. 30 minutes are counted from the login time and from any following token renewal. 
+&lt;p&gt;&lt;code&gt;token_ttl=30m&lt;/code&gt; - sets the default client token TTL to 30 minutes. 30 minutes are counted from the login time and from any following token renewal.
 The client token will only be able to renew 3 times before reaching it total allowed TTL of 2 hours.&lt;/p&gt;
 &lt;p&gt;Existing role values can be changed using &lt;code&gt;vault write auth/approle/role/dea-role token_ttl=30m token_explicit_max_ttl=2h&lt;/code&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -6724,21 +6726,21 @@ If you experience a problem with CSM for Resiliency it is important you provide 
         
         
         &lt;h2 id=&#34;logs-and-events&#34;&gt;Logs and Events&lt;/h2&gt;
-&lt;p&gt;The first and in most cases sufficient step in troubleshooting issues with a CSI driver that has Encryption enabled 
+&lt;p&gt;The first and in most cases sufficient step in troubleshooting issues with a CSI driver that has Encryption enabled
 is exploring logs of the Encryption driver and related Kubernetes components. These are some useful log sources:&lt;/p&gt;
 &lt;h3 id=&#34;csi-driver-containers-logs&#34;&gt;CSI Driver Containers Logs&lt;/h3&gt;
-&lt;p&gt;The driver creates several &lt;em&gt;controller&lt;/em&gt; and &lt;em&gt;node&lt;/em&gt; pods. They can be listed with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; get pods&lt;/code&gt;. 
+&lt;p&gt;The driver creates several &lt;em&gt;controller&lt;/em&gt; and &lt;em&gt;node&lt;/em&gt; pods. They can be listed with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; get pods&lt;/code&gt;.
 The output will look similar to:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                              READY   STATUS    RESTARTS   AGE
 isi-controller-84f697c874-2j6d4   10/10   Running   0          16h
 isi-node-4gtwf                    4/4     Running   0          16h
 isi-node-lnzws                    4/4     Running   0          16h
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;List containers in pod &lt;code&gt;isi-node-4gtwf&lt;/code&gt; with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf&lt;/code&gt;. 
-Each pod has containers called &lt;code&gt;driver&lt;/code&gt; which is the storage driver container and &lt;code&gt;driver-sec&lt;/code&gt; which is the Encryption driver container. 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;List containers in pod &lt;code&gt;isi-node-4gtwf&lt;/code&gt; with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf&lt;/code&gt;.
+Each pod has containers called &lt;code&gt;driver&lt;/code&gt; which is the storage driver container and &lt;code&gt;driver-sec&lt;/code&gt; which is the Encryption driver container.
 These container&amp;rsquo;s logs tend to provide the most important information, but other containers may give a hint too.
 View the logs of &lt;code&gt;driver-sec&lt;/code&gt; in &lt;code&gt;isi-node-4gtwf&lt;/code&gt; with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf driver-sec&lt;/code&gt;.
 The log level of this container can be changed by setting value &lt;a href=&#34;../deployment#helm-chart-values&#34;&gt;encryption.logLevel&lt;/a&gt; and restarting the driver.&lt;/p&gt;
-&lt;p&gt;Often it is necessary to see the logs produced on a specific Kubernetes worker host. 
+&lt;p&gt;Often it is necessary to see the logs produced on a specific Kubernetes worker host.
 To find which &lt;em&gt;node&lt;/em&gt; pod is running on which worker host, use &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; get pods -o wide&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;persistentvolume-persistentvolumeclaim-and-application-pod-events&#34;&gt;PersistentVolume, PersistentVolumeClaim and Application Pod Events&lt;/h3&gt;
 &lt;p&gt;Some errors may be logged to the related resource events that can be viewed with &lt;code&gt;kubectl describe&lt;/code&gt; command for that resource.&lt;/p&gt;
@@ -7019,13 +7021,8 @@ prevent communication with the &lt;code&gt;&amp;lt;grpc-address&amp;gt;&lt;/code
 &lt;p&gt;If SELinux is enabled, the policies may fail to install:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;error: failed to install policies (see /tmp/policy-install-for-karavi3163047435): exit status 1
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;View the contents /tmp/policy-install-for-karavi* file listed in the error message. If there is a Permission denied error while running the policy-install.sh script, manually run the script to install policies.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat /tmp/policy-install-for-karavi3163047435
-
-# find the location of the policy-install.sh script located in the file and manually run the script
-
-$ /tmp/karavi-installer-2908017483/policy-install.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/h3&gt;
+&lt;p&gt;This issue should only occur with older versions of CSM Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.&lt;/p&gt;
+&lt;h3 id=&#34;after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/h3&gt;
 &lt;p&gt;If SELinux is enabled, the create-pvc Pod may be in an Error state:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kube-system    create-pvc-44a763c7-e70f-4e32-a114-e94615041042   0/1     Error       0          102s
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;

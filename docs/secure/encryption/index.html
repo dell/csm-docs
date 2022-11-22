@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.104.3" />
+<meta name="generator" content="Hugo 0.106.0">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/docs/secure/encryption/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -627,7 +627,7 @@
 <p>The volume data is encrypted on the Kubernetes worker host running the application workload, transparently for the application.</p>
 <p>Under the hood, <em>gocryptfs</em>, an open-source FUSE based encryptor, is used to encrypt both files content and the names of files and directories.</p>
 <p>Files content is encrypted using AES-256-GCM and names are encrypted using AES-256-EME.</p>
-<p><em>gocryptfs</em> needs a password to initialize and to unlock the encrypted file system. 
+<p><em>gocryptfs</em> needs a password to initialize and to unlock the encrypted file system.
 Encryption generates 32 random bytes for the password and stores them in Hashicorp Vault.</p>
 <p>For detailed information on the cryptography behind gocryptfs, see <a href="https://nuetzlich.net/gocryptfs/forward_mode_crypto">gocryptfs Cryptography</a>.</p>
 <p>When a CSI Driver is installed with the Encryption feature enabled, two provisioners are registered in the cluster:</p>
@@ -696,7 +696,7 @@ Encryption generates 32 random bytes for the password and stores them in Hashico
 <li>When deployed with PowerScale CSI driver, <code>controllerCount</code> has to be set to 1.</li>
 <li>No other CSM component can be enabled simultaneously with Encryption.</li>
 <li>The only supported authentication method for Vault is AppRole.</li>
-<li>Encryption secrets, config maps and encryption related values cannot be updated while the CSI driver is running: 
+<li>Encryption secrets, config maps and encryption related values cannot be updated while the CSI driver is running:
 the CSI driver must be restarted to pick up the change.</li>
 </ul>
 <h2 id="supported-operating-systemscontainer-orchestrator-platforms">Supported Operating Systems/Container Orchestrator Platforms</h2>
@@ -794,14 +794,14 @@ the CSI driver must be restarted to pick up the change.</li>
 <p>Vault server (or cluster) is typically deployed in a dedicated Kubernetes cluster, but for the purpose of Encryption, it can be located anywhere.
 Even the simplest standalone single instance server with in-memory storage will suffice for testing.</p>
 <blockquote>
-<p><strong>NOTE:</strong> Properly deployed and configured Vault is crucial for security of the volumes encrypted with Encryption. 
+<p><strong>NOTE:</strong> Properly deployed and configured Vault is crucial for security of the volumes encrypted with Encryption.
 Please refer to the Hashicorp Vault documentation regarding recommended deployment options.</p>
 </blockquote>
 <blockquote>
 <p><strong>CAUTION:</strong> Compromised Vault server or Vault storage back-end may lead to unauthorized access to the volumes encrypted with Encryption.</p>
 </blockquote>
 <blockquote>
-<p><strong>CAUTION:</strong> Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption. 
+<p><strong>CAUTION:</strong> Destroyed Vault storage back-end or the encryption key stored in it, will make it impossible to unlock the volume encrypted with Encryption.
 Access to the data will be lost for ever.</p>
 </blockquote>
 <p>Refer to <a href="vault">Vault Configuration section</a> for minimal configuration steps required to support Encryption and other configuration considerations.</p>
