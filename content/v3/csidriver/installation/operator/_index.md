@@ -97,10 +97,9 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 #### Steps
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
-1. Clone the [Dell CSI Operator repository](https://github.com/dell/dell-csi-operator).
+1. Clone and checkout the required dell-csi-operator version using `git clone -b v1.7.0 https://github.com/dell/dell-csi-operator.git`.
 2. cd dell-csi-operator
-3. git checkout dell-csi-operator-`your-version'
-4. Run `bash scripts/install.sh` to install the operator.
+3. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
 Any existing installations of Dell CSI Operator (v1.2.0 or later) installed using `install.sh` to the 'default' or 'dell-csi-operator' namespace can be upgraded to the new version by running `install.sh --upgrade`.
 
@@ -438,5 +437,4 @@ You should not provide any `StorageClass` or `VolumeSnapshotClass` details durin
 
 **NOTE:** For more information on pre-requisites and parameters, please refer to the sub-pages below for each driver.
 
-**NOTE:** Storage Classes and Volume Snapshot Classes would no longer be created during the installation of the driver via an operator from v1.4.0 and higher.
-
+**NOTE:** Storage Classes and Volume Snapshot Classes would no longer be created during the installation of the driver via an operator from v1.4.0 andÛù—w≠ÆÇÈY‰v

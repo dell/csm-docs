@@ -37,7 +37,7 @@ kubectl create -f client/config/crd
 kubectl create -f deploy/kubernetes/snapshot-controller
 ```
 *NOTE:*
-- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
 
 ## Installing CSI Driver via Operator
 
