@@ -18,9 +18,8 @@ from the Kubernetes cluster where the CSI driver is to be deployed.
 
 ## Rekey Controller
 
-The CSM Encryption Rekey CRD Controller is an optional component that, if installed, allows encrypted volumes rekeying in a
-Kubernetes cluster. The Rekey Controller can be installed via the standard Dell Helm Chart repository available at https://github.com/dell/helm-charts.
-For complete details, please see the [installation instructions](../rekey).
+The Encryption Rekey CRD Controller is an optional component that, if installed, allows encrypted volumes rekeying in a
+Kubernetes cluster. Please refer to [Rekey Configuration](../rekey) for the Rekey Controller installation details.
 
 ## Helm Chart Values
 
@@ -35,10 +34,7 @@ encryption:
   pluginName: "sec-isilon.dellemc.com"
 
   # image: Encryption driver image name.
-  image: "dellemc/csm-encryption:v0.1.0"
-
-  # imagePullPolicy: If specified, overrides the chart global imagePullPolicy.
-  imagePullPolicy:
+  image: "dellemc/csm-encryption:v0.2.0"
 
   # logLevel: Log level of the encryption driver.
   # Allowed values: "error", "warning", "info", "debug", "trace".
@@ -73,15 +69,14 @@ encryption:
 
 | Parameter | Description| Required | Default |
 | --------- |------------|----------| ------- |  
-| enabled | Enable/disable volume encryption feature.| No | false |
-| pluginName | The name of the provisioner to use for encrypted volumes.| No | "sec-isilon.dellemc.com" |
-| image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.1.0" |
-| imagePullPolicy | If specified, overrides the chart global imagePullPolicy.| No | CSI driver global imagePullPolicy |
-| logLevel | Log level of the encryption driver.<br/>Allowed values: "error", "warning", "info", "debug, `"trace". | No | "error" |
-| apiPort | TCP Port number used by the REST API Server.| No | 3838 |
-| livenessPort | HTTP liveness probe port number. Leave empty to disable the liveness probe.| No | |
+| enabled | Enable/disable volume encryption feature. | No | false |
+| pluginName | The name of the provisioner to use for encrypted volumes. | No | "sec-isilon.dellemc.com" |
+| image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.2.0" |
+| logLevel | Log level of the encryption driver.<br/>Allowed values: "error", "warning", "info", "debug", "trace". | No | "error" |
+| apiPort | TCP Port number used by the REST API Server. | No | 3838 |
+| livenessPort | HTTP liveness probe port number. Leave empty to disable the liveness probe. | No | |
 | ocp | Enable when running an OCP Platform with CoreOS worker nodes. | No | false |
-| ocpCoreID| User ID and group ID of user core on CoreOS worker nodes. Ignored when ocp is set to false.| No | "1000:1000" |
+| ocpCoreID | User ID and group ID of user core on CoreOS worker nodes. Ignored when ocp is set to false. | No | "1000:1000" |
 | extraArgs | Extra command line parameters to pass to the encryption driver.<br/>Allowed values:<br/>"\-\-sharedStorage" - may be required by some applications to work properly.<br/>When set, performance is reduced and hard links cannot be created.<br/>See the [gocryptfs documentation](https://github.com/rfjakob/gocryptfs/blob/v2.2.1/Documentation/MANPAGE.md#-sharedstorage) for more details. | No | [] |
 
 ## Secrets and Config Maps

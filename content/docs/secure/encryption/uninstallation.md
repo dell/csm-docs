@@ -32,12 +32,12 @@ It can be removed with `sed -i '/^ssh-rsa .* driver-sec$/d' /root/.ssh/authorize
 
 ## Remove Kubernetes Resources
 
-Remove [the resources that were created in Kubernetes cluster for Encryption](../deployment#secrets-and-config-maps).
+Remove [the resources](../deployment#secrets-and-config-maps) created in Kubernetes cluster for Encryption.
 
 ## Remove Vault Server Configuration
 
-Remove [the configuration created in the Vault server for Encryption](../vault#minimum-server-configuration).
+Remove [the configuration](../vault#minimum-server-configuration) created in the Vault server for Encryption.
 
 ## Remove Rekey Controller
 
-Remove [the configuration created in the Rekey Controller for Encryption](../#rekey-controller-installation).
+Remove [the resources](../rekey#rekey-controller-installation) created during the installation of the Rekey Controller.
