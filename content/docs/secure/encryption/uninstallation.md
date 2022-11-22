@@ -10,11 +10,11 @@ Description: >
 
 Login to each worker host and perform these steps:
 
-#### Remove directory */root/.driver-sec*
+__Remove directory */root/.driver-sec*__
 
 This directory was created when a CSI driver with Encryption first ran on the host.
 
-#### Remove entry from */root/.ssh/authorized_keys*
+__Remove entry from */root/.ssh/authorized_keys*__
 
 This is an entry added when a CSI driver with Encryption first ran on the host.
 It ends with `driver-sec`, similarly to:
