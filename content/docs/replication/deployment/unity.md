@@ -110,7 +110,7 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is measured in units of time, that may be lost due to a failure.
 * `replication.storage.dell.com/ignoreNamespaces`, if set to `true` Unity driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.
 * `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them.
->NOTE: Please configure the VolumeGroupPrefix carefully. The Name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<System IP Address OR FQDN\>-\<rpo\>' cannot be more than 63 characters.
+>NOTE: Please configure the VolumeGroupPrefix carefully. The Name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<Cluster Name\>-\<rpo\>' cannot be more than 63 characters.
 * `arrayId` is a unique identifier of the storage array you specified in array connection secret.
 * `nasServer` id of the Nas server of local array to which the allocated volume will belong.
 * `storagePool` is the storage pool of the local array.
