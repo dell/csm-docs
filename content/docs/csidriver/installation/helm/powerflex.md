@@ -50,8 +50,7 @@ The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storag
 SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS), RHEL 7.9 and RHEL 8.x. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps [below](#manual-sdc-deployment).
 Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 
-*NOTE:* While installing the CSI Driver for PowerFlex using the Automated SDC Deployment. You must verify the following two packages are installed on the worker nodes as a 
-prerequiste. 
+*NOTE:* To install CSI driver for Powerflex with Automated SDC deployment, You need below two packages on worker nodes.
 1. libaio
 2. numactl-libs
 
