@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.104.3" />
+<meta name="generator" content="Hugo 0.106.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -620,21 +620,21 @@
 
 	       
 	<h2 id="logs-and-events">Logs and Events</h2>
-<p>The first and in most cases sufficient step in troubleshooting issues with a CSI driver that has Encryption enabled 
+<p>The first and in most cases sufficient step in troubleshooting issues with a CSI driver that has Encryption enabled
 is exploring logs of the Encryption driver and related Kubernetes components. These are some useful log sources:</p>
 <h3 id="csi-driver-containers-logs">CSI Driver Containers Logs</h3>
-<p>The driver creates several <em>controller</em> and <em>node</em> pods. They can be listed with <code>kubectl -n &lt;driver namespace&gt; get pods</code>. 
+<p>The driver creates several <em>controller</em> and <em>node</em> pods. They can be listed with <code>kubectl -n &lt;driver namespace&gt; get pods</code>.
 The output will look similar to:</p>
 <pre tabindex="0"><code>NAME                              READY   STATUS    RESTARTS   AGE
 isi-controller-84f697c874-2j6d4   10/10   Running   0          16h
 isi-node-4gtwf                    4/4     Running   0          16h
 isi-node-lnzws                    4/4     Running   0          16h
-</code></pre><p>List containers in pod <code>isi-node-4gtwf</code> with <code>kubectl -n &lt;driver namespace&gt; logs isi-node-4gtwf</code>. 
-Each pod has containers called <code>driver</code> which is the storage driver container and <code>driver-sec</code> which is the Encryption driver container. 
+</code></pre><p>List containers in pod <code>isi-node-4gtwf</code> with <code>kubectl -n &lt;driver namespace&gt; logs isi-node-4gtwf</code>.
+Each pod has containers called <code>driver</code> which is the storage driver container and <code>driver-sec</code> which is the Encryption driver container.
 These container&rsquo;s logs tend to provide the most important information, but other containers may give a hint too.
 View the logs of <code>driver-sec</code> in <code>isi-node-4gtwf</code> with <code>kubectl -n &lt;driver namespace&gt; logs isi-node-4gtwf driver-sec</code>.
 The log level of this container can be changed by setting value <a href="../deployment#helm-chart-values">encryption.logLevel</a> and restarting the driver.</p>
-<p>Often it is necessary to see the logs produced on a specific Kubernetes worker host. 
+<p>Often it is necessary to see the logs produced on a specific Kubernetes worker host.
 To find which <em>node</em> pod is running on which worker host, use <code>kubectl -n &lt;driver namespace&gt; get pods -o wide</code>.</p>
 <h3 id="persistentvolume-persistentvolumeclaim-and-application-pod-events">PersistentVolume, PersistentVolumeClaim and Application Pod Events</h3>
 <p>Some errors may be logged to the related resource events that can be viewed with <code>kubectl describe</code> command for that resource.</p>

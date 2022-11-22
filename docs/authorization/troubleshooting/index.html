@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.104.3" />
+<meta name="generator" content="Hugo 0.106.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/authorization/troubleshooting/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-07-04T02:55:14-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-11-22T08:56:58-05:00" /><meta property="og:site_name" content="Dell Technologies" />
 
 <meta itemprop="name" content="Troubleshooting">
 <meta itemprop="description" content="Troubleshooting guide
 ">
-<meta itemprop="dateModified" content="2022-07-04T02:55:14-04:00" />
-<meta itemprop="wordCount" content="956">
+<meta itemprop="dateModified" content="2022-11-22T08:56:58-05:00" />
+<meta itemprop="wordCount" content="929">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Troubleshooting"/>
 <meta name="twitter:description" content="Troubleshooting guide
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -644,13 +644,8 @@ prevent communication with the <code>&lt;grpc-address&gt;</code>, either new rul
 <p>If SELinux is enabled, the policies may fail to install:</p>
 <pre tabindex="0"><code>error: failed to install policies (see /tmp/policy-install-for-karavi3163047435): exit status 1
 </code></pre><p><strong>Resolution</strong></p>
-<p>View the contents /tmp/policy-install-for-karavi* file listed in the error message. If there is a Permission denied error while running the policy-install.sh script, manually run the script to install policies.</p>
-<pre tabindex="0"><code>$ cat /tmp/policy-install-for-karavi3163047435
-
-# find the location of the policy-install.sh script located in the file and manually run the script
-
-$ /tmp/karavi-installer-2908017483/policy-install.sh
-</code></pre><h3 id="after-installation-the-create-pvc-pod-is-in-an-error-state">After installation, the create-pvc Pod is in an Error state</h3>
+<p>This issue should only occur with older versions of CSM Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.</p>
+<h3 id="after-installation-the-create-pvc-pod-is-in-an-error-state">After installation, the create-pvc Pod is in an Error state</h3>
 <p>If SELinux is enabled, the create-pvc Pod may be in an Error state:</p>
 <pre tabindex="0"><code>kube-system    create-pvc-44a763c7-e70f-4e32-a114-e94615041042   0/1     Error       0          102s
 </code></pre><p><strong>Resolution</strong></p>

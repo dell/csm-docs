@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.104.3" />
+<meta name="generator" content="Hugo 0.106.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.9bc13fa45fba869cccb7614d24c9015d.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -621,7 +621,7 @@
 	<h2 id="vault-server-installation">Vault Server Installation</h2>
 <p>If there is already a Vault server available, skip to <a href="#minimum-server-configuration">Minimum Server Configuration</a>.</p>
 <p>If there is no Vault server available to use with Encryption, it can be installed in many ways following <a href="https://www.vaultproject.io/docs">Hashicorp Vault documentation</a>.</p>
-<p>For testing environment, however, a simple deployment suggested in this section may suffice. 
+<p>For testing environment, however, a simple deployment suggested in this section may suffice.
 It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.</p>
 <blockquote>
 <p><strong>NOTE</strong>: With in-memory storage, the encryption keys are permanently destroyed upon the server termination.</p>
@@ -639,8 +639,8 @@ It creates a standalone server with in-memory (non-persistent) storage, running 
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-out server.csr
 </span></span></code></pre></div><p>Create server certificate signed by the CA:</p>
 <blockquote>
-<p>Replace <code>&lt;external IP&gt;</code> with an IP address by which Encryption can reach the Vault server. 
-This may be the address of the Docker host where the Vault server will be running. 
+<p>Replace <code>&lt;external IP&gt;</code> with an IP address by which Encryption can reach the Vault server.
+This may be the address of the Docker host where the Vault server will be running.
 The same address should be used for <code>vault_addr</code> in <a href="../deployment#configmap-vault-client-conf">vault-client-conf</a>.</p>
 </blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat &gt; cert.ext <span style="color:#4e9a06">&lt;&lt;EOF
@@ -730,16 +730,16 @@ The same address should be used for <code>vault_addr</code> in <a href="../deplo
 </span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	sh -c <span style="color:#4e9a06">&#39;vault server -dev -dev-listen-address 0.0.0.0:8200 -config=server.hcl&#39;</span>
 </span></span></code></pre></div><h2 id="minimum-server-configuration">Minimum Server Configuration</h2>
 <blockquote>
-<p><strong>NOTE:</strong> this configuration is a bare minimum to support Encryption and is not intended for use in production environment. 
+<p><strong>NOTE:</strong> this configuration is a bare minimum to support Encryption and is not intended for use in production environment.
 Refer to the <a href="https://www.vaultproject.io/docs">Hashicorp Vault documentation</a> for recommended configuration options.</p>
 </blockquote>
 <blockquote>
 <p>If a <a href="#vault-server-installation">test instance of Vault</a> is used, the <code>vault</code> commands below can be executed in the Vault server container shell.
 To enter the shell, run <code>docker exec -it vault-server sh</code>. After completing the configuration process, exit the shell by typing <code>exit</code>.</p>
-<p>Alternatively, you can <a href="https://www.vaultproject.io/downloads">download the vault binary</a> and run it anywhere. 
+<p>Alternatively, you can <a href="https://www.vaultproject.io/downloads">download the vault binary</a> and run it anywhere.
 It will require two environment variables to communicate with the Vault server:</p>
 <ul>
-<li><code>VAULT_ADDR</code> - URL similar to <code>http://127.0.0.1:8200</code>. You may need to change the address in the URL to the address of 
+<li><code>VAULT_ADDR</code> - URL similar to <code>http://127.0.0.1:8200</code>. You may need to change the address in the URL to the address of
 the Docker host where the server is running.</li>
 <li><code>VAULT_TOKEN</code> - Authentication token, e.g. the root token <code>DemoRootToken</code> used in the <a href="#vault-server-installation">test instance of Vault</a>.</li>
 </ul>
@@ -788,7 +788,7 @@ The expiration time for new secret IDs can be set in <code>secret_id_ttl</code> 
 <p>Effective client token TTL is determined by the Vault server based on multiple factors which are described in the <a href="https://www.vaultproject.io/docs/concepts/tokens#token-time-to-live-periodic-tokens-and-explicit-max-ttls">Vault documentation</a>.</p>
 <p>With the default server settings, role level values control TTL in this way:</p>
 <p><code>token_explicit_max_ttl=2h</code> - limits the client token TTL to 2 hours since it was originally issues as a result of login. This is a hard limit.</p>
-<p><code>token_ttl=30m</code> - sets the default client token TTL to 30 minutes. 30 minutes are counted from the login time and from any following token renewal. 
+<p><code>token_ttl=30m</code> - sets the default client token TTL to 30 minutes. 30 minutes are counted from the login time and from any following token renewal.
 The client token will only be able to renew 3 times before reaching it total allowed TTL of 2 hours.</p>
 <p>Existing role values can be changed using <code>vault write auth/approle/role/dea-role token_ttl=30m token_explicit_max_ttl=2h</code>.</p>
 <blockquote>
