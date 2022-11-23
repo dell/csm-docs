@@ -114,7 +114,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_TRANSPORT_PROTOCOL | Choose which transport protocol to use (ISCSI, FC, auto or None)	| Yes | auto |
    | X_CSI_POWERMAX_PORTGROUPS |List of comma-separated port groups (ISCSI only). Example: "PortGroup1,PortGroup2" | No | - | 
    | X_CSI_MANAGED_ARRAYS | List of comma-separated array ID(s) which will be managed by the driver | Yes | - |
-   | X_CSI_POWERMAX_PROXY_SERVICE_NAME | Name of CSI PowerMax ReverseProxy service. Leave blank if not using reverse proxy | No | - |
+   | X_CSI_POWERMAX_PROXY_SERVICE_NAME | Name of CSI PowerMax ReverseProxy service. | Yes | powermax-reverseproxy |
    | X_CSI_GRPC_MAX_THREADS | Number of concurrent grpc requests allowed per client | No | 4 |
    | X_CSI_IG_MODIFY_HOSTNAME | Change any existing host names. When nodenametemplate is set, it changes the name to the specified format else it uses driver default host name format. | No | false |
    | X_CSI_IG_NODENAME_TEMPLATE | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster. | No | - |
@@ -168,11 +168,9 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 
 ### CSI PowerMax ReverseProxy
 
-CSI PowerMax ReverseProxy is an optional component that can be installed with the CSI PowerMax driver. For more details on this feature see the related [documentation](../../../features/powermax#csi-powermax-reverse-proxy).
+CSI PowerMax ReverseProxy is component that will be installed along with the CSI PowerMax driver. For more details on this feature see the related [documentation](../../../features/powermax#csi-powermax-reverse-proxy).
 
-When you install CSI PowerMax ReverseProxy, dell-csi-operator will create a Deployment and ClusterIP service as part of the installation
-
-**Note** - To use the ReverseProxy with the CSI PowerMax driver, the ReverseProxy service should be created before you install the CSIPowerMax driver.
+Deployment and ClusterIP service will be created by dell-csi-operator.
 
 #### Pre-requisites
 Create a TLS secret that holds an SSL certificate and a private key which is required by the reverse proxy server. 
@@ -351,11 +349,10 @@ spec:
         - name: "X_CSI_TRANSPORT_PROTOCOL"
           value: ""
         # X_CSI_POWERMAX_PROXY_SERVICE_NAME: Refers to the name of the proxy service in kubernetes
-        # Set this to "powermax-reverseproxy" if you are installing the proxy
         # Allowed values: "powermax-reverseproxy"
-        # default values: "" <empty>
+        # default values: "powermax-reverseproxy" 
         - name: "X_CSI_POWERMAX_PROXY_SERVICE_NAME"
-          value: ""
+          value: "powermax-reverseproxy"
         # X_CSI_GRPC_MAX_THREADS: Defines the maximum number of concurrent grpc requests.
         # Set this value to a higher number (max 50) if you are using the proxy
         # Allowed values: n, where n > 4
@@ -467,7 +464,6 @@ data:
 
 
 Note: 
- - `dell-csi-operator` does not support the installation of CSI PowerMax ReverseProxy as a sidecar to the controller Pod. This facility is only present with `dell-csi-helm-installer`.
  - `Kubelet config dir path` is not yet configurable in case of Operator based driver installation.
  - Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
 

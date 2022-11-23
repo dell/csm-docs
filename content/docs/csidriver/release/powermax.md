@@ -8,12 +8,12 @@ description: Release notes for PowerMax CSI driver
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
 ### New Features/Changes
-- [Online volume expansion for replicated volumes.](https://github.com/dell/csm/issues/336)
-- [Added support for PowerMaxOS 10.](https://github.com/dell/csm/issues/389)
-- [Removed 9.x Unisphere REST endpoints support.](https://github.com/dell/csm/issues/389)
-- [Added 10.0 Unisphere REST endpoints support.](https://github.com/dell/csm/issues/389)
-- [Automatic SRDF group creation for PowerMax arrays (PowerMaxOS 10 and above).](https://github.com/dell/csm/issues/411)
-- [Added PowerPath support.](https://github.com/dell/csm/issues/436)
+- [Added support for Kubernetes 1.25.](https://github.com/dell/csm/issues/478)
+- [csi-reverseproxy is mandated along with the driver](https://github.com/dell/csm/issues/495)
+- [Added support for VMware/vSphere virtualization](https://github.com/dell/csm/issues/528)
+
+>Note: Replication for PowerMax is supported in Kubernetes 1.25.
+>Replication is not supported with VMware/Vsphere virtualization support.
 
 ### Fixed Issues
 There are no fixed issues in this release.

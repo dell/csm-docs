@@ -7,6 +7,20 @@ Description: >
 ---
 
 
+
+## Release Notes - CSM Application Mobility 0.2.0
+### New Features/Changes
+
+- [Scheduled Backups for Application Mobility](https://github.com/dell/csm/issues/551)
+
+### Fixed Issues
+
+There are no fixed issues in this release.
+
+### Known Issues
+
+There are no known issues in this release.
+
 ## Release Notes - CSM Application Mobility 0.1.0
 ### New Features/Changes
 

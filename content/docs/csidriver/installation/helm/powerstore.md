@@ -145,12 +145,11 @@ controller:
     #   false: disable checking of health condition of CSI volumes
     # Default value: None
     enabled: false
-
-    # volumeHealthMonitorInterval: Interval of monitoring volume health condition
+    # interval: Interval of monitoring volume health condition
     # Allowed values: Number followed by unit (s,m,h)
     # Examples: 60s, 5m, 1h
     # Default value: 60s
-    volumeHealthMonitorInterval: 60s
+    interval: 60s
 
 node:
   healthMonitor:
@@ -178,7 +177,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.4.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.5.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
@@ -215,7 +214,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | controller.snapshot.snapNamePrefix | Defines prefix to apply to the names of a created snapshots | No | "csisnap" |
 | controller.resizer.enabled | Allows to enable/disable resizer sidecar with driver installation for volume expansion feature | No | "true" |
 | controller.healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
-| controller.healthMonitor.volumeHealthMonitorInterval | Interval of monitoring volume health condition | No | 60s |
+| controller.healthMonitor.interval | Interval of monitoring volume health condition | No | 60s |
 | controller.nodeSelector | Defines what nodes would be selected for pods of controller deployment | Yes | " " |
 | controller.tolerations  | Defines tolerations that would be applied to controller deployment | Yes | " " |
 | node.nodeNamePrefix | Defines the string added to each node that the CSI driver registers | No | "csi-node" |
@@ -228,6 +227,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | images.driverRepository | To use an image from custom repository | No | dockerhub |
 | version | To use any driver version | No | Latest driver version |
 | allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
+| storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true
+| storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
 
 8. Install the driver using `csi-install.sh` bash script by running `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
