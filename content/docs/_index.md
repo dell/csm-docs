@@ -13,6 +13,7 @@ The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and 
 
 <img src="csm_hexagon.png" alt="CSM Hex Diagram" width="500"/>
 
+<br> <br>
 CSM is made up of multiple components including modules (enterprise capabilities), CSI drivers (storage enablement), and other related applications (deployment, feature controllers, etc).
 
 {{< cardpane >}}
