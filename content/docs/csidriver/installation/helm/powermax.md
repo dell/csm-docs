@@ -173,7 +173,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.4.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.5.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -240,7 +240,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
-| image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.1.0 |
+| image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.4.0 |
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
@@ -326,7 +326,7 @@ global:
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
   # Set enabled to true if you want to use proxy
-  image: dellemc/csipowermax-reverseproxy:v2.3.0
+  image: dellemc/csipowermax-reverseproxy:v2.4.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222
@@ -372,7 +372,7 @@ global:
 
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
-  image: dellemc/csipowermax-reverseproxy:v2.3.0
+  image: dellemc/csipowermax-reverseproxy:v2.4.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222
