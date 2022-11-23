@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting"
 linkTitle: "Troubleshooting"
-weight: 10
+weight: 11
 Description: >
   Dell Container Storage Modules (CSM) troubleshooting information
 ---
@@ -17,3 +17,7 @@ Troubleshooting links for Container Storage Modules:
 [CSM for Replication](../replication/troubleshooting)
 
 [CSM for Resiliency](../resiliency/troubleshooting)
+
+[CSM for Encryption](../secure/encryption/troubleshooting)
+
+[CSM for Application Mobility](../applicationmobility/troubleshooting)

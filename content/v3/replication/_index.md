@@ -16,45 +16,45 @@ applications in case of both planned and unplanned migration.
 CSM for Replication provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerScale | Unity | PowerStore | PowerFlex | PowerMax |
-| - | :-: | :-: | :-: | :-: | :-: |
-| Replicate data using native storage array based replication | yes | no | yes | no | yes |
-| Create `PersistentVolume` objects in the cluster representing the replicated volume | yes |  no | yes | no | yes |
-| Create `DellCSIReplicationGroup` objects in the cluster | yes |  no | yes | no | yes |
-| Failover & Reprotect applications using the replicated volumes | yes |  no | yes | no | yes |
-| Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters | yes | no | yes | no | yes |
+| Capability                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
+| ----------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
+| Replicate data using native storage array based replication                         | yes      | yes        | yes        | no        | no    |
+| Create `PersistentVolume` objects in the cluster representing the replicated volume | yes      | yes        | yes        | no        | no    |
+| Create `DellCSIReplicationGroup` objects in the cluster                             | yes      | yes        | yes        | no        | no    |
+| Failover & Reprotect applications using the replicated volumes                      | yes      | yes        | yes        | no        | no    |
+| Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters | yes | yes | yes | no | no |
 {{</table>}}
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| COP/OS | PowerMax | PowerStore | PowerScale |
-|-|-|-|-|
-| Kubernetes    | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23|
-| Red Hat OpenShift | 4.8, 4.9 | 4.8, 4.9 | 4.8, 4.9 |
-| RHEL          |     7.x, 8.x      |     7.x, 8.x      |  7.x, 8.x |
-| CentOS        |     7.8, 7.9     |     7.8, 7.9     | 7.8, 7.9 |
-| Ubuntu        |       20.04      |       20.04      | 20.04 |
-| SLES          |        15SP2        |        15SP2        | 15SP2 |
+| COP/OS        | PowerMax         | PowerStore       | PowerScale |
+|---------------|------------------|------------------|------------|
+| Kubernetes    | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 |
+| Red Hat OpenShift | 4.8, 4.9     | 4.8, 4.9         | 4.8, 4.9   |
+| RHEL          |     7.x, 8.x     |     7.x, 8.x     |  7.x, 8.x  |
+| CentOS        |     7.8, 7.9     |     7.8, 7.9     | 7.8, 7.9   |
+| Ubuntu        |       20.04      |       20.04      | 20.04      |
+| SLES          |        15SP2     |        15SP2     | 15SP2      |
 {{</table>}}
 
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerMax | PowerStore | PowerScale |
+|               | PowerMax            | PowerStore       | PowerScale       |
 |---------------|:-------------------:|:----------------:|:----------------:|
-| Storage Array | 5978.479.479, 5978.711.711, Unisphere 9.2 | 1.0.x, 2.0.x, 2.1.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 |
+| Storage Array | PowerMax 2000/8000 <br> 5978.479.479, 5978.711.711, Unisphere 9.2 | 1.0.x, 2.0.x, 2.1.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 |
 {{</table>}}
 
 ## Supported CSI Drivers
 
 CSM for Replication supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
-| Storage Array | CSI Driver | Supported Versions |
-| ------------- | ---------- | ------------------ |
-| CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0, v2.1, v2.2 |
-| CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0, v2.1, v2.2 |
-| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.2 |
+| Storage Array                  | CSI Driver                                               | Supported Versions |
+| ------------------------------ | -------------------------------------------------------- | ------------------ |
+| CSI Driver for Dell PowerMax   | [csi-powermax](https://github.com/dell/csi-powermax)     | v2.0, v2.1, v2.2   |
+| CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0, v2.1, v2.2   |
+| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.2               |
 {{</table>}}
 
 ## Details
@@ -80,27 +80,23 @@ the objects still exist in pairs.
 CSM for Replication provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
-| ---------| -------- | -------- | -------- | -------- | -------- |
-| Asynchronous replication of PVs accross K8s clusters    | yes | yes | yes | no  | no  |
-| Synchronous replication of PVs accross K8s clusters     | yes | no  | no  | no  | no  |
-| Single cluster (stretched) mode replication             | yes | yes | yes | no  | no  |
-| Replication actions (failover, reprotect)               | yes | yes | yes | no  | no  | 
+| Capability                                                      | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
+| ----------------------------------------------------------------| -------- | ---------- | ---------- | --------- | ----- |
+| Asynchronous replication of PVs accross or single K8s clusters  | yes      | yes (block)| yes        | no        | no    |
+| Synchronous replication of PVs accross or single  K8s clusters  | yes      | no         | no         | no        | no    |
+| Metro replication single (stretched) cluster                    | yes      | no         | no         | no        | no    |
+| Replication actions (failover, reprotect)                       | yes      | yes        | yes        | no        | no    |
 {{</table>}}
 
 ### Supported Platforms
 
 The following matrix provides a list of all supported versions for each Dell Storage product.
 
-| Platforms | PowerMax | PowerStore | PowerScale |
-| -------- | --------- | ---------- | ---------- |
+| Platforms  | PowerMax          | PowerStore       | PowerScale       |
+| ---------- | ----------------- | ---------------- | ---------------- |
 | Kubernetes | 1.21, 1.22, 1.23  | 1.21, 1.22, 1.23 | 1.21, 1.22, 1.23 |
-| CSI Driver | 2.x | 2.x | 2.2+ | 
-
-| Platforms | PowerMax | PowerStore | PowerScale |
-| -------- | --------- | ---------- | ---------- |
-| RedHat Openshift |4.8, 4.9 | 4.8, 4.9 | 4.8, 4.9 |
-| CSI Driver | 2.2+ | 2.x | 2.2+ |
+| RedHat Openshift |4.8, 4.9     | 4.8, 4.9         | 4.8, 4.9         |
+| CSI Driver | 2.x               | 2.x              | 2.2+             |
 
 For compatibility with storage arrays please refer to corresponding [CSI drivers](../csidriver/#features-and-capabilities)
 

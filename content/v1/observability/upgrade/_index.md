@@ -55,7 +55,7 @@ CSM for Observability online installer upgrade can be used if the initial deploy
     ```
 2. Update `values.yaml` file as needed. Configuration options are outlined in the [Helm chart deployment section](../deployment/helm#configuration).
 
-2. Execute the `./karavi-observability-install.sh` script:
+3. Execute the `./karavi-observability-install.sh` script:
     ```
     [user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh upgrade --namespace $namespace --values myvalues.yaml --version $latest_chart_version
     ---------------------------------------------------------------------------------
@@ -80,3 +80,42 @@ CSM for Observability online installer upgrade can be used if the initial deploy
     |
     |- Waiting for pods in namespace karavi to be ready                 Success
     ``` 
+
+## Offline Installer Upgrade
+
+Assuming that you have already installed the Karavi Observability Helm Chart by offline installer and meet its installation requirement.
+These instructions can be followed when a Helm chart was installed and will be upgraded in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.
+
+1. Build the Offline Bundle
+    Follow [Offline Karavi Observability Helm Chart Installer](../deployment/offline) to build the latest bundle.
+
+2. Unpack the Offline Bundle
+   Follow [Offline Karavi Observability Helm Chart Installer](../deployment/offline), copy and unpack the Offline Bundle to another Linux system, and push Docker images to the internal Docker registry.
+
+3. Perform Helm upgrade
+   1. Change directory to `helm` which contains the updated Helm chart directory:
+      ```
+      [user@anothersystem /home/user/offline-karavi-observability-bundle]# cd helm
+      ```
+   2. Install necessary cert-manager CustomResourceDefinitions provided.
+      ```
+      [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl apply --validate=false -f cert-manager.crds.yaml
+      ```
+   3. (Optional) Enable Karavi Observability for PowerFlex/PowerScale to use an existing instance of Karavi Authorization for accessing the REST API for the given storage systems.  
+      **Note**: Assuming that if the Karavi Observability's Authorization has been enabled in the phase of [Offline Karavi Observability Helm Chart Installer](../deployment/offline), the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.  
+      A sample configuration values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).  
+      In your own configuration values.yaml, you need to enable PowerFlex/PowerScale Authorization, and provide the location of the sidecar-proxy Docker image and URL of the Karavi Authorization proxyHost address.  
+   
+   4. Now that the required images have been made available and the Helm chart's configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart's repository.  
+      **Note**: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace in the phase of [Offline Karavi Observability Helm Chart Installer](../deployment/offline)   
+      Optionally, you could provide your own [configurations](../deployment/helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
+      ```
+        [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm upgrade -n install-namespace app-name karavi-observability
+        NAME: app-name
+        LAST DEPLOYED: Wed Aug 17 14:44:04 2022
+        NAMESPACE: install-namespace
+        STATUS: deployed
+        REVISION: 1
+        TEST SUITE: None
+      ``` 
+        

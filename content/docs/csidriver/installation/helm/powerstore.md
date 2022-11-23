@@ -145,7 +145,6 @@ controller:
     #   false: disable checking of health condition of CSI volumes
     # Default value: None
     enabled: false
-
     # interval: Interval of monitoring volume health condition
     # Allowed values: Number followed by unit (s,m,h)
     # Examples: 60s, 5m, 1h

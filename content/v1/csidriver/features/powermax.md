@@ -56,6 +56,8 @@ status:
 
 ### Creating PVCs with VolumeSnapshots as Source
 
+>Note: This is not supported for metro volumes.
+
 The following is a sample manifest for creating a PVC with a VolumeSnapshot as a source:
 ```yaml
 apiVersion: v1
@@ -78,7 +80,7 @@ spec:
 
 ### Creating PVCs with PVCs as source
 
-This is not supported for replicated volumes.
+>Note: This is not supported for replicated volumes.
 
 This is a sample manifest for creating a PVC with another PVC as a source:
 ```yaml
@@ -159,8 +161,6 @@ To install multiple CSI drivers, follow these steps:
 ## Volume expansion
 
 Starting in v1.4, the CSI PowerMax driver supports the expansion of Persistent Volumes (PVs). This expansion is done online, which is when the PVC is attached to any node.
-
->Note: This feature is not supported for replicated volumes.
 
 To use this feature, enable in `values.yaml`
 
