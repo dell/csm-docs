@@ -116,6 +116,7 @@ User can query for CSI-PowerScale driver using the following command:
    | --------- | ----------- | -------- |-------- |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   | X_CSI_MAX_PATH_LIMIT | Defines the maximum length of path for a volume | No | 192 |
    | ***Common parameters for node and controller*** |
    | CSI_ENDPOINT | The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |
    | X_CSI_ISI_SKIP_CERTIFICATE_VALIDATION | Specifies whether SSL security needs to be enabled for communication between PowerScale and CSI Driver | No | true |
@@ -150,7 +151,7 @@ User can query for CSI-PowerScale driver using the following command:
    3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
 
 ## Volume Health Monitoring
-This feature is introduced in CSI Driver for unity version 2.1.0.
+This feature is introduced in CSI Driver for PowerScale version 2.1.0.
 
 ### Operator based installation
 

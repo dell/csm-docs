@@ -30,7 +30,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
         password: "password"                      # password for connecting to API
         skipCertificateValidation: true           # indicates if client side validation of (management)server's certificate can be skipped
         isDefault: true                           # treat current array as a default (would be used by storage classes without arrayID parameter)
-        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, None, or auto)
+        blockProtocol: "auto"                     # what SCSI transport protocol use on node side (FC, ISCSI, NVMeTCP, NVMeFC, None, or auto)
         nasName: "nas-server"                     # what NAS should be used for NFS volumes
         nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
                                                   # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
@@ -69,13 +69,13 @@ metadata:
   namespace: test-powerstore
 spec:
   driver:
-    configVersion: v2.2.0
+    configVersion: v2.3.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     fsGroupPolicy: ReadWriteOnceWithFSType
     common:
-      image: "dellemc/csi-powerstore:v2.2.0"
+      image: "dellemc/csi-powerstore:v2.3.0"
       imagePullPolicy: IfNotPresent
       envs:
         - name: X_CSI_POWERSTORE_NODE_NAME_PREFIX
@@ -139,6 +139,7 @@ data:
 | X_CSI_NFS_ACLS | Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. | No | "0777" |
 | ***Node parameters*** |
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false | 
+
 6.  Execute the following command to create PowerStore custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerStore driver.
       - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n <driver-namespace>`
 
@@ -177,7 +178,7 @@ volume stats value under node should be set to true.
 
 ## Dynamic Logging Configuration
 
-This feature is introduced in CSI Driver for unity version 2.0.0. 
+This feature is introduced in CSI Driver for PowerStore version 2.0.0. 
 
 ### Operator based installation
 As part of driver installation, a ConfigMap with the name `powerstore-config-params` is created using the manifest located in the sample file. This ConfigMap contains attributes `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver and `CSI_LOG_FORMAT` which specifies the current log format of the CSI driver. To set the default/initial log level user can set this field during driver installation.
