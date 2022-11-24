@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6a3b6e578121ae1b4bd6529b0d9d18d8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0d0097f78f3109b712264ac98d59c691.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6a3b6e578121ae1b4bd6529b0d9d18d8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -879,23 +879,23 @@
 <p>Run <code>kubectl -n authorization get ingress</code> and <code>kubectl -n authorization get service</code> to see the Ingress rules for these services and the exposed port for accessing these services via the LoadBalancer. For example:</p>
 <pre tabindex="0"><code># kubectl -n authorization get ingress
 NAME              CLASS   HOSTS                           ADDRESS   PORTS     AGE
-proxy-server      nginx   csm-authorization.com                     80, 443   86s
-role-service      nginx   role.csm-authorization.com                80, 443   86s
-storage-service   nginx   storage.csm-authorization.com             80, 443   86s
-tenant-service    nginx   tenant.csm-authorization.com              80, 443   86s
+proxy-server      nginx   csm-authorization.com                     00, 000   86s
+role-service      nginx   role.csm-authorization.com                00, 000   86s
+storage-service   nginx   storage.csm-authorization.com             00, 000   86s
+tenant-service    nginx   tenant.csm-authorization.com              00, 000   86s
 
 # kubectl -n auth get service
 NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-authorization-cert-manager                         ClusterIP      10.104.35.150    &lt;none&gt;        9402/TCP                     28s
-authorization-cert-manager-webhook                 ClusterIP      10.97.179.94     &lt;none&gt;        443/TCP                      27s
-authorization-ingress-nginx-controller             LoadBalancer   10.108.115.217   &lt;pending&gt;     80:30080/TCP,443:30016/TCP   27s
-authorization-ingress-nginx-controller-admission   ClusterIP      10.103.143.215   &lt;none&gt;        443/TCP                      27s
-proxy-server                                       ClusterIP      10.111.86.51     &lt;none&gt;        8080/TCP                     28s
-redis                                              ClusterIP      10.111.158.17    &lt;none&gt;        6379/TCP                     28s
-redis-commander                                    ClusterIP      10.107.22.41     &lt;none&gt;        8081/TCP                     27s
-role-service                                       ClusterIP      10.96.113.230    &lt;none&gt;        50051/TCP                    27s
-storage-service                                    ClusterIP      10.101.144.37    &lt;none&gt;        50051/TCP                    27s
-tenant-service                                     ClusterIP      10.109.60.141    &lt;none&gt;        50051/TCP                    28s
+authorization-cert-manager                         ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                     28s
+authorization-cert-manager-webhook                 ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                      27s
+authorization-ingress-nginx-controller             LoadBalancer   00.000.000.000    &lt;pending&gt;     00:00000/TCP,000:00000/TCP   27s
+authorization-ingress-nginx-controller-admission   ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                      27s
+proxy-server                                       ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                     28s
+redis                                              ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                     28s
+redis-commander                                    ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                     27s
+role-service                                       ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                    27s
+storage-service                                    ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                    27s
+tenant-service                                     ClusterIP      00.000.000.000    &lt;none&gt;        000/TCP                    28s
 </code></pre><p>On the machine running <code>karavictl</code>, the <code>/etc/hosts</code> file needs to be updated with the Ingress hosts for the storage, tenant, and role services. For example:</p>
 <pre tabindex="0"><code>&lt;master_node_ip&gt; tenant.csm-authorization.com
 &lt;master_node_ip&gt; role.csm-authorization.com
