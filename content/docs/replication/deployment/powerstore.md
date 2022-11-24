@@ -115,6 +115,9 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/ignoreNamespaces`, if set to `true` PowerStore driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.
 * `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name
   to differentiate them.
+  
+>NOTE: To configure the VolumeGroupPrefix, the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<Cluster Name\>-\<rpo\>' cannot be more than 63 characters.
+
 * `arrayID` is a unique identifier of the storage array you specified in array connection secret.
 
 Let's follow up that with an example. Let's assume you have two Kubernetes clusters and two PowerStore
