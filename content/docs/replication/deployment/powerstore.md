@@ -116,7 +116,7 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name
   to differentiate them.
   
->NOTE: To configure the VolumeGroupPrefix,the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<Cluster Name\>-\<rpo\>' cannot be more than 63 characters.
+>NOTE: To configure the VolumeGroupPrefix, the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<Cluster Name\>-\<rpo\>' cannot be more than 63 characters.
 
 * `arrayID` is a unique identifier of the storage array you specified in array connection secret.
 
