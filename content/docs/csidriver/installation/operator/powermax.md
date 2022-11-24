@@ -36,6 +36,18 @@ Set up the iSCSI initiators as follows:
 
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
 
+#### Auto RDM for vSphere over FC requirements
+
+The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
+
+Set up the environment as follows: 
+
+- Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.
+
+- Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
+
+- Add hosts/initiators from all ESX/ESXis to a host group where the cluster is hosted.
+
 #### Linux multipathing requirements
 
 CSI Driver for Dell PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.
@@ -120,9 +132,16 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_IG_NODENAME_TEMPLATE | Provide a template for the CSI driver to use while creating the Host/IG on the array for the nodes in the cluster. It is of the format a-b-c-%foo%-xyz where foo will be replaced by host name of each node in the cluster. | No | - |
    | X_CSI_POWERMAX_DRIVER_NAME | Set custom CSI driver name. For more details on this feature see the related [documentation](../../../features/powermax/#custom-driver-name) | No | - |
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No | false |
+   | X_CSI_VSPHERE_ENABLED | Enable VMware virtualized environment support via RDM | No | false |
+   | X_CSI_VSPHERE_PORTGROUP | Existing portGroup that driver will use for vSphere | Yes | "" |
+   | X_CSI_VSPHERE_HOSTGROUP | Existing host group that driver will use for vSphere | Yes | "" |
+   | X_CSI_VCenter_HOST | URL/endpoint of the vCenter where all the ESX are present | Yes | "" |
+   | X_CSI_VCenter_USERNAME | Username from the vCenter credentials | Yes | "" |   
+   | X_CSI_VCenter_PWD | Password from the vCenter credentials | Yes | "" |
    | ***Node parameters***|
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input. | No | false |
+   
 5. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 
 **Note** - If CSI driver is getting installed using OCP UI , create these two configmaps manually using the command `oc create -f <configfilename>`
@@ -531,3 +550,51 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 <br>
    
  >Note: Name of the configmap should always be `node-topology-config`.
+
+## Support for auto RDM for vSphere over FC 
+
+This feature is introduced in CSI Driver for PowerMax version 2.5.0.
+
+### Operator based installation
+Support for auto RDM for vSphere over FC feature is optional and by default this feature is disabled for drivers when installed via operator.
+
+To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver manifest under controller and node section. 
+
+```
+# VMware/vSphere virtualization support
+        # set X_CSI_VSPHERE_ENABLED to true, if you to enable VMware virtualized environment support via RDM
+        # Allowed values:
+        #   "true" - vSphere volumes are enabled
+        #   "false" - vSphere volumes are disabled
+        # Default value: "false"
+        - name: "X_CSI_VSPHERE_ENABLED"
+          value: "false"
+        # X_CSI_VSPHERE_PORTGROUP: An existing portGroup that driver will use for vSphere
+        # recommended format: csi-x-VC-PG, x can be anything of user choice
+        # Allowed value: valid existing port group on the array
+        # Default value: "" <empty>
+        - name: "X_CSI_VSPHERE_PORTGROUP"
+          value: ""
+        # X_CSI_VSPHERE_HOSTGROUP: An existing host group that driver will use for vSphere
+        # this hostGroup should contain initiators from all the ESXs/ESXi host where the cluster is deployed
+        # recommended format: csi-x-VC-HG, x can be anything of user choice
+        # Allowed value: valid existing port group on the array
+        # Default value: "" <empty>
+        - name: "X_CSI_VSPHERE_HOSTGROUP"
+          value: ""
+        # X_CSI_VCenter_HOST: URL/endpoint of the vCenter where all the ESX are present
+        # Allowed value: valid vCenter host endpoint
+        # Default value: "" <empty>
+        - name: "X_CSI_VCenter_HOST"
+          value: ""
+        # X_CSI_VCenter_USERNAME: username from the vCenter credentials
+        # Allowed value: valid vCenter host username
+        # Default value: "" <empty>
+        - name: "X_CSI_VCenter_USERNAME"
+          value: ""
+        # X_CSI_VCenter_PWD: password from the vCenter credentials
+        # Allowed value: valid vCenter host password
+        # Default value: "" <empty>
+        - name: "X_CSI_VCenter_PWD"
+          value: ""
+```
