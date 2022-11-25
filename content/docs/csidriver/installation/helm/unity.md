@@ -185,7 +185,7 @@ Procedure
     | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity XT system| true     | -       |
     | storageArrayList.arrayId  | ArrayID for Unity XT system                    | true     | -       |
     | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | true | true |
-    | storageArrayList.isDefault| An array having isDefault=true or isDefaultArray=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | true | - |
+    | storageArrayList.isDefault| An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | true | - |
 
 
     Example: secret.yaml
