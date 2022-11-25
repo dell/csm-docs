@@ -405,7 +405,7 @@ spec:
 You can set the field ***replicas*** to a higher number than `1` for the latest driver versions.
 
 Note - The `image` field should point to the correct image tag for version of the driver you are installing.  
-For e.g. - If you wish to install v1.10.0 of the CSI PowerMax driver, use the image tag `dellemc/csi-powermax:v1.10.0`
+For e.g. - If you wish to install v2.5.0 of the CSI PowerMax driver, use the image tag `dellemc/csi-powermax:v2.5.0`
 
 ### SideCars
 Although the sidecars field in the driver specification is optional, it is **strongly** recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell support.
