@@ -68,4 +68,5 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Supported FS  | ext4 / xfs       | ext4 / xfs         | ext3 / ext4 / xfs / NFS | NFS       | ext3 / ext4 / xfs / NFS |
 | Thin / Thick provisioning | Thin  | Thin              | Thin/Thick       | N/A              | Thin             |
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
+| Auto RDM(vSphere)  | Yes(over FC)  | N/A              | N/A      | N/A              | N/A             |
 {{</table>}}

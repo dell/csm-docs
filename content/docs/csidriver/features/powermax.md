@@ -253,7 +253,7 @@ For additional information, see the website: [Kubernetes](https://kubernetes.io/
 
 ## CSI PowerMax Reverse Proxy
 
-To get the maximum performance out of the CSI driver for PowerMax and Unisphere for PowerMax REST APIs, starting with v1.4 of the driver, you can deploy the optional CSI PowerMax Reverse Proxy application.
+CSI PowerMax Reverse Proxy application is deployed along with the driver to get the maximum performance out of the CSI driver for PowerMax and Unisphere for PowerMax REST APIs.
 
 CSI PowerMax Reverse Proxy is a (go) HTTPS server that acts as a reverse proxy for the Unisphere for PowerMax RESTAPI interface. Any RESTAPI request sent from the driver to the reverse proxy is forwarded to the Unisphere server and the response is routed back to the driver.
 
@@ -287,9 +287,9 @@ key=tls.key
 
 ### Using Helm installer
 
-In the `my-powermax-settings.yaml` file, the csireverseproxy section can be used to deploy and configure the CSI PowerMax Reverse Proxy.
+In the `my-powermax-settings.yaml` file, the csireverseproxy section can be used to configure the CSI PowerMax Reverse Proxy.
 
-The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. If it is enabled (using the `enabled` parameter in the csireverseproxy section of the `my-powermax-settings.yaml` file), the install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.
+The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. The install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.
 
 ### Using Dell CSI Operator
 
@@ -566,10 +566,14 @@ When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode rest
 
 To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
   
-## VMware/vSphere virtualization support via RDM
+## Support for auto RDM for vSphere over FC
   
-CSI Driver for Dell PowerMax 2.5.0 and above supports VMware/vSphere virtualization support via RDM.
-  
+CSI Driver for Dell PowerMax 2.5.0 and above supports auto RDM for vSphere over FC.
+
+This feature supports volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. This feature enables the users to use PMAX CSI drivers with VMs on vSphere Hypervisor with the same feature and functionality as there with bare metal servers when they have only FC ports in PMAX storage.
+
+It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like ISCSI or FC (in pass-through) is not supported.  
+
 To use this feature, set vSphere.enabled to true
   
 ```
@@ -598,6 +602,6 @@ vSphere:
   
 ```
   
->Note: Replication is not supported with VMware/vSphere virtualization support via RDM
-  
-  
+>Note: Replication is not supported with this feature.
+>Limitations of RDM can be referred [here.](https://configmax.esp.vmware.com/home)  
+>RDMs should not be added/removed manually from vCenter on any of the cluster VMs.   
