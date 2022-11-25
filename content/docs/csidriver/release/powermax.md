@@ -10,7 +10,7 @@ description: Release notes for PowerMax CSI driver
 ### New Features/Changes
 - [Added support for Kubernetes 1.25.](https://github.com/dell/csm/issues/478)
 - [csi-reverseproxy is mandated along with the driver](https://github.com/dell/csm/issues/495)
-- [Added support for VMware/vSphere virtualization](https://github.com/dell/csm/issues/528)
+- [Added support for auto RDM for vSphere over FC](https://github.com/dell/csm/issues/528)
 - [Added support for OpenShift 4.11](https://github.com/dell/csm/issues/480)
 - [SLES 15 SP4 support added](https://github.com/dell/csm/issues/539)
 
