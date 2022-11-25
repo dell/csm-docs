@@ -59,7 +59,7 @@ CSM for Observability provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerFlex | PowerStore | PowerScale |
 |---------------|:-------------------:|:----------------:|:----------------:|
-| Storage Array | 3.5.x, 3.6.x, 4.0 | 1.0.x, 2.0.x, 2.1.x, 3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 |
+| Storage Array | 3.5.x, 3.6.x, 4.0 | 1.0.x, 2.0.x, 2.1.x, 3.0, 3.2 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 |
 {{</table>}}
 
 ## Supported CSI Drivers
