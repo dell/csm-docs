@@ -11,14 +11,14 @@ The Dell CSI Operator is a Kubernetes Operator, which can be used to install and
 ## Prerequisites
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image:
@@ -37,7 +37,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ```
 
 *NOTE:*
-- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
 
 
 ## Installation
@@ -50,21 +50,21 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 #### Full list of CSI Drivers and versions supported by the Dell CSI Operator
 | CSI Driver         | Version   | ConfigVersion  | Kubernetes Version   | OpenShift Version     |
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
-| CSI PowerMax       | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerMax       | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerMax       | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
-| CSI PowerFlex      | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
+| CSI PowerMax       | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerFlex      | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerFlex      | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
-| CSI PowerScale     | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
+| CSI PowerFlex      | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerScale     | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerScale     | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
-| CSI Unity XT       | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
+| CSI PowerScale     | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI Unity XT       | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI Unity XT       | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
-| CSI PowerStore     | 2.1.0     | v2.1.0         | 1.20, 1.21, 1.22     | 4.8, 4.8 EUS, 4.9     |
+| CSI Unity XT       | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerStore     | 2.2.0     | v2.2.0         | 1.21, 1.22, 1.23     | 4.8, 4.8 EUS, 4.9     |
 | CSI PowerStore     | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI PowerStore     | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 
 </br>
 
@@ -76,7 +76,7 @@ The installation process involves the creation of a `Subscription` object either
 * _Automatic_ - If you want the Operator to be automatically installed or upgraded (once an upgrade becomes available)
 * _Manual_ - If you want a Cluster Administrator to manually review and approve the `InstallPlan` for installation/upgrades
 
-**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
+**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
 
 #### Pre-Requisite for installation with OLM
 Please run the following commands for creating the required `ConfigMap` before installing the `dell-csi-operator` using OLM.  
@@ -97,7 +97,7 @@ $ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n
 #### Steps
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
-1. Clone and checkout the required dell-csi-operator version using `git clone -b v1.8.0 https://github.com/dell/dell-csi-operator.git`.
+1. Clone and checkout the required dell-csi-operator version using `git clone -b v1.9.0 https://github.com/dell/dell-csi-operator.git`.
 2. cd dell-csi-operator
 3. Run `bash scripts/install.sh` to install the operator.
 >NOTE: Dell CSI Operator version 1.4.0 and higher would install to the 'dell-csi-operator' namespace by default.
@@ -274,12 +274,12 @@ The below notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.3.0
+        configVersion: v2.4.0
    ```
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
    external-health-monitor sidecar in the sidecar section and `value`under controller set to true and the `value` under node set 
-   to true as shown below:
+   to true as shown below:<br />
     i. Add controller and node section as below:
     ```yaml
         controller:
@@ -298,26 +298,26 @@ The below notes explain some of the general items to take care of.
         - args:
           - --volume-name-prefix=csiunity
           - --default-fstype=ext4
-          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.1.0
+          image: k8s.gcr.io/sig-storage/csi-provisioner:v3.2.0
           imagePullPolicy: IfNotPresent
           name: provisioner
         - args:
           - --snapshot-name-prefix=csiunitysnap
-          image: k8s.gcr.io/sig-storage/csi-snapshotter:v5.0.1
+          image: k8s.gcr.io/sig-storage/csi-snapshotter:v6.0.1
           imagePullPolicy: IfNotPresent
           name: snapshotter
         - args:
           - --monitor-interval=60s
-          image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.5.0
+          image: gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.6.0
           imagePullPolicy: IfNotPresent
           name: external-health-monitor
-        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.4.0
+        - image: k8s.gcr.io/sig-storage/csi-attacher:v3.5.0
           imagePullPolicy: IfNotPresent
           name: attacher
         - image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
           imagePullPolicy: IfNotPresent
           name: registrar
-        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.4.0
+        - image: k8s.gcr.io/sig-storage/csi-resizer:v1.5.0
           imagePullPolicy: IfNotPresent
           name: resizer
     ```

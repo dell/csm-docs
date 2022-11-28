@@ -10,11 +10,11 @@ Description: >
 
 Login to each worker host and perform these steps:
 
-#### Remove directory */root/.driver-sec*
+__Remove directory */root/.driver-sec*__
 
 This directory was created when a CSI driver with Encryption first ran on the host.
 
-#### Remove entry from */root/.ssh/authorized_keys*
+__Remove entry from */root/.ssh/authorized_keys*__
 
 This is an entry added when a CSI driver with Encryption first ran on the host.
 It ends with `driver-sec`, similarly to:
@@ -32,8 +32,12 @@ It can be removed with `sed -i '/^ssh-rsa .* driver-sec$/d' /root/.ssh/authorize
 
 ## Remove Kubernetes Resources
 
-Remove [the resources that were created in Kubernetes cluster for Encryption](../deployment#secrets-and-config-maps).
+Remove [the resources](../deployment#secrets-and-config-maps) created in Kubernetes cluster for Encryption.
 
 ## Remove Vault Server Configuration
 
-Remove [the configuration created in the Vault server for Encryption](../vault#minimum-server-configuration).
+Remove [the configuration](../vault#minimum-server-configuration) created in the Vault server for Encryption.
+
+## Remove Rekey Controller
+
+Remove [the resources](../rekey#rekey-controller-installation) created during the installation of the Rekey Controller.

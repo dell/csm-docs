@@ -16,6 +16,7 @@ applications in case of both planned and unplanned migration.
 CSM for Replication provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
+<<<<<<< HEAD
 | Capability                                                                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
 | ----------------------------------------------------------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
 | Replicate data using native storage array based replication                                                                         |   yes    |    yes     |    yes     |    no     |  no   |
@@ -24,11 +25,29 @@ CSM for Replication provides the following capabilities:
 | Failover & Reprotect applications using the replicated volumes                                                                      |   yes    |    yes     |     no     |    no     |  no   |
 | Online Volume Expansion for replicated volumes                                                                                      |   yes    |     no     |     no     |    no     |  no   |
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    no     |  no   |
+=======
+| Capability                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
+| ----------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
+| Replicate data using native storage array based replication                         | yes      | yes        | yes        | no        | no    |
+| Asynchronous file volume replication                         | yes      | no        | yes        | no        | no    |
+| Asynchronous block volume replication                         | yes      | yes        | n/a        | no        | no    |
+| Synchronous file volume replication                         | yes      | no        | no        | no        | no    |
+| Synchronous block volume replication                         | yes      | no        | n/a        | no        | no    |
+| Active-Active (Metro) block volume replication                         | yes      | no        | n/a        | no        | no    |
+| Active-Active (Metro) file volume replication                         | yes      | no        | no        | no        | no    |
+| Create `PersistentVolume` objects in the cluster representing the replicated volume | yes      | yes        | yes        | no        | no    |
+| Create `DellCSIReplicationGroup` objects in the cluster                             | yes      | yes        | yes        | no        | no    |
+| Failover & Reprotect applications using the replicated volumes                      | yes      | yes        | yes        | no        | no    |
+| Online Volume Expansion for replicated volumes				       | yes      | no	      | no	   | no	       | no    |
+| Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters | yes | yes | yes | no | no |
+>>>>>>> release-1.5
 {{</table>}}
+
 
 ## Supported Operating Systems/Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
+<<<<<<< HEAD
 | COP/OS            | PowerMax         | PowerStore       | PowerScale       |
 | ----------------- | ---------------- | ---------------- | ---------------- |
 | Kubernetes        | 1.22, 1.23, 1.24 | 1.22, 1.23, 1.24 | 1.22, 1.23, 1.24 |
@@ -37,6 +56,16 @@ CSM for Replication provides the following capabilities:
 | CentOS            | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         |
 | Ubuntu            | 20.04            | 20.04            | 20.04            |
 | SLES              | 15SP2            | 15SP2            | 15SP2            |
+=======
+| COP/OS        | PowerMax         | PowerStore       | PowerScale |
+|---------------|------------------|------------------|------------|
+| Kubernetes    | 1.23, 1.24, 1.25 | 1.22, 1.23, 1.24 | 1.22, 1.23, 1.24 |
+| Red Hat OpenShift | 4.10, 4.11    | 4.9, 4.10        | 4.9, 4.10  |
+| RHEL          |     7.x, 8.x     |     7.x, 8.x     |  7.x, 8.x  |
+| CentOS        |     7.8, 7.9     |     7.8, 7.9     | 7.8, 7.9   |
+| Ubuntu        |       20.04      |       20.04      | 20.04      |
+| SLES          |        15SP4     |        15SP2     | 15SP2      |
+>>>>>>> release-1.5
 {{</table>}}
 
 ## Supported Storage Platforms
@@ -78,6 +107,7 @@ the objects still exist in pairs.
 * Different namespaces cannot share the same RDF group for creating volumes with ASYNC mode for PowerMax.
 * Same RDF group cannot be shared across different replication modes for PowerMax.
 
+<<<<<<< HEAD
 ### CSM for Replication Module Capabilities
 
 CSM for Replication provides the following capabilities:
@@ -91,15 +121,25 @@ CSM for Replication provides the following capabilities:
 | Replication actions (failover, reprotect)                      | yes      | yes         | yes        | no        | no    |
 {{</table>}}
 
+=======
+>>>>>>> release-1.5
 ### Supported Platforms
 
 The following matrix provides a list of all supported versions for each Dell Storage product.
 
+<<<<<<< HEAD
 | Platforms        | PowerMax                       | PowerStore       | PowerScale       |
 | ---------------- | ------------------------------ | ---------------- | ---------------- |
 | Kubernetes       | 1.22, 1.23, 1.24               | 1.22, 1.23, 1.24 | 1.22, 1.23, 1.24 |
 | RedHat Openshift | 4.9, 4.10                      | 4.9, 4.10        | 4.9, 4.10        |
 | CSI Driver       | 2.x(k8s), <br> 2.2+(OpenShift) | 2.x              | 2.2+             |
+=======
+| Platforms  | PowerMax          | PowerStore       | PowerScale       |
+| ---------- | ----------------- | ---------------- | ---------------- |
+| Kubernetes | 1.23, 1.24, 1.25  | 1.22, 1.23, 1.24 | 1.22, 1.23, 1.24 |
+| RedHat Openshift |4.10, 4.11    | 4.9, 4.10        | 4.9, 4.10        |
+| CSI Driver | 2.x(k8s), <br> 2.2+(OpenShift)| 2.x              | 2.2+             |
+>>>>>>> release-1.5
 
 For compatibility with storage arrays please refer to corresponding [CSI drivers](../csidriver/#features-and-capabilities)
 

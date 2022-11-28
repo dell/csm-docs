@@ -11,10 +11,10 @@ The controller section of the Helm chart installs the following components in a 
 - CSI Driver for Dell PowerMax
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
-- Kubernetes External Snapshotter, which provides snapshot support
+- Kubernetes External Snapshotter, which provides snapshot support- 
+- CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance
 - Kubernetes External Resizer, which resizes the volume
 - (optional) Kubernetes External health monitor, which provides volume health status
-- (optional) CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance
 - (optional) Dell CSI Replicator, which provides Replication capability. 
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
@@ -28,12 +28,14 @@ The following requirements must be met before installing CSI Driver for Dell Pow
 - Install Helm 3
 - Fibre Channel requirements
 - iSCSI requirements
+- Auto RDM for vSphere over FC requirements
 - Certificate validation for Unisphere REST API calls
 - Mount propagation is enabled on container runtime that is being used
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
 - If using Powerpath , install the PowerPath for Linux requirements
+
 
 ### Install Helm 3
 
@@ -63,6 +65,18 @@ Set up the iSCSI initiators as follows:
 - The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.
 
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+
+### Auto RDM for vSphere over FC requirements
+
+The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.
+
+Set up the environment as follows: 
+
+- Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.
+
+- Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
+
+- Add hosts/initiators from all ESX/ESXis to a host group where the cluster is hosted.
 
 ### Certificate validation for Unisphere REST API calls
 
@@ -125,7 +139,7 @@ snapshot:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers to support Volume snapshots.
@@ -133,7 +147,7 @@ The CSI external-snapshotter sidecar is split into two controllers to support Vo
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
@@ -152,7 +166,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
 
 *NOTE:*
-- It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.1.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 ### (Optional) Replication feature Requirements
@@ -173,7 +187,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.4.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.5.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -183,7 +197,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
    where *myusername* and *mypassword* are credentials for a user with PowerMax privileges.
 4. Create the secret by running `kubectl create -f samples/secret/secret.yaml`.
-5. If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - _csireverseproxy-tls-secret_ which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.
+5. Create a TLS secret with the name - _csireverseproxy-tls-secret_ which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.
 6. Copy the default values.yaml file `cd helm && cp csi-powermax/values.yaml my-powermax-settings.yaml`
 7. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
 8. Edit the newly created file and provide values for the following parameters `vi my-powermax-settings.yaml`
@@ -195,10 +209,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
 | storageArrayId | This refers to PowerMax Symmetrix ID.| Yes | 000000000001|
 | endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| Yes if Reverse Proxy mode is _StandAlone_ | https://primary-1.unisphe.re:8443 |
-| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| No | https://backup-1.unisphe.re:8443 |
+| backupEndpoint | This refers to the URL of the backup Unisphere server managing _storageArrayId_, if Reverse Proxy is installed in _StandAlone_ mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| Yes | https://backup-1.unisphe.re:8443 |
 | managementServers | This section refers to the list of configurations for Unisphere servers managing powermax arrays.| - | - |
 | endpoint | This refers to the URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on | Yes | https://primary-1.unisphe.re:8443 |
-| credentialsSecret| This refers to the user credentials for _endpoint_ | No| primary-1-secret|
+| credentialsSecret| This refers to the user credentials for _endpoint_ | Yes| primary-1-secret|
 | skipCertificateValidation | This parameter should be set to false if you want to do client-side TLS verification of Unisphere for PowerMax SSL certificates.| No | "True"       |
 | certSecret    |  The name of the secret in the same namespace containing the CA certificates of the Unisphere server | Yes, if skipCertificateValidation is set to false | Empty|
 | limits | This refers to various limits for Reverse Proxy | No | - |
@@ -240,8 +254,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
-| enabled |  Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.<br>**NOTE:** If not enabled, then there is no requirement to configure any of the following values. | No | "False" |
-| image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.1.0 |
+| image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.4.0 |
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
@@ -260,6 +273,14 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | image | Image for dell-csi-replicator sidecar. | No | " " |
 | replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
 | replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
+| **vSphere**| This section refers to the configuration options for VMware virtualized environment support via RDM  |  -  | - |
+| enabled                  | A boolean that enables/disables VMware virtualized environment support. |  No      |   false   |
+| fcPortGroup                  | Existing portGroup that driver will use for vSphere. |  Yes      |   ""   |
+| fcHostGroup                  | Existing host group that driver will use for vSphere. |  Yes      |   ""   |
+| vCenterHost                  | URL/endpoint of the vCenter where all the ESX are present |  Yes      |   ""   |
+| vCenterUserName                  | Username from the vCenter credentials. |  Yes      |   ""   |
+| vCenterPassword                  | Password from the vCenter credentials. |  Yes      |   ""   |
+
 
 8. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml`
 9. Or you can also install the driver using standalone helm chart using the command `helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax`
@@ -292,22 +313,6 @@ Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes
 
-### CSI PowerMax driver without Proxy
-In this mode, the CSI PowerMax driver can only connect to a single `Unisphere` server. So, you just specify a list of storage arrays
-and the address of the `Unisphere` server
-
-```yaml
-global:
-  defaultCredentialsSecret: powermax-creds
-  storageArrays:
-    - storageArrayId: "000000000001"
-    - storageArrayId: "000000000002"
-  managementServers:
-    - endpoint: https://unisphere-address:8443
-```
-
->Note: If you provide multiple endpoints in the list of management servers, the installer will only use the first server in the list
-
 ### CSI PowerMax driver with Proxy in Linked mode
 In this mode, the CSI PowerMax ReverseProxy acts as a `passthrough` for the RESTAPI calls and only provides limited functionality
 such as rate limiting, backup Unisphere server. The CSI PowerMax driver is still responsible for the authentication with the Unisphere server.
@@ -330,13 +335,12 @@ global:
         maxActiveWrite: 4
         maxOutStandingRead: 50
         maxOutStandingWrite: 50
-    - endpoint: https://backup-unisphere:8443 #Optional
+    - endpoint: https://backup-unisphere:8443 
 
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
   # Set enabled to true if you want to use proxy
-  enabled: true
-  image: dellemc/csipowermax-reverseproxy:v2.3.0
+  image: dellemc/csipowermax-reverseproxy:v2.4.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222
@@ -382,9 +386,7 @@ global:
 
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
-  # Set enabled to true if you want to use proxy
-  enabled: true
-  image: dellemc/csipowermax-reverseproxy:v2.3.0
+  image: dellemc/csipowermax-reverseproxy:v2.4.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222
