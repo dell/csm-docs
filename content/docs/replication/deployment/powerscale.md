@@ -215,28 +215,28 @@ Failback operations are not presently supported for PowerScale. In the event of 
 Performing failback and discarding changes made to the target is to simply resume synchronization from the source. The steps to perform this operation are as follows:
 1. Log in to the source PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab. 
 2. Edit the source-side SyncIQ policy's schedule from `When source is modified` to `Manual`. 
-3.  Log in to the target PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Local targets` tab.
-4.  Perform `Actions > Disallow writes` on the target-side Local Target policy that matches the SyncIQ policy undergoing failback. 
-5.  Return to the source array. Enable the source-side SyncIQ policy. Edit its schedule from `Manual` to `When source is modified`. Set the time delay for synchronization as appropriate.
+3. Log in to the target PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Local targets` tab.
+4. Perform `Actions > Disallow writes` on the target-side Local Target policy that matches the SyncIQ policy undergoing failback. 
+5. Return to the source array. Enable the source-side SyncIQ policy. Edit its schedule from `Manual` to `When source is modified`. Set the time delay for synchronization as appropriate.
 #### Failback - Discard Source
 
 Information on performing a failback while taking changes made to the original target can be found in this [SyncIQ document.](https://infohub.delltechnologies.com/l/dell-powerscale-synciq-architecture-configuration-and-considerations/failback-14) The detailed steps are as follows:
 
 1. Log in to the source PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab. 
 2. Edit the source-side SyncIQ policy's schedule from `When source is modified` to `Manual`. 
-3.  Log in to the target PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab.
-4.  Delete the target-side SyncIQ policy that has a name matching the SyncIQ policy undergoing failback. This is necessary to prevent conflicts when running resync-prep in the next step.
-5.  On the source PowerScale array, enable the SyncIQ policy that is undergoing failback. On this policy, perform `Actions > Resync-prep`. This will create a new SyncIQ policy on the target PowerScale array, matching the original SyncIQ policy with an appended *_mirror* to its name. 
-6.  On the target PowerScale array's `Policies` tab, perform `Actions > Start job` on the *_mirror* policy. Wait for this synchronization to complete. 
-7.  On the source PowerScale array, switch from the `Policies` tab to the `Local targets` tab. Find the local target policy that matches the SyncIQ policy being failed over and perform `Actions > Allow writes`. 
-8.  On the target PowerScale array, perform `Actions > Resync-prep` on the *_mirror* policy. 
-9.  On the target PowerScale array, delete the *_mirror* SyncIQ policy. 
+3. Log in to the target PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab.
+4. Delete the target-side SyncIQ policy that has a name matching the SyncIQ policy undergoing failback. This is necessary to prevent conflicts when running resync-prep in the next step.
+5. On the source PowerScale array, enable the SyncIQ policy that is undergoing failback. On this policy, perform `Actions > Resync-prep`. This will create a new SyncIQ policy on the target PowerScale array, matching the original SyncIQ policy with an appended *_mirror* to its name. 
+6. On the target PowerScale array's `Policies` tab, perform `Actions > Start job` on the *_mirror* policy. Wait for this synchronization to complete. 
+7. On the source PowerScale array, switch from the `Policies` tab to the `Local targets` tab. Find the local target policy that matches the SyncIQ policy being failed over and perform `Actions > Allow writes`. 
+8. On the target PowerScale array, perform `Actions > Resync-prep` on the *_mirror* policy. 
+9. On the target PowerScale array, delete the *_mirror* SyncIQ policy. 
 10. On the target PowerScale array, manually recreate the original SyncIQ policy that was deleted in step 4. This will require filepaths, RPO, and other details that can be obtained from the source-side SyncIQ policy. Its name **must** match the source-side SyncIQ policy.
 11. Ensure that the target-side SyncIQ policy that was just created is **Enabled.** This will create a Local Target policy on the source side. If it was not created as Enabled, enable it now. 
 12. On the source PowerScale array, select the `Local targets` tab. Perform `Actions > Allow writes` on the source-side Local Target policy that matches the SyncIQ policy undergoing failback. 
 13. **Disable** the target-side SyncIQ policy.
 14. On the source PowerScale array, edit the SyncIQ policy's schedule from `Manual` to `When source is modified`. Set the time delay for synchronization as appropriate.
-15.  On the source PowerScale array, enable the SyncIQ policy. 
+15. On the source PowerScale array, enable the SyncIQ policy. 
 
 ### Supported Replication Actions
 The CSI PowerScale driver supports the following list of replication actions:
