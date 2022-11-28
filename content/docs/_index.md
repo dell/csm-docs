@@ -70,7 +70,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | -------------------------------------------------------------------------------------------- | :-----: | :---------------: | :---------------: | :-----------------: |
 | [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar)                  | v1.5.0  |      v1.4.0       |      v1.3.0       |       v1.2.0        |
 | [Observability](https://hub.docker.com/r/dellemc/csm-topology)                               | v1.4.0  |      v1.3.0       |      v1.2.0       |       v1.1.1        |
-| [Replication](https://hub.docker.com/r/dellemc/dell-csi-replicator)                          | v1.3.0  |      v1.3.0       |      v1.3.0       |       v1.2.0        |
+| [Replication](https://hub.docker.com/r/dellemc/dell-replication-controller)                  | v1.4.0  |      v1.3.0       |      v1.3.0       |       v1.2.0        |
 | [Resiliency](https://hub.docker.com/r/dellemc/podmon)                                        | v1.4.0  |      v1.3.0       |      v1.2.0       |       v1.1.0        |
 | [Encryption](https://hub.docker.com/r/dellemc/csm-encryption)                                | v0.2.0  |      v0.1.0       |        NA         |         NA          |
 | [Application Mobility](https://hub.docker.com/r/dellemc/csm-application-mobility-controller) | v0.2.0  |      v0.1.0       |        NA         |         NA          |
@@ -86,7 +86,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
 | [**Authorization**](authorization/) v1.5                    | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
 | [**Observability**](observability/) v1.4                    | ✔️                    | ✔️                     | ✔️                     | ❌                   | ❌                   |
-| [**Replication**](replication/)   v1.3                      | ❌                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
+| [**Replication**](replication/)   v1.4                      | ❌                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
 | [**Resiliency**](resiliency/)     v1.4                      | ✔️                    | ✔️                     | ❌                     | ❌                   | ✔️                   |
 | [**Encryption**](secure/encryption)    v0.2.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
 | [**Application Mobility**](applicationmobility/)     v0.2.0 | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ✔️                   |

@@ -38,7 +38,7 @@ The following table lists details of what actions should be used in different Di
 | ------------------- | ----------------------------------------------------- | ---------------------- | -------------------------------------- | -------------------------------------------- | -------------------------------------- |
 | Planned Migration   | FAILOVER_LOCAL<br>FAILOVER_REMOTE                     | symrdf failover -swap  | FAILOVER (no REPROTECT after FAILOVER) | allow_writes on target, disable local policy | FAILOVER (no REPROTECT after FAILOVER) |
 | Reprotect           | REPROTECT_LOCAL<br>REPROTECT_REMOTE                   | symrdf resume/est      | REPROTECT                              | Not supported                                | REPROTECT                              |
-| Unplanned Migration | UNPLANNED_FAILOVER_LOCAL<br>UNPLANNED_FAILOVER_REMOTE | symrdf failover -force | FAILOVER (at target site)              | break association on target                  | FAILOVER (at target site)              |
+| Unplanned Migration | UNPLANNED_FAILOVER_LOCAL<br>UNPLANNED_FAILOVE_REMOTE  | symrdf failover -force | FAILOVER (at target site)              | allow_writes on target               | FAILOVER (at target site)              |
 {{</table>}}
 
 ### Maintenance Actions
