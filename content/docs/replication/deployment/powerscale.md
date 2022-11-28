@@ -198,8 +198,11 @@ The CSI PowerScale driver will create a volume on the array, add it to a VolumeG
 using the parameters provided in the replication enabled Storage Class.
 
 ### SyncIQ Policy Architecture
+When creating `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s) used for replication, matching SyncIQ policies are created on *both* the source and target PowerScale storage arrays. 
 
+This is done so that the RG objects can communicate with a relative 'local' and 'remote' set of policies to query for current synchronization status and perform replication actions; on the *source* Kubernetes cluster's RG, the *source* PowerScale array is seen as 'local' and the *target* PowerScale array is seen as remote. The inverse relationship exists on the *target* Kubernetes cluster's RG, which sees the *target* PowerScale array as 'local' and the *source* PowerScale array as 'remote'. 
 
+Upon creation, both SyncIQ policies (source and target) are set to a schedule of `When source is modified`. The source PowerScale array's SyncIQ policy is `Enabled` when the RG is created, and the target array's policy is `Disabled`. Similarly, the directory that is being replicated is *read-write accessible* on the source storage array, and is restricted to *read-only* on the target. 
 
 ### Performing Failover on PowerScale
 
@@ -234,7 +237,7 @@ Information on performing a failback while taking changes made to the original t
 10. On the target PowerScale array, manually recreate the original SyncIQ policy that was deleted in step 4. This will require filepaths, RPO, and other details that can be obtained from the source-side SyncIQ policy. Its name **must** match the source-side SyncIQ policy.
 11. Ensure that the target-side SyncIQ policy that was just created is **Enabled.** This will create a Local Target policy on the source side. If it was not created as Enabled, enable it now. 
 12. On the source PowerScale array, select the `Local targets` tab. Perform `Actions > Allow writes` on the source-side Local Target policy that matches the SyncIQ policy undergoing failback. 
-13. **Disable** the target-side SyncIQ policy.
+13. Disable the target-side SyncIQ policy.
 14. On the source PowerScale array, edit the SyncIQ policy's schedule from `Manual` to `When source is modified`. Set the time delay for synchronization as appropriate.
 15. On the source PowerScale array, enable the SyncIQ policy. 
 
