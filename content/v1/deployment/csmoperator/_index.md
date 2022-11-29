@@ -120,7 +120,7 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 
 #### Mandatory fields
 
-**configVersion** - Configuration version - refer [here](#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csm-operator) for appropriate config version.
+**configVersion** - Configuration version - refer [here](#supported-csi-drivers) for appropriate config version.
 
 **replicas**  - Number of replicas for controller plugin - must be set to 1 for all drivers.
 
