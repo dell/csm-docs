@@ -604,4 +604,5 @@ vSphere:
   
 >Note: Replication is not supported with this feature.
 >Limitations of RDM can be referred [here.](https://configmax.esp.vmware.com/home)  
+>Supported number of RDM Volumes per VM is 60 as per the limitations.
 >RDMs should not be added/removed manually from vCenter on any of the cluster VMs.   
