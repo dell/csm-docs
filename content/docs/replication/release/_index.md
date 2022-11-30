@@ -6,7 +6,7 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for replication
 ---
 
-## Release Notes - CSM Replication 1.4.0
+## Release Notes - CSM Replication 1.3.1
 
 ### New Features/Changes
 There are no new features in this release.
@@ -16,8 +16,8 @@ There are no new features in this release.
 - ["repctl cluster inject --use-sa" doesn't work for Kubernetes 1.24 and above](https://github.com/dell/csm/issues/463)
 
 ### Known Issues
-| Github ID | Description  |   
-|-----------------------------------------------|-----------------------------------------------------------------------------------------|
-| [532](https://github.com/dell/csm/issues/532) | **PowerScale:** Reprotect should NOT be calling allow_write_revert.|   
-| [516](https://github.com/dell/csm/issues/516) | **PowerScale:** CSI documentation misses the privileges to user to use CSM replication.|   
-| [523](https://github.com/dell/csm/issues/523) | **PowerScale:** Artifacts are not properly cleaned after deletion.|   
+| Github ID                                     | Description                                                                             |
+| --------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [532](https://github.com/dell/csm/issues/532) | **PowerScale:** Reprotect should NOT be calling allow_write_revert.                     |
+| [516](https://github.com/dell/csm/issues/516) | **PowerScale:** CSI documentation misses the privileges to user to use CSM replication. |
+| [523](https://github.com/dell/csm/issues/523) | **PowerScale:** Artifacts are not properly cleaned after deletion.                      |
