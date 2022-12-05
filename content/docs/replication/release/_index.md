@@ -18,5 +18,4 @@ There are no new features in this release.
 ### Known Issues
 | Github ID                                     | Description                                                                             |
 | --------------------------------------------- | --------------------------------------------------------------------------------------- |
-| [532](https://github.com/dell/csm/issues/532) | **PowerScale:** Reprotect should NOT be calling allow_write_revert.                     |
 | [523](https://github.com/dell/csm/issues/523) | **PowerScale:** Artifacts are not properly cleaned after deletion.                      |
