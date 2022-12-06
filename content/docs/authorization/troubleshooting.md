@@ -157,3 +157,24 @@ kubectl -n <namespace> rollout restart deploy/proxy-server
 kubectl -n <driver-namespace> rollout restart deploy/vxflexos-controller
 kubectl -n <driver-namespace> rollout restart daemonSet/vxflexos-node
 ```
+
+### The Failure of Creating an Authorization RPM
+  This response occurs when running 'make rpm' without the proper permissions or correct pathing of the Authorization repository
+
+```
+Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting "/root/karavi-authorization/bin/deploy" to rootfs at "/home/builder/rpm/deploy": mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERRO[0001] error waiting for container: context canceled 
+```
+
+__Resolution__
+
+1. Ensure the cloned repository is in a folder independent of the root or home directory
+
+```
+~/myrepos/karavi-authroization
+```
+
+2. Enable appropriate permissions to the RPM folder (this is where the Authorization RPM is located after being created)
+
+```
+chmod o+rwx deploy/rpm
+```
