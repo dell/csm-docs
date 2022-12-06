@@ -933,6 +933,7 @@ data:
         
         &lt;h2 id=&#34;rpm-deployment&#34;&gt;RPM Deployment&lt;/h2&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#The-Failure-of-Building-an-Authorization-RPM&#34;&gt;The Failure of Building an Authorization RPM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &lt;code&gt;karavictl tenant&lt;/code&gt; commands result in an HTTP 504 error&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#installation-fails-to-install-policies&#34;&gt;Installation fails to install policies&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/a&gt;&lt;/li&gt;
@@ -942,7 +943,19 @@ data:
 &lt;li&gt;&lt;a href=&#34;#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors&#34;&gt;The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &amp;ldquo;request denied for path&amp;rdquo; errors&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
+&lt;h3 id=&#34;the-failure-of-building-an-authorization-rpm&#34;&gt;The Failure of Building an Authorization RPM&lt;/h3&gt;
+&lt;p&gt;This response occurs when running &amp;lsquo;make rpm&amp;rsquo; without the proper permissions or correct pathing of the Authorization repository.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting &amp;#34;/root/karavi-authorization/bin/deploy&amp;#34; to rootfs at &amp;#34;/home/builder/rpm/deploy&amp;#34;: mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERRO[0001] error waiting for container: context canceled 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ensure the cloned repository is in a folder independent of the root or home directory.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/root/myrepos/karavi-authorization
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Enable appropriate permissions to the RPM folder (this is where the Authorization RPM is located after being built).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;chmod o+rwx deploy/rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
 &lt;p&gt;To retrieve logs from services on the CSM Authorization Server, run the following command (e.g proxy-server logs):&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For OPA related logs, run:&lt;/p&gt;
