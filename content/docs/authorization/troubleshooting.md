@@ -7,6 +7,7 @@ Description: >
 ---
 
 ## RPM Deployment
+- [The Failure of Building an Authorization RPM](#The-Failure-of-Building-an-Authorization-RPM)
 - [Running `karavictl tenant` commands result in an HTTP 504 error](#running-karavictl-tenant-commands-result-in-an-http-504-error)
 - [Installation fails to install policies](#installation-fails-to-install-policies)
 - [After installation, the create-pvc Pod is in an Error state](#after-installation-the-create-pvc-pod-is-in-an-error-state)
