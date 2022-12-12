@@ -78,6 +78,8 @@ Set up the environment as follows:
 
 - Add initiators from all ESX/ESXis to a host(initiator group) where the cluster is hosted.
 
+>Note: Initiators from all ESX/ESXi should be part of a single host(initiator group) and not hostgroup(cascaded intitiator group).
+
 ### Certificate validation for Unisphere REST API calls
 
 As part of the CSI driver installation, the CSI driver requires a secret with the name _powermax-certs_ present in the namespace _powermax_. This secret contains the X509 certificates of the CA which signed the Unisphere SSL certificate in PEM format. This secret is mounted as a volume in the driver container. In earlier releases, if the install script did not find the secret, it created an empty secret with the same name. From the 1.2.0 release, the secret volume has been made optional. The install script no longer attempts to create an empty secret.
