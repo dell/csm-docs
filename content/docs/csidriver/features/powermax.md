@@ -588,7 +588,7 @@ vSphere:
   # fcPortGroup: an existing portGroup that driver will use for vSphere
   # recommended format: csi-x-VC-PG, x can be anything of user choice
   fcPortGroup: "csi-vsphere-VC-PG"
-  # fcHostGroup: an existing host group that driver will use for vSphere
+  # fcHostGroup: an existing host(initiator group) that driver will use for vSphere
   # this hostGroup should contain initiators from all the ESXs/ESXi host
   # where the cluster is deployed
   # recommended format: csi-x-VC-HG, x can be anything of user choice

@@ -46,7 +46,7 @@ Set up the environment as follows:
 
 - Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
 
-- Add hosts/initiators from all ESX/ESXis to a host group where the cluster is hosted.
+- Add initiators from all ESX/ESXis to a host(initiator group) where the cluster is hosted.
 
 #### Linux multipathing requirements
 
@@ -134,7 +134,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No | false |
    | X_CSI_VSPHERE_ENABLED | Enable VMware virtualized environment support via RDM | No | false |
    | X_CSI_VSPHERE_PORTGROUP | Existing portGroup that driver will use for vSphere | Yes | "" |
-   | X_CSI_VSPHERE_HOSTGROUP | Existing host group that driver will use for vSphere | Yes | "" |
+   | X_CSI_VSPHERE_HOSTGROUP | Existing host(initiator group) that driver will use for vSphere | Yes | "" |
    | X_CSI_VCenter_HOST | URL/endpoint of the vCenter where all the ESX are present | Yes | "" |
    | X_CSI_VCenter_USERNAME | Username from the vCenter credentials | Yes | "" |   
    | X_CSI_VCenter_PWD | Password from the vCenter credentials | Yes | "" |
@@ -575,10 +575,10 @@ To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver man
         # Default value: "" <empty>
         - name: "X_CSI_VSPHERE_PORTGROUP"
           value: ""
-        # X_CSI_VSPHERE_HOSTGROUP: An existing host group that driver will use for vSphere
+        # X_CSI_VSPHERE_HOSTGROUP: An existing host(initiator group) that driver will use for vSphere
         # this hostGroup should contain initiators from all the ESXs/ESXi host where the cluster is deployed
         # recommended format: csi-x-VC-HG, x can be anything of user choice
-        # Allowed value: valid existing port group on the array
+        # Allowed value: valid existing host on the array
         # Default value: "" <empty>
         - name: "X_CSI_VSPHERE_HOSTGROUP"
           value: ""
