@@ -37,9 +37,9 @@
 Encryption generates 32 random bytes for the password and stores them in Hashicorp Vault.&lt;/p&gt;
 &lt;p&gt;For detailed information on the cryptography behind gocryptfs, see &lt;a href=&#34;https://nuetzlich.net/gocryptfs/forward_mode_crypto&#34;&gt;gocryptfs Cryptography&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When a CSI Driver is installed with the Encryption feature enabled, two provisioners are registered in the cluster:&lt;/p&gt;
-&lt;h4 id=&#34;provisioner-for-unencrypted-volumes&#34;&gt;Provisioner for unencrypted volumes&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Provisioner for unencrypted volumes&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;This provisioner belongs to the storage driver and does not depend on the Encryption feature. Use a storage class with this provisioner to create regular unencrypted volumes.&lt;/p&gt;
-&lt;h4 id=&#34;provisioner-for-encrypted-volumes&#34;&gt;Provisioner for encrypted volumes&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Provisioner for encrypted volumes&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;This provisioner belongs to Encryption and registers with the name &lt;a href=&#34;deployment/#helm-chart-values&#34;&gt;&lt;code&gt;encryption.pluginName&lt;/code&gt;&lt;/a&gt; when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.&lt;/p&gt;
 &lt;h2 id=&#34;capabilities&#34;&gt;Capabilities&lt;/h2&gt;
 
@@ -121,7 +121,11 @@ the CSI driver must be restarted to pick up the change.&lt;/li&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Kubernetes&lt;/td&gt;
-&lt;td&gt;1.22, 1.23, 1.24&lt;/td&gt;
+&lt;td&gt;1.22, 1.23, 1.24, 1.25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Red Hat OpenShift&lt;/td&gt;
+&lt;td&gt;4.10, 4.11&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;RHEL&lt;/td&gt;
@@ -211,6 +215,9 @@ Please refer to the Hashicorp Vault documentation regarding recommended deployme
 Access to the data will be lost for ever.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Refer to &lt;a href=&#34;vault&#34;&gt;Vault Configuration section&lt;/a&gt; for minimal configuration steps required to support Encryption and other configuration considerations.&lt;/p&gt;
+&lt;h2 id=&#34;key-rotation-rekey&#34;&gt;Key Rotation (rekey)&lt;/h2&gt;
+&lt;p&gt;This preview of Encryption includes the ability to change the KEK (Key Encryption Key) of an encrypted volume, an operation commonly known as Shallow Rekey, or
+Shallow Key Rotation. The KEK is the 256-bit key that encrypts the Data Encryption Key which encrypts the data on the volume.&lt;/p&gt;
 &lt;h2 id=&#34;kubernetes-worker-hosts-requirements&#34;&gt;Kubernetes Worker Hosts Requirements&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Each Kubernetes worker host should have SSH server running.&lt;/li&gt;

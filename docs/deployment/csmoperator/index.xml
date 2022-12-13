@@ -179,5 +179,30 @@ Events
       </description>
     </item>
     
+    <item>
+      <title>Docs: Release notes</title>
+      <link>https://dell.github.io/csm-docs/docs/deployment/csmoperator/release/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/deployment/csmoperator/release/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v100&#34;&gt;Release Notes - Container Storage Modules Operator v1.0.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/477&#34;&gt;Added support for CSI PowerFlex Driver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/488&#34;&gt;Added support for CSM Observability Module&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/478&#34;&gt;Added support to Kubernetes 1.25&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/480&#34;&gt;Added support for OpenShift 4.11&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
+
+      </description>
+    </item>
+    
   </channel>
 </rss>

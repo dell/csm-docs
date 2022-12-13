@@ -29,6 +29,9 @@ the rest of the deployment process is described in the correspondent &lt;a href=
 &lt;h2 id=&#34;vault-server&#34;&gt;Vault Server&lt;/h2&gt;
 &lt;p&gt;Hashicorp Vault must be &lt;a href=&#34;../vault&#34;&gt;pre-configured&lt;/a&gt; to support Encryption. The Vault server&amp;rsquo;s IP address and port must be accessible
 from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
+&lt;h2 id=&#34;rekey-controller&#34;&gt;Rekey Controller&lt;/h2&gt;
+&lt;p&gt;The Encryption Rekey CRD Controller is an optional component that, if installed, allows encrypted volumes rekeying in a
+Kubernetes cluster. Please refer to &lt;a href=&#34;../rekey&#34;&gt;Rekey Configuration&lt;/a&gt; for the Rekey Controller installation details.&lt;/p&gt;
 &lt;h2 id=&#34;helm-chart-values&#34;&gt;Helm Chart Values&lt;/h2&gt;
 &lt;p&gt;The drivers that support Encryption via Helm chart have an &lt;code&gt;encryption&lt;/code&gt; block in their &lt;em&gt;values.yaml&lt;/em&gt; file that looks like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;encryption&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -39,20 +42,31 @@ from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;pluginName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sec-isilon.dellemc.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# image: Encryption driver image name.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;dellemc/csm-encryption:v0.1.0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# imagePullPolicy: If specified, overrides the chart global imagePullPolicy.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;dellemc/csm-encryption:v0.2.0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# logLevel: Log level of the encryption driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: &amp;#34;error&amp;#34;, &amp;#34;warning&amp;#34;, &amp;#34;info&amp;#34;, &amp;#34;debug&amp;#34;, &amp;#34;trace&amp;#34;.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;logLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;error&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# apiPort: TCP port number used by the REST API server.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiPort&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3838&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# logLevel: Log level of the encryption driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: &amp;#34;error&amp;#34;, &amp;#34;warning&amp;#34;, &amp;#34;info&amp;#34;, &amp;#34;debug&amp;#34;, &amp;#34;trace&amp;#34;.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;logLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;debug&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# livenessPort: HTTP liveness probe port number. &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Leave empty to disable the liveness probe.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Example: 8080&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;livenessPort&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# ocp: Enable when running on OpenShift Container Platform with CoreOS worker nodes.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ocp&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# ocpCoreID: User ID and group ID of user core on CoreOS worker nodes.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Ignored when ocp is set to false.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ocpCoreID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;1000:1000&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# extraArgs: Extra command line parameters to pass to the encryption driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# --sharedStorage - may be required by some applications to work properly.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -85,19 +99,19 @@ from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
 &lt;td&gt;image&lt;/td&gt;
 &lt;td&gt;Encryption driver image name.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;dellemc/csm-encryption:v0.1.0&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;imagePullPolicy&lt;/td&gt;
-&lt;td&gt;If specified, overrides the chart global imagePullPolicy.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;CSI driver global imagePullPolicy&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;dellemc/csm-encryption:v0.2.0&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;logLevel&lt;/td&gt;
-&lt;td&gt;Log level of the encryption driver.&lt;br/&gt;Allowed values: &amp;ldquo;error&amp;rdquo;, &amp;ldquo;warning&amp;rdquo;, &amp;ldquo;info&amp;rdquo;, &amp;ldquo;debug, `&amp;ldquo;trace&amp;rdquo;.&lt;/td&gt;
+&lt;td&gt;Log level of the encryption driver.&lt;br/&gt;Allowed values: &amp;ldquo;error&amp;rdquo;, &amp;ldquo;warning&amp;rdquo;, &amp;ldquo;info&amp;rdquo;, &amp;ldquo;debug&amp;rdquo;, &amp;ldquo;trace&amp;rdquo;.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;&amp;ldquo;error&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;apiPort&lt;/td&gt;
+&lt;td&gt;TCP Port number used by the REST API Server.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;3838&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;livenessPort&lt;/td&gt;
@@ -106,8 +120,20 @@ from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;ocp&lt;/td&gt;
+&lt;td&gt;Enable when running an OCP Platform with CoreOS worker nodes.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ocpCoreID&lt;/td&gt;
+&lt;td&gt;User ID and group ID of user core on CoreOS worker nodes. Ignored when ocp is set to false.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;1000:1000&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;extraArgs&lt;/td&gt;
-&lt;td&gt;Extra command line parameters to pass to the encryption driver.&lt;br/&gt;Allowed values:&lt;br/&gt;&amp;rdquo;--sharedStorage&amp;quot; - may be required by some applications to work properly.&lt;br/&gt;When set, performance is reduced and hard links cannot be created.&lt;br/&gt;See the &lt;a href=&#34;https://github.com/rfjakob/gocryptfs/blob/v2.2.1/Documentation/MANPAGE.md#-sharedstorage&#34;&gt;gocryptfs documentation&lt;/a&gt; for more details.&lt;/td&gt;
+&lt;td&gt;Extra command line parameters to pass to the encryption driver.&lt;br/&gt;Allowed values:&lt;br/&gt;&amp;quot;--sharedStorage&amp;quot; - may be required by some applications to work properly.&lt;br/&gt;When set, performance is reduced and hard links cannot be created.&lt;br/&gt;See the &lt;a href=&#34;https://github.com/rfjakob/gocryptfs/blob/v2.2.1/Documentation/MANPAGE.md#-sharedstorage&#34;&gt;gocryptfs documentation&lt;/a&gt; for more details.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;[]&lt;/td&gt;
 &lt;/tr&gt;
@@ -273,9 +299,9 @@ To apply new values in the secret (e.g., to update the client certificate), the 
         
         &lt;h2 id=&#34;cleanup-kubernetes-worker-hosts&#34;&gt;Cleanup Kubernetes Worker Hosts&lt;/h2&gt;
 &lt;p&gt;Login to each worker host and perform these steps:&lt;/p&gt;
-&lt;h4 id=&#34;remove-directory-rootdriver-sec&#34;&gt;Remove directory &lt;em&gt;/root/.driver-sec&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Remove directory &lt;em&gt;/root/.driver-sec&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;This directory was created when a CSI driver with Encryption first ran on the host.&lt;/p&gt;
-&lt;h4 id=&#34;remove-entry-from-rootsshauthorized_keys&#34;&gt;Remove entry from &lt;em&gt;/root/.ssh/authorized_keys&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Remove entry from &lt;em&gt;/root/.ssh/authorized_keys&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;This is an entry added when a CSI driver with Encryption first ran on the host.
 It ends with &lt;code&gt;driver-sec&lt;/code&gt;, similarly to:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGvSWmTL7NORRDPAvtbMbvoHUBLnen9bRtJePbGk1boJ4XK39Qdvo2zFHZ/6t2+dSL7xKo2kcxX3ovj3RyOPuqNCob
@@ -286,9 +312,11 @@ ocI5t+n01dWeVOCSOH/Q3uXxHKnFvWVZh7m6583R9LfdGfwshsnx4CNz22kp69hzwBPxehR+U/VXkDUW
 VQrpjsCPCu3fpVjvvwfspVOftbn/sNgY1J3lz0pdgvJ3yQs6pa+DODQyin5Rt//19rIGifPxi/Hk/k49Vw== driver-sec
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It can be removed with &lt;code&gt;sed -i &#39;/^ssh-rsa .* driver-sec$/d&#39; /root/.ssh/authorized_keys&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;remove-kubernetes-resources&#34;&gt;Remove Kubernetes Resources&lt;/h2&gt;
-&lt;p&gt;Remove &lt;a href=&#34;../deployment#secrets-and-config-maps&#34;&gt;the resources that were created in Kubernetes cluster for Encryption&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Remove &lt;a href=&#34;../deployment#secrets-and-config-maps&#34;&gt;the resources&lt;/a&gt; created in Kubernetes cluster for Encryption.&lt;/p&gt;
 &lt;h2 id=&#34;remove-vault-server-configuration&#34;&gt;Remove Vault Server Configuration&lt;/h2&gt;
-&lt;p&gt;Remove &lt;a href=&#34;../vault#minimum-server-configuration&#34;&gt;the configuration created in the Vault server for Encryption&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Remove &lt;a href=&#34;../vault#minimum-server-configuration&#34;&gt;the configuration&lt;/a&gt; created in the Vault server for Encryption.&lt;/p&gt;
+&lt;h2 id=&#34;remove-rekey-controller&#34;&gt;Remove Rekey Controller&lt;/h2&gt;
+&lt;p&gt;Remove &lt;a href=&#34;../rekey#rekey-controller-installation&#34;&gt;the resources&lt;/a&gt; created during the installation of the Rekey Controller.&lt;/p&gt;
 
       </description>
     </item>
@@ -310,7 +338,7 @@ It creates a standalone server with in-memory (non-persistent) storage, running 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: With in-memory storage, the encryption keys are permanently destroyed upon the server termination.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4 id=&#34;generate-tls-certificates-for-server-and-client&#34;&gt;Generate TLS certificates for server and client&lt;/h4&gt;
+&lt;h3 id=&#34;generate-tls-certificates-for-server-and-client&#34;&gt;Generate TLS certificates for server and client&lt;/h3&gt;
 &lt;p&gt;Create server CA private key and certificate:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;openssl req -x509 -sha256 -days &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;365&lt;/span&gt; -newkey rsa:2048 -nodes &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	-subj &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/CN=Vault Root CA&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
@@ -375,7 +403,7 @@ The same address should be used for &lt;code&gt;vault_addr&lt;/code&gt; in &lt;a
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	-CAcreateserial
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat client-ca.crt &amp;gt;&amp;gt; client.crt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;create-server-hcl-file&#34;&gt;Create server hcl file&lt;/h4&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;create-server-hcl-file&#34;&gt;Create server hcl file&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat &amp;gt;server.hcl &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;storage &amp;#34;inmem&amp;#34; {}
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
@@ -394,7 +422,7 @@ The same address should be used for &lt;code&gt;vault_addr&lt;/code&gt; in &lt;a
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;api_addr = &amp;#34;http://127.0.0.1:8200&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;ui = true
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;start-vault-server&#34;&gt;Start Vault Server&lt;/h4&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;start-vault-server&#34;&gt;Start Vault Server&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Variable &lt;code&gt;CONF_DIR&lt;/code&gt; below refers to the directory containing files &lt;em&gt;server.crt&lt;/em&gt;, &lt;em&gt;server.key&lt;/em&gt;, &lt;em&gt;client-ca.crt&lt;/em&gt; and &lt;em&gt;server.hcl&lt;/em&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -428,13 +456,13 @@ the Docker host where the server is running.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;VAULT_TOKEN&lt;/code&gt; - Authentication token, e.g. the root token &lt;code&gt;DemoRootToken&lt;/code&gt; used in the &lt;a href=&#34;#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;h4 id=&#34;enable-keyvalue-secret-engine&#34;&gt;Enable Key/Value secret engine&lt;/h4&gt;
+&lt;h3 id=&#34;enable-keyvalue-secret-engine&#34;&gt;Enable Key/Value secret engine&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault secrets &lt;span style=&#34;color:#204a87&#34;&gt;enable&lt;/span&gt; -version&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt; -path&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;dea-keys/ kv
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write /dea-keys/config &lt;span style=&#34;color:#000&#34;&gt;cas_required&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;max_versions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Key/Value secret engine is used to store encryption keys. Each encryption key is represented by a key-value entry.&lt;/p&gt;
-&lt;h4 id=&#34;enable-approle-authentication&#34;&gt;Enable AppRole authentication&lt;/h4&gt;
+&lt;h3 id=&#34;enable-approle-authentication&#34;&gt;Enable AppRole authentication&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault auth &lt;span style=&#34;color:#204a87&#34;&gt;enable&lt;/span&gt; approle
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;create-a-role&#34;&gt;Create a role&lt;/h4&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;create-a-role&#34;&gt;Create a role&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write auth/approle/role/dea-role &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;secret_id_ttl&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;28d &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;token_num_uses&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
@@ -443,7 +471,7 @@ the Docker host where the server is running.&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;token_explicit_max_ttl&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;10d &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;secret_id_num_uses&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;TTL values here are chosen arbitrarily and can be changed to desired values.&lt;/p&gt;
-&lt;h4 id=&#34;create-and-assign-a-token-policy-to-the-role&#34;&gt;Create and assign a token policy to the role&lt;/h4&gt;
+&lt;h3 id=&#34;create-and-assign-a-token-policy-to-the-role&#34;&gt;Create and assign a token policy to the role&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault policy write dea-policy - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;path &amp;#34;dea-keys/*&amp;#34; {
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;	capabilities = [&amp;#34;create&amp;#34;, &amp;#34;read&amp;#34;, &amp;#34;update&amp;#34;, &amp;#34;delete&amp;#34;, &amp;#34;list&amp;#34;]
@@ -456,7 +484,7 @@ the Docker host where the server is running.&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write auth/approle/role/dea-role &lt;span style=&#34;color:#000&#34;&gt;token_policies&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;dea-policy&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The role needs full access to the Key/Value secret engine to perform encryption key operations.
 The role only needs read access to the Key/Value secret engine config endpoint for configuration validation.&lt;/p&gt;
-&lt;h4 id=&#34;set-role-id-and-secret-id-to-the-role&#34;&gt;Set role ID and secret ID to the role&lt;/h4&gt;
+&lt;h3 id=&#34;set-role-id-and-secret-id-to-the-role&#34;&gt;Set role ID and secret ID to the role&lt;/h3&gt;
 &lt;p&gt;Role ID and secret ID are normally generated by Vault. To get the generated values, run these commands:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault &lt;span style=&#34;color:#204a87&#34;&gt;read&lt;/span&gt; auth/approle/role/dea-role/role-id
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write -f auth/approle/role/dea-role/secret-id
@@ -478,6 +506,187 @@ The client token will only be able to renew 3 times before reaching it total all
 &lt;blockquote&gt;
 &lt;p&gt;Selecting too short TTL values will result in excessive overhead in Encryption to remain authenticated to the Vault server.&lt;/p&gt;
 &lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Rekey Configuration</title>
+      <link>https://dell.github.io/csm-docs/docs/secure/encryption/rekey/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/secure/encryption/rekey/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;rekey-controller-installation&#34;&gt;Rekey Controller Installation&lt;/h2&gt;
+&lt;p&gt;The CSM Encryption Rekey CRD Controller is an optional component that, if installed, allows encrypted volumes rekeying in a
+Kubernetes cluster. The Rekey Controller can be installed via the Dell Helm charts &lt;a href=&#34;https://github.com/dell/helm-charts&#34;&gt;repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Dell Helm charts can be added with the command &lt;code&gt;helm repo add dell https://dell.github.io/helm-charts&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;kubeconfig-secret&#34;&gt;Kubeconfig Secret&lt;/h3&gt;
+&lt;p&gt;A secret with kubeconfig must be created with the name &lt;code&gt;cluster-kube-config&lt;/code&gt;. Here is an example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; kubectl create secret generic cluster-kube-config --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;/root/.kube/config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;helm-chart-values&#34;&gt;Helm Chart Values&lt;/h3&gt;
+&lt;p&gt;The Rekey Controller Helm chart defines these values:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Rekey controller image name.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;dellemc/csm-encryption-rekey-controller:v0.1.0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Rekey controller image pull policy.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#  Always: Always pull the image.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#  IfNotPresent: Only pull the image if it does not already exist on the node.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#  Never: Never pull the image.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;IfNotPresent&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# logLevel: Log level of the rekey controller.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: &amp;#34;error&amp;#34;, &amp;#34;warning&amp;#34;, &amp;#34;info&amp;#34;, &amp;#34;debug&amp;#34;, &amp;#34;trace&amp;#34;.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;logLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;info&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This value is required and must match encryption.pluginName value&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# of the corresponding Dell CSI driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;provisioner&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This value is required and must match encryption.apiPort value&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# of the corresponding Dell CSI driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;image&lt;/td&gt;
+&lt;td&gt;Rekey controller image name.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;dellemc/csm-encryption-rekey-controller:v0.1.0&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;imagePullPolicy&lt;/td&gt;
+&lt;td&gt;Rekey controller image pull policy.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;IfNotPresent&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;logLevel&lt;/td&gt;
+&lt;td&gt;Log level of the rekey controller.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;info&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;provisioner&lt;/td&gt;
+&lt;td&gt;This value is required and must match &lt;code&gt;encryption.pluginName&lt;/code&gt; value of the corresponding Dell CSI driver.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;port&lt;/td&gt;
+&lt;td&gt;This value is required and must match &lt;code&gt;encryption.apiPort&lt;/code&gt; value of the corresponding Dell CSI driver.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;deployment&#34;&gt;Deployment&lt;/h3&gt;
+&lt;p&gt;Copy the chart&amp;rsquo;s values.yaml to a local file and adjust the values in the local file for the current cluster.
+Deploy the controller using a command similar to this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install --values local-values.yaml rekey-controller dell/csm-encryption-rekey-controller
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A rekey-controller pod should now be up and running.&lt;/p&gt;
+&lt;h2 id=&#34;rekey-usage&#34;&gt;Rekey Usage&lt;/h2&gt;
+&lt;p&gt;Rekeying is initiated and monitored via Kubernetes custom resources of type &lt;code&gt;rekeys.encryption.storage.dell.com&lt;/code&gt;.
+This can be done directly &lt;a href=&#34;#rekey-with-kubectl&#34;&gt;using kubectl&lt;/a&gt; or in a more user-friendly way &lt;a href=&#34;#rekey-with-dellctl&#34;&gt;using dellctl&lt;/a&gt;.
+Creation of a rekey resource for a PV will kick off a rekey process on this PV. The rekey resource will contain the result
+of the operation. Refer to &lt;a href=&#34;#rekey-status&#34;&gt;Rekey Status&lt;/a&gt; for possible status values.&lt;/p&gt;
+&lt;h3 id=&#34;rekey-with-dellctl&#34;&gt;Rekey with dellctl&lt;/h3&gt;
+&lt;p&gt;If &lt;code&gt;dellctl&lt;/code&gt; CLI is installed, rekeying an encrypted volume is simple.
+For example, to rekey a PV with the name &lt;code&gt;k8s-112a5d41bc&lt;/code&gt; use a command like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dellctl encryption rekey myrekey k8s-112a5d41bc
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;INFO rekey request &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;myrekey&amp;#34;&lt;/span&gt; submitted successfully &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; persistent volume &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;k8s-112a5d41bc&amp;#34;&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;INFO Run &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;dellctl encryption rekey-status myrekey&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; more details.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then to check the status of the newly created rekey with the name &lt;code&gt;myrekey&lt;/code&gt; use this command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dellctl encryption rekey-status myrekey
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;INFO Status of rekey request &lt;span style=&#34;color:#000&#34;&gt;myrekey&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; completed
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;rekey-with-kubectl&#34;&gt;Rekey with kubectl&lt;/h3&gt;
+&lt;p&gt;Create a cluster-scoped rekey resource to rekey an encrypted volume.
+For example, to rekey a PV with the name &lt;code&gt;k8s-09a76734f&lt;/code&gt; use a command like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: &amp;#34;encryption.storage.dell.com/v1alpha1&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: &amp;#34;Rekey&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: &amp;#34;example-rekey&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  persistentVolumeName: &amp;#34;k8s-029a76734f&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the rekey resource has been created, after some time, the status of
+the rekey can be inspected through the &lt;code&gt;status.phase&lt;/code&gt; field of the rekey resource.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ &lt;span style=&#34;color:#204a87&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get rekey example-rekey -o &lt;span style=&#34;color:#000&#34;&gt;jsonpath&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{.status.phase}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;completed
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;rekey-status&#34;&gt;Rekey Status&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;status.phase&lt;/code&gt; field of a rekey resource can have these values:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Value&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;initialized&lt;/td&gt;
+&lt;td&gt;The request has been received by the Rekey Controller.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;started&lt;/td&gt;
+&lt;td&gt;The request is being processed by the Encryption driver.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;completed&lt;/td&gt;
+&lt;td&gt;The request successfully completed and the volume is protected by a new key.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rejected&lt;/td&gt;
+&lt;td&gt;The rekey process has not started, a non-existent or not encrypted PV in the request is a common reason.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;failed&lt;/td&gt;
+&lt;td&gt;The rekey process has failed, possibly due to unreachable Encryption driver or an error response from the driver.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;unknown&lt;/td&gt;
+&lt;td&gt;The request was sent to the Encryption driver, but no response was received. It is still possible that the rekey succeeded and the volume key has changed.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;cleanup&#34;&gt;Cleanup&lt;/h3&gt;
+&lt;p&gt;Remove old rekey resources just like any other resource, using &lt;code&gt;kubectl delete&lt;/code&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Release Notes</title>
+      <link>https://dell.github.io/csm-docs/docs/secure/encryption/release/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/secure/encryption/release/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/437&#34;&gt;Technical preview release&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Shallow Rekey with Rekey CRDs.&lt;/li&gt;
+&lt;li&gt;OpenShift Container Platform support (4.10 and 4.11).&lt;/li&gt;
+&lt;li&gt;Kubernetes 1.25 support.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h2&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h2 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h2&gt;
+&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
       </description>
     </item>
@@ -514,27 +723,27 @@ To find which &lt;em&gt;node&lt;/em&gt; pod is running on which worker host, use
 &lt;p&gt;Some errors related to communication with the Vault server and key requests may be logged on the Vault server side.
 If you run a &lt;a href=&#34;../vault#vault-server-installation&#34;&gt;test instance of the server in a Docker container&lt;/a&gt; you can view the logs with &lt;code&gt;docker logs vault-server&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;typical-failure-reasons&#34;&gt;Typical Failure Reasons&lt;/h2&gt;
-&lt;h4 id=&#34;incorrect-vault-related-configuration&#34;&gt;Incorrect Vault related configuration&lt;/h4&gt;
+&lt;h3 id=&#34;incorrect-vault-related-configuration&#34;&gt;Incorrect Vault related configuration&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../deployment#secret-vault-auth&#34;&gt;vault-auth secret&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../deployment#secret-vault-cert&#34;&gt;vault-cert secret&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../deployment#configmap-vault-client-conf&#34;&gt;vault-client-conf config map&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;incorrect-vault-server-side-configuration&#34;&gt;Incorrect Vault server-side configuration&lt;/h4&gt;
+&lt;h3 id=&#34;incorrect-vault-server-side-configuration&#34;&gt;Incorrect Vault server-side configuration&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../vault#minimum-server-configuration&#34;&gt;Vault server configuration&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;expired-approle-secret-id&#34;&gt;Expired AppRole secret ID&lt;/h4&gt;
+&lt;h3 id=&#34;expired-approle-secret-id&#34;&gt;Expired AppRole secret ID&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;../vault#set-role-id-and-secret-id-to-the-role&#34;&gt;reset the role secret ID&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;incorrect-csi-driver-configuration&#34;&gt;Incorrect CSI driver configuration&lt;/h4&gt;
+&lt;h3 id=&#34;incorrect-csi-driver-configuration&#34;&gt;Incorrect CSI driver configuration&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;check the related CSI driver &lt;a href=&#34;../../../csidriver/troubleshooting&#34;&gt;troubleshooting steps&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;ssh-stopped&#34;&gt;SSH server is stopped/restarted on the worker host&lt;/h4&gt;
+&lt;h3 id=&#34;ssh-stopped&#34;&gt;SSH server is stopped/restarted on the worker host&lt;/h3&gt;
 &lt;p&gt;This may manifest in:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;failure to start the CSI driver&lt;/li&gt;
@@ -546,7 +755,7 @@ If you run a &lt;a href=&#34;../vault#vault-server-installation&#34;&gt;test ins
 &lt;li&gt;check SSH server is running on all worker host&lt;/li&gt;
 &lt;li&gt;stop all workloads that use encrypted volumes on the node, then restart them&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;no-license-provided-or-license-expired&#34;&gt;No license provided, or license expired&lt;/h4&gt;
+&lt;h3 id=&#34;no-license-provided-or-license-expired&#34;&gt;No license provided, or license expired&lt;/h3&gt;
 &lt;p&gt;This may manifest in:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;failure to start the CSI driver&lt;/li&gt;
@@ -558,29 +767,25 @@ If you run a &lt;a href=&#34;../vault#vault-server-installation&#34;&gt;test ins
 &lt;li&gt;check the license is for the cluster on which the encrypted volumes are created&lt;/li&gt;
 &lt;li&gt;check &lt;a href=&#34;../deployment#secret-encryption-license&#34;&gt;encryption-license secret&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Release Notes</title>
-      <link>https://dell.github.io/csm-docs/docs/secure/encryption/release/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/docs/secure/encryption/release/</guid>
-      <description>
-        
-        
-        &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;h2 id=&#34;typical-rekey-failure-reasons&#34;&gt;Typical Rekey Failure reasons&lt;/h2&gt;
+&lt;p&gt;If all rekeys in the cluster are failing&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/437&#34;&gt;Technical preview release&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;PowerScale CSI volumes encryption (for new volumes)&lt;/li&gt;
-&lt;li&gt;Encryption keys stored in Hashicorp Vault&lt;/li&gt;
+&lt;li&gt;check the Rekey controller helm chart values.yaml &lt;code&gt;provisioner&lt;/code&gt; name against the Dell CSI driver chart &lt;code&gt;encryption.pluginName&lt;/code&gt;, and ensure they match.&lt;/li&gt;
+&lt;li&gt;check the Rekey controller helm chart values.yaml &lt;code&gt;port&lt;/code&gt; number against the Dell CSI driver chart &lt;code&gt;encryption.apiPort&lt;/code&gt;, and ensure they match.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
+&lt;p&gt;If Rekeys fail for a particular PV&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check that the volume is provisioned by the Encryption provisioner&lt;/li&gt;
+&lt;li&gt;check that volume attachments exist for the said PV&lt;/li&gt;
+&lt;li&gt;check that at least one node on which the PV is mounted is available and reachable&lt;/li&gt;
+&lt;li&gt;check the Encryption provisioner logs for details that may indicate the failure reason&lt;/li&gt;
+&lt;li&gt;check the Rekey controller log for the reason for failure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If a Rekey results in a &lt;code&gt;Status.Phase&lt;/code&gt; of &lt;code&gt;unknown&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;this implies the connection failed during the rekey process which may mean the volume was rekeyed&lt;/li&gt;
+&lt;li&gt;an additional rekey attempt should work assuming a reliable connection to the Encryption provisioner. This may result in the volume being rekeyed twice.&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>

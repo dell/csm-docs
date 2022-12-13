@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.107.0">
+<meta name="generator" content="Hugo 0.108.0">
 <link rel="alternate" type="application/rss&#43;xml" href="https://dell.github.io/csm-docs/v3/replication/index.xml">
 <meta name="robots" content="index, follow">
 
@@ -18,7 +18,6 @@
 " />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/replication/" /><meta property="og:site_name" content="Dell Technologies" />
-
 <meta itemprop="name" content="Replication">
 <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Replication
 "><meta name="twitter:card" content="summary"/>
@@ -80,13 +79,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.4)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.5)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.3</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.4</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.3</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2.1</a>
 	
 </div>
 
@@ -102,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1a92b49016b8a8177e5e494d11a68246.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a38645a2fdac844998df9ead0118fe21.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1a92b49016b8a8177e5e494d11a68246.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a38645a2fdac844998df9ead0118fe21.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -166,6 +165,8 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization-li">
   <a href="/csm-docs/v3/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatormodulesreplication-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatortroubleshooting-li">
@@ -573,53 +574,53 @@ applications in case of both planned and unplanned migration.</p>
 <thead>
 <tr>
 <th>Capability</th>
-<th style="text-align:center">PowerScale</th>
-<th style="text-align:center">Unity</th>
-<th style="text-align:center">PowerStore</th>
-<th style="text-align:center">PowerFlex</th>
 <th style="text-align:center">PowerMax</th>
+<th style="text-align:center">PowerStore</th>
+<th style="text-align:center">PowerScale</th>
+<th style="text-align:center">PowerFlex</th>
+<th style="text-align:center">Unity</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Replicate data using native storage array based replication</td>
 <td style="text-align:center">yes</td>
-<td style="text-align:center">no</td>
+<td style="text-align:center">yes</td>
 <td style="text-align:center">yes</td>
 <td style="text-align:center">no</td>
-<td style="text-align:center">yes</td>
+<td style="text-align:center">no</td>
 </tr>
 <tr>
 <td>Create <code>PersistentVolume</code> objects in the cluster representing the replicated volume</td>
 <td style="text-align:center">yes</td>
-<td style="text-align:center">no</td>
+<td style="text-align:center">yes</td>
 <td style="text-align:center">yes</td>
 <td style="text-align:center">no</td>
-<td style="text-align:center">yes</td>
+<td style="text-align:center">no</td>
 </tr>
 <tr>
 <td>Create <code>DellCSIReplicationGroup</code> objects in the cluster</td>
 <td style="text-align:center">yes</td>
-<td style="text-align:center">no</td>
+<td style="text-align:center">yes</td>
 <td style="text-align:center">yes</td>
 <td style="text-align:center">no</td>
-<td style="text-align:center">yes</td>
+<td style="text-align:center">no</td>
 </tr>
 <tr>
 <td>Failover &amp; Reprotect applications using the replicated volumes</td>
 <td style="text-align:center">yes</td>
-<td style="text-align:center">no</td>
+<td style="text-align:center">yes</td>
 <td style="text-align:center">yes</td>
 <td style="text-align:center">no</td>
-<td style="text-align:center">yes</td>
+<td style="text-align:center">no</td>
 </tr>
 <tr>
 <td>Provides a command line utility - <a href="tools">repctl</a> for configuring &amp; managing replication related resources across multiple clusters</td>
 <td style="text-align:center">yes</td>
-<td style="text-align:center">no</td>
+<td style="text-align:center">yes</td>
 <td style="text-align:center">yes</td>
 <td style="text-align:center">no</td>
-<td style="text-align:center">yes</td>
+<td style="text-align:center">no</td>
 </tr>
 </tbody>
 </table>
@@ -780,15 +781,15 @@ the objects still exist in pairs.</p>
 </thead>
 <tbody>
 <tr>
-<td>Asynchronous replication of PVs accross K8s clusters</td>
+<td>Asynchronous replication of PVs accross or single K8s clusters</td>
 <td>yes</td>
-<td>yes</td>
+<td>yes (block)</td>
 <td>yes</td>
 <td>no</td>
 <td>no</td>
 </tr>
 <tr>
-<td>Synchronous replication of PVs accross K8s clusters</td>
+<td>Synchronous replication of PVs accross or single  K8s clusters</td>
 <td>yes</td>
 <td>no</td>
 <td>no</td>
@@ -796,10 +797,10 @@ the objects still exist in pairs.</p>
 <td>no</td>
 </tr>
 <tr>
-<td>Single cluster (stretched) mode replication</td>
+<td>Metro replication single (stretched) cluster</td>
 <td>yes</td>
-<td>yes</td>
-<td>yes</td>
+<td>no</td>
+<td>no</td>
 <td>no</td>
 <td>no</td>
 </tr>
@@ -834,24 +835,6 @@ the objects still exist in pairs.</p>
 <td>1.21, 1.22, 1.23</td>
 </tr>
 <tr>
-<td>CSI Driver</td>
-<td>2.x</td>
-<td>2.x</td>
-<td>2.2+</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Platforms</th>
-<th>PowerMax</th>
-<th>PowerStore</th>
-<th>PowerScale</th>
-</tr>
-</thead>
-<tbody>
-<tr>
 <td>RedHat Openshift</td>
 <td>4.8, 4.9</td>
 <td>4.8, 4.9</td>
@@ -859,7 +842,7 @@ the objects still exist in pairs.</p>
 </tr>
 <tr>
 <td>CSI Driver</td>
-<td>2.2+</td>
+<td>2.x</td>
 <td>2.x</td>
 <td>2.2+</td>
 </tr>

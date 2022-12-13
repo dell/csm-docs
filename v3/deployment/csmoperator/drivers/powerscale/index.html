@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.107.0">
+<meta name="generator" content="Hugo 0.108.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,13 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/deployment/csmoperator/drivers/powerscale/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" /><meta property="og:site_name" content="Dell Technologies" />
-
+<meta property="article:modified_time" content="2022-12-13T21:01:32+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerScale via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
-<meta itemprop="wordCount" content="835">
+<meta itemprop="dateModified" content="2022-12-13T21:01:32+05:30" />
+<meta itemprop="wordCount" content="841">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerScale via Dell CSM Operator
@@ -84,13 +83,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.4)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.5)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.3</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.4</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.2.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.3</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2.1</a>
 	
 </div>
 
@@ -106,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1a92b49016b8a8177e5e494d11a68246.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a38645a2fdac844998df9ead0118fe21.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1a92b49016b8a8177e5e494d11a68246.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a38645a2fdac844998df9ead0118fe21.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -170,6 +169,8 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization-li">
   <a href="/csm-docs/v3/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsmoperatormodulesreplication-li">
+  <a href="/csm-docs/v3/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3deploymentcsmoperatortroubleshooting-li">
@@ -492,6 +493,7 @@
     <li><a href="#installing-csi-driver-for-powerscale-via-dell-csm-operator">Installing CSI Driver for PowerScale via Dell CSM Operator</a>
       <ul>
         <li><a href="#listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</a></li>
+        <li><a href="#prerequisite">Prerequisite</a></li>
         <li><a href="#install-driver">Install Driver</a></li>
       </ul>
     </li>
@@ -558,7 +560,7 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <h3 id="listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</h3>
 <p>User can query for all Dell CSI drivers using the following command:
 <code>kubectl get csm --all-namespaces</code></p>
-<h3 id="install-driver">Install Driver</h3>
+<h3 id="prerequisite">Prerequisite</h3>
 <ol>
 <li>
 <p>Create namespace.
@@ -636,6 +638,12 @@ Please refer <a href="../../../../csidriver/installation/helm/isilon/#certificat
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">cert-0</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>Execute command: <code>kubectl create -f empty-secret.yaml</code></p>
+</li>
+</ol>
+<h3 id="install-driver">Install Driver</h3>
+<ol>
+<li>
+<p>Follow all the <a href="#prerequisite">prerequisites</a> above</p>
 </li>
 <li>
 <p>Create a CR (Custom Resource) for PowerScale using the sample files provided
@@ -764,7 +772,7 @@ This command will deploy the CSI-PowerScale driver in the namespace specified in
 <p><strong>Note</strong> :</p>
 <ol>
 <li>&ldquo;Kubelet config dir path&rdquo; is not yet configurable in case of Operator based driver installation.</li>
-<li>Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.</li>
+<li>Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.�</li>
 </ol>
 
 	

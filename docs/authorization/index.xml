@@ -247,6 +247,20 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
     </item>
     
     <item>
+      <title>Docs: Configuration</title>
+      <link>https://dell.github.io/csm-docs/docs/authorization/configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/authorization/configuration/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section provides the details and instructions on how to configure CSM Authorization.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Deployment</title>
       <link>https://dell.github.io/csm-docs/docs/authorization/deployment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -375,7 +389,7 @@ This document outlines all karavictl commands, their intended use, options that 
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-role-update&#34;&gt;karavictl role update&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Update one or more CSM roles&lt;/td&gt;
+&lt;td&gt;Update the quota of one or more CSM roles&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-role-delete&#34;&gt;karavictl role delete&lt;/a&gt;&lt;/td&gt;
@@ -618,9 +632,9 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl role create --role=role-name=system-type=000000000001=mypool=200000000
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-update&#34;&gt;karavictl role update&lt;/h3&gt;
-&lt;p&gt;Update one or more CSM roles&lt;/p&gt;
+&lt;p&gt;Update the quota of one or more CSM roles&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-8&#34;&gt;Synopsis&lt;/h5&gt;
-&lt;p&gt;Updates one or more CSM roles&lt;/p&gt;
+&lt;p&gt;Updates the quota of one or more CSM roles&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl role update [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-8&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --from-file string   role data from a file

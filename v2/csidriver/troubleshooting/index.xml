@@ -122,6 +122,14 @@
 &lt;td&gt;Volume metrics are missing&lt;/td&gt;
 &lt;td&gt;Enable &lt;a href=&#34;../../features/powerflex#volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
+&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI-PowerFlex volumes cannot mount; are being recognized as multipath devices&lt;/td&gt;
+&lt;td&gt;CSI-PowerFlex does not support multipath; to fix: &lt;br/&gt; 1. Remove any multipath mapping involving a powerflex volume with &lt;code&gt;multipath -f &amp;lt;powerflex volume&amp;gt;&lt;/code&gt; &lt;br/&gt; 2. Blacklist CSI-PowerFlex volumes in multipath config file&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
@@ -163,6 +171,14 @@
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;kubectl logs powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt; driver&lt;/code&gt; logs show that the driver failed to connect to the U4P because it could not verify the certificates&lt;/td&gt;
 &lt;td&gt;Check the powermax-certs secret and ensure it is not empty or it has the valid certificates&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.22.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1&lt;/td&gt;
+&lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/csi-powermax/blob/main/helm/csi-powermax/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
+&lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -271,6 +287,18 @@
 &lt;td&gt;If PVC is not getting created and getting the following error in PVC description: &lt;br /&gt;&lt;code&gt;failed to provision volume with StorageClass &amp;quot;powerstore-iscsi&amp;quot;: rpc error: code = Internal desc = : Unknown error:&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;Check if you&amp;rsquo;ve created a secret with correct credentials&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state&lt;/td&gt;
+&lt;td&gt;remove the nvme_tcp module from the host incase of NVMeFC connection&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
+&lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If the pod creation for NVMe takes time when the connections between the host and the array are more than 2 and considerable volumes are mounted on the host&lt;/td&gt;
+&lt;td&gt;Reduce the number of connections between the host and the array to 2.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -278,7 +306,7 @@
     </item>
     
     <item>
-      <title>V2: Unity</title>
+      <title>V2: Unity XT</title>
       <link>https://dell.github.io/csm-docs/v2/csidriver/troubleshooting/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -300,7 +328,7 @@
 &lt;td&gt;You may need to put an insecure-registries entry in &lt;code&gt;/etc/docker/daemon.json&lt;/code&gt; or login to the docker registry&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;The &lt;code&gt;kubectl logs -n unity unity-node-&amp;lt;suffix&amp;gt;&lt;/code&gt; driver logs show that the driver can&amp;rsquo;t connect to Unity - Authentication failure.&lt;/td&gt;
+&lt;td&gt;The &lt;code&gt;kubectl logs -n unity unity-node-&amp;lt;suffix&amp;gt;&lt;/code&gt; driver logs show that the driver can&amp;rsquo;t connect to Unity XT - Authentication failure.&lt;/td&gt;
 &lt;td&gt;Check if you have created a secret with correct credentials&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -320,8 +348,12 @@
 &lt;td&gt;This is because iSCSI initiator login takes longer than the node pod startup time. This can be overcome by bouncing the node pods in the cluster using the below command the driver pods with &lt;strong&gt;kubectl get pods -n unity &amp;ndash;no-headers=true | awk &amp;lsquo;/unity-/{print $1}&amp;rsquo;| xargs kubectl delete -n unity pod&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: &lt;code&gt;Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.21.0 &amp;lt;= 1.23.0 which is incompatible with Kubernetes V1.21.11-mirantis-1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: &lt;code&gt;Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.21.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.21.11-mirantis-1&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;If you are using an extended Kubernetes version, please see the helm Chart at &lt;code&gt;helm/csi-unity/Chart.yaml&lt;/code&gt; and use the alternate &lt;code&gt;kubeVersion&lt;/code&gt; check that is provided in the comments. &lt;em&gt;Please note&lt;/em&gt; that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
+&lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the VolumeAttachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
