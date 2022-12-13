@@ -18,7 +18,8 @@ Note that the deployment of the driver using the operator does not use any Helm 
 User can query for all Dell CSI drivers using the following command:
 `kubectl get csm --all-namespaces`
 
-### Install Driver
+
+### Prerequisite
 
 1. Create namespace.
    Execute `kubectl create namespace test-isilon` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-isilon'.
@@ -104,10 +105,14 @@ User can query for all Dell CSI drivers using the following command:
       ```
       Execute command: ```kubectl create -f empty-secret.yaml```
 
-4. Create a CR (Custom Resource) for PowerScale using the sample files provided 
+### Install Driver
+
+1. Follow all the [prerequisites](#prerequisite) above
+   
+2. Create a CR (Custom Resource) for PowerScale using the sample files provided 
    [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
 
-5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
+3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
@@ -128,12 +133,12 @@ User can query for all Dell CSI drivers using the following command:
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node | 
 
-6.  Execute the following command to create PowerScale custom resource:
+4.  Execute the following command to create PowerScale custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
-7.  [Verify the CSI Driver installation](../../#verifying-the-driver-installation)
+5.  [Verify the CSI Driver installation](../../#verifying-the-driver-installation)
     
 **Note** : 
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+   2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.³
