@@ -89,16 +89,11 @@ The implications of this are that if more than one pod on a node is sharing the 
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-resiliency-120&#34;&gt;Release Notes - CSM Resiliency 1.2.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-resiliency-130&#34;&gt;Release Notes - CSM Resiliency 1.3.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Support for node taint when driver pod is unhealthy.&lt;/li&gt;
-&lt;li&gt;Resiliency protection on driver node pods, see &lt;a href=&#34;https://github.com/dell/csm/issues/145&#34;&gt;CSI node failure protection&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Resiliency support for CSI Driver for PowerScale, see &lt;a href=&#34;https://github.com/dell/csm/issues/262&#34;&gt;CSI Driver for PowerScale&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Occasional failure unmounting Unity volume for raw block devices via iSCSI, see &lt;a href=&#34;https://github.com/dell/csm/issues/237&#34;&gt;unmounting Unity volume&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Documentation improvement to identify all requirements when building the service and running unit tests for CSM Authorization and CSM Resiliency repository (&lt;a href=&#34;https://github.com/dell/karavi-resiliency/pull/131)&#34;&gt;https://github.com/dell/karavi-resiliency/pull/131)&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 
@@ -186,11 +181,10 @@ are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p
 &lt;p&gt;Configure all the helm chart parameters described below before installing the drivers.&lt;/p&gt;
 &lt;h2 id=&#34;helm-chart-installation&#34;&gt;Helm Chart Installation&lt;/h2&gt;
 &lt;p&gt;The drivers that support Helm chart installation allow CSM for Resiliency to be &lt;em&gt;optionally&lt;/em&gt; installed by variables in the chart. There is a &lt;em&gt;podmon&lt;/em&gt; block specified in the &lt;em&gt;values.yaml&lt;/em&gt; file of the chart that will look similar to the text below by default:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Podmon is an optional feature under development and tech preview.
-# Enable this feature only after contact support for additional information
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Enable this feature only after contact support for additional information
 podmon:
   enabled: true
-  image: dellemc/podmon:v1.2.0
+  image: dellemc/podmon:v1.3.0
   controller:
     args:
       - &amp;#34;--csisock=unix:/var/run/csi/csi.sock&amp;#34;

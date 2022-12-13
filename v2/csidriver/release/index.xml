@@ -22,13 +22,14 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---dell-csi-operator-170&#34;&gt;Release Notes - Dell CSI Operator 1.7.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---dell-csi-operator-180&#34;&gt;Release Notes - Dell CSI Operator 1.8.0&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There will be a delay in certification of Dell CSI Operator 1.7.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.7.0 release.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There will be a delay in certification of Dell CSI Operator 1.8.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.8.0 release.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes 1.23.&lt;/li&gt;
+&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
@@ -50,14 +51,17 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v220&#34;&gt;Release Notes - CSI PowerFlex v2.2.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v240&#34;&gt;Release Notes - CSI PowerFlex v2.4.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes 1.23.&lt;/li&gt;
-&lt;li&gt;Added support for Amazon Elastic Kubernetes Service Anywhere.&lt;/li&gt;
+&lt;li&gt;Added InstallationID annotation for volume attributes.&lt;/li&gt;
+&lt;li&gt;Added optional parameter protectionDomain to storageclass.&lt;/li&gt;
+&lt;li&gt;RHEL 8.6 support added&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Enhancements to volume group snapshotter.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -70,6 +74,10 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;tr&gt;
 &lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.&lt;/td&gt;
 &lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
+&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -90,12 +98,19 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powermax-v220&#34;&gt;Release Notes - CSI PowerMax v2.2.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powermax-v230&#34;&gt;Release Notes - CSI PowerMax v2.3.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for new access modes in CSI Spec 1.5.&lt;/li&gt;
-&lt;li&gt;Added support for Volume Health Monitoring.&lt;/li&gt;
-&lt;li&gt;Added support for Kubernetes 1.23.&lt;/li&gt;
+&lt;li&gt;Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.&lt;/li&gt;
+&lt;li&gt;Added support for Standalone Helm Charts.&lt;/li&gt;
+&lt;li&gt;Removed beta volumesnapshotclass sample files.&lt;/li&gt;
+&lt;li&gt;Added mapping of PV/PVC to namespace.&lt;/li&gt;
+&lt;li&gt;Added support to configure fsGroupPolicy.&lt;/li&gt;
+&lt;li&gt;Added support to filter topology keys based on user inputs.&lt;/li&gt;
+&lt;li&gt;Added support for SRDF Metro group sharing multiple namespaces.&lt;/li&gt;
+&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
+&lt;li&gt;Added support to convert replicated volume to non-replicated volume and vice versa for Sync and Async modes.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
@@ -124,12 +139,19 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;td&gt;GetSnapVolumeList fails with context deadline error&lt;/td&gt;
 &lt;td&gt;The following error can occur if a large number of snapshots are present on the array. There is no workaround for this but it can be avoided by deleting unused snapshots on the array&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
+&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;After expanding file system volume , new size is not getting reflected inside the container&lt;/td&gt;
+&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/dell/csm/issues/378&#34;&gt;https://github.com/dell/csm/issues/378&lt;/a&gt; . Workaround : Remount the volumes &lt;br/&gt; 1. Edit the replica count as 0 in application StatefulSet &lt;br /&gt; 2. Change the replica count as 1 for same StatefulSet.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode introduced in the release will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
-&lt;li&gt;Expansion of volumes and cloning of volumes are not supported for replicated volumes.&lt;/li&gt;
+&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>
@@ -144,18 +166,17 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v220&#34;&gt;Release Notes - CSI Driver for PowerScale v2.2.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v230&#34;&gt;Release Notes - CSI Driver for PowerScale v2.3.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Replication.&lt;/li&gt;
-&lt;li&gt;Added support for Kubernetes 1.23.&lt;/li&gt;
-&lt;li&gt;Added support to configure fsGroupPolicy.&lt;/li&gt;
-&lt;li&gt;Added support for session based authentication along with basic authentication for PowerScale.&lt;/li&gt;
+&lt;li&gt;Removed beta volumesnapshotclass sample files.&lt;/li&gt;
+&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
+&lt;li&gt;Added support to increase volume path limit.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
+&lt;li&gt;Added support for CSM Resiliency sidecar via Helm.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;CSI Driver installation fails with the error message &amp;ldquo;error getting FQDN&amp;rdquo;.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -200,13 +221,15 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v220&#34;&gt;Release Notes - CSI PowerStore v2.2.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v230&#34;&gt;Release Notes - CSI PowerStore v2.3.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for NVMe/TCP protocol.&lt;/li&gt;
-&lt;li&gt;Added support for Kubernetes 1.23.&lt;/li&gt;
-&lt;li&gt;Added support to configure fsGroupPolicy.&lt;/li&gt;
-&lt;li&gt;Added support for configuring permissions using POSIX mode bits and NFSv4 ACLs on NFS mount directory.&lt;/li&gt;
+&lt;li&gt;Support Volume Group Snapshots.&lt;/li&gt;
+&lt;li&gt;Removed beta volumesnapshotclass sample files.&lt;/li&gt;
+&lt;li&gt;Support Configurable Volume Attributes.&lt;/li&gt;
+&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
+&lt;li&gt;Added support for NVMe/FC protocol.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
@@ -227,6 +250,14 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;td&gt;fsGroupPolicy may not work as expected without root privileges for NFS only&lt;br/&gt;&lt;a href=&#34;https://github.com/kubernetes/examples/issues/260&#34;&gt;https://github.com/kubernetes/examples/issues/260&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;To get the desired behavior set &amp;ldquo;allowRoot: &amp;ldquo;true&amp;rdquo; in the storage class parameter&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If the NVMeFC pod is not getting created and the host looses the ssh connection, causing the driver pods to go to error state&lt;/td&gt;
+&lt;td&gt;remove the nvme_tcp module from the host incase of NVMeFC connection&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
+&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
@@ -238,7 +269,7 @@ For any CSI operator and driver issues, questions or feedback, please follow our
     </item>
     
     <item>
-      <title>V2: Unity</title>
+      <title>V2: Unity XT</title>
       <link>https://dell.github.io/csm-docs/v2/csidriver/release/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -246,13 +277,15 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-unity-v220&#34;&gt;Release Notes - CSI Unity v2.2.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-unity-xt-v230&#34;&gt;Release Notes - CSI Unity XT v2.3.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes 1.23.&lt;/li&gt;
-&lt;li&gt;Added support for Standalone Helm Charts.&lt;/li&gt;
+&lt;li&gt;Removed beta volumesnapshotclass sample files.&lt;/li&gt;
+&lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;CSM Resiliency: Occasional failure unmounting Unity volume for raw block devices via iSCSI.&lt;/p&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -267,12 +300,16 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;td&gt;Currently, when the driver is uninstalled, topology-related node labels are not getting removed automatically. There is an open issue in the Kubernetes to fix this. Until the fix is released, remove the labels manually after the driver un-installation using command &lt;strong&gt;kubectl label node &amp;lt;node_name&amp;gt; &lt;label1&gt;- &lt;label2&gt;- &amp;hellip;&lt;/strong&gt; Example: &lt;strong&gt;kubectl label node &lt;hostname&gt; csi-unity.dellemc.com/array123-iscsi-&lt;/strong&gt; Note: there must be - at the end of each label to remove it.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;NFS Clone - Resize of the snapshot is not supported by Unity Platform.&lt;/td&gt;
-&lt;td&gt;Currently, when the driver takes a clone of NFS volume, it succeeds. But when the user tries to resize the NFS volumesnapshot, the driver will throw an error. The user should never try to resize the cloned NFS volume.&lt;/td&gt;
+&lt;td&gt;NFS Clone - Resize of the snapshot is not supported by Unity XT Platform, however the user should never try to resize the cloned NFS volume.&lt;/td&gt;
+&lt;td&gt;Currently, when the driver takes a clone of NFS volume, it succeeds but if the user tries to resize the NFS volumesnapshot, the driver will throw an error.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.&lt;/td&gt;
 &lt;td&gt;Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-health-monitor/issues/100&#34;&gt;https://github.com/kubernetes-csi/external-health-monitor/issues/100&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
+&lt;td&gt;This is a known issue and has been reported at &lt;a href=&#34;https://github.com/kubernetes-csi/external-attacher/issues/215&#34;&gt;https://github.com/kubernetes-csi/external-attacher/issues/215&lt;/a&gt;. Workaround: &lt;br /&gt; 1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the VolumeAttachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
