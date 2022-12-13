@@ -12,7 +12,7 @@ This includes the following drivers:
 * [PowerMax](https://github.com/dell/csi-powermax)
 * [PowerScale](https://github.com/dell/csi-powerscale)
 * [PowerStore](https://github.com/dell/csi-powerstore)
-* [Unity](https://github.com/dell/csi-unity)
+* [Unity XT](https://github.com/dell/csi-unity)
 
 As well as the Dell CSI Operator
 * [Dell CSI Operator](https://github.com/dell/dell-csi-operator)
@@ -65,7 +65,7 @@ The resulting offline bundle file can be copied to another machine, if necessary
 
 For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:
 ```
-git clone -b v1.7.0 https://github.com/dell/dell-csi-operator.git
+git clone -b v1.8.0 https://github.com/dell/dell-csi-operator.git
 ```
 ```
 cd dell-csi-operator/scripts

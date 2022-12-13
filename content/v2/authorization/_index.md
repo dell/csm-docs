@@ -20,7 +20,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 
 ## CSM for Authorization Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
-| Feature | PowerFlex | PowerMax | PowerScale | Unity | PowerStore |
+| Feature | PowerFlex | PowerMax | PowerScale | Unity XT | PowerStore |
 | - | - | - | - | - | - |
 | Ability to set storage quota limits to ensure k8s tenants are not overconsuming storage | Yes | Yes | No (natively supported) | No | No |
 | Ability to create access control policies to ensure k8s tenant clusters are not accessing storage that does not belong to them | Yes | Yes | No (natively supported) | No | No |
@@ -33,8 +33,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes    | 1.21, 1.22, 1.23 |
-| Red Hat OpenShift | 4.8, 4.9|
+| Kubernetes    | 1.22, 1.23, 1.24 |
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
 {{</table>}}
@@ -53,9 +52,9 @@ CSM for Authorization supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
-| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0, v2.1, v2.2 |
-| CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0, v2.1 ,v2.2 |
-| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0, v2.1, v2.2 |
+| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
+| CSI Driver for Dell PowerMax | [csi-powermax](https://github.com/dell/csi-powermax) | v2.0 + |
+| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0 + |
 {{</table>}}
 
 **NOTE:** If the deployed CSI driver has a number of controller pods equal to the number of schedulable nodes in your cluster, CSM for Authorization may not be able to inject properly into the driver's controller pod.
@@ -69,6 +68,7 @@ CSM for Authorization consists of 2 components - the Authorization sidecar and t
 | ------------------------------- | ---------------------------------- |
 | dellemc/csm-authorization-sidecar:v1.0.0 | v1.0.0, v1.1.0 |
 | dellemc/csm-authorization-sidecar:v1.2.0 | v1.1.0, v1.2.0 |
+| dellemc/csm-authorization-sidecar:v1.3.0 | v1.1.0, v1.2.0, v1.3.0 |
 {{</table>}}
 ## Roles and Responsibilities
 

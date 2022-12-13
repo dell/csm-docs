@@ -39,7 +39,7 @@ This table lists the configurable parameters of the Application Mobility Helm ch
 | - | - | - | - |
 | `replicaCount` | Number of replicas for the Application Mobility controllers | Yes | `1` |
 | `image.pullPolicy` | Image pull policy for the Application Mobility controller images | Yes | `IfNotPresent` |
-| `controller.image` | Location of the Application Mobility Docker image | Yes | `dell/csm-application-mobility-controller:v0.1.0` |
+| `controller.image` | Location of the Application Mobility Docker image | Yes | `dellemc/csm-application-mobility-controller:v0.2.0` |
 | `cert-manager.enabled` |  If set to true, cert-manager will be installed during Application Mobility installation | Yes | `false` |
 | `veleroNamespace` |  If Velero is already installed, set to the namespace where Velero is installed | No | `velero` |
 | `licenseName` |  Name of the Secret that contains the License for Application Mobility | Yes | `license` |
@@ -57,6 +57,7 @@ This table lists the configurable parameters of the Application Mobility Helm ch
 | `velero.configuration.backupStorageLocation.config` |  Additional provider-specific configuration. See https://velero.io/docs/v1.9/api-types/backupstoragelocation/ for specific details. | Yes | ` ` |
 | `velero.initContainers` |  List of plugins used by Velero. Dell Velero plugin is required and plugins for other providers can be added.  | Yes | ` ` |
 | `velero.initContainers[0].name` |  Name of the Dell Velero plugin.  | Yes | `dell-custom-velero-plugin` |
-| `velero.initContainers[0].image` |  Location of the Dell Velero plugin image.  | Yes | `dellemc/csm-application-mobility-velero-plugin:v0.1.0` |
+| `velero.initContainers[0].image` |  Location of the Dell Velero plugin image.  | Yes | `dellemc/csm-application-mobility-velero-plugin:v0.2.0` |
 | `velero.initContainers[0].volumeMounts[0].mountPath` |  Mount path of the volume mount.  | Yes | `/target` |
 | `velero.initContainers[0].volumeMounts[0].name` |  Name of the volume mount.  | Yes | `plugins` |
+| `velero.restic.privileged` | If set to true, Restic Pods will be run in privileged mode. Note: Set to true when using Red Hat OpenShift | No | `false` | 

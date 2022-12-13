@@ -25,6 +25,7 @@ If you feel that something is unclear or missing in this document, please open u
 | [karavictl role delete](#karavictl-role-delete ) | Delete role |
 | [karavictl rolebinding](#karavictl-rolebinding) | Manage role bindings |
 | [karavictl rolebinding create](#karavictl-rolebinding-create) | Create a rolebinding between role and tenant |
+| [karavictl rolebinding delete](#karavictl-rolebinding-delete) | Delete a rolebinding between role and tenant |
 | [karavictl storage](#karavictl-storage) | Manage storage systems |
 | [karavictl storage get](#karavictl-storage-get) | Get details on a registered storage system |
 | [karavictl storage list](#karavictl-storage-list) | List registered storage systems |
@@ -35,7 +36,7 @@ If you feel that something is unclear or missing in this document, please open u
 | [karavictl tenant create](#karavictl-tenant-create) | Create a tenant resource within CSM |
 | [karavictl tenant get](#karavictl-tenant-get) | Get a tenant resource within CSM |
 | [karavictl tenant list](#karavictl-tenant-list) | Lists tenant resources within CSM |
-| [karavictl tenant get](#karavictl-tenant-get) | Get a tenant resource within CSM |
+| [karavictl tenant revoke](#karavictl-tenant-revoke) | Get a tenant resource within CSM |
 | [karavictl tenant delete](#karavictl-tenant-delete) | Deletes a tenant resource within CSM |
 
 
@@ -538,7 +539,46 @@ karavictl rolebinding create [flags]
 ```
 $ karavictl rolebinding create --role CSISilver --tenant Alice
 ```
-On success, there will be no output. You may run `karavictl tenant get <tenant-name>` to confirm the rolebinding creation occurred.
+On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the rolebinding creation occurred.
+
+
+---
+
+
+
+### karavictl rolebinding delete
+
+Delete a rolebinding between role and tenant
+
+##### Synopsis
+
+Deletes a rolebinding between role and tenant
+
+```
+karavictl rolebinding delete [flags]
+```
+
+##### Options
+
+```
+  -h, --help   help for create
+  -r, --role string     Role name
+  -t, --tenant string   Tenant name
+```
+
+##### Options inherited from parent commands
+
+```
+      --addr string     Address of the server (default "localhost:443")
+      --config string   config file (default is $HOME/.karavictl.yaml)
+```
+
+##### Output
+
+```
+$ karavictl rolebinding delete --role CSISilver --tenant Alice
+```
+On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the rolebinding deletion occurred.
 
 
 
@@ -802,7 +842,7 @@ Manage tenants
 
 ##### Synopsis
 
-Management fortenants
+Management for tenants
 
 ```
 karavictl tenant [flags]
@@ -875,7 +915,7 @@ Get a tenant resource within CSM
 
 ##### Synopsis
 
-Gets a tenant resource within CSM
+Gets a tenant resource and its assigned roles within CSM
 
 ```
 karavictl tenant get [flags]
@@ -902,6 +942,7 @@ $ karavictl tenant get --name Alice
 
 {
   "name": "Alice"
+  "roles": "role-1,role-2"
 }
 
 ```
@@ -951,6 +992,44 @@ $ karavictl tenant list
 }
 
 ```
+
+
+
+---
+
+
+
+### karavictl tenant revoke
+
+Revokes access for a tenant
+
+##### Synopsis
+
+Revokes access to storage resources for a tenant
+
+```
+karavictl tenant revoke [flags]
+```
+
+##### Options
+
+```
+  -h, --help   help for create
+  -n, --name string   Tenant name
+```
+
+##### Options inherited from parent commands
+
+```
+      --addr string     Address of the server (default "localhost:443")
+      --config string   config file (default is $HOME/.karavictl.yaml)
+```
+
+##### Output
+```
+$ karavictl tenant revoke --name Alice
+```
+On success, there will be no output.
 
 
 

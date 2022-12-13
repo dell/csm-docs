@@ -36,6 +36,35 @@ Set up the iSCSI initiators as follows:
 
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
 
+#### Linux multipathing requirements
+
+CSI Driver for Dell PowerMax supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver.
+
+Set up Linux multipathing as follows:
+
+- All the nodes must have the _Device Mapper Multipathing_ package installed.  
+  *NOTE:* When this package is installed it creates a multipath configuration file which is located at `/etc/multipath.conf`. Please ensure that this file always exists.
+- Enable multipathing using `mpathconf --enable --with_multipathd y`
+- Enable `user_friendly_names` and `find_multipaths` in the `multipath.conf` file.
+
+As a best practice, use these options to help the operating system and the mulitpathing software detect path changes efficiently:
+```text
+path_grouping_policy multibus
+path_checker tur
+features "1 queue_if_no_path"
+path_selector "round-robin 0"
+no_path_retry 10
+```
+
+#### PowerPath for Linux requirements
+
+CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.
+
+Follow this procedure to set up PowerPath for Linux:
+
+- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
+- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
+- Start the PowerPath service using `systemctl start PowerPath`
 
 #### Create secret for client-side TLS verification (Optional)
 Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../helm/powermax#certificate-validation-for-unisphere-rest-api-calls).
@@ -179,7 +208,7 @@ metadata:
   namespace: test-powermax # <- Set the namespace to where you will install the CSI PowerMax driver
 spec:
   # Image for CSI PowerMax ReverseProxy
-  image: dellemc/csipowermax-reverseproxy:v2.1.0 # <- CSI PowerMax Reverse Proxy image
+  image: dellemc/csipowermax-reverseproxy:v2.3.0 # <- CSI PowerMax Reverse Proxy image
   imagePullPolicy: Always
   # TLS secret which contains SSL certificate and private key for the Reverse Proxy server
   tlsSecret: csirevproxy-tls-secret
@@ -265,8 +294,8 @@ metadata:
   namespace: test-powermax
 spec:
   driver:
-    # Config version for CSI PowerMax v2.3.0 driver
-    configVersion: v2.3.0
+    # Config version for CSI PowerMax v2.4.0 driver
+    configVersion: v2.4.0
     # replica: Define the number of PowerMax controller nodes
     # to deploy to the Kubernetes release
     # Allowed values: n, where n > 0
@@ -275,8 +304,8 @@ spec:
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      # Image for CSI PowerMax driver v2.3.0
-      image: dellemc/csi-powermax:v2.3.0
+      # Image for CSI PowerMax driver v2.4.0
+      image: dellemc/csi-powermax:v2.4.0
       # imagePullPolicy: Policy to determine if the image should be pulled prior to starting the container.
       # Allowed values:
       #  Always: Always pull the image.

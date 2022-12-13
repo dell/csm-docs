@@ -3,13 +3,14 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.4.0
+## Release Notes - CSI PowerStore v2.5.0
 
 ### New Features/Changes
 
-- [Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype](https://github.com/dell/csm/issues/188)
-- [Added support for iSCSI in TKG Qualification](https://github.com/dell/csm/issues/363)
-- [Added support for Stand alone Helm Chart](https://github.com/dell/csm/issues/355)
+- [Added support for Storage Capacity Tracking feature](https://github.com/dell/csm/issues/483)
+- [Added support for Kubernetes 1.25](https://github.com/dell/csm/issues/478)
+- [Added support for OpenShift 4.11](https://github.com/dell/csm/issues/480)
+- [Added support for PowerStore 3.2 array](https://github.com/dell/csm/issues/482)
 
 ### Fixed Issues
 

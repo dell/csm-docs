@@ -65,10 +65,10 @@ The resulting offline bundle file can be copied to another machine, if necessary
 
 For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:
 ```
-git clone https://github.com/dell/dell-csi-operator.git
+git clone -b v1.7.0 https://github.com/dell/dell-csi-operator.git
 ```
 ```
-cd dell-csi-operator
+cd dell-csi-operator/scripts
 ```
 ```
 [root@user scripts]# ./csi-offline-bundle.sh -c
@@ -252,4 +252,4 @@ Now that the required images are available and the Helm Charts/Operator configur
 *NOTES:* 
 1. Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.
 2. Installation should be done using the files that are obtained after unpacking the offline bundle (dell-csi-operator-bundle.tar.gz) as the image tags in the manifests are modified to point to the internal registry. 
-3. Offline bundle installs operator in `default` namespace via install.sh script. Make sure that the current context in kubeconfig file has the namespace set to `default`.
+3. Offline bundle installs operator in `default` namespace via install.sh script. Make sure that the current context in kubeconfig file has the namespace set to `default`·
