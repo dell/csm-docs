@@ -34,11 +34,11 @@ For e.g. -
 The following table lists details of what actions should be used in different Disaster Recovery workflows & the equivalent operation done on the storage array:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Workflow            | Actions                                               | PowerMax               | PowerStore                             | PowerScale                                   | Unity                                  |
-| ------------------- | ----------------------------------------------------- | ---------------------- | -------------------------------------- | -------------------------------------------- | -------------------------------------- |
-| Planned Migration   | FAILOVER_LOCAL<br>FAILOVER_REMOTE                     | symrdf failover -swap  | FAILOVER (no REPROTECT after FAILOVER) | allow_writes on target, disable local policy | FAILOVER (no REPROTECT after FAILOVER) |
-| Reprotect           | REPROTECT_LOCAL<br>REPROTECT_REMOTE                   | symrdf resume/est      | REPROTECT                              | Not supported                                | REPROTECT                              |
-| Unplanned Migration | UNPLANNED_FAILOVER_LOCAL<br>UNPLANNED_FAILOVER_REMOTE | symrdf failover -force | FAILOVER (at target site)              | allow_writes on target               | FAILOVER (at target site)              |
+| Workflow            | Actions                                               | PowerMax               | PowerStore                             | PowerScale                                       | Unity                                  |
+| ------------------- | ----------------------------------------------------- | ---------------------- | -------------------------------------- | ------------------------------------------------ | -------------------------------------- |
+| Planned Migration   | FAILOVER_LOCAL<br>FAILOVER_REMOTE                     | symrdf failover -swap  | FAILOVER (no REPROTECT after FAILOVER) | allow_writes on target, disable local policy     | FAILOVER (no REPROTECT after FAILOVER) |
+| Reprotect           | REPROTECT_LOCAL<br>REPROTECT_REMOTE                   | symrdf resume/est      | REPROTECT                              | Delete policy on source, create policy on target | REPROTECT                              |
+| Unplanned Migration | UNPLANNED_FAILOVER_LOCAL<br>UNPLANNED_FAILOVER_REMOTE | symrdf failover -force | FAILOVER (at target site)              | allow_writes on target                           | FAILOVER (at target site)              |
 {{</table>}}
 
 ### Maintenance Actions
