@@ -946,7 +946,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Current version of the driver. Don&amp;rsquo;t modify this value as this value will be used by the install script.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;v2.3.0&lt;/td&gt;
+&lt;td&gt;v2.3.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;images&lt;/td&gt;

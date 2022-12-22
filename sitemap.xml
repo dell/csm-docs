@@ -207,22 +207,22 @@
     <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/features/powermax/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powermax/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/features/powermax/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/upgradation/drivers/powermax/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/features/powermax/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/upgradation/drivers/powermax/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/features/powermax/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
@@ -540,7 +540,7 @@
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/</loc>
     <lastmod>2022-09-29T18:28:31+05:30</lastmod>
@@ -558,7 +558,7 @@
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/resiliency/deployment/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/observability/deployment/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
@@ -942,13 +942,13 @@
     <lastmod>2022-03-23T08:15:39-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/replication/migrating-volumes/</loc>
-    <lastmod>2022-06-22T16:36:23+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/replication/migrating-volumes/</loc>
-    <lastmod>2022-09-21T18:28:15+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/replication/migrating-volumes/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/replication/monitoring/</loc>
     <lastmod>2021-09-21T21:01:25+05:30</lastmod>
@@ -1227,7 +1227,7 @@
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/archives/</loc>
     <lastmod>2022-03-23T08:15:39-04:00</lastmod>
@@ -1260,10 +1260,10 @@
     <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
@@ -1299,10 +1299,10 @@
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/offline/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/installation/offline/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/installation/offline/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
@@ -1413,7 +1413,7 @@
     <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/installation/helm/powermax/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/installation/operator/powermax/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
@@ -1428,7 +1428,7 @@
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/installation/helm/powermax/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/installation/operator/powermax/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>
@@ -1437,7 +1437,7 @@
     <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/release/powermax/</loc>
-    <lastmod>2022-12-13T21:01:32+05:30</lastmod>
+    <lastmod>2022-12-22T17:28:06+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v2/csidriver/troubleshooting/powermax/</loc>
     <lastmod>2022-12-13T21:01:32+05:30</lastmod>

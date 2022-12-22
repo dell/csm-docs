@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/release/powermax/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2022-12-13T21:01:32+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2022-12-22T17:28:06+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Release notes for PowerMax CSI driver">
-<meta itemprop="dateModified" content="2022-12-13T21:01:32+05:30" />
-<meta itemprop="wordCount" content="440">
+<meta itemprop="dateModified" content="2022-12-22T17:28:06+05:30" />
+<meta itemprop="wordCount" content="484">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Release notes for PowerMax CSI driver"/>
@@ -83,7 +83,7 @@
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.4</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.3</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.3.1</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.2.1</a>
 	
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.a38645a2fdac844998df9ead0118fe21.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f44b5be292c836e19d06691c7046be6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.a38645a2fdac844998df9ead0118fe21.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.2f44b5be292c836e19d06691c7046be6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -505,7 +505,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csi-powermax-v230">Release Notes - CSI PowerMax v2.3.0</a>
+    <li><a href="#release-notes---csi-powermax-v231">Release Notes - CSI PowerMax v2.3.1</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -565,7 +565,7 @@
 	<h1>PowerMax</h1>
 
 	       
-	<h2 id="release-notes---csi-powermax-v230">Release Notes - CSI PowerMax v2.3.0</h2>
+	<h2 id="release-notes---csi-powermax-v231">Release Notes - CSI PowerMax v2.3.1</h2>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
 <li>Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.</li>
@@ -578,9 +578,16 @@
 <li>Added support for Kubernetes 1.24.</li>
 <li>Added support for OpenShift 4.10.</li>
 <li>Added support to convert replicated volume to non-replicated volume and vice versa for Sync and Async modes.</li>
+<li>Added expansion support for replicated volumes.</li>
+<li>Added concurrency enhancements for replicated volumes</li>
 </ul>
+<blockquote>
+<p>Note: v2.3.1 has been qualified with helm installation only. For using it via operator installation please change the image tag to v2.3.1 <a href="https://github.com/dell/dell-csi-operator/blob/main/config/samples/storage_v1_csipowermax.yaml">here</a> for installing via UI and <a href="https://github.com/dell/dell-csi-operator/tree/main/samples">here</a> for installating via CLI.</p>
+</blockquote>
 <h3 id="fixed-issues">Fixed Issues</h3>
-<p>There are no fixed issues in this release.</p>
+<ul>
+<li><a href="https://github.com/dell/csm/issues/548">Volume Attachment failure due to WWN mismatch</a></li>
+</ul>
 <h3 id="known-issues">Known Issues</h3>
 <table>
 <thead>

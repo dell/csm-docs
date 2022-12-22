@@ -98,7 +98,7 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powermax-v230&#34;&gt;Release Notes - CSI PowerMax v2.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powermax-v231&#34;&gt;Release Notes - CSI PowerMax v2.3.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.&lt;/li&gt;
@@ -111,9 +111,16 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;li&gt;Added support for Kubernetes 1.24.&lt;/li&gt;
 &lt;li&gt;Added support for OpenShift 4.10.&lt;/li&gt;
 &lt;li&gt;Added support to convert replicated volume to non-replicated volume and vice versa for Sync and Async modes.&lt;/li&gt;
+&lt;li&gt;Added expansion support for replicated volumes.&lt;/li&gt;
+&lt;li&gt;Added concurrency enhancements for replicated volumes&lt;/li&gt;
 &lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: v2.3.1 has been qualified with helm installation only. For using it via operator installation please change the image tag to v2.3.1 &lt;a href=&#34;https://github.com/dell/dell-csi-operator/blob/main/config/samples/storage_v1_csipowermax.yaml&#34;&gt;here&lt;/a&gt; for installing via UI and &lt;a href=&#34;https://github.com/dell/dell-csi-operator/tree/main/samples&#34;&gt;here&lt;/a&gt; for installating via CLI.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/548&#34;&gt;Volume Attachment failure due to WWN mismatch&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
