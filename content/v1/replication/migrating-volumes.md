@@ -8,7 +8,7 @@ description: >
 
 You can migrate existing pre-provisioned volumes to another storage class by using volume migration feature. 
 
-As of CSM 1.3 two versions of migration are supported: 
+Currently two versions of migration are supported: 
 - To replicated storage class from NON replicated one
 - To NON replicated storage class from replicated one
 

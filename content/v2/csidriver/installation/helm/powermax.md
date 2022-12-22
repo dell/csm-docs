@@ -162,7 +162,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.3.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.3.1 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -209,7 +209,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | powerMaxDebug | Enables low level and http traffic logging between the CSI driver and Unisphere. Don't enable this unless asked to do so by the support team. | No | false |
 | enableCHAP | Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key "chapsecret" | No | false |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
+| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.1 | 
 | images | Defines the container images used by the driver.  | - | - |
 | driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
 | **controller** | Allows configuration of the controller-specific parameters.| - | - |
@@ -283,7 +283,7 @@ Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any
 The existing volume snapshot class will be retained.
 
 *Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7.0 or higher, before upgrading to 2.3.0.
+It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7.0 or higher, before upgrading to 2.3.1.
 
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes

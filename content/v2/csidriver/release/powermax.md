@@ -3,7 +3,7 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.3.0
+## Release Notes - CSI PowerMax v2.3.1
 
 ### New Features/Changes
 - Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype.
@@ -16,9 +16,13 @@ description: Release notes for PowerMax CSI driver
 - Added support for Kubernetes 1.24.
 - Added support for OpenShift 4.10.
 - Added support to convert replicated volume to non-replicated volume and vice versa for Sync and Async modes.
+- Added expansion support for replicated volumes.
+- Added concurrency enhancements for replicated volumes
+
+>Note: v2.3.1 has been qualified with helm installation only. For using it via operator installation please change the image tag to v2.3.1 [here](https://github.com/dell/dell-csi-operator/blob/main/config/samples/storage_v1_csipowermax.yaml) for installing via UI and [here](https://github.com/dell/dell-csi-operator/tree/main/samples) for installating via CLI.
 
 ### Fixed Issues
-There are no fixed issues in this release.
+ - [Volume Attachment failure due to WWN mismatch](https://github.com/dell/csm/issues/548)
 
 ### Known Issues
 

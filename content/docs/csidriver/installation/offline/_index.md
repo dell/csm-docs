@@ -80,7 +80,7 @@ cd dell-csi-operator/scripts
    dellemc/csi-isilon:v2.4.0
    dellemc/csi-isilon:v2.5.0
    dellemc/csipowermax-reverseproxy:v2.4.0
-   dellemc/csi-powermax:v2.3.0
+   dellemc/csi-powermax:v2.3.1
    dellemc/csi-powermax:v2.4.0
    dellemc/csi-powermax:v2.5.0
    dellemc/csi-powerstore:v2.3.0
@@ -208,7 +208,7 @@ Preparing a offline bundle for installation
    dellemc/csi-isilon:v2.4.0 -> localregistry:5000/csi-operator/csi-isilon:v2.4.0
    dellemc/csi-isilon:v2.5.0 -> localregistry:5000/csi-operator/csi-isilon:v2.5.0
    dellemc/csipowermax-reverseproxy:v2.4.0 -> localregistry:5000/csi-operator/csipowermax-reverseproxy:v2.4.0
-   dellemc/csi-powermax:v2.3.0 -> localregistry:5000/csi-operator/csi-powermax:v2.3.0
+   dellemc/csi-powermax:v2.3.1 -> localregistry:5000/csi-operator/csi-powermax:v2.3.1
    dellemc/csi-powermax:v2.4.0 -> localregistry:5000/csi-operator/csi-powermax:v2.4.0
    dellemc/csi-powermax:v2.5.0 -> localregistry:5000/csi-operator/csi-powermax:v2.5.0
    dellemc/csi-powerstore:v2.3.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.3.0
@@ -235,7 +235,7 @@ Preparing a offline bundle for installation
    changing: dellemc/csi-isilon:v2.4.0 -> localregistry:5000/csi-operator/csi-isilon:v2.4.0
    changing: dellemc/csi-isilon:v2.5.0 -> localregistry:5000/csi-operator/csi-isilon:v2.5.0
    changing: dellemc/csipowermax-reverseproxy:v2.4.0 -> localregistry:5000/csi-operator/csipowermax-reverseproxy:v2.4.0
-   changing: dellemc/csi-powermax:v2.3.0 -> localregistry:5000/csi-operator/csi-powermax:v2.3.0
+   changing: dellemc/csi-powermax:v2.3.1 -> localregistry:5000/csi-operator/csi-powermax:v2.3.1
    changing: dellemc/csi-powermax:v2.4.0 -> localregistry:5000/csi-operator/csi-powermax:v2.4.0
    changing: dellemc/csi-powermax:v2.5.0 -> localregistry:5000/csi-operator/csi-powermax:v2.5.0
    changing: dellemc/csi-powerstore:v2.3.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.3.0

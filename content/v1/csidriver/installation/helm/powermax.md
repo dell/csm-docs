@@ -221,7 +221,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | powerMaxDebug | Enables low level and http traffic logging between the CSI driver and Unisphere. Don't enable this unless asked to do so by the support team. | No | false |
 | enableCHAP | Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key "chapsecret" | No | false |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
+| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.1 | 
 | images | Defines the container images used by the driver.  | - | - |
 | driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
 | **controller** | Allows configuration of the controller-specific parameters.| - | - |

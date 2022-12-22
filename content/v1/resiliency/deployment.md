@@ -24,7 +24,7 @@ The drivers that support Helm chart installation allow CSM for Resiliency to be 
 # Enable this feature only after contact support for additional information
 podmon:
   enabled: true
-  image: dellemc/podmon:v1.3.0
+  image: dellemc/podmon:v
   controller:
     args:
       - "--csisock=unix:/var/run/csi/csi.sock"
