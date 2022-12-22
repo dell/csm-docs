@@ -1035,7 +1035,7 @@ If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using t
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;requests&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;8Gi&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;iscsi-chap&#34;&gt;iSCSI CHAP&lt;/h2&gt;
-&lt;p&gt;With version 1.3.0, support has been added for the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI.
+&lt;p&gt;Starting from version 1.3.0, unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
 To enable CHAP authentication:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Create secret &lt;code&gt;powermax-creds&lt;/code&gt; with the key &lt;code&gt;chapsecret&lt;/code&gt; set to the iSCSI CHAP secret. If the secret exists, delete and re-create the secret with this newly added key.&lt;/li&gt;
@@ -1050,7 +1050,7 @@ To enable CHAP authentication:&lt;/p&gt;
 &lt;p&gt;With unidirectional CHAP, the PowerMax array challenges the host initiator during the initial link negotiation process and expects to receive a valid credential and CHAP secret in response.&lt;/p&gt;
 &lt;p&gt;When challenged, the host initiator transmits a CHAP credential and CHAP secret to the storage array. The storage array looks for this credential and CHAP secret which is stored in the host initiator group. When a positive authentication occurs, the PowerMax array sends an acceptance message to the host. However, if the PowerMax array fails to find any record of the credential/secret pair, it sends a rejection message, and the link is closed.&lt;/p&gt;
 &lt;h2 id=&#34;custom-driver-name&#34;&gt;Custom Driver Name&lt;/h2&gt;
-&lt;p&gt;With version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.&lt;/p&gt;
+&lt;p&gt;Starting from version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.&lt;/p&gt;
 &lt;p&gt;To use this feature, set the following values under &lt;code&gt;customDriverName&lt;/code&gt; in &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Value: Set this to the custom name of the driver.&lt;/li&gt;
@@ -1433,10 +1433,10 @@ N2 and N3: None&lt;/p&gt;
         
         
         &lt;p&gt;You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;h2 id=&#34;update-driver-from-v22-to-v23-using-helm&#34;&gt;Update Driver from v2.2 to v2.3 using Helm&lt;/h2&gt;
+&lt;h2 id=&#34;update-driver-from-v22-to-v231-using-helm&#34;&gt;Update Driver from v2.2 to v2.3.1 using Helm&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository and get the v2.3 driver.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.3.1 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository and get the v2.3.1 driver.&lt;/li&gt;
 &lt;li&gt;Update the values file as needed.&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;csi-install&lt;/code&gt; script with the option &lt;em&gt;--upgrade&lt;/em&gt; by running: &lt;code&gt;cd ../dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
@@ -6008,7 +6008,7 @@ kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart daemonSet/vxflexos-n
         
         
         &lt;p&gt;You can migrate existing pre-provisioned volumes to another storage class by using volume migration feature.&lt;/p&gt;
-&lt;p&gt;As of CSM 1.3 two versions of migration are supported:&lt;/p&gt;
+&lt;p&gt;Currently two versions of migration are supported:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;To replicated storage class from NON replicated one&lt;/li&gt;
 &lt;li&gt;To NON replicated storage class from replicated one&lt;/li&gt;

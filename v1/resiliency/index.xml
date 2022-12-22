@@ -184,7 +184,7 @@ are connected to the Control Plane through a K8S Control Plane IP Network.&lt;/p
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Enable this feature only after contact support for additional information
 podmon:
   enabled: true
-  image: dellemc/podmon:v1.3.0
+  image: dellemc/podmon:v
   controller:
     args:
       - &amp;#34;--csisock=unix:/var/run/csi/csi.sock&amp;#34;

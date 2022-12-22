@@ -729,7 +729,7 @@ It is strongly recommended to upgrade the earlier versions of CSI PowerFlex to 1
 &lt;h2 id=&#34;install-the-driver&#34;&gt;Install the Driver&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.3.1 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
 &lt;li&gt;Ensure that you have created a namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace powermax&lt;/code&gt; to create a new one&lt;/li&gt;
 &lt;li&gt;Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
@@ -941,7 +941,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Current version of the driver. Don&amp;rsquo;t modify this value as this value will be used by the install script.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;v2.3.0&lt;/td&gt;
+&lt;td&gt;v2.3.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;images&lt;/td&gt;
@@ -1202,7 +1202,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;p&gt;&lt;em&gt;Upgrading from CSI PowerMax v2.1.0 driver&lt;/em&gt;:
 The existing volume snapshot class will be retained.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Upgrading from an older version of the driver&lt;/em&gt;:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7.0 or higher, before upgrading to 2.3.0.&lt;/p&gt;
+It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7.0 or higher, before upgrading to 2.3.1.&lt;/p&gt;
 &lt;h2 id=&#34;sample-values-file&#34;&gt;Sample values file&lt;/h2&gt;
 &lt;p&gt;The following sections have useful snippets from &lt;code&gt;values.yaml&lt;/code&gt; file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes&lt;/p&gt;
 &lt;h3 id=&#34;csi-powermax-driver-without-proxy&#34;&gt;CSI PowerMax driver without Proxy&lt;/h3&gt;
