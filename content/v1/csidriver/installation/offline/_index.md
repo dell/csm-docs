@@ -79,7 +79,7 @@ cd dell-csi-operator/scripts
    dellemc/csi-isilon:v2.0.0
    dellemc/csi-isilon:v2.1.0
    dellemc/csipowermax-reverseproxy:v2.3.0
-   dellemc/csi-powermax:v2.3.0
+   dellemc/csi-powermax:v2.3.1
    dellemc/csi-powermax:v2.4.0
    dellemc/csi-powerstore:v2.0.0
    dellemc/csi-powerstore:v2.1.0
