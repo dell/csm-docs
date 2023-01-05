@@ -6,11 +6,13 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for replication
 ---
 
-## Release Notes - CSM Replication 1.3.1
+## Release Notes - CSM Replication 1.4.0
 
 ### New Features/Changes
 
- - Reprotect and Failback functionality have been added for PowerScale storage arrays. 
+ - [PowerScale - Implement Failback functionality](https://github.com/dell/csm/issues/558)
+ - [PowerScale - Implement Reprotect functionality](https://github.com/dell/csm/issues/532)
+ - [PowerScale - SyncIQ policy improvements](https://github.com/dell/csm/issues/573)
 
 ### Fixed Issues
 
