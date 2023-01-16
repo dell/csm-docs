@@ -650,14 +650,14 @@ reclaimPolicy: Delete
 allowVolumeExpansion: true
 parameters:
     storagepool: "pool2" # Insert Storage pool
-    systemID: "0e7a082862fedf0f" # Insert System ID
+    systemID: <SYSTEM_ID> # Insert System ID
     bandwidthLimitInKbps: "10240" # Insert bandwidth limit in Kbps
     iopsLimit: "11" # Insert iops limit
     csi.storage.k8s.io/fstype: ext4
 volumeBindingMode: WaitForFirstConsumer
 allowedTopologies:
   - matchLabelExpressions:
-      - key: csi-vxflexos.dellemc.com/0e7a082862fedf0f # Insert System ID
+      - key: csi-vxflexos.dellemc.com/<SYSTEM_ID> # Insert System ID
         values:
           - csi-vxflexos.dellemc.com
 ```
