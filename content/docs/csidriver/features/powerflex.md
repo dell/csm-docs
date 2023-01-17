@@ -642,23 +642,23 @@ To accomplish this, two new parameters are introduced in the storage class: band
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-name: vxflexos
-annotations:
-storageclass.kubernetes.io/is-default-class: "true"
+    name: vxflexos
+    annotations:
+        storageclass.kubernetes.io/is-default-class: "true"
 provisioner: csi-vxflexos.dellemc.com
 reclaimPolicy: Delete
 allowVolumeExpansion: true
 parameters:
-storagepool: <STORAGE_POOL> # Insert Storage pool
-systemID: <SYSTEM_ID> # Insert System ID
-bandwidthLimitInKbps: <BANDWIDTH_LIMIT_IN_KBPS> # Insert bandwidth limit in Kbps
-iopsLimit: <IOPS_LIMIT> # Insert iops limit
-csi.storage.k8s.io/fstype: ext4
+    storagepool: "pool2" # Insert Storage pool
+    systemID: <SYSTEM_ID> # Insert System ID
+    bandwidthLimitInKbps: "10240" # Insert bandwidth limit in Kbps
+    iopsLimit: "11" # Insert iops limit
+    csi.storage.k8s.io/fstype: ext4
 volumeBindingMode: WaitForFirstConsumer
 allowedTopologies:
-- matchLabelExpressions:
-    - key: csi-vxflexos.dellemc.com/<SYSTEM_ID> # Insert System ID
-      values:
-        - csi-vxflexos.dellemc.com
+  - matchLabelExpressions:
+      - key: csi-vxflexos.dellemc.com/<SYSTEM_ID> # Insert System ID
+        values:
+          - csi-vxflexos.dellemc.com
 ```
 Once the volume gets created, the ControllerPublishVolume will set the QoS limits for the volumes mapped to SDC.
