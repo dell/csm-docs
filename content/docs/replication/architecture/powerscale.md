@@ -1,7 +1,7 @@
 ---
 title: PowerScale
 linktitle: PowerScale
-weight: 7
+weight: 2
 description: >
   Platform-Specific Architecture for CSI PowerScale
 ---
