@@ -36,14 +36,14 @@ CSM for Replication provides the following capabilities:
 ## Supported Operating Systems/Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-| COP/OS            | PowerMax         | PowerStore       | PowerScale       |
-| ----------------- | ---------------- | ---------------- | ---------------- |
-| Kubernetes        | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 |
-| Red Hat OpenShift | 4.10, 4.11       | 4.9, 4.10        | 4.9, 4.10        |
-| RHEL              | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         |
-| CentOS            | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         |
-| Ubuntu            | 20.04            | 20.04            | 20.04            |
-| SLES              | 15SP4            | 15SP2            | 15SP2            |
+| COP/OS            | PowerMax         | PowerStore       | PowerScale       | PowerFlex        |
+| ----------------- | ---------------- | ---------------- | ---------------- | ---------------- |
+| Kubernetes        | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24             |
+| Red Hat OpenShift | 4.10, 4.11       | 4.9, 4.10        | 4.9, 4.10        | 4.9, 4.10        |
+| RHEL              | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         | 8.x              |
+| CentOS            | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         | 7.9              |
+| Ubuntu            | 20.04            | 20.04            | 20.04            | n/a              |
+| SLES              | 15SP4            | 15SP2            | 15SP2            | n/a              |
 {{</table>}}
 
 ## Supported Storage Platforms
@@ -90,11 +90,11 @@ the objects still exist in pairs.
 
 The following matrix provides a list of all supported versions for each Dell Storage product.
 
-| Platforms        | PowerMax                       | PowerStore       | PowerScale       |
-| ---------------- | ------------------------------ | ---------------- | ---------------- |
-| Kubernetes       | 1.24, 1.25, 1.26               | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 |
-| RedHat Openshift | 4.10, 4.11                     | 4.9, 4.10        | 4.9, 4.10        |
-| CSI Driver       | 2.x(k8s), <br> 2.2+(OpenShift) | 2.x              | 2.2+             |
+| Platforms        | PowerMax                       | PowerStore       | PowerScale       | PowerFlex        |
+| ---------------- | ------------------------------ | ---------------- | ---------------- | ---------------- |
+| Kubernetes       | 1.24, 1.25, 1.26               | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25       |
+| RedHat Openshift | 4.10, 4.11                     | 4.9, 4.10        | 4.9, 4.10        | 4.9, 4.10        |
+| CSI Driver       | 2.x(k8s), <br> 2.2+(OpenShift) | 2.x              | 2.2+             | 2.6+             |
 
 For compatibility with storage arrays please refer to corresponding [CSI drivers](../csidriver/#features-and-capabilities)
 
