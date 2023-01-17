@@ -136,7 +136,7 @@ Let's go through each parameter and what it means:
 
 * `Accesszone` is the name of the access zone a volume can be created in.
 * `AzServiceIP` AccessZone groupnet service IP. It is optional and can be provided if different than the PowerScale cluster endpoint.
-* `IsiPath` is the base path for the volumes to be created on the PowerScale cluster.
+* `IsiPath` is the base path for the volumes to be created on the PowerScale cluster. IsiPath between source and target storage classes MUST be consistent. If not specified in the storage class, the IsiPath defined in the storage array's secret will be used, and if that is not specified, the IsiPath defined in the values.yaml file used for driver installation is used as the lowest-priority. 
 * `RootClientEnabled` determines whether the driver should enable root squashing or not.
 * `ClusterName` name of PowerScale cluster, where PV will be provisioned, specified as it was listed in `isilon-creds` secret.
 
@@ -201,6 +201,13 @@ using the parameters provided in the replication enabled Storage Class.
 When creating `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s) used for replication, a SyncIQ policy to facilitate this replication is created *only* on the source PowerScale storage array. 
 
 This singular SyncIQ policy on the source storage array and its matching Local Target policy on the target storage array provide information for the RGs to determine their status. Upon creation, the SyncIQ policy is set to a schedule of `When source is modified`. The SyncIQ policy is `Enabled` when the RG is created. The directory that is being replicated is *read-write accessible* on the source storage array, and is restricted to *read-only* on the target. 
+
+### Replication Group Deletion 
+When deleting `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s) used for replication, deletion should only be performed on an empty RG. If there is any user-created or Kubernetes PV-generated data left inside of the replication group, the RG object will be held in a `Deleting` state until all user data has been cleared out. 
+
+If the RG's folder on both source and target storage arrays is empty and the RG is given a delete command, it will perform a sync, then remove its SyncIQ policy from the source storage array, then delete the RG object on both source and target Kubernetes clusters. 
+
+If irregular cluster/array behavior causes the RG to become stuck (ex: RG cannot verify that source and target are synced before deletion because one of the sides is down), the RG will also become stuck. If forced removal of the RG is necessary, the finalizers can be removed manually to allow for deletion, but data and SyncIQ policies may remain on the storage arrays and require manual deletion. See [this Knowledge Base Article](https://www.dell.com/support/kbdoc/en-us/000206294/dell-csm-replication-powerscale-replication-artifacts-remain-after-deletion) for further information on manual deletion. 
 
 ### Performing Failover/Failback/Reprotect on PowerScale
 
