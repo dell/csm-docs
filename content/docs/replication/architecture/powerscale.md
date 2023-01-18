@@ -12,7 +12,7 @@ When creating `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s
 This singular SyncIQ policy on the source storage array and its matching Local Target policy on the target storage array provide information for the RGs to determine their status. Upon creation, the SyncIQ policy is set to a schedule of `When source is modified`. The SyncIQ policy is `Enabled` when the RG is created. The directory that is being replicated is *read-write accessible* on the source storage array, and is restricted to *read-only* on the target. 
 
 ### Replication Group Deletion 
-When deleting `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s) used for replication, deletion should only be performed on an empty RG. If there is any user-created or Kubernetes PV-generated data left inside of the replication group, the RG object will be held in a `Deleting` state until all user data has been cleared out. 
+When deleting `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s) used for replication, deletion should only be performed on an empty RG. If there is any user-created or Kubernetes PV-generated data left inside of the replication group, the RG object will be held in a `Deleting` state until all user data has been cleared out on **both** source and target storage arrays. 
 
 If the RG's folder on both source and target storage arrays is empty and the RG is given a delete command, it will perform a sync, then remove its SyncIQ policy from the source storage array, then delete the RG object on both source and target Kubernetes clusters. 
 
