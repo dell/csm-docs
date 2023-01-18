@@ -16,7 +16,7 @@ When deleting `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s
 
 If the RG's folder on both source and target storage arrays is empty and the RG is given a delete command, it will perform a sync, then remove its SyncIQ policy from the source storage array, then delete the RG object on both source and target Kubernetes clusters. 
 
-If irregular cluster/array behavior causes the RG to become stuck (ex: RG cannot verify that source and target are synced before deletion because one of the sides is down), the RG will also become stuck. If forced removal of the RG is necessary, the finalizers can be removed manually to allow for deletion, but data and SyncIQ policies may remain on the storage arrays and require manual deletion. See [this Knowledge Base Article](https://www.dell.com/support/kbdoc/en-us/000206294/dell-csm-replication-powerscale-replication-artifacts-remain-after-deletion) for further information on manual deletion. 
+If irregular Kubernetes cluster/storage array behavior causes the source and target to fall out-of-sync (ex: one of the sides is down), the RG deletion will become stuck. If forced removal of the RG is necessary, the finalizers can be removed manually to allow for deletion, but data and SyncIQ policies may remain on the storage arrays and require manual deletion. See [this Knowledge Base Article](https://www.dell.com/support/kbdoc/en-us/000206294/dell-csm-replication-powerscale-replication-artifacts-remain-after-deletion) for further information on manual deletion. 
 
 ### Performing Failover/Failback/Reprotect on PowerScale
 
