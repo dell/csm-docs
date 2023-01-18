@@ -75,9 +75,8 @@ The following CSI drivers support replication:
 1. CSI driver for PowerMax
 2. CSI driver for PowerStore
 3. CSI driver for PowerScale
-4. CSI driver for Unity XT
 
-Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../powerstore), [PowerScale](../powerscale) or [Unity](../unity) pages during the driver installation.
+Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../powerstore) or [PowerScale](../powerscale) pages during the driver installation.
 
 >Note: Please ensure that replication CRDs are installed in the clusters where you are installing the CSI drivers. These CRDs are generally installed as part of the CSM Replication controller installation process.
 
