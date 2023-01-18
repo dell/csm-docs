@@ -14,7 +14,7 @@ To use Replication, you need at least two clusters:
 - a source cluster which is the main cluster
 - one or more target clusters which will serve as diaster recovery clusters for the main cluster
 
-To configure all the clusters, follow the steps be
+To configure all the clusters, follow the steps below:
 
 1. On your main cluster, follow the instructions available in CSM Replication for [Installation using repctl](../../../../replication/deployment/install-repctl). NOTE: On step 4 of the link above, you MUST use the command below to automatically package all clusters' `.kube` config as a secret:           
 
