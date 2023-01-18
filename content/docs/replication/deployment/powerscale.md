@@ -136,7 +136,7 @@ Let's go through each parameter and what it means:
 
 * `Accesszone` is the name of the access zone a volume can be created in.
 * `AzServiceIP` AccessZone groupnet service IP. It is optional and can be provided if different than the PowerScale cluster endpoint.
-* `IsiPath` is the base path for the volumes to be created on the PowerScale cluster. If not specified in the storage class, the IsiPath defined in the storage array's secret will be used, and if that is not specified, the IsiPath defined in the values.yaml file used for driver installation is used as the lowest-priority. IsiPath between source and target Replication Groups **must** be consistent.
+* `IsiPath` is the base path for the volumes to be created on the PowerScale cluster. If not specified in the storage class, the IsiPath defined in the storage array's secret will be used, If that is not specified, the IsiPath defined in the values.yaml file used for driver installation is used as the lowest-priority. IsiPath between source and target Replication Groups **must** be consistent.
 * `RootClientEnabled` determines whether the driver should enable root squashing or not.
 * `ClusterName` name of PowerScale cluster, where PV will be provisioned, specified as it was listed in `isilon-creds` secret.
 
