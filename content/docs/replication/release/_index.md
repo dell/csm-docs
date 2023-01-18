@@ -16,9 +16,10 @@ Description: >
 
 ### Fixed Issues
 
-There are no fixed issues at this time. 
-
-### Known Issues
 | Github ID                                     | Description                                                        |
 | --------------------------------------------- | ------------------------------------------------------------------ |
 | [523](https://github.com/dell/csm/issues/523) | **PowerScale:** Artifacts are not properly cleaned after deletion. |
+
+### Known Issues
+
+There are no known issues at this time. 
