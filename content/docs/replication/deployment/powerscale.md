@@ -130,7 +130,7 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is measured in units of time, that may be lost due to a failure.
 > NOTE: Available RPO values "Five_Minutes", "Fifteen_Minutes", "Thirty_Minutes", "One_Hour", "Six_Hours", "Twelve_Hours", "One_Day"
 * `replication.storage.dell.com/ignoreNamespaces`, if set to `true` PowerScale driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.
-* `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them.
+* `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them. It is important to not use the same prefix for different kubernetes clusters, otherwise any action on a replication group in one kubernetes cluster will impact the other.
 
 > NOTE: To configure the VolumeGroupPrefix, the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<System IP Address OR FQDN\>-\<rpo\>\' cannot be more than 63 characters.
 
@@ -198,52 +198,63 @@ The CSI PowerScale driver will create a volume on the array, add it to a VolumeG
 using the parameters provided in the replication enabled Storage Class.
 
 ### SyncIQ Policy Architecture
-When creating `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s) used for replication, matching SyncIQ policies are created on *both* the source and target PowerScale storage arrays. 
+When creating `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s) used for replication, a SyncIQ policy to facilitate this replication is created *only* on the source PowerScale storage array. 
 
-This is done so that the RG objects can communicate with a relative 'local' and 'remote' set of policies to query for current synchronization status and perform replication actions; on the *source* Kubernetes cluster's RG, the *source* PowerScale array is seen as 'local' and the *target* PowerScale array is seen as remote. The inverse relationship exists on the *target* Kubernetes cluster's RG, which sees the *target* PowerScale array as 'local' and the *source* PowerScale array as 'remote'. 
+This singular SyncIQ policy on the source storage array and its matching Local Target policy on the target storage array provide information for the RGs to determine their status. Upon creation, the SyncIQ policy is set to a schedule of `When source is modified`. The SyncIQ policy is `Enabled` when the RG is created. The directory that is being replicated is *read-write accessible* on the source storage array, and is restricted to *read-only* on the target. 
 
-Upon creation, both SyncIQ policies (source and target) are set to a schedule of `When source is modified`. The source PowerScale array's SyncIQ policy is `Enabled` when the RG is created, and the target array's policy is `Disabled`. Similarly, the directory that is being replicated is *read-write accessible* on the source storage array, and is restricted to *read-only* on the target. 
+### Performing Failover/Failback/Reprotect on PowerScale
 
-### Performing Failover on PowerScale
+Failover, Failback, and Reprotect one-step operations are not natively supported on PowerScale, and are performed as a series of steps in CSM replication. When any of these operations are triggered, through the use of `repctl` or by editing the RG, the steps below are performed on the PowerScale storage arrays.
+
+#### Failover - Halt Replication and Allow Writes on Target
 
 Steps for performing Failover can be found in the Tools page under [Executing Actions.](https://dell.github.io/csm-docs/docs/replication/tools/#executing-actions) There are some PowerScale-specific considerations to keep in mind: 
-- Failover on PowerScale does NOT halt writes on the source side. It is recommended that the storage administrator or end user manually stop writes to ensure no data is lost on the source side in the event of future failback. 
-- In the case of unplanned failover, the source-side SyncIQ policy will be left enabled and set to its previously defined `When source is modified` sync schedule. It is recommended for storage admins to manually disable the source-side SyncIQ policy when bringing the failed-over source array back online.
+- Failover on PowerScale does NOT halt writes on the source side. It is recommended that the storage administrator or end user manually **stop writes** to ensure no data is lost on the source side in the event of future failback. 
+- In the case of unplanned failover, the SyncIQ policy on the source PowerScale array will be left enabled and set to its previously defined `When source is modified` sync schedule. Storage admins **must** manually disable this SyncIQ policy when bringing the failed-over source array back online, or unexpected behavior may occur.
 
-### Performing Failback on PowerScale
+The below steps are performed by CSM replication to perform a failover.
 
-Failback operations are not presently supported for PowerScale. In the event of a failover, failback can be performed manually using the below methodologies. 
+1. Syncing data from source to target one final time before transition. *(planned failover only)*
+2. Disabling the SyncIQ policy on the source PowerScale storage array. *(planned failover only)*
+3. Enabling writes on the target PowerScale array's Local Target policy.  
+
 #### Failback - Discard Target
 
-Performing failback and discarding changes made to the target is to simply resume synchronization from the source. The steps to perform this operation are as follows:
-1. Log in to the source PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab. 
-2. Edit the source-side SyncIQ policy's schedule from `When source is modified` to `Manual`. 
-3. Log in to the target PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Local targets` tab.
-4. Perform `Actions > Disallow writes` on the target-side Local Target policy that matches the SyncIQ policy undergoing failback. 
-5. Return to the source array. Enable the source-side SyncIQ policy. Edit its schedule from `Manual` to `When source is modified`. Set the time delay for synchronization as appropriate.
+Performing failback and discarding changes made to the target is to simply resume synchronization from the source. The steps CSM replication is following to perform this operation are as follows:
+
+1. Editing the SyncIQ policy on the source PowerScale array's schedule from `When source is modified` to `Manual`. 
+2. Performing `Actions > Disallow writes` on the target PowerScale array's Local Target policy that matches the SyncIQ policy undergoing failback. 
+3. Editing the SyncIQ policy's schedule from `Manual` to `When source is modified` and setting the time delay for synchronization as appropriate.
+4. Enabling the source PowerScale array's SyncIQ policy. 
+
+   
 #### Failback - Discard Source
 
-Information on the methodology for performing a failback while taking changes made to the original target can be found in relevant PowerScale SyncIQ documentation. The detailed steps are as follows:
+Information on the methodology for performing a failback while taking changes made to the original target can be found in relevant PowerScale SyncIQ documentation. The steps CSM replication is following to perform this operation are as follows:
 
-1. Log in to the source PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab. 
-2. Edit the source-side SyncIQ policy's schedule from `When source is modified` to `Manual`. 
-3. Log in to the target PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab.
-4. Delete the target-side SyncIQ policy that has a name matching the SyncIQ policy undergoing failback. This is necessary to prevent conflicts when running resync-prep in the next step.
-5. On the source PowerScale array, enable the SyncIQ policy that is undergoing failback. On this policy, perform `Actions > Resync-prep`. This will create a new SyncIQ policy on the target PowerScale array, matching the original SyncIQ policy with an appended *_mirror* to its name. Wait until the policy being acted on is disabled by the resync-prep operation before continuing.
-6. On the target PowerScale array's `Policies` tab, perform `Actions > Start job` on the *_mirror* policy. Wait for this synchronization to complete. 
-7. On the source PowerScale array, switch from the `Policies` tab to the `Local targets` tab. Find the local target policy that matches the SyncIQ policy undergoing failback and perform `Actions > Allow writes`. 
-8. On the target PowerScale array, perform `Actions > Resync-prep` on the *_mirror* policy. Wait until the policy on the source side is re-enabled by the resync-prep operation before continuing.
-9. On the target PowerScale array, delete the *_mirror* SyncIQ policy. 
-10. On the target PowerScale array, manually recreate the original SyncIQ policy that was deleted in step 4. This will require filepaths, RPO, and other details that can be obtained from the source-side SyncIQ policy. Its name **must** match the source-side SyncIQ policy. Its source directory will be the source-side policy's *target* directory, and vice-versa. Its target host will be the source PowerScale array endpoint.
-11. Ensure that the target-side SyncIQ policy that was just created is **Enabled.** This will create a Local Target policy on the source side. If it was not created as Enabled, enable it now. 
-12. On the source PowerScale array, select the `Local targets` tab. Perform `Actions > Allow writes` on the source-side Local Target policy that matches the SyncIQ policy undergoing failback. 
-13. Disable the target-side SyncIQ policy.
-14. On the source PowerScale array, edit the SyncIQ policy's schedule from `Manual` to `When source is modified`. Set the time delay for synchronization as appropriate.
+1. Editing the SyncIQ policy on the source PowerScale array's schedule from `When source is modified` to `Manual`. 
+2. Enabling the SyncIQ policy that is undergoing failback, if it isn't already enabled. 
+3. Performing the `Resync-prep` action on the SyncIQ policy. This will create a new SyncIQ policy on the target PowerScale array, matching the original SyncIQ policy with an appended *_mirror* to its name. 
+4. Starting a synchronization job on the target PowerScale array's newly created *_mirror* policy.
+5. Running the `Allow writes` operation on the Local Target on the source PowerScale array that was created by the *_mirror* policy. 
+6. Performing the `Resync-prep` action on the target PowerScale array's *_mirror* policy. 
+7. Deleting the *_mirror* SyncIQ policy. 
+8. Editing the SyncIQ policy on the source PowerScale array's schedule from `Manual` to `When source is modified` and setting the time delay for synchronization as appropriate.
+
+#### Reprotect - Set Original Target as New Source 
+
+A reprotect operation is, in essence, doing away with the original source-target relationship and establishing a new one in the reverse direction. This is done **only after** failing over to the original target array is complete, and the original source array is up and ready to be made into a new replication destination. To accomplish this, CSM replication performs the following steps:
+
+1. Deleting the SyncIQ policy on the original source PowerScale array. 
+2. Creating a new SyncIQ policy on the original target PowerScale array. This policy establishes the original target as a new *source*, and sets its replication destination to the original source (which can be considered the new *target*.)
 
 ### Supported Replication Actions
 The CSI PowerScale driver supports the following list of replication actions:
 - FAILOVER_REMOTE
 - UNPLANNED_FAILOVER_LOCAL
+- FAILBACK_LOCAL
+- ACTION_FAILBACK_DISCARD_CHANGES_LOCAL
+- REPROTECT_LOCAL
 - SUSPEND
 - RESUME
 - SYNC

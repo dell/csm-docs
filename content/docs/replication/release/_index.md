@@ -6,16 +6,19 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for replication
 ---
 
-## Release Notes - CSM Replication 1.3.1
+## Release Notes - CSM Replication 1.4.0
 
 ### New Features/Changes
-There are no new features in this release.
+
+ - [PowerScale - Implement Failback functionality](https://github.com/dell/csm/issues/558)
+ - [PowerScale - Implement Reprotect functionality](https://github.com/dell/csm/issues/532)
+ - [PowerScale - SyncIQ policy improvements](https://github.com/dell/csm/issues/573)
 
 ### Fixed Issues
-- [PowerScale Replication - Replicated PV has the wrong AzServiceIP](https://github.com/dell/csm/issues/514)
-- ["repctl cluster inject --use-sa" doesn't work for Kubernetes 1.24 and above](https://github.com/dell/csm/issues/463)
+
+There are no fixed issues at this time. 
 
 ### Known Issues
-| Github ID                                     | Description                                                                             |
-| --------------------------------------------- | --------------------------------------------------------------------------------------- |
-| [523](https://github.com/dell/csm/issues/523) | **PowerScale:** Artifacts are not properly cleaned after deletion.                      |
+| Github ID                                     | Description                                                        |
+| --------------------------------------------- | ------------------------------------------------------------------ |
+| [523](https://github.com/dell/csm/issues/523) | **PowerScale:** Artifacts are not properly cleaned after deletion. |
