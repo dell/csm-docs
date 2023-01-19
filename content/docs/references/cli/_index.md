@@ -789,6 +789,8 @@ Encryption rekey status with name of the rekey object
 
 Prints a Table of the container images Driver needs
 
+**NOTE.**: dellctl images Currently supports csi-vxflexos driver only.
+
 #### Aliases
 
 ```
