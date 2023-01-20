@@ -30,7 +30,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
 | [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
-| [dellctl images](#dellctl-images) | Prints a Table of the container images Driver needs |
+| [dellctl images](#dellctl-images) | List the container images needed by csi driver |
 
 
 ## Installation instructions
@@ -787,7 +787,7 @@ Encryption rekey status with name of the rekey object
 
 ### dellctl images
 
-Prints a Table of the container images Driver needs
+List the container images needed by csi driver
 
 **NOTE.**: dellctl images Currently supports csi-vxflexos driver only.
 
