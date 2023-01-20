@@ -789,7 +789,7 @@ Encryption rekey status with name of the rekey object
 
 List the container images needed by csi driver
 
-**NOTE.**: dellctl images Currently supports csi-vxflexos driver only.
+**NOTE.**: dellctl images currently supports csi-vxflexos driver only.
 
 #### Aliases
 
