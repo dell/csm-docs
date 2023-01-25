@@ -1,65 +1,12 @@
 ---
 title: Cert-csi
 linktitle: Cert-csi
-description: Test-suite to validate Dell CSI Drivers
+description: Tool to validate Dell CSI Drivers
 ---
 
-# Getting Started Guide
+Cert-csi is a tool to validate Dell CSI Drivers. It contains various test suites to validate the drivers. 
 
-<!--ts-->
-   * [CERT-CSI: Test tool for CSI Drivers](#cert-csi-test-tool-for-csi-drivers)
-      * [Installing](#installing)
-      * [How to Run](#how-to-run)
-      * [Driver Certification](#driver-certification)
-         * [Preparing Config](#preparing-config)
-         * [Launching Certification Test Run](#launching-certification-test-run)
-      * [Functional Tests](#functional-tests)
-         * [Running Individual Suites](#running-individual-suites)
-            * [Volume/PVC Creation](#volumepvc-creation)
-            * [Provisioning/Pod creation](#provisioningpod-creation)
-            * [Running Volume Deletion suite](#running-volume-deletion-suite)
-            * [Running Pod Deletion suite](#running-pod-deletion-suite)
-            * [Running Cloned Volume deletion suite](#running-cloned-volume-deletion-suite)
-            * [Multi Attach Volume Tests](#multi-attach-volume-tests)
-            * [Ephemeral volumes suite](#ephemeral-volumes-suite)
-            * [Storage Capacity Tracking Suite](#storage-capacity-tracking-suite)
-         * [Other Options](#other-options)
-            * [Generating tabular report from DB](#generating-tabular-report-from-db)
-            * [Generating XML report from DB](#generating-xml-report-from-db)
-            * [Including Array configuration file](#including-array-configuration-file)
-         * [Screenshots](#screenshots)
-      * [Kubernetes End-To-End Tests](#kubernetes-end-to-end-tests)
-         * [Running Kubernetes End-To-End Tests](#running-kubernetes-end-to-end-tests)
-         * [Kubernetes end-to-end reporting](#kubernetes-end-to-end-reporting)
-         * [Test config files format](#test-config-files-format)
-         * [Example Commands](#example-commands)
-      * [Performance Tests](#performance-tests)
-         * [Running Individual Suites](#running-individual-suites-1)
-            * [Running Volume Creation test suite](#running-volume-creation-test-suite)
-            * [Running Provisioning test suite](#running-provisioning-test-suite)
-            * [Running Scalability test suite](#running-scalability-test-suite)
-            * [Running VolumeIO test suite](#running-volumeio-test-suite)
-            * [Running Snap test suite](#running-snap-test-suite)
-            * [Running MultiAttachVol suite](#running-multiattachvol-suite)
-            * [Running Replication test suite](#running-replication-test-suite)
-            * [Running Volume Cloning test suite](#running-volume-cloning-test-suite)
-            * [Running Volume Expansion test suite](#running-volume-expansion-test-suite)
-            * [Running Blocksnap suite](#running-blocksnap-suite)
-         * [Running Longevity mode](#running-longevity-mode)
-         * [Interacting with DB](#interacting-with-db)
-            * [Generating report from runs without running tests](#generating-report-from-runs-without-running-tests)
-            * [Customizing report folder](#customizing-report-folder)
-            * [Generating report from multiple databases and test runs](#generating-report-from-multiple-databases-and-test-runs)
-            * [Listing all known test runs](#listing-all-known-test-runs)
-         * [Other options](#other-options-1)
-            * [Customizing report folder](#customizing-report-folder-1)
-            * [Running with enabled driver resource usage metrics](#running-with-enabled-driver-resource-usage-metrics)
-            * [Running custom hooks from program](#running-custom-hooks-from-program)
-         * [Screenshots](#screenshots-1)
-
-<!--te-->
-
-## Installing
+## Installation
 To install this tool you can download one of binary files located in [RELEASES](https://github.com/dell/cert-csi/releases)
 
 Also you can build tool yourself by cloning repository and running
