@@ -23,6 +23,11 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
    Dell CSI Helm installer installs the CSI Driver components using the provided Helm charts.
    [...More on installation instructions](../csidriver/installation/helm)
   {{< /card >}}
+  {{< card header="[CSM Installation Wizard](csminstallationwizard/)"
+          footer="Generates manifest file for installation">}}
+   CSM Installation Wizard generates manifest files to install Dell CSI Drivers and supported modules.
+   [...More on installation instructions](csminstallationwizard)
+  {{< /card >}}
    {{< card header="[Dell CSI Drivers Installation via offline installer](../csidriver/installation/offline)"
           footer="[Offline installation for all drivers](../csidriver/installation/offline)">}}
   Both Helm and Dell CSI opetor supports offline installation of the Dell CSI Storage Providers via `csi-offline-bundle.sh` script by creating a usable package.
