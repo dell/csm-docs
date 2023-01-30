@@ -198,7 +198,7 @@ arrayIds: arr-1
 
 Tabular Report example
 
-![img9](./img/Tabular-Report.PNG)
+![img9](../img/Tabular-Report.PNG)
 
 ## Kubernetes End-To-End Tests
 All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..
@@ -368,37 +368,37 @@ cert-csi test <test suite> --sc <storage class> <...> --sh ./hooks/start.sh --rh
 
 Running provisioning test
 
-![img1](./img/unified.PNG)
+![img1](../img/unified.PNG)
 
 You can interrupt the application by sending interruption signal (for example pressing Ctrl + C)
 It will stop polling and try to cleanup resources.
 
-![img2](./img/interrupt.PNG)
+![img2](../img/interrupt.PNG)
 
 Running scaling test
 
-![img3](./img/scaling.PNG)
+![img3](../img/scaling.PNG)
 
 Listing available test runs
 
-![img4](./img/list.PNG)
+![img4](../img/list.PNG)
 
 Running longevity mode
 
-![img5](./img/long.PNG)
+![img5](../img/long.PNG)
 
 Multi DB Tabular report example
 
-![img6](./img/multi-db-tabular.png)
+![img6](../img/multi-db-tabular.png)
 
 Text report example
 
-![img7](./img/txtrep.PNG)
+![img7](../img/txtrep.PNG)
 
 HTML report example
 
-![img8](./img/htmlrep.PNG)
+![img8](../img/htmlrep.PNG)
 
 Resource usage example chart
 
-![img9](./img/resusage.png)
+![img9](../img/resusage.png)
