@@ -16,7 +16,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Kubernetes    | 1.23, 1.24, 1.25 | 1.23, 1.24, 1.25    | 1.23, 1.24, 1.25 | 1.23, 1.24, 1.25  | 1.23, 1.24, 1.25 |
+| Kubernetes    | 1.24, 1.25, 1.26 | 1.23, 1.24, 1.25    | 1.23, 1.24, 1.25 | 1.23, 1.24, 1.25  | 1.23, 1.24, 1.25 |
 | RHEL          |     7.x,8.x      |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.x,8.x      |
 | Ubuntu        |       20.04      |       20.04         |  18.04, 20.04    | 18.04, 20.04      |        20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
@@ -33,7 +33,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
-| CSI Driver version       | 2.5.0    | 2.5.0     | 2.5.0     | 2.5.0      | 2.5.1      |
+| CSI Driver version       | 2.6.0    | 2.5.0     | 2.5.0     | 2.5.0      | 2.5.1      |
 | Static Provisioning      | yes      | yes       | yes       | yes        | yes        |
 | Dynamic Provisioning     | yes      | yes       | yes       | yes        | yes        |
 | Expand Persistent Volume | yes      | yes       | yes       | yes        | yes        |
