@@ -19,8 +19,7 @@ Also you can build a docker container
 docker build -t cert-csi --build-arg username=user --build-arg password=qwerty . 
 ```
 
-If you want to collect resource usage metrics of csi-driver please provide
-namespace where it can be found and install metric-server like so _(kubectl is needed)_
+If you want to collect resource usage metrics of csi-driver please provide namespace where it can be found and install metric-server like so _(kubectl is needed)_
 
 ```bash
 make install-ms
@@ -36,13 +35,10 @@ make install-nix
 
 To get information on how to use program you can use built-in help. 
 
-Or if you're using UNIX-like system and enabled _auto-completion feature_ while installing the tool, then you can use shell's
-built-in auto-completion to navigate through program's subcommands and flags interactively by just pressing TAB.
+Or if you're using UNIX-like system and enabled _auto-completion feature_ while installing the tool, then you can use shell's built-in auto-completion to navigate through program's subcommands and flags interactively by just pressing TAB.
 
-Also, if your environment is pointed to any kube cluster (which is required to run cert-csi), 
-then you will also receive dynamically formatted suggestion right from your cluster.
-For example if you press TAB while passing --storageclass (or --sc) argument, 
-the tool will parse all existing Storage Classes from your cluster and suggest them as an input for you. 
+Also, if your environment is pointed to any kube cluster (which is required to run cert-csi), then you will also receive dynamically formatted suggestion right from your cluster.
+For example if you press TAB while passing --storageclass (or --sc) argument, the tool will parse all existing Storage Classes from your cluster and suggest them as an input for you. 
 
 > To run a docker container your command should look something like this
 > `docker run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi <usual program arguments>`
