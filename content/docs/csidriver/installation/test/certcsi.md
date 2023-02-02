@@ -402,7 +402,7 @@ It will stop polling and try to cleanup resources.
 
 Running scaling test
 
-![img3](../img/scaling.png)
+![img3](../img/scaling.PNG)
 
 Listing available test runs
 
