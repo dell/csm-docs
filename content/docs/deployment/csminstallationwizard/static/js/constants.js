@@ -27,6 +27,8 @@ const CONSTANTS = {
 	TEMP_DIR: "templates/",
 	TEMP_EXT: ".template",
 	HYPHEN: "-",
+	NODE_SELECTOR_TAB: '\n'.padEnd(7, " "),
+	SLASH: "/",
 	VERSIONS_DIR: "csm-versions/",
 	CSM: "csm",
 	DEFAULT_VALUES: "default-values",
