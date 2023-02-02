@@ -9,35 +9,33 @@ Cert-csi is a tool to validate Dell CSI Drivers. It contains various test suites
 ## Installation
 To install this tool you can download one of binary files located in [RELEASES](https://github.com/dell/cert-csi/releases)
 
-Also you can build tool yourself by cloning repository and running
+You can build the tool by cloning the repository and running this command:
 ```bash
 make build 
 ```
 
-Also you can build a docker container
+You can also build a docker container by running this command:
 ```bash
 docker build -t cert-csi --build-arg username=user --build-arg password=qwerty . 
 ```
 
-If you want to collect resource usage metrics of csi-driver please provide namespace where it can be found and install metric-server like so _(kubectl is needed)_
+If you want to collect csi-driver resource usage metrics, then please provide the namespace where it can be found and install the metric-server using this command (kubectl is required):
 
 ```bash
 make install-ms
 ```
-[FOR UNIX] If you want to build and install the tool to your $PATH and enable the **auto-completion** feature:
+[FOR UNIX] If you want to build and install the tool to your $PATH and enable the **auto-completion** feature, then run this command:
 
 ```bash
 make install-nix
 ```
-> Alternatively you can use instruction from https://github.com/kubernetes-incubator/metrics-server
+> Alternatively, you can install the metric-server by following the instructions at https://github.com/kubernetes-incubator/metrics-server
 
-## How to Run
+## Running Cert-CSI
 
-To get information on how to use program you can use built-in help. 
+To get information on how to use the program, you can use built-in help. If you're using a UNIX-like system and enabled _auto-completion feature_ while installing the tool, then you can use shell's built-in auto-completion to navigate through program's subcommands and flags interactively by just pressing TAB.
 
-Or if you're using UNIX-like system and enabled _auto-completion feature_ while installing the tool, then you can use shell's built-in auto-completion to navigate through program's subcommands and flags interactively by just pressing TAB.
-
-Also, if your environment is pointed to any kube cluster (which is required to run cert-csi), then you will also receive dynamically formatted suggestion right from your cluster.
+To run cert-csi, you have to point your environment to a kube cluster. This allows you to receive dynamically formatted suggestions from your cluster.
 For example if you press TAB while passing --storageclass (or --sc) argument, the tool will parse all existing Storage Classes from your cluster and suggest them as an input for you. 
 
 > To run a docker container your command should look something like this
@@ -71,7 +69,7 @@ storageClasses:
 
 ### Launching Certification Test Run
 
-After preparing certification configuration file you can launch certification by running 
+After preparing a certification configuration file, you can launch certification by running 
 ```bash
 cert-csi certify --cert-config <path-to-config>
 Optional Params:
@@ -86,6 +84,7 @@ Optional Params:
 ### Running Individual Suites
 #### Volume/PVC Creation
 
+To run volume or PVC creation test suite, run the command:
 ```bash
 cert-csi functional-test volume-creation --sc <storage class> -n 5
 Optional Params:
@@ -97,6 +96,7 @@ Optional Params:
 
 #### Provisioning/Pod creation
 
+To run volume provisioning or pod creation test suite, run the command:
 ```bash
 cert-csi functional-test provisioning --sc <storage class>
 Optional Params:
@@ -109,6 +109,7 @@ Optional Params:
 
 #### Running Volume Deletion suite
 
+To run volume delete test suite, run the command:
 ```bash
 cert-csi functional-test volume-deletion
 --pvc-name value : PVC name to delete
@@ -117,6 +118,7 @@ cert-csi functional-test volume-deletion
 
 #### Running Pod Deletion suite
 
+To run pod deletion test suite, run the command:
 ```bash
 cert-csi functional-test pod-deletion
 --pod-name : Pod name to delete
@@ -125,6 +127,7 @@ cert-csi functional-test pod-deletion
 
 #### Running Cloned Volume deletion suite
 
+To run cloned volume deletion test suite, run the command:
 ```bash
 cert-csi functional-test clone-volume-deletion
 --clone-volume-name : Volume name to delete
@@ -132,6 +135,7 @@ cert-csi functional-test clone-volume-deletion
 
 #### Multi Attach Volume Tests
 
+To run multi-attach volume test suite, run the command:
 ```bash
 cert-csi functional-test multi-attach-vol --sc <storage-class>
 --pods : Number of pods to create
@@ -140,6 +144,7 @@ cert-csi functional-test multi-attach-vol --sc <storage-class>
 
 #### Ephemeral volumes suite
 
+To run ephemeral volume test suite, run the command:
 ```bash
 cert-csi functional-test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
 --pods : Number of pods to create 
@@ -155,6 +160,7 @@ size=5Gi
 
 #### Storage Capacity Tracking Suite
 
+To run storage capacity tracking test suite, run the command:
 ```bash
 cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace> --pi <poll-interval>
 Optional Params:
@@ -165,6 +171,7 @@ Optional Params:
 
 #### Generating tabular report from DB
 
+To generate tabular report from the database, run the command:
 ```bash
 cert-csi -db <db_path> functional-report -tabular
 Example: cert-csi -db ./test.db functional-report -tabular
@@ -173,6 +180,7 @@ Note: DB is mandatory parameter
 
 #### Generating XML report from DB
 
+To generate XML report from the database, run the command:
 ```bash
 cert-csi -db <db_path> functional-report -xml
 Example: cert-csi -db ./test.db functional-report -xml
@@ -202,6 +210,7 @@ All Kubernetes end to end tests require that you provide the driver config based
 
 ### Running kubernetes end-to-end tests
 
+To run kubernetes end-to-end tests, run the command:
 ```bash
 cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config>  --focus <regx pattern to focus Ex: "External.Storage.*" >  --timeout <timeout Ex: "2h"> --version < version of k8s Ex: "v1.25.0"> --skip-tests <skip these steps mentioned in file> --skip <regx pattern to skip tests Ex:"Generic Ephemeral-volume|(block volmode)">
 ```
@@ -226,41 +235,47 @@ cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config> 
 
 ## Performance Tests
 
-All performance tests require that you provide storage class that you want to test. You can provide multiple storage classes in one command like so `... --sc <sc1> --sc <sc2> ...`
+All performance tests require that you provide a storage class that you want to test. You can provide multiple storage classes in one command. For example, `... --sc <sc1> --sc <sc2> ...`
 
 ### Running Individual Suites 
 #### Running Volume Creation test suite
 
+To run volume creation test suite, run the command:
 ```bash
 cert-csi test volume-creation --sc <storage class> -n 25
 ```
 
 #### Running Provisioning test suite
 
+To run volume provisioning test suite, run the command:
 ```bash
 cert-csi test provisioning --sc <storage class> --podNum 1 --volNum 10
 ```
 
 #### Running Scalability test suite
 
+To run scalability test suite, run the command:
 ```bash
 cert-csi test scaling --sc <storage class> --replicas 5
 ```
 
 #### Running VolumeIO test suite
 
+To run volumeIO test suite, run the command:
 ```bash
 cert-csi test vio --sc <storage class> --chainNumber 5 --chainLength 20
 ```
 
 #### Running Snap test suite
 
+To run volume snapshot test suite, run the command:
 ```bash
 cert-csi test snap --sc <storage class> --vsc <volume snapshot class> 
 ```
 
-#### Running MultiAttachVol suite
+#### Running Multi-attach volume suite
 
+To run multi-attach volume test suite, run the command: 
 ```bash
 cert-csi test multi-attach-vol --sc <storage class> --podNum 3
 ```
@@ -270,18 +285,21 @@ cert-csi test multi-attach-vol --sc <storage class> --podNum 3 --block # to use 
 
 #### Running Replication test suite
 
+To run replication test suite, run the command:
 ```bash
 cert-csi test replication --sc <storage class> --pn 1 --vn 5 --vsc <snapshot class> 
 ```
 
 #### Running Volume Cloning test suite
 
+To run volume cloning test suite, run the command:
 ```bash
 cert-csi test clone-volume --sc <storage class> --pn 1 --vn 5
 ```
 
 #### Running Volume Expansion test suite
 
+To run volume expansion test, run the command:
 ```bash
 cert-csi test expansion --sc <storage class> --pn 1 --vn 5 --iSize 8Gi --expSize 16Gi
 
@@ -292,12 +310,14 @@ cert-csi test expansion --sc <storage class> --pn 1 --vn 5 --block # to create b
 
 #### Running Blocksnap suite
 
+To run block snapshot test suite, run the command:
 ```bash
 cert-csi test blocksnap --sc <storageClass> --vsc <snapshotclass>
 ```
 
 ### Running Longevity mode
 
+To run longevity test suite, run the command:
 ```bash
 cert-csi test <any of previous tests> --sc <storage class> --longevity <number of iterations>
 ```
@@ -306,6 +326,7 @@ cert-csi test <any of previous tests> --sc <storage class> --longevity <number o
 
 #### Generating report from runs without running tests
 
+To generate test report from the database, run the command:
 ```bash
 cert-csi --db <path/to/.db> report --testrun <test-run-name> --html --txt
 Report types:
@@ -316,6 +337,8 @@ Report types:
 ```
 
 #### Customizing report folder
+
+To specify test report folder path, use --path option as follows:
 ```bash
 cert-csi --db <path/to/.db> report --testrun <test-run-name> --path <path-to-folder>
 Options:
@@ -324,6 +347,7 @@ Options:
 
 #### Generating report from multiple databases and test runs
 
+To generate report from multiple databases, run the command:
 ```bash
 cert-csi report --tr <db-path>:<test-run-name> --tr ... --tabular --xml
 Supported report types: 
@@ -333,6 +357,7 @@ Supported report types:
 
 #### Listing all known test runs
 
+To list all test runs, run the command:
 ```bash
 cert-csi --db <path/to/.db> list test-runs
 ```
@@ -340,6 +365,8 @@ cert-csi --db <path/to/.db> list test-runs
 ### Other options
 
 #### Customizing report folder
+
+To specify test report folder path, use --path option as follows:
 ```bash
 cert-csi <command> --path <path-to-folder>
 Commands:
@@ -350,12 +377,14 @@ Commands:
 
 #### Running with enabled driver resource usage metrics
 
+To run tests with driver resource usage metrics enabled, run the command:
 ```bash
 cert-csi test <test suite> --sc <storage class> <...> --ns <driver namespace> 
 ```
 
 #### Running custom hooks from program
 
+To run tests with custom hooks, run the command:
 ```bash
 cert-csi test <test suite> --sc <storage class> <...> --sh ./hooks/start.sh --rh ./hooks/ready.sh --fh ./hooks/finish.sh
 ```
@@ -366,7 +395,7 @@ Running provisioning test
 
 ![img1](../img/unified.PNG)
 
-You can interrupt the application by sending interruption signal (for example pressing Ctrl + C)
+You can interrupt the application by sending an interruption signal (for example pressing Ctrl + C).
 It will stop polling and try to cleanup resources.
 
 ![img2](../img/interrupt.PNG)
