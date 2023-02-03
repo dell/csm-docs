@@ -25,6 +25,13 @@ To upgrade the CSM Replication sidecar that is installed along with the driver, 
 2. Run the csi-install script with the option `--upgrade` by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace <your-namespace> --values ./myvalues.yaml --upgrade`
 3. Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology
 
+### PowerScale
+
+On PowerScale systems, an additional step is needed when upgrading from CSM v1.5 to CSM v1.6. Because the SyncIQ policy created on the target-side storage array is no longer used, it must be deleted for any existing replication groups after performing the upgrade to the CSM Replication sidecar and PowerScale CSI driver. These steps should be performed before the replication groups are used with the new version of the CSI driver. Until this step is performed, Replication Groups created on CSM v1.5 will display an UNKNOWN link state in CSM v1.6.
+
+1. Log in to the target PowerScale array. 
+2. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab.
+3. Delete all disabled, target-side SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format `<prefix>-<kubernetes namespace>-<IP of replication destination>-<RPO duration>`.
 
 ## Updating CSM Replication controller
 
@@ -48,4 +55,4 @@ This option will only work if you have previously installed replication with hel
 1. Find a new version of deployment manifest that can be found in `deploy/controller.yaml`, with newer `image` pointing to the version of CSM Replication controller you want to upgrade to 
 2. Apply said manifest using the usual `repctl create` command like so 
 `./repctl create -f ./deploy/controller.yaml`. The output should have this line `Successfully updated existing deployment: dell-replication-controller-manager` 
-3. Check if everything is OK by querying your Kubernetes clusters using `kubectl` like this `kubectl get pods -n dell-replication-controller`, your pods should READY and RUNNING
+3. Check if everything is OK by querying your Kubernetes clusters using `kubectl` like this `kubectl get pods -n dell-replication-controller`, your pods should be READY and RUNNING
