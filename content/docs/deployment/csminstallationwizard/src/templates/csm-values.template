@@ -1,0 +1,118 @@
+#
+#
+# Copyright © 2023 Dell Inc. or its subsidiaries. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#      http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#
+## K8S/DRIVER ATTRIBUTES
+########################
+csi-powerstore:
+  enabled: $POWERSTORE_ENABLED
+  namespace: $POWERSTORE_DRIVER_NAMESPACE
+  version: $VERSION
+  images:
+    driverRepository: $IMAGE_REPOSITORY
+  ## Controller ATTRIBUTES
+  controller:
+    controllerCount: $CONTROLLER_COUNT
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+    nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+    replication:
+      enabled: $REPLICATION_ENABLED
+      image: $REPLICATION_IMAGE
+    vgsnapshot:
+      enabled: $VG_SNAPSHOT_ENABLED
+      image: $VG_SNAPSHOT_IMAGE
+    snapshot:
+      enabled: $SNAPSHOT_ENABLED
+    resizer:
+      enabled: $RESIZER_ENABLED
+  ## Node ATTRIBUTES
+  node:
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+    nodeSelector: $NODE_POD_NODE_SELECTOR
+
+##########################################
+csi-powermax:
+  enabled: $POWERMAX_ENABLED
+  namespace: $POWERMAX_DRIVER_NAMESPACE
+
+## K8S/Replication Module ATTRIBUTES
+##########################################
+csm-replication:
+  enabled: $REPLICATION_ENABLED
+  namespace: $CSM_NAMESPACE
+
+## K8S/Observability Module ATTRIBUTES
+##########################################
+karavi-observability:
+  enabled: $OBSERVABILITY_ENABLED
+  namespace: $CSM_NAMESPACE
+  karaviMetricsPowerstore:
+    enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
+  karaviMetricsPowerflex:
+    enabled: $POWERFLEX_OBSERVABILITY_METRICS_ENABLED
+  karaviMetricsPowerscale:
+    enabled: $POWERSCALE_OBSERVABILITY_METRICS_ENABLED
+
+## K8S/Application-mobility Module ATTRIBUTES
+##########################################
+csm-application-mobility:
+  enabled: $APP_MOBILITY_ENABLED
+  namespace: $CSM_NAMESPACE
+  # csm-application-mobility requires velero. If velero is already installed on the cluster, specify the namespace in which velero is deployed. Default value is "velero"
+  veleroNamespace:  $CSM_NAMESPACE
+  velero:
+    credentials:
+      secretContents:
+        cloud: |
+          [default]
+          aws_access_key_id=minioadmin
+          aws_secret_access_key=minioadmin
+    configuration:
+      provider: aws
+      backupStorageLocation:
+        name: default
+        bucket: velero-bucket
+        config:
+          region: minio
+          s3ForcePathStyle: true
+          s3Url: http://10.225.105.43:9000
+          publicUrl: http://10.225.105.43:9000
+    initContainers:
+    - name: dell-custom-velero-plugin
+      image: dellemc/csm-application-mobility-velero-plugin:v0.2.0
+      volumeMounts:
+      - mountPath: /target
+        name: plugins
+    - name: velero-plugin-for-aws
+      image: velero/velero-plugin-for-aws:v1.5.0
+      volumeMounts:
+      - mountPath: /target
+        name: plugins
+
+## K8S/Authorization Module ATTRIBUTES
+##########################################
+csm-authorization:
+  enabled: $AUTHORIZATION_ENABLED
+  namespace: $CSM_NAMESPACE
+  redis:
+    namespace: $CSM_NAMESPACE
+    storageClass: powerstore-topology-iscsi
+
+## K8S/Cert-manager ATTRIBUTES
+##########################################
+cert-manager:
+  enabled: $CERT_MANAGER_ENABLED
+  namespace: $CSM_NAMESPACE
