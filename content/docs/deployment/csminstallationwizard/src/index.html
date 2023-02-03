@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CSM Installation Wizard | Dell Technologies</title>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/dds-icons.min.css" />
+    <link rel="stylesheet" href="static/css/dds-icons.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <script type="text/javascript" src="static/js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <header>
+        <div class="container-fluid td-outer">
+          <nav class="js-navbar-scroll navbar-dark flex-column flex-md-row ">
+            <p class="navbar-brand">
+              <span class="navbar-logo">
+                <img src="static/images/dell_logo.jpg" class="img">
+              </span>
+            </p>
+          </nav>
+        </div>
+      </header>
+      <hr>
+      <main class="container mt-5 mb-5">
+        <div class="row">
+          <div class="col-8 pl-md-5">
+            <span class="heading">Container Storage Modules (CSM) Installation Wizard </span>
+          </div>
+          <div class="col-4"></div>
+        </div>
+        <!-- form body starts -->
+        <form class="was-validated needs-validation" id="csm-form">
+          <div class="row mt-5 pb-5">
+            <div class="card">
+              <div class="col-2"></div>
+              <!-- card body starts -->
+              <div class="col-8">
+                <div class="row mt-3">
+                  <div class="col-sm-12 h5">Configure installation settings and repository </div>
+                </div>
+                <div class="row mb-4">
+                  <label for="array" class="col-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Storage Array">Array</label>
+                  <div class="col-sm-9"></div>
+                  <div class="col-sm-8">
+                    <select id="array" class="form-select" required>
+                      <option value="" selected>Select the Array</option>
+                      <option value="csi-powerstore">PowerStore</option>
+                      <option value="csi-powermax">PowerMax</option>
+                      <option value="csi-powerscale" disabled>PowerScale</option>
+                      <option value="csi-powerflex" disabled>PowerFlex</option>
+                      <option value="csi-unity" disabled>Unity</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <label for="installation-type" class="col-sm-3 col-form-label">Installation Type</label>
+                  <div class="col-sm-9"></div>
+                  <div class="col-sm-8">
+                    <select id="installation-type" class="form-select" required>
+                      <option value="" selected> Select the Installation type</option>
+                      <option value="helm">Helm</option>
+                      <option value="operator" disabled>Operator</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- main content starts -->
+                <div id="main">
+                  <div class="row mb-4">
+                    <label for="image-repository" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Specify the registry from where the image should be pulled">Image Repository</label>
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-8">
+                      <input class="form-control input-lg" type="text" id="image-repository" placeholder="dellemc" required>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="row mt-1">
+                        <a class="reset" id="reset-image-repository" onclick="resetImageRepository(csmMap)">Reset to default</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <label for="csm-version" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="CSM Version">CSM Version</label>
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-8">
+                      <select id="csm-version" class="form-select" onchange="onCSMVersionChange()" required>
+                        <option value="" selected> Select the CSM version</option>
+                        <option value="1.4.0">CSM 1.4</option>
+                      </select>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row mb-4">
+                    <div class="col-sm-12 h5">Select modules for installation</div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="snapshot" value="" checked>
+                      <label for="snapshot" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable volume snapshot feature">Snapshot</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4 vgsnapshot">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="vgsnapshot" value="">
+                      <label for="vgsnapshot" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable volume-group-snapshot feature">Volume Group Snapshot</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="resizer" value="" checked>
+                      <label for="resizer" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/disable resizer feature">Resizer</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="health-monitor" value="">
+                      <label for="health-monitor" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable health monitor of CSI volumes">Health Monitor</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="replication" value="">
+                      <label for="replication" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable replication feature">Replication</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4 observability">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="observability" value="" onchange="onObservabilityChange()">
+                      <label for="observability" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable observability feature">Observability</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4 observability">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="observability-metrics" value="">
+                      <label for="observability-metrics" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable observability metrics feature">Observability Metrics</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4 app-mobility">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="application-mobility" value="">
+                      <label for="application-mobility" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable application mobility feature">Application Mobility</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4 authorization">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="authorization" value="" onchange="onAuthorizationChange()">
+                      <label for="authorization" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable authorization feature">Authorization</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4 authorization">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="authorization-skip-cert-validation" value="" checked>
+                      <label for="authorization-skip-cert-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="">Authorization Skip Certificate Validation</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="cert-manager-enabled" value="">
+                      <label for="cert-manager-enabled" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable cert manager feature">Cert Manager</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <label for="controller-count" class="col-sm-4 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Defines the number of controller pods to deploy">Controller Pods Count</label>
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-8">
+                      <input class="form-control input-lg" type="number" id="controller-count" min="1" required>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="row mt-1">
+                        <a class="reset" id="reset-controller-count" onclick="resetControllerCount(csmMap)">Reset to default</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4 nodeselector">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="controller-pods-node-selector" value="" onchange="onNodeSelectorChange(nodeSelectorNote, csmMap)">
+                      <label for="controller-pods-node-selector" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable the installation of controller pods on control plane">Install Controller Pods On Control Plane</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4 nodeselector">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="node-pods-node-selector" value="" onchange="onNodeSelectorChange(nodeSelectorNote, csmMap)">
+                      <label for="node-pods-node-selector" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable the installation of node pods on control plane">Install Node Pods On Control Plane</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4 node-sel-attributes">
+                    <div class="col-12 py-2 note">
+                      <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+                      <span id="node-selector-note" class="h6"></span>
+                    </div>
+                  </div>
+                  <div class="row mb-3 node-sel-attributes">
+                    <label for="node-selector-label" class="col-sm-12 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="">Node Selector Label</label>
+                    <div class="col-sm-8">
+                      <input class="form-control input-lg" type="text" id="node-selector-label" required>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="row mt-1">
+                        <a class="reset" id="reset-node-selector-label" onclick="resetNodeSelectorLabel(csmMap)">Reset to default</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4 namespace">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="single-namespace" value="" onchange="singleNamespaceCheck()">
+                      <label for="single-namespace" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Deploy the CSM driver and module in single namespace">Single Namespace</label>
+                    </div>
+                  </div>
+                  <div class="row mb-4 namespace">
+                    <label for="driver-namespace" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the namespace to deploy the CSM driver">Driver Namespace</label>
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-8">
+                      <input class="form-control input-lg" type="text" id="driver-namespace" required>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="row mt-1">
+                        <a class="reset" id="reset-driver-namespace" onclick="resetDriverNamespace(driver)">Reset to default</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4 namespace">
+                    <label for="module-namespace" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the namespace to deploy the CSM module">Module Namespace</label>
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-8">
+                      <input class="form-control input-lg" type="text" id="module-namespace" required>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="row mt-1">
+                        <a class="reset" id="reset-module-namespace" onclick="resetModuleNameSpace(moduleNamespace)">Reset to default</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- main content ends -->
+                </div>
+                <div class="row mb-4">
+                  <div class="col-12 ">
+                    <a class="btn button-primary col-5" id="download-file" download="values.yaml">Generate YAML</a>
+                  </div>
+                </div>
+                <!-- card body ends -->
+              </div>
+              <div class="col-2"></div>
+            </div>
+          </div>
+          <!-- form body ends -->
+        </form>
+        <div class="row mb-4">
+          <div class="col-2"></div>
+          <div class="col-10 card" id="command-text-area" style="width: 100rem;">
+            <div class="row">
+              <div class="col-10 card-body h4" id="command-title"></div>
+              <div class="col-1">
+                <button type="button" class="copy">
+                  <i class="dds__icon dds__icon--copy-alt" style="vertical-align: middle;padding-right: 2px;"></i>
+                  <span id="copy">Copy</span>
+                </button>
+              </div>
+            </div>
+            <div class="mt-3 mx-1 py-2 note">
+              <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+              <span class="h6" id="command-note"></span>
+            </div>
+            <div class="mt-3 mx-1">
+              <span id="command1"></span>
+            </div>
+            <div class="mt-3 mx-1">
+              <span id="command2"></span>
+            </div>
+            <div class="my-3"></div>
+          </div>
+        </div>
+      </main>
+      <footer class="bg-secondary py-5 row d-print-none">
+        <div class="container-fluid mx-sm-5">
+          <div class="row">
+            <div class="col-6 col-sm-4 text-xs-center order-sm-2"></div>
+            <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"></div>
+            <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+              <small class="text-white">&copy; 2022 The Dell Technologies All Rights Reserved</small>
+              <small class="ml-1">
+                <a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank">Privacy Policy</a>
+              </small>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script type="text/javascript" src="static/js/constants.js"></script>
+    <script type="text/javascript" src="static/js/commands.js"></script>
+    <script type="text/javascript" src="static/js/utility.js"></script>
+    <script type="text/javascript" src="static/js/ui-functions.js"></script>
+    <script type="text/javascript">
+      onPageLoad();
+    </script>
+    <script type="text/javascript" src="static/js/generate-yaml.js"></script>
+    <script type="text/javascript">
+      //  Function to validate form
+      (function() {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        forms.style.display = 'none'
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach(function(form) {
+          form.addEventListener('click', function(event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+          }, false)
+        })
+      })();
+    </script>
+  </body>
+</html>
