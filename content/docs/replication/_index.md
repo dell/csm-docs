@@ -19,12 +19,12 @@ CSM for Replication provides the following capabilities:
 | Capability                                                                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
 | ----------------------------------------------------------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
 | Replicate data using native storage array based replication                                                                         |   yes    |    yes     |    yes     |    no     |  no   |
-| Asynchronous file volume replication                                                                                                |   yes    |     no     |    yes     |    no     |  no   |
+| Asynchronous file volume replication                                                                                                |   no    |     no     |    yes     |    no     |  no   |
 | Asynchronous block volume replication                                                                                               |   yes    |    yes     |    n/a     |    no     |  no   |
-| Synchronous file volume replication                                                                                                 |   yes    |     no     |     no     |    no     |  no   |
+| Synchronous file volume replication                                                                                                 |   no    |     no     |     no     |    no     |  no   |
 | Synchronous block volume replication                                                                                                |   yes    |     no     |    n/a     |    no     |  no   |
 | Active-Active (Metro) block volume replication                                                                                      |   yes    |     no     |    n/a     |    no     |  no   |
-| Active-Active (Metro) file volume replication                                                                                       |   yes    |     no     |     no     |    no     |  no   |
+| Active-Active (Metro) file volume replication                                                                                       |   no    |     no     |     no     |    no     |  no   |
 | Create `PersistentVolume` objects in the cluster representing the replicated volume                                                 |   yes    |    yes     |    yes     |    no     |  no   |
 | Create `DellCSIReplicationGroup` objects in the cluster                                                                             |   yes    |    yes     |    yes     |    no     |  no   |
 | Failover & Reprotect applications using the replicated volumes                                                                      |   yes    |    yes     |    yes     |    no     |  no   |
@@ -38,7 +38,7 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS            | PowerMax         | PowerStore       | PowerScale       |
 | ----------------- | ---------------- | ---------------- | ---------------- |
-| Kubernetes        | 1.24, 1.25, 1.26 | 1.22, 1.23, 1.24 | 1.22, 1.23, 1.24 |
+| Kubernetes        | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 |
 | Red Hat OpenShift | 4.10, 4.11       | 4.9, 4.10        | 4.9, 4.10        |
 | RHEL              | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         |
 | CentOS            | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         |
