@@ -5,7 +5,7 @@ description: Container Storage Modules Installation Wizard
 weight: 1
 ---
 
-The [Dell Container Storage Modules Installation Wizard](index.html) is a webpage which generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on the inputs from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download the individual helm charts for driver and modules. User can enable or disable the necessary modules through the UI and a manifest file is generated accordingly, without manually editing the helm charts. 
+The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a webpage which generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on the inputs from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download the individual helm charts for driver and modules. User can enable or disable the necessary modules through the UI and a manifest file is generated accordingly, without manually editing the helm charts. 
 
 >NOTE: CSM Installation Wizard currently supports Helm based manifest file generation only. 
 
@@ -28,7 +28,7 @@ The [Dell Container Storage Modules Installation Wizard](index.html) is a webpag
 
 ## Installation
 
-1. Open the [CSM Installation Wizard](index.html).
+1. Open the [CSM Installation Wizard](./src/index.html).
 2. Select the `Array`.
 3. Select the `Helm` as `Installation Type`.
 4. Enter the `Image Repository`. Default is `dellemc`.
