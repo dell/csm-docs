@@ -12,12 +12,28 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 ### Upgrading CSM for Authorization proxy server
 
-Obtain the latest single binary installer RPM by following one of our two options [here](../deployment/#single-binary-installer). 
+Obtain the latest single binary installer RPM by following one of our two options [here](../deployment/#single-binary-installer).
+
+To upgrade from previous versions to version 1.6.0, the traefik helm chart should be removed first:
+
+```
+k3s kubectl -n kube-system delete helmcharts.helm.cattle.io traefik
+```
 
 To update the rpm package on the system, run the below command from within the extracted folder:
 
 ```
 sh install_karavi_auth.sh --upgrade
+```
+
+As an option, on version 1.6.0, the Nodeports for traefik service can be specified:
+
+```
+sh install_karavi_auth.sh --upgrade  --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+
+Ex.:
+
+sh install_karavi_auth.sh --upgrade  --traefik_web_port 30001 --traefik_websecure_port 30002
 ```
 
 To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:
