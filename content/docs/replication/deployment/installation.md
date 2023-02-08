@@ -75,8 +75,7 @@ The following CSI drivers support replication:
 1. CSI driver for PowerMax
 2. CSI driver for PowerStore
 3. CSI driver for PowerScale
-4. CSI driver for Unity XT
-5. CSI driver for PowerFlex
+4. CSI driver for PowerFlex
 
 Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../powerstore), [PowerScale](../powerscale), or [PowerFlex](../powerflex) pages during the driver installation.
 

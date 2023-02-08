@@ -20,14 +20,14 @@ to do the steps described in the following sections.
 
 Be sure to configure replication between multiple PowerFlex instances using instructions provided by PowerFlex storage.
 
-You can ensure that you configured remote systems by navigating to the `Protection` tab and choosing `Peer Systems` in the UI of your PowerFlex instance.
+Ensure that the remote systems are configured by navigating to the `Protection` tab and choosing `Peer Systems` in the UI of the PowerFlex instance.
 
-You should see a list of remote systems with the `State` fields set to `Connected`.
+There should be a list of remote systems with the `State` fields set to `Connected`.
 
 #### In Kubernetes
 Ensure you installed CRDs and replication controller in your clusters.
 
-To verify you have everything in order you can execute the following commands:
+Run the following commands to verify that everything is installed correctly:
 
 * Check controller pods
     ```shell
@@ -53,13 +53,13 @@ To install the driver with replication enabled, you need to ensure you have set
 helm parameter `replication.enabled` in your copy of example `values.yaml` file
 (usually called `my-powerflex-settings.yaml`, `myvalues.yaml` etc.).
 
-Here is an example of how that would look like
+Here is an example of how that would look
 ```yaml
 ...
 # Set this to true to enable replication
 replication:
   enabled: true
-  image: dellemc/dell-csi-replicator:v1.0.0
+  image: dellemc/dell-csi-replicator:v1.2.0
   replicationContextPrefix: "powerflex"
   replicationPrefix: "replication.storage.dell.com"
 ...
@@ -96,7 +96,7 @@ kind: StorageClass
 metadata:
   name: vxflexos-replication
 provisioner: csi-vxflexos.dellemc.com
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 allowVolumeExpansion: true
 volumeBindingMode: Immediate
 parameters:
@@ -109,6 +109,9 @@ parameters:
   replication.storage.dell.com/volumeGroupPrefix: "csi"
   replication.storage.dell.com/consistencyGroupName: <desiredConsistencyGroupName>
   replication.storage.dell.com/protectionDomain: <remoteProtectionDomain>
+  systemID: <sourceSystemID>
+  storagepool: <sourceStoragePool>
+  protectiondomain: <sourceProtectionDomain>
 ```
 
 Let's go through each parameter and what it means:
@@ -122,6 +125,8 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/remoteSystem` is the name of the remote system
   as seen from the current PowerFlex instance. This parameter is the systemID of
   the array.
+* `replication.storage.dell.com/remoteStoragePool` is the name of the storage
+  pool on the remote system to be used for creating the remote volumes.
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is
   measured in units of time, that may be lost due to a failure.
 * `replication.storage.dell.com/volumeGroupPrefix` represents what string would
@@ -131,8 +136,12 @@ Let's go through each parameter and what it means:
   driver will generate a name for the consistency group.
 * `replication.storage.dell.com/protectionDomain` represents the remote array's
   protection domain to use.
+* `systemID` represents the systemID of the PowerFlex array.
+* `storagepool` represents the name of the storage pool to be used on the
+  PowerFlex array.
+* `protectiondomain` represents the array's protection domain to be used.
 
-Let's follow up that with an example, let's assume we have two Kubernetes
+Let's follow up that with an example. Let's assume we have two Kubernetes
 clusters and two PowerFlex storage arrays:
 * Clusters have IDs of `cluster-1` and `cluster-2`
 * Cluster `cluster-1` connected to array `000000000001`
@@ -140,7 +149,7 @@ clusters and two PowerFlex storage arrays:
 * For `cluster-1` we plan to use storage pool `pool1` and protection domain `domain1`
 * For `cluster-2` we plan to use storage pool `pool1` and protection domain `domain1`
 
-And this how would our pair of storage classes would look like:
+And this is how our pair of storage classes would look:
 
 StorageClass to be created in `cluster-1`:
 ```yaml
@@ -162,6 +171,8 @@ parameters:
   replication.storage.dell.com/rpo: 60
   replication.storage.dell.com/volumeGroupPrefix: "csi"
   arrayID: "000000000001"
+  storagepool: "pool1"
+  protectiondomain: "domain1"
 ```
 
 StorageClass to be created in `cluster-2`:
@@ -184,6 +195,8 @@ parameters:
   replication.storage.dell.com/rpo: 60
   replication.storage.dell.com/volumeGroupPrefix: "csi"
   arrayID: "000000000002"
+  storagepool: "pool1"
+  protectiondomain: "domain1"
 ```
 
 After figuring out how storage classes would look, you just need to go and apply
@@ -203,8 +216,8 @@ copy it, and modify it to your needs.
 If you open this example you can see a lot of similar fields and parameters you
 can modify in the storage class.
 
-Let's use the same example from manual installation and see how the config would
-look like
+Let's use the same example from the manual installation and see how the config would
+look
 ```yaml
 sourceClusterID: "cluster-1"
 targetClusterID: "cluster-2"
