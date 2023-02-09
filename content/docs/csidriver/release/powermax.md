@@ -3,15 +3,14 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.5.0
+## Release Notes - CSI PowerMax v2.6.0
 
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
 ### New Features/Changes
-- [Added support for Kubernetes 1.26.](https://github.com/dell/csm/issues/597)
-
->Note: Replication for PowerMax is supported in Kubernetes 1.26.
->Replication is not supported with VMware/Vsphere virtualization support.
+- [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
+- [Added support to clone the replicated volumes](https://github.com/dell/csm/issues/646)
+- [Added support to restore the snapshot of metro volumes](https://github.com/dell/csm/issues/652)
 
 ### Fixed Issues
 There are no fixed issues in this release.
