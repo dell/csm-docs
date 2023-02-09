@@ -161,13 +161,13 @@ metadata:
   namespace: test-vxflexos
 spec:
   driver:
-    configVersion: v2.5.0
+    configVersion: v2.6.0
     replicas: 1
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     fsGroupPolicy: File
     common:
-      image: "dellemc/csi-vxflexos:v2.5.0"
+      image: "dellemc/csi-vxflexos:v2.6.0"
       imagePullPolicy: IfNotPresent
       envs:
         - name: X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT
