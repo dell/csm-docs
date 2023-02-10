@@ -665,7 +665,7 @@ Once the volume gets created, the ControllerPublishVolume will set the QoS limit
 
 ## Rename SDC
 
-Starting in version 2.6, CSI Driver for PowerFlex now supports renaming of SDC. To use this feature, the node section of values.yaml should have renameSDC keys enabled with a prefix value. 
+Starting in version 2.6, the CSI Driver for PowerFlex now supports renaming of SDC. To use this feature, the node section of values.yaml should have renameSDC keys enabled with a prefix value.
 
 ```yaml
 # "node" allows to configure node specific parameters
@@ -688,7 +688,7 @@ node:
     # Examples: "rhel-sdc", "sdc-test"
     prefix: "sdc-test"
 ```
-The renameSDC section is going to be used by the Node Service, it has two keys enabled and prefix,
+The renameSDC section is going to be used by the Node Service, it has two keys enabled and prefix:
 * `enabled`: Boolean variable that specifies if the renaming for SDC is to be carried out or not. Is true then the driver will perform the rename operation. By default, its value will be false.
 * `prefix`: string variable that is used to set the prefix for SDC name.
 
@@ -696,11 +696,11 @@ Now based on these two keys, there are certain scenarios on which the driver is 
 * If enabled and prefix given then set the prefix+worker_node_name for SDC name.
 * If enabled and prefix not given then set worker_node_name for SDC name.
 
-> NOTE: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length do not exceed 31 character limit. 
+> NOTE: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
 
 ## Pre-approving SDC by GUID
 
-Starting in version 2.6, CSI Driver for PowerFlex now supports renaming the SDCs.
+Starting in version 2.6, the CSI Driver for PowerFlex now supports renaming the SDCs.
 CSI PowerFlex driver should be able to detect/read the SDC mode from the PowerFlex array and determine whether requests for SDC approval be made to the array prior to publishing a volume. This is specific to each SDC.
 
 ```yaml
