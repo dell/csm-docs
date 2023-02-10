@@ -662,3 +662,62 @@ allowedTopologies:
           - csi-vxflexos.dellemc.com
 ```
 Once the volume gets created, the ControllerPublishVolume will set the QoS limits for the volumes mapped to SDC.
+
+## Rename SDC
+
+Starting in version 2.6, CSI Driver for PowerFlex now supports renaming of SDC. To use this feature, the node section of values.yaml should have renameSDC keys enabled with a prefix value. 
+
+```yaml
+# "node" allows to configure node specific parameters
+node:
+   ...
+   ...
+
+  # "renameSDC" defines the rename operation for SDC
+  # Default value: None
+  renameSDC:
+    # enabled: Enable/Disable rename of SDC
+    # Allowed values:
+    #   true: enable renaming
+    #   false: disable renaming
+    # Default value: "false"
+    enabled: false
+    # "prefix" defines a string for the new name of the SDC.
+    # "prefix" + "worker_node_hostname" should not exceed 31 chars.
+    # Default value: none
+    # Examples: "rhel-sdc", "sdc-test"
+    prefix: "sdc-test"
+```
+The renameSDC section is going to be used by the Node Service, it has two keys enabled and prefix,
+* `enabled`: Boolean variable that specifies if the renaming for SDC is to be carried out or not. Is true then the driver will perform the rename operation. By default, its value will be false.
+* `prefix`: string variable that is used to set the prefix for SDC name.
+
+Now based on these two keys, there are certain scenarios on which the driver is going to perform the rename SDC operation:
+* If enabled and prefix given then set the prefix+worker_node_name for SDC name.
+* If enabled and prefix not given then set worker_node_name for SDC name.
+
+> NOTE: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length do not exceed 31 character limit. 
+
+## Pre-approving SDC by GUID
+
+Starting in version 2.6, CSI Driver for PowerFlex now supports renaming the SDCs.
+CSI PowerFlex driver should be able to detect/read the SDC mode from the PowerFlex array and determine whether requests for SDC approval be made to the array prior to publishing a volume. This is specific to each SDC.
+
+```yaml
+# "node" allows to configure node specific parameters
+node:
+  ...
+  ...
+
+  # "approveSDC" defines the approve operation for SDC
+  # Default value: None
+  approveSDC:
+    # enabled: Enable/Disable SDC approval
+    #Allowed values:
+    #  true: Driver will attempt to approve restricted SDC by GUID during setup
+    #  false: Driver will not attempt to approve restricted SDC by GUID during setup
+    # Default value: false
+    enabled: false
+```
+
+If SDC approval is denied, then provisioning of the volume should not be attempted and the appropriate error message is reported in the logs/events so the user is informed.
