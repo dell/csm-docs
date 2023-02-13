@@ -203,6 +203,10 @@ Use the below command to replace or update the secret:
 | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | nodeSelector | Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
 | tolerations | Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
+| **renameSDC** | This section allows the rename operation for SDC. | - | - |
+| enabled | A boolean that enable/disable rename SDC feature. | No | false |
+| prefix | Defines a string for the prefix of the SDC. | No | " " |
+| approveSDC.enabled | A boolean that enable/disable SDC approval feature. | No | false |
 | **monitor**              | This section allows the configuration of the SDC monitoring pod.                                                                                                                                                                                                                                                                                                                                                  | -        | -       |
 | enabled                  | Set to enable the usage of the monitoring pod.                                                                                                                                                                                                                                                                                                                                                                | Yes     | false |
 | hostNetwork              | Set whether the monitor pod should run on the host network or not.                                                                                                                                                                                                                                                                                                                                            | Yes     | true |

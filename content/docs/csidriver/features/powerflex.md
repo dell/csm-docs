@@ -700,7 +700,7 @@ Now based on these two keys, there are certain scenarios on which the driver is 
 
 ## Pre-approving SDC by GUID
 
-Starting in version 2.6, the CSI Driver for PowerFlex now supports renaming the SDCs.
+Starting in version 2.6, the CSI Driver for PowerFlex now supports pre-approving SDC by GUID.
 CSI PowerFlex driver should be able to detect/read the SDC mode from the PowerFlex array and determine whether requests for SDC approval be made to the array prior to publishing a volume. This is specific to each SDC.
 
 ```yaml
