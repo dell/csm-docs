@@ -43,5 +43,15 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 13. Manifest file `values.yaml` will be generated and downloaded. 
 14. Follow the steps in `Run the following commands to install` section to install Dell CSI Driver and Modules using the generated manifest file. 
 
+## Install Helm Chart
 
+**Steps**
+
+1. Add the Dell Helm Charts repo `helm repo add dell https://dell.github.io/helm-charts`
+
+2. Copy the downloaded values.yaml file. 
+
+3. Look over all the fields in the generated `values.yaml` and fill in/adjust any as needed.
+
+Please follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [Authorization](../../authorization/), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/deployment.md), and [Application Mobility](../../applicationmobility/) to configure additional parameters in values.yaml.
 
