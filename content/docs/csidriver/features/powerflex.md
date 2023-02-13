@@ -667,7 +667,7 @@ Once the volume gets created, the ControllerPublishVolume will set the QoS limit
 
 Starting in version 2.6, the CSI Driver for PowerFlex now supports renaming of SDC. To use this feature, the node section of values.yaml should have renameSDC keys enabled with a prefix value.
 
-If you want to rename the SDC, please make the following edits to your values file at `yaml csi-vxflexos/helm/csi-vxflexos/values.yaml:`
+If you want to rename the SDC, please make the following edits to your values file at `csi-vxflexos/helm/csi-vxflexos/values.yaml:`
 ```yaml
 # "node" allows to configure node specific parameters
 node:
@@ -704,7 +704,7 @@ Now based on these two keys, there are certain scenarios on which the driver is 
 Starting in version 2.6, the CSI Driver for PowerFlex now supports pre-approving SDC by GUID.
 CSI PowerFlex driver should be able to detect/read the SDC mode from the PowerFlex array and determine whether requests for SDC approval be made to the array prior to publishing a volume. This is specific to each SDC.
 
-If you want to get the SDC pre-approved by GUID, please make the following edits to your values file at `yaml csi-vxflexos/helm/csi-vxflexos/values.yaml:`
+If you want to get the SDC pre-approved by GUID, please make the following edits to your values file at `csi-vxflexos/helm/csi-vxflexos/values.yaml:`
 ```yaml
 # "node" allows to configure node specific parameters
 node:
