@@ -667,7 +667,7 @@ Once the volume gets created, the ControllerPublishVolume will set the QoS limit
 
 Starting in version 2.6, the CSI Driver for PowerFlex now supports renaming of SDC. To use this feature, the node section of values.yaml should have renameSDC keys enabled with a prefix value.
 
-If you want to rename the SDC, please make the following edits to your values file at `csi-vxflexos/helm/csi-vxflexos/values.yaml:`
+If you want to rename the SDC, please make the following edits to your [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
 ```yaml
 # "node" allows to configure node specific parameters
 node:
@@ -690,7 +690,7 @@ node:
     prefix: "sdc-test"
 ```
 The renameSDC section is going to be used by the Node Service, it has two keys enabled and prefix:
-* `enabled`: Boolean variable that specifies if the renaming for SDC is to be carried out or not. Is true then the driver will perform the rename operation. By default, its value will be false.
+* `enabled`: Boolean variable that specifies if the renaming for SDC is to be carried out or not. If true then the driver will perform the rename operation. By default, its value will be false.
 * `prefix`: string variable that is used to set the prefix for SDC name.
 
 Now based on these two keys, there are certain scenarios on which the driver is going to perform the rename SDC operation:
@@ -704,7 +704,7 @@ Now based on these two keys, there are certain scenarios on which the driver is 
 Starting in version 2.6, the CSI Driver for PowerFlex now supports pre-approving SDC by GUID.
 CSI PowerFlex driver should be able to detect/read the SDC mode from the PowerFlex array and determine whether requests for SDC approval be made to the array prior to publishing a volume. This is specific to each SDC.
 
-If you want to get the SDC pre-approved by GUID, please make the following edits to your values file at `csi-vxflexos/helm/csi-vxflexos/values.yaml:`
+If you want to get the SDC pre-approved by GUID, please make the following edits to your [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
 ```yaml
 # "node" allows to configure node specific parameters
 node:
@@ -723,4 +723,4 @@ node:
 ```
 > NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
 
-If SDC approval is denied, then provisioning of the volume should not be attempted and the appropriate error message is reported in the logs/events so the user is informed.
+If SDC approval is denied, then provisioning of the volume should not be attempted and an appropriate error message is reported in the logs/events so the user is informed.
