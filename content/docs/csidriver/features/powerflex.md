@@ -693,7 +693,7 @@ The renameSDC section is going to be used by the Node Service, it has two keys e
 * `enabled`: Boolean variable that specifies if the renaming for SDC is to be carried out or not. If true then the driver will perform the rename operation. By default, its value will be false.
 * `prefix`: string variable that is used to set the prefix for SDC name.
 
-Now based on these two keys, there are certain scenarios on which the driver is going to perform the rename SDC operation:
+Based on these two keys, there are certain scenarios on which the driver is going to perform the rename SDC operation:
 * If enabled and prefix given then set the prefix+worker_node_name for SDC name.
 * If enabled and prefix not given then set worker_node_name for SDC name.
 
