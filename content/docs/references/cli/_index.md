@@ -30,10 +30,11 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
 | [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
+| [dellctl volume list](#dellctl-volume-list) | Lists metadata for local volumes on cluster |
 
 
 ## Installation instructions
-1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.4.0).
+1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.5.1).
 2. chmod +x dellctl
 3. Move `dellctl` to `/usr/local/bin` or add `dellctl`'s containing directory path to PATH environment variable.
 4. Run `dellctl --help` to know available commands or run `dellctl command --help` to know more about a specific command.
@@ -781,4 +782,30 @@ Encryption rekey status with name of the rekey object
 ```
 # dellctl encryption rekey-status myrekey
  INFO Status of rekey request myrekey = completed
+```
+### dellctl volume list
+
+Lists metadata for local volumes on cluster
+
+##### Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for list
+      --insecure string     TLS transaction to use InsecureSkipVerify
+      --namespace string    driver namespace to use
+      --proxy string        auth proxy endpoint to use
+```
+
+##### Output
+
+Retrieve volume list metadata filtered on proxy, insecure, and namespace designations
+
+```
+# dellctl volume list --proxy https://lglap124.hop.lab.emc.com/proxy/volumes --insecure true --namespace vxflexos
+NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE
+k8s-0325497cd7   a69b554f00000004   8.000000   mypool   636468e3638c840f   k8s-0325497cd7   released    vxflexos        vol-create-test-cthdf   replication-suite-fe2eac41
+k8s-a0c031582b   a69b555000000005   8.000000   mypool   636468e3638c840f   k8s-a0c031582b   released    vxflexos        vol-create-test-nqfwz   replication-suite-fe2eac41
+k8s-3908a6954f   a69b555100000006   8.000000   mypool   636468e3638c840f   k8s-3908a6954f   released    vxflexos        vol-create-test-4flg5   replication-suite-fe2eac41
+k8s-28e4184f41   a69b554e00000003   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   released    vxflexos        vol-create-test-nnvxf   replication-suite-fe2eac41
 ```
