@@ -152,7 +152,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
 
 **Optional:**
-To enable reporting of trace data with [Zipkin](https://zipkin.io/), this can be achieved through the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
+To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
 
   Add the Zipkin values to the configMap:
   ```
