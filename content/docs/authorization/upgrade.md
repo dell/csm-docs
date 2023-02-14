@@ -14,19 +14,13 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 Obtain the latest single binary installer RPM by following one of our two options [here](../deployment/#single-binary-installer).
 
-To upgrade from previous versions to version 1.6.0, the traefik helm chart should be removed first:
-
-```
-k3s kubectl -n kube-system delete helmcharts.helm.cattle.io traefik
-```
-
 To update the rpm package on the system, run the below command from within the extracted folder:
 
 ```
 sh install_karavi_auth.sh --upgrade
 ```
 
-As an option, on version 1.6.0, the Nodeports for traefik service can be specified:
+As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:
 
 ```
 sh install_karavi_auth.sh --upgrade  --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
