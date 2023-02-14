@@ -39,7 +39,7 @@ CSM for Replication provides the following capabilities:
 | COP/OS            | PowerMax         | PowerStore       | PowerScale       | PowerFlex        |
 | ----------------- | ---------------- | ---------------- | ---------------- | ---------------- |
 | Kubernetes        | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 |
-| Red Hat OpenShift | 4.10, 4.11       | 4.9, 4.10        | 4.9, 4.10        | 4.9, 4.10        |
+| Red Hat OpenShift | 4.10, 4.11       | 4.9, 4.10        | 4.9, 4.10        | 4.10, 4.11       |
 | RHEL              | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         |
 | CentOS            | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         |
 | Ubuntu            | 20.04            | 20.04            | 20.04            | 20.04            |
@@ -51,7 +51,7 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               |                                                 PowerMax                                                 |     PowerStore      |             PowerScale             | PowerFlex |
 | ------------- | :------------------------------------------------------------------------------------------------------: | :-----------------: | :--------------------------------: | :-------: |
-| Storage Array | PowerMax 2000/8000 <br> PowerMax 2500/8500 <br> 5978.479.479, 5978.711.711, 6079.xxx.xxx, Unisphere 10.0 | 1.0.x, 2.0.x, 2.1.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 3.6       |
+| Storage Array | PowerMax 2000/8000 <br> PowerMax 2500/8500 <br> 5978.479.479, 5978.711.711, 6079.xxx.xxx, Unisphere 10.0 | 1.0.x, 2.0.x, 2.1.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 3.6.x, 4.0       |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -93,7 +93,7 @@ The following matrix provides a list of all supported versions for each Dell Sto
 | Platforms        | PowerMax                       | PowerStore       | PowerScale       | PowerFlex        |
 | ---------------- | ------------------------------ | ---------------- | ---------------- | ---------------- |
 | Kubernetes       | 1.24, 1.25, 1.26               | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 |
-| RedHat Openshift | 4.10, 4.11                     | 4.9, 4.10        | 4.9, 4.10        | 4.9, 4.10        |
+| RedHat Openshift | 4.10, 4.11                     | 4.9, 4.10        | 4.9, 4.10        | 4.10, 4.11       |
 | CSI Driver       | 2.x(k8s), <br> 2.2+(OpenShift) | 2.x              | 2.2+             | 2.6+             |
 
 For compatibility with storage arrays please refer to corresponding [CSI drivers](../csidriver/#features-and-capabilities)
