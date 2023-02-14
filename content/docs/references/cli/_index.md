@@ -30,7 +30,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
 | [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
-| [dellctl volume list](#dellctl-volume-list) | Lists metadata for local volumes on cluster |
+| [dellctl volume list](#dellctl-volume-list) | Lists local volumes metadata for a given tenant |
 
 
 ## Installation instructions
