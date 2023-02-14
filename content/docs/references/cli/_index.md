@@ -785,7 +785,7 @@ Encryption rekey status with name of the rekey object
 ```
 ### dellctl volume list
 
-Lists metadata for local volumes on cluster
+Lists local volumes metadata for a given tenant. 
 
 ##### Flags
 
@@ -793,19 +793,19 @@ Lists metadata for local volumes on cluster
       --cluster-id string   Id of the cluster managed by dellctl
   -h, --help                help for list
       --insecure string     TLS transaction to use InsecureSkipVerify
-      --namespace string    driver namespace to use
+      --namespace string    namespace of the secret for the given tenant
       --proxy string        auth proxy endpoint to use
 ```
 
 ##### Output
 
-Retrieve volume list metadata filtered on proxy, insecure, and namespace designations
+Retrieve volume list metadata for a given tenant. The namespace is used to designate where the tenant has given it's secret token. 
 
 ```
-# dellctl volume list --proxy https://lglap124.hop.lab.emc.com/proxy/volumes --insecure true --namespace vxflexos
+# dellctl volume list --proxy <proxy.dell.com> --namespace vxflexos
 NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE
 k8s-0325497cd7   a69b554f00000004   8.000000   mypool   636468e3638c840f   k8s-0325497cd7   released    vxflexos        vol-create-test-cthdf   replication-suite-fe2eac41
 k8s-a0c031582b   a69b555000000005   8.000000   mypool   636468e3638c840f   k8s-a0c031582b   released    vxflexos        vol-create-test-nqfwz   replication-suite-fe2eac41
 k8s-3908a6954f   a69b555100000006   8.000000   mypool   636468e3638c840f   k8s-3908a6954f   released    vxflexos        vol-create-test-4flg5   replication-suite-fe2eac41
-k8s-28e4184f41   a69b554e00000003   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   released    vxflexos        vol-create-test-nnvxf   replication-suite-fe2eac41
+k8s-28e4184f41   a69b554e00000003   8.000000   mypool   636468e3638c840f   none             none        none            none                    none
 ```
