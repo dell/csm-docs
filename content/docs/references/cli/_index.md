@@ -799,7 +799,7 @@ Lists local volumes metadata for a given tenant.
 
 ##### Output
 
-Retrieve volume list metadata for a given tenant. The namespace is used to designate where the tenant has given it's secret token. 
+Retrieve volume list metadata for a given tenant. The namespace is the namespace where tenant secret is created. 
 
 ```
 # dellctl volume list --proxy <proxy.dell.com> --namespace vxflexos
