@@ -31,7 +31,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
 | [dellctl images](#dellctl-images) | List the container images needed by csi driver |
-| [dellctl volume list](#dellctl-volume-list) | Lists local volumes metadata for a given tenant |
+| [dellctl volume list](#dellctl-volume-list) | Lists PowerFlex volume infomation for a given tenant on a local cluster |
 
 
 ## Installation instructions
@@ -847,16 +847,16 @@ Lists metadata on local PowerFlex volumes for a given tenant.
 ##### Flags
 
 ```
-      --cluster-id string   Id of the cluster managed by dellctl
-  -h, --help                help for list
-      --insecure string     TLS transaction to use InsecureSkipVerify
-      --namespace string    namespace of the secret for the given tenant
-      --proxy string        auth proxy endpoint to use
+      --cluster-id string              Id of the cluster managed by dellctl
+  -h, --help                           help for list
+      --insecure optionalBool[=true]   whether to skip certificate validation
+      --namespace string               namespace of the secret for the given tenant
+      --proxy string                   auth proxy endpoint to use
 ```
 
 ##### Output
 
-Retrieve volume list metadata for a given tenant. The namespace is the namespace where tenant secret is created. 
+Lists PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
 
 ```
 # dellctl volume list --proxy <proxy.dell.com> --namespace vxflexos
