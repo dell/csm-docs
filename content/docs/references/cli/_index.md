@@ -842,7 +842,7 @@ dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.
 
 ### dellctl volume list
 
-Lists metadata on local PowerFlex volumes for a given tenant. 
+Lists PowerFlex volume infomation for a given tenant on a local cluster
 
 ##### Flags
 
