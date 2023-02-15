@@ -80,7 +80,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 ## CSM Modules Support Matrix for Dell CSI Drivers 
 
-| CSM Module                                                  | CSI PowerFlex v2.5.0 | CSI PowerScale v2.5.0 | CSI PowerStore v2.5.0 | CSI PowerMax v2.5.0 | CSI Unity XT v2.5.0 |
+| CSM Module                                                  | CSI PowerFlex v2.5.0 | CSI PowerScale v2.5.0 | CSI PowerStore v2.5.1 | CSI PowerMax v2.5.0 | CSI Unity XT v2.5.0 |
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
 | [**Authorization**](authorization/) v1.5                    | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
 | [**Observability**](observability/) v1.4                    | ✔️                    | ✔️                     | ✔️                     | ❌                   | ❌                   |
