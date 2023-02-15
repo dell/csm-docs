@@ -31,7 +31,7 @@ On PowerScale systems, an additional step is needed when upgrading to CSM Replic
 
 1. Log in to the target PowerScale array. 
 2. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab.
-3. Delete all disabled SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format `<prefix>-<kubernetes namespace>-<IP of replication destination>-<RPO duration>`.
+3. Delete disabled, target-side SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format `<prefix>-<kubernetes namespace>-<IP of replication destination>-<RPO duration>`.
 
 ## Updating CSM Replication controller
 
