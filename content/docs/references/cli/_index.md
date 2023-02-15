@@ -837,6 +837,7 @@ dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.
                                                                         k8s.gcr.io/sig-storage/csi-resizer:v1.4.0
                                                                         k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
                                                                         dellemc/sdc:3.6.0.6
+```
 
 
 ### dellctl volume list
