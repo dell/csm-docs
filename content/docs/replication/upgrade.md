@@ -27,11 +27,11 @@ To upgrade the CSM Replication sidecar that is installed along with the driver, 
 
 ### PowerScale
 
-On PowerScale systems, an additional step is needed when upgrading to CSM v1.6 or later. Because the SyncIQ policy created on the target-side storage array is no longer used, it must be deleted for any existing replication groups after performing the upgrade to the CSM Replication sidecar and PowerScale CSI driver. These steps should be performed before the replication groups are used with the new version of the CSI driver. Until this step is performed, Replication Groups created on CSM v1.5 will display an UNKNOWN link state in CSM v1.6.
+On PowerScale systems, an additional step is needed when upgrading to CSM Replication v1.4.0 or later. Because the SyncIQ policy created on the target-side storage array is no longer used, it must be deleted for any existing `DellCSIReplicationGroup` objects after performing the upgrade to the CSM Replication sidecar and PowerScale CSI driver. These steps should be performed before the `DellCSIReplicationGroup` objects are used with the new version of the CSI driver. Until this step is performed, existing `DellCSIReplicationGroup` objects will display an UNKNOWN link state.
 
 1. Log in to the target PowerScale array. 
 2. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab.
-3. Delete all disabled, target-side SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format `<prefix>-<kubernetes namespace>-<IP of replication destination>-<RPO duration>`.
+3. Delete all disabled SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format `<prefix>-<kubernetes namespace>-<IP of replication destination>-<RPO duration>`.
 
 ## Updating CSM Replication controller
 
@@ -59,6 +59,6 @@ This option will only work if you have previously installed replication with hel
 
 ### Replication CRD version update
 
-CRD `dellcsireplicationgroups.replication.storage.dell.com` has been updated to version `v1` in CSM 1.6. To facilitate the continued use of existing `DellCSIReplicationGroup` CR objects after upgrading to CSM 1.6 or later, an `init container` will be deployed during upgrade. The `init container` updates the existing CRs with necessary steps for their continued use.
+CRD `dellcsireplicationgroups.replication.storage.dell.com` has been updated to version `v1` in CSM Replication v1.4.0. To facilitate the continued use of existing `DellCSIReplicationGroup` CR objects after upgrading to CSM Replication v1.4.0 or later, an `init container` will be deployed during upgrade. The `init container` updates the existing CRs with necessary steps for their continued use.
 
 > Note: Do not update the CRD as part of upgrade. The `init container` takes care of updating existing CRD and CR versions.
