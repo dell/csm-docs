@@ -785,7 +785,7 @@ Encryption rekey status with name of the rekey object
 ```
 ### dellctl volume list
 
-Lists local volumes metadata for a given tenant. 
+Lists metadata on local PowerFlex volumes for a given tenant. 
 
 ##### Flags
 
