@@ -847,7 +847,6 @@ Lists PowerFlex volume infomation for a given tenant on a local cluster
 ##### Flags
 
 ```
-      --cluster-id string              Id of the cluster managed by dellctl
   -h, --help                           help for list
       --insecure optionalBool[=true]   whether to skip certificate validation
       --namespace string               namespace of the secret for the given tenant
