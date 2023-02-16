@@ -118,6 +118,10 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/548&#34;&gt;Volume Attachment failure due to WWN mismatch&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Please upgrade the driver to 2.5.0+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;Unable to update Host: A problem occurred modifying the host resource&lt;/td&gt;
 &lt;td&gt;This issue occurs when the nodes do not have unique hostnames or when an IP address/FQDN with same sub-domains are used as hostnames. The workaround is to use unique hostnames or FQDN with unique sub-domains&lt;/td&gt;
 &lt;/tr&gt;
