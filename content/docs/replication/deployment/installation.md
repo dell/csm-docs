@@ -44,7 +44,7 @@ git clone github.com/dell/csm-replication
 cd csm-replication
 kubectl create ns dell-replication-controller
 # Copy and  modify values.yaml file if you wish to customize your deployment in any way
-cp ../helm/csm-replication/values.yaml ./myvalues.yaml
+cp ./helm/csm-replication/values.yaml ./myvalues.yaml
 bash scripts/install.sh --values ./myvalues.yaml
 ```
 >Note: Current installation method allows you to specify custom `<FQDN>:<IP>` entries to be appended to controller's `/etc/hosts` file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server's address.
