@@ -860,8 +860,8 @@ Lists PowerFlex volume infomation for a given tenant on a local cluster. The nam
 ```
 # dellctl volume list --proxy <proxy.dell.com> --namespace vxflexos
 NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE
-k8s-0325497cd7   a69b554f00000004   8.000000   mypool   636468e3638c840f   k8s-0325497cd7   released    vxflexos        vol-create-test-cthdf   replication-suite-fe2eac41
-k8s-a0c031582b   a69b555000000005   8.000000   mypool   636468e3638c840f   k8s-a0c031582b   released    vxflexos        vol-create-test-nqfwz   replication-suite-fe2eac41
-k8s-3908a6954f   a69b555100000006   8.000000   mypool   636468e3638c840f   k8s-3908a6954f   released    vxflexos        vol-create-test-4flg5   replication-suite-fe2eac41
+k8s-0325497cd7   a69b554f00000004   8.000000   mypool   636468e3638c840f   k8s-0325497cd7   Released    vxflexos        vol-create-test-cthdf   replication-suite-fe2eac41
+k8s-a0c031582b   a69b555000000005   8.000000   mypool   636468e3638c840f   k8s-a0c031582b   Released    vxflexos        vol-create-test-nqfwz   replication-suite-fe2eac41
+k8s-3908a6954f   a69b555100000006   8.000000   mypool   636468e3638c840f   k8s-3908a6954f   Released    vxflexos        vol-create-test-4flg5   replication-suite-fe2eac41
 k8s-28e4184f41   a69b554e00000003   8.000000   mypool   636468e3638c840f   none             none        none            none                    none
 ```
