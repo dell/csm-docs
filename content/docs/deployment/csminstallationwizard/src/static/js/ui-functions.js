@@ -19,6 +19,11 @@ var driver = "";
 var driverNamespace = "";
 var moduleNamespace = "csm-module";
 
+const setupTooltipStyle = () => {
+	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+	[...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+};
+
 function onArrayChange() {
 	$('#array').on('change', function() {
 		$("#command-text-area").hide();
@@ -31,30 +36,72 @@ function onArrayChange() {
 		document.getElementById("module-namespace").value = moduleNamespace;
 		$(".namespace").show();
 		loadCSMVersions(document.getElementById("csm-version").value);
+		onObservabilityChange();
+		onAuthorizationChange();
+		onAppMobilityChange(veleroNote);
+		onResiliencyChange(podmonNote);
+		onSnapshotChange(snapshotNote);
+		onVSphereChange();
+		validateInput(validateForm, CONSTANTS);
 	});
 }
 
 function onAuthorizationChange() {
 	if ($("#authorization").prop('checked') === true) {
-		$('label[for=authorization-skip-cert-validation], input#authorization-skip-cert-validation').show();
+		$('div#authorization-skip-cert-validation-wrapper').show();
 	} else {
-		$('label[for=authorization-skip-cert-validation], input#authorization-skip-cert-validation').hide();
+		$('div#authorization-skip-cert-validation-wrapper').hide();
 	}
 }
 
 function onObservabilityChange() {
 	if ($("#observability").prop('checked') === true) {
-		$('label[for=observability-metrics], input#observability-metrics').show();
+		$('div#observability-metrics-wrapper').show();
 	} else {
-		$('label[for=observability-metrics], input#observability-metrics').hide();
+		$('div#observability-metrics-wrapper').hide();
+	}
+}
+
+function onAppMobilityChange(veleroNoteValue) {
+	if ($("#application-mobility").prop('checked') === true) {
+		$('div#velero-wrapper').show();
+		$("#velero-note").html(veleroNoteValue);
+	} else {
+		$('div#velero-wrapper').hide();
+	}
+}
+
+function onResiliencyChange(podmonNoteValue) {
+	if ($("#resiliency").prop('checked') === true) {
+		$('div#podmon-note-wrapper').show();
+		$("#podmon-note").html(podmonNoteValue);
+	} else {
+		$('div#podmon-note-wrapper').hide();
+	}
+}
+
+function onSnapshotChange(snapshotNoteValue) {
+	if ($("#snapshot").prop('checked') === true) {
+		$('div#snapshot-note-wrapper').show();
+		$("#snapshot-note").html(snapshotNoteValue);
+	} else {
+		$('div#snapshot-note-wrapper').hide();
+	}
+}
+
+function onVSphereChange() {
+	if ($("#vSphere").prop('checked') === true) {
+		$('div#vSphere-wrapper').show();
+	} else {
+		$('div#vSphere-wrapper').hide();
 	}
 }
 
 function singleNamespaceCheck() {
 	if ($("#single-namespace").prop('checked') === true) {
-		$('label[for=driver-namespace], input#driver-namespace, label[for=module-namespace], input#module-namespace,#reset-driver-namespace,#reset-module-namespace').hide();
+		$('div#single-namespace-disabled').hide();
 	} else {
-		$('label[for=driver-namespace], input#driver-namespace, label[for=module-namespace], input#module-namespace,#reset-driver-namespace,#reset-module-namespace').show();
+		$('div#single-namespace-disabled').show();
 	}
 }
 
@@ -69,7 +116,12 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 	}
 }
 
-const onCSMVersionChange = () => document.getElementById("csm-version").value !== "" ? loadCSMVersions(document.getElementById("csm-version").value) : null;
+const onCSMVersionChange = () => {
+	document.getElementById("csm-version").value !== "" ? loadCSMVersions(document.getElementById("csm-version").value) : null;
+	displayModules(driver, CONSTANTS);
+	onObservabilityChange();
+	onAuthorizationChange();
+};
 
 const onCopyButtonClickHandler = () => {
 	var c1 = $('#command1').text() + "\n";
@@ -88,7 +140,7 @@ const resetImageRepository = csmMapValue => {
 	document.getElementById("image-repository").value = csmMapValue.get("imageRepository");
 }
 
-const resetControllerCount  = csmMapValue => {
+const resetControllerCount = csmMapValue => {
 	document.getElementById("controller-count").value = String(csmMapValue.get("controllerCount"));
 }
 
@@ -104,37 +156,56 @@ const resetModuleNameSpace = moduleNamespaceValue => {
 	document.getElementById("module-namespace").value = moduleNamespaceValue;
 }
 
-const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFunc, loadDefaultValuesFunc, hideFieldsFunc, setDefaultValuesFunc) => {
-	if (!validateFormFunc()) {
-		return false
-	}
+const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFunc, loadDefaultValuesFunc, hideFieldsFunc, setDefaultValuesFunc, validateInputFunc, CONSTANTS_PARAM) => {
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(driverTemplate);
 	link.style.display = 'inline-block';
 	displayCommandsFunc(driver, commandTitle, commandNote, command1, command2, command3)
-	document.getElementById("csm-form").reset();
-	loadDefaultValuesFunc();
-	hideFieldsFunc();
-	setDefaultValuesFunc(defaultValues, csmMap);
-	$(".namespace").hide();
-	return true
+	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
+	return true;
 }
 
 function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".vgsnapshot").show();
 	$(".authorization").show();
-	$(".observability").show();
 	$(".appMobility").show();
+	$(".storageArrays").hide();
+	$(".powermax-csi-reverse-proxy").hide();
+	$(".cluster-prefix").hide();
+	$(".port-groups").hide();
+	$(".resiliency").hide();
+	$(".storage-capacity").hide();
+	$(".migration").hide();
+	$(".vSphere").hide();
+
+	const selectedCSMVersion = document.getElementById("csm-version").value;
+
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
 			$(".authorization").hide();
+			$("#authorization").prop('checked', false);
+			$(".storage-capacity").show();
+
+			if (selectedCSMVersion === "1.6.0") {
+				$(".resiliency").show();
+			}
+
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
 			break;
 		case CONSTANTS_PARAM.POWERMAX:
 			$(".vgsnapshot").hide();
-			$(".observability").hide();
 			$(".appMobility").hide();
+			$(".storageArrays").show();
+
+			if (selectedCSMVersion === "1.4.0" || selectedCSMVersion === "1.5.0") {
+				$(".powermax-csi-reverse-proxy").show();
+			}
+
+			$(".cluster-prefix").show();
+			$(".port-groups").show();
+			$(".migration").show();
+			$(".vSphere").show();
 			break;
 		case CONSTANTS_PARAM.POWERFLEX:
 			break;
@@ -151,9 +222,9 @@ function displayCommands(driverName, commandTitleValue, commandNoteValue, comman
 	$("#command1").html(command1Value.replaceAll("$drivernamespace", driverNamespace));
 	$("#command-note").html(commandNoteValue.replaceAll("$drivernamespace", driverNamespace));
 	if ($("#single-namespace").prop('checked') === true) {
-		$("#command2").html(command2Value.replace("$driver", driverName));
+		$("#command2").html(command2Value.replaceAll("$driver", driverName));
 	} else {
-		$("#command2").html(command3Value.replace("$driver", driverName));
+		$("#command2").html(command3Value.replaceAll("$driver", driverName));
 	}
 }
 
@@ -161,13 +232,21 @@ function hideFields() {
 	$(".authAttributes").hide()
 	$(".node-sel-attributes").hide();
 	$(".replication-attributes").hide();
-	$('label[for=authorization-skip-cert-validation], input#authorization-skip-cert-validation').hide();
-	$('label[for=observability-metrics], input#observability-metrics').hide();
 }
 
-const downloadFileHandler = () => $("#download-file").on('click', () => downloadFile(validateForm, generateYamlFile, displayCommands, loadDefaultValues, hideFields, setDefaultValues));
+function validateInput(validateFormFunc, CONSTANTS_PARAM) {
+	$("#download-file").addClass("disabled");
+	if (validateFormFunc(CONSTANTS_PARAM)) {
+		$("#download-file").removeClass("disabled");
+		return true
+	}
+	return false
+}
+
+const downloadFileHandler = () => $("#download-file").on('click', () => downloadFile(validateForm, generateYamlFile, displayCommands, loadDefaultValues, hideFields, setDefaultValues, validateInput, CONSTANTS));
 
 function onPageLoad() {
+	setupTooltipStyle();
 	$("*").css("cursor", "pointer");
 	$("#main").hide();
 	hideFields();
@@ -177,12 +256,17 @@ function onPageLoad() {
 	onArrayChange();
 	onCopyButtonClick();
 	downloadFileHandler();
+	validateInput(validateForm, CONSTANTS);
 }
 
 if (typeof exports !== 'undefined') {
 	module.exports = {
 		onAuthorizationChange,
 		onObservabilityChange,
+		onAppMobilityChange,
+		onResiliencyChange,
+		onSnapshotChange,
+		onVSphereChange,
 		singleNamespaceCheck,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
@@ -194,6 +278,7 @@ if (typeof exports !== 'undefined') {
 		downloadFile,
 		displayModules,
 		displayCommands,
-		hideFields
+		hideFields,
+		validateInput
 	};
 }

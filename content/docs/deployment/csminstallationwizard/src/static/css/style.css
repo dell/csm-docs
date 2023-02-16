@@ -93,7 +93,8 @@
 	background-color: #fff !important;
 	border-color: #0672cb !important;
 	color: #0672cb !important;
-	margin-top: 20%;
+	margin-top: 8%;
+	margin-left: 45%;
   }
   
   .tooltip.right .tooltip-arrow {
@@ -109,4 +110,8 @@
   .reset {
 	font-size: 1.1em;
 	font-weight: bold;
+  }
+
+  .child-level-one {
+	margin-left: 1em;
   }
