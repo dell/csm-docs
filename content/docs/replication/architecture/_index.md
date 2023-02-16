@@ -27,7 +27,7 @@ Any replication related operation is always carried out on all the volumes prese
 
 ```yaml
 kind: DellCSIReplicationGroup
-apiVersion: replication.storage.dell.com/v1alpha1
+apiVersion: replication.storage.dell.com/v1
 metadata:
   name: rg-e6be24c0-145d-4b62-8674-639282ebdd13
 spec:
