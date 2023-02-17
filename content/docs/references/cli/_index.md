@@ -866,5 +866,6 @@ NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NA
 k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
 k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
 k8s-b1abb817d3   a69bf19000000001   8.000000   mypool   636468e3638c840f   k8s-b1abb817d3   Bound       vxflexos        demo-claim13   default
-k8s-28e4184f41   a69b554e00000003   8.000000   mypool   636468e3638c840f   none             none        none            none           none
+k8s-28e4184f41   c6b2280d0000009a   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   Available   local-storage  
+k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
 ```
