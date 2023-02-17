@@ -10,6 +10,7 @@ Description: >
 
 ### New Features/Changes
 - [Added support for CSI PowerStore Driver](https://github.com/dell/csm/issues/613)
+- [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
 
 
 ### Fixed Issues
