@@ -31,10 +31,11 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
 | [dellctl images](#dellctl-images) | List the container images needed by csi driver |
+| [dellctl volume list](#dellctl-volume-list) | Lists PowerFlex volume infomation for a given tenant on a local cluster |
 
 
 ## Installation instructions
-1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.4.0).
+1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.5.1).
 2. chmod +x dellctl
 3. Move `dellctl` to `/usr/local/bin` or add `dellctl`'s containing directory path to PATH environment variable.
 4. Run `dellctl --help` to know available commands or run `dellctl command --help` to know more about a specific command.
@@ -784,7 +785,6 @@ Encryption rekey status with name of the rekey object
  INFO Status of rekey request myrekey = completed
 ```
 
-
 ### dellctl images
 
 List the container images needed by csi driver
@@ -837,4 +837,31 @@ dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.
                                                                         k8s.gcr.io/sig-storage/csi-resizer:v1.4.0
                                                                         k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
                                                                         dellemc/sdc:3.6.0.6
+```
 
+
+### dellctl volume list
+
+Lists PowerFlex volume infomation for a given tenant on a local cluster
+
+##### Flags
+
+```
+  -h, --help                           help for list
+      --insecure optionalBool[=true]   whether to skip certificate validation
+      --namespace string               namespace of the secret for the given tenant
+      --proxy string                   auth proxy endpoint to use
+```
+
+##### Output
+
+Lists PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
+
+```
+# dellctl volume list --proxy <proxy.dell.com> --namespace vxflexos
+NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE
+k8s-0325497cd7   a69b554f00000004   8.000000   mypool   636468e3638c840f   k8s-0325497cd7   Released    vxflexos        vol-create-test-cthdf   replication-suite-fe2eac41
+k8s-a0c031582b   a69b555000000005   8.000000   mypool   636468e3638c840f   k8s-a0c031582b   Released    vxflexos        vol-create-test-nqfwz   replication-suite-fe2eac41
+k8s-3908a6954f   a69b555100000006   8.000000   mypool   636468e3638c840f   k8s-3908a6954f   Released    vxflexos        vol-create-test-4flg5   replication-suite-fe2eac41
+k8s-28e4184f41   a69b554e00000003   8.000000   mypool   636468e3638c840f   none             none        none            none                    none
+```

@@ -19,12 +19,12 @@ CSM for Replication provides the following capabilities:
 | Capability                                                                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
 | ----------------------------------------------------------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
 | Replicate data using native storage array based replication                                                                         |   yes    |    yes     |    yes     |    no     |  no   |
-| Asynchronous file volume replication                                                                                                |   yes    |     no     |    yes     |    no     |  no   |
+| Asynchronous file volume replication                                                                                                |   no    |     no     |    yes     |    no     |  no   |
 | Asynchronous block volume replication                                                                                               |   yes    |    yes     |    n/a     |    no     |  no   |
-| Synchronous file volume replication                                                                                                 |   yes    |     no     |     no     |    no     |  no   |
+| Synchronous file volume replication                                                                                                 |   no    |     no     |     no     |    no     |  no   |
 | Synchronous block volume replication                                                                                                |   yes    |     no     |    n/a     |    no     |  no   |
 | Active-Active (Metro) block volume replication                                                                                      |   yes    |     no     |    n/a     |    no     |  no   |
-| Active-Active (Metro) file volume replication                                                                                       |   yes    |     no     |     no     |    no     |  no   |
+| Active-Active (Metro) file volume replication                                                                                       |   no    |     no     |     no     |    no     |  no   |
 | Create `PersistentVolume` objects in the cluster representing the replicated volume                                                 |   yes    |    yes     |    yes     |    no     |  no   |
 | Create `DellCSIReplicationGroup` objects in the cluster                                                                             |   yes    |    yes     |    yes     |    no     |  no   |
 | Failover & Reprotect applications using the replicated volumes                                                                      |   yes    |    yes     |     no     |    no     |  no   |
