@@ -74,7 +74,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 7. Install the Helm chart.
 
-    On your terminal, run the below command:
+    On your terminal, run this command:
 
     ```terminal
     helm install container-storage-modules dell/container-storage-modules -f <values.yaml location>
