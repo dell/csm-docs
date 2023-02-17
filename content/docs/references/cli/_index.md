@@ -31,7 +31,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
 | [dellctl images](#dellctl-images) | List the container images needed by csi driver |
-| [dellctl volume list](#dellctl-volume-list) | Lists PowerFlex volume infomation for a given tenant on a local cluster |
+| [dellctl volume get](#dellctl-volume-get) | Gets PowerFlex volume infomation for a given tenant on a local cluster |
 
 
 ## Installation instructions
@@ -840,9 +840,12 @@ dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.
 ```
 
 
-### dellctl volume list
+### dellctl volume get
 
-Lists PowerFlex volume infomation for a given tenant on a local cluster
+Gets PowerFlex volume infomation for a given tenant on a local cluster
+
+##### Aliases
+  get, ls, list
 
 ##### Flags
 
@@ -855,13 +858,12 @@ Lists PowerFlex volume infomation for a given tenant on a local cluster
 
 ##### Output
 
-Lists PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
+Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
 
 ```
-# dellctl volume list --proxy <proxy.dell.com> --namespace vxflexos
-NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME                NAMESPACE
-k8s-0325497cd7   a69b554f00000004   8.000000   mypool   636468e3638c840f   k8s-0325497cd7   Released    vxflexos        vol-create-test-cthdf   replication-suite-fe2eac41
-k8s-a0c031582b   a69b555000000005   8.000000   mypool   636468e3638c840f   k8s-a0c031582b   Released    vxflexos        vol-create-test-nqfwz   replication-suite-fe2eac41
-k8s-3908a6954f   a69b555100000006   8.000000   mypool   636468e3638c840f   k8s-3908a6954f   Released    vxflexos        vol-create-test-4flg5   replication-suite-fe2eac41
-k8s-28e4184f41   a69b554e00000003   8.000000   mypool   636468e3638c840f   none             none        none            none                    none
+# dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
+NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
+k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
+k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
+k8s-b1abb817d3   a69bf19000000001   8.000000   mypool   636468e3638c840f   k8s-b1abb817d3   Bound       vxflexos        demo-claim13   default
 ```
