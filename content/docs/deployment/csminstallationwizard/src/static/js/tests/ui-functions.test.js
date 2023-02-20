@@ -60,23 +60,23 @@ describe("GIVEN onAuthorizationChange function", () => {
 	test("SHOULD hide authorization components when option not checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="authorization">
-            <div id="authorization-skip-cert-validation-wrapper" style="display:">
+            <div class="authorization-wrapper" style="display:">
         `;
 
-		onAuthorizationChange();
+		onAuthorizationChange("Test authorization note");
 
-		expect($("div#authorization-skip-cert-validation-wrapper").css("display")).toEqual("none");
+		expect($(".authorization-wrapper").css("display")).toEqual("none");
 	});
 
 	test("SHOULD show authorization components when option checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="authorization" checked>
-            <div id="authorization-skip-cert-validation-wrapper"  style="display:none">
+            <div class="authorization-wrapper" style="display:none">
         `;
 
-		onAuthorizationChange();
+		onAuthorizationChange("Test authorization note");
 
-		expect($("div#authorization-skip-cert-validation-wrapper").css("display")).not.toEqual("none");
+		expect($(".authorization-wrapper").css("display")).not.toEqual("none");
 	});
 });
 

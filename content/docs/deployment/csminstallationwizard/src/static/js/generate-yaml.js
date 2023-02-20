@@ -73,6 +73,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.resiliency = $("#resiliency").prop('checked') ? true : false;
 	DriverValues.storageCapacity = $("#storage-capacity").prop('checked') ? true : false;
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
+	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value;
 	DriverValues.vgsnapshotImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("vgsnapshotImage");
 	DriverValues.replicationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("replicationImage");
 	DriverValues.migrationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("migrationImage");
@@ -131,6 +132,7 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 	yaml = yaml.replaceAll("$MIGRATION_IMAGE", obj.migrationImage);
 	yaml = yaml.replaceAll("$AUTHORIZATION_ENABLED", obj.authorization);
 	yaml = yaml.replaceAll("$AUTHORIZATION_IMAGE", obj.authorizationImage);
+	yaml = yaml.replaceAll("$AUTHORIZATION_PROXY_HOST", obj.authorizationProxyHost);
 	yaml = yaml.replaceAll("$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION", obj.authorizationSkipCertValidation);
 	yaml = yaml.replaceAll("$OBSERVABILITY_ENABLED", obj.observability);
 	yaml = yaml.replaceAll("$RESILIENCY_ENABLED", obj.resiliency);

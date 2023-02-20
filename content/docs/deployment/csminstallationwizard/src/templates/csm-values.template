@@ -117,6 +117,8 @@ csi-powermax:
   authorization:
     enabled: $AUTHORIZATION_ENABLED
     sidecarProxyImage: $AUTHORIZATION_IMAGE
+    proxyHost: $AUTHORIZATION_PROXY_HOST
+    skipCertificateValidation:  $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
   vSphere:
     enabled: $VSPHERE_ENABLED
     fcPortGroup: "$VSPHERE_FC_PORT_GROUP"

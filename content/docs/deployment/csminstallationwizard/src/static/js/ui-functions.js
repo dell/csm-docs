@@ -47,11 +47,13 @@ function onArrayChange() {
 	});
 }
 
-function onAuthorizationChange() {
+function onAuthorizationChange(authorizationNoteValue) {
 	if ($("#authorization").prop('checked') === true) {
-		$('div#authorization-skip-cert-validation-wrapper').show();
+		$('.authorization-wrapper').show();
+		$('#authorization-note').html(authorizationNoteValue).show();
 	} else {
-		$('div#authorization-skip-cert-validation-wrapper').hide();
+		$('.authorization-wrapper').hide();
+		$('#authorization-note').hide();
 	}
 }
 
