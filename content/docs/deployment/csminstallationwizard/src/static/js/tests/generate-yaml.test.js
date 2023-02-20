@@ -140,6 +140,8 @@ describe("GIVEN createYamlString function", () => {
             namespace: $CSM_NAMESPACE
             karaviMetricsPowerstore:
               enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
+			karaviMetricsPowermax:
+              enabled: $POWERMAX_OBSERVABILITY_METRICS_ENABLED
             karaviMetricsPowerflex:
               enabled: $POWERFLEX_OBSERVABILITY_METRICS_ENABLED
             karaviMetricsPowerscale:
@@ -275,6 +277,8 @@ describe("GIVEN createYamlString function", () => {
             namespace: ""
             karaviMetricsPowerstore:
               enabled: true
+			karaviMetricsPowermax:
+              enabled: false
             karaviMetricsPowerflex:
               enabled: false
             karaviMetricsPowerscale:
@@ -341,7 +345,7 @@ describe("GIVEN createYamlString function", () => {
 		const expected = `
           csi-powerstore:
             enabled: true
-            namespace: 
+            namespace: csi-powerstore
             version: v2.4.0
             images:
               driverRepository: dellemc
@@ -370,7 +374,7 @@ describe("GIVEN createYamlString function", () => {
           ##########################################
           csi-powermax:
             enabled: false
-            namespace: 
+            namespace: ""
           
           ## K8S/Replication Module ATTRIBUTES
           ##########################################
@@ -385,6 +389,8 @@ describe("GIVEN createYamlString function", () => {
             namespace: 
             karaviMetricsPowerstore:
               enabled: true
+			karaviMetricsPowermax:
+              enabled: false
             karaviMetricsPowerflex:
               enabled: false
             karaviMetricsPowerscale:
@@ -495,6 +501,8 @@ describe("GIVEN createYamlString function", () => {
             namespace: ""
             karaviMetricsPowerstore:
               enabled: false
+			karaviMetricsPowermax:
+              enabled: false
             karaviMetricsPowerflex:
               enabled: true
             karaviMetricsPowerscale:
@@ -561,7 +569,7 @@ describe("GIVEN createYamlString function", () => {
 		const expected = `
           csi-powerstore:
             enabled: false
-            namespace: 
+            namespace: ""
             version: v2.4.0
             images:
               driverRepository: dellemc
@@ -590,7 +598,7 @@ describe("GIVEN createYamlString function", () => {
           ##########################################
           csi-powermax:
             enabled: false
-            namespace: 
+            namespace: ""
           
           ## K8S/Replication Module ATTRIBUTES
           ##########################################
@@ -604,6 +612,8 @@ describe("GIVEN createYamlString function", () => {
             enabled: true
             namespace: 
             karaviMetricsPowerstore:
+              enabled: false
+			karaviMetricsPowermax:
               enabled: false
             karaviMetricsPowerflex:
               enabled: true
@@ -715,6 +725,8 @@ describe("GIVEN createYamlString function", () => {
             namespace: ""
             karaviMetricsPowerstore:
               enabled: false
+			karaviMetricsPowermax:
+              enabled: true
             karaviMetricsPowerflex:
               enabled: false
             karaviMetricsPowerscale:
@@ -781,7 +793,7 @@ describe("GIVEN createYamlString function", () => {
 		const expected = `
           csi-powerstore:
             enabled: false
-            namespace: 
+            namespace: ""
             version: v2.4.0
             images:
               driverRepository: dellemc
@@ -810,7 +822,7 @@ describe("GIVEN createYamlString function", () => {
           ##########################################
           csi-powermax:
             enabled: true
-            namespace: 
+            namespace: csi-powerstore
           
           ## K8S/Replication Module ATTRIBUTES
           ##########################################
@@ -825,6 +837,8 @@ describe("GIVEN createYamlString function", () => {
             namespace: 
             karaviMetricsPowerstore:
               enabled: false
+			karaviMetricsPowermax:
+              enabled: true
             karaviMetricsPowerflex:
               enabled: false
             karaviMetricsPowerscale:
@@ -935,6 +949,8 @@ describe("GIVEN createYamlString function", () => {
             namespace: ""
             karaviMetricsPowerstore:
               enabled: false
+			karaviMetricsPowermax:
+              enabled: false
             karaviMetricsPowerflex:
               enabled: false
             karaviMetricsPowerscale:
@@ -1001,7 +1017,7 @@ describe("GIVEN createYamlString function", () => {
 		const expected = `
           csi-powerstore:
             enabled: false
-            namespace: 
+            namespace: ""
             version: v2.4.0
             images:
               driverRepository: dellemc
@@ -1030,7 +1046,7 @@ describe("GIVEN createYamlString function", () => {
           ##########################################
           csi-powermax:
             enabled: false
-            namespace: 
+            namespace: ""
           
           ## K8S/Replication Module ATTRIBUTES
           ##########################################
@@ -1044,6 +1060,8 @@ describe("GIVEN createYamlString function", () => {
             enabled: true
             namespace: 
             karaviMetricsPowerstore:
+              enabled: false
+			karaviMetricsPowermax:
               enabled: false
             karaviMetricsPowerflex:
               enabled: false
@@ -1155,6 +1173,8 @@ describe("GIVEN createYamlString function", () => {
             namespace: ""
             karaviMetricsPowerstore:
               enabled: false
+			karaviMetricsPowermax:
+              enabled: false
             karaviMetricsPowerflex:
               enabled: false
             karaviMetricsPowerscale:
@@ -1221,7 +1241,7 @@ describe("GIVEN createYamlString function", () => {
 		const expected = `
           csi-powerstore:
             enabled: false
-            namespace: 
+            namespace: ""
             version: v2.4.0
             images:
               driverRepository: dellemc
@@ -1250,7 +1270,7 @@ describe("GIVEN createYamlString function", () => {
           ##########################################
           csi-powermax:
             enabled: false
-            namespace: 
+            namespace: ""
           
           ## K8S/Replication Module ATTRIBUTES
           ##########################################
@@ -1264,6 +1284,8 @@ describe("GIVEN createYamlString function", () => {
             enabled: true
             namespace: 
             karaviMetricsPowerstore:
+              enabled: false
+			karaviMetricsPowermax:
               enabled: false
             karaviMetricsPowerflex:
               enabled: false
