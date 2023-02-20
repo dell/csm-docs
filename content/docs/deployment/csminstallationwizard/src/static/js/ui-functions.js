@@ -25,6 +25,11 @@ const setupTooltipStyle = () => {
 	[...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 };
 
+const setupTooltipStyle = () => {
+	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+	[...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+};
+
 function onArrayChange() {
 	$('#array').on('change', function() {
 		$("#command-text-area").hide();
