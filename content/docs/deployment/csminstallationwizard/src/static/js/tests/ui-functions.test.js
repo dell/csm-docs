@@ -19,6 +19,10 @@
 const {
 	onAuthorizationChange,
 	onObservabilityChange,
+	onAppMobilityChange,
+	onResiliencyChange,
+	onSnapshotChange,
+	onVSphereChange,
 	singleNamespaceCheck,
 	onNodeSelectorChange,
 	onCopyButtonClickHandler,
@@ -30,7 +34,8 @@ const {
 	downloadFile,
 	displayModules,
 	displayCommands,
-	hideFields
+	hideFields,
+	validateInput
 } = require('../ui-functions');
 
 const CONSTANTS = {
@@ -54,27 +59,23 @@ describe("GIVEN onAuthorizationChange function", () => {
 	test("SHOULD hide authorization components when option not checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="authorization">
-            <input type="checkbox" id="authorization-skip-cert-validation" style="display:">
-            <label for="authorization-skip-cert-validation" style="display:"></label>
+            <div id="authorization-skip-cert-validation-wrapper" style="display:">
         `;
 
 		onAuthorizationChange();
 
-		expect($("label[for=authorization-skip-cert-validation]").css("display")).toEqual("none");
-		expect($("input#authorization-skip-cert-validation").css("display")).toEqual("none");
+		expect($("div#authorization-skip-cert-validation-wrapper").css("display")).toEqual("none");
 	});
 
 	test("SHOULD show authorization components when option checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="authorization" checked>
-            <input type="checkbox" id="authorization-skip-cert-validation" style="display:none">
-            <label for="authorization-skip-cert-validation" style="display:none"></label>
+            <div id="authorization-skip-cert-validation-wrapper"  style="display:none">
         `;
 
 		onAuthorizationChange();
 
-		expect($("label[for=authorization-skip-cert-validation]").css("display")).not.toEqual("none");
-		expect($("input#authorization-skip-cert-validation").css("display")).not.toEqual("none");
+		expect($("div#authorization-skip-cert-validation-wrapper").css("display")).not.toEqual("none");
 	});
 });
 
@@ -82,27 +83,119 @@ describe("GIVEN onObservabilityChange function", () => {
 	test("SHOULD hide Observability Metrics components when option not checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="observability">
-            <input type="checkbox" id="observability-metrics" style="display:">
-            <label for="observability-metrics" style="display:"></label>
+            <div id="observability-metrics-wrapper" style="display:">
         `;
 
 		onObservabilityChange();
 
-		expect($("label[for=observability-metrics]").css("display")).toEqual("none");
-		expect($("input#observability-metrics").css("display")).toEqual("none");
+		expect($("div#observability-metrics-wrapper").css("display")).toEqual("none");
 	});
 
 	test("SHOULD show Observability Metrics components when option checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="observability" checked>
-            <input type="checkbox" id="observability-metrics" style="display:none">
-            <label for="observability-metrics" style="display:none"></label>
+            <div id="observability-metrics-wrapper" style="display:none">
         `;
 
 		onObservabilityChange();
 
-		expect($("label[for=observability-metrics]").css("display")).not.toEqual("none");
-		expect($("input#observability-metrics").css("display")).not.toEqual("none");
+		expect($("div#observability-metrics-wrapper").css("display")).not.toEqual("none");
+	});
+});
+
+describe("GIVEN onAppMobilityChange function", () => {
+	test("SHOULD hide velero component components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="application-mobility">
+            <div id="velero-wrapper" style="display:">
+        `;
+
+		onAppMobilityChange("Test velero note");
+
+		expect($("div#velero-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show Observability Metrics components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="application-mobility" checked>
+            <div id="velero-wrapper" style="display:none">
+        `;
+
+		onAppMobilityChange("Test velero note");
+
+		expect($("div#velero-wrapper").css("display")).not.toEqual("none");
+	});
+});
+
+describe("GIVEN onResiliencyChange function", () => {
+	test("SHOULD hide Podmon components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="resiliency">
+            <div id="podmon-note-wrapper" style="display:">
+        `;
+
+		onResiliencyChange("Test podmon note");
+
+		expect($("div#podmon-note-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show Podmon components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="resiliency" checked>
+            <div id="podmon-note-wrapper" style="display:none">
+        `;
+
+		onResiliencyChange("Test podmon note");
+
+		expect($("div#podmon-note-wrapper").css("display")).not.toEqual("none");
+	});
+});
+
+describe("GIVEN onSnapshotChange function", () => {
+	test("SHOULD hide snapshot components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="snapshot">
+            <div id="snapshot-note-wrapper" style="display:">
+        `;
+
+		onSnapshotChange("Temp snapshot note");
+
+		expect($("div#snapshot-note-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show snapshot components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="snapshot" checked>
+            <div id="snapshot-note-wrapper" style="display:none">
+        `;
+
+		onSnapshotChange("Temp snapshot note");
+
+		expect($("div#snapshot-note-wrapper").css("display")).not.toEqual("none");
+	});
+});
+
+describe("GIVEN onVSphereChange function", () => {
+	test("SHOULD hide Observability Metrics components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="vSphere">
+            <div id="vSphere-wrapper" style="display:">
+        `;
+
+		onVSphereChange();
+
+		expect($("div#vSphere-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show Observability Metrics components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="vSphere" checked>
+            <div id="vSphere-wrapper" style="display:none">
+        `;
+
+		onVSphereChange();
+
+		expect($("div#vSphere-wrapper").css("display")).not.toEqual("none");
 	});
 });
 
@@ -110,43 +203,23 @@ describe("GIVEN singleNamespaceCheck function", () => {
 	test("SHOULD hide namespace components when option checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="single-namespace" checked>
-            <label for="driver-namespace" style="display:"></label>
-            <input type="text" id="driver-namespace">
-            <label for="module-namespace" style="display:"></label>
-            <input type="text" id="module-namespace">
-            <a id="reset-driver-namespace"></a>
-            <a id="reset-module-namespace"></a>
+			<div id="single-namespace-disabled"></div>
         `;
 
 		singleNamespaceCheck();
 
-		expect($("label[for=driver-namespace]").css("display")).toEqual("none");
-		expect($("input#driver-namespace").css("display")).toEqual("none");
-		expect($("label[for=module-namespace]").css("display")).toEqual("none");
-		expect($("input#module-namespace").css("display")).toEqual("none");
-		expect($("#reset-driver-namespace").css("display")).toEqual("none");
-		expect($("#reset-module-namespace").css("display")).toEqual("none");
+		expect($("div#single-namespace-disabled").css("display")).toEqual("none");
 	});
 
 	test("SHOULD show namespace components when option not checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="single-namespace">
-            <label for="driver-namespace" style="display:none"></label>
-            <input type="text" id="driver-namespace" style="display:none">
-            <label for="module-namespace" style="display:none"></label>
-            <input type="text" id="module-namespace" style="display:none">
-            <a id="reset-driver-namespace" style="display:none"></a>
-            <a id="reset-module-namespace" style="display:none"></a>
+            <div id="single-namespace-disabled"></div>
         `;
 
 		singleNamespaceCheck();
 
-		expect($("label[for=driver-namespace]").css("display")).not.toEqual("none");
-		expect($("input#driver-namespace").css("display")).not.toEqual("none");
-		expect($("label[for=module-namespace]").css("display")).not.toEqual("none");
-		expect($("input#module-namespace").css("display")).not.toEqual("none");
-		expect($("#reset-driver-namespace").css("display")).not.toEqual("none");
-		expect($("#reset-module-namespace").css("display")).not.toEqual("none");
+		expect($("div#single-namespace-disabled").css("display")).not.toEqual("none");
 	});
 });
 
@@ -288,22 +361,21 @@ describe("GIVEN resetModuleNameSpace function", () => {
 	});
 });
 
-describe("GIVEN downloadFile function", () => {
-	test("SHOULD return false if validate function returns false", () => {
-		const received = downloadFile(() => false)
-
-		expect(received).toEqual(false);
-	});
-});
-
 describe("GIVEN displayModules function", () => {
+	const testHtml = `
+		<select id="csm-version">
+			<option value="1.6.0" selected>CSM 1.6</option>
+			<option value="1.5.0">CSM 1.5</option>
+			<option value="1.4.0">CSM 1.4</option>
+		</select>
+		<div class="vgsnapshot" style="display:none"></div>
+		<div class="authorization" style="display:none"></div>
+		<div class="observability"></div>
+		<div class="appMobility" style="display:none"></div>
+	`;
+
 	test("SHOULD show expected components for csi-powerstore", () => {
-		document.body.innerHTML = `
-            <div class="vgsnapshot" style="display:none"></div>
-            <div class="authorization" style="display:none"></div>
-            <div class="observability" style="display:none"></div>
-            <div class="appMobility" style="display:none"></div>
-        `;
+		document.body.innerHTML = testHtml;
 
 		displayModules("csi-powerstore", CONSTANTS);
 
@@ -314,12 +386,7 @@ describe("GIVEN displayModules function", () => {
 	});
 
 	test("SHOULD show expected components for csi-powerscale", () => {
-		document.body.innerHTML = `
-            <div class="vgsnapshot" style="display:none"></div>
-            <div class="authorization" style="display:none"></div>
-            <div class="observability" style="display:none"></div>
-            <div class="appMobility" style="display:none"></div>
-        `;
+		document.body.innerHTML = testHtml;
 
 		displayModules("csi-powerscale", CONSTANTS);
 
@@ -330,28 +397,18 @@ describe("GIVEN displayModules function", () => {
 	});
 
 	test("SHOULD show expected components for csi-powermax", () => {
-		document.body.innerHTML = `
-            <div class="vgsnapshot" style="display:none"></div>
-            <div class="authorization" style="display:none"></div>
-            <div class="observability" style="display:none"></div>
-            <div class="appMobility" style="display:none"></div>
-        `;
+		document.body.innerHTML = testHtml;
 
 		displayModules("csi-powermax", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("none");
 		expect($(".authorization").css("display")).toEqual("block");
-		expect($(".observability").css("display")).toEqual("none");
+		expect($(".observability").css("display")).toEqual("block");
 		expect($(".appMobility").css("display")).toEqual("none");
 	});
 
 	test("SHOULD show expected components for csi-powerflex", () => {
-		document.body.innerHTML = `
-            <div class="vgsnapshot" style="display:none"></div>
-            <div class="authorization" style="display:none"></div>
-            <div class="observability" style="display:none"></div>
-            <div class="appMobility" style="display:none"></div>
-        `;
+		document.body.innerHTML = testHtml;
 
 		displayModules("csi-powerflex", CONSTANTS);
 
@@ -362,12 +419,7 @@ describe("GIVEN displayModules function", () => {
 	});
 
 	test("SHOULD show expected components for csi-unity", () => {
-		document.body.innerHTML = `
-            <div class="vgsnapshot" style="display:none"></div>
-            <div class="authorization" style="display:none"></div>
-            <div class="observability" style="display:none"></div>
-            <div class="appMobility" style="display:none"></div>
-        `;
+		document.body.innerHTML = testHtml;
 
 		displayModules("csi-unity", CONSTANTS);
 
@@ -384,10 +436,6 @@ describe("GIVEN hideFields function", () => {
             <div class="authAttributes" style="display:block"></div>
             <div class="node-sel-attributes" style="display:block"></div>
             <div class="replication-attributes" style="display:block"></div>
-            <input type="checkbox" id="authorization-skip-cert-validation" style="display:block">
-            <label for="authorization-skip-cert-validation" title="" style="display:block"></label>
-            <input type="checkbox" id="observability-metrics" style="display:block">
-            <label for="observability-metrics" title="" style="display:block"></label>
         `;
 
 		hideFields();
@@ -395,10 +443,6 @@ describe("GIVEN hideFields function", () => {
 		expect($(".authAttributes").css("display")).toEqual("none");
 		expect($(".node-sel-attributes").css("display")).toEqual("none");
 		expect($(".replication-attributes").css("display")).toEqual("none");
-		expect($("label[for=authorization-skip-cert-validation]").css("display")).toEqual("none");
-		expect($("input#authorization-skip-cert-validation").css("display")).toEqual("none");
-		expect($("label[for=observability-metrics]").css("display")).toEqual("none");
-		expect($("input#observability-metrics").css("display")).toEqual("none");
 	});
 });
 
@@ -451,4 +495,69 @@ describe("GIVEN displayCommands function", () => {
 		expect($("#command1").text()).toEqual("helm repo add dell https://chaganti-rajitha.github.io/csm-installation/charts/pkg");
 		expect($("#command2").text()).toEqual("helm install csi-powerstore  dell/csm-drivers-modules -n [namespace] -f values.yaml");
 	});
+});
+
+describe("SHOULD Disable/Enable Generate YAML button based on validation of input fields", () => {
+
+	test("SHOULD disable Generate YAML button if the array is not selected ", () => {
+		document.body.innerHTML = `
+			<input id="array" value="">
+			<input id="installation-type" value="helm">
+			<input id="image-repository" value="dell">
+			<input id="csm-version" value="csm-1.6.0">
+			<input type="number" id="controller-count" value="1">
+			<input type="text" id="driver-namespace" value="csm-driver">
+			<input type="text" id="module-namespace" value="csm-module">
+        `;	
+
+		const received = validateInput(() => false, {});
+		expect(received).toEqual(false);
+	});
+
+	test("SHOULD disable Generate YAML button if driver-namespace is empty", () => {
+		document.body.innerHTML = `
+            <input type="text" id="driver-namespace" value="">
+			<input id="array" value="csi-powerstore">
+			<input id="installation-type" value="helm">
+			<input id="image-repository" value="dell">
+			<input id="csm-version" value="csm-1.6.0">
+			<input type="number" id="controller-count" value="1">
+			<input type="text" id="module-namespace" value="csm-module">
+        `;
+
+		const received = validateInput(() => false, {});
+		expect(received).toEqual(false);	
+	});
+	
+	test("SHOULD disable Generate YAML button if controller count is less than 1 ", () => {
+		document.body.innerHTML = `
+			<input type="number" id="controller-count" value="0">
+			<input id="array" value="csi-powerstore">
+			<input id="installation-type" value="helm">
+			<input id="image-repository" value="dell">
+			<input id="csm-version" value="csm-1.6.0">
+			<input type="text" id="driver-namespace" value="csm-driver">
+			<input type="text" id="module-namespace" value="csm-module">
+        `;
+
+		const received = validateInput(() => false, {});
+		expect(received).toEqual(false);
+	});
+
+	test("SHOULD enable Generate YAML button only if all the required fields have valid inputs", () => {
+		document.body.innerHTML = `
+			<input id="array" value="csi-powerstore">
+			<input id="installation-type" value="helm">
+			<input id="image-repository" value="dell">
+			<input id="csm-version" value="csm-1.6.0">
+			<input type="number" id="controller-count" value="1">
+			<input type="text" id="driver-namespace" value="csm-driver">
+			<input type="text" id="module-namespace" value="csm-module">
+        `;
+		
+		const received = validateInput(() => true, {});
+		expect(received).toEqual(true);
+
+	});
+	
 });
