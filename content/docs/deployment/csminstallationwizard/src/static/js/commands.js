@@ -17,7 +17,11 @@
  */
 var commandTitle = 'Run the following commands to install';
 var commandNote = 'Ensure that the namespaces and secrets are created before installing the helm chart';
-var command1 = 'helm repo add dell https://chaganti-rajitha.github.io/csm-installation/charts/pkg';
-var command2 = 'helm install $driver  dell/csm-drivers-modules -n [namespace] -f values.yaml'
-var command3 = 'helm install $driver  dell/csm-drivers-modules -f values.yaml';
+var command1 = 'helm repo add dell https://dell.github.io/helm-charts';
+var command2 = 'helm install $driver  dell/container-storage-modules -n [namespace] -f values.yaml'
+var command3 = 'helm install $driver  dell/container-storage-modules -f values.yaml';
 var nodeSelectorNote = 'For the pod to be eligible to run on a node, the node must have the indicated key-value pair as label';
+
+const snapshotNote = 'If Snapshot is enabled, ensure the Snapshot CRDs are installed';
+const veleroNote = 'If Velero is enabled, please add the respective credentials and configurations in the YAML file.';
+const podmonNote = 'Uncomment tolerations under node property, if CSM for Resiliency and CSI Driver pods monitor are enabled in the generated YAML';

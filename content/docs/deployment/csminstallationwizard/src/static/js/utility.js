@@ -18,7 +18,7 @@
 var defaultValues = "";
 var csmMap = new Map();
 
-function validateForm() {
+function validateForm(CONSTANTS_PARAM) {
 	if (document.getElementById('array').value.trim() === "") {
 		return false;
 	}
@@ -31,7 +31,53 @@ function validateForm() {
 	if (document.getElementById('csm-version').value.trim() === "") {
 		return false;
 	}
-	return true
+	if (document.getElementById('driver-namespace').value.trim() === "") {
+		return false;
+	}
+	if (document.getElementById('module-namespace').value.trim() === "") {
+		return false;
+	}
+	if (document.getElementById('controller-count').value.trim() < 1) {
+		return false;
+	}
+
+	const powermaxSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERMAX;
+	const vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
+
+	if (powermaxSelected) {
+		if (document.getElementById('storage-array-id').value.trim() === "") {
+			return false;
+		}
+		if (document.getElementById('storage-array-endpoint-url').value.trim() === "") {
+			return false;
+		}
+		if (document.getElementById('management-servers-endpoint-url').value.trim() === "") {
+			return false;
+		}
+		if (document.getElementById('cluster-prefix').value.trim() === "") {
+			return false;
+		}
+	
+		if (vSphereEnabled) {
+			if (document.getElementById('vSphere-fc-port-group').value.trim() === "") {
+				return false;
+			}
+			if (document.getElementById('vSphere-fc-host-name').value.trim() === "") {
+				return false;
+			}
+			if (document.getElementById('vSphere-vCenter-host').value.trim() === "") {
+				return false;
+			}
+			if (document.getElementById('vSphere-vCenter-username').value.trim() === "") {
+				return false;
+			}
+			if (document.getElementById('vSphere-vCenter-password').value.trim() === "") {
+				return false;
+			}
+		}
+	}
+
+	return true;
 }
 
 function loadDefaultValues() {

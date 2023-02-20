@@ -73,7 +73,7 @@ describe("GIVEN validateForm functions", () => {
 		expect(validateForm()).toBe(false);
 	});
 
-	test("SHOULD return true IF all values are non-empty", () => {
+	test("SHOULD return false IF driver-namespace value is empty", () => {
 		document.body.innerHTML = `
 			<select id="array" value="csi-powerstore">
 				<option value="csi-powerstore">PowerStore</option>
@@ -82,12 +82,203 @@ describe("GIVEN validateForm functions", () => {
 				<option value="helm">Helm</option>
 			</select>
 			<input type="text" id="image-repository" value="some-value">
-			<select id="csm-version">
-				<option value="1.4.0">CSM 1.4</option>
+			<select id="csm-version" value="1.4.0">
+				<option value="1.4.0" selected>CSM 1.4</option>
 			</select>
+			<input type="text" id="driver-namespace">
 		`;
 
-		expect(validateForm()).toBe(true);
+		expect(validateForm()).toBe(false);
+	});
+
+	test("SHOULD return false IF module-namespace value is empty", () => {
+		document.body.innerHTML = `
+			<select id="array" value="csi-powerstore">
+				<option value="csi-powerstore">PowerStore</option>
+			</select>
+			<select id="installation-type" value="helm">
+				<option value="helm">Helm</option>
+			</select>
+			<input type="text" id="image-repository" value="some-value">
+			<select id="csm-version" value="1.4.0">
+				<option value="1.4.0" selected>CSM 1.4</option>
+			</select>
+			<input type="text" id="driver-namespace" value="temp-value">
+			<input type="text" id="module-namespace">
+		`;
+
+		expect(validateForm()).toBe(false);
+	});
+
+	test("SHOULD return false IF controller-count value is empty", () => {
+		document.body.innerHTML = `
+			<select id="array" value="csi-powerstore">
+				<option value="csi-powerstore">PowerStore</option>
+			</select>
+			<select id="installation-type" value="helm">
+				<option value="helm">Helm</option>
+			</select>
+			<input type="text" id="image-repository" value="some-value">
+			<select id="csm-version" value="1.4.0">
+				<option value="1.4.0" selected>CSM 1.4</option>
+			</select>
+			<input type="text" id="driver-namespace" value="temp-value">
+			<input type="text" id="module-namespace" value="temp-value">
+			<input type="number" id="controller-count">
+		`;
+
+		expect(validateForm()).toBe(false);
+	});
+
+	const powermaxTestHtml = `
+		<select id="array" value="csi-powermax">
+			<option value="csi-powermax">PowerStore</option>
+		</select>
+		<select id="installation-type" value="helm">
+			<option value="helm">Helm</option>
+		</select>
+		<input type="text" id="image-repository" value="some-value">
+		<select id="csm-version" value="1.4.0">
+			<option value="1.4.0" selected>CSM 1.4</option>
+		</select>
+		<input type="text" id="driver-namespace" value="temp-value">
+		<input type="text" id="module-namespace" value="temp-value">
+		<input type="number" id="controller-count" value="1">
+		<input type="text" id="storage-array-id">
+		<input type="text" id="storage-array-endpoint-url">
+		<input type="text" id="management-servers-endpoint-url">
+		<input type="text" id="cluster-prefix">
+		<input type="checkbox" id="vSphere">
+		<input type="text" id="vSphere-fc-port-group">
+		<input type="text" id="vSphere-fc-host-name">
+		<input type="text" id="vSphere-vCenter-host">
+		<input type="text" id="vSphere-vCenter-username">
+		<input type="text" id="vSphere-vCenter-password">
+	`;
+
+	const CONSTANT_PARAM = {
+		POWERMAX: "csi-powermax"
+	};
+
+	test("SHOULD return false IF storage-array-id value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return false IF storage-array-endpoint-url value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return false IF management-servers-endpoint-url value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return false IF cluster-prefix value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('management-servers-endpoint-url').value = "test-value";
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return true IF vSphere value is unchecked", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('management-servers-endpoint-url').value = "test-value";
+		document.getElementById('cluster-prefix').value = "test-value";
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(true);
+	});
+
+	test("SHOULD return false IF vSphere value is checked AND vSphere-fc-port-group value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('management-servers-endpoint-url').value = "test-value";
+		document.getElementById('cluster-prefix').value = "test-value";
+		$("#vSphere").prop('checked', true);
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return false IF vSphere value is checked AND vSphere-fc-host-name value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('management-servers-endpoint-url').value = "test-value";
+		document.getElementById('cluster-prefix').value = "test-value";
+		$("#vSphere").prop('checked', true);
+		document.getElementById('vSphere-fc-port-group').value = "test-value";
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return false IF vSphere value is checked AND vSphere-vCenter-host value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('management-servers-endpoint-url').value = "test-value";
+		document.getElementById('cluster-prefix').value = "test-value";
+		$("#vSphere").prop('checked', true);
+		document.getElementById('vSphere-fc-port-group').value = "test-value";
+		document.getElementById('vSphere-fc-host-name').value = "test-value";
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return false IF vSphere value is checked AND vSphere-vCenter-username value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('management-servers-endpoint-url').value = "test-value";
+		document.getElementById('cluster-prefix').value = "test-value";
+		$("#vSphere").prop('checked', true);
+		document.getElementById('vSphere-fc-port-group').value = "test-value";
+		document.getElementById('vSphere-fc-host-name').value = "test-value";
+		document.getElementById('vSphere-vCenter-host').value = "test-value";
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return false IF vSphere value is checked AND vSphere-vCenter-password value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('management-servers-endpoint-url').value = "test-value";
+		document.getElementById('cluster-prefix').value = "test-value";
+		$("#vSphere").prop('checked', true);
+		document.getElementById('vSphere-fc-port-group').value = "test-value";
+		document.getElementById('vSphere-fc-host-name').value = "test-value";
+		document.getElementById('vSphere-vCenter-host').value = "test-value";
+		document.getElementById('vSphere-vCenter-username').value = "test-value";
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return false IF vSphere value is checked AND all required values are non-empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('management-servers-endpoint-url').value = "test-value";
+		document.getElementById('cluster-prefix').value = "test-value";
+		$("#vSphere").prop('checked', true);
+		document.getElementById('vSphere-fc-port-group').value = "test-value";
+		document.getElementById('vSphere-fc-host-name').value = "test-value";
+		document.getElementById('vSphere-vCenter-host').value = "test-value";
+		document.getElementById('vSphere-vCenter-username').value = "test-value";
+		document.getElementById('vSphere-vCenter-password').value = "test-value";
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(true);
 	});
 });
 
