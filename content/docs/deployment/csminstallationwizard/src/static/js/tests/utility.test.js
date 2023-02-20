@@ -131,8 +131,8 @@ describe("GIVEN validateForm functions", () => {
 	});
 
 	const powermaxTestHtml = `
-		<select id="array" value="csi-powermax">
-			<option value="csi-powermax">PowerStore</option>
+		<select id="array" value="powermax">
+			<option value="powermax">PowerMax</option>
 		</select>
 		<select id="installation-type" value="helm">
 			<option value="helm">Helm</option>
@@ -146,6 +146,7 @@ describe("GIVEN validateForm functions", () => {
 		<input type="number" id="controller-count" value="1">
 		<input type="text" id="storage-array-id">
 		<input type="text" id="storage-array-endpoint-url">
+		<input type="text" id="storage-array-backup-endpoint-url">
 		<input type="text" id="management-servers-endpoint-url">
 		<input type="text" id="cluster-prefix">
 		<input type="checkbox" id="vSphere">
@@ -157,7 +158,7 @@ describe("GIVEN validateForm functions", () => {
 	`;
 
 	const CONSTANT_PARAM = {
-		POWERMAX: "csi-powermax"
+		POWERMAX: "powermax"
 	};
 
 	test("SHOULD return false IF storage-array-id value is empty", () => {
@@ -173,11 +174,18 @@ describe("GIVEN validateForm functions", () => {
 		expect(validateForm(CONSTANT_PARAM)).toBe(false);
 	});
 
+	test("SHOULD return false IF storage-array-backup-endpoint-url value is empty", () => {
+		document.body.innerHTML = powermaxTestHtml;
+		document.getElementById('storage-array-id').value = "test-value";
+		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
 	test("SHOULD return false IF management-servers-endpoint-url value is empty", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
-
+		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
 		expect(validateForm(CONSTANT_PARAM)).toBe(false);
 	});
 
@@ -185,6 +193,7 @@ describe("GIVEN validateForm functions", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
 		document.getElementById('management-servers-endpoint-url').value = "test-value";
 
 		expect(validateForm(CONSTANT_PARAM)).toBe(false);
@@ -194,6 +203,7 @@ describe("GIVEN validateForm functions", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
 		document.getElementById('management-servers-endpoint-url').value = "test-value";
 		document.getElementById('cluster-prefix').value = "test-value";
 
@@ -204,6 +214,7 @@ describe("GIVEN validateForm functions", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
 		document.getElementById('management-servers-endpoint-url').value = "test-value";
 		document.getElementById('cluster-prefix').value = "test-value";
 		$("#vSphere").prop('checked', true);
@@ -215,6 +226,7 @@ describe("GIVEN validateForm functions", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
 		document.getElementById('management-servers-endpoint-url').value = "test-value";
 		document.getElementById('cluster-prefix').value = "test-value";
 		$("#vSphere").prop('checked', true);
@@ -227,6 +239,7 @@ describe("GIVEN validateForm functions", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
 		document.getElementById('management-servers-endpoint-url').value = "test-value";
 		document.getElementById('cluster-prefix').value = "test-value";
 		$("#vSphere").prop('checked', true);
@@ -240,6 +253,7 @@ describe("GIVEN validateForm functions", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
 		document.getElementById('management-servers-endpoint-url').value = "test-value";
 		document.getElementById('cluster-prefix').value = "test-value";
 		$("#vSphere").prop('checked', true);
@@ -254,6 +268,7 @@ describe("GIVEN validateForm functions", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
 		document.getElementById('management-servers-endpoint-url').value = "test-value";
 		document.getElementById('cluster-prefix').value = "test-value";
 		$("#vSphere").prop('checked', true);
@@ -269,6 +284,7 @@ describe("GIVEN validateForm functions", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
+		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
 		document.getElementById('management-servers-endpoint-url').value = "test-value";
 		document.getElementById('cluster-prefix').value = "test-value";
 		$("#vSphere").prop('checked', true);

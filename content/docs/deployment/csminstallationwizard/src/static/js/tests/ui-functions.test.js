@@ -42,7 +42,8 @@ const CONSTANTS = {
 	POWERSTORE: "csi-powerstore",
 	POWERSCALE: "csi-powerscale",
 	POWERFLEX: "csi-powerflex",
-	POWERMAX: "csi-powermax",
+	POWERMAX: "powermax",
+	POWERSTORE_RELEASE_NAME: "powerstore",
 	UNITY: "csi-unity",
 	MODULE: "csm-modules",
 	CSM_VALUES: "csm-values",
@@ -399,7 +400,7 @@ describe("GIVEN displayModules function", () => {
 	test("SHOULD show expected components for csi-powermax", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("csi-powermax", CONSTANTS);
+		displayModules("powermax", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("none");
 		expect($(".authorization").css("display")).toEqual("block");
@@ -449,9 +450,9 @@ describe("GIVEN hideFields function", () => {
 describe("GIVEN displayCommands function", () => {
 	const commandTitleValue = "Run the following commands to install";
 	const commandNoteValue = "Ensure that the namespaces and secrets are created before installing the helm chart";
-	const command1Value = "helm repo add dell https://chaganti-rajitha.github.io/csm-installation/charts/pkg";
-	const command2Value = "helm install $driver  dell/csm-drivers-modules -n [namespace] -f values.yaml";
-	const command3Value = "helm install $driver  dell/csm-drivers-modules -f values.yaml";
+	const command1Value = "helm repo add dell https://dell.github.io/helm-charts";
+	const command2Value = "helm install $release-name dell/container-storage-modules -n [namespace] -f values.yaml";
+	const command3Value = "helm install $release-name dell/container-storage-modules -f values.yaml";
 	test("SHOULD show expected commands", () => {
 		document.body.innerHTML = `
             <input type="text" id="driver-namespace" value="csi-powerstore">
@@ -465,13 +466,13 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("csi-powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
 		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
-		expect($("#command1").text()).toEqual("helm repo add dell https://chaganti-rajitha.github.io/csm-installation/charts/pkg");
-		expect($("#command2").text()).toEqual("helm install csi-powerstore  dell/csm-drivers-modules -f values.yaml");
+		expect($("#command1").text()).toEqual("helm repo add dell https://dell.github.io/helm-charts");
+		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -f values.yaml");
 	});
 
 	test("SHOULD show expected commands for singleNamespace", () => {
@@ -487,13 +488,13 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("csi-powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
 		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
-		expect($("#command1").text()).toEqual("helm repo add dell https://chaganti-rajitha.github.io/csm-installation/charts/pkg");
-		expect($("#command2").text()).toEqual("helm install csi-powerstore  dell/csm-drivers-modules -n [namespace] -f values.yaml");
+		expect($("#command1").text()).toEqual("helm repo add dell https://dell.github.io/helm-charts");
+		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n [namespace] -f values.yaml");
 	});
 });
 

@@ -18,6 +18,7 @@
 var driver = "";
 var driverNamespace = "";
 var moduleNamespace = "csm-module";
+var releaseName ="";
 
 const setupTooltipStyle = () => {
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -160,7 +161,7 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(driverTemplate);
 	link.style.display = 'inline-block';
-	displayCommandsFunc(driver, commandTitle, commandNote, command1, command2, command3)
+	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, command3)
 	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
 	return true;
 }
@@ -214,7 +215,7 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	}
 }
 
-function displayCommands(driverName, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value) {
+function displayCommands(releaseName, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value) {
 	driverNamespace = document.getElementById("driver-namespace").value
 	$("#command-text-area").show();
 	$("#command-title").html(commandTitleValue);
@@ -222,9 +223,9 @@ function displayCommands(driverName, commandTitleValue, commandNoteValue, comman
 	$("#command1").html(command1Value.replaceAll("$drivernamespace", driverNamespace));
 	$("#command-note").html(commandNoteValue.replaceAll("$drivernamespace", driverNamespace));
 	if ($("#single-namespace").prop('checked') === true) {
-		$("#command2").html(command2Value.replaceAll("$driver", driverName));
+		$("#command2").html(command2Value.replaceAll("$release-name", releaseName));
 	} else {
-		$("#command2").html(command3Value.replaceAll("$driver", driverName));
+		$("#command2").html(command3Value.replaceAll("$release-name", releaseName));
 	}
 }
 

@@ -22,7 +22,7 @@ const CONSTANTS = {
 	POWERSTORE: "csi-powerstore",
 	POWERSCALE: "csi-powerscale",
 	POWERFLEX: "csi-powerflex",
-	POWERMAX: "csi-powermax",
+	POWERMAX: "powermax",
 	UNITY: "csi-unity",
 	MODULE: "csm-modules",
 	CSM_VALUES: "csm-values",
@@ -784,7 +784,7 @@ describe("GIVEN createYamlString function", () => {
             namespace: ""
         `;
 
-		const received = createYamlString(testYAML, testObject, "csi-powermax", CONSTANTS);
+		const received = createYamlString(testYAML, testObject, "powermax", CONSTANTS);
 
 		expect(received).toEqual(expected);
 	});
@@ -896,7 +896,7 @@ describe("GIVEN createYamlString function", () => {
             namespace: 
         `;
 
-		const received = createYamlString(testYAML, testObjectSingleNamespaceDisabled, "csi-powermax", CONSTANTS);
+		const received = createYamlString(testYAML, testObjectSingleNamespaceDisabled, "powermax", CONSTANTS);
 
 		expect(received).toEqual(expected);
 	});

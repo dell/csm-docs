@@ -155,10 +155,12 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
 		yaml = yaml.replaceAll("$POWERSTORE_ENABLED", true);
+		releaseName = CONSTANTS_PARAM.POWERSTORE_RELEASE_NAME;
 	} else if (driverParam === CONSTANTS_PARAM.POWERFLEX) {
 		yaml = yaml.replaceAll("$POWERFLEX_ENABLED", true);
 	} else if (driverParam === CONSTANTS_PARAM.POWERMAX) {
 		yaml = yaml.replaceAll("$POWERMAX_ENABLED", true);
+		releaseName = CONSTANTS_PARAM.POWERMAX;
 	} else if (driverParam === CONSTANTS_PARAM.POWERSCALE) {
 		yaml = yaml.replaceAll("$POWERSCALE_ENABLED", true);
 	} else {
