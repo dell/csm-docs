@@ -73,6 +73,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.resiliency = $("#resiliency").prop('checked') ? true : false;
 	DriverValues.storageCapacity = $("#storage-capacity").prop('checked') ? true : false;
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
+	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value;
 	DriverValues.vgsnapshotImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("vgsnapshotImage");
 	DriverValues.replicationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("replicationImage");
 	DriverValues.migrationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("migrationImage");
@@ -100,7 +101,6 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.storageArrayId = $("#storage-array-id").val();
 	DriverValues.storageArrayEndpointUrl = $("#storage-array-endpoint-url").val() || '""';
 	DriverValues.storageArrayBackupEndpointUrl = $("#storage-array-backup-endpoint-url").val() || '""';
-	DriverValues.managementServersEndpointUrl = $("#management-servers-endpoint-url").val() || '""';
 	DriverValues.clusterPrefix = $("#cluster-prefix").val();
 	DriverValues.portGroups = $("#port-groups").val();
 
@@ -131,6 +131,7 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 	yaml = yaml.replaceAll("$MIGRATION_IMAGE", obj.migrationImage);
 	yaml = yaml.replaceAll("$AUTHORIZATION_ENABLED", obj.authorization);
 	yaml = yaml.replaceAll("$AUTHORIZATION_IMAGE", obj.authorizationImage);
+	yaml = yaml.replaceAll("$AUTHORIZATION_PROXY_HOST", obj.authorizationProxyHost);
 	yaml = yaml.replaceAll("$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION", obj.authorizationSkipCertValidation);
 	yaml = yaml.replaceAll("$OBSERVABILITY_ENABLED", obj.observability);
 	yaml = yaml.replaceAll("$RESILIENCY_ENABLED", obj.resiliency);
@@ -141,7 +142,7 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_ID", obj.storageArrayId);
 	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_ENDPOINT_URL", obj.storageArrayEndpointUrl);
 	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", obj.storageArrayBackupEndpointUrl);
-	yaml = yaml.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", obj.managementServersEndpointUrl);
+	yaml = yaml.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", obj.storageArrayEndpointUrl);
 	yaml = yaml.replaceAll("$POWERMAX_CSI_REVERSE_PROXY_IMAGE", obj.powermaxCSIReverseProxyImage);
 	yaml = yaml.replaceAll("$POWERMAX_CLUSTER_PREFIX", obj.clusterPrefix);
 	yaml = yaml.replaceAll("$POWERMAX_PORT_GROUPS", obj.portGroups);
@@ -155,10 +156,12 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
 		yaml = yaml.replaceAll("$POWERSTORE_ENABLED", true);
+		releaseName = CONSTANTS_PARAM.POWERSTORE_RELEASE_NAME;
 	} else if (driverParam === CONSTANTS_PARAM.POWERFLEX) {
 		yaml = yaml.replaceAll("$POWERFLEX_ENABLED", true);
 	} else if (driverParam === CONSTANTS_PARAM.POWERMAX) {
 		yaml = yaml.replaceAll("$POWERMAX_ENABLED", true);
+		releaseName = CONSTANTS_PARAM.POWERMAX;
 	} else if (driverParam === CONSTANTS_PARAM.POWERSCALE) {
 		yaml = yaml.replaceAll("$POWERSCALE_ENABLED", true);
 	} else {
