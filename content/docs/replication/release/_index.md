@@ -13,6 +13,7 @@ Description: >
  - [PowerScale - Implement Failback functionality](https://github.com/dell/csm/issues/558)
  - [PowerScale - Implement Reprotect functionality](https://github.com/dell/csm/issues/532)
  - [PowerScale - SyncIQ policy improvements](https://github.com/dell/csm/issues/573)
+ - [PowerFlex - Initial Replication Support](https://github.com/dell/csm/issues/618)
 
 ### Fixed Issues
 

@@ -189,7 +189,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.5.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -293,7 +293,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 - This script also runs the verify.sh script in the same directory. You will be prompted to enter the credentials for each of the Kubernetes nodes. The `verify.sh` script needs the credentials to check if the iSCSI initiators have been configured on all nodes. You can also skip the verification step by specifying the `--skip-verify-node` option
 - In order to enable authorization, there should be an authorization proxy server already installed. 
 - PowerMax Array username must have role as `StorageAdmin` to be able to perform CRUD operations.
-- If the user is using complex K8s version like “v1.22.3-mirantis-1”, use below kubeVersion check in [helm Chart](https://github.com/dell/csi-powermax/blob/main/helm/csi-powermax/Chart.yaml) file. kubeVersion: “>= 1.22.0-0 < 1.25.0-0”.
+- If the user is using complex K8s version like “v1.23.3-mirantis-1”, use this kubeVersion check in [helm Chart](https://github.com/dell/csi-powermax/blob/main/helm/csi-powermax/Chart.yaml) file. kubeVersion: “>= 1.23.0-0 < 1.27.0-0”.
 - User should provide all boolean values with double-quotes. This applies only for values.yaml. Example: “true”/“false”.
 - controllerCount parameter value should be <= number of nodes in the kubernetes cluster else install script fails.
 - Endpoint should not have any special character at the end apart from port number.

@@ -662,3 +662,65 @@ allowedTopologies:
           - csi-vxflexos.dellemc.com
 ```
 Once the volume gets created, the ControllerPublishVolume will set the QoS limits for the volumes mapped to SDC.
+
+## Rename SDC
+
+Starting with version 2.6, the CSI driver for PowerFlex will support renaming of SDCs. To use this feature, the node section of values.yaml should have renameSDC keys enabled with a prefix value.
+
+To enable renaming of SDC, make the following edits to [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
+```yaml
+# "node" allows to configure node specific parameters
+node:
+   ...
+   ...
+
+  # "renameSDC" defines the rename operation for SDC
+  # Default value: None
+  renameSDC:
+    # enabled: Enable/Disable rename of SDC
+    # Allowed values:
+    #   true: enable renaming
+    #   false: disable renaming
+    # Default value: "false"
+    enabled: false
+    # "prefix" defines a string for the new name of the SDC.
+    # "prefix" + "worker_node_hostname" should not exceed 31 chars.
+    # Default value: none
+    # Examples: "rhel-sdc", "sdc-test"
+    prefix: "sdc-test"
+```
+The renameSDC section is going to be used by the Node Service, it has two keys enabled and prefix:
+* `enabled`: Boolean variable that specifies if the renaming for SDC is to be carried out or not. If true then the driver will perform the rename operation. By default, its value will be false.
+* `prefix`: string variable that is used to set the prefix for SDC name.
+
+Based on these two keys, there are certain scenarios on which the driver is going to perform the rename SDC operation:
+* If enabled and prefix given then set the prefix+worker_node_name for SDC name.
+* If enabled and prefix not given then set worker_node_name for SDC name.
+
+> NOTE: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
+
+## Pre-approving SDC by GUID
+
+Starting with version 2.6, the CSI Driver for PowerFlex will support pre-approving SDC by GUID.
+CSI PowerFlex driver will detect the SDC mode set on the PowerFlex array and will request SDC approval from the array prior to publishing a volume. This is specific to each SDC.
+
+To request SDC approval for GUID, make the following edits to [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
+```yaml
+# "node" allows to configure node specific parameters
+node:
+  ...
+  ...
+
+  # "approveSDC" defines the approve operation for SDC
+  # Default value: None
+  approveSDC:
+    # enabled: Enable/Disable SDC approval
+    #Allowed values:
+    #  true: Driver will attempt to approve restricted SDC by GUID during setup
+    #  false: Driver will not attempt to approve restricted SDC by GUID during setup
+    # Default value: false
+    enabled: false
+```
+> NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
+
+If SDC approval is denied, then provisioning of the volume will not be attempted and an appropriate error message is reported in the logs/events so the user is informed.
