@@ -226,7 +226,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | ISI_PRIV_SYNCIQ        | Read Write |
 
 Create isilon-creds secret using the following command:
-  <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
+  <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
    
    *NOTE:* 
    - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
@@ -299,4 +299,19 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 ## Volume Snapshot Class
 
 Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. Sample volume snapshot class manifests are available at `samples/volumesnapshotclass/`. Use these sample manifests to create a volumesnapshotclass for creating volume snapshots; uncomment/ update the manifests as per the requirements.
+
+## Silent Mount Re-tries (v2.6.0)
+There are race conditions, when completing the ControllerPublish call to populate the client to volumes export list takes longer time than usual due to background NFS refresh process on OneFS wouldn't have completed at same time, resulted in error:"mount failed" with initial attempts and might log success after few re-tries. This unnecessarily logs false positive "mount failed" error logs and to overcome this scenario Driver does silent mount re-tries attempts after every two sec. (five attempts max) for every NodePublish Call and allows successful mount within five re-tries without logging any mount error messages.
+"mount failed" will be logged once these five mount retrial attempts are exhausted and still client is not populated to export list.
+
+Mount Re-tries handles below scenarios:
+- Access denied by server while mounting (NFSv3)
+- No such file or directory (NFSv4)
+
+*Sample*:
+```
+level=error clusterName=powerscale runid=10 msg="mount failed: exit status 32
+mounting arguments: -t nfs -o rw XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d /var/lib/kubelet/pods/9f72096a-a7dc-4517-906c-20697f9d7375/volumes/kubernetes.io~csi/k8s-ac7b91962d/mount
+output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d
+```
 
