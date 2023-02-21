@@ -84,11 +84,11 @@ User can query for all Dell CSI drivers using the following command:
 | ***Node parameters*** |
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
 
-4.  Execute the following command to create PowerStore custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI PowerStore driver in the namespace specified in the input YAML file
-      - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n <driver-namespace>`
+4.  Execute the following command to create PowerStore custom resource:`kubectl create -f <input_sample_file.yaml>`. This command will deploy the CSI PowerStore driver in the namespace specified in the input YAML file
+      - Next, the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n <driver-namespace>`
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
     
 **Note** : 
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+   2. Snapshotter and resizer sidecars are not optional. They are defaults with Driver installation. 
