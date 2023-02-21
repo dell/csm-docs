@@ -83,6 +83,7 @@ csi-powermax:
     storageArrays:
       - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
         endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
+        backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
     managementServers:
       - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
   version: $VERSION
@@ -116,6 +117,8 @@ csi-powermax:
   authorization:
     enabled: $AUTHORIZATION_ENABLED
     sidecarProxyImage: $AUTHORIZATION_IMAGE
+    proxyHost: $AUTHORIZATION_PROXY_HOST
+    skipCertificateValidation:  $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
   vSphere:
     enabled: $VSPHERE_ENABLED
     fcPortGroup: "$VSPHERE_FC_PORT_GROUP"
@@ -182,17 +185,6 @@ csm-application-mobility:
       #volumeMounts:
       #- mountPath: /target
         #name: plugins
-
-## K8S/Authorization Module ATTRIBUTES
-##########################################
-csm-authorization:
-  enabled: $AUTHORIZATION_ENABLED
-  namespace: $CSM_NAMESPACE
-  cert-manager:
-    enabled: false
-  redis:
-    namespace: $CSM_NAMESPACE
-    #storageClass: 
 
 ## K8S/Cert-manager ATTRIBUTES
 ##########################################
