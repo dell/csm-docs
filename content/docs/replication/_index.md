@@ -49,9 +49,9 @@ CSM for Replication provides the following capabilities:
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               |                                                 PowerMax                                                 |     PowerStore             |             PowerScale             | PowerFlex |
-| ------------- | :------------------------------------------------------------------------------------------------------: | :------------------------: | :--------------------------------: | :-------: |
-| Storage Array | PowerMax 2000/8000 <br> PowerMax 2500/8500 <br> 5978.479.479, 5978.711.711, 6079.xxx.xxx, Unisphere 10.0 | 1.0.x, 2.0.x, 2.1.x, 3.5.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 3.6.x, 4.0|
+|               |                                                 PowerMax                                                 |                  PowerStore                  |             PowerScale             | PowerFlex |
+| ------------- | :------------------------------------------------------------------------------------------------------: | :------------------------------------------: | :--------------------------------: | :-------: |
+| Storage Array | PowerMax 2000/8000 <br> PowerMax 2500/8500 <br> 5978.479.479, 5978.711.711, 6079.xxx.xxx, Unisphere 10.0 | 1.0.x, <br> 2.0.x, 2.1.x, <br> 3.0, 3.2, 3.5 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 | 3.6.x, 4.0|
 {{</table>}}
 
 ## Supported CSI Drivers
