@@ -9,8 +9,8 @@ description: Release notes for PowerScale CSI driver
 
 - [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
 - [Added support for Ubuntu 22.04](https://github.com/dell/csm/issues/671)
-- [Added support for MKE 3.6.x]()
-- [Added support for RKE 1.4.1]()
+- [Added support for MKE 3.6.x](https://github.com/dell/csm/issues/672)
+- [Added support for RKE 1.4.1](https://github.com/dell/csm/issues/670)
 
 ### Fixed Issues
 
