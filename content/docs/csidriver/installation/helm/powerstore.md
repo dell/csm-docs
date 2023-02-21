@@ -74,6 +74,7 @@ If you want to use the protocol, set up the NVMe initiators as follows:
 modprobe nvme
 modprobe nvme_tcp
 ```
+- The NVMe modules may not be available after a node reboot. Loading the modules at startup is recommended.
 
 **Requirements for NVMeFC**
 - NVMeFC Zoning of the Host Bus Adapters (HBAs) to the Fibre Channel port must be done.
