@@ -52,7 +52,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.controllerCount = document.getElementById("controller-count").value;
 	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : false;
 	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : false;
-	DriverValues.nodeSelectorLabel = document.getElementById("node-selector-label").value;
+	DriverValues.nodeSelectorLabel = document.getElementById("node-selector-label").value || '""';
 	var labels = DriverValues.nodeSelectorLabel.split(":");
 	var nodeSelector = CONSTANTS_PARAM.NODE_SELECTOR_TAB + labels[0] + ': "' + labels[1] + '"';
 	if ($("#controller-pods-node-selector").prop('checked') === true) {
@@ -66,14 +66,28 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.resizer = $("#resizer").prop('checked') ? true : false;
 	DriverValues.healthMonitor = $("#health-monitor").prop('checked') ? true : false;
 	DriverValues.replication = $("#replication").prop('checked') ? true : false;
+	DriverValues.migration = $("#migration").prop('checked') ? true : false;
 	DriverValues.observability = $("#observability").prop('checked') ? true : false;
 	DriverValues.observabilityMetrics = $("#observability-metrics").prop('checked') ? true : false;
 	DriverValues.authorization = $("#authorization").prop('checked') ? true : false;
+	DriverValues.resiliency = $("#resiliency").prop('checked') ? true : false;
+	DriverValues.storageCapacity = $("#storage-capacity").prop('checked') ? true : false;
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
 	DriverValues.vgsnapshotImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("vgsnapshotImage");
 	DriverValues.replicationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("replicationImage");
+	DriverValues.migrationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("migrationImage");
 	DriverValues.authorizationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("authorizationImage");
+	DriverValues.powermaxCSIReverseProxyImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("powermaxCSIReverseProxyImage");
+	DriverValues.podmonImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("podmonImage");
+
+	if (DriverValues.csmVersion === "1.4.0" || DriverValues.csmVersion === "1.5.0") {
+		DriverValues.powermaxCSIReverseProxyImageEnabled = $("#powermax-csi-reverse-proxy").prop('checked') ? true : false;
+	} else {
+		DriverValues.powermaxCSIReverseProxyImageEnabled = true;
+	}
+
 	DriverValues.applicationMobility = $("#application-mobility").prop('checked') ? true : false;
+	DriverValues.velero = $("#velero").prop('checked') ? true : false;
 	DriverValues.certManagerEnabled = $("#cert-manager-enabled").prop('checked') ? true : false;
 	DriverValues.singleNamespaceEnabled = $("#single-namespace").prop('checked') ? true : false;
 	driverNamespace = document.getElementById("driver-namespace").value;
@@ -83,87 +97,128 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	authorizationEnabled = DriverValues.authorization;
 	replicationEnabled = DriverValues.replication;
 
+	DriverValues.storageArrayId = $("#storage-array-id").val();
+	DriverValues.storageArrayEndpointUrl = $("#storage-array-endpoint-url").val() || '""';
+	DriverValues.storageArrayBackupEndpointUrl = $("#storage-array-backup-endpoint-url").val() || '""';
+	DriverValues.managementServersEndpointUrl = $("#management-servers-endpoint-url").val() || '""';
+	DriverValues.clusterPrefix = $("#cluster-prefix").val();
+	DriverValues.portGroups = $("#port-groups").val();
+
+	DriverValues.vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
+	DriverValues.vSphereFCPortGroup = $("#vSphere-fc-port-group").val();
+	DriverValues.vSphereFCHostName = $("#vSphere-fc-host-name").val();
+	DriverValues.vSphereVCenterHost = $("#vSphere-vCenter-host").val();
+	DriverValues.vSphereVCenterUserName = $("#vSphere-vCenter-username").val();
+	DriverValues.vSphereVCenterPassword = $("#vSphere-vCenter-password").val();
+
 	return DriverValues
 }
 
 function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
-	yaml = yaml.replace("$IMAGE_REPOSITORY", obj.imageRepository);
-	yaml = yaml.replace("$VERSION", obj.driverVersion);
-	yaml = yaml.replace("$CONTROLLER_COUNT", obj.controllerCount);
-	yaml = yaml.replace("$CONTROLLER_POD_NODE_SELECTOR", obj.controllerPodsNodeSelector);
-	yaml = yaml.replace("$NODE_POD_NODE_SELECTOR", obj.nodePodsNodeSelector);
+	yaml = yaml.replaceAll("$IMAGE_REPOSITORY", obj.imageRepository);
+	yaml = yaml.replaceAll("$VERSION", obj.driverVersion);
+	yaml = yaml.replaceAll("$CONTROLLER_COUNT", obj.controllerCount);
+	yaml = yaml.replaceAll("$CONTROLLER_POD_NODE_SELECTOR", obj.controllerPodsNodeSelector);
+	yaml = yaml.replaceAll("$NODE_POD_NODE_SELECTOR", obj.nodePodsNodeSelector);
 	yaml = yaml.replaceAll("$HEALTH_MONITOR_ENABLED", obj.healthMonitor);
-	yaml = yaml.replace("$VG_SNAPSHOT_ENABLED", obj.vgsnapshot);
-	yaml = yaml.replace("$VG_SNAPSHOT_IMAGE", obj.vgsnapshotImage);
-	yaml = yaml.replace("$SNAPSHOT_ENABLED", obj.snapshot);
-	yaml = yaml.replace("$RESIZER_ENABLED", obj.resizer);
+	yaml = yaml.replaceAll("$VG_SNAPSHOT_ENABLED", obj.vgsnapshot);
+	yaml = yaml.replaceAll("$VG_SNAPSHOT_IMAGE", obj.vgsnapshotImage);
+	yaml = yaml.replaceAll("$SNAPSHOT_ENABLED", obj.snapshot);
+	yaml = yaml.replaceAll("$RESIZER_ENABLED", obj.resizer);
 	yaml = yaml.replaceAll("$REPLICATION_ENABLED", obj.replication);
-	yaml = yaml.replace("$REPLICATION_IMAGE", obj.replicationImage);
-	yaml = yaml.replace("$AUTHORIZATION_ENABLED", obj.authorization);
-	yaml = yaml.replace("$AUTHORIZATION_IMAGE", obj.authorizationImage);
-	yaml = yaml.replace("$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION", obj.authorizationSkipCertValidation);
-	yaml = yaml.replace("$OBSERVABILITY_ENABLED", obj.observability);
+	yaml = yaml.replaceAll("$REPLICATION_IMAGE", obj.replicationImage);
+	yaml = yaml.replaceAll("$MIGRATION_ENABLED", obj.migration);
+	yaml = yaml.replaceAll("$MIGRATION_IMAGE", obj.migrationImage);
+	yaml = yaml.replaceAll("$AUTHORIZATION_ENABLED", obj.authorization);
+	yaml = yaml.replaceAll("$AUTHORIZATION_IMAGE", obj.authorizationImage);
+	yaml = yaml.replaceAll("$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION", obj.authorizationSkipCertValidation);
+	yaml = yaml.replaceAll("$OBSERVABILITY_ENABLED", obj.observability);
+	yaml = yaml.replaceAll("$RESILIENCY_ENABLED", obj.resiliency);
+	yaml = yaml.replaceAll("$PODMAN_IMAGE", obj.podmonImage);
+	yaml = yaml.replaceAll("$STORAGE_CAPACITY_ENABLED", obj.storageCapacity);
+	yaml = yaml.replaceAll("$POWERMAX_CSI_REVERSE_PROXY_IMAGE_ENABLED", obj.powermaxCSIReverseProxyImageEnabled);
+
+	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_ID", obj.storageArrayId);
+	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_ENDPOINT_URL", obj.storageArrayEndpointUrl);
+	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", obj.storageArrayBackupEndpointUrl);
+	yaml = yaml.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", obj.managementServersEndpointUrl);
+	yaml = yaml.replaceAll("$POWERMAX_CSI_REVERSE_PROXY_IMAGE", obj.powermaxCSIReverseProxyImage);
+	yaml = yaml.replaceAll("$POWERMAX_CLUSTER_PREFIX", obj.clusterPrefix);
+	yaml = yaml.replaceAll("$POWERMAX_PORT_GROUPS", obj.portGroups);
+	
+	yaml = yaml.replaceAll("$VSPHERE_ENABLED", obj.vSphereEnabled);
+	yaml = yaml.replaceAll("$VSPHERE_FC_PORT_GROUP", obj.vSphereFCPortGroup);
+	yaml = yaml.replaceAll("$VSPHERE_FC_HOST_NAME", obj.vSphereFCHostName);
+	yaml = yaml.replaceAll("$VSPHERE_VCENTER_HOST", obj.vSphereVCenterHost);
+	yaml = yaml.replaceAll("$VSPHERE_VCENTER_USERNAME", obj.vSphereVCenterUserName);
+	yaml = yaml.replaceAll("$VSPHERE_VCENTER_PASSWORD", obj.vSphereVCenterPassword);
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
-		yaml = yaml.replace("$POWERSTORE_ENABLED", true);
+		yaml = yaml.replaceAll("$POWERSTORE_ENABLED", true);
 	} else if (driverParam === CONSTANTS_PARAM.POWERFLEX) {
-		yaml = yaml.replace("$POWERFLEX_ENABLED", true);
+		yaml = yaml.replaceAll("$POWERFLEX_ENABLED", true);
 	} else if (driverParam === CONSTANTS_PARAM.POWERMAX) {
-		yaml = yaml.replace("$POWERMAX_ENABLED", true);
+		yaml = yaml.replaceAll("$POWERMAX_ENABLED", true);
 	} else if (driverParam === CONSTANTS_PARAM.POWERSCALE) {
-		yaml = yaml.replace("$POWERSCALE_ENABLED", true);
+		yaml = yaml.replaceAll("$POWERSCALE_ENABLED", true);
 	} else {
-		yaml = yaml.replace("$UNITY_ENABLED", true);
+		yaml = yaml.replaceAll("$UNITY_ENABLED", true);
 	}
-	yaml = yaml.replace("$POWERSTORE_ENABLED", false);
-	yaml = yaml.replace("$POWERFLEX_ENABLED", false);
-	yaml = yaml.replace("$POWERMAX_ENABLED", false);
-	yaml = yaml.replace("$POWERSCALE_ENABLED", false);
-	yaml = yaml.replace("$UNITY_ENABLED", false);
+	yaml = yaml.replaceAll("$POWERSTORE_ENABLED", false);
+	yaml = yaml.replaceAll("$POWERFLEX_ENABLED", false);
+	yaml = yaml.replaceAll("$POWERMAX_ENABLED", false);
+	yaml = yaml.replaceAll("$POWERSCALE_ENABLED", false);
+	yaml = yaml.replaceAll("$UNITY_ENABLED", false);
 
 	if (obj.singleNamespaceEnabled) {
 		yaml = yaml.replaceAll("$CSM_NAMESPACE", '""');
-		yaml = yaml.replace("$POWERSTORE_DRIVER_NAMESPACE", '""');
-		yaml = yaml.replace("$POWERFLEX_DRIVER_NAMESPACE", '""');
-		yaml = yaml.replace("$POWERMAX_DRIVER_NAMESPACE", '""');
-		yaml = yaml.replace("$POWERSCALE_DRIVER_NAMESPACE", '""');
-		yaml = yaml.replace("$UNITY_DRIVER_NAMESPACE", '""');
+		yaml = yaml.replaceAll("$POWERSTORE_DRIVER_NAMESPACE", '""');
+		yaml = yaml.replaceAll("$POWERFLEX_DRIVER_NAMESPACE", '""');
+		yaml = yaml.replaceAll("$POWERMAX_DRIVER_NAMESPACE", '""');
+		yaml = yaml.replaceAll("$POWERSCALE_DRIVER_NAMESPACE", '""');
+		yaml = yaml.replaceAll("$UNITY_DRIVER_NAMESPACE", '""');
 	} else {
 		yaml = yaml.replaceAll("$CSM_NAMESPACE", moduleNamespace);
-		yaml = yaml.replace("$POWERSTORE_DRIVER_NAMESPACE", driverNamespace);
-		yaml = yaml.replace("$POWERFLEX_DRIVER_NAMESPACE", driverNamespace);
-		yaml = yaml.replace("$POWERMAX_DRIVER_NAMESPACE", driverNamespace);
-		yaml = yaml.replace("$POWERSCALE_DRIVER_NAMESPACE", driverNamespace);
-		yaml = yaml.replace("$UNITY_DRIVER_NAMESPACE", driverNamespace);
+
+		if (driverNamespace === "") {
+			driverNamespace = driverParam
+		}
 
 		if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
-			yaml = yaml.replace("$POWERSTORE_DRIVER_NAMESPACE", driverParam);
+			yaml = yaml.replaceAll("$POWERSTORE_DRIVER_NAMESPACE", driverNamespace);
 		} else if (driverParam === CONSTANTS_PARAM.POWERFLEX) {
-			yaml = yaml.replace("$POWERFLEX_DRIVER_NAMESPACE", driverParam);
+			yaml = yaml.replaceAll("$POWERFLEX_DRIVER_NAMESPACE", driverNamespace);
 		} else if (driverParam === CONSTANTS_PARAM.POWERMAX) {
-			yaml = yaml.replace("$POWERMAX_DRIVER_NAMESPACE", driverParam);
+			yaml = yaml.replaceAll("$POWERMAX_DRIVER_NAMESPACE", driverNamespace);
 		} else if (driverParam === CONSTANTS_PARAM.POWERSCALE) {
-			yaml = yaml.replace("$POWERSCALE_DRIVER_NAMESPACE", driverParam);
+			yaml = yaml.replaceAll("$POWERSCALE_DRIVER_NAMESPACE", driverNamespace);
 		} else {
-			yaml = yaml.replace("$UNITY_DRIVER_NAMESPACE", driverParam);
+			yaml = yaml.replaceAll("$UNITY_DRIVER_NAMESPACE", driverNamespace);
 		}
 	}
 	if (obj.observabilityMetrics) {
 		if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
-			yaml = yaml.replace("$POWERSTORE_OBSERVABILITY_METRICS_ENABLED", true);
+			yaml = yaml.replaceAll("$POWERSTORE_OBSERVABILITY_METRICS_ENABLED", true);
+		} else if (driverParam === CONSTANTS_PARAM.POWERMAX) {
+			yaml = yaml.replaceAll("$POWERMAX_OBSERVABILITY_METRICS_ENABLED", true);
 		} else if (driverParam === CONSTANTS_PARAM.POWERFLEX) {
-			yaml = yaml.replace("$POWERFLEX_OBSERVABILITY_METRICS_ENABLED", true);
+			yaml = yaml.replaceAll("$POWERFLEX_OBSERVABILITY_METRICS_ENABLED", true);
 		} else if (driverParam === CONSTANTS_PARAM.POWERSCALE) {
-			yaml = yaml.replace("$POWERSCALE_OBSERVABILITY_METRICS_ENABLED", true);
+			yaml = yaml.replaceAll("$POWERSCALE_OBSERVABILITY_METRICS_ENABLED", true);
 		}
 	}
-	yaml = yaml.replace("$POWERSTORE_OBSERVABILITY_METRICS_ENABLED", false);
-	yaml = yaml.replace("$POWERFLEX_OBSERVABILITY_METRICS_ENABLED", false);
-	yaml = yaml.replace("$POWERSCALE_OBSERVABILITY_METRICS_ENABLED", false);
+	yaml = yaml.replaceAll("$POWERSTORE_OBSERVABILITY_METRICS_ENABLED", false);
+	yaml = yaml.replaceAll("$POWERMAX_OBSERVABILITY_METRICS_ENABLED", false);
+	yaml = yaml.replaceAll("$POWERFLEX_OBSERVABILITY_METRICS_ENABLED", false);
+	yaml = yaml.replaceAll("$POWERSCALE_OBSERVABILITY_METRICS_ENABLED", false);
 
-	yaml = yaml.replace("$APP_MOBILITY_ENABLED", obj.applicationMobility);
-	yaml = yaml.replace("$CERT_MANAGER_ENABLED", obj.certManagerEnabled);
-	yaml = yaml.replaceAll("null", "")
+	yaml = yaml.replaceAll("$APP_MOBILITY_ENABLED", obj.applicationMobility);
+	yaml = yaml.replaceAll("$VELERO_ENABLED", obj.velero);
+	yaml = yaml.replaceAll("$CERT_MANAGER_ENABLED", obj.certManagerEnabled);
+
+	const regex = /\$[a-zA-Z0-9_-]*/g;
+	yaml = yaml.replaceAll(regex, '""');
+
 	return yaml
 }
 

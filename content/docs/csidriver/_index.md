@@ -20,12 +20,12 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | RHEL          |     7.x,8.x      |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.9,8.6      |
 | Ubuntu        |       20.04      |       20.04         |  18.04, 20.04    | 18.04, 20.04      |        20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
-| SLES          |        15SP4     |        15SP4        |       15SP3      |         15SP3     |       15SP3      |
+| SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP3     |       15SP3      |
 | Red Hat OpenShift | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 |
 | Mirantis Kubernetes Engine | 3.5.x |      3.6.0        |       3.5.x      |        3.5.x      |        3.6.1     |
 | Google Anthos |        1.12       |          1.12        |        no        |         1.12       |        1.13       |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI         |
-| Rancher Kubernetes Engine | yes  |          1.4.1        |        yes       |         yes       |      yes         |
+| Rancher Kubernetes Engine | yes  |          1.4.1        |        1.4.1       |         yes       |      yes         |
 | Amazon Elastic Kubernetes Service<br> Anywhere | no  |          yes        |        no      |        yes       |      yes      |
 {{</table>}}
 
@@ -33,7 +33,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
-| CSI Driver version       | 2.6.0    | 2.5.0     | 2.5.0     | 2.5.0      | 2.6.0      |
+| CSI Driver version       | 2.6.0    | 2.6.0     | 2.6.0     | 2.6.0      | 2.6.0      |
 | Static Provisioning      | yes      | yes       | yes       | yes        | yes        |
 | Dynamic Provisioning     | yes      | yes       | yes       | yes        | yes        |
 | Expand Persistent Volume | yes      | yes       | yes       | yes        | yes        |

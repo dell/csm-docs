@@ -112,7 +112,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.5.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
 
@@ -176,7 +176,7 @@ Use the below command to replace or update the secret:
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.5.0 |
+| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.6.0 |
 | driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
 | powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | No | dellemc/sdc:3.6 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
@@ -203,6 +203,10 @@ Use the below command to replace or update the secret:
 | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | nodeSelector | Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
 | tolerations | Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
+| **renameSDC** | This section allows the rename operation for SDC. | - | - |
+| enabled | A boolean that enable/disable rename SDC feature. | No | false |
+| prefix | Defines a string for the prefix of the SDC. | No | " " |
+| approveSDC.enabled | A boolean that enable/disable SDC approval feature. | No | false |
 | **monitor**              | This section allows the configuration of the SDC monitoring pod.                                                                                                                                                                                                                                                                                                                                                  | -        | -       |
 | enabled                  | Set to enable the usage of the monitoring pod.                                                                                                                                                                                                                                                                                                                                                                | Yes     | false |
 | hostNetwork              | Set whether the monitor pod should run on the host network or not.                                                                                                                                                                                                                                                                                                                                            | Yes     | true |
