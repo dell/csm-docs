@@ -860,7 +860,7 @@ Gets PowerFlex volume infomation for a given tenant on a local cluster
 
 Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
 
-Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater. 
+>Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater. 
 
 ```
 # dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
