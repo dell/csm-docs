@@ -3,14 +3,12 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.5.0
+## Release Notes - CSI PowerStore v2.6.0
 
 ### New Features/Changes
 
-- [Added support for Storage Capacity Tracking feature](https://github.com/dell/csm/issues/483)
-- [Added support for Kubernetes 1.25](https://github.com/dell/csm/issues/478)
-- [Added support for OpenShift 4.11](https://github.com/dell/csm/issues/480)
-- [Added support for PowerStore 3.2 array](https://github.com/dell/csm/issues/482)
+- [Added support for Resiliency](https://github.com/dell/csm/issues/587)
+- [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
 
 ### Fixed Issues
 
