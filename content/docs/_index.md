@@ -66,7 +66,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 | Modules/Drivers                                                                              | CSM 1.5.1 | [CSM 1.4](../v1/) | [CSM 1.3.1](../v2/) | [CSM 1.2.1](../v3/) |
 | -------------------------------------------------------------------------------------------- | :-----: | :---------------: | :---------------: | :-----------------: |
-| [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar)                  | v1.5.0  |      v1.4.0       |      v1.3.0       |       v1.2.0        |
+| [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar)                  | v1.5.1  |      v1.4.0       |      v1.3.0       |       v1.2.0        |
 | [Observability](https://hub.docker.com/r/dellemc/csm-topology)                               | v1.4.0  |      v1.3.0       |      v1.2.0       |       v1.1.1        |
 | [Replication](https://hub.docker.com/r/dellemc/dell-replication-controller)                  | v1.3.1  |      v1.3.0       |      v1.3.0       |       v1.2.0        |
 | [Resiliency](https://hub.docker.com/r/dellemc/podmon)                                        | v1.4.0  |      v1.3.0       |      v1.2.0       |       v1.1.0        |
@@ -82,7 +82,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 | CSM Module                                                  | CSI PowerFlex v2.5.0 | CSI PowerScale v2.5.0 | CSI PowerStore v2.5.1 | CSI PowerMax v2.5.0 | CSI Unity XT v2.5.0 |
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
-| [**Authorization**](authorization/) v1.5                    | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
+| [**Authorization**](authorization/) v1.5.1                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
 | [**Observability**](observability/) v1.4                    | ✔️                    | ✔️                     | ✔️                     | ❌                   | ❌                   |
 | [**Replication**](replication/)   v1.3.1                    | ❌                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
 | [**Resiliency**](resiliency/)     v1.4                      | ✔️                    | ✔️                     | ❌                     | ❌                   | ✔️                   |
