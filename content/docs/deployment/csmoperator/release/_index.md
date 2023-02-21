@@ -14,7 +14,7 @@ Description: >
 
 
 ### Fixed Issues
-There are no fixed issues in this release.
+[Fix for CSM Authorization CRD in the CSM Operator not able to custom configurations](https://github.com/dell/csm/issues/633)
 
 ### Known Issues
 There are no known issues in this release.
