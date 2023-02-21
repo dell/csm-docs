@@ -217,7 +217,7 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	}
 }
 
-function displayCommands(releaseName, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value) {
+function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value) {
 	driverNamespace = document.getElementById("driver-namespace").value
 	$("#command-text-area").show();
 	$("#command-title").html(commandTitleValue);
@@ -225,9 +225,9 @@ function displayCommands(releaseName, commandTitleValue, commandNoteValue, comma
 	$("#command1").html(command1Value.replaceAll("$drivernamespace", driverNamespace));
 	$("#command-note").html(commandNoteValue.replaceAll("$drivernamespace", driverNamespace));
 	if ($("#single-namespace").prop('checked') === true) {
-		$("#command2").html(command2Value.replaceAll("$release-name", releaseName));
+		$("#command2").html(command2Value.replaceAll("$release-name", releaseNameValue));
 	} else {
-		$("#command2").html(command3Value.replaceAll("$release-name", releaseName));
+		$("#command2").html(command3Value.replaceAll("$release-name", releaseNameValue));
 	}
 }
 

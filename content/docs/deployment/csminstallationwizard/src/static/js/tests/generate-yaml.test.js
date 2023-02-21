@@ -24,6 +24,7 @@ const CONSTANTS = {
 	POWERFLEX: "csi-powerflex",
 	POWERMAX: "powermax",
 	UNITY: "csi-unity",
+  POWERSTORE_RELEASE_NAME: "powerstore",
 	MODULE: "csm-modules",
 	CSM_VALUES: "csm-values",
 	TEMP_DIR: "templates/",
@@ -48,6 +49,7 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="node-pods-node-selector" checked>
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="module-namespace" value="">
+            <input type="text" id="authorization-proxy-host" value="">
         `;
 
 		const testCSMMap = new Map([

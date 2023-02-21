@@ -186,17 +186,6 @@ csm-application-mobility:
       #- mountPath: /target
         #name: plugins
 
-## K8S/Authorization Module ATTRIBUTES
-##########################################
-csm-authorization:
-  enabled: $AUTHORIZATION_ENABLED
-  namespace: $CSM_NAMESPACE
-  cert-manager:
-    enabled: false
-  redis:
-    namespace: $CSM_NAMESPACE
-    #storageClass: 
-
 ## K8S/Cert-manager ATTRIBUTES
 ##########################################
 cert-manager:
