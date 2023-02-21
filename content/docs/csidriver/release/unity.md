@@ -8,8 +8,8 @@ description: Release notes for Unity XT CSI driver
 ### New Features/Changes
 
 - [Added support to Kubernetes 1.26](https://github.com/dell/csm/issues/597)
-- Added support for MKE 3.6
-- Added support for RKE 1.4.1
+- [Added support for MKE 3.6](https://github.com/dell/csm/issues/672)
+- [Added support for RKE 1.4.1](https://github.com/dell/csm/issues/670)
 
 ### Known Issues
 
