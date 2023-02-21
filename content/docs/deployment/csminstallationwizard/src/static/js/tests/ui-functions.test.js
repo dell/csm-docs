@@ -453,9 +453,15 @@ describe("GIVEN displayCommands function", () => {
 	const command1Value = "helm repo add dell https://dell.github.io/helm-charts";
 	const command2Value = "helm install $release-name dell/container-storage-modules -n [namespace] -f values.yaml";
 	const command3Value = "helm install $release-name dell/container-storage-modules -f values.yaml";
+
+	const CONSTANT_PARAM = {
+		POWERMAX: "powermax"
+	};
+
 	test("SHOULD show expected commands", () => {
 		document.body.innerHTML = `
-            <input type="text" id="driver-namespace" value="csi-powerstore">
+			<input id="array" value="csi-powerstore">
+			<input type="text" id="driver-namespace" value="csi-powerstore">
             <input type="checkbox" id="single-namespace" value="">
 
             <div id="command-text-area" style="display:none">
@@ -466,7 +472,7 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANT_PARAM);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
@@ -477,6 +483,7 @@ describe("GIVEN displayCommands function", () => {
 
 	test("SHOULD show expected commands for singleNamespace", () => {
 		document.body.innerHTML = `
+			<input id="array" value="csi-powerstore">
             <input type="text" id="driver-namespace" value="csi-powerstore">
             <input type="checkbox" id="single-namespace" checked>
 
@@ -488,7 +495,7 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANT_PARAM);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");

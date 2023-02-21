@@ -163,7 +163,7 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(driverTemplate);
 	link.style.display = 'inline-block';
-	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, command3)
+	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, command3,CONSTANTS_PARAM)
 	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
 	return true;
 }
@@ -217,9 +217,10 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	}
 }
 
-function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value) {
+function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value,CONSTANTS_PARAM) {
 	driverNamespace = document.getElementById("driver-namespace").value
 	$("#command-text-area").show();
+	$("#reverseProxyNote").hide();
 	$("#command-title").html(commandTitleValue);
 	$("#command-note").show();
 	$("#command1").html(command1Value.replaceAll("$drivernamespace", driverNamespace));
@@ -228,6 +229,9 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 		$("#command2").html(command2Value.replaceAll("$release-name", releaseNameValue));
 	} else {
 		$("#command2").html(command3Value.replaceAll("$release-name", releaseNameValue));
+	}
+	if (document.getElementById("array").value === CONSTANTS_PARAM.POWERMAX){
+		$("#reverseProxyNote").show();
 	}
 }
 

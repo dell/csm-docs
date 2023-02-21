@@ -101,7 +101,6 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.storageArrayId = $("#storage-array-id").val();
 	DriverValues.storageArrayEndpointUrl = $("#storage-array-endpoint-url").val() || '""';
 	DriverValues.storageArrayBackupEndpointUrl = $("#storage-array-backup-endpoint-url").val() || '""';
-	DriverValues.managementServersEndpointUrl = $("#management-servers-endpoint-url").val() || '""';
 	DriverValues.clusterPrefix = $("#cluster-prefix").val();
 	DriverValues.portGroups = $("#port-groups").val();
 
@@ -143,7 +142,7 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_ID", obj.storageArrayId);
 	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_ENDPOINT_URL", obj.storageArrayEndpointUrl);
 	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", obj.storageArrayBackupEndpointUrl);
-	yaml = yaml.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", obj.managementServersEndpointUrl);
+	yaml = yaml.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", obj.storageArrayEndpointUrl);
 	yaml = yaml.replaceAll("$POWERMAX_CSI_REVERSE_PROXY_IMAGE", obj.powermaxCSIReverseProxyImage);
 	yaml = yaml.replaceAll("$POWERMAX_CLUSTER_PREFIX", obj.clusterPrefix);
 	yaml = yaml.replaceAll("$POWERMAX_PORT_GROUPS", obj.portGroups);
