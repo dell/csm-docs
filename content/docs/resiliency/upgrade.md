@@ -14,6 +14,8 @@ For information on the Unity XT CSI driver upgrade process, see [Unity XT CSI Dr
 
 For information on the PowerScale CSI driver upgrade process, see [PowerScale CSI Driver](../../csidriver/upgradation/drivers/isilon).
 
+For information on the PowerStore CSI driver upgrade process, see [PowerStore CSI Driver](../../csidriver/upgradation/drivers/powerstore).
+
 ## Helm Chart Upgrade
 
 To upgrade CSM for Resiliency with the driver, the following steps are required. 
