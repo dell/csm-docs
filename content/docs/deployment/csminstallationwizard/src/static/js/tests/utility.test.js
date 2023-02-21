@@ -173,13 +173,6 @@ describe("GIVEN validateForm functions", () => {
 		expect(validateForm(CONSTANT_PARAM)).toBe(false);
 	});
 
-	test("SHOULD return false IF storage-array-backup-endpoint-url value is empty", () => {
-		document.body.innerHTML = powermaxTestHtml;
-		document.getElementById('storage-array-id').value = "test-value";
-		document.getElementById('storage-array-endpoint-url').value = "test-value";
-		expect(validateForm(CONSTANT_PARAM)).toBe(false);
-	});
-
 	test("SHOULD return false IF cluster-prefix value is empty", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";

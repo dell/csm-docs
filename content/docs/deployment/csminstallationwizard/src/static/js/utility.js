@@ -51,9 +51,6 @@ function validateForm(CONSTANTS_PARAM) {
 		if (document.getElementById('storage-array-endpoint-url').value.trim() === "") {
 			return false;
 		}
-		if (document.getElementById('storage-array-backup-endpoint-url').value.trim() === "") {			
-			return false;
-		}
 		if (document.getElementById('cluster-prefix').value.trim() === "") {
 			return false;
 		}
