@@ -14,7 +14,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 | CSI Driver         | Version   | 
 | ------------------ | --------- | 
 | CSI PowerStore     | 2.6.0     | 
-| CSI PowerMax       | 2.4.0     | 
+| CSI PowerMax       | 2.6.0     | 
 
 ## Supported Dell CSM Modules
 
