@@ -30,10 +30,12 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
 | [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
 | [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
+| [dellctl images](#dellctl-images) | List the container images needed by csi driver |
+| [dellctl volume get](#dellctl-volume-get) | Gets PowerFlex volume infomation for a given tenant on a local cluster |
 
 
 ## Installation instructions
-1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.4.0).
+1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.5.1).
 2. chmod +x dellctl
 3. Move `dellctl` to `/usr/local/bin` or add `dellctl`'s containing directory path to PATH environment variable.
 4. Run `dellctl --help` to know available commands or run `dellctl command --help` to know more about a specific command.
@@ -781,4 +783,91 @@ Encryption rekey status with name of the rekey object
 ```
 # dellctl encryption rekey-status myrekey
  INFO Status of rekey request myrekey = completed
+```
+
+### dellctl images
+
+List the container images needed by csi driver
+
+**NOTE.**: dellctl images currently supports csi-vxflexos driver only.
+
+#### Aliases
+
+```
+images,imgs
+```
+
+#### Flags
+
+```
+  Flags:
+  -d, --driver string   csi driver name
+  -h, --help            help for images
+  
+```
+#### Output
+
+
+```
+# dellctl images --driver csi-vxflexos
+Driver Image                    Supported Orchestrator Versions         Sidecar Images
+dellemc/csi-vxflexos:v2.5.0     k8s1.25,k8s1.24,k8s1.23,ocp4.11,ocp4.10 k8s.gcr.io/sig-storage/csi-attacher:v4.0.0
+                                                                        k8s.gcr.io/sig-storage/csi-provisioner:v3.3.0
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
+                                                                        k8s.gcr.io/sig-storage/csi-external-health-monitor-controller:v0.7.0
+                                                                        k8s.gcr.io/sig-storage/csi-snapshotter:v6.1.0
+                                                                        k8s.gcr.io/sig-storage/csi-resizer:v1.6.0
+                                                                        k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.6.0
+                                                                        dellemc/sdc:3.6.0.6
+
+dellemc/csi-vxflexos:v2.4.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.io/sig-storage/csi-attacher:v3.5.0
+                                                                        k8s.gcr.io/sig-storage/csi-provisioner:v3.2.1
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
+                                                                        k8s.gcr.io/sig-storage/csi-external-health-monitor-controller:v0.6.0
+                                                                        k8s.gcr.io/sig-storage/csi-snapshotter:v6.0.1
+                                                                        k8s.gcr.io/sig-storage/csi-resizer:v1.5.0
+                                                                        k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        dellemc/sdc:3.6.0.6
+
+dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.io/sig-storage/csi-attacher:v3.4.0
+                                                                        k8s.gcr.io/sig-storage/csi-provisioner:v3.1.0
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.0.1
+                                                                        gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.5.0
+                                                                        k8s.gcr.io/sig-storage/csi-snapshotter:v5.0.1
+                                                                        k8s.gcr.io/sig-storage/csi-resizer:v1.4.0
+                                                                        k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        dellemc/sdc:3.6.0.6
+```
+
+
+### dellctl volume get
+
+Gets PowerFlex volume infomation for a given tenant on a local cluster
+
+##### Aliases
+  get, ls, list
+
+##### Flags
+
+```
+  -h, --help                           help for get
+      --insecure optionalBool[=true]   provide flag to skip certificate validation
+      --namespace string               namespace of the secret for the given tenant
+      --proxy string                   auth proxy endpoint to use
+```
+
+##### Output
+
+Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
+
+>Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater. 
+
+```
+# dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
+NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
+k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
+k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
+k8s-b1abb817d3   a69bf19000000001   8.000000   mypool   636468e3638c840f   k8s-b1abb817d3   Bound       vxflexos        demo-claim13   default
+k8s-28e4184f41   c6b2280d0000009a   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   Available   local-storage  
+k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
 ```

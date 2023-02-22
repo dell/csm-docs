@@ -59,3 +59,5 @@ Create the karavi-authorization-config secret using this command:
     Enable CSM for Authorization and provide the *proxyHost* address
 
 7. Install the CSI PowerFlex driver
+
+8. (Optional) Install [dellctl](../../../references/cli) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../references/cli) for the installation steps and command list.
