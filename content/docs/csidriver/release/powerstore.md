@@ -11,7 +11,7 @@ There are no features/changes in this release.
 
 ### Fixed Issues
 
-- Fixed issue where driver was not properly cleaning up resources when volumes were unmounted
+- [Fixed issue where driver was not properly cleaning up resources when volumes were unmounted](https://github.com/dell/csm/issues/666)
 
 ### Known Issues
 
