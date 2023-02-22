@@ -222,8 +222,8 @@ cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config> 
 - cert-csi logs will be present in the execution directory `info.log` , `error.log`
 
 ### Test config files format
-- #### [driver-config](../pkg/utils/testdata/config-nfs.yaml)
-- #### [ignore-tests](../pkg/utils/ignore.yaml)
+- #### [driver-config](https://github.com/dell/cert-csi/blob/main/pkg/utils/testdata/config-nfs.yaml)
+- #### [ignore-tests](https://github.com/dell/cert-csi/blob/main/pkg/utils/ignore.yaml)
 
 ### Example Commands
 -  ```bash
