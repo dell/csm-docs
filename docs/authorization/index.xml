@@ -1079,24 +1079,15 @@ kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart daemonSet/vxflexos-n
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-authorization-140&#34;&gt;Release Notes - CSM Authorization 1.4.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-authorization-151&#34;&gt;Release Notes - CSM Authorization 1.5.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;CSM 1.4 Release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/350&#34;&gt;#350&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM Authorization insecure related entities are renamed to skipCertificateValidation. (&lt;a href=&#34;https://github.com/dell/csm/issues/368&#34;&gt;#368&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Show volumes associated with the tenant from the k8s server. (&lt;a href=&#34;https://github.com/dell/csm/issues/408&#34;&gt;#408&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM 1.5.1 release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/582&#34;&gt;#582&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;bugs&#34;&gt;Bugs&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;PowerScale volumes unable to be created with Helm deployment of CSM Authorization. (&lt;a href=&#34;https://github.com/dell/csm/issues/419&#34;&gt;#419&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Authorization CLI documentation does not mention &amp;ndash;array-insecure flag when creating or updating storage systems. (&lt;a href=&#34;https://github.com/dell/csm/issues/416&#34;&gt;#416&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Authorization: Add documentation for backing up and restoring redis data. (&lt;a href=&#34;https://github.com/dell/csm/issues/410&#34;&gt;#410&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM Authorization doesn&amp;rsquo;t recognize storage with capital letters. (&lt;a href=&#34;https://github.com/dell/csm/issues/398&#34;&gt;#398&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Update Authorization documentation with supported versions of k3s-selinux and container-selinux packages. (&lt;a href=&#34;https://github.com/dell/csm/issues/393&#34;&gt;#393&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Using Authorization without dependency on jq. (&lt;a href=&#34;https://github.com/dell/csm/issues/390&#34;&gt;#390&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Authorization Documentation Improvement. (&lt;a href=&#34;https://github.com/dell/csm/issues/384&#34;&gt;#384&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Unit test failing for csm-authorization. (&lt;a href=&#34;https://github.com/dell/csm/issues/382&#34;&gt;#382&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Karavictl has incorrect permissions after download. (&lt;a href=&#34;https://github.com/dell/csm/issues/360&#34;&gt;#360&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Helm deployment of Authorization denies a valid request path from csi-powerflex. (&lt;a href=&#34;https://github.com/dell/csm/issues/353&#34;&gt;#353&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM Authorization installation fails due to a PATH not looking in /usr/local/bin. (&lt;a href=&#34;https://github.com/dell/csm/issues/580&#34;&gt;#580&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>

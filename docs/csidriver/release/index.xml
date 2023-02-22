@@ -217,16 +217,13 @@ Replication is not supported with VMware/Vsphere virtualization support.&lt;/p&g
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v250&#34;&gt;Release Notes - CSI PowerStore v2.5.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v251&#34;&gt;Release Notes - CSI PowerStore v2.5.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/483&#34;&gt;Added support for Storage Capacity Tracking feature&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/478&#34;&gt;Added support for Kubernetes 1.25&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/480&#34;&gt;Added support for OpenShift 4.11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/482&#34;&gt;Added support for PowerStore 3.2 array&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;There are no features/changes in this release.&lt;/p&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/666&#34;&gt;Fixed issue where driver was not properly cleaning up resources when volumes were unmounted&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -257,6 +254,7 @@ Replication is not supported with VMware/Vsphere virtualization support.&lt;/p&g
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
+&lt;li&gt;This release is only supported when driver is installed via helm.&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>

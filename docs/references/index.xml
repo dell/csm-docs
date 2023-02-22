@@ -112,11 +112,19 @@ This document outlines all dellctl commands, their intended use, options that ca
 &lt;td&gt;&lt;a href=&#34;#dellctl-encryption-rekey-status&#34;&gt;dellctl encryption rekey-status&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Get status of an encryption rekey operation&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-images&#34;&gt;dellctl images&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;List the container images needed by csi driver&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-volume-get&#34;&gt;dellctl volume get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Gets PowerFlex volume infomation for a given tenant on a local cluster&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&#34;installation-instructions&#34;&gt;Installation instructions&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;Download &lt;code&gt;dellctl&lt;/code&gt; from &lt;a href=&#34;https://github.com/dell/csm/releases/tag/v1.4.0&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Download &lt;code&gt;dellctl&lt;/code&gt; from &lt;a href=&#34;https://github.com/dell/csm/releases/tag/v1.5.1&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;chmod +x dellctl&lt;/li&gt;
 &lt;li&gt;Move &lt;code&gt;dellctl&lt;/code&gt; to &lt;code&gt;/usr/local/bin&lt;/code&gt; or add &lt;code&gt;dellctl&lt;/code&gt;&amp;rsquo;s containing directory path to PATH environment variable.&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;dellctl --help&lt;/code&gt; to know available commands or run &lt;code&gt;dellctl command --help&lt;/code&gt; to know more about a specific command.&lt;/li&gt;
@@ -478,6 +486,66 @@ schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-19&#34;&gt;Output&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl encryption rekey-status myrekey
  INFO Status of rekey request myrekey = completed
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;dellctl-images&#34;&gt;dellctl images&lt;/h3&gt;
+&lt;p&gt;List the container images needed by csi driver&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE.&lt;/strong&gt;: dellctl images currently supports csi-vxflexos driver only.&lt;/p&gt;
+&lt;h4 id=&#34;aliases-2&#34;&gt;Aliases&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;images,imgs
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;flags-20&#34;&gt;Flags&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  Flags:
+  -d, --driver string   csi driver name
+  -h, --help            help for images
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;output-20&#34;&gt;Output&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl images --driver csi-vxflexos
+Driver Image                    Supported Orchestrator Versions         Sidecar Images
+dellemc/csi-vxflexos:v2.5.0     k8s1.25,k8s1.24,k8s1.23,ocp4.11,ocp4.10 k8s.gcr.io/sig-storage/csi-attacher:v4.0.0
+                                                                        k8s.gcr.io/sig-storage/csi-provisioner:v3.3.0
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
+                                                                        k8s.gcr.io/sig-storage/csi-external-health-monitor-controller:v0.7.0
+                                                                        k8s.gcr.io/sig-storage/csi-snapshotter:v6.1.0
+                                                                        k8s.gcr.io/sig-storage/csi-resizer:v1.6.0
+                                                                        k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.6.0
+                                                                        dellemc/sdc:3.6.0.6
+
+dellemc/csi-vxflexos:v2.4.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.io/sig-storage/csi-attacher:v3.5.0
+                                                                        k8s.gcr.io/sig-storage/csi-provisioner:v3.2.1
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
+                                                                        k8s.gcr.io/sig-storage/csi-external-health-monitor-controller:v0.6.0
+                                                                        k8s.gcr.io/sig-storage/csi-snapshotter:v6.0.1
+                                                                        k8s.gcr.io/sig-storage/csi-resizer:v1.5.0
+                                                                        k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        dellemc/sdc:3.6.0.6
+
+dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.io/sig-storage/csi-attacher:v3.4.0
+                                                                        k8s.gcr.io/sig-storage/csi-provisioner:v3.1.0
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.0.1
+                                                                        gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.5.0
+                                                                        k8s.gcr.io/sig-storage/csi-snapshotter:v5.0.1
+                                                                        k8s.gcr.io/sig-storage/csi-resizer:v1.4.0
+                                                                        k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        dellemc/sdc:3.6.0.6
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;dellctl-volume-get&#34;&gt;dellctl volume get&lt;/h3&gt;
+&lt;p&gt;Gets PowerFlex volume infomation for a given tenant on a local cluster&lt;/p&gt;
+&lt;h5 id=&#34;aliases-3&#34;&gt;Aliases&lt;/h5&gt;
+&lt;p&gt;get, ls, list&lt;/p&gt;
+&lt;h5 id=&#34;flags-21&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help                           help for get
+      --insecure optionalBool[=true]   provide flag to skip certificate validation
+      --namespace string               namespace of the secret for the given tenant
+      --proxy string                   auth proxy endpoint to use
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-21&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl volume get --proxy &amp;lt;proxy.dell.com&amp;gt; --namespace vxflexos
+NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
+k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
+k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
+k8s-b1abb817d3   a69bf19000000001   8.000000   mypool   636468e3638c840f   k8s-b1abb817d3   Bound       vxflexos        demo-claim13   default
+k8s-28e4184f41   c6b2280d0000009a   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   Available   local-storage  
+k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
 &lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
