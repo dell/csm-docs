@@ -3,12 +3,13 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.5.0
+## Release Notes - CSI Unity XT v2.6.0
 
 ### New Features/Changes
 
-- [Added support to Kubernetes 1.25](https://github.com/dell/csm/issues/478)
-- [Added support for OpenShift 4.11](https://github.com/dell/csm/issues/480)
+- [Added support to Kubernetes 1.26](https://github.com/dell/csm/issues/597)
+- [Added support for MKE 3.6](https://github.com/dell/csm/issues/672)
+- [Added support for RKE 1.4.1](https://github.com/dell/csm/issues/670)
 
 ### Known Issues
 

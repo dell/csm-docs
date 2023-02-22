@@ -61,7 +61,7 @@
                     <select id="array" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
                       <option value="" selected>Select the Array</option>
                       <option value="csi-powerstore">PowerStore</option>
-                      <option value="csi-powermax">PowerMax</option>
+                      <option value="powermax">PowerMax</option>
                       <option value="csi-powerscale" disabled>PowerScale</option>
                       <option value="csi-powerflex" disabled>PowerFlex</option>
                       <option value="csi-unity" disabled>Unity</option>
@@ -89,8 +89,6 @@
                     <div class="col-sm-3">
                       <select id="csm-version" class="form-select" onchange="onCSMVersionChange(); validateInput(validateForm, CONSTANTS)" required>
                         <option value="1.6.0" selected>CSM 1.6</option>
-                        <option value="1.5.0">CSM 1.5</option>
-                        <option value="1.4.0">CSM 1.4</option>
                       </select>
                     </div>
                   </div>
@@ -110,22 +108,35 @@
                         <input class="form-check-input" type="checkbox" id="velero" value="" checked>
                         <label for="velero" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Velero feature">Velero</label>
                       </div>
-                      <div class="mt-3 mx-1 py-2 note">
+                      <div class="mt-3 py-2 note">
                         <i class="icon dds__icon dds__icon--alert-info-cir"></i>
                         <span class="h6" id="velero-note"></span>
                       </div>
                     </div>
                   </div>
 
-                  <div class="row mb-4 authorization">
+                  <div class="row mb-4 authorization col-sm-11">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="authorization" value="" onchange="onAuthorizationChange()">
+                      <input class="form-check-input" type="checkbox" id="authorization" value="" onchange="onAuthorizationChange(authorizationNote)">
                       <label for="authorization" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Authorization module">Authorization</label>
                     </div>
-                    <div class="row mt-3 child-level-one" id="authorization-skip-cert-validation-wrapper">
+                    <div class="row mt-3 child-level-one authorization-wrapper">
                       <div class="col-sm-12">
                         <input class="form-check-input" type="checkbox" id="authorization-skip-cert-validation" value="" checked>
-                        <label for="authorization-skip-cert-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="">Authorization Skip Certificate Validation</label>
+                        <label for="authorization-skip-cert-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable certificate validation of the csm-authorization server">Authorization Skip Certificate Validation</label>
+                      </div>
+                    </div>
+                    <div class="row mt-3 child-level-one authorization-wrapper">
+                      <label for="authorization-proxy-host" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Hostname of the csm-authorization server" style="width: 110px;">Proxy Host</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-3">
+                        <input class="form-control input-lg" type="text" id="authorization-proxy-host" placeholder="">
+                      </div>
+                    </div>
+                    <div class="row child-level-one authorization-wrapper">
+                      <div class="mt-3 py-2 note">
+                        <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+                        <span class="h6" id="authorization-note"></span>
                       </div>
                     </div>
                   </div>
@@ -156,7 +167,7 @@
                       <label for="resiliency" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Resiliency module">Resiliency</label>
                     </div>
                     <div class="row child-level-one" id="podmon-note-wrapper">
-                      <div class="mt-3 mx-1 py-2 note">
+                      <div class="mt-3 py-2 note">
                         <i class="icon dds__icon dds__icon--alert-info-cir"></i>
                         <span class="h6" id="podmon-note"></span>
                       </div>
@@ -202,7 +213,7 @@
                       <label for="snapshot" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Volume Snapshot feature">Snapshot</label>
                     </div>
                     <div class="row child-level-one" id="snapshot-note-wrapper">
-                      <div class="mt-3 mx-1 py-2 note">
+                      <div class="mt-3 py-2 note">
                         <i class="icon dds__icon dds__icon--alert-info-cir"></i>
                         <span class="h6" id="snapshot-note"></span>
                       </div>
@@ -239,17 +250,19 @@
 
                     <div class="row mb-4">
                       <label for="storage-array-endpoint-url" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="This refers to the URL of the Unisphere server managing storageArrayId. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on." style="width: 225px;">Storage Array Endpoint URL</label>
-                      <div class="col-sm-9"></div>
-                      <div class="was-validated col-sm-3">
-                        <input class="form-control input-lg" type="text" id="storage-array-endpoint-url" placeholder="Example: https://primary-2.unisphe.re:8443" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      <div class="row">
+                        <div class="was-validated col-sm-3">
+                          <input class="form-control input-lg" type="text" id="storage-array-endpoint-url" placeholder="Example: https://primary-2.unisphe.re:8443" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
                       </div>
                     </div>
-                    
+
                     <div class="row mb-4">
-                      <label for="management-servers-endpoint-url" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="URL of the Unisphere server. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on" style="width: 280px;">Management Servers Endpoint URL</label>
-                      <div class="col-sm-9"></div>
-                      <div class="was-validated col-sm-3">
-                        <input class="form-control input-lg" type="text" id="management-servers-endpoint-url" placeholder="Example: https://primary-1.unisphe.re:8443" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      <label for="storage-array-backup-endpoint-url" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="This refers to the URL of the backup Unisphere server managing storageArrayId. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on." style="width: 280px;">Storage Array Backup Endpoint URL</label>
+                      <div class="row">
+                      <div class="col-sm-3">
+                        <input class="form-control input-lg" type="text" id="storage-array-backup-endpoint-url" placeholder="Example: https://backup-1.unisphe.re:8443">
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -273,7 +286,7 @@
 
                   <div class="port-groups">
                     <div class="row mb-4">
-                      <label for="port-groups" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the set of existing port groups that the driver will use" style="width: 110px;">Port Groups</label>
+                      <label for="port-groups" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the set of existing port groups that the driver will use. Mandatory for ISCSI and Optional for FC" style="width: 110px;">Port Groups</label>
                       <div class="col-sm-9"></div>
                       <div class="col-sm-3">
                         <input class="form-control input-lg" type="text" id="port-groups" placeholder="Example: pg1, pg2, pg3, pg1" required>
@@ -331,13 +344,14 @@
 
                   <div class="was-validated row mb-4">
                     <label for="controller-count" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Defines the number of controller pods to deploy." style="width: 180px;">Controller Pods Count</label>
-                    <div class="col-sm-9"></div>
-                    <div class="col-sm-2">
-                      <input class="form-control input-sm" type="number" id="controller-count" min="1" oninput="validateInput(validateForm, CONSTANTS)" required>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="row mt-1">
-                        <a class="reset" id="reset-controller-count" onclick="resetControllerCount(csmMap)">Reset to default</a>
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <input class="form-control input-sm" type="number" id="controller-count" min="1" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-controller-count" onclick="resetControllerCount(csmMap)">Reset to default</a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -439,6 +453,10 @@
             </div>
             <div class="mt-3 mx-1">
               <span id="command2"></span>
+            </div>
+            <div class="mt-3 mx-1 py-2 note" id="reverseProxyNote">
+              <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+              <span class="h6">Click on the <a href="https://dell.github.io/csm-docs/docs/csidriver/features/powermax/#prerequisite" target="_blank">documentation link</a> for the steps to generate the certificates</span>
             </div>
             <div class="my-3"></div>
           </div>

@@ -46,23 +46,23 @@ Dell CSI Operator has been tested and qualified with
 If you have installed an old version of the `dell-csi-operator` which was available with the name _CSI Operator_, please refer to this [section](#replacing-csi-operator-with-dell-csi-operator) before continuing.
 
 #### Full list of CSI Drivers and versions supported by the Dell CSI Operator
-| CSI Driver         | Version | ConfigVersion | Kubernetes Version | OpenShift Version     |
-| ------------------ |---------|---------------|--------------------| --------------------- |
-| CSI PowerMax       | 2.4.0   | v2.3.0        | 1.22, 1.23, 1.24   | 4.8, 4.8 EUS, 4.9     |
-| CSI PowerMax       | 2.5.0   | v2.4.0        | 1.23, 1.24, 1.25   | 4.9, 4.10, 4.10 EUS   |
-| CSI PowerMax       | 2.6.0   | v2.5.0        | 1.24, 1.25, 1.26   | 4.10, 4.10 EUS, 4.11  |
-| CSI PowerFlex      | 2.3.0   | v2.3.0        | 1.22, 1.23, 1.24   | 4.9, 4.10, 4.10 EUS   |
-| CSI PowerFlex      | 2.4.0   | v2.4.0        | 1.22, 1.23, 1.24   | 4.9, 4.10, 4.10 EUS   |
-| CSI PowerFlex      | 2.5.0   | v2.5.0        | 1.23, 1.24, 1.25   | 4.10, 4.10 EUS, 4.11  |
-| CSI PowerScale     | 2.4.0   | v2.4.0        | 1.22, 1.23, 1.24   | 4.9, 4.10, 4.10 EUS   |
-| CSI PowerScale     | 2.5.0   | v2.5.0        | 1.23, 1.24, 1.25   | 4.10, 4.10 EUS, 4.11   |
-| CSI PowerScale     | 2.6.0   | v2.6.0        | 1.24, 1.25, 1.26   | 4.10, 4.10 EUS, 4.11  |
-| CSI Unity XT       | 2.3.0   | v2.3.0        | 1.22, 1.23, 1.24   | 4.9, 4.10, 4.10 EUS   |
-| CSI Unity XT       | 2.4.0   | v2.4.0        | 1.22, 1.23, 1.24   | 4.9, 4.10, 4.10 EUS   |
-| CSI Unity XT       | 2.5.0   | v2.5.0        | 1.23, 1.24, 1.25   | 4.10, 4.10 EUS, 4.11  |
-| CSI PowerStore     | 2.3.0   | v2.3.0        | 1.22, 1.23, 1.24   | 4.9, 4.10, 4.10 EUS   |
-| CSI PowerStore     | 2.4.0   | v2.4.0        | 1.22, 1.23, 1.24   | 4.9, 4.10, 4.10 EUS   |
-| CSI PowerStore     | 2.5.0   | v2.5.0        | 1.23, 1.24. 1.25   | 4.10, 4.10 EUS, 4.11  |
+| CSI Driver         | Version   | ConfigVersion  | Kubernetes Version   | OpenShift Version     |
+| ------------------ | --------- | -------------- | -------------------- | --------------------- |
+| CSI PowerMax       | 2.4.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.8, 4.8 EUS, 4.9     |
+| CSI PowerMax       | 2.5.0     | v2.4.0         | 1.23, 1.24, 1.25     | 4.9, 4.10, 4.10 EUS   |
+| CSI PowerMax       | 2.6.0     | v2.5.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
+| CSI PowerFlex      | 2.3.0     | v2.3.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI PowerFlex      | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI PowerFlex      | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
+| CSI PowerScale     | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI PowerScale     | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
+| CSI PowerScale     | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
+| CSI Unity XT       | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI Unity XT       | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
+| CSI Unity XT       | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
+| CSI PowerStore     | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
+| CSI PowerStore     | 2.5.0     | v2.5.0         | 1.23, 1.24. 1.25     | 4.10, 4.10 EUS, 4.11  |
+| CSI PowerStore     | 2.6.0     | v2.6.0         | 1.24, 1.25. 1.26     | 4.10, 4.10 EUS, 4.11  |
 
 </br>
 

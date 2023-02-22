@@ -22,8 +22,9 @@ const CONSTANTS = {
 	POWERSTORE: "csi-powerstore",
 	POWERSCALE: "csi-powerscale",
 	POWERFLEX: "csi-powerflex",
-	POWERMAX: "csi-powermax",
-	UNITY: "csi-unity",
+	POWERMAX: "powermax",
+	UNITY: "csi-unity", 
+	POWERSTORE_RELEASE_NAME: "powerstore",
 	MODULE: "csm-modules",
 	CSM_VALUES: "csm-values",
 	TEMP_DIR: "templates/",
@@ -48,6 +49,7 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="node-pods-node-selector" checked>
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="module-namespace" value="">
+            <input type="text" id="authorization-proxy-host" value="">
         `;
 
 		const testCSMMap = new Map([
@@ -784,7 +786,7 @@ describe("GIVEN createYamlString function", () => {
             namespace: ""
         `;
 
-		const received = createYamlString(testYAML, testObject, "csi-powermax", CONSTANTS);
+		const received = createYamlString(testYAML, testObject, "powermax", CONSTANTS);
 
 		expect(received).toEqual(expected);
 	});
@@ -896,7 +898,7 @@ describe("GIVEN createYamlString function", () => {
             namespace: 
         `;
 
-		const received = createYamlString(testYAML, testObjectSingleNamespaceDisabled, "csi-powermax", CONSTANTS);
+		const received = createYamlString(testYAML, testObjectSingleNamespaceDisabled, "powermax", CONSTANTS);
 
 		expect(received).toEqual(expected);
 	});
