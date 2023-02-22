@@ -119,6 +119,9 @@
 &lt;li&gt;
 &lt;p&gt;Install the CSI PowerFlex driver&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(Optional) Install &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl&lt;/a&gt; to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the &lt;a href=&#34;../../../references/cli&#34;&gt;dellctl documentation page&lt;/a&gt; for the installation steps and command list.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>

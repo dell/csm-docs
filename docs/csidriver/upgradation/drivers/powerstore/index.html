@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-12-13T21:01:32+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-02-22T12:59:31+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Upgrade PowerStore CSI driver">
-<meta itemprop="dateModified" content="2022-12-13T21:01:32+05:30" />
-<meta itemprop="wordCount" content="400">
+<meta itemprop="dateModified" content="2023-02-22T12:59:31+05:30" />
+<meta itemprop="wordCount" content="337">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Upgrade PowerStore CSI driver"/>
@@ -79,7 +79,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.5)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.5.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.4</a>
 	
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2ec52120deea4c1e0f507be87fbd209.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4a447acdf9a6f7d774b47744fc310fbb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2ec52120deea4c1e0f507be87fbd209.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4a447acdf9a6f7d774b47744fc310fbb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -569,13 +569,6 @@
 
 
 
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#update-driver-from-v24-to-v25-using-helm">Update Driver from v2.4 to v2.5 using Helm</a></li>
-    <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
-  </ul>
-</nav>
-
 
 
 
@@ -625,16 +618,16 @@
 	<h1>PowerStore</h1>
 
 	       
-	<p>You can upgrade the CSI Driver for Dell PowerStore using Helm or Dell CSI Operator.</p>
-<h2 id="update-driver-from-v24-to-v25-using-helm">Update Driver from v2.4 to v2.5 using Helm</h2>
+	<p>You can upgrade the CSI Driver for Dell PowerStore using Helm.</p>
+<h2 id="update-driver-from-v25-to-v251-using-helm">Update Driver from v2.5 to v2.5.1 using Helm</h2>
 <p>Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.5.0 https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the driver.</p>
+<p>Run <code>git clone -b v2.5.1 https://github.com/dell/csi-powerstore.git</code> to clone the git repository and get the driver.</p>
 </li>
 <li>
-<p>Edit <code>helm/config.yaml</code> file and configure connection information for your PowerStore arrays changing the following parameters:</p>
+<p>Edit <code>samples/secret/secret.yaml</code> file and configure connection information for your PowerStore arrays changing the following parameters:</p>
 <ul>
 <li><em>endpoint</em>: defines the full URL path to the PowerStore API.</li>
 <li><em>globalID</em>: specifies what storage cluster the driver should use</li>
@@ -651,7 +644,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 <li>
 <p>(optional) create new storage classes using ones from <code>samples/storageclass</code> folder as an example and apply them to the Kubernetes cluster by running <code>kubectl create -f &lt;path_to_storageclass_file&gt;</code></p>
 <blockquote>
-<p>Storage classes created by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4 driver will not be deleted, v2.5 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4 in your cluster then be sure to include the same array you have used for the v1.4/v2.0/v2.1/v2.2/v2.3/v2.4 driver and make it default in the <code>config.yaml</code> file.</p>
+<p>Storage classes created by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver will not be deleted, v2.5.1 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 in your cluster then be sure to include the same array you have used for the v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver and make it default in the <code>secret.yaml</code> file.</p>
 </blockquote>
 </li>
 <li>
@@ -662,22 +655,6 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 </li>
 <li>
 <p>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running: <code>./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade</code>.</p>
-</li>
-</ol>
-<h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
-<p><strong>Notes:</strong></p>
-<ol>
-<li>
-<p>While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.</p>
-</li>
-<li>
-<p>Upgrading the Operator does not upgrade the CSI Driver.</p>
-</li>
-<li>
-<p>Please upgrade the Dell CSI Operator by following <a href="./../operator">here</a>.</p>
-</li>
-<li>
-<p>Once the operator is upgraded, to upgrade the driver, refer <a href="./../../../installation/operator/#update-csi-drivers">here</a>.</p>
 </li>
 </ol>
 

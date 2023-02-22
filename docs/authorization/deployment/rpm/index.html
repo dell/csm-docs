@@ -79,7 +79,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.5)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.5.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.4</a>
 	
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2ec52120deea4c1e0f507be87fbd209.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4a447acdf9a6f7d774b47744fc310fbb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2ec52120deea4c1e0f507be87fbd209.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.4a447acdf9a6f7d774b47744fc310fbb.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -669,7 +669,7 @@
 <p>The CSM for Authorization proxy server is installed using a shell script after extracting from a tar archive.</p>
 <p>If CSM for Authorization is being installed on a system where SELinux is enabled, you must ensure the proper SELinux policies have been installed.</p>
 <h3 id="shell-script-installer">Shell Script Installer</h3>
-<p>As of version 1.5.0, the easiest way to obtain the tar archive with the shell script installer is directly from the <a href="https://github.com/dell/karavi-authorization/releases">GitHub repository&rsquo;s releases</a> section.</p>
+<p>The easiest way to obtain the tar archive with the shell script installer is directly from the <a href="https://github.com/dell/karavi-authorization/releases">GitHub repository&rsquo;s releases</a> section.</p>
 <p>Alternatively, the tar archive can be built from source by cloning the <a href="https://github.com/dell/karavi-authorization">GitHub repository</a> and using the following Makefile targets to build the installer:</p>
 <pre tabindex="0"><code>make dist build-installer rpm package
 </code></pre><p>The <code>build-installer</code> step creates a binary at <code>karavi-authorization/bin/deploy</code> and embeds all components required for installation. The <code>rpm</code> step generates an RPM package and stores it at <code>karavi-authorization/deploy/rpm/x86_64/</code>. The <code>package</code> step bundles the install script, authorization package, pre-downloaded K3s-SELinux packages, and policies folder together for the installation in the <code>packages/</code> directory.
