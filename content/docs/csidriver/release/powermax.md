@@ -13,6 +13,7 @@ description: Release notes for PowerMax CSI driver
 - [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
 - [Added support to clone the replicated volumes](https://github.com/dell/csm/issues/646)
 - [Added support to restore the snapshot of metro volumes](https://github.com/dell/csm/issues/652)
+- [Added support for MKE 3.6.1](https://github.com/dell/csm/issues/672)
 
 ### Fixed Issues
 There are no fixed issues in this release.
