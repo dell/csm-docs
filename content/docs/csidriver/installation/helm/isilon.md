@@ -48,14 +48,14 @@ controller:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image:
@@ -74,7 +74,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
 
 *NOTE:*
-- It is recommended to use 6.1.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.2.x version of snapshotter/snapshot-controller.
 
 ### (Optional) Volume Health Monitoring
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
@@ -226,7 +226,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | ISI_PRIV_SYNCIQ        | Read Write |
 
 Create isilon-creds secret using the following command:
-  <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
+  <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
    
    *NOTE:* 
    - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
@@ -268,7 +268,7 @@ If the 'skipCertificateValidation' parameter is set to false and a previous inst
 
 CSI Driver for Dell PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating *secret.yaml*. Users can now update the isilon-creds secret by editing the *secret.yaml* and executing the following command
 
-`kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
+`kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
 
 
 **Note**: Updating isilon-certs-x secrets is a manual process, unlike isilon-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
@@ -299,4 +299,19 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 ## Volume Snapshot Class
 
 Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. Sample volume snapshot class manifests are available at `samples/volumesnapshotclass/`. Use these sample manifests to create a volumesnapshotclass for creating volume snapshots; uncomment/ update the manifests as per the requirements.
+
+## Silent Mount Re-tries (v2.6.0)
+There are race conditions, when completing the ControllerPublish call to populate the client to volumes export list takes longer time than usual due to background NFS refresh process on OneFS wouldn't have completed at same time, resulted in error:"mount failed" with initial attempts and might log success after few re-tries. This unnecessarily logs false positive "mount failed" error logs and to overcome this scenario Driver does silent mount re-tries attempts after every two sec. (five attempts max) for every NodePublish Call and allows successful mount within five re-tries without logging any mount error messages.
+"mount failed" will be logged once these five mount retrial attempts are exhausted and still client is not populated to export list.
+
+Mount Re-tries handles below scenarios:
+- Access denied by server while mounting (NFSv3)
+- No such file or directory (NFSv4)
+
+*Sample*:
+```
+level=error clusterName=powerscale runid=10 msg="mount failed: exit status 32
+mounting arguments: -t nfs -o rw XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d /var/lib/kubelet/pods/9f72096a-a7dc-4517-906c-20697f9d7375/volumes/kubernetes.io~csi/k8s-ac7b91962d/mount
+output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d
+```
 
