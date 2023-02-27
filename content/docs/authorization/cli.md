@@ -1105,7 +1105,7 @@ On success, there will be no output. You may run `karavictl tenant get --name <t
 
 ### karavictl tenant update
 
-Updates a tenant's approvesdc boolean flag value within CSM only for Powerflex Pre-approved Guid feature
+Updates a tenant's resource within CSM
 
 ##### Synopsis
 
@@ -1134,4 +1134,4 @@ karavictl tenant update [flags]
 ```
 $ karavictl tenant update --name Alice --approvesdc=false
 ```
-On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the deletion occurred.
+On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the update was persisted.
