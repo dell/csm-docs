@@ -1120,7 +1120,7 @@ karavictl tenant update [flags]
 ```
   -h, --help   help for create
   -n, --name string   Tenant name
-      --approvesdc boolean (Usage: --approvesdc=true/false | This flag is only applicable to PowerFlex. true value allows the tenant's SDC approval request to be forwarded to the PowerFlex array. false value will block the request to approve SDC if SDC is not in approved state)
+      --approvesdc boolean (Usage: --approvesdc=true/false | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request )
 ```
 
 ##### Options inherited from parent commands
