@@ -1105,13 +1105,15 @@ On success, there will be no output. You may run `karavictl tenant get --name <t
 
 ### karavictl tenant update
 
-Updates a tenant resource within CSM
+Updates a tenant's approvesdc boolean flag value within CSM only for Powerflex Pre-approved Guid feature
 
 ##### Synopsis
 
-Updates a tenant resource within CSM (currently for powerflex)
+Updates a tenant resource within CSM (currently only for powerflex)
 
+```
 karavictl tenant update [flags]
+```
 
 #### Options
 

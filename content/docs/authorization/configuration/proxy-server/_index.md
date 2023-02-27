@@ -49,14 +49,15 @@ karavictl tenant create --name Finance --insecure --addr tenant.csm-authorizatio
 >__Note__: 
 > - The `insecure` flag specifies to skip certificate validation when connecting to the tenant service. Run `karavictl tenant create --help` for help.
 
-For Powerflex, the `approvesdc` boolean flag is `true` by default. If the `approvesdc` flag is false for a tenant, the proxy server will deny the requests to approve SDC if the SDCs are already in not-approved state. Inorder to change this flag for an already created tenant, see `tenant update` command in CLI section.
+> - For the Powerflex Pre-approved Guid feature, the `approvesdc` boolean flag is `true` by default. If the `approvesdc` flag is false for a tenant, the proxy server will deny the requests to approve SDC if the SDCs are already in not-approved state. Inorder to change this flag for an already created tenant, see `tenant update` command in CLI section.
 
-yaml
+```yaml
 # RPM Deployment
 karavictl tenant create --name Finance --approvesdc=false --insecure --addr grpc.DNS-hostname:443
 
 # Helm Deployment
 karavictl tenant create --name Finance --approvesdc=false --insecure --addr tenant.csm-authorization.com:<ingress-nginx-controller-port>
+```
 
 ### Configuring Roles
 
