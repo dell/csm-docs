@@ -257,13 +257,35 @@ If you are installing the latest versions of the CSI drivers, the driver control
 The CSI Drivers installed by the Dell CSI Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –
 
 * Modifying the installation directly via `kubectl edit`
-    For example - If the name of the installed Unity XT driver is unity, then run
+    For example - If the Unity XT driver is installed then run the below command to get the name of the driver.
     ```
     # Replace driver-namespace with the namespace where the Unity XT driver is installed
-    $ kubectl edit csiunity/unity -n <driver-namespace>
+    $ kubectl get csiunity -n <driver-namespace>
+      NAME              AGE
+      test-unity        3m16s
+    ```
+    Use the driver name in `kubectl edit` command, for example `test-unity` in this case. 
+    
+    ```
+    # Replace driver-namespace with the namespace where the Unity XT driver is installed
+    $ kubectl edit csiunity/<driver-name> -n <driver-namespace>
     ```
     and modify the installation. The usual fields to edit are the version of drivers and sidecars and the env variables.
 * Modify the API object in place via `kubectl patch` command. 
+
+   Use below command to get the deployments.
+   ```
+   # Replace driver-namespace with the namespace where the Unity XT driver is installed
+   $ kubectl get deployments -n <driver-namespace>
+     NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+     unity-controller        0/2     2            0           46s
+   ```
+   and modify the API object via `kubectl patch` command, for example if you wanted to patch the deployment to have two replicas, it would look something like this.
+   ```
+   # Replace driver-namespace with the namespace where the Unity XT driver is installed
+   $ kubectl patch deploy/unity-controller -n <driver-namespace> -p '{"spec":{"replicas": 2}}'
+     deployment.apps/unity-controller patched
+  ```
 
 To create patch file or edit deployments, refer [here](https://github.com/dell/dell-csi-operator/tree/master/samples) for driver version & env variables and [here](https://github.com/dell/dell-csi-operator/tree/master/driverconfig/config.yaml) for version of side-cars.
 The latest versions of drivers could have additional env variables or sidecars.
