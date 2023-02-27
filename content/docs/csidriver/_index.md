@@ -17,15 +17,19 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
 | Kubernetes    | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26    | 1.24, 1.25, 1.26 | 1.23, 1.24, 1.25  | 1.24, 1.25, 1.26 |
+<<<<<<< HEAD
 | RHEL          |     7.x,8.x      |     7.9,8.5,8.6     |     7.x,8.x      |     7.x,8.x       |     7.9,8.6      |
+=======
+| RHEL          |     7.x,8.x      |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.9,8.6      |
+>>>>>>> 559621f6dd2e212cdf838ee93f847bed53292c50
 | Ubuntu        |       20.04      |       20.04         |  18.04, 20.04    | 20.04, 22.04      |        20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
-| SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP3     |       15SP3      |
+| SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP3     |       15SP4      |
 | Red Hat OpenShift | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 |
 | Mirantis Kubernetes Engine | 3.6.x |      3.6.x        |       3.6.x      |        3.6.x      |        3.6.x     |
 | Google Anthos |        1.12       |          1.12        |        no        |         1.12       |        1.13       |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI         |
-| Rancher Kubernetes Engine | yes  |          1.4.1        |        1.4.1       |         yes       |      yes         |
+| Rancher Kubernetes Engine | yes  |          1.4.1        |        1.4.1       |         yes       |      1.4.1         |
 | Amazon Elastic Kubernetes Service<br> Anywhere | no  |          yes        |        no      |        yes       |      yes      |
 {{</table>}}
 
