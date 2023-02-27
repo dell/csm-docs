@@ -256,7 +256,18 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     $ kubectl edit csiunity/unity -n <driver-namespace>
     ```
     and modify the installation. The usual fields to edit are the version of drivers and sidecars and the env variables.
-* Modify the API object in place via `kubectl patch` command. 
+    To get the name of the installed driver, which is `unity` in the above case, run the below command. 
+    ```
+    $ kubectl get csiunity -n <driver-namespace>
+    ```
+* Modify the API object in place via `kubectl patch` command. For example if you want to patch the deployment to have two replicas for Unity XT driver, then run this command
+    ```
+    $ kubectl patch deploy/unity-controller -n <driver-namespace> -p '{"spec":{"replicas": 2}}'
+    ``` 
+    To get the deployment, which is `unity-controller` in the above case, run the below command.
+    ```
+    $ kubectl get deployments -n <driver-namespace>
+    ```
 
 To create patch file or edit deployments, refer [here](https://github.com/dell/dell-csi-operator/tree/master/samples) for driver version & env variables and [here](https://github.com/dell/dell-csi-operator/tree/master/driverconfig/config.yaml) for version of side-cars.
 The latest versions of drivers could have additional env variables or sidecars.
