@@ -1109,7 +1109,7 @@ Updates a tenant's resource within CSM
 
 ##### Synopsis
 
-Updates a tenant resource within CSM (currently only for powerflex)
+Updates a tenant resource within CSM
 
 ```
 karavictl tenant update [flags]
@@ -1120,7 +1120,7 @@ karavictl tenant update [flags]
 ```
   -h, --help   help for create
   -n, --name string   Tenant name
-      --approvesdc boolean (Usage: --approvesdc=true/false | true value will allow the tenant's request to approve SDC pass through proxy server to powerflex array. false value will block the request to approve SDC if SDC is not in approved state)
+      --approvesdc boolean (Usage: --approvesdc=true/false | This flag is only applicable to PowerFlex. true value allows the tenant's SDC approval request to be forwarded to the PowerFlex array. false value will block the request to approve SDC if SDC is not in approved state)
 ```
 
 ##### Options inherited from parent commands
