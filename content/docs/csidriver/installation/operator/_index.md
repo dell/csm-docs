@@ -256,7 +256,7 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     $ kubectl edit csiunity/unity -n <driver-namespace>
     ```
     and modify the installation. The usual fields to edit are the version of drivers and sidecars and the env variables.
-    To get the name of the installed driver, which is `unity` in the above case, run the below command. 
+    To get the name of the installed driver, which is `unity` in the above case, run this command. 
     ```
     $ kubectl get csiunity -n <driver-namespace>
     ```
