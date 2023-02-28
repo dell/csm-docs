@@ -14,9 +14,9 @@ You can build the tool by cloning the repository and running this command:
 make build 
 ```
 
-You can also build a docker container by running this command:
+You can also build a docker container image by running this command:
 ```bash
-docker build -t cert-csi --build-arg username=user --build-arg password=qwerty . 
+docker build -t cert-csi . 
 ```
 
 If you want to collect csi-driver resource usage metrics, then please provide the namespace where it can be found and install the metric-server using this command (kubectl is required):
