@@ -152,8 +152,7 @@ describe("GIVEN validateForm functions", () => {
 		<input type="text" id="vSphere-fc-port-group">
 		<input type="text" id="vSphere-fc-host-name">
 		<input type="text" id="vSphere-vCenter-host">
-		<input type="text" id="vSphere-vCenter-username">
-		<input type="text" id="vSphere-vCenter-password">
+		<input type="text" id="vSphere-vCenter-cred-secrett">
 	`;
 
 	const CONSTANT_PARAM = {
@@ -228,7 +227,7 @@ describe("GIVEN validateForm functions", () => {
 		expect(validateForm(CONSTANT_PARAM)).toBe(false);
 	});
 
-	test("SHOULD return false IF vSphere value is checked AND vSphere-vCenter-username value is empty", () => {
+	test("SHOULD return false IF vSphere value is checked AND vSphere-vCenter-cred-secret value is empty", () => {
 		document.body.innerHTML = powermaxTestHtml;
 		document.getElementById('storage-array-id').value = "test-value";
 		document.getElementById('storage-array-endpoint-url').value = "test-value";
@@ -238,21 +237,6 @@ describe("GIVEN validateForm functions", () => {
 		document.getElementById('vSphere-fc-port-group').value = "test-value";
 		document.getElementById('vSphere-fc-host-name').value = "test-value";
 		document.getElementById('vSphere-vCenter-host').value = "test-value";
-
-		expect(validateForm(CONSTANT_PARAM)).toBe(false);
-	});
-
-	test("SHOULD return false IF vSphere value is checked AND vSphere-vCenter-password value is empty", () => {
-		document.body.innerHTML = powermaxTestHtml;
-		document.getElementById('storage-array-id').value = "test-value";
-		document.getElementById('storage-array-endpoint-url').value = "test-value";
-		document.getElementById('storage-array-backup-endpoint-url').value = "test-value";
-		document.getElementById('cluster-prefix').value = "test-value";
-		$("#vSphere").prop('checked', true);
-		document.getElementById('vSphere-fc-port-group').value = "test-value";
-		document.getElementById('vSphere-fc-host-name').value = "test-value";
-		document.getElementById('vSphere-vCenter-host').value = "test-value";
-		document.getElementById('vSphere-vCenter-username').value = "test-value";
 
 		expect(validateForm(CONSTANT_PARAM)).toBe(false);
 	});
@@ -267,8 +251,7 @@ describe("GIVEN validateForm functions", () => {
 		document.getElementById('vSphere-fc-port-group').value = "test-value";
 		document.getElementById('vSphere-fc-host-name').value = "test-value";
 		document.getElementById('vSphere-vCenter-host').value = "test-value";
-		document.getElementById('vSphere-vCenter-username').value = "test-value";
-		document.getElementById('vSphere-vCenter-password').value = "test-value";
+		document.getElementById('vSphere-vCenter-cred-secret').value = "test-value";
 
 		expect(validateForm(CONSTANT_PARAM)).toBe(true);
 	});

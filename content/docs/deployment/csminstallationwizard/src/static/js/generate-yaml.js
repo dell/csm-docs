@@ -108,8 +108,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.vSphereFCPortGroup = $("#vSphere-fc-port-group").val();
 	DriverValues.vSphereFCHostName = $("#vSphere-fc-host-name").val();
 	DriverValues.vSphereVCenterHost = $("#vSphere-vCenter-host").val();
-	DriverValues.vSphereVCenterUserName = $("#vSphere-vCenter-username").val();
-	DriverValues.vSphereVCenterPassword = $("#vSphere-vCenter-password").val();
+	DriverValues.vSphereVCenterCredSecret = $("#vSphere-vCenter-cred-secret").val();
 
 	return DriverValues
 }
@@ -151,8 +150,7 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 	yaml = yaml.replaceAll("$VSPHERE_FC_PORT_GROUP", obj.vSphereFCPortGroup);
 	yaml = yaml.replaceAll("$VSPHERE_FC_HOST_NAME", obj.vSphereFCHostName);
 	yaml = yaml.replaceAll("$VSPHERE_VCENTER_HOST", obj.vSphereVCenterHost);
-	yaml = yaml.replaceAll("$VSPHERE_VCENTER_USERNAME", obj.vSphereVCenterUserName);
-	yaml = yaml.replaceAll("$VSPHERE_VCENTER_PASSWORD", obj.vSphereVCenterPassword);
+	yaml = yaml.replaceAll("$VSPHERE_VCENTER_CRED_SECRET", obj.vSphereVCenterCredSecret);
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
 		yaml = yaml.replaceAll("$POWERSTORE_ENABLED", true);
