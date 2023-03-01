@@ -111,7 +111,6 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.vSphereFCHostName = $("#vSphere-fc-host-name").val();
 	DriverValues.vSphereVCenterHost = $("#vSphere-vCenter-host").val();
 	DriverValues.vSphereVCenterCredSecret = $("#vSphere-vCenter-cred-secret").val();
-	alert($("#array").val())
 	return DriverValues
 }
 
