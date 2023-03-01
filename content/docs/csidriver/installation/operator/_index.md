@@ -250,7 +250,7 @@ Please refer to the _Troubleshooting_ section [here](../../troubleshooting/opera
 The CSI Drivers installed by the Dell CSI Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –
 
 * Modifying the installation directly via `kubectl edit`
-    For example - If the Unity XT driver is installed then run this command to get the name of the object name of kind CSIUnity.
+    For example - If the Unity XT driver is installed then run this command to get the object name of kind CSIUnity.
     ```
     # Replace driver-namespace with the namespace where the Unity XT driver is installed
     $ kubectl get csiunity -n <driver-namespace>
