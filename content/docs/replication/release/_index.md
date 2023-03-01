@@ -14,6 +14,7 @@ Description: >
  - [PowerScale - Implement Reprotect functionality](https://github.com/dell/csm/issues/532)
  - [PowerScale - SyncIQ policy improvements](https://github.com/dell/csm/issues/573)
  - [PowerFlex - Initial Replication Support](https://github.com/dell/csm/issues/618)
+ - [Replication APIs to be moved from alpha phase](https://github.com/dell/csm/issues/432)
 
 ### Fixed Issues
 
