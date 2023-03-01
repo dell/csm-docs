@@ -24,7 +24,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
   {{< /card >}}
   {{< card header="[**Replication**](replication/)"
-          footer="Supports [PowerStore](csidriver/features/powerstore/) [PowerScale](csidriver/features/powerscale/) [PowerMax](csidriver/features/powermax/)">}}
+          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerStore](csidriver/features/powerstore/) [PowerScale](csidriver/features/powerscale/) [PowerMax](csidriver/features/powermax/)">}}
   CSM for Replication project aims to bring Replication & Disaster Recovery capabilities of Dell Storage Arrays to Kubernetes clusters. It helps you replicate groups of volumes and can provide you a way to restart applications in case of both planned and unplanned migration.
 [...Learn more](replication/)
 {{< /card >}}
@@ -68,7 +68,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | -------------------------------------------------------------------------------------------- | :-----: | :---------------: | :---------------: | :-----------------: |
 | [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar)                  | v1.5.1  |      v1.4.0       |      v1.3.0       |       v1.2.0        |
 | [Observability](https://hub.docker.com/r/dellemc/csm-topology)                               | v1.5.0  |      v1.4.0       |      v1.3.0       |       v1.2.0        |
-| [Replication](https://hub.docker.com/r/dellemc/dell-replication-controller)                  | v1.3.1  |      v1.3.0       |      v1.3.0       |       v1.2.0        |
+| [Replication](https://hub.docker.com/r/dellemc/dell-replication-controller)                  | v1.4.0  |      v1.3.1       |      v1.3.0       |       v1.3.0        |
 | [Resiliency](https://hub.docker.com/r/dellemc/podmon)                                        | v1.4.0  |      v1.3.0       |      v1.2.0       |       v1.1.0        |
 | [Encryption](https://hub.docker.com/r/dellemc/csm-encryption)                                | v0.2.0  |      v0.1.0       |        NA         |         NA          |
 | [Application Mobility](https://hub.docker.com/r/dellemc/csm-application-mobility-controller) | v0.2.0  |      v0.1.0       |        NA         |         NA          |
@@ -76,15 +76,15 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | [CSI Driver for Unity XT](https://hub.docker.com/r/dellemc/csi-unity/tags)                   | v2.6.0  |      v2.5.0       |      v2.4.0       |       v2.3.0        |
 | [CSI Driver for PowerStore](https://hub.docker.com/r/dellemc/csi-powerstore/tags)            | v2.6.0  |      v2.5.1       |      v2.4.0       |       v2.3.0        |
 | [CSI Driver for PowerFlex](https://hub.docker.com/r/dellemc/csi-vxflexos/tags)               | v2.6.0  |      v2.5.0       |      v2.4.0       |       v2.3.0        |
-| [CSI Driver for PowerMax](https://hub.docker.com/r/dellemc/csi-powermax/tags)                | v2.6.0  |      v2.5.0       |      v2.4.0       |       v2.3.1       |
+| [CSI Driver for PowerMax](https://hub.docker.com/r/dellemc/csi-powermax/tags)                | v2.6.0  |      v2.5.0       |      v2.4.0       |       v2.3.1        |
 
 ## CSM Modules Support Matrix for Dell CSI Drivers 
 
 | CSM Module                                                  | CSI PowerFlex v2.6.0 | CSI PowerScale v2.6.0 | CSI PowerStore v2.6.0 | CSI PowerMax v2.6.0 | CSI Unity XT v2.6.0 |
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
 | [**Authorization**](authorization/) v1.5.1                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
-| [**Observability**](observability/) v1.5                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Replication**](replication/)   v1.3.1                    | ❌                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Resiliency**](resiliency/)     v1.4                      | ✔️                    | ✔️                     | ❌                     | ❌                   | ✔️                   |
+| [**Observability**](observability/) v1.5.0                  | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
+| [**Replication**](replication/)   v1.4.0                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
+| [**Resiliency**](resiliency/)     v1.4.0                    | ✔️                    | ✔️                     | ❌                     | ❌                   | ✔️                   |
 | [**Encryption**](secure/encryption)    v0.2.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
 | [**Application Mobility**](applicationmobility/)     v0.2.0 | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ✔️                   |
