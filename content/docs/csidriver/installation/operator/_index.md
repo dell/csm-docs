@@ -250,13 +250,35 @@ Please refer to the _Troubleshooting_ section [here](../../troubleshooting/opera
 The CSI Drivers installed by the Dell CSI Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –
 
 * Modifying the installation directly via `kubectl edit`
-    For example - If the name of the installed Unity XT driver is unity, then run
+    For example - If the Unity XT driver is installed then run this command to get the object name of kind CSIUnity.
     ```
     # Replace driver-namespace with the namespace where the Unity XT driver is installed
-    $ kubectl edit csiunity/unity -n <driver-namespace>
+    $ kubectl get csiunity -n <driver-namespace>
+    ```
+    use the object name of kind CSIUnity in `kubectl edit` command.
+
+    ```
+    # Replace object-name with the object name of kind CSIUnity
+    $ kubectl edit csiunity/<object-name> -n <driver-namespace>
     ```
     and modify the installation. The usual fields to edit are the version of drivers and sidecars and the env variables.
+    
 * Modify the API object in place via `kubectl patch` command. 
+   For example if you want to patch the deployment to have two replicas for Unity XT driver then run this command to get the deployment
+    ```
+    $ kubectl get deployments -n <driver-namespace>
+    ```
+    to patch the deployment with your patch object inline run this command.
+    ```
+    # Replace deployment with the name of the deployment
+    $ kubectl patch deploy/<deployment> -n <driver-namespace> -p '{"spec":{"replicas": 2}}'
+    ``` 
+    to patch the deployment with your patch file run this command.
+    ```
+    # Replace deployment with the name of the deployment
+    kubectl patch deployment <deployment> --patch-file patch-file.yaml
+    ```
+    
 
 To create patch file or edit deployments, refer [here](https://github.com/dell/dell-csi-operator/tree/master/samples) for driver version & env variables and [here](https://github.com/dell/dell-csi-operator/tree/master/driverconfig/config.yaml) for version of side-cars.
 The latest versions of drivers could have additional env variables or sidecars.
