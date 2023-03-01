@@ -65,10 +65,7 @@ function validateForm(CONSTANTS_PARAM) {
 			if (document.getElementById('vSphere-vCenter-host').value.trim() === "") {
 				return false;
 			}
-			if (document.getElementById('vSphere-vCenter-username').value.trim() === "") {
-				return false;
-			}
-			if (document.getElementById('vSphere-vCenter-password').value.trim() === "") {
+			if (document.getElementById('vSphere-vCenter-cred-secret').value.trim() === "") {
 				return false;
 			}
 		}
