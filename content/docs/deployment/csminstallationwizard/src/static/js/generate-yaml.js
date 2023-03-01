@@ -77,10 +77,12 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.vgsnapshotImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("vgsnapshotImage");
 	DriverValues.replicationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("replicationImage");
 	DriverValues.migrationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("migrationImage");
+	DriverValues.migrationNodeRescanSidecarImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("migrationNodeRescanSidecarImage");
 	DriverValues.authorizationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("authorizationImage");
 	DriverValues.powermaxCSIReverseProxyImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("powermaxCSIReverseProxyImage");
 	DriverValues.podmonImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("podmonImage");
-
+	DriverValues.appMobilityVeleroPluginImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("appMobilityVeleroPluginImage");
+	
 	if (DriverValues.csmVersion === "1.4.0" || DriverValues.csmVersion === "1.5.0") {
 		DriverValues.powermaxCSIReverseProxyImageEnabled = $("#powermax-csi-reverse-proxy").prop('checked') ? true : false;
 	} else {
@@ -109,7 +111,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.vSphereFCHostName = $("#vSphere-fc-host-name").val();
 	DriverValues.vSphereVCenterHost = $("#vSphere-vCenter-host").val();
 	DriverValues.vSphereVCenterCredSecret = $("#vSphere-vCenter-cred-secret").val();
-
+	alert($("#array").val())
 	return DriverValues
 }
 
@@ -128,6 +130,7 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 	yaml = yaml.replaceAll("$REPLICATION_IMAGE", obj.replicationImage);
 	yaml = yaml.replaceAll("$MIGRATION_ENABLED", obj.migration);
 	yaml = yaml.replaceAll("$MIGRATION_IMAGE", obj.migrationImage);
+	yaml = yaml.replaceAll("$MIGRATION_NODE_RESCAN_SIDECAR_IMAGE", obj.migrationNodeRescanSidecarImage);
 	yaml = yaml.replaceAll("$AUTHORIZATION_ENABLED", obj.authorization);
 	yaml = yaml.replaceAll("$AUTHORIZATION_IMAGE", obj.authorizationImage);
 	yaml = yaml.replaceAll("$AUTHORIZATION_PROXY_HOST", obj.authorizationProxyHost);
@@ -215,6 +218,7 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 
 	yaml = yaml.replaceAll("$APP_MOBILITY_ENABLED", obj.applicationMobility);
 	yaml = yaml.replaceAll("$VELERO_ENABLED", obj.velero);
+	yaml = yaml.replaceAll("$APP_MOBILITY_VELERO_PLUGIN_IMAGE", obj.appMobilityVeleroPluginImage);
 	yaml = yaml.replaceAll("$CERT_MANAGER_ENABLED", obj.certManagerEnabled);
 
 	const regex = /\$[a-zA-Z0-9_-]*/g;

@@ -176,7 +176,7 @@ csm-application-mobility:
           #publicUrl:
     initContainers:
     - name: dell-custom-velero-plugin
-      image: $APP-MOBILITY_VELERO_PLUGIN_IMAGE
+      image: $APP_MOBILITY_VELERO_PLUGIN_IMAGE
       volumeMounts:
       - mountPath: /target
         name: plugins

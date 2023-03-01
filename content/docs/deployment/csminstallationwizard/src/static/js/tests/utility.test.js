@@ -152,7 +152,7 @@ describe("GIVEN validateForm functions", () => {
 		<input type="text" id="vSphere-fc-port-group">
 		<input type="text" id="vSphere-fc-host-name">
 		<input type="text" id="vSphere-vCenter-host">
-		<input type="text" id="vSphere-vCenter-cred-secrett">
+		<input type="text" id="vSphere-vCenter-cred-secret">
 	`;
 
 	const CONSTANT_PARAM = {
