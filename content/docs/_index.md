@@ -36,7 +36,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 [...Learn more](resiliency/)
   {{< /card >}}
 {{< card header="[**Observability**](observability/)"
-          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerStore](csidriver/features/powerstore/)">}}
+          footer="Supports [PowerFlex](csidriver/features/powerflex/) [PowerStore](csidriver/features/powerstore/) [PowerScale](csidriver/features/powerscale/) [PowerMax](csidriver/features/powermax/)">}}
  CSM for Observability provides visibility on the capacity of the volumes/file shares that is being managed with Dell CSM CSI (Container Storage Interface) drivers along with their performance in terms of bandwidth, IOPS, and response time.
 [...Learn more](observability/)
   {{< /card >}}
@@ -67,7 +67,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | Modules/Drivers                                                                              | CSM 1.6 | [CSM 1.5.1](../v1/) | [CSM 1.4](../v2/) | [CSM 1.3](../v3/) |
 | -------------------------------------------------------------------------------------------- | :-----: | :---------------: | :---------------: | :-----------------: |
 | [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar)                  | v1.5.1  |      v1.4.0       |      v1.3.0       |       v1.2.0        |
-| [Observability](https://hub.docker.com/r/dellemc/csm-topology)                               | v1.4.0  |      v1.3.0       |      v1.2.0       |       v1.1.1        |
+| [Observability](https://hub.docker.com/r/dellemc/csm-topology)                               | v1.5.0  |      v1.4.0       |      v1.3.0       |       v1.2.0        |
 | [Replication](https://hub.docker.com/r/dellemc/dell-replication-controller)                  | v1.3.1  |      v1.3.0       |      v1.3.0       |       v1.2.0        |
 | [Resiliency](https://hub.docker.com/r/dellemc/podmon)                                        | v1.4.0  |      v1.3.0       |      v1.2.0       |       v1.1.0        |
 | [Encryption](https://hub.docker.com/r/dellemc/csm-encryption)                                | v0.2.0  |      v0.1.0       |        NA         |         NA          |
@@ -80,10 +80,10 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 ## CSM Modules Support Matrix for Dell CSI Drivers 
 
-| CSM Module                                                  | CSI PowerFlex v2.5.0 | CSI PowerScale v2.5.0 | CSI PowerStore v2.5.1 | CSI PowerMax v2.5.0 | CSI Unity XT v2.5.0 |
+| CSM Module                                                  | CSI PowerFlex v2.6.0 | CSI PowerScale v2.6.0 | CSI PowerStore v2.6.0 | CSI PowerMax v2.6.0 | CSI Unity XT v2.6.0 |
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
 | [**Authorization**](authorization/) v1.5.1                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
-| [**Observability**](observability/) v1.4                    | ✔️                    | ✔️                     | ✔️                     | ❌                   | ❌                   |
+| [**Observability**](observability/) v1.5                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
 | [**Replication**](replication/)   v1.3.1                    | ❌                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
 | [**Resiliency**](resiliency/)     v1.4                      | ✔️                    | ✔️                     | ❌                     | ❌                   | ✔️                   |
 | [**Encryption**](secure/encryption)    v0.2.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
