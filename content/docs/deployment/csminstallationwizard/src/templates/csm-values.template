@@ -114,6 +114,7 @@ csi-powermax:
   migration:
     enabled: $MIGRATION_ENABLED
     image: $MIGRATION_IMAGE
+    nodeRescanSidecarImage: $MIGRATION_NODE_RESCAN_SIDECAR_IMAGE
   authorization:
     enabled: $AUTHORIZATION_ENABLED
     sidecarProxyImage: $AUTHORIZATION_IMAGE
@@ -124,8 +125,7 @@ csi-powermax:
     fcPortGroup: "$VSPHERE_FC_PORT_GROUP"
     fcHostName: "$VSPHERE_FC_HOST_NAME"
     vCenterHost: "$VSPHERE_VCENTER_HOST"
-    vCenterUserName: "$VSPHERE_VCENTER_USERNAME"
-    vCenterPassword: "$VSPHERE_VCENTER_PASSWORD"
+    vCenterCredSecret: $VSPHERE_VCENTER_CRED_SECRET
 
 ## K8S/Replication Module ATTRIBUTES
 ##########################################
@@ -176,7 +176,7 @@ csm-application-mobility:
           #publicUrl:
     initContainers:
     - name: dell-custom-velero-plugin
-      image: dellemc/csm-application-mobility-velero-plugin:v0.2.0
+      image: $APP_MOBILITY_VELERO_PLUGIN_IMAGE
       volumeMounts:
       - mountPath: /target
         name: plugins
