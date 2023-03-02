@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.110.0">
+<meta name="generator" content="Hugo 0.111.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,11 +18,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/replication/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-05-26T16:49:02-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-03-02T20:31:38+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Replication">
 <meta itemprop="description" content="Pre-requisite for Installing Replication via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2022-05-26T16:49:02-04:00" />
+<meta itemprop="dateModified" content="2023-03-02T20:31:38+05:30" />
 <meta itemprop="wordCount" content="182">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Replication"/>
@@ -634,12 +634,12 @@
 </ul>
 <p>To configure all the clusters, follow the steps below:</p>
 <ol>
-<li>On your main cluster, follow the instructions available in CSM Replication for <a href="../../../replication/deployment/install-repctl.md">Installation using repctl</a>. NOTE: On step 4 of the link above, you MUST use the command below to automatically package all clusters&rsquo; <code>.kube</code> config as a secret:</li>
+<li>On your main cluster, follow the instructions available in CSM Replication for <a href="../../../../replication/deployment/install-repctl">Installation using repctl</a>. NOTE: On step 4 of the link above, you MUST use the command below to automatically package all clusters&rsquo; <code>.kube</code> config as a secret:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ./repctl cluster inject 
 </span></span></code></pre></div><p>CSM Operator needs this admin configs instead of the service accounts’ configs  to be able to properly manage the target clusters. The default service account that&rsquo;ll be used is the CSM Operator service account.</p>
 <ol start="2">
-<li>On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following <a href="../drivers/powerscale.md/#prerequisite">prerequisites for deploying PowerScale via Dell CSM Operator</a></li>
+<li>On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following <a href="../../drivers/powerscale/#prerequisite">prerequisites for deploying PowerScale via Dell CSM Operator</a></li>
 </ol>
 
 	
