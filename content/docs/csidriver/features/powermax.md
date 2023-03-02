@@ -110,7 +110,7 @@ When the driver is installed and all the node plug-ins have initialized successf
 
 `symaccess -sid <symid> -iscsi <host iqn> set chap -cred <host IQN> -secret <CHAP secret>`
 
-Where <host IQN> is the name of the iSCSI initiator of a host IQN, and <CHAP secret> is the chapsecret that is used at the time of the installation of the driver.
+Where `host IQN` is the name of the iSCSI initiator of a host IQN, and `CHAP secret` is the chapsecret that is used at the time of the installation of the driver.
 
 *NOTE*: The host IQN is also used as the username when setting up the CHAP credentials.
 
