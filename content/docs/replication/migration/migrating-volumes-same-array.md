@@ -1,9 +1,9 @@
 ---
-title: Migrating Volumes
-linktitle: Migrating Volumes
-weight: 6
+title: Between Storage classes
+linktitle: Between Storage classes
+weight: 2
 description: >
-  Migrating Volumes Between Storage Classes
+  Support for Array Migration of Volumes between storage classes
 ---
 
 You can migrate existing pre-provisioned volumes to another storage class by using volume migration feature. 
