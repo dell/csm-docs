@@ -26,9 +26,9 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 
 | CSM Modules        | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
-| CSM Authorization  | 1.2.0 +   | v1.2.0 +       |
+| CSM Authorization  | 1.4.0 +   | v1.4.0 +       |
 | CSM Replication    | 1.3.0 +   | v1.3.0 +       |
-| CSM Observability  | 1.2.0 +   | v1.2.0 +       |
+| CSM Observability  | 1.3.0 +   | v1.3.0 +       |
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
@@ -50,20 +50,6 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 {{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
    
-#### Operator Installation on a cluster with OLM
-1. Clone and checkout the required csm-operator version using `git clone -b v1.1.0 https://github.com/dell/csm-operator.git`
-2. `cd csm-operator`
-3. Run `bash scripts/install_olm.sh` to install the operator.
->NOTE: Dell CSM Operator will get installed in the `test-csm-operator-olm` namespace.
-
-{{< imgproc install_olm.jpg Resize "2500x" >}}{{< /imgproc >}}
-
-4. Once installation completes, run the command `kubectl get pods -n test-csm-operator-olm` to validate the installation. If installed successfully, you should be able to see the operator pods and CSV in the `test-csm-operator-olm` namespace. The CSV phase will be in `Succeeded` state.
-   
-{{< imgproc install_olm_pods.JPG Resize "2500x" >}}{{< /imgproc >}}
-
->**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
-
 ### Installation via Operator Hub
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
 
@@ -76,11 +62,6 @@ The installation process involves the creation of a `Subscription` object either
 To uninstall a CSM operator, run `bash scripts/uninstall.sh`. This will uninstall the operator in `dell-csm-operator` namespace.
 
 {{< imgproc uninstall.jpg Resize "2500x" >}}{{< /imgproc >}}
-
-#### Operator uninstallation on a cluster with OLM
-To uninstall a CSM operator installed with OLM run `bash scripts/uninstall_olm.sh`. This will uninstall the operator in  `test-csm-operator-olm` namespace.
-
-{{< imgproc uninstall_olm.JPG Resize "2500x" >}}{{< /imgproc >}}
 
 ### To upgrade Dell CSM Operator, perform the following steps.
 Dell CSM Operator can be upgraded in 2 ways:
