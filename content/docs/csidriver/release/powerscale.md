@@ -3,7 +3,7 @@ title: PowerScale
 description: Release notes for PowerScale CSI driver
 ---
 
-## Release Notes - CSI Driver for PowerScale v2.5.0
+## Release Notes - CSI Driver for PowerScale v2.6.0
 
 ### New Features/Changes
 
