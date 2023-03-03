@@ -11,9 +11,9 @@ Description: >
 
 ### New Features/Changes
 - Restrict the version of TLS to v1.2 for all requests to CSM authorization proxy server. ([#642](https://github.com/dell/csm/issues/642))
-- Option to set Nodeports for the ingress controller during CSM authorization install/upgrade.
-- Restrict CSM authorization requests to use either signed or self-signed certificate generated for the proxy server.
+- PowerFlex preapproved GUIDs. ([#402](https://github.com/dell/csm/issues/402))
+- CSM 1.6 release specific changes. ([#583](https://github.com/dell/csm/issues/583))
 
 ### Bugs
-
-- CSM Authorization installation fails due to a PATH not looking in /usr/local/bin. ([#580](https://github.com/dell/csm/issues/580))
+- CSM Authorization quota of zero should allow infinite use for PowerFlex and PowerMax. ([#654](https://github.com/dell/csm/issues/654))
+- CSM Authorization CRD in the CSM Operator doesn't read custom configurations. ([#633](https://github.com/dell/csm/issues/633))
