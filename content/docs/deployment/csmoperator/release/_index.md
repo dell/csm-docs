@@ -17,4 +17,4 @@ Description: >
 [Fix for CSM Authorization CRD in the CSM Operator not able to custom configurations](https://github.com/dell/csm/issues/633)
 
 ### Known Issues
-There are no known issues in this release.
+CSM object does not track available deployment count when down scaling to n-1 , where n is number of nodes.
