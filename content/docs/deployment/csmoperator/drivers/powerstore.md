@@ -71,7 +71,7 @@ User can query for all Dell CSI drivers using the following command:
 
   | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
-| replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state till new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
+| replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
 | namespace | Specifies namespace where the driver will be installed | Yes | "test-powerstore" |
 | fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType` | No |"ReadWriteOnceWithFSType"|
 | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
