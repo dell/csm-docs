@@ -76,8 +76,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
     On your terminal, run this command:
 
-    `helm install <release-name> dell/container-storage-modules -f <values.yaml location>` <br/>
-
     ```terminal
+    helm install <release-name> dell/container-storage-modules -f <values.yaml location>
     Example: helm install powerstore dell/container-storage-modules -f values.yaml
     ```
