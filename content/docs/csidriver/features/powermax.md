@@ -591,11 +591,8 @@ vSphere:
   fcHostGroup: "csi-vsphere-VC-HG"
   # vCenterHost: URL/endpoint of the vCenter where all the ESX are present
   vCenterHost: "00.000.000.01"
-  # vCenterUserName: username from the vCenter credentials
-  vCenterUserName: "user"
-  # vCenterPassword: password from the vCenter credentials
-  vCenterPassword: "pwd"
-  
+  # vCenterCredSecret: secret name for the vCenter credentials
+  vCenterCredSecret: vcenter-creds  
 ```
   
 >Note: Replication is not supported with this feature.

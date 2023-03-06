@@ -19,9 +19,7 @@ If the user have native multipathing, the user has to run multipath list command
 
 #### On Storage Array 
 
-User has to configure physical SRDF connection between source array (where the volumes are currently provisioned) and target array (where the volumes should be migrated). 
-
-User can ensure the configured target array by navigating to the Data Protection tab and choosing SRDF Groups on the managing Unisphere of the array. User should be able to see the target array listed in the remote arrays section.  
+User has to configure physical SRDF connection between source array (where the volumes are currently provisioned) and target array (where the volumes should be migrated).
 
 #### In Kubernetes 
 
@@ -41,8 +39,6 @@ To install CRD, user can run the command as below
 
 Dell-csi-migrator and dell-csi-node-rescanner sidecars are installed alongside with the driver, the user can enable it in myvalues.yaml file 
 
-To install the driver with migration enabled the user need to ensure that helm parameter migration.enabled is set in the copy of example values.yaml file (usually called my-powermax-settings.yaml, myvalues.yaml etc.). 
-
 #### Sample:
 
 ```yaml
@@ -56,8 +52,9 @@ migration:
   enabled: true
   # Change this to use any specific version of the dell-csi-migrator sidecar 
   # Default value: None 
-  nodeRescanSidecarImage: "vmadurprd01.cec.lab.emc.com:5000/dub/csi-nrescan:latest" 
-  image: "vmadurprd01.cec.lab.emc.com:5000/dub/migrator:latest" 
+  nodeRescanSidecarImage: 
+  nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0 
+  image: dellemc/dell-csi-migrator:v1.1.0 
   # migrationPrefix: Determine if migration is enabled 
   # Default value: "migration.storage.dell.com" 
   # Examples: "migration.storage.dell.com" 
@@ -73,21 +70,21 @@ Target array configuration and endpoint needs to be updated in the myvalues.yaml
   # The CSI PowerMax ReverseProxy section to fill out the required configuration  
   defaultCredentialsSecret: powermax-creds 
   storageArrays: 
-    - storageArrayId: "000120001136" 
-      endpoint: https://10.228.210.49:8443 
+    - storageArrayId: "000000000000" 
+      endpoint: https://00.000.000.00:0000 
 #      backupEndpoint: https://backup-1.unisphe.re:8443 
     - storageArrayId: "000120001178" 
-      endpoint: https://10.228.210.51:8443 
+      endpoint: https://00.000.000.00:0000 
 #      backupEndpoint: https://backup-2.unisphe.re:8443 
 ```
  
-After enabling the migration module the user can continue to install the CSI driver following usual installation procedure to ensure that the necessary array connection information to secret has been added. 
- 
+After enabling the migration module the user can continue to install the CSI driver following usual installation procedure.
+
 ## PowerMax Support 
 
 #### Supports migrations: 
 
-- From a VMAX array to a VMAX3, VMAX All Flash, or PowerMax array  
+- From a VMAX3 array to VMAX All Flash, or PowerMax array  
 
 - From a PowerMax array to another PowerMax array
 
@@ -95,7 +92,7 @@ After enabling the migration module the user can continue to install the CSI dri
 
 To trigger array migration procedure, the user need to create the migration group for the required source and target array.  
 
-Creating the migration group will trigger reconcile action on the migrator sidecar that will call ArrayMigrate() on the CSI driver with actions migrate or commit. After the migrated state, the migration group will trigger reconcile on the node-rescanner sidecar. 
+Creating the migration group will trigger reconcile action on the migrator sidecar that will call ArrayMigrate() on the CSI driver with actions `migrate` or `commit`. After the migrated state, the migration group will trigger reconcile on the node-rescanner sidecar. 
 
 #### Manual Migration Group Creation 
 

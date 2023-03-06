@@ -14,6 +14,9 @@ description: Release notes for PowerMax CSI driver
 - [Added support to clone the replicated volumes](https://github.com/dell/csm/issues/646)
 - [Added support to restore the snapshot of metro volumes](https://github.com/dell/csm/issues/652)
 - [Added support for MKE 3.6.1](https://github.com/dell/csm/issues/672)
+- [Added support for user array migration between arrays](https://github.com/dell/csm/issues/267)
+- [Added support for Observability](https://github.com/dell/csm/issues/586)
+- [Added support for generating manifest file via CSM Installation wizard](https://github.com/dell/csm/issues/591)
 
 ### Fixed Issues
 There are no fixed issues in this release.
