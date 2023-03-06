@@ -47,7 +47,7 @@ Verify that zero padding is enabled on the PowerFlex storage pools that will be 
 ### Install PowerFlex Storage Data Client
 
 The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver. 
-SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS), RHEL 7.9 and RHEL 8.x. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps [below](#manual-sdc-deployment).
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps [below](#manual-sdc-deployment).
 Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 
 *NOTE:* To install CSI driver for Powerflex with automated SDC deployment, you need below two packages on worker nodes.
@@ -178,7 +178,7 @@ Use the below command to replace or update the secret:
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
 | version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.6.0 |
 | driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
-| powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | No | dellemc/sdc:3.6 |
+| powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | dellemc/sdc:3.6.0.6 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
 | logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
 | logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
