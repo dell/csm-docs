@@ -20,17 +20,16 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 | CSM Modules          | Version   | 
 | ---------------------| --------- | 
-| CSM Authorization    | 1.5.0     | 
+| Application Mobility | 0.2.0     |
 | CSM Observability    | 1.4.0     |
 | CSM Replication      | 1.3.1     |
 | CSM Resiliency       | 1.4.0     |
-| Application Mobility | 0.2.0     |
 
 ## Installation
 
 1. Open the [CSM Installation Wizard](./src/index.html).
-2. Select the `Array`.
-3. Select the `Installation Type` as `Helm`.
+2. Select the `Installation Type` as `Helm`.
+3. Select the `Array`.
 4. Enter the `Image Repository`. The default value is `dellemc`.
 5. Select the `CSM Version`. 
 6. Select the modules for installation. If there are module specific inputs, enter their values. 
@@ -41,7 +40,8 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 11. Enter the `Module Namespace`. The default value is `csm-module`. 
 12. Click on `Generate YAML`.
 13. A manifest file, `values.yaml` will be generated and downloaded. 
-14. Follow the steps in `Run the following commands to install` section to install Dell CSI Driver and Modules using the generated manifest file. 
+14. A section `Run the following commands to install` will be displayed.
+15. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file. 
 
 ## Install Helm Chart
 
@@ -76,8 +76,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
     On your terminal, run this command:
 
-    **Syntax**:`helm install <release-name> dell/container-storage-modules -f <values.yaml location>` <br/>
-
     ```terminal
-    e.g: helm install powerstore dell/container-storage-modules -f values.yaml
+    helm install <release-name> dell/container-storage-modules -f <values.yaml location>
+    Example: helm install powerstore dell/container-storage-modules -f values.yaml
     ```
