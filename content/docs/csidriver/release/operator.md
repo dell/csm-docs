@@ -9,6 +9,7 @@ description: Release notes for Dell CSI Operator
 
 - [Added support to Kubernetes 1.26](https://github.com/dell/csm/issues/597)
 - [Added pre-approved GUIDs support for PowerFlex](https://github.com/dell/csm/issues/402)
+- [Updated Go version from 1.19 to 1.20](https://github.com/dell/csm/issues/658)
 
 >**Note:** There will be a delay in certification of Dell CSI Operator 1.11.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.11.0 release.
 
