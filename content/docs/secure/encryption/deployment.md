@@ -34,7 +34,7 @@ encryption:
   pluginName: "sec-isilon.dellemc.com"
 
   # image: Encryption driver image name.
-  image: "dellemc/csm-encryption:v0.2.0"
+  image: "dellemc/csm-encryption:v0.3.0"
 
   # logLevel: Log level of the encryption driver.
   # Allowed values: "error", "warning", "info", "debug", "trace".
@@ -67,11 +67,11 @@ encryption:
   extraArgs: []
 ```
 
-| Parameter | Description| Required | Default |
-| --------- |------------|----------| ------- |  
+| Parameter | Description | Required | Default |
+| --------- | ----------- | -------- | ------- |  
 | enabled | Enable/disable volume encryption feature. | No | false |
 | pluginName | The name of the provisioner to use for encrypted volumes. | No | "sec-isilon.dellemc.com" |
-| image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.2.0" |
+| image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.3.0" |
 | logLevel | Log level of the encryption driver.<br/>Allowed values: "error", "warning", "info", "debug", "trace". | No | "error" |
 | apiPort | TCP Port number used by the REST API Server. | No | 3838 |
 | livenessPort | HTTP liveness probe port number. Leave empty to disable the liveness probe. | No | |
