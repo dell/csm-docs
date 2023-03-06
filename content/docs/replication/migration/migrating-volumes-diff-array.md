@@ -61,7 +61,7 @@ migration:
   migrationPrefix: "migration.storage.dell.com" 
 ``` 
 
-Target array configuration and endpoint needs to be updated in the myvalues.yaml file as shown below.  
+Target array configuration and endpoint needs to be updated in the [myvalues.yaml](../../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode) file as shown below.  
 
 ```yaml
   ########################## 
@@ -96,23 +96,31 @@ Creating the migration group will trigger reconcile action on the migrator sidec
 
 #### Manual Migration Group Creation 
 
-User can find sample migration group manifest in the driver repository [here](https://github.com/dell/csi-powermax/tree/main/samples/migrationgroup)  
+User can find sample migration group manifest in the driver repository [here](https://github.com/dell/csi-powermax/tree/main/samples/migrationgroup) 
 
 ``` yaml
-apiVersion: "replication.storage.dell.com/v1" 
-kind: DellCSIMigrationGroup 
-metadata: 
-  name: pmax-migration 
-spec: 
-  driverName: "csi-powermax.dellemc.com" 
-  sourceID: "000000000000" 
-  targetID: "000000000000" 
-  migrationGroupAttributes: 
-          param: "migrate" 
-driverName : Name of the driver in this csi-powermax.dellemc.com 
-sourceID and targetID: Array IDs of source and target arrays respectively where migration is being planned. 
-```
-After completion of migration, the migration group comes to deleting state after which the admin can manually delete the migration group with kubectl -delete -f <manifest.yaml> 
+apiVersion: "replication.storage.dell.com/v1"
+kind: DellCSIMigrationGroup
+metadata:
+  # custom name of the migration group
+  # Default value: pmax-migration
+  name: pmax-migration
+spec:
+  # driverName: exact name of CSI Powermax driver
+  driverName: "csi-powermax.dellemc.com"
+  # sourceID: source ArrayID
+  sourceID: "000000001234"
+  # targetID: target ArrayID
+  targetID: "000000005678"
+  migrationGroupAttributes:
+    action: "migrate"
+ ```   
+ To create the migration group, use the below command,
+ `kubectl -create -f <manifest.yaml>`
+
+After completion of migration, the migration group comes to deleting state after which the admin can manually delete the migration group with the below command.
+
+`kubectl -delete -f <manifest.yaml>`. 
 
 ## Post migration 
 
