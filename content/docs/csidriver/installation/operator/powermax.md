@@ -406,7 +406,7 @@ To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver man
         - name: "X_CSI_VSPHERE_HOSTGROUP"
           value: ""
 ```
-Edit the section in the driver manifest having sample for the following `Secret` with required values.
+Edit the section in the driver manifest having the sample for the following `Secret` with required values.
 ```
 apiVersion: v1
 kind: Secret
