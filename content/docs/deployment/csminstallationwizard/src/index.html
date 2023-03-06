@@ -115,32 +115,6 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4 authorization col-sm-11">
-                    <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="authorization" value="" onchange="onAuthorizationChange(authorizationNote)">
-                      <label for="authorization" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Authorization module">Authorization</label>
-                    </div>
-                    <div class="row mt-3 child-level-one authorization-wrapper">
-                      <div class="col-sm-12">
-                        <input class="form-check-input" type="checkbox" id="authorization-skip-cert-validation" value="" checked>
-                        <label for="authorization-skip-cert-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable certificate validation of the csm-authorization server">Authorization Skip Certificate Validation</label>
-                      </div>
-                    </div>
-                    <div class="row mt-3 child-level-one authorization-wrapper">
-                      <label for="authorization-proxy-host" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Hostname of the csm-authorization server" style="width: 110px;">Proxy Host</label>
-                      <div class="col-sm-9"></div>
-                      <div class="col-sm-3">
-                        <input class="form-control input-lg" type="text" id="authorization-proxy-host" placeholder="">
-                      </div>
-                    </div>
-                    <div class="row child-level-one authorization-wrapper">
-                      <div class="mt-3 py-2 note">
-                        <i class="icon dds__icon dds__icon--alert-info-cir"></i>
-                        <span class="h6" id="authorization-note"></span>
-                      </div>
-                    </div>
-                  </div>
-
                   <div class="row mb-4 observability">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="observability" value="" onchange="onObservabilityChange()">
@@ -177,6 +151,32 @@
                   <hr>
                   <div class="row mb-4">
                     <div class="col-sm-12 h5">Select the features for installation.</div>
+                  </div>
+                
+                  <div class="row mb-4 authorization col-sm-11">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="authorization" value="" onchange="onAuthorizationChange(authorizationNote)">
+                      <label for="authorization" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Authorization module">Authorization</label>
+                    </div>
+                    <div class="row mt-3 child-level-one authorization-wrapper">
+                      <div class="col-sm-12">
+                        <input class="form-check-input" type="checkbox" id="authorization-skip-cert-validation" value="" checked>
+                        <label for="authorization-skip-cert-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable certificate validation of the csm-authorization server">Authorization Skip Certificate Validation</label>
+                      </div>
+                    </div>
+                    <div class="row mt-3 child-level-one authorization-wrapper">
+                      <label for="authorization-proxy-host" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Hostname of the csm-authorization server" style="width: 110px;">Proxy Host</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-3">
+                        <input class="form-control input-lg" type="text" id="authorization-proxy-host" placeholder="">
+                      </div>
+                    </div>
+                    <div class="row child-level-one authorization-wrapper">
+                      <div class="mt-3 py-2 note">
+                        <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+                        <span class="h6" id="authorization-note"></span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="row mb-4">
