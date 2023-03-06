@@ -68,7 +68,7 @@ the CSI driver must be restarted to pick up the change.
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes | 1.22, 1.23, 1.24, 1.25 |
+| Kubernetes | 1.22, 1.23, 1.24, 1.25, 1.26 |
 | Red Hat OpenShift  | 4.10, 4.11 |
 | RHEL | 7.9, 8.4 |
 | Ubuntu | 18.04, 20.04 |
