@@ -9,7 +9,7 @@ The Container Storage Modules along with the required CSI Drivers can each be de
 
 {{< cardpane >}}
   {{< card header="[**CSM Operator**](csmoperator/)"
-          footer="Supported drivers: [PowerScale](csmoperator/drivers/powerscale/), [PowerStore](csmoperator/drivers/powerstore/), [PowerFlex](csmoperator/drivers/powerflex/) <br> Supported modules [Authorization](csmoperator/modules/authorization/), [Replication](csmoperator/modules/replication/), [Observability](csmoperator/modules/observability/)">}}
+          footer="Supported drivers: [PowerScale](csmoperator/drivers/powerscale/), [PowerStore](csmoperator/drivers/powerstore/), [PowerFlex](csmoperator/drivers/powerflex/) <br> Supported modules: [Authorization](csmoperator/modules/authorization/), [Replication](csmoperator/modules/replication/), [Observability](csmoperator/modules/observability/)">}}
   Dell CSM Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 [...More on installation instructions](csmoperator/)
   {{< /card >}}
