@@ -2,7 +2,7 @@ name: Linter
 
 on:
   push:
-    branches: [ main ]
+    branches: [ csm-installation-wizard-doc-update ]
   pull_request:
     branches: [ main ]
 jobs:
