@@ -262,7 +262,7 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     ```
     $ kubectl edit <driver-object>/<object-name> -n <driver-namespace>
     ```
-    For example - If the object name is of of kind CSIUnity.
+    For example - If the object name is of kind CSIUnity.
     ```
     # Replace object-name with the object name of kind CSIUnity
     $ kubectl edit csiunity/<object-name> -n <driver-namespace>
