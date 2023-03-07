@@ -47,6 +47,7 @@ Set up the environment as follows:
 - Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
 
 - Add initiators from all ESX/ESXis to a host(initiator group) where the cluster is hosted.
+- Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same. 
 
 #### Linux multipathing requirements
 
@@ -193,10 +194,12 @@ Deployment and ClusterIP service will be created by dell-csi-operator.
 Create a TLS secret that holds an SSL certificate and a private key which is required by the reverse proxy server. 
 Use a tool such as `openssl` to generate this secret using the example below:
 
-```
-    openssl genrsa -out tls.key 2048
-    openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
-    kubectl create secret -n powermax tls revproxy-certs --cert=tls.crt --key=tls.key
+```bash
+openssl genrsa -out tls.key 2048
+openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
+kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
+kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --
+key=tls.key
 ```
 
 #### Set the following parameters in the CSI PowerMaxReverseProxy Spec
@@ -403,3 +406,24 @@ To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver man
         - name: "X_CSI_VSPHERE_HOSTGROUP"
           value: ""
 ```
+Edit the section in the driver manifest having the sample for the following `Secret` with required values.
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vcenter-creds
+  # Set driver namespace
+  namespace: test-powermax
+type: Opaque
+data:
+  # set username to the base64 encoded username
+  username: YWRtaW4=
+  # set password to the base64 encoded password
+  password: YWRtaW4=
+```
+These values can be obtained using base64 encoding as described in the following example:
+```bash
+echo -n "myusername" | base64
+echo -n "mypassword" | base64
+```
+where *myusername* and *mypassword* are credentials for a user with vCenter privileges.
