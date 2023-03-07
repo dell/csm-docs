@@ -11,14 +11,14 @@ The Dell CSI Operator is a Kubernetes Operator, which can be used to install and
 ## Prerequisites
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: [v6.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: [v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
@@ -35,7 +35,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ```
 
 *NOTE:*
-- It is recommended to use 6.2.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.2.1 version of snapshotter/snapshot-controller.
 
 
 ## Installation
