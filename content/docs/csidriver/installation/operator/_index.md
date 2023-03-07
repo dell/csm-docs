@@ -11,7 +11,7 @@ The Dell CSI Operator is a Kubernetes Operator, which can be used to install and
 ## Prerequisites
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: [v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
