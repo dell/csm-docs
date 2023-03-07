@@ -19,11 +19,15 @@ controller, because different versions could be incompatible with each other.
 To upgrade the CSM Replication sidecar that is installed along with the driver, the following steps are required. 
 
 >Note: These steps refer to the values file and `csi-install.sh` script that was used during the initial installation of the Dell CSI driver.
+
 **Steps**
 
 1. Update the `controller.replication.image` value in the values files to reference the new CSM Replication sidecar image.
-2. Run the csi-install script with the option `--upgrade` by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace <your-namespace> --values ./myvalues.yaml --upgrade`
+2. Run the csi-install script with the option `--upgrade` by running: <br>
+`cd ../dell-csi-helm-installer && ./csi-install.sh --namespace <your-namespace> --values ./myvalues.yaml --upgrade`
 3. Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology
+
+>For more information on upgrading the CSI driver, please visit the [CSI driver upgrade page](../../csidriver/upgradation).
 
 ### PowerScale
 
@@ -34,6 +38,8 @@ On PowerScale systems, an additional step is needed when upgrading to CSM Replic
 3. Delete disabled, target-side SyncIQ policies that are used for CSM Replication. Such policies will be distinguished by their names, of the format `<prefix>-<kubernetes namespace>-<IP of replication destination>-<RPO duration>`.
 
 ## Updating CSM Replication controller
+
+Make sure the appropriate release branch is available on the machine performing the upgrade by running:<br>`git clone -b <release-branch> https://github.com/dell/csm-replication.git`
 
 ### Upgrading with Helm
 
