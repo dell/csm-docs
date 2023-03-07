@@ -572,7 +572,7 @@ It will be supported only on new/freshly installed clusters where the cluster is
 
 To use this feature
 - Set `vSphere.enabled` to true.
-- Create a secret which contains vCenter privileges. Follow the steps [here](../installation/helm/powermax/#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
+- Create a secret which contains vCenter privileges. Follow the steps [here](../../installation/helm/powermax/#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
   
 ```
  VMware/vSphere virtualization support

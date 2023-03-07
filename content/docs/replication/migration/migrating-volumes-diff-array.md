@@ -52,7 +52,6 @@ migration:
   enabled: true
   # Change this to use any specific version of the dell-csi-migrator sidecar 
   # Default value: None 
-  nodeRescanSidecarImage: 
   nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0 
   image: dellemc/dell-csi-migrator:v1.1.0 
   # migrationPrefix: Determine if migration is enabled 

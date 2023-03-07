@@ -16,6 +16,8 @@ The controller section of the Helm chart installs the following components in a 
 - Kubernetes External Resizer, which resizes the volume
 - (optional) Kubernetes External health monitor, which provides volume health status
 - (optional) Dell CSI Replicator, which provides Replication capability. 
+- (optional) Dell CSI Migrator, which provides migrating capability within and across arrays
+- (optional) Node rescanner, which rescans the node for new data paths after migration 
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
 - CSI Driver for Dell PowerMax
@@ -102,6 +104,9 @@ Set up the environment as follows:
   where *myusername* and *mypassword* are credentials for a user with vCenter privileges.
 
 >Note: Initiators from all ESX/ESXi should be part of a single host(initiator group) and not hostgroup(cascaded intitiator group).
+
+Create the secret by running the below command, 
+`kubectl create -f samples/secret/vcenter-secret.yaml`.
 
 ### Certificate validation for Unisphere REST API calls
 
