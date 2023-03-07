@@ -267,7 +267,7 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     # Replace object-name with the object name of kind CSIUnity
     $ kubectl edit csiunity/<object-name> -n <driver-namespace>
     ```
-    and modify the installation. The usual fields to edit are the version of drivers and sidecars and the environment variables.
+    and modify the installation. The usual fields to edit are the version of drivers, sidecars and the environment variables.
     
 * Modify the API object in place via `kubectl patch` command. 
    For example if you want to patch the deployment to have two replicas for Unity XT driver then run this command to get the deployment
