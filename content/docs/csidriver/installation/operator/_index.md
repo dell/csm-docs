@@ -35,7 +35,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 ```
 
 *NOTE:*
-- It is recommended to use 6.2.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.2.1 version of snapshotter/snapshot-controller.
 
 
 ## Installation
@@ -79,7 +79,7 @@ The installation process involves the creation of a `Subscription` object either
 #### Pre-Requisite for installation with OLM
 Please run the following commands for creating the required `ConfigMap` before installing the `dell-csi-operator` using OLM.  
 ```
-$ git clone https://github.com/dell/dell-csi-operator.git
+$ git clone -b v1.11.0 https://github.com/dell/dell-csi-operator.git
 $ cd dell-csi-operator
 $ tar -czf config.tar.gz driverconfig/
 # Replace operator-namespace in the below command with the actual namespace where the operator will be deployed by OLM
@@ -250,18 +250,24 @@ Please refer to the _Troubleshooting_ section [here](../../troubleshooting/opera
 The CSI Drivers installed by the Dell CSI Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –
 
 * Modifying the installation directly via `kubectl edit`
+    ```
+    $ kubectl get <driver-object> -n <driver-namespace>
+    ```
     For example - If the Unity XT driver is installed then run this command to get the object name of kind CSIUnity.
     ```
     # Replace driver-namespace with the namespace where the Unity XT driver is installed
     $ kubectl get csiunity -n <driver-namespace>
     ```
-    use the object name of kind CSIUnity in `kubectl edit` command.
-
+    use the object name in `kubectl edit` command.
+    ```
+    $ kubectl edit <driver-object>/<object-name> -n <driver-namespace>
+    ```
+    For example - If the object name is CSIUnity.
     ```
     # Replace object-name with the object name of kind CSIUnity
     $ kubectl edit csiunity/<object-name> -n <driver-namespace>
     ```
-    and modify the installation. The usual fields to edit are the version of drivers and sidecars and the env variables.
+    and modify the installation. The usual fields to edit are the version of drivers, sidecars and the environment variables.
     
 * Modify the API object in place via `kubectl patch` command. 
    For example if you want to patch the deployment to have two replicas for Unity XT driver then run this command to get the deployment
@@ -280,8 +286,8 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     ```
     
 
-To create patch file or edit deployments, refer [here](https://github.com/dell/dell-csi-operator/tree/master/samples) for driver version & env variables and [here](https://github.com/dell/dell-csi-operator/tree/master/driverconfig/config.yaml) for version of side-cars.
-The latest versions of drivers could have additional env variables or sidecars.
+To create patch file or edit deployments, refer [here](https://github.com/dell/dell-csi-operator/tree/master/samples) for driver version & environment variables and [here](https://github.com/dell/dell-csi-operator/tree/master/driverconfig/config.yaml) for version of side-cars.
+The latest versions of drivers could have additional environment variables or sidecars.
 
 The below notes explain some of the general items to take care of.
 
