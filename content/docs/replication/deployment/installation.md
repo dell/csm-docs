@@ -17,7 +17,7 @@ Please read this [document](../configmap-secrets) before proceeding with the ins
 clusters which will be required during or after the installation.
 
 ### Install repctl
-You can download pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
+You can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
 Alternately, if you want to build the binary yourself, you can follow these steps:
 ```shell
 git clone github.com/dell/csm-replication
@@ -26,18 +26,18 @@ make build
 ```
 
 ### Installing CSM Replication Controller
-You can use one of the following methods to install CSM Replication Controller
+You can use one of the following methods to install CSM Replication Controller:
 * Using repctl
 * Installation script (Helm chart)
 
-We recommend using repctl for the installation as it simplifies the installation workflow. This process also helps configure `repctl`
+We recommend using repctl for the installation, as it simplifies the installation workflow. This process also helps configure `repctl`
 for future use during management operations.
 
 #### Using repctl
 Please follow the steps [here](../install-repctl) to install & configure Dell Replication Controller
 
 #### Using the installation script
-Repeat the following steps on all clusters where you want to configure replication
+Repeat the following steps on all clusters where you want to configure replication:
 
 ```shell
 git clone github.com/dell/csm-replication
@@ -83,7 +83,7 @@ Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../pow
 
 ### Dynamic Log Level Change
 CSM Replication Controller can dynamically change its logs' verbosity level.
-To set log level in runtime you need to edit the controllers ConfigMap:
+To set log level in runtime, you need to edit the controllers ConfigMap:
 ```shell
     kubectl edit cm dell-replication-controller-config -n dell-replication-controller
 ```
