@@ -12,6 +12,11 @@ description: Release notes for Unity XT CSI driver
 - [Added support for RKE 1.4.1](https://github.com/dell/csm/issues/670)
 - [Added support for SLES SP4](https://github.com/dell/csm/issues/695)
 
+### Fixed Issues
+
+- [PVC fails to resize with message "Invalid value 0; must be greater than zero"](https://github.com/dell/csm/issues/507)
+
+
 ### Known Issues
 
 | Issue | Workaround |
