@@ -1,3 +1,4 @@
+
 ---
 title: "Documentation"
 linkTitle: "Documentation"
@@ -10,6 +11,7 @@ The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and 
 
 <img src="csm_hexagon.png" alt="CSM Hex Diagram" width="500"/>
 
+<br> <br>
 CSM is made up of multiple components including modules (enterprise capabilities), CSI drivers (storage enablement), and other related applications (deployment, feature controllers, etc).
 
 {{< cardpane >}}
@@ -58,31 +60,29 @@ CSM is made up of multiple components including modules (enterprise capabilities
   {{< /card >}}
 {{< /cardpane >}}
 
-<img src="csm_diagram.jpg" alt="CSM Diagram" width="800"/>
-
 ## CSM Supported Modules and Dell CSI Drivers
 
-| Modules/Drivers | CSM 1.4 | [CSM 1.3.1](../v1/) | [CSM 1.2.1](../v2/) | [CSM 1.2](../v3/) | 
-| - | :-: | :-: | :-: | :-: |
-| [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar) | v1.4.0 | v1.3.0 | v1.2.0 | v1.2.0 |
-| [Observability](https://hub.docker.com/r/dellemc/csm-topology) | v1.3.0 | v1.2.0 | v1.1.1 | v1.1.0 |
-| [Replication](https://hub.docker.com/r/dellemc/dell-csi-replicator) | v1.3.0 | v1.3.0 | v1.2.0 | v1.2.0 |
-| [Resiliency](https://hub.docker.com/r/dellemc/podmon) | v1.3.0 | v1.2.0 | v1.1.0 | v1.1.0 |
-| [Encryption](https://hub.docker.com/r/dellemc/csm-encryption) | v0.1.0 | NA | NA | NA | 
-| [Application Mobility](https://hub.docker.com/r/dellemc/csm-application-mobility-controller) | v0.1.0 | NA | NA | NA |
-| [CSI Driver for PowerScale](https://hub.docker.com/r/dellemc/csi-isilon/tags) | v2.4.0 | v2.3.0 | v2.2.0 | v2.2.0 | 
-| [CSI Driver for Unity XT](https://hub.docker.com/r/dellemc/csi-unity/tags) | v2.4.0 | v2.3.0 | v2.2.0 | v2.2.0 |
-| [CSI Driver for PowerStore](https://hub.docker.com/r/dellemc/csi-powerstore/tags) | v2.4.0 | v2.3.0 | v2.2.0| v2.2.0 |
-| [CSI Driver for PowerFlex](https://hub.docker.com/r/dellemc/csi-vxflexos/tags) | v2.4.0 | v2.3.0 | v2.2.0 | v2.2.0 |
-| [CSI Driver for PowerMax](https://hub.docker.com/r/dellemc/csi-powermax/tags) | v2.4.0 | v2.3.1 | v2.2.0 | v2.2.0 |
+| Modules/Drivers                                                                              | CSM 1.5.1 | [CSM 1.4](../v1/) | [CSM 1.3.1](../v2/) | [CSM 1.2.1](../v3/) |
+| -------------------------------------------------------------------------------------------- | :-----: | :---------------: | :---------------: | :-----------------: |
+| [Authorization](https://hub.docker.com/r/dellemc/csm-authorization-sidecar)                  | v1.5.1  |      v1.4.0       |      v1.3.0       |       v1.2.0        |
+| [Observability](https://hub.docker.com/r/dellemc/csm-topology)                               | v1.4.0  |      v1.3.0       |      v1.2.0       |       v1.1.1        |
+| [Replication](https://hub.docker.com/r/dellemc/dell-replication-controller)                  | v1.3.1  |      v1.3.0       |      v1.3.0       |       v1.2.0        |
+| [Resiliency](https://hub.docker.com/r/dellemc/podmon)                                        | v1.4.0  |      v1.3.0       |      v1.2.0       |       v1.1.0        |
+| [Encryption](https://hub.docker.com/r/dellemc/csm-encryption)                                | v0.2.0  |      v0.1.0       |        NA         |         NA          |
+| [Application Mobility](https://hub.docker.com/r/dellemc/csm-application-mobility-controller) | v0.2.0  |      v0.1.0       |        NA         |         NA          |
+| [CSI Driver for PowerScale](https://hub.docker.com/r/dellemc/csi-isilon/tags)                | v2.5.0  |      v2.4.0       |      v2.3.0       |       v2.2.0        |
+| [CSI Driver for Unity XT](https://hub.docker.com/r/dellemc/csi-unity/tags)                   | v2.5.0  |      v2.4.0       |      v2.3.0       |       v2.2.0        |
+| [CSI Driver for PowerStore](https://hub.docker.com/r/dellemc/csi-powerstore/tags)            | v2.5.1  |      v2.4.0       |      v2.3.0       |       v2.2.0        |
+| [CSI Driver for PowerFlex](https://hub.docker.com/r/dellemc/csi-vxflexos/tags)               | v2.5.0  |      v2.4.0       |      v2.3.0       |       v2.2.0        |
+| [CSI Driver for PowerMax](https://hub.docker.com/r/dellemc/csi-powermax/tags)                | v2.5.0  |      v2.4.0       |      v2.3.1       |       v2.2.0        |
 
 ## CSM Modules Support Matrix for Dell CSI Drivers 
 
-| CSM Module        | CSI PowerFlex v2.4.0 | CSI PowerScale v2.4.0 | CSI PowerStore v2.4.0 | CSI PowerMax v2.4.0 | CSI Unity XT v2.4.0    |
-| ----------------- | -------------- | --------------- | --------------- | ------------- | --------------- |
-| Authorization v1.4| ✔️              | ✔️               | ❌              | ✔️             | ❌            |
-| Observability v1.3| ✔️              | ✔️              | ✔️               | ❌            | ❌            |
-| Replication   v1.3| ❌             | ✔️              | ✔️               | ✔️             | ❌            |
-| Resiliency     v1.3| ✔️              | ✔️              | ❌              | ❌            | ✔️             |
-| Encryption    v0.1.0| ❌              | ✔️              | ❌              | ❌            | ❌             |
-| Application Mobility     v0.1.0| ✔️              | ✔️              | ✔️              | ✔️            | ✔️             |
+| CSM Module                                                  | CSI PowerFlex v2.5.0 | CSI PowerScale v2.5.0 | CSI PowerStore v2.5.1 | CSI PowerMax v2.5.0 | CSI Unity XT v2.5.0 |
+| ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
+| [**Authorization**](authorization/) v1.5.1                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
+| [**Observability**](observability/) v1.4                    | ✔️                    | ✔️                     | ✔️                     | ❌                   | ❌                   |
+| [**Replication**](replication/)   v1.3.1                    | ❌                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
+| [**Resiliency**](resiliency/)     v1.4                      | ✔️                    | ✔️                     | ❌                     | ❌                   | ✔️                   |
+| [**Encryption**](secure/encryption)    v0.2.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
+| [**Application Mobility**](applicationmobility/)     v0.2.0 | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ✔️                   |

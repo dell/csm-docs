@@ -65,7 +65,7 @@ The resulting offline bundle file can be copied to another machine, if necessary
 
 For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:
 ```
-git clone -b v1.9.0 https://github.com/dell/dell-csi-operator.git
+git clone -b v1.10.0 https://github.com/dell/dell-csi-operator.git
 ```
 ```
 cd dell-csi-operator/scripts
@@ -76,22 +76,26 @@ cd dell-csi-operator/scripts
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.0.0
-   dellemc/csi-isilon:v2.1.0
-   dellemc/csipowermax-reverseproxy:v2.3.0
+   dellemc/csi-isilon:v2.3.0
+   dellemc/csi-isilon:v2.4.0
+   dellemc/csi-isilon:v2.5.0
+   dellemc/csipowermax-reverseproxy:v2.4.0
    dellemc/csi-powermax:v2.3.1
    dellemc/csi-powermax:v2.4.0
-   dellemc/csi-powerstore:v2.0.0
-   dellemc/csi-powerstore:v2.1.0
-   dellemc/csi-unity:v2.0.0
-   dellemc/csi-unity:v2.1.0
-   localregistry:5028/csi-unity/csi-unity:20220303110841
-   dellemc/csi-vxflexos:v2.0.0
-   dellemc/csi-vxflexos:v2.1.0
-   localregistry:5035/csi-operator/dell-csi-operator:v1.7.0
-   dellemc/sdc:3.5.1.1
+   dellemc/csi-powermax:v2.5.0
+   dellemc/csi-powerstore:v2.3.0
+   dellemc/csi-powerstore:v2.4.0
+   dellemc/csi-powerstore:v2.5.0
+   dellemc/csi-unity:v2.3.0
+   dellemc/csi-unity:v2.4.0
+   dellemc/csi-unity:v2.5.0
+   dellemc/csi-vxflexos:v2.3.0
+   dellemc/csi-vxflexos:v2.4.0
+   dellemc/csi-vxflexos:v2.5.0
+   dellemc/dell-csi-operator:v1.10.0
    dellemc/sdc:3.5.1.1-1
    dellemc/sdc:3.6
+   dellemc/sdc:3.6.0.6
    docker.io/busybox:1.32.0
    ...
    ...
@@ -113,17 +117,18 @@ cd dell-csi-operator/scripts
    dell-csi-operator-bundle/
    dell-csi-operator-bundle/driverconfig/
    dell-csi-operator-bundle/driverconfig/config.yaml
-   dell-csi-operator-bundle/driverconfig/isilon_v200_v119.json
-   dell-csi-operator-bundle/driverconfig/isilon_v200_v120.json
-   dell-csi-operator-bundle/driverconfig/isilon_v200_v121.json
-   dell-csi-operator-bundle/driverconfig/isilon_v200_v122.json
-   dell-csi-operator-bundle/driverconfig/isilon_v210_v120.json
-   dell-csi-operator-bundle/driverconfig/isilon_v210_v121.json
-   dell-csi-operator-bundle/driverconfig/isilon_v210_v122.json
-   dell-csi-operator-bundle/driverconfig/isilon_v220_v121.json
-   dell-csi-operator-bundle/driverconfig/isilon_v220_v122.json
-   dell-csi-operator-bundle/driverconfig/isilon_v220_v123.json
-   dell-csi-operator-bundle/driverconfig/powermax_v200_v119.json
+   dell-csi-operator-bundle/driverconfig/isilon_v230_v121.json
+   dell-csi-operator-bundle/driverconfig/isilon_v230_v122.json
+   dell-csi-operator-bundle/driverconfig/isilon_v230_v123.json
+   dell-csi-operator-bundle/driverconfig/isilon_v230_v124.json
+   dell-csi-operator-bundle/driverconfig/isilon_v240_v121.json
+   dell-csi-operator-bundle/driverconfig/isilon_v240_v122.json
+   dell-csi-operator-bundle/driverconfig/isilon_v240_v123.json
+   dell-csi-operator-bundle/driverconfig/isilon_v240_v124.json
+   dell-csi-operator-bundle/driverconfig/isilon_v250_v123.json
+   dell-csi-operator-bundle/driverconfig/isilon_v250_v124.json
+   dell-csi-operator-bundle/driverconfig/isilon_v250_v125.json
+   dell-csi-operator-bundle/driverconfig/powermax_v230_v121.json
    ...
    ...
 
@@ -173,47 +178,51 @@ Preparing a offline bundle for installation
 
    5b1fa8e3e100: Loading layer [==================================================>]  3.697MB/3.697MB
    e20ed4c73206: Loading layer [==================================================>]  17.22MB/17.22MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.0
+   Loaded image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.6.0
    d72a74c56330: Loading layer [==================================================>]  3.031MB/3.031MB
    f2d2ab12e2a7: Loading layer [==================================================>]  48.08MB/48.08MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v2.0.2
+   Loaded image: k8s.gcr.io/sig-storage/csi-snapshotter-v6.1.0
    417cb9b79ade: Loading layer [==================================================>]  3.062MB/3.062MB
    61fefb35ccee: Loading layer [==================================================>]  16.88MB/16.88MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0
+   Loaded image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
    7a5b9c0b4b14: Loading layer [==================================================>]  3.031MB/3.031MB
    1555ad6e2d44: Loading layer [==================================================>]  49.86MB/49.86MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v2.1.0
+   Loaded image: k8s.gcr.io/sig-storage/csi-attacher-v4.0.0
    2de1422d5d2d: Loading layer [==================================================>]  54.56MB/54.56MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v2.2.1
+   Loaded image: k8s.gcr.io/sig-storage/csi-resizer-v1.6.0
    25a1c1010608: Loading layer [==================================================>]  54.54MB/54.54MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v2.2.2
+   Loaded image: k8s.gcr.io/sig-storage/csi-snapshotter-v6.0.1
    07363fa84210: Loading layer [==================================================>]  3.062MB/3.062MB
    5227e51ea570: Loading layer [==================================================>]  54.92MB/54.92MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v3.0.0
+   Loaded image: k8s.gcr.io/sig-storage/csi-attacher-v3.5.0
    cfb5cbeabdb2: Loading layer [==================================================>]  55.38MB/55.38MB
-   Loaded image: k8s.gcr.io/sig-storage/csi-provisioner:v3.1.0
+   Loaded image: k8s.gcr.io/sig-storage/csi-resizer-v1.5.0
    ...
    ...
 
 *
 * Tagging and pushing images
 
-   localregistry:5035/csi-operator/dell-csi-operator:v1.7.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.7.0
-   dellemc/csi-isilon:v2.0.0 -> localregistry:5000/csi-operator/csi-isilon:v2.0.0
-   dellemc/csi-isilon:v2.1.0 -> localregistry:5000/csi-operator/csi-isilon:v2.1.0
-   dellemc/csipowermax-reverseproxy:v1.4.0 -> localregistry:5000/csi-operator/csipowermax-reverseproxy:v1.4.0
-   dellemc/csi-powermax:v2.0.0 -> localregistry:5000/csi-operator/csi-powermax:v2.0.0
-   dellemc/csi-powermax:v2.1.0 -> localregistry:5000/csi-operator/csi-powermax:v2.1.0
-   dellemc/csi-powerstore:v2.0.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.0.0
-   dellemc/csi-powerstore:v2.1.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.1.0
-   dellemc/csi-unity:nightly -> localregistry:5000/csi-operator/csi-unity:nightly
-   dellemc/csi-unity:v2.0.0 -> localregistry:5000/csi-operator/csi-unity:v2.0.0
-   dellemc/csi-unity:v2.1.0 -> localregistry:5000/csi-operator/csi-unity:v2.1.0
-   dellemc/csi-vxflexos:v2.0.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.0.0
-   dellemc/csi-vxflexos:v2.1.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.1.0
-   dellemc/sdc:3.5.1.1 -> localregistry:5000/csi-operator/sdc:3.5.1.1
+   dellemc/dell-csi-operator:v1.10.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.10.0
+   dellemc/csi-isilon:v2.3.0 -> localregistry:5000/csi-operator/csi-isilon:v2.3.0
+   dellemc/csi-isilon:v2.4.0 -> localregistry:5000/csi-operator/csi-isilon:v2.4.0
+   dellemc/csi-isilon:v2.5.0 -> localregistry:5000/csi-operator/csi-isilon:v2.5.0
+   dellemc/csipowermax-reverseproxy:v2.4.0 -> localregistry:5000/csi-operator/csipowermax-reverseproxy:v2.4.0
+   dellemc/csi-powermax:v2.3.1 -> localregistry:5000/csi-operator/csi-powermax:v2.3.1
+   dellemc/csi-powermax:v2.4.0 -> localregistry:5000/csi-operator/csi-powermax:v2.4.0
+   dellemc/csi-powermax:v2.5.0 -> localregistry:5000/csi-operator/csi-powermax:v2.5.0
+   dellemc/csi-powerstore:v2.3.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.3.0
+   dellemc/csi-powerstore:v2.4.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.4.0
+   dellemc/csi-powerstore:v2.5.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.5.0
+   dellemc/csi-unity:v2.3.0 -> localregistry:5000/csi-operator/csi-unity:v2.3.0
+   dellemc/csi-unity:v2.4.0 -> localregistry:5000/csi-operator/csi-unity:v2.4.0
+   dellemc/csi-unity:v2.5.0 -> localregistry:5000/csi-operator/csi-unity:v2.5.0
+   dellemc/csi-vxflexos:v2.3.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.3.0
+   dellemc/csi-vxflexos:v2.4.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.4.0
+   dellemc/csi-vxflexos:v2.5.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.5.0
    dellemc/sdc:3.5.1.1-1 -> localregistry:5000/csi-operator/sdc:3.5.1.1-1
    dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
+   dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
    docker.io/busybox:1.32.0 -> localregistry:5000/csi-operator/busybox:1.32.0
    ...
    ...
@@ -221,22 +230,26 @@ Preparing a offline bundle for installation
 *
 * Preparing operator files within /root/dell-csi-operator-bundle
 
-   changing: localregistry:5000/csi-operator/dell-csi-operator:v1.7.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.7.0
-   changing: dellemc/csi-isilon:v2.0.0 -> localregistry:5000/csi-operator/csi-isilon:v2.0.0
-   changing: dellemc/csi-isilon:v2.1.0 -> localregistry:5000/csi-operator/csi-isilon:v2.1.0
-   changing: dellemc/csipowermax-reverseproxy:v1.4.0 -> localregistry:5000/csi-operator/csipowermax-reverseproxy:v1.4.0
-   changing: dellemc/csi-powermax:v2.0.0 -> localregistry:5000/csi-operator/csi-powermax:v2.0.0
-   changing: dellemc/csi-powermax:v2.1.0 -> localregistry:5000/csi-operator/csi-powermax:v2.1.0
-   changing: dellemc/csi-powerstore:v2.0.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.0.0
-   changing: dellemc/csi-powerstore:v2.1.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.1.0
-   changing: dellemc/csi-unity:nightly -> localregistry:5000/csi-operator/csi-unity:nightly
-   changing: dellemc/csi-unity:v2.0.0 -> localregistry:5000/csi-operator/csi-unity:v2.0.0
-   changing: dellemc/csi-unity:v2.1.0 -> localregistry:5000/csi-operator/csi-unity:v2.1.0
-   changing: dellemc/csi-vxflexos:v2.0.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.0.0
-   changing: dellemc/csi-vxflexos:v2.1.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.1.0
-   changing: dellemc/sdc:3.5.1.1 -> localregistry:5000/csi-operator/sdc:3.5.1.1
+   changing: dellemc/dell-csi-operator:v1.10.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.10.0
+   changing: dellemc/csi-isilon:v2.3.0 -> localregistry:5000/csi-operator/csi-isilon:v2.3.0
+   changing: dellemc/csi-isilon:v2.4.0 -> localregistry:5000/csi-operator/csi-isilon:v2.4.0
+   changing: dellemc/csi-isilon:v2.5.0 -> localregistry:5000/csi-operator/csi-isilon:v2.5.0
+   changing: dellemc/csipowermax-reverseproxy:v2.4.0 -> localregistry:5000/csi-operator/csipowermax-reverseproxy:v2.4.0
+   changing: dellemc/csi-powermax:v2.3.1 -> localregistry:5000/csi-operator/csi-powermax:v2.3.1
+   changing: dellemc/csi-powermax:v2.4.0 -> localregistry:5000/csi-operator/csi-powermax:v2.4.0
+   changing: dellemc/csi-powermax:v2.5.0 -> localregistry:5000/csi-operator/csi-powermax:v2.5.0
+   changing: dellemc/csi-powerstore:v2.3.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.3.0
+   changing: dellemc/csi-powerstore:v2.4.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.4.0
+   changing: dellemc/csi-powerstore:v2.5.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.5.0
+   changing: dellemc/csi-unity:v2.3.0 -> localregistry:5000/csi-operator/csi-unity:v2.3.0
+   changing: dellemc/csi-unity:v2.4.0 -> localregistry:5000/csi-operator/csi-unity:v2.4.0
+   changing: dellemc/csi-unity:v2.5.0 -> localregistry:5000/csi-operator/csi-unity:v2.5.0
+   changing: dellemc/csi-vxflexos:v2.3.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.3.0
+   changing: dellemc/csi-vxflexos:v2.4.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.4.0
+   changing: dellemc/csi-vxflexos:v2.5.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.5.0
    changing: dellemc/sdc:3.5.1.1-1 -> localregistry:5000/csi-operator/sdc:3.5.1.1-1
    changing: dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
+   changing: dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
    changing: docker.io/busybox:1.32.0 -> localregistry:5000/csi-operator/busybox:1.32.0
    ...
    ...
