@@ -6,13 +6,12 @@ description: Release notes for PowerFlex CSI driver
 ## Release Notes - CSI PowerFlex v2.4.0
 
 ### New Features/Changes
-- Added InstallationID annotation for volume attributes.
-- Added optional parameter protectionDomain to storageclass.
+- [Added optional parameter protectionDomain to storageclass](https://github.com/dell/csm/issues/415)
+- [Added InstallationID annotation for volume attributes.](https://github.com/dell/csm/issues/434)
 - RHEL 8.6 support added 
 
-### Fixed Issues
-
-- Enhancements to volume group snapshotter. 
+### Fixed Issues 
+- [Enhancements and fixes to volume group snapshotter](https://github.com/dell/csm/issues/371)
 
 ### Known Issues
 
