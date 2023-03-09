@@ -253,5 +253,8 @@ The warning arises when a user uninstalls Observability by simply deleting names
 Error: INSTALLATION FAILED: failed to create resource: Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://karavi-observability-cert-manager-webhook.karavi-observability.svc:443/mutate?timeout=10s": dial tcp 10.106.44.80:443: connect: connection refused
 ```
 
+To resolve this, leave the CSM namespace in place after a failed installation, and run the below command:
+
  `helm delete karavi-observability --namespace [CSM_NAMESPACE]`
-After a failed installation, run the above command . Then delete the namespace `kubectl delete ns [CSM_NAMESPACE]`. Wait until namespace is fully deleted, recreate the namespace, and reinstall Observability again. 
+
+Then delete the namespace `kubectl delete ns [CSM_NAMESPACE]`. Wait until namespace is fully deleted, recreate the namespace, and reinstall Observability again. 
