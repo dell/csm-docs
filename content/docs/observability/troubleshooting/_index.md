@@ -14,7 +14,7 @@ Description: >
 5. [How can I troubleshoot latency problems with CSM for Observability?](#how-can-i-troubleshoot-latency-problems-with-csm-for-observability)
 6. [Why does the Observability installation timeout with pods stuck in 'ContainerCreating'/'CrashLoopBackOff'/'Error' stage?](#why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage)
 7. [Why do I see FailedMount warnings when describing pods in my cluster?](#why-do-i-see-failedmount-warnings-when-describing-pods-in-my-cluster)
-8. [Why do I see 'Failed calling webhook' error when reinstalling CSM for Observability?](#Why do I see Failed calling webhook error when reinstalling CSM for Observability)
+8. [Why do I see `Failed calling webhook error` when reinstalling CSM for Observability?](#Why do I see Failed calling webhook error when reinstalling CSM for Observability)
 
 
 ### Why do I see a certificate problem when accessing the topology service outside of my Kubernetes cluster?
