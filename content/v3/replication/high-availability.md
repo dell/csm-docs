@@ -46,6 +46,9 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 ```
 
+> Note: Different namespaces can share the same RDF group for creating volumes.
+
+
 ### Snapshots on SRDF Metro volumes
 A snapshot can be created on either of the volumes in the metro volume pair depending on the parameters in the `VolumeSnapshotClass`.
 The snapshots are by default created on the volumes on the R1 side of the SRDF metro pair, but if a Symmetrix id is specified in the `VolumeSnapshotClass` parameters, the driver creates the snapshot on the specified array; the specified array can either be the R1 or the R2 array. A `VolumeSnapshotClass` with symmetrix id specified in parameters may look as follows:
@@ -60,4 +63,5 @@ deletionPolicy: Delete
 parameters:
   SYMID: '000000000001'
 ```
+
 >Note: Restoring snapshots to a metro volume is currently not supported.

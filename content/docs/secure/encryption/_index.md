@@ -79,7 +79,7 @@ the CSI driver must be restarted to pick up the change.
 
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerScale |
-|---------------|------------|
+| ------------- | ---------- |
 | Storage Array | OneFS 9.0 |
 {{</table>}}
 

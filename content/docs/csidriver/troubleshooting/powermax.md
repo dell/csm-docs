@@ -12,7 +12,6 @@ description: Troubleshooting PowerMax Driver
 | When a node goes down, the block volumes attached to the node cannot be attached to another node | 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node. |
 | When attempting a driver upgrade, you see: ```spec.fsGroupPolicy: Invalid value: "xxx": field is immutable``` | You cannot upgrade between drivers with different fsGroupPolicies. See [upgrade documentation](../../upgradation/drivers/powermax) for more details |
 | Ater the migration group is in “migrated” state but unable to move to “commit ready” state because the new paths are not being discovered on the cluster nodes.| Run the following commands manually on the cluster nodes `rescan-scsi-bus.sh  -i`  `rescan-scsi-bus.sh  -a`|
-| `Failed to fetch details for array: 000000000000. [Unauthorized]`"
-| Please make sure that correct encrypted username and password in secret files are used, also ensure whether the RBAC is enabled for the user |
+| `Failed to fetch details for array: 000000000000. [Unauthorized]`" | Please make sure that correct encrypted username and password in secret files are used, also ensure whether the RBAC is enabled for the user |
 | `Error looking up volume for idempotence check: Not Found` or `Get Volume step fails for: (000000000000) symID with error (Invalid Response from API)`| Make sure that Unisphere endpoint doesn't end with front slash |
 |`FailedPrecondition desc = no topology keys could be generate`| Make sure that FC or iSCSI connectivity to the arrays are proper |

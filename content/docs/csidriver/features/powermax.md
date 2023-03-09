@@ -570,7 +570,9 @@ This feature supports volume provisioning on Kubernetes clusters running on vSph
 
 It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like ISCSI or FC (in pass-through) is not supported.  
 
-To use this feature, set vSphere.enabled to true
+To use this feature
+- Set `vSphere.enabled` to true.
+- Create a secret which contains vCenter privileges. Follow the steps [here](../installation/helm/powermax/#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
   
 ```
  VMware/vSphere virtualization support

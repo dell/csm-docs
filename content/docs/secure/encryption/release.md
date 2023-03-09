@@ -9,9 +9,8 @@ Description: >
 ## New Features/Changes
 
 - [Technical preview release](https://github.com/dell/csm/issues/437)
-- Shallow Rekey with Rekey CRDs.
-- OpenShift Container Platform support (4.10 and 4.11).
-- Kubernetes 1.25 support.
+- Kubernetes 1.26 support.
+- Security updates.
 
 ## Fixed Issues
 

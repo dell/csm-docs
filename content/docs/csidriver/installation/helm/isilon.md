@@ -185,7 +185,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | image | image for podmon. | No | " " |
    | **encryption** | [Encryption](../../../../secure/encryption/deployment) is an optional feature to apply encryption to CSI volumes. | - | - |
    | enabled        | A boolean that enables/disables Encryption feature. | No | false |
-   | image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.1.0" |
+   | image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.3.0" |
    
    *NOTE:* 
 

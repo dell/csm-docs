@@ -17,13 +17,13 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
 | Kubernetes    | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26    | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26  | 1.24, 1.25, 1.26 |
-| RHEL          |     7.x,8.x      |     7.9,8.5,8.6     |     7.9,8.3,8.4,8.5,8.6     |     7.9,8.3,8.5,8.6       |     7.9,8.6      |
+| RHEL          |     7.x,8.x      |     7.x,8.x     |     7.x,8.x     |     7.x,8.x       |     7.x,8.x      |
 | Ubuntu        |       20.04      |       20.04         |  18.04, 20.04    | 20.04, 22.04      |        20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.8, 7.9     |      7.8, 7.9     |     7.8, 7.9     |
 | SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP3     |       15SP4      |
 | Red Hat OpenShift | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 | 4.10, 4.10 EUS, 4.11 |
-| Mirantis Kubernetes Engine | 3.6.x |     3.5.x,3.6.x         |       3.6.0      | 3.5.x, 3.6.x      |        3.6.x     |
-| Google Anthos |        1.12       |          1.12        |        no        |         1.12       |        1.13       |
+| Mirantis Kubernetes Engine | 3.6.x |     3.5.x,3.6.x         |       3.6.x      | 3.5.x, 3.6.x      |        3.6.x     |
+| Google Anthos |        1.12       |          1.12        |        no        |         1.12       |        1.14       |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI         |
 | Rancher Kubernetes Engine | 1.4.1  |          1.4.1        |        1.4.1       |         1.4.1       |      1.4.1         |
 | Amazon Elastic Kubernetes Service<br> Anywhere | no  |          yes        |        no      |        yes       |      yes      |
