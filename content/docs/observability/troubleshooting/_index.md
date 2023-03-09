@@ -14,6 +14,8 @@ Description: >
 5. [How can I troubleshoot latency problems with CSM for Observability?](#how-can-i-troubleshoot-latency-problems-with-csm-for-observability)
 6. [Why does the Observability installation timeout with pods stuck in 'ContainerCreating'/'CrashLoopBackOff'/'Error' stage?](#why-does-the-observability-installation-timeout-with-pods-stuck-in-containercreatingcrashloopbackofferror-stage)
 7. [Why do I see FailedMount warnings when describing pods in my cluster?](#why-do-i-see-failedmount-warnings-when-describing-pods-in-my-cluster)
+8. [Why do I see Failed calling webhook error when reinstalling CSM for Observability?](#Why do I see Failed calling webhook error when reinstalling CSM for Observability)
+
 
 ### Why do I see a certificate problem when accessing the topology service outside of my Kubernetes cluster?
 
@@ -243,3 +245,13 @@ The warning can arise when a self-signed certificate for otel-collector is issue
 MountVolume.SetUp failed for volume "tls-secret" : secret "otel-collector-tls" not found
 Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached volumes=[vxflexos-config-params vxflexos-config tls-secret karavi-metrics-powerflex-configmap kube-api-access-4fqgl karavi-authorization-config proxy-server-root-certificate]: timed out waiting for the condition
 ```
+### Why do I see Failed calling webhook error when reinstalling CSM for Observability?
+
+The warning arises when a user uninstalls Observability by simply deleting namespace and by failing to properly `helm delete` this results to to the credential manager failing on future installations and user may see the following error
+
+```console
+Error: INSTALLATION FAILED: failed to create resource: Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://karavi-observability-cert-manager-webhook.karavi-observability.svc:443/mutate?timeout=10s": dial tcp 10.106.44.80:443: connect: connection refused
+```
+
+ `helm delete karavi-observability --namespace [CSM_NAMESPACE]`
+After a failed installation, run the above command . Then delete the namespace `kubectl delete ns [CSM_NAMESPACE]`. Wait until namespace is fully deleted, recreate the namespace, and reinstall Observability again. 
