@@ -245,7 +245,8 @@ The warning can arise when a self-signed certificate for otel-collector is issue
 MountVolume.SetUp failed for volume "tls-secret" : secret "otel-collector-tls" not found
 Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached volumes=[vxflexos-config-params vxflexos-config tls-secret karavi-metrics-powerflex-configmap kube-api-access-4fqgl karavi-authorization-config proxy-server-root-certificate]: timed out waiting for the condition
 ```
-### Why do I see Failed calling webhook error when reinstalling CSM for Observability?
+
+### Why do I see Failed calling webhook error when reinstalling CSM for Observability
 
 This warning can occur when a user uninstalls Observability by deleting the Kubernetes namespace before properly cleaning up by running `helm delete` on the Observability Helm installation. This results in the credential manager failing to properly integrate with Observability on future installations. The user may see the following error in the Grafana pod upon reinstallation:
 
