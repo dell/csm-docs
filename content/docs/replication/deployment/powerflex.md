@@ -53,7 +53,7 @@ To install the driver with replication enabled, you need to ensure you have set
 helm parameter `replication.enabled` in your copy of example `values.yaml` file
 (usually called `my-powerflex-settings.yaml`, `myvalues.yaml` etc.).
 
-Here is an example of how that would look
+Here is an example of how that would look:
 ```yaml
 ...
 # Set this to true to enable replication
@@ -120,7 +120,7 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/remoteStorageClassName` points to the name of
   the remote storage class. If you are using replication with the multi-cluster
   configuration you can make it the same as the current storage class name.
-* `replication.storage.dell.com/remoteClusterID` represents ID of a remote
+* `replication.storage.dell.com/remoteClusterID` represents the ID of a remote
   cluster. It is the same id you put in the replication controller config map.
 * `replication.storage.dell.com/remoteSystem` is the name of the remote system
   as seen from the current PowerFlex instance. This parameter is the systemID of
@@ -130,7 +130,7 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is
   measured in units of time, that may be lost due to a failure.
 * `replication.storage.dell.com/volumeGroupPrefix` represents what string would
-  be appended to the volume group name to differentiate them.
+  be appended to the volume group name to differentiate it from other volume groups.
 * `replication.storage.dell.com/consistencyGroupName` represents the desired
   name to give the consistency group on the PowerFlex array. If omitted, the
   driver will generate a name for the consistency group.
@@ -243,9 +243,9 @@ parameters:
 After preparing the config you can apply it to both clusters with repctl. Just
 make sure you've added your clusters to repctl via the `add` command before.
 
-To create storage classes just run `./repctl create sc --from-config <config-file>` and storage classes would be applied to both clusters.
+To create storage classes, run `./repctl create sc --from-config <config-file>` and storage classes will be applied to both clusters.
 
-After creating storage classes you can make sure they are in place by using
+After creating storage classes you can make sure they are in place by using the
 `./repctl get storageclasses` command.
 
 ### Provisioning Replicated Volumes
