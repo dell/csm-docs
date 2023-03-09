@@ -17,18 +17,18 @@ Configure SRDF connection between multiple PowerMax instances. Follow instructio
 
 You can ensure that you configured remote arrays by navigating to the `Data Protection` tab and choosing `SRDF Groups` on the managing Unisphere of your array. You should see a list of remote systems with the SRDF Group number that is configured and the Online field set to a green tick.
 
-While using any SRDF groups, ensure that they are for exclusive use by the CSI PowerMax driver -
+While using any SRDF groups, ensure that they are for exclusive use by the CSI PowerMax driver:
 * Any SRDF group which will be used by the driver is not in use by any other application
 * If an SRDF group is already in use by a CSI driver, don't use it for provisioning replicated volumes outside CSI provisioning workflows.
 
-There are some important limitations that apply to how CSI PowerMax driver uses SRDF groups -
+There are some important limitations that apply to how CSI PowerMax driver uses SRDF groups:
 * One replicated storage group using Async/Sync __always__ contains volumes provisioned from a single namespace.
 * While using SRDF mode Async, a single SRDF group can be used to provision volumes within a single namespace. You can still create multiple storage classes using the same SRDF group for different Service Levels.
   But all these storage classes will be restricted to provisioning volumes within a single namespace.
 * When using SRDF mode Sync/Metro, a single SRDF group can be used to provision volumes from multiple namespaces.
 
 #### Automatic creation of SRDF Groups
-CSI Driver for Powermax supports automatic creation of SRDF Groups starting **v2.4.0** with help of **10.0** REST endpoints.
+CSI Driver for Powermax supports automatic creation of SRDF Groups as of **v2.4.0** with help of **10.0** REST endpoints.
 To use this feature:
 * Remove _replication.storage.dell.com/RemoteRDFGroup_ and _replication.storage.dell.com/RDFGroup_ params from the storage classes before creating first replicated volume.
 * Driver will check next available RDF pair and use them to create volumes.
@@ -47,8 +47,8 @@ To verify you have everything in order you can execute the following commands:
     ```shell
     kubectl get pods -n dell-replication-controller
     ```
-  Pods should be `READY` and `RUNNING`
-* Check that controller config map is properly populated
+  Pods should be `READY` and `RUNNING`.
+* Check that controller config map is properly populated:
     ```shell
     kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
     ```
@@ -62,10 +62,10 @@ in [installation-repctl](../install-repctl) or [installation](../installation).
 ### Installing Driver With Replication Module
 
 To install the driver with replication enabled you need to ensure you have set
-helm parameter `replication.enabled` in your copy of example `values.yaml` file
+Helm parameter `replication.enabled` in your copy of example `values.yaml` file
 (usually called `my-powermax-settings.yaml`, `myvalues.yaml` etc.).
 
-Here is an example of how that would look like
+Here is an example of what that would look like:
 ```yaml
 ...
 # Set this to true to enable replication
@@ -81,7 +81,7 @@ You can leave other parameters like `image`, `replicationContextPrefix`, and `re
 After enabling the replication module you can continue to install the CSI driver for PowerMax following
 usual installation procedure, just ensure you've added necessary array connection information to secret.
 
-> **_NOTE:_** you need to install your driver at least on the source cluster, but it is recommended to install
+> **_NOTE:_** You need to install your driver at least on the source cluster, but it is recommended to install
 > drivers on all clusters you will use for replication.
 
 
@@ -90,7 +90,7 @@ usual installation procedure, just ensure you've added necessary array connectio
 To be able to provision replicated volumes you need to create properly configured storage
 classes on both source and target clusters.
 
-Pair of storage classes on the source and target clusters would be essentially `mirrored` copies of one another.
+A pair of storage classes on the source and target clusters would be essentially `mirrored` copies of one another.
 You can create them manually or with help from `repctl`.
 
 #### Manual Storage Class Creation
@@ -126,8 +126,8 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/isReplicationEnabled` if set to `true`, will mark this storage class as replication enabled,
   just leave it as `true`.
 * `replication.storage.dell.com/RemoteStorageClassName` points to the name of the remote storage class, if you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.
-* `replication.storage.dell.com/RemoteClusterID` represents the ID of a remote cluster, it is the same id you put in the replication controller config map.
-* `replication.storage.dell.com/RemoteSYMID` is the Symmetrix id of the remote array.
+* `replication.storage.dell.com/RemoteClusterID` represents the ID of a remote cluster, it is the same ID you put in the replication controller config map.
+* `replication.storage.dell.com/RemoteSYMID` is the Symmetrix ID of the remote array.
 * `replication.storage.dell.com/RemoteSRP` is the storage pool of the remote array.
 * `replication.storage.dell.com/RemoteServiceLevel` is the service level that will be assigned to remote volumes.
 * `replication.storage.dell.com/RdfMode` points to the RDF mode you want to use. It should be one out of "ASYNC", "METRO" and "SYNC". If mode is set to
@@ -198,20 +198,19 @@ parameters:
   replication.storage.dell.com/remoteClusterID: "cluster-1"
 ```
 
-After figuring out how storage classes would look like you just need to go and apply them to
-your Kubernetes clusters with `kubectl`.
+After creating storage class YAML files, they must be applied to your Kubernetes clusters with `kubectl`.
 
 #### Storage Class Creation With repctl
 
 `repctl` can simplify storage class creation by creating a pair of mirrored storage classes in both clusters
 (using a single storage class configuration) in one command.
 
-To create storage classes with `repctl` you need to fill up the config with necessary information.
+To create storage classes with `repctl` you need to fill the config with necessary information.
 You can find an example [here](https://github.com/dell/csm-replication/blob/main/repctl/examples/powermax_example_values.yaml), copy it, and modify it to your needs.
 
-If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.
+If you open this example you can see similar fields and parameters to what was seen in manual storage class creation.
 
-Let's use the same example from manual installation and see how config would look like
+Let's use the same example from manual installation and see what its repctl config file would look like:
 ```yaml
 sourceClusterID: "cluster-1"
 targetClusterID: "cluster-2"
@@ -239,13 +238,13 @@ After preparing the config you can apply it to both clusters with repctl, just m
 added your clusters to repctl via the `add` command before.
 
 To create storage classes just run `./repctl create sc --from-config <config-file>` and storage classes
-would be applied to both clusters.
+will be applied to both clusters.
 
 After creating storage classes you can make sure they are in place by using `./repctl get storageclasses` command.
 
 ### Provisioning Replicated Volumes
 
-After installing the driver and creating storage classes you are good to create volumes using newly
+After installing the driver and creating storage classes you are good to create volumes using the newly
 created storage classes.
 
 On your source cluster, create a PersistentVolumeClaim using one of the replication enabled Storage Classes.
@@ -254,7 +253,7 @@ using the parameters provided in the replication-enabled Storage Class.
 
 #### Provisioning Metro Volumes
 
-Here is an example of a storage class configured for Metro mode,
+Here is an example of a storage class configured for Metro mode:
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -285,7 +284,7 @@ On your cluster, create a PersistentVolumeClaim using this storage class. The CS
 ### Supported Replication Actions
 The CSI PowerMax driver supports the following list of replication actions:
 
-#### Basic Site Specific Actions -
+#### Basic Site Specific Actions
 - FAILOVER_LOCAL
 - FAILOVER_REMOTE
 - UNPLANNED_FAILOVER_LOCAL
@@ -293,8 +292,8 @@ The CSI PowerMax driver supports the following list of replication actions:
 - REPROTECT_LOCAL
 - REPROTECT_REMOTE
 
-#### Advanced Site Specific Actions -
-In this section we are going to refer to "Site A" as the original source site & "Site B" as the original target site.
+#### Advanced Site Specific Actions
+In this section, we are going to refer to "Site A" as the original source site & "Site B" as the original target site.
 Any action with the LOCAL suffix means, do this action for the local site. Any action with the REMOTE suffix means do this action for the remote site.
 - FAILOVER_WITHOUT_SWAP_LOCAL
   - You can use this action to do a failover when you are at Site B, and don't want to swap the replication direction.
@@ -321,7 +320,7 @@ Any action with the LOCAL suffix means, do this action for the local site. Any a
   - On Site B, run `kubectl edit rg <rg-name>` and edit the 'action' in `spec` with `SWAP_REMOTE`.
   - After receiving this request the CSI driver will attempt to do SWAP at Site B which is the remote site.
 
-#### Maintenance Actions -
+#### Maintenance Actions
 - SUSPEND
 - RESUME
 - ESTABLISH

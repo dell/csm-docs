@@ -9,8 +9,8 @@ description: >
 You can migrate existing pre-provisioned volumes to another storage class by using volume migration feature. 
 
 Currently two versions of migration are supported: 
-- To replicated storage class from NON replicated one
-- To NON replicated storage class from replicated one
+- To replicated storage class from NON replicated one.
+- To NON replicated storage class from replicated one.
 
 ## Prerequisites
 - Original volume is from the one of currently supported CSI drivers (see Support Matrix)
@@ -47,16 +47,16 @@ test-pv-to-powermax-replication        1Gi        RWO            Retain         
 
 ```
 
-When Volume Migration is finished source PV will be updated with EVENT that denotes that this has taken place. 
+When Volume Migration is finished, source PV will be updated with an `EVENT` that denotes that this has taken place. 
 
-Newly created PV (`test-pv-to-powermax-replication` in our example) is available for consumption via static provisioning by any PVC that will request it.
+Newly created PV (`test-pv-to-powermax-replication` in our example) is available for consumption via static provisioning by any PVC that requests it.
 
 
 ## Namespace Considerations For Replication
 
 Replication Groups in CSM Replication can be made namespaced, meaning that one SC will generate one Replication Group per namespace. This is also important when migrating volumes from/to replcation storage class.
 
-When just setting one annotation `migration.storage.dell.com/migrate-to` migrated volume is assumed to be used in same namespace as original PV and it's PVC. In the case of being migrated to replication enabled storage class will be inserted in namespaced Replication Group inside PVC namespace. 
+"When just setting one annotation migration.storage.dell.com/migrate-to migrated volume is assumed to be used in same namespace as original PV and it’s PVC. In the case of being migrated to replication enabled storage class will be inserted in namespaced Replication Group inside PVC namespace."
 
 However, you can define in which namespace migrated volume must be used after migration by setting `migration.storage.dell.com/namespace`. You can use the same annotation in a scenario where you only have a statically provisioned PV, and you don't have it bound to any PVC, and you want to migrate it to another storage class.
 
@@ -67,37 +67,37 @@ You can migrate your PVs without disrupting workflows if you use StatefulSet wit
 
 Instruction (you can also use `repctl` for convenience):
 
-1. Find every PV for your StatefulSet and patch it with `migration.storage.dell.com/migrate-to` annotation that points to new storage class
-```shell
-kubectl patch pv <pv-name> -p '{"metadata": {"annotations":{"migration.storage.dell.com/migrate-to":"powermax-replication"}}}'
-```
+1. Find every PV for your StatefulSet and patch it with `migration.storage.dell.com/migrate-to` annotation that points to new storage class:
+    ```shell
+    kubectl patch pv <pv-name> -p '{"metadata": {"annotations":{"migration.storage.dell.com/migrate-to":"powermax-replication"}}}'
+    ```
 
-2. Ensure you have a copy of StatefulSet manifest somewhere ready, we will need it later. If you don't have it, you can get it from cluster
-```shell
-kubectl get sts <sts-name> -n <ns-name> -o yaml > sts-manifest.yaml
-```
+2. Ensure you have a copy of StatefulSet manifest somewhere ready, we will need it later. If you don't have it, you can get it from cluster:
+    ```shell
+    kubectl get sts <sts-name> -n <ns-name> -o yaml > sts-manifest.yaml
+    ```
 
-3. To not disrupt any workflows we will need to delete StatefulSet without deleting any pods, to do so you can use `--cascade` flag
-```shell
-kubectl delete sts <sts-name> -n <ns-name> --cascade=orphan
-```
+3. To not disrupt any workflows, we will need to delete StatefulSet without deleting any pods, to do so you can use the `--cascade` flag:
+    ```shell
+    kubectl delete sts <sts-name> -n <ns-name> --cascade=orphan
+    ```
 
-4. Change StorageClass in your manifest of StatefulSet to point to a new storage class, then apply it to the cluster
-```shell
-kubectl apply -f sts-manifest.yaml
-```
+4. Change the StorageClass in your manifest of StatefulSet to point to a new storage class, then apply it to the cluster:
+    ```shell
+    kubectl apply -f sts-manifest.yaml
+    ```
 
-5. Find a PVC and pod of one replica of StatefulSet delete PVCs first and Pod after it
-```shell
-kubectl delete pvc <pvc-name> -n <ns-name>
-```
-```shell
-kubectl delete pod <pod-name> -n <ns-name>
-```
+5. Find a PVC and pod of one replica of StatefulSet delete PVCs first and Pod after it:
+    ```shell
+    kubectl delete pvc <pvc-name> -n <ns-name>
+    ```
+    ```shell
+    kubectl delete pod <pod-name> -n <ns-name>
+    ```
 
-Wait for new pod to be created by StatefulSet, it should create new PVC that will use migrated PV. 
+    Wait for new pod to be created by StatefulSet, it should create new PVC that will use migrated PV. 
 
-6. Repeat step 5 until all replicas use new PVCs
+6. Repeat step 5 until all replicas use new PVCs.
 
 
 ## Using repctl
@@ -106,13 +106,13 @@ You can use `repctl` CLI tool to help you simplify running migration specific co
 
 ### Single PV
 
-In most its basic form repctl can do the same as kubectl, for example, migrating single PV from our example will look like: 
+In its most simple usage, repctl can do the same operations as kubectl, for example, migrating the single PV 'test-pv' from our example will look like: 
 
 ```shell
 ./repctl migrate pv test-pv --to-sc powermax-replication
 ```
 
-`repctl` will go and patch the resource for you. You can also provide `--wait` flag for it to wait until migrated PV is created in cluster. 
+`repctl` will go and patch the resource for you. You can also provide `--wait` flag for it to wait until migrated PV is created in the cluster. 
 `repctl` also can set `migration.storage.dell.com/namespace` for you if you provide `--target-ns` flag. 
 
 
