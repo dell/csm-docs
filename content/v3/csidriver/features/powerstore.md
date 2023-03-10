@@ -541,7 +541,7 @@ The value of that parameter is added as an additional entry to NFS Export host a
 For example the following notation:
 ```yaml
 externalAccess: "10.0.0.0/24"
-``` 
+```
 
 This means that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
 
@@ -668,10 +668,65 @@ nfsAcls: "A::OWNER@:rwatTnNcCy,A::GROUP@:rxtncy,A::EVERYONE@:rxtncy,A::user@doma
 >POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
 
 
-## NVMe/TCP Support
+## NVMe Support
 
-CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as `NVMeTCP`. 
-In case blockProtocol is specified as `auto`, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then FC gets the highest priority followed by iSCSI and then NVMeTCP.
-
+**NVMeTCP Support**
+CSI Driver for Dell Powerstore 2.2.0 and above supports NVMe/TCP provisioning. To enable NVMe/TCP provisioning, blockProtocol on secret should be specified as `NVMeTCP`.
 >Note: NVMe/TCP is not supported on RHEL 7.x versions and CoreOS. 
 >NVMe/TCP is supported with Powerstore 2.1 and above.
+
+**NVMeFC Support**
+CSI Driver for Dell Powerstore 2.3.0 and above supports NVMe/FC provisioning. To enable NVMe/FC provisioning, blockProtocol on secret should be specified as `NVMeFC`.
+>NVMe/FC is supported with Powerstore 3.0 and above.
+
+>NVMe-FC feature is supported with Helm.
+
+>Note: 
+>   In case blockProtocol is specified as `auto`, the driver will be able to find the initiators on the host and choose the protocol accordingly. If the host has multiple protocols enabled, then NVMeFC gets the highest priority followed by NVMeTCP, followed by FC and then iSCSI.
+
+## Volume group snapshot Support
+
+CSI Driver for Dell Powerstore 2.3.0 and above supports creating volume groups and take snapshot of them by making use of CRD (Custom Resource Definition). More information can be found here: [Volume Group Snapshotter](../../../snapshots/volume-group-snapshots/).
+
+## Configurable Volume Attributes (Optional)
+
+The CSI PowerStore driver version 2.3.0 and above supports Configurable volume atttributes. 
+
+PowerStore array provides a set of optional volume creation attributes. These attributes can be configured for the volume (block and NFS) at the time of creation through PowerStore CSI driver. 
+These attributes can be specified as labels in PVC yaml file. The following is a sample manifest for creating volume with some of the configurable volume attributes. 
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc1
+  namespace: default
+  labels:
+    description: DB-volume
+    appliance_id: A1
+    volume_group_id: f5f9dbbd-d12f-463e-becb-2e6d0a85405e
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+        requests:
+          storage: 8Gi
+  storageClassName: powerstore-ext4
+
+```
+
+>Note: Default description value is `pvcName-pvcNamespace`. 
+
+The following is the list of all the attribtues supported by PowerStore CSI driver: 
+
+| Block Volume | NFS Volume |
+| --- | --- |
+| description <br /> appliance_id <br /> volume_group_id <br /> protection_policy_id <br /> performance_policy_id <br /> app_type <br /> app_type_other <br />  <br />  <br />  <br />  <br />  <br /> | description <br /> config_type <br /> access_policy <br /> locking_policy <br /> folder_rename_policy <br /> is_async_mtime_enabled <br /> protection_policy_id <br /> file_events_publishing_mode <br /> host_io_size <br /> flr_attributes.flr_create.mode <br /> flr_attributes.flr_create.default_retention <br /> flr_attributes.flr_create.maximum_retention <br /> flr_attributes.flr_create.minimum_retention |
+
+<br>  
+
+**Note:**
+>Refer to the PowerStore array specification for the allowed values for each attribute, at `https://<array-ip>/swaggerui/`. 
+>Make sure that the attributes specified are supported by the version of PowerStore array used. 
+
+>Configurable Volume Attributes feature is supported with Helm.

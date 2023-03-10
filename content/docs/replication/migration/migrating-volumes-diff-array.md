@@ -6,15 +6,16 @@ description: >
   Support for Array Migration of Volumes between arrays
 ---
 
-User can migrate existing pre-provisioned volumes to another storage array by using array migration feature. 
+User can migrate existing pre-provisioned volumes to another storage array by using the array migration feature. 
 
->Note: Currently only migration of standalone volumes is supported. 
+> _**NOTE**_: Currently only migration of standalone volumes is supported. 
 
 ## Prerequisites 
 
 This feature needs to be planned in a controlled host environment.
 
-If the user have native multipathing, the user has to run multipath list commands on all nodes to ensure that there are no faulty paths on the host. If any faulty paths exist, the user has to flush the paths, and have a clean setup before migration is triggered using the following command,
+If the user have native multipathing, the user has to run multipath list commands on all nodes to ensure that there are no faulty paths on the host. If any faulty paths exist, the user has to flush the paths, and have a clean setup before migration is triggered using the following command:
+
 `rescan-scsi-bus.sh --remove`
 
 #### On Storage Array 
@@ -25,7 +26,7 @@ User has to configure physical SRDF connection between source array (where the v
 
 User need to ensure that migration group CRD is installed. 
 
-To install CRD, user can run the command as below 
+To install CRD, user can run the command as below:
 
 `kubectl create -f deploy/replicationcrds.all.yaml`
 
@@ -37,7 +38,7 @@ To install CRD, user can run the command as below
 
 ## Installing Driver With sidecars 
 
-Dell-csi-migrator and dell-csi-node-rescanner sidecars are installed alongside with the driver, the user can enable it in myvalues.yaml file 
+Dell-csi-migrator and dell-csi-node-rescanner sidecars are installed alongside with the driver, the user can enable it in the driver's myvalues.yaml file.
 
 #### Sample:
 
@@ -60,7 +61,7 @@ migration:
   migrationPrefix: "migration.storage.dell.com" 
 ``` 
 
-Target array configuration and endpoint needs to be updated in the [myvalues.yaml](../../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode) file as shown below.  
+Target array configuration and endpoint needs to be updated in the driver's [myvalues.yaml](../../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode) file as shown below:  
 
 ```yaml
   ########################## 
@@ -81,11 +82,11 @@ After enabling the migration module the user can continue to install the CSI dri
 
 ## PowerMax Support 
 
-#### Supports migrations: 
+CSM for PowerMax supports the following migrations: 
 
-- From a VMAX3 array to VMAX All Flash, or PowerMax array  
+- From a VMAX3 array to VMAX All Flash, or PowerMax array.  
 
-- From a PowerMax array to another PowerMax array
+- From a PowerMax array to another PowerMax array.
 
 #### Basic Usage 
 
@@ -95,7 +96,7 @@ Creating the migration group will trigger reconcile action on the migrator sidec
 
 #### Manual Migration Group Creation 
 
-User can find sample migration group manifest in the driver repository [here](https://github.com/dell/csi-powermax/tree/main/samples/migrationgroup) 
+User can find sample migration group manifest in the driver repository [here](https://github.com/dell/csi-powermax/tree/main/samples/migrationgroup). A sample is provided below, for convenience:  
 
 ``` yaml
 apiVersion: "replication.storage.dell.com/v1"
@@ -114,15 +115,16 @@ spec:
   migrationGroupAttributes:
     action: "migrate"
  ```   
- To create the migration group, use the below command,
+ To create the migration group, use the below command:
+
  `kubectl -create -f <manifest.yaml>`
 
-After completion of migration, the migration group comes to deleting state after which the admin can manually delete the migration group with the below command.
+After completion of migration, the migration group comes to deleting state after which the admin can manually delete the migration group with the below command:
 
-`kubectl -delete -f <manifest.yaml>`. 
+`kubectl -delete -f <manifest.yaml>` 
 
 ## Post migration 
 
 The PV/PVCs will be mounted, up and running after migration and the pod can continue service as before.  
 
-> Limitation: Any control operations like expansion, snapshot creation, replication workflows on migrated PV/PVCs will not be supported. 
+> _**LIMITATION**_: Any control operations like expansion, snapshot creation, replication workflows on migrated PV/PVCs will not be supported. 
