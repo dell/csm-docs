@@ -247,7 +247,7 @@ Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached vo
 ```
 
 ### Why do I see 'Failed calling webhook' error when reinstalling CSM for Observability?
-This warning can occur when a user uninstalls Observability by deleting the Kubernetes namespace before properly cleaning up by running `helm delete` on the Observability Helm installation. This results in the credential manager failing to properly integrate with Observability on future installations. The user may see the following error in the Grafana pod upon reinstallation:
+This warning can occur when a user uninstalls Observability by deleting the Kubernetes namespace before properly cleaning up by running `helm delete` on the Observability Helm installation. This results in the credential manager failing to properly integrate with Observability on future installations. The user may see the following error in the module pods upon reinstallation:
 
 ```console
 Error: INSTALLATION FAILED: failed to create resource: Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://karavi-observability-cert-manager-webhook.karavi-observability.svc:443/mutate?timeout=10s": dial tcp 10.106.44.80:443: connect: connection refused
