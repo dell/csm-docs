@@ -19,4 +19,3 @@ Description: >
 ### Known Issues
 CSM object does not track available deployment count when down scaling to n-1 , where n is number of nodes.    
 [Powerflex driver specific parameters mentioned in the samples are not configurable when deployed via CSM Operator](https://github.com/dell/csm/issues/714)  
-[PowerFlex driver deployment via CSM Operator should work without having the user to create ConfigMap](https://github.com/dell/csm/issues/713)
