@@ -32,7 +32,7 @@ The umbrella repository for every Dell Container Storage Module is: [https://git
 Prerequisites can be found on the respective module deployment pages:
 - [Dell Container Storage Module for Observability Deployment](../../observability/deployment/#prerequisites)
 - [Dell Container Storage Module for Authorization Deployment](../../authorization/deployment/#prerequisites)
-- [Dell Container Storage Module for Resiliency Deployment](../../esiliency/deployment/)
+- [Dell Container Storage Module for Resiliency Deployment](../../resiliency/deployment/)
 - [Dell Container Storage Module for Replication Deployment](../../replication/deployment/installation/#before-you-begin)
 
 Prerequisites for deploying the Dell CSI drivers can be found here:
