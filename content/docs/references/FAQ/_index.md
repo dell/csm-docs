@@ -34,8 +34,8 @@ Prerequisites can be found on the respective module deployment pages:
 - [Dell Container Storage Module for Authorization Deployment](../../authorization/deployment/#prerequisites)
 - [Dell Container Storage Module for Resiliency Deployment](../../resiliency/deployment/)
 - [Dell Container Storage Module for Replication Deployment](../../replication/deployment/installation/#before-you-begin)
-- [Dell Container Storage Module for Application Mobility](../..//applicationmobility/deployment/#pre-requisites)
-- [Dell Container Storage Module for Encryption](../../secure/encryption/deployment/#vault-server)
+- [Dell Container Storage Module for Application Mobility Deployment](../..//applicationmobility/deployment/#pre-requisites)
+- [Dell Container Storage Module for Encryption Deployment](../../secure/encryption/deployment/#vault-server)
 
 Prerequisites for deploying the Dell CSI drivers can be found here:
 - [Dell CSI Drivers Deployment](../../csidriver/installation/)
@@ -69,7 +69,7 @@ The supported Kubernetes distributions for Container Storage Modules are documen
 - [Dell Container Storage Module for Observability](../../observability/#supported-operating-systemscontainer-orchestrator-platforms)
 - [Dell Container Storage Module for Replication](../../replication/#supported-operating-systemscontainer-orchestrator-platforms)
 - [Dell Container Storage Module for Resiliency](../../resiliency/#supported-operating-systemscontainer-orchestrator-platforms)
-- [Dell Container Storage Module for Application Mobility](../../resiliency/#supported-operating-systemscontainer-orchestrator-platforms)
+- [Dell Container Storage Module for Application Mobility](../../applicationmobility/#supported-operating-systemscontainer-orchestrator-platforms)
 - [Dell Container Storage Module for Encryption](../../secure/encryption/#supported-operating-systemscontainer-orchestrator-platforms)
 
 The supported distros for the Dell CSI Drivers are located [here](../../csidriver/#supported-operating-systemscontainer-orchestrator-platforms).
@@ -95,7 +95,7 @@ It is advised to comply with the support matrices (links below) and not deviate 
 - [Dell CSI Drivers](../../csidriver/#supported-operating-systemscontainer-orchestrator-platforms).
 
 ### Can I run Container Storage Modules in a production environment?
-As of CSM 1.5, the Container Storage Modules Authorization, Observability, Replication, Resiliency are GA and ready for production systems. The modules Encryption and Application Mobility are launched for Tech Preview Release and it is not intended to use in the Production systems.
+As of CSM 1.5, the Container Storage Modules Authorization, Observability, Replication and Resiliency are GA and ready for production systems. The modules Encryption and Application Mobility are launched for Tech Preview Release and it is not intended to use in the Production systems.
 
 ### Is Dell Container Storage Modules (CSM) supported by Dell Technologies?
 Yes!
