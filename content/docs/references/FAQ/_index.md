@@ -95,7 +95,8 @@ It is advised to comply with the support matrices (links below) and not deviate 
 - [Dell CSI Drivers](../../csidriver/#supported-operating-systemscontainer-orchestrator-platforms).
 
 ### Can I run Container Storage Modules in a production environment?
-As of CSM 1.6, the Container Storage Modules Authorization, Observability, Replication, and Resiliency are GA and ready for production systems. The modules Encryption and Application Mobility are launched for Tech Preview Release and it is not intended to use in the Production systems.
+
+Currently, the Container Storage Modules Authorization, Observability, Replication, and Resiliency are GA and ready for production systems. The modules Encryption and Application Mobility are launched for Tech Preview Release and it is not intended to use in the Production systems.
 
 ### Is Dell Container Storage Modules (CSM) supported by Dell Technologies?
 Yes!
