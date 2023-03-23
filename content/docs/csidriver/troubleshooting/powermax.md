@@ -16,3 +16,4 @@ description: Troubleshooting PowerMax Driver
 | `Error looking up volume for idempotence check: Not Found` or `Get Volume step fails for: (000000000000) symID with error (Invalid Response from API)`| Make sure that Unisphere endpoint doesn't end with front slash |
 |`FailedPrecondition desc = no topology keys could be generate`| Make sure that FC or iSCSI connectivity to the arrays are proper |
 | CreateHost failed with error `initiator is already part of different host.` | Update modifyHostName to true in values.yaml Or Remove the initiator from existing host |
+| `kubectl logs powermax-controller-<xyz> –n <namespace>` driver logs says connection refused and the reverseproxy logs says "Failed to setup server.(secrets \"<secret-name>\" not found) | Make sure the given secret <secret-name> exist on the cluster |
