@@ -24,7 +24,7 @@
         
         &lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Please note, Dell CSM operator currently ONLY supports deploying CSM Authorization sidecar/container.&lt;/p&gt;
 &lt;h2 id=&#34;pre-requisite&#34;&gt;Pre-requisite&lt;/h2&gt;
-&lt;p&gt;Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../authorization/deployment/_index.md/#configuring-a-dell-csiÔe€#aœD0¥&lt;/p&gt;
+&lt;p&gt;Follow the instructions available in CSM Authorization for &lt;a href=&#34;../../../authorization/deployment/_index.md/#configuring-a-dell-csi-driver&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>

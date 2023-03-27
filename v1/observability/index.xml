@@ -643,7 +643,7 @@ helm repo update
 &lt;p&gt;The command below removes all the Kubernetes components associated with the chart.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; helm delete karavi-observability --namespace &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You may also want to uninstall the CRDs created for cert-manager.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
@@ -669,7 +669,7 @@ helm repo update
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Check if the latest Helm chart version is available:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm search repo dell
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-dell/karavi-observability       1.0.1           1.0.0           CSM for Observability is part of the [Container...
+dell/karavi-observability       1.4.0           1.4.0           CSM for Observability is part of the [Container...
 &lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
 &lt;p&gt;Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See &lt;a href=&#34;../deployment/helm#prerequisites&#34;&gt;Prerequisites&lt;/a&gt; for location of CRDs.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -975,16 +975,17 @@ Optionally, you could provide your own &lt;a href=&#34;../deployment/helm/#confi
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-observability-130&#34;&gt;Release Notes - CSM Observability 1.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-observability-140&#34;&gt;Release Notes - CSM Observability 1.4.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/452&#34;&gt;Support PowerScale in CSM Observability&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/453&#34;&gt;Set PV/PVC&amp;rsquo;s namespace when using Observability Module&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/454&#34;&gt;CSM Observability modules stick with otel controller 0.42.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/478&#34;&gt;CSM support for Kubernetes 1.25&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/480&#34;&gt;CSM support for Openshift 4.11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/476&#34;&gt;CSM support for PowerFlex 4.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/519&#34;&gt;Observability - Improve Grafana dashboard&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/430&#34;&gt;Observability Topology: nil pointer error&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/479&#34;&gt;step_error: command not found in karavi-observability-install.sh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 

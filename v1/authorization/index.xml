@@ -247,6 +247,20 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
     </item>
     
     <item>
+      <title>V1: Configuration</title>
+      <link>https://dell.github.io/csm-docs/v1/authorization/configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/authorization/configuration/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section provides the details and instructions on how to configure CSM Authorization.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>V1: Deployment</title>
       <link>https://dell.github.io/csm-docs/v1/authorization/deployment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -271,7 +285,9 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
         
         &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
 &lt;h2 id=&#34;uninstalling-the-rpm&#34;&gt;Uninstalling the RPM&lt;/h2&gt;
-&lt;p&gt;To uninstall the rpm package on the system, run the below command:&lt;/p&gt;
+&lt;p&gt;To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -e k3s-selinux
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To uninstall the CSM Authorization rpm package on the system, run:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -e &amp;lt;rpm_file_name&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uninstalling-the-sidecar-proxy-in-the-csi-driver&#34;&gt;Uninstalling the sidecar-proxy in the CSI Driver&lt;/h2&gt;
 &lt;p&gt;To uninstall the sidecar-proxy in the CSI Driver, &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../deployment&#34;&gt;reinstall&lt;/a&gt; the driver using the original configuration secret.&lt;/p&gt;
@@ -295,8 +311,8 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h3&gt;
 &lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To update the rpm package on the system, run the below command:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -Uvh karavi-authorization-&amp;lt;new_version&amp;gt;.x86_64.rpm --nopreun --nopostun
+&lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh install_karavi_auth.sh --upgrade
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -qa | grep karavi
 k3s kubectl version
@@ -373,7 +389,7 @@ This document outlines all karavictl commands, their intended use, options that 
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-role-update&#34;&gt;karavictl role update&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Update one or more CSM roles&lt;/td&gt;
+&lt;td&gt;Update the quota of one or more CSM roles&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-role-delete&#34;&gt;karavictl role delete&lt;/a&gt;&lt;/td&gt;
@@ -616,9 +632,9 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl role create --role=role-name=system-type=000000000001=mypool=200000000
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-update&#34;&gt;karavictl role update&lt;/h3&gt;
-&lt;p&gt;Update one or more CSM roles&lt;/p&gt;
+&lt;p&gt;Update the quota of one or more CSM roles&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-8&#34;&gt;Synopsis&lt;/h5&gt;
-&lt;p&gt;Updates one or more CSM roles&lt;/p&gt;
+&lt;p&gt;Updates the quota of one or more CSM roles&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl role update [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-8&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --from-file string   role data from a file
@@ -931,6 +947,7 @@ data:
         
         &lt;h2 id=&#34;rpm-deployment&#34;&gt;RPM Deployment&lt;/h2&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#The-Failure-of-Building-an-Authorization-RPM&#34;&gt;The Failure of Building an Authorization RPM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &lt;code&gt;karavictl tenant&lt;/code&gt; commands result in an HTTP 504 error&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#installation-fails-to-install-policies&#34;&gt;Installation fails to install policies&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/a&gt;&lt;/li&gt;
@@ -940,7 +957,19 @@ data:
 &lt;li&gt;&lt;a href=&#34;#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors&#34;&gt;The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &amp;ldquo;request denied for path&amp;rdquo; errors&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
+&lt;h3 id=&#34;the-failure-of-building-an-authorization-rpm&#34;&gt;The Failure of Building an Authorization RPM&lt;/h3&gt;
+&lt;p&gt;This response occurs when running &amp;lsquo;make rpm&amp;rsquo; without the proper permissions or correct pathing of the Authorization repository.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting &amp;#34;/root/karavi-authorization/bin/deploy&amp;#34; to rootfs at &amp;#34;/home/builder/rpm/deploy&amp;#34;: mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERRO[0001] error waiting for container: context canceled 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ensure the cloned repository is in a folder independent of the root or home directory.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/root/myrepos/karavi-authorization
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Enable appropriate permissions to the RPM folder (this is where the Authorization RPM is located after being built).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;chmod o+rwx deploy/rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
 &lt;p&gt;To retrieve logs from services on the CSM Authorization Server, run the following command (e.g proxy-server logs):&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For OPA related logs, run:&lt;/p&gt;
@@ -959,13 +988,8 @@ prevent communication with the &lt;code&gt;&amp;lt;grpc-address&amp;gt;&lt;/code
 &lt;p&gt;If SELinux is enabled, the policies may fail to install:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;error: failed to install policies (see /tmp/policy-install-for-karavi3163047435): exit status 1
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;View the contents /tmp/policy-install-for-karavi* file listed in the error message. If there is a Permission denied error while running the policy-install.sh script, manually run the script to install policies.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat /tmp/policy-install-for-karavi3163047435
-
-# find the location of the policy-install.sh script located in the file and manually run the script
-
-$ /tmp/karavi-installer-2908017483/policy-install.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/h3&gt;
+&lt;p&gt;This issue should only occur with older versions of CSM Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.&lt;/p&gt;
+&lt;h3 id=&#34;after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/h3&gt;
 &lt;p&gt;If SELinux is enabled, the create-pvc Pod may be in an Error state:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kube-system    create-pvc-44a763c7-e70f-4e32-a114-e94615041042   0/1     Error       0          102s
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
@@ -1055,24 +1079,15 @@ kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart daemonSet/vxflexos-n
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-authorization-140&#34;&gt;Release Notes - CSM Authorization 1.4.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-authorization-151&#34;&gt;Release Notes - CSM Authorization 1.5.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;CSM 1.4 Release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/350&#34;&gt;#350&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM Authorization insecure related entities are renamed to skipCertificateValidation. (&lt;a href=&#34;https://github.com/dell/csm/issues/368&#34;&gt;#368&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Show volumes associated with the tenant from the k8s server. (&lt;a href=&#34;https://github.com/dell/csm/issues/408&#34;&gt;#408&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM 1.5.1 release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/582&#34;&gt;#582&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;bugs&#34;&gt;Bugs&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;PowerScale volumes unable to be created with Helm deployment of CSM Authorization. (&lt;a href=&#34;https://github.com/dell/csm/issues/419&#34;&gt;#419&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Authorization CLI documentation does not mention &amp;ndash;array-insecure flag when creating or updating storage systems. (&lt;a href=&#34;https://github.com/dell/csm/issues/416&#34;&gt;#416&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Authorization: Add documentation for backing up and restoring redis data. (&lt;a href=&#34;https://github.com/dell/csm/issues/410&#34;&gt;#410&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM Authorization doesn&amp;rsquo;t recognize storage with capital letters. (&lt;a href=&#34;https://github.com/dell/csm/issues/398&#34;&gt;#398&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Update Authorization documentation with supported versions of k3s-selinux and container-selinux packages. (&lt;a href=&#34;https://github.com/dell/csm/issues/393&#34;&gt;#393&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Using Authorization without dependency on jq. (&lt;a href=&#34;https://github.com/dell/csm/issues/390&#34;&gt;#390&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Authorization Documentation Improvement. (&lt;a href=&#34;https://github.com/dell/csm/issues/384&#34;&gt;#384&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Unit test failing for csm-authorization. (&lt;a href=&#34;https://github.com/dell/csm/issues/382&#34;&gt;#382&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Karavictl has incorrect permissions after download. (&lt;a href=&#34;https://github.com/dell/csm/issues/360&#34;&gt;#360&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Helm deployment of Authorization denies a valid request path from csi-powerflex. (&lt;a href=&#34;https://github.com/dell/csm/issues/353&#34;&gt;#353&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM Authorization installation fails due to a PATH not looking in /usr/local/bin. (&lt;a href=&#34;https://github.com/dell/csm/issues/580&#34;&gt;#580&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>

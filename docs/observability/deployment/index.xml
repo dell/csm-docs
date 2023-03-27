@@ -47,6 +47,8 @@
 &lt;li&gt;
 &lt;p&gt;Copy the config Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;vxflexos-config&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/&#39; | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerFlex, perform the following steps:&lt;/p&gt;
@@ -54,6 +56,8 @@
 &lt;li&gt;
 &lt;p&gt;Copy the driver configuration parameters ConfigMap from the CSI PowerFlex namespace into the CSM for Observability namespace:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;vxflexos-config-params&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get configmap [VXFLEXOS-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/name: [VXFLEXOS-CONFIG-PARAMS]/name: vxflexos-config-params/&#39; | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the &lt;code&gt;karavi-authorization-config&lt;/code&gt;, &lt;code&gt;proxy-server-root-certificate&lt;/code&gt;, &lt;code&gt;proxy-authz-tokens&lt;/code&gt; Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:&lt;/p&gt;
@@ -65,6 +69,8 @@
 &lt;li&gt;
 &lt;p&gt;Copy the config Secret from the CSI PowerStore namespace into the CSM for Observability namespace:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;powerstore-config&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get secret [POWERSTORE-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/name: [POWERSTORE-CONFIG]/name: powerstore-config/&#39; | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;powerscale&#34;&gt;PowerScale&lt;/h3&gt;
@@ -72,6 +78,8 @@
 &lt;li&gt;
 &lt;p&gt;Copy the config Secret from the CSI PowerScale namespace into the CSM for Observability namespace:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;isilon-creds&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/name: [ISILON-CREDS]/name: isilon-creds/&#39; | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerScale, perform these steps:&lt;/p&gt;
@@ -79,10 +87,47 @@
 &lt;li&gt;
 &lt;p&gt;Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the CSM for Observability namespace:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl get configmap isilon-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;isilon-config-params&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get configmap [ISILON-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/name: [ISILON-CONFIG-PARAMS]/name: isilon-config-params/&#39; | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the &lt;code&gt;karavi-authorization-config&lt;/code&gt;, &lt;code&gt;proxy-server-root-certificate&lt;/code&gt;, &lt;code&gt;proxy-authz-tokens&lt;/code&gt; Secret from the CSI PowerScale namespace into the CSM for Observability namespace:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | sed &#39;s/name: karavi-authorization-config/name: isilon-karavi-authorization-config/&#39; | sed &#39;s/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/&#39; | sed &#39;s/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;powermax&#34;&gt;PowerMax&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the configmap &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt; from the CSI Driver for Dell PowerMax namespace to the CSM namespace.&lt;br&gt;
+&lt;strong&gt;Note:&lt;/strong&gt; Observability for PowerMax works only with &lt;a href=&#34;../../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode&#34;&gt;CSI PowerMax driver with Proxy in StandAlone mode&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/&#39; | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the secrets in &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt; from the CSI Driver for Dell PowerMax namespace to the CSM namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o jsonpath=&amp;#34;{.data.config\.yaml}&amp;#34; | grep arrayCredentialSecret | awk &amp;#39;BEGIN{FS=&amp;#34;:&amp;#34;}{print $2}&amp;#39; | uniq)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;do
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#34;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#34; | kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;done
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt;, please use the following command to copy secrets:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;for secret in $(kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o jsonpath=&amp;#34;{.data.config\.yaml}&amp;#34; | grep arrayCredentialSecret | awk &amp;#39;BEGIN{FS=&amp;#34;:&amp;#34;}{print $2}&amp;#39; | uniq)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;do
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#34;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#34; | kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;done
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerMax, perform these steps:&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the driver configuration parameters ConfigMap from the CSI PowerMax namespace into the CSM for Observability namespace:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get configmap powermax-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-config-params&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get configmap [POWERMAX-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/&#39; | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the &lt;code&gt;karavi-authorization-config&lt;/code&gt;, &lt;code&gt;proxy-server-root-certificate&lt;/code&gt;, &lt;code&gt;proxy-authz-tokens&lt;/code&gt; Secret from the CSI PowerMax namespace into the CSM for Observability namespace:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&#39; | sed &#39;s/name: karavi-authorization-config/name: powermax-karavi-authorization-config/&#39; | sed &#39;s/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/&#39; | sed &#39;s/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/&#39; | kubectl create -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
@@ -94,6 +139,7 @@
 &lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured in your values file for CSM Observability.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerScale, the &lt;code&gt;karaviMetricsPowerscale.authorization&lt;/code&gt; parameters must be properly configured in your values file for CSM Observability.&lt;/li&gt;
+&lt;li&gt;If CSM for Authorization is enabled for CSI PowerMax, the &lt;code&gt;karaviMetricsPowermax.authorization&lt;/code&gt; parameters must be properly configured in your values file for CSM Observability.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; helm install karavi-observability dell/karavi-observability -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -f myvalues.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternatively, you can specify each parameter using the &amp;lsquo;&amp;ndash;set key=value[,key=value]&amp;rsquo; and/or &amp;lsquo;&amp;ndash;set-file key=value[,key=value] arguments to &amp;lsquo;helm install&amp;rsquo;. For example:&lt;/p&gt;
@@ -377,7 +423,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;karaviMetricsPowerscale.concurrentPowerscaleQueries&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The number of simultaneous metrics queries to make to PowerScale(MUST be less than 10; otherwise, several request errors from PowerScale will ensue.&lt;/td&gt;
+&lt;td&gt;The number of simultaneous metrics queries to make to PowerScale(MUST be less than 10; otherwise, several request errors from PowerScale will ensue.)&lt;/td&gt;
 &lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -430,6 +476,46 @@
 &lt;td&gt;A boolean that enables/disables certificate validation of the csm-authorization server.&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowermax.capacityMetricsEnabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable PowerMax capacity metric Collection&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowermax.performanceMetricsEnabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable PowerMax performance metric Collection&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowermax.capacityPollFrequencySeconds&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The polling frequency (in seconds) to gather capacity metrics&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;20&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowermax.performancePollFrequencySeconds&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The polling frequency (in seconds) to gather performance metrics&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;20&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowermax.concurrentPowermaxQueries&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowermax.authorization.enabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;../../../authorization&#34;&gt;Authorization&lt;/a&gt; is an optional feature to apply credential shielding of the backend PowerMax.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowermax.authorization.proxyHost&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Hostname of the csm-authorization server.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;karaviMetricsPowermax.authorization.skipCertificateValidation&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;A boolean that enables/disables certificate validation of the csm-authorization server.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -479,7 +565,8 @@ You may obtain a copy of the License at
 &lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;online-installer&#34;&gt;Online Installer&lt;/h2&gt;
-&lt;p&gt;The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.&lt;/p&gt;
+&lt;p&gt;The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.&lt;br&gt;
+The installer expects CSI drivers are using the default secret and configmap names.&lt;/p&gt;
 &lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
 &lt;p&gt;A Linux-based system, with internet access, will be used to execute the script to install CSM for Observability into a Kubernetes/Openshift environment that also has internet access.&lt;/p&gt;
 &lt;table&gt;
@@ -521,6 +608,7 @@ Options:
   --csi-powerflex-namespace[=]&amp;lt;csi powerflex namespace&amp;gt;       Namespace where CSI PowerFlex is installed, default is &amp;#39;vxflexos&amp;#39;
   --csi-powerstore-namespace[=]&amp;lt;csi powerstore namespace&amp;gt;     Namespace where CSI PowerStore is installed, default is &amp;#39;csi-powerstore&amp;#39;
   --csi-powerscale-namespace[=]&amp;lt;csi powerscale namespace&amp;gt;     Namespace where CSI PowerScale is installed, default is &amp;#39;isilon&amp;#39;
+  --csi-powermax-namespace[=]&amp;lt;csi powermax namespace&amp;gt;         Namespace where CSI PowerMax is installed, default is &amp;#39;powermax&amp;#39;
   --set-file                                                  Set values from files used during helm installation (can be specified multiple times)
   --skip-verify                                               Skip verification of the environment
   --values[=]&amp;lt;values.yaml&amp;gt;                                    Values file, which defines configuration values
@@ -548,6 +636,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured in &lt;code&gt;myvalues.yaml&lt;/code&gt; for CSM Observability.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerScale, the &lt;code&gt;karaviMetricsPowerscale.authorization&lt;/code&gt; parameters must be properly configured in &lt;code&gt;myvalues.yaml&lt;/code&gt; for CSM Observability.&lt;/li&gt;
+&lt;li&gt;If CSM for Authorization is enabled for CSI PowerMax, the &lt;code&gt;karaviMetricsPowermax.authorization&lt;/code&gt; parameters must be properly configured in &lt;code&gt;myvalues.yaml&lt;/code&gt; for CSM Observability.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
 ---------------------------------------------------------------------------------
@@ -582,6 +671,16 @@ The following example will install CSM for Observability into the CSM namespace.
 |
 |- Copying Secret from powerstore to karavi                         Success
 |
+|- CSI Driver for PowerScale is installed                           Success
+|
+|- Copying Secret from isilon to karavi                             Success
+|
+|- CSI Driver for PowerMax is installed                             Success
+|
+|- Copying ConfigMap from powermax to karavi                        Success
+|
+|- Copying Secret from powermax to karavi                           Success
+|
 |- Installing CertManager CRDs                                      Success
 |
 |- Enabling Karavi Authorization for Karavi Observability
@@ -589,6 +688,14 @@ The following example will install CSM for Observability into the CSM namespace.
   |--&amp;gt; Copying ConfigMap from vxflexos to karavi                    Success
   |
   |--&amp;gt; Copying Karavi Authorization Secrets from vxflexos to karavi Success
+  |
+  |--&amp;gt; Copying ConfigMap from isilon to karavi                      Success
+  |
+  |--&amp;gt; Copying Karavi Authorization Secrets from isilon to karavi   Success
+  |
+  |--&amp;gt; Copying ConfigMap from powermax to karavi                    Success
+  |
+  |--&amp;gt; Copying Karavi Authorization Secrets from powermax to karavi Success
 |
 |- Installing Karavi Observability helm chart                       Success
 |
@@ -670,10 +777,11 @@ The following example will install CSM for Observability into the CSM namespace.
 *
 * Downloading and saving Docker images
 
-  dellemc/csm-topology:v1.4.0
-  dellemc/csm-metrics-powerflex:v1.4.0
-  dellemc/csm-metrics-powerstore:v1.4.0
-  dellemc/csm-metrics-powerscale:v1.1.0
+  dellemc/csm-topology:v1.5.0
+  dellemc/csm-metrics-powerflex:v1.5.0
+  dellemc/csm-metrics-powerstore:v1.5.0
+  dellemc/csm-metrics-powerscale:v1.2.0
+  dellemc/csm-metrics-powermax:v1.0.0
   otel/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20
 
@@ -698,10 +806,11 @@ The following example will install CSM for Observability into the CSM namespace.
 *
 * Loading, tagging, and pushing Docker images to registry &amp;lt;my-registry&amp;gt;:5000/
 
-  dellemc/csm-topology:v1.4.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.4.0
-  dellemc/csm-metrics-powerflex:v1.4.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.4.0
-  dellemc/csm-metrics-powerstore:v1.4.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.4.0
-  dellemc/csm-metrics-powerscale:v1.1.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.1.0
+  dellemc/csm-topology:v1.5.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.5.0
+  dellemc/csm-metrics-powerflex:v1.5.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.5.0
+  dellemc/csm-metrics-powerstore:v1.5.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.5.0
+  dellemc/csm-metrics-powerscale:v1.2.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.2.0
+  dellemc/csm-metrics-powermax:v1.0.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.0.0
   otel/opentelemetry-collector:0.42.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/nginx-unprivileged:1.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
@@ -719,18 +828,49 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;li&gt;
 &lt;p&gt;Copy the CSI Driver Secret(s)&lt;/p&gt;
 &lt;p&gt;Copy the CSI Driver Secret from the namespace where CSI Driver is installed to the namespace where CSM for Observability is to be installed.&lt;/p&gt;
-&lt;p&gt;CSI Driver for PowerFlex:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CSI Driver for PowerFlex:&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;vxflexos-config&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/&amp;#39; | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerFlex, perform these steps:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;vxflexos-config-params&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap [VXFLEXOS-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/name: [VXFLEXOS-CONFIG-PARAMS]/name: vxflexos-config-params/&amp;#39; | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;CSI Driver for PowerStore&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;CSI Driver for PowerStore:&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;CSI Driver for PowerScale:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;powerstore-config&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret [POWERSTORE-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/name: [POWERSTORE-CONFIG]/name: powerstore-config/&amp;#39; | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;CSI Driver for PowerScale:&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f - 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the CSI driver secret name is not the default &lt;code&gt;isilon-creds&lt;/code&gt;, please use the following command to copy secret:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/name: [ISILON-CREDS]/name: isilon-creds/&amp;#39; | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerScale, perform these steps:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap isilon-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;isilon-config-params&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap [ISILON-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/name: [ISILON-CONFIG-PARAMS]/name: isilon-config-params/&amp;#39; | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | sed &amp;#39;s/name: karavi-authorization-config/name: isilon-karavi-authorization-config/&amp;#39; | sed &amp;#39;s/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/&amp;#39; | sed &amp;#39;s/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;CSI Driver for PowerMax:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Copy the configmap from the CSI Driver for Dell PowerMax namespace to the CSM namespace.&lt;br&gt;
+&lt;strong&gt;Note:&lt;/strong&gt; Observability for PowerMax works only with &lt;a href=&#34;../../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode&#34;&gt;CSI PowerMax driver with Proxy in StandAlone mode&lt;/a&gt;.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/&amp;#39; | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Copy the secrets from the CSI Driver for Dell PowerMax namespace to the CSM namespace.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;for secret in $(kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o jsonpath=&amp;#34;{.data.config\.yaml}&amp;#34; | grep arrayCredentialSecret | awk &amp;#39;BEGIN{FS=&amp;#34;:&amp;#34;}{print $2}&amp;#39; | uniq)
+do
+   kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#34;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#34; | kubectl create -f -
+done
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-reverseproxy-config&lt;/code&gt;, please use the following command to copy secrets:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;for secret in $(kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o jsonpath=&amp;#34;{.data.config\.yaml}&amp;#34; | grep arrayCredentialSecret | awk &amp;#39;BEGIN{FS=&amp;#34;:&amp;#34;}{print $2}&amp;#39; | uniq)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;do
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;   kubectl get secret $secret -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#34;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#34; | kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-style:italic&#34;&gt;done
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If &lt;a href=&#34;../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;CSM for Authorization is enabled&lt;/a&gt; for CSI PowerMax, perform these steps:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap powermax-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the CSI driver configmap name is not the default &lt;code&gt;powermax-config-params&lt;/code&gt;, please use the following command to copy configmap:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get configmap [POWERMAX-CONFIG-PARAMS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/name: [POWERMAX-CONFIG-PARAMS]/name: powermax-config-params/&amp;#39; | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | kubectl create -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed &amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39; | sed &amp;#39;s/name: karavi-authorization-config/name: powermax-karavi-authorization-config/&amp;#39; | sed &amp;#39;s/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/&amp;#39; | sed &amp;#39;s/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/&amp;#39; | kubectl create -f -
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Now that the required images have been made available and the Helm chart&amp;rsquo;s configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart&amp;rsquo;s repository.&lt;/p&gt;
@@ -740,6 +880,7 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;li&gt;The default &lt;code&gt;values.yaml&lt;/code&gt; is configured to deploy the CSM for Observability Topology service on install.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerFlex, the &lt;code&gt;karaviMetricsPowerflex.authorization&lt;/code&gt; parameters must be properly configured.&lt;/li&gt;
 &lt;li&gt;If CSM for Authorization is enabled for CSI PowerScale, the &lt;code&gt;karaviMetricsPowerscale.authorization&lt;/code&gt; parameters must be properly configured.&lt;/li&gt;
+&lt;li&gt;If CSM for Authorization is enabled for CSI PowerMax, the &lt;code&gt;karaviMetricsPowermax.authorization&lt;/code&gt; parameters must be properly configured.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm install -n install-namespace app-name karavi-observability
 

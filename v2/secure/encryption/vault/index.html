@@ -1,0 +1,868 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.111.3">
+<meta name="robots" content="index, follow">
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
+
+<title>Vault Configuration | Dell Technologies</title>
+<meta name="description" content="Configuration requirements for Vault server
+">
+<meta property="og:title" content="Vault Configuration" />
+<meta property="og:description" content="Configuration requirements for Vault server
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dell.github.io/csm-docs/v2/secure/encryption/vault/" /><meta property="article:section" content="v2" />
+
+<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta itemprop="name" content="Vault Configuration">
+<meta itemprop="description" content="Configuration requirements for Vault server
+">
+<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
+<meta itemprop="wordCount" content="949">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vault Configuration"/>
+<meta name="twitter:description" content="Configuration requirements for Vault server
+"/>
+
+
+
+
+<link rel="preload" href="/csm-docs/scss/main.min.cd2be3b45e8efe8c539fd02fd688532749963e73e9acef5b9c41e902f957060c.css" as="style">
+<link href="/csm-docs/scss/main.min.cd2be3b45e8efe8c539fd02fd688532749963e73e9acef5b9c41e902f957060c.css" rel="stylesheet" integrity="">
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/csm-docs/">
+		<span class="navbar-logo"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1017 132"><defs><style>.cls-1{fill:#fff}</style></defs><title>DellTech_Logo_Prm_Wht_rgb</title><path class="cls-1" d="M1015 84.89c0-12.23-6.8-17.66-20.39-20.38s-21.73-4.08-21.73-13.58c0-6.8 5.44-10.87 15-10.87 12.22.0 16.3 5.43 16.3 12.22l1.36 1.36h5.43l1.37-1.36c0-13.58-10.88-19-24.46-19-15 0-23.1 8.15-23.1 17.67.0 10.86 8.15 16.3 21.73 19s20.38 4.08 20.38 15c0 6.79-4.07 12.23-17.66 12.23-12.22.0-17.66-6.8-17.66-15l-1.35-1.36h-5.44l-1.35 1.36c0 12.23 9.5 21.74 25.8 21.74 17.66.0 25.82-8.15 25.82-19M956.58 71.31l1.36-1.37V65.87c0-19-10.87-32.61-29.89-32.61s-29.89 13.59-29.89 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38l-1.36-1.36h-5.43l-1.36 1.36c-2.72 8.15-8.16 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H907.67l-1.36-1.36c0-9.51 5.44-23.09 21.74-23.09s21.74 13.58 21.74 23.09zm-59.78 36.68V36l-1.36-1.35h-5.43L880.5 36v65.22l1.36 1.36h5.43zm0-78.8V14.24l-1.36-1.36h-5.43l-1.36 1.36v8.15l1.36 1.36h5.43zM837 97.12c-13.59.0-21.74-9.52-21.74-28.53S823.44 40.06 837 40.06s21.73 9.5 21.73 28.53S850.61 97.12 837 97.12M858.76 93c0 17.66-4.07 31.25-20.38 31.25-12.22.0-16.3-5.44-17.66-12.23l-1.35-1.36h-5.44l-1.36 1.36c1.36 10.87 9.51 19 25.81 19 17.67.0 28.53-10.87 28.53-38V36l-1.35-1.35h-4.08L860.12 36l-1.36 8.16H857.4c-2.71-5.43-9.5-10.87-21.74-10.87-19 0-28.53 15-28.53 35.33s9.52 35.32 28.53 35.32c12.24.0 19-5.43 21.74-10.87zm-88.3-53c13.58.0 23.09 10.87 23.09 28.53S784 97.12 770.46 97.12s-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32s-13.59-35.33-31.25-35.33-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-40.76-2.72V8.81l-1.36-1.36h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43zM680.8 40.06c13.58.0 23.09 10.87 23.09 28.53s-9.51 28.53-23.09 28.53-23.1-10.87-23.1-28.53 9.51-28.53 23.1-28.53m0 63.85c17.66.0 31.25-12.23 31.25-35.32S698.46 33.26 680.8 33.26s-31.25 12.23-31.25 35.33 13.59 35.32 31.25 35.32m-39.4-2.72V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.67 4.08-21.74 10.87h-1.36L592.49 36l-1.36-1.35h-4.08L585.7 36v65.22l1.35 1.36h5.44l1.36-1.36V64.51c0-15 6.79-24.45 21.73-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.37 1.36H640zm-69.29.0V60.43c0-17.66-9.51-27.17-24.45-27.17-9.52.0-17.66 4.08-21.74 10.87h-1.36V8.81L523.2 7.45h-5.43l-1.36 1.36v92.38l1.36 1.36h5.43l1.36-1.36V64.51c0-15 6.8-24.45 21.74-24.45 10.87.0 17.66 6.79 17.66 20.37v40.76l1.36 1.36h5.44zM455.28 68.59c0-19 9.5-28.53 23.09-28.53s19 8.15 20.38 16.29l1.35 1.37h5.44l1.36-1.37c-1.36-13.58-12.23-23.09-28.53-23.09-17.66.0-31.24 10.87-31.24 35.33s13.58 35.32 31.24 35.32c16.3.0 27.17-9.51 28.53-23.1l-1.36-1.36H500.1l-1.35 1.36C497.39 89 492 97.12 478.37 97.12s-23.09-9.52-23.09-28.53m-14.95 2.72 1.36-1.37V65.87c0-19-10.87-32.61-29.9-32.61s-29.88 13.59-29.88 32.61v2.72c0 19 9.51 35.32 31.25 35.32 19 0 25.81-12.23 27.17-20.38L439 82.17h-5.43l-1.36 1.36c-2.72 8.15-8.15 13.59-19 13.59-17.66.0-23.1-16.31-23.1-24.46l1.36-1.35zm-8.15-6.8H391.42l-1.36-1.36c0-9.51 5.44-23.09 21.73-23.09s21.75 13.58 21.75 23.09zM395.57 12.88V8.81l-1.36-1.36H323.56L322.2 8.81v4.07l1.36 1.36h29.89l1.36 1.36v85.59l1.36 1.36h5.43l1.36-1.36V15.6l1.36-1.36h29.89z"/><path class="cls-1" d="M322.2 83.65v18.9H260.85V7.45h21.6v76.2zM38.55 102.55A47.57 47.57.0 0084.58 67l53.8 42 53.77-42v35.56H253.5V83.65H213.75V7.45h-21.6V43L140.58 83.3l-11.54-9L153.73 55l26.89-21-15.35-12-51.58 40.3-11.53-9L153.73 13 138.38 1 84.58 43a47.57 47.57.0 00-46-35.58H0v95.1zM21.6 83.65V26.35H38.55c14.33.0 26 12.83 26 28.65s-11.67 28.65-26 28.65z"/></svg></span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/csm-docs/docs/" ><span>Container Storage Modules</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="https://github.com/dell/csm" target="_blank" ><span>GitHub</span></a>
+			</li>
+			
+			
+			<li class="nav-item dropdown d-none d-lg-block">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	Releases
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6)</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	
+</div>
+
+			</li>
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block"><input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7479074da1163893700bd90fae480bbb.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <input
+  type="search"
+  class="form-control td-search-input"
+  placeholder="&#xf002; Search this site…"
+  aria-label="Search this site…"
+  autocomplete="off"
+  
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7479074da1163893700bd90fae480bbb.json"
+  data-offline-search-base-href="/"
+  data-offline-search-max-results="10"
+>
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv2-li">
+  <a href="/csm-docs/v2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-csm-docsv2"><span class="">Documentation</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2deployment-li">
+  <a href="/csm-docs/v2/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deployment"><span class="">Deployment</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymentcsmoperator-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperator"><span class="">CSM Operator</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymentcsmoperatordrivers-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/drivers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperatordrivers"><span class="">CSI Drivers</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatordriverspowerscale-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymentcsmoperatormodules-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/modules/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperatormodules"><span class="">CSM Modules</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesreplication-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatortroubleshooting-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperatortroubleshooting"><span class="">Troubleshooting</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2csidriver-li">
+  <a href="/csm-docs/v2/csidriver/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriver"><span class="">CSI Drivers</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2csidriverinstallation-li">
+  <a href="/csm-docs/v2/csidriver/installation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriverinstallation"><span class="">Installation</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2csidriverinstallationhelm-li">
+  <a href="/csm-docs/v2/csidriver/installation/helm/" title="CSI Driver installation using Helm" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriverinstallationhelm"><span class="">Using Helm</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationhelmpowerflex-li">
+  <a href="/csm-docs/v2/csidriver/installation/helm/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationhelmpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationhelmpowermax-li">
+  <a href="/csm-docs/v2/csidriver/installation/helm/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationhelmpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationhelmisilon-li">
+  <a href="/csm-docs/v2/csidriver/installation/helm/isilon/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationhelmisilon"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationhelmpowerstore-li">
+  <a href="/csm-docs/v2/csidriver/installation/helm/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationhelmpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationhelmunity-li">
+  <a href="/csm-docs/v2/csidriver/installation/helm/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationhelmunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2csidriverinstallationoperator-li">
+  <a href="/csm-docs/v2/csidriver/installation/operator/" title="CSI Driver installation using Dell CSI Operator" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriverinstallationoperator"><span class="">Using Operator</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationoperatorpowerflex-li">
+  <a href="/csm-docs/v2/csidriver/installation/operator/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationoperatorpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationoperatorpowermax-li">
+  <a href="/csm-docs/v2/csidriver/installation/operator/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationoperatorpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationoperatorisilon-li">
+  <a href="/csm-docs/v2/csidriver/installation/operator/isilon/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationoperatorisilon"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationoperatorpowerstore-li">
+  <a href="/csm-docs/v2/csidriver/installation/operator/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationoperatorpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationoperatorunity-li">
+  <a href="/csm-docs/v2/csidriver/installation/operator/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationoperatorunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationoffline-li">
+  <a href="/csm-docs/v2/csidriver/installation/offline/" title="Offline Installation of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriverinstallationoffline"><span class="">Offline Installer</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2csidriverinstallationtest-li">
+  <a href="/csm-docs/v2/csidriver/installation/test/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriverinstallationtest"><span class="">Testing Drivers</span></a>
+  <ul class="ul-4 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationtestpowerflex-li">
+  <a href="/csm-docs/v2/csidriver/installation/test/powerflex/" title="Test PowerFlex CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationtestpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationtestpowermax-li">
+  <a href="/csm-docs/v2/csidriver/installation/test/powermax/" title="Test PowerMax CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationtestpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationtestpowerscale-li">
+  <a href="/csm-docs/v2/csidriver/installation/test/powerscale/" title="Test PowerScale CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationtestpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationtestpowerstore-li">
+  <a href="/csm-docs/v2/csidriver/installation/test/powerstore/" title="Test PowerStore CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationtestpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverinstallationtestunity-li">
+  <a href="/csm-docs/v2/csidriver/installation/test/unity/" title="Test Unity XT CSI Driver" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverinstallationtestunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriveruninstall-li">
+  <a href="/csm-docs/v2/csidriver/uninstall/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriveruninstall"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2csidriverupgradation-li">
+  <a href="/csm-docs/v2/csidriver/upgradation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriverupgradation"><span class="">Upgrade</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverupgradationdriversoperator-li">
+  <a href="/csm-docs/v2/csidriver/upgradation/drivers/operator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverupgradationdriversoperator"><span class="">Dell CSI Operator</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverupgradationdriverspowerflex-li">
+  <a href="/csm-docs/v2/csidriver/upgradation/drivers/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverupgradationdriverspowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverupgradationdriverspowermax-li">
+  <a href="/csm-docs/v2/csidriver/upgradation/drivers/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverupgradationdriverspowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverupgradationdriversisilon-li">
+  <a href="/csm-docs/v2/csidriver/upgradation/drivers/isilon/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverupgradationdriversisilon"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverupgradationdriverspowerstore-li">
+  <a href="/csm-docs/v2/csidriver/upgradation/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverupgradationdriverspowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverupgradationdriversunity-li">
+  <a href="/csm-docs/v2/csidriver/upgradation/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverupgradationdriversunity"><span class="">Unity XT</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverupgradationdriversoffline-li">
+  <a href="/csm-docs/v2/csidriver/upgradation/drivers/offline/" title="Offline Upgrade of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverupgradationdriversoffline"><span class="">Offline Upgrade</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2csidriverfeatures-li">
+  <a href="/csm-docs/v2/csidriver/features/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriverfeatures"><span class="">Features</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverfeaturespowerflex-li">
+  <a href="/csm-docs/v2/csidriver/features/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverfeaturespowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverfeaturespowermax-li">
+  <a href="/csm-docs/v2/csidriver/features/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverfeaturespowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverfeaturespowerscale-li">
+  <a href="/csm-docs/v2/csidriver/features/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverfeaturespowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverfeaturespowerstore-li">
+  <a href="/csm-docs/v2/csidriver/features/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverfeaturespowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverfeaturesunity-li">
+  <a href="/csm-docs/v2/csidriver/features/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverfeaturesunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2csidrivertroubleshooting-li">
+  <a href="/csm-docs/v2/csidriver/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidrivertroubleshooting"><span class="">Troubleshooting</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidrivertroubleshootingoperator-li">
+  <a href="/csm-docs/v2/csidriver/troubleshooting/operator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidrivertroubleshootingoperator"><span class="">Dell CSI Operator</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidrivertroubleshootingpowerflex-li">
+  <a href="/csm-docs/v2/csidriver/troubleshooting/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidrivertroubleshootingpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidrivertroubleshootingpowermax-li">
+  <a href="/csm-docs/v2/csidriver/troubleshooting/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidrivertroubleshootingpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidrivertroubleshootingpowerscale-li">
+  <a href="/csm-docs/v2/csidriver/troubleshooting/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidrivertroubleshootingpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidrivertroubleshootingpowerstore-li">
+  <a href="/csm-docs/v2/csidriver/troubleshooting/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidrivertroubleshootingpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidrivertroubleshootingunity-li">
+  <a href="/csm-docs/v2/csidriver/troubleshooting/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidrivertroubleshootingunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2csidriverrelease-li">
+  <a href="/csm-docs/v2/csidriver/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriverrelease"><span class="">Release Notes</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverreleaseoperator-li">
+  <a href="/csm-docs/v2/csidriver/release/operator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverreleaseoperator"><span class="">Operator</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverreleasepowerflex-li">
+  <a href="/csm-docs/v2/csidriver/release/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverreleasepowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverreleasepowermax-li">
+  <a href="/csm-docs/v2/csidriver/release/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverreleasepowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverreleasepowerscale-li">
+  <a href="/csm-docs/v2/csidriver/release/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverreleasepowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverreleasepowerstore-li">
+  <a href="/csm-docs/v2/csidriver/release/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverreleasepowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverreleaseunity-li">
+  <a href="/csm-docs/v2/csidriver/release/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverreleaseunity"><span class="">Unity XT</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2csidriverpartners-li">
+  <a href="/csm-docs/v2/csidriver/partners/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2csidriverpartners"><span class="">Our Ecosystem Partners</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverpartnersoperator-li">
+  <a href="/csm-docs/v2/csidriver/partners/operator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverpartnersoperator"><span class="">OperatorHub.io</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverpartnersredhat-li">
+  <a href="/csm-docs/v2/csidriver/partners/redhat/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverpartnersredhat"><span class="">Red Hat OpenShift</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverpartnersdocker-li">
+  <a href="/csm-docs/v2/csidriver/partners/docker/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverpartnersdocker"><span class="">MKE</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverpartnersrancher-li">
+  <a href="/csm-docs/v2/csidriver/partners/rancher/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverpartnersrancher"><span class="">RKE</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2csidriverpartnerstanzu-li">
+  <a href="/csm-docs/v2/csidriver/partners/tanzu/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2csidriverpartnerstanzu"><span class="">VMware Tanzu</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2authorization-li">
+  <a href="/csm-docs/v2/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorization"><span class="">Authorization</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationdesign-li">
+  <a href="/csm-docs/v2/authorization/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationdesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationbackup-and-restore-li">
+  <a href="/csm-docs/v2/authorization/backup-and-restore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restore"><span class="">Backup and Restore</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationbackup-and-restorehelm-li">
+  <a href="/csm-docs/v2/authorization/backup-and-restore/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationbackup-and-restorerpm-li">
+  <a href="/csm-docs/v2/authorization/backup-and-restore/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationdeployment-li">
+  <a href="/csm-docs/v2/authorization/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationdeployment"><span class="">Deployment</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationdeploymentrpm-li">
+  <a href="/csm-docs/v2/authorization/deployment/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationdeploymentrpm"><span class="">RPM</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationdeploymenthelm-li">
+  <a href="/csm-docs/v2/authorization/deployment/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationdeploymenthelm"><span class="">Helm</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationuninstallation-li">
+  <a href="/csm-docs/v2/authorization/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationupgrade-li">
+  <a href="/csm-docs/v2/authorization/upgrade/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationupgrade"><span class="">Upgrade</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationcli-li">
+  <a href="/csm-docs/v2/authorization/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationcli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationtroubleshooting-li">
+  <a href="/csm-docs/v2/authorization/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2authorizationtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationrelease-li">
+  <a href="/csm-docs/v2/authorization/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationrelease"><span class="">Release notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2observability-li">
+  <a href="/csm-docs/v2/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2observability"><span class="">Observability</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilitydesign-li">
+  <a href="/csm-docs/v2/observability/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2observabilitydesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2observabilitymetrics-li">
+  <a href="/csm-docs/v2/observability/metrics/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2observabilitymetrics"><span class="">Metrics</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilitymetricspowerflex-li">
+  <a href="/csm-docs/v2/observability/metrics/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2observabilitymetricspowerflex"><span class="">PowerFlex Metrics</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilitymetricspowerscale-li">
+  <a href="/csm-docs/v2/observability/metrics/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2observabilitymetricspowerscale"><span class="">PowerScale Metrics</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilitymetricspowerstore-li">
+  <a href="/csm-docs/v2/observability/metrics/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2observabilitymetricspowerstore"><span class="">PowerStore Metrics</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2observabilitydeployment-li">
+  <a href="/csm-docs/v2/observability/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2observabilitydeployment"><span class="">Deployment</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilitydeploymenthelm-li">
+  <a href="/csm-docs/v2/observability/deployment/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2observabilitydeploymenthelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilitydeploymentonline-li">
+  <a href="/csm-docs/v2/observability/deployment/online/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2observabilitydeploymentonline"><span class="">Installer</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilitydeploymentoffline-li">
+  <a href="/csm-docs/v2/observability/deployment/offline/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2observabilitydeploymentoffline"><span class="">Offline Installer</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilityuninstall-li">
+  <a href="/csm-docs/v2/observability/uninstall/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2observabilityuninstall"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilityupgrade-li">
+  <a href="/csm-docs/v2/observability/upgrade/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2observabilityupgrade"><span class="">Upgrade</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilitytroubleshooting-li">
+  <a href="/csm-docs/v2/observability/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2observabilitytroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2observabilityrelease-li">
+  <a href="/csm-docs/v2/observability/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2observabilityrelease"><span class="">Release notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2replication-li">
+  <a href="/csm-docs/v2/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2replication"><span class="">Replication</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2replicationdeployment-li">
+  <a href="/csm-docs/v2/replication/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2replicationdeployment"><span class="">Deployment</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationdeploymentinstallation-li">
+  <a href="/csm-docs/v2/replication/deployment/installation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationdeploymentinstallation"><span class="">Installation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationdeploymentconfigmap-secrets-li">
+  <a href="/csm-docs/v2/replication/deployment/configmap-secrets/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationdeploymentconfigmap-secrets"><span class="">ConfigMap &amp; Secrets</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationdeploymentinstall-repctl-li">
+  <a href="/csm-docs/v2/replication/deployment/install-repctl/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationdeploymentinstall-repctl"><span class="">Installation using repctl</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationdeploymentstorageclasses-li">
+  <a href="/csm-docs/v2/replication/deployment/storageclasses/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationdeploymentstorageclasses"><span class="">Storage Class</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationdeploymentpowermax-li">
+  <a href="/csm-docs/v2/replication/deployment/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationdeploymentpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationdeploymentpowerscale-li">
+  <a href="/csm-docs/v2/replication/deployment/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationdeploymentpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationdeploymentpowerstore-li">
+  <a href="/csm-docs/v2/replication/deployment/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationdeploymentpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationdeploymentunity-li">
+  <a href="/csm-docs/v2/replication/deployment/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationdeploymentunity"><span class="">Unity</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationarchitecture-li">
+  <a href="/csm-docs/v2/replication/architecture/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationarchitecture"><span class="">Architecture</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationcluster-topologies-li">
+  <a href="/csm-docs/v2/replication/cluster-topologies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationcluster-topologies"><span class="">Cluster Topologies</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationdisaster-recovery-li">
+  <a href="/csm-docs/v2/replication/disaster-recovery/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationdisaster-recovery"><span class="">Disaster Recovery</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationhigh-availability-li">
+  <a href="/csm-docs/v2/replication/high-availability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationhigh-availability"><span class="">High Availability</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationmigrating-volumes-li">
+  <a href="/csm-docs/v2/replication/migrating-volumes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationmigrating-volumes"><span class="">Migrating Volumes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationmonitoring-li">
+  <a href="/csm-docs/v2/replication/monitoring/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationmonitoring"><span class="">Monitoring</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationreplication-actions-li">
+  <a href="/csm-docs/v2/replication/replication-actions/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationreplication-actions"><span class="">Replication Actions</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationvolume_expansion-li">
+  <a href="/csm-docs/v2/replication/volume_expansion/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationvolume_expansion"><span class="">Volume Expansion</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationtools-li">
+  <a href="/csm-docs/v2/replication/tools/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationtools"><span class="">Tools</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationtroubleshooting-li">
+  <a href="/csm-docs/v2/replication/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationtroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationrelease-li">
+  <a href="/csm-docs/v2/replication/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2replicationrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationupgrade-li">
+  <a href="/csm-docs/v2/replication/upgrade/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationupgrade"><span class="">Upgrade</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2replicationuninstall-li">
+  <a href="/csm-docs/v2/replication/uninstall/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2replicationuninstall"><span class="">Uninstall</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2resiliency-li">
+  <a href="/csm-docs/v2/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2resiliency"><span class="">Resiliency</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2resiliencydesign-li">
+  <a href="/csm-docs/v2/resiliency/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2resiliencydesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2resiliencyrelease-li">
+  <a href="/csm-docs/v2/resiliency/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2resiliencyrelease"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2resiliencyuninstallation-li">
+  <a href="/csm-docs/v2/resiliency/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2resiliencyuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2resiliencyusecases-li">
+  <a href="/csm-docs/v2/resiliency/usecases/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2resiliencyusecases"><span class="">Use Cases</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2resiliencydeployment-li">
+  <a href="/csm-docs/v2/resiliency/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2resiliencydeployment"><span class="">Deployment</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2resiliencyupgrade-li">
+  <a href="/csm-docs/v2/resiliency/upgrade/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2resiliencyupgrade"><span class="">Upgrade</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2resiliencytroubleshooting-li">
+  <a href="/csm-docs/v2/resiliency/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2resiliencytroubleshooting"><span class="">Troubleshooting</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2snapshots-li">
+  <a href="/csm-docs/v2/snapshots/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2snapshots"><span class="">Snapshots</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2snapshotsvolume-group-snapshots-li">
+  <a href="/csm-docs/v2/snapshots/volume-group-snapshots/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2snapshotsvolume-group-snapshots"><span class="">Volume Group Snapshots</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2applicationmobility-li">
+  <a href="/csm-docs/v2/applicationmobility/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2applicationmobility"><span class="">Application Mobility</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2applicationmobilitydeployment-li">
+  <a href="/csm-docs/v2/applicationmobility/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2applicationmobilitydeployment"><span class="">Deployment</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2applicationmobilityuninstallation-li">
+  <a href="/csm-docs/v2/applicationmobility/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2applicationmobilityuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2applicationmobilityuse_cases-li">
+  <a href="/csm-docs/v2/applicationmobility/use_cases/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2applicationmobilityuse_cases"><span class="">Use Cases</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2applicationmobilitytroubleshooting-li">
+  <a href="/csm-docs/v2/applicationmobility/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2applicationmobilitytroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2applicationmobilityrelease-li">
+  <a href="/csm-docs/v2/applicationmobility/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2applicationmobilityrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv2secure-li">
+  <a href="/csm-docs/v2/secure/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2secure"><span class="">Secure</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv2secureencryption-li">
+  <a href="/csm-docs/v2/secure/encryption/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2secureencryption"><span class="">Encryption</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2secureencryptiondeployment-li">
+  <a href="/csm-docs/v2/secure/encryption/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptiondeployment"><span class="">Deployment</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2secureencryptionuninstallation-li">
+  <a href="/csm-docs/v2/secure/encryption/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-csm-docsv2secureencryptionvault-li">
+  <a href="/csm-docs/v2/secure/encryption/vault/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionvault"><span class="td-sidebar-nav-active-item">Vault Configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2secureencryptiontroubleshooting-li">
+  <a href="/csm-docs/v2/secure/encryption/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2secureencryptionrelease-li">
+  <a href="/csm-docs/v2/secure/encryption/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2troubleshooting-li">
+  <a href="/csm-docs/v2/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2troubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2license-li">
+  <a href="/csm-docs/v2/license/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2license"><span class="">License</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2release-li">
+  <a href="/csm-docs/v2/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2release"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2support-li">
+  <a href="/csm-docs/v2/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2support"><span class="">Support</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2references-li">
+  <a href="/csm-docs/v2/references/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2references"><span class="">References</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2referencescli-li">
+  <a href="/csm-docs/v2/references/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2referencescli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2referencesfaq-li">
+  <a href="/csm-docs/v2/references/faq/" title="CSM FAQ" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2referencesfaq"><span class="">FAQ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2referenceslearn-li">
+  <a href="/csm-docs/v2/references/learn/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2referenceslearn"><span class="">Learn</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2referenceslearnstart-li">
+  <a href="/csm-docs/v2/references/learn/start/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2referenceslearnstart"><span class="">Getting Started</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2referenceslearnvideo-li">
+  <a href="/csm-docs/v2/references/learn/video/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2referenceslearnvideo"><span class="">Quick video lessons</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2referencescontributionguidelines-li">
+  <a href="/csm-docs/v2/references/contributionguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2referencescontributionguidelines"><span class="">Contribution Guidelines</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2referencespolicies-li">
+  <a href="/csm-docs/v2/references/policies/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2referencespolicies"><span class="">Policies</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2referencespoliciesdeprecationpolicy-li">
+  <a href="/csm-docs/v2/references/policies/deprecationpolicy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2referencespoliciesdeprecationpolicy"><span class="">Deprecation Policy</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+
+
+
+
+
+
+
+
+            
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#vault-server-installation">Vault Server Installation</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#minimum-server-configuration">Minimum Server Configuration</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#token-ttl-considerations">Token TTL Considerations</a></li>
+  </ul>
+</nav>
+
+
+
+
+            
+
+	
+		
+
+
+
+  
+  
+
+	
+		
+
+
+
+  
+  
+
+	
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="https://dell.github.io/csm-docs/v2/">Documentation</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="https://dell.github.io/csm-docs/v2/secure/">Secure</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="https://dell.github.io/csm-docs/v2/secure/encryption/">Encryption</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="https://dell.github.io/csm-docs/v2/secure/encryption/vault/" aria-disabled="true" class="btn-link disabled">Vault Configuration</a>
+  </li>
+  </ol>
+</nav>
+            
+<div class="td-content">
+	<h1>Vault Configuration</h1>
+
+	       
+	<h2 id="vault-server-installation">Vault Server Installation</h2>
+<p>If there is already a Vault server available, skip to <a href="#minimum-server-configuration">Minimum Server Configuration</a>.</p>
+<p>If there is no Vault server available to use with Encryption, it can be installed in many ways following <a href="https://www.vaultproject.io/docs">Hashicorp Vault documentation</a>.</p>
+<p>For testing environment, however, a simple deployment suggested in this section may suffice.
+It creates a standalone server with in-memory (non-persistent) storage, running in a Docker container.</p>
+<blockquote>
+<p><strong>NOTE</strong>: With in-memory storage, the encryption keys are permanently destroyed upon the server termination.</p>
+</blockquote>
+<h4 id="generate-tls-certificates-for-server-and-client">Generate TLS certificates for server and client</h4>
+<p>Create server CA private key and certificate:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>openssl req -x509 -sha256 -days <span style="color:#0000cf;font-weight:bold">365</span> -newkey rsa:2048 -nodes <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-subj <span style="color:#4e9a06">&#34;/CN=Vault Root CA&#34;</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-keyout server-ca.key <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-out server-ca.crt
+</span></span></code></pre></div><p>Create server private key and CSR:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>openssl req -newkey rsa:2048 -nodes <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-subj <span style="color:#4e9a06">&#34;/CN=vault-demo-server&#34;</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-keyout server.key <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-out server.csr
+</span></span></code></pre></div><p>Create server certificate signed by the CA:</p>
+<blockquote>
+<p>Replace <code>&lt;external IP&gt;</code> with an IP address by which Encryption can reach the Vault server.
+This may be the address of the Docker host where the Vault server will be running.
+The same address should be used for <code>vault_addr</code> in <a href="../deployment#configmap-vault-client-conf">vault-client-conf</a>.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat &gt; cert.ext <span style="color:#4e9a06">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">authorityKeyIdentifier=keyid,issuer
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">basicConstraints=CA:FALSE
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">subjectAltName = @alt_names
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">[alt_names]
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">DNS.1 = vault-demo-server
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">IP.1 = 127.0.0.1
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">IP.2 = &lt;external IP&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>openssl x509 -req <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-CA server-ca.crt -CAkey server-ca.key <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-in server.csr <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-out server.crt <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-days <span style="color:#0000cf;font-weight:bold">365</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-extfile cert.ext <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-CAcreateserial
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cat server-ca.crt &gt;&gt; server.crt
+</span></span></code></pre></div><p>Create client CA private key and certificate:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>openssl req -x509 -sha256 -days <span style="color:#0000cf;font-weight:bold">365</span> -newkey rsa:2048 -nodes <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-subj <span style="color:#4e9a06">&#34;/CN=Client Root CA&#34;</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-keyout client-ca.key <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-out client-ca.crt
+</span></span></code></pre></div><p>Create client private key and CSR:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>openssl req -newkey rsa:2048 -nodes <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-subj <span style="color:#4e9a06">&#34;/CN=vault-client&#34;</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-keyout client.key <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-out client.csr
+</span></span></code></pre></div><p>Create client certificate signed by the CA:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat &gt; cert.ext <span style="color:#4e9a06">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">authorityKeyIdentifier=keyid,issuer
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">basicConstraints=CA:FALSE
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">subjectAltName = @alt_names
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">[alt_names]
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">DNS.1 = vault-client
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">IP.1 = 127.0.0.1
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>openssl x509 -req <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-CA client-ca.crt -CAkey client-ca.key <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-in client.csr <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-out client.crt <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-days <span style="color:#0000cf;font-weight:bold">365</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-extfile cert.ext <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-CAcreateserial
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cat client-ca.crt &gt;&gt; client.crt
+</span></span></code></pre></div><h4 id="create-server-hcl-file">Create server hcl file</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat &gt;server.hcl <span style="color:#4e9a06">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">storage &#34;inmem&#34; {}
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">listener &#34;tcp&#34; {
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	address = &#34;0.0.0.0:8400&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	tls_disable = &#34;false&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	tls_cipher_suites = &#34;TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	tls_min_version = &#34;tls12&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	tls_cert_file = &#34;/var/vault/server.crt&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	tls_key_file  = &#34;/var/vault/server.key&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	tls_client_ca_file = &#34;/var/vault/client-ca.crt&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	tls_require_and_verify_client_cert = &#34;true&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">}
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">disable_mlock = true
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">api_addr = &#34;http://127.0.0.1:8200&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">ui = true
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">EOF</span>
+</span></span></code></pre></div><h4 id="start-vault-server">Start Vault Server</h4>
+<blockquote>
+<p>Variable <code>CONF_DIR</code> below refers to the directory containing files <em>server.crt</em>, <em>server.key</em>, <em>client-ca.crt</em> and <em>server.hcl</em>.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#000">VOL_DIR</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;</span><span style="color:#000">$CONF_DIR</span><span style="color:#4e9a06">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">VOL_DIR_D</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;/var/vault&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">ROOT_TOKEN</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;DemoRootToken&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">VAULT_IMG</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;vault:1.9.3&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>docker run --rm -d <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	--name<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;vault-server&#34;</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-p 8200:8200 -p 8400:8400 <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-v <span style="color:#000">$VOL_DIR</span>:<span style="color:#000">$VOL_DIR_D</span> -w <span style="color:#000">$VOL_DIR_D</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-e <span style="color:#000">VAULT_DEV_ROOT_TOKEN_ID</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">$ROOT_TOKEN</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-e <span style="color:#000">VAULT_ADDR</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;http://127.0.0.1:8200&#34;</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	-e <span style="color:#000">VAULT_TOKEN</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">$ROOT_TOKEN</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	<span style="color:#000">$VAULT_IMG</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	sh -c <span style="color:#4e9a06">&#39;vault server -dev -dev-listen-address 0.0.0.0:8200 -config=server.hcl&#39;</span>
+</span></span></code></pre></div><h2 id="minimum-server-configuration">Minimum Server Configuration</h2>
+<blockquote>
+<p><strong>NOTE:</strong> this configuration is a bare minimum to support Encryption and is not intended for use in production environment.
+Refer to the <a href="https://www.vaultproject.io/docs">Hashicorp Vault documentation</a> for recommended configuration options.</p>
+</blockquote>
+<blockquote>
+<p>If a <a href="#vault-server-installation">test instance of Vault</a> is used, the <code>vault</code> commands below can be executed in the Vault server container shell.
+To enter the shell, run <code>docker exec -it vault-server sh</code>. After completing the configuration process, exit the shell by typing <code>exit</code>.</p>
+<p>Alternatively, you can <a href="https://www.vaultproject.io/downloads">download the vault binary</a> and run it anywhere.
+It will require two environment variables to communicate with the Vault server:</p>
+<ul>
+<li><code>VAULT_ADDR</code> - URL similar to <code>http://127.0.0.1:8200</code>. You may need to change the address in the URL to the address of
+the Docker host where the server is running.</li>
+<li><code>VAULT_TOKEN</code> - Authentication token, e.g. the root token <code>DemoRootToken</code> used in the <a href="#vault-server-installation">test instance of Vault</a>.</li>
+</ul>
+</blockquote>
+<h4 id="enable-keyvalue-secret-engine">Enable Key/Value secret engine</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vault secrets <span style="color:#204a87">enable</span> -version<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">2</span> -path<span style="color:#ce5c00;font-weight:bold">=</span>dea-keys/ kv
+</span></span><span style="display:flex;"><span>vault write /dea-keys/config <span style="color:#000">cas_required</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87">true</span> <span style="color:#000">max_versions</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">1</span> 
+</span></span></code></pre></div><p>Key/Value secret engine is used to store encryption keys. Each encryption key is represented by a key-value entry.</p>
+<h4 id="enable-approle-authentication">Enable AppRole authentication</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vault auth <span style="color:#204a87">enable</span> approle
+</span></span></code></pre></div><h4 id="create-a-role">Create a role</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vault write auth/approle/role/dea-role <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	<span style="color:#000">secret_id_ttl</span><span style="color:#ce5c00;font-weight:bold">=</span>28d <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	<span style="color:#000">token_num_uses</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">0</span> <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	<span style="color:#000">token_ttl</span><span style="color:#ce5c00;font-weight:bold">=</span>1h <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	<span style="color:#000">token_max_ttl</span><span style="color:#ce5c00;font-weight:bold">=</span>1h <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	<span style="color:#000">token_explicit_max_ttl</span><span style="color:#ce5c00;font-weight:bold">=</span>10d <span style="color:#4e9a06">\
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06"></span>	<span style="color:#000">secret_id_num_uses</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">0</span>
+</span></span></code></pre></div><p>TTL values here are chosen arbitrarily and can be changed to desired values.</p>
+<h4 id="create-and-assign-a-token-policy-to-the-role">Create and assign a token policy to the role</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vault policy write dea-policy - <span style="color:#4e9a06">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">path &#34;dea-keys/*&#34; {
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	capabilities = [&#34;create&#34;, &#34;read&#34;, &#34;update&#34;, &#34;delete&#34;, &#34;list&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">}
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">path &#34;dea-keys/config&#34; {
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">	capabilities = [&#34;read&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">}
+</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vault write auth/approle/role/dea-role <span style="color:#000">token_policies</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;dea-policy&#34;</span>
+</span></span></code></pre></div><p>The role needs full access to the Key/Value secret engine to perform encryption key operations.
+The role only needs read access to the Key/Value secret engine config endpoint for configuration validation.</p>
+<h4 id="set-role-id-and-secret-id-to-the-role">Set role ID and secret ID to the role</h4>
+<p>Role ID and secret ID are normally generated by Vault. To get the generated values, run these commands:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vault <span style="color:#204a87">read</span> auth/approle/role/dea-role/role-id
+</span></span><span style="display:flex;"><span>vault write -f auth/approle/role/dea-role/secret-id
+</span></span></code></pre></div><p>In test environment, pre-defined role ID and secret ID can be set, for example <code>demo-role-id</code> and <code>demo-secret-id</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vault write auth/approle/role/dea-role/role-id <span style="color:#000">role_id</span><span style="color:#ce5c00;font-weight:bold">=</span>demo-role-id
+</span></span><span style="display:flex;"><span>vault write auth/approle/role/dea-role/custom-secret-id <span style="color:#000">secret_id</span><span style="color:#ce5c00;font-weight:bold">=</span>demo-secret-id
+</span></span></code></pre></div><blockquote>
+<p>Secret ID has an expiration time after which it becomes invalid resulting in <a href="../troubleshooting#expired-approle-secret-id">authorization failure</a>.
+The expiration time for new secret IDs can be set in <code>secret_id_ttl</code> parameter when <a href="#create-a-role">the role is created</a> or later on using
+<code>vault write auth/approle/role/dea-role/secret-id-ttl secret_id_ttl=24h</code>.</p>
+</blockquote>
+<h2 id="token-ttl-considerations">Token TTL Considerations</h2>
+<p>Effective client token TTL is determined by the Vault server based on multiple factors which are described in the <a href="https://www.vaultproject.io/docs/concepts/tokens#token-time-to-live-periodic-tokens-and-explicit-max-ttls">Vault documentation</a>.</p>
+<p>With the default server settings, role level values control TTL in this way:</p>
+<p><code>token_explicit_max_ttl=2h</code> - limits the client token TTL to 2 hours since it was originally issues as a result of login. This is a hard limit.</p>
+<p><code>token_ttl=30m</code> - sets the default client token TTL to 30 minutes. 30 minutes are counted from the login time and from any following token renewal.
+The client token will only be able to renew 3 times before reaching it total allowed TTL of 2 hours.</p>
+<p>Existing role values can be changed using <code>vault write auth/approle/role/dea-role token_ttl=30m token_explicit_max_ttl=2h</code>.</p>
+<blockquote>
+<p>Selecting too short TTL values will result in excessive overhead in Encryption to remain authenticated to the Vault server.</p>
+</blockquote>
+
+	
+	
+
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" href="https://github.com/dell/csm">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
+    <a class="text-white" target="_blank" href="http://del.ly/Slack_request">
+      <i class="fab fa-slack"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2023 The Dell Technologies All Rights Reserved</small>
+        <small class="ml-1"><a href="https://www.dell.com/learn/us/en/uscorp1/policies-privacy" target="_blank">Privacy Policy</a></small>
+	
+		
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+<script src="/csm-docs/js/main.min.357cdcbd77fb614ceb215987dafe216ba8720b4aa10ecd38bccb7c0013e32f2a.js" integrity="sha256-NXzcvXf7YUzrIVmH2v4ha6hyC0qhDs04vMt8ABPjLyo=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

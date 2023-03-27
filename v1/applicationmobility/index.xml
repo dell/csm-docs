@@ -72,7 +72,7 @@
 &lt;td&gt;&lt;code&gt;controller.image&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;Location of the Application Mobility Docker image&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;dell/csm-application-mobility-controller:v0.1.0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dellemc/csm-application-mobility-controller:v0.2.0&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;cert-manager.enabled&lt;/code&gt;&lt;/td&gt;
@@ -180,7 +180,7 @@
 &lt;td&gt;&lt;code&gt;velero.initContainers[0].image&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;Location of the Dell Velero plugin image.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;dellemc/csm-application-mobility-velero-plugin:v0.1.0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dellemc/csm-application-mobility-velero-plugin:v0.2.0&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;velero.initContainers[0].volumeMounts[0].mountPath&lt;/code&gt;&lt;/td&gt;
@@ -193,6 +193,12 @@
 &lt;td&gt;Name of the volume mount.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;&lt;code&gt;plugins&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;velero.restic.privileged&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;If set to true, Restic Pods will be run in privileged mode. Note: Set to true when using Red Hat OpenShift&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -398,16 +404,25 @@ data:
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-application-mobility-010&#34;&gt;Release Notes - CSM Application Mobility 0.1.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-application-mobility-020&#34;&gt;Release Notes - CSM Application Mobility 0.2.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/551&#34;&gt;Scheduled Backups for Application Mobility&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
+&lt;h2 id=&#34;release-notes---csm-application-mobility-010&#34;&gt;Release Notes - CSM Application Mobility 0.1.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges-1&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/449&#34;&gt;Technical preview release&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Clone stateful application workloads and application data to other clusters, either on-premise or in the cloud&lt;/li&gt;
 &lt;li&gt;Supports Restic as a data mover for application data&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;h3 id=&#34;fixed-issues-1&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;h3 id=&#34;known-issues-1&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
       </description>

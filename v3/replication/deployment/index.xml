@@ -56,11 +56,14 @@ for future use during management operations.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp ../helm/csm-replication/values.yaml ./myvalues.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash scripts/install.sh --values ./myvalues.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;Note: Current installation method allows you to specify custom &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; entry to be appended to controller&amp;rsquo;s &lt;code&gt;/etc/hosts&lt;/code&gt; file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server&amp;rsquo;s address.
+&lt;p&gt;Note: Current installation method allows you to specify custom &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; entries to be appended to controller&amp;rsquo;s &lt;code&gt;/etc/hosts&lt;/code&gt; file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server&amp;rsquo;s address.
 The feature can be enabled by modifying &lt;code&gt;values.yaml&lt;/code&gt;.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-hostAliases:&#34; data-lang=&#34;hostAliases:&#34;&gt;enableHostAliases: true
-hostName: &amp;#34;foo.bar&amp;#34;
-ip: &amp;#34;10.10.10.10&amp;#34;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-hostAliases:&#34; data-lang=&#34;hostAliases:&#34;&gt;- ip: &amp;#34;10.10.10.10&amp;#34;
+  hostnames: 
+    - &amp;#34;foo.bar&amp;#34;
+- ip: &amp;#34;10.10.10.11&amp;#34;
+  hostnames: 
+    - &amp;#34;foo.baz&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
 &lt;p&gt;This script will do the following:&lt;/p&gt;
 &lt;ol&gt;

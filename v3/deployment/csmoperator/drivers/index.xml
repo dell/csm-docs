@@ -236,13 +236,13 @@ Please refer &lt;a href=&#34;../../../../csidriver/installation/helm/isilon/#cer
 This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;../../#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../drivers/_index.md#verifying-the-driver-installation&#34;&gt;Verify the CSI Driver installation&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; :&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&amp;ldquo;Kubelet config dir path&amp;rdquo; is not yet configurable in case of Operator based driver installation.&lt;/li&gt;
-&lt;li&gt;Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.³&lt;/li&gt;
+&lt;li&gt;Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>
