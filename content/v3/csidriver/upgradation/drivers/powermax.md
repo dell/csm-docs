@@ -10,10 +10,10 @@ Description: Upgrade PowerMax CSI driver
 
 You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.
 
-## Update Driver from v2.1 to v2.2 using Helm
+## Update Driver from v2.2 to v2.3.1 using Helm
 
 **Steps**
-1. Run `git clone -b v2.2.0 https://github.com/dell/csi-powermax.git` to clone the git repository and get the v2.2 driver.
+1. Run `git clone -b v2.3.1 https://github.com/dell/csi-powermax.git` to clone the git repository and get the v2.3.1 driver.
 2. Update the values file as needed.
 2. Run the `csi-install` script with the option _\-\-upgrade_ by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade`.
 

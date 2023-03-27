@@ -65,7 +65,7 @@ The resulting offline bundle file can be copied to another machine, if necessary
 
 For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:
 ```
-git clone -b v1.8.0 https://github.com/dell/dell-csi-operator.git
+git clone -b v1.9.0 https://github.com/dell/dell-csi-operator.git
 ```
 ```
 cd dell-csi-operator/scripts
@@ -78,9 +78,9 @@ cd dell-csi-operator/scripts
 
    dellemc/csi-isilon:v2.0.0
    dellemc/csi-isilon:v2.1.0
-   dellemc/csipowermax-reverseproxy:v1.4.0
-   dellemc/csi-powermax:v2.0.0
-   dellemc/csi-powermax:v2.1.0
+   dellemc/csipowermax-reverseproxy:v2.3.0
+   dellemc/csi-powermax:v2.3.1
+   dellemc/csi-powermax:v2.4.0
    dellemc/csi-powerstore:v2.0.0
    dellemc/csi-powerstore:v2.1.0
    dellemc/csi-unity:v2.0.0

@@ -1,0 +1,25 @@
+name: Linter
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+    lint:
+      name: Lint Code Base
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
+        - name: Lint Code Base
+          uses: github/super-linter@v4.10.1
+          env:
+            VALIDATE_JAVASCRIPT_ES: true
+            LINTER_RULES_PATH: .github/linters
+            JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.js
+            VALIDATE_HTML: true
+            FILTER_REGEX_INCLUDE: .*/csminstallationwizard/*
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

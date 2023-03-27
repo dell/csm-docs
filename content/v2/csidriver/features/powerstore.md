@@ -188,7 +188,7 @@ provisioner: csi-powerstore.dellemc.com
 reclaimPolicy: Delete
 allowVolumeExpansion: true # Set this attribute to true if you plan to expand any PVCs created using this storage class
 parameters:
-    FsType: xfs
+    csi.storage.k8s.io/fstype: xfs
 ```
 
 To resize a PVC, edit the existing PVC spec and set spec.resources.requests.storage to the intended size. For example, if you have a PVC pstore-pvc-demo of size 3Gi, then you can resize it to 30Gi by updating the PVC.
@@ -494,7 +494,7 @@ allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   arrayID: "GlobalUniqueID"
-  FsType: "ext4"
+  csi.storage.k8s.io/fstype: "ext4"
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -506,7 +506,7 @@ allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   arrayID: "GlobalUniqueID"
-  FsType: "xfs"
+  csi.storage.k8s.io/fstype: "xfs"
 ```
 
 Here we specify two storage classes: one of them uses the first array and `ext4` filesystem, and the other uses the second array and `xfs` filesystem. 

@@ -1,0 +1,193 @@
+#
+#
+# Copyright © 2023 Dell Inc. or its subsidiaries. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#      http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#
+## K8S/DRIVER ATTRIBUTES
+########################
+csi-powerstore:
+  enabled: $POWERSTORE_ENABLED
+  namespace: $POWERSTORE_DRIVER_NAMESPACE
+  version: $VERSION
+  images:
+    driverRepository: $IMAGE_REPOSITORY
+  ## Controller ATTRIBUTES
+  controller:
+    controllerCount: $CONTROLLER_COUNT
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+    nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+    replication:
+      enabled: $REPLICATION_ENABLED
+      image: $REPLICATION_IMAGE
+    vgsnapshot:
+      enabled: $VG_SNAPSHOT_ENABLED
+      image: $VG_SNAPSHOT_IMAGE
+    snapshot:
+      enabled: $SNAPSHOT_ENABLED
+    resizer:
+      enabled: $RESIZER_ENABLED
+  ## Node ATTRIBUTES
+  node:
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+    nodeSelector: $NODE_POD_NODE_SELECTOR
+      # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
+    # tolerations:
+    # - key: "offline.vxflexos.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "vxflexos.podmon.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "offline.unity.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "unity.podmon.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "offline.isilon.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "isilon.podmon.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "offline.powerstore.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "powerstore.podmon.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+  storageCapacity:
+    enabled: $STORAGE_CAPACITY_ENABLED
+  podmon:
+    enabled: $RESILIENCY_ENABLED
+    image: $PODMAN_IMAGE
+
+## K8S/Powermax ATTRIBUTES
+##########################################
+csi-powermax:
+  enabled: $POWERMAX_ENABLED
+  namespace: $POWERMAX_DRIVER_NAMESPACE
+  global:
+    storageArrays:
+      - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
+        endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
+        backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
+    managementServers:
+      - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
+  version: $VERSION
+  images:
+    driverRepository: $IMAGE_REPOSITORY
+  clusterPrefix: $POWERMAX_CLUSTER_PREFIX
+  portGroups: "$POWERMAX_PORT_GROUPS"
+  controller:
+    controllerCount: $CONTROLLER_COUNT
+    snapshot:
+      enabled: $SNAPSHOT_ENABLED
+    resizer:
+      enabled: $RESIZER_ENABLED
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+    nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+  node:
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+    nodeSelector: $NODE_POD_NODE_SELECTOR
+  csireverseproxy:
+    image: $POWERMAX_CSI_REVERSE_PROXY_IMAGE
+    deployAsSidecar: $POWERMAX_CSI_REVERSE_PROXY_IMAGE_ENABLED
+    namespace: $POWERMAX_DRIVER_NAMESPACE
+  replication:
+    enabled: $REPLICATION_ENABLED
+    image: $REPLICATION_IMAGE
+  migration:
+    enabled: $MIGRATION_ENABLED
+    image: $MIGRATION_IMAGE
+    nodeRescanSidecarImage: $MIGRATION_NODE_RESCAN_SIDECAR_IMAGE
+  authorization:
+    enabled: $AUTHORIZATION_ENABLED
+    sidecarProxyImage: $AUTHORIZATION_IMAGE
+    proxyHost: $AUTHORIZATION_PROXY_HOST
+    skipCertificateValidation:  $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
+  vSphere:
+    enabled: $VSPHERE_ENABLED
+    fcPortGroup: "$VSPHERE_FC_PORT_GROUP"
+    fcHostName: "$VSPHERE_FC_HOST_NAME"
+    vCenterHost: "$VSPHERE_VCENTER_HOST"
+    vCenterCredSecret: $VSPHERE_VCENTER_CRED_SECRET
+
+## K8S/Replication Module ATTRIBUTES
+##########################################
+csm-replication:
+  enabled: $REPLICATION_ENABLED
+  namespace: $CSM_NAMESPACE
+
+## K8S/Observability Module ATTRIBUTES
+##########################################
+karavi-observability:
+  enabled: $OBSERVABILITY_ENABLED
+  namespace: $CSM_NAMESPACE
+  karaviMetricsPowerstore:
+    enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
+  karaviMetricsPowermax:
+    enabled: $POWERMAX_OBSERVABILITY_METRICS_ENABLED
+  karaviMetricsPowerflex:
+    enabled: $POWERFLEX_OBSERVABILITY_METRICS_ENABLED
+  karaviMetricsPowerscale:
+    enabled: $POWERSCALE_OBSERVABILITY_METRICS_ENABLED
+  cert-manager:
+    enabled: false
+
+## K8S/Application-mobility Module ATTRIBUTES
+##########################################
+csm-application-mobility:
+  enabled: $APP_MOBILITY_ENABLED
+  namespace: $CSM_NAMESPACE
+  # csm-application-mobility requires velero. If velero is already installed on the cluster, specify the namespace in which velero is deployed. Default value is "velero"
+  veleroNamespace: velero
+  velero:
+    enabled: $VELERO_ENABLED
+    credentials:
+      secretContents:
+        cloud: |
+          [default]
+          aws_access_key_id=access_key
+          aws_secret_access_key=secret_access_key
+    configuration:
+      provider: aws
+      backupStorageLocation:
+        name: default
+        bucket: velero-bucket
+        config: {}
+          #region: 
+          #s3ForcePathStyle: 
+          #s3Url: 
+          #publicUrl:
+    initContainers:
+    - name: dell-custom-velero-plugin
+      image: $APP_MOBILITY_VELERO_PLUGIN_IMAGE
+      volumeMounts:
+      - mountPath: /target
+        name: plugins
+    #- name: velero-plugin-for-aws
+      #image: velero/velero-plugin-for-aws:v1.5.0
+      #volumeMounts:
+      #- mountPath: /target
+        #name: plugins
+
+## K8S/Cert-manager ATTRIBUTES
+##########################################
+cert-manager:
+  enabled: $CERT_MANAGER_ENABLED
+  namespace: $CSM_NAMESPACE

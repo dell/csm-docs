@@ -56,8 +56,6 @@ status:
 
 ### Creating PVCs with VolumeSnapshots as Source
 
->Note: This is not supported for metro volumes.
-
 The following is a sample manifest for creating a PVC with a VolumeSnapshot as a source:
 ```yaml
 apiVersion: v1
@@ -79,8 +77,6 @@ spec:
 ```
 
 ### Creating PVCs with PVCs as source
-
->Note: This is not supported for replicated volumes.
 
 This is a sample manifest for creating a PVC with another PVC as a source:
 ```yaml
@@ -114,7 +110,7 @@ When the driver is installed and all the node plug-ins have initialized successf
 
 `symaccess -sid <symid> -iscsi <host iqn> set chap -cred <host IQN> -secret <CHAP secret>`
 
-Where <host IQN> is the name of the iSCSI initiator of a host IQN, and <CHAP secret> is the chapsecret that is used at the time of the installation of the driver.
+Where `host IQN` is the name of the iSCSI initiator of a host IQN, and `CHAP secret` is the chapsecret that is used at the time of the installation of the driver.
 
 *NOTE*: The host IQN is also used as the username when setting up the CHAP credentials.
 
@@ -574,7 +570,9 @@ This feature supports volume provisioning on Kubernetes clusters running on vSph
 
 It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like ISCSI or FC (in pass-through) is not supported.  
 
-To use this feature, set vSphere.enabled to true
+To use this feature
+- Set `vSphere.enabled` to true.
+- Create a secret which contains vCenter privileges. Follow the steps [here](../../installation/helm/powermax/#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
   
 ```
  VMware/vSphere virtualization support
@@ -595,11 +593,8 @@ vSphere:
   fcHostGroup: "csi-vsphere-VC-HG"
   # vCenterHost: URL/endpoint of the vCenter where all the ESX are present
   vCenterHost: "00.000.000.01"
-  # vCenterUserName: username from the vCenter credentials
-  vCenterUserName: "user"
-  # vCenterPassword: password from the vCenter credentials
-  vCenterPassword: "pwd"
-  
+  # vCenterCredSecret: secret name for the vCenter credentials
+  vCenterCredSecret: vcenter-creds  
 ```
   
 >Note: Replication is not supported with this feature.
