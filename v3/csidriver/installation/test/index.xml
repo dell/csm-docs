@@ -320,7 +320,7 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;li&gt;After the pod becomes &lt;code&gt;Ready&lt;/code&gt; and &lt;code&gt;Running&lt;/code&gt;, you can start to use this pod and volume.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Note: CSI driver for PowerMax will create the necessary objects like Storage group, HostID and Masking View. They must not be create›y»z7ö&amp;rsquo;ÏhÏ˘X&lt;/p&gt;
+&lt;p&gt;Note: CSI driver for PowerMax will create the necessary objects like Storage group, HostID and Masking View. They must not be created manually.&lt;/p&gt;
 &lt;/blockquote&gt;
 
       </description>
@@ -463,7 +463,7 @@ storage classes and automatically mounts them to the pod.&lt;/p&gt;
     </item>
     
     <item>
-      <title>V3: Test Unity CSI Driver</title>
+      <title>V3: Test Unity XT CSI Driver</title>
       <link>https://dell.github.io/csm-docs/v3/csidriver/installation/test/unity/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -471,7 +471,7 @@ storage classes and automatically mounts them to the pod.&lt;/p&gt;
       <description>
         
         
-        &lt;h2 id=&#34;test-deploying-a-simple-pod-and-pvc-with-unity-storage&#34;&gt;Test deploying a simple Pod and Pvc with Unity storage&lt;/h2&gt;
+        &lt;h2 id=&#34;test-deploying-a-simple-pod-and-pvc-with-unity-xt-storage&#34;&gt;Test deploying a simple Pod and Pvc with Unity XT storage&lt;/h2&gt;
 &lt;p&gt;In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default NFS and iSCSI and FC storage classes and automatically mounts them to the pod.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -495,7 +495,7 @@ storage classes and automatically mounts them to the pod.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;support-for-sles-15-sp2&#34;&gt;Support for SLES 15 SP2&lt;/h2&gt;
-&lt;p&gt;The CSI Driver for Dell Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.&lt;/p&gt;
+&lt;p&gt;The CSI Driver for Dell Unity XT requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;open-iscsi &lt;strong&gt;open-iscsi is required in order to make use of iSCSI protocol for provisioning&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;nfs-utils &lt;strong&gt;nfs-utils is required in order to make use of NFS protocol for provisioning&lt;/strong&gt;&lt;/li&gt;

@@ -55,7 +55,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It is recommended to use 5.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
+&lt;li&gt;It is recommended to use 6.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;installing-csi-driver-via-operator&#34;&gt;Installing CSI Driver via Operator&lt;/h2&gt;
 &lt;p&gt;Refer &lt;a href=&#34;../drivers/powerscale&#34;&gt;PowerScale Driver&lt;/a&gt; to install the driver via Operator&lt;/p&gt;

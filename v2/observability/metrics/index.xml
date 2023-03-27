@@ -120,6 +120,104 @@
     </item>
     
     <item>
+      <title>V2: PowerScale Metrics</title>
+      <link>https://dell.github.io/csm-docs/v2/observability/metrics/powerscale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/observability/metrics/powerscale/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section outlines the metrics collected by the Container Storage Modules (CSM) Observability module for PowerScale. The &lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale&#34;&gt;Grafana reference dashboards&lt;/a&gt; for PowerScale metrics can be uploaded to your Grafana instance.&lt;/p&gt;
+&lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
+&lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth) are available by default and broken down by cluster and quota.&lt;/p&gt;
+&lt;p&gt;To disable these metrics, set the &lt;code&gt;performanceMetricsEnabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_cpu_use_rate&lt;/td&gt;
+&lt;td&gt;Average CPU usage for all nodes in the monitored cluster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_disk_read_operation_rate&lt;/td&gt;
+&lt;td&gt;Average rate at which the disks in the cluster servicing data read change requests&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_disk_write_operation_rate&lt;/td&gt;
+&lt;td&gt;Average rate at which the disks in the cluster servicing data write change requests&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_disk_throughput_read_rate_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;Throughput rate of data being read from the disks in the cluster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_disk_throughput_write_rate_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;Throughput rate of data being written to the disks in the cluster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
+&lt;p&gt;Provides visibility into the total, used, and available capacity for PowerScale cluster and quotas.&lt;/p&gt;
+&lt;p&gt;To disable these metrics, set the &lt;code&gt;capacityMetricsEnabled&lt;/code&gt; field to false in helm/values.yaml.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_total_capacity_terabytes&lt;/td&gt;
+&lt;td&gt;Total cluster capacity (TB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_remaining_capacity_terabytes&lt;/td&gt;
+&lt;td&gt;Total unused cluster capacity (TB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_used_capacity_percentage&lt;/td&gt;
+&lt;td&gt;Percent of total cluster capacity that has been used&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_total_hard_quota_gigabytes&lt;/td&gt;
+&lt;td&gt;Amount of total capacity allocated in all directory hard quotas&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_cluster_total_hard_quota_percentage&lt;/td&gt;
+&lt;td&gt;Percent of total capacity allocated in all directory hard quotas&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_volume_quota_subscribed_gigabytes&lt;/td&gt;
+&lt;td&gt;Space used of Quota for a directory (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_volume_hard_quota_remaining_gigabytes&lt;/td&gt;
+&lt;td&gt;Unused spaced below the hard limit for a directory (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_volume_quota_subscribed_percentage&lt;/td&gt;
+&lt;td&gt;Percentage of space used in hard limit for a directory&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powerscale_volume_hard_quota_remaining_percentage&lt;/td&gt;
+&lt;td&gt;Percentage of the remaining space in hard limit for a directory&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>V2: PowerStore Metrics</title>
       <link>https://dell.github.io/csm-docs/v2/observability/metrics/powerstore/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

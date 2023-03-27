@@ -37,8 +37,19 @@
 &lt;p&gt;These packages need to be installed on the Linux host:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;container-selinux&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&#34;&gt;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;k3s-selinux-0.4-1&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;Use the appropriate package manager on the machine to install the packages.&lt;/p&gt;
+&lt;h3 id=&#34;using-yum-on-centosredhat-7&#34;&gt;Using yum on CentOS/RedHat 7:&lt;/h3&gt;
+&lt;p&gt;yum install -y container-selinux&lt;/p&gt;
+&lt;p&gt;yum install -y &lt;a href=&#34;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&#34;&gt;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;using-yum-on-centosredhat-8&#34;&gt;Using yum on CentOS/RedHat 8:&lt;/h3&gt;
+&lt;p&gt;yum install -y container-selinux&lt;/p&gt;
+&lt;p&gt;yum install -y &lt;a href=&#34;https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm&#34;&gt;https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dark-sites&#34;&gt;Dark Sites&lt;/h3&gt;
+&lt;p&gt;For environments where &lt;code&gt;yum&lt;/code&gt; will not work, obtain the supported version of container-selinux for your OS version and install it.&lt;/p&gt;
+&lt;p&gt;The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from &lt;a href=&#34;https://centos.pkgs.org/7/centos-extras-x86_64/&#34;&gt;https://centos.pkgs.org/7/centos-extras-x86_64/&lt;/a&gt; and &lt;a href=&#34;https://centos.pkgs.org/8/centos-appstream-x86_64/&#34;&gt;https://centos.pkgs.org/8/centos-appstream-x86_64/&lt;/a&gt;, respectively.&lt;/p&gt;
+&lt;p&gt;The k3s-selinux-0.4-1 RPM can be obtained from &lt;a href=&#34;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&#34;&gt;https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm&lt;/a&gt; or &lt;a href=&#34;https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm&#34;&gt;https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm&lt;/a&gt; for CentOS/RedHat 7 and 8, respectively. Download the supported version of k3s-selinux-0.4-1 for your OS version and install it.&lt;/p&gt;
 &lt;h2 id=&#34;deploying-the-csm-authorization-proxy-server&#34;&gt;Deploying the CSM Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.&lt;/p&gt;
 &lt;p&gt;The CSM for Authorization proxy server is installed using a single binary installer.&lt;/p&gt;
@@ -192,7 +203,7 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo === Generating token ===
-karavictl generate token --tenant $TenantName --insecure --addr &amp;#34;grpc.${AuthorizationProxyHost}&amp;#34; | jq -r &amp;#39;.Token&amp;#39; &amp;gt; token.yaml
+karavictl generate token --tenant $TenantName --insecure --addr &amp;#34;grpc.${AuthorizationProxyHost}&amp;#34; | sed -e &amp;#39;s/&amp;#34;Token&amp;#34;: //&amp;#39; -e &amp;#39;s/[{}&amp;#34;]//g&amp;#39; -e &amp;#39;s/\\n/\n/g&amp;#39; &amp;gt; token.yaml
 
 echo === Copy token to Driver Host ===
 sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
@@ -259,7 +270,7 @@ sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostV
 &lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;insecure&lt;/td&gt;
+&lt;td&gt;skipCertificateValidation&lt;/td&gt;
 &lt;td&gt;A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
@@ -393,7 +404,7 @@ sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostV
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are updating the signing secret, the tenants need to be updated with new tokens via the &lt;code&gt;karavictl generate token&lt;/code&gt; command like so. The &lt;code&gt;--insecure&lt;/code&gt; flag is only necessary if certificates were not provided in &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;code&gt;karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot; | jq -r &#39;.Token&#39; &amp;gt; kubectl -n $namespace apply -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;karavictl generate token --tenant $TenantName --insecure --addr &amp;quot;grpc.${AuthorizationProxyHost}&amp;quot; | sed -e &#39;s/&amp;quot;Token&amp;quot;: //&#39; -e &#39;s/[{}&amp;quot;]//g&#39; -e &#39;s/\\n/\n/g&#39; | kubectl -n $namespace apply -f -&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;csm-for-authorization-proxy-server-dynamic-configuration-settings&#34;&gt;CSM for Authorization Proxy Server Dynamic Configuration Settings&lt;/h2&gt;
 &lt;p&gt;Some settings are not stored in the &lt;code&gt;karavi-config-secret&lt;/code&gt; but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM for Authorization logging settings during runtime, run the below command on the K3s cluster, make your changes, and save the updated configmap data.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;k3s kubectl -n karavi edit configmap/csm-config-params
@@ -421,7 +432,7 @@ sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostV
 &lt;li&gt;role-service, which configures roles for tenants to be bound to&lt;/li&gt;
 &lt;li&gt;storage-service, which configures backend storage arrays for the proxy-server to foward requests to&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The folloiwng third-party components are installed in the specified namespace:&lt;/p&gt;
+&lt;p&gt;The following third-party components are installed in the specified namespace:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;redis, which stores data regarding tenants and their volume ownership, quota, and revokation status&lt;/li&gt;
 &lt;li&gt;redis-commander, a web management tool for Redis&lt;/li&gt;
@@ -466,7 +477,7 @@ sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostV
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After editing the file, run the following command to create a secret called &lt;code&gt;karavi-config-secret&lt;/code&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Use the following command to replace or update the secret:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file=config=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the default values.yaml file &lt;code&gt;cp charts/csm-authorization/values.yaml myvalues.yaml&lt;/code&gt;&lt;/p&gt;
@@ -687,9 +698,20 @@ sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostV
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To install CSM Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;install-karavictl&#34;&gt;Install Karavictl&lt;/h2&gt;
-&lt;p&gt;The Karavictl CLI can be obtained directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
-&lt;p&gt;In order to run &lt;code&gt;karavictl&lt;/code&gt; commands, the binary needs to exist in your PATH, for example /usr/local/bin.&lt;/p&gt;
-&lt;p&gt;Karavictl commands and intended use can be found &lt;a href=&#34;../../cli/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download the latest release of karavictl&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -LO https://github.com/dell/karavi-authorization/releases/latest/download/karavictl
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Install karavictl&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo install -o root -g root -m 0755 karavictl /usr/local/bin/karavictl
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you do not have root access on the target system, you can still install karavictl to the ~/.local/bin directory:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;chmod +x karavictl
+mkdir -p ~/.local/bin
+mv ./karavictl ~/.local/bin/karavictl
+# and then append (or prepend) ~/.local/bin to $PATH
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Karavictl commands and intended use can be found &lt;a href=&#34;../../cli/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-the-csm-authorization-proxy-server&#34;&gt;Configuring the CSM Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The storage administrator must first configure the proxy server with the following:&lt;/p&gt;
 &lt;ul&gt;
@@ -702,23 +724,23 @@ sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostV
 &lt;p&gt;Run &lt;code&gt;kubectl -n authorization get ingress&lt;/code&gt; and &lt;code&gt;kubectl -n authorization get service&lt;/code&gt; to see the Ingress rules for these services and the exposed port for accessing these services via the LoadBalancer. For example:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# kubectl -n authorization get ingress
 NAME              CLASS   HOSTS                           ADDRESS   PORTS     AGE
-proxy-server      nginx   csm-authorization.com                     80, 443   86s
-role-service      nginx   role.csm-authorization.com                80, 443   86s
-storage-service   nginx   storage.csm-authorization.com             80, 443   86s
-tenant-service    nginx   tenant.csm-authorization.com              80, 443   86s
+proxy-server      nginx   csm-authorization.com                     00, 000   86s
+role-service      nginx   role.csm-authorization.com                00, 000   86s
+storage-service   nginx   storage.csm-authorization.com             00, 000   86s
+tenant-service    nginx   tenant.csm-authorization.com              00, 000   86s
 
 # kubectl -n auth get service
 NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-authorization-cert-manager                         ClusterIP      10.104.35.150    &amp;lt;none&amp;gt;        9402/TCP                     28s
-authorization-cert-manager-webhook                 ClusterIP      10.97.179.94     &amp;lt;none&amp;gt;        443/TCP                      27s
-authorization-ingress-nginx-controller             LoadBalancer   10.108.115.217   &amp;lt;pending&amp;gt;     80:30080/TCP,443:30016/TCP   27s
-authorization-ingress-nginx-controller-admission   ClusterIP      10.103.143.215   &amp;lt;none&amp;gt;        443/TCP                      27s
-proxy-server                                       ClusterIP      10.111.86.51     &amp;lt;none&amp;gt;        8080/TCP                     28s
-redis                                              ClusterIP      10.111.158.17    &amp;lt;none&amp;gt;        6379/TCP                     28s
-redis-commander                                    ClusterIP      10.107.22.41     &amp;lt;none&amp;gt;        8081/TCP                     27s
-role-service                                       ClusterIP      10.96.113.230    &amp;lt;none&amp;gt;        50051/TCP                    27s
-storage-service                                    ClusterIP      10.101.144.37    &amp;lt;none&amp;gt;        50051/TCP                    27s
-tenant-service                                     ClusterIP      10.109.60.141    &amp;lt;none&amp;gt;        50051/TCP                    28s
+authorization-cert-manager                         ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                     28s
+authorization-cert-manager-webhook                 ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                      27s
+authorization-ingress-nginx-controller             LoadBalancer   00.000.000.000    &amp;lt;pending&amp;gt;     00:00000/TCP,000:00000/TCP   27s
+authorization-ingress-nginx-controller-admission   ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                      27s
+proxy-server                                       ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                     28s
+redis                                              ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                     28s
+redis-commander                                    ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                     27s
+role-service                                       ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                    27s
+storage-service                                    ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                    27s
+tenant-service                                     ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                    28s
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On the machine running &lt;code&gt;karavictl&lt;/code&gt;, the &lt;code&gt;/etc/hosts&lt;/code&gt; file needs to be updated with the Ingress hosts for the storage, tenant, and role services. For example:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;master_node_ip&amp;gt; tenant.csm-authorization.com
 &amp;lt;master_node_ip&amp;gt; role.csm-authorization.com
@@ -754,13 +776,13 @@ tenant-service                                     ClusterIP      10.109.60.141 
 &lt;/ul&gt;
 &lt;h3 id=&#34;generating-a-token&#34;&gt;Generating a Token&lt;/h3&gt;
 &lt;p&gt;Now that the tenant is bound to a role, a JSON Web Token can be generated for the tenant. For example, to generate a token for the &lt;code&gt;Finance&lt;/code&gt; tenant:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016
 
 {
   &amp;#34;Token&amp;#34;: &amp;#34;\napiVersion: v1\nkind: Secret\nmetadata:\n  name: proxy-authz-tokens\ntype: Opaque\ndata:\n  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUXhPRFlzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLmJIODN1TldmaHoxc1FVaDcweVlfMlF3N1NTVnEyRzRKeGlyVHFMWVlEMkU=\n  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWXhNallzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkxNbWVUSkZlX2dveXR0V0lUUDc5QWVaTy1kdmN5SHAwNUwyNXAtUm9ZZnM=\n&amp;#34;
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With &lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;jq&lt;/a&gt;, you process the above response to filter the secret manifest. For example:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl generate token --tenant Finance --insecure --addr --addr tenant.csm-authorization.com:30016 | jq -r &amp;#39;.Token&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Process the above response to filter the secret manifest. For example using sed you can run the following:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | sed -e &amp;#39;s/&amp;#34;Token&amp;#34;: //&amp;#39; -e &amp;#39;s/[{}&amp;#34;]//g&amp;#39; -e &amp;#39;s/\\n/\n/g&amp;#39;
 apiVersion: v1
 kind: Secret
 metadata:
@@ -827,7 +849,7 @@ data:
 &lt;td&gt;&amp;quot; &amp;quot;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;insecure&lt;/td&gt;
+&lt;td&gt;skipCertificateValidation&lt;/td&gt;
 &lt;td&gt;A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;

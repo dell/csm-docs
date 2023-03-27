@@ -323,7 +323,7 @@ controller:
 &lt;/blockquote&gt;
 &lt;p&gt;For configuring Controller HA on the Dell CSI Operator, please refer to the &lt;a href=&#34;../../installation/operator/#custom-resource-specification&#34;&gt;Dell CSI Operator documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;sdc-deployment&#34;&gt;SDC Deployment&lt;/h2&gt;
-&lt;p&gt;The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run the node portion of the CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platforms which support automatic SDC deployment: currently only Red Hat CoreOS (RHCOS). On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hub.docker.com/r/dellemc/sdc&lt;/a&gt; for your OS versions.&lt;/p&gt;
+&lt;p&gt;The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run the node portion of the CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platforms which support automatic SDC deployment: currently Red Hat CoreOS (RHCOS), RHEL8.x,RHEL 7.9 are the only supported OS platforms. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hub.docker.com/r/dellemc/sdc&lt;/a&gt; for your OS versions.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;On Kubernetes nodes which run the node portion of the CSI driver, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the nodes with OS version which supports automatic SDC deployment. If there is an SDC kernel module installed then the version is checked and updated.&lt;/li&gt;
 &lt;li&gt;Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.&lt;/li&gt;
@@ -535,7 +535,36 @@ ensure the proper values are enabled in your values file. See the values table i
   ----     ------                     ----                ----         ------
 Warning  VolumeConditionAbnormal      35s (x9 over 12m)  kubelet       Volume vol4: volPath: /var/.../rhel-705f0dcbf1/mount is not mounted: &amp;lt;nil&amp;gt;
 Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vol2: Volume is not found by node driver at 2021-11-11 02:04:49
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;set-qos-limits&#34;&gt;Set QoS Limits&lt;/h2&gt;
+&lt;p&gt;Starting in version 2.5, CSI Driver for PowerFlex now supports setting the limits for the bandwidth and IOPS that one SDC generates for the specified volume. This enables the CSI driver to control the quality of service (QoS).
+In this release this is supported at the StorageClass level, so once a volume is created QoS Settings can&amp;rsquo;t be adjusted later.
+To accomplish this, two new parameters are introduced in the storage class: bandwidthLimitInKbps and iopsLimit.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ensure that the proper values are enabled in your storage class yaml files. Refer to the &lt;a href=&#34;https://github.com/dell/csi-powerflex/tree/main/samples/storageclass&#34;&gt;sample storage class yamls&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;storage.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;StorageClass&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;vxflexos&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageclass.kubernetes.io/is-default-class&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;provisioner&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csi-vxflexos.dellemc.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;reclaimPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Delete&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allowVolumeExpansion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;parameters&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storagepool&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;STORAGE_POOL&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert Storage pool&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;systemID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;SYSTEM_ID&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert System ID&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;bandwidthLimitInKbps&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;BANDWIDTH_LIMIT_IN_KBPS&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert bandwidth limit in Kbps&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;iopsLimit&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;IOPS_LIMIT&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert iops limit&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csi.storage.k8s.io/fstype&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ext4&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeBindingMode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WaitForFirstConsumer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allowedTopologies&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabelExpressions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csi-vxflexos.dellemc.com/&amp;lt;SYSTEM_ID&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert System ID&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;values&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;csi-vxflexos.dellemc.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the volume gets created, the ControllerPublishVolume will set the QoS limits for the volumes mapped to SDC.&lt;/p&gt;
+
       </description>
     </item>
     
@@ -625,7 +654,7 @@ If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using t
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;requests&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;8Gi&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;iscsi-chap&#34;&gt;iSCSI CHAP&lt;/h2&gt;
-&lt;p&gt;Starting from v1.3.0, the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
+&lt;p&gt;Starting from version 1.3.0, the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
 To enable CHAP authentication:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Create secret &lt;code&gt;powermax-creds&lt;/code&gt; with the key &lt;code&gt;chapsecret&lt;/code&gt; set to the iSCSI CHAP secret. If the secret exists, delete and re-create the secret with this newly added key.&lt;/li&gt;
@@ -640,7 +669,7 @@ To enable CHAP authentication:&lt;/p&gt;
 &lt;p&gt;With unidirectional CHAP, the PowerMax array challenges the host initiator during the initial link negotiation process and expects to receive a valid credential and CHAP secret in response.&lt;/p&gt;
 &lt;p&gt;When challenged, the host initiator transmits a CHAP credential and CHAP secret to the storage array. The storage array looks for this credential and CHAP secret which is stored in the host initiator group. When a positive authentication occurs, the PowerMax array sends an acceptance message to the host. However, if the PowerMax array fails to find any record of the credential/secret pair, it sends a rejection message, and the link is closed.&lt;/p&gt;
 &lt;h2 id=&#34;custom-driver-name&#34;&gt;Custom Driver Name&lt;/h2&gt;
-&lt;p&gt;Starting from version 1.3.0 driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.&lt;/p&gt;
+&lt;p&gt;Starting from version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.&lt;/p&gt;
 &lt;p&gt;To use this feature, set the following values under &lt;code&gt;customDriverName&lt;/code&gt; in &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Value: Set this to the custom name of the driver.&lt;/li&gt;
@@ -742,7 +771,7 @@ The driver helm chart installation uses the values above to:&lt;/li&gt;
 &lt;p&gt;Raw Block volumes are presented as a block device to the Pod by using a bind mount to a block device in the node&amp;rsquo;s file system. The driver does not format or check the format of any file system on the block device. Raw Block volumes support online Volume Expansion, but it is up to the application to manage to reconfigure the file system (if any) to the new size.&lt;/p&gt;
 &lt;p&gt;For additional information, see the website: &lt;a href=&#34;https://kubernetes.io/docs/concepts/storage/persistent-volumes/#raw-block-volume-support&#34;&gt;Kubernetes&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;csi-powermax-reverse-proxy&#34;&gt;CSI PowerMax Reverse Proxy&lt;/h2&gt;
-&lt;p&gt;To get the maximum performance out of the CSI driver for PowerMax and Unisphere for PowerMax REST APIs, starting with v1.4 of the driver, you can deploy the optional CSI PowerMax Reverse Proxy application.&lt;/p&gt;
+&lt;p&gt;CSI PowerMax Reverse Proxy application is deployed along with the driver to get the maximum performance out of the CSI driver for PowerMax and Unisphere for PowerMax REST APIs.&lt;/p&gt;
 &lt;p&gt;CSI PowerMax Reverse Proxy is a (go) HTTPS server that acts as a reverse proxy for the Unisphere for PowerMax RESTAPI interface. Any RESTAPI request sent from the driver to the reverse proxy is forwarded to the Unisphere server and the response is routed back to the driver.&lt;/p&gt;
 &lt;p&gt;The Reverse Proxy application helps regulate the maximum number of requests which can be sent to the Unisphere RESTAPI at a given time across all driver controller and node Pods. This helps with better queuing of CSI requests and the performance of the CSI PowerMax driver.&lt;/p&gt;
 &lt;p&gt;Optionally, you can specify an alternate (backup) Unisphere server and if the primary Unisphere server is not reachable or does not respond, the proxy will redirect the calls to this alternate Unisphere.&lt;/p&gt;
@@ -763,8 +792,8 @@ The driver helm chart installation uses the values above to:&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret -n &amp;lt;namespace&amp;gt; tls csirevproxy-tls-secret --cert&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;tls.crt --
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;tls.key
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;using-helm-installer&#34;&gt;Using Helm installer&lt;/h3&gt;
-&lt;p&gt;In the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; file, the csireverseproxy section can be used to deploy and configure the CSI PowerMax Reverse Proxy.&lt;/p&gt;
-&lt;p&gt;The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. If it is enabled (using the &lt;code&gt;enabled&lt;/code&gt; parameter in the csireverseproxy section of the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; file), the install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.&lt;/p&gt;
+&lt;p&gt;In the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; file, the csireverseproxy section can be used to configure the CSI PowerMax Reverse Proxy.&lt;/p&gt;
+&lt;p&gt;The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. The install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.&lt;/p&gt;
 &lt;h3 id=&#34;using-dell-csi-operator&#34;&gt;Using Dell CSI Operator&lt;/h3&gt;
 &lt;p&gt;Starting with the v1.1.0 release of the Dell CSI Operator, a new Custom Resource Definition can be used to install CSI PowerMax Reverse Proxy.&lt;/p&gt;
 &lt;p&gt;This Custom Resource has to be created in the same namespace as the CSI PowerMax driver and it has to be created before the driver Custom Resource. To use the service, the driver Custom Resource manifest must be configured with the service name &amp;ldquo;powermax-reverseproxy&amp;rdquo;. For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the &lt;a href=&#34;../../installation/operator/powermax&#34;&gt;Dell CSI Operator documentation&lt;/a&gt; for PowerMax.&lt;/p&gt;
@@ -1006,6 +1035,40 @@ N2 and N3: None&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;1Gi&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When this feature is enabled, the existing &lt;code&gt;ReadWriteOnce(RWO)&lt;/code&gt; access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.&lt;/p&gt;
 &lt;p&gt;To migrate existing PersistentVolumes to use &lt;code&gt;ReadWriteOncePod&lt;/code&gt;, please follow the instruction from &lt;a href=&#34;https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;support-for-auto-rdm-for-vsphere-over-fc&#34;&gt;Support for auto RDM for vSphere over FC&lt;/h2&gt;
+&lt;p&gt;CSI Driver for Dell PowerMax 2.5.0 and above supports auto RDM for vSphere over FC.&lt;/p&gt;
+&lt;p&gt;This feature supports volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. This feature enables the users to use PMAX CSI drivers with VMs on vSphere Hypervisor with the same feature and functionality as there with bare metal servers when they have only FC ports in PMAX storage.&lt;/p&gt;
+&lt;p&gt;It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like ISCSI or FC (in pass-through) is not supported.&lt;/p&gt;
+&lt;p&gt;To use this feature, set vSphere.enabled to true&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; VMware/vSphere virtualization support
+# set enable to true, if you to enable VMware virtualized environment support via RDM
+# Allowed Values:
+#   &amp;#34;true&amp;#34; - vSphere volumes are enabled
+#   &amp;#34;false&amp;#34; - vSphere volumes are disabled
+# Default value: &amp;#34;false&amp;#34;
+vSphere:
+  enabled: false
+  # fcPortGroup: an existing portGroup that driver will use for vSphere
+  # recommended format: csi-x-VC-PG, x can be anything of user choice
+  fcPortGroup: &amp;#34;csi-vsphere-VC-PG&amp;#34;
+  # fcHostGroup: an existing host(initiator group) that driver will use for vSphere
+  # this hostGroup should contain initiators from all the ESXs/ESXi host
+  # where the cluster is deployed
+  # recommended format: csi-x-VC-HG, x can be anything of user choice
+  fcHostGroup: &amp;#34;csi-vsphere-VC-HG&amp;#34;
+  # vCenterHost: URL/endpoint of the vCenter where all the ESX are present
+  vCenterHost: &amp;#34;00.000.000.01&amp;#34;
+  # vCenterUserName: username from the vCenter credentials
+  vCenterUserName: &amp;#34;user&amp;#34;
+  # vCenterPassword: password from the vCenter credentials
+  vCenterPassword: &amp;#34;pwd&amp;#34;
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: Replication is not supported with this feature.
+Limitations of RDM can be referred &lt;a href=&#34;https://configmax.esp.vmware.com/home&#34;&gt;here.&lt;/a&gt;&lt;br&gt;
+Supported number of RDM Volumes per VM is 60 as per the limitations.
+RDMs should not be added/removed manually from vCenter on any of the cluster VMs.&lt;/p&gt;
+&lt;/blockquote&gt;
 
       </description>
     </item>
@@ -1910,7 +1973,7 @@ However, to provision new volumes, make sure to delete old Storage Classes and c
 &lt;p&gt;CSI Driver for Dell Powerstore is supported in the NAT environment for NFS protocol.&lt;/p&gt;
 &lt;p&gt;The user will be able to install the driver and able to create pods.&lt;/p&gt;
 &lt;h2 id=&#34;pvpvc-metrics&#34;&gt;PV/PVC Metrics&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.volumeHealthMonitorInterval parameter.&lt;/p&gt;
+&lt;p&gt;CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.&lt;/p&gt;
 &lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes&#34;&gt;Single Pod Access Mode for PersistentVolumes&lt;/h2&gt;
 &lt;p&gt;Starting from version 2.1, CSI Driver for Powerstore now supports a new access mode &lt;code&gt;ReadWriteOncePod&lt;/code&gt; for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Powerstore allows restricting volume access to a single pod in the cluster and within a worker node.&lt;/p&gt;
 &lt;p&gt;Prerequisites&lt;/p&gt;
@@ -1997,7 +2060,7 @@ These attributes can be specified as labels in PVC yaml file. The following is a
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;Note: Default description value is &lt;code&gt;pvcName-pvcNamespace&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;The following is the list of all the attribtues supported by PowerStore CSI driver:&lt;/p&gt;
+&lt;p&gt;This is the list of all the attributes supported by PowerStore CSI driver:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2020,6 +2083,17 @@ Make sure that the attributes specified are supported by the version of PowerSto
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Configurable Volume Attributes feature is supported with Helm.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;storage-capacity-tracking&#34;&gt;Storage Capacity Tracking&lt;/h2&gt;
+&lt;p&gt;CSI PowerStore driver version 2.5.0 and above supports Storage Capacity Tracking.&lt;/p&gt;
+&lt;p&gt;This feature helps the scheduler to make more informed choices about where to start pods which depend on unbound volumes with late binding (aka &amp;ldquo;wait for first consumer&amp;rdquo;). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay in Pending state. This means they are not scheduled.&lt;/p&gt;
+&lt;p&gt;Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.&lt;/p&gt;
+&lt;p&gt;The attribute &lt;code&gt;storageCapacity.enabled&lt;/code&gt; in &lt;code&gt;my-powerstore-settings.yaml&lt;/code&gt; can be used to enabled/disabled the feature during driver installation .
+To configure how often driver checks for changed capacity set &lt;code&gt;storageCapacity.pollInterval&lt;/code&gt; attribute. In case of driver installed via operator, this interval can be configured in the sample files provided &lt;a href=&#34;https://github.com/dell/dell-csi-operator/tree/master/samples&#34;&gt;here&lt;/a&gt; by editing the &lt;code&gt;capacity-poll-interval&lt;/code&gt; argument present in the &lt;code&gt;provisioner&lt;/code&gt; sidecar.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This feature requires kubernetes v1.24 and above and will be automatically disabled in lower version of kubernetes.&lt;/p&gt;
 &lt;/blockquote&gt;
 
       </description>
@@ -2410,7 +2484,7 @@ By default this is disabled in CSI Driver for Unity XT. You will have to set the
 &lt;p&gt;To update the log level dynamically user has to edit the ConfigMap &lt;code&gt;unity-config-params&lt;/code&gt; and update &lt;code&gt;CSI_LOG_LEVEL&lt;/code&gt; to the desired log level.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl edit configmap -n unity unity-config-params
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;tenancy-support-for-unity-xt-nfs&#34;&gt;Tenancy support for Unity XT NFS&lt;/h2&gt;
-&lt;p&gt;The CSI Unity XT driver version v2.1.0 (and later versions) supports the Tenancy feature of Unity XT such that the user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.&lt;/p&gt;
+&lt;p&gt;The CSI Unity XT driver supports the Tenancy feature of Unity XT that allows the user to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.&lt;/p&gt;
 &lt;p&gt;Prerequisites (to be manually created in Unity XT Array) before the driver installation:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create Tenants&lt;/li&gt;

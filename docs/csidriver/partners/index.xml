@@ -123,7 +123,7 @@
       <description>
         
         
-        &lt;p&gt;The Dell CSI Drivers support Rancher Kubernetes Engine (RKE) v1.2.8.&lt;/p&gt;
+        &lt;p&gt;The Dell CSI Drivers support Rancher Kubernetes Engine (RKE) v1.4.1.&lt;/p&gt;
 &lt;p&gt;The installation process for the drivers on such clusters remains the same as the installation process on regular Kubernetes clusters. Installation on this cluster is done using helm and via Operator has not been qualified.&lt;/p&gt;
 &lt;h2 id=&#34;rke-examples&#34;&gt;RKE Examples&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;../rancher1.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -141,7 +141,7 @@
         
         
         &lt;p&gt;The CSI Driver for Dell Unity XT, PowerScale and PowerStore supports VMware Tanzu. The deployment of these Tanzu clusters is done using the VMware Tanzu supervisor cluster and the supervisor namespace.&lt;/p&gt;
-&lt;p&gt;Currently, VMware Tanzu with normal configuration(without NAT) supports Kubernetes 1.20 and higher.
+&lt;p&gt;Currently, VMware Tanzu 7.0 with normal configuration(without NAT) supports Kubernetes 1.22.
 The CSI driver can be installed on  this cluster using Helm. Installation of CSI drivers in Tanzu via Operator has not been qualified.&lt;/p&gt;
 &lt;p&gt;To login to the Tanzu cluster, download kubectl and kubectl vsphere binaries to any of the system&lt;/p&gt;
 &lt;p&gt;Refer: &lt;a href=&#34;https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-0F6E45C4-3CB1-4562-9370-686668519FCA.html&#34;&gt;https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-0F6E45C4-3CB1-4562-9370-686668519FCA.html&lt;/a&gt;&lt;/p&gt;

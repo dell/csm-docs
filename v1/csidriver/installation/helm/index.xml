@@ -57,10 +57,13 @@
 &lt;p&gt;Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see &lt;a href=&#34;https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html&#34;&gt;Dell PowerFlex documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;install-powerflex-storage-data-client&#34;&gt;Install PowerFlex Storage Data Client&lt;/h3&gt;
 &lt;p&gt;The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
-SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment;
-currently only Red Hat CoreOS (RHCOS).
-On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps &lt;a href=&#34;#manual-sdc-deployment&#34;&gt;below&lt;/a&gt;.
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS), RHEL 7.9 and RHEL 8.x. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps &lt;a href=&#34;#manual-sdc-deployment&#34;&gt;below&lt;/a&gt;.
 Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hub.docker.com/r/dellemc/sdc&lt;/a&gt; for supported OS versions.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt; To install CSI driver for Powerflex with automated SDC deployment, you need below two packages on worker nodes.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;libaio&lt;/li&gt;
+&lt;li&gt;numactl-libs&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt; For a typical install, you will pull SDC kernel modules from the Dell FTP site, which is set up by default. Some users might want to mirror this repository to a local location. The &lt;a href=&#34;https://www.dell.com/support/kbdoc/en-us/000184206/how-to-use-a-private-repository-for&#34;&gt;PowerFlex KB article&lt;/a&gt; has instructions on how to do this.&lt;/p&gt;
 &lt;h4 id=&#34;manual-sdc-deployment&#34;&gt;Manual SDC Deployment&lt;/h4&gt;
 &lt;p&gt;For detailed PowerFlex installation procedure, see the &lt;a href=&#34;https://docs.delltechnologies.com/bundle/VXF_DEPLOY/page/GUID-DD20489C-42D9-42C6-9795-E4694688CC75.html&#34;&gt;Dell PowerFlex Deployment Guide&lt;/a&gt;. Install the PowerFlex SDC as follows:&lt;/p&gt;
@@ -81,14 +84,14 @@ Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hu
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd&#34;&gt;v6.0.x&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd&#34;&gt;v6.1.x&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
 &lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;A common snapshot controller&lt;/li&gt;
 &lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller&#34;&gt;v6.0.x&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller&#34;&gt;v6.1.x&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The manifests available on GitHub install the snapshotter image:
@@ -107,14 +110,14 @@ Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hu
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;When using Kubernetes it is recommended to use 6.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
+&lt;li&gt;When using Kubernetes it is recommended to use 6.1.x version of snapshotter/snapshot-controller.&lt;/li&gt;
 &lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;install-the-driver&#34;&gt;Install the Driver&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.5.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created a namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create a new one.&lt;/p&gt;
@@ -160,7 +163,7 @@ Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hu
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;endpoint&lt;/td&gt;
-&lt;td&gt;REST API gateway HTTPS endpoint for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on&lt;/td&gt;
+&lt;td&gt;REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -209,7 +212,7 @@ Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hu
 &lt;li&gt;&amp;ldquo;insecure&amp;rdquo; parameter has been changed to &amp;ldquo;skipCertificateValidation&amp;rdquo; as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of &amp;ldquo;insecure&amp;rdquo; or &amp;ldquo;skipCertificateValidation&amp;rdquo; for now. The driver would return an error if both parameters are used.&lt;/li&gt;
 &lt;li&gt;Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the &lt;a href=&#34;../../../features/powerflex#dynamic-logging-configuration&#34;&gt;Dynamic Logging Configuration&lt;/a&gt; section in Features for more information.&lt;/li&gt;
 &lt;li&gt;If the user is using complex K8s version like &amp;ldquo;v1.21.3-mirantis-1&amp;rdquo;, use this kubeVersion check in helm/csi-unity/Chart.yaml file.
-kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.25.0-0&amp;rdquo;&lt;/li&gt;
+kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.26.0-0&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol start=&#34;5&#34;&gt;
 &lt;li&gt;
@@ -245,7 +248,7 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.25.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Set to verify the values file version matches driver version and used to pull the image as part of the image name.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;2.0.0&lt;/td&gt;
+&lt;td&gt;2.5.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;driverRepository&lt;/td&gt;
@@ -374,7 +377,7 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.25.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;volumeHealthMonitorInterval&lt;/td&gt;
+&lt;td&gt;interval&lt;/td&gt;
 &lt;td&gt;Interval of monitoring volume health condition. Allowed values: Number followed by unit (s,m,h)&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;60s&lt;/td&gt;
@@ -605,10 +608,10 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;li&gt;CSI Driver for Dell PowerMax&lt;/li&gt;
 &lt;li&gt;Kubernetes External Provisioner, which provisions the volumes&lt;/li&gt;
 &lt;li&gt;Kubernetes External Attacher, which attaches the volumes to the containers&lt;/li&gt;
-&lt;li&gt;Kubernetes External Snapshotter, which provides snapshot support&lt;/li&gt;
+&lt;li&gt;Kubernetes External Snapshotter, which provides snapshot support-&lt;/li&gt;
+&lt;li&gt;CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance&lt;/li&gt;
 &lt;li&gt;Kubernetes External Resizer, which resizes the volume&lt;/li&gt;
 &lt;li&gt;(optional) Kubernetes External health monitor, which provides volume health status&lt;/li&gt;
-&lt;li&gt;(optional) CSI PowerMax ReverseProxy, which maximizes CSI driver and Unisphere performance&lt;/li&gt;
 &lt;li&gt;(optional) Dell CSI Replicator, which provides Replication capability.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The node section of the Helm chart installs the following component in a &lt;em&gt;DaemonSet&lt;/em&gt; in the specified namespace:&lt;/p&gt;
@@ -623,6 +626,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;li&gt;Install Helm 3&lt;/li&gt;
 &lt;li&gt;Fibre Channel requirements&lt;/li&gt;
 &lt;li&gt;iSCSI requirements&lt;/li&gt;
+&lt;li&gt;Auto RDM for vSphere over FC requirements&lt;/li&gt;
 &lt;li&gt;Certificate validation for Unisphere REST API calls&lt;/li&gt;
 &lt;li&gt;Mount propagation is enabled on container runtime that is being used&lt;/li&gt;
 &lt;li&gt;Linux multipathing requirements&lt;/li&gt;
@@ -652,6 +656,23 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;li&gt;The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For more information about configuring iSCSI, see &lt;a href=&#34;https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf&#34;&gt;Dell Host Connectivity guide&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;auto-rdm-for-vsphere-over-fc-requirements&#34;&gt;Auto RDM for vSphere over FC requirements&lt;/h3&gt;
+&lt;p&gt;The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.&lt;/p&gt;
+&lt;p&gt;Set up the environment as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add initiators from all ESX/ESXis to a host(initiator group) where the cluster is hosted.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Initiators from all ESX/ESXi should be part of a single host(initiator group) and not hostgroup(cascaded intitiator group).&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;certificate-validation-for-unisphere-rest-api-calls&#34;&gt;Certificate validation for Unisphere REST API calls&lt;/h3&gt;
 &lt;p&gt;As part of the CSI driver installation, the CSI driver requires a secret with the name &lt;em&gt;powermax-certs&lt;/em&gt; present in the namespace &lt;em&gt;powermax&lt;/em&gt;. This secret contains the X509 certificates of the CA which signed the Unisphere SSL certificate in PEM format. This secret is mounted as a volume in the driver container. In earlier releases, if the install script did not find the secret, it created an empty secret with the same name. From the 1.2.0 release, the secret volume has been made optional. The install script no longer attempts to create an empty secret.&lt;/p&gt;
 &lt;p&gt;The CSI driver exposes an install parameter &lt;code&gt;skipCertificateValidation&lt;/code&gt; which determines if the driver performs client-side verification of the Unisphere certificates. The &lt;code&gt;skipCertificateValidation&lt;/code&gt; parameter is set to &lt;em&gt;true&lt;/em&gt; by default, and the driver does not verify the Unisphere certificates.&lt;/p&gt;
@@ -697,14 +718,14 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd&#34;&gt;v6.0.x&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd&#34;&gt;v6.1.x&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
 &lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers to support Volume snapshots.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;A common snapshot controller&lt;/li&gt;
 &lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller&#34;&gt;v6.0.x&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller&#34;&gt;v6.1.x&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The manifests available on GitHub install the snapshotter image:
@@ -720,7 +741,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It is recommended to use 6.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
+&lt;li&gt;It is recommended to use 6.1.x version of snapshotter/snapshot-controller.&lt;/li&gt;
 &lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;optional-replication-feature-requirements&#34;&gt;(Optional) Replication feature Requirements&lt;/h3&gt;
@@ -733,7 +754,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 &lt;h2 id=&#34;install-the-driver&#34;&gt;Install the Driver&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.4.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.5.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.&lt;/li&gt;
 &lt;li&gt;Ensure that you have created a namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace powermax&lt;/code&gt; to create a new one&lt;/li&gt;
 &lt;li&gt;Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
 These values can be obtained using base64 encoding as described in the following example:
@@ -741,7 +762,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;echo&lt;/span&gt; -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;mypassword&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;where &lt;em&gt;myusername&lt;/em&gt; and &lt;em&gt;mypassword&lt;/em&gt; are credentials for a user with PowerMax privileges.&lt;/li&gt;
 &lt;li&gt;Create the secret by running &lt;code&gt;kubectl create -f samples/secret/secret.yaml&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - &lt;em&gt;csireverseproxy-tls-secret&lt;/em&gt; which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.&lt;/li&gt;
+&lt;li&gt;Create a TLS secret with the name - &lt;em&gt;csireverseproxy-tls-secret&lt;/em&gt; which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.&lt;/li&gt;
 &lt;li&gt;Copy the default values.yaml file &lt;code&gt;cd helm &amp;amp;&amp;amp; cp csi-powermax/values.yaml my-powermax-settings.yaml&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -&amp;gt; Help (?) -&amp;gt; About in Unisphere for PowerMax GUI.&lt;/li&gt;
 &lt;li&gt;Edit the newly created file and provide values for the following parameters &lt;code&gt;vi my-powermax-settings.yaml&lt;/code&gt;&lt;/li&gt;
@@ -789,7 +810,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;tr&gt;
 &lt;td&gt;backupEndpoint&lt;/td&gt;
 &lt;td&gt;This refers to the URL of the backup Unisphere server managing &lt;em&gt;storageArrayId&lt;/em&gt;, if Reverse Proxy is installed in &lt;em&gt;StandAlone&lt;/em&gt; mode. If authorization is enabled, backupEndpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://backup-1.unisphe.re:8443&#34;&gt;https://backup-1.unisphe.re:8443&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -807,7 +828,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;tr&gt;
 &lt;td&gt;credentialsSecret&lt;/td&gt;
 &lt;td&gt;This refers to the user credentials for &lt;em&gt;endpoint&lt;/em&gt;&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;primary-1-secret&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -946,7 +967,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Current version of the driver. Don&amp;rsquo;t modify this value as this value will be used by the install script.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;v2.3.1&lt;/td&gt;
+&lt;td&gt;v2.3.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;images&lt;/td&gt;
@@ -1057,16 +1078,10 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;enabled&lt;/td&gt;
-&lt;td&gt;Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.&lt;br&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If not enabled, then there is no requirement to configure any of the following values.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;False&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;image&lt;/td&gt;
 &lt;td&gt;This refers to the image of the CSI Powermax Reverse Proxy container.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;dellemc/csipowermax-reverseproxy:v2.1.0&lt;/td&gt;
+&lt;td&gt;dellemc/csipowermax-reverseproxy:v2.4.0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;tlsSecret&lt;/td&gt;
@@ -1176,6 +1191,48 @@ These values can be obtained using base64 encoding as described in the following
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;replication.storage.dell.com&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;vSphere&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;This section refers to the configuration options for VMware virtualized environment support via RDM&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;enabled&lt;/td&gt;
+&lt;td&gt;A boolean that enables/disables VMware virtualized environment support.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fcPortGroup&lt;/td&gt;
+&lt;td&gt;Existing portGroup that driver will use for vSphere.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fcHostGroup&lt;/td&gt;
+&lt;td&gt;Existing host(initiator group) that driver will use for vSphere.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vCenterHost&lt;/td&gt;
+&lt;td&gt;URL/endpoint of the vCenter where all the ESX are present&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vCenterUserName&lt;/td&gt;
+&lt;td&gt;Username from the vCenter credentials.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vCenterPassword&lt;/td&gt;
+&lt;td&gt;Password from the vCenter credentials.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;ol start=&#34;8&#34;&gt;
@@ -1205,19 +1262,6 @@ These values can be obtained using base64 encoding as described in the following
 &lt;p&gt;Starting with CSI PowerMax v1.7.0, &lt;code&gt;dell-csi-helm-installer&lt;/code&gt; will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the &lt;em&gt;samples/volumesnapshotclass&lt;/em&gt; folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.&lt;/p&gt;
 &lt;h2 id=&#34;sample-values-file&#34;&gt;Sample values file&lt;/h2&gt;
 &lt;p&gt;The following sections have useful snippets from &lt;code&gt;values.yaml&lt;/code&gt; file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes&lt;/p&gt;
-&lt;h3 id=&#34;csi-powermax-driver-without-proxy&#34;&gt;CSI PowerMax driver without Proxy&lt;/h3&gt;
-&lt;p&gt;In this mode, the CSI PowerMax driver can only connect to a single &lt;code&gt;Unisphere&lt;/code&gt; server. So, you just specify a list of storage arrays
-and the address of the &lt;code&gt;Unisphere&lt;/code&gt; server&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;global&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;defaultCredentialsSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;powermax-creds&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageArrays&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageArrayId&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;000000000001&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageArrayId&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;000000000002&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;managementServers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;https://unisphere-address:8443&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;Note: If you provide multiple endpoints in the list of management servers, the installer will only use the first server in the list&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;h3 id=&#34;csi-powermax-driver-with-proxy-in-linked-mode&#34;&gt;CSI PowerMax driver with Proxy in Linked mode&lt;/h3&gt;
 &lt;p&gt;In this mode, the CSI PowerMax ReverseProxy acts as a &lt;code&gt;passthrough&lt;/code&gt; for the RESTAPI calls and only provides limited functionality
 such as rate limiting, backup Unisphere server. The CSI PowerMax driver is still responsible for the authentication with the Unisphere server.&lt;/p&gt;
@@ -1237,13 +1281,12 @@ it will be considered as the backup Unisphere&amp;rsquo;s endpoint.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;maxActiveWrite&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;maxOutStandingRead&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;50&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;maxOutStandingWrite&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;50&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;https://backup-unisphere:8443&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#Optional&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;endpoint&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;https://backup-unisphere:8443 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# &amp;#34;csireverseproxy&amp;#34; refers to the subchart csireverseproxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csireverseproxy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Set enabled to true if you want to use proxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dellemc/csipowermax-reverseproxy:v2.3.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dellemc/csipowermax-reverseproxy:v2.4.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tlsSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csirevproxy-tls-secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;deployAsSidecar&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2222&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -1286,9 +1329,7 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# &amp;#34;csireverseproxy&amp;#34; refers to the subchart csireverseproxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csireverseproxy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Set enabled to true if you want to use proxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dellemc/csipowermax-reverseproxy:v2.3.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dellemc/csipowermax-reverseproxy:v2.4.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tlsSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csirevproxy-tls-secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;deployAsSidecar&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2222&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -1329,6 +1370,7 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 &lt;li&gt;Install Kubernetes or OpenShift (see &lt;a href=&#34;../../../../csidriver/#features-and-capabilities&#34;&gt;supported versions&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;Install Helm 3&lt;/li&gt;
 &lt;li&gt;Mount propagation is enabled on container runtime that is being used&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nfs-utils&lt;/code&gt; package must be installed on nodes that will mount volumes&lt;/li&gt;
 &lt;li&gt;If using Snapshot feature, satisfy all Volume Snapshot requirements&lt;/li&gt;
 &lt;li&gt;If enabling CSM for Authorization, please refer to the &lt;a href=&#34;../../../../authorization/deployment/&#34;&gt;Authorization deployment steps&lt;/a&gt; first&lt;/li&gt;
 &lt;li&gt;If enabling CSM for Replication, please refer to the &lt;a href=&#34;../../../../replication/deployment/&#34;&gt;Replication deployment steps&lt;/a&gt; first&lt;/li&gt;
@@ -1345,14 +1387,14 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:&lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd&#34;&gt;v6.0.x&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:&lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd&#34;&gt;v6.1.x&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
 &lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;A common snapshot controller&lt;/li&gt;
 &lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller&#34;&gt;v6.0.x&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller&#34;&gt;v6.1.x&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The manifests available on GitHub install the snapshotter image:
@@ -1362,34 +1404,8 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 &lt;/li&gt;
 &lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h2&gt;
-&lt;p&gt;Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
-To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
-health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
-volume stats value under node should be set to true.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;healthMonitor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# enabled: Enable/Disable health monitor of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   true: enable checking of health condition of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   false: disable checking of health condition of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: None&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# healthMonitorInterval: Interval of monitoring volume health condition&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: Number followed by unit (s,m,h)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Examples: 60s, 5m, 1h&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: 60s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;interval&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;60s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;healthMonitor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   true: enable checking of health condition of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   false: disable checking of health condition of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: None&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
-&lt;p&gt;You can install CRDs and the default snapshot controller by running the following commands:&lt;/p&gt;
+&lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
+&lt;p&gt;You can install CRDs and the default snapshot controller by running these commands:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git checkout release-&amp;lt;your-version&amp;gt;
@@ -1397,9 +1413,36 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It is recommended to use 6.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
+&lt;li&gt;It is recommended to use 6.1.x version of snapshotter/snapshot-controller.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;optional-replication-feature-requirements&#34;&gt;(Optional) Replication feature Requirements&lt;/h3&gt;
+&lt;h3 id=&#34;optional-volume-health-monitoring&#34;&gt;(Optional) Volume Health Monitoring&lt;/h3&gt;
+&lt;p&gt;Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.&lt;/p&gt;
+&lt;p&gt;If enabled capacity metrics (used &amp;amp; free capacity, used &amp;amp; free inodes) for PowerScale PV will be expose in Kubernetes metrics API.&lt;/p&gt;
+&lt;p&gt;To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
+health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
+volume stats value under node should be set to true.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;healthMonitor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# enabled: Enable/Disable health monitor of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   true: enable checking of health condition of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   false: disable checking of health condition of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: None&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# healthMonitorInterval: Interval of monitoring volume health condition&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: Number followed by unit (s,m,h)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Examples: 60s, 5m, 1h&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: 60s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;interval&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;60s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;healthMonitor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   true: enable checking of health condition of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   false: disable checking of health condition of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: None&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;optional-replication-feature-requirements&#34;&gt;(Optional) Replication feature Requirements&lt;/h3&gt;
 &lt;p&gt;Applicable only if you decided to enable the Replication feature in &lt;code&gt;values.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -1410,7 +1453,7 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.4.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.5.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created the namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace isilon&lt;/code&gt; to create a new one. The use of &amp;ldquo;isilon&amp;rdquo;  as the namespace is just an example. You can choose any name for the namespace.&lt;/p&gt;
@@ -1435,6 +1478,12 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;driverRepository&lt;/td&gt;
+&lt;td&gt;Set to give the repository containing the driver image (used as part of the image name).&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;dellemc&lt;/td&gt;
+&lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;logLevel&lt;/td&gt;
 &lt;td&gt;CSI driver log level&lt;/td&gt;
@@ -1652,6 +1701,12 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;td&gt;/ifs/data/csi&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;ignoreUnresolvableHosts&lt;/td&gt;
+&lt;td&gt;Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn&amp;rsquo;t exist anymore.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;noProbeOnStart&lt;/td&gt;
 &lt;td&gt;Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
@@ -1736,6 +1791,7 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;li&gt;ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a &amp;ldquo;Pending&amp;rdquo; state till new nodes are available for scheduling. The installer exits with a WARNING on the same.&lt;/li&gt;
 &lt;li&gt;Whenever the &lt;em&gt;certSecretCount&lt;/em&gt; parameter changes in &lt;em&gt;my-isilon-setting.yaml&lt;/em&gt; user needs to reinstall the driver.&lt;/li&gt;
 &lt;li&gt;In order to enable authorization, there should be an authorization proxy server already installed.&lt;/li&gt;
+&lt;li&gt;If you are using a custom image, check the &lt;em&gt;version&lt;/em&gt; and &lt;em&gt;driverRepository&lt;/em&gt; fields in &lt;em&gt;my-isilon-setting.yaml&lt;/em&gt; to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: &lt;driverRepository&gt;/csi-isilon:v&lt;version&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -1793,6 +1849,12 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;td&gt;default value from values.yaml&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;ignoreUnresolvableHosts&lt;/td&gt;
+&lt;td&gt;Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn&amp;rsquo;t exist anymore.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;default value from values.yaml&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;endpointPort&lt;/td&gt;
 &lt;td&gt;Specify the HTTPs port number of the PowerScale OneFS API server&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
@@ -1812,6 +1874,9 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;user-privileges&#34;&gt;User privileges&lt;/h3&gt;
 &lt;p&gt;The username specified in &lt;em&gt;secret.yaml&lt;/em&gt; must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1849,10 +1914,12 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;td&gt;ISI_PRIV_IFS_BACKUP&lt;/td&gt;
 &lt;td&gt;Read Only&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ISI_PRIV_SYNCIQ&lt;/td&gt;
+&lt;td&gt;Read Write&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
 &lt;p&gt;Create isilon-creds secret using the following command:
 &lt;br/&gt; &lt;code&gt;kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
@@ -2023,7 +2090,7 @@ PowerStore.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd&#34;&gt;v6.0.x&lt;/a&gt; for the installation.&lt;/p&gt;
+&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd&#34;&gt;v6.1.x&lt;/a&gt; for the installation.&lt;/p&gt;
 &lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
 &lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
 &lt;ul&gt;
@@ -2031,7 +2098,7 @@ PowerStore.&lt;/p&gt;
 &lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available:
-Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller&#34;&gt;v6.0.x&lt;/a&gt; for the installation.&lt;/p&gt;
+Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller&#34;&gt;v6.1.x&lt;/a&gt; for the installation.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The manifests available on GitHub install the snapshotter image:
@@ -2050,7 +2117,7 @@ Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It is recommended to use 6.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
+&lt;li&gt;It is recommended to use 6.1.x version of snapshotter/snapshot-controller.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h3&gt;
 &lt;p&gt;Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
@@ -2065,12 +2132,11 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   false: disable checking of health condition of CSI volumes&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: None&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# volumeHealthMonitorInterval: Interval of monitoring volume health condition&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# interval: Interval of monitoring volume health condition&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: Number followed by unit (s,m,h)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Examples: 60s, 5m, 1h&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Default value: 60s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeHealthMonitorInterval&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;60s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;interval&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;60s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;healthMonitor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -2091,7 +2157,7 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.4.0 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.5.1 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Ensure that you have created namespace where you want to install the driver. You can run &lt;code&gt;kubectl create namespace csi-powerstore&lt;/code&gt; to create a new one. &amp;ldquo;csi-powerstore&amp;rdquo; is just an example. You can choose any name for the namespace.
@@ -2217,7 +2283,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;td&gt;false&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;controller.healthMonitor.volumeHealthMonitorInterval&lt;/td&gt;
+&lt;td&gt;controller.healthMonitor.interval&lt;/td&gt;
 &lt;td&gt;Interval of monitoring volume health condition&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;60s&lt;/td&gt;
@@ -2293,6 +2359,18 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;td&gt;Allows the controller to round off filesystem to 3Gi which is the minimum supported value&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;storageCapacity.enabled&lt;/td&gt;
+&lt;td&gt;Enable/Disable storage capacity tracking&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;storageCapacity.pollInterval&lt;/td&gt;
+&lt;td&gt;Configure how often the driver checks for changed capacity&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;5m&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2446,7 +2524,7 @@ Unity XT.&lt;/p&gt;
 &lt;p&gt;Install CSI Driver for Unity XT using this procedure.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Before you begin&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;You must have the downloaded files, including the Helm chart from the source &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;git repository&lt;/a&gt; with the command &lt;code&gt;git clone -b v2.4.0 https://github.com/dell/csi-unity.git&lt;/code&gt;, as a pre-requisite for running this procedure.&lt;/li&gt;
+&lt;li&gt;You must have the downloaded files, including the Helm chart from the source &lt;a href=&#34;https://github.com/dell/csi-unity&#34;&gt;git repository&lt;/a&gt; with the command &lt;code&gt;git clone -b v2.5.0 https://github.com/dell/csi-unity.git&lt;/code&gt;, as a pre-requisite for running this procedure.&lt;/li&gt;
 &lt;li&gt;In the top-level dell-csi-helm-installer directory, there should be two scripts, &lt;code&gt;csi-install.sh&lt;/code&gt; and &lt;code&gt;csi-uninstall.sh&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Ensure &lt;em&gt;unity&lt;/em&gt; namespace exists in Kubernetes cluster. Use the &lt;code&gt;kubectl create namespace unity&lt;/code&gt; command to create the namespace if the namespace is not present.&lt;/li&gt;
 &lt;/ul&gt;
@@ -2459,7 +2537,7 @@ Unity XT.&lt;/p&gt;
 &lt;li&gt;ArrayId corresponds to the serial number of Unity XT array.&lt;/li&gt;
 &lt;li&gt;Unity XT Array username must have role as Storage Administrator to be able to perform CRUD operations.&lt;/li&gt;
 &lt;li&gt;If the user is using complex K8s version like &amp;ldquo;v1.21.3-mirantis-1&amp;rdquo;, use below kubeVersion check in helm/csi-unity/Chart.yaml file.
-kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.25.0-0&amp;rdquo;&lt;/li&gt;
+kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.26.0-0&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -2726,7 +2804,7 @@ The following table lists driver configuration parameters for multiple storage a
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;storageArrayList.isDefault&lt;/td&gt;
-&lt;td&gt;An array having isDefault=true or isDefaultArray=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list.&lt;/td&gt;
+&lt;td&gt;An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list.&lt;/td&gt;
 &lt;td&gt;true&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -2780,14 +2858,14 @@ The driver will continue to use previous values in case of an error found in the
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster&lt;/p&gt;
 &lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd&#34;&gt;v6.0.x&lt;/a&gt; for the installation.&lt;/p&gt;
+&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd&#34;&gt;v6.1.x&lt;/a&gt; for the installation.&lt;/p&gt;
 &lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
 &lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;A common snapshot controller&lt;/li&gt;
 &lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller&#34;&gt;v6.0.x&lt;/a&gt; for the installation.&lt;/p&gt;
+&lt;p&gt;Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller&#34;&gt;v6.1.x&lt;/a&gt; for the installation.&lt;/p&gt;
 &lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
 &lt;p&gt;You can install CRDs and default snapshot controller by running following commands:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
@@ -2797,7 +2875,7 @@ The driver will continue to use previous values in case of an error found in the
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It is recommended to use 6.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
+&lt;li&gt;It is recommended to use 6.1.x version of snapshotter/snapshot-controller.&lt;/li&gt;
 &lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -2805,7 +2883,7 @@ The driver will continue to use previous values in case of an error found in the
 &lt;p&gt;Run the &lt;code&gt;./csi-install.sh --namespace unity --values ./myvalues.yaml&lt;/code&gt; command to proceed with the installation using bash script.&lt;/p&gt;
 &lt;p&gt;A successful installation must display messages that look similar to the following samples:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;------------------------------------------------------
-&amp;gt; Installing CSI Driver: csi-unity on 1.22
+&amp;gt; Installing CSI Driver: csi-unity on 1.25
 ------------------------------------------------------
 ------------------------------------------------------
 &amp;gt; Checking to see if CSI Driver is already installed
@@ -2813,52 +2891,52 @@ The driver will continue to use previous values in case of an error found in the
 ------------------------------------------------------
 &amp;gt; Verifying Kubernetes and driver configuration
 ------------------------------------------------------
-|- Kubernetes Version: 1.22
+|- Kubernetes Version: 1.25
 |
 |- Driver: csi-unity                                                
 |
 |- Verifying Kubernetes version                                     
+  |
+  |--&amp;gt; Verifying minimum Kubernetes version                         Success
+  |
+  |--&amp;gt; Verifying maximum Kubernetes version                         Success
 |
-|--&amp;gt; Verifying minimum Kubernetes version                         Success
+|- Verifying that required namespaces have been created             Success
 |
-|--&amp;gt; Verifying maximum Kubernetes version                         Success
+|- Verifying that required secrets have been created                Success
 |
-|- Verifying that required namespaces have been created           Success
-|
-|- Verifying that required secrets have been created              Success
-|
-|- Verifying that optional secrets have been created              Success
-|
-|- Verifying alpha snapshot resources                               
-|
-|--&amp;gt; Verifying that alpha snapshot CRDs are not installed         Success
+|- Verifying that optional secrets have been created                Success
+  |
+  |- Verifying alpha snapshot resources
+  |
+  |--&amp;gt; Verifying that alpha snapshot CRDs are not installed         Success
 |
 |- Verifying sshpass installation..                                 |
-|- Verifying iSCSI installation                                     
+|- Verifying iSCSI installation
 Enter the root password of 10.**.**.**:
 
 Enter the root password of 10.**.**.**:
 Success
 |
-|- Verifying snapshot support                                       
+|- Verifying snapshot support
+  |
+  |--&amp;gt; Verifying that snapshot CRDs are available                   Success
+  |
+  |--&amp;gt; Verifying that the snapshot controller is available          Success
 |
-|--&amp;gt; Verifying that snapshot CRDs are available                   Success
+|- Verifying helm version                                           Success
 |
-|--&amp;gt; Verifying that the snapshot controller is available          Success
-|
-|- Verifying helm version                                         Success
-|
-|- Verifying helm values version                                  Success
+|- Verifying helm values version                                    Success
 
 ------------------------------------------------------
 &amp;gt; Verification Complete - Success
 ------------------------------------------------------
 |
-|- Installing Driver                                              Success
-|
-|--&amp;gt; Waiting for Deployment unity-controller to be ready          Success
-|
-|--&amp;gt; Waiting for DaemonSet unity-node to be ready                 Success
+|- Installing Driver                                                Success
+  |
+  |--&amp;gt; Waiting for Deployment unity-controller to be ready          Success
+  |
+  |--&amp;gt; Waiting for DaemonSet unity-node to be ready                 Success
 ------------------------------------------------------
 &amp;gt; Operation complete
 ------------------------------------------------------

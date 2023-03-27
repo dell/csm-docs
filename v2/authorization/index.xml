@@ -233,6 +233,20 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
     </item>
     
     <item>
+      <title>V2: Backup and Restore</title>
+      <link>https://dell.github.io/csm-docs/v2/authorization/backup-and-restore/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/authorization/backup-and-restore/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Backup and Restore information for CSM Authorization can be found in this section.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>V2: Deployment</title>
       <link>https://dell.github.io/csm-docs/v2/authorization/deployment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -521,6 +535,8 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl role get [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-5&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for get
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-4&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-5&#34;&gt;Output&lt;/h5&gt;
@@ -544,6 +560,8 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl role list [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-6&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for list
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-5&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-6&#34;&gt;Output&lt;/h5&gt;
@@ -582,6 +600,8 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-7&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --from-file string   role data from a file
       --role strings       role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
   -h, --help               help for create
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -603,6 +623,8 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-8&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --from-file string   role data from a file
       --role strings       role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
   -h, --help               help for update
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-7&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
@@ -619,6 +641,8 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl role delete &amp;lt;role-name&amp;gt; [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-9&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for delete
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-8&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-9&#34;&gt;Output&lt;/h5&gt;
@@ -644,8 +668,9 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl rolebinding create [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-11&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
-  -r, --role string     Role name
-  -t, --tenant string   Tenant name
+  -r, --role string       Role name
+  -t, --tenant string     Tenant name
+      --insecure boolean  insecure skip verify flag for Helm deployment
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-10&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;#34;localhost:443&amp;#34;)
       --config string   config file (default is $HOME/.karavictl.yaml)
@@ -660,8 +685,9 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl rolebinding delete [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-12&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
-  -r, --role string     Role name
-  -t, --tenant string   Tenant name
+  -r, --role string      Role name
+  -t, --tenant string    Tenant name
+      --insecure boolean insecure skip verify flag for Helm deployment
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-11&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;#34;localhost:443&amp;#34;)
       --config string   config file (default is $HOME/.karavictl.yaml)
@@ -690,6 +716,8 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help               help for get
   -s, --system-id string   System identifier (default &amp;#34;systemid&amp;#34;)
   -t, --type string        Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-13&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-14&#34;&gt;Output&lt;/h5&gt;
@@ -708,6 +736,8 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl storage list [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-15&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for list
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-14&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-15&#34;&gt;Output&lt;/h5&gt;
@@ -734,15 +764,17 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-16&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -e, --endpoint string    Endpoint of REST API gateway
   -h, --help               help for create
-  -i, --insecure           Insecure skip verify
-  -p, --password string        Password (default &amp;#34;****&amp;#34;)
+  -a, --array-insecure     Array insecure skip verify
+  -p, --password string    Password (default &amp;#34;****&amp;#34;)
   -s, --system-id string   System identifier (default &amp;#34;systemid&amp;#34;)
   -t, --type string        Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
   -u, --user string        Username (default &amp;#34;admin&amp;#34;)
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-15&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-16&#34;&gt;Output&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl storage create --endpoint https://1.1.1.1 --insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-storage-update&#34;&gt;karavictl storage update&lt;/h3&gt;
@@ -753,15 +785,17 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-17&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -e, --endpoint string    Endpoint of REST API gateway
   -h, --help               help for update
-  -i, --insecure           Insecure skip verify
+  -a, --array-insecure     Array insecure skip verify
   -p, --pass string        Password (default &amp;#34;****&amp;#34;)
   -s, --system-id string   System identifier (default &amp;#34;systemid&amp;#34;)
   -t, --type string        Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
   -u, --user string        Username (default &amp;#34;admin&amp;#34;)
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-16&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-17&#34;&gt;Output&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl storage update --endpoint https://1.1.1.1 --insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the update occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-storage-delete&#34;&gt;karavictl storage delete&lt;/h3&gt;
@@ -773,6 +807,8 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help               help for delete
   -s, --system-id string   System identifier (default &amp;#34;systemid&amp;#34;)
   -t, --type string        Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-17&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-18&#34;&gt;Output&lt;/h5&gt;
@@ -799,6 +835,7 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-20&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
   -n, --name string   Tenant name
+      --insecure      insecure skip verify flag for Helm deployment
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-19&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;#34;localhost:443&amp;#34;)
       --config string   config file (default is $HOME/.karavictl.yaml)
@@ -814,6 +851,7 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-21&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
   -n, --name string   Tenant name
+      --insecure      insecure skip verify flag for Helm deployment
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-20&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;#34;localhost:443&amp;#34;)
       --config string   config file (default is $HOME/.karavictl.yaml)
@@ -832,6 +870,7 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl tenant list [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-22&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
+      --insecure      insecure skip verify flag for Helm deployment
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-21&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;#34;localhost:443&amp;#34;)
       --config string   config file (default is $HOME/.karavictl.yaml)
@@ -854,6 +893,7 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-23&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
   -n, --name string   Tenant name
+      --insecure      insecure skip verify flag for Helm deployment
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-22&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;#34;localhost:443&amp;#34;)
       --config string   config file (default is $HOME/.karavictl.yaml)
@@ -869,6 +909,7 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-24&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
   -n, --name string   Tenant name
+      --insecure      insecure skip verify flag for Helm deployment
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-23&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;#34;localhost:443&amp;#34;)
       --config string   config file (default is $HOME/.karavictl.yaml)
@@ -1014,19 +1055,24 @@ kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart daemonSet/vxflexos-n
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-authorization-130&#34;&gt;Release Notes - CSM Authorization 1.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-authorization-140&#34;&gt;Release Notes - CSM Authorization 1.4.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/261&#34;&gt;CSM-Authorization can deployed with helm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;CSM 1.4 Release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/350&#34;&gt;#350&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM Authorization insecure related entities are renamed to skipCertificateValidation. (&lt;a href=&#34;https://github.com/dell/csm/issues/368&#34;&gt;#368&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;h3 id=&#34;bugs&#34;&gt;Bugs&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/313&#34;&gt;Authorization proxy server install fails due to missing container-selinux&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/277&#34;&gt;Permissions on karavictl and k3s binaries are incorrect&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/317&#34;&gt;Authorization NGINX Ingress Controller fails to install on OpenShift&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;PowerScale volumes unable to be created with Helm deployment of CSM Authorization. (&lt;a href=&#34;https://github.com/dell/csm/issues/419&#34;&gt;#419&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Authorization CLI documentation does not mention &amp;ndash;array-insecure flag when creating or updating storage systems. (&lt;a href=&#34;https://github.com/dell/csm/issues/416&#34;&gt;#416&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Authorization: Add documentation for backing up and restoring redis data. (&lt;a href=&#34;https://github.com/dell/csm/issues/410&#34;&gt;#410&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM Authorization doesn&amp;rsquo;t recognize storage with capital letters. (&lt;a href=&#34;https://github.com/dell/csm/issues/398&#34;&gt;#398&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Update Authorization documentation with supported versions of k3s-selinux and container-selinux packages. (&lt;a href=&#34;https://github.com/dell/csm/issues/393&#34;&gt;#393&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Using Authorization without dependency on jq. (&lt;a href=&#34;https://github.com/dell/csm/issues/390&#34;&gt;#390&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Authorization Documentation Improvement. (&lt;a href=&#34;https://github.com/dell/csm/issues/384&#34;&gt;#384&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Unit test failing for csm-authorization. (&lt;a href=&#34;https://github.com/dell/csm/issues/382&#34;&gt;#382&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Karavictl has incorrect permissions after download. (&lt;a href=&#34;https://github.com/dell/csm/issues/360&#34;&gt;#360&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Helm deployment of Authorization denies a valid request path from csi-powerflex. (&lt;a href=&#34;https://github.com/dell/csm/issues/353&#34;&gt;#353&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>

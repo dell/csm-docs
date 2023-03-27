@@ -352,7 +352,10 @@ extra parameters related to metro replication. A &lt;code&gt;StorageClass&lt;/co
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/RemoteServiceLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Bronze&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;reclaimPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Delete&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeBindingMode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Immediate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;snapshots-on-srdf-metro-volumes&#34;&gt;Snapshots on SRDF Metro volumes&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: Different namespaces can share the same RDF group for creating volumes.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;snapshots-on-srdf-metro-volumes&#34;&gt;Snapshots on SRDF Metro volumes&lt;/h3&gt;
 &lt;p&gt;A snapshot can be created on either of the volumes in the metro volume pair depending on the parameters in the &lt;code&gt;VolumeSnapshotClass&lt;/code&gt;.
 The snapshots are by default created on the volumes on the R1 side of the SRDF metro pair, but if a Symmetrix id is specified in the &lt;code&gt;VolumeSnapshotClass&lt;/code&gt; parameters, the driver creates the snapshot on the specified array; the specified array can either be the R1 or the R2 array. A &lt;code&gt;VolumeSnapshotClass&lt;/code&gt; with symmetrix id specified in parameters may look as follows:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;snapshot.storage.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -366,6 +369,125 @@ The snapshots are by default created on the volumes on the R1 side of the SRDF m
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;Note: Restoring snapshots to a metro volume is currently not supported.&lt;/p&gt;
 &lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V3: Migrating Volumes</title>
+      <link>https://dell.github.io/csm-docs/v3/replication/migrating-volumes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/replication/migrating-volumes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;You can migrate existing pre-provisioned volumes to another storage class by using volume migration feature.&lt;/p&gt;
+&lt;p&gt;Currently two versions of migration are supported:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To replicated storage class from NON replicated one&lt;/li&gt;
+&lt;li&gt;To NON replicated storage class from replicated one&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Original volume is from the one of currently supported CSI drivers (see Support Matrix)&lt;/li&gt;
+&lt;li&gt;Migrated sidecar is installed alongside with the driver, you can enable it in your &lt;code&gt;myvalues.yaml&lt;/code&gt; file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;migration&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;support-matrix&#34;&gt;Support Matrix&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Migration Type&lt;/th&gt;
+&lt;th&gt;PowerMax&lt;/th&gt;
+&lt;th&gt;PowerStore&lt;/th&gt;
+&lt;th&gt;PowerScale&lt;/th&gt;
+&lt;th&gt;PowerFlex&lt;/th&gt;
+&lt;th&gt;Unity&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;NON_REPL_TO_REPL&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;REPL_TO_NON_REPL&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;basic-usage&#34;&gt;Basic Usage&lt;/h2&gt;
+&lt;p&gt;To trigger migration procedure, you need to patch existing PersistentVolume with migration annotation (by default &lt;code&gt;migration.storage.dell.com/migrate-to&lt;/code&gt;) and in value of said annotation specify StorageClass name you want to migrate to.&lt;/p&gt;
+&lt;p&gt;For example, if we have PV named &lt;code&gt;test-pv&lt;/code&gt; already provisioned and we want to migrate it to replicated storage class named &lt;code&gt;powermax-replication&lt;/code&gt; we can run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch pv test-pv -p &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;metadata&amp;#34;: {&amp;#34;annotations&amp;#34;:{&amp;#34;migration.storage.dell.com/migrate-to&amp;#34;:&amp;#34;powermax-replication&amp;#34;}}}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Patching PV resource will trigger migration sidecar that will call &lt;code&gt;VolumeMigrate&lt;/code&gt; call from the CSI driver. After migration is finished new PersistentVolume will be created in cluster with name of original PV plus &lt;code&gt;-to-&amp;lt;sc-name&amp;gt;&lt;/code&gt; appended to it.&lt;/p&gt;
+&lt;p&gt;In our example, we will see this when running &lt;code&gt;kubectl get pv&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME                                   CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                       STORAGECLASS                REASON   AGE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;test-pv                                1Gi        RWO            Retain           Bound       default/test-pvc            powermax                             5m
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;test-pv-to-powermax-replication        1Gi        RWO            Retain           Available                               powermax-replication                 10s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When Volume Migration is finished source PV will be updated with EVENT that denotes that this has taken place.&lt;/p&gt;
+&lt;p&gt;Newly created PV (&lt;code&gt;test-pv-to-powermax-replication&lt;/code&gt; in our example) is available for consumption via static provisioning by any PVC that will request it.&lt;/p&gt;
+&lt;h2 id=&#34;namespace-considerations-for-replication&#34;&gt;Namespace Considerations For Replication&lt;/h2&gt;
+&lt;p&gt;Replication Groups in CSM Replication can be made namespaced, meaning that one SC will generate one Replication Group per namespace. This is also important when migrating volumes from/to replcation storage class.&lt;/p&gt;
+&lt;p&gt;When just setting one annotation &lt;code&gt;migration.storage.dell.com/migrate-to&lt;/code&gt; migrated volume is assumed to be used in same namespace as original PV and it&amp;rsquo;s PVC. In the case of being migrated to replication enabled storage class will be inserted in namespaced Replication Group inside PVC namespace.&lt;/p&gt;
+&lt;p&gt;However, you can define in which namespace migrated volume must be used after migration by setting &lt;code&gt;migration.storage.dell.com/namespace&lt;/code&gt;. You can use the same annotation in a scenario where you only have a statically provisioned PV, and you don&amp;rsquo;t have it bound to any PVC, and you want to migrate it to another storage class.&lt;/p&gt;
+&lt;h2 id=&#34;non-disruptive-migration&#34;&gt;Non Disruptive Migration&lt;/h2&gt;
+&lt;p&gt;You can migrate your PVs without disrupting workflows if you use StatefulSet with multiple replicas to deploy application.&lt;/p&gt;
+&lt;p&gt;Instruction (you can also use &lt;code&gt;repctl&lt;/code&gt; for convenience):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Find every PV for your StatefulSet and patch it with &lt;code&gt;migration.storage.dell.com/migrate-to&lt;/code&gt; annotation that points to new storage class&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch pv &amp;lt;pv-name&amp;gt; -p &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;metadata&amp;#34;: {&amp;#34;annotations&amp;#34;:{&amp;#34;migration.storage.dell.com/migrate-to&amp;#34;:&amp;#34;powermax-replication&amp;#34;}}}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Ensure you have a copy of StatefulSet manifest somewhere ready, we will need it later. If you don&amp;rsquo;t have it, you can get it from cluster&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get sts &amp;lt;sts-name&amp;gt; -n &amp;lt;ns-name&amp;gt; -o yaml &amp;gt; sts-manifest.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;To not disrupt any workflows we will need to delete StatefulSet without deleting any pods, to do so you can use &lt;code&gt;--cascade&lt;/code&gt; flag&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete sts &amp;lt;sts-name&amp;gt; -n &amp;lt;ns-name&amp;gt; --cascade&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;orphan
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Change StorageClass in your manifest of StatefulSet to point to a new storage class, then apply it to the cluster&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply -f sts-manifest.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;Find a PVC and pod of one replica of StatefulSet delete PVCs first and Pod after it&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete pvc &amp;lt;pvc-name&amp;gt; -n &amp;lt;ns-name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete pod &amp;lt;pod-name&amp;gt; -n &amp;lt;ns-name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Wait for new pod to be created by StatefulSet, it should create new PVC that will use migrated PV.&lt;/p&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;Repeat step 5 until all replicas use new PVCs&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;using-repctl&#34;&gt;Using repctl&lt;/h2&gt;
+&lt;p&gt;You can use &lt;code&gt;repctl&lt;/code&gt; CLI tool to help you simplify running migration specific commands.&lt;/p&gt;
+&lt;h3 id=&#34;single-pv&#34;&gt;Single PV&lt;/h3&gt;
+&lt;p&gt;In most its basic form repctl can do the same as kubectl, for example, migrating single PV from our example will look like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl migrate pv test-pv --to-sc powermax-replication
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; will go and patch the resource for you. You can also provide &lt;code&gt;--wait&lt;/code&gt; flag for it to wait until migrated PV is created in cluster.
+&lt;code&gt;repctl&lt;/code&gt; also can set &lt;code&gt;migration.storage.dell.com/namespace&lt;/code&gt; for you if you provide &lt;code&gt;--target-ns&lt;/code&gt; flag.&lt;/p&gt;
+&lt;p&gt;Aside from just migrating single PVs repctl can migrate PVCs and StatefulSets.&lt;/p&gt;
+&lt;h3 id=&#34;pvc&#34;&gt;PVC&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can find PV for any given PVC for you and patch it.
+This could be done with similar command to single PV migration:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl migrate pvc test-pvc --to-sc powermax-replication -n default
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Notice that we provide original namespace (&lt;code&gt;default&lt;/code&gt; in our example) for this command because PVCs are namespaced resource and we need namespace to be able to find it.&lt;/p&gt;
+&lt;h3 id=&#34;statefulset&#34;&gt;StatefulSet&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can help you migrate entire StatefulSet by automating migration process.&lt;/p&gt;
+&lt;p&gt;You can use this command to do so:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl migrate sts test-sts --to-sc powermax-replication -n default
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;By default, it will find every Pod, PVC and PV for provided StatefulSet and patch every PV with annotation.&lt;/p&gt;
+&lt;p&gt;You can also optionally provide &lt;code&gt;--ndu&lt;/code&gt; flag, with this flag provided repctl will do steps provided in &lt;a href=&#34;#non-disruptive-migration&#34;&gt;Non Disruptive Migration&lt;/a&gt; section automatically.&lt;/p&gt;
 
       </description>
     </item>
@@ -676,6 +798,57 @@ Name of StorageClass resource that created as &amp;ldquo;target&amp;rdquo; will 
 &lt;tr&gt;
 &lt;td&gt;PV and/or PVCs are not being created at the source/target cluster. If you check the controller&amp;rsquo;s logs you can see &lt;code&gt;no such host&lt;/code&gt; errors&lt;/td&gt;
 &lt;td&gt;Make sure cluster-1&amp;rsquo;s API is pingable from cluster-2 and vice versa. If one of your clusters is OpenShift located in a private network and needs records in /etc/hosts - &lt;code&gt;exec&lt;/code&gt; into controller pod and modify &lt;code&gt;/etc/hosts&lt;/code&gt; manually.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V3: Release notes</title>
+      <link>https://dell.github.io/csm-docs/v3/replication/release/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/replication/release/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csm-replication-130&#34;&gt;Release Notes - CSM Replication 1.3.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for Kubernetes 1.24&lt;/li&gt;
+&lt;li&gt;Added support for OpenShift 4.10&lt;/li&gt;
+&lt;li&gt;Added volume upgrade/downgrade functionality for replication volumes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed panic occuring when encountering PVC with empty StorageClass&lt;/li&gt;
+&lt;li&gt;PV and RG retention policy checks are no longer case sensitive&lt;/li&gt;
+&lt;li&gt;RG will now display EMPTY link state when no PV found&lt;/li&gt;
+&lt;li&gt;[&lt;code&gt;PowerScale&lt;/code&gt;] Running &lt;code&gt;reprotect&lt;/code&gt; action on source cluster after failover no longer puts RG into UNKNOWN state&lt;/li&gt;
+&lt;li&gt;[&lt;code&gt;PowerScale&lt;/code&gt;] Deleting RG will break replication link before trying to delete group on array&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Github ID&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/514&#34;&gt;514&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; When creating a replicated PV in PowerScale, the replicated PV&amp;rsquo;s AzServiceIP property has the target PowerScale endpoint instead of the one defined in the target Storage class.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/515&#34;&gt;515&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; If you failover with an application still running and the volume mounted on the target site, then we cannot mount the PVC due to : &amp;ldquo;mount.nfs: Stale file handle&amp;rdquo;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/518&#34;&gt;518&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; On CSM for Replication with PowerScale, after a repctl failover to a target cluster, the source directory has been removed from the PowerScale. The PersistentVolume Object is still present in Kubernetes.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

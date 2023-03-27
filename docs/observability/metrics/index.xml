@@ -120,6 +120,165 @@
     </item>
     
     <item>
+      <title>Docs: PowerMax Metrics</title>
+      <link>https://dell.github.io/csm-docs/docs/observability/metrics/powermax/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/observability/metrics/powermax/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section outlines the metrics collected by the Container Storage Modules (CSM) Observability module for PowerMax. The &lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powermax&#34;&gt;Grafana reference dashboards&lt;/a&gt; for PowerMax metrics can be uploaded to your Grafana instance.&lt;/p&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Unisphere user credentials must have PERF_MONITOR permissions.&lt;/li&gt;
+&lt;li&gt;Ensure time synchronization for Kubernetes cluster and PowerMax Unisphere by using Network Time Protocol (NTP).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;io-performance-metrics&#34;&gt;I/O Performance Metrics&lt;/h2&gt;
+&lt;p&gt;Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by storage group and volume.&lt;/p&gt;
+&lt;p&gt;To disable these metrics, set the &lt;code&gt;performanceMetricsEnabled&lt;/code&gt; field under &lt;code&gt;karaviMetricsPowermax&lt;/code&gt; to false in helm/values.yaml.&lt;/p&gt;
+&lt;p&gt;The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_read_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The storage group read bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_write_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The storage group write bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_read_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete read operations within PowerMax system by the storage group&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_write_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete write operations within PowerMax system by the storage group&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_read_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of read operations performed by a storage group (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_write_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of write operations performed by a storage group (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_average_io_size_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The storage group average IO sizes (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_volume_read_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The volume read bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_volume_write_bw_megabytes_per_second&lt;/td&gt;
+&lt;td&gt;The volume write bandwidth (MB/s)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_volume_read_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete read operations to a volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_volume_write_latency_milliseconds&lt;/td&gt;
+&lt;td&gt;The time (in ms) to complete write operations to a volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_volume_read_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of read operations performed against a volume (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_volume_write_iops_per_second&lt;/td&gt;
+&lt;td&gt;The number of write operations performed against a volume (per second)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;storage-capacity-metrics&#34;&gt;Storage Capacity Metrics&lt;/h2&gt;
+&lt;p&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/p&gt;
+&lt;p&gt;To disable these metrics, set the &lt;code&gt;capacityMetricsEnabled&lt;/code&gt; field under &lt;code&gt;karaviMetricsPowermax&lt;/code&gt; to false in helm/values.yaml.&lt;/p&gt;
+&lt;p&gt;The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the &lt;a href=&#34;../../&#34;&gt;CSM for Observability&lt;/a&gt; for more information on deploying and configuring the OpenTelemetry collector.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_class_total_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Total capacity for a given storage class (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_class_used_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Total used capacity for a given storage class (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_class_used_capacity_percentage&lt;/td&gt;
+&lt;td&gt;Used capacity of a storage class in percent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_array_total_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Total capacity on a given array managed by CSI driver (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_array_used_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Total used capacity on a given array managed by CSI driver (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_array_used_capacity_percentage&lt;/td&gt;
+&lt;td&gt;Total used capacity on a given array managed by CSI driver in percent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_total_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Total capacity for a given storage group (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_used_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Total used capacity for a given storage group  (GB)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_storage_group_used_capacity_percentage&lt;/td&gt;
+&lt;td&gt;Used capacity of a storage group in percent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_srp_total_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Total capacity of the storage resource pool in GB managed by CSI driver&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_srp_used_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Used capacity of a storage resource pool in GB managed by CSI driver&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_srp_used_capacity_percentage&lt;/td&gt;
+&lt;td&gt;Used capacity of a storage resource pool in percent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_volume_total_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Total capacity of the volume in GB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_volume_used_capacity_gigabytes&lt;/td&gt;
+&lt;td&gt;Used capacity of a volume in GB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;powermax_volume_used_capacity_percentage&lt;/td&gt;
+&lt;td&gt;Used capacity of a volume in percent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: PowerScale Metrics</title>
       <link>https://dell.github.io/csm-docs/docs/observability/metrics/powerscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

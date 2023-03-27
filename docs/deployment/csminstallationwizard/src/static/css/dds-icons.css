@@ -1,0 +1,1846 @@
+@charset "UTF-8";
+.dds__icon {
+  width: 1em;
+  height: 1em;
+}
+
+@font-face {
+  font-family: "dds-icons";
+  font-style: normal;
+  font-weight: normal;
+  src: url("//dds.dell.com/icons/2.7.0/dds-icons.woff2") format("woff2"), url("//dds.dell.com/icons/2.7.0/dds-icons.woff") format("woff");
+}
+.dds__icon {
+  font-family: "dds-icons" !important;
+}
+.dds__icon {
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  font-size: inherit;
+  font-style: normal;
+  font-feature-settings: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-transform: none;
+  line-height: 1em;
+}
+
+.dds__icon--accessibility::before {
+  content: "♿";
+}
+
+.dds__icon--add-sqr::before {
+  content: "⊞";
+}
+
+.dds__icon--airplane::before {
+  content: "🛪";
+}
+
+.dds__icon--alarm-bell::before {
+  content: "🕭";
+}
+
+.dds__icon--alarm-clock::before {
+  content: "🕑";
+}
+
+.dds__icon--alert-check-cir::before {
+  content: "🗸";
+}
+
+.dds__icon--alert-check-sqr::before {
+  content: "🗹";
+}
+
+.dds__icon--alert-error::before {
+  content: "⛔";
+}
+
+.dds__icon--alert-info-cir::before {
+  content: "🛈";
+}
+
+.dds__icon--alert-notice::before {
+  content: "⚠";
+}
+
+.dds__icon--app-window::before {
+  content: "🗔";
+}
+
+.dds__icon--arrow-cir-down::before {
+  content: "⭳";
+}
+
+.dds__icon--arrow-cir-left::before {
+  content: "⭰";
+}
+
+.dds__icon--arrow-cir-right::before {
+  content: "⭲";
+}
+
+.dds__icon--arrow-cir-up::before {
+  content: "⭱";
+}
+
+.dds__icon--arrow-down::before {
+  content: "↓";
+}
+
+.dds__icon--arrow-export::before {
+  content: "↗";
+}
+
+.dds__icon--arrow-left::before {
+  content: "←";
+}
+
+.dds__icon--arrow-right::before {
+  content: "→";
+}
+
+.dds__icon--arrow-tri-down::before {
+  content: "▽";
+}
+
+.dds__icon--arrow-tri-left::before {
+  content: "◁";
+}
+
+.dds__icon--arrow-tri-right::before {
+  content: "▷";
+}
+
+.dds__icon--arrow-tri-solid-right::before {
+  content: "⏵";
+}
+
+.dds__icon--arrow-tri-up::before {
+  content: "⃤";
+}
+
+.dds__icon--arrow-up::before {
+  content: "↑";
+}
+
+.dds__icon--assistance::before {
+  content: "💁";
+}
+
+.dds__icon--audio-speaker::before {
+  content: "🔈";
+}
+
+.dds__icon--audio-speaker-mute::before {
+  content: "🔇";
+}
+
+.dds__icon--audio-speaker-on::before {
+  content: "🔊";
+}
+
+.dds__icon--award-certificate::before {
+  content: "🎗";
+}
+
+.dds__icon--award-trophy::before {
+  content: "🏆";
+}
+
+.dds__icon--battery-charge::before {
+  content: "🔋";
+}
+
+.dds__icon--bolt::before {
+  content: "🗲";
+}
+
+.dds__icon--bookmark::before {
+  content: "🔖";
+}
+
+.dds__icon--book-open::before {
+  content: "📖";
+}
+
+.dds__icon--brightness::before {
+  content: "🔅";
+}
+
+.dds__icon--calculator::before {
+  content: "🖩";
+}
+
+.dds__icon--calendar::before {
+  content: "📅";
+}
+
+.dds__icon--camera::before {
+  content: "📷";
+}
+
+.dds__icon--cancelled::before {
+  content: "⃠";
+}
+
+.dds__icon--capture-image::before {
+  content: "+";
+}
+
+.dds__icon--card-credit::before {
+  content: "💴";
+}
+
+.dds__icon--card-info::before {
+  content: "💳";
+}
+
+.dds__icon--carry-case::before {
+  content: "💼";
+}
+
+.dds__icon--cart::before {
+  content: "🛒";
+}
+
+.dds__icon--chain-link::before {
+  content: "🖇";
+}
+
+.dds__icon--charge-back::before {
+  content: "💰";
+}
+
+.dds__icon--chart-bars-axis::before {
+  content: "📊";
+}
+
+.dds__icon--chart-bars-box::before {
+  content: "📉";
+}
+
+.dds__icon--chart-insights::before {
+  content: "📈";
+}
+
+.dds__icon--chat-bot::before {
+  content: "🤖";
+}
+
+.dds__icon--chat-dots::before {
+  content: "💬";
+}
+
+.dds__icon--check::before {
+  content: "✓";
+}
+
+.dds__icon--chevron-cir-down::before {
+  content: "⮋";
+}
+
+.dds__icon--chevron-cir-left::before {
+  content: "⮈";
+}
+
+.dds__icon--chevron-cir-right::before {
+  content: "⮊";
+}
+
+.dds__icon--chevron-cir-up::before {
+  content: "⮉";
+}
+
+.dds__icon--chevron-down::before {
+  content: "﹀";
+}
+
+.dds__icon--chevron-left::before {
+  content: "〈";
+}
+
+.dds__icon--chevron-right::before {
+  content: "〉";
+}
+
+.dds__icon--chevron-up::before {
+  content: "︿";
+}
+
+.dds__icon--chip-set::before {
+  content: "▦";
+}
+
+.dds__icon--clipboard::before {
+  content: "📋";
+}
+
+.dds__icon--clock::before {
+  content: "🕒";
+}
+
+.dds__icon--clock-arrow-left::before {
+  content: "🕓";
+}
+
+.dds__icon--clock-arrow-right::before {
+  content: "🕕";
+}
+
+.dds__icon--clone::before {
+  content: "🗗";
+}
+
+.dds__icon--close-x::before {
+  content: "🗙";
+}
+
+.dds__icon--close-back::before {
+  content: "⌦";
+}
+
+.dds__icon--close-cir::before {
+  content: "🗵";
+}
+
+.dds__icon--close-sqr::before {
+  content: "🗷";
+}
+
+.dds__icon--cloud::before {
+  content: "☁";
+}
+
+.dds__icon--cloud-check::before {
+  content: "🌩";
+}
+
+.dds__icon--collapse-down-sqr::before {
+  content: "⏬";
+}
+
+.dds__icon--collapse-up-sqr::before {
+  content: "⏫";
+}
+
+.dds__icon--comment::before {
+  content: "🗨";
+}
+
+.dds__icon--compare::before {
+  content: "⥦";
+}
+
+.dds__icon--conversation::before {
+  content: "🗪";
+}
+
+.dds__icon--conversation-cir::before {
+  content: "🗫";
+}
+
+.dds__icon--copy::before {
+  content: "🗇";
+}
+
+.dds__icon--copy-alt::before {
+  content: "🗍";
+}
+
+.dds__icon--cube::before {
+  content: "📦";
+}
+
+.dds__icon--currency::before {
+  content: "$";
+}
+
+.dds__icon--cursor::before {
+  content: "☝";
+}
+
+.dds__icon--d-display::before {
+  content: "🖵";
+}
+
+.dds__icon--dashboard::before {
+  content: "🗠";
+}
+
+.dds__icon--data-center::before {
+  content: "🏢";
+}
+
+.dds__icon--data-compute::before {
+  content: "🖭";
+}
+
+.dds__icon--datastore::before {
+  content: "🖬";
+}
+
+.dds__icon--debug::before {
+  content: "🐞";
+}
+
+.dds__icon--device-data-center::before {
+  content: "🖪";
+}
+
+.dds__icon--device-laptop::before {
+  content: "🖴";
+}
+
+.dds__icon--device-mobile::before {
+  content: "🖁";
+}
+
+.dds__icon--device-modular::before {
+  content: "💻";
+}
+
+.dds__icon--device-monitor::before {
+  content: "⎚";
+}
+
+.dds__icon--device-server::before {
+  content: "🖶";
+}
+
+.dds__icon--device-server-tower::before {
+  content: "🖥";
+}
+
+.dds__icon--diagnostic::before {
+  content: "🗡";
+}
+
+.dds__icon--dimensions-weight::before {
+  content: "📏";
+}
+
+.dds__icon--disc-software::before {
+  content: "🖸";
+}
+
+.dds__icon--doc-add::before {
+  content: "🖹";
+}
+
+.dds__icon--doc-arrow-left::before {
+  content: "🖺";
+}
+
+.dds__icon--doc-arrow-right::before {
+  content: "🗋";
+}
+
+.dds__icon--doc-lines::before {
+  content: "🗈";
+}
+
+.dds__icon--doc-reports::before {
+  content: "🗉";
+}
+
+.dds__icon--document::before {
+  content: "🗏";
+}
+
+.dds__icon--download-alt::before {
+  content: "⤓";
+}
+
+.dds__icon--ear::before {
+  content: "👂";
+}
+
+.dds__icon--energy-efficient::before {
+  content: "🌳";
+}
+
+.dds__icon--escalate-tri::before {
+  content: "⧋";
+}
+
+.dds__icon--exit-door::before {
+  content: "⇚";
+}
+
+.dds__icon--eye-view-on::before {
+  content: "👁";
+}
+
+.dds__icon--fan::before {
+  content: "❋";
+}
+
+.dds__icon--filter::before {
+  content: "⛛";
+}
+
+.dds__icon--fingerprint::before {
+  content: "👆";
+}
+
+.dds__icon--flag::before {
+  content: "⛿";
+}
+
+.dds__icon--flame::before {
+  content: "🔥";
+}
+
+.dds__icon--flash-drive::before {
+  content: "💽";
+}
+
+.dds__icon--folder::before {
+  content: "🗀";
+}
+
+.dds__icon--folder-add::before {
+  content: "🗂";
+}
+
+.dds__icon--folder-arrow-right::before {
+  content: "🖿";
+}
+
+.dds__icon--full-screen::before {
+  content: "🗖";
+}
+
+.dds__icon--gear::before {
+  content: "⚙";
+}
+
+.dds__icon--globe-simple::before {
+  content: "🌐";
+}
+
+.dds__icon--handle::before {
+  content: "⋮";
+}
+
+.dds__icon--hand-touch::before {
+  content: "🖢";
+}
+
+.dds__icon--hard-drive::before {
+  content: "🖫";
+}
+
+.dds__icon--heart::before {
+  content: "♡";
+}
+
+.dds__icon--heart-filled::before {
+  content: "♥";
+}
+
+.dds__icon--help-cir::before {
+  content: "⯑";
+}
+
+.dds__icon--hinge::before {
+  content: "🖳";
+}
+
+.dds__icon--home::before {
+  content: "🏡";
+}
+
+.dds__icon--import::before {
+  content: "↧";
+}
+
+.dds__icon--import-alt::before {
+  content: "↥";
+}
+
+.dds__icon--inbox::before {
+  content: "📥";
+}
+
+.dds__icon--ink-toner::before {
+  content: "🖨";
+}
+
+.dds__icon--key::before {
+  content: "🔑";
+}
+
+.dds__icon--keyboard::before {
+  content: "⌨";
+}
+
+.dds__icon--keyboard-mouse::before {
+  content: "🖦";
+}
+
+.dds__icon--laptop-generic::before {
+  content: "🖷";
+}
+
+.dds__icon--lightbulb::before {
+  content: "💡";
+}
+
+.dds__icon--location::before {
+  content: "📍";
+}
+
+.dds__icon--lock-closed::before {
+  content: "🔒";
+}
+
+.dds__icon--lock-open::before {
+  content: "🔓";
+}
+
+.dds__icon--log-in::before {
+  content: "⍈";
+}
+
+.dds__icon--mail::before {
+  content: "🖂";
+}
+
+.dds__icon--mail-open::before {
+  content: "🖆";
+}
+
+.dds__icon--menu-closed::before {
+  content: "☰";
+}
+
+.dds__icon--microphone-off::before {
+  content: "🎤";
+}
+
+.dds__icon--minus-minimize::before {
+  content: "−";
+}
+
+.dds__icon--missing-image::before {
+  content: "⛶";
+}
+
+.dds__icon--mouse::before {
+  content: "🖰";
+}
+
+.dds__icon--mouse-cord::before {
+  content: "🖯";
+}
+
+.dds__icon--movie-clapper::before {
+  content: "🎬";
+}
+
+.dds__icon--movie-clapper-play::before {
+  content: "🎦";
+}
+
+.dds__icon--music-note::before {
+  content: "🎝";
+}
+
+.dds__icon--network-vert::before {
+  content: "🖧";
+}
+
+.dds__icon--office::before {
+  content: "🏣";
+}
+
+.dds__icon--overflow::before {
+  content: "⋯";
+}
+
+.dds__icon--paint-brush::before {
+  content: "🖌";
+}
+
+.dds__icon--paint-palette::before {
+  content: "🎨";
+}
+
+.dds__icon--paper-clip::before {
+  content: "📎";
+}
+
+.dds__icon--partners::before {
+  content: "✋";
+}
+
+.dds__icon--pause::before {
+  content: "⏸";
+}
+
+.dds__icon--pencil::before {
+  content: "🖉";
+}
+
+.dds__icon--pencil-check::before {
+  content: "🖊";
+}
+
+.dds__icon--pencil-mark::before {
+  content: "🖎";
+}
+
+.dds__icon--performance::before {
+  content: "⏲";
+}
+
+.dds__icon--phone::before {
+  content: "🕾";
+}
+
+.dds__icon--pin::before {
+  content: "📌";
+}
+
+.dds__icon--play-cir::before {
+  content: "⏯";
+}
+
+.dds__icon--popout-window::before {
+  content: "⎘";
+}
+
+.dds__icon--pop-up-arrow::before {
+  content: "⇱";
+}
+
+.dds__icon--power-supply::before {
+  content: "🔌";
+}
+
+.dds__icon--printer::before {
+  content: "📠";
+}
+
+.dds__icon--projector::before {
+  content: "📾";
+}
+
+.dds__icon--recycle::before {
+  content: "♲";
+}
+
+.dds__icon--recycle-bin::before {
+  content: "♻";
+}
+
+.dds__icon--redo::before {
+  content: "⮎";
+}
+
+.dds__icon--redo-move::before {
+  content: "⟳";
+}
+
+.dds__icon--refresh-spin::before {
+  content: "🗘";
+}
+
+.dds__icon--remove-cir::before {
+  content: "⊝";
+}
+
+.dds__icon--remove-sqr::before {
+  content: "⊟";
+}
+
+.dds__icon--reset::before {
+  content: "⟲";
+}
+
+.dds__icon--restore::before {
+  content: "⭹";
+}
+
+.dds__icon--save::before {
+  content: "⍗";
+}
+
+.dds__icon--save-disk::before {
+  content: "💾";
+}
+
+.dds__icon--scale::before {
+  content: "⤒";
+}
+
+.dds__icon--search::before {
+  content: "🔍";
+}
+
+.dds__icon--search-arrow-left::before {
+  content: "🔎";
+}
+
+.dds__icon--search-back::before {
+  content: "⏮";
+}
+
+.dds__icon--search-forward::before {
+  content: "⏭";
+}
+
+.dds__icon--share::before {
+  content: "↷";
+}
+
+.dds__icon--shield::before {
+  content: "⛉";
+}
+
+.dds__icon--shield-check::before {
+  content: "⛊";
+}
+
+.dds__icon--slider-vert::before {
+  content: "🎚";
+}
+
+.dds__icon--snapshot::before {
+  content: "⯐";
+}
+
+.dds__icon--snowflake::before {
+  content: "❄";
+}
+
+.dds__icon--sort-horiz::before {
+  content: "⮂";
+}
+
+.dds__icon--sort-vert::before {
+  content: "⥮";
+}
+
+.dds__icon--star::before {
+  content: "✩";
+}
+
+.dds__icon--star-filled::before {
+  content: "★";
+}
+
+.dds__icon--stop::before {
+  content: "⏹";
+}
+
+.dds__icon--sync-horiz::before {
+  content: "⮔";
+}
+
+.dds__icon--tag::before {
+  content: "🏷";
+}
+
+.dds__icon--thumb-down::before {
+  content: "👎";
+}
+
+.dds__icon--thumb-up::before {
+  content: "👍";
+}
+
+.dds__icon--trash::before {
+  content: "🗑";
+}
+
+.dds__icon--tv::before {
+  content: "📺";
+}
+
+.dds__icon--undo::before {
+  content: "⮌";
+}
+
+.dds__icon--undo-move::before {
+  content: "⭮";
+}
+
+.dds__icon--upload::before {
+  content: "⭫";
+}
+
+.dds__icon--user::before {
+  content: "👩";
+}
+
+.dds__icon--user-group::before {
+  content: "👪";
+}
+
+.dds__icon--user-groups::before {
+  content: "👫";
+}
+
+.dds__icon--view-column::before {
+  content: "▥";
+}
+
+.dds__icon--view-grid::before {
+  content: "▤";
+}
+
+.dds__icon--view-grid-alt::before {
+  content: "▩";
+}
+
+.dds__icon--warranty::before {
+  content: "🗰";
+}
+
+.dds__icon--weight-bell::before {
+  content: "🔔";
+}
+
+.dds__icon--wifi::before {
+  content: "📡";
+}
+
+.dds__icon--wrench-single::before {
+  content: "🔧";
+}
+
+.dds__icon--wrench-tools::before {
+  content: "🛠";
+}
+
+.dds__icon--wifi-none::before {
+  content: "\e900";
+}
+
+.dds__icon--globe-location::before {
+  content: "\e901";
+}
+
+.dds__icon--brand-skype::before {
+  content: "\e902";
+}
+
+.dds__icon--gift-card::before {
+  content: "\e903";
+}
+
+.dds__icon--metadata::before {
+  content: "\e904";
+}
+
+.dds__icon--objects::before {
+  content: "\e905";
+}
+
+.dds__icon--play-sqr::before {
+  content: "\e906";
+}
+
+.dds__icon--plus-add::before {
+  content: "\e907";
+}
+
+.dds__icon--sort-az::before {
+  content: "\e908";
+}
+
+.dds__icon--ellipsis::before {
+  content: "\e909";
+}
+
+.dds__icon--arrange::before {
+  content: "\e910";
+}
+
+.dds__icon--volume::before {
+  content: "\e911";
+}
+
+.dds__icon--arrow-tri-solid-stacked::before {
+  content: "\e912";
+}
+
+.dds__icon--popout-double-condense-vertical::before {
+  content: "\e913";
+}
+
+.dds__icon--popout-double-condense::before {
+  content: "\e914";
+}
+
+.dds__icon--barbell::before {
+  content: "\e915";
+}
+
+.dds__icon--expand::before {
+  content: "\e916";
+}
+
+.dds__icon--currency-coins-pounds::before {
+  content: "\e917";
+}
+
+.dds__icon--currency-coins-rupees::before {
+  content: "\e918";
+}
+
+.dds__icon--currency-coins-yen::before {
+  content: "\e919";
+}
+
+.dds__icon--audio-card::before {
+  content: "\e920";
+}
+
+.dds__icon--popout-double-vertical::before {
+  content: "\e921";
+}
+
+.dds__icon--audio-speaker-levels::before {
+  content: "\e922";
+}
+
+.dds__icon--device-desktop::before {
+  content: "\e923";
+}
+
+.dds__icon--audio-speaker-off::before {
+  content: "\e924";
+}
+
+.dds__icon--calendar-add::before {
+  content: "\e925";
+}
+
+.dds__icon--calendar-check::before {
+  content: "\e926";
+}
+
+.dds__icon--calendar-remove::before {
+  content: "\e927";
+}
+
+.dds__icon--heart-half-filled::before {
+  content: "\e928";
+}
+
+.dds__icon--battery-empty::before {
+  content: "\e929";
+}
+
+.dds__icon--star-half-filled::before {
+  content: "\e930";
+}
+
+.dds__icon--thumb-down-filled::before {
+  content: "\e931";
+}
+
+.dds__icon--thumb-up-filled::before {
+  content: "\e932";
+}
+
+.dds__icon--brand-alienware::before {
+  content: "\e933";
+}
+
+.dds__icon--brand-dell::before {
+  content: "\e934";
+}
+
+.dds__icon--brand-dellemc::before {
+  content: "\e935";
+}
+
+.dds__icon--brand-delltechnologies::before {
+  content: "\e937";
+}
+
+.dds__icon--brand-delltechnologiesvert::before {
+  content: "\e938";
+}
+
+.dds__icon--bookmark-filled::before {
+  content: "\e939";
+}
+
+.dds__icon--card-swipe-left::before {
+  content: "\e941";
+}
+
+.dds__icon--card-swipe-right::before {
+  content: "\e942";
+}
+
+.dds__icon--charge-back-folder::before {
+  content: "\e947";
+}
+
+.dds__icon--charge-back-report::before {
+  content: "\e948";
+}
+
+.dds__icon--clipboard-check::before {
+  content: "\e959";
+}
+
+.dds__icon--cloud-document::before {
+  content: "\e968";
+}
+
+.dds__icon--cloud-iq::before {
+  content: "\e969";
+}
+
+.dds__icon--column-add::before {
+  content: "\e971";
+}
+
+.dds__icon--comment-add::before {
+  content: "\e973";
+}
+
+.dds__icon--comment-check::before {
+  content: "\e974";
+}
+
+.dds__icon--deploy::before {
+  content: "\e984";
+}
+
+.dds__icon--device-laptop-detachable::before {
+  content: "\e987";
+}
+
+.dds__icon--device-lock-screen::before {
+  content: "\e988";
+}
+
+.dds__icon--device-storage-array::before {
+  content: "\e990";
+}
+
+.dds__icon--device-switch-blade::before {
+  content: "\e991";
+}
+
+.dds__icon--device-switch-blade-2U::before {
+  content: "\e992";
+}
+
+.dds__icon--device-tablet-horiz::before {
+  content: "\e993";
+}
+
+.dds__icon--device-tablet-vert::before {
+  content: "\e994";
+}
+
+.dds__icon--device-thin-client::before {
+  content: "\e995";
+}
+
+.dds__icon--disc-arrow-down::before {
+  content: "\e998";
+}
+
+.dds__icon--disc-arrow-up::before {
+  content: "\e999";
+}
+
+.dds__icon--brand-dell-gaming::before {
+  content: "\e90a";
+}
+
+.dds__icon--tag-deal::before {
+  content: "\e90b";
+}
+
+.dds__icon--alert-info-sqr::before {
+  content: "\e90c";
+}
+
+.dds__icon--user-directory::before {
+  content: "\e90d";
+}
+
+.dds__icon--brand-windows::before {
+  content: "\e90e";
+}
+
+.dds__icon--app-window-search::before {
+  content: "\e90f";
+}
+
+.dds__icon--currency-coins-indian-rupees::before {
+  content: "\e91a";
+}
+
+.dds__icon--currency-coins-generic::before {
+  content: "\e91b";
+}
+
+.dds__icon--currency-coins-euros::before {
+  content: "\e91c";
+}
+
+.dds__icon--add-cir::before {
+  content: "\e91d";
+}
+
+.dds__icon--game-controller::before {
+  content: "\e91e";
+}
+
+.dds__icon--gaming-desktop::before {
+  content: "\e91f";
+}
+
+.dds__icon--battery-horiz-empty::before {
+  content: "\e92a";
+}
+
+.dds__icon--battery-horiz-full::before {
+  content: "\e92b";
+}
+
+.dds__icon--battery-horiz-half::before {
+  content: "\e92c";
+}
+
+.dds__icon--battery-vert-full::before {
+  content: "\e92d";
+}
+
+.dds__icon--battery-vert-half::before {
+  content: "\e92e";
+}
+
+.dds__icon--bluetooth::before {
+  content: "\e92f";
+}
+
+.dds__icon--calendar-search::before {
+  content: "\e93c";
+}
+
+.dds__icon--check-property::before {
+  content: "\e94e";
+}
+
+.dds__icon--clipboard-lines::before {
+  content: "\e95a";
+}
+
+.dds__icon--clipboard-notes::before {
+  content: "\e95b";
+}
+
+.dds__icon--clipboard-remove::before {
+  content: "\e95c";
+}
+
+.dds__icon--clipboard-search::before {
+  content: "\e95d";
+}
+
+.dds__icon--cloud-restore::before {
+  content: "\e96a";
+}
+
+.dds__icon--cloud-upload::before {
+  content: "\e96b";
+}
+
+.dds__icon--cloud-wireless::before {
+  content: "\e96c";
+}
+
+.dds__icon--collapse-down::before {
+  content: "\e96d";
+}
+
+.dds__icon--collapse-up::before {
+  content: "\e96f";
+}
+
+.dds__icon--currency-coins::before {
+  content: "\e97c";
+}
+
+.dds__icon--cursor-clock::before {
+  content: "\e97e";
+}
+
+.dds__icon--device-nodes::before {
+  content: "\e98c";
+}
+
+.dds__icon--device-screen-size::before {
+  content: "\e98d";
+}
+
+.dds__icon--disc-check::before {
+  content: "\e99a";
+}
+
+.dds__icon--disc-insert::before {
+  content: "\e99b";
+}
+
+.dds__icon--disc-recovery::before {
+  content: "\e99c";
+}
+
+.dds__icon--disc-secure::before {
+  content: "\e99d";
+}
+
+.dds__icon--disc-system::before {
+  content: "\e99f";
+}
+
+.dds__icon--doc-check::before {
+  content: "\e9a3";
+}
+
+.dds__icon--doc-cube::before {
+  content: "\e9a4";
+}
+
+.dds__icon--doc-manual::before {
+  content: "\e9a6";
+}
+
+.dds__icon--docs-copy-alt::before {
+  content: "\e9a8";
+}
+
+.dds__icon--doc-search::before {
+  content: "\e9a9";
+}
+
+.dds__icon--doc-secure::before {
+  content: "\e9aa";
+}
+
+.dds__icon--doc-settings::before {
+  content: "\e9ab";
+}
+
+.dds__icon--doc-support::before {
+  content: "\e9ac";
+}
+
+.dds__icon--download::before {
+  content: "\e9ae";
+}
+
+.dds__icon--eye-view-off::before {
+  content: "\e9b6";
+}
+
+.dds__icon--filter-add::before {
+  content: "\e9ba";
+}
+
+.dds__icon--filter-clear::before {
+  content: "\e9bb";
+}
+
+.dds__icon--filter-move::before {
+  content: "\e9bc";
+}
+
+.dds__icon--filter-remove::before {
+  content: "\e9bd";
+}
+
+.dds__icon--folder-arrow-up::before {
+  content: "\e9c5";
+}
+
+.dds__icon--folder-media::before {
+  content: "\e9c6";
+}
+
+.dds__icon--gear-arrow::before {
+  content: "\e9c9";
+}
+
+.dds__icon--gear-wrench::before {
+  content: "\e9ca";
+}
+
+.dds__icon--graphics-card::before {
+  content: "\e9cd";
+}
+
+.dds__icon--hand-touch-screen::before {
+  content: "\e9d0";
+}
+
+.dds__icon--hd-generic::before {
+  content: "\e9d2";
+}
+
+.dds__icon--headphones::before {
+  content: "\e9d3";
+}
+
+.dds__icon--headset::before {
+  content: "\e9d4";
+}
+
+.dds__icon--heat::before {
+  content: "\e9d5";
+}
+
+.dds__icon--help-sqr::before {
+  content: "\e9d7";
+}
+
+.dds__icon--host-server::before {
+  content: "\e9d9";
+}
+
+.dds__icon--host-server-hex::before {
+  content: "\e9da";
+}
+
+.dds__icon--host-server-rack::before {
+  content: "\e9db";
+}
+
+.dds__icon--inbox-arrow-down::before {
+  content: "\e9df";
+}
+
+.dds__icon--infrastructure::before {
+  content: "\e9e0";
+}
+
+.dds__icon--keypad::before {
+  content: "\e9e5";
+}
+
+.dds__icon--lcd::before {
+  content: "\e9e7";
+}
+
+.dds__icon--location-play::before {
+  content: "\e9ea";
+}
+
+.dds__icon--log-out::before {
+  content: "\e9ee";
+}
+
+.dds__icon--manage-info::before {
+  content: "\e9f1";
+}
+
+.dds__icon--management-software::before {
+  content: "\e9f2";
+}
+
+.dds__icon--memory::before {
+  content: "\e9f3";
+}
+
+.dds__icon--memory-card-reader::before {
+  content: "\e9f4";
+}
+
+.dds__icon--memory-sd-card::before {
+  content: "\e9f5";
+}
+
+.dds__icon--microchip::before {
+  content: "\e9f8";
+}
+
+.dds__icon--microphone-on::before {
+  content: "\e9fa";
+}
+
+.dds__icon--migrate::before {
+  content: "\e9fb";
+}
+
+.dds__icon--minimize::before {
+  content: "\e9fc";
+}
+
+.dds__icon--2-in-1::before {
+  content: "\eaa3";
+}
+
+.dds__icon--pre-seed::before {
+  content: "\eaa4";
+}
+
+.dds__icon--receipt::before {
+  content: "\eaa5";
+}
+
+.dds__icon--brand-xps::before {
+  content: "\eaa6";
+}
+
+.dds__icon--data-protection::before {
+  content: "\eaa7";
+}
+
+.dds__icon--hyper-converged-infrastructure::before {
+  content: "\eaa8";
+}
+
+.dds__icon--unpin::before {
+  content: "\eaa9";
+}
+
+.dds__icon--network-connected::before {
+  content: "\ea04";
+}
+
+.dds__icon--network-horiz::before {
+  content: "\ea05";
+}
+
+.dds__icon--network-share::before {
+  content: "\ea06";
+}
+
+.dds__icon--network-vert-disable::before {
+  content: "\ea08";
+}
+
+.dds__icon--partnership::before {
+  content: "\ea09";
+}
+
+.dds__icon--password::before {
+  content: "\ea12";
+}
+
+.dds__icon--pause-sqr::before {
+  content: "\ea14";
+}
+
+.dds__icon--pencil-remove::before {
+  content: "\ea18";
+}
+
+.dds__icon--popout-double::before {
+  content: "\ea21";
+}
+
+.dds__icon--popout-share::before {
+  content: "\ea22";
+}
+
+.dds__icon--popout-window-arrow::before {
+  content: "\ea24";
+}
+
+.dds__icon--pop-up-arrow-corner::before {
+  content: "\ea26";
+}
+
+.dds__icon--port-double::before {
+  content: "\ea27";
+}
+
+.dds__icon--power-off::before {
+  content: "\ea28";
+}
+
+.dds__icon--power-on::before {
+  content: "\ea29";
+}
+
+.dds__icon--protractor::before {
+  content: "\ea31";
+}
+
+.dds__icon--pulse::before {
+  content: "\ea32";
+}
+
+.dds__icon--puzzle::before {
+  content: "\ea33";
+}
+
+.dds__icon--qos::before {
+  content: "\ea34";
+}
+
+.dds__icon--rack::before {
+  content: "\ea35";
+}
+
+.dds__icon--rss::before {
+  content: "\ea40";
+}
+
+.dds__icon--search-arrow-right::before {
+  content: "\ea46";
+}
+
+.dds__icon--server-rack-arrow-right::before {
+  content: "\ea49";
+}
+
+.dds__icon--shipping::before {
+  content: "\ea50";
+}
+
+.dds__icon--skip-forward::before {
+  content: "\ea51";
+}
+
+.dds__icon--skip-to-end::before {
+  content: "\ea52";
+}
+
+.dds__icon--skip-to-front::before {
+  content: "\ea53";
+}
+
+.dds__icon--slider-horiz::before {
+  content: "\ea54";
+}
+
+.dds__icon--smart-select::before {
+  content: "\ea56";
+}
+
+.dds__icon--social-networking::before {
+  content: "\ea59";
+}
+
+.dds__icon--start-up::before {
+  content: "\ea61";
+}
+
+.dds__icon--suspend::before {
+  content: "\ea63";
+}
+
+.dds__icon--sync-vert::before {
+  content: "\ea65";
+}
+
+.dds__icon--task-check::before {
+  content: "\ea68";
+}
+
+.dds__icon--task-check-progress::before {
+  content: "\ea69";
+}
+
+.dds__icon--usb::before {
+  content: "\ea73";
+}
+
+.dds__icon--user-about::before {
+  content: "\ea75";
+}
+
+.dds__icon--user-add::before {
+  content: "\ea76";
+}
+
+.dds__icon--user-check::before {
+  content: "\ea77";
+}
+
+.dds__icon--user-cir::before {
+  content: "\ea78";
+}
+
+.dds__icon--user-cir-add::before {
+  content: "\ea79";
+}
+
+.dds__icon--user-group-disable::before {
+  content: "\ea80";
+}
+
+.dds__icon--user-groups-disable::before {
+  content: "\ea82";
+}
+
+.dds__icon--user-lock::before {
+  content: "\ea83";
+}
+
+.dds__icon--user-remove::before {
+  content: "\ea84";
+}
+
+.dds__icon--user-search::before {
+  content: "\ea85";
+}
+
+.dds__icon--user-unlock::before {
+  content: "\ea86";
+}
+
+.dds__icon--video-card::before {
+  content: "\ea87";
+}
+
+.dds__icon--view-detailed::before {
+  content: "\ea89";
+}
+
+.dds__icon--web-camera::before {
+  content: "\ea92";
+}
+
+.dds__icon--web-camera-hd::before {
+  content: "\ea93";
+}
+
+.dds__icon--wifi-simple::before {
+  content: "\ea96";
+}
+
+.dds__icon--windows-support::before {
+  content: "\ea97";
+}
+
+.dds__icon--wrench-cir::before {
+  content: "\ea98";
+}
+
+.dds__icon--wrench-double::before {
+  content: "\ea99";
+}
+
+.dds__icon--package-closed::before {
+  content: "\ea0c";
+}
+
+.dds__icon--package-open::before {
+  content: "\ea0d";
+}
+
+.dds__icon--pie-chart::before {
+  content: "\ea1b";
+}
+
+.dds__icon--pie-chart-solid::before {
+  content: "\ea1c";
+}
+
+.dds__icon--power-supply-cord::before {
+  content: "\ea2b";
+}
+
+.dds__icon--power-supply-double::before {
+  content: "\ea2c";
+}
+
+.dds__icon--processor::before {
+  content: "\ea2e";
+}
+
+.dds__icon--productivity::before {
+  content: "\ea2f";
+}
+
+.dds__icon--removable-storage-usb::before {
+  content: "\ea3b";
+}
+
+.dds__icon--server-rack-search::before {
+  content: "\ea4a";
+}
+
+.dds__icon--server-rack-support::before {
+  content: "\ea4b";
+}
+
+.dds__icon--shield-protect::before {
+  content: "\ea4f";
+}
+
+.dds__icon--sort-za::before {
+  content: "\ea5d";
+}
+
+.dds__icon--speaker-double::before {
+  content: "\ea5e";
+}
+
+.dds__icon--stack::before {
+  content: "\ea5f";
+}
+
+.dds__icon--toolbox::before {
+  content: "\ea6c";
+}
+
+.dds__icon--touch-pad::before {
+  content: "\ea6d";
+}
+
+.dds__icon--translate::before {
+  content: "\ea6e";
+}
+
+.dds__icon--user-cir-remove::before {
+  content: "\ea7a";
+}
+
+.dds__icon--user-contact::before {
+  content: "\ea7b";
+}
+
+.dds__icon--user-disable::before {
+  content: "\ea7d";
+}
+
+.dds__icon--user-group-chat::before {
+  content: "\ea7f";
+}
+
+.dds__icon--view-list::before {
+  content: "\ea8c";
+}
+
+.dds__icon--view-row::before {
+  content: "\ea8d";
+}
+
+.dds__icon--view-table::before {
+  content: "\ea8e";
+}
+
+.dds__icon--virtualization::before {
+  content: "\ea8f";
+}
+
+.dds__icon--wrench-manage::before {
+  content: "\ea9a";
+}
+
+.dds__icon--zoom-in::before {
+  content: "\ea9d";
+}
+
+.dds__icon--zoom-out::before {
+  content: "\ea9e";
+}
