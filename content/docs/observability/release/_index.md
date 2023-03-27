@@ -6,15 +6,13 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for observability
 ---
 
-## Release Notes - CSM Observability 1.4.0
+## Release Notes - CSM Observability 1.5.0
 
 ### New Features/Changes
-- [CSM support for Kubernetes 1.25](https://github.com/dell/csm/issues/478)
-- [CSM support for Openshift 4.11](https://github.com/dell/csm/issues/480) 
-- [CSM support for PowerFlex 4.0](https://github.com/dell/csm/issues/476)
-- [Observability - Improve Grafana dashboard](https://github.com/dell/csm/issues/519)
+- [CSM support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
+- [Support PowerMax in CSM Observability](https://github.com/dell/csm/issues/586)
 
 ### Fixed Issues
-- [step_error: command not found in karavi-observability-install.sh](https://github.com/dell/csm/issues/479)
+- [Observability - Improve Grafana dashboards for PowerFlex/PowerStore](https://github.com/dell/csm/issues/640)
 
 ### Known Issues

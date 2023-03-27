@@ -7,7 +7,7 @@ Description: Code features for PowerFlex Driver
 
 ## Volume Snapshot Feature
 
-The CSI PowerFlex driver version 2.0 and higher supports v1 snapshots on Kubernetes 1.21/1.22/1.23.
+The CSI PowerFlex driver versions 2.0 and higher support v1 snapshots.
 
 In order to use Volume Snapshots, ensure the following components are deployed to your cluster:
 - Kubernetes Volume Snapshot CRDs
@@ -82,35 +82,7 @@ spec:
 
 ## Create Consistent Snapshot of Group of Volumes
 
-This feature extends CSI specification to add the capability to create crash-consistent snapshots of a group of volumes. This feature is available as a technical preview. To use this feature, users have to deploy the csi-volumegroupsnapshotter side-car as part of the PowerFlex driver. Once the sidecar has been deployed, users can make snapshots by using yaml files such as this one:
-```
-apiVersion: volumegroup.storage.dell.com/v1
-kind: DellCsiVolumeGroupSnapshot
-metadata:
-  name: "vg-snaprun1"
-  namespace: "helmtest-vxflexos"
-spec:
-  # Add fields here
-  driverName: "csi-vxflexos.dellemc.com"
-  # defines how to process VolumeSnapshot members when volume group snapshot is deleted
-  # "Retain" - keep VolumeSnapshot instances
-  # "Delete" - delete VolumeSnapshot instances
-  memberReclaimPolicy: "Retain"
-  volumesnapshotclass: "vxflexos-snapclass"
-  pvcLabel: "vgs-snap-label"
-  # pvcList:
-  #   - "pvcName1"
-  #   - "pvcName2"
-```
-The pvcLabel field specifies a label that must be present in PVCs that are to be snapshotted. Here is a sample of that portion of a .yaml for a PVC:
-```
-metadata:
-  name: pvol0
-  namespace: helmtest-vxflexos
-  labels:
-    volume-group: vgs-snap-label
-```
-More details about the installation and use of the VolumeGroup Snapshotter can be found here: [dell-csi-volumegroup-snapshotter](https://github.com/dell/csi-volumegroup-snapshotter).
+This feature extends CSI specification to add the capability to create crash-consistent snapshots of a group of volumes. This feature is available as a technical preview. To use this feature, users have to deploy the csi-volumegroupsnapshotter side-car as part of the PowerFlex driver. Once the sidecar has been deployed, users can make snapshots by using yaml files, More information can be found here: [Volume Group Snapshotter](../../../snapshots/volume-group-snapshots/).
 
 ## Volume Expansion Feature
 
@@ -398,9 +370,9 @@ controller:
    - key: "node-role.kubernetes.io/master"
      operator: "Exists"
      effect: "NoSchedule"
-```  
+```
 > *NOTE:* Tolerations/selectors work the same way for node pods.   
-   
+
 For configuring Controller HA on the Dell CSI Operator, please refer to the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).  
 
 ## SDC Deployment
@@ -450,7 +422,7 @@ There is a sample yaml file in the samples folder under the top-level directory 
   endpoint: "https://127.0.0.2"
   skipCertificateValidation: true 
   mdm: "10.0.0.3,10.0.0.4"
-  ```
+ ```
 Here we specify that we want the CSI driver to manage two arrays: one with an IP `127.0.0.1` and the other with an IP `127.0.0.2`.
 
 To use this config we need to create a Kubernetes secret from it. To do so, run the following command:
@@ -546,7 +518,7 @@ To run the corresponding helm test, go to csi-vxflexos/test/helm/ephemeral and f
 Then run:
 ````
 ./testEphemeral.sh
-````  
+````
 this test deploys the pod with two ephemeral volumes, and write some data to them before deleting the pod.   
 When creating ephemeral volumes, it is important to specify the following within the volumeAttributes section: volumeName, size, storagepool, and if you want to use a non-default array, systemID.  
 
@@ -587,7 +559,7 @@ Events:
   Type     Reason                     Age                 From                                                         Message
   ----     ------                     ----                ----                                                         ------
   Warning  VolumeConditionAbnormal    32s                 csi-pv-monitor-controller-csi-vxflexos.dellemc.com           Volume is not found at 2021-11-03 20:31:04
-```  
+```
 Events will also be reported to pods that have abnormal volumes. In these two events from `kubectl describe pods -n <ns>`, we can see that this pod has two abnormal volumes: one volume was unmounted outside of Kubernetes, while another was deleted from PowerFlex array.
 ```
 Events:

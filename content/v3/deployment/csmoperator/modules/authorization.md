@@ -9,4 +9,4 @@ The CSM Authorization module for supported Dell CSI Drivers can be installed via
 
 ## Pre-requisite
 
-Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../authorization/deployment/_index.md/#configuring-a-dell-csiÔe€#aœD0¥
+Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../authorization/deployment/_index.md/#configuring-a-dell-csi-driver).

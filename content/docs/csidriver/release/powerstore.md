@@ -3,11 +3,12 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.5.1
+## Release Notes - CSI PowerStore v2.6.0
 
 ### New Features/Changes
 
-There are no features/changes in this release.
+- [Added support for Resiliency](https://github.com/dell/csm/issues/587)
+- [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
 
 ### Fixed Issues
 

@@ -103,7 +103,7 @@ spec:
 
 ## iSCSI CHAP
 
-With version 1.3.0, support has been added for the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI.
+Starting from version 1.3.0, unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
 To enable CHAP authentication:
 1. Create secret `powermax-creds` with the key `chapsecret` set to the iSCSI CHAP secret. If the secret exists, delete and re-create the secret with this newly added key.
 2. Set the parameter `enableCHAP` in `my-powermax-settings.yaml` to true.
@@ -126,7 +126,7 @@ When challenged, the host initiator transmits a CHAP credential and CHAP secret 
 
 ## Custom Driver Name
 
-With version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.
+Starting from version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.
 
 To use this feature, set the following values under `customDriverName` in `my-powermax-settings.yaml`.
 - Value: Set this to the custom name of the driver.
@@ -401,7 +401,7 @@ After a successful installation of the driver, if a node Pod is running successf
 
 The values for all these keys are always set to the name of the provisioner which is usually `csi-powermax.dellemc.com`.
 
-> *NOTE:* The Topology support does not include any customer-defined topology, that is, users cannot create their own labels for nodes and storage classes and expect the labels to be honored by the driver.
+Starting from version 2.3.0, topology keys have been enhanced to filter out arrays, associated transport protocol available to each node and create topology keys based on any such user input.
 
 ### Topology Usage
 To use the Topology feature, the storage classes must be modified as follows:  
@@ -438,6 +438,80 @@ on any worker node with access to the PowerMax array `000000000001` irrespective
 > A set of sample storage class definitions to enable topology-aware volume provisioning has been provided in the `csi-powermax/samples/storageclass` folder 
 
 For additional information on how to use _Topology aware Volume Provisioning_, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
+
+### Custom Topology keys
+To use the enhanced topology keys:
+1. To use this feature, set node.topologyControl.enabled to true.
+2. Edit the config file [topologyConfig.yaml](https://github.com/dell/csi-powermax/blob/main/samples/configmap/topologyConfig.yaml) in `csi-powermax/samples/configmap` folder and provide values for the following parameters.
+
+| Parameter | Description  |  
+|-----------|--------------|
+| allowedConnections | List of node, array and protocol info for user allowed configuration |  
+| allowedConnections.nodeName | Name of the node on which user wants to apply given rules |
+| allowedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+| deniedConnections | List of node, array and protocol info for user denied configuration |  
+| deniedConnections.nodeName | Name of the node on which user wants to apply given rules  |
+| deniedConnections.rules | List of StorageArrayID:TransportProtocol pair |
+
+<br>
+
+**Sample config file:** 
+
+```
+# allowedConnections contains a list of (node, array and protocol) info for user allowed configuration
+# For any given storage array ID and protocol on a Node, topology keys will be created for just those pair and
+# every other configuration is ignored
+# Please refer to the doc website about a detailed explanation of each configuration parameter
+# and the various possible inputs
+allowedConnections:
+  # nodeName: Name of the node on which user wants to apply given rules
+  # Allowed values:
+  # nodeName - name of a specific node
+  # * -  all the nodes
+  # Examples: "node1", "*"
+  - nodeName: "node1"
+    # rules is a list of 'StorageArrayID:TransportProtocol' pair. ':' is required between both value
+    # Allowed values:
+    # StorageArrayID:
+    #   - SymmetrixID : for specific storage array
+    #   - "*" :- for all the arrays connected to the node
+    # TransportProtocol:
+    #   - FC : Fibre Channel protocol
+    #   - ISCSI : iSCSI protocol
+    #   - "*" - for all the possible Transport Protocol
+    # Examples: "000000000001:FC", "000000000002:*", "*:FC", "*:*"
+    rules:
+      - "000000000001:FC"
+      - "000000000002:FC"
+  - nodeName: "*"
+    rules:
+      - "000000000002:FC"
+# deniedConnections contains a list of (node, array and protocol) info for denied configurations by user
+# For any given storage array ID and protocol on a Node, topology keys will be created for every other configuration but
+# not these input pairs
+deniedConnections:
+  - nodeName: "node2"
+    rules:
+      - "000000000002:*"
+  - nodeName: "node3"
+    rules:
+      - "*:*"
+```
+
+3. Use the below command to create ConfigMap with configmap name as `node-topology-config` in the namespace powermax,  
+
+`kubectl create configmap node-topology-config --from-file=topologyConfig.yaml -n powermax`
+
+For example, let there be 3 nodes and 2 arrays, so based on the sample config file above, topology keys will be created as below:
+
+New Topology keys
+N1: csi-driver/000000000001.FC:csi-driver, csi-driver/000000000002.FC:csi-driver
+<br>
+N2 and N3: None 
+
+
+>Note: Name of the configmap should always be `node-topology-config`.
+
 
 ## Dynamic Logging Configuration
 

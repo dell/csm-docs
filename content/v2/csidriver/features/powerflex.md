@@ -522,6 +522,69 @@ Then run:
 this test deploys the pod with two ephemeral volumes, and write some data to them before deleting the pod.   
 When creating ephemeral volumes, it is important to specify the following within the volumeAttributes section: volumeName, size, storagepool, and if you want to use a non-default array, systemID.  
 
+## Consuming Existing Volumes with Static Provisioning
+
+To use existing volumes from PowerFlex array as Peristent volumes in your Kubernetes environment, perform these steps:
+1. Log into one of the MDMs of the PowerFlex cluster.
+2. Execute these commands to retrieve the `systemID` and `volumeID`.
+    1. `scli --mdm_ip <IPs, comma separated> --login --username <username> --password <password>`
+    - **Output:** `Logged in. User role is SuperUser. System ID is <systemID>`
+    2. `scli --query_volume --volume_name <volume name>`
+    - **Output:** `Volume ID: <volumeID> Name: <volume name>`
+3. Create PersistentVolume and use this volume ID in the volumeHandle with the format `systemID`-`volumeID` in the manifest. Modify other parameters according to your needs.
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: existingVol
+spec:
+  capacity:
+    storage: 8Gi
+  csi:
+    driver: csi-vxflexos.dellemc.com
+    volumeHandle: <systemID>-<volumeID>
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: vxflexos
+```
+4. Create PersistentVolumeClaim to use this PersistentVolume.
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvol
+spec:
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: vxflexos
+```
+5. Then use this PVC as a volume in a pod.
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: static-prov-pod
+spec:
+    containers:
+      - name: test
+        image: busybox
+        command: [ "sleep", "3600" ]
+        volumeMounts:
+          - mountPath: "/data0"
+            name: pvol
+    volumes:
+      - name: pvol
+        persistentVolumeClaim:
+            claimName: pvol
+```
+6. After the pod is `Ready` and `Running`, you can start to use this pod and volume.
+
+**Note:** Retrieval of the volume ID is possible through the UI. You must select the volume, navigate to `Details` section and click the volume in the graph. This selection will set the filter to the desired volume. At this point the volume ID can be found in the URL.
 
 ## Dynamic Logging Configuration
 

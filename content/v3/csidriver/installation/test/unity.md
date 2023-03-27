@@ -1,10 +1,10 @@
 ---
-title: Test Unity CSI Driver
-linktitle: Unity
-description: Tests to validate Unity CSI Driver installation
+title: Test Unity XT CSI Driver
+linktitle: Unity XT
+description: Tests to validate Unity XT CSI Driver installation
 ---
 
-## Test deploying a simple Pod and Pvc with Unity storage
+## Test deploying a simple Pod and Pvc with Unity XT storage
 In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default NFS and iSCSI and FC storage classes and automatically mounts them to the pod.
 
 **Steps**
@@ -30,7 +30,7 @@ You can find all the created resources in `test-unity` namespace.
 
 ## Support for SLES 15 SP2
 
-The CSI Driver for Dell Unity requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
+The CSI Driver for Dell Unity XT requires the following set of packages installed on all worker nodes that run on SLES 15 SP2.
 
 - open-iscsi **open-iscsi is required in order to make use of iSCSI protocol for provisioning**
 - nfs-utils **nfs-utils is required in order to make use of NFS protocol for provisioning**

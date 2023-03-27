@@ -40,7 +40,8 @@ If the Authorization module is enabled for the CSI drivers installed in the same
 
 ## Online Installer
 
-The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.
+The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.  
+The installer expects CSI drivers are using the default secret and configmap names.
 
 ### Dependencies
 
@@ -71,6 +72,7 @@ Options:
   --csi-powerflex-namespace[=]<csi powerflex namespace>       Namespace where CSI PowerFlex is installed, default is 'vxflexos'
   --csi-powerstore-namespace[=]<csi powerstore namespace>     Namespace where CSI PowerStore is installed, default is 'csi-powerstore'
   --csi-powerscale-namespace[=]<csi powerscale namespace>     Namespace where CSI PowerScale is installed, default is 'isilon'
+  --csi-powermax-namespace[=]<csi powermax namespace>         Namespace where CSI PowerMax is installed, default is 'powermax'
   --set-file                                                  Set values from files used during helm installation (can be specified multiple times)
   --skip-verify                                               Skip verification of the environment
   --values[=]<values.yaml>                                    Values file, which defines configuration values
@@ -104,6 +106,7 @@ To perform an online installation of CSM for Observability, the following steps 
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
     - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability. 
     - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
+    - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowermax.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
 
     ```
     [user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
@@ -139,6 +142,16 @@ To perform an online installation of CSM for Observability, the following steps 
     |
     |- Copying Secret from powerstore to karavi                         Success
     |
+    |- CSI Driver for PowerScale is installed                           Success
+    |
+    |- Copying Secret from isilon to karavi                             Success
+    |
+    |- CSI Driver for PowerMax is installed                             Success
+    |
+    |- Copying ConfigMap from powermax to karavi                        Success
+    |
+    |- Copying Secret from powermax to karavi                           Success
+    |
     |- Installing CertManager CRDs                                      Success
     |
     |- Enabling Karavi Authorization for Karavi Observability
@@ -146,6 +159,14 @@ To perform an online installation of CSM for Observability, the following steps 
       |--> Copying ConfigMap from vxflexos to karavi                    Success
       |
       |--> Copying Karavi Authorization Secrets from vxflexos to karavi Success
+      |
+      |--> Copying ConfigMap from isilon to karavi                      Success
+      |
+      |--> Copying Karavi Authorization Secrets from isilon to karavi   Success
+      |
+      |--> Copying ConfigMap from powermax to karavi                    Success
+      |
+      |--> Copying Karavi Authorization Secrets from powermax to karavi Success
     |
     |- Installing Karavi Observability helm chart                       Success
     |

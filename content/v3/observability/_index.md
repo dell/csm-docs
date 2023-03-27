@@ -29,7 +29,7 @@ CSM for Observability is composed of several services, each living in its own Gi
 CSM for Observability provides the following capabilities:
 
 {{<table "table table-striped table-bordered table-sm">}}
-| Capability | PowerMax | PowerFlex | Unity | PowerScale | PowerStore |
+| Capability | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 | - | :-: | :-: | :-: | :-: | :-: |
 | Collect and expose Volume Metrics via the OpenTelemetry Collector | no | yes | no | no | yes |
 | Collect and expose File System Metrics via the OpenTelemetry Collector | no |  no | no | no | yes |
@@ -46,8 +46,8 @@ CSM for Observability provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes    | 1.21, 1.22, 1.23 |
-| Red Hat OpenShift | 4.8, 4.9 |
+| Kubernetes    | 1.22, 1.23, 1.24 |
+| Red Hat OpenShift | 4.9, 4.10 |
 | Rancher Kubernetes Engine | yes | 
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
@@ -67,8 +67,8 @@ CSM for Observability supports the following CSI drivers and versions.
 {{<table "table table-striped table-bordered table-sm">}}
 | Storage Array | CSI Driver | Supported Versions |
 | ------------- | ---------- | ------------------ |
-| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0, v2.1, v2.2 |
-| CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0, v2.1, v2.2 |
+| CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
+| CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0 + |
 {{</table>}}
 
 ## Topology Data
@@ -79,7 +79,7 @@ CSM for Observability provides Kubernetes administrators with the topology data 
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Namespace                  | The namespace associated with the persistent volume claim                                                                                          |
 | Persistent Volume          | The name of the persistent volume                                                                                                                  |
-| Status                     | The status of the persistent volume. "Released" indicating the persistent volume has a claim. "Bound" indicating the persistent volume has a claim |
+| Status                     | The status of the persistent volume. "Released" indicates the persistent volume does not have a claim. "Bound" indicates the persistent volume has a claim |
 | Persistent Volume Claim    | The name of the persistent volume claim associated with the persistent volume                                                                      |
 | CSI Driver                 | The name of the CSI driver that was responsible for provisioning the volume on the storage system                                                  |
 | Created                    | The date the persistent volume was created                                                                                                         |

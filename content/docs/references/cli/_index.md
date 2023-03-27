@@ -35,7 +35,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 
 
 ## Installation instructions
-1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.5.1).
+1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.6.0).
 2. chmod +x dellctl
 3. Move `dellctl` to `/usr/local/bin` or add `dellctl`'s containing directory path to PATH environment variable.
 4. Run `dellctl --help` to know available commands or run `dellctl command --help` to know more about a specific command.

@@ -12,22 +12,23 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 
 | Kubernetes Version         | OpenShift Version   |
 | -------------------------- | ------------------- |
-| 1.23, 1.24, 1.25           | 4.10, 4.10 EUS, 4.11 |
+| 1.24, 1.25, 1.26           | 4.10, 4.10 EUS, 4.11 |
 
 ## Supported CSI Drivers
 
 | CSI Driver         | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
-| CSI PowerScale     | 2.3.0 +   |   v2.3.0 +     |
-| CSI PowerFlex      | 2.3.0 +   |   v2.3.0 +     |
+| CSI PowerScale     | 2.4.0 +   |   v2.4.0 +     |
+| CSI PowerFlex      | 2.4.0 +   |   v2.4.0 +     |
+| CSI PowerStore     | 2.4.0 +   |   v2.4.0 +     |
 
 ## Supported CSM Modules
 
 | CSM Modules        | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
-| CSM Authorization  | 1.2.0 +   | v1.2.0 +       |
+| CSM Authorization  | 1.4.0 +   | v1.4.0 +       |
 | CSM Replication    | 1.3.0 +   | v1.3.0 +       |
-| CSM Observability  | 1.2.0 +   | v1.2.0 +       |
+| CSM Observability  | 1.3.0 +   | v1.3.0 +       |
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
@@ -36,7 +37,7 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 #### Operator Installation on a cluster without OLM
 
-1. Clone and checkout the required csm-operator version using `git clone -b v1.0.0 https://github.com/dell/csm-operator.git`
+1. Clone and checkout the required csm-operator version using `git clone -b v1.1.0 https://github.com/dell/csm-operator.git`
 2. `cd csm-operator`
 3. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
 4. Run `bash scripts/install.sh` to install the operator.
@@ -49,20 +50,6 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 {{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
    
-#### Operator Installation on a cluster with OLM
-1. Clone and checkout the required csm-operator version using `git clone -b v1.0.0 https://github.com/dell/csm-operator.git`
-2. `cd csm-operator`
-3. Run `bash scripts/install_olm.sh` to install the operator.
->NOTE: Dell CSM Operator will get installed in the `test-csm-operator-olm` namespace.
-
-{{< imgproc install_olm.jpg Resize "2500x" >}}{{< /imgproc >}}
-
-4. Once installation completes, run the command `kubectl get pods -n test-csm-operator-olm` to validate the installation. If installed successfully, you should be able to see the operator pods and CSV in the `test-csm-operator-olm` namespace. The CSV phase will be in `Succeeded` state.
-   
-{{< imgproc install_olm_pods.JPG Resize "2500x" >}}{{< /imgproc >}}
-
->**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
-
 ### Installation via Operator Hub
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
 
@@ -76,11 +63,6 @@ To uninstall a CSM operator, run `bash scripts/uninstall.sh`. This will uninstal
 
 {{< imgproc uninstall.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-#### Operator uninstallation on a cluster with OLM
-To uninstall a CSM operator installed with OLM run `bash scripts/uninstall_olm.sh`. This will uninstall the operator in  `test-csm-operator-olm` namespace.
-
-{{< imgproc uninstall_olm.JPG Resize "2500x" >}}{{< /imgproc >}}
-
 ### To upgrade Dell CSM Operator, perform the following steps.
 Dell CSM Operator can be upgraded in 2 ways:
 
@@ -89,7 +71,7 @@ Dell CSM Operator can be upgraded in 2 ways:
 2.Using Operator Lifecycle Manager (OLM)
 
 #### Using Installation Script
-1. Clone and checkout the required csm-operator version using `git clone -b v1.0.0 https://github.com/dell/csm-operator.git`
+1. Clone and checkout the required csm-operator version using `git clone -b v1.1.0 https://github.com/dell/csm-operator.git`
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
 

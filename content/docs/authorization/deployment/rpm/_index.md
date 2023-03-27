@@ -124,6 +124,16 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
     sh install_karavi_auth.sh
     ```
 
+  As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:
+
+  ```
+  sh install_karavi_auth.sh --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+
+  Ex.:
+
+  sh install_karavi_auth.sh --traefik_web_port 30001 --traefik_websecure_port 30002
+  
+
 5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 
 If errors occur during installation, review the [Troubleshooting](../../troubleshooting) section.

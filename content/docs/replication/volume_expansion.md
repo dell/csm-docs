@@ -9,16 +9,16 @@ description: >
 Starting in v2.4.0, the CSI PowerMax driver supports the expansion of Replicated Persistent Volumes (PVs). This expansion is done online, which is when the PVC is attached to any node.
 
 ## Prerequisites
-- To use this feature, enable resizer in values.yaml.
+- To use this feature, enable resizer in values.yaml:
 ```yaml
 resizer:
   enabled: true
 ```
-- To use this feature, the storage class that is used to create the PVC must have the attribute allowVolumeExpansion set to true.
+- To use this feature, the storage class that is used to create the PVC must have the attribute allowVolumeExpansion set to `true`.
 
 ## Basic Usage
 
-To resize a PVC, edit the existing PVC spec and set spec.resources.requests.storage to the intended size. For example, if you have a PVC - pmax-pvc-demo of size 5 Gi, then you can resize it to 10 Gi by updating the PVC.
+To resize a PVC, edit the existing PVC spec and set spec.resources.requests.storage to the intended size. For example, if you have a PVC `pmax-pvc-demo` of size 5 Gi, then you can resize it to 10 Gi by updating the PVC:
 
 ```yaml
 kind: PersistentVolumeClaim
@@ -37,8 +37,8 @@ spec:
 ```
 Update remote PVC with expanded size:
 
-1. Update the remote PVC size with the same size as on local PVC
+1. Update the remote PVC size with the same size as on local PVC.
 
 2. After sync with remote CSI driver, volume size will be updated to show new size. 
 
-*NOTE*: The Kubernetes Volume Expansion feature can only be used to increase the size of the volume, it cannot be used to shrink a volume.
+> _**NOTE**_: The Kubernetes Volume Expansion feature can only be used to increase the size of the volume, it cannot be used to shrink a volume.

@@ -86,7 +86,7 @@ User can query for CSI-PowerScale driver using the following command:
 
    Use the following command to replace or update the secret
 
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
+   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
 
    **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
    The driver will continue to use previous values in case of an error found in the YAML file.
