@@ -17,7 +17,7 @@
  */ 
   .img {
 	display: inline-block;
-	margin-top: 20px;
+	margin-top: 18px;
 	margin-right: 0px;
 	margin-left: 1%;
 	height: 30px;
@@ -114,4 +114,12 @@
 
   .child-level-one {
 	margin-left: 1em;
+  }
+
+  .installation-wizard-navbar {
+    background: #30638e;
+    min-height: 4rem;
+    z-index: 32;
+	width: 100%;
+	padding-left: 10px;
   }
