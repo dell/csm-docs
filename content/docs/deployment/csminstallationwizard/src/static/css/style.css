@@ -120,13 +120,13 @@
     background: #30638e;
     min-height: 4rem;
     z-index: 32;
-	width: 100%;
-	padding-left: 12px;
+    width: 100%;
+    padding-left: 12px;
   }
 
   .page-container {
-	position: relative;
-	min-height: 100vh;
+    position: relative;
+    min-height: 100vh;
   }
 
   .text-align-right {
@@ -146,13 +146,13 @@
   }
 
   main {
-	padding-bottom: 150px;
+    padding-bottom: 150px;
   }
 
   footer {
-	background-color: #403f4c;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	min-height: 150px;
+    background-color: #403f4c;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 150px;
   }
