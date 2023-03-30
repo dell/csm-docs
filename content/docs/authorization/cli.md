@@ -166,16 +166,17 @@ karavictl generate token [flags]
 ##### Options
 
 ```
-      --addr string            host:port address (default "grpc.gatekeeper.cluster:443")
-      --from-config string     File providing self-generated token information
   -h, --help                   help for token
-      --tenant                 Tenant name 
-      --shared-secret string   Shared secret for token signing
+  -t, --tenant string          Tenant name 
+   --access-token-expiration duration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
+   --refresh-token-expiration duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
 ```
 
 ##### Options inherited from parent commands
 
 ```
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
       --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
@@ -536,13 +537,13 @@ karavictl rolebinding create [flags]
   -h, --help   help for create
   -r, --role string       Role name
   -t, --tenant string     Tenant name
-      --insecure boolean  insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost:443")
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
       --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
@@ -573,16 +574,16 @@ karavictl rolebinding delete [flags]
 ##### Options
 
 ```
-  -h, --help   help for create
+  -h, --help   help for delete
   -r, --role string      Role name
   -t, --tenant string    Tenant name
-      --insecure boolean insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost:443")
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
       --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
@@ -908,15 +909,16 @@ karavictl tenant create [flags]
 ##### Options
 
 ```
+  -a, --approvesdc    To allow/deny SDC approval requests (default true)
   -h, --help   help for create
   -n, --name string   Tenant name
-      --insecure      insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost:443")
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
       --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
@@ -948,16 +950,16 @@ karavictl tenant get [flags]
 ##### Options
 
 ```
-  -h, --help   help for create
+  -h, --help   help for get
   -n, --name string   Tenant name
-      --insecure      insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost:443")
+      --addr string     Address of the server (default "localhost")
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -993,14 +995,14 @@ karavictl tenant list [flags]
 ##### Options
 
 ```
-  -h, --help   help for create
-      --insecure      insecure skip verify flag for Helm deployment
+  -h, --help   help for list
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost:443")
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
       --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
@@ -1040,15 +1042,16 @@ karavictl tenant revoke [flags]
 ##### Options
 
 ```
+  -c, --cancel        Cancel a previous tenant revocation
   -h, --help   help for create
   -n, --name string   Tenant name
-      --insecure      insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost:443")
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
       --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
@@ -1079,16 +1082,16 @@ karavictl tenant delete [flags]
 ##### Options
 
 ```
-  -h, --help   help for create
+  -h, --help   help for delete
   -n, --name string   Tenant name
-      --insecure      insecure skip verify flag for Helm deployment
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost:443")
+      --addr string     Address of the server (default "localhost")
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -1118,16 +1121,17 @@ karavictl tenant update [flags]
 #### Options
 
 ```
-  -h, --help   help for create
+  -a, --approvesdc    To allow/deny SDC approval requests (default true)
+  -h, --help   help for update
   -n, --name string   Tenant name
-      --approvesdc boolean (Usage: --approvesdc=true/false | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request )
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost:443")
+      --addr string     Address of the server (default "localhost")
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        Skip certificate validation
 ```
 
 ##### Output

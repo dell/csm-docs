@@ -72,7 +72,7 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
         "host": ":8080"
       },
       "zipkin": {
-        "collectoruri": "http://DNS-hostname:9411/api/v2/spans",
+        "collectoruri": "http://zipkin-addr:9411/api/v2/spans",
         "probability": 1
       },
       "certificate": {
@@ -95,21 +95,6 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
 >__Note__:
 > - `DNS-hostname` refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running `nslookup <IP_address>`
 > - There are a number of ways to create certificates. In a production environment, certificates are usually created and managed by an IT administrator. Otherwise, certificates can be created using OpenSSL.
-
-2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS-hostname` is also required. All traffic from `grpc.DNS-hostname` needs to be routed to `DNS-hostname` address, this can be configured by adding a new DNS entry for `grpc.DNS-hostname` or providing a temporary path in the systems `/etc/hosts` file. 
-
->__Note__: The certificate provided in `crtFile` should be valid for both the `DNS-hostname` and the `grpc.DNS-hostname` address. 
-
-    For example, create the certificate config file with alternate names (to include DNS-hostname and grpc.DNS-hostname) and then create the .crt file: 
-
-      ```
-      CN = DNS-hostname
-      subjectAltName = @alt_names
-      [alt_names]
-      DNS.1 = grpc.DNS-hostname.com
-
-      $ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out DNS-hostname.com.crt -days 365 -sha256
-      ```
 
 3. To install the rpm package on the system, you must first extract the contents of the tar file with the command:
 
@@ -178,7 +163,7 @@ Replace the data in `config.yaml` under the `data` field with your new, encoded 
 
 >__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is required if certificates were not provided in `$HOME/.karavi/config.json`
 
-`karavictl generate token --tenant $TenantName --insecure --addr grpc.DNS-hostname:443 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
+`karavictl generate token --tenant $TenantName --insecure --addr DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
 
 ## CSM for Authorization Proxy Server Dynamic Configuration Settings
 

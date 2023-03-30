@@ -14,7 +14,7 @@ The storage administrator must first configure the proxy server with the followi
 - Bind roles to tenants
 
 >__Note__:
-> - The `RPM deployment` will use the address and port of the server (i.e. grpc.<DNS-hostname>:443).
+> - The `RPM deployment` will use the address and of the server.
 > - The `Helm deployment` will use the address and port of the Ingress hosts for the storage, tenant, and role services.
 
 ### Configuring Storage
@@ -42,10 +42,10 @@ A `tenant` is a Kubernetes cluster that a role will be bound to. For example, to
 
 ```yaml
 # RPM Deployment
-karavictl tenant create --name Finance --insecure --addr grpc.<DNS-hostname>:443
+karavictl tenant create --name Finance --insecure --addr DNS-hostname
 
 # Helm Deployment
-karavictl tenant create --name Finance --insecure --addr tenant.csm-authorization.com:<ingress-nginx-controller-port>
+karavictl tenant create --name Finance --insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
 ```
 
 >__Note__: 
@@ -56,10 +56,10 @@ karavictl tenant create --name Finance --insecure --addr tenant.csm-authorizatio
 
 ```yaml
 # RPM Deployment
-karavictl tenant create --name Finance --approvesdc=false --insecure --addr grpc.DNS-hostname:443
+karavictl tenant create --name Finance --approvesdc=false --insecure --addr DNS-hostname
 
 # Helm Deployment
-karavictl tenant create --name Finance --approvesdc=false --insecure --addr tenant.csm-authorization.com:<ingress-nginx-controller-port>
+karavictl tenant create --name Finance --approvesdc=false --insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
 ```
 
 ### Configuring Roles
@@ -83,14 +83,14 @@ A `role binding` binds a role to a tenant. For example, to bind the `FinanceRole
 
 ```yaml
 # RPM Deployment
-karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr grpc.<DNS-hostname>:443
+karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr DNS-hostname
 
 # Helm Deployment
-karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr tenant.csm-authorization.com:<ingress-nginx-controller-port>
+karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
 ```
 
 >__Note__: 
-> - The `insecure` flag specifies to skip certificate validation when connecting to the tenant service. Run `karavictl rolebinding create --help` for help.
+> - The `insecure` flag specifies to skip certificate validation when connecting to CSM Authorization. Run `karavictl rolebinding create --help` for help.
 
 ### Generate a Token
 
@@ -106,7 +106,7 @@ After creating the role bindings, the next logical step is to generate the acces
 
   ```
   echo === Generating token ===
-  karavictl generate token --tenant ${tenantName} --insecure --addr grpc.<DNS-hostname>:443 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
+  karavictl generate token --tenant ${tenantName} --insecure --addr DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
 
   echo === Copy token to Driver Host ===
   sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
@@ -117,7 +117,7 @@ After creating the role bindings, the next logical step is to generate the acces
 Now that the tenant is bound to a role, a JSON Web Token can be generated for the tenant. For example, to generate a token for the `Finance` tenant:
 
 ```
-karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:<ingress-nginx-controller-port>
+karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
 
 {
   "Token": "\napiVersion: v1\nkind: Secret\nmetadata:\n  name: proxy-authz-tokens\ntype: Opaque\ndata:\n  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUXhPRFlzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLmJIODN1TldmaHoxc1FVaDcweVlfMlF3N1NTVnEyRzRKeGlyVHFMWVlEMkU=\n  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWXhNallzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkxNbWVUSkZlX2dveXR0V0lUUDc5QWVaTy1kdmN5SHAwNUwyNXAtUm9ZZnM=\n"
@@ -127,7 +127,7 @@ karavictl generate token --tenant Finance --insecure --addr tenant.csm-authoriza
 Process the above response to filter the secret manifest. For example using sed you can run the following:
 
 ```
-karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:<ingress-nginx-controller-port> | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
+karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:<ingress-nginx-controller-port> | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
 apiVersion: v1
 kind: Secret
 metadata:
