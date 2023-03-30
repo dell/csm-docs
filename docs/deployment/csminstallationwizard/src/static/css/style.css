@@ -17,7 +17,7 @@
  */ 
   .img {
 	display: inline-block;
-	margin-top: 20px;
+	margin-top: 18px;
 	margin-right: 0px;
 	margin-left: 1%;
 	height: 30px;
@@ -114,4 +114,45 @@
 
   .child-level-one {
 	margin-left: 1em;
+  }
+
+  .installation-wizard-navbar {
+    background: #30638e;
+    min-height: 4rem;
+    z-index: 32;
+    width: 100%;
+    padding-left: 12px;
+  }
+
+  .page-container {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .text-align-right {
+    text-align: right;
+    padding-right: 100px;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #222;
+    text-align: left;
+    background-color: #fff;
+  }
+
+  main {
+    padding-bottom: 150px;
+  }
+
+  footer {
+    background-color: #403f4c;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 150px;
   }
