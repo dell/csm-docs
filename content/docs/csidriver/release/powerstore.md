@@ -9,10 +9,14 @@ description: Release notes for PowerStore CSI driver
 
 - [Added support for Resiliency](https://github.com/dell/csm/issues/587)
 - [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
+- [Added support for MKE 3.6.x](https://github.com/dell/csm/issues/672)
+- [Added support for RKE 1.4.1](https://github.com/dell/csm/issues/670)
 
 ### Fixed Issues
 
-- [Fixed issue where driver was not properly cleaning up resources when volumes were unmounted](https://github.com/dell/csm/issues/666)
+- [Multiple iSCSI network support](https://github.com/dell/csm/issues/668)
+- [Create volume successful but unable to map volumes to a hosts](https://github.com/dell/csm/issues/599)
+- [Can't find IP in X_CSI_POWERSTORE_EXTERNAL_ACCESS for NFS provisioning](https://github.com/dell/csm/issues/689)
 
 ### Known Issues
 
@@ -26,4 +30,3 @@ description: Release notes for PowerStore CSI driver
 ### Note:
 
 - Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
-- This release is only supported when driver is installed via helm.

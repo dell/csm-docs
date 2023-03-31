@@ -32,3 +32,13 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
 4. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
 5. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml` and update parameters as per the requirement.
 6. Run the `csi-install` script with the option _\-\-upgrade_ by running: `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade`.
+
+## Upgrade using Dell CSI Operator:
+
+**Notes:**
+1. While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.
+2. Upgrading the Operator does not upgrade the CSI Driver.
+
+
+1. Please upgrade the Dell CSI Operator by following [here](./../operator).
+2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).
