@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-03-31T14:50:57+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Release notes for PowerStore CSI driver">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
-<meta itemprop="wordCount" content="274">
+<meta itemprop="dateModified" content="2023-03-31T14:50:57+05:30" />
+<meta itemprop="wordCount" content="282">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Release notes for PowerStore CSI driver"/>
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7479074da1163893700bd90fae480bbb.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.320827c8716dde4df9d950c3d317106a.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7479074da1163893700bd90fae480bbb.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.320827c8716dde4df9d950c3d317106a.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -656,10 +656,14 @@
 <ul>
 <li><a href="https://github.com/dell/csm/issues/587">Added support for Resiliency</a></li>
 <li><a href="https://github.com/dell/csm/issues/597">Added support for Kubernetes 1.26</a></li>
+<li><a href="https://github.com/dell/csm/issues/672">Added support for MKE 3.6.x</a></li>
+<li><a href="https://github.com/dell/csm/issues/670">Added support for RKE 1.4.1</a></li>
 </ul>
 <h3 id="fixed-issues">Fixed Issues</h3>
 <ul>
-<li><a href="https://github.com/dell/csm/issues/666">Fixed issue where driver was not properly cleaning up resources when volumes were unmounted</a></li>
+<li><a href="https://github.com/dell/csm/issues/668">Multiple iSCSI network support</a></li>
+<li><a href="https://github.com/dell/csm/issues/599">Create volume successful but unable to map volumes to a hosts</a></li>
+<li><a href="https://github.com/dell/csm/issues/689">Can&rsquo;t find IP in X_CSI_POWERSTORE_EXTERNAL_ACCESS for NFS provisioning</a></li>
 </ul>
 <h3 id="known-issues">Known Issues</h3>
 <table>
@@ -691,7 +695,6 @@
 <h3 id="note">Note:</h3>
 <ul>
 <li>Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&rsquo;t support enabling of alpha features for Production Grade clusters.</li>
-<li>This release is only supported when driver is installed via helm.</li>
 </ul>
 
 	
