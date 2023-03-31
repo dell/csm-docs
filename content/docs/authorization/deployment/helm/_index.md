@@ -139,7 +139,6 @@ NAME              CLASS   HOSTS                           ADDRESS   PORTS     AG
 proxy-server      nginx   csm-authorization.com                     00, 000   86s
 role-service      nginx   role.csm-authorization.com                00, 000   86s
 storage-service   nginx   storage.csm-authorization.com             00, 000   86s
-tenant-service    nginx   tenant.csm-authorization.com              00, 000   86s
 
 # kubectl -n auth get service
 NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
