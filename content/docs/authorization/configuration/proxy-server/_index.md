@@ -27,7 +27,7 @@ A `storage` entity in CSM Authorization consists of the storage type (PowerFlex,
 karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --array-insecure
 
 # Helm Deployment
-karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr storage.csm-authorization.com:<ingress-nginx-controller-port>
+karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
 ```
 
 >__Note__:

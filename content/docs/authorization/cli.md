@@ -105,6 +105,8 @@ tenant-service         1/1     1            1           59m
 redis-primary          1/1     1            1           59m
 proxy-server           1/1     1            1           59m
 redis-commander        1/1     1            1           59m
+storage-service        1/1     1            1           59m
+role-service           1/1     1            1           59m
 ```
 
 
@@ -615,7 +617,9 @@ karavictl storage [flags]
 ##### Options
 
 ```
-  -h, --help   help for storage
+  --addr string   address of the csm-authorization storage service
+  -h, --help      help for storage
+  --insecure      insecure skip verify
 ```
 
 ##### Options inherited from parent commands
@@ -652,14 +656,14 @@ karavictl storage get [flags]
   -h, --help               help for get
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
 
-```
+```   
+      --addr string     address of the csm-authorization storage service
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        insecure skip verify
 ```
 
 ##### Output
@@ -696,14 +700,15 @@ karavictl storage list [flags]
 
 ```
   -h, --help   help for list
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
+  -t, --type string   Type of storage system
 ```
 
 ##### Options inherited from parent commands
 
 ```
+      --addr string     address of the csm-authorization storage service
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        insecure skip verify
 ```
 
 ##### Output
@@ -753,14 +758,14 @@ karavictl storage create [flags]
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
   -u, --user string        Username (default "admin")
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
 
 ```
+      --addr string     address of the csm-authorization storage service
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        insecure skip verify
 ```
 
 ##### Output
@@ -797,14 +802,14 @@ karavictl storage update [flags]
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
   -u, --user string        Username (default "admin")
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
 
 ```
+      --addr string     address of the csm-authorization storage service
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        insecure skip verify
 ```
 
 ##### Output
@@ -838,14 +843,14 @@ karavictl storage delete [flags]
   -h, --help               help for delete
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
 
 ```
+      --addr string     address of the csm-authorization storage service
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        insecure skip verify
 ```
 
 ##### Output
