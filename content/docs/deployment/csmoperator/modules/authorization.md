@@ -155,7 +155,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
 
   Add the Zipkin values to the configMap where `ZIPKIN_ADDRESS` is the IP address or hostname of the Zipkin server.
   ```
-  ZIPKIN_URI: "http://ZIPKIN-ADDRESS:9411/api/v2/spans"
+  ZIPKIN_URI: "http://ZIPKIN_ADDRESS:9411/api/v2/spans"
   ZIPKIN_PROBABILITY: "1.0"
   ```
 
