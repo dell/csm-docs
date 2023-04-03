@@ -909,7 +909,7 @@ karavictl tenant create [flags]
 ##### Options
 
 ```
-  -a, --approvesdc    To allow/deny SDC approval requests (default true)
+  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
   -h, --help   help for create
   -n, --name string   Tenant name
 ```
@@ -1121,7 +1121,7 @@ karavictl tenant update [flags]
 #### Options
 
 ```
-  -a, --approvesdc    To allow/deny SDC approval requests (default true)
+  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
   -h, --help   help for update
   -n, --name string   Tenant name
 ```
