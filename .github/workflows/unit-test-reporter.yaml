@@ -2,9 +2,9 @@ name: Unit Test Action
 
 on:
   push:
-    branches: [ unit-test-github-action ]
-  pull_request:
     branches: [ main ]
+  pull_request:
+    branches: [ main, release-1.7.0 ]
 jobs:
   build-test:
       name: Build & Run Unit Test
