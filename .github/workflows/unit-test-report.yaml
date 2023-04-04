@@ -1,0 +1,24 @@
+name: Unit Test Action
+
+on:
+  push:
+    branches: [ unit-test-github-action ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build-test:
+      name: Build & Test
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v1
+      - name: Run Tests
+        working-directory: ./content/docs/deployment/csminstallationwizard/src/
+        run: |
+          npm install 
+          npm test
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            ./content/docs/deployment/csminstallationwizard/src/reports/*.xml
