@@ -12,7 +12,3 @@ Instructions for reporting a vulnerability can be found on the [Dell Vulnerabili
 
 
 CSM recommends to stay on the [lastest release](https://github.com/dell/csm/releases/latest) of Dell Container Storage Modules to take advantage of new features, enhancements, bug fixes, and security fixes.
-
-## Reporting a Vulnerability
-
-Please report a vulnerability by opening an Issue in [CSM](https://github.com/dell/csm/issues).
