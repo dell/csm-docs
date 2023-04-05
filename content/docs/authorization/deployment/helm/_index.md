@@ -72,7 +72,7 @@ The following third-party components are optionally installed in the specified n
 | authorization.images.storageService | The image to use for the storage-service. | Yes | dellemc/csm-authorization-storage:nightly |
 | authorization.images.opa | The image to use for Open Policy Agent. | Yes | openpolicyagent/opa |
 | authorization.images.opaKubeMgmt | The image to use for Open Policy Agent kube-mgmt. | Yes | openpolicyagent/kube-mgmt:0.11 |
-| authorization.hostname | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress. | Yes | csm-authorization.com |
+| authorization.hostname | The hostname to configure the self-signed certificate (if applicable) and the proxy, role, and storage service Ingresses. | Yes | csm-authorization.com |
 | authorization.logLevel | CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”. | Yes | debug |
 | authorization.zipkin.collectoruri | The URI of the Zipkin instance to export traces. | No | - |
 | authorization.zipkin.probability | The ratio of traces to export. | No | - |
@@ -135,7 +135,7 @@ Karavictl commands and intended use can be found [here](../../cli/).
 
 The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
 
-Configuration is achieved by using `karavictl` to connect to the proxy service. In this example, we will be referencing an installation using `csm-authorization.com` as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster's master node.
+Configuration is achieved by using `karavictl` to connect to the proxy, storage, and role services. In this example, we will be referencing an installation using `csm-authorization.com` as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster's master node.
 
 Run `kubectl -n authorization get ingress` and `kubectl -n authorization get service` to see the Ingress rules for these services and the exposed port for accessing these services via the LoadBalancer. For example:
 
@@ -145,11 +145,10 @@ kubectl -n authorization get ingress
 ```
 NAME              CLASS   HOSTS                           ADDRESS   PORTS     AGE
 proxy-server      nginx   csm-authorization.com                     00, 000   86s
-```
-```bash
-kubectl -n auth get service
-```
-```
+role-service      nginx   role.csm-authorization.com                00, 000   86s
+storage-service   nginx   storage.csm-authorization.com             00, 000   86s
+
+# kubectl -n auth get service
 NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
 authorization-cert-manager                         ClusterIP      00.000.000.000    <none>        000/TCP                     28s
 authorization-cert-manager-webhook                 ClusterIP      00.000.000.000    <none>        000/TCP                      27s
@@ -168,6 +167,12 @@ On the machine running `karavictl`, the `/etc/hosts` file needs to be updated wi
 ```bash
 <master_node_ip> csm-authorization.com
 ```
+<master_node_ip> csm-authorization.com
+<master_node_ip> role.csm-authorization.com
+<master_node_ip> storage.csm-authorization.com
+```
+
+The port that exposes these services is `30016`.
 
 Please continue following the steps outlined in the [proxy server](../../configuration/proxy-server) configuration.
 

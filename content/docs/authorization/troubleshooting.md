@@ -54,10 +54,8 @@ For OPA related logs, run:
 
 ### Running "karavictl tenant" commands result in an HTTP 504 error
 This situation may occur if there are Iptables or other firewall rules preventing communication with the provided `DNS-hostname`:
-```bash
-karavictl tenant list --addr <DNS-hostname>
 ```
-```
+$ karavictl tenant list --addr <DNS-hostname>
 {
   "ErrorMsg": "rpc error: code = Unavailable desc = Gateway Timeout: HTTP status code 504; 
   transport: received the unexpected content-type \"text/plain; charset=utf-8\""

@@ -35,17 +35,11 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
     After editing the file, run this command to create a secret called `karavi-config-secret`:
     
-    ```bash
-
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml
-    ```
+    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml`
 
     Use this command to replace or update the secret:
 
-    ```bash
-    
-    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
-    ```
+    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
 
 4. Create the `karavi-storage-secret` using the file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml) to store storage system credentials.
 
@@ -158,6 +152,8 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
    | PROXY_HOST | The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress. | Yes | csm-authorization.com |
    | PROXY_INGRESS_CLASSNAME | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
    | PROXY_INGRESS_HOSTS | Additional host rules to be applied to the proxy-service Ingress.  | No | authorization-ingress-nginx-controller.authorization.svc.cluster.local |
+   | ROLE_INGRESS_CLASSNAME | The ingressClassName of the role-service Ingress. | Yes | nginx |
+   | STORAGE_INGRESS_CLASSNAME | The ingressClassName of the storage-service Ingress. | Yes | nginx |
    | REDIS_STORAGE_CLASS | The storage class for Redis to use for persistence. If not supplied, the default storage class is used. | Yes | - |
    | **ingress-nginx** | This section configures the enablement of the NGINX Ingress Controller. | - | - |
    | enabled | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | true |
@@ -168,7 +164,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
 
   Add the Zipkin values to the configMap where `ZIPKIN_ADDRESS` is the IP address or hostname of the Zipkin server.
-  ```bash
+  ```
   ZIPKIN_URI: "http://ZIPKIN_ADDRESS:9411/api/v2/spans"
   ZIPKIN_PROBABILITY: "1.0"
   ```

@@ -242,19 +242,18 @@ karavictl generate token [flags]
 ##### Options
 
 ```
-  -h, --help                              help for token
-  -t, --tenant                 string     Tenant name
-   --access-token-expiration   duration   Expiration time of the access token, e.g. 1m30s (default 1m0s)
-   --refresh-token-expiration  duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+  -h, --help                   help for token
+  -t, --tenant string          Tenant name 
+   --access-token-expiration duration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
+   --refresh-token-expiration duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
 ```
 
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
+      --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -633,10 +632,9 @@ karavictl rolebinding create [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
+      --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -675,10 +673,9 @@ karavictl rolebinding delete [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
+      --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -1026,10 +1023,9 @@ karavictl tenant create [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
+      --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -1060,17 +1056,16 @@ karavictl tenant get [flags]
 ##### Options
 
 ```
-  -h, --help          help for get
+  -h, --help   help for get
   -n, --name string   Tenant name
 ```
 
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
+      --addr string     Address of the server (default "localhost")
+      --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -1112,10 +1107,9 @@ karavictl tenant list [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
+      --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -1162,10 +1156,9 @@ karavictl tenant revoke [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
+      --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -1202,10 +1195,9 @@ karavictl tenant delete [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
+      --addr string     Address of the server (default "localhost")
+      --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -1243,10 +1235,9 @@ karavictl tenant update [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
+      --addr string     Address of the server (default "localhost")
+      --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
