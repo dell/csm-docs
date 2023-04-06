@@ -617,9 +617,9 @@ karavictl storage [flags]
 ##### Options
 
 ```
-  --addr string   address of the csm-authorization storage service
-  -h, --help      help for storage
-  --insecure      insecure skip verify
+      --addr string    Address of the server (default "localhost")
+      -h, --help       Help for storage
+      --insecure       Skip certificate validation
 ```
 
 ##### Options inherited from parent commands
@@ -653,7 +653,7 @@ karavictl storage get [flags]
 ##### Options
 
 ```
-  -h, --help               help for get
+  -h, --help               Help for get
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
 ```
@@ -661,9 +661,9 @@ karavictl storage get [flags]
 ##### Options inherited from parent commands
 
 ```   
-      --addr string     address of the csm-authorization storage service
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        insecure skip verify
+      --addr string     Address of the server (default "localhost")
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -699,16 +699,16 @@ karavictl storage list [flags]
 ##### Options
 
 ```
-  -h, --help   help for list
+  -h, --help          Help for list
   -t, --type string   Type of storage system
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     address of the csm-authorization storage service
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        insecure skip verify
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -752,7 +752,7 @@ karavictl storage create [flags]
 
 ```
   -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               help for create
+  -h, --help               Help for create
   -a, --array-insecure     Array insecure skip verify
   -p, --password string    Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
@@ -763,9 +763,9 @@ karavictl storage create [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     address of the csm-authorization storage service
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        insecure skip verify
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -796,7 +796,7 @@ karavictl storage update [flags]
 
 ```
   -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               help for update
+  -h, --help               Help for update
   -a, --array-insecure     Array insecure skip verify
   -p, --pass string        Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
@@ -807,9 +807,9 @@ karavictl storage update [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     address of the csm-authorization storage service
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        insecure skip verify
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -840,7 +840,7 @@ karavictl storage delete [flags]
 ##### Options
 
 ```
-  -h, --help               help for delete
+  -h, --help               Help for delete
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
 ```
@@ -848,9 +848,9 @@ karavictl storage delete [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     address of the csm-authorization storage service
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        insecure skip verify
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
