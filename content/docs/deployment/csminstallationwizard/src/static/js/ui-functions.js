@@ -31,12 +31,11 @@ function onArrayChange() {
 		driver = $(this).val();
 		driver === "" ? $("#main").hide() : $("#main").show();
 		displayModules(driver, CONSTANTS)
-		loadTemplate();
+		loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value,document.getElementById("csm-version").value);
 		setDefaultValues(defaultValues, csmMap);
 		document.getElementById("driver-namespace").value = driver;
 		document.getElementById("module-namespace").value = moduleNamespace;
 		$(".namespace").show();
-		loadCSMVersions(document.getElementById("csm-version").value);
 		onObservabilityChange();
 		onAuthorizationChange();
 		onAppMobilityChange(veleroNote);
@@ -120,7 +119,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 }
 
 const onCSMVersionChange = () => {
-	document.getElementById("csm-version").value !== "" ? loadCSMVersions(document.getElementById("csm-version").value) : null;
+	document.getElementById("csm-version").value !== "" ? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value,document.getElementById("csm-version").value): null;
 	displayModules(driver, CONSTANTS);
 	onObservabilityChange();
 	onAuthorizationChange();
@@ -161,7 +160,7 @@ const resetModuleNameSpace = moduleNamespaceValue => {
 
 const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFunc, loadDefaultValuesFunc, hideFieldsFunc, setDefaultValuesFunc, validateInputFunc, CONSTANTS_PARAM) => {
 	var link = document.getElementById('download-file');
-	link.href = generateYamlFileFunc(driverTemplate);
+	link.href = generateYamlFileFunc(template);
 	link.style.display = 'inline-block';
 	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, command3, CONSTANTS_PARAM)
 	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
@@ -188,10 +187,7 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".authorization").hide();
 			$("#authorization").prop('checked', false);
 			$(".storage-capacity").show();
-
-			if (selectedCSMVersion === "1.6.0") {
-				$(".resiliency").show();
-			}
+			$(".resiliency").show();
 
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
@@ -200,11 +196,6 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".vgsnapshot").hide();
 			$(".appMobility").hide();
 			$(".storageArrays").show();
-
-			if (selectedCSMVersion === "1.4.0" || selectedCSMVersion === "1.5.0") {
-				$(".powermax-csi-reverse-proxy").show();
-			}
-
 			$(".cluster-prefix").show();
 			$(".port-groups").show();
 			$(".migration").show();

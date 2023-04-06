@@ -46,7 +46,7 @@
                     <select id="installation-type" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
                       <option value="" selected> Select the Installation type</option>
                       <option value="helm">Helm</option>
-                      <option value="operator" disabled>Operator</option>
+                      <option value="operator">Operator</option>
                     </select>
                   </div>
                 </div>
@@ -85,6 +85,7 @@
                     <div class="col-sm-9"></div>
                     <div class="col-sm-3">
                       <select id="csm-version" class="form-select" onchange="onCSMVersionChange(); validateInput(validateForm, CONSTANTS)" required>
+                        <option value="1.7.0" selected>CSM 1.7</option>
                         <option value="1.6.0" selected>CSM 1.6</option>
                       </select>
                     </div>

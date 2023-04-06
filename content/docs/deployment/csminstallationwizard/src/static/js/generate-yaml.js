@@ -16,8 +16,7 @@
  *
  */
 
-var driverTemplate = "";
-var moduleTemplate = "";
+var template = "";
 var version = "";
 var powerstoreEnabled = false;
 var powermaxEnabled = false;
@@ -82,12 +81,8 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.powermaxCSIReverseProxyImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("powermaxCSIReverseProxyImage");
 	DriverValues.podmonImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("podmonImage");
 	DriverValues.appMobilityVeleroPluginImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("appMobilityVeleroPluginImage");
+	DriverValues.powermaxCSIReverseProxyImageEnabled = true;
 	
-	if (DriverValues.csmVersion === "1.4.0" || DriverValues.csmVersion === "1.5.0") {
-		DriverValues.powermaxCSIReverseProxyImageEnabled = $("#powermax-csi-reverse-proxy").prop('checked') ? true : false;
-	} else {
-		DriverValues.powermaxCSIReverseProxyImageEnabled = true;
-	}
 
 	DriverValues.applicationMobility = $("#application-mobility").prop('checked') ? true : false;
 	DriverValues.velero = $("#velero").prop('checked') ? true : false;
@@ -226,9 +221,15 @@ function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 	return yaml
 }
 
-function loadTemplate() {
-	var tmplFile = CONSTANTS.TEMP_DIR + CONSTANTS.CSM_VALUES + CONSTANTS.TEMP_EXT;
-	$.get(tmplFile, function(data) { driverTemplate = String(data) }, "text");
+function loadTemplate(array,installationType,version) {
+	var tmplFile;
+	if (installationType === CONSTANTS.HELM){
+		 tmplFile = CONSTANTS.TEMP_DIR + CONSTANTS.SLASH + CONSTANTS.HELM + CONSTANTS.SLASH + CONSTANTS.CSM + CONSTANTS.HYPHEN + version + CONSTANTS.HYPHEN + CONSTANTS.VALUES + CONSTANTS.TEMP_EXT;
+	} else{
+		alert("operator")
+		tmplFile = CONSTANTS.TEMP_DIR + CONSTANTS.SLASH + CONSTANTS.OPERATOR + CONSTANTS.SLASH + CONSTANTS.CSM + CONSTANTS.HYPHEN + array + CONSTANTS.HYPHEN + version + CONSTANTS.TEMP_EXT;
+	}
+	$.get(tmplFile, function(data) { template = String(data) }, "text");
 }
 
 if (typeof exports !== 'undefined') {

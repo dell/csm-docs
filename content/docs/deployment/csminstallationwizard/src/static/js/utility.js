@@ -75,7 +75,7 @@ function validateForm(CONSTANTS_PARAM) {
 }
 
 function loadDefaultValues() {
-	var defaultValuesFile = CONSTANTS.VERSIONS_DIR + CONSTANTS.DEFAULT_VALUES + CONSTANTS.PROPERTIES;
+	var defaultValuesFile = CONSTANTS.VERSIONS_DIR + CONSTANTS.SLASH + CONSTANTS.DEFAULT_VALUES + CONSTANTS.PROPERTIES;
 	$.get(defaultValuesFile, function(data) { defaultValues = String(data) }, "text");
 }
 
@@ -100,8 +100,9 @@ function setMap(str) {
 }
 
 function loadCSMVersions(v) {
-	var versionFile = CONSTANTS.VERSIONS_DIR + CONSTANTS.CSM + CONSTANTS.HYPHEN + v + CONSTANTS.PROPERTIES;
+	var versionFile = CONSTANTS.VERSIONS_DIR +CONSTANTS.SLASH+ CONSTANTS.CSM + CONSTANTS.HYPHEN + v + CONSTANTS.PROPERTIES;
 	$.get(versionFile, function(data) { version = String(data) }, "text");
+
 }
 
 if (typeof exports !== 'undefined') {

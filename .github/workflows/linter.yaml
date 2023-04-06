@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main , release-1.7.0 ]
 jobs:
     lint:
       name: Lint Code Base

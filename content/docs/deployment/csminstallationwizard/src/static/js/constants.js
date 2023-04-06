@@ -24,14 +24,16 @@ const CONSTANTS = {
 	UNITY: "csi-unity",
 	POWERSTORE_RELEASE_NAME: "powerstore",
 	MODULE: "csm-modules",
-	CSM_VALUES: "csm-values",
-	TEMP_DIR: "templates/",
+	VALUES: "values",
+	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
 	HYPHEN: "-",
 	NODE_SELECTOR_TAB: '\n'.padEnd(7, " "),
 	SLASH: "/",
-	VERSIONS_DIR: "csm-versions/",
+	VERSIONS_DIR: "csm-versions",
 	CSM: "csm",
 	DEFAULT_VALUES: "default-values",
-	PROPERTIES: ".properties"
+	PROPERTIES: ".properties",
+	HELM: "helm",
+	OPERATOR: "operator"
 };
