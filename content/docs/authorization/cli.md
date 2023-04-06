@@ -707,9 +707,9 @@ karavictl storage [flags]
 ##### Options
 
 ```
-      --addr      string   Address of the server (default "localhost")
-  -h, --help               Help for storage
-      --insecure           Skip certificate validation
+      --addr string    Address of the server (default "localhost")
+      -h, --help       Help for storage
+      --insecure       Skip certificate validation
 ```
 
 ##### Options inherited from parent commands
@@ -751,11 +751,10 @@ karavictl storage get [flags]
 
 ##### Options inherited from parent commands
 
-```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
+```   
+      --addr string     Address of the server (default "localhost")
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -799,10 +798,9 @@ karavictl storage list [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -857,10 +855,9 @@ karavictl storage create [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -903,10 +900,9 @@ karavictl storage update [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -940,16 +936,15 @@ karavictl storage delete [flags]
 ```
   -h, --help               Help for delete
   -s, --system-id string   System identifier (default "systemid")
-  -t, --type      string   Type of storage system ("powerflex", "powermax")
+  -t, --type string        Type of storage system ("powerflex", "powermax")
 ```
 
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output

@@ -16,7 +16,7 @@ The storage administrator must first configure Authorization with the following 
 
 >__Note__:
 > - The `RPM deployment` will use the address of the server.
-> - The `Helm deployment` will use the address and port of the Ingress hosts for the storage, tenant, and role services.
+> - The `Helm deployment` will use the address and port of the Ingress hosts for the proxy-server and role services.
 
 ### Configuring Storage
 
@@ -30,7 +30,8 @@ karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id 
 #Helm/Operator Deployment
 ```bash
 
-karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --array-insecure  --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml
+# Helm Deployment
+karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
 ```
 
 >__Note__:
