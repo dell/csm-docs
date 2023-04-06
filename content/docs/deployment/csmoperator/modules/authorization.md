@@ -143,7 +143,6 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | PROXY_INGRESS_CLASSNAME | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
    | PROXY_INGRESS_HOSTS | Additional host rules to be applied to the proxy-service Ingress.  | No | authorization-ingress-nginx-controller.authorization.svc.cluster.local |
    | ROLE_INGRESS_CLASSNAME | The ingressClassName of the role-service Ingress. | Yes | nginx |
-   | STORAGE_INGRESS_CLASSNAME | The ingressClassName of the storage-service Ingress. | Yes | nginx |
    | REDIS_STORAGE_CLASS | The storage class for Redis to use for persistence. If not supplied, the default storage class is used. | Yes | - |
    | **ingress-nginx** | This section configures the enablement of the NGINX Ingress Controller. | - | - |
    | enabled | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | true |
