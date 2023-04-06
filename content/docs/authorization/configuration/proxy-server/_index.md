@@ -14,8 +14,8 @@ The storage administrator must first configure the proxy server with the followi
 - Bind roles to tenants
 
 >__Note__:
-> - The `RPM deployment` will use the address and of the server.
-> - The `Helm deployment` will use the address and port of the Ingress hosts for the storage, tenant, and role services.
+> - The `RPM deployment` will use the address of the server.
+> - The `Helm deployment` will use the address and port of the Ingress hosts for the proxy-server and role services.
 
 ### Configuring Storage
 
