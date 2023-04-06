@@ -15,7 +15,7 @@ The storage administrator must first configure the proxy server with the followi
 
 >__Note__:
 > - The `RPM deployment` will use the address of the server.
-> - The `Helm deployment` will use the address and port of the Ingress hosts for the storage, tenant, and role services.
+> - The `Helm deployment` will use the address and port of the Ingress hosts for the proxy-server and role services.
 
 ### Configuring Storage
 
@@ -27,7 +27,7 @@ A `storage` entity in CSM Authorization consists of the storage type (PowerFlex,
 karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --array-insecure
 
 # Helm Deployment
-karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr storage.csm-authorization.com:<ingress-nginx-controller-port>
+karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
 ```
 
 >__Note__:
