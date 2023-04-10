@@ -71,6 +71,23 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.storageCapacity = $("#storage-capacity").prop('checked') ? true : false;
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
 	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value || '""';
+	DriverValues.vgsnapshotImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("vgsnapshotImage");
+	DriverValues.replicationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("replicationImage");
+	DriverValues.migrationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("migrationImage");
+	DriverValues.migrationNodeRescanSidecarImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("migrationNodeRescanSidecarImage");
+	DriverValues.authorizationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("authorizationImage");
+	DriverValues.powermaxCSIReverseProxyImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("powermaxCSIReverseProxyImage");
+	DriverValues.podmonImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("podmonImage");
+	DriverValues.appMobilityVeleroPluginImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("appMobilityVeleroPluginImage");
+	
+	if (DriverValues.csmVersion === "1.4.0" || DriverValues.csmVersion === "1.5.0") {
+		DriverValues.powermaxCSIReverseProxyImageEnabled = $("#powermax-csi-reverse-proxy").prop('checked') ? true : false;
+	} else {
+		DriverValues.powermaxCSIReverseProxyImageEnabled = true;
+	}
+
+	DriverValues.applicationMobility = $("#application-mobility").prop('checked') ? true : false;
+	DriverValues.velero = $("#velero").prop('checked') ? true : false;
 	DriverValues.certManagerEnabled = $("#cert-manager-enabled").prop('checked') ? true : false;
 	observabilityEnabled = DriverValues.observability;
 	authorizationEnabled = DriverValues.authorization;
@@ -90,39 +107,47 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	return DriverValues
 }
 
-function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) {
-	yamlTpl = yamlTpl.replaceAll("$IMAGE_REPOSITORY", yamlTplValues.imageRepository);
-	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_COUNT", yamlTplValues.controllerCount);
-	yamlTpl = yamlTpl.replaceAll("$VOLUME_NAME_PREFIX", yamlTplValues.volNamePrefix);
-	yamlTpl = yamlTpl.replaceAll("$SNAP_NAME_PREFIX", yamlTplValues.snapNamePrefix);
-	yamlTpl = yamlTpl.replaceAll("$FSGROUP_POLICY", yamlTplValues.fsGroupPolicy);
-	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_POD_NODE_SELECTOR", yamlTplValues.controllerPodsNodeSelector);
-	yamlTpl = yamlTpl.replaceAll("$NODE_POD_NODE_SELECTOR", yamlTplValues.nodePodsNodeSelector);
-	yamlTpl = yamlTpl.replaceAll("$HEALTH_MONITOR_ENABLED", yamlTplValues.healthMonitor);
-	yamlTpl = yamlTpl.replaceAll("$VG_SNAPSHOT_ENABLED", yamlTplValues.vgsnapshot);
-	yamlTpl = yamlTpl.replaceAll("$SNAPSHOT_ENABLED", yamlTplValues.snapshot);
-	yamlTpl = yamlTpl.replaceAll("$RESIZER_ENABLED", yamlTplValues.resizer);
-	yamlTpl = yamlTpl.replaceAll("$REPLICATION_ENABLED", yamlTplValues.replication);
-	yamlTpl = yamlTpl.replaceAll("$MIGRATION_ENABLED", yamlTplValues.migration);
-	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_ENABLED", yamlTplValues.authorization);
-	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_PROXY_HOST", yamlTplValues.authorizationProxyHost);
-	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION", yamlTplValues.authorizationSkipCertValidation);
-	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_ENABLED", yamlTplValues.observability);
-	yamlTpl = yamlTpl.replaceAll("$RESILIENCY_ENABLED", yamlTplValues.resiliency);
-	yamlTpl = yamlTpl.replaceAll("$STORAGE_CAPACITY_ENABLED", yamlTplValues.storageCapacity);
-	yamlTpl = yamlTpl.replaceAll("$MONITOR_ENABLED", yamlTplValues.monitor);
-	yamlTpl = yamlTpl.replaceAll("$CERT_SECRET_COUNT", yamlTplValues.certSecretCount);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_ID", yamlTplValues.storageArrayId);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", yamlTplValues.storageArrayBackupEndpointUrl);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_CLUSTER_PREFIX", yamlTplValues.clusterPrefix);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_PORT_GROUPS", yamlTplValues.portGroups);
-	yamlTpl = yamlTpl.replaceAll("$VSPHERE_ENABLED", yamlTplValues.vSphereEnabled);
-	yamlTpl = yamlTpl.replaceAll("$VSPHERE_FC_PORT_GROUP", yamlTplValues.vSphereFCPortGroup);
-	yamlTpl = yamlTpl.replaceAll("$VSPHERE_FC_HOST_NAME", yamlTplValues.vSphereFCHostName);
-	yamlTpl = yamlTpl.replaceAll("$VSPHERE_VCENTER_HOST", yamlTplValues.vSphereVCenterHost);
-	yamlTpl = yamlTpl.replaceAll("$VSPHERE_VCENTER_CRED_SECRET", yamlTplValues.vSphereVCenterCredSecret);
+function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
+	yaml = yaml.replaceAll("$IMAGE_REPOSITORY", obj.imageRepository);
+	yaml = yaml.replaceAll("$VERSION", obj.driverVersion);
+	yaml = yaml.replaceAll("$MONITOR_ENABLED", obj.monitor);
+	yaml = yaml.replaceAll("$CERT_SECRET_COUNT", obj.certSecretCount);
+	yaml = yaml.replaceAll("$CONTROLLER_COUNT", obj.controllerCount);
+	yaml = yaml.replaceAll("$CONTROLLER_POD_NODE_SELECTOR", obj.controllerPodsNodeSelector);
+	yaml = yaml.replaceAll("$NODE_POD_NODE_SELECTOR", obj.nodePodsNodeSelector);
+	yaml = yaml.replaceAll("$HEALTH_MONITOR_ENABLED", obj.healthMonitor);
+	yaml = yaml.replaceAll("$VG_SNAPSHOT_ENABLED", obj.vgsnapshot);
+	yaml = yaml.replaceAll("$VG_SNAPSHOT_IMAGE", obj.vgsnapshotImage);
+	yaml = yaml.replaceAll("$SNAPSHOT_ENABLED", obj.snapshot);
+	yaml = yaml.replaceAll("$RESIZER_ENABLED", obj.resizer);
+	yaml = yaml.replaceAll("$REPLICATION_ENABLED", obj.replication);
+	yaml = yaml.replaceAll("$REPLICATION_IMAGE", obj.replicationImage);
+	yaml = yaml.replaceAll("$MIGRATION_ENABLED", obj.migration);
+	yaml = yaml.replaceAll("$MIGRATION_IMAGE", obj.migrationImage);
+	yaml = yaml.replaceAll("$MIGRATION_NODE_RESCAN_SIDECAR_IMAGE", obj.migrationNodeRescanSidecarImage);
+	yaml = yaml.replaceAll("$AUTHORIZATION_ENABLED", obj.authorization);
+	yaml = yaml.replaceAll("$AUTHORIZATION_IMAGE", obj.authorizationImage);
+	yaml = yaml.replaceAll("$AUTHORIZATION_PROXY_HOST", obj.authorizationProxyHost);
+	yaml = yaml.replaceAll("$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION", obj.authorizationSkipCertValidation);
+	yaml = yaml.replaceAll("$OBSERVABILITY_ENABLED", obj.observability);
+	yaml = yaml.replaceAll("$RESILIENCY_ENABLED", obj.resiliency);
+	yaml = yaml.replaceAll("$PODMAN_IMAGE", obj.podmonImage);
+	yaml = yaml.replaceAll("$STORAGE_CAPACITY_ENABLED", obj.storageCapacity);
+	yaml = yaml.replaceAll("$POWERMAX_CSI_REVERSE_PROXY_IMAGE_ENABLED", obj.powermaxCSIReverseProxyImageEnabled);
+
+	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_ID", obj.storageArrayId);
+	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_ENDPOINT_URL", obj.storageArrayEndpointUrl);
+	yaml = yaml.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", obj.storageArrayBackupEndpointUrl);
+	yaml = yaml.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", obj.storageArrayEndpointUrl);
+	yaml = yaml.replaceAll("$POWERMAX_CSI_REVERSE_PROXY_IMAGE", obj.powermaxCSIReverseProxyImage);
+	yaml = yaml.replaceAll("$POWERMAX_CLUSTER_PREFIX", obj.clusterPrefix);
+	yaml = yaml.replaceAll("$POWERMAX_PORT_GROUPS", obj.portGroups);
+	
+	yaml = yaml.replaceAll("$VSPHERE_ENABLED", obj.vSphereEnabled);
+	yaml = yaml.replaceAll("$VSPHERE_FC_PORT_GROUP", obj.vSphereFCPortGroup);
+	yaml = yaml.replaceAll("$VSPHERE_FC_HOST_NAME", obj.vSphereFCHostName);
+	yaml = yaml.replaceAll("$VSPHERE_VCENTER_HOST", obj.vSphereVCenterHost);
+	yaml = yaml.replaceAll("$VSPHERE_VCENTER_CRED_SECRET", obj.vSphereVCenterCredSecret);
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
 		yamlTpl = yamlTpl.replaceAll("$POWERSTORE_ENABLED", true);

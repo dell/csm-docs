@@ -59,9 +59,9 @@
                       <option value="" selected>Select the Array</option>
                       <option value="powerstore">PowerStore</option>
                       <option value="powermax">PowerMax</option>
-                      <option value="isilon">PowerScale</option>
-                      <option value="vxflexos">PowerFlex</option>
-                      <option value="unity">Unity</option>
+                      <option value="csi-powerscale" disabled>PowerScale</option>
+                      <option value="csi-powerflex">PowerFlex</option>
+                      <option value="csi-unity" disabled>Unity</option>
                     </select>
                   </div>
                 </div>
@@ -335,7 +335,7 @@
                   </div>
 
                   <div class="row mb-4 cert-secret-count-wrapper">
-                    <label for="cert-secret-count" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Represents the number of certificate secrets, which the user is going to create for SSL authentication." style="width: 200px;">Certificate Secret Count</label>
+                    <label for="cert-secret-count" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Represents the number of certificate secrets, which the user is going to create for SSL authentication." style="width: 180px;">Certificate Secret Count</label>
                     <div class="row">
                       <div class="col-sm-2">
                         <input class="form-control input-sm" type="number" id="cert-secret-count" min="0" value="0">
@@ -343,19 +343,6 @@
                     </div>
                   </div>
 
-                  <div class="was-validated row mb-4 fsGroupPolicy">
-                    <label for="fsGroupPolicy" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Select the fsGroupPolicy type" style="width: 180px;">FS Group Policy</label>
-                    <div class="col-sm-9"></div>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <select id="fsGroup-Policy" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
-                          <option value="ReadWriteOnceWithFSType" selected>ReadWriteOnceWithFSType</option>
-                          <option value="File">File</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  
                   <div class="was-validated row mb-4">
                     <label for="controller-count" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Defines the number of controller pods to deploy." style="width: 180px;">Controller Pods Count</label>
                     <div class="row">

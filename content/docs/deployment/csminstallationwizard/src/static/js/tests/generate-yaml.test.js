@@ -83,9 +83,7 @@ describe("GIVEN setValues function", () => {
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
 			certSecretCount: "0",
-			controllerCount: "1",
-			volNamePrefix: "csivol",
-			snapNamePrefix: "csi-snap",
+			controllerCount: "2",
 			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodeSelectorLabel: "node-role.kubernetes.io/control-plane:",
@@ -111,29 +109,34 @@ describe("GIVEN setValues function", () => {
             <select id="csm-version">
                 <option value="1.6.0">CSM 1.6</option>
             </select>
-            <select id="fsGroup-Policy">
-                <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
-            </select>
             <input type="text" id="image-repository" value="dellemc">
             <input type="number" id="cert-secret-count" value="0">
             <input type="number" id="controller-count" value="2">
-            <input type="text" id="vol-name-prefix" value="csivol">
-            <input type="text" id="snapshot-prefix" value="csi-snap">
             <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
             <input type="checkbox" id="controller-pods-node-selector" checked>
             <input type="checkbox" id="node-pods-node-selector" checked>
             <input type="text" id="driver-namespace" value="">
+            <input type="text" id="module-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
         `;
+
+		const testCSMMap = new Map([
+			["csmVersion", "1.6.0"],
+			["imageRepository", "dellemc"],
+			["controllerCount", "2"],
+			["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
+			["driverVersion", "v2.6.0"],
+			["vgsnapshotImage", "csi-volumegroup-snapshotter:v1.2.0"],
+			["replicationImage", "dell-csi-replicator:v1.4.0"],
+			["authorizationImage", "csm-authorization-sidecar:v1.6.0"]
+		]);
 
 		const expected = {
 			csmVersion: "1.6.0",
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
 			certSecretCount: "0",
-			controllerCount: "1",
-			VolnamePrefix: "csivol",
-			SnapnamePrefix: "csi-snap",
+			controllerCount: "2",
 			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodeSelectorLabel: "node-role.kubernetes.io/control-plane:",
@@ -146,7 +149,12 @@ describe("GIVEN setValues function", () => {
 			observabilityMetrics: false,
 			authorization: false,
 			authorizationSkipCertValidation: true,
+			vgsnapshotImage: "dellemc/csi-volumegroup-snapshotter:v1.2.0",
+			replicationImage: "dellemc/dell-csi-replicator:v1.4.0",
+			authorizationImage: "dellemc/csm-authorization-sidecar:v1.6.0",
+			applicationMobility: false,
 			certManagerEnabled: false,
+			singleNamespaceEnabled: false
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);

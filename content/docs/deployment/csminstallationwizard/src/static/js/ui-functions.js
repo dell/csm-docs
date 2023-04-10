@@ -170,10 +170,8 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".migration").hide();
 	$(".vSphere").hide();
 	$(".cert-secret-count-wrapper").hide();
-	$(".monitor").hide();
-	$(".vol-name-prefix").show();
-	$("div#snap-prefix").show();
-	$(".fsGroupPolicy").hide();
+
+	const selectedCSMVersion = document.getElementById("csm-version").value;
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -200,11 +198,8 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERFLEX:
-			$(".monitor").show();
 			$(".resiliency").show();
 			$(".cert-secret-count-wrapper").show();
-			$("div#snap-prefix").hide();
-			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.UNITY:
 			$(".observability").hide();
