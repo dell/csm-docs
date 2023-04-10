@@ -23,7 +23,6 @@ const {
 	onResiliencyChange,
 	onSnapshotChange,
 	onVSphereChange,
-	singleNamespaceCheck,
 	onNodeSelectorChange,
 	onCopyButtonClickHandler,
 	resetImageRepository,
@@ -44,15 +43,18 @@ const CONSTANTS = {
 	POWERMAX: "powermax",
 	UNITY: "unity",
 	POWERSTORE_NAMESPACE: "csi-powerstore",
-	UNITY: "csi-unity",
-	CSM_VALUES: "csm-values",
-	TEMP_DIR: "templates/",
+	VALUES: "values",
+	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
 	HYPHEN: "-",
-	VERSIONS_DIR: "csm-versions/",
+	NODE_SELECTOR_TAB: '\n'.padEnd(7, " "),
+	SLASH: "/",
+	VERSIONS_DIR: "csm-versions",
 	CSM: "csm",
 	DEFAULT_VALUES: "default-values",
-	PROPERTIES: ".properties"
+	PROPERTIES: ".properties",
+	HELM: "helm",
+	OPERATOR: "operator"
 };
 
 describe("GIVEN onAuthorizationChange function", () => {
@@ -199,30 +201,6 @@ describe("GIVEN onVSphereChange function", () => {
 	});
 });
 
-describe("GIVEN singleNamespaceCheck function", () => {
-	test("SHOULD hide namespace components when option checked", () => {
-		document.body.innerHTML = `
-            <input type="checkbox" id="single-namespace" checked>
-			<div id="single-namespace-disabled"></div>
-        `;
-
-		singleNamespaceCheck();
-
-		expect($("div#single-namespace-disabled").css("display")).toEqual("none");
-	});
-
-	test("SHOULD show namespace components when option not checked", () => {
-		document.body.innerHTML = `
-            <input type="checkbox" id="single-namespace">
-            <div id="single-namespace-disabled"></div>
-        `;
-
-		singleNamespaceCheck();
-
-		expect($("div#single-namespace-disabled").css("display")).not.toEqual("none");
-	});
-});
-
 describe("GIVEN onNodeSelectorChange function", () => {
 	const nodeSelectorNoteValue = "Test nodeSelectorNote value";
 	const testCSMMap = new Map([["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"]]);
@@ -352,9 +330,8 @@ describe("GIVEN resetDriverNamespace function", () => {
 describe("GIVEN displayModules function", () => {
 	const testHtml = `
 		<select id="csm-version">
-			<option value="1.6.0" selected>CSM 1.6</option>
-			<option value="1.5.0">CSM 1.5</option>
-			<option value="1.4.0">CSM 1.4</option>
+			<option value="1.7.0" selected>CSM 1.7.0</option>
+			<option value="1.6.0">CSM 1.6.0</option>
 		</select>
 		<div class="vgsnapshot" style="display:none"></div>
 		<div class="authorization" style="display:none"></div>
@@ -365,7 +342,7 @@ describe("GIVEN displayModules function", () => {
 	test("SHOULD show expected components for csi-powerstore", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("csi-powerstore", CONSTANTS);
+		displayModules("powerstore", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("none");
@@ -376,7 +353,7 @@ describe("GIVEN displayModules function", () => {
 	test("SHOULD show expected components for csi-powerscale", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("csi-powerscale", CONSTANTS);
+		displayModules("powerscale", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("block");
@@ -398,7 +375,7 @@ describe("GIVEN displayModules function", () => {
 	test("SHOULD show expected components for csi-powerflex", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("csi-powerflex", CONSTANTS);
+		displayModules("powerflex", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("block");
@@ -409,7 +386,7 @@ describe("GIVEN displayModules function", () => {
 	test("SHOULD show expected components for csi-unity", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("csi-unity", CONSTANTS);
+		displayModules("unity", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("block");
@@ -438,19 +415,26 @@ describe("GIVEN displayCommands function", () => {
 	const commandTitleValue = "Run the following commands to install";
 	const commandNoteValue = "Ensure that the namespaces and secrets are created before installing the helm chart";
 	const command1Value = "helm repo add dell https://dell.github.io/helm-charts";
-	const command2Value = "helm install $release-name dell/container-storage-modules -n [namespace] -f values.yaml";
-	const command3Value = "helm install $release-name dell/container-storage-modules -f values.yaml";
+	const command2Value = "helm install $release-name dell/container-storage-modules -n $namespace --version $version -f values.yaml";
 
 	const CONSTANT_PARAM = {
-		POWERMAX: "powermax"
+		POWERSTORE: "powerstore",
+		POWERSCALE: "powerscale",
+		POWERFLEX: "powerflex",
+		POWERMAX: "powermax",
+		UNITY: "unity",
+		POWERSTORE_NAMESPACE: "csi-powerstore",
+		HELM: "helm",
+		OPERATOR: "operator",
+		CSM_HELM_v160: "0.1.0",
+		CSM_HELM_v170: "1.0.0"
 	};
 
 	test("SHOULD show expected commands", () => {
 		document.body.innerHTML = `
-			<input id="array" value="csi-powerstore">
+			<input id="array" value="powerstore">
 			<input type="text" id="driver-namespace" value="csi-powerstore">
-            <input type="checkbox" id="single-namespace" value="">
-
+			<input type="text" id="csm-version" value="1.7.0">
             <div id="command-text-area" style="display:none">
                 <div id="command-title"></div>
                 <span id="command-note" style="display:none"></span>
@@ -459,37 +443,15 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANT_PARAM);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, CONSTANT_PARAM);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
 		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
 		expect($("#command1").text()).toEqual("helm repo add dell https://dell.github.io/helm-charts");
-		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -f values.yaml");
+		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.0 -f values.yaml");
 	});
 
-	test("SHOULD show expected commands for singleNamespace", () => {
-		document.body.innerHTML = `
-			<input id="array" value="csi-powerstore">
-            <input type="text" id="driver-namespace" value="csi-powerstore">
-            <input type="checkbox" id="single-namespace" checked>
-
-            <div id="command-text-area" style="display:none">
-                <div id="command-title"></div>
-                <span id="command-note" style="display:none"></span>
-                <span id="command1"></span>
-                <span id="command2"></span>
-            </div>
-        `;
-
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANT_PARAM);
-
-		expect($("#command-text-area").css("display")).toEqual("block");
-		expect($("#command-title").text()).toEqual("Run the following commands to install");
-		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
-		expect($("#command1").text()).toEqual("helm repo add dell https://dell.github.io/helm-charts");
-		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n [namespace] -f values.yaml");
-	});
 });
 
 describe("SHOULD Disable/Enable Generate YAML button based on validation of input fields", () => {
@@ -502,7 +464,6 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 			<input id="csm-version" value="csm-1.6.0">
 			<input type="number" id="controller-count" value="1">
 			<input type="text" id="driver-namespace" value="csm-driver">
-			<input type="text" id="module-namespace" value="csm-module">
         `;	
 
 		const received = validateInput(() => false, {});
@@ -511,13 +472,12 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 
 	test("SHOULD disable Generate YAML button if driver-namespace is empty", () => {
 		document.body.innerHTML = `
-            <input type="text" id="driver-namespace" value="">
-			<input id="array" value="csi-powerstore">
+			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
-			<input id="image-repository" value="dell">
+			<input id="image-repository" value="dellemc">
 			<input id="csm-version" value="csm-1.6.0">
 			<input type="number" id="controller-count" value="1">
-			<input type="text" id="module-namespace" value="csm-module">
+			<input type="text" id="driver-namespace" value="">
         `;
 
 		const received = validateInput(() => false, {});
@@ -527,12 +487,11 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 	test("SHOULD disable Generate YAML button if controller count is less than 1 ", () => {
 		document.body.innerHTML = `
 			<input type="number" id="controller-count" value="0">
-			<input id="array" value="csi-powerstore">
+			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
 			<input id="image-repository" value="dell">
 			<input id="csm-version" value="csm-1.6.0">
-			<input type="text" id="driver-namespace" value="csm-driver">
-			<input type="text" id="module-namespace" value="csm-module">
+			<input type="text" id="driver-namespace" value="csi-powerstore">
         `;
 
 		const received = validateInput(() => false, {});
@@ -541,13 +500,12 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 
 	test("SHOULD enable Generate YAML button only if all the required fields have valid inputs", () => {
 		document.body.innerHTML = `
-			<input id="array" value="csi-powerstore">
+			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
 			<input id="image-repository" value="dell">
 			<input id="csm-version" value="csm-1.6.0">
 			<input type="number" id="controller-count" value="1">
-			<input type="text" id="driver-namespace" value="csm-driver">
-			<input type="text" id="module-namespace" value="csm-module">
+			<input type="text" id="driver-namespace" value="csi-powerstore">
         `;
 		
 		const received = validateInput(() => true, {});

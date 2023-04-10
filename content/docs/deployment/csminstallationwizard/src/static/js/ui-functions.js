@@ -198,13 +198,13 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 	var helmChartVersion;
 	switch(csmVersion){
 		case "1.7.0": 
-			helmChartVersion =  CONSTANTS.CSM_HELM_v170;
+			helmChartVersion =  CONSTANTS_PARAM.CSM_HELM_v170;
 			break;
 		case "1.6.0": 
-			helmChartVersion =  CONSTANTS.CSM_HELM_v160;
+			helmChartVersion =  CONSTANTS_PARAM.CSM_HELM_v160;
 			break;
 		default:
-			helmChartVersion =  CONSTANTS.CSM_HELM_v170;
+			helmChartVersion =  CONSTANTS_PARAM.CSM_HELM_v170;
 			break;
 	}
 	
