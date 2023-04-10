@@ -208,6 +208,10 @@
 &lt;td&gt;&lt;code&gt;kubectl logs powermax-controller-&amp;lt;xyz&amp;gt; –n &amp;lt;namespace&amp;gt;&lt;/code&gt; driver logs says connection refused and the reverseproxy logs says &amp;ldquo;Failed to setup server.(secrets &amp;quot;secret-name&amp;quot; not found)&amp;rdquo;&lt;/td&gt;
 &lt;td&gt;Make sure the given secret &lt;secret-name&gt; exist on the cluster &lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;nodestage is failing with error &lt;code&gt;Error invalid IQN Target iqn.EMC.0648.SE1F&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;1. Update initiator name to full default name , ex: iqn.1993-08.org.debian:01:e9afae962192 &lt;br&gt; 2.Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed and it should be full default name.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
