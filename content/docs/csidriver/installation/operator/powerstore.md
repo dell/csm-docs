@@ -3,6 +3,10 @@ title: PowerStore
 description: >
   Installing CSI Driver for PowerStore via Operator
 ---
+{{% pageinfo color="primary" %}}
+Dell CSI Operator is no longer actively maintained and support will be deprecated in CSM 1.9 (Driver Version 2.9.0) and we highly recommend to use [CSM Operator](../../../../deployment/csmoperator) for the installation henceforth.
+{{% /pageinfo %}}
+
 ## Installing CSI Driver for PowerStore via Operator
 
 The CSI Driver for Dell PowerStore can be installed via the Dell CSI Operator.
