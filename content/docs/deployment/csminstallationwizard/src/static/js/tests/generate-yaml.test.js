@@ -42,6 +42,7 @@ describe("GIVEN setValues function", () => {
                 <option value="1.4.0">CSM 1.4</option>
             </select>
             <input type="text" id="image-repository" value="dellemc">
+            <input type="number" id="cert-secret-count" value="0">
             <input type="number" id="controller-count" value="2">
             <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
             <input type="checkbox" id="controller-pods-node-selector" checked>
@@ -66,6 +67,7 @@ describe("GIVEN setValues function", () => {
 			csmVersion: "1.4.0",
 			driverVersion: "v2.4.0",
 			imageRepository: "dellemc",
+			certSecretCount: "0",
 			controllerCount: "2",
 			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
@@ -85,6 +87,56 @@ describe("GIVEN setValues function", () => {
 			applicationMobility: false,
 			certManagerEnabled: false,
 			singleNamespaceEnabled: false
+		};
+
+		const received = setValues(testCSMMap, CONSTANTS);
+
+		expect(received).toEqual(received);
+	});
+
+	test("SHOULD return expected DriverValues for csm version 1.6.0", () => {
+		document.body.innerHTML = `
+            <select id="csm-version">
+                <option value="1.6.0">CSM 1.6</option>
+            </select>
+            <input type="text" id="image-repository" value="dellemc">
+            <input type="number" id="cert-secret-count" value="0">
+            <input type="number" id="controller-count" value="2">
+            <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
+            <input type="checkbox" id="controller-pods-node-selector" checked>
+            <input type="checkbox" id="node-pods-node-selector" checked>
+            <input type="text" id="driver-namespace" value="">
+            <input type="text" id="authorization-proxy-host" value="">
+        `;
+
+		const testCSMMap = new Map([
+			["csmVersion", "1.6.0"],
+			["imageRepository", "dellemc"],
+			["controllerCount", "2"],
+			["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
+			["driverVersion", "v2.6.0"],
+		]);
+
+		const expected = {
+			csmVersion: "1.6.0",
+			driverVersion: "v2.6.0",
+			imageRepository: "dellemc",
+			certSecretCount: "0",
+			controllerCount: "2",
+			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+			nodeSelectorLabel: "node-role.kubernetes.io/control-plane:",
+			snapshot: true,
+			vgsnapshot: false,
+			resizer: true,
+			healthMonitor: false,
+			replication: false,
+			observability: false,
+			observabilityMetrics: false,
+			authorization: false,
+			authorizationSkipCertValidation: true,
+			applicationMobility: false,
+			certManagerEnabled: false,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);

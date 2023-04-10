@@ -13,7 +13,7 @@ csi-powerstore:
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
     replication:
       enabled: $REPLICATION_ENABLED
-      image: $REPLICATION_IMAGE
+      image: dellemc/dell-csi-replicator:v1.4.0
     vgsnapshot:
       enabled: $VG_SNAPSHOT_ENABLED
       image: dellemc/csi-volumegroup-snapshotter:v1.2.0
@@ -108,6 +108,64 @@ csi-powermax:
     fcHostName: "$VSPHERE_FC_HOST_NAME"
     vCenterHost: "$VSPHERE_VCENTER_HOST"
     vCenterCredSecret: $VSPHERE_VCENTER_CRED_SECRET
+
+## CSI PowerFlex
+########################
+csi-vxflexos:
+  enabled: $POWERFLEX_ENABLED
+  version: v2.6.0
+  images:
+    driverRepository: $IMAGE_REPOSITORY
+    powerflexSdc: dellemc/sdc:3.6.0.6
+  certSecretCount: $CERT_SECRET_COUNT
+  controller:
+    replication:
+      enabled: $REPLICATION_ENABLED
+      image: dellemc/dell-csi-replicator:v1.4.0
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+    controllerCount: $CONTROLLER_COUNT
+    snapshot:
+      enabled: $SNAPSHOT_ENABLED
+    resizer:
+      enabled: $RESIZER_ENABLED
+    nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+  node:
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+    nodeSelector: $NODE_POD_NODE_SELECTOR
+    tolerations:
+    # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
+    # - key: "offline.vxflexos.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "vxflexos.podmon.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "offline.unity.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "unity.podmon.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "offline.isilon.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # - key: "isilon.podmon.storage.dell.com"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+  monitor:
+    enabled: $MONITOR_ENABLED
+  vgsnapshotter:
+    enabled: $VG_SNAPSHOT_ENABLED
+    image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+  podmon:
+    enabled: $RESILIENCY_ENABLED
+    image: dellemc/podmon:v1.5.0
+  authorization:
+    enabled: $AUTHORIZATION_ENABLED
+    sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+    proxyHost: $AUTHORIZATION_PROXY_HOST
 
 ## K8S/Replication Module ATTRIBUTES
 ##########################################

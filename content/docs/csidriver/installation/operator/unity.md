@@ -4,6 +4,9 @@ description: >
   Installing CSI Driver for Unity XT via Operator
 ---
 
+{{% pageinfo color="primary" %}}
+Dell CSI Operator is no longer actively maintained and support will be deprecated in CSM 1.9 (Driver Version 2.9.0) and we highly recommend to use [CSM Operator](../../../../deployment/csmoperator) for the installation henceforth.
+{{% /pageinfo %}}
 
 
 ## CSI Driver for Unity XT

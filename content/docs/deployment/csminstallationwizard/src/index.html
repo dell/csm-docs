@@ -60,7 +60,7 @@
                       <option value="powerstore">PowerStore</option>
                       <option value="powermax">PowerMax</option>
                       <option value="powerscale" disabled>PowerScale</option>
-                      <option value="powerflex" disabled>PowerFlex</option>
+                      <option value="powerflex">PowerFlex</option>
                       <option value="unity" disabled>Unity</option>
                     </select>
                   </div>
@@ -328,6 +328,22 @@
                         <div class="was-validated col-sm-3">
                           <input class="form-control input-lg" type="text" id="vSphere-vCenter-cred-secret" placeholder="Example: vcenter-creds" value="vcenter-creds" oninput="validateInput(validateForm, CONSTANTS)" required>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4 monitor">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="monitor" value="">
+                      <label for="monitor" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Allows the configuration of the SDC monitoring pod.">Allow Monitoring Pod</label>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4 cert-secret-count-wrapper">
+                    <label for="cert-secret-count" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Represents the number of certificate secrets, which the user is going to create for SSL authentication." style="width: 180px;">Certificate Secret Count</label>
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <input class="form-control input-sm" type="number" id="cert-secret-count" min="0" value="0">
                       </div>
                     </div>
                   </div>

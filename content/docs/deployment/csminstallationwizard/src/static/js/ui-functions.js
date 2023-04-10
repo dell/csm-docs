@@ -166,6 +166,7 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".storage-capacity").hide();
 	$(".migration").hide();
 	$(".vSphere").hide();
+	$(".cert-secret-count-wrapper").hide();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -186,6 +187,8 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".vSphere").show();
 			break;
 		case CONSTANTS_PARAM.POWERFLEX:
+			$(".resiliency").show();
+			$(".cert-secret-count-wrapper").show();
 			break;
 		case CONSTANTS_PARAM.UNITY:
 			break;

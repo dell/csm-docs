@@ -43,6 +43,8 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.csmVersion = document.getElementById("csm-version").value
 	DriverValues.driverVersion = csmMapValues.get("driverVersion");
 	DriverValues.imageRepository = document.getElementById("image-repository").value;
+	DriverValues.monitor = $("#monitor").prop('checked') ? true : false;
+	DriverValues.certSecretCount = document.getElementById("cert-secret-count").value;
 	DriverValues.controllerCount = document.getElementById("controller-count").value;
 	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : false;
 	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : false;
@@ -67,7 +69,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.resiliency = $("#resiliency").prop('checked') ? true : false;
 	DriverValues.storageCapacity = $("#storage-capacity").prop('checked') ? true : false;
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
-	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value;	
+	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value || '""';
 	DriverValues.applicationMobility = $("#application-mobility").prop('checked') ? true : false;
 	DriverValues.velero = $("#velero").prop('checked') ? true : false;
 	DriverValues.certManagerEnabled = $("#cert-manager-enabled").prop('checked') ? true : false;
@@ -99,25 +101,23 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$NODE_POD_NODE_SELECTOR", yamlTplValues.nodePodsNodeSelector);
 	yamlTpl = yamlTpl.replaceAll("$HEALTH_MONITOR_ENABLED", yamlTplValues.healthMonitor);
 	yamlTpl = yamlTpl.replaceAll("$VG_SNAPSHOT_ENABLED", yamlTplValues.vgsnapshot);
-	yamlTpl = yamlTpl.replaceAll("$VG_SNAPSHOT_IMAGE", yamlTplValues.vgsnapshotImage);
 	yamlTpl = yamlTpl.replaceAll("$SNAPSHOT_ENABLED", yamlTplValues.snapshot);
 	yamlTpl = yamlTpl.replaceAll("$RESIZER_ENABLED", yamlTplValues.resizer);
 	yamlTpl = yamlTpl.replaceAll("$REPLICATION_ENABLED", yamlTplValues.replication);
 	yamlTpl = yamlTpl.replaceAll("$MIGRATION_ENABLED", yamlTplValues.migration);
-	yamlTpl = yamlTpl.replaceAll("$MIGRATION_NODE_RESCAN_SIDECAR_IMAGE", yamlTplValues.migrationNodeRescanSidecarImage);
 	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_ENABLED", yamlTplValues.authorization);
 	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_PROXY_HOST", yamlTplValues.authorizationProxyHost);
 	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION", yamlTplValues.authorizationSkipCertValidation);
 	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_ENABLED", yamlTplValues.observability);
 	yamlTpl = yamlTpl.replaceAll("$RESILIENCY_ENABLED", yamlTplValues.resiliency);
-	yamlTpl = yamlTpl.replaceAll("$PODMAN_IMAGE", yamlTplValues.podmonImage);
 	yamlTpl = yamlTpl.replaceAll("$STORAGE_CAPACITY_ENABLED", yamlTplValues.storageCapacity);
+	yamlTpl = yamlTpl.replaceAll("$MONITOR_ENABLED", yamlTplValues.monitor);
+	yamlTpl = yamlTpl.replaceAll("$CERT_SECRET_COUNT", yamlTplValues.certSecretCount);
 
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_ID", yamlTplValues.storageArrayId);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", yamlTplValues.storageArrayBackupEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_CSI_REVERSE_PROXY_IMAGE", yamlTplValues.powermaxCSIReverseProxyImage);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_CLUSTER_PREFIX", yamlTplValues.clusterPrefix);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_PORT_GROUPS", yamlTplValues.portGroups);
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_ENABLED", yamlTplValues.vSphereEnabled);
