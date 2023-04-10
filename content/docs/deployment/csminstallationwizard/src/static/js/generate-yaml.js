@@ -49,6 +49,8 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.csmVersion = document.getElementById("csm-version").value
 	DriverValues.driverVersion = csmMapValues.get("driverVersion");
 	DriverValues.imageRepository = document.getElementById("image-repository").value;
+	DriverValues.monitor = $("#monitor").prop('checked') ? true : false;
+	DriverValues.certSecretCount = document.getElementById("cert-secret-count").value;
 	DriverValues.controllerCount = document.getElementById("controller-count").value;
 	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : false;
 	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : false;
@@ -73,7 +75,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.resiliency = $("#resiliency").prop('checked') ? true : false;
 	DriverValues.storageCapacity = $("#storage-capacity").prop('checked') ? true : false;
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
-	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value;
+	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value || '""';
 	DriverValues.vgsnapshotImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("vgsnapshotImage");
 	DriverValues.replicationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("replicationImage");
 	DriverValues.migrationImage = DriverValues.imageRepository + CONSTANTS_PARAM.SLASH + csmMapValues.get("migrationImage");
@@ -117,6 +119,8 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 function createYamlString(yaml, obj, driverParam, CONSTANTS_PARAM) {
 	yaml = yaml.replaceAll("$IMAGE_REPOSITORY", obj.imageRepository);
 	yaml = yaml.replaceAll("$VERSION", obj.driverVersion);
+	yaml = yaml.replaceAll("$MONITOR_ENABLED", obj.monitor);
+	yaml = yaml.replaceAll("$CERT_SECRET_COUNT", obj.certSecretCount);
 	yaml = yaml.replaceAll("$CONTROLLER_COUNT", obj.controllerCount);
 	yaml = yaml.replaceAll("$CONTROLLER_POD_NODE_SELECTOR", obj.controllerPodsNodeSelector);
 	yaml = yaml.replaceAll("$NODE_POD_NODE_SELECTOR", obj.nodePodsNodeSelector);
