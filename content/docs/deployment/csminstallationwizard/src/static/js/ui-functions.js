@@ -17,7 +17,6 @@
  */
 var driver = "";
 var driverNamespace = "";
-var moduleNamespace = "csm-module";
 var releaseName ="";
 
 const setupTooltipStyle = () => {
@@ -33,8 +32,7 @@ function onArrayChange() {
 		displayModules(driver, CONSTANTS)
 		loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value,document.getElementById("csm-version").value);
 		setDefaultValues(defaultValues, csmMap);
-		document.getElementById("driver-namespace").value = driver;
-		document.getElementById("module-namespace").value = moduleNamespace;
+		driver === CONSTANTS.POWERSTORE ? document.getElementById("driver-namespace").value = CONSTANTS.POWERSTORE_NAMESPACE : document.getElementById("driver-namespace").value = driver;
 		$(".namespace").show();
 		onObservabilityChange();
 		onAuthorizationChange();
@@ -99,14 +97,6 @@ function onVSphereChange() {
 	}
 }
 
-function singleNamespaceCheck() {
-	if ($("#single-namespace").prop('checked') === true) {
-		$('div#single-namespace-disabled').hide();
-	} else {
-		$('div#single-namespace-disabled').show();
-	}
-}
-
 function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 	if ($("#controller-pods-node-selector").prop('checked') === true || $("#node-pods-node-selector").prop('checked') === true) {
 		$(".node-sel-attributes").show();
@@ -154,16 +144,13 @@ const resetDriverNamespace = driverValue => {
 	document.getElementById("driver-namespace").value = driverValue;
 }
 
-const resetModuleNameSpace = moduleNamespaceValue => {
-	document.getElementById("module-namespace").value = moduleNamespaceValue;
-}
-
-const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFunc, loadDefaultValuesFunc, hideFieldsFunc, setDefaultValuesFunc, validateInputFunc, CONSTANTS_PARAM) => {
+const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFunc, validateInputFunc, CONSTANTS_PARAM) => {
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(template);
 	link.style.display = 'inline-block';
-	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, command3, CONSTANTS_PARAM)
+	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, CONSTANTS_PARAM)
 	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
+
 	return true;
 }
 
@@ -180,15 +167,12 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".migration").hide();
 	$(".vSphere").hide();
 
-	const selectedCSMVersion = document.getElementById("csm-version").value;
-
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
 			$(".authorization").hide();
 			$("#authorization").prop('checked', false);
 			$(".storage-capacity").show();
 			$(".resiliency").show();
-
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
 			break;
@@ -208,19 +192,30 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	}
 }
 
-function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS_PARAM) {
-	driverNamespace = document.getElementById("driver-namespace").value
+function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, CONSTANTS_PARAM) {
+	driverNamespace = document.getElementById("driver-namespace").value;
+	csmVersion = document.getElementById("csm-version").value;
+	var helmChartVersion;
+	switch(csmVersion){
+		case "1.7.0": 
+			helmChartVersion =  CONSTANTS.CSM_HELM_v170;
+			break;
+		case "1.6.0": 
+			helmChartVersion =  CONSTANTS.CSM_HELM_v160;
+			break;
+		default:
+			helmChartVersion =  CONSTANTS.CSM_HELM_v170;
+			break;
+	}
+	
 	$("#command-text-area").show();
 	$("#reverseProxyNote").hide();
 	$("#command-title").html(commandTitleValue);
 	$("#command-note").show();
-	$("#command1").html(command1Value.replaceAll("$drivernamespace", driverNamespace));
-	$("#command-note").html(commandNoteValue.replaceAll("$drivernamespace", driverNamespace));
-	if ($("#single-namespace").prop('checked') === true) {
-		$("#command2").html(command2Value.replaceAll("$release-name", releaseNameValue));
-	} else {
-		$("#command2").html(command3Value.replaceAll("$release-name", releaseNameValue));
-	}
+	$("#command1").html(command1Value);
+	$("#command-note").html(commandNoteValue);
+	var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace",driverNamespace).replace("$version",helmChartVersion);
+	$("#command2").html(command2);
 	if (document.getElementById("array").value === CONSTANTS_PARAM.POWERMAX){
 		$("#reverseProxyNote").show();
 	}
@@ -265,14 +260,12 @@ if (typeof exports !== 'undefined') {
 		onResiliencyChange,
 		onSnapshotChange,
 		onVSphereChange,
-		singleNamespaceCheck,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
 		resetImageRepository,
 		resetControllerCount,
 		resetNodeSelectorLabel,
 		resetDriverNamespace,
-		resetModuleNameSpace,
 		downloadFile,
 		displayModules,
 		displayCommands,

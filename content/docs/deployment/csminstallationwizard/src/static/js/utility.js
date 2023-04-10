@@ -34,9 +34,6 @@ function validateForm(CONSTANTS_PARAM) {
 	if (document.getElementById('driver-namespace').value.trim() === "") {
 		return false;
 	}
-	if (document.getElementById('module-namespace').value.trim() === "") {
-		return false;
-	}
 	if (document.getElementById('controller-count').value.trim() < 1) {
 		return false;
 	}
@@ -99,16 +96,10 @@ function setMap(str) {
 	return testMap;
 }
 
-function loadCSMVersions(v) {
-	var versionFile = CONSTANTS.VERSIONS_DIR +CONSTANTS.SLASH+ CONSTANTS.CSM + CONSTANTS.HYPHEN + v + CONSTANTS.PROPERTIES;
-	$.get(versionFile, function(data) { version = String(data) }, "text");
-
-}
-
 if (typeof exports !== 'undefined') {
 	module.exports = {
 		validateForm,
 		setMap,
-		setDefaultValues
+		setDefaultValues,
 	};
 }

@@ -30,7 +30,6 @@ const {
 	resetControllerCount,
 	resetNodeSelectorLabel,
 	resetDriverNamespace,
-	resetModuleNameSpace,
 	downloadFile,
 	displayModules,
 	displayCommands,
@@ -39,13 +38,13 @@ const {
 } = require('../ui-functions');
 
 const CONSTANTS = {
-	POWERSTORE: "csi-powerstore",
-	POWERSCALE: "csi-powerscale",
-	POWERFLEX: "csi-powerflex",
+	POWERSTORE: "powerstore",
+	POWERSCALE: "powerscale",
+	POWERFLEX: "powerflex",
 	POWERMAX: "powermax",
-	POWERSTORE_RELEASE_NAME: "powerstore",
+	UNITY: "unity",
+	POWERSTORE_NAMESPACE: "csi-powerstore",
 	UNITY: "csi-unity",
-	MODULE: "csm-modules",
 	CSM_VALUES: "csm-values",
 	TEMP_DIR: "templates/",
 	TEMP_EXT: ".template",
@@ -347,18 +346,6 @@ describe("GIVEN resetDriverNamespace function", () => {
 		resetDriverNamespace("csi-powerstore");
 
 		expect(document.getElementById("driver-namespace").value).toEqual("csi-powerstore");
-	});
-});
-
-describe("GIVEN resetModuleNameSpace function", () => {
-	test("SHOULD invoke resetModuleNameSpace function", () => {
-		document.body.innerHTML = `
-            <input type="text" id="module-namespace">
-        `;
-
-		resetModuleNameSpace("csm-module");
-
-		expect(document.getElementById("module-namespace").value).toEqual("csm-module");
 	});
 });
 

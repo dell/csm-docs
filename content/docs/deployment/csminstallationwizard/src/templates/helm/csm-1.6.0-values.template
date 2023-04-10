@@ -2,7 +2,6 @@
 ########################
 csi-powerstore:
   enabled: $POWERSTORE_ENABLED
-  namespace: $POWERSTORE_DRIVER_NAMESPACE
   version: v2.6.0
   images:
     driverRepository: $IMAGE_REPOSITORY
@@ -63,7 +62,6 @@ csi-powerstore:
 ##########################################
 csi-powermax:
   enabled: $POWERMAX_ENABLED
-  namespace: $POWERMAX_DRIVER_NAMESPACE
   global:
     storageArrays:
       - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
@@ -91,8 +89,7 @@ csi-powermax:
     nodeSelector: $NODE_POD_NODE_SELECTOR
   csireverseproxy:
     image: dellemc/csipowermax-reverseproxy:v2.5.0
-    deployAsSidecar: $POWERMAX_CSI_REVERSE_PROXY_IMAGE_ENABLED
-    namespace: $POWERMAX_DRIVER_NAMESPACE
+    deployAsSidecar: true
   replication:
     enabled: $REPLICATION_ENABLED
     image: dellemc/dell-csi-replicator:v1.4.0
@@ -116,13 +113,11 @@ csi-powermax:
 ##########################################
 csm-replication:
   enabled: $REPLICATION_ENABLED
-  namespace: $CSM_NAMESPACE
 
 ## K8S/Observability Module ATTRIBUTES
 ##########################################
 karavi-observability:
   enabled: $OBSERVABILITY_ENABLED
-  namespace: $CSM_NAMESPACE
   karaviMetricsPowerstore:
     enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
   karaviMetricsPowermax:
@@ -138,7 +133,6 @@ karavi-observability:
 ##########################################
 csm-application-mobility:
   enabled: $APP_MOBILITY_ENABLED
-  namespace: $CSM_NAMESPACE
   # csm-application-mobility requires velero. If velero is already installed on the cluster, specify the namespace in which velero is deployed. Default value is "velero"
   veleroNamespace: velero
   velero:
@@ -161,7 +155,7 @@ csm-application-mobility:
           #publicUrl:
     initContainers:
     - name: dell-custom-velero-plugin
-      image: $dellemc/csm-application-mobility-velero-plugin:v0.3.0
+      image: dellemc/csm-application-mobility-velero-plugin:v0.3.0
       volumeMounts:
       - mountPath: /target
         name: plugins
@@ -175,4 +169,3 @@ csm-application-mobility:
 ##########################################
 cert-manager:
   enabled: $CERT_MANAGER_ENABLED
-  namespace: $CSM_NAMESPACE

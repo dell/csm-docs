@@ -57,11 +57,11 @@
                   <div class="col-sm-3">
                     <select id="array" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
                       <option value="" selected>Select the Array</option>
-                      <option value="csi-powerstore">PowerStore</option>
+                      <option value="powerstore">PowerStore</option>
                       <option value="powermax">PowerMax</option>
-                      <option value="csi-powerscale" disabled>PowerScale</option>
-                      <option value="csi-powerflex" disabled>PowerFlex</option>
-                      <option value="csi-unity" disabled>Unity</option>
+                      <option value="powerscale" disabled>PowerScale</option>
+                      <option value="powerflex" disabled>PowerFlex</option>
+                      <option value="unity" disabled>Unity</option>
                     </select>
                   </div>
                 </div>
@@ -376,13 +376,7 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4 namespace">
-                    <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="single-namespace" value="" onchange="singleNamespaceCheck()">
-                      <label for="single-namespace" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Deploy the CSM driver and module in a single namespace.">Single Namespace</label>
-                    </div>
-                  </div>
-                  <div id="single-namespace-disabled">
+                  <div>
                     <div class="row mb-4 namespace">
                       <label for="driver-namespace" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the namespace to deploy the CSM driver" style="width: 155px;">Driver Namespace</label>
                       <div class="col-sm-9"></div>
@@ -392,18 +386,6 @@
                       <div class="col-sm-4">
                         <div class="row mt-1">
                           <a class="reset" id="reset-driver-namespace" onclick="resetDriverNamespace(driver)">Reset to default</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mb-4 namespace">
-                      <label for="module-namespace" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the namespace to deploy the CSM module" style="width: 170px;">Module Namespace</label>
-                      <div class="col-sm-9"></div>
-                      <div class="was-validated col-sm-3">
-                        <input class="form-control input-lg" type="text" id="module-namespace" oninput="validateInput(validateForm, CONSTANTS)" required>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="row mt-1">
-                          <a class="reset" id="reset-module-namespace" onclick="resetModuleNameSpace(moduleNamespace)">Reset to default</a>
                         </div>
                       </div>
                     </div>

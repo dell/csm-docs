@@ -17,13 +17,12 @@
  */
 
 const CONSTANTS = {
-	POWERSTORE: "csi-powerstore",
-	POWERSCALE: "csi-powerscale",
-	POWERFLEX: "csi-powerflex",
+	POWERSTORE: "powerstore",
+	POWERSCALE: "powerscale",
+	POWERFLEX: "powerflex",
 	POWERMAX: "powermax",
-	UNITY: "csi-unity",
-	POWERSTORE_RELEASE_NAME: "powerstore",
-	MODULE: "csm-modules",
+	UNITY: "unity",
+	POWERSTORE_NAMESPACE: "csi-powerstore",
 	VALUES: "values",
 	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
@@ -35,5 +34,7 @@ const CONSTANTS = {
 	DEFAULT_VALUES: "default-values",
 	PROPERTIES: ".properties",
 	HELM: "helm",
-	OPERATOR: "operator"
+	OPERATOR: "operator",
+	CSM_HELM_v160: "0.1.0",
+	CSM_HELM_v170: "1.0.0"
 };

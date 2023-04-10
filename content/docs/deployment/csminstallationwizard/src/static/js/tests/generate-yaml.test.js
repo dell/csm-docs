@@ -19,13 +19,12 @@
 const { setValues, createYamlString } = require("../generate-yaml");
 
 const CONSTANTS = {
-	POWERSTORE: "csi-powerstore",
-	POWERSCALE: "csi-powerscale",
-	POWERFLEX: "csi-powerflex",
+	POWERSTORE: "powerstore",
+	POWERSCALE: "powerscale",
+	POWERFLEX: "powerflex",
 	POWERMAX: "powermax",
-	UNITY: "csi-unity", 
-	POWERSTORE_RELEASE_NAME: "powerstore",
-	MODULE: "csm-modules",
+	UNITY: "unity",
+	POWERSTORE_NAMESPACE: "csi-powerstore",
 	CSM_VALUES: "csm-values",
 	TEMP_DIR: "templates/",
 	TEMP_EXT: ".template",
