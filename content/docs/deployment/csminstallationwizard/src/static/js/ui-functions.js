@@ -180,6 +180,7 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".storage-capacity").hide();
 	$(".migration").hide();
 	$(".vSphere").hide();
+	$(".cert-secret-count-wrapper").hide();
 
 	const selectedCSMVersion = document.getElementById("csm-version").value;
 
@@ -211,6 +212,8 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".vSphere").show();
 			break;
 		case CONSTANTS_PARAM.POWERFLEX:
+			$(".resiliency").show();
+			$(".cert-secret-count-wrapper").show();
 			break;
 		case CONSTANTS_PARAM.UNITY:
 			break;
