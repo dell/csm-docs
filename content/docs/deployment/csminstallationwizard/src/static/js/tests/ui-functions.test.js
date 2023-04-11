@@ -54,7 +54,9 @@ const CONSTANTS = {
 	DEFAULT_VALUES: "default-values",
 	PROPERTIES: ".properties",
 	HELM: "helm",
-	OPERATOR: "operator"
+	OPERATOR: "operator",
+	CSM_HELM_v160: "0.1.0",
+	CSM_HELM_v170: "1.0.0"
 };
 
 describe("GIVEN onAuthorizationChange function", () => {
@@ -417,19 +419,6 @@ describe("GIVEN displayCommands function", () => {
 	const command1Value = "helm repo add dell https://dell.github.io/helm-charts";
 	const command2Value = "helm install $release-name dell/container-storage-modules -n $namespace --version $version -f values.yaml";
 
-	const CONSTANT_PARAM = {
-		POWERSTORE: "powerstore",
-		POWERSCALE: "powerscale",
-		POWERFLEX: "powerflex",
-		POWERMAX: "powermax",
-		UNITY: "unity",
-		POWERSTORE_NAMESPACE: "csi-powerstore",
-		HELM: "helm",
-		OPERATOR: "operator",
-		CSM_HELM_v160: "0.1.0",
-		CSM_HELM_v170: "1.0.0"
-	};
-
 	test("SHOULD show expected commands", () => {
 		document.body.innerHTML = `
 			<input id="array" value="powerstore">
@@ -443,7 +432,7 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, CONSTANT_PARAM);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, CONSTANTS);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
