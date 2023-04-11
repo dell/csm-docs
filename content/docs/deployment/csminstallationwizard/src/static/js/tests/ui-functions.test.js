@@ -339,6 +339,7 @@ describe("GIVEN displayModules function", () => {
 			<option value="1.7.0" selected>CSM 1.7.0</option>
 			<option value="1.6.0">CSM 1.6.0</option>
 		</select>
+		<input type="text" id="driver-namespace">
 		<div class="vgsnapshot" style="display:none"></div>
 		<div class="authorization" style="display:none"></div>
 		<div class="observability"></div>

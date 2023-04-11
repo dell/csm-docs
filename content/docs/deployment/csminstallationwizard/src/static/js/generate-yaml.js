@@ -19,7 +19,6 @@
 var template = "";
 var version = "";
 var observabilityEnabled = false;
-var applicationMobilityEnabled = false;
 var authorizationEnabled = false;
 var replicationEnabled = false;
 
@@ -70,13 +69,8 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.storageCapacity = $("#storage-capacity").prop('checked') ? true : false;
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
 	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value || '""';
-	DriverValues.applicationMobility = $("#application-mobility").prop('checked') ? true : false;
-	DriverValues.velero = $("#velero").prop('checked') ? true : false;
 	DriverValues.certManagerEnabled = $("#cert-manager-enabled").prop('checked') ? true : false;
-	DriverValues.singleNamespaceEnabled = $("#single-namespace").prop('checked') ? true : false;
-	driverNamespace = document.getElementById("driver-namespace").value;
 	observabilityEnabled = DriverValues.observability;
-	applicationMobilityEnabled = DriverValues.applicationMobility;
 	authorizationEnabled = DriverValues.authorization;
 	replicationEnabled = DriverValues.replication;
 
@@ -145,10 +139,6 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$POWERSCALE_ENABLED", false);
 	yamlTpl = yamlTpl.replaceAll("$UNITY_ENABLED", false);
 
-	if (driverNamespace === "") {
-		driverNamespace = driverParam
-	}
-
 	if (yamlTplValues.observabilityMetrics) {
 		if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
 			yamlTpl = yamlTpl.replaceAll("$POWERSTORE_OBSERVABILITY_METRICS_ENABLED", true);
@@ -164,9 +154,6 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_OBSERVABILITY_METRICS_ENABLED", false);
 	yamlTpl = yamlTpl.replaceAll("$POWERFLEX_OBSERVABILITY_METRICS_ENABLED", false);
 	yamlTpl = yamlTpl.replaceAll("$POWERSCALE_OBSERVABILITY_METRICS_ENABLED", false);
-
-	yamlTpl = yamlTpl.replaceAll("$APP_MOBILITY_ENABLED", yamlTplValues.applicationMobility);
-	yamlTpl = yamlTpl.replaceAll("$VELERO_ENABLED", yamlTplValues.velero);
 	yamlTpl = yamlTpl.replaceAll("$CERT_MANAGER_ENABLED", yamlTplValues.certManagerEnabled);
 
 	const regex = /\$[a-zA-Z0-9_-]*/g;

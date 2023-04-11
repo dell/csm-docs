@@ -199,19 +199,19 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	}
 }
 
-function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, CONSTANTS_PARAM) {
+function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, CONSTANTS) {
 	driverNamespace = document.getElementById("driver-namespace").value;
 	csmVersion = document.getElementById("csm-version").value;
 	var helmChartVersion;
 	switch(csmVersion){
 		case "1.7.0": 
-			helmChartVersion =  CONSTANTS_PARAM.CSM_HELM_v170;
+			helmChartVersion =  CONSTANTS.CSM_HELM_v170;
 			break;
 		case "1.6.0": 
-			helmChartVersion =  CONSTANTS_PARAM.CSM_HELM_v160;
+			helmChartVersion =  CONSTANTS.CSM_HELM_v160;
 			break;
 		default:
-			helmChartVersion =  CONSTANTS_PARAM.CSM_HELM_v170;
+			helmChartVersion =  CONSTANTS.CSM_HELM_v170;
 			break;
 	}
 	$("#command-text-area").show();
@@ -222,7 +222,7 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 	$("#command-note").html(commandNoteValue);
 	var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace",driverNamespace).replace("$version",helmChartVersion);
 	$("#command2").html(command2);
-	if (document.getElementById("array").value === CONSTANTS_PARAM.POWERMAX){
+	if (document.getElementById("array").value === CONSTANTS.POWERMAX){
 		$("#reverseProxyNote").show();
 	}
 }

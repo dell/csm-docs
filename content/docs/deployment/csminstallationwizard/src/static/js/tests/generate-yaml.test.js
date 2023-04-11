@@ -87,7 +87,6 @@ describe("GIVEN setValues function", () => {
 			observabilityMetrics: false,
 			authorization: false,
 			authorizationSkipCertValidation: true,
-			applicationMobility: false,
 			certManagerEnabled: false,
 		};
 
@@ -137,7 +136,6 @@ describe("GIVEN setValues function", () => {
 			observabilityMetrics: false,
 			authorization: false,
 			authorizationSkipCertValidation: true,
-			applicationMobility: false,
 			certManagerEnabled: false,
 		};
 
@@ -365,7 +363,6 @@ describe("GIVEN createYamlString function", () => {
 		vgsnapshotImage: "dellemc/csi-volumegroup-snapshotter:v1.2.0",
 		replicationImage: "dellemc/dell-csi-replicator:v1.4.0",
 		authorizationImage: "dellemc/csm-authorization-sidecar:v1.6.0",
-		applicationMobility: false,
 		certManagerEnabled: false,
     authorizationProxyHost: '""',
     monitor: false,
