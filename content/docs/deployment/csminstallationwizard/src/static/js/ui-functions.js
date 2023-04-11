@@ -32,7 +32,6 @@ function onArrayChange() {
 		displayModules(driver, CONSTANTS)
 		loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value,document.getElementById("csm-version").value);
 		setDefaultValues(defaultValues, csmMap);
-		driver === CONSTANTS.POWERSTORE ? document.getElementById("driver-namespace").value = CONSTANTS.POWERSTORE_NAMESPACE : document.getElementById("driver-namespace").value = driver;
 		$(".namespace").show();
 		onObservabilityChange();
 		onAuthorizationChange();
@@ -174,8 +173,10 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$("#authorization").prop('checked', false);
 			$(".storage-capacity").show();
 			$(".resiliency").show();
+			$("#driver-namespace").val() = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
+			$("#driver-namespace").val() = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERMAX:
 			$(".vgsnapshot").hide();
@@ -185,12 +186,15 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".port-groups").show();
 			$(".migration").show();
 			$(".vSphere").show();
+			$("#driver-namespace").val() = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERFLEX:
 			$(".resiliency").show();
 			$(".cert-secret-count-wrapper").show();
+			$("#driver-namespace").val() = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.UNITY:
+			$("#driver-namespace").val() = CONSTANTS_PARAM.UNITY_NAMESPACE;
 			break;
 	}
 }
@@ -210,7 +214,6 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 			helmChartVersion =  CONSTANTS_PARAM.CSM_HELM_v170;
 			break;
 	}
-	
 	$("#command-text-area").show();
 	$("#reverseProxyNote").hide();
 	$("#command-title").html(commandTitleValue);
