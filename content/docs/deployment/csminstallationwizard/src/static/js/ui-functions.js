@@ -230,7 +230,7 @@ function validateInput(validateFormFunc, CONSTANTS_PARAM) {
 	return false
 }
 
-const downloadFileHandler = () => $("#download-file").on('click', () => downloadFile(validateForm, generateYamlFile, displayCommands, loadDefaultValues, hideFields, setDefaultValues, validateInput, CONSTANTS));
+const downloadFileHandler = () => $("#download-file").on('click', () => downloadFile(validateForm, generateYamlFile, displayCommands, validateInput, CONSTANTS));
 
 function onPageLoad() {
 	setupTooltipStyle();
