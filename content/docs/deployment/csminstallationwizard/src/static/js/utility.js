@@ -34,9 +34,6 @@ function validateForm(CONSTANTS_PARAM) {
 	if (document.getElementById('driver-namespace').value.trim() === "") {
 		return false;
 	}
-	if (document.getElementById('module-namespace').value.trim() === "") {
-		return false;
-	}
 	if (document.getElementById('controller-count').value.trim() < 1) {
 		return false;
 	}
@@ -54,7 +51,7 @@ function validateForm(CONSTANTS_PARAM) {
 		if (document.getElementById('cluster-prefix').value.trim() === "") {
 			return false;
 		}
-	
+
 		if (vSphereEnabled) {
 			if (document.getElementById('vSphere-fc-port-group').value.trim() === "") {
 				return false;
@@ -71,12 +68,19 @@ function validateForm(CONSTANTS_PARAM) {
 		}
 	}
 
+	const authorizationEnabled = $("#authorization").prop('checked') ? true : false;
+	if (authorizationEnabled && document.getElementById('authorization-proxy-host').value.trim() === "") {
+		return false;
+	}
+
 	return true;
 }
 
 function loadDefaultValues() {
-	var defaultValuesFile = CONSTANTS.VERSIONS_DIR + CONSTANTS.DEFAULT_VALUES + CONSTANTS.PROPERTIES;
-	$.get(defaultValuesFile, function(data) { defaultValues = String(data) }, "text");
+	var defaultValuesFile = CONSTANTS.VERSIONS_DIR + CONSTANTS.SLASH + CONSTANTS.DEFAULT_VALUES + CONSTANTS.PROPERTIES;
+	$.get(defaultValuesFile, function(data) {
+		defaultValues = String(data)
+	}, "text");
 }
 
 function setDefaultValues(defaultValuesParam, csmMapValues) {
@@ -99,15 +103,10 @@ function setMap(str) {
 	return testMap;
 }
 
-function loadCSMVersions(v) {
-	var versionFile = CONSTANTS.VERSIONS_DIR + CONSTANTS.CSM + CONSTANTS.HYPHEN + v + CONSTANTS.PROPERTIES;
-	$.get(versionFile, function(data) { version = String(data) }, "text");
-}
-
 if (typeof exports !== 'undefined') {
 	module.exports = {
 		validateForm,
 		setMap,
-		setDefaultValues
+		setDefaultValues,
 	};
 }
