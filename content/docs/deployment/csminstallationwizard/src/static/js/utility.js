@@ -68,6 +68,11 @@ function validateForm(CONSTANTS_PARAM) {
 		}
 	}
 
+	const authorizationEnabled = $("#authorization").prop('checked') ? true : false;
+	if (authorizationEnabled && document.getElementById('authorization-proxy-host').value.trim() === ""){
+		return false;
+	}
+
 	return true;
 }
 

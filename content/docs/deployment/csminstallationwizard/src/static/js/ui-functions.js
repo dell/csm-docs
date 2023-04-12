@@ -35,7 +35,6 @@ function onArrayChange() {
 		$(".namespace").show();
 		onObservabilityChange();
 		onAuthorizationChange();
-		onAppMobilityChange(veleroNote);
 		onResiliencyChange(podmonNote);
 		onSnapshotChange(snapshotNote);
 		onVSphereChange();
@@ -58,15 +57,6 @@ function onObservabilityChange() {
 		$('div#observability-metrics-wrapper').show();
 	} else {
 		$('div#observability-metrics-wrapper').hide();
-	}
-}
-
-function onAppMobilityChange(veleroNoteValue) {
-	if ($("#application-mobility").prop('checked') === true) {
-		$('div#velero-wrapper').show();
-		$("#velero-note").html(veleroNoteValue);
-	} else {
-		$('div#velero-wrapper').hide();
 	}
 }
 
@@ -109,7 +99,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 
 const onCSMVersionChange = () => {
 	document.getElementById("csm-version").value !== "" ? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value,document.getElementById("csm-version").value): null;
-	displayModules(driver, CONSTANTS);
+	//displayModules(driver, CONSTANTS);
 	onObservabilityChange();
 	onAuthorizationChange();
 };
@@ -156,7 +146,6 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".vgsnapshot").show();
 	$(".authorization").show();
-	$(".appMobility").show();
 	$(".storageArrays").hide();
 	$(".powermax-csi-reverse-proxy").hide();
 	$(".cluster-prefix").hide();
@@ -180,7 +169,6 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			break;
 		case CONSTANTS_PARAM.POWERMAX:
 			$(".vgsnapshot").hide();
-			$(".appMobility").hide();
 			$(".storageArrays").show();
 			$(".cluster-prefix").show();
 			$(".port-groups").show();
@@ -262,7 +250,6 @@ if (typeof exports !== 'undefined') {
 	module.exports = {
 		onAuthorizationChange,
 		onObservabilityChange,
-		onAppMobilityChange,
 		onResiliencyChange,
 		onSnapshotChange,
 		onVSphereChange,
