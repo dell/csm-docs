@@ -81,8 +81,8 @@ You can create them manually or with help from `repctl`.
 
 #### Manual Storage Class Creation
 
-You can find sample replication enabled storage class in the driver repository
-[here](https://github.com/dell/csi-powerstore/blob/main/samples/storageclass/powerstore-replication.yaml).
+You can find sample replication enabled storage class for block storage (Volumes) in the driver repository
+[here](https://github.com/dell/csi-powerstore/blob/main/samples/storageclass/powerstore-block-replication.yaml).
 
 It will look like this:
 ```yaml
@@ -94,6 +94,7 @@ provisioner: "csi-powerstore.dellemc.com"
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
 parameters:
+  csi.storage.k8s.io/fstype: "ext4"
   replication.storage.dell.com/isReplicationEnabled: "true"
   replication.storage.dell.com/remoteStorageClassName: "powerstore-replication"
   replication.storage.dell.com/remoteClusterID: "tgt-cluster-id"
@@ -105,6 +106,7 @@ parameters:
 ```
 
 Let's go through each parameter and what it means:
+* `csi.storage.k8s.io/fstype` sets the filesystem type for the storage class. For block (Volume) storage, it should be set to `ext4`. For file (File System) storage, it should be set to `nfs`.
 * `replication.storage.dell.com/isReplicationEnabled` if set to `true` will mark this storage class as replication enabled,
   just leave it as `true`.
 * `replication.storage.dell.com/remoteStorageClassName` points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.
@@ -172,17 +174,49 @@ parameters:
 
 After creating storage class YAML files, they must be applied to your Kubernetes clusters with `kubectl`.
 
+Creating storage classes for file-type storage is very similar to the process for creating block-type storage classes. You can find sample replication enabled storage class for block storage (Volumes) in the driver repository
+[here](https://github.com/dell/csi-powerstore/blob/main/samples/storageclass/powerstore-block-replication.yaml).
+
+It will look like this:
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: "powerstore-replication"
+provisioner: "csi-powerstore.dellemc.com"
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+parameters:
+  csi.storage.k8s.io/fstype: "ext4"
+  replication.storage.dell.com/nasName: "nas-server"
+  replication.storage.dell.com/allowRoot: "false"
+  replication.storage.dell.com/isReplicationEnabled: "true"
+  replication.storage.dell.com/remoteStorageClassName: "powerstore-replication"
+  replication.storage.dell.com/remoteClusterID: "tgt-cluster-id"
+  replication.storage.dell.com/remoteSystem: "RT-0000"
+  replication.storage.dell.com/rpo: Five_Minutes
+  replication.storage.dell.com/ignoreNamespaces: "false"
+  replication.storage.dell.com/volumeGroupPrefix: "csi"
+  arrayID: "Unique"
+```
+
+Most of these parameters are the same as the above block-storage example, but there are some new ones. Let's go over each file-storage only parameter:
+* `replication.storage.dell.com/nasName` selects the NAS server that the storage class should place created filesystems on. It **must** already exist on the storage array, and it **must** be configured for array-to-array replication.
+* `replication.storage.dell.com/allowRoot` if set to `true` will allow root users to exercise root privileges on the NFS server. Defaults to false.
+
+Otherwise, generating storage class pairs and applying them using `kubectl` is done in the same way as block storage. The nasName value and allowRoot should be consistent from source to target storage classes.
+
 #### Storage Class Creation With repctl
 
 `repctl` can simplify storage class creation by creating a pair of mirrored storage classes in both clusters
-(using a single storage class configuration) in one command.
+(using a single storage class configuration file) in one command.
 
 To create storage classes with `repctl` you need to fill the config with necessary information.
-You can find an example in [here](https://github.com/dell/csm-replication/blob/main/repctl/examples/powerstore_example_values.yaml), copy it, and modify it to your needs.
+You can find an example for block storage [here](https://github.com/dell/csm-replication/blob/main/repctl/examples/powerstore_block_example_values.yaml) and for file storage [here](https://github.com/dell/csm-replication/blob/main/repctl/examples/powerstore_file_example_values.yaml), copy it, and modify it to your needs.
 
-If you open this example you can see similar fields and parameters to what was seen in manual storage class creation.
+If you open either example you can see similar fields and parameters to what was seen in manual storage class creation.
 
-Let's use the same example from manual installation and see what its repctl config file would look like:
+Let's use the same example from manual installation for block storage and see what its repctl config file would look like:
 ```yaml
 sourceClusterID: "cluster-1"
 targetClusterID: "cluster-2"
@@ -216,14 +250,15 @@ After installing the driver and creating storage classes you are good to create 
 created storage classes.
 
 On your source cluster, create a PersistentVolumeClaim using one of the replication enabled Storage Classes.
-The CSI PowerStore driver will create a volume on the array, add it to a VolumeGroup and configure replication
-using the parameters provided in the replication enabled Storage Class.
+The CSI PowerStore driver will create a volume or filesystem on the array, add it to a VolumeGroup/specified NAS server, and configure replication using the parameters provided in the replication-enabled Storage Class.
 
 ### Supported Replication Actions
-The CSI PowerStore driver supports the following list of replication actions:
+The CSI PowerStore driver supports the following list of replication actions on block-storage replication:
 - FAILOVER_REMOTE
 - UNPLANNED_FAILOVER_LOCAL
 - REPROTECT_LOCAL
 - SUSPEND
 - RESUME
 - SYNC
+
+As of now, file-storage replication does not support any replication actions. Replication action support is planned for the near future.
