@@ -783,7 +783,200 @@ test("SHOULD return generated yaml file string for driver csi-powerflex", () => 
 
 	test("SHOULD return generated yaml file string for driver csi-powermax", () => {
 		const expected = `
-`;
+    ## K8S/DRIVER ATTRIBUTES
+    ########################
+    csi-powerstore:
+      enabled: false
+      version: v2.6.0
+      images:
+        driverRepository: dellemc
+      ## Controller ATTRIBUTES
+      controller:
+        controllerCount: 2
+        healthMonitor:
+          enabled: false
+        nodeSelector: false
+        replication:
+          enabled: false
+          image: dellemc/dell-csi-replicator:v1.4.0
+        vgsnapshot:
+          enabled: false
+          image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+        snapshot:
+          enabled: true
+        resizer:
+          enabled: true
+      ## Node ATTRIBUTES
+      node:
+        healthMonitor:
+          enabled: false
+        nodeSelector: false
+          # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
+        # tolerations:
+        # - key: "offline.vxflexos.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "vxflexos.podmon.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "offline.unity.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "unity.podmon.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "offline.isilon.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "isilon.podmon.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "offline.powerstore.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "powerstore.podmon.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+      storageCapacity:
+        enabled: false
+      podmon:
+        enabled: false
+        image: dellemc/podmon:v1.5.0
+    
+    ## K8S/Powermax ATTRIBUTES
+    ##########################################
+    csi-powermax:
+      enabled: true
+      global:
+        storageArrays:
+          - storageArrayId: ""
+            endpoint: ""
+            backupEndpoint: ""
+        managementServers:
+          - endpoint: ""
+      version: v2.6.0
+      images:
+        driverRepository: dellemc
+      clusterPrefix: 
+      portGroups: ""
+      controller:
+        controllerCount: 2
+        snapshot:
+          enabled: true
+        resizer:
+          enabled: true
+        healthMonitor:
+          enabled: false
+        nodeSelector: false
+      node:
+        healthMonitor:
+          enabled: false
+        nodeSelector: false
+      csireverseproxy:
+        image: dellemc/csipowermax-reverseproxy:v2.5.0
+        deployAsSidecar: true
+      replication:
+        enabled: false
+        image: dellemc/dell-csi-replicator:v1.4.0
+      migration:
+        enabled: false
+        image: dellemc/dell-csi-migrator:v1.1.0
+        nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0
+      authorization:
+        enabled: false
+        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        proxyHost: ""
+        skipCertificateValidation:  true
+      vSphere:
+        enabled: false
+        fcPortGroup: "csi-vsphere-VC-PG"
+        fcHostName: "csi-vsphere-VC-HN"
+        vCenterHost: "00.000.000.00"
+        vCenterCredSecret: vcenter-creds
+    
+    ## CSI PowerFlex
+    ########################
+    csi-vxflexos:
+      enabled: false
+      version: v2.6.0
+      images:
+        driverRepository: dellemc
+        powerflexSdc: dellemc/sdc:3.6.0.6
+      certSecretCount: 0
+      controller:
+        replication:
+          enabled: false
+          image: dellemc/dell-csi-replicator:v1.4.0
+        healthMonitor:
+          enabled: false
+        controllerCount: 2
+        snapshot:
+          enabled: true
+        resizer:
+          enabled: true
+        nodeSelector: false
+      node:
+        healthMonitor:
+          enabled: false
+        nodeSelector: false
+        tolerations:
+        # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
+        # - key: "offline.vxflexos.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "vxflexos.podmon.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "offline.unity.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "unity.podmon.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "offline.isilon.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+        # - key: "isilon.podmon.storage.dell.com"
+        #   operator: "Exists"
+        #   effect: "NoSchedule"
+      monitor:
+        enabled: false
+      vgsnapshotter:
+        enabled: false
+        image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+      podmon:
+        enabled: false
+        image: dellemc/podmon:v1.5.0
+      authorization:
+        enabled: false
+        sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+        proxyHost: ""
+    
+    ## K8S/Replication Module ATTRIBUTES
+    ##########################################
+    csm-replication:
+      enabled: false
+    
+    ## K8S/Observability Module ATTRIBUTES
+    ##########################################
+    karavi-observability:
+      enabled: true
+      karaviMetricsPowerstore:
+        enabled: false
+      karaviMetricsPowermax:
+        enabled: true
+      karaviMetricsPowerflex:
+        enabled: false
+      karaviMetricsPowerscale:
+        enabled: false
+      cert-manager:
+        enabled: false
+    
+    ## K8S/Cert-manager ATTRIBUTES
+    ##########################################
+    cert-manager:
+      enabled: false
+  `;
 
 		const received = createYamlString(testYAML, testObject, "powermax", CONSTANTS);
 
