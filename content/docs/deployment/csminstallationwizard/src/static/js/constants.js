@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 const CONSTANTS = {
 	POWERSTORE: "powerstore",
 	POWERSCALE: "powerscale",
@@ -39,6 +38,6 @@ const CONSTANTS = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
-	CSM_HELM_v160: "0.1.0",
-	CSM_HELM_v170: "1.0.0"
+	CSM_HELM_V160: "0.1.0",
+	CSM_HELM_V170: "1.0.0"
 };

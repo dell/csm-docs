@@ -15,8 +15,11 @@
  * limitations under the License.
  *
  */
-
-const { validateForm, setMap, setDefaultValues } = require("../utility");
+const {
+	validateForm,
+	setMap,
+	setDefaultValues
+} = require("../utility");
 
 describe("GIVEN validateForm functions", () => {
 	test("SHOULD return false IF array value is empty", () => {
@@ -250,7 +253,9 @@ describe("GIVEN setMap function", () => {
 
 	test("SHOULD create map from given empty string", () => {
 		const receivedMap = setMap("");
-		const expectedMap = new Map([["", undefined]]);
+		const expectedMap = new Map([
+			["", undefined]
+		]);
 
 		expect(receivedMap).toEqual(expectedMap);
 	});

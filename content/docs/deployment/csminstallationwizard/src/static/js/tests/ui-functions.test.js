@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 const {
 	onAuthorizationChange,
 	onObservabilityChange,
@@ -57,8 +56,8 @@ const CONSTANTS = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
-	CSM_HELM_v160: "0.1.0",
-	CSM_HELM_v170: "1.0.0"
+	CSM_HELM_V160: "0.1.0",
+	CSM_HELM_V170: "1.0.0"
 };
 
 describe("GIVEN onAuthorizationChange function", () => {
@@ -183,7 +182,9 @@ describe("GIVEN onVSphereChange function", () => {
 
 describe("GIVEN onNodeSelectorChange function", () => {
 	const nodeSelectorNoteValue = "Test nodeSelectorNote value";
-	const testCSMMap = new Map([["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"]]);
+	const testCSMMap = new Map([
+		["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"]
+	]);
 
 	test("SHOULD show Controller Pods components when controller-pods-node-selector option checked", () => {
 		document.body.innerHTML = `
@@ -254,7 +255,9 @@ describe("GIVEN onCopyButtonClickHandler function", () => {
 });
 
 describe("GIVEN resetImageRepository function", () => {
-	const testCSMMap = new Map([["imageRepository", "dellemc"]]);
+	const testCSMMap = new Map([
+		["imageRepository", "dellemc"]
+	]);
 
 	test("SHOULD invoke resetImageRepository function", () => {
 		document.body.innerHTML = `
@@ -268,7 +271,9 @@ describe("GIVEN resetImageRepository function", () => {
 });
 
 describe("GIVEN resetControllerCount function", () => {
-	const testCSMMap = new Map([["controllerCount", "2"]]);
+	const testCSMMap = new Map([
+		["controllerCount", "2"]
+	]);
 
 	test("SHOULD invoke resetControllerCount function", () => {
 		document.body.innerHTML = `
@@ -282,7 +287,9 @@ describe("GIVEN resetControllerCount function", () => {
 });
 
 describe("GIVEN resetNodeSelectorLabel function", () => {
-	const testCSMMap = new Map([["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"]]);
+	const testCSMMap = new Map([
+		["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"]
+	]);
 
 	test("SHOULD invoke resetNodeSelectorLabel function", () => {
 		document.body.innerHTML = `
@@ -426,7 +433,7 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 			<input id="csm-version" value="csm-1.6.0">
 			<input type="number" id="controller-count" value="1">
 			<input type="text" id="driver-namespace" value="csm-driver">
-        `;	
+        `;
 
 		const received = validateInput(() => false, {});
 		expect(received).toEqual(false);
@@ -443,9 +450,9 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
         `;
 
 		const received = validateInput(() => false, {});
-		expect(received).toEqual(false);	
+		expect(received).toEqual(false);
 	});
-	
+
 	test("SHOULD disable Generate YAML button if controller count is less than 1 ", () => {
 		document.body.innerHTML = `
 			<input type="number" id="controller-count" value="0">
@@ -469,10 +476,10 @@ describe("SHOULD Disable/Enable Generate YAML button based on validation of inpu
 			<input type="number" id="controller-count" value="1">
 			<input type="text" id="driver-namespace" value="csi-powerstore">
         `;
-		
+
 		const received = validateInput(() => true, {});
 		expect(received).toEqual(true);
 
 	});
-	
+
 });

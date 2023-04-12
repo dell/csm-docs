@@ -51,7 +51,7 @@ function validateForm(CONSTANTS_PARAM) {
 		if (document.getElementById('cluster-prefix').value.trim() === "") {
 			return false;
 		}
-	
+
 		if (vSphereEnabled) {
 			if (document.getElementById('vSphere-fc-port-group').value.trim() === "") {
 				return false;
@@ -69,7 +69,7 @@ function validateForm(CONSTANTS_PARAM) {
 	}
 
 	const authorizationEnabled = $("#authorization").prop('checked') ? true : false;
-	if (authorizationEnabled && document.getElementById('authorization-proxy-host').value.trim() === ""){
+	if (authorizationEnabled && document.getElementById('authorization-proxy-host').value.trim() === "") {
 		return false;
 	}
 
@@ -78,7 +78,9 @@ function validateForm(CONSTANTS_PARAM) {
 
 function loadDefaultValues() {
 	var defaultValuesFile = CONSTANTS.VERSIONS_DIR + CONSTANTS.SLASH + CONSTANTS.DEFAULT_VALUES + CONSTANTS.PROPERTIES;
-	$.get(defaultValuesFile, function(data) { defaultValues = String(data) }, "text");
+	$.get(defaultValuesFile, function(data) {
+		defaultValues = String(data)
+	}, "text");
 }
 
 function setDefaultValues(defaultValuesParam, csmMapValues) {

@@ -17,7 +17,7 @@
  */
 var driver = "";
 var driverNamespace = "";
-var releaseName ="";
+var releaseName = "";
 
 const setupTooltipStyle = () => {
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -30,7 +30,7 @@ function onArrayChange() {
 		driver = $(this).val();
 		driver === "" ? $("#main").hide() : $("#main").show();
 		displayModules(driver, CONSTANTS)
-		loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value,document.getElementById("csm-version").value);
+		loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value);
 		setDefaultValues(defaultValues, csmMap);
 		$(".namespace").show();
 		onObservabilityChange();
@@ -98,8 +98,8 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 }
 
 const onCSMVersionChange = () => {
-	document.getElementById("csm-version").value !== "" ? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value,document.getElementById("csm-version").value): null;
-	//displayModules(driver, CONSTANTS);
+	document.getElementById("csm-version").value !== "" ? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
+	displayModules(driver, CONSTANTS);
 	onObservabilityChange();
 	onAuthorizationChange();
 };
@@ -191,15 +191,15 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 	driverNamespace = document.getElementById("driver-namespace").value;
 	csmVersion = document.getElementById("csm-version").value;
 	var helmChartVersion;
-	switch(csmVersion){
-		case "1.7.0": 
-			helmChartVersion =  CONSTANTS.CSM_HELM_v170;
+	switch (csmVersion) {
+		case "1.7.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V170;
 			break;
-		case "1.6.0": 
-			helmChartVersion =  CONSTANTS.CSM_HELM_v160;
+		case "1.6.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V160;
 			break;
 		default:
-			helmChartVersion =  CONSTANTS.CSM_HELM_v170;
+			helmChartVersion = CONSTANTS.CSM_HELM_V170;
 			break;
 	}
 	$("#command-text-area").show();
@@ -208,9 +208,9 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 	$("#command-note").show();
 	$("#command1").html(command1Value);
 	$("#command-note").html(commandNoteValue);
-	var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace",driverNamespace).replace("$version",helmChartVersion);
+	var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace", driverNamespace).replace("$version", helmChartVersion);
 	$("#command2").html(command2);
-	if (document.getElementById("array").value === CONSTANTS.POWERMAX){
+	if (document.getElementById("array").value === CONSTANTS.POWERMAX) {
 		$("#reverseProxyNote").show();
 	}
 }

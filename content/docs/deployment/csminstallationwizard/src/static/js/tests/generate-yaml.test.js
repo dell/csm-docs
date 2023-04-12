@@ -15,8 +15,10 @@
  * limitations under the License.
  *
  */
-
-const { setValues, createYamlString } = require("../generate-yaml");
+const {
+	setValues,
+	createYamlString
+} = require("../generate-yaml");
 
 const CONSTANTS = {
 	POWERSTORE: "powerstore",
@@ -41,8 +43,8 @@ const CONSTANTS = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
-	CSM_HELM_v160: "0.1.0",
-	CSM_HELM_v170: "1.0.0"
+	CSM_HELM_V160: "0.1.0",
+	CSM_HELM_V170: "1.0.0"
 };
 
 describe("GIVEN setValues function", () => {
@@ -146,7 +148,7 @@ describe("GIVEN setValues function", () => {
 });
 
 describe("GIVEN createYamlString function", () => {
-  const testYAML = `
+	const testYAML = `
     ## K8S/DRIVER ATTRIBUTES
     ########################
     csi-powerstore:
@@ -341,7 +343,7 @@ describe("GIVEN createYamlString function", () => {
     cert-manager:
       enabled: $CERT_MANAGER_ENABLED
   `;
-  
+
 	const testObject = {
 		csmVersion: "1.6.0",
 		driverVersion: "v2.6.0",
@@ -349,8 +351,8 @@ describe("GIVEN createYamlString function", () => {
 		controllerCount: "2",
 		controllerPodsNodeSelector: false,
 		nodePodsNodeSelector: false,
-    resiliency: false,
-    storageCapacity: false,
+		resiliency: false,
+		storageCapacity: false,
 		snapshot: true,
 		vgsnapshot: false,
 		resizer: true,
@@ -364,24 +366,24 @@ describe("GIVEN createYamlString function", () => {
 		replicationImage: "dellemc/dell-csi-replicator:v1.4.0",
 		authorizationImage: "dellemc/csm-authorization-sidecar:v1.6.0",
 		certManagerEnabled: false,
-    authorizationProxyHost: '""',
-    monitor: false,
-    certSecretCount: 0,
-    storageArrayId: "",
-    storageArrayEndpointUrl: '""',
-   storageArrayBackupEndpointUrl: '""',
-    clusterPrefix: "",
-    portGroups: "",
-    vSphereEnabled: false,
-    vSphereFCPortGroup: "csi-vsphere-VC-PG",
-    vSphereFCHostName: "csi-vsphere-VC-HN",
-    vSphereVCenterHost:"00.000.000.00",
-    vSphereVCenterCredSecret: "vcenter-creds",
-    migration:  false
+		authorizationProxyHost: '""',
+		monitor: false,
+		certSecretCount: 0,
+		storageArrayId: "",
+		storageArrayEndpointUrl: '""',
+		storageArrayBackupEndpointUrl: '""',
+		clusterPrefix: "",
+		portGroups: "",
+		vSphereEnabled: false,
+		vSphereFCPortGroup: "csi-vsphere-VC-PG",
+		vSphereFCHostName: "csi-vsphere-VC-HN",
+		vSphereVCenterHost: "00.000.000.00",
+		vSphereVCenterCredSecret: "vcenter-creds",
+		migration: false
 	};
 
 	test("SHOULD return generated yaml file string for driver csi-powerstore", () => {
-    const expected = `
+		const expected = `
     ## K8S/DRIVER ATTRIBUTES
     ########################
     csi-powerstore:
@@ -580,8 +582,8 @@ describe("GIVEN createYamlString function", () => {
 		expect(received).toEqual(expected);
 	});
 
-test("SHOULD return generated yaml file string for driver csi-powerflex", () => {
-    const expected = `
+	test("SHOULD return generated yaml file string for driver csi-powerflex", () => {
+		const expected = `
     ## K8S/DRIVER ATTRIBUTES
     ########################
     csi-powerstore:

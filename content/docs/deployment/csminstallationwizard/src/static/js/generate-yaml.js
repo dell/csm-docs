@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-
 var template = "";
 var version = "";
 var observabilityEnabled = false;
@@ -161,18 +160,20 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	return yamlTpl
 }
 
-function loadTemplate(array,templateType,version) {
+function loadTemplate(array, templateType, csmVersion) {
 	var tmplFile;
 	switch (templateType) {
 		case CONSTANTS.HELM:
-			tmplFile = CONSTANTS.TEMP_DIR + CONSTANTS.SLASH + CONSTANTS.HELM + CONSTANTS.SLASH + CONSTANTS.CSM + CONSTANTS.HYPHEN + version + CONSTANTS.HYPHEN + CONSTANTS.VALUES + CONSTANTS.TEMP_EXT;
+			tmplFile = CONSTANTS.TEMP_DIR + CONSTANTS.SLASH + CONSTANTS.HELM + CONSTANTS.SLASH + CONSTANTS.CSM + CONSTANTS.HYPHEN + csmVersion + CONSTANTS.HYPHEN + CONSTANTS.VALUES + CONSTANTS.TEMP_EXT;
 			break;
 		case CONSTANTS.OPERATOR:
-			tmplFile = CONSTANTS.TEMP_DIR + CONSTANTS.SLASH + CONSTANTS.OPERATOR + CONSTANTS.SLASH + CONSTANTS.CSM + CONSTANTS.HYPHEN + array + CONSTANTS.HYPHEN + version + CONSTANTS.TEMP_EXT;
+			tmplFile = CONSTANTS.TEMP_DIR + CONSTANTS.SLASH + CONSTANTS.OPERATOR + CONSTANTS.SLASH + CONSTANTS.CSM + CONSTANTS.HYPHEN + array + CONSTANTS.HYPHEN + csmVersion + CONSTANTS.TEMP_EXT;
 			break;
 	}
-	
-	$.get(tmplFile, function(data) { template = String(data) }, "text");
+
+	$.get(tmplFile, function(data) {
+		template = String(data)
+	}, "text");
 }
 
 if (typeof exports !== 'undefined') {
