@@ -17,8 +17,7 @@
  */
 var driver = "";
 var driverNamespace = "";
-var moduleNamespace = "csm-module";
-var releaseName ="";
+var releaseName = "";
 
 const setupTooltipStyle = () => {
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -31,15 +30,11 @@ function onArrayChange() {
 		driver = $(this).val();
 		driver === "" ? $("#main").hide() : $("#main").show();
 		displayModules(driver, CONSTANTS)
-		loadTemplate();
+		loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value);
 		setDefaultValues(defaultValues, csmMap);
-		document.getElementById("driver-namespace").value = driver;
-		document.getElementById("module-namespace").value = moduleNamespace;
 		$(".namespace").show();
-		loadCSMVersions(document.getElementById("csm-version").value);
 		onObservabilityChange();
 		onAuthorizationChange();
-		onAppMobilityChange(veleroNote);
 		onResiliencyChange(podmonNote);
 		onSnapshotChange(snapshotNote);
 		onVSphereChange();
@@ -62,15 +57,6 @@ function onObservabilityChange() {
 		$('div#observability-metrics-wrapper').show();
 	} else {
 		$('div#observability-metrics-wrapper').hide();
-	}
-}
-
-function onAppMobilityChange(veleroNoteValue) {
-	if ($("#application-mobility").prop('checked') === true) {
-		$('div#velero-wrapper').show();
-		$("#velero-note").html(veleroNoteValue);
-	} else {
-		$('div#velero-wrapper').hide();
 	}
 }
 
@@ -100,14 +86,6 @@ function onVSphereChange() {
 	}
 }
 
-function singleNamespaceCheck() {
-	if ($("#single-namespace").prop('checked') === true) {
-		$('div#single-namespace-disabled').hide();
-	} else {
-		$('div#single-namespace-disabled').show();
-	}
-}
-
 function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 	if ($("#controller-pods-node-selector").prop('checked') === true || $("#node-pods-node-selector").prop('checked') === true) {
 		$(".node-sel-attributes").show();
@@ -120,7 +98,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 }
 
 const onCSMVersionChange = () => {
-	document.getElementById("csm-version").value !== "" ? loadCSMVersions(document.getElementById("csm-version").value) : null;
+	document.getElementById("csm-version").value !== "" ? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 	displayModules(driver, CONSTANTS);
 	onObservabilityChange();
 	onAuthorizationChange();
@@ -155,23 +133,19 @@ const resetDriverNamespace = driverValue => {
 	document.getElementById("driver-namespace").value = driverValue;
 }
 
-const resetModuleNameSpace = moduleNamespaceValue => {
-	document.getElementById("module-namespace").value = moduleNamespaceValue;
-}
-
-const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFunc, loadDefaultValuesFunc, hideFieldsFunc, setDefaultValuesFunc, validateInputFunc, CONSTANTS_PARAM) => {
+const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFunc, validateInputFunc, CONSTANTS_PARAM) => {
 	var link = document.getElementById('download-file');
-	link.href = generateYamlFileFunc(driverTemplate);
+	link.href = generateYamlFileFunc(template);
 	link.style.display = 'inline-block';
-	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, command3, CONSTANTS_PARAM)
+	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, CONSTANTS_PARAM)
 	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
+
 	return true;
 }
 
 function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".vgsnapshot").show();
 	$(".authorization").show();
-	$(".appMobility").show();
 	$(".storageArrays").hide();
 	$(".powermax-csi-reverse-proxy").hide();
 	$(".cluster-prefix").hide();
@@ -182,58 +156,61 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".vSphere").hide();
 	$(".cert-secret-count-wrapper").hide();
 
-	const selectedCSMVersion = document.getElementById("csm-version").value;
-
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
 			$(".authorization").hide();
 			$("#authorization").prop('checked', false);
 			$(".storage-capacity").show();
-
-			if (selectedCSMVersion === "1.6.0") {
-				$(".resiliency").show();
-			}
-
+			$(".resiliency").show();
+			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
+			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERMAX:
 			$(".vgsnapshot").hide();
-			$(".appMobility").hide();
 			$(".storageArrays").show();
-
-			if (selectedCSMVersion === "1.4.0" || selectedCSMVersion === "1.5.0") {
-				$(".powermax-csi-reverse-proxy").show();
-			}
-
 			$(".cluster-prefix").show();
 			$(".port-groups").show();
 			$(".migration").show();
 			$(".vSphere").show();
+			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERFLEX:
 			$(".resiliency").show();
 			$(".cert-secret-count-wrapper").show();
+			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.UNITY:
+			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.UNITY_NAMESPACE;
 			break;
 	}
 }
 
-function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS_PARAM) {
-	driverNamespace = document.getElementById("driver-namespace").value
+function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, CONSTANTS) {
+	driverNamespace = document.getElementById("driver-namespace").value;
+	csmVersion = document.getElementById("csm-version").value;
+	var helmChartVersion;
+	switch (csmVersion) {
+		case "1.7.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V170;
+			break;
+		case "1.6.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V160;
+			break;
+		default:
+			helmChartVersion = CONSTANTS.CSM_HELM_V170;
+			break;
+	}
 	$("#command-text-area").show();
 	$("#reverseProxyNote").hide();
 	$("#command-title").html(commandTitleValue);
 	$("#command-note").show();
-	$("#command1").html(command1Value.replaceAll("$drivernamespace", driverNamespace));
-	$("#command-note").html(commandNoteValue.replaceAll("$drivernamespace", driverNamespace));
-	if ($("#single-namespace").prop('checked') === true) {
-		$("#command2").html(command2Value.replaceAll("$release-name", releaseNameValue));
-	} else {
-		$("#command2").html(command3Value.replaceAll("$release-name", releaseNameValue));
-	}
-	if (document.getElementById("array").value === CONSTANTS_PARAM.POWERMAX){
+	$("#command1").html(command1Value);
+	$("#command-note").html(commandNoteValue);
+	var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace", driverNamespace).replace("$version", helmChartVersion);
+	$("#command2").html(command2);
+	if (document.getElementById("array").value === CONSTANTS.POWERMAX) {
 		$("#reverseProxyNote").show();
 	}
 }
@@ -253,7 +230,7 @@ function validateInput(validateFormFunc, CONSTANTS_PARAM) {
 	return false
 }
 
-const downloadFileHandler = () => $("#download-file").on('click', () => downloadFile(validateForm, generateYamlFile, displayCommands, loadDefaultValues, hideFields, setDefaultValues, validateInput, CONSTANTS));
+const downloadFileHandler = () => $("#download-file").on('click', () => downloadFile(validateForm, generateYamlFile, displayCommands, validateInput, CONSTANTS));
 
 function onPageLoad() {
 	setupTooltipStyle();
@@ -273,18 +250,15 @@ if (typeof exports !== 'undefined') {
 	module.exports = {
 		onAuthorizationChange,
 		onObservabilityChange,
-		onAppMobilityChange,
 		onResiliencyChange,
 		onSnapshotChange,
 		onVSphereChange,
-		singleNamespaceCheck,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
 		resetImageRepository,
 		resetControllerCount,
 		resetNodeSelectorLabel,
 		resetDriverNamespace,
-		resetModuleNameSpace,
 		downloadFile,
 		displayModules,
 		displayCommands,
