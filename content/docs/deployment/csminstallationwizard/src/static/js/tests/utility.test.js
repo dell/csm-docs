@@ -266,8 +266,6 @@ describe("GIVEN setDefaultValues function", () => {
 		document.body.innerHTML = `
 			<input type="text" id="image-repository">
 			<input type="number" id="controller-count">
-			<input type="text" id="vol-name-prefix">
-			<input type="text" id="snapshot-prefix">
 			<select id="csm-version" value="1.7.0">
 				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
@@ -283,13 +281,10 @@ describe("GIVEN setDefaultValues function", () => {
 			["certSecretCount", "1"]
 		]);
 
-		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
+		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2", testCSMMap);
 
 		expect(document.getElementById("image-repository").value).toEqual("dellemc");
 		expect(document.getElementById("controller-count").value).toEqual("2");
 		expect(document.getElementById("csm-version").value).toEqual("1.7.0");
-		expect(document.getElementById("vol-name-prefix").value).toEqual("csivol");
-		expect(document.getElementById("snapshot-prefix").value).toEqual("csi-snap");
-		expect(document.getElementById("cert-secret-count").value).toEqual("1");
 	});
 });

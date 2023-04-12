@@ -158,9 +158,6 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".vgsnapshot").show();
 	$(".authorization").show();
-	$(".observability").show();
-	$(".replication-mod").show();
-	$(".cert-manager").show();
 	$(".storageArrays").hide();
 	$(".powermax-csi-reverse-proxy").hide();
 	$(".cluster-prefix").hide();
@@ -171,8 +168,6 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".vSphere").hide();
 	$(".cert-secret-count-wrapper").hide();
 
-	const selectedCSMVersion = document.getElementById("csm-version").value;
-
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
 			$(".authorization").hide();
@@ -182,10 +177,6 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
-			$(".cert-secret-count-wrapper").show();
-			$(".resiliency").show();
-			$(".fsGroupPolicy").show();
-			$(".vgsnapshot").hide();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERMAX:
@@ -200,15 +191,9 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 		case CONSTANTS_PARAM.POWERFLEX:
 			$(".resiliency").show();
 			$(".cert-secret-count-wrapper").show();
+			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.UNITY:
-			$(".observability").hide();
-			$(".replication-mod").hide();
-			$(".resiliency").show();
-			$(".vgsnapshot").hide();
-			$(".authorization").hide();
-			$(".fsGroupPolicy").show();	
-			$(".cert-manager").hide();			
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.UNITY_NAMESPACE;
 			break;
 	}

@@ -8,7 +8,6 @@ csi-powerstore:
   ## Controller ATTRIBUTES
   controller:
     controllerCount: $CONTROLLER_COUNT
-    volumeNamePrefix: $VOLUME_NAME_PREFIX
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
@@ -20,7 +19,6 @@ csi-powerstore:
       image: dellemc/csi-volumegroup-snapshotter:v1.2.0
     snapshot:
       enabled: $SNAPSHOT_ENABLED
-      snapNamePrefix: $SNAP_NAME_PREFIX
     resizer:
       enabled: $RESIZER_ENABLED
   ## Node ATTRIBUTES
@@ -78,10 +76,8 @@ csi-powermax:
   portGroups: "$POWERMAX_PORT_GROUPS"
   controller:
     controllerCount: $CONTROLLER_COUNT
-    volumeNamePrefix: $VOLUME_NAME_PREFIX
     snapshot:
       enabled: $SNAPSHOT_ENABLED
-      snapNamePrefix: $SNAP_NAME_PREFIX
     resizer:
       enabled: $RESIZER_ENABLED
     healthMonitor:
@@ -129,7 +125,6 @@ csi-vxflexos:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     controllerCount: $CONTROLLER_COUNT
-    volumeNamePrefix: $VOLUME_NAME_PREFIX
     snapshot:
       enabled: $SNAPSHOT_ENABLED
     resizer:
@@ -172,188 +167,6 @@ csi-vxflexos:
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
 
-## K8S/PowerScale ATTRIBUTES
-##########################################
-csi-isilon:
-  enabled: $POWERSCALE_ENABLED
-  version: "v2.7.0"
-  certSecretCount: $CERT_SECRET_COUNT
-
-  allowedNetworks: []
- 
-  verbose: 1
-
-  enableCustomTopology: false
-
-  fsGroupPolicy: $FSGROUP_POLICY
-
-  controller:
-    controllerCount: $CONTROLLER_COUNT
-    volumeNamePrefix: $VOLUME_NAME_PREFIX
-
-    replication:
-      enabled: $REPLICATION_ENABLED
-      image: dellemc/dell-csi-replicator:v1.4.0
-
-    snapshot:
-      enabled: $SNAPSHOT_ENABLED
-      snapNamePrefix: $SNAP_NAME_PREFIX
-
-    resizer:
-      enabled: $RESIZER_ENABLED
-
-    healthMonitor:
-      enabled: $HEALTH_MONITOR_ENABLED
-
-    nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
-
-  node:
-    nodeSelector: $NODE_POD_NODE_SELECTOR
-    tolerations:
-    #  - key: "node.kubernetes.io/memory-pressure"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    #  - key: "node.kubernetes.io/disk-pressure"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    #  - key: "node.kubernetes.io/network-unavailable"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    # - key: "node-role.kubernetes.io/master"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    # tolerations:
-    # - key: "node-role.kubernetes.io/control-plane"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-
-    # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
-    #tolerations:
-    #  - key: "offline.vxflexos.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "vxflexos.podmon.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "offline.unity.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "unity.podmon.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "offline.isilon.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "isilon.podmon.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-
-    healthMonitor:
-      enabled: $HEALTH_MONITOR_ENABLED
-
-  authorization:
-    enabled: false
-    sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-    proxyHost: $AUTHORIZATION_PROXY_HOST
-    skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
-
-  # Enable this feature only after contact support for additional information
-  podmon:
-    enabled: $RESILIENCY_ENABLED
-    image: dellemc/podmon:v1.5.0
-    #controller:
-    #  args:
-    #    - "--csisock=unix:/var/run/csi/csi.sock"
-    #    - "--labelvalue=csi-isilon"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-isilon.dellemc.com"
-    #    - "--mode=controller"
-    #    - "--skipArrayConnectionValidation=false"
-    #    - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
-
-    #node:
-    #  args:
-    #    - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
-    #    - "--labelvalue=csi-isilon"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-isilon.dellemc.com"
-    #    - "--mode=node"
-    #    - "--leaderelection=false"
-    #    - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
-
-  images:
-    driverRepository: $IMAGE_REPOSITORY
-
-## CSI Unity
-########################
-csi-unity:
-  enabled: $UNITY_ENABLED
-  version: v2.7.0
-  images:
-    driverRepository: $IMAGE_REPOSITORY
-  certSecretCount: $CERT_SECRET_COUNT
-  fsGroupPolicy: $FSGROUP_POLICY
-  controller:
-    controllerCount: $CONTROLLER_COUNT
-    volumeNamePrefix: $VOLUME_NAME_PREFIX
-    snapshot:
-      enabled: $SNAPSHOT_ENABLED
-      snapNamePrefix: $SNAP_NAME_PREFIX
-    resizer:
-      enabled: $RESIZER_ENABLED
-    nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
-    healthMonitor:
-      enabled: $HEALTH_MONITOR_ENABLED
-  node:
-    healthMonitor:
-      enabled: $HEALTH_MONITOR_ENABLED
-    nodeSelector: $NODE_POD_NODE_SELECTOR 
-    tolerations:
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
-    #  - key: "node-role.kubernetes.io/master"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    #  - key: "node-role.kubernetes.io/control-plane"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    #  - key: "node.kubernetes.io/memory-pressure"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    #  - key: "node.kubernetes.io/disk-pressure"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    #  - key: "node.kubernetes.io/network-unavailable"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
-    #  - key: "offline.vxflexos.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "vxflexos.podmon.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "offline.unity.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "unity.podmon.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "offline.isilon.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-    #  - key: "isilon.podmon.storage.dell.com"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
-  podmon:
-    enabled: $RESILIENCY_ENABLED
-    image: dellemc/podmon:v1.5.0
-
 ## K8S/Replication Module ATTRIBUTES
 ##########################################
 csm-replication:
@@ -372,7 +185,7 @@ karavi-observability:
   karaviMetricsPowerscale:
     enabled: $POWERSCALE_OBSERVABILITY_METRICS_ENABLED
   cert-manager:
-    enabled: $CERT_MANAGER_ENABLED
+    enabled: false
 
 ## K8S/Cert-manager ATTRIBUTES
 ##########################################

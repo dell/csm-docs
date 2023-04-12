@@ -17,8 +17,8 @@
  */
 const CONSTANTS = {
 	POWERSTORE: "powerstore",
-	POWERSCALE: "isilon",
-	POWERFLEX: "vxflexos",
+	POWERSCALE: "powerscale",
+	POWERFLEX: "powerflex",
 	POWERMAX: "powermax",
 	UNITY: "unity",
 	POWERSTORE_NAMESPACE: "csi-powerstore",
