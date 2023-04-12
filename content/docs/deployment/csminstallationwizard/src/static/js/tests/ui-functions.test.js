@@ -19,7 +19,6 @@
 const {
 	onAuthorizationChange,
 	onObservabilityChange,
-	onAppMobilityChange,
 	onResiliencyChange,
 	onSnapshotChange,
 	onVSphereChange,
@@ -29,7 +28,6 @@ const {
 	resetControllerCount,
 	resetNodeSelectorLabel,
 	resetDriverNamespace,
-	downloadFile,
 	displayModules,
 	displayCommands,
 	hideFields,
@@ -108,30 +106,6 @@ describe("GIVEN onObservabilityChange function", () => {
 		onObservabilityChange();
 
 		expect($("div#observability-metrics-wrapper").css("display")).not.toEqual("none");
-	});
-});
-
-describe("GIVEN onAppMobilityChange function", () => {
-	test("SHOULD hide velero component components when option not checked", () => {
-		document.body.innerHTML = `
-            <input type="checkbox" id="application-mobility">
-            <div id="velero-wrapper" style="display:">
-        `;
-
-		onAppMobilityChange("Test velero note");
-
-		expect($("div#velero-wrapper").css("display")).toEqual("none");
-	});
-
-	test("SHOULD show Observability Metrics components when option checked", () => {
-		document.body.innerHTML = `
-            <input type="checkbox" id="application-mobility" checked>
-            <div id="velero-wrapper" style="display:none">
-        `;
-
-		onAppMobilityChange("Test velero note");
-
-		expect($("div#velero-wrapper").css("display")).not.toEqual("none");
 	});
 });
 
@@ -343,7 +317,6 @@ describe("GIVEN displayModules function", () => {
 		<div class="vgsnapshot" style="display:none"></div>
 		<div class="authorization" style="display:none"></div>
 		<div class="observability"></div>
-		<div class="appMobility" style="display:none"></div>
 	`;
 
 	test("SHOULD show expected components for csi-powerstore", () => {
@@ -354,7 +327,6 @@ describe("GIVEN displayModules function", () => {
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("none");
 		expect($(".observability").css("display")).toEqual("block");
-		expect($(".appMobility").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show expected components for csi-powerscale", () => {
@@ -365,7 +337,6 @@ describe("GIVEN displayModules function", () => {
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("block");
-		expect($(".appMobility").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show expected components for csi-powermax", () => {
@@ -376,7 +347,6 @@ describe("GIVEN displayModules function", () => {
 		expect($(".vgsnapshot").css("display")).toEqual("none");
 		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("block");
-		expect($(".appMobility").css("display")).toEqual("none");
 	});
 
 	test("SHOULD show expected components for csi-powerflex", () => {
@@ -387,7 +357,6 @@ describe("GIVEN displayModules function", () => {
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("block");
-		expect($(".appMobility").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show expected components for csi-unity", () => {
@@ -398,7 +367,6 @@ describe("GIVEN displayModules function", () => {
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("block");
-		expect($(".appMobility").css("display")).toEqual("block");
 	});
 });
 

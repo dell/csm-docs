@@ -107,7 +107,6 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$STORAGE_CAPACITY_ENABLED", yamlTplValues.storageCapacity);
 	yamlTpl = yamlTpl.replaceAll("$MONITOR_ENABLED", yamlTplValues.monitor);
 	yamlTpl = yamlTpl.replaceAll("$CERT_SECRET_COUNT", yamlTplValues.certSecretCount);
-
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_ID", yamlTplValues.storageArrayId);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", yamlTplValues.storageArrayBackupEndpointUrl);
