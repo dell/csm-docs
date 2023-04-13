@@ -57,7 +57,7 @@ storage products from Kubernetes clusters
 ```
       --config string   config file (default is $HOME/.karavictl.yaml)
   -h, --help            help for karavictl
-  -t, --toggle          Help message for toggle
+  -t, --toggle          help message for toggle
 ```
 
 ##### Output
@@ -225,7 +225,7 @@ karavictl role [flags]
 ##### Options
 
 ```
-  -h, --help   Help for role
+  -h, --help   help for role
 ```
 
 ##### Options inherited from parent commands
@@ -308,7 +308,7 @@ karavictl role list [flags]
 ##### Options
 
 ```
-  -h, --help   Help for list
+  -h, --help   help for list
 ```
 
 ##### Options inherited from parent commands
@@ -373,7 +373,7 @@ karavictl role create [flags]
 ```
   -f, --from-file string   Role data from a file
       --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
-  -h, --help               Help for create
+  -h, --help               help for create
 ```
 
 *NOTE:* 
@@ -463,7 +463,7 @@ karavictl role delete <role-name> [flags]
 ##### Options
 
 ```
-  -h, --help   Help for delete
+  -h, --help   help for delete
 ```
 
 ##### Options inherited from parent commands
@@ -618,7 +618,7 @@ karavictl storage [flags]
 
 ```
       --addr string    Address of the server (default "localhost")
-      -h, --help       Help for storage
+      -h, --help       help for storage
       --insecure       Skip certificate validation
 ```
 
@@ -653,7 +653,7 @@ karavictl storage get [flags]
 ##### Options
 
 ```
-  -h, --help               Help for get
+  -h, --help               help for get
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
 ```
@@ -699,7 +699,7 @@ karavictl storage list [flags]
 ##### Options
 
 ```
-  -h, --help          Help for list
+  -h, --help          help for list
   -t, --type string   Type of storage system
 ```
 
@@ -752,7 +752,7 @@ karavictl storage create [flags]
 
 ```
   -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               Help for create
+  -h, --help               help for create
   -a, --array-insecure     Array insecure skip verify
   -p, --password string    Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
@@ -796,7 +796,7 @@ karavictl storage update [flags]
 
 ```
   -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               Help for update
+  -h, --help               help for update
   -a, --array-insecure     Array insecure skip verify
   -p, --pass string        Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
@@ -840,7 +840,7 @@ karavictl storage delete [flags]
 ##### Options
 
 ```
-  -h, --help               Help for delete
+  -h, --help               help for delete
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
 ```
