@@ -66,7 +66,7 @@ The following third-party components are optionally installed in the specified n
 | authorization.images.storageService | The image to use for the storage-service. | Yes | dellemc/csm-authorization-storage:nightly |
 | authorization.images.opa | The image to use for Open Policy Agent. | Yes | openpolicyagent/opa |
 | authorization.images.opaKubeMgmt | The image to use for Open Policy Agent kube-mgmt. | Yes | openpolicyagent/kube-mgmt:0.11 |
-| authorization.hostname | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingresses. | Yes | csm-authorization.com |
+| authorization.hostname | The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress. | Yes | csm-authorization.com |
 | authorization.logLevel | CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”. | Yes | debug |
 | authorization.zipkin.collectoruri | The URI of the Zipkin instance to export traces. | No | - |
 | authorization.zipkin.probability | The ratio of traces to export. | No | - |
