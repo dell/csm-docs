@@ -225,7 +225,7 @@ karavictl role [flags]
 ##### Options
 
 ```
-  -h, --help   help for role
+  -h, --help   Help for role
 ```
 
 ##### Options inherited from parent commands
@@ -308,7 +308,7 @@ karavictl role list [flags]
 ##### Options
 
 ```
-  -h, --help   help for list
+  -h, --help   Help for list
 ```
 
 ##### Options inherited from parent commands
@@ -463,7 +463,7 @@ karavictl role delete <role-name> [flags]
 ##### Options
 
 ```
-  -h, --help   help for delete
+  -h, --help   Help for delete
 ```
 
 ##### Options inherited from parent commands
