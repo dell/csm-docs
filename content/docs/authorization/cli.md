@@ -225,13 +225,13 @@ karavictl role [flags]
 ##### Options
 
 ```
-  -h, --help   help for role
+  -h, --help   Help for role
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --config string   Config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -265,9 +265,9 @@ karavictl role get [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -308,15 +308,15 @@ karavictl role list [flags]
 ##### Options
 
 ```
-  -h, --help   help for list
+  -h, --help   Help for list
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -371,9 +371,9 @@ karavictl role create [flags]
 ##### Options
 
 ```
-  -f, --from-file string   role data from a file
-      --role strings       role in the form <name>=<type>=<id>=<pool>=<quota>
-  -h, --help               help for create
+  -f, --from-file string   Role data from a file
+      --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
+  -h, --help               Help for create
 ```
 
 *NOTE:* 
@@ -382,9 +382,9 @@ karavictl role create [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -419,17 +419,17 @@ karavictl role update [flags]
 ##### Options
 
 ```
-  -f, --from-file string   role data from a file
-      --role strings       role in the form <name>=<type>=<id>=<pool>=<quota>
-  -h, --help               help for update
+  -f, --from-file string   Role data from a file
+      --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
+  -h, --help               Help for update
 ```
 
 ##### Options inherited from parent commands
 
 ```
       --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -463,15 +463,15 @@ karavictl role delete <role-name> [flags]
 ##### Options
 
 ```
-  -h, --help   help for delete
+  -h, --help   Help for delete
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
