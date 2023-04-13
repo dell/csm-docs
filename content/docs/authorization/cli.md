@@ -260,14 +260,14 @@ karavictl role get [flags]
 
 ```
   -h, --help   help for get
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
 
 ```
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Output
@@ -309,14 +309,14 @@ karavictl role list [flags]
 
 ```
   -h, --help   help for list
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
 
 ```
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Output
@@ -373,8 +373,6 @@ karavictl role create [flags]
 ```
   -f, --from-file string   role data from a file
       --role strings       role in the form <name>=<type>=<id>=<pool>=<quota>
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
   -h, --help               help for create
 ```
 
@@ -385,6 +383,8 @@ karavictl role create [flags]
 
 ```
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Output
@@ -421,8 +421,6 @@ karavictl role update [flags]
 ```
   -f, --from-file string   role data from a file
       --role strings       role in the form <name>=<type>=<id>=<pool>=<quota>
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
   -h, --help               help for update
 ```
 
@@ -430,6 +428,8 @@ karavictl role update [flags]
 
 ```
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Output
@@ -464,14 +464,14 @@ karavictl role delete <role-name> [flags]
 
 ```
   -h, --help   help for delete
-      --insecure           insecure skip verify flag for Helm deployment
-      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Options inherited from parent commands
 
 ```
       --config string   config file (default is $HOME/.karavictl.yaml)
+      --insecure           insecure skip verify flag for Helm deployment
+      --addr               address of the container for Helm deployment (pod:port)
 ```
 
 ##### Output
