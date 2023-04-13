@@ -15,7 +15,7 @@ The storage administrator must first configure the proxy server with the followi
 
 >__Note__:
 > - The `RPM deployment` will use the address of the server.
-> - The `Helm deployment` will use the address and port of the Ingress hosts for the proxy-server and role services.
+> - The `Helm deployment` will use the address and port of the Ingress hosts for the proxy-server.
 
 ### Configuring Storage
 
@@ -71,7 +71,7 @@ A `role` consists of a name, the storage to use, and the quota limit for the sto
 karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
 
 # Helm Deployment
-karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
+karavictl role create --insecure --addr csm-authorization.com:30016 --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
 ```
 
 >__Note__: 
