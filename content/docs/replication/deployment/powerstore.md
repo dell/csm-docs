@@ -174,8 +174,8 @@ parameters:
 
 After creating storage class YAML files, they must be applied to your Kubernetes clusters with `kubectl`.
 
-Creating storage classes for file-type storage is very similar to the process for creating block-type storage classes. You can find sample replication enabled storage class for block storage (Volumes) in the driver repository
-[here](https://github.com/dell/csi-powerstore/blob/main/samples/storageclass/powerstore-block-replication.yaml).
+Creating storage classes for file-type storage is very similar to the process for creating block-type storage classes. You can find sample replication enabled storage class for file storage (File Systems) in the driver repository
+[here](https://github.com/dell/csi-powerstore/blob/main/samples/storageclass/powerstore-file-replication.yaml).
 
 It will look like this:
 ```yaml
