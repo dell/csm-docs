@@ -38,7 +38,7 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS            | PowerMax         | PowerStore       | PowerScale       | PowerFlex        |
 | ----------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| Kubernetes        | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 |
+| Kubernetes        | 1.25, 1.26,1.27  | 1.25, 1.26,1.27  |  1.25, 1.26,1.27 | 1.25, 1.26,1.27  |
 | Red Hat OpenShift | 4.10, 4.11       | 4.10, 4.11       | 4.10, 4.11       | 4.10, 4.11       |
 | RHEL              | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         |
 | CentOS            | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         |
