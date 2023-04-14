@@ -266,6 +266,8 @@ describe("GIVEN setDefaultValues function", () => {
 		document.body.innerHTML = `
 			<input type="text" id="image-repository">
 			<input type="number" id="controller-count">
+			<input type="text" id="vol-name-prefix">
+			<input type="text" id="snapshot-prefix">
 			<select id="csm-version" value="1.7.0">
 				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
@@ -274,7 +276,9 @@ describe("GIVEN setDefaultValues function", () => {
 		const testCSMMap = new Map([
 			["csmVersion", "1.7.0"],
 			["imageRepository", "dellemc"],
-			["controllerCount", "2"]
+			["controllerCount", "2"],
+			["VolnamePrefix", "csivol"],
+			["SnapnamePrefix", "csi-snap"]
 		]);
 
 		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2", testCSMMap);
@@ -282,5 +286,7 @@ describe("GIVEN setDefaultValues function", () => {
 		expect(document.getElementById("image-repository").value).toEqual("dellemc");
 		expect(document.getElementById("controller-count").value).toEqual("2");
 		expect(document.getElementById("csm-version").value).toEqual("1.7.0");
+		expect(document.getElementById("vol-name-prefix").value).toEqual("csivol");
+		expect(document.getElementById("snapshot-prefix").value).toEqual("csi-snap");
 	});
 });

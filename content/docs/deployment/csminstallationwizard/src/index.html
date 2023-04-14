@@ -59,9 +59,9 @@
                       <option value="" selected>Select the Array</option>
                       <option value="powerstore">PowerStore</option>
                       <option value="powermax">PowerMax</option>
-                      <option value="powerscale" disabled>PowerScale</option>
                       <option value="powerflex">PowerFlex</option>
-                      <option value="unity" disabled>Unity</option>
+                      <option value="unity">Unity</option>
+                      <option value="powerscale" disabled>PowerScale</option>
                     </select>
                   </div>
                 </div>
@@ -109,7 +109,7 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4">
+                  <div class="row mb-4 replication-mod">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="replication" value="">
                       <label for="replication" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Replication module">Replication</label>
@@ -160,7 +160,7 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4">
+                  <div class="row mb-4 cert-manager">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="cert-manager-enabled" value="">
                       <label for="cert-manager-enabled" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Cert Manager feature">Cert Manager</label>
@@ -188,10 +188,22 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4 col-sm-11">
+                  <div class="row mb-4 col-sm-11 snapshot-feature">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="snapshot" value="" onchange="onSnapshotChange(snapshotNote)" checked>
-                      <label for="snapshot" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Volume Snapshot feature">Snapshot</label>
+                      <input class="form-check-input" type="checkbox" id="snapshot" value="" onchange="onSnapshotChange(snapshotNote, driver, CONSTANTS)" checked>
+                      <label for="snapshot" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Volume Snapshot feature." style="width: 180px;">Snapshot</label>
+                    </div>
+                    <div class="was-validated row mt-3 child-level-one" id="snap-prefix">
+                      <label for="snapshot-prefix" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix to apply to the names of a created snapshots" ">Snap Name Prefix</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-3">
+                        <input class="form-control input-lg" type="text" id="snapshot-prefix" placeholder="csi-snap" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-snap-name-prefix" onclick="resetSnapNamePrefix(csmMap)">Reset to default</a>
+                        </div>
+                      </div>
                     </div>
                     <div class="row child-level-one" id="snapshot-note-wrapper">
                       <div class="mt-3 py-2 note">
@@ -331,6 +343,18 @@
                     </div>
                   </div>
 
+                  <div class="was-validated row mb-4 fsGroupPolicy">
+                    <label for="fsGroupPolicy" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Select the fsGroupPolicy type" style="width: 180px;">FSGroupPolicy Type</label>
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-3">
+                      <select id="fsGroup-Policy" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
+                        <option value="" selected> Select the FSGroupPolicy type</option>
+                        <option value="ReadWriteOnceWithFSType">ReadWriteOnceWithFSType</option>
+                        <option value="File">File</option>
+                      </select>
+                    </div>
+                  </div>
+                  
                   <div class="was-validated row mb-4">
                     <label for="controller-count" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Defines the number of controller pods to deploy." style="width: 180px;">Controller Pods Count</label>
                     <div class="row">
@@ -345,6 +369,19 @@
                     </div>
                   </div>
 
+                  <div class="was-validated row mb-4 vol-name-prefix">
+                    <label for="vol-name-prefix" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix of PersistentVolume names created." style="width: 180px;">Volume Name Prefix</label>
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-3">
+                      <input class="form-control input-lg" type="text" id="vol-name-prefix" placeholder="csivol"  oninput="validateInput(validateForm, CONSTANTS)" required>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="row mt-1">
+                        <a class="reset" id="reset-vol-name-prefix" onclick="resetVolNamePrefix(csmMap)">Reset to default</a>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div class="row mb-4 nodeselector">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="controller-pods-node-selector" value="" onchange="onNodeSelectorChange(nodeSelectorNote, csmMap)">

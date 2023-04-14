@@ -53,9 +53,14 @@ describe("GIVEN setValues function", () => {
             <select id="csm-version">
                 <option value="1.6.0">CSM 1.6</option>
             </select>
+            <select id="fsGroup-Policy">
+                <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
+            </select>
             <input type="text" id="image-repository" value="dellemc">
             <input type="number" id="cert-secret-count" value="0">
             <input type="number" id="controller-count" value="2">
+            <input type="text" id="vol-name-prefix" value="csivol">
+            <input type="text" id="snapshot-prefix" value="csi-snap">
             <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
             <input type="checkbox" id="controller-pods-node-selector" checked>
             <input type="checkbox" id="node-pods-node-selector" checked>
@@ -66,7 +71,9 @@ describe("GIVEN setValues function", () => {
 		const testCSMMap = new Map([
 			["csmVersion", "1.6.0"],
 			["imageRepository", "dellemc"],
-			["controllerCount", "2"],
+			["controllerCount", "1"],
+      ["VolnamePrefix", "csivol"],
+			["SnapnamePrefix", "csi-snap"],
 			["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
 			["driverVersion", "v2.6.0"],
 		]);
@@ -76,7 +83,9 @@ describe("GIVEN setValues function", () => {
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
 			certSecretCount: "0",
-			controllerCount: "2",
+			controllerCount: "1",
+      VolnamePrefix: "csivol",
+			SnapnamePrefix: "csi-snap",
 			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodeSelectorLabel: "node-role.kubernetes.io/control-plane:",
@@ -102,9 +111,14 @@ describe("GIVEN setValues function", () => {
             <select id="csm-version">
                 <option value="1.6.0">CSM 1.6</option>
             </select>
+            <select id="fsGroup-Policy">
+                <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
+            </select>
             <input type="text" id="image-repository" value="dellemc">
             <input type="number" id="cert-secret-count" value="0">
             <input type="number" id="controller-count" value="2">
+            <input type="text" id="vol-name-prefix" value="csivol">
+            <input type="text" id="snapshot-prefix" value="csi-snap">
             <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
             <input type="checkbox" id="controller-pods-node-selector" checked>
             <input type="checkbox" id="node-pods-node-selector" checked>
@@ -115,7 +129,9 @@ describe("GIVEN setValues function", () => {
 		const testCSMMap = new Map([
 			["csmVersion", "1.6.0"],
 			["imageRepository", "dellemc"],
-			["controllerCount", "2"],
+			["controllerCount", "1"],
+      ["VolnamePrefix", "csivol"],
+			["SnapnamePrefix", "csi-snap"],
 			["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
 			["driverVersion", "v2.6.0"],
 		]);
@@ -125,7 +141,9 @@ describe("GIVEN setValues function", () => {
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
 			certSecretCount: "0",
-			controllerCount: "2",
+			controllerCount: "1",
+      VolnamePrefix: "csivol",
+			SnapnamePrefix: "csi-snap",
 			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodeSelectorLabel: "node-role.kubernetes.io/control-plane:",
@@ -317,7 +335,72 @@ describe("GIVEN createYamlString function", () => {
         enabled: $AUTHORIZATION_ENABLED
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
         proxyHost: $AUTHORIZATION_PROXY_HOST
-    
+
+    ## CSI Unity
+    ########################
+    csi-unity:
+      enabled: $UNITY_ENABLED
+      version: v2.6.0
+      images:
+        driverRepository: $IMAGE_REPOSITORY
+      certSecretCount: 1
+      fsGroupPolicy: $FSGROUP_POLICY
+      controller:
+        controllerCount: $CONTROLLER_COUNT
+        volumeNamePrefix: $VOLUME_NAME_PREFIX
+        snapshot:
+          enabled: $SNAPSHOT_ENABLED
+          snapNamePrefix: $SNAP_NAME_PREFIX
+        resizer:
+          enabled: $RESIZER_ENABLED
+        nodeSelector:
+        healthMonitor:
+          enabled: $HEALTH_MONITOR_ENABLED
+      node:
+        healthMonitor:
+          enabled: $HEALTH_MONITOR_ENABLED
+        nodeSelector:
+        tolerations:
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+        #  - key: "node-role.kubernetes.io/master"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+        #  - key: "node-role.kubernetes.io/control-plane"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/memory-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/disk-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/network-unavailable"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
+        #  - key: "offline.vxflexos.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "vxflexos.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.unity.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "unity.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.isilon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "isilon.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+      podmon:
+        enabled: $RESILIENCY_ENABLED
+        image: dellemc/podmon:v1.5.0
+
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
     csm-replication:
@@ -348,7 +431,10 @@ describe("GIVEN createYamlString function", () => {
 		csmVersion: "1.6.0",
 		driverVersion: "v2.6.0",
 		imageRepository: "dellemc",
-		controllerCount: "2",
+		controllerCount: "1",
+    FsgroupPolicy: "ReadWriteOnceWithFSType",
+    VolnamePrefix: "csivol",
+    SnapnamePrefix: "csi-snap",
 		controllerPodsNodeSelector: false,
 		nodePodsNodeSelector: false,
 		resiliency: false,
@@ -393,7 +479,7 @@ describe("GIVEN createYamlString function", () => {
         driverRepository: dellemc
       ## Controller ATTRIBUTES
       controller:
-        controllerCount: 2
+        controllerCount: 1
         healthMonitor:
           enabled: false
         nodeSelector: false
@@ -461,7 +547,7 @@ describe("GIVEN createYamlString function", () => {
       clusterPrefix: 
       portGroups: ""
       controller:
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -510,7 +596,7 @@ describe("GIVEN createYamlString function", () => {
           image: dellemc/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -552,7 +638,72 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
         proxyHost: ""
-    
+
+    ## CSI Unity
+    ########################
+    csi-unity:
+      enabled: false
+      version: v2.6.0
+      images:
+        driverRepository: dellemc
+      certSecretCount: 1
+      fsGroupPolicy: ReadWriteOnceWithFSType
+      controller:
+        controllerCount: 1
+        volumeNamePrefix: csivol
+        snapshot:
+          enabled: true
+          snapNamePrefix: csi-snap
+        resizer:
+          enabled: true
+        nodeSelector:
+        healthMonitor:
+          enabled: false
+      node:
+        healthMonitor:
+          enabled: false
+        nodeSelector:
+        tolerations:
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+        #  - key: "node-role.kubernetes.io/master"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+        #  - key: "node-role.kubernetes.io/control-plane"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/memory-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/disk-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/network-unavailable"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
+        #  - key: "offline.vxflexos.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "vxflexos.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.unity.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "unity.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.isilon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "isilon.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+      podmon:
+        enabled: false
+        image: dellemc/podmon:v1.5.0
+
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
     csm-replication:
@@ -593,7 +744,7 @@ describe("GIVEN createYamlString function", () => {
         driverRepository: dellemc
       ## Controller ATTRIBUTES
       controller:
-        controllerCount: 2
+        controllerCount: 1
         healthMonitor:
           enabled: false
         nodeSelector: false
@@ -661,7 +812,7 @@ describe("GIVEN createYamlString function", () => {
       clusterPrefix: 
       portGroups: ""
       controller:
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -710,7 +861,7 @@ describe("GIVEN createYamlString function", () => {
           image: dellemc/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -752,7 +903,72 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
         proxyHost: ""
-    
+
+    ## CSI Unity
+    ########################
+    csi-unity:
+      enabled: false
+      version: v2.6.0
+      images:
+        driverRepository: dellemc
+      certSecretCount: 1
+      fsGroupPolicy: ReadWriteOnceWithFSType
+      controller:
+        controllerCount: 1
+        volumeNamePrefix: csivol
+        snapshot:
+          enabled: true
+          snapNamePrefix: csi-snap
+        resizer:
+          enabled: true
+        nodeSelector:
+        healthMonitor:
+          enabled: false
+      node:
+        healthMonitor:
+          enabled: false
+        nodeSelector:
+        tolerations:
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+        #  - key: "node-role.kubernetes.io/master"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+        #  - key: "node-role.kubernetes.io/control-plane"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/memory-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/disk-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/network-unavailable"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
+        #  - key: "offline.vxflexos.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "vxflexos.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.unity.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "unity.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.isilon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "isilon.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+      podmon:
+        enabled: false
+        image: dellemc/podmon:v1.5.0
+
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
     csm-replication:
@@ -794,7 +1010,7 @@ describe("GIVEN createYamlString function", () => {
         driverRepository: dellemc
       ## Controller ATTRIBUTES
       controller:
-        controllerCount: 2
+        controllerCount: 1
         healthMonitor:
           enabled: false
         nodeSelector: false
@@ -862,7 +1078,7 @@ describe("GIVEN createYamlString function", () => {
       clusterPrefix: 
       portGroups: ""
       controller:
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -911,7 +1127,7 @@ describe("GIVEN createYamlString function", () => {
           image: dellemc/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -953,7 +1169,72 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
         proxyHost: ""
-    
+
+    ## CSI Unity
+    ########################
+    csi-unity:
+      enabled: false
+      version: v2.6.0
+      images:
+        driverRepository: dellemc
+      certSecretCount: 1
+      fsGroupPolicy: ReadWriteOnceWithFSType
+      controller:
+        controllerCount: 1
+        volumeNamePrefix: csivol
+        snapshot:
+          enabled: true
+          snapNamePrefix: csi-snap
+        resizer:
+          enabled: true
+        nodeSelector:
+        healthMonitor:
+          enabled: false
+      node:
+        healthMonitor:
+          enabled: false
+        nodeSelector:
+        tolerations:
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+        #  - key: "node-role.kubernetes.io/master"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+        #  - key: "node-role.kubernetes.io/control-plane"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/memory-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/disk-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/network-unavailable"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
+        #  - key: "offline.vxflexos.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "vxflexos.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.unity.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "unity.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.isilon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "isilon.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+      podmon:
+        enabled: false
+        image: dellemc/podmon:v1.5.0
+
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
     csm-replication:
@@ -997,7 +1278,7 @@ describe("GIVEN createYamlString function", () => {
         driverRepository: dellemc
       ## Controller ATTRIBUTES
       controller:
-        controllerCount: 2
+        controllerCount: 1
         healthMonitor:
           enabled: false
         nodeSelector: false
@@ -1065,7 +1346,7 @@ describe("GIVEN createYamlString function", () => {
       clusterPrefix: 
       portGroups: ""
       controller:
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -1114,7 +1395,7 @@ describe("GIVEN createYamlString function", () => {
           image: dellemc/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -1156,7 +1437,72 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
         proxyHost: ""
-    
+
+    ## CSI Unity
+    ########################
+    csi-unity:
+      enabled: false
+      version: v2.6.0
+      images:
+        driverRepository: dellemc
+      certSecretCount: 1
+      fsGroupPolicy: ReadWriteOnceWithFSType
+      controller:
+        controllerCount: 1
+        volumeNamePrefix: csivol
+        snapshot:
+          enabled: true
+          snapNamePrefix: csi-snap
+        resizer:
+          enabled: true
+        nodeSelector:
+        healthMonitor:
+          enabled: false
+      node:
+        healthMonitor:
+          enabled: false
+        nodeSelector:
+        tolerations:
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+        #  - key: "node-role.kubernetes.io/master"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+        #  - key: "node-role.kubernetes.io/control-plane"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/memory-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/disk-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/network-unavailable"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
+        #  - key: "offline.vxflexos.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "vxflexos.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.unity.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "unity.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.isilon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "isilon.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+      podmon:
+        enabled: false
+        image: dellemc/podmon:v1.5.0
+
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
     csm-replication:
@@ -1199,7 +1545,7 @@ describe("GIVEN createYamlString function", () => {
         driverRepository: dellemc
       ## Controller ATTRIBUTES
       controller:
-        controllerCount: 2
+        controllerCount: 1
         healthMonitor:
           enabled: false
         nodeSelector: false
@@ -1267,7 +1613,7 @@ describe("GIVEN createYamlString function", () => {
       clusterPrefix: 
       portGroups: ""
       controller:
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -1316,7 +1662,7 @@ describe("GIVEN createYamlString function", () => {
           image: dellemc/dell-csi-replicator:v1.4.0
         healthMonitor:
           enabled: false
-        controllerCount: 2
+        controllerCount: 1
         snapshot:
           enabled: true
         resizer:
@@ -1358,7 +1704,72 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
         proxyHost: ""
-    
+
+    ## CSI Unity
+    ########################
+    csi-unity:
+      enabled: true
+      version: v2.6.0
+      images:
+        driverRepository: dellemc
+      certSecretCount: 1
+      fsGroupPolicy: ReadWriteOnceWithFSType
+      controller:
+        controllerCount: 1
+        volumeNamePrefix: csivol
+        snapshot:
+          enabled: true
+          snapNamePrefix: csi-snap
+        resizer:
+          enabled: true
+        nodeSelector:
+        healthMonitor:
+          enabled: false
+      node:
+        healthMonitor:
+          enabled: false
+        nodeSelector:
+        tolerations:
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+        #  - key: "node-role.kubernetes.io/master"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+        #  - key: "node-role.kubernetes.io/control-plane"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/memory-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/disk-pressure"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        #  - key: "node.kubernetes.io/network-unavailable"
+        #    operator: "Exists"
+        #    effect: "NoExecute"
+        # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
+        #  - key: "offline.vxflexos.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "vxflexos.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.unity.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "unity.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "offline.isilon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+        #  - key: "isilon.podmon.storage.dell.com"
+        #    operator: "Exists"
+        #    effect: "NoSchedule"
+      podmon:
+        enabled: false
+        image: dellemc/podmon:v1.5.0
+
     ## K8S/Replication Module ATTRIBUTES
     ##########################################
     csm-replication:
