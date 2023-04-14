@@ -196,7 +196,7 @@
                     <div class="was-validated row mt-3 child-level-one" id="snap-prefix">
                       <label for="snapshot-prefix" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix to apply to the names of a created snapshots">Snap Name Prefix</label>
                       <div class="col-sm-9"></div>
-                      <div class="col-sm-3">
+                      <div class="col-sm-2">
                         <input class="form-control input-lg" type="text" id="snapshot-prefix" placeholder="csi-snap" oninput="validateInput(validateForm, CONSTANTS)" required>
                       </div>
                       <div class="col-sm-4">
@@ -344,14 +344,15 @@
                   </div>
 
                   <div class="was-validated row mb-4 fsGroupPolicy">
-                    <label for="fsGroupPolicy" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Select the fsGroupPolicy type" style="width: 180px;">FSGroupPolicy Type</label>
+                    <label for="fsGroupPolicy" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Select the fsGroupPolicy type" style="width: 180px;">FS Group Policy</label>
                     <div class="col-sm-9"></div>
-                    <div class="col-sm-3">
-                      <select id="fsGroup-Policy" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
-                        <option value="" selected> Select the FSGroupPolicy type</option>
-                        <option value="ReadWriteOnceWithFSType">ReadWriteOnceWithFSType</option>
-                        <option value="File">File</option>
-                      </select>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <select id="fsGroup-Policy" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
+                          <option value="ReadWriteOnceWithFSType" selected>ReadWriteOnceWithFSType</option>
+                          <option value="File">File</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                   
@@ -372,12 +373,14 @@
                   <div class="was-validated row mb-4 vol-name-prefix">
                     <label for="vol-name-prefix" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix of PersistentVolume names created." style="width: 180px;">Volume Name Prefix</label>
                     <div class="col-sm-9"></div>
-                    <div class="col-sm-3">
-                      <input class="form-control input-lg" type="text" id="vol-name-prefix" placeholder="csivol"  oninput="validateInput(validateForm, CONSTANTS)" required>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="row mt-1">
-                        <a class="reset" id="reset-vol-name-prefix" onclick="resetVolNamePrefix(csmMap)">Reset to default</a>
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="vol-name-prefix" placeholder="csivol"  oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-vol-name-prefix" onclick="resetVolNamePrefix(csmMap)">Reset to default</a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -416,7 +419,7 @@
                     <div class="row mb-4 namespace">
                       <label for="driver-namespace" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the namespace to deploy the CSM chart" style="width: 155px;">Namespace</label>
                       <div class="col-sm-9"></div>
-                      <div class="was-validated col-sm-3">
+                      <div class="was-validated col-sm-2">
                         <input class="form-control input-lg" type="text" id="driver-namespace" oninput="validateInput(validateForm, CONSTANTS)" required>
                       </div>
                       <div class="col-sm-4">
