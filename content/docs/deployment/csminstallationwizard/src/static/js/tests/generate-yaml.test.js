@@ -48,13 +48,13 @@ const CONSTANTS = {
 };
 
 const testCSMMap = new Map([
-  ["csmVersion", "1.6.0"],
-  ["imageRepository", "dellemc"],
-  ["controllerCount", "1"],
-  ["volNamePrefix", "csivol"],
-  ["snapNamePrefix", "csi-snap"],
-  ["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
-  ["driverVersion", "v2.6.0"],
+	["csmVersion", "1.6.0"],
+	["imageRepository", "dellemc"],
+	["controllerCount", "1"],
+	["volNamePrefix", "csivol"],
+	["snapNamePrefix", "csi-snap"],
+	["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
+	["driverVersion", "v2.6.0"],
 ]);
 
 describe("GIVEN setValues function", () => {
