@@ -132,11 +132,11 @@ const resetControllerCount = csmMapValue => {
 }
 
 const resetVolNamePrefix = csmMapValue => {
-	document.getElementById("vol-name-prefix").value = String(csmMapValue.get("VolnamePrefix"));
+	document.getElementById("vol-name-prefix").value = String(csmMapValue.get("volNamePrefix"));
 }
 
 const resetSnapNamePrefix = csmMapValue => {
-	document.getElementById("snapshot-prefix").value = String(csmMapValue.get("SnapnamePrefix"));
+	document.getElementById("snapshot-prefix").value = String(csmMapValue.get("snapNamePrefix"));
 }
 
 const resetNodeSelectorLabel = csmMapValue => {

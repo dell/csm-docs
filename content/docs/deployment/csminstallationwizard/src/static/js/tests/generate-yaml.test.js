@@ -47,6 +47,16 @@ const CONSTANTS = {
 	CSM_HELM_V170: "1.0.0"
 };
 
+const testCSMMap = new Map([
+  ["csmVersion", "1.6.0"],
+  ["imageRepository", "dellemc"],
+  ["controllerCount", "1"],
+  ["volNamePrefix", "csivol"],
+  ["snapNamePrefix", "csi-snap"],
+  ["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
+  ["driverVersion", "v2.6.0"],
+]);
+
 describe("GIVEN setValues function", () => {
 	test("SHOULD return expected DriverValues", () => {
 		document.body.innerHTML = `
@@ -68,24 +78,14 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="authorization-proxy-host" value="">
         `;
 
-		const testCSMMap = new Map([
-			["csmVersion", "1.6.0"],
-			["imageRepository", "dellemc"],
-			["controllerCount", "1"],
-      ["VolnamePrefix", "csivol"],
-			["SnapnamePrefix", "csi-snap"],
-			["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
-			["driverVersion", "v2.6.0"],
-		]);
-
 		const expected = {
 			csmVersion: "1.6.0",
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
 			certSecretCount: "0",
 			controllerCount: "1",
-      VolnamePrefix: "csivol",
-			SnapnamePrefix: "csi-snap",
+			volNamePrefix: "csivol",
+			snapNamePrefix: "csi-snap",
 			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodeSelectorLabel: "node-role.kubernetes.io/control-plane:",
@@ -126,23 +126,13 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="authorization-proxy-host" value="">
         `;
 
-		const testCSMMap = new Map([
-			["csmVersion", "1.6.0"],
-			["imageRepository", "dellemc"],
-			["controllerCount", "1"],
-      ["VolnamePrefix", "csivol"],
-			["SnapnamePrefix", "csi-snap"],
-			["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
-			["driverVersion", "v2.6.0"],
-		]);
-
 		const expected = {
 			csmVersion: "1.6.0",
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
 			certSecretCount: "0",
 			controllerCount: "1",
-      VolnamePrefix: "csivol",
+			VolnamePrefix: "csivol",
 			SnapnamePrefix: "csi-snap",
 			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
@@ -432,9 +422,9 @@ describe("GIVEN createYamlString function", () => {
 		driverVersion: "v2.6.0",
 		imageRepository: "dellemc",
 		controllerCount: "1",
-    FsgroupPolicy: "ReadWriteOnceWithFSType",
-    VolnamePrefix: "csivol",
-    SnapnamePrefix: "csi-snap",
+		fsGroupPolicy: "ReadWriteOnceWithFSType",
+		volNamePrefix: "csivol",
+		snapNamePrefix: "csi-snap",
 		controllerPodsNodeSelector: false,
 		nodePodsNodeSelector: false,
 		resiliency: false,

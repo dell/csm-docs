@@ -88,8 +88,8 @@ function setDefaultValues(defaultValuesParam, csmMapValues) {
 	document.getElementById("image-repository").value = csmMapValues.get("imageRepository");
 	document.getElementById("csm-version").value = String(csmMapValues.get("csmVersion"));
 	document.getElementById("controller-count").value = String(csmMapValues.get("controllerCount"));
-	document.getElementById("vol-name-prefix").value = csmMapValues.get("VolnamePrefix");
-	document.getElementById("snapshot-prefix").value = csmMapValues.get("SnapnamePrefix");
+	document.getElementById("vol-name-prefix").value = csmMapValues.get("volNamePrefix");
+	document.getElementById("snapshot-prefix").value = csmMapValues.get("snapNamePrefix");
 }
 
 function setMap(str) {

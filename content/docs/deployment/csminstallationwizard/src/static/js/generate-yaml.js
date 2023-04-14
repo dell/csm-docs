@@ -44,9 +44,9 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.monitor = $("#monitor").prop('checked') ? true : false;
 	DriverValues.certSecretCount = document.getElementById("cert-secret-count").value;
 	DriverValues.controllerCount = document.getElementById("controller-count").value;
-	DriverValues.VolnamePrefix = document.getElementById("vol-name-prefix").value;
-	DriverValues.SnapnamePrefix = document.getElementById("snapshot-prefix").value;
-	DriverValues.FsgroupPolicy = document.getElementById("fsGroup-Policy").value;
+	DriverValues.volNamePrefix = document.getElementById("vol-name-prefix").value;
+	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
+	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
 	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : false;
 	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : false;
 	DriverValues.nodeSelectorLabel = document.getElementById("node-selector-label").value || '""';
@@ -93,9 +93,9 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) {
 	yamlTpl = yamlTpl.replaceAll("$IMAGE_REPOSITORY", yamlTplValues.imageRepository);
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_COUNT", yamlTplValues.controllerCount);
-	yamlTpl = yamlTpl.replaceAll("$VOLUME_NAME_PREFIX", yamlTplValues.VolnamePrefix);
-	yamlTpl = yamlTpl.replaceAll("$SNAP_NAME_PREFIX", yamlTplValues.SnapnamePrefix);
-	yamlTpl = yamlTpl.replaceAll("$FSGROUP_POLICY", yamlTplValues.FsgroupPolicy);
+	yamlTpl = yamlTpl.replaceAll("$VOLUME_NAME_PREFIX", yamlTplValues.volNamePrefix);
+	yamlTpl = yamlTpl.replaceAll("$SNAP_NAME_PREFIX", yamlTplValues.snapNamePrefix);
+	yamlTpl = yamlTpl.replaceAll("$FSGROUP_POLICY", yamlTplValues.fsGroupPolicy);
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_POD_NODE_SELECTOR", yamlTplValues.controllerPodsNodeSelector);
 	yamlTpl = yamlTpl.replaceAll("$NODE_POD_NODE_SELECTOR", yamlTplValues.nodePodsNodeSelector);
 	yamlTpl = yamlTpl.replaceAll("$HEALTH_MONITOR_ENABLED", yamlTplValues.healthMonitor);
