@@ -56,7 +56,7 @@ storage products from Kubernetes clusters
 
 ```
       --config string   config file (default is $HOME/.karavictl.yaml)
-  -h, --help            Help for karavictl
+  -h, --help            help for karavictl
   -t, --toggle          help message for toggle
 ```
 
