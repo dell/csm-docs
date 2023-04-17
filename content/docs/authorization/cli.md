@@ -56,7 +56,7 @@ storage products from Kubernetes clusters
 
 ```
       --config string   config file (default is $HOME/.karavictl.yaml)
-  -h, --help            help for karavictl
+  -h, --help            Help for karavictl
   -t, --toggle          help message for toggle
 ```
 
@@ -373,7 +373,7 @@ karavictl role create [flags]
 ```
   -f, --from-file string   Role data from a file
       --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
-  -h, --help               help for create
+  -h, --help               Help for create
 ```
 
 *NOTE:* 
@@ -618,7 +618,7 @@ karavictl storage [flags]
 
 ```
       --addr string    Address of the server (default "localhost")
-      -h, --help       help for storage
+      -h, --help       Help for storage
       --insecure       Skip certificate validation
 ```
 
@@ -653,7 +653,7 @@ karavictl storage get [flags]
 ##### Options
 
 ```
-  -h, --help               help for get
+  -h, --help               Help for get
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
 ```
@@ -796,7 +796,7 @@ karavictl storage update [flags]
 
 ```
   -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               help for update
+  -h, --help               Help for update
   -a, --array-insecure     Array insecure skip verify
   -p, --pass string        Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
@@ -840,7 +840,7 @@ karavictl storage delete [flags]
 ##### Options
 
 ```
-  -h, --help               help for delete
+  -h, --help               Help for delete
   -s, --system-id string   System identifier (default "systemid")
   -t, --type string        Type of storage system ("powerflex", "powermax")
 ```

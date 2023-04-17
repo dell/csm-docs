@@ -31,7 +31,7 @@ karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id 
 ```
 
 >__Note__:
-> - The `insecure` flag specifies to skip certificate validation when connecting to the CSM Authorization proxy-server.
+> - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
 > - The `addr` flag is the address of the Authorization proxy-server. 
 > - The `array-insecure` flag specifies to skip certificate validation when proxy-service connects to the backend storage array.
 > - The `powerflexIP` is the API endpoint of your PowerFlex. You can find the `systemID` at the `https://<powerflex_gui_address>/dashboard/performance` near the `System` title.
@@ -51,7 +51,7 @@ karavictl tenant create --name Finance --insecure --addr csm-authorization.com:<
 ```
 
 >__Note__: 
-> - The `insecure` flag specifies to skip certificate validation when connecting to the CSM Authorization proxy-server.
+> - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
 > - The `addr` flag is the address of the Authorization proxy-server. 
 > - Run `karavictl tenant create --help` for help.
 
@@ -78,7 +78,7 @@ karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100
 ```
 
 >__Note__: 
-> - The `insecure` flag specifies to skip certificate validation when connecting to the CSM Authorization proxy-server.
+> - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
 > - The `addr` flag is the address of the Authorization proxy-server.
 > - Run `karavictl role create --help` for help.
 
@@ -95,7 +95,7 @@ karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --ad
 ```
 
 >__Note__: 
-> - The `insecure` flag specifies to skip certificate validation when connecting to the CSM Authorization proxy-server.
+> - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
 > - The `addr` flag is the address of the Authorization proxy-server. 
 > - Run `karavictl rolebinding create --help` for help.
 
@@ -127,6 +127,6 @@ data:
 This secret must be applied in the driver namespace.
 
 >__Note__: 
-> - The `insecure` flag specifies to skip certificate validation when connecting to the CSM Authorization proxy-server.
+> - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
 > - The `addr` flag is the address of the Authorization proxy-server.
 > - Run `karavictl generate token --help` for help.
