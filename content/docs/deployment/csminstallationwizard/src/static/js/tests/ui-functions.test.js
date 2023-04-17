@@ -374,9 +374,9 @@ describe("GIVEN displayModules function", () => {
 
 		displayModules("unity", CONSTANTS);
 
-		expect($(".vgsnapshot").css("display")).toEqual("block");
-		expect($(".authorization").css("display")).toEqual("block");
-		expect($(".observability").css("display")).toEqual("block");
+		expect($(".vgsnapshot").css("display")).toEqual("none");
+		expect($(".authorization").css("display")).toEqual("none");
+		expect($(".observability").css("display")).toEqual("none");
 	});
 });
 

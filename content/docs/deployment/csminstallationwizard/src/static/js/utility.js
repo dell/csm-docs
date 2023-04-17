@@ -90,7 +90,6 @@ function setDefaultValues(defaultValuesParam, csmMapValues) {
 	document.getElementById("controller-count").value = String(csmMapValues.get("controllerCount"));
 	document.getElementById("vol-name-prefix").value = csmMapValues.get("volNamePrefix");
 	document.getElementById("snapshot-prefix").value = csmMapValues.get("snapNamePrefix");
-	document.getElementById("cert-secret-count").value = csmMapValues.get("certSecretCount");
 }
 
 function setMap(str) {

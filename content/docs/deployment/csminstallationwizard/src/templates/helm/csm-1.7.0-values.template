@@ -167,6 +167,71 @@ csi-vxflexos:
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
 
+## CSI Unity
+########################
+csi-unity:
+  enabled: $UNITY_ENABLED
+  version: v2.6.0
+  images:
+    driverRepository: $IMAGE_REPOSITORY
+  certSecretCount: 1
+  fsGroupPolicy: $FSGROUP_POLICY
+  controller:
+    controllerCount: $CONTROLLER_COUNT
+    volumeNamePrefix: $VOLUME_NAME_PREFIX
+    snapshot:
+      enabled: $SNAPSHOT_ENABLED
+      snapNamePrefix: $SNAP_NAME_PREFIX
+    resizer:
+      enabled: $RESIZER_ENABLED
+    nodeSelector:
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+  node:
+    healthMonitor:
+      enabled: $HEALTH_MONITOR_ENABLED
+    nodeSelector:
+    tolerations:
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+    #  - key: "node-role.kubernetes.io/master"
+    #    operator: "Exists"
+    #    effect: "NoExecute"
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+    #  - key: "node-role.kubernetes.io/control-plane"
+    #    operator: "Exists"
+    #    effect: "NoExecute"
+    #  - key: "node.kubernetes.io/memory-pressure"
+    #    operator: "Exists"
+    #    effect: "NoExecute"
+    #  - key: "node.kubernetes.io/disk-pressure"
+    #    operator: "Exists"
+    #    effect: "NoExecute"
+    #  - key: "node.kubernetes.io/network-unavailable"
+    #    operator: "Exists"
+    #    effect: "NoExecute"
+    # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled 
+    #  - key: "offline.vxflexos.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "vxflexos.podmon.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "offline.unity.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "unity.podmon.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "offline.isilon.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "isilon.podmon.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+  podmon:
+    enabled: $RESILIENCY_ENABLED
+    image: dellemc/podmon:v1.5.0
+
 ## K8S/Replication Module ATTRIBUTES
 ##########################################
 csm-replication:
