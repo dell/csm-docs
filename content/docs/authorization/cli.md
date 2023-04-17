@@ -307,8 +307,7 @@ karavictl role [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --config string   Config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -342,10 +341,9 @@ karavictl role get [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -393,10 +391,9 @@ karavictl role list [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -453,7 +450,7 @@ karavictl role create [flags]
 
 ```
   -f, --from-file string   Role data from a file
-      --role      strings  Role in the form <name>=<type>=<id>=<pool>=<quota>
+      --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
   -h, --help               Help for create
 ```
 
@@ -463,10 +460,9 @@ karavictl role create [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -503,17 +499,16 @@ karavictl role update [flags]
 
 ```
   -f, --from-file string   Role data from a file
-      --role      strings  Role in the form <name>=<type>=<id>=<pool>=<quota>
+      --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
   -h, --help               Help for update
 ```
 
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+      --config string   config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
@@ -555,10 +550,9 @@ karavictl role delete <role-name> [flags]
 ##### Options inherited from parent commands
 
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --addr string     Address of the server (default "localhost")
+      --insecure        Skip certificate validation
 ```
 
 ##### Output
