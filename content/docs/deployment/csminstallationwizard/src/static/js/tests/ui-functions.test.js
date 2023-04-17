@@ -137,22 +137,26 @@ describe("GIVEN onSnapshotChange function", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="snapshot">
             <div id="snapshot-note-wrapper" style="display:">
+			<div id="snap-prefix" style="display:">
         `;
 
-		onSnapshotChange("Temp snapshot note");
+		onSnapshotChange("Temp snapshot note", "unity", CONSTANTS);
 
 		expect($("div#snapshot-note-wrapper").css("display")).toEqual("none");
+		expect($("div#snap-prefix").css("display")).toEqual("none");
 	});
 
 	test("SHOULD show snapshot components when option checked", () => {
 		document.body.innerHTML = `
             <input type="checkbox" id="snapshot" checked>
             <div id="snapshot-note-wrapper" style="display:none">
+			<div id="snap-prefix" style="display:none">
         `;
 
-		onSnapshotChange("Temp snapshot note");
+		onSnapshotChange("Temp snapshot note", "unity", CONSTANTS);
 
 		expect($("div#snapshot-note-wrapper").css("display")).not.toEqual("none");
+		expect($("div#snap-prefix").css("display")).not.toEqual("none");
 	});
 });
 
@@ -371,9 +375,9 @@ describe("GIVEN displayModules function", () => {
 
 		displayModules("unity", CONSTANTS);
 
-		expect($(".vgsnapshot").css("display")).toEqual("block");
-		expect($(".authorization").css("display")).toEqual("block");
-		expect($(".observability").css("display")).toEqual("block");
+		expect($(".vgsnapshot").css("display")).toEqual("none");
+		expect($(".authorization").css("display")).toEqual("none");
+		expect($(".observability").css("display")).toEqual("none");
 	});
 });
 
