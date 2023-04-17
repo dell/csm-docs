@@ -699,7 +699,7 @@ karavictl storage list [flags]
 ##### Options
 
 ```
-  -h, --help          help for list
+  -h, --help          Help for list
   -t, --type string   Type of storage system
 ```
 
@@ -752,7 +752,7 @@ karavictl storage create [flags]
 
 ```
   -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               help for create
+  -h, --help               Help for create
   -a, --array-insecure     Array insecure skip verify
   -p, --password string    Password (default "****")
   -s, --system-id string   System identifier (default "systemid")
