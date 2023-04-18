@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/isilon/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-04-18T11:30:28+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing CSI Driver for PowerScale via Helm
 ">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
-<meta itemprop="wordCount" content="3187">
+<meta itemprop="dateModified" content="2023-04-18T11:30:28+05:30" />
+<meta itemprop="wordCount" content="3358">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerScale via Helm
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.589a99127f8cd6b8116600808222c873.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.277e21f7f3a5464e1689507a65f6e53c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.589a99127f8cd6b8116600808222c873.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.277e21f7f3a5464e1689507a65f6e53c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -1306,6 +1306,57 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 <blockquote>
 <p>Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.</p>
 </blockquote>
+<p><strong>Steps to create secondary storage class:</strong></p>
+<p>There are samples storage class yaml files available under <code>samples/storageclass</code>.  These can be copied and modified as needed.</p>
+<ol>
+<li>Copy the <code>storageclass.yaml</code> to <code>second_storageclass.yaml</code> ( This is just an example, you can rename to file you require. )</li>
+<li>Edit the  <code>second_storageclass.yaml</code> yaml file and update following parameters:</li>
+</ol>
+<ul>
+<li>
+<p>Update the <code>name</code> parameter to you require</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">isilon-new</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Cluster name of 2nd array looks like this in the secret file.( Under <code>/samples/secret/secret.yaml</code>)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">                </span>- <span style="color:#204a87;font-weight:bold">clusterName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;cluster2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">                  </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;user name&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">                  </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Password&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">                  </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.X.X.X&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">                  </span><span style="color:#204a87;font-weight:bold">endpointPort</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">&#34;8080</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></li>
+<li>
+<p>Use same clusterName ↑ in the  <code>second_storageclass.yaml</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Optional: true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">ClusterName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;cluster2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></li>
+<li>
+<p><em>Note</em>: These are two essential parameters that you need to change in the &ldquo;second_storageclass.yaml&rdquo; file and other parameters that you change as required.</p>
+</li>
+</ul>
+<ol start="3">
+<li>Save the  <code>second_storageclass.yaml</code> file</li>
+<li>Create your 2nd storage class by using <code>kubectl</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f &lt;path_to_second_storageclass_file&gt;
+</span></span></code></pre></div><ol start="5">
+<li>
+<p>Use newly created storage class <code>isilon-new</code> for volumes to spin up on <code>cluster2</code></p>
+<p>PVC example</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PersistentVolumeClaim</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">test-pvc</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">accessModes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span>- <span style="color:#000">ReadWriteOnce</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">5Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">isilon-new</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></li>
+</ol>
 <h2 id="volume-snapshot-class">Volume Snapshot Class</h2>
 <p>Starting CSI PowerScale v1.6, <code>dell-csi-helm-installer</code> will not create any Volume Snapshot Class during the driver installation. Sample volume snapshot class manifests are available at <code>samples/volumesnapshotclass/</code>. Use these sample manifests to create a volumesnapshotclass for creating volume snapshots; uncomment/ update the manifests as per the requirements.</p>
 <h2 id="silent-mount-re-tries-v260">Silent Mount Re-tries (v2.6.0)</h2>
