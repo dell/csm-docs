@@ -811,31 +811,31 @@ images,imgs
 ```
 # dellctl images --driver csi-vxflexos
 Driver Image                    Supported Orchestrator Versions         Sidecar Images
-dellemc/csi-vxflexos:v2.5.0     k8s1.25,k8s1.24,k8s1.23,ocp4.11,ocp4.10 k8s.gcr.io/sig-storage/csi-attacher:v4.0.0
-                                                                        k8s.gcr.io/sig-storage/csi-provisioner:v3.3.0
+dellemc/csi-vxflexos:v2.5.0     k8s1.25,k8s1.24,k8s1.23,ocp4.11,ocp4.10 registry.k8s.io/sig-storage/csi-attacher:v4.0.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.3.0
                                                                         dellemc/csi-volumegroup-snapshotter:v1.2.0
-                                                                        k8s.gcr.io/sig-storage/csi-external-health-monitor-controller:v0.7.0
-                                                                        k8s.gcr.io/sig-storage/csi-snapshotter:v6.1.0
-                                                                        k8s.gcr.io/sig-storage/csi-resizer:v1.6.0
-                                                                        k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.6.0
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.7.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.1.0
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.6.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.6.0
                                                                         dellemc/sdc:3.6.0.6
 
-dellemc/csi-vxflexos:v2.4.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.io/sig-storage/csi-attacher:v3.5.0
-                                                                        k8s.gcr.io/sig-storage/csi-provisioner:v3.2.1
+dellemc/csi-vxflexos:v2.4.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  registry.k8s.io/sig-storage/csi-attacher:v3.5.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.2.1
                                                                         dellemc/csi-volumegroup-snapshotter:v1.2.0
-                                                                        k8s.gcr.io/sig-storage/csi-external-health-monitor-controller:v0.6.0
-                                                                        k8s.gcr.io/sig-storage/csi-snapshotter:v6.0.1
-                                                                        k8s.gcr.io/sig-storage/csi-resizer:v1.5.0
-                                                                        k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.6.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.0.1
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.5.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1
                                                                         dellemc/sdc:3.6.0.6
 
-dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.io/sig-storage/csi-attacher:v3.4.0
-                                                                        k8s.gcr.io/sig-storage/csi-provisioner:v3.1.0
+dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  registry.k8s.io/sig-storage/csi-attacher:v3.4.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.1.0
                                                                         dellemc/csi-volumegroup-snapshotter:v1.0.1
                                                                         gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.5.0
-                                                                        k8s.gcr.io/sig-storage/csi-snapshotter:v5.0.1
-                                                                        k8s.gcr.io/sig-storage/csi-resizer:v1.4.0
-                                                                        k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v5.0.1
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.4.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1
                                                                         dellemc/sdc:3.6.0.6
 ```
 
