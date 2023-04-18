@@ -296,6 +296,52 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 >Note: If you continue to use the old storage classes, you may not be able to take advantage of any new storage class parameter supported by the driver.
 
+**Steps to create secondary storage class:**
+
+There are samples storage class yaml files available under `samples/storageclass`.  These can be copied and modified as needed. 
+
+1. Copy the `storageclass.yaml` to `second_storageclass.yaml` ( This is just an example, you can rename to file you require. )
+2. Edit the  `second_storageclass.yaml` yaml file and update following parameters:
+- Update the `name` parameter to you require 
+    ````yaml
+    metadata:
+      name: isilon-new
+  ````
+- Cluster name of 2nd array looks like this in the secret file.( Under `/samples/secret/secret.yaml`)
+  ````yaml
+                  - clusterName: "cluster2"
+                    username: "user name"
+                    password: "Password"
+                    endpoint: "10.X.X.X"
+                    endpointPort: "8080
+                            
+- Use same clusterName &#8593; in the  `second_storageclass.yaml` 
+     ````yaml
+       # Optional: true
+       ClusterName: "cluster2"
+- *Note*: These are two essential parameters that you need to change in the "second_storageclass.yaml" file and other parameters that you change as required. 
+3. Save the  `second_storageclass.yaml` file 
+4. Create your 2nd storage class by using `kubectl`:
+  ````bash
+  kubectl create -f <path_to_second_storageclass_file>
+  ````
+5. Use newly created storage class `isilon-new` for volumes to spin up on `cluster2`
+
+    PVC example
+   ````yaml
+     apiVersion: v1
+     kind: PersistentVolumeClaim
+     metadata:
+       name: test-pvc
+     spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: isilon-new
+     ````
+
 ## Volume Snapshot Class
 
 Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. Sample volume snapshot class manifests are available at `samples/volumesnapshotclass/`. Use these sample manifests to create a volumesnapshotclass for creating volume snapshots; uncomment/ update the manifests as per the requirements.
