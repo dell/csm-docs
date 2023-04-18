@@ -300,8 +300,8 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 There are samples storage class yaml files available under `samples/storageclass`.  These can be copied and modified as needed. 
 
-1. Copy the `storageclass.yaml` to `storageclass_2.yaml` ( This is just an example, you can rename to file you require. )
-2. Edit the  `storageclass_2.yaml` yaml file and update following parameters:
+1. Copy the `storageclass.yaml` to `second_storageclass.yaml` ( This is just an example, you can rename to file you require. )
+2. Edit the  `second_storageclass.yaml` yaml file and update following parameters:
 - Update the `name` parameter to you require 
     ````yaml
     metadata:
@@ -315,15 +315,15 @@ There are samples storage class yaml files available under `samples/storageclass
                     endpoint: "10.X.X.X"
                     endpointPort: "8080
                             
-- Use same clusterName &#8593; in the  `storageclass_2.yaml` 
+- Use same clusterName &#8593; in the  `second_storageclass.yaml` 
      ````yaml
        # Optional: true
        ClusterName: "cluster2"
-- *Note*: These are two essential parameters that you need to change in the "storageclass_2.yaml" file and other parameters that you change as required. 
-3. Save the  `storageclass_2.yaml` file 
+- *Note*: These are two essential parameters that you need to change in the "second_storageclass.yaml" file and other parameters that you change as required. 
+3. Save the  `second_storageclass.yaml` file 
 4. Create your 2nd storage class by using `kubectl`:
   ````bash
-  kubectl create -f <path_to_storageclass_2_file>
+  kubectl create -f <path_to_second_storageclass_file>
   ````
 5. Use newly created storage class `isilon-new` for volumes to spin up on `cluster2`
 
