@@ -7,12 +7,9 @@ description: Release notes for PowerStore CSI driver
 
 ### New Features/Changes
 
-- [Added support for Resiliency](https://github.com/dell/csm/issues/587)
-- [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
+- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
 
 ### Fixed Issues
-
-- [Fixed issue where driver was not properly cleaning up resources when volumes were unmounted](https://github.com/dell/csm/issues/666)
 
 ### Known Issues
 
@@ -26,4 +23,3 @@ description: Release notes for PowerStore CSI driver
 ### Note:
 
 - Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
-- This release is only supported when driver is installed via helm.
