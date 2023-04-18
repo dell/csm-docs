@@ -3,20 +3,13 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.6.0
+## Release Notes - CSI PowerStore v2.7.0
 
 ### New Features/Changes
 
-- [Added support for Resiliency](https://github.com/dell/csm/issues/587)
-- [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
-- [Added support for MKE 3.6.x](https://github.com/dell/csm/issues/672)
-- [Added support for RKE 1.4.1](https://github.com/dell/csm/issues/670)
+- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
 
 ### Fixed Issues
-
-- [Multiple iSCSI network support](https://github.com/dell/csm/issues/668)
-- [Create volume successful but unable to map volumes to a hosts](https://github.com/dell/csm/issues/599)
-- [Can't find IP in X_CSI_POWERSTORE_EXTERNAL_ACCESS for NFS provisioning](https://github.com/dell/csm/issues/689)
 
 ### Known Issues
 
