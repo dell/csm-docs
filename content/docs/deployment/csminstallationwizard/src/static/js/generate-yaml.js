@@ -129,6 +129,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 		releaseName = CONSTANTS_PARAM.POWERSTORE;
 	} else if (driverParam === CONSTANTS_PARAM.POWERFLEX) {
 		yamlTpl = yamlTpl.replaceAll("$POWERFLEX_ENABLED", true);
+		releaseName = CONSTANTS_PARAM.POWERFLEX;
 	} else if (driverParam === CONSTANTS_PARAM.POWERMAX) {
 		yamlTpl = yamlTpl.replaceAll("$POWERMAX_ENABLED", true);
 		releaseName = CONSTANTS_PARAM.POWERMAX;
