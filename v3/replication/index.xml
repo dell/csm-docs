@@ -850,6 +850,10 @@ Name of StorageClass resource that created as &amp;ldquo;target&amp;rdquo; will 
 &lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/518&#34;&gt;518&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; On CSM for Replication with PowerScale, after a repctl failover to a target cluster, the source directory has been removed from the PowerScale. The PersistentVolume Object is still present in Kubernetes.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/753&#34;&gt;753&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; When Persistent Volumes (PVs) are created with quota enabled on CSM versions 1.6.0 and before, an incorrect quota gets set for the target side read-only PVs/directories based on the consumed non-zero source size instead of the assigned quota of the source. This can create issues when the user performs failover and wants to write data to the failed over site. If lower quota limit is set, no new writes can be performed on the target side post failover. &lt;br /&gt; &lt;strong&gt;Workaround&lt;/strong&gt; using PowerScale cluster CLI or UI: &lt;br /&gt; For each Persistent Volume on the source kubernetes cluster, &lt;br /&gt; 1. Get the quota assigned for the directory on the source PowerScale cluster. The path to the directory information can be obtained from the specification field of the Persistent Volume object. &lt;br /&gt; 2. Verify the quota of the target directory on the target PowerScale cluster. If incorrect quota is set, update the quota on the target directory with the same information as on the source. If no quota is set, create a quota for the target directory.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
