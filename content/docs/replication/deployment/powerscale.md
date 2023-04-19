@@ -162,8 +162,8 @@ driver: "isilon"
 reclaimPolicy: "Delete"
 replicationPrefix: "replication.storage.dell.com"
 remoteRetentionPolicy:
-  RG: "Retain"
-  PV: "Retain"
+  RG: "Delete"
+  PV: "Delete"
 parameters:
   rpo: "Five_Minutes"
   ignoreNamespaces: "false"
