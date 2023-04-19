@@ -159,7 +159,7 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v260&#34;&gt;Release Notes - CSI Driver for PowerScale v2.6.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v261&#34;&gt;Release Notes - CSI Driver for PowerScale v2.6.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/597&#34;&gt;Added support for Kubernetes 1.26&lt;/a&gt;&lt;/li&gt;
@@ -168,7 +168,20 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/670&#34;&gt;Added support for RKE 1.4.1&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Github ID&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/753&#34;&gt;753&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Replication:&lt;/strong&gt; Incorrect quota set on the target PV/directory when Quota is enabled.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
