@@ -16,10 +16,10 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/isilon/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-04-19T14:14:50-05:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Upgrade PowerScale CSI driver">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
+<meta itemprop="dateModified" content="2023-04-19T14:14:50-05:00" />
 <meta itemprop="wordCount" content="171">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
@@ -79,7 +79,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
 	
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.aa31ac73531f8800c9617a5b266672e7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.f5b7534f8293a67ab1bf5c6d49713593.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.aa31ac73531f8800c9617a5b266672e7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.f5b7534f8293a67ab1bf5c6d49713593.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -593,7 +593,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#upgrade-driver-from-version-250-to-260-using-helm">Upgrade Driver from version 2.5.0 to 2.6.0 using Helm</a></li>
+    <li><a href="#upgrade-driver-from-version-250-to-261-using-helm">Upgrade Driver from version 2.5.0 to 2.6.1 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
   </ul>
 </nav>
@@ -648,12 +648,12 @@
 
 	       
 	<p>You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSI Operator.</p>
-<h2 id="upgrade-driver-from-version-250-to-260-using-helm">Upgrade Driver from version 2.5.0 to 2.6.0 using Helm</h2>
+<h2 id="upgrade-driver-from-version-250-to-261-using-helm">Upgrade Driver from version 2.5.0 to 2.6.1 using Helm</h2>
 <p><strong>Note:</strong> While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.</p>
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Clone the repository using <code>git clone -b v2.6.0 https://github.com/dell/csi-powerscale.git</code>, copy the helm/csi-isilon/values.yaml into a new location with a custom name say <em>my-isilon-settings.yaml</em>, to customize settings for installation. Edit <em>my-isilon-settings.yaml</em> as per the requirements.</p>
+<p>Clone the repository using <code>git clone -b v2.6.1 https://github.com/dell/csi-powerscale.git</code>, copy the helm/csi-isilon/values.yaml into a new location with a custom name say <em>my-isilon-settings.yaml</em>, to customize settings for installation. Edit <em>my-isilon-settings.yaml</em> as per the requirements.</p>
 </li>
 <li>
 <p>Change to directory dell-csi-helm-installer to install the Dell PowerScale <code>cd dell-csi-helm-installer</code></p>

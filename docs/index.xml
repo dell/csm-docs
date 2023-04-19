@@ -2879,12 +2879,12 @@ For example, if a volume were to be deleted from the array, or unmounted outside
         
         
         &lt;p&gt;You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;h2 id=&#34;upgrade-driver-from-version-250-to-260-using-helm&#34;&gt;Upgrade Driver from version 2.5.0 to 2.6.0 using Helm&lt;/h2&gt;
+&lt;h2 id=&#34;upgrade-driver-from-version-250-to-261-using-helm&#34;&gt;Upgrade Driver from version 2.5.0 to 2.6.1 using Helm&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Clone the repository using &lt;code&gt;git clone -b v2.6.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt;, copy the helm/csi-isilon/values.yaml into a new location with a custom name say &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, to customize settings for installation. Edit &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; as per the requirements.&lt;/p&gt;
+&lt;p&gt;Clone the repository using &lt;code&gt;git clone -b v2.6.1 https://github.com/dell/csi-powerscale.git&lt;/code&gt;, copy the helm/csi-isilon/values.yaml into a new location with a custom name say &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, to customize settings for installation. Edit &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; as per the requirements.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Change to directory dell-csi-helm-installer to install the Dell PowerScale &lt;code&gt;cd dell-csi-helm-installer&lt;/code&gt;&lt;/p&gt;
