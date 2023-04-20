@@ -168,8 +168,6 @@ On the machine running `karavictl`, the `/etc/hosts` file needs to be updated wi
 <master_node_ip> csm-authorization.com
 ```
 
-The port that exposes these services is `30016`.
-
 Please continue following the steps outlined in the [proxy server](../../configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization

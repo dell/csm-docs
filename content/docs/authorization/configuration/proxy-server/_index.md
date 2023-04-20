@@ -8,15 +8,14 @@ description: >
 ## Configuring the CSM for Authorization Proxy Server
 
 The storage administrator must first configure Authorization with the following via `karavictl`:
-- Karavictl admin token
 - Storage systems
 - Tenants
 - Roles
 - Role bindings
 
 >__Note__:
-> - The `RPM deployment` will use the address of the server.
-> - The `Helm deployment` will use the address and port of the Ingress hosts for the proxy-server.
+> - The address of the Authorization proxy-server must be specified when executing `karavictl`. For the `RPM deployment`, the address is the DNS-hostname of the machine where the RPM
+is installed. For the `Helm/Operator deployment`, the address is the Ingress host of the `proxy-server` with the port of the exposed Ingress Controller.
 
 ### Configuring Storage
 
@@ -25,13 +24,12 @@ A `storage` entity in CSM Authorization consists of the storage type (PowerFlex,
 #RPM Deployment
 ```bash
 
-karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --array-insecure --insecure --addr DNS-hostname --admin-token admintoken.yaml
-```
-#Helm/Operator Deployment
-```bash
+```yaml
+# RPM Deployment
+karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --array-insecure --insecure --addr DNS-hostname
 
-# Helm Deployment
-karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
+# Helm/Operator Deployment
+karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --array-insecure  --insecure --addr csm-authorization.com:<ingress-controller-port>
 ```
 
 >__Note__:
@@ -52,8 +50,8 @@ A `tenant` is a Kubernetes cluster that a role will be bound to. For example, to
 # RPM Deployment
 karavictl tenant create --name Finance --insecure --addr DNS-hostname
 
-# Helm Deployment
-karavictl tenant create --name Finance --insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
+# Helm/Operator Deployment
+karavictl tenant create --name Finance --insecure --addr csm-authorization.com:<ingress-controller-port>
 ```
 
 >__Note__: 
@@ -67,19 +65,20 @@ karavictl tenant create --name Finance --insecure --addr csm-authorization.com:<
 # RPM Deployment
 karavictl tenant create --name Finance --approvesdc=false --insecure --addr DNS-hostname
 
-# Helm Deployment
-karavictl tenant create --name Finance --approvesdc=false --insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
+# Helm/Operator Deployment
+karavictl tenant create --name Finance --approvesdc=false --insecure --addr csm-authorization.com:<ingress-controller-port>
 ```
 
 ### Configuring Roles
 
 A `role` consists of a name, the storage to use, and the quota limit for the storage pool to be used. For example, to create a role named `FinanceRole` using the PowerFlex storage created above with a quota limit of 100GB in storage pool `myStoragePool`:
 
-#RPM Deployment
-```bash
+```yaml
+# RPM Deployment
+karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB --insecure --addr DNS-hostname
 
-# Helm Deployment
-karavictl role create --insecure --addr csm-authorization.com:30016 --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
+# Helm/Operator Deployment
+karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB --insecure --addr csm-authorization.com:<ingress-controller-port>
 ```
 
 >__Note__: 
@@ -95,47 +94,30 @@ A `role binding` binds a role to a tenant. For example, to bind the `FinanceRole
 # RPM Deployment
 karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr DNS-hostname
 
-# Helm Deployment
-karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
+# Helm/Operator Deployment
+karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr csm-authorization.com:<ingress-controller-port>
 ```
 
 >__Note__: 
-> - The `insecure` flag specifies to skip certificate validation when connecting to CSM Authorization. Run `karavictl rolebinding create --help` for help.
+> - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
+> - The `addr` flag is the address of the Authorization proxy-server. 
+> - Run `karavictl rolebinding create --help` for help.
 
 ### Generate a Token
 
-Once rolebindings are created, an access/refresh token pair can be created for the tenant. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
-
-#### RPM
 After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
 
->__Note__: 
-> - The `--insecure` flag is required if certificates were not provided in `$HOME/.karavi/config.json`.
-> - This sample copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
+```yaml
+# RPM Deployment
+karavictl generate token --tenant Finance --insecure --addr DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
 
-  ```
-  echo === Generating token ===
-  karavictl generate token --tenant ${tenantName} --insecure --addr DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
-
-  echo === Copy token to Driver Host ===
-  sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
-  ```
-
-#### Helm
-
-Now that the tenant is bound to a role, a JSON Web Token can be generated for the tenant. For example, to generate a token for the `Finance` tenant:
-
-karavictl generate token --tenant Finance --insecure --addr DNS-hostname --admin-token admintoken.yaml > token.yaml
-```
-karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:<ingress-nginx-controller-port>
-
-karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml > token.yaml
+# Helm/Operator Deployment
+karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:<ingress-controller-port> | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
 ```
 
 `token.yaml` will have a Kubernetes secret manifest that looks like this:
 
 ```
-karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:<ingress-nginx-controller-port> | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
 apiVersion: v1
 data:
   access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKamMyMGlMQ0psZUhBaU9qRTJPREl3TVRBeU5UTXNJbWR5YjNWd0lqb2labTl2SWl3aWFYTnpJam9pWTI5dExtUmxiR3d1WTNOdElpd2ljbTlzWlhNaU9pSmlZWElpTENKemRXSWlPaUpqYzIwdGRHVnVZVzUwSW4wLjlSYkJISzJUS2dZbVdDX0paazBoSXV0N0daSDV4NGVjQVk2ekdaUDNvUWs=
