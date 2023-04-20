@@ -137,6 +137,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 		yamlTpl = yamlTpl.replaceAll("$POWERSCALE_ENABLED", true);
 	} else {
 		yamlTpl = yamlTpl.replaceAll("$UNITY_ENABLED", true);
+		releaseName = CONSTANTS_PARAM.UNITY;
 	}
 	yamlTpl = yamlTpl.replaceAll("$POWERSTORE_ENABLED", false);
 	yamlTpl = yamlTpl.replaceAll("$POWERFLEX_ENABLED", false);
