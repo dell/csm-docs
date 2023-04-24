@@ -271,7 +271,7 @@ type: Opaque
 
 Usually, you will want to pipe the output to kubectl to apply the secret
 ```
-$ karavictl generate token --shared-secret supersecret --admin-token admintoken.yaml | kubectl apply -f -
+$ karavictl generate token --tenant Alice --admin-token admintoken.yaml | kubectl apply -f -
 ```
 
 
