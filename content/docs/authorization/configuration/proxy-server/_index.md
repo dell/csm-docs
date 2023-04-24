@@ -32,7 +32,7 @@ $ cat admintoken.yaml
 }
 
 ```
-Alternatively, JWT signing secret can be specified with the CLI.
+Alternatively, the JWT signing secret can be specified with the CLI.
 
 ```
 $ karavictl admin token --name admin  --jwt-signing-secret supersecret --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
