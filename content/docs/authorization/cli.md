@@ -118,7 +118,7 @@ $ Enter JWT Signing Secret: ***********
 }
 
 ```
-Alternatively, one can supply JWT signing secret with command
+Alternatively, one can supply JWT signing secret with command.
 
 ```
 
