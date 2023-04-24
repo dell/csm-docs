@@ -185,23 +185,23 @@ karavictl generate token [flags]
 ##### Output
 
 ```
-$ karavictl generate token --shared-secret supersecret
+$ karavictl generate token --tenant Alice
 
 apiVersion: v1
-kind: Secret
-metadata:
-  name: proxy-authz-tokens
-  namespace: vxflexos
-type: Opaque
 data:
   access: <ACCESS-TOKEN>
   refresh: <REFRESH-TOKEN>
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: proxy-authz-tokens
+type: Opaque
 ```
 
 
 Usually, you will want to pipe the output to kubectl to apply the secret
 ```
-$ karavictl generate token --shared-secret supersecret | kubectl apply -f -
+$ karavictl generate token --tenant Alice | kubectl apply -f -
 ```
 
 
