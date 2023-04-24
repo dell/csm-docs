@@ -109,10 +109,10 @@ After creating the role bindings, the next logical step is to generate the acces
 
 ```yaml
 # RPM Deployment
-karavictl generate token --tenant Finance --insecure --addr DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
+karavictl generate token --tenant Finance --insecure --addr DNS-hostname > token.yaml
 
 # Helm/Operator Deployment
-karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:<ingress-controller-port> | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
+karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:<ingress-controller-port> > token.yaml
 ```
 
 `token.yaml` will have a Kubernetes secret manifest that looks like this:

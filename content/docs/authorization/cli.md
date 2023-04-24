@@ -261,7 +261,8 @@ karavictl generate token [flags]
 ```bash
 karavictl generate token --tenant Alice --admin-token admintoken.yaml
 ```
-```yaml
+$ karavictl generate token --tenant Alice
+
 apiVersion: v1
 data:
   access: <ACCESS-TOKEN>
@@ -275,9 +276,8 @@ type: Opaque
 
 
 Usually, you will want to pipe the output to kubectl to apply the secret
-```bash
-
-karavictl generate token --tenant Alice --admin-token admintoken.yaml | kubectl apply -f -
+```
+$ karavictl generate token --tenant Alice | kubectl apply -f -
 ```
 
 
