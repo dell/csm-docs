@@ -20,7 +20,7 @@ is installed. For the `Helm/Operator deployment`, the address is the Ingress hos
 
 ### Configuring Admin Token
 
-Generate admin token that will be required to run `karavictl` commands except generating `admin token` and `cluster-info`.
+Generate an admin token that will be required to run `karavictl` commands except generating `admin token` and `cluster-info`.
 
 ```
 $ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
@@ -32,7 +32,7 @@ $ cat admintoken.yaml
 }
 
 ```
-Alternately JWT Signing Secret can be specified with the CLI
+Alternately, JWT signing secret can be specified with the CLI
 
 ```
 $ karavictl admin token --name admin  --jwt-signing-secret supersecret --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
