@@ -2,7 +2,7 @@
 ########################
 csi-powerstore:
   enabled: $POWERSTORE_ENABLED
-  version: v2.6.0
+  version: v2.7.0
   images:
     driverRepository: $IMAGE_REPOSITORY
   ## Controller ATTRIBUTES
@@ -69,7 +69,7 @@ csi-powermax:
         backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
     managementServers:
       - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
-  version: v2.6.0
+  version: v2.7.0
   images:
     driverRepository: $IMAGE_REPOSITORY
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
@@ -113,7 +113,7 @@ csi-powermax:
 ########################
 csi-vxflexos:
   enabled: $POWERFLEX_ENABLED
-  version: v2.6.0
+  version: v2.7.0
   images:
     driverRepository: $IMAGE_REPOSITORY
     powerflexSdc: dellemc/sdc:3.6.0.6
@@ -171,7 +171,7 @@ csi-vxflexos:
 ########################
 csi-unity:
   enabled: $UNITY_ENABLED
-  version: v2.6.0
+  version: v2.7.0
   images:
     driverRepository: $IMAGE_REPOSITORY
   certSecretCount: 1
@@ -236,6 +236,151 @@ csi-unity:
 ##########################################
 csm-replication:
   enabled: $REPLICATION_ENABLED
+
+## K8S/PowerScale ATTRIBUTES
+##########################################
+version: "v2.7.0"
+
+# certSecretCount: Represents number of certificate secrets, which user is going to create for
+certSecretCount: 1
+
+# allowedNetworks: Custom networks for PowerScale export
+#   Specify list of networks which can be used for NFS I/O traffic; CIDR format should be used.
+# Default value: None
+# Examples: [192.168.1.0/24, 192.168.100.0/22]
+allowedNetworks: []
+
+# maxIsilonVolumesPerNode: Specify default value for maximum number of volumes that controller can publish to the node.
+maxIsilonVolumesPerNode: 0
+
+imagePullPolicy: IfNotPresent
+
+# verbose: Indicates what content of the OneFS REST API message should be logged in debug level logs
+# Allowed Values:
+#   0: log full content of the HTTP request and response
+#   1: log without the HTTP response body
+#   2: log only 1st line of the HTTP request and response
+# Default value: 0
+verbose: 1
+
+# enableCustomTopology: Specify if custom topology label <provisionerName>.dellemc.com/<powerscalefqdnorip>:<provisionerName>
+enableCustomTopology: false
+
+# fsGroupPolicy: Defines if the underlying volume supports changing ownership and permission of the volume before being mounted.
+fsGroupPolicy: ReadWriteOnceWithFSType
+
+# controller: configure controller pod specific parameters
+controller:
+  controllerCount: 2
+
+  # replication: allows to configure replication
+  replication:
+    enabled: false
+    image: dellemc/dell-csi-replicator:v1.4.0
+
+  snapshot:
+    enabled: true
+    snapNamePrefix: snapshot
+
+  resizer:
+    enabled: true
+
+  healthMonitor:
+    enabled: false
+
+  # nodeSelector: Define node selection constraints for pods of controller deployment.
+  nodeSelector:
+
+node:
+  nodeSelector:
+  tolerations:
+  #  - key: "node.kubernetes.io/memory-pressure"
+  #    operator: "Exists"
+  #    effect: "NoExecute"
+  #  - key: "node.kubernetes.io/disk-pressure"
+  #    operator: "Exists"
+  #    effect: "NoExecute"
+  #  - key: "node.kubernetes.io/network-unavailable"
+  #    operator: "Exists"
+  #    effect: "NoExecute"
+  # - key: "node-role.kubernetes.io/master"
+  #   operator: "Exists"
+  #   effect: "NoSchedule"
+  # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+  # tolerations:
+  # - key: "node-role.kubernetes.io/control-plane"
+  #   operator: "Exists"
+  #   effect: "NoSchedule"
+
+  # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
+  #tolerations:
+  #  - key: "offline.vxflexos.storage.dell.com"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
+  #  - key: "vxflexos.podmon.storage.dell.com"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
+  #  - key: "offline.unity.storage.dell.com"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
+  #  - key: "unity.podmon.storage.dell.com"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
+  #  - key: "offline.isilon.storage.dell.com"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
+  #  - key: "isilon.podmon.storage.dell.com"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
+
+  # dnsPolicy: Determines the DNS Policy of the Node service.
+  dnsPolicy: ClusterFirstWithHostNet
+
+  healthMonitor:
+    enabled: false
+
+## PLATFORM ATTRIBUTES
+######################
+
+# skipCertificateValidation: Specify whether the PowerScale OneFS API server's certificate chain and host name should be verified.
+skipCertificateValidation: true
+
+authorization:
+  enabled: false
+  sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
+  proxyHost:
+  skipCertificateValidation: true
+
+# Enable this feature only after contact support for additional information
+podmon:
+  enabled: false
+  image: dellemc/podmon:v1.5.0
+  #controller:
+  #  args:
+  #    - "--csisock=unix:/var/run/csi/csi.sock"
+  #    - "--labelvalue=csi-isilon"
+  #    - "--arrayConnectivityPollRate=60"
+  #    - "--driverPath=csi-isilon.dellemc.com"
+  #    - "--mode=controller"
+  #    - "--skipArrayConnectionValidation=false"
+  #    - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+  #    - "--driverPodLabelValue=dell-storage"
+  #    - "--ignoreVolumelessPods=false"
+
+  #node:
+  #  args:
+  #    - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
+  #    - "--labelvalue=csi-isilon"
+  #    - "--arrayConnectivityPollRate=60"
+  #    - "--driverPath=csi-isilon.dellemc.com"
+  #    - "--mode=node"
+  #    - "--leaderelection=false"
+  #    - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+  #    - "--driverPodLabelValue=dell-storage"
+  #    - "--ignoreVolumelessPods=false"
+
+images:
+  driverRepository: dellemc
 
 ## K8S/Observability Module ATTRIBUTES
 ##########################################
