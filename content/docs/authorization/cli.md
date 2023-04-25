@@ -107,14 +107,14 @@ karavictl admin token [flags]
 
 ```
 
-##### Examples
+##### Output
 ```
 $ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m
 $ Enter JWT Signing Secret: ***********
 
 {
-  "Access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE2ODIzNDUzMzAsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.b_q5mTISbE1J9g7Nt6TOlIOriM6-yBMYPESUpFoa8xQ",
-  "Refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE2ODQ5MzcyNzAsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.EtE1VDt7bau1U5yWmhgbT92w0z4q_kkoY4sb_UNKtMo"
+  "Access": <ACCESS-TOKEN>,
+  "Refresh": <REFRESH-TOKEN>
 }
 
 ```
@@ -124,8 +124,8 @@ Alternatively, one can supply JWT signing secret with command.
 
 $ karavictl admin token --name admin --jwt-signing-secret secret --access-token-expiration 30s --refresh-token-expiration 120m
 {
-  "Access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE2ODIzNDYzNDgsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.SLXsk1DTuIaqjT4SOZa0_7y7Xqjrklq2lVgqDEjEDAo",
-  "Refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjc20iLCJleHAiOjE2ODQ5MzgyODgsImdyb3VwIjoiYWRtaW4iLCJpc3MiOiJjb20uZGVsbC5jc20iLCJyb2xlcyI6IiIsInN1YiI6ImNzbS1hZG1pbiJ9.OFibMVqetyJbRNMW12ZUiaZZc5bQTGeOL4vaqIp_QfM"
+  "Access": <ACCESS-TOKEN>,
+  "Refresh": <REFRESH-TOKEN>
 }
 
 ```
@@ -178,7 +178,6 @@ role-service           1/1     1            1           59m
 ```
 
 
-
 ---
 
 
@@ -205,7 +204,7 @@ karavictl generate [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -237,19 +236,19 @@ karavictl generate token [flags]
 ##### Options
 
 ```
-  -h, --help                   help for token
-  -t, --tenant string          Tenant name 
-   --access-token-expiration duration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
-   --refresh-token-expiration duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+  -h, --help                              help for token
+  -t, --tenant                 string     Tenant name
+   --access-token-expiration   duration   Expiration time of the access token, e.g. 1m30s (default 1m0s)
+   --refresh-token-expiration  duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
 ```
 
 ##### Options inherited from parent commands
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -302,7 +301,7 @@ karavictl role [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   Config file (default is $HOME/.karavictl.yaml)
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -337,9 +336,9 @@ karavictl role get [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -387,9 +386,9 @@ karavictl role list [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -445,7 +444,7 @@ karavictl role create [flags]
 
 ```
   -f, --from-file string   Role data from a file
-      --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
+      --role      strings  Role in the form <name>=<type>=<id>=<pool>=<quota>
   -h, --help               Help for create
 ```
 
@@ -456,9 +455,9 @@ karavictl role create [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -494,7 +493,7 @@ karavictl role update [flags]
 
 ```
   -f, --from-file string   Role data from a file
-      --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
+      --role      strings  Role in the form <name>=<type>=<id>=<pool>=<quota>
   -h, --help               Help for update
 ```
 
@@ -502,9 +501,9 @@ karavictl role update [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -545,9 +544,9 @@ karavictl role delete <role-name> [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -585,7 +584,7 @@ karavictl rolebinding [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -622,9 +621,9 @@ karavictl rolebinding create [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -663,9 +662,9 @@ karavictl rolebinding delete [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -696,16 +695,16 @@ karavictl storage [flags]
 ##### Options
 
 ```
-      --addr string    Address of the server (default "localhost")
-      -h, --help       Help for storage
-      --insecure       Skip certificate validation
+      --addr      string   Address of the server (default "localhost")
+  -h, --help               Help for storage
+      --insecure           Skip certificate validation
 ```
 
 ##### Options inherited from parent commands
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -742,9 +741,9 @@ karavictl storage get [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --insecure        Skip certificate validation
+      --addr        string   Address of the server (default "localhost")
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -788,9 +787,9 @@ karavictl storage list [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -846,9 +845,9 @@ karavictl storage create [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -891,9 +890,9 @@ karavictl storage update [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -926,16 +925,16 @@ karavictl storage delete [flags]
 ```
   -h, --help               Help for delete
   -s, --system-id string   System identifier (default "systemid")
-  -t, --type string        Type of storage system ("powerflex", "powermax")
+  -t, --type      string   Type of storage system ("powerflex", "powermax")
 ```
 
 ##### Options inherited from parent commands
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -972,7 +971,7 @@ karavictl tenant [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -1009,9 +1008,9 @@ karavictl tenant create [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -1042,7 +1041,7 @@ karavictl tenant get [flags]
 ##### Options
 
 ```
-  -h, --help   help for get
+  -h, --help          help for get
   -n, --name string   Tenant name
 ```
 
@@ -1050,9 +1049,9 @@ karavictl tenant get [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        Skip certificate validation
+      --addr        string   Address of the server (default "localhost")
+      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -1095,9 +1094,9 @@ karavictl tenant list [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -1145,9 +1144,9 @@ karavictl tenant revoke [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -1185,9 +1184,9 @@ karavictl tenant delete [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        Skip certificate validation
+      --addr        string   Address of the server (default "localhost")
+      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
@@ -1226,9 +1225,9 @@ karavictl tenant update [flags]
 
 ```
   -f, --admin-token string   Specify the admin token file
-      --addr string     Address of the server (default "localhost")
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        Skip certificate validation
+      --addr        string   Address of the server (default "localhost")
+      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
