@@ -91,7 +91,7 @@ Generate admin tokens
 ##### Synopsis
 
 Generate admin token for use with CSM Authorization commands.
-The tokens are output into yaml pair format, which can be saved in a file
+The tokens output in YAML format, which can be saved in a file.
 
 ```
 karavictl admin token [flags]
