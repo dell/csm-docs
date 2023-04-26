@@ -135,6 +135,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 		releaseName = CONSTANTS_PARAM.POWERMAX;
 	} else if (driverParam === CONSTANTS_PARAM.POWERSCALE) {
 		yamlTpl = yamlTpl.replaceAll("$POWERSCALE_ENABLED", true);
+		releaseName = CONSTANTS_PARAM.POWERSCALE;
 	} else {
 		yamlTpl = yamlTpl.replaceAll("$UNITY_ENABLED", true);
 		releaseName = CONSTANTS_PARAM.UNITY;

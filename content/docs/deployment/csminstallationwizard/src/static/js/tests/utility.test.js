@@ -278,7 +278,8 @@ describe("GIVEN setDefaultValues function", () => {
 			["imageRepository", "dellemc"],
 			["controllerCount", "2"],
 			["volNamePrefix", "csivol"],
-			["snapNamePrefix", "csi-snap"]
+			["snapNamePrefix", "csi-snap"],
+			["certSecretCount","1"]
 		]);
 
 		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2", testCSMMap);
@@ -288,5 +289,6 @@ describe("GIVEN setDefaultValues function", () => {
 		expect(document.getElementById("csm-version").value).toEqual("1.7.0");
 		expect(document.getElementById("vol-name-prefix").value).toEqual("csivol");
 		expect(document.getElementById("snapshot-prefix").value).toEqual("csi-snap");
+		expect(document.getElementById("cert-secret-count").value).toEqual("1");
 	});
 });
