@@ -280,7 +280,7 @@ describe("GIVEN setDefaultValues function", () => {
 			["controllerCount", "2"],
 			["volNamePrefix", "csivol"],
 			["snapNamePrefix", "csi-snap"],
-			["certSecretCount","1"]
+			["certSecretCount", "1"]
 		]);
 
 		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
