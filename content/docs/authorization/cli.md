@@ -14,6 +14,7 @@ If you feel that something is unclear or missing in this document, please open u
 | Command | Description |
 | - | - |
 | [karavictl](#karavictl) | karavictl is used to interact with CSM Authorization Server |
+| [karavictl admin token](#karavictl-admin-token) | Generate admin tokens |
 | [karavictl cluster-info](#karavictl-cluster-info) | Display the state of resources within the cluster |
 | [karavictl generate](#karavictl-generate) | Generate resources for use with CSM |
 | [karavictl generate token](#karavictl-generate-token) | Generate tokens |
@@ -52,12 +53,27 @@ karavictl is used to interact with CSM Authorization Server
 karavictl provides security, RBAC, and quota limits for accessing Dell
 storage products from Kubernetes clusters
 
+##### Commands
+
+```
+  admin        Generate admin token for use with CSM Authorization
+  cluster-info Display the state of resources within the cluster
+  completion   Generate the autocompletion script for the specified shell
+  generate     Generate resources for use with Karavi
+  help         Help about any command
+  role         Manage roles
+  rolebinding  Manage role bindings
+  storage      Manage storage systems
+  tenant       Manage tenants
+```
+
 ##### Options
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
-  -h, --help            help for karavictl
-  -t, --toggle          Help message for toggle
+      --config      string   config file (default is $HOME/.karavictl.yaml)
+  -h, --help                 help for karavictl
+  -t, --toggle               Help message for toggle
+  -f, --admin-token string   Specify the admin token file
 ```
 
 ##### Output
@@ -66,6 +82,58 @@ Outputs help text
 
 
 
+---
+
+### karavictl admin token
+
+Generate admin tokens
+
+##### Synopsis
+
+Generate admin token for use with CSM Authorization commands.
+The tokens output in YAML format, which can be saved in a file.
+
+```
+karavictl admin token [flags]
+```
+
+##### Options
+```
+  -h, --help                                 help for token
+  -s, --jwt-signing-secret        string     Specify JWT signing secret, or omit to use stdin
+  -n, --name                      string     Administration name
+      --refresh-token-expiration  duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+      --access-token-expiration   duration   Expiration time of the access token, e.g. 1m30s (default 1m0s)
+
+```
+
+##### Output
+```
+$ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m
+$ Enter JWT Signing Secret: ***********
+
+{
+  "Access": <ACCESS-TOKEN>,
+  "Refresh": <REFRESH-TOKEN>
+}
+
+```
+Alternatively, one can supply JWT signing secret with command.
+
+```
+
+$ karavictl admin token --name admin --jwt-signing-secret secret --access-token-expiration 30s --refresh-token-expiration 120m
+{
+  "Access": <ACCESS-TOKEN>,
+  "Refresh": <REFRESH-TOKEN>
+}
+
+```
+##### Options inherited from parent commands
+
+```
+      --config string   config file (default is $HOME/.karavictl.yaml)
+```
 ---
 
 
@@ -110,7 +178,6 @@ role-service           1/1     1            1           59m
 ```
 
 
-
 ---
 
 
@@ -136,7 +203,8 @@ karavictl generate [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -159,7 +227,7 @@ Generate tokens for use with the CSI Driver when in proxy mode
 The tokens are output as a Kubernetes Secret resource, so the results may
 be piped directly to kubectl:
 
-Example: karavictl generate token | kubectl apply -f -
+Example: karavictl generate token --tenant Alice --admin-token admintoken.yaml | kubectl apply -f -
 
 ```
 karavictl generate token [flags]
@@ -168,24 +236,25 @@ karavictl generate token [flags]
 ##### Options
 
 ```
-  -h, --help                   help for token
-  -t, --tenant string          Tenant name 
-   --access-token-expiration duration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
-   --refresh-token-expiration duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+  -h, --help                              help for token
+  -t, --tenant                 string     Tenant name
+   --access-token-expiration   duration   Expiration time of the access token, e.g. 1m30s (default 1m0s)
+   --refresh-token-expiration  duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
 
 ```
-$ karavictl generate token --tenant Alice
+$ karavictl generate token --tenant Alice --admin-token admintoken.yaml
 
 apiVersion: v1
 data:
@@ -201,7 +270,7 @@ type: Opaque
 
 Usually, you will want to pipe the output to kubectl to apply the secret
 ```
-$ karavictl generate token --tenant Alice | kubectl apply -f -
+$ karavictl generate token --tenant Alice --admin-token admintoken.yaml | kubectl apply -f -
 ```
 
 
@@ -231,7 +300,8 @@ karavictl role [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -244,7 +314,7 @@ Outputs help text
 
 
 
-### karavictl role get
+### karavictl role get 
 
 Get role
 
@@ -265,15 +335,16 @@ karavictl role get [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl role get CSISilver
+$ karavictl role get CSISilver --admin-token admintoken.yaml
 
 {
   "Name": "CSISilver",
@@ -314,15 +385,16 @@ karavictl role list [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl role list
+$ karavictl role list --admin-token admintoken.yaml
 
 {
   "CSIGold": [
@@ -372,7 +444,7 @@ karavictl role create [flags]
 
 ```
   -f, --from-file string   Role data from a file
-      --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
+      --role      strings  Role in the form <name>=<type>=<id>=<pool>=<quota>
   -h, --help               Help for create
 ```
 
@@ -382,22 +454,23 @@ karavictl role create [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl role create --from-file roles.json
+$ karavictl role create --from-file roles.json --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl role get <role-name>` to confirm the creation occurred.
 
 Alternatively, you can create a role in-line using:
 
 ```
-$ karavictl role create --role=role-name=system-type=000000000001=mypool=200000000
+$ karavictl role create --role=role-name=system-type=000000000001=mypool=200000000 --admin-token admintoken.yaml
 ```
 
 ---
@@ -420,29 +493,30 @@ karavictl role update [flags]
 
 ```
   -f, --from-file string   Role data from a file
-      --role strings       Role in the form <name>=<type>=<id>=<pool>=<quota>
+      --role      strings  Role in the form <name>=<type>=<id>=<pool>=<quota>
   -h, --help               Help for update
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl role update --from-file roles.json
+$ karavictl role update --from-file roles.json --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl role get <role-name>` to confirm the update occurred.
 
 Alternatively, you can update existing roles in-line using:
 
 ```
-$ karavictl role update --role=role-name=system-type=000000000001=mypool=400000000
+$ karavictl role update --role=role-name=system-type=000000000001=mypool=400000000 --admin-token admintoken.yaml
 ```
 ---
 
@@ -469,15 +543,16 @@ karavictl role delete <role-name> [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl role delete CSISilver
+$ karavictl role delete CSISilver --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl role get <role-name>` to confirm the deletion occurred.
 
@@ -508,7 +583,8 @@ karavictl rolebinding [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -544,15 +620,16 @@ karavictl rolebinding create [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
 
 ```
-$ karavictl rolebinding create --role CSISilver --tenant Alice
+$ karavictl rolebinding create --role CSISilver --tenant Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the rolebinding creation occurred.
 
@@ -584,15 +661,16 @@ karavictl rolebinding delete [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
 
 ```
-$ karavictl rolebinding delete --role CSISilver --tenant Alice
+$ karavictl rolebinding delete --role CSISilver --tenant Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the rolebinding deletion occurred.
 
@@ -617,15 +695,16 @@ karavictl storage [flags]
 ##### Options
 
 ```
-      --addr string    Address of the server (default "localhost")
-      -h, --help       Help for storage
-      --insecure       Skip certificate validation
+      --addr      string   Address of the server (default "localhost")
+  -h, --help               Help for storage
+      --insecure           Skip certificate validation
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -660,16 +739,17 @@ karavictl storage get [flags]
 
 ##### Options inherited from parent commands
 
-```   
-      --addr string     Address of the server (default "localhost")
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --insecure        Skip certificate validation
+```
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl storage get --type powerflex --system-id 3000000000011111
+$ karavictl storage get --type powerflex --system-id 3000000000011111 --admin-token admintoken.yaml
 {
   "User": "admin",
   "Password": "(omitted)",
@@ -706,15 +786,16 @@ karavictl storage list [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl storage list
+$ karavictl storage list --admin-token admintoken.yaml
 
 {
   "storage": {
@@ -763,15 +844,16 @@ karavictl storage create [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
+$ karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ******** --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the creation occurred.
 
@@ -807,15 +889,16 @@ karavictl storage update [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ********
+$ karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ******** --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the update occurred.
 
@@ -842,20 +925,21 @@ karavictl storage delete [flags]
 ```
   -h, --help               Help for delete
   -s, --system-id string   System identifier (default "systemid")
-  -t, --type string        Type of storage system ("powerflex", "powermax")
+  -t, --type      string   Type of storage system ("powerflex", "powermax")
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.karavictl.yaml)
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --config      string   Config file (default is $HOME/.karavictl.yaml)
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 ```
-$ karavictl storage delete --type powerflex --system-id 3000000000011111
+$ karavictl storage delete --type powerflex --system-id 3000000000011111 --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the deletion occurred.
 
@@ -886,7 +970,8 @@ karavictl tenant [flags]
 ##### Options inherited from parent commands
 
 ```
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -922,14 +1007,15 @@ karavictl tenant create [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
 ```
-$ karavictl tenant create --name Alice
+$ karavictl tenant create --name Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the creation occurred.
 
@@ -955,22 +1041,23 @@ karavictl tenant get [flags]
 ##### Options
 
 ```
-  -h, --help   help for get
+  -h, --help          help for get
   -n, --name string   Tenant name
 ```
 
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost")
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 
 ```
-$ karavictl tenant get --name Alice
+$ karavictl tenant get --name Alice --admin-token admintoken.yaml
 
 {
   "name": "Alice"
@@ -1006,15 +1093,16 @@ karavictl tenant list [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
 
 ```
-$ karavictl tenant list
+$ karavictl tenant list --admin-token admintoken.yaml
 
 {
   "tenants": [
@@ -1055,14 +1143,15 @@ karavictl tenant revoke [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost")
-      --insecure        Skip certificate validation
-      --config string   config file (default is $HOME/.karavictl.yaml)
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --insecure             Skip certificate validation
+      --config      string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
 ```
-$ karavictl tenant revoke --name Alice
+$ karavictl tenant revoke --name Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output.
 
@@ -1094,14 +1183,15 @@ karavictl tenant delete [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost")
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 ```
-$ karavictl tenant delete --name Alice
+$ karavictl tenant delete --name Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the deletion occurred.
 
@@ -1134,13 +1224,14 @@ karavictl tenant update [flags]
 ##### Options inherited from parent commands
 
 ```
-      --addr string     Address of the server (default "localhost")
-      --config string   config file (default is $HOME/.karavictl.yaml)
-      --insecure        Skip certificate validation
+  -f, --admin-token string   Specify the admin token file
+      --addr        string   Address of the server (default "localhost")
+      --config      string   config file (default is $HOME/.karavictl.yaml)
+      --insecure             Skip certificate validation
 ```
 
 ##### Output
 ```
-$ karavictl tenant update --name Alice --approvesdc=false
+$ karavictl tenant update --name Alice --approvesdc=false --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the update was persisted.
