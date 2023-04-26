@@ -271,6 +271,7 @@ describe("GIVEN setDefaultValues function", () => {
 			<select id="csm-version" value="1.7.0">
 				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
+			<input type="text" id="cert-secret-count">
 		`;
 
 		const testCSMMap = new Map([
@@ -282,7 +283,7 @@ describe("GIVEN setDefaultValues function", () => {
 			["certSecretCount","1"]
 		]);
 
-		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2", testCSMMap);
+		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
 
 		expect(document.getElementById("image-repository").value).toEqual("dellemc");
 		expect(document.getElementById("controller-count").value).toEqual("2");
