@@ -94,7 +94,8 @@ The following third-party components are optionally installed in the specified n
 
 To install CSM Authorization with the service Ingresses using your own certificate, run:
 
-```
+```bash
+
 helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization \
 --set-file authorization.certificate=<location-of-certificate-file> \
 --set-file authorization.privateKey=<location-of-private-key-file>
@@ -102,7 +103,8 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 To install CSM Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:
 
-```
+```bash
+
 helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization
 ```
 
@@ -110,24 +112,25 @@ helm -n authorization install authorization -f myvalues.yaml charts/csm-authoriz
 
 1. Download the latest release of karavictl
 
-```
+```bash
+
 curl -LO https://github.com/dell/karavi-authorization/releases/latest/download/karavictl
 ```
 
 2. Install karavictl
 
-```
+```bash
 sudo install -o root -g root -m 0755 karavictl /usr/local/bin/karavictl
 ```
 
 If you do not have root access on the target system, you can still install karavictl to the ~/.local/bin directory:
 
-```
+```bash
 chmod +x karavictl
 mkdir -p ~/.local/bin
 mv ./karavictl ~/.local/bin/karavictl
-# and then append (or prepend) ~/.local/bin to $PATH
 ```
+#and then append (or prepend) ~/.local/bin to $PATH
 
 Karavictl commands and intended use can be found [here](../../cli/). 
 
@@ -139,15 +142,20 @@ Configuration is achieved by using `karavictl` to connect to the storage, tenant
 
 Run `kubectl -n authorization get ingress` and `kubectl -n authorization get service` to see the Ingress rules for these services and the exposed port for accessing these services via the LoadBalancer. For example:
 
+```bash
+kubectl -n authorization get ingress
 ```
-# kubectl -n authorization get ingress
+```
 NAME              CLASS   HOSTS                           ADDRESS   PORTS     AGE
 proxy-server      nginx   csm-authorization.com                     00, 000   86s
 role-service      nginx   role.csm-authorization.com                00, 000   86s
 storage-service   nginx   storage.csm-authorization.com             00, 000   86s
 tenant-service    nginx   tenant.csm-authorization.com              00, 000   86s
-
-# kubectl -n auth get service
+```
+```bash
+kubectl -n auth get service
+```
+```
 NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
 authorization-cert-manager                         ClusterIP      00.000.000.000    <none>        000/TCP                     28s
 authorization-cert-manager-webhook                 ClusterIP      00.000.000.000    <none>        000/TCP                      27s
@@ -163,7 +171,7 @@ tenant-service                                     ClusterIP      00.000.000.000
 
 On the machine running `karavictl`, the `/etc/hosts` file needs to be updated with the Ingress hosts for the storage, tenant, and role services. For example:
 
-```
+```text
 <master_node_ip> tenant.csm-authorization.com
 <master_node_ip> role.csm-authorization.com
 <master_node_ip> storage.csm-authorization.com
@@ -211,13 +219,14 @@ Replace the data in `config.yaml` under the `data` field with your new, encoded 
 
 Some settings are not stored in the `karavi-config-secret` but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM Authorization logging settings during runtime, run the below command, make your changes, and save the updated configMap data.
 
-```
+```bash
 kubectl -n authorization edit configmap/csm-config-params
 ```
 
 This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:
 
-```
+```bash
+
 kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/<release_name>-config-params
 ```
 

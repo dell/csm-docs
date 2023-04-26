@@ -489,7 +489,7 @@ As part of driver installation, a ConfigMap with the name `unity-config-params` 
 Users can set the default log level by specifying log level to `logLevel` attribute in values.yaml during driver installation.
 
 To change the log level dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade
 ```
@@ -501,7 +501,7 @@ Note: myvalues.yaml is a values.yaml file which user has used for driver install
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `unity-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
-```
+```bash
 kubectl edit configmap -n unity unity-config-params
 ```  
 

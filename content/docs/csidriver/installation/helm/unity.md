@@ -188,9 +188,10 @@ Procedure
     | storageArrayList.isDefault| An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | true | - |
 
 
-    Example: secret.yaml
-    ```yaml
-      storageArrayList:
+Example: secret.yaml
+
+```yaml
+  storageArrayList:
       - arrayId: "APM00******1"
         username: "user"
         password: "password"
@@ -203,15 +204,18 @@ Procedure
         password: "password"
         endpoint: "https://10.1.1.2/"
         skipCertificateValidation: true
-    ```
+ ```
 
-	Use the following command to create a new secret unity-creds from `secret.yaml` file.
+Use the following command to create a new secret unity-creds from `secret.yaml` file.
 	
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
-    
-    Use the following command to replace or update the secret:
-    
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
+  ```bash
+    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml
+  ```
+Use the following command to replace or update the secret:
+
+  ```bash
+    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -
+  ```
     
     **Note**: The user needs to validate the yaml syntax and array-related key/values while replacing the unity-creds secret.
     The driver will continue to use previous values in case of an error found in the yaml file.
@@ -219,8 +223,8 @@ Procedure
 	
 	Alternatively, users can configure and use `secret.yaml` for driver configuration. The parameters remain the same as in the above table and below is a sample of `secret.yaml`. Samples of  `secret.yaml` is available in the directory `csi-unity/samples/secret/ `.
 	
-	Example: secret.yaml
-	```yaml
+Example: secret.yaml
+```yaml
     storageArrayList:
     - arrayId: "APM00******1"
       username: "user"
@@ -234,7 +238,7 @@ Procedure
       password: "password"
       endpoint: "https://10.1.1.2/"
       skipCertificateValidation: true
-       ```
+  ```
     
       **Note:**
       * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
@@ -446,8 +450,9 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the "Host" information in an array.
 User can update secret using the following command:
-```
-    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+```bash
+
+  kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 ```
 **Note**: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
 
@@ -459,7 +464,7 @@ As part of driver installation, a ConfigMap with the name `unity-config-params` 
 Users can set the default log level by specifying log level to `logLevel` attribute in values.yaml during driver installation.
 
 To change the log level dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade
 ```

@@ -104,7 +104,7 @@ After creating the role bindings, the next logical step is to generate the acces
 > - The `--insecure` flag is required if certificates were not provided in `$HOME/.karavi/config.json`.
 > - This sample copies the token directly to the Kubernetes cluster master node. The requirement here is that the token must be copied and/or stored in any location accessible to the Kubernetes tenant admin.
 
-  ```
+  ```bash
   echo === Generating token ===
   karavictl generate token --tenant ${tenantName} --insecure --addr grpc.<DNS-hostname>:443 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
 
@@ -116,9 +116,10 @@ After creating the role bindings, the next logical step is to generate the acces
 
 Now that the tenant is bound to a role, a JSON Web Token can be generated for the tenant. For example, to generate a token for the `Finance` tenant:
 
-```
+```bash
 karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:<ingress-nginx-controller-port>
-
+```
+```
 {
   "Token": "\napiVersion: v1\nkind: Secret\nmetadata:\n  name: proxy-authz-tokens\ntype: Opaque\ndata:\n  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUXhPRFlzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLmJIODN1TldmaHoxc1FVaDcweVlfMlF3N1NTVnEyRzRKeGlyVHFMWVlEMkU=\n  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWXhNallzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkxNbWVUSkZlX2dveXR0V0lUUDc5QWVaTy1kdmN5SHAwNUwyNXAtUm9ZZnM=\n"
 }
@@ -126,7 +127,7 @@ karavictl generate token --tenant Finance --insecure --addr tenant.csm-authoriza
 
 Process the above response to filter the secret manifest. For example using sed you can run the following:
 
-```
+```yaml
 karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:<ingress-nginx-controller-port> | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
 apiVersion: v1
 kind: Secret

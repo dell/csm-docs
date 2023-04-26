@@ -274,11 +274,11 @@ The certificate and key are provided to the proxy via a Kubernetes TLS secret (i
 Here is an example showing how to generate a private key and use that to sign an SSL certificate using the openssl tool:
 
 ```bash
-openssl genrsa -out tls.key 2048
-openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
-kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
-kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --
-key=tls.key
+  openssl genrsa -out tls.key 2048
+  openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
+  kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
+  kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --
+  key=tls.key
 ```
 
 ### Using Helm installer
@@ -308,14 +308,14 @@ For example, if `nodeNameTemplate` is _abc-%foo%-hostname_ and nodename is _work
 Starting with version 1.5, the CSI PowerMax driver supports running multiple replicas of the controller Pod. At any time, only one controller Pod is active(leader), and the rest are on standby. In case of a failure, one of the standby Pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`. Additionally by leveraging `pod anti-affinity`, no two-controller Pods are ever scheduled on the same node.
 
 To increase or decrease the number of controller Pods, edit the following value in `values.yaml` file:
-```
+```yaml
 controllerCount: 2
 ```  
 > *NOTE:* The default value for controllerCount is 2. We recommend not changing this unless it is really necessary.
 > Also, if the controller count is greater than the number of available nodes (where the Pods can be scheduled), some controller Pods will remain in the Pending state  
    
 If you are using `dell-csi-operator`, adjust the following value in your Custom Resource manifest
-```  
+```yaml
 replicas: 2  
 ```
 
@@ -451,7 +451,7 @@ To use the enhanced topology keys:
 
 **Sample config file:** 
 
-```
+```yaml
 # allowedConnections contains a list of (node, array and protocol) info for user allowed configuration
 # For any given storage array ID and protocol on a Node, topology keys will be created for just those pair and
 # every other configuration is ignored
@@ -517,9 +517,9 @@ As part of driver installation, a ConfigMap with the name `powermax-config-param
 Users can set the default log level by specifying log level to `logLevel` attribute in my-powermax-settings.yaml during driver installation.
 
 To change the log level dynamically to a different value, the user can edit the same my-powermax-settings.yaml, and run the following command
-```
-cd dell-csi-helm-installer
-./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade
+```bash
+  cd dell-csi-helm-installer
+  ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade
 ```
 
 Note: my-powermax-settings.yaml is a values.yaml file which the user has used for driver installation.  
@@ -529,7 +529,7 @@ Note: my-powermax-settings.yaml is a values.yaml file which the user has used fo
 As part of driver installation, a ConfigMap with the name `powermax-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level the user can set this field during driver installation.
 
 To update the log level dynamically, the user has to edit the ConfigMap `powermax-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
-```
+```bash
 kubectl edit configmap -n powermax powermax-config-params
 ```  
 
@@ -574,7 +574,7 @@ To use this feature
 - Set `vSphere.enabled` to true.
 - Create a secret which contains vCenter privileges. Follow the steps [here](../../installation/helm/powermax/#auto-rdm-for-vsphere-over-fc-requirements) to create it. Update `vCenterCredSecret` with the secret name created.
   
-```
+```yaml
  VMware/vSphere virtualization support
 # set enable to true, if you to enable VMware virtualized environment support via RDM
 # Allowed Values:

@@ -146,12 +146,15 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 
 After editing the file, run the below command to create a secret called `vxflexos-config`:
     
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml`
+```bash
 
+  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml
+```
 Use the below command to replace or update the secret:
+```bash
 
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
-
+  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+```
 *NOTE:* 
 
 - The user needs to validate the YAML syntax and array-related key/values while replacing the vxflexos-creds secret.
@@ -259,18 +262,25 @@ If this secret is an empty secret, then the validation of the certificate fails,
 If the gateway certificate is self-signed or if you are using an embedded gateway, then perform the following steps.
 
 1. To fetch the certificate, run the following command.
-
-         `openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem`
+    ```bash
+   
+    openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+    ```
 	
    Example: openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
 	
 2. Run the following command to create the cert secret with index '0':
 
-         `kubectl create secret generic vxflexos-certs-0 --from-file=cert-0=ca_cert_0.pem -n vxflexos`
+    ```bash
+   
+    kubectl create secret generic vxflexos-certs-0 --from-file=cert-0=ca_cert_0.pem -n vxflexos
+    ```
+    Use the following command to replace the secret:
 	
-   Use the following command to replace the secret:
-	
-          `kubectl create secret generic vxflexos-certs-0 -n vxflexos --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -` 
+    ```bash
+   
+    kubectl create secret generic vxflexos-certs-0 -n vxflexos --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
+    ``` 
 	
 3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: vxflexos-certs-1, vxflexos-certs-2, etc)
 

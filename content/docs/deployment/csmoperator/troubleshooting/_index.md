@@ -20,7 +20,7 @@ The Dell CSM Operator is not fully compliant with the OperatorHub React UI eleme
 
 ### How can I view detailed logs for the CSM Operator?
 Detailed logs of the CSM Operator can be displayed using the following command:
-```
+```bash
 kubectl logs <csm-operator-controller-podname> -n <namespace>
 ```
 

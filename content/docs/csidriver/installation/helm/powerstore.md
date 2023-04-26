@@ -137,7 +137,7 @@ Volume Health Monitoring feature is optional and by default this feature is disa
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
 health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
 volume stats value under node should be set to true.
-   ```yaml
+```yaml
 controller:
   healthMonitor:
     # enabled: Enable/Disable health monitor of CSI volumes
@@ -160,7 +160,7 @@ node:
     #   false: disable checking of health condition of CSI volumes
     # Default value: None
     enabled: false
-   ```
+```
 ### (Optional) Replication feature Requirements
 
 Applicable only if you decided to enable the Replication feature in `values.yaml`
@@ -287,6 +287,7 @@ Starting CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Vo
 
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the “Host” information in an array. User can update secret using the following command:
 ```bash
+
 kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 ```
 ## Dynamic Logging Configuration
@@ -299,7 +300,7 @@ As part of driver installation, a ConfigMap with the name `powerstore-config-par
 Users can set the default log level by specifying log level to `logLevel` and log format to `logFormat` attribute in `my-powerstore-settings.yaml` during driver installation.
 
 To change the log level or log format dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade
 ```

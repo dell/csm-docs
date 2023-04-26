@@ -37,7 +37,7 @@ The dell-csm-replicator supports 'sync deletion' of replicated PV resources i.e 
 
 The decision to whether or not sync delete the corresponding PV depends on a Storage Class parameter which can be configured by the user: 
 
-```
+```yaml
 replication.storage.dell.com/remotePVRetentionPolicy: 'delete' | 'retain'
 ```
 
@@ -53,7 +53,7 @@ The dell-csm-replicator supports 'sync deletion' of RG (DellCSIReplicationGroup)
 
 The decision to whether or not sync delete the corresponding RG depends on a Storage Class parameter which can be configured by the user. 
 
-```
+```yaml
 replication.storage.dell.com/remoteRGRetentionPolicy: 'delete' | 'retain'
 ```
 

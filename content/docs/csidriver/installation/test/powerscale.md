@@ -17,7 +17,7 @@ Test the deployment workflow of a simple pod on PowerScale storage.
    Create a file `storageclass.yaml` using sample yaml file located at samples/storageclass/isilon.yaml. Update/uncomment the attributes in this sample file as per the requirements.
 
    Execute the following command to create a storage class:
-   ```
+   ```bash
    kubectl create -f $PWD/storageclass.yaml
    ```
 
@@ -42,7 +42,7 @@ Test the deployment workflow of a simple pod on PowerScale storage.
     To attach a volume to a host, create a new application(Pod) and use the PVC created above in the Pod. This scenario is explained using the Nginx application. Create `nginx.yaml` using sample yaml files located at samples/pod/.
 
     Execute the following command to mount the volume to the Kubernetes node:
-    ```
+    ```bash
     kubectl create -f $PWD/nginx.yaml
     ```
 
@@ -66,9 +66,9 @@ Test the deployment workflow of a simple pod on PowerScale storage.
    The following procedure will create a snapshot of the volume in the container using VolumeSnapshot objects defined in snapshot-of-test-pvc.yaml. The sample file for snapshot creation is located at samples/volumesnapshot/.
 
    Execute the following command to create snapshot:
-        
-      `kubectl create -f samples/volumesnapshot/snapshot-of-test-pvc.yaml` 
-
+   ```bash     
+   kubectl create -f samples/volumesnapshot/snapshot-of-test-pvc.yaml 
+   ```
    The spec.source section contains the volume that will be snapped in the default namespace. For example, if the volume to be snapped is test-pvc, then the created snapshot is named snapshot-of-test-pvc. Verify the PowerScale system for the newly created snapshot.
     
 
@@ -86,7 +86,7 @@ Test the deployment workflow of a simple pod on PowerScale storage.
     The sample file for volume creation from the snapshot is located at samples/persistentvolumeclaim/pvc-from-snapshot.yaml .
     
     Execute the following command to create a snapshot:
-    ```
+    ```bash
     kubectl create -f samples/persistentvolumeclaim/pvc-from-snapshot.yaml
     ```
 
@@ -97,7 +97,7 @@ Test the deployment workflow of a simple pod on PowerScale storage.
 
     Execute the following commands to delete the snapshot:
     
-    ```
+    ```bash
     kubectl get volumesnapshot
     kubectl delete volumesnapshot snapshot-of-test-pvc
     ```
@@ -110,7 +110,7 @@ Test the deployment workflow of a simple pod on PowerScale storage.
     The sample file for volume creation from volume is located at samples/persistentvolumeclaim/pvc-from-pvc.yaml
     
     Execute the following command to create a pvc from another pvc:
-    ```
+    ```bash
     kubectl create -f samples/persistentvolumeclaim/pvc-from-pvc.yaml
     ```
 
@@ -126,7 +126,7 @@ Test the deployment workflow of a simple pod on PowerScale storage.
 
 9.  **To delete the volume**
 
-    ```
+    ```bash
     kubectl get pvc
     kubectl delete pvc testvolclaim1
     kubectl get pvc

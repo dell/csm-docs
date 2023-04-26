@@ -188,7 +188,7 @@ This feature is introduced in CSI Driver for PowerStore version 2.0.0.
 As part of driver installation, a ConfigMap with the name `powerstore-config-params` is created using the manifest located in the sample file. This ConfigMap contains attributes `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver and `CSI_LOG_FORMAT` which specifies the current log format of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `powerstore-config-params` and update `CSI_LOG_LEVEL` to the desired log level and `CSI_LOG_FORMAT` to the desired log format.
-```
+```bash
 kubectl edit configmap -n csi-powerstore powerstore-config-params
 ```
 **Note** : 

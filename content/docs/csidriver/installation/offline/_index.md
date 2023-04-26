@@ -64,15 +64,16 @@ The script will perform the following steps:
 The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.
 
 For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:
-```
+```bash
 git clone -b v1.11.0 https://github.com/dell/dell-csi-operator.git
 ```
-```
+```bash
 cd dell-csi-operator/scripts
 ```
-```
+```bash
 [root@user scripts]# ./csi-offline-bundle.sh -c
-
+```
+```
 *
 * Pulling and saving container images
 

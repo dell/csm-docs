@@ -52,7 +52,8 @@ You can edit these manifests and install the driver using the `OperatorHub` UI.
 Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
 
 *  Check if ContainerStorageModule CR is created successfully using the command below:
-    ```
+    ```bash
+
     $ kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
     ```
 * Check the status of the CR to verify if the driver installation is in the `Succeeded` state. If the status is not `Succeeded`, see the [Troubleshooting guide](../troubleshooting/#my-dell-csi-driver-install-failed-how-do-i-fix-it) for more information.
@@ -63,8 +64,9 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 
 * Modifying the installation directly via `kubectl edit`
     For example - If the name of the installed PowerScale driver is powerscale, then run
-    ```
-    # Replace driver-namespace with the namespace where the PowerScale driver is installed
+
+     #Replace driver-namespace with the namespace where the PowerScale driver is installed
+    ```bash
     $ kubectl edit csm/powerscale -n <driver-namespace>
     ```
     and modify the installation
@@ -87,7 +89,7 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 The CSI Drivers and CSM Modules can be uninstalled by deleting the Custom Resource.
 
 For e.g.
-```
+```bash
 $ kubectl delete csm/powerscale -n <driver-namespace>
 ```
 

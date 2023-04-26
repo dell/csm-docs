@@ -155,7 +155,7 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
 
   Add the Zipkin values to the configMap:
-  ```
+  ```yaml
   ZIPKIN_URI: "http://PROXY_HOST:9411/api/v2/spans"
   ZIPKIN_PROBABILITY: "1.0"
   ```

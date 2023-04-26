@@ -112,8 +112,10 @@ Flags:
 
 ##### Output
 
+```bash
+dellctl cluster add -n cluster1 -f ~/kubeconfigs/cluster1-kubeconfig
 ```
-# dellctl cluster add -n cluster1 -f ~/kubeconfigs/cluster1-kubeconfig
+```
  INFO Adding clusters ...
  INFO Cluster: cluster1
  INFO Successfully added cluster cluster1 in /root/.dellctl/clusters/cluster1 folder.
@@ -121,8 +123,11 @@ Flags:
 
 Add a cluster with it's uid
 
+```bash
+
+dellctl cluster add -n cluster2 -f ~/kubeconfigs/cluster2-kubeconfig -u "035133aa-5b65-4080-a813-34a7abe48180"
 ```
-# dellctl cluster add -n cluster2 -f ~/kubeconfigs/cluster2-kubeconfig -u "035133aa-5b65-4080-a813-34a7abe48180"
+```
  INFO Adding clusters ...
  INFO Cluster: cluster2
  INFO Successfully added cluster cluster2 in /root/.dellctl/clusters/cluster2 folder.
@@ -153,8 +158,10 @@ Removes a k8s cluster by name from the list of clusters being managed by dellctl
 
 ##### Output
 
+```bash
+dellctl cluster remove -n cluster1
 ```
-# dellctl cluster remove -n cluster1
+```
  INFO Removing cluster with id cluster1
  INFO Removed cluster with id cluster1
 ```
@@ -183,8 +190,10 @@ List all clusters currently being managed by dellctl
 
 ##### Output
 
+```bash
+dellctl cluster get
 ```
-# dellctl cluster get
+```
 CLUSTER ID      VERSION URL                             UID
 cluster1        v1.22   https://1.2.3.4:6443
 cluster2        v1.22   https://1.2.3.5:6443            035133aa-5b65-4080-a813-34a7abe48180
@@ -252,24 +261,32 @@ Create an application backup/clones
 
 Create a backup of the applications running in namespace `demo1`
 
+```bash
+dellctl backup create backup1 --include-namespaces demo1
 ```
-# dellctl backup create backup1 --include-namespaces demo1
+```
  INFO Backup request "backup1" submitted successfully.
  INFO Run 'dellctl backup get backup1' for more details.
 ```
 
 Create clones of the application running in namespace `demo1`, on clusters with id `cluster1` and `cluster2`
 
+```bash
+
+dellctl backup create demo-app-clones --include-namespaces demo1 --clones "cluster1/demo1:restore-ns1" --clones "cluster2/demo1:restore-ns1"
 ```
-# dellctl backup create demo-app-clones --include-namespaces demo1 --clones "cluster1/demo1:restore-ns1" --clones "cluster2/demo1:restore-ns1"
+```
  INFO Clone request "demo-app-clones" submitted successfully.
  INFO Run 'dellctl backup get demo-app-clones' for more details.
 ```
 
 Take backup of application running in namespace `demo3` on remote cluster with id `cluster2`
 
+```bash
+
+dellctl backup create backup4 --include-namespaces demo3 --cluster-id cluster2
 ```
-# dellctl backup create backup4 --include-namespaces demo3 --cluster-id cluster2
+```
  INFO Backup request "backup4" submitted successfully.
  INFO Run 'dellctl backup get backup4' for more details.
 ```
@@ -296,8 +313,10 @@ Delete one or more application backups
 
 ##### Output
 
+```bash
+dellctl backup delete backup1
 ```
-# dellctl backup delete backup1
+```
 Are you sure you want to continue (Y/N)? Y
  INFO Request to delete backup "backup1" submitted successfully.
  INFO The backup will be fully deleted after all associated data (backup files, pod volume data, restores, velero backup) are removed.
@@ -305,8 +324,10 @@ Are you sure you want to continue (Y/N)? Y
 
 Delete multiple backups
 
+```bash
+dellctl backup delete backup1 backup2
 ```
-# dellctl backup delete backup1 backup2
+```
 Are you sure you want to continue (Y/N)? Y
  INFO Request to delete backup "backup1" submitted successfully.
  INFO The backup will be fully deleted after all associated data (backup files, pod volume data, restores, velero backup) are removed.
@@ -317,8 +338,10 @@ Are you sure you want to continue (Y/N)? Y
 
 Delete all backups without asking for user confirmation
 
+```bash
+dellctl backup delete --all --confirm
 ```
-# dellctl backup delete --all --confirm
+``` 
  INFO Request to delete backup "backup4" submitted successfully.
  INFO The backup will be fully deleted after all associated data (backup files, pod volume data, restores, velero backup) are removed.
  INFO Request to delete backup "demo-app-clones" submitted successfully.
@@ -345,8 +368,10 @@ Get application backups
 
 ##### Output
 
+```bash
+dellctl backup get
 ```
-# dellctl backup get
+```
 NAME              STATUS      CREATED                         EXPIRES                         STORAGE LOCATION   DATA MOVER   CLONED   TARGET CLUSTERS
 backup1           Completed   2022-07-27 11:51:00 -0400 EDT   2022-08-26 11:51:00 -0400 EDT   default            Restic       false
 backup2           Completed   2022-07-27 11:59:24 -0400 EDT   2022-08-26 11:59:42 -0400 EDT   default            Restic       false
@@ -356,8 +381,10 @@ demo-app-clones   Restored    2022-07-27 11:53:37 -0400 EDT   2022-08-26 11:53:3
 
 Get backups from remote cluster with id `cluster2`
 
+```bash
+dellctl backup get --cluster-id cluster2
 ```
-# dellctl backup get --cluster-id cluster2
+```
 NAME              STATUS      CREATED                         EXPIRES                         STORAGE LOCATION   DATA MOVER   CLONED   TARGET CLUSTERS
 backup1           Completed   2022-07-27 11:52:42 -0400 EDT   NA                              default            Restic       false
 backup2           Completed   2022-07-27 12:02:29 -0400 EDT   NA                              default            Restic       false
@@ -367,8 +394,10 @@ demo-app-clones   Completed   2022-07-27 11:54:55 -0400 EDT   NA                
 
 Get backups with their names
 
+```bash
+dellctl backup get backup1 demo-app-clones
 ```
-# dellctl backup get backup1 demo-app-clones
+```
 NAME              STATUS      CREATED                         EXPIRES                         STORAGE LOCATION   DATA MOVER   CLONED   TARGET CLUSTERS
 backup1           Completed   2022-07-27 11:51:00 -0400 EDT   2022-08-26 11:51:00 -0400 EDT   default            Restic       false
 demo-app-clones   Completed   2022-07-27 11:53:37 -0400 EDT   2022-08-26 11:53:37 -0400 EDT   default            Restic       true     cluster1, cluster2
@@ -432,16 +461,22 @@ Restore an application backup
 
 Restore application backup `backup1` on local cluster in namespace `restorens1`
 
+```bash
+
+dellctl restore create restore1 --from-backup backup1 --namespace-mappings "demo1:restorens1"
 ```
-# dellctl restore create restore1 --from-backup backup1 --namespace-mappings "demo1:restorens1"
+``` 
  INFO Restore request "restore1" submitted successfully.
  INFO Run 'dellctl restore get restore1' for more details.
 ```
 
 Restore application backup `backup1` on remote cluster `cluster2` in namespace `demo1`
 
+```bash
+
+dellctl restore create restore1 --from-backup backup1 --cluster-id cluster2
 ```
-# dellctl restore create restore1 --from-backup backup1 --cluster-id cluster2
+``` 
  INFO Restore request "restore1" submitted successfully.
  INFO Run 'dellctl restore get restore1' for more details.
 ```
@@ -470,18 +505,22 @@ Delete one or more application restores
 
 Delete a restore created on remote cluster with id `cluster2`
 
+```bash
+dellctl restore delete restore1 --cluster-id cluster2
 ```
-# dellctl restore delete restore1 --cluster-id cluster2
-Are you sure you want to continue (Y/N)? Y
+```
+ Are you sure you want to continue (Y/N)? Y
  INFO Request to delete restore "restore1" submitted successfully.
  INFO The restore will be fully deleted after all associated data (restore files, velero restore) are removed.
 ```
 
 Delete multiple restores
 
+```bash
+dellctl restore delete restore1 restore4
 ```
-# dellctl restore delete restore1 restore4
-Are you sure you want to continue (Y/N)? Y
+```
+ Are you sure you want to continue (Y/N)? Y
  INFO Request to delete restore "restore1" submitted successfully.
  INFO The restore will be fully deleted after all associated data (restore files, velero restore) are removed.
  INFO Request to delete restore "restore4" submitted successfully.
@@ -490,8 +529,10 @@ Are you sure you want to continue (Y/N)? Y
 
 Delete all restores without asking for user confirmation
 
+```bash
+dellctl restore delete --all --confirm
 ```
-# dellctl restore delete --all --confirm
+``` 
  INFO Request to delete restore "restore1" submitted successfully.
  INFO The restore will be fully deleted after all associated data (restore files, velero restore) are removed.
  INFO Request to delete restore "restore2" submitted successfully.
@@ -519,8 +560,10 @@ Get application restores
 
 Get all the application restores created on local cluster
 
+```bash
+dellctl restore get
 ```
-# dellctl restore get
+```
 NAME       BACKUP    STATUS      CREATED                         COMPLETED
 restore1   backup1   Completed   2022-07-27 12:35:29 -0400 EDT
 restore4   backup1   Completed   2022-07-27 12:39:42 -0400 EDT
@@ -528,16 +571,20 @@ restore4   backup1   Completed   2022-07-27 12:39:42 -0400 EDT
 
 Get all the application restores created on remote cluster with id `cluster2`
 
+```bash
+dellctl restore get --cluster-id cluster2
 ```
-# dellctl restore get --cluster-id cluster2
+```
 NAME       BACKUP    STATUS      CREATED                         COMPLETED
 restore1   backup1   Completed   2022-07-27 12:38:43 -0400 EDT
 ```
 
 Get restores with their names
 
+```bash
+dellctl restore get restore1
 ```
-# dellctl restore get restore1
+```
 NAME       BACKUP    STATUS      CREATED                         COMPLETED
 restore1   backup1   Completed   2022-07-27 12:35:29 -0400 EDT
 ```
@@ -582,7 +629,7 @@ Create a schedule
 
 ##### Available Commands
 
-```
+```bash
   for-backup  Create a schedule for application backups
 ```
 
@@ -638,24 +685,33 @@ Create a schedule for application backups
 
 Create a schedule to backup namespace demo, every 1hour
 
+```bash
+
+dellctl schedule create for-backup --name schedule1 --schedule "@every 1h" --include-namespaces demo
 ```
-# dellctl schedule create for-backup --name schedule1 --schedule "@every 1h" --include-namespaces demo
+```
  INFO schedule request "schedule1" submitted successfully.
  INFO Run 'dellctl schedule get schedule1' for more details.
 ```
 
 Create a schedule to backup namespace demo, once a day at midnight and set OwnerReferences on backups created by this schedule
 
+```bash
+
+dellctl schedule create for-backup --name schedule2 --schedule "@daily" --include-namespaces demo --set-owner-references-in-backup
 ```
-# dellctl schedule create for-backup --name schedule2 --schedule "@daily" --include-namespaces demo --set-owner-references-in-backup
+``` 
  INFO schedule request "schedule2" submitted successfully.
  INFO Run 'dellctl schedule get schedule2' for more details.
 ```
 
 Create a schedule to backup namespace demo, at 23:00(11:00 pm) every saturday
 
+```bash
+
+dellctl schedule create for-backup --name schedule3 --schedule "00 23 * * 6" --include-namespaces demo
 ```
-# dellctl schedule create for-backup --name schedule3 --schedule "00 23 * * 6" --include-namespaces demo
+```
  INFO schedule request "schedule3" submitted successfully.
  INFO Run 'dellctl schedule get schedule3' for more details.
 ```
@@ -684,25 +740,31 @@ Delete one or more schedules
 
 Delete a schedule with name
 
+```bash
+ dellctl schedule delete schedule1
 ```
-# dellctl schedule delete schedule1
-Are you sure you want to continue (Y/N)? y
+```
+ Are you sure you want to continue (Y/N)? y
  INFO Request to delete schedule "schedule1" submitted successfully.
 ```
 
 Delete multiple schedules
 
+```bash
+dellctl schedule delete schedule1 schedule2
 ```
-# dellctl schedule delete schedule1 schedule2
-Are you sure you want to continue (Y/N)? y
+```
+ Are you sure you want to continue (Y/N)? y
  INFO Request to delete schedule "schedule1" submitted successfully.
  INFO Request to delete schedule "schedule2" submitted successfully.
 ```
 
 Delete all schedules without asking for user confirmation
 
+```bash
+dellctl schedule delete --confirm --all
 ```
-# dellctl schedule delete --confirm --all
+```
  INFO Request to delete schedule "schedule1" submitted successfully.
  INFO Request to delete schedule "schedule2" submitted successfully.
 ```
@@ -728,8 +790,10 @@ Get schedules
 
 Get all the application schedules created on local cluster
 
+```bash
+dellctl schedule get
 ```
-# dellctl schedule get
+```
 NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAST BACKUP TIME
 schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
 schedule2     Enabled   2022-11-04 08:35:57 +0000 UTC   false    @daily      NA
@@ -737,8 +801,10 @@ schedule2     Enabled   2022-11-04 08:35:57 +0000 UTC   false    @daily      NA
 
 Get schedules with their names
 
+```bash
+dellctl schedule get schedule1
 ```
-# dellctl schedule get schedule1
+```
 NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAST BACKUP TIME
 schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
 ```
@@ -758,8 +824,10 @@ Encryption rekey with a name for the rekey object and volume name of an encrypte
 ##### Output
 
 
+```bash
+dellctl encryption rekey myrekey k8s-5d2cc565d4
 ```
-# dellctl encryption rekey myrekey k8s-5d2cc565d4
+``` 
  INFO rekey request "myrekey" submitted successfully for persistent volume "k8s-5d2cc565d4".
  INFO Run 'dellctl encryption rekey-status myrekey' for more details.
 ```
@@ -780,8 +848,10 @@ Encryption rekey status with name of the rekey object
 ##### Output
 
 
+```bash
+dellctl encryption rekey-status myrekey
 ```
-# dellctl encryption rekey-status myrekey
+```
  INFO Status of rekey request myrekey = completed
 ```
 
@@ -808,8 +878,10 @@ images,imgs
 #### Output
 
 
+```bash
+dellctl images --driver csi-vxflexos
 ```
-# dellctl images --driver csi-vxflexos
+```
 Driver Image                    Supported Orchestrator Versions         Sidecar Images
 dellemc/csi-vxflexos:v2.5.0     k8s1.25,k8s1.24,k8s1.23,ocp4.11,ocp4.10 k8s.gcr.io/sig-storage/csi-attacher:v4.0.0
                                                                         k8s.gcr.io/sig-storage/csi-provisioner:v3.3.0
@@ -862,8 +934,10 @@ Gets PowerFlex volume infomation for a given tenant on a local cluster. The name
 
 >Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater. 
 
+```bash
+dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
 ```
-# dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
+```
 NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
 k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
 k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
