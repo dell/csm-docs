@@ -73,14 +73,12 @@ function onSnapshotChange(snapshotNoteValue, driverName, CONSTANTS_PARAM) {
 	if ($("#snapshot").prop('checked') === true) {
 		$('div#snapshot-note-wrapper').show();
 		$("#snapshot-note").html(snapshotNoteValue);
-		if (driverName === CONSTANTS_PARAM.UNITY){
+		if (driverName !== CONSTANTS_PARAM.POWERFLEX){
 			$('div#snap-prefix').show();
 		}
 	} else {
 		$('div#snapshot-note-wrapper').hide();
-		if (driverName === CONSTANTS_PARAM.UNITY){
-			$('div#snap-prefix').hide();
-		}
+		$('div#snap-prefix').hide();
 	}
 }
 
@@ -160,6 +158,9 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".vgsnapshot").show();
 	$(".authorization").show();
+	$(".observability").show();
+	$(".replication-mod").show();
+	$(".cert-manager").show();
 	$(".storageArrays").hide();
 	$(".powermax-csi-reverse-proxy").hide();
 	$(".cluster-prefix").hide();
@@ -170,12 +171,9 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".vSphere").hide();
 	$(".cert-secret-count-wrapper").hide();
 	$(".monitor").hide();
-	$(".vol-name-prefix").hide();
-	$("div#snap-prefix").hide();
+	$(".vol-name-prefix").show();
+	$("div#snap-prefix").show();
 	$(".fsGroupPolicy").hide();
-	$(".observability").show();
-	$(".replication-mod").show();
-	$(".cert-manager").show();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -186,6 +184,10 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
+			$(".cert-secret-count-wrapper").show();
+			$(".resiliency").show();
+			$(".fsGroupPolicy").show();
+			$(".vgsnapshot").hide();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERMAX:
@@ -201,6 +203,7 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".monitor").show();
 			$(".resiliency").show();
 			$(".cert-secret-count-wrapper").show();
+			$("div#snap-prefix").hide();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.UNITY:
@@ -209,8 +212,6 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".resiliency").show();
 			$(".vgsnapshot").hide();
 			$(".authorization").hide();
-			$(".vol-name-prefix").show();
-			$("div#snap-prefix").show();
 			$(".fsGroupPolicy").show();	
 			$(".cert-manager").hide();			
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.UNITY_NAMESPACE;
