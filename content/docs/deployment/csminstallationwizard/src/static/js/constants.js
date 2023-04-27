@@ -17,7 +17,7 @@
  */
 const CONSTANTS = {
 	POWERSTORE: "powerstore",
-	POWERSCALE: "powerscale",
+	POWERSCALE: "isilon",
 	POWERFLEX: "vxflexos",
 	POWERMAX: "powermax",
 	UNITY: "unity",
