@@ -73,14 +73,12 @@ function onSnapshotChange(snapshotNoteValue, driverName, CONSTANTS_PARAM) {
 	if ($("#snapshot").prop('checked') === true) {
 		$('div#snapshot-note-wrapper').show();
 		$("#snapshot-note").html(snapshotNoteValue);
-		if (driverName === CONSTANTS_PARAM.UNITY){
+		if (driverName !== CONSTANTS_PARAM.POWERFLEX){
 			$('div#snap-prefix').show();
 		}
 	} else {
 		$('div#snapshot-note-wrapper').hide();
-		if (driverName === CONSTANTS_PARAM.UNITY){
-			$('div#snap-prefix').hide();
-		}
+		$('div#snap-prefix').hide();
 	}
 }
 
@@ -205,7 +203,6 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".monitor").show();
 			$(".resiliency").show();
 			$(".cert-secret-count-wrapper").show();
-			$(".vol-name-prefix").hide();
 			$("div#snap-prefix").hide();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;

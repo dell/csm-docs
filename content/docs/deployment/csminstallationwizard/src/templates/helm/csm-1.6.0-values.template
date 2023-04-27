@@ -129,6 +129,7 @@ csi-vxflexos:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     controllerCount: $CONTROLLER_COUNT
+    volumeNamePrefix: $VOLUME_NAME_PREFIX
     snapshot:
       enabled: $SNAPSHOT_ENABLED
     resizer:
