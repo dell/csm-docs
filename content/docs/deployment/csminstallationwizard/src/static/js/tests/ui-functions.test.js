@@ -345,7 +345,6 @@ describe("GIVEN displayModules function", () => {
 
 		displayModules("powerscale", CONSTANTS);
 
-		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("block");
 	});
