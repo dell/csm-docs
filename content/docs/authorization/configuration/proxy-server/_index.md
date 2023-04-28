@@ -22,7 +22,7 @@ The storage administrator must first configure Authorization with the following 
 
 Generate an admin token that will be required to run `karavictl` commands except generating `admin token` and `cluster-info`.
 
-```yaml
+```
 $ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
 $ Enter JWT Signing Secret:
 $ cat admintoken.yaml
@@ -34,7 +34,7 @@ $ cat admintoken.yaml
 ```
 Alternatively, the JWT signing secret can be specified with the CLI.
 
-```yaml
+```
 $ karavictl admin token --name admin  --jwt-signing-secret supersecret --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
 $ cat admintoken.yaml
 {
@@ -141,7 +141,7 @@ karavictl generate token --tenant Finance --insecure --addr csm-authorization.co
 
 `token.yaml` will have a Kubernetes secret manifest that looks like this:
 
-```yaml
+```
 apiVersion: v1
 data:
   access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKamMyMGlMQ0psZUhBaU9qRTJPREl3TVRBeU5UTXNJbWR5YjNWd0lqb2labTl2SWl3aWFYTnpJam9pWTI5dExtUmxiR3d1WTNOdElpd2ljbTlzWlhNaU9pSmlZWElpTENKemRXSWlPaUpqYzIwdGRHVnVZVzUwSW4wLjlSYkJISzJUS2dZbVdDX0paazBoSXV0N0daSDV4NGVjQVk2ekdaUDNvUWs=
