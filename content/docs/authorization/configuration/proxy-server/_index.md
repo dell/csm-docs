@@ -16,7 +16,7 @@ The storage administrator must first configure Authorization with the following 
 
 >__Note__:
 > - The address of the Authorization proxy-server must be specified when executing `karavictl`. For the `RPM deployment`, the address is the DNS-hostname of the machine where the RPM
-    is installed. For the `Helm/Operator deployment`, the address is the Ingress host of the `proxy-server` with the port of the exposed Ingress Controller.
+is installed. For the `Helm/Operator deployment`, the address is the Ingress host of the `proxy-server` with the port of the exposed Ingress Controller.
 
 ### Configuring Admin Token
 
@@ -60,10 +60,10 @@ karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id 
 
 >__Note__:
 > - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
-> - The `addr` flag is the address of the Authorization proxy-server.
+> - The `addr` flag is the address of the Authorization proxy-server. 
 > - The `array-insecure` flag specifies to skip certificate validation when proxy-service connects to the backend storage array.
 > - The `powerflexIP` is the API endpoint of your PowerFlex. You can find the `systemID` at the `https://<powerflex_gui_address>/dashboard/performance` near the `System` title.
-> - The `user` and `password` arguments are credentials to the powerflex UI.
+> - The `user` and `password` arguments are credentials to the powerflex UI. 
 > - Run `karavictl storage create --help` for help.
 
 ### Configuring Tenants
@@ -78,9 +78,9 @@ karavictl tenant create --name Finance --insecure --addr DNS-hostname --admin-to
 karavictl tenant create --name Finance --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml
 ```
 
->__Note__:
+>__Note__: 
 > - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
-> - The `addr` flag is the address of the Authorization proxy-server.
+> - The `addr` flag is the address of the Authorization proxy-server. 
 > - Run `karavictl tenant create --help` for help.
 
 > - For the Powerflex Pre-approved Guid feature, the `approvesdc` boolean flag is `true` by default. If the `approvesdc` flag is false for a tenant, the proxy server will deny the requests to approve SDC if the SDCs are already in not-approved state. Inorder to change this flag for an already created tenant, see `tenant update` command in CLI section.
@@ -105,7 +105,7 @@ karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100
 karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml
 ```
 
->__Note__:
+>__Note__: 
 > - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
 > - The `addr` flag is the address of the Authorization proxy-server.
 > - Run `karavictl role create --help` for help.
@@ -122,9 +122,9 @@ karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --ad
 karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml
 ```
 
->__Note__:
+>__Note__: 
 > - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
-> - The `addr` flag is the address of the Authorization proxy-server.
+> - The `addr` flag is the address of the Authorization proxy-server. 
 > - Run `karavictl rolebinding create --help` for help.
 
 ### Generate a Token
@@ -156,7 +156,7 @@ type: Opaque
 
 This secret must be applied in the driver namespace.
 
->__Note__:
+>__Note__: 
 > - The `insecure` flag specifies to skip certificate validation when connecting to the Authorization proxy-server.
 > - The `addr` flag is the address of the Authorization proxy-server.
 > - Run `karavictl generate token --help` for help.
