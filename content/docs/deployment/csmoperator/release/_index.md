@@ -13,7 +13,7 @@ Description: >
 
 
 ### Fixed Issues
-
+- [Unable to delete application pod when driver is installed using CSM-Operator](https://github.com/dell/csm/issues/785)
 
 ### Known Issues
 CSM object does not track available deployment count when down scaling to n-1 , where n is number of nodes.
