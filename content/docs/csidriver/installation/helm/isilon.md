@@ -35,7 +35,12 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
 **Steps**
 
-  Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
+  Run the command to install Helm 3.0.
+  ```bash
+  
+  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  ``` 
+  
 
 ### (Optional) Volume Snapshot Requirements
 
