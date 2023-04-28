@@ -1,9 +1,9 @@
 ---
 title: CLI
-linktitle: CLI
+linktitle: CLI 
 weight: 4
 description: >
-    Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
 ---
 
 karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
@@ -93,7 +93,7 @@ Generate admin tokens
 Generate admin token for use with CSM Authorization commands.
 The tokens output in YAML format, which can be saved in a file.
 
-```bash
+```
 karavictl admin token [flags]
 ```
 
@@ -108,7 +108,7 @@ karavictl admin token [flags]
 ```
 
 ##### Output
-```bash
+```
 $ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m
 $ Enter JWT Signing Secret: ***********
 
@@ -120,7 +120,7 @@ $ Enter JWT Signing Secret: ***********
 ```
 Alternatively, one can supply JWT signing secret with command.
 
-```bash
+```
 
 $ karavictl admin token --name admin --jwt-signing-secret secret --access-token-expiration 30s --refresh-token-expiration 120m
 {
@@ -146,7 +146,7 @@ Display the state of resources within the cluster
 
 Prints table of resources within the cluster, including their readiness
 
-```bash
+```
 karavictl cluster-info [flags]
 ```
 
@@ -165,7 +165,7 @@ karavictl cluster-info [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl cluster-info
 NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
 github-auth-provider   1/1     1            1           59m
@@ -190,7 +190,7 @@ Generate resources for use with CSM
 
 Generates resources for use with CSM
 
-```bash
+```
 karavictl generate [flags]
 ```
 
@@ -229,7 +229,7 @@ be piped directly to kubectl:
 
 Example: karavictl generate token --tenant Alice --admin-token admintoken.yaml | kubectl apply -f -
 
-```bash
+```
 karavictl generate token [flags]
 ```
 
@@ -253,7 +253,7 @@ karavictl generate token [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl generate token --tenant Alice --admin-token admintoken.yaml
 
 apiVersion: v1
@@ -269,7 +269,7 @@ type: Opaque
 
 
 Usually, you will want to pipe the output to kubectl to apply the secret
-```bash
+```
 $ karavictl generate token --tenant Alice --admin-token admintoken.yaml | kubectl apply -f -
 ```
 
@@ -287,7 +287,7 @@ Manage roles
 
 Manage roles
 
-```bash
+```
 karavictl role [flags]
 ```
 
@@ -314,7 +314,7 @@ Outputs help text
 
 
 
-### karavictl role get
+### karavictl role get 
 
 Get role
 
@@ -322,7 +322,7 @@ Get role
 
 Get role
 
-```bash
+```
 karavictl role get [flags]
 ```
 
@@ -343,7 +343,7 @@ karavictl role get [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl role get CSISilver --admin-token admintoken.yaml
 
 {
@@ -372,7 +372,7 @@ List roles
 
 List roles
 
-```bash
+```
 karavictl role list [flags]
 ```
 
@@ -393,7 +393,7 @@ karavictl role list [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl role list --admin-token admintoken.yaml
 
 {
@@ -436,7 +436,7 @@ Create one or more CSM roles
 
 Creates one or more CSM roles
 
-```bash
+```
 karavictl role create [flags]
 ```
 
@@ -448,8 +448,8 @@ karavictl role create [flags]
   -h, --help               Help for create
 ```
 
-*NOTE:*
-- For PowerScale, set the `quota` to 0 as CSM for Authorization does not enforce quota limits.
+*NOTE:* 
+  - For PowerScale, set the `quota` to 0 as CSM for Authorization does not enforce quota limits.
 
 ##### Options inherited from parent commands
 
@@ -469,8 +469,7 @@ On success, there will be no output. You may run `karavictl role get <role-name>
 
 Alternatively, you can create a role in-line using:
 
-```bash
-
+```
 $ karavictl role create --role=role-name=system-type=000000000001=mypool=200000000 --admin-token admintoken.yaml
 ```
 
@@ -486,7 +485,7 @@ Update the quota of one or more CSM roles
 
 Updates the quota of one or more CSM roles
 
-```bash
+```
 karavictl role update [flags]
 ```
 
@@ -509,15 +508,14 @@ karavictl role update [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl role update --from-file roles.json --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl role get <role-name>` to confirm the update occurred.
 
 Alternatively, you can update existing roles in-line using:
 
-```bash
-
+```
 $ karavictl role update --role=role-name=system-type=000000000001=mypool=400000000 --admin-token admintoken.yaml
 ```
 ---
@@ -532,7 +530,7 @@ Delete role
 
 Delete role
 
-```bash
+```
 karavictl role delete <role-name> [flags]
 ```
 
@@ -553,7 +551,7 @@ karavictl role delete <role-name> [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl role delete CSISilver --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl role get <role-name>` to confirm the deletion occurred.
@@ -572,7 +570,7 @@ Manage role bindings
 
 Management for role bindings
 
-```bash
+```
 karavictl rolebinding [flags]
 ```
 
@@ -607,7 +605,7 @@ Create a rolebinding between role and tenant
 
 Creates a rolebinding between role and tenant
 
-```bash
+```
 karavictl rolebinding create [flags]
 ```
 
@@ -630,8 +628,7 @@ karavictl rolebinding create [flags]
 
 ##### Output
 
-```bash
-
+```
 $ karavictl rolebinding create --role CSISilver --tenant Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the rolebinding creation occurred.
@@ -649,7 +646,7 @@ Delete a rolebinding between role and tenant
 
 Deletes a rolebinding between role and tenant
 
-```bash
+```
 karavictl rolebinding delete [flags]
 ```
 
@@ -672,7 +669,7 @@ karavictl rolebinding delete [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl rolebinding delete --role CSISilver --tenant Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the rolebinding deletion occurred.
@@ -691,7 +688,7 @@ Manage storage systems
 
 Manages storage systems
 
-```bash
+```
 karavictl storage [flags]
 ```
 
@@ -728,7 +725,7 @@ Get details on a registered storage system.
 
 Gets details on a registered storage system.
 
-```bash
+```
 karavictl storage get [flags]
 ```
 
@@ -751,7 +748,7 @@ karavictl storage get [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl storage get --type powerflex --system-id 3000000000011111 --admin-token admintoken.yaml
 {
   "User": "admin",
@@ -775,7 +772,7 @@ List registered storage systems.
 
 Lists registered storage systems.
 
-```bash
+```
 karavictl storage list [flags]
 ```
 
@@ -797,7 +794,7 @@ karavictl storage list [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl storage list --admin-token admintoken.yaml
 
 {
@@ -828,7 +825,7 @@ Create and register a storage system.
 
 Creates and registers a storage system.
 
-```bash
+```
 karavictl storage create [flags]
 ```
 
@@ -855,8 +852,7 @@ karavictl storage create [flags]
 
 ##### Output
 
-```bash
-
+```
 $ karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ******** --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the creation occurred.
@@ -874,7 +870,7 @@ Update a registered storage system.
 
 Updates a registered storage system.
 
-```bash
+```
 karavictl storage update [flags]
 ```
 
@@ -901,8 +897,7 @@ karavictl storage update [flags]
 
 ##### Output
 
-```bash
-
+```
 $ karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ******** --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the update occurred.
@@ -921,7 +916,7 @@ Delete a registered storage system.
 
 Deletes a registered storage system.
 
-```bash
+```
 karavictl storage delete [flags]
 ```
 
@@ -943,7 +938,7 @@ karavictl storage delete [flags]
 ```
 
 ##### Output
-```bash
+```
 $ karavictl storage delete --type powerflex --system-id 3000000000011111 --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the deletion occurred.
@@ -962,7 +957,7 @@ Manage tenants
 
 Management for tenants
 
-```bash
+```
 karavictl tenant [flags]
 ```
 
@@ -997,7 +992,7 @@ Create a tenant resource within CSM
 
 Creates a tenant resource within CSM
 
-```bash
+```
 karavictl tenant create [flags]
 ```
 
@@ -1019,7 +1014,7 @@ karavictl tenant create [flags]
 ```
 
 ##### Output
-```bash
+```
 $ karavictl tenant create --name Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the creation occurred.
@@ -1039,7 +1034,7 @@ Get a tenant resource within CSM
 
 Gets a tenant resource and its assigned roles within CSM
 
-```bash
+```
 karavictl tenant get [flags]
 ```
 
@@ -1061,7 +1056,7 @@ karavictl tenant get [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl tenant get --name Alice --admin-token admintoken.yaml
 
 {
@@ -1085,7 +1080,7 @@ Lists tenant resources within CSM
 
 Lists tenant resources within CSM
 
-```bash
+```
 karavictl tenant list [flags]
 ```
 
@@ -1106,7 +1101,7 @@ karavictl tenant list [flags]
 
 ##### Output
 
-```bash
+```
 $ karavictl tenant list --admin-token admintoken.yaml
 
 {
@@ -1133,7 +1128,7 @@ Revokes access for a tenant
 
 Revokes access to storage resources for a tenant
 
-```bash
+```
 karavictl tenant revoke [flags]
 ```
 
@@ -1155,7 +1150,7 @@ karavictl tenant revoke [flags]
 ```
 
 ##### Output
-```bash
+```
 $ karavictl tenant revoke --name Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output.
@@ -1174,7 +1169,7 @@ Deletes a tenant resource within CSM
 
 Deletes a tenant resource within CSM
 
-```bash
+```
 karavictl tenant delete [flags]
 ```
 
@@ -1195,7 +1190,7 @@ karavictl tenant delete [flags]
 ```
 
 ##### Output
-```bash
+```
 $ karavictl tenant delete --name Alice --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the deletion occurred.
@@ -1214,7 +1209,7 @@ Updates a tenant's resource within CSM
 
 Updates a tenant resource within CSM
 
-```bash
+```
 karavictl tenant update [flags]
 ```
 
@@ -1236,8 +1231,7 @@ karavictl tenant update [flags]
 ```
 
 ##### Output
-```bash
-
+```
 $ karavictl tenant update --name Alice --approvesdc=false --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the update was persisted.
