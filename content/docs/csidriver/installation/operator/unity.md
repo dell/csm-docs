@@ -4,6 +4,9 @@ description: >
   Installing CSI Driver for Unity XT via Operator
 ---
 
+{{% pageinfo color="primary" %}}
+Dell CSI Operator is no longer actively maintained and support will be deprecated in CSM 1.9 (Driver Version 2.9.0) and we highly recommend to use [CSM Operator](../../../../deployment/csmoperator) for the installation henceforth.
+{{% /pageinfo %}}
 
 
 ## CSI Driver for Unity XT
@@ -201,7 +204,7 @@ data:
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `unity-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
-```bash
+```
 kubectl edit configmap -n unity unity-config-params
 ```  
 
@@ -216,8 +219,7 @@ kubectl edit configmap -n unity unity-config-params
 
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external health monitor sidecar. To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
-```yaml
-
+```
       # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
       # Also set the env variable controller.envs.X_CSI_ENABLE_VOL_HEALTH_MONITOR  to "true".
       # - name: external-health-monitor

@@ -6,6 +6,10 @@ description: >
   Installation of CSI drivers using Dell CSI Operator
 ---
 
+{{% pageinfo color="primary" %}}
+Dell CSI Operator is no longer actively maintained and support will be deprecated in CSM 1.9 (Driver Version 2.9.0) and we highly recommend to use [CSM Operator](../../../../deployment/csmoperator) for the installation henceforth.
+{{% /pageinfo %}}
+
 The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
 
 ## Prerequisites
@@ -78,16 +82,12 @@ The installation process involves the creation of a `Subscription` object either
 
 #### Pre-Requisite for installation with OLM
 Please run the following commands for creating the required `ConfigMap` before installing the `dell-csi-operator` using OLM.  
-```bash
- git clone -b v1.11.0 https://github.com/dell/dell-csi-operator.git
- cd dell-csi-operator
- tar -czf config.tar.gz driverconfig/
 ```
-
-Replace operator-namespace in the below command with the actual namespace where the operator will be deployed by OLM
-```bash
-
- kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n <operator-namespace>
+$ git clone -b v1.11.0 https://github.com/dell/dell-csi-operator.git
+$ cd dell-csi-operator
+$ tar -czf config.tar.gz driverconfig/
+# Replace operator-namespace in the below command with the actual namespace where the operator will be deployed by OLM
+$ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n <operator-namespace>
 ```
 ##### Upstream Kubernetes
 - For installing via OperatorHub.io on Kubernetes, go to the [OperatorHub page](../../partners/operator/).
@@ -214,13 +214,11 @@ CSI Drivers can be installed by creating a `CustomResource` object in your clust
 
 Sample manifest files for each driver `CustomResourceDefintion` have been provided in the `samples` folder to help with the installation of the drivers.
 These files follow the naming convention
-```text
-   {driver name}_{driver version}_k8s_{k8 version}.yaml
-```
+
+    {driver name}_{driver version}_k8s_{k8 version}.yaml
 Or
-```text
-   {driver name}_{driver version}_ops_{OpenShift version}.yaml
-```
+
+    {driver name}_{driver version}_ops_{OpenShift version}.yaml
 For e.g.
 * samples/powermax_v260_k8s_126.yaml* <- To install CSI PowerMax driver v2.6.0 on a Kubernetes 1.26 cluster  
 * samples/powermax_v260_ops_411.yaml* <- To install CSI PowerMax driver v2.6.0 on an OpenShift 4.11 cluster
@@ -229,7 +227,7 @@ Copy the correct sample file and edit the mandatory & any optional parameters sp
 >NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available [here](#custom-resource-specification). Please make sure to read through and understand the various fields.
 
 Run the following command to install the CSI driver.
-```bash
+```
 kubectl create -f <driver-manifest.yaml>
 ```
 
@@ -242,8 +240,8 @@ Once the driver Custom Resource has been created, you can verify the installatio
 *  Check if Driver CR got created successfully
 
     For e.g. – If you installed the PowerMax driver
-    ```bash
-    kubectl get csipowermax -n <driver-namespace>
+    ```
+    $ kubectl get csipowermax -n <driver-namespace>
     ```
 * Check the status of the Custom Resource to verify if the driver installation was successful
 
@@ -256,40 +254,38 @@ Please refer to the _Troubleshooting_ section [here](../../troubleshooting/opera
 The CSI Drivers installed by the Dell CSI Operator can be updated like any Kubernetes resource. This can be achieved in various ways which include –
 
 * Modifying the installation directly via `kubectl edit`
-    ```bash
-    kubectl get <driver-object> -n <driver-namespace>
+    ```
+    $ kubectl get <driver-object> -n <driver-namespace>
     ```
     For example - If the Unity XT driver is installed then run this command to get the object name of kind CSIUnity.
-
-    #Replace driver-namespace with the namespace where the Unity XT driver is installed
-    ```bash  
-    kubectl get csiunity -n <driver-namespace>
+    ```
+    # Replace driver-namespace with the namespace where the Unity XT driver is installed
+    $ kubectl get csiunity -n <driver-namespace>
     ```
     use the object name in `kubectl edit` command.
-    ```bash
-    kubectl edit <driver-object>/<object-name> -n <driver-namespace>
+    ```
+    $ kubectl edit <driver-object>/<object-name> -n <driver-namespace>
     ```
     For example - If the object name is CSIUnity.
-    #Replace object-name with the object name of kind CSIUnity
-    ```bash
-    kubectl edit csiunity/<object-name> -n <driver-namespace>
+    ```
+    # Replace object-name with the object name of kind CSIUnity
+    $ kubectl edit csiunity/<object-name> -n <driver-namespace>
     ```
     and modify the installation. The usual fields to edit are the version of drivers, sidecars and the environment variables.
     
 * Modify the API object in place via `kubectl patch` command. 
    For example if you want to patch the deployment to have two replicas for Unity XT driver then run this command to get the deployment
-    ```bash
-    kubectl get deployments -n <driver-namespace>
+    ```
+    $ kubectl get deployments -n <driver-namespace>
     ```
     to patch the deployment with your patch object inline run this command.
-    #Replace deployment with the name of the deployment
-    ```bash
-  
-    kubectl patch deploy/<deployment> -n <driver-namespace> -p '{"spec":{"replicas": 2}}'
+    ```
+    # Replace deployment with the name of the deployment
+    $ kubectl patch deploy/<deployment> -n <driver-namespace> -p '{"spec":{"replicas": 2}}'
     ``` 
     to patch the deployment with your patch file run this command.
-    #Replace deployment with the name of the deployment
-    ```bash
+    ```
+    # Replace deployment with the name of the deployment
     kubectl patch deployment <deployment> --patch-file patch-file.yaml
     ```
     

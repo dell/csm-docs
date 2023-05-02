@@ -3,6 +3,9 @@ title: PowerScale
 description: >
   Installing CSI Driver for PowerScale via Operator
 ---
+{{% pageinfo color="primary" %}}
+Dell CSI Operator is no longer actively maintained and support will be deprecated in CSM 1.9 (Driver Version 2.9.0) and we highly recommend to use [CSM Operator](../../../../deployment/csmoperator) for the installation henceforth.
+{{% /pageinfo %}}
 
 ## Installing CSI Driver for PowerScale via Operator
 
@@ -28,7 +31,7 @@ User can query for CSI-PowerScale driver using the following command:
 2. Create *isilon-creds* secret by using secret.yaml file format only.
   
    2.1   Create a yaml file called secret.yaml with the following content:
-     ```yaml
+     ```
       isilonClusters:
          # logical name of PowerScale Cluster
        - clusterName: "cluster1"
@@ -159,7 +162,6 @@ Volume Health Monitoring feature is optional and by default this feature is disa
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external health monitor sidecar. To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
 
    ```yaml
-
     # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
       # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED  to "true".
       # - name: external-health-monitor
@@ -170,7 +172,7 @@ To enable this feature, add the below block to the driver manifest before instal
     #   true: enable checking of health condition of CSI volumes
     #   false: disable checking of health condition of CSI volumes
     # Default value: false
- controller:
+     controller:
    envs:
      - name: X_CSI_HEALTH_MONITOR_ENABLED
        value: "true"

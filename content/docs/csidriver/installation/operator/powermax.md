@@ -3,6 +3,9 @@ title: PowerMax
 description: >
   Installing CSI Driver for PowerMax via Operator
 ---
+{{% pageinfo color="primary" %}}
+Dell CSI Operator is no longer actively maintained and support will be deprecated in CSM 1.9 (Driver Version 2.9.0) and we highly recommend to use [CSM Operator](../../../../deployment/csmoperator) for the installation henceforth.
+{{% /pageinfo %}}
 
 ## Installing CSI Driver for PowerMax via Operator
 
@@ -90,11 +93,11 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 2. Create PowerMax credentials:
    Create a file called powermax-creds.yaml with the following content:
      ```yaml
-          apiVersion: v1
+        apiVersion: v1
           kind: Secret
           metadata:
           name: powermax-creds
-          # Replace driver-namespace with the namespace where driver is being deployed
+            # Replace driver-namespace with the namespace where driver is being deployed
             namespace: <driver-namespace>
           type: Opaque
           data:
@@ -106,7 +109,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
           # chapsecret: <base64 CHAP secret>
      ```
    Replace the values for the username and password parameters. These values can be obtained using base64 encoding as described in the following example:
-   ```bash
+   ```
    echo -n "myusername" | base64
    echo -n "mypassword" | base64
    # If mychapsecret is the ISCSI CHAP secret
@@ -278,14 +281,14 @@ spec:
 #### Installation
 Copy the sample file - `powermax_reverseproxy.yaml` from the `samples` folder or use the sample available in the `OperatorHub` UI  
 Edit and input all required parameters and then use the `OperatorHub` UI or run the following command to install the CSI PowerMax Reverse Proxy service:
-```bash
-  kubectl create -f powermax_reverseproxy.yaml
-```
+
+    kubectl create -f powermax_reverseproxy.yaml
+
 You can query for the deployment and service created as part of the installation using the following commands:
-```bash
-  kubectl get deployment -n <namespace>
-  kubectl get svc -n <namespace>
-```
+  
+    kubectl get deployment -n <namespace>
+    kubectl get svc -n <namespace>
+
 There is a new sample file - `powermax_revproxy_standalone_with_driver.yaml` in the `samples` folder which enables installation of
 CSI PowerMax ReverseProxy in `StandAlone` mode along with the CSI PowerMax driver. This mode enables the CSI PowerMax driver to connect
 to multiple Unisphere servers for managing multiple PowerMax arrays. Please follow the same steps described above to install ReverseProxy
@@ -299,8 +302,8 @@ This feature is introduced in CSI Driver for powermax version 2.0.0.
 As part of driver installation, a ConfigMap with the name `powermax-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `powermax-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
-```bash
-  kubectl edit configmap -n powermax powermax-config-params
+```
+kubectl edit configmap -n powermax powermax-config-params
 ```  
 ###  Sample  CRD file for  powermax  
 You can find the sample CRD file [here](https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml) 
@@ -317,7 +320,7 @@ Volume Health Monitoring feature is optional and by default this feature is disa
 
 To enable this feature, set  `X_CSI_HEALTH_MONITOR_ENABLED` to `true` in the driver manifest under controller and node section. Also, install the `external-health-monitor` from `sideCars` section for controller plugin.
 To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
-```yaml  
+```   
      # Install the 'external-health-monitor' sidecar accordingly.
         # Allowed values:
         #   true: enable checking of health condition of CSI volumes
@@ -350,8 +353,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 1. To enable this feature, set  `X_CSI_TOPOLOGY_CONTROL_ENABLED` to `true` in the driver manifest under node section. 
 
-```yaml
-
+```
    # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
         # if enabled, user can create custom topology keys by editing node-topology-config configmap.
         # Allowed values:
@@ -384,7 +386,7 @@ Support for auto RDM for vSphere over FC feature is optional and by default this
 
 To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver manifest under controller and node section. 
 
-```yaml
+```
 # VMware/vSphere virtualization support
         # set X_CSI_VSPHERE_ENABLED to true, if you to enable VMware virtualized environment support via RDM
         # Allowed values:
@@ -408,7 +410,7 @@ To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver man
           value: ""
 ```
 Edit the section in the driver manifest having the sample for the following `Secret` with required values.
-```yaml
+```
 apiVersion: v1
 kind: Secret
 metadata:
