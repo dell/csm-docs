@@ -10,20 +10,20 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
 ## Prerequisites
 
 - Create a namespace `karavi`
-  ```
+  ```bash
   kubectl create namespace karavi
   ```
 - [Install cert-manager with Helm](https://cert-manager.io/docs/installation/helm/)
     1. Add the Helm repository
-        ```
+        ```bash
         helm repo add jetstack https://charts.jetstack.io
         ```
     2. Update your local Helm chart repository cache
-        ```
+        ```bash
         helm repo update
         ```
     3. Install cert-manager in the namespace `karavi`
-        ```
+        ```bash
         helm install \
           cert-manager jetstack/cert-manager \
           --namespace karavi \
@@ -31,8 +31,10 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
           --set installCRDs=true
         ```
     4. Verify installation
-        ```
+        ```bash
         $ kubectl get pod -n karavi
+        ```
+        ```
         NAME                                      READY   STATUS    RESTARTS        AGE
         cert-manager-7b45d477c8-z28sq             1/1     Running   0               2m2s
         cert-manager-cainjector-86f7f4749-mdz7c   1/1     Running   0               2m2s
@@ -42,14 +44,14 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
     - Option 1: Self-signed certificates
 		1. A Sample certificates manifest can be found at `samples/observability/selfsigned-cert.yaml`.
 		2. Create certificates
-      ```
+      ```bash
       kubectl create -f selfsigned-cert.yaml
       ```
 
     - Option 2: Custom certificates
 		1. Replace `tls.crt` and `tls.key` with actual base64-encoded certificate and private key in `samples/observability/custom-cert.yaml`.
 		2. Create certificates
-      ```
+      ```bash
       kubectl create -f custom-cert.yaml
       ```
 - Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/main/samples)

@@ -20,13 +20,15 @@ The Dell CSM Operator is not fully compliant with the OperatorHub React UI eleme
 
 ### How can I view detailed logs for the CSM Operator?
 Detailed logs of the CSM Operator can be displayed using the following command:
-```
+```bash
 kubectl logs <csm-operator-controller-podname> -n <namespace>
 ```
 
 ### My Dell CSI Driver install failed. How do I fix it?
 Describe the current state by issuing: 
-`kubectl describe csm <custom-resource-name> -n <namespace>`
+```bash
+kubectl describe csm <custom-resource-name> -n <namespace>
+```
 
 In the output refer to the status and events section. If status shows pods that are in the failed state, refer to the CSI Driver Troubleshooting guide.
 
@@ -50,7 +52,10 @@ Events
 The above event shows dellem/csi-isilon does not exist, to resolve this user can kubectl edit the csm and update to correct image.
 
 
-To get details of driver installation: `kubectl logs <dell-csm-operator-controller-manager-pod> -n dell-csm-operator`.
+To get details of driver installation: 
+```bash
+kubectl logs <dell-csm-operator-controller-manager-pod> -n dell-csm-operator
+```
 
 Typical reasons for errors:
 * Incorrect driver version 
