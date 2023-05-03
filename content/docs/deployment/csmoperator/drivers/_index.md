@@ -88,7 +88,7 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 ### Uninstall CSI Driver
 The CSI Drivers and CSM Modules can be uninstalled by deleting the Custom Resource.
 
-For e.g.
+For example
 ```bash
   kubectl delete csm/powerscale -n <driver-namespace>
 ```
