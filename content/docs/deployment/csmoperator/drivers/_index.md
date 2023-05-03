@@ -51,7 +51,7 @@ You can edit these manifests and install the driver using the `OperatorHub` UI.
 ### Verifying the driver installation
 Once the driver `Custom Resource (CR)` is created, you can verify the installation as follows
 
-*  Check if ContainerStorageModule CR is created successfully using the command below:
+*  Check if ContainerStorageModule CR is created successfully using this command:
     ```bash
    
     kubectl get csm/<name-of-custom-resource> -n <driver-namespace> -o yaml
