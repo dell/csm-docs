@@ -49,7 +49,7 @@ Refer [PowerStore Driver](../drivers/powerstore) to install the driver via Opera
 You can edit these manifests and install the driver using the `OperatorHub` UI.
 
 ### Verifying the driver installation
-Once the driver `Custom Resource (CR)` is created, you can verify the installation as mentioned below
+Once the driver `Custom Resource (CR)` is created, you can verify the installation as follows
 
 *  Check if ContainerStorageModule CR is created successfully using the command below:
     ```bash
