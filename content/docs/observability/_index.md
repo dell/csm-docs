@@ -49,7 +49,7 @@ CSM for Observability provides the following capabilities:
 | COP/OS | Supported Versions |
 |-|-|
 | Kubernetes    | 1.25, 1.26, 1.27 |
-| Red Hat OpenShift | 4.9, 4.10, 4.11 |
+| Red Hat OpenShift | 4.10, 4.11, 4.12 |
 | Rancher Kubernetes Engine | yes | 
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
