@@ -22,7 +22,7 @@ User can query for all Dell CSI drivers using the following command:
 ### Prerequisite
 
 1. Create namespace.
-   Execute `kubectl create namespace test-isilon` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-isilon'.
+   Execute `kubectl create namespace isilon` to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'isilon'.
 
 2. Create *isilon-creds* secret by creating a yaml file called secret.yaml with the following content:
      ```
@@ -78,7 +78,7 @@ User can query for all Dell CSI drivers using the following command:
          endpointPort: "8080"
       ```
 
-   Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,  
+   Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,
    `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
 
    Use the following command to replace or update the secret
@@ -87,7 +87,7 @@ User can query for all Dell CSI drivers using the following command:
 
    **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
    The driver will continue to use previous values in case of an error found in the YAML file.
-           
+
 3. Create isilon-certs-n secret.
       Please refer [this section](../../../../csidriver/installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
 
@@ -108,8 +108,8 @@ User can query for all Dell CSI drivers using the following command:
 ### Install Driver
 
 1. Follow all the [prerequisites](#prerequisite) above
-   
-2. Create a CR (Custom Resource) for PowerScale using the sample files provided 
+
+2. Create a CR (Custom Resource) for PowerScale using the sample files provided
    [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
@@ -131,14 +131,14 @@ User can query for all Dell CSI drivers using the following command:
    | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | |
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
-   | X_CSI_MODE   | Driver starting mode  | No | node | 
+   | X_CSI_MODE   | Driver starting mode  | No | node |
 
 4.  Execute the following command to create PowerScale custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
-    
-**Note** : 
+
+**Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+   2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
