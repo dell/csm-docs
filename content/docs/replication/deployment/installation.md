@@ -65,10 +65,10 @@ This script will do the following:
 After the installation ConfigMap will consist of only the `logLevel` field, to add the rest configuration to the cluster do the following:
 * Update the configuration in `deploy/config.yaml` after going through the guide [here](../configmap-secrets)
 * Run the following commands to update and complete the installation
-```shell
-    cd csm-replication
-    kubectl create configmap dell-replication-controller-config --namespace dell-replication-controller --from-file deploy/config.yaml -o yaml --dry-run | kubectl apply -f -
-```
+  ```shell
+  cd csm-replication
+  kubectl create configmap dell-replication-controller-config --namespace dell-replication-controller --from-file deploy/config.yaml -o yaml --dry-run | kubectl apply -f -
+  ```
 
 ### Install CSI driver
 The following CSI drivers support replication:
@@ -85,7 +85,8 @@ Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../pow
 CSM Replication Controller can dynamically change its logs' verbosity level.
 To set log level in runtime, you need to edit the controllers ConfigMap:
 ```shell
-    kubectl edit cm dell-replication-controller-config -n dell-replication-controller
+  
+kubectl edit cm dell-replication-controller-config -n dell-replication-controller
 ```
 And set the *CSI_LOG_LEVEL* field to the level of your choosing.
 CSM Replication controller supports following log levels:

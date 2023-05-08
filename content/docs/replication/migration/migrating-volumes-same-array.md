@@ -34,13 +34,14 @@ To trigger migration procedure, you need to patch existing PersistentVolume with
 For example, if we have PV named `test-pv` already provisioned and we want to migrate it to replicated storage class named `powermax-replication` we can run:
 
 ```shell
+
 kubectl patch pv test-pv -p '{"metadata": {"annotations":{"migration.storage.dell.com/migrate-to":"powermax-replication"}}}'
 ```
 
 Patching PV resource will trigger migration sidecar that will call `VolumeMigrate` call from the CSI driver. After migration is finished new PersistentVolume will be created in cluster with name of original PV plus `-to-<sc-name>` appended to it. 
 
 In our example, we will see this when running `kubectl get pv`: 
-```shell
+```
 NAME                                   CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                       STORAGECLASS                REASON   AGE
 test-pv                                1Gi        RWO            Retain           Bound       default/test-pvc            powermax                             5m
 test-pv-to-powermax-replication        1Gi        RWO            Retain           Available                               powermax-replication                 10s
@@ -69,16 +70,19 @@ Instruction (you can also use `repctl` for convenience):
 
 1. Find every PV for your StatefulSet and patch it with `migration.storage.dell.com/migrate-to` annotation that points to new storage class:
     ```shell
+
     kubectl patch pv <pv-name> -p '{"metadata": {"annotations":{"migration.storage.dell.com/migrate-to":"powermax-replication"}}}'
     ```
 
 2. Ensure you have a copy of StatefulSet manifest somewhere ready, we will need it later. If you don't have it, you can get it from cluster:
     ```shell
+
     kubectl get sts <sts-name> -n <ns-name> -o yaml > sts-manifest.yaml
     ```
 
 3. To not disrupt any workflows, we will need to delete StatefulSet without deleting any pods, to do so you can use the `--cascade` flag:
     ```shell
+    
     kubectl delete sts <sts-name> -n <ns-name> --cascade=orphan
     ```
 
