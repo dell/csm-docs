@@ -212,6 +212,10 @@
 &lt;td&gt;nodestage is failing with error &lt;code&gt;Error invalid IQN Target iqn.EMC.0648.SE1F&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;1. Update initiator name to full default name , ex: iqn.1993-08.org.debian:01:e9afae962192 &lt;br&gt; 2.Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed and it should be full default name.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Volume mount is failing on few OS(ex:VMware Virtual Platform) during node publish with error &lt;code&gt;wrong fs type, bad option, bad superblock&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;1. Check the multipath configuration(if enabled) 2. Edit Vm Advanced settings-&amp;gt;hardware and add the param &lt;code&gt;disk.enableUUID=true&lt;/code&gt; and reboot the node&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
