@@ -6,6 +6,11 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for authorization
 ---
 
+## Release Notes - CSM Authorization 1.7.0
+
+### New Features/Changes
+- Secrets encryption enabled by default. ([#774](https://github.com/dell/csm/issues/774))
+
 
 ## Release Notes - CSM Authorization 1.6.0
 
