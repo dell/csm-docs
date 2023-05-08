@@ -6,6 +6,7 @@ description: >
 {{% pageinfo color="primary" %}}
 The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9 (Driver Version 2.9.0). It is highly recommended that you use [CSM Operator](../../../../deployment/csmoperator) going forward.
 {{% /pageinfo %}}
+{{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9 (Driver Version 2.9.0). It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
 
 ## Installing CSI Driver for PowerMax via Operator
 
