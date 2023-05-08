@@ -258,7 +258,7 @@ To deploy the Operator, follow the instructions available &lt;a href=&#34;../../
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Create namespace.
-Execute &lt;code&gt;kubectl create namespace test-isilon&lt;/code&gt; to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &amp;rsquo;test-isilon&#39;.&lt;/p&gt;
+Execute &lt;code&gt;kubectl create namespace isilon&lt;/code&gt; to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &amp;lsquo;isilon&amp;rsquo;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create &lt;em&gt;isilon-creds&lt;/em&gt; secret by creating a yaml file called secret.yaml with the following content:&lt;/p&gt;
@@ -312,7 +312,7 @@ Execute &lt;code&gt;kubectl create namespace test-isilon&lt;/code&gt; to create 
     password: &amp;#34;password&amp;#34;
     endpoint: &amp;#34;1.2.3.4&amp;#34;
     endpointPort: &amp;#34;8080&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,&lt;br&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,
 &lt;code&gt;kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Use the following command to replace or update the secret&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
