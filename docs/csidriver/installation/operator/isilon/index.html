@@ -18,11 +18,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/operator/isilon/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-08T08:02:16-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing CSI Driver for PowerScale via Operator
 ">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
+<meta itemprop="dateModified" content="2023-05-08T08:02:16-04:00" />
 <meta itemprop="wordCount" content="1273">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.c9ff41ba677e80913ccb501ba5d49b7a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.28260d5ffc2ef4e398795a80e94c590f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.c9ff41ba677e80913ccb501ba5d49b7a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.28260d5ffc2ef4e398795a80e94c590f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -676,7 +676,7 @@
 <ol>
 <li>
 <p>Create namespace.</p>
-<p>Execute <code>kubectl create namespace test-isilon</code> to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &rsquo;test-isilon'.</p>
+<p>Execute <code>kubectl create namespace isilon</code> to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &lsquo;isilon&rsquo;.</p>
 </li>
 <li>
 <p>Create <em>isilon-creds</em> secret by using secret.yaml file format only.</p>
@@ -731,7 +731,7 @@
     password: &#34;password&#34;
     endpoint: &#34;1.2.3.4&#34;
     endpointPort: &#34;8080&#34;
-</code></pre><p>Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,<br>
+</code></pre><p>Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,
 <code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml</code></p>
 <p>Use the following command to replace or update the secret</p>
 <p><code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -</code></p>
@@ -948,7 +948,7 @@ To enable this feature, add the below block to the driver manifest before instal
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#8f5902;font-style:italic"># Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED  to &#34;true&#34;.</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#8f5902;font-style:italic"># - name: external-health-monitor</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#8f5902;font-style:italic">#   args: [&#34;--monitor-interval=60s&#34;]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Install the &#39;external-health-monitor&#39; sidecar accordingly.</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic"># Allowed values:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#   true: enable checking of health condition of CSI volumes</span><span style="color:#f8f8f8;text-decoration:underline">

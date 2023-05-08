@@ -18,11 +18,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerscale/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-12-13T21:01:32+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-08T08:02:16-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerScale via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2022-12-13T21:01:32+05:30" />
+<meta itemprop="dateModified" content="2023-05-08T08:02:16-04:00" />
 <meta itemprop="wordCount" content="841">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.c9ff41ba677e80913ccb501ba5d49b7a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.28260d5ffc2ef4e398795a80e94c590f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.c9ff41ba677e80913ccb501ba5d49b7a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.28260d5ffc2ef4e398795a80e94c590f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -671,7 +671,7 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <ol>
 <li>
 <p>Create namespace.
-Execute <code>kubectl create namespace test-isilon</code> to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &rsquo;test-isilon'.</p>
+Execute <code>kubectl create namespace isilon</code> to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &lsquo;isilon&rsquo;.</p>
 </li>
 <li>
 <p>Create <em>isilon-creds</em> secret by creating a yaml file called secret.yaml with the following content:</p>
@@ -725,7 +725,7 @@ Execute <code>kubectl create namespace test-isilon</code> to create the test-isi
     password: &#34;password&#34;
     endpoint: &#34;1.2.3.4&#34;
     endpointPort: &#34;8080&#34;
-</code></pre><p>Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,<br>
+</code></pre><p>Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,
 <code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml</code></p>
 <p>Use the following command to replace or update the secret</p>
 <p><code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -</code></p>
