@@ -191,4 +191,4 @@ Follow the instructions available in CSM Authorization for [Configuring the CSM 
 
 ### Configuring a Dell CSI Driver with CSM Authorization
 
-Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../../authorization/deployment/helm/#configuring-a-dell-csi-driver-with-csm-for-authorization).
+Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../../authorization/configuration/#configuring-a-dell-csi-driver-with-csm-for-authorization).

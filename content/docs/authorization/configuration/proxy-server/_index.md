@@ -131,7 +131,7 @@ karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --ad
 
 ### Generate a Token
 
-After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
+Once rolebindings are created, an access/refresh token pair can be created for the tenant. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
 
 ```yaml
 # RPM Deployment
@@ -153,7 +153,6 @@ metadata:
   creationTimestamp: null
   name: proxy-authz-tokens
 type: Opaque
-
 ```
 
 This secret must be applied in the driver namespace.
