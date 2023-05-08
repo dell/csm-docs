@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/powermax/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-04-10T18:41:44+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-08T19:58:14+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Troubleshooting PowerMax Driver">
-<meta itemprop="dateModified" content="2023-04-10T18:41:44+05:30" />
-<meta itemprop="wordCount" content="493">
+<meta itemprop="dateModified" content="2023-05-08T19:58:14+05:30" />
+<meta itemprop="wordCount" content="534">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Troubleshooting PowerMax Driver"/>
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.28260d5ffc2ef4e398795a80e94c590f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1a8424a17b56d12bd4286dd68b17f6c8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.28260d5ffc2ef4e398795a80e94c590f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1a8424a17b56d12bd4286dd68b17f6c8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -699,6 +699,10 @@
 <tr>
 <td>nodestage is failing with error <code>Error invalid IQN Target iqn.EMC.0648.SE1F</code></td>
 <td>1. Update initiator name to full default name , ex: iqn.1993-08.org.debian:01:e9afae962192 <br> 2.Ensure that the iSCSI initiators are available on all the nodes where the driver node plugin will be installed and it should be full default name.</td>
+</tr>
+<tr>
+<td>Volume mount is failing on few OS(ex:VMware Virtual Platform) during node publish with error <code>wrong fs type, bad option, bad superblock</code></td>
+<td>1. Check the multipath configuration(if enabled) 2. Edit Vm Advanced settings-&gt;hardware and add the param <code>disk.enableUUID=true</code> and reboot the node</td>
 </tr>
 </tbody>
 </table>
