@@ -34,6 +34,7 @@ To verify you have everything in order you can execute the following commands:
   Pods should be `READY` and `RUNNING`.
 * Check that controller config map is properly populated:
     ```shell
+    
     kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
     ```
   `data` field should be properly populated with cluster id of your choosing and, if using multi-cluster
