@@ -36,6 +36,7 @@ Run the following commands to verify that everything is installed correctly:
   Pods should be `READY` and `RUNNING`
 * Check that the controller config map is properly populated
     ```shell
+    
     kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
     ```
   `data` field should be properly populated with cluster-id of your choosing
