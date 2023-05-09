@@ -42,41 +42,33 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
       `kubectl -n vxflexos create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -`
 
-4. Create the driver configuration secret applicable to your driver installation method.
+4. Create the driver configuration secret, applicable to your driver installation method, to communicate with the CSM Authorization sidecar.
 
     **Helm**
 
-    Refer to step 4 in the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `samples/config.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `samples/config.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
 
-    - Update `endpoint` to match the endpoint in `samples/secret/karavi-authorization-config.json`. For example, iff you are using the default value, the `endpoint` should be `https://localhost:9400`.
+    - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
     - Update `skipCertificateValidation` to `true`.
 
     - The `username` and `password` can be any value since they will be ignored.
-
-    - Create the vxflexos-config secret using this command:
-
-      `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl apply -f -`
 
     **Operator**
 
-    Refer to step 2 in the [Install Driver](../../../csidriver/installation/operator/powerflex/#install-driver) section to prepare the `config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Create Secret](../../../deployment/csmoperator/drivers/powerflex/#create-secret) section to prepare the `config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
 
-    - Update `endpoint` to match the endpoint in `samples/secret/karavi-authorization-config.json`. For example, if you are using the default value, the `endpoint` should be `https://localhost:9400`.
+    - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
     - Update `skipCertificateValidation` to `true`.
 
     - The `username` and `password` can be any value since they will be ignored.
-
-    - Create the vxflexos-config secret using this command:
-
-      `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl apply -f -`
 
 5. Enable CSM Authorization in the driver installation applicable to your installation method.
 
     **Helm**
 
-    Refer to step 9 in the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in *myvalues.yaml* file to enable CSM Authorization.
+    Refer to the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `myvalues.yaml` file to enable CSM Authorization.
 
     - Update `authorization.enabled` to `true`.
     
@@ -88,7 +80,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     **Operator**
 
-    Refer to step 4 in the [Install Driver](../../../csidriver/installation/operator/powerflex/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
+    Refer to the [Install Driver](../../../deployment/csmoperator/drivers/powerflex/#install-driver) section to edit the parameters in the Custom Resource to enable CSM Authorization.
 
     Under `modules`, enable the module named `authorization`:
 
@@ -120,6 +112,6 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
               value: "true"
     ```
 
-7. Install the CSI PowerFlex driver following the appropriate documenation for your installation method.
+6. Install the CSI PowerFlex driver following the appropriate documenation for your installation method.
 
-8. (Optional) Install [dellctl](../../../references/cli) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../references/cli) for the installation steps and command list.
+7. (Optional) Install [dellctl](../../../references/cli) to perform Kubernetes administrator commands for additional capabilities (e.g., list volumes). Please refer to the [dellctl documentation page](../../../references/cli) for the installation steps and command list.
