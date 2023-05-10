@@ -52,9 +52,9 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 #### Full list of CSI Drivers and versions supported by the Dell CSI Operator
 | CSI Driver         | Version   | ConfigVersion  | Kubernetes Version   | OpenShift Version     |
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
-| CSI PowerMax       | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerMax       | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerMax       | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
+| CSI PowerMax       | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12 EUS, 4.12  |
 | CSI PowerFlex      | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerFlex      | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerFlex      | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
@@ -126,7 +126,7 @@ For installation of the supported drivers, a `CustomResource` has to be created 
 ### Pre-requisites for upstream Kubernetes Clusters
 On upstream Kubernetes clusters, make sure to install
 * VolumeSnapshot CRDs
-  * On clusters running v1.24,v1.25 & v1.26, make sure to install v1 VolumeSnapshot CRDs
+  * On clusters running v1.25,v1.26 & v1.27, make sure to install v1 VolumeSnapshot CRDs
 * External Volume Snapshot Controller with the correct version
 
 ### Pre-requisites for Red Hat OpenShift Clusters
@@ -220,8 +220,8 @@ Or
 
     {driver name}_{driver version}_ops_{OpenShift version}.yaml
 For e.g.
-* samples/powermax_v260_k8s_126.yaml* <- To install CSI PowerMax driver v2.6.0 on a Kubernetes 1.26 cluster  
-* samples/powermax_v260_ops_411.yaml* <- To install CSI PowerMax driver v2.6.0 on an OpenShift 4.11 cluster
+* samples/powermax_v270_k8s_126.yaml* <- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.26 cluster  
+* samples/powermax_v270_ops_411.yaml* <- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.11 cluster
 
 Copy the correct sample file and edit the mandatory & any optional parameters specific to your driver installation by following the instructions [here](#modify-the-driver-specification)  
 >NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available [here](#custom-resource-specification). Please make sure to read through and understand the various fields.
@@ -299,7 +299,7 @@ The below notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.6.0
+        configVersion: v2.7.0
    ```
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
@@ -437,7 +437,7 @@ spec:
 You can set the field ***replicas*** to a higher number than `1` for the latest driver versions.
 
 Note - The `image` field should point to the correct image tag for version of the driver you are installing.  
-For e.g. - If you wish to install v2.6.0 of the CSI PowerMax driver, use the image tag `dellemc/csi-powermax:v2.6.0`
+For e.g. - If you wish to install v2.7.0 of the CSI PowerMax driver, use the image tag `dellemc/csi-powermax:v2.7.0`
 
 ### SideCars
 Although the sidecars field in the driver specification is optional, it is **strongly** recommended to not modify any details related to sidecars provided (if present) in the sample manifests. The only exception to this is modifications requested by the documentation, for example, filling in blank IPs or other such system-specific data. Any modifications not specifically requested by the documentation should be only done after consulting with Dell support.
