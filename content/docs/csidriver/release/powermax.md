@@ -13,6 +13,7 @@ description: Release notes for PowerMax CSI driver
 - [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
 - [Added support for PowerMax v10.0.1 array](https://github.com/dell/csm/issues/760)
 - [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
+- [Added support for kubernetes 1.27](https://github.com/dell/csm/issues/761)
 
 ### Fixed Issues
 There are no fixed issues in this release.
