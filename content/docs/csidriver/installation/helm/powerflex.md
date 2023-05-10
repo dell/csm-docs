@@ -136,7 +136,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```yaml
 - username: "admin"
   password: "Password123"
-  systemID: "ID2"
+  systemID: "2b11bb111111bb1b"
   endpoint: "https://127.0.0.2"
   skipCertificateValidation: true 
   isDefault: true 
