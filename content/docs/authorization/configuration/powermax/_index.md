@@ -47,9 +47,9 @@ Create the karavi-authorization-config secret using this command:
 
     **Helm**
 
-    In step 3 in the [Install the Driver](../../../csidriver/installation/helm/powermax/#install-the-driver) where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax, you can leave these with the default values as they will be ignored.
+    In [Install the Driver](../../../csidriver/installation/helm/powermax/#install-the-driver) where you edit `samples/secret/secret.yaml` with the credentials of the PowerMax, you can leave these with the default values as they will be ignored.
 
-    Refer to step 8 in the [Install the Driver](../../../csidriver/installation/helm/powermax/#install-the-driver) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Install the Driver](../../../csidriver/installation/helm/powermax/#install-the-driver) section to edit the parameters in `my-powermax-settings.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
 
     - Update `global.storageArrays.endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
@@ -62,6 +62,35 @@ Create the karavi-authorization-config secret using this command:
     - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server.
     
     - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
+
+    Example:
+
+    ```
+    global:
+      storageArrays:
+        - storageArrayId: "123456789"
+          endpoint: https://localhost:9400
+      managementServers:
+        - endpoint: https://localhost:9400
+
+    authorization:
+      enabled: true
+
+      # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
+      # Default value: dellemc/csm-authorization-sidecar:v1.7.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
+
+      # proxyHost: hostname of the csm-authorization server
+      # Default value: None
+      proxyHost: csm-authorization.com
+
+      # skipCertificateValidation: certificate validation of the csm-authorization server
+      # Allowed Values:
+      #   "true" - TLS certificate verification will be skipped
+      #   "false" - TLS certificate will be verified 
+      # Default value: "true" 
+      skipCertificateValidation: true
+    ```
 
 5. Install the CSI PowerMax driver following the appropriate documenation for your installation method.
 

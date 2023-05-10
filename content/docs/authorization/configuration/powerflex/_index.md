@@ -42,33 +42,58 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
       `kubectl -n vxflexos create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -`
 
-4. Create the driver configuration secret, applicable to your driver installation method, to communicate with the CSM Authorization sidecar.
+4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with the CSM Authorization sidecar.
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `samples/config.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `samples/config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
     - Update `skipCertificateValidation` to `true`.
 
     - The `username` and `password` can be any value since they will be ignored.
+
+    Example:
+
+    ```
+    - username: "ignored"
+      password: "ignored"
+      systemID: "ID2"
+      endpoint: "https://localhost:9400"
+      skipCertificateValidation: true 
+      isDefault: true 
+      mdm: "10.0.0.3,10.0.0.4"
+    ```
+
 
     **Operator**
 
-    Refer to the [Create Secret](../../../deployment/csmoperator/drivers/powerflex/#create-secret) section to prepare the `config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
+    Refer to the [Create Secret](../../../deployment/csmoperator/drivers/powerflex/#create-secret) section to prepare `config.yaml` to configure the driver to communicate with the CSM Authorization sidecar.
 
     - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
 
     - Update `skipCertificateValidation` to `true`.
 
     - The `username` and `password` can be any value since they will be ignored.
+
+    Example:
+
+    ```
+    - username: "ignored"
+      password: "ignored"
+      systemID: "ID2"
+      endpoint: "https://localhost:9400"
+      skipCertificateValidation: true 
+      isDefault: true 
+      mdm: "10.0.0.3,10.0.0.4"
+    ```
 
 5. Enable CSM Authorization in the driver installation applicable to your installation method.
 
     **Helm**
 
-    Refer to the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `myvalues.yaml` file to enable CSM Authorization.
+    Refer to the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `myvalues.yaml` to enable CSM Authorization.
 
     - Update `authorization.enabled` to `true`.
     
@@ -77,6 +102,28 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server.
     
     - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
+
+    Example:
+
+    ```
+    authorization:
+      enabled: true
+
+      # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
+      # Default value: dellemc/csm-authorization-sidecar:v1.7.0
+      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
+
+      # proxyHost: hostname of the csm-authorization server
+      # Default value: None
+      proxyHost: csm-authorization.com
+
+      # skipCertificateValidation: certificate validation of the csm-authorization server
+      # Allowed Values:
+      #   "true" - TLS certificate verification will be skipped
+      #   "false" - TLS certificate will be verified 
+      # Default value: "true" 
+      skipCertificateValidation: true
+    ```
 
     **Operator**
 
@@ -91,6 +138,8 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     - Update the `PROXY_HOST` environment value to the hostname of the CSM Authorization Proxy Server.
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
+
+    Example: 
 
     ```
     modules:

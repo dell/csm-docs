@@ -24,7 +24,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
    | password | Password for connecting to to the backend storage array. This parameter is ignored. | No | - |
    | intendedEndpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
    | endpoint | HTTPS localhost endpoint that the authorization sidecar will listen on. This will be the array endpoint to be configured for the driver. | Yes | https://localhost:9400 |
-   | systemID | System ID of the backend storage array. | Yes | " " |
+   | systemID | Cluster name of the backend storage array. | Yes | " " |
    | skipCertificateValidation  | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
    | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
 
@@ -32,11 +32,6 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 Create the karavi-authorization-config secret using this command:
 
 `kubectl -n isilon create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
-
->__Note__:  
-> - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
-> - The *systemID* will be the *clusterName* of the array. 
-> - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
 
 3. Create the proxy-server-root-certificate secret.
 
@@ -48,7 +43,31 @@ Create the karavi-authorization-config secret using this command:
 
       `kubectl -n isilon create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -`
 
-4. Enable CSM Authorization in the driver installation applicable to your installation method.
+4. Prepare the driver configuration secret, applicable to your driver installation method, to communicate with the CSM Authorization sidecar.
+
+    **Helm**
+
+    Refer to the [Install the Driver](../../../csidriver/installation/helm/isilon/#install-the-driver) section to edit the parameters in `samples/secret/secret.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
+
+    - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
+
+    - Update `skipCertificateValidation` to `true`.
+
+    - Update `mountEndpoint` to the PowerScale OneFS API server. For example, 10.0.0.1.
+
+    - The `username` and `password` can be any value since they will be ignored.
+
+    **Operator**
+
+    Refer to the [Prerequisite](../../../deployment/csmoperator/drivers/powerscale/#prerequisite) section to prepare the `secret.yaml` file to configure the driver to communicate with the CSM Authorization sidecar.
+
+    - Update `endpoint` to match the localhost endpoint in `samples/secret/karavi-authorization-config.json`.
+
+    - Update `skipCertificateValidation` to `true`.
+
+    - The `username` and `password` can be any value since they will be ignored.
+
+5. Enable CSM Authorization in the driver installation applicable to your installation method.
     
     **Helm**
 
