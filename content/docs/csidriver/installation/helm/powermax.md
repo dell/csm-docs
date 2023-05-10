@@ -293,7 +293,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
 | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
-| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
+| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 | **migration** | [Migration](../../../../replication/migrating-volumes) is an optional feature to enable migration between storage classes | - | - |
 | enabled                  | A boolean that enables/disables migration feature. |  No      |   false   |
 | image | Image for dell-csi-migrator sidecar. | No | " " |
