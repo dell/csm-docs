@@ -393,19 +393,26 @@ To manage multiple arrays you need to create an array connection configuration t
 
 ### Creating array configuration
 
-There is a sample yaml file in the samples folder under the top-level directory called `config.yaml` with the following content:
+There is a sample yaml file in the samples folder under the top-level directory called `secret.yaml` with the following content:
  ```yaml
-  # Username for accessing PowerFlex system.	
-- username: "admin"
-  # Password for accessing PowerFlex system.	
+  # Username for accessing PowerFlex system.
+  # If authorization is enabled, username will be ignored.
+  - username: "admin"
+  # Password for accessing PowerFlex system.
+  # If authorization is enabled, password will be ignored.
   password: "password"
   # System name/ID of PowerFlex system.	
-  systemID: "ID1"
+  # Required: true
+  systemID: "1a99aa999999aa9a"
+  # Previous names used in secret of PowerFlex system.
+  allSystemNames: "pflex-1,pflex-2"
   # REST API gateway HTTPS endpoint for PowerFlex system.
+  # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
+  # the authorization sidecar will listen on
   endpoint: "https://127.0.0.1"
-  # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
-  # Allowed values: true or false
-  # Default value: true
+    # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
+    # Allowed values: true or false
+    # Default value: true
   skipCertificateValidation: true 
   # indicates if this array is the default array
   # needed for backwards compatibility
@@ -414,20 +421,25 @@ There is a sample yaml file in the samples folder under the top-level directory 
   isDefault: true
   # defines the MDM(s) that SDC should register with on start.
   # Allowed values:  a list of IP addresses or hostnames separated by comma.
-  # Default value: none 
+  # Default value: none
   mdm: "10.0.0.1,10.0.0.2"
+  # Defines all system names used to create powerflex volumes
+  # Required: false
+  # Default value: none
+  AllSystemNames: "name1,name2"
 - username: "admin"
   password: "Password123"
-  systemID: "ID2"
+  systemID: "2b11bb111111bb1b"
   endpoint: "https://127.0.0.2"
   skipCertificateValidation: true 
   mdm: "10.0.0.3,10.0.0.4"
+  AllSystemNames: "name1,name2"
  ```
 Here we specify that we want the CSI driver to manage two arrays: one with an IP `127.0.0.1` and the other with an IP `127.0.0.2`.
 
 To use this config we need to create a Kubernetes secret from it. To do so, run the following command:
 
-`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml`
+`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml`
 
 ## Dynamic Array Configuration
 
