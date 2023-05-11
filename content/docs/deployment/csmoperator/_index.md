@@ -38,7 +38,10 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 #### Operator Installation on a cluster without OLM
 
-1. Clone and checkout the required csm-operator version using `git clone -b v1.1.0 https://github.com/dell/csm-operator.git`
+1. Clone and checkout the required csm-operator version using 
+```bash
+git clone -b v1.1.0 https://github.com/dell/csm-operator.git
+```
 2. `cd csm-operator`
 3. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
 4. Run `bash scripts/install.sh` to install the operator.
@@ -47,7 +50,11 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 {{< imgproc install.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-5. Run the command `kubectl get pods -n dell-csm-operator` to validate the installation. If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
+5. Run the command to validate the installation.
+```bash
+kubectl get pods -n dell-csm-operator
+```
+ If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
 
 {{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
    
@@ -72,7 +79,10 @@ Dell CSM Operator can be upgraded in 2 ways:
 2.Using Operator Lifecycle Manager (OLM)
 
 #### Using Installation Script
-1. Clone and checkout the required csm-operator version using `git clone -b v1.1.0 https://github.com/dell/csm-operator.git`
+1. Clone and checkout the required csm-operator version using 
+```bash
+git clone -b v1.1.0 https://github.com/dell/csm-operator.git
+```
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
 
