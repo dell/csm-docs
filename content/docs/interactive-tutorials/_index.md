@@ -12,4 +12,4 @@ Our interactive tutorials provide step-by-step guidance on how to use our CSM pr
 <iframe width="1140" height="640" sandbox="allow-forms allow-modals allow-popups allow-same-origin allow-scripts" src="https://play.instruqt.com/embed/dell/tracks/csm-quickstart?token=em_hdpeUhrpwfrkPUoo" style="border: 0;"></iframe>
 
 
-> Notes: it takes about 15 minutes for the lab to be ready to use.
+> NOTE: it takes about 15 minutes for the lab to be ready to use.
