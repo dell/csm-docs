@@ -28,13 +28,13 @@ __Resolution__
 
 1. Ensure the cloned repository is in a folder independent of the root or home directory.
 
-```
+```bash
 /root/myrepos/karavi-authorization
 ```
 
 2. Enable appropriate permissions to the RPM folder (this is where the Authorization RPM is located after being built).
 
-```
+```bash
 chmod o+rwx deploy/rpm
 ```
 
@@ -42,20 +42,22 @@ chmod o+rwx deploy/rpm
 
 To retrieve logs from services on the CSM Authorization Server, run the following command (e.g proxy-server logs):
 
-```
-$ k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
+```bash
+k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
 ```
 
 For OPA related logs, run:
 
-```
-$ k3s kubectl logs deploy/proxy-server -n karavi -c opa
+```bash
+k3s kubectl logs deploy/proxy-server -n karavi -c opa
 ```
 
 ### Running "karavictl tenant" commands result in an HTTP 504 error
 This situation may occur if there are Iptables or other firewall rules preventing communication with the provided `DNS-hostname`:
+```bash
+karavictl tenant list --addr <DNS-hostname>
 ```
-$ karavictl tenant list --addr <DNS-hostname>
+```
 {
   "ErrorMsg": "rpc error: code = Unavailable desc = Gateway Timeout: HTTP status code 504; 
   transport: received the unexpected content-type \"text/plain; charset=utf-8\""
@@ -87,9 +89,9 @@ kube-system    create-pvc-44a763c7-e70f-4e32-a114-e94615041042   0/1     Error  
 __Resolution__
 
 Run the following commands to allow the PVC to be created:
-```
-$ semanage fcontext -a -t container_file_t  "/var/lib/rancher/k3s/storage(/.*)?"
-$ restorecon -R  /var/lib/rancher/k3s/storage/
+```bash
+semanage fcontext -a -t container_file_t  "/var/lib/rancher/k3s/storage(/.*)?"
+restorecon -R  /var/lib/rancher/k3s/storage/
 ```
 
 ### The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to "request denied for path" errors
@@ -115,7 +117,7 @@ __Resolution__
 
 1. Edit the `powerflex-urls` configMap in the namespace where CSM Authorization is deployed to allow all request paths by default.
 
-```
+```bash
 kubectl -n <namespace> edit configMap powerflex-urls
 ```
 
@@ -169,13 +171,13 @@ data:
 
 2. Rollout restart the CSM Authorization proxy-server so the policy change gets applied.
 
-```
+```bash
 kubectl -n <namespace> rollout restart deploy/proxy-server
 ```
 
 3. Optionally, rollout restart the CSI Driver for Dell PowerFlex to restart the driver pods. Alternatively, wait for the Kubernetes CrashLoopBackoff behavior to restart the driver.
 
-```
+```bash
 kubectl -n <driver-namespace> rollout restart deploy/vxflexos-controller
 kubectl -n <driver-namespace> rollout restart daemonSet/vxflexos-node
 ```

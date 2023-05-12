@@ -23,13 +23,13 @@ The following package needs to be installed on the Linux host:
 Use the appropriate package manager on the machine to install the package.
 
 ### Using yum on CentOS/RedHat 7:
-
+```bash
 yum install -y container-selinux
-
+```
 ### Using yum on CentOS/RedHat 8:
-
+```bash
 yum install -y container-selinux
-
+```
 ### Dark Sites
 
 For environments where `yum` will not work, obtain the supported version of container-selinux for your OS version and install it.
@@ -50,7 +50,7 @@ The easiest way to obtain the tar archive with the shell script installer is dir
 
 Alternatively, the tar archive can be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
 
-```
+```bash
 make dist build-installer rpm package
 ```
 
@@ -111,9 +111,10 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
 
   As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:
 
-  ```
-  sh install_karavi_auth.sh --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+  ```bash
 
+  sh install_karavi_auth.sh --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+  ```
   Ex.:
 
   sh install_karavi_auth.sh --traefik_web_port 30001 --traefik_websecure_port 30002
@@ -145,37 +146,49 @@ CSM for Authorization has a subset of configuration parameters that can be updat
 
 Updating configuration parameters can be done by editing the `karavi-config-secret` on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so: 
 
-`k3s kubectl -n karavi get secret/karavi-config-secret`
+```bash
+k3s kubectl -n karavi get secret/karavi-config-secret
+```
 
 To update or add parameters, you must edit the base64 encoded data in the secret. The` karavi-config-secret` data can be decoded like so:
 
-`k3s kubectl -n karavi get secret/karavi-config-secret -o yaml | grep config.yaml | head -n 1 | awk '{print $2}' | base64 -d`
+```bash
+k3s kubectl -n karavi get secret/karavi-config-secret -o yaml | grep config.yaml | head -n 1 | awk '{print $2}' | base64 -d
+```
 
 Save the output to a file or copy it to an editor to make changes. Once you are done with the changes, you must encode the data to base64. If your changes are in a file, you can encode it like so:
 
-`cat <file> | base64`
+```bash 
+cat <file> | base64
+```
 
 Copy the new, encoded data and edit the `karavi-config-secret` with the new data. Run this command to edit the secret:
 
-`k3s kubectl -n karavi edit secret/karavi-config-secret`
+```bash
+k3s kubectl -n karavi edit secret/karavi-config-secret
+```
 
 Replace the data in `config.yaml` under the `data` field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.
 
 >__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is required if certificates were not provided in `$HOME/.karavi/config.json`
 
-`karavictl generate token --tenant $TenantName --insecure --addr DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
+```bash
+
+karavictl generate token --tenant $TenantName --insecure --addr DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -
+```
 
 ## CSM for Authorization Proxy Server Dynamic Configuration Settings
 
 Some settings are not stored in the `karavi-config-secret` but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM for Authorization logging settings during runtime, run the below command on the K3s cluster, make your changes, and save the updated configmap data.
 
-```
+```bash
 k3s kubectl -n karavi edit configmap/csm-config-params
 ```
 
 This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:
 
-```
+```bash
+
 kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/<release_name>-config-params
 ```
 
