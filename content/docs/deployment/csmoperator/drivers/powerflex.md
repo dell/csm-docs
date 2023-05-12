@@ -16,7 +16,9 @@ Note that the deployment of the driver using the operator does not use any Helm 
 
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using this command:
-`kubectl get csm --all-namespaces`
+```bash
+kubectl get csm --all-namespaces
+```
 
 ### Prerequisites
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details
@@ -25,7 +27,27 @@ User can query for all Dell CSI drivers using this command:
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
 - **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file, 
-  secret.yaml. An example of secret.yaml is provided in this document below. Do not set MDM value for initContainers in the driver CR file manually.
+  config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
+- **Note:** To use an sdc-binary module from customer ftp site:
+  - Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:
+ ```bash
+  echo -n <credential>| base64 -i
+ ``` 
+   secret sample to use:
+ ```yaml
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: sdc-repo-creds
+        namespace: vxflexos
+      type: Opaque
+      data:
+        # set username to the base64 encoded username, sdc default is
+          username: <username in base64>
+        # set password to the base64 encoded password, sdc default is
+          password: <password in base64>
+```  
+  - Create secret for FTP side by using the command `kubectl create -f sdc-repo-secret.yaml`.
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note: 
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
     - **If not using sidecar**, leave the enabled field set to false.
@@ -107,12 +129,18 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       AllSystemNames: "name1,name2"
     ```
 
-    After editing the file, run this command to create a secret called `vxflexos-config`.
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml`
+    After editing the file, run this command to create a secret called `test-vxflexos-config`. If you are using a different namespace/secret name, just substitute those into the command.
+    ```bash
+    
+    kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml
+    ```
 
     Use this command to replace or update the secret:
 
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
+    ```bash
+    
+    kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -
+    ```
 
 ### Install Driver
 
@@ -135,7 +163,9 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
    | X_CSI_ALLOW_RWO_MULTI_POD_ACCESS | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
 
 4.  Execute this command to create PowerFlex custom resource:
-    ```kubectl create -f <input_sample_file.yaml>``` .
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ``` 
     This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)

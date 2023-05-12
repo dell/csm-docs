@@ -11,12 +11,14 @@ The CSM Resiliency module for supported Dell CSI Drivers can be installed via th
 
 When utilizing CSM for Resiliency module, it is crucial to note that it will solely act upon pods that have been assigned a designated label. This label must have both a key and a value that match what has been set in the resiliency module configuration. Upon startup, CSM for Resiliency generates a log message that displays the label key and value being used to monitor pods.:
 
- ```
+ ```yaml
  labelSelector: {map[podmon.dellemc.com/driver:csi-vxflexos]
  ```
  The above message indicates the key is: podmon.dellemc.com/driver and the label value is csi-vxflexos. To search for the pods that would be monitored, try this:
- ```
-[root@lglbx209 podmontest]# kubectl get pods -A -l podmon.dellemc.com/driver=csi-vxflexos
+ ```bash
+ kubectl get pods -A -l podmon.dellemc.com/driver=csi-vxflexos
+```
+```
 NAMESPACE   NAME           READY   STATUS    RESTARTS   AGE
 pmtu1       podmontest-0   1/1     Running   0          3m7s
 pmtu2       podmontest-0   1/1     Running   0          3m8s

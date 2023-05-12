@@ -16,7 +16,9 @@ Note that the deployment of the driver using the operator does not use any Helm 
 
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using the following command:
-`kubectl get csm --all-namespaces`
+```bash
+kubectl get csm --all-namespaces
+```
 
 
 ### Prerequisite
@@ -78,12 +80,18 @@ User can query for all Dell CSI drivers using the following command:
            endpointPort: "8080"
       ```
 
-   Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
+   Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,  
+   ```bash
+
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml
+   ```
 
    Use the following command to replace or update the secret
 
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
+   ```bash
+   
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -
+   ```
 
    **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
    The driver will continue to use previous values in case of an error found in the YAML file.
@@ -134,7 +142,9 @@ User can query for all Dell CSI drivers using the following command:
    | X_CSI_MODE   | Driver starting mode  | No | node |
 
 4.  Execute the following command to create PowerScale custom resource:
-    ```kubectl create -f <input_sample_file.yaml>``` .
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ``` 
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
