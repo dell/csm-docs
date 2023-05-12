@@ -221,7 +221,7 @@ Use the below command to replace or update the secret:
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
 | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
-| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
+| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 
 
 10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
