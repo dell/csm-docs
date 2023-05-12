@@ -12,21 +12,22 @@ Description: >
 
 ## Installation
 1. Create a namespace where Application Mobility will be installed.
-    ```
+    ```bash
     kubectl create ns application-mobility
     ```
 2. Edit the license Secret file (see Pre-requisites above) and set the correct namespace (ex: `namespace: application-mobility`)
 3. Create the Secret containing a license file
-    ```
+    ```bash
     kubectl apply -f license.yml
     ```
 4. Add the Dell Helm Charts repository
-    ```
+    ```bash
     helm repo add dell https://dell.github.io/helm-charts
     ```
 5. Either create a values.yml file or provide the `--set` options to the `helm install` to override default values from the [Configuration](#configuration) section.
 6. Install the helm chart
-    ```
+    ```bash
+    
     helm install application-mobility -n application-mobility dell/csm-application-mobility
     ```
 
