@@ -25,7 +25,7 @@ make build
 
 The rest of the instructions will assume that your current working directory is the csm-replication/repctl directory.
 ## Configuration Steps
-To configure replication when using multiple clusters:
+To configure Replication perform the following steps:
 
 1. On your main cluster collect the cluster admin configurations for each of the clusters. In the following example the source cluster, `cluster-1` uses configuration `/root/.kube/config-1` and the target cluster, `cluster-2` uses the configuration `/root/.config/config-2`. Use repctl to add the clusters:
     ```shell
@@ -36,7 +36,7 @@ To configure replication when using multiple clusters:
     ```shell
     ./repctl create -f ../deploy/replicationcrds.all.yaml
     ```
-3. Inject the service account's configuration into the clusters. CSM Operator needs the admin configs instead of the service account configurations to be able to properly manage the target clusters.
+3. Inject the service account's configuration into the clusters.
     ```shell
     ./repctl cluster inject
     ```
@@ -46,6 +46,6 @@ To configure replication when using multiple clusters:
     ```shell
     ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
     ```
-6. On each of the target clusters, configure the [prerequisites](../../../csmoperator/drivers/#pre-requisites-for-installation-of-the-csi-drivers) for deploying the driver via Dell CSM Operator.
+6. On the target cluster, configure the [prerequisites](../../../csmoperator/drivers/#pre-requisites-for-installation-of-the-csi-drivers) for deploying the driver via Dell CSM Operator.
 
 7. Install the CSI driver for your chosen storage platform on the source cluster according to the instructions for [installing the drivers using CSM Operator](../../../csmoperator/drivers/#installing-csi-driver-via-operator).
