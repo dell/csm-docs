@@ -35,11 +35,17 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
     After editing the file, run this command to create a secret called `karavi-config-secret`:
     
-    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml`
+    ```bash
+
+    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml
+    ```
 
     Use this command to replace or update the secret:
 
-    `kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+    ```bash
+    
+    kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -
+    ```
 
 4. Create the `karavi-storage-secret` using the file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml) to store storage system credentials.
 
@@ -162,7 +168,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
 
   Add the Zipkin values to the configMap where `ZIPKIN_ADDRESS` is the IP address or hostname of the Zipkin server.
-  ```
+  ```bash
   ZIPKIN_URI: "http://ZIPKIN_ADDRESS:9411/api/v2/spans"
   ZIPKIN_PROBABILITY: "1.0"
   ```
