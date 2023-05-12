@@ -13,6 +13,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 ## Features and capabilities
 
 ### Supported Operating Systems/Container Orchestrator Platforms
+
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
@@ -30,6 +31,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{</table>}}
 
 ### CSI Driver Capabilities
+
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
@@ -47,15 +49,19 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Topology                 | yes      | yes       | yes       | yes        | yes        |
 | Multi-array              | yes      | yes       | yes       | yes        | yes        |
 | Volume Health Monitoring | yes      | yes       | yes       | yes        | yes        |
-| Storage Capacity Tracking | no      | no        | no        | no         | yes        |
+| Storage Capacity Tracking | no      | no        | no        | yes        | yes        |
 {{</table>}}
+
 ### Supported Storage Platforms
+
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax                                                | PowerFlex        | Unity XT                   | PowerScale                         |    PowerStore    |
 |---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
 | Storage Array |PowerMax 2000/8000 <br> PowerMax 2500/8500 <br> 5978.479.479, 5978.711.711, 6079.xxx.xxx<br>Unisphere 10.0 |    3.5.x, 3.6.x, 4.0  | 5.0.x, 5.1.x, 5.2.x | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 1.0.x, 2.0.x, 2.1.x, 3.0, 3.2     |
 {{</table>}}
+
 ### Backend Storage Details
+
 {{<table "table table-striped table-bordered table-sm">}}
 | Features      | PowerMax         | PowerFlex          | Unity XT         | PowerScale       | PowerStore       |
 |---------------|:----------------:|:------------------:|:----------------:|:----------------:|:----------------:|

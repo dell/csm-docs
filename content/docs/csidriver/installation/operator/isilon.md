@@ -17,6 +17,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
 **Note**: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerScale via Operator.
 
 ### Listing installed drivers with the CSI Isilon CRD
+
 User can query for CSI-PowerScale driver using the following command:
 `kubectl get csiisilon --all-namespaces`
 
@@ -28,7 +29,8 @@ User can query for CSI-PowerScale driver using the following command:
 2. Create *isilon-creds* secret by using secret.yaml file format only.
 
    2.1   Create a yaml file called secret.yaml with the following content:
-     ```
+
+     ```yaml
       isilonClusters:
          # logical name of PowerScale Cluster
        - clusterName: "cluster1"
@@ -106,6 +108,7 @@ User can query for CSI-PowerScale driver using the following command:
       data:
          cert-0: ""
       ```
+
       Execute command: ```kubectl create -f empty-secret.yaml```
 
 4. Create a CR (Custom Resource) for PowerScale using the sample files provided
@@ -116,6 +119,7 @@ User can query for CSI-PowerScale driver using the following command:
    | --------- | ----------- | -------- |-------- |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   | storageCapacity | Enable/Disable storage capacity tracking feature | No | true |
    | X_CSI_MAX_PATH_LIMIT | Defines the maximum length of path for a volume | No | 192 |
    | ***Common parameters for node and controller*** |
    | CSI_ENDPOINT | The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |
@@ -141,16 +145,18 @@ User can query for CSI-PowerScale driver using the following command:
    | leader-election-renew-deadline   | Duration, that the acting leader will retry refreshing leadership before giving up  | No | 15s |
    | leader-election-retry-period   | Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |
 
-6.  Execute the following command to create PowerScale custom resource:
+6. Execute the following command to create PowerScale custom resource:
     ```kubectl create -f <input_sample_file.yaml>``` .
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
 **Note** :
+
    1. From CSI-PowerScale v1.6.0 and higher, Storage class and VolumeSnapshotClass will **not** be created as part of driver deployment. The user has to create Storageclass and Volume Snapshot Class.
    2. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
 
 ## Volume Health Monitoring
+
 This feature is introduced in CSI Driver for PowerScale version 2.1.0.
 
 ### Operator based installation
