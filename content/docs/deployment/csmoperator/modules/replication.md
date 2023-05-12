@@ -11,11 +11,11 @@ The CSM Replication module for supported Dell CSI Drivers can be installed via t
 To configure Replication prior to installation via CSM Operator, you need:
 
 - a source cluster which is the main cluster
-- a target cluster which will serve as the disaster recovery cluster, a single stretched cluster configuration is also supported
-- the csm-replication GitHub repository is cloned to your source cluster and the [`repctl`](../../../../replication/tools) tool is either built from source or downloaded and in your PATH
+- a target cluster which will serve as the disaster recovery cluster
+> **_NOTE:_**  If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster. The source cluster is also the target cluster.
 
 ### Cloning the GitHub Repository and Building repctl
-On your source cluster run the following to clone and build the repctl tool.
+The [csm-replication](https://github.com/dell/csm-replication.git) GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:
 
 ```
 git clone -b v1.4.0 https://github.com/dell/csm-replication.git
