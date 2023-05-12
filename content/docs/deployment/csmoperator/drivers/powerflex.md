@@ -16,7 +16,9 @@ Note that the deployment of the driver using the operator does not use any Helm 
 
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using this command:
-`kubectl get csm --all-namespaces`
+```bash
+kubectl get csm --all-namespaces
+```
 
 ### Prerequisites
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details
@@ -28,9 +30,9 @@ User can query for all Dell CSI drivers using this command:
   config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
 - **Note:** To use an sdc-binary module from customer ftp site:
   - Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:
- ```yaml
-      echo -n <credential>| base64 -i
-``` 
+ ```bash
+  echo -n <credential>| base64 -i
+ ``` 
    secret sample to use:
  ```yaml
       apiVersion: v1
@@ -126,11 +128,17 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
     ```
 
     After editing the file, run this command to create a secret called `test-vxflexos-config`. If you are using a different namespace/secret name, just substitute those into the command.
-    `kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml`
+    ```bash
+    
+    kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml
+    ```
 
     Use this command to replace or update the secret:
 
-    `kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+    ```bash
+    
+    kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -
+    ```
 
 ### Install Driver
 
@@ -153,7 +161,9 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
    | X_CSI_ALLOW_RWO_MULTI_POD_ACCESS | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
 
 4.  Execute this command to create PowerFlex custom resource:
-    ```kubectl create -f <input_sample_file.yaml>``` .
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ``` 
     This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)

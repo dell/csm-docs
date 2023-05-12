@@ -135,12 +135,14 @@ The following provisioning types are supported and have been tested:
 
  The first thing to remember about _CSM for Resiliency_ is that it only takes action on pods configured with the designated label. Both the key and the value have to match what is in the podmon helm configuration. CSM for Resiliency emits a log message at startup with the label key and value it is using to monitor pods:
 
- ```
+ ```yaml
  labelSelector: {map[podmon.dellemc.com/driver:csi-vxflexos]
  ```
  The above message indicates the key is: podmon.dellemc.com/driver and the label value is csi-vxflexos. To search for the pods that would be monitored, try this:
+ ```bash
+ kubectl get pods -A -l podmon.dellemc.com/driver=csi-vxflexos
  ```
-[root@lglbx209 podmontest]# kubectl get pods -A -l podmon.dellemc.com/driver=csi-vxflexos
+```
 NAMESPACE   NAME           READY   STATUS    RESTARTS   AGE
 pmtu1       podmontest-0   1/1     Running   0          3m7s
 pmtu2       podmontest-0   1/1     Running   0          3m8s
@@ -148,8 +150,10 @@ pmtu3       podmontest-0   1/1     Running   0          3m6s
  ```
 
  If CSM for Resiliency detects a problem with a pod caused by a node or other failure that it can initiate remediation for, it will add an event to that pod's events:
- ```
+ ```bash
  kubectl get events -n pmtu1
+ ```
+ ```
  ...
  61s         Warning   NodeFailure              pod/podmontest-0              podmon cleaning pod [7520ba2a-cec5-4dff-8537-20c9bdafbe26 node.example.com] with force delete
 ...
@@ -158,7 +162,7 @@ pmtu3       podmontest-0   1/1     Running   0          3m6s
  CSM for Resiliency may also generate events if it is unable to clean up a pod for some reason. For example, it may not clean up a pod because the pod is still doing I/O to the array.
 
  Similarly, the label selector for csi-powerscale and csi-unity would be as shown respectively.
- ```
+ ```yaml
  labelSelector: {map[podmon.dellemc.com/driver:csi-isilon]
  labelSelector: {map[podmon.dellemc.com/driver:csi-unity]
  ```
@@ -186,7 +190,7 @@ Normally CSM for Resiliency should be able to move pods that have been impacted 
 
     If some of the monitored pods are still executing, node-podmon will emit the following log message at the end of a cleanup cycle (and retry the cleanup after a delay):
 
-    ```
+    ```yaml
     pods skipped for cleanup because still present: <pod-list>
     ```
     If this happens, __DO NOT__ manually remove the CSM for Resiliency node taint. Doing so could possibly cause data corruption if volumes were not cleaned up, and a pod using those volumes was subsequently scheduled to that node.

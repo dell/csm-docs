@@ -16,7 +16,9 @@ Note that the deployment of the driver using the operator does not use any Helm 
 
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using the following command:
-`kubectl get csm --all-namespaces`
+```bash
+kubectl get csm --all-namespaces
+```
 
 
 ### Prerequisite
@@ -57,6 +59,7 @@ User can query for all Dell CSI drivers using the following command:
 
    Combine both files and create Kubernetes secret by running the following command:
    ```bash
+
    sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
    ```
 
@@ -84,8 +87,16 @@ User can query for all Dell CSI drivers using the following command:
 | ***Node parameters*** |
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
 
-4.  Execute the following command to create PowerStore custom resource:`kubectl create -f <input_sample_file.yaml>`. This command will deploy the CSI PowerStore driver in the namespace specified in the input YAML file
-      - Next, the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n <driver-namespace>`
+4.  Execute the following command to create PowerStore custom resource:
+   ```bash
+   kubectl create -f <input_sample_file.yaml>
+   ```
+   This command will deploy the CSI PowerStore driver in the namespace specified in the input YAML file.
+      
+   - Next, the driver should be installed, you can check the condition of driver pods by running 
+      ```bash
+      kubectl get all -n <driver-namespace>
+      ```
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
     
