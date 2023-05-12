@@ -8,11 +8,11 @@ description: >
 ## Configuring the CSM for Authorization Proxy Server
 
 The storage administrator must first configure Authorization with the following via `karavictl`:
-- Generate admin token
+- Karavictl admin token
 - Storage systems
 - Tenants
 - Roles
-- Bind roles to tenants
+- Role bindings
 
 >__Note__:
 > - The address of the Authorization proxy-server must be specified when executing `karavictl`. For the `RPM deployment`, the address is the DNS-hostname of the machine where the RPM
@@ -20,7 +20,7 @@ is installed. For the `Helm/Operator deployment`, the address is the Ingress hos
 
 ### Configuring Admin Token
 
-Generate an admin token that will be required to run `karavictl` commands except generating `admin token` and `cluster-info`.
+An admin token is required for executing `karavictl` commands, with the exception of `admin token` and `cluster-info`. For example, to generate an admin token and redirect the output to a file:
 
 ```
 $ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
@@ -44,6 +44,8 @@ $ cat admintoken.yaml
 
 ```
 
+>__Note__:
+> - The `karavictl admin token` command is an exception where you do not need to specify the address of the proxy-server.
 
 ### Configuring Storage
 
@@ -129,7 +131,7 @@ karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --ad
 
 ### Generate a Token
 
-After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
+Once rolebindings are created, an access/refresh token pair can be created for the tenant. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
 
 ```yaml
 # RPM Deployment
@@ -151,7 +153,6 @@ metadata:
   creationTimestamp: null
   name: proxy-authz-tokens
 type: Opaque
-
 ```
 
 This secret must be applied in the driver namespace.

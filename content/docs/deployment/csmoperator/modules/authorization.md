@@ -213,8 +213,8 @@ Follow the instructions available in CSM Authorization for [Installing karavictl
 
 ### Configuring the CSM Authorization Proxy Server
 
-Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/deployment/helm/#configuring-the-csm-authorization-proxy-server).
+Follow the instructions available in CSM Authorization for [Configuring the CSM Authorization Proxy Server](../../../../authorization/configuration/proxy-server/#configuring-the-csm-authorization-proxy-server).
 
 ### Configuring a Dell CSI Driver with CSM Authorization
 
-Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../../authorization/deployment/helm/#configuring-a-dell-csi-driver-with-csm-for-authorization).
+Follow the instructions available in CSM Authorization for [Configuring a Dell CSI Driver with CSM for Authorization](../../../../authorization/configuration/#configuring-a-dell-csi-driver-with-csm-for-authorization).
