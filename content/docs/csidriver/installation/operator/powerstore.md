@@ -39,9 +39,17 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
         nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
                                                   # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
    ```
-   Change the parameters with relevant values for your PowerStore array. 
-
+   Change the parameters with relevant values for your PowerStore array.  
    Add more blocks similar to above for each PowerStore array if necessary.
+   ### User Privileges
+   The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have enough privileges to perform the actions. The suggested user role are as follows:
+
+   | User Role             |
+   | --------------------- |
+   | Administrator         |
+   | Storage Administrator |
+   | Storage Operator      |
+
 3. Create Kubernetes secret: 
 
    Create a file called `secret.yaml` in same folder as `config.yaml` with following content
