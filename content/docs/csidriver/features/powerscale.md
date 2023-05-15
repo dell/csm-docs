@@ -568,3 +568,17 @@ When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode rest
 
 To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
 
+## Storage Capacity Tracking
+
+CSI PowerScale driver version 2.7.0 and above supports Storage Capacity Tracking.
+
+This feature helps the scheduler to make more informed choices about where to start pods which depends on unbound volumes with late binding (aka "WaitForFirstConsumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay Pending. This means they are not scheduled.
+
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
+
+The attribute `storageCapacity.enabled` in `my-powerscale-settings.yaml` can be used to enable/disable the feature during driver installation.
+To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute.
+
+**Note:**
+>This feature requires Kubernetes v1.24 and above and will be automatically disabled in lower versions of Kubernetes.
