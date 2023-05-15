@@ -151,7 +151,7 @@ Example: helm install powerstore dell/container-storage-modules -f values.yaml
       <description>
         
         
-        &lt;p&gt;The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
+        &lt;p&gt;The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
 &lt;h2 id=&#34;supported-platforms&#34;&gt;Supported Platforms&lt;/h2&gt;
 &lt;p&gt;Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.&lt;/p&gt;
 &lt;table&gt;
@@ -306,7 +306,7 @@ Example: helm install powerstore dell/container-storage-modules -f values.yaml
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for Upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h3&gt;
-&lt;p&gt;As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.&lt;br&gt;
+&lt;p&gt;As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 &lt;code&gt;containerstoragemodule&lt;/code&gt; CRD is installed in API Group &lt;code&gt;storage.dell.com&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Drivers and modules can be installed by creating a &lt;code&gt;customResource&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;custom-resource-specification&#34;&gt;Custom Resource Specification&lt;/h3&gt;

@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/replication/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-02T22:27:16+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-15T06:22:16-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Replication">
 <meta itemprop="description" content="Pre-requisite for Installing Replication via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2023-03-02T22:27:16+05:30" />
-<meta itemprop="wordCount" content="185">
+<meta itemprop="dateModified" content="2023-05-15T06:22:16-04:00" />
+<meta itemprop="wordCount" content="327">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Replication"/>
 <meta name="twitter:description" content="Pre-requisite for Installing Replication via Dell CSM Operator
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2d2e0f6de3389796f7a2ed1f7c2f1d1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.add88597ea4140bf5ee98702a41adaa3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2d2e0f6de3389796f7a2ed1f7c2f1d1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.add88597ea4140bf5ee98702a41adaa3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -597,6 +597,17 @@
 
 
 
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li><a href="#cloning-the-github-repository-and-building-repctl">Cloning the GitHub Repository and Building repctl</a></li>
+      </ul>
+    </li>
+    <li><a href="#configuration-steps">Configuration Steps</a></li>
+  </ul>
+</nav>
+
 
 
 
@@ -649,21 +660,54 @@
 	<h1>Replication</h1>
 
 	       
-	<p>The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Replication sidecar and the complemental CSM Replication controller manager.</p>
-<h2 id="prerequisite">Prerequisite</h2>
-<p>To use Replication, you need at least two clusters:</p>
+	<p>The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy the CSM Replication sidecar and the CSM Replication Controller Manager.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To configure Replication prior to installation via CSM Operator, you need:</p>
 <ul>
 <li>a source cluster which is the main cluster</li>
-<li>one or more target clusters which will serve as diaster recovery clusters for the main cluster</li>
+<li>a target cluster which will serve as the disaster recovery cluster</li>
 </ul>
-<p>To configure all the clusters, follow the steps below:</p>
+<blockquote>
+<p><strong><em>NOTE:</em></strong>  If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster. The source cluster is also the target cluster.</p>
+</blockquote>
+<h3 id="cloning-the-github-repository-and-building-repctl">Cloning the GitHub Repository and Building repctl</h3>
+<p>The <a href="https://github.com/dell/csm-replication.git">csm-replication</a> GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:</p>
+<pre tabindex="0"><code>git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+cd csm-replication/repctl
+make build
+</code></pre><p>The rest of the instructions will assume that your current working directory is the csm-replication/repctl directory.</p>
+<h2 id="configuration-steps">Configuration Steps</h2>
+<p>To configure Replication perform the following steps:</p>
 <ol>
-<li>On your main cluster, follow the instructions available in CSM Replication for <a href="../../../../replication/deployment/install-repctl">Installation using repctl</a>, with the exception of step 4. When you reach step 4, you MUST use the command below to automatically package all clusters <code>.kube</code> config as a secret:</li>
+<li>On your main cluster collect the cluster admin configurations for each of the clusters. In the following example the source cluster, <code>cluster-1</code> uses configuration <code>/root/.kube/config-1</code> and the target cluster, <code>cluster-2</code> uses the configuration <code>/root/.config/config-2</code>. Use repctl to add the clusters:
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ./repctl cluster add -f <span style="color:#4e9a06">&#34;/root/.kube/config-1&#34;</span>,<span style="color:#4e9a06">&#34;/root/.kube/config-2&#34;</span> -n <span style="color:#4e9a06">&#34;cluster-1&#34;</span>,<span style="color:#4e9a06">&#34;cluster-2&#34;</span>
+</span></span></code></pre></div></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>  ./repctl cluster inject 
-</span></span></code></pre></div><p>CSM Operator needs this admin configs instead of the service accounts’ configs  to be able to properly manage the target clusters. The default service account that&rsquo;ll be used is the CSM Operator service account.</p>
+<blockquote>
+<p><strong><em>NOTE:</em></strong>  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.</p>
+</blockquote>
 <ol start="2">
-<li>On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following <a href="../../drivers/powerscale/#prerequisite">prerequisites for deploying PowerScale via Dell CSM Operator</a></li>
+<li>
+<p>Install the replication controller CRDs:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl create -f ../deploy/replicationcrds.all.yaml
+</span></span></code></pre></div></li>
+<li>
+<p>Inject the service account&rsquo;s configuration into the clusters.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl cluster inject
+</span></span></code></pre></div></li>
+<li>
+<p>Customize the <code>examples/&lt;storage&gt;_example_values.yaml</code> sample config. Set the values for sourceClusterID and targetClusterID to the same names used in step 1. For a stretched cluster set both fields to <code>self</code>:</p>
+</li>
+<li>
+<p>Create the replication storage classes using the modified configuration from step 4:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl create sc --from-config ./examples/&lt;storage&gt;_example_values.yaml
+</span></span></code></pre></div></li>
+<li>
+<p>On the target cluster, configure the <a href="../../../csmoperator/drivers/#pre-requisites-for-installation-of-the-csi-drivers">prerequisites</a> for deploying the driver via Dell CSM Operator.</p>
+</li>
+<li>
+<p>Install the CSI driver for your chosen storage platform on the source cluster according to the instructions for <a href="../../../csmoperator/drivers/#installing-csi-driver-via-operator">installing the drivers using CSM Operator</a>.</p>
+</li>
 </ol>
 
 	
