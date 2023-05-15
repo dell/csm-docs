@@ -194,7 +194,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     
     Add more blocks similar to above for each PowerStore array if necessary. 
     ### User Privileges
-    The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have enough privileges to perform the actions. The suggested user role are as follows:
+    The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct privileges to perform the actions. The suggested user role are as follows:
 
     | User Role             |
     | --------------------- |
