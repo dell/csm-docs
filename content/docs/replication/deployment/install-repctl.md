@@ -1,11 +1,12 @@
 ---
 title: Installation using repctl
 linktitle: Installation using repctl
-weight: 4 
+weight: 4
 description: Installation of CSM for Replication using repctl
 ---
 
 ## Install Replication Walkthrough
+> **_NOTE:_**  These steps should not be used when installing using Dell CSM Operator.
 
 You can start using Container Storage Modules (CSM) for Replication with help from `repctl` using these simple steps:
 
@@ -14,6 +15,7 @@ You can start using Container Storage Modules (CSM) for Replication with help fr
       ```shell
       ./repctl cluster add -f "/root/.kube/config-1","/root/.kube/config-2" -n "cluster-1","cluster-2"
       ```
+   > **_NOTE:_**  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.
 3. Install replication controller and CRDs:
       ```shell
       ./repctl create -f ../deploy/replicationcrds.all.yaml
@@ -28,7 +30,7 @@ You can start using Container Storage Modules (CSM) for Replication with help fr
           ```
     2. (Less secure) Inject admin configs into clusters:
           ```shell
-          ./repctl cluster inject 
+          ./repctl cluster inject
           ```
 5. Modify `examples/<storage>_example_values.yaml` config with replication
    information:
@@ -44,4 +46,4 @@ You can start using Container Storage Modules (CSM) for Replication with help fr
       ```
 
 
-> Note: all `repctl` output is saved alongside the `repctl` binary in a `repctl.log` file and can be attached to any installation troubleshooting requests. 
+> Note: all `repctl` output is saved in a `repctl.log` file in the current working directory and can be attached to any installation troubleshooting requests.

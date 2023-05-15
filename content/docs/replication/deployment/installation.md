@@ -20,7 +20,7 @@ clusters which will be required during or after the installation.
 You can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
 Alternately, if you want to build the binary yourself, you can follow these steps:
 ```shell
-git clone github.com/dell/csm-replication
+git clone -b v1.4.0 https://github.com/dell/csm-replication.git
 cd csm-replication/repctl
 make build
 ```
@@ -51,10 +51,10 @@ bash scripts/install.sh --values ./myvalues.yaml
 > The feature can be enabled by modifying `values.yaml`.
 >``` hostAliases:
 > - ip: "10.10.10.10"
->   hostnames: 
+>   hostnames:
 >     - "foo.bar"
 > - ip: "10.10.10.11"
->   hostnames: 
+>   hostnames:
 >     - "foo.baz"
 
 This script will do the following:
