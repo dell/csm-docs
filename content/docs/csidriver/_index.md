@@ -47,7 +47,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Topology                 | yes      | yes       | yes       | yes        | yes        |
 | Multi-array              | yes      | yes       | yes       | yes        | yes        |
 | Volume Health Monitoring | yes      | yes       | yes       | yes        | yes        |
-| Storage Capacity Tracking | no      | no        | no        | no         | yes        |
+| Storage Capacity Tracking | no      | no        | no        | yes        | yes        |
 {{</table>}}
 ### Supported Storage Platforms
 {{<table "table table-striped table-bordered table-sm">}}

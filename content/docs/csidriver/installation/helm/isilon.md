@@ -145,6 +145,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | kubeletConfigDir | Specify kubelet config dir path | Yes | "/var/lib/kubelet" |
    | enableCustomTopology | Indicates PowerScale FQDN/IP which will be fetched from node label and the same will be used by controller and node pod to establish a connection to Array. This requires enableCustomTopology to be enabled. | No | false |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
+   | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
    | podmonAPIPort | Defines the port which csi-driver will use within the cluster to support podmon | No | 8083 |
    | maxPathLen | Defines the maximum length of path for a volume | No | 192 |
    | ***controller*** | Configure controller pod specific parameters | | |
@@ -314,4 +316,3 @@ level=error clusterName=powerscale runid=10 msg="mount failed: exit status 32
 mounting arguments: -t nfs -o rw XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d /var/lib/kubelet/pods/9f72096a-a7dc-4517-906c-20697f9d7375/volumes/kubernetes.io~csi/k8s-ac7b91962d/mount
 output: mount.nfs: access denied by server while mounting XX.XX.XX.XX:/ifs/data/csi/k8s-ac7b91962d
 ```
-
