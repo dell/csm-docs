@@ -468,6 +468,95 @@ Let us assume the user creates a PVC with 3 Gi of storage and 'SmartQuotas' have
     - Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)
     - The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.
 
+If SmartQuota feature is enabled, user can also set other quota parameters such as Soft Limit , Advisory Limit and 
+soft grace period using storage class yaml file or pvc yaml file.
+
+**Storage Class Example with Quota Limit Parameters:**
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: isilon
+provisioner: csi-isilon.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  # The name of the access zone a volume can be created in
+  # Optional: true
+  # Default value: default value specified in values.yaml
+  # Examples: System, zone1
+  AccessZone: System
+
+  # The base path for the volumes to be created on PowerScale cluster.
+  # Ensure that this path exists on PowerScale cluster.
+  # Allowed values: unix absolute path
+  # Optional: true
+  # Default value: value specified in values.yaml for isiPath
+  # Examples: /ifs/data/csi, /ifs/engineering
+  IsiPath: /ifs/data/csi
+
+  #Parameter to set Advisory Limit to quota
+  #Optional: true
+  #Default value: 0 comes in picture if value not specified in sc yaml
+  AdvisoryLimit: "50"
+
+  #Parameter to set soft limit to quota
+  #Optional: true
+  #Default value: 0 comes in picture if value not specified in sc yaml
+  SoftLimit: "80"
+  #Parameter which must be mentioned along with Soft Limit
+  #Soft Limit can be exceeded until the grace period
+  #Optional: true
+  #Default value: 0 comes in picture if value not specified in sc yaml
+  SoftGracePrd: "86400"
+
+  # The permissions for isi volume directory path
+  # This value overrides the isiVolumePathPermissions attribute of corresponding cluster config in secret, if present
+  # Allowed values: valid octal mode number
+  # Default value: "0777"
+  # Examples: "0777", "777", "0755"
+  #IsiVolumePathPermissions: "0777"
+
+  # AccessZone groupnet service IP. Update AzServiceIP if different than endpoint.
+  # Optional: true
+  # Default value: endpoint of the cluster ClusterName
+  #AzServiceIP : 192.168.2.1
+
+  # When a PVC is being created, this parameter determines, when a node mounts the PVC,
+  # whether to add the k8s node to the "Root clients" field or "Clients" field of the NFS export
+  # Allowed values:
+  #   "true": adds k8s node to the "Root clients" field of the NFS export
+  #   "false": adds k8s node to the "Clients" field of the NFS export
+  # Optional: true
+  # Default value: "false"
+  RootClientEnabled: "false"
+
+```
+**PVC Example with Quota Limit Parameters:**
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pvc
+  labels:
+    pvcSoftLimit: "10"
+    pvcAdvisoryLimit: "50"
+    pvcSoftGracePrd : "85400"
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: isilon
+
+```
+Note 
+- If quota limits values are specified in both storage class yaml and PVC yaml , then values mentioned in PVC yaml will get precedence.
+- If few parameters are specified in storage class yaml and few in PVC yaml , then both will be combined and applied while quota creation
+  For Example: If advisory limit = 30 is mentioned in storage class yaml and soft limit = 50  and soft grace period = 86400 are mentioned in PVC yaml .
+  Then values set in quota will be advisory limit = 30, soft limit = 50 and soft grace period =86400. 
 
 ## Dynamic Logging Configuration
 
