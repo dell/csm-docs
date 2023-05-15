@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/replication/deployment/install-repctl/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-15T06:22:16-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Installation using repctl">
 <meta itemprop="description" content="Installation of CSM for Replication using repctl">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
-<meta itemprop="wordCount" content="184">
+<meta itemprop="dateModified" content="2023-05-15T06:22:16-04:00" />
+<meta itemprop="wordCount" content="215">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Installation using repctl"/>
 <meta name="twitter:description" content="Installation of CSM for Replication using repctl"/>
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2d2e0f6de3389796f7a2ed1f7c2f1d1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.add88597ea4140bf5ee98702a41adaa3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.b2d2e0f6de3389796f7a2ed1f7c2f1d1.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.add88597ea4140bf5ee98702a41adaa3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -643,12 +643,18 @@
 
 	       
 	<h2 id="install-replication-walkthrough">Install Replication Walkthrough</h2>
+<blockquote>
+<p><strong><em>NOTE:</em></strong>  These steps should not be used when installing using Dell CSM Operator.</p>
+</blockquote>
 <p>You can start using Container Storage Modules (CSM) for Replication with help from <code>repctl</code> using these simple steps:</p>
 <ol>
 <li>Prepare admin Kubernetes clusters configs</li>
 <li>Add admin configs as clusters to <code>repctl</code>:
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl cluster add -f <span style="color:#4e9a06">&#34;/root/.kube/config-1&#34;</span>,<span style="color:#4e9a06">&#34;/root/.kube/config-2&#34;</span> -n <span style="color:#4e9a06">&#34;cluster-1&#34;</span>,<span style="color:#4e9a06">&#34;cluster-2&#34;</span>
-</span></span></code></pre></div></li>
+</span></span></code></pre></div><blockquote>
+<p><strong><em>NOTE:</em></strong>  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.</p>
+</blockquote>
+</li>
 <li>Install replication controller and CRDs:
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl create -f ../deploy/replicationcrds.all.yaml
 </span></span><span style="display:flex;"><span>./repctl create -f ../deploy/controller.yaml
@@ -663,7 +669,7 @@ The message should disappear once you inject the kubeconfigs (next step).</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl cluster inject --use-sa
 </span></span></code></pre></div></li>
 <li>(Less secure) Inject admin configs into clusters:
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl cluster inject 
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./repctl cluster inject
 </span></span></code></pre></div></li>
 </ol>
 </li>
@@ -682,7 +688,7 @@ information:
 </span></span></code></pre></div></li>
 </ol>
 <blockquote>
-<p>Note: all <code>repctl</code> output is saved alongside the <code>repctl</code> binary in a <code>repctl.log</code> file and can be attached to any installation troubleshooting requests.</p>
+<p>Note: all <code>repctl</code> output is saved in a <code>repctl.log</code> file in the current working directory and can be attached to any installation troubleshooting requests.</p>
 </blockquote>
 
 	
