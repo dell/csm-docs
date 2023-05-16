@@ -193,6 +193,15 @@ CRDs should be configured during replication prepare stage with repctl as descri
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
+    ### User Privileges
+    The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct privileges to perform the actions. The suggested user role are as follows:
+
+    | User Role             |
+    | --------------------- |
+    | Administrator         |
+    | Storage Administrator |
+    | Storage Operator      |
+
 4. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
    
