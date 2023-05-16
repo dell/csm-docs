@@ -393,7 +393,7 @@ To manage multiple arrays you need to create an array connection configuration t
 
 ### Creating array configuration
 
-There is a sample yaml file in the samples folder under the top-level directory called `secret.yaml` with the following content:
+There is a sample yaml file in the samples folder called `secret.yaml` with the following content:
  ```yaml
   # Username for accessing PowerFlex system.
   # If authorization is enabled, username will be ignored.
@@ -401,10 +401,12 @@ There is a sample yaml file in the samples folder under the top-level directory 
   # Password for accessing PowerFlex system.
   # If authorization is enabled, password will be ignored.
   password: "password"
-  # System name/ID of PowerFlex system.	
+  # PowerFlex system name or ID.	
   # Required: true
   systemID: "1a99aa999999aa9a"
-  # Previous names used in secret of PowerFlex system.
+  # Required: false
+  # Previous names used in secret of PowerFlex system. Only needed if PowerFlex System Name has been changed by user 
+  # and old resources are still based on the old name. 
   allSystemNames: "pflex-1,pflex-2"
   # REST API gateway HTTPS endpoint for PowerFlex system.
   # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
@@ -435,6 +437,8 @@ There is a sample yaml file in the samples folder under the top-level directory 
   mdm: "10.0.0.3,10.0.0.4"
   AllSystemNames: "name1,name2"
  ```
+The systemID can be found by displaying system level information, which is outlined [here](https://infohub.delltechnologies.com/l/powerflex-rest-api-introduction/system-information)
+
 Here we specify that we want the CSI driver to manage two arrays: one with an IP `127.0.0.1` and the other with an IP `127.0.0.2`.
 
 To use this config we need to create a Kubernetes secret from it. To do so, run the following command:

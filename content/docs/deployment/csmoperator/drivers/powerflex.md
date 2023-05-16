@@ -25,7 +25,7 @@ User can query for all Dell CSI drivers using this command:
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
 - **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file, 
-  secret.yaml. An example of secret.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
+  secret.yaml. An example of secret.yaml is provided in this document below. Do not set MDM value for initContainers in the driver CR file manually.
 - **Note:** To use an sdc-binary module from customer ftp site:
   - Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:
  ```yaml
@@ -93,7 +93,9 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       # System name/ID of PowerFlex system.	
       # Required: true
       systemID: "1a99aa999999aa9a"
-      # Previous names used in secret of PowerFlex system.
+      # Required: false
+      # Previous names used in secret of PowerFlex system. Only needed if PowerFlex System Name has been changed by user 
+      # and old resources are still based on the old name. 
       allSystemNames: "pflex-1,pflex-2"
       # REST API gateway HTTPS endpoint for PowerFlex system.
       # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
