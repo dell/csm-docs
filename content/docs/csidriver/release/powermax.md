@@ -14,6 +14,7 @@ description: Release notes for PowerMax CSI driver
 - [Added support for PowerMax v10.0.1 array](https://github.com/dell/csm/issues/760)
 - [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
 - [Added support for kubernetes 1.27](https://github.com/dell/csm/issues/761)
+- [Added support for read only access mode for raw block volumes](https://github.com/dell/csm/issues/792)
 
 ### Fixed Issues
 There are no fixed issues in this release.
