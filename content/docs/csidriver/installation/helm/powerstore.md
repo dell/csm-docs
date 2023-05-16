@@ -172,11 +172,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     | Storage Administrator |
     | Storage Operator      |
 
-4. Create the secret by running 
-   ```bash
-  
-   kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml
-   ```
+4. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
    
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
