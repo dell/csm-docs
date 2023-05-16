@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/isilon/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-04-19T14:14:50-05:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-16T20:31:19+05:30" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing CSI Driver for PowerScale via Helm
 ">
-<meta itemprop="dateModified" content="2023-04-19T14:14:50-05:00" />
-<meta itemprop="wordCount" content="3358">
+<meta itemprop="dateModified" content="2023-05-16T20:31:19+05:30" />
+<meta itemprop="wordCount" content="3172">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerScale via Helm
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.add88597ea4140bf5ee98702a41adaa3.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.8210d611754e962ebf1feb6edfa8e2a1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.add88597ea4140bf5ee98702a41adaa3.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.8210d611754e962ebf1feb6edfa8e2a1.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -712,39 +712,7 @@
 <p><strong>Steps</strong></p>
 <p>Run the <code>curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash</code> command to install Helm 3.0.</p>
 <h3 id="optional-volume-snapshot-requirements">(Optional) Volume Snapshot Requirements</h3>
-<p>Applicable only if you decided to enable snapshot feature in <code>values.yaml</code></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">controller</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">snapshot</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><h4 id="volume-snapshot-crds">Volume Snapshot CRD&rsquo;s</h4>
-<p>The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:<a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd">v6.2.1</a></p>
-<h4 id="volume-snapshot-controller">Volume Snapshot Controller</h4>
-<p>The CSI external-snapshotter sidecar is split into two controllers:</p>
-<ul>
-<li>A common snapshot controller</li>
-<li>A CSI external-snapshotter sidecar</li>
-</ul>
-<p>The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using <code>kubectl</code> and the manifests are available here: <a href="https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/deploy/kubernetes/snapshot-controller">v6.2.1</a></p>
-<p><em>NOTE:</em></p>
-<ul>
-<li>The manifests available on GitHub install the snapshotter image:
-<ul>
-<li><a href="https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;tab=tags">quay.io/k8scsi/csi-snapshotter:v4.0.x</a></li>
-</ul>
-</li>
-<li>The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.</li>
-</ul>
-<h4 id="installation-example">Installation example</h4>
-<p>You can install CRDs and the default snapshot controller by running these commands:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/kubernetes-csi/external-snapshotter/
-</span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> ./external-snapshotter
-</span></span><span style="display:flex;"><span>git checkout release-&lt;your-version&gt;
-</span></span><span style="display:flex;"><span>kubectl kustomize client/config/crd <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
-</span></span><span style="display:flex;"><span>kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller <span style="color:#000;font-weight:bold">|</span> kubectl create -f -
-</span></span></code></pre></div><p><em>NOTE:</em></p>
-<ul>
-<li>It is recommended to use 6.2.x version of snapshotter/snapshot-controller.</li>
-</ul>
+<p>For detailed snapshot setup procedure, <a href="../../../../snapshots/#optional-volume-snapshot-requirements">click here.</a></p>
 <h3 id="optional-volume-health-monitoring">(Optional) Volume Health Monitoring</h3>
 <p>Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.</p>
 <p>If enabled capacity metrics (used &amp; free capacity, used &amp; free inodes) for PowerScale PV will be expose in Kubernetes metrics API.</p>

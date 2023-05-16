@@ -79,40 +79,7 @@ Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hu
 &lt;li&gt;To add more MDM_IP for multi-array support, run &lt;code&gt;/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;optional-volume-snapshot-requirements&#34;&gt;(Optional) Volume Snapshot Requirements&lt;/h3&gt;
-&lt;p&gt;Applicable only if you decided to enable snapshot feature in &lt;code&gt;values.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd&#34;&gt;v6.1.x&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
-&lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A common snapshot controller&lt;/li&gt;
-&lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller&#34;&gt;v6.1.x&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The manifests available on GitHub install the snapshotter image:
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v4.0.x&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
-&lt;p&gt;You can install CRDs and default snapshot controller by running following commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git checkout release-&amp;lt;your-version&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;When using Kubernetes it is recommended to use 6.1.x version of snapshotter/snapshot-controller.&lt;/li&gt;
-&lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;install-the-driver&#34;&gt;Install the Driver&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -758,36 +725,7 @@ These values can be obtained using base64 encoding as described in the following
 &lt;li&gt;Start the PowerPath service using &lt;code&gt;systemctl start PowerPath&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;optional-volume-snapshot-requirements&#34;&gt;(Optional) Volume Snapshot Requirements&lt;/h3&gt;
-&lt;p&gt;Applicable only if you decided to enable snapshot feature in &lt;code&gt;values.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.0/client/config/crd&#34;&gt;v6.2.x&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
-&lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers to support Volume snapshots.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A common snapshot controller&lt;/li&gt;
-&lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.0/deploy/kubernetes/snapshot-controller&#34;&gt;v6.2.x&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The manifests available on GitHub install the snapshotter image:
-&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v4.0.x&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
-&lt;p&gt;You can install CRDs and the default snapshot controller by running the following commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git checkout release-&amp;lt;your-version&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It is recommended to use 6.1.x version of snapshotter/snapshot-controller.&lt;/li&gt;
-&lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;optional-replication-feature-requirements&#34;&gt;(Optional) Replication feature Requirements&lt;/h3&gt;
 &lt;p&gt;Applicable only if you decided to enable the Replication feature in &lt;code&gt;values.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -1421,39 +1359,7 @@ You can specify primary and backup Unisphere servers for each storage array. If 
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Run the &lt;code&gt;curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash&lt;/code&gt; command to install Helm 3.0.&lt;/p&gt;
 &lt;h3 id=&#34;optional-volume-snapshot-requirements&#34;&gt;(Optional) Volume Snapshot Requirements&lt;/h3&gt;
-&lt;p&gt;Applicable only if you decided to enable snapshot feature in &lt;code&gt;values.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:&lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd&#34;&gt;v6.2.1&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
-&lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A common snapshot controller&lt;/li&gt;
-&lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available here: &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/deploy/kubernetes/snapshot-controller&#34;&gt;v6.2.1&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The manifests available on GitHub install the snapshotter image:
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v4.0.x&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
-&lt;p&gt;You can install CRDs and the default snapshot controller by running these commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git checkout release-&amp;lt;your-version&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It is recommended to use 6.2.x version of snapshotter/snapshot-controller.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;optional-volume-health-monitoring&#34;&gt;(Optional) Volume Health Monitoring&lt;/h3&gt;
 &lt;p&gt;Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.&lt;/p&gt;
 &lt;p&gt;If enabled capacity metrics (used &amp;amp; free capacity, used &amp;amp; free inodes) for PowerScale PV will be expose in Kubernetes metrics API.&lt;/p&gt;
@@ -2191,39 +2097,7 @@ PowerStore.&lt;/p&gt;
 &lt;li&gt;Ensure that the multipath command for &lt;code&gt;multipath.conf&lt;/code&gt; is available on all Kubernetes nodes.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;optional-volume-snapshot-requirements&#34;&gt;(Optional) Volume Snapshot Requirements&lt;/h3&gt;
-&lt;p&gt;Applicable only if you decided to enable the snapshot feature in &lt;code&gt;values.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd&#34;&gt;v6.1.x&lt;/a&gt; for the installation.&lt;/p&gt;
-&lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
-&lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A common snapshot controller&lt;/li&gt;
-&lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available:
-Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller&#34;&gt;v6.1.x&lt;/a&gt; for the installation.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The manifests available on GitHub install the snapshotter image:
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v4.0.x&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
-&lt;p&gt;You can install CRDs and default snapshot controller by running these commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git checkout release-&amp;lt;your-version&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It is recommended to use 6.1.x version of snapshotter/snapshot-controller.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;volume-health-monitoring&#34;&gt;Volume Health Monitoring&lt;/h3&gt;
 &lt;p&gt;Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
@@ -2956,33 +2830,7 @@ The driver will continue to use previous values in case of an error found in the
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;*&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Parameters &amp;#34;allowRWOMultiPodAccess&amp;#34; and &amp;#34;syncNodeInfoInterval&amp;#34; have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Setup for snapshots.&lt;/p&gt;
-&lt;p&gt;Applicable only if you decided to enable snapshot feature in &lt;code&gt;values.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster&lt;/p&gt;
-&lt;h4 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h4&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd&#34;&gt;v6.2.1&lt;/a&gt; for the installation.&lt;/p&gt;
-&lt;h4 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h4&gt;
-&lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A common snapshot controller&lt;/li&gt;
-&lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Use &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller&#34;&gt;v6.2.1&lt;/a&gt; for the installation.&lt;/p&gt;
-&lt;h4 id=&#34;installation-example&#34;&gt;Installation example&lt;/h4&gt;
-&lt;p&gt;You can install CRDs and default snapshot controller by running following commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git checkout release-&amp;lt;your-version&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl kustomize client/config/crd &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It is recommended to use 6.1.x version of snapshotter/snapshot-controller.&lt;/li&gt;
-&lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Run the &lt;code&gt;./csi-install.sh --namespace unity --values ./myvalues.yaml&lt;/code&gt; command to proceed with the installation using bash script.&lt;/p&gt;
