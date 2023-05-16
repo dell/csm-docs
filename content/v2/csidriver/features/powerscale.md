@@ -497,18 +497,19 @@ parameters:
 
   #Parameter to set Advisory Limit to quota
   #Optional: true
-  #Default value: 0 comes in picture if value not specified in sc yaml
-  AdvisoryLimit: "50"
+  #Default Behaviour: Limit not set
+  #AdvisoryLimit: "50"
 
   #Parameter to set soft limit to quota
   #Optional: true
-  #Default value: 0 comes in picture if value not specified in sc yaml
-  SoftLimit: "80"
+  #Default Behaviour: Limit not set
+  #SoftLimit: "80"
+  
   #Parameter which must be mentioned along with Soft Limit
   #Soft Limit can be exceeded until the grace period
   #Optional: true
-  #Default value: 0 comes in picture if value not specified in sc yaml
-  SoftGracePrd: "86400"
+  #Default Behaviour: Limit not set
+  #SoftGracePrd: "86400"
 
   # The permissions for isi volume directory path
   # This value overrides the isiVolumePathPermissions attribute of corresponding cluster config in secret, if present
@@ -539,10 +540,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: test-pvc
-  labels:
-    pvcSoftLimit: "10"
-    pvcAdvisoryLimit: "50"
-    pvcSoftGracePrd : "85400"
+#Uncomment below 4 lines to set quota limit parameters
+#  labels:
+#    pvcSoftLimit: "10"
+#    pvcAdvisoryLimit: "50"
+#    pvcSoftGracePrd : "85400"
 spec:
   accessModes:
   - ReadWriteOnce
