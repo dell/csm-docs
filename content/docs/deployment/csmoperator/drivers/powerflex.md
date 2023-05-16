@@ -35,7 +35,7 @@ User can query for all Dell CSI drivers using this command:
     # sdc-monitor is disabled by default, due to high CPU usage 
       - name: sdc-monitor
         enabled: false
-        image: dellemc/sdc:3.6.06
+        image: dellemc/sdc:3.6.0.6
         envs:
         - name: HOST_PID
           value: "1"
