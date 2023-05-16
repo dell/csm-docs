@@ -36,7 +36,7 @@ After the VolumeSnapshot has been successfully created by the CSI driver, a Volu
 
 ### (Optional) Volume Snapshot Requirements
 
-Applicable only if you decided to enable snapshot feature in `values.yaml`
+Applicable only if you decide to enable the snapshot feature in `values.yaml`.
 
 ```yaml
 snapshot:
@@ -71,6 +71,6 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
 
 *NOTE:*
-- It is recommended to use 6.2.x version of snapshotter/snapshot-controller.
+- It is recommended to use the 6.2.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
