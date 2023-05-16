@@ -38,43 +38,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
   Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
 
 ### (Optional) Volume Snapshot Requirements
-
-Applicable only if you decided to enable snapshot feature in `values.yaml`
-
-```yaml
-controller:
-  snapshot:
-    enabled: true
-```
-
-#### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here:[v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd)
-
-#### Volume Snapshot Controller
-The CSI external-snapshotter sidecar is split into two controllers:
-- A common snapshot controller
-- A CSI external-snapshotter sidecar
-
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/deploy/kubernetes/snapshot-controller)
-
-*NOTE:*
-- The manifests available on GitHub install the snapshotter image:
-   - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
-
-
-#### Installation example
-You can install CRDs and the default snapshot controller by running these commands:
-```bash
-git clone https://github.com/kubernetes-csi/external-snapshotter/
-cd ./external-snapshotter
-git checkout release-<your-version>
-kubectl kustomize client/config/crd | kubectl create -f -
-kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
-```
-
-*NOTE:*
-- It is recommended to use 6.2.x version of snapshotter/snapshot-controller.
+  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### (Optional) Volume Health Monitoring
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.

@@ -239,43 +239,7 @@ Procedure
       **Note:**
       * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 
-6. Setup for snapshots.
-         
-   Applicable only if you decided to enable snapshot feature in `values.yaml`
-
-    ```yaml
-    controller:
-      snapshot:
-        enabled: true
-    ```
-
-   In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster
-
-    #### Volume Snapshot CRD's
-    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd) for the installation.
-
-    #### Volume Snapshot Controller
-    The CSI external-snapshotter sidecar is split into two controllers:
-    - A common snapshot controller
-    - A CSI external-snapshotter sidecar
-
-    Use [v6.2.1](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller) for the installation.
-
-    #### Installation example 
-
-    You can install CRDs and default snapshot controller by running following commands:
-    ```bash
-    git clone https://github.com/kubernetes-csi/external-snapshotter/
-    cd ./external-snapshotter
-    git checkout release-<your-version>
-    kubectl kustomize client/config/crd | kubectl create -f -
-    kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
-    ```
-
-    **Note**:
-    - It is recommended to use 6.1.x version of snapshotter/snapshot-controller.
-    - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
-
+6. For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
               
 
 7. Run the `./csi-install.sh --namespace unity --values ./myvalues.yaml` command to proceed with the installation using bash script.

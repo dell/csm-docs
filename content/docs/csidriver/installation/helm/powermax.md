@@ -160,44 +160,7 @@ Set up the PowerPath for Linux as follows:
 - Start the PowerPath service using `systemctl start PowerPath`
 
 ### (Optional) Volume Snapshot Requirements
-
-Applicable only if you decided to enable snapshot feature in `values.yaml`
-
-```yaml
-snapshot:
-  enabled: true
-```
-
-#### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v6.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.0/client/config/crd)
-
-#### Volume Snapshot Controller
-The CSI external-snapshotter sidecar is split into two controllers to support Volume snapshots.
-
-- A common snapshot controller
-- A CSI external-snapshotter sidecar
-
-The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.0/deploy/kubernetes/snapshot-controller)
-
-*NOTE:*
-- The manifests available on GitHub install the snapshotter image: 
-  [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
-
-#### Installation example 
-
-You can install CRDs and the default snapshot controller by running the following commands:
-```bash
-git clone https://github.com/kubernetes-csi/external-snapshotter/
-cd ./external-snapshotter
-git checkout release-<your-version>
-kubectl kustomize client/config/crd | kubectl create -f -
-kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
-```
-
-*NOTE:*
-- It is recommended to use 6.1.x version of snapshotter/snapshot-controller.
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### (Optional) Replication feature Requirements
 
