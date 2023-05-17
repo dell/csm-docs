@@ -145,8 +145,11 @@ kubectl -n authorization get ingress
 ```
 NAME              CLASS   HOSTS                           ADDRESS   PORTS     AGE
 proxy-server      nginx   csm-authorization.com                     00, 000   86s
-
-# kubectl -n auth get service
+```
+```bash
+kubectl -n auth get service
+```
+```
 NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
 authorization-cert-manager                         ClusterIP      00.000.000.000    <none>        000/TCP                     28s
 authorization-cert-manager-webhook                 ClusterIP      00.000.000.000    <none>        000/TCP                      27s
@@ -163,8 +166,6 @@ tenant-service                                     ClusterIP      00.000.000.000
 On the machine running `karavictl`, the `/etc/hosts` file needs to be updated with the Ingress hosts for the proxy, storage, and role services. For example:
 
 ```bash
-<master_node_ip> csm-authorization.com
-```
 <master_node_ip> csm-authorization.com
 ```
 

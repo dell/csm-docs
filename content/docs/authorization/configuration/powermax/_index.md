@@ -32,7 +32,8 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 Create the karavi-authorization-config secret using this command:
   ```bash
 
-`kubectl -n powermax create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
+  kubectl -n powermax create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -
+  ```
 
 3. Create the proxy-server-root-certificate secret.
 
@@ -46,6 +47,9 @@ Create the karavi-authorization-config secret using this command:
     Otherwise, create the proxy-server-root-certificate secret with the appropriate file:
 
       ```bash
+
+      kubectl -n powermax create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -
+      ```
 
 4. Enable CSM Authorization in the driver installation applicable to your installation method.
 
@@ -69,7 +73,7 @@ Create the karavi-authorization-config secret using this command:
 
     Example:
 
-    ```
+    ```yaml
     global:
       storageArrays:
         - storageArrayId: "123456789"
