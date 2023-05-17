@@ -39,7 +39,7 @@ To enable this module, user should choose the sample file for the respective dri
       #   true: enable Resiliency feature(deploy podmon sidecar)
       #   false: disable Resiliency feature(do not deploy podmon sidecar)
       # Default value: false
-      enabled: false
+      enabled: true
       configVersion: v1.6.0
       components:
         - name: podmon-controller
