@@ -25,57 +25,57 @@ User can query for all Dell CSI drivers using the following command:
    Execute `kubectl create namespace isilon` to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'isilon'.
 
 2. Create *isilon-creds* secret by creating a yaml file called secret.yaml with the following content:
-     ```
+     ```yaml
       isilonClusters:
          # logical name of PowerScale Cluster
-       - clusterName: "cluster1"
+         - clusterName: "cluster1"
 
-         # username for connecting to PowerScale OneFS API server
-         # Default value: None
-         username: "user"
+           # username for connecting to PowerScale OneFS API server
+           # Default value: None
+           username: "user"
 
-         # password for connecting to PowerScale OneFS API server
-         password: "password"
+           # password for connecting to PowerScale OneFS API server
+           password: "password"
 
-         # HTTPS endpoint of the PowerScale OneFS API server
-         # Default value: None
-         # Examples: "1.2.3.4", "https://1.2.3.4", "https://abc.myonefs.com"
-         endpoint: "1.2.3.4"
+           # HTTPS endpoint of the PowerScale OneFS API server
+           # Default value: None
+           # Examples: "1.2.3.4", "https://1.2.3.4", "https://abc.myonefs.com"
+           endpoint: "1.2.3.4"
 
-         # Is this a default cluster (would be used by storage classes without ClusterName parameter)
-         # Allowed values:
-         #   true: mark this cluster config as default
-         #   false: mark this cluster config as not default
-         # Default value: false
-         isDefault: true
+           # Is this a default cluster (would be used by storage classes without ClusterName parameter)
+           # Allowed values:
+           #   true: mark this cluster config as default
+           #   false: mark this cluster config as not default
+           # Default value: false
+           isDefault: true
 
-         # Specify whether the PowerScale OneFS API server's certificate chain and host name should be verified.
-         # Allowed values:
-         #   true: skip OneFS API server's certificate verification
-         #   false: verify OneFS API server's certificates
-         # Default value: default value specified in values.yaml
-         # skipCertificateValidation: true
+           # Specify whether the PowerScale OneFS API server's certificate chain and host name should be verified.
+           # Allowed values:
+           #   true: skip OneFS API server's certificate verification
+           #   false: verify OneFS API server's certificates
+           # Default value: default value specified in values.yaml
+           # skipCertificateValidation: true
 
-         # The base path for the volumes to be created on PowerScale cluster
-         # This will be used if a storage class does not have the IsiPath parameter specified.
-         # Ensure that this path exists on PowerScale cluster.
-         # Allowed values: unix absolute path
-         # Default value: default value specified in values.yaml
-         # Examples: "/ifs/data/csi", "/ifs/engineering"
-         # isiPath: "/ifs/data/csi"
+           # The base path for the volumes to be created on PowerScale cluster
+           # This will be used if a storage class does not have the IsiPath parameter specified.
+           # Ensure that this path exists on PowerScale cluster.
+           # Allowed values: unix absolute path
+           # Default value: default value specified in values.yaml
+           # Examples: "/ifs/data/csi", "/ifs/engineering"
+           # isiPath: "/ifs/data/csi"
 
-         # The permissions for isi volume directory path
-         # This will be used if a storage class does not have the IsiVolumePathPermissions parameter specified.
-         # Allowed values: valid octal mode number
-         # Default value: "0777"
-         # Examples: "0777", "777", "0755"
-         # isiVolumePathPermissions: "0777"
+           # The permissions for isi volume directory path
+           # This will be used if a storage class does not have the IsiVolumePathPermissions parameter specified.
+           # Allowed values: valid octal mode number
+           # Default value: "0777"
+           # Examples: "0777", "777", "0755"
+           # isiVolumePathPermissions: "0777"
 
-       - clusterName: "cluster2"
-         username: "user"
-         password: "password"
-         endpoint: "1.2.3.4"
-         endpointPort: "8080"
+         - clusterName: "cluster2"
+           username: "user"
+           password: "password"
+           endpoint: "1.2.3.4"
+           endpointPort: "8080"
       ```
 
    Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,

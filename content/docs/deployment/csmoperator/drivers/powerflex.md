@@ -86,7 +86,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
      ```yaml
       # Username for accessing PowerFlex system.	
       # Required: true
-     - username: "admin"
+    - username: "admin"
       # Password for accessing PowerFlex system.	
       # Required: true
       password: "password"
