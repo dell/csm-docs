@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-05-16T20:31:19+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-17T15:22:30-04:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing the CSI Driver for PowerFlex via Helm
 ">
-<meta itemprop="dateModified" content="2023-05-16T20:31:19+05:30" />
-<meta itemprop="wordCount" content="3101">
+<meta itemprop="dateModified" content="2023-05-17T15:22:30-04:00" />
+<meta itemprop="wordCount" content="3169">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Installing the CSI Driver for PowerFlex via Helm
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.bf8930ed2a6da0944336b45640edd5bd.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d71f6b9faae04a2c82af2522f63d165.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.bf8930ed2a6da0944336b45640edd5bd.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d71f6b9faae04a2c82af2522f63d165.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -728,13 +728,14 @@ Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r
 <p>Run <code>git clone -b v2.6.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
 </li>
 <li>
-<p>Ensure that you have created a namespace where you want to install the driver. You can run <code>kubectl create namespace vxflexos</code> to create a new one.</p>
+<p>A namespace for the driver is expected prior to running the command below. If one is not created already, you can run <code>kubectl create namespace vxflexos</code> to create a new one.
+Note that the namespace can be any user-defined name that follows the conventions for namespaces outlined by Kubernetes. In this example we assume that the namespace is &lsquo;vxflexos&rsquo;</p>
 </li>
 <li>
-<p>Collect information from the PowerFlex SDC by executing the <code>get_vxflexos_info.sh</code> script located in the <code>scripts</code> directory. This script shows the <em>VxFlex OS system ID</em> and <em>MDM IP</em> addresses. Make a note of the values for these parameters as they must be entered into <code>samples/config.yaml</code>.</p>
+<p>Collect information from the PowerFlex SDC by executing the <code>get_vxflexos_info.sh</code> script located in the <code>scripts</code> directory. This script shows the <em>VxFlex OS system ID</em> and <em>MDM IP</em> addresses. Make a note of the values for these parameters as they must be entered into <code>samples/secret.yaml</code>.</p>
 </li>
 <li>
-<p>Prepare <code>samples/config.yaml</code> for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.</p>
+<p>Prepare <code>samples/secret.yaml</code> for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.</p>
 <table>
 <thead>
 <tr>
@@ -759,7 +760,7 @@ Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r
 </tr>
 <tr>
 <td>systemID</td>
-<td>System name/ID of PowerFlex system.</td>
+<td>PowerFlex system name or ID.</td>
 <td>true</td>
 <td>-</td>
 </tr>
@@ -795,22 +796,22 @@ Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r
 </tr>
 </tbody>
 </table>
-<p>Example: <code>samples/config.yaml</code></p>
+<p>Example: <code>samples/secret.yaml</code></p>
 </li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;admin&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Password123&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;ID2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">systemID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;2b11bb111111bb1b&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;https://127.0.0.2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">skipCertificateValidation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline"> 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">isDefault</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline"> 
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mdm</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p><em>NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.</em></p>
-<p>After editing the file, run the below command to create a secret called <code>vxflexos-config</code>:</p>
-<pre><code>`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml`
+<p>After editing the file, run the below command to create a secret called <code>vxflexos-config</code>. This assumes <code>vxflexos</code> is release name, but it can be modified during <a href="/#install-the-driver">install</a>:</p>
+<pre><code>`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml`
 </code></pre>
 <p>Use the below command to replace or update the secret:</p>
-<pre><code>`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+<pre><code>`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
 </code></pre>
 <p><em>NOTE:</em></p>
 <ul>
@@ -1131,7 +1132,8 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.27.0-0&rdquo;</li>
 </tbody>
 </table>
 <ol start="10">
-<li>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml</code>. Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to <code>helm/README.md</code>.</li>
+<li>Install the driver using <code>csi-install.sh</code> bash script by running <code>cd dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml</code>. You may modify the release name with the <code>--release</code> arg. If arg is not provided, release will be named <code>vxflexos</code> by default.
+Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to <code>helm/README.md</code>.</li>
 </ol>
 <p><em>NOTE:</em></p>
 <ul>
