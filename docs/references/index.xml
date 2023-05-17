@@ -667,7 +667,14 @@ k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
       <description>
         
         
-        
+        &lt;p&gt;You can learn more and engage with the CSM community over different channels by:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reading the official &lt;a href=&#34;https://infohub.delltechnologies.com/t/blogs-99/&#34;&gt;blogs&lt;/a&gt; and &lt;a href=&#34;https://infohub.delltechnologies.com/t/persistent-storage-for-containerized-applications-on-kubernetes-with-powermax-san-storage-13/&#34;&gt;white paper&lt;/a&gt; are on &lt;a href=&#34;https://infohub.delltechnologies.com/&#34;&gt;https://infohub.delltechnologies.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Seeing the lastest CSM features in action from &lt;a href=&#34;https://www.youtube.com/watch?v=OBlb25Kw20Q&amp;amp;list=PL2nlzNk2-VMHsKVguetbetbmxd4eMfc_X&#34;&gt;Dell Technologies&amp;rsquo; YouTube channel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Reaching-out the development team on &lt;a href=&#34;https://dell-iac.slack.com/&#34;&gt;Slack&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Learning from technical blogs on &lt;a href=&#34;https://volumes.blog/&#34;&gt;https://volumes.blog/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
       </description>
     </item>
     
