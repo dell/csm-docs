@@ -33,11 +33,11 @@ kubectl delete -f deploy/controller.yaml
 
 To delete the replication group CRD, you can run the command:
 
-All replication groups should be deleted before deleting the replication group CRD.
-
 ```shell
 kubectl delete crd dellcsireplicationgroups.replication.storage.dell.com
 ```
+
+All replication groups should be deleted before deleting the replication group CRD.
 
 > _**NOTE**_: Be sure to run the chosen command on all clusters where you want to uninstall the replication controller/CRD.
 
