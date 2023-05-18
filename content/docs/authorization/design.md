@@ -254,6 +254,13 @@ Both the CSM for Authorization Server and Sidecar Proxy are long-running process
 
 The following otel exporters are used:
 
-* `go.opentelemetry.io/otel/exporters/metric/prometheus`
-* `go.opentelemetry.io/otel/exporters/trace/zipkin`
-* `go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp`
+* ```bash
+  go.opentelemetry.io/otel/exporters/metric/prometheus
+  ```
+* ```bash
+  go.opentelemetry.io/otel/exporters/trace/zipkin
+  ```
+* ```bash
+
+  go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp    
+  ```
