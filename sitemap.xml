@@ -408,7 +408,7 @@
     <lastmod>2021-09-21T21:01:25+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/replication/deployment/installation/</loc>
-    <lastmod>2023-05-15T06:22:16-04:00</lastmod>
+    <lastmod>2023-05-18T13:28:09-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/installation/</loc>
     <lastmod>2021-12-03T13:03:43-04:00</lastmod>
@@ -822,7 +822,7 @@
     <lastmod>2022-03-23T08:15:39-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/replication/deployment/install-repctl/</loc>
-    <lastmod>2023-05-15T06:22:16-04:00</lastmod>
+    <lastmod>2023-05-18T13:28:09-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/replication/deployment/install-repctl/</loc>
     <lastmod>2022-03-23T08:15:39-04:00</lastmod>
@@ -832,6 +832,9 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/replication/deployment/install-repctl/</loc>
     <lastmod>2022-06-22T16:36:23+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/docs/replication/deployment/install-script/</loc>
+    <lastmod>2023-05-18T13:28:09-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/references/policies/</loc>
     <lastmod>2022-07-06T10:26:15+05:30</lastmod>
@@ -1248,7 +1251,7 @@
     <lastmod>2022-09-21T18:28:15+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/replication/uninstall/</loc>
-    <lastmod>2023-03-27T17:14:31+05:30</lastmod>
+    <lastmod>2023-05-18T13:28:09-05:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/replication/uninstall/</loc>
     <lastmod>2022-05-24T16:59:37-03:00</lastmod>

@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/replication/deployment/install-repctl/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-05-15T06:22:16-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-18T13:28:09-05:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Installation using repctl">
 <meta itemprop="description" content="Installation of CSM for Replication using repctl">
-<meta itemprop="dateModified" content="2023-05-15T06:22:16-04:00" />
-<meta itemprop="wordCount" content="215">
+<meta itemprop="dateModified" content="2023-05-18T13:28:09-05:00" />
+<meta itemprop="wordCount" content="300">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Installation using repctl"/>
 <meta name="twitter:description" content="Installation of CSM for Replication using repctl"/>
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d71f6b9faae04a2c82af2522f63d165.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e73e5843726da170505cb3336cb6615c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d71f6b9faae04a2c82af2522f63d165.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e73e5843726da170505cb3336cb6615c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -419,6 +419,8 @@
   <a href="/csm-docs/docs/replication/deployment/configmap-secrets/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentconfigmap-secrets"><span class="">ConfigMap &amp; Secrets</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-csm-docsdocsreplicationdeploymentinstall-repctl-li">
   <a href="/csm-docs/docs/replication/deployment/install-repctl/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentinstall-repctl"><span class="td-sidebar-nav-active-item">Installation using repctl</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsreplicationdeploymentinstall-script-li">
+  <a href="/csm-docs/docs/replication/deployment/install-script/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentinstall-script"><span class="">Installation using script</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsreplicationdeploymentstorageclasses-li">
   <a href="/csm-docs/docs/replication/deployment/storageclasses/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentstorageclasses"><span class="">Storage Class</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsreplicationdeploymentpowerflex-li">
@@ -586,6 +588,17 @@
 
 
 
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#install-replication-walkthrough">Install Replication Walkthrough</a>
+      <ul>
+        <li><a href="#set-up-repctl-tool">Set up repctl tool</a></li>
+        <li><a href="#installation-steps">Installation steps</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
 
 
 
@@ -639,6 +652,20 @@
 <blockquote>
 <p><strong><em>NOTE:</em></strong>  These steps should not be used when installing using Dell CSM Operator.</p>
 </blockquote>
+<h3 id="set-up-repctl-tool">Set up repctl tool</h3>
+<p>Before you begin, make sure you have the repctl tool available.</p>
+<p>You can download a pre-built repctl binary from our <a href="https://github.com/dell/csm-replication/releases">Releases</a> page.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://github.com/dell/csm-replication/releases/download/v1.4.0/repctl-linux-amd64
+</span></span><span style="display:flex;"><span>mv repctl-linux-amd64 repctl
+</span></span><span style="display:flex;"><span>chmod +x repctl
+</span></span></code></pre></div><p>Alternately, if you want to build the binary yourself, you can follow these steps:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+</span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> csm-replication/repctl
+</span></span><span style="display:flex;"><span>make build
+</span></span></code></pre></div><h3 id="installation-steps">Installation steps</h3>
+<blockquote>
+<p><strong><em>NOTE:</em></strong>  The repctl commands only have to be run from one Kubernetes cluster. Repctl does the appropriate configuration on both clusters, when installing replication with it.</p>
+</blockquote>
 <p>You can start using Container Storage Modules (CSM) for Replication with help from <code>repctl</code> using these simple steps:</p>
 <ol>
 <li>Prepare admin Kubernetes clusters configs</li>
@@ -666,8 +693,7 @@ The message should disappear once you inject the kubeconfigs (next step).</p>
 </span></span></code></pre></div></li>
 </ol>
 </li>
-<li>Modify <code>examples/&lt;storage&gt;_example_values.yaml</code> config with replication
-information:
+<li>Modify <code>csm-replication/repctl/examples/&lt;storage&gt;_example_values.yaml</code> config with replication information:
 <blockquote>
 <p><strong><em>NOTE:</em></strong>  <code>clusterID</code> should match names you gave to clusters in step 2</p>
 </blockquote>
