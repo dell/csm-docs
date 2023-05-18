@@ -94,8 +94,8 @@ Refer samples from [here](https://github.com/dell/dell-csi-operator/tree/master/
 apiVersion: storage.dell.com/v1
 kind: CSIUnity
 metadata:
-  name: test-unity
-  namespace: test-unity
+  name: unity
+  namespace: unity
 spec:
   driver:
     configVersion: v2.5.0
@@ -185,7 +185,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: unity-config-params
-  namespace: test-unity
+  namespace: unity
 data:
   driver-config-params.yaml: |
     CSI_LOG_LEVEL: "info"

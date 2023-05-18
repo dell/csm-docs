@@ -326,7 +326,7 @@ The below notes explain some of the general items to take care of.
 kind: ConfigMap
 metadata:
   name: unity-config-params
-  namespace: test-unity
+  namespace: unity
 data:
   driver-config-params.yaml: |
     CSI_LOG_LEVEL: "info"
