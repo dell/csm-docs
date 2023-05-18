@@ -78,7 +78,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. A namespace for the driver is expected prior to running the command below. If one is not created already, you can run `kubectl create namespace vxflexos` to create a new one. 
 Note that the namespace can be any user-defined name that follows the conventions for namespaces outlined by Kubernetes. In this example we assume that the namespace is 'vxflexos'
@@ -133,7 +133,7 @@ Use the below command to replace or update the secret:
 - "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
 - Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
 - If the user is using complex K8s version like "v1.21.3-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
-           kubeVersion: ">= 1.21.0-0 < 1.27.0-0"
+           kubeVersion: ">= 1.21.0-0 < 1.28.0-0"
 	   
 	   
 5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features.  
