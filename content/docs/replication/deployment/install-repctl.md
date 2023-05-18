@@ -8,6 +8,26 @@ description: Installation of CSM for Replication using repctl
 ## Install Replication Walkthrough
 > **_NOTE:_**  These steps should not be used when installing using Dell CSM Operator.
 
+### Set up repctl tool
+Before you begin, make sure you have the repctl tool available.
+
+You can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
+```shell
+wget https://github.com/dell/csm-replication/releases/download/v1.4.0/repctl-linux-amd64
+mv repctl-linux-amd64 repctl
+chmod +x repctl
+```
+
+Alternately, if you want to build the binary yourself, you can follow these steps:
+```shell
+git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+cd csm-replication/repctl
+make build
+```
+
+### Installation steps
+> **_NOTE:_**  The repctl commands only have to be run from one Kubernetes cluster. Repctl does the appropriate configuration on both clusters, when installing replication with it.
+
 You can start using Container Storage Modules (CSM) for Replication with help from `repctl` using these simple steps:
 
 1. Prepare admin Kubernetes clusters configs
@@ -32,8 +52,7 @@ You can start using Container Storage Modules (CSM) for Replication with help fr
           ```shell
           ./repctl cluster inject
           ```
-5. Modify `examples/<storage>_example_values.yaml` config with replication
-   information:
+5. Modify `csm-replication/repctl/examples/<storage>_example_values.yaml` config with replication information:
    > **_NOTE:_**  `clusterID` should match names you gave to clusters in step 2
 6. Create replication storage classes using config:
       ```shell
