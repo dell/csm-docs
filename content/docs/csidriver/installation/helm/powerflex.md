@@ -115,7 +115,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
 
