@@ -8,10 +8,9 @@ description: >
 
 This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication. 
 
+## Uninstalling replication controller
 
-## Uninstalling common replication controller
-
-To uninstall the common replication controller, you can use the script `uninstall.sh` located in the `scripts` folder:
+To uninstall the replication controller, you can use the script `uninstall.sh` located in the `scripts` folder:
 ```shell
 ./uninstall.sh 
 ```
@@ -32,7 +31,8 @@ If you used `controller.yaml` manifest with either `kubectl` or `repctl`, use th
 kubectl delete -f deploy/controller.yaml
 ```
 
-To delete the replication CRD, you can run the command:
+To delete the replication group CRD, you can run the command:
+All replication groups should be deleted before deleting the replication group CRD.
 
 ```shell
 kubectl delete crd dellcsireplicationgroups.replication.storage.dell.com
