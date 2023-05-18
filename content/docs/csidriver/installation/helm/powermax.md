@@ -61,7 +61,11 @@ Install Helm 3 on the master node before you install CSI Driver for Dell PowerMa
 
 **Steps**
 
-  Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.
+  Run the command to install Helm 3.
+   ```bash
+   
+   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+   ``` 
 
 
 ### Fibre Channel Requirements
@@ -107,7 +111,9 @@ Set up the environment as follows:
 >Note: Initiators from all ESX/ESXi should be part of a single host(initiator group) and not hostgroup(cascaded intitiator group).
 
 Create the secret by running the below command, 
-`kubectl create -f samples/secret/vcenter-secret.yaml`.
+```bash
+kubectl create -f samples/secret/vcenter-secret.yaml
+```
 
 ### Certificate validation for Unisphere REST API calls
 
@@ -118,11 +124,19 @@ The CSI driver exposes an install parameter `skipCertificateValidation` which de
 If the `skipCertificateValidation` parameter is set to _false_ and a previous installation attempt created an empty secret, then this secret must be deleted and re-created using the CA certs.
 
 If the Unisphere certificate is self-signed or if you are using an embedded Unisphere, then perform the following steps:
-1. To fetch the certificate, run `openssl s_client -showcerts -connect [Unisphere IP]:8443 </dev/null 2> /dev/null | openssl x509 -outform PEM > ca_cert.pem`
+1. To fetch the certificate, run 
+   ```bash
+
+   openssl s_client -showcerts -connect [Unisphere IP]:8443 </dev/null 2> /dev/null | openssl x509 -outform PEM > ca_cert.pem
+   ```
 
    *NOTE*: The IP address varies for each user.
 
-2. To create the secret, run `kubectl create secret generic powermax-certs --from-file=ca_cert.pem -n powermax`
+2. To create the secret, run 
+   ```bash
+
+   kubectl create secret generic powermax-certs --from-file=ca_cert.pem -n powermax
+   ```
 
 ### Ports in the port group
 
@@ -157,8 +171,15 @@ CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux Power
 Set up the PowerPath for Linux as follows:
 
 - All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
-- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
-- Start the PowerPath service using `systemctl start PowerPath`
+- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using 
+   ```bash
+
+    rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm
+   ```
+- Start the PowerPath service using 
+  ```bash
+   systemctl start PowerPath
+  ```
 
 ### (Optional) Volume Snapshot Requirements
 
@@ -313,8 +334,16 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | vCenterCredSecret                  | Secret name for the vCenter credentials. |  Yes      |   ""   |
 
 
-8. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml`
-9. Or you can also install the driver using standalone helm chart using the command `helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax`
+8. Install the driver using `csi-install.sh` bash script by running 
+    ```bash
+    
+    cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml
+    ```
+9. Or you can also install the driver using standalone helm chart using the command 
+   ```bash
+   
+   helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax
+   ```
 
 *Note:* 
 - For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.

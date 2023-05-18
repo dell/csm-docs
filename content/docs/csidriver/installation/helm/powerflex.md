@@ -38,8 +38,11 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
 **Steps**
 
-  Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
-
+  Run the command to install Helm 3.0.
+  ```bash
+  
+  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  ```
 ### Enable Zero Padding on PowerFlex
 
 Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see [Dell PowerFlex documentation](https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html).
@@ -146,11 +149,17 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 
 After editing the file, run the below command to create a secret called `vxflexos-config`:
     
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml`
+  ```bash
+  
+  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml
+  ```
 
 Use the below command to replace or update the secret:
 
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+  ```bash
+  
+  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -
+  ```
 
 *NOTE:* 
 
@@ -168,7 +177,10 @@ Use the below command to replace or update the secret:
 6. If using automated SDC deployment:
    - Check the SDC container image is the correct version for your version of PowerFlex. 
    
-7. Copy the default values.yaml file `cd helm && cp csi-vxflexos/values.yaml myvalues.yaml`
+7. Copy the default values.yaml file 
+   ```bash
+   cd helm && cp csi-vxflexos/values.yaml myvalues.yaml
+   ```
 
 8. If you are using a custom image, check the `version` and `driverRepository` fields in `myvalues.yaml` to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: `<driverRepository>/csi-vxflexos:v<version>`
 
@@ -260,17 +272,30 @@ If the gateway certificate is self-signed or if you are using an embedded gatewa
 
 1. To fetch the certificate, run the following command.
 
-         `openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem`
+   ```bash
+   
+   openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+   ```
 	
-   Example: openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+   Example: 
+   ```bash
+   
+   openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+   ```
 	
 2. Run the following command to create the cert secret with index '0':
 
-         `kubectl create secret generic vxflexos-certs-0 --from-file=cert-0=ca_cert_0.pem -n vxflexos`
+   ```bash
+   
+   kubectl create secret generic vxflexos-certs-0 --from-file=cert-0=ca_cert_0.pem -n vxflexos
+   ```
 	
    Use the following command to replace the secret:
 	
-          `kubectl create secret generic vxflexos-certs-0 -n vxflexos --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -` 
+   ```bash
+   
+   kubectl create secret generic vxflexos-certs-0 -n vxflexos --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
+   ``` 
 	
 3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: vxflexos-certs-1, vxflexos-certs-2, etc)
 

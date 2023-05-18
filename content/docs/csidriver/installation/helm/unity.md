@@ -39,8 +39,11 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell U
 
 **Steps**
 
-Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
+Run the command to install Helm 3.0.
+```bash
 
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+``` 
 
 ### Fibre Channel requirements
 
@@ -88,7 +91,10 @@ Install CSI Driver for Unity XT using this procedure.
 
 *Before you begin*
 
- * As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.6.0 https://github.com/dell/csi-unity.git```.
+ * As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command 
+   ```bash
+   git clone -b v2.6.0 https://github.com/dell/csi-unity.git
+   ```
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
@@ -207,11 +213,17 @@ Procedure
 
 	Use the following command to create a new secret unity-creds from `secret.yaml` file.
 	
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
+    ```bash
+    
+    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml
+    ```
     
     Use the following command to replace or update the secret:
     
-    `kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
+    ```bash
+    
+    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -
+    ```
     
     **Note**: The user needs to validate the yaml syntax and array-related key/values while replacing the unity-creds secret.
     The driver will continue to use previous values in case of an error found in the yaml file.
@@ -278,8 +290,10 @@ Procedure
 
               
 
-7. Run the `./csi-install.sh --namespace unity --values ./myvalues.yaml` command to proceed with the installation using bash script.
-
+7. Run the command to proceed with the installation using bash script.
+   ```bash
+   ./csi-install.sh --namespace unity --values ./myvalues.yaml
+   ```
     A successful installation must display messages that look similar to the following samples:
     ```
     ------------------------------------------------------
@@ -351,17 +365,28 @@ Procedure
 
     **Note**:
     To install nightly or latest csi driver build using bash script use this command:
-    `/csi-install.sh --namespace unity --values ./myvalues.yaml --version nightly/latest`
+    ```bash
+    
+    /csi-install.sh --namespace unity --values ./myvalues.yaml --version nightly/latest
+    ```
 
 8. You can also install the driver using standalone helm chart by running helm install command, first using the --dry-run flag to 
    confirm various parameters are as desired. Once the parameters are validated, run the command without the --dry-run flag.
    Note: This example assumes that the user is at repo root helm folder i.e csi-unity/helm.
 
-   **Syntax**:`helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>` <br/>
+   **Syntax**:
+   ```bash
+   
+   helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>
+   ```
    `<namespace>` - namespace of the driver installation.  <br/>
    `<name of secret>` - unity in case of unity-creds and unity-certs-0 secrets. <br/>
    `<helmPath>` - Path of the helm directory. <br/>
-   e.g: helm install --dry-run --values ./csi-unity/myvalues.yaml --namespace unity unity ./csi-unity
+   e.g: 
+   ```bash
+   
+   helm install --dry-run --values ./csi-unity/myvalues.yaml --namespace unity unity ./csi-unity
+   ```
 
 
 ## Certificate validation for Unisphere REST API calls 
@@ -381,12 +406,25 @@ If this secret is an empty secret, then the validation of the certificate fails,
 If the Unisphere certificate is self-signed or if you are using an embedded Unisphere, then perform the following steps.
 
    1. To fetch the certificate, run the following command.
-      `openssl s_client -showcerts -connect <Unisphere IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem`
-      Example: openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+      ```bash
+      
+      openssl s_client -showcerts -connect <Unisphere IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+      ```
+      Example: 
+      ```bash
+      
+      openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+      ```
    2. Run the following command to create the cert secret with index '0':
-         `kubectl create secret generic unity-certs-0 --from-file=cert-0=ca_cert_0.pem -n unity`
+      ```bash
+      
+      kubectl create secret generic unity-certs-0 --from-file=cert-0=ca_cert_0.pem -n unity
+      ```
       Use the following command to replace the secret:
-          `kubectl create secret generic unity-certs-0 -n unity --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -` 
+      ```bash
+      
+      kubectl create secret generic unity-certs-0 -n unity --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
+      ``` 
    3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: unity-certs-1, unity-certs-2, etc)
 
 
@@ -446,8 +484,9 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the "Host" information in an array.
 User can update secret using the following command:
-```
-    kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+```bash
+
+kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 ```
 **Note**: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
 
@@ -459,7 +498,7 @@ As part of driver installation, a ConfigMap with the name `unity-config-params` 
 Users can set the default log level by specifying log level to `logLevel` attribute in values.yaml during driver installation.
 
 To change the log level dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade
 ```

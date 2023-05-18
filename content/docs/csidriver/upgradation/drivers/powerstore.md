@@ -27,8 +27,20 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
-3. (optional) create new storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
+3. (optional) create new storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running 
+    ```bash
+    kubectl create -f <path_to_storageclass_file>
+    ```
+    
     >Storage classes created by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver will not be deleted, v2.6 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 in your cluster then be sure to include the same array you have used for the v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver and make it default in the `secret.yaml` file.
-4. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
+4. Create the secret by running 
+    ```bash
+    
+    kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml
+    ```
 5. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml` and update parameters as per the requirement.
-6. Run the `csi-install` script with the option _\-\-upgrade_ by running: `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade`.
+6. Run the `csi-install` script with the option _\-\-upgrade_ by running: 
+     ```bash
+
+     ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade
+     ```
