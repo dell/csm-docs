@@ -6,14 +6,13 @@ Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
 
-## Release Notes - Container Storage Modules Operator v1.2.0
+## Release Notes - Container Storage Modules Operator v1.3.0
 
 ### New Features/Changes
-- [Added support for CSI PowerStore Driver](https://github.com/dell/csm/issues/739)
+- [Added support for CSI Unity XT Driver](https://github.com/dell/csm/issues/756)
 
 
 ### Fixed Issues
-- [Unable to delete application pod when CSI-PowerStore is installed using CSM-Operator](https://github.com/dell/csm/issues/785)
+
 
 ### Known Issues
-CSM object does not track available deployment count when down scaling to n-1 , where n is number of nodes.

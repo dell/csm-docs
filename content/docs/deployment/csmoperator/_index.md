@@ -12,7 +12,7 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 
 | Kubernetes Version         | OpenShift Version   |
 | -------------------------- | ------------------- |
-| 1.24, 1.25, 1.26           | 4.10, 4.10 EUS, 4.11 |
+| 1.25, 1.26, 1.27           | 4.11, 4.12, 4.12 EUS |
 
 ## Supported CSI Drivers
 
@@ -21,6 +21,7 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 | CSI PowerScale     | 2.4.0 +   |   v2.4.0 +     |
 | CSI PowerFlex      | 2.4.0 +   |   v2.4.0 +     |
 | CSI PowerStore     | 2.4.0 +   |   v2.4.0 +     |
+| CSI Unity XT       | 2.5.0 +   |   v2.5.0 +     |
 
 ## Supported CSM Modules
 
