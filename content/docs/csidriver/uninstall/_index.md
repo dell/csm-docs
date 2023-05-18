@@ -9,13 +9,15 @@ description: Methods to uninstall Dell CSI Driver
 
 To uninstall a driver, the `csi-uninstall.sh` script provides a handy wrapper around the `helm` utility. The only required argument for uninstallation is the namespace name. For example, to uninstall the driver:
 
-```
+```bash
 ./csi-uninstall.sh --namespace <driver-namespace>
 ```
 
 For usage information:
+```bash
+./csi-uninstall.sh -h
 ```
-[dell-csi-helm-installer]# ./csi-uninstall.sh -h
+```
 Help for ./csi-uninstall.sh
 
 Usage: ./csi-uninstall.sh options...
@@ -34,7 +36,7 @@ This can be done using OperatorHub GUI by deleting the CR or via kubectl.
     
 For example - To uninstall the driver installed via the operator, delete the Custom Resource(CR)
 
-```
-# Replace driver-type, driver-name and driver-namespace with their respective values
+#Replace driver-type, driver-name and driver-namespace with their respective values
+```bash
 kubectl delete <driver-type>/<driver-name> -n <driver-namespace>
 ```
