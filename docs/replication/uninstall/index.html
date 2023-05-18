@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/replication/uninstall/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-18T13:28:09-05:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Uninstall">
 <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Replication Uninstallation
 ">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
-<meta itemprop="wordCount" content="164">
+<meta itemprop="dateModified" content="2023-05-18T13:28:09-05:00" />
+<meta itemprop="wordCount" content="175">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Uninstall"/>
 <meta name="twitter:description" content="Dell Container Storage Modules (CSM) for Replication Uninstallation
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d71f6b9faae04a2c82af2522f63d165.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e73e5843726da170505cb3336cb6615c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d71f6b9faae04a2c82af2522f63d165.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e73e5843726da170505cb3336cb6615c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -423,6 +423,8 @@
   <a href="/csm-docs/docs/replication/deployment/configmap-secrets/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentconfigmap-secrets"><span class="">ConfigMap &amp; Secrets</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationdeploymentinstall-repctl-li">
   <a href="/csm-docs/docs/replication/deployment/install-repctl/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentinstall-repctl"><span class="">Installation using repctl</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationdeploymentinstall-script-li">
+  <a href="/csm-docs/docs/replication/deployment/install-script/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentinstall-script"><span class="">Installation using script</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationdeploymentstorageclasses-li">
   <a href="/csm-docs/docs/replication/deployment/storageclasses/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentstorageclasses"><span class="">Storage Class</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsreplicationdeploymentpowerflex-li">
@@ -592,7 +594,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#uninstalling-common-replication-controller">Uninstalling common replication controller</a></li>
+    <li><a href="#uninstalling-replication-controller">Uninstalling replication controller</a></li>
     <li><a href="#uninstalling-the-replication-sidecar">Uninstalling the replication sidecar</a></li>
   </ul>
 </nav>
@@ -644,8 +646,8 @@
 
 	       
 	<p>This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication.</p>
-<h2 id="uninstalling-common-replication-controller">Uninstalling common replication controller</h2>
-<p>To uninstall the common replication controller, you can use the script <code>uninstall.sh</code> located in the <code>scripts</code> folder:</p>
+<h2 id="uninstalling-replication-controller">Uninstalling replication controller</h2>
+<p>To uninstall the replication controller, you can use the script <code>uninstall.sh</code> located in the <code>scripts</code> folder:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./uninstall.sh 
 </span></span></code></pre></div><p>This script will automatically detect how the current version was installed (repctl or Helm) and use the correct method to delete it.</p>
 <p>You can also manually uninstall the replication controller using a method that depends on how you installed it.</p>
@@ -653,9 +655,10 @@
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>helm delete -n dell-replication-controller replication
 </span></span></code></pre></div><p>If you used <code>controller.yaml</code> manifest with either <code>kubectl</code> or <code>repctl</code>, use this:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl delete -f deploy/controller.yaml
-</span></span></code></pre></div><p>To delete the replication CRD, you can run the command:</p>
+</span></span></code></pre></div><p>To delete the replication group CRD, you can run the command:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl delete crd dellcsireplicationgroups.replication.storage.dell.com
-</span></span></code></pre></div><blockquote>
+</span></span></code></pre></div><p>All replication groups should be deleted before deleting the replication group CRD.</p>
+<blockquote>
 <p><em><strong>NOTE</strong></em>: Be sure to run the chosen command on all clusters where you want to uninstall the replication controller/CRD.</p>
 </blockquote>
 <h2 id="uninstalling-the-replication-sidecar">Uninstalling the replication sidecar</h2>

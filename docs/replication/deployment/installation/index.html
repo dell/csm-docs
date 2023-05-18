@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/replication/deployment/installation/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-05-15T06:22:16-04:00" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-18T13:28:09-05:00" /><meta property="og:site_name" content="Dell Technologies" />
 <meta itemprop="name" content="Installation">
 <meta itemprop="description" content="Installation of CSM for Replication
 ">
-<meta itemprop="dateModified" content="2023-05-15T06:22:16-04:00" />
-<meta itemprop="wordCount" content="499">
+<meta itemprop="dateModified" content="2023-05-18T13:28:09-05:00" />
+<meta itemprop="wordCount" content="291">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Installation"/>
 <meta name="twitter:description" content="Installation of CSM for Replication
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d71f6b9faae04a2c82af2522f63d165.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e73e5843726da170505cb3336cb6615c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.5d71f6b9faae04a2c82af2522f63d165.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e73e5843726da170505cb3336cb6615c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -423,6 +423,8 @@
   <a href="/csm-docs/docs/replication/deployment/configmap-secrets/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentconfigmap-secrets"><span class="">ConfigMap &amp; Secrets</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsreplicationdeploymentinstall-repctl-li">
   <a href="/csm-docs/docs/replication/deployment/install-repctl/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentinstall-repctl"><span class="">Installation using repctl</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsreplicationdeploymentinstall-script-li">
+  <a href="/csm-docs/docs/replication/deployment/install-script/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentinstall-script"><span class="">Installation using script</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsreplicationdeploymentstorageclasses-li">
   <a href="/csm-docs/docs/replication/deployment/storageclasses/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsreplicationdeploymentstorageclasses"><span class="">Storage Class</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsreplicationdeploymentpowerflex-li">
@@ -595,8 +597,7 @@
     <li>
       <ul>
         <li><a href="#before-you-begin">Before you begin</a></li>
-        <li><a href="#install-repctl">Install repctl</a></li>
-        <li><a href="#installing-csm-replication-controller">Installing CSM Replication Controller</a></li>
+        <li><a href="#install-csm-replication-controller">Install CSM Replication Controller</a></li>
         <li><a href="#install-csi-driver">Install CSI driver</a></li>
         <li><a href="#dynamic-log-level-change">Dynamic Log Level Change</a></li>
       </ul>
@@ -653,22 +654,15 @@
 	<h1>Installation</h1>
 
 	       
-	<p>The installation process consists of three steps:</p>
+	<p>The installation process consists of two steps:</p>
 <ol>
-<li>Install repctl</li>
 <li>Install Container Storage Modules (CSM) for Replication Controller</li>
 <li>Install CSI driver after enabling replication</li>
 </ol>
 <h3 id="before-you-begin">Before you begin</h3>
 <p>Please read this <a href="../configmap-secrets">document</a> before proceeding with the installation. It provides detailed steps on how to set up communication between multiple
 clusters which will be required during or after the installation.</p>
-<h3 id="install-repctl">Install repctl</h3>
-<p>You can download a pre-built repctl binary from our <a href="https://github.com/dell/csm-replication/releases">Releases</a> page.
-Alternately, if you want to build the binary yourself, you can follow these steps:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone -b v1.4.0 https://github.com/dell/csm-replication.git
-</span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> csm-replication/repctl
-</span></span><span style="display:flex;"><span>make build
-</span></span></code></pre></div><h3 id="installing-csm-replication-controller">Installing CSM Replication Controller</h3>
+<h3 id="install-csm-replication-controller">Install CSM Replication Controller</h3>
 <p>You can use one of the following methods to install CSM Replication Controller:</p>
 <ul>
 <li>Using repctl</li>
@@ -677,38 +671,10 @@ Alternately, if you want to build the binary yourself, you can follow these step
 <p>We recommend using repctl for the installation, as it simplifies the installation workflow. This process also helps configure <code>repctl</code>
 for future use during management operations.</p>
 <h4 id="using-repctl">Using repctl</h4>
-<p>Please follow the steps <a href="../install-repctl">here</a> to install &amp; configure Dell Replication Controller</p>
+<p>Please follow the steps <a href="../install-repctl">here</a> to install &amp; configure Dell Replication Controller using repctl.</p>
 <h4 id="using-the-installation-script">Using the installation script</h4>
-<p>Repeat the following steps on all clusters where you want to configure replication:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone github.com/dell/csm-replication
-</span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> csm-replication
-</span></span><span style="display:flex;"><span>kubectl create ns dell-replication-controller
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Copy and  modify values.yaml file if you wish to customize your deployment in any way</span>
-</span></span><span style="display:flex;"><span>cp ./helm/csm-replication/values.yaml ./myvalues.yaml
-</span></span><span style="display:flex;"><span>bash scripts/install.sh --values ./myvalues.yaml
-</span></span></code></pre></div><blockquote>
-<p>Note: Current installation method allows you to specify custom <code>&lt;FQDN&gt;:&lt;IP&gt;</code> entries to be appended to controller&rsquo;s <code>/etc/hosts</code> file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server&rsquo;s address.
-The feature can be enabled by modifying <code>values.yaml</code>.</p>
-<pre tabindex="0"><code class="language-hostAliases:" data-lang="hostAliases:">- ip: &#34;10.10.10.10&#34;
-  hostnames:
-    - &#34;foo.bar&#34;
-- ip: &#34;10.10.10.11&#34;
-  hostnames:
-    - &#34;foo.baz&#34;
-</code></pre></blockquote>
-<p>This script will do the following:</p>
-<ol>
-<li>Install <code>DellCSIReplicationGroup</code> CRD in your cluster</li>
-<li>Install <code>dell-replication-controller</code></li>
-</ol>
-<p>After the installation ConfigMap will consist of only the <code>logLevel</code> field, to add the rest configuration to the cluster do the following:</p>
-<ul>
-<li>Update the configuration in <code>deploy/config.yaml</code> after going through the guide <a href="../configmap-secrets">here</a></li>
-<li>Run the following commands to update and complete the installation</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    <span style="color:#204a87">cd</span> csm-replication
-</span></span><span style="display:flex;"><span>    kubectl create configmap dell-replication-controller-config --namespace dell-replication-controller --from-file deploy/config.yaml -o yaml --dry-run <span style="color:#000;font-weight:bold">|</span> kubectl apply -f -
-</span></span></code></pre></div><h3 id="install-csi-driver">Install CSI driver</h3>
+<p>Please follow the steps <a href="../install-script">here</a> to install &amp; configure Dell Replication Controller using script.</p>
+<h3 id="install-csi-driver">Install CSI driver</h3>
 <p>The following CSI drivers support replication:</p>
 <ol>
 <li>CSI driver for PowerMax</li>

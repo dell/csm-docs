@@ -908,8 +908,8 @@ controller, because different versions could be incompatible with each other.&lt
         
         
         &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Replication.&lt;/p&gt;
-&lt;h2 id=&#34;uninstalling-common-replication-controller&#34;&gt;Uninstalling common replication controller&lt;/h2&gt;
-&lt;p&gt;To uninstall the common replication controller, you can use the script &lt;code&gt;uninstall.sh&lt;/code&gt; located in the &lt;code&gt;scripts&lt;/code&gt; folder:&lt;/p&gt;
+&lt;h2 id=&#34;uninstalling-replication-controller&#34;&gt;Uninstalling replication controller&lt;/h2&gt;
+&lt;p&gt;To uninstall the replication controller, you can use the script &lt;code&gt;uninstall.sh&lt;/code&gt; located in the &lt;code&gt;scripts&lt;/code&gt; folder:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./uninstall.sh 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This script will automatically detect how the current version was installed (repctl or Helm) and use the correct method to delete it.&lt;/p&gt;
 &lt;p&gt;You can also manually uninstall the replication controller using a method that depends on how you installed it.&lt;/p&gt;
@@ -917,9 +917,10 @@ controller, because different versions could be incompatible with each other.&lt
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm delete -n dell-replication-controller replication
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you used &lt;code&gt;controller.yaml&lt;/code&gt; manifest with either &lt;code&gt;kubectl&lt;/code&gt; or &lt;code&gt;repctl&lt;/code&gt;, use this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete -f deploy/controller.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To delete the replication CRD, you can run the command:&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To delete the replication group CRD, you can run the command:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete crd dellcsireplicationgroups.replication.storage.dell.com
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All replication groups should be deleted before deleting the replication group CRD.&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: Be sure to run the chosen command on all clusters where you want to uninstall the replication controller/CRD.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;uninstalling-the-replication-sidecar&#34;&gt;Uninstalling the replication sidecar&lt;/h2&gt;

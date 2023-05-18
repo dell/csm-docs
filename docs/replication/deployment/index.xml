@@ -22,22 +22,15 @@
       <description>
         
         
-        &lt;p&gt;The installation process consists of three steps:&lt;/p&gt;
+        &lt;p&gt;The installation process consists of two steps:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Install repctl&lt;/li&gt;
 &lt;li&gt;Install Container Storage Modules (CSM) for Replication Controller&lt;/li&gt;
 &lt;li&gt;Install CSI driver after enabling replication&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h3&gt;
 &lt;p&gt;Please read this &lt;a href=&#34;../configmap-secrets&#34;&gt;document&lt;/a&gt; before proceeding with the installation. It provides detailed steps on how to set up communication between multiple
 clusters which will be required during or after the installation.&lt;/p&gt;
-&lt;h3 id=&#34;install-repctl&#34;&gt;Install repctl&lt;/h3&gt;
-&lt;p&gt;You can download a pre-built repctl binary from our &lt;a href=&#34;https://github.com/dell/csm-replication/releases&#34;&gt;Releases&lt;/a&gt; page.
-Alternately, if you want to build the binary yourself, you can follow these steps:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.0 https://github.com/dell/csm-replication.git
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication/repctl
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make build
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;installing-csm-replication-controller&#34;&gt;Installing CSM Replication Controller&lt;/h3&gt;
+&lt;h3 id=&#34;install-csm-replication-controller&#34;&gt;Install CSM Replication Controller&lt;/h3&gt;
 &lt;p&gt;You can use one of the following methods to install CSM Replication Controller:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Using repctl&lt;/li&gt;
@@ -46,38 +39,10 @@ Alternately, if you want to build the binary yourself, you can follow these step
 &lt;p&gt;We recommend using repctl for the installation, as it simplifies the installation workflow. This process also helps configure &lt;code&gt;repctl&lt;/code&gt;
 for future use during management operations.&lt;/p&gt;
 &lt;h4 id=&#34;using-repctl&#34;&gt;Using repctl&lt;/h4&gt;
-&lt;p&gt;Please follow the steps &lt;a href=&#34;../install-repctl&#34;&gt;here&lt;/a&gt; to install &amp;amp; configure Dell Replication Controller&lt;/p&gt;
+&lt;p&gt;Please follow the steps &lt;a href=&#34;../install-repctl&#34;&gt;here&lt;/a&gt; to install &amp;amp; configure Dell Replication Controller using repctl.&lt;/p&gt;
 &lt;h4 id=&#34;using-the-installation-script&#34;&gt;Using the installation script&lt;/h4&gt;
-&lt;p&gt;Repeat the following steps on all clusters where you want to configure replication:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone github.com/dell/csm-replication
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create ns dell-replication-controller
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy and  modify values.yaml file if you wish to customize your deployment in any way&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp ./helm/csm-replication/values.yaml ./myvalues.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash scripts/install.sh --values ./myvalues.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;Note: Current installation method allows you to specify custom &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; entries to be appended to controller&amp;rsquo;s &lt;code&gt;/etc/hosts&lt;/code&gt; file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server&amp;rsquo;s address.
-The feature can be enabled by modifying &lt;code&gt;values.yaml&lt;/code&gt;.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-hostAliases:&#34; data-lang=&#34;hostAliases:&#34;&gt;- ip: &amp;#34;10.10.10.10&amp;#34;
-  hostnames:
-    - &amp;#34;foo.bar&amp;#34;
-- ip: &amp;#34;10.10.10.11&amp;#34;
-  hostnames:
-    - &amp;#34;foo.baz&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
-&lt;p&gt;This script will do the following:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Install &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; CRD in your cluster&lt;/li&gt;
-&lt;li&gt;Install &lt;code&gt;dell-replication-controller&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;After the installation ConfigMap will consist of only the &lt;code&gt;logLevel&lt;/code&gt; field, to add the rest configuration to the cluster do the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Update the configuration in &lt;code&gt;deploy/config.yaml&lt;/code&gt; after going through the guide &lt;a href=&#34;../configmap-secrets&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Run the following commands to update and complete the installation&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    kubectl create configmap dell-replication-controller-config --namespace dell-replication-controller --from-file deploy/config.yaml -o yaml --dry-run &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;install-csi-driver&#34;&gt;Install CSI driver&lt;/h3&gt;
+&lt;p&gt;Please follow the steps &lt;a href=&#34;../install-script&#34;&gt;here&lt;/a&gt; to install &amp;amp; configure Dell Replication Controller using script.&lt;/p&gt;
+&lt;h3 id=&#34;install-csi-driver&#34;&gt;Install CSI driver&lt;/h3&gt;
 &lt;p&gt;The following CSI drivers support replication:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;CSI driver for PowerMax&lt;/li&gt;
@@ -225,6 +190,20 @@ already has all the required RBAC privileges.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  These steps should not be used when installing using Dell CSM Operator.&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h3 id=&#34;set-up-repctl-tool&#34;&gt;Set up repctl tool&lt;/h3&gt;
+&lt;p&gt;Before you begin, make sure you have the repctl tool available.&lt;/p&gt;
+&lt;p&gt;You can download a pre-built repctl binary from our &lt;a href=&#34;https://github.com/dell/csm-replication/releases&#34;&gt;Releases&lt;/a&gt; page.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://github.com/dell/csm-replication/releases/download/v1.4.0/repctl-linux-amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv repctl-linux-amd64 repctl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x repctl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternately, if you want to build the binary yourself, you can follow these steps:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication/repctl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make build
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;installation-steps&#34;&gt;Installation steps&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  The repctl commands only have to be run from one Kubernetes cluster. Repctl does the appropriate configuration on both clusters, when installing replication with it.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;You can start using Container Storage Modules (CSM) for Replication with help from &lt;code&gt;repctl&lt;/code&gt; using these simple steps:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Prepare admin Kubernetes clusters configs&lt;/li&gt;
@@ -252,8 +231,7 @@ The message should disappear once you inject the kubeconfigs (next step).&lt;/p&
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
-&lt;li&gt;Modify &lt;code&gt;examples/&amp;lt;storage&amp;gt;_example_values.yaml&lt;/code&gt; config with replication
-information:
+&lt;li&gt;Modify &lt;code&gt;csm-replication/repctl/examples/&amp;lt;storage&amp;gt;_example_values.yaml&lt;/code&gt; config with replication information:
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  &lt;code&gt;clusterID&lt;/code&gt; should match names you gave to clusters in step 2&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -270,6 +248,51 @@ information:
 &lt;p&gt;Note: all &lt;code&gt;repctl&lt;/code&gt; output is saved in a &lt;code&gt;repctl.log&lt;/code&gt; file in the current working directory and can be attached to any installation troubleshooting requests.&lt;/p&gt;
 &lt;/blockquote&gt;
 
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Installation using script</title>
+      <link>https://dell.github.io/csm-docs/docs/replication/deployment/install-script/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/replication/deployment/install-script/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;install-replication-walkthrough&#34;&gt;Install Replication Walkthrough&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  These steps should be repeated on all Kubernetes clusters where you want to configure replication.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create ns dell-replication-controller
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy and  modify values.yaml file if you wish to customize your deployment in any way&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp ./helm/csm-replication/values.yaml ./myvalues.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bash scripts/install.sh --values ./myvalues.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: Current installation method allows you to specify custom &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; entries to be appended to controller&amp;rsquo;s &lt;code&gt;/etc/hosts&lt;/code&gt; file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server&amp;rsquo;s address.
+The feature can be enabled by modifying &lt;code&gt;values.yaml&lt;/code&gt;.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-hostAliases:&#34; data-lang=&#34;hostAliases:&#34;&gt;- ip: &amp;#34;10.10.10.10&amp;#34;
+  hostnames:
+    - &amp;#34;foo.bar&amp;#34;
+- ip: &amp;#34;10.10.10.11&amp;#34;
+  hostnames:
+    - &amp;#34;foo.baz&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;p&gt;This script will do the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Install &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; CRD in your cluster&lt;/li&gt;
+&lt;li&gt;Install &lt;code&gt;dell-replication-controller&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After the installation ConfigMap will consist of only the &lt;code&gt;logLevel&lt;/code&gt; field, to add the rest configuration to the cluster do the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Update the configuration in &lt;code&gt;deploy/config.yaml&lt;/code&gt; after going through the guide &lt;a href=&#34;../configmap-secrets&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Run the following commands to update and complete the installation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    kubectl create configmap dell-replication-controller-config --namespace dell-replication-controller --from-file deploy/config.yaml -o yaml --dry-run &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     
