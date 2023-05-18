@@ -3,14 +3,11 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.6.0
+## Release Notes - CSI PowerFlex v2.7.0
 
 ### New Features/Changes
-- [PowerFlex pre-approved GUIDs support added.](https://github.com/dell/csm/issues/402)
-- [Rename SDC support added.](https://github.com/dell/csm/issues/402)
-- [K8 1.26 support added.](https://github.com/dell/csm/issues/597)
-- [RKE 1.4.1 support added.](https://github.com/dell/csm/issues/670)
-- [MKE 3.6.0 support added.](https://github.com/dell/csm/issues/672)
+- [K8 1.27 support added.](https://github.com/dell/csm/issues/743)
+- [OCP 4.12 support added](https://github.com/dell/csm/issues/743)
 
 ### Fixed Issues
 

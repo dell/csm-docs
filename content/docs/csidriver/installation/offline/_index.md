@@ -89,9 +89,9 @@ cd dell-csi-operator/scripts
    dellemc/csi-unity:v2.3.0
    dellemc/csi-unity:v2.4.0
    dellemc/csi-unity:v2.5.0
-   dellemc/csi-vxflexos:v2.4.0
    dellemc/csi-vxflexos:v2.5.0
    dellemc/csi-vxflexos:v2.6.0
+   dellemc/csi-vxflexos:v2.7.0
    dellemc/dell-csi-operator:v1.11.0
    dellemc/sdc:3.5.1.1-1
    dellemc/sdc:3.6
@@ -217,9 +217,9 @@ Preparing a offline bundle for installation
    dellemc/csi-unity:v2.3.0 -> localregistry:5000/csi-operator/csi-unity:v2.3.0
    dellemc/csi-unity:v2.4.0 -> localregistry:5000/csi-operator/csi-unity:v2.4.0
    dellemc/csi-unity:v2.5.0 -> localregistry:5000/csi-operator/csi-unity:v2.5.0
-   dellemc/csi-vxflexos:v2.4.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.4.0
    dellemc/csi-vxflexos:v2.5.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.5.0
    dellemc/csi-vxflexos:v2.6.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.6.0
+   dellemc/csi-vxflexos:v2.4.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.7.0
    dellemc/sdc:3.5.1.1-1 -> localregistry:5000/csi-operator/sdc:3.5.1.1-1
    dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
    dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
@@ -244,9 +244,9 @@ Preparing a offline bundle for installation
    changing: dellemc/csi-unity:v2.3.0 -> localregistry:5000/csi-operator/csi-unity:v2.3.0
    changing: dellemc/csi-unity:v2.4.0 -> localregistry:5000/csi-operator/csi-unity:v2.4.0
    changing: dellemc/csi-unity:v2.5.0 -> localregistry:5000/csi-operator/csi-unity:v2.5.0
-   changing: dellemc/csi-vxflexos:v2.4.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.4.0
    changing: dellemc/csi-vxflexos:v2.5.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.5.0
    changing: dellemc/csi-vxflexos:v2.6.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.6.0
+   changing: dellemc/csi-vxflexos:v2.4.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.7.0
    changing: dellemc/sdc:3.5.1.1-1 -> localregistry:5000/csi-operator/sdc:3.5.1.1-1
    changing: dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
    changing: dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
