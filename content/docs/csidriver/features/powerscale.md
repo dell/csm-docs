@@ -295,14 +295,14 @@ In case of a failure, one of the standby pods becomes active and takes the posit
 Additionally by leveraging `pod anti-affinity`, no two-controller pods are ever scheduled on the same node.
 
 To increase or decrease the number of controller pods, edit the following value in `myvalues.yaml` file:
-```
+```yaml
 controllerCount: 2
 ```
 
 >**NOTE:** The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.
 
 If you are using the `dell-csi-operator`, adjust the following value in your Custom Resource manifest
-```
+```yaml
 replicas: 2  
 ```
 For more details about configuring Controller HA using the Dell CSI Operator, refer to the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).
@@ -479,7 +479,7 @@ As part of driver installation, a ConfigMap with the name `isilon-config-params`
 Users can set the default log level by specifying log level to `logLevel` attribute in values.yaml during driver installation.
 
 To change the log level dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade
 ```
@@ -491,7 +491,7 @@ Note: here my-isilon-settings.yaml is a values.yaml file which user has used for
 As part of driver installation, a ConfigMap with the name `isilon-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `isilon-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
-```
+```bash
 kubectl edit configmap -n isilon isilon-config-params
 ```  
 
@@ -512,7 +512,7 @@ The permissions for volume directory can now be configured in 3 ways:
 2. Through secrets
 3. Through storage class
 
-```
+```yaml
   # isiVolumePathPermissions: The permissions for isi volume directory path
   # This value acts as a default value for isiVolumePathPermissions, if not specified for a cluster config in secret
   # Allowed values: valid octal mode number
@@ -548,7 +548,9 @@ For example, if a volume were to be deleted from the array, or unmounted outside
 Use `ReadWriteOncePod(RWOP)` access mode if you want to ensure that only one pod across the whole cluster can read that PVC or write to it. This is supported for CSI Driver for PowerScale 2.1.0+ and Kubernetes version 1.22+.
 
 To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet, by setting command line arguments:
-`--feature-gates="...,ReadWriteOncePod=true"`
+```bash
+--feature-gates="...,ReadWriteOncePod=true"
+```
 
 ### Creating a PersistentVolumeClaim
 ```yaml

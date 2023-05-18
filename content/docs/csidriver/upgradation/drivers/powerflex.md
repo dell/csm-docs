@@ -16,26 +16,36 @@ You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operato
 2. You need to create config.yaml with the configuration of your system.
    Check this section in installation documentation:  [Install the Driver](../../../installation/helm/powerflex#install-the-driver)
 3. Update values file as needed.
-4. Run the `csi-install` script with the option _\-\-upgrade_ by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade`.
+4. Run the `csi-install` script with the option _\-\-upgrade_ by running: 
+   ```bash
+  
+   cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
+   ```
 
 *NOTE:*
 - If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.
-- To update any installation parameter after the driver has been installed, change the `myvalues.yaml` file and run the install script with the option _\-\-upgrade_, for example: `./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade`.
+- To update any installation parameter after the driver has been installed, change the `myvalues.yaml` file and run the install script with the option _\-\-upgrade_, for example: 
+  ```bash
+
+  ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
+  ```
 - The logging configuration from v1.5 will not work in v2.1, since the log configuration parameters are now set in the values.yaml file located at helm/csi-vxflexos/values.yaml. Please set the logging configuration parameters in the values.yaml file.
 
 - You cannot upgrade between drivers with different fsGroupPolicies. To check the current driver's fsGroupPolicy, use this command:  
-``` kubectl describe csidriver csi-vxflexos.dellemc.com```   
-and check the "Spec" section:    
-```
-...
-Spec:
-  Attach Required:     true
-  Fs Group Policy:     ReadWriteOnceWithFSType
-  Pod Info On Mount:   true
-  Requires Republish:  false
-  Storage Capacity:    false
-...
-```
+  ```bash
+   kubectl describe csidriver csi-vxflexos.dellemc.com
+  ```   
+  and check the "Spec" section:    
+  ```yaml
+  ...
+  Spec:
+    Attach Required:     true
+    Fs Group Policy:     ReadWriteOnceWithFSType
+    Pod Info On Mount:   true
+    Requires Republish:  false
+    Storage Capacity:    false
+  ...
+  ```
 
 ## Upgrade using Dell CSI Operator:
 **Note:** Upgrading the Operator does not upgrade the CSI Driver.

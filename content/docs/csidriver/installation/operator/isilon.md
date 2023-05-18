@@ -21,7 +21,9 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
 
 ### Listing installed drivers with the CSI Isilon CRD
 User can query for CSI-PowerScale driver using the following command:
-`kubectl get csiisilon --all-namespaces`
+```bash
+kubectl get csiisilon --all-namespaces
+```
 
 ### Install Driver
 
@@ -31,7 +33,7 @@ User can query for CSI-PowerScale driver using the following command:
 2. Create *isilon-creds* secret by using secret.yaml file format only.
   
    2.1   Create a yaml file called secret.yaml with the following content:
-     ```
+     ```yaml
       isilonClusters:
          # logical name of PowerScale Cluster
        - clusterName: "cluster1"
@@ -85,11 +87,17 @@ User can query for CSI-PowerScale driver using the following command:
       ```
 
    Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,  
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
+   ```bash
+
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml
+   ```
 
    Use the following command to replace or update the secret
 
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
+   ```bash
+
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+   ```
 
    **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
    The driver will continue to use previous values in case of an error found in the YAML file.
@@ -109,7 +117,10 @@ User can query for CSI-PowerScale driver using the following command:
       data:
          cert-0: ""
       ```
-      Execute command: ```kubectl create -f empty-secret.yaml```
+      Execute command: 
+      ```bash
+      kubectl create -f empty-secret.yaml
+      ```
 
 4. Create a CR (Custom Resource) for PowerScale using the sample files provided 
    [here](https://github.com/dell/dell-csi-operator/tree/master/samples).
@@ -145,7 +156,9 @@ User can query for CSI-PowerScale driver using the following command:
    | leader-election-retry-period   | Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |   
 
 6.  Execute the following command to create PowerScale custom resource:
-    ```kubectl create -f <input_sample_file.yaml>``` .
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ```
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
     
 **Note** : 
