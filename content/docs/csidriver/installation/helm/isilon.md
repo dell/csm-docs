@@ -35,7 +35,11 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
 **Steps**
 
-  Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
+  Run the command to install Helm 3.0.
+  ```bash
+
+  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  ```
 
 ### (Optional) Volume Snapshot Requirements
 
@@ -237,12 +241,17 @@ Create isilon-creds secret using the following command:
    - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../authorization) is enabled.
    
 7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell PowerScale.
-    ```
+    ```bash
     kubectl create -f empty-secret.yaml
     ```
    This command will create a new secret called `isilon-certs-0` in isilon namespace.
    
-8.  Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml` (assuming that the current working directory is 'helm' and my-isilon-settings.yaml is also present under 'helm' directory)
+8.  Install the driver using `csi-install.sh` bash script by running 
+    ```bash
+   
+    cd ../dell-csi-helm-installer && ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml
+    ``` 
+(assuming that the current working directory is 'helm' and my-isilon-settings.yaml is also present under 'helm' directory)
 
 ## Certificate validation for OneFS REST API calls 
 
@@ -256,9 +265,21 @@ If the 'skipCertificateValidation' parameter is set to false and a previous inst
 
 ### Procedure
 
-1. To fetch the certificate, run `openssl s_client -showcerts -connect [OneFS IP] </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem`
-2. To create the certs secret, run `kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon`  
-3. Use the following command to replace the secret <br/> `kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -`
+1. To fetch the certificate, run 
+```bash
+
+openssl s_client -showcerts -connect [OneFS IP] </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+```
+2. To create the certs secret, run 
+```bash
+
+kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon
+```  
+3. Use the following command to replace the secret <br/> 
+```bash
+
+kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
+```
 
 **NOTES:**
 1. The OneFS IP can be with or without a port, depends upon the configuration of OneFS API server.
@@ -270,7 +291,10 @@ If the 'skipCertificateValidation' parameter is set to false and a previous inst
 
 CSI Driver for Dell PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating *secret.yaml*. Users can now update the isilon-creds secret by editing the *secret.yaml* and executing the following command
 
-`kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
+```bash
+
+kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+```
 
 
 **Note**: Updating isilon-certs-x secrets is a manual process, unlike isilon-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.

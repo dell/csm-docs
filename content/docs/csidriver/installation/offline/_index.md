@@ -64,15 +64,16 @@ The script will perform the following steps:
 The resulting offline bundle file can be copied to another machine, if necessary, to gain access to the desired image registry.
 
 For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:
-```
+```bash
 git clone -b v1.11.0 https://github.com/dell/dell-csi-operator.git
 ```
-```
+```bash
 cd dell-csi-operator/scripts
 ```
+```bash
+./csi-offline-bundle.sh -c
 ```
-[root@user scripts]# ./csi-offline-bundle.sh -c
-
+```
 *
 * Pulling and saving container images
 
@@ -156,8 +157,10 @@ The script will then perform the following steps:
 
 
 An example of preparing the bundle for installation (192.168.75.40:5000 refers to an image registry accessible to Kubernetes/OpenShift):
-```
+```bash
 tar xvfz dell-csi-operator-bundle.tar.gz
+```
+```
 dell-csi-operator-bundle/
 dell-csi-operator-bundle/samples/
 ...
@@ -166,11 +169,13 @@ dell-csi-operator-bundle/samples/
 dell-csi-operator-bundle/LICENSE
 dell-csi-operator-bundle/README.md
 ```
-```
+```bash
 cd dell-csi-operator-bundle
 ```
+```bash
+./csi-offline-bundle.sh -p -r localregistry:5000/csi-operator
 ```
-[root@user scripts]# ./csi-offline-bundle.sh -p -r localregistry:5000/csi-operator
+```
 Preparing a offline bundle for installation
 
 *
