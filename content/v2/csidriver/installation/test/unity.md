@@ -13,11 +13,11 @@ In the repository, a simple test manifest exists that creates three different Pe
    ```bash
    kubectl create -f ./test/sample.yaml
    ```
-You can find all the created resources in `unity` namespace.
+You can find all the created resources in `test-unity` namespace.
 
 2. Check if the pod is created and Ready and Running by running:
    ```bash
-   kubectl get all -n unity
+   kubectl get all -n test-unity
    ```
    If it is in CrashLoopback state then the driver installation was not successful. Check the logs of the node and the controller.
 
