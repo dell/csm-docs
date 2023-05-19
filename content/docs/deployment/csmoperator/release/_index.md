@@ -10,10 +10,12 @@ Description: >
 
 ### New Features/Changes
 - [Added support for CSI Unity XT Driver](https://github.com/dell/csm/issues/756)
+- [Added Replication Support for PowerFlex driver](https://github.com/dell/csm/issues/821)
 
 
 ### Fixed Issues
 - [CSM object goes into failed state when deployments are getting scaled down/up](https://github.com/dell/csm/issues/816)
+- [Replication install using Operator does not work](https://github.com/dell/csm/issues/788)
 
 
 ### Known Issues
