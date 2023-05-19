@@ -26,7 +26,7 @@ kubectl get csm --all-namespaces
 1. Create namespace.
    Execute `kubectl create namespace unity` to create the unity namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'unity'.
 
-2. Create a file called `config.yaml` that has Unity XT array connection details with the following content
+2. Create a file called `secret.yaml` that has Unity XT array connection details with the following content
    ```yaml
       storageArrayList:
       - arrayId: "APM00******1"                 # unique array id of the Unisphere array
