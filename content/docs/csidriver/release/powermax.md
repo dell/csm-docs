@@ -18,6 +18,7 @@ description: Release notes for PowerMax CSI driver
 - [Added support for host groups for vSphere environment](https://github.com/dell/csm/issues/746)
 - [Added support to delete volumes on target array when it is set to Delete in storage class](https://github.com/dell/csm/issues/801)
 - [Added support for setting up QoS parameters for throttling performance and bandwidth at Storage Group level](https://github.com/dell/csm/issues/726)
+- [Added support for PowerMax Driver](https://github.com/dell/csm/issues/769)
 
 ### Fixed Issues
 There are no fixed issues in this release.

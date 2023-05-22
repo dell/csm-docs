@@ -2,7 +2,7 @@
 title: Replication
 linkTitle: "Replication"
 description: >
-  Pre-requisite for Installing Replication via Dell CSM Operator
+  Installing Replication via Dell CSM Operator
 ---
 
 The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Replication sidecar and the complemental CSM Replication controller manager.

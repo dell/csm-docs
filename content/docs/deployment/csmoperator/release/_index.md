@@ -10,6 +10,7 @@ Description: >
 
 ### New Features/Changes
 - [Added support for CSI Unity XT Driver](https://github.com/dell/csm/issues/756)
+- [Added support for PowerMax Driver](https://github.com/dell/csm/issues/769)
 - [Added Replication Support for PowerFlex driver](https://github.com/dell/csm/issues/821)
 
 

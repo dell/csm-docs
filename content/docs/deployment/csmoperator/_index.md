@@ -21,6 +21,7 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 | CSI PowerScale     | 2.5.0 +   |   v2.5.0 +     |
 | CSI PowerFlex      | 2.5.0 +   |   v2.5.0 +     |
 | CSI PowerStore     | 2.5.0 +   |   v2.5.0 +     |
+| CSI PowerMax       | 2.6.0 +   |   v2.6.0 +     |
 | CSI Unity XT       | 2.5.0 +   |   v2.5.0 +     |
 
 ## Supported CSM Modules

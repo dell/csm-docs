@@ -2,7 +2,7 @@
 title: Authorization
 linkTitle: "Authorization"
 description: >
-  Pre-requisite for Installing Authorization via Dell CSM Operator
+  Installing Authorization via Dell CSM Operator
 ---
 
 ## Install CSM Authorization via Dell CSM Operator

@@ -43,6 +43,7 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 
 Refer [PowerScale Driver](../drivers/powerscale) to install the driver via Operator <br>
 Refer [PowerFlex Driver](../drivers/powerflex) to install the driver via Operator <br>
+Refer [PowerMax Driver](../drivers/powermax) to install the driver via Operator <br>
 Refer [PowerStore Driver](../drivers/powerstore) to install the driver via Operator <br>
 Refer [Unity Driver](../drivers/unity) to install the driver via Operator <br>
 
