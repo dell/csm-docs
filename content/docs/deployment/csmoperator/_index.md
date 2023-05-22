@@ -12,15 +12,16 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 
 | Kubernetes Version         | OpenShift Version   |
 | -------------------------- | ------------------- |
-| 1.24, 1.25, 1.26           | 4.10, 4.10 EUS, 4.11 |
+| 1.25, 1.26, 1.27           | 4.11, 4.12, 4.12 EUS |
 
 ## Supported CSI Drivers
 
 | CSI Driver         | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
-| CSI PowerScale     | 2.4.0 +   |   v2.4.0 +     |
-| CSI PowerFlex      | 2.4.0 +   |   v2.4.0 +     |
-| CSI PowerStore     | 2.4.0 +   |   v2.4.0 +     |
+| CSI PowerScale     | 2.5.0 +   |   v2.5.0 +     |
+| CSI PowerFlex      | 2.5.0 +   |   v2.5.0 +     |
+| CSI PowerStore     | 2.5.0 +   |   v2.5.0 +     |
+| CSI Unity XT       | 2.5.0 +   |   v2.5.0 +     |
 
 ## Supported CSM Modules
 
@@ -40,7 +41,7 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 1. Clone and checkout the required csm-operator version using 
 ```bash
-git clone -b v1.1.0 https://github.com/dell/csm-operator.git
+git clone -b v1.2.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
@@ -81,7 +82,7 @@ Dell CSM Operator can be upgraded in 2 ways:
 #### Using Installation Script
 1. Clone and checkout the required csm-operator version using 
 ```bash
-git clone -b v1.1.0 https://github.com/dell/csm-operator.git
+git clone -b v1.2.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
