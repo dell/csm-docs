@@ -405,7 +405,7 @@ To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver man
         - name: "X_CSI_VSPHERE_PORTGROUP"
           value: ""
         # X_CSI_VSPHERE_HOSTNAME: An existing host(initiator group)/ host group(cascaded intiator group) that driver will use for vSphere
-        # this host should contain initiators from all the ESXs/ESXi host where the cluster is deployed
+        # this host/host group should contain initiators from all the ESXs/ESXi host where the cluster is deployed
         # recommended format: csi-x-VC-HN, x can be anything of user choice
         # Allowed value: valid existing host(initiator group)/ host group(cascaded intiator group) on the array
         # Default value: "" <empty>
