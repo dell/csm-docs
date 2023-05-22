@@ -14,8 +14,8 @@ The following command creates a statefulset that consumes three volumes of defau
 kubectl create -f test/sample.yaml
 ```
 
-After executing this command 3 PVC and statefulset are created in the `test-unity` namespace.
-You can check created PVCs by running `kubectl get pvc -n test-unity` and check statefulset's pods by running `kubectl get pods -n test-unity` command.
+After executing this command 3 PVC and statefulset are created in the `unity` namespace.
+You can check created PVCs by running `kubectl get pvc -n unity` and check statefulset's pods by running `kubectl get pods -n unity` command.
 The pod should be `Ready` and `Running`.
 
 > If Pod is in CrashLoopback or PVCs is in a Pending state then driver installation is not successful, check logs of node and controller.
@@ -126,7 +126,7 @@ apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
   name: pvol0-snap
-  namespace: test-unity
+  namespace: unity
 spec:
   volumeSnapshotClassName: unity-snapclass
   source:
@@ -155,7 +155,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: restorepvc
-  namespace: test-unity
+  namespace: unity
 spec:
   storageClassName: unity-iscsi
   dataSource:
@@ -275,7 +275,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: vol0
-  namespace: test-unity
+  namespace: unity
 spec:
   storageClassName: unity-nfs
   accessModes:
@@ -293,7 +293,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: cloned-pvc
-  namespace: test-unity
+  namespace: unity
 spec:
   storageClassName: unity-nfs
   dataSource:
@@ -631,7 +631,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: unity-config-params
-  namespace: test-unity
+  namespace: unity
 data:
   driver-config-params.yaml: |
     CSI_LOG_LEVEL: "info"
