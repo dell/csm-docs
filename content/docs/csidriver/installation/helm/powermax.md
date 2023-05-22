@@ -108,8 +108,6 @@ Set up the environment as follows:
     ```
   where *myusername* and *mypassword* are credentials for a user with vCenter privileges.
 
->Note: Initiators from all ESX/ESXi should be part of a single host(initiator group) and not hostgroup(cascaded intitiator group).
-
 Create the secret by running the below command, 
 ```bash
 kubectl create -f samples/secret/vcenter-secret.yaml
@@ -292,7 +290,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | **vSphere**| This section refers to the configuration options for VMware virtualized environment support via RDM  |  -  | - |
 | enabled                  | A boolean that enables/disables VMware virtualized environment support. |  No      |   false   |
 | fcPortGroup                  | Existing portGroup that driver will use for vSphere. |  Yes      |   ""   |
-| fcHostGroup                  | Existing host(initiator group) that driver will use for vSphere. |  Yes      |   ""   |
+| fcHostGroup                  | Existing host(initiator group)/hostgroup(cascaded initiator group) that driver will use for vSphere. |  Yes      |   ""   |
 | vCenterHost                  | URL/endpoint of the vCenter where all the ESX are present |  Yes      |   ""   |
 | vCenterCredSecret                  | Secret name for the vCenter credentials. |  Yes      |   ""   |
 
