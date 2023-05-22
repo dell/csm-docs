@@ -50,7 +50,7 @@ Set up the environment as follows:
 
 - Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
 
-- Add initiators from all ESX/ESXis to a host/host group(initiator group) where the cluster is hosted.
+- Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
 - Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same. 
 
 >Note: Hostgroups support with vSphere environment will be only available on csm-operator.
