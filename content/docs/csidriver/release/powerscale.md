@@ -3,6 +3,7 @@ title: PowerScale
 description: Release notes for PowerScale CSI driver
 ---
 
+
 ## Release Notes - CSI Driver for PowerScale v2.7.0
 
 ### New Features/Changes
@@ -15,7 +16,9 @@ description: Release notes for PowerScale CSI driver
 
 ### Fixed Issues
 
-There are no fixed issues in this release.
+| Github ID                                     | Description                                                                            |
+| --------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [753](https://github.com/dell/csm/issues/753) | **Replication:** Incorrect quota set on the target PV/directory when Quota is enabled. |
 
 ### Known Issues
 | Issue                                                                                                                                                                                                                               | Resolution or workaround, if known                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |

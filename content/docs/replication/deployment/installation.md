@@ -6,26 +6,16 @@ description: >
   Installation of CSM for Replication
 ---
 
-The installation process consists of three steps:
+The installation process consists of two steps:
 
-1. Install repctl
-2. Install Container Storage Modules (CSM) for Replication Controller
-3. Install CSI driver after enabling replication
+1. Install Container Storage Modules (CSM) for Replication Controller
+2. Install CSI driver after enabling replication
 
 ### Before you begin
 Please read this [document](../configmap-secrets) before proceeding with the installation. It provides detailed steps on how to set up communication between multiple
 clusters which will be required during or after the installation.
 
-### Install repctl
-You can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
-Alternately, if you want to build the binary yourself, you can follow these steps:
-```shell
-git clone github.com/dell/csm-replication
-cd csm-replication/repctl
-make build
-```
-
-### Installing CSM Replication Controller
+### Install CSM Replication Controller
 You can use one of the following methods to install CSM Replication Controller:
 * Using repctl
 * Installation script (Helm chart)
@@ -34,7 +24,7 @@ We recommend using repctl for the installation, as it simplifies the installatio
 for future use during management operations.
 
 #### Using repctl
-Please follow the steps [here](../install-repctl) to install & configure Dell Replication Controller
+Please follow the steps [here](../install-repctl) to install & configure Dell Replication Controller using repctl.
 
 #### Using the installation script
 Repeat the following steps on all clusters where you want to configure replication:
