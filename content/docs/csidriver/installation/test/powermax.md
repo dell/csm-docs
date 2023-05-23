@@ -19,7 +19,11 @@ Use this procedure to perform a volume test.
 
 1. Create a namespace with the name _test_.
 2. Run the `cd csi-powermax/test/helm` command to go to the `csi-powermax/test/helm` directory, which contains the `starttest.sh` script and the _2vols_ directories.
-3. Run the starttest.sh script and provide it with a test name. The following sample command can be used to run the _2vols_ test: `./starttest.sh -t 2vols -n <test_namespace> -s <storageclass-name>`
+3. Run the starttest.sh script and provide it with a test name. The following sample command can be used to run the _2vols_ test: 
+   ```bash
+   
+   ./starttest.sh -t 2vols -n <test_namespace> -s <storageclass-name>
+   ```
 
     This script installs a helm chart that creates a Pod with a container, creates two PVCs, and mounts them into the created container. You can now log in to the newly created container and check the mounts.
 4. Run the `/stoptest.sh -t 2vols -n <test_namespace>` script to stop the test. This script deletes the Pods and the PVCs created during the test and uninstalls the helm chart.
@@ -32,7 +36,11 @@ Use this procedure to perform a volume clone test.
 
 1. Create a namespace with the name _test_.
 2. Run the `cd csi-powermax/test/helm` command to go to the `csi-powermax/test/helm` directory, which contains the `volumeclonetest.sh` script.
-3. Run the `volumeclonetest.sh` script using the following command: `bash volumeclonetest.sh -n <test_namespace> -s <storageclass-name>`
+3. Run the `volumeclonetest.sh` script using the following command: 
+   ```bash 
+
+   volumeclonetest.sh -n <test_namespace> -s <storageclass-name>
+   ```
 
 This script does the following:
 - Installs a helm chart that creates a Pod with a container, creates two PVCs, and mounts them into the created container.
@@ -172,3 +180,35 @@ spec:
 5. After the pod becomes `Ready` and `Running`, you can start to use this pod and volume.
 
 >Note: CSI driver for PowerMax will create the necessary objects like Storage group, HostID and Masking View. They must not be created manually.
+
+
+## Setting QoS parameters for throttling performance and bandwidth 
+
+Use this procedure to set QoS parameters for throttling performance and bandwidth
+
+1. Create [storage class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) with the following parameters set.
+
+``` yaml
+ # Following params are for HostLimits, set them only if you want to set IOLimits
+  # HostLimitName uniquely identifies given set of limits on a storage class
+  # This is used in naming storage group, max of 3 letter
+  # Optional: true
+  # Example: "HL1", "HL2"
+  #HostLimitName: "HL1"
+  # The MBs per Second Host IO limit for the storage class
+  # Optional: true, Default: ""
+  # Examples: 100, 200, NOLIMIT
+  #HostIOLimitMBSec: ""
+  # The IOs per Second Host IO limit for the storage class
+  # Optional: true, Default: ""
+  # Examples: 100, 200, NOLIMIT
+  #HostIOLimitIOSec: ""
+  # distribution of the Host IO limits for the storage class
+  # Optional: true, Default: ""
+  # Allowed values: Never","Always" or "OnFailure" only
+  #DynamicDistribution: ""
+  ```
+
+2. Use the above storage class to create the PVC and provision the volume to the pod.
+
+3. Once the pod becones `Ready` and `Running`, you will see the QoS parameters applied for throttling performance and bandwidth.

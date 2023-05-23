@@ -2,26 +2,50 @@
 title: Replication
 linkTitle: "Replication"
 description: >
-  Pre-requisite for Installing Replication via Dell CSM Operator
+  Installing Replication via Dell CSM Operator
 ---
 
-The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Replication sidecar and the complemental CSM Replication controller manager.
+The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy the CSM Replication sidecar and the CSM Replication Controller Manager.
 
-## Prerequisite
-
-To use Replication, you need at least two clusters:
+## Prerequisites
+To configure Replication prior to installation via CSM Operator, you need:
 
 - a source cluster which is the main cluster
-- one or more target clusters which will serve as diaster recovery clusters for the main cluster
+- a target cluster which will serve as the disaster recovery cluster
+> **_NOTE:_**  If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster. The source cluster is also the target cluster.
 
-To configure all the clusters, follow the steps below:
+### Cloning the GitHub Repository and Building repctl
+The [csm-replication](https://github.com/dell/csm-replication.git) GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:
 
-1. On your main cluster, follow the instructions available in CSM Replication for [Installation using repctl](../../../../replication/deployment/install-repctl), with the exception of step 4. When you reach step 4, you MUST use the command below to automatically package all clusters `.kube` config as a secret:           
-
-```shell
-  ./repctl cluster inject 
+```
+git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+cd csm-replication/repctl
+make build
 ```
 
-CSM Operator needs this admin configs instead of the service accounts’ configs  to be able to properly manage the target clusters. The default service account that'll be used is the CSM Operator service account.
+The rest of the instructions will assume that your current working directory is the csm-replication/repctl directory.
+## Configuration Steps
+To configure Replication perform the following steps:
 
-2. On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following [prerequisites for deploying PowerScale via Dell CSM Operator](../../drivers/powerscale/#prerequisite)
+1. On your main cluster collect the cluster admin configurations for each of the clusters. In the following example the source cluster, `cluster-1` uses configuration `/root/.kube/config-1` and the target cluster, `cluster-2` uses the configuration `/root/.config/config-2`. Use repctl to add the clusters:
+    ```shell
+      ./repctl cluster add -f "/root/.kube/config-1","/root/.kube/config-2" -n "cluster-1","cluster-2"
+    ```
+  > **_NOTE:_**  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.
+2. Install the replication controller CRDs:
+    ```shell
+    ./repctl create -f ../deploy/replicationcrds.all.yaml
+    ```
+3. Inject the service account's configuration into the clusters.
+    ```shell
+    ./repctl cluster inject
+    ```
+4. Customize the `examples/<storage>_example_values.yaml` sample config. Set the values for sourceClusterID and targetClusterID to the same names used in step 1. For a stretched cluster set both fields to `self`:
+
+5. Create the replication storage classes using the modified configuration from step 4:
+    ```shell
+    ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
+    ```
+6. On the target cluster, configure the [prerequisites](../../../csmoperator/drivers/#pre-requisites-for-installation-of-the-csi-drivers) for deploying the driver via Dell CSM Operator.
+
+7. Install the CSI driver for your chosen storage platform on the source cluster according to the instructions for [installing the drivers using CSM Operator](../../../csmoperator/drivers/#installing-csi-driver-via-operator).

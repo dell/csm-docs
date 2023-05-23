@@ -39,8 +39,11 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
 **Steps**
 
-  Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
-
+  Run the command to install Helm 3.0.
+  ```bash
+  
+  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  ```
 ### Fibre Channel requirements
 
 Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
@@ -66,7 +69,9 @@ For information about configuring iSCSI, see _Dell PowerStore documentation_ on 
 
 If you want to use the protocol, set up the NVMe initiators as follows:
 - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
-`sudo apt install nvme-cli`
+```bash
+sudo apt install nvme-cli
+```
 
 **Requirements for NVMeTCP**
 - Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
@@ -94,42 +99,7 @@ Set up Linux multipathing as follows:
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
 ### (Optional) Volume Snapshot Requirements
-
-Applicable only if you decided to enable the snapshot feature in `values.yaml`
-
-```yaml
-snapshot:
-  enabled: true
-```
-
-#### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd) for the installation.
-
-#### Volume Snapshot Controller
-The CSI external-snapshotter sidecar is split into two controllers:
-- A common snapshot controller
-- A CSI external-snapshotter sidecar
-
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available:
-Use [v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller) for the installation.
-
-*NOTE:*
-- The manifests available on GitHub install the snapshotter image: 
-   - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
-
-#### Installation example
-You can install CRDs and default snapshot controller by running these commands:
-```bash
-git clone https://github.com/kubernetes-csi/external-snapshotter/
-cd ./external-snapshotter
-git checkout release-<your-version>
-kubectl kustomize client/config/crd | kubectl create -f -
-kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
-```
-
-*NOTE:*
-- It is recommended to use 6.1.x version of snapshotter/snapshot-controller.
+  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### Volume Health Monitoring
 
@@ -138,28 +108,28 @@ To enable this feature, add the below block to the driver manifest before instal
 health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
 volume stats value under node should be set to true.
    ```yaml
-controller:
-  healthMonitor:
-    # enabled: Enable/Disable health monitor of CSI volumes
-    # Allowed values:
-    #   true: enable checking of health condition of CSI volumes
-    #   false: disable checking of health condition of CSI volumes
-    # Default value: None
-    enabled: false
-    # interval: Interval of monitoring volume health condition
-    # Allowed values: Number followed by unit (s,m,h)
-    # Examples: 60s, 5m, 1h
-    # Default value: 60s
-    interval: 60s
+    controller:
+      healthMonitor:
+        # enabled: Enable/Disable health monitor of CSI volumes
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: None
+        enabled: false
+        # interval: Interval of monitoring volume health condition
+        # Allowed values: Number followed by unit (s,m,h)
+        # Examples: 60s, 5m, 1h
+        # Default value: 60s
+        interval: 60s
 
-node:
-  healthMonitor:
-    # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
-    # Allowed values:
-    #   true: enable checking of health condition of CSI volumes
-    #   false: disable checking of health condition of CSI volumes
-    # Default value: None
-    enabled: false
+    node:
+      healthMonitor:
+        # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: None
+        enabled: false
    ```
 ### (Optional) Replication feature Requirements
 
@@ -193,11 +163,28 @@ CRDs should be configured during replication prepare stage with repctl as descri
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
-4. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
+    ### User Privileges
+    The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct privileges to perform the actions. The suggested user role are as follows:
+
+    | User Role             |
+    | --------------------- |
+    | Administrator         |
+    | Storage Administrator |
+    | Storage Operator      |
+
+4. Create the secret by running 
+   ```bash
+  
+   kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml
+   ```
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
    
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
-6. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml`
+6. Copy the default values.yaml file 
+   ```bash
+   
+   cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml
+   ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 
 | Parameter | Description | Required | Default |
@@ -231,7 +218,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
 
-8. Install the driver using `csi-install.sh` bash script by running `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml` 
+8. Install the driver using `csi-install.sh` bash script by running 
+   ```bash
+   
+   ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml
+   ``` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
 
 *NOTE:* 
@@ -266,8 +257,8 @@ There are samples storage class yaml files available under `samples/storageclass
 allowedTopologies:
   - matchLabelExpressions: 
       - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
-# replace "-iscsi" with "-fc", "-nvmetcp" or "-nvmefc" or "-nfs" at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts
-# replace "12.34.56.78" with PowerStore endpoint IP
+  # replace "-iscsi" with "-fc", "-nvmetcp" or "-nvmefc" or "-nfs" at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts
+  # replace "12.34.56.78" with PowerStore endpoint IP
         values:
           - "true"
 ```
@@ -287,6 +278,7 @@ Starting CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Vo
 
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the “Host” information in an array. User can update secret using the following command:
 ```bash
+
 kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 ```
 ## Dynamic Logging Configuration
@@ -299,7 +291,7 @@ As part of driver installation, a ConfigMap with the name `powerstore-config-par
 Users can set the default log level by specifying log level to `logLevel` and log format to `logFormat` attribute in `my-powerstore-settings.yaml` during driver installation.
 
 To change the log level or log format dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade
 ```

@@ -61,7 +61,11 @@ Install Helm 3 on the master node before you install CSI Driver for Dell PowerMa
 
 **Steps**
 
-  Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.
+  Run the command to install Helm 3.
+   ```bash
+   
+   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+   ``` 
 
 
 ### Fibre Channel Requirements
@@ -104,10 +108,10 @@ Set up the environment as follows:
     ```
   where *myusername* and *mypassword* are credentials for a user with vCenter privileges.
 
->Note: Initiators from all ESX/ESXi should be part of a single host(initiator group) and not hostgroup(cascaded intitiator group).
-
 Create the secret by running the below command, 
-`kubectl create -f samples/secret/vcenter-secret.yaml`.
+```bash
+kubectl create -f samples/secret/vcenter-secret.yaml
+```
 
 ### Certificate validation for Unisphere REST API calls
 
@@ -118,11 +122,19 @@ The CSI driver exposes an install parameter `skipCertificateValidation` which de
 If the `skipCertificateValidation` parameter is set to _false_ and a previous installation attempt created an empty secret, then this secret must be deleted and re-created using the CA certs.
 
 If the Unisphere certificate is self-signed or if you are using an embedded Unisphere, then perform the following steps:
-1. To fetch the certificate, run `openssl s_client -showcerts -connect [Unisphere IP]:8443 </dev/null 2> /dev/null | openssl x509 -outform PEM > ca_cert.pem`
+1. To fetch the certificate, run 
+   ```bash
+
+   openssl s_client -showcerts -connect [Unisphere IP]:8443 </dev/null 2> /dev/null | openssl x509 -outform PEM > ca_cert.pem
+   ```
 
    *NOTE*: The IP address varies for each user.
 
-2. To create the secret, run `kubectl create secret generic powermax-certs --from-file=ca_cert.pem -n powermax`
+2. To create the secret, run 
+   ```bash
+
+   kubectl create secret generic powermax-certs --from-file=ca_cert.pem -n powermax
+   ```
 
 ### Ports in the port group
 
@@ -157,48 +169,18 @@ CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux Power
 Set up the PowerPath for Linux as follows:
 
 - All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
-- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
-- Start the PowerPath service using `systemctl start PowerPath`
+- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using 
+   ```bash
+
+    rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm
+   ```
+- Start the PowerPath service using 
+  ```bash
+   systemctl start PowerPath
+  ```
 
 ### (Optional) Volume Snapshot Requirements
-
-Applicable only if you decided to enable snapshot feature in `values.yaml`
-
-```yaml
-snapshot:
-  enabled: true
-```
-
-#### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v6.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.0/client/config/crd)
-
-#### Volume Snapshot Controller
-The CSI external-snapshotter sidecar is split into two controllers to support Volume snapshots.
-
-- A common snapshot controller
-- A CSI external-snapshotter sidecar
-
-The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.2.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.0/deploy/kubernetes/snapshot-controller)
-
-*NOTE:*
-- The manifests available on GitHub install the snapshotter image: 
-  [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
-
-#### Installation example 
-
-You can install CRDs and the default snapshot controller by running the following commands:
-```bash
-git clone https://github.com/kubernetes-csi/external-snapshotter/
-cd ./external-snapshotter
-git checkout release-<your-version>
-kubectl kustomize client/config/crd | kubectl create -f -
-kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
-```
-
-*NOTE:*
-- It is recommended to use 6.1.x version of snapshotter/snapshot-controller.
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### (Optional) Replication feature Requirements
 
@@ -294,7 +276,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
 | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
-| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
+| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 | **migration** | [Migration](../../../../replication/migrating-volumes) is an optional feature to enable migration between storage classes | - | - |
 | enabled                  | A boolean that enables/disables migration feature. |  No      |   false   |
 | image | Image for dell-csi-migrator sidecar. | No | " " |
@@ -308,13 +290,21 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | **vSphere**| This section refers to the configuration options for VMware virtualized environment support via RDM  |  -  | - |
 | enabled                  | A boolean that enables/disables VMware virtualized environment support. |  No      |   false   |
 | fcPortGroup                  | Existing portGroup that driver will use for vSphere. |  Yes      |   ""   |
-| fcHostGroup                  | Existing host(initiator group) that driver will use for vSphere. |  Yes      |   ""   |
+| fcHostGroup                  | Existing host(initiator group)/hostgroup(cascaded initiator group) that driver will use for vSphere. |  Yes      |   ""   |
 | vCenterHost                  | URL/endpoint of the vCenter where all the ESX are present |  Yes      |   ""   |
 | vCenterCredSecret                  | Secret name for the vCenter credentials. |  Yes      |   ""   |
 
 
-8. Install the driver using `csi-install.sh` bash script by running `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml`
-9. Or you can also install the driver using standalone helm chart using the command `helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax`
+8. Install the driver using `csi-install.sh` bash script by running 
+    ```bash
+    
+    cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml
+    ```
+9. Or you can also install the driver using standalone helm chart using the command 
+   ```bash
+   
+   helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax
+   ```
 
 *Note:* 
 - For detailed instructions on how to run the install scripts, see the readme document in the dell-csi-helm-installer folder.

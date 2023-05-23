@@ -18,7 +18,7 @@ In order to use Volume Snapshots, ensure the following components are deployed t
 Installation of PowerFlex driver v1.5 and later does not create VolumeSnapshotClass. You can find a sample of a default v1
 VolumeSnapshotClass instance in `samples/volumesnapshotclass` directory. If needed, you can install the default sample. Following is the default sample for v1:
 
-```
+```yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
@@ -36,7 +36,7 @@ deletionPolicy: Delete
 
 The following is a sample manifest for creating a Volume Snapshot using the v1 snapshot APIs:
 
-```
+```yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
@@ -51,7 +51,7 @@ spec:
 Once the VolumeSnapshot is successfully created by the CSI PowerFlex driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_, it is available for use.
 
 Following is the relevant section of VolumeSnapshot object status:
-```
+```yaml
 status:
   boundVolumeSnapshotContentName: snapcontent-5a8334d2-eb40-4917-83a2-98f238c4bda
   creationTime: "2020-07-16T08:42:12Z"
@@ -61,7 +61,7 @@ status:
 ### Creating PVCs with Volume Snapshots as Source
 
 The following is a sample manifest for creating a PVC with a VolumeSnapshot as a source:
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -91,7 +91,7 @@ The CSI PowerFlex driver version 1.2 and later support expansion of Persistent V
 To use this feature, the storage class used to create the PVC must have the attribute _allowVolumeExpansion_ set to _true_.
 
 Following is a sample manifest for a storage class that allows for Volume Expansion:
-```
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -112,7 +112,7 @@ allowedTopologies:
 To resize a PVC, edit the existing PVC spec and set _spec.resources.requests.storage_ to the intended size.
 
 For example, if you have a PVC - pvol0 of size 8Gi, then you can resize it to 16 Gi by updating the PVC:
-```
+```yaml
 spec:
   accessModes:
   - ReadWriteOnce
@@ -137,7 +137,7 @@ The CSI PowerFlex driver version 1.3 and later support volume cloning. This feat
 The source PVC must be bound and available (not in use). Source and destination PVC must be in the same namespace and have the same Storage Class.
 
 To clone a volume, you must first have an existing pvc, for example, pvol0:
-```
+```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -154,7 +154,7 @@ spec:
 ```
 
 The following is a sample manifest for cloning pvol0:
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -178,7 +178,7 @@ The CSI PowerFlex driver version 1.2 and later support Raw Block volumes, which 
 
 Following is an example configuration of **Raw Block Outline**:
 
-```
+```yaml
 kind: StatefulSet
 apiVersion: apps/v1
 metadata:
@@ -216,7 +216,7 @@ For additional information, see the [Kubernetes Raw Block Volume Support documen
 
 The CSI PowerFlex driver version 1.5 and later support additional mkfs format options. A user is able to specify additional format options as needed for the driver. Format options are specified in storageclass yaml under _mkfsFormatOption_ as in the following example:
 
-```
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -255,7 +255,7 @@ This Topology support does not include customer-defined topology, users cannot c
 To utilize the Topology feature, the storage classes are modified to specify the _volumeBindingMode_ as _WaitForFirstConsumer_ and to specify the desired topology labels within _allowedTopologies_. This ensures that the pod schedule takes advantage of the topology and be guaranteed that the node selected has access to provisioned volumes.
 
 Storage Class Example with Topology Support:
-```
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -288,7 +288,7 @@ For additional information, see the [Kubernetes Topology documentation](https://
 ## Controller HA   
 
 The CSI PowerFlex driver version 1.3 and later support multiple controller pods. A Controller pod can be assigned to a worker node or a master node, as long as no other controller pod is currently assigned to the node. To control the number of controller pods, edit:
-```
+```yaml
 controllerCount: 2
 ```
 in your values file to the desired number of controller pods. By default, the driver will deploy with two controller pods, each assigned to a different worker node. 
@@ -296,7 +296,7 @@ in your values file to the desired number of controller pods. By default, the dr
 > *NOTE:* If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state. 
 
 If you are using the Dell CSI Operator, the value to adjust is:  
-```  
+```yaml  
 replicas: 1  
 ```
 in your driver yaml in `config/samples/`
@@ -304,7 +304,7 @@ in your driver yaml in `config/samples/`
 If you want to specify where controller pods get assigned, make the following edits to your values file at `csi-vxflexos/helm/csi-vxflexos/values.yaml`:    
 
 To assign controller pods to worker nodes only (Default):   
-```
+```yaml
 # "controller" allows to configure controller specific parameters
 controller:
 
@@ -327,7 +327,7 @@ controller:
 
 ```
 To assign controller pods to master and worker nodes:  
-```
+```yaml
 # "controller" allows to configure controller specific parameters
 controller:
 
@@ -350,7 +350,7 @@ controller:
 ```
 
 To assign controller pods to master nodes only:  
-```  
+```yaml
 # "controller" allows to configure controller specific parameters
 controller:
 
@@ -393,19 +393,28 @@ To manage multiple arrays you need to create an array connection configuration t
 
 ### Creating array configuration
 
-There is a sample yaml file in the samples folder under the top-level directory called `config.yaml` with the following content:
+There is a sample yaml file in the samples folder called `secret.yaml` with the following content:
  ```yaml
-  # Username for accessing PowerFlex system.	
-- username: "admin"
-  # Password for accessing PowerFlex system.	
+  # Username for accessing PowerFlex system.
+  # If authorization is enabled, username will be ignored.
+  - username: "admin"
+  # Password for accessing PowerFlex system.
+  # If authorization is enabled, password will be ignored.
   password: "password"
-  # System name/ID of PowerFlex system.	
-  systemID: "ID1"
+  # PowerFlex system name or ID.	
+  # Required: true
+  systemID: "1a99aa999999aa9a"
+  # Required: false
+  # Previous names used in secret of PowerFlex system. Only needed if PowerFlex System Name has been changed by user 
+  # and old resources are still based on the old name. 
+  allSystemNames: "pflex-1,pflex-2"
   # REST API gateway HTTPS endpoint for PowerFlex system.
+  # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
+  # the authorization sidecar will listen on
   endpoint: "https://127.0.0.1"
-  # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
-  # Allowed values: true or false
-  # Default value: true
+    # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
+    # Allowed values: true or false
+    # Default value: true
   skipCertificateValidation: true 
   # indicates if this array is the default array
   # needed for backwards compatibility
@@ -414,20 +423,30 @@ There is a sample yaml file in the samples folder under the top-level directory 
   isDefault: true
   # defines the MDM(s) that SDC should register with on start.
   # Allowed values:  a list of IP addresses or hostnames separated by comma.
-  # Default value: none 
+  # Default value: none
   mdm: "10.0.0.1,10.0.0.2"
+  # Defines all system names used to create powerflex volumes
+  # Required: false
+  # Default value: none
+  AllSystemNames: "name1,name2"
 - username: "admin"
   password: "Password123"
-  systemID: "ID2"
+  systemID: "2b11bb111111bb1b"
   endpoint: "https://127.0.0.2"
   skipCertificateValidation: true 
   mdm: "10.0.0.3,10.0.0.4"
+  AllSystemNames: "name1,name2"
  ```
+The systemID can be found by displaying system level information, which is outlined [here](https://infohub.delltechnologies.com/l/powerflex-rest-api-introduction/system-information)
+
 Here we specify that we want the CSI driver to manage two arrays: one with an IP `127.0.0.1` and the other with an IP `127.0.0.2`.
 
 To use this config we need to create a Kubernetes secret from it. To do so, run the following command:
 
-`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml`
+```bash
+
+kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml
+```
 
 ## Dynamic Array Configuration
 
@@ -516,9 +535,9 @@ spec:
 This manifest creates a pod and attach two newly created ephemeral inline csi volumes to it, one ext4 and the other xfs.  
 To run the corresponding helm test, go to csi-vxflexos/test/helm/ephemeral and fill in the values for storagepool and systemID in sample.yaml.  
 Then run:
-````
+```bash
 ./testEphemeral.sh
-````
+```
 this test deploys the pod with two ephemeral volumes, and write some data to them before deleting the pod.   
 When creating ephemeral volumes, it is important to specify the following within the volumeAttributes section: volumeName, size, storagepool, and if you want to use a non-default array, systemID.  
 
@@ -527,9 +546,14 @@ When creating ephemeral volumes, it is important to specify the following within
 To use existing volumes from PowerFlex array as Peristent volumes in your Kubernetes environment, perform these steps:
 1. Log into one of the MDMs of the PowerFlex cluster.
 2. Execute these commands to retrieve the `systemID` and `volumeID`.
-    1. `scli --mdm_ip <IPs, comma separated> --login --username <username> --password <password>`
+    1. ```bash
+    
+        scli --mdm_ip <IPs, comma separated> --login --username <username> --password <password>
+       ```
     - **Output:** `Logged in. User role is SuperUser. System ID is <systemID>`
-    2. `scli --query_volume --volume_name <volume name>`
+    2. ```bash
+        scli --query_volume --volume_name <volume name>
+       ```
     - **Output:** `Volume ID: <volumeID> Name: <volume name>`
 3. Create PersistentVolume and use this volume ID in the volumeHandle with the format `systemID`-`volumeID` in the manifest. Modify other parameters according to your needs.
 ```yaml
@@ -591,7 +615,7 @@ spec:
 The dynamic logging configuration that was introduced in v1.5 of the driver was revamped for v2.0; v1.5 logging configuration is not compatible with v2.0.   
 Two fields in values.yaml (located at helm/csi-vxflexos/values.yaml) are used to configure the dynamic logging: logLevel and logFormat.
 
-```
+```yaml
 # CSI driver log level
 # Allowed values: "error", "warn"/"warning", "info", "debug"
 # Default value: "debug"
@@ -604,7 +628,9 @@ logFormat: "TEXT"
 ```
 
 To change the logging fields after the driver is deployed, you can use this command to edit the configmap:  
-` kubectl edit configmap -n vxflexos vxflexos-config-params `  
+```bash
+ kubectl edit configmap -n vxflexos vxflexos-config-params 
+```  
 and then make the necessary adjustments for CSI_LOG_LEVEL and CSI_LOG_FORMAT.   
 
 If either option is set to a value outside of what is supported, the driver will use the default values of "debug" and "text" . 

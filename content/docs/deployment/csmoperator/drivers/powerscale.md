@@ -16,78 +16,86 @@ Note that the deployment of the driver using the operator does not use any Helm 
 
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using the following command:
-`kubectl get csm --all-namespaces`
+```bash
+kubectl get csm --all-namespaces
+```
 
 
 ### Prerequisite
 
 1. Create namespace.
-   Execute `kubectl create namespace test-isilon` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-isilon'.
+   Execute `kubectl create namespace isilon` to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'isilon'.
 
 2. Create *isilon-creds* secret by creating a yaml file called secret.yaml with the following content:
-     ```
+     ```yaml
       isilonClusters:
          # logical name of PowerScale Cluster
-       - clusterName: "cluster1"
+         - clusterName: "cluster1"
 
-         # username for connecting to PowerScale OneFS API server
-         # Default value: None
-         username: "user"
+           # username for connecting to PowerScale OneFS API server
+           # Default value: None
+           username: "user"
 
-         # password for connecting to PowerScale OneFS API server
-         password: "password"
+           # password for connecting to PowerScale OneFS API server
+           password: "password"
 
-         # HTTPS endpoint of the PowerScale OneFS API server
-         # Default value: None
-         # Examples: "1.2.3.4", "https://1.2.3.4", "https://abc.myonefs.com"
-         endpoint: "1.2.3.4"
+           # HTTPS endpoint of the PowerScale OneFS API server
+           # Default value: None
+           # Examples: "1.2.3.4", "https://1.2.3.4", "https://abc.myonefs.com"
+           endpoint: "1.2.3.4"
 
-         # Is this a default cluster (would be used by storage classes without ClusterName parameter)
-         # Allowed values:
-         #   true: mark this cluster config as default
-         #   false: mark this cluster config as not default
-         # Default value: false
-         isDefault: true
+           # Is this a default cluster (would be used by storage classes without ClusterName parameter)
+           # Allowed values:
+           #   true: mark this cluster config as default
+           #   false: mark this cluster config as not default
+           # Default value: false
+           isDefault: true
 
-         # Specify whether the PowerScale OneFS API server's certificate chain and host name should be verified.
-         # Allowed values:
-         #   true: skip OneFS API server's certificate verification
-         #   false: verify OneFS API server's certificates
-         # Default value: default value specified in values.yaml
-         # skipCertificateValidation: true
+           # Specify whether the PowerScale OneFS API server's certificate chain and host name should be verified.
+           # Allowed values:
+           #   true: skip OneFS API server's certificate verification
+           #   false: verify OneFS API server's certificates
+           # Default value: default value specified in values.yaml
+           # skipCertificateValidation: true
 
-         # The base path for the volumes to be created on PowerScale cluster
-         # This will be used if a storage class does not have the IsiPath parameter specified.
-         # Ensure that this path exists on PowerScale cluster.
-         # Allowed values: unix absolute path
-         # Default value: default value specified in values.yaml
-         # Examples: "/ifs/data/csi", "/ifs/engineering"
-         # isiPath: "/ifs/data/csi"
+           # The base path for the volumes to be created on PowerScale cluster
+           # This will be used if a storage class does not have the IsiPath parameter specified.
+           # Ensure that this path exists on PowerScale cluster.
+           # Allowed values: unix absolute path
+           # Default value: default value specified in values.yaml
+           # Examples: "/ifs/data/csi", "/ifs/engineering"
+           # isiPath: "/ifs/data/csi"
 
-         # The permissions for isi volume directory path
-         # This will be used if a storage class does not have the IsiVolumePathPermissions parameter specified.
-         # Allowed values: valid octal mode number
-         # Default value: "0777"
-         # Examples: "0777", "777", "0755"
-         # isiVolumePathPermissions: "0777"
+           # The permissions for isi volume directory path
+           # This will be used if a storage class does not have the IsiVolumePathPermissions parameter specified.
+           # Allowed values: valid octal mode number
+           # Default value: "0777"
+           # Examples: "0777", "777", "0755"
+           # isiVolumePathPermissions: "0777"
 
-       - clusterName: "cluster2"
-         username: "user"
-         password: "password"
-         endpoint: "1.2.3.4"
-         endpointPort: "8080"
+         - clusterName: "cluster2"
+           username: "user"
+           password: "password"
+           endpoint: "1.2.3.4"
+           endpointPort: "8080"
       ```
 
    Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,  
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
+   ```bash
+
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml
+   ```
 
    Use the following command to replace or update the secret
 
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
+   ```bash
+   
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -
+   ```
 
    **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
    The driver will continue to use previous values in case of an error found in the YAML file.
-           
+
 3. Create isilon-certs-n secret.
       Please refer [this section](../../../../csidriver/installation/helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
 
@@ -108,8 +116,8 @@ User can query for all Dell CSI drivers using the following command:
 ### Install Driver
 
 1. Follow all the [prerequisites](#prerequisite) above
-   
-2. Create a CR (Custom Resource) for PowerScale using the sample files provided 
+
+2. Create a CR (Custom Resource) for PowerScale using the sample files provided
    [here](https://github.com/dell/csm-operator/tree/master/samples). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
@@ -131,14 +139,16 @@ User can query for all Dell CSI drivers using the following command:
    | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | |
    | ***Node parameters*** |
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
-   | X_CSI_MODE   | Driver starting mode  | No | node | 
+   | X_CSI_MODE   | Driver starting mode  | No | node |
 
 4.  Execute the following command to create PowerScale custom resource:
-    ```kubectl create -f <input_sample_file.yaml>``` .
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ``` 
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
-    
-**Note** : 
+
+**Note** :
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+   2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.

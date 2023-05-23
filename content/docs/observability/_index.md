@@ -114,7 +114,7 @@ Logs can be viewed by using the `kubectl logs` CLI command to output logs for a 
 
 For example, the following script will capture logs of all Pods in the CSM namespace and save the output to one file per Pod.
 
-```
+```bash
 #!/bin/bash
 
 namespace=[CSM_NAMESPACE]

@@ -8,11 +8,11 @@ description: >
 ## Configuring the CSM for Authorization Proxy Server
 
 The storage administrator must first configure Authorization with the following via `karavictl`:
-- Generate admin token
+- Karavictl admin token
 - Storage systems
 - Tenants
 - Roles
-- Bind roles to tenants
+- Role bindings
 
 >__Note__:
 > - The address of the Authorization proxy-server must be specified when executing `karavictl`. For the `RPM deployment`, the address is the DNS-hostname of the machine where the RPM
@@ -20,9 +20,10 @@ is installed. For the `Helm/Operator deployment`, the address is the Ingress hos
 
 ### Configuring Admin Token
 
-Generate an admin token that will be required to run `karavictl` commands except generating `admin token` and `cluster-info`.
+An admin token is required for executing `karavictl` commands, with the exception of `admin token` and `cluster-info`. For example, to generate an admin token and redirect the output to a file:
 
-```
+```bash
+
 $ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
 $ Enter JWT Signing Secret:
 $ cat admintoken.yaml
@@ -34,7 +35,8 @@ $ cat admintoken.yaml
 ```
 Alternatively, the JWT signing secret can be specified with the CLI.
 
-```
+```bash
+
 $ karavictl admin token --name admin  --jwt-signing-secret supersecret --access-token-expiration 30s --refresh-token-expiration 120m > admintoken.yaml
 $ cat admintoken.yaml
 {
@@ -44,17 +46,21 @@ $ cat admintoken.yaml
 
 ```
 
+>__Note__:
+> - The `karavictl admin token` command is an exception where you do not need to specify the address of the proxy-server.
 
 ### Configuring Storage
 
 A `storage` entity in CSM Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:
 
+#RPM Deployment
+```bash
 
-```yaml
-# RPM Deployment
 karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --array-insecure --insecure --addr DNS-hostname --admin-token admintoken.yaml
+```
+#Helm/Operator Deployment
+```bash
 
-# Helm/Operator Deployment
 karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id ${systemID} --user ${user} --password ${password} --array-insecure  --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml
 ```
 
@@ -69,12 +75,14 @@ karavictl storage create --type powerflex --endpoint ${powerflexIP} --system-id 
 ### Configuring Tenants
 
 A `tenant` is a Kubernetes cluster that a role will be bound to. For example, to create a tenant named `Finance`:
+#RPM Deployment
+```bash
 
-```yaml
-# RPM Deployment
 karavictl tenant create --name Finance --insecure --addr DNS-hostname --admin-token admintoken.yaml
+```
+#Helm/Operator Deployment
+```bash
 
-# Helm/Operator Deployment
 karavictl tenant create --name Finance --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml
 ```
 
@@ -85,11 +93,14 @@ karavictl tenant create --name Finance --insecure --addr csm-authorization.com:<
 
 > - For the Powerflex Pre-approved Guid feature, the `approvesdc` boolean flag is `true` by default. If the `approvesdc` flag is false for a tenant, the proxy server will deny the requests to approve SDC if the SDCs are already in not-approved state. Inorder to change this flag for an already created tenant, see `tenant update` command in CLI section.
 
-```yaml
-# RPM Deployment
-karavictl tenant create --name Finance --approvesdc=false --insecure --addr DNS-hostname --admin-token admintoken.yaml
+#RPM Deployment
+```bash
 
-# Helm/Operator Deployment
+karavictl tenant create --name Finance --approvesdc=false --insecure --addr DNS-hostname --admin-token admintoken.yaml
+```
+#Helm/Operator Deployment
+```bash
+
 karavictl tenant create --name Finance --approvesdc=false --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml
 ```
 
@@ -97,11 +108,13 @@ karavictl tenant create --name Finance --approvesdc=false --insecure --addr csm-
 
 A `role` consists of a name, the storage to use, and the quota limit for the storage pool to be used. For example, to create a role named `FinanceRole` using the PowerFlex storage created above with a quota limit of 100GB in storage pool `myStoragePool`:
 
-```yaml
-# RPM Deployment
-karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB --insecure --addr DNS-hostname --admin-token admintoken.yaml
+#RPM Deployment
+```bash
 
-# Helm/Operator Deployment
+karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB --insecure --addr DNS-hostname --admin-token admintoken.yaml
+```
+#Helm/Operator Deployment
+```bash
 karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml
 ```
 
@@ -114,11 +127,14 @@ karavictl role create --role=FinanceRole=powerflex=${systemID}=myStoragePool=100
 
 A `role binding` binds a role to a tenant. For example, to bind the `FinanceRole` to the `Finance` tenant:
 
-```yaml
-# RPM Deployment
-karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr DNS-hostname --admin-token admintoken.yaml
+#RPM Deployment
+```bash
 
-# Helm/Operator Deployment
+karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr DNS-hostname --admin-token admintoken.yaml
+```
+#Helm/Operator Deployment
+```bash
+
 karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml
 ```
 
@@ -129,19 +145,22 @@ karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --ad
 
 ### Generate a Token
 
-After creating the role bindings, the next logical step is to generate the access token. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
+Once rolebindings are created, an access/refresh token pair can be created for the tenant. The storage admin is responsible for generating and sending the token to the Kubernetes tenant admin.
 
-```yaml
-# RPM Deployment
+#RPM Deployment
+```bash
+
 karavictl generate token --tenant Finance --insecure --addr DNS-hostname --admin-token admintoken.yaml > token.yaml
+```
+#Helm/Operator Deployment
+```bash
 
-# Helm/Operator Deployment
 karavictl generate token --tenant Finance --insecure --addr csm-authorization.com:<ingress-controller-port> --admin-token admintoken.yaml > token.yaml
 ```
 
 `token.yaml` will have a Kubernetes secret manifest that looks like this:
 
-```
+```yaml
 apiVersion: v1
 data:
   access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKamMyMGlMQ0psZUhBaU9qRTJPREl3TVRBeU5UTXNJbWR5YjNWd0lqb2labTl2SWl3aWFYTnpJam9pWTI5dExtUmxiR3d1WTNOdElpd2ljbTlzWlhNaU9pSmlZWElpTENKemRXSWlPaUpqYzIwdGRHVnVZVzUwSW4wLjlSYkJISzJUS2dZbVdDX0paazBoSXV0N0daSDV4NGVjQVk2ekdaUDNvUWs=
@@ -151,7 +170,6 @@ metadata:
   creationTimestamp: null
   name: proxy-authz-tokens
 type: Opaque
-
 ```
 
 This secret must be applied in the driver namespace.

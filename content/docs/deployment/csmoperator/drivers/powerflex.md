@@ -16,7 +16,9 @@ Note that the deployment of the driver using the operator does not use any Helm 
 
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using this command:
-`kubectl get csm --all-namespaces`
+```bash
+kubectl get csm --all-namespaces
+```
 
 ### Prerequisites
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details
@@ -28,9 +30,9 @@ User can query for all Dell CSI drivers using this command:
   config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
 - **Note:** To use an sdc-binary module from customer ftp site:
   - Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:
- ```yaml
-      echo -n <credential>| base64 -i
-``` 
+ ```bash
+  echo -n <credential>| base64 -i
+ ``` 
    secret sample to use:
  ```yaml
       apiVersion: v1
@@ -55,12 +57,12 @@ User can query for all Dell CSI drivers using this command:
     # sdc-monitor is disabled by default, due to high CPU usage 
       - name: sdc-monitor
         enabled: false
-        image: dellemc/sdc:3.6
+        image: dellemc/sdc:3.6.0.6
         envs:
         - name: HOST_PID
           value: "1"
         - name: MDM
-          value: "10.xx.xx.xx,10.xx.xx.xx" #provide MDM value
+          value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
 ```  
 
 #### Manual SDC Deployment
@@ -74,43 +76,45 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 3. Install the SDC per the _Dell PowerFlex Deployment Guide_:
     - For environments using RPM, run `rpm -iv ./EMC-ScaleIO-sdc-*.x86_64.rpm`, where * is the SDC name corresponding to the PowerFlex installation version.
 4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`1. Create namespace.
-   Execute `kubectl create namespace test-vxflexos` to create the `test-vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-vxflexos'.
+   Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
 
 #### Create Secret
 1. Create namespace: 
-   Execute `kubectl create namespace test-vxflexos` to create the test-vxflexos namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-vxflexos'.
-2. Prepare the config.yaml for driver configuration.
+   Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
+2. Prepare the secret.yaml for driver configuration.
 
-    Example: config.yaml
+    Example: secret.yaml
 
      ```yaml
-      # Username for accessing PowerFlex system.	
-      # Required: true
+      # Username for accessing PowerFlex system.
+      # If authorization is enabled, username will be ignored.
      - username: "admin"
-      # Password for accessing PowerFlex system.	
-      # Required: true
+      # Password for accessing PowerFlex system.
+      # If authorization is enabled, password will be ignored.
       password: "password"
       # System name/ID of PowerFlex system.	
       # Required: true
-      systemID: "ID1"
-      # REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system.
-      # Required: true
+      systemID: "1a99aa999999aa9a"
+      # Required: false
+      # Previous names used in secret of PowerFlex system. Only needed if PowerFlex System Name has been changed by user 
+      # and old resources are still based on the old name. 
+      allSystemNames: "pflex-1,pflex-2"
+      # REST API gateway HTTPS endpoint for PowerFlex system.
+      # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
+      # the authorization sidecar will listen on
       endpoint: "https://127.0.0.1"
-      # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
-      # Allowed values: true or false
-      # Required: true
-      # Default value: true
+       # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
+       # Allowed values: true or false
+       # Default value: true
       skipCertificateValidation: true 
       # indicates if this array is the default array
       # needed for backwards compatibility
       # only one array is allowed to have this set to true 
-      # Required: false
       # Default value: false
       isDefault: true
       # defines the MDM(s) that SDC should register with on start.
       # Allowed values:  a list of IP addresses or hostnames separated by comma.
-      # Required: true
-      # Default value: none 
+      # Default value: none
       mdm: "10.0.0.1,10.0.0.2"
       # Defines all system names used to create powerflex volumes
       # Required: false
@@ -118,7 +122,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       AllSystemNames: "name1,name2"
     - username: "admin"
       password: "Password123"
-      systemID: "ID2"
+      systemID: "2b11bb111111bb1b"
       endpoint: "https://127.0.0.2"
       skipCertificateValidation: true 
       mdm: "10.0.0.3,10.0.0.4"
@@ -126,11 +130,17 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
     ```
 
     After editing the file, run this command to create a secret called `test-vxflexos-config`. If you are using a different namespace/secret name, just substitute those into the command.
-    `kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml`
+    ```bash
+    
+    kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml
+    ```
 
     Use this command to replace or update the secret:
 
-    `kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+    ```bash
+    
+    kubectl create secret generic test-vxflexos-config -n test-vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -
+    ```
 
 ### Install Driver
 
@@ -153,7 +163,9 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
    | X_CSI_ALLOW_RWO_MULTI_POD_ACCESS | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
 
 4.  Execute this command to create PowerFlex custom resource:
-    ```kubectl create -f <input_sample_file.yaml>``` .
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ``` 
     This command will deploy the CSI-PowerFlex driver in the namespace specified in the input YAML file.
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)

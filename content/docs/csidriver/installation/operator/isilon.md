@@ -21,17 +21,19 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
 
 ### Listing installed drivers with the CSI Isilon CRD
 User can query for CSI-PowerScale driver using the following command:
-`kubectl get csiisilon --all-namespaces`
+```bash
+kubectl get csiisilon --all-namespaces
+```
 
 ### Install Driver
 
 1. Create namespace.
-     
-   Execute `kubectl create namespace test-isilon` to create the test-isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-isilon'.
+
+   Execute `kubectl create namespace isilon` to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'isilon'.
 2. Create *isilon-creds* secret by using secret.yaml file format only.
-  
+
    2.1   Create a yaml file called secret.yaml with the following content:
-     ```
+     ```yaml
       isilonClusters:
          # logical name of PowerScale Cluster
        - clusterName: "cluster1"
@@ -85,15 +87,21 @@ User can query for CSI-PowerScale driver using the following command:
       ```
 
    Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,  
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
+   ```bash
+
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml
+   ```
 
    Use the following command to replace or update the secret
 
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
+   ```bash
+
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+   ```
 
    **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
    The driver will continue to use previous values in case of an error found in the YAML file.
-           
+
 3. Create isilon-certs-n secret.
       Please refer [this section](../../helm/isilon/#certificate-validation-for-onefs-rest-api-calls) for creating cert-secrets.
 
@@ -109,9 +117,12 @@ User can query for CSI-PowerScale driver using the following command:
       data:
          cert-0: ""
       ```
-      Execute command: ```kubectl create -f empty-secret.yaml```
+      Execute command: 
+      ```bash
+      kubectl create -f empty-secret.yaml
+      ```
 
-4. Create a CR (Custom Resource) for PowerScale using the sample files provided 
+4. Create a CR (Custom Resource) for PowerScale using the sample files provided
    [here](https://github.com/dell/dell-csi-operator/tree/master/samples).
 5. Users should configure the parameters in CR. The following table lists the primary configurable parameters of the PowerScale driver and their default values:
 
@@ -132,7 +143,7 @@ User can query for CSI-PowerScale driver using the following command:
    | ***Controller parameters*** |
    | X_CSI_MODE   | Driver starting mode  | No | controller |
    | X_CSI_ISI_ACCESS_ZONE | Name of the access zone a volume can be created in | No | System |
-   | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | | 
+   | X_CSI_ISI_QUOTA_ENABLED | To enable SmartQuotas | Yes | |
    | nodeSelector | Define node selection constraints for pods of controller deployment | No | |
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller plugin. Provides details of volume status and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No | false |
    | ***Node parameters*** |
@@ -142,16 +153,18 @@ User can query for CSI-PowerScale driver using the following command:
    | ***Side car parameters*** |
    | leader-election-lease-duration | Duration, that non-leader candidates will wait to force acquire leadership | No | 20s |
    | leader-election-renew-deadline   | Duration, that the acting leader will retry refreshing leadership before giving up  | No | 15s |
-   | leader-election-retry-period   | Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |   
+   | leader-election-retry-period   | Duration, the LeaderElector clients should wait between tries of actions  | No | 5s |
 
 6.  Execute the following command to create PowerScale custom resource:
-    ```kubectl create -f <input_sample_file.yaml>``` .
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ```
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
-    
-**Note** : 
+
+**Note** :
    1. From CSI-PowerScale v1.6.0 and higher, Storage class and VolumeSnapshotClass will **not** be created as part of driver deployment. The user has to create Storageclass and Volume Snapshot Class.
    2. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+   3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
 
 ## Volume Health Monitoring
 This feature is introduced in CSI Driver for PowerScale version 2.1.0.
@@ -166,7 +179,7 @@ To enable this feature, add the below block to the driver manifest before instal
       # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED  to "true".
       # - name: external-health-monitor
       #   args: ["--monitor-interval=60s"]
-      
+
     # Install the 'external-health-monitor' sidecar accordingly.
     # Allowed values:
     #   true: enable checking of health condition of CSI volumes

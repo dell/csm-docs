@@ -39,9 +39,17 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
         nfsAcls: "0777"                           # (Optional) defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
                                                   # NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
    ```
-   Change the parameters with relevant values for your PowerStore array. 
-
+   Change the parameters with relevant values for your PowerStore array.  
    Add more blocks similar to above for each PowerStore array if necessary.
+   ### User Privileges
+   The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct privileges to perform the actions. The suggested user role are as follows:
+
+   | User Role             |
+   | --------------------- |
+   | Administrator         |
+   | Storage Administrator |
+   | Storage Operator      |
+
 3. Create Kubernetes secret: 
 
    Create a file called `secret.yaml` in same folder as `config.yaml` with following content
@@ -58,6 +66,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
 
    Combine both files and create Kubernetes secret by running the following command:
    ```bash
+
    sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
    ```
    
@@ -192,7 +201,7 @@ This feature is introduced in CSI Driver for PowerStore version 2.0.0.
 As part of driver installation, a ConfigMap with the name `powerstore-config-params` is created using the manifest located in the sample file. This ConfigMap contains attributes `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver and `CSI_LOG_FORMAT` which specifies the current log format of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `powerstore-config-params` and update `CSI_LOG_LEVEL` to the desired log level and `CSI_LOG_FORMAT` to the desired log format.
-```
+```bash
 kubectl edit configmap -n csi-powerstore powerstore-config-params
 ```
 **Note** : 

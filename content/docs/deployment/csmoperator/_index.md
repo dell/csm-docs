@@ -5,22 +5,24 @@ description: Container Storage Modules Operator
 weight: 1
 ---
 
-The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
+The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
 ## Supported Platforms
 Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.
 
 | Kubernetes Version         | OpenShift Version   |
 | -------------------------- | ------------------- |
-| 1.24, 1.25, 1.26           | 4.10, 4.10 EUS, 4.11 |
+| 1.25, 1.26, 1.27           | 4.11, 4.12, 4.12 EUS |
 
 ## Supported CSI Drivers
 
 | CSI Driver         | Version   | ConfigVersion  |
 | ------------------ | --------- | -------------- |
-| CSI PowerScale     | 2.4.0 +   |   v2.4.0 +     |
-| CSI PowerFlex      | 2.4.0 +   |   v2.4.0 +     |
-| CSI PowerStore     | 2.4.0 +   |   v2.4.0 +     |
+| CSI PowerScale     | 2.5.0 +   |   v2.5.0 +     |
+| CSI PowerFlex      | 2.5.0 +   |   v2.5.0 +     |
+| CSI PowerStore     | 2.5.0 +   |   v2.5.0 +     |
+| CSI PowerMax       | 2.6.0 +   |   v2.6.0 +     |
+| CSI Unity XT       | 2.5.0 +   |   v2.5.0 +     |
 
 ## Supported CSM Modules
 
@@ -38,7 +40,10 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 #### Operator Installation on a cluster without OLM
 
-1. Clone and checkout the required csm-operator version using `git clone -b v1.1.0 https://github.com/dell/csm-operator.git`
+1. Clone and checkout the required csm-operator version using 
+```bash
+git clone -b v1.2.0 https://github.com/dell/csm-operator.git
+```
 2. `cd csm-operator`
 3. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
 4. Run `bash scripts/install.sh` to install the operator.
@@ -47,14 +52,18 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 {{< imgproc install.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-5. Run the command `kubectl get pods -n dell-csm-operator` to validate the installation. If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
+5. Run the command to validate the installation.
+```bash
+kubectl get pods -n dell-csm-operator
+```
+ If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
 
 {{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
-   
+
 ### Installation via Operator Hub
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
 
-The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the operator to: 
+The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the operator to:
 * _Automatic_ - If you want the operator to be automatically installed or upgraded (once an upgrade is available).
 * _Manual_ - If you want a cluster administrator to manually review and approve the `InstallPlan` for installation/upgrades.
 
@@ -72,7 +81,10 @@ Dell CSM Operator can be upgraded in 2 ways:
 2.Using Operator Lifecycle Manager (OLM)
 
 #### Using Installation Script
-1. Clone and checkout the required csm-operator version using `git clone -b v1.1.0 https://github.com/dell/csm-operator.git`
+1. Clone and checkout the required csm-operator version using 
+```bash
+git clone -b v1.2.0 https://github.com/dell/csm-operator.git
+```
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
 
@@ -88,13 +100,13 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 **NOTE**: The recommended version of OLM for Upstream Kubernetes is **`v0.18.3`**.
 
 ### Custom Resource Definitions
-As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.  
+As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 `containerstoragemodule` CRD is installed in API Group `storage.dell.com`.
 
 Drivers and modules can be installed by creating a `customResource`.
 
 ### Custom Resource Specification
-Each CSI Driver and CSM Module installation is represented by a Custom Resource.  
+Each CSI Driver and CSM Module installation is represented by a Custom Resource.
 
 The specification for the Custom Resource is the same for all the drivers.Below is a list of all the mandatory and optional fields in the Custom Resource specification
 
@@ -118,7 +130,7 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 
 **node** - List of environment variables and values which are applicable only for node.
 
-**sideCars** - Specification for CSI sidecar containers.  
+**sideCars** - Specification for CSI sidecar containers.
 
 **authSecret** - Name of the secret holding credentials for use by the driver. If not specified, the default secret *-creds must exist in the same namespace as driver.
 
@@ -126,6 +138,6 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 
 **tolerations** - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them.
 
-**nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet. 
+**nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.
 
->**Note:** The `image` field should point to the correct image tag for version of the driver you are installing.  
+>**Note:** The `image` field should point to the correct image tag for version of the driver you are installing.
