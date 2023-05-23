@@ -4,6 +4,7 @@
     <link>https://dell.github.io/csm-docs/docs/</link>
     <description>Recent content in Container Storage Modules on Dell Technologies</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     
 	  <atom:link href="https://dell.github.io/csm-docs/docs/index.xml" rel="self" type="application/rss+xml" />
     
@@ -1596,6 +1597,12 @@ Spec:
 &lt;ol&gt;
 &lt;li&gt;Please upgrade the Dell CSI Operator by following &lt;a href=&#34;./../operator&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Once the operator is upgraded, to upgrade the driver, refer &lt;a href=&#34;./../../../installation/operator/#update-csi-drivers&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;upgrade-using-dell-csm-operator&#34;&gt;Upgrade using Dell CSM Operator:&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Upgrading the Operator does not upgrade the CSI Driver.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Please upgrade the Dell CSM Operator by following &lt;a href=&#34;../../../../deployment/csmoperator/#to-upgrade-dell-csm-operator-perform-the-following-steps&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Once the operator is upgraded, to upgrade the driver, refer &lt;a href=&#34;../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>
@@ -3642,6 +3649,12 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;li&gt;
 &lt;p&gt;Once the operator is upgraded, to upgrade the driver, refer &lt;a href=&#34;./../../../installation/operator/#update-csi-drivers&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;upgrade-using-dell-csm-operator&#34;&gt;Upgrade using Dell CSM Operator:&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Upgrading the Operator does not upgrade the CSI Driver.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Please upgrade the Dell CSM Operator by following &lt;a href=&#34;../../../../deployment/csmoperator/#to-upgrade-dell-csm-operator-perform-the-following-steps&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Once the operator is upgraded, to upgrade the driver, refer &lt;a href=&#34;../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>
