@@ -77,9 +77,9 @@ cd dell-csi-operator/scripts
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.4.0
    dellemc/csi-isilon:v2.5.0
    dellemc/csi-isilon:v2.6.0
+   dellemc/csi-isilon:v2.7.0
    dellemc/csipowermax-reverseproxy:v2.4.0
    dellemc/csi-powermax:v2.3.1
    dellemc/csi-powermax:v2.4.0
