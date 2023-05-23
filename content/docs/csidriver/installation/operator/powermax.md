@@ -97,17 +97,17 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    Create a file called powermax-creds.yaml with the following content:
      ```yaml
         apiVersion: v1
-          kind: Secret
-          metadata:
+        kind: Secret
+        metadata:
           name: powermax-creds
             # Replace driver-namespace with the namespace where driver is being deployed
-            namespace: <driver-namespace>
-          type: Opaque
-          data:
-            # set username to the base64 encoded username
-            username: <base64 username>
-            # set password to the base64 encoded password
-            password: <base64 password>
+          namespace: <driver-namespace>
+        type: Opaque
+        data:
+          # set username to the base64 encoded username
+          username: <base64 username>
+          # set password to the base64 encoded password
+          password: <base64 password>
           # Uncomment the following key if you wish to use ISCSI CHAP authentication (v1.3.0 onwards)
           # chapsecret: <base64 CHAP secret>
      ```
@@ -152,18 +152,19 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 **Note** - If CSI driver is getting installed using OCP UI , create these two configmaps manually using the command `oc create -f <configfilename>`
 1. Configmap name powermax-config-params
      ```yaml
-	    apiVersion: v1
-        kind: ConfigMap
-        metadata:
-          name: powermax-config-params
-          namespace: test-powermax
-        data:
-          driver-config-params.yaml: |
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+         name: powermax-config-params
+         namespace: test-powermax
+      data:
+         driver-config-params.yaml: |
             CSI_LOG_LEVEL: "debug"
             CSI_LOG_FORMAT: "JSON"
      ```
  2. Configmap name node-topology-config
      ```yaml
+        apiVersion: v1
         kind: ConfigMap
         metadata:
           name: node-topology-config
@@ -249,16 +250,15 @@ spec:
     standAloneConfig: # Set mode to "StandAlone" in order to use this config
        storageArrays:
           - storageArrayId: "000000000001"
-             # Unisphere server managing the PowerMax array
+            # Unisphere server managing the PowerMax array
             primaryURL: https://unisphere-1-addr:8443
-             # proxyCredentialSecrets are used by the clients of the proxy to connect to it
-             # If using proxy in the stand alone mode, then the driver must be provided the
-             # same secret.
-             # The format of the proxy credential secret are exactly the same as the unisphere credential secret
-             # For using the proxy with the driver, use the same proxy credential secrets for
-             # all the managed storage arrays
+            # proxyCredentialSecrets are used by the clients of the proxy to connect to it
+            # If using proxy in the stand alone mode, then the driver must be provided the same secret.
+            # The format of the proxy credential secret are exactly the same as the unisphere credential secret
+            # For using the proxy with the driver, use the same proxy credential secrets for
+            # all the managed storage arrays
             proxyCredentialSecrets:
-	      - proxy-creds
+	           - proxy-creds
           - storageArrayId: "000000000002"
             primaryURL: https://unisphere-2-addr:8443
              # An optional backup Unisphere server managing the same array
@@ -269,7 +269,7 @@ spec:
                - proxy-creds
        managementServers:
           - url: https://unisphere-1-addr:8443
-             # Secret containing the credentials of the Unisphere server
+            # Secret containing the credentials of the Unisphere server
             arrayCredentialSecret: unsiphere-1-creds
             skipCertificateValidation: true
           - url: https://unisphere-2-addr:8443
