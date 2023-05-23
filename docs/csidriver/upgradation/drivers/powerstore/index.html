@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.111.3">
+<meta name="generator" content="Hugo 0.112.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powerstore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-31T14:50:57+05:30" /><meta property="og:site_name" content="Dell Technologies" />
+<meta property="article:modified_time" content="2023-05-23T20:26:07+05:30" />
 <meta itemprop="name" content="PowerStore">
 <meta itemprop="description" content="Upgrade PowerStore CSI driver">
-<meta itemprop="dateModified" content="2023-03-31T14:50:57+05:30" />
-<meta itemprop="wordCount" content="396">
+<meta itemprop="dateModified" content="2023-05-23T20:26:07+05:30" />
+<meta itemprop="wordCount" content="431">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerStore"/>
 <meta name="twitter:description" content="Upgrade PowerStore CSI driver"/>
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e73e5843726da170505cb3336cb6615c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.2add092a4b5ab494250071192564a1b3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e73e5843726da170505cb3336cb6615c.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.2add092a4b5ab494250071192564a1b3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -592,6 +592,7 @@
   <ul>
     <li><a href="#update-driver-from-v25-to-v26-using-helm">Update Driver from v2.5 to v2.6 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
+    <li><a href="#upgrade-using-dell-csm-operator">Upgrade using Dell CSM Operator:</a></li>
   </ul>
 </nav>
 
@@ -699,6 +700,12 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 <p>Once the operator is upgraded, to upgrade the driver, refer <a href="./../../../installation/operator/#update-csi-drivers">here</a>.</p>
 </li>
 </ol>
+<h2 id="upgrade-using-dell-csm-operator">Upgrade using Dell CSM Operator:</h2>
+<p><strong>Note:</strong> Upgrading the Operator does not upgrade the CSI Driver.</p>
+<ol>
+<li>Please upgrade the Dell CSM Operator by following <a href="../../../../deployment/csmoperator/#to-upgrade-dell-csm-operator-perform-the-following-steps">here</a></li>
+<li>Once the operator is upgraded, to upgrade the driver, refer <a href="../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator">here</a></li>
+</ol>
 
 	
 	
@@ -765,8 +772,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 
 
 
-
-<script src="/csm-docs/js/main.min.357cdcbd77fb614ceb215987dafe216ba8720b4aa10ecd38bccb7c0013e32f2a.js" integrity="sha256-NXzcvXf7YUzrIVmH2v4ha6hyC0qhDs04vMt8ABPjLyo=" crossorigin="anonymous"></script>
+<script src="/csm-docs/js/main.js"></script>
 
 
 
