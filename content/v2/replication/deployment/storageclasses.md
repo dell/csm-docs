@@ -43,7 +43,7 @@ replication.storage.dell.com/remotePVRetentionPolicy: 'delete' | 'retain'
 
 If the remotePVRetentionPolicy is set to 'delete', the corresponding PV would be deleted.
 
-If the remotePVRetentionPolicy is set to 'retain', the corresponding PV would be retained. 
+If the remotePVRetentionPolicy is set to 'retain', the corresponding PV would be retained. This is not applicable for file system replication.
 
 By default, if the remotePVRetentionPolicy is not specified in the Storage Class, replicated PV resources are retained.
 

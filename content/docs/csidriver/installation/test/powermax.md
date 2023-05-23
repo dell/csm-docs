@@ -180,3 +180,35 @@ spec:
 5. After the pod becomes `Ready` and `Running`, you can start to use this pod and volume.
 
 >Note: CSI driver for PowerMax will create the necessary objects like Storage group, HostID and Masking View. They must not be created manually.
+
+
+## Setting QoS parameters for throttling performance and bandwidth 
+
+Use this procedure to set QoS parameters for throttling performance and bandwidth
+
+1. Create [storage class](https://github.com/dell/csi-powermax/tree/main/samples/storageclass) with the following parameters set.
+
+``` yaml
+ # Following params are for HostLimits, set them only if you want to set IOLimits
+  # HostLimitName uniquely identifies given set of limits on a storage class
+  # This is used in naming storage group, max of 3 letter
+  # Optional: true
+  # Example: "HL1", "HL2"
+  #HostLimitName: "HL1"
+  # The MBs per Second Host IO limit for the storage class
+  # Optional: true, Default: ""
+  # Examples: 100, 200, NOLIMIT
+  #HostIOLimitMBSec: ""
+  # The IOs per Second Host IO limit for the storage class
+  # Optional: true, Default: ""
+  # Examples: 100, 200, NOLIMIT
+  #HostIOLimitIOSec: ""
+  # distribution of the Host IO limits for the storage class
+  # Optional: true, Default: ""
+  # Allowed values: Never","Always" or "OnFailure" only
+  #DynamicDistribution: ""
+  ```
+
+2. Use the above storage class to create the PVC and provision the volume to the pod.
+
+3. Once the pod becones `Ready` and `Running`, you will see the QoS parameters applied for throttling performance and bandwidth.
