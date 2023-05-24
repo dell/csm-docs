@@ -1,0 +1,1604 @@
+[33mcommit 577eadb46ba87ce7a33bf8b77510c1ab3979ecbe[m[33m ([m[1;36mHEAD -> [m[1;32mrevert-643-updating-docs-for-1.27[m[33m, [m[1;31morigin/revert-643-updating-docs-for-1.27[m[33m)[m
+Merge: 2ac5fd93b 0f8f000cd
+Author: Peres Kereotubo <peres_kereotubo@dell.com>
+Date:   Wed May 24 15:33:56 2023 -0400
+
+    Merge branch 'revert-643-updating-docs-for-1.27' of https://github.com/dell/csm-docs into revert-643-updating-docs-for-1.27
+
+[33mcommit 2ac5fd93bfcf498faa45341b1672f550c1100740[m
+Author: Peres Kereotubo <118770866+PeresKereotubo@users.noreply.github.com>
+Date:   Wed May 24 12:49:45 2023 -0500
+
+    Revert "Updating documentation for k8s 1.27 (#643)"
+    
+    This reverts commit 2fc2a5349427b36a9f0d10b32093e185dd428e00.
+
+[33mcommit 133f09a697e41e9205f32e2f3bb82ab3930f4748[m
+Author: Peres Kereotubo <118770866+PeresKereotubo@users.noreply.github.com>
+Date:   Wed May 24 12:49:45 2023 -0500
+
+    Revert "Updating documentation for k8s 1.27 (#643)"
+    
+    This reverts commit 2fc2a5349427b36a9f0d10b32093e185dd428e00.
+
+[33mcommit 0f8f000cdeadeabd932238cf8e94c7027540a154[m
+Merge: ac380985e 3c4398b23
+Author: Peres Kereotubo <peres_kereotubo@dell.com>
+Date:   Wed May 24 15:00:06 2023 -0400
+
+    Merge branch 'revert-643-updating-docs-for-1.27' of https://github.com/dell/csm-docs into revert-643-updating-docs-for-1.27
+
+[33mcommit ac380985eb9d3d4c47b664b7294ff1902350121d[m
+Author: Peres Kereotubo <118770866+PeresKereotubo@users.noreply.github.com>
+Date:   Wed May 24 12:49:45 2023 -0500
+
+    Revert "Updating documentation for k8s 1.27 (#643)"
+    
+    This reverts commit 2fc2a5349427b36a9f0d10b32093e185dd428e00.
+
+[33mcommit 3c4398b238bb23fc4a50c73d6c31ffeb577ab6ef[m
+Merge: 229b440d6 bc5634a98
+Author: Peres Kereotubo <peres_kereotubo@dell.com>
+Date:   Wed May 24 14:48:56 2023 -0400
+
+    Merge branch 'revert-643-updating-docs-for-1.27' of https://github.com/dell/csm-docs into revert-643-updating-docs-for-1.27
+
+[33mcommit 229b440d6e5ef2be3e36202c792b78df0358b7d7[m
+Author: Peres Kereotubo <118770866+PeresKereotubo@users.noreply.github.com>
+Date:   Wed May 24 12:49:45 2023 -0500
+
+    Revert "Updating documentation for k8s 1.27 (#643)"
+    
+    This reverts commit 2fc2a5349427b36a9f0d10b32093e185dd428e00.
+
+[33mcommit bc5634a9839c7fd7e0aee45a1c292ab7032201df[m[33m ([m[1;32mmain[m[33m)[m
+Author: Peres Kereotubo <118770866+PeresKereotubo@users.noreply.github.com>
+Date:   Wed May 24 12:49:45 2023 -0500
+
+    Revert "Updating documentation for k8s 1.27 (#643)"
+    
+    This reverts commit 2fc2a5349427b36a9f0d10b32093e185dd428e00.
+
+[33mcommit 2fc2a5349427b36a9f0d10b32093e185dd428e00[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Peres Kereotubo <118770866+PeresKereotubo@users.noreply.github.com>
+Date:   Tue May 23 18:30:41 2023 -0500
+
+    Updating documentation for k8s 1.27 (#643)
+
+[33mcommit 6e05f57586be862bf887804643934d46e787e463[m
+Author: Meghana GM <41953467+meggm@users.noreply.github.com>
+Date:   Tue May 23 20:26:07 2023 +0530
+
+    Added support for csi-driver upgrades via csm-operator (#638)
+
+[33mcommit b2bfe235e57b6dbfd8994ec7467156a083c9f618[m
+Author: Santhosh Lakshmanan <111809751+santhoshatdell@users.noreply.github.com>
+Date:   Thu May 18 13:28:09 2023 -0500
+
+    Replication installation doc corrections (#631)
+
+[33mcommit 1a381437ea3fcea97b0c11c6bae64e4977545ade[m
+Author: Abrar Basha <109154267+mbasha-dell@users.noreply.github.com>
+Date:   Wed May 17 15:22:30 2023 -0400
+
+    Power flex deployment fixes (#619)
+    
+    * PowerFlex deployment and feature clarifications
+    
+    * added clarification on system id example
+    
+    * clarified vxflexos naming, secret location, and system id information
+    
+    * removed section from sdc deployment for operator
+    
+    * Fixed sdc image version
+
+[33mcommit 36132b16c10cc6f6ce6cad3ac9271c364ed01112[m
+Author: coulof <49235405+coulof@users.noreply.github.com>
+Date:   Wed May 17 03:13:39 2023 -0400
+
+    Cleanup pages and point to latest blogs & videos (#620)
+
+[33mcommit a0c2b578eafca80be3cbd710c39cba3a212771c3[m
+Author: coulof <49235405+coulof@users.noreply.github.com>
+Date:   Wed May 17 03:13:02 2023 -0400
+
+    Fix indentation (#622)
+
+[33mcommit 70583f3fb8048a81ce04c6dcd0c727cd74d0d400[m
+Author: mgandharva <124261698+mgandharva@users.noreply.github.com>
+Date:   Tue May 16 20:31:19 2023 +0530
+
+    Common-section-for-Volume-Snapshot (#623)
+    
+    * Common-section-for-Volume-Snapshot
+    
+    * Common-section-for-Volume-Snapshot
+    
+    * Common-section-for-Volume-Snapshot
+
+[33mcommit 2f11206a9fc2a17f063cd52864f1b4e8efe9e085[m
+Author: Don Khan <don.khan@dell.com>
+Date:   Mon May 15 06:22:16 2023 -0400
+
+    Fixes for Operator install of Replication (#612)
+
+[33mcommit 6e5537d599680e5e8215c775c34e855557951e6f[m
+Author: coulof <49235405+coulof@users.noreply.github.com>
+Date:   Fri May 12 11:20:45 2023 +0200
+
+    Add Instruqt CSM lab (#609)
+    
+    * Add Instruqt CSM lab
+    
+    ---------
+    
+    Co-authored-by: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+
+[33mcommit 1ce686172e124bd212e52dbdca9b60c6d0383af9[m
+Author: mgandharva <124261698+mgandharva@users.noreply.github.com>
+Date:   Thu May 11 14:56:20 2023 +0530
+
+    bug_update_support_matrix (#606)
+
+[33mcommit b910d668511b6ee3f293cb5018de7a676320fb3b[m
+Author: boyamurthy <92081029+boyamurthy@users.noreply.github.com>
+Date:   Mon May 8 19:58:14 2023 +0530
+
+    Adding troubleshooting section for mount issue on powermax (#603)
+
+[33mcommit 415f026ac4d39d16752282ccf4bf60844920f7ab[m
+Author: Don Khan <don.khan@dell.com>
+Date:   Mon May 8 08:02:16 2023 -0400
+
+    Fix inconsistency in isilon namespace (#597)
+
+[33mcommit 35c8f7a7bcd08e82bb480e4ff10849f6efc87c97[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Apr 24 13:26:59 2023 +0530
+
+    Update _index.md (#584)
+
+[33mcommit 05572bd9c54109ac85d7bd376b434cf81bdea508[m
+Author: Santhosh Lakshmanan <111809751+santhoshatdell@users.noreply.github.com>
+Date:   Wed Apr 19 14:14:50 2023 -0500
+
+    Updating main with changes from release-1.6.1 (#580)
+
+[33mcommit 32913219d435b784be764a9d7fd9c74271645580[m
+Author: Santhosh Lakshmanan <111809751+santhoshatdell@users.noreply.github.com>
+Date:   Wed Apr 19 11:32:56 2023 -0500
+
+    Added replication module known issue (#569)
+
+[33mcommit ed64551c47269bbeefd903009ae97865a1ec52a2[m
+Author: HarishH-DELL <109663924+HarishH-DELL@users.noreply.github.com>
+Date:   Tue Apr 18 11:30:28 2023 +0530
+
+    Multi array support documentation improvements (#575)
+    
+    * Multi array support documentation improvements
+    
+    * renamed sc name
+
+[33mcommit b29de03c0b5dc4103daa8071102c9e9118dac914[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Apr 10 18:41:44 2023 +0530
+
+    updated troubleshooting doc (#558)
+
+[33mcommit 86f9bae173e4d3275ab4af8467b2afb18632557a[m
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Tue Apr 4 19:28:57 2023 +0530
+
+    Security Policy (#556)
+
+[33mcommit 4806add6fdd92c050e31da11996638b6988d7e2f[m
+Author: Akshay Saini <109056238+AkshaySainiDell@users.noreply.github.com>
+Date:   Fri Mar 31 14:50:57 2023 +0530
+
+    Update release notes & upgrade steps (#553)
+
+[33mcommit 64ba31f8b970618a5f94a27bf1980e20fb485370[m
+Author: Samihan Deshmukh <120082727+samihan-dell@users.noreply.github.com>
+Date:   Thu Mar 30 11:16:17 2023 +0530
+
+    Fixing UI improvements (#549)
+    
+    * fix: Removing images list for old csm version
+    
+    * fix: Adding missing images
+    
+    * fix: Modified installation wizard top navbar identical to csm-docs navbar
+    
+    * fix: Sticking navbar to top
+    
+    * fix: Added UI as cluster prefix should be 3 letters
+    
+    * fix: fixing logo redirection to home page
+    
+    * style: aligning logo position to csm-docs logo position
+    
+    * fix: fixing logo redirection to home page
+    
+    * style: Keeping footer of installation wizard at bottom
+    
+    * style: Aligned social links and adjusted fonts
+    
+    * fix: Fixed linting issue
+    
+    * fix: Refactored styling spacing
+
+[33mcommit b79377d309a7a33cd8245d2a403b017161157cc8[m[33m ([m[1;33mtag: v1.6.0[m[33m)[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Mon Mar 27 17:14:31 2023 +0530
+
+    Release 1.6.0 (#547)
+
+[33mcommit 56c2f3cdba1d332b50ee1c9a67a46dbc90a4d312[m[33m ([m[1;31morigin/1.6[m[33m)[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Mon Mar 20 12:09:58 2023 +0530
+
+    Update _index.md (#545)
+
+[33mcommit 3809c1ff961f53d52296070f30081aacced08557[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Fri Mar 17 18:43:43 2023 +0530
+
+    Update _index.md (#544)
+    
+    Updated the Module information in FAQ
+
+[33mcommit 3449b34a6e1b2007feb54011eba9f686fdcf0d56[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Thu Mar 16 19:05:50 2023 +0530
+
+    Update _index.md (#543)
+
+[33mcommit 3a1eb3cc90258a7026946afcde3ba6a10b983c1d[m
+Author: Harsha Yalamanchili <26751135+harshaatdell@users.noreply.github.com>
+Date:   Tue Mar 7 12:30:28 2023 -0500
+
+    Update CODEOWNERS (#533)
+
+[33mcommit fb3579f37d8251da22194fe08d2824c898e872e7[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Mon Mar 6 22:38:16 2023 +0530
+
+    Rollback to the Old Architecture Image (#523)
+    
+    Rollback to the Old Architecture Image for Better Resolution
+
+[33mcommit 2bfa308fd866481624178479865e9c3c02a2b958[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Mon Mar 6 22:31:34 2023 +0530
+
+    Bug 704 csm architecture (#522)
+
+[33mcommit 05e7bbe6e83cef71be79fe9df0826e9745a02206[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Mon Mar 6 21:05:30 2023 +0530
+
+    Updating to the latest CSM Architecture (#518)
+
+[33mcommit e44b91812ec1ec1d9a9b5ae5c359a27472c76a26[m
+Author: Harsha Yalamanchili <26751135+harshaatdell@users.noreply.github.com>
+Date:   Fri Mar 3 15:02:41 2023 -0500
+
+    Update _index.md (#512)
+
+[33mcommit d5f7272ed9ecfa859c587fd89e70be0e4b763768[m
+Author: AnandatDell <105747555+anandrajak1@users.noreply.github.com>
+Date:   Thu Mar 2 22:27:16 2023 +0530
+
+    Update replication.md (#505)
+
+[33mcommit 15eaeac0fdb773ac9d0b36e6c1c34ab88f763344[m
+Author: AnandatDell <105747555+anandrajak1@users.noreply.github.com>
+Date:   Thu Mar 2 20:31:38 2023 +0530
+
+    Update replication.md (#503)
+
+[33mcommit aa677488bd8f2e6fc4e2ba12411d191909b99558[m[33m ([m[1;33mtag: v1.5.1[m[33m)[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Wed Feb 22 12:59:31 2023 +0530
+
+    CSM Docs v1.5.1 Changes - Release 1.5.1 to Main (#485)
+
+[33mcommit 69a4e0029ff62fdc705ac421b9e062ad14f82b0d[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Feb 16 12:12:32 2023 +0530
+
+    Update known issues PowerMax (#461)
+
+[33mcommit b8f54b8fd19dd1c6aabaea9f6f44c222577cc0c7[m
+Author: Surya Prakash Gupta <109594002+suryagupta4@users.noreply.github.com>
+Date:   Wed Feb 15 14:01:03 2023 +0530
+
+    Anthos 1.13 support for PowerStore (#458)
+    
+    Updated support matrix for PowerStore with Anthos 1.13
+
+[33mcommit 10405daa3a967e101a9e7f2d1b1b9161e39d1569[m
+Author: Rajendra Indukuri <82365588+rajendraindukuri@users.noreply.github.com>
+Date:   Tue Jan 31 15:59:38 2023 +0530
+
+    Updating support status of Unity XT for EKS (#440)
+
+[33mcommit 089fdf6b09b20d77676fca3e49cf958b14e82918[m[33m ([m[1;32mupdatingfor-k8s-1.27[m[33m)[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Mon Jan 23 15:05:10 2023 +0530
+
+    Updated the content changes related to PowerFlex as mentioned in this, (#437)
+
+[33mcommit a50f063c97da1d6b8acd9b9f55848556fc62263e[m
+Author: Nitesh-Rewatkar <90749010+nitesh3108@users.noreply.github.com>
+Date:   Wed Jan 4 11:55:07 2023 +0530
+
+    Add Amazon EKS support to PowerScale (#428)
+
+[33mcommit 1861e4c228aa151104f5e227f5872ec0cde50ca2[m[33m ([m[1;33mtag: v1.3.1[m[33m)[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Dec 22 17:28:06 2022 +0530
+
+    Release 1.3.1 changes (#427)
+
+[33mcommit 9b8b098ef7f8588bd1df07471b6df5c440211dc9[m
+Author: rajkumar-palani <43825650+rajkumar-palani@users.noreply.github.com>
+Date:   Mon Dec 19 20:16:10 2022 +0530
+
+    Update Code Owners (#426)
+
+[33mcommit e8e9eb91c4e23b81c36389e78bd95e4322ae2570[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Tue Dec 13 21:01:32 2022 +0530
+
+    Release 1.5 changes (#424)
+
+[33mcommit 344ce1221d22592ec289663e3bbdce6905844f71[m[33m ([m[1;33mtag: v1.5[m[33m)[m
+Author: IsaiasA1 <109099794+IsaiasA1@users.noreply.github.com>
+Date:   Tue Dec 6 12:32:56 2022 -0600
+
+    Rpm auth issue (#423)
+    
+    * Updating troubleshooting authorization
+    
+    * Updating troubleshooting authorization
+    
+    * diction change and placement
+    
+    * added topic link
+
+[33mcommit dc0e47a3f163f6368bab8876849cdf28ccf254a6[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Nov 28 16:45:05 2022 +0530
+
+    Update architecture diagram (#417)
+
+[33mcommit 33d6a129a61b6957e9b06ef0997b0ef6b60f691c[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Nov 24 18:56:06 2022 +0530
+
+    fixed sec bug (#413)
+
+[33mcommit 0ac7883a0a2bf0a54c735f661870cff438bb2c05[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Wed Nov 23 12:28:22 2022 +0530
+
+    Update CSM architecture diagram (#380)
+
+[33mcommit 4f52ceae38076e13a83fbf97b75a52bfcb76248e[m
+Author: aqu-dell <108017114+arnchiequ-dell@users.noreply.github.com>
+Date:   Tue Nov 22 08:56:58 2022 -0500
+
+    Updating documentation for selinux changes (#398)
+    
+    * Updating documentation for selinux changes
+    
+    * Minor updates for PR comments
+    
+    * Adding version to index.md
+
+[33mcommit 2e29e105a354a78ff40c75295dfcae798ad49518[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Oct 27 17:50:11 2022 +0530
+
+    Update Replication release notes (#371)
+
+[33mcommit 489246a7e175324cc87a3e33d37db410f1002682[m
+Author: Matt Schmaelzle <51763677+mjsdell@users.noreply.github.com>
+Date:   Tue Oct 25 16:59:48 2022 -0400
+
+    Release notes update for CSM Replication (#370)
+    
+    * Update _index.md
+    
+    * Update _index.md
+    
+    * Update _index.md
+
+[33mcommit 07e4e002c96e56c9684489964dddfb1abbf53896[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Oct 17 12:45:56 2022 +0530
+
+    Update PowerMax support matrix (#362)
+
+[33mcommit 49c5181eeca9eccc3139a70233786c04dce7cf8c[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Sep 29 18:28:31 2022 +0530
+
+    Update supported Powermax Matrix (#360)
+
+[33mcommit 182bbd984ae8bf8e26dd8b1a6183ee2bd79527ec[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Sep 29 17:11:06 2022 +0530
+
+    update encryption as CSM module (#359)
+
+[33mcommit 47643c89fb9b80db47e2372f6da78dabd18ef035[m
+Author: Adarsh Kumar Yadav <109620911+adarsh-dell@users.noreply.github.com>
+Date:   Thu Sep 29 16:59:25 2022 +0530
+
+    Reverting last commit (#357)
+
+[33mcommit 48a2016ed06bfeaae440107476e74b5155a3ac65[m
+Author: Adarsh Kumar Yadav <109620911+adarsh-dell@users.noreply.github.com>
+Date:   Thu Sep 29 12:22:50 2022 +0530
+
+    Doc update for healthMonitor parameter (#356)
+
+[33mcommit 9581023ae75ac1fc3f12b7f6afdcb0db908f44c8[m
+Author: satyakonduri <109734493+satyakonduri@users.noreply.github.com>
+Date:   Wed Sep 28 14:33:36 2022 +0530
+
+    CSI-Powerstore: Update upgrade procedure (#355)
+
+[33mcommit 286992e34f4d81073e21019c5324183cb91c166d[m
+Author: baoy1 <105041111+baoy1@users.noreply.github.com>
+Date:   Tue Sep 27 14:32:17 2022 +0800
+
+    Fix csm-metrics-powerscale version (#353)
+
+[33mcommit 6ba7f7a24055199c734986bff1263cc9fb941cf8[m[33m ([m[1;33mtag: v1.4[m[33m)[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Wed Sep 21 18:28:15 2022 +0530
+
+    Release 1.4 for CSM (#352)
+
+[33mcommit 6d4d4e0c8d4e574dc3c8d1b8d189f360dfde8ffa[m[33m ([m[1;31morigin/update_u4P_upgrade_procedure[m[33m)[m
+Author: JacobGros <jacobgrosner4@gmail.com>
+Date:   Thu Aug 25 11:05:23 2022 -0400
+
+    revert R.N. back to 1.3 version (#333)
+
+[33mcommit 89595df432ba4e7d7a8ec13f854623d2cdc15e85[m
+Author: Rajshree Khare <69839943+khareRajshree@users.noreply.github.com>
+Date:   Tue Aug 23 02:10:19 2022 +0530
+
+    csi-powerflex 2.4 release notes (#327)
+    
+    * csi-powerflex 2.4 release notes
+    
+    * Update powerflex.md
+    
+    Co-authored-by: JacobGros <jacobgrosner4@gmail.com>
+
+[33mcommit 18764aa9655af6960de2bcc67c0b48c1976922bc[m
+Author: Adarsh Kumar Yadav <109620911+adarsh-dell@users.noreply.github.com>
+Date:   Wed Aug 10 16:35:56 2022 +0530
+
+    Doc modification (#307)
+
+[33mcommit 7734eaa54130e72b52f895bdb7ac38d3b9cb5244[m
+Author: Patrice Chalin <chalin@users.noreply.github.com>
+Date:   Tue Jul 26 02:41:41 2022 -0400
+
+    Upgrade docsy for offline search fix (#297)
+
+[33mcommit 0d335cbee4620c5f34022c61392b25ed1e142c5c[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Jul 25 18:33:36 2022 +0530
+
+    updated docsy (#296)
+
+[33mcommit bc0b7b2a692e5450cc6deab185cc98456c8f5998[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Jul 25 17:27:07 2022 +0530
+
+    fixed offline search (#295)
+
+[33mcommit 5658d19dd78450c84934cddea4b982d3f76aa861[m
+Author: boyamurthy <92081029+boyamurthy@users.noreply.github.com>
+Date:   Thu Jul 21 11:28:38 2022 +0530
+
+    updating known issues (#293)
+
+[33mcommit a7cee86fed8c19c3b466352e3a56ad199eada4e5[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Wed Jul 20 14:31:44 2022 +0530
+
+    Delete themes directory (#292)
+
+[33mcommit dcd8495bc32354916bc6459e9219454357b6d516[m
+Author: shaynafinocchiaro <66699024+shaynafinocchiaro@users.noreply.github.com>
+Date:   Tue Jul 19 12:46:36 2022 -0400
+
+    Documentation Improvement (#291)
+
+[33mcommit 1178a46139cc2f8f601779a7ece2adf251d9ef79[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Tue Jul 19 17:55:18 2022 +0530
+
+    updated themes for release versions (#290)
+
+[33mcommit 04fb6b305737f7f559cf5589cf7db56d39531c82[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Jul 18 12:17:37 2022 +0530
+
+    Fix known docsy issue in the workflow  (#289)
+
+[33mcommit 7954de81dbd7bedafe5db218cbcaf23453488425[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Jul 18 11:20:41 2022 +0530
+
+    Fix workflows (#288)
+
+[33mcommit 697130624c9a27fe9488ce8314b94bbb2a4103c5[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Jul 14 19:24:36 2022 +0530
+
+    update package-lock.json (#286)
+
+[33mcommit 6b765b38989ab29d21da30181ffa6dbd2f53f21b[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Jul 14 19:13:06 2022 +0530
+
+    Update deploy.yml
+
+[33mcommit fbcef28467311e0f85f0a2e17af3394489ecbefc[m
+Author: Yamunadevi N Shanmugam <yamunadevi.shanmugam@dell.com>
+Date:   Thu Jul 14 12:36:18 2022 +0000
+
+     update docsy module
+    
+    Signed-off-by: Yamunadevi N Shanmugam <Yamunadevi.Shanmugam@dell.com>
+
+[33mcommit 55da01860f182d0572ad9fa5d9b34a76d2475690[m
+Author: Shanmugapriya M <97021994+spriya-m@users.noreply.github.com>
+Date:   Mon Jul 11 12:01:28 2022 +0530
+
+    iSCSI support for CSI PowerStore on VMware Tanzu
+
+[33mcommit 2f74ee9414a522e9dfb536c54a00c281a37b31ef[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Wed Jul 6 10:26:15 2022 +0530
+
+    update left side navigation (#276)
+
+[33mcommit d2f3e6d39c96496da8520cfe69aa8fe36d587bbf[m
+Author: Rajendra Indukuri <82365588+rajendraindukuri@users.noreply.github.com>
+Date:   Tue Jul 5 18:36:12 2022 +0530
+
+    Updating code owners file (#277)
+
+[33mcommit 8df67db7b45ced170a31122443882ff1b9fe23a5[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Jul 4 13:15:09 2022 +0530
+
+    Format fixing for PowerFlex (#272)
+
+[33mcommit 80911cc71514193805de5449318363919f36aa64[m
+Author: Aaron Tye <tyeaaron@gmail.com>
+Date:   Mon Jul 4 02:55:14 2022 -0400
+
+    add troubleshooting for path denied (#274)
+
+[33mcommit 2b975c5ea836e6e10f9232a7738f71cc5368985f[m
+Author: JacobGros <jacobgrosner4@gmail.com>
+Date:   Mon Jul 4 02:51:41 2022 -0400
+
+    Enhance pflex install (#273)
+
+[33mcommit 8a6811faacb117645164905dac5b5bd107a5473a[m
+Author: Rajendra Indukuri <82365588+rajendraindukuri@users.noreply.github.com>
+Date:   Mon Jul 4 12:19:27 2022 +0530
+
+    bugfix-345-improvements-operator-docs (#275)
+
+[33mcommit 30ecb9505150e191a80b39a17ec9ff6c560326ae[m
+Author: JacobGros <jacobgrosner4@gmail.com>
+Date:   Wed Jun 29 08:19:14 2022 -0400
+
+    add mpath trouble shooting for pflex (#270)
+
+[33mcommit cb2c53576933120d25e94e837ae40f274ae64058[m
+Author: shaynafinocchiaro <66699024+shaynafinocchiaro@users.noreply.github.com>
+Date:   Wed Jun 29 06:00:50 2022 -0400
+
+    Update CSM Authorization Helm Deployment (#271)
+
+[33mcommit 3e8b2dd3fab547c25dbe3be609e1b970d6a0202b[m
+Author: shaynafinocchiaro <66699024+shaynafinocchiaro@users.noreply.github.com>
+Date:   Tue Jun 28 03:25:46 2022 -0400
+
+    remove branching from git clone (#268)
+
+[33mcommit dc23cfdaa98d3161aaa4d5cb1ff1611bf3863d4b[m
+Author: Rajendra Indukuri <82365588+rajendraindukuri@users.noreply.github.com>
+Date:   Tue Jun 28 12:53:49 2022 +0530
+
+    Bugfix 345 update operator clone steps (#269)
+
+[33mcommit dc9601d535908a58c01432acb9e99a38c897c209[m[33m ([m[1;33mtag: v1.3[m[33m)[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Wed Jun 22 16:36:23 2022 +0530
+
+    CSM Release 1.3 (#266)
+
+[33mcommit 43dc6f76588a05c08967893ffdd3a8f311053d75[m
+Author: coulof <49235405+coulof@users.noreply.github.com>
+Date:   Wed Jun 8 07:33:41 2022 +0200
+
+    Reorganize support matrixes (#258)
+
+[33mcommit 927382212eb10a2403fca3741db41a0bed827b45[m
+Author: Yamunadevi N Shanmugam <82038610+shanmydell@users.noreply.github.com>
+Date:   Fri Jun 3 16:05:02 2022 +0530
+
+    Device expansion not supported for PowerMax replicated volumes (#254)
+
+[33mcommit 071ff90707c4e84986226d537f39626549e6fb30[m
+Author: Michael Edegware <michael.edegware@tufts.edu>
+Date:   Thu May 26 16:49:02 2022 -0400
+
+    adds documentation for replication (#247)
+    
+    * adds documentation for replication
+
+[33mcommit 479dc5a249bb090eed95dbabed577ba0db5108ac[m
+Author: gallacher <35462391+gallacher@users.noreply.github.com>
+Date:   Tue May 24 16:59:37 2022 -0300
+
+    Documentation changes to support the CSM 1.2.1 release (#214)
+    
+    * patch version updates
+    
+    * update module version
+    
+    * update release navigation
+    
+    * fix formatting and prometheus data source url (#211)
+    
+    Co-authored-by: Yamunadevi N Shanmugam <Yamunadevi.Shanmugam@dell.com>
+    Co-authored-by: shaynafinocchiaro <66699024+shaynafinocchiaro@users.noreply.github.com>
+
+[33mcommit 442dbf7e375a0acb9f775a7a33da24eef62d7708[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu May 5 18:32:14 2022 +0530
+
+    Update CSM support matrix to home page  (#205)
+
+[33mcommit 173e49d209fe97fdb82449b178649dadd37abb8d[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Tue Apr 26 12:01:37 2022 +0530
+
+    added support for amazon EKS for Powerstore (#199)
+
+[33mcommit ba747fe5be32f3dcf8819378fa83aaf4da0b5a01[m
+Author: coulof <49235405+coulof@users.noreply.github.com>
+Date:   Mon Apr 25 10:01:20 2022 +0200
+
+    Annotation to set the default SC is not beta anymore (#198)
+
+[33mcommit 03f4156b08f1af07f4d046f3cd3e95f9f3895834[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Apr 21 14:30:51 2022 +0530
+
+    Bug - Fix code owner file (#195)
+
+[33mcommit f11650a813c9ccb115258407e1aa898173ec53ac[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Apr 21 10:42:58 2022 +0530
+
+    Deployment method for CRDs and the default snapshot controller - updates (#193)
+
+[33mcommit a2c8a0e6cd93a505906e2950311717e4160e6e25[m
+Author: JacobGros <jacobgrosner4@gmail.com>
+Date:   Tue Mar 29 00:13:53 2022 -0400
+
+    Add trouble-shooting entry (#189)
+
+[33mcommit c69afd9e69ccc195ffcca5f0bf7562da5a61cd8a[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Mar 28 18:44:11 2022 +0530
+
+    Revert "Add troubleshooting entry (#187)" (#188)
+    
+    This reverts commit 17359e3747428d43fef84efe032a600ff36e462e.
+
+[33mcommit 17359e3747428d43fef84efe032a600ff36e462e[m
+Author: JacobGros <jacobgrosner4@gmail.com>
+Date:   Mon Mar 28 09:11:55 2022 -0400
+
+    Add troubleshooting entry (#187)
+
+[33mcommit a5d8bc15f42bf26af4a2a6a95d6124f91b8ca930[m[33m ([m[1;33mtag: v1.2[m[33m)[m
+Author: hoppea2 <33433874+hoppea2@users.noreply.github.com>
+Date:   Wed Mar 23 08:15:39 2022 -0400
+
+    Release 1.2 (#185)
+
+[33mcommit 44206b2a045aab0864b178b10ff49e493bfb6866[m
+Author: abhi16394 <32352976+abhi16394@users.noreply.github.com>
+Date:   Thu Mar 3 08:56:16 2022 -0500
+
+    operator changes for powerflex-v2.2.0 (#171)
+
+[33mcommit de80877a0ccb29bee4651a5397cc929fd59cbe5a[m
+Author: Harish P <harish_p4@dell.com>
+Date:   Mon Feb 28 11:52:02 2022 +0530
+
+    Reverted NVMe docs (#168)
+
+[33mcommit 5f34426ee896a883354afb095e23cacfb1d2c473[m
+Author: Shanmugapriya M <97021994+spriya-m@users.noreply.github.com>
+Date:   Fri Feb 25 15:51:17 2022 +0530
+
+    Reverting POSIX and NFSv4 ACLs doc updates (#160)
+
+[33mcommit 0304bbd5b9a2a475d764a05e038417e077ad9e67[m
+Author: Harish P <harishp8889@gmail.com>
+Date:   Fri Feb 25 13:36:04 2022 +0530
+
+    updated fsgroup documentation (#153)
+
+[33mcommit bdef604d9c33c99f8ca7951b4738557c3b816aae[m
+Author: Francis Nijay <francis.nijay@dell.com>
+Date:   Fri Feb 25 11:43:29 2022 +0530
+
+    Added documentation for NVMeTCP for Powerstore (#154)
+    
+    Co-authored-by: shanmydell <82038610+shanmydell@users.noreply.github.com>
+
+[33mcommit 9e5fdd187dd205388f2b28d35136be8b0d0b79fb[m
+Author: Shanmugapriya M <97021994+spriya-m@users.noreply.github.com>
+Date:   Thu Feb 24 16:06:47 2022 +0530
+
+    Documentation update for POSIX and NFSv4 ACLs support (#147)
+
+[33mcommit 64ea23284a778479eee87e54f0bb499ba6601ba8[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Wed Feb 23 09:45:14 2022 +0530
+
+    addin application prefix information (#149)
+
+[33mcommit 11b1e6ff2a145a93f78639720d432d3dbe2060c3[m
+Author: JacobGros <jacobgrosner4@gmail.com>
+Date:   Wed Dec 8 08:54:04 2021 -0500
+
+    Remove fedora (#114)
+    
+    * remove Fedora from index
+    
+    * remove Fedora from features
+    
+    * Remove Fedora from Installation
+    
+    * feedback
+    
+    * remove Fedora from release notes
+
+[33mcommit 7929e11a815b2526bec0a3f8d27c216bb6ae9db4[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Tue Dec 7 16:37:36 2021 +0530
+
+    Update _index.md (#113)
+
+[33mcommit c924ae47375cbd4de8ff94ae5548c0eca96a6dd0[m[33m ([m[1;33mtag: v1.1[m[33m)[m
+Author: gallacher <35462391+gallacher@users.noreply.github.com>
+Date:   Fri Dec 3 13:03:43 2021 -0400
+
+    Release 1.1 Documentation Updates (#110)
+    
+    * [replication] Added upgrade page and updated install info (#57)
+    
+    * Added note about repctl logs file
+    
+    * Added upgrade instructions for both controller and sidecar
+    
+    * modified installation\upgrade section
+    
+    * Fixed couple of grammar mistakes
+    
+    * Added new entry to troubleshooting page
+    
+    * Addressed review comments
+    
+    * Changed link address
+    
+    Co-authored-by: Maxim Sklyarov <Maxim_Sklyarov@dell.com>
+    
+    * Update deployment steps for CSM Authorization (#58)
+    
+    * begin updating deployment
+    
+    * fixed typos
+    
+    * add auth upgrade doc
+    
+    * updated powerscale with authorization
+    
+    * updated authorization documentation for powermax, powerflex, and powerscale
+    
+    * refactored for powermax
+    
+    * added vxflexos related docs for auth deployment and configuration
+    
+    * consolidated proxy server root cert
+    
+    * fix grammar, notes, value.yaml parameters, update auth deployment
+    
+    * added note for driver configurations with auth
+    
+    * updated note
+    
+    * add auth note to drivers
+    
+    * update upgrade path
+    
+    Co-authored-by: atye <tyeaaron@gmail.com>
+    Co-authored-by: sharmilarama <sharmila.ramamoorthy@dell.com>
+    Co-authored-by: Logan Jones <logan_jones2@dell.com>
+    
+    * Fix operator install docs (#62)
+    
+    * Small update to the contributing doc (#54)
+    
+    * Update _index.md
+    
+    * Update _index.md
+    
+    * fixed sidecar instructions
+    
+    * Update _index.md
+    
+    * making changes requested by Aron
+    
+    * trying to get rid of unwanted changes
+    
+    Co-authored-by: gallacher <35462391+gallacher@users.noreply.github.com>
+    
+    * add Volume Health Monitor section (#67)
+    
+    * add Volume Health Monitor section
+    
+    * PR feedback
+    
+    * pv/pvc metrics csi-powerstore changes (#64)
+    
+    * Added troubleshooting documentation about gateway timeout for authorization (#63)
+    
+    * Upgrade and Rollback Support for CSM for Authorization proxy server (#66)
+    
+    * added auth upgrade and rollback, updated auth notes for drivers
+    
+    * fixed spacing
+    
+    * [replication] Added uninstall page, updated repctl readme (#70)
+    
+    * static provisioning and ephemeral changes (#71)
+    
+    * Update uninstall.md
+    
+    * updated auuth deployment steps (#72)
+    
+    * add  healthMonitorInterval to values table (#79)
+    
+    * Helm install update (#74)
+    
+    * updating helm install instructions
+    
+    * adding troubleshooting for helm update
+    
+    * minor changes and updates
+    
+    * more minor changes
+    
+    * word change
+    
+    * more minor changes
+    
+    * addressing comments from Jacob
+    
+    * fixing numbers
+    
+    * update code owners (#76)
+    
+    * Move health monitor section to correct file  (#81)
+    
+    * update correct file
+    
+    * remove feature from wrong file
+    
+    * Removed older OpenShift and added new driver versions (#84)
+    
+    * Feature rwop csi powerstore (#89)
+    
+    * Documentation for RWOP - CSI Powerstore
+    
+    * Addressed review comment
+    
+    * Update powerstore.md
+    
+    Co-authored-by: shanmydell <82038610+shanmydell@users.noreply.github.com>
+    
+    * Feature rwop accessmode support for csi-powerscale (#90)
+    
+    Co-authored-by: shanmydell <82038610+shanmydell@users.noreply.github.com>
+    
+    * Tenant documentation for both csi-unity and operator (#85)
+    
+    Co-authored-by: shanmydell <82038610+shanmydell@users.noreply.github.com>
+    
+    * Replication prerequisites & troubleshooting (#93)
+    
+    Co-authored-by: shanmydell <82038610+shanmydell@users.noreply.github.com>
+    
+    * Feature/pvc metrics csi powerstore update (#91)
+    
+    * volume health monitoring update (#92)
+    
+    * volume health monitoring update
+    
+    * Update powerscale.md
+    
+    * update documentation for health monitoring
+    
+    Co-authored-by: shanmydell <82038610+shanmydell@users.noreply.github.com>
+    Co-authored-by: Randeep Sharma <92301596+randeepsharma@users.noreply.github.com>
+    Co-authored-by: Bahubali Jain <bahubali_jain@dell.com>
+    
+    * Changed replication support matrix (#94)
+    
+    * Changed replication support matrix
+    
+    * Changed to X
+    
+    * Add health values (#95)
+    
+    * add new values to values table
+    
+    * Add note to features section
+    
+    * fix typo
+    
+    * Common changes (#86)
+    
+    * Unity - RWOP Access Mode and Volume Health Monitoring (#77)
+    
+    * RWOP support matrix change (#96)
+    
+    * Added known issue for unity (#97)
+    
+    * Update powerflex.md (#98)
+    
+    * powerscale release notes updated (#99)
+    
+    * Operator Docs changes related to Unity features (#102)
+    
+    * Operator upgrade documentation for volume health monitor changes (#104)
+    
+    * Added note about how to list volume snapshots (#101)
+    
+    * restructured deployment docs (#106)
+    
+    * Improve operator install steps (#107)
+    
+    * Update versions (#100)
+    
+    * Added note that clarifies keys for csm installer (#108)
+    
+    * Added volume health monitor in CSI spec support (#109)
+    
+    * updated sample update for topology usage (#112)
+    
+    https://github.com/dell/csm/issues/82
+    
+    Co-authored-by: Andrey Schipilo <superdron97@yandex.ru>
+    Co-authored-by: Maxim Sklyarov <Maxim_Sklyarov@dell.com>
+    Co-authored-by: shaynafinocchiaro <66699024+shaynafinocchiaro@users.noreply.github.com>
+    Co-authored-by: atye <tyeaaron@gmail.com>
+    Co-authored-by: sharmilarama <sharmila.ramamoorthy@dell.com>
+    Co-authored-by: Logan Jones <logan_jones2@dell.com>
+    Co-authored-by: Jooseppi Luna <jooseppi_luna@dell.com>
+    Co-authored-by: JacobGros <jacobgrosner4@gmail.com>
+    Co-authored-by: Ashish Verma <32611022+ashish2207@users.noreply.github.com>
+    Co-authored-by: Trevor Dawe <trevor.dawe@dell.com>
+    Co-authored-by: gilltaran <91598969+gilltaran@users.noreply.github.com>
+    Co-authored-by: hoppea2 <33433874+hoppea2@users.noreply.github.com>
+    Co-authored-by: Francis Nijay <francis.nijay@dell.com>
+    Co-authored-by: shanmydell <82038610+shanmydell@users.noreply.github.com>
+    Co-authored-by: Bahubali Jain <66621574+bpjain2004@users.noreply.github.com>
+    Co-authored-by: karthikk92 <92289639+karthikk92@users.noreply.github.com>
+    Co-authored-by: Sakshi-dell <75004921+Sakshi-dell@users.noreply.github.com>
+    Co-authored-by: Randeep Sharma <92301596+randeepsharma@users.noreply.github.com>
+    Co-authored-by: Bahubali Jain <bahubali_jain@dell.com>
+    Co-authored-by: rensyct <80810999+rensyct@users.noreply.github.com>
+    Co-authored-by: Rajendra Indukuri <82365588+rajendraindukuri@users.noreply.github.com>
+    Co-authored-by: abhi16394 <32352976+abhi16394@users.noreply.github.com>
+    Co-authored-by: panigs7 <92028646+panigs7@users.noreply.github.com>
+    Co-authored-by: Prasanna M <35757638+prablr79@users.noreply.github.com>
+
+[33mcommit f2836dd7dffabe23b0713d68229e49585882858d[m
+Author: Jooseppi Luna <jooseppi_luna@dell.com>
+Date:   Thu Nov 18 15:39:44 2021 -0500
+
+    Update powerflex.md (#88)
+
+[33mcommit d38d10413ed3f5db03c9fc0d01938dc94d7d9369[m
+Author: Jooseppi Luna <jooseppi_luna@dell.com>
+Date:   Thu Nov 18 10:40:16 2021 -0500
+
+    adding troubleshooting scenario (#87)
+    
+    * adding troubleshooting scenario
+    
+    * fixing typo
+
+[33mcommit 0ed105037b7c9dced7b2d41ba992c07acef292b7[m
+Author: abhi16394 <32352976+abhi16394@users.noreply.github.com>
+Date:   Thu Nov 18 04:55:21 2021 -0500
+
+    Update powerflex.md (#80)
+
+[33mcommit 228455e9ba03ec7d2d64b7b44e507e403d840bc8[m
+Author: hoppea2 <33433874+hoppea2@users.noreply.github.com>
+Date:   Wed Nov 17 12:05:50 2021 -0500
+
+    update code owners (#78)
+
+[33mcommit 8a4613bed09380403aa039019c5c1ad2e062df73[m
+Author: cturiel <56453527+cturiel@users.noreply.github.com>
+Date:   Mon Nov 15 15:09:02 2021 +0100
+
+    fix yaml syntax error (#73)
+
+[33mcommit 191ebbbacc118495316850341035667e5b98c0f7[m
+Author: Francis Nijay <francis.nijay@dell.com>
+Date:   Fri Nov 12 14:24:27 2021 +0530
+
+    Updated docs to clone drivers from tag v2.0.0 (#61)
+
+[33mcommit d88239683135fe51e68b109f21afbe498f380a82[m
+Author: yifei jin <yifeijin@users.noreply.github.com>
+Date:   Thu Nov 11 14:01:01 2021 -0500
+
+    Powerflex readwriteoncepod Feature
+    
+    Powerflex readwriteoncepod Feature
+
+[33mcommit a22ea319a30706afc4a628e505666d16537449a9[m
+Author: gallacher <35462391+gallacher@users.noreply.github.com>
+Date:   Wed Nov 3 14:04:16 2021 -0300
+
+    Small update to the contributing doc (#54)
+    
+    * Update _index.md
+    
+    * Update _index.md
+
+[33mcommit 8052eb83f55c3d5756f9106b8b09f9fccf8b586d[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Oct 28 18:47:11 2021 +0530
+
+    Rename .github/workflows/pull_request_template.md to .github/pull_request_template.md (#53)
+
+[33mcommit dc905a09ca8f7f15bc8f3261faaadd882cc4f3f3[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Oct 28 18:41:53 2021 +0530
+
+    Contribution Guidelines (#50)
+
+[33mcommit e2454039539ed307d46b2b5bb33c3d27948fae28[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Oct 28 18:08:08 2021 +0530
+
+    Remove forbidden words check (#52)
+
+[33mcommit 52d9421acbafa209ff2247926bfd6cc373adafa6[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Tue Oct 26 20:05:42 2021 +0530
+
+    Create pull_request_template.md (#49)
+
+[33mcommit 1b1a025f9b0f60ac681e6410dff40f54ab9e72cb[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Tue Oct 19 11:58:25 2021 +0530
+
+    added workflow for forbidden work and malware scanner (#40)
+
+[33mcommit 327b9fed740236684bc5ea057e7758d4b4fb8f1d[m
+Author: Trevor Dawe <trevor.dawe@dell.com>
+Date:   Fri Oct 15 16:40:26 2021 -0300
+
+    Update observability upgrade (#48)
+
+[33mcommit 8c224f50fe5771fc1678a1ecc03110b1e97faf37[m
+Author: Trevor Dawe <trevor.dawe@dell.com>
+Date:   Fri Oct 15 16:02:34 2021 -0300
+
+    Added docs for upgrading observability, resiliency, and installer (#47)
+
+[33mcommit 83489d9ac409470f0ef295ab28faccca1f62b7df[m
+Author: sharmilarama <72404078+sharmilarama@users.noreply.github.com>
+Date:   Fri Oct 15 13:06:31 2021 -0400
+
+    fix cert-manager CRDS (#46)
+
+[33mcommit 49aec2fddafcf41f3c99ebcb7fdc01e92e44879c[m
+Author: Trevor Dawe <trevor.dawe@dell.com>
+Date:   Fri Oct 15 10:48:34 2021 -0300
+
+    Added upgrade documentation for the installer (#44)
+
+[33mcommit 081bb1fe3b6e60385edb9b57b2cec3afbce741f3[m
+Author: sharmilarama <72404078+sharmilarama@users.noreply.github.com>
+Date:   Fri Oct 15 02:25:13 2021 -0400
+
+    update upgrade instructions (#45)
+
+[33mcommit 674dc61c87287904561084d7de4ecf4c4da37470[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Fri Oct 15 11:38:27 2021 +0530
+
+    Update Hickory SR version (#41)
+
+[33mcommit 1b56cb1853a747c3fdc3f9cc4eb6c2a3fff1c4f1[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Oct 14 10:59:00 2021 +0530
+
+    Aligning_with_branch_strategy (#43)
+
+[33mcommit b79cec07ebcc602742a1d0c2c07188287c650315[m
+Author: gallacher <35462391+gallacher@users.noreply.github.com>
+Date:   Tue Oct 12 14:45:25 2021 -0300
+
+    Observability matrix update (#42)
+    
+    * Update observability capabilities support matrix
+
+[33mcommit 4c81088deba7f615c37a139be94f78a2f37b92dc[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Mon Oct 11 13:02:53 2021 +0530
+
+    updates (#39)
+
+[33mcommit c72e39ba8ff67e30a61d052316f74b88ff0ae530[m
+Author: JacobGros <jacobgrosner4@gmail.com>
+Date:   Tue Oct 5 07:23:38 2021 -0400
+
+    Update _index.md (#38)
+
+[33mcommit 564dca8412184a600d689a2a065c52f2f2f9e3a1[m
+Author: sharmilarama <72404078+sharmilarama@users.noreply.github.com>
+Date:   Fri Oct 1 10:04:01 2021 -0400
+
+    upgrade cert manager (#37)
+
+[33mcommit 8db89049fbd89c9cdf38fa94e3389ce8c41b0d88[m
+Author: hoppea2 <33433874+hoppea2@users.noreply.github.com>
+Date:   Mon Sep 27 09:05:06 2021 -0400
+
+    Add info how to retrieve CMS auth server logs (#36)
+
+[33mcommit 03b05141e1ad06237712d5a18b5772a55e0cda78[m
+Author: Trevor Dawe <trevor.dawe@dell.com>
+Date:   Mon Sep 27 09:09:45 2021 -0300
+
+    Updated docs for common installer (#35)
+
+[33mcommit 4b158352ba6aaaf49613f9a20a2b2d64b34081e0[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Wed Sep 22 14:48:01 2021 +0530
+
+    update swagger (#34)
+
+[33mcommit 427dd21c2e1a661e673ae419912c81c2ce579859[m[33m ([m[1;33mtag: v1.0[m[33m)[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Tue Sep 21 21:01:25 2021 +0530
+
+    Release cy21 q3 (#32)
+
+[33mcommit 9d6bc33e2e4602b00df308cb583b7a8a6c5b6401[m
+Merge: f7d77d48c 9dd0fecf2
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Fri Jul 16 12:09:56 2021 +0530
+
+    Merge pull request #30 from dell/Release-updates
+    
+    Release updates
+
+[33mcommit 9dd0fecf2606621bea822d3d17429ba652aae5a0[m
+Author: shanmydell <yamunadevi.shanmugam@dell.com>
+Date:   Fri Jul 16 11:52:03 2021 +0530
+
+    release updates
+
+[33mcommit f7d77d48c406ecaf831184e36b035eb42a0dd16b[m
+Author: Audrius <41962073+astripei70@users.noreply.github.com>
+Date:   Fri Jul 16 02:05:18 2021 -0400
+
+    Update _index.md (#29)
+
+[33mcommit 7de0c9ccceaf4c1df9cd487c5dfaa86f602573d6[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Wed Jul 7 12:30:48 2021 +0530
+
+    updates (#28)
+
+[33mcommit b9b1737d27fbd4c4394b0cd881c01519b03d097d[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Thu Jul 1 19:13:06 2021 +0530
+
+    updates 2 (#27)
+
+[33mcommit 7d7fe7cb619d73bb590f7be6454261af3b2be627[m
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Fri Jun 25 15:43:47 2021 +0530
+
+    Release CY21Q2 update (#25)
+    
+    * update message
+    
+    * updated links
+    
+    * Updates
+
+[33mcommit 0a5d7a27e26e2bed2273f8b0d6c006391e506006[m
+Merge: d69e56e3d 782af50e5
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Fri Jun 18 14:36:45 2021 +0530
+
+    Merge pull request #24 from dell/release-CY21Q2
+    
+    Release CY21Q2
+
+[33mcommit 782af50e595a06895863ce399fa44c3f20b8527b[m
+Author: shanmydell <yamunadevi.shanmugam@dell.com>
+Date:   Fri Jun 18 14:14:57 2021 +0530
+
+    updates
+
+[33mcommit f4091f552e3cf82763b6e25daa137256214cdcd8[m
+Author: shanmydell <yamunadevi.shanmugam@dell.com>
+Date:   Fri Jun 18 13:39:03 2021 +0530
+
+    Release CY21Q2
+
+[33mcommit d69e56e3d77a8ba02c4a365a9e4cb38439c238e1[m[33m ([m[1;33mtag: CY21Q1[m[33m, [m[1;31morigin/release-CY21Q1[m[33m)[m
+Merge: a76a88406 c6973f8a5
+Author: Audrius <41962073+astripei70@users.noreply.github.com>
+Date:   Fri May 28 09:25:04 2021 -0400
+
+    Merge pull request #22 from dell/powerflex-anthos-certification
+    
+    Update _index.md
+    Received verbally the second approval as well
+
+[33mcommit c6973f8a5919097314ca3c713fc745b8828bf531[m
+Author: Audrius <41962073+astripei70@users.noreply.github.com>
+Date:   Wed May 26 14:24:13 2021 -0400
+
+    Update _index.md
+
+[33mcommit a76a884069bad2662e0f77e766d652b569dffacf[m
+Merge: 8dad1a300 42eb6a6e5
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Fri Apr 16 19:15:10 2021 +0530
+
+    Merge pull request #20 from dell/update-releasenotes
+    
+    Release note updates
+
+[33mcommit 42eb6a6e52b5d8bbeaa5870d3db9de3f89b98a26[m
+Author: shanmydell <yamunadevi.shanmugam@dell.com>
+Date:   Fri Apr 16 18:14:04 2021 +0530
+
+    updated MDM value
+
+[33mcommit 2e6abeb8652853039cfbaaf2aa485544e62e1017[m
+Author: shanmydell <yamunadevi.shanmugam@dell.com>
+Date:   Fri Apr 16 17:00:11 2021 +0530
+
+    Release note updates
+
+[33mcommit 8dad1a3005b95578c412e42795c23142a2b62ac1[m
+Merge: c2331fd87 64ea1166c
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Tue Apr 13 10:13:50 2021 +0530
+
+    Merge pull request #19 from dell/minor-doc-issues-resolved
+    
+    doc issues resolved
+
+[33mcommit 64ea1166ceff1fe6be0c9f4e814ac13ae24e6842[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Tue Apr 13 01:41:05 2021 +0530
+
+    doc issues resolved
+
+[33mcommit c2331fd8755a12710a5ea09ea4bb7af815923e24[m
+Merge: 25494fc5b 1afd58fc3
+Author: shanmydell <82038610+shanmydell@users.noreply.github.com>
+Date:   Wed Apr 7 08:57:29 2021 +0530
+
+    Merge pull request #18 from dell/release-note-updates
+    
+    Release note update
+
+[33mcommit 1afd58fc37bc10b3d21d9012f928c3bfa7d91d2e[m
+Author: shanmydell <yamunadevi.shanmugam@dell.com>
+Date:   Tue Apr 6 18:57:40 2021 +0530
+
+    release note update
+    
+    Updated Openshift installation warning
+
+[33mcommit 25494fc5bb06a8eb50c39ddf9f25182a085b179f[m
+Merge: 694816ed8 83382e153
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Fri Apr 2 18:25:06 2021 +0530
+
+    Merge pull request #17 from dell/csi-drivers-updates
+    
+    csi-driver updates
+
+[33mcommit 83382e153b9b7fe753d8cf211b1254152a163c45[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Fri Apr 2 01:16:18 2021 +0530
+
+    csi-driver updates
+
+[33mcommit 694816ed8ded77e63d6903d0f44eb74022d8f8c2[m
+Merge: b3bcbe4bf 5be668bc8
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Mon Mar 22 19:24:15 2021 +0530
+
+    Merge pull request #16 from dell/operator-updates
+    
+    operator-changes
+
+[33mcommit 5be668bc8dd585553901b37be2c9c07770282566[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Mon Mar 22 19:07:13 2021 +0530
+
+    operator-changes
+
+[33mcommit b3bcbe4bf1cf3334a7e16adcc922f9297535c238[m
+Merge: 4f7c27c2d a7cc358f6
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Fri Mar 19 18:38:04 2021 +0530
+
+    Merge pull request #15 from dell/Update-release-notes
+    
+    Release notes updated
+
+[33mcommit a7cc358f63745bfbfab4aac10795a957f26b4192[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Fri Mar 19 17:44:38 2021 +0530
+
+    Release notes updated
+
+[33mcommit 4f7c27c2d41640e57c317d4b3a50adef43381008[m
+Merge: 64cd9a572 a2e9ce3ca
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Fri Mar 19 07:21:38 2021 +0530
+
+    Merge pull request #14 from dell/new-release
+    
+    CY21Q1 Release
+
+[33mcommit a2e9ce3ca65a30ff9795c9d1ce5fa5a0b6558ad6[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Fri Mar 19 00:44:02 2021 +0530
+
+    powerflex updates
+
+[33mcommit 40a25209ede58b392e9036066b92ec526e6f43f9[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Thu Mar 18 20:32:31 2021 +0530
+
+    updates
+
+[33mcommit d44932fbb1b8b16b0b53dd3e05dbaa7fd58fcb60[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Thu Mar 18 20:05:36 2021 +0530
+
+    updates
+
+[33mcommit fe34a2654b7fc82e7cb3a63c44a6f0426d29cda3[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Thu Mar 18 19:10:04 2021 +0530
+
+    updates
+
+[33mcommit 2f3ed043e7c8874af9a1da0f45fd38dcd52dbdb8[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Thu Mar 18 16:24:42 2021 +0530
+
+    links updated
+
+[33mcommit fd4e2e7dee2e46d32c8093e99cd0ffe8c4dcbff4[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Thu Mar 18 01:03:08 2021 +0530
+
+    dell csi-drivers release
+
+[33mcommit 64cd9a5721cd855215fd8856435751577b998c5e[m
+Merge: 8ec4e338f bbb0c4597
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Mon Jan 18 14:18:30 2021 +0530
+
+    Merge pull request #10 from dell/snapshot-update
+    
+    snapshots link updated
+
+[33mcommit bbb0c4597f32e65dadc89aa8ddf00e38082457a7[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Sat Jan 16 00:35:03 2021 +0530
+
+    snapshots link updated
+
+[33mcommit 8ec4e338fa117d22acfe39d3ba8685aab4396a01[m
+Merge: a97a20893 73b81d585
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Fri Dec 18 12:45:01 2020 +0530
+
+    Merge pull request #8 from dell/weekly-sync
+    
+    Weekly Sync up Internal repo
+
+[33mcommit 73b81d585bc0c1caa86a158cbec7da8d5b1a7559[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Fri Dec 18 12:40:53 2020 +0530
+
+    update introduction page
+
+[33mcommit c3678fd5b58c22a8f7037ea57661678ea170b4e4[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Fri Dec 18 11:32:22 2020 +0530
+
+    sync with internal repo
+
+[33mcommit a97a20893575686b60b5e85c8182cc8c2ae5fc4b[m
+Merge: ba73ea32f b6f6f87bb
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Fri Dec 11 19:33:56 2020 +0530
+
+    Merge pull request #7 from dell/weekly-sync
+    
+    Weekly sync
+
+[33mcommit b6f6f87bb94eaac8b23498326d2224b0cf6c0541[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Fri Dec 11 18:11:30 2020 +0530
+
+    updated main page
+
+[33mcommit 1524bc2e4d9d6dc8e8a8c3331b5db68c8b673255[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Fri Dec 11 17:58:44 2020 +0530
+
+    updated unity release notes and pscal helm installer
+
+[33mcommit 675ef66860d55d281f515a6bca3c673e085dd6e2[m
+Author: Sakshi_Makkar <Sakshi_Makkar@Dell.com>
+Date:   Fri Dec 11 15:59:45 2020 +0530
+
+    Weekly-sync
+    
+    Updates taken from all Internal PRs
+
+[33mcommit ba73ea32f5ddd57841c197242c724b2740308aa2[m
+Merge: 1cec0fe21 139648a4a
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Sun Dec 6 09:37:54 2020 +0530
+
+    Merge pull request #6 from dell/imagePath
+    
+    Path for images and PDFs corrected
+
+[33mcommit 139648a4a296702a0b180a7c1bfb4f58525acef0[m
+Author: Sakshi <Sakshi_makkar@dell.com>
+Date:   Sat Dec 5 13:38:20 2020 -0500
+
+    Path for images and PDFs corrected
+
+[33mcommit 1cec0fe211b33457650a8344181cf2286942af5e[m
+Merge: 4fe17a5ae 88d4760e9
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Sat Dec 5 13:15:54 2020 +0530
+
+    Merge pull request #5 from dell/Updates
+    
+    Updates on doc page
+
+[33mcommit 88d4760e98c9822a67f88bc0f890dd457f2f6935[m
+Author: Sakshi <Sakshi_makkar@dell.com>
+Date:   Fri Dec 4 15:36:20 2020 -0500
+
+    link update in introduction section
+
+[33mcommit 2e321461ead43cfed9d0b303976e6714940e6c6e[m
+Author: Sakshi <Sakshi_makkar@dell.com>
+Date:   Fri Dec 4 15:19:03 2020 -0500
+
+    broken links corrected
+
+[33mcommit 4fe17a5aecc8645398409fbdfe33df4f1eaae24b[m
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Thu Dec 3 19:45:52 2020 +0530
+
+    updated again config.toml
+
+[33mcommit 127b2abcf5a64030d35f4b08a4279a347ae6adbd[m
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Thu Dec 3 19:40:53 2020 +0530
+
+    updated config.toml
+    
+    added base URL https://dell.github.io/
+
+[33mcommit a4497556e6d89c4899ff5f8d320469bb630047ec[m
+Merge: 30c77b341 ee6cbc41f
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Thu Dec 3 19:33:43 2020 +0530
+
+    Merge pull request #4 from dell/updating-deployfile
+    
+    Create deploy1.yml
+
+[33mcommit ee6cbc41fedd81754f340c52cff1dabcefd86d80[m
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Thu Dec 3 19:32:16 2020 +0530
+
+    Create deploy1.yml
+
+[33mcommit 30c77b341f0ea088bab23c5034e56c578e6734e9[m
+Merge: 3ca3ca774 df0155d52
+Author: Prasanna M <35757638+prablr79@users.noreply.github.com>
+Date:   Thu Dec 3 19:00:51 2020 +0530
+
+    Merge pull request #3 from dell/loadingContent
+    
+    Loading content
+
+[33mcommit df0155d52b0fcb1a746d5d41faf3a7e4a4eca7bd[m
+Author: Sakshi <Sakshi_makkar@dell.com>
+Date:   Thu Dec 3 07:41:57 2020 -0500
+
+    Adding content
+
+[33mcommit 1b3ccd2685ffc6d5ae963ec6ed8942b541c501ec[m
+Author: Sakshi <Sakshi_makkar@dell.com>
+Date:   Thu Dec 3 07:41:35 2020 -0500
+
+    Adding deployment file
+
+[33mcommit 1dfc209a9252904f489b0e8cbb2122ba9aec03de[m
+Author: Sakshi <Sakshi_makkar@dell.com>
+Date:   Thu Dec 3 07:41:12 2020 -0500
+
+    Adding theme related content
+
+[33mcommit 3ca3ca774ee848231136b9e9550ff54f6e2dd707[m
+Author: mjsdell <51763677+mjsdell@users.noreply.github.com>
+Date:   Thu Dec 3 00:06:35 2020 -0500
+
+    Update README.md
+
+[33mcommit 5e218e1362f6902f69df2c713f64ae1d6ad8ef64[m
+Author: Sakshi <Sakshi_makkar@dell.com>
+Date:   Wed Dec 2 23:48:07 2020 -0500
+
+    Initial Commit
