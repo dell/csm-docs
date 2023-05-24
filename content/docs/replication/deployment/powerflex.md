@@ -44,9 +44,7 @@ Run the following commands to verify that everything is installed correctly:
   populated by a list of target cluster IDs.
 
 
-If you don't have something installed or something is out-of-place, please refer
-to installation instructions in [installation-repctl](../install-repctl) or
-[installation](../installation).
+If you don't have something installed or something is out-of-place, please refer to installation instructions [here](../installation).
 
 ### Installing Driver With Replication Module
 
