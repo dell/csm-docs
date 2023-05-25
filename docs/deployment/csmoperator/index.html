@@ -97,7 +97,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fab17b271a2654c3edeba6000a7190bd.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5ddf3001619bf8a4c1b364cc9549e953.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -119,7 +119,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fab17b271a2654c3edeba6000a7190bd.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.5ddf3001619bf8a4c1b364cc9549e953.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -595,7 +595,6 @@
         <li><a href="#installation-via-operator-hub">Installation via Operator Hub</a></li>
         <li><a href="#uninstall">Uninstall</a></li>
         <li><a href="#to-upgrade-dell-csm-operator-perform-the-following-steps">To upgrade Dell CSM Operator, perform the following steps.</a></li>
-        <li><a href="#upgrade-driver-using-dell-csm-operator">Upgrade driver using Dell CSM Operator:</a></li>
         <li><a href="#custom-resource-definitions">Custom Resource Definitions</a></li>
         <li><a href="#custom-resource-specification">Custom Resource Specification</a></li>
       </ul>
@@ -803,29 +802,6 @@
 <li>If the upgrade policy is set to <code>Manual</code>, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the <strong><code>Installed Operators</code></strong> section of the OpenShift console. Clicking on the hyperlink to <code>Approve</code> the installation would trigger the dell-csm-operator upgrade process.</li>
 </ul>
 <p><strong>NOTE</strong>: The recommended version of OLM for Upstream Kubernetes is <strong><code>v0.18.3</code></strong>.</p>
-<h3 id="upgrade-driver-using-dell-csm-operator">Upgrade driver using Dell CSM Operator:</h3>
-<p>The CSI Drivers installed by the Dell CSM Operator can be updated like any Kubernetes resource.</p>
-<ul>
-<li>Modifying the installation directly via <code>kubectl edit</code>
-<pre tabindex="0"><code>$ kubectl get &lt;driver-object&gt; -n &lt;driver-namespace&gt;
-</code></pre>For example - If the CSI PowerStore driver is installed then run this command to get the object name
-<pre tabindex="0"><code># Replace driver-namespace with the namespace where the CSI PowerStore driver is installed
-$ kubectl get csm -n &lt;driver-namespace&gt;
-</code></pre>use the object name in <code>kubectl edit</code> command.
-<pre tabindex="0"><code>$ kubectl edit csm &lt;driver-object&gt;/&lt;object-name&gt; -n &lt;driver-namespace&gt;
-</code></pre>For example - If the object name is powerstore then use the name as powerstore
-<pre tabindex="0"><code># Replace object-name with the powerstore
-$ kubectl edit csm powerstore -n &lt;driver-namespace&gt;
-</code></pre>and modify the installation. The usual fields to edit are the version of drivers, sidecars and the environment variables.
-The following notes explain some of the general items to take care of.</li>
-</ul>
-<p><strong>NOTES:</strong></p>
-<ol>
-<li>If you are trying to upgrade the CSI driver from an older version, make sure to modify the <em>configVersion</em> field.
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">configVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v2.7.0</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div></li>
-</ol>
 <h3 id="custom-resource-definitions">Custom Resource Definitions</h3>
 <p>As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 <code>containerstoragemodule</code> CRD is installed in API Group <code>storage.dell.com</code>.</p>
