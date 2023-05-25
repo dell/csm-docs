@@ -306,29 +306,6 @@ Example: helm install powerstore dell/container-storage-modules -f values.yaml
 &lt;li&gt;If the upgrade policy is set to &lt;code&gt;Manual&lt;/code&gt;, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the &lt;strong&gt;&lt;code&gt;Installed Operators&lt;/code&gt;&lt;/strong&gt; section of the OpenShift console. Clicking on the hyperlink to &lt;code&gt;Approve&lt;/code&gt; the installation would trigger the dell-csm-operator upgrade process.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for Upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;upgrade-driver-using-dell-csm-operator&#34;&gt;Upgrade driver using Dell CSM Operator:&lt;/h3&gt;
-&lt;p&gt;The CSI Drivers installed by the Dell CSM Operator can be updated like any Kubernetes resource.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Modifying the installation directly via &lt;code&gt;kubectl edit&lt;/code&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ kubectl get &amp;lt;driver-object&amp;gt; -n &amp;lt;driver-namespace&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;For example - If the CSI PowerStore driver is installed then run this command to get the object name
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Replace driver-namespace with the namespace where the CSI PowerStore driver is installed
-$ kubectl get csm -n &amp;lt;driver-namespace&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;use the object name in &lt;code&gt;kubectl edit&lt;/code&gt; command.
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ kubectl edit csm &amp;lt;driver-object&amp;gt;/&amp;lt;object-name&amp;gt; -n &amp;lt;driver-namespace&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;For example - If the object name is powerstore then use the name as powerstore
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Replace object-name with the powerstore
-$ kubectl edit csm powerstore -n &amp;lt;driver-namespace&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;and modify the installation. The usual fields to edit are the version of drivers, sidecars and the environment variables.
-The following notes explain some of the general items to take care of.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;NOTES:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field.
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.7.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
 &lt;h3 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h3&gt;
 &lt;p&gt;As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 &lt;code&gt;containerstoragemodule&lt;/code&gt; CRD is installed in API Group &lt;code&gt;storage.dell.com&lt;/code&gt;.&lt;/p&gt;
