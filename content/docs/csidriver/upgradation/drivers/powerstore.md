@@ -42,9 +42,3 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
 
 1. Please upgrade the Dell CSI Operator by following [here](./../operator).
 2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).
-
-## Upgrade using Dell CSM Operator:
-**Note:** Upgrading the Operator does not upgrade the CSI Driver.
-
-1. Please upgrade the Dell CSM Operator by following [here](../../../../deployment/csmoperator/#to-upgrade-dell-csm-operator-perform-the-following-steps)
-2. Once the operator is upgraded, to upgrade the driver, refer [here](../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator)
