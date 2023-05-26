@@ -99,6 +99,36 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 
 **NOTE**: The recommended version of OLM for Upstream Kubernetes is **`v0.18.3`**.
 
+### Upgrade driver using Dell CSM Operator:
+The CSI Drivers installed by the Dell CSM Operator can be updated like any Kubernetes resource.
+* Modifying the installation directly via `kubectl edit`
+    ```
+    $ kubectl get <driver-object> -n <driver-namespace>
+    ```
+    For example - If the CSI PowerStore driver is installed then run this command to get the object name
+    ```
+    # Replace driver-namespace with the namespace where the CSI PowerStore driver is installed
+    $ kubectl get csm -n <driver-namespace>
+    ```
+    use the object name in `kubectl edit` command.
+    ```
+    $ kubectl edit csm <driver-object>/<object-name> -n <driver-namespace>
+    ```
+    For example - If the object name is powerstore then use the name as powerstore
+    ```
+    # Replace object-name with the powerstore
+    $ kubectl edit csm powerstore -n <driver-namespace>
+    ```
+    and modify the installation. The usual fields to edit are the version of drivers, sidecars and the environment variables.
+The following notes explain some of the general items to take care of.
+
+**NOTES:**
+1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field.
+   ```yaml
+      driver:
+        configVersion: v2.7.0
+   ```
+
 ### Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 `containerstoragemodule` CRD is installed in API Group `storage.dell.com`.
