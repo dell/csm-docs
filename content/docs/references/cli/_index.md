@@ -856,9 +856,13 @@ dellctl encryption rekey-status myrekey
 
 ### dellctl images
 
-List the container images needed by csi driver
+List the container images needed by csi drivers and csm modules
 
-**NOTE.**: dellctl images currently supports csi-vxflexos driver only.
+**NOTE.**: 
+Currently supported csidrivers and csmmodules
+csidrivers: [csi-vxflexos,csi-isilon,csi-powerstore,csi-unity,csi-powermax]
+csmmodules: [csm-authorization]
+
 
 #### Aliases
 
@@ -870,46 +874,73 @@ images,imgs
 
 ```
   Flags:
-  -d, --driver string   csi driver name
-  -h, --help            help for images
+  -c, --component string   csi driver/csm module name
+  -h, --help               help for images
   
 ```
 #### Output
 
 
 ```bash
-dellctl images --driver csi-vxflexos
+dellctl images --component csi-vxflexos
 ```
 ```
-Driver Image                    Supported Orchestrator Versions         Sidecar Images
-dellemc/csi-vxflexos:v2.5.0     k8s1.25,k8s1.24,k8s1.23,ocp4.11,ocp4.10 registry.k8s.io/sig-storage/csi-attacher:v4.0.0
+Driver/Module Image             Supported Orchestrator Versions         Sidecar Images
+dellemc/csi-vxflexos:v2.7.0     k8s1.27,k8s1.26,k8s1.25,ocp4.12,ocp4.11 registry.k8s.io/sig-storage/csi-attacher:v4.2.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.4.0
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.8.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.2.1
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.7.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.6.3
+                                                                        dellemc/sdc:3.6.0.6
+
+dellemc/csi-vxflexos:v2.6.0     k8s1.26,k8s1.25,k8s1.24,ocp4.11,ocp4.10 registry.k8s.io/sig-storage/csi-attacher:v4.0.0
                                                                         registry.k8s.io/sig-storage/csi-provisioner:v3.3.0
-                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
                                                                         registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.7.0
                                                                         registry.k8s.io/sig-storage/csi-snapshotter:v6.1.0
                                                                         registry.k8s.io/sig-storage/csi-resizer:v1.6.0
                                                                         registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.6.0
                                                                         dellemc/sdc:3.6.0.6
 
-dellemc/csi-vxflexos:v2.4.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  registry.k8s.io/sig-storage/csi-attacher:v3.5.0
-                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.2.1
-                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
-                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.6.0
-                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.0.1
-                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.5.0
-                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1
+dellemc/csi-vxflexos:v2.5.0     k8s1.25,k8s1.24,k8s1.23,ocp4.11,ocp4.10 registry.k8s.io/sig-storage/csi-attacher:v4.0.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.3.0
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.7.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.1.0
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.6.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.6.0
                                                                         dellemc/sdc:3.6.0.6
 
-dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  registry.k8s.io/sig-storage/csi-attacher:v3.4.0
-                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.1.0
-                                                                        dellemc/csi-volumegroup-snapshotter:v1.0.1
-                                                                        gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.5.0
-                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v5.0.1
-                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.4.0
-                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1
-                                                                        dellemc/sdc:3.6.0.6
 ```
 
+```bash
+dellctl images --component csm-authorization
+```
+```
+Driver/Module Image                             Supported Orchestrator Versions Sidecar Images
+dellemc/csm-authorization-sidecar:v1.7.0        k8s1.27,k8s1.26,k8s1.25         jetstack/cert-manager-cainjector:v1.6.1
+                                                                                jetstack/cert-manager-controller:v1.6.1
+                                                                                jetstack/cert-manager-webhook:v1.6.1
+                                                                                ingress-nginx/controller:v1.4.0
+                                                                                ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
+
+dellemc/csm-authorization-sidecar:v1.6.0        k8s1.26,k8s1.25,k8s1.24         jetstack/cert-manager-cainjector:v1.6.1
+                                                                                jetstack/cert-manager-controller:v1.6.1
+                                                                                jetstack/cert-manager-webhook:v1.6.1
+                                                                                ingress-nginx/controller:v1.4.0
+                                                                                ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
+
+dellemc/csm-authorization-sidecar:v1.5.0        k8s1.24,k8s1.23,k8s1.22         jetstack/cert-manager-cainjector:v1.6.1
+                                                                                jetstack/cert-manager-controller:v1.6.1
+                                                                                jetstack/cert-manager-webhook:v1.6.1
+                                                                                ingress-nginx/controller:v1.4.0
+                                                                                ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
+
+dellemc/csm-authorization-sidecar:v1.4.0        k8s1.24,k8s1.23,k8s1.22         jetstack/cert-manager-cainjector:v1.6.1
+                                                                                jetstack/cert-manager-controller:v1.6.1
+                                                                                jetstack/cert-manager-webhook:v1.6.1
+                                                                                ingress-nginx/controller:v1.4.0
+                                                                                ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343
+```
 
 ### dellctl volume get
 
