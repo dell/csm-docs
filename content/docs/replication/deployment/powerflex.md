@@ -36,7 +36,6 @@ Run the following commands to verify that everything is installed correctly:
   Pods should be `READY` and `RUNNING`
 * Check that the controller config map is properly populated
     ```shell
-    
     kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
     ```
   `data` field should be properly populated with cluster-id of your choosing
@@ -44,7 +43,9 @@ Run the following commands to verify that everything is installed correctly:
   populated by a list of target cluster IDs.
 
 
-If you don't have something installed or something is out-of-place, please refer to installation instructions [here](../installation).
+If you don't have something installed or something is out-of-place, please refer
+to installation instructions in [installation-repctl](../install-repctl) or
+[installation](../installation).
 
 ### Installing Driver With Replication Module
 
@@ -68,7 +69,8 @@ You can leave other parameters like `image`, `replicationContextPrefix`, and
 
 After enabling the replication module you can continue to install the CSI driver
 for PowerFlex following the usual installation procedure, just ensure you've added
-necessary array connection information to secret.
+the array information for all of the arrays being used in the
+[secret](../../../csidriver/installation/helm/powerflex#install-the-driver).
 
 > **_NOTE:_** you need to install your driver at least on the source cluster,
 > but it is recommended to install drivers on all clusters you will use for
@@ -256,6 +258,18 @@ On your source cluster, create a PersistentVolumeClaim using one of the
 replication enabled Storage Classes. The CSI PowerFlex driver will create a
 volume on the array, add it to a VolumeGroup and configure replication using the
 parameters provided in the replication enabled Storage Class.
+
+### Deleting Replication Groups
+
+To delete a replication group from a cluster, the group must be empty. This
+means that all associated replication pairs must have been deleted/removed.
+
+This command will delete the empty replication group from the cluster and the
+associated replication consistency group from the PowerFlex array.
+
+```shell
+  kubectl delete rg <rg-id>
+```
 
 ### Supported Replication Actions
 The CSI PowerFlex driver supports the following list of replication actions:
