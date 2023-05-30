@@ -16,9 +16,6 @@ description: Release notes for PowerScale CSI driver
 
 ### Fixed Issues
 
-| Github ID                                     | Description                                                                            |
-| --------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [753](https://github.com/dell/csm/issues/753) | **Replication:** Incorrect quota set on the target PV/directory when Quota is enabled. |
 
 ### Known Issues
 | Issue                                                                                                                                                                                                                               | Resolution or workaround, if known                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
