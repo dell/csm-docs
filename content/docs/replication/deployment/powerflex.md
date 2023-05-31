@@ -44,8 +44,7 @@ Run the following commands to verify that everything is installed correctly:
 
 
 If you don't have something installed or something is out-of-place, please refer
-to installation instructions in [installation-repctl](../install-repctl) or
-[installation](../installation).
+to installation instructions [here](../installation).
 
 ### Installing Driver With Replication Module
 
@@ -258,18 +257,6 @@ On your source cluster, create a PersistentVolumeClaim using one of the
 replication enabled Storage Classes. The CSI PowerFlex driver will create a
 volume on the array, add it to a VolumeGroup and configure replication using the
 parameters provided in the replication enabled Storage Class.
-
-### Deleting Replication Groups
-
-To delete a replication group from a cluster, the group must be empty. This
-means that all associated replication pairs must have been deleted/removed.
-
-This command will delete the empty replication group from the cluster and the
-associated replication consistency group from the PowerFlex array.
-
-```shell
-  kubectl delete rg <rg-id>
-```
 
 ### Supported Replication Actions
 The CSI PowerFlex driver supports the following list of replication actions:
