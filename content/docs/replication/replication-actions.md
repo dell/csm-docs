@@ -67,7 +67,7 @@ To delete a replication group from a cluster, the group must be empty. This
 means that all associated replication pairs must have been deleted/removed.
 
 This command will delete the empty replication group from the cluster and the
-associated replication consistency group from the PowerFlex array.
+associated replication group from the backend array.
 
 ```shell
   kubectl delete rg <rg-id>
