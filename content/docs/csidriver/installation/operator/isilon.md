@@ -130,6 +130,7 @@ kubectl get csiisilon --all-namespaces
    | --------- | ----------- | -------- |-------- |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   | storageCapacity | Enable/Disable storage capacity tracking feature | No | true |
    | X_CSI_MAX_PATH_LIMIT | Defines the maximum length of path for a volume | No | 192 |
    | ***Common parameters for node and controller*** |
    | CSI_ENDPOINT | The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |

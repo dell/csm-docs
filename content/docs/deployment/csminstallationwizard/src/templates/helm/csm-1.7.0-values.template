@@ -187,6 +187,9 @@ csi-isilon:
 
   fsGroupPolicy: $FSGROUP_POLICY
 
+  storageCapacity:
+    enabled: true
+
   controller:
     controllerCount: $CONTROLLER_COUNT
     volumeNamePrefix: $VOLUME_NAME_PREFIX
