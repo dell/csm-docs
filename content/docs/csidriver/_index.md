@@ -23,9 +23,9 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP3     |       15SP4      |
 | Red Hat OpenShift | 4.11, 4.12, 4.12 EUS | 4.11, 4.12, 4.12 EUS | 4.11, 4.12, 4.12 EUS | 4.11, 4.12, 4.12 EUS | 4.11, 4.12, 4.12 EUS |
 | Mirantis Kubernetes Engine | 3.6.x |     3.5.x,3.6.x         |       3.6.x      | 3.5.x, 3.6.x      |        3.6.x     |
-| Google Anthos |        1.12       |          1.12        |        no        |         1.15       |        1.14       |
+| Google Anthos |        1.12       |          1.12        |        no        |         1.15       |        1.15       |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI         |
-| Rancher Kubernetes Engine | 1.4.1  |          1.4.1        |        1.4.1       |         1.4.1       |      1.4.1         |
+| Rancher Kubernetes Engine | 1.4.1  |          1.4.1        |        1.4.1       |         1.4.1       |      1.4.5         |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  |          yes        |        yes      |        yes       |      yes      |
 | Kubernetes K3s Engine on Debian OS |     no      |         no              |      1.25, 1.26, 1.27        |        no       |        no         |
 {{</table>}}
@@ -54,7 +54,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax                                                | PowerFlex        | Unity XT                   | PowerScale                         |    PowerStore    |
 |---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
-| Storage Array |PowerMax 2000/8000 <br> 5978.479.479, 5978.711.711 <br>  <br> PowerMax 2500/8500 <br> 10.0.1 (6079.175) <br>Unisphere 10.0 |    3.5.x, 3.6.x, 4.0  | 5.2.x, 5.3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 1.0.x, 2.0.x, 2.1.x, 3.0, 3.2, 3.5     |
+| Storage Array |PowerMax 2000/8000 <br> 5978.479.479, 5978.711.711 <br>  <br> PowerMax 2500/8500 <br> 10.0.1 (6079.175) <br>Unisphere 10.0 |    3.5.x, 3.6.x, 4.0  | 5.2.x, 5.3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 2.0.x, 2.1.x, 3.0, 3.2, 3.5     |
 {{</table>}}
 ### Backend Storage Details
 {{<table "table table-striped table-bordered table-sm">}}

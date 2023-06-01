@@ -24,7 +24,7 @@ kubectl get csm --all-namespaces
 ### Prerequisite
 
 1. Create namespace.
-   Execute `kubectl create namespace test-powerstore` to create the test-powerstore namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-powerstore'.
+   Execute `kubectl create namespace powerstore` to create the powerstore namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'powerstore'.
 
 2. Create a file called `config.yaml` that has Powerstore array connection details with the following content
    ```yaml
@@ -50,8 +50,8 @@ kubectl get csm --all-namespaces
    apiVersion: v1
    kind: Secret
    metadata:
-      name: test-powerstore-config
-      namespace: test-powerstore
+      name: powerstore-config
+      namespace: powerstore
    type: Opaque
    data:
       config: CONFIG_YAML
@@ -75,7 +75,7 @@ kubectl get csm --all-namespaces
   | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
 | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
-| namespace | Specifies namespace where the driver will be installed | Yes | "test-powerstore" |
+| namespace | Specifies namespace where the driver will be installed | Yes | "powerstore" |
 | fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType` | No |"ReadWriteOnceWithFSType"|
 | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
 | ***Common parameters for node and controller*** |
