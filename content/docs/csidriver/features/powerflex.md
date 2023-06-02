@@ -445,7 +445,7 @@ To use this config we need to create a Kubernetes secret from it. To do so, run 
 
 ```bash
 
-kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml
+kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml
 ```
 
 ## Dynamic Array Configuration
