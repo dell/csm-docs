@@ -251,7 +251,7 @@ Procedure
       **Note:**
       * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 
-6. For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
+6. If you want to leverage snapshotting feature, the pre-requisite is to install external-snapshotter. Installation of external-snapshotter is required only for Kubernetes and is available by default with OpenShift installations. [Click here](../../../../snapshots/#optional-volume-snapshot-requirements) to follow the procedure to install external-snapshotter.
               
 
 7. Run the command to proceed with the installation using bash script.
@@ -331,7 +331,7 @@ Procedure
     To install nightly or latest csi driver build using bash script use this command:
     ```bash
     
-    /csi-install.sh --namespace unity --values ./myvalues.yaml --version nightly/latest
+    /csi-install.sh --namespace unity --values ./myvalues.yaml --version latest
     ```
 
 8. You can also install the driver using standalone helm chart by running helm install command, first using the --dry-run flag to 

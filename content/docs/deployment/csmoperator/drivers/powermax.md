@@ -12,8 +12,6 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
->Note: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerMax via Operator.
-
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using this command:
 ```bash

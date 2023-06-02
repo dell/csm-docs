@@ -13,6 +13,9 @@ Description: >
 - [Added support for PowerMax Driver](https://github.com/dell/csm/issues/769)
 - [Added Replication Support for PowerFlex driver](https://github.com/dell/csm/issues/821)
 - [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
+- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
+- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
+- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
 
 
 ### Fixed Issues
@@ -21,3 +24,4 @@ Description: >
 
 
 ### Known Issues
+There are no known issues in this release.

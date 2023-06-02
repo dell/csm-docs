@@ -12,8 +12,6 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-**Note**: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI Unity XT via Operator.
-
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using the following command:
 ```bash
@@ -62,7 +60,6 @@ kubectl get csm --all-namespaces
 | namespace | Specifies namespace where the driver will be installed | Yes | "unity" |
 | fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType` | No |"ReadWriteOnceWithFSType"|
 | ***Common parameters for node and controller*** |
-| X_CSI_UNITY_NODE_NAME_PREFIX | Prefix to add to each node registered by the CSI driver | Yes | "csi-node" 
 | X_CSI_UNITY_ALLOW_MULTI_POD_ACCESS | To enable sharing of volumes across multiple pods within the same node in RWO access mode | No | false |
 | X_CSI_UNITY_SYNC_NODEINFO_INTERVAL | Time interval to add node info to array. Default 15 minutes. Minimum value should be 1 | No | 15 |
 | CSI_LOG_LEVEL | Sets the logging level of the driver | true | info |
