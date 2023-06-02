@@ -12,7 +12,6 @@ description: Release notes for Unity XT CSI driver
 - [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
 - [Added support for K3s on Debian OS](https://github.com/dell/csm/issues/798)
 - [Added support for Unisphere 5.3.0 array](https://github.com/dell/csm/issues/842)
-- [Added support for RKE 1.4.5]()
 
 ### Fixed Issues
 
