@@ -33,6 +33,8 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 | CSM Observability  | 1.3.0 +   | v1.3.0 +       |
 | CSM Resiliency     | 1.6.0 +   | v1.6.0 +       |
 
+>Note: Observability module installation with CSM operator for PowerMax is not currently supported. 
+
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
 

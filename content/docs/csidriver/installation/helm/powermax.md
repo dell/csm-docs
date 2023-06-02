@@ -203,7 +203,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml` file,to point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -283,7 +283,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
-| **migration** | [Migration](../../../../replication/migrating-volumes) is an optional feature to enable migration between storage classes | - | - |
+| **migration** | [Migration](../../../../replication/migration/migrating-volumes-same-array) is an optional feature to enable migration between storage classes | - | - |
 | enabled                  | A boolean that enables/disables migration feature. |  No      |   false   |
 | image | Image for dell-csi-migrator sidecar. | No | " " |
 | nodeRescanSidecarImage | Image for node rescan sidecar which rescans nodes for identifying new paths. | No | " " |
