@@ -159,7 +159,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
         configVersion: v1.7.0
         components:
         - name: karavi-authorization-proxy
-          image: dellemc/csm-authorization-sidecar:v1.6.0
+          image: dellemc/csm-authorization-sidecar:v1.7.0
           envs:
             # proxyHost: hostname of the csm-authorization server
             - name: "PROXY_HOST"
