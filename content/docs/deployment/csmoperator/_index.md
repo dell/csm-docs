@@ -34,6 +34,7 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 | CSM Resiliency     | 1.6.0 +   | v1.6.0 +       |
 
 >NOTE:
+>- Replication module installation with CSM operator for PowerStore is not currently supported.
 >- Observability module installation with CSM operator for PowerMax & PowerStore is not currently supported.
 >- Resiliency module installation with CSM operator for Unity XT is not currently supported.
 
