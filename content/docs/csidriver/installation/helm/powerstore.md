@@ -211,14 +211,14 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-| controller.vgsnapshot.enabled | To enable or disable the volume group snapshot feature | No | "true" |
+| controller.vgsnapshot.enabled | Allows to enable/disable the volume group snapshot feature | No | "true" |
 | images.driverRepository | To use an image from custom repository | No | dockerhub |
 | version | To use any driver version | No | Latest driver version |
 | allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
-| storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true
+| storageCapacity.enabled | Allows to enable/disable storage capacity tracking | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
-| podmon.enabled | Allows to enable/disable resiliency | No | false
-| podmon.image | Sidecar image for resiliency | No | dellemc/podmon:v1.6.0
+| podmon.enabled | [Allows to enable/disable resiliency](../../../resiliency/deployment.md) | No | false
+| podmon.image | Sidecar image for resiliency | No | dellemc/podmon
 
 8. Install the driver using `csi-install.sh` bash script by running 
    ```bash
