@@ -84,7 +84,7 @@ The installation process involves the creation of a `Subscription` object either
 Please run the following commands for creating the required `ConfigMap` before installing the `dell-csi-operator` using OLM.  
 #Replace operator-namespace in the below command with the actual namespace where the operator will be deployed by OLM
 ```bash
-git clone -b v1.11.0 https://github.com/dell/dell-csi-operator.git
+git clone -b v1.12.0 https://github.com/dell/dell-csi-operator.git
 cd dell-csi-operator
 tar -czf config.tar.gz driverconfig/
 kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n <operator-namespace>
@@ -99,7 +99,7 @@ kubectl create configmap dell-csi-operator-config --from-file config.tar.gz -n <
 #### Steps
 
 >**Skip step 1 for "offline bundle installation" and continue using the workspace created by untar of dell-csi-operator-bundle.tar.gz.**
-1. Clone and checkout the required dell-csi-operator version using `git clone -b v1.11.0 https://github.com/dell/dell-csi-operator.git`.
+1. Clone and checkout the required dell-csi-operator version using `git clone -b v1.12.0 https://github.com/dell/dell-csi-operator.git`.
 2. cd dell-csi-operator
 3. Run `bash scripts/install.sh` to install the operator.
 
