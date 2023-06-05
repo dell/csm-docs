@@ -18,6 +18,7 @@ csi-powerstore:
     vgsnapshot:
       enabled: $VG_SNAPSHOT_ENABLED
       image: dellemc/csi-volumegroup-snapshotter:v1.2.0
+    metadataretriever: dellemc/csi-metadata-retriever:v1.4.0
     snapshot:
       enabled: $SNAPSHOT_ENABLED
       snapNamePrefix: $SNAP_NAME_PREFIX
