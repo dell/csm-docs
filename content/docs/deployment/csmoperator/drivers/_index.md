@@ -24,7 +24,7 @@ The common snapshot controller must be installed only once in the cluster irresp
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image:
     - [quay.io/k8scsi/csi-snapshotter:v6.2.2](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v6.2.2&tab=tags)
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+- The CSI external-snapshotter sidecar is installed along with the driver and does not involve any extra configuration.
 
 ### Installation example
 
