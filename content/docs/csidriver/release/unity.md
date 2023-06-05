@@ -3,18 +3,19 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.6.0
+## Release Notes - CSI Unity XT v2.7.0
 
 ### New Features/Changes
 
-- [Added support to Kubernetes 1.26](https://github.com/dell/csm/issues/597)
-- [Added support for MKE 3.6](https://github.com/dell/csm/issues/672)
-- [Added support for RKE 1.4.1](https://github.com/dell/csm/issues/670)
-- [Added support for SLES SP4](https://github.com/dell/csm/issues/695)
+- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
+- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
+- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
+- [Added support for K3s on Debian OS](https://github.com/dell/csm/issues/798)
+- [Added support for Unisphere 5.3.0 array](https://github.com/dell/csm/issues/842)
 
 ### Fixed Issues
 
-- [PVC fails to resize with message "Invalid value 0; must be greater than zero"](https://github.com/dell/csm/issues/507)
+There are no fixed issues in this release.
 
 
 ### Known Issues

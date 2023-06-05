@@ -17,7 +17,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 | CSI PowerMax       | 2.7.0     | 
 | CSI PowerFlex      | 2.7.0     | 
 | CSI PowerScale     | 2.7.0     | 
-| CSI Unity          | 2.7.0     | 
+| CSI Unity XT       | 2.7.0     | 
 
 ## Supported Dell CSM Modules
 
@@ -70,7 +70,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 6. If the Volume Snapshot feature is enabled, please refer to [Volume Snapshot for PowerStore](../../csidriver/installation/helm/powerstore/#optional-volume-snapshot-requirements) and [Volume Snapshot for PowerMax](../../csidriver/installation/helm/powermax/#optional-volume-snapshot-requirements) to install the Volume Snapshot CRDs and the default snapshot controller.
 
->> NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
+>> NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
 
 7. Install the Helm chart.
 

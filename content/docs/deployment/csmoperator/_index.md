@@ -167,8 +167,6 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 
 **sideCars** - Specification for CSI sidecar containers.
 
-**authSecret** - Name of the secret holding credentials for use by the driver. If not specified, the default secret *-creds must exist in the same namespace as driver.
-
 **tlsCertSecret** - Name of the TLS cert secret for use by the driver. If not specified, a secret *-certs must exist in the namespace as driver.
 
 **tolerations** - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them.

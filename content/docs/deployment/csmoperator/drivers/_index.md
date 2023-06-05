@@ -12,19 +12,19 @@ On Upstream Kubernetes clusters, ensure that to install
 * External Volume Snapshot Controller
 
 ### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available [here](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available [here](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.2/client/config/crd)
 
 ### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available [here](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available [here](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.2/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image:
-    - [quay.io/k8scsi/csi-snapshotter:v6.2.1](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v6.2.1&tab=tags)
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+    - [quay.io/k8scsi/csi-snapshotter:v6.2.2](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v6.2.2&tab=tags)
+- The CSI external-snapshotter sidecar is installed along with the driver and does not involve any extra configuration.
 
 ### Installation example
 
@@ -37,7 +37,7 @@ kubectl create -f client/config/crd
 kubectl create -f deploy/kubernetes/snapshot-controller
 ```
 *NOTE:*
-- It is recommended to use 6.2.1 version of snapshotter/snapshot-controller.
+- It is recommended to use 6.2.2 version of snapshotter/snapshot-controller.
 
 ## Installing CSI Driver via Operator
 
@@ -45,7 +45,7 @@ Refer [PowerScale Driver](../drivers/powerscale) to install the driver via Opera
 Refer [PowerFlex Driver](../drivers/powerflex) to install the driver via Operator <br>
 Refer [PowerMax Driver](../drivers/powermax) to install the driver via Operator <br>
 Refer [PowerStore Driver](../drivers/powerstore) to install the driver via Operator <br>
-Refer [Unity Driver](../drivers/unity) to install the driver via Operator <br>
+Refer [Unity XT Driver](../drivers/unity) to install the driver via Operator <br>
 
 >**Note**: If you are using an OLM based installation, example manifests are available in `OperatorHub` UI.
 You can edit these manifests and install the driver using the `OperatorHub` UI.
@@ -82,7 +82,7 @@ The CSI Drivers and CSM Modules installed by the Dell CSM Operator can be update
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.6.0
+        configVersion: v2.7.0
    ```
 2. Do not try to update the operator by modifying the original `CustomResource` manifest file and running the `kubectl apply -f` command. As part of the driver installation, the Operator sets some annotations on the `CustomResource` object which are further utilized in some workflows (like detecting upgrade of drivers). If you run the `kubectl apply -f` command to update the driver, these annotations are overwritten and this may lead to failures.
 

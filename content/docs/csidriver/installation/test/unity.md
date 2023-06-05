@@ -4,7 +4,7 @@ linktitle: Unity XT
 description: Tests to validate Unity XT CSI Driver installation
 ---
 
-## Test deploying a simple Pod and Pvc with Unity XT storage
+## Test deploying a simple Pod and PVC with Unity XT storage
 In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default NFS and iSCSI and FC storage classes and automatically mounts them to the pod.
 
 **Steps**
