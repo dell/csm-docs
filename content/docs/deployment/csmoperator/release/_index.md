@@ -12,6 +12,7 @@ Description: >
 - [Added support for CSI Unity XT Driver](https://github.com/dell/csm/issues/756)
 - [Added support for PowerMax Driver](https://github.com/dell/csm/issues/769)
 - [Added Replication Support for PowerFlex driver](https://github.com/dell/csm/issues/821)
+- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
 
 
 ### Fixed Issues

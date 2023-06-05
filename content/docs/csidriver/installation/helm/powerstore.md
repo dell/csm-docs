@@ -148,7 +148,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
@@ -217,6 +217,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
 | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
+| podmon | Allows to enable/disable volume resiliency | No | false
 
 8. Install the driver using `csi-install.sh` bash script by running 
    ```bash

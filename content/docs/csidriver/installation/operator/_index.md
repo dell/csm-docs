@@ -67,6 +67,7 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 | CSI PowerStore     | 2.4.0     | v2.4.0         | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS   |
 | CSI PowerStore     | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerStore     | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
+| CSI PowerStore     | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12, 4.12 EUS  |
 
 </br>
 
