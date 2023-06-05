@@ -115,14 +115,14 @@ After editing the file, run the below command to create a secret called `vxflexo
     
   ```bash
   
-  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml
+  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml
   ```
 
 Use the below command to replace or update the secret:
 
   ```bash
   
-  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -
+  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml -o yaml --dry-run=client | kubectl replace -f -
   ```
 
 *NOTE:* 
@@ -152,13 +152,13 @@ Use the below command to replace or update the secret:
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.6.0 |
+| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.7.0 |
 | driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
 | powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | dellemc/sdc:3.6.0.6 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
 | logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
 | logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
-| kubeletConfigDir | kubelet config directory path. Ensure that the config.yaml file is present at this path. | Yes | /var/lib/kubelet |
+| kubeletConfigDir | kubelet config directory path. Ensure that the secret.yaml file is present at this path. | Yes | /var/lib/kubelet |
 | defaultFsType | Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs. | Yes | ext4 |
 | fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes are`None, File, and ReadWriteOnceWithFSType.` | No | "ReadWriteOnceWithFSType" |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never. | Yes | IfNotPresent | 
@@ -225,7 +225,7 @@ As part of the CSI driver installation, the CSI driver requires a secret with th
 
 This secret contains the X509 certificates of the CA which signed PowerFlex gateway SSL certificate in PEM format.
 
-The CSI driver exposes an install parameter in config.yaml, `skipCertificateValidation`, which determines if the driver performs client-side verification of the gateway certificates.
+The CSI driver exposes an install parameter in secret.yaml, `skipCertificateValidation`, which determines if the driver performs client-side verification of the gateway certificates.
 
 `skipCertificateValidation` parameter is set to true by default, and the driver does not verify the gateway certificates.
 

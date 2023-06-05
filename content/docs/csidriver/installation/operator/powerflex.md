@@ -23,8 +23,8 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
 #### SDC Deployment for Operator 
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
-- **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file, 
-  config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
+- **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
+  secret.yaml. An example of secret.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
 - **Note:** To use an sdc-binary module from customer ftp site:
   - Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:
   ```bash
@@ -48,7 +48,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
   - Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml. Please note the following: 
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
     - **If not using sidecar**, please leave this commented out -- otherwise, the empty fields will cause errors.
-##### Example CR:  [config/samples/vxflex_v270_ops_411.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/vxflex_v270_ops_411.yaml)
+##### Example CR:  [config/samples/vxflex_v270_ops_412.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/vxflex_v270_ops_411.yaml)
 ```yaml
         sideCars:
     # Comment the following section if you don't want to run the monitoring sidecar
@@ -86,9 +86,9 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 
 1. Create namespace: 
    Run `kubectl create namespace <driver-namespace>` command using the desired name to create the namespace.
-2. Prepare the config.yaml for driver configuration.
+2. Prepare the secret.yaml for driver configuration.
 
-    Example: config.yaml
+    Example: secret.yaml
 
      ```yaml
       # Username for accessing PowerFlex system.	
@@ -134,18 +134,18 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 
     After editing the file, run the following command to create a secret called `vxflexos-config`
     ```bash
-    kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=config.yaml
+    kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=secret.yaml
     ```
 
     Use the following command to replace or update the secret:
 
     ```bash
-    kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=config.yaml -o yaml --dry-run=client | kubectl replace -f -
+    kubectl create secret generic vxflexos-config -n <driver-namespace> --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
     ```
 
     *Note:* 
     
-      - System ID, MDM configuration, etc. now are taken directly from config.yaml. MDM provided in the input_sample_file.yaml will be overidden with MDM values in config.yaml.
+      - System ID, MDM configuration, etc. now are taken directly from secret.yaml. MDM provided in the input_sample_file.yaml will be overidden with MDM values in secret.yaml.
       - Please provide MDM values in input_sample_file.yaml so that it will be overidden by default value.
 
 3. Create a Custom Resource (CR) for PowerFlex using the sample files provided    [here](https://github.com/dell/dell-csi-operator/tree/master/samples).
@@ -176,7 +176,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
         forceUpdate: false
         fsGroupPolicy: File
         common:
-          image: "dellemc/csi-vxflexos:v2.6.0"
+          image: "dellemc/csi-vxflexos:v2.7.0"
           imagePullPolicy: IfNotPresent
           envs:
             - name: X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT
@@ -223,7 +223,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
               value: "false"
 
         initContainers:
-          - image: dellemc/sdc:3.6
+          - image: dellemc/sdc:3.6.0.6
             imagePullPolicy: IfNotPresent
             name: sdc
             envs:
