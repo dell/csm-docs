@@ -188,6 +188,7 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".resiliency").show();
 			$(".fsGroupPolicy").show();
 			$(".vgsnapshot").hide();
+			$(".storage-capacity").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERMAX:
