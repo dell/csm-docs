@@ -32,7 +32,7 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
     kubectl create -f <path_to_storageclass_file>
     ```
     
-    >Storage classes created by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver will not be deleted, v2.6 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 in your cluster then be sure to include the same array you have used for the v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver and make it default in the `secret.yaml` file.
+    >Storage classes created by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5/v2.6 driver will not be deleted, v2.7 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5/v2.6 in your cluster then be sure to include the same array you have used for the v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5/v2.6 driver and make it default in the `secret.yaml` file.
 4. Create the secret by running 
     ```bash
     
