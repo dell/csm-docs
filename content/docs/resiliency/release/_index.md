@@ -11,6 +11,7 @@ Description: >
 ### New Features/Changes
 - CSM support for Kubernetes 1.27. ([#761](https://github.com/dell/csm/issues/761))
 - CSM 1.7 release specific changes. ([#743](https://github.com/dell/csm/issues/743))
+- CSM Operator: Support install of Resiliency module. ([#739](https://github.com/dell/csm/issues/739))
 
 ### Fixed Issues
 - CSM for Resiliency openshift test required to pass ssh options in scp command. ([#737](https://github.com/dell/csm/issues/737))

@@ -44,15 +44,16 @@ To enable this module, user should choose the sample file for the respective dri
       components:
         - name: podmon-controller
           args:
-            - "--csisock=unix:/var/run/csi/csi.sock"
             - "--labelvalue=csi-powerstore"
             - "--arrayConnectivityPollRate=60"
-            - "--driverPath=csi-powerstore.dellemc.com"
-            - "--mode=controller"
             - "--skipArrayConnectionValidation=false"
-            - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
             - "--driverPodLabelValue=dell-storage"
             - "--ignoreVolumelessPods=false"
+            # Below 4 args should not be modified.
+            - "--csisock=unix:/var/run/csi/csi.sock"
+            - "--mode=controller"
+            - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+            - "--driverPath=csi-powerstore.dellemc.com"
         - name: podmon-node
           envs:
             # podmonAPIPort: Defines the port to be used within the kubernetes cluster
@@ -61,13 +62,14 @@ To enable this module, user should choose the sample file for the respective dri
             - name: "X_CSI_PODMON_API_PORT"
               value: "8083"
           args:
-            - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
             - "--labelvalue=csi-powerstore"
             - "--arrayConnectivityPollRate=60"
-            - "--driverPath=csi-powerstore.dellemc.com"
-            - "--mode=node"
             - "--leaderelection=false"
-            - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
             - "--driverPodLabelValue=dell-storage"
             - "--ignoreVolumelessPods=false"
+            # Below 4 args should not be modified.
+            - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
+            - "--mode=node"
+            - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+            - "--driverPath=csi-powerstore.dellemc.com"
 ```

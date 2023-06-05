@@ -9,12 +9,12 @@ Description: Upgrade PowerStore CSI driver
 
 You can upgrade the CSI Driver for Dell PowerStore using Helm.
 
-## Update Driver from v2.5 to v2.6 using Helm
+## Update Driver from v2.6 to v2.7 using Helm
 
 Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.
 
 **Steps**
-1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powerstore.git` to clone the git repository and get the driver.
+1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerstore.git` to clone the git repository and get the driver.
 2. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing the following parameters:
     - *endpoint*: defines the full URL path to the PowerStore API.
     - *globalID*: specifies what storage cluster the driver should use  
@@ -32,7 +32,7 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
     kubectl create -f <path_to_storageclass_file>
     ```
     
-    >Storage classes created by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver will not be deleted, v2.6 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 in your cluster then be sure to include the same array you have used for the v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver and make it default in the `secret.yaml` file.
+    >Storage classes created by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5/v2.6 driver will not be deleted, v2.7 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5/v2.6 in your cluster then be sure to include the same array you have used for the v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5/v2.6 driver and make it default in the `secret.yaml` file.
 4. Create the secret by running 
     ```bash
     

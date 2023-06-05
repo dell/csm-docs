@@ -13,6 +13,7 @@ description: Release notes for PowerStore CSI driver
 - [CSM support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
 - [Add upgrade support of csi-powerstore driver in CSM-Operator](https://github.com/dell/csm/issues/805)
 - [CSM support for Openshift 4.12](https://github.com/dell/csm/issues/571)
+- [Update to the latest UBI/UBI Micro images for CSM](https://github.com/dell/csm/issues/843)
 
 ### Fixed Issues
 - [Storage Capacity Tracking not working in CSI-PowerStore when installed using CSM Operator](https://github.com/dell/csm/issues/823)
