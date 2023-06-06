@@ -1,5 +1,7 @@
 ## K8S/DRIVER ATTRIBUTES
-########################
+##########################################
+## K8S/CSI-PowerStore ATTRIBUTES
+##########################################
 csi-powerstore:
   enabled: $POWERSTORE_ENABLED
   version: v2.7.0
@@ -61,7 +63,7 @@ csi-powerstore:
     enabled: $RESILIENCY_ENABLED
     image: dellemc/podmon:v1.6.0
 
-## K8S/Powermax ATTRIBUTES
+## K8S/CSI-PowerMax ATTRIBUTES
 ##########################################
 csi-powermax:
   enabled: $POWERMAX_ENABLED
@@ -114,8 +116,8 @@ csi-powermax:
     vCenterHost: "$VSPHERE_VCENTER_HOST"
     vCenterCredSecret: $VSPHERE_VCENTER_CRED_SECRET
 
-## CSI PowerFlex
-########################
+## K8S/CSI-PowerFlex ATTRIBUTES
+##########################################
 csi-vxflexos:
   enabled: $POWERFLEX_ENABLED
   version: v2.7.0
@@ -191,7 +193,7 @@ csi-vxflexos:
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
 
-## K8S/PowerScale ATTRIBUTES
+## K8S/CSI-PowerScale ATTRIBUTES
 ##########################################
 csi-isilon:
   enabled: $POWERSCALE_ENABLED
@@ -311,8 +313,8 @@ csi-isilon:
   images:
     driverRepository: $IMAGE_REPOSITORY
 
-## CSI Unity
-########################
+## K8S/CSI-Unity ATTRIBUTES
+##########################################
 csi-unity:
   enabled: $UNITY_ENABLED
   version: v2.7.0
