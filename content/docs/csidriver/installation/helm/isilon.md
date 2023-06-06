@@ -6,6 +6,7 @@ description: >
 The CSI Driver for Dell PowerScale can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerscale/tree/master/dell-csi-helm-installer).
 
 The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
+
 - CSI Driver for PowerScale
 - Kubernetes External Provisioner, which provisions the volumes
 - Kubernetes External Attacher, which attaches the volumes to the containers
@@ -13,12 +14,14 @@ The controller section of the Helm chart installs the following components in a 
 - Kubernetes External Resizer, which resizes the volume
 
 The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
+
 - CSI Driver for PowerScale
 - Kubernetes Node Registrar, which handles the driver registration
 
 ## Prerequisites
 
 The following are requirements to be met before installing the CSI Driver for Dell PowerScale:
+
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
@@ -36,15 +39,17 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 **Steps**
 
   Run the command to install Helm 3.0.
-  ```bash
 
+  ```bash
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
 
 ### (Optional) Volume Snapshot Requirements
+
   For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### (Optional) Volume Health Monitoring
+
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via helm.
 
 If enabled capacity metrics (used & free capacity, used & free inodes) for PowerScale PV will be expose in Kubernetes metrics API.
@@ -52,6 +57,7 @@ If enabled capacity metrics (used & free capacity, used & free inodes) for Power
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external
 health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
 volume stats value under node should be set to true.
+
 ```yaml
 controller:
   healthMonitor:
@@ -77,6 +83,7 @@ node:
 ```
 
 ### (Optional) Replication feature Requirements
+
 Applicable only if you decided to enable the Replication feature in `values.yaml`
 
 ```yaml
@@ -93,7 +100,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.6.1 https://github.com/dell/csi-powerscale.git` to clone the git repository.
+
+1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerscale.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace isilon` to create a new one. The use of "isilon"  as the namespace is just an example. You can choose any name for the namespace.
 3. Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the *secret.yaml*.
 4. Copy *the helm/csi-isilon/values.yaml* into a new location with name say *my-isilon-settings.yaml*, to customize settings for installation.
@@ -157,7 +165,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | enabled        | A boolean that enables/disables Encryption feature. | No | false |
    | image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.3.0" |
    
-   *NOTE:* 
+   *NOTE:*
 
    - ControllerCount parameter value must not exceed the number of nodes in the Kubernetes cluster. Otherwise, some of the controller pods remain in a "Pending" state till new nodes are available for scheduling. The installer exits with a WARNING on the same.
    - Whenever the *certSecretCount* parameter changes in *my-isilon-setting.yaml* user needs to reinstall the driver.
@@ -182,6 +190,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | mountEndpoint | Endpoint of the PowerScale OneFS API server, for example, 10.0.0.1. This must be specified if [CSM-Authorization](https://github.com/dell/karavi-authorization) is enabled. | No | - |
 
 ### User privileges
+
    The username specified in *secret.yaml* must be from the authentication providers of PowerScale. The user must have enough privileges to perform the actions. The suggested privileges are as follows:
 
    | Privilege              | Type       |
@@ -210,14 +219,14 @@ Create isilon-creds secret using the following command:
     ```
    This command will create a new secret called `isilon-certs-0` in isilon namespace.
    
-8.  Install the driver using `csi-install.sh` bash script by running 
+8.  Install the driver using `csi-install.sh` bash script by running
     ```bash
    
     cd ../dell-csi-helm-installer && ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml
     ``` 
 (assuming that the current working directory is 'helm' and my-isilon-settings.yaml is also present under 'helm' directory)
 
-## Certificate validation for OneFS REST API calls 
+## Certificate validation for OneFS REST API calls
 
 The CSI driver exposes an install parameter 'skipCertificateValidation' which determines if the driver
 performs client-side verification of the OneFS certificates. The 'skipCertificateValidation' parameter is set to true by default and the driver does not verify the OneFS certificates.
@@ -238,7 +247,7 @@ openssl s_client -showcerts -connect [OneFS IP] </dev/null 2>/dev/null | openssl
 ```bash
 
 kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon
-```  
+```
 3. Use the following command to replace the secret <br/> 
 ```bash
 
@@ -246,6 +255,7 @@ kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cer
 ```
 
 **NOTES:**
+
 1. The OneFS IP can be with or without a port, depends upon the configuration of OneFS API server.
 2. The commands are based on the namespace 'isilon'
 3. It is highly recommended that ca_cert.pem file(s) having the naming convention as ca_cert_number.pem (example: ca_cert_0, ca_cert_1), where this number starts from 0 and grows as the number of OneFS arrays grows.
@@ -260,9 +270,7 @@ CSI Driver for Dell PowerScale now provides supports for Multi cluster. Now user
 kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 ```
 
-
 **Note**: Updating isilon-certs-x secrets is a manual process, unlike isilon-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.
-
 
 ## Storage Classes
 
@@ -274,6 +282,7 @@ The CSI driver for Dell PowerScale version 1.5 and later, `dell-csi-helm-install
 The storage classes created as part of the installation have an annotation - "helm.sh/resource-policy": keep set. This ensures that even after an uninstall or upgrade, the storage classes are not deleted. You can continue using these storage classes if you wish so.
 
 *NOTE*:
+
 - At least one storage class is required for one array.
 - If you uninstall the driver and reinstall it, you can still face errors if any update in the `values.yaml` file leads to an update of the storage class(es):
 
@@ -305,7 +314,7 @@ There are samples storage class yaml files available under `samples/storageclass
                     endpoint: "10.X.X.X"
                     endpointPort: "8080
                             
-- Use same clusterName &#8593; in the  `second_storageclass.yaml` 
+- Use same clusterName &#8593; in the  `second_storageclass.yaml`
      ````yaml
        # Optional: true
        ClusterName: "cluster2"
@@ -337,10 +346,12 @@ There are samples storage class yaml files available under `samples/storageclass
 Starting CSI PowerScale v1.6, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. Sample volume snapshot class manifests are available at `samples/volumesnapshotclass/`. Use these sample manifests to create a volumesnapshotclass for creating volume snapshots; uncomment/ update the manifests as per the requirements.
 
 ## Silent Mount Re-tries (v2.6.0)
+
 There are race conditions, when completing the ControllerPublish call to populate the client to volumes export list takes longer time than usual due to background NFS refresh process on OneFS wouldn't have completed at same time, resulted in error:"mount failed" with initial attempts and might log success after few re-tries. This unnecessarily logs false positive "mount failed" error logs and to overcome this scenario Driver does silent mount re-tries attempts after every two sec. (five attempts max) for every NodePublish Call and allows successful mount within five re-tries without logging any mount error messages.
 "mount failed" will be logged once these five mount retrial attempts are exhausted and still client is not populated to export list.
 
 Mount Re-tries handles below scenarios:
+
 - Access denied by server while mounting (NFSv3)
 - No such file or directory (NFSv4)
 
