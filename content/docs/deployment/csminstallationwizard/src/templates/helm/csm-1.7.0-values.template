@@ -62,6 +62,29 @@ csi-powerstore:
   podmon:
     enabled: $RESILIENCY_ENABLED
     image: dellemc/podmon:v1.6.0
+    #controller:
+    #  args:
+    #    - "--csisock=unix:/var/run/csi/csi.sock"
+    #    - "--labelvalue=csi-powerstore"
+    #    - "--arrayConnectivityPollRate=60"
+    #    - "--driverPath=csi-powerstore.dellemc.com"
+    #    - "--mode=controller"
+    #    - "--skipArrayConnectionValidation=false"
+    #    - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+    #    - "--driverPodLabelValue=dell-storage"
+    #    - "--ignoreVolumelessPods=false"
+
+    #node:
+    #  args:
+    #    - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
+    #    - "--labelvalue=csi-powerstore"
+    #    - "--arrayConnectivityPollRate=60"
+    #    - "--driverPath=csi-powerstore.dellemc.com"
+    #    - "--mode=node"
+    #    - "--leaderelection=false"
+    #    - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+    #    - "--driverPodLabelValue=dell-storage"
+    #    - "--ignoreVolumelessPods=false"
 
 ## K8S/CSI-PowerMax ATTRIBUTES
 ##########################################
