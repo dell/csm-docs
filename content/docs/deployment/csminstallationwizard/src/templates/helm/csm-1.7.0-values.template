@@ -432,7 +432,7 @@ karavi-observability:
   enabled: $OBSERVABILITY_ENABLED
   karaviMetricsPowerstore:
     enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
-  karaviMetricsPowermax:
+  karaviMetricsPowerMax:
     enabled: $POWERMAX_OBSERVABILITY_METRICS_ENABLED
   karaviMetricsPowerflex:
     enabled: $POWERFLEX_OBSERVABILITY_METRICS_ENABLED

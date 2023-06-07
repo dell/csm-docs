@@ -15,7 +15,7 @@ description: Release notes for Dell CSI Operator
 
 ### Fixed Issues
 
-- [Updated Powermax environment variables name for consistency](https://github.com/dell/csm/issues/584)
+- [Updated PowerMax environment variables name for consistency](https://github.com/dell/csm/issues/584)
 - [Updated PowerMax vCenter to use secrets for its credentials](https://github.com/dell/csm/issues/686)
 
 ### Known Issues

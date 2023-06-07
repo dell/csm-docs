@@ -188,10 +188,10 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | ***CSI Reverseproxy Module***                   |                                                                                                                                                                                                                                                                          |          |                                |
    | X_CSI_REVPROXY_TLS_SECRET                       | Name of TLS secret defined in config map                                                                                                                                                                                                                                 | Yes      | "csirevproxy-tls-secret"       |
    | X_CSI_REVPROXY_PORT                             | Port number where reverseproxy will listen as defined in config map                                                                                                                                                                                                      | Yes      | "2222"                         |
-   | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI Powermax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
+   | X_CSI_CONFIG_MAP_NAME                           | Name of config map as created for CSI PowerMax                                                                                                                                                                                                                           | Yes      | "powermax-reverseproxy-config" |
    
 6. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
-7. The mandatory module CSI Powermax Reverseproxy will be installed automatically with the same command.
+7. The mandatory module CSI PowerMax Reverseproxy will be installed automatically with the same command.
 
 ## Dynamic Logging Configuration
 

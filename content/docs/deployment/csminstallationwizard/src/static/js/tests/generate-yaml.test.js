@@ -216,7 +216,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: $RESILIENCY_ENABLED
         image: dellemc/podmon:v1.5.0
     
-    ## K8S/Powermax ATTRIBUTES
+    ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
       enabled: $POWERMAX_ENABLED
@@ -401,7 +401,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: $OBSERVABILITY_ENABLED
       karaviMetricsPowerstore:
         enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
-      karaviMetricsPowermax:
+      karaviMetricsPowerMax:
         enabled: $POWERMAX_OBSERVABILITY_METRICS_ENABLED
       karaviMetricsPowerflex:
         enabled: $POWERFLEX_OBSERVABILITY_METRICS_ENABLED
@@ -519,7 +519,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         image: dellemc/podmon:v1.5.0
     
-    ## K8S/Powermax ATTRIBUTES
+    ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
       enabled: false
@@ -704,7 +704,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       karaviMetricsPowerstore:
         enabled: true
-      karaviMetricsPowermax:
+      karaviMetricsPowerMax:
         enabled: false
       karaviMetricsPowerflex:
         enabled: false
@@ -784,7 +784,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         image: dellemc/podmon:v1.5.0
     
-    ## K8S/Powermax ATTRIBUTES
+    ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
       enabled: false
@@ -969,7 +969,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       karaviMetricsPowerstore:
         enabled: false
-      karaviMetricsPowermax:
+      karaviMetricsPowerMax:
         enabled: false
       karaviMetricsPowerflex:
         enabled: true
@@ -1050,7 +1050,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         image: dellemc/podmon:v1.5.0
     
-    ## K8S/Powermax ATTRIBUTES
+    ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
       enabled: true
@@ -1235,7 +1235,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       karaviMetricsPowerstore:
         enabled: false
-      karaviMetricsPowermax:
+      karaviMetricsPowerMax:
         enabled: true
       karaviMetricsPowerflex:
         enabled: false
@@ -1318,7 +1318,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         image: dellemc/podmon:v1.5.0
     
-    ## K8S/Powermax ATTRIBUTES
+    ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
       enabled: false
@@ -1503,7 +1503,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       karaviMetricsPowerstore:
         enabled: false
-      karaviMetricsPowermax:
+      karaviMetricsPowerMax:
         enabled: false
       karaviMetricsPowerflex:
         enabled: false
@@ -1585,7 +1585,7 @@ describe("GIVEN createYamlString function", () => {
         enabled: false
         image: dellemc/podmon:v1.5.0
     
-    ## K8S/Powermax ATTRIBUTES
+    ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
       enabled: false
@@ -1770,7 +1770,7 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       karaviMetricsPowerstore:
         enabled: false
-      karaviMetricsPowermax:
+      karaviMetricsPowerMax:
         enabled: false
       karaviMetricsPowerflex:
         enabled: false

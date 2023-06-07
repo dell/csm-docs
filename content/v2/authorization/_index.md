@@ -43,7 +43,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex | PowerScale |
 |---------------|:----------------:|:-------------------:|:----------------:|
-| Storage Array |PowerMax 2000/8000 <br> PowerMax 2500/8500 <br> 5978.479.479, 5978.711.711, 6079.xxx.xxx, Unisphere 10.0|    3.5.x, 3.6.x    | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 |
+| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx,<br> Unisphere 10.0 |    3.5.x, 3.6.x    | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3 |
 {{</table>}}
 
 ## Supported CSI Drivers

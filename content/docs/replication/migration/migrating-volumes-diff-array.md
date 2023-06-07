@@ -110,7 +110,7 @@ metadata:
   # Default value: pmax-migration
   name: pmax-migration
 spec:
-  # driverName: exact name of CSI Powermax driver
+  # driverName: exact name of CSI PowerMax driver
   driverName: "csi-powermax.dellemc.com"
   # sourceID: source ArrayID
   sourceID: "000000001234"

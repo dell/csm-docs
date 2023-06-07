@@ -107,7 +107,7 @@ To perform an online installation of CSM for Observability, the following steps 
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
     - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability. 
     - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
-    - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowermax.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
+    - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
 
     ```bash
     

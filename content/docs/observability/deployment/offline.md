@@ -269,7 +269,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
     - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured. 
     - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured.
-    - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowermax.authorization` parameters must be properly configured.
+    - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured.
 
     ```bash
 

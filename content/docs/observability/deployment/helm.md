@@ -194,7 +194,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
        - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
        - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in your values file for CSM Observability. 
        - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in your values file for CSM Observability.
-       - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowermax.authorization` parameters must be properly configured in your values file for CSM Observability.
+       - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in your values file for CSM Observability.
 
        ```console
 
@@ -281,11 +281,11 @@ The following table lists the configurable parameters of the CSM for Observabili
 | `karaviMetricsPowerscale.authorization.enabled` | [Authorization](../../../authorization) is an optional feature to apply credential shielding of the backend PowerScale. | `false` |
 | `karaviMetricsPowerscale.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
 | `karaviMetricsPowerscale.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
-| `karaviMetricsPowermax.capacityMetricsEnabled` | Enable PowerMax capacity metric Collection | `true` |
-| `karaviMetricsPowermax.performanceMetricsEnabled` | Enable PowerMax performance metric Collection | `true` |
-| `karaviMetricsPowermax.capacityPollFrequencySeconds` | The polling frequency (in seconds) to gather capacity metrics | `20` |
-| `karaviMetricsPowermax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
-| `karaviMetricsPowermax.concurrentPowermaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
-| `karaviMetricsPowermax.authorization.enabled` | [Authorization](../../../authorization) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
-| `karaviMetricsPowermax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
-| `karaviMetricsPowermax.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
+| `karaviMetricsPowerMax.capacityMetricsEnabled` | Enable PowerMax capacity metric Collection | `true` |
+| `karaviMetricsPowerMax.performanceMetricsEnabled` | Enable PowerMax performance metric Collection | `true` |
+| `karaviMetricsPowerMax.capacityPollFrequencySeconds` | The polling frequency (in seconds) to gather capacity metrics | `20` |
+| `karaviMetricsPowerMax.performancePollFrequencySeconds` | The polling frequency (in seconds) to gather performance metrics | `20` |
+| `karaviMetricsPowerMax.concurrentPowerMaxQueries` | The number of simultaneous metrics queries to make to PowerMax (MUST be less than 10; otherwise, several request errors from PowerMax will ensue.) | `10` |
+| `karaviMetricsPowerMax.authorization.enabled` | [Authorization](../../../authorization) is an optional feature to apply credential shielding of the backend PowerMax. | `false` |
+| `karaviMetricsPowerMax.authorization.proxyHost` | Hostname of the csm-authorization server. |  |
+| `karaviMetricsPowerMax.authorization.skipCertificateValidation` | A boolean that enables/disables certificate validation of the csm-authorization server. |  |
