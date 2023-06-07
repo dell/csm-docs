@@ -856,12 +856,11 @@ dellctl encryption rekey-status myrekey
 
 ### dellctl images
 
-List the container images needed by csi drivers and csm modules
+List the container images needed by csm components
 
 **NOTE.**: 
-Currently supported csidrivers and csmmodules
-csidrivers: [csi-vxflexos,csi-isilon,csi-powerstore,csi-unity,csi-powermax]
-csmmodules: [csm-authorization]
+# Supported CSM Components
+[csi-vxflexos,csi-isilon,csi-powerstore,csi-unity,csi-powermax,csm-authorization]
 
 
 #### Aliases
@@ -874,7 +873,7 @@ images,imgs
 
 ```
   Flags:
-  -c, --component string   csi driver/csm module name
+  -c, --component string   csm-component name
   -h, --help               help for images
   
 ```
