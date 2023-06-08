@@ -14,6 +14,15 @@ csi-powerstore:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+    tolerations:
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+    # - key: "node-role.kubernetes.io/master"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+    # - key: "node-role.kubernetes.io/control-plane"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
     replication:
       enabled: $REPLICATION_ENABLED
       image: dellemc/dell-csi-replicator:v1.5.0
@@ -31,32 +40,41 @@ csi-powerstore:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
-      # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
-    # tolerations:
-    # - key: "offline.vxflexos.storage.dell.com"
+    tolerations:
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+    # - key: "node-role.kubernetes.io/master"
     #   operator: "Exists"
     #   effect: "NoSchedule"
-    # - key: "vxflexos.podmon.storage.dell.com"
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+    # - key: "node-role.kubernetes.io/control-plane"
     #   operator: "Exists"
     #   effect: "NoSchedule"
-    # - key: "offline.unity.storage.dell.com"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # - key: "unity.podmon.storage.dell.com"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # - key: "offline.isilon.storage.dell.com"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # - key: "isilon.podmon.storage.dell.com"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # - key: "offline.powerstore.storage.dell.com"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # - key: "powerstore.podmon.storage.dell.com"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
+
+    # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
+    #  - key: "offline.vxflexos.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "vxflexos.podmon.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "offline.unity.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "unity.podmon.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "offline.isilon.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "isilon.podmon.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "offline.powerstore.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
+    #  - key: "powerstore.podmon.storage.dell.com"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
   podmon:
@@ -113,10 +131,27 @@ csi-powermax:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+    tolerations:
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+    #  - key: "node-role.kubernetes.io/master"
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+    #  - key: "node-role.kubernetes.io/control-plane"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
+    tolerations:
+    - key: "node.kubernetes.io/memory-pressure"
+      operator: "Exists"
+      effect: "NoExecute"
+    - key: "node.kubernetes.io/disk-pressure"
+      operator: "Exists"
+      effect: "NoExecute"
+    - key: "node.kubernetes.io/network-unavailable"
+      operator: "Exists"
+      effect: "NoExecute"
   csireverseproxy:
     image: dellemc/csipowermax-reverseproxy:v2.6.0
     deployAsSidecar: true
@@ -161,11 +196,28 @@ csi-vxflexos:
     resizer:
       enabled: $RESIZER_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+    tolerations:
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint 
+    # - key: "node-role.kubernetes.io/master"   
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint 
+    # - key: "node-role.kubernetes.io/control-plane"   
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
     tolerations:
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+    # - key: "node-role.kubernetes.io/master"   
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint 
+    # - key: "node-role.kubernetes.io/control-plane"   
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
     # - key: "offline.vxflexos.storage.dell.com"
     #   operator: "Exists"
@@ -253,9 +305,18 @@ csi-isilon:
       enabled: $HEALTH_MONITOR_ENABLED
 
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+    tolerations:
+    # - key: "node-role.kubernetes.io/master"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+    # - key: "node-role.kubernetes.io/control-plane"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
 
   node:
     nodeSelector: $NODE_POD_NODE_SELECTOR
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
     tolerations:
     #  - key: "node.kubernetes.io/memory-pressure"
     #    operator: "Exists"
@@ -270,13 +331,11 @@ csi-isilon:
     #   operator: "Exists"
     #   effect: "NoSchedule"
     # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    # tolerations:
     # - key: "node-role.kubernetes.io/control-plane"
     #   operator: "Exists"
     #   effect: "NoSchedule"
 
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
-    #tolerations:
     #  - key: "offline.vxflexos.storage.dell.com"
     #    operator: "Exists"
     #    effect: "NoSchedule"
@@ -354,6 +413,15 @@ csi-unity:
     resizer:
       enabled: $RESIZER_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+    tolerations:
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
+    #  - key: "node-role.kubernetes.io/master"
+    #    operator: "Exists"
+    #    effect: "NoExecute"
+    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
+    #  - key: "node-role.kubernetes.io/control-plane"
+    #    operator: "Exists"
+    #    effect: "NoSchedule"
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
   node:
