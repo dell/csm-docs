@@ -47,8 +47,8 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.volNamePrefix = document.getElementById("vol-name-prefix").value;
 	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
 	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
-	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : false;
-	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : false;
+	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : "";
+	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodeSelectorLabel = document.getElementById("node-selector-label").value || '""';
 	var labels = DriverValues.nodeSelectorLabel.split(":");
 	var nodeSelector = CONSTANTS_PARAM.NODE_SELECTOR_TAB + labels[0] + ': "' + labels[1] + '"';
