@@ -221,7 +221,6 @@ Create isilon-creds secret using the following command:
    
 8.  Install the driver using `csi-install.sh` bash script by running
     ```bash
-   
     cd ../dell-csi-helm-installer && ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml
     ``` 
 (assuming that the current working directory is 'helm' and my-isilon-settings.yaml is also present under 'helm' directory)
@@ -240,17 +239,14 @@ If the 'skipCertificateValidation' parameter is set to false and a previous inst
 
 1. To fetch the certificate, run 
 ```bash
-
 openssl s_client -showcerts -connect [OneFS IP] </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
 ```
 2. To create the certs secret, run 
 ```bash
-
 kubectl create secret generic isilon-certs-0 --from-file=cert-0=ca_cert_0.pem -n isilon
 ```
 3. Use the following command to replace the secret <br/> 
 ```bash
-
 kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
 ```
 
@@ -266,7 +262,6 @@ kubectl create secret generic isilon-certs-0 -n isilon --from-file=cert-0=ca_cer
 CSI Driver for Dell PowerScale now provides supports for Multi cluster. Now users can link the single CSI Driver to multiple OneFS Clusters by updating *secret.yaml*. Users can now update the isilon-creds secret by editing the *secret.yaml* and executing the following command
 
 ```bash
-
 kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 ```
 
@@ -302,28 +297,29 @@ There are samples storage class yaml files available under `samples/storageclass
 1. Copy the `storageclass.yaml` to `second_storageclass.yaml` ( This is just an example, you can rename to file you require. )
 2. Edit the  `second_storageclass.yaml` yaml file and update following parameters:
 - Update the `name` parameter to you require 
-    ````yaml
+   ```yaml
     metadata:
       name: isilon-new
-  ````
+   ```
 - Cluster name of 2nd array looks like this in the secret file.( Under `/samples/secret/secret.yaml`)
-  ````yaml
-                  - clusterName: "cluster2"
-                    username: "user name"
-                    password: "Password"
-                    endpoint: "10.X.X.X"
-                    endpointPort: "8080
-                            
+  ```yaml
+  - clusterName: "cluster2"
+    username: "user name"
+    password: "Password"
+    endpoint: "10.X.X.X"
+    endpointPort: "8080
+  ```                          
 - Use same clusterName &#8593; in the  `second_storageclass.yaml`
-     ````yaml
-       # Optional: true
-       ClusterName: "cluster2"
+   ```yaml
+    # Optional: true
+    ClusterName: "cluster2"
+   ```
 - *Note*: These are two essential parameters that you need to change in the "second_storageclass.yaml" file and other parameters that you change as required. 
 3. Save the  `second_storageclass.yaml` file 
 4. Create your 2nd storage class by using `kubectl`:
-  ````bash
-  kubectl create -f <path_to_second_storageclass_file>
-  ````
+    ```bash
+    kubectl create -f <path_to_second_storageclass_file>
+    ```
 5. Use newly created storage class `isilon-new` for volumes to spin up on `cluster2`
 
     PVC example

@@ -269,7 +269,6 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     ```
     use the object name in `kubectl edit` command.
     ```bash
-    
     kubectl edit <driver-object>/<object-name> -n <driver-namespace>
     ```
     For example - If the object name is CSIUnity.
@@ -287,13 +286,11 @@ The CSI Drivers installed by the Dell CSI Operator can be updated like any Kuber
     to patch the deployment with your patch object inline run this command.
     #Replace deployment with the name of the deployment
     ```bash
-
     kubectl patch deploy/<deployment> -n <driver-namespace> -p '{"spec":{"replicas": 2}}'
     ``` 
     to patch the deployment with your patch file run this command.
     #Replace deployment with the name of the deployment
     ```bash
-    
     kubectl patch deployment <deployment> --patch-file patch-file.yaml
     ```
     
