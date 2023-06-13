@@ -66,7 +66,6 @@ Install Helm 3 on the master node before you install CSI Driver for Dell PowerMa
 
   Run the command to install Helm 3.
    ```bash
-   
    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
    ``` 
 
@@ -127,7 +126,6 @@ If the `skipCertificateValidation` parameter is set to _false_ and a previous in
 If the Unisphere certificate is self-signed or if you are using an embedded Unisphere, then perform the following steps:
 1. To fetch the certificate, run 
    ```bash
-
    openssl s_client -showcerts -connect [Unisphere IP]:8443 </dev/null 2> /dev/null | openssl x509 -outform PEM > ca_cert.pem
    ```
 
@@ -135,7 +133,6 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
 
 2. To create the secret, run 
    ```bash
-
    kubectl create secret generic powermax-certs --from-file=ca_cert.pem -n powermax
    ```
 
@@ -174,7 +171,6 @@ Set up the PowerPath for Linux as follows:
 - All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
 - `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using 
    ```bash
-
     rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm
    ```
 - Start the PowerPath service using 
@@ -212,10 +208,19 @@ CRDs should be configured during replication prepare stage with repctl as descri
     echo -n "mypassword" | base64
     ```
    where *myusername* and *mypassword* are credentials for a user with PowerMax privileges.
-4. Create the secret by running `kubectl create -f samples/secret/secret.yaml`.
-5. Copy the default values.yaml file `cd helm && cp csi-powermax/values.yaml my-powermax-settings.yaml`
+4. Create the secret by running 
+    ```bash
+    kubectl create -f samples/secret/secret.yaml
+    ```
+5. Copy the default values.yaml file 
+    ```bash
+    cd helm && cp csi-powermax/values.yaml my-powermax-settings.yaml
+    ```
 6. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
-7. Edit the newly created file and provide values for the following parameters `vi my-powermax-settings.yaml`
+7. Edit the newly created file and provide values for the following parameters 
+    ```bash
+    vi my-powermax-settings.yaml
+    ```
 
 | Parameter | Description  | Required   | Default  |
 |-----------|--------------|------------|----------|
@@ -303,12 +308,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 8. Install the driver using `csi-install.sh` bash script by running 
     ```bash
-    
     cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ../helm/my-powermax-settings.yaml
     ```
 9. Or you can also install the driver using standalone helm chart using the command 
    ```bash
-   
    helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax
    ```
 
