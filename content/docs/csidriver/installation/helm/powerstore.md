@@ -163,13 +163,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     
     Add more blocks similar to above for each PowerStore array if necessary. 
     ### User Privileges
-    The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct privileges to perform the actions. The suggested user role are as follows:
-
-    | User Role             |
-    | --------------------- |
-    | Administrator         |
-    | Storage Administrator |
-    | Storage Operator      |
+    The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 
 4. Create the secret by running 
    ```bash
