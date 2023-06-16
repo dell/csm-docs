@@ -41,7 +41,6 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell U
 
 Run the command to install Helm 3.0.
 ```bash
-
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 ``` 
 
@@ -214,14 +213,12 @@ Procedure
 	Use the following command to create a new secret unity-creds from `secret.yaml` file.
 	
     ```bash
-    
     kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml
     ```
     
     Use the following command to replace or update the secret:
     
     ```bash
-    
     kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -
     ```
     
@@ -232,7 +229,7 @@ Procedure
 	Alternatively, users can configure and use `secret.yaml` for driver configuration. The parameters remain the same as in the above table and below is a sample of `secret.yaml`. Samples of  `secret.yaml` is available in the directory `csi-unity/samples/secret/ `.
 	
 	Example: secret.yaml
-	```yaml
+	  ```yaml
     storageArrayList:
     - arrayId: "APM00******1"
       username: "user"
@@ -246,10 +243,9 @@ Procedure
       password: "password"
       endpoint: "https://10.1.1.2/"
       skipCertificateValidation: true
-       ```
+    ```
     
-      **Note:**
-      * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
+    **Note:** Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 
 6. If you want to leverage snapshotting feature, the pre-requisite is to install external-snapshotter. Installation of external-snapshotter is required only for Kubernetes and is available by default with OpenShift installations. [Click here](../../../../snapshots/#optional-volume-snapshot-requirements) to follow the procedure to install external-snapshotter.
               
@@ -330,7 +326,6 @@ Procedure
     **Note**:
     To install nightly or latest csi driver build using bash script use this command:
     ```bash
-    
     /csi-install.sh --namespace unity --values ./myvalues.yaml --version latest
     ```
 
@@ -340,7 +335,6 @@ Procedure
 
    **Syntax**:
    ```bash
-   
    helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>
    ```
    `<namespace>` - namespace of the driver installation.  <br/>
@@ -348,7 +342,6 @@ Procedure
    `<helmPath>` - Path of the helm directory. <br/>
    e.g: 
    ```bash
-   
    helm install --dry-run --values ./csi-unity/myvalues.yaml --namespace unity unity ./csi-unity
    ```
 
@@ -371,22 +364,18 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
 
    1. To fetch the certificate, run the following command.
       ```bash
-      
       openssl s_client -showcerts -connect <Unisphere IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
       ```
       Example: 
       ```bash
-      
       openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
       ```
    2. Run the following command to create the cert secret with index '0':
       ```bash
-      
       kubectl create secret generic unity-certs-0 --from-file=cert-0=ca_cert_0.pem -n unity
       ```
       Use the following command to replace the secret:
       ```bash
-      
       kubectl create secret generic unity-certs-0 -n unity --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
       ``` 
    3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: unity-certs-1, unity-certs-2, etc)
@@ -449,7 +438,6 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the "Host" information in an array.
 User can update secret using the following command:
 ```bash
-
 kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 ```
 **Note**: Updating unity-certs-x secrets is a manual process, unlike unity-creds. Users have to re-install the driver in case of updating/adding the SSL certificates or changing the certSecretCount parameter.

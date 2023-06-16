@@ -41,7 +41,6 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
   Run the command to install Helm 3.0.
   ```bash
-  
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
 ### Fibre Channel requirements
@@ -164,17 +163,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
     
     Add more blocks similar to above for each PowerStore array if necessary. 
     ### User Privileges
-    The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct privileges to perform the actions. The suggested user role are as follows:
-
-    | User Role             |
-    | --------------------- |
-    | Administrator         |
-    | Storage Administrator |
-    | Storage Operator      |
+    The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 
 4. Create the secret by running 
    ```bash
-  
    kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml
    ```
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
@@ -182,7 +174,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Copy the default values.yaml file 
    ```bash
-   
    cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
@@ -222,7 +213,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 8. Install the driver using `csi-install.sh` bash script by running 
    ```bash
-   
    ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml
    ``` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
@@ -255,20 +245,20 @@ There are samples storage class yaml files available under `samples/storageclass
 - *csi.storage.k8s.io/fstype*: specifies what filesystem type driver should use, possible variants `ext3`, `ext4`, `xfs`, `nfs`, if not specified driver will use `ext4` by default.
 - *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 - *allowedTopologies* (Optional): If you want you can also add topology constraints.
-```yaml
-allowedTopologies:
-  - matchLabelExpressions: 
-      - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
-  # replace "-iscsi" with "-fc", "-nvmetcp" or "-nvmefc" or "-nfs" at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts
-  # replace "12.34.56.78" with PowerStore endpoint IP
-        values:
-          - "true"
-```
+    ```yaml
+    allowedTopologies:
+      - matchLabelExpressions: 
+          - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
+      # replace "-iscsi" with "-fc", "-nvmetcp" or "-nvmefc" or "-nfs" at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts
+      # replace "12.34.56.78" with PowerStore endpoint IP
+            values:
+              - "true"
+    ```
 
 2. Create your storage class by using `kubectl`:
-```bash
-kubectl create -f <path_to_storageclass_file>
-```
+    ```bash
+    kubectl create -f <path_to_storageclass_file>
+    ```
 
 *NOTE:* Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.
 
@@ -280,7 +270,6 @@ Starting CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Vo
 
 Users can dynamically add delete array information from secret. Whenever an update happens the driver updates the “Host” information in an array. User can update secret using the following command:
 ```bash
-
 kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl replace -f -
 ```
 ## Dynamic Logging Configuration

@@ -42,13 +42,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
    Change the parameters with relevant values for your PowerStore array.  
    Add more blocks similar to above for each PowerStore array if necessary.
    ### User Privileges
-   The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct privileges to perform the actions. The suggested user role are as follows:
-
-   | User Role             |
-   | --------------------- |
-   | Administrator         |
-   | Storage Administrator |
-   | Storage Operator      |
+   The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 
 3. Create Kubernetes secret: 
 
