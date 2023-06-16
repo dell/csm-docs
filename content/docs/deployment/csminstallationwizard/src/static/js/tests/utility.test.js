@@ -282,7 +282,7 @@ describe("GIVEN setDefaultValues function", () => {
 			["volNamePrefix", "csivol"],
 			["snapNamePrefix", "csi-snap"],
 			["certSecretCount", "1"],
-			["taint","node-role.kubernetes.io/control-plane"]
+			["taint", "node-role.kubernetes.io/control-plane"]
 		]);
 
 		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
