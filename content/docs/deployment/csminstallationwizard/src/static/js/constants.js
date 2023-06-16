@@ -38,7 +38,6 @@ const CONSTANTS = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
-	CSM_HELM_V160: "0.1.0",
 	CSM_HELM_V170: "1.0.0",
 	TAINTS: `
     - key: "$KEY"
@@ -50,5 +49,4 @@ const CONSTANTS = {
     #  operator: "Exists"
     #  effect: "NoSchedule"
 	`
-
 };

@@ -44,16 +44,16 @@ const CONSTANTS = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V170: "1.0.0",
-  TAINTS: `
-  - key: "$KEY"
-    operator: "Exists"
-    effect: "NoSchedule"
-`,
-COMMENTED_TAINTS: `
-  #- key: "node-role.kubernetes.io/control-plane"
-  #  operator: "Exists"
-  #  effect: "NoSchedule"
-`
+	TAINTS: `
+    - key: "$KEY"
+      operator: "Exists"
+      effect: "NoSchedule"
+	`,
+	COMMENTED_TAINTS: `
+    #- key: "node-role.kubernetes.io/control-plane"
+    #  operator: "Exists"
+    #  effect: "NoSchedule"
+	`
 };
 
 const testCSMMap = new Map([
@@ -109,7 +109,7 @@ describe("GIVEN setValues function", () => {
 			authorization: false,
 			authorizationSkipCertValidation: true,
 			certManagerEnabled: false,
-      taint: "node-role.kubernetes.io/control-plane"
+			taint: "node-role.kubernetes.io/control-plane"
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -159,7 +159,7 @@ describe("GIVEN setValues function", () => {
 			authorization: false,
 			authorizationSkipCertValidation: true,
 			certManagerEnabled: false,
-      taint: "node-role.kubernetes.io/control-plane"
+			taint: "node-role.kubernetes.io/control-plane"
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
