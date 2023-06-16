@@ -67,6 +67,16 @@ function validateForm(CONSTANTS_PARAM) {
 			}
 		}
 	}
+	if ($('#controller-pods-node-selector').prop('checked') || $('#node-pods-node-selector').prop('checked')){
+		if (document.getElementById('node-selector-label').value.trim() === "") {
+			return false;
+		}
+	}
+	if ($('#controller-pods-node-selector').prop('checked') || $('#node-pods-node-selector').prop('checked')){
+		if (document.getElementById('taint').value.trim() === "") {
+			return false;
+		}
+	}
 
 	const authorizationEnabled = $("#authorization").prop('checked') ? true : false;
 	if (authorizationEnabled && document.getElementById('authorization-proxy-host').value.trim() === "") {
