@@ -27,6 +27,7 @@ const {
 	resetControllerCount,
 	resetNodeSelectorLabel,
 	resetDriverNamespace,
+	resetTaint,
 	displayModules,
 	displayCommands,
 	hideFields,
@@ -315,6 +316,22 @@ describe("GIVEN resetDriverNamespace function", () => {
 		resetDriverNamespace("csi-powerstore");
 
 		expect(document.getElementById("driver-namespace").value).toEqual("csi-powerstore");
+	});
+});
+
+describe("GIVEN resetTaint function", () => {
+	const testCSMMap = new Map([
+		["taint", "node-role.kubernetes.io/control-plane"]
+	]);
+
+	test("SHOULD invoke resetTaint function", () => {
+		document.body.innerHTML = `
+            <input type="text" id="taint">
+        `;
+
+		resetTaint(testCSMMap);
+
+		expect(document.getElementById("taint").value).toEqual(testCSMMap.get("taint"));
 	});
 });
 

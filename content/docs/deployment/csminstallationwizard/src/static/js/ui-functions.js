@@ -145,6 +145,10 @@ const resetDriverNamespace = driverValue => {
 	document.getElementById("driver-namespace").value = driverValue;
 }
 
+const resetTaint = csmMapValue => {
+	document.getElementById("taint").value = String(csmMapValue.get("taint"));
+}
+
 const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFunc, validateInputFunc, CONSTANTS_PARAM) => {
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(template);
@@ -289,6 +293,7 @@ if (typeof exports !== 'undefined') {
 		resetControllerCount,
 		resetNodeSelectorLabel,
 		resetDriverNamespace,
+		resetTaint,
 		downloadFile,
 		displayModules,
 		displayCommands,

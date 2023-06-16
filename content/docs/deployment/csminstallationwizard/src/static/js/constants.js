@@ -39,5 +39,16 @@ const CONSTANTS = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V160: "0.1.0",
-	CSM_HELM_V170: "1.0.0"
+	CSM_HELM_V170: "1.0.0",
+	TAINTS: `
+    - key: "$KEY"
+      operator: "Exists"
+      effect: "NoSchedule"
+	`,
+	COMMENTED_TAINTS: `
+    #- key: "node-role.kubernetes.io/control-plane"
+    #  operator: "Exists"
+    #  effect: "NoSchedule"
+	`
+
 };

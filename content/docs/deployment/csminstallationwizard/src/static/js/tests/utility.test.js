@@ -272,6 +272,7 @@ describe("GIVEN setDefaultValues function", () => {
 				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
 			<input type="text" id="cert-secret-count">
+			<input type="text" id="taint">
 		`;
 
 		const testCSMMap = new Map([
@@ -280,7 +281,8 @@ describe("GIVEN setDefaultValues function", () => {
 			["controllerCount", "2"],
 			["volNamePrefix", "csivol"],
 			["snapNamePrefix", "csi-snap"],
-			["certSecretCount", "1"]
+			["certSecretCount", "1"],
+			["taint","node-role.kubernetes.io/control-plane"]
 		]);
 
 		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
@@ -291,5 +293,7 @@ describe("GIVEN setDefaultValues function", () => {
 		expect(document.getElementById("vol-name-prefix").value).toEqual("csivol");
 		expect(document.getElementById("snapshot-prefix").value).toEqual("csi-snap");
 		expect(document.getElementById("cert-secret-count").value).toEqual("1");
+		expect(document.getElementById("taint").value).toEqual("node-role.kubernetes.io/control-plane");
+
 	});
 });

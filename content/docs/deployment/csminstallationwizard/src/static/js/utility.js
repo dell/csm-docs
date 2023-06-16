@@ -91,6 +91,8 @@ function setDefaultValues(defaultValuesParam, csmMapValues) {
 	document.getElementById("vol-name-prefix").value = csmMapValues.get("volNamePrefix");
 	document.getElementById("snapshot-prefix").value = csmMapValues.get("snapNamePrefix");
 	document.getElementById("cert-secret-count").value = csmMapValues.get("certSecretCount");
+	document.getElementById("taint").value = csmMapValues.get("taint");
+
 }
 
 function setMap(str) {

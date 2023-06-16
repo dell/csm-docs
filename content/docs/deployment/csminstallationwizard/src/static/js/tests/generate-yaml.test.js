@@ -43,7 +43,17 @@ const CONSTANTS = {
 	PROPERTIES: ".properties",
 	HELM: "helm",
 	OPERATOR: "operator",
-	CSM_HELM_V170: "1.0.0"
+	CSM_HELM_V170: "1.0.0",
+  TAINTS: `
+  - key: "$KEY"
+    operator: "Exists"
+    effect: "NoSchedule"
+`,
+COMMENTED_TAINTS: `
+  #- key: "node-role.kubernetes.io/control-plane"
+  #  operator: "Exists"
+  #  effect: "NoSchedule"
+`
 };
 
 const testCSMMap = new Map([
@@ -75,6 +85,7 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="node-pods-node-selector" checked>
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
+            <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
         `;
 
 		const expected = {
@@ -98,6 +109,7 @@ describe("GIVEN setValues function", () => {
 			authorization: false,
 			authorizationSkipCertValidation: true,
 			certManagerEnabled: false,
+      taint: "node-role.kubernetes.io/control-plane"
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -123,6 +135,7 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="node-pods-node-selector" checked>
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
+            <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
         `;
 
 		const expected = {
@@ -146,6 +159,7 @@ describe("GIVEN setValues function", () => {
 			authorization: false,
 			authorizationSkipCertValidation: true,
 			certManagerEnabled: false,
+      taint: "node-role.kubernetes.io/control-plane"
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
