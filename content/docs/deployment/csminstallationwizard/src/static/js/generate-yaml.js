@@ -53,8 +53,8 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	var taint = document.getElementById("taint").value || '""';
 	var labels = DriverValues.nodeSelectorLabel.split(":");
 	var nodeSelector = CONSTANTS_PARAM.NODE_SELECTOR_TAB + labels[0] + ': "' + labels[1] + '"';
-	DriverValues.controllerTolerations = CONSTANTS_PARAM.COMMENTED_TAINTS.trimEnd();
-	DriverValues.nodeTolerations= CONSTANTS_PARAM.COMMENTED_TAINTS.trimEnd();
+	DriverValues.controllerTolerations = "";
+	DriverValues.nodeTolerations= "";
 	if ($("#controller-pods-node-selector").prop('checked') === true) {
 		DriverValues.controllerPodsNodeSelector = nodeSelector;
 		DriverValues.controllerTolerations = CONSTANTS_PARAM.TAINTS.replace("$KEY", taint).trimEnd();
