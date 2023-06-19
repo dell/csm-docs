@@ -7,43 +7,43 @@ weight: 1
 
 The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
-## Supported Platforms
-Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.
+## Support Matrix
+
+Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below:
 
 | Kubernetes Version         | OpenShift Version   |
 | -------------------------- | ------------------- |
 | 1.25, 1.26, 1.27           | 4.11, 4.12, 4.12 EUS |
 
-## Supported CSI Drivers
 
-| CSI Driver         | Version   | ConfigVersion  |
-| ------------------ | --------- | -------------- |
-| CSI PowerScale     | 2.5.0 +   |   v2.5.0 +     |
-| CSI PowerFlex      | 2.5.0 +   |   v2.5.0 +     |
-| CSI PowerStore     | 2.5.0 +   |   v2.5.0 +     |
-| CSI PowerMax       | 2.6.0 +   |   v2.6.0 +     |
-| CSI Unity XT       | 2.5.0 +   |   v2.5.0 +     |
+The table below lists the driver and modules versions installable with the CSM Operator:
 
-## Supported CSM Modules
+| CSM Module         | PowerFlex  |  PowerScale  |  PowerStore |  PowerMax  |  Unity XT  |
+| ------------------ | ---------- | ------------ | ----------- | ---------- | ---------- |
+| CSI Driver         | ✔ 2.5.0+   | ✔ 2.5.0+    | ✔ 2.5.0+    | ✔ 2.6.0+   | ✔ 2.6.0+  |
+| CSM Authorization  | ✔ 1.4.0+   | ✔ 1.4.0+    | ✔ 1.4.0+    | ✔ 1.4.0+   | ✔ 1.4.0+  |
+| CSM Replication    | ✔ 1.3.0+   | ✔ 1.3.0+    | ❌          | ✔ 1.3.0+   | ❌        |
+| CSM Observability  | ✔ 1.3.0+   | ✔ v1.3.0+   | ❌          | ❌         | ❌         |
+| CSM Resiliency     | ✔ 1.6.0+   | ✔ v1.6.0+   |✔ v1.6.0+    | ❌         | ❌         |
 
-| CSM Modules        | Version   | ConfigVersion  |
-| ------------------ | --------- | -------------- |
-| CSM Authorization  | 1.4.0 +   | v1.4.0 +       |
-| CSM Replication    | 1.3.0 +   | v1.3.0 +       |
-| CSM Observability  | 1.3.0 +   | v1.3.0 +       |
-| CSM Resiliency     | 1.6.0 +   | v1.6.0 +       |
-
->NOTE:
->- Replication module installation with CSM operator for PowerStore is not currently supported.
->- Observability module installation with CSM operator for PowerMax & PowerStore is not currently supported.
->- Resiliency module installation with CSM operator for Unity XT is not currently supported.
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
 
-### Manual Installation
+Once installed you will be able to deploy [drivers](drivers) and [modules](modules) from the Operator.
 
-#### Operator Installation on a cluster without OLM
+### OpenShift Installation via Operator Hub
+`dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
+
+The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the operator to:
+* _Automatic_ - If you want the operator to be automatically installed or upgraded (once an upgrade is available).
+* _Manual_ - If you want a cluster administrator to manually review and approve the `InstallPlan` for installation/upgrades.
+
+![OpenShit Operator Hub CSM install](operator_hub_install.gif)
+
+>NOTE: Dell CSM Operator is distributed as a `Certified` & `Community` versions. Both are the exact same code and supported by Dell Technologies, the only difference is that the `Certified` version is validated by RedHat. The `Certified` version often release couple of days/weeks after the `Community` version.
+
+### Manual Installation on a cluster without OLM
 
 1. Clone and checkout the required csm-operator version using 
 ```bash
@@ -65,25 +65,28 @@ kubectl get pods -n dell-csm-operator
 
 {{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-### Installation via Operator Hub
-`dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
-
-The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the operator to:
-* _Automatic_ - If you want the operator to be automatically installed or upgraded (once an upgrade is available).
-* _Manual_ - If you want a cluster administrator to manually review and approve the `InstallPlan` for installation/upgrades.
-
-### Uninstall
-#### Operator uninstallation on a cluster without OLM
+## Uninstall
+### Operator uninstallation on a cluster without OLM
 To uninstall a CSM operator, run `bash scripts/uninstall.sh`. This will uninstall the operator in `dell-csm-operator` namespace.
 
 {{< imgproc uninstall.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-### To upgrade Dell CSM Operator, perform the following steps.
+## Upgrade
+### Dell CSM Operator
 Dell CSM Operator can be upgraded in 2 ways:
 
-1.Using script (for non-OLM based installation)
+1. Using Operator Lifecycle Manager (OLM)
 
-2.Using Operator Lifecycle Manager (OLM)
+2. Using script (for non-OLM based installation)
+
+#### Using OLM
+The upgrade of the Dell CSM Operator is done via Operator Lifecycle Manager.
+
+The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role while upgrading dell-csm-operator on OpenShift. This option can be set during installation of dell-csm-operator on OpenShift via the console and can be either set to `Manual` or `Automatic`.
+- If the **`Update approval`** is set to `Automatic`, OpenShift automatically detects whenever the latest version of dell-csm-operator is available in the **`Operator hub`**, and upgrades it to the latest available version.
+- If the upgrade policy is set to `Manual`, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the **`Installed Operators`** section of the OpenShift console. Clicking on the hyperlink to `Approve` the installation would trigger the dell-csm-operator upgrade process.
+
+>NOTE: The recommended version of OLM for Upstream Kubernetes is **`v0.18.3`**.
 
 #### Using Installation Script
 1. Clone and checkout the required csm-operator version using 
@@ -93,16 +96,7 @@ git clone -b v1.2.0 https://github.com/dell/csm-operator.git
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
 
->Note: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
-
-#### Using OLM
-The upgrade of the Dell CSM Operator is done via Operator Lifecycle Manager.
-
-The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role while upgrading dell-csm-operator on OpenShift. This option can be set during installation of dell-csm-operator on OpenShift via the console and can be either set to `Manual` or `Automatic`.
-- If the **`Update approval`** is set to `Automatic`, OpenShift automatically detects whenever the latest version of dell-csm-operator is available in the **`Operator hub`**, and upgrades it to the latest available version.
-- If the upgrade policy is set to `Manual`, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the **`Installed Operators`** section of the OpenShift console. Clicking on the hyperlink to `Approve` the installation would trigger the dell-csm-operator upgrade process.
-
-**NOTE**: The recommended version of OLM for Upstream Kubernetes is **`v0.18.3`**.
+>NOTE: Dell CSM Operator would install to the 'dell-csm-operator' namespace by default.
 
 ### Upgrade driver using Dell CSM Operator:
 The CSI Drivers installed by the Dell CSM Operator can be updated like any Kubernetes resource.
@@ -134,7 +128,7 @@ The following notes explain some of the general items to take care of.
         configVersion: v2.7.0
    ```
 
-### Custom Resource Definitions
+## Custom Resource Definitions
 As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 `containerstoragemodule` CRD is installed in API Group `storage.dell.com`.
 
@@ -173,4 +167,4 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 
 **nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.
 
->**Note:** The `image` field should point to the correct image tag for version of the driver you are installing.
+>NOTE: The `image` field should point to the correct image tag for version of the driver you are installing.
