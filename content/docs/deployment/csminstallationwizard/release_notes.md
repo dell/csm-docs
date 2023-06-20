@@ -1,5 +1,5 @@
 ---
-title: CSM Installation Wizard
+title: Release Notes
 description: Release notes for CSM Installation Wizard
 ---
 
