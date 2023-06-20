@@ -21,7 +21,7 @@ kubectl get csm --all-namespaces
 ### Prerequisites
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../csidriver/troubleshooting/powerflex) for details.
 
->NOTE: That step can be skipped with OpenShift.
+>NOTE: This step can be skipped with OpenShift.
 
 #### SDC Deployment for Operator 
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
@@ -78,7 +78,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 4. To add more MDM_IP for multi-array support, run `/opt/emc/scaleio/sdc/bin/drv_cfg --add_mdm --ip 10.xx.xx.xx.xx,10.xx.xx.xx`1. Create namespace.
    Execute `kubectl create namespace vxflexos` to create the `vxflexos` namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'vxflexos'
 
->NOTE: That step can be skipped with OpenShift CoreOS nodes.
+>NOTE: This step can be skipped with OpenShift CoreOS nodes.
 
 #### Create Secret
 1. Create namespace: 

@@ -13,7 +13,7 @@ On Upstream Kubernetes clusters, ensure that to install
 
 For detailed snapshot setup procedure, [click here.](../../../snapshots/#optional-volume-snapshot-requirements)
 
->NOTE: That step can be skipped with OpenShift.
+>NOTE: This step can be skipped with OpenShift.
 
 ## Installing CSI Driver via Operator
 
