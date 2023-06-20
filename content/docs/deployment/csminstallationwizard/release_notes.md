@@ -15,5 +15,4 @@ description: Release notes for CSM Installation Wizard
 
 | Issue | Workaround |
 |-------|------------|
-| On selecting Resiliency module during the installation the generated values.yaml has the tolerations required for Resiliency  commented.| The commented tolerations in the generated values.yaml file has to be manually uncommented if Resiliency is selected. The feature request and has been created at https://github.com/dell/csm/issues/866|
-
+| Tolerations required by the Resiliency module are commented out in the generated values.yaml file when Resiliency module is selected| If Resiliency is selected, the commented tolerations in the generated values.yaml file must be manually uncommented. The issue has been created at https://github.com/dell/csm/issues/866|
