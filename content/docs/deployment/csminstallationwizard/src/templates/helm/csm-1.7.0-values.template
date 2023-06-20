@@ -14,15 +14,7 @@ csi-powerstore:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
-    tolerations:
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
-    # - key: "node-role.kubernetes.io/master"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    # - key: "node-role.kubernetes.io/control-plane"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
+    tolerations: $CONTROLLER_TOLERATIONS
     replication:
       enabled: $REPLICATION_ENABLED
       image: dellemc/dell-csi-replicator:v1.5.0
@@ -40,16 +32,7 @@ csi-powerstore:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
-    tolerations:
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
-    # - key: "node-role.kubernetes.io/master"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    # - key: "node-role.kubernetes.io/control-plane"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-
+    tolerations: $NODE_TOLERATIONS
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
     #  - key: "offline.vxflexos.storage.dell.com"
     #    operator: "Exists"
@@ -131,13 +114,7 @@ csi-powermax:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
-    tolerations:
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
-    #  - key: "node-role.kubernetes.io/master"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    #  - key: "node-role.kubernetes.io/control-plane"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
+    tolerations: $CONTROLLER_TOLERATIONS
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
@@ -196,28 +173,12 @@ csi-vxflexos:
     resizer:
       enabled: $RESIZER_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
-    tolerations:
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint 
-    # - key: "node-role.kubernetes.io/master"   
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint 
-    # - key: "node-role.kubernetes.io/control-plane"   
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
+    tolerations: $CONTROLLER_TOLERATIONS
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
-    tolerations:
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
-    # - key: "node-role.kubernetes.io/master"   
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint 
-    # - key: "node-role.kubernetes.io/control-plane"   
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
+    tolerations: $NODE_TOLERATIONS
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
     # - key: "offline.vxflexos.storage.dell.com"
     #   operator: "Exists"
@@ -305,19 +266,11 @@ csi-isilon:
       enabled: $HEALTH_MONITOR_ENABLED
 
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
-    tolerations:
-    # - key: "node-role.kubernetes.io/master"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    # - key: "node-role.kubernetes.io/control-plane"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-
+    tolerations: $CONTROLLER_TOLERATIONS
   node:
     nodeSelector: $NODE_POD_NODE_SELECTOR
     # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
-    tolerations:
+    tolerations: $NODE_TOLERATIONS
     #  - key: "node.kubernetes.io/memory-pressure"
     #    operator: "Exists"
     #    effect: "NoExecute"
@@ -327,14 +280,6 @@ csi-isilon:
     #  - key: "node.kubernetes.io/network-unavailable"
     #    operator: "Exists"
     #    effect: "NoExecute"
-    # - key: "node-role.kubernetes.io/master"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    # - key: "node-role.kubernetes.io/control-plane"
-    #   operator: "Exists"
-    #   effect: "NoSchedule"
-
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor are enabled
     #  - key: "offline.vxflexos.storage.dell.com"
     #    operator: "Exists"
@@ -413,30 +358,14 @@ csi-unity:
     resizer:
       enabled: $RESIZER_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
-    tolerations:
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
-    #  - key: "node-role.kubernetes.io/master"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    #  - key: "node-role.kubernetes.io/control-plane"
-    #    operator: "Exists"
-    #    effect: "NoSchedule"
+    tolerations: $CONTROLLER_TOLERATIONS
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR 
-    tolerations:
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
-    #  - key: "node-role.kubernetes.io/master"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-    #  - key: "node-role.kubernetes.io/control-plane"
-    #    operator: "Exists"
-    #    effect: "NoExecute"
+    tolerations: $NODE_TOLERATIONS
     #  - key: "node.kubernetes.io/memory-pressure"
     #    operator: "Exists"
     #    effect: "NoExecute"

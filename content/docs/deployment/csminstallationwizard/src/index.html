@@ -405,12 +405,24 @@
                   </div>
                   <div class="row mb-3 node-sel-attributes child-level-one">
                     <label for="node-selector-label" class="col-sm-12 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="">Node Selector Label</label>
-                    <div class="col-sm-4">
-                      <input class="form-control input-lg" type="text" id="node-selector-label" required>
+                    <div class="was-validated col-sm-4">
+                      <input class="form-control input-lg" type="text" id="node-selector-label" onchange="validateInput(validateForm, CONSTANTS)" required>
                     </div>
                     <div class="col-sm-4">
                       <div class="row mt-1">
-                        <a class="reset" id="reset-node-selector-label" onclick="resetNodeSelectorLabel(csmMap)">Reset to default</a>
+                        <a class="reset" id="reset-node-selector-label" onclick="resetNodeSelectorLabel(csmMap),validateInput(validateForm, CONSTANTS)" >Reset to default</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3 node-sel-attributes child-level-one">
+                    <label for="taint" class="col-sm-12 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="">Taint</label>
+                    <div class="was-validated col-sm-4">
+                      <input class="form-control input-lg" type="text" id="taint" onchange="validateInput(validateForm, CONSTANTS)" required>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="row mt-1">
+                        <a class="reset" id="reset-taint" onclick="resetTaint(csmMap), validateInput(validateForm, CONSTANTS)">Reset to default</a>
                       </div>
                     </div>
                   </div>

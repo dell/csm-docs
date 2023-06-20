@@ -50,13 +50,18 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodeSelectorLabel = document.getElementById("node-selector-label").value || '""';
+	var taint = document.getElementById("taint").value || '""';
 	var labels = DriverValues.nodeSelectorLabel.split(":");
 	var nodeSelector = CONSTANTS_PARAM.NODE_SELECTOR_TAB + labels[0] + ': "' + labels[1] + '"';
+	DriverValues.controllerTolerations = "";
+	DriverValues.nodeTolerations= "";
 	if ($("#controller-pods-node-selector").prop('checked') === true) {
 		DriverValues.controllerPodsNodeSelector = nodeSelector;
+		DriverValues.controllerTolerations = CONSTANTS_PARAM.TAINTS.replace("$KEY", taint).trimEnd();
 	}
 	if ($("#node-pods-node-selector").prop('checked') === true) {
 		DriverValues.nodePodsNodeSelector = nodeSelector;
+		DriverValues.nodeTolerations = CONSTANTS_PARAM.TAINTS.replace("$KEY", taint).trimEnd();
 	}
 	DriverValues.snapshot = $("#snapshot").prop('checked') ? true : false;
 	DriverValues.vgsnapshot = $("#vgsnapshot").prop('checked') ? true : false;
@@ -123,6 +128,8 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_FC_HOST_NAME", yamlTplValues.vSphereFCHostName);
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_VCENTER_HOST", yamlTplValues.vSphereVCenterHost);
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_VCENTER_CRED_SECRET", yamlTplValues.vSphereVCenterCredSecret);
+	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_TOLERATIONS", yamlTplValues.controllerTolerations);
+	yamlTpl = yamlTpl.replaceAll("$NODE_TOLERATIONS", yamlTplValues.nodeTolerations);
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
 		yamlTpl = yamlTpl.replaceAll("$POWERSTORE_ENABLED", true);
