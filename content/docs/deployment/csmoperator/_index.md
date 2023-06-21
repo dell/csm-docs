@@ -14,29 +14,21 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 | -------------------------- | ------------------- |
 | 1.25, 1.26, 1.27           | 4.11, 4.12, 4.12 EUS |
 
-## Supported CSI Drivers
+>NOTE:
+>- Authorization module installation with CSM operator with Openshift platform is not currently supported.
 
-| CSI Driver         | Version   | ConfigVersion  |
-| ------------------ | --------- | -------------- |
-| CSI PowerScale     | 2.5.0 +   |   v2.5.0 +     |
-| CSI PowerFlex      | 2.5.0 +   |   v2.5.0 +     |
-| CSI PowerStore     | 2.5.0 +   |   v2.5.0 +     |
-| CSI PowerMax       | 2.6.0 +   |   v2.6.0 +     |
-| CSI Unity XT       | 2.5.0 +   |   v2.5.0 +     |
+## Supported CSI Components
 
-## Supported CSM Modules
-
-| CSM Modules        | Version   | ConfigVersion  |
-| ------------------ | --------- | -------------- |
-| CSM Authorization  | 1.4.0 +   | v1.4.0 +       |
-| CSM Replication    | 1.3.0 +   | v1.3.0 +       |
-| CSM Observability  | 1.3.0 +   | v1.3.0 +       |
-| CSM Resiliency     | 1.6.0 +   | v1.6.0 +       |
+| CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
+| ------------------ |---------|-------------------|-----------------|-------------------|----------------|
+| CSI PowerScale     | 2.7.0   | 1.6.0             | 1.5.0           | 1.5.0             | 1.6.0          |
+| CSI PowerFlex      | 2.7.0   | 1.6.0             | 1.5.0           | 1.5.0             | 1.6.0          |
+| CSI PowerStore     | 2.7.0   | N/A               | N/A             | N/A               | 1.6.0          |
+| CSI PowerMax       | 2.7.0   | 1.6.0             | 1.5.0           | N/A               | N/A            |
+| CSI Unity XT       | 2.7.0   | N/A               | N/A             | N/A               | N/A            |
 
 >NOTE:
->- Replication module installation with CSM operator for PowerStore is not currently supported.
->- Observability module installation with CSM operator for PowerMax & PowerStore is not currently supported.
->- Resiliency module installation with CSM operator for Unity XT is not currently supported.
+>- For the different versions of CSI-drivers supporting the CSM modules, please refer to the sample files [here](https://github.com/dell/csm-operator/tree/main/samples).
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
