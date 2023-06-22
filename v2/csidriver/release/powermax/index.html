@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/csidriver/release/powermax/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" />
+<meta property="article:modified_time" content="2023-06-22T18:04:57+05:30" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Release notes for PowerMax CSI driver">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
-<meta itemprop="wordCount" content="293">
+<meta itemprop="dateModified" content="2023-06-22T18:04:57+05:30" />
+<meta itemprop="wordCount" content="247">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Release notes for PowerMax CSI driver"/>
@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.05417859ace4ee9dd83a1437dd2e9ee3.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e9497dc67d04f81a0967f6dfbf958bb7.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.05417859ace4ee9dd83a1437dd2e9ee3.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.e9497dc67d04f81a0967f6dfbf958bb7.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -624,7 +624,9 @@
 <li><a href="https://github.com/dell/csm/issues/436">Added PowerPath support.</a></li>
 </ul>
 <h3 id="fixed-issues">Fixed Issues</h3>
-<p>There are no fixed issues in this release.</p>
+<ul>
+<li><a href="https://github.com/dell/csm/issues/378">After expanding file system volume ,new size is not getting reflected inside the container</a></li>
+</ul>
 <h3 id="known-issues">Known Issues</h3>
 <table>
 <thead>
@@ -645,10 +647,6 @@
 <tr>
 <td>When a node goes down, the block volumes attached to the node cannot be attached to another node</td>
 <td>This is a known issue and has been reported at <a href="https://github.com/kubernetes-csi/external-attacher/issues/215">https://github.com/kubernetes-csi/external-attacher/issues/215</a>. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node</td>
-</tr>
-<tr>
-<td>After expanding file system volume , new size is not getting reflected inside the container</td>
-<td>This is a known issue and has been reported at <a href="https://github.com/dell/csm/issues/378">https://github.com/dell/csm/issues/378</a> . Workaround : Remount the volumes <br/> 1. Edit the replica count as 0 in application StatefulSet <br /> 2. Change the replica count as 1 for same StatefulSet.</td>
 </tr>
 </tbody>
 </table>
