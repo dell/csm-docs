@@ -53,7 +53,7 @@ vgsnapshotter:
   image: 
  
 ```
-> Note: It is recommended you set controllerCount to 1 in your values file, to avoid duplicate vgs controllers running  
+> Note: It is recommended you set controllerCount to 1 in your [values file](https://github.com/dell/csi-powerflex/blob/fea900ff9b528837714c215af0e7e340a8773e94/helm/csi-vxflexos/values.yaml#L132), to avoid duplicate vgs controllers running  
     
 To deploy CSM Volume Group Snapshotter with the driver, these changes are required:
 1. Enable CSM Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true. 
