@@ -16,7 +16,7 @@ description: Release notes for PowerMax CSI driver
 - [Added PowerPath support.](https://github.com/dell/csm/issues/436)
 
 ### Fixed Issues
-There are no fixed issues in this release.
+- [After expanding file system volume ,new size is not getting reflected inside the container](https://github.com/dell/csm/issues/378)
 
 ### Known Issues
 
@@ -25,7 +25,6 @@ There are no fixed issues in this release.
 |[Volume Attachment failure due to WWN mismatch](https://github.com/dell/csm/issues/548)| Please upgrade the driver to 2.5.0+|
 | Unable to update Host: A problem occurred modifying the host resource | This issue occurs when the nodes do not have unique hostnames or when an IP address/FQDN with same sub-domains are used as hostnames. The workaround is to use unique hostnames or FQDN with unique sub-domains|
 | When a node goes down, the block volumes attached to the node cannot be attached to another node | This is a known issue and has been reported at https://github.com/kubernetes-csi/external-attacher/issues/215. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the volumeattachment to the node that went down. <br /> Now the volume can be attached to the new node |
-| After expanding file system volume , new size is not getting reflected inside the container | This is a known issue and has been reported at https://github.com/dell/csm/issues/378 . Workaround : Remount the volumes <br/> 1. Edit the replica count as 0 in application StatefulSet <br /> 2. Change the replica count as 1 for same StatefulSet. |
 
 ### Note:
 
