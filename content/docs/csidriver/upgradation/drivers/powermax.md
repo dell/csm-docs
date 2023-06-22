@@ -57,4 +57,3 @@ You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.
 
 1. Please upgrade the Dell CSI Operator by following [here](./../operator).
 2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).
-

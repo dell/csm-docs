@@ -18,7 +18,7 @@ description: Release notes for PowerMax CSI driver
 >Replication is not supported with VMware/Vsphere virtualization support.
 
 ### Fixed Issues
-There are no fixed issues in this release.
+- [After expanding file system volume ,new size is not getting reflected inside the container](https://github.com/dell/csm/issues/378)
 
 ### Known Issues
 
