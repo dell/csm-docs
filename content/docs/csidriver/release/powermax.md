@@ -5,7 +5,7 @@ description: Release notes for PowerMax CSI driver
 
 ## Release Notes - CSI PowerMax v2.7.0
 
-{{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9 (Driver Version 2.9.0). It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
+{{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
 
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
@@ -13,7 +13,7 @@ description: Release notes for PowerMax CSI driver
 - [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
 - [Added support for PowerMax v10.0.1 array](https://github.com/dell/csm/issues/760)
 - [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [Added support for Amazom EKS](https://github.com/dell/csm/issues/825)
+- [Added support for Amazon EKS Anywhere](https://github.com/dell/csm/issues/825)
 - [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
 - [Added support for read only mount option for block volumes](https://github.com/dell/csm/issues/792)
 - [Added support for host groups for vSphere environment](https://github.com/dell/csm/issues/746)
