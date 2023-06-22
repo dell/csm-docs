@@ -16,7 +16,7 @@ description: Release notes for PowerMax CSI driver
 - [Added PowerPath support.](https://github.com/dell/csm/issues/436)
 
 ### Fixed Issues
-- [expanding file system volume](https://github.com/dell/csm/issues/378)
+- [After expanding file system volume ,new size is not getting reflected inside the container](https://github.com/dell/csm/issues/378)
 
 ### Known Issues
 
