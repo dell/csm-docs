@@ -10,7 +10,7 @@ description: Release notes for PowerFlex CSI driver
 - [OCP 4.12 support added](https://github.com/dell/csm/issues/743)
 
 ### Fixed Issues
-
+- [Fix the offline helm installation failure](https://github.com/dell/csm/issues/868)
 ### Known Issues
 
 | Issue | Workaround |
