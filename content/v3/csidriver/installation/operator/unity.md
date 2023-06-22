@@ -97,12 +97,12 @@ metadata:
   namespace: test-unity
 spec:
   driver:
-    configVersion: v2.3.0
+    configVersion: v2.4.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      image: "dellemc/csi-unity:v2.3.0"
+      image: "dellemc/csi-unity:v2.4.0"
       imagePullPolicy: IfNotPresent
     sideCars:
       - name: provisioner
@@ -210,7 +210,6 @@ kubectl edit configmap -n unity unity-config-params
   3. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
 
 ## Volume Health Monitoring
-This feature is introduced in CSI Driver for Unity XT version v2.1.0.
 
 ### Operator based installation
 

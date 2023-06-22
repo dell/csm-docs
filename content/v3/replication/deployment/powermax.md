@@ -22,11 +22,22 @@ While using any SRDF groups, ensure that they are for exclusive use by the CSI P
 * If an SRDF group is already in use by a CSI driver, don't use it for provisioning replicated volumes outside CSI provisioning workflows.
 
 There are some important limitations that apply to how CSI PowerMax driver uses SRDF groups -
-* One replicated storage group __always__ contains volumes provisioned from a single namespace
-* While using SRDF mode Async/Metro, a single SRDF group can be used to provision volumes within a single namespace. You can still create multiple storage classes using the same SRDF group for different Service Levels.
+* One replicated storage group using Async/Sync __always__ contains volumes provisioned from a single namespace.
+* While using SRDF mode Async, a single SRDF group can be used to provision volumes within a single namespace. You can still create multiple storage classes using the same SRDF group for different Service Levels.
   But all these storage classes will be restricted to provisioning volumes within a single namespace.
-* When using SRDF mode Sync, a single SRDF group can be used to provision volumes from multiple namespaces.
+* When using SRDF mode Sync/Metro, a single SRDF group can be used to provision volumes from multiple namespaces.
 
+#### Automatic creation of SRDF Groups
+CSI Driver for PowerMax supports automatic creation of SRDF Groups starting **v2.4.0** with help of **10.0** REST endpoints.
+To use this feature:
+* Remove _replication.storage.dell.com/RemoteRDFGroup_ and _replication.storage.dell.com/RDFGroup_ params from the storage classes before creating first replicated volume.
+* Driver will check next available RDF pair and use them to create volumes.
+* This enables customers to use same storage class across namespace to create volume.
+
+Limitation of Auto SRDFG:
+* For Async mode, this feature is supported for namespaces with at most 7 characters. 
+* RDF label used to map namespace with the RDF group has limit of 10 char. 3 char is used for cluster prefix to make RDFG unique across clusters.
+* For namespace with more than 7 char, use manual entry of RDF groups in storage class.
 #### In Kubernetes
 Ensure you installed CRDs and replication controller in your clusters.
 
@@ -105,8 +116,8 @@ parameters:
   replication.storage.dell.com/RemoteServiceLevel: <Remote Service Level>
   replication.storage.dell.com/RdfMode: <RdfMode>
   replication.storage.dell.com/Bias: "false"
-  replication.storage.dell.com/RdfGroup: <RdfGroup>
-  replication.storage.dell.com/RemoteRDFGroup: <RemoteRDFGroup>
+  replication.storage.dell.com/RdfGroup: <RdfGroup> # optional
+  replication.storage.dell.com/RemoteRDFGroup: <RemoteRDFGroup> # optional
   replication.storage.dell.com/remoteStorageClassName: <RemoteStorageClassName>
   replication.storage.dell.com/remoteClusterID: <RemoteClusterID>
 ```
@@ -123,8 +134,8 @@ Let's go through each parameter and what it means:
   METRO, driver does not need `RemoteStorageClassName` and `RemoteClusterID` as it supports METRO with single cluster configuration.
 * `replication.storage.dell.com/Bias` when the RdfMode is set to METRO, this parameter is required to indicate driver to use Bias or Witness.
   If set to true, the driver will configure METRO with Bias, if set to false, the driver will configure METRO with Witness.
-* `replication.storage.dell.com/RdfGroup` is the local SRDF group number, as configured.
-* `replication.storage.dell.com/RemoteRDFGroup` is the remote SRDF group number, as configured.
+* `replication.storage.dell.com/RdfGroup` is the local SRDF group number, as configured. It is optional for using Auto SRDF group by driver.
+* `replication.storage.dell.com/RemoteRDFGroup` is the remote SRDF group number, as configured. It is optional for using Auto SRDF group by driver.
 
 Let's follow up that with an example, let's assume we have two Kubernetes clusters and two PowerMax
 storage arrays:

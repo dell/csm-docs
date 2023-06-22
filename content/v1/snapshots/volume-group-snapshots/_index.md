@@ -34,6 +34,8 @@ IMPORTANT: delete previous v1aplha2 version of CRD and vgs resources created usi
 ```
 If you want to install the VGS CRD from a pre-generated yaml, you can do so with this command (run in top-level folder):
 ```
+git clone https://github.com/dell/csi-volumegroup-snapshotter.git
+cd csi-volumegroup-snapshotter
 kubectl apply -f config/crd/vgs-install.yaml
 ```
 

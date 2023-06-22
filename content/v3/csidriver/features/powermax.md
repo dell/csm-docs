@@ -103,7 +103,7 @@ spec:
 
 ## iSCSI CHAP
 
-Starting from version 1.3.0, unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
+Starting from v1.3.0, the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
 To enable CHAP authentication:
 1. Create secret `powermax-creds` with the key `chapsecret` set to the iSCSI CHAP secret. If the secret exists, delete and re-create the secret with this newly added key.
 2. Set the parameter `enableCHAP` in `my-powermax-settings.yaml` to true.
@@ -126,7 +126,7 @@ When challenged, the host initiator transmits a CHAP credential and CHAP secret 
 
 ## Custom Driver Name
 
-Starting from version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.
+Starting from version 1.3.0 driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.
 
 To use this feature, set the following values under `customDriverName` in `my-powermax-settings.yaml`.
 - Value: Set this to the custom name of the driver.
@@ -161,8 +161,6 @@ To install multiple CSI drivers, follow these steps:
 ## Volume expansion
 
 Starting in v1.4, the CSI PowerMax driver supports the expansion of Persistent Volumes (PVs). This expansion is done online, which is when the PVC is attached to any node.
-
->Note: This feature is not supported for replicated volumes.
 
 To use this feature, enable in `values.yaml`
 

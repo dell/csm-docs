@@ -88,7 +88,7 @@ Install CSI Driver for Unity XT using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.3.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
+ * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.4.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
@@ -123,6 +123,7 @@ Procedure
     | podmon.enabled | service to monitor failing jobs and notify | false | - |
     | podmon.image| pod man image name | false | - |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
+    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
     | **controller** | Allows configuration of the controller-specific parameters.| - | - |
     | controllerCount | Defines the number of csi-unity controller pods to deploy to the Kubernetes release| Yes | 2 |
     | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
@@ -169,6 +170,7 @@ Procedure
     allowRWOMultiPodAccess: false
     syncNodeInfoInterval: 5
     maxUnityVolumesPerNode: 0
+    fsGroupPolicy: ReadWriteOneFSType
     ```
    
 4. For certificate validation of Unisphere REST API calls refer [here](#certificate-validation-for-unisphere-rest-api-calls). Otherwise, create an empty secret with file `csi-unity/samples/secret/emptysecret.yaml` file by running the `kubectl create -f csi-unity/samples/secret/emptysecret.yaml` command.
@@ -250,14 +252,14 @@ Procedure
    In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster
 
     #### Volume Snapshot CRD's
-    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd) for the installation.
+    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd) for the installation.
 
     #### Volume Snapshot Controller
     The CSI external-snapshotter sidecar is split into two controllers:
     - A common snapshot controller
     - A CSI external-snapshotter sidecar
 
-    Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller) for the installation.
+    Use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller) for the installation.
 
     #### Installation example 
 
@@ -271,7 +273,7 @@ Procedure
     ```
 
     **Note**:
-    - It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+    - It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
     - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
               
@@ -398,14 +400,6 @@ If the Unisphere certificate is self-signed or if you are using an embedded Unis
 ## Volume Snapshot Class
 
 A wide set of annotated storage class manifests have been provided in the [csi-unity/samples/volumesnapshotclass/](https://github.com/dell/csi-unity/tree/main/samples/volumesnapshotclass) folder. Use these samples to create new Volume Snapshot to provision storage.
-
-### What happens to my existing Volume Snapshot Classes?
-
-*Upgrading from CSI Unity XT v2.1.0 driver*:
-The existing volume snapshot class will be retained.
-
-*Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI Unity XT to v1.6.0 or higher, before upgrading to v2.3.0.
 
 ## Storage Classes
 

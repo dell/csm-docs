@@ -17,9 +17,10 @@ The following table lists driver configuration parameters for multiple storage a
 | --------- | ----------- | -------- |-------- |
 | username | Username for accessing Unity XT system  | true | - |
 | password | Password for accessing Unity XT system  | true | - |
-| restGateway | REST API gateway HTTPS endpoint Unity XT system| true | - |
+| endpoint | REST API gateway HTTPS endpoint Unity XT system| true | - |
 | arrayId | ArrayID for Unity XT system | true | - |
-| isDefaultArray | An array having isDefaultArray=true is for backward compatibility. This parameter should occur once in the list. | true | - |
+| isDefault | An array having isDefault=true is for backward compatibility. This parameter should occur once in the list. | true | - |
+| skipCertificateValidation | Determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface | true | true | - |
 
 Ex: secret.yaml
 
@@ -97,12 +98,12 @@ metadata:
   namespace: test-unity
 spec:
   driver:
-    configVersion: v2.4.0
+    configVersion: v2.5.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      image: "dellemc/csi-unity:v2.4.0"
+      image: "dellemc/csi-unity:v2.5.0"
       imagePullPolicy: IfNotPresent
     sideCars:
       - name: provisioner

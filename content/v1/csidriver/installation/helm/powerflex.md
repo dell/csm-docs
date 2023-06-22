@@ -47,7 +47,7 @@ Verify that zero padding is enabled on the PowerFlex storage pools that will be 
 ### Install PowerFlex Storage Data Client
 
 The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver. 
-SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS), RHEL 7.9 and RHEL 8.x. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps [below](#manual-sdc-deployment).
+SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment; for Red Hat CoreOS (RHCOS), RHEL 7.9, RHEL 8.4, RHEL 8.6. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps [below](#manual-sdc-deployment).
 Refer to https://hub.docker.com/r/dellemc/sdc for supported OS versions.
 
 *NOTE:* To install CSI driver for Powerflex with automated SDC deployment, you need below two packages on worker nodes.
@@ -70,73 +70,37 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 
 
 ### (Optional) Volume Snapshot Requirements
-
-Applicable only if you decided to enable snapshot feature in `values.yaml`
-
-```yaml
-controller:
-  snapshot:
-    enabled: true
-```
-
-#### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available here: [v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd)
-
-#### Volume Snapshot Controller
-The CSI external-snapshotter sidecar is split into two controllers:
-- A common snapshot controller
-- A CSI external-snapshotter sidecar
-
-The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller)
-
-*NOTE:*
-- The manifests available on GitHub install the snapshotter image: 
-   - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
-
-#### Installation example 
-
-You can install CRDs and default snapshot controller by running following commands:
-```bash
-git clone https://github.com/kubernetes-csi/external-snapshotter/
-cd ./external-snapshotter
-git checkout release-<your-version>
-kubectl kustomize client/config/crd | kubectl create -f -
-kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
-```
-
-*NOTE:*
-- When using Kubernetes it is recommended to use 6.1.x version of snapshotter/snapshot-controller.
-- The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
+  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.5.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
-2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace vxflexos` to create a new one.
+2. A namespace for the driver is expected prior to running the command below. If one is not created already, you can run `kubectl create namespace vxflexos` to create a new one. 
+Note that the namespace can be any user-defined name that follows the conventions for namespaces outlined by Kubernetes. In this example we assume that the namespace is 'vxflexos'
 
-3. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the `scripts` directory. This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the values for these parameters as they must be entered into `samples/config.yaml`.
+3. Collect information from the PowerFlex SDC by executing the `get_vxflexos_info.sh` script located in the `scripts` directory. This script shows the _VxFlex OS system ID_ and _MDM IP_ addresses. Make a note of the values for these parameters as they must be entered into `samples/secret.yaml`.
 
-4. Prepare `samples/config.yaml` for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.
+4. Prepare `samples/secret.yaml` for driver configuration. The following table lists driver configuration parameters for multiple storage arrays.
 
     | Parameter | Description                                                  | Required | Default |
     | --------- | ------------------------------------------------------------ | -------- | ------- |
     | username  | Username for accessing PowerFlex system. If authorization is enabled, username will be ignored.                       | true     | -       |
     | password  | Password for accessing PowerFlex system. If authorization is enabled, password will be ignored.                     | true     | -       |
-    | systemID  | System name/ID of PowerFlex system.                           | true     | -       |
+    | systemID  | PowerFlex system name or ID.                           | true     | -       |
     | allSystemNames | List of previous names of powerflex array if used for PV create     | false    | -       |
     | endpoint  | REST API gateway HTTPS endpoint/PowerFlex Manager public IP for PowerFlex system. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on          | true     | -       |
     | skipCertificateValidation  | Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface. | true     | true    |
     | isDefault | An array having isDefault=true is for backward compatibility. This parameter should occur once in the list. | false    | false   |
     | mdm       | mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
 
-    Example: `samples/config.yaml`
+    Example: `samples/secret.yaml`
 
 ```yaml
 - username: "admin"
   password: "Password123"
-  systemID: "ID2"
+  systemID: "2b11bb111111bb1b"
   endpoint: "https://127.0.0.2"
   skipCertificateValidation: true 
   isDefault: true 
@@ -144,13 +108,13 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
  *NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.* 
 
-After editing the file, run the below command to create a secret called `vxflexos-config`:
+After editing the file, run the below command to create a secret called `vxflexos-config`. This assumes `vxflexos` is release name, but it can be modified during [install](/#install-the-driver):
     
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml`
+    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml`
 
 Use the below command to replace or update the secret:
 
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/config.yaml -o yaml --dry-run=client | kubectl replace -f -`
+    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
 
 *NOTE:* 
 
@@ -160,7 +124,7 @@ Use the below command to replace or update the secret:
 - "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
 - Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
 - If the user is using complex K8s version like "v1.21.3-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
-           kubeVersion: ">= 1.21.0-0 < 1.26.0-0"
+           kubeVersion: ">= 1.21.0-0 < 1.27.0-0"
 	   
 	   
 5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features.  
@@ -176,9 +140,9 @@ Use the below command to replace or update the secret:
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.5.0 |
+| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.6.0 |
 | driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
-| powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | No | dellemc/sdc:3.6 |
+| powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | dellemc/sdc:3.6.0.6 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
 | logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
 | logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
@@ -203,6 +167,10 @@ Use the below command to replace or update the secret:
 | healthMonitor.enabled | Enable/Disable health monitor of CSI volumes- volume usage, volume condition | No | false |
 | nodeSelector | Defines what nodes would be selected for pods of node daemonset. Leave as blank to use all nodes. | Yes | " " |
 | tolerations | Defines tolerations that would be applied to node daemonset. Leave as blank to install node driver only on worker nodes. | Yes | " " |
+| **renameSDC** | This section allows the rename operation for SDC. | - | - |
+| enabled | A boolean that enable/disable rename SDC feature. | No | false |
+| prefix | Defines a string for the prefix of the SDC. | No | " " |
+| approveSDC.enabled | A boolean that enable/disable SDC approval feature. | No | false |
 | **monitor**              | This section allows the configuration of the SDC monitoring pod.                                                                                                                                                                                                                                                                                                                                                  | -        | -       |
 | enabled                  | Set to enable the usage of the monitoring pod.                                                                                                                                                                                                                                                                                                                                                                | Yes     | false |
 | hostNetwork              | Set whether the monitor pod should run on the host network or not.                                                                                                                                                                                                                                                                                                                                            | Yes     | true |
@@ -220,7 +188,8 @@ Use the below command to replace or update the secret:
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
 
 
-10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
+10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default. 
+Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
 
  *NOTE:*
 - For detailed instructions on how to run the install scripts, refer to the README.md  in the dell-csi-helm-installer folder.
