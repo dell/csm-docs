@@ -15,17 +15,23 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 | -------------------------- | ------------------- |
 | 1.25, 1.26, 1.27           | 4.11, 4.12, 4.12 EUS |
 
+>NOTE:
+>- Authorization module is only supported on Kubernetes platforms.
+
+## Supported CSM Components
 
 The table below lists the driver and modules versions installable with the CSM Operator:
 
-| CSM Module         | PowerFlex  |  PowerScale  |  PowerStore |  PowerMax  |  Unity XT  |
-| ------------------ | ---------- | ------------ | ----------- | ---------- | ---------- |
-| CSI Driver         | ✔ 2.5.0+   | ✔ 2.5.0+    | ✔ 2.5.0+    | ✔ 2.6.0+   | ✔ 2.6.0+  |
-| CSM Authorization  | ✔ 1.4.0+   | ✔ 1.4.0+    | ✔ 1.4.0+    | ✔ 1.4.0+   | ✔ 1.4.0+  |
-| CSM Replication    | ✔ 1.3.0+   | ✔ 1.3.0+    | ❌          | ✔ 1.3.0+   | ❌        |
-| CSM Observability  | ✔ 1.3.0+   | ✔ v1.3.0+   | ❌          | ❌         | ❌         |
-| CSM Resiliency     | ✔ 1.6.0+   | ✔ v1.6.0+   |✔ v1.6.0+    | ❌         | ❌         |
+| CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
+| ------------------ |---------|-------------------|-----------------|-------------------|----------------|
+| CSI PowerScale     | 2.7.0   | 1.6.0             | 1.5.0           | 1.5.0             | 1.6.0          |
+| CSI PowerFlex      | 2.7.0   | 1.6.0             | 1.5.0           | 1.5.0             | 1.6.0          |
+| CSI PowerStore     | 2.7.0   | N/A               | N/A             | N/A               | 1.6.0          |
+| CSI PowerMax       | 2.7.0   | 1.6.0             | 1.5.0           | N/A               | N/A            |
+| CSI Unity XT       | 2.7.0   | N/A               | N/A             | N/A               | N/A            |
 
+>NOTE:
+>- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples) for prior versions of CSM.
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
