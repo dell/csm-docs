@@ -13,7 +13,6 @@ description: Release notes for Dell CSI Operator
 - [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
 - [Allow user to set Quota limit parameters from the PVC request in CSI PowerScale](https://github.com/dell/csm/issues/742)
 
-
 >**Note:** There will be a delay in certification of Dell CSI Operator 1.12.0 and it will not be available for download from the Red Hat OpenShift certified catalog right away. The operator will still be available for download from the Red Hat OpenShift Community Catalog soon after the 1.12.0 release.
 
 ### Fixed Issues
