@@ -101,7 +101,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e9497dc67d04f81a0967f6dfbf958bb7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.e9497dc67d04f81a0967f6dfbf958bb7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -682,7 +682,10 @@ vgsnapshotter:
   enabled: false
   image: 
  
-</code></pre><p>To deploy CSM Volume Group Snapshotter with the driver, these changes are required:</p>
+</code></pre><blockquote>
+<p>Note: It is recommended you set controllerCount to 1 in your <a href="https://github.com/dell/csi-powerflex/blob/fea900ff9b528837714c215af0e7e340a8773e94/helm/csi-vxflexos/values.yaml#L132">values file</a>, to avoid duplicate vgs controllers running</p>
+</blockquote>
+<p>To deploy CSM Volume Group Snapshotter with the driver, these changes are required:</p>
 <ol>
 <li>Enable CSM Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true.</li>
 <li>In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on DockerHub, <code>dellemc/csi-volumegroup-snapshotter:v1.2.0</code>).</li>
