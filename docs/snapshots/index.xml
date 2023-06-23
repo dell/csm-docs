@@ -54,7 +54,10 @@ vgsnapshotter:
   enabled: false
   image: 
  
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To deploy CSM Volume Group Snapshotter with the driver, these changes are required:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: It is recommended you set controllerCount to 1 in your &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/fea900ff9b528837714c215af0e7e340a8773e94/helm/csi-vxflexos/values.yaml#L132&#34;&gt;values file&lt;/a&gt;, to avoid duplicate vgs controllers running&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To deploy CSM Volume Group Snapshotter with the driver, these changes are required:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Enable CSM Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true.&lt;/li&gt;
 &lt;li&gt;In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on DockerHub, &lt;code&gt;dellemc/csi-volumegroup-snapshotter:v1.2.0&lt;/code&gt;).&lt;/li&gt;
