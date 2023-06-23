@@ -65,7 +65,7 @@ The resulting offline bundle file can be copied to another machine, if necessary
 
 For example, here is the output of a request to build an offline bundle for the Dell CSI Operator:
 ```bash
-git clone -b v1.11.0 https://github.com/dell/dell-csi-operator.git
+git clone -b v1.12.0 https://github.com/dell/dell-csi-operator.git
 ```
 ```bash
 cd dell-csi-operator/scripts
@@ -93,7 +93,7 @@ cd dell-csi-operator/scripts
    dellemc/csi-vxflexos:v2.5.0
    dellemc/csi-vxflexos:v2.6.0
    dellemc/csi-vxflexos:v2.7.0
-   dellemc/dell-csi-operator:v1.11.0
+   dellemc/dell-csi-operator:v1.12.0
    dellemc/sdc:3.6
    dellemc/sdc:3.6.0.6
    docker.io/busybox:1.32.0
@@ -207,7 +207,7 @@ Preparing a offline bundle for installation
 *
 * Tagging and pushing images
 
-   dellemc/dell-csi-operator:v1.11.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.11.0
+   dellemc/dell-csi-operator:v1.12.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.12.0
    dellemc/csi-isilon:v2.3.0 -> localregistry:5000/csi-operator/csi-isilon:v2.3.0
    dellemc/csi-isilon:v2.4.0 -> localregistry:5000/csi-operator/csi-isilon:v2.4.0
    dellemc/csi-isilon:v2.5.0 -> localregistry:5000/csi-operator/csi-isilon:v2.5.0
@@ -233,7 +233,7 @@ Preparing a offline bundle for installation
 *
 * Preparing operator files within /root/dell-csi-operator-bundle
 
-   changing: dellemc/dell-csi-operator:v1.11.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.11.0
+   changing: dellemc/dell-csi-operator:v1.12.0 -> localregistry:5000/csi-operator/dell-csi-operator:v1.12.0
    changing: dellemc/csi-isilon:v2.3.0 -> localregistry:5000/csi-operator/csi-isilon:v2.3.0
    changing: dellemc/csi-isilon:v2.4.0 -> localregistry:5000/csi-operator/csi-isilon:v2.4.0
    changing: dellemc/csi-isilon:v2.5.0 -> localregistry:5000/csi-operator/csi-isilon:v2.5.0

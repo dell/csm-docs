@@ -10,7 +10,7 @@ description: Release notes for Dell CSI Operator
 - [Added support to Kubernetes 1.27](https://github.com/dell/csm/issues/761)
 - [Added support to Openshift 4.12](https://github.com/dell/csm/issues/571)
 - [Added Storage Capacity Tracking support for CSI-PowerScale](https://github.com/dell/csm/issues/824)
-- [Migrate image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
+- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
 - [Allow user to set Quota limit parameters from the PVC request in CSI PowerScale](https://github.com/dell/csm/issues/742)
 
 
