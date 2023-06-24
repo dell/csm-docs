@@ -14,6 +14,8 @@ For the complete discussion and rationale, you can read the [pod-safety design p
 
 For more background on the forced deletion of Pods in a StatefulSet, please visit [Force Delete StatefulSet Pods](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#:~:text=In%20normal%20operation%20of%20a,1%20are%20alive%20and%20ready).
 
+CSM for Resiliency and [Non graceful node shutdown](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/2268-non-graceful-shutdown) are mutually exclusive. One shall use either CSM for Resiliency or Non graceful node shutdown feature provided by Kubernetes.
+
 ## CSM for Resiliency High-Level Description
 
 CSM for Resiliency is designed to make Kubernetes Applications, including those that utilize persistent storage, more resilient to various failures. The first component of the Resiliency module is a pod monitor that is specifically designed to protect stateful applications from various failures. It is not a standalone application, but rather is deployed as a _sidecar_ to CSI (Container Storage Interface) drivers, in both the driver's controller pods and the driver's node pods. Deploying CSM for Resiliency as a sidecar allows it to make direct requests to the driver through the Unix domain socket that Kubernetes sidecars use to make CSI requests.
@@ -29,9 +31,9 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability                              | PowerScale | Unity XT | PowerStore | PowerFlex | PowerMax |
 | --------------------------------------- | :--------: | :------: | :--------: | :-------: | :------: |
-| Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | yes  | yes | no | yes | no |
-| Cleanup pod artifacts from failed nodes | yes         | yes   | no         | yes       | no       |
-| Revoke PV access from failed nodes      | yes         | yes   | no         | yes       | no       |
+| Detect pod failures when: Node failure, K8S Control Plane Network failure, K8S Control Plane failure, Array I/O Network failure | yes  | yes | yes | yes | no |
+| Cleanup pod artifacts from failed nodes | yes         | yes   | yes         | yes       | no       |
+| Revoke PV access from failed nodes      | yes         | yes   | yes         | yes       | no       |
 {{</table>}}
 
 ## Supported Operating Systems/Container Orchestrator Platforms
@@ -39,8 +41,8 @@ CSM for Resiliency provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS            | Supported Versions |
 | ----------------- | :----------------: |
-| Kubernetes        | 1.22, 1.23, 1.24   |
-| Red Hat OpenShift |     4.9, 4.10      |
+| Kubernetes        | 1.25, 1.26, 1.27   |
+| Red Hat OpenShift | 4.10, 4.11, 4.12   |
 | RHEL              |     7.x, 8.x       |
 | CentOS            |     7.8, 7.9       |
 {{</table>}}
@@ -48,9 +50,9 @@ CSM for Resiliency provides the following capabilities:
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex    | Unity XT                          | PowerScale                              |
-| ------------- | :----------: | :-------------------------------: | :-------------------------------------: |
-| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 |
+|               | PowerFlex    | Unity XT                          | PowerScale                              | PowerStore                    |
+| ------------- | :----------: | :-------------------------------: | :-------------------------------------: | :---------------------------: |
+| Storage Array | 3.5.x, 3.6.x | 5.0.5, 5.0.6, 5.0.7, 5.1.0, 5.1.2 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 1.0.x, 2.0.x, 2.1.x, 3.0, 3.2 |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -62,6 +64,7 @@ CSM for Resiliency supports the following CSI drivers and versions.
 | CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0.0 + |
 | CSI Driver for Dell Unity XT  | [csi-unity](https://github.com/dell/csi-unity)         | v2.0.0 + |
 | CSI Driver for Dell PowerScale  | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.3.0 + |
+| CSI Driver for Dell PowerStore  | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.6.0 + |
 {{</table>}}
 
 ### PowerFlex Support
@@ -88,6 +91,14 @@ All three deployment options, Unity XT, UnityVSA, and Unity-based VxBlock, enjoy
 ### PowerScale Support
 
 PowerScale is a highly scalable NFS array that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerScale leverages the following PowerScale features:
+
+* Detection of Array I/O Network Connectivity status changes.
+* A robust mechanism to detect if Nodes are actively doing I/O to volumes.
+* Low latency REST API supports fast CSI provisioning and de-provisioning operations.
+
+### PowerStore Support
+
+PowerStore is a highly scalable array that is very well suited to Kubernetes deployments. The CSM for Resiliency support for PowerStore leverages the following PowerStore features:
 
 * Detection of Array I/O Network Connectivity status changes.
 * A robust mechanism to detect if Nodes are actively doing I/O to volumes.

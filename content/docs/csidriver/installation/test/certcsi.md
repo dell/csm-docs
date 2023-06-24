@@ -39,7 +39,10 @@ To run cert-csi, you have to point your environment to a kube cluster. This allo
 For example if you press TAB while passing --storageclass (or --sc) argument, the tool will parse all existing Storage Classes from your cluster and suggest them as an input for you. 
 
 > To run a docker container your command should look something like this
-> `docker run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi <usual program arguments>`
+> ```bash
+>
+>   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi <usual program arguments>
+>   ```
 
 ## Driver Certification 
 
@@ -146,6 +149,7 @@ cert-csi functional-test multi-attach-vol --sc <storage-class>
 
 To run ephemeral volume test suite, run the command:
 ```bash
+
 cert-csi functional-test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
 --pods : Number of pods to create 
 --pod-name : To create pods with custom name
@@ -162,6 +166,7 @@ size=5Gi
 
 To run storage capacity tracking test suite, run the command:
 ```bash
+
 cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace> --pi <poll-interval>
 Optional Params:
 --vs : volume size to be created
@@ -206,12 +211,15 @@ Tabular Report example
 
 ## Kubernetes End-To-End Tests
 All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..
-` --driver-config <path of driver config file> and --version "v1.25.0" `
+```bash
+ --driver-config <path of driver config file> and --version "v1.25.0" 
+ ```
 
 ### Running kubernetes end-to-end tests
 
 To run kubernetes end-to-end tests, run the command:
 ```bash
+
 cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config>  --focus <regx pattern to focus Ex: "External.Storage.*" >  --timeout <timeout Ex: "2h"> --version < version of k8s Ex: "v1.25.0"> --skip-tests <skip these steps mentioned in file> --skip <regx pattern to skip tests Ex:"Generic Ephemeral-volume|(block volmode)">
 ```
 
@@ -227,15 +235,20 @@ cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config> 
 
 ### Example Commands
 -  ```bash
+
    cert-csi k8s-e2e --config "/root/.kube/config" --driver-config "/root/e2e_config/config-nfs.yaml"  --focus "External.Storage.*"  --timeout "2h" --version "v1.25.0" --skip-tests "/root/e2e_config/ignore.yaml"
    ```
 -  ```bash
+
    ./cert-csi k8s-e2e --config "/root/.kube/config" --driver-config "/root/e2e_config/config-iscsi.yaml" --focus "External.Storage.*"  --timeout "2h" --version "v1.25.0" --focus-file "capacity.go"
    ```
 
 ## Performance Tests
 
-All performance tests require that you provide a storage class that you want to test. You can provide multiple storage classes in one command. For example, `... --sc <sc1> --sc <sc2> ...`
+All performance tests require that you provide a storage class that you want to test. You can provide multiple storage classes in one command. For example, 
+```bash
+... --sc <sc1> --sc <sc2> ...
+```
 
 ### Running Individual Suites 
 #### Running Volume Creation test suite
@@ -280,6 +293,7 @@ To run multi-attach volume test suite, run the command:
 cert-csi test multi-attach-vol --sc <storage class> --podNum 3
 ```
 ```bash
+
 cert-csi test multi-attach-vol --sc <storage class> --podNum 3 --block # to use raw block volumes
 ```
 
@@ -287,6 +301,7 @@ cert-csi test multi-attach-vol --sc <storage class> --podNum 3 --block # to use 
 
 To run replication test suite, run the command:
 ```bash
+
 cert-csi test replication --sc <storage class> --pn 1 --vn 5 --vsc <snapshot class> 
 ```
 
@@ -301,6 +316,7 @@ cert-csi test clone-volume --sc <storage class> --pn 1 --vn 5
 
 To run volume expansion test, run the command:
 ```bash
+
 cert-csi test expansion --sc <storage class> --pn 1 --vn 5 --iSize 8Gi --expSize 16Gi
 
 cert-csi test expansion --sc <storage class> --pn 1 --vn 5 # `iSize` and `expSize` default to 3Gi and 6Gi respectively
@@ -319,6 +335,7 @@ cert-csi test blocksnap --sc <storageClass> --vsc <snapshotclass>
 
 To run longevity test suite, run the command:
 ```bash
+
 cert-csi test <any of previous tests> --sc <storage class> --longevity <number of iterations>
 ```
 
@@ -340,6 +357,7 @@ Report types:
 
 To specify test report folder path, use --path option as follows:
 ```bash
+
 cert-csi --db <path/to/.db> report --testrun <test-run-name> --path <path-to-folder>
 Options:
 --path: path to folder where reports will be created (if not specified ~/.cert-csi/ will be used)
@@ -386,6 +404,7 @@ cert-csi test <test suite> --sc <storage class> <...> --ns <driver namespace>
 
 To run tests with custom hooks, run the command:
 ```bash
+
 cert-csi test <test suite> --sc <storage class> <...> --sh ./hooks/start.sh --rh ./hooks/ready.sh --fh ./hooks/finish.sh
 ```
 

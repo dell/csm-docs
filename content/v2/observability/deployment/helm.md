@@ -17,7 +17,7 @@ The Container Storage Modules (CSM) for Observability Helm chart bootstraps an O
 **Steps**
 1. Create a namespace where you want to install the module `kubectl create namespace karavi`
 
-2. Install cert-manager CRDs `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml`
+2. Install cert-manager CRDs `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml`
 
 3. Add the Dell Helm Charts repo `helm repo add dell https://dell.github.io/helm-charts`
 

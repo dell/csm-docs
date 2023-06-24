@@ -144,7 +144,13 @@ pmtu3       podmontest-0   1/1     Running   0          3m6s
 ...
  ```
 
- CSM for Resiliency may also generate events if it is unable to cleanup a pod for some reason. For example, it may not clean up a pod because the pod is still doing I/O to the array.
+ CSM for Resiliency may also generate events if it is unable to clean up a pod for some reason. For example, it may not clean up a pod because the pod is still doing I/O to the array.
+
+ Similarly, the label selector for csi-powerscale and csi-unity would be as shown respectively.
+ ```
+ labelSelector: {map[podmon.dellemc.com/driver:csi-isilon]
+ labelSelector: {map[podmon.dellemc.com/driver:csi-unity]
+ ```
 
  #### Important
  Before putting an application into production that relies on CSM for Resiliency monitoring, it is important to do a few test failovers first. To do this take the node that is running the pod offline for at least 2-3 minutes. Verify that there is an event message similar to the one above is logged, and that the pod recovers and restarts normally with no loss of data. (Note that if the node is running many CSM for Resiliency protected pods, the node may need to be down longer for CSM for Resiliency to have time to evacuate all the protected pods.)

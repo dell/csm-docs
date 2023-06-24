@@ -47,6 +47,7 @@ Set up the environment as follows:
 - Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
 
 - Add initiators from all ESX/ESXis to a host(initiator group) where the cluster is hosted.
+- Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same. 
 
 #### Linux multipathing requirements
 
@@ -136,8 +137,6 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_VSPHERE_PORTGROUP | Existing portGroup that driver will use for vSphere | Yes | "" |
    | X_CSI_VSPHERE_HOSTGROUP | Existing host(initiator group) that driver will use for vSphere | Yes | "" |
    | X_CSI_VCenter_HOST | URL/endpoint of the vCenter where all the ESX are present | Yes | "" |
-   | X_CSI_VCenter_USERNAME | Username from the vCenter credentials | Yes | "" |   
-   | X_CSI_VCenter_PWD | Password from the vCenter credentials | Yes | "" |
    | ***Node parameters***|
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input. | No | false |
@@ -147,7 +146,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 **Note** - If CSI driver is getting installed using OCP UI , create these two configmaps manually using the command `oc create -f <configfilename>`
 1. Configmap name powermax-config-params
      ```yaml
-	apiVersion: v1
+	    apiVersion: v1
         kind: ConfigMap
         metadata:
           name: powermax-config-params
@@ -195,10 +194,12 @@ Deployment and ClusterIP service will be created by dell-csi-operator.
 Create a TLS secret that holds an SSL certificate and a private key which is required by the reverse proxy server. 
 Use a tool such as `openssl` to generate this secret using the example below:
 
-```
-    openssl genrsa -out tls.key 2048
-    openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
-    kubectl create secret -n powermax tls revproxy-certs --cert=tls.crt --key=tls.key
+```bash
+openssl genrsa -out tls.key 2048
+openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
+kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
+kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --
+key=tls.key
 ```
 
 #### Set the following parameters in the CSI PowerMaxReverseProxy Spec
@@ -301,188 +302,10 @@ To update the log level dynamically user has to edit the ConfigMap `powermax-con
 ```
 kubectl edit configmap -n powermax powermax-config-params
 ```  
-###  Sample  CRD file for  powermax   
+###  Sample  CRD file for  powermax  
+You can find the sample CRD file [here](https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml) 
 
-``` yaml
-apiVersion: storage.dell.com/v1
-kind: CSIPowerMax
-metadata:
-  name: test-powermax
-  namespace: test-powermax
-spec:
-  driver:
-    # Config version for CSI PowerMax v2.5.0 driver
-    configVersion: v2.5.0
-    # replica: Define the number of PowerMax controller nodes
-    # to deploy to the Kubernetes release
-    # Allowed values: n, where n > 0
-    # Default value: None
-    replicas: 2
-    dnsPolicy: ClusterFirstWithHostNet
-    forceUpdate: false
-    common:
-      # Image for CSI PowerMax driver v2.5.0
-      image: dellemc/csi-powermax:v2.5.0
-      # imagePullPolicy: Policy to determine if the image should be pulled prior to starting the container.
-      # Allowed values:
-      #  Always: Always pull the image.
-      #  IfNotPresent: Only pull the image if it does not already exist on the node.
-      #  Never: Never pull the image.
-      # Default value: None
-      imagePullPolicy: IfNotPresent
-      envs:
-        # X_CSI_MANAGED_ARRAYS: Serial ID of the arrays that will be used for provisioning
-        # Default value: None
-        # Examples: "000000000001", "000000000002"
-        - name: X_CSI_MANAGED_ARRAYS
-          value: "000000000000,000000000001"
-        # X_CSI_POWERMAX_ENDPOINT: Address of the Unisphere server that is managing the PowerMax arrays
-        # Default value: None
-        # Example: https://0.0.0.1:8443
-        - name: X_CSI_POWERMAX_ENDPOINT
-          value: "https://0.0.0.0:8443/"
-        # X_CSI_K8S_CLUSTER_PREFIX: Define a prefix that is appended onto
-        # all resources created in the Array
-        # This should be unique per K8s/CSI deployment
-        # maximum length of this value is 3 characters
-        # Default value: None
-        # Examples: "XYZ", "EMC"
-        - name: X_CSI_K8S_CLUSTER_PREFIX
-          value: "XYZ"
-        # X_CSI_POWERMAX_PORTGROUPS: Define the set of existing port groups that the driver will use.
-        # It is a comma separated list of portgroup names.
-        # Required only in case of iSCSI port groups
-        # Allowed values: iSCSI Port Group names
-        # Default value: None
-        # Examples: "pg1", "pg1, pg2"
-        - name: "X_CSI_POWERMAX_PORTGROUPS"
-          value: ""
-        # "X_CSI_TRANSPORT_PROTOCOL" can be "FC" or "FIBRE" for fibrechannel,
-        # "ISCSI" for iSCSI, or "" for autoselection.
-        # Allowed values:
-        #   "FC"    - Fiber Channel protocol
-        #   "FIBER" - Fiber Channel protocol
-        #   "ISCSI" - iSCSI protocol
-        #   ""      - Automatic selection of transport protocol
-        # Default value: "" <empty>
-        - name: "X_CSI_TRANSPORT_PROTOCOL"
-          value: ""
-        # X_CSI_POWERMAX_PROXY_SERVICE_NAME: Refers to the name of the proxy service in kubernetes
-        # Allowed values: "powermax-reverseproxy"
-        # default values: "powermax-reverseproxy" 
-        - name: "X_CSI_POWERMAX_PROXY_SERVICE_NAME"
-          value: "powermax-reverseproxy"
-        # X_CSI_GRPC_MAX_THREADS: Defines the maximum number of concurrent grpc requests.
-        # Set this value to a higher number (max 50) if you are using the proxy
-        # Allowed values: n, where n > 4
-        # default values: None
-        - name: "X_CSI_GRPC_MAX_THREADS"
-          value: "4"
-
-    sideCars:
-      # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
-      # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED to "true" for controller plugin.
-      # Also set the env variable node.envs.X_CSI_HEALTH_MONITOR_ENABLED to "true" for node plugin.
-      #- name: external-health-monitor
-      #  args: ["--monitor-interval=300s"]
-
-    controller:
-      envs:
-        # X_CSI_HEALTH_MONITOR_ENABLED: Determines if the controller plugin will monitor health of CSI volumes- volume status, volume condition
-        # Install the 'external-health-monitor' sidecar accordingly.
-        # Allowed values:
-        #   true: enable checking of health condition of CSI volumes
-        #   false: disable checking of health condition of CSI volumes
-        # Default value: false
-        - name: X_CSI_HEALTH_MONITOR_ENABLED
-          value: "false"
-    node:
-      envs:
-        # X_CSI_POWERMAX_ISCSI_ENABLE_CHAP: Determine if the node plugin is going to configure
-        # ISCSI node databases on the nodes with the CHAP credentials
-        # If enabled, the CHAP secret must be provided in the credentials secret
-        # and set to the key "chapsecret"
-        # Allowed values:
-        #   "true"  - CHAP is enabled
-        #   "false" - CHAP is disabled
-        # Default value: "false"
-        - name: "X_CSI_POWERMAX_ISCSI_ENABLE_CHAP"
-          value: "false"
-        # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin- volume usage, volume condition
-        # Allowed values:
-        #   true: enable checking of health condition of CSI volumes
-        #   false: disable checking of health condition of CSI volumes
-        # Default value: false
-        - name: X_CSI_HEALTH_MONITOR_ENABLED
-          value: "false"
-        # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
-        # if enabled, user can create custom topology keys by editing node-topology-config configmap.
-        # Allowed values:
-        #   true: enable the filtration based on config map
-        #   false: disable the filtration based on config map
-        # Default value: false
-        - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
-          value: "false"
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: powermax-config-params
-  namespace: test-powermax
-data:
-  driver-config-params.yaml: |
-    CSI_LOG_LEVEL: "debug"
-    CSI_LOG_FORMAT: "JSON"
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: node-topology-config
-  namespace: test-powermax
-data:
-  topologyConfig.yaml: |
-    # allowedConnections contains a list of (node, array and protocol) info for user allowed configuration
-    # For any given storage array ID and protocol on a Node, topology keys will be created for just those pair and
-    # every other configuration is ignored
-    # Please refer to the doc website about a detailed explanation of each configuration parameter
-    # and the various possible inputs
-    allowedConnections:
-      # nodeName: Name of the node on which user wants to apply given rules
-      # Allowed values:
-      # nodeName - name of a specific node
-      # * -  all the nodes
-      # Examples: "node1", "*"
-      - nodeName: "node1"
-        # rules is a list of 'StorageArrayID:TransportProtocol' pair. ':' is required between both value
-        # Allowed values:
-        # StorageArrayID:
-        #   - SymmetrixID : for specific storage array
-        #   - "*" :- for all the arrays connected to the node
-        # TransportProtocol:
-        #   - FC : Fibre Channel protocol
-        #   - ISCSI : iSCSI protocol
-        #   - "*" - for all the possible Transport Protocol
-        # Examples: "000000000001:FC", "000000000002:*", "*:FC", "*:*"
-        rules:
-          - "000000000001:FC"
-          - "000000000002:FC"
-      - nodeName: "*"
-        rules:
-          - "000000000002:FC"
-    # deniedConnections contains a list of (node, array and protocol) info for denied configurations by user
-    # For any given storage array ID and protocol on a Node, topology keys will be created for every other configuration but
-    # not these input pairs
-    deniedConnections:
-      - nodeName: "node2"
-        rules:
-          - "000000000002:*"
-      - nodeName: "node3"
-        rules:
-          - "*:*"
-```
-
-
-Note: 
+>Note: 
  - `Kubelet config dir path` is not yet configurable in case of Operator based driver installation.
  - Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.
 
@@ -582,19 +405,25 @@ To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver man
         # Default value: "" <empty>
         - name: "X_CSI_VSPHERE_HOSTGROUP"
           value: ""
-        # X_CSI_VCenter_HOST: URL/endpoint of the vCenter where all the ESX are present
-        # Allowed value: valid vCenter host endpoint
-        # Default value: "" <empty>
-        - name: "X_CSI_VCenter_HOST"
-          value: ""
-        # X_CSI_VCenter_USERNAME: username from the vCenter credentials
-        # Allowed value: valid vCenter host username
-        # Default value: "" <empty>
-        - name: "X_CSI_VCenter_USERNAME"
-          value: ""
-        # X_CSI_VCenter_PWD: password from the vCenter credentials
-        # Allowed value: valid vCenter host password
-        # Default value: "" <empty>
-        - name: "X_CSI_VCenter_PWD"
-          value: ""
 ```
+Edit the section in the driver manifest having the sample for the following `Secret` with required values.
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vcenter-creds
+  # Set driver namespace
+  namespace: test-powermax
+type: Opaque
+data:
+  # set username to the base64 encoded username
+  username: YWRtaW4=
+  # set password to the base64 encoded password
+  password: YWRtaW4=
+```
+These values can be obtained using base64 encoding as described in the following example:
+```bash
+echo -n "myusername" | base64
+echo -n "mypassword" | base64
+```
+where *myusername* and *mypassword* are credentials for a user with vCenter privileges.

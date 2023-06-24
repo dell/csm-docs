@@ -3,18 +3,19 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.6.0
+## Release Notes - CSI Unity XT v2.7.0
 
 ### New Features/Changes
 
-- [Added support to Kubernetes 1.26](https://github.com/dell/csm/issues/597)
-- [Added support for MKE 3.6](https://github.com/dell/csm/issues/672)
-- [Added support for RKE 1.4.1](https://github.com/dell/csm/issues/670)
-- [Added support for SLES SP4](https://github.com/dell/csm/issues/695)
+- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
+- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
+- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
+- [Added support for K3s on Debian OS](https://github.com/dell/csm/issues/798)
+- [Added support for Unisphere 5.3.0 array](https://github.com/dell/csm/issues/842)
 
 ### Fixed Issues
 
-- [PVC fails to resize with message "Invalid value 0; must be greater than zero"](https://github.com/dell/csm/issues/507)
+There are no fixed issues in this release.
 
 
 ### Known Issues
@@ -25,7 +26,7 @@ description: Release notes for Unity XT CSI driver
 | NFS Clone - Resize of the snapshot is not supported by Unity XT Platform, however the user should never try to resize the cloned NFS volume.| Currently, when the driver takes a clone of NFS volume, it succeeds but if the user tries to resize the NFS volumesnapshot, the driver will throw an error.|
 | Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.| Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at https://github.com/kubernetes-csi/external-health-monitor/issues/100|
 | When a node goes down, the block volumes attached to the node cannot be attached to another node | This is a known issue and has been reported at https://github.com/kubernetes-csi/external-attacher/issues/215. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the VolumeAttachment to the node that went down. <br /> Now the volume can be attached to the new node. |
-
+| CSI driver does not verify iSCSI initiators on the array correctly when iSCSI initiator names are not in lowercase - After any node reboot, the driver pod on that rebooted node goes into a failed state, failing to find the iSCSI initiator on the array | Work around is to rename host iSCSI initiators to lowercase and reboot the respective worker node. The CSI driver pod will spin off successfully. Example: Rename "iqn.2000-11.com.DEMOWORKERNODE01:1a234b56cd78" to "iqn.2000-11.com.demoworkernode01:1a234b56cd78" in lowercase. 
 ### Note:
 
 - Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

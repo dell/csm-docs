@@ -33,6 +33,7 @@ The following requirements must be met before installing CSI Driver for Dell Pow
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
+- If using Powerpath , install the PowerPath for Linux requirements
 
 ### Install Helm 3
 
@@ -104,6 +105,16 @@ path_selector "round-robin 0"
 no_path_retry 10
 ```
 
+### PowerPath for Linux requirements
+
+CSI Driver for Dell PowerMax supports PowerPath for Linux. Configure Linux PowerPath before installing the CSI Driver.
+
+Set up the PowerPath for Linux as follows:
+
+- All the nodes must have the PowerPath package installed . Download the PowerPath archive for the environment from [Dell Online Support](https://www.dell.com/support/home/en-in/product-support/product/powerpath-for-linux/drivers).
+- `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
+- Start the PowerPath service using `systemctl start PowerPath`
+
 ### (Optional) Volume Snapshot Requirements
 
 Applicable only if you decided to enable snapshot feature in `values.yaml`
@@ -114,7 +125,7 @@ snapshot:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd)
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. For installation, use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd)
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers to support Volume snapshots.
@@ -122,7 +133,7 @@ The CSI external-snapshotter sidecar is split into two controllers to support Vo
 - A common snapshot controller
 - A CSI external-snapshotter sidecar
 
-The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller)
+The common snapshot controller must be installed only once in the cluster, irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available here: [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller)
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
@@ -141,7 +152,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
 
 *NOTE:*
-- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
 ### (Optional) Replication feature Requirements
@@ -162,7 +173,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.3.1 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.4.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml file, point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -174,7 +185,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
 4. Create the secret by running `kubectl create -f samples/secret/secret.yaml`.
 5. If you are going to install the new CSI PowerMax ReverseProxy service, create a TLS secret with the name - _csireverseproxy-tls-secret_ which holds an SSL certificate and the corresponding private key in the namespace where you are installing the driver.
 6. Copy the default values.yaml file `cd helm && cp csi-powermax/values.yaml my-powermax-settings.yaml`
-7. Edit the newly created file and provide values for the following parameters `vi my-powermax-settings.yaml`
+7. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
+8. Edit the newly created file and provide values for the following parameters `vi my-powermax-settings.yaml`
 
 | Parameter | Description  | Required   | Default  |
 |-----------|--------------|------------|----------|
@@ -229,7 +241,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
 | enabled |  Boolean parameter which indicates if CSI PowerMax Reverse Proxy is going to be configured and installed.<br>**NOTE:** If not enabled, then there is no requirement to configure any of the following values. | No | "False" |
-| image | This refers to the image of the CSI Powermax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.1.0 |
+| image | This refers to the image of the CSI PowerMax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.1.0 |
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
@@ -276,14 +288,6 @@ Upgrading from an older version of the driver: The storage classes will be delet
 ## Volume Snapshot Class
 
 Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
-
-### What happens to my existing Volume Snapshot Classes?
-
-*Upgrading from CSI PowerMax v2.1.0 driver*:
-The existing volume snapshot class will be retained.
-
-*Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerMax to 1.7.0 or higher, before upgrading to 2.3.1.
 
 ## Sample values file
 The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes
@@ -332,7 +336,7 @@ global:
 csireverseproxy:
   # Set enabled to true if you want to use proxy
   enabled: true
-  image: dellemc/csipowermax-reverseproxy:v1.4.0
+  image: dellemc/csipowermax-reverseproxy:v2.3.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222
@@ -380,7 +384,7 @@ global:
 csireverseproxy:
   # Set enabled to true if you want to use proxy
   enabled: true
-  image: dellemc/csipowermax-reverseproxy:v1.4.0
+  image: dellemc/csipowermax-reverseproxy:v2.3.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222

@@ -22,8 +22,8 @@ The node section of the Helm chart installs the following component in a _Daemon
 The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
-- If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe/TCP Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP configuration.
-> You can use either the Fibre Channel or iSCSI or NVMe/TCP protocol, but you do not need all the three.
+- If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP or NVMe/FC configuration.
+> You can use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, but you do not need all the four.
 
 > If you want to use preconfigured iSCSI/FC hosts be sure to check that they are not part of any host group
 - Linux native multipathing requirements
@@ -102,7 +102,7 @@ snapshot:
 ```
 
 #### Volume Snapshot CRD's
-The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd) for the installation.
+The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/client/config/crd) for the installation.
 
 #### Volume Snapshot Controller
 The CSI external-snapshotter sidecar is split into two controllers:
@@ -110,15 +110,14 @@ The CSI external-snapshotter sidecar is split into two controllers:
 - A CSI external-snapshotter sidecar
 
 The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters 4.4 and later, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using `kubectl` and the manifests are available:
-Use [v5.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller) for the installation.
+Use [v6.0.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.0.1/deploy/kubernetes/snapshot-controller) for the installation.
 
 *NOTE:*
 - The manifests available on GitHub install the snapshotter image: 
    - [quay.io/k8scsi/csi-snapshotter:v4.0.x](https://quay.io/repository/k8scsi/csi-snapshotter?tag=v4.0.0&tab=tags)
 - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
 
-#### Installation example 
-
+#### Installation example
 You can install CRDs and default snapshot controller by running these commands:
 ```bash
 git clone https://github.com/kubernetes-csi/external-snapshotter/
@@ -129,7 +128,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
 
 *NOTE:*
-- It is recommended to use 5.0.x version of snapshotter/snapshot-controller.
+- It is recommended to use 6.0.x version of snapshotter/snapshot-controller.
 
 ### Volume Health Monitoring
 
@@ -147,7 +146,7 @@ controller:
     # Default value: None
     enabled: false
 
-    # healthMonitorInterval: Interval of monitoring volume health condition
+    # volumeHealthMonitorInterval: Interval of monitoring volume health condition
     # Allowed values: Number followed by unit (s,m,h)
     # Examples: 60s, 5m, 1h
     # Default value: 60s
@@ -162,7 +161,6 @@ node:
     # Default value: None
     enabled: false
    ```
-
 ### (Optional) Replication feature Requirements
 
 Applicable only if you decided to enable the Replication feature in `values.yaml`
@@ -180,11 +178,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.3.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.4.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
-3. Check `helm/csi-powerstore/driver-image.yaml` and confirm the driver image points to new image.
-4. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
+3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
     - *endpoint*: defines the full URL path to the PowerStore API.
     - *globalID*: specifies what storage cluster the driver should use  
     - *username*, *password*: defines credentials for connecting to array.
@@ -196,12 +193,12 @@ CRDs should be configured during replication prepare stage with repctl as descri
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
-5. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
-6. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
+4. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
+5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
    
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
-7. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml`
-8. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
+6. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml`
+7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|----------|---------|
@@ -228,6 +225,9 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
 | controller.vgsnapshot.enabled | To enable or disable the volume group snapshot feature | No | "true" |
+| images.driverRepository | To use an image from custom repository | No | dockerhub |
+| version | To use any driver version | No | Latest driver version |
+| allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
 
 8. Install the driver using `csi-install.sh` bash script by running `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
@@ -257,7 +257,7 @@ There are samples storage class yaml files available under `samples/storageclass
 
 1. Edit the sample storage class yaml file and update following parameters: 
 - *arrayID*: specifies what storage cluster the driver should use, if not specified driver will use storage cluster specified as `default` in `samples/secret/secret.yaml`
-- *FsType*: specifies what filesystem type driver should use, possible variants `ext3`, `ext4`, `xfs`, `nfs`, if not specified driver will use `ext4` by default.
+- *csi.storage.k8s.io/fstype*: specifies what filesystem type driver should use, possible variants `ext3`, `ext4`, `xfs`, `nfs`, if not specified driver will use `ext4` by default.
 - *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 - *allowedTopologies* (Optional): If you want you can also add topology constraints.
 ```yaml
@@ -280,14 +280,6 @@ kubectl create -f <path_to_storageclass_file>
 ## Volume Snapshot Class
 
 Starting CSI PowerStore v1.4.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
-
-### What happens to my existing Volume Snapshot Classes?
-
-*Upgrading from CSI PowerStore v2.1.0 driver*:
-The existing volume snapshot class will be retained.
-
-*Upgrading from an older version of the driver*:
-It is strongly recommended to upgrade the earlier versions of CSI PowerStore to 1.4.0 or higher, before upgrading to 2.3.0.
 
 ## Dynamically update the powerstore secrets 
 

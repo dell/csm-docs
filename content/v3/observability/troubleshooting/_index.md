@@ -171,7 +171,7 @@ sidecar:
     enabled: true
 
 ## Additional grafana server ConfigMap mounts
-## Defines additional mounts with ConfigMap. CofigMap must be manually created in the namespace.
+## Defines additional mounts with ConfigMap. ConfigMap must be manually created in the namespace.
 extraConfigmapMounts: []
 ```
   </details>

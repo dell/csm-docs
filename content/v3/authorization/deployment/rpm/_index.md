@@ -19,7 +19,29 @@ The CSM for Authorization proxy server requires a Linux host with the following 
 
 These packages need to be installed on the Linux host:
 - container-selinux
-- https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm
+- k3s-selinux-0.4-1
+
+Use the appropriate package manager on the machine to install the packages.
+
+### Using yum on CentOS/RedHat 7:
+
+yum install -y container-selinux
+
+yum install -y https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm
+
+### Using yum on CentOS/RedHat 8:
+
+yum install -y container-selinux
+
+yum install -y https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm
+
+### Dark Sites
+
+For environments where `yum` will not work, obtain the supported version of container-selinux for your OS version and install it.
+
+The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [https://centos.pkgs.org/7/centos-extras-x86_64/](https://centos.pkgs.org/7/centos-extras-x86_64/) and [https://centos.pkgs.org/8/centos-appstream-x86_64/](https://centos.pkgs.org/8/centos-appstream-x86_64/), respectively.
+
+The k3s-selinux-0.4-1 RPM can be obtained from [https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm](https://rpm.rancher.io/k3s/stable/common/centos/7/noarch/k3s-selinux-0.4-1.el7.noarch.rpm) or [https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm](https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-0.4-1.el8.noarch.rpm) for CentOS/RedHat 7 and 8, respectively. Download the supported version of k3s-selinux-0.4-1 for your OS version and install it.
 
 ## Deploying the CSM Authorization Proxy Server
 
@@ -188,7 +210,7 @@ After creating the role bindings, the next logical step is to generate the acces
 
   ```
   echo === Generating token ===
-  karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > token.yaml
+  karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' > token.yaml
 
   echo === Copy token to Driver Host ===
   sshpass -p ${DriverHostPassword} scp token.yaml ${DriverHostVMUser}@{DriverHostVMIP}:/tmp/token.yaml 
@@ -230,7 +252,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
    | intendedEndpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
    | endpoint | HTTPS localhost endpoint that the authorization sidecar will listen on. | Yes | https://localhost:9400 |
    | systemID | System ID of the backend storage array. | Yes | " " |
-   | insecure | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
+   | skipCertificateValidation | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
    | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
 
 
@@ -330,7 +352,7 @@ Replace the data in `config.yaml` under the `data` field with your new, encoded 
 
 >__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is only necessary if certificates were not provided in `$HOME/.karavi/config.json`
 
-`karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | jq -r '.Token' > kubectl -n $namespace apply -f -`
+`karavictl generate token --tenant $TenantName --insecure --addr "grpc.${AuthorizationProxyHost}" | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
 
 ## CSM for Authorization Proxy Server Dynamic Configuration Settings
 

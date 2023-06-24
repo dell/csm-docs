@@ -103,7 +103,7 @@ spec:
 
 ## iSCSI CHAP
 
-Starting from v1.3.0, the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
+Starting from version 1.3.0, the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
 To enable CHAP authentication:
 1. Create secret `powermax-creds` with the key `chapsecret` set to the iSCSI CHAP secret. If the secret exists, delete and re-create the secret with this newly added key.
 2. Set the parameter `enableCHAP` in `my-powermax-settings.yaml` to true.
@@ -126,7 +126,7 @@ When challenged, the host initiator transmits a CHAP credential and CHAP secret 
 
 ## Custom Driver Name
 
-Starting from version 1.3.0 driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.
+Starting from version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.
 
 To use this feature, set the following values under `customDriverName` in `my-powermax-settings.yaml`.
 - Value: Set this to the custom name of the driver.
@@ -253,7 +253,7 @@ For additional information, see the website: [Kubernetes](https://kubernetes.io/
 
 ## CSI PowerMax Reverse Proxy
 
-To get the maximum performance out of the CSI driver for PowerMax and Unisphere for PowerMax REST APIs, starting with v1.4 of the driver, you can deploy the optional CSI PowerMax Reverse Proxy application.
+CSI PowerMax Reverse Proxy application is deployed along with the driver to get the maximum performance out of the CSI driver for PowerMax and Unisphere for PowerMax REST APIs.
 
 CSI PowerMax Reverse Proxy is a (go) HTTPS server that acts as a reverse proxy for the Unisphere for PowerMax RESTAPI interface. Any RESTAPI request sent from the driver to the reverse proxy is forwarded to the Unisphere server and the response is routed back to the driver.
 
@@ -287,9 +287,9 @@ key=tls.key
 
 ### Using Helm installer
 
-In the `my-powermax-settings.yaml` file, the csireverseproxy section can be used to deploy and configure the CSI PowerMax Reverse Proxy.
+In the `my-powermax-settings.yaml` file, the csireverseproxy section can be used to configure the CSI PowerMax Reverse Proxy.
 
-The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. If it is enabled (using the `enabled` parameter in the csireverseproxy section of the `my-powermax-settings.yaml` file), the install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.
+The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. The install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.
 
 ### Using Dell CSI Operator
 
@@ -565,3 +565,44 @@ spec:
 When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
 
 To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
+  
+## Support for auto RDM for vSphere over FC
+  
+CSI Driver for Dell PowerMax 2.5.0 and above supports auto RDM for vSphere over FC.
+
+This feature supports volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. This feature enables the users to use PMAX CSI drivers with VMs on vSphere Hypervisor with the same feature and functionality as there with bare metal servers when they have only FC ports in PMAX storage.
+
+It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like ISCSI or FC (in pass-through) is not supported.  
+
+To use this feature, set vSphere.enabled to true
+  
+```
+ VMware/vSphere virtualization support
+# set enable to true, if you to enable VMware virtualized environment support via RDM
+# Allowed Values:
+#   "true" - vSphere volumes are enabled
+#   "false" - vSphere volumes are disabled
+# Default value: "false"
+vSphere:
+  enabled: false
+  # fcPortGroup: an existing portGroup that driver will use for vSphere
+  # recommended format: csi-x-VC-PG, x can be anything of user choice
+  fcPortGroup: "csi-vsphere-VC-PG"
+  # fcHostGroup: an existing host(initiator group) that driver will use for vSphere
+  # this hostGroup should contain initiators from all the ESXs/ESXi host
+  # where the cluster is deployed
+  # recommended format: csi-x-VC-HG, x can be anything of user choice
+  fcHostGroup: "csi-vsphere-VC-HG"
+  # vCenterHost: URL/endpoint of the vCenter where all the ESX are present
+  vCenterHost: "00.000.000.01"
+  # vCenterUserName: username from the vCenter credentials
+  vCenterUserName: "user"
+  # vCenterPassword: password from the vCenter credentials
+  vCenterPassword: "pwd"
+  
+```
+  
+>Note: Replication is not supported with this feature.
+>Limitations of RDM can be referred [here.](https://configmax.esp.vmware.com/home)  
+>Supported number of RDM Volumes per VM is 60 as per the limitations.
+>RDMs should not be added/removed manually from vCenter on any of the cluster VMs.   

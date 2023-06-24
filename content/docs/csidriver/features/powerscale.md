@@ -17,13 +17,13 @@ You can connect a single CSI-PowerScale driver with multiple PowerScale clusters
 
 ## Consuming existing volumes with static provisioning
 
-You can use existent volumes from the PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
+You can use existing volumes from the PowerScale array as Persistent Volumes in your Kubernetes, perform the following steps:
 
 1. Open your volume in One FS, and take a note of volume-id.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
 3. In the following example, the PowerScale cluster accessZone is assumed as 'System', storage class as 'isilon', cluster name as 'pscale-cluster' and volume's internal name as 'isilonvol'. The volume-handle should be in the format of <volume_name>=_=_=<export_id>=_=_=<zone>=_=_=<cluster_name>
-4. If Quotas are enabled in the driver, it is required to add the Quota ID to the description of the NFS export in this format: 
-`CSI_QUOTA_ID:sC-kAAEAAAAAAAAAAAAAQEpVAAAAAAAA`
+4. If Quotas are enabled in the driver, it is required to add the Quota ID to the description of the NFS export in this format:
+   `CSI_QUOTA_ID:sC-kAAEAAAAAAAAAAAAAQEpVAAAAAAAA`
 5. Quota ID can be identified by querying the PowerScale system.
 
 ```yaml
@@ -42,9 +42,9 @@ spec:
   csi:
     driver: csi-isilon.dellemc.com
     volumeAttributes:
-        Path: "/ifs/data/csi/isilonvol"
-        Name: "isilonvol"
-        AzServiceIP: 'XX.XX.XX.XX'
+      Path: "/ifs/data/csi/isilonvol"
+      Name: "isilonvol"
+      AzServiceIP: 'XX.XX.XX.XX'
     volumeHandle: isilonvol=_=_=652=_=_=System=_=_=pscale-cluster
   claimRef:
     name: isilonstaticpvc
@@ -61,10 +61,10 @@ metadata:
   namespace: default
 spec:
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   resources:
-        requests:
-          storage: 5Gi
+    requests:
+      storage: 5Gi
   volumeName: isilonstaticpv
   storageClassName: isilon           
 ```
@@ -75,26 +75,26 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-    name: static-prov-pod
+  name: static-prov-pod
 spec:
-    containers:
-      - name: test
-        image: docker.io/centos:latest
-        command: [ "/bin/sleep", "3600" ]
-        volumeMounts:
-          - mountPath: "/data0"
-            name: pvol
-    volumes:
-      - name: pvol
-        persistentVolumeClaim:
-            claimName: isilonstaticpvc
+  containers:
+    - name: test
+      image: docker.io/centos:latest
+      command: [ "/bin/sleep", "3600" ]
+      volumeMounts:
+        - mountPath: "/data0"
+          name: pvol
+  volumes:
+    - name: pvol
+      persistentVolumeClaim:
+        claimName: isilonstaticpvc
 ```
 
 5. After the pod becomes `Ready` and `Running`, you can start to use this pod and volume.
 
 ## PVC Creation Feature
 
-Following yaml content can be used to create a PVC without referring any PV.
+The following yaml content can be used to create a PVC without referring any PV.
 
 ```yaml
 apiVersion: v1
@@ -104,16 +104,16 @@ metadata:
   namespace: default
 spec:
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   resources:
-        requests:
-          storage: 5Gi
+    requests:
+      storage: 5Gi
   storageClassName: isilon           
 ```
 
 ## Volume Snapshot Feature
 
-The CSI PowerScale driver version 2.0 and later supports managing v1 snapshots. 
+The CSI PowerScale driver version 2.0 and later supports managing v1 snapshots.
 
 In order to use Volume Snapshots, ensure the following components have been deployed to your cluster:
 
@@ -128,9 +128,9 @@ In order to use Volume Snapshots, ensure the following components have been depl
 
 During the installation of CSI PowerScale driver version 2.0 and higher, no default Volume Snapshot Class will get created.
 
-Following are the manifests for the Volume Snapshot Class:
+The following are the manifests for the Volume Snapshot Class:
 
-1. VolumeSnapshotClass 
+1. VolumeSnapshotClass
 ```yaml
 
 apiVersion: snapshot.storage.k8s.io/v1
@@ -163,7 +163,7 @@ spec:
 
 Once the VolumeSnapshot has been successfully created by the CSI PowerScale driver, a VolumeSnapshotContent object is automatically created. Once the status of the VolumeSnapshot object has the _readyToUse_ field set to _true_ , it is available for use.
 
-Following is the relevant section of VolumeSnapshot object status:
+The following is the relevant section of VolumeSnapshot object status:
 
 ```yaml
 status:
@@ -195,11 +195,11 @@ spec:
       storage: 5Gi
 ```
 
-> Starting from CSI PowerScale driver version 2.2, it is allowed to create PersistentVolumeClaim from VolumeSnapshot with different isi paths i.e., isi paths of the new volume and the VolumeSnapshot can be different.
+> Starting from CSI PowerScale driver version 2.2, different isi paths can be used to create PersistentVolumeClaim from VolumeSnapshot.This means the isi paths of the new volume and the VolumeSnapshot can be different.
 
 ## Volume Expansion
 
-The CSI PowerScale driver version 1.2 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).
+CSI PowerScale driver version 1.2 and later supports the expansion of Persistent Volumes (PVs). This expansion can be done either online (for example, when a PVC is attached to a node) or offline (for example, when a PVC is not attached to any node).
 
 To use this feature, the storage class that is used to create the PVC must have the attribute `allowVolumeExpansion` set to true.
 
@@ -230,14 +230,14 @@ To resize a PVC, edit the existing PVC spec and set spec.resources.requests.stor
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    name: isilon-pvc-expansion-demo
+  name: isilon-pvc-expansion-demo
 spec:
-    accessModes:
-      - ReadWriteOnce
-    resources:
-        requests:
-            storage: 30Gi # Updated size from 3Gi to 30Gi
-    storageClassName: isilon-expand-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi # Updated size from 3Gi to 30Gi
+  storageClassName: isilon-expand-sc
 ```
 
 >The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.
@@ -258,7 +258,7 @@ metadata:
   name: existing-pvc
 spec:
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
@@ -272,10 +272,10 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: volume-from-volume
-  namespace: default 
+  namespace: default
 spec:
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   volumeMode: Filesystem
   resources:
     requests:
@@ -289,7 +289,7 @@ spec:
 
 ## Controller HA
 
-The CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of controller pod. At any time, only one controller pod is active(leader), and the rest are on standby.
+CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of the controller pod. At any time, only one controller pod is active(leader), and the rest are on standby.
 In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`.
 
 Additionally by leveraging `pod anti-affinity`, no two-controller pods are ever scheduled on the same node.
@@ -312,9 +312,9 @@ For more details about configuring Controller HA using the Dell CSI Operator, re
 The CSI PowerScale driver version 1.4.0 and later supports CSI ephemeral inline volumes.
 
 This feature serves as use cases for data volumes whose content and lifecycle are tied to a pod. For example, a driver might populate a volume with dynamically created secrets that are specific to the application running in the pod. Such volumes need to be created together with a pod and can be deleted as part of pod termination (ephemeral). They get defined as part of the pod spec (inline).
- 
+
 At runtime, nested inline volumes follow the lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.
- 
+
 The following is a sample manifest for creating CSI ephemeral Inline Volume in pod manifest with CSI PowerScale driver.
 
 ```yaml
@@ -344,27 +344,27 @@ This manifest creates a pod in a given cluster and attaches a newly created ephe
 ## Topology
 ### Topology Support
 
-The CSI PowerScale driver version 1.4.0 and later supports Topology by default which forces volumes to be placed on worker nodes that have connectivity to the backend storage, as a result of which the nodes which have access to PowerScale Array are appropriately labeled. The driver leverages these labels to ensure that the driver components (controller, node) are spawned only on nodes wherein these labels exist. 
-  
+CSI PowerScale driver version 1.4.0 and later supports Topology by default which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This results in nodes which have access to PowerScale Array being appropriately labeled. The driver leverages these labels to ensure that the driver components (controller, node) are spawned only on nodes wherein these labels exist.
+
 This covers use cases where:
- 
-The CSI PowerScale driver may not be installed or running on some nodes where Users have chosen to restrict the nodes on accessing the PowerScale storage array. 
+
+The CSI PowerScale driver may not be installed or running on some nodes where Users have chosen to restrict the nodes on accessing the PowerScale storage array.
 
 We support CustomTopology which enables users to apply labels for nodes - "csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com" and expect the labels to be honored by the driver.
-  
-When “enableCustomTopology” is set to “true”, the CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and use them to initialize node pod with custom PowerScale FQDN/IP.
+
+When “enableCustomTopology” is set to “true”, the CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and uses them to initialize node pod with custom PowerScale FQDN/IP.
 
 **Note:** Only a single cluster can be configured as part of secret.yaml for custom topology.
 
 
 ### Topology Usage
-   
-To utilize the Topology feature, create a custom `StorageClass` with `volumeBindingMode` set to `WaitForFirstConsumer` and specify the desired topology labels within `allowedTopologies` field of this custom storage class. This ensures that the Pod schedule takes advantage of the topology and the selected node has access to provisioned volumes. 
+
+To utilize the Topology feature, create a custom `StorageClass` with `volumeBindingMode` set to `WaitForFirstConsumer` and specify the desired topology labels within `allowedTopologies` field of this custom storage class. This ensures that the Pod schedule takes advantage of the topology and the selected node has access to provisioned volumes.
 
 **Note:** Whenever a new storage cluster is being added in secret, even though it is dynamic, the new storage cluster IP address-related label is not added to worker nodes dynamically. The user has to spin off (bounce) driver-related pods (controller and node pods) in order to apply newly added information to be reflected in worker nodes.
-  
+
 **Storage Class Example with Topology Support:**
- 
+
 ```yaml
 # This is a sample manifest for utilizing the topology feature and mount options.
 # PVCs created using this storage class will be scheduled 
@@ -421,7 +421,7 @@ has workloads scheduled, there is a possibility that it might lead to backward c
 
 Also, the previous workload will still be using the default network and not custom networks. For previous workloads to use custom networks, the recreation of pods is required.
 
-When csi-powerscale driver creates an NFS export, the traffic flows through the client specified in the export. By default, the client is the network interface for Kubernetes 
+When csi-powerscale driver creates an NFS export, the traffic flows through the client specified in the export. By default, the client is the network interface for Kubernetes
 communication (same IP/fqdn as k8s node) by default.
 
 For a cluster with multiple network interfaces and if a user wants to segregate k8s traffic from NFS traffic; you can use the `allowedNetworks` option.
@@ -440,9 +440,9 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 
 ## Node selector in helm template
 
-Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world.)For more information, refer to https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector 
-  
-Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations for more information.  
+Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world.)For more information, refer to https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector
+
+Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations for more information.
 
 ## Usage of SmartQuotas to Limit Storage Consumption
 
@@ -453,28 +453,118 @@ To use the SmartQuotas feature user can specify the boolean value 'enableQuota' 
 Let us assume the user creates a PVC with 3 Gi of storage and 'SmartQuotas' have already been enabled in PowerScale Cluster.
 
 - When 'enableQuota' is set to 'true'
-    - The driver sets the hard limit of the PVC to 3Gi.
-    - The user adds data of 2Gi to the above said PVC (by logging into POD). It works as expected.
-    - The user tries to add 2Gi more data.
-    - Driver doesn't allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.
-    - The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.
-    - User retries adding 2Gi more data (which has been errored out previously).
-    - The driver accepts the data.
-    
-- When 'enableQuota' is set to 'false'
-    - Driver doesn't set any hard limit against the PVC created.
-    - The user adds data of 2Gi to the above said PVC, which is having the size 3Gi (by logging into POD). It works as expected.
-    - The user tries to add 2Gi more data. Now the total size of data is 4Gi.
-    - Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)
-    - The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.
+  - The driver sets the hard limit of the PVC to 3Gi.
+  - The user adds data of 2Gi to the above said PVC (by logging into POD). It works as expected.
+  - The user tries to add 2Gi more data.
+  - Driver doesn't allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.
+  - The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.
+  - User retries adding 2Gi more data (which has been errored out previously).
+  - The driver accepts the data.
 
+- When 'enableQuota' is set to 'false'
+  - Driver doesn't set any hard limit against the PVC created.
+  - The user adds data of 2Gi to the above said PVC, which is having the size 3Gi (by logging into POD). It works as expected.
+  - The user tries to add 2Gi more data. Now the total size of data is 4Gi.
+  - Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)
+  - The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.
+
+If SmartQuota feature is enabled, user can also set other quota parameters such as Soft Limit , Advisory Limit and
+soft grace period using storage class yaml file or pvc yaml file.
+
+**Storage Class Example with Quota Limit Parameters:**
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: isilon
+provisioner: csi-isilon.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  # The name of the access zone a volume can be created in
+  # Optional: true
+  # Default value: default value specified in values.yaml
+  # Examples: System, zone1
+  AccessZone: System
+
+  # The base path for the volumes to be created on PowerScale cluster.
+  # Ensure that this path exists on PowerScale cluster.
+  # Allowed values: unix absolute path
+  # Optional: true
+  # Default value: value specified in values.yaml for isiPath
+  # Examples: /ifs/data/csi, /ifs/engineering
+  IsiPath: /ifs/data/csi
+
+  #Parameter to set Advisory Limit to quota
+  #Optional: true
+  #Default value: Limit not Set
+  #AdvisoryLimit: "50"
+  
+  #Parameter to set soft limit to quota
+  #Optional: true
+  #Default value: Limit not Set
+  #SoftLimit: "80"
+  
+  #Parameter which must be mentioned along with Soft Limit
+  #Soft Limit can be exceeded until the grace period
+  #Optional: true
+  #Default value: Limit not Set
+  #SoftGracePrd: "86400"
+
+  # The permissions for isi volume directory path
+  # This value overrides the isiVolumePathPermissions attribute of corresponding cluster config in secret, if present
+  # Allowed values: valid octal mode number
+  # Default value: "0777"
+  # Examples: "0777", "777", "0755"
+  #IsiVolumePathPermissions: "0777"
+
+  # AccessZone groupnet service IP. Update AzServiceIP if different than endpoint.
+  # Optional: true
+  # Default value: endpoint of the cluster ClusterName
+  #AzServiceIP : 192.168.2.1
+
+  # When a PVC is being created, this parameter determines, when a node mounts the PVC,
+  # whether to add the k8s node to the "Root clients" field or "Clients" field of the NFS export
+  # Allowed values:
+  #   "true": adds k8s node to the "Root clients" field of the NFS export
+  #   "false": adds k8s node to the "Clients" field of the NFS export
+  # Optional: true
+  # Default value: "false"
+  RootClientEnabled: "false"
+
+```
+**PVC Example with Quota Limit Parameters:**
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pvc
+#Uncomment below 4 lines to set quota limit parameters
+#  labels:
+#    pvcSoftLimit: "10"
+#    pvcAdvisoryLimit: "50"
+#    pvcSoftGracePrd : "85400"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: isilon
+```
+Note
+- If quota limit values are specified in both storage class yaml and PVC yaml , then values mentioned in PVC yaml will get precedence.
+- If few parameters are specified in storage class yaml and few in PVC yaml , then both will be combined and applied while quota creation
+  For Example: If advisory limit = 30 is mentioned in storage class yaml and soft limit = 50  and soft grace period = 86400 are mentioned in PVC yaml .
+  Then values set in quota will be advisory limit = 30, soft limit = 50 and soft grace period =86400.
 
 ## Dynamic Logging Configuration
 
 This feature is introduced in CSI Driver for PowerScale version 1.6.0 and updated in version 2.0.0
 
 ### Helm based installation
-As part of driver installation, a ConfigMap with the name `isilon-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver. 
+As part of driver installation, a ConfigMap with the name `isilon-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver.
 
 Users can set the default log level by specifying log level to `logLevel` attribute in values.yaml during driver installation.
 
@@ -484,7 +574,7 @@ cd dell-csi-helm-installer
 ./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade
 ```
 
-Note: here my-isilon-settings.yaml is a values.yaml file which user has used for driver installation.  
+Note: here my-isilon-settings.yaml is a values.yaml file which user has used for driver installation.
 
 
 ### Operator based installation
@@ -536,11 +626,11 @@ Other ways of configuring powerscale volume permissions remain the same as helm-
 
 ## PV/PVC Metrics
 
-CSI Driver for Dell PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes. 
+CSI Driver for Dell PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes.
 For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.
 
 ### This feature can be enabled
-1. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.   
+1. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.
 2. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file and by enabling the alpha feature gate `CSIVolumeHealth`.
 
 ## Single Pod Access Mode for PersistentVolumes- ReadWriteOncePod (ALPHA FEATURE)
@@ -558,7 +648,7 @@ metadata:
   name: single-writer-only
 spec:
   accessModes:
-  - ReadWriteOncePod # the volume can be mounted as read-write by a single pod across the whole cluster
+    - ReadWriteOncePod # the volume can be mounted as read-write by a single pod across the whole cluster
   resources:
     requests:
       storage: 1Gi
@@ -567,4 +657,3 @@ spec:
 When this feature is enabled, the existing `ReadWriteOnce(RWO)` access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.
 
 To migrate existing PersistentVolumes to use `ReadWriteOncePod`, please follow the instruction from [here](https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes).
-

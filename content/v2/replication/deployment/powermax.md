@@ -28,7 +28,7 @@ There are some important limitations that apply to how CSI PowerMax driver uses 
 * When using SRDF mode Sync/Metro, a single SRDF group can be used to provision volumes from multiple namespaces.
 
 #### Automatic creation of SRDF Groups
-CSI Driver for Powermax supports automatic creation of SRDF Groups starting **v2.4.0** with help of **10.0** REST endpoints.
+CSI Driver for PowerMax supports automatic creation of SRDF Groups starting **v2.4.0** with help of **10.0** REST endpoints.
 To use this feature:
 * Remove _replication.storage.dell.com/RemoteRDFGroup_ and _replication.storage.dell.com/RDFGroup_ params from the storage classes before creating first replicated volume.
 * Driver will check next available RDF pair and use them to create volumes.

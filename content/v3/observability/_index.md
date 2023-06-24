@@ -14,13 +14,14 @@ Description: >
 
 Metrics data is collected and pushed to the [OpenTelemetry Collector](https://github.com/open-telemetry/opentelemetry-collector), so it can be processed, and exported in a format consumable by Prometheus. SSL certificates for TLS between nodes are handled by [cert-manager](https://github.com/jetstack/cert-manager).
 
-CSM for Observability is composed of several services, each living in its own GitHub repository, that can be installed following one of the three deployments we support [here](deployment). Contributions can be made to this repository or any of the CSM for Observability repositories listed below. 
+CSM for Observability is composed of several services, each living in its own GitHub repository, that can be installed following one of the four deployments we support [here](deployment). Contributions can be made to this repository or any of the CSM for Observability repositories listed below. 
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Name | Repository | Description |
 | ---- | ---------  | ----------- |
-| Performance Metrics for PowerFlex | [CSM Metrics for PowerFlex](https://github.com/dell/karavi-metrics-powerflex) | Performance Metrics for PowerFlex captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for Dell PowerFlex. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics so they can be visualized in Grafana. Please visit the repository for more information. |
-| Performance Metrics for PowerStore | [CSM Metrics for PowerStore](https://github.com/dell/csm-metrics-powerstore) | Performance Metrics for PowerStore captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for Dell PowerStore. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics so they can be visualized in Grafana. Please visit the repository for more information. |
+| Metrics for PowerFlex | [CSM Metrics for PowerFlex](https://github.com/dell/karavi-metrics-powerflex) | Metrics for PowerFlex captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for Dell PowerFlex. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
+| Metrics for PowerStore | [CSM Metrics for PowerStore](https://github.com/dell/csm-metrics-powerstore) | Metrics for PowerStore captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for Dell PowerStore. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
+| Metrics for PowerScale | [CSM Metrics for PowerScale](https://github.com/dell/csm-metrics-powerscale) | Metrics for PowerScale captures telemetry data about Kubernetes storage usage and performance obtained through the CSI (Container Storage Interface) Driver for Dell PowerScale. The metrics service pushes it to the OpenTelemetry Collector, so it can be processed, and exported in a format consumable by Prometheus. Prometheus can then be configured to scrape the OpenTelemetry Collector exporter endpoint to provide metrics, so they can be visualized in Grafana. Please visit the repository for more information. |
 | Volume Topology | [CSM Topology](https://github.com/dell/karavi-topology) | Topology provides Kubernetes administrators with the topology data related to containerized storage that is provisioned by a CSI (Container Storage Interface) Driver for Dell storage products. The Topology service is enabled by default as part of the CSM for Observability Helm Chart [values file](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). Please visit the repository for more information. |
 {{</table>}}
 
@@ -31,14 +32,14 @@ CSM for Observability provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | Capability | PowerMax | PowerFlex | Unity XT | PowerScale | PowerStore |
 | - | :-: | :-: | :-: | :-: | :-: |
-| Collect and expose Volume Metrics via the OpenTelemetry Collector | no | yes | no | no | yes |
+| Collect and expose Volume Metrics via the OpenTelemetry Collector | no | yes | no | yes | yes |
 | Collect and expose File System Metrics via the OpenTelemetry Collector | no |  no | no | no | yes |
 | Collect and expose export (k8s) node metrics via the OpenTelemetry Collector | no |  yes | no | no | no |
-| Collect and expose filesystem capacity metrics via the OpenTelemetry Collector | no | no | no | no | yes |
-| Collect and expose block storage capacity metrics via the OpenTelemetry Collector | no | yes | no | no | yes |
-| Non-disruptive config changes | no |  yes | no | no | yes |
-| Non-disruptive log level changes | no |  yes | no | no | yes |
-| Grafana Dashboards for displaying metrics and topology data | no |  yes | no | no | yes |
+| Collect and expose block storage metrics via the OpenTelemetry Collector | no | yes | no | no | yes |
+| Collect and expose file storage metrics via the OpenTelemetry Collector | no | no | no | yes | yes |
+| Non-disruptive config changes | no |  yes | no | yes | yes |
+| Non-disruptive log level changes | no |  yes | no | yes | yes |
+| Grafana Dashboards for displaying metrics and topology data | no |  yes | no | yes | yes |
 {{</table>}}
 
 ## Supported Operating Systems/Container Orchestrator Platforms
@@ -56,9 +57,9 @@ CSM for Observability provides the following capabilities:
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               | PowerFlex | PowerStore |
-|---------------|:-------------------:|:----------------:|
-| Storage Array | 3.5.x, 3.6.x | 1.0.x, 2.0.x, 2.1.x |
+|               | PowerFlex | PowerStore | PowerScale |
+|---------------|:-------------------:|:----------------:|:----------------:|
+| Storage Array | 3.5.x, 3.6.x | 1.0.x, 2.0.x, 2.1.x, 3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -69,6 +70,7 @@ CSM for Observability supports the following CSI drivers and versions.
 | ------------- | ---------- | ------------------ |
 | CSI Driver for Dell PowerFlex | [csi-powerflex](https://github.com/dell/csi-powerflex) | v2.0 + |
 | CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0 + |
+| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.0 + |
 {{</table>}}
 
 ## Topology Data
@@ -78,17 +80,16 @@ CSM for Observability provides Kubernetes administrators with the topology data 
 | Field                      | Description                                                                                                                                        |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Namespace                  | The namespace associated with the persistent volume claim                                                                                          |
-| Persistent Volume          | The name of the persistent volume                                                                                                                  |
-| Status                     | The status of the persistent volume. "Released" indicates the persistent volume does not have a claim. "Bound" indicates the persistent volume has a claim |
 | Persistent Volume Claim    | The name of the persistent volume claim associated with the persistent volume                                                                      |
-| CSI Driver                 | The name of the CSI driver that was responsible for provisioning the volume on the storage system                                                  |
-| Created                    | The date the persistent volume was created                                                                                                         |
-| Provisioned Size           | The provisioned size of the persistent volume                                                                                                      |
+| Persistent Volume          | The name of the persistent volume                                                                                                                  |
 | Storage Class              | The storage class associated with the persistent volume                                                                                            |
-| Storage System Volume Name | The name of the volume on the storage system that is associated with the persistent volume                                                         |
-| Storage Pool               | The storage pool name the volume/storage class is associated with                                                                                  |
+| Provisioned Size           | The provisioned size of the persistent volume                                                                                                      |
+| Status                     | The status of the persistent volume. "Released" indicates the persistent volume does not have a claim. "Bound" indicates the persistent volume has a claim |
+| Created                    | The date the persistent volume was created                                                                                                         |
 | Storage System             | The storage system ID or IP address the volume is associated with                                                                                  |
 | Protocol                   | The storage system protocol type the volume/storage class is associated with                                                                       |
+| Storage Pool               | The storage pool name the volume/storage class is associated with                                                                                  |
+| Storage System Volume Name | The name of the volume on the storage system that is associated with the persistent volume                                                         |
 {{</table>}}
 ## TLS Encryption
 
