@@ -24,6 +24,13 @@
         
         
         &lt;h2 id=&#34;release-notes---dell-csi-operator-1120&#34;&gt;Release Notes - Dell CSI Operator 1.12.0&lt;/h2&gt;
+
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use &lt;a href=&#34;../../../deployment/csmoperator&#34;&gt;CSM Operator&lt;/a&gt; going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/761&#34;&gt;Added support to Kubernetes 1.27&lt;/a&gt;&lt;/li&gt;
