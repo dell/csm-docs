@@ -65,7 +65,7 @@
         
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9 (Driver Version 2.9.0). It is highly recommended that you use &lt;a href=&#34;../../../deployment/csmoperator&#34;&gt;CSM Operator&lt;/a&gt; going forward.&lt;/p&gt;
+&lt;p&gt;The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use &lt;a href=&#34;../../../deployment/csmoperator&#34;&gt;CSM Operator&lt;/a&gt; going forward.&lt;/p&gt;
 
 &lt;/div&gt;
 
