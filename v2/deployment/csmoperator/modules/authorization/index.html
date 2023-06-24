@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.0">
+<meta name="generator" content="Hugo 0.114.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/deployment/csmoperator/modules/authorization/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2022-09-21T18:28:15+05:30" />
+<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="name" content="Authorization">
 <meta itemprop="description" content="Pre-requisite for Installing Authorization via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2022-09-21T18:28:15+05:30" />
-<meta itemprop="wordCount" content="47">
+<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
+<meta itemprop="wordCount" content="1112">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Authorization"/>
 <meta name="twitter:description" content="Pre-requisite for Installing Authorization via Dell CSM Operator
@@ -43,6 +43,7 @@
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
 
   </head>
   <body class="td-page">
@@ -83,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.5.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.4</a>
 	
 </div>
 
@@ -105,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -149,7 +150,9 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv2deploymentcsmoperatordrivers-li">
   <a href="/csm-docs/v2/deployment/csmoperator/drivers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperatordrivers"><span class="">CSI Drivers</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatordriverspowerscale-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatordriverspowerflex-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/drivers/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatordriverspowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatordriverspowerscale-li">
   <a href="/csm-docs/v2/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
 </li>
   </ul>
@@ -158,12 +161,16 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization-li">
   <a href="/csm-docs/v2/deployment/csmoperator/modules/authorization/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization"><span class="td-sidebar-nav-active-item">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2deploymentcsmoperatormodulesobservability-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/modules/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2deploymentcsmoperatormodulesreplication-li">
   <a href="/csm-docs/v2/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2deploymentcsmoperatortroubleshooting-li">
   <a href="/csm-docs/v2/deployment/csmoperator/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperatortroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv2deploymentcsmoperatorrelease-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperatorrelease"><span class="">Release notes</span></a>
 </li>
   </ul>
 </li>
@@ -322,6 +329,19 @@
   <a href="/csm-docs/v2/authorization/backup-and-restore/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restorehelm"><span class="">Helm</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationbackup-and-restorerpm-li">
   <a href="/csm-docs/v2/authorization/backup-and-restore/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationconfiguration-li">
+  <a href="/csm-docs/v2/authorization/configuration/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfiguration"><span class="">Configuration</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationpowerflex-li">
+  <a href="/csm-docs/v2/authorization/configuration/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationpowermax-li">
+  <a href="/csm-docs/v2/authorization/configuration/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationpowerscale-li">
+  <a href="/csm-docs/v2/authorization/configuration/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationproxy-server-li">
+  <a href="/csm-docs/v2/authorization/configuration/proxy-server/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationproxy-server"><span class="">Proxy Server</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationdeployment-li">
@@ -487,10 +507,12 @@
   <a href="/csm-docs/v2/secure/encryption/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionuninstallation"><span class="">Uninstallation</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptionvault-li">
   <a href="/csm-docs/v2/secure/encryption/vault/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionvault"><span class="">Vault Configuration</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptiontroubleshooting-li">
-  <a href="/csm-docs/v2/secure/encryption/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptionrekey-li">
+  <a href="/csm-docs/v2/secure/encryption/rekey/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionrekey"><span class="">Rekey Configuration</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptionrelease-li">
   <a href="/csm-docs/v2/secure/encryption/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionrelease"><span class="">Release Notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptiontroubleshooting-li">
+  <a href="/csm-docs/v2/secure/encryption/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
 </li>
   </ul>
 </li>
@@ -552,6 +574,20 @@
 
 
 
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#install-csm-authorization-via-dell-csm-operator">Install CSM Authorization via Dell CSM Operator</a>
+      <ul>
+        <li><a href="#prerequisite">Prerequisite</a></li>
+        <li><a href="#install-csm-authorization-proxy-server">Install CSM Authorization Proxy Server</a></li>
+        <li><a href="#install-karavictl">Install Karavictl</a></li>
+        <li><a href="#configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</a></li>
+        <li><a href="#configuring-a-dell-csi-driver-with-csm-authorization">Configuring a Dell CSI Driver with CSM Authorization</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
 
 
 
@@ -604,9 +640,272 @@
 	<h1>Authorization</h1>
 
 	       
-	<p>The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Please note, Dell CSM operator currently ONLY supports deploying CSM Authorization sidecar/container.</p>
-<h2 id="pre-requisite">Pre-requisite</h2>
-<p>Follow the instructions available in CSM Authorization for <a href="../../../authorization/deployment/_index.md/#configuring-a-dell-csi-driver">Configuring a Dell CSI Driver with CSM for Authorization</a>.</p>
+	<h2 id="install-csm-authorization-via-dell-csm-operator">Install CSM Authorization via Dell CSM Operator</h2>
+<p>The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
+To deploy the Operator, follow the instructions available <a href="../../#installation">here</a>.</p>
+<h3 id="prerequisite">Prerequisite</h3>
+<ol>
+<li>
+<p>Execute <code>kubectl create namespace authorization</code> to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &lsquo;authorization&rsquo;.</p>
+</li>
+<li>
+<p>Install cert-manager CRDs <code>kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml</code></p>
+</li>
+<li>
+<p>Prepare <code>samples/authorization/config.yaml</code> provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml">here</a> which contains the JWT signing secret. The following table lists the configuration parameters.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>web.jwtsigningsecret</td>
+<td>String used to sign JSON Web Tokens</td>
+<td>true</td>
+<td>secret</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">web</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">jwtsigningsecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">randomString123</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>After editing the file, run this command to create a secret called <code>karavi-config-secret</code>:</p>
+<p><code>kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml</code></p>
+<p>Use this command to replace or update the secret:</p>
+<p><code>kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -</code></p>
+</li>
+<li>
+<p>Create the <code>karavi-storage-secret</code> using the file provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml">here</a> to store storage system credentials.</p>
+<p>Use this command to create the secret:</p>
+<p><code>kubectl create -f samples/authorization/karavi-storage-secret.yaml</code></p>
+</li>
+<li>
+<p>Prepare a storage class for Redis to use for persistence. If not supplied, the default storage class in your environment is used.</p>
+<p>Example, if using CSM Authorization for PowerScale:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">storage.k8s.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">StorageClass</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">isilon</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">provisioner</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-isilon.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">reclaimPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Delete</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">allowVolumeExpansion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">parameters</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># The name of the access zone a volume can be created in</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Optional: true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Default value: default value specified in values.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Examples: System, zone1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">AccessZone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">System</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># The base path for the volumes to be created on PowerScale cluster.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Ensure that this path exists on PowerScale cluster.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Allowed values: unix absolute path</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Optional: true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Default value: value specified in values.yaml for isiPath</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Examples: /ifs/data/csi, /ifs/engineering</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">IsiPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/ifs/data/csi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># The permissions for isi volume directory path</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># This value overrides the isiVolumePathPermissions attribute of corresponding cluster config in secret, if present</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Allowed values: valid octal mode number</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Default value: &#34;0777&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Examples: &#34;0777&#34;, &#34;777&#34;, &#34;0755&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#IsiVolumePathPermissions: &#34;0777&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># AccessZone groupnet service IP. Update AzServiceIP if different than endpoint.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Optional: true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Default value: endpoint of the cluster ClusterName</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#AzServiceIP : 192.168.2.1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># When a PVC is being created, this parameter determines, when a node mounts the PVC,</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># whether to add the k8s node to the &#34;Root clients&#34; field or &#34;Clients&#34; field of the NFS export</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Allowed values:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#   &#34;true&#34;: adds k8s node to the &#34;Root clients&#34; field of the NFS export</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#   &#34;false&#34;: adds k8s node to the &#34;Clients&#34; field of the NFS export</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Optional: true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Default value: &#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">RootClientEnabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Name of PowerScale cluster, where pv will be provisioned.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># This name should match with name of one of the cluster configs in isilon-creds secret.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># If this parameter is not specified, then default cluster config in isilon-creds secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># will be considered if available.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Optional: true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#ClusterName: &lt;cluster_name&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Sets the filesystem type which will be used to format the new volume</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Optional: true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># Default value: None</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic">#csi.storage.k8s.io/fstype: &#34;nfs&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># volumeBindingMode controls when volume binding and dynamic provisioning should occur.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Allowed values:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#   Immediate: indicates that volume binding and dynamic provisioning occurs once the</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#   PersistentVolumeClaim is created</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#   WaitForFirstConsumer: will delay the binding and provisioning of a PersistentVolume</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#   until a Pod using the PersistentVolumeClaim is created</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Default value: Immediate</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">volumeBindingMode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Immediate</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># allowedTopologies helps scheduling pods on worker nodes which match all of below expressions.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># If enableCustomTopology is set to true in helm values.yaml, then do not specify allowedTopologies</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Change all instances of &lt;ISILON_IP&gt; to the IP of the PowerScale OneFS API server</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#allowedTopologies:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#  - matchLabelExpressions:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#      - key: csi-isilon.dellemc.com/&lt;ISILON_IP&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#        values:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#          - csi-isilon.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># specify additional mount options for when a Persistent Volume is being mounted on a node.</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># To mount volume with NFSv4, specify mount option vers=4. Make sure NFSv4 is enabled on the Isilon Cluster</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#mountOptions: [&#34;&lt;mountOption1&gt;&#34;, &#34;&lt;mountOption2&gt;&#34;, ..., &#34;&lt;mountOptionN&gt;&#34;]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>Save the file and create it by using <code>kubectl create -f &lt;input_file.yaml&gt;</code>.</p>
+</li>
+</ol>
+<h3 id="install-csm-authorization-proxy-server">Install CSM Authorization Proxy Server</h3>
+<ol>
+<li>
+<p>Follow all the <a href="#prerequisite">prerequisites</a>.</p>
+</li>
+<li>
+<p>Create a CR (Custom Resource) for Authorization using the sample file provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server.yaml">here</a>. This file can be modified to use custom parameters if needed.</p>
+</li>
+<li>
+<p>Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>authorization</strong></td>
+<td>This section configures the CSM-Authorization components.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PROXY_HOST</td>
+<td>The hostname to configure the self-signed certificate (if applicable), and the proxy, tenant, role, and storage service Ingresses.</td>
+<td>Yes</td>
+<td>csm-authorization.com</td>
+</tr>
+<tr>
+<td>AUTHORIZATION_LOG_LEVEL</td>
+<td>CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.</td>
+<td>Yes</td>
+<td>debug</td>
+</tr>
+<tr>
+<td>AUTHORIZATION_ZIPKIN_COLLECTORURI</td>
+<td>The URI of the Zipkin instance to export traces.</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td>AUTHORIZATION_ZIPKIN_PROBABILITY</td>
+<td>The ratio of traces to export.</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PROXY_INGRESS_CLASSNAME</td>
+<td>The ingressClassName of the proxy-service Ingress.</td>
+<td>Yes</td>
+<td>nginx</td>
+</tr>
+<tr>
+<td>PROXY_INGRESS_HOSTS</td>
+<td>Additional host rules to be applied to the proxy-service Ingress.</td>
+<td>No</td>
+<td>authorization-ingress-nginx-controller.authorization.svc.cluster.local</td>
+</tr>
+<tr>
+<td>TENANT_INGRESS_CLASSNAME</td>
+<td>The ingressClassName of the tenant-service Ingress.</td>
+<td>Yes</td>
+<td>nginx</td>
+</tr>
+<tr>
+<td>ROLE_INGRESS_CLASSNAME</td>
+<td>The ingressClassName of the role-service Ingress.</td>
+<td>Yes</td>
+<td>nginx</td>
+</tr>
+<tr>
+<td>STORAGE_INGRESS_CLASSNAME</td>
+<td>The ingressClassName of the storage-service Ingress.</td>
+<td>Yes</td>
+<td>nginx</td>
+</tr>
+<tr>
+<td>REDIS_STORAGE_CLASS</td>
+<td>The storage class for Redis to use for persistence. If not supplied, the default storage class is used.</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>ingress-nginx</strong></td>
+<td>This section configures the enablement of the NGINX Ingress Controller.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed.</td>
+<td>No</td>
+<td>true</td>
+</tr>
+<tr>
+<td><strong>cert-manager</strong></td>
+<td>This section configures the enablement of cert-manager.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed.</td>
+<td>No</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Execute this command to create the Authorization CR:</p>
+<p><code>kubectl create -f samples/authorization/csm_authorization_proxy_server.yaml</code></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>:</p>
+<ul>
+<li>This command will deploy the Authorization Proxy Server in the namespace specified in the input YAML file.</li>
+</ul>
+</blockquote>
+<ol start="5">
+<li>
+<p>Create the <code>karavi-auth-tls</code> secret using your own certificate or by using a self-signed certificate generated via cert-manager.</p>
+<p>If using your own certificate that is valid for each Ingress hostname, use this command to create the <code>karavi-auth-tls</code> secret:</p>
+<p><code>kubectl create secret tls karavi-auth-tls -n authorization --key &lt;location-of-private-key-file&gt; --cert &lt;location-of-certificate-file&gt;</code></p>
+<p>If using a self-signed certificate, prepare <code>samples/authorization/certificate.yaml</code> provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate.yaml">here</a>. An entry for each hostname specified in the CR must be added under <code>dnsNames</code> for the certificate to be valid for each Ingress.</p>
+<p>Use this command to create the <code>karavi-auth-tls</code> secret:</p>
+<p><code>kubectl create -f samples/authorization/certificate.yaml</code></p>
+</li>
+</ol>
+<h3 id="install-karavictl">Install Karavictl</h3>
+<p>Follow the instructions available in CSM Authorization for <a href="../../../../authorization/deployment/helm/#install-karavictl">Installing karavictl</a>.</p>
+<h3 id="configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</h3>
+<p>Follow the instructions available in CSM Authorization for <a href="../../../../authorization/deployment/helm/#configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</a>.</p>
+<h3 id="configuring-a-dell-csi-driver-with-csm-authorization">Configuring a Dell CSI Driver with CSM Authorization</h3>
+<p>Follow the instructions available in CSM Authorization for <a href="../../../../authorization/deployment/helm/#configuring-a-dell-csi-driver-with-csm-for-authorization">Configuring a Dell CSI Driver with CSM for Authorization</a>.</p>
 
 	
 	
@@ -662,7 +961,7 @@
 
 
     </div>
-    
+    <script src='/csm-docs/js/prism.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 

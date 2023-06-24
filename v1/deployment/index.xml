@@ -15,6 +15,135 @@
     
     
     <item>
+      <title>V1: CSM Installation Wizard</title>
+      <link>https://dell.github.io/csm-docs/v1/deployment/csminstallationwizard/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/deployment/csminstallationwizard/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;a href=&#34;./src/index.html&#34;&gt;Dell Container Storage Modules Installation Wizard&lt;/a&gt; is a webpage that generates a manifest file for installing Dell CSI Drivers and its supported CSM Modules, based on input from the user. It generates a single manifest file to install both Dell CSI Drivers and its supported CSM Modules, thereby eliminating the need to download individual Helm charts for drivers and modules. The user can enable or disable the necessary modules through the UI, and a manifest file is generated accordingly without manually editing the helm charts.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE: The CSM Installation Wizard currently supports Helm based manifest file generation only.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;supported-dell-csi-drivers&#34;&gt;Supported Dell CSI Drivers&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CSI Driver&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerStore&lt;/td&gt;
+&lt;td&gt;2.6.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerMax&lt;/td&gt;
+&lt;td&gt;2.6.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;supported-dell-csm-modules&#34;&gt;Supported Dell CSM Modules&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CSM Modules&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Application Mobility&lt;/td&gt;
+&lt;td&gt;0.3.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSM Observability&lt;/td&gt;
+&lt;td&gt;1.5.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSM Replication&lt;/td&gt;
+&lt;td&gt;1.4.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSM Resiliency&lt;/td&gt;
+&lt;td&gt;1.5.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Open the &lt;a href=&#34;./src/index.html&#34;&gt;CSM Installation Wizard&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Select the &lt;code&gt;Installation Type&lt;/code&gt; as &lt;code&gt;Helm&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Select the &lt;code&gt;Array&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Enter the &lt;code&gt;Image Repository&lt;/code&gt;. The default value is &lt;code&gt;dellemc&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Select the &lt;code&gt;CSM Version&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Select the modules for installation. If there are module specific inputs, enter their values.&lt;/li&gt;
+&lt;li&gt;If needed, modify the &lt;code&gt;Controller Pods Count&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If needed, select &lt;code&gt;Install Controller Pods on Control Plane&lt;/code&gt; and/or &lt;code&gt;Install Node Pods on Control Plane&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Select &lt;code&gt;Single Namespace&lt;/code&gt; if the Dell CSI Driver and Modules should be installed in the same namespace.&lt;/li&gt;
+&lt;li&gt;Enter the &lt;code&gt;Driver Namespace&lt;/code&gt;. The default value is &lt;code&gt;csi-&amp;lt;array&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Enter the &lt;code&gt;Module Namespace&lt;/code&gt;. The default value is &lt;code&gt;csm-module&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Click on &lt;code&gt;Generate YAML&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;A manifest file, &lt;code&gt;values.yaml&lt;/code&gt; will be generated and downloaded.&lt;/li&gt;
+&lt;li&gt;A section &lt;code&gt;Run the following commands to install&lt;/code&gt; will be displayed.&lt;/li&gt;
+&lt;li&gt;Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;install-helm-chart&#34;&gt;Install Helm Chart&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE: Ensure that the namespaces and secrets are created before installing the Helm chart.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Add the Dell Helm Charts repository.&lt;/p&gt;
+&lt;p&gt;On your terminal, run each of the commands below:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-terminal&#34; data-lang=&#34;terminal&#34;&gt;helm repo add dell https://dell.github.io/helm-charts
+helm repo update
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the downloaded values.yaml file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Look over all the fields in the generated &lt;code&gt;values.yaml&lt;/code&gt; and fill in/adjust any as needed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For the Observability module, please refer &lt;a href=&#34;../../observability/deployment/#post-installation-dependencies&#34;&gt;Observability&lt;/a&gt; to install the post installation dependencies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If Authorization is enabled , please refer to &lt;a href=&#34;../../authorization/deployment/helm/&#34;&gt;Authorization&lt;/a&gt; for the installation and configuration of the Proxy Server.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE: Only the Authorization sidecar is enabled by the CSM Installation Wizard. The Proxy Server has to be installed and configured separately.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;If the Volume Snapshot feature is enabled, please refer to &lt;a href=&#34;../../csidriver/installation/helm/powerstore/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot for PowerStore&lt;/a&gt; and &lt;a href=&#34;../../csidriver/installation/helm/powermax/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot for PowerMax&lt;/a&gt; to install the Volume Snapshot CRDs and the default snapshot controller.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in &lt;a href=&#34;../../csidriver/installation/helm/powerstore/#install-the-driver&#34;&gt;PowerStore&lt;/a&gt;, &lt;a href=&#34;../../csidriver/installation/helm/powermax/#install-the-driver&#34;&gt;PowerMax&lt;/a&gt;, &lt;a href=&#34;../../observability/&#34;&gt;Observability&lt;/a&gt;, &lt;a href=&#34;../../replication/&#34;&gt;Replication&lt;/a&gt;, &lt;a href=&#34;../../resiliency/&#34;&gt;Resiliency&lt;/a&gt;, and &lt;a href=&#34;../../applicationmobility/&#34;&gt;Application Mobility&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Install the Helm chart.&lt;/p&gt;
+&lt;p&gt;On your terminal, run this command:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-terminal&#34; data-lang=&#34;terminal&#34;&gt;helm install &amp;lt;release-name&amp;gt; dell/container-storage-modules -f &amp;lt;values.yaml location&amp;gt;
+Example: helm install powerstore dell/container-storage-modules -f values.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>V1: CSM Operator</title>
       <link>https://dell.github.io/csm-docs/v1/deployment/csmoperator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -23,7 +152,7 @@
       <description>
         
         
-        &lt;p&gt;The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
+        &lt;p&gt;The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
 &lt;h2 id=&#34;supported-platforms&#34;&gt;Supported Platforms&lt;/h2&gt;
 &lt;p&gt;Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.&lt;/p&gt;
 &lt;table&gt;
@@ -35,66 +164,69 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;1.23, 1.24, 1.25&lt;/td&gt;
+&lt;td&gt;1.24, 1.25, 1.26&lt;/td&gt;
 &lt;td&gt;4.10, 4.10 EUS, 4.11&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;supported-csi-drivers&#34;&gt;Supported CSI Drivers&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Authorization module is only supported on Kubernetes platforms.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;supported-csm-components&#34;&gt;Supported CSM Components&lt;/h2&gt;
+&lt;p&gt;The table below lists the driver and modules versions installable with the CSM Operator:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;CSI Driver&lt;/th&gt;
 &lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;ConfigVersion&lt;/th&gt;
+&lt;th&gt;CSM Authorization&lt;/th&gt;
+&lt;th&gt;CSM Replication&lt;/th&gt;
+&lt;th&gt;CSM Observability&lt;/th&gt;
+&lt;th&gt;CSM Resiliency&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.3.0 +&lt;/td&gt;
-&lt;td&gt;v2.3.0 +&lt;/td&gt;
+&lt;td&gt;2.6.0&lt;/td&gt;
+&lt;td&gt;1.6.0&lt;/td&gt;
+&lt;td&gt;1.4.0&lt;/td&gt;
+&lt;td&gt;1.5.0&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;2.3.0 +&lt;/td&gt;
-&lt;td&gt;v2.3.0 +&lt;/td&gt;
+&lt;td&gt;2.6.0&lt;/td&gt;
+&lt;td&gt;1.6.0&lt;/td&gt;
+&lt;td&gt;1.4.0&lt;/td&gt;
+&lt;td&gt;1.5.0&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerStore&lt;/td&gt;
+&lt;td&gt;2.6.0&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;supported-csm-modules&#34;&gt;Supported CSM Modules&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;CSM Modules&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;th&gt;ConfigVersion&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;CSM Authorization&lt;/td&gt;
-&lt;td&gt;1.2.0 +&lt;/td&gt;
-&lt;td&gt;v1.2.0 +&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSM Replication&lt;/td&gt;
-&lt;td&gt;1.3.0 +&lt;/td&gt;
-&lt;td&gt;v1.3.0 +&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSM Observability&lt;/td&gt;
-&lt;td&gt;1.2.0 +&lt;/td&gt;
-&lt;td&gt;v1.2.0 +&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Refer to sample files &lt;a href=&#34;https://github.com/dell/csm-operator/tree/main/samples&#34;&gt;here&lt;/a&gt; for prior versions of CSM.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Dell CSM Operator can be installed manually or via Operator Hub.&lt;/p&gt;
 &lt;h3 id=&#34;manual-installation&#34;&gt;Manual Installation&lt;/h3&gt;
 &lt;h4 id=&#34;operator-installation-on-a-cluster-without-olm&#34;&gt;Operator Installation on a cluster without OLM&lt;/h4&gt;
 &lt;ol&gt;
-&lt;li&gt;Clone and checkout the required csm-operator version using &lt;code&gt;git clone -b v1.0.0 https://github.com/dell/csm-operator.git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Clone and checkout the required csm-operator version using &lt;code&gt;git clone -b v1.1.0 https://github.com/dell/csm-operator.git&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;(Optional) If using a local Docker image, edit the &lt;code&gt;deploy/operator.yaml&lt;/code&gt; file and set the image name for the CSM Operator Deployment.&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;bash scripts/install.sh&lt;/code&gt; to install the operator.&lt;/li&gt;
@@ -129,45 +261,6 @@
 	
 &lt;/figure&gt;
 
-&lt;h4 id=&#34;operator-installation-on-a-cluster-with-olm&#34;&gt;Operator Installation on a cluster with OLM&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;Clone and checkout the required csm-operator version using &lt;code&gt;git clone -b v1.0.0 https://github.com/dell/csm-operator.git&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;bash scripts/install_olm.sh&lt;/code&gt; to install the operator.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: Dell CSM Operator will get installed in the &lt;code&gt;test-csm-operator-olm&lt;/code&gt; namespace.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-
-
-
-
-
-
-&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/install_olm_hu2eedd74f931e8260c860feb0c72f1e62_182304_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1022&#34;&gt;
-	
-&lt;/figure&gt;
-
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;Once installation completes, run the command &lt;code&gt;kubectl get pods -n test-csm-operator-olm&lt;/code&gt; to validate the installation. If installed successfully, you should be able to see the operator pods and CSV in the &lt;code&gt;test-csm-operator-olm&lt;/code&gt; namespace. The CSV phase will be in &lt;code&gt;Succeeded&lt;/code&gt; state.&lt;/li&gt;
-&lt;/ol&gt;
-
-
-
-
-
-
-
-&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/install_olm_pods_hu66764453d70d08f74a9828e23052aaa9_58146_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;367&#34;&gt;
-	
-&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;h3 id=&#34;installation-via-operator-hub&#34;&gt;Installation via Operator Hub&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;dell-csm-operator&lt;/code&gt; can be installed via Operator Hub on upstream Kubernetes clusters &amp;amp; Red Hat OpenShift Clusters.&lt;/p&gt;
 &lt;p&gt;The installation process involves the creation of a &lt;code&gt;Subscription&lt;/code&gt; object either via the &lt;em&gt;OperatorHub&lt;/em&gt; UI or using &lt;code&gt;kubectl/oc&lt;/code&gt;. While creating the &lt;code&gt;Subscription&lt;/code&gt; you can set the Approval strategy for the &lt;code&gt;InstallPlan&lt;/code&gt; for the operator to:&lt;/p&gt;
@@ -190,27 +283,13 @@
 	
 &lt;/figure&gt;
 
-&lt;h4 id=&#34;operator-uninstallation-on-a-cluster-with-olm&#34;&gt;Operator uninstallation on a cluster with OLM&lt;/h4&gt;
-&lt;p&gt;To uninstall a CSM operator installed with OLM run &lt;code&gt;bash scripts/uninstall_olm.sh&lt;/code&gt;. This will uninstall the operator in  &lt;code&gt;test-csm-operator-olm&lt;/code&gt; namespace.&lt;/p&gt;
-
-
-
-
-
-
-
-&lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v1/deployment/csmoperator/uninstall_olm_hu7acfc5f0715e9eb8698001d34862a289_37915_2500x0_resize_q75_catmullrom.JPG&#34; width=&#34;2500&#34; height=&#34;496&#34;&gt;
-	
-&lt;/figure&gt;
-
 &lt;h3 id=&#34;to-upgrade-dell-csm-operator-perform-the-following-steps&#34;&gt;To upgrade Dell CSM Operator, perform the following steps.&lt;/h3&gt;
 &lt;p&gt;Dell CSM Operator can be upgraded in 2 ways:&lt;/p&gt;
 &lt;p&gt;1.Using script (for non-OLM based installation)&lt;/p&gt;
 &lt;p&gt;2.Using Operator Lifecycle Manager (OLM)&lt;/p&gt;
 &lt;h4 id=&#34;using-installation-script&#34;&gt;Using Installation Script&lt;/h4&gt;
 &lt;ol&gt;
-&lt;li&gt;Clone and checkout the required csm-operator version using &lt;code&gt;git clone -b v1.0.0 https://github.com/dell/csm-operator.git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Clone and checkout the required csm-operator version using &lt;code&gt;git clone -b v1.1.0 https://github.com/dell/csm-operator.git&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Execute &lt;code&gt;bash scripts/install.sh --upgrade&lt;/code&gt;  . This command will install the latest version of the operator.&lt;/li&gt;
 &lt;/ol&gt;
@@ -226,7 +305,7 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for Upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h3&gt;
-&lt;p&gt;As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.&lt;br&gt;
+&lt;p&gt;As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 &lt;code&gt;containerstoragemodule&lt;/code&gt; CRD is installed in API Group &lt;code&gt;storage.dell.com&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Drivers and modules can be installed by creating a &lt;code&gt;customResource&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;custom-resource-specification&#34;&gt;Custom Resource Specification&lt;/h3&gt;

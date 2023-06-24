@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.0">
+<meta name="generator" content="Hugo 0.114.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerscale/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-05-17T03:13:02-04:00" />
+<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerScale via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2023-05-17T03:13:02-04:00" />
-<meta itemprop="wordCount" content="841">
+<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
+<meta itemprop="wordCount" content="834">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerScale via Dell CSM Operator
@@ -43,6 +43,7 @@
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
 
   </head>
   <body class="td-page">
@@ -83,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.5.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.4</a>
 	
 </div>
 
@@ -105,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,8 +144,13 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeployment-li">
   <a href="/csm-docs/docs/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeploymentcsmoperator-li">
   <a href="/csm-docs/docs/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -153,10 +159,14 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax"><span class="">PowerMax</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale"><span class="td-sidebar-nav-active-item">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsmoperatordriversunity-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriversunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsdeploymentcsmoperatormodules-li">
@@ -168,6 +178,8 @@
   <a href="/csm-docs/docs/deployment/csmoperator/modules/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication-li">
   <a href="/csm-docs/docs/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency"><span class="">Resiliency</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsmoperatortroubleshooting-li">
@@ -358,6 +370,8 @@
   <a href="/csm-docs/docs/authorization/deployment/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentrpm"><span class="">RPM</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymenthelm-li">
   <a href="/csm-docs/docs/authorization/deployment/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymenthelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymentoperator-li">
+  <a href="/csm-docs/docs/authorization/deployment/operator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentoperator"><span class="">Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationuninstallation-li">
@@ -660,11 +674,10 @@
 <p>The CSI Driver for Dell PowerScale can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available <a href="../../#installation">here</a>.</p>
 <p>Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.</p>
-<p><strong>Note</strong>: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerScale via Operator.</p>
 <h3 id="listing-installed-drivers-with-the-containerstoragemodule-crd">Listing installed drivers with the ContainerStorageModule CRD</h3>
-<p>User can query for all Dell CSI drivers using the following command:
-<code>kubectl get csm --all-namespaces</code></p>
-<h3 id="prerequisite">Prerequisite</h3>
+<p>User can query for all Dell CSI drivers using the following command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get csm --all-namespaces
+</span></span></code></pre></div><h3 id="prerequisite">Prerequisite</h3>
 <ol>
 <li>
 <p>Create namespace.
@@ -722,11 +735,11 @@ Execute <code>kubectl create namespace isilon</code> to create the isilon namesp
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;password&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">endpoint</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;1.2.3.4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">endpointPort</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;8080&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><p>Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,
-<code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml</code></p>
-<p>Use the following command to replace or update the secret</p>
-<p><code>kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -</code></p>
-<p><strong>Note</strong>: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
+</span></span></span></code></pre></div><p>Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create secret generic isilon-creds -n isilon --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml
+</span></span></code></pre></div><p>Use the following command to replace or update the secret</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create secret generic isilon-creds -n isilon --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>secret.yaml -o yaml --dry-run <span style="color:#000;font-weight:bold">|</span> kubectl replace -f -
+</span></span></code></pre></div><p><strong>Note</strong>: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
 The driver will continue to use previous values in case of an error found in the YAML file.</p>
 </li>
 <li>
@@ -770,6 +783,12 @@ Please refer <a href="../../../../csidriver/installation/helm/isilon/#certificat
 <td>Determines the DNS Policy of the Node service</td>
 <td>Yes</td>
 <td>ClusterFirstWithHostNet</td>
+</tr>
+<tr>
+<td>storageCapacity</td>
+<td>Enable/Disable storage capacity tracking feature</td>
+<td>No</td>
+<td>false</td>
 </tr>
 <tr>
 <td><em><strong>Common parameters for node and controller</strong></em></td>
@@ -865,9 +884,9 @@ Please refer <a href="../../../../csidriver/installation/helm/isilon/#certificat
 </table>
 </li>
 <li>
-<p>Execute the following command to create PowerScale custom resource:
-<code>kubectl create -f &lt;input_sample_file.yaml&gt;</code> .
-This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.</p>
+<p>Execute the following command to create PowerScale custom resource:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f &lt;input_sample_file.yaml&gt;
+</span></span></code></pre></div><p>This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.</p>
 </li>
 <li>
 <p><a href="../#verifying-the-driver-installation">Verify the CSI Driver installation</a></p>
@@ -933,7 +952,7 @@ This command will deploy the CSI-PowerScale driver in the namespace specified in
 
 
     </div>
-    
+    <script src='/csm-docs/js/prism.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 

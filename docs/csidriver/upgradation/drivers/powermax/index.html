@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.0">
+<meta name="generator" content="Hugo 0.114.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,10 +16,10 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powermax/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-05-23T20:26:07+05:30" />
+<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Upgrade PowerMax CSI driver">
-<meta itemprop="dateModified" content="2023-05-23T20:26:07+05:30" />
+<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="wordCount" content="243">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
@@ -39,6 +39,7 @@
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
 
   </head>
   <body class="td-page">
@@ -79,13 +80,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.5.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.4</a>
 	
 </div>
 
@@ -101,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -139,8 +140,13 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsdeployment-li">
   <a href="/csm-docs/docs/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperator-li">
   <a href="/csm-docs/docs/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -149,10 +155,14 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax"><span class="">PowerMax</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriversunity-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriversunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodules-li">
@@ -164,6 +174,8 @@
   <a href="/csm-docs/docs/deployment/csmoperator/modules/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication-li">
   <a href="/csm-docs/docs/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency"><span class="">Resiliency</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatortroubleshooting-li">
@@ -354,6 +366,8 @@
   <a href="/csm-docs/docs/authorization/deployment/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentrpm"><span class="">RPM</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymenthelm-li">
   <a href="/csm-docs/docs/authorization/deployment/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymenthelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymentoperator-li">
+  <a href="/csm-docs/docs/authorization/deployment/operator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentoperator"><span class="">Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationuninstallation-li">
@@ -595,7 +609,7 @@
         <li><a href="#updating-the-csi-driver-to-use-100-unisphere">Updating the CSI Driver to use 10.0 Unisphere</a></li>
       </ul>
     </li>
-    <li><a href="#update-driver-from-v25-to-v26-using-helm">Update Driver from v2.5 to v2.6 using Helm</a></li>
+    <li><a href="#update-driver-from-v26-to-v27-using-helm">Update Driver from v2.6 to v2.7 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
   </ul>
 </nav>
@@ -650,36 +664,47 @@
 
 	       
 	<p>You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.</p>
-<p><strong>Note:</strong> CSI Driver for Powermax v2.4.0 requires 10.0 REST endpoint support of Unisphere.</p>
+<p><strong>Note:</strong> CSI Driver for PowerMax v2.4.0 requires 10.0 REST endpoint support of Unisphere.</p>
 <h3 id="updating-the-csi-driver-to-use-100-unisphere">Updating the CSI Driver to use 10.0 Unisphere</h3>
 <ol>
 <li>Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions <a href="https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;ps=true">here.</a></li>
 <li>Update the <code>my-powermax-settings.yaml</code> to have endpoint with 10.0 support.</li>
 </ol>
-<h2 id="update-driver-from-v25-to-v26-using-helm">Update Driver from v2.5 to v2.6 using Helm</h2>
+<h2 id="update-driver-from-v26-to-v27-using-helm">Update Driver from v2.6 to v2.7 using Helm</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone -b v2.6.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository and get the driver.</li>
+<li>Run <code>git clone -b v2.7.0 https://github.com/dell/csi-powermax.git</code> to clone the git repository and get the driver.</li>
 <li>Update the values file as needed.</li>
-<li>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running: <code>cd ../dell-csi-helm-installer &amp;&amp; ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade</code>.</li>
+<li>Run the <code>csi-install</code> script with the option <em>--upgrade</em> by running:
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> ../dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade
+</span></span></code></pre></div></li>
 </ol>
 <p><em>NOTE:</em></p>
 <ul>
-<li>If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.</li>
-<li>To update any installation parameter after the driver has been installed, change the <code>my-powermax-settings.yaml</code> file and run the install script with the option <em>--upgrade</em>, for example: <code>./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml –upgrade</code>.</li>
-<li>You cannot upgrade between drivers with different fsGroupPolicies. To check the current driver&rsquo;s fsGroupPolicy, use this command:
-<code> kubectl describe csidriver csi-powermax</code>
-and check the &ldquo;Spec&rdquo; section:</li>
+<li>
+<p>If you are upgrading from a driver version that was installed using Helm v2, ensure that you install Helm3 before installing the driver.</p>
+</li>
+<li>
+<p>To update any installation parameter after the driver has been installed, change the <code>my-powermax-settings.yaml</code> file and run the install script with the option <em>--upgrade</em>, for example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml –upgrade
+</span></span></code></pre></div></li>
+<li>
+<p>You cannot upgrade between drivers with different fsGroupPolicies. To check the current driver&rsquo;s fsGroupPolicy, use this command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe csidriver csi-powermax
+</span></span></code></pre></div><p>and check the &ldquo;Spec&rdquo; section:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">...</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">Spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">Attach Required</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">Fs Group Policy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#000">ReadWriteOnceWithFSType</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">Pod Info On Mount</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">Requires Republish</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">Storage Capacity</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#000">...</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div></li>
 </ul>
-<pre tabindex="0"><code>...
-Spec:
-  Attach Required:     true
-  Fs Group Policy:     ReadWriteOnceWithFSType
-  Pod Info On Mount:   false
-  Requires Republish:  false
-  Storage Capacity:    false
-...
-</code></pre><h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
+<h2 id="upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</h2>
 <p><strong>Note:</strong> Upgrading the Operator does not upgrade the CSI Driver.</p>
 <ol>
 <li>Please upgrade the Dell CSI Operator by following <a href="./../operator">here</a>.</li>
@@ -740,7 +765,7 @@ Spec:
 
 
     </div>
-    
+    <script src='/csm-docs/js/prism.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 

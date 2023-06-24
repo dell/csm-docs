@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.0">
+<meta name="generator" content="Hugo 0.114.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/features/powerflex/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" />
+<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Code features for PowerFlex Driver">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
-<meta itemprop="wordCount" content="3078">
+<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
+<meta itemprop="wordCount" content="3332">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Code features for PowerFlex Driver"/>
@@ -39,6 +39,7 @@
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
 
   </head>
   <body class="td-page">
@@ -79,13 +80,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.5.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.4</a>
 	
 </div>
 
@@ -101,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -139,18 +140,7 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3deployment-li">
   <a href="/csm-docs/v3/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsminstaller-li">
-  <a href="/csm-docs/v3/deployment/csminstaller/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstaller"><span class="">CSM Installer</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallercsmapi-li">
-  <a href="/csm-docs/v3/deployment/csminstaller/csmapi/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallercsmapi"><span class="">CSM REST API</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallercsmcli-li">
-  <a href="/csm-docs/v3/deployment/csminstaller/csmcli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallercsmcli"><span class="">CSM CLI</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallertroubleshooting-li">
-  <a href="/csm-docs/v3/deployment/csminstaller/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallertroubleshooting"><span class="">Troubleshooting</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
   <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatordrivers-li">
@@ -247,6 +237,8 @@
   <a href="/csm-docs/v3/csidriver/upgradation/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriverspowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriversunity-li">
   <a href="/csm-docs/v3/csidriver/upgradation/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriversunity"><span class="">Unity XT</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriversoffline-li">
+  <a href="/csm-docs/v3/csidriver/upgradation/drivers/offline/" title="Offline Upgrade of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriversoffline"><span class="">Offline Upgrade</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsv3csidriverfeatures-li">
@@ -320,6 +312,15 @@
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3authorizationdesign-li">
   <a href="/csm-docs/v3/authorization/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationdesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3authorizationbackup-and-restore-li">
+  <a href="/csm-docs/v3/authorization/backup-and-restore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationbackup-and-restore"><span class="">Backup and Restore</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3authorizationbackup-and-restorehelm-li">
+  <a href="/csm-docs/v3/authorization/backup-and-restore/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationbackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3authorizationbackup-and-restorerpm-li">
+  <a href="/csm-docs/v3/authorization/backup-and-restore/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3authorizationdeployment-li">
   <a href="/csm-docs/v3/authorization/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationdeployment"><span class="">Deployment</span></a>
   <ul class="ul-3 foldable">
@@ -351,6 +352,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitymetricspowerflex-li">
   <a href="/csm-docs/v3/observability/metrics/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitymetricspowerflex"><span class="">PowerFlex Metrics</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitymetricspowerscale-li">
+  <a href="/csm-docs/v3/observability/metrics/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitymetricspowerscale"><span class="">PowerScale Metrics</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitymetricspowerstore-li">
   <a href="/csm-docs/v3/observability/metrics/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitymetricspowerstore"><span class="">PowerStore Metrics</span></a>
 </li>
@@ -396,6 +399,8 @@
   <a href="/csm-docs/v3/replication/deployment/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerstore-li">
   <a href="/csm-docs/v3/replication/deployment/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentunity-li">
+  <a href="/csm-docs/v3/replication/deployment/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentunity"><span class="">Unity</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationarchitecture-li">
@@ -412,6 +417,8 @@
   <a href="/csm-docs/v3/replication/monitoring/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationmonitoring"><span class="">Monitoring</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationreplication-actions-li">
   <a href="/csm-docs/v3/replication/replication-actions/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationreplication-actions"><span class="">Replication Actions</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationvolume_expansion-li">
+  <a href="/csm-docs/v3/replication/volume_expansion/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationvolume_expansion"><span class="">Volume Expansion</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationtools-li">
   <a href="/csm-docs/v3/replication/tools/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationtools"><span class="">Tools</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationtroubleshooting-li">
@@ -450,16 +457,55 @@
   <a href="/csm-docs/v3/snapshots/volume-group-snapshots/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3snapshotsvolume-group-snapshots"><span class="">Volume Group Snapshots</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3release-li">
-  <a href="/csm-docs/v3/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3release"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3applicationmobility-li">
+  <a href="/csm-docs/v3/applicationmobility/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3applicationmobility"><span class="">Application Mobility</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilitydeployment-li">
+  <a href="/csm-docs/v3/applicationmobility/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilitydeployment"><span class="">Deployment</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilityuninstallation-li">
+  <a href="/csm-docs/v3/applicationmobility/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilityuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilityuse_cases-li">
+  <a href="/csm-docs/v3/applicationmobility/use_cases/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilityuse_cases"><span class="">Use Cases</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilitytroubleshooting-li">
+  <a href="/csm-docs/v3/applicationmobility/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilitytroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilityrelease-li">
+  <a href="/csm-docs/v3/applicationmobility/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilityrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3secure-li">
+  <a href="/csm-docs/v3/secure/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3secure"><span class="">Secure</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3secureencryption-li">
+  <a href="/csm-docs/v3/secure/encryption/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3secureencryption"><span class="">Encryption</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptiondeployment-li">
+  <a href="/csm-docs/v3/secure/encryption/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptiondeployment"><span class="">Deployment</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptionuninstallation-li">
+  <a href="/csm-docs/v3/secure/encryption/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptionuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptionvault-li">
+  <a href="/csm-docs/v3/secure/encryption/vault/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptionvault"><span class="">Vault Configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptiontroubleshooting-li">
+  <a href="/csm-docs/v3/secure/encryption/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptionrelease-li">
+  <a href="/csm-docs/v3/secure/encryption/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptionrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3troubleshooting-li">
   <a href="/csm-docs/v3/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3troubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3license-li">
+  <a href="/csm-docs/v3/license/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3license"><span class="">License</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3release-li">
+  <a href="/csm-docs/v3/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3release"><span class="">Release notes</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3support-li">
   <a href="/csm-docs/v3/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3support"><span class="">Support</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3references-li">
   <a href="/csm-docs/v3/references/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3references"><span class="">References</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3referencesfaq-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3referencescli-li">
+  <a href="/csm-docs/v3/references/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3referencescli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3referencesfaq-li">
   <a href="/csm-docs/v3/references/faq/" title="CSM FAQ" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3referencesfaq"><span class="">FAQ</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3referenceslearn-li">
   <a href="/csm-docs/v3/references/learn/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3referenceslearn"><span class="">Learn</span></a>
@@ -535,6 +581,7 @@
       </ul>
     </li>
     <li><a href="#ephemeral-inline-volume">Ephemeral Inline Volume</a></li>
+    <li><a href="#consuming-existing-volumes-with-static-provisioning">Consuming Existing Volumes with Static Provisioning</a></li>
     <li><a href="#dynamic-logging-configuration">Dynamic Logging Configuration</a></li>
     <li><a href="#volume-health-monitoring">Volume Health Monitoring</a></li>
   </ul>
@@ -997,6 +1044,78 @@ Then run:</p>
 <pre tabindex="0"><code>./testEphemeral.sh
 </code></pre><p>this test deploys the pod with two ephemeral volumes, and write some data to them before deleting the pod.<br>
 When creating ephemeral volumes, it is important to specify the following within the volumeAttributes section: volumeName, size, storagepool, and if you want to use a non-default array, systemID.</p>
+<h2 id="consuming-existing-volumes-with-static-provisioning">Consuming Existing Volumes with Static Provisioning</h2>
+<p>To use existing volumes from PowerFlex array as Peristent volumes in your Kubernetes environment, perform these steps:</p>
+<ol>
+<li>Log into one of the MDMs of the PowerFlex cluster.</li>
+<li>Execute these commands to retrieve the <code>systemID</code> and <code>volumeID</code>.
+<ol>
+<li><code>scli --mdm_ip &lt;IPs, comma separated&gt; --login --username &lt;username&gt; --password &lt;password&gt;</code></li>
+</ol>
+<ul>
+<li><strong>Output:</strong> <code>Logged in. User role is SuperUser. System ID is &lt;systemID&gt;</code></li>
+</ul>
+<ol start="2">
+<li><code>scli --query_volume --volume_name &lt;volume name&gt;</code></li>
+</ol>
+<ul>
+<li><strong>Output:</strong> <code>Volume ID: &lt;volumeID&gt; Name: &lt;volume name&gt;</code></li>
+</ul>
+</li>
+<li>Create PersistentVolume and use this volume ID in the volumeHandle with the format <code>systemID</code>-<code>volumeID</code> in the manifest. Modify other parameters according to your needs.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PersistentVolume</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">existingVol</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">capacity</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">8Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">csi</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">csi-vxflexos.dellemc.com</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">volumeHandle</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">&lt;systemID&gt;-&lt;volumeID&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">volumeMode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Filesystem</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">accessModes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#000">ReadWriteOnce</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><ol start="4">
+<li>Create PersistentVolumeClaim to use this PersistentVolume.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PersistentVolumeClaim</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pvol</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">accessModes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#000">ReadWriteOnce</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">volumeMode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Filesystem</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">requests</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">storage</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">8Gi</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">storageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><ol start="5">
+<li>Then use this PVC as a volume in a pod.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Pod</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">static-prov-pod</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">containers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">test</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">busybox</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">command</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;sleep&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;3600&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">volumeMounts</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span>- <span style="color:#204a87;font-weight:bold">mountPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/data0&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pvol</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">volumes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pvol</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">persistentVolumeClaim</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">claimName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pvol</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><ol start="6">
+<li>After the pod is <code>Ready</code> and <code>Running</code>, you can start to use this pod and volume.</li>
+</ol>
+<p><strong>Note:</strong> Retrieval of the volume ID is possible through the UI. You must select the volume, navigate to <code>Details</code> section and click the volume in the graph. This selection will set the filter to the desired volume. At this point the volume ID can be found in the URL.</p>
 <h2 id="dynamic-logging-configuration">Dynamic Logging Configuration</h2>
 <p>The dynamic logging configuration that was introduced in v1.5 of the driver was revamped for v2.0; v1.5 logging configuration is not compatible with v2.0.<br>
 Two fields in values.yaml (located at helm/csi-vxflexos/values.yaml) are used to configure the dynamic logging: logLevel and logFormat.</p>
@@ -1085,7 +1204,7 @@ Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vo
 
 
     </div>
-    
+    <script src='/csm-docs/js/prism.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 

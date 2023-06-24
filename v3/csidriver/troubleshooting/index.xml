@@ -131,6 +131,10 @@
 &lt;td&gt;CSI-PowerFlex volumes cannot mount; are being recognized as multipath devices&lt;/td&gt;
 &lt;td&gt;CSI-PowerFlex does not support multipath; to fix: &lt;br/&gt; 1. Remove any multipath mapping involving a powerflex volume with &lt;code&gt;multipath -f &amp;lt;powerflex volume&amp;gt;&lt;/code&gt; &lt;br/&gt; 2. Blacklist CSI-PowerFlex volumes in multipath config file&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When attempting a driver upgrade, you see: &lt;code&gt;spec.fsGroupPolicy: Invalid value: &amp;quot;xxx&amp;quot;: field is immutable&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;You cannot upgrade between drivers with different fsGroupPolicies. See &lt;a href=&#34;../../upgradation/drivers/powerflex&#34;&gt;upgrade documentation&lt;/a&gt; for more details&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
@@ -180,6 +184,10 @@
 &lt;tr&gt;
 &lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
 &lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the volumeattachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;When attempting a driver upgrade, you see: &lt;code&gt;spec.fsGroupPolicy: Invalid value: &amp;quot;xxx&amp;quot;: field is immutable&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;You cannot upgrade between drivers with different fsGroupPolicies. See &lt;a href=&#34;../../upgradation/drivers/powermax&#34;&gt;upgrade documentation&lt;/a&gt; for more details&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -249,6 +257,10 @@
 &lt;td&gt;While attaching a ReadOnly PVC from a volume snapshot to a pod, the mount operation will fail with error &lt;code&gt;mounting ... failed, reason given by server: No such file or directory&lt;/code&gt;, if RO volume&amp;rsquo;s access zone(non System access zone) on Isilon is configured with a dedicated service IP(which is same as &lt;code&gt;AzServiceIP&lt;/code&gt; storage class parameter). This operation results in accessing the snapshot base directory(&lt;code&gt;/ifs&lt;/code&gt;) and results in overstepping the RO volume&amp;rsquo;s access zone&amp;rsquo;s base directory, which the OneFS doesn&amp;rsquo;t allow.&lt;/td&gt;
 &lt;td&gt;Provide a service ip that belongs to RO volume&amp;rsquo;s access zone which set the highest level &lt;code&gt;/ifs&lt;/code&gt; as its zone base directory.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.22.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1&lt;/td&gt;
+&lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/main/helm/csi-isilon/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -299,6 +311,10 @@
 &lt;tr&gt;
 &lt;td&gt;If the pod creation for NVMe takes time when the connections between the host and the array are more than 2 and considerable volumes are mounted on the host&lt;/td&gt;
 &lt;td&gt;Reduce the number of connections between the host and the array to 2.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.22.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1&lt;/td&gt;
+&lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/csi-powerstore/blob/main/helm/csi-powerstore/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -355,6 +371,10 @@
 &lt;tr&gt;
 &lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
 &lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the VolumeAttachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Volume attachments are not removed after deleting the pods&lt;/td&gt;
+&lt;td&gt;If you are using Kubernetes version &amp;lt; 1.24, assign the volume name prefix such that the total length of volume name created in array should be more than 68 bytes. From Kubernetes version &amp;gt;= 1.24, this issue is taken care.&lt;br /&gt; Please refer the kubernetes issue &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/97230&#34;&gt;https://github.com/kubernetes/kubernetes/issues/97230&lt;/a&gt; which has detailed explanation.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

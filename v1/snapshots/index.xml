@@ -41,7 +41,9 @@ kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;IMPORTANT: delete previous v1aplha2 version of CRD and vgs resources created using alpha version.
 	   Snapshots on array will remain if memberReclaimPolicy=retain was used.
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you want to install the VGS CRD from a pre-generated yaml, you can do so with this command (run in top-level folder):&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl apply -f config/crd/vgs-install.yaml
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/dell/csi-volumegroup-snapshotter.git
+cd csi-volumegroup-snapshotter
+kubectl apply -f config/crd/vgs-install.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you want to create your own CRD for installation with Kustomize, then the command &lt;code&gt;make install&lt;/code&gt; can be used to create and install the Custom Resource Definitions in your Kubernetes cluster.&lt;/p&gt;
 &lt;h3 id=&#34;3-deploy-vgs-in-csi-driver-with-helm-chart-parameters&#34;&gt;3. Deploy VGS in CSI Driver with Helm Chart Parameters&lt;/h3&gt;
 &lt;p&gt;The drivers that support Helm chart deployment allow the CSM Volume Group Snapshotter to be &lt;em&gt;optionally&lt;/em&gt; deployed

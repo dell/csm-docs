@@ -54,8 +54,8 @@
 &lt;h3 id=&#34;shell-script-installer&#34;&gt;Shell Script Installer&lt;/h3&gt;
 &lt;p&gt;The easiest way to obtain the tar archive with the shell script installer is directly from the &lt;a href=&#34;https://github.com/dell/karavi-authorization/releases&#34;&gt;GitHub repository&amp;rsquo;s releases&lt;/a&gt; section.&lt;/p&gt;
 &lt;p&gt;Alternatively, the tar archive can be built from source by cloning the &lt;a href=&#34;https://github.com/dell/karavi-authorization&#34;&gt;GitHub repository&lt;/a&gt; and using the following Makefile targets to build the installer:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;make dist build-installer rpm package
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;build-installer&lt;/code&gt; step creates a binary at &lt;code&gt;karavi-authorization/bin/deploy&lt;/code&gt; and embeds all components required for installation. The &lt;code&gt;rpm&lt;/code&gt; step generates an RPM package and stores it at &lt;code&gt;karavi-authorization/deploy/rpm/x86_64/&lt;/code&gt;. The &lt;code&gt;package&lt;/code&gt; step bundles the install script, authorization package, pre-downloaded K3s-SELinux packages, and policies folder together for the installation in the &lt;code&gt;packages/&lt;/code&gt; directory.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make dist build-installer rpm package
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;build-installer&lt;/code&gt; step creates a binary at &lt;code&gt;karavi-authorization/bin/deploy&lt;/code&gt; and embeds all components required for installation. The &lt;code&gt;rpm&lt;/code&gt; step generates an RPM package and stores it at &lt;code&gt;karavi-authorization/deploy/rpm/x86_64/&lt;/code&gt;. The &lt;code&gt;package&lt;/code&gt; step bundles the install script, authorization package, pre-downloaded K3s-SELinux packages, and policies folder together for the installation in the &lt;code&gt;packages/&lt;/code&gt; directory.
 This allows CSM for Authorization to be installed in network-restricted environments.&lt;/p&gt;
 &lt;p&gt;A Storage Administrator can execute the shell script, install_karavi_auth.sh as a root user or via &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;installing-the-rpm&#34;&gt;Installing the RPM&lt;/h3&gt;
@@ -70,7 +70,7 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;host&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;:8080&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;zipkin&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;collectoruri&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;http://DNS-hostname:9411/api/v2/spans&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;collectoruri&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;http://zipkin-addr:9411/api/v2/spans&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;probability&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;certificate&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
@@ -93,23 +93,6 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;li&gt;There are a number of ways to create certificates. In a production environment, certificates are usually created and managed by an IT administrator. Otherwise, certificates can be created using OpenSSL.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;In order to configure secure grpc connectivity, an additional subdomain in the format &lt;code&gt;grpc.DNS-hostname&lt;/code&gt; is also required. All traffic from &lt;code&gt;grpc.DNS-hostname&lt;/code&gt; needs to be routed to &lt;code&gt;DNS-hostname&lt;/code&gt; address, this can be configured by adding a new DNS entry for &lt;code&gt;grpc.DNS-hostname&lt;/code&gt; or providing a temporary path in the systems &lt;code&gt;/etc/hosts&lt;/code&gt; file.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The certificate provided in &lt;code&gt;crtFile&lt;/code&gt; should be valid for both the &lt;code&gt;DNS-hostname&lt;/code&gt; and the &lt;code&gt;grpc.DNS-hostname&lt;/code&gt; address.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;For example, create the certificate config file with alternate names (to include DNS-hostname and grpc.DNS-hostname) and then create the .crt file: 
-
-  ```
-  CN = DNS-hostname
-  subjectAltName = @alt_names
-  [alt_names]
-  DNS.1 = grpc.DNS-hostname.com
-
-  $ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out DNS-hostname.com.crt -days 365 -sha256
-  ```
-&lt;/code&gt;&lt;/pre&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;To install the rpm package on the system, you must first extract the contents of the tar file with the command:&lt;/p&gt;
@@ -119,72 +102,67 @@ This allows CSM for Authorization to be installed in network-restricted environm
 &lt;p&gt;Afterwards, you must enter the extracted folder&amp;rsquo;s directory and run the shell script:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; karavi_authorization_&amp;lt;version&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --traefik_web_port &amp;lt;web port number&amp;gt; --traefik_websecure_port &amp;lt;websecure port number&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ex.:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sh install_karavi_auth.sh --traefik_web_port &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;30001&lt;/span&gt; --traefik_websecure_port &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;30002&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After installation, application data will be stored on the system under &lt;code&gt;/var/lib/rancher/k3s/storage/&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh install_karavi_auth.sh --traefik_web_port &amp;lt;web port number&amp;gt; --traefik_websecure_port &amp;lt;websecure port number&amp;gt;
+&lt;p&gt;If errors occur during installation, review the &lt;a href=&#34;../../troubleshooting&#34;&gt;Troubleshooting&lt;/a&gt; section.&lt;/p&gt;
+&lt;h2 id=&#34;configuring-the-csm-for-authorization-proxy-server&#34;&gt;Configuring the CSM for Authorization Proxy Server&lt;/h2&gt;
+&lt;p&gt;The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.&lt;/p&gt;
+&lt;p&gt;Please follow the steps outlined in the &lt;a href=&#34;../../configuration/proxy-server&#34;&gt;proxy server&lt;/a&gt; configuration.&lt;/p&gt;
+&lt;h2 id=&#34;configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/h2&gt;
+&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant administrator.&lt;/p&gt;
+&lt;p&gt;Please follow the steps outlined in &lt;a href=&#34;../../configuration/powerflex&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;../../configuration/powermax&#34;&gt;PowerMax&lt;/a&gt;, or &lt;a href=&#34;../../configuration/powerscale&#34;&gt;PowerScale&lt;/a&gt; to configure the CSI Driver to work with the Authorization sidecar.&lt;/p&gt;
+&lt;h2 id=&#34;updating-csm-for-authorization-proxy-server-configuration&#34;&gt;Updating CSM for Authorization Proxy Server Configuration&lt;/h2&gt;
+&lt;p&gt;CSM for Authorization has a subset of configuration parameters that can be updated dynamically:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;web.jwtsigningsecret&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;secret&amp;rdquo;&lt;/td&gt;
+&lt;td&gt;The secret used to sign JWT tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Updating configuration parameters can be done by editing the &lt;code&gt;karavi-config-secret&lt;/code&gt; on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;k3s kubectl -n karavi get secret/karavi-config-secret
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To update or add parameters, you must edit the base64 encoded data in the secret. The&lt;code&gt; karavi-config-secret&lt;/code&gt; data can be decoded like so:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;k3s kubectl -n karavi get secret/karavi-config-secret -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; grep config.yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; head -n &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 -d
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Save the output to a file or copy it to an editor to make changes. Once you are done with the changes, you must encode the data to base64. If your changes are in a file, you can encode it like so:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat &amp;lt;file&amp;gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Copy the new, encoded data and edit the &lt;code&gt;karavi-config-secret&lt;/code&gt; with the new data. Run this command to edit the secret:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;k3s kubectl -n karavi edit secret/karavi-config-secret
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Replace the data in &lt;code&gt;config.yaml&lt;/code&gt; under the &lt;code&gt;data&lt;/code&gt; field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are updating the signing secret, the tenants need to be updated with new tokens via the &lt;code&gt;karavictl generate token&lt;/code&gt; command like so. The &lt;code&gt;--insecure&lt;/code&gt; flag is required if certificates were not provided in &lt;code&gt;$HOME/.karavi/config.json&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant &lt;span style=&#34;color:#000&#34;&gt;$TenantName&lt;/span&gt; --insecure --addr DNS-hostname &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed -e &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/&amp;#34;Token&amp;#34;: //&amp;#39;&lt;/span&gt; -e &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/[{}&amp;#34;]//g&amp;#39;&lt;/span&gt; -e &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/\\n/\n/g&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl -n &lt;span style=&#34;color:#000&#34;&gt;$namespace&lt;/span&gt; apply -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;csm-for-authorization-proxy-server-dynamic-configuration-settings&#34;&gt;CSM for Authorization Proxy Server Dynamic Configuration Settings&lt;/h2&gt;
+&lt;p&gt;Some settings are not stored in the &lt;code&gt;karavi-config-secret&lt;/code&gt; but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM for Authorization logging settings during runtime, run the below command on the K3s cluster, make your changes, and save the updated configmap data.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;k3s kubectl -n karavi edit configmap/csm-config-params
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_CSI_DRVIER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; edit configmap/&amp;lt;release_name&amp;gt;-config-params
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Using PowerFlex as an example, &lt;code&gt;kubectl -n vxflexos edit configmap/vxflexos-config-params&lt;/code&gt; can be used to update the logging level of the sidecar-proxy and the driver.&lt;/p&gt;
 
-Ex.:
-
-sh install_karavi_auth.sh --traefik_web_port 30001 --traefik_websecure_port 30002
-
-
-5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
-
-If errors occur during installation, review the [Troubleshooting](../../troubleshooting) section.
-
-## Configuring the CSM for Authorization Proxy Server
-
-The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
-
-Please follow the steps outlined in the [proxy server](../../configuration/proxy-server) configuration.
-
-## Configuring a Dell CSI Driver with CSM for Authorization
-
-The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant administrator.
-
-Please follow the steps outlined in [PowerFlex](../../configuration/powerflex), [PowerMax](../../configuration/powermax), or [PowerScale](../../configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
-
-## Updating CSM for Authorization Proxy Server Configuration
-
-CSM for Authorization has a subset of configuration parameters that can be updated dynamically:
-
-| Parameter | Type | Default | Description |
-| --------- | ---- | ------- | ----------- |
-| web.jwtsigningsecret | String | &amp;#34;secret&amp;#34; |The secret used to sign JWT tokens | 
-
-Updating configuration parameters can be done by editing the `karavi-config-secret` on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so: 
-
-`k3s kubectl -n karavi get secret/karavi-config-secret`
-
-To update or add parameters, you must edit the base64 encoded data in the secret. The` karavi-config-secret` data can be decoded like so:
-
-`k3s kubectl -n karavi get secret/karavi-config-secret -o yaml | grep config.yaml | head -n 1 | awk &amp;#39;{print $2}&amp;#39; | base64 -d`
-
-Save the output to a file or copy it to an editor to make changes. Once you are done with the changes, you must encode the data to base64. If your changes are in a file, you can encode it like so:
-
-`cat &amp;lt;file&amp;gt; | base64`
-
-Copy the new, encoded data and edit the `karavi-config-secret` with the new data. Run this command to edit the secret:
-
-`k3s kubectl -n karavi edit secret/karavi-config-secret`
-
-Replace the data in `config.yaml` under the `data` field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.
-
-&amp;gt;__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is required if certificates were not provided in `$HOME/.karavi/config.json`
-
-`karavictl generate token --tenant $TenantName --insecure --addr grpc.DNS-hostname:443 | sed -e &amp;#39;s/&amp;#34;Token&amp;#34;: //&amp;#39; -e &amp;#39;s/[{}&amp;#34;]//g&amp;#39; -e &amp;#39;s/\\n/\n/g&amp;#39; | kubectl -n $namespace apply -f -`
-
-## CSM for Authorization Proxy Server Dynamic Configuration Settings
-
-Some settings are not stored in the `karavi-config-secret` but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM for Authorization logging settings during runtime, run the below command on the K3s cluster, make your changes, and save the updated configmap data.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;k3s kubectl -n karavi edit configmap/csm-config-params&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
-This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/&amp;lt;release_name&amp;gt;-config-params&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
-Using PowerFlex as an example, `kubectl -n vxflexos edit configmap/vxflexos-config-params` can be used to update the logging level of the sidecar-proxy and the driver.
-&lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
     
@@ -248,10 +226,12 @@ Using PowerFlex as an example, `kubectl -n vxflexos edit configmap/vxflexos-conf
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;web&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;jwtsigningsecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;randomString123&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After editing the file, run the following command to create a secret called &lt;code&gt;karavi-config-secret&lt;/code&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Use the following command to replace or update the secret:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;config.yaml&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;samples/csm-authorization/config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Use the following command to replace or update the secret:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic karavi-config-secret -n authorization --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;config.yaml&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;samples/csm-authorization/config.yaml -o yaml --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;client &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl replace -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Copy the default values.yaml file &lt;code&gt;cp charts/csm-authorization/values.yaml myvalues.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -337,7 +317,7 @@ Using PowerFlex as an example, `kubectl -n vxflexos edit configmap/vxflexos-conf
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;authorization.hostname&lt;/td&gt;
-&lt;td&gt;The hostname to configure the self-signed certificate (if applicable) and the proxy, tenant, role, and storage service Ingresses.&lt;/td&gt;
+&lt;td&gt;The hostname to configure the self-signed certificate (if applicable) and the proxy Ingress.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;csm-authorization.com&lt;/td&gt;
 &lt;/tr&gt;
@@ -378,24 +358,6 @@ Using PowerFlex as an example, `kubectl -n vxflexos edit configmap/vxflexos-conf
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;authorization.tenantServiceIngress.ingressClassName&lt;/td&gt;
-&lt;td&gt;The ingressClassName of the tenant-service Ingress.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;authorization.tenantServiceIngress.hosts&lt;/td&gt;
-&lt;td&gt;Additional host rules to be applied to the tenant-service Ingress.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;authorization.tenantServiceIngress.annotations&lt;/td&gt;
-&lt;td&gt;Additional annotations for the tenant-service Ingress.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;authorization.roleServiceIngress.ingressClassName&lt;/td&gt;
 &lt;td&gt;The ingressClassName of the role-service Ingress.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
@@ -410,24 +372,6 @@ Using PowerFlex as an example, `kubectl -n vxflexos edit configmap/vxflexos-conf
 &lt;tr&gt;
 &lt;td&gt;authorization.roleServiceIngress.annotations&lt;/td&gt;
 &lt;td&gt;Additional annotations for the role-service Ingress.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;authorization.storageServiceIngress.ingressClassName&lt;/td&gt;
-&lt;td&gt;The ingressClassName of the storage-service Ingress.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;authorization.storageServiceIngress.hosts&lt;/td&gt;
-&lt;td&gt;Additional host rules to be applied to the storage-service Ingress.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;authorization.storageServiceIngress.annotations&lt;/td&gt;
-&lt;td&gt;Additional annotations for the storage-service Ingress.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
@@ -457,49 +401,42 @@ Using PowerFlex as an example, `kubectl -n vxflexos edit configmap/vxflexos-conf
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The tenant, role, and storage services use GRPC. If the Ingress Controller requires annotations to support GRPC, they must be supplied.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
 &lt;ol start=&#34;6&#34;&gt;
 &lt;li&gt;Install the driver using &lt;code&gt;helm&lt;/code&gt;:&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;To install CSM Authorization with the service Ingresses using your own certificate, run:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization \
---set-file authorization.certificate=&amp;lt;location-of-certificate-file&amp;gt; \
---set-file authorization.privateKey=&amp;lt;location-of-private-key-file&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To install CSM Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;install-karavictl&#34;&gt;Install Karavictl&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--set-file authorization.certificate&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;location-of-certificate-file&amp;gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--set-file authorization.privateKey&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;location-of-private-key-file&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To install CSM Authorization with the service Ingresses using a self-signed certificate generated via cert-manager, run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm -n authorization install authorization -f myvalues.yaml charts/csm-authorization
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;install-karavictl&#34;&gt;Install Karavictl&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Download the latest release of karavictl&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -LO https://github.com/dell/karavi-authorization/releases/latest/download/karavictl
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -LO https://github.com/dell/karavi-authorization/releases/latest/download/karavictl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;Install karavictl&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo install -o root -g root -m 0755 karavictl /usr/local/bin/karavictl
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you do not have root access on the target system, you can still install karavictl to the ~/.local/bin directory:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;chmod +x karavictl
-mkdir -p ~/.local/bin
-mv ./karavictl ~/.local/bin/karavictl
-# and then append (or prepend) ~/.local/bin to $PATH
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Karavictl commands and intended use can be found &lt;a href=&#34;../../cli/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo install -o root -g root -m &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0755&lt;/span&gt; karavictl /usr/local/bin/karavictl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you do not have root access on the target system, you can still install karavictl to the ~/.local/bin directory:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x karavictl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p ~/.local/bin
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv ./karavictl ~/.local/bin/karavictl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# and then append (or prepend) ~/.local/bin to $PATH&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Karavictl commands and intended use can be found &lt;a href=&#34;../../cli/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-the-csm-authorization-proxy-server&#34;&gt;Configuring the CSM Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.&lt;/p&gt;
-&lt;p&gt;Configuration is achieved by using &lt;code&gt;karavictl&lt;/code&gt; to connect to the storage, tenant, and role services. In this example, we will be referencing an installation using &lt;code&gt;csm-authorization.com&lt;/code&gt; as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster&amp;rsquo;s master node.&lt;/p&gt;
+&lt;p&gt;Configuration is achieved by using &lt;code&gt;karavictl&lt;/code&gt; to connect to the proxy service. In this example, we will be referencing an installation using &lt;code&gt;csm-authorization.com&lt;/code&gt; as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster&amp;rsquo;s master node.&lt;/p&gt;
 &lt;p&gt;Run &lt;code&gt;kubectl -n authorization get ingress&lt;/code&gt; and &lt;code&gt;kubectl -n authorization get service&lt;/code&gt; to see the Ingress rules for these services and the exposed port for accessing these services via the LoadBalancer. For example:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# kubectl -n authorization get ingress
-NAME              CLASS   HOSTS                           ADDRESS   PORTS     AGE
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n authorization get ingress
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME              CLASS   HOSTS                           ADDRESS   PORTS     AGE
 proxy-server      nginx   csm-authorization.com                     00, 000   86s
-role-service      nginx   role.csm-authorization.com                00, 000   86s
-storage-service   nginx   storage.csm-authorization.com             00, 000   86s
-tenant-service    nginx   tenant.csm-authorization.com              00, 000   86s
-
-# kubectl -n auth get service
-NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n auth get service
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
 authorization-cert-manager                         ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                     28s
 authorization-cert-manager-webhook                 ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                      27s
 authorization-ingress-nginx-controller             LoadBalancer   00.000.000.000    &amp;lt;pending&amp;gt;     00:00000/TCP,000:00000/TCP   27s
@@ -510,12 +447,9 @@ redis-commander                                    ClusterIP      00.000.000.000
 role-service                                       ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                    27s
 storage-service                                    ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                    27s
 tenant-service                                     ClusterIP      00.000.000.000    &amp;lt;none&amp;gt;        000/TCP                    28s
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On the machine running &lt;code&gt;karavictl&lt;/code&gt;, the &lt;code&gt;/etc/hosts&lt;/code&gt; file needs to be updated with the Ingress hosts for the storage, tenant, and role services. For example:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;master_node_ip&amp;gt; tenant.csm-authorization.com
-&amp;lt;master_node_ip&amp;gt; role.csm-authorization.com
-&amp;lt;master_node_ip&amp;gt; storage.csm-authorization.com
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The port that exposes these services is &lt;code&gt;30016&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Please continue following the steps outlined in the &lt;a href=&#34;../../configuration/proxy-server&#34;&gt;proxy server&lt;/a&gt; configuration.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On the machine running &lt;code&gt;karavictl&lt;/code&gt;, the &lt;code&gt;/etc/hosts&lt;/code&gt; file needs to be updated with the Ingress hosts for the proxy, storage, and role services. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;master_node_ip&amp;gt; csm-authorization.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Please continue following the steps outlined in the &lt;a href=&#34;../../configuration/proxy-server&#34;&gt;proxy server&lt;/a&gt; configuration.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/h2&gt;
 &lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant admin.&lt;/p&gt;
 &lt;p&gt;Please follow the steps outlined in &lt;a href=&#34;../../configuration/powerflex&#34;&gt;PowerFlex&lt;/a&gt;, &lt;a href=&#34;../../configuration/powermax&#34;&gt;PowerMax&lt;/a&gt;, or &lt;a href=&#34;../../configuration/powerscale&#34;&gt;PowerScale&lt;/a&gt; to configure the CSI Driver to work with the Authorization sidecar.&lt;/p&gt;
@@ -540,23 +474,42 @@ tenant-service                                     ClusterIP      00.000.000.000
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Updating configuration parameters can be done by editing the &lt;code&gt;karavi-config-secret&lt;/code&gt;. The secret can be queried using k3s and kubectl like so:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl -n authorization get secret/karavi-config-secret&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;To update parameters, you must edit the base64 encoded data in the secret. The&lt;code&gt; karavi-config-secret&lt;/code&gt; data can be decoded like so:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl -n authorization get secret/karavi-config-secret -o yaml | grep config.yaml | head -n 1 | awk &#39;{print $2}&#39; | base64 -d&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Save the output to a file or copy it to an editor to make changes. Once you are done with the changes, you must encode the data to base64. If your changes are in a file, you can encode it like so:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;cat &amp;lt;file&amp;gt; | base64&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Copy the new, encoded data and edit the &lt;code&gt;karavi-config-secret&lt;/code&gt; with the new data. Run this command to edit the secret:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl -n karavi edit secret/karavi-config-secret&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Replace the data in &lt;code&gt;config.yaml&lt;/code&gt; under the &lt;code&gt;data&lt;/code&gt; field with your new, encoded data. Save the changes and CSM Authorization will read the changed secret.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n authorization get secret/karavi-config-secret
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To update parameters, you must edit the base64 encoded data in the secret. The&lt;code&gt; karavi-config-secret&lt;/code&gt; data can be decoded like so:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n authorization get secret/karavi-config-secret -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; grep config.yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; head -n &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64 -d
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Save the output to a file or copy it to an editor to make changes. Once you are done with the changes, you must encode the data to base64. If your changes are in a file, you can encode it like so:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat &amp;lt;file&amp;gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; base64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Copy the new, encoded data and edit the &lt;code&gt;karavi-config-secret&lt;/code&gt; with the new data. Run this command to edit the secret:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n karavi edit secret/karavi-config-secret
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Replace the data in &lt;code&gt;config.yaml&lt;/code&gt; under the &lt;code&gt;data&lt;/code&gt; field with your new, encoded data. Save the changes and CSM Authorization will read the changed secret.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are updating the signing secret, the tenants need to be updated with new tokens via the &lt;code&gt;karavictl generate token&lt;/code&gt; command.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;csm-for-authorization-proxy-server-dynamic-configuration-settings&#34;&gt;CSM for Authorization Proxy Server Dynamic Configuration Settings&lt;/h2&gt;
 &lt;p&gt;Some settings are not stored in the &lt;code&gt;karavi-config-secret&lt;/code&gt; but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM Authorization logging settings during runtime, run the below command, make your changes, and save the updated configMap data.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl -n authorization edit configmap/csm-config-params
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/&amp;lt;release_name&amp;gt;-config-params
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Using PowerFlex as an example, &lt;code&gt;kubectl -n vxflexos edit configmap/vxflexos-config-params&lt;/code&gt; can be used to update the logging level of the sidecar-proxy and the driver.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n authorization edit configmap/csm-config-params
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_CSI_DRVIER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; edit configmap/&amp;lt;release_name&amp;gt;-config-params
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Using PowerFlex as an example, &lt;code&gt;kubectl -n vxflexos edit configmap/vxflexos-config-params&lt;/code&gt; can be used to update the logging level of the sidecar-proxy and the driver.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Operator</title>
+      <link>https://dell.github.io/csm-docs/docs/authorization/deployment/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/authorization/deployment/operator/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
+To deploy the Operator, follow the instructions available &lt;a href=&#34;../../../deployment/csmoperator/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To install CSM Authorization via the Dell CSM Operator, follow the instructions &lt;a href=&#34;../../../deployment/csmoperator/modules/authorization&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To enable CSM Authorization with a supported Dell CSI Driver, follow the configuration steps for the relevant driver &lt;a href=&#34;../../../authorization/configuration&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>

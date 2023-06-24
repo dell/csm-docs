@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.0">
+<meta name="generator" content="Hugo 0.114.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,11 +18,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/resiliency/deployment/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" />
+<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="name" content="Deployment">
 <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Resiliency installation
 ">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
+<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="wordCount" content="1226">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Deployment"/>
@@ -43,6 +43,7 @@
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
 
   </head>
   <body class="td-page">
@@ -83,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.5.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.4</a>
 	
 </div>
 
@@ -105,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,8 +144,13 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsdeployment-li">
   <a href="/csm-docs/docs/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperator-li">
   <a href="/csm-docs/docs/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -153,10 +159,14 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax"><span class="">PowerMax</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriversunity-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriversunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodules-li">
@@ -168,6 +178,8 @@
   <a href="/csm-docs/docs/deployment/csmoperator/modules/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication-li">
   <a href="/csm-docs/docs/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency"><span class="">Resiliency</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatortroubleshooting-li">
@@ -358,6 +370,8 @@
   <a href="/csm-docs/docs/authorization/deployment/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentrpm"><span class="">RPM</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymenthelm-li">
   <a href="/csm-docs/docs/authorization/deployment/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymenthelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymentoperator-li">
+  <a href="/csm-docs/docs/authorization/deployment/operator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentoperator"><span class="">Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationuninstallation-li">
@@ -658,29 +672,29 @@
 <p>Configure all the helm chart parameters described below before installing the drivers.</p>
 <h2 id="helm-chart-installation">Helm Chart Installation</h2>
 <p>The drivers that support Helm chart installation allow CSM for Resiliency to be <em>optionally</em> installed by variables in the chart. There is a <em>podmon</em> block specified in the <em>values.yaml</em> file of the chart that will look similar to the text below by default:</p>
-<pre tabindex="0"><code># Enable this feature only after contact support for additional information
-podmon:
-  enabled: true
-  image: dellemc/podmon:v1.3.0
-  controller:
-    args:
-      - &#34;--csisock=unix:/var/run/csi/csi.sock&#34;
-      - &#34;--labelvalue=csi-vxflexos&#34;
-      - &#34;--mode=controller&#34;
-      - &#34;--skipArrayConnectionValidation=false&#34;
-      - &#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&#34;
-      - &#34;--driverPodLabelValue=dell-storage&#34;
-      - &#34;--ignoreVolumelessPods=false&#34;
-  node:
-    args:
-      - &#34;--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock&#34;
-      - &#34;--labelvalue=csi-vxflexos&#34;
-      - &#34;--mode=node&#34;
-      - &#34;--leaderelection=false&#34;
-      - &#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&#34;
-      - &#34;--driverPodLabelValue=dell-storage&#34;
-      - &#34;--ignoreVolumelessPods=false&#34;
-</code></pre><p>To install CSM for Resiliency with the driver, the following changes are required:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Enable this feature only after contact support for additional information</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">podmon</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">enabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">dellemc/podmon:v1.3.0</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">controller</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">args</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--csisock=unix:/var/run/csi/csi.sock&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--labelvalue=csi-vxflexos&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--mode=controller&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--skipArrayConnectionValidation=false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--driverPodLabelValue=dell-storage&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--ignoreVolumelessPods=false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">node</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">args</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--labelvalue=csi-vxflexos&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--mode=node&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--leaderelection=false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--driverPodLabelValue=dell-storage&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;--ignoreVolumelessPods=false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>To install CSM for Resiliency with the driver, the following changes are required:</p>
 <ol>
 <li>Enable CSM for Resiliency by changing the podmon.enabled boolean to true. This will enable both controller-podmon and node-podmon.</li>
 <li>Specify the podmon image to be used as podmon.image.</li>
@@ -1002,7 +1016,7 @@ The ConfigMap to edit will have this pattern: <storage>-config-params (e.g., <co
 
 
     </div>
-    
+    <script src='/csm-docs/js/prism.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 

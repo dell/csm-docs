@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.0">
+<meta name="generator" content="Hugo 0.114.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v2/replication/deployment/powerscale/" /><meta property="article:section" content="v2" />
 
-<meta property="article:modified_time" content="2022-06-22T16:36:23+05:30" />
+<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Enabling Replication feature for CSI PowerScale
 ">
-<meta itemprop="dateModified" content="2022-06-22T16:36:23+05:30" />
-<meta itemprop="wordCount" content="1179">
+<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
+<meta itemprop="wordCount" content="2139">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Enabling Replication feature for CSI PowerScale
@@ -43,6 +43,7 @@
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
 
   </head>
   <body class="td-page">
@@ -83,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.5.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.4</a>
 	
 </div>
 
@@ -105,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -149,7 +150,9 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2deploymentcsmoperatordrivers-li">
   <a href="/csm-docs/v2/deployment/csmoperator/drivers/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperatordrivers"><span class="">CSI Drivers</span></a>
   <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatordriverspowerscale-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatordriverspowerflex-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/drivers/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatordriverspowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatordriverspowerscale-li">
   <a href="/csm-docs/v2/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
 </li>
   </ul>
@@ -158,12 +161,16 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization-li">
   <a href="/csm-docs/v2/deployment/csmoperator/modules/authorization/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesauthorization"><span class="">Authorization</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesobservability-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/modules/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatormodulesreplication-li">
   <a href="/csm-docs/v2/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2deploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatortroubleshooting-li">
   <a href="/csm-docs/v2/deployment/csmoperator/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperatortroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2deploymentcsmoperatorrelease-li">
+  <a href="/csm-docs/v2/deployment/csmoperator/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2deploymentcsmoperatorrelease"><span class="">Release notes</span></a>
 </li>
   </ul>
 </li>
@@ -322,6 +329,19 @@
   <a href="/csm-docs/v2/authorization/backup-and-restore/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restorehelm"><span class="">Helm</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationbackup-and-restorerpm-li">
   <a href="/csm-docs/v2/authorization/backup-and-restore/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationconfiguration-li">
+  <a href="/csm-docs/v2/authorization/configuration/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfiguration"><span class="">Configuration</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationpowerflex-li">
+  <a href="/csm-docs/v2/authorization/configuration/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationpowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationpowermax-li">
+  <a href="/csm-docs/v2/authorization/configuration/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationpowermax"><span class="">PowerMax</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationpowerscale-li">
+  <a href="/csm-docs/v2/authorization/configuration/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationpowerscale"><span class="">PowerScale</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2authorizationconfigurationproxy-server-li">
+  <a href="/csm-docs/v2/authorization/configuration/proxy-server/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv2authorizationconfigurationproxy-server"><span class="">Proxy Server</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv2authorizationdeployment-li">
@@ -487,10 +507,12 @@
   <a href="/csm-docs/v2/secure/encryption/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionuninstallation"><span class="">Uninstallation</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptionvault-li">
   <a href="/csm-docs/v2/secure/encryption/vault/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionvault"><span class="">Vault Configuration</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptiontroubleshooting-li">
-  <a href="/csm-docs/v2/secure/encryption/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptionrekey-li">
+  <a href="/csm-docs/v2/secure/encryption/rekey/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionrekey"><span class="">Rekey Configuration</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptionrelease-li">
   <a href="/csm-docs/v2/secure/encryption/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptionrelease"><span class="">Release Notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv2secureencryptiontroubleshooting-li">
+  <a href="/csm-docs/v2/secure/encryption/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv2secureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
 </li>
   </ul>
 </li>
@@ -560,6 +582,9 @@
         <li><a href="#installing-driver-with-replication-module">Installing Driver With Replication Module</a></li>
         <li><a href="#creating-storage-classes">Creating Storage Classes</a></li>
         <li><a href="#provisioning-replicated-volumes">Provisioning Replicated Volumes</a></li>
+        <li><a href="#synciq-policy-architecture">SyncIQ Policy Architecture</a></li>
+        <li><a href="#performing-failover-on-powerscale">Performing Failover on PowerScale</a></li>
+        <li><a href="#performing-failback-on-powerscale">Performing Failback on PowerScale</a></li>
         <li><a href="#supported-replication-actions">Supported Replication Actions</a></li>
       </ul>
     </li>
@@ -683,10 +708,14 @@ You can create them manually or with the help of <code>repctl</code>.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replication.storage.dell.com/remoteStorageClassName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;isilon-replication&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replication.storage.dell.com/remoteClusterID</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;target&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replication.storage.dell.com/remoteSystem</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;cluster-2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replication.storage.dell.com/remoteAccessZone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">System</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replication.storage.dell.com/remoteAzServiceIP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">192.168.1.2</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replication.storage.dell.com/remoteRootClientEnabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replication.storage.dell.com/rpo</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Five_Minutes</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replication.storage.dell.com/ignoreNamespaces</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replication.storage.dell.com/volumeGroupPrefix</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;csi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">AccessZone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">System</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">AzServiceIP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">192.168.1.1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">IsiPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/ifs/data/csi</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">RootClientEnabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">ClusterName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">cluster-1</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -697,6 +726,9 @@ just leave it as <code>true</code>.</li>
 <li><code>replication.storage.dell.com/remoteStorageClassName</code> points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.</li>
 <li><code>replication.storage.dell.com/remoteClusterID</code> represents the ID of a remote cluster. It is the same id you put in the replication controller config map.</li>
 <li><code>replication.storage.dell.com/remoteSystem</code> is the name of the remote system that should match whatever <code>clusterName</code> you called it in <code>isilon-creds</code> secret.</li>
+<li><code>replication.storage.dell.com/remoteAccessZone</code> is the name of the access zone a remote volume can be created in.</li>
+<li><code>replication.storage.dell.com/remoteAzServiceIP</code> AccessZone groupnet service IP. It is optional and can be provided if different than the remote system endpoint.</li>
+<li><code>replication.storage.dell.com/remoteRootClientEnabled</code> determines whether the driver should enable root squashing or not for the remote volume.</li>
 <li><code>replication.storage.dell.com/rpo</code> is an acceptable amount of data, which is measured in units of time, that may be lost due to a failure.</li>
 </ul>
 <blockquote>
@@ -705,9 +737,15 @@ just leave it as <code>true</code>.</li>
 <ul>
 <li><code>replication.storage.dell.com/ignoreNamespaces</code>, if set to <code>true</code> PowerScale driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.</li>
 <li><code>replication.storage.dell.com/volumeGroupPrefix</code> represents what string would be appended to the volume group name to differentiate them.</li>
-<li><code>Accesszone</code> is the name of the access zone a volume can be created in</li>
-<li><code>IsiPath</code> is the base path for the volumes to be created on the PowerScale cluster</li>
-<li><code>RootClientEnabled</code> determines whether the driver should enable root squashing or not</li>
+</ul>
+<blockquote>
+<p>NOTE: To configure the VolumeGroupPrefix, the name format of '&lt;volumeGroupPrefix&gt;-&lt;namespace&gt;-&lt;System IP Address OR FQDN&gt;-&lt;rpo&gt;' cannot be more than 63 characters.</p>
+</blockquote>
+<ul>
+<li><code>Accesszone</code> is the name of the access zone a volume can be created in.</li>
+<li><code>AzServiceIP</code> AccessZone groupnet service IP. It is optional and can be provided if different than the PowerScale cluster endpoint.</li>
+<li><code>IsiPath</code> is the base path for the volumes to be created on the PowerScale cluster.</li>
+<li><code>RootClientEnabled</code> determines whether the driver should enable root squashing or not.</li>
 <li><code>ClusterName</code> name of PowerScale cluster, where PV will be provisioned, specified as it was listed in <code>isilon-creds</code> secret.</li>
 </ul>
 <p>After figuring out how storage classes would look, you just need to go and apply them to your Kubernetes clusters with <code>kubectl</code>.</p>
@@ -724,20 +762,27 @@ You can find an example <a href="https://github.com/dell/csm-replication/blob/ma
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">driver</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;isilon&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">reclaimPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Delete&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">replicationPrefix</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;replication.storage.dell.com&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">remoteRetentionPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">RG</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Delete&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">PV</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Delete&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">parameters</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">rpo</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Five_Minutes&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">ignoreNamespaces</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">volumeGroupPrefix</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;csi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">accessZone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;System&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">isiPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/ifs/data/csi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">rootClientEnabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">clusterName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;cluster-1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">target</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;cluster-2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><blockquote>
-<p>NOTE: both storage classes expected to use access zone with same name</p>
-</blockquote>
-<p>After preparing the config, you can apply it to both clusters with <code>repctl</code>. Before you do this, ensure you&rsquo;ve added your clusters to <code>repctl</code> via the <code>add</code> command.</p>
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">rootClientEnabled</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">target</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">accessZone</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;System&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">target</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;System&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">azServiceIP</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">source</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;192.168.1.1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">target</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;192.168.1.2&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>After preparing the config, you can apply it to both clusters with <code>repctl</code>. Before you do this, ensure you&rsquo;ve added your clusters to <code>repctl</code> via the <code>add</code> command.</p>
 <p>To create storage classes just run <code>./repctl create sc --from-config &lt;config-file&gt;</code> and storage classes would be applied to both clusters.</p>
 <p>After creating storage classes you can make sure they are in place by using <code>./repctl get storageclasses</code> command.</p>
 <h3 id="provisioning-replicated-volumes">Provisioning Replicated Volumes</h3>
@@ -746,12 +791,50 @@ created storage classes.</p>
 <p>On your source cluster, create a PersistentVolumeClaim using one of the replication-enabled Storage Classes.
 The CSI PowerScale driver will create a volume on the array, add it to a VolumeGroup and configure replication
 using the parameters provided in the replication enabled Storage Class.</p>
+<h3 id="synciq-policy-architecture">SyncIQ Policy Architecture</h3>
+<p>When creating <code>DellCSIReplicationGroup</code> (RG) objects on the Kubernetes cluster(s) used for replication, matching SyncIQ policies are created on <em>both</em> the source and target PowerScale storage arrays.</p>
+<p>This is done so that the RG objects can communicate with a relative &rsquo;local&rsquo; and &lsquo;remote&rsquo; set of policies to query for current synchronization status and perform replication actions; on the <em>source</em> Kubernetes cluster&rsquo;s RG, the <em>source</em> PowerScale array is seen as &rsquo;local&rsquo; and the <em>target</em> PowerScale array is seen as remote. The inverse relationship exists on the <em>target</em> Kubernetes cluster&rsquo;s RG, which sees the <em>target</em> PowerScale array as &rsquo;local&rsquo; and the <em>source</em> PowerScale array as &lsquo;remote&rsquo;.</p>
+<p>Upon creation, both SyncIQ policies (source and target) are set to a schedule of <code>When source is modified</code>. The source PowerScale array&rsquo;s SyncIQ policy is <code>Enabled</code> when the RG is created, and the target array&rsquo;s policy is <code>Disabled</code>. Similarly, the directory that is being replicated is <em>read-write accessible</em> on the source storage array, and is restricted to <em>read-only</em> on the target.</p>
+<h3 id="performing-failover-on-powerscale">Performing Failover on PowerScale</h3>
+<p>Steps for performing Failover can be found in the Tools page under <a href="https://dell.github.io/csm-docs/docs/replication/tools/#executing-actions">Executing Actions.</a> There are some PowerScale-specific considerations to keep in mind:</p>
+<ul>
+<li>Failover on PowerScale does NOT halt writes on the source side. It is recommended that the storage administrator or end user manually stop writes to ensure no data is lost on the source side in the event of future failback.</li>
+<li>In the case of unplanned failover, the source-side SyncIQ policy will be left enabled and set to its previously defined <code>When source is modified</code> sync schedule. It is recommended for storage admins to manually disable the source-side SyncIQ policy when bringing the failed-over source array back online.</li>
+</ul>
+<h3 id="performing-failback-on-powerscale">Performing Failback on PowerScale</h3>
+<p>Failback operations are not presently supported for PowerScale. In the event of a failover, failback can be performed manually using the below methodologies.</p>
+<h4 id="failback---discard-target">Failback - Discard Target</h4>
+<p>Performing failback and discarding changes made to the target is to simply resume synchronization from the source. The steps to perform this operation are as follows:</p>
+<ol>
+<li>Log in to the source PowerScale array. Navigate to the <code>Data Protection &gt; SyncIQ</code> page and select the <code>Policies</code> tab.</li>
+<li>Edit the source-side SyncIQ policy&rsquo;s schedule from <code>When source is modified</code> to <code>Manual</code>.</li>
+<li>Log in to the target PowerScale array. Navigate to the <code>Data Protection &gt; SyncIQ</code> page and select the <code>Local targets</code> tab.</li>
+<li>Perform <code>Actions &gt; Disallow writes</code> on the target-side Local Target policy that matches the SyncIQ policy undergoing failback.</li>
+<li>Return to the source array. Enable the source-side SyncIQ policy. Edit its schedule from <code>Manual</code> to <code>When source is modified</code>. Set the time delay for synchronization as appropriate.</li>
+</ol>
+<h4 id="failback---discard-source">Failback - Discard Source</h4>
+<p>Information on the methodology for performing a failback while taking changes made to the original target can be found in relevant PowerScale SyncIQ documentation. The detailed steps are as follows:</p>
+<ol>
+<li>Log in to the source PowerScale array. Navigate to the <code>Data Protection &gt; SyncIQ</code> page and select the <code>Policies</code> tab.</li>
+<li>Edit the source-side SyncIQ policy&rsquo;s schedule from <code>When source is modified</code> to <code>Manual</code>.</li>
+<li>Log in to the target PowerScale array. Navigate to the <code>Data Protection &gt; SyncIQ</code> page and select the <code>Policies</code> tab.</li>
+<li>Delete the target-side SyncIQ policy that has a name matching the SyncIQ policy undergoing failback. This is necessary to prevent conflicts when running resync-prep in the next step.</li>
+<li>On the source PowerScale array, enable the SyncIQ policy that is undergoing failback. On this policy, perform <code>Actions &gt; Resync-prep</code>. This will create a new SyncIQ policy on the target PowerScale array, matching the original SyncIQ policy with an appended <em>_mirror</em> to its name. Wait until the policy being acted on is disabled by the resync-prep operation before continuing.</li>
+<li>On the target PowerScale array&rsquo;s <code>Policies</code> tab, perform <code>Actions &gt; Start job</code> on the <em>_mirror</em> policy. Wait for this synchronization to complete.</li>
+<li>On the source PowerScale array, switch from the <code>Policies</code> tab to the <code>Local targets</code> tab. Find the local target policy that matches the SyncIQ policy undergoing failback and perform <code>Actions &gt; Allow writes</code>.</li>
+<li>On the target PowerScale array, perform <code>Actions &gt; Resync-prep</code> on the <em>_mirror</em> policy. Wait until the policy on the source side is re-enabled by the resync-prep operation before continuing.</li>
+<li>On the target PowerScale array, delete the <em>_mirror</em> SyncIQ policy.</li>
+<li>On the target PowerScale array, manually recreate the original SyncIQ policy that was deleted in step 4. This will require filepaths, RPO, and other details that can be obtained from the source-side SyncIQ policy. Its name <strong>must</strong> match the source-side SyncIQ policy. Its source directory will be the source-side policy&rsquo;s <em>target</em> directory, and vice-versa. Its target host will be the source PowerScale array endpoint.</li>
+<li>Ensure that the target-side SyncIQ policy that was just created is <strong>Enabled.</strong> This will create a Local Target policy on the source side. If it was not created as Enabled, enable it now.</li>
+<li>On the source PowerScale array, select the <code>Local targets</code> tab. Perform <code>Actions &gt; Allow writes</code> on the source-side Local Target policy that matches the SyncIQ policy undergoing failback.</li>
+<li>Disable the target-side SyncIQ policy.</li>
+<li>On the source PowerScale array, edit the SyncIQ policy&rsquo;s schedule from <code>Manual</code> to <code>When source is modified</code>. Set the time delay for synchronization as appropriate.</li>
+</ol>
 <h3 id="supported-replication-actions">Supported Replication Actions</h3>
 <p>The CSI PowerScale driver supports the following list of replication actions:</p>
 <ul>
 <li>FAILOVER_REMOTE</li>
 <li>UNPLANNED_FAILOVER_LOCAL</li>
-<li>REPROTECT_LOCAL</li>
 <li>SUSPEND</li>
 <li>RESUME</li>
 <li>SYNC</li>
@@ -811,7 +894,7 @@ using the parameters provided in the replication enabled Storage Class.</p>
 
 
     </div>
-    
+    <script src='/csm-docs/js/prism.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
