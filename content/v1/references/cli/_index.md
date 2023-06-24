@@ -35,7 +35,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 
 
 ## Installation instructions
-1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.5.1).
+1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.6.0).
 2. chmod +x dellctl
 3. Move `dellctl` to `/usr/local/bin` or add `dellctl`'s containing directory path to PATH environment variable.
 4. Run `dellctl --help` to know available commands or run `dellctl command --help` to know more about a specific command.
@@ -860,10 +860,10 @@ Gets PowerFlex volume infomation for a given tenant on a local cluster
 
 Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
 
->Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater. 
+>Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater.
 
 ```
-# dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
+# dellctl volume get --proxy <proxy.dell.com/proxy/volumes> --namespace vxflexos
 NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
 k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
 k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default

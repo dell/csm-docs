@@ -15,23 +15,33 @@
  * limitations under the License.
  *
  */
-
 const CONSTANTS = {
-	POWERSTORE: "csi-powerstore",
-	POWERSCALE: "csi-powerscale",
-	POWERFLEX: "csi-powerflex",
+	POWERSTORE: "powerstore",
+	POWERSCALE: "isilon",
+	POWERFLEX: "vxflexos",
 	POWERMAX: "powermax",
-	UNITY: "csi-unity",
-	POWERSTORE_RELEASE_NAME: "powerstore",
-	MODULE: "csm-modules",
-	CSM_VALUES: "csm-values",
-	TEMP_DIR: "templates/",
+	UNITY: "unity",
+	POWERSTORE_NAMESPACE: "csi-powerstore",
+	POWERFLEX_NAMESPACE: "vxflexos",
+	POWERMAX_NAMESPACE: "powermax",
+	POWERSCALE_NAMESPACE: "isilon",
+	UNITY_NAMESPACE: "unity",
+	VALUES: "values",
+	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
 	HYPHEN: "-",
 	NODE_SELECTOR_TAB: '\n'.padEnd(7, " "),
 	SLASH: "/",
-	VERSIONS_DIR: "csm-versions/",
+	VERSIONS_DIR: "csm-versions",
 	CSM: "csm",
 	DEFAULT_VALUES: "default-values",
-	PROPERTIES: ".properties"
+	PROPERTIES: ".properties",
+	HELM: "helm",
+	OPERATOR: "operator",
+	CSM_HELM_V170: "1.0.0",
+	TAINTS: `
+     - key: "$KEY"
+       operator: "Exists"
+       effect: "NoSchedule"
+	`
 };

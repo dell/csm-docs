@@ -44,7 +44,8 @@ Please follow the steps outlined in [PowerMax](../powermax), [PowerStore](../pow
 CSM Replication Controller can dynamically change its logs' verbosity level.
 To set log level in runtime, you need to edit the controllers ConfigMap:
 ```shell
-    kubectl edit cm dell-replication-controller-config -n dell-replication-controller
+  
+kubectl edit cm dell-replication-controller-config -n dell-replication-controller
 ```
 And set the *CSI_LOG_LEVEL* field to the level of your choosing.
 CSM Replication controller supports following log levels:

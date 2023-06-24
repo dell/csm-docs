@@ -38,8 +38,10 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
 **Steps**
 
-  Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
-
+  Run the command to install Helm 3.0.
+  ```bash
+  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  ```
 ### Enable Zero Padding on PowerFlex
 
 Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see [Dell PowerFlex documentation](https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html).
@@ -75,7 +77,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. A namespace for the driver is expected prior to running the command below. If one is not created already, you can run `kubectl create namespace vxflexos` to create a new one. 
 Note that the namespace can be any user-defined name that follows the conventions for namespaces outlined by Kubernetes. In this example we assume that the namespace is 'vxflexos'
@@ -110,11 +112,17 @@ Note that the namespace can be any user-defined name that follows the convention
 
 After editing the file, run the below command to create a secret called `vxflexos-config`. This assumes `vxflexos` is release name, but it can be modified during [install](/#install-the-driver):
     
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml`
+  ```bash
+  
+  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml
+  ```
 
 Use the below command to replace or update the secret:
 
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
+  ```bash
+  
+  kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml -o yaml --dry-run=client | kubectl replace -f -
+  ```
 
 *NOTE:* 
 
@@ -124,7 +132,7 @@ Use the below command to replace or update the secret:
 - "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
 - Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
 - If the user is using complex K8s version like "v1.21.3-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
-           kubeVersion: ">= 1.21.0-0 < 1.27.0-0"
+           kubeVersion: ">= 1.21.0-0 < 1.28.0-0"
 	   
 	   
 5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../features/powerflex#dynamic-logging-configuration) section in Features.  
@@ -132,7 +140,10 @@ Use the below command to replace or update the secret:
 6. If using automated SDC deployment:
    - Check the SDC container image is the correct version for your version of PowerFlex. 
    
-7. Copy the default values.yaml file `cd helm && cp csi-vxflexos/values.yaml myvalues.yaml`
+7. Copy the default values.yaml file 
+   ```bash
+   cd helm && cp csi-vxflexos/values.yaml myvalues.yaml
+   ```
 
 8. If you are using a custom image, check the `version` and `driverRepository` fields in `myvalues.yaml` to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: `<driverRepository>/csi-vxflexos:v<version>`
 
@@ -140,13 +151,13 @@ Use the below command to replace or update the secret:
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.6.0 |
+| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.7.0 |
 | driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
 | powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | dellemc/sdc:3.6.0.6 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
 | logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
 | logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
-| kubeletConfigDir | kubelet config directory path. Ensure that the config.yaml file is present at this path. | Yes | /var/lib/kubelet |
+| kubeletConfigDir | kubelet config directory path. Ensure that the secret.yaml file is present at this path. | Yes | /var/lib/kubelet |
 | defaultFsType | Used to set the default FS type which will be used for mount volumes if FsType is not specified in the storage class. Allowed values: ext4, xfs. | Yes | ext4 |
 | fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes are`None, File, and ReadWriteOnceWithFSType.` | No | "ReadWriteOnceWithFSType" |
 | imagePullPolicy | Policy to determine if the image should be pulled prior to starting the container. Allowed values: Always, IfNotPresent, Never. | Yes | IfNotPresent | 
@@ -185,7 +196,7 @@ Use the below command to replace or update the secret:
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
 | sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
-| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization server. | No | true |
+| skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 
 
 10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default. 
@@ -213,7 +224,7 @@ As part of the CSI driver installation, the CSI driver requires a secret with th
 
 This secret contains the X509 certificates of the CA which signed PowerFlex gateway SSL certificate in PEM format.
 
-The CSI driver exposes an install parameter in config.yaml, `skipCertificateValidation`, which determines if the driver performs client-side verification of the gateway certificates.
+The CSI driver exposes an install parameter in secret.yaml, `skipCertificateValidation`, which determines if the driver performs client-side verification of the gateway certificates.
 
 `skipCertificateValidation` parameter is set to true by default, and the driver does not verify the gateway certificates.
 
@@ -225,17 +236,30 @@ If the gateway certificate is self-signed or if you are using an embedded gatewa
 
 1. To fetch the certificate, run the following command.
 
-         `openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem`
+   ```bash
+   
+   openssl s_client -showcerts -connect <Gateway IP:Port> </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+   ```
 	
-   Example: openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+   Example: 
+   ```bash
+   
+   openssl s_client -showcerts -connect 1.1.1.1:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
+   ```
 	
 2. Run the following command to create the cert secret with index '0':
 
-         `kubectl create secret generic vxflexos-certs-0 --from-file=cert-0=ca_cert_0.pem -n vxflexos`
+   ```bash
+   
+   kubectl create secret generic vxflexos-certs-0 --from-file=cert-0=ca_cert_0.pem -n vxflexos
+   ```
 	
    Use the following command to replace the secret:
 	
-          `kubectl create secret generic vxflexos-certs-0 -n vxflexos --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -` 
+   ```bash
+   
+   kubectl create secret generic vxflexos-certs-0 -n vxflexos --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -
+   ``` 
 	
 3. Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: vxflexos-certs-1, vxflexos-certs-2, etc)
 

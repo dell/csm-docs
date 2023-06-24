@@ -12,12 +12,13 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-**Note**: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerScale via Operator.
-
 ### Listing installed drivers with the ContainerStorageModule CRD
-User can query for all Dell CSI drivers using the following command:
-`kubectl get csm --all-namespaces`
 
+User can query for all Dell CSI drivers using the following command:
+
+```bash
+kubectl get csm --all-namespaces
+```
 
 ### Prerequisite
 
@@ -25,6 +26,7 @@ User can query for all Dell CSI drivers using the following command:
    Execute `kubectl create namespace isilon` to create the isilon namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'isilon'.
 
 2. Create *isilon-creds* secret by creating a yaml file called secret.yaml with the following content:
+
      ```yaml
       isilonClusters:
          # logical name of PowerScale Cluster
@@ -79,11 +81,16 @@ User can query for all Dell CSI drivers using the following command:
       ```
 
    Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
+
+   ```bash
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml
+   ```
 
    Use the following command to replace or update the secret
 
-   `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
+   ```bash
+   kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -
+   ```
 
    **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the isilon-creds secret.
    The driver will continue to use previous values in case of an error found in the YAML file.
@@ -103,6 +110,7 @@ User can query for all Dell CSI drivers using the following command:
       data:
          cert-0: ""
       ```
+
       Execute command: ```kubectl create -f empty-secret.yaml```
 
 ### Install Driver
@@ -117,6 +125,7 @@ User can query for all Dell CSI drivers using the following command:
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
+   | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
    | ***Common parameters for node and controller*** |
    | CSI_ENDPOINT | The UNIX socket address for handling gRPC calls | No | /var/run/csi/csi.sock |
    | X_CSI_ISI_SKIP_CERTIFICATE_VALIDATION | Specifies whether SSL security needs to be enabled for communication between PowerScale and CSI Driver | No | true |
@@ -133,12 +142,17 @@ User can query for all Dell CSI drivers using the following command:
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
 
-4.  Execute the following command to create PowerScale custom resource:
-    ```kubectl create -f <input_sample_file.yaml>``` .
+4. Execute the following command to create PowerScale custom resource:
+
+    ```bash
+    kubectl create -f <input_sample_file.yaml>
+    ```
+
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
-5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+5. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 **Note** :
+
    1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
    2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation.

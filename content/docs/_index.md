@@ -64,11 +64,11 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 ## CSM Modules Support Matrix for Dell CSI Drivers 
 
-| CSM Module                                                  | CSI PowerFlex v2.6.0 | CSI PowerScale v2.6.1 | CSI PowerStore v2.6.0 | CSI PowerMax v2.6.0 | CSI Unity XT v2.6.0 |
+| CSM Module                                                  | CSI PowerFlex v2.7.0 | CSI PowerScale v2.7.0 | CSI PowerStore v2.7.0 | CSI PowerMax v2.7.0 | CSI Unity XT v2.7.0 |
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
-| [**Authorization**](authorization/) v1.6.0                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
+| [**Authorization**](authorization/) v1.7.0                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
 | [**Observability**](observability/) v1.5.0                  | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Replication**](replication/)   v1.4.0                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Resiliency**](resiliency/)     v1.5.0                    | ✔️                    | ✔️                     | ✔️                    | ❌                   | ✔️                   |
-| [**Encryption**](secure/encryption)    v0.3.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
-| [**Application Mobility**](applicationmobility/)     v0.3.0 | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ✔️                   |
+| [**Replication**](replication/)   v1.5.0                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
+| [**Resiliency**](resiliency/)     v1.6.0                    | ✔️                    | ✔️                     | ✔️                    | ❌                   | ✔️                   |
+| [**Encryption**](secure/encryption)    v0.4.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
+| [**Application Mobility**](applicationmobility/)     v0.4.0 | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ✔️                   |

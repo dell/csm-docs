@@ -69,6 +69,8 @@ Options:
   --namespace[=]<namespace>                                   Namespace where Karavi Observability will be installed
   Optional
   --csi-powerflex-namespace[=]<csi powerflex namespace>       Namespace where CSI PowerFlex is installed, default is 'vxflexos'
+  --csi-powerstore-namespace[=]<csi powerstore namespace>     Namespace where CSI PowerStore is installed, default is 'csi-powerstore'
+  --csi-powerscale-namespace[=]<csi powerscale namespace>     Namespace where CSI PowerScale is installed, default is 'isilon'
   --set-file                                                  Set values from files used during helm installation (can be specified multiple times)
   --skip-verify                                               Skip verification of the environment
   --values[=]<values.yaml>                                    Values file, which defines configuration values
@@ -77,7 +79,7 @@ Options:
   --help                                                      Help
 ```
 
-__Note:__ CSM for Authorization currently does not support the Observability module for PowerStore.  Therefore setting `enable-authorization` is not supported in this case.
+__Note:__ CSM for Authorization currently does not support the Observability module for PowerStore. Therefore setting `enable-authorization` is not supported in this case.
 
 ### Executing the Installer
 
@@ -101,6 +103,7 @@ To perform an online installation of CSM for Observability, the following steps 
     __Note:__ 
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
     - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability. 
+    - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
 
     ```
     [user@system /home/user/karavi-observability/installer]# ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml

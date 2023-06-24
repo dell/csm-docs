@@ -6,10 +6,10 @@ weight: 1
 ---
 
 {{% pageinfo color="primary" %}}
-The Dell CSM Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.
+The Dell Container Storage Modules Operator Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.
 {{% /pageinfo %}}
 
-The Dell CSM Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
+The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
 ## Supported Platforms
 Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.
@@ -18,17 +18,20 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 | -------------------- | ------------------- |
 | 1.22, 1.23, 1.24     | 4.9, 4.10, 4.10 EUS |
 
-## Supported CSI Drivers
 
-| CSI Driver         | Version   | ConfigVersion  |
-| ------------------ | --------- | -------------- |
-| CSI PowerScale     | 2.2.0 +   |   v2.2.0  +    |
+>NOTE:
+>- Authorization module is only supported on Kubernetes platforms.
 
-## Supported CSM Modules
+## Supported CSM Components
 
-| CSM Modules        | Version   | ConfigVersion  |
-| ------------------ | --------- | -------------- |
-| CSM Authorization  | 1.2.0 +   | v1.2.0 +       |
+The table below lists the driver and modules versions installable with the CSM Operator:
+
+| CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
+| ------------------ |---------|-------------------|-----------------|-------------------|----------------|
+| CSI PowerScale     | 2.4.0   | 1.4.0             | 1.3.0           | 1.3.0             | N/A            |
+
+>NOTE:
+>- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples) for prior versions of CSM.
 
 ## Installation
 Dell CSM Operator can be installed manually or via Operator Hub.
@@ -62,7 +65,7 @@ Dell CSM Operator can be installed manually or via Operator Hub.
    
 {{< imgproc install_olm_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
 
->**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.2`**.
+>**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
 
 ### Installation via Operator Hub
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
@@ -119,7 +122,7 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 
 #### Mandatory fields
 
-**configVersion** - Configuration version - refer [here](#full-list-of-csi-drivers-and-versions-supported-by-the-dell-csm-operator) for appropriate config version.
+**configVersion** - Configuration version - refer [here](#supported-csi-drivers) for appropriate config version.
 
 **replicas**  - Number of replicas for controller plugin - must be set to 1 for all drivers.
 

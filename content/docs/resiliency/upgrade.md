@@ -25,4 +25,8 @@ To upgrade CSM for Resiliency with the driver, the following steps are required.
 **Steps**
 
 1. Update the podmon.image value in the values files to reference the new podmon image.
-2. Run the csi-install script with the option --upgrade by running: `cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade`.
+2. Run the csi-install script with the option --upgrade by running: 
+```bash
+
+cd ../dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
+```

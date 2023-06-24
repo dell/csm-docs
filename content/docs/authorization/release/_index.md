@@ -6,14 +6,18 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for authorization
 ---
 
-
-## Release Notes - CSM Authorization 1.6.0
+## Release Notes - CSM Authorization 1.7.0
 
 ### New Features/Changes
-- Restrict the version of TLS to v1.2 for all requests to CSM authorization proxy server. ([#642](https://github.com/dell/csm/issues/642))
-- PowerFlex preapproved GUIDs. ([#402](https://github.com/dell/csm/issues/402))
-- CSM 1.6 release specific changes. ([#583](https://github.com/dell/csm/issues/583))
+- CSM Authorization karavictl requires an admin token. ([#725](https://github.com/dell/csm/issues/725))
+- CSM support for Kubernetes 1.27. ([#761](https://github.com/dell/csm/issues/761))
+- CSM 1.7 release specific changes. ([#743](https://github.com/dell/csm/issues/743))
+- CSM Authorization encryption for secrets in K3S. ([#774](https://github.com/dell/csm/issues/774))
 
 ### Bugs
-- CSM Authorization quota of zero should allow infinite use for PowerFlex and PowerMax. ([#654](https://github.com/dell/csm/issues/654))
-- CSM Authorization CRD in the CSM Operator doesn't read custom configurations. ([#633](https://github.com/dell/csm/issues/633))
+- Authorization should have sample CRD for every supported version in csm-operator. ([#826](https://github.com/dell/csm/issues/826))
+- Improve CSM Operator Authorization documentation. ([#800](https://github.com/dell/csm/issues/800))
+- CSM Authorization doesn't write the status code on error for csi-powerscale. ([#787](https://github.com/dell/csm/issues/787))
+- Authorization RPM installation should use nogpgcheck for k3s-selinux package. ([#772](https://github.com/dell/csm/issues/772))
+- CSM Authorization - karavictl generate token should output valid yaml. ([#767](https://github.com/dell/csm/issues/767))
+
