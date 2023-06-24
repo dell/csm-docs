@@ -3,30 +3,30 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.0">
+<meta name="generator" content="Hugo 0.114.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
 <link rel="icon" type="image/png" href="/csm-docs/favicons/favicon-16x16.png" sizes="16x16">
 
 <title>Authorization | Dell Technologies</title>
-<meta name="description" content="Pre-requisite for Installing Authorization via Dell CSM Operator
+<meta name="description" content="Installing Authorization via Dell CSM Operator
 ">
 <meta property="og:title" content="Authorization" />
-<meta property="og:description" content="Pre-requisite for Installing Authorization via Dell CSM Operator
+<meta property="og:description" content="Installing Authorization via Dell CSM Operator
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" />
+<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="name" content="Authorization">
-<meta itemprop="description" content="Pre-requisite for Installing Authorization via Dell CSM Operator
+<meta itemprop="description" content="Installing Authorization via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
-<meta itemprop="wordCount" content="1139">
+<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
+<meta itemprop="wordCount" content="1120">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Authorization"/>
-<meta name="twitter:description" content="Pre-requisite for Installing Authorization via Dell CSM Operator
+<meta name="twitter:description" content="Installing Authorization via Dell CSM Operator
 "/>
 
 
@@ -43,6 +43,7 @@
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
 
   </head>
   <body class="td-page">
@@ -83,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.5.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.4</a>
 	
 </div>
 
@@ -105,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,8 +144,13 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeployment-li">
   <a href="/csm-docs/docs/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeploymentcsmoperator-li">
   <a href="/csm-docs/docs/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -153,10 +159,14 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax"><span class="">PowerMax</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriversunity-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriversunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-csm-docsdocsdeploymentcsmoperatormodules-li">
@@ -168,6 +178,8 @@
   <a href="/csm-docs/docs/deployment/csmoperator/modules/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication-li">
   <a href="/csm-docs/docs/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency"><span class="">Resiliency</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsdocsdeploymentcsmoperatortroubleshooting-li">
@@ -358,6 +370,8 @@
   <a href="/csm-docs/docs/authorization/deployment/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentrpm"><span class="">RPM</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymenthelm-li">
   <a href="/csm-docs/docs/authorization/deployment/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymenthelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymentoperator-li">
+  <a href="/csm-docs/docs/authorization/deployment/operator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentoperator"><span class="">Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationuninstallation-li">
@@ -668,8 +682,12 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <p>Execute <code>kubectl create namespace authorization</code> to create the authorization namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is &lsquo;authorization&rsquo;.</p>
 </li>
 <li>
-<p>Install cert-manager CRDs <code>kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml</code></p>
+<p>Install cert-manager CRDs</p>
 </li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl apply --validate<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87">false</span> -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml
+</span></span></code></pre></div><ol start="3">
 <li>
 <p>Prepare <code>samples/authorization/config.yaml</code> provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/config.yaml">here</a> which contains the JWT signing secret. The following table lists the configuration parameters.</p>
 <table>
@@ -694,15 +712,18 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">web</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">jwtsigningsecret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">randomString123</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>After editing the file, run this command to create a secret called <code>karavi-config-secret</code>:</p>
-<p><code>kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml</code></p>
-<p>Use this command to replace or update the secret:</p>
-<p><code>kubectl create secret generic karavi-config-secret -n authorization --from-file=config.yaml=samples/csm-authorization/config.yaml -o yaml --dry-run=client | kubectl replace -f -</code></p>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create secret generic karavi-config-secret -n authorization --from-file<span style="color:#ce5c00;font-weight:bold">=</span>config.yaml<span style="color:#ce5c00;font-weight:bold">=</span>samples/authorization/config.yaml
+</span></span></code></pre></div><p>Use this command to replace or update the secret:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create secret generic karavi-config-secret -n authorization --from-file<span style="color:#ce5c00;font-weight:bold">=</span>config.yaml<span style="color:#ce5c00;font-weight:bold">=</span>samples/authorization/config.yaml -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl replace -f -
+</span></span></code></pre></div></li>
 <li>
 <p>Create the <code>karavi-storage-secret</code> using the file provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/karavi-storage-secret.yaml">here</a> to store storage system credentials.</p>
 <p>Use this command to create the secret:</p>
-<p><code>kubectl create -f samples/authorization/karavi-storage-secret.yaml</code></p>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create -f samples/authorization/karavi-storage-secret.yaml
+</span></span></code></pre></div></li>
 <li>
 <p>Prepare a storage class for Redis to use for persistence. If not supplied, the default storage class in your environment is used.</p>
 <p>Example, if using CSM Authorization for PowerScale:</p>
@@ -782,8 +803,9 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># specify additional mount options for when a Persistent Volume is being mounted on a node.</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># To mount volume with NFSv4, specify mount option vers=4. Make sure NFSv4 is enabled on the Isilon Cluster</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic">#mountOptions: [&#34;&lt;mountOption1&gt;&#34;, &#34;&lt;mountOption2&gt;&#34;, ..., &#34;&lt;mountOptionN&gt;&#34;]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><p>Save the file and create it by using <code>kubectl create -f &lt;input_file.yaml&gt;</code>.</p>
-</li>
+</span></span></span></code></pre></div><p>Save the file and create it by using</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f &lt;input_file.yaml&gt;
+</span></span></code></pre></div></li>
 </ol>
 <h3 id="install-csm-authorization-proxy-server">Install CSM Authorization Proxy Server</h3>
 <ol>
@@ -791,7 +813,7 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <p>Follow all the <a href="#prerequisite">prerequisites</a>.</p>
 </li>
 <li>
-<p>Create a CR (Custom Resource) for Authorization using the sample file provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server.yaml">here</a>. This file can be modified to use custom parameters if needed.</p>
+<p>Create a CR (Custom Resource) for Authorization using the sample file provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v170.yaml">here</a>. This file can be modified to use custom parameters if needed.</p>
 </li>
 <li>
 <p>Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:</p>
@@ -813,7 +835,7 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 </tr>
 <tr>
 <td>PROXY_HOST</td>
-<td>The hostname to configure the self-signed certificate (if applicable), and the proxy, tenant, role, and storage service Ingresses.</td>
+<td>The hostname to configure the self-signed certificate (if applicable), and the proxy service Ingress.</td>
 <td>Yes</td>
 <td>csm-authorization.com</td>
 </tr>
@@ -828,24 +850,6 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <td>Additional host rules to be applied to the proxy-service Ingress.</td>
 <td>No</td>
 <td>authorization-ingress-nginx-controller.authorization.svc.cluster.local</td>
-</tr>
-<tr>
-<td>TENANT_INGRESS_CLASSNAME</td>
-<td>The ingressClassName of the tenant-service Ingress.</td>
-<td>Yes</td>
-<td>nginx</td>
-</tr>
-<tr>
-<td>ROLE_INGRESS_CLASSNAME</td>
-<td>The ingressClassName of the role-service Ingress.</td>
-<td>Yes</td>
-<td>nginx</td>
-</tr>
-<tr>
-<td>STORAGE_INGRESS_CLASSNAME</td>
-<td>The ingressClassName of the storage-service Ingress.</td>
-<td>Yes</td>
-<td>nginx</td>
 </tr>
 <tr>
 <td>REDIS_STORAGE_CLASS</td>
@@ -883,14 +887,15 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 </ol>
 <p><strong>Optional:</strong>
 To enable reporting of trace data with <a href="https://zipkin.io/">Zipkin</a>, use the <code>csm-config-params</code> configMap in the sample CR or dynamically by editing the configMap.</p>
-<p>Add the Zipkin values to the configMap:</p>
-<pre tabindex="0"><code>ZIPKIN_URI: &#34;http://PROXY_HOST:9411/api/v2/spans&#34;
-ZIPKIN_PROBABILITY: &#34;1.0&#34;
-</code></pre><ol start="4">
+<p>Add the Zipkin values to the configMap where <code>ZIPKIN_ADDRESS</code> is the IP address or hostname of the Zipkin server.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ZIPKIN_URI: <span style="color:#4e9a06">&#34;http://ZIPKIN_ADDRESS:9411/api/v2/spans&#34;</span>
+</span></span><span style="display:flex;"><span>ZIPKIN_PROBABILITY: <span style="color:#4e9a06">&#34;1.0&#34;</span>
+</span></span></code></pre></div><ol start="4">
 <li>
 <p>Execute this command to create the Authorization CR:</p>
-<p><code>kubectl create -f samples/authorization/csm_authorization_proxy_server.yaml</code></p>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create -f samples/authorization/csm_authorization_proxy_server_v170.yaml
+</span></span></code></pre></div></li>
 </ol>
 <blockquote>
 <p><strong>Note</strong>:</p>
@@ -902,21 +907,22 @@ ZIPKIN_PROBABILITY: &#34;1.0&#34;
 <li>
 <p>Create the <code>karavi-auth-tls</code> secret using your own certificate or by using a self-signed certificate generated via cert-manager.</p>
 <p>If using your own certificate that is valid for each Ingress hostname, use this command to create the <code>karavi-auth-tls</code> secret:</p>
-<p><code>kubectl create secret tls karavi-auth-tls -n authorization --key &lt;location-of-private-key-file&gt; --cert &lt;location-of-certificate-file&gt;</code></p>
-<p>If using a self-signed certificate, prepare <code>samples/authorization/certificate.yaml</code> provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate.yaml">here</a>. An entry for each hostname specified in the CR must be added under <code>dnsNames</code> for the certificate to be valid for each Ingress.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create secret tls karavi-auth-tls -n authorization --key &lt;location-of-private-key-file&gt; --cert &lt;location-of-certificate-file&gt;
+</span></span></code></pre></div><p>If using a self-signed certificate, prepare <code>samples/authorization/certificate_v170.yaml</code> provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/certificatev170.yaml">here</a>. An entry for each hostname specified in the CR must be added under <code>dnsNames</code> for the certificate to be valid for each Ingress.</p>
 <p>Use this command to create the <code>karavi-auth-tls</code> secret:</p>
-<p><code>kubectl create -f samples/authorization/certificate.yaml</code></p>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f samples/authorization/certificate_v170.yaml
+</span></span></code></pre></div></li>
 </ol>
 <h3 id="verify-installation-of-the-csm-authorization-proxy-server">Verify Installation of the CSM Authorization Proxy Server</h3>
 <p>Once the Authorization CR is created, you can verify the installation as mentioned below:</p>
-<p><code>kubectl describe csm/&lt;name-of-custom-resource&gt; -n &lt;namespace&gt;</code></p>
-<h3 id="install-karavictl">Install Karavictl</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe csm/&lt;name-of-custom-resource&gt; -n &lt;namespace&gt;
+</span></span></code></pre></div><h3 id="install-karavictl">Install Karavictl</h3>
 <p>Follow the instructions available in CSM Authorization for <a href="../../../../authorization/deployment/helm/#install-karavictl">Installing karavictl</a>.</p>
 <h3 id="configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</h3>
-<p>Follow the instructions available in CSM Authorization for <a href="../../../../authorization/deployment/helm/#configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</a>.</p>
+<p>Follow the instructions available in CSM Authorization for <a href="../../../../authorization/configuration/proxy-server/#configuring-the-csm-authorization-proxy-server">Configuring the CSM Authorization Proxy Server</a>.</p>
 <h3 id="configuring-a-dell-csi-driver-with-csm-authorization">Configuring a Dell CSI Driver with CSM Authorization</h3>
-<p>Follow the instructions available in CSM Authorization for <a href="../../../../authorization/deployment/helm/#configuring-a-dell-csi-driver-with-csm-for-authorization">Configuring a Dell CSI Driver with CSM for Authorization</a>.</p>
+<p>Follow the instructions available in CSM Authorization for <a href="../../../../authorization/configuration/#configuring-a-dell-csi-driver-with-csm-for-authorization">Configuring a Dell CSI Driver with CSM for Authorization</a>.</p>
 
 	
 	
@@ -972,7 +978,7 @@ ZIPKIN_PROBABILITY: &#34;1.0&#34;
 
 
     </div>
-    
+    <script src='/csm-docs/js/prism.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 

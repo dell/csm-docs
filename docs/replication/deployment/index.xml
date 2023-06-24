@@ -58,7 +58,8 @@ for future use during management operations.&lt;/p&gt;
 &lt;h3 id=&#34;dynamic-log-level-change&#34;&gt;Dynamic Log Level Change&lt;/h3&gt;
 &lt;p&gt;CSM Replication Controller can dynamically change its logs&amp;rsquo; verbosity level.
 To set log level in runtime, you need to edit the controllers ConfigMap:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    kubectl edit cm dell-replication-controller-config -n dell-replication-controller
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl edit cm dell-replication-controller-config -n dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And set the &lt;em&gt;CSI_LOG_LEVEL&lt;/em&gt; field to the level of your choosing.
 CSM Replication controller supports following log levels:&lt;/p&gt;
 &lt;ul&gt;
@@ -139,13 +140,13 @@ Run the following command:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Using a Certificate Signing Request for a user&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; scripts
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ./gen-kubeconfig.sh -u &amp;lt;CN user&amp;gt; -c &amp;lt;CSR&amp;gt; -k &amp;lt;key&amp;gt;  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# where &amp;#34;CN user&amp;#34; is the name of the user &amp;amp; key is the private key of the user&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; scripts
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ./gen-kubeconfig.sh -u &amp;lt;CN user&amp;gt; -c &amp;lt;CSR&amp;gt; -k &amp;lt;key&amp;gt;  &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# where &amp;#34;CN user&amp;#34; is the name of the user &amp;amp; key is the private key of the user&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Create kubeconfig file for a Service Account&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; scripts
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       ./gen-kubeconfig.sh -s &amp;lt;sa-name&amp;gt; -n &amp;lt;namespace&amp;gt;       
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; scripts
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ./gen-kubeconfig.sh -s &amp;lt;sa-name&amp;gt; -n &amp;lt;namespace&amp;gt;       
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once you have created the KubeConfig file, you can use it to create the secret.&lt;/p&gt;
 &lt;h4 id=&#34;secrets-using-normal-kubernetes-users&#34;&gt;Secrets using normal Kubernetes users&lt;/h4&gt;
 &lt;p&gt;You can create a normal Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/reference/access-authn-authz/authentication/#users-in-kubernetes&#34;&gt;user&lt;/a&gt; for your remote
@@ -159,10 +160,12 @@ Once you have the user created, you can provide it the RBAC privileges required 
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply -f deploy/role.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Create a ClusterRoleBinding in &lt;em&gt;Cluster B&lt;/em&gt; for the user:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create clusterrolebinding &amp;lt;name&amp;gt; --clusterrole&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;dell-replication-manager-role --user&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;user-name&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create clusterrolebinding &amp;lt;name&amp;gt; --clusterrole&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;dell-replication-manager-role --user&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;user-name&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Create a secret in &lt;em&gt;Cluster A&lt;/em&gt; using the kubeconfig file for this user:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic &amp;lt;secret-name&amp;gt; --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;kubeconfig_file_user&amp;gt; --namespace dell-replication-controller
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic &amp;lt;secret-name&amp;gt; --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;kubeconfig_file_user&amp;gt; --namespace dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;secrets-using-serviceaccount-tokens&#34;&gt;Secrets using ServiceAccount tokens&lt;/h4&gt;
@@ -171,9 +174,11 @@ We recommend using the token for the &lt;code&gt;dell-replication-controller-sa&
 already has all the required RBAC privileges.&lt;/p&gt;
 &lt;h5 id=&#34;example-1&#34;&gt;Example&lt;/h5&gt;
 &lt;p&gt;Use the following command to first create a KubeConfig file using the helper script in &lt;em&gt;Cluster B&lt;/em&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./gen-kubeconfig.sh -s dell-replication-controller-sa -n dell-replication-controller
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./gen-kubeconfig.sh -s dell-replication-controller-sa -n dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the KubeConfig file has been generated successfully, use the following command in &lt;em&gt;Cluster A&lt;/em&gt; to to create the secret:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic &amp;lt;secret-name&amp;gt; --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;kubeconfig_file_user&amp;gt; --namespace dell-replication-controller
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic &amp;lt;secret-name&amp;gt; --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;kubeconfig_file_user&amp;gt; --namespace dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
@@ -194,11 +199,11 @@ already has all the required RBAC privileges.&lt;/p&gt;
 &lt;h3 id=&#34;set-up-repctl-tool&#34;&gt;Set up repctl tool&lt;/h3&gt;
 &lt;p&gt;Before you begin, make sure you have the repctl tool available.&lt;/p&gt;
 &lt;p&gt;You can download a pre-built repctl binary from our &lt;a href=&#34;https://github.com/dell/csm-replication/releases&#34;&gt;Releases&lt;/a&gt; page.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://github.com/dell/csm-replication/releases/download/v1.4.0/repctl-linux-amd64
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://github.com/dell/csm-replication/releases/download/v1.5.0/repctl-linux-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv repctl-linux-amd64 repctl
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x repctl
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternately, if you want to build the binary yourself, you can follow these steps:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.5.0 https://github.com/dell/csm-replication.git
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication/repctl
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make build
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;installation-steps&#34;&gt;Installation steps&lt;/h3&gt;
@@ -209,7 +214,8 @@ already has all the required RBAC privileges.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Prepare admin Kubernetes clusters configs&lt;/li&gt;
 &lt;li&gt;Add admin configs as clusters to &lt;code&gt;repctl&lt;/code&gt;:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster add -f &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config-1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config-2&amp;#34;&lt;/span&gt; -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-2&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster add -f &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config-1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config-2&amp;#34;&lt;/span&gt; -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-2&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -238,11 +244,13 @@ The message should disappear once you inject the kubeconfigs (next step).&lt;/p&
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;Create replication storage classes using config:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create sc --from-config ./examples/&amp;lt;storage&amp;gt;_example_values.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create sc --from-config ./examples/&amp;lt;storage&amp;gt;_example_values.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Install CSI driver for your chosen storage in source cluster and provision replicated volumes&lt;/li&gt;
 &lt;li&gt;(optional) Create PVCs on target cluster from Replication Group:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create pvc --rg &amp;lt;rg-name&amp;gt; -t &amp;lt;target-namespace&amp;gt; --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create pvc --rg &amp;lt;rg-name&amp;gt; -t &amp;lt;target-namespace&amp;gt; --dry-run&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
@@ -265,7 +273,7 @@ The message should disappear once you inject the kubeconfigs (next step).&lt;/p&
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  These steps should be repeated on all Kubernetes clusters where you want to configure replication.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.5.0 https://github.com/dell/csm-replication.git
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create ns dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy and  modify values.yaml file if you wish to customize your deployment in any way&lt;/span&gt;
@@ -329,15 +337,15 @@ In the case of a single stretched cluster, it should be always set to &lt;code&g
 &lt;h3 id=&#34;pv-sync-deletion&#34;&gt;PV sync Deletion&lt;/h3&gt;
 &lt;p&gt;The dell-csm-replicator supports &amp;lsquo;sync deletion&amp;rsquo; of replicated PV resources i.e when a replication enabled PV is deleted its corresponding source or target PV can also be deleted.&lt;/p&gt;
 &lt;p&gt;The decision to whether or not sync delete the corresponding PV depends on a Storage Class parameter which can be configured by the user:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;replication.storage.dell.com/remotePVRetentionPolicy: &amp;#39;delete&amp;#39; | &amp;#39;retain&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the remotePVRetentionPolicy is set to &amp;lsquo;delete&amp;rsquo;, the corresponding PV would be deleted.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/remotePVRetentionPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;delete&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;| &amp;#39;retain&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the remotePVRetentionPolicy is set to &amp;lsquo;delete&amp;rsquo;, the corresponding PV would be deleted.&lt;/p&gt;
 &lt;p&gt;If the remotePVRetentionPolicy is set to &amp;lsquo;retain&amp;rsquo;, the corresponding PV would be retained. This is not applicable for file system replication.&lt;/p&gt;
 &lt;p&gt;By default, if the remotePVRetentionPolicy is not specified in the Storage Class, replicated PV resources are retained.&lt;/p&gt;
 &lt;h3 id=&#34;rg-sync-deletion&#34;&gt;RG sync Deletion&lt;/h3&gt;
 &lt;p&gt;The dell-csm-replicator supports &amp;lsquo;sync deletion&amp;rsquo; of RG (DellCSIReplicationGroup) resources i.e when an RG is deleted its corresponding source or target RG can also be deleted.&lt;/p&gt;
 &lt;p&gt;The decision to whether or not sync delete the corresponding RG depends on a Storage Class parameter which can be configured by the user.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;replication.storage.dell.com/remoteRGRetentionPolicy: &amp;#39;delete&amp;#39; | &amp;#39;retain&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If the remoteRGRetentionPolicy is set to &amp;lsquo;delete&amp;rsquo;, the corresponding RG would be deleted.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replication.storage.dell.com/remoteRGRetentionPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;delete&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;| &amp;#39;retain&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the remoteRGRetentionPolicy is set to &amp;lsquo;delete&amp;rsquo;, the corresponding RG would be deleted.&lt;/p&gt;
 &lt;p&gt;If the remoteRGRetentionPolicy is set to &amp;lsquo;retain&amp;rsquo;, the corresponding RG would be retained.&lt;/p&gt;
 &lt;p&gt;By default, if the remoteRGRetentionPolicy is not specified in the Storage Class, replicated RG resources are retained.&lt;/p&gt;
 &lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
@@ -408,8 +416,7 @@ and, if using multi-cluster installation, your &lt;code&gt;targets:&lt;/code&gt;
 populated by a list of target cluster IDs.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;If you don&amp;rsquo;t have something installed or something is out-of-place, please refer
-to installation instructions in &lt;a href=&#34;../install-repctl&#34;&gt;installation-repctl&lt;/a&gt; or
-&lt;a href=&#34;../installation&#34;&gt;installation&lt;/a&gt;.&lt;/p&gt;
+to installation instructions &lt;a href=&#34;../installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;installing-driver-with-replication-module&#34;&gt;Installing Driver With Replication Module&lt;/h3&gt;
 &lt;p&gt;To install the driver with replication enabled, you need to ensure you have set
 helm parameter &lt;code&gt;replication.enabled&lt;/code&gt; in your copy of example &lt;code&gt;values.yaml&lt;/code&gt; file
@@ -427,7 +434,8 @@ helm parameter &lt;code&gt;replication.enabled&lt;/code&gt; in your copy of exam
 &lt;code&gt;replicationPrefix&lt;/code&gt; as they are.&lt;/p&gt;
 &lt;p&gt;After enabling the replication module you can continue to install the CSI driver
 for PowerFlex following the usual installation procedure, just ensure you&amp;rsquo;ve added
-necessary array connection information to secret.&lt;/p&gt;
+the array information for all of the arrays being used in the
+&lt;a href=&#34;../../../csidriver/installation/helm/powerflex#install-the-driver&#34;&gt;secret&lt;/a&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt; you need to install your driver at least on the source cluster,
 but it is recommended to install drivers on all clusters you will use for
@@ -632,7 +640,7 @@ But all these storage classes will be restricted to provisioning volumes within 
 &lt;li&gt;When using SRDF mode Sync/Metro, a single SRDF group can be used to provision volumes from multiple namespaces.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;automatic-creation-of-srdf-groups&#34;&gt;Automatic creation of SRDF Groups&lt;/h4&gt;
-&lt;p&gt;CSI Driver for Powermax supports automatic creation of SRDF Groups as of &lt;strong&gt;v2.4.0&lt;/strong&gt; with help of &lt;strong&gt;10.0&lt;/strong&gt; REST endpoints.
+&lt;p&gt;CSI Driver for PowerMax supports automatic creation of SRDF Groups as of &lt;strong&gt;v2.4.0&lt;/strong&gt; with help of &lt;strong&gt;10.0&lt;/strong&gt; REST endpoints.
 To use this feature:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Remove &lt;em&gt;replication.storage.dell.com/RemoteRDFGroup&lt;/em&gt; and &lt;em&gt;replication.storage.dell.com/RDFGroup&lt;/em&gt; params from the storage classes before creating first replicated volume.&lt;/li&gt;
@@ -653,12 +661,12 @@ To use this feature:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods -n dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;Pods should be &lt;code&gt;READY&lt;/code&gt; and &lt;code&gt;RUNNING&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Check that controller config map is properly populated:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;code&gt;data&lt;/code&gt; field should be properly populated with cluster-id of your choosing and, if using multi-cluster
 installation, your &lt;code&gt;targets:&lt;/code&gt; parameter should be populated by a list of target clusters IDs.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;If you don&amp;rsquo;t have something installed or something out-of-place please refer to installation instructions
-in &lt;a href=&#34;../install-repctl&#34;&gt;installation-repctl&lt;/a&gt; or &lt;a href=&#34;../installation&#34;&gt;installation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t have something installed or something is out-of-place, please refer to installation instructions &lt;a href=&#34;../installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;installing-driver-with-replication-module&#34;&gt;Installing Driver With Replication Module&lt;/h3&gt;
 &lt;p&gt;To install the driver with replication enabled you need to ensure you have set
 Helm parameter &lt;code&gt;replication.enabled&lt;/code&gt; in your copy of example &lt;code&gt;values.yaml&lt;/code&gt; file
@@ -942,11 +950,12 @@ The storage protection group on the array can be deleted only if it has no volum
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods -n dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;Pods should be &lt;code&gt;READY&lt;/code&gt; and &lt;code&gt;RUNNING&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Check that controller config map is properly populated:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;code&gt;data&lt;/code&gt; field should be properly populated with cluster-id of your choosing and, if using multi-cluster
 installation, your &lt;code&gt;targets:&lt;/code&gt; parameter should be populated by a list of target clusters IDs.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;If you don&amp;rsquo;t have something installed or something is out-of-place, please refer to installation instructions in &lt;a href=&#34;../install-repctl&#34;&gt;installation-repctl&lt;/a&gt; or &lt;a href=&#34;../installation&#34;&gt;installation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t have something installed or something is out-of-place, please refer to installation instructions &lt;a href=&#34;../installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;installing-driver-with-replication-module&#34;&gt;Installing Driver With Replication Module&lt;/h3&gt;
 &lt;p&gt;To install the driver with replication enabled, you need to ensure you have set
 helm parameter &lt;code&gt;controller.replication.enabled&lt;/code&gt; in your copy of example &lt;code&gt;values.yaml&lt;/code&gt; file
@@ -1117,11 +1126,12 @@ in UI of your PowerStore instance.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods -n dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;Pods should be &lt;code&gt;READY&lt;/code&gt; and &lt;code&gt;RUNNING&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Check that controller config map is properly populated:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;code&gt;data&lt;/code&gt; field should be properly populated with cluster id of your choosing and, if using multi-cluster
 installation, your &lt;code&gt;targets:&lt;/code&gt; parameter should be populated by list of target clusters IDs.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;If you don&amp;rsquo;t have something installed or something is out-of-place, please refer to installation instructions in &lt;a href=&#34;../install-repctl&#34;&gt;installation-repctl&lt;/a&gt; or &lt;a href=&#34;../installation&#34;&gt;installation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t have something installed or something is out-of-place, please refer to installation instructions &lt;a href=&#34;../installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;installing-driver-with-replication-module&#34;&gt;Installing Driver With Replication Module&lt;/h3&gt;
 &lt;p&gt;To install the driver with replication enabled you need to ensure you have set
 Helm parameter &lt;code&gt;controller.replication.enabled&lt;/code&gt; in your copy of example &lt;code&gt;values.yaml&lt;/code&gt; file

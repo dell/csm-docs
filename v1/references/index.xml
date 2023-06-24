@@ -125,7 +125,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 &lt;/table&gt;
 &lt;h2 id=&#34;installation-instructions&#34;&gt;Installation instructions&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;Download &lt;code&gt;dellctl&lt;/code&gt; from &lt;a href=&#34;https://github.com/dell/csm/releases/tag/v1.5.1&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Download &lt;code&gt;dellctl&lt;/code&gt; from &lt;a href=&#34;https://github.com/dell/csm/releases/tag/v1.6.0&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;chmod +x dellctl&lt;/li&gt;
 &lt;li&gt;Move &lt;code&gt;dellctl&lt;/code&gt; to &lt;code&gt;/usr/local/bin&lt;/code&gt; or add &lt;code&gt;dellctl&lt;/code&gt;&amp;rsquo;s containing directory path to PATH environment variable.&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;dellctl --help&lt;/code&gt; to know available commands or run &lt;code&gt;dellctl command --help&lt;/code&gt; to know more about a specific command.&lt;/li&gt;
@@ -540,7 +540,7 @@ dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  k8s.gcr.
 &lt;blockquote&gt;
 &lt;p&gt;Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl volume get --proxy &amp;lt;proxy.dell.com&amp;gt; --namespace vxflexos
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl volume get --proxy &amp;lt;proxy.dell.com/proxy/volumes&amp;gt; --namespace vxflexos
 NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
 k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
 k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
@@ -584,28 +584,35 @@ k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
 &lt;h3 id=&#34;what-are-the-prerequisites-for-deploying-container-storage-modules&#34;&gt;What are the prerequisites for deploying Container Storage Modules?&lt;/h3&gt;
 &lt;p&gt;Prerequisites can be found on the respective module deployment pages:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../observability/deployment/#prerequisites&#34;&gt;Dell Container Storage Module for Observability Deployment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../authorization/deployment/#prerequisites&#34;&gt;Dell Container Storage Module for Authorization Deployment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../resiliency/deployment/&#34;&gt;Dell Container Storage Module for Resiliency Deployment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../replication/deployment/installation/#before-you-begin&#34;&gt;Dell Container Storage Module for Replication Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../observability/deployment/#prerequisites&#34;&gt;Dell Container Storage Module for Observability Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../authorization/deployment/#prerequisites&#34;&gt;Dell Container Storage Module for Authorization Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../resiliency/deployment/&#34;&gt;Dell Container Storage Module for Resiliency Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../replication/deployment/installation/#before-you-begin&#34;&gt;Dell Container Storage Module for Replication Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../..//applicationmobility/deployment/#pre-requisites&#34;&gt;Dell Container Storage Module for Application Mobility Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../secure/encryption/deployment/#vault-server&#34;&gt;Dell Container Storage Module for Encryption Deployment&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Prerequisites for deploying the Dell CSI drivers can be found here:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../csidriver/installation/&#34;&gt;Dell CSI Drivers Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../csidriver/installation/&#34;&gt;Dell CSI Drivers Deployment&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;how-do-i-uninstall-or-disable-a-module&#34;&gt;How do I uninstall or disable a module?&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../authorization/uninstallation/&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../observability/uninstall/&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../resiliency/uninstallation/&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../authorization/uninstallation/&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../observability/uninstall/&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../resiliency/uninstallation/&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../replication/uninstall/&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../applicationmobility/uninstallation/&#34;&gt;Dell Container Storage Module for Application Mobility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../secure/encryption/uninstallation/&#34;&gt;Dell Container Storage Module for Encryption&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;how-do-i-troubleshoot-container-storage-modules&#34;&gt;How do I troubleshoot Container Storage Modules?&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../csidriver/troubleshooting/&#34;&gt;Dell CSI Drivers&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../authorization/troubleshooting/&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../observability/troubleshooting/&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../replication/troubleshooting/&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../resiliency/troubleshooting/&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../csidriver/troubleshooting/&#34;&gt;Dell CSI Drivers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../authorization/troubleshooting/&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../observability/troubleshooting/&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../replication/troubleshooting/&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../resiliency/troubleshooting/&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../applicationmobility/troubleshooting/&#34;&gt;Dell Container Storage Module for Application Mobility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../secure/encryption/troubleshooting/&#34;&gt;Dell Container Storage Module for Encryption&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;can-i-use-the-csm-functionality-like-prometheus-collection-or-authorization-quotas-for-my-non-kubernetes-storage-clients&#34;&gt;Can I use the CSM functionality like Prometheus collection or Authorization quotas for my non-Kubernetes storage clients?&lt;/h3&gt;
 &lt;p&gt;No, all the modules have been designed to work inside Kubernetes with Dell CSI drivers.&lt;/p&gt;
@@ -614,12 +621,14 @@ k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
 &lt;h3 id=&#34;which-kubernetes-distributions-are-supported&#34;&gt;Which Kubernetes distributions are supported?&lt;/h3&gt;
 &lt;p&gt;The supported Kubernetes distributions for Container Storage Modules are documented:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../authorization/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../observability/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../replication/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../resiliency/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../authorization/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../observability/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../replication/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../resiliency/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../applicationmobility/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Application Mobility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../secure/encryption/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Encryption&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The supported distros for the Dell CSI Drivers are located &lt;a href=&#34;../csidriver/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The supported distros for the Dell CSI Drivers are located &lt;a href=&#34;../../csidriver/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;how-do-i-get-a-list-of-container-storage-modules-deployed-in-my-cluster-with-their-versions&#34;&gt;How do I get a list of Container Storage Modules deployed in my cluster with their versions?&lt;/h3&gt;
 &lt;p&gt;The easiest way to find the module version is to check the image tag for the module. For all the namespaces you can execute the following:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl get pods -A -o jsonpath=&amp;#34;{..image}&amp;#34; | tr -s &amp;#39;[[:space:]]&amp;#39; &amp;#39;\n&amp;#39; | grep &amp;#39;csm\|karavi&amp;#39; | sort | uniq -c
@@ -628,17 +637,19 @@ k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;do-all-container-storage-modules-need-to-be-the-same-version-or-can-i-mix-and-match&#34;&gt;Do all Container Storage Modules need to be the same version, or can I mix and match?&lt;/h3&gt;
 &lt;p&gt;It is advised to comply with the support matrices (links below) and not deviate from it with mixed versions.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../authorization/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../observability/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../replication/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../resiliency/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../csidriver/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell CSI Drivers&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../authorization/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Authorization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../observability/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Observability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../replication/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Replication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../resiliency/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Resiliency&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../applicationmobility/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Application Mobility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../secure/encryption/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell Container Storage Module for Encryption&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../csidriver/#supported-operating-systemscontainer-orchestrator-platforms&#34;&gt;Dell CSI Drivers&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;can-i-run-container-storage-modules-in-a-production-environment&#34;&gt;Can I run Container Storage Modules in a production environment?&lt;/h3&gt;
-&lt;p&gt;As of CSM 1.0, the Container Storage Modules are GA and ready for production systems.&lt;/p&gt;
+&lt;p&gt;Currently, the Container Storage Modules Authorization, Observability, Replication, and Resiliency are GA and ready for production systems. The modules Encryption and Application Mobility are launched for Tech Preview Release and it is not intended to use in the Production systems.&lt;/p&gt;
 &lt;h3 id=&#34;is-dell-container-storage-modules-csm-supported-by-dell-technologies&#34;&gt;Is Dell Container Storage Modules (CSM) supported by Dell Technologies?&lt;/h3&gt;
 &lt;p&gt;Yes!&lt;/p&gt;
-&lt;p&gt;If you find an issue, please follow our &lt;a href=&#34;../support/&#34;&gt;support process&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you find an issue, please follow our &lt;a href=&#34;../../support/&#34;&gt;support process&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;can-i-modify-a-module-or-contribute-to-the-project&#34;&gt;Can I modify a module or contribute to the project?&lt;/h3&gt;
 &lt;p&gt;Yes!&lt;/p&gt;
 &lt;p&gt;All Container Storage Modules are released as open-source projects under Apache-2.0 License. You are free to contribute directly following the &lt;a href=&#34;https://github.com/dell/csm/blob/main/docs/CONTRIBUTING.md&#34;&gt;contribution guidelines&lt;/a&gt;, fork the projects, modify them, and of course share feedback or open tickets ;-)&lt;/p&gt;
@@ -657,7 +668,14 @@ k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
       <description>
         
         
-        
+        &lt;p&gt;You can learn more and engage with the CSM community over different channels by:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reading the official &lt;a href=&#34;https://infohub.delltechnologies.com/t/blogs-99/&#34;&gt;blogs&lt;/a&gt; and &lt;a href=&#34;https://infohub.delltechnologies.com/t/persistent-storage-for-containerized-applications-on-kubernetes-with-powermax-san-storage-13/&#34;&gt;white paper&lt;/a&gt; are on &lt;a href=&#34;https://infohub.delltechnologies.com/&#34;&gt;https://infohub.delltechnologies.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Seeing the lastest CSM features in action from &lt;a href=&#34;https://www.youtube.com/watch?v=OBlb25Kw20Q&amp;amp;list=PL2nlzNk2-VMHsKVguetbetbmxd4eMfc_X&#34;&gt;Dell Technologies&amp;rsquo; YouTube channel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Reaching-out the development team on &lt;a href=&#34;https://dell-iac.slack.com/&#34;&gt;Slack&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Learning from technical blogs on &lt;a href=&#34;https://volumes.blog/&#34;&gt;https://volumes.blog/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
       </description>
     </item>
     

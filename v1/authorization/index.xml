@@ -314,6 +314,12 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
 &lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh install_karavi_auth.sh --upgrade
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh install_karavi_auth.sh --upgrade  --traefik_web_port &amp;lt;web port number&amp;gt; --traefik_websecure_port &amp;lt;websecure port number&amp;gt;
+
+Ex.:
+
+sh install_karavi_auth.sh --upgrade  --traefik_web_port 30001 --traefik_websecure_port 30002
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -qa | grep karavi
 k3s kubectl version
@@ -455,6 +461,10 @@ This document outlines all karavictl commands, their intended use, options that 
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-tenant-delete&#34;&gt;karavictl tenant delete&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Deletes a tenant resource within CSM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-update&#34;&gt;karavictl tenant update&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Updates a tenant resource within CSM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -933,6 +943,22 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-24&#34;&gt;Output&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl tenant delete --name Alice
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-tenant-update&#34;&gt;karavictl tenant update&lt;/h3&gt;
+&lt;p&gt;Updates a tenant&amp;rsquo;s resource within CSM&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-25&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Updates a tenant resource within CSM&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl tenant update [flags]
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;options-25&#34;&gt;Options&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
+  -n, --name string   Tenant name
+      --approvesdc boolean (Usage: --approvesdc=true/false | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&amp;#39;s SDC request )
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-24&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;#34;localhost:443&amp;#34;)
+      --config string   config file (default is $HOME/.karavictl.yaml)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-25&#34;&gt;Output&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl tenant update --name Alice --approvesdc=false
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the update was persisted.&lt;/p&gt;
 
       </description>
     </item>
@@ -1080,15 +1106,17 @@ kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart daemonSet/vxflexos-n
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-authorization-151&#34;&gt;Release Notes - CSM Authorization 1.5.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-authorization-160&#34;&gt;Release Notes - CSM Authorization 1.6.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Show volumes associated with the tenant from the k8s server. (&lt;a href=&#34;https://github.com/dell/csm/issues/408&#34;&gt;#408&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM 1.5.1 release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/582&#34;&gt;#582&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Restrict the version of TLS to v1.2 for all requests to CSM authorization proxy server. (&lt;a href=&#34;https://github.com/dell/csm/issues/642&#34;&gt;#642&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;PowerFlex preapproved GUIDs. (&lt;a href=&#34;https://github.com/dell/csm/issues/402&#34;&gt;#402&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM 1.6 release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/583&#34;&gt;#583&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;bugs&#34;&gt;Bugs&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;CSM Authorization installation fails due to a PATH not looking in /usr/local/bin. (&lt;a href=&#34;https://github.com/dell/csm/issues/580&#34;&gt;#580&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM Authorization quota of zero should allow infinite use for PowerFlex and PowerMax. (&lt;a href=&#34;https://github.com/dell/csm/issues/654&#34;&gt;#654&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM Authorization CRD in the CSM Operator doesn&amp;rsquo;t read custom configurations. (&lt;a href=&#34;https://github.com/dell/csm/issues/633&#34;&gt;#633&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>

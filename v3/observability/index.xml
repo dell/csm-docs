@@ -34,7 +34,13 @@
 &lt;ul&gt;
 &lt;li&gt;Prometheus for scraping the metrics from the OTEL collector.&lt;/li&gt;
 &lt;li&gt;Grafana for visualizing the metrics from Prometheus and Topology services using custom dashboards.&lt;/li&gt;
-&lt;li&gt;CSM for Observability will use secrets to get details about the storage systems used by the CSI drivers. These secrets should be copied from the namespaces where the drivers are deployed. CSI Powerflex driver uses the &amp;lsquo;vxflexos-config&amp;rsquo; secret and CSI PowerStore uses the &amp;lsquo;powerstore-config&amp;rsquo; secret.&lt;/li&gt;
+&lt;li&gt;CSM for Observability will use secrets to get details about the storage systems used by the CSI drivers. These secrets should be copied from the namespaces where the drivers are deployed.
+&lt;ul&gt;
+&lt;li&gt;CSI PowerFlex driver uses the &amp;lsquo;vxflexos-config&amp;rsquo; secret.&lt;/li&gt;
+&lt;li&gt;CSI PowerStore driver uses the &amp;lsquo;powerstore-config&amp;rsquo; secret.&lt;/li&gt;
+&lt;li&gt;CSI PowerScale driver uses the &amp;lsquo;isilon-creds&amp;rsquo; secret.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;deployment-architectures&#34;&gt;Deployment Architectures&lt;/h2&gt;
 &lt;p&gt;CSM for Observability can be deployed to either direct storage system requests directly to the storage system or through the &lt;a href=&#34;../../authorization&#34;&gt;CSM for Authorization&lt;/a&gt; proxy.  The CSI driver must be configured to route storage system requests through the CSM for Authorization proxy in order for CSM for Observability to do the same.&lt;/p&gt;
@@ -354,8 +360,8 @@ helm repo update
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dashboards&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;## Additional grafana server CofigMap mounts&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;## Defines additional mounts with CofigMap. CofigMap must be manually created in the namespace.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;## Additional grafana server ConfigMap mounts&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;## Defines additional mounts with ConfigMap. ConfigMap must be manually created in the namespace.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;extraConfigmapMounts&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# If you created a ConfigMap on the previous step, delete [] and uncomment the lines below &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#   - name: certs-configmap&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#     mountPath: /etc/ssl/certs/ca-certificates.crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -400,11 +406,31 @@ helm repo update
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerflex/storage_consumption.json&#34;&gt;PowerFlex: Storage Pool Consumption By CSI Driver&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.&lt;/td&gt;
+&lt;td&gt;Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/volume_io_metrics.json&#34;&gt;PowerStore: I/O Performance by Provisioned Volume&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;em&gt;As of Release 0.4.0:&lt;/em&gt; Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume&lt;/td&gt;
+&lt;td&gt;Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/filesystem_io_metrics.json&#34;&gt;PowerStore: I/O Performance by File System&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Provides visibility into the I/O performance metrics (IOPS, bandwidth, latency) by filesystem&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerstore/storage_consumption.json&#34;&gt;PowerStore: Array and Storage Class Consumption By CSI Driver&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Provides visibility into the total, used and available capacity for a storage class and associated underlying storage construct&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/cluster_io_metrics.json&#34;&gt;PowerScale: I/O Performance by Cluster&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Provides visibility into the I/O performance metrics (IOPS, bandwidth) by cluster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/cluster_capacity.json&#34;&gt;PowerScale: Capacity by Cluster&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Provides visibility into the total, used, available capacity and directory quota capacity by cluster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/powerscale/volume_capacity.json&#34;&gt;PowerScale: Capacity by Quota&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Provides visibility into the subscribed, remaining capacity and usage by quota&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;https://github.com/dell/karavi-observability/blob/main/grafana/dashboards/topology/topology.json&#34;&gt;CSI Driver Provisioned Volume Topology&lt;/a&gt;&lt;/td&gt;
@@ -432,6 +458,11 @@ helm repo update
 &lt;td&gt;karavi-metrics-powerstore-configmap&lt;/td&gt;
 &lt;td&gt;karavi-metrics-powerstore&lt;/td&gt;
 &lt;td&gt;&lt;ul&gt;&lt;li&gt;COLLECTOR_ADDR&lt;/li&gt;&lt;li&gt;PROVISIONER_NAMES&lt;/li&gt;&lt;li&gt;POWERSTORE_VOLUME_METRICS_ENABLED&lt;/li&gt;&lt;li&gt;POWERSTORE_VOLUME_IO_POLL_FREQUENCY&lt;/li&gt;&lt;li&gt;POWERSTORE_SPACE_POLL_FREQUENCY&lt;/li&gt;&lt;li&gt;POWERSTORE_ARRAY_POLL_FREQUENCY&lt;/li&gt;&lt;li&gt;POWERSTORE_FILE_SYSTEM_POLL_FREQUENCY&lt;/li&gt;&lt;li&gt;POWERSTORE_MAX_CONCURRENT_QUERIES&lt;/li&gt;&lt;li&gt;LOG_LEVEL&lt;/li&gt;&lt;li&gt;LOG_FORMAT&lt;/li&gt;&lt;li&gt;ZIPKIN_URI&lt;/li&gt;&lt;li&gt;ZIPKIN_SERVICE_NAME&lt;/li&gt;&lt;li&gt;ZIPKIN_PROBABILITY&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;karavi-metrics-powerscale-configmap&lt;/td&gt;
+&lt;td&gt;karavi-metrics-powerscale&lt;/td&gt;
+&lt;td&gt;&lt;ul&gt;&lt;li&gt;COLLECTOR_ADDR&lt;/li&gt; &lt;li&gt;PROVISIONER_NAMES&lt;/li&gt; &lt;li&gt;POWERSCALE_MAX_CONCURRENT_QUERIES&lt;/li&gt; &lt;li&gt;POWERSCALE_CAPACITY_METRICS_ENABLED&lt;/li&gt; &lt;li&gt;POWERSCALE_PERFORMANCE_METRICS_ENABLED&lt;/li&gt; &lt;li&gt;POWERSCALE_CLUSTER_CAPACITY_POLL_FREQUENCY&lt;/li&gt; &lt;li&gt;POWERSCALE_CLUSTER_PERFORMANCE_POLL_FREQUENCY&lt;/li&gt; &lt;li&gt;POWERSCALE_QUOTA_CAPACITY_POLL_FREQUENCY&lt;/li&gt; &lt;li&gt;POWERSCALE_ISICLIENT_INSECURE&lt;/li&gt; &lt;li&gt;POWERSCALE_ISICLIENT_AUTH_TYPE&lt;/li&gt; &lt;li&gt;POWERSCALE_ISICLIENT_VERBOSE&lt;/li&gt; &lt;li&gt;LOG_LEVEL&lt;/li&gt; &lt;li&gt;LOG_FORMAT&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;karavi-topology-configmap&lt;/td&gt;
@@ -514,31 +545,55 @@ helm repo update
 &lt;h3 id=&#34;when-csm-for-observability-uses-the-authorization-module&#34;&gt;When CSM for Observability uses the Authorization module&lt;/h3&gt;
 &lt;p&gt;In this case, all storage system requests made by CSM for Observability will be routed through the Authorization module. The following must be performed:&lt;/p&gt;
 &lt;h4 id=&#34;update-the-authorization-module-token&#34;&gt;Update the Authorization Module Token&lt;/h4&gt;
+&lt;h5 id=&#34;csi-driver-for-dell-powerflex&#34;&gt;CSI Driver for Dell PowerFlex&lt;/h5&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Delete the current &lt;code&gt;proxy-authz-tokens&lt;/code&gt; Secret from the CSM namespace.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl delete secret proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Copy the &lt;code&gt;proxy-authz-tokens&lt;/code&gt; Secret from a CSI Driver to the CSM namespace.&lt;/p&gt;
+&lt;p&gt;Copy the &lt;code&gt;proxy-authz-tokens&lt;/code&gt; Secret from the CSI Driver for Dell PowerFlex to the CSM namespace.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl get secret proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSM_CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;csi-driver-for-dell-powerscale&#34;&gt;CSI Driver for Dell PowerScale&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Delete the current &lt;code&gt;isilon-proxy-authz-tokens&lt;/code&gt; Secret from the CSM namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl delete secret isilon-proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the &lt;code&gt;isilon-proxy-authz-tokens&lt;/code&gt; Secret from the CSI Driver for Dell PowerScale namespace to the CSM namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl get secret proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSM_CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;update-storage-systems&#34;&gt;Update Storage Systems&lt;/h4&gt;
 &lt;p&gt;If the list of storage systems managed by a Dell CSI Driver have changed, the following steps can be performed to update CSM for Observability to reference the updated systems:&lt;/p&gt;
+&lt;h5 id=&#34;csi-driver-for-dell-powerflex-1&#34;&gt;CSI Driver for Dell PowerFlex&lt;/h5&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Delete the current &lt;code&gt;karavi-authorization-config&lt;/code&gt; Secret from the CSM namespace.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl delete secret proxy-authz-tokens -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Copy the &lt;code&gt;karavi-authorization-config&lt;/code&gt; Secret from the CSI Driver namespace to CSM for Observability namespace.&lt;/p&gt;
+&lt;p&gt;Copy the &lt;code&gt;karavi-authorization-config&lt;/code&gt; Secret from the CSI Driver for Dell PowerFlex namespace to CSM for Observability namespace.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl get secret karavi-authorization-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSM_CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;csi-driver-for-dell-powerscale-1&#34;&gt;CSI Driver for Dell PowerScale&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Delete the current &lt;code&gt;isilon-karavi-authorization-config&lt;/code&gt; Secret from the CSM namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl delete secret isilon-karavi-authorization-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the isilon-karavi-authorization-config Secret from the CSI Driver for Dell PowerScale namespace to CSM for Observability namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl get secret karavi-authorization-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSM_CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/name: karavi-authorization-config/name: isilon-karavi-authorization-config/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;when-csm-for-observability-does-not-use-the-authorization-module&#34;&gt;When CSM for Observability does not use the Authorization module&lt;/h3&gt;
 &lt;p&gt;In this case all storage system requests made by CSM for Observability will not be routed through the Authorization module. The following must be performed:&lt;/p&gt;
-&lt;h4 id=&#34;csi-driver-for-dell-powerflex&#34;&gt;CSI Driver for Dell PowerFlex&lt;/h4&gt;
+&lt;h4 id=&#34;csi-driver-for-dell-powerflex-2&#34;&gt;CSI Driver for Dell PowerFlex&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Delete the current &lt;code&gt;vxflexos-config&lt;/code&gt; Secret from the CSM namespace.&lt;/p&gt;
@@ -558,6 +613,17 @@ helm repo update
 &lt;li&gt;
 &lt;p&gt;Copy the &lt;code&gt;powerstore-config&lt;/code&gt; Secret from the CSI Driver for Dell PowerStore namespace to the CSM namespace.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl get secret powerstore-config -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;csi-driver-for-dell-powerscale-2&#34;&gt;CSI Driver for Dell PowerScale&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Delete the current &lt;code&gt;isilon-creds&lt;/code&gt; Secret from the CSM namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl delete secret isilon-creds -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSM_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy the &lt;code&gt;isilon-creds&lt;/code&gt; Secret from the CSI Driver for Dell PowerScale namespace to the CSM namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902&#34;&gt;$&lt;/span&gt; kubectl get secret isilon-creds -n &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CSI_DRIVER_NAMESPACE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; -o yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; sed &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;s/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl create -f -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -652,6 +718,50 @@ Upgrade Offline Installer deployment:
 |
 |- Waiting for pods in namespace karavi to be ready                 Success
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;offline-installer-upgrade&#34;&gt;Offline Installer Upgrade&lt;/h2&gt;
+&lt;p&gt;Assuming that you have already installed the Karavi Observability Helm Chart by offline installer and meet its installation requirement.
+These instructions can be followed when a Helm chart was installed and will be upgraded in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Build the Offline Bundle
+Follow &lt;a href=&#34;../deployment/offline&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt; to build the latest bundle.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unpack the Offline Bundle
+Follow &lt;a href=&#34;../deployment/offline&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;, copy and unpack the Offline Bundle to another Linux system, and push Docker images to the internal Docker registry.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Perform Helm upgrade&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Change directory to &lt;code&gt;helm&lt;/code&gt; which contains the updated Helm chart directory:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle]# cd helm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install necessary cert-manager CustomResourceDefinitions provided.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# kubectl apply --validate=false -f cert-manager.crds.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(Optional) Enable Karavi Observability for PowerFlex/PowerScale to use an existing instance of Karavi Authorization for accessing the REST API for the given storage systems.&lt;br&gt;
+&lt;strong&gt;Note&lt;/strong&gt;: Assuming that if the Karavi Observability&amp;rsquo;s Authorization has been enabled in the phase of &lt;a href=&#34;../deployment/offline&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;, the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.&lt;br&gt;
+A sample configuration values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;br&gt;
+In your own configuration values.yaml, you need to enable PowerFlex/PowerScale Authorization, and provide the location of the sidecar-proxy Docker image and URL of the Karavi Authorization proxyHost address.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now that the required images have been made available and the Helm chart&amp;rsquo;s configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart&amp;rsquo;s repository.&lt;br&gt;
+&lt;strong&gt;Note&lt;/strong&gt;: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace in the phase of &lt;a href=&#34;../deployment/offline&#34;&gt;Offline Karavi Observability Helm Chart Installer&lt;/a&gt;&lt;br&gt;
+Optionally, you could provide your own &lt;a href=&#34;../deployment/helm/#configuration&#34;&gt;configurations&lt;/a&gt;. A sample values.yaml file is located &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  [user@anothersystem /home/user/offline-karavi-observability-bundle/helm]# helm upgrade -n install-namespace app-name karavi-observability
+  NAME: app-name
+  LAST DEPLOYED: Wed Aug 17 14:44:04 2022
+  NAMESPACE: install-namespace
+  STATUS: deployed
+  REVISION: 1
+  TEST SUITE: None
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>
@@ -803,7 +913,7 @@ Upgrade Offline Installer deployment:
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;## Additional grafana server ConfigMap mounts&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;## Defines additional mounts with ConfigMap. CofigMap must be manually created in the namespace.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;## Defines additional mounts with ConfigMap. ConfigMap must be manually created in the namespace.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;extraConfigmapMounts&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/details&gt;
 &lt;details&gt;
@@ -866,13 +976,16 @@ Upgrade Offline Installer deployment:
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-observability-120&#34;&gt;Release Notes - CSM Observability 1.2.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-observability-130&#34;&gt;Release Notes - CSM Observability 1.3.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/452&#34;&gt;Support PowerScale in CSM Observability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/453&#34;&gt;Set PV/PVC&amp;rsquo;s namespace when using Observability Module&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/454&#34;&gt;CSM Observability modules stick with otel controller 0.42.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/279&#34;&gt;PowerStore Grafana dashboard does not populate correctly &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/278&#34;&gt;Grafana installation script - prometheus address is incorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/259&#34;&gt;prometheus-values.yaml error in json&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/430&#34;&gt;Observability Topology: nil pointer error&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 

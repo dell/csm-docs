@@ -31,13 +31,10 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 &lt;/ol&gt;
 &lt;h3 id=&#34;using-installation-script&#34;&gt;Using Installation Script&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;Clone and checkout the required dell-csi-operator version using &lt;code&gt;git clone -b v1.9.0 https://github.com/dell/dell-csi-operator.git&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Clone and checkout the required dell-csi-operator version using &lt;code&gt;git clone -b v1.10.0 https://github.com/dell/dell-csi-operator.git&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;cd dell-csi-operator&lt;/li&gt;
-&lt;li&gt;Execute &lt;code&gt;bash scripts/install.sh --upgrade&lt;/code&gt;  . This command will install the latest version of the operator.&lt;/li&gt;
+&lt;li&gt;Execute &lt;code&gt;bash scripts/install.sh --upgrade&lt;/code&gt;. This command will install the latest version of the operator.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note: Dell CSI Operator version 1.4.0 and higher would install to the &amp;lsquo;dell-csi-operator&amp;rsquo; namespace by default.&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;h3 id=&#34;using-olm&#34;&gt;Using OLM&lt;/h3&gt;
 &lt;p&gt;The upgrade of the Dell CSI Operator is done via Operator Lifecycle Manager.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;Update approval&lt;/code&gt; (&lt;strong&gt;&lt;code&gt;InstallPlan&lt;/code&gt;&lt;/strong&gt; in OLM terms) strategy plays a role while upgrading dell-csi-operator on OpenShift. This option can be set during installation of dell-csi-operator on OpenShift via the console and can be either set to &lt;code&gt;Manual&lt;/code&gt; or &lt;code&gt;Automatic&lt;/code&gt;.&lt;/p&gt;
@@ -45,7 +42,7 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 &lt;li&gt;If the &lt;strong&gt;&lt;code&gt;Update approval&lt;/code&gt;&lt;/strong&gt; is set to &lt;code&gt;Automatic&lt;/code&gt;, OpenShift automatically detects whenever the latest version of dell-csi-operator is available in the &lt;strong&gt;&lt;code&gt;Operator hub&lt;/code&gt;&lt;/strong&gt;, and upgrades it to the latest available version.&lt;/li&gt;
 &lt;li&gt;If the upgrade policy is set to &lt;code&gt;Manual&lt;/code&gt;, OpenShift notifies of an available upgrade. This notification can be viewed by the user in the &lt;strong&gt;&lt;code&gt;Installed Operators&lt;/code&gt;&lt;/strong&gt; section of the OpenShift console. Clicking on the hyperlink to &lt;code&gt;Approve&lt;/code&gt; the installation would trigger the dell-csi-operator upgrade process.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for Upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt; when upgrading operator to &lt;code&gt;v1.9.0&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The recommended version of OLM for Upstream Kubernetes is &lt;strong&gt;&lt;code&gt;v0.18.3&lt;/code&gt;&lt;/strong&gt; when upgrading operator to &lt;code&gt;v1.10.0&lt;/code&gt;.&lt;/p&gt;
 
       </description>
     </item>
@@ -109,7 +106,7 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 &lt;td&gt;&lt;code&gt;controller.image&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;Location of the Application Mobility Docker image&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;dell/csm-application-mobility-controller:v0.1.0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dellemc/csm-application-mobility-controller:v0.2.0&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;cert-manager.enabled&lt;/code&gt;&lt;/td&gt;
@@ -217,7 +214,7 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 &lt;td&gt;&lt;code&gt;velero.initContainers[0].image&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;Location of the Dell Velero plugin image.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;dellemc/csm-application-mobility-velero-plugin:v0.1.0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dellemc/csm-application-mobility-velero-plugin:v0.2.0&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;velero.initContainers[0].volumeMounts[0].mountPath&lt;/code&gt;&lt;/td&gt;
@@ -230,6 +227,12 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 &lt;td&gt;Name of the volume mount.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;&lt;code&gt;plugins&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;velero.restic.privileged&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;If set to true, Restic Pods will be run in privileged mode. Note: Set to true when using Red Hat OpenShift&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -253,6 +256,9 @@ the rest of the deployment process is described in the correspondent &lt;a href=
 &lt;h2 id=&#34;vault-server&#34;&gt;Vault Server&lt;/h2&gt;
 &lt;p&gt;Hashicorp Vault must be &lt;a href=&#34;../vault&#34;&gt;pre-configured&lt;/a&gt; to support Encryption. The Vault server&amp;rsquo;s IP address and port must be accessible
 from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
+&lt;h2 id=&#34;rekey-controller&#34;&gt;Rekey Controller&lt;/h2&gt;
+&lt;p&gt;The Encryption Rekey CRD Controller is an optional component that, if installed, allows encrypted volumes rekeying in a
+Kubernetes cluster. Please refer to &lt;a href=&#34;../rekey&#34;&gt;Rekey Configuration&lt;/a&gt; for the Rekey Controller installation details.&lt;/p&gt;
 &lt;h2 id=&#34;helm-chart-values&#34;&gt;Helm Chart Values&lt;/h2&gt;
 &lt;p&gt;The drivers that support Encryption via Helm chart have an &lt;code&gt;encryption&lt;/code&gt; block in their &lt;em&gt;values.yaml&lt;/em&gt; file that looks like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;encryption&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -263,20 +269,31 @@ from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;pluginName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sec-isilon.dellemc.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# image: Encryption driver image name.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;dellemc/csm-encryption:v0.1.0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# imagePullPolicy: If specified, overrides the chart global imagePullPolicy.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;dellemc/csm-encryption:v0.2.0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# logLevel: Log level of the encryption driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: &amp;#34;error&amp;#34;, &amp;#34;warning&amp;#34;, &amp;#34;info&amp;#34;, &amp;#34;debug&amp;#34;, &amp;#34;trace&amp;#34;.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;logLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;error&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# apiPort: TCP port number used by the REST API server.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiPort&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3838&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# logLevel: Log level of the encryption driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: &amp;#34;error&amp;#34;, &amp;#34;warning&amp;#34;, &amp;#34;info&amp;#34;, &amp;#34;debug&amp;#34;, &amp;#34;trace&amp;#34;.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;logLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;debug&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# livenessPort: HTTP liveness probe port number. &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Leave empty to disable the liveness probe.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Example: 8080&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;livenessPort&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# ocp: Enable when running on OpenShift Container Platform with CoreOS worker nodes.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ocp&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# ocpCoreID: User ID and group ID of user core on CoreOS worker nodes.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Ignored when ocp is set to false.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ocpCoreID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;1000:1000&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# extraArgs: Extra command line parameters to pass to the encryption driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# --sharedStorage - may be required by some applications to work properly.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -309,19 +326,19 @@ from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
 &lt;td&gt;image&lt;/td&gt;
 &lt;td&gt;Encryption driver image name.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&amp;ldquo;dellemc/csm-encryption:v0.1.0&amp;rdquo;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;imagePullPolicy&lt;/td&gt;
-&lt;td&gt;If specified, overrides the chart global imagePullPolicy.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;CSI driver global imagePullPolicy&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;dellemc/csm-encryption:v0.2.0&amp;rdquo;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;logLevel&lt;/td&gt;
-&lt;td&gt;Log level of the encryption driver.&lt;br/&gt;Allowed values: &amp;ldquo;error&amp;rdquo;, &amp;ldquo;warning&amp;rdquo;, &amp;ldquo;info&amp;rdquo;, &amp;ldquo;debug, `&amp;ldquo;trace&amp;rdquo;.&lt;/td&gt;
+&lt;td&gt;Log level of the encryption driver.&lt;br/&gt;Allowed values: &amp;ldquo;error&amp;rdquo;, &amp;ldquo;warning&amp;rdquo;, &amp;ldquo;info&amp;rdquo;, &amp;ldquo;debug&amp;rdquo;, &amp;ldquo;trace&amp;rdquo;.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;&amp;ldquo;error&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;apiPort&lt;/td&gt;
+&lt;td&gt;TCP Port number used by the REST API Server.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;3838&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;livenessPort&lt;/td&gt;
@@ -330,8 +347,20 @@ from the Kubernetes cluster where the CSI driver is to be deployed.&lt;/p&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;ocp&lt;/td&gt;
+&lt;td&gt;Enable when running an OCP Platform with CoreOS worker nodes.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ocpCoreID&lt;/td&gt;
+&lt;td&gt;User ID and group ID of user core on CoreOS worker nodes. Ignored when ocp is set to false.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;1000:1000&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;extraArgs&lt;/td&gt;
-&lt;td&gt;Extra command line parameters to pass to the encryption driver.&lt;br/&gt;Allowed values:&lt;br/&gt;&amp;rdquo;--sharedStorage&amp;quot; - may be required by some applications to work properly.&lt;br/&gt;When set, performance is reduced and hard links cannot be created.&lt;br/&gt;See the &lt;a href=&#34;https://github.com/rfjakob/gocryptfs/blob/v2.2.1/Documentation/MANPAGE.md#-sharedstorage&#34;&gt;gocryptfs documentation&lt;/a&gt; for more details.&lt;/td&gt;
+&lt;td&gt;Extra command line parameters to pass to the encryption driver.&lt;br/&gt;Allowed values:&lt;br/&gt;&amp;quot;--sharedStorage&amp;quot; - may be required by some applications to work properly.&lt;br/&gt;When set, performance is reduced and hard links cannot be created.&lt;br/&gt;See the &lt;a href=&#34;https://github.com/rfjakob/gocryptfs/blob/v2.2.1/Documentation/MANPAGE.md#-sharedstorage&#34;&gt;gocryptfs documentation&lt;/a&gt; for more details.&lt;/td&gt;
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;[]&lt;/td&gt;
 &lt;/tr&gt;
@@ -1101,7 +1130,7 @@ controller:
 &lt;/blockquote&gt;
 &lt;p&gt;For configuring Controller HA on the Dell CSI Operator, please refer to the &lt;a href=&#34;../../installation/operator/#custom-resource-specification&#34;&gt;Dell CSI Operator documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;sdc-deployment&#34;&gt;SDC Deployment&lt;/h2&gt;
-&lt;p&gt;The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run the node portion of the CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platforms which support automatic SDC deployment: currently only Red Hat CoreOS (RHCOS). On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hub.docker.com/r/dellemc/sdc&lt;/a&gt; for your OS versions.&lt;/p&gt;
+&lt;p&gt;The CSI PowerFlex driver version 1.3 and later support the automatic deployment of the PowerFlex SDC on Kubernetes nodes which run the node portion of the CSI driver. The deployment of the SDC kernel module occurs on these nodes with OS platforms which support automatic SDC deployment: currently Red Hat CoreOS (RHCOS), RHEL8.x,RHEL 7.9 are the only supported OS platforms. On Kubernetes nodes with OS version not supported by automatic install, you must perform the Manual SDC Deployment steps below. Refer &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hub.docker.com/r/dellemc/sdc&lt;/a&gt; for your OS versions.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;On Kubernetes nodes which run the node portion of the CSI driver, the SDC init container runs prior to the driver being installed. It installs the SDC kernel module on the nodes with OS version which supports automatic SDC deployment. If there is an SDC kernel module installed then the version is checked and updated.&lt;/li&gt;
 &lt;li&gt;Optionally, if the SDC monitor is enabled, another container is started and runs as the monitor. Follow PowerFlex SDC documentation to get monitor metrics.&lt;/li&gt;
@@ -1313,7 +1342,36 @@ ensure the proper values are enabled in your values file. See the values table i
   ----     ------                     ----                ----         ------
 Warning  VolumeConditionAbnormal      35s (x9 over 12m)  kubelet       Volume vol4: volPath: /var/.../rhel-705f0dcbf1/mount is not mounted: &amp;lt;nil&amp;gt;
 Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vol2: Volume is not found by node driver at 2021-11-11 02:04:49
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;set-qos-limits&#34;&gt;Set QoS Limits&lt;/h2&gt;
+&lt;p&gt;Starting in version 2.5, CSI Driver for PowerFlex now supports setting the limits for the bandwidth and IOPS that one SDC generates for the specified volume. This enables the CSI driver to control the quality of service (QoS).
+In this release this is supported at the StorageClass level, so once a volume is created QoS Settings can&amp;rsquo;t be adjusted later.
+To accomplish this, two new parameters are introduced in the storage class: bandwidthLimitInKbps and iopsLimit.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ensure that the proper values are enabled in your storage class yaml files. Refer to the &lt;a href=&#34;https://github.com/dell/csi-powerflex/tree/main/samples/storageclass&#34;&gt;sample storage class yamls&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;storage.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;StorageClass&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;vxflexos&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageclass.kubernetes.io/is-default-class&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;provisioner&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csi-vxflexos.dellemc.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;reclaimPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Delete&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allowVolumeExpansion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;parameters&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storagepool&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;STORAGE_POOL&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert Storage pool&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;systemID&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;SYSTEM_ID&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert System ID&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;bandwidthLimitInKbps&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;BANDWIDTH_LIMIT_IN_KBPS&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert bandwidth limit in Kbps&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;iopsLimit&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;IOPS_LIMIT&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert iops limit&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csi.storage.k8s.io/fstype&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ext4&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeBindingMode&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WaitForFirstConsumer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allowedTopologies&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabelExpressions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csi-vxflexos.dellemc.com/&amp;lt;SYSTEM_ID&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Insert System ID&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;values&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;csi-vxflexos.dellemc.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the volume gets created, the ControllerPublishVolume will set the QoS limits for the volumes mapped to SDC.&lt;/p&gt;
+
       </description>
     </item>
     
@@ -1327,10 +1385,10 @@ Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vo
         
         
         &lt;p&gt;You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;h2 id=&#34;update-driver-from-v22-to-v23-using-helm&#34;&gt;Update Driver from v2.2 to v2.3 using Helm&lt;/h2&gt;
+&lt;h2 id=&#34;update-driver-from-v24-to-v25-using-helm&#34;&gt;Update Driver from v2.4 to v2.5 using Helm&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.3.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository and get the v2.3.0 driver.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.5.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository and get the v2.3.0 driver.&lt;/li&gt;
 &lt;li&gt;You need to create config.yaml with the configuration of your system.
 Check this section in installation documentation:  &lt;a href=&#34;../../../installation/helm/powerflex#install-the-driver&#34;&gt;Install the Driver&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Update values file as needed.&lt;/li&gt;
@@ -1563,7 +1621,7 @@ If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using t
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;requests&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;8Gi&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;iscsi-chap&#34;&gt;iSCSI CHAP&lt;/h2&gt;
-&lt;p&gt;Starting from v1.3.0, the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
+&lt;p&gt;Starting from version 1.3.0, the unidirectional Challenge Handshake Authentication Protocol (CHAP) for iSCSI has been supported.
 To enable CHAP authentication:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Create secret &lt;code&gt;powermax-creds&lt;/code&gt; with the key &lt;code&gt;chapsecret&lt;/code&gt; set to the iSCSI CHAP secret. If the secret exists, delete and re-create the secret with this newly added key.&lt;/li&gt;
@@ -1578,7 +1636,7 @@ To enable CHAP authentication:&lt;/p&gt;
 &lt;p&gt;With unidirectional CHAP, the PowerMax array challenges the host initiator during the initial link negotiation process and expects to receive a valid credential and CHAP secret in response.&lt;/p&gt;
 &lt;p&gt;When challenged, the host initiator transmits a CHAP credential and CHAP secret to the storage array. The storage array looks for this credential and CHAP secret which is stored in the host initiator group. When a positive authentication occurs, the PowerMax array sends an acceptance message to the host. However, if the PowerMax array fails to find any record of the credential/secret pair, it sends a rejection message, and the link is closed.&lt;/p&gt;
 &lt;h2 id=&#34;custom-driver-name&#34;&gt;Custom Driver Name&lt;/h2&gt;
-&lt;p&gt;Starting from version 1.3.0 driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.&lt;/p&gt;
+&lt;p&gt;Starting from version 1.3.0 of the driver, a custom name can be assigned to the driver at the time of installation. This enables installation of the CSI driver in a different namespace and installation of multiple CSI drivers for Dell PowerMax in the same Kubernetes/OpenShift cluster.&lt;/p&gt;
 &lt;p&gt;To use this feature, set the following values under &lt;code&gt;customDriverName&lt;/code&gt; in &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Value: Set this to the custom name of the driver.&lt;/li&gt;
@@ -1680,7 +1738,7 @@ The driver helm chart installation uses the values above to:&lt;/li&gt;
 &lt;p&gt;Raw Block volumes are presented as a block device to the Pod by using a bind mount to a block device in the node&amp;rsquo;s file system. The driver does not format or check the format of any file system on the block device. Raw Block volumes support online Volume Expansion, but it is up to the application to manage to reconfigure the file system (if any) to the new size.&lt;/p&gt;
 &lt;p&gt;For additional information, see the website: &lt;a href=&#34;https://kubernetes.io/docs/concepts/storage/persistent-volumes/#raw-block-volume-support&#34;&gt;Kubernetes&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;csi-powermax-reverse-proxy&#34;&gt;CSI PowerMax Reverse Proxy&lt;/h2&gt;
-&lt;p&gt;To get the maximum performance out of the CSI driver for PowerMax and Unisphere for PowerMax REST APIs, starting with v1.4 of the driver, you can deploy the optional CSI PowerMax Reverse Proxy application.&lt;/p&gt;
+&lt;p&gt;CSI PowerMax Reverse Proxy application is deployed along with the driver to get the maximum performance out of the CSI driver for PowerMax and Unisphere for PowerMax REST APIs.&lt;/p&gt;
 &lt;p&gt;CSI PowerMax Reverse Proxy is a (go) HTTPS server that acts as a reverse proxy for the Unisphere for PowerMax RESTAPI interface. Any RESTAPI request sent from the driver to the reverse proxy is forwarded to the Unisphere server and the response is routed back to the driver.&lt;/p&gt;
 &lt;p&gt;The Reverse Proxy application helps regulate the maximum number of requests which can be sent to the Unisphere RESTAPI at a given time across all driver controller and node Pods. This helps with better queuing of CSI requests and the performance of the CSI PowerMax driver.&lt;/p&gt;
 &lt;p&gt;Optionally, you can specify an alternate (backup) Unisphere server and if the primary Unisphere server is not reachable or does not respond, the proxy will redirect the calls to this alternate Unisphere.&lt;/p&gt;
@@ -1701,8 +1759,8 @@ The driver helm chart installation uses the values above to:&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret -n &amp;lt;namespace&amp;gt; tls csirevproxy-tls-secret --cert&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;tls.crt --
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;tls.key
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;using-helm-installer&#34;&gt;Using Helm installer&lt;/h3&gt;
-&lt;p&gt;In the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; file, the csireverseproxy section can be used to deploy and configure the CSI PowerMax Reverse Proxy.&lt;/p&gt;
-&lt;p&gt;The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. If it is enabled (using the &lt;code&gt;enabled&lt;/code&gt; parameter in the csireverseproxy section of the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; file), the install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.&lt;/p&gt;
+&lt;p&gt;In the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; file, the csireverseproxy section can be used to configure the CSI PowerMax Reverse Proxy.&lt;/p&gt;
+&lt;p&gt;The new Helm chart is configured as a sub chart for the CSI PowerMax helm chart. The install script automatically installs the CSI PowerMax Reverse Proxy and configures the CSI PowerMax driver to use this service.&lt;/p&gt;
 &lt;h3 id=&#34;using-dell-csi-operator&#34;&gt;Using Dell CSI Operator&lt;/h3&gt;
 &lt;p&gt;Starting with the v1.1.0 release of the Dell CSI Operator, a new Custom Resource Definition can be used to install CSI PowerMax Reverse Proxy.&lt;/p&gt;
 &lt;p&gt;This Custom Resource has to be created in the same namespace as the CSI PowerMax driver and it has to be created before the driver Custom Resource. To use the service, the driver Custom Resource manifest must be configured with the service name &amp;ldquo;powermax-reverseproxy&amp;rdquo;. For complete installation instructions for the CSI PowerMax driver and the CSI PowerMax Reverse Proxy, see the &lt;a href=&#34;../../installation/operator/powermax&#34;&gt;Dell CSI Operator documentation&lt;/a&gt; for PowerMax.&lt;/p&gt;
@@ -1944,6 +2002,40 @@ N2 and N3: None&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;1Gi&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When this feature is enabled, the existing &lt;code&gt;ReadWriteOnce(RWO)&lt;/code&gt; access mode restricts volume access to a single node and allows multiple pods on the same node to read from and write to the same volume.&lt;/p&gt;
 &lt;p&gt;To migrate existing PersistentVolumes to use &lt;code&gt;ReadWriteOncePod&lt;/code&gt;, please follow the instruction from &lt;a href=&#34;https://kubernetes.io/blog/2021/09/13/read-write-once-pod-access-mode-alpha/#migrating-existing-persistentvolumes&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;support-for-auto-rdm-for-vsphere-over-fc&#34;&gt;Support for auto RDM for vSphere over FC&lt;/h2&gt;
+&lt;p&gt;CSI Driver for Dell PowerMax 2.5.0 and above supports auto RDM for vSphere over FC.&lt;/p&gt;
+&lt;p&gt;This feature supports volume provisioning on Kubernetes clusters running on vSphere (VMware hypervisor) via RDM mechanism. This feature enables the users to use PMAX CSI drivers with VMs on vSphere Hypervisor with the same feature and functionality as there with bare metal servers when they have only FC ports in PMAX storage.&lt;/p&gt;
+&lt;p&gt;It will be supported only on new/freshly installed clusters where the cluster is exclusively deployed in a virtualized vSphere environment. Having hybrid topologies like ISCSI or FC (in pass-through) is not supported.&lt;/p&gt;
+&lt;p&gt;To use this feature, set vSphere.enabled to true&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; VMware/vSphere virtualization support
+# set enable to true, if you to enable VMware virtualized environment support via RDM
+# Allowed Values:
+#   &amp;#34;true&amp;#34; - vSphere volumes are enabled
+#   &amp;#34;false&amp;#34; - vSphere volumes are disabled
+# Default value: &amp;#34;false&amp;#34;
+vSphere:
+  enabled: false
+  # fcPortGroup: an existing portGroup that driver will use for vSphere
+  # recommended format: csi-x-VC-PG, x can be anything of user choice
+  fcPortGroup: &amp;#34;csi-vsphere-VC-PG&amp;#34;
+  # fcHostGroup: an existing host(initiator group) that driver will use for vSphere
+  # this hostGroup should contain initiators from all the ESXs/ESXi host
+  # where the cluster is deployed
+  # recommended format: csi-x-VC-HG, x can be anything of user choice
+  fcHostGroup: &amp;#34;csi-vsphere-VC-HG&amp;#34;
+  # vCenterHost: URL/endpoint of the vCenter where all the ESX are present
+  vCenterHost: &amp;#34;00.000.000.01&amp;#34;
+  # vCenterUserName: username from the vCenter credentials
+  vCenterUserName: &amp;#34;user&amp;#34;
+  # vCenterPassword: password from the vCenter credentials
+  vCenterPassword: &amp;#34;pwd&amp;#34;
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: Replication is not supported with this feature.
+Limitations of RDM can be referred &lt;a href=&#34;https://configmax.esp.vmware.com/home&#34;&gt;here.&lt;/a&gt;&lt;br&gt;
+Supported number of RDM Volumes per VM is 60 as per the limitations.
+RDMs should not be added/removed manually from vCenter on any of the cluster VMs.&lt;/p&gt;
+&lt;/blockquote&gt;
 
       </description>
     </item>
@@ -1958,16 +2050,16 @@ N2 and N3: None&lt;/p&gt;
         
         
         &lt;p&gt;You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSI Driver for Powermax v2.4.0 requires 10.0 REST endpoint support of Unisphere.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; CSI Driver for PowerMax v2.4.0 requires 10.0 REST endpoint support of Unisphere.&lt;/p&gt;
 &lt;h3 id=&#34;updating-the-csi-driver-to-use-100-unisphere&#34;&gt;Updating the CSI Driver to use 10.0 Unisphere&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Upgrade the Unisphere to have 10.0 endpoint support.Please find the instructions &lt;a href=&#34;https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&amp;amp;ps=true&#34;&gt;here.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Update the &lt;code&gt;my-powermax-settings.yaml&lt;/code&gt; to have endpoint with 10.0 support.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;update-driver-from-v23-to-v24-using-helm&#34;&gt;Update Driver from v2.3 to v2.4 using Helm&lt;/h2&gt;
+&lt;h2 id=&#34;update-driver-from-v24-to-v25-using-helm&#34;&gt;Update Driver from v2.4 to v2.5 using Helm&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run &lt;code&gt;git clone -b v2.4.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository and get the v2.4 driver.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;git clone -b v2.5.0 https://github.com/dell/csi-powermax.git&lt;/code&gt; to clone the git repository and get the driver.&lt;/li&gt;
 &lt;li&gt;Update the values file as needed.&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;csi-install&lt;/code&gt; script with the option &lt;em&gt;--upgrade&lt;/em&gt; by running: &lt;code&gt;cd ../dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml --upgrade&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
@@ -2457,12 +2549,12 @@ For example, if a volume were to be deleted from the array, or unmounted outside
         
         
         &lt;p&gt;You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;h2 id=&#34;upgrade-driver-from-version-230-to-240-using-helm&#34;&gt;Upgrade Driver from version 2.3.0 to 2.4.0 using Helm&lt;/h2&gt;
+&lt;h2 id=&#34;upgrade-driver-from-version-240-to-250-using-helm&#34;&gt;Upgrade Driver from version 2.4.0 to 2.5.0 using Helm&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Clone the repository using &lt;code&gt;git clone -b v2.4.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt;, copy the helm/csi-isilon/values.yaml into a new location with a custom name say &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, to customize settings for installation. Edit &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; as per the requirements.&lt;/p&gt;
+&lt;p&gt;Clone the repository using &lt;code&gt;git clone -b v2.5.0 https://github.com/dell/csi-powerscale.git&lt;/code&gt;, copy the helm/csi-isilon/values.yaml into a new location with a custom name say &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, to customize settings for installation. Edit &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; as per the requirements.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Change to directory dell-csi-helm-installer to install the Dell PowerScale &lt;code&gt;cd dell-csi-helm-installer&lt;/code&gt;&lt;/p&gt;
@@ -3035,7 +3127,7 @@ However, to provision new volumes, make sure to delete old Storage Classes and c
 &lt;p&gt;CSI Driver for Dell Powerstore is supported in the NAT environment for NFS protocol.&lt;/p&gt;
 &lt;p&gt;The user will be able to install the driver and able to create pods.&lt;/p&gt;
 &lt;h2 id=&#34;pvpvc-metrics&#34;&gt;PV/PVC Metrics&lt;/h2&gt;
-&lt;p&gt;CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.volumeHealthMonitorInterval parameter.&lt;/p&gt;
+&lt;p&gt;CSI Driver for Dell Powerstore 2.1.0 and above supports volume health monitoring. To enable Volume Health Monitoring from the node side, the alpha feature gate CSIVolumeHealth needs to be enabled. To use this feature, set controller.healthMonitor.enabled and node.healthMonitor.enabled to true. To change the monitor interval, set controller.healthMonitor.interval parameter.&lt;/p&gt;
 &lt;h2 id=&#34;single-pod-access-mode-for-persistentvolumes&#34;&gt;Single Pod Access Mode for PersistentVolumes&lt;/h2&gt;
 &lt;p&gt;Starting from version 2.1, CSI Driver for Powerstore now supports a new access mode &lt;code&gt;ReadWriteOncePod&lt;/code&gt; for PersistentVolumes and PersistentVolumeClaims. With this feature, CSI Driver for Powerstore allows restricting volume access to a single pod in the cluster and within a worker node.&lt;/p&gt;
 &lt;p&gt;Prerequisites&lt;/p&gt;
@@ -3122,7 +3214,7 @@ These attributes can be specified as labels in PVC yaml file. The following is a
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;Note: Default description value is &lt;code&gt;pvcName-pvcNamespace&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;The following is the list of all the attribtues supported by PowerStore CSI driver:&lt;/p&gt;
+&lt;p&gt;This is the list of all the attributes supported by PowerStore CSI driver:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3146,6 +3238,17 @@ Make sure that the attributes specified are supported by the version of PowerSto
 &lt;blockquote&gt;
 &lt;p&gt;Configurable Volume Attributes feature is supported with Helm.&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h2 id=&#34;storage-capacity-tracking&#34;&gt;Storage Capacity Tracking&lt;/h2&gt;
+&lt;p&gt;CSI PowerStore driver version 2.5.0 and above supports Storage Capacity Tracking.&lt;/p&gt;
+&lt;p&gt;This feature helps the scheduler to make more informed choices about where to start pods which depend on unbound volumes with late binding (aka &amp;ldquo;wait for first consumer&amp;rdquo;). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay in Pending state. This means they are not scheduled.&lt;/p&gt;
+&lt;p&gt;Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.&lt;/p&gt;
+&lt;p&gt;The attribute &lt;code&gt;storageCapacity.enabled&lt;/code&gt; in &lt;code&gt;my-powerstore-settings.yaml&lt;/code&gt; can be used to enabled/disabled the feature during driver installation .
+To configure how often driver checks for changed capacity set &lt;code&gt;storageCapacity.pollInterval&lt;/code&gt; attribute. In case of driver installed via operator, this interval can be configured in the sample files provided &lt;a href=&#34;https://github.com/dell/dell-csi-operator/tree/master/samples&#34;&gt;here&lt;/a&gt; by editing the &lt;code&gt;capacity-poll-interval&lt;/code&gt; argument present in the &lt;code&gt;provisioner&lt;/code&gt; sidecar.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This feature requires kubernetes v1.24 and above and will be automatically disabled in lower version of kubernetes.&lt;/p&gt;
+&lt;/blockquote&gt;
 
       </description>
     </item>
@@ -3159,16 +3262,16 @@ Make sure that the attributes specified are supported by the version of PowerSto
       <description>
         
         
-        &lt;p&gt;You can upgrade the CSI Driver for Dell PowerStore using Helm or Dell CSI Operator.&lt;/p&gt;
-&lt;h2 id=&#34;update-driver-from-v23-to-v24-using-helm&#34;&gt;Update Driver from v2.3 to v2.4 using Helm&lt;/h2&gt;
+        &lt;p&gt;You can upgrade the CSI Driver for Dell PowerStore using Helm.&lt;/p&gt;
+&lt;h2 id=&#34;update-driver-from-v25-to-v251-using-helm&#34;&gt;Update Driver from v2.5 to v2.5.1 using Helm&lt;/h2&gt;
 &lt;p&gt;Note: While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.4.0 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository and get the driver.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.5.1 https://github.com/dell/csi-powerstore.git&lt;/code&gt; to clone the git repository and get the driver.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Edit &lt;code&gt;helm/config.yaml&lt;/code&gt; file and configure connection information for your PowerStore arrays changing the following parameters:&lt;/p&gt;
+&lt;p&gt;Edit &lt;code&gt;samples/secret/secret.yaml&lt;/code&gt; file and configure connection information for your PowerStore arrays changing the following parameters:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;endpoint&lt;/em&gt;: defines the full URL path to the PowerStore API.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;globalID&lt;/em&gt;: specifies what storage cluster the driver should use&lt;/li&gt;
@@ -3185,7 +3288,7 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;li&gt;
 &lt;p&gt;(optional) create new storage classes using ones from &lt;code&gt;samples/storageclass&lt;/code&gt; folder as an example and apply them to the Kubernetes cluster by running &lt;code&gt;kubectl create -f &amp;lt;path_to_storageclass_file&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Storage classes created by v1.4/v2.0/v2.1/v2.2/v2.3 driver will not be deleted, v2.4 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.4/v2.0/v2.1/v2.2/v2.3 in your cluster then be sure to include the same array you have used for the v1.4/v2.0/v2.1/v2.2/v2.3 driver and make it default in the &lt;code&gt;config.yaml&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;Storage classes created by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver will not be deleted, v2.5.1 driver will use default array to manage volumes provisioned with old storage classes. Thus, if you still have volumes provisioned by v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 in your cluster then be sure to include the same array you have used for the v1.4/v2.0/v2.1/v2.2/v2.3/v2.4/v2.5 driver and make it default in the &lt;code&gt;secret.yaml&lt;/code&gt; file.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -3196,22 +3299,6 @@ NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POS
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Run the &lt;code&gt;csi-install&lt;/code&gt; script with the option &lt;em&gt;--upgrade&lt;/em&gt; by running: &lt;code&gt;./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;upgrade-using-dell-csi-operator&#34;&gt;Upgrade using Dell CSI Operator:&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;While upgrading the driver via operator, replicas count in sample CR yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Upgrading the Operator does not upgrade the CSI Driver.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Please upgrade the Dell CSI Operator by following &lt;a href=&#34;./../operator&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Once the operator is upgraded, to upgrade the driver, refer &lt;a href=&#34;./../../../installation/operator/#update-csi-drivers&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -3725,7 +3812,7 @@ By default this is disabled in CSI Driver for Unity XT. You will have to set the
 &lt;p&gt;To update the log level dynamically user has to edit the ConfigMap &lt;code&gt;unity-config-params&lt;/code&gt; and update &lt;code&gt;CSI_LOG_LEVEL&lt;/code&gt; to the desired log level.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl edit configmap -n unity unity-config-params
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;tenancy-support-for-unity-xt-nfs&#34;&gt;Tenancy support for Unity XT NFS&lt;/h2&gt;
-&lt;p&gt;The CSI Unity XT driver version v2.1.0 (and later versions) supports the Tenancy feature of Unity XT such that the user will be able to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.&lt;/p&gt;
+&lt;p&gt;The CSI Unity XT driver supports the Tenancy feature of Unity XT that allows the user to associate specific worker nodes (in the cluster) and NFS storage volumes with Tenant.&lt;/p&gt;
 &lt;p&gt;Prerequisites (to be manually created in Unity XT Array) before the driver installation:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create Tenants&lt;/li&gt;
@@ -3859,9 +3946,9 @@ Example &lt;em&gt;configmap.yaml&lt;/em&gt;&lt;/p&gt;
 &lt;h3 id=&#34;using-helm&#34;&gt;Using Helm&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While upgrading the driver via helm, controllerCount variable in myvalues.yaml can be at most one less than the number of worker nodes.&lt;/p&gt;
 &lt;p&gt;Preparing myvalues.yaml is the same as explained in the install section.&lt;/p&gt;
-&lt;p&gt;To upgrade the driver from csi-unity v2.3.0 to csi-unity v2.4.0&lt;/p&gt;
+&lt;p&gt;To upgrade the driver from csi-unity v2.4.0 to csi-unity v2.5.0&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Get the latest csi-unity v2.4.0 code from Github using using &lt;code&gt;git clone -b v2.4.0 https://github.com/dell/csi-unity.git&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Get the latest csi-unity v2.5.0 code from Github using &lt;code&gt;git clone -b v2.5.0 https://github.com/dell/csi-unity.git&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Copy the helm/csi-unity/values.yaml to the new location csi-unity/dell-csi-helm-installer and rename it to myvalues.yaml. Customize settings for installation by editing myvalues.yaml as needed.&lt;/li&gt;
 &lt;li&gt;Navigate to csi-unity/dell-csi-hem-installer folder and execute this command:
 &lt;code&gt;./csi-install.sh --namespace unity --values ./myvalues.yaml --upgrade&lt;/code&gt;&lt;/li&gt;
@@ -4142,7 +4229,9 @@ CSM Replication controller supports following log levels:&lt;/p&gt;
         
         &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
 &lt;h2 id=&#34;uninstalling-the-rpm&#34;&gt;Uninstalling the RPM&lt;/h2&gt;
-&lt;p&gt;To uninstall the rpm package on the system, run the below command:&lt;/p&gt;
+&lt;p&gt;To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -e k3s-selinux
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To uninstall the CSM Authorization rpm package on the system, run:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -e &amp;lt;rpm_file_name&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uninstalling-the-sidecar-proxy-in-the-csi-driver&#34;&gt;Uninstalling the sidecar-proxy in the CSI Driver&lt;/h2&gt;
 &lt;p&gt;To uninstall the sidecar-proxy in the CSI Driver, &lt;a href=&#34;../../csidriver/uninstall&#34;&gt;uninstall&lt;/a&gt; the driver and &lt;a href=&#34;../../deployment&#34;&gt;reinstall&lt;/a&gt; the driver using the original configuration secret.&lt;/p&gt;
@@ -4177,9 +4266,9 @@ CSM Replication controller supports following log levels:&lt;/p&gt;
         
         &lt;h2 id=&#34;cleanup-kubernetes-worker-hosts&#34;&gt;Cleanup Kubernetes Worker Hosts&lt;/h2&gt;
 &lt;p&gt;Login to each worker host and perform these steps:&lt;/p&gt;
-&lt;h4 id=&#34;remove-directory-rootdriver-sec&#34;&gt;Remove directory &lt;em&gt;/root/.driver-sec&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Remove directory &lt;em&gt;/root/.driver-sec&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;This directory was created when a CSI driver with Encryption first ran on the host.&lt;/p&gt;
-&lt;h4 id=&#34;remove-entry-from-rootsshauthorized_keys&#34;&gt;Remove entry from &lt;em&gt;/root/.ssh/authorized_keys&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Remove entry from &lt;em&gt;/root/.ssh/authorized_keys&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;This is an entry added when a CSI driver with Encryption first ran on the host.
 It ends with &lt;code&gt;driver-sec&lt;/code&gt;, similarly to:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGvSWmTL7NORRDPAvtbMbvoHUBLnen9bRtJePbGk1boJ4XK39Qdvo2zFHZ/6t2+dSL7xKo2kcxX3ovj3RyOPuqNCob
@@ -4190,9 +4279,11 @@ ocI5t+n01dWeVOCSOH/Q3uXxHKnFvWVZh7m6583R9LfdGfwshsnx4CNz22kp69hzwBPxehR+U/VXkDUW
 VQrpjsCPCu3fpVjvvwfspVOftbn/sNgY1J3lz0pdgvJ3yQs6pa+DODQyin5Rt//19rIGifPxi/Hk/k49Vw== driver-sec
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It can be removed with &lt;code&gt;sed -i &#39;/^ssh-rsa .* driver-sec$/d&#39; /root/.ssh/authorized_keys&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;remove-kubernetes-resources&#34;&gt;Remove Kubernetes Resources&lt;/h2&gt;
-&lt;p&gt;Remove &lt;a href=&#34;../deployment#secrets-and-config-maps&#34;&gt;the resources that were created in Kubernetes cluster for Encryption&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Remove &lt;a href=&#34;../deployment#secrets-and-config-maps&#34;&gt;the resources&lt;/a&gt; created in Kubernetes cluster for Encryption.&lt;/p&gt;
 &lt;h2 id=&#34;remove-vault-server-configuration&#34;&gt;Remove Vault Server Configuration&lt;/h2&gt;
-&lt;p&gt;Remove &lt;a href=&#34;../vault#minimum-server-configuration&#34;&gt;the configuration created in the Vault server for Encryption&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Remove &lt;a href=&#34;../vault#minimum-server-configuration&#34;&gt;the configuration&lt;/a&gt; created in the Vault server for Encryption.&lt;/p&gt;
+&lt;h2 id=&#34;remove-rekey-controller&#34;&gt;Remove Rekey Controller&lt;/h2&gt;
+&lt;p&gt;Remove &lt;a href=&#34;../rekey#rekey-controller-installation&#34;&gt;the resources&lt;/a&gt; created during the installation of the Rekey Controller.&lt;/p&gt;
 
       </description>
     </item>
@@ -4381,7 +4472,7 @@ This can be achieved by using helm installation method. Refer to the &lt;a href=
 &lt;p&gt;Use &lt;code&gt;repctl&lt;/code&gt; to create secrets using service account tokens and update ConfigMaps in multiple clusters in one command.
 Run the following command -&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;repctl cluster inject --use-sa
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will create secrets using the token for the &lt;code&gt;default&lt;/code&gt; ServiceAccount and update the ConfigMap in all the clusters
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will create secrets using the token for the &lt;code&gt;dell-replication-controller-sa&lt;/code&gt; ServiceAccount and update the ConfigMap in all the clusters
 which have been configured for &lt;code&gt;repctl&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;inject-kubeconfigs-from-repctl-configuration&#34;&gt;Inject KubeConfigs from repctl configuration&lt;/h4&gt;
 &lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; is usually configured to communicate with multiple Kubernetes clusters and is provided with a set of KubeConfig files for each cluster.
@@ -4438,11 +4529,11 @@ Once you have the user created, you can provide it the RBAC privileges required 
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic &amp;lt;secret-name&amp;gt; --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;kubeconfig_file_user&amp;gt; --namespace dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;secrets-using-serviceaccount-tokens&#34;&gt;Secrets using ServiceAccount tokens&lt;/h4&gt;
 &lt;p&gt;You can use service account tokens to establish communication between various clusters.
-We recommend using the token for the &lt;code&gt;default&lt;/code&gt; service account in the &lt;code&gt;dell-replication-controller&lt;/code&gt; namespace after the installation as it
+We recommend using the token for the &lt;code&gt;dell-replication-controller-sa&lt;/code&gt; service account in the &lt;code&gt;dell-replication-controller&lt;/code&gt; namespace after the installation as it
 already has all the required RBAC privileges.&lt;/p&gt;
 &lt;h5 id=&#34;example-1&#34;&gt;Example&lt;/h5&gt;
 &lt;p&gt;Use the following command to first create a KubeConfig file using the helper script in &lt;em&gt;Cluster B&lt;/em&gt; -&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./gen-kubeconfig.sh -s default -n dell-replication-controller
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./gen-kubeconfig.sh -s dell-replication-controller-sa -n dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the KubeConfig file has been generated successfully, use the following command in &lt;em&gt;Cluster A&lt;/em&gt; to to create the secret:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create secret generic &amp;lt;secret-name&amp;gt; --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&amp;lt;kubeconfig_file_user&amp;gt; --namespace dell-replication-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -4468,7 +4559,7 @@ already has all the required RBAC privileges.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Enable this feature only after contact support for additional information
 podmon:
   enabled: true
-  image: dellemc/podmon:v
+  image: dellemc/podmon:v1.3.0
   controller:
     args:
       - &amp;#34;--csisock=unix:/var/run/csi/csi.sock&amp;#34;
@@ -4477,6 +4568,7 @@ podmon:
       - &amp;#34;--skipArrayConnectionValidation=false&amp;#34;
       - &amp;#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;#34;
       - &amp;#34;--driverPodLabelValue=dell-storage&amp;#34;
+      - &amp;#34;--ignoreVolumelessPods=false&amp;#34;
   node:
     args:
       - &amp;#34;--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock&amp;#34;
@@ -4485,6 +4577,7 @@ podmon:
       - &amp;#34;--leaderelection=false&amp;#34;
       - &amp;#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;#34;
       - &amp;#34;--driverPodLabelValue=dell-storage&amp;#34;
+      - &amp;#34;--ignoreVolumelessPods=false&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To install CSM for Resiliency with the driver, the following changes are required:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Enable CSM for Resiliency by changing the podmon.enabled boolean to true. This will enable both controller-podmon and node-podmon.&lt;/li&gt;
@@ -4569,6 +4662,12 @@ podmon:
 &lt;td&gt;String that set the path to a file containing configuration parameter(for instance, Log levels) for a driver.&lt;/td&gt;
 &lt;td&gt;controller &amp;amp; node&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ignoreVolumelessPods&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;td&gt;Boolean value that if set to true will enable CSM for Resiliency to ignore pods without persistent volume attached to the pod.&lt;/td&gt;
+&lt;td&gt;controller &amp;amp; node&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&#34;powerflex-specific-recommendations&#34;&gt;PowerFlex Specific Recommendations&lt;/h2&gt;
@@ -4587,6 +4686,7 @@ podmon:
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--skipArrayConnectionValidation=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPodLabelValue=dell-storage&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--ignoreVolumelessPods=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -4595,6 +4695,7 @@ podmon:
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--leaderelection=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/vxflexos-config-params/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPodLabelValue=dell-storage&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--ignoreVolumelessPods=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;unity-xt-specific-recommendations&#34;&gt;Unity XT Specific Recommendations&lt;/h2&gt;
 &lt;p&gt;Here is a typical installation used for testing:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;podmon&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -4609,6 +4710,7 @@ podmon:
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--skipArrayConnectionValidation=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/unity-config/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPodLabelValue=dell-storage&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--ignoreVolumelessPods=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--csisock=unix:/var/lib/kubelet/plugins/unity.emc.dell.com/csi_sock&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -4618,6 +4720,7 @@ podmon:
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--leaderelection=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/unity-config/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPodLabelValue=dell-storage&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--ignoreVolumelessPods=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;powerscale-specific-recommendations&#34;&gt;PowerScale Specific Recommendations&lt;/h2&gt;
 &lt;p&gt;Here is a typical installation used for testing:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;podmon&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -4633,6 +4736,7 @@ podmon:
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--skipArrayConnectionValidation=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPodLabelValue=dell-storage&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--ignoreVolumelessPods=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;node&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -4643,6 +4747,7 @@ podmon:
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--leaderelection=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--driverPodLabelValue=dell-storage&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;--ignoreVolumelessPods=false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;dynamic-parameters&#34;&gt;Dynamic parameters&lt;/h2&gt;
 &lt;p&gt;CSM for Resiliency has configuration parameters that can be updated dynamically, such as the logging level and format. This can be
 done by editing the Dell CSI Driver&amp;rsquo;s parameters ConfigMap. The ConfigMap can be queried using kubectl.
@@ -4738,7 +4843,7 @@ The ConfigMap to edit will have this pattern: &lt;storage&gt;-config-params (e.g
 &lt;p&gt;Create a namespace where you want to install the module &lt;code&gt;kubectl create namespace karavi&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Install cert-manager CRDs &lt;code&gt;kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Install cert-manager CRDs &lt;code&gt;kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Add the Dell Helm Charts repo &lt;code&gt;helm repo add dell https://dell.github.io/helm-charts&lt;/code&gt;&lt;/p&gt;
@@ -5373,10 +5478,10 @@ The following example will install CSM for Observability into the CSM namespace.
 *
 * Downloading and saving Docker images
 
-  dellemc/csm-topology:v1.3.0
-  dellemc/csm-metrics-powerflex:v1.3.0
-  dellemc/csm-metrics-powerstore:v1.3.0
-  dellemc/csm-metrics-powerscale:v1.0.0
+  dellemc/csm-topology:v1.4.0
+  dellemc/csm-metrics-powerflex:v1.4.0
+  dellemc/csm-metrics-powerstore:v1.4.0
+  dellemc/csm-metrics-powerscale:v1.1.0
   otel/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20
 
@@ -5401,10 +5506,10 @@ The following example will install CSM for Observability into the CSM namespace.
 *
 * Loading, tagging, and pushing Docker images to registry &amp;lt;my-registry&amp;gt;:5000/
 
-  dellemc/csm-topology:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.3.0
-  dellemc/csm-metrics-powerflex:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.3.0
-  dellemc/csm-metrics-powerstore:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.3.0
-  dellemc/csm-metrics-powerscale:v1.0.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.0.0
+  dellemc/csm-topology:v1.4.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.4.0
+  dellemc/csm-metrics-powerflex:v1.4.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.4.0
+  dellemc/csm-metrics-powerstore:v1.4.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.4.0
+  dellemc/csm-metrics-powerscale:v1.1.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.1.0
   otel/opentelemetry-collector:0.42.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/nginx-unprivileged:1.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
@@ -5554,8 +5659,8 @@ TEST SUITE: None
 &lt;/ul&gt;
 &lt;h3 id=&#34;upgrading-csm-for-authorization-proxy-server&#34;&gt;Upgrading CSM for Authorization proxy server&lt;/h3&gt;
 &lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To update the rpm package on the system, run the below command:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -Uvh karavi-authorization-&amp;lt;new_version&amp;gt;.x86_64.rpm --nopreun --nopostun
+&lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh install_karavi_auth.sh --upgrade
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -qa | grep karavi
 k3s kubectl version
@@ -5747,7 +5852,7 @@ It creates a standalone server with in-memory (non-persistent) storage, running 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: With in-memory storage, the encryption keys are permanently destroyed upon the server termination.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4 id=&#34;generate-tls-certificates-for-server-and-client&#34;&gt;Generate TLS certificates for server and client&lt;/h4&gt;
+&lt;h3 id=&#34;generate-tls-certificates-for-server-and-client&#34;&gt;Generate TLS certificates for server and client&lt;/h3&gt;
 &lt;p&gt;Create server CA private key and certificate:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;openssl req -x509 -sha256 -days &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;365&lt;/span&gt; -newkey rsa:2048 -nodes &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	-subj &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/CN=Vault Root CA&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
@@ -5812,7 +5917,7 @@ The same address should be used for &lt;code&gt;vault_addr&lt;/code&gt; in &lt;a
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	-CAcreateserial
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat client-ca.crt &amp;gt;&amp;gt; client.crt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;create-server-hcl-file&#34;&gt;Create server hcl file&lt;/h4&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;create-server-hcl-file&#34;&gt;Create server hcl file&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat &amp;gt;server.hcl &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;storage &amp;#34;inmem&amp;#34; {}
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;
@@ -5831,7 +5936,7 @@ The same address should be used for &lt;code&gt;vault_addr&lt;/code&gt; in &lt;a
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;api_addr = &amp;#34;http://127.0.0.1:8200&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;ui = true
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;start-vault-server&#34;&gt;Start Vault Server&lt;/h4&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;start-vault-server&#34;&gt;Start Vault Server&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Variable &lt;code&gt;CONF_DIR&lt;/code&gt; below refers to the directory containing files &lt;em&gt;server.crt&lt;/em&gt;, &lt;em&gt;server.key&lt;/em&gt;, &lt;em&gt;client-ca.crt&lt;/em&gt; and &lt;em&gt;server.hcl&lt;/em&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -5865,13 +5970,13 @@ the Docker host where the server is running.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;VAULT_TOKEN&lt;/code&gt; - Authentication token, e.g. the root token &lt;code&gt;DemoRootToken&lt;/code&gt; used in the &lt;a href=&#34;#vault-server-installation&#34;&gt;test instance of Vault&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;h4 id=&#34;enable-keyvalue-secret-engine&#34;&gt;Enable Key/Value secret engine&lt;/h4&gt;
+&lt;h3 id=&#34;enable-keyvalue-secret-engine&#34;&gt;Enable Key/Value secret engine&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault secrets &lt;span style=&#34;color:#204a87&#34;&gt;enable&lt;/span&gt; -version&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt; -path&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;dea-keys/ kv
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write /dea-keys/config &lt;span style=&#34;color:#000&#34;&gt;cas_required&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;max_versions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Key/Value secret engine is used to store encryption keys. Each encryption key is represented by a key-value entry.&lt;/p&gt;
-&lt;h4 id=&#34;enable-approle-authentication&#34;&gt;Enable AppRole authentication&lt;/h4&gt;
+&lt;h3 id=&#34;enable-approle-authentication&#34;&gt;Enable AppRole authentication&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault auth &lt;span style=&#34;color:#204a87&#34;&gt;enable&lt;/span&gt; approle
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;create-a-role&#34;&gt;Create a role&lt;/h4&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;create-a-role&#34;&gt;Create a role&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write auth/approle/role/dea-role &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;secret_id_ttl&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;28d &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;token_num_uses&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
@@ -5880,7 +5985,7 @@ the Docker host where the server is running.&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;token_explicit_max_ttl&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;10d &lt;span style=&#34;color:#4e9a06&#34;&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;secret_id_num_uses&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;TTL values here are chosen arbitrarily and can be changed to desired values.&lt;/p&gt;
-&lt;h4 id=&#34;create-and-assign-a-token-policy-to-the-role&#34;&gt;Create and assign a token policy to the role&lt;/h4&gt;
+&lt;h3 id=&#34;create-and-assign-a-token-policy-to-the-role&#34;&gt;Create and assign a token policy to the role&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault policy write dea-policy - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;path &amp;#34;dea-keys/*&amp;#34; {
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;	capabilities = [&amp;#34;create&amp;#34;, &amp;#34;read&amp;#34;, &amp;#34;update&amp;#34;, &amp;#34;delete&amp;#34;, &amp;#34;list&amp;#34;]
@@ -5893,7 +5998,7 @@ the Docker host where the server is running.&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write auth/approle/role/dea-role &lt;span style=&#34;color:#000&#34;&gt;token_policies&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;dea-policy&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The role needs full access to the Key/Value secret engine to perform encryption key operations.
 The role only needs read access to the Key/Value secret engine config endpoint for configuration validation.&lt;/p&gt;
-&lt;h4 id=&#34;set-role-id-and-secret-id-to-the-role&#34;&gt;Set role ID and secret ID to the role&lt;/h4&gt;
+&lt;h3 id=&#34;set-role-id-and-secret-id-to-the-role&#34;&gt;Set role ID and secret ID to the role&lt;/h3&gt;
 &lt;p&gt;Role ID and secret ID are normally generated by Vault. To get the generated values, run these commands:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault &lt;span style=&#34;color:#204a87&#34;&gt;read&lt;/span&gt; auth/approle/role/dea-role/role-id
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vault write -f auth/approle/role/dea-role/secret-id
@@ -5973,7 +6078,7 @@ This document outlines all karavictl commands, their intended use, options that 
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-role-update&#34;&gt;karavictl role update&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Update one or more CSM roles&lt;/td&gt;
+&lt;td&gt;Update the quota of one or more CSM roles&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-role-delete&#34;&gt;karavictl role delete&lt;/a&gt;&lt;/td&gt;
@@ -6216,9 +6321,9 @@ data:
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl role create --role=role-name=system-type=000000000001=mypool=200000000
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-update&#34;&gt;karavictl role update&lt;/h3&gt;
-&lt;p&gt;Update one or more CSM roles&lt;/p&gt;
+&lt;p&gt;Update the quota of one or more CSM roles&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-8&#34;&gt;Synopsis&lt;/h5&gt;
-&lt;p&gt;Updates one or more CSM roles&lt;/p&gt;
+&lt;p&gt;Updates the quota of one or more CSM roles&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl role update [flags]
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-8&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --from-file string   role data from a file
@@ -6622,6 +6727,163 @@ information
     </item>
     
     <item>
+      <title>V2: Rekey Configuration</title>
+      <link>https://dell.github.io/csm-docs/v2/secure/encryption/rekey/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/secure/encryption/rekey/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;rekey-controller-installation&#34;&gt;Rekey Controller Installation&lt;/h2&gt;
+&lt;p&gt;The CSM Encryption Rekey CRD Controller is an optional component that, if installed, allows encrypted volumes rekeying in a
+Kubernetes cluster. The Rekey Controller can be installed via the Dell Helm charts &lt;a href=&#34;https://github.com/dell/helm-charts&#34;&gt;repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Dell Helm charts can be added with the command &lt;code&gt;helm repo add dell https://dell.github.io/helm-charts&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;kubeconfig-secret&#34;&gt;Kubeconfig Secret&lt;/h3&gt;
+&lt;p&gt;A secret with kubeconfig must be created with the name &lt;code&gt;cluster-kube-config&lt;/code&gt;. Here is an example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; kubectl create secret generic cluster-kube-config --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;/root/.kube/config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;helm-chart-values&#34;&gt;Helm Chart Values&lt;/h3&gt;
+&lt;p&gt;The Rekey Controller Helm chart defines these values:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Rekey controller image name.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;dellemc/csm-encryption-rekey-controller:v0.1.0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Rekey controller image pull policy.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#  Always: Always pull the image.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#  IfNotPresent: Only pull the image if it does not already exist on the node.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#  Never: Never pull the image.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;imagePullPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;IfNotPresent&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# logLevel: Log level of the rekey controller.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: &amp;#34;error&amp;#34;, &amp;#34;warning&amp;#34;, &amp;#34;info&amp;#34;, &amp;#34;debug&amp;#34;, &amp;#34;trace&amp;#34;.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;logLevel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;info&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This value is required and must match encryption.pluginName value&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# of the corresponding Dell CSI driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;provisioner&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This value is required and must match encryption.apiPort value&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# of the corresponding Dell CSI driver.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;image&lt;/td&gt;
+&lt;td&gt;Rekey controller image name.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;dellemc/csm-encryption-rekey-controller:v0.1.0&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;imagePullPolicy&lt;/td&gt;
+&lt;td&gt;Rekey controller image pull policy.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;IfNotPresent&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;logLevel&lt;/td&gt;
+&lt;td&gt;Log level of the rekey controller.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;&amp;ldquo;info&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;provisioner&lt;/td&gt;
+&lt;td&gt;This value is required and must match &lt;code&gt;encryption.pluginName&lt;/code&gt; value of the corresponding Dell CSI driver.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;port&lt;/td&gt;
+&lt;td&gt;This value is required and must match &lt;code&gt;encryption.apiPort&lt;/code&gt; value of the corresponding Dell CSI driver.&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;deployment&#34;&gt;Deployment&lt;/h3&gt;
+&lt;p&gt;Copy the chart&amp;rsquo;s values.yaml to a local file and adjust the values in the local file for the current cluster.
+Deploy the controller using a command similar to this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install --values local-values.yaml rekey-controller dell/csm-encryption-rekey-controller
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A rekey-controller pod should now be up and running.&lt;/p&gt;
+&lt;h2 id=&#34;rekey-usage&#34;&gt;Rekey Usage&lt;/h2&gt;
+&lt;p&gt;Rekeying is initiated and monitored via Kubernetes custom resources of type &lt;code&gt;rekeys.encryption.storage.dell.com&lt;/code&gt;.
+This can be done directly &lt;a href=&#34;#rekey-with-kubectl&#34;&gt;using kubectl&lt;/a&gt; or in a more user-friendly way &lt;a href=&#34;#rekey-with-dellctl&#34;&gt;using dellctl&lt;/a&gt;.
+Creation of a rekey resource for a PV will kick off a rekey process on this PV. The rekey resource will contain the result
+of the operation. Refer to &lt;a href=&#34;#rekey-status&#34;&gt;Rekey Status&lt;/a&gt; for possible status values.&lt;/p&gt;
+&lt;h3 id=&#34;rekey-with-dellctl&#34;&gt;Rekey with dellctl&lt;/h3&gt;
+&lt;p&gt;If &lt;code&gt;dellctl&lt;/code&gt; CLI is installed, rekeying an encrypted volume is simple.
+For example, to rekey a PV with the name &lt;code&gt;k8s-112a5d41bc&lt;/code&gt; use a command like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dellctl encryption rekey myrekey k8s-112a5d41bc
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;INFO rekey request &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;myrekey&amp;#34;&lt;/span&gt; submitted successfully &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; persistent volume &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;k8s-112a5d41bc&amp;#34;&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;INFO Run &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;dellctl encryption rekey-status myrekey&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; more details.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then to check the status of the newly created rekey with the name &lt;code&gt;myrekey&lt;/code&gt; use this command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dellctl encryption rekey-status myrekey
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;INFO Status of rekey request &lt;span style=&#34;color:#000&#34;&gt;myrekey&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; completed
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;rekey-with-kubectl&#34;&gt;Rekey with kubectl&lt;/h3&gt;
+&lt;p&gt;Create a cluster-scoped rekey resource to rekey an encrypted volume.
+For example, to rekey a PV with the name &lt;code&gt;k8s-09a76734f&lt;/code&gt; use a command like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: &amp;#34;encryption.storage.dell.com/v1alpha1&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: &amp;#34;Rekey&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: &amp;#34;example-rekey&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  persistentVolumeName: &amp;#34;k8s-029a76734f&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the rekey resource has been created, after some time, the status of
+the rekey can be inspected through the &lt;code&gt;status.phase&lt;/code&gt; field of the rekey resource.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ &lt;span style=&#34;color:#204a87&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get rekey example-rekey -o &lt;span style=&#34;color:#000&#34;&gt;jsonpath&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{.status.phase}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;completed
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;rekey-status&#34;&gt;Rekey Status&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;status.phase&lt;/code&gt; field of a rekey resource can have these values:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Value&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;initialized&lt;/td&gt;
+&lt;td&gt;The request has been received by the Rekey Controller.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;started&lt;/td&gt;
+&lt;td&gt;The request is being processed by the Encryption driver.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;completed&lt;/td&gt;
+&lt;td&gt;The request successfully completed and the volume is protected by a new key.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rejected&lt;/td&gt;
+&lt;td&gt;The rekey process has not started, a non-existent or not encrypted PV in the request is a common reason.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;failed&lt;/td&gt;
+&lt;td&gt;The rekey process has failed, possibly due to unreachable Encryption driver or an error response from the driver.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;unknown&lt;/td&gt;
+&lt;td&gt;The request was sent to the Encryption driver, but no response was received. It is still possible that the rekey succeeded and the volume key has changed.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;cleanup&#34;&gt;Cleanup&lt;/h3&gt;
+&lt;p&gt;Remove old rekey resources just like any other resource, using &lt;code&gt;kubectl delete&lt;/code&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>V2: Troubleshooting</title>
       <link>https://dell.github.io/csm-docs/v2/applicationmobility/troubleshooting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -6716,86 +6978,6 @@ If you experience a problem with CSM for Resiliency it is important you provide 
     </item>
     
     <item>
-      <title>V2: Troubleshooting</title>
-      <link>https://dell.github.io/csm-docs/v2/secure/encryption/troubleshooting/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dell.github.io/csm-docs/v2/secure/encryption/troubleshooting/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;logs-and-events&#34;&gt;Logs and Events&lt;/h2&gt;
-&lt;p&gt;The first and in most cases sufficient step in troubleshooting issues with a CSI driver that has Encryption enabled
-is exploring logs of the Encryption driver and related Kubernetes components. These are some useful log sources:&lt;/p&gt;
-&lt;h3 id=&#34;csi-driver-containers-logs&#34;&gt;CSI Driver Containers Logs&lt;/h3&gt;
-&lt;p&gt;The driver creates several &lt;em&gt;controller&lt;/em&gt; and &lt;em&gt;node&lt;/em&gt; pods. They can be listed with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; get pods&lt;/code&gt;.
-The output will look similar to:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                              READY   STATUS    RESTARTS   AGE
-isi-controller-84f697c874-2j6d4   10/10   Running   0          16h
-isi-node-4gtwf                    4/4     Running   0          16h
-isi-node-lnzws                    4/4     Running   0          16h
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;List containers in pod &lt;code&gt;isi-node-4gtwf&lt;/code&gt; with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf&lt;/code&gt;.
-Each pod has containers called &lt;code&gt;driver&lt;/code&gt; which is the storage driver container and &lt;code&gt;driver-sec&lt;/code&gt; which is the Encryption driver container.
-These container&amp;rsquo;s logs tend to provide the most important information, but other containers may give a hint too.
-View the logs of &lt;code&gt;driver-sec&lt;/code&gt; in &lt;code&gt;isi-node-4gtwf&lt;/code&gt; with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf driver-sec&lt;/code&gt;.
-The log level of this container can be changed by setting value &lt;a href=&#34;../deployment#helm-chart-values&#34;&gt;encryption.logLevel&lt;/a&gt; and restarting the driver.&lt;/p&gt;
-&lt;p&gt;Often it is necessary to see the logs produced on a specific Kubernetes worker host.
-To find which &lt;em&gt;node&lt;/em&gt; pod is running on which worker host, use &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; get pods -o wide&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;persistentvolume-persistentvolumeclaim-and-application-pod-events&#34;&gt;PersistentVolume, PersistentVolumeClaim and Application Pod Events&lt;/h3&gt;
-&lt;p&gt;Some errors may be logged to the related resource events that can be viewed with &lt;code&gt;kubectl describe&lt;/code&gt; command for that resource.&lt;/p&gt;
-&lt;h3 id=&#34;vault-server-logs&#34;&gt;Vault Server Logs&lt;/h3&gt;
-&lt;p&gt;Some errors related to communication with the Vault server and key requests may be logged on the Vault server side.
-If you run a &lt;a href=&#34;../vault#vault-server-installation&#34;&gt;test instance of the server in a Docker container&lt;/a&gt; you can view the logs with &lt;code&gt;docker logs vault-server&lt;/code&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;typical-failure-reasons&#34;&gt;Typical Failure Reasons&lt;/h2&gt;
-&lt;h4 id=&#34;incorrect-vault-related-configuration&#34;&gt;Incorrect Vault related configuration&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;check &lt;a href=&#34;../deployment#secret-vault-auth&#34;&gt;vault-auth secret&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;check &lt;a href=&#34;../deployment#secret-vault-cert&#34;&gt;vault-cert secret&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;check &lt;a href=&#34;../deployment#configmap-vault-client-conf&#34;&gt;vault-client-conf config map&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;incorrect-vault-server-side-configuration&#34;&gt;Incorrect Vault server-side configuration&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;check &lt;a href=&#34;../vault#minimum-server-configuration&#34;&gt;Vault server configuration&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;expired-approle-secret-id&#34;&gt;Expired AppRole secret ID&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;../vault#set-role-id-and-secret-id-to-the-role&#34;&gt;reset the role secret ID&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;incorrect-csi-driver-configuration&#34;&gt;Incorrect CSI driver configuration&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;check the related CSI driver &lt;a href=&#34;../../../csidriver/troubleshooting&#34;&gt;troubleshooting steps&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;ssh-stopped&#34;&gt;SSH server is stopped/restarted on the worker host&lt;/h4&gt;
-&lt;p&gt;This may manifest in:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;failure to start the CSI driver&lt;/li&gt;
-&lt;li&gt;failure to create a new encrypted volume&lt;/li&gt;
-&lt;li&gt;failure to access an encrypted volume (IO errors)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Resolution:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;check SSH server is running on all worker host&lt;/li&gt;
-&lt;li&gt;stop all workloads that use encrypted volumes on the node, then restart them&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;no-license-provided-or-license-expired&#34;&gt;No license provided, or license expired&lt;/h4&gt;
-&lt;p&gt;This may manifest in:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;failure to start the CSI driver&lt;/li&gt;
-&lt;li&gt;failure to create a new encrypted volume&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Resolution:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;obtain a &lt;a href=&#34;../../../license&#34;&gt;new valid license&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;check the license is for the cluster on which the encrypted volumes are created&lt;/li&gt;
-&lt;li&gt;check &lt;a href=&#34;../deployment#secret-encryption-license&#34;&gt;encryption-license secret&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
       <title>V2: High Availability</title>
       <link>https://dell.github.io/csm-docs/v2/replication/high-availability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -6804,7 +6986,7 @@ If you run a &lt;a href=&#34;../vault#vault-server-installation&#34;&gt;test ins
       <description>
         
         
-        &lt;p&gt;One of the goals of high availability is to eliminate single points of failure in a storage system. In Kubernetes, this can mean that a single PV represents multiple read/write enabled volumes on different arrays, located at reasonable distances with both the volumes in sync with each other. If one of the volumes goes down, there will still be another volume available for read and write. This kind of high availability can be achieved by using SRDF Metro replication mode supported only by Powermax arrays.&lt;/p&gt;
+        &lt;p&gt;One of the goals of high availability is to eliminate single points of failure in a storage system. In Kubernetes, this can mean that a single PV represents multiple read/write enabled volumes on different arrays, located at reasonable distances with both the volumes in sync with each other. If one of the volumes goes down, there will still be another volume available for read and write. This kind of high availability can be achieved by using SRDF Metro replication mode supported only by PowerMax arrays.&lt;/p&gt;
 &lt;h2 id=&#34;srdf-metro-architecture&#34;&gt;SRDF Metro Architecture&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;../metro.png&#34; alt=&#34;metro architecture diagram&#34;&gt;&lt;/p&gt;
 &lt;p&gt;In SRDF metro configurations:&lt;/p&gt;
@@ -6867,16 +7049,25 @@ The snapshots are by default created on the volumes on the R1 side of the SRDF m
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-application-mobility-010&#34;&gt;Release Notes - CSM Application Mobility 0.1.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-application-mobility-020&#34;&gt;Release Notes - CSM Application Mobility 0.2.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/551&#34;&gt;Scheduled Backups for Application Mobility&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
+&lt;h2 id=&#34;release-notes---csm-application-mobility-010&#34;&gt;Release Notes - CSM Application Mobility 0.1.0&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges-1&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/449&#34;&gt;Technical preview release&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Clone stateful application workloads and application data to other clusters, either on-premise or in the cloud&lt;/li&gt;
 &lt;li&gt;Supports Restic as a data mover for application data&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;h3 id=&#34;fixed-issues-1&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;h3 id=&#34;known-issues-1&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
       </description>
@@ -6891,15 +7082,16 @@ The snapshots are by default created on the volumes on the R1 side of the SRDF m
       <description>
         
         
-        &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+        &lt;h2 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/437&#34;&gt;Technical preview release&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;PowerScale CSI volumes encryption (for new volumes)&lt;/li&gt;
-&lt;li&gt;Encryption keys stored in Hashicorp Vault&lt;/li&gt;
+&lt;li&gt;Shallow Rekey with Rekey CRDs.&lt;/li&gt;
+&lt;li&gt;OpenShift Container Platform support (4.10 and 4.11).&lt;/li&gt;
+&lt;li&gt;Kubernetes 1.25 support.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;h2 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h2&gt;
 &lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
-&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;h2 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h2&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
       </description>
@@ -6992,6 +7184,7 @@ then the storage class definitions in both the clusters would look like -&lt;/p&
         
         &lt;h2 id=&#34;rpm-deployment&#34;&gt;RPM Deployment&lt;/h2&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#The-Failure-of-Building-an-Authorization-RPM&#34;&gt;The Failure of Building an Authorization RPM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &lt;code&gt;karavictl tenant&lt;/code&gt; commands result in an HTTP 504 error&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#installation-fails-to-install-policies&#34;&gt;Installation fails to install policies&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/a&gt;&lt;/li&gt;
@@ -7001,7 +7194,19 @@ then the storage class definitions in both the clusters would look like -&lt;/p&
 &lt;li&gt;&lt;a href=&#34;#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors&#34;&gt;The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to &amp;ldquo;request denied for path&amp;rdquo; errors&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
+&lt;h3 id=&#34;the-failure-of-building-an-authorization-rpm&#34;&gt;The Failure of Building an Authorization RPM&lt;/h3&gt;
+&lt;p&gt;This response occurs when running &amp;lsquo;make rpm&amp;rsquo; without the proper permissions or correct pathing of the Authorization repository.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting &amp;#34;/root/karavi-authorization/bin/deploy&amp;#34; to rootfs at &amp;#34;/home/builder/rpm/deploy&amp;#34;: mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERRO[0001] error waiting for container: context canceled 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ensure the cloned repository is in a folder independent of the root or home directory.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/root/myrepos/karavi-authorization
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Enable appropriate permissions to the RPM folder (this is where the Authorization RPM is located after being built).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;chmod o+rwx deploy/rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;retrieve-csm-authorization-server-logs&#34;&gt;Retrieve CSM Authorization Server Logs&lt;/h3&gt;
 &lt;p&gt;To retrieve logs from services on the CSM Authorization Server, run the following command (e.g proxy-server logs):&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ k3s kubectl logs deploy/proxy-server -n karavi -c proxy-server
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For OPA related logs, run:&lt;/p&gt;
@@ -7020,13 +7225,8 @@ prevent communication with the &lt;code&gt;&amp;lt;grpc-address&amp;gt;&lt;/code
 &lt;p&gt;If SELinux is enabled, the policies may fail to install:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;error: failed to install policies (see /tmp/policy-install-for-karavi3163047435): exit status 1
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;View the contents /tmp/policy-install-for-karavi* file listed in the error message. If there is a Permission denied error while running the policy-install.sh script, manually run the script to install policies.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat /tmp/policy-install-for-karavi3163047435
-
-# find the location of the policy-install.sh script located in the file and manually run the script
-
-$ /tmp/karavi-installer-2908017483/policy-install.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/h3&gt;
+&lt;p&gt;This issue should only occur with older versions of CSM Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.&lt;/p&gt;
+&lt;h3 id=&#34;after-installation-the-create-pvc-pod-is-in-an-error-state&#34;&gt;After installation, the create-pvc Pod is in an Error state&lt;/h3&gt;
 &lt;p&gt;If SELinux is enabled, the create-pvc Pod may be in an Error state:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kube-system    create-pvc-44a763c7-e70f-4e32-a114-e94615041042   0/1     Error       0          102s
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;&lt;/p&gt;
@@ -7108,120 +7308,100 @@ kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart daemonSet/vxflexos-n
     </item>
     
     <item>
-      <title>V2: Migrating Volumes</title>
-      <link>https://dell.github.io/csm-docs/v2/replication/migrating-volumes/</link>
+      <title>V2: Troubleshooting</title>
+      <link>https://dell.github.io/csm-docs/v2/secure/encryption/troubleshooting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dell.github.io/csm-docs/v2/replication/migrating-volumes/</guid>
+      <guid>https://dell.github.io/csm-docs/v2/secure/encryption/troubleshooting/</guid>
       <description>
         
         
-        &lt;p&gt;You can migrate existing pre-provisioned volumes to another storage class by using volume migration feature.&lt;/p&gt;
-&lt;p&gt;Currently two versions of migration are supported:&lt;/p&gt;
+        &lt;h2 id=&#34;logs-and-events&#34;&gt;Logs and Events&lt;/h2&gt;
+&lt;p&gt;The first and in most cases sufficient step in troubleshooting issues with a CSI driver that has Encryption enabled
+is exploring logs of the Encryption driver and related Kubernetes components. These are some useful log sources:&lt;/p&gt;
+&lt;h3 id=&#34;csi-driver-containers-logs&#34;&gt;CSI Driver Containers Logs&lt;/h3&gt;
+&lt;p&gt;The driver creates several &lt;em&gt;controller&lt;/em&gt; and &lt;em&gt;node&lt;/em&gt; pods. They can be listed with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; get pods&lt;/code&gt;.
+The output will look similar to:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                              READY   STATUS    RESTARTS   AGE
+isi-controller-84f697c874-2j6d4   10/10   Running   0          16h
+isi-node-4gtwf                    4/4     Running   0          16h
+isi-node-lnzws                    4/4     Running   0          16h
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;List containers in pod &lt;code&gt;isi-node-4gtwf&lt;/code&gt; with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf&lt;/code&gt;.
+Each pod has containers called &lt;code&gt;driver&lt;/code&gt; which is the storage driver container and &lt;code&gt;driver-sec&lt;/code&gt; which is the Encryption driver container.
+These container&amp;rsquo;s logs tend to provide the most important information, but other containers may give a hint too.
+View the logs of &lt;code&gt;driver-sec&lt;/code&gt; in &lt;code&gt;isi-node-4gtwf&lt;/code&gt; with &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; logs isi-node-4gtwf driver-sec&lt;/code&gt;.
+The log level of this container can be changed by setting value &lt;a href=&#34;../deployment#helm-chart-values&#34;&gt;encryption.logLevel&lt;/a&gt; and restarting the driver.&lt;/p&gt;
+&lt;p&gt;Often it is necessary to see the logs produced on a specific Kubernetes worker host.
+To find which &lt;em&gt;node&lt;/em&gt; pod is running on which worker host, use &lt;code&gt;kubectl -n &amp;lt;driver namespace&amp;gt; get pods -o wide&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;persistentvolume-persistentvolumeclaim-and-application-pod-events&#34;&gt;PersistentVolume, PersistentVolumeClaim and Application Pod Events&lt;/h3&gt;
+&lt;p&gt;Some errors may be logged to the related resource events that can be viewed with &lt;code&gt;kubectl describe&lt;/code&gt; command for that resource.&lt;/p&gt;
+&lt;h3 id=&#34;vault-server-logs&#34;&gt;Vault Server Logs&lt;/h3&gt;
+&lt;p&gt;Some errors related to communication with the Vault server and key requests may be logged on the Vault server side.
+If you run a &lt;a href=&#34;../vault#vault-server-installation&#34;&gt;test instance of the server in a Docker container&lt;/a&gt; you can view the logs with &lt;code&gt;docker logs vault-server&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;typical-failure-reasons&#34;&gt;Typical Failure Reasons&lt;/h2&gt;
+&lt;h3 id=&#34;incorrect-vault-related-configuration&#34;&gt;Incorrect Vault related configuration&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;To replicated storage class from NON replicated one&lt;/li&gt;
-&lt;li&gt;To NON replicated storage class from replicated one&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../deployment#secret-vault-auth&#34;&gt;vault-auth secret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../deployment#secret-vault-cert&#34;&gt;vault-cert secret&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../deployment#configmap-vault-client-conf&#34;&gt;vault-client-conf config map&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;h3 id=&#34;incorrect-vault-server-side-configuration&#34;&gt;Incorrect Vault server-side configuration&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Original volume is from the one of currently supported CSI drivers (see Support Matrix)&lt;/li&gt;
-&lt;li&gt;Migrated sidecar is installed alongside with the driver, you can enable it in your &lt;code&gt;myvalues.yaml&lt;/code&gt; file&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;#logs-and-events&#34;&gt;logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../vault#minimum-server-configuration&#34;&gt;Vault server configuration&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;migration&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;support-matrix&#34;&gt;Support Matrix&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Migration Type&lt;/th&gt;
-&lt;th&gt;PowerMax&lt;/th&gt;
-&lt;th&gt;PowerStore&lt;/th&gt;
-&lt;th&gt;PowerScale&lt;/th&gt;
-&lt;th&gt;PowerFlex&lt;/th&gt;
-&lt;th&gt;Unity&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;NON_REPL_TO_REPL&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;REPL_TO_NON_REPL&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id=&#34;basic-usage&#34;&gt;Basic Usage&lt;/h2&gt;
-&lt;p&gt;To trigger migration procedure, you need to patch existing PersistentVolume with migration annotation (by default &lt;code&gt;migration.storage.dell.com/migrate-to&lt;/code&gt;) and in value of said annotation specify StorageClass name you want to migrate to.&lt;/p&gt;
-&lt;p&gt;For example, if we have PV named &lt;code&gt;test-pv&lt;/code&gt; already provisioned and we want to migrate it to replicated storage class named &lt;code&gt;powermax-replication&lt;/code&gt; we can run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch pv test-pv -p &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;metadata&amp;#34;: {&amp;#34;annotations&amp;#34;:{&amp;#34;migration.storage.dell.com/migrate-to&amp;#34;:&amp;#34;powermax-replication&amp;#34;}}}&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Patching PV resource will trigger migration sidecar that will call &lt;code&gt;VolumeMigrate&lt;/code&gt; call from the CSI driver. After migration is finished new PersistentVolume will be created in cluster with name of original PV plus &lt;code&gt;-to-&amp;lt;sc-name&amp;gt;&lt;/code&gt; appended to it.&lt;/p&gt;
-&lt;p&gt;In our example, we will see this when running &lt;code&gt;kubectl get pv&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME                                   CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                       STORAGECLASS                REASON   AGE
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;test-pv                                1Gi        RWO            Retain           Bound       default/test-pvc            powermax                             5m
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;test-pv-to-powermax-replication        1Gi        RWO            Retain           Available                               powermax-replication                 10s
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When Volume Migration is finished source PV will be updated with EVENT that denotes that this has taken place.&lt;/p&gt;
-&lt;p&gt;Newly created PV (&lt;code&gt;test-pv-to-powermax-replication&lt;/code&gt; in our example) is available for consumption via static provisioning by any PVC that will request it.&lt;/p&gt;
-&lt;h2 id=&#34;namespace-considerations-for-replication&#34;&gt;Namespace Considerations For Replication&lt;/h2&gt;
-&lt;p&gt;Replication Groups in CSM Replication can be made namespaced, meaning that one SC will generate one Replication Group per namespace. This is also important when migrating volumes from/to replcation storage class.&lt;/p&gt;
-&lt;p&gt;When just setting one annotation &lt;code&gt;migration.storage.dell.com/migrate-to&lt;/code&gt; migrated volume is assumed to be used in same namespace as original PV and it&amp;rsquo;s PVC. In the case of being migrated to replication enabled storage class will be inserted in namespaced Replication Group inside PVC namespace.&lt;/p&gt;
-&lt;p&gt;However, you can define in which namespace migrated volume must be used after migration by setting &lt;code&gt;migration.storage.dell.com/namespace&lt;/code&gt;. You can use the same annotation in a scenario where you only have a statically provisioned PV, and you don&amp;rsquo;t have it bound to any PVC, and you want to migrate it to another storage class.&lt;/p&gt;
-&lt;h2 id=&#34;non-disruptive-migration&#34;&gt;Non Disruptive Migration&lt;/h2&gt;
-&lt;p&gt;You can migrate your PVs without disrupting workflows if you use StatefulSet with multiple replicas to deploy application.&lt;/p&gt;
-&lt;p&gt;Instruction (you can also use &lt;code&gt;repctl&lt;/code&gt; for convenience):&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Find every PV for your StatefulSet and patch it with &lt;code&gt;migration.storage.dell.com/migrate-to&lt;/code&gt; annotation that points to new storage class&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch pv &amp;lt;pv-name&amp;gt; -p &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;metadata&amp;#34;: {&amp;#34;annotations&amp;#34;:{&amp;#34;migration.storage.dell.com/migrate-to&amp;#34;:&amp;#34;powermax-replication&amp;#34;}}}&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;Ensure you have a copy of StatefulSet manifest somewhere ready, we will need it later. If you don&amp;rsquo;t have it, you can get it from cluster&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get sts &amp;lt;sts-name&amp;gt; -n &amp;lt;ns-name&amp;gt; -o yaml &amp;gt; sts-manifest.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;To not disrupt any workflows we will need to delete StatefulSet without deleting any pods, to do so you can use &lt;code&gt;--cascade&lt;/code&gt; flag&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete sts &amp;lt;sts-name&amp;gt; -n &amp;lt;ns-name&amp;gt; --cascade&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;orphan
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;Change StorageClass in your manifest of StatefulSet to point to a new storage class, then apply it to the cluster&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply -f sts-manifest.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;Find a PVC and pod of one replica of StatefulSet delete PVCs first and Pod after it&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete pvc &amp;lt;pvc-name&amp;gt; -n &amp;lt;ns-name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete pod &amp;lt;pod-name&amp;gt; -n &amp;lt;ns-name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Wait for new pod to be created by StatefulSet, it should create new PVC that will use migrated PV.&lt;/p&gt;
-&lt;ol start=&#34;6&#34;&gt;
-&lt;li&gt;Repeat step 5 until all replicas use new PVCs&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;using-repctl&#34;&gt;Using repctl&lt;/h2&gt;
-&lt;p&gt;You can use &lt;code&gt;repctl&lt;/code&gt; CLI tool to help you simplify running migration specific commands.&lt;/p&gt;
-&lt;h3 id=&#34;single-pv&#34;&gt;Single PV&lt;/h3&gt;
-&lt;p&gt;In most its basic form repctl can do the same as kubectl, for example, migrating single PV from our example will look like:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl migrate pv test-pv --to-sc powermax-replication
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; will go and patch the resource for you. You can also provide &lt;code&gt;--wait&lt;/code&gt; flag for it to wait until migrated PV is created in cluster.
-&lt;code&gt;repctl&lt;/code&gt; also can set &lt;code&gt;migration.storage.dell.com/namespace&lt;/code&gt; for you if you provide &lt;code&gt;--target-ns&lt;/code&gt; flag.&lt;/p&gt;
-&lt;p&gt;Aside from just migrating single PVs repctl can migrate PVCs and StatefulSets.&lt;/p&gt;
-&lt;h3 id=&#34;pvc&#34;&gt;PVC&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can find PV for any given PVC for you and patch it.
-This could be done with similar command to single PV migration:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl migrate pvc test-pvc --to-sc powermax-replication -n default
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Notice that we provide original namespace (&lt;code&gt;default&lt;/code&gt; in our example) for this command because PVCs are namespaced resource and we need namespace to be able to find it.&lt;/p&gt;
-&lt;h3 id=&#34;statefulset&#34;&gt;StatefulSet&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;repctl&lt;/code&gt; can help you migrate entire StatefulSet by automating migration process.&lt;/p&gt;
-&lt;p&gt;You can use this command to do so:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl migrate sts test-sts --to-sc powermax-replication -n default
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;By default, it will find every Pod, PVC and PV for provided StatefulSet and patch every PV with annotation.&lt;/p&gt;
-&lt;p&gt;You can also optionally provide &lt;code&gt;--ndu&lt;/code&gt; flag, with this flag provided repctl will do steps provided in &lt;a href=&#34;#non-disruptive-migration&#34;&gt;Non Disruptive Migration&lt;/a&gt; section automatically.&lt;/p&gt;
+&lt;h3 id=&#34;expired-approle-secret-id&#34;&gt;Expired AppRole secret ID&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../vault#set-role-id-and-secret-id-to-the-role&#34;&gt;reset the role secret ID&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;incorrect-csi-driver-configuration&#34;&gt;Incorrect CSI driver configuration&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;check the related CSI driver &lt;a href=&#34;../../../csidriver/troubleshooting&#34;&gt;troubleshooting steps&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ssh-stopped&#34;&gt;SSH server is stopped/restarted on the worker host&lt;/h3&gt;
+&lt;p&gt;This may manifest in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;failure to start the CSI driver&lt;/li&gt;
+&lt;li&gt;failure to create a new encrypted volume&lt;/li&gt;
+&lt;li&gt;failure to access an encrypted volume (IO errors)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Resolution:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check SSH server is running on all worker host&lt;/li&gt;
+&lt;li&gt;stop all workloads that use encrypted volumes on the node, then restart them&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;no-license-provided-or-license-expired&#34;&gt;No license provided, or license expired&lt;/h3&gt;
+&lt;p&gt;This may manifest in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;failure to start the CSI driver&lt;/li&gt;
+&lt;li&gt;failure to create a new encrypted volume&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Resolution:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;obtain a &lt;a href=&#34;../../../license&#34;&gt;new valid license&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;check the license is for the cluster on which the encrypted volumes are created&lt;/li&gt;
+&lt;li&gt;check &lt;a href=&#34;../deployment#secret-encryption-license&#34;&gt;encryption-license secret&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;typical-rekey-failure-reasons&#34;&gt;Typical Rekey Failure reasons&lt;/h2&gt;
+&lt;p&gt;If all rekeys in the cluster are failing&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check the Rekey controller helm chart values.yaml &lt;code&gt;provisioner&lt;/code&gt; name against the Dell CSI driver chart &lt;code&gt;encryption.pluginName&lt;/code&gt;, and ensure they match.&lt;/li&gt;
+&lt;li&gt;check the Rekey controller helm chart values.yaml &lt;code&gt;port&lt;/code&gt; number against the Dell CSI driver chart &lt;code&gt;encryption.apiPort&lt;/code&gt;, and ensure they match.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If Rekeys fail for a particular PV&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;check that the volume is provisioned by the Encryption provisioner&lt;/li&gt;
+&lt;li&gt;check that volume attachments exist for the said PV&lt;/li&gt;
+&lt;li&gt;check that at least one node on which the PV is mounted is available and reachable&lt;/li&gt;
+&lt;li&gt;check the Encryption provisioner logs for details that may indicate the failure reason&lt;/li&gt;
+&lt;li&gt;check the Rekey controller log for the reason for failure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If a Rekey results in a &lt;code&gt;Status.Phase&lt;/code&gt; of &lt;code&gt;unknown&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;this implies the connection failed during the rekey process which may mean the volume was rekeyed&lt;/li&gt;
+&lt;li&gt;an additional rekey attempt should work assuming a reliable connection to the Encryption provisioner. This may result in the volume being rekeyed twice.&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>

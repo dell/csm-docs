@@ -42,9 +42,10 @@
 &lt;p&gt;To run cert-csi, you have to point your environment to a kube cluster. This allows you to receive dynamically formatted suggestions from your cluster.
 For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndash;sc) argument, the tool will parse all existing Storage Classes from your cluster and suggest them as an input for you.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;To run a docker container your command should look something like this
-&lt;code&gt;docker run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi &amp;lt;usual program arguments&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;To run a docker container your command should look something like this&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  docker run --rm -it -v ~/.kube/config:/root/.kube/config -v &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;pwd&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;:/app/cert-csi cert-csi &amp;lt;usual program arguments&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;driver-certification&#34;&gt;Driver Certification&lt;/h2&gt;
 &lt;p&gt;You can use cert-csi to launch a certification test run against multiple storage classes to check if the driver adheres to advertised capabilities.&lt;/p&gt;
 &lt;h3 id=&#34;preparing-config&#34;&gt;Preparing Config&lt;/h3&gt;
@@ -112,7 +113,8 @@ For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndas
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--block : To create raw block volume 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;ephemeral-volumes-suite&#34;&gt;Ephemeral volumes suite&lt;/h4&gt;
 &lt;p&gt;To run ephemeral volume test suite, run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test ephemeral-volume --driver &amp;lt;driver-name&amp;gt; --attr ephemeral-config.properties
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test ephemeral-volume --driver &amp;lt;driver-name&amp;gt; --attr ephemeral-config.properties
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pods : Number of pods to create 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pod-name : To create pods with custom name
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--attr : CSI volume attributes file name
@@ -124,7 +126,8 @@ For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndas
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;5Gi
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;storage-capacity-tracking-suite&#34;&gt;Storage Capacity Tracking Suite&lt;/h4&gt;
 &lt;p&gt;To run storage capacity tracking test suite, run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test capacity-tracking --sc &amp;lt;storage-class&amp;gt; --drns &amp;lt;driver-namespace&amp;gt; --pi &amp;lt;poll-interval&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test capacity-tracking --sc &amp;lt;storage-class&amp;gt; --drns &amp;lt;driver-namespace&amp;gt; --pi &amp;lt;poll-interval&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Optional Params:
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--vs : volume size to be created
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;other-options&#34;&gt;Other Options&lt;/h3&gt;
@@ -153,11 +156,12 @@ For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndas
 &lt;p&gt;Tabular Report example&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../img/tabularReport.png&#34; alt=&#34;img9&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;kubernetes-end-to-end-tests&#34;&gt;Kubernetes End-To-End Tests&lt;/h2&gt;
-&lt;p&gt;All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..
-&lt;code&gt;--driver-config &amp;lt;path of driver config file&amp;gt; and --version &amp;quot;v1.25.0&amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&#34;running-kubernetes-end-to-end-tests&#34;&gt;Running kubernetes end-to-end tests&lt;/h3&gt;
+&lt;p&gt;All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; --driver-config &amp;lt;path of driver config file&amp;gt; and --version &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;running-kubernetes-end-to-end-tests&#34;&gt;Running kubernetes end-to-end tests&lt;/h3&gt;
 &lt;p&gt;To run kubernetes end-to-end tests, run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi k8s-e2e --config &amp;lt;kube config&amp;gt; --driver-config &amp;lt;path to driver config&amp;gt;  --focus &amp;lt;regx pattern to focus Ex: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;External.Storage.*&amp;#34;&lt;/span&gt; &amp;gt;  --timeout &amp;lt;timeout Ex: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2h&amp;#34;&lt;/span&gt;&amp;gt; --version &amp;lt; version of k8s Ex: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt;&amp;gt; --skip-tests &amp;lt;skip these steps mentioned in file&amp;gt; --skip &amp;lt;regx pattern to skip tests Ex:&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Generic Ephemeral-volume|(block volmode)&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi k8s-e2e --config &amp;lt;kube config&amp;gt; --driver-config &amp;lt;path to driver config&amp;gt;  --focus &amp;lt;regx pattern to focus Ex: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;External.Storage.*&amp;#34;&lt;/span&gt; &amp;gt;  --timeout &amp;lt;timeout Ex: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2h&amp;#34;&lt;/span&gt;&amp;gt; --version &amp;lt; version of k8s Ex: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt;&amp;gt; --skip-tests &amp;lt;skip these steps mentioned in file&amp;gt; --skip &amp;lt;regx pattern to skip tests Ex:&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Generic Ephemeral-volume|(block volmode)&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;kubernetes-end-to-end-reporting&#34;&gt;Kubernetes end-to-end reporting&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;All the reports generated by kubernetes end-to-end tests will be under &lt;code&gt;$HOME/reports&lt;/code&gt; directory by default if user doesn&amp;rsquo;t mention the report path.&lt;/li&gt;
@@ -176,15 +180,18 @@ For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndas
 &lt;h3 id=&#34;example-commands&#34;&gt;Example Commands&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi k8s-e2e --config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config&amp;#34;&lt;/span&gt; --driver-config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/e2e_config/config-nfs.yaml&amp;#34;&lt;/span&gt;  --focus &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;External.Storage.*&amp;#34;&lt;/span&gt;  --timeout &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2h&amp;#34;&lt;/span&gt; --version &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt; --skip-tests &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/e2e_config/ignore.yaml&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi k8s-e2e --config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config&amp;#34;&lt;/span&gt; --driver-config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/e2e_config/config-nfs.yaml&amp;#34;&lt;/span&gt;  --focus &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;External.Storage.*&amp;#34;&lt;/span&gt;  --timeout &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2h&amp;#34;&lt;/span&gt; --version &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt; --skip-tests &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/e2e_config/ignore.yaml&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./cert-csi k8s-e2e --config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config&amp;#34;&lt;/span&gt; --driver-config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/e2e_config/config-iscsi.yaml&amp;#34;&lt;/span&gt; --focus &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;External.Storage.*&amp;#34;&lt;/span&gt;  --timeout &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2h&amp;#34;&lt;/span&gt; --version &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt; --focus-file &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;capacity.go&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./cert-csi k8s-e2e --config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config&amp;#34;&lt;/span&gt; --driver-config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/e2e_config/config-iscsi.yaml&amp;#34;&lt;/span&gt; --focus &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;External.Storage.*&amp;#34;&lt;/span&gt;  --timeout &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2h&amp;#34;&lt;/span&gt; --version &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt; --focus-file &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;capacity.go&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;performance-tests&#34;&gt;Performance Tests&lt;/h2&gt;
-&lt;p&gt;All performance tests require that you provide a storage class that you want to test. You can provide multiple storage classes in one command. For example, &lt;code&gt;... --sc &amp;lt;sc1&amp;gt; --sc &amp;lt;sc2&amp;gt; ...&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&#34;running-individual-suites-1&#34;&gt;Running Individual Suites&lt;/h3&gt;
+&lt;p&gt;All performance tests require that you provide a storage class that you want to test. You can provide multiple storage classes in one command. For example,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;... --sc &amp;lt;sc1&amp;gt; --sc &amp;lt;sc2&amp;gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;running-individual-suites-1&#34;&gt;Running Individual Suites&lt;/h3&gt;
 &lt;h4 id=&#34;running-volume-creation-test-suite&#34;&gt;Running Volume Creation test suite&lt;/h4&gt;
 &lt;p&gt;To run volume creation test suite, run the command:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; volume-creation --sc &amp;lt;storage class&amp;gt; -n &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;25&lt;/span&gt;
@@ -203,16 +210,19 @@ For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndas
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-multi-attach-volume-suite&#34;&gt;Running Multi-attach volume suite&lt;/h4&gt;
 &lt;p&gt;To run multi-attach volume test suite, run the command:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; multi-attach-vol --sc &amp;lt;storage class&amp;gt; --podNum &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; multi-attach-vol --sc &amp;lt;storage class&amp;gt; --podNum &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt; --block &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# to use raw block volumes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; multi-attach-vol --sc &amp;lt;storage class&amp;gt; --podNum &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt; --block &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# to use raw block volumes&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-replication-test-suite&#34;&gt;Running Replication test suite&lt;/h4&gt;
 &lt;p&gt;To run replication test suite, run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; replication --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; --vsc &amp;lt;snapshot class&amp;gt; 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; replication --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; --vsc &amp;lt;snapshot class&amp;gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-volume-cloning-test-suite&#34;&gt;Running Volume Cloning test suite&lt;/h4&gt;
 &lt;p&gt;To run volume cloning test suite, run the command:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; clone-volume --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-volume-expansion-test-suite&#34;&gt;Running Volume Expansion test suite&lt;/h4&gt;
 &lt;p&gt;To run volume expansion test, run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; expansion --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; --iSize 8Gi --expSize 16Gi
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; expansion --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; --iSize 8Gi --expSize 16Gi
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; expansion --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# `iSize` and `expSize` default to 3Gi and 6Gi respectively&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
@@ -222,7 +232,8 @@ For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndas
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; blocksnap --sc &amp;lt;storageClass&amp;gt; --vsc &amp;lt;snapshotclass&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;running-longevity-mode&#34;&gt;Running Longevity mode&lt;/h3&gt;
 &lt;p&gt;To run longevity test suite, run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; &amp;lt;any of previous tests&amp;gt; --sc &amp;lt;storage class&amp;gt; --longevity &amp;lt;number of iterations&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; &amp;lt;any of previous tests&amp;gt; --sc &amp;lt;storage class&amp;gt; --longevity &amp;lt;number of iterations&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;interacting-with-db&#34;&gt;Interacting with DB&lt;/h3&gt;
 &lt;h4 id=&#34;generating-report-from-runs-without-running-tests&#34;&gt;Generating report from runs without running tests&lt;/h4&gt;
 &lt;p&gt;To generate test report from the database, run the command:&lt;/p&gt;
@@ -234,7 +245,8 @@ For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndas
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--tabular: tidy html report with basic run information
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;customizing-report-folder&#34;&gt;Customizing report folder&lt;/h4&gt;
 &lt;p&gt;To specify test report folder path, use &amp;ndash;path option as follows:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi --db &amp;lt;path/to/.db&amp;gt; report --testrun &amp;lt;test-run-name&amp;gt; --path &amp;lt;path-to-folder&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi --db &amp;lt;path/to/.db&amp;gt; report --testrun &amp;lt;test-run-name&amp;gt; --path &amp;lt;path-to-folder&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Options:
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--path: path to folder where reports will be created &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; not specified ~/.cert-csi/ will be used&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;generating-report-from-multiple-databases-and-test-runs&#34;&gt;Generating report from multiple databases and test runs&lt;/h4&gt;
@@ -259,7 +271,8 @@ For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndas
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; suite&amp;gt; --sc &amp;lt;storage class&amp;gt; &amp;lt;...&amp;gt; --ns &amp;lt;driver namespace&amp;gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-custom-hooks-from-program&#34;&gt;Running custom hooks from program&lt;/h4&gt;
 &lt;p&gt;To run tests with custom hooks, run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; suite&amp;gt; --sc &amp;lt;storage class&amp;gt; &amp;lt;...&amp;gt; --sh ./hooks/start.sh --rh ./hooks/ready.sh --fh ./hooks/finish.sh
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; suite&amp;gt; --sc &amp;lt;storage class&amp;gt; &amp;lt;...&amp;gt; --sh ./hooks/start.sh --rh ./hooks/ready.sh --fh ./hooks/finish.sh
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;screenshots-1&#34;&gt;Screenshots&lt;/h2&gt;
 &lt;h3 id=&#34;running-provisioning-test&#34;&gt;Running provisioning test&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;../img/unifiedTest.png&#34; alt=&#34;img1&#34;&gt;&lt;/p&gt;
@@ -440,8 +453,10 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;p&gt;Run the &lt;code&gt;cd csi-powermax/test/helm&lt;/code&gt; command to go to the &lt;code&gt;csi-powermax/test/helm&lt;/code&gt; directory, which contains the &lt;code&gt;starttest.sh&lt;/code&gt; script and the &lt;em&gt;2vols&lt;/em&gt; directories.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Run the starttest.sh script and provide it with a test name. The following sample command can be used to run the &lt;em&gt;2vols&lt;/em&gt; test: &lt;code&gt;./starttest.sh -t 2vols -n &amp;lt;test_namespace&amp;gt; -s &amp;lt;storageclass-name&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;This script installs a helm chart that creates a Pod with a container, creates two PVCs, and mounts them into the created container. You can now log in to the newly created container and check the mounts.&lt;/p&gt;
+&lt;p&gt;Run the starttest.sh script and provide it with a test name. The following sample command can be used to run the &lt;em&gt;2vols&lt;/em&gt; test:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./starttest.sh -t 2vols -n &amp;lt;test_namespace&amp;gt; -s &amp;lt;storageclass-name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This script installs a helm chart that creates a Pod with a container, creates two PVCs, and mounts them into the created container. You can now log in to the newly created container and check the mounts.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Run the &lt;code&gt;/stoptest.sh -t 2vols -n &amp;lt;test_namespace&amp;gt;&lt;/code&gt; script to stop the test. This script deletes the Pods and the PVCs created during the test and uninstalls the helm chart.&lt;/p&gt;
@@ -455,7 +470,10 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;ol&gt;
 &lt;li&gt;Create a namespace with the name &lt;em&gt;test&lt;/em&gt;.&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;cd csi-powermax/test/helm&lt;/code&gt; command to go to the &lt;code&gt;csi-powermax/test/helm&lt;/code&gt; directory, which contains the &lt;code&gt;volumeclonetest.sh&lt;/code&gt; script.&lt;/li&gt;
-&lt;li&gt;Run the &lt;code&gt;volumeclonetest.sh&lt;/code&gt; script using the following command: &lt;code&gt;bash volumeclonetest.sh -n &amp;lt;test_namespace&amp;gt; -s &amp;lt;storageclass-name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run the &lt;code&gt;volumeclonetest.sh&lt;/code&gt; script using the following command:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;volumeclonetest.sh -n &amp;lt;test_namespace&amp;gt; -s &amp;lt;storageclass-name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This script does the following:&lt;/p&gt;
 &lt;ul&gt;
@@ -511,7 +529,7 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;h2 id=&#34;consuming-existing-volumes-with-static-provisioning&#34;&gt;Consuming existing volumes with static provisioning&lt;/h2&gt;
 &lt;p&gt;Use this procedure to consume existing volumes with static provisioning.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Open your Unisphere for Powermax, and take a note of volume-id.&lt;/li&gt;
+&lt;li&gt;Open your Unisphere for PowerMax, and take a note of volume-id.&lt;/li&gt;
 &lt;li&gt;Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.&lt;/li&gt;
 &lt;li&gt;In the following example, storage class is assumed as &amp;lsquo;powermax&amp;rsquo;, cluster prefix as &amp;lsquo;ABC&amp;rsquo; and volume&amp;rsquo;s internal name as &amp;lsquo;00001&amp;rsquo;, array ID as &amp;lsquo;000000000001&amp;rsquo;, volume ID as &amp;lsquo;1abc23456&amp;rsquo;. The volume-handle should be in the format of &lt;code&gt;csi&lt;/code&gt;-&lt;code&gt;clusterPrefix&lt;/code&gt;-&lt;code&gt;volumeNamePrefix&lt;/code&gt;-&lt;code&gt;id&lt;/code&gt;-&lt;code&gt;arrayID&lt;/code&gt;-&lt;code&gt;volumeID&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
@@ -590,6 +608,37 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;blockquote&gt;
 &lt;p&gt;Note: CSI driver for PowerMax will create the necessary objects like Storage group, HostID and Masking View. They must not be created manually.&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h2 id=&#34;setting-qos-parameters-for-throttling-performance-and-bandwidth&#34;&gt;Setting QoS parameters for throttling performance and bandwidth&lt;/h2&gt;
+&lt;p&gt;Use this procedure to set QoS parameters for throttling performance and bandwidth&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create &lt;a href=&#34;https://github.com/dell/csi-powermax/tree/main/samples/storageclass&#34;&gt;storage class&lt;/a&gt; with the following parameters set.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Following params are for HostLimits, set them only if you want to set IOLimits&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# HostLimitName uniquely identifies given set of limits on a storage class&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This is used in naming storage group, max of 3 letter&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Optional: true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Example: &amp;#34;HL1&amp;#34;, &amp;#34;HL2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#HostLimitName: &amp;#34;HL1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The MBs per Second Host IO limit for the storage class&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Optional: true, Default: &amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Examples: 100, 200, NOLIMIT&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#HostIOLimitMBSec: &amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The IOs per Second Host IO limit for the storage class&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Optional: true, Default: &amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Examples: 100, 200, NOLIMIT&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#HostIOLimitIOSec: &amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# distribution of the Host IO limits for the storage class&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Optional: true, Default: &amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allowed values: Never&amp;#34;,&amp;#34;Always&amp;#34; or &amp;#34;OnFailure&amp;#34; only&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#DynamicDistribution: &amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Use the above storage class to create the PVC and provision the volume to the pod.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once the pod becones &lt;code&gt;Ready&lt;/code&gt; and &lt;code&gt;Running&lt;/code&gt;, you will see the QoS parameters applied for throttling performance and bandwidth.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 
       </description>
     </item>
@@ -612,15 +661,16 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;p&gt;&lt;strong&gt;Creating a storage class:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Create a file &lt;code&gt;storageclass.yaml&lt;/code&gt; using sample yaml file located at samples/storageclass/isilon.yaml. Update/uncomment the attributes in this sample file as per the requirements.&lt;/p&gt;
 &lt;p&gt;Execute the following command to create a storage class:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl create -f $PWD/storageclass.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Result: After executing the above command storage class will be created in the default namespace, and the user can see the storage class by executing &lt;code&gt;kubectl get sc&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f &lt;span style=&#34;color:#000&#34;&gt;$PWD&lt;/span&gt;/storageclass.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Result: After executing the above command storage class will be created in the default namespace, and the user can see the storage class by executing&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get sc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Creating a volume:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Create a file &lt;code&gt;pvc.yaml&lt;/code&gt; using sample yaml files located at samples/persistentvolumeclaim/pvc.yaml&lt;/p&gt;
 &lt;p&gt;Execute the following command to create volume:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl create -f $PWD/pvc.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Result: After executing the above command PVC will be created in the default namespace, and the user can see the pvc by executing the command kubectl get pvc.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f &lt;span style=&#34;color:#000&#34;&gt;$PWD&lt;/span&gt;/pvc.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Result: After executing the above command PVC will be created in the default namespace, and the user can see the pvc by executing the command kubectl get pvc.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The status of the volume can be either Bound or Pending depending on the VolumeBindingMode specified on the storage class.&lt;/p&gt;
@@ -629,8 +679,8 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;p&gt;&lt;strong&gt;Attach the volume to Host&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;To attach a volume to a host, create a new application(Pod) and use the PVC created above in the Pod. This scenario is explained using the Nginx application. Create &lt;code&gt;nginx.yaml&lt;/code&gt; using sample yaml files located at samples/pod/.&lt;/p&gt;
 &lt;p&gt;Execute the following command to mount the volume to the Kubernetes node:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl create -f $PWD/nginx.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Result: After executing the above command, a new nginx pod will be successfully created and started in the default namespace.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f &lt;span style=&#34;color:#000&#34;&gt;$PWD&lt;/span&gt;/nginx.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Result: After executing the above command, a new nginx pod will be successfully created and started in the default namespace.
 &lt;strong&gt;Note&lt;/strong&gt;: Verify PowerScale system for the host to be part of clients/rootclients field of export created for volume and used by nginx application.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -638,12 +688,14 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;p&gt;VolumeSnapshotClass is needed for creating the volume snapshots. Starting from v1.6, CSI Driver for PowerScale will not create any default Volume Snapshot class.&lt;/p&gt;
 &lt;p&gt;So the user has to create a volume snapshot class. The required sample files are present under samples/volumesnapshotclass/. Choose the file based on Kubernetes version.&lt;/p&gt;
 &lt;p&gt;Execute either one of the following commands to create a volume snapshot class.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl create -f samples/volumesnapshotclass/isilon-volumesnapshotclass-v1.yaml&lt;/code&gt; OR &lt;code&gt;kubectl create -f samples/volumesnapshotclass/isilon-volumesnapshotclass-v1beta1.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;The above-said command will create a volume snapshotclass with the name isilon-snapclass.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f samples/volumesnapshotclass/isilon-volumesnapshotclass-v1.yaml&lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt; OR &lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt;kubectl create -f samples/volumesnapshotclass/isilon-volumesnapshotclass-v1beta1.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The above-said command will create a volume snapshotclass with the name isilon-snapclass.&lt;/p&gt;
 &lt;p&gt;The following procedure will create a snapshot of the volume in the container using VolumeSnapshot objects defined in snapshot-of-test-pvc.yaml. The sample file for snapshot creation is located at samples/volumesnapshot/.&lt;/p&gt;
 &lt;p&gt;Execute the following command to create snapshot:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl create -f samples/volumesnapshot/snapshot-of-test-pvc.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;The spec.source section contains the volume that will be snapped in the default namespace. For example, if the volume to be snapped is test-pvc, then the created snapshot is named snapshot-of-test-pvc. Verify the PowerScale system for the newly created snapshot.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f samples/volumesnapshot/snapshot-of-test-pvc.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The spec.source section contains the volume that will be snapped in the default namespace. For example, if the volume to be snapped is test-pvc, then the created snapshot is named snapshot-of-test-pvc. Verify the PowerScale system for the newly created snapshot.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:&lt;/p&gt;
@@ -658,34 +710,36 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;p&gt;The following procedure will create a new volume from a given snapshot which is specified in the spec dataSource field.&lt;/p&gt;
 &lt;p&gt;The sample file for volume creation from the snapshot is located at samples/persistentvolumeclaim/pvc-from-snapshot.yaml .&lt;/p&gt;
 &lt;p&gt;Execute the following command to create a snapshot:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl create -f samples/persistentvolumeclaim/pvc-from-snapshot.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Verify the PowerScale system for newly created volume from the snapshot.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f samples/persistentvolumeclaim/pvc-from-snapshot.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Verify the PowerScale system for newly created volume from the snapshot.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Delete Snapshot&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Execute the following commands to delete the snapshot:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl get volumesnapshot
-kubectl delete volumesnapshot snapshot-of-test-pvc
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get volumesnapshot
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete volumesnapshot snapshot-of-test-pvc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Create a new volume from existing volume(volume clone)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;The following procedure will create a new volume from another existing volume which is specified in the spec dataSource field.&lt;/p&gt;
 &lt;p&gt;The sample file for volume creation from volume is located at samples/persistentvolumeclaim/pvc-from-pvc.yaml&lt;/p&gt;
 &lt;p&gt;Execute the following command to create a pvc from another pvc:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl create -f samples/persistentvolumeclaim/pvc-from-pvc.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Verify the PowerScale system for newly created volume from volume.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f samples/persistentvolumeclaim/pvc-from-pvc.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Verify the PowerScale system for newly created volume from volume.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;To Unattach the volume from Host&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Delete the nginx application to Unattach the volume from the host:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl delete -f nginx.yaml&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete -f nginx.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;To delete the volume&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl get pvc
-kubectl delete pvc testvolclaim1
-kubectl get pvc
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pvc
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete pvc testvolclaim1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pvc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>
@@ -739,7 +793,7 @@ storage classes and automatically mounts them to the pod.&lt;/p&gt;
       <description>
         
         
-        &lt;h2 id=&#34;test-deploying-a-simple-pod-and-pvc-with-unity-xt-storage&#34;&gt;Test deploying a simple Pod and Pvc with Unity XT storage&lt;/h2&gt;
+        &lt;h2 id=&#34;test-deploying-a-simple-pod-and-pvc-with-unity-xt-storage&#34;&gt;Test deploying a simple Pod and PVC with Unity XT storage&lt;/h2&gt;
 &lt;p&gt;In the repository, a simple test manifest exists that creates three different PersistentVolumeClaims using default NFS and iSCSI and FC storage classes and automatically mounts them to the pod.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -747,11 +801,11 @@ storage classes and automatically mounts them to the pod.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f ./test/sample.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;You can find all the created resources in &lt;code&gt;test-unity&lt;/code&gt; namespace.&lt;/p&gt;
+&lt;p&gt;You can find all the created resources in &lt;code&gt;unity&lt;/code&gt; namespace.&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;Check if the pod is created and Ready and Running by running:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get all -n test-unity
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get all -n unity
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If it is in CrashLoopback state then the driver installation was not successful. Check the logs of the node and the controller.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;

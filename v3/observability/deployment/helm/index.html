@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.0">
+<meta name="generator" content="Hugo 0.114.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/observability/deployment/helm/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2023-03-27T17:14:31+05:30" />
+<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="name" content="Helm">
 <meta itemprop="description" content="Dell Container Storage Modules (CSM) for Observability Helm deployment
 ">
-<meta itemprop="dateModified" content="2023-03-27T17:14:31+05:30" />
-<meta itemprop="wordCount" content="925">
+<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
+<meta itemprop="wordCount" content="1305">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Helm"/>
 <meta name="twitter:description" content="Dell Container Storage Modules (CSM) for Observability Helm deployment
@@ -43,6 +43,7 @@
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
 
   </head>
   <body class="td-page">
@@ -83,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.5.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.4</a>
 	
 </div>
 
@@ -105,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,18 +144,7 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3deployment-li">
   <a href="/csm-docs/v3/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsminstaller-li">
-  <a href="/csm-docs/v3/deployment/csminstaller/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsminstaller"><span class="">CSM Installer</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallercsmapi-li">
-  <a href="/csm-docs/v3/deployment/csminstaller/csmapi/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallercsmapi"><span class="">CSM REST API</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallercsmcli-li">
-  <a href="/csm-docs/v3/deployment/csminstaller/csmcli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallercsmcli"><span class="">CSM CLI</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3deploymentcsminstallertroubleshooting-li">
-  <a href="/csm-docs/v3/deployment/csminstaller/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3deploymentcsminstallertroubleshooting"><span class="">Troubleshooting</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperator-li">
   <a href="/csm-docs/v3/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3deploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3deploymentcsmoperatordrivers-li">
@@ -251,6 +241,8 @@
   <a href="/csm-docs/v3/csidriver/upgradation/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriverspowerstore"><span class="">PowerStore</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriversunity-li">
   <a href="/csm-docs/v3/csidriver/upgradation/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriversunity"><span class="">Unity XT</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3csidriverupgradationdriversoffline-li">
+  <a href="/csm-docs/v3/csidriver/upgradation/drivers/offline/" title="Offline Upgrade of Dell CSI Storage Providers" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3csidriverupgradationdriversoffline"><span class="">Offline Upgrade</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3csidriverfeatures-li">
@@ -324,6 +316,15 @@
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3authorizationdesign-li">
   <a href="/csm-docs/v3/authorization/design/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3authorizationdesign"><span class="">Design</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3authorizationbackup-and-restore-li">
+  <a href="/csm-docs/v3/authorization/backup-and-restore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationbackup-and-restore"><span class="">Backup and Restore</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3authorizationbackup-and-restorehelm-li">
+  <a href="/csm-docs/v3/authorization/backup-and-restore/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationbackup-and-restorehelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3authorizationbackup-and-restorerpm-li">
+  <a href="/csm-docs/v3/authorization/backup-and-restore/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationbackup-and-restorerpm"><span class="">RPM</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3authorizationdeployment-li">
   <a href="/csm-docs/v3/authorization/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3authorizationdeployment"><span class="">Deployment</span></a>
   <ul class="ul-3 foldable">
@@ -355,6 +356,8 @@
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitymetricspowerflex-li">
   <a href="/csm-docs/v3/observability/metrics/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitymetricspowerflex"><span class="">PowerFlex Metrics</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitymetricspowerscale-li">
+  <a href="/csm-docs/v3/observability/metrics/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitymetricspowerscale"><span class="">PowerScale Metrics</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3observabilitymetricspowerstore-li">
   <a href="/csm-docs/v3/observability/metrics/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3observabilitymetricspowerstore"><span class="">PowerStore Metrics</span></a>
 </li>
@@ -400,6 +403,8 @@
   <a href="/csm-docs/v3/replication/deployment/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentpowerstore-li">
   <a href="/csm-docs/v3/replication/deployment/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentpowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationdeploymentunity-li">
+  <a href="/csm-docs/v3/replication/deployment/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationdeploymentunity"><span class="">Unity</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationarchitecture-li">
@@ -416,6 +421,8 @@
   <a href="/csm-docs/v3/replication/monitoring/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationmonitoring"><span class="">Monitoring</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationreplication-actions-li">
   <a href="/csm-docs/v3/replication/replication-actions/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationreplication-actions"><span class="">Replication Actions</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationvolume_expansion-li">
+  <a href="/csm-docs/v3/replication/volume_expansion/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationvolume_expansion"><span class="">Volume Expansion</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationtools-li">
   <a href="/csm-docs/v3/replication/tools/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3replicationtools"><span class="">Tools</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3replicationtroubleshooting-li">
@@ -454,16 +461,55 @@
   <a href="/csm-docs/v3/snapshots/volume-group-snapshots/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3snapshotsvolume-group-snapshots"><span class="">Volume Group Snapshots</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3release-li">
-  <a href="/csm-docs/v3/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3release"><span class="">Release notes</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3applicationmobility-li">
+  <a href="/csm-docs/v3/applicationmobility/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3applicationmobility"><span class="">Application Mobility</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilitydeployment-li">
+  <a href="/csm-docs/v3/applicationmobility/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilitydeployment"><span class="">Deployment</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilityuninstallation-li">
+  <a href="/csm-docs/v3/applicationmobility/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilityuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilityuse_cases-li">
+  <a href="/csm-docs/v3/applicationmobility/use_cases/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilityuse_cases"><span class="">Use Cases</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilitytroubleshooting-li">
+  <a href="/csm-docs/v3/applicationmobility/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilitytroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3applicationmobilityrelease-li">
+  <a href="/csm-docs/v3/applicationmobility/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3applicationmobilityrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3secure-li">
+  <a href="/csm-docs/v3/secure/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3secure"><span class="">Secure</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3secureencryption-li">
+  <a href="/csm-docs/v3/secure/encryption/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3secureencryption"><span class="">Encryption</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptiondeployment-li">
+  <a href="/csm-docs/v3/secure/encryption/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptiondeployment"><span class="">Deployment</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptionuninstallation-li">
+  <a href="/csm-docs/v3/secure/encryption/uninstallation/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptionuninstallation"><span class="">Uninstallation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptionvault-li">
+  <a href="/csm-docs/v3/secure/encryption/vault/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptionvault"><span class="">Vault Configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptiontroubleshooting-li">
+  <a href="/csm-docs/v3/secure/encryption/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptiontroubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3secureencryptionrelease-li">
+  <a href="/csm-docs/v3/secure/encryption/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsv3secureencryptionrelease"><span class="">Release Notes</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3troubleshooting-li">
   <a href="/csm-docs/v3/troubleshooting/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3troubleshooting"><span class="">Troubleshooting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3license-li">
+  <a href="/csm-docs/v3/license/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3license"><span class="">License</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3release-li">
+  <a href="/csm-docs/v3/release/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3release"><span class="">Release notes</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-csm-docsv3support-li">
   <a href="/csm-docs/v3/support/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3support"><span class="">Support</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsv3references-li">
   <a href="/csm-docs/v3/references/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3references"><span class="">References</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3referencesfaq-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3referencescli-li">
+  <a href="/csm-docs/v3/references/cli/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3referencescli"><span class="">CLI</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsv3referencesfaq-li">
   <a href="/csm-docs/v3/references/faq/" title="CSM FAQ" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3referencesfaq"><span class="">FAQ</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsv3referenceslearn-li">
   <a href="/csm-docs/v3/references/learn/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsv3referenceslearn"><span class="">Learn</span></a>
@@ -512,7 +558,9 @@
     <li><a href="#prerequisites">Prerequisites</a></li>
     <li><a href="#install-the-csm-for-observability-helm-chart">Install the CSM for Observability Helm Chart</a>
       <ul>
-        <li></li>
+        <li><a href="#powerflex">PowerFlex</a></li>
+        <li><a href="#powerstore">PowerStore</a></li>
+        <li><a href="#powerscale">PowerScale</a></li>
       </ul>
     </li>
     <li><a href="#configuration">Configuration</a></li>
@@ -588,7 +636,7 @@
 </li>
 <li>
 <p>Copy only the deployed CSI driver entities to the Observability namespace</p>
-<h4 id="powerflex">PowerFlex</h4>
+<h3 id="powerflex">PowerFlex</h3>
 <ol>
 <li>
 <p>Copy the config Secret from the CSI PowerFlex namespace into the CSM for Observability namespace:</p>
@@ -606,11 +654,29 @@
 <p><code>kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -</code></p>
 </li>
 </ol>
-<h4 id="powerstore">PowerStore</h4>
+<h3 id="powerstore">PowerStore</h3>
 <ol>
 <li>
 <p>Copy the config Secret from the CSI PowerStore namespace into the CSM for Observability namespace:</p>
 <p><code>kubectl get secret powerstore-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -</code></p>
+</li>
+</ol>
+<h3 id="powerscale">PowerScale</h3>
+<ol>
+<li>
+<p>Copy the config Secret from the CSI PowerScale namespace into the CSM for Observability namespace:</p>
+<p><code>kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -</code></p>
+</li>
+</ol>
+<p>If <a href="../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization">CSM for Authorization is enabled</a> for CSI PowerScale, perform these steps:</p>
+<ol start="2">
+<li>
+<p>Copy the driver configuration parameters ConfigMap from the CSI PowerScale namespace into the CSM for Observability namespace:</p>
+<p><code>kubectl get configmap isilon-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -</code></p>
+</li>
+<li>
+<p>Copy the <code>karavi-authorization-config</code>, <code>proxy-server-root-certificate</code>, <code>proxy-authz-tokens</code> Secret from the CSI PowerScale namespace into the CSM for Observability namespace:</p>
+<p><code>kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | sed 's/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f -</code></p>
 </li>
 </ol>
 </li>
@@ -621,6 +687,7 @@
 <ul>
 <li>The default <code>values.yaml</code> is configured to deploy the CSM for Observability Topology service on install.</li>
 <li>If CSM for Authorization is enabled for CSI PowerFlex, the <code>karaviMetricsPowerflex.authorization</code> parameters must be properly configured in your values file for CSM Observability.</li>
+<li>If CSM for Authorization is enabled for CSI PowerScale, the <code>karaviMetricsPowerscale.authorization</code> parameters must be properly configured in your values file for CSM Observability.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#8f5902">$</span> helm install karavi-observability dell/karavi-observability -n <span style="color:#ce5c00;font-weight:bold">[</span>CSM_NAMESPACE<span style="color:#ce5c00;font-weight:bold">]</span> -f myvalues.yaml
 </span></span></code></pre></div><p>Alternatively, you can specify each parameter using the &lsquo;&ndash;set key=value[,key=value]&rsquo; and/or &lsquo;&ndash;set-file key=value[,key=value] arguments to &lsquo;helm install&rsquo;. For example:</p>
@@ -813,7 +880,7 @@
 <td><code>10</code></td>
 </tr>
 <tr>
-<td><code>karaviMetricsPowerstore.concurrentPowerflexQueries</code></td>
+<td><code>karaviMetricsPowerstore.concurrentPowerstoreQueries</code></td>
 <td>The number of simultaneous metrics queries to make to PowerStore (must be less than 10; otherwise, several request errors from PowerStore will ensue.)</td>
 <td><code>10</code></td>
 </tr>
@@ -856,6 +923,106 @@
 <td><code>karaviMetricsPowerstore.zipkin.probability</code></td>
 <td>Percentage of trace information to send to Zipkin (Valid range: 0.0 to 1.0)</td>
 <td><code>0</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.image</code></td>
+<td>CSM Metrics for PowerScale Service image</td>
+<td><code>dellemc/csm-metrics-powerscale:v1.0</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.enabled</code></td>
+<td>Enable CSM Metrics for PowerScale service</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.collectorAddr</code></td>
+<td>Metrics Collector accessible from the Kubernetes cluster</td>
+<td><code>otel-collector:55680</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.provisionerNames</code></td>
+<td>Provisioner Names used to filter for determining PowerScale volumes (must be a Comma-separated list)</td>
+<td><code>csi-isilon.dellemc.com</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.capacityMetricsEnabled</code></td>
+<td>Enable PowerScale capacity metric Collection</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.performanceMetricsEnabled</code></td>
+<td>Enable PowerScale performance metric Collection</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.clusterCapacityPollFrequencySeconds</code></td>
+<td>The polling frequency (in seconds) to gather cluster capacity metrics</td>
+<td><code>30</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.clusterPerformancePollFrequencySeconds</code></td>
+<td>The polling frequency (in seconds) to gather cluster performance metrics</td>
+<td><code>20</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.quotaCapacityPollFrequencySeconds</code></td>
+<td>The polling frequency (in seconds) to gather volume capacity metrics</td>
+<td><code>30</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.concurrentPowerscaleQueries</code></td>
+<td>The number of simultaneous metrics queries to make to PowerScale(MUST be less than 10; otherwise, several request errors from PowerScale will ensue.</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.endpoint</code></td>
+<td>Endpoint for pod leader election</td>
+<td><code>karavi-metrics-powerscale</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.service.type</code></td>
+<td>Kubernetes service type</td>
+<td><code>ClusterIP</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.logLevel</code></td>
+<td>Output logs that are at or above the given log level severity (Valid values: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, PANIC)</td>
+<td><code>INFO</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.logFormat</code></td>
+<td>Output logs in the specified format (Valid values: text, json)</td>
+<td><code>text</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.isiClientOptions.isiSkipCertificateValidation</code></td>
+<td>Skip OneFS API server&rsquo;s certificates</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.isiClientOptions.isiAuthType</code></td>
+<td>0 to enable session-based Authentication; 1 to enables basic Authentication</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.isiClientOptions.isiLogVerbose</code></td>
+<td>Decide High/Medium/Low content of the OneFS REST API message</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.authorization.enabled</code></td>
+<td><a href="../../../authorization">Authorization</a> is an optional feature to apply credential shielding of the backend PowerScale.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.authorization.proxyHost</code></td>
+<td>Hostname of the csm-authorization server.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>karaviMetricsPowerscale.authorization.skipCertificateValidation</code></td>
+<td>A boolean that enables/disables certificate validation of the csm-authorization server.</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -914,7 +1081,7 @@
 
 
     </div>
-    
+    <script src='/csm-docs/js/prism.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 

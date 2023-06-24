@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.0">
+<meta name="generator" content="Hugo 0.114.1">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-05-17T15:22:30-04:00" />
+<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing the CSI Driver for PowerFlex via Helm
 ">
-<meta itemprop="dateModified" content="2023-05-17T15:22:30-04:00" />
-<meta itemprop="wordCount" content="3169">
+<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
+<meta itemprop="wordCount" content="3170">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Installing the CSI Driver for PowerFlex via Helm
@@ -43,6 +43,7 @@
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/prism.css"/>
 
   </head>
   <body class="td-page">
@@ -83,13 +84,13 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.6.1)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.5.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.4</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v2">v1.5.1</a>
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">1.3.1</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v3">v1.4</a>
 	
 </div>
 
@@ -105,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0e901027293596f42bb03fb739294a01.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.0c494a2be8ae12ba899cdfbcdf0eeb81.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -143,8 +144,13 @@
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-csm-docsdocsdeployment-li">
   <a href="/csm-docs/docs/deployment/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeployment"><span class="">Deployment</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizard-li">
   <a href="/csm-docs/docs/deployment/csminstallationwizard/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsminstallationwizard"><span class="">CSM Installation Wizard</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes-li">
+  <a href="/csm-docs/docs/deployment/csminstallationwizard/release_notes/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsminstallationwizardrelease_notes"><span class="">Release Notes</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperator-li">
   <a href="/csm-docs/docs/deployment/csmoperator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsdeploymentcsmoperator"><span class="">CSM Operator</span></a>
   <ul class="ul-3 foldable">
@@ -153,10 +159,14 @@
   <ul class="ul-4 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerflex/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerflex"><span class="">PowerFlex</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/powermax/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowermax"><span class="">PowerMax</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerscale/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerscale"><span class="">PowerScale</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore-li">
   <a href="/csm-docs/docs/deployment/csmoperator/drivers/powerstore/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriverspowerstore"><span class="">PowerStore</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatordriversunity-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/drivers/unity/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatordriversunity"><span class="">Unity XT</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodules-li">
@@ -168,6 +178,8 @@
   <a href="/csm-docs/docs/deployment/csmoperator/modules/observability/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesobservability"><span class="">Observability</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication-li">
   <a href="/csm-docs/docs/deployment/csmoperator/modules/replication/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesreplication"><span class="">Replication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency-li">
+  <a href="/csm-docs/docs/deployment/csmoperator/modules/resiliency/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-csm-docsdocsdeploymentcsmoperatormodulesresiliency"><span class="">Resiliency</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsdeploymentcsmoperatortroubleshooting-li">
@@ -358,6 +370,8 @@
   <a href="/csm-docs/docs/authorization/deployment/rpm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentrpm"><span class="">RPM</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymenthelm-li">
   <a href="/csm-docs/docs/authorization/deployment/helm/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymenthelm"><span class="">Helm</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationdeploymentoperator-li">
+  <a href="/csm-docs/docs/authorization/deployment/operator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-csm-docsdocsauthorizationdeploymentoperator"><span class="">Operator</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id="m-csm-docsdocsauthorizationuninstallation-li">
@@ -695,8 +709,9 @@
 <h3 id="install-helm-30">Install Helm 3.0</h3>
 <p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerFlex.</p>
 <p><strong>Steps</strong></p>
-<p>Run the <code>curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash</code> command to install Helm 3.0.</p>
-<h3 id="enable-zero-padding-on-powerflex">Enable Zero Padding on PowerFlex</h3>
+<p>Run the command to install Helm 3.0.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 <span style="color:#000;font-weight:bold">|</span> bash
+</span></span></code></pre></div><h3 id="enable-zero-padding-on-powerflex">Enable Zero Padding on PowerFlex</h3>
 <p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html">Dell PowerFlex documentation</a>.</p>
 <h3 id="install-powerflex-storage-data-client">Install PowerFlex Storage Data Client</h3>
 <p>The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
@@ -727,7 +742,7 @@ Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.6.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.7.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>A namespace for the driver is expected prior to running the command below. If one is not created already, you can run <code>kubectl create namespace vxflexos</code> to create a new one.
@@ -810,12 +825,12 @@ Note that the namespace can be any user-defined name that follows the convention
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mdm</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.0.0.3,10.0.0.4&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p><em>NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.</em></p>
 <p>After editing the file, run the below command to create a secret called <code>vxflexos-config</code>. This assumes <code>vxflexos</code> is release name, but it can be modified during <a href="/#install-the-driver">install</a>:</p>
-<pre><code>`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml`
-</code></pre>
-<p>Use the below command to replace or update the secret:</p>
-<pre><code>`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=samples/secret.yaml -o yaml --dry-run=client | kubectl replace -f -`
-</code></pre>
-<p><em>NOTE:</em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>samples/secret.yaml
+</span></span></code></pre></div><p>Use the below command to replace or update the secret:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create secret generic vxflexos-config -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">config</span><span style="color:#ce5c00;font-weight:bold">=</span>samples/secret.yaml -o yaml --dry-run<span style="color:#ce5c00;font-weight:bold">=</span>client <span style="color:#000;font-weight:bold">|</span> kubectl replace -f -
+</span></span></code></pre></div><p><em>NOTE:</em></p>
 <ul>
 <li>The user needs to validate the YAML syntax and array-related key/values while replacing the vxflexos-creds secret.</li>
 <li>If you want to create a new array or update the MDM values in the secret, you will need to reinstall the driver. If you change other details, such as login information, the secret will dynamically update &ndash; see <a href="../../../features/powerflex#dynamic-array-configuration">dynamic-array-configuration</a> for more details.</li>
@@ -823,7 +838,7 @@ Note that the namespace can be any user-defined name that follows the convention
 <li>&ldquo;insecure&rdquo; parameter has been changed to &ldquo;skipCertificateValidation&rdquo; as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of &ldquo;insecure&rdquo; or &ldquo;skipCertificateValidation&rdquo; for now. The driver would return an error if both parameters are used.</li>
 <li>Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the <a href="../../../features/powerflex#dynamic-logging-configuration">Dynamic Logging Configuration</a> section in Features for more information.</li>
 <li>If the user is using complex K8s version like &ldquo;v1.21.3-mirantis-1&rdquo;, use this kubeVersion check in helm/csi-unity/Chart.yaml file.
-kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.27.0-0&rdquo;</li>
+kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.28.0-0&rdquo;</li>
 </ul>
 <ol start="5">
 <li>
@@ -836,8 +851,9 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.27.0-0&rdquo;</li>
 </ul>
 </li>
 <li>
-<p>Copy the default values.yaml file <code>cd helm &amp;&amp; cp csi-vxflexos/values.yaml myvalues.yaml</code></p>
-</li>
+<p>Copy the default values.yaml file</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> helm <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> cp csi-vxflexos/values.yaml myvalues.yaml
+</span></span></code></pre></div></li>
 <li>
 <p>If you are using a custom image, check the <code>version</code> and <code>driverRepository</code> fields in <code>myvalues.yaml</code> to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: <code>&lt;driverRepository&gt;/csi-vxflexos:v&lt;version&gt;</code></p>
 </li>
@@ -859,7 +875,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.27.0-0&rdquo;</li>
 <td>version</td>
 <td>Set to verify the values file version matches driver version and used to pull the image as part of the image name.</td>
 <td>Yes</td>
-<td>2.6.0</td>
+<td>2.7.0</td>
 </tr>
 <tr>
 <td>driverRepository</td>
@@ -893,7 +909,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.27.0-0&rdquo;</li>
 </tr>
 <tr>
 <td>kubeletConfigDir</td>
-<td>kubelet config directory path. Ensure that the config.yaml file is present at this path.</td>
+<td>kubelet config directory path. Ensure that the secret.yaml file is present at this path.</td>
 <td>Yes</td>
 <td>/var/lib/kubelet</td>
 </tr>
@@ -1127,7 +1143,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.27.0-0&rdquo;</li>
 </tr>
 <tr>
 <td>skipCertificateValidation</td>
-<td>A boolean that enables/disables certificate validation of the csm-authorization server.</td>
+<td>A boolean that enables/disables certificate validation of the csm-authorization proxy server.</td>
 <td>No</td>
 <td>true</td>
 </tr>
@@ -1168,7 +1184,7 @@ The <code>verify.sh</code> script needs the credentials to check if SDC has been
 <p><em>Before you begin</em></p>
 <p>As part of the CSI driver installation, the CSI driver requires a secret with the name vxflexos-certs-0 to vxflexos-certs-n based on the &ldquo;.Values.certSecretCount&rdquo; parameter present in the namespace vxflexos.</p>
 <p>This secret contains the X509 certificates of the CA which signed PowerFlex gateway SSL certificate in PEM format.</p>
-<p>The CSI driver exposes an install parameter in config.yaml, <code>skipCertificateValidation</code>, which determines if the driver performs client-side verification of the gateway certificates.</p>
+<p>The CSI driver exposes an install parameter in secret.yaml, <code>skipCertificateValidation</code>, which determines if the driver performs client-side verification of the gateway certificates.</p>
 <p><code>skipCertificateValidation</code> parameter is set to true by default, and the driver does not verify the gateway certificates.</p>
 <p>If <code>skipCertificateValidation</code> is set to false, then the secret vxflexos-certs-n must contain the CA certificate for the array gateway.</p>
 <p>If this secret is an empty secret, then the validation of the certificate fails, and the driver fails to start.</p>
@@ -1176,18 +1192,20 @@ The <code>verify.sh</code> script needs the credentials to check if SDC has been
 <ol>
 <li>
 <p>To fetch the certificate, run the following command.</p>
-<pre><code>  `openssl s_client -showcerts -connect &lt;Gateway IP:Port&gt; &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; ca_cert_0.pem`
-</code></pre>
-<p>Example: openssl s_client -showcerts -connect 1.1.1.1:443 &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; ca_cert_0.pem</p>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>openssl s_client -showcerts -connect &lt;Gateway IP:Port&gt; &lt;/dev/null 2&gt;/dev/null <span style="color:#000;font-weight:bold">|</span> openssl x509 -outform PEM &gt; ca_cert_0.pem
+</span></span></code></pre></div><p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>openssl s_client -showcerts -connect 1.1.1.1:443 &lt;/dev/null 2&gt;/dev/null <span style="color:#000;font-weight:bold">|</span> openssl x509 -outform PEM &gt; ca_cert_0.pem
+</span></span></code></pre></div></li>
 <li>
 <p>Run the following command to create the cert secret with index &lsquo;0&rsquo;:</p>
-<pre><code>  `kubectl create secret generic vxflexos-certs-0 --from-file=cert-0=ca_cert_0.pem -n vxflexos`
-</code></pre>
-<p>Use the following command to replace the secret:</p>
-<pre><code>   `kubectl create secret generic vxflexos-certs-0 -n vxflexos --from-file=cert-0=ca_cert_0.pem -o yaml --dry-run | kubectl replace -f -` 
-</code></pre>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create secret generic vxflexos-certs-0 --from-file<span style="color:#ce5c00;font-weight:bold">=</span>cert-0<span style="color:#ce5c00;font-weight:bold">=</span>ca_cert_0.pem -n vxflexos
+</span></span></code></pre></div><p>Use the following command to replace the secret:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create secret generic vxflexos-certs-0 -n vxflexos --from-file<span style="color:#ce5c00;font-weight:bold">=</span>cert-0<span style="color:#ce5c00;font-weight:bold">=</span>ca_cert_0.pem -o yaml --dry-run <span style="color:#000;font-weight:bold">|</span> kubectl replace -f -
+</span></span></code></pre></div></li>
 <li>
 <p>Repeat step 1 and 2 to create multiple cert secrets with incremental index (example: vxflexos-certs-1, vxflexos-certs-2, etc)</p>
 </li>
@@ -1280,7 +1298,7 @@ Deleting a storage class has no impact on a running Pod with mounted PVCs. You c
 
 
     </div>
-    
+    <script src='/csm-docs/js/prism.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 

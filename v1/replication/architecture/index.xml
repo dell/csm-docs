@@ -1,0 +1,78 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – Architecture</title>
+    <link>https://dell.github.io/csm-docs/v1/replication/architecture/</link>
+    <description>Recent content in Architecture on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v1/replication/architecture/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1: PowerScale</title>
+      <link>https://dell.github.io/csm-docs/v1/replication/architecture/powerscale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/replication/architecture/powerscale/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;synciq-policy-architecture&#34;&gt;SyncIQ Policy Architecture&lt;/h3&gt;
+&lt;p&gt;When creating &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; (RG) objects on the Kubernetes cluster(s) used for replication, a SyncIQ policy to facilitate this replication is created &lt;em&gt;only&lt;/em&gt; on the source PowerScale storage array.&lt;/p&gt;
+&lt;p&gt;This singular SyncIQ policy on the source storage array and its matching Local Target policy on the target storage array provide information for the RGs to determine their status. Upon creation, the SyncIQ policy is set to a schedule of &lt;code&gt;When source is modified&lt;/code&gt;. The SyncIQ policy is &lt;code&gt;Enabled&lt;/code&gt; when the RG is created. The directory that is being replicated is &lt;em&gt;read-write accessible&lt;/em&gt; on the source storage array, and is restricted to &lt;em&gt;read-only&lt;/em&gt; on the target.&lt;/p&gt;
+&lt;h3 id=&#34;replication-group-deletion&#34;&gt;Replication Group Deletion&lt;/h3&gt;
+&lt;p&gt;When deleting &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; (RG) objects on the Kubernetes cluster(s) used for replication, deletion should only be performed on an empty RG. If there is any user-created or Kubernetes PV-generated data left inside of the replication group, the RG object will be held in a &lt;code&gt;Deleting&lt;/code&gt; state until all user data has been cleared out on &lt;strong&gt;both&lt;/strong&gt; source and target storage arrays.&lt;/p&gt;
+&lt;p&gt;If the RG&amp;rsquo;s folder on both source and target storage arrays is empty and the RG is given a delete command, it will perform a sync, then remove its SyncIQ policy from the source storage array, then delete the RG object on both source and target Kubernetes clusters.&lt;/p&gt;
+&lt;p&gt;If irregular Kubernetes cluster/storage array behavior causes the source and target to fall out-of-sync (ex: one of the sides is down), the RG deletion will become stuck. If forced removal of the RG is necessary, the finalizers can be removed manually to allow for deletion, but data and SyncIQ policies may remain on the storage arrays and require manual deletion. See &lt;a href=&#34;https://www.dell.com/support/kbdoc/en-us/000206294/dell-csm-replication-powerscale-replication-artifacts-remain-after-deletion&#34;&gt;this Knowledge Base Article&lt;/a&gt; for further information on manual deletion.&lt;/p&gt;
+&lt;h3 id=&#34;performing-failoverfailbackreprotect-on-powerscale&#34;&gt;Performing Failover/Failback/Reprotect on PowerScale&lt;/h3&gt;
+&lt;p&gt;Failover, Failback, and Reprotect one-step operations are not natively supported on PowerScale, and are performed as a series of steps in CSM replication. When any of these operations are triggered, through the use of &lt;code&gt;repctl&lt;/code&gt; or by editing the RG, the steps below are performed on the PowerScale storage arrays.&lt;/p&gt;
+&lt;h4 id=&#34;failover---halt-replication-and-allow-writes-on-target&#34;&gt;Failover - Halt Replication and Allow Writes on Target&lt;/h4&gt;
+&lt;p&gt;Steps for performing Failover can be found in the Tools page under &lt;a href=&#34;https://dell.github.io/csm-docs/docs/replication/tools/#executing-actions&#34;&gt;Executing Actions.&lt;/a&gt; There are some PowerScale-specific considerations to keep in mind:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Failover on PowerScale does NOT halt writes on the source side. It is recommended that the storage administrator or end user manually &lt;strong&gt;stop writes&lt;/strong&gt; to ensure no data is lost on the source side in the event of future failback.&lt;/li&gt;
+&lt;li&gt;In the case of unplanned failover, the SyncIQ policy on the source PowerScale array will be left enabled and set to its previously defined &lt;code&gt;When source is modified&lt;/code&gt; sync schedule. Storage admins &lt;strong&gt;must&lt;/strong&gt; manually disable this SyncIQ policy when bringing the failed-over source array back online, or unexpected behavior may occur.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The below steps are performed by CSM replication to perform a failover.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Syncing data from source to target one final time before transition. &lt;em&gt;(planned failover only)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Disabling the SyncIQ policy on the source PowerScale storage array. &lt;em&gt;(planned failover only)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Enabling writes on the target PowerScale array&amp;rsquo;s Local Target policy.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;failback---discard-target&#34;&gt;Failback - Discard Target&lt;/h4&gt;
+&lt;p&gt;Performing failback and discarding changes made to the target is to simply resume synchronization from the source. The steps CSM replication is following to perform this operation are as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Editing the SyncIQ policy on the source PowerScale array&amp;rsquo;s schedule from &lt;code&gt;When source is modified&lt;/code&gt; to &lt;code&gt;Manual&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Performing &lt;code&gt;Actions &amp;gt; Disallow writes&lt;/code&gt; on the target PowerScale array&amp;rsquo;s Local Target policy that matches the SyncIQ policy undergoing failback.&lt;/li&gt;
+&lt;li&gt;Editing the SyncIQ policy&amp;rsquo;s schedule from &lt;code&gt;Manual&lt;/code&gt; to &lt;code&gt;When source is modified&lt;/code&gt; and setting the time delay for synchronization as appropriate.&lt;/li&gt;
+&lt;li&gt;Enabling the source PowerScale array&amp;rsquo;s SyncIQ policy.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;failback---discard-source&#34;&gt;Failback - Discard Source&lt;/h4&gt;
+&lt;p&gt;Information on the methodology for performing a failback while taking changes made to the original target can be found in relevant PowerScale SyncIQ documentation. The steps CSM replication is following to perform this operation are as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Editing the SyncIQ policy on the source PowerScale array&amp;rsquo;s schedule from &lt;code&gt;When source is modified&lt;/code&gt; to &lt;code&gt;Manual&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Enabling the SyncIQ policy that is undergoing failback, if it isn&amp;rsquo;t already enabled.&lt;/li&gt;
+&lt;li&gt;Performing the &lt;code&gt;Resync-prep&lt;/code&gt; action on the SyncIQ policy. This will create a new SyncIQ policy on the target PowerScale array, matching the original SyncIQ policy with an appended &lt;em&gt;_mirror&lt;/em&gt; to its name.&lt;/li&gt;
+&lt;li&gt;Starting a synchronization job on the target PowerScale array&amp;rsquo;s newly created &lt;em&gt;_mirror&lt;/em&gt; policy.&lt;/li&gt;
+&lt;li&gt;Running the &lt;code&gt;Allow writes&lt;/code&gt; operation on the Local Target on the source PowerScale array that was created by the &lt;em&gt;_mirror&lt;/em&gt; policy.&lt;/li&gt;
+&lt;li&gt;Performing the &lt;code&gt;Resync-prep&lt;/code&gt; action on the target PowerScale array&amp;rsquo;s &lt;em&gt;_mirror&lt;/em&gt; policy.&lt;/li&gt;
+&lt;li&gt;Deleting the &lt;em&gt;_mirror&lt;/em&gt; SyncIQ policy.&lt;/li&gt;
+&lt;li&gt;Editing the SyncIQ policy on the source PowerScale array&amp;rsquo;s schedule from &lt;code&gt;Manual&lt;/code&gt; to &lt;code&gt;When source is modified&lt;/code&gt; and setting the time delay for synchronization as appropriate.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;reprotect---set-original-target-as-new-source&#34;&gt;Reprotect - Set Original Target as New Source&lt;/h4&gt;
+&lt;p&gt;A reprotect operation is, in essence, doing away with the original source-target relationship and establishing a new one in the reverse direction. This is done &lt;strong&gt;only after&lt;/strong&gt; failing over to the original target array is complete, and the original source array is up and ready to be made into a new replication destination. To accomplish this, CSM replication performs the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Deleting the SyncIQ policy on the original source PowerScale array.&lt;/li&gt;
+&lt;li&gt;Creating a new SyncIQ policy on the original target PowerScale array. This policy establishes the original target as a new &lt;em&gt;source&lt;/em&gt;, and sets its replication destination to the original source (which can be considered the new &lt;em&gt;target&lt;/em&gt;.)&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

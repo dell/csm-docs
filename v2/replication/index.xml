@@ -320,7 +320,7 @@ c. Execute &amp;quot;reprotect&amp;quot; action on selected ReplicationGroup whi
       <description>
         
         
-        &lt;p&gt;One of the goals of high availability is to eliminate single points of failure in a storage system. In Kubernetes, this can mean that a single PV represents multiple read/write enabled volumes on different arrays, located at reasonable distances with both the volumes in sync with each other. If one of the volumes goes down, there will still be another volume available for read and write. This kind of high availability can be achieved by using SRDF Metro replication mode supported only by Powermax arrays.&lt;/p&gt;
+        &lt;p&gt;One of the goals of high availability is to eliminate single points of failure in a storage system. In Kubernetes, this can mean that a single PV represents multiple read/write enabled volumes on different arrays, located at reasonable distances with both the volumes in sync with each other. If one of the volumes goes down, there will still be another volume available for read and write. This kind of high availability can be achieved by using SRDF Metro replication mode supported only by PowerMax arrays.&lt;/p&gt;
 &lt;h2 id=&#34;srdf-metro-architecture&#34;&gt;SRDF Metro Architecture&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;../metro.png&#34; alt=&#34;metro architecture diagram&#34;&gt;&lt;/p&gt;
 &lt;p&gt;In SRDF metro configurations:&lt;/p&gt;
@@ -575,7 +575,7 @@ There are certain pre-requisites that have to be fulfilled before any action can
 &lt;td&gt;REPROTECT_LOCAL&lt;br&gt;REPROTECT_REMOTE&lt;/td&gt;
 &lt;td&gt;symrdf resume/est&lt;/td&gt;
 &lt;td&gt;REPROTECT&lt;/td&gt;
-&lt;td&gt;enable local policy, disallow_writes on remote&lt;/td&gt;
+&lt;td&gt;Not supported&lt;/td&gt;
 &lt;td&gt;REPROTECT&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -583,7 +583,7 @@ There are certain pre-requisites that have to be fulfilled before any action can
 &lt;td&gt;UNPLANNED_FAILOVER_LOCAL&lt;br&gt;UNPLANNED_FAILOVER_REMOTE&lt;/td&gt;
 &lt;td&gt;symrdf failover -force&lt;/td&gt;
 &lt;td&gt;FAILOVER (at target site)&lt;/td&gt;
-&lt;td&gt;break association on target&lt;/td&gt;
+&lt;td&gt;allow_writes on target&lt;/td&gt;
 &lt;td&gt;FAILOVER (at target site)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -871,20 +871,13 @@ Name of StorageClass resource that created as &amp;ldquo;target&amp;rdquo; will 
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-replication-130&#34;&gt;Release Notes - CSM Replication 1.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-replication-131&#34;&gt;Release Notes - CSM Replication 1.3.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Added support for Kubernetes 1.24&lt;/li&gt;
-&lt;li&gt;Added support for OpenShift 4.10&lt;/li&gt;
-&lt;li&gt;Added volume upgrade/downgrade functionality for replication volumes&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;There are no new features in this release.&lt;/p&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Fixed panic occuring when encountering PVC with empty StorageClass&lt;/li&gt;
-&lt;li&gt;PV and RG retention policy checks are no longer case sensitive&lt;/li&gt;
-&lt;li&gt;RG will now display EMPTY link state when no PV found&lt;/li&gt;
-&lt;li&gt;[&lt;code&gt;PowerScale&lt;/code&gt;] Running &lt;code&gt;reprotect&lt;/code&gt; action on source cluster after failover no longer puts RG into UNKNOWN state&lt;/li&gt;
-&lt;li&gt;[&lt;code&gt;PowerScale&lt;/code&gt;] Deleting RG will break replication link before trying to delete group on array&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/514&#34;&gt;PowerScale Replication - Replicated PV has the wrong AzServiceIP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/463&#34;&gt;&amp;ldquo;repctl cluster inject &amp;ndash;use-sa&amp;rdquo; doesn&amp;rsquo;t work for Kubernetes 1.24 and above&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -896,16 +889,8 @@ Name of StorageClass resource that created as &amp;ldquo;target&amp;rdquo; will 
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/514&#34;&gt;514&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; When creating a replicated PV in PowerScale, the replicated PV&amp;rsquo;s AzServiceIP property has the target PowerScale endpoint instead of the one defined in the target Storage class.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/515&#34;&gt;515&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; If you failover with an application still running and the volume mounted on the target site, then we cannot mount the PVC due to : &amp;ldquo;mount.nfs: Stale file handle&amp;rdquo;.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/518&#34;&gt;518&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; On CSM for Replication with PowerScale, after a repctl failover to a target cluster, the source directory has been removed from the PowerScale. The PersistentVolume Object is still present in Kubernetes.&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/523&#34;&gt;523&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; Artifacts are not properly cleaned after deletion.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/753&#34;&gt;753&lt;/a&gt;&lt;/td&gt;

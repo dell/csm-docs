@@ -244,7 +244,7 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;h2 id=&#34;consuming-existing-volumes-with-static-provisioning&#34;&gt;Consuming existing volumes with static provisioning&lt;/h2&gt;
 &lt;p&gt;Use this procedure to consume existing volumes with static provisioning.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Open your Unisphere for Powermax, and take a note of volume-id.&lt;/li&gt;
+&lt;li&gt;Open your Unisphere for PowerMax, and take a note of volume-id.&lt;/li&gt;
 &lt;li&gt;Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.&lt;/li&gt;
 &lt;li&gt;In the following example, storage class is assumed as &amp;lsquo;powermax&amp;rsquo;, cluster prefix as &amp;lsquo;ABC&amp;rsquo; and volume&amp;rsquo;s internal name as &amp;lsquo;00001&amp;rsquo;, array ID as &amp;lsquo;000000000001&amp;rsquo;, volume ID as &amp;lsquo;1abc23456&amp;rsquo;. The volume-handle should be in the format of &lt;code&gt;csi&lt;/code&gt;-&lt;code&gt;clusterPrefix&lt;/code&gt;-&lt;code&gt;volumeNamePrefix&lt;/code&gt;-&lt;code&gt;id&lt;/code&gt;-&lt;code&gt;arrayID&lt;/code&gt;-&lt;code&gt;volumeID&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
