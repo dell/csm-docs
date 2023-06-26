@@ -70,6 +70,7 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/743&#34;&gt;K8 1.27 support added.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/743&#34;&gt;OCP 4.12 support added&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/739&#34;&gt;CSM Operator: Support install of Resiliency module&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
@@ -185,6 +186,7 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/761&#34;&gt;Added support for Kubernetes 1.27&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/571&#34;&gt;Added support for OpenShift 4.12&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/744&#34;&gt;Migrated image registry from k8s.gcr.io to registry.k8s.io&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/739&#34;&gt;CSM Operator: Support install of Resiliency module&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
