@@ -13,6 +13,7 @@ description: Release notes for PowerScale CSI driver
 - [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
 - [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
 - [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
+- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
 
 ### Fixed Issues
 

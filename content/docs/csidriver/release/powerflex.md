@@ -8,6 +8,7 @@ description: Release notes for PowerFlex CSI driver
 ### New Features/Changes
 - [K8 1.27 support added.](https://github.com/dell/csm/issues/743)
 - [OCP 4.12 support added](https://github.com/dell/csm/issues/743)
+- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
 
 ### Fixed Issues
 - [Fix the offline helm installation failure](https://github.com/dell/csm/issues/868)
