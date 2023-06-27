@@ -310,7 +310,7 @@ replicas: 2
 
 For more details about configuring Controller HA using the Dell CSI Operator, refer to the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).
 
-## Ephemeral Inline Volume
+## CSI Ephemeral Inline Volume
 
 The CSI PowerScale driver version 1.4.0 and later supports CSI ephemeral inline volumes.
 
@@ -347,6 +347,7 @@ This manifest creates a pod in a given cluster and attaches a newly created ephe
 **Note**: Storage class is not supported in CSI ephemeral inline volumes and all parameters are driver specific.
 CSI ephemeral volumes allow users to provide volumeAttributes directly to the CSI driver as part of the Pod spec.
 Following `volumeAttributes` are supported: size, ClusterName, AccessZone, IsiPath, IsiVolumePathPermissions, AzServiceIP.
+For reference, check the description of parameters in the following example: <https://github.com/dell/csi-powerscale/blob/main/samples/storageclass/isilon.yaml>
 
 ## Topology
 
