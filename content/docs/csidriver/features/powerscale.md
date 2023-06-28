@@ -346,7 +346,7 @@ This manifest creates a pod in a given cluster and attaches a newly created ephe
 
 **Note**: Storage class is not supported in CSI ephemeral inline volumes and all parameters are driver specific.
 CSI ephemeral volumes allow users to provide volumeAttributes directly to the CSI driver as part of the Pod spec.
-Following `volumeAttributes` are supported: size, ClusterName, AccessZone, IsiPath, IsiVolumePathPermissions, AzServiceIP.
+These `volumeAttributes` are supported: size, ClusterName, AccessZone, IsiPath, IsiVolumePathPermissions, AzServiceIP.
 For reference, check the description of parameters in the following example: [isilon.yaml](https://github.com/dell/csi-powerscale/blob/main/samples/storageclass/isilon.yaml)
 
 ## Topology
@@ -449,9 +449,9 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 
 ## Node selector in helm template
 
-Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world.)For more information, refer to https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector
+Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world).For more information, refer to <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector>
 
-Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations for more information.
+Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to <https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations> for more information.
 
 ## Usage of SmartQuotas to Limit Storage Consumption
 

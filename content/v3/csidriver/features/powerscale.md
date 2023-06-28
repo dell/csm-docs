@@ -345,7 +345,7 @@ This manifest creates a pod in a given cluster and attaches a newly created ephe
 
 **Note**: Storage class is not supported in CSI ephemeral inline volumes and all parameters are driver specific.
 CSI ephemeral volumes allow users to provide volumeAttributes directly to the CSI driver as part of the Pod spec.
-Following `volumeAttributes` are supported: size, ClusterName, AccessZone, IsiPath, IsiVolumePathPermissions, AzServiceIP.
+These `volumeAttributes` are supported: size, ClusterName, AccessZone, IsiPath, IsiVolumePathPermissions, AzServiceIP.
 For reference, check the description of parameters in the following example: [isilon.yaml](https://github.com/dell/csi-powerscale/blob/main/samples/storageclass/isilon.yaml)
 
 ## Topology
@@ -353,7 +353,7 @@ For reference, check the description of parameters in the following example: [is
 ### Topology Support
 
 CSI PowerScale driver version 1.4.0 and later supports Topology by default which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This results in nodes which have access to PowerScale Array being appropriately labeled. The driver leverages these labels to ensure that the driver components (controller, node) are spawned only on nodes wherein these labels exist.
-  
+
 This covers use cases where:
 
 The CSI PowerScale driver may not be installed or running on some nodes where Users have chosen to restrict the nodes on accessing the PowerScale storage array.
@@ -448,9 +448,9 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 
 ## Node selector in helm template
 
-Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world.)For more information, refer to https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector
+Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world).For more information, refer to <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector>
   
-Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations for more information.  
+Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to <https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations> for more information.  
 
 ## Usage of SmartQuotas to Limit Storage Consumption
 
