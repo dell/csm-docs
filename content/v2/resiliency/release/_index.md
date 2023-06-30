@@ -13,6 +13,6 @@ Description: >
 
 ### Fixed Issues
 
-- Documentation improvement to identify all requirements when building the service and running unit tests for CSM Authorization and CSM Resiliency repository (https://github.com/dell/karavi-resiliency/pull/131).
+- Documentation improvement to identify all requirements when building the service and running unit tests for CSM Authorization and CSM Resiliency repository. [#131](https://github.com/dell/karavi-resiliency/pull/131).
 
 ### Known Issues
