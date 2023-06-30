@@ -36,7 +36,7 @@ Prerequisites can be found on the respective module deployment pages:
 - [Dell Container Storage Module for Replication Deployment](../replication/deployment/installation/#before-you-begin)
 
 Prerequisites for deploying the Dell CSI drivers can be found here:
-- [Dell CSI Drivers Deployment](../csidriver/installation/)
+- [Dell CSI Drivers Deployment](../../csidriver/installation/)
 
 ### How do I uninstall or disable a module?
 - [Dell Container Storage Module for Authorization](../../authorization/uninstallation.md)
@@ -44,7 +44,7 @@ Prerequisites for deploying the Dell CSI drivers can be found here:
 - [Dell Container Storage Module for Resiliency](../../resiliency/uninstallation.md)
 
 ### How do I troubleshoot Container Storage Modules?
-- [Dell CSI Drivers](../csidriver/troubleshooting/)
+- [Dell CSI Drivers](../../csidriver/troubleshooting/)
 - [Dell Container Storage Module for Authorization](../../authorization/troubleshooting.md)
 - [Dell Container Storage Module for Observability](../observability/troubleshooting/)
 - [Dell Container Storage Module for Replication](../replication/troubleshooting/)
@@ -63,7 +63,7 @@ The supported Kubernetes distributions for Container Storage Modules are documen
 - [Dell Container Storage Module for Replication](../replication/#supported-operating-systemscontainer-orchestrator-platforms)
 - [Dell Container Storage Module for Resiliency](../../resiliency/_index.md#supported-operating-systemscontainer-orchestrator-platforms)
 
-The supported distros for the Dell CSI Drivers are located [here](../csidriver/#supported-operating-systemscontainer-orchestrator-platforms).
+The supported distros for the Dell CSI Drivers are located [here](../../csidriver/#supported-operating-systemscontainer-orchestrator-platforms).
 
 ### How do I get a list of Container Storage Modules deployed in my cluster with their versions?
 The easiest way to find the module version is to check the image tag for the module. For all the namespaces you can execute the following:
@@ -89,7 +89,7 @@ As of CSM 1.0, the Container Storage Modules are GA and ready for production sys
 ### Is Dell Container Storage Modules (CSM) supported by Dell Technologies?
 Yes!
 
-If you find an issue, please follow our [support process](../support/)
+If you find an issue, please follow our [support process](../../support/)
 
 ### Can I modify a module or contribute to the project?
 Yes!
