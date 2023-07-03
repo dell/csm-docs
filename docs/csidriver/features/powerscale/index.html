@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.114.1">
+<meta name="generator" content="Hugo 0.115.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/features/powerscale/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
+<meta property="article:modified_time" content="2023-07-03T12:12:42+05:30" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Code features for PowerScale Driver">
-<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
-<meta itemprop="wordCount" content="3736">
+<meta itemprop="dateModified" content="2023-07-03T12:12:42+05:30" />
+<meta itemprop="wordCount" content="3795">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Code features for PowerScale Driver"/>
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.610b1193ed0823011d223b2c3504c499.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3cb8cb35240e0f138a454972ee02a74c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.610b1193ed0823011d223b2c3504c499.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3cb8cb35240e0f138a454972ee02a74c.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -616,7 +616,7 @@
     <li><a href="#volume-expansion">Volume Expansion</a></li>
     <li><a href="#volume-cloning-feature">Volume Cloning Feature</a></li>
     <li><a href="#controller-ha">Controller HA</a></li>
-    <li><a href="#ephemeral-inline-volume">Ephemeral Inline Volume</a></li>
+    <li><a href="#csi-ephemeral-inline-volume">CSI Ephemeral Inline Volume</a></li>
     <li><a href="#topology">Topology</a>
       <ul>
         <li><a href="#topology-support">Topology Support</a></li>
@@ -936,14 +936,14 @@ kubectl create command.</p>
 In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing <code>kubernetes leases</code>.</p>
 <p>Additionally by leveraging <code>pod anti-affinity</code>, no two-controller pods are ever scheduled on the same node.</p>
 <p>To increase or decrease the number of controller pods, edit the following value in <code>myvalues.yaml</code> file:</p>
-<pre tabindex="0"><code>controllerCount: 2
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">controllerCount</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><blockquote>
 <p><strong>NOTE:</strong> The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.</p>
 </blockquote>
 <p>If you are using the <code>dell-csi-operator</code>, adjust the following value in your Custom Resource manifest</p>
-<pre tabindex="0"><code>replicas: 2  
-</code></pre><p>For more details about configuring Controller HA using the Dell CSI Operator, refer to the <a href="../../installation/operator/#custom-resource-specification">Dell CSI Operator documentation</a>.</p>
-<h2 id="ephemeral-inline-volume">Ephemeral Inline Volume</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">replicas</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#f8f8f8;text-decoration:underline">  
+</span></span></span></code></pre></div><p>For more details about configuring Controller HA using the Dell CSI Operator, refer to the <a href="../../installation/operator/#custom-resource-specification">Dell CSI Operator documentation</a>.</p>
+<h2 id="csi-ephemeral-inline-volume">CSI Ephemeral Inline Volume</h2>
 <p>The CSI PowerScale driver version 1.4.0 and later supports CSI ephemeral inline volumes.</p>
 <p>This feature serves as use cases for data volumes whose content and lifecycle are tied to a pod. For example, a driver might populate a volume with dynamically created secrets that are specific to the application running in the pod. Such volumes need to be created together with a pod and can be deleted as part of pod termination (ephemeral). They get defined as part of the pod spec (inline).</p>
 <p>At runtime, nested inline volumes follow the lifecycle of their associated pods where the driver handles all phases of volume operations as pods are created and destroyed.</p>
@@ -968,6 +968,10 @@ In case of a failure, one of the standby pods becomes active and takes the posit
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">size</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;2Gi&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">ClusterName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;cluster1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span></code></pre></div><p>This manifest creates a pod in a given cluster and attaches a newly created ephemeral inline CSI volume to it.</p>
+<p><strong>Note</strong>: Storage class is not supported in CSI ephemeral inline volumes and all parameters are driver specific.
+CSI ephemeral volumes allow users to provide volumeAttributes directly to the CSI driver as part of the Pod spec.
+These <code>volumeAttributes</code> are supported: size, ClusterName, AccessZone, IsiPath, IsiVolumePathPermissions, AzServiceIP.
+For reference, check the description of parameters in the following example: <a href="https://github.com/dell/csi-powerscale/blob/main/samples/storageclass/isilon.yaml">isilon.yaml</a></p>
 <h2 id="topology">Topology</h2>
 <h3 id="topology-support">Topology Support</h3>
 <p>CSI PowerScale driver version 1.4.0 and later supports Topology by default which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This results in nodes which have access to PowerScale Array being appropriately labeled. The driver leverages these labels to ensure that the driver components (controller, node) are spawned only on nodes wherein these labels exist.</p>
@@ -1043,7 +1047,7 @@ communication (same IP/fqdn as k8s node) by default.</p>
 <p><strong>NOTE:</strong> <br>The default value of <code>maxIsilonVolumesPerNode</code> is 0. <br>If <code>maxIsilonVolumesPerNode</code> is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to <code>maxIsilonVolumesPerNode</code> attribute is applicable to all the nodes in the cluster for which node label <code>max-isilon-volumes-per-node</code> is not set.</p>
 </blockquote>
 <h2 id="node-selector-in-helm-template">Node selector in helm template</h2>
-<p>Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world.)For more information, refer to <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector">https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector</a></p>
+<p>Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world).For more information, refer to <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector">https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector</a></p>
 <p>Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations">https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations</a> for more information.</p>
 <h2 id="usage-of-smartquotas-to-limit-storage-consumption">Usage of SmartQuotas to Limit Storage Consumption</h2>
 <p>CSI driver for Dell Isilon handles capacity limiting using SmartQuotas feature.</p>
@@ -1164,14 +1168,14 @@ Then values set in quota will be advisory limit = 30, soft limit = 50 and soft g
 <p>As part of driver installation, a ConfigMap with the name <code>isilon-config-params</code> is created, which contains an attribute <code>CSI_LOG_LEVEL</code> which specifies the current log level of CSI driver.</p>
 <p>Users can set the default log level by specifying log level to <code>logLevel</code> attribute in values.yaml during driver installation.</p>
 <p>To change the log level dynamically to a different value user can edit the same values.yaml, and run the following command</p>
-<pre tabindex="0"><code>cd dell-csi-helm-installer
-./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade
-</code></pre><p>Note: here my-isilon-settings.yaml is a values.yaml file which user has used for driver installation.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer
+</span></span><span style="display:flex;"><span>./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade
+</span></span></code></pre></div><p>Note: here my-isilon-settings.yaml is a values.yaml file which user has used for driver installation.</p>
 <h3 id="operator-based-installation">Operator based installation</h3>
 <p>As part of driver installation, a ConfigMap with the name <code>isilon-config-params</code> is created using the manifest located in the sample file. This ConfigMap contains an attribute <code>CSI_LOG_LEVEL</code> which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.</p>
 <p>To update the log level dynamically user has to edit the ConfigMap <code>isilon-config-params</code> and update <code>CSI_LOG_LEVEL</code> to the desired log level.</p>
-<pre tabindex="0"><code>kubectl edit configmap -n isilon isilon-config-params
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit configmap -n isilon isilon-config-params
+</span></span></code></pre></div><blockquote>
 <p>Note: Prior to CSI Driver for PowerScale version 2.0.0, the log level was allowed to be updated dynamically through <code>logLevel</code> attribute in the secret object.</p>
 </blockquote>
 <h2 id="nat-support">NAT Support</h2>
@@ -1185,13 +1189,13 @@ Then values set in quota will be advisory limit = 30, soft limit = 50 and soft g
 <li>Through secrets</li>
 <li>Through storage class</li>
 </ol>
-<pre tabindex="0"><code>  # isiVolumePathPermissions: The permissions for isi volume directory path
-  # This value acts as a default value for isiVolumePathPermissions, if not specified for a cluster config in secret
-  # Allowed values: valid octal mode number
-  # Default value: &#34;0777&#34;
-  # Examples: &#34;0777&#34;, &#34;777&#34;, &#34;0755&#34;
-  isiVolumePathPermissions: &#34;0777&#34;
-</code></pre><p>The permissions present in values.yaml are the default for all cluster config.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># isiVolumePathPermissions: The permissions for isi volume directory path</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># This value acts as a default value for isiVolumePathPermissions, if not specified for a cluster config in secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Allowed values: valid octal mode number</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Default value: &#34;0777&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># Examples: &#34;0777&#34;, &#34;777&#34;, &#34;0755&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">isiVolumePathPermissions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;0777&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>The permissions present in values.yaml are the default for all cluster config.</p>
 <p>If the volume permission is not present in storage class then secrets are considered and if it is not present even in secrets then values.yaml is considered.</p>
 <blockquote>
 <p><strong>Note:</strong> <br>For volume creation from source (volume from snapshot/volume from volume) permissions are inherited from source. <br><br>Create myvalues.yaml/my-isilon-settings.yaml and storage class accordingly.</p>
