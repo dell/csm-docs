@@ -48,7 +48,7 @@
 &lt;li&gt;If using Snapshot feature, satisfy all Volume Snapshot requirements&lt;/li&gt;
 &lt;li&gt;A user must exist on the array with a role &lt;em&gt;&amp;gt;= FrontEndConfigure&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;If enabling CSM for Authorization, please refer to the &lt;a href=&#34;../../../../authorization/deployment/&#34;&gt;Authorization deployment steps&lt;/a&gt; first&lt;/li&gt;
-&lt;li&gt;If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See &lt;a href=&#34;../../../troubleshooting/powerflex.md&#34;&gt;troubleshooting section&lt;/a&gt; for details&lt;/li&gt;
+&lt;li&gt;If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See &lt;a href=&#34;../../../troubleshooting/powerflex&#34;&gt;troubleshooting section&lt;/a&gt; for details&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;install-helm-30&#34;&gt;Install Helm 3.0&lt;/h3&gt;
 &lt;p&gt;Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerFlex.&lt;/p&gt;
