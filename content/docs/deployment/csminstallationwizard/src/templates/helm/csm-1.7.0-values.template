@@ -119,7 +119,7 @@ csi-powermax:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
-    tolerations:
+    tolerations: $NODE_TOLERATIONS
     - key: "node.kubernetes.io/memory-pressure"
       operator: "Exists"
       effect: "NoExecute"
