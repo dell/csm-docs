@@ -24,4 +24,4 @@ To configure all the clusters, follow the steps below:
 
 CSM Operator needs this admin configs instead of the service accounts’ configs  to be able to properly manage the target clusters. The default service account that'll be used is the CSM Operator service account.
 
-2. On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following [prerequisites for deploying PowerScale via Dell CSM Operator](../../../../csidriver/installation/helm/isilon.md/#prerequisite)
+2. On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following [prerequisites for deploying PowerScale via Dell CSM Operator](../../../../csidriver/installation/helm/isilon/#prerequisite)
