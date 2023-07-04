@@ -120,15 +120,15 @@ csi-powermax:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
     tolerations: $NODE_TOLERATIONS
-    - key: "node.kubernetes.io/memory-pressure"
-      operator: "Exists"
-      effect: "NoExecute"
-    - key: "node.kubernetes.io/disk-pressure"
-      operator: "Exists"
-      effect: "NoExecute"
-    - key: "node.kubernetes.io/network-unavailable"
-      operator: "Exists"
-      effect: "NoExecute"
+     - key: "node.kubernetes.io/memory-pressure"
+       operator: "Exists"
+       effect: "NoExecute"
+     - key: "node.kubernetes.io/disk-pressure"
+       operator: "Exists"
+       effect: "NoExecute"
+     - key: "node.kubernetes.io/network-unavailable"
+       operator: "Exists"
+       effect: "NoExecute"
   csireverseproxy:
     image: dellemc/csipowermax-reverseproxy:v2.6.0
     deployAsSidecar: true
