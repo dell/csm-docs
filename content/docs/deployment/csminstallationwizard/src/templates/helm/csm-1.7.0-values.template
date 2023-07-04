@@ -436,7 +436,7 @@ karavi-observability:
   karaviMetricsPowerscale:
     enabled: $POWERSCALE_OBSERVABILITY_METRICS_ENABLED
   cert-manager:
-    enabled: $CERT_MANAGER_ENABLED
+    enabled: $OBSERVABILITY_CERT_MANAGER_ENABLED
 
 ## K8S/Cert-manager ATTRIBUTES
 ##########################################
