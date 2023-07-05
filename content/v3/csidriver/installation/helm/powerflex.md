@@ -29,7 +29,7 @@ The following are requirements that must be met before installing the CSI Driver
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - A user must exist on the array with a role _>= FrontEndConfigure_
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
-- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../troubleshooting/powerflex.md) for details
+- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../troubleshooting/powerflex/) for details
 
 
 ### Install Helm 3.0
