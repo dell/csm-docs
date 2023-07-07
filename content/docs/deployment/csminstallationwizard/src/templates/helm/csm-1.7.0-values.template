@@ -119,16 +119,16 @@ csi-powermax:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
-    tolerations:
-    - key: "node.kubernetes.io/memory-pressure"
-      operator: "Exists"
-      effect: "NoExecute"
-    - key: "node.kubernetes.io/disk-pressure"
-      operator: "Exists"
-      effect: "NoExecute"
-    - key: "node.kubernetes.io/network-unavailable"
-      operator: "Exists"
-      effect: "NoExecute"
+    tolerations: $NODE_TOLERATIONS
+     - key: "node.kubernetes.io/memory-pressure"
+       operator: "Exists"
+       effect: "NoExecute"
+     - key: "node.kubernetes.io/disk-pressure"
+       operator: "Exists"
+       effect: "NoExecute"
+     - key: "node.kubernetes.io/network-unavailable"
+       operator: "Exists"
+       effect: "NoExecute"
   csireverseproxy:
     image: dellemc/csipowermax-reverseproxy:v2.6.0
     deployAsSidecar: true
@@ -143,7 +143,7 @@ csi-powermax:
     enabled: $AUTHORIZATION_ENABLED
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
-    skipCertificateValidation:  $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
+    skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
   vSphere:
     enabled: $VSPHERE_ENABLED
     fcPortGroup: "$VSPHERE_FC_PORT_GROUP"
@@ -228,6 +228,7 @@ csi-vxflexos:
     enabled: $AUTHORIZATION_ENABLED
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
+    skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
 
 ## K8S/CSI-PowerScale ATTRIBUTES
 ##########################################
@@ -269,7 +270,6 @@ csi-isilon:
     tolerations: $CONTROLLER_TOLERATIONS
   node:
     nodeSelector: $NODE_POD_NODE_SELECTOR
-    # Uncomment if nodes you wish to use have the node-role.kubernetes.io/master taint
     tolerations: $NODE_TOLERATIONS
     #  - key: "node.kubernetes.io/memory-pressure"
     #    operator: "Exists"
@@ -304,7 +304,7 @@ csi-isilon:
       enabled: $HEALTH_MONITOR_ENABLED
 
   authorization:
-    enabled: false
+    enabled: $AUTHORIZATION_ENABLED
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
     skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
@@ -436,7 +436,7 @@ karavi-observability:
   karaviMetricsPowerscale:
     enabled: $POWERSCALE_OBSERVABILITY_METRICS_ENABLED
   cert-manager:
-    enabled: $CERT_MANAGER_ENABLED
+    enabled: $OBSERVABILITY_CERT_MANAGER_ENABLED
 
 ## K8S/Cert-manager ATTRIBUTES
 ##########################################
