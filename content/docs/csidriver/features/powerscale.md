@@ -131,6 +131,7 @@ During the installation of CSI PowerScale driver version 2.0 and higher, no defa
 The following are the manifests for the Volume Snapshot Class:
 
 1. VolumeSnapshotClass
+
 ```yaml
 
 apiVersion: snapshot.storage.k8s.io/v1
@@ -242,7 +243,6 @@ spec:
 
 >The Kubernetes Volume Expansion feature can only be used to increase the size of a volume. It cannot be used to shrink a volume.
 
-
 ## Volume Cloning Feature
 
 The CSI PowerScale driver version 1.3 and later supports volume cloning. This allows specifying existing PVCs in the _dataSource_ field to indicate a user would like to clone a Volume.
@@ -295,19 +295,22 @@ In case of a failure, one of the standby pods becomes active and takes the posit
 Additionally by leveraging `pod anti-affinity`, no two-controller pods are ever scheduled on the same node.
 
 To increase or decrease the number of controller pods, edit the following value in `myvalues.yaml` file:
-```
+
+```yaml
 controllerCount: 2
 ```
 
 >**NOTE:** The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.
 
 If you are using the `dell-csi-operator`, adjust the following value in your Custom Resource manifest
-```
+
+```yaml
 replicas: 2  
 ```
+
 For more details about configuring Controller HA using the Dell CSI Operator, refer to the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).
 
-## Ephemeral Inline Volume
+## CSI Ephemeral Inline Volume
 
 The CSI PowerScale driver version 1.4.0 and later supports CSI ephemeral inline volumes.
 
@@ -341,7 +344,13 @@ spec:
 
 This manifest creates a pod in a given cluster and attaches a newly created ephemeral inline CSI volume to it.
 
+**Note**: Storage class is not supported in CSI ephemeral inline volumes and all parameters are driver specific.
+CSI ephemeral volumes allow users to provide volumeAttributes directly to the CSI driver as part of the Pod spec.
+These `volumeAttributes` are supported: size, ClusterName, AccessZone, IsiPath, IsiVolumePathPermissions, AzServiceIP.
+For reference, check the description of parameters in the following example: [isilon.yaml](https://github.com/dell/csi-powerscale/blob/main/samples/storageclass/isilon.yaml)
+
 ## Topology
+
 ### Topology Support
 
 CSI PowerScale driver version 1.4.0 and later supports Topology by default which forces volumes to be placed on worker nodes that have connectivity to the backend storage. This results in nodes which have access to PowerScale Array being appropriately labeled. The driver leverages these labels to ensure that the driver components (controller, node) are spawned only on nodes wherein these labels exist.
@@ -355,7 +364,6 @@ We support CustomTopology which enables users to apply labels for nodes - "csi-i
 When “enableCustomTopology” is set to “true”, the CSI driver fetches custom labels “csi-isilon.dellemc.com/XX.XX.XX.XX=csi-isilon.dellemc.com” applied on worker nodes, and uses them to initialize node pod with custom PowerScale FQDN/IP.
 
 **Note:** Only a single cluster can be configured as part of secret.yaml for custom topology.
-
 
 ### Topology Usage
 
@@ -412,6 +420,7 @@ allowedTopologies:
 # To mount volume with NFSv4, specify mount option vers=4. Make sure NFSv4 is enabled on the Isilon Cluster.
 mountOptions: ["<mountOption1>", "<mountOption2>", ..., "<mountOptionN>"]
 ```
+
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
 ## Support custom networks for NFS I/O traffic
@@ -427,8 +436,8 @@ communication (same IP/fqdn as k8s node) by default.
 For a cluster with multiple network interfaces and if a user wants to segregate k8s traffic from NFS traffic; you can use the `allowedNetworks` option.
 `allowedNetworks` takes CIDR addresses as a parameter to match the IPs to be picked up by the driver to allow and route NFS traffic.
 
-
 ## Volume Limit
+
 The CSI Driver for Dell PowerScale allows users to specify the maximum number of PowerScale volumes that can be used in a node.
 
 The user can set the volume limit for a node by creating a node label `max-isilon-volumes-per-node` and specifying the volume limit for that node.
@@ -440,9 +449,9 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 
 ## Node selector in helm template
 
-Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world.)For more information, refer to https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector
+Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world).For more information, refer to <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector>
 
-Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations for more information.
+Similarly, users can define the tolerations based on various conditions like memory pressure, disk pressure and network availability. Refer to <https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/#taints-and-tolerations> for more information.
 
 ## Usage of SmartQuotas to Limit Storage Consumption
 
@@ -472,6 +481,7 @@ If SmartQuota feature is enabled, user can also set other quota parameters such 
 soft grace period using storage class yaml file or pvc yaml file.
 
 **Storage Class Example with Quota Limit Parameters:**
+
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -533,6 +543,7 @@ parameters:
   RootClientEnabled: "false"
 
 ```
+
 **PVC Example with Quota Limit Parameters:**
 
 ```yaml
@@ -553,7 +564,9 @@ spec:
       storage: 5Gi
   storageClassName: isilon
 ```
+
 Note
+
 - If quota limit values are specified in both storage class yaml and PVC yaml , then values mentioned in PVC yaml will get precedence.
 - If few parameters are specified in storage class yaml and few in PVC yaml , then both will be combined and applied while quota creation
   For Example: If advisory limit = 30 is mentioned in storage class yaml and soft limit = 50  and soft grace period = 86400 are mentioned in PVC yaml .
@@ -564,24 +577,27 @@ Note
 This feature is introduced in CSI Driver for PowerScale version 1.6.0 and updated in version 2.0.0
 
 ### Helm based installation
+
 As part of driver installation, a ConfigMap with the name `isilon-config-params` is created, which contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of CSI driver.
 
 Users can set the default log level by specifying log level to `logLevel` attribute in values.yaml during driver installation.
 
 To change the log level dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml --upgrade
 ```
 
 Note: here my-isilon-settings.yaml is a values.yaml file which user has used for driver installation.
 
-
 ### Operator based installation
+
 As part of driver installation, a ConfigMap with the name `isilon-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `isilon-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
-```
+
+```bash
 kubectl edit configmap -n isilon isilon-config-params
 ```  
 
@@ -596,13 +612,14 @@ CSI Driver for Dell PowerScale is supported in the NAT environment.
 This feature is introduced in CSI Driver for PowerScale version 2.0.0
 
 ### Helm based installation
+
 The permissions for volume directory can now be configured in 3 ways:
 
 1. Through values.yaml
 2. Through secrets
 3. Through storage class
 
-```
+```yaml
   # isiVolumePathPermissions: The permissions for isi volume directory path
   # This value acts as a default value for isiVolumePathPermissions, if not specified for a cluster config in secret
   # Allowed values: valid octal mode number
@@ -623,13 +640,13 @@ In the case of operator-based installation, default permission for powerscale di
 
 Other ways of configuring powerscale volume permissions remain the same as helm-based installation.
 
-
 ## PV/PVC Metrics
 
 CSI Driver for Dell PowerScale 2.1.0 and above supports volume health monitoring. This allows Kubernetes to report on the condition, status and usage of the underlying volumes.
 For example, if a volume were to be deleted from the array, or unmounted outside of Kubernetes, Kubernetes will now report these abnormal conditions as events.
 
 ### This feature can be enabled
+
 1. For controller plugin, by setting attribute `controller.healthMonitor.enabled` to `true` in `values.yaml` file. Also health monitoring interval can be changed through attribute `controller.healthMonitor.interval` in `values.yaml` file.
 2. For node plugin, by setting attribute `node.healthMonitor.enabled` to `true` in `values.yaml` file and by enabling the alpha feature gate `CSIVolumeHealth`.
 
@@ -641,6 +658,7 @@ To use this feature, enable the ReadWriteOncePod feature gate for kube-apiserver
 `--feature-gates="...,ReadWriteOncePod=true"`
 
 ### Creating a PersistentVolumeClaim
+
 ```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
