@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.115.1">
+<meta name="generator" content="Hugo 0.115.2">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,11 +18,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/authorization/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
+<meta property="article:modified_time" content="2023-07-11T10:11:32-04:00" />
 <meta itemprop="name" content="Authorization">
 <meta itemprop="description" content="Installing Authorization via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
+<meta itemprop="dateModified" content="2023-07-11T10:11:32-04:00" />
 <meta itemprop="wordCount" content="1120">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Authorization"/>
@@ -32,8 +32,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.28dfb86e1fa78bdf95ef196b950f0ddfe8d8c336f2a2f21eeb9449b11e7c344b.css" as="style">
-<link href="/csm-docs/scss/main.min.28dfb86e1fa78bdf95ef196b950f0ddfe8d8c336f2a2f21eeb9449b11e7c344b.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.d6268f24d21f31a22b6a61f0826fd9fe19150353c8e51b64ee5cb484384f0dae.css" as="style">
+<link href="/csm-docs/scss/main.min.d6268f24d21f31a22b6a61f0826fd9fe19150353c8e51b64ee5cb484384f0dae.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.90426106a60145c32e0841c79a9cdf5a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.26c4d9692de525032f4e406f8125588f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.90426106a60145c32e0841c79a9cdf5a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.26c4d9692de525032f4e406f8125588f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -909,7 +909,7 @@ To enable reporting of trace data with <a href="https://zipkin.io/">Zipkin</a>, 
 <p>If using your own certificate that is valid for each Ingress hostname, use this command to create the <code>karavi-auth-tls</code> secret:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>kubectl create secret tls karavi-auth-tls -n authorization --key &lt;location-of-private-key-file&gt; --cert &lt;location-of-certificate-file&gt;
-</span></span></code></pre></div><p>If using a self-signed certificate, prepare <code>samples/authorization/certificate_v170.yaml</code> provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/certificatev170.yaml">here</a>. An entry for each hostname specified in the CR must be added under <code>dnsNames</code> for the certificate to be valid for each Ingress.</p>
+</span></span></code></pre></div><p>If using a self-signed certificate, prepare <code>samples/authorization/certificate_v170.yaml</code> provided <a href="https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v170.yaml">here</a>. An entry for each hostname specified in the CR must be added under <code>dnsNames</code> for the certificate to be valid for each Ingress.</p>
 <p>Use this command to create the <code>karavi-auth-tls</code> secret:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f samples/authorization/certificate_v170.yaml
 </span></span></code></pre></div></li>

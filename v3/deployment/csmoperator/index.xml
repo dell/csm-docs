@@ -121,7 +121,7 @@ The steps include:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Deploy the Dell CSM Operator (if it is not already deployed). Please follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Configure any pre-requisite for the desired module(s). See the specific module below for more information&lt;/li&gt;
-&lt;li&gt;Follow the instructions available &lt;a href=&#34;../drivers/powerscale.md/#install-driver&#34;&gt;here&lt;/a&gt;) to install the Dell CSI Driver via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable the desired module(s). There are &lt;a href=&#34;https://github.com/dell/csm-operator/tree/main/samples&#34;&gt;sample manifests&lt;/a&gt; provided which can be edited to do an easy installation of the driver along with the module.&lt;/li&gt;
+&lt;li&gt;Follow the instructions available &lt;a href=&#34;../../../csidriver/installation/operator/isilon/#installing-csi-driver-for-powerscale-via-operator&#34;&gt;here&lt;/a&gt;) to install the Dell CSI Driver via the CSM Operator. The module section in the ContainerStorageModule CR should be updated to enable the desired module(s). There are &lt;a href=&#34;https://github.com/dell/csm-operator/tree/main/samples&#34;&gt;sample manifests&lt;/a&gt; provided which can be edited to do an easy installation of the driver along with the module.&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>

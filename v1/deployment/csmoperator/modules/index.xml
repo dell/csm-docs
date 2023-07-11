@@ -155,7 +155,7 @@ To deploy the Operator, follow the instructions available &lt;a href=&#34;../../
 &lt;p&gt;Follow all the &lt;a href=&#34;#prerequisite&#34;&gt;prerequisites&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Create a CR (Custom Resource) for Authorization using the sample file provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server.yaml&#34;&gt;here&lt;/a&gt;. This file can be modified to use custom parameters if needed.&lt;/p&gt;
+&lt;p&gt;Create a CR (Custom Resource) for Authorization using the sample file provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v160.yaml&#34;&gt;here&lt;/a&gt;. This file can be modified to use custom parameters if needed.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:&lt;/p&gt;
@@ -267,7 +267,7 @@ ZIPKIN_PROBABILITY: &amp;#34;1.0&amp;#34;
 &lt;p&gt;Create the &lt;code&gt;karavi-auth-tls&lt;/code&gt; secret using your own certificate or by using a self-signed certificate generated via cert-manager.&lt;/p&gt;
 &lt;p&gt;If using your own certificate that is valid for each Ingress hostname, use this command to create the &lt;code&gt;karavi-auth-tls&lt;/code&gt; secret:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret tls karavi-auth-tls -n authorization --key &amp;lt;location-of-private-key-file&amp;gt; --cert &amp;lt;location-of-certificate-file&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;If using a self-signed certificate, prepare &lt;code&gt;samples/authorization/certificate.yaml&lt;/code&gt; provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate.yaml&#34;&gt;here&lt;/a&gt;. An entry for each hostname specified in the CR must be added under &lt;code&gt;dnsNames&lt;/code&gt; for the certificate to be valid for each Ingress.&lt;/p&gt;
+&lt;p&gt;If using a self-signed certificate, prepare &lt;code&gt;samples/authorization/certificate.yaml&lt;/code&gt; provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v160.yaml&#34;&gt;here&lt;/a&gt;. An entry for each hostname specified in the CR must be added under &lt;code&gt;dnsNames&lt;/code&gt; for the certificate to be valid for each Ingress.&lt;/p&gt;
 &lt;p&gt;Use this command to create the &lt;code&gt;karavi-auth-tls&lt;/code&gt; secret:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create -f samples/authorization/certificate.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;

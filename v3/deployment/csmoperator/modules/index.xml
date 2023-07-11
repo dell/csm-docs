@@ -25,7 +25,7 @@
         
         &lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Please note, Dell CSM operator currently ONLY supports deploying CSM Authorization sidecar/container.&lt;/p&gt;
 &lt;h2 id=&#34;pre-requisite&#34;&gt;Pre-requisite&lt;/h2&gt;
-&lt;p&gt;Follow the instructions available in CSM Authorization for &lt;a href=&#34;../../../authorization/deployment/_index.md/#configuring-a-dell-csi-driver&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Follow the instructions available in CSM Authorization for &lt;a href=&#34;../../../../authorization/deployment/helm#configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
@@ -53,7 +53,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ./repctl cluster inject 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CSM Operator needs this admin configs instead of the service accounts’ configs  to be able to properly manage the target clusters. The default service account that&amp;rsquo;ll be used is the CSM Operator service account.&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following &lt;a href=&#34;../drivers/powerscale.md/#prerequisite&#34;&gt;prerequisites for deploying PowerScale via Dell CSM Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following &lt;a href=&#34;../../../../csidriver/installation/helm/isilon/#prerequisite&#34;&gt;prerequisites for deploying PowerScale via Dell CSM Operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>

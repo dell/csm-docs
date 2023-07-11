@@ -94,7 +94,7 @@ The implications of this are that if more than one pod on a node is sharing the 
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Documentation improvement to identify all requirements when building the service and running unit tests for CSM Authorization and CSM Resiliency repository (&lt;a href=&#34;https://github.com/dell/karavi-resiliency/pull/131)&#34;&gt;https://github.com/dell/karavi-resiliency/pull/131)&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Documentation improvement to identify all requirements when building the service and running unit tests for CSM Authorization and CSM Resiliency repository. &lt;a href=&#34;https://github.com/dell/karavi-resiliency/pull/131&#34;&gt;#131&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 

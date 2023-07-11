@@ -794,7 +794,7 @@ data:
   refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWTFNVEVzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkVxb3lXNld5ZEFLdU9mSmtkMkZaMk9TVThZMzlKUFc0YmhfNHc5R05ZNmM=
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This secret must be applied in the driver namespace. Continue reading the next section for configuring the driver to use CSM Authorization.&lt;/p&gt;
 &lt;h2 id=&#34;configuring-a-dell-csi-driver-with-csm-for-authorization&#34;&gt;Configuring a Dell CSI Driver with CSM for Authorization&lt;/h2&gt;
-&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant admin.&lt;/p&gt;
+&lt;p&gt;The second part of CSM for Authorization deployment is to configure one or more of the &lt;a href=&#34;../../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; CSI drivers. This is controlled by the Kubernetes tenant admin.&lt;/p&gt;
 &lt;h3 id=&#34;configuring-a-dell-csi-driver&#34;&gt;Configuring a Dell CSI Driver&lt;/h3&gt;
 &lt;p&gt;Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:&lt;/p&gt;
 &lt;ol&gt;
