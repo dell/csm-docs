@@ -95,7 +95,7 @@ PowerScale is a highly scalable NFS array that is very well suited to Kubernetes
 
 ## Limitations and Exclusions
 
-This file contains information on Limitations and Exclusions that users should be aware of. Additionally, there are driver specific limitations and exclusions that may be called out in the [Deploying CSM for Resiliency](deployment) page.
+This file contains information on Limitations and Exclusions that users should be aware of. Additionally, there are driver specific limitations and exclusions that may be called out in the [Deploying CSM for Resiliency](../deployment) page.
 
 ### Supported and Tested Operating Modes
 
