@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.115.1">
+<meta name="generator" content="Hugo 0.115.2">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,11 +18,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v3/csidriver/installation/helm/powerflex/" /><meta property="article:section" content="v3" />
 
-<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
+<meta property="article:modified_time" content="2023-07-11T10:11:32-04:00" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing the CSI Driver for PowerFlex via Helm
 ">
-<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
+<meta itemprop="dateModified" content="2023-07-11T10:11:32-04:00" />
 <meta itemprop="wordCount" content="3235">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
@@ -32,8 +32,8 @@
 
 
 
-<link rel="preload" href="/csm-docs/scss/main.min.28dfb86e1fa78bdf95ef196b950f0ddfe8d8c336f2a2f21eeb9449b11e7c344b.css" as="style">
-<link href="/csm-docs/scss/main.min.28dfb86e1fa78bdf95ef196b950f0ddfe8d8c336f2a2f21eeb9449b11e7c344b.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/csm-docs/scss/main.min.d6268f24d21f31a22b6a61f0826fd9fe19150353c8e51b64ee5cb484384f0dae.css" as="style">
+<link href="/csm-docs/scss/main.min.d6268f24d21f31a22b6a61f0826fd9fe19150353c8e51b64ee5cb484384f0dae.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.90426106a60145c32e0841c79a9cdf5a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.26c4d9692de525032f4e406f8125588f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.90426106a60145c32e0841c79a9cdf5a.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.26c4d9692de525032f4e406f8125588f.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -651,14 +651,14 @@
 <li>If using Snapshot feature, satisfy all Volume Snapshot requirements</li>
 <li>A user must exist on the array with a role <em>&gt;= FrontEndConfigure</em></li>
 <li>If enabling CSM for Authorization, please refer to the <a href="../../../../authorization/deployment/">Authorization deployment steps</a> first</li>
-<li>If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See <a href="../../../troubleshooting/powerflex.md">troubleshooting section</a> for details</li>
+<li>If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See <a href="../../../troubleshooting/powerflex/">troubleshooting section</a> for details</li>
 </ul>
 <h3 id="install-helm-30">Install Helm 3.0</h3>
 <p>Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerFlex.</p>
 <p><strong>Steps</strong></p>
 <p>Run the <code>curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash</code> command to install Helm 3.0.</p>
 <h3 id="enable-zero-padding-on-powerflex">Enable Zero Padding on PowerFlex</h3>
-<p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html">Dell PowerFlex documentation</a>.</p>
+<p>Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see <a href="https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&amp;lang=en-us">Dell PowerFlex documentation</a>.</p>
 <h3 id="install-powerflex-storage-data-client">Install PowerFlex Storage Data Client</h3>
 <p>The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
 SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment;

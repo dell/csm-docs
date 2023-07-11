@@ -48,14 +48,14 @@
 &lt;li&gt;If using Snapshot feature, satisfy all Volume Snapshot requirements&lt;/li&gt;
 &lt;li&gt;A user must exist on the array with a role &lt;em&gt;&amp;gt;= FrontEndConfigure&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;If enabling CSM for Authorization, please refer to the &lt;a href=&#34;../../../../authorization/deployment/&#34;&gt;Authorization deployment steps&lt;/a&gt; first&lt;/li&gt;
-&lt;li&gt;If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See &lt;a href=&#34;../../../troubleshooting/powerflex.md&#34;&gt;troubleshooting section&lt;/a&gt; for details&lt;/li&gt;
+&lt;li&gt;If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See &lt;a href=&#34;../../../troubleshooting/powerflex/&#34;&gt;troubleshooting section&lt;/a&gt; for details&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;install-helm-30&#34;&gt;Install Helm 3.0&lt;/h3&gt;
 &lt;p&gt;Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerFlex.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Run the &lt;code&gt;curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash&lt;/code&gt; command to install Helm 3.0.&lt;/p&gt;
 &lt;h3 id=&#34;enable-zero-padding-on-powerflex&#34;&gt;Enable Zero Padding on PowerFlex&lt;/h3&gt;
-&lt;p&gt;Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see &lt;a href=&#34;https://cpsdocs.dellemc.com/bundle/PF_CONF_CUST/page/GUID-D32BDFF7-3014-4894-8E1E-2A31A86D343A.html&#34;&gt;Dell PowerFlex documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Verify that zero padding is enabled on the PowerFlex storage pools that will be used. Use PowerFlex GUI or the PowerFlex CLI to check this setting. For more information to configure this setting, see &lt;a href=&#34;https://www.dell.com/support/manuals/en-us/scaleio/pfx_powerflex_config_customize_3.6.x/enable-or-disable-zero-padding-policy?guid=guid-d32bdff7-3014-4894-8e1e-2a31a86d343a&amp;amp;lang=en-us&#34;&gt;Dell PowerFlex documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;install-powerflex-storage-data-client&#34;&gt;Install PowerFlex Storage Data Client&lt;/h3&gt;
 &lt;p&gt;The CSI Driver for PowerFlex requires you to have installed the PowerFlex Storage Data Client (SDC) on all Kubernetes nodes which run the node portion of the CSI driver.
 SDC could be installed automatically by CSI driver install on Kubernetes nodes with OS platform which support automatic SDC deployment;
