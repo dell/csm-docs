@@ -10,17 +10,7 @@ description: Release notes for PowerMax CSI driver
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
 ### New Features/Changes
-- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
-- [Added support for PowerMax v10.0.1 array](https://github.com/dell/csm/issues/760)
-- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [Added support for Amazon EKS Anywhere](https://github.com/dell/csm/issues/825)
-- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
-- [Added support for read only mount option for block volumes](https://github.com/dell/csm/issues/792)
-- [Added support for host groups for vSphere environment](https://github.com/dell/csm/issues/746)
-- [Added support to delete volumes on target array when it is set to Delete in storage class](https://github.com/dell/csm/issues/801)
-- [Added support for setting up QoS parameters for throttling performance and bandwidth at Storage Group level](https://github.com/dell/csm/issues/726)
-- [Added support for CSM Operator for PowerMax Driver](https://github.com/dell/csm/issues/769)
-- [Added support to create reverseproxy certs automatically](https://github.com/dell/csm/issues/819)
+- [Added support for RHEL 9.0](https://github.com/dell/csm/issues/893)
 
 ### Fixed Issues
 There are no fixed issues in this release.
