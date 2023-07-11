@@ -11,6 +11,7 @@ description: Release notes for PowerMax CSI driver
 
 ### New Features/Changes
 - [Added support for RHEL 9.0](https://github.com/dell/csm/issues/893)
+- [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
 
 ### Fixed Issues
 There are no fixed issues in this release.
