@@ -48,11 +48,11 @@ const CONSTANTS = {
       operator: "Exists"
       effect: "NoSchedule"
 	`,
-  OPERATOR_TAINTS: `
+	OPERATOR_TAINTS: `
   - key: "$KEY"
     operator: "Exists"
     effect: "NoSchedule"
-  `,
+	`,
 	COMMENTED_TAINTS: `
     #- key: "node-role.kubernetes.io/control-plane"
     #  operator: "Exists"
@@ -96,59 +96,59 @@ describe("GIVEN setValues function", () => {
         `;
 
 		const expected = {
-      csmVersion: '1.7.0',
-      driverVersion: 'v2.7.0',
-      imageRepository: 'dellemc',
-      monitor: false,
-      certSecretCount: '1',
-      controllerCount: '1',
-      volNamePrefix: 'csivol',
-      snapNamePrefix: 'csi-snap',
-      fsGroupPolicy: 'ReadWriteOnceWithFSType',
-      driverNamespace: '',
-      installationType: 'helm',
-      controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
-      nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
-      nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
-      controllerTolerations: '\n' +
+			csmVersion: '1.7.0',
+			driverVersion: 'v2.7.0',
+			imageRepository: 'dellemc',
+			monitor: false,
+			certSecretCount: '1',
+			controllerCount: '1',
+			volNamePrefix: 'csivol',
+			snapNamePrefix: 'csi-snap',
+			fsGroupPolicy: 'ReadWriteOnceWithFSType',
+			driverNamespace: '',
+			installationType: 'helm',
+			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+			nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
+			controllerTolerations: '\n' +
         '    - key: "node-role.kubernetes.io/control-plane"\n' +
         '      operator: "Exists"\n' +
         '      effect: "NoSchedule"',
-      nodeTolerations: '\n' +
+			nodeTolerations: '\n' +
         '    - key: "node-role.kubernetes.io/control-plane"\n' +
         '      operator: "Exists"\n' +
         '      effect: "NoSchedule"',
-      snapshot: false,
-      vgsnapshot: false,
-      resizer: false,
-      healthMonitor: false,
-      replication: false,
-      migration: false,
-      observability: false,
-      observabilityMetrics: false,
-      authorization: false,
-      resiliency: false,
-      storageCapacity: false,
-      authorizationSkipCertValidation: false,
-      authorizationProxyHost: '""',
-      certManagerEnabled: false,
-      storageArrayId: undefined,
-      storageArrayEndpointUrl: '""',
-      storageArrayBackupEndpointUrl: '""',
-      clusterPrefix: undefined,
-      portGroups: undefined,
-      vSphereEnabled: false,
-      vSphereFCPortGroup: undefined,
-      vSphereFCHostName: undefined,
-      vSphereVCenterHost: undefined,
-      vSphereVCenterCredSecret: undefined
+			snapshot: false,
+			vgsnapshot: false,
+			resizer: false,
+			healthMonitor: false,
+			replication: false,
+			migration: false,
+			observability: false,
+			observabilityMetrics: false,
+			authorization: false,
+			resiliency: false,
+			storageCapacity: false,
+			authorizationSkipCertValidation: false,
+			authorizationProxyHost: '""',
+			certManagerEnabled: false,
+			storageArrayId: undefined,
+			storageArrayEndpointUrl: '""',
+			storageArrayBackupEndpointUrl: '""',
+			clusterPrefix: undefined,
+			portGroups: undefined,
+			vSphereEnabled: false,
+			vSphereFCPortGroup: undefined,
+			vSphereFCHostName: undefined,
+			vSphereVCenterHost: undefined,
+			vSphereVCenterCredSecret: undefined
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
 		expect(expected).toEqual(received);
 	});
 
-  test("SHOULD return expected DriverValues for Operator", () => {
+	test("SHOULD return expected DriverValues for Operator", () => {
 		document.body.innerHTML = `
             <select id="csm-version">
                 <option value="1.7.0">CSM 1.7</option>
@@ -172,58 +172,58 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
         `;
 
-    const expected = {
-      csmVersion: '1.7.0',
-      driverVersion: 'v2.7.0',
-      imageRepository: 'dellemc',
-      monitor: false,
-      certSecretCount: '1',
-      controllerCount: '1',
-      volNamePrefix: 'csivol',
-      snapNamePrefix: 'csi-snap',
-      fsGroupPolicy: 'ReadWriteOnceWithFSType',
-      driverNamespace: '',
-      installationType: 'operator',
-      controllerPodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
-      nodePodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
-      nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
-      controllerTolerations: '\n' +
+		const expected = {
+			csmVersion: '1.7.0',
+			driverVersion: 'v2.7.0',
+			imageRepository: 'dellemc',
+			monitor: false,
+			certSecretCount: '1',
+			controllerCount: '1',
+			volNamePrefix: 'csivol',
+			snapNamePrefix: 'csi-snap',
+			fsGroupPolicy: 'ReadWriteOnceWithFSType',
+			driverNamespace: '',
+			installationType: 'operator',
+			controllerPodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
+			nodePodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
+			nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
+			controllerTolerations: '\n' +
         '  - key: "node-role.kubernetes.io/control-plane"\n' +
         '    operator: "Exists"\n' +
         '    effect: "NoSchedule"',
-      nodeTolerations: '\n' +
+			nodeTolerations: '\n' +
         '  - key: "node-role.kubernetes.io/control-plane"\n' +
         '    operator: "Exists"\n' +
         '    effect: "NoSchedule"',
-      snapshot: false,
-      vgsnapshot: false,
-      resizer: false,
-      healthMonitor: false,
-      replication: false,
-      migration: false,
-      observability: false,
-      observabilityMetrics: false,
-      authorization: false,
-      resiliency: false,
-      storageCapacity: false,
-      authorizationSkipCertValidation: false,
-      authorizationProxyHost: '""',
-      certManagerEnabled: false,
-      storageArrayId: undefined,
-      storageArrayEndpointUrl: '""',
-      storageArrayBackupEndpointUrl: '""',
-      clusterPrefix: undefined,
-      portGroups: undefined,
-      vSphereEnabled: false,
-      vSphereFCPortGroup: undefined,
-      vSphereFCHostName: undefined,
-      vSphereVCenterHost: undefined,
-      vSphereVCenterCredSecret: undefined
-    };
+			snapshot: false,
+			vgsnapshot: false,
+			resizer: false,
+			healthMonitor: false,
+			replication: false,
+			migration: false,
+			observability: false,
+			observabilityMetrics: false,
+			authorization: false,
+			resiliency: false,
+			storageCapacity: false,
+			authorizationSkipCertValidation: false,
+			authorizationProxyHost: '""',
+			certManagerEnabled: false,
+			storageArrayId: undefined,
+			storageArrayEndpointUrl: '""',
+			storageArrayBackupEndpointUrl: '""',
+			clusterPrefix: undefined,
+			portGroups: undefined,
+			vSphereEnabled: false,
+			vSphereFCPortGroup: undefined,
+			vSphereFCHostName: undefined,
+			vSphereVCenterHost: undefined,
+			vSphereVCenterCredSecret: undefined
+		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
 		expect(expected).toEqual(received);
-		});
+	});
 
 	test("SHOULD return expected DriverValues for csm version 1.6.0", () => {
 		document.body.innerHTML = `
@@ -250,7 +250,7 @@ describe("GIVEN setValues function", () => {
         `;
 
 		const expected = {
-      installationType: "operator",
+			installationType: "operator",
 			csmVersion: "1.6.0",
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
@@ -275,7 +275,6 @@ describe("GIVEN setValues function", () => {
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
-    console.log("***received***", received)
 		expect(received).toEqual(received);
 	});
 });

@@ -199,7 +199,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".storage-capacity").show();
 			$(".resiliency").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
-			if (installationType == 'operator'){
+			if (installationType === 'operator'){
 				$(".observability").hide();
 				$(".replication-mod").hide();
 				$(".image-repository").hide();
@@ -267,13 +267,13 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 	$("#command-note").show();
 	$("#command-note").html(commandNoteValue);
 	
-	if (installationType == 'helm'){
+	if (installationType === 'helm'){
 		$("#command1").html(command1Value);
 
 		$("#command2-wrapper").show();
 		var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace", driverNamespace).replace("$version", helmChartVersion);
 		$("#command2").html(command2);
-	}else{
+	} else {
 		$("#command1").html(command3Value);
 		$("#command2-wrapper").hide();
 	}

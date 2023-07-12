@@ -56,10 +56,10 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	var labels = DriverValues.nodeSelectorLabel.split(":");
 	var nodeSelector
 	var taints
-	if (DriverValues.installationType == CONSTANTS_PARAM.OPERATOR) {
+	if (DriverValues.installationType === CONSTANTS_PARAM.OPERATOR) {
 		nodeSelector = '\n'.padEnd(8, " ") + labels[0] + ': "' + labels[1] + '"';
 		taints = CONSTANTS_PARAM.OPERATOR_TAINTS.replace("$KEY", taint).trimEnd();
-	}else{
+	} else {
 		nodeSelector = '\n'.padEnd(7, " ") + labels[0] + ': "' + labels[1] + '"';
 		taints = CONSTANTS_PARAM.HELM_TAINTS.replace("$KEY", taint).trimEnd();
 	}
