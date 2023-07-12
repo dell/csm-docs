@@ -47,21 +47,31 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.volNamePrefix = document.getElementById("vol-name-prefix").value;
 	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
 	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
+	DriverValues.driverNamespace = document.getElementById("driver-namespace").value;
+	DriverValues.installationType = document.getElementById("installation-type").value;
 	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodeSelectorLabel = document.getElementById("node-selector-label").value || '""';
 	var taint = document.getElementById("taint").value || '""';
 	var labels = DriverValues.nodeSelectorLabel.split(":");
-	var nodeSelector = CONSTANTS_PARAM.NODE_SELECTOR_TAB + labels[0] + ': "' + labels[1] + '"';
+	var nodeSelector
+	var taints
+	if (DriverValues.installationType == CONSTANTS_PARAM.OPERATOR) {
+		nodeSelector = '\n'.padEnd(8, " ") + labels[0] + ': "' + labels[1] + '"';
+		taints = CONSTANTS_PARAM.OPERATOR_TAINTS.replace("$KEY", taint).trimEnd();
+	}else{
+		nodeSelector = '\n'.padEnd(7, " ") + labels[0] + ': "' + labels[1] + '"';
+		taints = CONSTANTS_PARAM.HELM_TAINTS.replace("$KEY", taint).trimEnd();
+	}
 	DriverValues.controllerTolerations = "";
 	DriverValues.nodeTolerations= "";
 	if ($("#controller-pods-node-selector").prop('checked') === true) {
 		DriverValues.controllerPodsNodeSelector = nodeSelector;
-		DriverValues.controllerTolerations = CONSTANTS_PARAM.TAINTS.replace("$KEY", taint).trimEnd();
+		DriverValues.controllerTolerations = taints;
 	}
 	if ($("#node-pods-node-selector").prop('checked') === true) {
 		DriverValues.nodePodsNodeSelector = nodeSelector;
-		DriverValues.nodeTolerations = CONSTANTS_PARAM.TAINTS.replace("$KEY", taint).trimEnd();
+		DriverValues.nodeTolerations = taints;
 	}
 	DriverValues.snapshot = $("#snapshot").prop('checked') ? true : false;
 	DriverValues.vgsnapshot = $("#vgsnapshot").prop('checked') ? true : false;
@@ -101,6 +111,8 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$VOLUME_NAME_PREFIX", yamlTplValues.volNamePrefix);
 	yamlTpl = yamlTpl.replaceAll("$SNAP_NAME_PREFIX", yamlTplValues.snapNamePrefix);
 	yamlTpl = yamlTpl.replaceAll("$FSGROUP_POLICY", yamlTplValues.fsGroupPolicy);
+	yamlTpl = yamlTpl.replaceAll("$NAMESPACE", yamlTplValues.driverNamespace);
+	yamlTpl = yamlTpl.replaceAll("$INSTALLATIONTYPE", yamlTplValues.installationType);
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_POD_NODE_SELECTOR", yamlTplValues.controllerPodsNodeSelector);
 	yamlTpl = yamlTpl.replaceAll("$NODE_POD_NODE_SELECTOR", yamlTplValues.nodePodsNodeSelector);
 	yamlTpl = yamlTpl.replaceAll("$HEALTH_MONITOR_ENABLED", yamlTplValues.healthMonitor);

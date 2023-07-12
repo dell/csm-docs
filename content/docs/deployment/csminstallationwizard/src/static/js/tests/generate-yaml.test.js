@@ -35,7 +35,6 @@ const CONSTANTS = {
 	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
 	HYPHEN: "-",
-	NODE_SELECTOR_TAB: '\n'.padEnd(7, " "),
 	SLASH: "/",
 	VERSIONS_DIR: "csm-versions",
 	CSM: "csm",
@@ -44,11 +43,16 @@ const CONSTANTS = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V170: "1.0.0",
-	TAINTS: `
+	HELM_TAINTS: `
     - key: "$KEY"
       operator: "Exists"
       effect: "NoSchedule"
 	`,
+  OPERATOR_TAINTS: `
+  - key: "$KEY"
+    operator: "Exists"
+    effect: "NoSchedule"
+  `,
 	COMMENTED_TAINTS: `
     #- key: "node-role.kubernetes.io/control-plane"
     #  operator: "Exists"
@@ -57,27 +61,30 @@ const CONSTANTS = {
 };
 
 const testCSMMap = new Map([
-	["csmVersion", "1.6.0"],
+	["csmVersion", "1.7.0"],
 	["imageRepository", "dellemc"],
 	["controllerCount", "1"],
 	["volNamePrefix", "csivol"],
 	["snapNamePrefix", "csi-snap"],
 	["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
-	["driverVersion", "v2.6.0"],
+	["driverVersion", "v2.7.0"],
 ]);
 
 describe("GIVEN setValues function", () => {
-	test("SHOULD return expected DriverValues", () => {
+	test("SHOULD return expected DriverValues for Helm", () => {
 		document.body.innerHTML = `
             <select id="csm-version">
-                <option value="1.6.0">CSM 1.6</option>
+                <option value="1.7.0">CSM 1.7</option>
+            </select>
+            <select id="installation-type">
+                <option value="helm" selected>Helm</option>
             </select>
             <select id="fsGroup-Policy">
                 <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
             </select>
             <input type="text" id="image-repository" value="dellemc">
-            <input type="number" id="cert-secret-count" value="0">
-            <input type="number" id="controller-count" value="2">
+            <input type="number" id="cert-secret-count" value="1">
+            <input type="number" id="controller-count" value="1">
             <input type="text" id="vol-name-prefix" value="csivol">
             <input type="text" id="snapshot-prefix" value="csi-snap">
             <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
@@ -89,39 +96,143 @@ describe("GIVEN setValues function", () => {
         `;
 
 		const expected = {
-			csmVersion: "1.6.0",
-			driverVersion: "v2.6.0",
-			imageRepository: "dellemc",
-			certSecretCount: "0",
-			controllerCount: "1",
-			volNamePrefix: "csivol",
-			snapNamePrefix: "csi-snap",
-			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
-			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
-			nodeSelectorLabel: "node-role.kubernetes.io/control-plane:",
-			snapshot: true,
-			vgsnapshot: false,
-			resizer: true,
-			healthMonitor: false,
-			replication: false,
-			observability: false,
-			observabilityMetrics: false,
-			authorization: false,
-			authorizationSkipCertValidation: true,
-			certManagerEnabled: false,
-			taint: "node-role.kubernetes.io/control-plane"
+      csmVersion: '1.7.0',
+      driverVersion: 'v2.7.0',
+      imageRepository: 'dellemc',
+      monitor: false,
+      certSecretCount: '1',
+      controllerCount: '1',
+      volNamePrefix: 'csivol',
+      snapNamePrefix: 'csi-snap',
+      fsGroupPolicy: 'ReadWriteOnceWithFSType',
+      driverNamespace: '',
+      installationType: 'helm',
+      controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+      nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+      nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
+      controllerTolerations: '\n' +
+        '    - key: "node-role.kubernetes.io/control-plane"\n' +
+        '      operator: "Exists"\n' +
+        '      effect: "NoSchedule"',
+      nodeTolerations: '\n' +
+        '    - key: "node-role.kubernetes.io/control-plane"\n' +
+        '      operator: "Exists"\n' +
+        '      effect: "NoSchedule"',
+      snapshot: false,
+      vgsnapshot: false,
+      resizer: false,
+      healthMonitor: false,
+      replication: false,
+      migration: false,
+      observability: false,
+      observabilityMetrics: false,
+      authorization: false,
+      resiliency: false,
+      storageCapacity: false,
+      authorizationSkipCertValidation: false,
+      authorizationProxyHost: '""',
+      certManagerEnabled: false,
+      storageArrayId: undefined,
+      storageArrayEndpointUrl: '""',
+      storageArrayBackupEndpointUrl: '""',
+      clusterPrefix: undefined,
+      portGroups: undefined,
+      vSphereEnabled: false,
+      vSphereFCPortGroup: undefined,
+      vSphereFCHostName: undefined,
+      vSphereVCenterHost: undefined,
+      vSphereVCenterCredSecret: undefined
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
-
-		expect(received).toEqual(received);
+		expect(expected).toEqual(received);
 	});
+
+  test("SHOULD return expected DriverValues for Operator", () => {
+		document.body.innerHTML = `
+            <select id="csm-version">
+                <option value="1.7.0">CSM 1.7</option>
+            </select>
+            <select id="installation-type">
+                <option value="operator" selected>Operator</option>
+            </select>
+            <select id="fsGroup-Policy">
+                <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
+            </select>
+            <input type="text" id="image-repository" value="dellemc">
+            <input type="number" id="cert-secret-count" value="1">
+            <input type="number" id="controller-count" value="1">
+            <input type="text" id="vol-name-prefix" value="csivol">
+            <input type="text" id="snapshot-prefix" value="csi-snap">
+            <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
+            <input type="checkbox" id="controller-pods-node-selector" checked>
+            <input type="checkbox" id="node-pods-node-selector" checked>
+            <input type="text" id="driver-namespace" value="">
+            <input type="text" id="authorization-proxy-host" value="">
+            <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+        `;
+
+    const expected = {
+      csmVersion: '1.7.0',
+      driverVersion: 'v2.7.0',
+      imageRepository: 'dellemc',
+      monitor: false,
+      certSecretCount: '1',
+      controllerCount: '1',
+      volNamePrefix: 'csivol',
+      snapNamePrefix: 'csi-snap',
+      fsGroupPolicy: 'ReadWriteOnceWithFSType',
+      driverNamespace: '',
+      installationType: 'operator',
+      controllerPodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
+      nodePodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
+      nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
+      controllerTolerations: '\n' +
+        '  - key: "node-role.kubernetes.io/control-plane"\n' +
+        '    operator: "Exists"\n' +
+        '    effect: "NoSchedule"',
+      nodeTolerations: '\n' +
+        '  - key: "node-role.kubernetes.io/control-plane"\n' +
+        '    operator: "Exists"\n' +
+        '    effect: "NoSchedule"',
+      snapshot: false,
+      vgsnapshot: false,
+      resizer: false,
+      healthMonitor: false,
+      replication: false,
+      migration: false,
+      observability: false,
+      observabilityMetrics: false,
+      authorization: false,
+      resiliency: false,
+      storageCapacity: false,
+      authorizationSkipCertValidation: false,
+      authorizationProxyHost: '""',
+      certManagerEnabled: false,
+      storageArrayId: undefined,
+      storageArrayEndpointUrl: '""',
+      storageArrayBackupEndpointUrl: '""',
+      clusterPrefix: undefined,
+      portGroups: undefined,
+      vSphereEnabled: false,
+      vSphereFCPortGroup: undefined,
+      vSphereFCHostName: undefined,
+      vSphereVCenterHost: undefined,
+      vSphereVCenterCredSecret: undefined
+    };
+
+		const received = setValues(testCSMMap, CONSTANTS);
+		expect(expected).toEqual(received);
+		});
 
 	test("SHOULD return expected DriverValues for csm version 1.6.0", () => {
 		document.body.innerHTML = `
             <select id="csm-version">
                 <option value="1.6.0">CSM 1.6</option>
             </select>
+            <select id="installation-type">
+              <option value="operator" selected>Operator</option>
+            </select>
             <select id="fsGroup-Policy">
                 <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
             </select>
@@ -139,6 +250,7 @@ describe("GIVEN setValues function", () => {
         `;
 
 		const expected = {
+      installationType: "operator",
 			csmVersion: "1.6.0",
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
@@ -163,7 +275,7 @@ describe("GIVEN setValues function", () => {
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
-
+    console.log("***received***", received)
 		expect(received).toEqual(received);
 	});
 });

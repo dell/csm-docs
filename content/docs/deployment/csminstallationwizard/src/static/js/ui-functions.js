@@ -24,12 +24,22 @@ const setupTooltipStyle = () => {
 	[...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 };
 
+function onInstallationTypeChange(){
+	driver = document.getElementById("array").value
+	driver === "" ? $("#main").hide() : $("#main").show();
+	installationType = document.getElementById("installation-type").value	
+	displayModules(installationType, driver, CONSTANTS)
+	$("#command-text-area").hide();
+	loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value);
+}
+
 function onArrayChange() {
 	$('#array').on('change', function() {
 		$("#command-text-area").hide();
 		driver = $(this).val();
 		driver === "" ? $("#main").hide() : $("#main").show();
-		displayModules(driver, CONSTANTS)
+		installationType = document.getElementById("installation-type").value
+		displayModules(installationType, driver, CONSTANTS)
 		loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value);
 		setDefaultValues(defaultValues, csmMap);
 		$(".namespace").show();
@@ -103,7 +113,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 
 const onCSMVersionChange = () => {
 	document.getElementById("csm-version").value !== "" ? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
-	displayModules(driver, CONSTANTS);
+	displayModules(installationType, driver, CONSTANTS);
 	onObservabilityChange();
 	onAuthorizationChange();
 };
@@ -153,13 +163,13 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(template);
 	link.style.display = 'inline-block';
-	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, CONSTANTS_PARAM)
+	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, command3, CONSTANTS_PARAM)
 	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
 
 	return true;
 }
 
-function displayModules(driverName, CONSTANTS_PARAM) {
+function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".vgsnapshot").show();
 	$(".authorization").show();
 	$(".observability").show();
@@ -178,6 +188,9 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	$(".vol-name-prefix").show();
 	$("div#snap-prefix").show();
 	$(".fsGroupPolicy").hide();
+	$(".image-repository").show();
+	$(".resizer").show();
+	$(".snapshot-feature").show();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -186,6 +199,17 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 			$(".storage-capacity").show();
 			$(".resiliency").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
+			if (installationType == 'operator'){
+				$(".observability").hide();
+				$(".replication-mod").hide();
+				$(".image-repository").hide();
+				$(".cert-manager").hide();
+				$(".vgsnapshot").hide();
+				$(".resizer").hide();
+				$(".snapshot-feature").hide();
+				$(".vol-name-prefix").hide();
+				$(".fsGroupPolicy").show();
+			}
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
 			$(".cert-secret-count-wrapper").show();
@@ -224,9 +248,10 @@ function displayModules(driverName, CONSTANTS_PARAM) {
 	}
 }
 
-function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, CONSTANTS) {
+function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS) {
 	driverNamespace = document.getElementById("driver-namespace").value;
 	csmVersion = document.getElementById("csm-version").value;
+	installationType = document.getElementById("installation-type").value
 	var helmChartVersion;
 	switch (csmVersion) {
 		case "1.7.0":
@@ -240,10 +265,18 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 	$("#reverseProxyNote").hide();
 	$("#command-title").html(commandTitleValue);
 	$("#command-note").show();
-	$("#command1").html(command1Value);
 	$("#command-note").html(commandNoteValue);
-	var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace", driverNamespace).replace("$version", helmChartVersion);
-	$("#command2").html(command2);
+	
+	if (installationType == 'helm'){
+		$("#command1").html(command1Value);
+
+		$("#command2-wrapper").show();
+		var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace", driverNamespace).replace("$version", helmChartVersion);
+		$("#command2").html(command2);
+	}else{
+		$("#command1").html(command3Value);
+		$("#command2-wrapper").hide();
+	}
 	if (document.getElementById("array").value === CONSTANTS.POWERMAX) {
 		$("#reverseProxyNote").show();
 	}

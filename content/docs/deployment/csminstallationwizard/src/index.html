@@ -43,10 +43,10 @@
                   <label for="installation-type" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Select the installation type" style="width: 140px;">Installation Type</label>
                   <div class="col-sm-9"></div>
                   <div class="col-sm-3">
-                    <select id="installation-type" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
+                    <select id="installation-type" class="form-select" onchange="validateInput(validateForm, CONSTANTS);onInstallationTypeChange()" required>
                       <option value="" selected> Select the Installation type</option>
                       <option value="helm">Helm</option>
-                      <option value="operator" disabled>Operator</option>
+                      <option value="operator">Operator</option>
                     </select>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
 
                 <!-- main content starts -->
                 <div id="main">
-                  <div class="was-validated row mb-4">
+                  <div class="was-validated row mb-4 image-repository">
                     <label for="image-repository" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Specify the registry from where the image should be pulled" style="width: 150px;">Image Repository</label>
                     <div class="col-sm-9"></div>
                     <div class="col-sm-3">
@@ -86,6 +86,7 @@
                     <div class="col-sm-3">
                       <select id="csm-version" class="form-select" onchange="onCSMVersionChange(); validateInput(validateForm, CONSTANTS)" required>
                         <option value="1.7.0" selected>CSM 1.7</option>
+                        <option value="1.8.0">CSM 1.8</option>
                       </select>
                     </div>
                   </div>
@@ -180,7 +181,7 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4">
+                  <div class="row mb-4 resizer">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="resizer" value="" checked>
                       <label for="resizer" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Volume Expansion feature">Resizer</label>
@@ -474,7 +475,7 @@
             <div class="mt-3 mx-1">
               <span id="command1"></span>
             </div>
-            <div class="mt-3 mx-1">
+            <div class="mt-3 mx-1" id="command2-wrapper">
               <span id="command2"></span>
             </div>
             <div class="mt-3 mx-1 py-2 note" id="reverseProxyNote">

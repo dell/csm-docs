@@ -25,6 +25,8 @@ const {
 	onCopyButtonClickHandler,
 	resetImageRepository,
 	resetControllerCount,
+	resetVolNamePrefix,
+	resetSnapNamePrefix,
 	resetNodeSelectorLabel,
 	resetDriverNamespace,
 	resetTaint,
@@ -49,7 +51,6 @@ const CONSTANTS = {
 	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
 	HYPHEN: "-",
-	NODE_SELECTOR_TAB: '\n'.padEnd(7, " "),
 	SLASH: "/",
 	VERSIONS_DIR: "csm-versions",
 	CSM: "csm",
@@ -290,6 +291,38 @@ describe("GIVEN resetControllerCount function", () => {
 	});
 });
 
+describe("GIVEN resetVolNamePrefix function", () => {
+	const testCSMMap = new Map([
+		["volNamePrefix", "csivol"]
+	]);
+
+	test("SHOULD invoke resetVolNamePrefix function", () => {
+		document.body.innerHTML = `
+            <input type="text" id="vol-name-prefix">
+        `;
+
+		resetVolNamePrefix(testCSMMap);
+
+		expect(document.getElementById("vol-name-prefix").value).toEqual("csivol");
+	});
+});
+
+describe("GIVEN resetSnapNamePrefix function", () => {
+	const testCSMMap = new Map([
+		["snapNamePrefix", "csi-snap"]
+	]);
+
+	test("SHOULD invoke resetSnapNamePrefix function", () => {
+		document.body.innerHTML = `
+            <input type="text" id="snapshot-prefix">
+        `;
+
+		resetSnapNamePrefix(testCSMMap);
+
+		expect(document.getElementById("snapshot-prefix").value).toEqual("csi-snap");
+	});
+});
+
 describe("GIVEN resetNodeSelectorLabel function", () => {
 	const testCSMMap = new Map([
 		["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"]
@@ -344,55 +377,109 @@ describe("GIVEN displayModules function", () => {
 		<div class="vgsnapshot" style="display:none"></div>
 		<div class="authorization" style="display:none"></div>
 		<div class="observability"></div>
+		<div class="replication-mod"></div>
+		<div class="image-repository"></div>
+		<div class="fsGroupPolicy"></div>
+		<div class="cert-manager"></div>
+		<div class="resizer"></div>
+		<div class="snapshot-feature"></div>
+		<div class="vol-name-prefix"></div>
+		<div class="resiliency"></div>
+		<div class="storage-capacity"></div>
+		<div class="cert-secret-count-wrapper"></div>
+		<div class="storageArrays"></div>
+		<div class="cluster-prefix"></div>
+		<div class="port-groups"></div>
+		<div class="migration"></div>
+		<div class="vSphere"></div>
+		<div class="monitor"></div>
 	`;
 
 	test("SHOULD show expected components for csi-powerstore", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("powerstore", CONSTANTS);
+		displayModules("helm", "powerstore", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("none");
 		expect($(".observability").css("display")).toEqual("block");
+		expect($(".resiliency").css("display")).toEqual("block");
+		expect($(".storage-capacity").css("display")).toEqual("block");
+	});
+
+	test("SHOULD show expected components for csi-powerstore", () => {
+		document.body.innerHTML = testHtml;
+
+		displayModules("operator", "powerstore", CONSTANTS);
+
+		expect($(".vgsnapshot").css("display")).toEqual("none");
+		expect($(".authorization").css("display")).toEqual("none");
+		expect($(".observability").css("display")).toEqual("none");
+		expect($(".replication-mod").css("display")).toEqual("none");
+		expect($(".image-repository").css("display")).toEqual("none");
+		expect($(".cert-manager").css("display")).toEqual("none");
+		expect($(".resizer").css("display")).toEqual("none");
+		expect($(".vol-name-prefix").css("display")).toEqual("none");
+		expect($(".snapshot-feature").css("display")).toEqual("none");
+		expect($(".fsGroupPolicy").css("display")).toEqual("block");
+		expect($(".resiliency").css("display")).toEqual("block");
+		expect($(".storage-capacity").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show expected components for csi-powerscale", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("powerscale", CONSTANTS);
+		displayModules("helm", "powerscale", CONSTANTS);
 
 		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("block");
+		expect($(".vgsnapshot").css("display")).toEqual("none");
+		expect($(".storage-capacity").css("display")).toEqual("block");
+		expect($(".fsGroupPolicy").css("display")).toEqual("block");
+		expect($(".resiliency").css("display")).toEqual("block");
+		expect($(".cert-secret-count-wrapper").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show expected components for csi-powermax", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("powermax", CONSTANTS);
+		displayModules("helm", "powermax", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("none");
 		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("block");
+		expect($(".storageArrays").css("display")).toEqual("block");
+		expect($(".cluster-prefix").css("display")).toEqual("block");
+		expect($(".port-groups").css("display")).toEqual("block");
+		expect($(".migration").css("display")).toEqual("block");
+		expect($(".vSphere").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show expected components for csi-powerflex", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("powerflex", CONSTANTS);
+		displayModules("helm", "powerflex", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("block");
 		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("block");
+		expect($(".monitor").css("display")).toEqual("block");
+		expect($(".resiliency").css("display")).toEqual("block");
+		expect($(".cert-secret-count-wrapper").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show expected components for csi-unity", () => {
 		document.body.innerHTML = testHtml;
 
-		displayModules("unity", CONSTANTS);
+		displayModules("helm", "unity", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("none");
 		expect($(".authorization").css("display")).toEqual("none");
 		expect($(".observability").css("display")).toEqual("none");
+		expect($(".replication-mod").css("display")).toEqual("none");
+		expect($(".cert-manager").css("display")).toEqual("none");
+		expect($(".resiliency").css("display")).toEqual("block");
+		expect($(".fsGroupPolicy").css("display")).toEqual("block");
 	});
 });
 
@@ -417,10 +504,12 @@ describe("GIVEN displayCommands function", () => {
 	const commandNoteValue = "Ensure that the namespaces and secrets are created before installing the helm chart";
 	const command1Value = "helm repo add dell https://dell.github.io/helm-charts";
 	const command2Value = "helm install $release-name dell/container-storage-modules -n $namespace --version $version -f values.yaml";
+	const command3Value = "kubectl create -f values.yaml";
 
 	test("SHOULD show expected commands", () => {
 		document.body.innerHTML = `
 			<input id="array" value="powerstore">
+			<input id="installation-type" value="helm">
 			<input type="text" id="driver-namespace" value="csi-powerstore">
 			<input type="text" id="csm-version" value="1.7.0">
             <div id="command-text-area" style="display:none">
@@ -431,7 +520,7 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, CONSTANTS);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
@@ -440,6 +529,27 @@ describe("GIVEN displayCommands function", () => {
 		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.0 -f values.yaml");
 	});
 
+	test("SHOULD show expected commands", () => {
+		document.body.innerHTML = `
+			<input id="array" value="powerstore">
+			<input id="installation-type" value="operator">
+			<input type="text" id="driver-namespace" value="csi-powerstore">
+			<input type="text" id="csm-version" value="1.7.0">
+            <div id="command-text-area" style="display:none">
+                <div id="command-title"></div>
+                <span id="command-note" style="display:none"></span>
+                <span id="command1"></span>
+                <span id="command2"></span>
+            </div>
+        `;
+
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
+
+		expect($("#command-text-area").css("display")).toEqual("block");
+		expect($("#command-title").text()).toEqual("Run the following commands to install");
+		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
+		expect($("#command1").text()).toEqual("kubectl create -f values.yaml");
+	});
 });
 
 describe("SHOULD Disable/Enable Generate YAML button based on validation of input fields", () => {
