@@ -38,7 +38,7 @@ Note: While upgrading the driver via helm, controllerCount variable in myvalues.
     
     kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml
     ```
-5. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml` and update parameters as per the requirement.
+5. Download the default values.yaml file `cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.7.0/charts/csi-powerstore/values.yaml` and update parameters as per the requirement.
 6. Run the `csi-install` script with the option _\-\-upgrade_ by running: 
      ```bash
 
