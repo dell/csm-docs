@@ -92,6 +92,11 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="controller-pods-node-selector" checked>
             <input type="checkbox" id="node-pods-node-selector" checked>
             <input type="text" id="driver-namespace" value="">
+            <input type="text" id="label-value" value="csi-powerstore">
+            <input type="number" id="poll-rate" value="60">
+            <input type="text" id="driver-pod-label" value="dell-storage">
+            <input type="checkbox" id="volumeless-pods">
+            <input type="checkbox" id="connection-validation">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
         `;
@@ -136,6 +141,12 @@ describe("GIVEN setValues function", () => {
 			storageArrayId: undefined,
 			storageArrayEndpointUrl: '""',
 			storageArrayBackupEndpointUrl: '""',
+			operatorResiliency: false,
+			labelValue: 'csi-powerstore',
+			pollRate: '60',
+			driverPodLabel: 'dell-storage',
+			connectionValidation: false,
+			volumelessPods: false,
 			clusterPrefix: undefined,
 			portGroups: undefined,
 			vSphereEnabled: false,
@@ -146,6 +157,7 @@ describe("GIVEN setValues function", () => {
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
+		console.log("***received***", received)
 		expect(expected).toEqual(received);
 	});
 
@@ -171,6 +183,11 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+            <input type="text" id="label-value" value="csi-powerstore">
+            <input type="number" id="poll-rate" value="60">
+            <input type="text" id="driver-pod-label" value="dell-storage">
+            <input type="checkbox" id="volumeless-pods">
+            <input type="checkbox" id="connection-validation">
         `;
 
 		const expected = {
@@ -213,6 +230,12 @@ describe("GIVEN setValues function", () => {
 			storageArrayId: undefined,
 			storageArrayEndpointUrl: '""',
 			storageArrayBackupEndpointUrl: '""',
+			operatorResiliency: false,
+			labelValue: 'csi-powerstore',
+			pollRate: '60',
+			driverPodLabel: 'dell-storage',
+			connectionValidation: false,
+			volumelessPods: false,
 			clusterPrefix: undefined,
 			portGroups: undefined,
 			vSphereEnabled: false,
@@ -248,6 +271,11 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+            <input type="text" id="label-value" value="csi-powerstore">
+            <input type="number" id="poll-rate" value="60">
+            <input type="text" id="driver-pod-label" value="dell-storage">
+            <input type="checkbox" id="volumeless-pods">
+            <input type="checkbox" id="connection-validation">
         `;
 
 		const expected = {

@@ -129,6 +129,63 @@
                     </div>
                   </div>
 
+                  <div class="row mb-4 resiliency-operator col-sm-11">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="operator-resiliency" value="" onchange="onOperatorResiliencyChange()">
+                      <label for="operator-resiliency" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Resiliency module">Resiliency</label>
+                    </div>
+                    <div class="row child-level-one" id="podmon-wrapper">
+                      <div class="was-validated row mt-3 child-level-one" id="resiliency-label-value">
+                        <label for="label-value" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Label value for the Resiliency module">Label Value</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="text" id="label-value" placeholder="csi-powerstore" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="row mt-1">
+                            <a class="reset" id="reset-label-value" onclick="resetLabelValue(csmMap)">Reset to default</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="was-validated row mt-3 child-level-one" id="array-poll-rate">
+                        <label for="poll-rate" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Provide Array Connectivity Poll Rate">Array Connectivity Poll Rate</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="number" id="poll-rate" placeholder="60" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="row mt-1">
+                            <a class="reset" id="reset-array-poll-rate" onclick="resetArrayPollRate(csmMap)">Reset to default</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3 array-connection child-level-one" id="connection-validation-wrapper">
+                        <div class="col-sm-12">
+                          <input class="form-check-input" type="checkbox" id="connection-validation" value="">
+                          <label for="connection-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Skip Array Connection Validation">Skip Array Connection Validation</label>
+                        </div>
+                      </div>
+                      <div class="was-validated row mt-3 child-level-one" id="driver-pod-label-value">
+                        <label for="driver-pod-label" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Provide Driver Pod Label Value">Driver Pod Label Value</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="text" id="driver-pod-label" placeholder="dell-storage" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="row mt-1">
+                            <a class="reset" id="reset-driver-pod-label" onclick="resetDriverPodLabel(csmMap)">Reset to default</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3 volumeless-pods child-level-one" id="ignore-volumeless-pods">
+                        <div class="col-sm-12">
+                          <input class="form-check-input" type="checkbox" id="volumeless-pods" value="">
+                          <label for="volumeless-pods" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Volume-less Pods">Ignore Volumeless Pods</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <hr>
                   <div class="row mb-4">
                     <div class="col-sm-12 h5">Select the features for installation</div>

@@ -19,6 +19,7 @@ const {
 	onAuthorizationChange,
 	onObservabilityChange,
 	onResiliencyChange,
+	onOperatorResiliencyChange,
 	onSnapshotChange,
 	onVSphereChange,
 	onNodeSelectorChange,
@@ -27,6 +28,9 @@ const {
 	resetControllerCount,
 	resetVolNamePrefix,
 	resetSnapNamePrefix,
+	resetDriverPodLabel,
+	resetArrayPollRate,
+	resetLabelValue,
 	resetNodeSelectorLabel,
 	resetDriverNamespace,
 	resetTaint,
@@ -131,6 +135,30 @@ describe("GIVEN onResiliencyChange function", () => {
 		onResiliencyChange("Test podmon note");
 
 		expect($("div#podmon-note-wrapper").css("display")).not.toEqual("none");
+	});
+});
+
+describe("GIVEN onOperatorResiliencyChange function", () => {
+	test("SHOULD hide podmon components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="operator-resiliency">
+            <div id="podmon-wrapper" style="display:">
+        `;
+
+		onOperatorResiliencyChange();
+
+		expect($("div#podmon-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show podmon components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="operator-resiliency" checked>
+            <div id="podmon-wrapper" style="display:none">
+        `;
+
+		onOperatorResiliencyChange();
+
+		expect($("div#podmon-wrapper").css("display")).not.toEqual("none");
 	});
 });
 
@@ -324,6 +352,54 @@ describe("GIVEN resetSnapNamePrefix function", () => {
 	});
 });
 
+describe("GIVEN resetArrayPollRate function", () => {
+	const testCSMMap = new Map([
+		["pollRate", "60"]
+	]);
+
+	test("SHOULD invoke resetArrayPollRate function", () => {
+		document.body.innerHTML = `
+            <input type="number" id="poll-rate">
+        `;
+
+		resetArrayPollRate(testCSMMap);
+
+		expect(document.getElementById("poll-rate").value).toEqual("60");
+	});
+});
+
+describe("GIVEN resetLabelValue function", () => {
+	const testCSMMap = new Map([
+		["labelValue", "csi-powerstore"]
+	]);
+
+	test("SHOULD invoke resetLabelValue function", () => {
+		document.body.innerHTML = `
+            <input type="text" id="label-value">
+        `;
+
+		resetLabelValue(testCSMMap);
+
+		expect(document.getElementById("label-value").value).toEqual("csi-powerstore");
+	});
+});
+
+describe("GIVEN resetDriverPodLabel function", () => {
+	const testCSMMap = new Map([
+		["driverPodLabel", "dell-storage"]
+	]);
+
+	test("SHOULD invoke resetDriverPodLabel function", () => {
+		document.body.innerHTML = `
+            <input type="text" id="driver-pod-label">
+        `;
+
+		resetDriverPodLabel(testCSMMap);
+
+		expect(document.getElementById("driver-pod-label").value).toEqual("dell-storage");
+	});
+});
+
 describe("GIVEN resetNodeSelectorLabel function", () => {
 	const testCSMMap = new Map([
 		["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"]
@@ -423,7 +499,7 @@ describe("GIVEN displayModules function", () => {
 		expect($(".vol-name-prefix").css("display")).toEqual("none");
 		expect($(".snapshot-feature").css("display")).toEqual("none");
 		expect($(".fsGroupPolicy").css("display")).toEqual("block");
-		expect($(".resiliency").css("display")).toEqual("block");
+		expect($(".resiliency").css("display")).toEqual("none");
 		expect($(".storage-capacity").css("display")).toEqual("block");
 	});
 

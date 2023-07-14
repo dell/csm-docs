@@ -30,6 +30,7 @@ function onInstallationTypeChange(){
 	installationType = document.getElementById("installation-type").value	
 	displayModules(installationType, driver, CONSTANTS)
 	$("#command-text-area").hide();
+	onOperatorResiliencyChange();
 	loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value);
 }
 
@@ -76,6 +77,14 @@ function onResiliencyChange(podmonNoteValue) {
 		$("#podmon-note").html(podmonNoteValue);
 	} else {
 		$('div#podmon-note-wrapper').hide();
+	}
+}
+
+function onOperatorResiliencyChange() {
+	if ($("#operator-resiliency").prop('checked') === true) {
+		$('div#podmon-wrapper').show();
+	} else {
+		$('div#podmon-wrapper').hide();
 	}
 }
 
@@ -155,6 +164,18 @@ const resetDriverNamespace = driverValue => {
 	document.getElementById("driver-namespace").value = driverValue;
 }
 
+const resetArrayPollRate = csmMapValue => {
+	document.getElementById("poll-rate").value = String(csmMapValue.get("pollRate"));
+}
+
+const resetLabelValue = csmMapValue => {
+	document.getElementById("label-value").value = String(csmMapValue.get("labelValue"));
+}
+
+const resetDriverPodLabel = csmMapValue => {
+	document.getElementById("driver-pod-label").value = String(csmMapValue.get("driverPodLabel"));
+}
+
 const resetTaint = csmMapValue => {
 	document.getElementById("taint").value = String(csmMapValue.get("taint"));
 }
@@ -191,7 +212,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".image-repository").show();
 	$(".resizer").show();
 	$(".snapshot-feature").show();
-
+	$(".resiliency-operator").hide();
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
 			$(".authorization").hide();
@@ -200,6 +221,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".resiliency").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
 			if (installationType === 'operator'){
+				$(".resiliency").hide();
+				$(".resiliency-operator").show();
 				$(".observability").hide();
 				$(".replication-mod").hide();
 				$(".image-repository").hide();
@@ -321,6 +344,7 @@ if (typeof exports !== 'undefined') {
 		onAuthorizationChange,
 		onObservabilityChange,
 		onResiliencyChange,
+		onOperatorResiliencyChange,
 		onSnapshotChange,
 		onVSphereChange,
 		onNodeSelectorChange,
@@ -329,6 +353,9 @@ if (typeof exports !== 'undefined') {
 		resetControllerCount,
 		resetNodeSelectorLabel,
 		resetDriverNamespace,
+		resetArrayPollRate,
+		resetLabelValue,
+		resetDriverPodLabel,
 		resetTaint,
 		downloadFile,
 		displayModules,
