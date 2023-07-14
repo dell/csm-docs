@@ -157,7 +157,6 @@ describe("GIVEN setValues function", () => {
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
-		console.log("***received***", received)
 		expect(expected).toEqual(received);
 	});
 
