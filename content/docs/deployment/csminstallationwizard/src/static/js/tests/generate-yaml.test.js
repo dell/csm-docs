@@ -92,7 +92,7 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="controller-pods-node-selector" checked>
             <input type="checkbox" id="node-pods-node-selector" checked>
             <input type="text" id="driver-namespace" value="">
-            <input type="text" id="label-value" value="csi-powerstore">
+            <input type="text" id="label-value" value="">
             <input type="number" id="poll-rate" value="60">
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
@@ -142,7 +142,7 @@ describe("GIVEN setValues function", () => {
 			storageArrayEndpointUrl: '""',
 			storageArrayBackupEndpointUrl: '""',
 			operatorResiliency: false,
-			labelValue: 'csi-powerstore',
+			labelValue: "",
 			pollRate: '60',
 			driverPodLabel: 'dell-storage',
 			connectionValidation: false,
@@ -182,7 +182,7 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
-            <input type="text" id="label-value" value="csi-powerstore">
+            <input type="text" id="label-value" value="">
             <input type="number" id="poll-rate" value="60">
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
@@ -230,7 +230,7 @@ describe("GIVEN setValues function", () => {
 			storageArrayEndpointUrl: '""',
 			storageArrayBackupEndpointUrl: '""',
 			operatorResiliency: false,
-			labelValue: 'csi-powerstore',
+			labelValue: "",
 			pollRate: '60',
 			driverPodLabel: 'dell-storage',
 			connectionValidation: false,
@@ -270,7 +270,7 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
-            <input type="text" id="label-value" value="csi-powerstore">
+            <input type="text" id="label-value" value="">
             <input type="number" id="poll-rate" value="60">
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">

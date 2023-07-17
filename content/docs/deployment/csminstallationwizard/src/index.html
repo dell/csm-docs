@@ -139,11 +139,11 @@
                         <label for="label-value" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="String that sets the value that denotes pods to be monitored by CSM for Resiliency">Label Value</label>
                         <div class="col-sm-9"></div>
                         <div class="col-sm-2">
-                          <input class="form-control input-lg" type="text" id="label-value" placeholder="csi-powerstore" oninput="validateInput(validateForm, CONSTANTS)" required>
+                          <input class="form-control input-lg" type="text" id="label-value" oninput="validateInput(validateForm, CONSTANTS)" required>
                         </div>
                         <div class="col-sm-4">
                           <div class="row mt-1">
-                            <a class="reset" id="reset-label-value" onclick="resetLabelValue(csmMap)">Reset to default</a>
+                            <a class="reset" id="reset-label-value" onclick="resetLabelValue(driver, CONSTANTS)">Reset to default</a>
                           </div>
                         </div>
                       </div>

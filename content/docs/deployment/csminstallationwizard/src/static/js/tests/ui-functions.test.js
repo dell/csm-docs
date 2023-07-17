@@ -51,6 +51,7 @@ const CONSTANTS = {
 	POWERMAX_NAMESPACE: "powermax",
 	POWERSCALE_NAMESPACE: "isilon",
 	UNITY_NAMESPACE: "unity",
+	POWERSTORE_LABEL_VALUE: "csi-powerstore",
 	VALUES: "values",
 	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
@@ -369,16 +370,12 @@ describe("GIVEN resetArrayPollRate function", () => {
 });
 
 describe("GIVEN resetLabelValue function", () => {
-	const testCSMMap = new Map([
-		["labelValue", "csi-powerstore"]
-	]);
-
 	test("SHOULD invoke resetLabelValue function", () => {
 		document.body.innerHTML = `
             <input type="text" id="label-value">
         `;
 
-		resetLabelValue(testCSMMap);
+		resetLabelValue("csi-powerstore", CONSTANTS);
 
 		expect(document.getElementById("label-value").value).toEqual("csi-powerstore");
 	});
@@ -470,9 +467,10 @@ describe("GIVEN displayModules function", () => {
 		<div class="migration"></div>
 		<div class="vSphere"></div>
 		<div class="monitor"></div>
+		<input type="text" id="label-value">
 	`;
 
-	test("SHOULD show expected components for csi-powerstore", () => {
+	test("SHOULD show expected components for helm csi-powerstore", () => {
 		document.body.innerHTML = testHtml;
 
 		displayModules("helm", "powerstore", CONSTANTS);
@@ -484,7 +482,7 @@ describe("GIVEN displayModules function", () => {
 		expect($(".storage-capacity").css("display")).toEqual("block");
 	});
 
-	test("SHOULD show expected components for csi-powerstore", () => {
+	test("SHOULD show expected components for operator csi-powerstore", () => {
 		document.body.innerHTML = testHtml;
 
 		displayModules("operator", "powerstore", CONSTANTS);

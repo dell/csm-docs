@@ -102,7 +102,6 @@ function setDefaultValues(defaultValuesParam, csmMapValues) {
 	document.getElementById("snapshot-prefix").value = csmMapValues.get("snapNamePrefix");
 	document.getElementById("cert-secret-count").value = csmMapValues.get("certSecretCount");
 	document.getElementById("taint").value = csmMapValues.get("taint");
-	document.getElementById("label-value").value = csmMapValues.get("labelValue");
 	document.getElementById("poll-rate").value = csmMapValues.get("pollRate");
 	document.getElementById("driver-pod-label").value = csmMapValues.get("driverPodLabel");
 

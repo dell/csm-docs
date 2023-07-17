@@ -80,13 +80,7 @@ function onResiliencyChange(podmonNoteValue) {
 	}
 }
 
-function onOperatorResiliencyChange() {
-	if ($("#operator-resiliency").prop('checked') === true) {
-		$('div#podmon-wrapper').show();
-	} else {
-		$('div#podmon-wrapper').hide();
-	}
-}
+const onOperatorResiliencyChange = () => $("#operator-resiliency").prop('checked') === true ? $('div#podmon-wrapper').show() : $('div#podmon-wrapper').hide();
 
 function onSnapshotChange(snapshotNoteValue, driverName, CONSTANTS_PARAM) {
 	if ($("#snapshot").prop('checked') === true) {
@@ -172,8 +166,12 @@ const resetArrayPollRate = csmMapValue => {
 	document.getElementById("poll-rate").value = String(csmMapValue.get("pollRate"));
 }
 
-const resetLabelValue = csmMapValue => {
-	document.getElementById("label-value").value = String(csmMapValue.get("labelValue"));
+const resetLabelValue = (driverValue, CONSTANTS_PARAM) => {
+	if (driverValue === CONSTANTS_PARAM.POWERSTORE) {
+		document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSTORE_LABEL_VALUE;
+	} else {
+		document.getElementById("label-value").value = driverValue;
+	}
 }
 
 const resetDriverPodLabel = csmMapValue => {
@@ -236,6 +234,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".snapshot-feature").hide();
 				$(".vol-name-prefix").hide();
 				$(".fsGroupPolicy").show();
+				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSTORE_LABEL_VALUE;
 			}
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
