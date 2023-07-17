@@ -136,7 +136,7 @@
                     </div>
                     <div class="row child-level-one" id="podmon-wrapper">
                       <div class="was-validated row mt-3 child-level-one" id="resiliency-label-value">
-                        <label for="label-value" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Label value for the Resiliency module">Label Value</label>
+                        <label for="label-value" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="String that sets the value that denotes pods to be monitored by CSM for Resiliency">Label Value</label>
                         <div class="col-sm-9"></div>
                         <div class="col-sm-2">
                           <input class="form-control input-lg" type="text" id="label-value" placeholder="csi-powerstore" oninput="validateInput(validateForm, CONSTANTS)" required>
@@ -148,7 +148,7 @@
                         </div>
                       </div>
                       <div class="was-validated row mt-3 child-level-one" id="array-poll-rate">
-                        <label for="poll-rate" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Provide Array Connectivity Poll Rate">Array Connectivity Poll Rate</label>
+                        <label for="poll-rate" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="The minimum polling rate in seconds to determine if the array has connectivity to a node">Array Connectivity Poll Rate</label>
                         <div class="col-sm-9"></div>
                         <div class="col-sm-2">
                           <input class="form-control input-lg" type="number" id="poll-rate" placeholder="60" oninput="validateInput(validateForm, CONSTANTS)" required>
@@ -162,7 +162,7 @@
                       <div class="row mt-3 array-connection child-level-one" id="connection-validation-wrapper">
                         <div class="col-sm-12">
                           <input class="form-check-input" type="checkbox" id="connection-validation" value="">
-                          <label for="connection-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Skip Array Connection Validation">Skip Array Connection Validation</label>
+                          <label for="connection-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable, if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod">Skip Array Connection Validation</label>
                         </div>
                       </div>
                       <div class="was-validated row mt-3 child-level-one" id="driver-pod-label-value">
@@ -180,7 +180,7 @@
                       <div class="row mt-3 volumeless-pods child-level-one" id="ignore-volumeless-pods">
                         <div class="col-sm-12">
                           <input class="form-check-input" type="checkbox" id="volumeless-pods" value="">
-                          <label for="volumeless-pods" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Volume-less Pods">Ignore Volumeless Pods</label>
+                          <label for="volumeless-pods" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable, if set to true will enable CSM for Resiliency to ignore pods without persistent volume attached to the pod.">Ignore Volumeless Pods</label>
                         </div>
                       </div>
                     </div>
@@ -272,7 +272,7 @@
 
                   <div class="row mb-4 storage-capacity">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="storage-capacity" value="">
+                      <input class="form-check-input" type="checkbox" id="storage-capacity" value="" checked>
                       <label for="storage-capacity" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Storage Capacity Tracking">Storage Capacity Tracking</label>
                     </div>
                   </div>
@@ -494,7 +494,7 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="row mt-1">
-                          <a class="reset" id="reset-driver-namespace" onclick="resetDriverNamespace(driver)">Reset to default</a>
+                          <a class="reset" id="reset-driver-namespace" onclick="resetDriverNamespace(driver, CONSTANTS)">Reset to default</a>
                         </div>
                       </div>
                     </div>

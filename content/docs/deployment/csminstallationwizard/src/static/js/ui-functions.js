@@ -160,8 +160,12 @@ const resetNodeSelectorLabel = csmMapValue => {
 	document.getElementById("node-selector-label").value = String(csmMapValue.get("nodeSelectorLabel"));
 }
 
-const resetDriverNamespace = driverValue => {
-	document.getElementById("driver-namespace").value = driverValue;
+const resetDriverNamespace = (driverValue, CONSTANTS_PARAM) => {
+	if (driverValue === CONSTANTS_PARAM.POWERSTORE) {
+		document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
+	} else {
+		document.getElementById("driver-namespace").value = driverValue;
+	}
 }
 
 const resetArrayPollRate = csmMapValue => {

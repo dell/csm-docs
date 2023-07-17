@@ -422,7 +422,7 @@ describe("GIVEN resetDriverNamespace function", () => {
             <input type="text" id="driver-namespace">
         `;
 
-		resetDriverNamespace("csi-powerstore");
+		resetDriverNamespace("csi-powerstore", CONSTANTS);
 
 		expect(document.getElementById("driver-namespace").value).toEqual("csi-powerstore");
 	});
