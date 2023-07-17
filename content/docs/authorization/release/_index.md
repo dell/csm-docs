@@ -22,3 +22,7 @@ Description: >
 - CSM Authorization doesn't write the status code on error for csi-powerscale. ([#787](https://github.com/dell/csm/issues/787))
 - Authorization RPM installation should use nogpgcheck for k3s-selinux package. ([#772](https://github.com/dell/csm/issues/772))
 - CSM Authorization - karavictl generate token should output valid yaml. ([#767](https://github.com/dell/csm/issues/767))
+
+### Known Issues
+
+There are no known issues in this release.
