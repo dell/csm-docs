@@ -48,7 +48,6 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
 	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
 	DriverValues.driverNamespace = document.getElementById("driver-namespace").value;
-	DriverValues.installationType = document.getElementById("installation-type").value;
 	DriverValues.labelValue = document.getElementById("label-value").value;
 	DriverValues.pollRate = document.getElementById("poll-rate").value;
 	DriverValues.driverPodLabel = document.getElementById("driver-pod-label").value;
@@ -61,7 +60,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	var labels = DriverValues.nodeSelectorLabel.split(":");
 	var nodeSelector
 	var taints
-	if (DriverValues.installationType === CONSTANTS_PARAM.OPERATOR) {
+	if (document.getElementById("installation-type").value === CONSTANTS_PARAM.OPERATOR) {
 		nodeSelector = '\n'.padEnd(8, " ") + labels[0] + ': "' + labels[1] + '"';
 		taints = CONSTANTS_PARAM.OPERATOR_TAINTS.replace("$KEY", taint).trimEnd();
 	} else {
@@ -118,7 +117,6 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$SNAP_NAME_PREFIX", yamlTplValues.snapNamePrefix);
 	yamlTpl = yamlTpl.replaceAll("$FSGROUP_POLICY", yamlTplValues.fsGroupPolicy);
 	yamlTpl = yamlTpl.replaceAll("$NAMESPACE", yamlTplValues.driverNamespace);
-	yamlTpl = yamlTpl.replaceAll("$INSTALLATIONTYPE", yamlTplValues.installationType);
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_POD_NODE_SELECTOR", yamlTplValues.controllerPodsNodeSelector);
 	yamlTpl = yamlTpl.replaceAll("$NODE_POD_NODE_SELECTOR", yamlTplValues.nodePodsNodeSelector);
 	yamlTpl = yamlTpl.replaceAll("$HEALTH_MONITOR_ENABLED", yamlTplValues.healthMonitor);

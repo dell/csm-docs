@@ -112,7 +112,6 @@ describe("GIVEN setValues function", () => {
 			snapNamePrefix: 'csi-snap',
 			fsGroupPolicy: 'ReadWriteOnceWithFSType',
 			driverNamespace: '',
-			installationType: 'helm',
 			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
 			nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
@@ -200,7 +199,6 @@ describe("GIVEN setValues function", () => {
 			snapNamePrefix: 'csi-snap',
 			fsGroupPolicy: 'ReadWriteOnceWithFSType',
 			driverNamespace: '',
-			installationType: 'operator',
 			controllerPodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
 			nodePodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
 			nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
@@ -278,7 +276,6 @@ describe("GIVEN setValues function", () => {
         `;
 
 		const expected = {
-			installationType: "operator",
 			csmVersion: "1.6.0",
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
