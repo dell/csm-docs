@@ -728,7 +728,7 @@ This is the list of all the attributes supported by PowerStore CSI driver:
 
 | Block Volume | NFS Volume |
 | --- | --- |
-| description <br /> appliance_id <br /> volume_group_id <br /> protection_policy_id <br /> performance_policy_id <br /> app_type <br /> app_type_other <br />  <br />  <br />  <br />  <br />  <br /> | description <br /> config_type <br /> access_policy <br /> locking_policy <br /> folder_rename_policy <br /> is_async_mtime_enabled <br /> protection_policy_id <br /> file_events_publishing_mode <br /> host_io_size <br /> flr_attributes.flr_create.mode <br /> flr_attributes.flr_create.default_retention <br /> flr_attributes.flr_create.maximum_retention <br /> flr_attributes.flr_create.minimum_retention |
+| csi.dell.com/description <br /> csi.dell.com/appliance_id <br /> csi.dell.com/volume_group_id <br /> csi.dell.com/protection_policy_id <br /> csi.dell.com/performance_policy_id <br /> csi.dell.com/app_type <br /> csi.dell.com/app_type_other <br />  <br />  <br />  <br />  <br />  <br /> | csi.dell.com/description <br /> csi.dell.com/config_type <br /> csi.dell.com/access_policy <br /> csi.dell.com/locking_policy <br /> csi.dell.com/folder_rename_policy <br /> csi.dell.com/is_async_mtime_enabled <br /> csi.dell.com/protection_policy_id <br /> csi.dell.com/file_events_publishing_mode <br /> csi.dell.com/host_io_size <br /> csi.dell.com/flr_attributes.flr_create.mode <br /> csi.dell.com/flr_attributes.flr_create.default_retention <br /> csi.dell.com/flr_attributes.flr_create.maximum_retention <br /> csi.dell.com/flr_attributes.flr_create.minimum_retention |
 
 <br>  
 
@@ -737,6 +737,8 @@ This is the list of all the attributes supported by PowerStore CSI driver:
 >Make sure that the attributes specified are supported by the version of PowerStore array used. 
 
 >Configurable Volume Attributes feature is supported with Helm.
+
+>Prefix `csi.dell.com/` has been added to the attributes from CSI PowerStore driver version 2.8.0
 
 ## Storage Capacity Tracking
 CSI PowerStore driver version 2.5.0 and above supports Storage Capacity Tracking.
