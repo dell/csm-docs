@@ -709,9 +709,9 @@ metadata:
   name: pvc1
   namespace: default
   labels:
-    description: DB-volume
-    appliance_id: A1
-    volume_group_id: f5f9dbbd-d12f-463e-becb-2e6d0a85405e
+    csi.dell.com/description: DB-volume
+    csi.dell.com/appliance_id: A1
+    csi.dell.com/volume_group_id: f5f9dbbd-d12f-463e-becb-2e6d0a85405e
 spec:
   accessModes:
   - ReadWriteOnce
