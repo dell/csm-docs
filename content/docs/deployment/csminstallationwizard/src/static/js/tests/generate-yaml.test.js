@@ -35,7 +35,6 @@ const CONSTANTS = {
 	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
 	HYPHEN: "-",
-	NODE_SELECTOR_TAB: '\n'.padEnd(7, " "),
 	SLASH: "/",
 	VERSIONS_DIR: "csm-versions",
 	CSM: "csm",
@@ -44,10 +43,16 @@ const CONSTANTS = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V170: "1.0.0",
-	TAINTS: `
+	CSM_HELM_V180: "1.1.0",
+	HELM_TAINTS: `
     - key: "$KEY"
       operator: "Exists"
       effect: "NoSchedule"
+	`,
+	OPERATOR_TAINTS: `
+  - key: "$KEY"
+    operator: "Exists"
+    effect: "NoSchedule"
 	`,
 	COMMENTED_TAINTS: `
     #- key: "node-role.kubernetes.io/control-plane"
@@ -57,27 +62,117 @@ const CONSTANTS = {
 };
 
 const testCSMMap = new Map([
-	["csmVersion", "1.6.0"],
+	["csmVersion", "1.7.0"],
 	["imageRepository", "dellemc"],
 	["controllerCount", "1"],
 	["volNamePrefix", "csivol"],
 	["snapNamePrefix", "csi-snap"],
 	["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
-	["driverVersion", "v2.6.0"],
+	["driverVersion", "v2.7.0"],
 ]);
 
 describe("GIVEN setValues function", () => {
-	test("SHOULD return expected DriverValues", () => {
+	test("SHOULD return expected DriverValues for Helm", () => {
 		document.body.innerHTML = `
             <select id="csm-version">
-                <option value="1.6.0">CSM 1.6</option>
+                <option value="1.7.0">CSM 1.7</option>
+            </select>
+            <select id="installation-type">
+                <option value="helm" selected>Helm</option>
             </select>
             <select id="fsGroup-Policy">
                 <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
             </select>
             <input type="text" id="image-repository" value="dellemc">
-            <input type="number" id="cert-secret-count" value="0">
-            <input type="number" id="controller-count" value="2">
+            <input type="number" id="cert-secret-count" value="1">
+            <input type="number" id="controller-count" value="1">
+            <input type="text" id="vol-name-prefix" value="csivol">
+            <input type="text" id="snapshot-prefix" value="csi-snap">
+            <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
+            <input type="checkbox" id="controller-pods-node-selector" checked>
+            <input type="checkbox" id="node-pods-node-selector" checked>
+            <input type="text" id="driver-namespace" value="">
+            <input type="text" id="label-value" value="">
+            <input type="number" id="poll-rate" value="60">
+            <input type="text" id="driver-pod-label" value="dell-storage">
+            <input type="checkbox" id="volumeless-pods">
+            <input type="checkbox" id="connection-validation">
+            <input type="text" id="authorization-proxy-host" value="">
+            <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+        `;
+
+		const expected = {
+			csmVersion: '1.7.0',
+			driverVersion: 'v2.7.0',
+			imageRepository: 'dellemc',
+			monitor: false,
+			certSecretCount: '1',
+			controllerCount: '1',
+			volNamePrefix: 'csivol',
+			snapNamePrefix: 'csi-snap',
+			fsGroupPolicy: 'ReadWriteOnceWithFSType',
+			driverNamespace: '',
+			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+			nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
+			controllerTolerations: '\n' +
+        '    - key: "node-role.kubernetes.io/control-plane"\n' +
+        '      operator: "Exists"\n' +
+        '      effect: "NoSchedule"',
+			nodeTolerations: '\n' +
+        '    - key: "node-role.kubernetes.io/control-plane"\n' +
+        '      operator: "Exists"\n' +
+        '      effect: "NoSchedule"',
+			snapshot: false,
+			vgsnapshot: false,
+			resizer: false,
+			healthMonitor: false,
+			replication: false,
+			migration: false,
+			observability: false,
+			observabilityMetrics: false,
+			authorization: false,
+			resiliency: false,
+			storageCapacity: false,
+			authorizationSkipCertValidation: false,
+			authorizationProxyHost: '""',
+			certManagerEnabled: false,
+			storageArrayId: undefined,
+			storageArrayEndpointUrl: '""',
+			storageArrayBackupEndpointUrl: '""',
+			operatorResiliency: false,
+			labelValue: "",
+			pollRate: '60',
+			driverPodLabel: 'dell-storage',
+			connectionValidation: false,
+			volumelessPods: false,
+			clusterPrefix: undefined,
+			portGroups: undefined,
+			vSphereEnabled: false,
+			vSphereFCPortGroup: undefined,
+			vSphereFCHostName: undefined,
+			vSphereVCenterHost: undefined,
+			vSphereVCenterCredSecret: undefined
+		};
+
+		const received = setValues(testCSMMap, CONSTANTS);
+		expect(expected).toEqual(received);
+	});
+
+	test("SHOULD return expected DriverValues for Operator", () => {
+		document.body.innerHTML = `
+            <select id="csm-version">
+                <option value="1.7.0">CSM 1.7</option>
+            </select>
+            <select id="installation-type">
+                <option value="operator" selected>Operator</option>
+            </select>
+            <select id="fsGroup-Policy">
+                <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
+            </select>
+            <input type="text" id="image-repository" value="dellemc">
+            <input type="number" id="cert-secret-count" value="1">
+            <input type="number" id="controller-count" value="1">
             <input type="text" id="vol-name-prefix" value="csivol">
             <input type="text" id="snapshot-prefix" value="csi-snap">
             <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
@@ -86,35 +181,69 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+            <input type="text" id="label-value" value="">
+            <input type="number" id="poll-rate" value="60">
+            <input type="text" id="driver-pod-label" value="dell-storage">
+            <input type="checkbox" id="volumeless-pods">
+            <input type="checkbox" id="connection-validation">
         `;
 
 		const expected = {
-			csmVersion: "1.6.0",
-			driverVersion: "v2.6.0",
-			imageRepository: "dellemc",
-			certSecretCount: "0",
-			controllerCount: "1",
-			volNamePrefix: "csivol",
-			snapNamePrefix: "csi-snap",
-			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
-			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
-			nodeSelectorLabel: "node-role.kubernetes.io/control-plane:",
-			snapshot: true,
+			csmVersion: '1.7.0',
+			driverVersion: 'v2.7.0',
+			imageRepository: 'dellemc',
+			monitor: false,
+			certSecretCount: '1',
+			controllerCount: '1',
+			volNamePrefix: 'csivol',
+			snapNamePrefix: 'csi-snap',
+			fsGroupPolicy: 'ReadWriteOnceWithFSType',
+			driverNamespace: '',
+			controllerPodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
+			nodePodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
+			nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
+			controllerTolerations: '\n' +
+        '  - key: "node-role.kubernetes.io/control-plane"\n' +
+        '    operator: "Exists"\n' +
+        '    effect: "NoSchedule"',
+			nodeTolerations: '\n' +
+        '  - key: "node-role.kubernetes.io/control-plane"\n' +
+        '    operator: "Exists"\n' +
+        '    effect: "NoSchedule"',
+			snapshot: false,
 			vgsnapshot: false,
-			resizer: true,
+			resizer: false,
 			healthMonitor: false,
 			replication: false,
+			migration: false,
 			observability: false,
 			observabilityMetrics: false,
 			authorization: false,
-			authorizationSkipCertValidation: true,
+			resiliency: false,
+			storageCapacity: false,
+			authorizationSkipCertValidation: false,
+			authorizationProxyHost: '""',
 			certManagerEnabled: false,
-			taint: "node-role.kubernetes.io/control-plane"
+			storageArrayId: undefined,
+			storageArrayEndpointUrl: '""',
+			storageArrayBackupEndpointUrl: '""',
+			operatorResiliency: false,
+			labelValue: "",
+			pollRate: '60',
+			driverPodLabel: 'dell-storage',
+			connectionValidation: false,
+			volumelessPods: false,
+			clusterPrefix: undefined,
+			portGroups: undefined,
+			vSphereEnabled: false,
+			vSphereFCPortGroup: undefined,
+			vSphereFCHostName: undefined,
+			vSphereVCenterHost: undefined,
+			vSphereVCenterCredSecret: undefined
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
-
-		expect(received).toEqual(received);
+		expect(expected).toEqual(received);
 	});
 
 	test("SHOULD return expected DriverValues for csm version 1.6.0", () => {
@@ -122,6 +251,9 @@ describe("GIVEN setValues function", () => {
             <select id="csm-version">
                 <option value="1.6.0">CSM 1.6</option>
             </select>
+            <select id="installation-type">
+              <option value="operator" selected>Operator</option>
+            </select>
             <select id="fsGroup-Policy">
                 <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
             </select>
@@ -136,6 +268,11 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+            <input type="text" id="label-value" value="">
+            <input type="number" id="poll-rate" value="60">
+            <input type="text" id="driver-pod-label" value="dell-storage">
+            <input type="checkbox" id="volumeless-pods">
+            <input type="checkbox" id="connection-validation">
         `;
 
 		const expected = {
@@ -163,7 +300,6 @@ describe("GIVEN setValues function", () => {
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
-
 		expect(received).toEqual(received);
 	});
 });
