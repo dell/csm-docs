@@ -611,4 +611,16 @@ vSphere:
 >Note: Replication is not supported with this feature.
 >Limitations of RDM can be referred [here.](https://configmax.esp.vmware.com/home)  
 >Supported number of RDM Volumes per VM is 60 as per the limitations.
->RDMs should not be added/removed manually from vCenter on any of the cluster VMs.   
+>RDMs should not be added/removed manually from vCenter on any of the cluster VMs.
+
+## Storage Capacity Tracking
+
+CSI PowerMax driver version 2.8.0 and above supports Storage Capacity Tracking.
+
+This feature helps the scheduler to make more informed choices about where to start pods which depend on unbound volumes with late binding (aka “wait for first consumer”). Nodes with requested capacity that is present on storage array, satisfying the topology constraints will be available for scheduling the pods, otherwise the pods stay in pending state.
+
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
+
+The attribute storageCapacity in values.yaml can be used to enable/disable (enabled by default) the feature during driver installation . To configure how often driver checks for changed capacity, set storageCapacity.pollInterval attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v280.yaml) by editing the --capacity-poll-interval argument present in the provisioner sidecar.
+
+>Note: This feature requires kubernetes v1.24 and above and will be automatically disabled in lower version of kubernetes.
