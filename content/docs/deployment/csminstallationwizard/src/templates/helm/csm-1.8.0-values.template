@@ -144,6 +144,8 @@ csi-powermax:
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
     skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
+  storageCapacity:
+    enabled: $STORAGE_CAPACITY_ENABLED
   vSphere:
     enabled: $VSPHERE_ENABLED
     fcPortGroup: "$VSPHERE_FC_PORT_GROUP"
