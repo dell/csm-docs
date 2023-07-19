@@ -72,7 +72,7 @@ storage products from Kubernetes clusters
 ```
   -h, --help                 Help for karavictl
   -f, --admin-token string   Path to admin token file; required for all commands except `admin token` and `cluster-info`
-      --addr                 Address of the CSM Authorization Proxy-Server; required for all commands except `admin token` and `cluster-info`
+      --addr                 Address of the CSM Authorization Proxy Server; required for all commands except `admin token` and `cluster-info`
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -194,7 +194,7 @@ karavictl generate [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -240,7 +240,7 @@ karavictl generate token [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -296,7 +296,7 @@ karavictl role [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -332,7 +332,7 @@ karavictl role get [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -382,7 +382,7 @@ karavictl role list [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -451,7 +451,7 @@ karavictl role create [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -497,7 +497,7 @@ karavictl role update [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -541,7 +541,7 @@ karavictl role delete <role-name> [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -580,7 +580,7 @@ karavictl rolebinding [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -618,7 +618,7 @@ karavictl rolebinding create [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -659,7 +659,7 @@ karavictl rolebinding delete [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -699,7 +699,7 @@ karavictl storage [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -737,7 +737,7 @@ karavictl storage get [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -783,7 +783,7 @@ karavictl storage list [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -840,7 +840,7 @@ karavictl storage create [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -885,7 +885,7 @@ karavictl storage update [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -927,7 +927,7 @@ karavictl storage delete [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -966,7 +966,7 @@ karavictl tenant [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -1004,7 +1004,7 @@ karavictl tenant create [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -1044,7 +1044,7 @@ karavictl tenant get [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -1088,7 +1088,7 @@ karavictl tenant list [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -1137,7 +1137,7 @@ karavictl tenant revoke [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -1176,7 +1176,7 @@ karavictl tenant delete [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -1216,7 +1216,7 @@ karavictl tenant update [flags]
 
 ```
   -f, --admin-token string   Path to admin token file; required
-      --addr                 Address of the CSM Authorization Proxy-Server; required
+      --addr                 Address of the CSM Authorization Proxy Server; required
       --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
