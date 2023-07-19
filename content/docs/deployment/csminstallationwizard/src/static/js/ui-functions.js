@@ -252,6 +252,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".port-groups").show();
 			$(".migration").show();
 			$(".vSphere").show();
+			$(".storage-capacity").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.POWERFLEX:
