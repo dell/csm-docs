@@ -148,7 +148,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input. | No | false |
    
-6. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
+5. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 
 **Note** - If CSI driver is getting installed using OCP UI , create these two configmaps manually using the command `oc create -f <configfilename>`
 1. Configmap name powermax-config-params
