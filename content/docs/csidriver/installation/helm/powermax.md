@@ -298,11 +298,10 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | image | Image for dell-csi-replicator sidecar. | No | " " |
 | replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
 | replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
-| **storageCapacity** | is an optional feature to enable storagecapacity & helps whether the requested capacity is available on the PowerMax driver and allocate it to the nodes.| - | - |
-| enabled                  | A boolean that enables/disables storagecapacity feature. |  No      |   true   |
+| **storageCapacity** | It is an optional feature that enable storagecapacity & helps the scheduler to check whether the requested capacity is available on the PowerMax driver and allocate it to the nodes.| - | - |
+| enabled                  | A boolean that enables/disables storagecapacity feature. |  -      |   true   |
 | image | Image for storagecapacity sidecar. | No | " " |
-| replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
-| replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
+| pollInterval | It configure how often external-provisioner polls the driver to detect changed capacity | No | 5m |
 | **vSphere**| This section refers to the configuration options for VMware virtualized environment support via RDM  |  -  | - |
 | enabled                  | A boolean that enables/disables VMware virtualized environment support. |  No      |   false   |
 | fcPortGroup                  | Existing portGroup that driver will use for vSphere. |  Yes      |   ""   |
