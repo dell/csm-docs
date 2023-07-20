@@ -127,6 +127,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | --------- | ----------- | -------- |-------- |
    | replicas | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability. | Yes | 2 |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   | storageCapacity | Helps the scheduler to schedule the pod on a node satisfying the topology constraints, only if the requested capacity is available on the storage array | - | true |
    | ***Common parameters for node and controller*** |
    | X_CSI_K8S_CLUSTER_PREFIX | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters | Yes | XYZ |
    | X_CSI_POWERMAX_ENDPOINT | IP address of the Unisphere for PowerMax | Yes | https://0.0.0.0:8443 |
@@ -147,7 +148,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input. | No | false |
    
-5. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
+6. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 
 **Note** - If CSI driver is getting installed using OCP UI , create these two configmaps manually using the command `oc create -f <configfilename>`
 1. Configmap name powermax-config-params
