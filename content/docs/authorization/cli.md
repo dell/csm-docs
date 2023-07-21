@@ -723,9 +723,9 @@ karavictl storage create [flags]
 
 ##### Optional Flags
 ```
-  -h, --help       Help for delete
+  -h, --help             Help for delete
   -a, --array-insecure   Skip certificate validation of the storage array
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+      --insecure         Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
@@ -766,9 +766,9 @@ karavictl storage update [flags]
 
 ##### Optional Flags
 ```
-  -h, --help       Help for delete
+  -h, --help             Help for delete
   -a, --array-insecure   Skip certificate validation of the storage array
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+      --insecure         Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
@@ -868,9 +868,9 @@ karavictl tenant create [flags]
 
 ##### Optional Flags
 ```
-  -h, --help       Help for delete
-  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny  a tenant's SDC request)
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+  -h, --help         Help for delete
+  -a, --approvesdc   To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny  a tenant's SDC request)
+      --insecure     Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
@@ -1070,9 +1070,9 @@ karavictl tenant update [flags]
 
 ##### Optional Flags
 ```
-  -h, --help       Help for delete
-  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+  -h, --help         Help for delete
+  -a, --approvesdc   To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
+      --insecure     Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
