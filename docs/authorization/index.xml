@@ -497,10 +497,10 @@ storage products from Kubernetes clusters&lt;/p&gt;
   storage      Manage storage systems
   tenant       Manage tenants
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config      string   config file (default is $HOME/.karavictl.yaml)
-  -h, --help                 help for karavictl
-  -t, --toggle               Help message for toggle
-  -f, --admin-token string   Specify the admin token file
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help                 Help for karavictl
+  -f, --admin-token string   Path to admin token file; required for all commands except `admin token` and `cluster-info`
+      --addr                 Address of the CSM Authorization Proxy Server; required for all commands except `admin token` and `cluster-info`
+      --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output&#34;&gt;Output&lt;/h5&gt;
 &lt;p&gt;Outputs help text&lt;/p&gt;
 &lt;hr&gt;
@@ -510,12 +510,13 @@ storage products from Kubernetes clusters&lt;/p&gt;
 &lt;p&gt;Generate admin token for use with CSM Authorization commands.
 The tokens output in YAML format, which can be saved in a file.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl admin token &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-1&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help                                 help for token
-  -s, --jwt-signing-secret        string     Specify JWT signing secret, or omit to use stdin
-  -n, --name                      string     Administration name
-      --refresh-token-expiration  duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
-      --access-token-expiration   duration   Expiration time of the access token, e.g. 1m30s (default 1m0s)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name   Name of the tenant
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help                       Help for token
+  -s, --jwt-signing-secret         Specify JWT signing secret, or omit to use stdin
+      --refresh-token-expiration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+      --access-token-expiration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-1&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ karavictl admin token --name admin --access-token-expiration 30s --refresh-token-expiration 120m
@@ -532,19 +533,14 @@ The tokens output in YAML format, which can be saved in a file.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Access&amp;#34;&lt;/span&gt;: &amp;lt;ACCESS-TOKEN&amp;gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Refresh&amp;#34;&lt;/span&gt;: &amp;lt;REFRESH-TOKEN&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
-&lt;h3 id=&#34;karavictl-cluster-info&#34;&gt;karavictl cluster-info&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;karavictl-cluster-info&#34;&gt;karavictl cluster-info&lt;/h3&gt;
 &lt;p&gt;Display the state of resources within the cluster&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-2&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Prints table of resources within the cluster, including their readiness&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl cluster-info &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-2&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help    help for cluster-info
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;optional-flags-1&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help    Help for cluster-info
   -w, --watch   Watch for changes
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-1&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --config string   config file (default is $HOME/.karavictl.yaml)
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-2&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl cluster-info
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
@@ -561,36 +557,27 @@ role-service           1/1     1            1           59m
 &lt;h5 id=&#34;synopsis-3&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Generates resources for use with CSM&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-3&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for generate
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-2&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-3&#34;&gt;Output&lt;/h5&gt;
-&lt;p&gt;Outputs help text&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;karavictl-generate-token&#34;&gt;karavictl generate token&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;optional-flags-2&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   Help for generate
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;karavictl-generate-token&#34;&gt;karavictl generate token&lt;/h3&gt;
 &lt;p&gt;Generate tokens&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-4&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Generate tokens for use with the CSI Driver when in proxy mode
 The tokens are output as a Kubernetes Secret resource, so the results may
 be piped directly to kubectl:&lt;/p&gt;
 &lt;p&gt;Example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-4&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help                              help for token
-  -t, --tenant                 string     Tenant name
-   --access-token-expiration   duration   Expiration time of the access token, e.g. 1m30s (default 1m0s)
-   --refresh-token-expiration  duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-3&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-4&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-1&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -t, --tenant        Name of the tenant
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-3&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help                       Help for token
+      --insecure                   Skip certificate validation of the CSM Authorization Proxy Server
+      --access-token-expiration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
+      --refresh-token-expiration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-3&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;access&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;ACCESS-TOKEN&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -601,36 +588,28 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;proxy-authz-tokens&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Opaque&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Usually, you will want to pipe the output to kubectl to apply the secret&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;role-commands&#34;&gt;Role Commands&lt;/h2&gt;
-&lt;h3 id=&#34;karavictl-role&#34;&gt;karavictl role&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;karavictl-role&#34;&gt;karavictl role&lt;/h3&gt;
 &lt;p&gt;Manage roles&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-5&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Manage roles&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-5&#34;&gt;Options&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-1&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   Help for role
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-4&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-5&#34;&gt;Output&lt;/h5&gt;
-&lt;p&gt;Outputs help text&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;karavictl-role-get&#34;&gt;karavictl role get&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;karavictl-role-get&#34;&gt;karavictl role get&lt;/h3&gt;
 &lt;p&gt;Get role&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-6&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Get role&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role get &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-6&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for get
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-5&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-6&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role get CSISilver --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-2&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Name of the role
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-4&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for get
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-4&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role get CSISilver --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;Name&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;CSISilver&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;StorageSystem&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;3000000000011111&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -647,15 +626,14 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-7&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;List roles&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role list &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-7&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   Help for list
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-6&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-7&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role list --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-3&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-5&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for list
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-5&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role list --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;#34;CSIGold&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;{&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -686,62 +664,52 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-8&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Creates one or more CSM roles&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role create &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-8&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --from-file string   Role data from a file
-      --role      strings  Role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
-  -h, --help               Help for create
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-4&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --role          Role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-6&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for create
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;For PowerScale, set the &lt;code&gt;quota&lt;/code&gt; to 0 as CSM for Authorization does not enforce quota limits.&lt;/li&gt;
+&lt;li&gt;Setting the &lt;code&gt;quota&lt;/code&gt; to 0 will not enforce storage quota&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h5 id=&#34;options-inherited-from-parent-commands-7&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-8&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role create --from-file roles.json --admin-token admintoken.yaml
+&lt;h5 id=&#34;output-6&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role create --role&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;role-name&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;system-type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;000000000001&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mypool&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;200000000&lt;/span&gt; --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
-&lt;p&gt;Alternatively, you can create a role in-line using:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role create --role&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;role-name&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;system-type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;000000000001&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mypool&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;200000000&lt;/span&gt; --admin-token admintoken.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-update&#34;&gt;karavictl role update&lt;/h3&gt;
 &lt;p&gt;Update the quota of one or more CSM roles&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-9&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Updates the quota of one or more CSM roles&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role update &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-9&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --from-file string   Role data from a file
-      --role      strings  Role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
-  -h, --help               Help for update
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-8&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-9&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role update --from-file roles.json --admin-token admintoken.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the update occurred.&lt;/p&gt;
-&lt;p&gt;Alternatively, you can update existing roles in-line using:&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-5&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --role          Role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-7&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for update
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-7&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role update --role&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;role-name&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;system-type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;000000000001&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mypool&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;400000000&lt;/span&gt; --admin-token admintoken.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the update occurred.&lt;/p&gt;
+&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-role-delete&#34;&gt;karavictl role delete&lt;/h3&gt;
 &lt;p&gt;Delete role&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-10&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Delete role&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role delete &amp;lt;role-name&amp;gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-10&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   Help for delete
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-9&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-10&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role delete CSISilver --admin-token admintoken.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role delete &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-6&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --role          Role in the form &amp;lt;name&amp;gt;=&amp;lt;type&amp;gt;=&amp;lt;id&amp;gt;=&amp;lt;pool&amp;gt;=&amp;lt;quota&amp;gt;
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-8&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-8&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl role delete --name CSISilver --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl role get &amp;lt;role-name&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-rolebinding&#34;&gt;karavictl rolebinding&lt;/h3&gt;
@@ -749,31 +717,24 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-11&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Management for role bindings&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-11&#34;&gt;Options&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-2&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for rolebinding
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-10&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-11&#34;&gt;Output&lt;/h5&gt;
-&lt;p&gt;Outputs help text&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;karavictl-rolebinding-create&#34;&gt;karavictl rolebinding create&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;karavictl-rolebinding-create&#34;&gt;karavictl rolebinding create&lt;/h3&gt;
 &lt;p&gt;Create a rolebinding between role and tenant&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-12&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Creates a rolebinding between role and tenant&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding create &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-12&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
-  -r, --role string       Role name
-  -t, --tenant string     Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-11&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-12&#34;&gt;Output&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-7&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -r, --role          Role name
+  -t, --tenant        Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-9&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for create
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-9&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding create --role CSISilver --tenant Alice --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding create --role CSISilver --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the rolebinding creation occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-rolebinding-delete&#34;&gt;karavictl rolebinding delete&lt;/h3&gt;
@@ -781,52 +742,42 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-13&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Deletes a rolebinding between role and tenant&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding delete &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-13&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for delete
-  -r, --role string      Role name
-  -t, --tenant string    Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-12&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-13&#34;&gt;Output&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-8&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -r, --role          Role name
+  -t, --tenant        Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-10&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-10&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding delete --role CSISilver --tenant Alice --admin-token admintoken.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the rolebinding deletion occurred.&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl rolebinding delete --role CSISilver --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output.&lt;/p&gt;
 &lt;h2 id=&#34;storage-commands&#34;&gt;Storage Commands&lt;/h2&gt;
 &lt;h3 id=&#34;karavictl-storage&#34;&gt;karavictl storage&lt;/h3&gt;
 &lt;p&gt;Manage storage systems&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-14&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Manages storage systems&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-14&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr      string   Address of the server (default &amp;#34;localhost&amp;#34;)
-  -h, --help               Help for storage
-      --insecure           Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-13&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-14&#34;&gt;Output&lt;/h5&gt;
-&lt;p&gt;Outputs help text&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;karavictl-storage-get&#34;&gt;karavictl storage get&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-3&#34;&gt;Options&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help               Help for storage
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;karavictl-storage-get&#34;&gt;karavictl storage get&lt;/h3&gt;
 &lt;p&gt;Get details on a registered storage system.&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-15&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Gets details on a registered storage system.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage get &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-15&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help               Help for get
-  -s, --system-id string   System identifier (default &amp;#34;systemid&amp;#34;)
-  -t, --type string        Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-14&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-15&#34;&gt;Output&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-9&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -s, --system-id     System identifier (default &amp;#34;systemid&amp;#34;)
+  -t, --type          Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;, &amp;#34;powerscale&amp;#34;)
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-11&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-11&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage get --type powerflex --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage get --type powerflex --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;User&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Password&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;(omitted)&amp;#34;&lt;/span&gt;,
@@ -839,16 +790,15 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-16&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Lists registered storage systems.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage list &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-16&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help          Help for list
-  -t, --type string   Type of storage system
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-15&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-16&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage list --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-10&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -t, --type          Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;, &amp;#34;powerscale&amp;#34;)
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-12&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-12&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage list --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;storage&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
@@ -868,22 +818,21 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-17&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Creates and registers a storage system.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage create &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-17&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               Help for create
-  -a, --array-insecure     Array insecure skip verify
-  -p, --password string    Password (default &amp;#34;****&amp;#34;)
-  -s, --system-id string   System identifier (default &amp;#34;systemid&amp;#34;)
-  -t, --type string        Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
-  -u, --user string        Username (default &amp;#34;admin&amp;#34;)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-16&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-17&#34;&gt;Output&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-11&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -e, --endpoint         Endpoint of REST API gateway
+  -a, --array-insecure   Skip certificate validation of the storage array
+  -p, --password         Password (default &amp;#34;****&amp;#34;)
+  -s, --system-id        System identifier (default &amp;#34;systemid&amp;#34;)
+  -t, --type             Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
+  -u, --user             Username (default &amp;#34;admin&amp;#34;)
+  -f, --admin-token      Path to admin token file
+      --addr             Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-13&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-13&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --type powerflex --user admin --password ******** --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --type powerflex --user admin --password ******** --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-storage-update&#34;&gt;karavictl storage update&lt;/h3&gt;
@@ -891,22 +840,21 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-18&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Updates a registered storage system.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage update &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-18&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               Help for update
-  -a, --array-insecure     Array insecure skip verify
-  -p, --pass string        Password (default &amp;#34;****&amp;#34;)
-  -s, --system-id string   System identifier (default &amp;#34;systemid&amp;#34;)
-  -t, --type string        Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
-  -u, --user string        Username (default &amp;#34;admin&amp;#34;)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-17&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-18&#34;&gt;Output&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-12&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -e, --endpoint         Endpoint of REST API gateway
+  -a, --array-insecure   Skip certificate validation of the storage array
+  -p, --pass             Password (default &amp;#34;****&amp;#34;)
+  -s, --system-id        System identifier (default &amp;#34;systemid&amp;#34;)
+  -t, --type             Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
+  -u, --user             Username (default &amp;#34;admin&amp;#34;)
+  -f, --admin-token      Path to admin token file
+      --addr             Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-14&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-14&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --type powerflex --user admin --password ******** --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --type powerflex --user admin --password ******** --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the update occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-storage-delete&#34;&gt;karavictl storage delete&lt;/h3&gt;
@@ -914,18 +862,17 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-19&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Deletes a registered storage system.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage delete &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-19&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help               Help for delete
-  -s, --system-id string   System identifier (default &amp;#34;systemid&amp;#34;)
-  -t, --type      string   Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-18&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-19&#34;&gt;Output&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-13&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -s, --system-id     System identifier (default &amp;#34;systemid&amp;#34;)
+  -t, --type          Type of storage system (&amp;#34;powerflex&amp;#34;, &amp;#34;powermax&amp;#34;)
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-15&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-15&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage delete --type powerflex --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl storage delete --type powerflex --system-id &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3000000000011111&lt;/span&gt; --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl storage get --type &amp;lt;storage-system-type&amp;gt; --system-id &amp;lt;storage-system-id&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
 &lt;h2 id=&#34;tenant-commands&#34;&gt;Tenant Commands&lt;/h2&gt;
 &lt;h3 id=&#34;karavictl-tenant&#34;&gt;karavictl tenant&lt;/h3&gt;
@@ -933,30 +880,24 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-20&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Management for tenants&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-20&#34;&gt;Options&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-4&#34;&gt;Options&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for tenant
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-19&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-20&#34;&gt;Output&lt;/h5&gt;
-&lt;p&gt;Outputs help text&lt;/p&gt;
-&lt;hr&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;karavictl-tenant-create&#34;&gt;karavictl tenant create&lt;/h3&gt;
 &lt;p&gt;Create a tenant resource within CSM&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-21&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Creates a tenant resource within CSM&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant create &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-21&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&amp;#39;s SDC request)
-  -h, --help   help for create
-  -n, --name string   Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-20&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-21&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant create --name Alice --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-14&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&amp;#39;s SDC request)
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-16&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-16&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant create --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the creation occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-tenant-get&#34;&gt;karavictl tenant get&lt;/h3&gt;
@@ -964,16 +905,15 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-22&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Gets a tenant resource and its assigned roles within CSM&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant get &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-22&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help          help for get
-  -n, --name string   Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-21&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-22&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant get --name Alice --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-15&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-17&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-17&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant get --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Alice&amp;#34;&lt;/span&gt;
@@ -985,15 +925,14 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-23&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Lists tenant resources within CSM&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant list &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-23&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for list
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-22&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-23&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant list --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-16&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-18&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-18&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant list --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;tenants&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;
@@ -1008,17 +947,16 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-24&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Revokes access to storage resources for a tenant&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant revoke &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-24&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -c, --cancel        Cancel a previous tenant revocation
-  -h, --help   help for create
-  -n, --name string   Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-23&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-24&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant revoke --name Alice --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-17&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-19&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -c, --cancel     Cancel a previous tenant revocation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-19&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant revoke --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-tenant-delete&#34;&gt;karavictl tenant delete&lt;/h3&gt;
@@ -1026,16 +964,15 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-25&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Deletes a tenant resource within CSM&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant delete &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;options-25&#34;&gt;Options&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for delete
-  -n, --name string   Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-24&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-25&#34;&gt;Output&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant delete --name Alice --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-18&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-20&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-20&#34;&gt;Output&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant delete --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;karavictl-tenant-update&#34;&gt;karavictl tenant update&lt;/h3&gt;
@@ -1043,18 +980,17 @@ be piped directly to kubectl:&lt;/p&gt;
 &lt;h5 id=&#34;synopsis-26&#34;&gt;Synopsis&lt;/h5&gt;
 &lt;p&gt;Updates a tenant resource within CSM&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant update &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;options-26&#34;&gt;Options&lt;/h4&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&amp;#39;s SDC request)
-  -h, --help   help for update
-  -n, --name string   Tenant name
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-25&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default &amp;#34;localhost&amp;#34;)
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-26&#34;&gt;Output&lt;/h5&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;required-flags-19&#34;&gt;Required Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -n, --name          Tenant name
+  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&amp;#39;s SDC request)
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;optional-flags-21&#34;&gt;Optional Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-21&#34;&gt;Output&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant update --name Alice --approvesdc&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; --admin-token admintoken.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;karavictl tenant update --name Alice --approvesdc&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; --admin-token admintoken.yaml --addr csm-authorization.host.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the update was persisted.&lt;/p&gt;
 
       </description>
