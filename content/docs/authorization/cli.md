@@ -70,10 +70,10 @@ storage products from Kubernetes clusters
 ##### Options
 
 ```
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-  -h, --help                 help for karavictl
-  -t, --toggle               Help message for toggle
-  -f, --admin-token string   Specify the admin token file
+  -h, --help                 Help for karavictl
+  -f, --admin-token string   Path to admin token file; required for all commands except `admin token` and `cluster-info`
+      --addr                 Address of the CSM Authorization Proxy Server; required for all commands except `admin token` and `cluster-info`
+      --insecure             Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
@@ -97,14 +97,17 @@ The tokens output in YAML format, which can be saved in a file.
 karavictl admin token [flags]
 ```
 
-##### Options
+##### Required Flags
 ```
-  -h, --help                                 help for token
-  -s, --jwt-signing-secret        string     Specify JWT signing secret, or omit to use stdin
-  -n, --name                      string     Administration name
-      --refresh-token-expiration  duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
-      --access-token-expiration   duration   Expiration time of the access token, e.g. 1m30s (default 1m0s)
+  -n, --name   Name of the tenant
+```
 
+##### Optional Flags
+```
+  -h, --help                       Help for token
+  -s, --jwt-signing-secret         Specify JWT signing secret, or omit to use stdin
+      --refresh-token-expiration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+      --access-token-expiration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
 ```
 
 ##### Output
@@ -130,13 +133,6 @@ $ karavictl admin token --name admin --jwt-signing-secret secret --access-token-
 }
 
 ```
-##### Options inherited from parent commands
-
-```
-      --config string   config file (default is $HOME/.karavictl.yaml)
-```
----
-
 
 
 ### karavictl cluster-info
@@ -151,17 +147,10 @@ Prints table of resources within the cluster, including their readiness
 karavictl cluster-info [flags]
 ```
 
-##### Options
-
+##### Optional Flags
 ```
-  -h, --help    help for cluster-info
+  -h, --help    Help for cluster-info
   -w, --watch   Watch for changes
-```
-
-##### Options inherited from parent commands
-
-```
-      --config string   config file (default is $HOME/.karavictl.yaml)
 ```
 
 ##### Output
@@ -197,28 +186,11 @@ Generates resources for use with CSM
 karavictl generate [flags]
 ```
 
-##### Options
+##### Optional Flags
 
 ```
-  -h, --help   help for generate
+  -h, --help   Help for generate
 ```
-
-##### Options inherited from parent commands
-
-```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-```
-
-##### Output
-
-Outputs help text
-
-
-
----
-
-
 
 ### karavictl generate token
 
@@ -232,35 +204,28 @@ be piped directly to kubectl:
 
 Example: 
 ```bash 
-
-karavictl generate token --tenant Alice --admin-token admintoken.yaml | kubectl apply -f -
-```
-```bash
-karavictl generate token [flags]
+karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com | kubectl apply -f -
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help                              help for token
-  -t, --tenant                 string     Tenant name
-   --access-token-expiration   duration   Expiration time of the access token, e.g. 1m30s (default 1m0s)
-   --refresh-token-expiration  duration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
+  -t, --tenant        Name of the tenant
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+  -h, --help                       Help for token
+      --insecure                   Skip certificate validation of the CSM Authorization Proxy Server
+      --access-token-expiration    Expiration time of the access token, e.g. 1m30s (default 1m0s)
+      --refresh-token-expiration   Expiration time of the refresh token, e.g. 48h (default 720h0m0s)
 ```
 
 ##### Output
 
 ```bash
-karavictl generate token --tenant Alice --admin-token admintoken.yaml
+karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 ```yaml
 apiVersion: v1
@@ -277,15 +242,8 @@ type: Opaque
 
 Usually, you will want to pipe the output to kubectl to apply the secret
 ```bash
-
-karavictl generate token --tenant Alice --admin-token admintoken.yaml | kubectl apply -f -
+karavictl generate token --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com | kubectl apply -f -
 ```
-
-
-
-## Role Commands
-
-
 
 ### karavictl role
 
@@ -305,23 +263,6 @@ karavictl role [flags]
   -h, --help   Help for role
 ```
 
-##### Options inherited from parent commands
-
-```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-```
-
-##### Output
-
-Outputs help text
-
-
-
----
-
-
-
 ### karavictl role get 
 
 Get role
@@ -334,25 +275,23 @@ Get role
 karavictl role get [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help   help for get
+  -n, --name          Name of the role
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+  -h, --help       Help for get
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
-karavictl role get CSISilver --admin-token admintoken.yaml
+karavictl role get CSISilver --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 ```yaml
 {
@@ -385,25 +324,22 @@ List roles
 karavictl role list [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help   Help for list
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+  -h, --help       Help for list
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
-karavictl role list --admin-token admintoken.yaml
+karavictl role list --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 ```yaml
 {
@@ -450,39 +386,29 @@ Creates one or more CSM roles
 karavictl role create [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -f, --from-file string   Role data from a file
-      --role      strings  Role in the form <name>=<type>=<id>=<pool>=<quota>
-  -h, --help               Help for create
+      --role          Role in the form <name>=<type>=<id>=<pool>=<quota>
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
+```
+
+##### Optional Flags
+```
+  -h, --help       Help for create
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 *NOTE:* 
-  - For PowerScale, set the `quota` to 0 as CSM for Authorization does not enforce quota limits.
+  - Setting the `quota` to 0 will not enforce storage quota
 
-##### Options inherited from parent commands
-
-```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-```
 
 ##### Output
 
 ```bash
-karavictl role create --from-file roles.json --admin-token admintoken.yaml
+karavictl role create --role=role-name=system-type=000000000001=mypool=200000000 --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output. You may run `karavictl role get <role-name>` to confirm the creation occurred.
-
-Alternatively, you can create a role in-line using:
-
-```bash
-
-karavictl role create --role=role-name=system-type=000000000001=mypool=200000000 --admin-token admintoken.yaml
-```
 
 ---
 
@@ -500,37 +426,27 @@ Updates the quota of one or more CSM roles
 karavictl role update [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -f, --from-file string   Role data from a file
-      --role      strings  Role in the form <name>=<type>=<id>=<pool>=<quota>
-  -h, --help               Help for update
+      --role          Role in the form <name>=<type>=<id>=<pool>=<quota>
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+  -h, --help       Help for update
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
 
-karavictl role update --from-file roles.json --admin-token admintoken.yaml
+karavictl role update --role=role-name=system-type=000000000001=mypool=400000000 --admin-token admintoken.yaml
 ```
 On success, there will be no output. You may run `karavictl role get <role-name>` to confirm the update occurred.
 
-Alternatively, you can update existing roles in-line using:
-
-```bash
-
-karavictl role update --role=role-name=system-type=000000000001=mypool=400000000 --admin-token admintoken.yaml
-```
 ---
 
 
@@ -544,28 +460,26 @@ Delete role
 Delete role
 
 ```bash
-karavictl role delete <role-name> [flags]
+karavictl role delete [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help   Help for delete
+      --role          Role in the form <name>=<type>=<id>=<pool>=<quota>
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
-karavictl role delete CSISilver --admin-token admintoken.yaml
+karavictl role delete --name CSISilver --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output. You may run `karavictl role get <role-name>` to confirm the deletion occurred.
 
@@ -593,23 +507,6 @@ karavictl rolebinding [flags]
   -h, --help   help for rolebinding
 ```
 
-##### Options inherited from parent commands
-
-```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-```
-
-##### Output
-
-Outputs help text
-
-
-
----
-
-
-
 ### karavictl rolebinding create
 
 Create a rolebinding between role and tenant
@@ -622,28 +519,25 @@ Creates a rolebinding between role and tenant
 karavictl rolebinding create [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help   help for create
-  -r, --role string       Role name
-  -t, --tenant string     Tenant name
+  -r, --role          Role name
+  -t, --tenant        Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+  -h, --help       Help for create
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
 
-karavictl rolebinding create --role CSISilver --tenant Alice --admin-token admintoken.yaml
+karavictl rolebinding create --role CSISilver --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the rolebinding creation occurred.
 
@@ -664,30 +558,27 @@ Deletes a rolebinding between role and tenant
 karavictl rolebinding delete [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help   help for delete
-  -r, --role string      Role name
-  -t, --tenant string    Tenant name
+  -r, --role          Role name
+  -t, --tenant        Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
 
-karavictl rolebinding delete --role CSISilver --tenant Alice --admin-token admintoken.yaml
+karavictl rolebinding delete --role CSISilver --tenant Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
-On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the rolebinding deletion occurred.
+On success, there will be no output.
 
 
 
@@ -710,27 +601,8 @@ karavictl storage [flags]
 ##### Options
 
 ```
-      --addr      string   Address of the server (default "localhost")
   -h, --help               Help for storage
-      --insecure           Skip certificate validation
 ```
-
-##### Options inherited from parent commands
-
-```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-```
-
-##### Output
-
-Outputs help text
-
-
-
----
-
-
 
 ### karavictl storage get
 
@@ -744,28 +616,25 @@ Gets details on a registered storage system.
 karavictl storage get [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help               Help for get
-  -s, --system-id string   System identifier (default "systemid")
-  -t, --type string        Type of storage system ("powerflex", "powermax")
+  -s, --system-id     System identifier (default "systemid")
+  -t, --type          Type of storage system ("powerflex", "powermax", "powerscale")
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
 
-karavictl storage get --type powerflex --system-id 3000000000011111 --admin-token admintoken.yaml
+karavictl storage get --type powerflex --system-id 3000000000011111 --admin-token admintoken.yaml --addr csm-authorization.host.com
 {
   "User": "admin",
   "Password": "(omitted)",
@@ -792,26 +661,23 @@ Lists registered storage systems.
 karavictl storage list [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help          Help for list
-  -t, --type string   Type of storage system
+  -t, --type          Type of storage system ("powerflex", "powermax", "powerscale")
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
-karavictl storage list --admin-token admintoken.yaml
+karavictl storage list --admin-token admintoken.yaml --addr csm-authorization.host.com
 
 {
   "storage": {
@@ -845,32 +711,29 @@ Creates and registers a storage system.
 karavictl storage create [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               Help for create
-  -a, --array-insecure     Array insecure skip verify
-  -p, --password string    Password (default "****")
-  -s, --system-id string   System identifier (default "systemid")
-  -t, --type string        Type of storage system ("powerflex", "powermax")
-  -u, --user string        Username (default "admin")
+  -e, --endpoint         Endpoint of REST API gateway
+  -a, --array-insecure   Skip certificate validation of the storage array
+  -p, --password         Password (default "****")
+  -s, --system-id        System identifier (default "systemid")
+  -t, --type             Type of storage system ("powerflex", "powermax")
+  -u, --user             Username (default "admin")
+  -f, --admin-token      Path to admin token file
+      --addr             Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
 
-karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ******** --admin-token admintoken.yaml
+karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ******** --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the creation occurred.
 
@@ -891,32 +754,29 @@ Updates a registered storage system.
 karavictl storage update [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -e, --endpoint string    Endpoint of REST API gateway
-  -h, --help               Help for update
-  -a, --array-insecure     Array insecure skip verify
-  -p, --pass string        Password (default "****")
-  -s, --system-id string   System identifier (default "systemid")
-  -t, --type string        Type of storage system ("powerflex", "powermax")
-  -u, --user string        Username (default "admin")
+  -e, --endpoint         Endpoint of REST API gateway
+  -a, --array-insecure   Skip certificate validation of the storage array
+  -p, --pass             Password (default "****")
+  -s, --system-id        System identifier (default "systemid")
+  -t, --type             Type of storage system ("powerflex", "powermax")
+  -u, --user             Username (default "admin")
+  -f, --admin-token      Path to admin token file
+      --addr             Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
 
-karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ******** --admin-token admintoken.yaml
+karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id 3000000000011111 --type powerflex --user admin --password ******** --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the update occurred.
 
@@ -938,27 +798,24 @@ Deletes a registered storage system.
 karavictl storage delete [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help               Help for delete
-  -s, --system-id string   System identifier (default "systemid")
-  -t, --type      string   Type of storage system ("powerflex", "powermax")
+  -s, --system-id     System identifier (default "systemid")
+  -t, --type          Type of storage system ("powerflex", "powermax")
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   Config file (default is $HOME/.karavictl.yaml)
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 ```bash
 
-karavictl storage delete --type powerflex --system-id 3000000000011111 --admin-token admintoken.yaml
+karavictl storage delete --type powerflex --system-id 3000000000011111 --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output. You may run `karavictl storage get --type <storage-system-type> --system-id <storage-system-id>` to confirm the deletion occurred.
 
@@ -986,18 +843,6 @@ karavictl tenant [flags]
   -h, --help   help for tenant
 ```
 
-##### Options inherited from parent commands
-
-```
-  -f, --admin-token string   Specify the admin token file
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-```
-
-##### Output
-
-Outputs help text
-
-
 
 ---
 
@@ -1015,26 +860,23 @@ Creates a tenant resource within CSM
 karavictl tenant create [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
+  -n, --name          Tenant name
   -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
-  -h, --help   help for create
-  -n, --name string   Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 ```bash
-karavictl tenant create --name Alice --admin-token admintoken.yaml
+karavictl tenant create --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the creation occurred.
 
@@ -1057,26 +899,23 @@ Gets a tenant resource and its assigned roles within CSM
 karavictl tenant get [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help          help for get
-  -n, --name string   Tenant name
+  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
-karavictl tenant get --name Alice --admin-token admintoken.yaml
+karavictl tenant get --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 
 {
   "name": "Alice"
@@ -1103,25 +942,22 @@ Lists tenant resources within CSM
 karavictl tenant list [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help   help for list
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 
 ```bash
-karavictl tenant list --admin-token admintoken.yaml
+karavictl tenant list --admin-token admintoken.yaml --addr csm-authorization.host.com
 
 {
   "tenants": [
@@ -1151,26 +987,23 @@ Revokes access to storage resources for a tenant
 karavictl tenant revoke [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -c, --cancel        Cancel a previous tenant revocation
-  -h, --help   help for create
-  -n, --name string   Tenant name
+  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --insecure             Skip certificate validation
-      --config      string   config file (default is $HOME/.karavictl.yaml)
+  -c, --cancel     Cancel a previous tenant revocation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 ```bash
-karavictl tenant revoke --name Alice --admin-token admintoken.yaml
+karavictl tenant revoke --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output.
 
@@ -1192,25 +1025,22 @@ Deletes a tenant resource within CSM
 karavictl tenant delete [flags]
 ```
 
-##### Options
-
+##### Required Flags
 ```
-  -h, --help   help for delete
-  -n, --name string   Tenant name
+  -n, --name          Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 ```bash
-karavictl tenant delete --name Alice --admin-token admintoken.yaml
+karavictl tenant delete --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the deletion occurred.
 
@@ -1232,26 +1062,23 @@ Updates a tenant resource within CSM
 karavictl tenant update [flags]
 ```
 
-#### Options
-
+##### Required Flags
 ```
+  -n, --name          Tenant name
   -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
-  -h, --help   help for update
-  -n, --name string   Tenant name
+  -f, --admin-token   Path to admin token file
+      --addr          Address of the CSM Authorization Proxy Server
 ```
 
-##### Options inherited from parent commands
-
+##### Optional Flags
 ```
-  -f, --admin-token string   Specify the admin token file
-      --addr        string   Address of the server (default "localhost")
-      --config      string   config file (default is $HOME/.karavictl.yaml)
-      --insecure             Skip certificate validation
+  -h, --help       Help for delete
+      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
 ```bash
 
-karavictl tenant update --name Alice --approvesdc=false --admin-token admintoken.yaml
+karavictl tenant update --name Alice --approvesdc=false --admin-token admintoken.yaml --addr csm-authorization.host.com
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the update was persisted.
