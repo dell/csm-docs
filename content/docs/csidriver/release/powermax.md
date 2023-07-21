@@ -12,6 +12,7 @@ description: Release notes for PowerMax CSI driver
 ### New Features/Changes
 - [Added support for RHEL 9.0](https://github.com/dell/csm/issues/893)
 - [Added Storage Capacity Tracking feature for Powermax](https://github.com/dell/csm/issues/876)
+- [Make standalone helm chart available from helm repository](https://github.com/dell/csm/issues/877)
 
 ### Fixed Issues
 There are no fixed issues in this release.
