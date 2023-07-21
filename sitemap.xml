@@ -1403,10 +1403,19 @@
     <loc>https://dell.github.io/csm-docs/v3/deployment/csmoperator/modules/authorization/</loc>
     <lastmod>2023-07-11T10:11:32-04:00</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/tags/backup/</loc>
+    <lastmod>2023-06-24T09:21:08+05:30</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/installation/test/certcsi/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/csidriver/installation/test/certcsi/</loc>
+    <lastmod>2023-06-24T09:21:08+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/tags/csi-driver/</loc>
+    <lastmod>2023-06-24T09:21:08+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/tags/csm-authorization/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/troubleshooting/operator/</loc>
@@ -1456,6 +1465,9 @@
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/authorization/deployment/helm/</loc>
     <lastmod>2023-07-11T10:11:32-04:00</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/tags/install/</loc>
+    <lastmod>2023-03-27T17:14:31+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/partners/docker/</loc>
     <lastmod>2021-09-21T21:01:25+05:30</lastmod>
@@ -1517,6 +1529,9 @@
     <loc>https://dell.github.io/csm-docs/v3/csidriver/release/operator/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/tags/pod-deploy/</loc>
+    <lastmod>2022-03-23T08:15:39-04:00</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/authorization/configuration/powerflex/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
@@ -1536,7 +1551,7 @@
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerflex/</loc>
-    <lastmod>2023-07-11T10:11:32-04:00</lastmod>
+    <lastmod>2023-07-21T10:06:19-04:00</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v1/authorization/configuration/powerflex/</loc>
     <lastmod>2023-03-27T17:14:31+05:30</lastmod>
@@ -1847,6 +1862,9 @@
     <loc>https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/resiliency/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
+    <loc>https://dell.github.io/csm-docs/tags/restore/</loc>
+    <lastmod>2023-06-24T09:21:08+05:30</lastmod>
+  </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/partners/rancher/</loc>
     <lastmod>2023-03-27T17:14:31+05:30</lastmod>
   </url><url>
@@ -1947,6 +1965,9 @@
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/v3/csidriver/troubleshooting/unity/</loc>
+    <lastmod>2023-06-24T09:21:08+05:30</lastmod>
+  </url><url>
+    <loc>https://dell.github.io/csm-docs/tags/upgrade/</loc>
     <lastmod>2023-06-24T09:21:08+05:30</lastmod>
   </url><url>
     <loc>https://dell.github.io/csm-docs/docs/csidriver/partners/tanzu/</loc>
