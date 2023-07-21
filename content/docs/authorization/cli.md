@@ -757,7 +757,7 @@ karavictl storage update [flags]
 ##### Required Flags
 ```
   -e, --endpoint         Endpoint of REST API gateway
-  -a, --array-insecure   Array insecure skip verify
+  -a, --array-insecure   Skip certificate validation of the storage array
   -p, --pass             Password (default "****")
   -s, --system-id        System identifier (default "systemid")
   -t, --type             Type of storage system ("powerflex", "powermax")
