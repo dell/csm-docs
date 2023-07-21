@@ -70,10 +70,10 @@ storage products from Kubernetes clusters
 ##### Options
 
 ```
-  -h, --help                 Help for karavictl
-  -f, --admin-token string   Path to admin token file; required for all commands except `admin token` and `cluster-info`
-      --addr                 Address of the CSM Authorization Proxy Server; required for all commands except `admin token` and `cluster-info`
-      --insecure             Skip certificate validation of the CSM Authorization Proxy Server
+  -h, --help          Help for karavictl
+  -f, --admin-token   Path to admin token file; required for all commands except `admin token` and `cluster-info`
+      --addr          Address of the CSM Authorization Proxy Server; required for all commands except `admin token` and `cluster-info`
+      --insecure      Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
 ##### Output
@@ -99,7 +99,7 @@ karavictl admin token [flags]
 
 ##### Required Flags
 ```
-  -n, --name   Name of the tenant
+  -n, --name   Name of the admin
 ```
 
 ##### Optional Flags
@@ -160,7 +160,6 @@ karavictl cluster-info
 ```
 ```
 NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
-github-auth-provider   1/1     1            1           59m
 tenant-service         1/1     1            1           59m
 redis-primary          1/1     1            1           59m
 proxy-server           1/1     1            1           59m
@@ -714,7 +713,6 @@ karavictl storage create [flags]
 ##### Required Flags
 ```
   -e, --endpoint         Endpoint of REST API gateway
-  -a, --array-insecure   Skip certificate validation of the storage array
   -p, --password         Password (default "****")
   -s, --system-id        System identifier (default "systemid")
   -t, --type             Type of storage system ("powerflex", "powermax")
@@ -726,6 +724,7 @@ karavictl storage create [flags]
 ##### Optional Flags
 ```
   -h, --help       Help for delete
+  -a, --array-insecure   Skip certificate validation of the storage array
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -757,7 +756,6 @@ karavictl storage update [flags]
 ##### Required Flags
 ```
   -e, --endpoint         Endpoint of REST API gateway
-  -a, --array-insecure   Skip certificate validation of the storage array
   -p, --pass             Password (default "****")
   -s, --system-id        System identifier (default "systemid")
   -t, --type             Type of storage system ("powerflex", "powermax")
@@ -769,6 +767,7 @@ karavictl storage update [flags]
 ##### Optional Flags
 ```
   -h, --help       Help for delete
+  -a, --array-insecure   Skip certificate validation of the storage array
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -863,7 +862,6 @@ karavictl tenant create [flags]
 ##### Required Flags
 ```
   -n, --name          Tenant name
-  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
@@ -871,6 +869,7 @@ karavictl tenant create [flags]
 ##### Optional Flags
 ```
   -h, --help       Help for delete
+  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny  a tenant's SDC request)
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
@@ -1065,7 +1064,6 @@ karavictl tenant update [flags]
 ##### Required Flags
 ```
   -n, --name          Tenant name
-  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 ```
@@ -1073,6 +1071,7 @@ karavictl tenant update [flags]
 ##### Optional Flags
 ```
   -h, --help       Help for delete
+  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request)
       --insecure   Skip certificate validation of the CSM Authorization Proxy Server
 ```
 
