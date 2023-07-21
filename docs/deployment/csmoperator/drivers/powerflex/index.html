@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.115.2">
+<meta name="generator" content="Hugo 0.115.4">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-07-11T10:11:32-04:00" />
+<meta property="article:modified_time" content="2023-07-21T10:06:19-04:00" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2023-07-11T10:11:32-04:00" />
-<meta itemprop="wordCount" content="1218">
+<meta itemprop="dateModified" content="2023-07-21T10:06:19-04:00" />
+<meta itemprop="wordCount" content="1124">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.26c4d9692de525032f4e406f8125588f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d3e4f1922364d7352b608bd6134ac9d8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.26c4d9692de525032f4e406f8125588f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.d3e4f1922364d7352b608bd6134ac9d8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -638,6 +638,29 @@
 
   
   
+    <div class="taxonomy taxonomy-terms-cloud taxo-tags">
+      
+        <h5 class="taxonomy-title">Tags</h5>
+      
+      <ul class="taxonomy-terms">
+        
+          <li><a class="taxonomy-term" href="https://dell.github.io/csm-docs/tags/backup/" data-taxonomy-term="backup"><span class="taxonomy-label">backup</span><span class="taxonomy-count">4</span></a></li>
+        
+          <li><a class="taxonomy-term" href="https://dell.github.io/csm-docs/tags/csi-driver/" data-taxonomy-term="csi-driver"><span class="taxonomy-label">csi-driver</span><span class="taxonomy-count">36</span></a></li>
+        
+          <li><a class="taxonomy-term" href="https://dell.github.io/csm-docs/tags/csm-authorization/" data-taxonomy-term="csm-authorization"><span class="taxonomy-label">csm-authorization</span><span class="taxonomy-count">8</span></a></li>
+        
+          <li><a class="taxonomy-term" href="https://dell.github.io/csm-docs/tags/install/" data-taxonomy-term="install"><span class="taxonomy-label">install</span><span class="taxonomy-count">8</span></a></li>
+        
+          <li><a class="taxonomy-term" href="https://dell.github.io/csm-docs/tags/pod-deploy/" data-taxonomy-term="pod-deploy"><span class="taxonomy-label">pod-deploy</span><span class="taxonomy-count">4</span></a></li>
+        
+          <li><a class="taxonomy-term" href="https://dell.github.io/csm-docs/tags/restore/" data-taxonomy-term="restore"><span class="taxonomy-label">restore</span><span class="taxonomy-count">4</span></a></li>
+        
+          <li><a class="taxonomy-term" href="https://dell.github.io/csm-docs/tags/upgrade/" data-taxonomy-term="upgrade"><span class="taxonomy-label">upgrade</span><span class="taxonomy-count">28</span></a></li>
+        
+      </ul>
+    </div>
+  
 
 	
 
@@ -689,32 +712,14 @@ To deploy the Operator, follow the instructions available <a href="../../#instal
 <li>This feature deploys the sdc kernel modules on all nodes with the help of an init container.</li>
 <li>For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r/dellemc/sdc</a> for supported versions.</li>
 <li><strong>Note:</strong> When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file,
-config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.</li>
-<li><strong>Note:</strong> To use an sdc-binary module from customer ftp site:
+config.yaml. An example of config.yaml is below in this document. Do not set MDM value for initContainers in the driver CR file manually.
 <ul>
-<li>Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> <span style="color:#204a87">echo</span> -n &lt;credential&gt;<span style="color:#000;font-weight:bold">|</span> base64 -i
-</span></span></code></pre></div><p>secret sample to use:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Secret</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sdc-repo-creds</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">vxflexos</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">type</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Opaque</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#8f5902;font-style:italic"># set username to the base64 encoded username, sdc default is</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">         </span><span style="color:#204a87;font-weight:bold">username</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">&lt;username in base64&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#8f5902;font-style:italic"># set password to the base64 encoded password, sdc default is</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">         </span><span style="color:#204a87;font-weight:bold">password</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">&lt;password in base64&gt;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><ul>
-<li>Create secret for FTP side by using the command <code>kubectl create -f sdc-repo-secret.yaml</code>.</li>
 <li>Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note:
 <ul>
 <li><strong>If using sidecar</strong>, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs.</li>
 <li><strong>If not using sidecar</strong>, leave the enabled field set to false.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
