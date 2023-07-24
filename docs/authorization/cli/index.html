@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/authorization/cli/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-07-21T10:06:34-04:00" />
+<meta property="article:modified_time" content="2023-07-24T12:07:56-04:00" />
 <meta itemprop="name" content="CLI">
 <meta itemprop="description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
 ">
-<meta itemprop="dateModified" content="2023-07-21T10:06:34-04:00" />
-<meta itemprop="wordCount" content="2594">
+<meta itemprop="dateModified" content="2023-07-24T12:07:56-04:00" />
+<meta itemprop="wordCount" content="2588">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CLI"/>
 <meta name="twitter:description" content="Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.da2cd483fb87e516d0e7c8e1639ae334.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1aae8304d6b90eeec80b5b7cb434a44e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.da2cd483fb87e516d0e7c8e1639ae334.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.1aae8304d6b90eeec80b5b7cb434a44e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -857,10 +857,10 @@ storage products from Kubernetes clusters</p>
   storage      Manage storage systems
   tenant       Manage tenants
 </code></pre><h5 id="options">Options</h5>
-<pre tabindex="0"><code>  -h, --help                 Help for karavictl
-  -f, --admin-token string   Path to admin token file; required for all commands except `admin token` and `cluster-info`
-      --addr                 Address of the CSM Authorization Proxy Server; required for all commands except `admin token` and `cluster-info`
-      --insecure             Skip certificate validation of the CSM Authorization Proxy Server
+<pre tabindex="0"><code>  -h, --help          Help for karavictl
+  -f, --admin-token   Path to admin token file; required for all commands except `admin token` and `cluster-info`
+      --addr          Address of the CSM Authorization Proxy Server; required for all commands except `admin token` and `cluster-info`
+      --insecure      Skip certificate validation of the CSM Authorization Proxy Server
 </code></pre><h5 id="output">Output</h5>
 <p>Outputs help text</p>
 <hr>
@@ -871,7 +871,7 @@ storage products from Kubernetes clusters</p>
 The tokens output in YAML format, which can be saved in a file.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>karavictl admin token <span style="color:#ce5c00;font-weight:bold">[</span>flags<span style="color:#ce5c00;font-weight:bold">]</span>
 </span></span></code></pre></div><h5 id="required-flags">Required Flags</h5>
-<pre tabindex="0"><code>  -n, --name   Name of the tenant
+<pre tabindex="0"><code>  -n, --name   Name of the admin
 </code></pre><h5 id="optional-flags">Optional Flags</h5>
 <pre tabindex="0"><code>  -h, --help                       Help for token
   -s, --jwt-signing-secret         Specify JWT signing secret, or omit to use stdin
@@ -904,7 +904,6 @@ The tokens output in YAML format, which can be saved in a file.</p>
 </code></pre><h5 id="output-2">Output</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>karavictl cluster-info
 </span></span></code></pre></div><pre tabindex="0"><code>NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
-github-auth-provider   1/1     1            1           59m
 tenant-service         1/1     1            1           59m
 redis-primary          1/1     1            1           59m
 proxy-server           1/1     1            1           59m
@@ -1180,7 +1179,6 @@ be piped directly to kubectl:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>karavictl storage create <span style="color:#ce5c00;font-weight:bold">[</span>flags<span style="color:#ce5c00;font-weight:bold">]</span>
 </span></span></code></pre></div><h5 id="required-flags-11">Required Flags</h5>
 <pre tabindex="0"><code>  -e, --endpoint         Endpoint of REST API gateway
-  -a, --array-insecure   Skip certificate validation of the storage array
   -p, --password         Password (default &#34;****&#34;)
   -s, --system-id        System identifier (default &#34;systemid&#34;)
   -t, --type             Type of storage system (&#34;powerflex&#34;, &#34;powermax&#34;)
@@ -1188,8 +1186,9 @@ be piped directly to kubectl:</p>
   -f, --admin-token      Path to admin token file
       --addr             Address of the CSM Authorization Proxy Server
 </code></pre><h5 id="optional-flags-13">Optional Flags</h5>
-<pre tabindex="0"><code>  -h, --help       Help for delete
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+<pre tabindex="0"><code>  -h, --help             Help for delete
+  -a, --array-insecure   Skip certificate validation of the storage array
+      --insecure         Skip certificate validation of the CSM Authorization Proxy Server
 </code></pre><h5 id="output-13">Output</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>karavictl storage create --endpoint https://1.1.1.1 --insecure --array-insecure --system-id <span style="color:#0000cf;font-weight:bold">3000000000011111</span> --type powerflex --user admin --password ******** --admin-token admintoken.yaml --addr csm-authorization.host.com
@@ -1202,7 +1201,6 @@ be piped directly to kubectl:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>karavictl storage update <span style="color:#ce5c00;font-weight:bold">[</span>flags<span style="color:#ce5c00;font-weight:bold">]</span>
 </span></span></code></pre></div><h5 id="required-flags-12">Required Flags</h5>
 <pre tabindex="0"><code>  -e, --endpoint         Endpoint of REST API gateway
-  -a, --array-insecure   Skip certificate validation of the storage array
   -p, --pass             Password (default &#34;****&#34;)
   -s, --system-id        System identifier (default &#34;systemid&#34;)
   -t, --type             Type of storage system (&#34;powerflex&#34;, &#34;powermax&#34;)
@@ -1210,8 +1208,9 @@ be piped directly to kubectl:</p>
   -f, --admin-token      Path to admin token file
       --addr             Address of the CSM Authorization Proxy Server
 </code></pre><h5 id="optional-flags-14">Optional Flags</h5>
-<pre tabindex="0"><code>  -h, --help       Help for delete
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+<pre tabindex="0"><code>  -h, --help             Help for delete
+  -a, --array-insecure   Skip certificate validation of the storage array
+      --insecure         Skip certificate validation of the CSM Authorization Proxy Server
 </code></pre><h5 id="output-14">Output</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>karavictl storage update --endpoint https://1.1.1.1 --insecure --array-insecure --system-id <span style="color:#0000cf;font-weight:bold">3000000000011111</span> --type powerflex --user admin --password ******** --admin-token admintoken.yaml --addr csm-authorization.host.com
@@ -1250,12 +1249,12 @@ be piped directly to kubectl:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>karavictl tenant create <span style="color:#ce5c00;font-weight:bold">[</span>flags<span style="color:#ce5c00;font-weight:bold">]</span>
 </span></span></code></pre></div><h5 id="required-flags-14">Required Flags</h5>
 <pre tabindex="0"><code>  -n, --name          Tenant name
-  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&#39;s SDC request)
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 </code></pre><h5 id="optional-flags-16">Optional Flags</h5>
-<pre tabindex="0"><code>  -h, --help       Help for delete
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+<pre tabindex="0"><code>  -h, --help         Help for delete
+  -a, --approvesdc   To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny  a tenant&#39;s SDC request)
+      --insecure     Skip certificate validation of the CSM Authorization Proxy Server
 </code></pre><h5 id="output-16">Output</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>karavictl tenant create --name Alice --admin-token admintoken.yaml --addr csm-authorization.host.com
 </span></span></code></pre></div><p>On success, there will be no output. You may run <code>karavictl tenant get --name &lt;tenant-name&gt;</code> to confirm the creation occurred.</p>
@@ -1342,12 +1341,12 @@ be piped directly to kubectl:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>karavictl tenant update <span style="color:#ce5c00;font-weight:bold">[</span>flags<span style="color:#ce5c00;font-weight:bold">]</span>
 </span></span></code></pre></div><h5 id="required-flags-19">Required Flags</h5>
 <pre tabindex="0"><code>  -n, --name          Tenant name
-  -a, --approvesdc    To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&#39;s SDC request)
   -f, --admin-token   Path to admin token file
       --addr          Address of the CSM Authorization Proxy Server
 </code></pre><h5 id="optional-flags-21">Optional Flags</h5>
-<pre tabindex="0"><code>  -h, --help       Help for delete
-      --insecure   Skip certificate validation of the CSM Authorization Proxy Server
+<pre tabindex="0"><code>  -h, --help         Help for delete
+  -a, --approvesdc   To allow/deny SDC approval requests (default true | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&#39;s SDC request)
+      --insecure     Skip certificate validation of the CSM Authorization Proxy Server
 </code></pre><h5 id="output-21">Output</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>karavictl tenant update --name Alice --approvesdc<span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#204a87">false</span> --admin-token admintoken.yaml --addr csm-authorization.host.com
