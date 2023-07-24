@@ -48,6 +48,7 @@ function onArrayChange() {
 		onAuthorizationChange();
 		onResiliencyChange(podmonNote);
 		onSnapshotChange(snapshotNote, driver, CONSTANTS);
+		onCertManagerChange(certmanagerNote);
 		onVSphereChange();
 		validateInput(validateForm, CONSTANTS);
 	});
@@ -93,6 +94,12 @@ function onSnapshotChange(snapshotNoteValue, driverName, CONSTANTS_PARAM) {
 		$('div#snapshot-note-wrapper').hide();
 		$('div#snap-prefix').hide();
 	}
+}
+
+function onCertManagerChange(certmanagerNoteValue) {
+	if ($("#certmanager").prop('checked') === true) {
+		$('div#certmanager-note-wrapper').show();
+		$("#certmanager-note").html(certmanagerNoteValue);
 }
 
 function onVSphereChange() {
@@ -350,6 +357,7 @@ if (typeof exports !== 'undefined') {
 		onResiliencyChange,
 		onOperatorResiliencyChange,
 		onSnapshotChange,
+		onCertManagerChange,
 		onVSphereChange,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
