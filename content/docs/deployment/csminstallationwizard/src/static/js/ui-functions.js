@@ -100,7 +100,7 @@ function onCertManagerChange(certmanagerNoteValue) {
 	if ($("#certmanager").prop('checked') === true) {
 		$('div#certmanager-note-wrapper').show();
 		$("#certmanager-note").html(certmanagerNoteValue);
-    } else {
+	} else {
 		$('div#certmanager-note-wrapper').hide();	
 	}
 }
