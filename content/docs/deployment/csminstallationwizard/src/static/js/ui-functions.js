@@ -98,8 +98,8 @@ function onSnapshotChange(snapshotNoteValue, driverName, CONSTANTS_PARAM) {
 
 function onCertManagerChange(certmanagerNoteValue) {
 	if ($("#cert-manager-enabled").prop('checked') === true) {
-		$('div#certmanager-note-wrapper').show();
-		$("#certmanager-note").html(certmanagerNoteValue);
+		$('div#cert-manager-enabled-note-wrapper').show();
+		$("#cert-manager-enabled-note").html(certmanagerNoteValue);
     }
 }
 
