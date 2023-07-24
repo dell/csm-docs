@@ -195,7 +195,7 @@ describe("GIVEN onSnapshotChange function", () => {
 describe("GIVEN onCertManagerChange function", () => {
 	test("SHOULD hide cert-manager components when option not checked", () => {
 		document.body.innerHTML = `
-            <input type="checkbox" id="cert-manager-enabled">
+            <input type="checkbox" id="certmanager">
             <div id="certmanager-note-wrapper" style="display:">
         `;
 		onCertManagerChange("Temp cert-manager note");
@@ -204,7 +204,7 @@ describe("GIVEN onCertManagerChange function", () => {
 
 	test("SHOULD show cert-manager components when option checked", () => {
 		document.body.innerHTML = `
-            <input type="checkbox" id="cert-manager-enabled" checked>
+            <input type="checkbox" id="certmanager" checked>
             <div id="certmanager-note-wrapper" style="display:none">
         `;
 		onCertManagerChange("Temp cert-manager note");
