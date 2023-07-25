@@ -425,6 +425,16 @@ kubectl get nodes --show-labels
 
 For any additional information about the topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
+## Volume Limit
+
+The CSI Driver for Dell PowerStore allows users to specify the maximum number of PowerStore volumes that can be used in a node.
+
+The user can set the volume limit for a node by creating a node label `max-powerstore-volumes-per-node` and specifying the volume limit for that node.
+<br/> `kubectl label node <node_name> max-powerstore-volumes-per-node=<volume_limit>`
+
+The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxPowerstoreVolumesPerNode` attribute in values.yaml.
+
+>**NOTE:** <br>The default value of `maxPowerstoreVolumesPerNode` is 0. <br>If `maxPowerstoreVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxPowerstoreVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-powerstore-volumes-per-node` is not set.
 
 ## Reuse PowerStore hostname 
 
