@@ -26,11 +26,11 @@ const CONSTANTS = {
 	POWERMAX_NAMESPACE: "powermax",
 	POWERSCALE_NAMESPACE: "isilon",
 	UNITY_NAMESPACE: "unity",
+	POWERSTORE_LABEL_VALUE: "csi-powerstore",
 	VALUES: "values",
 	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
 	HYPHEN: "-",
-	NODE_SELECTOR_TAB: '\n'.padEnd(7, " "),
 	SLASH: "/",
 	VERSIONS_DIR: "csm-versions",
 	CSM: "csm",
@@ -39,9 +39,15 @@ const CONSTANTS = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V170: "1.0.0",
-	TAINTS: `
+	CSM_HELM_V180: "1.1.0",
+	HELM_TAINTS: `
      - key: "$KEY"
        operator: "Exists"
        effect: "NoSchedule"
+	`,
+	OPERATOR_TAINTS: `
+      - key: "$KEY"
+        operator: "Exists"
+        effect: "NoSchedule"
 	`
 };

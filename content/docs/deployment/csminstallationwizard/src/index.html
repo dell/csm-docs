@@ -43,10 +43,10 @@
                   <label for="installation-type" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Select the installation type" style="width: 140px;">Installation Type</label>
                   <div class="col-sm-9"></div>
                   <div class="col-sm-3">
-                    <select id="installation-type" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
+                    <select id="installation-type" class="form-select" onchange="validateInput(validateForm, CONSTANTS);onInstallationTypeChange()" required>
                       <option value="" selected> Select the Installation type</option>
                       <option value="helm">Helm</option>
-                      <option value="operator" disabled>Operator</option>
+                      <option value="operator">Operator</option>
                     </select>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
 
                 <!-- main content starts -->
                 <div id="main">
-                  <div class="was-validated row mb-4">
+                  <div class="was-validated row mb-4 image-repository">
                     <label for="image-repository" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Specify the registry from where the image should be pulled" style="width: 150px;">Image Repository</label>
                     <div class="col-sm-9"></div>
                     <div class="col-sm-3">
@@ -85,7 +85,8 @@
                     <div class="col-sm-9"></div>
                     <div class="col-sm-3">
                       <select id="csm-version" class="form-select" onchange="onCSMVersionChange(); validateInput(validateForm, CONSTANTS)" required>
-                        <option value="1.7.0" selected>CSM 1.7</option>
+                        <option value="1.7.0">CSM 1.7</option>
+                        <option value="1.8.0" selected>CSM 1.8</option>
                       </select>
                     </div>
                   </div>
@@ -124,6 +125,63 @@
                       <div class="mt-3 py-2 note">
                         <i class="icon dds__icon dds__icon--alert-info-cir"></i>
                         <span class="h6" id="podmon-note"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4 resiliency-operator col-sm-11">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="operator-resiliency" value="" onchange="onOperatorResiliencyChange()">
+                      <label for="operator-resiliency" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Resiliency module">Resiliency</label>
+                    </div>
+                    <div class="row child-level-one" id="podmon-wrapper">
+                      <div class="was-validated row mt-3 child-level-one" id="resiliency-label-value">
+                        <label for="label-value" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="String that sets the value that denotes pods to be monitored by CSM for Resiliency">Label Value</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="text" id="label-value" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="row mt-1">
+                            <a class="reset" id="reset-label-value" onclick="resetLabelValue(driver, CONSTANTS)">Reset to default</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="was-validated row mt-3 child-level-one" id="array-poll-rate">
+                        <label for="poll-rate" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="The minimum polling rate in seconds to determine if the array has connectivity to a node">Array Connectivity Poll Rate</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="number" id="poll-rate" placeholder="60" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="row mt-1">
+                            <a class="reset" id="reset-array-poll-rate" onclick="resetArrayPollRate(csmMap)">Reset to default</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3 array-connection child-level-one" id="connection-validation-wrapper">
+                        <div class="col-sm-12">
+                          <input class="form-check-input" type="checkbox" id="connection-validation" value="">
+                          <label for="connection-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable, if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod">Skip Array Connection Validation</label>
+                        </div>
+                      </div>
+                      <div class="was-validated row mt-3 child-level-one" id="driver-pod-label-value">
+                        <label for="driver-pod-label" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Provide Driver Pod Label Value">Driver Pod Label Value</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="text" id="driver-pod-label" placeholder="dell-storage" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="row mt-1">
+                            <a class="reset" id="reset-driver-pod-label" onclick="resetDriverPodLabel(csmMap)">Reset to default</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3 volumeless-pods child-level-one" id="ignore-volumeless-pods">
+                        <div class="col-sm-12">
+                          <input class="form-check-input" type="checkbox" id="volumeless-pods" value="">
+                          <label for="volumeless-pods" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable, if set to true will enable CSM for Resiliency to ignore pods without persistent volume attached to the pod.">Ignore Volumeless Pods</label>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -180,7 +238,7 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4">
+                  <div class="row mb-4 resizer">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="resizer" value="" checked>
                       <label for="resizer" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Volume Expansion feature">Resizer</label>
@@ -214,7 +272,7 @@
 
                   <div class="row mb-4 storage-capacity">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="storage-capacity" value="">
+                      <input class="form-check-input" type="checkbox" id="storage-capacity" value="" checked>
                       <label for="storage-capacity" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Storage Capacity Tracking">Storage Capacity Tracking</label>
                     </div>
                   </div>
@@ -436,7 +494,7 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="row mt-1">
-                          <a class="reset" id="reset-driver-namespace" onclick="resetDriverNamespace(driver)">Reset to default</a>
+                          <a class="reset" id="reset-driver-namespace" onclick="resetDriverNamespace(driver, CONSTANTS)">Reset to default</a>
                         </div>
                       </div>
                     </div>
@@ -474,7 +532,7 @@
             <div class="mt-3 mx-1">
               <span id="command1"></span>
             </div>
-            <div class="mt-3 mx-1">
+            <div class="mt-3 mx-1" id="command2-wrapper">
               <span id="command2"></span>
             </div>
             <div class="mt-3 mx-1 py-2 note" id="reverseProxyNote">

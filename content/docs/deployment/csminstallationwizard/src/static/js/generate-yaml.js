@@ -47,21 +47,35 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.volNamePrefix = document.getElementById("vol-name-prefix").value;
 	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
 	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
+	DriverValues.driverNamespace = document.getElementById("driver-namespace").value;
+	DriverValues.labelValue = document.getElementById("label-value").value;
+	DriverValues.pollRate = document.getElementById("poll-rate").value;
+	DriverValues.driverPodLabel = document.getElementById("driver-pod-label").value;
+	DriverValues.connectionValidation = $("#connection-validation").prop('checked') ? true : false;
+	DriverValues.volumelessPods = $("#volumeless-pods").prop('checked') ? true : false;
 	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodeSelectorLabel = document.getElementById("node-selector-label").value || '""';
 	var taint = document.getElementById("taint").value || '""';
 	var labels = DriverValues.nodeSelectorLabel.split(":");
-	var nodeSelector = CONSTANTS_PARAM.NODE_SELECTOR_TAB + labels[0] + ': "' + labels[1] + '"';
+	var nodeSelector
+	var taints
+	if (document.getElementById("installation-type").value === CONSTANTS_PARAM.OPERATOR) {
+		nodeSelector = '\n'.padEnd(8, " ") + labels[0] + ': "' + labels[1] + '"';
+		taints = CONSTANTS_PARAM.OPERATOR_TAINTS.replace("$KEY", taint).trimEnd();
+	} else {
+		nodeSelector = '\n'.padEnd(7, " ") + labels[0] + ': "' + labels[1] + '"';
+		taints = CONSTANTS_PARAM.HELM_TAINTS.replace("$KEY", taint).trimEnd();
+	}
 	DriverValues.controllerTolerations = "";
 	DriverValues.nodeTolerations= "";
 	if ($("#controller-pods-node-selector").prop('checked') === true) {
 		DriverValues.controllerPodsNodeSelector = nodeSelector;
-		DriverValues.controllerTolerations = CONSTANTS_PARAM.TAINTS.replace("$KEY", taint).trimEnd();
+		DriverValues.controllerTolerations = taints;
 	}
 	if ($("#node-pods-node-selector").prop('checked') === true) {
 		DriverValues.nodePodsNodeSelector = nodeSelector;
-		DriverValues.nodeTolerations = CONSTANTS_PARAM.TAINTS.replace("$KEY", taint).trimEnd();
+		DriverValues.nodeTolerations = taints;
 	}
 	DriverValues.snapshot = $("#snapshot").prop('checked') ? true : false;
 	DriverValues.vgsnapshot = $("#vgsnapshot").prop('checked') ? true : false;
@@ -73,6 +87,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.observabilityMetrics = $("#observability-metrics").prop('checked') ? true : false;
 	DriverValues.authorization = $("#authorization").prop('checked') ? true : false;
 	DriverValues.resiliency = $("#resiliency").prop('checked') ? true : false;
+	DriverValues.operatorResiliency = $("#operator-resiliency").prop('checked') ? true : false;
 	DriverValues.storageCapacity = $("#storage-capacity").prop('checked') ? true : false;
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
 	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value || '""';
@@ -101,6 +116,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$VOLUME_NAME_PREFIX", yamlTplValues.volNamePrefix);
 	yamlTpl = yamlTpl.replaceAll("$SNAP_NAME_PREFIX", yamlTplValues.snapNamePrefix);
 	yamlTpl = yamlTpl.replaceAll("$FSGROUP_POLICY", yamlTplValues.fsGroupPolicy);
+	yamlTpl = yamlTpl.replaceAll("$NAMESPACE", yamlTplValues.driverNamespace);
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_POD_NODE_SELECTOR", yamlTplValues.controllerPodsNodeSelector);
 	yamlTpl = yamlTpl.replaceAll("$NODE_POD_NODE_SELECTOR", yamlTplValues.nodePodsNodeSelector);
 	yamlTpl = yamlTpl.replaceAll("$HEALTH_MONITOR_ENABLED", yamlTplValues.healthMonitor);
@@ -114,6 +130,12 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION", yamlTplValues.authorizationSkipCertValidation);
 	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_ENABLED", yamlTplValues.observability);
 	yamlTpl = yamlTpl.replaceAll("$RESILIENCY_ENABLED", yamlTplValues.resiliency);
+	yamlTpl = yamlTpl.replaceAll("$OPERATOR_RESILIENCY_ENABLED", yamlTplValues.operatorResiliency);
+	yamlTpl = yamlTpl.replaceAll("$LABEL_VALUE", yamlTplValues.labelValue);
+	yamlTpl = yamlTpl.replaceAll("$POLL_RATE", yamlTplValues.pollRate);
+	yamlTpl = yamlTpl.replaceAll("$DRIVER_POD_LABEL_VALUE", yamlTplValues.driverPodLabel);
+	yamlTpl = yamlTpl.replaceAll("$SKIP_ARRAY_CONNECTION_VALIDATION", yamlTplValues.connectionValidation);
+	yamlTpl = yamlTpl.replaceAll("$IGNORE_VOLUMELESS_PODS", yamlTplValues.volumelessPods);
 	yamlTpl = yamlTpl.replaceAll("$STORAGE_CAPACITY_ENABLED", yamlTplValues.storageCapacity);
 	yamlTpl = yamlTpl.replaceAll("$MONITOR_ENABLED", yamlTplValues.monitor);
 	yamlTpl = yamlTpl.replaceAll("$CERT_SECRET_COUNT", yamlTplValues.certSecretCount);

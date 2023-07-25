@@ -16,10 +16,10 @@
  *
  */
 var commandTitle = 'Run the following commands to install';
-var commandNote = 'Ensure that the namespaces and secrets are created before installing the helm chart';
+var commandNote = 'Ensure that the namespaces and secrets are created before installing the driver';
 var command1 = 'helm repo add dell https://dell.github.io/helm-charts';
 var command2 = 'helm install $release-name dell/container-storage-modules -n $namespace --version $version -f values.yaml';
-
+var command3 = 'kubectl create -f values.yaml';
 var nodeSelectorNote = 'For the pod to be eligible to run on a node, the node must have the indicated key-value pair as label';
 
 const snapshotNote = 'If Snapshot is enabled, ensure the Snapshot CRDs are installed';

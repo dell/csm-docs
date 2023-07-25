@@ -172,9 +172,9 @@ CRDs should be configured during replication prepare stage with repctl as descri
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
    
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
-6. Copy the default values.yaml file 
+6. Download the default values.yaml file 
    ```bash
-   cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.7.0/charts/csi-powerstore/values.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 
