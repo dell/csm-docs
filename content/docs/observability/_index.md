@@ -7,14 +7,14 @@ Description: >
 ---
 
  [Container Storage Modules](https://github.com/dell/csm) (CSM) for Observability is part of the open-source suite of Kubernetes storage enablers for Dell products.
- 
- It is an OpenTelemetry agent that collects array-level metrics for Dell storage so they can be scraped into a Prometheus database. With CSM for Observability, you will gain visibility not only on the capacity of the volumes/file shares you manage with Dell CSM CSI (Container Storage Interface) drivers but also their performance in terms of bandwidth, IOPS, and response time. 
- 
+
+ It is an OpenTelemetry agent that collects array-level metrics for Dell storage so they can be exported into a Prometheus database. With CSM for Observability, you will gain visibility not only on the capacity of the volumes/file shares you manage with Dell CSM CSI (Container Storage Interface) drivers but also their performance in terms of bandwidth, IOPS, and response time.
+
  Thanks to pre-packaged Grafana dashboards, you will be able to go through these metrics history and see the topology between a Kubernetes PV (Persistent Volume) and its translation as a LUN or file share in the backend array. This module also allows Kubernetes admins to collect array level metrics to check the overall capacity and performance directly from the Prometheus/Grafana tools rather than interfacing directly with the storage system itself.
 
 Metrics data is collected and pushed to the [OpenTelemetry Collector](https://github.com/open-telemetry/opentelemetry-collector), so it can be processed, and exported in a format consumable by Prometheus. SSL certificates for TLS between nodes are handled by [cert-manager](https://github.com/jetstack/cert-manager).
 
-CSM for Observability is composed of several services, each living in its own GitHub repository, that can be installed following one of the four deployments we support [here](deployment). Contributions can be made to this repository or any of the CSM for Observability repositories listed below. 
+CSM for Observability is composed of several services, each residing in its own GitHub repository, that can be installed following one of the four deployments we support [here](deployment). Contributions can be made to this repository or any of the CSM for Observability repositories listed below.
 
 {{<table "table table-striped table-bordered table-sm">}}
 | Name | Repository | Description |
@@ -49,8 +49,8 @@ CSM for Observability provides the following capabilities:
 | COP/OS | Supported Versions |
 |-|-|
 | Kubernetes    | 1.25, 1.26, 1.27 |
-| Red Hat OpenShift | 4.10, 4.11, 4.12 |
-| Rancher Kubernetes Engine | yes | 
+| Red Hat OpenShift | 4.11, 4.12, 4.13 |
+| Rancher Kubernetes Engine | yes |
 | RHEL          |     7.x, 8.x      |
 | CentOS        |     7.8, 7.9     |
 {{</table>}}
@@ -93,6 +93,7 @@ CSM for Observability provides Kubernetes administrators with the topology data 
 | Storage Pool               | The storage pool name the volume/storage class is associated with                                                                                  |
 | Storage System Volume Name | The name of the volume on the storage system that is associated with the persistent volume                                                         |
 {{</table>}}
+
 ## TLS Encryption
 
 CSM for Observability deployment relies on [cert-manager](https://github.com/jetstack/cert-manager) to manage SSL certificates that are used to encrypt communication between various components. When [deploying CSM for Observability](./deployment), cert-manager is installed and configured automatically.  The cert-manager components listed below will be installed alongside CSM for Observability.
