@@ -21,6 +21,7 @@ const {
 	onResiliencyChange,
 	onOperatorResiliencyChange,
 	onSnapshotChange,
+	onCertManagerChange,
 	onVSphereChange,
 	onNodeSelectorChange,
 	onCopyButtonClickHandler,
@@ -188,6 +189,26 @@ describe("GIVEN onSnapshotChange function", () => {
 
 		expect($("div#snapshot-note-wrapper").css("display")).not.toEqual("none");
 		expect($("div#snap-prefix").css("display")).not.toEqual("none");
+	});
+});
+
+describe("GIVEN onCertManagerChange function", () => {
+	test("SHOULD hide cert-manager components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="certmanager">
+            <div id="certmanager-note-wrapper" style="display:">
+        `;
+		onCertManagerChange("Temp cert-manager note");
+		expect($("div#certmanager-note-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show cert-manager components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="certmanager" checked>
+            <div id="certmanager-note-wrapper" style="display:none">
+        `;
+		onCertManagerChange("Temp cert-manager note");
+		expect($("div#certmanager-note-wrapper").css("display")).not.toEqual("none");
 	});
 });
 
