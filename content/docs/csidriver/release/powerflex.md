@@ -12,7 +12,7 @@ description: Release notes for PowerFlex CSI driver
 
 ### Fixed Issues
 - [Fix the offline helm installation failure](https://github.com/dell/csm/issues/868)
-- [High/Critical Vulnerabilities in the csi-powerflex driver](https://github.com/dell/csm/issues/868)
+-  High/Critical Vulnerabilities in the csi-powerflex driver
 ### Known Issues
 
 | Issue | Workaround |
