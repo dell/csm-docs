@@ -6,11 +6,10 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for replication
 ---
 
-## Release Notes - CSM Replication 1.5.0
+## Release Notes - CSM Replication 1.6.0
 
 ### New Features/Changes
- - [Target Backend Volume Deletion](https://github.com/dell/csm/issues/665)
- - [Base Image Updated to ubi-micro](https://github.com/dell/csm/issues/790)
+ - [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
 
 ### Fixed Issues
 

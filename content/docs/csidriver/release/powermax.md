@@ -3,14 +3,14 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.7.0
+## Release Notes - CSI PowerMax v2.8.0
 
 {{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
 
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
 ### New Features/Changes
-- [Added support for RHEL 9.0](https://github.com/dell/csm/issues/893)
+- [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
 - [Added Storage Capacity Tracking feature for Powermax](https://github.com/dell/csm/issues/876)
 - [Make standalone helm chart available from helm repository](https://github.com/dell/csm/issues/877)
 
