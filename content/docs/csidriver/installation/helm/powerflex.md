@@ -77,7 +77,7 @@ For detailed PowerFlex installation procedure, see the [Dell PowerFlex Deploymen
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerflex.git` to clone the git repository.
+1. Run `git clone -b v2.7.1 https://github.com/dell/csi-powerflex.git` to clone the git repository.
 
 2. A namespace for the driver is expected prior to running the command below. If one is not created already, you can run `kubectl create namespace vxflexos` to create a new one. 
 Note that the namespace can be any user-defined name that follows the conventions for namespaces outlined by Kubernetes. In this example we assume that the namespace is 'vxflexos'
@@ -151,7 +151,7 @@ Use the below command to replace or update the secret:
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.7.0 |
+| version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.7.1 |
 | driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
 | powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | dellemc/sdc:3.6.0.6 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |

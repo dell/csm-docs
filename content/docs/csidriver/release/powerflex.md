@@ -3,7 +3,7 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.7.0
+## Release Notes - CSI PowerFlex v2.7.1
 
 ### New Features/Changes
 - [K8 1.27 support added.](https://github.com/dell/csm/issues/743)
@@ -11,7 +11,7 @@ description: Release notes for PowerFlex CSI driver
 - [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
 
 ### Fixed Issues
-- [Fix the offline helm installation failure](https://github.com/dell/csm/issues/868)
+- [High/Critical Vulnerabilities in the csi-powerflex driver](https://github.com/dell/csm/issues/868)
 ### Known Issues
 
 | Issue | Workaround |
