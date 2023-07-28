@@ -9,7 +9,7 @@ menu:
 no_list: true
 ---
 {{% pageinfo color="primary" %}}
-The CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
+CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
 {{% /pageinfo %}}
 
 The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility, encryption, and resiliency.

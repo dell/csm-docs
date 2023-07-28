@@ -5,7 +5,7 @@ description: >
   Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
 ---
 {{% pageinfo color="primary" %}}
-The CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
+CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
 {{% /pageinfo %}}
 
 ## Installing CSI Driver for PowerFlex via Dell CSM Operator

@@ -25,4 +25,4 @@ description: Release notes for PowerFlex CSI driver
 
 - Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
 
-- The CSI-PowerFlex v2.7.1 is applicable only for helm based installations.
+- CSI-PowerFlex v2.7.1 is applicable only for helm based installations.
