@@ -5,7 +5,7 @@ description: Container Storage Modules Operator
 weight: 1
 ---
 {{% pageinfo color="primary" %}}
-The release 1.7.1 is only applicable to helm based installations of csi-powerflex driver.
+The CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
 {{% /pageinfo %}}
 
 The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
