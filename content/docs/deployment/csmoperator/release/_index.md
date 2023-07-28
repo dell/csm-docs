@@ -5,6 +5,9 @@ weight: 5
 Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
+{{% pageinfo color="primary" %}}
+The release 1.7.1 is only applicable to helm based installations of csi-powerflex driver.
+{{% /pageinfo %}}
 
 ## Release Notes - Container Storage Modules Operator v1.2.0
 
