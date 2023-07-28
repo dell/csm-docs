@@ -6,7 +6,7 @@ Description: >
   Dell Container Storage Modules (CSM) release notes
 ---
 {{% pageinfo color="primary" %}}
-The release 1.7.1 is only applicable to helm based installations of csi-powerflex driver.
+The CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
 {{% /pageinfo %}}
 
 Release notes for Container Storage Modules:
