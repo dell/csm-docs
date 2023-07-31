@@ -39,6 +39,7 @@ const CONSTANTS = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V170: "1.0.0",
+	CSM_HELM_V171: "1.0.1",
 	TAINTS: `
      - key: "$KEY"
        operator: "Exists"
