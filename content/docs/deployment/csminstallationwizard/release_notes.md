@@ -3,7 +3,7 @@ title: Release Notes
 description: Release notes for CSM Installation Wizard
 ---
 
-## Release Notes - CSM Installation Wizard 1.0.0
+## Release Notes - CSM Installation Wizard 1.0.1
 
 ### New Features/Changes
 

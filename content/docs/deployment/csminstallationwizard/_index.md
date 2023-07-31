@@ -15,7 +15,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 | ------------------ | --------- | 
 | CSI PowerStore     | 2.7.0     | 
 | CSI PowerMax       | 2.7.0     | 
-| CSI PowerFlex      | 2.7.0     | 
+| CSI PowerFlex      | 2.7.1     | 
 | CSI PowerScale     | 2.7.0     | 
 | CSI Unity XT       | 2.7.0     | 
 
@@ -79,5 +79,5 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
     ```terminal
     
     helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
-    Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.0 -f values.yaml
+    Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.1 -f values.yaml
     ```
