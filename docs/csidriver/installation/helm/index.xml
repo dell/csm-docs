@@ -86,7 +86,7 @@ Refer to &lt;a href=&#34;https://hub.docker.com/r/dellemc/sdc&#34;&gt;https://hu
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;git clone -b v2.7.0 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
+&lt;p&gt;Run &lt;code&gt;git clone -b v2.7.1 https://github.com/dell/csi-powerflex.git&lt;/code&gt; to clone the git repository.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;A namespace for the driver is expected prior to running the command below. If one is not created already, you can run &lt;code&gt;kubectl create namespace vxflexos&lt;/code&gt; to create a new one.
@@ -219,7 +219,7 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.28.0-0&amp;rdquo;&lt;/li&g
 &lt;td&gt;version&lt;/td&gt;
 &lt;td&gt;Set to verify the values file version matches driver version and used to pull the image as part of the image name.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;2.7.0&lt;/td&gt;
+&lt;td&gt;2.7.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;driverRepository&lt;/td&gt;

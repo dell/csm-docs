@@ -46,7 +46,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;2.7.0&lt;/td&gt;
+&lt;td&gt;2.7.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
@@ -143,7 +143,7 @@ helm repo update
 &lt;p&gt;On your terminal, run this command:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-terminal&#34; data-lang=&#34;terminal&#34;&gt;
 helm install &amp;lt;release-name&amp;gt; dell/container-storage-modules -n &amp;lt;namespace&amp;gt; --version &amp;lt;container-storage-module chart-version&amp;gt; -f &amp;lt;values.yaml location&amp;gt;
-Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.0 -f values.yaml
+Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.1 -f values.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -159,7 +159,14 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
       <description>
         
         
-        &lt;p&gt;The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
 &lt;h2 id=&#34;support-matrix&#34;&gt;Support Matrix&lt;/h2&gt;
 &lt;p&gt;Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below:&lt;/p&gt;
 &lt;table&gt;

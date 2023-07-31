@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.115.4">
+<meta name="generator" content="Hugo 0.116.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,11 +16,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/upgradation/drivers/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-06-24T09:21:08+05:30" />
+<meta property="article:modified_time" content="2023-07-31T22:37:05+05:30" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Upgrade PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2023-06-24T09:21:08+05:30" />
-<meta itemprop="wordCount" content="292">
+<meta itemprop="dateModified" content="2023-07-31T22:37:05+05:30" />
+<meta itemprop="wordCount" content="303">
 <meta itemprop="keywords" content="upgrade,csi-driver," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Upgrade PowerFlex CSI driver"/>
@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1aae8304d6b90eeec80b5b7cb434a44e.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b0335cf4f268ac1d73384084203c54f8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1aae8304d6b90eeec80b5b7cb434a44e.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b0335cf4f268ac1d73384084203c54f8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -604,7 +604,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#update-driver-from-v26-to-v27-using-helm">Update Driver from v2.6 to v2.7 using Helm</a></li>
+    <li><a href="#update-driver-from-v26-to-v271-using-helm">Update Driver from v2.6 to v2.7.1 using Helm</a></li>
     <li><a href="#upgrade-using-dell-csi-operator">Upgrade using Dell CSI Operator:</a></li>
     <li><a href="#upgrade-using-dell-csm-operator">Upgrade using Dell CSM Operator:</a></li>
   </ul>
@@ -682,11 +682,18 @@
 	<h1>PowerFlex</h1>
 
 	       
-	<p>You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operator.</p>
-<h2 id="update-driver-from-v26-to-v27-using-helm">Update Driver from v2.6 to v2.7 using Helm</h2>
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.</p>
+
+</div>
+
+<p>You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operator.</p>
+<h2 id="update-driver-from-v26-to-v271-using-helm">Update Driver from v2.6 to v2.7.1 using Helm</h2>
 <p><strong>Steps</strong></p>
 <ol>
-<li>Run <code>git clone -b v2.7.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository and get the v2.7.0 driver.</li>
+<li>Run <code>git clone -b v2.7.1 https://github.com/dell/csi-powerflex.git</code> to clone the git repository and get the v2.7.1 driver.</li>
 <li>You need to create secret.yaml with the configuration of your system.
 Check this section in installation documentation:  <a href="../../../installation/helm/powerflex#install-the-driver">Install the Driver</a></li>
 <li>Update values file as needed.</li>
