@@ -5,6 +5,10 @@ no_list: true
 description: Deployment of CSM for Replication
 weight: 1
 ---
+{{% pageinfo color="primary" %}}
+CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
+{{% /pageinfo %}}
+
 The Container Storage Modules along with the required CSI Drivers can each be deployed using CSM operator.
 
 {{< cardpane >}}

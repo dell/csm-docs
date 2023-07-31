@@ -5,6 +5,9 @@ weight: 5
 Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
+{{% pageinfo color="primary" %}}
+CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
+{{% /pageinfo %}}
 
 ## Release Notes - Container Storage Modules Operator v1.2.0
 
