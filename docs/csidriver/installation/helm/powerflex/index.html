@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.115.4">
+<meta name="generator" content="Hugo 0.116.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,11 +18,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-07-11T10:11:32-04:00" />
+<meta property="article:modified_time" content="2023-07-31T22:37:05+05:30" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing the CSI Driver for PowerFlex via Helm
 ">
-<meta itemprop="dateModified" content="2023-07-11T10:11:32-04:00" />
+<meta itemprop="dateModified" content="2023-07-31T22:37:05+05:30" />
 <meta itemprop="wordCount" content="3170">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
@@ -84,7 +84,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.7.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.6.1</a>
 	
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1aae8304d6b90eeec80b5b7cb434a44e.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b0335cf4f268ac1d73384084203c54f8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.1aae8304d6b90eeec80b5b7cb434a44e.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.b0335cf4f268ac1d73384084203c54f8.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -765,7 +765,7 @@ Refer to <a href="https://hub.docker.com/r/dellemc/sdc">https://hub.docker.com/r
 <p><strong>Steps</strong></p>
 <ol>
 <li>
-<p>Run <code>git clone -b v2.7.0 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
+<p>Run <code>git clone -b v2.7.1 https://github.com/dell/csi-powerflex.git</code> to clone the git repository.</p>
 </li>
 <li>
 <p>A namespace for the driver is expected prior to running the command below. If one is not created already, you can run <code>kubectl create namespace vxflexos</code> to create a new one.
@@ -898,7 +898,7 @@ kubeVersion: &ldquo;&gt;= 1.21.0-0 &lt; 1.28.0-0&rdquo;</li>
 <td>version</td>
 <td>Set to verify the values file version matches driver version and used to pull the image as part of the image name.</td>
 <td>Yes</td>
-<td>2.7.0</td>
+<td>2.7.1</td>
 </tr>
 <tr>
 <td>driverRepository</td>

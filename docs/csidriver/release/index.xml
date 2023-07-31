@@ -65,7 +65,7 @@ For any CSI operator and driver issues, questions or feedback, please follow our
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v270&#34;&gt;Release Notes - CSI PowerFlex v2.7.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v271&#34;&gt;Release Notes - CSI PowerFlex v2.7.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/743&#34;&gt;K8 1.27 support added.&lt;/a&gt;&lt;/li&gt;
@@ -101,7 +101,12 @@ For any CSI operator and driver issues, questions or feedback, please follow our
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn&amp;rsquo;t support enabling of alpha features for Production Grade clusters.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CSI-PowerFlex v2.7.1 is applicable only for helm based installations.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>
