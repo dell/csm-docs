@@ -3,7 +3,7 @@ title: PowerFlex
 description: Release notes for PowerFlex CSI driver
 ---
 
-## Release Notes - CSI PowerFlex v2.7.0
+## Release Notes - CSI PowerFlex v2.7.1
 
 ### New Features/Changes
 - [K8 1.27 support added.](https://github.com/dell/csm/issues/743)
@@ -24,3 +24,5 @@ description: Release notes for PowerFlex CSI driver
 ### Note:
 
 - Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
+
+- CSI-PowerFlex v2.7.1 is applicable only for helm based installations.
