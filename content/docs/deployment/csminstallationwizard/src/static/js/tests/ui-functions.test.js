@@ -53,6 +53,7 @@ const CONSTANTS = {
 	POWERSCALE_NAMESPACE: "isilon",
 	UNITY_NAMESPACE: "unity",
 	POWERSTORE_LABEL_VALUE: "csi-powerstore",
+	POWERSCALE_LABEL_VALUE: "csi-isilon",
 	VALUES: "values",
 	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
@@ -534,6 +535,25 @@ describe("GIVEN displayModules function", () => {
 		expect($(".fsGroupPolicy").css("display")).toEqual("block");
 		expect($(".resiliency").css("display")).toEqual("block");
 		expect($(".cert-secret-count-wrapper").css("display")).toEqual("block");
+	});
+
+	test("SHOULD show expected components for operator csi-powerscale", () => {
+		document.body.innerHTML = testHtml;
+
+		displayModules("operator", "powerscale", CONSTANTS);
+
+		expect($(".vgsnapshot").css("display")).toEqual("none");
+		expect($(".authorization").css("display")).toEqual("none");
+		expect($(".observability").css("display")).toEqual("none");
+		expect($(".replication-mod").css("display")).toEqual("none");
+		expect($(".image-repository").css("display")).toEqual("none");
+		expect($(".cert-manager").css("display")).toEqual("none");
+		expect($(".resizer").css("display")).toEqual("none");
+		expect($(".vol-name-prefix").css("display")).toEqual("none");
+		expect($(".snapshot-feature").css("display")).toEqual("none");
+		expect($(".fsGroupPolicy").css("display")).toEqual("block");
+		expect($(".resiliency").css("display")).toEqual("none");
+		expect($(".storage-capacity").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show expected components for csi-powermax", () => {

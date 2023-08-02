@@ -179,6 +179,8 @@ const resetArrayPollRate = csmMapValue => {
 const resetLabelValue = (driverValue, CONSTANTS_PARAM) => {
 	if (driverValue === CONSTANTS_PARAM.POWERSTORE) {
 		document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSTORE_LABEL_VALUE;
+	} else if (driverValue === CONSTANTS_PARAM.POWERSCALE){
+		document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSCALE_LABEL_VALUE;
 	} else {
 		document.getElementById("label-value").value = driverValue;
 	}
@@ -254,6 +256,18 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".vgsnapshot").hide();
 			$(".storage-capacity").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
+			if (installationType === 'operator'){
+				$(".resiliency").hide();
+				$(".resiliency-operator").show();
+				$(".observability").hide();
+				$(".replication-mod").hide();
+				$(".image-repository").hide();
+				$(".cert-manager").hide();
+				$(".resizer").hide();
+				$(".snapshot-feature").hide();
+				$(".vol-name-prefix").hide();
+				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSCALE_LABEL_VALUE;
+			}
 			break;
 		case CONSTANTS_PARAM.POWERMAX:
 			$(".vgsnapshot").hide();
