@@ -528,7 +528,7 @@ describe("GIVEN displayModules function", () => {
 
 		displayModules("helm", "powerscale", CONSTANTS);
 
-		expect($(".authorization").css("display")).toEqual("none");
+		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("block");
 		expect($(".vgsnapshot").css("display")).toEqual("none");
 		expect($(".storage-capacity").css("display")).toEqual("block");
@@ -543,7 +543,7 @@ describe("GIVEN displayModules function", () => {
 		displayModules("operator", "powerscale", CONSTANTS);
 
 		expect($(".vgsnapshot").css("display")).toEqual("none");
-		expect($(".authorization").css("display")).toEqual("none");
+		expect($(".authorization").css("display")).toEqual("block");
 		expect($(".observability").css("display")).toEqual("none");
 		expect($(".replication-mod").css("display")).toEqual("none");
 		expect($(".image-repository").css("display")).toEqual("none");
