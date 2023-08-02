@@ -250,6 +250,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			}
 			break;
 		case CONSTANTS_PARAM.POWERSCALE:
+			$(".authorization").hide();
+			$("#authorization").prop('checked', false);
 			$(".cert-secret-count-wrapper").show();
 			$(".resiliency").show();
 			$(".fsGroupPolicy").show();

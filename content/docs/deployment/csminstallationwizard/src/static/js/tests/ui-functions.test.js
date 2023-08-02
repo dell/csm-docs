@@ -528,7 +528,7 @@ describe("GIVEN displayModules function", () => {
 
 		displayModules("helm", "powerscale", CONSTANTS);
 
-		expect($(".authorization").css("display")).toEqual("block");
+		expect($(".authorization").css("display")).toEqual("none");
 		expect($(".observability").css("display")).toEqual("block");
 		expect($(".vgsnapshot").css("display")).toEqual("none");
 		expect($(".storage-capacity").css("display")).toEqual("block");
