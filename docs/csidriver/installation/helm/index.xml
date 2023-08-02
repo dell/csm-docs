@@ -1458,12 +1458,12 @@ volume stats value under node should be set to true.&lt;/p&gt;
 &lt;p&gt;Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the &lt;em&gt;secret.yaml&lt;/em&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Copy &lt;em&gt;the helm/csi-isilon/values.yaml&lt;/em&gt; into a new location with name say &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt;, to customize settings for installation.&lt;/p&gt;
+&lt;p&gt;Download  &lt;code&gt;wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml&lt;/code&gt; into  &lt;code&gt;cd ../dell-csi-helm-installer&lt;/code&gt; to customize settings for installation.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Edit &lt;em&gt;my-isilon-settings.yaml&lt;/em&gt; to set the following parameters for your installation:
 The following table lists the primary configurable parameters of the PowerScale driver Helm chart and their default values. More detailed information can be
-found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master/helm/csi-isilon/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
+found in the  &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-isilon/values.yaml&#34;&gt;&lt;code&gt;values.yaml&lt;/code&gt;&lt;/a&gt; file in this repository.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1945,7 +1945,8 @@ found in the  &lt;a href=&#34;https://github.com/dell/csi-powerscale/blob/master
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install the driver using &lt;code&gt;csi-install.sh&lt;/code&gt; bash script by running&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace isilon --values ../helm/my-isilon-settings.yaml
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./csi-install.sh --namespace isilon --values my-isilon-settings.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;(assuming that the current working directory is &amp;lsquo;helm&amp;rsquo; and my-isilon-settings.yaml is also present under &amp;lsquo;helm&amp;rsquo; directory)&lt;/p&gt;
