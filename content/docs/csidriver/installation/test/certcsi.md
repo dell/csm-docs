@@ -172,6 +172,16 @@ Optional Params:
 --vs : volume size to be created
 ```
 
+#### Volume Health Metric Suite
+
+To run volume health metric test suite, run the command:
+```bash
+
+cert-csi functional-test volumehealthmetrics --sc <storage-class> --driver-ns <driver-namespace> --podNum <number-of-pods> --volNum <number-of-volumes>
+```
+
+> Note: Make sure to enable healthMonitor for driver's controller & node pods before running this suite and it is recommended to keep smaller interval time for this sidecar.
+
 ### Other Options
 
 #### Generating tabular report from DB
