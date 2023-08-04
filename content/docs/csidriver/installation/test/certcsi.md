@@ -180,7 +180,7 @@ To run volume health metric test suite, run the command:
 cert-csi functional-test volumehealthmetrics --sc <storage-class> --driver-ns <driver-namespace> --podNum <number-of-pods> --volNum <number-of-volumes>
 ```
 
-> Note: Make sure to enable healthMonitor for driver's controller & node pods before running this suite and it is recommended to keep smaller interval time for this sidecar.
+> Note: Make sure to enable healthMonitor for driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.
 
 ### Other Options
 
