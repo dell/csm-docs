@@ -13,7 +13,7 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
   ```bash
   kubectl create namespace karavi
   ```
-- Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/main/samples) If cert-manager has already been installed, don't enable it.
+- Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/main/samples). If cert-manager has already been installed, don't enable it.
   - Scenario 1: Deploy one supported CSI Driver and enable Observability module
     - If you enable `metrics-powerscale` or `metrics-powerflex`, must enable `otel-collector` as well.
     
