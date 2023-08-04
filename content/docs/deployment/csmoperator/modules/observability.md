@@ -26,7 +26,7 @@ Note: pods in the `karavi` namespace will be in the ContainerCreating state unti
 
 - Create certificates
 
-  Note: you may need to wait for the cert-manager pods to be 60-90 seconds old to successfully create certificates without an x509 error.
+  Note: you may need to wait for the cert-manager pods to be 60-90 seconds old to successfully create certificates without an x509 error. See the [cert-manager documentation](https://cert-manager.io/docs/concepts/webhook/#webhook-connection-problems-shortly-after-cert-manager-installation) for more information.
   
     - Option 1: Self-signed certificates
 		1. A Sample certificates manifest can be found at `samples/observability/selfsigned-cert.yaml`.
