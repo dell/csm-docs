@@ -8,14 +8,17 @@ Description: >
 
 ## Release Notes - CSM Replication 1.6.0
 
+
 ### New Features/Changes
- - [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
+
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
+- [#885 - [FEATURE]: CSM 1.8 release specific changes](https://github.com/dell/csm/issues/885)
+- [#926 - [FEATURE]: set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
 
-| Github ID                                     | Description                                                        |
-| --------------------------------------------- | ------------------------------------------------------------------ |
-| [782](https://github.com/dell/csm/issues/782) | **PowerScale:** Target NFS exports are not deleted even though target directories are deleted |
+- [#928 - [BUG]: PowerStore Replication - Delete RG request hangs](https://github.com/dell/csm/issues/928)
 
 ### Known Issues
 

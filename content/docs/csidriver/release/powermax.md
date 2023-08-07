@@ -9,13 +9,21 @@ description: Release notes for PowerMax CSI driver
 
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
+
 ### New Features/Changes
-- [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
-- [Added Storage Capacity Tracking feature for Powermax](https://github.com/dell/csm/issues/876)
-- [Make standalone helm chart available from helm repository](https://github.com/dell/csm/issues/877)
+
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#861 - [FEATURE]: CSM for PowerMax file support ](https://github.com/dell/csm/issues/861)
+- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
+- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
+- [#885 - [FEATURE]: CSM 1.8 release specific changes](https://github.com/dell/csm/issues/885)
+- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#926 - [FEATURE]: set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
-There are no fixed issues in this release.
+
+- [#915 - [BUG]: Unit tests failing for CSI-PowerMax in in NodeGetInfo scenario.](https://github.com/dell/csm/issues/915)
+- [#936 - [BUG]: Change in the error message when the volume is not present](https://github.com/dell/csm/issues/936)
 
 ### Known Issues
 

@@ -5,20 +5,19 @@ description: Release notes for PowerStore CSI driver
 
 ## Release Notes - CSI PowerStore v2.7.0
 
+
 ### New Features/Changes
-- [CSI PowerStore - Add support for PowerStore Medusa (v3.5) array](https://github.com/dell/csm/issues/735)
-- [Allow FQDN for the endpoint in CSI-PowerStore](https://github.com/dell/csm/issues/731)
-- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
-- [Migrate image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [CSM support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
-- [Add upgrade support of csi-powerstore driver in CSM-Operator](https://github.com/dell/csm/issues/805)
-- [CSM support for Openshift 4.12](https://github.com/dell/csm/issues/571)
-- [Update to the latest UBI/UBI Micro images for CSM](https://github.com/dell/csm/issues/843)
+
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
+- [#885 - [FEATURE]: CSM 1.8 release specific changes](https://github.com/dell/csm/issues/885)
+- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
+- [#926 - [FEATURE]: set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
-- [Storage Capacity Tracking not working in CSI-PowerStore when installed using CSM Operator](https://github.com/dell/csm/issues/823)
-- [CHAP is set to true in the CSI-PowerStore sample file in CSI Operator](https://github.com/dell/csm/issues/812)
-- [Unable to delete application pod when CSI PowerStore is installed using CSM Operator](https://github.com/dell/csm/issues/785)
+
+- [#928 - [BUG]: PowerStore Replication - Delete RG request hangs](https://github.com/dell/csm/issues/928)
 
 ### Known Issues
 
