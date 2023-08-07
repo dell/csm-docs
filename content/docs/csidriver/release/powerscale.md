@@ -6,14 +6,15 @@ description: Release notes for PowerScale CSI driver
 
 ## Release Notes - CSI Driver for PowerScale v2.7.0
 
+
 ### New Features/Changes
 
-- [Allow user to set Quota limit parameters from the PVC request in CSI PowerScale](https://github.com/dell/csm/issues/742)
-- [CSI Spec 1.5: Storage capacity tracking feature](https://github.com/dell/csm/issues/824)
-- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
-- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
-- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
+- [#885 - [FEATURE]: CSM 1.8 release specific changes](https://github.com/dell/csm/issues/885)
+- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
+- [#926 - [FEATURE]: set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
 
