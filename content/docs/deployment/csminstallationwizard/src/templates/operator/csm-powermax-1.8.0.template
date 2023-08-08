@@ -322,15 +322,15 @@ spec:
         # image: Defines replication init container image. This shouldn't be changed
         # Allowed values: string
         image: dellemc/dell-replication-init:v1.0.1
-     # observability: allows to configure observability
+    # observability: allows to configure observability
     - name: observability
       # enabled: Enable/Disable observability
-      enabled: $OBSERVABILITY_ENABLED
+      enabled: $OBSERVABILITY_OPERATOR_ENABLED
       configVersion: v1.5.0
       components:
       - name: topology
         # enabled: Enable/Disable topology
-        enabled: false
+        enabled: $OBSERVABILITY_OPERATOR_ENABLED_TOPOLOGY
         # image: Defines karavi-topology image. This shouldn't be changed
         # Allowed values: string
         image: dellemc/csm-topology:v1.5.0
@@ -343,7 +343,7 @@ spec:
 
       - name: otel-collector
         # enabled: Enable/Disable OpenTelemetry Collector
-        enabled: false
+        enabled: $OBSERVABILITY_OPERATOR_ENABLED_OTEL
         # image: Defines otel-collector image. This shouldn't be changed
         # Allowed values: string
         image: otel/opentelemetry-collector:0.42.0
@@ -356,9 +356,9 @@ spec:
 
       - name: metrics-powermax
         # enabled: Enable/Disable PowerMax metrics
-        enabled: $POWERMAX_OBSERVABILITY_METRICS_ENABLED
+        enabled: $OBSERVABILITY_OPERATOR_ENABLED_METRICS
         # image: Defines PowerMax metrics image. This shouldn't be changed
-        image: dellemc/csm-metrics-powermax:v1.1.0
+        image: dellemc/csm-metrics-powermax:v1.0.0
         envs:
           # POWERMAX_MAX_CONCURRENT_QUERIES: set the default max concurrent queries to PowerMax
           # Allowed values: int
@@ -400,6 +400,6 @@ spec:
           # Default value: "otel-collector:55680"
           - name: "COLLECTOR_ADDRESS"
             value: "otel-collector:55680"
-          # configMap name which has all array/endpoint related info
+           # configMap name which has all array/endpoint related info
           - name: "X_CSI_CONFIG_MAP_NAME"
-            value: "powermax-reverseproxy-config"    
+            value: "powermax-reverseproxy-config" 

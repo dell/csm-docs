@@ -18,6 +18,7 @@
 var template = "";
 var version = "";
 var observabilityEnabled = false;
+var observabilityOperatorEnabled = false;
 var authorizationEnabled = false;
 var replicationEnabled = false;
 
@@ -86,6 +87,10 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.migration = $("#migration").prop('checked') ? true : false;
 	DriverValues.observability = $("#observability").prop('checked') ? true : false;
 	DriverValues.observabilityMetrics = $("#observability-metrics").prop('checked') ? true : false;
+	DriverValues.observabilityOperator = $("#observability-operator").prop('checked') ? true : false;
+        DriverValues.observabilityOperatorMetrics = $("#observability-operator-metrics").prop('checked') ? true : false;
+	DriverValues.observabilityOperatorTopology = $("#observability-operator-topology").prop('checked') ? true : false;
+	DriverValues.observabilityOperatorOtel = $("#observability-operator-otel").prop('checked') ? true : false;
 	DriverValues.authorization = $("#authorization").prop('checked') ? true : false;
 	DriverValues.resiliency = $("#resiliency").prop('checked') ? true : false;
 	DriverValues.operatorResiliency = $("#operator-resiliency").prop('checked') ? true : false;
@@ -95,6 +100,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.certManagerEnabled = $("#certmanager").prop('checked') ? true : false;
 	DriverValues.topologyEnabled = $("#topology").prop('checked') ? true : false;
 	observabilityEnabled = DriverValues.observability;
+	observabilityOperatorEnabled = DriverValues.observabilityOperator;
 	authorizationEnabled = DriverValues.authorization;
 	replicationEnabled = DriverValues.replication;
 
@@ -136,6 +142,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_PROXY_HOST", yamlTplValues.authorizationProxyHost);
 	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION", yamlTplValues.authorizationSkipCertValidation);
 	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_ENABLED", yamlTplValues.observability);
+	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_ENABLED", yamlTplValues.observabilityOperator);
 	yamlTpl = yamlTpl.replaceAll("$RESILIENCY_ENABLED", yamlTplValues.resiliency);
 	yamlTpl = yamlTpl.replaceAll("$OPERATOR_RESILIENCY_ENABLED", yamlTplValues.operatorResiliency);
 	yamlTpl = yamlTpl.replaceAll("$LABEL_VALUE", yamlTplValues.labelValue);
@@ -196,6 +203,11 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 			yamlTpl = yamlTpl.replaceAll("$POWERSCALE_OBSERVABILITY_METRICS_ENABLED", true);
 		}
 	}
+	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_ENABLED_TOPOLOGY", yamlTplValues.observabilityOperatorTopology);
+	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_ENABLED_METRICS", yamlTplValues.observabilityOperatorMetrics);
+	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_ENABLED_OTEL", yamlTplValues.observabilityOperatorOtel);
+
+
 	yamlTpl = yamlTpl.replaceAll("$POWERSTORE_OBSERVABILITY_METRICS_ENABLED", false);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_OBSERVABILITY_METRICS_ENABLED", false);
 	yamlTpl = yamlTpl.replaceAll("$POWERFLEX_OBSERVABILITY_METRICS_ENABLED", false);

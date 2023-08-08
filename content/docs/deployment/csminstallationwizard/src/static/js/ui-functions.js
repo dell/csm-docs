@@ -45,6 +45,7 @@ function onArrayChange() {
 		setDefaultValues(defaultValues, csmMap);
 		$(".namespace").show();
 		onObservabilityChange();
+		onObservabilityOperatorChange();
 		onAuthorizationChange();
 		onResiliencyChange(podmonNote);
 		onSnapshotChange(snapshotNote, driver, CONSTANTS);
@@ -72,6 +73,19 @@ function onObservabilityChange() {
 		$('div#observability-metrics-wrapper').hide();
 	}
 }
+
+function onObservabilityOperatorChange() {
+        if ($("#observability-operator").prop('checked') === true) {
+                $('div#observability-operator-metrics-wrapper').show();
+		$('div#observability-operator-topology-wrapper').show();
+		$('div#observability-operator-otel-wrapper').show();
+        } else {
+                $('div#observability-operator-metrics-wrapper').hide();
+		$('div#observability-operator-topology-wrapper').hide();
+		$('div#observability-operator-otel-wrapper').hide();
+        }
+}
+
 
 function onResiliencyChange(podmonNoteValue) {
 	if ($("#resiliency").prop('checked') === true) {
@@ -138,6 +152,7 @@ const onCSMVersionChange = () => {
 	document.getElementById("csm-version").value !== "" ? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 	displayModules(installationType, driver, CONSTANTS);
 	onObservabilityChange();
+	onObservabilityOperatorChange();
 	onAuthorizationChange();
 };
 
@@ -277,7 +292,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".snapshot-feature").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			if (installationType === 'operator'){
-				$(".observability").show();
+				$(".observability").hide();
 				$(".replication-mod").show();
 				$(".image-repository").hide();
 				$(".cert-manager").hide();
@@ -286,6 +301,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".migration").hide();
 				$(".resizer").hide();
 				$(".fsGroupPolicy").show();
+				$(".observability-operator").show();
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
 			}
 			break;
@@ -381,6 +397,7 @@ if (typeof exports !== 'undefined') {
 	module.exports = {
 		onAuthorizationChange,
 		onObservabilityChange,
+		onObservabilityOperatorChange,
 		onResiliencyChange,
 		onOperatorResiliencyChange,
 		onSnapshotChange,
