@@ -6,7 +6,7 @@ description: About Dell Technologies (Dell) CSI Drivers
 weight: 3
 ---
 
-The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.5) enabled Container Orchestrator (CO) and Dell Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using Dell storage system.
+The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-csi.github.io/docs/) (CSI spec v1.5) enabled Container Orchestrator (CO) and Dell Storage Arrays. It is a plug-in that is installed into Kubernetes to provide persistent storage using the Dell storage system.
 
 ![CSI Architecture](Architecture_Diagram.png)
 
@@ -23,7 +23,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP3     |       15SP4      |
 | Red Hat OpenShift | 4.12, 4.12 EUS, 4.13 | 4.11, 4.12, 4.12 EUS | 4.11, 4.12, 4.12 EUS | 4.11, 4.12, 4.12 EUS | 4.11, 4.12, 4.12 EUS |
 | Mirantis Kubernetes Engine | 3.6.x |     3.5.x,3.6.x         |       3.6.x      | 3.5.x, 3.6.x      |        3.6.x     |
-| Google Anthos |        1.14       |          1.12        |        no        |         1.15       |        1.15       |
+| Google Anthos |        1.15       |          1.12        |        no        |         1.15       |        1.15       |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI         |
 | Rancher Kubernetes Engine | 1.4.1  |          1.4.1        |        1.4.5       |         1.4.1       |      1.4.5         |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  |          yes        |        yes      |        yes       |      yes      |
