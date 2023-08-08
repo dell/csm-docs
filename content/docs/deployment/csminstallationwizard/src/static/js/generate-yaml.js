@@ -80,6 +80,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.snapshot = $("#snapshot").prop('checked') ? true : false;
 	DriverValues.vgsnapshot = $("#vgsnapshot").prop('checked') ? true : false;
 	DriverValues.resizer = $("#resizer").prop('checked') ? true : false;
+	DriverValues.iscsichap = $("#iscsichap").prop('checked') ? true : false;
 	DriverValues.healthMonitor = $("#health-monitor").prop('checked') ? true : false;
 	DriverValues.replication = $("#replication").prop('checked') ? true : false;
 	DriverValues.migration = $("#migration").prop('checked') ? true : false;
@@ -92,6 +93,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
 	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value || '""';
 	DriverValues.certManagerEnabled = $("#certmanager").prop('checked') ? true : false;
+	DriverValues.topologyEnabled = $("#topology").prop('checked') ? true : false;
 	observabilityEnabled = DriverValues.observability;
 	authorizationEnabled = DriverValues.authorization;
 	replicationEnabled = DriverValues.replication;
@@ -99,8 +101,11 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.storageArrayId = $("#storage-array-id").val();
 	DriverValues.storageArrayEndpointUrl = $("#storage-array-endpoint-url").val() || '""';
 	DriverValues.storageArrayBackupEndpointUrl = $("#storage-array-backup-endpoint-url").val() || '""';
+	DriverValues.manageArrayId = $("#manage-array-id").val();
+	DriverValues.manageArrayEndpointUrl = $("#manage-array-endpoint-url").val() || '""';
 	DriverValues.clusterPrefix = $("#cluster-prefix").val();
 	DriverValues.portGroups = $("#port-groups").val();
+	DriverValues.transportProtocol = $("#transport-protocol").val();
 
 	DriverValues.vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
 	DriverValues.vSphereFCPortGroup = $("#vSphere-fc-port-group").val();
@@ -123,6 +128,8 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$VG_SNAPSHOT_ENABLED", yamlTplValues.vgsnapshot);
 	yamlTpl = yamlTpl.replaceAll("$SNAPSHOT_ENABLED", yamlTplValues.snapshot);
 	yamlTpl = yamlTpl.replaceAll("$RESIZER_ENABLED", yamlTplValues.resizer);
+	yamlTpl = yamlTpl.replaceAll("$ISCSI_CHAP_ENABLED", yamlTplValues.iscsichap);
+	yamlTpl = yamlTpl.replaceAll("$TOPOLOGY_ENABLED", yamlTplValues.topologyEnabled);
 	yamlTpl = yamlTpl.replaceAll("$REPLICATION_ENABLED", yamlTplValues.replication);
 	yamlTpl = yamlTpl.replaceAll("$MIGRATION_ENABLED", yamlTplValues.migration);
 	yamlTpl = yamlTpl.replaceAll("$AUTHORIZATION_ENABLED", yamlTplValues.authorization);
@@ -143,8 +150,11 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", yamlTplValues.storageArrayBackupEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
+	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGE_ARRAY_ID", yamlTplValues.storageArrayId);
+	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGEE_ARRAY_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_CLUSTER_PREFIX", yamlTplValues.clusterPrefix);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_PORT_GROUPS", yamlTplValues.portGroups);
+	yamlTpl = yamlTpl.replaceAll("TRANSPORT_PROTOCOL", yamlTplValues.transportProtocol);
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_ENABLED", yamlTplValues.vSphereEnabled);
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_FC_PORT_GROUP", yamlTplValues.vSphereFCPortGroup);
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_FC_HOST_NAME", yamlTplValues.vSphereFCHostName);

@@ -323,6 +323,26 @@
                     </div>
                   </div>
 
+		  <div class="managedArrays mb-4">
+                    <div class="row mb-4">
+                      <label for="manage-array-id" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="This refers to PowerMax Symmetrix ID" style="width: 140px;">Managed Array Id</label>
+                      <div class="col-sm-9"></div>
+                      <div class="was-validated col-sm-3">
+                        <input class="form-control input-lg" type="text" id="manage-array-id" placeholder="Example: 000000000001" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <label for="manage-array-endpoint-url" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="This refers to the URL of the Unisphere server managing storageArrayId." style="width: 225px;">Managed Array Endpoint URL</label>
+                      <div class="row">
+                        <div class="was-validated col-sm-3">
+                          <input class="form-control input-lg" type="text" id="manage-array-endpoint-url" placeholder="Example: https://primary-1.unisphe.re:8443" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
                   <div class="row mb-3 powermax-csi-reverse-proxy">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="powermax-csi-reverse-proxy" value="" checked>
@@ -349,6 +369,38 @@
                       </div>
                     </div>
                   </div>
+
+		  <div class="transport-protocol">
+                    <div class="row mb-4">
+                      <label for="transport-protocol" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the Transport Protocol for the driver to use to provision to nodes. Optional" style="width: 110px;">Transport Protocol</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-3">
+                        <input class="form-control input-lg" type="text" id="transport-protocol" placeholder="Example: ISCSI ,FC or FIBRE " required>
+                      </div>
+                    </div>
+                  </div>
+
+		  <div class="row mb-4 iscsichap">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="iscsichap" value="" checked>
+                      <label for="iscsichap" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable ISCSI CHAPfeature">Iscsichap</label>
+                    </div>
+                  </div>
+
+		  <div class="row mb-4 col-sm-11 topology">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="topology" value="" onchange="onTopologyChange(topologyNote)" checked>
+                      <label for="topology" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Node Topology feature">Node Topology</label>
+                    </div>
+                    <div class="row child-level-one" id="topology-note-wrapper">
+                      <div class="mt-3 py-2 note">
+                        <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+                        <span class="h6" id="topology-note"></span>
+                      </div>
+                    </div>
+                  </div>
+
+
 
                   <div class="row mb-4 vSphere">
                     <div class="col-sm-12">

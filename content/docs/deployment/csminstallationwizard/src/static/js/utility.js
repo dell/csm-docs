@@ -51,6 +51,13 @@ function validateForm(CONSTANTS_PARAM) {
 		if (document.getElementById('cluster-prefix').value.trim() === "") {
 			return false;
 		}
+		if (document.getElementById('manage-array-id').value.trim() === "") {
+                        return false;
+                }
+		if (document.getElementById('manage-array-endpoint-url').value.trim() === "") {
+                        return false;
+                }
+
 
 		if (vSphereEnabled) {
 			if (document.getElementById('vSphere-fc-port-group').value.trim() === "") {

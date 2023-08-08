@@ -49,6 +49,7 @@ function onArrayChange() {
 		onResiliencyChange(podmonNote);
 		onSnapshotChange(snapshotNote, driver, CONSTANTS);
 		onCertManagerChange(certmanagerNote);
+		onTopologyChange(topologyNote);
 		onVSphereChange();
 		validateInput(validateForm, CONSTANTS);
 	});
@@ -103,6 +104,15 @@ function onCertManagerChange(certmanagerNoteValue) {
 	} else {
 		$('div#certmanager-note-wrapper').hide();	
 	}
+}
+
+function onTopologyChange(topologyNoteValue) {
+        if ($("#topology").prop('checked') === true) {
+                $('div#topology-note-wrapper').show();
+                $("#topology-note").html(topologyNoteValue);
+        } else {
+                $('div#topology-note-wrapper').hide();
+        }
 }
 
 function onVSphereChange() {
@@ -260,10 +270,24 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".storageArrays").show();
 			$(".cluster-prefix").show();
 			$(".port-groups").show();
+			$(".transport-protocol").show();
 			$(".migration").show();
 			$(".vSphere").show();
 			$(".storage-capacity").show();
+			$(".snapshot-feature").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
+			if (installationType === 'operator'){
+				$(".observability").show();
+				$(".replication-mod").show();
+				$(".image-repository").hide();
+				$(".cert-manager").hide();
+				$(".storageArrays").hide();
+				$(".managedArrays").show();
+				$(".migration").hide();
+				$(".resizer").hide();
+				$(".fsGroupPolicy").show();
+				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
+			}
 			break;
 		case CONSTANTS_PARAM.POWERFLEX:
 			$(".monitor").show();
@@ -361,6 +385,7 @@ if (typeof exports !== 'undefined') {
 		onOperatorResiliencyChange,
 		onSnapshotChange,
 		onCertManagerChange,
+		onTopologyChange,
 		onVSphereChange,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
