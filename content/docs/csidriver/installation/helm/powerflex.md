@@ -140,12 +140,12 @@ Use the below command to replace or update the secret:
 6. If using automated SDC deployment:
    - Check the SDC container image is the correct version for your version of PowerFlex. 
    
-7. Copy the default values.yaml file 
+7. Download the default values.yaml file  
    ```bash
-   cd helm && cp csi-vxflexos/values.yaml myvalues.yaml
+   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.7.1/charts/csi-vxflexos/values.yaml
    ```
 
-8. If you are using a custom image, check the `version` and `driverRepository` fields in `myvalues.yaml` to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: `<driverRepository>/csi-vxflexos:v<version>`
+8. If you are using a custom image, check the `version` and `driverRepository` fields in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: `<driverRepository>/csi-vxflexos:v<version>`
 
 9. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here:
 
@@ -199,7 +199,7 @@ Use the below command to replace or update the secret:
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 
 
-10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default. 
+10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values myvalues.yaml`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default. 
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
 
  *NOTE:*
@@ -294,7 +294,7 @@ There are samples storage class yaml files available under `samples/storageclass
 
  *NOTE*: 
 - At least one storage class is required for one array.
-- If you uninstall the driver and reinstall it, you can still face errors if any update in the `values.yaml` file leads to an update of the storage class(es):
+- If you uninstall the driver and reinstall it, you can still face errors if any update in the `myvalues.yaml` file leads to an update of the storage class(es):
 
 ```
     Error: cannot patch "<sc-name>" with kind StorageClass: StorageClass.storage.k8s.io "<sc-name>" is invalid: parameters: Forbidden: updates to parameters are forbidden
