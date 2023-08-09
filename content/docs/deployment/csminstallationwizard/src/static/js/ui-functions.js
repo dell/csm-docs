@@ -293,7 +293,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".vgsnapshot").hide();
 			$(".authorization").hide();
 			$(".fsGroupPolicy").show();	
-			$(".cert-manager").hide();			
+			$(".cert-manager").hide();
+			$(".storage-capacity").show();	
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.UNITY_NAMESPACE;
 			break;
 	}
