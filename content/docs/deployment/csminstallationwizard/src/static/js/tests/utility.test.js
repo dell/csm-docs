@@ -274,6 +274,7 @@ describe("GIVEN setDefaultValues function", () => {
 			<input type="text" id="cert-secret-count">
 			<input type="text" id="taint">
 			<input type="number" id="poll-rate">
+			<input type="number" id="array-threshold">
 			<input type="text" id="driver-pod-label">
 		`;
 
@@ -286,6 +287,7 @@ describe("GIVEN setDefaultValues function", () => {
 			["certSecretCount", "1"],
 			["taint", "node-role.kubernetes.io/control-plane"],
 			["pollRate", "60"],
+			["arrayThreshold", "3"],
 			["driverPodLabel", "dell-storage"]
 		]);
 
@@ -299,6 +301,7 @@ describe("GIVEN setDefaultValues function", () => {
 		expect(document.getElementById("cert-secret-count").value).toEqual("1");
 		expect(document.getElementById("taint").value).toEqual("node-role.kubernetes.io/control-plane");
 		expect(document.getElementById("poll-rate").value).toEqual("60");
+		expect(document.getElementById("array-threshold").value).toEqual("3");
 		expect(document.getElementById("driver-pod-label").value).toEqual("dell-storage");
 
 	});

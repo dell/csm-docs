@@ -165,6 +165,12 @@
                           <label for="connection-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable, if set to true will cause controllerPodCleanup to skip the validation that no I/O is ongoing before cleaning up the pod">Skip Array Connection Validation</label>
                         </div>
                       </div>
+                      <div class="row mt-3 child-level-one" id="leader-election-wrapper">
+                        <div class="col-sm-12">
+                          <input class="form-check-input" type="checkbox" id="leader-election" value="">
+                          <label for="leader-election" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable, Boolean value that should be set true for controller and false for node.">Leader Election</label>
+                        </div>
+                      </div>
                       <div class="was-validated row mt-3 child-level-one" id="driver-pod-label-value">
                         <label for="driver-pod-label" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Provide Driver Pod Label Value">Driver Pod Label Value</label>
                         <div class="col-sm-9"></div>
@@ -181,6 +187,18 @@
                         <div class="col-sm-12">
                           <input class="form-check-input" type="checkbox" id="volumeless-pods" value="">
                           <label for="volumeless-pods" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable, if set to true will enable CSM for Resiliency to ignore pods without persistent volume attached to the pod.">Ignore Volumeless Pods</label>
+                        </div>
+                      </div>
+                      <div class="was-validated row mt-3 child-level-one" id="array-connectionloss-threshold">
+                        <label for="array-threshold" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Gives the number of failed connection polls that will be deemed to indicate array connectivity loss. Should not be set to less than 3.">Array Connectivity ConnectionLoss Threshold</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="number" id="array-threshold" placeholder="3" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="row mt-1">
+                            <a class="reset" id="reset-array-connectionloss-threshold" onclick="resetArrayConnectionLossThreshold(csmMap)">Reset to default</a>
+                          </div>
                         </div>
                       </div>
                     </div>
