@@ -8,17 +8,16 @@ Description: >
 
 ## Release Notes - CSM Resiliency 1.6.0
 
+
 ### New Features/Changes
 
-- CSM support for Kubernetes 1.27. ([#761](https://github.com/dell/csm/issues/761))
-- CSM 1.7 release specific changes. ([#743](https://github.com/dell/csm/issues/743))
-- CSM Operator: Support install of Resiliency module. ([#739](https://github.com/dell/csm/issues/739))
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#885 - [FEATURE]: CSM 1.8 release specific changes](https://github.com/dell/csm/issues/885)
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
+- [#926 - [FEATURE]: set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
 
-- CSM for Resiliency openshift test required to pass ssh options in scp command. ([#737](https://github.com/dell/csm/issues/737))
-- CSM Resiliency GitHub actions produce sporadic failure. ([#733](https://github.com/dell/csm/issues/733))
-- CSI PODMON is tainting the worker node ([#765](https://github.com/dell/csm/issues/765))
 
 ### Known Issues
 

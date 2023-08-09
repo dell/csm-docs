@@ -5,13 +5,19 @@ description: Release notes for PowerFlex CSI driver
 
 ## Release Notes - CSI PowerFlex v2.7.0
 
+
 ### New Features/Changes
-- [K8 1.27 support added.](https://github.com/dell/csm/issues/743)
-- [OCP 4.12 support added](https://github.com/dell/csm/issues/743)
-- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
+
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#763 - [FEATURE]: CSI-PowerFlex 4.0 NFS support](https://github.com/dell/csm/issues/763)
+- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
+- [#885 - [FEATURE]: CSM 1.8 release specific changes](https://github.com/dell/csm/issues/885)
+- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#926 - [FEATURE]: set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
-- [Fix the offline helm installation failure](https://github.com/dell/csm/issues/868)
+
+
 ### Known Issues
 
 | Issue | Workaround |
