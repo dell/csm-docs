@@ -50,8 +50,10 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.driverNamespace = document.getElementById("driver-namespace").value;
 	DriverValues.labelValue = document.getElementById("label-value").value;
 	DriverValues.pollRate = document.getElementById("poll-rate").value;
+	DriverValues.arrayThreshold = document.getElementById("array-threshold").value;
 	DriverValues.driverPodLabel = document.getElementById("driver-pod-label").value;
 	DriverValues.connectionValidation = $("#connection-validation").prop('checked') ? true : false;
+	DriverValues.leaderElection = $("#leader-election").prop('checked') ? true : false;
 	DriverValues.volumelessPods = $("#volumeless-pods").prop('checked') ? true : false;
 	DriverValues.controllerPodsNodeSelector = $("#controller-pods-node-selector").prop('checked') ? true : "";
 	DriverValues.nodePodsNodeSelector = $("#node-pods-node-selector").prop('checked') ? true : "";
@@ -133,8 +135,10 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$OPERATOR_RESILIENCY_ENABLED", yamlTplValues.operatorResiliency);
 	yamlTpl = yamlTpl.replaceAll("$LABEL_VALUE", yamlTplValues.labelValue);
 	yamlTpl = yamlTpl.replaceAll("$POLL_RATE", yamlTplValues.pollRate);
+	yamlTpl = yamlTpl.replaceAll("$ARRAY_THRESHOLD", yamlTplValues.arrayThreshold);
 	yamlTpl = yamlTpl.replaceAll("$DRIVER_POD_LABEL_VALUE", yamlTplValues.driverPodLabel);
 	yamlTpl = yamlTpl.replaceAll("$SKIP_ARRAY_CONNECTION_VALIDATION", yamlTplValues.connectionValidation);
+	yamlTpl = yamlTpl.replaceAll("$LEADER_ELECTION", yamlTplValues.leaderElection);
 	yamlTpl = yamlTpl.replaceAll("$IGNORE_VOLUMELESS_PODS", yamlTplValues.volumelessPods);
 	yamlTpl = yamlTpl.replaceAll("$STORAGE_CAPACITY_ENABLED", yamlTplValues.storageCapacity);
 	yamlTpl = yamlTpl.replaceAll("$MONITOR_ENABLED", yamlTplValues.monitor);

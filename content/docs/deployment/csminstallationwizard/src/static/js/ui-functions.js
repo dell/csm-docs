@@ -176,6 +176,10 @@ const resetArrayPollRate = csmMapValue => {
 	document.getElementById("poll-rate").value = String(csmMapValue.get("pollRate"));
 }
 
+const resetArrayConnectionLossThreshold = csmMapValue => {
+	document.getElementById("array-threshold").value = String(csmMapValue.get("arrayThreshold"));
+}
+
 const resetLabelValue = (driverValue, CONSTANTS_PARAM) => {
 	if (driverValue === CONSTANTS_PARAM.POWERSTORE) {
 		document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSTORE_LABEL_VALUE;
@@ -386,6 +390,7 @@ if (typeof exports !== 'undefined') {
 		resetArrayPollRate,
 		resetLabelValue,
 		resetDriverPodLabel,
+		resetArrayConnectionLossThreshold,
 		resetTaint,
 		downloadFile,
 		displayModules,

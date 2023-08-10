@@ -165,17 +165,11 @@ spec:
       # Leave as blank to consider all nodes
       # Allowed values: map of key-value pairs
       # Default value: None
-      nodeSelector:$NODE_POD_NODE_SELECTOR
-      # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-      #  node-role.kubernetes.io/control-plane: ""
+      nodeSelector:$CONTROLLER_POD_NODE_SELECTOR
 
       # tolerations: Define tolerations for the controller deployment, if required.
       # Default value: None
-      tolerations:$NODE_TOLERATIONS
-      # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-      # - key: "node-role.kubernetes.io/control-plane"
-      #   operator: "Exists"
-      #   effect: "NoSchedule"
+      tolerations:$CONTROLLER_TOLERATIONS
 
     node:
       envs:
@@ -219,8 +213,6 @@ spec:
       # Allowed values: map of key-value pairs
       # Default value: None
       nodeSelector:$NODE_POD_NODE_SELECTOR
-      # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-      #  node-role.kubernetes.io/control-plane: ""
 
       # tolerations: Define tolerations for the node daemonset, if required.
       # Default value: None
@@ -234,10 +226,6 @@ spec:
       # - key: "node.kubernetes.io/network-unavailable"
       #   operator: "Exists"
       #   effect: "NoExecute"
-      # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-      # - key: "node-role.kubernetes.io/control-plane"
-      #   operator: "Exists"
-      #   effect: "NoSchedule"
 
     sideCars:
       - name: provisioner
@@ -451,7 +439,7 @@ spec:
             - "--skipArrayConnectionValidation=$SKIP_ARRAY_CONNECTION_VALIDATION"
             - "--driverPodLabelValue=$DRIVER_POD_LABEL_VALUE"
             - "--ignoreVolumelessPods=$IGNORE_VOLUMELESS_PODS"
-            - "--arrayConnectivityConnectionLossThreshold=3"
+            - "--arrayConnectivityConnectionLossThreshold=$ARRAY_THRESHOLD"
             # Below 4 args should not be modified.
             - "--csisock=unix:/var/run/csi/csi.sock"
             - "--mode=controller"
@@ -469,10 +457,10 @@ spec:
           args:
             - "--labelvalue=$LABEL_VALUE"
             - "--arrayConnectivityPollRate=$POLL_RATE"
-            - "--leaderelection=$SKIP_ARRAY_CONNECTION_VALIDATION"
+            - "--leaderelection=$LEADER_ELECTION"
             - "--driverPodLabelValue=$DRIVER_POD_LABEL_VALUE"
             - "--ignoreVolumelessPods=$IGNORE_VOLUMELESS_PODS"
-            - "--arrayConnectivityConnectionLossThreshold=3"
+            - "--arrayConnectivityConnectionLossThreshold=$ARRAY_THRESHOLD"
             # Below 4 args should not be modified.
             - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
             - "--mode=node"

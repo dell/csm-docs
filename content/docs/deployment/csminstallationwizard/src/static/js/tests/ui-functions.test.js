@@ -31,6 +31,7 @@ const {
 	resetSnapNamePrefix,
 	resetDriverPodLabel,
 	resetArrayPollRate,
+	resetArrayConnectionLossThreshold,
 	resetLabelValue,
 	resetNodeSelectorLabel,
 	resetDriverNamespace,
@@ -388,6 +389,22 @@ describe("GIVEN resetArrayPollRate function", () => {
 		resetArrayPollRate(testCSMMap);
 
 		expect(document.getElementById("poll-rate").value).toEqual("60");
+	});
+});
+
+describe("GIVEN resetArrayConnectionLossThreshold function", () => {
+	const testCSMMap = new Map([
+		["arrayThreshold", "3"]
+	]);
+
+	test("SHOULD invoke resetArrayConnectionLossThreshold function", () => {
+		document.body.innerHTML = `
+            <input type="number" id="array-threshold">
+        `;
+
+		resetArrayConnectionLossThreshold(testCSMMap);
+
+		expect(document.getElementById("array-threshold").value).toEqual("3");
 	});
 });
 
