@@ -228,6 +228,7 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 }
 
 function displayModules(installationType, driverName, CONSTANTS_PARAM) {
+	csmVersion = document.getElementById("csm-version").value;
 	$(".vgsnapshot").show();
 	$(".authorization").show();
 	$(".observability").show();
@@ -250,6 +251,12 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".resizer").show();
 	$(".snapshot-feature").show();
 	$(".resiliency-operator").hide();
+	$(".observability-operator").hide();
+	$(".managedArrays").hide();
+	$(".transport-protocol").hide();
+	$(".iscsichap").hide();
+	$(".topology").hide();
+
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
 			$(".authorization").hide();
@@ -285,23 +292,31 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".storageArrays").show();
 			$(".cluster-prefix").show();
 			$(".port-groups").show();
-			$(".transport-protocol").show();
+			$(".resiliency").hide();
 			$(".migration").show();
 			$(".vSphere").show();
 			$(".storage-capacity").show();
 			$(".snapshot-feature").show();
+			
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
-			if (installationType === 'operator'){
+			if (installationType === 'operator') {
+				if (csmVersion === 'CONSTANTS.CSM_HELM_V180') {
+					$(".observability-operator").show();
+				}
+				$(".observability-operator").show();
 				$(".observability").hide();
 				$(".replication-mod").show();
 				$(".image-repository").hide();
 				$(".cert-manager").hide();
 				$(".storageArrays").hide();
 				$(".managedArrays").show();
+				$(".transport-protocol").show();
 				$(".migration").hide();
 				$(".resizer").hide();
-				$(".fsGroupPolicy").show();
-				$(".observability-operator").show();
+				$(".fsGroupPolicy").show();	
+				$(".transport-protocol").show();
+				$(".iscsichap").show();
+				$(".topology").show();			
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
 			}
 			break;

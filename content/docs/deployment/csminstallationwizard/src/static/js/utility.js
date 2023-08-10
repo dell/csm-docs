@@ -42,21 +42,25 @@ function validateForm(CONSTANTS_PARAM) {
 	const vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
 
 	if (powermaxSelected) {
-		if (document.getElementById('storage-array-id').value.trim() === "") {
-			return false;
-		}
-		if (document.getElementById('storage-array-endpoint-url').value.trim() === "") {
-			return false;
-		}
+		if (document.getElementById('installation-type').value === "Helm") {
+			if (document.getElementById('storage-array-id').value.trim() === "") {
+				return false;
+			}
+			if (document.getElementById('storage-array-endpoint-url').value.trim() === "") {
+				return false;
+			}
+		} else {
+			if (document.getElementById('manage-array-id').value.trim() === "") {
+                        return false;
+        	}
+			if (document.getElementById('manage-array-endpoint-url').value.trim() === "") {
+                        return false;
+        	}
+		}	
+		
 		if (document.getElementById('cluster-prefix').value.trim() === "") {
 			return false;
 		}
-		if (document.getElementById('manage-array-id').value.trim() === "") {
-                        return false;
-                }
-		if (document.getElementById('manage-array-endpoint-url').value.trim() === "") {
-                        return false;
-                }
 
 
 		if (vSphereEnabled) {
