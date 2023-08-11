@@ -258,6 +258,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
 | images | Defines the container images used by the driver.  | - | - |
 | driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
+| maxPowerMaxVolumesPerNode | Specifies the maximum number of volume that can be created on a node. | Yes| 0 |
 | **controller** | Allows configuration of the controller-specific parameters.| - | - |
 | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
 | volumeNamePrefix | Defines a string prefix for the names of PersistentVolumes created | Yes | "k8s" |
