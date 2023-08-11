@@ -99,6 +99,7 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="connection-validation">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+            <input type="text" id="target-cluster-id" value="">
         `;
 
 		const expected = {
@@ -152,7 +153,8 @@ describe("GIVEN setValues function", () => {
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
-			vSphereVCenterCredSecret: undefined
+			vSphereVCenterCredSecret: undefined,
+      targetClusterId: undefined
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -186,6 +188,7 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
+            <input type="text" id="target-cluster-id" value="test-id">
         `;
 
 		const expected = {
@@ -239,7 +242,7 @@ describe("GIVEN setValues function", () => {
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
-			vSphereVCenterCredSecret: undefined
+			vSphereVCenterCredSecret: undefined,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -273,6 +276,7 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
+            <input type="text" id="target-cluster-id" value="test-id">
         `;
 
 		const expected = {

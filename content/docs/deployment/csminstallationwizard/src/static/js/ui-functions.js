@@ -31,7 +31,7 @@ function onInstallationTypeChange(){
 	displayModules(installationType, driver, CONSTANTS)
 	$("#command-text-area").hide();
 	onOperatorResiliencyChange();
-	loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value);
+	document.getElementById("array").value !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 }
 
 function onArrayChange() {
@@ -131,14 +131,12 @@ function onTopologyChange(topologyNoteValue) {
 }
 
 function onReplicationChange(replicationNoteValue) {
-	if ($("#replication-operator").prop('checked') === true) {
-		$('div#replication-operator-note-wrapper').show();
+	if ($("#replication").prop('checked') === true && $("#installation-type").val() === "operator") {
 		$("#replication-operator-note").html(replicationNoteValue);
-		$('div#target-cluster-id').show();
+		$('.replication-operator').show();
 		
 	} else {
-		$('div#replication-operator-note-wrapper').hide();
-		$('div#target-cluster-id').hide();
+		$('.replication-operator').hide();
 	}
 }
 
@@ -162,7 +160,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 }
 
 const onCSMVersionChange = () => {
-	document.getElementById("csm-version").value !== "" ? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
+	document.getElementById("csm-version").value !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 	displayModules(installationType, driver, CONSTANTS);
 	onObservabilityChange();
 	onObservabilityOperatorChange();
@@ -319,7 +317,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				}
 				$(".observability-operator").show();
 				$(".observability").hide();
-				$(".replication-mod").hide();
 				$(".replication-operator").show();
 				$(".image-repository").hide();
 				$(".cert-manager").hide();

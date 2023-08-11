@@ -111,7 +111,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.storageArrayId = $("#storage-array-id").val();
 	DriverValues.storageArrayEndpointUrl = $("#storage-array-endpoint-url").val() || '""';
 	DriverValues.storageArrayBackupEndpointUrl = $("#storage-array-backup-endpoint-url").val() || '""';
-	DriverValues.manageArrayId = $("#manage-array-id").val();
+	DriverValues.manageArrayId = $("#manage-array-id").val() || '""';
 	DriverValues.manageArrayEndpointUrl = $("#manage-array-endpoint-url").val() || '""';
 	DriverValues.clusterPrefix = $("#cluster-prefix").val();
 	DriverValues.portGroups = $("#port-groups").val();

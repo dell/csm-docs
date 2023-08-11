@@ -21,6 +21,44 @@ const {
 	setDefaultValues
 } = require("../utility");
 
+const CONSTANT_PARAM = {
+	POWERSTORE: "powerstore",
+	POWERSCALE: "isilon",
+	POWERFLEX: "vxflexos",
+	POWERMAX: "powermax",
+	UNITY: "unity",
+	POWERSTORE_NAMESPACE: "csi-powerstore",
+	POWERFLEX_NAMESPACE: "vxflexos",
+	POWERMAX_NAMESPACE: "powermax",
+	POWERSCALE_NAMESPACE: "isilon",
+	UNITY_NAMESPACE: "unity",
+	POWERSTORE_LABEL_VALUE: "csi-powerstore",
+	POWERMAX_LABEL_VALUE: "csi-powermax",
+	VALUES: "values",
+	TEMP_DIR: "templates",
+	TEMP_EXT: ".template",
+	HYPHEN: "-",
+	SLASH: "/",
+	VERSIONS_DIR: "csm-versions",
+	CSM: "csm",
+	DEFAULT_VALUES: "default-values",
+	PROPERTIES: ".properties",
+	HELM: "helm",
+	OPERATOR: "operator",
+	CSM_HELM_V170: "1.0.0",
+	CSM_HELM_V180: "1.1.0",
+	HELM_TAINTS: `
+     - key: "$KEY"
+       operator: "Exists"
+       effect: "NoSchedule"
+	`,
+	OPERATOR_TAINTS: `
+      - key: "$KEY"
+        operator: "Exists"
+        effect: "NoSchedule"
+	`
+};
+
 describe("GIVEN validateForm functions", () => {
 	test("SHOULD return false IF array value is empty", () => {
 		document.body.innerHTML = `
@@ -135,11 +173,8 @@ describe("GIVEN validateForm functions", () => {
 		<input type="text" id="vSphere-fc-host-name">
 		<input type="text" id="vSphere-vCenter-host">
 		<input type="text" id="vSphere-vCenter-cred-secret">
+		<input type="text" id="manage-array-id">
 	`;
-
-	const CONSTANT_PARAM = {
-		POWERMAX: "powermax"
-	};
 
 	test("SHOULD return false IF storage-array-id value is empty", () => {
 		document.body.innerHTML = powermaxTestHtml;

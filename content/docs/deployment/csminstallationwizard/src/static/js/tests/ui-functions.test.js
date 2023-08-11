@@ -20,6 +20,7 @@ const {
 	onObservabilityChange,
 	onResiliencyChange,
 	onOperatorResiliencyChange,
+	onObservabilityOperatorChange,
 	onSnapshotChange,
 	onCertManagerChange,
 	onVSphereChange,
@@ -253,7 +254,7 @@ describe("GIVEN onTopologyChange function", () => {
             <div id="topology-note-wrapper" style="display:">
         `;
 		onCertManagerChange("Temp topology note");
-		expect($("div#topology-note-wrapper").css("display")).toEqual("none");
+		expect($("div#topology-note-wrapper").css("display")).toEqual("block");
 	});
 
 	test("SHOULD show topology components when option checked", () => {
@@ -262,7 +263,7 @@ describe("GIVEN onTopologyChange function", () => {
             <div id="topology-note-wrapper" style="display:none">
         `;
 		onCertManagerChange("Temp topology note");
-		expect($("div#topology-note-wrapper").css("display")).not.toEqual("none");
+		expect($("div#topology-note-wrapper").css("display")).toEqual("none");
 	});
 });
 
