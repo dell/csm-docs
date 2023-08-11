@@ -42,7 +42,7 @@ function validateForm(CONSTANTS_PARAM) {
 	const vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
 
 	if (powermaxSelected) {
-		if (document.getElementById('installation-type').value === "Helm") {
+		if (document.getElementById('installation-type').value === CONSTANTS_PARAM.HELM) {
 			if (document.getElementById('storage-array-id').value.trim() === "") {
 				return false;
 			}
