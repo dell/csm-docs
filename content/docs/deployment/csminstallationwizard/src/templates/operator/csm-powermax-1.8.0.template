@@ -268,7 +268,7 @@ spec:
       #   true: enable replication feature(install dell-csi-replicator sidecar)
       #   false: disable replication feature(do not install dell-csi-replicator sidecar)
       # Default value: false
-      enabled: $REPLICATION_ENABLED
+      enabled: $REPLICATION_OPERATOR_ENABLED
       configVersion: v1.5.0
       components:
       - name: dell-csi-replicator
@@ -297,7 +297,7 @@ spec:
           # Set the value to "self" in case of stretched/single cluster configuration
           # Allowed values: string
           - name: "TARGET_CLUSTERS_IDS"
-            value: "target-cluster-1"
+            value: "$TARGET_CLUSTER_ID"
           # Replication log level
           # Allowed values: "error", "warn"/"warning", "info", "debug"
           # Default value: "debug"

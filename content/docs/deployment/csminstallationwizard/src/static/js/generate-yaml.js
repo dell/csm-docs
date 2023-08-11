@@ -21,6 +21,8 @@ var observabilityEnabled = false;
 var observabilityOperatorEnabled = false;
 var authorizationEnabled = false;
 var replicationEnabled = false;
+var replicationOperatorEnabled = false;
+
 
 function generateYamlFile(tmpl) {
 	var yamlFile = null;
@@ -47,6 +49,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.controllerCount = document.getElementById("controller-count").value;
 	DriverValues.volNamePrefix = document.getElementById("vol-name-prefix").value;
 	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
+	DriverValues.targetClusterId = document.getElementById("target-cluster-id").value;
 	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
 	DriverValues.driverNamespace = document.getElementById("driver-namespace").value;
 	DriverValues.labelValue = document.getElementById("label-value").value;
@@ -78,6 +81,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 		DriverValues.nodePodsNodeSelector = nodeSelector;
 		DriverValues.nodeTolerations = taints;
 	}
+	DriverValues.replicationOperator = $("#replication-operator").prop('checked') ? true : false;
 	DriverValues.snapshot = $("#snapshot").prop('checked') ? true : false;
 	DriverValues.vgsnapshot = $("#vgsnapshot").prop('checked') ? true : false;
 	DriverValues.resizer = $("#resizer").prop('checked') ? true : false;
@@ -126,6 +130,8 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_COUNT", yamlTplValues.controllerCount);
 	yamlTpl = yamlTpl.replaceAll("$VOLUME_NAME_PREFIX", yamlTplValues.volNamePrefix);
 	yamlTpl = yamlTpl.replaceAll("$SNAP_NAME_PREFIX", yamlTplValues.snapNamePrefix);
+	yamlTpl = yamlTpl.replaceAll("$REPLICATION_OPERATOR_ENABLED", yamlTplValues.replicationOperator);
+	yamlTpl = yamlTpl.replaceAll("$TARGET_CLUSTER_ID", yamlTplValues.targetClusterId);
 	yamlTpl = yamlTpl.replaceAll("$FSGROUP_POLICY", yamlTplValues.fsGroupPolicy);
 	yamlTpl = yamlTpl.replaceAll("$NAMESPACE", yamlTplValues.driverNamespace);
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_POD_NODE_SELECTOR", yamlTplValues.controllerPodsNodeSelector);

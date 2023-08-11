@@ -52,6 +52,7 @@ function onArrayChange() {
 		onCertManagerChange(certmanagerNote);
 		onTopologyChange(topologyNote);
 		onVSphereChange();
+		onReplicationChange(replicationNote);
 		validateInput(validateForm, CONSTANTS);
 	});
 }
@@ -127,6 +128,18 @@ function onTopologyChange(topologyNoteValue) {
         } else {
                 $('div#topology-note-wrapper').hide();
         }
+}
+
+function onReplicationChange(replicationNoteValue) {
+	if ($("#replication-operator").prop('checked') === true) {
+		$('div#replication-operator-note-wrapper').show();
+		$("#replication-operator-note").html(replicationNoteValue);
+		$('div#target-cluster-id').show();
+		
+	} else {
+		$('div#replication-operator-note-wrapper').hide();
+		$('div#target-cluster-id').hide();
+	}
 }
 
 function onVSphereChange() {
@@ -256,6 +269,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".transport-protocol").hide();
 	$(".iscsichap").hide();
 	$(".topology").hide();
+	$(".replication-operator").hide();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -305,7 +319,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				}
 				$(".observability-operator").show();
 				$(".observability").hide();
-				$(".replication-mod").show();
+				$(".replication-mod").hide();
+				$(".replication-operator").show();
 				$(".image-repository").hide();
 				$(".cert-manager").hide();
 				$(".storageArrays").hide();
@@ -316,7 +331,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".fsGroupPolicy").show();	
 				$(".transport-protocol").show();
 				$(".iscsichap").show();
-				$(".topology").show();			
+				$(".topology").show();	
+				$(".replication-operator").show();		
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
 			}
 			break;
@@ -418,6 +434,7 @@ if (typeof exports !== 'undefined') {
 		onSnapshotChange,
 		onCertManagerChange,
 		onTopologyChange,
+		onReplicationChange,
 		onVSphereChange,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
