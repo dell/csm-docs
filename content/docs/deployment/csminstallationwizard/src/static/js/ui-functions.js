@@ -288,6 +288,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".resiliency").show();
 			$(".cert-secret-count-wrapper").show();
 			$("div#snap-prefix").hide();
+			$(".storage-capacity").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.UNITY:
