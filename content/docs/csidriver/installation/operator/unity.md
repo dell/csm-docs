@@ -98,7 +98,7 @@ Users should configure the parameters in CR. The following table lists the prima
    | X_CSI_HEALTH_MONITOR_ENABLED                    | Enable/Disable health monitor of CSI volumes from Node plugin               | No       |                       |
 
 ### Example CR for Unity XT
-Refer samples from [here](https://github.com/dell/dell-csi-operator/tree/master/samples). Below is an example CR:
+Refer samples from [here](https://github.com/dell/csm-operator/blob/main/samples). Below is an example CR:
 ```yaml
 apiVersion: storage.dell.com/v1
 kind: CSIUnity
@@ -107,12 +107,12 @@ metadata:
   namespace: unity
 spec:
   driver:
-    configVersion: v2.7.0
+    configVersion: v2.8.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      image: "dellemc/csi-unity:v2.7.0"
+      image: "dellemc/csi-unity:v2.8.0"
       imagePullPolicy: IfNotPresent
     sideCars:
       - name: provisioner
@@ -121,7 +121,12 @@ spec:
         args: ["--snapshot-name-prefix=csiunitysnap"]
       # Enable/Disable health monitor of CSI volumes from node plugin. Provides details of volume usage.
       # - name: external-health-monitor
-      #   args: ["--monitor-interval=60s"]  
+      #   args: ["--monitor-interval=60s"]
+      # Uncomment the following to configure how often external-provisioner polls the driver to detect changed capacity
+      # Configure when the storageCapacity is set as "true"
+      # Allowed values: 1m,2m,3m,...,10m,...,60m etc. Default value: 5m
+      #- name: provisioner
+      #  args: ["--capacity-poll-interval=5m"]
 
     controller:
        envs:

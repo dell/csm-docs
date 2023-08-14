@@ -3,15 +3,11 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.7.0
+## Release Notes - CSI Unity XT v2.8.0
 
 ### New Features/Changes
 
-- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
-- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
-- [Added support for K3s on Debian OS](https://github.com/dell/csm/issues/798)
-- [Added support for Unisphere 5.3.0 array](https://github.com/dell/csm/issues/842)
+- [Added support for Storage Capacity Tracking for Unity XT](https://github.com/dell/csm/issues/876)
 
 ### Fixed Issues
 
