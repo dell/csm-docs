@@ -174,6 +174,7 @@ describe("GIVEN validateForm functions", () => {
 		<input type="text" id="vSphere-vCenter-host">
 		<input type="text" id="vSphere-vCenter-cred-secret">
 		<input type="text" id="manage-array-id">
+		<input type="text" id="transport-protocol">
 	`;
 
 	test("SHOULD return false IF storage-array-id value is empty", () => {

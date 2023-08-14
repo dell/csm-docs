@@ -100,6 +100,9 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
             <input type="text" id="target-cluster-id" value="">
+            <input type="text" id="transport-protocol" value="">
+            <input type="checkbox" id="iscsichap">
+
         `;
 
 		const expected = {
@@ -154,7 +157,8 @@ describe("GIVEN setValues function", () => {
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
-      targetClusterId: undefined
+      targetClusterId: undefined,
+      iscsichap: false,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -189,6 +193,8 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
             <input type="text" id="target-cluster-id" value="test-id">
+            <input type="text" id="transport-protocol" value="">
+            <input type="checkbox" id="iscsichap">
         `;
 
 		const expected = {
@@ -243,6 +249,7 @@ describe("GIVEN setValues function", () => {
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
+      iscsichap: false,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
