@@ -502,9 +502,6 @@ Without storage capacity tracking, pods get scheduled on a node satisfying the t
 
 The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
-**Note:**
->This feature requires kubernetes v1.24 and above and will be automatically disabled in lower version of kubernetes.
-
 ## Dynamic Logging Configuration
 
 ### Helm based installation
