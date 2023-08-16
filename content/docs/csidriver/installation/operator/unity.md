@@ -107,12 +107,12 @@ metadata:
   namespace: unity
 spec:
   driver:
-    configVersion: v2.8.0
+    configVersion: v2.7.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      image: "dellemc/csi-unity:v2.8.0"
+      image: "dellemc/csi-unity:v2.7.0"
       imagePullPolicy: IfNotPresent
     sideCars:
       - name: provisioner
