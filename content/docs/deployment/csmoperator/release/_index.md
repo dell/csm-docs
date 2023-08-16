@@ -9,7 +9,7 @@ Description: >
 ## Release Notes - Container Storage Modules Operator v1.2.0
 
 ### New Features/Changes
-- [Added support for Storage Capacity Tracking feature for Unity XT via csm operator](https://github.com/dell/csm/issues/876)
+- [Added support for Storage Capacity Tracking feature for Unity XT](https://github.com/dell/csm/issues/876)
 
 ### Fixed Issues
 

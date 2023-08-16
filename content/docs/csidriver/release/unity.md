@@ -7,7 +7,7 @@ description: Release notes for Unity XT CSI driver
 
 ### New Features/Changes
 
-- [Added support for Storage Capacity Tracking for Unity XT](https://github.com/dell/csm/issues/876)
+- [Added support for Storage Capacity Tracking feature](https://github.com/dell/csm/issues/876)
 
 ### Fixed Issues
 
