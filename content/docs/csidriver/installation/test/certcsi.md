@@ -172,16 +172,6 @@ Optional Params:
 --vs : volume size to be created
 ```
 
-#### Volume Health Metric Suite
-
-To run volume health metric test suite, run the command:
-```bash
-
-cert-csi functional-test volumehealthmetrics --sc <storage-class> --driver-ns <driver-namespace> --podNum <number-of-pods> --volNum <number-of-volumes>
-```
-
-> Note: Make sure to enable healthMonitor for driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.
-
 ### Other Options
 
 #### Generating tabular report from DB
@@ -339,6 +329,32 @@ cert-csi test expansion --sc <storage class> --pn 1 --vn 5 --block # to create b
 To run block snapshot test suite, run the command:
 ```bash
 cert-csi test blocksnap --sc <storageClass> --vsc <snapshotclass>
+```
+
+#### Volume Health Metric Suite
+
+To run the volume health metric test suite, run the command:
+```bash
+
+cert-csi test volumehealthmetrics --sc <storage-class> --driver-ns <driver-namespace> --podNum <number-of-pods> --volNum <number-of-volumes>
+```
+
+> Note: Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.
+
+#### Ephemeral volumes suite
+
+To run the ephemeral volume test suite, run the command:
+```bash
+cert-csi test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
+--pods : Number of pods to create 
+--pod-name : Create pods with custom name
+--attr : File name for the CSI volume attributes file (required)
+--fs-type: FS Type
+
+Sample ephemeral-config.properties (key/value pair)
+arrayId=arr1
+protocol=iSCSI
+size=5Gi
 ```
 
 ### Running Longevity mode
