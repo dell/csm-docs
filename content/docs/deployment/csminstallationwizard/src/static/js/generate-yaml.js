@@ -92,7 +92,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.observability = $("#observability").prop('checked') ? true : false;
 	DriverValues.observabilityMetrics = $("#observability-metrics").prop('checked') ? true : false;
 	DriverValues.observabilityOperator = $("#observability-operator").prop('checked') ? true : false;
-        DriverValues.observabilityOperatorMetrics = $("#observability-operator-metrics").prop('checked') ? true : false;
+       DriverValues.observabilityOperatorMetrics = $("#observability-operator-metrics").prop('checked') ? true : false;
 	DriverValues.observabilityOperatorTopology = $("#observability-operator-topology").prop('checked') ? true : false;
 	DriverValues.observabilityOperatorOtel = $("#observability-operator-otel").prop('checked') ? true : false;
 	DriverValues.authorization = $("#authorization").prop('checked') ? true : false;

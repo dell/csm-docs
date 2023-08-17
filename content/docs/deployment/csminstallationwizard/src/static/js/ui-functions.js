@@ -309,6 +309,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".vSphere").show();
 			$(".storage-capacity").show();
 			$(".snapshot-feature").show();
+			$(".replication-mod").show();
 			
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			if (installationType === 'operator') {
@@ -329,7 +330,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".transport-protocol").show();
 				$(".iscsichap").show();
 				$(".topology").show();	
-				$(".replication-operator").show();		
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
 			}
 			break;

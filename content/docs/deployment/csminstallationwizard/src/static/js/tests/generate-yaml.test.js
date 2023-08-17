@@ -102,7 +102,13 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="target-cluster-id" value="">
             <input type="text" id="transport-protocol" value="">
             <input type="checkbox" id="iscsichap">
-
+            <input type="checkbox" id="observability-operator">
+            <input type="checkbox" id="observability-operator-metrics">
+            <input type="checkbox" id="vobservability-operator-topology">
+            <input type="checkbox" id="observability-operator-otel">
+            <input type="text" id="manage-array-id">
+            <input type="text" id="manage-array-endpoint-url">
+            <input type="checkbox" id="topology">
         `;
 
 		const expected = {
@@ -157,9 +163,18 @@ describe("GIVEN setValues function", () => {
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
-      targetClusterId: undefined,
-      iscsichap: false,
-		};
+      targetClusterId: "",
+			iscsichap: false,
+      manageArrayId: '""',
+      manageArrayEndpointUrl: '""',
+      observabilityOperator: false,
+      observabilityOperatorMetrics: false,
+      observabilityOperatorOtel: false,
+      observabilityOperatorTopology: false,
+      replicationOperator: false,
+      topologyEnabled: false,
+      transportProtocol: "",
+    };
 
 		const received = setValues(testCSMMap, CONSTANTS);
 		expect(expected).toEqual(received);
@@ -192,9 +207,16 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
-            <input type="text" id="target-cluster-id" value="test-id">
+            <input type="text" id="target-cluster-id" value="">
             <input type="text" id="transport-protocol" value="">
             <input type="checkbox" id="iscsichap">
+            <input type="checkbox" id="observability-operator">
+            <input type="checkbox" id="observability-operator-metrics">
+            <input type="checkbox" id="vobservability-operator-topology">
+            <input type="checkbox" id="observability-operator-otel">
+            <input type="text" id="manage-array-id">
+            <input type="text" id="manage-array-endpoint-url">
+            <input type="checkbox" id="topology">
         `;
 
 		const expected = {
@@ -244,12 +266,22 @@ describe("GIVEN setValues function", () => {
 			volumelessPods: false,
 			clusterPrefix: undefined,
 			portGroups: undefined,
+      targetClusterId: "",
 			vSphereEnabled: false,
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
       iscsichap: false,
+      manageArrayId: '""',
+      manageArrayEndpointUrl: '""',
+      observabilityOperator: false,
+      observabilityOperatorMetrics: false,
+      observabilityOperatorOtel: false,
+      observabilityOperatorTopology: false,
+      replicationOperator: false,
+      topologyEnabled: false,
+      transportProtocol: "",
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
