@@ -776,7 +776,7 @@ CSI driver will support following operations for NFS volumes:
 To enable the support of NFS volumes operations from CSI driver, there are a few new keys introduced which needs to be set before performing the operations for NFS volumes.
 * `nasName`: defines the NAS server name that should be used for NFS volumes.
 * `nfsAcls`: defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
-* `externalAccess`: allows to specify additional entries for host to access NFS volumes.
+* `externalAccess`: allows you to specify additional entries for host to access NFS volumes.
 * `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
 
 The user has to update the `secret.yaml`, `values.yaml` and `storageclass-nfs.yaml` with the above keys as like below:
@@ -825,7 +825,7 @@ allowedTopologies:
 ```yaml
 ...
 ...
-# externalAccess: allows to specify additional entries for host to access NFS volumes. Both single IP address and subnet are valid entries.
+# externalAccess: allows you to specify additional entries for host to access NFS volumes. Both single IP address and subnet are valid entries.
 # Allowed Values: x.x.x.x/xx or x.x.x.x
 # Default Value: None
 externalAccess:
@@ -881,12 +881,12 @@ enableQuota: true
 ...
 ```
 
-Let us assume the user creates a PVC with 3 Gi of storage and quotas have already been enabled in PowerFlex system for the specified volume.
+For example, if the user creates a PVC with 3 Gi of storage and quotas have already been enabled in PowerFlex system for the specified volume.
 
 When `enableQuota` is set to `true`
 
 * The driver sets the hard limit of the PVC to 3Gi.
-* The user adds data of 2Gi to the above said PVC (by logging into POD). It works as expected.
+* The user adds data of 2Gi to the PVC (by logging into POD). It works as expected.
 * The user tries to add 2Gi more data.
 * Driver doesn't allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.
 * The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.
@@ -896,7 +896,7 @@ When `enableQuota` is set to `true`
 When `enableQuota` is set to `false`
 
 * Driver doesn't set any hard limit against the PVC created.
-* The user adds data of 2Gi to the above said PVC, which is having the size 3Gi (by logging into POD). It works as expected.
+* The user adds 2Gi data to the PVC, which has a limit of 3Gi. It works as expected.
 * The user tries to add 2Gi more data. Now the total size of data is 4Gi.
 * Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)
 * The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.
