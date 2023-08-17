@@ -323,6 +323,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".cert-manager").hide();
 				$(".storageArrays").hide();
 				$(".managedArrays").show();
+				$(".snapshot-feature").hide();
+				$(".vol-name-prefix").hide();
 				$(".transport-protocol").show();
 				$(".migration").hide();
 				$(".resizer").hide();
