@@ -171,7 +171,6 @@ describe("GIVEN setValues function", () => {
       observabilityOperatorMetrics: false,
       observabilityOperatorOtel: false,
       observabilityOperatorTopology: false,
-      replicationOperator: false,
       topologyEnabled: false,
       transportProtocol: "",
     };
@@ -279,7 +278,6 @@ describe("GIVEN setValues function", () => {
       observabilityOperatorMetrics: false,
       observabilityOperatorOtel: false,
       observabilityOperatorTopology: false,
-      replicationOperator: false,
       topologyEnabled: false,
       transportProtocol: "",
 		};
@@ -315,7 +313,8 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
-            <input type="text" id="target-cluster-id" value="test-id">
+            <input type="text" id="target-cluster-id" value="">
+            
         `;
 
 		const expected = {

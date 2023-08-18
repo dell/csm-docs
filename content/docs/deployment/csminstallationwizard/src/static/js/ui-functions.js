@@ -310,12 +310,11 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".storage-capacity").show();
 			$(".snapshot-feature").show();
 			$(".replication-mod").show();
-			
+			$(".iscsichap").show();
+			$(".transport-protocol").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			if (installationType === 'operator') {
-				if (csmVersion === 'CONSTANTS.CSM_HELM_V180') {
-					$(".observability-operator").show();
-				}
+				
 				$(".observability-operator").show();
 				$(".observability").hide();
 				$(".replication-operator").show();
@@ -330,7 +329,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".resizer").hide();
 				$(".fsGroupPolicy").show();	
 				$(".transport-protocol").show();
-				$(".iscsichap").show();
+				
 				$(".topology").show();	
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
 			}

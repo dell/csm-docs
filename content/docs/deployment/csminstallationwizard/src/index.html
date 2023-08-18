@@ -140,7 +140,7 @@
                       <input class="form-check-input" type="checkbox" id="replication" value="" onchange="onReplicationChange(replicationNote)">
                       <label for="replication" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Replication module">Replication</label>
                     </div>
-                      <div class="was-validated row mt-3 child-level-one replication-operator" id="target-cluster-id">
+                      <div class="was-validated row mt-3 child-level-one replication-operator">
                         <label for="target-cluster-id" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="List of cluster IDs of the targets clusters">Target Cluster ID</label>
                         <div class="col-sm-9"></div>
                         <div class="col-sm-2">
@@ -421,14 +421,14 @@
 
 		  <div class="row mb-4 iscsichap">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="iscsichap" value="" checked>
+                      <input class="form-check-input" type="checkbox" id="iscsichap" value="" >
                       <label for="iscsichap" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable ISCSI CHAPfeature">Iscsichap</label>
                     </div>
                   </div>
 
 		  <div class="row mb-4 col-sm-11 topology">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="topology" value="" onchange="onTopologyChange(topologyNote)" checked>
+                      <input class="form-check-input" type="checkbox" id="topology" value="" onchange="onTopologyChange(topologyNote)">
                       <label for="topology" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Node Topology feature">Node Topology</label>
                     </div>
                     <div class="row child-level-one" id="topology-note-wrapper">

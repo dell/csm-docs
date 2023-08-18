@@ -95,7 +95,7 @@ spec:
         #   ""      - Automatic selection of transport protocol
         # Default value: "" <empty>
         - name: X_CSI_TRANSPORT_PROTOCOL
-          value: $TRANSPORT_PROTOCOL
+          value: $NODE_TRANSPORT_PROTOCOL
         # X_CSI_POWERMAX_PROXY_SERVICE_NAME: Refers to the name of the proxy service in kubernetes
         # Allowed values: "csipowermax-reverseproxy"
         # default values: "csipowermax-reverseproxy"
@@ -268,7 +268,7 @@ spec:
       #   true: enable replication feature(install dell-csi-replicator sidecar)
       #   false: disable replication feature(do not install dell-csi-replicator sidecar)
       # Default value: false
-      enabled: $REPLICATION_OPERATOR_ENABLED
+      enabled: $REPLICATION_ENABLED
       configVersion: v1.5.0
       components:
       - name: dell-csi-replicator
@@ -297,7 +297,7 @@ spec:
           # Set the value to "self" in case of stretched/single cluster configuration
           # Allowed values: string
           - name: "TARGET_CLUSTERS_IDS"
-            value: "$TARGET_CLUSTER_ID"
+            value: $TARGET_CLUSTER_ID
           # Replication log level
           # Allowed values: "error", "warn"/"warning", "info", "debug"
           # Default value: "debug"
@@ -330,7 +330,7 @@ spec:
       components:
       - name: topology
         # enabled: Enable/Disable topology
-        enabled: $OBSERVABILITY_OPERATOR_ENABLED_TOPOLOGY
+        enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
         # image: Defines karavi-topology image. This shouldn't be changed
         # Allowed values: string
         image: dellemc/csm-topology:v1.5.0
@@ -343,7 +343,7 @@ spec:
 
       - name: otel-collector
         # enabled: Enable/Disable OpenTelemetry Collector
-        enabled: $OBSERVABILITY_OPERATOR_ENABLED_OTEL
+        enabled: $OBSERVABILITY_OPERATOR_OTEL
         # image: Defines otel-collector image. This shouldn't be changed
         # Allowed values: string
         image: otel/opentelemetry-collector:0.42.0
@@ -356,7 +356,7 @@ spec:
 
       - name: metrics-powermax
         # enabled: Enable/Disable PowerMax metrics
-        enabled: $OBSERVABILITY_OPERATOR_ENABLED_METRICS
+        enabled: $OBSERVABILITY_OPERATOR_METRICS
         # image: Defines PowerMax metrics image. This shouldn't be changed
         image: dellemc/csm-metrics-powermax:v1.0.0
         envs:

@@ -21,7 +21,6 @@ var observabilityEnabled = false;
 var observabilityOperatorEnabled = false;
 var authorizationEnabled = false;
 var replicationEnabled = false;
-var replicationOperatorEnabled = false;
 
 
 function generateYamlFile(tmpl) {
@@ -81,7 +80,6 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 		DriverValues.nodePodsNodeSelector = nodeSelector;
 		DriverValues.nodeTolerations = taints;
 	}
-	DriverValues.replicationOperator = $("#replication-operator").prop('checked') ? true : false;
 	DriverValues.snapshot = $("#snapshot").prop('checked') ? true : false;
 	DriverValues.vgsnapshot = $("#vgsnapshot").prop('checked') ? true : false;
 	DriverValues.resizer = $("#resizer").prop('checked') ? true : false;
@@ -130,7 +128,6 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_COUNT", yamlTplValues.controllerCount);
 	yamlTpl = yamlTpl.replaceAll("$VOLUME_NAME_PREFIX", yamlTplValues.volNamePrefix);
 	yamlTpl = yamlTpl.replaceAll("$SNAP_NAME_PREFIX", yamlTplValues.snapNamePrefix);
-	yamlTpl = yamlTpl.replaceAll("$REPLICATION_OPERATOR_ENABLED", yamlTplValues.replicationOperator);
 	yamlTpl = yamlTpl.replaceAll("$TARGET_CLUSTER_ID", yamlTplValues.targetClusterId);
 	yamlTpl = yamlTpl.replaceAll("$FSGROUP_POLICY", yamlTplValues.fsGroupPolicy);
 	yamlTpl = yamlTpl.replaceAll("$NAMESPACE", yamlTplValues.driverNamespace);
@@ -163,11 +160,11 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", yamlTplValues.storageArrayBackupEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGE_ARRAY_ID", yamlTplValues.storageArrayId);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGEE_ARRAY_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
+	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGE_ARRAY_ID", yamlTplValues.manageArrayId);
+	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGEE_ARRAY_ENDPOINT_URL", yamlTplValues.manageArrayEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_CLUSTER_PREFIX", yamlTplValues.clusterPrefix);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_PORT_GROUPS", yamlTplValues.portGroups);
-	yamlTpl = yamlTpl.replaceAll("TRANSPORT_PROTOCOL", yamlTplValues.transportProtocol);
+	yamlTpl = yamlTpl.replaceAll("$NODE_TRANSPORT_PROTOCOL", yamlTplValues.transportProtocol);
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_ENABLED", yamlTplValues.vSphereEnabled);
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_FC_PORT_GROUP", yamlTplValues.vSphereFCPortGroup);
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_FC_HOST_NAME", yamlTplValues.vSphereFCHostName);
@@ -209,9 +206,9 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 			yamlTpl = yamlTpl.replaceAll("$POWERSCALE_OBSERVABILITY_METRICS_ENABLED", true);
 		}
 	}
-	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_ENABLED_TOPOLOGY", yamlTplValues.observabilityOperatorTopology);
-	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_ENABLED_METRICS", yamlTplValues.observabilityOperatorMetrics);
-	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_ENABLED_OTEL", yamlTplValues.observabilityOperatorOtel);
+	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_TOPOLOGY", yamlTplValues.observabilityOperatorTopology);
+	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_METRICS", yamlTplValues.observabilityOperatorMetrics);
+	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_OPERATOR_OTEL", yamlTplValues.observabilityOperatorOtel);
 
 
 	yamlTpl = yamlTpl.replaceAll("$POWERSTORE_OBSERVABILITY_METRICS_ENABLED", false);
