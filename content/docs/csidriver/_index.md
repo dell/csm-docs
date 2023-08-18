@@ -54,7 +54,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax                                                | PowerFlex        | Unity XT                   | PowerScale                         |    PowerStore    |
 |---------------|:-------------------------------------------------------:|:----------------:|:--------------------------:|:----------------------------------:|:----------------:|
-| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br>Unisphere 10.0,10.0.1 |    3.5.x, 3.6.x, 4.0  | 5.1.x, 5.2.x, 5.3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 2.0.x, 2.1.x, 3.0, 3.2, 3.5     |
+| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br>Unisphere 10.0,10.0.1 |    3.5.x, 3.6.x, 4.0  | 5.1.x, 5.2.x, 5.3.0 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5.0.4 | 2.0.x, 2.1.x, 3.0, 3.2, 3.5     |
 {{</table>}}
 ### Backend Storage Details
 {{<table "table table-striped table-bordered table-sm">}}
