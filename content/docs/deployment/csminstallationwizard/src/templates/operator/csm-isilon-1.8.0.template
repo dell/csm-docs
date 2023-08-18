@@ -360,7 +360,7 @@ spec:
           #   true: enable deployment of cert-manager
           #   false: disable deployment of cert-manager only if it's already deployed
           # Default value: false
-          enabled: false
+          enabled: $OBSERVABILITY_ENABLED
 
         - name: metrics-powerscale
           # enabled: Enable/Disable PowerScale metrics
