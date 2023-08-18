@@ -263,8 +263,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			if (installationType === 'operator'){
 				$(".resiliency").hide();
 				$(".resiliency-operator").show();
-				$(".observability").hide();
-				$(".replication-mod").hide();
 				$(".image-repository").hide();
 				$(".cert-manager").hide();
 				$(".resizer").hide();
