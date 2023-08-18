@@ -839,7 +839,7 @@ externalAccess:
 # Allowed values:
 #   1) Unix mode: valid octal mode number
 #      Examples: "0777", "777", "0755"
-#   2) NFSv4 acls: valid NFSv4 acls, seperated by comma
+#   2) NFSv4 acls: valid NFSv4 acls, separated by comma
 #      Examples: "A::OWNER@:RWX,A::GROUP@:RWX", "A::OWNER@:rxtncy"
 # Optional: true
 # Default value: "0777"
