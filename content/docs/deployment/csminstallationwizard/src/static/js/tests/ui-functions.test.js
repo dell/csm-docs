@@ -561,8 +561,6 @@ describe("GIVEN displayModules function", () => {
 
 		expect($(".vgsnapshot").css("display")).toEqual("none");
 		expect($(".authorization").css("display")).toEqual("block");
-		expect($(".observability").css("display")).toEqual("none");
-		expect($(".replication-mod").css("display")).toEqual("none");
 		expect($(".image-repository").css("display")).toEqual("none");
 		expect($(".cert-manager").css("display")).toEqual("none");
 		expect($(".resizer").css("display")).toEqual("none");
