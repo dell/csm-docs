@@ -33,9 +33,9 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 ### Full list of CSI Drivers and versions supported by the Dell CSI Operator
 | CSI Driver         | Version   | ConfigVersion  | Kubernetes Version   | OpenShift Version     |
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
-| CSI PowerMax       | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerMax       | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
-| CSI PowerMax       | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12 EUS, 4.12  |
+| CSI PowerMax       | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.10, 4.10 EUS, 4.11  |
+| CSI PowerMax       | 2.8.0     | v2.8.0         | 1.26, 1.27, 1.28     | 4.11, 4.12 EUS, 4.12  |
 | CSI PowerFlex      | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerFlex      | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerFlex      | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12 EUS, 4.12  |
@@ -107,7 +107,7 @@ For installation of the supported drivers, a `CustomResource` has to be created 
 ### Pre-requisites for upstream Kubernetes Clusters
 On upstream Kubernetes clusters, make sure to install
 * VolumeSnapshot CRDs
-  * On clusters running v1.25,v1.26 & v1.27, make sure to install v1 VolumeSnapshot CRDs
+  * On clusters running v1.26,v1.27 & v1.28, make sure to install v1 VolumeSnapshot CRDs
 * External Volume Snapshot Controller with the correct version
 
 ### Pre-requisites for Red Hat OpenShift Clusters
@@ -206,8 +206,8 @@ Or
   {driver name}_{driver version}_ops_{OpenShift version}.yaml
 ```
 For e.g.
-* samples/powermax_v270_k8s_126.yaml* <- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.26 cluster  
-* samples/powermax_v270_ops_411.yaml* <- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.11 cluster
+* samples/powermax_v280_k8s_128.yaml* <- To install CSI PowerMax driver v2.8.0 on a Kubernetes 1.28 cluster  
+* samples/powermax_v280_ops_413.yaml* <- To install CSI PowerMax driver v2.8.0 on an OpenShift 4.13 cluster
 
 Copy the correct sample file and edit the mandatory & any optional parameters specific to your driver installation by following the instructions [here](#modify-the-driver-specification)  
 >NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available [here](#custom-resource-specification). Please make sure to read through and understand the various fields.

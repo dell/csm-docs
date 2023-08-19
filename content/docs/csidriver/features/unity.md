@@ -492,6 +492,16 @@ This feature:
     ```
 By default this is disabled in CSI Driver for Unity XT. You will have to set the `healthMonitor.enable` flag for controller, node or for both in `values.yaml` to get the volume stats and volume condition.
 
+## Storage Capacity Tracking
+CSI for Unity XT driver version 2.8.0 and above supports Storage Capacity Tracking.
+
+This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
+
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
+
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+
 ## Dynamic Logging Configuration
 
 ### Helm based installation
