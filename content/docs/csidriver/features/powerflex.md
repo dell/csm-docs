@@ -779,6 +779,21 @@ To enable the support of NFS volumes operations from CSI driver, there are a few
 * `externalAccess`: allows you to specify additional entries for host to access NFS volumes.
 * `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
 
+> NOTE:
+> * `nasName`
+>   * nasName is a mandatory parameter and has to be provided in secret yaml, else it will be an error state and will be captured in driver logs. 
+>   * nasName can be given at storage class level as well.
+>   * If specified in both, secret and storage class, then precedence is given to storage class value.
+>   * If nasName not given in secret, irrespective of it specified in SC, then it's an error state and will be captured in driver logs.
+> * `nfsAcls`
+>   * nfsAcls is an optional parameter, with a default value 0777. 
+>   * nfsAcls can be specified in secret or storage class or values. 
+>   * If nfsAcls is specified in more than one places, then the order of precedence will be:
+>     1. storage class
+>     2. secret
+>     3. values
+>     4. specified nowhere, then set to default value: 0777
+
 The user has to update the `secret.yaml`, `values.yaml` and `storageclass-nfs.yaml` with the above keys as like below:
 
 [`samples/secret.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml)
@@ -824,47 +839,14 @@ allowedTopologies:
 [`helm/csi-vxflexos/values.yaml`](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml)
 ```yaml
 ...
-...
-# externalAccess: allows you to specify additional entries for host to access NFS volumes. Both single IP address and subnet are valid entries.
-# Allowed Values: x.x.x.x/xx or x.x.x.x
-# Default Value: None
 externalAccess:
-
-# nfsAcls: enables setting permissions on NFS mount directory
-# This value acts as default value for NFS ACL (nfsAcls), if not specified for an array config in secret
-# Permissions can be specified in two formats:
-#   1) Unix mode (NFSv3)
-#   2) NFSv4 ACLs (NFSv4)
-#      NFSv4 ACLs are supported on NFSv4 share only.
-# Allowed values:
-#   1) Unix mode: valid octal mode number
-#      Examples: "0777", "777", "0755"
-#   2) NFSv4 acls: valid NFSv4 acls, separated by comma
-#      Examples: "A::OWNER@:RWX,A::GROUP@:RWX", "A::OWNER@:rxtncy"
-# Optional: true
-# Default value: "0777"
 nfsAcls: "0777"
-
-# enableQuota: a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.
-# Allowed values:
-#   true: set quota for volume
-#   false: do not set quota for volume
-# Optional: true
-# Default value: none
 enableQuota: false
-...
 ...
 ```
 
-> NOTE:
-> * The keys, nasName and nfsAcls, if not given in `storageclass-nfs.yaml`, then these values are picked from `secret.yaml`.
-> * If it's given at both the places, then precedence is given to `storageclass-nfs.yaml` over `secret.yaml`.
-> * If nasName is not given at both the places, then it's an error state and driver will capture it in logs.
-> * If nfsAcls is not given at either of the places, then it can be added to `values.yaml`. 
-> * nasName has to be provided in `secret.yaml` or `storageclass-nfs.yaml` for performing NFS operations.
-
 ## Usage of Quotas to Limit Storage Consumption for NFS volumes
-Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value ’enableQuota’ in values.yaml.
+Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
 
 To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
 ```yaml
@@ -909,9 +891,9 @@ If enableQuota feature is set, user can also set other tree quota parameters suc
 
 > NOTE:
 > * `hardLimit` is set to same size as that of PVC size.
-> *  When a volume with quota set to it is expanded then the hardLimit and softLimit are also recalculated by driver w.r.t. to the new PVC size.
-> * sofLimit cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).
-> * Value of softLimit should be lesser than 100%, since hardLimit will be set to 100% (PVC size) internally by the driver.
+> *  When a volume with quota enabled is expanded then the hardLimit and softLimit are also recalculated by driver w.r.t. to the new PVC size.
+> * `sofLimit` cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).
+> * `softLimit` should be lesser than 100%, since hardLimit will be set to 100% (PVC size) internally by the driver.
 
 ### Storage Class Example with Quota Limit Parameters:
 [`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
