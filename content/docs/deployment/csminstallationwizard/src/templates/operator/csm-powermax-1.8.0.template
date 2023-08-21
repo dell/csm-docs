@@ -64,7 +64,7 @@ spec:
         # Default value: None
         # Example: https://0.0.0.1:8443
         - name: X_CSI_POWERMAX_ENDPOINT
-          value: $POWERMAX_MANAGEE_ARRAY_ENDPOINT_URL
+          value: $POWERMAX_MANAGE_ARRAY_ENDPOINT_URL
         # X_CSI_K8S_CLUSTER_PREFIX: Define a prefix that is appended onto
         # all resources created in the Array
         # This should be unique per K8s/CSI deployment

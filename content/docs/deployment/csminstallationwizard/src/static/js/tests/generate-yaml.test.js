@@ -104,7 +104,7 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="iscsichap">
             <input type="checkbox" id="observability-operator">
             <input type="checkbox" id="observability-operator-metrics">
-            <input type="checkbox" id="vobservability-operator-topology">
+            <input type="checkbox" id="observability-operator-topology">
             <input type="checkbox" id="observability-operator-otel">
             <input type="text" id="manage-array-id">
             <input type="text" id="manage-array-endpoint-url">
@@ -175,8 +175,8 @@ describe("GIVEN setValues function", () => {
       transportProtocol: "",
     };
 
-		const received = setValues(testCSMMap, CONSTANTS);
-		expect(expected).toEqual(received);
+    const received = setValues(testCSMMap, CONSTANTS);
+    expect(expected).toEqual(received);
 	});
 
 	test("SHOULD return expected DriverValues for Operator", () => {
@@ -211,7 +211,7 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="iscsichap">
             <input type="checkbox" id="observability-operator">
             <input type="checkbox" id="observability-operator-metrics">
-            <input type="checkbox" id="vobservability-operator-topology">
+            <input type="checkbox" id="observability-operator-topology">
             <input type="checkbox" id="observability-operator-otel">
             <input type="text" id="manage-array-id">
             <input type="text" id="manage-array-endpoint-url">

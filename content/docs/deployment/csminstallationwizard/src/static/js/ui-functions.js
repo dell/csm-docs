@@ -76,15 +76,15 @@ function onObservabilityChange() {
 }
 
 function onObservabilityOperatorChange() {
-        if ($("#observability-operator").prop('checked') === true) {
-                $('div#observability-operator-metrics-wrapper').show();
+    	if ($("#observability-operator").prop('checked') === true) {
+        		$('div#observability-operator-metrics-wrapper').show();
 		$('div#observability-operator-topology-wrapper').show();
 		$('div#observability-operator-otel-wrapper').show();
-        } else {
-                $('div#observability-operator-metrics-wrapper').hide();
+    	} else {
+        		$('div#observability-operator-metrics-wrapper').hide();
 		$('div#observability-operator-topology-wrapper').hide();
 		$('div#observability-operator-otel-wrapper').hide();
-        }
+    	}
 }
 
 
@@ -123,11 +123,11 @@ function onCertManagerChange(certmanagerNoteValue) {
 
 function onTopologyChange(topologyNoteValue) {
         if ($("#topology").prop('checked') === true) {
-                $('div#topology-note-wrapper').show();
-                $("#topology-note").html(topologyNoteValue);
-        } else {
-                $('div#topology-note-wrapper').hide();
-        }
+        		$('div#topology-note-wrapper').show();
+        		$("#topology-note").html(topologyNoteValue);
+    	} else {
+        		$('div#topology-note-wrapper').hide();
+    	}
 }
 
 function onReplicationChange(replicationNoteValue) {
@@ -313,7 +313,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".iscsichap").show();
 			$(".transport-protocol").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
-			if (installationType === 'operator') {
+			if (installationType === CONSTANTS_PARAM.OPERATOR) {
 				
 				$(".observability-operator").show();
 				$(".observability").hide();

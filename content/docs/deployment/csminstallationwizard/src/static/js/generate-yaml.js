@@ -90,7 +90,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.observability = $("#observability").prop('checked') ? true : false;
 	DriverValues.observabilityMetrics = $("#observability-metrics").prop('checked') ? true : false;
 	DriverValues.observabilityOperator = $("#observability-operator").prop('checked') ? true : false;
-       DriverValues.observabilityOperatorMetrics = $("#observability-operator-metrics").prop('checked') ? true : false;
+    DriverValues.observabilityOperatorMetrics = $("#observability-operator-metrics").prop('checked') ? true : false;
 	DriverValues.observabilityOperatorTopology = $("#observability-operator-topology").prop('checked') ? true : false;
 	DriverValues.observabilityOperatorOtel = $("#observability-operator-otel").prop('checked') ? true : false;
 	DriverValues.authorization = $("#authorization").prop('checked') ? true : false;
@@ -161,7 +161,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL", yamlTplValues.storageArrayBackupEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL", yamlTplValues.storageArrayEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGE_ARRAY_ID", yamlTplValues.manageArrayId);
-	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGEE_ARRAY_ENDPOINT_URL", yamlTplValues.manageArrayEndpointUrl);
+	yamlTpl = yamlTpl.replaceAll("$POWERMAX_MANAGE_ARRAY_ENDPOINT_URL", yamlTplValues.manageArrayEndpointUrl);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_CLUSTER_PREFIX", yamlTplValues.clusterPrefix);
 	yamlTpl = yamlTpl.replaceAll("$POWERMAX_PORT_GROUPS", yamlTplValues.portGroups);
 	yamlTpl = yamlTpl.replaceAll("$NODE_TRANSPORT_PROTOCOL", yamlTplValues.transportProtocol);
