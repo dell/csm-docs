@@ -347,7 +347,6 @@ Procedure
    helm install --dry-run --values ./csi-unity/myvalues.yaml --namespace unity unity ./csi-unity
    ```
 
-
 ## Certificate validation for Unisphere REST API calls 
 
 This topic provides details about setting up the Dell Unity XT certificate validation for the CSI Driver.
