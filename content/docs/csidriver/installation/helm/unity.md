@@ -331,20 +331,16 @@ Procedure
     /csi-install.sh --namespace unity --values ./myvalues.yaml --version latest
     ```
 
-8. You can also install the driver using standalone helm chart by running helm install command, first using the --dry-run flag to 
-   confirm various parameters are as desired. Once the parameters are validated, run the command without the --dry-run flag.
-   Note: This example assumes that the user is at repo root helm folder i.e csi-unity/helm.
+8. You can also install the driver using standalone helm chart by cloning the centralised helm charts and run the helm install command as shown.
 
    **Syntax**:
    ```bash
-   helm install --dry-run --values <myvalues.yaml location> --namespace <namespace> <name of secret> <helmPath>
-   ```
-   `<namespace>` - namespace of the driver installation.  <br/>
-   `<name of secret>` - unity in case of unity-creds and unity-certs-0 secrets. <br/>
-   `<helmPath>` - Path of the helm directory. <br/>
-   e.g: 
-   ```bash
-   helm install --dry-run --values ./csi-unity/myvalues.yaml --namespace unity unity ./csi-unity
+
+   git clone -b csi-unity-2.8.0 https://github.com/dell/helm-charts
+
+   helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
+
+   Example: helm install unity dell/container-storage-modules -n csi-unity --version 1.0.1 -f values.yaml
    ```
 
 ## Certificate validation for Unisphere REST API calls 
