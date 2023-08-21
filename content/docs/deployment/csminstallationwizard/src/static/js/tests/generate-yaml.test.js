@@ -163,20 +163,20 @@ describe("GIVEN setValues function", () => {
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
-      targetClusterId: "",
+			targetClusterId: "",
 			iscsichap: false,
-      manageArrayId: '""',
-      manageArrayEndpointUrl: '""',
-      observabilityOperator: false,
-      observabilityOperatorMetrics: false,
-      observabilityOperatorOtel: false,
-      observabilityOperatorTopology: false,
-      topologyEnabled: false,
-      transportProtocol: "",
-    };
+			manageArrayId: '""',
+			manageArrayEndpointUrl: '""',
+			observabilityOperator: false,
+			observabilityOperatorMetrics: false,
+			observabilityOperatorOtel: false,
+			observabilityOperatorTopology: false,
+			topologyEnabled: false,
+			transportProtocol: "",
+		};
 
-    const received = setValues(testCSMMap, CONSTANTS);
-    expect(expected).toEqual(received);
+		const received = setValues(testCSMMap, CONSTANTS);
+		expect(expected).toEqual(received);
 	});
 
 	test("SHOULD return expected DriverValues for Operator", () => {
@@ -265,21 +265,21 @@ describe("GIVEN setValues function", () => {
 			volumelessPods: false,
 			clusterPrefix: undefined,
 			portGroups: undefined,
-      targetClusterId: "",
+			targetClusterId: "",
 			vSphereEnabled: false,
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
-      iscsichap: false,
-      manageArrayId: '""',
-      manageArrayEndpointUrl: '""',
-      observabilityOperator: false,
-      observabilityOperatorMetrics: false,
-      observabilityOperatorOtel: false,
-      observabilityOperatorTopology: false,
-      topologyEnabled: false,
-      transportProtocol: "",
+			iscsichap: false,
+			manageArrayId: '""',
+			manageArrayEndpointUrl: '""',
+			observabilityOperator: false,
+			observabilityOperatorMetrics: false,
+			observabilityOperatorOtel: false,
+			observabilityOperatorTopology: false,
+			topologyEnabled: false,
+			transportProtocol: "",
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
