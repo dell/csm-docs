@@ -305,6 +305,9 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".storage-capacity").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			if (installationType === 'operator'){
+				$(".observability-operator").show();
+				$(".observability").hide();
+				$(".replication-operator").show();
 				$(".resiliency").hide();
 				$(".resiliency-operator").show();
 				$(".image-repository").hide();
