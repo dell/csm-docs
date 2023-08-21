@@ -15,7 +15,7 @@ You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operato
 1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerflex.git` to clone the git repository and get the v2.7.0 driver.
 2. You need to create secret.yaml with the configuration of your system.
    Check this section in installation documentation:  [Install the Driver](../../../installation/helm/powerflex#install-the-driver)
-3. Update values file as needed.
+3. Update myvalues file as needed.
 4. Run the `csi-install` script with the option _\-\-upgrade_ by running: 
    ```bash
   
@@ -29,7 +29,7 @@ You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operato
 
   ./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
   ```
-- The logging configuration from v1.5 will not work in v2.1, since the log configuration parameters are now set in the values.yaml file located at helm/csi-vxflexos/values.yaml. Please set the logging configuration parameters in the values.yaml file.
+- The logging configuration from v1.5 will not work in v2.1, since the log configuration parameters are now set in the myvalues.yaml file located at dell-csi-helm-installer/myvalues.yaml. Please set the logging configuration parameters in the myvalues.yaml file.
 
 - You cannot upgrade between drivers with different fsGroupPolicies. To check the current driver's fsGroupPolicy, use this command:  
   ```bash

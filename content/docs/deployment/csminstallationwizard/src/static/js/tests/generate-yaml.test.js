@@ -94,9 +94,11 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="label-value" value="">
             <input type="number" id="poll-rate" value="60">
+            <input type="number" id="array-threshold" value="3">
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
+            <input type="checkbox" id="leader-election">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
             <input type="text" id="target-cluster-id" value="">
@@ -153,8 +155,10 @@ describe("GIVEN setValues function", () => {
 			operatorResiliency: false,
 			labelValue: "",
 			pollRate: '60',
+			arrayThreshold: '3',
 			driverPodLabel: 'dell-storage',
 			connectionValidation: false,
+			leaderElection: false,
 			volumelessPods: false,
 			clusterPrefix: undefined,
 			portGroups: undefined,
@@ -203,6 +207,7 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
             <input type="text" id="label-value" value="">
             <input type="number" id="poll-rate" value="60">
+            <input type="number" id="array-threshold" value="3">
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
@@ -216,6 +221,7 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="manage-array-id">
             <input type="text" id="manage-array-endpoint-url">
             <input type="checkbox" id="topology">
+            <input type="checkbox" id="leader-election">
         `;
 
 		const expected = {
@@ -260,8 +266,10 @@ describe("GIVEN setValues function", () => {
 			operatorResiliency: false,
 			labelValue: "",
 			pollRate: '60',
+			arrayThreshold: '3',
 			driverPodLabel: 'dell-storage',
 			connectionValidation: false,
+			leaderElection: false,
 			volumelessPods: false,
 			clusterPrefix: undefined,
 			portGroups: undefined,
@@ -310,11 +318,12 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
             <input type="text" id="label-value" value="">
             <input type="number" id="poll-rate" value="60">
+            <input type="number" id="array-threshold" value="3">
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
             <input type="text" id="target-cluster-id" value="">
-            
+            <input type="checkbox" id="leader-election">
         `;
 
 		const expected = {

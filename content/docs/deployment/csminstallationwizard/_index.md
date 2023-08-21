@@ -38,7 +38,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 7. If needed, modify the `Controller Pods Count`.
 8. If needed, select `Install Controller Pods on Control Plane` and/or `Install Node Pods on Control Plane`.
 9. Enter the `Namespace`. The default value is `csi-<array>`.
-10. Click on `Generate YAML`.   
+10. Click on `Generate YAML`.
 13. A manifest file, `values.yaml` will be generated and downloaded. 
 14. A section `Run the following commands to install` will be displayed.
 15. Run the commands displayed to install Dell CSI Driver and Modules using the generated manifest file. 
@@ -58,7 +58,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
     helm repo update
     ```
 
-2. Copy the downloaded values.yaml file. 
+2. Copy the downloaded values.yaml file.
 
 3. Look over all the fields in the generated `values.yaml` and fill in/adjust any as needed.
 

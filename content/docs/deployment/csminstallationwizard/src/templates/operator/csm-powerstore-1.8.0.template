@@ -107,18 +107,13 @@ spec:
       # Leave as blank to consider all nodes
       # Allowed values: map of key-value pairs
       # Default value: None
-      nodeSelector:$NODE_POD_NODE_SELECTOR
-      # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-      #  node-role.kubernetes.io/control-plane: ""
+      nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
 
       # tolerations: Define tolerations for the controllers, if required.
       # Leave as blank to install controller on worker nodes
       # Default value: None
-      tolerations:$NODE_TOLERATIONS
-      # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-      # - key: "node-role.kubernetes.io/control-plane"
-      #   operator: "Exists"
-      #   effect: "NoSchedule"
+      tolerations:$CONTROLLER_TOLERATIONS
+
     node:
       envs:
         # Set to "true" to enable ISCSI CHAP Authentication
@@ -132,6 +127,11 @@ spec:
         # Default value: false
         - name: X_CSI_HEALTH_MONITOR_ENABLED
           value: "$HEALTH_MONITOR_ENABLED"
+        # X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE: Defines the maximum PowerStore volumes that can be created per node
+        # Allowed values: Any value greater than or equal to 0
+        # Default value: "0"
+        - name: X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE
+          value: "0"
 
       # nodeSelector: Define node selection constraints for node pods.
       # For the pod to be eligible to run on a node, the node must have each
@@ -140,17 +140,11 @@ spec:
       # Allowed values: map of key-value pairs
       # Default value: None
       nodeSelector:$NODE_POD_NODE_SELECTOR
-      # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-      #  node-role.kubernetes.io/control-plane: ""
 
       # tolerations: Define tolerations for the controllers, if required.
       # Leave as blank to install controller on worker nodes
       # Default value: None
       tolerations:$NODE_TOLERATIONS
-      # Uncomment if nodes you wish to use have the node-role.kubernetes.io/control-plane taint
-      # - key: "node-role.kubernetes.io/control-plane"
-      #   operator: "Exists"
-      #   effect: "NoSchedule"
   
   modules:
     - name: resiliency
@@ -160,21 +154,26 @@ spec:
       #   false: disable Resiliency feature(do not deploy podmon sidecar)
       # Default value: false
       enabled: $OPERATOR_RESILIENCY_ENABLED
-      configVersion: v1.6.0
+      configVersion: v1.7.0
       components:
         - name: podmon-controller
+          image: dellemc/podmon:v1.7.0
+          imagePullPolicy: IfNotPresent
           args:
             - "--labelvalue=$LABEL_VALUE"
             - "--arrayConnectivityPollRate=$POLL_RATE"
             - "--skipArrayConnectionValidation=$SKIP_ARRAY_CONNECTION_VALIDATION"
             - "--driverPodLabelValue=$DRIVER_POD_LABEL_VALUE"
             - "--ignoreVolumelessPods=$IGNORE_VOLUMELESS_PODS"
+            - "--arrayConnectivityConnectionLossThreshold=$ARRAY_THRESHOLD"
             # Below 4 args should not be modified.
             - "--csisock=unix:/var/run/csi/csi.sock"
             - "--mode=controller"
             - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
             - "--driverPath=csi-powerstore.dellemc.com"
         - name: podmon-node
+          image: dellemc/podmon:v1.7.0
+          imagePullPolicy: IfNotPresent
           envs:
             # podmonAPIPort: Defines the port to be used within the kubernetes cluster
             # Allowed values: Any valid and free port (string)
@@ -184,9 +183,10 @@ spec:
           args:
             - "--labelvalue=$LABEL_VALUE"
             - "--arrayConnectivityPollRate=$POLL_RATE"
-            - "--leaderelection=$SKIP_ARRAY_CONNECTION_VALIDATION"
+            - "--leaderelection=$LEADER_ELECTION"
             - "--driverPodLabelValue=$DRIVER_POD_LABEL_VALUE"
             - "--ignoreVolumelessPods=$IGNORE_VOLUMELESS_PODS"
+            - "--arrayConnectivityConnectionLossThreshold=$ARRAY_THRESHOLD"
             # Below 4 args should not be modified.
             - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
             - "--mode=node"

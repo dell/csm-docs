@@ -140,12 +140,12 @@ Use the below command to replace or update the secret:
 6. If using automated SDC deployment:
    - Check the SDC container image is the correct version for your version of PowerFlex. 
    
-7. Copy the default values.yaml file 
+7. Download the default values.yaml file  
    ```bash
-   cd helm && cp csi-vxflexos/values.yaml myvalues.yaml
+   cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.7.1/charts/csi-vxflexos/values.yaml
    ```
 
-8. If you are using a custom image, check the `version` and `driverRepository` fields in `myvalues.yaml` to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: `<driverRepository>/csi-vxflexos:v<version>`
+8. If you are using a custom image, check the `version` and `driverRepository` fields in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: `<driverRepository>/csi-vxflexos:v<version>`
 
 9. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here:
 
@@ -164,6 +164,7 @@ Use the below command to replace or update the secret:
 | enablesnapshotcgdelete | A boolean that, when enabled, will delete all snapshots in a consistency group everytime a snap in the group is deleted. | Yes | false |
 | enablelistvolumesnapshot | A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise. | Yes | false |
 | allowRWOMultiPodAccess | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | Yes | false |
+| maxVxflexosVolumesPerNode | Maximum number of volumes that controller can publish to the node. | No | 0 |
 | **controller**           | This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](../../../features/powerflex#controller-ha) for Powerflex specifics.              | -        | -       |
 | volumeNamePrefix | Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them. | Yes | "k8s" |
 | controllerCount | Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the "controller" section in your values.yaml. For more details on the new controller pod configurations, see the [Features section](../../../features/powerflex#controller-ha) for Powerflex specifics. | Yes | 2 |
@@ -199,7 +200,7 @@ Use the below command to replace or update the secret:
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 
 
-10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values ../helm/myvalues.yaml`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default. 
+10. Install the driver using `csi-install.sh` bash script by running `cd dell-csi-helm-installer && ./csi-install.sh --namespace vxflexos --values myvalues.yaml`. You may modify the release name with the `--release` arg. If arg is not provided, release will be named `vxflexos` by default. 
 Alternatively, to do a helm install solely with Helm charts (without shell scripts), refer to `helm/README.md`.
 
  *NOTE:*
@@ -294,7 +295,7 @@ There are samples storage class yaml files available under `samples/storageclass
 
  *NOTE*: 
 - At least one storage class is required for one array.
-- If you uninstall the driver and reinstall it, you can still face errors if any update in the `values.yaml` file leads to an update of the storage class(es):
+- If you uninstall the driver and reinstall it, you can still face errors if any update in the `myvalues.yaml` file leads to an update of the storage class(es):
 
 ```
     Error: cannot patch "<sc-name>" with kind StorageClass: StorageClass.storage.k8s.io "<sc-name>" is invalid: parameters: Forbidden: updates to parameters are forbidden

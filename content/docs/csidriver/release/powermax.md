@@ -13,7 +13,9 @@ description: Release notes for PowerMax CSI driver
 - [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
 - [Added Storage Capacity Tracking feature for Powermax](https://github.com/dell/csm/issues/876)
 - [Make standalone helm chart available from helm repository](https://github.com/dell/csm/issues/877)
-
+- [Added support for Google Anthos 1.15](https://github.com/dell/csm/issues/937)
+- [Added support for Volume Limits feature](https://github.com/dell/csm/issues/878)
+- [Added support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
 ### Fixed Issues
 There are no fixed issues in this release.
 

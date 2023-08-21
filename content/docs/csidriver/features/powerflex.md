@@ -750,3 +750,14 @@ node:
 > NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
 
 If SDC approval is denied, then provisioning of the volume will not be attempted and an appropriate error message is reported in the logs/events so the user is informed.
+
+## Volume Limit
+
+The CSI Driver for Dell PowerFlex allows users to specify the maximum number of PowerFlex volumes that can be used in a node.
+
+The user can set the volume limit for a node by creating a node label `max-vxflexos-volumes-per-node` and specifying the volume limit for that node.
+<br/> `kubectl label node <node_name> max-vxflexos-volumes-per-node=<volume_limit>`
+
+The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxVxflexosVolumesPerNode` attribute in values.yaml file.
+
+>**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n vxflexos --no-headers=true | awk '/vxflexos-/{print $1}'| xargs kubectl delete -n vxflexos pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxVxflexosVolumesPerNode` is 0. <br><br>If `maxVxflexosVolumesPerNode` is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxVxflexosVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-vxflexos-volumes-per-node` is not set.

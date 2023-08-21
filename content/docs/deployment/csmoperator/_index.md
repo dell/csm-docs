@@ -56,19 +56,20 @@ The installation process involves the creation of a `Subscription` object either
 
 ### Manual Installation on a cluster without OLM
 
-1. Clone and checkout the required csm-operator version using 
+1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
+2. Clone and checkout the required csm-operator version using
 ```bash
 git clone -b v1.2.0 https://github.com/dell/csm-operator.git
 ```
-2. `cd csm-operator`
-3. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
-4. Run `bash scripts/install.sh` to install the operator.
+3. `cd csm-operator`
+4. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
+5. Run `bash scripts/install.sh` to install the operator.
 
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.
 
 {{< imgproc install.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-5. Run the command to validate the installation.
+6. Run the command to validate the installation.
 ```bash
 kubectl get pods -n dell-csm-operator
 ```
