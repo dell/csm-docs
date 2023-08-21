@@ -31,7 +31,7 @@ function onInstallationTypeChange(){
 	displayModules(installationType, driver, CONSTANTS)
 	$("#command-text-area").hide();
 	onOperatorResiliencyChange();
-	loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value);
+	document.getElementById("array").value !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 }
 
 function onArrayChange() {
@@ -45,11 +45,14 @@ function onArrayChange() {
 		setDefaultValues(defaultValues, csmMap);
 		$(".namespace").show();
 		onObservabilityChange();
+		onObservabilityOperatorChange();
 		onAuthorizationChange();
 		onResiliencyChange(podmonNote);
 		onSnapshotChange(snapshotNote, driver, CONSTANTS);
 		onCertManagerChange(certmanagerNote);
+		onTopologyChange(topologyNote);
 		onVSphereChange();
+		onReplicationChange(replicationNote);
 		validateInput(validateForm, CONSTANTS);
 	});
 }
@@ -71,6 +74,19 @@ function onObservabilityChange() {
 		$('div#observability-metrics-wrapper').hide();
 	}
 }
+
+function onObservabilityOperatorChange() {
+	if ($("#observability-operator").prop('checked') === true) {
+		$('div#observability-operator-metrics-wrapper').show();
+		$('div#observability-operator-topology-wrapper').show();
+		$('div#observability-operator-otel-wrapper').show();
+	} else {
+		$('div#observability-operator-metrics-wrapper').hide();
+		$('div#observability-operator-topology-wrapper').hide();
+		$('div#observability-operator-otel-wrapper').hide();
+	}
+}
+
 
 function onResiliencyChange(podmonNoteValue) {
 	if ($("#resiliency").prop('checked') === true) {
@@ -105,6 +121,25 @@ function onCertManagerChange(certmanagerNoteValue) {
 	}
 }
 
+function onTopologyChange(topologyNoteValue) {
+	if ($("#topology").prop('checked') === true) {
+		$('div#topology-note-wrapper').show();
+		$("#topology-note").html(topologyNoteValue);
+	} else {
+		$('div#topology-note-wrapper').hide();
+	}
+}
+
+function onReplicationChange(replicationNoteValue) {
+	if ($("#replication").prop('checked') === true && $("#installation-type").val() === "operator") {
+		$("#replication-operator-note").html(replicationNoteValue);
+		$('.replication-operator').show();
+		
+	} else {
+		$('.replication-operator').hide();
+	}
+}
+
 function onVSphereChange() {
 	if ($("#vSphere").prop('checked') === true) {
 		$('div#vSphere-wrapper').show();
@@ -125,9 +160,10 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 }
 
 const onCSMVersionChange = () => {
-	document.getElementById("csm-version").value !== "" ? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
+	document.getElementById("csm-version").value !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 	displayModules(installationType, driver, CONSTANTS);
 	onObservabilityChange();
+	onObservabilityOperatorChange();
 	onAuthorizationChange();
 };
 
@@ -209,6 +245,7 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 }
 
 function displayModules(installationType, driverName, CONSTANTS_PARAM) {
+	csmVersion = document.getElementById("csm-version").value;
 	$(".vgsnapshot").show();
 	$(".authorization").show();
 	$(".observability").show();
@@ -231,6 +268,13 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".resizer").show();
 	$(".snapshot-feature").show();
 	$(".resiliency-operator").hide();
+	$(".observability-operator").hide();
+	$(".managedArrays").hide();
+	$(".transport-protocol").hide();
+	$(".iscsichap").hide();
+	$(".topology").hide();
+	$(".replication-operator").hide();
+
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
 			$(".authorization").hide();
@@ -276,10 +320,35 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".storageArrays").show();
 			$(".cluster-prefix").show();
 			$(".port-groups").show();
+			$(".resiliency").hide();
 			$(".migration").show();
 			$(".vSphere").show();
 			$(".storage-capacity").show();
+			$(".snapshot-feature").show();
+			$(".replication-mod").show();
+			$(".iscsichap").show();
+			$(".transport-protocol").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
+			if (installationType === CONSTANTS_PARAM.OPERATOR) {
+				
+				$(".observability-operator").show();
+				$(".observability").hide();
+				$(".replication-operator").show();
+				$(".image-repository").hide();
+				$(".cert-manager").hide();
+				$(".storageArrays").hide();
+				$(".managedArrays").show();
+				$(".snapshot-feature").hide();
+				$(".vol-name-prefix").hide();
+				$(".transport-protocol").show();
+				$(".migration").hide();
+				$(".resizer").hide();
+				$(".fsGroupPolicy").show();	
+				$(".transport-protocol").show();
+				
+				$(".topology").show();	
+				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
+			}
 			break;
 		case CONSTANTS_PARAM.POWERFLEX:
 			$(".monitor").show();
@@ -374,10 +443,13 @@ if (typeof exports !== 'undefined') {
 	module.exports = {
 		onAuthorizationChange,
 		onObservabilityChange,
+		onObservabilityOperatorChange,
 		onResiliencyChange,
 		onOperatorResiliencyChange,
 		onSnapshotChange,
 		onCertManagerChange,
+		onTopologyChange,
+		onReplicationChange,
 		onVSphereChange,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,

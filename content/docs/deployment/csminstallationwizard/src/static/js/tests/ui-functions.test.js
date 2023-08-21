@@ -20,6 +20,7 @@ const {
 	onObservabilityChange,
 	onResiliencyChange,
 	onOperatorResiliencyChange,
+	onObservabilityOperatorChange,
 	onSnapshotChange,
 	onCertManagerChange,
 	onVSphereChange,
@@ -166,6 +167,40 @@ describe("GIVEN onOperatorResiliencyChange function", () => {
 	});
 });
 
+
+describe("GIVEN onObservabilityOperatorChange function", () => {
+	test("SHOULD hide observability components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="observability-operator">
+            <div id="observability-operator-metrics-wrapper" style="display:">
+			<div id="observability-operator-topology-wrapper" style="display:">
+			<div id="observability-operator-otel-wrapper" style="display:">
+
+        `;
+
+		onObservabilityOperatorChange();
+
+		expect($("div#observability-operator-metrics-wrapper").css("display")).toEqual("none");
+		expect($("div#observability-operator-topology-wrapper").css("display")).toEqual("none");
+		expect($("div#observability-operator-otel-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show podmon components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="observability-operator" checked>
+            <div id="observability-operator-metrics-wrapper" style="display:none">
+			<div id="observability-operator-topology-wrapper" style="display:none">
+			<div id="observability-operator-otel-wrapper" style="display:none">
+        `;
+
+		onObservabilityOperatorChange();
+
+		expect($("div#observability-operator-metrics-wrapper").css("display")).not.toEqual("none");
+		expect($("div#observability-operator-topology-wrapper").css("display")).not.toEqual("none");
+		expect($("div#observability-operator-otel-wrapper").css("display")).not.toEqual("none");
+	});
+});
+
 describe("GIVEN onSnapshotChange function", () => {
 	test("SHOULD hide snapshot components when option not checked", () => {
 		document.body.innerHTML = `
@@ -211,6 +246,26 @@ describe("GIVEN onCertManagerChange function", () => {
         `;
 		onCertManagerChange("Temp cert-manager note");
 		expect($("div#certmanager-note-wrapper").css("display")).not.toEqual("none");
+	});
+});
+
+describe("GIVEN onTopologyChange function", () => {
+	test("SHOULD hide topology components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="topology">
+            <div id="topology-note-wrapper" style="display:">
+        `;
+		onCertManagerChange("Temp topology note");
+		expect($("div#topology-note-wrapper").css("display")).toEqual("block");
+	});
+
+	test("SHOULD show topology components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="topology" checked>
+            <div id="topology-note-wrapper" style="display:none">
+        `;
+		onCertManagerChange("Temp topology note");
+		expect($("div#topology-note-wrapper").css("display")).toEqual("none");
 	});
 });
 
