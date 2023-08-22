@@ -58,13 +58,13 @@ spec:
         # Default value: None
         # Examples: "000000000001", "000000000002"
         - name: X_CSI_MANAGED_ARRAYS
-          value: $POWERMAX_MANAGE_ARRAY_ID
+          value: "$POWERMAX_MANAGE_ARRAY_ID"
         # X_CSI_POWERMAX_ENDPOINT: Address of the Unisphere server that is managing the PowerMax arrays
         # In case of multi-array, provide an endpoint of locally attached array
         # Default value: None
         # Example: https://0.0.0.1:8443
         - name: X_CSI_POWERMAX_ENDPOINT
-          value: $POWERMAX_MANAGE_ARRAY_ENDPOINT_URL
+          value: "$POWERMAX_MANAGE_ARRAY_ENDPOINT_URL"
         # X_CSI_K8S_CLUSTER_PREFIX: Define a prefix that is appended onto
         # all resources created in the Array
         # This should be unique per K8s/CSI deployment
@@ -72,7 +72,7 @@ spec:
         # Default value: None
         # Examples: "XYZ", "EMC"
         - name: X_CSI_K8S_CLUSTER_PREFIX
-          value: $POWERMAX_CLUSTER_PREFIX
+          value: "$POWERMAX_CLUSTER_PREFIX"
         # Specify kubelet config dir path.
         # Ensure that the config.yaml file is present at this path.
         # Default value: None
@@ -85,7 +85,7 @@ spec:
         # Default value: None
         # Examples: "pg1", "pg1, pg2"
         - name: X_CSI_POWERMAX_PORTGROUPS
-          value: $POWERMAX_PORT_GROUPS
+          value: "$POWERMAX_PORT_GROUPS"
         # "X_CSI_TRANSPORT_PROTOCOL" can be "FC" or "FIBRE" for fibrechannel,
         # "ISCSI" for iSCSI, or "" for autoselection.
         # Allowed values:
@@ -95,7 +95,7 @@ spec:
         #   ""      - Automatic selection of transport protocol
         # Default value: "" <empty>
         - name: X_CSI_TRANSPORT_PROTOCOL
-          value: $NODE_TRANSPORT_PROTOCOL
+          value: "$NODE_TRANSPORT_PROTOCOL"
         # X_CSI_POWERMAX_PROXY_SERVICE_NAME: Refers to the name of the proxy service in kubernetes
         # Allowed values: "csipowermax-reverseproxy"
         # default values: "csipowermax-reverseproxy"
@@ -108,25 +108,25 @@ spec:
         #   "false" - vSphere volumes are disabled
         # Default value: "false"
         - name: "X_CSI_VSPHERE_ENABLED"
-          value: $VSPHERE_ENABLED
+          value: "$VSPHERE_ENABLED"
         # X_CSI_VSPHERE_PORTGROUP: An existing portGroup that driver will use for vSphere
         # recommended format: csi-x-VC-PG, x can be anything of user choice
         # Allowed value: valid existing port group on the array
         # Default value: "" <empty>
         - name: "X_CSI_VSPHERE_PORTGROUP"
-          value: $VSPHERE_FC_PORT_GROUP
+          value: "$VSPHERE_FC_PORT_GROUP"
         # X_CSI_VSPHERE_HOSTNAME: An existing host(initiator group)/ host group(cascaded initiator group) that driver will use for vSphere
         # this host should contain initiators from all the ESXs/ESXi host where the cluster is deployed
         # recommended format: csi-x-VC-HN, x can be anything of user choice
         # Allowed value: valid existing host/host group on the array
         # Default value: "" <empty>
         - name: "X_CSI_VSPHERE_HOSTNAME"
-          value: $VSPHERE_FC_HOST_NAME
+          value: "$VSPHERE_FC_HOST_NAME"
         # X_CSI_VCENTER_HOST: URL/endpoint of the vCenter where all the ESX are present
         # Allowed value: valid vCenter host endpoint
         # Default value: "" <empty>
         - name: "X_CSI_VCENTER_HOST"
-          value: $VSPHERE_VCENTER_HOST
+          value: "$VSPHERE_VCENTER_HOST"
     controller:
       envs:
         # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin- volume usage, volume condition
@@ -166,7 +166,7 @@ spec:
         #   "false" - CHAP is disabled
         # Default value: "false"
         - name: X_CSI_POWERMAX_ISCSI_ENABLE_CHAP
-          value: $ISCSI_CHAP_ENABLED
+          value: "$ISCSI_CHAP_ENABLED"
         # X_CSI_HEALTH_MONITOR_ENABLED: Enable/Disable health monitor of CSI volumes from node plugin- volume usage, volume condition
         # Allowed values:
         #   true: enable checking of health condition of CSI volumes
@@ -181,7 +181,7 @@ spec:
         #   false: disable the filtration based on config map
         # Default value: false
         - name: X_CSI_TOPOLOGY_CONTROL_ENABLED
-          value: $TOPOLOGY_ENABLED
+          value: "$TOPOLOGY_ENABLED"
       # nodeSelector: Define node selection constraints for node pods.
       # For the pod to be eligible to run on a node, the node must have each
       # of the indicated key-value pairs as labels.
@@ -297,7 +297,7 @@ spec:
           # Set the value to "self" in case of stretched/single cluster configuration
           # Allowed values: string
           - name: "TARGET_CLUSTERS_IDS"
-            value: $TARGET_CLUSTER_ID
+            value: "$TARGET_CLUSTER_ID"
           # Replication log level
           # Allowed values: "error", "warn"/"warning", "info", "debug"
           # Default value: "debug"
