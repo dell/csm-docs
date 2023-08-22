@@ -9,6 +9,7 @@ description: Release notes for PowerFlex CSI driver
 - [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
 - [Enabled volume limits feature](https://github.com/dell/csm/issues/878)
 - [Updated sdc version to 3.6.1](https://github.com/dell/csm/issues/885)
+- [Added support for NFS volumes](https://github.com/dell/csm/issues/763)
 
 ### Fixed Issues
 - 
