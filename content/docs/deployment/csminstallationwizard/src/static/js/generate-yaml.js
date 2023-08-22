@@ -100,7 +100,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.operatorResiliency = $("#operator-resiliency").prop('checked') ? true : false;
 	DriverValues.storageCapacity = $("#storage-capacity").prop('checked') ? true : false;
 	DriverValues.authorizationSkipCertValidation = $("#authorization-skip-cert-validation").prop('checked') ? true : false;
-	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value || '""';
+	DriverValues.authorizationProxyHost = document.getElementById("authorization-proxy-host").value;
 	DriverValues.certManagerEnabled = $("#certmanager").prop('checked') ? true : false;
 	DriverValues.topologyEnabled = $("#topology").prop('checked') ? true : false;
 	observabilityEnabled = DriverValues.observability;
