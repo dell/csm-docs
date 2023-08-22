@@ -54,7 +54,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 **Steps**
 
-> NOTE: Ensure that the namespace and secrets are created before installing the Helm chart.
+>NOTE: Ensure that the namespace and secrets are created before installing the Helm chart.
 
 1. Add the Dell Helm Charts repository.
 
@@ -73,11 +73,11 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 5. If Authorization is enabled , please refer to [Authorization](../../authorization/deployment/helm/) for the installation and configuration of the Proxy Server.
 
-> NOTE: Only the Authorization sidecar is enabled by the CSM Installation Wizard. The Proxy Server has to be installed and configured separately.
+>NOTE: Only the Authorization sidecar is enabled by the CSM Installation Wizard. The Proxy Server has to be installed and configured separately.
 
 6. If the Volume Snapshot feature is enabled, please refer to [Volume Snapshot for PowerStore](../../csidriver/installation/helm/powerstore/#optional-volume-snapshot-requirements) and [Volume Snapshot for PowerMax](../../csidriver/installation/helm/powermax/#optional-volume-snapshot-requirements) to install the Volume Snapshot CRDs and the default snapshot controller.
 
-> NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
+>NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
 
 7. Install the Helm chart.
 
@@ -92,7 +92,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 **Steps**
 
-> NOTE: Ensure that the namespace, secrets, and config.yaml are created as prerequisites.
+>NOTE: Ensure that the namespace, secrets, and config.yaml are created as prerequisites.
 
 1. Copy the downloaded values.yaml file.
 
@@ -102,11 +102,11 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 4. If Authorization is enabled , please refer to [Authorization](../csmoperator/modules/authorization) for the installation and configuration of the Proxy Server.
 
-> NOTE: Only the Authorization sidecar is enabled by the CSM Installation Wizard. The Proxy Server has to be installed and configured separately.
+>NOTE: Only the Authorization sidecar is enabled by the CSM Installation Wizard. The Proxy Server has to be installed and configured separately.
 
 5. If Replication is enabled , please refer to [Replication](../csmoperator/modules/replication).
 
-> NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in [PowerStore](../csmoperator/drivers/powerstore), [PowerMax](../csmoperator/drivers/powermax), [PowerScale](../csmoperator/drivers/powerscale), [Resiliency](../csmoperator/modules/resiliency).
+>NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in [PowerStore](../csmoperator/drivers/powerstore), [PowerMax](../csmoperator/drivers/powermax), [PowerScale](../csmoperator/drivers/powerscale), [Resiliency](../csmoperator/modules/resiliency).
 
 6. Install the Operator.
 
