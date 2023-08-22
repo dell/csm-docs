@@ -160,7 +160,7 @@ csi-vxflexos:
   version: v2.8.0
   images:
     driverRepository: $IMAGE_REPOSITORY
-    powerflexSdc: dellemc/sdc:3.6.0.6
+    powerflexSdc: dellemc/sdc:3.6.1
   certSecretCount: $CERT_SECRET_COUNT
   controller:
     replication:

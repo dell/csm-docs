@@ -9,6 +9,8 @@ description: Release notes for PowerMax CSI driver
 
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
+>Note: File Replication for PowerMax is currently not supported 
+
 ### New Features/Changes
 - [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
 - [Added Storage Capacity Tracking feature for Powermax](https://github.com/dell/csm/issues/876)
@@ -16,6 +18,7 @@ description: Release notes for PowerMax CSI driver
 - [Added support for Google Anthos 1.15](https://github.com/dell/csm/issues/937)
 - [Added support for Volume Limits feature](https://github.com/dell/csm/issues/878)
 - [Added support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
+- [Added support for File volumes](https://github.com/dell/csm/issues/861)
 ### Fixed Issues
 There are no fixed issues in this release.
 
