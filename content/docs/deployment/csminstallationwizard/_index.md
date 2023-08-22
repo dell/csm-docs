@@ -92,7 +92,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 **Steps**
 
->NOTE: Ensure that the namespace, secrets, and config.yaml are created as prerequisites.
+>NOTE: Ensure that the csm-operator is installed and that the namespace, secrets, and config.yaml are created as prerequisites.
 
 1. Copy the downloaded values.yaml file.
 
