@@ -147,7 +147,7 @@ describe("GIVEN setValues function", () => {
 			resiliency: false,
 			storageCapacity: false,
 			authorizationSkipCertValidation: false,
-			authorizationProxyHost: '""',
+			authorizationProxyHost: '',
 			certManagerEnabled: false,
 			storageArrayId: undefined,
 			storageArrayEndpointUrl: '""',
@@ -258,7 +258,7 @@ describe("GIVEN setValues function", () => {
 			resiliency: false,
 			storageCapacity: false,
 			authorizationSkipCertValidation: false,
-			authorizationProxyHost: '""',
+			authorizationProxyHost: '',
 			certManagerEnabled: false,
 			storageArrayId: undefined,
 			storageArrayEndpointUrl: '""',
@@ -642,7 +642,7 @@ describe("GIVEN createYamlString function", () => {
 		replicationImage: "dellemc/dell-csi-replicator:v1.4.0",
 		authorizationImage: "dellemc/csm-authorization-sidecar:v1.6.0",
 		certManagerEnabled: false,
-		authorizationProxyHost: '""',
+		authorizationProxyHost: '',
 		monitor: false,
 		certSecretCount: 0,
 		storageArrayId: "",
@@ -762,7 +762,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -827,7 +827,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1027,7 +1027,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1092,7 +1092,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1293,7 +1293,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1358,7 +1358,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1561,7 +1561,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1626,7 +1626,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1828,7 +1828,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1893,7 +1893,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
