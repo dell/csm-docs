@@ -53,6 +53,8 @@ CSM for Replication provides the following capabilities:
 | Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br> Unisphere 10.0,10.0.1 | 1.0.x, <br> 2.0.x, 2.1.x, <br> 3.0, 3.2, 3.5 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5 | 3.6.x, 4.0|
 {{</table>}}
 
+>Note: File Replication for PowerMax is currently not supported 
+
 ## Details
 
 As on the storage arrays, all replication related Kubernetes entities are required/created in pairs -

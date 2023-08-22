@@ -255,10 +255,10 @@ spec:
         envs:
           # proxyHost: hostname of the csm-authorization server
           - name: "PROXY_HOST"
-            value: $AUTHORIZATION_PROXY_HOST
+            value: "$AUTHORIZATION_PROXY_HOST"
           # skipCertificateValidation: Enable/Disable certificate validation of the csm-authorization server
           - name: "SKIP_CERTIFICATE_VALIDATION"
-            value: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
+            value: "$AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION"
 
     # Replication: allows configuring replication module
     # Replication CRDs must be installed before installing driver

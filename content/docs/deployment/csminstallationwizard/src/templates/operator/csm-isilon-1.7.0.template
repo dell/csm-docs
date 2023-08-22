@@ -295,7 +295,7 @@ spec:
           # Set the value to "self" in case of stretched/single cluster configuration
           # Allowed values: string
           - name: "TARGET_CLUSTERS_IDS"
-            value: "target-cluster-1"
+            value: "$TARGET_CLUSTER_ID"
           # Replication log level
           # Allowed values: "error", "warn"/"warning", "info", "debug"
           # Default value: "debug"
@@ -325,12 +325,12 @@ spec:
     # observability: allows to configure observability
     - name: observability
       # enabled: Enable/Disable observability
-      enabled: $OBSERVABILITY_ENABLED
+      enabled: $OBSERVABILITY_OPERATOR_ENABLED
       configVersion: v1.5.0
       components:
         - name: topology
           # enabled: Enable/Disable topology
-          enabled: $OBSERVABILITY_ENABLED
+          enabled: $OBSERVABILITY_OPERATOR_TOPOLOGY
           # image: Defines karavi-topology image. This shouldn't be changed
           # Allowed values: string
           image: dellemc/csm-topology:v1.5.0
@@ -343,7 +343,7 @@ spec:
 
         - name: otel-collector
           # enabled: Enable/Disable OpenTelemetry Collector
-          enabled: $POWERSCALE_OBSERVABILITY_METRICS_ENABLED
+          enabled: $OBSERVABILITY_OPERATOR_OTEL
           # image: Defines otel-collector image. This shouldn't be changed
           # Allowed values: string
           image: otel/opentelemetry-collector:0.42.0
@@ -360,11 +360,11 @@ spec:
           #   true: enable deployment of cert-manager
           #   false: disable deployment of cert-manager only if it's already deployed
           # Default value: false
-          enabled: $OBSERVABILITY_ENABLED
+          enabled: $OBSERVABILITY_OPERATOR_ENABLED
 
         - name: metrics-powerscale
           # enabled: Enable/Disable PowerScale metrics
-          enabled: $POWERSCALE_OBSERVABILITY_METRICS_ENABLED
+          enabled: $OBSERVABILITY_OPERATOR_METRICS
           # image: Defines PowerScale metrics image. This shouldn't be changed
           # Allowed values: string
           image: dellemc/csm-metrics-powerscale:v1.2.0
