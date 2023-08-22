@@ -221,9 +221,18 @@ Create isilon-creds secret using the following command:
    
 8.  Install the driver using `csi-install.sh` bash script by running
     ```bash
-    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml &&
+    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml -b csi-isilon-2.8.0  https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml &&
     ./csi-install.sh --namespace isilon --values my-isilon-settings.yaml
     ``` 
+
+    OR 
+
+    To install particular version 
+    ```bash
+    cd dell-csi-helm-installer && wget -O my-isilon-settings.yaml -b <version> https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml &&
+    ./csi-install.sh --namespace isilon --values my-isilon-settings.yaml --helm-charts-version <version>
+    ```
+
 (assuming that the current working directory is 'helm' and my-isilon-settings.yaml is also present under 'helm' directory)
 
 ## Certificate validation for OneFS REST API calls
