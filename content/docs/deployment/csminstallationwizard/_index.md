@@ -37,7 +37,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 ## Installation
 
 1. Open the [CSM Installation Wizard](./src/index.html).
-2. Select the `Installation Type` as `Helm`/ `Operator`.
+2. Select the `Installation Type` as `Helm`/`Operator`.
 3. Select the `Array`.
 4. Enter the `Image Repository`. The default value is `dellemc`.
 5. Select the `CSM Version`. 
@@ -113,6 +113,5 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
     On your terminal, run this command:
 
     ```terminal
-    
     kubectl create -f values.yaml
     ```
