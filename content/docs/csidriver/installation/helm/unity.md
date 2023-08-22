@@ -331,7 +331,7 @@ Procedure
     /csi-install.sh --namespace unity --values ./myvalues.yaml --version latest
     ```
 
-8. You can also install the driver using standalone helm chart by cloning the centralised helm charts and run the helm install command as shown.
+8. You can also install the driver using standalone helm chart by cloning the centralised helm charts and running the helm install command as shown.
 
    **Syntax**:
    ```bash
