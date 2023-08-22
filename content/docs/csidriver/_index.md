@@ -16,12 +16,12 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Kubernetes    | 1.26, 1.27, 1.28 | 1.25, 1.26, 1.27    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27  | 1.25, 1.26, 1.27 |
+| Kubernetes    | 1.26, 1.27, 1.28 | 1.25, 1.26, 1.27    | 1.25, 1.26, 1.27 | 1.26, 1.27, 1.28  | 1.25, 1.26, 1.27 |
 | RHEL          |     7.x,8.x  |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.x,8.x      |
 | Ubuntu        |       20.04      |       20.04         |  18.04, 20.04    | 20.04, 22.04      |        20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.9     |      7.8, 7.9     |     7.8, 7.9     |
-| SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP3     |       15SP4      |
-| Red Hat OpenShift | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.11, 4.12, 4.12 EUS | 4.11, 4.12, 4.12 EUS | 4.12, 4.13, 4.13 EUS |
+| SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP4     |       15SP4      |
+| Red Hat OpenShift | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.11, 4.12, 4.12 EUS | 4.12, 4.12 EUS, 4.13 | 4.12, 4.13, 4.13 EUS |
 | Mirantis Kubernetes Engine | 3.6.x |     3.5.x,3.6.x         |       3.6.x      | 3.5.x, 3.6.x      |        3.6.x     |
 | Google Anthos |        1.15       |          1.12        |        no        |         1.15       |        1.15       |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI         |
