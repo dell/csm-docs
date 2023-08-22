@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.116.1">
+<meta name="generator" content="Hugo 0.117.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/isilon/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-08-02T20:34:04+05:30" />
+<meta property="article:modified_time" content="2023-08-22T19:14:15+05:30" />
 <meta itemprop="name" content="PowerScale">
 <meta itemprop="description" content="Installing CSI Driver for PowerScale via Helm
 ">
-<meta itemprop="dateModified" content="2023-08-02T20:34:04+05:30" />
-<meta itemprop="wordCount" content="3194">
+<meta itemprop="dateModified" content="2023-08-22T19:14:15+05:30" />
+<meta itemprop="wordCount" content="3220">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerScale"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerScale via Helm
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4ebad7fe7cf7b15486437f84da9cd70f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3b5a2add5907472c068230011de70056.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4ebad7fe7cf7b15486437f84da9cd70f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3b5a2add5907472c068230011de70056.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -793,7 +793,7 @@ volume stats value under node should be set to true.</p>
 <p>Collect information from the PowerScale Systems like IP address, IsiPath, username, and password. Make a note of the value for these parameters as they must be entered in the <em>secret.yaml</em>.</p>
 </li>
 <li>
-<p>Download  <code>wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml</code> into  <code>cd ../dell-csi-helm-installer</code> to customize settings for installation.</p>
+<p>Download  <code>wget -O my-isilon-settings.yaml -b csi-isilon-2.8.0 https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml</code> into  <code>cd ../dell-csi-helm-installer</code> to customize settings for installation.</p>
 </li>
 <li>
 <p>Edit <em>my-isilon-settings.yaml</em> to set the following parameters for your installation:
@@ -1280,8 +1280,12 @@ found in the  <a href="https://github.com/dell/helm-charts/blob/main/charts/csi-
 </li>
 <li>
 <p>Install the driver using <code>csi-install.sh</code> bash script by running</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-isilon-settings.yaml https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-isilon-settings.yaml -b csi-isilon-2.8.0  https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
 </span></span><span style="display:flex;"><span>./csi-install.sh --namespace isilon --values my-isilon-settings.yaml
+</span></span></code></pre></div><p>OR</p>
+<p>To install particular version</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#204a87">cd</span> dell-csi-helm-installer <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> wget -O my-isilon-settings.yaml -b &lt;version&gt; https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-isilon/values.yaml <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>./csi-install.sh --namespace isilon --values my-isilon-settings.yaml --helm-charts-version &lt;version&gt;
 </span></span></code></pre></div></li>
 </ol>
 <p>(assuming that the current working directory is &lsquo;helm&rsquo; and my-isilon-settings.yaml is also present under &lsquo;helm&rsquo; directory)</p>
