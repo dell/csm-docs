@@ -200,6 +200,8 @@ csi-vxflexos:
     # - key: "isilon.podmon.storage.dell.com"
     #   operator: "Exists"
     #   effect: "NoSchedule"
+  storageCapacity:
+    enabled: $STORAGE_CAPACITY_ENABLED
   monitor:
     enabled: $MONITOR_ENABLED
   vgsnapshotter:

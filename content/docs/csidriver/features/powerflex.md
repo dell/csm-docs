@@ -658,6 +658,16 @@ Warning  VolumeConditionAbnormal      35s (x9 over 12m)  kubelet       Volume vo
 Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vol2: Volume is not found by node driver at 2021-11-11 02:04:49
 ```
 
+## Storage Capacity Tracking
+CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.
+
+This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
+
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
+
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+
 ## Set QoS Limits
 Starting in version 2.5, CSI Driver for PowerFlex now supports setting the limits for the bandwidth and IOPS that one SDC generates for the specified volume. This enables the CSI driver to control the quality of service (QoS).
 In this release this is supported at the StorageClass level, so once a volume is created QoS Settings can't be adjusted later.
