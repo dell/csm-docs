@@ -10,6 +10,8 @@ Container Storage Modules (CSM) Replication sidecar is a helper container that i
 
 CSI driver for Dell PowerMax supports necessary extension calls from `dell-csi-extensions`. To be able to provision replicated volumes you would need to do the steps described in the following sections.
 
+>Note: File Replication for PowerMax is currently not supported 
+
 ### Before Installation
 
 #### On Storage Array
