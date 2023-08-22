@@ -132,12 +132,19 @@ function onTopologyChange(topologyNoteValue) {
 
 function onReplicationChange(replicationNoteValue) {
 	if ($("#replication").prop('checked') === true && $("#installation-type").val() === "operator") {
-		$("#replication-operator-note").html(replicationNoteValue);
-		$('.replication-operator').show();
+		replicationOperatorNoteValue = replicationNoteValue + "Enter the target cluster ID or `self` in case of stretched/single cluster";
+		$("#replication-note").html(replicationOperatorNoteValue);			
+		$('div#replication-note-wrapper').show();	
+		$('.replication-operator-clusterid').show();
 		
+	} else if ($("#replication").prop('checked') === true && installationType === 'helm') {
+		$("#replication-note").html(replicationNoteValue);	
+		$('.replication-operator-clusterid').hide();	
 	} else {
-		$('.replication-operator').hide();
+		$('div#replication-note-wrapper').hide();
+		$('.replication-operator-clusterid').hide();
 	}
+	
 }
 
 function onVSphereChange() {
@@ -273,7 +280,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".transport-protocol").hide();
 	$(".iscsichap").hide();
 	$(".topology").hide();
-	$(".replication-operator").hide();
+	$(".replication-operator-clusterid").hide();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -333,7 +340,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				
 				$(".observability-operator").show();
 				$(".observability").hide();
-				$(".replication-operator").show();
+				$(".replication-operator-clusterid").hide();
 				$(".image-repository").hide();
 				$(".cert-manager").hide();
 				$(".storageArrays").hide();
@@ -344,8 +351,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".migration").hide();
 				$(".resizer").hide();
 				$(".fsGroupPolicy").show();	
-				$(".transport-protocol").show();
-				
+				$(".transport-protocol").show();				
 				$(".topology").show();	
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
 			}
