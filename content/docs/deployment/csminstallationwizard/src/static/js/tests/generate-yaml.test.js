@@ -169,7 +169,7 @@ describe("GIVEN setValues function", () => {
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
-			targetClusterId: "",
+		  targetClusterId: "",
       targetArrayID: "",
       targetUnisphere: "",
 			iscsichap: false,

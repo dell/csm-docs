@@ -179,7 +179,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_TOLERATIONS", yamlTplValues.controllerTolerations);
 	yamlTpl = yamlTpl.replaceAll("$NODE_TOLERATIONS", yamlTplValues.nodeTolerations);
 	yamlTpl = yamlTpl.replaceAll("$TARGET_ARRAY_ID", yamlTplValues.targetArrayID);
-    yamlTpl = yamlTpl.replaceAll("$TARGET_UNISPHERE", yamlTplValues.targetUnisphere);
+	yamlTpl = yamlTpl.replaceAll("$TARGET_UNISPHERE", yamlTplValues.targetUnisphere);
 
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
