@@ -169,9 +169,9 @@ describe("GIVEN setValues function", () => {
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
-		  targetClusterId: "",
-      targetArrayID: "",
-      targetUnisphere: "",
+      targetClusterId: "",
+			targetArrayID: "",
+			targetUnisphere: "",
 			iscsichap: false,
 			manageArrayId: '""',
 			manageArrayEndpointUrl: '""',
@@ -279,9 +279,9 @@ describe("GIVEN setValues function", () => {
 			volumelessPods: false,
 			clusterPrefix: undefined,
 			portGroups: undefined,
-			targetClusterId: "",
-      targetArrayID: "",
-      targetUnisphere: "",
+			targetClusterId: false,
+			targetArrayID: "",
+			targetUnisphere: "",
 			vSphereEnabled: false,
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
@@ -433,14 +433,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: $POWERMAX_ENABLED
       global:
         storageArrays:
-          - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
-            endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
-            backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
-          - storageArrayId: $TARGET_ARRAY_ID
-            endpoint: $TARGET_UNISPHERE
+          - storageArrayId: ""
+            endpoint: ""
+            backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
-          - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
-          - endpoint: $TARGET_UNISPHERE
+          - endpoint: ""
+          - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: $IMAGE_REPOSITORY
@@ -740,9 +740,12 @@ describe("GIVEN createYamlString function", () => {
       global:
         storageArrays:
           - storageArrayId: ""
-            endpoint: ""
+            endpoint:""
             backupEndpoint: ""
+          - storageArrayId:""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1005,9 +1008,12 @@ describe("GIVEN createYamlString function", () => {
       global:
         storageArrays:
           - storageArrayId: ""
-            endpoint: ""
+            endpoint:""
             backupEndpoint: ""
+          - storageArrayId:""
+            endpoint: ""
         managementServers:
+          - endpoint: ""        
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1273,7 +1279,7 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
-            - storageArrayId: ""
+          - storageArrayId: ""
             endpoint: ""  
         managementServers:
           - endpoint: ""
@@ -1542,9 +1548,12 @@ describe("GIVEN createYamlString function", () => {
       global:
         storageArrays:
           - storageArrayId: ""
-            endpoint: ""
+            endpoint:""
             backupEndpoint: ""
+          - storageArrayId:""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1809,9 +1818,12 @@ describe("GIVEN createYamlString function", () => {
       global:
         storageArrays:
           - storageArrayId: ""
-            endpoint: ""
+            endpoint:""
             backupEndpoint: ""
+          - storageArrayId:""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
