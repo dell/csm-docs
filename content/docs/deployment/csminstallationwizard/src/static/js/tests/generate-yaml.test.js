@@ -740,9 +740,9 @@ describe("GIVEN createYamlString function", () => {
       global:
         storageArrays:
           - storageArrayId: ""
-            endpoint:""
+            endpoint: ""
             backupEndpoint: ""
-          - storageArrayId:""
+          - storageArrayId: ""
             endpoint: ""
         managementServers:
           - endpoint: ""
@@ -1008,9 +1008,9 @@ describe("GIVEN createYamlString function", () => {
       global:
         storageArrays:
           - storageArrayId: ""
-            endpoint:""
+            endpoint: ""
             backupEndpoint: ""
-          - storageArrayId:""
+          - storageArrayId: ""
             endpoint: ""
         managementServers:
           - endpoint: ""        
@@ -1548,7 +1548,7 @@ describe("GIVEN createYamlString function", () => {
       global:
         storageArrays:
           - storageArrayId: ""
-            endpoint:""
+            endpoint: ""
             backupEndpoint: ""
           - storageArrayId:""
             endpoint: ""
@@ -1818,9 +1818,9 @@ describe("GIVEN createYamlString function", () => {
       global:
         storageArrays:
           - storageArrayId: ""
-            endpoint:""
+            endpoint: ""
             backupEndpoint: ""
-          - storageArrayId:""
+          - storageArrayId: ""
             endpoint: ""
         managementServers:
           - endpoint: ""
