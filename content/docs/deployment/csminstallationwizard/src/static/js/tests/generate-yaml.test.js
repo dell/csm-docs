@@ -169,7 +169,7 @@ describe("GIVEN setValues function", () => {
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
-      targetClusterId: "",
+      targetClusterId: false,
 			targetArrayID: "",
 			targetUnisphere: "",
 			iscsichap: false,
@@ -1550,7 +1550,7 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
-          - storageArrayId:""
+          - storageArrayId: ""
             endpoint: ""
         managementServers:
           - endpoint: ""
