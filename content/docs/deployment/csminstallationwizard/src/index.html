@@ -141,12 +141,26 @@
                       <label for="replication" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Replication module">Replication</label>
                     </div>
                       <div class="was-validated row mt-3 child-level-one replication-operator-clusterid">
-                        <label for="target-cluster-id" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="List of cluster IDs of the targets clusters">Target Cluster ID</label>
+                        <label for="replication-operator-clusterid" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="List of cluster IDs of the targets clusters">Target Cluster ID</label>
                         <div class="col-sm-9"></div>
                         <div class="col-sm-2">
-                          <input class="form-control input-lg" type="text" id="target-cluster-id" placeholder="target-cluster-id" required>
+                          <input class="form-control input-lg" type="text" id="replication-operator-clusterid" placeholder="target clusterid" required>
                         </div>
+                      </div>
+                      <div class="was-validated row mt-3 child-level-one replication-helm-arrayid">
+                          <label for="replication-helm-arrayid" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Target array id for the replication">Target Array ID</label>
+                          <div class="col-sm-9"></div>
+                          <div class="col-sm-2">
+                            <input class="form-control input-lg" type="text" id="replication-helm-arrayid" placeholder="target array id" required>
+                          </div>
+                      </div>
+                      <div class="was-validated row mt-3 child-level-one replication-helm-unisphere">
+                        <label for="replication-helm-unisphere" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Target Unisphere for the replication">Target Unisphere</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="text" id="replication-helm-unisphere" placeholder="target unisphere" required>
                         </div>
+                    </div>
                       <div class="row child-level-one " id="replication-note-wrapper">
                         <div class="mt-3 py-2 note">
                           <i class="icon dds__icon dds__icon--alert-info-cir"></i>

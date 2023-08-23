@@ -135,6 +135,8 @@ csi-powermax:
   replication:
     enabled: $REPLICATION_ENABLED
     image: dellemc/dell-csi-replicator:v1.5.0
+    targetarrayid: $TARGET_ARRAY_ID
+    targetunisphere: $TARGET_UNISPHERE
   migration:
     enabled: $MIGRATION_ENABLED
     image: dellemc/dell-csi-migrator:v1.1.1

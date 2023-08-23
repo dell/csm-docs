@@ -101,7 +101,9 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="leader-election">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
-            <input type="text" id="target-cluster-id" value="">
+            <input type="text" id="replication-operator-clusterid" value="">
+            <input type="text" id="replication-helm-arrayid" value="">
+            <input type="text" id="replication-helm-unisphere" value="">
             <input type="text" id="transport-protocol" value="">
             <input type="checkbox" id="iscsichap">
             <input type="checkbox" id="observability-operator">
@@ -168,6 +170,8 @@ describe("GIVEN setValues function", () => {
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
 			targetClusterId: "",
+      targetArrayID: "",
+      targetUnisphere: "",
 			iscsichap: false,
 			manageArrayId: '""',
 			manageArrayEndpointUrl: '""',
@@ -211,7 +215,9 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
-            <input type="text" id="target-cluster-id" value="">
+            <input type="text" id="replication-operator-clusterid" value="">            
+            <input type="text" id="replication-helm-arrayid" value="">            
+            <input type="text" id="replication-helm-unisphere" value="">
             <input type="text" id="transport-protocol" value="">
             <input type="checkbox" id="iscsichap">
             <input type="checkbox" id="observability-operator">
@@ -274,6 +280,8 @@ describe("GIVEN setValues function", () => {
 			clusterPrefix: undefined,
 			portGroups: undefined,
 			targetClusterId: "",
+      targetArrayID: "",
+      targetUnisphere: "",
 			vSphereEnabled: false,
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
@@ -322,7 +330,9 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
-            <input type="text" id="target-cluster-id" value="">
+            <input type="text" id="replication-operator-clusterid" value="">            
+            <input type="text" id="replication-helm-arrayid" value="">
+            <input type="text" id="replication-helm-unisphere" value="">
             <input type="checkbox" id="leader-election">
         `;
 
@@ -452,6 +462,8 @@ describe("GIVEN createYamlString function", () => {
       replication:
         enabled: $REPLICATION_ENABLED
         image: dellemc/dell-csi-replicator:v1.4.0
+        targetarrayid: $TARGET_ARRAY_ID
+        targetunisphere: $TARGET_UNISPHERE
       migration:
         enabled: $MIGRATION_ENABLED
         image: dellemc/dell-csi-migrator:v1.1.0
@@ -1286,6 +1298,8 @@ describe("GIVEN createYamlString function", () => {
       replication:
         enabled: false
         image: dellemc/dell-csi-replicator:v1.4.0
+        targetarrayid: $TARGET_ARRAY_ID
+        targetunisphere: $TARGET_UNISPHERE
       migration:
         enabled: false
         image: dellemc/dell-csi-migrator:v1.1.0

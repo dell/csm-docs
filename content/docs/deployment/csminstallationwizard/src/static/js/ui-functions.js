@@ -132,17 +132,23 @@ function onTopologyChange(topologyNoteValue) {
 
 function onReplicationChange(replicationNoteValue) {
 	if ($("#replication").prop('checked') === true && $("#installation-type").val() === "operator") {
-		replicationOperatorNoteValue = replicationNoteValue + "Enter the target cluster ID or `self` in case of stretched/single cluster";
+		replicationOperatorNoteValue = replicationNoteValue + " Enter the target cluster ID or `self` in case of stretched/single cluster";
 		$("#replication-note").html(replicationOperatorNoteValue);			
 		$('div#replication-note-wrapper').show();	
-		$('.replication-operator-clusterid').show();
-		
+		$('.replication-operator-clusterid').show();		
+		$('.replication-helm-arrayid').hide();	
+		$('.replication-helm-unisphere').hide();
 	} else if ($("#replication").prop('checked') === true && installationType === 'helm') {
-		$("#replication-note").html(replicationNoteValue);	
+		$("#replication-note").html(replicationNoteValue);						
+		$('div#replication-note-wrapper').show();	
 		$('.replication-operator-clusterid').hide();	
+		$('.replication-helm-arrayid').show();	
+		$('.replication-helm-unisphere').show();
 	} else {
 		$('div#replication-note-wrapper').hide();
 		$('.replication-operator-clusterid').hide();
+		$('.replication-helm-arrayid').hide();	
+		$('.replication-helm-unisphere').hide();
 	}
 	
 }
@@ -281,6 +287,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".iscsichap").hide();
 	$(".topology").hide();
 	$(".replication-operator-clusterid").hide();
+	$(".replication-helm-arrayid").hide();
+	$(".replication-helm-unisphere").hide();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
