@@ -138,12 +138,18 @@ function onReplicationChange(replicationNoteValue) {
 		$('.replication-operator-clusterid').show();		
 		$('.replication-helm-arrayid').hide();	
 		$('.replication-helm-unisphere').hide();
-	} else if ($("#replication").prop('checked') === true && installationType === 'helm') {
+	} else if ($("#replication").prop('checked') === true && installationType === 'helm' && document.getElementById("array").value === CONSTANTS.POWERMAX) {
 		$("#replication-note").html(replicationNoteValue);						
 		$('div#replication-note-wrapper').show();	
 		$('.replication-operator-clusterid').hide();	
 		$('.replication-helm-arrayid').show();	
 		$('.replication-helm-unisphere').show();
+	} else if ($("#replication").prop('checked') === true && installationType === 'helm') {
+		$("#replication-note").html(replicationNoteValue);						
+		$('div#replication-note-wrapper').show();	
+		$('.replication-operator-clusterid').hide();	
+		$('.replication-helm-arrayid').hide();	
+		$('.replication-helm-unisphere').hide();
 	} else {
 		$('div#replication-note-wrapper').hide();
 		$('.replication-operator-clusterid').hide();
