@@ -436,8 +436,11 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
             endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
             backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
+          - storageArrayId: $TARGET_ARRAY_ID
+            endpoint: $TARGET_UNISPHERE
         managementServers:
           - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
+          - endpoint: $TARGET_UNISPHERE
       version: v2.6.0
       images:
         driverRepository: $IMAGE_REPOSITORY
@@ -462,8 +465,6 @@ describe("GIVEN createYamlString function", () => {
       replication:
         enabled: $REPLICATION_ENABLED
         image: dellemc/dell-csi-replicator:v1.4.0
-        targetarrayid: $TARGET_ARRAY_ID
-        targetunisphere: $TARGET_UNISPHERE
       migration:
         enabled: $MIGRATION_ENABLED
         image: dellemc/dell-csi-migrator:v1.1.0
@@ -1272,7 +1273,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+            - storageArrayId: ""
+            endpoint: ""  
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1298,8 +1302,6 @@ describe("GIVEN createYamlString function", () => {
       replication:
         enabled: false
         image: dellemc/dell-csi-replicator:v1.4.0
-        targetarrayid: $TARGET_ARRAY_ID
-        targetunisphere: $TARGET_UNISPHERE
       migration:
         enabled: false
         image: dellemc/dell-csi-migrator:v1.1.0

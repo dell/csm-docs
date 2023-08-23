@@ -96,8 +96,11 @@ csi-powermax:
       - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
         endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
         backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
+      - storageArrayId: $TARGET_ARRAY_ID
+        endpoint: $TARGET_UNISPHERE
     managementServers:
       - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
+      - endpoint: $TARGET_UNISPHERE
   version: v2.8.0
   images:
     driverRepository: $IMAGE_REPOSITORY
@@ -135,8 +138,6 @@ csi-powermax:
   replication:
     enabled: $REPLICATION_ENABLED
     image: dellemc/dell-csi-replicator:v1.5.0
-    targetarrayid: $TARGET_ARRAY_ID
-    targetunisphere: $TARGET_UNISPHERE
   migration:
     enabled: $MIGRATION_ENABLED
     image: dellemc/dell-csi-migrator:v1.1.1
