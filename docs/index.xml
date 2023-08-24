@@ -182,6 +182,7 @@ Dell CSI Operator can be upgraded based on the supported platforms in one of the
 &lt;li&gt;Object store bucket accessible by both the source and target clusters&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Repeat the following steps on both clusters:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Create a namespace where Application Mobility will be installed.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create ns application-mobility
