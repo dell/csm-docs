@@ -101,7 +101,9 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="leader-election">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
-            <input type="text" id="target-cluster-id" value="">
+            <input type="text" id="replication-operator-clusterid" value="">
+            <input type="text" id="replication-helm-arrayid" value="">
+            <input type="text" id="replication-helm-unisphere" value="">
             <input type="text" id="transport-protocol" value="">
             <input type="checkbox" id="iscsichap">
             <input type="checkbox" id="observability-operator">
@@ -168,6 +170,8 @@ describe("GIVEN setValues function", () => {
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
 			targetClusterId: "",
+			targetArrayID: "",
+			targetUnisphere: "",
 			iscsichap: false,
 			manageArrayId: '""',
 			manageArrayEndpointUrl: '""',
@@ -211,7 +215,9 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
-            <input type="text" id="target-cluster-id" value="">
+            <input type="text" id="replication-operator-clusterid" value="">            
+            <input type="text" id="replication-helm-arrayid" value="">            
+            <input type="text" id="replication-helm-unisphere" value="">
             <input type="text" id="transport-protocol" value="">
             <input type="checkbox" id="iscsichap">
             <input type="checkbox" id="observability-operator">
@@ -274,6 +280,8 @@ describe("GIVEN setValues function", () => {
 			clusterPrefix: undefined,
 			portGroups: undefined,
 			targetClusterId: "",
+			targetArrayID: "",
+			targetUnisphere: "",
 			vSphereEnabled: false,
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
@@ -322,7 +330,9 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
-            <input type="text" id="target-cluster-id" value="">
+            <input type="text" id="replication-operator-clusterid" value="">            
+            <input type="text" id="replication-helm-arrayid" value="">
+            <input type="text" id="replication-helm-unisphere" value="">
             <input type="checkbox" id="leader-election">
         `;
 
@@ -423,11 +433,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: $POWERMAX_ENABLED
       global:
         storageArrays:
-          - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
-            endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
-            backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
+          - storageArrayId: ""
+            endpoint: ""
+            backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
-          - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
+          - endpoint: ""
+          - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: $IMAGE_REPOSITORY
@@ -729,7 +742,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -994,7 +1010,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1260,7 +1279,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1528,7 +1550,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1795,7 +1820,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:

@@ -48,7 +48,9 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.controllerCount = document.getElementById("controller-count").value;
 	DriverValues.volNamePrefix = document.getElementById("vol-name-prefix").value;
 	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
-	DriverValues.targetClusterId = document.getElementById("target-cluster-id").value;
+	DriverValues.targetClusterId = document.getElementById("replication-operator-clusterid").value;
+	DriverValues.targetArrayID = document.getElementById("replication-helm-arrayid").value;
+	DriverValues.targetUnisphere = document.getElementById("replication-helm-unisphere").value;
 	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
 	DriverValues.driverNamespace = document.getElementById("driver-namespace").value;
 	DriverValues.labelValue = document.getElementById("label-value").value;
@@ -176,6 +178,9 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$VSPHERE_VCENTER_CRED_SECRET", yamlTplValues.vSphereVCenterCredSecret);
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_TOLERATIONS", yamlTplValues.controllerTolerations);
 	yamlTpl = yamlTpl.replaceAll("$NODE_TOLERATIONS", yamlTplValues.nodeTolerations);
+	yamlTpl = yamlTpl.replaceAll("$TARGET_ARRAY_ID", yamlTplValues.targetArrayID);
+	yamlTpl = yamlTpl.replaceAll("$TARGET_UNISPHERE", yamlTplValues.targetUnisphere);
+
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
 		yamlTpl = yamlTpl.replaceAll("$POWERSTORE_ENABLED", true);
