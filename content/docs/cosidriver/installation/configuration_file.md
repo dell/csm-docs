@@ -11,14 +11,14 @@ Description: Description of configuration file for ObjectScale
 
 ## Dell COSI Driver Configuration Schema
 
-This configuration file is used to specify the settings for the Dell COSI Driver, which is responsible for managing connections to the Dell ObjectScale platform. The configuration file is written in YAML format and based on the JSON schema and adheres to it's specification.
+This configuration file is used to specify the settings for the Dell COSI Driver, which is responsible for managing connections to the Dell ObjectScale platform. The configuration file is written in YAML format and based on the JSON schema and adheres to its specification.
 
 YAML files can have comments, which are lines in the file that begin with the `#` character. Comments can be used to provide context and explanations for the data in the file, and they are ignored by parsers when reading the YAML data.
 
 ## Configuration file example
 
 ```yaml
-# This is example of configuration file. You MUST edit it before applying!
+# This is example of a configuration file. You MUST edit the file before using it in your environment.
 
 # List of connections to object storage platforms that is used for object storage provisioning.
 connections:
@@ -132,7 +132,7 @@ connections:
     #
     # Possible values:
     # - true            - bucket will be emptied during the deletion.
-    # - false - default - deletion of bucket will fail, if the bucket is not empty.
+    # - false - default - deletion of bucket will fail if the bucket is not empty.
     #                     All contents of the bucket must be cleared manually.
     #
     # OPTIONAL
