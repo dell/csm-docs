@@ -169,7 +169,7 @@ describe("GIVEN setValues function", () => {
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
 			vSphereVCenterCredSecret: undefined,
-      targetClusterId: false,
+			targetClusterId: "",
 			targetArrayID: "",
 			targetUnisphere: "",
 			iscsichap: false,
@@ -279,7 +279,7 @@ describe("GIVEN setValues function", () => {
 			volumelessPods: false,
 			clusterPrefix: undefined,
 			portGroups: undefined,
-			targetClusterId: false,
+			targetClusterId: "",
 			targetArrayID: "",
 			targetUnisphere: "",
 			vSphereEnabled: false,
@@ -1013,7 +1013,7 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
         managementServers:
-          - endpoint: ""        
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1280,7 +1280,7 @@ describe("GIVEN createYamlString function", () => {
             endpoint: ""
             backupEndpoint: ""
           - storageArrayId: ""
-            endpoint: ""  
+            endpoint: ""
         managementServers:
           - endpoint: ""
           - endpoint: ""
