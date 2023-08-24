@@ -5,20 +5,21 @@ description: Release notes for PowerStore CSI driver
 
 ## Release Notes - CSI PowerStore v2.7.0
 
+
 ### New Features/Changes
-- [CSI PowerStore - Add support for PowerStore Medusa (v3.5) array](https://github.com/dell/csm/issues/735)
-- [Allow FQDN for the endpoint in CSI-PowerStore](https://github.com/dell/csm/issues/731)
-- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
-- [Migrate image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [CSM support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
-- [Add upgrade support of csi-powerstore driver in CSM-Operator](https://github.com/dell/csm/issues/805)
-- [CSM support for Openshift 4.12](https://github.com/dell/csm/issues/571)
-- [Update to the latest UBI/UBI Micro images for CSM](https://github.com/dell/csm/issues/843)
+
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
+- [#926 - [FEATURE]: Set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
+- [#947 - [FEATURE]: K8S 1.28 support in CSM 1.8](https://github.com/dell/csm/issues/947)
+- [#878 - [FEATURE] CSI 1.5 spec support : Implement Volume Limits](https://github.com/dell/csm/issues/878)
+- [#879 - [FEATURE]: Configurable Volume Attributes use recommended naming convention <prefix>/<name>](https://github.com/dell/csm/issues/879)
 
 ### Fixed Issues
-- [Storage Capacity Tracking not working in CSI-PowerStore when installed using CSM Operator](https://github.com/dell/csm/issues/823)
-- [CHAP is set to true in the CSI-PowerStore sample file in CSI Operator](https://github.com/dell/csm/issues/812)
-- [Unable to delete application pod when CSI PowerStore is installed using CSM Operator](https://github.com/dell/csm/issues/785)
+
+- [#928 - [BUG]: PowerStore Replication - Delete RG request hangs](https://github.com/dell/csm/issues/928)
+- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 
