@@ -5,15 +5,18 @@ description: Release notes for PowerFlex CSI driver
 
 ## Release Notes - CSI PowerFlex v2.8.0
 
+
 ### New Features/Changes
-- [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
-- [Enabled volume limits feature](https://github.com/dell/csm/issues/878)
-- [Added support for Storage Capacity Tracking feature](https://github.com/dell/csm/issues/876)
-- [Updated sdc version to 3.6.1](https://github.com/dell/csm/issues/885)
-- [Added support for NFS volumes](https://github.com/dell/csm/issues/763)
+
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#763 - [FEATURE]: CSI-PowerFlex 4.0 NFS support](https://github.com/dell/csm/issues/763)
+- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
+- [#926 - [FEATURE]: Set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
-- 
+
+- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
+
 ### Known Issues
 
 | Issue | Workaround |
