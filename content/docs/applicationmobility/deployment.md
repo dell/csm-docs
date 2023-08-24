@@ -11,6 +11,8 @@ Description: >
 - Object store bucket accessible by both the source and target clusters
 
 ## Installation
+Repeat the following steps on both clusters:
+
 1. Create a namespace where Application Mobility will be installed.
     ```bash
     kubectl create ns application-mobility
