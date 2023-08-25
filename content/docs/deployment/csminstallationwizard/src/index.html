@@ -43,7 +43,7 @@
                   <label for="installation-type" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Select the installation type" style="width: 140px;">Installation Type</label>
                   <div class="col-sm-9"></div>
                   <div class="col-sm-3">
-                    <select id="installation-type" class="form-select" onchange="validateInput(validateForm, CONSTANTS);onInstallationTypeChange();" required>
+                    <select id="installation-type" class="form-select" onchange="validateInput(validateForm, CONSTANTS);onInstallationTypeChange()" required>
                       <option value="" selected> Select the Installation type</option>
                       <option value="helm">Helm</option>
                       <option value="operator">Operator</option>
@@ -55,7 +55,7 @@
                   <label for="array" class="col-sm-1 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Refers to the storage array" style="width: 65px;">Array</label>
                   <div class="col-sm-9"></div>
                   <div class="col-sm-3">
-                    <select id="array" class="form-select" onchange="validateInput(validateForm, CONSTANTS);" required>
+                    <select id="array" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
                       <option value="" selected>Select the Array</option>
                       <option value="powerstore">PowerStore</option>
                       <option value="powermax">PowerMax</option>
