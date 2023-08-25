@@ -6,17 +6,20 @@ description: Release notes for PowerScale CSI driver
 
 ## Release Notes - CSI Driver for PowerScale v2.7.0
 
+
 ### New Features/Changes
 
-- [Allow user to set Quota limit parameters from the PVC request in CSI PowerScale](https://github.com/dell/csm/issues/742)
-- [CSI Spec 1.5: Storage capacity tracking feature](https://github.com/dell/csm/issues/824)
-- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
-- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
-- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
+- [#926 - [FEATURE]: Set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
+- [#947 - [FEATURE]: K8S 1.28 support in CSM 1.8](https://github.com/dell/csm/issues/947)
+- [#888 - [FEATURE]: Enhance GoPowerScale to support PowerScale Terraform Provider](https://github.com/dell/csm/issues/888)
 
 ### Fixed Issues
 
+- [#487 - [BUG]: Powerscale CSI driver RO PVC-from-snapshot wrong zone](https://github.com/dell/csm/issues/487)
+- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 | Issue                                                                                                                                                                                                                               | Resolution or workaround, if known                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
