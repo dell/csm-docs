@@ -210,6 +210,7 @@ Procedure
         password: "password"
         endpoint: "https://10.1.1.2/"
         skipCertificateValidation: true
+        isDefault: false
     ```
 
 	Use the following command to create a new secret unity-creds from `secret.yaml` file.
@@ -245,6 +246,7 @@ Procedure
       password: "password"
       endpoint: "https://10.1.1.2/"
       skipCertificateValidation: true
+      isDefault: false
     ```
     
     **Note:** Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
