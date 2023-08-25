@@ -64,6 +64,7 @@ const CONSTANTS = {
 const testCSMMap = new Map([
 	["csmVersion", "1.7.0"],
 	["imageRepository", "dellemc"],
+  ["maxVolumesPerNode", "0"],
 	["controllerCount", "1"],
 	["volNamePrefix", "csivol"],
 	["snapNamePrefix", "csi-snap"],
@@ -85,6 +86,7 @@ describe("GIVEN setValues function", () => {
             </select>
             <input type="text" id="image-repository" value="dellemc">
             <input type="number" id="cert-secret-count" value="1">
+            <input type="number" id="max-volumes-per-node" value="0">
             <input type="number" id="controller-count" value="1">
             <input type="text" id="vol-name-prefix" value="csivol">
             <input type="text" id="snapshot-prefix" value="csi-snap">
@@ -109,6 +111,7 @@ describe("GIVEN setValues function", () => {
 			imageRepository: 'dellemc',
 			monitor: false,
 			certSecretCount: '1',
+      maxVolumesPerNode: '0',
 			controllerCount: '1',
 			volNamePrefix: 'csivol',
 			snapNamePrefix: 'csi-snap',
@@ -176,6 +179,7 @@ describe("GIVEN setValues function", () => {
             </select>
             <input type="text" id="image-repository" value="dellemc">
             <input type="number" id="cert-secret-count" value="1">
+            <input type="number" id="max-volumes-per-node" value="0">
             <input type="number" id="controller-count" value="1">
             <input type="text" id="vol-name-prefix" value="csivol">
             <input type="text" id="snapshot-prefix" value="csi-snap">
@@ -200,6 +204,7 @@ describe("GIVEN setValues function", () => {
 			imageRepository: 'dellemc',
 			monitor: false,
 			certSecretCount: '1',
+      maxVolumesPerNode: '0',
 			controllerCount: '1',
 			volNamePrefix: 'csivol',
 			snapNamePrefix: 'csi-snap',
@@ -267,6 +272,7 @@ describe("GIVEN setValues function", () => {
             </select>
             <input type="text" id="image-repository" value="dellemc">
             <input type="number" id="cert-secret-count" value="0">
+            <input type="number" id="max-volumes-per-node" value="0">
             <input type="number" id="controller-count" value="2">
             <input type="text" id="vol-name-prefix" value="csivol">
             <input type="text" id="snapshot-prefix" value="csi-snap">
@@ -290,6 +296,7 @@ describe("GIVEN setValues function", () => {
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
 			certSecretCount: "0",
+      maxVolumesPerNode: '0',
 			controllerCount: "1",
 			VolnamePrefix: "csivol",
 			SnapnamePrefix: "csi-snap",
@@ -375,7 +382,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: $RESILIENCY_ENABLED
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: $MAX_VOLUMES_PER_NODE
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -580,6 +588,7 @@ describe("GIVEN createYamlString function", () => {
 		csmVersion: "1.6.0",
 		driverVersion: "v2.6.0",
 		imageRepository: "dellemc",
+    maxVolumesPerNode: "0",
 		controllerCount: "1",
 		fsGroupPolicy: "ReadWriteOnceWithFSType",
 		volNamePrefix: "csivol",
@@ -678,7 +687,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -943,7 +953,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -1209,7 +1220,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -1477,7 +1489,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -1744,7 +1757,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:

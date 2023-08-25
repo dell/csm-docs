@@ -94,7 +94,7 @@ describe("GIVEN validateForm functions", () => {
 		expect(validateForm()).toBe(false);
 	});
 
-	test("SHOULD return false IF controller-count value is empty", () => {
+	test("SHOULD return false IF controller-count & max-volumes-per-node value is empty", () => {
 		document.body.innerHTML = `
 			<select id="array" value="powerstore">
 				<option value="powerstore">PowerStore</option>
@@ -108,6 +108,7 @@ describe("GIVEN validateForm functions", () => {
 			</select>
 			<input type="text" id="driver-namespace" value="temp-value">
 			<input type="number" id="controller-count">
+			<input type="number" id="max-volumes-per-node">
 		`;
 
 		expect(validateForm()).toBe(false);
@@ -135,6 +136,7 @@ describe("GIVEN validateForm functions", () => {
 		<input type="text" id="vSphere-fc-host-name">
 		<input type="text" id="vSphere-vCenter-host">
 		<input type="text" id="vSphere-vCenter-cred-secret">
+		<input type="number" id="max-volumes-per-node">
 	`;
 
 	const CONSTANT_PARAM = {
@@ -265,6 +267,7 @@ describe("GIVEN setDefaultValues function", () => {
 	test("SHOULD fill values in dom", () => {
 		document.body.innerHTML = `
 			<input type="text" id="image-repository">
+			<input type="number" id="max-volumes-per-node">
 			<input type="number" id="controller-count">
 			<input type="text" id="vol-name-prefix">
 			<input type="text" id="snapshot-prefix">
@@ -281,6 +284,7 @@ describe("GIVEN setDefaultValues function", () => {
 		const testCSMMap = new Map([
 			["csmVersion", "1.7.0"],
 			["imageRepository", "dellemc"],
+			["maxVolumesPerNode", "0"],
 			["controllerCount", "2"],
 			["volNamePrefix", "csivol"],
 			["snapNamePrefix", "csi-snap"],
@@ -294,6 +298,7 @@ describe("GIVEN setDefaultValues function", () => {
 		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
 
 		expect(document.getElementById("image-repository").value).toEqual("dellemc");
+		expect(document.getElementById("max-volumes-per-node").value).toEqual("0");
 		expect(document.getElementById("controller-count").value).toEqual("2");
 		expect(document.getElementById("csm-version").value).toEqual("1.7.0");
 		expect(document.getElementById("vol-name-prefix").value).toEqual("csivol");

@@ -87,6 +87,8 @@ csi-powerstore:
     #    - "--driverPodLabelValue=dell-storage"
     #    - "--ignoreVolumelessPods=false"
 
+  maxPowerstoreVolumesPerNode: $MAX_VOLUMES_PER_NODE
+
 ## K8S/CSI-PowerMax ATTRIBUTES
 ##########################################
 csi-powermax:
