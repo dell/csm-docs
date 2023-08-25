@@ -109,11 +109,64 @@
                     </div>
                   </div>
 
+                  <div class="row mb-4 observability-operator">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="observability-operator" value="" onchange="onObservabilityOperatorChange()">
+                      <label for="observability-operator" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Observability module">Observability</label>
+                    </div>
+                    <div class="row mt-3 observability child-level-one" id="observability-operator-metrics-wrapper">
+                      <div class="col-sm-12">
+                        <input class="form-check-input" type="checkbox" id="observability-operator-metrics" value="">
+                        <label for="observability-operator-metrics" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Observability Metrics">Observability Metrics</label>
+                      </div>
+                    </div>
+                    <div class="row mt-3 observability child-level-one" id="observability-operator-topology-wrapper">
+                      <div class="col-sm-12">
+                        <input class="form-check-input" type="checkbox" id="observability-operator-topology" value="">
+                        <label for="observability-operator-topology" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Observability Metrics">Observability Topology</label>
+                      </div>
+                    </div>
+                    <div class="row mt-3 observability child-level-one" id="observability-operator-otel-wrapper">
+                      <div class="col-sm-12">
+                        <input class="form-check-input" type="checkbox" id="observability-operator-otel" value="">
+                        <label for="observability-operator-otel" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Observability Otel collector">Observability Otel Collector</label>
+                      </div>
+                    </div>
+                  </div>
+
+
                   <div class="row mb-4 replication-mod">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="replication" value="">
+                      <input class="form-check-input" type="checkbox" id="replication" value="" onchange="onReplicationChange(replicationNote)">
                       <label for="replication" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Replication module">Replication</label>
                     </div>
+                      <div class="was-validated row mt-3 child-level-one replication-operator-clusterid">
+                        <label for="replication-operator-clusterid" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="List of cluster IDs of the targets clusters">Target Cluster ID</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="text" id="replication-operator-clusterid" placeholder="target clusterid" required>
+                        </div>
+                      </div>
+                      <div class="was-validated row mt-3 child-level-one replication-helm-arrayid">
+                          <label for="replication-helm-arrayid" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Target array id for the replication">Target Array ID</label>
+                          <div class="col-sm-9"></div>
+                          <div class="col-sm-2">
+                            <input class="form-control input-lg" type="text" id="replication-helm-arrayid" placeholder="target array id" required>
+                          </div>
+                      </div>
+                      <div class="was-validated row mt-3 child-level-one replication-helm-unisphere">
+                        <label for="replication-helm-unisphere" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Target Unisphere for the replication">Target Unisphere</label>
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-2">
+                          <input class="form-control input-lg" type="text" id="replication-helm-unisphere" placeholder="target unisphere" required>
+                        </div>
+                    </div>
+                      <div class="row child-level-one " id="replication-note-wrapper">
+                        <div class="mt-3 py-2 note">
+                          <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+                          <span class="h6" id="replication-note"></span>
+                        </div>
+                      </div>
                   </div>
 
                   <div class="row mb-4 resiliency col-sm-11">
@@ -355,6 +408,26 @@
                     </div>
                   </div>
 
+                  <div class="managedArrays mb-4">
+                    <div class="row mb-4">
+                      <label for="manage-array-id" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="This refers to PowerMax Symmetrix ID" style="width: 140px;">Managed Array Id</label>
+                      <div class="col-sm-9"></div>
+                      <div class="was-validated col-sm-3">
+                        <input class="form-control input-lg" type="text" id="manage-array-id" placeholder="Example: 000000000001" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <label for="manage-array-endpoint-url" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="This refers to the URL of the Unisphere server managing storageArrayId." style="width: 225px;">Managed Array Endpoint URL</label>
+                      <div class="row">
+                        <div class="was-validated col-sm-3">
+                          <input class="form-control input-lg" type="text" id="manage-array-endpoint-url" placeholder="Example: https://primary-1.unisphe.re:8443" oninput="validateInput(validateForm, CONSTANTS)" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
                   <div class="row mb-3 powermax-csi-reverse-proxy">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="powermax-csi-reverse-proxy" value="" checked>
@@ -381,6 +454,38 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="transport-protocol">
+                    <div class="row mb-4">
+                      <label for="transport-protocol" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the Transport Protocol for the driver to use to provision to nodes. Optional" style="width: 110px;">Transport Protocol</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-3">
+                        <input class="form-control input-lg" type="text" id="transport-protocol" placeholder="Example: ISCSI ,FC or FIBRE " required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4 iscsichap">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="iscsichap" value="" >
+                      <label for="iscsichap" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable ISCSI CHAPfeature">iSCSI CHAP</label>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4 col-sm-11 topology">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="topology" value="" onchange="onTopologyChange(topologyNote)">
+                      <label for="topology" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Node Topology feature">Node Topology</label>
+                    </div>
+                    <div class="row child-level-one" id="topology-note-wrapper">
+                      <div class="mt-3 py-2 note">
+                        <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+                        <span class="h6" id="topology-note"></span>
+                      </div>
+                    </div>
+                  </div>
+
+
 
                   <div class="row mb-4 vSphere">
                     <div class="col-sm-12">

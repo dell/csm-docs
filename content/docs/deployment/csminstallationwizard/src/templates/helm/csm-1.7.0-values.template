@@ -92,12 +92,15 @@ csi-powerstore:
 csi-powermax:
   enabled: $POWERMAX_ENABLED
   global:
-    storageArrays:
-      - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
-        endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
-        backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
-    managementServers:
-      - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
+        storageArrays:
+          - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
+            endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
+            backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
+          - storageArrayId: $TARGET_ARRAY_ID
+            endpoint: $TARGET_UNISPHERE
+        managementServers:
+          - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
+          - endpoint: $TARGET_UNISPHERE
   version: v2.7.0
   images:
     driverRepository: $IMAGE_REPOSITORY
@@ -134,7 +137,7 @@ csi-powermax:
     deployAsSidecar: true
   replication:
     enabled: $REPLICATION_ENABLED
-    image: dellemc/dell-csi-replicator:v1.5.0
+    image: dellemc/dell-csi-replicator:v1.5.0 
   migration:
     enabled: $MIGRATION_ENABLED
     image: dellemc/dell-csi-migrator:v1.1.1

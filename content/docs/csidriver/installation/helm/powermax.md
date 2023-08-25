@@ -31,6 +31,7 @@ The following requirements must be met before installing CSI Driver for Dell Pow
 - Install Helm 3
 - Fibre Channel requirements
 - iSCSI requirements
+- NFS requirements
 - Auto RDM for vSphere over FC requirements
 - Certificate validation for Unisphere REST API calls
 - Mount propagation is enabled on container runtime that is being used
@@ -89,6 +90,13 @@ Set up the iSCSI initiators as follows:
 - The CSI Driver needs the port group names containing the required iSCSI director ports. These port groups must be set up on each Dell PowerMax array. All the port group names supplied to the driver must exist on each Dell PowerMax with the same name.
 
 For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+
+### NFS requirements
+
+CSI Driver for Dell PowerMax supports NFS communication. Ensure that the following requirements are met before you install CSI Driver:
+- Configure the NFS network. Please refer [here](https://dl.dell.com/content/manual57826791-dell-powermax-file-protocol-guide.pdf?language=en-us&ps=true) for more details.
+- PowerMax Embedded Management guest to access Unisphere for PowerMax.
+- Create the NAS server. Please refer [here](https://dl.dell.com/content/manual55638050-dell-powermax-file-quick-start-guide.pdf?language=en-us&ps=true) for more details.
 
 ### Auto RDM for vSphere over FC requirements
 

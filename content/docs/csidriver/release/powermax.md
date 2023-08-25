@@ -9,15 +9,27 @@ description: Release notes for PowerMax CSI driver
 
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
+>Note: File Replication for PowerMax is currently not supported 
+
+
 ### New Features/Changes
-- [Added support for OpenShift 4.13](https://github.com/dell/csm/issues/724)
-- [Added Storage Capacity Tracking feature for Powermax](https://github.com/dell/csm/issues/876)
-- [Make standalone helm chart available from helm repository](https://github.com/dell/csm/issues/877)
-- [Added support for Google Anthos 1.15](https://github.com/dell/csm/issues/937)
-- [Added support for Volume Limits feature](https://github.com/dell/csm/issues/878)
-- [Added support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
+
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#861 - [FEATURE]: CSM for PowerMax file support ](https://github.com/dell/csm/issues/861)
+- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
+- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
+- [#926 - [FEATURE]: Set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
+- [#947 - [FEATURE]: K8S 1.28 support in CSM 1.8](https://github.com/dell/csm/issues/947)
+- [#878 - [FEATURE] CSI 1.5 spec support : Implement Volume Limits](https://github.com/dell/csm/issues/878)
+- [#937 - [FEATURE]: Google Anthos 1.15 support  for PowerMax](https://github.com/dell/csm/issues/937)
+
 ### Fixed Issues
-There are no fixed issues in this release.
+
+- [#887 - [BUG]: Unit tests failing for CSI-PowerMax](https://github.com/dell/csm/issues/887)
+- [#890 - [BUG]: Missing nodeSelector and tolerations entry in sample file ](https://github.com/dell/csm/issues/890)
+- [#907 - [BUG]: Cert Manager should display tooltip about the pre-requisite. ](https://github.com/dell/csm/issues/907)
+- [#951 - [BUG]: Powermax : Static provisioning is failing for NFS volume ](https://github.com/dell/csm/issues/951)
+- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 

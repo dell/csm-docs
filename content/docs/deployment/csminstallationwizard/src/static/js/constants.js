@@ -27,6 +27,7 @@ const CONSTANTS = {
 	POWERSCALE_NAMESPACE: "isilon",
 	UNITY_NAMESPACE: "unity",
 	POWERSTORE_LABEL_VALUE: "csi-powerstore",
+	POWERMAX_LABEL_VALUE: "csi-powermax",
 	POWERSCALE_LABEL_VALUE: "csi-isilon",
 	VALUES: "values",
 	TEMP_DIR: "templates",

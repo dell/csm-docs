@@ -103,6 +103,18 @@ describe("GIVEN setValues function", () => {
             <input type="checkbox" id="leader-election">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+            <input type="text" id="replication-operator-clusterid" value="">
+            <input type="text" id="replication-helm-arrayid" value="">
+            <input type="text" id="replication-helm-unisphere" value="">
+            <input type="text" id="transport-protocol" value="">
+            <input type="checkbox" id="iscsichap">
+            <input type="checkbox" id="observability-operator">
+            <input type="checkbox" id="observability-operator-metrics">
+            <input type="checkbox" id="observability-operator-topology">
+            <input type="checkbox" id="observability-operator-otel">
+            <input type="text" id="manage-array-id">
+            <input type="text" id="manage-array-endpoint-url">
+            <input type="checkbox" id="topology">
         `;
 
 		const expected = {
@@ -140,7 +152,7 @@ describe("GIVEN setValues function", () => {
 			resiliency: false,
 			storageCapacity: false,
 			authorizationSkipCertValidation: false,
-			authorizationProxyHost: '""',
+			authorizationProxyHost: '',
 			certManagerEnabled: false,
 			storageArrayId: undefined,
 			storageArrayEndpointUrl: '""',
@@ -159,7 +171,19 @@ describe("GIVEN setValues function", () => {
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
-			vSphereVCenterCredSecret: undefined
+			vSphereVCenterCredSecret: undefined,
+			targetClusterId: "",
+			targetArrayID: "",
+			targetUnisphere: "",
+			iscsichap: false,
+			manageArrayId: '""',
+			manageArrayEndpointUrl: '""',
+			observabilityOperator: false,
+			observabilityOperatorMetrics: false,
+			observabilityOperatorOtel: false,
+			observabilityOperatorTopology: false,
+			topologyEnabled: false,
+			transportProtocol: "",
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -195,6 +219,18 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
+            <input type="text" id="replication-operator-clusterid" value="">            
+            <input type="text" id="replication-helm-arrayid" value="">            
+            <input type="text" id="replication-helm-unisphere" value="">
+            <input type="text" id="transport-protocol" value="">
+            <input type="checkbox" id="iscsichap">
+            <input type="checkbox" id="observability-operator">
+            <input type="checkbox" id="observability-operator-metrics">
+            <input type="checkbox" id="observability-operator-topology">
+            <input type="checkbox" id="observability-operator-otel">
+            <input type="text" id="manage-array-id">
+            <input type="text" id="manage-array-endpoint-url">
+            <input type="checkbox" id="topology">
             <input type="checkbox" id="leader-election">
         `;
 
@@ -233,7 +269,7 @@ describe("GIVEN setValues function", () => {
 			resiliency: false,
 			storageCapacity: false,
 			authorizationSkipCertValidation: false,
-			authorizationProxyHost: '""',
+			authorizationProxyHost: '',
 			certManagerEnabled: false,
 			storageArrayId: undefined,
 			storageArrayEndpointUrl: '""',
@@ -248,11 +284,23 @@ describe("GIVEN setValues function", () => {
 			volumelessPods: false,
 			clusterPrefix: undefined,
 			portGroups: undefined,
+			targetClusterId: "",
+			targetArrayID: "",
+			targetUnisphere: "",
 			vSphereEnabled: false,
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
 			vSphereVCenterHost: undefined,
-			vSphereVCenterCredSecret: undefined
+			vSphereVCenterCredSecret: undefined,
+			iscsichap: false,
+			manageArrayId: '""',
+			manageArrayEndpointUrl: '""',
+			observabilityOperator: false,
+			observabilityOperatorMetrics: false,
+			observabilityOperatorOtel: false,
+			observabilityOperatorTopology: false,
+			topologyEnabled: false,
+			transportProtocol: "",
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -288,6 +336,9 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-pod-label" value="dell-storage">
             <input type="checkbox" id="volumeless-pods">
             <input type="checkbox" id="connection-validation">
+            <input type="text" id="replication-operator-clusterid" value="">            
+            <input type="text" id="replication-helm-arrayid" value="">
+            <input type="text" id="replication-helm-unisphere" value="">
             <input type="checkbox" id="leader-election">
         `;
 
@@ -390,11 +441,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: $POWERMAX_ENABLED
       global:
         storageArrays:
-          - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
-            endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
-            backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
+          - storageArrayId: ""
+            endpoint: ""
+            backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
-          - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
+          - endpoint: ""
+          - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: $IMAGE_REPOSITORY
@@ -610,7 +664,7 @@ describe("GIVEN createYamlString function", () => {
 		replicationImage: "dellemc/dell-csi-replicator:v1.4.0",
 		authorizationImage: "dellemc/csm-authorization-sidecar:v1.6.0",
 		certManagerEnabled: false,
-		authorizationProxyHost: '""',
+		authorizationProxyHost: '',
 		monitor: false,
 		certSecretCount: 0,
 		storageArrayId: "",
@@ -698,7 +752,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -731,7 +788,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -796,7 +853,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -964,7 +1021,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -997,7 +1057,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1062,7 +1122,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1231,7 +1291,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1264,7 +1327,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1329,7 +1392,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1500,7 +1563,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1533,7 +1599,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1598,7 +1664,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1768,7 +1834,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1801,7 +1870,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1866,7 +1935,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################

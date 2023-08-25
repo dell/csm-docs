@@ -57,7 +57,7 @@ kubectl get csm --all-namespaces
     # sdc-monitor is disabled by default, due to high CPU usage 
       - name: sdc-monitor
         enabled: false
-        image: dellemc/sdc:3.6.0.6
+        image: dellemc/sdc:3.6.1
         envs:
         - name: HOST_PID
           value: "1"
@@ -158,6 +158,8 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
    | dnsPolicy | Determines the DNS Policy of the Node service | Yes | ClusterFirstWithHostNet |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
    | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability. | Yes | 2 |
+   | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
+   | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
    | ***Common parameters for node and controller*** |
    | X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT | Enable list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap) | No | false |
    | X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE | Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted | No | false |
