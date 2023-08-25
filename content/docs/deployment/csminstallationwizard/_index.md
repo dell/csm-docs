@@ -24,7 +24,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 | CSI Unity XT       | 2.8.0     |✔️      |❌        | 
 | CSI Unity XT       | 2.7.0     |✔️      |❌        | 
 
->NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity and PowerFlex drivers.
+>NOTE: The Installation Wizard currently does not support operator-based manifest file generation for Unity XT and PowerFlex drivers.
 
 ## Supported Dell CSM Modules
 

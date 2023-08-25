@@ -24,8 +24,21 @@ const setupTooltipStyle = () => {
 	[...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 };
 
+$(function() {
+	$("#installation-type, #array").change(function() {
+		var installationType = $("#installation-type").val();
+		var array = $("#array").val();
+	
+		$("option").prop("disabled", false);
+	
+		if (installationType === CONSTANTS.OPERATOR || (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY)) {
+		  $("option[value='vxflexos'], option[value='unity'],option[value='operator']").prop("disabled", true);
+		}
+	  });
+});
+
 function onInstallationTypeChange(){
-	driver = document.getElementById("array").value
+	driver = document.getElementById("array").value;
 	driver === "" ? $("#main").hide() : $("#main").show();
 	installationType = document.getElementById("installation-type").value	
 	displayModules(installationType, driver, CONSTANTS)
@@ -257,7 +270,7 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(template);
 	link.style.display = 'inline-block';
-	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, command3, CONSTANTS_PARAM)
+	displayCommandsFunc(releaseName, commandTitle, commandNote,commandNoteOperator, csmOperatorNote, command1, command2, command3, CONSTANTS_PARAM)
 	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
 
 	return true;
@@ -395,7 +408,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	}
 }
 
-function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS) {
+function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue,commandNoteOperatorValue, csmOperatorNoteValue,command1Value, command2Value, command3Value, CONSTANTS) {
 	driverNamespace = document.getElementById("driver-namespace").value;
 	csmVersion = document.getElementById("csm-version").value;
 	installationType = document.getElementById("installation-type").value
@@ -412,23 +425,28 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 			break;
 	}
 	$("#command-text-area").show();
-	$("#reverseProxyNote").hide();
+	$("#reverse-proxy-note").hide();
+	$("#csm-operator-note-wrapper").hide();
 	$("#command-title").html(commandTitleValue);
 	$("#command-note").show();
-	$("#command-note").html(commandNoteValue);
 	
 	if (installationType === 'helm'){
 		$("#command1").html(command1Value);
+		$("#command-note").html(commandNoteValue);
 
 		$("#command2-wrapper").show();
 		var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace", driverNamespace).replace("$version", helmChartVersion);
 		$("#command2").html(command2);
 	} else {
+		$("#csm-operator-note-wrapper").show();
+		$("#csm-operator-note").html(csmOperatorNoteValue);
 		$("#command1").html(command3Value);
+		$("#command-note").html(commandNoteOperatorValue);
 		$("#command2-wrapper").hide();
+
 	}
 	if (document.getElementById("array").value === CONSTANTS.POWERMAX) {
-		$("#reverseProxyNote").show();
+		$("#reverse-proxy-note").show();
 	}
 }
 
