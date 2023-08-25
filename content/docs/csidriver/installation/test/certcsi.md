@@ -62,6 +62,11 @@ storageClasses:
     clone: # is volume cloning supported (true or false)
     snapshot: # is volume snapshotting supported (true or false)
     RWX: # is ReadWriteMany volume access mode supported for non RawBlock volumes (true or false)
+    volumeHealth: false # set this to enable the execution of the VolumeHealthMetricsSuite.
+    # Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar and pass the required arguments.
+    VGS: false # set this to enable the execution of the VolumeGroupSnapSuite.
+    # Additionally, make sure to provide the necessary required arguments such as volumeSnapshotClass, vgs-volume-label, and any others as needed.
+    RWOP: false # set this to enable the execution of the MultiAttachSuite with the AccessMode set to ReadWriteOncePod.
     ephemeral: # if exists, then run EphemeralVolumeSuite
       driver: # driver name for EphemeralVolumeSuite
       fstype: # fstype for EphemeralVolumeSuite
