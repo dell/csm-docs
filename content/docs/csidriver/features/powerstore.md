@@ -432,7 +432,7 @@ The CSI Driver for Dell PowerStore allows users to specify the maximum number of
 The user can set the volume limit for a node by creating a node label `max-powerstore-volumes-per-node` and specifying the volume limit for that node.
 <br/> `kubectl label node <node_name> max-powerstore-volumes-per-node=<volume_limit>`
 
-The user can also set the volume limit for all the nodes in the cluster by specifying the same value for the `maxPowerstoreVolumesPerNode` attribute in values.yaml during Helm installation. In the case of a driver installed via the operator, this attribute can be modified in the sample file for PowerStore, which is located at https://github.com/dell/csm-operator/blob/main/samples/ by editing the `X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE` parameter.
+The user can also set the volume limit for all the nodes in the cluster by specifying the same value for the `maxPowerstoreVolumesPerNode` attribute in values.yaml during Helm installation. In the case of driver installed via the operator, this attribute can be modified in the sample file for PowerStore, which is located at https://github.com/dell/csm-operator/blob/main/samples/ by editing the `X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE` parameter.
 
 >**NOTE:** <br>The default value of `maxPowerstoreVolumesPerNode` is 0. <br>If `maxPowerstoreVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified in the `maxPowerstoreVolumesPerNode` attribute is applicable to all the nodes in the cluster for which the node label `max-powerstore-volumes-per-node` is not set.
 
