@@ -708,7 +708,7 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue,command1Value, command2Value, command3Value, CONSTANTS);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");

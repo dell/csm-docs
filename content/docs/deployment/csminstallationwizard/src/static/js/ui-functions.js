@@ -32,9 +32,9 @@ $(function() {
 		$("option").prop("disabled", false);
 	
 		if (installationType === CONSTANTS.OPERATOR || (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY)) {
-		  $("option[value='vxflexos'], option[value='unity'],option[value='operator']").prop("disabled", true);
+			$("option[value='vxflexos'], option[value='unity'],option[value='operator']").prop("disabled", true);
 		}
-	  });
+	});
 });
 
 function onInstallationTypeChange(){
@@ -270,7 +270,7 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(template);
 	link.style.display = 'inline-block';
-	displayCommandsFunc(releaseName, commandTitle, commandNote,commandNoteOperator, csmOperatorNote, command1, command2, command3, CONSTANTS_PARAM)
+	displayCommandsFunc(releaseName, commandTitle, commandNote, commandNoteOperator, csmOperatorNote, command1, command2, command3, CONSTANTS_PARAM)
 	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
 
 	return true;
@@ -408,7 +408,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	}
 }
 
-function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue,commandNoteOperatorValue, csmOperatorNoteValue,command1Value, command2Value, command3Value, CONSTANTS) {
+function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS) {
 	driverNamespace = document.getElementById("driver-namespace").value;
 	csmVersion = document.getElementById("csm-version").value;
 	installationType = document.getElementById("installation-type").value
