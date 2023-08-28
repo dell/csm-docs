@@ -109,11 +109,15 @@ Procedure
       * If the user is using a complex K8s version like "v1.24.6-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
             kubeVersion: ">= 1.24.0-0 < 1.29.0-0"
 
-2. Copy the `helm/csi-unity/values.yaml` into a file named `myvalues.yaml` in the same directory of `csi-install.sh`, to customize settings for installation.
+2. Get the required values.yaml using below command
 
-3. Edit `myvalues.yaml` to set the following parameters for your installation:
+```bash
+cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b <version> https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-unity/values.yaml
+```
+
+3. Edit `values.yaml` to set the following parameters for your installation:
    
-    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-unity/values.yaml) file in this repository.
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
@@ -256,8 +260,6 @@ Procedure
 
 7. Run the command to proceed with the installation using bash script.
    ```bash
-   cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b csi-unity-2.8.0  https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-unity/values.yaml &&
-
    ./csi-install.sh --namespace unity --values ./myvalues.yaml
    ```
     A successful installation must display messages that look similar to the following samples:
