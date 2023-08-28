@@ -49,7 +49,7 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 | CSI PowerStore     | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12, 4.12 EUS  |
 | CSI PowerStore     | 2.8.0     | v2.8.0         | 1.26, 1.27, 1.28     | 4.12, 4.12 EUS, 4.13  |
 
-</br
+</br>
 
 **Dell CSI Operator can be installed via OLM (Operator Lifecycle Manager) and manual installation.**
 
