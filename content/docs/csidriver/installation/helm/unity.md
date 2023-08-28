@@ -92,7 +92,7 @@ Install CSI Driver for Unity XT using this procedure.
 
  * As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command 
    ```bash
-   git clone -b v2.7.0 https://github.com/dell/csi-unity.git
+   git clone -b v2.8.0 https://github.com/dell/csi-unity.git
    ```
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
@@ -107,7 +107,7 @@ Procedure
       * ArrayId corresponds to the serial number of Unity XT array.
       * Unity XT Array username must have role as Storage Administrator to be able to perform CRUD operations.
       * If the user is using a complex K8s version like "v1.24.6-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
-            kubeVersion: ">= 1.24.0-0 < 1.28.0-0"
+            kubeVersion: ">= 1.24.0-0 < 1.29.0-0"
 
 2. Copy the `helm/csi-unity/values.yaml` into a file named `myvalues.yaml` in the same directory of `csi-install.sh`, to customize settings for installation.
 
@@ -256,6 +256,8 @@ Procedure
 
 7. Run the command to proceed with the installation using bash script.
    ```bash
+   cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b csi-unity-2.8.0  https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-unity/values.yaml &&
+
    ./csi-install.sh --namespace unity --values ./myvalues.yaml
    ```
     A successful installation must display messages that look similar to the following samples:
@@ -320,6 +322,14 @@ Procedure
     ------------------------------------------------------
     ```
 
+    OR 
+    To install particular version 
+    ```bash
+    cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b <version> https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-unity/values.yaml &&
+
+    ./csi-install.sh --namespace unity --values my-unity-settings.yaml --helm-charts-version <version>
+    ```
+
     Results:
 
     At the end of the script unity-controller Deployment and DaemonSet unity-node will be ready, execute command `kubectl get pods -n unity` to get the status of the pods and you will see the following:
@@ -330,7 +340,7 @@ Procedure
     **Note**:
     To install nightly or latest csi driver build using bash script use this command:
     ```bash
-    /csi-install.sh --namespace unity --values ./myvalues.yaml --version latest
+    /csi-install.sh --namespace unity --values ./myvalues.yaml --version latest --helm-charts-version <version>
     ```
 
 8. You can also install the driver using standalone helm chart by cloning the centralised helm charts and running the helm install command as shown.
