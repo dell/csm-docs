@@ -361,6 +361,20 @@
                     </div>
                   </div>
 
+                  <div class="was-validated row mb-4 max-volumes-per-node">
+                    <label for="max-volumes-per-node" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Default value for maximum number of volumes that controller can publish to the node." style="width: 200px;">Max Volumes Per Node</label>
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <input class="form-control input-sm" type="number" id="max-volumes-per-node" min="0" oninput="validateInput(validateForm, CONSTANTS)">
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-max-volumes-per-node" onclick="resetMaxVolumesPerNode(csmMap)">Reset to default</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <hr>
                   <div class="row mb-3">
                     <div class="col-sm-12 h5">Other configurations for installation</div>

@@ -45,6 +45,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.imageRepository = document.getElementById("image-repository").value;
 	DriverValues.monitor = $("#monitor").prop('checked') ? true : false;
 	DriverValues.certSecretCount = document.getElementById("cert-secret-count").value;
+	DriverValues.maxVolumesPerNode = document.getElementById("max-volumes-per-node").value;
 	DriverValues.controllerCount = document.getElementById("controller-count").value;
 	DriverValues.volNamePrefix = document.getElementById("vol-name-prefix").value;
 	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
@@ -129,6 +130,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 
 function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) {
 	yamlTpl = yamlTpl.replaceAll("$IMAGE_REPOSITORY", yamlTplValues.imageRepository);
+	yamlTpl = yamlTpl.replaceAll("$MAX_VOLUMES_PER_NODE", yamlTplValues.maxVolumesPerNode);
 	yamlTpl = yamlTpl.replaceAll("$CONTROLLER_COUNT", yamlTplValues.controllerCount);
 	yamlTpl = yamlTpl.replaceAll("$VOLUME_NAME_PREFIX", yamlTplValues.volNamePrefix);
 	yamlTpl = yamlTpl.replaceAll("$SNAP_NAME_PREFIX", yamlTplValues.snapNamePrefix);
