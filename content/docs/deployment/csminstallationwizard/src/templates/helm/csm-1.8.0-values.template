@@ -21,7 +21,7 @@ csi-powerstore:
     vgsnapshot:
       enabled: $VG_SNAPSHOT_ENABLED
       image: dellemc/csi-volumegroup-snapshotter:v1.2.0
-    metadataretriever: dellemc/csi-metadata-retriever:v1.4.0
+    metadataretriever: dellemc/csi-metadata-retriever:v1.5.0
     snapshot:
       enabled: $SNAPSHOT_ENABLED
       snapNamePrefix: $SNAP_NAME_PREFIX
@@ -62,7 +62,7 @@ csi-powerstore:
     enabled: $STORAGE_CAPACITY_ENABLED
   podmon:
     enabled: $RESILIENCY_ENABLED
-    image: dellemc/podmon:v1.6.0
+    image: dellemc/podmon:v1.7.0
     #controller:
     #  args:
     #    - "--csisock=unix:/var/run/csi/csi.sock"

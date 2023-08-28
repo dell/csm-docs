@@ -45,11 +45,11 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 | CSI Unity XT       | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI Unity XT       | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
 | CSI Unity XT       | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12, 4.12 EUS  |
-| CSI PowerStore     | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerStore     | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerStore     | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12, 4.12 EUS  |
+| CSI PowerStore     | 2.8.0     | v2.8.0         | 1.26, 1.27, 1.28     | 4.12, 4.12 EUS, 4.13  |
 
-</br>
+</br
 
 **Dell CSI Operator can be installed via OLM (Operator Lifecycle Manager) and manual installation.**
 
@@ -285,7 +285,7 @@ The below notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.7.0
+        configVersion: v2.8.0
    ```
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
