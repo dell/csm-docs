@@ -83,9 +83,6 @@ node:
     enabled: false
 ```
 
-
-
-
 ### (Optional) Replication feature Requirements
 
 Applicable only if you decided to enable the Replication feature in `values.yaml`
