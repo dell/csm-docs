@@ -431,7 +431,8 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".authorization").hide();
 			$(".fsGroupPolicy").show();	
 			$(".cert-manager").hide();
-			$(".storage-capacity").show();	
+			$(".storage-capacity").show();
+			$(".max-volumes-per-node").show();	
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.UNITY_NAMESPACE;
 			break;
 	}

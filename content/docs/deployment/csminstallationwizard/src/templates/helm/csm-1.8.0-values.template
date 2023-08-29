@@ -405,6 +405,7 @@ csi-unity:
     #    effect: "NoSchedule"
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
+  maxUnityVolumesPerNode: $MAX_VOLUMES_PER_NODE
   podmon:
     enabled: $RESILIENCY_ENABLED
     image: dellemc/podmon:v1.7.0
