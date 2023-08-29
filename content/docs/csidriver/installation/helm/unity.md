@@ -109,7 +109,7 @@ Procedure
       * If the user is using a complex K8s version like "v1.24.6-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
             kubeVersion: ">= 1.24.0-0 < 1.29.0-0"
 
-2. Get the required values.yaml using below command
+2. Get the required values.yaml using the command below:
 
 ```bash
 cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b <version> https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-unity/values.yaml
