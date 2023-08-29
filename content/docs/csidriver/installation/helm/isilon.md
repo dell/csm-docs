@@ -58,7 +58,6 @@ To enable this feature, add the below block to the driver manifest before instal
 health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
 volume stats value under node should be set to true.
 
-
 ```yaml
 controller:
   healthMonitor:
