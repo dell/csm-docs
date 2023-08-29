@@ -55,7 +55,7 @@ The installation process involves the creation of a `Subscription` object either
 
 ![OpenShit Operator Hub CSM install](operator_hub_install.gif)
 
->NOTE: Dell CSM Operator is distributed as a `Certified` & `Community` versions. Both are the exact same code and supported by Dell Technologies, the only difference is that the `Certified` version is validated by RedHat. The `Certified` version is often released couple of days/weeks after the `Community` version.
+>NOTE: Dell CSM Operator is distributed as both `Certified` & `Community` editions. Both editions have the same codebase and are supported by Dell Technologies, the only difference is that the `Certified` version is validated by RedHat. The `Certified` version is often released couple of days/weeks after the `Community` version.
 
 ### Manual Installation on a cluster without OLM
 
