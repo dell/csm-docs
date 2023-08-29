@@ -83,10 +83,7 @@ node:
     enabled: false
 ```
 
-*NOTE*: To enable this feature to existing driver OR enable this feature while upgrading the driver versions, 
-follow either of the way.
-1. Reinstall of Driver
-2. Upgrade the driver smoothly with "--upgrade" option
+
 
 
 ### (Optional) Replication feature Requirements
