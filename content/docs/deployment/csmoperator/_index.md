@@ -30,6 +30,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0         | ✔ 1.5.0           | ✔ 1.6.0        |
 | CSI PowerFlex      | 2.6.0   | ✔ 1.6.0           | ✔ 1.4.0         | ✔ 1.5.0           | ❌              |
 | CSI PowerFlex      | 2.5.0   | ✔ 1.5.0           | ❌              | ✔ 1.4.0           | ❌              |
+| CSI PowerStore     | 2.8.0   | ❌                | ❌              | ❌                 | ✔ 1.7.0        |
 | CSI PowerStore     | 2.7.0   | ❌                | ❌              | ❌                 | ✔ 1.6.0        |
 | CSI PowerStore     | 2.6.0   | ❌                | ❌              | ❌                 | ❌              |
 | CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0         | ❌                 | ❌              |
@@ -143,7 +144,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 * Pulling and saving container images
 
    dellemc/csi-isilon:v2.8.0
-   dellemc/csi-metadata-retriever:v1.4.0
+   dellemc/csi-metadata-retriever:v1.5.0
    dellemc/csipowermax-reverseproxy:v2.6.0
    dellemc/csi-powermax:v2.8.0
    dellemc/csi-powerstore:v2.8.0
@@ -258,7 +259,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
 * Tagging and pushing images
 
    dellemc/csi-isilon:v2.8.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
-   dellemc/csi-metadata-retriever:v1.4.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.4.0
+   dellemc/csi-metadata-retriever:v1.5.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
    ...
    ...
    registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
@@ -268,7 +269,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
 * Preparing files within /root/dell-csm-operator-bundle
 
    changing: dellemc/csi-isilon:v2.8.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
-   changing: dellemc/csi-metadata-retriever:v1.4.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.4.0
+   changing: dellemc/csi-metadata-retriever:v1.5.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
    ...
    ...
    changing: registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
