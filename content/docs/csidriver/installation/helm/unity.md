@@ -117,7 +117,7 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b <version> https:
 
 3. Edit `values.yaml` to set the following parameters for your installation:
    
-    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://raw.githubusercontent.com/dell/helm-charts/main/charts/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/main/charts/csi-unity/values.yaml) file in this repository.
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
