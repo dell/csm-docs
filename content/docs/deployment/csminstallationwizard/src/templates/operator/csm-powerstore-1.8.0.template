@@ -186,7 +186,6 @@ spec:
             - "--leaderelection=$LEADER_ELECTION"
             - "--driverPodLabelValue=$DRIVER_POD_LABEL_VALUE"
             - "--ignoreVolumelessPods=$IGNORE_VOLUMELESS_PODS"
-            - "--arrayConnectivityConnectionLossThreshold=$ARRAY_THRESHOLD"
             # Below 4 args should not be modified.
             - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
             - "--mode=node"
