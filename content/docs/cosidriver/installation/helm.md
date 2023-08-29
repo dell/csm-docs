@@ -63,11 +63,10 @@ Installing any of the CSI Driver components using Helm requires a few utilities 
 > - Whenever the *configuration.secretName* parameter changes in *my-cosi-values.yaml* user needs to reinstall the driver.
 > - Whenever the *configuration.data* parameter changes in *my-cosi-values.yaml* user needs to reinstall the driver.
 
-6. Install the driver by running `helm install dell-cosi ./cosi --namespace=dell-cosi --create-namespace --values ./my-cosi-values.yaml --set-file configuration.data=./my-cosi-configuration.yaml` (assuming that the current working directory is _charts_ and _my-cosi-settings.yaml_ is also present under _helm_ directory).
-
+6. Install the driver by running the following command (assuming that the current working directory is _charts_ and _my-cosi-settings.yaml_ is also present in _charts_ directory).
 
 ```sh
-helm install dell-cosi ./helm/cosi --namespace=dell-cosi --values ./my-cosi-values.yaml --set-file configuration.data=./my-cosi-configuration.yaml
+helm install dell-cosi ./cosi --namespace=dell-cosi --values ./my-cosi-values.yaml --set-file configuration.data=./my-cosi-configuration.yaml
 ```
 
 ## Bucket Classes, Bucket Access Classes
