@@ -98,7 +98,7 @@ csi-powermax:
       - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
         endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
         backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
-      - storageArrayId: $TARGET_ARRAY_ID
+      - storageArrayId: "$TARGET_ARRAY_ID"
         endpoint: $TARGET_UNISPHERE
     managementServers:
       - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
