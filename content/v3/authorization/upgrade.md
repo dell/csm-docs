@@ -6,6 +6,10 @@ description: >
   Upgrade Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+{{% /pageinfo %}}
+
 This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:
 - Upgrading the CSM for Authorization proxy server
 - Upgrading the Dell CSI drivers with CSM for Authorization enabled

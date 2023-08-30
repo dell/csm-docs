@@ -6,6 +6,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Uninstallation
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+{{% /pageinfo %}}
+
 This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization. 
 
 ## Uninstalling the RPM

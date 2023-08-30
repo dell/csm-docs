@@ -6,6 +6,14 @@ Description: >
   Troubleshooting guide
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+{{% /pageinfo %}}
+
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 1.9.
+{{% /pageinfo %}}
+
 ## RPM Deployment
 - [The Failure of Building an Authorization RPM](#The-Failure-of-Building-an-Authorization-RPM)
 - [Running `karavictl tenant` commands result in an HTTP 504 error](#running-karavictl-tenant-commands-result-in-an-http-504-error)

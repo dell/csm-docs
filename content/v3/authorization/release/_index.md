@@ -6,6 +6,10 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for authorization
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 1.9.
+{{% /pageinfo %}}
+
 ## Release Notes - CSM Authorization 1.4.0
 
 ### New Features/Changes

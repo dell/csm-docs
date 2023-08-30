@@ -6,6 +6,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM deployment
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 1.9.
+{{% /pageinfo %}}
+
 This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:
 - Deploying the CSM for Authorization proxy server, to be controlled by storage administrators
 - Configuring one to many [supported](../../../authorization#supported-csi-drivers) Dell CSI drivers with CSM for Authorization

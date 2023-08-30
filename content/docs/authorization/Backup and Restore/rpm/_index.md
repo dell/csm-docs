@@ -5,6 +5,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM backup and restore
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+{{% /pageinfo %}}
+
 ## Roles
 
 Role data is stored in the `common` Config Map in the underlying `k3s` deployment.
