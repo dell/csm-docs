@@ -24,16 +24,17 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.7.0   | ✔ 1.8.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.7.0       |
+| CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.7.0       |
+| CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
 | CSI PowerScale     | 2.6.0   | ✔ 1.6.0           | ✔ 1.4.0        | ✔ 1.5.0           | ❌            |
-| CSI PowerScale     | 2.5.0   | ✔ 1.5.0           | ✔ 1.3.0        | ✔ 1.4.0           | ❌            |
-| CSI PowerFlex      | 2.7.0   | ✔ 1.8.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.7.0       |
+| CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.7.0       |
+| CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
 | CSI PowerFlex      | 2.6.0   | ✔ 1.6.0           | ✔ 1.4.0        | ✔ 1.5.0           | ❌            |
-| CSI PowerFlex      | 2.5.0   | ✔ 1.5.0           | ❌             | ✔ 1.4.0           | ❌            |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
-| CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
+| CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
 | CSI PowerStore     | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
-| CSI PowerMax       | 2.7.0   | ✔ 1.8.0           | ✔ 1.5.0        | ❌                | ❌            |
+| CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.5.0        | ❌                | ❌            |
+| CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.7.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
