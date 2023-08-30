@@ -27,6 +27,7 @@ const {
 	onNodeSelectorChange,
 	onCopyButtonClickHandler,
 	resetImageRepository,
+	resetMaxVolumesPerNode,
 	resetControllerCount,
 	resetVolNamePrefix,
 	resetSnapNamePrefix,
@@ -380,6 +381,22 @@ describe("GIVEN resetImageRepository function", () => {
 		resetImageRepository(testCSMMap);
 
 		expect(document.getElementById("image-repository").value).toEqual("dellemc");
+	});
+});
+
+describe("GIVEN resetMaxVolumesPerNode function", () => {
+	const testCSMMap = new Map([
+		["maxVolumesPerNode", "0"]
+	]);
+
+	test("SHOULD invoke resetMaxVolumesPerNode function", () => {
+		document.body.innerHTML = `
+            <input type="number" id="max-volumes-per-node">
+        `;
+
+		resetMaxVolumesPerNode(testCSMMap);
+
+		expect(document.getElementById("max-volumes-per-node").value).toEqual("0");
 	});
 });
 

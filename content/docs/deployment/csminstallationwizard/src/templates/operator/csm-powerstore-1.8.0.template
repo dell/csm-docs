@@ -131,7 +131,7 @@ spec:
         # Allowed values: Any value greater than or equal to 0
         # Default value: "0"
         - name: X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE
-          value: "0"
+          value: "$MAX_VOLUMES_PER_NODE"
 
       # nodeSelector: Define node selection constraints for node pods.
       # For the pod to be eligible to run on a node, the node must have each
@@ -186,7 +186,6 @@ spec:
             - "--leaderelection=$LEADER_ELECTION"
             - "--driverPodLabelValue=$DRIVER_POD_LABEL_VALUE"
             - "--ignoreVolumelessPods=$IGNORE_VOLUMELESS_PODS"
-            - "--arrayConnectivityConnectionLossThreshold=$ARRAY_THRESHOLD"
             # Below 4 args should not be modified.
             - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
             - "--mode=node"

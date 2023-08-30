@@ -37,6 +37,9 @@ function validateForm(CONSTANTS_PARAM) {
 	if (document.getElementById('controller-count').value.trim() < 1) {
 		return false;
 	}
+	if (document.getElementById('max-volumes-per-node').value.trim() < 0) {
+		return false;
+	}
 
 	if ($("#installation-type").val() === CONSTANTS.OPERATOR && ($("#array").val() === CONSTANTS.POWERFLEX || $("#array").val() === CONSTANTS.UNITY)) {
 		return false;
@@ -111,6 +114,7 @@ function setDefaultValues(defaultValuesParam, csmMapValues) {
 	setMap(defaultValuesParam);
 	document.getElementById("image-repository").value = csmMapValues.get("imageRepository");
 	document.getElementById("csm-version").value = String(csmMapValues.get("csmVersion"));
+	document.getElementById("max-volumes-per-node").value = String(csmMapValues.get("maxVolumesPerNode"));
 	document.getElementById("controller-count").value = String(csmMapValues.get("controllerCount"));
 	document.getElementById("vol-name-prefix").value = csmMapValues.get("volNamePrefix");
 	document.getElementById("snapshot-prefix").value = csmMapValues.get("snapNamePrefix");

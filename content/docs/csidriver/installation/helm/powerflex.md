@@ -102,7 +102,7 @@ Note that the namespace can be any user-defined name that follows the convention
     | skipCertificateValidation  | Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface. | true     | true    |
     | isDefault | An array having isDefault=true is for backward compatibility. This parameter should occur once in the list. | false    | false   |
     | mdm       | mdm defines the MDM(s) that SDC should register with on start. This should be a list of MDM IP addresses or hostnames separated by comma. | true     | -       |
-    | nasName       | nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version >= 4.0. | false     | -       |
+    | nasName       | nasName defines what NAS should be used for NFS volumes. NFS volumes are supported on arrays version 4.0.x | false     | none       |
     | nfsAcls       | nfsAcls enables setting permissions on NFS mount directory. This value will be used if a storage class does not have the NFS ACL (nfsAcls) parameter specified. | false     | 0777       |
 
     Example: `samples/secret.yaml`
@@ -115,6 +115,18 @@ Note that the namespace can be any user-defined name that follows the convention
   skipCertificateValidation: true 
   isDefault: true 
   mdm: "10.0.0.3,10.0.0.4"
+```
+Example: `samples/secret.yaml` for PowerFlex storage system v4.0.x
+```yaml
+- username: "admin"
+  password: "Password123"
+  systemID: "2b11bb111111bb1b"
+  endpoint: "https://127.0.0.2"
+  skipCertificateValidation: true
+  isDefault: true
+  mdm: "10.0.0.3,10.0.0.4"
+  nasName : "nasServer"
+  nfsAcls: "0777"
 ```
  *NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.* 
 
@@ -172,7 +184,7 @@ Use the below command to replace or update the secret:
 | enablesnapshotcgdelete | A boolean that, when enabled, will delete all snapshots in a consistency group everytime a snap in the group is deleted. | Yes | false |
 | enablelistvolumesnapshot | A boolean that, when enabled, will allow list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap). It is recommend this be false unless instructed otherwise. | Yes | false |
 | allowRWOMultiPodAccess | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | Yes | false |
-| nfsAcls | Setting nfsAcls enables setting permissions on NFS mount directory. This value acts as default value for NFS ACL (nfsAcls), if not specified for an array config in secret. NFS volumes are supported on arrays version >= 4.0. Allowed values: for Unix mode: valid octal mode number like: "0777", "777", "0755"; for NFSv4 acls: valid NFSv4 acls, seperated by comma, like: "A::OWNER@:RWX,A::GROUP@:RWX", "A::OWNER@:rxtncy" | No | " " |
+| nfsAcls | Setting nfsAcls enables setting permissions on NFS mount directory. This value acts as default value for NFS ACL (nfsAcls), if not specified for an array config in secret. NFS volumes are supported on arrays version 4.0.x. Allowed values: for Unix mode: valid octal mode number like: "0777", "777", "0755"; for NFSv4 acls: valid NFSv4 acls, seperated by comma, like: "A::OWNER@:RWX,A::GROUP@:RWX", "A::OWNER@:rxtncy" | No | "0777" |
 | externalAccess | Setting externalAccess allows to specify additional entries for host to access NFS volumes. Both single IP address and subnet are valid entries. Allowed Values: x.x.x.x/xx or x.x.x.x. | No | " " |
 | enableQuota | A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume. | No | false |
 | **controller**           | This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](../../../features/powerflex#controller-ha) for Powerflex specifics.              | -        | -       |

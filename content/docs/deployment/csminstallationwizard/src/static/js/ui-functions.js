@@ -241,6 +241,10 @@ const resetControllerCount = csmMapValue => {
 	document.getElementById("controller-count").value = String(csmMapValue.get("controllerCount"));
 }
 
+const resetMaxVolumesPerNode = csmMapValue => {
+	document.getElementById("max-volumes-per-node").value = String(csmMapValue.get("maxVolumesPerNode"));
+}
+
 const resetVolNamePrefix = csmMapValue => {
 	document.getElementById("vol-name-prefix").value = String(csmMapValue.get("volNamePrefix"));
 }
@@ -321,6 +325,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".resizer").show();
 	$(".snapshot-feature").show();
 	$(".resiliency-operator").hide();
+	$(".max-volumes-per-node").hide();
 	$(".observability-operator").hide();
 	$(".managedArrays").hide();
 	$(".transport-protocol").hide();
@@ -336,6 +341,9 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$("#authorization").prop('checked', false);
 			$(".storage-capacity").show();
 			$(".resiliency").show();
+			if (document.getElementById("csm-version").value !== "1.7.0") {
+				$(".max-volumes-per-node").show();
+			}
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSTORE_NAMESPACE;
 			if (installationType === 'operator'){
 				$(".resiliency").hide();
@@ -517,6 +525,7 @@ if (typeof exports !== 'undefined') {
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
 		resetImageRepository,
+		resetMaxVolumesPerNode,
 		resetControllerCount,
 		resetNodeSelectorLabel,
 		resetDriverNamespace,
