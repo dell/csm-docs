@@ -110,7 +110,7 @@ connections:
     # How to:
     #   1. Login into ObjectScale Portal;
     #   2. From the menu on left side of the screen select 'Administration' tab;
-    #   3. After unfolding 'Administration' tab enter 'ObjectScale' page;
+    #   3. Expand the 'Administration' tab, and select 'ObjectScale';
     #   4. Select one of the object stores visible in the table, and click its name;
     #   5. You should see 'Summary' of that object store.
     #   6. In the 'Management Service details' section, you will see value under 'IP address' column.
