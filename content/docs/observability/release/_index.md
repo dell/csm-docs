@@ -9,6 +9,7 @@ Description: >
 ## Release Notes - CSM Observability 1.5.0
 
 
+
 ### New Features/Changes
 
 - [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)

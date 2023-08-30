@@ -9,6 +9,7 @@ Description: >
 ## Release Notes - CSM Authorization 1.7.0
 
 
+
 ### New Features/Changes
 
 - [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
