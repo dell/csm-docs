@@ -18,7 +18,7 @@ YAML files can have comments, which are lines in the file that begin with the `#
 ## Configuration file example
 
 ```yaml
-# This is example of a configuration file. You MUST edit the file before using it in your environment.
+# This is an example of a configuration file. You MUST edit the file before using it in your environment.
 
 # List of connections to object storage platforms that is used for object storage provisioning.
 connections:
@@ -65,7 +65,7 @@ connections:
     # How to:
     #   1. Login into ObjectScale Portal;
     #   2. From the menu on left side of the screen select 'Administration' tab;
-    #   3. After unfolding 'Administration' tab enter 'ObjectScale' page;
+    #   3. Expand the 'Administration tab and select 'ObjectScale';
     #   4. Select 'Federation' tab;
     #   5. In the table you will see value under 'ObjectScale ID' column.
     #
@@ -78,7 +78,7 @@ connections:
     # How to:
     #   1. Login into ObjectScale Portal;
     #   2. From the menu on left side of the screen select 'Administration' tab;
-    #   3. After unfolding 'Administration' tab enter 'ObjectScale' page;
+    #   3. Expand the 'Administration tab and select 'ObjectScale';
     #   4. Select one of the object stores visible in the table, and click its name;
     #   5. You should see 'Summary' of that object store.
     #   6. In the 'General' section, you will see value under 'Object store ID' column.
@@ -92,9 +92,9 @@ connections:
     # How to:
     #   1. Login into ObjectScale Portal;
     #   2. From the menu on left side of the screen select 'Administration' tab;
-    #   3. After unfolding 'Administration' tab enter 'ObjectScale' page;
+    #   3. Expand the 'Administration tab and select 'ObjectScale';
     #   4. Select 'Federation' tab;
-    #   5. In the table you will see one or more values, unroll selected one;
+    #   5. In the table you will see one or more values, expand the selected value;
     #   6. In the table, you will now see 'External Endpoint' value associated with 'objectscale-gateway-internal'.
     #
     # Valid values:
@@ -157,7 +157,7 @@ connections:
         # How to:
         #   1. Login into ObjectScale Portal;
         #   2. From the menu on left side of the screen select 'Administration' tab;
-        #   3. After unfolding 'Administration' tab enter 'ObjectScale' page;
+        #   3. Expand the 'Administration tab and select 'ObjectScale';
         #   4. Select one of the object stores visible in the table, and click its name;
         #   5. You should see 'Summary' of that object store.
         #   6. In the 'S3 Service details' section, you will see value under 'IP address' column.
@@ -236,7 +236,7 @@ connections:
       #     cat client.crt | base64 > client.crt.b64
       #   You can then open the 'client.crt.b64' file, copy it contents, and paste to the configuration file
       #
-      # It is required, only if the server requires client authentication.
+      # It is required only if the server requires client authentication.
       # It is mutually required if the field client-key has a value.
       #
       # REQUIRED:
@@ -279,7 +279,7 @@ connections:
       #     cat client.key | base64 > client.key.b64
       #   You can then open the 'client.key.b64' file, copy it contents, and paste to the configuration file
       #
-      # It is required, only if the server requires client authentication.
+      # It is required only if the server requires client authentication.
       # It is mutually required if the field client-cert has a value.
       #
       # REQUIRED:
