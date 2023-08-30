@@ -69,13 +69,13 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 3. Look over all the fields in the generated `values.yaml` and fill in/adjust any as needed.
 
->NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
+>NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
 
-4. If Observability is checked in the wizard, only the sidecar is enabled. Please refer to [Observability](../../observability/deployment/#post-installation-dependencies) to scrape metrics to Prometheus and load the Grafana dashboards.
+4. If Observability is checked in the wizard, only the sidecar is enabled. Refer to [Observability](../../observability/deployment/#post-installation-dependencies) to export metrics to Prometheus and load the Grafana dashboards.
 
-5. If Authorization is checked in the wizard, only the sidecar is enabled. Please refer to [Authorization](../../authorization/deployment/helm/) to install and configure the CSM Authorization Proxy Server.
+5. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../authorization/deployment/helm/) to install and configure the CSM Authorization Proxy Server.
 
-6. If your Kubernetes distribution doesn't have Volume Snapshot feature enabled, please refer to [this section](../../snapshots) to install the Volume Snapshot CRDs and the default snapshot controller.
+6. If your Kubernetes distribution doesn't have Volume Snapshot feature enabled, Refer to [this section](../../snapshots) to install the Volume Snapshot CRDs and the default snapshot controller.
 
 7. Install the Helm chart.
 
@@ -96,13 +96,13 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 2. Look over all the fields in the generated `values.yaml` and fill in/adjust any as needed.
 
->NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
+>NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
 
-3. If Observability is checked in the wizard, only the sidecar is enabled. Please refer to [Observability](../../observability/deployment/#post-installation-dependencies) to scrape metrics to Prometheus and load the Grafana dashboards.
+3. If Observability is checked in the wizard, only the sidecar is enabled. Refer to [Observability](../../observability/deployment/#post-installation-dependencies) to export metrics to Prometheus and load the Grafana dashboards.
 
-4. If Authorization is checked in the wizard, only the sidecar is enabled. Please refer to [Authorization](../../authorization/deployment/helm/) to install and configure the CSM Authorization Proxy Server.
+4. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../authorization/deployment/helm/) to install and configure the CSM Authorization Proxy Server.
 
-5. If Replication is enabled, please refer to [Replication](../csmoperator/modules/replication).
+5. If Replication is enabled, refer to [Replication](../csmoperator/modules/replication).
 
 6. Install the Operator.
 
