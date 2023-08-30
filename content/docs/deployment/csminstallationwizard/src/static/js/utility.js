@@ -38,6 +38,10 @@ function validateForm(CONSTANTS_PARAM) {
 		return false;
 	}
 
+	if ($("#installation-type").val() === CONSTANTS.OPERATOR && ($("#array").val() === CONSTANTS.POWERFLEX || $("#array").val() === CONSTANTS.UNITY)) {
+		return false;
+	}
+
 	const powermaxSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERMAX;
 	const vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
 

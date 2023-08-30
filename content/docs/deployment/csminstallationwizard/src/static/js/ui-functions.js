@@ -25,22 +25,42 @@ const setupTooltipStyle = () => {
 };
 
 $(function() {
-	$("#installation-type, #array").change(function() {
+
+	$("#installation-type, #array").focus(function() {
 		var installationType = $("#installation-type").val();
 		var array = $("#array").val();
 	
-		$("option").prop("disabled", false);
-	
-		if (installationType === CONSTANTS.OPERATOR || (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY)) {
-			$("option[value='vxflexos'], option[value='unity'],option[value='operator']").prop("disabled", true);
+		if (installationType === CONSTANTS.OPERATOR){
+			if(array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY) {
+				$("option[value='vxflexos'], option[value='unity'],option[value='operator']").prop("disabled", true);
+			}
+		} else if(array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY){
+				$("option[value='operator']").prop("disabled", true);
+		} else{
+			$("option").prop("disabled", false);
 		}
 	});
 });
 
+function disableDriver(){
+	var installationType = $("#installation-type").val();
+	var array = $("#array").val();
+	if (installationType === CONSTANTS.OPERATOR){
+		$("option[value='vxflexos'], option[value='unity']").prop("disabled", true);
+	}
+	else if (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY){
+		$("option[value='operator']").prop("disabled", true);
+	}
+	else{
+		$("option").prop("disabled", false);
+	}
+}
+
 function onInstallationTypeChange(){
 	driver = document.getElementById("array").value;
 	driver === "" ? $("#main").hide() : $("#main").show();
-	installationType = document.getElementById("installation-type").value	
+	installationType = document.getElementById("installation-type").value;
+	disableDriver();
 	displayModules(installationType, driver, CONSTANTS)
 	$("#command-text-area").hide();
 	onOperatorResiliencyChange();
@@ -49,6 +69,7 @@ function onInstallationTypeChange(){
 
 function onArrayChange() {
 	$('#array').on('change', function() {
+		disableDriver();
 		$("#command-text-area").hide();
 		driver = $(this).val();
 		driver === "" ? $("#main").hide() : $("#main").show();
