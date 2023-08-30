@@ -41,7 +41,7 @@ function validateForm(CONSTANTS_PARAM) {
 		return false;
 	}
 
-	if ($("#installation-type").val() === CONSTANTS.OPERATOR && ($("#array").val() === CONSTANTS.POWERFLEX || $("#array").val() === CONSTANTS.UNITY)) {
+	if ($("#installation-type").val() === CONSTANTS_PARAM.OPERATOR && ($("#array").val() === CONSTANTS_PARAM.POWERFLEX || $("#array").val() === CONSTANTS_PARAM.UNITY)) {
 		return false;
 	}
 
