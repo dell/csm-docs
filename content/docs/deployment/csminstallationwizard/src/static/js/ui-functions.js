@@ -31,12 +31,12 @@ $(function() {
 		var array = $("#array").val();
 	
 		if (installationType === CONSTANTS.OPERATOR){
-			if(array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY) {
+			if (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY) {
 				$("option[value='vxflexos'], option[value='unity'],option[value='operator']").prop("disabled", true);
 			}
-		} else if(array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY){
-				$("option[value='operator']").prop("disabled", true);
-		} else{
+		} else if (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY){
+			$("option[value='operator']").prop("disabled", true);
+		} else {
 			$("option").prop("disabled", false);
 		}
 	});
