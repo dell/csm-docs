@@ -51,7 +51,7 @@ function disableDriver(){
 	else if (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY){
 		$("option[value='operator']").prop("disabled", true);
 	}
-	else{
+	else {
 		$("option").prop("disabled", false);
 	}
 }
