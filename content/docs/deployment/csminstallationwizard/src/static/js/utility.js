@@ -41,6 +41,10 @@ function validateForm(CONSTANTS_PARAM) {
 		return false;
 	}
 
+	if ($("#installation-type").val() === CONSTANTS_PARAM.OPERATOR && ($("#array").val() === CONSTANTS_PARAM.POWERFLEX || $("#array").val() === CONSTANTS_PARAM.UNITY)) {
+		return false;
+	}
+
 	const powermaxSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERMAX;
 	const vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
 
