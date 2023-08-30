@@ -13,7 +13,7 @@ description: Release notes for CSM Installation Wizard
 
 ### Fixed Issues
 
-- [#959 - [BUG]: Tolerations in the generated values.yaml should be uncommented when resiliency is enabled](https://github.com/dell/csm/issues/959)
+- [#959 - [BUG]: Resiliency fields in the generated values.yaml should be uncommented when resiliency is enabled](https://github.com/dell/csm/issues/959)
 
 ### Known Issues
 
