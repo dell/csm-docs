@@ -776,7 +776,6 @@ CSI driver will support following operations for NFS volumes:
 To enable the support of NFS volumes operations from CSI driver, there are a few new keys introduced which needs to be set before performing the operations for NFS volumes.
 * `nasName`: defines the NAS server name that should be used for NFS volumes.
 * `nfsAcls`: defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
-* `externalAccess`: allows you to specify additional entries for host to access NFS volumes.
 * `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
 
 > NOTE:
@@ -840,7 +839,6 @@ allowedTopologies:
 [`helm/csi-vxflexos/values.yaml`](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml)
 ```yaml
 ...
-externalAccess:
 nfsAcls: "0777"
 enableQuota: false
 ...
