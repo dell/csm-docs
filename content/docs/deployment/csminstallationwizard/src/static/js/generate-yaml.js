@@ -51,7 +51,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
 	DriverValues.targetClusterId = document.getElementById("replication-operator-clusterid").value;
 	DriverValues.targetArrayID = document.getElementById("replication-helm-arrayid").value;
-	DriverValues.targetUnisphere = document.getElementById("replication-helm-unisphere").value;
+	DriverValues.targetUnisphere = document.getElementById("replication-helm-unisphere").value || '""';
 	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
 	DriverValues.driverNamespace = document.getElementById("driver-namespace").value;
 	DriverValues.labelValue = document.getElementById("label-value").value;
@@ -229,7 +229,9 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 
 	yamlTpl = yamlTpl.replaceAll("$CERT_MANAGER_ENABLED", yamlTplValues.certManagerEnabled);
 	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_CERT_MANAGER_ENABLED", !yamlTplValues.certManagerEnabled);
-
+	yamlTpl = yamlTpl.replaceAll('      - storageArrayId: ""', '#      - storageArrayId: ""');
+	yamlTpl = yamlTpl.replaceAll('        endpoint: ""', '#       endpoint: ""');	
+	yamlTpl = yamlTpl.replaceAll('      - endpoint: ""', '#      - endpoint: ""');
 	const regex = /\$[a-zA-Z0-9_-]*/g;
 	yamlTpl = yamlTpl.replaceAll(regex, '""');
 
