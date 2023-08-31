@@ -1,5 +1,7 @@
 ---
 title: Release Notes
+linkTitle: "Release notes"
+weight: 5
 description: Release notes for CSM Installation Wizard
 ---
 
