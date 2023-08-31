@@ -264,8 +264,8 @@ const resetSnapNamePrefix = csmMapValue => {
 	document.getElementById("snapshot-prefix").value = String(csmMapValue.get("snapNamePrefix"));
 }
 
-const resetSDCPrefix = csmMapValue => {
-	document.getElementById("sdc-prefix").value = String(csmMapValue.get("sdcPrefix"));
+const resetNfsAcls = csmMapValue => {
+	document.getElementById("nfs-acls").value = String(csmMapValue.get("nfsAcls"));
 }
 
 const resetNodeSelectorLabel = csmMapValue => {
@@ -570,6 +570,6 @@ if (typeof exports !== 'undefined') {
 		validateInput,
 		resetVolNamePrefix,
 		resetSnapNamePrefix,
-		resetSDCPrefix
+		resetNfsAcls
 	};
 }

@@ -358,11 +358,6 @@
                       <div class="col-sm-2">
                         <input class="form-control input-lg" type="text" id="sdc-prefix" placeholder="sdc-test" oninput="validateInput(validateForm, CONSTANTS)" required>
                       </div>
-                      <div class="col-sm-4">
-                        <div class="row mt-1">
-                          <a class="reset" id="reset-sdc-prefix" onclick="resetSDCPrefix(csmMap)">Reset to default</a>
-                        </div>
-                      </div>
                     </div>
                   </div>
 
@@ -411,6 +406,11 @@
                     <div class="row">
                       <div class="col-sm-2">
                         <input class="form-control input-sm" type="text" id="nfs-acls" placeholder="0777" oninput="validateInput(validateForm, CONSTANTS)">
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-nfs-acls" onclick="resetNfsAcls(csmMap)">Reset to default</a>
+                        </div>
                       </div>
                     </div>
                   </div>
