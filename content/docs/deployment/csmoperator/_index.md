@@ -70,7 +70,7 @@ git clone -b v1.3.0 https://github.com/dell/csm-operator.git
 
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.
 
-{{< imgproc install.jpg Resize "2500x" >}}{{< /imgproc >}}
+{{< imgproc install.JPG Resize "2500x" >}}{{< /imgproc >}}
 
 6. Run the command to validate the installation.
 ```bash
