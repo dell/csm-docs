@@ -7,7 +7,7 @@ description: Release notes for CSM Installation Wizard
 
 ### New Features/Changes
 
-- [Added support for the CSI-PowerStore, CSI-PowerMax, CSI-PowerScale, CSI-PowerFlex, CSI-Unity and the supported modules for helm installation ](https://github.com/dell/csm/issues/698)
+- [Added support for the CSI-PowerStore, CSI-PowerMax, CSI-PowerScale, CSI-PowerFlex, CSI-Unity and the supported modules for helm installation](https://github.com/dell/csm/issues/698)
 
 ### Fixed Issues
 

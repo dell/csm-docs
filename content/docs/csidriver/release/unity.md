@@ -3,20 +3,22 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.7.0
+## Release Notes - CSI Unity XT v2.8.0
+
 
 ### New Features/Changes
 
-- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
-- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
-- [Added support for K3s on Debian OS](https://github.com/dell/csm/issues/798)
-- [Added support for Unisphere 5.3.0 array](https://github.com/dell/csm/issues/842)
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
+- [#891 - [FEATURE]: Enhancing Unity XT driver to handle API requests after the sessionIdleTimeOut in STIG mode](https://github.com/dell/csm/issues/891)
+- [#926 - [FEATURE]: Set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
 
-There are no fixed issues in this release.
-
+- [#849 - [BUG]: CSI driver does not verify iSCSI initiators on the array correctly](https://github.com/dell/csm/issues/849)
+- [#901 - [BUG]: Unity XT: Volume Mount Hangs](https://github.com/dell/csm/issues/901)
+- [#902 - [BUG]: Space is not reflecting right on Unity](https://github.com/dell/csm/issues/902)
+- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 

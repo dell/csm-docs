@@ -658,6 +658,16 @@ Warning  VolumeConditionAbnormal      35s (x9 over 12m)  kubelet       Volume vo
 Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vol2: Volume is not found by node driver at 2021-11-11 02:04:49
 ```
 
+## Storage Capacity Tracking
+CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.
+
+This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
+
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
+
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+
 ## Set QoS Limits
 Starting in version 2.5, CSI Driver for PowerFlex now supports setting the limits for the bandwidth and IOPS that one SDC generates for the specified volume. This enables the CSI driver to control the quality of service (QoS).
 In this release this is supported at the StorageClass level, so once a volume is created QoS Settings can't be adjusted later.
@@ -750,3 +760,177 @@ node:
 > NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
 
 If SDC approval is denied, then provisioning of the volume will not be attempted and an appropriate error message is reported in the logs/events so the user is informed.
+
+## Volume Limit
+
+The CSI Driver for Dell PowerFlex allows users to specify the maximum number of PowerFlex volumes that can be used in a node.
+
+The user can set the volume limit for a node by creating a node label `max-vxflexos-volumes-per-node` and specifying the volume limit for that node.
+<br/> `kubectl label node <node_name> max-vxflexos-volumes-per-node=<volume_limit>`
+
+The user can also set the volume limit for all the nodes in the cluster by specifying the same to `maxVxflexosVolumesPerNode` attribute in values.yaml file.
+
+>**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n vxflexos --no-headers=true | awk '/vxflexos-/{print $1}'| xargs kubectl delete -n vxflexos pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxVxflexosVolumesPerNode` is 0. <br><br>If `maxVxflexosVolumesPerNode` is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxVxflexosVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-vxflexos-volumes-per-node` is not set.
+
+## NFS volume support
+Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
+
+CSI driver will support following operations for NFS volumes:
+
+* Creation and deletion of a NFS volume with RWO/RWX/ROX access modes.
+* Support of tree quotas while volume creation.
+* Expand the size of a NFS volume.
+* Creation and deletion of snapshot of a NFS volume while retaining file permissions.
+* Create NFS volume from the snapshot.
+
+To enable the support of NFS volumes operations from CSI driver, there are a few new keys introduced which needs to be set before performing the operations for NFS volumes.
+* `nasName`: defines the NAS server name that should be used for NFS volumes.
+* `nfsAcls`: defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
+* `externalAccess`: allows you to specify additional entries for host to access NFS volumes.
+* `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
+
+> NOTE:
+> * `nasName`
+>   * nasName is a mandatory parameter and has to be provided in secret yaml, else it will be an error state and will be captured in driver logs.
+>   * nasName can be given at storage class level as well.
+>   * If specified in both, secret and storage class, then precedence is given to storage class value.
+>   * If nasName not given in secret, irrespective of it specified in SC, then it's an error state and will be captured in driver logs.
+>   * If the PowerFlex storage system v4.0.x is configured with only block capabilities, then the user is required to give the default value for nasName as "none".
+> * `nfsAcls`
+>   * nfsAcls is an optional parameter, with a default value 0777.
+>   * nfsAcls can be specified in secret or storage class or values.
+>   * If nfsAcls is specified in more than one places, then the order of precedence will be:
+>     1. storage class
+>     2. secret
+>     3. values
+>     4. specified nowhere, then set to default value: 0777
+
+The user has to update the `secret.yaml`, `values.yaml` and `storageclass-nfs.yaml` with the above keys as like below:
+
+[`samples/secret.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/secret.yaml)
+```yaml
+- username: "admin"
+  password: "Password123"
+  systemID: "2b11bb111111bb1b"
+  endpoint: "https://127.0.0.2"
+  skipCertificateValidation: true
+  isDefault: true
+  mdm: "10.0.0.3,10.0.0.4"
+  nasName: "nas-server"
+  nfsAcls: "0777"
+```
+
+[`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: vxflexos-nfs
+provisioner: csi-vxflexos.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  storagepool: "pool2" # Insert Storage pool
+  systemID: <SYSTEM_ID> # Insert System ID
+  csi.storage.k8s.io/fstype: nfs
+  nasName: "nas-server"
+  allowRoot: "false"
+  nfsAcls: "0777"
+#  path: /csi
+#  softLimit: "80"
+#  gracePeriod: "86400"
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+- matchLabelExpressions:
+  - key: csi-vxflexos.dellemc.com/<SYSTEM_ID>-nfs # Insert System ID
+    values:
+    - "true"
+```
+
+[`helm/csi-vxflexos/values.yaml`](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml)
+```yaml
+...
+externalAccess:
+nfsAcls: "0777"
+enableQuota: false
+...
+```
+
+## Usage of Quotas to Limit Storage Consumption for NFS volumes
+Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
+
+To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
+```yaml
+...
+...
+# enableQuota: a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume.
+# Allowed values:
+#   true: set quota for volume
+#   false: do not set quota for volume
+# Optional: true
+# Default value: none
+enableQuota: true
+...
+...
+```
+
+For example, if the user creates a PVC with 3 Gi of storage and quotas have already been enabled in PowerFlex system for the specified volume.
+
+When `enableQuota` is set to `true`
+
+* The driver sets the hard limit of the PVC to 3Gi.
+* The user adds data of 2Gi to the PVC (by logging into POD). It works as expected.
+* The user tries to add 2Gi more data.
+* Driver doesn't allow the user to enter more data as total data to be added is 4Gi and PVC limit is 3Gi.
+* The user can expand the volume from 3Gi to 6Gi. The driver allows it and sets the hard limit of PVC to 6Gi.
+* User retries adding 2Gi more data (which has been errored out previously).
+* The driver accepts the data.
+
+When `enableQuota` is set to `false`
+
+* Driver doesn't set any hard limit against the PVC created.
+* The user adds 2Gi data to the PVC, which has a limit of 3Gi. It works as expected.
+* The user tries to add 2Gi more data. Now the total size of data is 4Gi.
+* Driver allows the user to enter more data irrespective of the initial PVC size (since no quota is set against this PVC)
+* The user can expand the volume from an initial size of 3Gi to 4Gi or more. The driver allows it.
+
+If enableQuota feature is set, user can also set other tree quota parameters such as soft limit, soft grace period and path using storage class yaml file.
+
+* `path`: relative path to the root of the associated NFS volume.
+* `softLimit`: soft limit set to quota. Specified as a percentage w.r.t. PVC size.
+* `gracePeriod`: grace period of quota, must be mentioned along with softLimit, in seconds. Soft Limit can be exceeded until the grace period.
+
+> NOTE:
+> * `hardLimit` is set to same size as that of PVC size.
+> *  When a volume with quota enabled is expanded then the hardLimit and softLimit are also recalculated by driver w.r.t. to the new PVC size.
+> * `sofLimit` cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).
+> * `softLimit` should be lesser than 100%, since hardLimit will be set to 100% (PVC size) internally by the driver.
+
+### Storage Class Example with Quota Limit Parameters:
+[`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: vxflexos-nfs
+provisioner: csi-vxflexos.dellemc.com
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  storagepool: "pool2" # Insert Storage pool
+  systemID: <SYSTEM_ID> # Insert System ID
+  csi.storage.k8s.io/fstype: nfs
+  nasName: "nas-server"
+  allowRoot: "false"
+  nfsAcls: "0777"
+  path: /csi
+  softLimit: "80"
+  gracePeriod: "86400"
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+  - matchLabelExpressions:
+    - key: csi-vxflexos.dellemc.com/<SYSTEM_ID>-nfs # Insert System ID
+      values:
+        - "true"
+```

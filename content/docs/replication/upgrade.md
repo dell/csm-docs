@@ -94,3 +94,5 @@ This option will only work if you have previously installed replication via Helm
 CRD `dellcsireplicationgroups.replication.storage.dell.com` has been updated to version `v1` in CSM Replication v1.4.0. To facilitate the continued use of existing `DellCSIReplicationGroup` CR objects after upgrading to CSM Replication v1.4.0 or later, an `init container` will be deployed during upgrade. The `init container` updates the existing CRs with necessary steps for their continued use.
 
 > _**Note**_: Do not update the CRD as part of upgrade. An `init container` included in the replication controller pod takes care of updating existing CRD and CR versions.
+
+Starting from CSM Replication v1.5.1, the `init container` has been removed. Therefore, when upgrading from versions older than v1.4.0 to v1.5.1 or any later versions, it is mandatory to perform an intermediate upgrade to either v1.4.0 or v1.5.0 before proceeding with any further upgrades.

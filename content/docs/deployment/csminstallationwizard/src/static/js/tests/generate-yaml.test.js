@@ -35,7 +35,6 @@ const CONSTANTS = {
 	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
 	HYPHEN: "-",
-	NODE_SELECTOR_TAB: '\n'.padEnd(7, " "),
 	SLASH: "/",
 	VERSIONS_DIR: "csm-versions",
 	CSM: "csm",
@@ -44,10 +43,16 @@ const CONSTANTS = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V170: "1.0.0",
-	TAINTS: `
+	CSM_HELM_V180: "1.1.0",
+	HELM_TAINTS: `
     - key: "$KEY"
       operator: "Exists"
       effect: "NoSchedule"
+	`,
+	OPERATOR_TAINTS: `
+  - key: "$KEY"
+    operator: "Exists"
+    effect: "NoSchedule"
 	`,
 	COMMENTED_TAINTS: `
     #- key: "node-role.kubernetes.io/control-plane"
@@ -57,27 +62,149 @@ const CONSTANTS = {
 };
 
 const testCSMMap = new Map([
-	["csmVersion", "1.6.0"],
+	["csmVersion", "1.7.0"],
 	["imageRepository", "dellemc"],
+	["maxVolumesPerNode", "0"],
 	["controllerCount", "1"],
 	["volNamePrefix", "csivol"],
 	["snapNamePrefix", "csi-snap"],
 	["nodeSelectorLabel", "node-role.kubernetes.io/control-plane:"],
-	["driverVersion", "v2.6.0"],
+	["driverVersion", "v2.7.0"],
 ]);
 
 describe("GIVEN setValues function", () => {
-	test("SHOULD return expected DriverValues", () => {
+	test("SHOULD return expected DriverValues for Helm", () => {
 		document.body.innerHTML = `
             <select id="csm-version">
-                <option value="1.6.0">CSM 1.6</option>
+                <option value="1.7.0">CSM 1.7</option>
+            </select>
+            <select id="installation-type">
+                <option value="helm" selected>Helm</option>
             </select>
             <select id="fsGroup-Policy">
                 <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
             </select>
             <input type="text" id="image-repository" value="dellemc">
-            <input type="number" id="cert-secret-count" value="0">
-            <input type="number" id="controller-count" value="2">
+            <input type="number" id="cert-secret-count" value="1">
+            <input type="number" id="max-volumes-per-node" value="0">
+            <input type="number" id="controller-count" value="1">
+            <input type="text" id="vol-name-prefix" value="csivol">
+            <input type="text" id="snapshot-prefix" value="csi-snap">
+            <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
+            <input type="checkbox" id="controller-pods-node-selector" checked>
+            <input type="checkbox" id="node-pods-node-selector" checked>
+            <input type="text" id="driver-namespace" value="">
+            <input type="text" id="label-value" value="">
+            <input type="number" id="poll-rate" value="60">
+            <input type="number" id="array-threshold" value="3">
+            <input type="text" id="driver-pod-label" value="dell-storage">
+            <input type="checkbox" id="volumeless-pods">
+            <input type="checkbox" id="connection-validation">
+            <input type="checkbox" id="leader-election">
+            <input type="text" id="authorization-proxy-host" value="">
+            <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+            <input type="text" id="replication-operator-clusterid" value="">
+            <input type="text" id="replication-helm-arrayid" value="">
+            <input type="text" id="replication-helm-unisphere" value="">
+            <input type="text" id="transport-protocol" value="">
+            <input type="checkbox" id="iscsichap">
+            <input type="checkbox" id="observability-operator">
+            <input type="checkbox" id="observability-operator-metrics">
+            <input type="checkbox" id="observability-operator-topology">
+            <input type="checkbox" id="observability-operator-otel">
+            <input type="text" id="manage-array-id">
+            <input type="text" id="manage-array-endpoint-url">
+            <input type="checkbox" id="topology">
+        `;
+
+		const expected = {
+			csmVersion: '1.7.0',
+			driverVersion: 'v2.7.0',
+			imageRepository: 'dellemc',
+			monitor: false,
+			certSecretCount: '1',
+			maxVolumesPerNode: '0',
+			controllerCount: '1',
+			volNamePrefix: 'csivol',
+			snapNamePrefix: 'csi-snap',
+			fsGroupPolicy: 'ReadWriteOnceWithFSType',
+			driverNamespace: '',
+			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
+			nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
+			controllerTolerations: '\n' +
+        '    - key: "node-role.kubernetes.io/control-plane"\n' +
+        '      operator: "Exists"\n' +
+        '      effect: "NoSchedule"',
+			nodeTolerations: '\n' +
+        '    - key: "node-role.kubernetes.io/control-plane"\n' +
+        '      operator: "Exists"\n' +
+        '      effect: "NoSchedule"',
+			snapshot: false,
+			vgsnapshot: false,
+			resizer: false,
+			healthMonitor: false,
+			replication: false,
+			migration: false,
+			observability: false,
+			observabilityMetrics: false,
+			authorization: false,
+			resiliency: false,
+			storageCapacity: false,
+			authorizationSkipCertValidation: false,
+			authorizationProxyHost: '',
+			certManagerEnabled: false,
+			storageArrayId: undefined,
+			storageArrayEndpointUrl: '""',
+			storageArrayBackupEndpointUrl: '""',
+			operatorResiliency: false,
+			labelValue: "",
+			pollRate: '60',
+			arrayThreshold: '3',
+			driverPodLabel: 'dell-storage',
+			connectionValidation: false,
+			leaderElection: false,
+			volumelessPods: false,
+			clusterPrefix: undefined,
+			portGroups: undefined,
+			vSphereEnabled: false,
+			vSphereFCPortGroup: undefined,
+			vSphereFCHostName: undefined,
+			vSphereVCenterHost: undefined,
+			vSphereVCenterCredSecret: undefined,
+			targetClusterId: "",
+			targetArrayID: "",
+			targetUnisphere: "",
+			iscsichap: false,
+			manageArrayId: '""',
+			manageArrayEndpointUrl: '""',
+			observabilityOperator: false,
+			observabilityOperatorMetrics: false,
+			observabilityOperatorOtel: false,
+			observabilityOperatorTopology: false,
+			topologyEnabled: false,
+			transportProtocol: "",
+		};
+
+		const received = setValues(testCSMMap, CONSTANTS);
+		expect(expected).toEqual(received);
+	});
+
+	test("SHOULD return expected DriverValues for Operator", () => {
+		document.body.innerHTML = `
+            <select id="csm-version">
+                <option value="1.7.0">CSM 1.7</option>
+            </select>
+            <select id="installation-type">
+                <option value="operator" selected>Operator</option>
+            </select>
+            <select id="fsGroup-Policy">
+                <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
+            </select>
+            <input type="text" id="image-repository" value="dellemc">
+            <input type="number" id="cert-secret-count" value="1">
+            <input type="number" id="max-volumes-per-node" value="0">
+            <input type="number" id="controller-count" value="1">
             <input type="text" id="vol-name-prefix" value="csivol">
             <input type="text" id="snapshot-prefix" value="csi-snap">
             <input type="text" id="node-selector-label" value="node-role.kubernetes.io/control-plane:">
@@ -86,35 +213,98 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+            <input type="text" id="label-value" value="">
+            <input type="number" id="poll-rate" value="60">
+            <input type="number" id="array-threshold" value="3">
+            <input type="text" id="driver-pod-label" value="dell-storage">
+            <input type="checkbox" id="volumeless-pods">
+            <input type="checkbox" id="connection-validation">
+            <input type="text" id="replication-operator-clusterid" value="">            
+            <input type="text" id="replication-helm-arrayid" value="">            
+            <input type="text" id="replication-helm-unisphere" value="">
+            <input type="text" id="transport-protocol" value="">
+            <input type="checkbox" id="iscsichap">
+            <input type="checkbox" id="observability-operator">
+            <input type="checkbox" id="observability-operator-metrics">
+            <input type="checkbox" id="observability-operator-topology">
+            <input type="checkbox" id="observability-operator-otel">
+            <input type="text" id="manage-array-id">
+            <input type="text" id="manage-array-endpoint-url">
+            <input type="checkbox" id="topology">
+            <input type="checkbox" id="leader-election">
         `;
 
 		const expected = {
-			csmVersion: "1.6.0",
-			driverVersion: "v2.6.0",
-			imageRepository: "dellemc",
-			certSecretCount: "0",
-			controllerCount: "1",
-			volNamePrefix: "csivol",
-			snapNamePrefix: "csi-snap",
-			controllerPodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
-			nodePodsNodeSelector: '\n      node-role.kubernetes.io/control-plane: ""',
-			nodeSelectorLabel: "node-role.kubernetes.io/control-plane:",
-			snapshot: true,
+			csmVersion: '1.7.0',
+			driverVersion: 'v2.7.0',
+			imageRepository: 'dellemc',
+			monitor: false,
+			certSecretCount: '1',
+			maxVolumesPerNode: '0',
+			controllerCount: '1',
+			volNamePrefix: 'csivol',
+			snapNamePrefix: 'csi-snap',
+			fsGroupPolicy: 'ReadWriteOnceWithFSType',
+			driverNamespace: '',
+			controllerPodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
+			nodePodsNodeSelector: '\n       node-role.kubernetes.io/control-plane: ""',
+			nodeSelectorLabel: 'node-role.kubernetes.io/control-plane:',
+			controllerTolerations: '\n' +
+        '  - key: "node-role.kubernetes.io/control-plane"\n' +
+        '    operator: "Exists"\n' +
+        '    effect: "NoSchedule"',
+			nodeTolerations: '\n' +
+        '  - key: "node-role.kubernetes.io/control-plane"\n' +
+        '    operator: "Exists"\n' +
+        '    effect: "NoSchedule"',
+			snapshot: false,
 			vgsnapshot: false,
-			resizer: true,
+			resizer: false,
 			healthMonitor: false,
 			replication: false,
+			migration: false,
 			observability: false,
 			observabilityMetrics: false,
 			authorization: false,
-			authorizationSkipCertValidation: true,
+			resiliency: false,
+			storageCapacity: false,
+			authorizationSkipCertValidation: false,
+			authorizationProxyHost: '',
 			certManagerEnabled: false,
-			taint: "node-role.kubernetes.io/control-plane"
+			storageArrayId: undefined,
+			storageArrayEndpointUrl: '""',
+			storageArrayBackupEndpointUrl: '""',
+			operatorResiliency: false,
+			labelValue: "",
+			pollRate: '60',
+			arrayThreshold: '3',
+			driverPodLabel: 'dell-storage',
+			connectionValidation: false,
+			leaderElection: false,
+			volumelessPods: false,
+			clusterPrefix: undefined,
+			portGroups: undefined,
+			targetClusterId: "",
+			targetArrayID: "",
+			targetUnisphere: "",
+			vSphereEnabled: false,
+			vSphereFCPortGroup: undefined,
+			vSphereFCHostName: undefined,
+			vSphereVCenterHost: undefined,
+			vSphereVCenterCredSecret: undefined,
+			iscsichap: false,
+			manageArrayId: '""',
+			manageArrayEndpointUrl: '""',
+			observabilityOperator: false,
+			observabilityOperatorMetrics: false,
+			observabilityOperatorOtel: false,
+			observabilityOperatorTopology: false,
+			topologyEnabled: false,
+			transportProtocol: "",
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
-
-		expect(received).toEqual(received);
+		expect(expected).toEqual(received);
 	});
 
 	test("SHOULD return expected DriverValues for csm version 1.6.0", () => {
@@ -122,11 +312,15 @@ describe("GIVEN setValues function", () => {
             <select id="csm-version">
                 <option value="1.6.0">CSM 1.6</option>
             </select>
+            <select id="installation-type">
+              <option value="operator" selected>Operator</option>
+            </select>
             <select id="fsGroup-Policy">
                 <option value="ReadWriteOnceWithFSType">Select the FSGroupPolicy type</option>
             </select>
             <input type="text" id="image-repository" value="dellemc">
             <input type="number" id="cert-secret-count" value="0">
+            <input type="number" id="max-volumes-per-node" value="0">
             <input type="number" id="controller-count" value="2">
             <input type="text" id="vol-name-prefix" value="csivol">
             <input type="text" id="snapshot-prefix" value="csi-snap">
@@ -136,6 +330,16 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="driver-namespace" value="">
             <input type="text" id="authorization-proxy-host" value="">
             <input type="text" id="taint" value="node-role.kubernetes.io/control-plane">
+            <input type="text" id="label-value" value="">
+            <input type="number" id="poll-rate" value="60">
+            <input type="number" id="array-threshold" value="3">
+            <input type="text" id="driver-pod-label" value="dell-storage">
+            <input type="checkbox" id="volumeless-pods">
+            <input type="checkbox" id="connection-validation">
+            <input type="text" id="replication-operator-clusterid" value="">            
+            <input type="text" id="replication-helm-arrayid" value="">
+            <input type="text" id="replication-helm-unisphere" value="">
+            <input type="checkbox" id="leader-election">
         `;
 
 		const expected = {
@@ -143,6 +347,7 @@ describe("GIVEN setValues function", () => {
 			driverVersion: "v2.6.0",
 			imageRepository: "dellemc",
 			certSecretCount: "0",
+			maxVolumesPerNode: '0',
 			controllerCount: "1",
 			VolnamePrefix: "csivol",
 			SnapnamePrefix: "csi-snap",
@@ -163,7 +368,6 @@ describe("GIVEN setValues function", () => {
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
-
 		expect(received).toEqual(received);
 	});
 });
@@ -229,18 +433,22 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: $RESILIENCY_ENABLED
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: $MAX_VOLUMES_PER_NODE
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
       enabled: $POWERMAX_ENABLED
       global:
         storageArrays:
-          - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
-            endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
-            backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
+          - storageArrayId: ""
+            endpoint: ""
+            backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
-          - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
+          - endpoint: ""
+          - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: $IMAGE_REPOSITORY
@@ -434,6 +642,7 @@ describe("GIVEN createYamlString function", () => {
 		csmVersion: "1.6.0",
 		driverVersion: "v2.6.0",
 		imageRepository: "dellemc",
+		maxVolumesPerNode: "0",
 		controllerCount: "1",
 		fsGroupPolicy: "ReadWriteOnceWithFSType",
 		volNamePrefix: "csivol",
@@ -455,7 +664,7 @@ describe("GIVEN createYamlString function", () => {
 		replicationImage: "dellemc/dell-csi-replicator:v1.4.0",
 		authorizationImage: "dellemc/csm-authorization-sidecar:v1.6.0",
 		certManagerEnabled: false,
-		authorizationProxyHost: '""',
+		authorizationProxyHost: '',
 		monitor: false,
 		certSecretCount: 0,
 		storageArrayId: "",
@@ -532,7 +741,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -542,7 +752,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -575,7 +788,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -640,7 +853,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -797,7 +1010,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -807,7 +1021,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -840,7 +1057,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -905,7 +1122,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1063,7 +1280,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -1073,7 +1291,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1106,7 +1327,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1171,7 +1392,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1331,7 +1552,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -1341,7 +1563,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1374,7 +1599,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1439,7 +1664,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################
@@ -1598,7 +1823,8 @@ describe("GIVEN createYamlString function", () => {
       podmon:
         enabled: false
         image: dellemc/podmon:v1.5.0
-    
+      maxPowerstoreVolumesPerNode: 0
+
     ## K8S/PowerMax ATTRIBUTES
     ##########################################
     csi-powermax:
@@ -1608,7 +1834,10 @@ describe("GIVEN createYamlString function", () => {
           - storageArrayId: ""
             endpoint: ""
             backupEndpoint: ""
+          - storageArrayId: ""
+            endpoint: ""
         managementServers:
+          - endpoint: ""
           - endpoint: ""
       version: v2.6.0
       images:
@@ -1641,7 +1870,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
         skipCertificateValidation:  true
       vSphere:
         enabled: false
@@ -1706,7 +1935,7 @@ describe("GIVEN createYamlString function", () => {
       authorization:
         enabled: false
         sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.6.0
-        proxyHost: ""
+        proxyHost: 
 
     ## CSI Unity
     ########################

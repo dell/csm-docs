@@ -21,6 +21,44 @@ const {
 	setDefaultValues
 } = require("../utility");
 
+const CONSTANT_PARAM = {
+	POWERSTORE: "powerstore",
+	POWERSCALE: "isilon",
+	POWERFLEX: "vxflexos",
+	POWERMAX: "powermax",
+	UNITY: "unity",
+	POWERSTORE_NAMESPACE: "csi-powerstore",
+	POWERFLEX_NAMESPACE: "vxflexos",
+	POWERMAX_NAMESPACE: "powermax",
+	POWERSCALE_NAMESPACE: "isilon",
+	UNITY_NAMESPACE: "unity",
+	POWERSTORE_LABEL_VALUE: "csi-powerstore",
+	POWERMAX_LABEL_VALUE: "csi-powermax",
+	VALUES: "values",
+	TEMP_DIR: "templates",
+	TEMP_EXT: ".template",
+	HYPHEN: "-",
+	SLASH: "/",
+	VERSIONS_DIR: "csm-versions",
+	CSM: "csm",
+	DEFAULT_VALUES: "default-values",
+	PROPERTIES: ".properties",
+	HELM: "helm",
+	OPERATOR: "operator",
+	CSM_HELM_V170: "1.0.0",
+	CSM_HELM_V180: "1.1.0",
+	HELM_TAINTS: `
+     - key: "$KEY"
+       operator: "Exists"
+       effect: "NoSchedule"
+	`,
+	OPERATOR_TAINTS: `
+      - key: "$KEY"
+        operator: "Exists"
+        effect: "NoSchedule"
+	`
+};
+
 describe("GIVEN validateForm functions", () => {
 	test("SHOULD return false IF array value is empty", () => {
 		document.body.innerHTML = `
@@ -94,7 +132,7 @@ describe("GIVEN validateForm functions", () => {
 		expect(validateForm()).toBe(false);
 	});
 
-	test("SHOULD return false IF controller-count value is empty", () => {
+	test("SHOULD return false IF controller-count & max-volumes-per-node value is empty", () => {
 		document.body.innerHTML = `
 			<select id="array" value="powerstore">
 				<option value="powerstore">PowerStore</option>
@@ -108,6 +146,7 @@ describe("GIVEN validateForm functions", () => {
 			</select>
 			<input type="text" id="driver-namespace" value="temp-value">
 			<input type="number" id="controller-count">
+			<input type="number" id="max-volumes-per-node">
 		`;
 
 		expect(validateForm()).toBe(false);
@@ -135,11 +174,10 @@ describe("GIVEN validateForm functions", () => {
 		<input type="text" id="vSphere-fc-host-name">
 		<input type="text" id="vSphere-vCenter-host">
 		<input type="text" id="vSphere-vCenter-cred-secret">
+		<input type="number" id="max-volumes-per-node">
+		<input type="text" id="manage-array-id">
+		<input type="text" id="transport-protocol">
 	`;
-
-	const CONSTANT_PARAM = {
-		POWERMAX: "powermax"
-	};
 
 	test("SHOULD return false IF storage-array-id value is empty", () => {
 		document.body.innerHTML = powermaxTestHtml;
@@ -265,6 +303,7 @@ describe("GIVEN setDefaultValues function", () => {
 	test("SHOULD fill values in dom", () => {
 		document.body.innerHTML = `
 			<input type="text" id="image-repository">
+			<input type="number" id="max-volumes-per-node">
 			<input type="number" id="controller-count">
 			<input type="text" id="vol-name-prefix">
 			<input type="text" id="snapshot-prefix">
@@ -273,27 +312,38 @@ describe("GIVEN setDefaultValues function", () => {
 			</select>
 			<input type="text" id="cert-secret-count">
 			<input type="text" id="taint">
+			<input type="number" id="poll-rate">
+			<input type="number" id="array-threshold">
+			<input type="text" id="driver-pod-label">
 		`;
 
 		const testCSMMap = new Map([
 			["csmVersion", "1.7.0"],
 			["imageRepository", "dellemc"],
+			["maxVolumesPerNode", "0"],
 			["controllerCount", "2"],
 			["volNamePrefix", "csivol"],
 			["snapNamePrefix", "csi-snap"],
 			["certSecretCount", "1"],
-			["taint", "node-role.kubernetes.io/control-plane"]
+			["taint", "node-role.kubernetes.io/control-plane"],
+			["pollRate", "60"],
+			["arrayThreshold", "3"],
+			["driverPodLabel", "dell-storage"]
 		]);
 
 		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
 
 		expect(document.getElementById("image-repository").value).toEqual("dellemc");
+		expect(document.getElementById("max-volumes-per-node").value).toEqual("0");
 		expect(document.getElementById("controller-count").value).toEqual("2");
 		expect(document.getElementById("csm-version").value).toEqual("1.7.0");
 		expect(document.getElementById("vol-name-prefix").value).toEqual("csivol");
 		expect(document.getElementById("snapshot-prefix").value).toEqual("csi-snap");
 		expect(document.getElementById("cert-secret-count").value).toEqual("1");
 		expect(document.getElementById("taint").value).toEqual("node-role.kubernetes.io/control-plane");
+		expect(document.getElementById("poll-rate").value).toEqual("60");
+		expect(document.getElementById("array-threshold").value).toEqual("3");
+		expect(document.getElementById("driver-pod-label").value).toEqual("dell-storage");
 
 	});
 });

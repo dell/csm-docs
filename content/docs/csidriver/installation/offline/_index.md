@@ -84,9 +84,9 @@ cd dell-csi-operator/scripts
    dellemc/csi-powermax:v2.3.1
    dellemc/csi-powermax:v2.4.0
    dellemc/csi-powermax:v2.5.0
-   dellemc/csi-powerstore:v2.5.0
    dellemc/csi-powerstore:v2.6.0
    dellemc/csi-powerstore:v2.7.0
+   dellemc/csi-powerstore:v2.8.0
    dellemc/csi-unity:v2.3.0
    dellemc/csi-unity:v2.4.0
    dellemc/csi-unity:v2.5.0
@@ -96,6 +96,7 @@ cd dell-csi-operator/scripts
    dellemc/dell-csi-operator:v1.12.0
    dellemc/sdc:3.6
    dellemc/sdc:3.6.0.6
+   dellemc/sdc:3.6.1
    docker.io/busybox:1.32.0
    ...
    ...
@@ -215,9 +216,9 @@ Preparing a offline bundle for installation
    dellemc/csi-powermax:v2.3.1 -> localregistry:5000/csi-operator/csi-powermax:v2.3.1
    dellemc/csi-powermax:v2.4.0 -> localregistry:5000/csi-operator/csi-powermax:v2.4.0
    dellemc/csi-powermax:v2.5.0 -> localregistry:5000/csi-operator/csi-powermax:v2.5.0
-   dellemc/csi-powerstore:v2.5.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.5.0
    dellemc/csi-powerstore:v2.6.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.6.0
    dellemc/csi-powerstore:v2.7.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.7.0
+   dellemc/csi-powerstore:v2.8.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.8.0
    dellemc/csi-unity:v2.3.0 -> localregistry:5000/csi-operator/csi-unity:v2.3.0
    dellemc/csi-unity:v2.4.0 -> localregistry:5000/csi-operator/csi-unity:v2.4.0
    dellemc/csi-unity:v2.5.0 -> localregistry:5000/csi-operator/csi-unity:v2.5.0
@@ -226,6 +227,7 @@ Preparing a offline bundle for installation
    dellemc/csi-vxflexos:v2.7.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.7.0
    dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
    dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
+   dellemc/sdc:3.6.1 -> localregistry:5000/csi-operator/sdc:3.6.1
    docker.io/busybox:1.32.0 -> localregistry:5000/csi-operator/busybox:1.32.0
    ...
    ...
@@ -241,9 +243,9 @@ Preparing a offline bundle for installation
    changing: dellemc/csi-powermax:v2.3.1 -> localregistry:5000/csi-operator/csi-powermax:v2.3.1
    changing: dellemc/csi-powermax:v2.4.0 -> localregistry:5000/csi-operator/csi-powermax:v2.4.0
    changing: dellemc/csi-powermax:v2.5.0 -> localregistry:5000/csi-operator/csi-powermax:v2.5.0
-   changing: dellemc/csi-powerstore:v2.5.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.5.0
    changing: dellemc/csi-powerstore:v2.6.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.6.0
    changing: dellemc/csi-powerstore:v2.7.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.7.0
+   changing: dellemc/csi-powerstore:v2.8.0 -> localregistry:5000/csi-operator/csi-powerstore:v2.8.0
    changing: dellemc/csi-unity:v2.3.0 -> localregistry:5000/csi-operator/csi-unity:v2.3.0
    changing: dellemc/csi-unity:v2.4.0 -> localregistry:5000/csi-operator/csi-unity:v2.4.0
    changing: dellemc/csi-unity:v2.5.0 -> localregistry:5000/csi-operator/csi-unity:v2.5.0
@@ -252,6 +254,7 @@ Preparing a offline bundle for installation
    changing: dellemc/csi-vxflexos:v2.7.0 -> localregistry:5000/csi-operator/csi-vxflexos:v2.7.0
    changing: dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
    changing: dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
+   changing: dellemc/sdc:3.6.1 -> localregistry:5000/csi-operator/sdc:3.6.1
    changing: docker.io/busybox:1.32.0 -> localregistry:5000/csi-operator/busybox:1.32.0
    ...
    ...

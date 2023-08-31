@@ -96,6 +96,7 @@ cd dell-csi-operator/scripts
    dellemc/sdc:3.5.1.1-1
    dellemc/sdc:3.6
    dellemc/sdc:3.6.0.6
+   dellemc/sdc:3.6.1
    docker.io/busybox:1.32.0
    ...
    ...
@@ -223,6 +224,7 @@ Preparing a offline bundle for installation
    dellemc/sdc:3.5.1.1-1 -> localregistry:5000/csi-operator/sdc:3.5.1.1-1
    dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
    dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
+   dellemc/sdc:3.6.1 -> localregistry:5000/csi-operator/sdc:3.6.1
    docker.io/busybox:1.32.0 -> localregistry:5000/csi-operator/busybox:1.32.0
    ...
    ...
@@ -250,6 +252,7 @@ Preparing a offline bundle for installation
    changing: dellemc/sdc:3.5.1.1-1 -> localregistry:5000/csi-operator/sdc:3.5.1.1-1
    changing: dellemc/sdc:3.6 -> localregistry:5000/csi-operator/sdc:3.6
    changing: dellemc/sdc:3.6.0.6 -> localregistry:5000/csi-operator/sdc:3.6.0.6
+   changing: dellemc/sdc:3.6.1 -> localregistry:5000/csi-operator/sdc:3.6.1
    changing: docker.io/busybox:1.32.0 -> localregistry:5000/csi-operator/busybox:1.32.0
    ...
    ...

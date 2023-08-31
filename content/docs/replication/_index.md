@@ -5,7 +5,7 @@ weight: 6
 Description: >
   Dell Container Storage Modules (CSM) for Replication
 ---
-[Container Storage Modules](https://github.com/dell/csm) (CSM) for Replication is part of the  open-source suite of Kubernetes storage enablers for Dell products. 
+[Container Storage Modules](https://github.com/dell/csm) (CSM) for Replication is part of the  open-source suite of Kubernetes storage enablers for Dell products.
 
 CSM for Replication project aims to bring Replication & Disaster Recovery capabilities of Dell Storage Arrays to Kubernetes clusters.
 It helps you replicate groups of volumes using the native replication technology available on the storage array and can provide you a way to restart
@@ -32,15 +32,14 @@ CSM for Replication provides the following capabilities:
 | Provides a command line utility - [repctl](tools) for configuring & managing replication related resources across multiple clusters |   yes    |    yes     |    yes     |    yes    |  no   |
 {{</table>}}
 
-
 ## Supported Operating Systems/Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS            | PowerMax         | PowerStore       | PowerScale       | PowerFlex        |
 | ----------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| Kubernetes        | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27 |
-| Red Hat OpenShift | 4.11, 4.12       | 4.11, 4.12       | 4.11, 4.12       | 4.11, 4.12       |
-| RHEL              | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         |
+| Kubernetes        | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28 |
+| Red Hat OpenShift | 4.12, 4.13       | 4.12, 4.13       | 4.12, 4.13       | 4.12, 4.13       |
+| RHEL              | 7.x, 8.x    | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         |
 | CentOS            | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         |
 | Ubuntu            | 20.04            | 20.04            | 20.04            | 20.04            |
 | SLES              | 15SP4            | 15SP2            | 15SP2            | 15SP3            |
@@ -51,12 +50,15 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 |               |                                                 PowerMax                                                 |                  PowerStore                  |               PowerScale                     | PowerFlex |
 | ------------- | :------------------------------------------------------------------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :-------: |
-| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br> Unisphere 10.0,10.0.1 | 1.0.x, <br> 2.0.x, 2.1.x, <br> 3.0, 3.2, 3.5 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 3.6.x, 4.0|
+| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br> Unisphere 10.0,10.0.1 | 1.0.x, <br> 2.0.x, 2.1.x, <br> 3.0, 3.2, 3.5 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5 | 3.6.x, 4.0|
 {{</table>}}
+
+>Note: File Replication for PowerMax is currently not supported 
 
 ## Details
 
 As on the storage arrays, all replication related Kubernetes entities are required/created in pairs -
+
 1. Pair of Kubernetes Clusters
 2. Pair of replication enabled Storage classes
 3. Pair of PersistentVolumes representing the replicated pair on the storage array
@@ -66,6 +68,7 @@ You can also use a single stretched Kubernetes cluster for protecting your appli
 the objects still exist in pairs.
 
 ### What it does not do
+
 * Replicate application manifests within/across clusters.
 * Stop applications before the planned/unplanned migration.
 * Start applications after the migration.
@@ -75,6 +78,7 @@ the objects still exist in pairs.
 * Same RDF group cannot be shared across different replication modes for PowerMax.
 
 ### QuickStart
+
 1. Install all required components:
   * Enable replication during CSI driver installation
   * Install CSM Replication Controller & repctl
@@ -82,7 +86,9 @@ the objects still exist in pairs.
 3. Create `PersistentVolumeClaim` using the replication enabled storage class
 
 ### How it works
+
 At a high level, the following happens when you create a `PersistentVolumeClaim` object using a replication enabled storage class -
+
 1. CSI driver creates protection group on the storage array (if required)
 2. CSI driver creates the volume and adds it to the protection group. There will be a corresponding group and pair on the remote storage array
 3. A `DellCSIReplicationGroup` object is created in the cluster representing the protection group on the storage array
@@ -92,8 +98,8 @@ You can refer this [page](architecture) for more details about the architecture.
 
 Once the `DellCSIReplicationGroup` & `PersistentVolume` objects have been replicated across clusters (or within the same cluster), you
 can exercise the general Disaster Recovery workflows -
+
 1. Planned Migration to the target cluster/array
 2. Unplanned Migration to the target cluster/array
 3. Reprotect volumes at the target cluster/array
 4. Maintenance activities like - Suspend, Resume, Establish replication
-
