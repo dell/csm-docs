@@ -229,9 +229,11 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 
 	yamlTpl = yamlTpl.replaceAll("$CERT_MANAGER_ENABLED", yamlTplValues.certManagerEnabled);
 	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_CERT_MANAGER_ENABLED", !yamlTplValues.certManagerEnabled);
-	yaml = yamlTpl.replaceAll('      - storageArrayId: ""','#      - storageArrayId: ""' );
-	yaml = yamlTpl.replaceAll('        endpoint: ""','#        endpoint: ""' );
-	yaml = yamlTpl.replaceAll('      - endpoint: ""','#      - endpoint: ""' );
+
+	alert(yamlTpl.includes('      - storageArrayId: ""'))
+
+	yamlTpl = yamlTpl.replace('      - storageArrayId: ""','#      - storageArrayId: ""');
+	yamlTpl = yamlTpl.replace('       endpoint: ""','#       endpoint: ""');
 	const regex = /\$[a-zA-Z0-9_-]*/g;
 	yamlTpl = yamlTpl.replaceAll(regex, '""');
 
