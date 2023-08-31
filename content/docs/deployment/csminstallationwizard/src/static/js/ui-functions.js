@@ -366,6 +366,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".fsGroupPolicy").show();
 			$(".vgsnapshot").hide();
 			$(".storage-capacity").show();
+			$(".max-volumes-per-node").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			if (installationType === 'operator'){
 				$(".observability-operator").show();

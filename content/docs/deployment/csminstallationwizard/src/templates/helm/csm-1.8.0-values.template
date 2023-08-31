@@ -244,6 +244,8 @@ csi-vxflexos:
 csi-isilon:
   enabled: $POWERSCALE_ENABLED
   version: "v2.8.0"
+  images:
+    driverRepository: $IMAGE_REPOSITORY
   certSecretCount: $CERT_SECRET_COUNT
 
   allowedNetworks: []
@@ -256,6 +258,8 @@ csi-isilon:
 
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
+
+  maxIsilonVolumesPerNode: $MAX_VOLUMES_PER_NODE
 
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -345,9 +349,6 @@ csi-isilon:
         - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
         - "--driverPodLabelValue=dell-storage"
         - "--ignoreVolumelessPods=false"
-
-  images:
-    driverRepository: $IMAGE_REPOSITORY
 
 ## K8S/CSI-Unity ATTRIBUTES
 ##########################################
