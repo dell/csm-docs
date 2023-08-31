@@ -214,7 +214,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 }
 
 function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
-	if ($("#renameSDC").prop('checked') === true) {
+	if ($("#rename-sdc").prop('checked') === true) {
 		if (driverName == CONSTANTS_PARAM.POWERFLEX){
 			$('div.sdc-prefix').show();
 		}
@@ -266,10 +266,6 @@ const resetSnapNamePrefix = csmMapValue => {
 
 const resetSDCPrefix = csmMapValue => {
 	document.getElementById("sdc-prefix").value = String(csmMapValue.get("sdcPrefix"));
-}
-
-const resetNfsAcls = csmMapValue => {
-	document.getElementById("nfsAcls").value = String(csmMapValue.get("nfsAcls"));
 }
 
 const resetNodeSelectorLabel = csmMapValue => {
@@ -353,9 +349,9 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".replication-operator-clusterid").hide();
 	$(".replication-helm-arrayid").hide();
 	$(".replication-helm-unisphere").hide();
-	$(".renameSDC-feature").hide();
-	$(".approveSDC").hide();
-	$(".nfsAcls").hide();
+	$(".rename-sdc-feature").hide();
+	$(".approve-sdc").hide();
+	$(".nfs-acls").hide();
 	$(".enable-quota").hide();
 
 	switch (driverName) {
@@ -445,11 +441,11 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".cert-secret-count-wrapper").show();
 			$("div#snap-prefix").hide();
 			$(".storage-capacity").show();
-			$(".renameSDC-feature").show();
-			$(".approveSDC").show();
+			$(".rename-sdc-feature").show();
+			$(".approve-sdc").show();
 			if (document.getElementById("csm-version").value == "1.8.0") {
 				$(".max-volumes-per-node").show();
-				$(".nfsAcls").show();
+				$(".nfs-acls").show();
 				$(".enable-quota").show();
 			}
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;

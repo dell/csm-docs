@@ -125,11 +125,10 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.vSphereFCHostName = $("#vSphere-fc-host-name").val();
 	DriverValues.vSphereVCenterHost = $("#vSphere-vCenter-host").val();
 	DriverValues.vSphereVCenterCredSecret = $("#vSphere-vCenter-cred-secret").val();
-	DriverValues.renameSDC = $("#renameSDC").prop('checked') ? true : false;
+	DriverValues.renameSDC = $("#rename-sdc").prop('checked') ? true : false;
 	DriverValues.sdcPrefix = $("#sdc-prefix").val();
-	// DriverValues.sdcPrefix = document.getElementById("sdc-prefix").value;
-	DriverValues.approveSDC = $("#approveSDC").prop('checked') ? true : false;
-    DriverValues.nfsAcls = document.getElementById("nfsAcls").value;
+	DriverValues.approveSDC = $("#approve-sdc").prop('checked') ? true : false;
+    DriverValues.nfsAcls = $("#nfs-acls").value;
     DriverValues.enableQuota = $("#enable-quota").prop('checked') ? true : false;
 	return DriverValues
 }
@@ -241,7 +240,7 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$CERT_MANAGER_ENABLED", yamlTplValues.certManagerEnabled);
 	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_CERT_MANAGER_ENABLED", !yamlTplValues.certManagerEnabled);
 	yamlTpl = yamlTpl.replaceAll('      - storageArrayId: ""', '#      - storageArrayId: ""');
-	yamlTpl = yamlTpl.replaceAll('        endpoint: ""', '#       endpoint: ""');	
+	yamlTpl = yamlTpl.replaceAll('        endpoint: ""', '#       endpoint: ""');
 	yamlTpl = yamlTpl.replaceAll('      - endpoint: ""', '#      - endpoint: ""');
 	const regex = /\$[a-zA-Z0-9_-]*/g;
 	yamlTpl = yamlTpl.replaceAll(regex, '""');

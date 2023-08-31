@@ -49,7 +49,7 @@ function validateForm(CONSTANTS_PARAM) {
 	const vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
 
 	const powerflexSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERFLEX;
-	const renameSDCEnabled = $("#renameSDC").prop('checked') ? true : false;
+	const renameSDCEnabled = $("#rename-sdc").prop('checked') ? true : false;
 
 	if (powermaxSelected) {
 		if (document.getElementById('installation-type').value === CONSTANTS_PARAM.HELM) {
