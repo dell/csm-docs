@@ -8,7 +8,7 @@ description: >
 
 The following instructions can be followed when a Helm chart will be installed in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.
 
-## Prerequisites 
+## Prerequisites
 
 - Helm 3.3
 - The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
@@ -58,7 +58,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     chmod +x offline-installer.sh
     ```
 
-3. Build the bundle by providing the Helm chart name as the argument. Below is a sample output that may be different on your machine. 
+3. Build the bundle by providing the Helm chart name as the argument. Below is a sample output that may be different on your machine.
 
     ```bash
     ./offline-installer.sh -c dell/karavi-observability
@@ -75,11 +75,11 @@ To perform an offline installation of a Helm chart, the following steps should b
     *
     * Downloading and saving Docker images
 
-      dellemc/csm-topology:v1.5.0
-      dellemc/csm-metrics-powerflex:v1.5.0
-      dellemc/csm-metrics-powerstore:v1.5.0
-      dellemc/csm-metrics-powerscale:v1.2.0
-      dellemc/csm-metrics-powermax:v1.0.0
+      dellemc/csm-topology:v1.6.0
+      dellemc/csm-metrics-powerflex:v1.6.0
+      dellemc/csm-metrics-powerstore:v1.6.0
+      dellemc/csm-metrics-powerscale:v1.3.0
+      dellemc/csm-metrics-powermax:v1.1.0
       otel/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.20
 
@@ -106,15 +106,15 @@ To perform an offline installation of a Helm chart, the following steps should b
     ```bash
     ./offline-installer.sh -p <my-registry>:5000
     ```
-    ```  
+    ```
     *
     * Loading, tagging, and pushing Docker images to registry <my-registry>:5000/
 
-      dellemc/csm-topology:v1.5.0 -> <my-registry>:5000/csm-topology:v1.5.0
-      dellemc/csm-metrics-powerflex:v1.5.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.5.0
-      dellemc/csm-metrics-powerstore:v1.5.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.5.0
-      dellemc/csm-metrics-powerscale:v1.2.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.2.0
-      dellemc/csm-metrics-powermax:v1.0.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.0.0
+      dellemc/csm-topology:v1.6.0 -> <my-registry>:5000/csm-topology:v1.6.0
+      dellemc/csm-metrics-powerflex:v1.6.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.6.0
+      dellemc/csm-metrics-powerstore:v1.6.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.6.0
+      dellemc/csm-metrics-powerscale:v1.3.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.3.0
+      dellemc/csm-metrics-powermax:v1.1.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.1.0
       otel/opentelemetry-collector:0.42.0 -> <my-registry>:5000/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.20 -> <my-registry>:5000/nginx-unprivileged:1.20
     ```
@@ -131,7 +131,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     kubectl apply --validate=false -f cert-manager.crds.yaml
     ```
 
-3. Copy the CSI Driver Secret(s) 
+3. Copy the CSI Driver Secret(s)
 
     Copy the CSI Driver Secret from the namespace where CSI Driver is installed to the namespace where CSM for Observability is to be installed.
 
@@ -140,7 +140,7 @@ To perform an offline installation of a Helm chart, the following steps should b
 
     kubectl get secret vxflexos-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
-    
+
     If the CSI driver secret name is not the default `vxflexos-config`, please use the following command to copy secret:
 
     ```bash
@@ -154,7 +154,7 @@ To perform an offline installation of a Helm chart, the following steps should b
 
     kubectl get configmap vxflexos-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
-   
+
     If the CSI driver configmap name is not the default `vxflexos-config-params`, please use the following command to copy configmap:
 
     ```bash
@@ -182,9 +182,9 @@ To perform an offline installation of a Helm chart, the following steps should b
     __CSI Driver for PowerScale:__
     ```bash
 
-    kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f - 
+    kubectl get secret isilon-creds -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
-   
+
     If the CSI driver secret name is not the default `isilon-creds`, please use the following command to copy secret:
     ```bash
 
@@ -197,7 +197,7 @@ To perform an offline installation of a Helm chart, the following steps should b
 
     kubectl get configmap isilon-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
-   
+
     If the CSI driver configmap name is not the default `isilon-config-params`, please use the following command to copy configmap:
 
     ```bash
@@ -208,11 +208,11 @@ To perform an offline installation of a Helm chart, the following steps should b
     ```bash
 
     kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: isilon-karavi-authorization-config/' | sed 's/name: proxy-server-root-certificate/name: isilon-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: isilon-proxy-authz-tokens/' | kubectl create -f -
-    ``` 
+    ```
 
     __CSI Driver for PowerMax:__
 
-    Copy the configmap from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
+    Copy the configmap from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
     __Note:__ Observability for PowerMax works only with [CSI PowerMax driver with Proxy in StandAlone mode](../../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode).
     ```bash
 
@@ -221,9 +221,9 @@ To perform an offline installation of a Helm chart, the following steps should b
 
     If the CSI driver configmap name is not the default `powermax-reverseproxy-config`, please use the following command to copy configmap:
     ```bash
-    
+
     kubectl get configmap [POWERMAX-REVERSEPROXY-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [POWERMAX-REVERSEPROXY-CONFIG]/name: powermax-reverseproxy-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
-    ```   
+    ```
 
     Copy the secrets from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
     ```bash
@@ -250,7 +250,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     kubectl get configmap powermax-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-    If the CSI driver configmap name is not the default `powermax-config-params`, please use the following command to copy configmap:  
+    If the CSI driver configmap name is not the default `powermax-config-params`, please use the following command to copy configmap:
 
     ```bash
 
@@ -260,14 +260,14 @@ To perform an offline installation of a Helm chart, the following steps should b
     ```bash
 
     kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | sed 's/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f -
-    ``` 
+    ```
 
-4. Now that the required images have been made available and the Helm chart's configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart's repository.  
+4. Now that the required images have been made available and the Helm chart's configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart's repository.
 
-    **Note:** 
+    **Note:**
     - Optionally, you could provide your own [configurations](../helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
-    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured. 
+    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured.
     - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured.
     - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured.
 
@@ -283,4 +283,3 @@ To perform an offline installation of a Helm chart, the following steps should b
     TEST SUITE: None
 
     ```
-    
