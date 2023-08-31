@@ -26,6 +26,12 @@ You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSI Operat
    ```
    Edit the _my-isilon-settings.yaml_ as per the requirements.
 
+    ```bash
+      ./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml   --upgrade
+      ```
+      OR 
+
+      To upgrade particular version 
       ```bash
-      ./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml  --helm-charts-version csi-isilon-2.8.0 --upgrade
+      ./csi-install.sh --namespace isilon --values ./my-isilon-settings.yaml  --helm-charts-version <version> --upgrade
       ```
