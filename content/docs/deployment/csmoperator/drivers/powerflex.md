@@ -27,7 +27,7 @@ kubectl get csm --all-namespaces
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
 - **Note:** When the driver is created, MDM value for initContainers in driver CR is set by the operator from mdm attributes in the driver configuration file, 
-  config.yaml. An example of config.yaml is in the below document. Do not set MDM value for initContainers in the driver CR file manually.
+  config.yaml. An example of config.yaml is in the document below. Do not set MDM value for initContainers in the driver CR file manually.
 - **Note:** To use an sdc-binary module from customer ftp site:
   - Create a secret, sdc-repo-secret.yaml to contain the credentials for the private repo. To generate the base64 encoding of a credential:
  ```bash
