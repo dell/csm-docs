@@ -176,6 +176,11 @@ csi-vxflexos:
     resizer:
       enabled: $RESIZER_ENABLED
     nodeSelector: $CONTROLLER_POD_NODE_SELECTOR
+    renameSDC:
+      enabled: $RENAME_SDC_ENABLED
+      sdcPrefix: $SDC_PREFIX
+    approveSDC:
+      enabled: $APPROVE_SDC_ENABLED
     tolerations: $CONTROLLER_TOLERATIONS
   node:
     healthMonitor:

@@ -347,6 +347,32 @@
                     </div>
                   </div>
 
+                  <div class="row mb-4 col-sm-11 renameSDC-feature">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="renameSDC" value="" onchange="onRenameSDCChange(driver, CONSTANTS)">
+                      <label for="renameSDC" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Rename SDC feature.">Rename SDC</label>
+                    </div>
+                    <div class="was-validated row mt-3 child-level-one sdc-prefix">
+                      <label for="sdc-prefix" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix to apply for a SDC name">SDC Prefix</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="sdc-prefix" placeholder="sdc-test" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-sdc-prefix" onclick="resetSDCPrefix(csmMap)">Reset to default</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4 approveSDC">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="approveSDC" value="">
+                      <label for="approveSDC" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable SDC approval">Approve SDC</label>
+                    </div>
+                  </div>
+
                   <div class="row mb-4 storage-capacity">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="storage-capacity" value="" checked>
@@ -372,6 +398,32 @@
                           <a class="reset" id="reset-max-volumes-per-node" onclick="resetMaxVolumesPerNode(csmMap)">Reset to default</a>
                         </div>
                       </div>
+                    </div>
+                  </div>
+
+                  <hr>
+                  <div class="row mb-3">
+                    <div class="col-sm-12 h6">NFS volume operations</div>
+                  </div>
+
+                  <div class="row mb-4 nfsAcls">
+                    <label for="nfsAcls" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory." style="width: 200px;">NFS ACLs</label>
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <input class="form-control input-sm" type="text" id="nfsAcls" placeholder="0777" oninput="validateInput(validateForm, CONSTANTS)">
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-nfsAcls" onclick="resetNfsAcls(csmMap)">Reset to default</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4 enable-quota">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="enable-quota" value="">
+                      <label for="enable-quota" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable quota limits for a newly provisioned NFS volume.">Quota</label>
                     </div>
                   </div>
 

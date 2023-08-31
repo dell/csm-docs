@@ -88,6 +88,7 @@ function onArrayChange() {
 		onVSphereChange();
 		onReplicationChange(replicationNote);
 		validateInput(validateForm, CONSTANTS);
+		onRenameSDCChange(driver, CONSTANTS);
 	});
 }
 
@@ -212,6 +213,16 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 	}
 }
 
+function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
+	if ($("#renameSDC").prop('checked') === true) {
+		if (driverName == CONSTANTS_PARAM.POWERFLEX){
+			$('div.sdc-prefix').show();
+		}
+	} else {
+		$('div.sdc-prefix').hide();
+	}
+}
+
 const onCSMVersionChange = () => {
 	document.getElementById("csm-version").value !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 	displayModules(installationType, driver, CONSTANTS);
@@ -251,6 +262,14 @@ const resetVolNamePrefix = csmMapValue => {
 
 const resetSnapNamePrefix = csmMapValue => {
 	document.getElementById("snapshot-prefix").value = String(csmMapValue.get("snapNamePrefix"));
+}
+
+const resetSDCPrefix = csmMapValue => {
+	document.getElementById("sdc-prefix").value = String(csmMapValue.get("sdcPrefix"));
+}
+
+const resetNfsAcls = csmMapValue => {
+	document.getElementById("nfsAcls").value = String(csmMapValue.get("nfsAcls"));
 }
 
 const resetNodeSelectorLabel = csmMapValue => {
@@ -334,6 +353,10 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".replication-operator-clusterid").hide();
 	$(".replication-helm-arrayid").hide();
 	$(".replication-helm-unisphere").hide();
+	$(".renameSDC-feature").hide();
+	$(".approveSDC").hide();
+	$(".nfsAcls").hide();
+	$(".enable-quota").hide();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -422,6 +445,13 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".cert-secret-count-wrapper").show();
 			$("div#snap-prefix").hide();
 			$(".storage-capacity").show();
+			$(".renameSDC-feature").show();
+			$(".approveSDC").show();
+			if (document.getElementById("csm-version").value == "1.8.0") {
+				$(".max-volumes-per-node").show();
+				$(".nfsAcls").show();
+				$(".enable-quota").show();
+			}
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.UNITY:
@@ -526,6 +556,7 @@ if (typeof exports !== 'undefined') {
 		onVSphereChange,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
+		onRenameSDCChange,
 		resetImageRepository,
 		resetMaxVolumesPerNode,
 		resetControllerCount,
@@ -542,6 +573,7 @@ if (typeof exports !== 'undefined') {
 		hideFields,
 		validateInput,
 		resetVolNamePrefix,
-		resetSnapNamePrefix
+		resetSnapNamePrefix,
+		resetSDCPrefix
 	};
 }

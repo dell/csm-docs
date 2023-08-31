@@ -185,6 +185,11 @@ csi-vxflexos:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
+    renameSDC:
+      enabled: $RENAME_SDC_ENABLED
+      sdcPrefix: $SDC_PREFIX
+    approveSDC:
+      enabled: $APPROVE_SDC_ENABLED
     tolerations: $NODE_TOLERATIONS
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
     # - key: "offline.vxflexos.storage.dell.com"
@@ -207,6 +212,8 @@ csi-vxflexos:
     #   effect: "NoSchedule"
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
+  nfsAcls: $NFS_ACLS
+  enableQuota: $QUOTA_ENABLED
   monitor:
     enabled: $MONITOR_ENABLED
   vgsnapshotter:
@@ -238,6 +245,7 @@ csi-vxflexos:
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.8.0
     proxyHost: $AUTHORIZATION_PROXY_HOST
     skipCertificateValidation: $AUTHORIZATION_SKIP_CERTIFICATE_VALIDATION
+  maxPowerflexVolumesPerNode: $MAX_VOLUMES_PER_NODE
 
 ## K8S/CSI-PowerScale ATTRIBUTES
 ##########################################
