@@ -174,7 +174,7 @@ describe("GIVEN setValues function", () => {
 			vSphereVCenterCredSecret: undefined,
 			targetClusterId: "",
 			targetArrayID: "",
-			targetUnisphere: "",
+			targetUnisphere: '""',
 			iscsichap: false,
 			manageArrayId: '""',
 			manageArrayEndpointUrl: '""',
@@ -286,7 +286,7 @@ describe("GIVEN setValues function", () => {
 			portGroups: undefined,
 			targetClusterId: "",
 			targetArrayID: "",
-			targetUnisphere: "",
+			targetUnisphere: '""',
 			vSphereEnabled: false,
 			vSphereFCPortGroup: undefined,
 			vSphereFCHostName: undefined,
@@ -441,14 +441,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: $POWERMAX_ENABLED
       global:
         storageArrays:
-          - storageArrayId: ""
-            endpoint: ""
+         - storageArrayId: ""
+           endpoint: ""
             backupEndpoint: ""
-          - storageArrayId: ""
-            endpoint: ""
+         - storageArrayId: ""
+           endpoint: ""
         managementServers:
-          - endpoint: ""
-          - endpoint: ""
+         - endpoint: ""
+         - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: $IMAGE_REPOSITORY
@@ -749,14 +749,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       global:
         storageArrays:
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
             backupEndpoint: ""
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
         managementServers:
-          - endpoint: ""
-          - endpoint: ""
+   #      - endpoint: ""
+   #      - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: dellemc
@@ -1018,14 +1018,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       global:
         storageArrays:
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
             backupEndpoint: ""
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
         managementServers:
-          - endpoint: ""
-          - endpoint: ""
+   #      - endpoint: ""
+   #      - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: dellemc
@@ -1288,14 +1288,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: true
       global:
         storageArrays:
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
             backupEndpoint: ""
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
         managementServers:
-          - endpoint: ""
-          - endpoint: ""
+   #      - endpoint: ""
+   #      - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: dellemc
@@ -1560,14 +1560,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       global:
         storageArrays:
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
             backupEndpoint: ""
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
         managementServers:
-          - endpoint: ""
-          - endpoint: ""
+   #      - endpoint: ""
+   #      - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: dellemc
@@ -1831,14 +1831,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: false
       global:
         storageArrays:
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
             backupEndpoint: ""
-          - storageArrayId: ""
-            endpoint: ""
+   #      - storageArrayId: ""
+   #       endpoint: ""
         managementServers:
-          - endpoint: ""
-          - endpoint: ""
+   #      - endpoint: ""
+   #      - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: dellemc
