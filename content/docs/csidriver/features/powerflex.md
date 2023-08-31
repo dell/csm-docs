@@ -896,7 +896,7 @@ If enableQuota feature is set, user can also set other tree quota parameters suc
 > * `sofLimit` cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).
 > * `softLimit` should be lesser than 100%, since hardLimit will be set to 100% (PVC size) internally by the driver.
 
-### Storage Class Example with Quota Limit Parameters:
+### Storage Class Example with Quota Limit Parameters
 [`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
 
 ```yaml
