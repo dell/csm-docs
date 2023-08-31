@@ -351,8 +351,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".replication-helm-unisphere").hide();
 	$(".rename-sdc-feature").hide();
 	$(".approve-sdc").hide();
-	$(".nfs-acls").hide();
-	$(".enable-quota").hide();
+	$(".nfs-feature").hide();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -445,8 +444,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".approve-sdc").show();
 			if (document.getElementById("csm-version").value == "1.8.0") {
 				$(".max-volumes-per-node").show();
-				$(".nfs-acls").show();
-				$(".enable-quota").show();
+				$(".nfs-feature").show();
 			}
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
