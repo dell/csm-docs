@@ -301,6 +301,9 @@ describe("GIVEN setValues function", () => {
 			observabilityOperatorTopology: false,
 			topologyEnabled: false,
 			transportProtocol: "",
+			renameSDC: false,
+			sdcPrefix: "",
+			approveSDC: false,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -514,6 +517,11 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: $HEALTH_MONITOR_ENABLED
         nodeSelector: $NODE_POD_NODE_SELECTOR
+        renameSDC:
+		  enabled: $RENAME_SDC_ENABLED
+		  sdcPrefix: $SDC_PREFIX
+		approveSDC:
+		  enabled: $APPROVE_SDC_ENABLED
         tolerations:
         # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
         # - key: "offline.vxflexos.storage.dell.com"
@@ -822,6 +830,11 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        renameSDC:
+		  enabled: false
+		  sdcPrefix: "sdc-test"
+		approveSDC:
+		  enabled: false
         tolerations:
         # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
         # - key: "offline.vxflexos.storage.dell.com"
@@ -1091,6 +1104,11 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        renameSDC:
+		  enabled: false
+		  sdcPrefix: "sdc-test"
+		approveSDC:
+		  enabled: false
         tolerations:
         # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
         # - key: "offline.vxflexos.storage.dell.com"
@@ -1361,6 +1379,11 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        renameSDC:
+		  enabled: false
+		  sdcPrefix: "sdc-test"
+		approveSDC:
+		  enabled: false
         tolerations:
         # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
         # - key: "offline.vxflexos.storage.dell.com"
@@ -1633,6 +1656,11 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        renameSDC:
+		  enabled: false
+		  sdcPrefix: "sdc-test"
+		approveSDC:
+		  enabled: false
         tolerations:
         # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
         # - key: "offline.vxflexos.storage.dell.com"
@@ -1904,6 +1932,11 @@ describe("GIVEN createYamlString function", () => {
         healthMonitor:
           enabled: false
         nodeSelector: false
+        renameSDC:
+		  enabled: false
+		  sdcPrefix: "sdc-test"
+		approveSDC:
+		  enabled: false
         tolerations:
         # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
         # - key: "offline.vxflexos.storage.dell.com"

@@ -275,6 +275,36 @@ describe("GIVEN validateForm functions", () => {
 
 		expect(validateForm(CONSTANT_PARAM)).toBe(true);
 	});
+
+	const powerflexTestHtml = `
+		<select id="array" value="powerflex">
+			<option value="powerflex">PowerFlex</option>
+		</select>
+		<select id="installation-type" value="helm">
+			<option value="helm">Helm</option>
+		</select>
+		<input type="text" id="image-repository" value="some-value">
+		<select id="csm-version" value="1.7.0">
+			<option value="1.7.0" selected>CSM 1.7.0</option>
+		</select>
+		<input type="text" id="driver-namespace" value="temp-value">
+		<input type="number" id="controller-count" value="1">
+		<input type="checkbox" id="rename-sdc">
+		<input type="text" id="sdc-prefix">
+	`;
+
+	test("SHOULD return true IF rename-sdc value is unchecked", () => {
+		document.body.innerHTML = powermaxTestHtml;
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
+
+	test("SHOULD return false IF rename-sdc value is checked AND sdc-prefix value is empty", () => {
+		document.body.innerHTML = powerflexTestHtml;
+		$("#rename-sdc").prop('checked', true);
+
+		expect(validateForm(CONSTANT_PARAM)).toBe(false);
+	});
 });
 
 describe("GIVEN setMap function", () => {
