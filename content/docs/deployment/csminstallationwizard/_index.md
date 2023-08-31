@@ -30,8 +30,8 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 | CSM Modules          | Version   | 
 | ---------------------| --------- | 
-| CSM Observability    | 1.5.1     |
-| CSM Replication      | 1.5.0     |
+| CSM Observability    | 1.6.0     |
+| CSM Replication      | 1.6.0     |
 | CSM Resiliency       | 1.6.0     |
 
 ## Installation
