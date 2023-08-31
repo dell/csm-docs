@@ -617,7 +617,7 @@ vSphere:
 
 CSI PowerMax driver version 2.8.0 and above supports Storage Capacity Tracking.
 
-This feature helps the scheduler to make more informed choices about where to start pods that depend on unbound volumes with late binding (aka “wait for first consumer”). Nodes satisfying the topology constraints, and with the requested capacity that is present on the storage array, will be available for scheduling the pods, Otherwise, the pods stay in pending state.
+This feature helps the scheduler to make more informed choices about where to start pods that depend on unbound volumes with late binding (aka “wait for first consumer”). Nodes satisfying the topology constraints, and with the requested capacity that is present on the storage array, will be available for scheduling the pods, Otherwise, the pods stay in pending state. External-provisioner makes one GetCapacity() call per storage class that is present on the cluster to get the AvailableCapacity for the array specified in the storage class that matches with the array mentioned during driver deployment.
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in the ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
