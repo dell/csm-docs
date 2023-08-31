@@ -441,14 +441,14 @@ describe("GIVEN createYamlString function", () => {
       enabled: $POWERMAX_ENABLED
       global:
         storageArrays:
-#         - storageArrayId: ""
-#           endpoint: ""
+         - storageArrayId: ""
+           endpoint: ""
             backupEndpoint: ""
-#         - storageArrayId: ""
-#           endpoint: ""
+         - storageArrayId: ""
+           endpoint: ""
         managementServers:
-#         - endpoint: ""
-#         - endpoint: ""
+         - endpoint: ""
+         - endpoint: ""
       version: v2.6.0
       images:
         driverRepository: $IMAGE_REPOSITORY
