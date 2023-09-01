@@ -27,9 +27,9 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerScale     | 2.8.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
 | CSI PowerScale     | 2.6.0   | ✔ 1.6.0           | ✔ 1.4.0        | ✔ 1.5.0           | ❌            |
-| CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
-| CSI PowerFlex      | 2.6.0   | ✔ 1.6.0           | ✔ 1.4.0        | ✔ 1.5.0           | ❌            |
-| CSI PowerFlex      | 2.5.0   | ✔ 1.5.0           | ❌             | ✔ 1.4.0           | ❌            |
+| CSI PowerFlex      | 2.8.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
+| CSI PowerFlex      | 2.7.0   | ✔ 1.6.0           | ✔ 1.4.0        | ✔ 1.5.0           | ❌            |
+| CSI PowerFlex      | 2.6.0   | ✔ 1.5.0           | ❌             | ✔ 1.4.0           | ❌            |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
 | CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
 | CSI PowerStore     | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
