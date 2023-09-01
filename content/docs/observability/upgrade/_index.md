@@ -91,7 +91,7 @@ CSM for Observability online installer upgrade can be used if the initial deploy
 ## Offline Installer Upgrade
 
 Assuming that you have already installed the Karavi Observability Helm Chart by offline installer and meet its installation requirement.
-These instructions can be followed when a Helm chart was installed and will be upgraded in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.
+These instructions can be followed when a Helm chart was installed and will be upgraded in an environment that does not have an Internet connection and will be unable to download the Helm chart and related Docker images.
 
 1. Build the Offline Bundle
     Follow [Offline Karavi Observability Helm Chart Installer](../deployment/offline) to build the latest bundle.

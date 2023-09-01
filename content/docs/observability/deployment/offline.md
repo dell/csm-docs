@@ -6,7 +6,7 @@ description: >
   Dell Container Storage Modules (CSM) for Observability Offline Installer
 ---
 
-The following instructions can be followed when a Helm chart will be installed in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.
+The following instructions can be followed when a Helm chart will be installed in an environment that does not have an Internet connection and will be unable to download the Helm chart and related Docker images.
 
 ## Prerequisites
 
@@ -17,10 +17,10 @@ The following instructions can be followed when a Helm chart will be installed i
 
 Multiple Linux-based systems may be required to create and process an offline bundle for use.
 
-* One Linux-based system, with internet access, will be used to create the bundle. This involves the user invoking a script that utilizes `docker` to pull and save container images to file.
+* One Linux-based system, with Internet access, will be used to create the bundle. This involves the user invoking a script that utilizes `docker` to pull and save container images to file.
 * One Linux-based system, with access to an image registry, to invoke a script that uses `docker` to restore container images from file and push them to a registry
 
-If one Linux system has both internet access and access to an internal registry, that system can be used for both steps.
+If one Linux system has both Internet access and access to an internal registry, that system can be used for both steps.
 
 Preparing an offline bundle requires the following utilities:
 

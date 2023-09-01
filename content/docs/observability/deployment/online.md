@@ -45,7 +45,7 @@ The installer expects CSI drivers are using the default secret and configmap nam
 
 ### Dependencies
 
-A Linux-based system, with internet access, will be used to execute the script to install CSM for Observability into a Kubernetes/Openshift environment that also has internet access.
+A Linux-based system, with Internet access, will be used to execute the script to install CSM for Observability into a Kubernetes/Openshift environment that also has Internet access.
 
 | Dependency            | Usage |
 | --------------------- | ----- |
