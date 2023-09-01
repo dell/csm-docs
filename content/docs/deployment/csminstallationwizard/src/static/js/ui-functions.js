@@ -215,7 +215,7 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 
 function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 	if ($("#rename-sdc").prop('checked') === true) {
-		if (driverName == CONSTANTS_PARAM.POWERFLEX){
+		if (driverName === POWERFLEX){
 			$('div.sdc-prefix').show();
 		}
 	} else {
@@ -442,7 +442,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".storage-capacity").show();
 			$(".rename-sdc-feature").show();
 			$(".approve-sdc").show();
-			if (document.getElementById("csm-version").value == "1.8.0") {
+			if (document.getElementById("csm-version").value === "1.8.0") {
 				$(".max-volumes-per-node").show();
 				$(".nfs-feature").show();
 			}
