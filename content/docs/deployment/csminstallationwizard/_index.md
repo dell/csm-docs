@@ -81,11 +81,13 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 >NOTE: Only the Authorization sidecar is enabled by the CSM Installation Wizard. The Proxy Server has to be installed and configured separately.
 
-7. If the Volume Snapshot feature is enabled, please refer to [Volume Snapshot for PowerStore](../../csidriver/installation/helm/powerstore/#optional-volume-snapshot-requirements) and [Volume Snapshot for PowerMax](../../csidriver/installation/helm/powermax/#optional-volume-snapshot-requirements) to install the Volume Snapshot CRDs and the default snapshot controller.
+7. For the Replication module, please refer [Replication](../../replication/deployment/) to configure communication between Kubernetes clusters.
+
+8. If the Volume Snapshot feature is enabled, please refer to [Volume Snapshot for PowerStore](../../csidriver/installation/helm/powerstore/#optional-volume-snapshot-requirements) and [Volume Snapshot for PowerMax](../../csidriver/installation/helm/powermax/#optional-volume-snapshot-requirements) to install the Volume Snapshot CRDs and the default snapshot controller.
 
 >NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, please follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
 
-8. Install the Helm chart.
+9. Install the Helm chart.
 
     On your terminal, run this command:
 

@@ -68,8 +68,8 @@ You can leave other parameters like `image`, `replicationContextPrefix`, and `re
 After enabling the replication module you can continue to install the CSI driver for PowerStore following
 usual installation procedure, just ensure you've added necessary array connection information to secret.
 
-> **_NOTE:_** you need to install your driver at least on the source cluster, but it is recommended to install
-> drivers on all clusters you will use for replication.
+> **_NOTE:_** You need to install your driver on all clusters where you want to use replication. Both arrays
+must be accessible from each cluster.
 
 
 ### Creating Storage Classes
@@ -109,7 +109,7 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/isReplicationEnabled` if set to `true` will mark this storage class as replication enabled,
   just leave it as `true`.
 * `replication.storage.dell.com/remoteStorageClassName` points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.
-* `replication.storage.dell.com/remoteClusterID` represents ID of a remote cluster. It is the same ID you put in the replication controller config map.
+* `replication.storage.dell.com/remoteClusterID` represents ID of a remote Kubernetes cluster. It is the same ID you put in the replication controller config map.
 * `replication.storage.dell.com/remoteSystem` is the name of the remote system as seen from the current PowerStore instance.
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is measured in units of time,
   that may be lost due to a failure.
