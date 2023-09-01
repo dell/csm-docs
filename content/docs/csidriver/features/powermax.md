@@ -621,7 +621,7 @@ This feature helps the scheduler to make more informed choices about where to st
 
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in the ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
-Storage Capacity can be tracked by setting the attribute `storageCapacity.enabled` to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set `storageCapacity.pollInterval` (set to 5m by default) attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+Storage Capacity can be tracked by setting the attribute `storageCapacity.enabled` to true in values.yaml (set to true by default) during driver installation. To configure how often driver checks for changed capacity, set the `storageCapacity.pollInterval` attribute (set to 5m by default). In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
 
 >Note: This feature requires kubernetes v1.24 and above and will be automatically disabled in lower version of kubernetes.
 
