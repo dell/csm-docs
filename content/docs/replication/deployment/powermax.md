@@ -74,7 +74,7 @@ Here is an example of what that would look like:
 # Set this to true to enable replication
 replication:
   enabled: true
-  image: dellemc/dell-csi-replicator:v1.0.0
+  image: dellemc/dell-csi-replicator:v1.6.0
   replicationContextPrefix: "powermax"
   replicationPrefix: "replication.storage.dell.com"
 ...
@@ -84,8 +84,8 @@ You can leave other parameters like `image`, `replicationContextPrefix`, and `re
 After enabling the replication module you can continue to install the CSI driver for PowerMax following
 usual installation procedure, just ensure you've added necessary array connection information to secret.
 
-> **_NOTE:_** You need to install your driver at least on the source cluster, but it is recommended to install
-> drivers on all clusters you will use for replication.
+> **_NOTE:_** You need to install your driver on all clusters where you want to use replication. Both arrays
+must be accessible from each cluster.
 
 
 ### Creating Storage Classes
@@ -129,7 +129,7 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/isReplicationEnabled` if set to `true`, will mark this storage class as replication enabled,
   just leave it as `true`.
 * `replication.storage.dell.com/RemoteStorageClassName` points to the name of the remote storage class, if you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.
-* `replication.storage.dell.com/RemoteClusterID` represents the ID of a remote cluster, it is the same ID you put in the replication controller config map.
+* `replication.storage.dell.com/RemoteClusterID` represents the ID of a remote Kubernetes cluster, it is the same ID you put in the replication controller config map.
 * `replication.storage.dell.com/RemoteSYMID` is the Symmetrix ID of the remote array.
 * `replication.storage.dell.com/RemoteSRP` is the storage pool of the remote array.
 * `replication.storage.dell.com/RemoteServiceLevel` is the service level that will be assigned to remote volumes.
