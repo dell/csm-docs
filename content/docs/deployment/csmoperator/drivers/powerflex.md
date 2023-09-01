@@ -88,59 +88,59 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
     Example: secret.yaml
 
      ```yaml
-        # Username for accessing PowerFlex system.
-  # If authorization is enabled, username will be ignored.
-- username: "admin"
-  # Password for accessing PowerFlex system.
-  # If authorization is enabled, password will be ignored.
-  password: "password"
-  # System name/ID of PowerFlex system.	
-  systemID: "1a99aa999999aa9a"
-  # Previous names used in secret of PowerFlex system.
-  allSystemNames: "pflex-1,pflex-2"
-  # REST API gateway HTTPS endpoint for PowerFlex system.
-  # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
-  # the authorization sidecar will listen on
-  endpoint: "https://127.0.0.1"
-  # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
-  # Allowed values: true or false
-  # Default value: true
-  skipCertificateValidation: true 
-  # indicates if this array is the default array
-  # needed for backwards compatibility
-  # only one array is allowed to have this set to true 
-  # Default value: false
-  isDefault: true
-  # defines the MDM(s) that SDC should register with on start.
-  # Allowed values:  a list of IP addresses or hostnames separated by comma.
-  # Default value: none 
-  mdm: "10.0.0.1,10.0.0.2"
-  # NFS is only supported on PowerFlex storage system 4.0.x
-  # nasName: name of NAS server used for NFS volumes
-  # nasName value must be specified in secret for performing NFS (file) operations.
-  # Allowed Values: string
-  # Default Value: "none"
-  nasName: "nas-server"
-  # nfsAcls: enables setting permissions on NFS mount directory
-  # This value will be used if a storage class does not have the NFS ACL (nfsAcls) parameter specified
-  # Permissions can be specified in two formats:
-  #   1) Unix mode (NFSv3)
-  #   2) NFSv4 ACLs (NFSv4)
-  #      NFSv4 ACLs are supported on NFSv4 share only.
-  # Allowed values:
-  #   1) Unix mode: valid octal mode number
-  #      Examples: "0777", "777", "0755"
-  #   2) NFSv4 acls: valid NFSv4 acls, separated by comma
-  #      Examples: "A::OWNER@:RWX,A::GROUP@:RWX", "A::OWNER@:rxtncy"
-  # Optional: true
-  # Default value: "0777"
-  # nfsAcls: "0777"  
-- username: "admin"
-  password: "Password123"
-  systemID: "2b11bb111111bb1b"
-  endpoint: "https://127.0.0.2"
-  skipCertificateValidation: true 
-  mdm: "10.0.0.3,10.0.0.4"
+      # Username for accessing PowerFlex system.
+      # If authorization is enabled, username will be ignored.
+     - username: "admin"
+      # Password for accessing PowerFlex system.
+      # If authorization is enabled, password will be ignored.
+      password: "password"
+      # System name/ID of PowerFlex system.	
+      systemID: "1a99aa999999aa9a"
+      # Previous names used in secret of PowerFlex system.
+      allSystemNames: "pflex-1,pflex-2"
+      # REST API gateway HTTPS endpoint for PowerFlex system.
+      # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
+      # the authorization sidecar will listen on
+      endpoint: "https://127.0.0.1"
+      # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
+      # Allowed values: true or false
+      # Default value: true
+      skipCertificateValidation: true 
+      # indicates if this array is the default array
+      # needed for backwards compatibility
+      # only one array is allowed to have this set to true 
+      # Default value: false
+      isDefault: true
+      # defines the MDM(s) that SDC should register with on start.
+      # Allowed values:  a list of IP addresses or hostnames separated by comma.
+      # Default value: none 
+      mdm: "10.0.0.1,10.0.0.2"
+      # NFS is only supported on PowerFlex storage system 4.0.x
+      # nasName: name of NAS server used for NFS volumes
+      # nasName value must be specified in secret for performing NFS (file) operations.
+      # Allowed Values: string
+      # Default Value: "none"
+      nasName: "nas-server"
+      # nfsAcls: enables setting permissions on NFS mount directory
+      # This value will be used if a storage class does not have the NFS ACL (nfsAcls) parameter specified
+      # Permissions can be specified in two formats:
+      #   1) Unix mode (NFSv3)
+      #   2) NFSv4 ACLs (NFSv4)
+      #      NFSv4 ACLs are supported on NFSv4 share only.
+      # Allowed values:
+      #   1) Unix mode: valid octal mode number
+      #      Examples: "0777", "777", "0755"
+      #   2) NFSv4 acls: valid NFSv4 acls, separated by comma
+      #      Examples: "A::OWNER@:RWX,A::GROUP@:RWX", "A::OWNER@:rxtncy"
+      # Optional: true
+      # Default value: "0777"
+      # nfsAcls: "0777"  
+    - username: "admin"
+      password: "Password123"
+      systemID: "2b11bb111111bb1b"
+      endpoint: "https://127.0.0.2"
+      skipCertificateValidation: true 
+      mdm: "10.0.0.3,10.0.0.4"
     ```
 
     After editing the file, run this command to create a secret called `vxflexos-config`. If you are using a different namespace/secret name, just substitute those into the command.
@@ -175,13 +175,11 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
    | nfsAcls | enables setting permissions on NFS mount directory | No | 0777 |
    | enableQuota | a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume | No | none |
    | maxVxflexosVolumesPerNode | Specify default value for maximum number of volumes that controller can publish to the node.If value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node | Yes | 0 |
-
    | ***Common parameters for node and controller*** |
    | X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT | Enable list volume operation to include snapshots (since creating a volume from a snap actually results in a new snap) | No | false |
    | X_CSI_VXFLEXOS_ENABLESNAPSHOTCGDELETE | Enable this to automatically delete all snapshots in a consistency group when a snap in the group is deleted | No | false |
    | X_CSI_DEBUG | To enable debug mode | No | true |
    | X_CSI_ALLOW_RWO_MULTI_POD_ACCESS | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | No | false |
-
    | ***Node parameters*** |
    | X_CSI_RENAME_SDC_ENABLED | Enable this to rename the SDC with the given prefix. The new name will be ("prefix" + "worker_node_hostname") and it should not exceed 31 chars. | Yes | false |
    | X_CSI_APPROVE_SDC_ENABLED | Enable this to to approve restricted SDC by GUID during setup | Yes | false |
