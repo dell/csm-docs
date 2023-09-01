@@ -121,6 +121,7 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b <version> https:
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
+    | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
     | logLevel | LogLevel is used to set the logging level of the driver | No | info |
     | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | No | false |
     | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
@@ -129,7 +130,6 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b <version> https:
     | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | No | 1 |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
     | podmon.enabled | service to monitor failing jobs and notify | No | false |
-    | podmon.image| pod man image name | No | - |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
     | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
     | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |

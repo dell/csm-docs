@@ -180,6 +180,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|----------|---------|
+| images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
 | logLevel | Defines CSI driver log level | No | "debug" |
 | logFormat | Defines CSI driver log format | No | "JSON" |
 | externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
@@ -204,15 +205,13 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
 | controller.vgsnapshot.enabled | Allows to enable/disable the volume group snapshot feature | No | "true" |
-| images.driverRepository | To use an image from custom repository | No | dockerhub |
 | version | To use any driver version | No | Latest driver version |
 | allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
 | storageCapacity.enabled | Allows to enable/disable storage capacity tracking feature | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
 | podmon.enabled | Allows to enable/disable [Resiliency](../../../resiliency/) feature | No | false
-| podmon.image | Sidecar image for resiliency | No | -
 
-8. Install the driver using `csi-install.sh` bash script by running 
+8. Install the driver using `csi-install.sh` bash script by running
    ```bash
    ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml
    ``` 

@@ -263,9 +263,8 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | powerMaxDebug | Enables low level and http traffic logging between the CSI driver and Unisphere. Don't enable this unless asked to do so by the support team. | No | false |
 | enableCHAP | Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key "chapsecret" | No | false |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.3.0 | 
-| images | Defines the container images used by the driver.  | - | - |
-| driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
+| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.8.0 |
+| images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
 | maxPowerMaxVolumesPerNode | Specifies the maximum number of volume that can be created on a node. | Yes| 0 |
 | **controller** | Allows configuration of the controller-specific parameters.| - | - |
 | controllerCount | Defines the number of csi-powerscale controller pods to deploy to the Kubernetes release| Yes | 2 |
@@ -283,7 +282,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | healthMonitor.enabled | Allows to enable/disable volume health monitor | No | false |
 | topologyControl.enabled | Allows to enable/disable topology control to filter topology keys | No | false |
 | **csireverseproxy**| This section refers to the configuration options for CSI PowerMax Reverse Proxy  |  -  | - |
-| image | This refers to the image of the CSI PowerMax Reverse Proxy container. | Yes | dellemc/csipowermax-reverseproxy:v2.4.0 |
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
@@ -294,22 +292,17 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | privateKeyFile | privateKeyFile has tls.key content in encoded format | No | tls.key.encoded64 |
 | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerMax. | - | - |
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
-| sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 | **migration** | [Migration](../../../../replication/migration/migrating-volumes-same-array) is an optional feature to enable migration between storage classes | - | - |
 | enabled                  | A boolean that enables/disables migration feature. |  No      |   false   |
-| image | Image for dell-csi-migrator sidecar. | No | " " |
-| nodeRescanSidecarImage | Image for node rescan sidecar which rescans nodes for identifying new paths. | No | " " |
 | migrationPrefix | enables migration sidecar to read required information from the storage class fields | No | migration.storage.dell.com |
 | **replication** | [Replication](../../../../replication/deployment) is an optional feature to enable replication & disaster recovery capabilities of PowerMax to Kubernetes clusters.| - | - |
 | enabled                  | A boolean that enables/disables replication feature. |  No      |   false   |
-| image | Image for dell-csi-replicator sidecar. | No | " " |
 | replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
 | replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
 | **storageCapacity** | It is an optional feature that enable storagecapacity & helps the scheduler to check whether the requested capacity is available on the PowerMax array and allocate it to the nodes.| - | - |
 | enabled                  | A boolean that enables/disables storagecapacity feature. |  -      |   true   |
-| image | Image for storagecapacity sidecar. | No | "" |
 | pollInterval | It configure how often external-provisioner polls the driver to detect changed capacity | - | 5m |
 | **vSphere**| This section refers to the configuration options for VMware virtualized environment support via RDM  |  -  | - |
 | enabled                  | A boolean that enables/disables VMware virtualized environment support. |  No      |   false   |
@@ -319,11 +312,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | vCenterCredSecret                  | Secret name for the vCenter credentials. |  Yes      |   ""   |
 
 
-8. Install the driver using `csi-install.sh` bash script by running 
+8. Install the driver using `csi-install.sh` bash script by running
     ```bash
     cd ../dell-csi-helm-installer && ./csi-install.sh --namespace powermax --values ./my-powermax-settings.yaml
     ```
-9. Or you can also install the driver using standalone helm chart using the command 
+9. Or you can also install the driver using standalone helm chart using the command
    ```bash
    helm install --values  my-powermax-settings.yaml --namespace powermax powermax ./csi-powermax
    ```
@@ -377,7 +370,6 @@ global:
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
   # Set enabled to true if you want to use proxy
-  image: dellemc/csipowermax-reverseproxy:v2.4.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222
@@ -423,7 +415,6 @@ global:
 
 # "csireverseproxy" refers to the subchart csireverseproxy
 csireverseproxy:
-  image: dellemc/csipowermax-reverseproxy:v2.4.0
   tlsSecret: csirevproxy-tls-secret
   deployAsSidecar: true
   port: 2222
