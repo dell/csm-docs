@@ -26,15 +26,16 @@ Kubernetes cluster. Please refer to [Rekey Configuration](../rekey) for the Reke
 The drivers that support Encryption via Helm chart have an `encryption` block in their *values.yaml* file that looks like this:
 
 ```yaml
+images:
+  # image: Encryption driver image name.
+  image: "dellemc/csm-encryption:v0.3.0"
+
 encryption:
   # enabled: Enable/disable volume encryption feature.
   enabled: false
 
   # pluginName: The name of the provisioner to use for encrypted volumes.
   pluginName: "sec-isilon.dellemc.com"
-
-  # image: Encryption driver image name.
-  image: "dellemc/csm-encryption:v0.3.0"
 
   # logLevel: Log level of the encryption driver.
   # Allowed values: "error", "warning", "info", "debug", "trace".
@@ -69,9 +70,9 @@ encryption:
 
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- | ------- |  
+| images.encryption | Encryption driver image name. | No | "dellemc/csm-encryption:v0.3.0" |
 | enabled | Enable/disable volume encryption feature. | No | false |
 | pluginName | The name of the provisioner to use for encrypted volumes. | No | "sec-isilon.dellemc.com" |
-| image | Encryption driver image name. | No | "dellemc/csm-encryption:v0.3.0" |
 | logLevel | Log level of the encryption driver.<br/>Allowed values: "error", "warning", "info", "debug", "trace". | No | "error" |
 | apiPort | TCP Port number used by the REST API Server. | No | 3838 |
 | livenessPort | HTTP liveness probe port number. Leave empty to disable the liveness probe. | No | |

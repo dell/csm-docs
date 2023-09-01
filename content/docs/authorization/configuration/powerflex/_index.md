@@ -104,9 +104,9 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     Refer to the [Install the Driver](../../../csidriver/installation/helm/powerflex/#install-the-driver) section to edit the parameters in `myvalues.yaml` to enable CSM Authorization.
 
+    - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+
     - Update `authorization.enabled` to `true`.
-    
-    - Update `authorization.sidecarProxyImage` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
     - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server.
     
@@ -117,10 +117,6 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
     ```yaml
     authorization:
       enabled: true
-
-      # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.7.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None

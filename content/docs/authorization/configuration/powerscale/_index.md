@@ -112,9 +112,9 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
 
     Refer to the [Install the Driver](../../../csidriver/installation/helm/isilon/#install-the-driver) section to edit the parameters in `my-isilon-settings.yaml` file to enable CSM Authorization.
 
+    - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+
     - Update `authorization.enabled` to `true`.
-    
-    - Update `authorization.sidecarProxyImage` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
     - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server.
     
@@ -125,10 +125,6 @@ kubectl -n isilon create secret generic karavi-authorization-config --from-file=
     ```yaml
     authorization:
       enabled: true
-
-      # sidecarProxyImage: the container image used for the csm-authorization-sidecar.
-      # Default value: dellemc/csm-authorization-sidecar:v1.7.0
-      sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
 
       # proxyHost: hostname of the csm-authorization server
       # Default value: None

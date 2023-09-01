@@ -58,12 +58,11 @@ controller:
   # replication: allows to configure replication
   replication:
     enabled: true
-    image: dellemc/dell-csi-replicator:v1.0.0
     replicationContextPrefix: "powerstore"
     replicationPrefix: "replication.storage.dell.com"
 ...
 ```
-You can leave other parameters like `image`, `replicationContextPrefix`, and `replicationPrefix` as they are.
+You can leave other parameters like `replicationContextPrefix`, and `replicationPrefix` as they are.
 
 After enabling the replication module you can continue to install the CSI driver for PowerStore following
 usual installation procedure, just ensure you've added necessary array connection information to secret.
