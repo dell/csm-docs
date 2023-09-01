@@ -115,7 +115,7 @@ These instructions can be followed when a Helm chart was installed and will be u
       In your own configuration values.yaml, you need to enable PowerFlex/PowerScale Authorization, and provide the location of the sidecar-proxy Docker image and URL of the Karavi Authorization proxyHost address.
 
    4. After the images have been made available and the Helm chart configuration is updated, follow the instructions within the Helm chart's repository to complete the installation.
-      **Note**: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace in the phase of [Offline Karavi Observability Helm Chart Installer](../deployment/offline)
+      **Note**: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace during the steps of [Offline Karavi Observability Helm Chart Installer](../deployment/offline)
       Optionally, you could provide your own [configurations](../deployment/helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
       ```bash
 
