@@ -58,7 +58,7 @@ controller:
   # replication: allows to configure replication
   replication:
     enabled: true
-    image: dellemc/dell-csi-replicator:v1.0.0
+    image: dellemc/dell-csi-replicator:v1.6.0
     replicationContextPrefix: "powerstore"
     replicationPrefix: "replication.storage.dell.com"
 ...

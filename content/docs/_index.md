@@ -68,7 +68,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
 | [**Authorization**](authorization/) v1.7.0                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
 | [**Observability**](observability/) v1.5.0                  | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Replication**](replication/)   v1.5.0                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
+| [**Replication**](replication/)   v1.6.0                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
 | [**Resiliency**](resiliency/)     v1.6.0                    | ✔️                    | ✔️                     | ✔️                    | ❌                   | ✔️                   |
 | [**Encryption**](secure/encryption)    v0.4.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
 | [**Application Mobility**](applicationmobility/)     v0.4.0 | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ✔️                   |

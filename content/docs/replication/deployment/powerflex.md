@@ -58,7 +58,7 @@ Here is an example of how that would look:
 # Set this to true to enable replication
 replication:
   enabled: true
-  image: dellemc/dell-csi-replicator:v1.2.0
+  image: dellemc/dell-csi-replicator:v1.6.0
   replicationContextPrefix: "powerflex"
   replicationPrefix: "replication.storage.dell.com"
 ...

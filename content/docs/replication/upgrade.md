@@ -45,7 +45,7 @@ On PowerScale systems, an additional step is needed when upgrading to CSM Replic
 Make sure the appropriate release branch is available on the machine performing the upgrade by running:
 
 ```bash
-git clone -b v1.5.0 https://github.com/dell/csm-replication.git
+git clone -b v1.6.0 https://github.com/dell/csm-replication.git
 ```
 
 ### Upgrading with Helm
@@ -95,4 +95,4 @@ CRD `dellcsireplicationgroups.replication.storage.dell.com` has been updated to 
 
 > _**Note**_: Do not update the CRD as part of upgrade. An `init container` included in the replication controller pod takes care of updating existing CRD and CR versions.
 
-Starting from CSM Replication v1.5.1, the `init container` has been removed. Therefore, when upgrading from versions older than v1.4.0 to v1.5.1 or any later versions, it is mandatory to perform an intermediate upgrade to either v1.4.0 or v1.5.0 before proceeding with any further upgrades.
+Starting from CSM Replication v1.6.0, the `init container` has been removed. Therefore, when upgrading from versions older than v1.4.0 to v1.6.0 or any later versions, it is mandatory to perform an intermediate upgrade to either v1.4.0 or v1.5.0 before proceeding with any further upgrades.
