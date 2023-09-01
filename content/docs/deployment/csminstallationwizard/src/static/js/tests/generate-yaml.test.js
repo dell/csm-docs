@@ -115,6 +115,11 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="manage-array-id">
             <input type="text" id="manage-array-endpoint-url">
             <input type="checkbox" id="topology">
+			<input type="checkbox" id="rename-sdc">
+			<input type="text" id="sdc-prefix" value="">
+			<input type="checkbox" id="approve-sdc">
+			<input type="text" id="nfs-acls" value="0777">
+			<input type="checkbox" id="enable-quota">
         `;
 
 		const expected = {
@@ -184,6 +189,11 @@ describe("GIVEN setValues function", () => {
 			observabilityOperatorTopology: false,
 			topologyEnabled: false,
 			transportProtocol: "",
+			renameSDC: false,
+			sdcPrefix: "",
+			approveSDC: false,
+			nfsAcls: "0777",
+			enableQuota: false,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -232,6 +242,11 @@ describe("GIVEN setValues function", () => {
             <input type="text" id="manage-array-endpoint-url">
             <input type="checkbox" id="topology">
             <input type="checkbox" id="leader-election">
+			<input type="checkbox" id="rename-sdc">
+			<input type="text" id="sdc-prefix" value="">
+			<input type="checkbox" id="approve-sdc">
+			<input type="text" id="nfs-acls" value="0777">
+			<input type="checkbox" id="enable-quota">
         `;
 
 		const expected = {
@@ -304,6 +319,8 @@ describe("GIVEN setValues function", () => {
 			renameSDC: false,
 			sdcPrefix: "",
 			approveSDC: false,
+			nfsAcls: "0777",
+			enableQuota: false,
 		};
 
 		const received = setValues(testCSMMap, CONSTANTS);
@@ -685,7 +702,12 @@ describe("GIVEN createYamlString function", () => {
 		vSphereFCHostName: "csi-vsphere-VC-HN",
 		vSphereVCenterHost: "00.000.000.00",
 		vSphereVCenterCredSecret: "vcenter-creds",
-		migration: false
+		migration: false,
+		renameSDC: false,
+		sdcPrefix: "sdc-test",
+		approveSDC: false
+		// nfsAcls: "0777",
+		// enableQuota: false
 	};
 
 	test("SHOULD return generated yaml file string for driver csi-powerstore", () => {
@@ -832,7 +854,7 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         renameSDC:
 		  enabled: false
-		  sdcPrefix: "sdc-test"
+		  sdcPrefix: sdc-test
 		approveSDC:
 		  enabled: false
         tolerations:
@@ -1106,7 +1128,7 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         renameSDC:
 		  enabled: false
-		  sdcPrefix: "sdc-test"
+		  sdcPrefix: sdc-test
 		approveSDC:
 		  enabled: false
         tolerations:
@@ -1381,7 +1403,7 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         renameSDC:
 		  enabled: false
-		  sdcPrefix: "sdc-test"
+		  sdcPrefix: sdc-test
 		approveSDC:
 		  enabled: false
         tolerations:
@@ -1658,7 +1680,7 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         renameSDC:
 		  enabled: false
-		  sdcPrefix: "sdc-test"
+		  sdcPrefix: sdc-test
 		approveSDC:
 		  enabled: false
         tolerations:
@@ -1934,7 +1956,7 @@ describe("GIVEN createYamlString function", () => {
         nodeSelector: false
         renameSDC:
 		  enabled: false
-		  sdcPrefix: "sdc-test"
+		  sdcPrefix: sdc-test
 		approveSDC:
 		  enabled: false
         tolerations:

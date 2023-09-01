@@ -128,8 +128,8 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.renameSDC = $("#rename-sdc").prop('checked') ? true : false;
 	DriverValues.sdcPrefix = $("#sdc-prefix").val();
 	DriverValues.approveSDC = $("#approve-sdc").prop('checked') ? true : false;
-    DriverValues.nfsAcls = $("#nfs-acls").val();
-    DriverValues.enableQuota = $("#enable-quota").prop('checked') ? true : false;
+	DriverValues.nfsAcls = $("#nfs-acls").val();
+	DriverValues.enableQuota = $("#enable-quota").prop('checked') ? true : false;
 	return DriverValues
 }
 
