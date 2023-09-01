@@ -179,7 +179,7 @@ spec:
       # Allowed values: n, where n >= 0
       # Default value: 0
       - name: X_CSI_MAX_VOLUMES_PER_NODE
-        value: "0"
+        value: "$MAX_VOLUMES_PER_NODE"
 
       # X_CSI_ALLOWED_NETWORKS: Custom networks for PowerScale export
       # Specify list of networks which can be used for NFS I/O traffic; CIDR format should be used.

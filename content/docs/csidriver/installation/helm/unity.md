@@ -101,7 +101,7 @@ Install CSI Driver for Unity XT using this procedure.
 
 Procedure
 
-1. Collect information from the Unity XT Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the  `secret.yaml` and `myvalues.yaml` file.
+1. Collect information from the Unity XT Systems like unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the  `secret.yaml` and `myvalues.yaml` file.
 
     **Note**: 
       * ArrayId corresponds to the serial number of Unity XT array.
@@ -121,16 +121,15 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b <version> https:
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
-    | version | helm version | true | - |
-    | logLevel | LogLevel is used to set the logging level of the driver | true | info |
-    | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | false | false |
+    | logLevel | LogLevel is used to set the logging level of the driver | No | info |
+    | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | No | false |
     | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-    | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
-    | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | false | 0 |
-    | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
+    | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | No | 15 |
+    | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | No | 0 |
+    | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | No | 1 |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
-    | podmon.enabled | service to monitor failing jobs and notify | false | - |
-    | podmon.image| pod man image name | false | - |
+    | podmon.enabled | service to monitor failing jobs and notify | No | false |
+    | podmon.image| pod man image name | No | - |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
     | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
     | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
@@ -191,12 +190,12 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml -b <version> https:
     
     | Parameter                 | Description                                    | Required | Default |
     | ------------------------- | ---------------------------------------------- | -------- |-------- |
-    | storageArrayList.username | Username for accessing Unity XT system         | true     | -       |
-    | storageArrayList.password | Password for accessing Unity XT system         | true     | -       |
-    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity XT system| true     | -       |
-    | storageArrayList.arrayId  | ArrayID for Unity XT system                    | true     | -       |
-    | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | true | true |
-    | storageArrayList.isDefault| An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | true | - |
+    | storageArrayList.username | Username for accessing Unity XT system         | Yes     | -       |
+    | storageArrayList.password | Password for accessing Unity XT system         | Yes     | -       |
+    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity XT system| Yes     | -       |
+    | storageArrayList.arrayId  | ArrayID for Unity XT system                    | Yes     | -       |
+    | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | Yes | true |
+    | storageArrayList.isDefault| An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | Yes | - |
 
 
     Example: secret.yaml
