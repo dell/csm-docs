@@ -114,7 +114,7 @@ To perform an offline installation of a Helm chart, the following steps should b
       dellemc/csm-metrics-powerflex:v1.6.0 -> <my-registry>:5000/csm-metrics-powerflex:v1.6.0
       dellemc/csm-metrics-powerstore:v1.6.0 -> <my-registry>:5000/csm-metrics-powerstore:v1.6.0
       dellemc/csm-metrics-powerscale:v1.3.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.3.0
-      dellemc/csm-metrics-powermax:v1.1.0 -> <my-registry>:5000/csm-metrics-powerscale:v1.1.0
+      dellemc/csm-metrics-powermax:v1.1.0 -> <my-registry>:5000/csm-metrics-powermax:v1.1.0
       otel/opentelemetry-collector:0.42.0 -> <my-registry>:5000/opentelemetry-collector:0.42.0
       nginxinc/nginx-unprivileged:1.20 -> <my-registry>:5000/nginx-unprivileged:1.20
     ```
