@@ -5,8 +5,6 @@
 csi-powerstore:
   enabled: $POWERSTORE_ENABLED
   version: v2.7.0
-  images:
-    driverRepository: $IMAGE_REPOSITORY
   ## Controller ATTRIBUTES
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -102,8 +100,6 @@ csi-powermax:
           - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
           - endpoint: $TARGET_UNISPHERE
   version: v2.7.0
-  images:
-    driverRepository: $IMAGE_REPOSITORY
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
   portGroups: "$POWERMAX_PORT_GROUPS"
   controller:
@@ -160,7 +156,6 @@ csi-vxflexos:
   enabled: $POWERFLEX_ENABLED
   version: v2.7.0
   images:
-    driverRepository: $IMAGE_REPOSITORY
     powerflexSdc: dellemc/sdc:3.6.0.6
   certSecretCount: $CERT_SECRET_COUNT
   controller:
@@ -238,8 +233,7 @@ csi-vxflexos:
 csi-isilon:
   enabled: $POWERSCALE_ENABLED
   version: "v2.7.0"
-  images:
-    driverRepository: $IMAGE_REPOSITORY
+
   certSecretCount: $CERT_SECRET_COUNT
 
   allowedNetworks: []
@@ -349,8 +343,6 @@ csi-isilon:
 csi-unity:
   enabled: $UNITY_ENABLED
   version: v2.7.0
-  images:
-    driverRepository: $IMAGE_REPOSITORY
   certSecretCount: $CERT_SECRET_COUNT
   fsGroupPolicy: $FSGROUP_POLICY
   controller:

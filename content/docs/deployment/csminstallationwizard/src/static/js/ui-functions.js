@@ -233,10 +233,6 @@ const onCopyButtonClickHandler = () => {
 const onCopyButtonClick = () => $("#copy").on('click', onCopyButtonClickHandler);
 
 //Reset to default values
-const resetImageRepository = csmMapValue => {
-	document.getElementById("image-repository").value = csmMapValue.get("imageRepository");
-}
-
 const resetControllerCount = csmMapValue => {
 	document.getElementById("controller-count").value = String(csmMapValue.get("controllerCount"));
 }
@@ -321,7 +317,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".vol-name-prefix").show();
 	$("div#snap-prefix").show();
 	$(".fsGroupPolicy").hide();
-	$(".image-repository").show();
 	$(".resizer").show();
 	$(".snapshot-feature").show();
 	$(".resiliency-operator").hide();
@@ -350,7 +345,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".resiliency-operator").show();
 				$(".observability").hide();
 				$(".replication-mod").hide();
-				$(".image-repository").hide();
 				$(".cert-manager").hide();
 				$(".vgsnapshot").hide();
 				$(".resizer").hide();
@@ -374,7 +368,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".replication-operator").show();
 				$(".resiliency").hide();
 				$(".resiliency-operator").show();
-				$(".image-repository").hide();
 				$(".cert-manager").hide();
 				$(".resizer").hide();
 				$(".snapshot-feature").hide();
@@ -401,7 +394,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".observability-operator").show();
 				$(".observability").hide();
 				$(".replication-operator-clusterid").hide();
-				$(".image-repository").hide();
 				$(".cert-manager").hide();
 				$(".storageArrays").hide();
 				$(".managedArrays").show();
@@ -526,7 +518,6 @@ if (typeof exports !== 'undefined') {
 		onVSphereChange,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
-		resetImageRepository,
 		resetMaxVolumesPerNode,
 		resetControllerCount,
 		resetNodeSelectorLabel,
