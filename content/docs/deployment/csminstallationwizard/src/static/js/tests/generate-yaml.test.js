@@ -706,8 +706,6 @@ describe("GIVEN createYamlString function", () => {
 		renameSDC: false,
 		sdcPrefix: "sdc-test",
 		approveSDC: false
-		// nfsAcls: "0777",
-		// enableQuota: false
 	};
 
 	test("SHOULD return generated yaml file string for driver csi-powerstore", () => {
