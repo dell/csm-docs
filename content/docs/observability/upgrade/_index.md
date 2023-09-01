@@ -1,6 +1,6 @@
 ---
 title: Upgrade
-linktitle: Upgrade 
+linktitle: Upgrade
 weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Observability Upgrade
@@ -13,7 +13,7 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 ## Helm Chart Upgrade
 
-CSM for Observability Helm upgrade supports [Helm](../deployment/helm), [Online Installer](../deployment/online), and [Offline Installer](../deployment/offline) deployments. 
+CSM for Observability Helm upgrade supports [Helm](../deployment/helm), [Online Installer](../deployment/online), and [Offline Installer](../deployment/offline) deployments.
 
 To upgrade an existing Helm installation of CSM for Observability to the latest release, download the latest Helm charts.
 
@@ -28,7 +28,7 @@ helm search repo dell
 ```
 ```
 NAME                            CHART VERSION   APP VERSION     DESCRIPTION
-dell/karavi-observability       1.5.0           1.5.0           CSM for Observability is part of the [Container...
+dell/karavi-observability       1.6.0           1.6.0           CSM for Observability is part of the [Container...
 ```
 
 >Note: If using cert-manager CustomResourceDefinitions older than v1.5.3, delete the old CRDs and install v1.5.3 of the CRDs prior to upgrade. See [Prerequisites](../deployment/helm#prerequisites) for location of CRDs.
@@ -66,7 +66,7 @@ CSM for Observability online installer upgrade can be used if the initial deploy
     ```
     ```
     ---------------------------------------------------------------------------------
-    >  Upgrading Karavi Observability in namespace karavi on 1.21
+    >  Upgrading Karavi Observability in namespace karavi on 1.28
     ---------------------------------------------------------------------------------
     |
     |- Karavi Observability is installed. Upgrade can continue          Success
@@ -86,12 +86,12 @@ CSM for Observability online installer upgrade can be used if the initial deploy
     |- Upgrading Karavi Observability helm chart                        Success
     |
     |- Waiting for pods in namespace karavi to be ready                 Success
-    ``` 
+    ```
 
 ## Offline Installer Upgrade
 
 Assuming that you have already installed the Karavi Observability Helm Chart by offline installer and meet its installation requirement.
-These instructions can be followed when a Helm chart was installed and will be upgraded in an environment that does not have an internet connection and will be unable to download the Helm chart and related Docker images.
+These instructions can be followed when a Helm chart was installed and will be upgraded in an environment that does not have an Internet connection and will be unable to download the Helm chart and related Docker images.
 
 1. Build the Offline Bundle
     Follow [Offline Karavi Observability Helm Chart Installer](../deployment/offline) to build the latest bundle.
@@ -106,27 +106,26 @@ These instructions can be followed when a Helm chart was installed and will be u
       ```
    2. Install necessary cert-manager CustomResourceDefinitions provided.
       ```bash
-      
+
       kubectl apply --validate=false -f cert-manager.crds.yaml
       ```
-   3. (Optional) Enable Karavi Observability for PowerFlex/PowerScale to use an existing instance of Karavi Authorization for accessing the REST API for the given storage systems.  
-      **Note**: Assuming that if the Karavi Observability's Authorization has been enabled in the phase of [Offline Karavi Observability Helm Chart Installer](../deployment/offline), the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.  
-      A sample configuration values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).  
-      In your own configuration values.yaml, you need to enable PowerFlex/PowerScale Authorization, and provide the location of the sidecar-proxy Docker image and URL of the Karavi Authorization proxyHost address.  
-   
-   4. Now that the required images have been made available and the Helm chart's configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart's repository.  
-      **Note**: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace in the phase of [Offline Karavi Observability Helm Chart Installer](../deployment/offline)   
+   3. (Optional) Enable Karavi Observability for PowerFlex/PowerScale to use an existing instance of Karavi Authorization for accessing the REST API for the given storage systems.
+      **Note**: Assuming that if the Karavi Observability's Authorization has been enabled in the phase of [Offline Karavi Observability Helm Chart Installer](../deployment/offline), the Authorization Secrets/Configmap have been copied to the Karavi Observability namespace.
+      A sample configuration values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
+      In your own configuration values.yaml, you need to enable PowerFlex/PowerScale Authorization, and provide the location of the sidecar-proxy Docker image and URL of the Karavi Authorization proxyHost address.
+
+   4. After the images have been made available and the Helm chart configuration is updated, follow the instructions within the Helm chart's repository to complete the installation.
+      **Note**: Assuming that Your Secrets from CSI Drivers have been copied to the Karavi Observability namespace during the steps of [Offline Karavi Observability Helm Chart Installer](../deployment/offline)
       Optionally, you could provide your own [configurations](../deployment/helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).
       ```bash
 
         helm upgrade -n install-namespace app-name karavi-observability
       ```
-      ```  
+      ```
         NAME: app-name
         LAST DEPLOYED: Wed Aug 17 14:44:04 2022
         NAMESPACE: install-namespace
         STATUS: deployed
         REVISION: 1
         TEST SUITE: None
-      ``` 
-        
+      ```

@@ -20,10 +20,10 @@ As well as the Dell CSI Operator
 ## Dependencies
 
 Multiple Linux-based systems may be required to create and process an offline bundle for use.
-* One Linux-based system, with internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes `docker` or `podman` to pull and save container images to file.
+* One Linux-based system, with Internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes `docker` or `podman` to pull and save container images to file.
 * One Linux-based system, with access to an image registry, to invoke a script that uses `docker` or `podman` to restore container images from file and push them to a registry
 
-If one Linux system has both internet access and access to an internal registry, that system can be used for both steps.
+If one Linux system has both Internet access and access to an internal registry, that system can be used for both steps.
 
 Preparing an offline bundle requires the following utilities:
 
@@ -47,7 +47,7 @@ To perform an offline installation of a driver or the Operator, the following st
 
 ### Building an offline bundle
 
-This needs to be performed on a Linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.
+This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.
 
 To build an offline bundle, the following steps are needed:
 1. Perform a `git clone` of the desired repository. For a helm-based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned

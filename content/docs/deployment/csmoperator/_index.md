@@ -24,15 +24,16 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.8.0   | ✔ 1.7.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
+| CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
 | CSI PowerScale     | 2.6.0   | ✔ 1.6.0           | ✔ 1.4.0        | ✔ 1.5.0           | ❌            |
-| CSI PowerFlex      | 2.8.0   | ✔ 1.7.0           | ✔ 1.6.0        | ✔ 1.5.0           | ✔ 1.6.0       |
-| CSI PowerFlex      | 2.7.0   | ✔ 1.6.0           | ✔ 1.5.0        | ✔ 1.5.0           | ❌            |
-| CSI PowerFlex      | 2.6.0   | ✔ 1.5.0           | ❌             | ✔ 1.4.0           | ❌            |
+| CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
+| CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
+| CSI PowerFlex      | 2.6.0   | ✔ 1.6.0           | ❌             | ✔ 1.4.0           | ❌            |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
 | CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
 | CSI PowerStore     | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
+| CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.7.0   | ❌                | ❌             | ❌                | ❌            |
@@ -80,16 +81,16 @@ kubectl get pods -n dell-csm-operator
 
 {{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-### Offline Bundle Installation on a cluster without OLM 
+### Offline Bundle Installation on a cluster without OLM
 The `csm-offline-bundle.sh` script can be used to create a package usable for offline installation of Dell CSI Drivers via CSM Operator
 
 #### Dependencies
 
 Multiple Linux-based systems may be required to create and process an offline bundle for use.
-* One Linux-based system, with internet access, will be used to create the bundle. This involves the user cloning a git repository hosted on github.com and then invoking a script that utilizes `docker` or `podman` to pull and save container images to file.
+* One Linux-based system, with Internet access, will be used to create the bundle. This involves the user cloning a git repository hosted on github.com and then invoking a script that utilizes `docker` or `podman` to pull and save container images to file.
 * One Linux-based system, with access to an image registry, to invoke a script that uses `docker` or `podman` to restore container images from file and push them to a registry
 
-If one Linux system has both internet access and access to an internal registry, that system can be used for both steps.
+If one Linux system has both Internet access and access to an internal registry, that system can be used for both steps.
 
 Preparing an offline bundle requires the following utilities:
 
@@ -114,7 +115,7 @@ To perform an offline installation, the following steps should be performed:
 
 #### Building an offline bundle
 
-This needs to be performed on a Linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.
+This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.
 
 To build an offline bundle, the following steps are needed:
 1. Clone and checkout the required csm-operator version using
@@ -297,7 +298,7 @@ kubectl create -f samples/storage_csm_unity_v280.yaml
 
 **NOTE:**
 1. Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager (OLM).
-2. Install/uninstall of operator and drivers should be done using the files that are obtained after unpacking the offline bundle (dell-csm-operator-bundle.tar.gz) as that is where the image tags in the manifests are modified to point to the specified internal registry. 
+2. Install/uninstall of operator and drivers should be done using the files that are obtained after unpacking the offline bundle (dell-csm-operator-bundle.tar.gz) as that is where the image tags in the manifests are modified to point to the specified internal registry.
 
 ## Uninstall
 ### Operator uninstallation on a cluster without OLM
@@ -323,7 +324,7 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 >NOTE: The recommended version of OLM for Upstream Kubernetes is **`v0.25.0`**.
 
 #### Using Installation Script
-1. Clone and checkout the required csm-operator version using 
+1. Clone and checkout the required csm-operator version using
 ```bash
 git clone -b v1.3.0 https://github.com/dell/csm-operator.git
 ```
