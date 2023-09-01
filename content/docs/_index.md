@@ -9,6 +9,14 @@ menu:
 no_list: true
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 2.0. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+{{% /pageinfo %}}
+
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 The Dell Technologies (Dell) Container Storage Modules (CSM) enables simple and consistent integration and automation experiences, extending enterprise storage capabilities to Kubernetes for cloud-native stateful applications. It reduces management complexity so developers can independently consume enterprise storage with ease and automate daily operations such as provisioning, snapshotting, replication, observability, authorization, application mobility, encryption, and resiliency.
 
 <img src="csm_hexagon.png" alt="CSM Hex Diagram" width="500"/>
@@ -66,9 +74,9 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 | CSM Module                                                  | CSI PowerFlex v2.7.0 | CSI PowerScale v2.7.0 | CSI PowerStore v2.8.0 | CSI PowerMax v2.7.0 | CSI Unity XT v2.7.0 |
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
-| [**Authorization**](authorization/) v1.7.0                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
+| [**Authorization**](authorization/) v1.8.0                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
 | [**Observability**](observability/) v1.5.0                  | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
 | [**Replication**](replication/)   v1.5.0                    | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
-| [**Resiliency**](resiliency/)     v1.6.0                    | ✔️                    | ✔️                     | ✔️                    | ❌                   | ✔️                   |
+| [**Resiliency**](resiliency/)     v1.7.0                    | ✔️                    | ✔️                     | ✔️                    | ❌                   | ✔️                   |
 | [**Encryption**](secure/encryption)    v0.4.0               | ❌                    | ✔️                     | ❌                     | ❌                   | ❌                   |
 | [**Application Mobility**](applicationmobility/)     v0.4.0 | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ✔️                   |
