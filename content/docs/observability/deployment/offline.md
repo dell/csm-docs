@@ -250,7 +250,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     kubectl get configmap powermax-config-params -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-    If the CSI driver configmap name is not the default `powermax-config-params`, please use the following command to copy configmap:
+    If the CSI driver configmap name is not the default `powermax-config-params`, use the following command to copy the configmap:
 
     ```bash
 
@@ -262,7 +262,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     kubectl get secret karavi-authorization-config proxy-server-root-certificate proxy-authz-tokens -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | sed 's/name: karavi-authorization-config/name: powermax-karavi-authorization-config/' | sed 's/name: proxy-server-root-certificate/name: powermax-proxy-server-root-certificate/' | sed 's/name: proxy-authz-tokens/name: powermax-proxy-authz-tokens/' | kubectl create -f -
     ```
 
-4. Now that the required images have been made available and the Helm chart's configuration updated with references to the internal registry location, installation can proceed by following the instructions that are documented within the Helm chart's repository.
+4. After the images have been made available and the Helm chart configuration is updated, follow the instructions within the Helm chart's repository to complete the installation.
 
     **Note:**
     - Optionally, you could provide your own [configurations](../helm/#configuration). A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml).

@@ -40,7 +40,7 @@ If the Authorization module is enabled for the CSI drivers installed in the same
 
 ## Online Installer
 
-The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.
+Follow the instructions below to install CSM for Observability in an environment that has an Internet connection and is capable of downloading the required Helm chart and Docker images.
 The installer expects CSI drivers are using the default secret and configmap names.
 
 ### Dependencies
