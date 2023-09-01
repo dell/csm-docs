@@ -6,7 +6,7 @@ description: >
 ---
 
 {{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 1.9.
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
 {{% /pageinfo %}}
 
 ## Install CSM Authorization via Dell CSM Operator

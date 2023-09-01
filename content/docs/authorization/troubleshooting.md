@@ -7,11 +7,11 @@ Description: >
 ---
 
 {{% pageinfo color="primary" %}}
-The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 2.0. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
 {{% /pageinfo %}}
 
 {{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 1.9.
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
 {{% /pageinfo %}}
 
 ## RPM Deployment
