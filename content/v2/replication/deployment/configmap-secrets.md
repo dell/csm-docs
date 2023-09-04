@@ -71,12 +71,12 @@ We provide a helper script which can help create KubeConfig files for a normal u
 * Using a Certificate Signing Request for a user
 ```shell
     cd scripts
-    ./gen-kubeconfig.sh -u <CN user> -c <CSR> -k <key>  # where "CN user" is the name of the user & key is the private key of the user
+    ./gen_kubeconfig.sh -u <CN user> -c <CSR> -k <key>  # where "CN user" is the name of the user & key is the private key of the user
 ```
 * Create kubeconfig file for a Service Account
 ```shell
        cd scripts
-       ./gen-kubeconfig.sh -s <sa-name> -n <namespace>       
+       ./gen_kubeconfig.sh -s <sa-name> -n <namespace>
 ```
 Once you have created the KubeConfig file, you can use it to create the secret.
 
@@ -109,7 +109,7 @@ already has all the required RBAC privileges.
 ##### Example
 Use the following command to first create a KubeConfig file using the helper script in _Cluster B_ -
 ```shell
-./gen-kubeconfig.sh -s dell-replication-controller-sa -n dell-replication-controller
+./gen_kubeconfig.sh -s dell-replication-controller-sa -n dell-replication-controller
 ```
 Once the KubeConfig file has been generated successfully, use the following command in _Cluster A_ to to create the secret:
 ```shell

@@ -6,6 +6,10 @@ Description: >
   Troubleshooting guide
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 ## RPM Deployment
 - [Running `karavictl tenant` commands result in an HTTP 504 error](#running-karavictl-tenant-commands-result-in-an-http-504-error)
 - [Installation fails to install policies](#installation-fails-to-install-policies)

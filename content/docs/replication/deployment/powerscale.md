@@ -64,7 +64,7 @@ controller:
   # replication: allows to configure replication
   replication:
     enabled: true
-    image: dellemc/dell-csi-replicator:v1.2.0
+    image: dellemc/dell-csi-replicator:v1.6.0
     replicationContextPrefix: "powerscale"
     replicationPrefix: "replication.storage.dell.com"
 ...
@@ -73,11 +73,11 @@ You can leave other parameters like `image`, `replicationContextPrefix`, and `re
 
 After enabling the replication module, you can continue to install the CSI driver for PowerScale following the usual installation procedure. Just ensure you've added the necessary array connection information to the Kubernetes secret for the PowerScale driver.
 
+> **_NOTE:_** You need to install your driver on all clusters where you want to use replication. Both arrays must be accessible from each cluster.
+
 ##### SyncIQ encryption
 
 If you plan to use encryption, you need to set `replicationCertificateID` in the array connection secret. To check the ID of the certificate for the cluster, you can navigate to `Data protection->SyncIQ->Settings,` find your certificate in the `Server Certificates` section and then push the `View/Edit` button. It will open a dialog that should contain the  `Id` field. Use the value of that field to set `replicationCertificateID`.
-
-> **_NOTE:_** You need to install your driver on ALL clusters where you want to use replication. Both arrays must be accessible from each cluster. 
 
 
 ### Creating Storage Classes
@@ -123,8 +123,8 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/isReplicationEnabled` if set to `true`, will mark this storage class as replication enabled,
   just leave it as `true`.
 * `replication.storage.dell.com/remoteStorageClassName` points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.
-* `replication.storage.dell.com/remoteClusterID` represents the ID of a remote cluster. It is the same ID you put in the replication controller config map.
-* `replication.storage.dell.com/remoteSystem` is the name of the remote system that should match whatever `clusterName` you called it in `isilon-creds` secret.
+* `replication.storage.dell.com/remoteClusterID` represents the ID of a remote Kubernetes cluster. It is the same ID you put in the replication controller config map.
+* `replication.storage.dell.com/remoteSystem` is the name of the remote PowerScale system that should match whatever `clusterName` you called it in `isilon-creds` secret.
 * `replication.storage.dell.com/remoteAccessZone` is the name of the access zone a remote volume can be created in.
 * `replication.storage.dell.com/remoteAzServiceIP` AccessZone groupnet service IP. It is optional and can be provided if different than the remote system endpoint.
 * `replication.storage.dell.com/remoteRootClientEnabled` determines whether the driver should enable root squashing or not for the remote volume.

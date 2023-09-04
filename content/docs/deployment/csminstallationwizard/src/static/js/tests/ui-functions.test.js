@@ -20,16 +20,21 @@ const {
 	onObservabilityChange,
 	onResiliencyChange,
 	onOperatorResiliencyChange,
+	onObservabilityOperatorChange,
 	onSnapshotChange,
+	onCertManagerChange,
 	onVSphereChange,
 	onNodeSelectorChange,
 	onCopyButtonClickHandler,
 	resetImageRepository,
+	resetMaxVolumesPerNode,
 	resetControllerCount,
 	resetVolNamePrefix,
 	resetSnapNamePrefix,
+	resetNfsAcls,
 	resetDriverPodLabel,
 	resetArrayPollRate,
+	resetArrayConnectionLossThreshold,
 	resetLabelValue,
 	resetNodeSelectorLabel,
 	resetDriverNamespace,
@@ -52,6 +57,7 @@ const CONSTANTS = {
 	POWERSCALE_NAMESPACE: "isilon",
 	UNITY_NAMESPACE: "unity",
 	POWERSTORE_LABEL_VALUE: "csi-powerstore",
+	POWERSCALE_LABEL_VALUE: "csi-isilon",
 	VALUES: "values",
 	TEMP_DIR: "templates",
 	TEMP_EXT: ".template",
@@ -163,6 +169,40 @@ describe("GIVEN onOperatorResiliencyChange function", () => {
 	});
 });
 
+
+describe("GIVEN onObservabilityOperatorChange function", () => {
+	test("SHOULD hide observability components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="observability-operator">
+            <div id="observability-operator-metrics-wrapper" style="display:">
+			<div id="observability-operator-topology-wrapper" style="display:">
+			<div id="observability-operator-otel-wrapper" style="display:">
+
+        `;
+
+		onObservabilityOperatorChange();
+
+		expect($("div#observability-operator-metrics-wrapper").css("display")).toEqual("none");
+		expect($("div#observability-operator-topology-wrapper").css("display")).toEqual("none");
+		expect($("div#observability-operator-otel-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show podmon components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="observability-operator" checked>
+            <div id="observability-operator-metrics-wrapper" style="display:none">
+			<div id="observability-operator-topology-wrapper" style="display:none">
+			<div id="observability-operator-otel-wrapper" style="display:none">
+        `;
+
+		onObservabilityOperatorChange();
+
+		expect($("div#observability-operator-metrics-wrapper").css("display")).not.toEqual("none");
+		expect($("div#observability-operator-topology-wrapper").css("display")).not.toEqual("none");
+		expect($("div#observability-operator-otel-wrapper").css("display")).not.toEqual("none");
+	});
+});
+
 describe("GIVEN onSnapshotChange function", () => {
 	test("SHOULD hide snapshot components when option not checked", () => {
 		document.body.innerHTML = `
@@ -188,6 +228,46 @@ describe("GIVEN onSnapshotChange function", () => {
 
 		expect($("div#snapshot-note-wrapper").css("display")).not.toEqual("none");
 		expect($("div#snap-prefix").css("display")).not.toEqual("none");
+	});
+});
+
+describe("GIVEN onCertManagerChange function", () => {
+	test("SHOULD hide cert-manager components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="certmanager">
+            <div id="certmanager-note-wrapper" style="display:">
+        `;
+		onCertManagerChange("Temp cert-manager note");
+		expect($("div#certmanager-note-wrapper").css("display")).toEqual("none");
+	});
+
+	test("SHOULD show cert-manager components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="certmanager" checked>
+            <div id="certmanager-note-wrapper" style="display:none">
+        `;
+		onCertManagerChange("Temp cert-manager note");
+		expect($("div#certmanager-note-wrapper").css("display")).not.toEqual("none");
+	});
+});
+
+describe("GIVEN onTopologyChange function", () => {
+	test("SHOULD hide topology components when option not checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="topology">
+            <div id="topology-note-wrapper" style="display:">
+        `;
+		onCertManagerChange("Temp topology note");
+		expect($("div#topology-note-wrapper").css("display")).toEqual("block");
+	});
+
+	test("SHOULD show topology components when option checked", () => {
+		document.body.innerHTML = `
+            <input type="checkbox" id="topology" checked>
+            <div id="topology-note-wrapper" style="display:none">
+        `;
+		onCertManagerChange("Temp topology note");
+		expect($("div#topology-note-wrapper").css("display")).toEqual("none");
 	});
 });
 
@@ -305,6 +385,22 @@ describe("GIVEN resetImageRepository function", () => {
 	});
 });
 
+describe("GIVEN resetMaxVolumesPerNode function", () => {
+	const testCSMMap = new Map([
+		["maxVolumesPerNode", "0"]
+	]);
+
+	test("SHOULD invoke resetMaxVolumesPerNode function", () => {
+		document.body.innerHTML = `
+            <input type="number" id="max-volumes-per-node">
+        `;
+
+		resetMaxVolumesPerNode(testCSMMap);
+
+		expect(document.getElementById("max-volumes-per-node").value).toEqual("0");
+	});
+});
+
 describe("GIVEN resetControllerCount function", () => {
 	const testCSMMap = new Map([
 		["controllerCount", "2"]
@@ -366,6 +462,38 @@ describe("GIVEN resetArrayPollRate function", () => {
 		resetArrayPollRate(testCSMMap);
 
 		expect(document.getElementById("poll-rate").value).toEqual("60");
+	});
+});
+
+describe("GIVEN resetNfsAcls function", () => {
+	const testCSMMap = new Map([
+		["nfsAcls", "0777"]
+	]);
+
+	test("SHOULD invoke resetNfsAcls function", () => {
+		document.body.innerHTML = `
+            <input type="text" id="nfs-acls">
+        `;
+
+		resetNfsAcls(testCSMMap);
+
+		expect(document.getElementById("nfs-acls").value).toEqual("0777");
+	});
+});
+
+describe("GIVEN resetArrayConnectionLossThreshold function", () => {
+	const testCSMMap = new Map([
+		["arrayThreshold", "3"]
+	]);
+
+	test("SHOULD invoke resetArrayConnectionLossThreshold function", () => {
+		document.body.innerHTML = `
+            <input type="number" id="array-threshold">
+        `;
+
+		resetArrayConnectionLossThreshold(testCSMMap);
+
+		expect(document.getElementById("array-threshold").value).toEqual("3");
 	});
 });
 
@@ -515,6 +643,23 @@ describe("GIVEN displayModules function", () => {
 		expect($(".cert-secret-count-wrapper").css("display")).toEqual("block");
 	});
 
+	test("SHOULD show expected components for operator csi-powerscale", () => {
+		document.body.innerHTML = testHtml;
+
+		displayModules("operator", "powerscale", CONSTANTS);
+
+		expect($(".vgsnapshot").css("display")).toEqual("none");
+		expect($(".authorization").css("display")).toEqual("block");
+		expect($(".image-repository").css("display")).toEqual("none");
+		expect($(".cert-manager").css("display")).toEqual("none");
+		expect($(".resizer").css("display")).toEqual("none");
+		expect($(".vol-name-prefix").css("display")).toEqual("none");
+		expect($(".snapshot-feature").css("display")).toEqual("none");
+		expect($(".fsGroupPolicy").css("display")).toEqual("block");
+		expect($(".resiliency").css("display")).toEqual("none");
+		expect($(".storage-capacity").css("display")).toEqual("block");
+	});
+
 	test("SHOULD show expected components for csi-powermax", () => {
 		document.body.innerHTML = testHtml;
 
@@ -577,11 +722,13 @@ describe("GIVEN hideFields function", () => {
 describe("GIVEN displayCommands function", () => {
 	const commandTitleValue = "Run the following commands to install";
 	const commandNoteValue = "Ensure that the namespaces and secrets are created before installing the helm chart";
+	const csmOperatorNoteValue = "Prerequisite: Ensure that the CSM Operator is installed";
+	const commandNoteOperatorValue = "Ensure that the namespaces, secrets and config.yaml (if applicable) are created before installing the driver";
 	const command1Value = "helm repo add dell https://dell.github.io/helm-charts";
 	const command2Value = "helm install $release-name dell/container-storage-modules -n $namespace --version $version -f values.yaml";
 	const command3Value = "kubectl create -f values.yaml";
 
-	test("SHOULD show expected commands", () => {
+	test("SHOULD show expected commands: Installation Type: Helm", () => {
 		document.body.innerHTML = `
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
@@ -595,7 +742,7 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
@@ -604,7 +751,7 @@ describe("GIVEN displayCommands function", () => {
 		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.0 -f values.yaml");
 	});
 
-	test("SHOULD show expected commands", () => {
+	test("SHOULD show expected commands: Installation Type: Operator", () => {
 		document.body.innerHTML = `
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="operator">
@@ -612,17 +759,19 @@ describe("GIVEN displayCommands function", () => {
 			<input type="text" id="csm-version" value="1.7.0">
             <div id="command-text-area" style="display:none">
                 <div id="command-title"></div>
+				<span id="csm-operator-note" style="display:none"></span>
                 <span id="command-note" style="display:none"></span>
                 <span id="command1"></span>
                 <span id="command2"></span>
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
+		expect($("#csm-operator-note").text()).toEqual("Prerequisite: Ensure that the CSM Operator is installed");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
-		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
+		expect($("#command-note").text()).toEqual("Ensure that the namespaces, secrets and config.yaml (if applicable) are created before installing the driver");
 		expect($("#command1").text()).toEqual("kubectl create -f values.yaml");
 	});
 });

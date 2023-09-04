@@ -3,20 +3,22 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.7.0
+## Release Notes - CSI Unity XT v2.8.0
+
 
 ### New Features/Changes
 
-- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
-- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
-- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
-- [Added support for K3s on Debian OS](https://github.com/dell/csm/issues/798)
-- [Added support for Unisphere 5.3.0 array](https://github.com/dell/csm/issues/842)
+- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
+- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
+- [#891 - [FEATURE]: Enhancing Unity XT driver to handle API requests after the sessionIdleTimeOut in STIG mode](https://github.com/dell/csm/issues/891)
+- [#926 - [FEATURE]: Set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 
 ### Fixed Issues
 
-There are no fixed issues in this release.
-
+- [#849 - [BUG]: CSI driver does not verify iSCSI initiators on the array correctly](https://github.com/dell/csm/issues/849)
+- [#901 - [BUG]: Unity XT: Volume Mount Hangs](https://github.com/dell/csm/issues/901)
+- [#902 - [BUG]: Space is not reflecting right on Unity](https://github.com/dell/csm/issues/902)
+- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 
@@ -26,7 +28,8 @@ There are no fixed issues in this release.
 | NFS Clone - Resize of the snapshot is not supported by Unity XT Platform, however the user should never try to resize the cloned NFS volume.| Currently, when the driver takes a clone of NFS volume, it succeeds but if the user tries to resize the NFS volumesnapshot, the driver will throw an error.|
 | Delete namespace that has PVCs and pods created with the driver. The External health monitor sidecar crashes as a result of this operation.| Deleting the namespace deletes the PVCs first and then removes the pods in the namespace. This brings a condition where pods exist without their PVCs and causes the external-health-monitor sidecar to crash. This is a known issue and has been reported at https://github.com/kubernetes-csi/external-health-monitor/issues/100|
 | When a node goes down, the block volumes attached to the node cannot be attached to another node | This is a known issue and has been reported at https://github.com/kubernetes-csi/external-attacher/issues/215. Workaround: <br /> 1. Force delete the pod running on the node that went down <br /> 2. Delete the VolumeAttachment to the node that went down. <br /> Now the volume can be attached to the new node. |
-| CSI driver does not verify iSCSI initiators on the array correctly when iSCSI initiator names are not in lowercase - After any node reboot, the driver pod on that rebooted node goes into a failed state, failing to find the iSCSI initiator on the array | Work around is to rename host iSCSI initiators to lowercase and reboot the respective worker node. The CSI driver pod will spin off successfully. Example: Rename "iqn.2000-11.com.DEMOWORKERNODE01:1a234b56cd78" to "iqn.2000-11.com.demoworkernode01:1a234b56cd78" in lowercase. 
+| A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error `"error when creating pod: the pod uses an inline volume provided by CSIDriver csi-unity.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged."` | This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label `security.openshift.io/csi-ephemeral-volume-profile` in [csidriver.yaml](https://github.com/dell/helm-charts/blob/csi-unity-2.8.0/charts/csi-unity/templates/csidriver.yaml) file with the required security profile value should be provided. Follow [OpenShift 4.13 documentation for CSI Ephemeral Volumes](https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html) for more information. |
+| If the volume limit is exhausted and there are pending pods and PVCs due to `exceed max volume count`, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted. | It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at https://github.com/kubernetes/kubernetes/issues/95911 with the same behavior. |
 ### Note:
 
 - Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.

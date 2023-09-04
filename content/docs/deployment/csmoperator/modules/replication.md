@@ -18,9 +18,16 @@ To configure Replication prior to installation via CSM Operator, you need:
 The [csm-replication](https://github.com/dell/csm-replication.git) GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:
 
 ```
-git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+git clone -b v1.6.0 https://github.com/dell/csm-replication.git
 cd csm-replication/repctl
 make build
+```
+
+Alternately, you can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
+```shell
+wget https://github.com/dell/csm-replication/releases/download/v1.6.0/repctl-linux-amd64
+mv repctl-linux-amd64 repctl
+chmod +x repctl
 ```
 
 The rest of the instructions will assume that your current working directory is the csm-replication/repctl directory.

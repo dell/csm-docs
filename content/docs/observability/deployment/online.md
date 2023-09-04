@@ -6,8 +6,12 @@ description: >
   Dell Container Storage Modules (CSM) for Observability Installer
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 <!--
-Copyright (c) 2020 Dell Inc., or its subsidiaries. All Rights Reserved.
+Copyright (c) 2020-2023 Dell Inc., or its subsidiaries. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -33,19 +37,19 @@ If the Authorization module is enabled for the CSI drivers installed in the same
 - Verifies the appropriate Secrets and ConfigMap exist in the CSI driver namespace.
 - Updates the CSM for Observability deployment to use the existing Authorization instance if not already enabled during the initial installation of CSM for Observability.
 
-## Prerequisites 
+## Prerequisites
 
 - Helm 3.3
 - The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
 
 ## Online Installer
 
-The following instructions can be followed to install CSM for Observability in an environment that has an internet connection and is capable of downloading the required Helm chart and Docker images.  
+Follow the instructions below to install CSM for Observability in an environment that has an Internet connection and is capable of downloading the required Helm chart and Docker images.
 The installer expects CSI drivers are using the default secret and configmap names.
 
 ### Dependencies
 
-A Linux-based system, with internet access, will be used to execute the script to install CSM for Observability into a Kubernetes/Openshift environment that also has internet access.
+A Linux-based system, with Internet access, will be used to execute the script to install CSM for Observability into a Kubernetes/Openshift environment that also has Internet access.
 
 | Dependency            | Usage |
 | --------------------- | ----- |
@@ -103,19 +107,19 @@ To perform an online installation of CSM for Observability, the following steps 
 
     A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../helm#configuration).
 
-    __Note:__ 
+    __Note:__
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.
-    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability. 
+    - If CSM for Authorization is enabled for CSI PowerFlex, the `karaviMetricsPowerflex.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
     - If CSM for Authorization is enabled for CSI PowerScale, the `karaviMetricsPowerscale.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
     - If CSM for Authorization is enabled for CSI PowerMax, the `karaviMetricsPowerMax.authorization` parameters must be properly configured in `myvalues.yaml` for CSM Observability.
 
     ```bash
-    
+
     ./karavi-observability-install.sh install --namespace [CSM_NAMESPACE] --values myvalues.yaml
     ```
     ```
     ---------------------------------------------------------------------------------
-    > Installing Karavi Observability in namespace karavi on 1.21
+    > Installing Karavi Observability in namespace karavi on 1.28
     ---------------------------------------------------------------------------------
     |
     |- Karavi Observability is not installed                            Success

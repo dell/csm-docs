@@ -5,6 +5,10 @@ description: >
   Configuring the CSM for Authorization Proxy Server
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 ## Configuring the CSM for Authorization Proxy Server
 
 The storage administrator must first configure the proxy server with the following:
