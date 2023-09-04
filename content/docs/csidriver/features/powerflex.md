@@ -813,7 +813,6 @@ parameters:
   systemID: <SYSTEM_ID> # Insert System ID
   csi.storage.k8s.io/fstype: nfs
   nasName: "nas-server"
-  allowRoot: "false"
 #  path: /csi
 #  softLimit: "80"
 #  gracePeriod: "86400"
@@ -898,7 +897,6 @@ parameters:
   systemID: <SYSTEM_ID> # Insert System ID
   csi.storage.k8s.io/fstype: nfs
   nasName: "nas-server"
-  allowRoot: "false"
   path: /csi
   softLimit: "80"
   gracePeriod: "86400"
