@@ -14,6 +14,8 @@ description: Release notes for CSM Installation Wizard
 - Helm and Operator based manifest file generation is supported for CSM-1.7 and CSM 1.8 releases
 
 - Volume Limit and Storage Capacity Tracking features have been added.
+- Rename SDC and approve SDC feature added for CSM-1.7 and CSM-1.8 for CSI-PowerFlex driver.
+- NFS volume feature added for CSM-1.8 for CSI-PowerFlex driver.
 
 ### Fixed Issues
 

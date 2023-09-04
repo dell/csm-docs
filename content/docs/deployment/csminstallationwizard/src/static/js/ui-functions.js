@@ -88,6 +88,7 @@ function onArrayChange() {
 		onVSphereChange();
 		onReplicationChange(replicationNote);
 		validateInput(validateForm, CONSTANTS);
+		onRenameSDCChange(driver, CONSTANTS);
 	});
 }
 
@@ -212,6 +213,16 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 	}
 }
 
+function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
+	if ($("#rename-sdc").prop('checked') === true) {
+		if (driverName === POWERFLEX){
+			$('div.sdc-prefix').show();
+		}
+	} else {
+		$('div.sdc-prefix').hide();
+	}
+}
+
 const onCSMVersionChange = () => {
 	document.getElementById("csm-version").value !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 	displayModules(installationType, driver, CONSTANTS);
@@ -251,6 +262,10 @@ const resetVolNamePrefix = csmMapValue => {
 
 const resetSnapNamePrefix = csmMapValue => {
 	document.getElementById("snapshot-prefix").value = String(csmMapValue.get("snapNamePrefix"));
+}
+
+const resetNfsAcls = csmMapValue => {
+	document.getElementById("nfs-acls").value = String(csmMapValue.get("nfsAcls"));
 }
 
 const resetNodeSelectorLabel = csmMapValue => {
@@ -334,6 +349,9 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".replication-operator-clusterid").hide();
 	$(".replication-helm-arrayid").hide();
 	$(".replication-helm-unisphere").hide();
+	$(".rename-sdc-feature").hide();
+	$(".approve-sdc").hide();
+	$(".nfs-feature").hide();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -422,6 +440,12 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".cert-secret-count-wrapper").show();
 			$("div#snap-prefix").hide();
 			$(".storage-capacity").show();
+			$(".rename-sdc-feature").show();
+			$(".approve-sdc").show();
+			if (document.getElementById("csm-version").value === "1.8.0") {
+				$(".max-volumes-per-node").show();
+				$(".nfs-feature").show();
+			}
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.UNITY:
@@ -526,6 +550,7 @@ if (typeof exports !== 'undefined') {
 		onVSphereChange,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
+		onRenameSDCChange,
 		resetImageRepository,
 		resetMaxVolumesPerNode,
 		resetControllerCount,
@@ -542,6 +567,7 @@ if (typeof exports !== 'undefined') {
 		hideFields,
 		validateInput,
 		resetVolNamePrefix,
-		resetSnapNamePrefix
+		resetSnapNamePrefix,
+		resetNfsAcls
 	};
 }

@@ -181,6 +181,11 @@ csi-vxflexos:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
+    renameSDC:
+      enabled: $RENAME_SDC_ENABLED
+      sdcPrefix: $SDC_PREFIX
+    approveSDC:
+      enabled: $APPROVE_SDC_ENABLED
     tolerations: $NODE_TOLERATIONS
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
     # - key: "offline.vxflexos.storage.dell.com"
