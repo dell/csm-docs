@@ -158,7 +158,6 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
    | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, excess pods will become stay in a pending state. Defaults are 2 which allows for Controller high availability. | Yes | 2 |
    | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
    | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m |
-   | nfsAcls | enables setting permissions on NFS mount directory | No | 0777 |
    | enableQuota | a boolean that, when enabled, will set quota limit for a newly provisioned NFS volume | No | none |
    | maxVxflexosVolumesPerNode | Specify default value for maximum number of volumes that controller can publish to the node.If value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node | Yes | 0 |
    | ***Common parameters for node and controller*** |
