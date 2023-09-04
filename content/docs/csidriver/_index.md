@@ -13,6 +13,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 ## Features and capabilities
 
 ### Supported Operating Systems/Container Orchestrator Platforms
+
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
@@ -23,9 +24,9 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP4     |       15SP4      |
 | Red Hat OpenShift | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.12, 4.13, 4.13 EUS |
 | Mirantis Kubernetes Engine | 3.6.x |     3.6.x         |       3.6.x      | 3.5.x, 3.6.x      |        3.6.x     |
-| Google Anthos |        1.15       |          1.15        |        no        |         1.15       |        1.15       |
+| Google Anthos |        1.15      |          1.15       |        no        |         1.15      |        1.15      |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI         |
-| Rancher Kubernetes Engine | 1.4.1  |          1.4.7        |        1.4.8       |         1.4.1       |      1.4.5         |
+| Rancher Kubernetes Engine | 1.4.1  |          1.4.7        |        1.4.8       |         1.4.7       |      1.4.5         |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  |          yes        |        yes      |        yes       |      yes      |
 | Kubernetes K3s Engine on Debian OS |     no      |         no              |      1.26, 1.27        |        no       |        no         |
 {{</table>}}
