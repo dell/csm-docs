@@ -52,8 +52,8 @@ You can upgrade CSI Driver for Dell PowerMax using Helm or Dell CSI Operator.
 
     ```
 
-## Upgrade using Dell CSI Operator:
+## Upgrade using Dell CSM Operator:
 **Note:** Upgrading the Operator does not upgrade the CSI Driver.
 
-1. Please upgrade the Dell CSI Operator by following [here](./../operator).
-2. Once the operator is upgraded, to upgrade the driver, refer [here](./../../../installation/operator/#update-csi-drivers).
+1. Upgrade the Dell CSM Operator by following [here](../../../../deployment/csmoperator/#to-upgrade-dell-csm-operator-perform-the-following-steps)
+2. Once the operator is upgraded, to upgrade the driver, refer [here](../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator)
