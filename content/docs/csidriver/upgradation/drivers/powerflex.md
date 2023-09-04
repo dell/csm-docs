@@ -7,6 +7,9 @@ tags:
 weight: 1
 Description: Upgrade PowerFlex CSI driver
 ---
+{{% pageinfo color="primary" %}}
+CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
+{{% /pageinfo %}}
 
 You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operator.
 

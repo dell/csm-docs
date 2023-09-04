@@ -86,7 +86,7 @@ Pair of storage classes on the source and target clusters would be essentially
 #### Manual Storage Class Creation
 
 You can find a sample of a replication enabled storage class in the driver repository
-[here](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/vxflexos-replication.yaml).
+here.
 
 It will look like this:
 ```yaml
