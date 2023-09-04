@@ -9,16 +9,16 @@ Description: >
 ## Release Notes - CSM Authorization 1.8.0
 
 
+
 ### New Features/Changes
 
 - [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
-- [#926 - [FEATURE]: Set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
 - [#947 - [FEATURE]: K8S 1.28 support in CSM 1.8](https://github.com/dell/csm/issues/947)
 
 ### Fixed Issues
 
 - [#895 - [BUG]: Documentation - Authorization](https://github.com/dell/csm/issues/895)
-- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
+- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 
