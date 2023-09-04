@@ -118,7 +118,6 @@ describe("GIVEN setValues function", () => {
 			<input type="checkbox" id="rename-sdc">
 			<input type="text" id="sdc-prefix" value="">
 			<input type="checkbox" id="approve-sdc">
-			<input type="text" id="nfs-acls" value="0777">
 			<input type="checkbox" id="enable-quota">
         `;
 
@@ -192,7 +191,6 @@ describe("GIVEN setValues function", () => {
 			renameSDC: false,
 			sdcPrefix: "",
 			approveSDC: false,
-			nfsAcls: "0777",
 			enableQuota: false,
 		};
 
@@ -245,7 +243,6 @@ describe("GIVEN setValues function", () => {
 			<input type="checkbox" id="rename-sdc">
 			<input type="text" id="sdc-prefix" value="">
 			<input type="checkbox" id="approve-sdc">
-			<input type="text" id="nfs-acls" value="0777">
 			<input type="checkbox" id="enable-quota">
         `;
 
@@ -319,7 +316,6 @@ describe("GIVEN setValues function", () => {
 			renameSDC: false,
 			sdcPrefix: "",
 			approveSDC: false,
-			nfsAcls: "0777",
 			enableQuota: false,
 		};
 

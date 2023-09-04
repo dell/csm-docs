@@ -346,7 +346,6 @@ describe("GIVEN setDefaultValues function", () => {
 			<input type="number" id="poll-rate">
 			<input type="number" id="array-threshold">
 			<input type="text" id="driver-pod-label">
-			<input type="text" id="nfs-acls">
 		`;
 
 		const testCSMMap = new Map([

@@ -128,7 +128,6 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.renameSDC = $("#rename-sdc").prop('checked') ? true : false;
 	DriverValues.sdcPrefix = $("#sdc-prefix").val();
 	DriverValues.approveSDC = $("#approve-sdc").prop('checked') ? true : false;
-	DriverValues.nfsAcls = $("#nfs-acls").val();
 	DriverValues.enableQuota = $("#enable-quota").prop('checked') ? true : false;
 	return DriverValues
 }
@@ -190,7 +189,6 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$RENAME_SDC_ENABLED", yamlTplValues.renameSDC);
 	yamlTpl = yamlTpl.replaceAll("$SDC_PREFIX", yamlTplValues.sdcPrefix);
 	yamlTpl = yamlTpl.replaceAll("$APPROVE_SDC_ENABLED", yamlTplValues.approveSDC);
-	yamlTpl = yamlTpl.replaceAll("$NFS_ACLS", yamlTplValues.nfsAcls);
 	yamlTpl = yamlTpl.replaceAll("$QUOTA_ENABLED", yamlTplValues.enableQuota);
 
 
