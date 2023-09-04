@@ -215,11 +215,11 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 
 function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 	if ($("#rename-sdc").prop('checked') === true) {
-		if (driverName === POWERFLEX){
-			$('div.sdc-prefix').show();
+		if (driverName === CONSTANTS_PARAM.POWERFLEX){
+			$(".sdc-prefix").show();
 		}
 	} else {
-		$('div.sdc-prefix').hide();
+		$(".sdc-prefix").hide();
 	}
 }
 
