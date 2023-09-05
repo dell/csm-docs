@@ -24,7 +24,7 @@ description: Release notes for PowerMax CSI driver
 - [#937 - [FEATURE]: Google Anthos 1.15 support  for PowerMax](https://github.com/dell/csm/issues/937)
 
 ### Fixed Issues
-
+- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 
