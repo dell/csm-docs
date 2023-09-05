@@ -413,6 +413,9 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".replication-mod").show();
 			$(".iscsichap").show();
 			$(".transport-protocol").show();
+			$(".topology").show();
+			$(".fsGroupPolicy").show();
+			$(".max-volumes-per-node").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			if (installationType === CONSTANTS_PARAM.OPERATOR) {
 				
@@ -426,11 +429,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".snapshot-feature").hide();
 				$(".vol-name-prefix").hide();
 				$(".transport-protocol").show();
-				$(".migration").hide();
 				$(".resizer").hide();
-				$(".fsGroupPolicy").show();	
-				$(".transport-protocol").show();				
-				$(".topology").show();	
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
 			}
 			break;

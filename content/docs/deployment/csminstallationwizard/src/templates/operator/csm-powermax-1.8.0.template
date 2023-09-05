@@ -186,7 +186,7 @@ spec:
         # Allowed values: Any value greater than or equal to 0
         # Default value: "0"
         - name: X_CSI_MAX_VOLUMES_PER_NODE
-          values: "0"
+          values: "$MAX_VOLUMES_PER_NODE"
       # nodeSelector: Define node selection constraints for node pods.
       # For the pod to be eligible to run on a node, the node must have each
       # of the indicated key-value pairs as labels.
@@ -229,14 +229,14 @@ spec:
     - name: csireverseproxy
       # enabled: Always set to true
       enabled: true
-      configVersion: v2.6.0
+      configVersion: v2.7.0
       forceRemoveModule: true
       components:
       - name: csipowermax-reverseproxy
       # image: Define the container images used for the reverse proxy
       # Default value: None
-      # Example: "csipowermax-reverseproxy:v2.6.0"
-        image: dellemc/csipowermax-reverseproxy:v2.6.0
+      # Example: "csipowermax-reverseproxy:v2.7.0"
+        image: dellemc/csipowermax-reverseproxy:v2.7.0
         envs:
           # "tlsSecret" defines the TLS secret that is created with certificate
           # and its associated key
