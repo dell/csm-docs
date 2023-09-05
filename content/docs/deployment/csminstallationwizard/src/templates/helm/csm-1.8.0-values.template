@@ -108,6 +108,12 @@ csi-powermax:
     driverRepository: $IMAGE_REPOSITORY
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
   portGroups: "$POWERMAX_PORT_GROUPS"
+  fsGroupPolicy: "$FSGROUP_POLICY"
+  maxPowerMaxVolumesPerNode: $MAX_VOLUMES_PER_NODE
+  enableCHAP: $ISCSI_CHAP_ENABLED
+  transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
+  storageCapacity:
+    enabled: $STORAGE_CAPACITY_ENABLED
   controller:
     controllerCount: $CONTROLLER_COUNT
     volumeNamePrefix: $VOLUME_NAME_PREFIX
@@ -123,6 +129,8 @@ csi-powermax:
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
+    topologyControl:
+      enabled: $TOPOLOGY_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
     tolerations: $NODE_TOLERATIONS
      - key: "node.kubernetes.io/memory-pressure"
@@ -135,7 +143,7 @@ csi-powermax:
        operator: "Exists"
        effect: "NoExecute"
   csireverseproxy:
-    image: dellemc/csipowermax-reverseproxy:v2.6.0
+    image: dellemc/csipowermax-reverseproxy:v2.7.0
     deployAsSidecar: true
   replication:
     enabled: $REPLICATION_ENABLED
@@ -449,7 +457,7 @@ karavi-observability:
   enabled: $OBSERVABILITY_ENABLED
   karaviMetricsPowerstore:
     enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
-  karaviMetricsPowerMax:
+  karaviMetricsPowermax:
     enabled: $POWERMAX_OBSERVABILITY_METRICS_ENABLED
   karaviMetricsPowerflex:
     enabled: $POWERFLEX_OBSERVABILITY_METRICS_ENABLED

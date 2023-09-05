@@ -106,6 +106,9 @@ csi-powermax:
     driverRepository: $IMAGE_REPOSITORY
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
   portGroups: "$POWERMAX_PORT_GROUPS"
+  fsGroupPolicy: "$FSGROUP_POLICY"
+  enableCHAP: $ISCSI_CHAP_ENABLED
+  transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
   controller:
     controllerCount: $CONTROLLER_COUNT
     volumeNamePrefix: $VOLUME_NAME_PREFIX
@@ -121,6 +124,8 @@ csi-powermax:
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
+    topologyControl:
+      enabled: $TOPOLOGY_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
     tolerations: $NODE_TOLERATIONS
      - key: "node.kubernetes.io/memory-pressure"
@@ -438,7 +443,7 @@ karavi-observability:
   enabled: $OBSERVABILITY_ENABLED
   karaviMetricsPowerstore:
     enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
-  karaviMetricsPowerMax:
+  karaviMetricsPowermax:
     enabled: $POWERMAX_OBSERVABILITY_METRICS_ENABLED
   karaviMetricsPowerflex:
     enabled: $POWERFLEX_OBSERVABILITY_METRICS_ENABLED
