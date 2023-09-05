@@ -215,11 +215,11 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 
 function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 	if ($("#rename-sdc").prop('checked') === true) {
-		if (driverName === POWERFLEX){
-			$('div.sdc-prefix').show();
+		if (driverName === CONSTANTS_PARAM.POWERFLEX){
+			$(".sdc-prefix").show();
 		}
 	} else {
-		$('div.sdc-prefix').hide();
+		$(".sdc-prefix").hide();
 	}
 }
 
@@ -262,10 +262,6 @@ const resetVolNamePrefix = csmMapValue => {
 
 const resetSnapNamePrefix = csmMapValue => {
 	document.getElementById("snapshot-prefix").value = String(csmMapValue.get("snapNamePrefix"));
-}
-
-const resetNfsAcls = csmMapValue => {
-	document.getElementById("nfs-acls").value = String(csmMapValue.get("nfsAcls"));
 }
 
 const resetNodeSelectorLabel = csmMapValue => {
@@ -566,7 +562,6 @@ if (typeof exports !== 'undefined') {
 		hideFields,
 		validateInput,
 		resetVolNamePrefix,
-		resetSnapNamePrefix,
-		resetNfsAcls
+		resetSnapNamePrefix
 	};
 }

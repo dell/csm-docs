@@ -31,7 +31,6 @@ const {
 	resetControllerCount,
 	resetVolNamePrefix,
 	resetSnapNamePrefix,
-	resetNfsAcls,
 	resetDriverPodLabel,
 	resetArrayPollRate,
 	resetArrayConnectionLossThreshold,
@@ -462,22 +461,6 @@ describe("GIVEN resetArrayPollRate function", () => {
 		resetArrayPollRate(testCSMMap);
 
 		expect(document.getElementById("poll-rate").value).toEqual("60");
-	});
-});
-
-describe("GIVEN resetNfsAcls function", () => {
-	const testCSMMap = new Map([
-		["nfsAcls", "0777"]
-	]);
-
-	test("SHOULD invoke resetNfsAcls function", () => {
-		document.body.innerHTML = `
-            <input type="text" id="nfs-acls">
-        `;
-
-		resetNfsAcls(testCSMMap);
-
-		expect(document.getElementById("nfs-acls").value).toEqual("0777");
 	});
 });
 

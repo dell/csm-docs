@@ -775,7 +775,6 @@ CSI driver will support following operations for NFS volumes:
 
 To enable the support of NFS volumes operations from CSI driver, there are a few new keys introduced which needs to be set before performing the operations for NFS volumes.
 * `nasName`: defines the NAS server name that should be used for NFS volumes.
-* `nfsAcls`: defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
 * `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
 
 > NOTE:
@@ -785,14 +784,6 @@ To enable the support of NFS volumes operations from CSI driver, there are a few
 >   * If specified in both, secret and storage class, then precedence is given to storage class value.
 >   * If nasName not given in secret, irrespective of it specified in SC, then it's an error state and will be captured in driver logs.
 >   * If the PowerFlex storage system v4.0.x is configured with only block capabilities, then the user is required to give the default value for nasName as "none".
-> * `nfsAcls`
->   * nfsAcls is an optional parameter, with a default value 0777.
->   * nfsAcls can be specified in secret or storage class or values.
->   * If nfsAcls is specified in more than one places, then the order of precedence will be:
->     1. storage class
->     2. secret
->     3. values
->     4. specified nowhere, then set to default value: 0777
 
 The user has to update the `secret.yaml`, `values.yaml` and `storageclass-nfs.yaml` with the above keys as like below:
 
@@ -806,7 +797,6 @@ The user has to update the `secret.yaml`, `values.yaml` and `storageclass-nfs.ya
   isDefault: true
   mdm: "10.0.0.3,10.0.0.4"
   nasName: "nas-server"
-  nfsAcls: "0777"
 ```
 
 [`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
@@ -823,8 +813,6 @@ parameters:
   systemID: <SYSTEM_ID> # Insert System ID
   csi.storage.k8s.io/fstype: nfs
   nasName: "nas-server"
-  allowRoot: "false"
-  nfsAcls: "0777"
 #  path: /csi
 #  softLimit: "80"
 #  gracePeriod: "86400"
@@ -839,7 +827,6 @@ allowedTopologies:
 [`helm/csi-vxflexos/values.yaml`](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml)
 ```yaml
 ...
-nfsAcls: "0777"
 enableQuota: false
 ...
 ```
@@ -910,8 +897,6 @@ parameters:
   systemID: <SYSTEM_ID> # Insert System ID
   csi.storage.k8s.io/fstype: nfs
   nasName: "nas-server"
-  allowRoot: "false"
-  nfsAcls: "0777"
   path: /csi
   softLimit: "80"
   gracePeriod: "86400"

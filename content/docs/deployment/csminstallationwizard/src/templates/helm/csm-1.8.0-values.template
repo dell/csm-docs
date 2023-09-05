@@ -220,7 +220,6 @@ csi-vxflexos:
     #   effect: "NoSchedule"
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
-  nfsAcls: $NFS_ACLS
   enableQuota: $QUOTA_ENABLED
   monitor:
     enabled: $MONITOR_ENABLED
