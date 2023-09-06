@@ -17,7 +17,7 @@ csi-powerstore:
     tolerations: $CONTROLLER_TOLERATIONS
     replication:
       enabled: $REPLICATION_ENABLED
-      image: dellemc/dell-csi-replicator:v1.5.0
+      image: dellemc/dell-csi-replicator:v1.6.0
     vgsnapshot:
       enabled: $VG_SNAPSHOT_ENABLED
       image: dellemc/csi-volumegroup-snapshotter:v1.3.0
@@ -147,11 +147,11 @@ csi-powermax:
     deployAsSidecar: true
   replication:
     enabled: $REPLICATION_ENABLED
-    image: dellemc/dell-csi-replicator:v1.5.0
+    image: dellemc/dell-csi-replicator:v1.6.0
   migration:
     enabled: $MIGRATION_ENABLED
-    image: dellemc/dell-csi-migrator:v1.1.1
-    nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.1
+    image: dellemc/dell-csi-migrator:v1.2.0
+    nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.1.0
   authorization:
     enabled: $AUTHORIZATION_ENABLED
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.8.0
@@ -178,7 +178,7 @@ csi-vxflexos:
   controller:
     replication:
       enabled: $REPLICATION_ENABLED
-      image: dellemc/dell-csi-replicator:v1.5.0
+      image: dellemc/dell-csi-replicator:v1.6.0
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     controllerCount: $CONTROLLER_COUNT
@@ -282,7 +282,7 @@ csi-isilon:
 
     replication:
       enabled: $REPLICATION_ENABLED
-      image: dellemc/dell-csi-replicator:v1.5.0
+      image: dellemc/dell-csi-replicator:v1.6.0
 
     snapshot:
       enabled: $SNAPSHOT_ENABLED
