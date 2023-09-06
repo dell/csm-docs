@@ -12,22 +12,20 @@ description: Release notes for PowerMax CSI driver
 >Note: File Replication for PowerMax is currently not supported 
 
 
+
 ### New Features/Changes
 
 - [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
 - [#861 - [FEATURE]: CSM for PowerMax file support ](https://github.com/dell/csm/issues/861)
 - [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
 - [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
-- [#947 - [FEATURE]: K8S 1.28 support in CSM 1.8](https://github.com/dell/csm/issues/947)
-- [#878 - [FEATURE] CSI 1.5 spec support : Implement Volume Limits](https://github.com/dell/csm/issues/878)
+- [#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits](https://github.com/dell/csm/issues/878)
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
 - [#937 - [FEATURE]: Google Anthos 1.15 support  for PowerMax](https://github.com/dell/csm/issues/937)
 
 ### Fixed Issues
 
-- [#890 - [BUG]: Missing nodeSelector and tolerations entry in sample file ](https://github.com/dell/csm/issues/890)
-- [#907 - [BUG]: Cert Manager should display tooltip about the pre-requisite. ](https://github.com/dell/csm/issues/907)
-- [#951 - [BUG]: Powermax : Static provisioning is failing for NFS volume ](https://github.com/dell/csm/issues/951)
-- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
+- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 

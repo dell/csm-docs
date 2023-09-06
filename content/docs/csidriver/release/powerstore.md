@@ -6,20 +6,19 @@ description: Release notes for PowerStore CSI driver
 ## Release Notes - CSI PowerStore v2.8.0
 
 
+
 ### New Features/Changes
 
 - [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
 - [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
-- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
-- [#926 - [FEATURE]: Set up golangci-lint for all CSM repositories](https://github.com/dell/csm/issues/926)
-- [#947 - [FEATURE]: K8S 1.28 support in CSM 1.8](https://github.com/dell/csm/issues/947)
-- [#878 - [FEATURE] CSI 1.5 spec support : Implement Volume Limits](https://github.com/dell/csm/issues/878)
+- [#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits](https://github.com/dell/csm/issues/878)
 - [#879 - [FEATURE]: Configurable Volume Attributes use recommended naming convention <prefix>/<name>](https://github.com/dell/csm/issues/879)
+- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
 
 ### Fixed Issues
 
+- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
 - [#928 - [BUG]: PowerStore Replication - Delete RG request hangs](https://github.com/dell/csm/issues/928)
-- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 
