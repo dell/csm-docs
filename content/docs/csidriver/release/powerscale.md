@@ -6,6 +6,7 @@ description: Release notes for PowerScale CSI driver
 
 ## Release Notes - CSI Driver for PowerScale v2.8.0
 
+
 ### New Features/Changes
 
 - [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
@@ -13,12 +14,11 @@ description: Release notes for PowerScale CSI driver
 - [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
 - [#947 - [FEATURE]: K8S 1.28 support in CSM 1.8](https://github.com/dell/csm/issues/947)
 - [#950 - [FEATURE]: PowerScale 9.5.0.4 support](https://github.com/dell/csm/issues/950)
-- [#967 - [FEATURE]: SLES15 SP4 support in csi powerscale](https://github.com/dell/csm/issues/967)
+- [#888 - [FEATURE]: Enhance GoPowerScale to support PowerScale Terraform Provider](https://github.com/dell/csm/issues/888)
 
 ### Fixed Issues
 
 - [#487 - [BUG]: Powerscale CSI driver RO PVC-from-snapshot wrong zone](https://github.com/dell/csm/issues/487)
-- [#916 - [BUG]: Remove refs to deprecated io/ioutil](https://github.com/dell/csm/issues/916)
 
 ### Known Issues
 
