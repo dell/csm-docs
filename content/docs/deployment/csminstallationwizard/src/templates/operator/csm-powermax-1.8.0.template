@@ -186,7 +186,7 @@ spec:
         # Allowed values: Any value greater than or equal to 0
         # Default value: "0"
         - name: X_CSI_MAX_VOLUMES_PER_NODE
-          values: "$MAX_VOLUMES_PER_NODE"
+          value: "$MAX_VOLUMES_PER_NODE"
       # nodeSelector: Define node selection constraints for node pods.
       # For the pod to be eligible to run on a node, the node must have each
       # of the indicated key-value pairs as labels.
