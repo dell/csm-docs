@@ -158,5 +158,4 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
     
 **Note** : 
-   1. "Kubelet config dir path" is not yet configurable in case of Operator based driver installation.
-   2. Also, snapshotter and resizer sidecars are not optional to choose, it comes default with Driver installation. 
+   1. Snapshotter and resizer sidecars are installed by default.
