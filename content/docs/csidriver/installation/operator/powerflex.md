@@ -5,6 +5,7 @@ description: >
 ---
 {{% pageinfo color="primary" %}}
 The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use [CSM Operator](../../../../deployment/csmoperator) going forward.
+CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
 {{% /pageinfo %}}
 
 
@@ -19,7 +20,7 @@ There are sample manifests provided which can be edited to do an easy installati
 Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.
 
 ### Prerequisites:
-- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../troubleshooting/powerflex.md) for details
+- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../troubleshooting/powerflex) for details
 #### SDC Deployment for Operator 
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.

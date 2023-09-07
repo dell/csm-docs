@@ -8,6 +8,9 @@ menu:
     weight: 20
 no_list: true
 ---
+{{% pageinfo color="primary" %}}
+CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
+{{% /pageinfo %}}
 
 {{% pageinfo color="primary" %}}
 The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 2.0. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
@@ -72,7 +75,7 @@ CSM is made up of multiple components including modules (enterprise capabilities
 
 ## CSM Modules Support Matrix for Dell CSI Drivers
 
-| CSM Module                                                  | CSI PowerFlex v2.7.0 | CSI PowerScale v2.7.0 | CSI PowerStore v2.8.0 | CSI PowerMax v2.7.0 | CSI Unity XT v2.7.0 |
+| CSM Module                                                  | CSI PowerFlex v2.8.0 | CSI PowerScale v2.8.0 | CSI PowerStore v2.8.0 | CSI PowerMax v2.7.0 | CSI Unity XT v2.7.0 |
 | ----------------------------------------------------------- | -------------------- | --------------------- | --------------------- | ------------------- | ------------------- |
 | [**Authorization**](authorization/) v1.8.0                  | ✔️                    | ✔️                     | ❌                     | ✔️                   | ❌                   |
 | [**Observability**](observability/) v1.6.0                  | ✔️                    | ✔️                     | ✔️                     | ✔️                   | ❌                   |
