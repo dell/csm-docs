@@ -23,6 +23,7 @@ The following prerequisites must be deployed into the namespace where CSM for Ob
   - CSI PowerFlex driver uses the 'vxflexos-config' secret. 
   - CSI PowerStore driver uses the 'powerstore-config' secret. 
   - CSI PowerScale driver uses the 'isilon-creds' secret.
+  - CSI PowerMax driver uses the secrets in configmap 'powermax-reverseproxy-config'.
 
 ## Deployment Architectures
 

@@ -6,21 +6,17 @@ Description: >
   Dell Container Storage Modules (CSM) release notes for replication
 ---
 
-## Release Notes - CSM Replication 1.4.0
+## Release Notes - CSM Replication 1.5.0
 
 ### New Features/Changes
-
- - [PowerScale - Implement Failback functionality](https://github.com/dell/csm/issues/558)
- - [PowerScale - Implement Reprotect functionality](https://github.com/dell/csm/issues/532)
- - [PowerScale - SyncIQ policy improvements](https://github.com/dell/csm/issues/573)
- - [PowerFlex - Initial Replication Support](https://github.com/dell/csm/issues/618)
- - [Replication APIs to be moved from alpha phase](https://github.com/dell/csm/issues/432)
+ - [Target Backend Volume Deletion](https://github.com/dell/csm/issues/665)
+ - [Base Image Updated to ubi-micro](https://github.com/dell/csm/issues/790)
 
 ### Fixed Issues
 
 | Github ID                                     | Description                                                        |
 | --------------------------------------------- | ------------------------------------------------------------------ |
-| [523](https://github.com/dell/csm/issues/523) | **PowerScale:** Artifacts are not properly cleaned after deletion. |
+| [782](https://github.com/dell/csm/issues/782) | **PowerScale:** Target NFS exports are not deleted even though target directories are deleted |
 
 ### Known Issues
 

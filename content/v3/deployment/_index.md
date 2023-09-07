@@ -7,8 +7,6 @@ weight: 1
 ---
 The Container Storage Modules along with the required CSI Drivers can each be deployed using CSM operator.
 
->Note: Currently CSM operator is in tech preview and is not supported in production environments.
-
 {{< cardpane >}}
   {{< card header="[**CSM Operator**](csmoperator/)"
           footer="Supports driver [PowerScale](csmoperator/drivers/powerscale/), modules [Authorization](csmoperator/modules/authorization/) [Replication](csmoperator/modules/replication/)">}}

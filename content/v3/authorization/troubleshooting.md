@@ -11,6 +11,7 @@ The CSM Authorization karavictl CLI is no longer actively maintained or supporte
 {{% /pageinfo %}}
 
 ## RPM Deployment
+- [The Failure of Building an Authorization RPM](#The-Failure-of-Building-an-Authorization-RPM)
 - [Running `karavictl tenant` commands result in an HTTP 504 error](#running-karavictl-tenant-commands-result-in-an-http-504-error)
 - [Installation fails to install policies](#installation-fails-to-install-policies)
 - [After installation, the create-pvc Pod is in an Error state](#after-installation-the-create-pvc-pod-is-in-an-error-state)
@@ -19,6 +20,27 @@ The CSM Authorization karavictl CLI is no longer actively maintained or supporte
 - [The CSI Driver for Dell PowerFlex v2.3.0 is in an Error or CrashLoopBackoff state due to "request denied for path" errors](#the-csi-driver-for-dell-powerflex-v230-is-in-an-error-or-crashloopbackoff-state-due-to-request-denied-for-path-errors)
 
 ---
+
+### The Failure of Building an Authorization RPM
+  This response occurs when running 'make rpm' without the proper permissions or correct pathing of the Authorization repository.
+
+```
+Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error mounting "/root/karavi-authorization/bin/deploy" to rootfs at "/home/builder/rpm/deploy": mount /root/karavi-authorization/bin/deploy:/home/builder/rpm/deploy (via /proc/self/fd/6), flags: 0x5000: not a directory: unknown: Are you trying to mount a directory onto a file (or vice-versa)? Check if the specified host path exists and is the expected type.ERRO[0001] error waiting for container: context canceled 
+```
+
+__Resolution__
+
+1. Ensure the cloned repository is in a folder independent of the root or home directory.
+
+```
+/root/myrepos/karavi-authorization
+```
+
+2. Enable appropriate permissions to the RPM folder (this is where the Authorization RPM is located after being built).
+
+```
+chmod o+rwx deploy/rpm
+```
 
 ### Retrieve CSM Authorization Server Logs
 
@@ -57,15 +79,7 @@ error: failed to install policies (see /tmp/policy-install-for-karavi3163047435)
 
 __Resolution__
 
-View the contents /tmp/policy-install-for-karavi* file listed in the error message. If there is a Permission denied error while running the policy-install.sh script, manually run the script to install policies.
-
-```
-$ cat /tmp/policy-install-for-karavi3163047435
-
-# find the location of the policy-install.sh script located in the file and manually run the script
-
-$ /tmp/karavi-installer-2908017483/policy-install.sh
-```
+This issue should only occur with older versions of CSM Authorization. If your system is encountering this issue, upgrade to version 1.5.0 or above.
 
 ### After installation, the create-pvc Pod is in an Error state
 If SELinux is enabled, the create-pvc Pod may be in an Error state:

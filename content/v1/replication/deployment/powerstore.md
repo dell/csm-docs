@@ -34,13 +34,14 @@ To verify you have everything in order you can execute the following commands:
   Pods should be `READY` and `RUNNING`.
 * Check that controller config map is properly populated:
     ```shell
+    
     kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
     ```
   `data` field should be properly populated with cluster id of your choosing and, if using multi-cluster
   installation, your `targets:` parameter should be populated by list of target clusters IDs.
 
 
-If you don't have something installed or something is out-of-place, please refer to installation instructions in [installation-repctl](../install-repctl) or [installation](../installation).
+If you don't have something installed or something is out-of-place, please refer to installation instructions [here](../installation).
 
 ### Installing Driver With Replication Module
 

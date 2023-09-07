@@ -9,7 +9,7 @@ The Container Storage Modules along with the required CSI Drivers can each be de
 
 {{< cardpane >}}
   {{< card header="[**CSM Operator**](csmoperator/)"
-          footer="Supports driver [PowerScale](csmoperator/drivers/powerscale/), modules [Authorization](csmoperator/modules/authorization/) [Replication](csmoperator/modules/replication/)">}}
+          footer="Supported drivers: [PowerScale](csmoperator/drivers/powerscale/), [PowerStore](csmoperator/drivers/powerstore/), [PowerFlex](csmoperator/drivers/powerflex/) <br> Supported modules: [Authorization](csmoperator/modules/authorization/), [Replication](csmoperator/modules/replication/), [Observability](csmoperator/modules/observability/)">}}
   Dell CSM Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 [...More on installation instructions](csmoperator/)
   {{< /card >}}
@@ -22,6 +22,11 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
           footer="Installs [PowerStore](../csidriver/installation/helm/powerstore/) [PowerMax](../csidriver/installation/helm/powermax/) [PowerScale](../csidriver/installation/helm/isilon/) [PowerFlex](../csidriver/installation/helm/powerflex/) [Unity](../csidriver/installation/helm/unity/)">}}
    Dell CSI Helm installer installs the CSI Driver components using the provided Helm charts.
    [...More on installation instructions](../csidriver/installation/helm)
+  {{< /card >}}
+  {{< card header="[CSM Installation Wizard](csminstallationwizard/)"
+          footer="Generates manifest file for installation">}}
+   CSM Installation Wizard generates manifest files to install Dell CSI Drivers and supported modules.
+   [...More on installation instructions](csminstallationwizard)
   {{< /card >}}
    {{< card header="[Dell CSI Drivers Installation via offline installer](../csidriver/installation/offline)"
           footer="[Offline installation for all drivers](../csidriver/installation/offline)">}}

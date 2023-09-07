@@ -14,7 +14,13 @@ This section outlines the uninstallation steps for Container Storage Modules (CS
 
 ## Uninstalling the RPM
 
-To uninstall the rpm package on the system, run the below command:
+To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run: 
+
+```
+rpm -e k3s-selinux
+```
+
+To uninstall the CSM Authorization rpm package on the system, run:
 
 ```
 rpm -e <rpm_file_name>

@@ -18,10 +18,10 @@ This section outlines the upgrade steps for Container Storage Modules (CSM) for 
 
 Obtain the latest single binary installer RPM by following one of our two options [here](../deployment/#single-binary-installer). 
 
-To update the rpm package on the system, run the below command:
+To update the rpm package on the system, run the below command from within the extracted folder:
 
 ```
-rpm -Uvh karavi-authorization-<new_version>.x86_64.rpm --nopreun --nopostun
+sh install_karavi_auth.sh --upgrade
 ```
 
 To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:
