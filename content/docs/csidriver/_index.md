@@ -17,7 +17,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Kubernetes    | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28    | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28  | 1.26, 1.27, 1.28 |
+| Kubernetes    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27  | 1.25, 1.26, 1.27 |
 | RHEL          |     7.x,8.x  |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.x,8.x      |
 | Ubuntu        |       20.04      |       20.04         |  20.04    | 20.04, 22.04      |        20.04     |
 | CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.9     |      7.8, 7.9     |     7.8, 7.9     |

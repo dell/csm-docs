@@ -885,7 +885,7 @@ dellctl images --component csi-vxflexos
 ```
 ```
 Driver/Module Image             Supported Orchestrator Versions         Sidecar Images
-dellemc/csi-vxflexos:v2.8.0     k8s1.28,k8s1.27,k8s1.26,ocp4.13,ocp4.12 registry.k8s.io/sig-storage/csi-attacher:v4.3.0
+dellemc/csi-vxflexos:v2.8.0     k8s1.27,k8s1.26,k8s1.25,ocp4.13,ocp4.12 registry.k8s.io/sig-storage/csi-attacher:v4.3.0
                                                                         registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
                                                                         registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.9.0
                                                                         registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2

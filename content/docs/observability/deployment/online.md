@@ -119,7 +119,7 @@ To perform an online installation of CSM for Observability, the following steps 
     ```
     ```
     ---------------------------------------------------------------------------------
-    > Installing Karavi Observability in namespace karavi on 1.28
+    > Installing Karavi Observability in namespace karavi on 1.27
     ---------------------------------------------------------------------------------
     |
     |- Karavi Observability is not installed                            Success

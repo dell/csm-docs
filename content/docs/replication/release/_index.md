@@ -14,7 +14,6 @@ Description: >
 
 - [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
 - [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
-- [#947 - [FEATURE]: K8s 1.28 support ](https://github.com/dell/csm/issues/947)
 
 ### Fixed Issues
 

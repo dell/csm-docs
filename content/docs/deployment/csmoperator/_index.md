@@ -13,7 +13,7 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 
 | Kubernetes Version         | OpenShift Version    |
 | -------------------------- | -------------------- |
-| 1.26, 1.27, 1.28           | 4.12, 4.12 EUS, 4.13 |
+| 1.25, 1.26, 1.27           | 4.12, 4.12 EUS, 4.13 |
 
 >NOTE:
 >- Authorization module is only supported on Kubernetes platforms.

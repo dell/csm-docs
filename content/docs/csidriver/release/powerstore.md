@@ -11,7 +11,6 @@ description: Release notes for PowerStore CSI driver
 
 - [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
 - [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
-- [#947 - [FEATURE]: K8s 1.28 support ](https://github.com/dell/csm/issues/947)
 - [#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits](https://github.com/dell/csm/issues/878)
 - [#879 - [FEATURE]: Configurable Volume Attributes use recommended naming convention <prefix>/<name>](https://github.com/dell/csm/issues/879)
 - [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)

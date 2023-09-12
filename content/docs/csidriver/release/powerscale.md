@@ -11,7 +11,6 @@ description: Release notes for PowerScale CSI driver
 
 - [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
 - [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
-- [#947 - [FEATURE]: K8s 1.28 support ](https://github.com/dell/csm/issues/947)
 - [#950 - [FEATURE]: PowerScale 9.5.0.4 support](https://github.com/dell/csm/issues/950)
 - [#967 - [FEATURE]: SLES15 SP4 support in csi powerscale](https://github.com/dell/csm/issues/967)
 - [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
