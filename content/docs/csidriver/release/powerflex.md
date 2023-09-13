@@ -12,7 +12,6 @@ description: Release notes for PowerFlex CSI driver
 - [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
 - [#763 - [FEATURE]: CSI-PowerFlex 4.0 NFS support](https://github.com/dell/csm/issues/763)
 - [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
-- [#947 - [FEATURE]: K8s 1.28 support ](https://github.com/dell/csm/issues/947)
 - [#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits](https://github.com/dell/csm/issues/878)
 - [#885 - [FEATURE]: SDC 3.6.1 support](https://github.com/dell/csm/issues/885)
 

@@ -66,7 +66,7 @@ CSM for Observability online installer upgrade can be used if the initial deploy
     ```
     ```
     ---------------------------------------------------------------------------------
-    >  Upgrading Karavi Observability in namespace karavi on 1.28
+    >  Upgrading Karavi Observability in namespace karavi on 1.27
     ---------------------------------------------------------------------------------
     |
     |- Karavi Observability is installed. Upgrade can continue          Success

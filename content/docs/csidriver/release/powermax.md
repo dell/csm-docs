@@ -19,7 +19,6 @@ description: Release notes for PowerMax CSI driver
 - [#861 - [FEATURE]: CSM for PowerMax file support ](https://github.com/dell/csm/issues/861)
 - [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
 - [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
-- [#947 - [FEATURE]: K8s 1.28 support ](https://github.com/dell/csm/issues/947)
 - [#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits](https://github.com/dell/csm/issues/878)
 - [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
 - [#937 - [FEATURE]: Google Anthos 1.15 support  for PowerMax](https://github.com/dell/csm/issues/937)

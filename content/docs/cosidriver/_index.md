@@ -18,7 +18,7 @@ Dell COSI Driver is a multi-backend driver, meaning that it can connect to multi
 {{<table "table table-striped table-bordered table-sm">}}
 |            |    COSI    |
 |------------|:----------:|
-| Kubernetes | 1.27, 1.28 |
+| Kubernetes |    1.27    |
 | K3s        |    1.27    |
 {{</table>}}
 
