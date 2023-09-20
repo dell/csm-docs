@@ -6,6 +6,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM deployment
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:
 - Deploying the CSM for Authorization proxy server, to be controlled by storage administrators
 - Configuring one to many [supported](../../../authorization#supported-csi-drivers) Dell CSI drivers with CSM for Authorization
@@ -123,6 +127,16 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
     cd karavi_authorization_<version>
     sh install_karavi_auth.sh
     ```
+
+  As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:
+
+  ```
+  sh install_karavi_auth.sh --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+
+  Ex.:
+
+  sh install_karavi_auth.sh --traefik_web_port 30001 --traefik_websecure_port 30002
+  
 
 5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 

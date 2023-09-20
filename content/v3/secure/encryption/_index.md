@@ -26,11 +26,11 @@ For detailed information on the cryptography behind gocryptfs, see [gocryptfs Cr
 
 When a CSI Driver is installed with the Encryption feature enabled, two provisioners are registered in the cluster:
 
-#### Provisioner for unencrypted volumes
+**Provisioner for unencrypted volumes**
 
 This provisioner belongs to the storage driver and does not depend on the Encryption feature. Use a storage class with this provisioner to create regular unencrypted volumes. 
 
-#### Provisioner for encrypted volumes
+**Provisioner for encrypted volumes**
 
 This provisioner belongs to Encryption and registers with the name [`encryption.pluginName`](deployment/#helm-chart-values) when Encryption is enabled. Use a storage class with this provisioner to create encrypted volumes.
 
@@ -68,7 +68,8 @@ the CSI driver must be restarted to pick up the change.
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes | 1.22, 1.23, 1.24 |
+| Kubernetes | 1.22, 1.23, 1.24, 1.25 |
+| Red Hat OpenShift  | 4.10, 4.11 |
 | RHEL | 7.9, 8.4 |
 | Ubuntu | 18.04, 20.04 |
 | SLES | 15SP2 |
@@ -116,6 +117,10 @@ Please refer to the Hashicorp Vault documentation regarding recommended deployme
 Access to the data will be lost for ever.
 
 Refer to [Vault Configuration section](vault) for minimal configuration steps required to support Encryption and other configuration considerations.
+
+## Key Rotation (rekey)
+This preview of Encryption includes the ability to change the KEK (Key Encryption Key) of an encrypted volume, an operation commonly known as Shallow Rekey, or 
+Shallow Key Rotation. The KEK is the 256-bit key that encrypts the Data Encryption Key which encrypts the data on the volume. 
 
 ## Kubernetes Worker Hosts Requirements
 

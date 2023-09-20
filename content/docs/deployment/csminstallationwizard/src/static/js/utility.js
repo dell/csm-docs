@@ -37,20 +37,40 @@ function validateForm(CONSTANTS_PARAM) {
 	if (document.getElementById('controller-count').value.trim() < 1) {
 		return false;
 	}
+	if (document.getElementById('max-volumes-per-node').value.trim() < 0) {
+		return false;
+	}
+
+	if ($("#installation-type").val() === CONSTANTS_PARAM.OPERATOR && ($("#array").val() === CONSTANTS_PARAM.POWERFLEX || $("#array").val() === CONSTANTS_PARAM.UNITY)) {
+		return false;
+	}
 
 	const powermaxSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERMAX;
 	const vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
 
+	const powerflexSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERFLEX;
+	const renameSDCEnabled = $("#rename-sdc").prop('checked') ? true : false;
+
 	if (powermaxSelected) {
-		if (document.getElementById('storage-array-id').value.trim() === "") {
-			return false;
-		}
-		if (document.getElementById('storage-array-endpoint-url').value.trim() === "") {
-			return false;
-		}
+		if (document.getElementById('installation-type').value === CONSTANTS_PARAM.HELM) {
+			if (document.getElementById('storage-array-id').value.trim() === "") {
+				return false;
+			}
+			if (document.getElementById('storage-array-endpoint-url').value.trim() === "") {
+				return false;
+			}
+		} else {
+			if (document.getElementById('manage-array-id').value.trim() === "") {
+				return false;
+			}
+			if (document.getElementById('manage-array-endpoint-url').value.trim() === "") {
+				return false;
+			}
+		}		
 		if (document.getElementById('cluster-prefix').value.trim() === "") {
 			return false;
 		}
+
 
 		if (vSphereEnabled) {
 			if (document.getElementById('vSphere-fc-port-group').value.trim() === "") {
@@ -64,6 +84,15 @@ function validateForm(CONSTANTS_PARAM) {
 			}
 			if (document.getElementById('vSphere-vCenter-cred-secret').value.trim() === "") {
 				return false;
+			}
+		}
+	}
+	if (powerflexSelected) {
+		if (document.getElementById('installation-type').value === CONSTANTS_PARAM.HELM) {
+			if (renameSDCEnabled) {
+				if (document.getElementById('sdc-prefix').value.trim() === "") {
+					return false;
+				}
 			}
 		}
 	}
@@ -97,11 +126,15 @@ function setDefaultValues(defaultValuesParam, csmMapValues) {
 	setMap(defaultValuesParam);
 	document.getElementById("image-repository").value = csmMapValues.get("imageRepository");
 	document.getElementById("csm-version").value = String(csmMapValues.get("csmVersion"));
+	document.getElementById("max-volumes-per-node").value = String(csmMapValues.get("maxVolumesPerNode"));
 	document.getElementById("controller-count").value = String(csmMapValues.get("controllerCount"));
 	document.getElementById("vol-name-prefix").value = csmMapValues.get("volNamePrefix");
 	document.getElementById("snapshot-prefix").value = csmMapValues.get("snapNamePrefix");
 	document.getElementById("cert-secret-count").value = csmMapValues.get("certSecretCount");
 	document.getElementById("taint").value = csmMapValues.get("taint");
+	document.getElementById("poll-rate").value = csmMapValues.get("pollRate");
+	document.getElementById("array-threshold").value = csmMapValues.get("arrayThreshold");
+	document.getElementById("driver-pod-label").value = csmMapValues.get("driverPodLabel");
 
 }
 

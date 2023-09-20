@@ -4,6 +4,9 @@ description: >
   Installing CSI Driver for Unity XT via Operator
 ---
 
+{{% pageinfo color="primary" %}}
+The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use [CSM Operator](../../../../deployment/csmoperator) going forward.
+{{% /pageinfo %}}
 
 
 ## CSI Driver for Unity XT
@@ -42,11 +45,17 @@ Ex: secret.yaml
   
 ```
 
-`kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml`
+```bash
+
+kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml
+```
 
 Use the following command to replace or update the secret
 
-`kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -`
+```bash
+
+kubectl create secret generic unity-creds -n unity --from-file=config=secret.yaml -o yaml --dry-run | kubectl replace -f -
+```
 
 **Note**: The user needs to validate the YAML syntax and array related key/values while replacing the unity-creds secret.
 The driver will continue to use previous values in case of an error found in the YAML file.
@@ -94,16 +103,16 @@ Refer samples from [here](https://github.com/dell/dell-csi-operator/tree/master/
 apiVersion: storage.dell.com/v1
 kind: CSIUnity
 metadata:
-  name: test-unity
-  namespace: test-unity
+  name: unity
+  namespace: unity
 spec:
   driver:
-    configVersion: v2.6.0
+    configVersion: v2.7.0
     replicas: 2
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     common:
-      image: "dellemc/csi-unity:v2.6.0"
+      image: "dellemc/csi-unity:v2.7.0"
       imagePullPolicy: IfNotPresent
     sideCars:
       - name: provisioner
@@ -185,7 +194,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: unity-config-params
-  namespace: test-unity
+  namespace: unity
 data:
   driver-config-params.yaml: |
     CSI_LOG_LEVEL: "info"
@@ -201,7 +210,7 @@ data:
 As part of driver installation, a ConfigMap with the name `unity-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `unity-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
-```
+```bash
 kubectl edit configmap -n unity unity-config-params
 ```  
 
@@ -216,7 +225,7 @@ kubectl edit configmap -n unity unity-config-params
 
 Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
 To enable this feature, add the below block to the driver manifest before installing the driver. This ensures to install external health monitor sidecar. To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
-```
+```yaml
       # Uncomment the following to install 'external-health-monitor' sidecar to enable health monitor of CSI volumes from Controller plugin.
       # Also set the env variable controller.envs.X_CSI_ENABLE_VOL_HEALTH_MONITOR  to "true".
       # - name: external-health-monitor
