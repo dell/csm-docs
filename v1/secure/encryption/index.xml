@@ -526,7 +526,8 @@ Kubernetes cluster. The Rekey Controller can be installed via the Dell Helm char
 &lt;p&gt;Dell Helm charts can be added with the command &lt;code&gt;helm repo add dell https://dell.github.io/helm-charts&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;kubeconfig-secret&#34;&gt;Kubeconfig Secret&lt;/h3&gt;
 &lt;p&gt;A secret with kubeconfig must be created with the name &lt;code&gt;cluster-kube-config&lt;/code&gt;. Here is an example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; kubectl create secret generic cluster-kube-config --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;/root/.kube/config
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; kubectl create secret generic cluster-kube-config --from-file&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;/root/.kube/config
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;helm-chart-values&#34;&gt;Helm Chart Values&lt;/h3&gt;
 &lt;p&gt;The Rekey Controller Helm chart defines these values:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Rekey controller image name.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -595,7 +596,8 @@ Kubernetes cluster. The Rekey Controller can be installed via the Dell Helm char
 &lt;h3 id=&#34;deployment&#34;&gt;Deployment&lt;/h3&gt;
 &lt;p&gt;Copy the chart&amp;rsquo;s values.yaml to a local file and adjust the values in the local file for the current cluster.
 Deploy the controller using a command similar to this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install --values local-values.yaml rekey-controller dell/csm-encryption-rekey-controller
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install --values local-values.yaml rekey-controller dell/csm-encryption-rekey-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A rekey-controller pod should now be up and running.&lt;/p&gt;
 &lt;h2 id=&#34;rekey-usage&#34;&gt;Rekey Usage&lt;/h2&gt;
 &lt;p&gt;Rekeying is initiated and monitored via Kubernetes custom resources of type &lt;code&gt;rekeys.encryption.storage.dell.com&lt;/code&gt;.
@@ -605,13 +607,14 @@ of the operation. Refer to &lt;a href=&#34;#rekey-status&#34;&gt;Rekey Status&lt
 &lt;h3 id=&#34;rekey-with-dellctl&#34;&gt;Rekey with dellctl&lt;/h3&gt;
 &lt;p&gt;If &lt;code&gt;dellctl&lt;/code&gt; CLI is installed, rekeying an encrypted volume is simple.
 For example, to rekey a PV with the name &lt;code&gt;k8s-112a5d41bc&lt;/code&gt; use a command like this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dellctl encryption rekey myrekey k8s-112a5d41bc
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;INFO rekey request &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;myrekey&amp;#34;&lt;/span&gt; submitted successfully &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; persistent volume &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;k8s-112a5d41bc&amp;#34;&lt;/span&gt;.
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;INFO Run &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;dellctl encryption rekey-status myrekey&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; more details.
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then to check the status of the newly created rekey with the name &lt;code&gt;myrekey&lt;/code&gt; use this command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dellctl encryption rekey-status myrekey
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;INFO Status of rekey request &lt;span style=&#34;color:#000&#34;&gt;myrekey&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; completed
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;rekey-with-kubectl&#34;&gt;Rekey with kubectl&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dellctl encryption rekey myrekey k8s-112a5d41bc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;INFO rekey request &amp;#34;myrekey&amp;#34; submitted successfully for persistent volume &amp;#34;k8s-112a5d41bc&amp;#34;.
+INFO Run &amp;#39;dellctl encryption rekey-status myrekey&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then to check the status of the newly created rekey with the name &lt;code&gt;myrekey&lt;/code&gt; use this command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dellctl encryption rekey-status myrekey
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;INFO Status of rekey request myrekey = completed
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;rekey-with-kubectl&#34;&gt;Rekey with kubectl&lt;/h3&gt;
 &lt;p&gt;Create a cluster-scoped rekey resource to rekey an encrypted volume.
 For example, to rekey a PV with the name &lt;code&gt;k8s-09a76734f&lt;/code&gt; use a command like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f - &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF
@@ -624,9 +627,9 @@ For example, to rekey a PV with the name &lt;code&gt;k8s-09a76734f&lt;/code&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the rekey resource has been created, after some time, the status of
 the rekey can be inspected through the &lt;code&gt;status.phase&lt;/code&gt; field of the rekey resource.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ &lt;span style=&#34;color:#204a87&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get rekey example-rekey -o &lt;span style=&#34;color:#000&#34;&gt;jsonpath&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{.status.phase}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;completed
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;rekey-status&#34;&gt;Rekey Status&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;kubectl get rekey example-rekey -o &lt;span style=&#34;color:#000&#34;&gt;jsonpath&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{.status.phase}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;completed
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;rekey-status&#34;&gt;Rekey Status&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;status.phase&lt;/code&gt; field of a rekey resource can have these values:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;

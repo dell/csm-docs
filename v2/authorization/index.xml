@@ -23,7 +23,14 @@
       <description>
         
         
-        &lt;p&gt;Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.&lt;/p&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.&lt;/p&gt;
 &lt;p&gt;This document provides an overview of the major components, including how they fit together and pointers to implementation details.&lt;/p&gt;
 &lt;p&gt;If you are a developer who is new to CSM for Authorization and want to build a mental map of how it works, you&amp;rsquo;re in the right place.&lt;/p&gt;
 &lt;h2 id=&#34;terminology&#34;&gt;Terminology&lt;/h2&gt;
@@ -284,7 +291,14 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
       <description>
         
         
-        &lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 2.0. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;This section outlines the uninstallation steps for Container Storage Modules (CSM) for Authorization.&lt;/p&gt;
 &lt;h2 id=&#34;uninstalling-the-rpm&#34;&gt;Uninstalling the RPM&lt;/h2&gt;
 &lt;p&gt;To uninstall the rpm package on the system, you must first uninstall the K3s SELinux package if SELinux is enabled. To uninstall the K3s SELinux package, run:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -e k3s-selinux
@@ -305,7 +319,14 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
       <description>
         
         
-        &lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 2.0. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;This section outlines the upgrade steps for Container Storage Modules (CSM) for Authorization.  The upgrade of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Upgrading the CSM for Authorization proxy server&lt;/li&gt;
 &lt;li&gt;Upgrading the Dell CSI drivers with CSM for Authorization enabled&lt;/li&gt;
@@ -314,6 +335,12 @@ today.  Support for more Storage Arrays will come in the future.&lt;/p&gt;
 &lt;p&gt;Obtain the latest single binary installer RPM by following one of our two options &lt;a href=&#34;../deployment/#single-binary-installer&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;To update the rpm package on the system, run the below command from within the extracted folder:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh install_karavi_auth.sh --upgrade
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh install_karavi_auth.sh --upgrade  --traefik_web_port &amp;lt;web port number&amp;gt; --traefik_websecure_port &amp;lt;websecure port number&amp;gt;
+
+Ex.:
+
+sh install_karavi_auth.sh --upgrade  --traefik_web_port 30001 --traefik_websecure_port 30002
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rpm -qa | grep karavi
 k3s kubectl version
@@ -345,7 +372,14 @@ k3s kubectl version
       <description>
         
         
-        &lt;p&gt;karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
 This document outlines all karavictl commands, their intended use, options that can be provided to alter their execution, and expected output from those commands.&lt;/p&gt;
 &lt;p&gt;If you feel that something is unclear or missing in this document, please open up an &lt;a href=&#34;https://github.com/dell/csm/issues&#34;&gt;issue&lt;/a&gt;.&lt;/p&gt;
 &lt;table&gt;
@@ -455,6 +489,10 @@ This document outlines all karavictl commands, their intended use, options that 
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#karavictl-tenant-delete&#34;&gt;karavictl tenant delete&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Deletes a tenant resource within CSM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#karavictl-tenant-update&#34;&gt;karavictl tenant update&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Updates a tenant resource within CSM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -933,6 +971,22 @@ data:
 &lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-24&#34;&gt;Output&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl tenant delete --name Alice
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the deletion occurred.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;karavictl-tenant-update&#34;&gt;karavictl tenant update&lt;/h3&gt;
+&lt;p&gt;Updates a tenant&amp;rsquo;s resource within CSM&lt;/p&gt;
+&lt;h5 id=&#34;synopsis-25&#34;&gt;Synopsis&lt;/h5&gt;
+&lt;p&gt;Updates a tenant resource within CSM&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;karavictl tenant update [flags]
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;options-25&#34;&gt;Options&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   help for create
+  -n, --name string   Tenant name
+      --approvesdc boolean (Usage: --approvesdc=true/false | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant&amp;#39;s SDC request )
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;options-inherited-from-parent-commands-24&#34;&gt;Options inherited from parent commands&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --addr string     Address of the server (default &amp;#34;localhost:443&amp;#34;)
+      --config string   config file (default is $HOME/.karavictl.yaml)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-25&#34;&gt;Output&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ karavictl tenant update --name Alice --approvesdc=false
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On success, there will be no output. You may run &lt;code&gt;karavictl tenant get --name &amp;lt;tenant-name&amp;gt;&lt;/code&gt; to confirm the update was persisted.&lt;/p&gt;
 
       </description>
     </item>
@@ -946,7 +1000,14 @@ data:
       <description>
         
         
-        &lt;h2 id=&#34;rpm-deployment&#34;&gt;RPM Deployment&lt;/h2&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;rpm-deployment&#34;&gt;RPM Deployment&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#The-Failure-of-Building-an-Authorization-RPM&#34;&gt;The Failure of Building an Authorization RPM&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#running-karavictl-tenant-commands-result-in-an-http-504-error&#34;&gt;Running &lt;code&gt;karavictl tenant&lt;/code&gt; commands result in an HTTP 504 error&lt;/a&gt;&lt;/li&gt;
@@ -1080,15 +1141,17 @@ kubectl -n &amp;lt;driver-namespace&amp;gt; rollout restart daemonSet/vxflexos-n
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-authorization-151&#34;&gt;Release Notes - CSM Authorization 1.5.1&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-authorization-160&#34;&gt;Release Notes - CSM Authorization 1.6.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Show volumes associated with the tenant from the k8s server. (&lt;a href=&#34;https://github.com/dell/csm/issues/408&#34;&gt;#408&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;CSM 1.5.1 release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/582&#34;&gt;#582&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Restrict the version of TLS to v1.2 for all requests to CSM authorization proxy server. (&lt;a href=&#34;https://github.com/dell/csm/issues/642&#34;&gt;#642&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;PowerFlex preapproved GUIDs. (&lt;a href=&#34;https://github.com/dell/csm/issues/402&#34;&gt;#402&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM 1.6 release specific changes. (&lt;a href=&#34;https://github.com/dell/csm/issues/583&#34;&gt;#583&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;bugs&#34;&gt;Bugs&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;CSM Authorization installation fails due to a PATH not looking in /usr/local/bin. (&lt;a href=&#34;https://github.com/dell/csm/issues/580&#34;&gt;#580&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM Authorization quota of zero should allow infinite use for PowerFlex and PowerMax. (&lt;a href=&#34;https://github.com/dell/csm/issues/654&#34;&gt;#654&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CSM Authorization CRD in the CSM Operator doesn&amp;rsquo;t read custom configurations. (&lt;a href=&#34;https://github.com/dell/csm/issues/633&#34;&gt;#633&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>

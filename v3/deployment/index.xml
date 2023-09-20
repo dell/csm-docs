@@ -23,14 +23,7 @@
       <description>
         
         
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The Dell Container Storage Modules Operator Operator is currently in tech-preview and is not supported in production environments. It can be used in environments where no other Dell CSI Drivers or CSM Modules are installed.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
+        &lt;p&gt;The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.&lt;/p&gt;
 &lt;h2 id=&#34;supported-platforms&#34;&gt;Supported Platforms&lt;/h2&gt;
 &lt;p&gt;Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.&lt;/p&gt;
 &lt;table&gt;
@@ -42,8 +35,8 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;1.22, 1.23, 1.24&lt;/td&gt;
-&lt;td&gt;4.9, 4.10, 4.10 EUS&lt;/td&gt;
+&lt;td&gt;1.23, 1.24, 1.25&lt;/td&gt;
+&lt;td&gt;4.10, 4.10 EUS, 4.11&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -69,10 +62,18 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.4.0&lt;/td&gt;
+&lt;td&gt;2.5.0&lt;/td&gt;
+&lt;td&gt;1.5.0&lt;/td&gt;
+&lt;td&gt;1.3.0&lt;/td&gt;
 &lt;td&gt;1.4.0&lt;/td&gt;
-&lt;td&gt;1.3.0&lt;/td&gt;
-&lt;td&gt;1.3.0&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerFlex&lt;/td&gt;
+&lt;td&gt;2.5.0&lt;/td&gt;
+&lt;td&gt;1.5.0&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;td&gt;1.4.0&lt;/td&gt;
 &lt;td&gt;N/A&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -88,7 +89,7 @@
 &lt;h3 id=&#34;manual-installation&#34;&gt;Manual Installation&lt;/h3&gt;
 &lt;h4 id=&#34;operator-installation-on-a-cluster-without-olm&#34;&gt;Operator Installation on a cluster without OLM&lt;/h4&gt;
 &lt;ol&gt;
-&lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/csm-operator&#34;&gt;Dell CSM Operator repository&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Clone and checkout the required csm-operator version using &lt;code&gt;git clone -b v1.0.0 https://github.com/dell/csm-operator.git&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;(Optional) If using a local Docker image, edit the &lt;code&gt;deploy/operator.yaml&lt;/code&gt; file and set the image name for the CSM Operator Deployment.&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;bash scripts/install.sh&lt;/code&gt; to install the operator.&lt;/li&gt;
@@ -104,7 +105,7 @@
 
 
 &lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v3/deployment/csmoperator/install_hu65a008b76338bb66f6abc1e8679a223d_170165_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1252&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v3/deployment/csmoperator/install_hu85888722b51123e0513e2ebaa152324f_147828_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;1435&#34;&gt;
 	
 &lt;/figure&gt;
 
@@ -125,7 +126,7 @@
 
 &lt;h4 id=&#34;operator-installation-on-a-cluster-with-olm&#34;&gt;Operator Installation on a cluster with OLM&lt;/h4&gt;
 &lt;ol&gt;
-&lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/csm-operator&#34;&gt;Dell CSM Operator repository&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Clone and checkout the required csm-operator version using &lt;code&gt;git clone -b v1.0.0 https://github.com/dell/csm-operator.git&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;bash scripts/install_olm.sh&lt;/code&gt; to install the operator.&lt;/li&gt;
 &lt;/ol&gt;
@@ -155,7 +156,7 @@
 
 
 &lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v3/deployment/csmoperator/install_olm_pods_huda4520e12712062a7cd7a9d2b5385714_107093_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;487&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v3/deployment/csmoperator/install_olm_pods_hu66764453d70d08f74a9828e23052aaa9_58146_2500x0_resize_q75_catmullrom.jpg&#34; width=&#34;2500&#34; height=&#34;367&#34;&gt;
 	
 &lt;/figure&gt;
 
@@ -194,7 +195,7 @@
 
 
 &lt;figure class=&#34;card rounded p-2 td-post-card mb-4 mt-4&#34; style=&#34;max-width: 2510px&#34;&gt;
-	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v3/deployment/csmoperator/uninstall_olm_huffe5566d5d7fb4af320bc708dd65cfbb_46203_2500x0_resize_q75_catmullrom.JPG&#34; width=&#34;2500&#34; height=&#34;504&#34;&gt;
+	&lt;img class=&#34;card-img-top&#34; src=&#34;https://dell.github.io/csm-docs/csm-docs/v3/deployment/csmoperator/uninstall_olm_hu7acfc5f0715e9eb8698001d34862a289_37915_2500x0_resize_q75_catmullrom.JPG&#34; width=&#34;2500&#34; height=&#34;496&#34;&gt;
 	
 &lt;/figure&gt;
 
@@ -204,9 +205,8 @@
 &lt;p&gt;2.Using Operator Lifecycle Manager (OLM)&lt;/p&gt;
 &lt;h4 id=&#34;using-installation-script&#34;&gt;Using Installation Script&lt;/h4&gt;
 &lt;ol&gt;
-&lt;li&gt;Clone the &lt;a href=&#34;https://github.com/dell/csm-operator&#34;&gt;Dell CSM Operator repository&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Clone and checkout the required csm-operator version using &lt;code&gt;git clone -b v1.0.0 https://github.com/dell/csm-operator.git&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;git checkout -b &amp;lsquo;csm-operator-version&amp;rsquo;&lt;/li&gt;
 &lt;li&gt;Execute &lt;code&gt;bash scripts/install.sh --upgrade&lt;/code&gt;  . This command will install the latest version of the operator.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;

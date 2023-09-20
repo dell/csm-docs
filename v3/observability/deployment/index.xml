@@ -36,7 +36,7 @@
 &lt;p&gt;Create a namespace where you want to install the module &lt;code&gt;kubectl create namespace karavi&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Install cert-manager CRDs &lt;code&gt;kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Install cert-manager CRDs &lt;code&gt;kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Add the Dell Helm Charts repo &lt;code&gt;helm repo add dell https://dell.github.io/helm-charts&lt;/code&gt;&lt;/p&gt;
@@ -446,7 +446,14 @@
       <description>
         
         
-        &lt;!--
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;!--
 Copyright (c) 2020 Dell Inc., or its subsidiaries. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
@@ -671,10 +678,10 @@ The following example will install CSM for Observability into the CSM namespace.
 *
 * Downloading and saving Docker images
 
-  dellemc/csm-topology:v1.3.0
-  dellemc/csm-metrics-powerflex:v1.3.0
-  dellemc/csm-metrics-powerstore:v1.3.0
-  dellemc/csm-metrics-powerscale:v1.0.0
+  dellemc/csm-topology:v1.4.0
+  dellemc/csm-metrics-powerflex:v1.4.0
+  dellemc/csm-metrics-powerstore:v1.4.0
+  dellemc/csm-metrics-powerscale:v1.1.0
   otel/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20
 
@@ -699,10 +706,10 @@ The following example will install CSM for Observability into the CSM namespace.
 *
 * Loading, tagging, and pushing Docker images to registry &amp;lt;my-registry&amp;gt;:5000/
 
-  dellemc/csm-topology:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.3.0
-  dellemc/csm-metrics-powerflex:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.3.0
-  dellemc/csm-metrics-powerstore:v1.3.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.3.0
-  dellemc/csm-metrics-powerscale:v1.0.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.0.0
+  dellemc/csm-topology:v1.4.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-topology:v1.4.0
+  dellemc/csm-metrics-powerflex:v1.4.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerflex:v1.4.0
+  dellemc/csm-metrics-powerstore:v1.4.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerstore:v1.4.0
+  dellemc/csm-metrics-powerscale:v1.1.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/csm-metrics-powerscale:v1.1.0
   otel/opentelemetry-collector:0.42.0 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/opentelemetry-collector:0.42.0
   nginxinc/nginx-unprivileged:1.20 -&amp;gt; &amp;lt;my-registry&amp;gt;:5000/nginx-unprivileged:1.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;

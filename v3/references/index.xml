@@ -55,7 +55,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#dellctl-backup&#34;&gt;dellctl backup&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Allows to manipulate application backups/clones&lt;/td&gt;
+&lt;td&gt;Allows you to manipulate application backups/clones&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#dellctl-backup-create&#34;&gt;dellctl backup create&lt;/a&gt;&lt;/td&gt;
@@ -71,7 +71,7 @@ This document outlines all dellctl commands, their intended use, options that ca
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#dellctl-restore&#34;&gt;dellctl restore&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Allows to manipulate application restores&lt;/td&gt;
+&lt;td&gt;Allows you to manipulate application restores&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;#dellctl-restore-create&#34;&gt;dellctl restore create&lt;/a&gt;&lt;/td&gt;
@@ -85,11 +85,47 @@ This document outlines all dellctl commands, their intended use, options that ca
 &lt;td&gt;&lt;a href=&#34;#dellctl-restore-get&#34;&gt;dellctl restore get&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Get application restores&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-schedule&#34;&gt;dellctl schedule&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Allows you to manipulate schedules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-schedule-create&#34;&gt;dellctl schedule create&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Create a schedule&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-schedule-create-for-backup&#34;&gt;dellctl schedule create for-backup&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Create a schedule for application backups&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-schedule-delete&#34;&gt;dellctl schedule delete&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Delete schedules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-schedule-get&#34;&gt;dellctl schedule get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Get schedules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-encryption-rekey&#34;&gt;dellctl encryption rekey&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Rekey an encrypted volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-encryption-rekey-status&#34;&gt;dellctl encryption rekey-status&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Get status of an encryption rekey operation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-images&#34;&gt;dellctl images&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;List the container images needed by csi driver&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;#dellctl-volume-get&#34;&gt;dellctl volume get&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Gets PowerFlex volume infomation for a given tenant on a local cluster&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&#34;installation-instructions&#34;&gt;Installation instructions&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;Download &lt;code&gt;dellctl&lt;/code&gt; from &lt;a href=&#34;https://github.com/dell/csm/releases/tag/v1.4.0&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Download &lt;code&gt;dellctl&lt;/code&gt; from &lt;a href=&#34;https://github.com/dell/csm/releases/tag/v1.5.1&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;chmod +x dellctl&lt;/li&gt;
 &lt;li&gt;Move &lt;code&gt;dellctl&lt;/code&gt; to &lt;code&gt;/usr/local/bin&lt;/code&gt; or add &lt;code&gt;dellctl&lt;/code&gt;&amp;rsquo;s containing directory path to PATH environment variable.&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;dellctl --help&lt;/code&gt; to know available commands or run &lt;code&gt;dellctl command --help&lt;/code&gt; to know more about a specific command.&lt;/li&gt;
@@ -106,7 +142,7 @@ The user can register one or more remote clusters for &lt;code&gt;dellctl&lt;/co
 &lt;p&gt;Outputs help text&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;dellctl-cluster&#34;&gt;dellctl cluster&lt;/h3&gt;
-&lt;p&gt;Allows to manipulate one or more k8s cluster configurations&lt;/p&gt;
+&lt;p&gt;Allows you to manipulate one or more k8s cluster configurations&lt;/p&gt;
 &lt;h5 id=&#34;available-commands&#34;&gt;Available Commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  add         Adds a k8s cluster to be managed by dellctl
   remove      Removes a k8s cluster managed by dellctl
@@ -162,7 +198,7 @@ cluster2        v1.22   https://1.2.3.5:6443            035133aa-5b65-4080-a813-
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h2 id=&#34;commands-related-to-application-mobility-operations&#34;&gt;Commands related to application mobility operations&lt;/h2&gt;
 &lt;h3 id=&#34;dellctl-backup&#34;&gt;dellctl backup&lt;/h3&gt;
-&lt;p&gt;Allows to manipulate application backups/clones&lt;/p&gt;
+&lt;p&gt;Allows you to manipulate application backups/clones&lt;/p&gt;
 &lt;h5 id=&#34;available-commands-1&#34;&gt;Available Commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  create      Create an application backup/clones
   delete      Delete application backups
@@ -256,7 +292,7 @@ backup1           Completed   2022-07-27 11:51:00 -0400 EDT   2022-08-26 11:51:0
 demo-app-clones   Completed   2022-07-27 11:53:37 -0400 EDT   2022-08-26 11:53:37 -0400 EDT   default            Restic       true     cluster1, cluster2
 &lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
 &lt;h3 id=&#34;dellctl-restore&#34;&gt;dellctl restore&lt;/h3&gt;
-&lt;p&gt;Allows to manipulate application restores&lt;/p&gt;
+&lt;p&gt;Allows you to manipulate application restores&lt;/p&gt;
 &lt;h5 id=&#34;available-commands-2&#34;&gt;Available Commands&lt;/h5&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  create      Restore an application backup
   delete      Delete application restores
@@ -338,6 +374,179 @@ restore1   backup1   Completed   2022-07-27 12:38:43 -0400 EDT
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl restore get restore1
 NAME       BACKUP    STATUS      CREATED                         COMPLETED
 restore1   backup1   Completed   2022-07-27 12:35:29 -0400 EDT
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-schedule&#34;&gt;dellctl schedule&lt;/h3&gt;
+&lt;p&gt;Allows you to manipulate schedules&lt;/p&gt;
+&lt;h5 id=&#34;available-commands-3&#34;&gt;Available Commands&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  create      Create a schedule
+  delete      Delete schedules
+  get         Get schedules
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;flags-13&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help   Help for schedule  
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-13&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Outputs help text&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-schedule-create&#34;&gt;dellctl schedule create&lt;/h3&gt;
+&lt;p&gt;Create a schedule&lt;/p&gt;
+&lt;h5 id=&#34;available-commands-4&#34;&gt;Available Commands&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  for-backup  Create a schedule for application backups
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;flags-14&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                Help for create
+      --name string         Name for the schedule
+      --schedule string     A cron expression representing when to create the application backup  
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-14&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Outputs help text&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-schedule-create-for-backup&#34;&gt;dellctl schedule create for-backup&lt;/h3&gt;
+&lt;p&gt;Create a schedule for application backups&lt;/p&gt;
+&lt;h5 id=&#34;flags-15&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --exclude-namespaces stringArray                        List of namespace names to exclude from the backup.
+      --include-namespaces stringArray                        List of namespace names to include in the backup (use &amp;#39;*&amp;#39; for all namespaces). (default *)
+      --ttl duration                                          Backup retention period. (default 720h0m0s)
+      --exclude-resources stringArray                         Resources to exclude from the backup, formatted as resource.group, such as storageclasses.storage.k8s.io.
+      --include-resources stringArray                         Resources to include in the backup, formatted as resource.group, such as storageclasses.storage.k8s.io (use &amp;#39;*&amp;#39; for all resources).
+      --backup-location string                                Storage location where k8s resources and application data will be backed up to. (default &amp;#34;default&amp;#34;)
+      --data-mover string                                     Data mover to be used to backup application data. (default &amp;#34;Restic&amp;#34;)
+      --include-cluster-resources optionalBool[=true]         Include cluster-scoped resources in the backup
+  -l, --label-selector labelSelector                          Only backup resources matching this label selector. (default &amp;lt;none&amp;gt;)
+      --set-owner-references-in-backup optionalBool[=false]   Specifies whether to set OwnerReferences on backups created by this schedule.
+  -n, --namespace string                                      The namespace in which application mobility service should operate. (default &amp;#34;app-mobility-system&amp;#34;)
+  -h, --help                                                  Help for for-backup
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;global-flags&#34;&gt;Global Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --cluster-id string   Id of the cluster managed by dellctl
+      --name string         Name for the schedule
+      --schedule string     A cron expression representing when to create the application backup
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-15&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Create a schedule to backup namespace demo, every 1hour&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl schedule create for-backup --name schedule1 --schedule &amp;#34;@every 1h&amp;#34; --include-namespaces demo
+ INFO schedule request &amp;#34;schedule1&amp;#34; submitted successfully.
+ INFO Run &amp;#39;dellctl schedule get schedule1&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Create a schedule to backup namespace demo, once a day at midnight and set OwnerReferences on backups created by this schedule&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl schedule create for-backup --name schedule2 --schedule &amp;#34;@daily&amp;#34; --include-namespaces demo --set-owner-references-in-backup
+ INFO schedule request &amp;#34;schedule2&amp;#34; submitted successfully.
+ INFO Run &amp;#39;dellctl schedule get schedule2&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Create a schedule to backup namespace demo, at 23:00(11:00 pm) every saturday&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl schedule create for-backup --name schedule3 --schedule &amp;#34;00 23 * * 6&amp;#34; --include-namespaces demo
+ INFO schedule request &amp;#34;schedule3&amp;#34; submitted successfully.
+ INFO Run &amp;#39;dellctl schedule get schedule3&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-schedule-delete&#34;&gt;dellctl schedule delete&lt;/h3&gt;
+&lt;p&gt;Delete one or more schedules&lt;/p&gt;
+&lt;h5 id=&#34;flags-16&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --all                 Delete all schedules
+      --cluster-id string   Id of the cluster managed by dellctl
+      --confirm             Confirm deletion
+  -h, --help                Help for delete
+  -n, --namespace string    The namespace in which application mobility service should operate. (default &amp;#34;app-mobility-system&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-16&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Delete a schedule with name&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl schedule delete schedule1
+Are you sure you want to continue (Y/N)? y
+ INFO Request to delete schedule &amp;#34;schedule1&amp;#34; submitted successfully.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Delete multiple schedules&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl schedule delete schedule1 schedule2
+Are you sure you want to continue (Y/N)? y
+ INFO Request to delete schedule &amp;#34;schedule1&amp;#34; submitted successfully.
+ INFO Request to delete schedule &amp;#34;schedule2&amp;#34; submitted successfully.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Delete all schedules without asking for user confirmation&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl schedule delete --confirm --all
+ INFO Request to delete schedule &amp;#34;schedule1&amp;#34; submitted successfully.
+ INFO Request to delete schedule &amp;#34;schedule2&amp;#34; submitted successfully.
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;dellctl-schedule-get&#34;&gt;dellctl schedule get&lt;/h3&gt;
+&lt;p&gt;Get schedules&lt;/p&gt;
+&lt;h5 id=&#34;flags-17&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                Help for get
+  -n, --namespace string    The namespace in which application mobility service should operate. (default &amp;#34;app-mobility-system&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-17&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Get all the application schedules created on local cluster&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl schedule get
+NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAST BACKUP TIME
+schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
+schedule2     Enabled   2022-11-04 08:35:57 +0000 UTC   false    @daily      NA
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Get schedules with their names&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl schedule get schedule1
+NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAST BACKUP TIME
+schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;dellctl-encryption-rekey&#34;&gt;dellctl encryption rekey&lt;/h3&gt;
+&lt;p&gt;Encryption rekey with a name for the rekey object and volume name of an encrypted volume&lt;/p&gt;
+&lt;h5 id=&#34;flags-18&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for get
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-18&#34;&gt;Output&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl encryption rekey myrekey k8s-5d2cc565d4
+ INFO rekey request &amp;#34;myrekey&amp;#34; submitted successfully for persistent volume &amp;#34;k8s-5d2cc565d4&amp;#34;.
+ INFO Run &amp;#39;dellctl encryption rekey-status myrekey&amp;#39; for more details.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;dellctl-encryption-rekey-status&#34;&gt;dellctl encryption rekey-status&lt;/h3&gt;
+&lt;p&gt;Encryption rekey status with name of the rekey object&lt;/p&gt;
+&lt;h5 id=&#34;flags-19&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for get
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-19&#34;&gt;Output&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl encryption rekey-status myrekey
+ INFO Status of rekey request myrekey = completed
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;dellctl-images&#34;&gt;dellctl images&lt;/h3&gt;
+&lt;p&gt;List the container images needed by csi driver&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE.&lt;/strong&gt;: dellctl images currently supports csi-vxflexos driver only.&lt;/p&gt;
+&lt;h4 id=&#34;aliases-2&#34;&gt;Aliases&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;images,imgs
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;flags-20&#34;&gt;Flags&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  Flags:
+  -d, --driver string   csi driver name
+  -h, --help            help for images
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;output-20&#34;&gt;Output&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl images --driver csi-vxflexos
+Driver Image                    Supported Orchestrator Versions         Sidecar Images
+dellemc/csi-vxflexos:v2.5.0     k8s1.25,k8s1.24,k8s1.23,ocp4.11,ocp4.10 registry.k8s.io/sig-storage/csi-attacher:v4.0.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.3.0
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.7.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.1.0
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.6.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.6.0
+                                                                        dellemc/sdc:3.6.0.6
+
+dellemc/csi-vxflexos:v2.4.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  registry.k8s.io/sig-storage/csi-attacher:v3.5.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.2.1
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.6.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.0.1
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.5.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        dellemc/sdc:3.6.0.6
+
+dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  registry.k8s.io/sig-storage/csi-attacher:v3.4.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.1.0
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.0.1
+                                                                        gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.5.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v5.0.1
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.4.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        dellemc/sdc:3.6.0.6
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;dellctl-volume-get&#34;&gt;dellctl volume get&lt;/h3&gt;
+&lt;p&gt;Gets PowerFlex volume infomation for a given tenant on a local cluster&lt;/p&gt;
+&lt;h5 id=&#34;aliases-3&#34;&gt;Aliases&lt;/h5&gt;
+&lt;p&gt;get, ls, list&lt;/p&gt;
+&lt;h5 id=&#34;flags-21&#34;&gt;Flags&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  -h, --help                           help for get
+      --insecure optionalBool[=true]   provide flag to skip certificate validation
+      --namespace string               namespace of the secret for the given tenant
+      --proxy string                   auth proxy endpoint to use
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;output-21&#34;&gt;Output&lt;/h5&gt;
+&lt;p&gt;Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# dellctl volume get --proxy &amp;lt;proxy.dell.com&amp;gt; --namespace vxflexos
+NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
+k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
+k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
+k8s-b1abb817d3   a69bf19000000001   8.000000   mypool   636468e3638c840f   k8s-b1abb817d3   Bound       vxflexos        demo-claim13   default
+k8s-28e4184f41   c6b2280d0000009a   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   Available   local-storage  
+k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
 &lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
@@ -376,7 +585,7 @@ restore1   backup1   Completed   2022-07-27 12:35:29 -0400 EDT
 &lt;p&gt;Prerequisites can be found on the respective module deployment pages:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;../../observability/deployment/#prerequisites&#34;&gt;Dell Container Storage Module for Observability Deployment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;../../authorization/deployment/rpm#prerequisites&#34;&gt;Dell Container Storage Module for Authorization Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../authorization/deployment/rpm/#prerequisites&#34;&gt;Dell Container Storage Module for Authorization Deployment&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;../../resiliency/deployment&#34;&gt;Dell Container Storage Module for Resiliency Deployment&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;../../replication/deployment/installation/#before-you-begin&#34;&gt;Dell Container Storage Module for Replication Deployment&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;

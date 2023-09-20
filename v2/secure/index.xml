@@ -122,7 +122,7 @@ the CSI driver must be restarted to pick up the change.&lt;/li&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Kubernetes&lt;/td&gt;
-&lt;td&gt;1.22, 1.23, 1.24, 1.25&lt;/td&gt;
+&lt;td&gt;1.24, 1.25, 1.26&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Red Hat OpenShift&lt;/td&gt;
