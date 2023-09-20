@@ -44,8 +44,7 @@ Run the following commands to verify that everything is installed correctly:
 
 
 If you don't have something installed or something is out-of-place, please refer
-to installation instructions in [installation-repctl](../install-repctl) or
-[installation](../installation).
+to installation instructions [here](../installation).
 
 ### Installing Driver With Replication Module
 
@@ -69,7 +68,8 @@ You can leave other parameters like `image`, `replicationContextPrefix`, and
 
 After enabling the replication module you can continue to install the CSI driver
 for PowerFlex following the usual installation procedure, just ensure you've added
-necessary array connection information to secret.
+the array information for all of the arrays being used in the
+[secret](../../../csidriver/installation/helm/powerflex#install-the-driver).
 
 > **_NOTE:_** you need to install your driver at least on the source cluster,
 > but it is recommended to install drivers on all clusters you will use for
@@ -87,7 +87,7 @@ Pair of storage classes on the source and target clusters would be essentially
 #### Manual Storage Class Creation
 
 You can find a sample of a replication enabled storage class in the driver repository
-[here](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/vxflexos-replication.yaml).
+here.
 
 It will look like this:
 ```yaml

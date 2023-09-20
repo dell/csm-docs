@@ -24,7 +24,10 @@ To upgrade the CSM Replication sidecar that is installed along with the driver, 
 
 1. Update the `controller.replication.image` value in the values files to reference the new CSM Replication sidecar image.
 2. Run the csi-install script with the option `--upgrade` by running: <br>
-`cd ../dell-csi-helm-installer && ./csi-install.sh --namespace <your-namespace> --values ./myvalues.yaml --upgrade`
+      ```bash
+
+      cd ../dell-csi-helm-installer && ./csi-install.sh --namespace <your-namespace> --values ./myvalues.yaml --upgrade
+      ```
 3. Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology
 
 >For more information on upgrading the CSI driver, please visit the [CSI driver upgrade page](../../csidriver/upgradation).
@@ -41,7 +44,9 @@ On PowerScale systems, an additional step is needed when upgrading to CSM Replic
 
 Make sure the appropriate release branch is available on the machine performing the upgrade by running:
 
-`git clone -b <release-branch> https://github.com/dell/csm-replication.git`
+```bash
+git clone -b v1.5.0 https://github.com/dell/csm-replication.git
+```
 
 ### Upgrading with Helm
 
@@ -51,11 +56,17 @@ This option will only work if you have previously installed replication via Helm
 1. Update the `image` value in the values files to reference the new CSM Replication controller image or use a new version of the csm-replication Helm chart.
 2. Run the install script with the option `--upgrade` by running:
 
-    `cd ./scripts && ./install.sh --values ./myvalues.yaml --upgrade`
+    ```bash
+
+    cd ./scripts && ./install.sh --values ./myvalues.yaml --upgrade
+    ```
 
 3. Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology.
 
-> _**Note**_: Upgrade won't override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using `kubectl edit cm -n dell-replication-controller dell-replication-controller-config`
+> _**Note**_: Upgrade won't override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using 
+      ```bash 
+      kubectl edit cm -n dell-replication-controller dell-replication-controller-config  
+      ```
 
 
 ### Upgrading with repctl
@@ -66,13 +77,16 @@ This option will only work if you have previously installed replication via Helm
 1. Find a new version of deployment manifest that can be found in `deploy/controller.yaml`, with newer `image` pointing to the version of CSM Replication controller you want to upgrade to.
 2. Apply said manifest using the usual `repctl create` command like so:
 
-      `./repctl create -f ../deploy/controller.yaml`. 
+      ```bash
+      ./repctl create -f ../deploy/controller.yaml
+      ``` 
 
       The output should have this line `Successfully updated existing deployment: dell-replication-controller-manager`
 3. Check if everything is OK by querying your Kubernetes clusters using `kubectl` using a `kubectl get`:
 
-      `kubectl get pods -n dell-replication-controller`
-   
+      ```bash
+      kubectl get pods -n dell-replication-controller`
+      ```
       Your pods should be `READY` and `RUNNING`.
 
 ### Replication CRD version update

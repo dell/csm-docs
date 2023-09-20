@@ -17,6 +17,8 @@
  */
 var commandTitle = 'Run the following commands to install';
 var commandNote = 'Ensure that the namespaces and secrets are created before installing the driver';
+var commandNoteOperator = 'Ensure that the namespaces, secrets and config.yaml (if applicable) are created before installing the driver';
+var csmOperatorNote = 'Prerequisite: Ensure that the CSM Operator is installed';
 var command1 = 'helm repo add dell https://dell.github.io/helm-charts';
 var command2 = 'helm install $release-name dell/container-storage-modules -n $namespace --version $version -f values.yaml';
 var command3 = 'kubectl create -f values.yaml';

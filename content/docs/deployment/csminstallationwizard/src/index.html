@@ -61,7 +61,7 @@
                       <option value="powermax">PowerMax</option>
                       <option value="isilon">PowerScale</option>
                       <option value="vxflexos">PowerFlex</option>
-                      <option value="unity">Unity</option>
+                      <option value="unity">Unity XT</option>
                     </select>
                   </div>
                 </div>
@@ -347,6 +347,27 @@
                     </div>
                   </div>
 
+                  <div class="row mb-4 col-sm-11 rename-sdc-feature">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="rename-sdc" value="" onchange="onRenameSDCChange(driver, CONSTANTS)">
+                      <label for="rename-sdc" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Rename SDC feature.">Rename SDC</label>
+                    </div>
+                    <div class="was-validated row mt-3 child-level-one sdc-prefix">
+                      <label for="sdc-prefix" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix to apply for a SDC name">SDC Prefix</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="sdc-prefix" placeholder="sdc-test" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4 approve-sdc">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="approve-sdc" value="">
+                      <label for="approve-sdc" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable SDC approval">Approve SDC</label>
+                    </div>
+                  </div>
+
                   <div class="row mb-4 storage-capacity">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="storage-capacity" value="" checked>
@@ -371,6 +392,16 @@
                         <div class="row mt-1">
                           <a class="reset" id="reset-max-volumes-per-node" onclick="resetMaxVolumesPerNode(csmMap)">Reset to default</a>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3 nfs-feature">
+                    <div class="col-sm-12 h6">NFS volume operations</div>
+                    <div class="row mb-4 enable-quota">
+                      <div class="col-sm-12">
+                        <input class="form-check-input" type="checkbox" id="enable-quota" value="">
+                        <label for="enable-quota" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable quota limits for a newly provisioned NFS volume.">Quota</label>
                       </div>
                     </div>
                   </div>
@@ -668,6 +699,10 @@
                 </button>
               </div>
             </div>
+            <div class="mt-3 mx-1 py-2 note" id="csm-operator-note-wrapper">
+              <i class="icon dds__icon dds__icon--alert-info-cir"></i>
+              <span class="h6" id="csm-operator-note"></span>
+            </div>
             <div class="mt-3 mx-1 py-2 note">
               <i class="icon dds__icon dds__icon--alert-info-cir"></i>
               <span class="h6" id="command-note"></span>
@@ -678,7 +713,7 @@
             <div class="mt-3 mx-1" id="command2-wrapper">
               <span id="command2"></span>
             </div>
-            <div class="mt-3 mx-1 py-2 note" id="reverseProxyNote">
+            <div class="mt-3 mx-1 py-2 note" id="reverse-proxy-note">
               <i class="icon dds__icon dds__icon--alert-info-cir"></i>
               <span class="h6">Click on the <a href="https://dell.github.io/csm-docs/docs/csidriver/features/powermax/#prerequisite" target="_blank">documentation link</a> for the steps to generate the certificates</span>
             </div>

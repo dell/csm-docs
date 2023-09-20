@@ -5,6 +5,10 @@ description: >
   Installing Authorization via Dell CSM Operator
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 ## Install CSM Authorization via Dell CSM Operator
 
 The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
@@ -192,7 +196,7 @@ To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `cs
     kubectl create secret tls karavi-auth-tls -n authorization --key <location-of-private-key-file> --cert <location-of-certificate-file>
     ```
 
-    If using a self-signed certificate, prepare `samples/authorization/certificate_v170.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/certificatev170.yaml). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
+    If using a self-signed certificate, prepare `samples/authorization/certificate_v170.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v170.yaml). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
 
     Use this command to create the `karavi-auth-tls` secret:
 

@@ -92,7 +92,7 @@ Install CSI Driver for Unity XT using this procedure.
 
  * As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command 
    ```bash
-   git clone -b v2.7.0 https://github.com/dell/csi-unity.git
+   git clone -b v2.8.0 https://github.com/dell/csi-unity.git
    ```
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
@@ -101,32 +101,35 @@ Install CSI Driver for Unity XT using this procedure.
 
 Procedure
 
-1. Collect information from the Unity XT Systems like Unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the  `secret.yaml` and `myvalues.yaml` file.
+1. Collect information from the Unity XT Systems like unique ArrayId, IP address, username, and password. Make a note of the value for these parameters as they must be entered in the  `secret.yaml` and `myvalues.yaml` file.
 
     **Note**: 
       * ArrayId corresponds to the serial number of Unity XT array.
       * Unity XT Array username must have role as Storage Administrator to be able to perform CRUD operations.
       * If the user is using a complex K8s version like "v1.24.6-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
-            kubeVersion: ">= 1.24.0-0 < 1.28.0-0"
+            kubeVersion: ">= 1.24.0-0 < 1.29.0-0"
 
-2. Copy the `helm/csi-unity/values.yaml` into a file named `myvalues.yaml` in the same directory of `csi-install.sh`, to customize settings for installation.
+2. Get the required values.yaml using the command below:
 
-3. Edit `myvalues.yaml` to set the following parameters for your installation:
+```bash
+cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.8.0/charts/csi-unity/values.yaml
+```
+
+3. Edit `values.yaml` to set the following parameters for your installation:
    
-    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.8.0/charts/csi-unity/values.yaml) file in this repository.
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
-    | version | helm version | true | - |
-    | logLevel | LogLevel is used to set the logging level of the driver | true | info |
-    | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | false | false |
+    | logLevel | LogLevel is used to set the logging level of the driver | No | info |
+    | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | No | false |
     | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
-    | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | false | 15 |
-    | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | false | 0 |
-    | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | false | 1 |
+    | syncNodeInfoInterval | Time interval to add node info to the array. Default 15 minutes. The minimum value should be 1 minute. | No | 15 |
+    | maxUnityVolumesPerNode | Maximum number of volumes that controller can publish to the node. | No | 0 |
+    | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | No | 1 |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
-    | podmon.enabled | service to monitor failing jobs and notify | false | - |
-    | podmon.image| pod man image name | false | - |
+    | podmon.enabled | service to monitor failing jobs and notify | No | false |
+    | podmon.image| pod man image name | No | - |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
     | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
     | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
@@ -187,12 +190,12 @@ Procedure
     
     | Parameter                 | Description                                    | Required | Default |
     | ------------------------- | ---------------------------------------------- | -------- |-------- |
-    | storageArrayList.username | Username for accessing Unity XT system         | true     | -       |
-    | storageArrayList.password | Password for accessing Unity XT system         | true     | -       |
-    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity XT system| true     | -       |
-    | storageArrayList.arrayId  | ArrayID for Unity XT system                    | true     | -       |
-    | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | true | true |
-    | storageArrayList.isDefault| An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | true | - |
+    | storageArrayList.username | Username for accessing Unity XT system         | Yes     | -       |
+    | storageArrayList.password | Password for accessing Unity XT system         | Yes     | -       |
+    | storageArrayList.endpoint | REST API gateway HTTPS endpoint Unity XT system| Yes     | -       |
+    | storageArrayList.arrayId  | ArrayID for Unity XT system                    | Yes     | -       |
+    | storageArrayList.skipCertificateValidation | "skipCertificateValidation " determines if the driver is going to validate unisphere certs while connecting to the Unisphere REST API interface. If it is set to false, then a secret unity-certs has to be created with an X.509 certificate of CA which signed the Unisphere certificate. | Yes | true |
+    | storageArrayList.isDefault| An array having isDefault=true or isDefault=true will be considered as the default array when arrayId is not specified in the storage class. This parameter should occur only once in the list. | Yes | - |
 
 
     Example: secret.yaml
@@ -330,7 +333,7 @@ Procedure
     **Note**:
     To install nightly or latest csi driver build using bash script use this command:
     ```bash
-    /csi-install.sh --namespace unity --values ./myvalues.yaml --version latest
+    /csi-install.sh --namespace unity --values ./myvalues.yaml --version latest --helm-charts-version <version>
     ```
 
 8. You can also install the driver using standalone helm chart by cloning the centralised helm charts and running the helm install command as shown.

@@ -51,7 +51,7 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.snapNamePrefix = document.getElementById("snapshot-prefix").value;
 	DriverValues.targetClusterId = document.getElementById("replication-operator-clusterid").value;
 	DriverValues.targetArrayID = document.getElementById("replication-helm-arrayid").value;
-	DriverValues.targetUnisphere = document.getElementById("replication-helm-unisphere").value;
+	DriverValues.targetUnisphere = document.getElementById("replication-helm-unisphere").value || '""';
 	DriverValues.fsGroupPolicy = document.getElementById("fsGroup-Policy").value;
 	DriverValues.driverNamespace = document.getElementById("driver-namespace").value;
 	DriverValues.labelValue = document.getElementById("label-value").value;
@@ -125,6 +125,10 @@ function setValues(csmMapValues, CONSTANTS_PARAM) {
 	DriverValues.vSphereFCHostName = $("#vSphere-fc-host-name").val();
 	DriverValues.vSphereVCenterHost = $("#vSphere-vCenter-host").val();
 	DriverValues.vSphereVCenterCredSecret = $("#vSphere-vCenter-cred-secret").val();
+	DriverValues.renameSDC = $("#rename-sdc").prop('checked') ? true : false;
+	DriverValues.sdcPrefix = $("#sdc-prefix").val();
+	DriverValues.approveSDC = $("#approve-sdc").prop('checked') ? true : false;
+	DriverValues.enableQuota = $("#enable-quota").prop('checked') ? true : false;
 	return DriverValues
 }
 
@@ -182,6 +186,10 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 	yamlTpl = yamlTpl.replaceAll("$NODE_TOLERATIONS", yamlTplValues.nodeTolerations);
 	yamlTpl = yamlTpl.replaceAll("$TARGET_ARRAY_ID", yamlTplValues.targetArrayID);
 	yamlTpl = yamlTpl.replaceAll("$TARGET_UNISPHERE", yamlTplValues.targetUnisphere);
+	yamlTpl = yamlTpl.replaceAll("$RENAME_SDC_ENABLED", yamlTplValues.renameSDC);
+	yamlTpl = yamlTpl.replaceAll("$SDC_PREFIX", yamlTplValues.sdcPrefix);
+	yamlTpl = yamlTpl.replaceAll("$APPROVE_SDC_ENABLED", yamlTplValues.approveSDC);
+	yamlTpl = yamlTpl.replaceAll("$QUOTA_ENABLED", yamlTplValues.enableQuota);
 
 
 	if (driverParam === CONSTANTS_PARAM.POWERSTORE) {
@@ -229,7 +237,9 @@ function createYamlString(yamlTpl, yamlTplValues, driverParam, CONSTANTS_PARAM) 
 
 	yamlTpl = yamlTpl.replaceAll("$CERT_MANAGER_ENABLED", yamlTplValues.certManagerEnabled);
 	yamlTpl = yamlTpl.replaceAll("$OBSERVABILITY_CERT_MANAGER_ENABLED", !yamlTplValues.certManagerEnabled);
-
+	yamlTpl = yamlTpl.replaceAll('      - storageArrayId: ""', '#      - storageArrayId: ""');
+	yamlTpl = yamlTpl.replaceAll('        endpoint: ""', '#       endpoint: ""');	
+	yamlTpl = yamlTpl.replaceAll('      - endpoint: ""', '#      - endpoint: ""');
 	const regex = /\$[a-zA-Z0-9_-]*/g;
 	yamlTpl = yamlTpl.replaceAll(regex, '""');
 

@@ -63,29 +63,29 @@ csi-powerstore:
   podmon:
     enabled: $RESILIENCY_ENABLED
     image: dellemc/podmon:v1.6.0
-    #controller:
-    #  args:
-    #    - "--csisock=unix:/var/run/csi/csi.sock"
-    #    - "--labelvalue=csi-powerstore"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-powerstore.dellemc.com"
-    #    - "--mode=controller"
-    #    - "--skipArrayConnectionValidation=false"
-    #    - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
+    controller:
+      args:
+        - "--csisock=unix:/var/run/csi/csi.sock"
+        - "--labelvalue=csi-powerstore"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-powerstore.dellemc.com"
+        - "--mode=controller"
+        - "--skipArrayConnectionValidation=false"
+        - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
 
-    #node:
-    #  args:
-    #    - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
-    #    - "--labelvalue=csi-powerstore"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-powerstore.dellemc.com"
-    #    - "--mode=node"
-    #    - "--leaderelection=false"
-    #    - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
+    node:
+      args:
+        - "--csisock=unix:/var/lib/kubelet/plugins/csi-powerstore.dellemc.com/csi_sock"
+        - "--labelvalue=csi-powerstore"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-powerstore.dellemc.com"
+        - "--mode=node"
+        - "--leaderelection=false"
+        - "--driver-config-params=/powerstore-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
 
 ## K8S/CSI-PowerMax ATTRIBUTES
 ##########################################
@@ -96,7 +96,7 @@ csi-powermax:
           - storageArrayId: "$POWERMAX_STORAGE_ARRAY_ID"
             endpoint: $POWERMAX_STORAGE_ARRAY_ENDPOINT_URL
             backupEndpoint: $POWERMAX_STORAGE_ARRAY_BACKUP_ENDPOINT_URL
-          - storageArrayId: $TARGET_ARRAY_ID
+          - storageArrayId: "$TARGET_ARRAY_ID"
             endpoint: $TARGET_UNISPHERE
         managementServers:
           - endpoint: $POWERMAX_MANAGEMENT_SERVERS_ENDPOINT_URL
@@ -106,6 +106,9 @@ csi-powermax:
     driverRepository: $IMAGE_REPOSITORY
   clusterPrefix: $POWERMAX_CLUSTER_PREFIX
   portGroups: "$POWERMAX_PORT_GROUPS"
+  fsGroupPolicy: "$FSGROUP_POLICY"
+  enableCHAP: $ISCSI_CHAP_ENABLED
+  transportProtocol: "$NODE_TRANSPORT_PROTOCOL"
   controller:
     controllerCount: $CONTROLLER_COUNT
     volumeNamePrefix: $VOLUME_NAME_PREFIX
@@ -121,6 +124,8 @@ csi-powermax:
   node:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
+    topologyControl:
+      enabled: $TOPOLOGY_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
     tolerations: $NODE_TOLERATIONS
      - key: "node.kubernetes.io/memory-pressure"
@@ -181,6 +186,11 @@ csi-vxflexos:
     healthMonitor:
       enabled: $HEALTH_MONITOR_ENABLED
     nodeSelector: $NODE_POD_NODE_SELECTOR
+    renameSDC:
+      enabled: $RENAME_SDC_ENABLED
+      sdcPrefix: $SDC_PREFIX
+    approveSDC:
+      enabled: $APPROVE_SDC_ENABLED
     tolerations: $NODE_TOLERATIONS
     # Uncomment if CSM for Resiliency and CSI Driver pods monitor is enabled 
     # - key: "offline.vxflexos.storage.dell.com"
@@ -209,24 +219,24 @@ csi-vxflexos:
   podmon:
     enabled: $RESILIENCY_ENABLED
     image: dellemc/podmon:v1.6.0
-    # controller:
-    #  args:
-    #    - "--csisock=unix:/var/run/csi/csi.sock"
-    #    - "--labelvalue=csi-vxflexos"
-    #    - "--mode=controller"
-    #    - "--skipArrayConnectionValidation=false"
-    #    - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
-    # node:
-    #   args:
-    #     - "--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
-    #     - "--labelvalue=csi-vxflexos"
-    #     - "--mode=node"
-    #     - "--leaderelection=false"
-    #     - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
-    #     - "--driverPodLabelValue=dell-storage"
-    #     - "--ignoreVolumelessPods=false"
+    controller:
+      args:
+        - "--csisock=unix:/var/run/csi/csi.sock"
+        - "--labelvalue=csi-vxflexos"
+        - "--mode=controller"
+        - "--skipArrayConnectionValidation=false"
+        - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
+    node:
+      args:
+        - "--csisock=unix:/var/lib/kubelet/plugins/vxflexos.emc.dell.com/csi_sock"
+        - "--labelvalue=csi-vxflexos"
+        - "--mode=node"
+        - "--leaderelection=false"
+        - "--driver-config-params=/vxflexos-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
   authorization:
     enabled: $AUTHORIZATION_ENABLED
     sidecarProxyImage: dellemc/csm-authorization-sidecar:v1.7.0
@@ -238,6 +248,8 @@ csi-vxflexos:
 csi-isilon:
   enabled: $POWERSCALE_ENABLED
   version: "v2.7.0"
+  images:
+    driverRepository: $IMAGE_REPOSITORY
   certSecretCount: $CERT_SECRET_COUNT
 
   allowedNetworks: []
@@ -250,6 +262,8 @@ csi-isilon:
 
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
+
+  maxIsilonVolumesPerNode: $MAX_VOLUMES_PER_NODE
 
   controller:
     controllerCount: $CONTROLLER_COUNT
@@ -316,32 +330,29 @@ csi-isilon:
   podmon:
     enabled: $RESILIENCY_ENABLED
     image: dellemc/podmon:v1.6.0
-    #controller:
-    #  args:
-    #    - "--csisock=unix:/var/run/csi/csi.sock"
-    #    - "--labelvalue=csi-isilon"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-isilon.dellemc.com"
-    #    - "--mode=controller"
-    #    - "--skipArrayConnectionValidation=false"
-    #    - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
+    controller:
+      args:
+        - "--csisock=unix:/var/run/csi/csi.sock"
+        - "--labelvalue=csi-isilon"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-isilon.dellemc.com"
+        - "--mode=controller"
+        - "--skipArrayConnectionValidation=false"
+        - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
 
-    #node:
-    #  args:
-    #    - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
-    #    - "--labelvalue=csi-isilon"
-    #    - "--arrayConnectivityPollRate=60"
-    #    - "--driverPath=csi-isilon.dellemc.com"
-    #    - "--mode=node"
-    #    - "--leaderelection=false"
-    #    - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
-    #    - "--driverPodLabelValue=dell-storage"
-    #    - "--ignoreVolumelessPods=false"
-
-  images:
-    driverRepository: $IMAGE_REPOSITORY
+    node:
+      args:
+        - "--csisock=unix:/var/lib/kubelet/plugins/csi-isilon/csi_sock"
+        - "--labelvalue=csi-isilon"
+        - "--arrayConnectivityPollRate=60"
+        - "--driverPath=csi-isilon.dellemc.com"
+        - "--mode=node"
+        - "--leaderelection=false"
+        - "--driver-config-params=/csi-isilon-config-params/driver-config-params.yaml"
+        - "--driverPodLabelValue=dell-storage"
+        - "--ignoreVolumelessPods=false"
 
 ## K8S/CSI-Unity ATTRIBUTES
 ##########################################
@@ -432,7 +443,7 @@ karavi-observability:
   enabled: $OBSERVABILITY_ENABLED
   karaviMetricsPowerstore:
     enabled: $POWERSTORE_OBSERVABILITY_METRICS_ENABLED
-  karaviMetricsPowerMax:
+  karaviMetricsPowermax:
     enabled: $POWERMAX_OBSERVABILITY_METRICS_ENABLED
   karaviMetricsPowerflex:
     enabled: $POWERFLEX_OBSERVABILITY_METRICS_ENABLED

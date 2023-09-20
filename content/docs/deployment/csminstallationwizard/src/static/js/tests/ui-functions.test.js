@@ -705,11 +705,13 @@ describe("GIVEN hideFields function", () => {
 describe("GIVEN displayCommands function", () => {
 	const commandTitleValue = "Run the following commands to install";
 	const commandNoteValue = "Ensure that the namespaces and secrets are created before installing the helm chart";
+	const csmOperatorNoteValue = "Prerequisite: Ensure that the CSM Operator is installed";
+	const commandNoteOperatorValue = "Ensure that the namespaces, secrets and config.yaml (if applicable) are created before installing the driver";
 	const command1Value = "helm repo add dell https://dell.github.io/helm-charts";
 	const command2Value = "helm install $release-name dell/container-storage-modules -n $namespace --version $version -f values.yaml";
 	const command3Value = "kubectl create -f values.yaml";
 
-	test("SHOULD show expected commands", () => {
+	test("SHOULD show expected commands: Installation Type: Helm", () => {
 		document.body.innerHTML = `
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="helm">
@@ -723,7 +725,7 @@ describe("GIVEN displayCommands function", () => {
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
@@ -732,7 +734,7 @@ describe("GIVEN displayCommands function", () => {
 		expect($("#command2").text()).toEqual("helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.0 -f values.yaml");
 	});
 
-	test("SHOULD show expected commands", () => {
+	test("SHOULD show expected commands: Installation Type: Operator", () => {
 		document.body.innerHTML = `
 			<input id="array" value="powerstore">
 			<input id="installation-type" value="operator">
@@ -740,17 +742,19 @@ describe("GIVEN displayCommands function", () => {
 			<input type="text" id="csm-version" value="1.7.0">
             <div id="command-text-area" style="display:none">
                 <div id="command-title"></div>
+				<span id="csm-operator-note" style="display:none"></span>
                 <span id="command-note" style="display:none"></span>
                 <span id="command1"></span>
                 <span id="command2"></span>
             </div>
         `;
 
-		displayCommands("powerstore", commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
+		displayCommands("powerstore", commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS);
 
 		expect($("#command-text-area").css("display")).toEqual("block");
+		expect($("#csm-operator-note").text()).toEqual("Prerequisite: Ensure that the CSM Operator is installed");
 		expect($("#command-title").text()).toEqual("Run the following commands to install");
-		expect($("#command-note").text()).toEqual("Ensure that the namespaces and secrets are created before installing the helm chart");
+		expect($("#command-note").text()).toEqual("Ensure that the namespaces, secrets and config.yaml (if applicable) are created before installing the driver");
 		expect($("#command1").text()).toEqual("kubectl create -f values.yaml");
 	});
 });

@@ -469,7 +469,7 @@ Dynamic array configuration change detection is only used for properties of an e
 To add a new array to the secret, or to alter an array's mdm field, you must run `csi-install.sh` with `--upgrade` option to update the MDM key in secret and restart the node pods.
 ```bash
 cd <DRIVER-HOME>/dell-csi-helm-installer
-./csi-install.sh --upgrade --namespace vxflexos --values ../helm/csi-vxflexos/values.yaml
+./csi-install.sh --namespace vxflexos --values ./myvalues.yaml --upgrade
  kubectl delete  pods --all -n vxflexos
 ```
 
@@ -658,16 +658,6 @@ Warning  VolumeConditionAbnormal      35s (x9 over 12m)  kubelet       Volume vo
 Warning  VolumeConditionAbnormal      5s                 kubelet       Volume vol2: Volume is not found by node driver at 2021-11-11 02:04:49
 ```
 
-## Storage Capacity Tracking
-CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.
-
-This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
-If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
-
-Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
-
-The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
-
 ## Set QoS Limits
 Starting in version 2.5, CSI Driver for PowerFlex now supports setting the limits for the bandwidth and IOPS that one SDC generates for the specified volume. This enables the CSI driver to control the quality of service (QoS).
 In this release this is supported at the StorageClass level, so once a volume is created QoS Settings can't be adjusted later.
@@ -773,7 +763,7 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 >**NOTE:** <br>To reflect the changes after setting the value either via node label or in values.yaml file, user has to bounce the driver controller and node pods using the command `kubectl get pods -n vxflexos --no-headers=true | awk '/vxflexos-/{print $1}'| xargs kubectl delete -n vxflexos pod`. <br><br> If the value is set both by node label and values.yaml file then node label value will get the precedence and user has to remove the node label in order to reflect the values.yaml value. <br><br>The default value of `maxVxflexosVolumesPerNode` is 0. <br><br>If `maxVxflexosVolumesPerNode` is set to zero, then Container Orchestration decides how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxVxflexosVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-vxflexos-volumes-per-node` is not set.
 
 ## NFS volume support
-Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0 and greater.
+Starting with version 2.8, the CSI driver for PowerFlex will support NFS volumes for PowerFlex storage systems version 4.0.x.
 
 CSI driver will support following operations for NFS volumes:
 
@@ -785,8 +775,6 @@ CSI driver will support following operations for NFS volumes:
 
 To enable the support of NFS volumes operations from CSI driver, there are a few new keys introduced which needs to be set before performing the operations for NFS volumes.
 * `nasName`: defines the NAS server name that should be used for NFS volumes.
-* `nfsAcls`: defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory. NFSv4 ACLs are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
-* `externalAccess`: allows you to specify additional entries for host to access NFS volumes.
 * `enableQuota`: when enabled will set quota limit for a newly provisioned NFS volume.
 
 > NOTE:
@@ -795,14 +783,7 @@ To enable the support of NFS volumes operations from CSI driver, there are a few
 >   * nasName can be given at storage class level as well.
 >   * If specified in both, secret and storage class, then precedence is given to storage class value.
 >   * If nasName not given in secret, irrespective of it specified in SC, then it's an error state and will be captured in driver logs.
-> * `nfsAcls`
->   * nfsAcls is an optional parameter, with a default value 0777.
->   * nfsAcls can be specified in secret or storage class or values.
->   * If nfsAcls is specified in more than one places, then the order of precedence will be:
->     1. storage class
->     2. secret
->     3. values
->     4. specified nowhere, then set to default value: 0777
+>   * If the PowerFlex storage system v4.0.x is configured with only block capabilities, then the user is required to give the default value for nasName as "none".
 
 The user has to update the `secret.yaml`, `values.yaml` and `storageclass-nfs.yaml` with the above keys as like below:
 
@@ -816,7 +797,6 @@ The user has to update the `secret.yaml`, `values.yaml` and `storageclass-nfs.ya
   isDefault: true
   mdm: "10.0.0.3,10.0.0.4"
   nasName: "nas-server"
-  nfsAcls: "0777"
 ```
 
 [`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
@@ -833,8 +813,6 @@ parameters:
   systemID: <SYSTEM_ID> # Insert System ID
   csi.storage.k8s.io/fstype: nfs
   nasName: "nas-server"
-  allowRoot: "false"
-  nfsAcls: "0777"
 #  path: /csi
 #  softLimit: "80"
 #  gracePeriod: "86400"
@@ -849,8 +827,6 @@ allowedTopologies:
 [`helm/csi-vxflexos/values.yaml`](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml)
 ```yaml
 ...
-externalAccess:
-nfsAcls: "0777"
 enableQuota: false
 ...
 ```
@@ -905,7 +881,7 @@ If enableQuota feature is set, user can also set other tree quota parameters suc
 > * `sofLimit` cannot be set to unlimited value (0), otherwise it will become greater than hardLimit (PVC size).
 > * `softLimit` should be lesser than 100%, since hardLimit will be set to 100% (PVC size) internally by the driver.
 
-### Storage Class Example with Quota Limit Parameters:
+### Storage Class Example with Quota Limit Parameters
 [`samples/storageclass/storageclass-nfs.yaml`](https://github.com/dell/csi-powerflex/blob/main/samples/storageclass/storageclass-nfs.yaml)
 
 ```yaml
@@ -921,8 +897,6 @@ parameters:
   systemID: <SYSTEM_ID> # Insert System ID
   csi.storage.k8s.io/fstype: nfs
   nasName: "nas-server"
-  allowRoot: "false"
-  nfsAcls: "0777"
   path: /csi
   softLimit: "80"
   gracePeriod: "86400"
@@ -933,3 +907,13 @@ allowedTopologies:
       values:
         - "true"
 ```
+
+## Storage Capacity Tracking
+CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.
+
+This feature helps the scheduler to make more informed choices about where to schedule pods which depend on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
+
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
+
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often the driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.

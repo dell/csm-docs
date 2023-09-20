@@ -207,7 +207,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.8.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml` file,to point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -222,7 +222,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
 5. Download the default values.yaml file 
     ```bash
-    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.8.0/charts/csi-powermax/values.yaml
+    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.8.0/charts/csi-powermax/values.yaml
     ```
 6. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
 7. Edit the newly created file and provide values for the following parameters 
@@ -309,7 +309,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
 | **storageCapacity** | It is an optional feature that enable storagecapacity & helps the scheduler to check whether the requested capacity is available on the PowerMax array and allocate it to the nodes.| - | - |
 | enabled                  | A boolean that enables/disables storagecapacity feature. |  -      |   true   |
-| image | Image for storagecapacity sidecar. | No | "" |
 | pollInterval | It configure how often external-provisioner polls the driver to detect changed capacity | - | 5m |
 | **vSphere**| This section refers to the configuration options for VMware virtualized environment support via RDM  |  -  | - |
 | enabled                  | A boolean that enables/disables VMware virtualized environment support. |  No      |   false   |

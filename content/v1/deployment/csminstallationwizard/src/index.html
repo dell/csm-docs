@@ -57,11 +57,11 @@
                   <div class="col-sm-3">
                     <select id="array" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
                       <option value="" selected>Select the Array</option>
-                      <option value="csi-powerstore">PowerStore</option>
+                      <option value="powerstore">PowerStore</option>
                       <option value="powermax">PowerMax</option>
-                      <option value="csi-powerscale" disabled>PowerScale</option>
-                      <option value="csi-powerflex" disabled>PowerFlex</option>
-                      <option value="csi-unity" disabled>Unity</option>
+                      <option value="isilon">PowerScale</option>
+                      <option value="vxflexos">PowerFlex</option>
+                      <option value="unity">Unity</option>
                     </select>
                   </div>
                 </div>
@@ -85,7 +85,8 @@
                     <div class="col-sm-9"></div>
                     <div class="col-sm-3">
                       <select id="csm-version" class="form-select" onchange="onCSMVersionChange(); validateInput(validateForm, CONSTANTS)" required>
-                        <option value="1.6.0" selected>CSM 1.6</option>
+                        <option value="1.7.0" selected>CSM 1.7.0</option>
+                        <option value="1.7.1" selected>CSM 1.7.1</option>
                       </select>
                     </div>
                   </div>
@@ -93,23 +94,6 @@
                   <hr>
                   <div class="row mb-4">
                     <div class="col-sm-12 h5">Select modules for installation</div>
-                  </div>
-
-                  <div class="row mb-4 app-mobility col-sm-11">
-                    <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="application-mobility" value="" onchange="onAppMobilityChange(veleroNote)">
-                      <label for="application-mobility" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Application Mobility module">Application Mobility</label>
-                    </div>
-                    <div class="row mt-3 child-level-one" id="velero-wrapper">
-                      <div class="col-sm-12">
-                        <input class="form-check-input" type="checkbox" id="velero" value="" checked>
-                        <label for="velero" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Velero feature">Velero</label>
-                      </div>
-                      <div class="mt-3 py-2 note">
-                        <i class="icon dds__icon dds__icon--alert-info-cir"></i>
-                        <span class="h6" id="velero-note"></span>
-                      </div>
-                    </div>
                   </div>
 
                   <div class="row mb-4 observability">
@@ -125,7 +109,7 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4">
+                  <div class="row mb-4 replication-mod">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="replication" value="">
                       <label for="replication" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Replication module">Replication</label>
@@ -147,7 +131,7 @@
 
                   <hr>
                   <div class="row mb-4">
-                    <div class="col-sm-12 h5">Select the features for installation.</div>
+                    <div class="col-sm-12 h5">Select the features for installation</div>
                   </div>
                 
                   <div class="row mb-4 authorization col-sm-11">
@@ -161,11 +145,11 @@
                         <label for="authorization-skip-cert-validation" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable certificate validation of the csm-authorization server">Authorization Skip Certificate Validation</label>
                       </div>
                     </div>
-                    <div class="row mt-3 child-level-one authorization-wrapper">
+                    <div class="row mt-3 was-validated child-level-one authorization-wrapper">
                       <label for="authorization-proxy-host" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Hostname of the csm-authorization server" style="width: 110px;">Proxy Host</label>
                       <div class="col-sm-9"></div>
                       <div class="col-sm-3">
-                        <input class="form-control input-lg" type="text" id="authorization-proxy-host" placeholder="">
+                        <input class="form-control input-lg" type="text" id="authorization-proxy-host" placeholder="" required>
                       </div>
                     </div>
                     <div class="row child-level-one authorization-wrapper">
@@ -176,7 +160,7 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4">
+                  <div class="row mb-4 cert-manager">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="cert-manager-enabled" value="">
                       <label for="cert-manager-enabled" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Cert Manager feature">Cert Manager</label>
@@ -204,10 +188,22 @@
                     </div>
                   </div>
 
-                  <div class="row mb-4 col-sm-11">
+                  <div class="row mb-4 col-sm-11 snapshot-feature">
                     <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="snapshot" value="" onchange="onSnapshotChange(snapshotNote)" checked>
-                      <label for="snapshot" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Volume Snapshot feature">Snapshot</label>
+                      <input class="form-check-input" type="checkbox" id="snapshot" value="" onchange="onSnapshotChange(snapshotNote, driver, CONSTANTS)" checked>
+                      <label for="snapshot" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Enable/Disable Volume Snapshot feature." style="width: 180px;">Snapshot</label>
+                    </div>
+                    <div class="was-validated row mt-3 child-level-one" id="snap-prefix">
+                      <label for="snapshot-prefix" class="col-sm-3 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix to apply to the names of a created snapshots">Snap Name Prefix</label>
+                      <div class="col-sm-9"></div>
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="snapshot-prefix" placeholder="csi-snap" oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-snap-name-prefix" onclick="resetSnapNamePrefix(csmMap)">Reset to default</a>
+                        </div>
+                      </div>
                     </div>
                     <div class="row child-level-one" id="snapshot-note-wrapper">
                       <div class="mt-3 py-2 note">
@@ -331,6 +327,36 @@
                     </div>
                   </div>
 
+                  <div class="row mb-4 monitor">
+                    <div class="col-sm-12">
+                      <input class="form-check-input" type="checkbox" id="monitor" value="">
+                      <label for="monitor" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Allows the configuration of the SDC monitoring pod.">Allow Monitoring Pod</label>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4 cert-secret-count-wrapper">
+                    <label for="cert-secret-count" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Represents the number of certificate secrets, which the user is going to create for SSL authentication." style="width: 200px;">Certificate Secret Count</label>
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <input class="form-control input-sm" type="number" id="cert-secret-count" min="0" value="0">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="was-validated row mb-4 fsGroupPolicy">
+                    <label for="fsGroupPolicy" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Select the fsGroupPolicy type" style="width: 180px;">FS Group Policy</label>
+                    <div class="col-sm-9"></div>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <select id="fsGroup-Policy" class="form-select" onchange="validateInput(validateForm, CONSTANTS)" required>
+                          <option value="ReadWriteOnceWithFSType" selected>ReadWriteOnceWithFSType</option>
+                          <option value="File">File</option>
+                          <option value="None">None</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div class="was-validated row mb-4">
                     <label for="controller-count" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Defines the number of controller pods to deploy." style="width: 180px;">Controller Pods Count</label>
                     <div class="row">
@@ -345,6 +371,21 @@
                     </div>
                   </div>
 
+                  <div class="was-validated row mb-4 vol-name-prefix">
+                    <label for="vol-name-prefix" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Prefix of PersistentVolume names created." style="width: 180px;">Volume Name Prefix</label>
+                    <div class="col-sm-9"></div>
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <input class="form-control input-lg" type="text" id="vol-name-prefix" placeholder="csivol"  oninput="validateInput(validateForm, CONSTANTS)" required>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row mt-1">
+                          <a class="reset" id="reset-vol-name-prefix" onclick="resetVolNamePrefix(csmMap)">Reset to default</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div class="row mb-4 nodeselector">
                     <div class="col-sm-12">
                       <input class="form-check-input" type="checkbox" id="controller-pods-node-selector" value="" onchange="onNodeSelectorChange(nodeSelectorNote, csmMap)">
@@ -365,44 +406,38 @@
                   </div>
                   <div class="row mb-3 node-sel-attributes child-level-one">
                     <label for="node-selector-label" class="col-sm-12 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="">Node Selector Label</label>
-                    <div class="col-sm-4">
-                      <input class="form-control input-lg" type="text" id="node-selector-label" required>
+                    <div class="was-validated col-sm-4">
+                      <input class="form-control input-lg" type="text" id="node-selector-label" onchange="validateInput(validateForm, CONSTANTS)" required>
                     </div>
                     <div class="col-sm-4">
                       <div class="row mt-1">
-                        <a class="reset" id="reset-node-selector-label" onclick="resetNodeSelectorLabel(csmMap)">Reset to default</a>
+                        <a class="reset" id="reset-node-selector-label" onclick="resetNodeSelectorLabel(csmMap),validateInput(validateForm, CONSTANTS)" >Reset to default</a>
                       </div>
                     </div>
                   </div>
 
-                  <div class="row mb-4 namespace">
-                    <div class="col-sm-12">
-                      <input class="form-check-input" type="checkbox" id="single-namespace" value="" onchange="singleNamespaceCheck()">
-                      <label for="single-namespace" class="form-check-label ms-2 text-dark" data-bs-toggle="tooltip" data-bs-placement="right" title="Deploy the CSM driver and module in a single namespace.">Single Namespace</label>
+                  <div class="row mb-3 node-sel-attributes child-level-one">
+                    <label for="taint" class="col-sm-12 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="">Taint</label>
+                    <div class="was-validated col-sm-4">
+                      <input class="form-control input-lg" type="text" id="taint" onchange="validateInput(validateForm, CONSTANTS)" required>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="row mt-1">
+                        <a class="reset" id="reset-taint" onclick="resetTaint(csmMap), validateInput(validateForm, CONSTANTS)">Reset to default</a>
+                      </div>
                     </div>
                   </div>
-                  <div id="single-namespace-disabled">
+
+                  <div>
                     <div class="row mb-4 namespace">
-                      <label for="driver-namespace" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the namespace to deploy the CSM driver" style="width: 155px;">Driver Namespace</label>
+                      <label for="driver-namespace" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the namespace to deploy the CSM chart" style="width: 155px;">Namespace</label>
                       <div class="col-sm-9"></div>
-                      <div class="was-validated col-sm-3">
+                      <div class="was-validated col-sm-2">
                         <input class="form-control input-lg" type="text" id="driver-namespace" oninput="validateInput(validateForm, CONSTANTS)" required>
                       </div>
                       <div class="col-sm-4">
                         <div class="row mt-1">
                           <a class="reset" id="reset-driver-namespace" onclick="resetDriverNamespace(driver)">Reset to default</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mb-4 namespace">
-                      <label for="module-namespace" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Define the namespace to deploy the CSM module" style="width: 170px;">Module Namespace</label>
-                      <div class="col-sm-9"></div>
-                      <div class="was-validated col-sm-3">
-                        <input class="form-control input-lg" type="text" id="module-namespace" oninput="validateInput(validateForm, CONSTANTS)" required>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="row mt-1">
-                          <a class="reset" id="reset-module-namespace" onclick="resetModuleNameSpace(moduleNamespace)">Reset to default</a>
                         </div>
                       </div>
                     </div>

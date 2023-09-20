@@ -5,6 +5,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms. 
 
 The following CSM Authorization components are installed in the specified namespace:
@@ -87,8 +91,8 @@ The following third-party components are optionally installed in the specified n
 | redis.images.commander | The image to use for Redis Commander. | Yes | rediscommander/redis-commander:latest |
 | redis.storageClass | The storage class for Redis to use for persistence. If not supplied, the default storage class is used. | No | - |
 
- *NOTE*: 
-- The tenant, role, and storage services use GRPC. If the Ingress Controller requires annotations to support GRPC, they must be supplied.
+>__Note__: 
+> - The tenant, role, and storage services use GRPC. If the Ingress Controller requires annotations to support GRPC, they must be supplied.
 
 6. Install the driver using `helm`:
 
@@ -133,13 +137,9 @@ Karavictl commands and intended use can be found [here](../../cli/).
 
 ## Configuring the CSM Authorization Proxy Server
 
-The storage administrator must first configure the proxy server with the following:
-- Storage systems
-- Tenants
-- Roles
-- Role bindings
+The first part of CSM for Authorization deployment is to configure the proxy server. This is controlled by the Storage Administrator.
 
-This is done using `karavictl` to connect to the storage, tenant, and role services. In this example, we will be referencing an installation using `csm-authorization.com` as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster's master node.
+Configuration is achieved by using `karavictl` to connect to the storage, tenant, and role services. In this example, we will be referencing an installation using `csm-authorization.com` as the authorization.hostname value and the NGINX Ingress Controller accessed via the cluster's master node.
 
 Run `kubectl -n authorization get ingress` and `kubectl -n authorization get service` to see the Ingress rules for these services and the exposed port for accessing these services via the LoadBalancer. For example:
 
@@ -175,177 +175,14 @@ On the machine running `karavictl`, the `/etc/hosts` file needs to be updated wi
 
 The port that exposes these services is `30016`.
 
-
-### Configure Storage
-
-A `storage` entity in CSM Authorization consists of the storage type (PowerFlex, PowerMax, PowerScale), the system ID, the API endpoint, and the credentials. For example, to create PowerFlex storage:
-
-```
-karavictl storage create --type powerflex --endpoint https://10.0.0.1 --system-id ${systemID} --user ${user} --password ${password} --insecure --array-insecure --addr storage.csm-authorization.com:30016
-```
-
- *NOTE*: 
-- The `insecure` flag specifies to skip certificate validation when connecting to the CSM Authorization storage service. The `array-insecure` flag specifies to skip certificate validation when proxy-service connects to the backend storage array. Run `karavictl storage create --help` for help.
-
-### Configuring Tenants
-
-A `tenant` is a Kubernetes cluster that a role will be bound to. For example, to create a tenant named `Finance`:
-
-```
-karavictl tenant create --name Finance --insecure --addr tenant.csm-authorization.com:30016
-```
-
- *NOTE*: 
-- The `insecure` flag specifies to skip certificate validation when connecting to the tenant service. Run `karavictl tenant create --help` for help.
-
-### Configuring Roles
-
-A `role` consists of a name, the storage to use, and the quota limit for the storage pool to be used. For example, to create a role named `FinanceRole` using the PowerFlex storage created above with a quota limit of 100GB in storage pool `myStoragePool`:
-
-```
-karavictl role create --insecure --addr role.csm-authorization.com:30016 --role=FinanceRole=powerflex=${systemID}=myStoragePool=100GB
-```
-
- *NOTE*: 
-- The `insecure` flag specifies to skip certificate validation when connecting to the role service. Run `karavictl role create --help` for help.
-
-### Configuring Role Bindings
-
-A `role binding` binds a role to a tenant. For example, to bind the `FinanceRole` to the `Finance` tenant:
-
-```
-karavictl rolebinding create --tenant Finance --role FinanceRole --insecure --addr tenant.csm-authorization.com:30016
-```
-
- *NOTE*: 
-- The `insecure` flag specifies to skip certificate validation when connecting to the tenant service. Run `karavictl rolebinding create --help` for help.
-
-### Generating a Token
-
-Now that the tenant is bound to a role, a JSON Web Token can be generated for the tenant. For example, to generate a token for the `Finance` tenant:
-
-```
-karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016
-
-{
-  "Token": "\napiVersion: v1\nkind: Secret\nmetadata:\n  name: proxy-authz-tokens\ntype: Opaque\ndata:\n  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUXhPRFlzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLmJIODN1TldmaHoxc1FVaDcweVlfMlF3N1NTVnEyRzRKeGlyVHFMWVlEMkU=\n  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWXhNallzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkxNbWVUSkZlX2dveXR0V0lUUDc5QWVaTy1kdmN5SHAwNUwyNXAtUm9ZZnM=\n"
-}
-```
-
-Process the above response to filter the secret manifest. For example using sed you can run the following:
-
-```
-karavictl generate token --tenant Finance --insecure --addr tenant.csm-authorization.com:30016 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g'
-apiVersion: v1
-kind: Secret
-metadata:
-  name: proxy-authz-tokens
-type: Opaque
-data:
-  access: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRNek1qUTFOekVzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLk4tNE42Q1pPbUptcVQtRDF5ZkNGdEZqSmRDRjcxNlh1SXlNVFVyckNOS1U=
-  refresh: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhkV1FpT2lKcllYSmhkbWtpTENKbGVIQWlPakUyTlRVNU1UWTFNVEVzSW1keWIzVndJam9pWm05dklpd2lhWE56SWpvaVkyOXRMbVJsYkd3dWEyRnlZWFpwSWl3aWNtOXNaWE1pT2lKaVlYSWlMQ0p6ZFdJaU9pSnJZWEpoZG1rdGRHVnVZVzUwSW4wLkVxb3lXNld5ZEFLdU9mSmtkMkZaMk9TVThZMzlKUFc0YmhfNHc5R05ZNmM=
-```
-
-This secret must be applied in the driver namespace. Continue reading the next section for configuring the driver to use CSM Authorization.
+Please continue following the steps outlined in the [proxy server](../../configuration/proxy-server) configuration.
 
 ## Configuring a Dell CSI Driver with CSM for Authorization
 
-The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
+The second part of CSM for Authorization deployment is to configure one or more of the [supported](../../../authorization#supported-csi-drivers) CSI drivers. This is controlled by the Kubernetes tenant admin.
 
-### Configuring a Dell CSI Driver
+Please follow the steps outlined in [PowerFlex](../../configuration/powerflex), [PowerMax](../../configuration/powermax), or [PowerScale](../../configuration/powerscale) to configure the CSI Driver to work with the Authorization sidecar.
 
-Given a setup where Kubernetes, a storage system, and the CSM for Authorization Proxy Server are deployed, follow the steps below to configure the CSI Drivers to work with the Authorization sidecar:
-
-1. Apply the secret containing the token data into the driver namespace. It's assumed that the Kubernetes administrator has the token secret manifest saved in `/tmp/token.yaml`.
-
-    ```console
-    # It is assumed that array type powermax has the namespace "powermax", powerflex has the namepace "vxflexos", and powerscale has the namespace "isilon".
-    kubectl apply -f /tmp/token.yaml -n powermax
-    kubectl apply -f /tmp/token.yaml -n vxflexos
-    kubectl apply -f /tmp/token.yaml -n isilon
-   ```
-
-2. Edit the following parameters in samples/secret/karavi-authorization-config.json file in [CSI PowerFlex](https://github.com/dell/csi-powerflex/tree/main/samples), [CSI PowerMax](https://github.com/dell/csi-powermax/tree/main/samples/secret), or [CSI PowerScale](https://github.com/dell/csi-powerscale/tree/main/samples/secret) driver and update/add connection information for one or more backend storage arrays. In an instance where multiple CSI drivers are configured on the same Kubernetes cluster, the port range in the *endpoint* parameter must be different for each driver.
-
-  | Parameter | Description | Required | Default |
-   | --------- | ----------- | -------- |-------- |
-   | username | Username for connecting to the backend storage array. This parameter is ignored. | No | - |
-   | password | Password for connecting to to the backend storage array. This parameter is ignored. | No | - |
-   | intendedEndpoint | HTTPS REST API endpoint of the backend storage array. | Yes | - |
-   | endpoint | HTTPS localhost endpoint that the authorization sidecar will listen on. | Yes | https://localhost:9400 |
-   | systemID | System ID of the backend storage array. | Yes | " " |
-   | skipCertificateValidation  | A boolean that enables/disables certificate validation of the backend storage array. This parameter is not used. | No | true |
-   | isDefault | A boolean that indicates if the array is the default array. This parameter is not used. | No | default value from values.yaml |
-
-
-Create the karavi-authorization-config secret using the following command:
-
-`kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic karavi-authorization-config --from-file=config=samples/secret/karavi-authorization-config.json -o yaml --dry-run=client | kubectl apply -f -`
-
->__Note__:  
-> - Create the driver secret as you would normally except update/add the connection information for communicating with the sidecar instead of the backend storage array and scrub the username and password
-> - For PowerScale, the *systemID* will be the *clusterName* of the array. 
->   - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
-3. Create the proxy-server-root-certificate secret.
-
-    If running in *insecure* mode, create the secret with empty data:
-
-      `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-literal=rootCertificate.pem= -o yaml --dry-run=client | kubectl apply -f -`
-
-    Otherwise, create the proxy-server-root-certificate secret with the appropriate file:
-
-      `kubectl -n [CSI_DRIVER_NAMESPACE] create secret generic proxy-server-root-certificate --from-file=rootCertificate.pem=/path/to/rootCA -o yaml --dry-run=client | kubectl apply -f -`
-
-
->__Note__: Follow the steps below for additional configurations to one or more of the supported CSI drivers. 
-#### PowerFlex
-
-Please refer to step 5 in the [installation steps for PowerFlex](../../../csidriver/installation/helm/powerflex) to edit the parameters in samples/config.yaml file to communicate with the sidecar.
-
-1. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
-
-2. Create vxflexos-config secret using the following command:
-
-    `kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml -o yaml --dry-run=client | kubectl apply -f -`
-
-Please refer to step 9 in the [installation steps for PowerFlex](../../../csidriver/installation/helm/powerflex) to edit the parameters in *myvalues.yaml* file to communicate with the sidecar.
-
-3. Enable CSM for Authorization and provide *proxyHost* address 
-
-4. Install the CSI PowerFlex driver
-#### PowerMax
-
-Please refer to step 7 in the [installation steps for PowerMax](../../../csidriver/installation/helm/powermax) to edit the parameters in *my-powermax-settings.yaml* to communicate with the sidecar. 
-
-1. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
-
-2. Enable CSM for Authorization and provide *proxyHost* address
-
-3. Install the CSI PowerMax driver
-
-#### PowerScale
-
-Please refer to step 5 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in *my-isilon-settings.yaml* to communicate with the sidecar. 
-
-1. Update *endpointPort* to match the endpoint port number set in samples/secret/karavi-authorization-config.json
-
-*Notes:*
-> - In *my-isilon-settings.yaml*, endpointPort acts as a default value. If endpointPort is not specified in *my-isilon-settings.yaml*, then it should be specified in the *endpoint* parameter of samples/secret/secret.yaml.
-> - The *isilon-creds* secret has a *mountEndpoint* parameter which must be set to the hostname or IP address of the PowerScale OneFS API server, for example, 10.0.0.1.
-
-2. Enable CSM for Authorization and provide *proxyHost* address 
-
-Please refer to step 6 in the [installation steps for PowerScale](../../../csidriver/installation/helm/isilon) to edit the parameters in samples/secret/secret.yaml file to communicate with the sidecar.
-
-3. Update *endpoint* to match the endpoint set in samples/secret/karavi-authorization-config.json
-
->__Note__: Only add the endpoint port if it has not been set in *my-isilon-settings.yaml*.
-
-4. Create the isilon-creds secret using the following command:
-
-    `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml -o yaml --dry-run=client | kubectl apply -f -`
-   
-5. Install the CSI PowerScale driver
 ## Updating CSM for Authorization Proxy Server Configuration
 
 CSM for Authorization has a subset of configuration parameters that can be updated dynamically:

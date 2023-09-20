@@ -24,10 +24,43 @@ const setupTooltipStyle = () => {
 	[...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 };
 
+$(function() {
+
+	$("#installation-type, #array").focus(function() {
+		var installationType = $("#installation-type").val();
+		var array = $("#array").val();
+	
+		if (installationType === CONSTANTS.OPERATOR){
+			if (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY) {
+				$("option[value='vxflexos'], option[value='unity'],option[value='operator']").prop("disabled", true);
+			}
+		} else if (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY){
+			$("option[value='operator']").prop("disabled", true);
+		} else {
+			$("option").prop("disabled", false);
+		}
+	});
+});
+
+function disableDriver(){
+	var installationType = $("#installation-type").val();
+	var array = $("#array").val();
+	if (installationType === CONSTANTS.OPERATOR){
+		$("option[value='vxflexos'], option[value='unity']").prop("disabled", true);
+	}
+	else if (array === CONSTANTS.POWERFLEX || array === CONSTANTS.UNITY){
+		$("option[value='operator']").prop("disabled", true);
+	}
+	else {
+		$("option").prop("disabled", false);
+	}
+}
+
 function onInstallationTypeChange(){
-	driver = document.getElementById("array").value
+	driver = document.getElementById("array").value;
 	driver === "" ? $("#main").hide() : $("#main").show();
-	installationType = document.getElementById("installation-type").value	
+	installationType = document.getElementById("installation-type").value;
+	disableDriver();
 	displayModules(installationType, driver, CONSTANTS)
 	$("#command-text-area").hide();
 	onOperatorResiliencyChange();
@@ -36,6 +69,7 @@ function onInstallationTypeChange(){
 
 function onArrayChange() {
 	$('#array').on('change', function() {
+		disableDriver();
 		$("#command-text-area").hide();
 		driver = $(this).val();
 		driver === "" ? $("#main").hide() : $("#main").show();
@@ -54,6 +88,7 @@ function onArrayChange() {
 		onVSphereChange();
 		onReplicationChange(replicationNote);
 		validateInput(validateForm, CONSTANTS);
+		onRenameSDCChange(driver, CONSTANTS);
 	});
 }
 
@@ -178,6 +213,16 @@ function onNodeSelectorChange(nodeSelectorNoteValue, csmMapValue) {
 	}
 }
 
+function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
+	if ($("#rename-sdc").prop('checked') === true) {
+		if (driverName === CONSTANTS_PARAM.POWERFLEX){
+			$(".sdc-prefix").show();
+		}
+	} else {
+		$(".sdc-prefix").hide();
+	}
+}
+
 const onCSMVersionChange = () => {
 	document.getElementById("csm-version").value !== ""? loadTemplate(document.getElementById("array").value, document.getElementById("installation-type").value, document.getElementById("csm-version").value) : null;
 	displayModules(installationType, driver, CONSTANTS);
@@ -261,7 +306,7 @@ const downloadFile = (validateFormFunc, generateYamlFileFunc, displayCommandsFun
 	var link = document.getElementById('download-file');
 	link.href = generateYamlFileFunc(template);
 	link.style.display = 'inline-block';
-	displayCommandsFunc(releaseName, commandTitle, commandNote, command1, command2, command3, CONSTANTS_PARAM)
+	displayCommandsFunc(releaseName, commandTitle, commandNote, commandNoteOperator, csmOperatorNote, command1, command2, command3, CONSTANTS_PARAM)
 	validateInputFunc(validateFormFunc, CONSTANTS_PARAM)
 
 	return true;
@@ -300,6 +345,9 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 	$(".replication-operator-clusterid").hide();
 	$(".replication-helm-arrayid").hide();
 	$(".replication-helm-unisphere").hide();
+	$(".rename-sdc-feature").hide();
+	$(".approve-sdc").hide();
+	$(".nfs-feature").hide();
 
 	switch (driverName) {
 		case CONSTANTS_PARAM.POWERSTORE:
@@ -332,6 +380,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".fsGroupPolicy").show();
 			$(".vgsnapshot").hide();
 			$(".storage-capacity").show();
+			$(".max-volumes-per-node").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERSCALE_NAMESPACE;
 			if (installationType === 'operator'){
 				$(".observability-operator").show();
@@ -360,6 +409,9 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".replication-mod").show();
 			$(".iscsichap").show();
 			$(".transport-protocol").show();
+			$(".topology").show();
+			$(".fsGroupPolicy").show();
+			$(".max-volumes-per-node").show();
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERMAX_NAMESPACE;
 			if (installationType === CONSTANTS_PARAM.OPERATOR) {
 				
@@ -373,11 +425,7 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".snapshot-feature").hide();
 				$(".vol-name-prefix").hide();
 				$(".transport-protocol").show();
-				$(".migration").hide();
 				$(".resizer").hide();
-				$(".fsGroupPolicy").show();	
-				$(".transport-protocol").show();				
-				$(".topology").show();	
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
 			}
 			break;
@@ -387,6 +435,12 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".cert-secret-count-wrapper").show();
 			$("div#snap-prefix").hide();
 			$(".storage-capacity").show();
+			$(".rename-sdc-feature").show();
+			$(".approve-sdc").show();
+			if (document.getElementById("csm-version").value === "1.8.0") {
+				$(".max-volumes-per-node").show();
+				$(".nfs-feature").show();
+			}
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.POWERFLEX_NAMESPACE;
 			break;
 		case CONSTANTS_PARAM.UNITY:
@@ -397,13 +451,14 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 			$(".authorization").hide();
 			$(".fsGroupPolicy").show();	
 			$(".cert-manager").hide();
-			$(".storage-capacity").show();	
+			$(".storage-capacity").show();
+			$(".max-volumes-per-node").show();	
 			document.getElementById("driver-namespace").value = CONSTANTS_PARAM.UNITY_NAMESPACE;
 			break;
 	}
 }
 
-function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, command1Value, command2Value, command3Value, CONSTANTS) {
+function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, commandNoteOperatorValue, csmOperatorNoteValue, command1Value, command2Value, command3Value, CONSTANTS) {
 	driverNamespace = document.getElementById("driver-namespace").value;
 	csmVersion = document.getElementById("csm-version").value;
 	installationType = document.getElementById("installation-type").value
@@ -420,23 +475,28 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 			break;
 	}
 	$("#command-text-area").show();
-	$("#reverseProxyNote").hide();
+	$("#reverse-proxy-note").hide();
+	$("#csm-operator-note-wrapper").hide();
 	$("#command-title").html(commandTitleValue);
 	$("#command-note").show();
-	$("#command-note").html(commandNoteValue);
 	
 	if (installationType === 'helm'){
 		$("#command1").html(command1Value);
+		$("#command-note").html(commandNoteValue);
 
 		$("#command2-wrapper").show();
 		var command2 = command2Value.replace("$release-name", releaseNameValue).replace("$namespace", driverNamespace).replace("$version", helmChartVersion);
 		$("#command2").html(command2);
 	} else {
+		$("#csm-operator-note-wrapper").show();
+		$("#csm-operator-note").html(csmOperatorNoteValue);
 		$("#command1").html(command3Value);
+		$("#command-note").html(commandNoteOperatorValue);
 		$("#command2-wrapper").hide();
+
 	}
 	if (document.getElementById("array").value === CONSTANTS.POWERMAX) {
-		$("#reverseProxyNote").show();
+		$("#reverse-proxy-note").show();
 	}
 }
 
@@ -485,6 +545,7 @@ if (typeof exports !== 'undefined') {
 		onVSphereChange,
 		onNodeSelectorChange,
 		onCopyButtonClickHandler,
+		onRenameSDCChange,
 		resetImageRepository,
 		resetMaxVolumesPerNode,
 		resetControllerCount,

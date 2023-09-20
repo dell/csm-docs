@@ -50,7 +50,7 @@ The easiest way to obtain the tar archive with the shell script installer is dir
 
 Alternatively, the tar archive can be built from source by cloning the [GitHub repository](https://github.com/dell/karavi-authorization) and using the following Makefile targets to build the installer:
 
-```
+```bash
 make dist build-installer rpm package
 ```
 
@@ -72,7 +72,7 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
         "host": ":8080"
       },
       "zipkin": {
-        "collectoruri": "http://DNS-hostname:9411/api/v2/spans",
+        "collectoruri": "http://zipkin-addr:9411/api/v2/spans",
         "probability": 1
       },
       "certificate": {
@@ -96,21 +96,6 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
 > - `DNS-hostname` refers to the hostname of the system in which the CSM for Authorization server will be installed. This hostname can be found by running `nslookup <IP_address>`
 > - There are a number of ways to create certificates. In a production environment, certificates are usually created and managed by an IT administrator. Otherwise, certificates can be created using OpenSSL.
 
-2. In order to configure secure grpc connectivity, an additional subdomain in the format `grpc.DNS-hostname` is also required. All traffic from `grpc.DNS-hostname` needs to be routed to `DNS-hostname` address, this can be configured by adding a new DNS entry for `grpc.DNS-hostname` or providing a temporary path in the systems `/etc/hosts` file. 
-
->__Note__: The certificate provided in `crtFile` should be valid for both the `DNS-hostname` and the `grpc.DNS-hostname` address. 
-
-    For example, create the certificate config file with alternate names (to include DNS-hostname and grpc.DNS-hostname) and then create the .crt file: 
-
-      ```
-      CN = DNS-hostname
-      subjectAltName = @alt_names
-      [alt_names]
-      DNS.1 = grpc.DNS-hostname.com
-
-      $ openssl x509 -req -in cert_request_file.csr -CA root_CA.pem -CAkey private_key_File.key -CAcreateserial -out DNS-hostname.com.crt -days 365 -sha256
-      ```
-
 3. To install the rpm package on the system, you must first extract the contents of the tar file with the command:
 
     ```shell
@@ -124,15 +109,16 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
     sh install_karavi_auth.sh
     ```
 
-  As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:
+    As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:
+    ```bash
 
-  ```
-  sh install_karavi_auth.sh --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+    sh install_karavi_auth.sh --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+    ````
+   Ex.:
+    ```bash
 
-  Ex.:
-
-  sh install_karavi_auth.sh --traefik_web_port 30001 --traefik_websecure_port 30002
-  
+    sh install_karavi_auth.sh --traefik_web_port 30001 --traefik_websecure_port 30002
+    ```
 
 5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 
@@ -160,37 +146,50 @@ CSM for Authorization has a subset of configuration parameters that can be updat
 
 Updating configuration parameters can be done by editing the `karavi-config-secret` on the CSM for the Authorization Server. The secret can be queried using k3s and kubectl like so: 
 
-`k3s kubectl -n karavi get secret/karavi-config-secret`
+```bash
+k3s kubectl -n karavi get secret/karavi-config-secret
+```
 
 To update or add parameters, you must edit the base64 encoded data in the secret. The` karavi-config-secret` data can be decoded like so:
 
-`k3s kubectl -n karavi get secret/karavi-config-secret -o yaml | grep config.yaml | head -n 1 | awk '{print $2}' | base64 -d`
+```bash
+
+k3s kubectl -n karavi get secret/karavi-config-secret -o yaml | grep config.yaml | head -n 1 | awk '{print $2}' | base64 -d
+```
 
 Save the output to a file or copy it to an editor to make changes. Once you are done with the changes, you must encode the data to base64. If your changes are in a file, you can encode it like so:
 
-`cat <file> | base64`
+```bash
+cat <file> | base64
+```
 
 Copy the new, encoded data and edit the `karavi-config-secret` with the new data. Run this command to edit the secret:
 
-`k3s kubectl -n karavi edit secret/karavi-config-secret`
+```bash
+k3s kubectl -n karavi edit secret/karavi-config-secret
+```
 
 Replace the data in `config.yaml` under the `data` field with your new, encoded data. Save the changes and CSM for Authorization will read the changed secret.
 
 >__Note__: If you are updating the signing secret, the tenants need to be updated with new tokens via the `karavictl generate token` command like so. The `--insecure` flag is required if certificates were not provided in `$HOME/.karavi/config.json`
 
-`karavictl generate token --tenant $TenantName --insecure --addr grpc.DNS-hostname:443 | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -`
+```bash
+
+karavictl generate token --tenant $TenantName --insecure --addr DNS-hostname | sed -e 's/"Token": //' -e 's/[{}"]//g' -e 's/\\n/\n/g' | kubectl -n $namespace apply -f -
+```
 
 ## CSM for Authorization Proxy Server Dynamic Configuration Settings
 
 Some settings are not stored in the `karavi-config-secret` but in the csm-config-params ConfigMap, such as LOG_LEVEL and LOG_FORMAT. To update the CSM for Authorization logging settings during runtime, run the below command on the K3s cluster, make your changes, and save the updated configmap data.
 
-```
+```bash
 k3s kubectl -n karavi edit configmap/csm-config-params
 ```
 
 This edit will not update the logging level for the sidecar-proxy containers running in the CSI Driver pods. To update the sidecar-proxy logging levels, you must update the associated CSI Driver ConfigMap in a similar fashion:
 
-```
+```bash
+
 kubectl -n [CSM_CSI_DRVIER_NAMESPACE] edit configmap/<release_name>-config-params
 ```
 

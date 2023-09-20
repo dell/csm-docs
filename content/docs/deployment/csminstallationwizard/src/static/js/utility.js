@@ -41,8 +41,15 @@ function validateForm(CONSTANTS_PARAM) {
 		return false;
 	}
 
+	if ($("#installation-type").val() === CONSTANTS_PARAM.OPERATOR && ($("#array").val() === CONSTANTS_PARAM.POWERFLEX || $("#array").val() === CONSTANTS_PARAM.UNITY)) {
+		return false;
+	}
+
 	const powermaxSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERMAX;
 	const vSphereEnabled = $("#vSphere").prop('checked') ? true : false;
+
+	const powerflexSelected = document.getElementById('array').value.trim() === CONSTANTS_PARAM.POWERFLEX;
+	const renameSDCEnabled = $("#rename-sdc").prop('checked') ? true : false;
 
 	if (powermaxSelected) {
 		if (document.getElementById('installation-type').value === CONSTANTS_PARAM.HELM) {
@@ -77,6 +84,15 @@ function validateForm(CONSTANTS_PARAM) {
 			}
 			if (document.getElementById('vSphere-vCenter-cred-secret').value.trim() === "") {
 				return false;
+			}
+		}
+	}
+	if (powerflexSelected) {
+		if (document.getElementById('installation-type').value === CONSTANTS_PARAM.HELM) {
+			if (renameSDCEnabled) {
+				if (document.getElementById('sdc-prefix').value.trim() === "") {
+					return false;
+				}
 			}
 		}
 	}
