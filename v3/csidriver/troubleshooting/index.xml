@@ -100,8 +100,8 @@
 &lt;td&gt;Check that your container orchestrator is properly configured to work with SElinux.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Installation of the driver on Kubernetes v1.21/v1.22/v1.23 fails with the following error: &lt;br /&gt;&lt;code&gt;Error: unable to build kubernetes objects from release manifest: unable to recognize &amp;quot;&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Kubernetes v1.21/v1.22/v1.23 requires v1 version of snapshot CRDs to be created in cluster, see the &lt;a href=&#34;../../installation/helm/powerflex/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Installation of the driver on Kubernetes v1.23/v1.24/v1.25 fails with the following error: &lt;br /&gt;&lt;code&gt;Error: unable to build kubernetes objects from release manifest: unable to recognize &amp;quot;&amp;quot;: no matches for kind &amp;quot;VolumeSnapshotClass&amp;quot; in version &amp;quot;snapshot.storage.k8s.io/v1&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Kubernetes v1.23/v1.24/v1.25 requires v1 version of snapshot CRDs to be created in cluster, see the &lt;a href=&#34;../../installation/helm/powerflex/#optional-volume-snapshot-requirements&#34;&gt;Volume Snapshot Requirements&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;The &lt;code&gt;kubectl logs -n vxflexos vxflexos-controller-* driver&lt;/code&gt; logs show &lt;code&gt;x509: certificate signed by unknown authority&lt;/code&gt;&lt;/td&gt;
@@ -116,7 +116,7 @@
 &lt;td&gt;Make sure that v1 snapshotter CRDs and v1 snapclass are installed, and not v1beta1, which is no longer supported.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: &lt;code&gt;Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.21.0 &amp;lt;= 1.23.0 which is incompatible with Kubernetes V1.21.11-mirantis-1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: &lt;code&gt;Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.21.0 &amp;lt;= 1.25.0 which is incompatible with Kubernetes V1.21.11-mirantis-1&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;If you are using an extended Kubernetes version, please see the helm Chart at &lt;code&gt;helm/csi-vxflexos/Chart.yaml&lt;/code&gt; and use the alternate &lt;code&gt;kubeVersion&lt;/code&gt; check that is provided in the comments. &lt;em&gt;Please note&lt;/em&gt; that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -365,7 +365,7 @@
 &lt;td&gt;This is because iSCSI initiator login takes longer than the node pod startup time. This can be overcome by bouncing the node pods in the cluster using the below command the driver pods with &lt;strong&gt;kubectl get pods -n unity &amp;ndash;no-headers=true | awk &amp;lsquo;/unity-/{print $1}&amp;rsquo;| xargs kubectl delete -n unity pod&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: &lt;code&gt;Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.21.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.21.11-mirantis-1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: &lt;code&gt;Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.21.0 &amp;lt; 1.26.0 which is incompatible with Kubernetes V1.21.11-mirantis-1&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;If you are using an extended Kubernetes version, please see the helm Chart at &lt;code&gt;helm/csi-unity/Chart.yaml&lt;/code&gt; and use the alternate &lt;code&gt;kubeVersion&lt;/code&gt; check that is provided in the comments. &lt;em&gt;Please note&lt;/em&gt; that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;

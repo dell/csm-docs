@@ -23,7 +23,14 @@
       <description>
         
         
-        &lt;h2 id=&#34;install-csm-authorization-via-dell-csm-operator&#34;&gt;Install CSM Authorization via Dell CSM Operator&lt;/h2&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;install-csm-authorization-via-dell-csm-operator&#34;&gt;Install CSM Authorization via Dell CSM Operator&lt;/h2&gt;
 &lt;p&gt;The CSM Authorization module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
 To deploy the Operator, follow the instructions available &lt;a href=&#34;../../#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h3&gt;
@@ -155,7 +162,7 @@ To deploy the Operator, follow the instructions available &lt;a href=&#34;../../
 &lt;p&gt;Follow all the &lt;a href=&#34;#prerequisite&#34;&gt;prerequisites&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Create a CR (Custom Resource) for Authorization using the sample file provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v150.yaml&#34;&gt;here&lt;/a&gt;. This file can be modified to use custom parameters if needed.&lt;/p&gt;
+&lt;p&gt;Create a CR (Custom Resource) for Authorization using the sample file provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v160.yaml&#34;&gt;here&lt;/a&gt;. This file can be modified to use custom parameters if needed.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:&lt;/p&gt;
@@ -180,24 +187,6 @@ To deploy the Operator, follow the instructions available &lt;a href=&#34;../../
 &lt;td&gt;The hostname to configure the self-signed certificate (if applicable), and the proxy, tenant, role, and storage service Ingresses.&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;csm-authorization.com&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;AUTHORIZATION_LOG_LEVEL&lt;/td&gt;
-&lt;td&gt;CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”.&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;debug&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;AUTHORIZATION_ZIPKIN_COLLECTORURI&lt;/td&gt;
-&lt;td&gt;The URI of the Zipkin instance to export traces.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;AUTHORIZATION_ZIPKIN_PROBABILITY&lt;/td&gt;
-&lt;td&gt;The ratio of traces to export.&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;PROXY_INGRESS_CLASSNAME&lt;/td&gt;
@@ -262,6 +251,13 @@ To deploy the Operator, follow the instructions available &lt;a href=&#34;../../
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Optional:&lt;/strong&gt;
+To enable reporting of trace data with &lt;a href=&#34;https://zipkin.io/&#34;&gt;Zipkin&lt;/a&gt;, use the &lt;code&gt;csm-config-params&lt;/code&gt; configMap in the sample CR or dynamically by editing the configMap.&lt;/p&gt;
+&lt;p&gt;Add the Zipkin values to the configMap:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ZIPKIN_URI: &amp;#34;http://PROXY_HOST:9411/api/v2/spans&amp;#34;
+ZIPKIN_PROBABILITY: &amp;#34;1.0&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;Execute this command to create the Authorization CR:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create -f samples/authorization/csm_authorization_proxy_server.yaml&lt;/code&gt;&lt;/p&gt;
@@ -278,11 +274,14 @@ To deploy the Operator, follow the instructions available &lt;a href=&#34;../../
 &lt;p&gt;Create the &lt;code&gt;karavi-auth-tls&lt;/code&gt; secret using your own certificate or by using a self-signed certificate generated via cert-manager.&lt;/p&gt;
 &lt;p&gt;If using your own certificate that is valid for each Ingress hostname, use this command to create the &lt;code&gt;karavi-auth-tls&lt;/code&gt; secret:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create secret tls karavi-auth-tls -n authorization --key &amp;lt;location-of-private-key-file&amp;gt; --cert &amp;lt;location-of-certificate-file&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;If using a self-signed certificate, prepare &lt;code&gt;samples/authorization/certificate.yaml&lt;/code&gt; provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v150.yaml&#34;&gt;here&lt;/a&gt;. An entry for each hostname specified in the CR must be added under &lt;code&gt;dnsNames&lt;/code&gt; for the certificate to be valid for each Ingress.&lt;/p&gt;
+&lt;p&gt;If using a self-signed certificate, prepare &lt;code&gt;samples/authorization/certificate.yaml&lt;/code&gt; provided &lt;a href=&#34;https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v160.yaml&#34;&gt;here&lt;/a&gt;. An entry for each hostname specified in the CR must be added under &lt;code&gt;dnsNames&lt;/code&gt; for the certificate to be valid for each Ingress.&lt;/p&gt;
 &lt;p&gt;Use this command to create the &lt;code&gt;karavi-auth-tls&lt;/code&gt; secret:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;kubectl create -f samples/authorization/certificate.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h3 id=&#34;verify-installation-of-the-csm-authorization-proxy-server&#34;&gt;Verify Installation of the CSM Authorization Proxy Server&lt;/h3&gt;
+&lt;p&gt;Once the Authorization CR is created, you can verify the installation as mentioned below:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;kubectl describe csm/&amp;lt;name-of-custom-resource&amp;gt; -n &amp;lt;namespace&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;install-karavictl&#34;&gt;Install Karavictl&lt;/h3&gt;
 &lt;p&gt;Follow the instructions available in CSM Authorization for &lt;a href=&#34;../../../../authorization/deployment/helm/#install-karavictl&#34;&gt;Installing karavictl&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;configuring-the-csm-authorization-proxy-server&#34;&gt;Configuring the CSM Authorization Proxy Server&lt;/h3&gt;
@@ -384,21 +383,54 @@ cert-manager-webhook-66c85f8577-c7hxx     1/1     Running   0               2m2s
       <description>
         
         
-        &lt;p&gt;The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy CSM Replication sidecar and the complemental CSM Replication controller manager.&lt;/p&gt;
-&lt;h2 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h2&gt;
-&lt;p&gt;To use Replication, you need at least two clusters:&lt;/p&gt;
+        &lt;p&gt;The CSM Replication module for supported Dell CSI Drivers can be installed via the Dell CSM Operator. Dell CSM Operator will deploy the CSM Replication sidecar and the CSM Replication Controller Manager.&lt;/p&gt;
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;To configure Replication prior to installation via CSM Operator, you need:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;a source cluster which is the main cluster&lt;/li&gt;
-&lt;li&gt;one or more target clusters which will serve as diaster recovery clusters for the main cluster&lt;/li&gt;
+&lt;li&gt;a target cluster which will serve as the disaster recovery cluster&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;To configure all the clusters, follow the steps below:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster. The source cluster is also the target cluster.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;cloning-the-github-repository-and-building-repctl&#34;&gt;Cloning the GitHub Repository and Building repctl&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&#34;https://github.com/dell/csm-replication.git&#34;&gt;csm-replication&lt;/a&gt; GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+cd csm-replication/repctl
+make build
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The rest of the instructions will assume that your current working directory is the csm-replication/repctl directory.&lt;/p&gt;
+&lt;h2 id=&#34;configuration-steps&#34;&gt;Configuration Steps&lt;/h2&gt;
+&lt;p&gt;To configure Replication perform the following steps:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;On your main cluster, follow the instructions available in CSM Replication for &lt;a href=&#34;../../../../replication/deployment/install-repctl&#34;&gt;Installation using repctl&lt;/a&gt;, with the exception of step 4. When you reach step 4, you MUST use the command below to automatically package all clusters &lt;code&gt;.kube&lt;/code&gt; config as a secret:&lt;/li&gt;
+&lt;li&gt;On your main cluster collect the cluster admin configurations for each of the clusters. In the following example the source cluster, &lt;code&gt;cluster-1&lt;/code&gt; uses configuration &lt;code&gt;/root/.kube/config-1&lt;/code&gt; and the target cluster, &lt;code&gt;cluster-2&lt;/code&gt; uses the configuration &lt;code&gt;/root/.config/config-2&lt;/code&gt;. Use repctl to add the clusters:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ./repctl cluster add -f &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config-1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config-2&amp;#34;&lt;/span&gt; -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-1&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cluster-2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ./repctl cluster inject 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CSM Operator needs this admin configs instead of the service accounts’ configs  to be able to properly manage the target clusters. The default service account that&amp;rsquo;ll be used is the CSM Operator service account.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;On each of the target clusters, configure the prerequisites for deploying the driver via Dell CSM Operator. For example, PowerScale has the following &lt;a href=&#34;../../drivers/powerscale/#prerequisite&#34;&gt;prerequisites for deploying PowerScale via Dell CSM Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the replication controller CRDs:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create -f ../deploy/replicationcrds.all.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Inject the service account&amp;rsquo;s configuration into the clusters.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl cluster inject
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Customize the &lt;code&gt;examples/&amp;lt;storage&amp;gt;_example_values.yaml&lt;/code&gt; sample config. Set the values for sourceClusterID and targetClusterID to the same names used in step 1. For a stretched cluster set both fields to &lt;code&gt;self&lt;/code&gt;:&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create the replication storage classes using the modified configuration from step 4:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create sc --from-config ./examples/&amp;lt;storage&amp;gt;_example_values.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On the target cluster, configure the &lt;a href=&#34;../../../csmoperator/drivers/#pre-requisites-for-installation-of-the-csi-drivers&#34;&gt;prerequisites&lt;/a&gt; for deploying the driver via Dell CSM Operator.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the CSI driver for your chosen storage platform on the source cluster according to the instructions for &lt;a href=&#34;../../../csmoperator/drivers/#installing-csi-driver-via-operator&#34;&gt;installing the drivers using CSM Operator&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>

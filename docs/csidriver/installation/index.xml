@@ -102,13 +102,6 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerMax&lt;/td&gt;
-&lt;td&gt;2.5.0&lt;/td&gt;
-&lt;td&gt;v2.5.0&lt;/td&gt;
-&lt;td&gt;1.23, 1.24, 1.25&lt;/td&gt;
-&lt;td&gt;4.10, 4.10 EUS, 4.11&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerMax&lt;/td&gt;
 &lt;td&gt;2.6.0&lt;/td&gt;
 &lt;td&gt;v2.6.0&lt;/td&gt;
 &lt;td&gt;1.24, 1.25, 1.26&lt;/td&gt;
@@ -118,6 +111,13 @@
 &lt;td&gt;CSI PowerMax&lt;/td&gt;
 &lt;td&gt;2.7.0&lt;/td&gt;
 &lt;td&gt;v2.7.0&lt;/td&gt;
+&lt;td&gt;1.25, 1.26, 1.27&lt;/td&gt;
+&lt;td&gt;4.10, 4.10 EUS, 4.11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerMax&lt;/td&gt;
+&lt;td&gt;2.8.0&lt;/td&gt;
+&lt;td&gt;v2.8.0&lt;/td&gt;
 &lt;td&gt;1.25, 1.26, 1.27&lt;/td&gt;
 &lt;td&gt;4.11, 4.12 EUS, 4.12&lt;/td&gt;
 &lt;/tr&gt;
@@ -186,13 +186,6 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerStore&lt;/td&gt;
-&lt;td&gt;2.5.0&lt;/td&gt;
-&lt;td&gt;v2.5.0&lt;/td&gt;
-&lt;td&gt;1.23, 1.24, 1.25&lt;/td&gt;
-&lt;td&gt;4.10, 4.10 EUS, 4.11&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CSI PowerStore&lt;/td&gt;
 &lt;td&gt;2.6.0&lt;/td&gt;
 &lt;td&gt;v2.6.0&lt;/td&gt;
 &lt;td&gt;1.24, 1.25, 1.26&lt;/td&gt;
@@ -204,6 +197,13 @@
 &lt;td&gt;v2.7.0&lt;/td&gt;
 &lt;td&gt;1.25, 1.26, 1.27&lt;/td&gt;
 &lt;td&gt;4.11, 4.12, 4.12 EUS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSI PowerStore&lt;/td&gt;
+&lt;td&gt;2.8.0&lt;/td&gt;
+&lt;td&gt;v2.8.0&lt;/td&gt;
+&lt;td&gt;1.25, 1.26, 1.27&lt;/td&gt;
+&lt;td&gt;4.12, 4.12 EUS, 4.13&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -365,8 +365,8 @@ These files follow the naming convention&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;driver name&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;_&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;driver version&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;_ops_&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;OpenShift version&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;.yaml
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For e.g.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;samples/powermax_v270_k8s_126.yaml* &amp;lt;- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.26 cluster&lt;/li&gt;
-&lt;li&gt;samples/powermax_v270_ops_411.yaml* &amp;lt;- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.11 cluster&lt;/li&gt;
+&lt;li&gt;samples/powermax_v280_k8s_127.yaml* &amp;lt;- To install CSI PowerMax driver v2.8.0 on a Kubernetes 1.27 cluster&lt;/li&gt;
+&lt;li&gt;samples/powermax_v280_ops_413.yaml* &amp;lt;- To install CSI PowerMax driver v2.8.0 on an OpenShift 4.13 cluster&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Copy the correct sample file and edit the mandatory &amp;amp; any optional parameters specific to your driver installation by following the instructions &lt;a href=&#34;#modify-the-driver-specification&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -426,7 +426,7 @@ The latest versions of drivers could have additional environment variables or si
 &lt;ol&gt;
 &lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field if required.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.7.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.8.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
 To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add
@@ -603,10 +603,10 @@ or the Dell CSI Operator.&lt;/p&gt;
 &lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
 &lt;p&gt;Multiple Linux-based systems may be required to create and process an offline bundle for use.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;One Linux-based system, with internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes &lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt; to pull and save container images to file.&lt;/li&gt;
+&lt;li&gt;One Linux-based system, with Internet access, will be used to create the bundle. This involved the user cloning a git repository hosted on github.com and then invoking a script that utilizes &lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt; to pull and save container images to file.&lt;/li&gt;
 &lt;li&gt;One Linux-based system, with access to an image registry, to invoke a script that uses &lt;code&gt;docker&lt;/code&gt; or &lt;code&gt;podman&lt;/code&gt; to restore container images from file and push them to a registry&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;If one Linux system has both internet access and access to an internal registry, that system can be used for both steps.&lt;/p&gt;
+&lt;p&gt;If one Linux system has both Internet access and access to an internal registry, that system can be used for both steps.&lt;/p&gt;
 &lt;p&gt;Preparing an offline bundle requires the following utilities:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -651,7 +651,7 @@ or the Dell CSI Operator.&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; It is recommended to use the same build tool for packing and unpacking of images (either docker or podman).&lt;/p&gt;
 &lt;h3 id=&#34;building-an-offline-bundle&#34;&gt;Building an offline bundle&lt;/h3&gt;
-&lt;p&gt;This needs to be performed on a Linux system with access to the internet as a git repo will need to be cloned, and container images pulled from public registries.&lt;/p&gt;
+&lt;p&gt;This needs to be performed on a Linux system with access to the Internet as a git repo will need to be cloned, and container images pulled from public registries.&lt;/p&gt;
 &lt;p&gt;To build an offline bundle, the following steps are needed:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Perform a &lt;code&gt;git clone&lt;/code&gt; of the desired repository. For a helm-based install, the specific driver repo should be cloned. For an Operator based deployment, the Dell CSI Operator repo should be cloned&lt;/li&gt;
@@ -683,18 +683,19 @@ or the Dell CSI Operator.&lt;/p&gt;
    dellemc/csi-powermax:v2.3.1
    dellemc/csi-powermax:v2.4.0
    dellemc/csi-powermax:v2.5.0
-   dellemc/csi-powerstore:v2.5.0
    dellemc/csi-powerstore:v2.6.0
    dellemc/csi-powerstore:v2.7.0
+   dellemc/csi-powerstore:v2.8.0
    dellemc/csi-unity:v2.3.0
    dellemc/csi-unity:v2.4.0
    dellemc/csi-unity:v2.5.0
-   dellemc/csi-vxflexos:v2.5.0
    dellemc/csi-vxflexos:v2.6.0
    dellemc/csi-vxflexos:v2.7.0
+   dellemc/csi-vxflexos:v2.8.0
    dellemc/dell-csi-operator:v1.12.0
    dellemc/sdc:3.6
    dellemc/sdc:3.6.0.6
+   dellemc/sdc:3.6.1
    docker.io/busybox:1.32.0
    ...
    ...
@@ -801,17 +802,18 @@ dell-csi-operator-bundle/README.md
    dellemc/csi-powermax:v2.3.1 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.3.1
    dellemc/csi-powermax:v2.4.0 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.4.0
    dellemc/csi-powermax:v2.5.0 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.5.0
-   dellemc/csi-powerstore:v2.5.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.5.0
    dellemc/csi-powerstore:v2.6.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.6.0
    dellemc/csi-powerstore:v2.7.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.7.0
+   dellemc/csi-powerstore:v2.8.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.8.0
    dellemc/csi-unity:v2.3.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.3.0
    dellemc/csi-unity:v2.4.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.4.0
    dellemc/csi-unity:v2.5.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.5.0
-   dellemc/csi-vxflexos:v2.5.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.5.0
    dellemc/csi-vxflexos:v2.6.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.6.0
    dellemc/csi-vxflexos:v2.7.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.7.0
+   dellemc/csi-vxflexos:v2.8.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.8.0
    dellemc/sdc:3.6 -&amp;gt; localregistry:5000/csi-operator/sdc:3.6
    dellemc/sdc:3.6.0.6 -&amp;gt; localregistry:5000/csi-operator/sdc:3.6.0.6
+   dellemc/sdc:3.6.1 -&amp;gt; localregistry:5000/csi-operator/sdc:3.6.1
    docker.io/busybox:1.32.0 -&amp;gt; localregistry:5000/csi-operator/busybox:1.32.0
    ...
    ...
@@ -827,17 +829,18 @@ dell-csi-operator-bundle/README.md
    changing: dellemc/csi-powermax:v2.3.1 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.3.1
    changing: dellemc/csi-powermax:v2.4.0 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.4.0
    changing: dellemc/csi-powermax:v2.5.0 -&amp;gt; localregistry:5000/csi-operator/csi-powermax:v2.5.0
-   changing: dellemc/csi-powerstore:v2.5.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.5.0
    changing: dellemc/csi-powerstore:v2.6.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.6.0
    changing: dellemc/csi-powerstore:v2.7.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.7.0
+   changing: dellemc/csi-powerstore:v2.8.0 -&amp;gt; localregistry:5000/csi-operator/csi-powerstore:v2.8.0
    changing: dellemc/csi-unity:v2.3.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.3.0
    changing: dellemc/csi-unity:v2.4.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.4.0
    changing: dellemc/csi-unity:v2.5.0 -&amp;gt; localregistry:5000/csi-operator/csi-unity:v2.5.0
-   changing: dellemc/csi-vxflexos:v2.5.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.5.0
    changing: dellemc/csi-vxflexos:v2.6.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.6.0
    changing: dellemc/csi-vxflexos:v2.7.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.7.0
+   changing: dellemc/csi-vxflexos:v2.8.0 -&amp;gt; localregistry:5000/csi-operator/csi-vxflexos:v2.8.0
    changing: dellemc/sdc:3.6 -&amp;gt; localregistry:5000/csi-operator/sdc:3.6
    changing: dellemc/sdc:3.6.0.6 -&amp;gt; localregistry:5000/csi-operator/sdc:3.6.0.6
+   changing: dellemc/sdc:3.6.1 -&amp;gt; localregistry:5000/csi-operator/sdc:3.6.1
    changing: docker.io/busybox:1.32.0 -&amp;gt; localregistry:5000/csi-operator/busybox:1.32.0
    ...
    ...

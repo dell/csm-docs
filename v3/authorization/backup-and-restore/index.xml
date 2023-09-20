@@ -104,7 +104,14 @@ k8s-ab74921ab9      8Gi        RWO            Delete           Bound      author
       <description>
         
         
-        &lt;h2 id=&#34;roles&#34;&gt;Roles&lt;/h2&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization RPM is no longer actively maintained or supported. It will be deprecated in CSM 2.0. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;roles&#34;&gt;Roles&lt;/h2&gt;
 &lt;p&gt;Role data is stored in the &lt;code&gt;common&lt;/code&gt; Config Map in the underlying &lt;code&gt;k3s&lt;/code&gt; deployment.&lt;/p&gt;
 &lt;h3 id=&#34;steps-to-execute-in-the-existing-authorization-deployment&#34;&gt;Steps to execute in the existing Authorization deployment&lt;/h3&gt;
 &lt;ol&gt;
