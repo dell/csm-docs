@@ -33,12 +33,12 @@ Ensure you installed CRDs and replication controller in your clusters.
 
 To verify you have everything in order you can execute the following commands:
 
-* Check controller pods
+* Check controller pods:
     ```shell
     kubectl get pods -n dell-replication-controller
     ```
-  Pods should be `READY` and `RUNNING`
-* Check that controller config map is properly populated
+  Pods should be `READY` and `RUNNING`.
+* Check that controller config map is properly populated:
     ```shell
     kubectl get cm -n dell-replication-controller dell-replication-controller-config -o yaml
     ```
@@ -70,13 +70,13 @@ controller:
 ```
 You can leave other parameters like `image`, `replicationContextPrefix`, and `replicationPrefix` as they are.
 
-After enabling the replication module, you can continue to install the CSI driver for PowerScale following the usual installation procedure. Just ensure you've added the necessary array connection information to secret.
+After enabling the replication module, you can continue to install the CSI driver for PowerScale following the usual installation procedure. Just ensure you've added the necessary array connection information to the Kubernetes secret for the PowerScale driver.
 
 ##### SyncIQ encryption
 
 If you plan to use encryption, you need to set `replicationCertificateID` in the array connection secret. To check the ID of the certificate for the cluster, you can navigate to `Data protection->SyncIQ->Settings,` find your certificate in the `Server Certificates` section and then push the `View/Edit` button. It will open a dialog that should contain the  `Id` field. Use the value of that field to set `replicationCertificateID`.
 
-> **_NOTE:_** you need to install your driver on ALL clusters where you want to use replication. Both arrays must be accessible from each cluster. 
+> **_NOTE:_** You need to install your driver on ALL clusters where you want to use replication. Both arrays must be accessible from each cluster. 
 
 
 ### Creating Storage Classes
@@ -122,25 +122,26 @@ Let's go through each parameter and what it means:
 * `replication.storage.dell.com/isReplicationEnabled` if set to `true`, will mark this storage class as replication enabled,
   just leave it as `true`.
 * `replication.storage.dell.com/remoteStorageClassName` points to the name of the remote storage class. If you are using replication with the multi-cluster configuration you can make it the same as the current storage class name.
-* `replication.storage.dell.com/remoteClusterID` represents the ID of a remote cluster. It is the same id you put in the replication controller config map.
+* `replication.storage.dell.com/remoteClusterID` represents the ID of a remote cluster. It is the same ID you put in the replication controller config map.
 * `replication.storage.dell.com/remoteSystem` is the name of the remote system that should match whatever `clusterName` you called it in `isilon-creds` secret.
 * `replication.storage.dell.com/remoteAccessZone` is the name of the access zone a remote volume can be created in.
 * `replication.storage.dell.com/remoteAzServiceIP` AccessZone groupnet service IP. It is optional and can be provided if different than the remote system endpoint.
 * `replication.storage.dell.com/remoteRootClientEnabled` determines whether the driver should enable root squashing or not for the remote volume.
 * `replication.storage.dell.com/rpo` is an acceptable amount of data, which is measured in units of time, that may be lost due to a failure.
-> NOTE: Available RPO values "Five_Minutes", "Fifteen_Minutes", "Thirty_Minutes", "One_Hour", "Six_Hours", "Twelve_Hours", "One_Day"
+> **_NOTE_**: Available RPO values "Five_Minutes", "Fifteen_Minutes", "Thirty_Minutes", "One_Hour", "Six_Hours", "Twelve_Hours", "One_Day"
 * `replication.storage.dell.com/ignoreNamespaces`, if set to `true` PowerScale driver, it will ignore in what namespace volumes are created and put every volume created using this storage class into a single volume group.
-* `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them.
+* `replication.storage.dell.com/volumeGroupPrefix` represents what string would be appended to the volume group name to differentiate them. It is important to not use the same prefix for different kubernetes clusters, otherwise any action on a replication group in one kubernetes cluster will impact the other.
 
-> NOTE: To configure the VolumeGroupPrefix, the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<System IP Address OR FQDN\>-\<rpo\>\' cannot be more than 63 characters.
+> **_NOTE_**: To configure the VolumeGroupPrefix, the name format of \'\<volumeGroupPrefix\>-\<namespace\>-\<System IP Address OR FQDN\>-\<rpo\>\' cannot be more than 63 characters.
 
 * `Accesszone` is the name of the access zone a volume can be created in.
 * `AzServiceIP` AccessZone groupnet service IP. It is optional and can be provided if different than the PowerScale cluster endpoint.
-* `IsiPath` is the base path for the volumes to be created on the PowerScale cluster.
+* `IsiPath` is the base path for the volumes to be created on the PowerScale cluster. If not specified in the storage class, the IsiPath defined in the storage array's secret will be used. If that is not specified, the IsiPath defined in the values.yaml file used for driver installation is used as the lowest-priority. IsiPath between source and target Replication Groups **must** be consistent.
 * `RootClientEnabled` determines whether the driver should enable root squashing or not.
 * `ClusterName` name of PowerScale cluster, where PV will be provisioned, specified as it was listed in `isilon-creds` secret.
 
-After figuring out how storage classes would look, you just need to go and apply them to your Kubernetes clusters with `kubectl`.
+After creating storage class YAML files, they must be applied to
+your Kubernetes clusters with `kubectl`.
 
 #### Storage Class creation with `repctl`
 
@@ -150,9 +151,9 @@ After figuring out how storage classes would look, you just need to go and apply
 To create storage classes with `repctl` you need to fill up the config with necessary information.
 You can find an example [here](https://github.com/dell/csm-replication/blob/main/repctl/examples/powerscale_example_values.yaml), copy it, and modify it to your needs.
 
-If you open this example you can see a lot of similar fields and parameters you can modify in the storage class.
+If you open this example you can see similar fields and parameters to what was seen in manual storage class creation.
 
-Let's use the same example from manual installation and see what config would look like:
+Let's use the same example from manual installation and see what its repctl config file would look like:
 ```yaml
 sourceClusterID: "source"
 targetClusterID: "target"
@@ -184,66 +185,26 @@ parameters:
 
 After preparing the config, you can apply it to both clusters with `repctl`. Before you do this, ensure you've added your clusters to `repctl` via the `add` command.
 
-To create storage classes just run `./repctl create sc --from-config <config-file>` and storage classes would be applied to both clusters.
+To create storage classes just run `./repctl create sc --from-config <config-file>` and storage classes
 
 After creating storage classes you can make sure they are in place by using `./repctl get storageclasses` command.
 
 ### Provisioning Replicated Volumes
 
-After installing the driver and creating storage classes, you are good to create volumes using newly
+After installing the driver and creating storage classes, you are good to create volumes using the newly
 created storage classes.
 
 On your source cluster, create a PersistentVolumeClaim using one of the replication-enabled Storage Classes.
 The CSI PowerScale driver will create a volume on the array, add it to a VolumeGroup and configure replication
 using the parameters provided in the replication enabled Storage Class.
 
-### SyncIQ Policy Architecture
-When creating `DellCSIReplicationGroup` (RG) objects on the Kubernetes cluster(s) used for replication, matching SyncIQ policies are created on *both* the source and target PowerScale storage arrays. 
-
-This is done so that the RG objects can communicate with a relative 'local' and 'remote' set of policies to query for current synchronization status and perform replication actions; on the *source* Kubernetes cluster's RG, the *source* PowerScale array is seen as 'local' and the *target* PowerScale array is seen as remote. The inverse relationship exists on the *target* Kubernetes cluster's RG, which sees the *target* PowerScale array as 'local' and the *source* PowerScale array as 'remote'. 
-
-Upon creation, both SyncIQ policies (source and target) are set to a schedule of `When source is modified`. The source PowerScale array's SyncIQ policy is `Enabled` when the RG is created, and the target array's policy is `Disabled`. Similarly, the directory that is being replicated is *read-write accessible* on the source storage array, and is restricted to *read-only* on the target. 
-
-### Performing Failover on PowerScale
-
-Steps for performing Failover can be found in the Tools page under [Executing Actions.](https://dell.github.io/csm-docs/docs/replication/tools/#executing-actions) There are some PowerScale-specific considerations to keep in mind: 
-- Failover on PowerScale does NOT halt writes on the source side. It is recommended that the storage administrator or end user manually stop writes to ensure no data is lost on the source side in the event of future failback. 
-- In the case of unplanned failover, the source-side SyncIQ policy will be left enabled and set to its previously defined `When source is modified` sync schedule. It is recommended for storage admins to manually disable the source-side SyncIQ policy when bringing the failed-over source array back online.
-
-### Performing Failback on PowerScale
-
-Failback operations are not presently supported for PowerScale. In the event of a failover, failback can be performed manually using the below methodologies. 
-#### Failback - Discard Target
-
-Performing failback and discarding changes made to the target is to simply resume synchronization from the source. The steps to perform this operation are as follows:
-1. Log in to the source PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab. 
-2. Edit the source-side SyncIQ policy's schedule from `When source is modified` to `Manual`. 
-3. Log in to the target PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Local targets` tab.
-4. Perform `Actions > Disallow writes` on the target-side Local Target policy that matches the SyncIQ policy undergoing failback. 
-5. Return to the source array. Enable the source-side SyncIQ policy. Edit its schedule from `Manual` to `When source is modified`. Set the time delay for synchronization as appropriate.
-#### Failback - Discard Source
-
-Information on the methodology for performing a failback while taking changes made to the original target can be found in relevant PowerScale SyncIQ documentation. The detailed steps are as follows:
-
-1. Log in to the source PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab. 
-2. Edit the source-side SyncIQ policy's schedule from `When source is modified` to `Manual`. 
-3. Log in to the target PowerScale array. Navigate to the `Data Protection > SyncIQ` page and select the `Policies` tab.
-4. Delete the target-side SyncIQ policy that has a name matching the SyncIQ policy undergoing failback. This is necessary to prevent conflicts when running resync-prep in the next step.
-5. On the source PowerScale array, enable the SyncIQ policy that is undergoing failback. On this policy, perform `Actions > Resync-prep`. This will create a new SyncIQ policy on the target PowerScale array, matching the original SyncIQ policy with an appended *_mirror* to its name. Wait until the policy being acted on is disabled by the resync-prep operation before continuing.
-6. On the target PowerScale array's `Policies` tab, perform `Actions > Start job` on the *_mirror* policy. Wait for this synchronization to complete. 
-7. On the source PowerScale array, switch from the `Policies` tab to the `Local targets` tab. Find the local target policy that matches the SyncIQ policy undergoing failback and perform `Actions > Allow writes`. 
-8. On the target PowerScale array, perform `Actions > Resync-prep` on the *_mirror* policy. Wait until the policy on the source side is re-enabled by the resync-prep operation before continuing.
-9. On the target PowerScale array, delete the *_mirror* SyncIQ policy. 
-10. On the target PowerScale array, manually recreate the original SyncIQ policy that was deleted in step 4. This will require filepaths, RPO, and other details that can be obtained from the source-side SyncIQ policy. Its name **must** match the source-side SyncIQ policy. Its source directory will be the source-side policy's *target* directory, and vice-versa. Its target host will be the source PowerScale array endpoint.
-11. Ensure that the target-side SyncIQ policy that was just created is **Enabled.** This will create a Local Target policy on the source side. If it was not created as Enabled, enable it now. 
-12. On the source PowerScale array, select the `Local targets` tab. Perform `Actions > Allow writes` on the source-side Local Target policy that matches the SyncIQ policy undergoing failback. 
-13. Disable the target-side SyncIQ policy.
-14. On the source PowerScale array, edit the SyncIQ policy's schedule from `Manual` to `When source is modified`. Set the time delay for synchronization as appropriate.
-
 ### Supported Replication Actions
 The CSI PowerScale driver supports the following list of replication actions:
 - FAILOVER_REMOTE
 - UNPLANNED_FAILOVER_LOCAL
+- FAILBACK_LOCAL
+- ACTION_FAILBACK_DISCARD_CHANGES_LOCAL
+- REPROTECT_LOCAL
 - SUSPEND
 - RESUME
 - SYNC

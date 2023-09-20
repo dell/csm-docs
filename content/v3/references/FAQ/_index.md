@@ -31,7 +31,7 @@ The umbrella repository for every Dell Container Storage Module is: [https://git
 ### What are the prerequisites for deploying Container Storage Modules?
 Prerequisites can be found on the respective module deployment pages:
 - [Dell Container Storage Module for Observability Deployment](../../observability/deployment/#prerequisites)
-- [Dell Container Storage Module for Authorization Deployment](../../authorization/deployment/rpm#prerequisites)
+- [Dell Container Storage Module for Authorization Deployment](../../authorization/deployment/rpm/#prerequisites)
 - [Dell Container Storage Module for Resiliency Deployment](../../resiliency/deployment)
 - [Dell Container Storage Module for Replication Deployment](../../replication/deployment/installation/#before-you-begin)
 

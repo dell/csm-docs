@@ -13,33 +13,34 @@ Once the `DellCSIReplicationGroup` & `PersistentVolume` objects have been replic
 ### Planned Migration to the target cluster/array
 This scenario is the typical choice when you want to try your disaster recovery plan or you need to switch activities from one site to another: 
 
-    a. Execute "failover" action on selected ReplicationGroup using the cluster name
+a. Execute "failover" action on selected ReplicationGroup using the cluster name
     
-        ./repctl --rg rg-id failover --target target-cluster-name
-        
-    b. Execute "reprotect" action on selected ReplicationGroup which will resume the replication from new "source"
-    
-        ./repctl --rg rg-id reprotect --at new-source-cluster-name
-
+   ```bash
+    ./repctl --rg rg-id failover --target target-cluster-name
+   ```    
+b. Execute "reprotect" action on selected ReplicationGroup which will resume the replication from new "source"
+   ```bash
+    ./repctl --rg rg-id reprotect --at new-source-cluster-name
+   ```
 ![state_changes1](../state_changes1.png)
 
 ### Unplanned Migration to the target cluster/array
 This scenario is the typical choice when a site goes down: 
 
-    a. Execute "failover" action on selected ReplicationGroup using the cluster name 
-    
-        ./repctl --rg rg-id failover --target target-cluster-name --unplanned
-    
-    b. Execute "swap" action on selected ReplicationGroup which would swap personalities of R1 and R2 (only applicable for PowerMax driver)
-    
-        ./repctl --rg rg-id swap --at target-cluster-name
+a. Execute "failover" action on selected ReplicationGroup using the cluster name 
+   ```bash    
+    ./repctl --rg rg-id failover --target target-cluster-name --unplanned 
+   ```    
+b. Execute "swap" action on selected ReplicationGroup which would swap personalities of R1 and R2 (only applicable for PowerMax driver)
+   ```bash    
+    ./repctl --rg rg-id swap --at target-cluster-name
+   ```
+> _**Note**_: Unplanned migration usually happens when the original "source" cluster is unavailable. The following action makes sense when the cluster is back.
 
-    **Note:** Unplanned migration usually happens when the original "source" cluster is unavailable. The following action makes sense when the cluster is back.
-
-    c. Execute "reprotect" action on selected ReplicationGroup which will resume the replication.
-    
-        ./repctl --rg rg-id reprotect --at new-source-cluster-name
-        
+c. Execute "reprotect" action on selected ReplicationGroup which will resume the replication.
+   ```bash    
+    ./repctl --rg rg-id reprotect --at new-source-cluster-name
+   ```        
 ![state_changes2](../state_changes2.png) 
       
 

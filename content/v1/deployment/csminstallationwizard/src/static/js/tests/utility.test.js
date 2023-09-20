@@ -15,8 +15,11 @@
  * limitations under the License.
  *
  */
-
-const { validateForm, setMap, setDefaultValues } = require("../utility");
+const {
+	validateForm,
+	setMap,
+	setDefaultValues
+} = require("../utility");
 
 describe("GIVEN validateForm functions", () => {
 	test("SHOULD return false IF array value is empty", () => {
@@ -33,7 +36,7 @@ describe("GIVEN validateForm functions", () => {
 	test("SHOULD return false IF installationType value is empty", () => {
 		document.body.innerHTML = `
 			<select id="array" value="csi-powerstore">
-				<option value="csi-powerstore">PowerStore</option>
+				<option value="powerstore">PowerStore</option>
 			</select>
 			<select id="installation-type"></select>
 			<input type="text" id="image-repository">
@@ -45,8 +48,8 @@ describe("GIVEN validateForm functions", () => {
 
 	test("SHOULD return false IF imageRepository value is empty", () => {
 		document.body.innerHTML = `
-			<select id="array" value="csi-powerstore">
-				<option value="csi-powerstore">PowerStore</option>
+			<select id="array" value="powerstore">
+				<option value="powerstore">PowerStore</option>
 			</select>
 			<select id="installation-type" value="helm">
 				<option value="helm">Helm</option>
@@ -60,8 +63,8 @@ describe("GIVEN validateForm functions", () => {
 
 	test("SHOULD return false IF csmVersion value is empty", () => {
 		document.body.innerHTML = `
-			<select id="array" value="csi-powerstore">
-				<option value="csi-powerstore">PowerStore</option>
+			<select id="array" value="powerstore">
+				<option value="powerstore">PowerStore</option>
 			</select>
 			<select id="installation-type" value="helm">
 				<option value="helm">Helm</option>
@@ -75,15 +78,15 @@ describe("GIVEN validateForm functions", () => {
 
 	test("SHOULD return false IF driver-namespace value is empty", () => {
 		document.body.innerHTML = `
-			<select id="array" value="csi-powerstore">
-				<option value="csi-powerstore">PowerStore</option>
+			<select id="array" value="powerstore">
+				<option value="powerstore">PowerStore</option>
 			</select>
 			<select id="installation-type" value="helm">
 				<option value="helm">Helm</option>
 			</select>
 			<input type="text" id="image-repository" value="some-value">
-			<select id="csm-version" value="1.4.0">
-				<option value="1.4.0" selected>CSM 1.4</option>
+			<select id="csm-version" value="1.7.0">
+				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
 			<input type="text" id="driver-namespace">
 		`;
@@ -91,39 +94,19 @@ describe("GIVEN validateForm functions", () => {
 		expect(validateForm()).toBe(false);
 	});
 
-	test("SHOULD return false IF module-namespace value is empty", () => {
-		document.body.innerHTML = `
-			<select id="array" value="csi-powerstore">
-				<option value="csi-powerstore">PowerStore</option>
-			</select>
-			<select id="installation-type" value="helm">
-				<option value="helm">Helm</option>
-			</select>
-			<input type="text" id="image-repository" value="some-value">
-			<select id="csm-version" value="1.4.0">
-				<option value="1.4.0" selected>CSM 1.4</option>
-			</select>
-			<input type="text" id="driver-namespace" value="temp-value">
-			<input type="text" id="module-namespace">
-		`;
-
-		expect(validateForm()).toBe(false);
-	});
-
 	test("SHOULD return false IF controller-count value is empty", () => {
 		document.body.innerHTML = `
-			<select id="array" value="csi-powerstore">
-				<option value="csi-powerstore">PowerStore</option>
+			<select id="array" value="powerstore">
+				<option value="powerstore">PowerStore</option>
 			</select>
 			<select id="installation-type" value="helm">
 				<option value="helm">Helm</option>
 			</select>
 			<input type="text" id="image-repository" value="some-value">
-			<select id="csm-version" value="1.4.0">
-				<option value="1.4.0" selected>CSM 1.4</option>
+			<select id="csm-version" value="1.7.0">
+				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
 			<input type="text" id="driver-namespace" value="temp-value">
-			<input type="text" id="module-namespace" value="temp-value">
 			<input type="number" id="controller-count">
 		`;
 
@@ -138,11 +121,10 @@ describe("GIVEN validateForm functions", () => {
 			<option value="helm">Helm</option>
 		</select>
 		<input type="text" id="image-repository" value="some-value">
-		<select id="csm-version" value="1.4.0">
-			<option value="1.4.0" selected>CSM 1.4</option>
+		<select id="csm-version" value="1.7.0">
+			<option value="1.7.0" selected>CSM 1.7.0</option>
 		</select>
 		<input type="text" id="driver-namespace" value="temp-value">
-		<input type="text" id="module-namespace" value="temp-value">
 		<input type="number" id="controller-count" value="1">
 		<input type="text" id="storage-array-id">
 		<input type="text" id="storage-array-endpoint-url">
@@ -271,7 +253,9 @@ describe("GIVEN setMap function", () => {
 
 	test("SHOULD create map from given empty string", () => {
 		const receivedMap = setMap("");
-		const expectedMap = new Map([["", undefined]]);
+		const expectedMap = new Map([
+			["", undefined]
+		]);
 
 		expect(receivedMap).toEqual(expectedMap);
 	});
@@ -282,22 +266,34 @@ describe("GIVEN setDefaultValues function", () => {
 		document.body.innerHTML = `
 			<input type="text" id="image-repository">
 			<input type="number" id="controller-count">
-			<select id="csm-version">
-				<option value="" selected>Select the CSM version</option>
-				<option value="1.4.0">CSM 1.4</option>
+			<input type="text" id="vol-name-prefix">
+			<input type="text" id="snapshot-prefix">
+			<select id="csm-version" value="1.7.0">
+				<option value="1.7.0" selected>CSM 1.7.0</option>
 			</select>
+			<input type="text" id="cert-secret-count">
+			<input type="text" id="taint">
 		`;
 
 		const testCSMMap = new Map([
-			["csmVersion", "1.4.0"],
+			["csmVersion", "1.7.0"],
 			["imageRepository", "dellemc"],
-			["controllerCount", "2"]
+			["controllerCount", "2"],
+			["volNamePrefix", "csivol"],
+			["snapNamePrefix", "csi-snap"],
+			["certSecretCount", "1"],
+			["taint", "node-role.kubernetes.io/control-plane"]
 		]);
 
-		setDefaultValues("csmVersion=1.4.0\r\nimageRepository=dellemc\r\ncontrollerCount=2", testCSMMap);
+		setDefaultValues("csmVersion=1.7.0\r\nimageRepository=dellemc\r\ncontrollerCount=2\r\ncertSecretCount=1", testCSMMap);
 
 		expect(document.getElementById("image-repository").value).toEqual("dellemc");
 		expect(document.getElementById("controller-count").value).toEqual("2");
-		expect(document.getElementById("csm-version").value).toEqual("1.4.0");
+		expect(document.getElementById("csm-version").value).toEqual("1.7.0");
+		expect(document.getElementById("vol-name-prefix").value).toEqual("csivol");
+		expect(document.getElementById("snapshot-prefix").value).toEqual("csi-snap");
+		expect(document.getElementById("cert-secret-count").value).toEqual("1");
+		expect(document.getElementById("taint").value).toEqual("node-role.kubernetes.io/control-plane");
+
 	});
 });

@@ -6,6 +6,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
 This document outlines all karavictl commands, their intended use, options that can be provided to alter their execution, and expected output from those commands.
 
@@ -21,7 +25,7 @@ If you feel that something is unclear or missing in this document, please open u
 | [karavictl role get](#karavictl-role-get) | Get role |
 | [karavictl role list](#karavictl-role-list) | List roles |
 | [karavictl role create](#karavictl-role-create) | Create one or more CSM roles |
-| [karavictl role update](#karavictl-role-update) | Update one or more CSM roles |
+| [karavictl role update](#karavictl-role-update) | Update the quota of one or more CSM roles |
 | [karavictl role delete](#karavictl-role-delete ) | Delete role |
 | [karavictl rolebinding](#karavictl-rolebinding) | Manage role bindings |
 | [karavictl rolebinding create](#karavictl-rolebinding-create) | Create a rolebinding between role and tenant |
@@ -402,11 +406,11 @@ $ karavictl role create --role=role-name=system-type=000000000001=mypool=2000000
 
 ### karavictl role update
 
-Update one or more CSM roles
+Update the quota of one or more CSM roles
 
 ##### Synopsis
 
-Updates one or more CSM roles
+Updates the quota of one or more CSM roles
 
 ```
 karavictl role update [flags]

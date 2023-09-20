@@ -15,18 +15,27 @@ This document outlines all dellctl commands, their intended use, options that ca
 | [dellctl cluster add](#dellctl-cluster-add) | Add a k8s cluster to be managed by dellctl |
 | [dellctl cluster remove](#dellctl-cluster-remove) | Removes a k8s cluster managed by dellctl |
 | [dellctl cluster get](#dellctl-cluster-get) | List all clusters currently being managed by dellctl |
-| [dellctl backup](#dellctl-backup) | Allows to manipulate application backups/clones |
+| [dellctl backup](#dellctl-backup) | Allows you to manipulate application backups/clones |
 | [dellctl backup create](#dellctl-backup-create) | Create an application backup/clones |
 | [dellctl backup delete](#dellctl-backup-delete) | Delete application backups |
 | [dellctl backup get](#dellctl-backup-get) | Get application backups |
-| [dellctl restore](#dellctl-restore) | Allows to manipulate application restores |
+| [dellctl restore](#dellctl-restore) | Allows you to manipulate application restores |
 | [dellctl restore create](#dellctl-restore-create) | Restore an application backup |
 | [dellctl restore delete](#dellctl-restore-delete) | Delete application restores |
 | [dellctl restore get](#dellctl-restore-get) | Get application restores |
+| [dellctl schedule](#dellctl-schedule) | Allows you to manipulate schedules |
+| [dellctl schedule create](#dellctl-schedule-create) | Create a schedule |
+| [dellctl schedule create for-backup](#dellctl-schedule-create-for-backup) | Create a schedule for application backups |
+| [dellctl schedule delete](#dellctl-schedule-delete) | Delete schedules |
+| [dellctl schedule get](#dellctl-schedule-get) | Get schedules |
+| [dellctl encryption rekey](#dellctl-encryption-rekey) | Rekey an encrypted volume |
+| [dellctl encryption rekey-status](#dellctl-encryption-rekey-status) | Get status of an encryption rekey operation |
+| [dellctl images](#dellctl-images) | List the container images needed by csi driver |
+| [dellctl volume get](#dellctl-volume-get) | Gets PowerFlex volume infomation for a given tenant on a local cluster |
 
 
 ## Installation instructions
-1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.4.0).
+1. Download `dellctl` from [here](https://github.com/dell/csm/releases/tag/v1.5.1).
 2. chmod +x dellctl
 3. Move `dellctl` to `/usr/local/bin` or add `dellctl`'s containing directory path to PATH environment variable.
 4. Run `dellctl --help` to know available commands or run `dellctl command --help` to know more about a specific command.
@@ -60,7 +69,7 @@ Outputs help text
 
 ### dellctl cluster
 
-Allows to manipulate one or more k8s cluster configurations
+Allows you to manipulate one or more k8s cluster configurations
 
 ##### Available Commands
 
@@ -191,7 +200,7 @@ cluster2        v1.22   https://1.2.3.5:6443            035133aa-5b65-4080-a813-
 
 ### dellctl backup
 
-Allows to manipulate application backups/clones
+Allows you to manipulate application backups/clones
 
 ##### Available Commands
 
@@ -373,7 +382,7 @@ demo-app-clones   Completed   2022-07-27 11:53:37 -0400 EDT   2022-08-26 11:53:3
 
 ### dellctl restore
 
-Allows to manipulate application restores
+Allows you to manipulate application restores
 
 ##### Available Commands
 
@@ -531,4 +540,334 @@ Get restores with their names
 # dellctl restore get restore1
 NAME       BACKUP    STATUS      CREATED                         COMPLETED
 restore1   backup1   Completed   2022-07-27 12:35:29 -0400 EDT
+```
+
+
+
+---
+
+
+
+### dellctl schedule
+
+Allows you to manipulate schedules
+
+##### Available Commands
+
+```
+  create      Create a schedule
+  delete      Delete schedules
+  get         Get schedules
+```
+
+##### Flags
+
+```
+  -h, --help   Help for schedule  
+```
+
+##### Output
+
+Outputs help text
+
+
+
+---
+
+
+
+### dellctl schedule create
+
+Create a schedule
+
+##### Available Commands
+
+```
+  for-backup  Create a schedule for application backups
+```
+
+##### Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                Help for create
+      --name string         Name for the schedule
+      --schedule string     A cron expression representing when to create the application backup  
+```
+
+##### Output
+
+Outputs help text
+
+
+
+---
+
+
+
+### dellctl schedule create for-backup
+
+Create a schedule for application backups
+
+##### Flags
+
+```
+      --exclude-namespaces stringArray                        List of namespace names to exclude from the backup.
+      --include-namespaces stringArray                        List of namespace names to include in the backup (use '*' for all namespaces). (default *)
+      --ttl duration                                          Backup retention period. (default 720h0m0s)
+      --exclude-resources stringArray                         Resources to exclude from the backup, formatted as resource.group, such as storageclasses.storage.k8s.io.
+      --include-resources stringArray                         Resources to include in the backup, formatted as resource.group, such as storageclasses.storage.k8s.io (use '*' for all resources).
+      --backup-location string                                Storage location where k8s resources and application data will be backed up to. (default "default")
+      --data-mover string                                     Data mover to be used to backup application data. (default "Restic")
+      --include-cluster-resources optionalBool[=true]         Include cluster-scoped resources in the backup
+  -l, --label-selector labelSelector                          Only backup resources matching this label selector. (default <none>)
+      --set-owner-references-in-backup optionalBool[=false]   Specifies whether to set OwnerReferences on backups created by this schedule.
+  -n, --namespace string                                      The namespace in which application mobility service should operate. (default "app-mobility-system")
+  -h, --help                                                  Help for for-backup
+```
+
+##### Global Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+      --name string         Name for the schedule
+      --schedule string     A cron expression representing when to create the application backup
+```
+
+##### Output
+
+Create a schedule to backup namespace demo, every 1hour
+
+```
+# dellctl schedule create for-backup --name schedule1 --schedule "@every 1h" --include-namespaces demo
+ INFO schedule request "schedule1" submitted successfully.
+ INFO Run 'dellctl schedule get schedule1' for more details.
+```
+
+Create a schedule to backup namespace demo, once a day at midnight and set OwnerReferences on backups created by this schedule
+
+```
+# dellctl schedule create for-backup --name schedule2 --schedule "@daily" --include-namespaces demo --set-owner-references-in-backup
+ INFO schedule request "schedule2" submitted successfully.
+ INFO Run 'dellctl schedule get schedule2' for more details.
+```
+
+Create a schedule to backup namespace demo, at 23:00(11:00 pm) every saturday
+
+```
+# dellctl schedule create for-backup --name schedule3 --schedule "00 23 * * 6" --include-namespaces demo
+ INFO schedule request "schedule3" submitted successfully.
+ INFO Run 'dellctl schedule get schedule3' for more details.
+```
+
+
+
+---
+
+
+
+### dellctl schedule delete
+
+Delete one or more schedules
+
+##### Flags
+
+```
+      --all                 Delete all schedules
+      --cluster-id string   Id of the cluster managed by dellctl
+      --confirm             Confirm deletion
+  -h, --help                Help for delete
+  -n, --namespace string    The namespace in which application mobility service should operate. (default "app-mobility-system")
+```
+
+##### Output
+
+Delete a schedule with name
+
+```
+# dellctl schedule delete schedule1
+Are you sure you want to continue (Y/N)? y
+ INFO Request to delete schedule "schedule1" submitted successfully.
+```
+
+Delete multiple schedules
+
+```
+# dellctl schedule delete schedule1 schedule2
+Are you sure you want to continue (Y/N)? y
+ INFO Request to delete schedule "schedule1" submitted successfully.
+ INFO Request to delete schedule "schedule2" submitted successfully.
+```
+
+Delete all schedules without asking for user confirmation
+
+```
+# dellctl schedule delete --confirm --all
+ INFO Request to delete schedule "schedule1" submitted successfully.
+ INFO Request to delete schedule "schedule2" submitted successfully.
+```
+
+
+---
+
+
+
+### dellctl schedule get
+
+Get schedules
+
+##### Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                Help for get
+  -n, --namespace string    The namespace in which application mobility service should operate. (default "app-mobility-system")
+```
+
+##### Output
+
+Get all the application schedules created on local cluster
+
+```
+# dellctl schedule get
+NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAST BACKUP TIME
+schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
+schedule2     Enabled   2022-11-04 08:35:57 +0000 UTC   false    @daily      NA
+```
+
+Get schedules with their names
+
+```
+# dellctl schedule get schedule1
+NAME          STATUS    CREATED                         PAUSED   SCHEDULE    LAST BACKUP TIME
+schedule1     Enabled   2022-11-04 08:33:35 +0000 UTC   false    @every 1h   NA
+```
+
+### dellctl encryption rekey
+
+Encryption rekey with a name for the rekey object and volume name of an encrypted volume
+
+##### Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for get
+```
+
+
+##### Output
+
+
+```
+# dellctl encryption rekey myrekey k8s-5d2cc565d4
+ INFO rekey request "myrekey" submitted successfully for persistent volume "k8s-5d2cc565d4".
+ INFO Run 'dellctl encryption rekey-status myrekey' for more details.
+```
+
+
+### dellctl encryption rekey-status
+
+Encryption rekey status with name of the rekey object
+
+##### Flags
+
+```
+      --cluster-id string   Id of the cluster managed by dellctl
+  -h, --help                help for get
+```
+
+
+##### Output
+
+
+```
+# dellctl encryption rekey-status myrekey
+ INFO Status of rekey request myrekey = completed
+```
+
+### dellctl images
+
+List the container images needed by csi driver
+
+**NOTE.**: dellctl images currently supports csi-vxflexos driver only.
+
+#### Aliases
+
+```
+images,imgs
+```
+
+#### Flags
+
+```
+  Flags:
+  -d, --driver string   csi driver name
+  -h, --help            help for images
+  
+```
+#### Output
+
+
+```
+# dellctl images --driver csi-vxflexos
+Driver Image                    Supported Orchestrator Versions         Sidecar Images
+dellemc/csi-vxflexos:v2.5.0     k8s1.25,k8s1.24,k8s1.23,ocp4.11,ocp4.10 registry.k8s.io/sig-storage/csi-attacher:v4.0.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.3.0
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.7.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.1.0
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.6.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.6.0
+                                                                        dellemc/sdc:3.6.0.6
+
+dellemc/csi-vxflexos:v2.4.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  registry.k8s.io/sig-storage/csi-attacher:v3.5.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.2.1
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.2.0
+                                                                        registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.6.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v6.0.1
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.5.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        dellemc/sdc:3.6.0.6
+
+dellemc/csi-vxflexos:v2.3.0     k8s1.24,k8s1.23,k8s1.22,ocp4.10,ocp4.9  registry.k8s.io/sig-storage/csi-attacher:v3.4.0
+                                                                        registry.k8s.io/sig-storage/csi-provisioner:v3.1.0
+                                                                        dellemc/csi-volumegroup-snapshotter:v1.0.1
+                                                                        gcr.io/k8s-staging-sig-storage/csi-external-health-monitor-controller:v0.5.0
+                                                                        registry.k8s.io/sig-storage/csi-snapshotter:v5.0.1
+                                                                        registry.k8s.io/sig-storage/csi-resizer:v1.4.0
+                                                                        registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.5.1
+                                                                        dellemc/sdc:3.6.0.6
+```
+
+
+### dellctl volume get
+
+Gets PowerFlex volume infomation for a given tenant on a local cluster
+
+##### Aliases
+  get, ls, list
+
+##### Flags
+
+```
+  -h, --help                           help for get
+      --insecure optionalBool[=true]   provide flag to skip certificate validation
+      --namespace string               namespace of the secret for the given tenant
+      --proxy string                   auth proxy endpoint to use
+```
+
+##### Output
+
+Gets PowerFlex volume infomation for a given tenant on a local cluster. The namespace is the namespace where tenant secret is created. 
+
+>Note: This was output was generated using Authorization Proxy version 1.5.1. Please ensure you are using version 1.5.1 or greater. 
+
+```
+# dellctl volume get --proxy <proxy.dell.com> --namespace vxflexos
+NAME             VOLUME ID          SIZE       POOL     SYSTEM ID          PV NAME          PV STATUS   STORAGE CLASS   PVC NAME       NAMESPACE
+k8s-e7c8b39112   a69bf18e00000008   8.000000   mypool   636468e3638c840f   k8s-e7c8b39112   Released    vxflexos        demo-claim10   default
+k8s-e6e2b46103   a69bf18f00000009   8.000000   mypool   636468e3638c840f   k8s-e6e2b46103   Bound       vxflexos        demo-claim11   default
+k8s-b1abb817d3   a69bf19000000001   8.000000   mypool   636468e3638c840f   k8s-b1abb817d3   Bound       vxflexos        demo-claim13   default
+k8s-28e4184f41   c6b2280d0000009a   8.000000   mypool   636468e3638c840f   k8s-28e4184f41   Available   local-storage  
+k8s-7296621062   a69b554f00000004   8.000000   mypool   636468e3638c840f
 ```

@@ -16,23 +16,25 @@ Obtain the latest single binary installer RPM by following one of our two option
 
 To update the rpm package on the system, run the below command from within the extracted folder:
 
-```
+```bash
 sh install_karavi_auth.sh --upgrade
 ```
 
 As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:
 
-```
-sh install_karavi_auth.sh --upgrade  --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+```bash
 
+sh install_karavi_auth.sh --upgrade  --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+```
 Ex.:
+```bash
 
 sh install_karavi_auth.sh --upgrade  --traefik_web_port 30001 --traefik_websecure_port 30002
 ```
 
 To verify that the new version of the rpm is installed and K3s has been updated, run the below commands:
 
-```
+```bash
 rpm -qa | grep karavi
 k3s kubectl version
 ``` 
@@ -54,6 +56,7 @@ This section outlines the rollback steps for Container Storage Modules (CSM) for
 
 To rollback the rpm package on the system, run the below command:
 
-```
+```bash
+
 rpm -Uvh --oldpackage karavi-authorization-<old_version>.x86_64.rpm --nopreun --nopostun
 ```

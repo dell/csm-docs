@@ -6,6 +6,11 @@ tags:
 weight: 1
 Description: Upgrade Dell CSI Operator
 ---
+
+{{% pageinfo color="primary" %}}
+The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use [CSM Operator](../../../../deployment/csmoperator) going forward.
+{{% /pageinfo %}}
+
 To upgrade Dell CSI Operator, perform the following steps.
 Dell CSI Operator can be upgraded based on the supported platforms in one of the 2 ways:
 1.	Using script (for non-OLM based installation)

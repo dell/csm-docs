@@ -27,7 +27,7 @@ The Rekey Controller Helm chart defines these values:
 
 ```yaml
 # Rekey controller image name.
-image: "dellemc/csm-encryption-rekey-controller:v0.1.0"
+image: "dellemc/csm-encryption-rekey-controller:v0.2.0"
 
 # Rekey controller image pull policy.
 # Allowed values:
@@ -51,11 +51,11 @@ port:
 
 | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- | ------- |
-| image | Rekey controller image name. | No | "dellemc/csm-encryption-rekey-controller:v0.1.0" |
+| image | Rekey controller image name. | No | "dellemc/csm-encryption-rekey-controller:v0.2.0" |
 | imagePullPolicy | Rekey controller image pull policy. | No | "IfNotPresent" |
 | logLevel | Log level of the rekey controller. | No | "info" |
-| provisioner | This value is required and must match `encryption.pluginName` value of the corresponding Dell CSI driver. | Yes |  |
-| port | This value is required and must match `encryption.apiPort` value of the corresponding Dell CSI driver. | Yes |  |
+| provisioner | This value is required and must match `encryption.pluginName` value of the corresponding Dell CSI driver. | Yes | |
+| port | This value is required and must match `encryption.apiPort` value of the corresponding Dell CSI driver. | Yes | |
 
 ### Deployment
 

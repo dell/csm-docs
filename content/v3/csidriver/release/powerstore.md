@@ -3,17 +3,15 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.4.0
+## Release Notes - CSI PowerStore v2.5.1
 
 ### New Features/Changes
 
-- [Updated deprecated StorageClass parameter fsType with csi.storage.k8s.io/fstype](https://github.com/dell/csm/issues/188)
-- [Added support for iSCSI in TKG Qualification](https://github.com/dell/csm/issues/363)
-- [Added support for Stand alone Helm Chart](https://github.com/dell/csm/issues/355)
+There are no features/changes in this release.
 
 ### Fixed Issues
 
-There are no fixed issues in this release.
+- [Fixed issue where driver was not properly cleaning up resources when volumes were unmounted](https://github.com/dell/csm/issues/666)
 
 ### Known Issues
 
@@ -27,3 +25,4 @@ There are no fixed issues in this release.
 ### Note:
 
 - Support for Kubernetes alpha features like Volume Health Monitoring and RWOP (ReadWriteOncePod) access mode will not be available in Openshift environment as Openshift doesn't support enabling of alpha features for Production Grade clusters.
+- This release is only supported when driver is installed via helm.

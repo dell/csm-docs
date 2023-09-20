@@ -5,14 +5,14 @@ description: Container Storage Modules Operator
 weight: 1
 ---
 
-The Dell Container Storage Modules Operator Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
+The Dell Container Storage Modules Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers and CSM Modules provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. The operator can be installed using OLM (Operator Lifecycle Manager) or manually.
 
 ## Supported Platforms
 Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenShift. Supported versions are listed below.
 
 | Kubernetes Version         | OpenShift Version   |
 | -------------------------- | ------------------- |
-| 1.23, 1.24, 1.25           | 4.10, 4.10 EUS, 4.11 |
+| 1.24, 1.25, 1.26           | 4.10, 4.10 EUS, 4.11 |
 
 >NOTE:
 >- Authorization module is only supported on Kubernetes platforms.
@@ -23,8 +23,9 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.5.0   | 1.5.0             | 1.3.0           | 1.4.0             | N/A            |
-| CSI PowerFlex      | 2.5.0   | 1.5.0             | N/A             | 1.4.0             | N/A            |
+| CSI PowerScale     | 2.6.0   | 1.6.0             | 1.4.0           | 1.5.0             | N/A            |
+| CSI PowerFlex      | 2.6.0   | 1.6.0             | 1.4.0           | 1.5.0             | N/A            |
+| CSI PowerStore     | 2.6.0   | N/A               | N/A             | N/A               | N/A            |
 
 >NOTE:
 >- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples) for prior versions of CSM.
@@ -36,7 +37,7 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 
 #### Operator Installation on a cluster without OLM
 
-1. Clone and checkout the required csm-operator version using `git clone -b v1.0.0 https://github.com/dell/csm-operator.git`
+1. Clone and checkout the required csm-operator version using `git clone -b v1.1.0 https://github.com/dell/csm-operator.git`
 2. `cd csm-operator`
 3. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
 4. Run `bash scripts/install.sh` to install the operator.
@@ -48,25 +49,11 @@ Dell CSM Operator can be installed manually or via Operator Hub.
 5. Run the command `kubectl get pods -n dell-csm-operator` to validate the installation. If installed successfully, you should be able to see the operator pod in the `dell-csm-operator` namespace.
 
 {{< imgproc install_pods.jpg Resize "2500x" >}}{{< /imgproc >}}
-   
-#### Operator Installation on a cluster with OLM
-1. Clone and checkout the required csm-operator version using `git clone -b v1.0.0 https://github.com/dell/csm-operator.git`
-2. `cd csm-operator`
-3. Run `bash scripts/install_olm.sh` to install the operator.
->NOTE: Dell CSM Operator will get installed in the `test-csm-operator-olm` namespace.
-
-{{< imgproc install_olm.jpg Resize "2500x" >}}{{< /imgproc >}}
-
-4. Once installation completes, run the command `kubectl get pods -n test-csm-operator-olm` to validate the installation. If installed successfully, you should be able to see the operator pods and CSV in the `test-csm-operator-olm` namespace. The CSV phase will be in `Succeeded` state.
-   
-{{< imgproc install_olm_pods.JPG Resize "2500x" >}}{{< /imgproc >}}
-
->**NOTE**: The recommended version of OLM for upstream Kubernetes is **`v0.18.3`**.
 
 ### Installation via Operator Hub
 `dell-csm-operator` can be installed via Operator Hub on upstream Kubernetes clusters & Red Hat OpenShift Clusters.
 
-The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the operator to: 
+The installation process involves the creation of a `Subscription` object either via the _OperatorHub_ UI or using `kubectl/oc`. While creating the `Subscription` you can set the Approval strategy for the `InstallPlan` for the operator to:
 * _Automatic_ - If you want the operator to be automatically installed or upgraded (once an upgrade is available).
 * _Manual_ - If you want a cluster administrator to manually review and approve the `InstallPlan` for installation/upgrades.
 
@@ -76,11 +63,6 @@ To uninstall a CSM operator, run `bash scripts/uninstall.sh`. This will uninstal
 
 {{< imgproc uninstall.jpg Resize "2500x" >}}{{< /imgproc >}}
 
-#### Operator uninstallation on a cluster with OLM
-To uninstall a CSM operator installed with OLM run `bash scripts/uninstall_olm.sh`. This will uninstall the operator in  `test-csm-operator-olm` namespace.
-
-{{< imgproc uninstall_olm.JPG Resize "2500x" >}}{{< /imgproc >}}
-
 ### To upgrade Dell CSM Operator, perform the following steps.
 Dell CSM Operator can be upgraded in 2 ways:
 
@@ -89,7 +71,7 @@ Dell CSM Operator can be upgraded in 2 ways:
 2.Using Operator Lifecycle Manager (OLM)
 
 #### Using Installation Script
-1. Clone and checkout the required csm-operator version using `git clone -b v1.0.0 https://github.com/dell/csm-operator.git`
+1. Clone and checkout the required csm-operator version using `git clone -b v1.1.0 https://github.com/dell/csm-operator.git`
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
 
@@ -105,13 +87,13 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 **NOTE**: The recommended version of OLM for Upstream Kubernetes is **`v0.18.3`**.
 
 ### Custom Resource Definitions
-As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.  
+As part of the Dell CSM Operator installation, a CRD representing configuration for the CSI Driver and CSM Modules is also installed.
 `containerstoragemodule` CRD is installed in API Group `storage.dell.com`.
 
 Drivers and modules can be installed by creating a `customResource`.
 
 ### Custom Resource Specification
-Each CSI Driver and CSM Module installation is represented by a Custom Resource.  
+Each CSI Driver and CSM Module installation is represented by a Custom Resource.
 
 The specification for the Custom Resource is the same for all the drivers.Below is a list of all the mandatory and optional fields in the Custom Resource specification
 
@@ -135,7 +117,7 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 
 **node** - List of environment variables and values which are applicable only for node.
 
-**sideCars** - Specification for CSI sidecar containers.  
+**sideCars** - Specification for CSI sidecar containers.
 
 **authSecret** - Name of the secret holding credentials for use by the driver. If not specified, the default secret *-creds must exist in the same namespace as driver.
 
@@ -143,6 +125,6 @@ The specification for the Custom Resource is the same for all the drivers.Below 
 
 **tolerations** - List of tolerations which should be applied to the driver StatefulSet/Deployment and DaemonSet. It should be set separately in the controller and node sections if you want separate set of tolerations for them.
 
-**nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet. 
+**nodeSelector** - Used to specify node selectors for the driver StatefulSet/Deployment and DaemonSet.
 
->**Note:** The `image` field should point to the correct image tag for version of the driver you are installing.  
+>**Note:** The `image` field should point to the correct image tag for version of the driver you are installing.

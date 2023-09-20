@@ -6,6 +6,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization CLI
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
+{{% /pageinfo %}}
+
 karavictl is a command-line interface (CLI) used to interact with and manage your Container Storage Modules (CSM) Authorization deployment.
 This document outlines all karavictl commands, their intended use, options that can be provided to alter their execution, and expected output from those commands.
 
@@ -38,6 +42,7 @@ If you feel that something is unclear or missing in this document, please open u
 | [karavictl tenant list](#karavictl-tenant-list) | Lists tenant resources within CSM |
 | [karavictl tenant revoke](#karavictl-tenant-revoke) | Get a tenant resource within CSM |
 | [karavictl tenant delete](#karavictl-tenant-delete) | Deletes a tenant resource within CSM |
+| [karavictl tenant update](#karavictl-tenant-update) | Updates a tenant resource within CSM |
 
 
 ## General Commands
@@ -1095,3 +1100,42 @@ karavictl tenant delete [flags]
 $ karavictl tenant delete --name Alice
 ```
 On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the deletion occurred.
+
+
+
+---
+
+
+
+### karavictl tenant update
+
+Updates a tenant's resource within CSM
+
+##### Synopsis
+
+Updates a tenant resource within CSM
+
+```
+karavictl tenant update [flags]
+```
+
+#### Options
+
+```
+  -h, --help   help for create
+  -n, --name string   Tenant name
+      --approvesdc boolean (Usage: --approvesdc=true/false | This flag is only applicable to PowerFlex. This flag will Approve/Deny a tenant's SDC request )
+```
+
+##### Options inherited from parent commands
+
+```
+      --addr string     Address of the server (default "localhost:443")
+      --config string   config file (default is $HOME/.karavictl.yaml)
+```
+
+##### Output
+```
+$ karavictl tenant update --name Alice --approvesdc=false
+```
+On success, there will be no output. You may run `karavictl tenant get --name <tenant-name>` to confirm the update was persisted.

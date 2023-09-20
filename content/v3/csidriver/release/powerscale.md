@@ -3,11 +3,14 @@ title: PowerScale
 description: Release notes for PowerScale CSI driver
 ---
 
-## Release Notes - CSI Driver for PowerScale v2.4.0
+## Release Notes - CSI Driver for PowerScale v2.5.0
 
 ### New Features/Changes
 
-- [Added support to add client only to root clients when RO volume is created from snapshot and RootClientEnabled is set to true.](https://github.com/dell/csm/issues/362)
+- [Add support for Standalone Helm charts.](https://github.com/dell/csm/issues/506)
+- [Add an option to the CSI driver force the client list to be updated even if there are unresolvable host.](https://github.com/dell/csm/issues/534)
+- [Added support for OpenShift 4.11](https://github.com/dell/csm/issues/480)
+- [Added support for Kubernetes 1.25](https://github.com/dell/csm/issues/478)
 
 ### Fixed Issues
 
