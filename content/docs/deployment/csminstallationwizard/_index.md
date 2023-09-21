@@ -86,15 +86,13 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 8. If Replication is checked in the wizard, refer to [Replication](../../replication/deployment/) on configuring communication between Kubernetes clusters.
 
->NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
-
 9. Install the Helm chart.
 
     On your terminal, run this command:
 
     ```terminal
     helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
-    Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.0.1 -f values.yaml
+    Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.1.0 -f values.yaml
     ```
 ## Installation Using Operator
 
@@ -113,8 +111,6 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 4. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../authorization/deployment/helm/) to install and configure the CSM Authorization Proxy Server.
 
 5. If Replication is checked in the wizard, refer to [Replication](../csmoperator/modules/replication) for the necessary prerequisites required for this module.
-
->NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, follow the steps outlined in [PowerStore](../csmoperator/drivers/powerstore), [PowerMax](../csmoperator/drivers/powermax), [PowerScale](../csmoperator/drivers/powerscale), [Resiliency](../csmoperator/modules/resiliency).
 
 6. Install the Operator.
 
