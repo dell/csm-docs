@@ -77,13 +77,13 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 * `echo -n '<MDM_IPS>' | base64`
 * `kubectl patch secret vxflexos-config -n vxflexos -p "{\"data\": { \"MDM\": \"<GENERATED_BASE64>\"}}"`
 
-5. If Observability is checked in the wizard, only the sidecar is enabled. Refer to [Observability](../../observability/deployment/#post-installation-dependencies) to export metrics to Prometheus and load the Grafana dashboards.
+5. If Observability is checked in the wizard, refer to [Observability](../../observability/deployment/#post-installation-dependencies) to export metrics to Prometheus and load the Grafana dashboards.
 
 6. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../authorization/deployment/helm/) to install and configure the CSM Authorization Proxy Server.
 
-7. If your Kubernetes distribution doesn't have Volume Snapshot feature enabled, Refer to [this section](../../snapshots) to install the Volume Snapshot CRDs and the default snapshot controller.
+7. If your Kubernetes distribution doesn't have the Volume Snapshot feature enabled, refer to [this section](../../snapshots) to install the Volume Snapshot CRDs and the default snapshot controller.
 
-8. If Replication is checked in the wizard, refer to [Replication](../../replication/deployment/) on how to configure communication between Kubernetes clusters.
+8. If Replication is checked in the wizard, refer to [Replication](../../replication/deployment/) on configuring communication between Kubernetes clusters.
 
 >NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
 
@@ -108,11 +108,11 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 >NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
 
-3. If Observability is checked in the wizard, only the sidecar is enabled. Refer to [Observability](../../observability/deployment/#post-installation-dependencies) to export metrics to Prometheus and load the Grafana dashboards.
+3. If Observability is checked in the wizard, refer to [Observability](../../observability/deployment/#post-installation-dependencies) to export metrics to Prometheus and load the Grafana dashboards.
 
 4. If Authorization is checked in the wizard, only the sidecar is enabled. Refer to [Authorization](../../authorization/deployment/helm/) to install and configure the CSM Authorization Proxy Server.
 
-5. If Replication is checked in the wizard, refer to [Replication](../../replication/deployment/) on how to configure communication between Kubernetes clusters.
+5. If Replication is checked in the wizard, refer to [Replication](../../replication/deployment/) on configuring communication between Kubernetes clusters.
 
 >NOTE: The CSM Installation Wizard generates values.yaml with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, follow the steps outlined in [PowerStore](../csmoperator/drivers/powerstore), [PowerMax](../csmoperator/drivers/powermax), [PowerScale](../csmoperator/drivers/powerscale), [Resiliency](../csmoperator/modules/resiliency).
 
