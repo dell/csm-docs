@@ -104,7 +104,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 2. Look over all the fields in the generated `values.yaml` and fill in/adjust any as needed.
 
->NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [PowerStore](../../csidriver/installation/helm/powerstore/#install-the-driver), [PowerMax](../../csidriver/installation/helm/powermax/#install-the-driver), [PowerScale](../../csidriver/installation/helm/isilon/#install-the-driver), [PowerFlex](../../csidriver/installation/helm/powerflex/#install-the-driver), [Unity XT](../../csidriver/installation/helm/unity/#install-csi-driver), [Observability](../../observability/), [Replication](../../replication/), [Resiliency](../../resiliency/).
+>NOTE: The CSM Installation Wizard generates `values.yaml` with the minimal inputs required to install the CSM. To configure additional parameters in values.yaml, you can follow the steps outlined in [PowerStore](../csmoperator/drivers/powerstore), [PowerMax](../csmoperator/drivers/powermax), [PowerScale](../csmoperator/drivers/powerscale), [Resiliency](../csmoperator/modules/resiliency).
 
 3. If Observability is checked in the wizard, refer to [Observability](../../observability/deployment/#post-installation-dependencies) to export metrics to Prometheus and load the Grafana dashboards.
 
