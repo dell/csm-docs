@@ -219,7 +219,11 @@ kubeVersion: &amp;ldquo;&amp;gt;= 1.21.0-0 &amp;lt; 1.29.0-0&amp;rdquo;&lt;/li&g
 &lt;li&gt;
 &lt;p&gt;Download the default values.yaml file&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.8.0/charts/csi-vxflexos/values.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: To connect to a PowerFlex 4.5 array, edit the powerflexSdc parameter in your values.yaml file to use dellemc/sdc:4.5:&lt;br&gt;
+&lt;code&gt;powerflexSdc: dellemc/sdc:4.5&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;If you are using a custom image, check the &lt;code&gt;version&lt;/code&gt; and &lt;code&gt;driverRepository&lt;/code&gt; fields in &lt;code&gt;my-vxflexos-settings.yaml&lt;/code&gt; to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: &lt;code&gt;&amp;lt;driverRepository&amp;gt;/csi-vxflexos:v&amp;lt;version&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
