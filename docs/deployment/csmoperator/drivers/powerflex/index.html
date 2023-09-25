@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-09-20T19:05:29+05:30" />
+<meta property="article:modified_time" content="2023-09-25T17:38:22-03:00" />
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2023-09-20T19:05:29+05:30" />
-<meta itemprop="wordCount" content="1215">
+<meta itemprop="dateModified" content="2023-09-25T17:38:22-03:00" />
+<meta itemprop="wordCount" content="1237">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerFlex via Dell CSM Operator
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7b883895f1a774b3e9aa4d1b7404706f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0928df56509de1e5bf6d29ca6efd4d6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7b883895f1a774b3e9aa4d1b7404706f.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0928df56509de1e5bf6d29ca6efd4d6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -755,7 +755,11 @@ config.yaml. An example of config.yaml is below in this document. Do not set MDM
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MDM</span><span style="color:#f8f8f8;text-decoration:underline">
 </span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">value</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;10.xx.xx.xx,10.xx.xx.xx&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">#provide the same MDM value from secret</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></span></span></code></pre></div><h4 id="manual-sdc-deployment">Manual SDC Deployment</h4>
+</span></span></span></code></pre></div><blockquote>
+<p>Note: To connect to a PowerFlex 4.5 array, edit the initContainers.image parameter in your samples file to use dellemc/sdc:4.5:<br>
+<code>- image: dellemc/sdc:4.5</code></p>
+</blockquote>
+<h4 id="manual-sdc-deployment">Manual SDC Deployment</h4>
 <p>For detailed PowerFlex installation procedure, see the <em>Dell PowerFlex Deployment Guide</em>. Install the PowerFlex SDC using this procedure:</p>
 <p><strong>Steps</strong></p>
 <ol>
