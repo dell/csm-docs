@@ -45,7 +45,7 @@ kubectl get csm --all-namespaces
           value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
 ```  
 
-   >Note: To connect to a PowerFlex 4.5 array, edit the initContainers.image parameter in your samples file to use dellemc/sdc:4.5, like this:  
+   >Note: To connect to a PowerFlex 4.5 array, edit the initContainers.image parameter in your samples file to use dellemc/sdc:4.5:  
    >`- image: dellemc/sdc:4.5`
 
 #### Manual SDC Deployment
