@@ -206,8 +206,8 @@ Or
   {driver name}_{driver version}_ops_{OpenShift version}.yaml
 ```
 For e.g.
-* samples/powermax_v280_k8s_127.yaml* <- To install CSI PowerMax driver v2.8.0 on a Kubernetes 1.27 cluster  
-* samples/powermax_v280_ops_413.yaml* <- To install CSI PowerMax driver v2.8.0 on an OpenShift 4.13 cluster
+* samples/powermax_v270_k8s_127.yaml* <- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.27 cluster  
+* samples/powermax_v270_ops_412.yaml* <- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.12 cluster
 
 Copy the correct sample file and edit the mandatory & any optional parameters specific to your driver installation by following the instructions [here](#modify-the-driver-specification)  
 >NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available [here](#custom-resource-specification). Please make sure to read through and understand the various fields.
@@ -285,7 +285,7 @@ The below notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field if required.
    ```yaml
       driver:
-        configVersion: v2.8.0
+        configVersion: v2.7.0
    ```
 2. Volume Health Monitoring feature is optional and by default this feature is disabled for drivers when installed via operator.
    To enable this feature, we will have to modify the below block while upgrading the driver.To get the volume health state add 
