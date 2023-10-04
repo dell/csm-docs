@@ -170,13 +170,13 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       namespace: test-vxflexos
     spec:
       driver:
-        configVersion: v2.8.0
+        configVersion: v2.7.0
         replicas: 1
         dnsPolicy: ClusterFirstWithHostNet
         forceUpdate: false
         fsGroupPolicy: File
         common:
-          image: "dellemc/csi-vxflexos:v2.8.0"
+          image: "dellemc/csi-vxflexos:v2.7.0"
           imagePullPolicy: IfNotPresent
           envs:
             - name: X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT
