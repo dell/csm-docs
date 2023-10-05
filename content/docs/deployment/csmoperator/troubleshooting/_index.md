@@ -10,7 +10,7 @@ weight: 3
   - [Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?](#why-does-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui)
   - [How can I view detailed logs for the CSM Operator?](#how-can-i-view-detailed-logs-for-the-csm-operator)
   - [My Dell CSI Driver install failed. How do I fix it?](#my-dell-csi-driver-install-failed-how-do-i-fix-it)
-  - [My Dell CSM Replication install failed to validate replication prechecks with 'no such host'.](#my-dell-csm-replication-install-failed-to-validate-replication-prechecks-with-no-such-host)
+  - [My CSM Replication install fails to validate replication prechecks with 'no such host'.](#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host)
 
 ### Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?
 The Dell CSM Operator is unable to manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Dell CSM Operator
