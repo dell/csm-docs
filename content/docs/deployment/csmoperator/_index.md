@@ -66,7 +66,7 @@ The installation process involves the creation of a `Subscription` object either
 git clone -b v1.3.0 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
-4. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
+4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
 5. Run `bash scripts/install.sh` to install the operator.
 
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.

@@ -15,8 +15,8 @@ weight: 3
 The Dell CSM Operator is unable to manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Dell CSM Operator
 
 
-### Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?
-The Dell CSM Operator is not fully compliant with the OperatorHub React UI elements.Due to this, some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use `kubectl/oc` commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Dell CSM Operator.
+### Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?
+The Dell CSM Operator is not fully compliant with the OperatorHub React UI elements. Due to this, some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use `kubectl/oc` commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Dell CSM Operator.
 
 ### How can I view detailed logs for the CSM Operator?
 Detailed logs of the CSM Operator can be displayed using the following command:
