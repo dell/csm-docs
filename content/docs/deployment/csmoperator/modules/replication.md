@@ -14,7 +14,7 @@ To configure Replication prior to installation via CSM Operator, you need:
 - a target cluster which will serve as the disaster recovery cluster
 > **_NOTE:_**  If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster. The source cluster is also the target cluster.
 
-- _(Optional)_ If **CSM Replication** is being deployed using two clusters in a environment where the DNS is not configured, and the cluster API endpoints are
+- _(Optional)_ If CSM Replication is being deployed using two clusters in an environment where the DNS is not configured, and the cluster API endpoints are
 FQDNs, it is necessary to add the `<FQDN>:<IP>` mapping in the /etc/hosts file in order to resolve queries to the remote API server.
 This change will need to be made to the /etc/hosts file on:
     - The bastion node(s) (or wherever `repctl` is used).
@@ -24,7 +24,7 @@ This change will need to be made to the /etc/hosts file on:
     Update the ClusterServiceVersion before continuing. Execute the command below, replacing the fields for the remote cluster's FQDN and IP.
     ```bash 
     kubectl patch clusterserviceversions.operators.coreos.com -n <operator-namespace> dell-csm-operator-certified.v1.3.0 \
-    --type=json -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/hostAliases", "value": [{"ip":"<remote-cluster-ip>","hostnames":["<remote-FQDN>"]}]}]'
+    --type=json -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/hostAliases", "value": [{"ip":"<remote-IP>","hostnames":["<remote-FQDN>"]}]}]'
     ```
 
 ### Cloning the GitHub Repository and Building repctl
@@ -70,7 +70,7 @@ To configure Replication perform the following steps:
 
 7. Install the CSI driver for your chosen storage platform on the source cluster according to the instructions for [installing the drivers using CSM Operator](../../../csmoperator/drivers/#installing-csi-driver-via-operator).
 
-8. _(Optional)_ If **CSM Replication** is deployed using two clusters in an environment where the DNS is not configured, it is necessary to update the dell-replication-controller-manager Kubernetes deployment to map the API endpoint FQDN to an IP address by adding the `hostAliases` field and associated FQDN:IP mappings.
+8. _(Optional)_ If CSM Replication is deployed using two clusters in an environment where the DNS is not configured, it is necessary to update the dell-replication-controller-manager Kubernetes deployment to map the API endpoint FQDN to an IP address by adding the `hostAliases` field and associated FQDN:IP mappings.
 
     To update the dell-replication-controller-manager deployment, execute the command below, replacing the fields for the remote cluster's FQDN and IP. Make sure to update the deployment on both the primary and disaster recovery clusters.
     ```bash

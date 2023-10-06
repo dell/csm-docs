@@ -60,7 +60,7 @@ Typical reasons for errors:
 * Incorrect RBAC permissions
 
 ### My CSM Replication install fails to validate replication prechecks with 'no such host'.
-In replication environments that utilize more than one cluster, and utilize FQDNs to reference API endpoints, it is highly recommended that the DNS be configured to resolve requests involving the FQDN to the appropriate Kubernetes cluster.
+In replication environments that utilize more than one cluster, and utilize FQDNs to reference API endpoints, it is highly recommended that the DNS be configured to resolve requests involving the FQDN to the appropriate cluster.
 
 If for some reason it is not possible to configure the DNS, the /etc/hosts file should be updated to map the FQDN to the appropriate IP. This change will need to be made to the /etc/hosts file on:
 - The bastion node(s) (or wherever `repctl` is used).
@@ -70,7 +70,7 @@ If for some reason it is not possible to configure the DNS, the /etc/hosts file 
 To update the ClusterServiceVersion, execute the command below, replacing the fields for the remote cluster's FQDN and IP.
 ```bash
 kubectl patch clusterserviceversions.operators.coreos.com -n <operator-namespace> dell-csm-operator-certified.v1.3.0 \
-> --type=json -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/hostAliases", "value": [{"ip":"<remote-cluster-ip>","hostnames":["<remote-FQDN>"]}]}]'
+--type=json -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/hostAliases", "value": [{"ip":"<remote-IP>","hostnames":["<remote-FQDN>"]}]}]'
 ```
 
 To update the dell-replication-controller-manager deployment, execute the command below, replacing the fields for the remote cluster's FQDN and IP. Make sure to update the deployment on both the primary and disaster recovery clusters.
