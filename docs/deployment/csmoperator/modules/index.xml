@@ -367,12 +367,27 @@ To enable reporting of trace data with &lt;a href=&#34;https://zipkin.io/&#34;&g
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt;  If using a single Kubernetes cluster in a stretched configuration, there will be only one cluster. The source cluster is also the target cluster.&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;(Optional)&lt;/em&gt; If CSM Replication is being deployed using two clusters in an environment where the DNS is not configured, and the cluster API endpoints are
+FQDNs, it is necessary to add the &lt;code&gt;&amp;lt;FQDN&amp;gt;:&amp;lt;IP&amp;gt;&lt;/code&gt; mapping in the /etc/hosts file in order to resolve queries to the remote API server.
+This change will need to be made to the /etc/hosts file on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The bastion node(s) (or wherever &lt;code&gt;repctl&lt;/code&gt; is used).&lt;/li&gt;
+&lt;li&gt;Either the CSM Operator Deployment or ClusterServiceVersion custom resource if using an Operator Lifecycle Manager (such as with an OperatorHub install).&lt;/li&gt;
+&lt;li&gt;Both dell-replication-controller-manager deployments (covered in &lt;a href=&#34;#configuration-steps&#34;&gt;Configuration Steps&lt;/a&gt; below).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Update the ClusterServiceVersion before continuing. Execute the command below, replacing the fields for the remote cluster&amp;rsquo;s FQDN and IP.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch clusterserviceversions.operators.coreos.com -n &amp;lt;operator-namespace&amp;gt; dell-csm-operator-certified.v1.3.0 &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;json -p&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[{&amp;#34;op&amp;#34;: &amp;#34;add&amp;#34;, &amp;#34;path&amp;#34;: &amp;#34;/spec/install/spec/deployments/0/spec/template/spec/hostAliases&amp;#34;, &amp;#34;value&amp;#34;: [{&amp;#34;ip&amp;#34;:&amp;#34;&amp;lt;remote-IP&amp;gt;&amp;#34;,&amp;#34;hostnames&amp;#34;:[&amp;#34;&amp;lt;remote-FQDN&amp;gt;&amp;#34;]}]}]&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;cloning-the-github-repository-and-building-repctl&#34;&gt;Cloning the GitHub Repository and Building repctl&lt;/h3&gt;
 &lt;p&gt;The &lt;a href=&#34;https://github.com/dell/csm-replication.git&#34;&gt;csm-replication&lt;/a&gt; GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone -b v1.6.0 https://github.com/dell/csm-replication.git
-cd csm-replication/repctl
-make build
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Alternately, you can download a pre-built repctl binary from our &lt;a href=&#34;https://github.com/dell/csm-replication/releases&#34;&gt;Releases&lt;/a&gt; page.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.6.0 https://github.com/dell/csm-replication.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csm-replication/repctl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make build
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternately, you can download a pre-built repctl binary from our &lt;a href=&#34;https://github.com/dell/csm-replication/releases&#34;&gt;Releases&lt;/a&gt; page.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://github.com/dell/csm-replication/releases/download/v1.6.0/repctl-linux-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv repctl-linux-amd64 repctl
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod +x repctl
@@ -409,6 +424,12 @@ make build
 &lt;li&gt;
 &lt;p&gt;Install the CSI driver for your chosen storage platform on the source cluster according to the instructions for &lt;a href=&#34;../../../csmoperator/drivers/#installing-csi-driver-via-operator&#34;&gt;installing the drivers using CSM Operator&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;(Optional)&lt;/em&gt; If CSM Replication is deployed using two clusters in an environment where the DNS is not configured, it is necessary to update the dell-replication-controller-manager Kubernetes deployment to map the API endpoint FQDN to an IP address by adding the &lt;code&gt;hostAliases&lt;/code&gt; field and associated FQDN:IP mappings.&lt;/p&gt;
+&lt;p&gt;To update the dell-replication-controller-manager deployment, execute the command below, replacing the fields for the remote cluster&amp;rsquo;s FQDN and IP. Make sure to update the deployment on both the primary and disaster recovery clusters.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch deployment -n dell-replication-controller dell-replication-controller-manager &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;-p &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;spec&amp;#34;:{&amp;#34;template&amp;#34;:{&amp;#34;spec&amp;#34;:{&amp;#34;hostAliases&amp;#34;:[{&amp;#34;hostnames&amp;#34;:[&amp;#34;&amp;lt;remote-FQDN&amp;gt;&amp;#34;],&amp;#34;ip&amp;#34;:&amp;#34;&amp;lt;remote-IP&amp;gt;&amp;#34;}]}}}}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>
