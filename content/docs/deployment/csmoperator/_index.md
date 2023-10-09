@@ -66,8 +66,23 @@ The installation process involves the creation of a `Subscription` object either
 git clone -b v1.3.0 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
-4. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
-5. Run `bash scripts/install.sh` to install the operator.
+4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
+5. _(Optional)_ If **CSM Replication** is planned for use and will be deployed using two clusters in an environment where the DNS is not configured, and cluster API endpoints are FQDNs, in order to resolve queries to remote API endpoints, it is necessary to edit the `deploy/operator.yaml` file and add the `hostAliases` field and associated `<FQDN>:<IP>` mappings to the CSM Operator Controller Manager Deployment under `spec.template.spec`. More information on host aliases can be found, [here](https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/).
+    ```yaml
+    # example config
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: dell-csm-operator-controller-manager
+    spec:
+      template:
+        spec:
+          hostAliases:
+          - hostnames:
+            - "remote.FQDN"
+            ip: "255.255.255.1"
+    ```
+6. Run `bash scripts/install.sh` to install the operator.
 
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.
 
