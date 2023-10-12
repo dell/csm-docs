@@ -98,7 +98,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fc636037cec783caa792a1b8d024b4a4.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3b23ed59a67b6e2dbf6e9fe1355d99c6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -120,7 +120,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.fc636037cec783caa792a1b8d024b4a4.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.3b23ed59a67b6e2dbf6e9fe1355d99c6.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -894,12 +894,20 @@
 <td style="text-align:center">yes</td>
 </tr>
 <tr>
-<td><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Mode</a></td>
-<td style="text-align:center"><strong>FC/iSCSI:</strong> <br>RWO/<br>RWOP<br> <strong>Raw block/NFS:</strong> <br>RWO/<br>RWX/<br>ROX/<br>RWOP</td>
-<td style="text-align:center">RWO/ROX/RWOP<br><br>RWX (Raw block &amp; NFS only)</td>
-<td style="text-align:center">RWO/ROX/RWOP<br><br>RWX (Raw block &amp; NFS only)</td>
-<td style="text-align:center">RWO/RWX/ROX/<br>RWOP</td>
-<td style="text-align:center">RWO/RWOP<br>(FC/iSCSI)<br>RWO/<br>RWX/<br>ROX/<br>RWOP<br>(RawBlock, NFS)</td>
+<td><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">Access Mode</a> for <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode">volumeMode: Filesystem</a></td>
+<td style="text-align:center">RWO, RWOP<br><br>ROX, RWX <strong>with NFS ONLY</strong></td>
+<td style="text-align:center">RWO, ROX, RWOP<br><br>RWX  <strong>with NFS ONLY</strong></td>
+<td style="text-align:center">RWO, ROX, RWOP<br><br>RWX  <strong>with NFS ONLY</strong></td>
+<td style="text-align:center">RWO, RWX, ROX, RWOP</td>
+<td style="text-align:center">RWO, RWOP<br><br>ROX, RWX <strong>with NFS ONLY</strong></td>
+</tr>
+<tr>
+<td>Access Mode for <code>volumeMode: Block</code></td>
+<td style="text-align:center">RWO, RWX, ROX, RWOP</td>
+<td style="text-align:center">RWO, RWX, ROX, RWOP</td>
+<td style="text-align:center">RWO, RWX, ROX, RWOP</td>
+<td style="text-align:center">Not Supported</td>
+<td style="text-align:center">RWO, RWX, ROX, RWOP</td>
 </tr>
 <tr>
 <td>CSI Volume Cloning</td>
@@ -1000,7 +1008,7 @@
 
 
 <blockquote>
-<p>Note:  To connect to a PowerFlex 4.5 array, the SDC image will need to be changed to dellemc/sdc:4.5.</p>
+<p>Note: To connect to a PowerFlex 4.5 array, the SDC image will need to be changed to dellemc/sdc:4.5.</p>
 <ul>
 <li>If using helm to install, you will need to make this change in your values.yaml file. See <a href="https://dell.github.io/csm-docs/docs/csidriver/installation/helm/powerflex/">helm install documentation</a> for details.</li>
 <li>If using CSM-Operator to install, you will need to make this change in your samples file. See <a href="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powerflex/">operator install documentation</a> for details.</li>
@@ -1058,7 +1066,7 @@
 </tr>
 <tr>
 <td>NFS</td>
-<td style="text-align:center">yes</td>
+<td style="text-align:center">yes - SDNAS only (not eNAS)</td>
 <td style="text-align:center">yes</td>
 <td style="text-align:center">yes</td>
 <td style="text-align:center">yes</td>
