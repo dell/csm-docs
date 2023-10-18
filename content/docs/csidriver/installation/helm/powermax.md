@@ -106,7 +106,7 @@ Set up the environment as follows:
 
 - Requires VMware vCenter management software to manage all ESX/ESXis where the cluster is hosted.
 
-- Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
+- Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted.
 
 - Add initiators from all ESX/ESXis to a host(initiator group) where the cluster is hosted.
 
@@ -117,6 +117,7 @@ Set up the environment as follows:
     echo -n "mypassword" | base64
     ```
   where *myusername* and *mypassword* are credentials for a user with vCenter privileges.
+  If replication feature is enabled, ensure the secret includes all the PowerMax arrays involved in replication.
 
 Create the secret by running the below command, 
 ```bash
