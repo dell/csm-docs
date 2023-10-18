@@ -129,6 +129,7 @@ Example: `samples/secret.yaml` for PowerFlex storage system v4.0.x
  *NOTE: To use multiple arrays, copy and paste section above for each array. Make sure isDefault is set to true for only one array.* 
 
 If replication feature is enabled, ensure the secret includes all the PowerFlex arrays involved in replication.
+
 After editing the file, run the below command to create a secret called `vxflexos-config`. This assumes `vxflexos` is release name, but it can be modified during [install](../#install-the-driver):
     
   ```bash

@@ -216,8 +216,6 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    echo -n "mychapsecret" | base64
 
    ```
-   If replication feature is enabled, ensure the secret includes all the PowerMax arrays involved in replication.
-   
    Run the `kubectl create -f powermax-creds.yaml` command to create the secret.
 3. Create a configmap using sample [here](https://github.com/dell/csm-operator/tree/master/samples/csireverseproxy). Fill in the appropriate values for driver configuration.
    Example: config.yaml
