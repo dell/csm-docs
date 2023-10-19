@@ -7,17 +7,16 @@ description: Release notes for Unity XT CSI driver
 
 
 
+
 ### New Features/Changes
 
-- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
-- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
-- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
-- [#891 - [FEATURE]: Enhancing Unity XT driver to handle API requests after the sessionIdleTimeOut in STIG mode](https://github.com/dell/csm/issues/891)
+- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
+- [#1012 - [FEATURE]: CSM 1.9 release specific changes](https://github.com/dell/csm/issues/1012)
 
 ### Fixed Issues
 
-- [#849 - [BUG]: CSI driver does not verify iSCSI initiators on the array correctly](https://github.com/dell/csm/issues/849)
-- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
+- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
 
 ### Known Issues
 

@@ -7,17 +7,16 @@ description: Release notes for PowerFlex CSI driver
 
 
 
+
 ### New Features/Changes
 
-- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
-- [#763 - [FEATURE]: CSI-PowerFlex 4.0 NFS support](https://github.com/dell/csm/issues/763)
-- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
-- [#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits](https://github.com/dell/csm/issues/878)
-- [#885 - [FEATURE]: SDC 3.6.1 support](https://github.com/dell/csm/issues/885)
+- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
+- [#1012 - [FEATURE]: CSM 1.9 release specific changes](https://github.com/dell/csm/issues/1012)
 
 ### Fixed Issues
 
-- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
+- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
 
 ### Known Issues
 
