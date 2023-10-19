@@ -178,7 +178,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    - In order to enable authorization, there should be an authorization proxy server already installed.
    - If you are using a custom image, check the *version* and *driverRepository* fields in *my-isilon-setting.yaml* to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: <driverRepository>/csi-isilon:<version>
 
-6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters.
+6. Edit following parameters in samples/secret/secret.yaml file and update/add connection/authentication information for one or more PowerScale clusters. If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication.
 
    | Parameter | Description | Required | Default |
    | --------- | ----------- | -------- |-------- |

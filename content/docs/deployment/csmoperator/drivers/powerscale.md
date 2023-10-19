@@ -80,7 +80,11 @@ kubectl get csm --all-namespaces
            endpointPort: "8080"
       ```
 
-   Replace the values for the given keys as per your environment. After creating the secret.yaml, the following command can be used to create the secret,
+   Replace the values for the given keys as per your environment.
+
+   If replication feature is enabled, ensure the secret includes all the PowerScale clusters involved in replication.
+
+   After creating the secret.yaml, the following command can be used to create the secret,
 
    ```bash
    kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml
