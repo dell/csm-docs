@@ -7,18 +7,18 @@ description: Release notes for PowerScale CSI driver
 ## Release Notes - CSI Driver for PowerScale v2.8.0
 
 
+
 ### New Features/Changes
 
-- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
-- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
-- [#950 - [FEATURE]: PowerScale 9.5.0.4 support](https://github.com/dell/csm/issues/950)
-- [#967 - [FEATURE]: SLES15 SP4 support in csi powerscale](https://github.com/dell/csm/issues/967)
-- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
+- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
+- [#1012 - [FEATURE]: CSM 1.9 release specific changes](https://github.com/dell/csm/issues/1012)
 
 ### Fixed Issues
 
-- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
-- [#487 - [BUG]: Powerscale CSI driver RO PVC-from-snapshot wrong zone](https://github.com/dell/csm/issues/487)
+- [#999 - [BUG]: Volume health fails because it looks to a wrong path](https://github.com/dell/csm/issues/999)
+- [#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator](https://github.com/dell/csm/issues/990)
+- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
 
 ### Known Issues
 
