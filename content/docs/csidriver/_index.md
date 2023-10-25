@@ -12,16 +12,12 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 
 ## Features and capabilities
 
-### Supported Operating Systems/Container Orchestrator Platforms
+### Supported Container Orchestrator Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
 | Kubernetes    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27  | 1.25, 1.26, 1.27 |
-| RHEL          |     7.x,8.x      |     7.x,8.x         |     7.x,8.x      |     7.x,8.x       |     7.x,8.x      |
-| Ubuntu        |       20.04      |       20.04         |  20.04           | 20.04, 22.04      |        20.04     |
-| CentOS        |     7.8, 7.9     |      7.8, 7.9       |     7.9          |      7.8, 7.9     |     7.8, 7.9     |
-| SLES          |        15SP4     |        15SP4        |       15SP4      |         15SP4     |       15SP4      |
 | Red Hat OpenShift | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.12, 4.13, 4.13 EUS |
 | Mirantis Kubernetes Engine | 3.6.x |     3.6.x         |       3.6.x      | 3.5.x, 3.6.x      |        3.6.x     |
 | Google Anthos |        1.15      |          1.15       |        no        |         1.15      |        1.15      |
@@ -29,7 +25,12 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Rancher Kubernetes Engine | 1.4.1|          1.4.7      |        1.4.8     |         1.4.7     |      1.4.5       |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  | yes  |   yes      |        yes        |      yes         |
 | Kubernetes K3s Engine on Debian OS |     no    |  no   |      1.26, 1.27  |        no         |        no        |
+| OS dependencies | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | RHEL 7.x,8.x<br>Ubuntu 20.04<br>SLES 15SP4 |    iscsi-initiator-utils<br>multipathd<br>nfs-utils | nfs-utils | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
 {{</table>}}
+
+> Note on OS dependencies :
+> * The required packages are only for needed protocol (e.g. if NVMe isn't the storage access protocol then you nvme-cli is not needed).
+> * Internal testing is done for RHEL and SLES only, to confirm another OS is fully compatible, all [cert-csi tests](installation/test/certcsi) must pass successfully
 
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
