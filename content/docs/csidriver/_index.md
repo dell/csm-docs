@@ -25,12 +25,13 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Rancher Kubernetes Engine | 1.4.1|          1.4.7      |        1.4.8     |         1.4.7     |      1.4.5       |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  | yes  |   yes      |        yes        |      yes         |
 | Kubernetes K3s Engine on Debian OS |     no    |  no   |      1.26, 1.27  |        no         |        no        |
-| OS dependencies | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | RHEL 7.x,8.x<br>Ubuntu 20.04<br>SLES 15SP4 |    iscsi-initiator-utils<br>multipathd<br>nfs-utils | nfs-utils | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
+| OS dependencies | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | - |    iscsi-initiator-utils<br>multipathd<br>nfs-utils | nfs-utils | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
 {{</table>}}
 
-> Note on OS dependencies :
-> * The required packages are only for needed protocol (e.g. if NVMe isn't the storage access protocol then you nvme-cli is not needed).
-> * Internal testing is done for RHEL and SLES only, to confirm another OS is fully compatible, all [cert-csi tests](installation/test/certcsi) must pass successfully
+> Notes:
+> * The required OS packages are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required).
+> * Internal testing is done for RHEL and SLES only, to confirm another OS is fully compatible, all [cert-csi tests](installation/test/certcsi) must pass successfully.
+> * Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage System OS level support matrices.
 
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
