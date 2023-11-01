@@ -29,9 +29,8 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{</table>}}
 
 > Notes:
-> * The required OS packages are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required).
-> * Internal testing is done for RHEL and SLES only, to confirm another OS is fully compatible, all [cert-csi tests](installation/test/certcsi) must pass successfully.
-> * Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage System OS level support matrices.
+> * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required).
+> * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 
 ### CSI Driver Capabilities
 {{<table "table table-striped table-bordered table-sm">}}
