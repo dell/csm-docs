@@ -973,14 +973,7 @@ To apply new values in the secret (e.g., to update the client certificate), the 
       <description>
         
         
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.&lt;/p&gt;
+        &lt;p&gt;Container Storage Modules (CSM) for Authorization is designed as a service mesh solution and consists of many internal components that work together in concert to achieve its overall functionality.&lt;/p&gt;
 &lt;p&gt;This document provides an overview of the major components, including how they fit together and pointers to implementation details.&lt;/p&gt;
 &lt;p&gt;If you are a developer who is new to CSM for Authorization and want to build a mental map of how it works, you&amp;rsquo;re in the right place.&lt;/p&gt;
 &lt;h2 id=&#34;terminology&#34;&gt;Terminology&lt;/h2&gt;
@@ -6974,14 +6967,7 @@ The ConfigMap to edit will have this pattern: &lt;storage&gt;-config-params (e.g
       <description>
         
         
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;!--
+        &lt;!--
 Copyright (c) 2020-2023 Dell Inc., or its subsidiaries. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
