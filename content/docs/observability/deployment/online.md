@@ -6,10 +6,6 @@ description: >
   Dell Container Storage Modules (CSM) for Observability Installer
 ---
 
-{{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
-{{% /pageinfo %}}
-
 <!--
 Copyright (c) 2020-2023 Dell Inc., or its subsidiaries. All Rights Reserved.
 
