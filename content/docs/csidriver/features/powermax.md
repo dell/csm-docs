@@ -5,8 +5,6 @@ weight: 1
 Description: Code features for PowerMax Driver
 ---
 
-{{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9 (Driver Version 2.9.0). It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
-
 ## Multi Unisphere Support 
 
 Starting with v1.7, the CSI PowerMax driver can communicate with multiple Unisphere for PowerMax servers to manage multiple PowerMax arrays.
