@@ -8,6 +8,17 @@ description: >
 
 {{% pageinfo color="primary" %}}
 The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use [CSM Operator](../../../deployment/csmoperator) going forward.
+
+Please follow the steps below to migrate from Dell CSI Operator to CSM Operator
+* Step1: Backup the CRD to save the settings used
+* Step2: Map and update the settings in CRD in step1 to the relevant CRD in CSM Operator
+* Step3: Keep the secret and namespace for the driver
+* Step4: Keep the Storage Class and Volume Snapshot Class
+* Step5: Uninstall the CRD from the CSI Operator
+* Step6: Uninstall the CSI Operator itself
+* Step7: Install the CSM Operator
+* Step8: Install the CRD updated in Step 2
+
 {{% /pageinfo %}}
 
 The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
