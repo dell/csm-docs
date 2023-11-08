@@ -7,12 +7,19 @@ description: Release notes for PowerScale CSI driver
 ## Release Notes - CSI Driver for PowerScale v2.9.0
 
 
+
 ### New Features/Changes
 
-- [#905 - [FEATURE]: add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
+- [#1012 - [FEATURE]: CSM 1.9 release specific changes](https://github.com/dell/csm/issues/1012)
+- [#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM](https://github.com/dell/csm/issues/1031)
 
 ### Fixed Issues
 
+- [#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator](https://github.com/dell/csm/issues/990)
+- [#999 - [BUG]: Volume health fails because it looks to a wrong path](https://github.com/dell/csm/issues/999)
+- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
 
 ### Known Issues
 

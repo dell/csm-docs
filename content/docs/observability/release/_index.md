@@ -10,13 +10,15 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
-- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
-- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
+- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
+- [#1012 - [FEATURE]: CSM 1.9 release specific changes](https://github.com/dell/csm/issues/1012)
+- [#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM](https://github.com/dell/csm/issues/1031)
 
 ### Fixed Issues
 
-- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
+- [#1007 - [BUG]: Run each metrics gatherer in a separate goroutine](https://github.com/dell/csm/issues/1007)
 
 ### Known Issues

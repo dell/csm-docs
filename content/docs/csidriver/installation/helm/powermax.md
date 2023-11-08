@@ -4,7 +4,6 @@ linktitle: PowerMax
 description: >
   Installing CSI Driver for PowerMax via Helm
 ---
-{{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9 (Driver Version 2.9.0). It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
 
 CSI Driver for Dell PowerMax can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, see the script [documentation](https://github.com/dell/csi-powermax/tree/master/dell-csi-helm-installer).
 
@@ -233,7 +232,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | Parameter | Description  | Required   | Default  |
 |-----------|--------------|------------|----------|
 | **global**| This section refers to configuration options for both CSI PowerMax Driver and Reverse Proxy | - | - |
-|defaultCredentialsSecret| This secret name refers to:<br> 1. The Unisphere credentials if the driver is installed without proxy or with proxy in Linked mode.<br>2. The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>3. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
+|defaultCredentialsSecret| This secret name refers to:<br> 1 The proxy credentials if the driver is installed with proxy in StandAlone mode.<br>2. The default Unisphere credentials if credentialsSecret is not specified for a management server.| Yes | powermax-creds |
 | storageArrays| This section refers to the list of arrays managed by the driver and Reverse Proxy in StandAlone mode.| - | - |
 | storageArrayId | This refers to PowerMax Symmetrix ID.| Yes | 000000000001|
 | endpoint | This refers to the URL of the Unisphere server managing _storageArrayId_. If authorization is enabled, endpoint should be the HTTPS localhost endpoint that the authorization sidecar will listen on| Yes if Reverse Proxy mode is _StandAlone_ | https://primary-1.unisphe.re:8443 |
@@ -287,7 +286,6 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | tlsSecret | This refers to the TLS secret of the Reverse Proxy Server.| Yes | csirevproxy-tls-secret |
 | deployAsSidecar | If set to _true_, the Reverse Proxy is installed as a sidecar to the driver's controller pod otherwise it is installed as a separate deployment.| Yes | "True" |
 | port  | Specify the port number that is used by the NodePort service created by the CSI PowerMax Reverse Proxy installation| Yes | 2222 |
-| mode | This refers to the installation mode of Reverse Proxy. It can be set to:<br> 1. _Linked_: In this mode, the Reverse Proxy communicates with a primary or a backup Unisphere managing the same set of arrays.<br>2. _StandAlone_: In this mode, the Reverse Proxy communicates with multiple arrays managed by different Unispheres.| Yes | "StandAlone" |
 | **certManager** | Auto-create TLS certificate for csi-reverseproxy | - | - |
 | selfSignedCert | Set selfSignedCert to use a self-signed certificate | No | true |
 | certificateFile | certificateFile has tls.key content in encoded format | No | tls.crt.encoded64 |
@@ -347,44 +345,7 @@ A wide set of annotated storage class manifests has been provided in the `sample
 Starting with CSI PowerMax v1.7.0, `dell-csi-helm-installer` will not create any Volume Snapshot Class during the driver installation. There is a sample Volume Snapshot Class manifest present in the _samples/volumesnapshotclass_ folder. Please use this sample to create a new Volume Snapshot Class to create Volume Snapshots.
 
 ## Sample values file
-The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in various modes
-
-### CSI PowerMax driver with Proxy in Linked mode
-In this mode, the CSI PowerMax ReverseProxy acts as a `passthrough` for the RESTAPI calls and only provides limited functionality
-such as rate limiting, backup Unisphere server. The CSI PowerMax driver is still responsible for the authentication with the Unisphere server.
-
-The first endpoint in the list of management servers is the primary Unisphere server and if you provide a second endpoint, then
-it will be considered as the backup Unisphere's endpoint.
-
-```yaml
-global:
-  defaultCredentialsSecret: powermax-creds
-  storageArrays:
-    - storageArrayId: "000000000001"
-    - storageArrayId: "000000000002"
-  managementServers:
-    - endpoint: https://primary-unisphere:8443
-      skipCertificateValidation: false
-      certSecret: primary-cert
-      limits:
-        maxActiveRead: 5
-        maxActiveWrite: 4
-        maxOutStandingRead: 50
-        maxOutStandingWrite: 50
-    - endpoint: https://backup-unisphere:8443 
-
-# "csireverseproxy" refers to the subchart csireverseproxy
-csireverseproxy:
-  # Set enabled to true if you want to use proxy
-  image: dellemc/csipowermax-reverseproxy:v2.4.0
-  tlsSecret: csirevproxy-tls-secret
-  deployAsSidecar: true
-  port: 2222
-  mode: Linked
-```
-
->Note: Since the driver is still responsible for authentication when used with Proxy in `Linked` mode, the credentials for both
-> primary and backup Unisphere need to be the same.
+The following sections have useful snippets from `values.yaml` file which provides more information on how to configure the CSI PowerMax driver along with CSI PowerMax ReverseProxy in StandAlone mode.
 
 ### CSI PowerMax driver with Proxy in StandAlone mode
 This is the most advanced configuration which provides you with the capability to connect to Multiple Unisphere servers.

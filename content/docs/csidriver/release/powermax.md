@@ -5,27 +5,25 @@ description: Release notes for PowerMax CSI driver
 
 ## Release Notes - CSI PowerMax v2.8.0
 
-{{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
-
 > Note: Starting from CSI v2.4.0, Only Unisphere 10.0 REST endpoints are supported. It is mandatory that Unisphere should be updated to 10.0. Please find the instructions [here.](https://dl.dell.com/content/manual34878027-dell-unisphere-for-powermax-10-0-0-installation-guide.pdf?language=en-us&ps=true)
 
 >Note: File Replication for PowerMax is currently not supported 
 
 
 
+
 ### New Features/Changes
 
-- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
-- [#861 - [FEATURE]: CSM for PowerMax file support ](https://github.com/dell/csm/issues/861)
-- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
-- [#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts](https://github.com/dell/csm/issues/877)
-- [#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits](https://github.com/dell/csm/issues/878)
-- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
-- [#937 - [FEATURE]: Google Anthos 1.15 support  for PowerMax](https://github.com/dell/csm/issues/937)
+- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
+- [#991 - [FEATURE]:Remove linked proxy mode for PowerMax](https://github.com/dell/csm/issues/991)
+- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
+- [#1012 - [FEATURE]: CSM 1.9 release specific changes](https://github.com/dell/csm/issues/1012)
+- [#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM](https://github.com/dell/csm/issues/1031)
 
 ### Fixed Issues
 
-- [#916 - [BUG]: Remove references to deprecated io/ioutil package](https://github.com/dell/csm/issues/916)
+- [#983 - [BUG]: storageCapacity can be set in unsupported CSI Powermax with CSM Operator](https://github.com/dell/csm/issues/983)
+- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
 
 ### Known Issues
 
