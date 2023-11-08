@@ -92,13 +92,13 @@ Optional Params:
 ### Running Individual Suites
 #### Volume/PVC Creation
 
-#### Workflow
+##### Workflow
 1. Creates namespace `functional-test` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
 Otherwise, the Persistent Volume Claims could be `Pending` but the suite will succeed.
 
-> Note: Thie suite does not cleanup resources.
+> Note: This suite does not cleanup resources.
 
 To run volume or PVC creation test suite, run the command:
 ```bash
