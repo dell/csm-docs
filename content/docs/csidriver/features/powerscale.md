@@ -447,6 +447,17 @@ The user can also set the volume limit for all the nodes in the cluster by speci
 
 >**NOTE:** <br>The default value of `maxIsilonVolumesPerNode` is 0. <br>If `maxIsilonVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified to `maxIsilonVolumesPerNode` attribute is applicable to all the nodes in the cluster for which node label `max-isilon-volumes-per-node` is not set.
 
+## Storage Capacity Tracking
+
+CSI for PowerScale driver version 2.8.0 and above supports Storage Capacity Tracking.
+
+This feature helps the scheduler to make more informed choices about where to schedule pods which depends on unbound volumes with late binding (aka "wait for first consumer"). Pods will be scheduled on a node (satisfying the topology constraints) only if the requested capacity is available on the storage array.
+If such a node is not available, the pods stay in Pending state. This means pods are not scheduled.
+
+Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity. 
+
+The attribute `storageCapacity.enabled` in `values.yaml` can be used to enable/disable the feature during driver installation using helm. This is by default set to true. To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample file provided [here.](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v280.yaml) by editing the `--capacity-poll-interval` argument present in the provisioner sidecar.
+
 ## Node selector in helm template
 
 Now user can define in which worker node, the CSI node pod daemonset can run (just like any other pod in Kubernetes world).For more information, refer to <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector>

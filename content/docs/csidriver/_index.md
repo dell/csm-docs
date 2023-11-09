@@ -17,14 +17,14 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex           | Unity XT         | PowerScale        | PowerStore       |
 |---------------|:----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|
-| Kubernetes    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27  | 1.25, 1.26, 1.27 |
+| Kubernetes    | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27    | 1.26, 1.27, 1.28 | 1.26, 1.27, 1.28  | 1.25, 1.26, 1.27 |
 | Red Hat OpenShift | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.12, 4.12 EUS, 4.13 | 4.12, 4.13, 4.13 EUS |
 | Mirantis Kubernetes Engine | 3.6.x |     3.6.x         |       3.6.x      | 3.5.x, 3.6.x      |        3.6.x     |
 | Google Anthos |        1.15      |          1.15       |        no        |         1.15      |        1.15      |
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI   |
 | Rancher Kubernetes Engine | 1.4.1|          1.4.7      |        1.4.8     |         1.4.7     |      1.4.5       |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  | yes  |   yes      |        yes        |      yes         |
-| Kubernetes K3s Engine on Debian OS |     no    |  no   |      1.26, 1.27  |        no         |        no        |
+| Kubernetes K3s Engine on Debian OS |     no    |  no   |      1.26, 1.27, 1.28  |        no         |        no        |
 | OS dependencies | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | - |    iscsi-initiator-utils<br>multipathd<br>nfs-utils | nfs-utils | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
 {{</table>}}
 
@@ -36,7 +36,7 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 {{<table "table table-striped table-bordered table-sm">}}
 | Features                 | PowerMax | PowerFlex | Unity XT  | PowerScale | PowerStore |
 |--------------------------|:--------:|:---------:|:---------:|:----------:|:----------:|
-| CSI Driver version       | 2.8.0    | 2.8.0     | 2.8.0     | 2.8.0      | 2.8.0      |
+| CSI Driver version       | 2.8.0    | 2.8.0     | 2.9.0     | 2.9.0      | 2.8.0      |
 | Static Provisioning      | yes      | yes       | yes       | yes        | yes        |
 | Dynamic Provisioning     | yes      | yes       | yes       | yes        | yes        |
 | Expand Persistent Volume | yes      | yes       | yes       | yes        | yes        |
