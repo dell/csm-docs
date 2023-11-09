@@ -33,9 +33,6 @@ encryption:
   # pluginName: The name of the provisioner to use for encrypted volumes.
   pluginName: "sec-isilon.dellemc.com"
 
-  # image: Encryption driver image name.
-  image: "dellemc/csm-encryption:v0.3.0"
-
   # logLevel: Log level of the encryption driver.
   # Allowed values: "error", "warning", "info", "debug", "trace".
   logLevel: "error"
