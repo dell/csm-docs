@@ -106,7 +106,7 @@ Given a setup where Kubernetes, a storage system, and the CSM for Authorization 
 
     - Update `authorization.enabled` to `true`.
     
-    - Update `authorization.sidecarProxyImage` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
+    - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
     - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server.
     

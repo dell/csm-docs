@@ -167,15 +167,15 @@ Use the below command to replace or update the secret:
    >Note: To connect to a PowerFlex 4.5 array, edit the powerflexSdc parameter in your values.yaml file to use dellemc/sdc:4.5:  
    >`powerflexSdc: dellemc/sdc:4.5`
 
-8. If you are using a custom image, check the `version` and `driverRepository` fields in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository and driver version. These two fields are spliced together to form the image name, as shown here: `<driverRepository>/csi-vxflexos:v<version>`
+8. If you are using custom images, check the fields under `images` in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository.
 
 9. Look over all the other fields `myvalues.yaml` and fill in/adjust any as needed. All the fields are described here:
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Required | Default |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
 | version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.8.0 |
-| driverRepository | Set to give the repository containing the driver image (used as part of the image name). | Yes | dellemc |
-| powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | dellemc/sdc:3.6.1 |
+| images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
+| images.powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | dellemc/sdc:3.6.1 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
 | logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
 | logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
@@ -217,10 +217,8 @@ Use the below command to replace or update the secret:
 | image | Image for vg snapshotter. | No | " " |
 | **podmon**               | [Podmon](../../../../resiliency/deployment) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
 | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-| image | image for podmon. | No | " " |
 | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
-| sidecarProxyImage | Image for csm-authorization-sidecar. | No | " " |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
 

@@ -42,7 +42,7 @@ kubectl create -f deploy/replicationcrds.all.yaml
 
 ## Installing Driver With sidecars 
 
-Dell-csi-migrator and dell-csi-node-rescanner sidecars are installed alongside with the driver, the user can enable it in the driver's myvalues.yaml file.
+Dell-csi-migrator and dell-csi-node-rescanner sidecars are installed alongside with the driver, the user can enable it in the driver's `myvalues.yaml` file.
 
 #### Sample:
 
@@ -55,10 +55,6 @@ Dell-csi-migrator and dell-csi-node-rescanner sidecars are installed alongside w
 # Default value: "false" 
 migration: 
   enabled: true
-  # Change this to use any specific version of the dell-csi-migrator sidecar 
-  # Default value: None 
-  nodeRescanSidecarImage: dellemc/dell-csi-node-rescanner:v1.0.0 
-  image: dellemc/dell-csi-migrator:v1.1.0 
   # migrationPrefix: Determine if migration is enabled 
   # Default value: "migration.storage.dell.com" 
   # Examples: "migration.storage.dell.com" 
