@@ -57,6 +57,8 @@ spec:
           value: debug
 
     sideCars:
+      - name: provisioner
+        args: ["--volume-name-prefix=csivol"]
       # health monitor is disabled by default, refer to driver documentation before enabling it
       - name: external-health-monitor
         enabled: $HEALTH_MONITOR_ENABLED
