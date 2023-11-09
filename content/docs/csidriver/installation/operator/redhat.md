@@ -7,7 +7,7 @@ description: >
 ## CR Sample Files
 
 {{<table "table table-striped table-bordered table-sm">}}
-|            |    CSI     |    CSM     |
+|            |    CSI Operator     |    CSM Operator     |
 |------------|:----------:|:----------:|
 | PowerScale |    [isilon_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/isilon_v270_k8s_127.yaml)    |     [storage_csm_powerscale_v280.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerscale_v280.yaml)       |
 | PowerMax   |    [powermax_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v270_k8s_127.yaml)    |     [storage_csm_powermax_v280.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v280.yaml)       |
@@ -19,7 +19,7 @@ description: >
 ## OpenShift Web Console Migration Steps
 
 1. Save the CR yaml file of the current CSI driver to preserve the settings (for use in step 6). Use the following commands in your cluster to get the CR:
-  ```bash
+  ```
       kubectl -n <namespace> get <CRD_kind>
       kubectl -n <namespace> get <CRD_kind>/<CR_name> -o yaml
   ```
