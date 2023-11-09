@@ -91,14 +91,13 @@ Optional Params:
 
 ### Running Individual Suites
 #### Volume/PVC Creation
-
 ##### Workflow
 1. Creates namespace `functional-test` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
-Otherwise, the Persistent Volume Claims could be `Pending` but the suite will succeed.
+Otherwise, the Persistent Volume Claims could be in a non-Bound status but the suite will succeed.
 
-> Note: This suite does not cleanup resources.
+> Note: This suite does not delete resources. Run the [Volume/PVC Deletion](#Volume/PVC-Deletion) suite to delete the resources.
 
 To run volume or PVC creation test suite, run the command:
 ```bash
@@ -110,7 +109,25 @@ Optional Params:
 --block : To create raw block volumes
 ```
 
-#### Provisioning/Pod creation
+#### Volume/PVC Deletion
+##### Workflow
+1. Deletes the specified Persistent Volume Claim in the specified Namespace.
+
+To run volume delete test suite, run the command:
+```bash
+cert-csi functional-test volume-deletion --pvc-name <pvc-name> --pvc-namespace <namespace>
+--pvc-name value : PVC name to delete
+--pvc-namespace : PVC namespace where PVC is present
+```
+
+#### Pod Provisioning
+##### Workflow
+1. Creates namespace `functional-test` where resources will be created.
+2. Creates Persistent Volume Claims.
+3. Creates Pods to consume the Persistent Volume Claims.
+4. Waits for Pods to be in the Ready state.
+
+> Note: This suite does not delete resources. Run the [Volume/PVC Deletion](#Pod-Deletion) suite to delete the resources.
 
 To run volume provisioning or pod creation test suite, run the command:
 ```bash
@@ -123,20 +140,15 @@ Optional Params:
 --vol-access-mode: To set volume access modes 
 ```
 
-#### Running Volume Deletion suite
-
-To run volume delete test suite, run the command:
-```bash
-cert-csi functional-test volume-deletion
---pvc-name value : PVC name to delete
---pvc-namespace : PVC namespace where PVC is present
-```
-
-#### Running Pod Deletion suite
+#### Pod Deletion
+##### Workflow
+1. Deletes the specified Pod in the specified Namespace.
+2. Deletes the Persistent Volume Claim(s) consumed by the Pod.
+3. Waits for the volume attachments associated with the Persistent Volume(s) to be removed.
 
 To run pod deletion test suite, run the command:
 ```bash
-cert-csi functional-test pod-deletion
+cert-csi functional-test pod-deletion --pod-name <pod-name> --pod-namespace <namespace>
 --pod-name : Pod name to delete
 --pod-namespace : Pod namespace where pod is present
 ```
