@@ -78,6 +78,8 @@ Follow this procedure to set up PowerPath for Linux:
 - `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
 - Start the PowerPath service using `systemctl start PowerPath`
 
+>Note: Do not install EMC PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
+
 #### Create secret for client-side TLS verification (Optional)
 Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../helm/powermax#certificate-validation-for-unisphere-rest-api-calls).
 
