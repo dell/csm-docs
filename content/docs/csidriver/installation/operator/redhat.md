@@ -24,7 +24,7 @@ description: >
       kubectl -n <namespace> get <CRD_kind>/<CR_name> -o yaml
   ```
   Example for CSI Unity:
-  ```bash
+  ```
       kubectl -n openshift-operators get CSIUnity
       kubectl -n openshift-operators get CSIUnity/test-unity -o yaml
   ```
