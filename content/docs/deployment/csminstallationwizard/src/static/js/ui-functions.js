@@ -423,7 +423,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".storageArrays").hide();
 				$(".managedArrays").show();
 				$(".snapshot-feature").hide();
-				$(".vol-name-prefix").hide();
 				$(".transport-protocol").show();
 				$(".resizer").hide();
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
