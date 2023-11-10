@@ -16,6 +16,18 @@ description: >
 | PowerFlex  |     [vxflex_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/vxflex_v270_k8s_127.yaml)       |      [storage_csm_powerflex_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v290.yaml)      |
 {{</table>}}
 
+## Migration Steps
+
+* Step 1: Backup the CRD to save the settings used
+* Step 2: Map and update the settings in CRD in step1 to the relevant CRD in CSM Operator
+* Step 3: Keep the secret and namespace for the driver
+* Step 4: Keep the Storage Class and Volume Snapshot Class
+* Step 5: Uninstall the CRD from the CSI Operator
+* Step 6: Uninstall the CSI Operator itself
+* Step 7: Install the CSM Operator
+* Step 8: Install the CRD updated in Step 2
+>NOTE: Uninstallation of the driver and the Operator is non-disruptive for mounted volumes. Nonetheless you can not create new volume, snapshot or move a Pod.
+
 ## OpenShift Web Console Migration Steps
 
 1. Save the CR yaml file of the current CSI driver to preserve the settings (for use in step 6). Use the following commands in your cluster to get the CR:
@@ -30,13 +42,18 @@ description: >
   ```
 2. Keep the secret and namespace for the driver, as well as the Storage Classes and Volume Snapshot Classes, intact on the cluster
 3. Delete the CSI driver through the CSI Operator in the OpenShift Web Console
-    - Find the CSI operator under "Operators" -> "Installed Operators"
-    - Select the "Dell CSI Operator" and find your installed CSI driver under "All instances"
+    - Find the CSI operator under *Operators* -> *Installed Operators*
+    - Select the *Dell CSI Operator* and find your installed CSI driver under *All instances*
 4. Uninstall the CSI Operator in the OpenShift Web Console
 5. Install the CSM Operator in the OpenShift Web Console
-    - Search for "Dell" in the OperatorHub
-    - Select "Dell Container Storage Modules" and install
+    - Search for *Dell* in the OperatorHub
+    - Select *Dell Container Storage Modules* and install
 6. Install the CSI driver through the CSM Operator in the OpenShift Web Console
-    - Select "Create instance" under the provided Container Storage Module API
+    - Select *Create instance* under the provided Container Storage Module API
     - Use the CR backup from step 1 to manually map desired settings to the new CSI driver
     - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver
+>NOTE: Uninstallation of the driver and the Operator is non-disruptive for mounted volumes. Nonetheless you can not create new volume, snapshot or move a Pod.
+
+## Testing
+
+To test that the new installation is working, please follow the steps outlined [here](../../test) for your specific driver.
