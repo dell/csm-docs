@@ -78,7 +78,7 @@ storageClasses:
 ### Launching Certification Test Run
 
 After preparing a certification configuration file, you can launch certification by running 
-```bash
+```
 cert-csi certify --cert-config <path-to-config>
 Optional Params:
    --vsc: volume snapshot class, required if you specified snapshot capability
@@ -97,10 +97,10 @@ Optional Params:
 3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
 Otherwise, the Persistent Volume Claims could be in a non-Bound status but the suite will succeed.
 
-> Note: This suite does not delete resources. Run the [Volume/PVC Deletion](#Volume/PVC-Deletion) suite to delete the resources.
+> This suite does not delete resources on success.
 
 To run volume or PVC creation test suite, run the command:
-```bash
+```
 cert-csi functional-test volume-creation --sc <storage class> -n 5
 Optional Params:
 --custom-name : To give custom name for PVC while creating only 1 PVC
@@ -114,7 +114,7 @@ Optional Params:
 1. Deletes the specified Persistent Volume Claim in the specified Namespace.
 
 To run volume delete test suite, run the command:
-```bash
+```
 cert-csi functional-test volume-deletion --pvc-name <pvc-name> --pvc-namespace <namespace>
 --pvc-name value : PVC name to delete
 --pvc-namespace : PVC namespace where PVC is present
@@ -127,10 +127,10 @@ cert-csi functional-test volume-deletion --pvc-name <pvc-name> --pvc-namespace <
 3. Creates Pods to consume the Persistent Volume Claims.
 4. Waits for Pods to be in the Ready state.
 
-> Note: This suite does not delete resources. Run the [Volume/PVC Deletion](#Pod-Deletion) suite to delete the resources.
+> This suite does not delete resources on success.
 
 To run volume provisioning or pod creation test suite, run the command:
-```bash
+```
 cert-csi functional-test provisioning --sc <storage class>
 Optional Params:
 --volumeNumber : number of volumes to attach to each pod 
@@ -147,14 +147,14 @@ Optional Params:
 3. Waits for the volume attachments associated with the Persistent Volume(s) to be removed.
 
 To run pod deletion test suite, run the command:
-```bash
+```
 cert-csi functional-test pod-deletion --pod-name <pod-name> --pod-namespace <namespace>
 --pod-name : Pod name to delete
 --pod-namespace : Pod namespace where pod is present
 ```
 
 #### Running Cloned Volume deletion suite
-
+##### todo
 To run cloned volume deletion test suite, run the command:
 ```bash
 cert-csi functional-test clone-volume-deletion
@@ -162,6 +162,18 @@ cert-csi functional-test clone-volume-deletion
 ```
 
 #### Multi Attach Volume Tests
+##### Workflow
+1. Creates namespace `functional-test` where resources will be created.
+2. Creates Persistent Volume Claim.
+3. Creates Pod to consume the Persistent Volume Claim.
+4. Waits for Pod to be in the Ready state.
+5. Creates additional Pods to consume the same Persistent Volume Claim.
+6. Waits for Pods to be in the Ready state.
+7. Writes data to volume on the original Pod.
+8. Verifies that the checksum of the data on the original Pod matches the checksums of the data on the additional Pods.
+
+> This suite does not delete resources on success.\
+> This suite requires an NFS storage class or the `--block` argument.
 
 To run multi-attach volume test suite, run the command:
 ```bash
@@ -173,19 +185,63 @@ cert-csi functional-test multi-attach-vol --sc <storage-class>
 #### Ephemeral volumes suite
 
 To run ephemeral volume test suite, run the command:
-```bash
-
+```
 cert-csi functional-test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
 --pods : Number of pods to create 
 --pod-name : To create pods with custom name
 --attr : CSI volume attributes file name
---fs-type: FS Type can be specified
-
-Sample ephemeral-config.properties (key/value pair)
-arrayId=arr1
-protocol=iSCSI
-size=5Gi
+--fs-type: FS Type can be specified (ext4, xfs, etc. Default determined by driver.)
 ```
+Sample ephemeral-config.properties (key/value pair)
+
+   {{< tabs name="volume-attributes-examples" >}}
+   {{% tab name="CSI PowerFlex" %}}
+
+   ```bash
+   volumeName: "my-ephemeral-vol"
+   size: "10Gi"
+   storagepool: "sample"
+   systemID: "sample"
+   ```
+
+   {{% /tab %}}
+   {{% tab name="CSI PowerScale" %}}
+
+   ```bash
+   size: "10Gi"
+   ClusterName: "sample"
+   AccessZone: "sample"
+   IsiPath: "/ifs/data/sample"
+   IsiVolumePathPermissions: "0777"
+   AzServiceIP: "192.168.2.1"
+   ```
+
+   {{% /tab %}}
+   {{% tab name="CSI PowerStore" %}}
+
+   ```bash
+   size: "10Gi"
+   arrayID: "sample"
+   nasName: "sample"
+   nfsAcls: "0777"
+   ```
+
+   {{% /tab %}}
+   {{% tab name="CSI Unity" %}}
+
+   ```bash
+   size: "10Gi"
+   arrayID: "sample"
+   protocol: iSCSI
+   thinProvisioned: "true"
+   isDataReductionEnabled: "false"
+   tieringPolicy: "1"
+   storagePool: pool_2
+   nasName: "sample"
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
 
 #### Storage Capacity Tracking Suite
 
