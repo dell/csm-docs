@@ -32,9 +32,13 @@ description: >
 3. Keep the secret and namespace for the driver intact on the cluster
 4. Keep the Storage Classes and Volume Snapshot Classes intact on the cluster
 5. Uninstall the CR from the CSI Operator
+    - Instructions can be found [here](../../../../csidriver/uninstall/#uninstall-a-csi-driver-installed-via-dell-csi-operator)
 6. Uninstall the CSI Operator itself
+    - Instructions can be found [here](../../../../deployment/csmoperator/#installation)
 7. Install the CSM Operator
+    - Instructions can be found [here](../../../../deployment/csmoperator/#uninstall)
 8. Install the CR updated in step 2
+    - Instructions can be found [here](../)
 >NOTE: Uninstallation of the driver and the Operator is non-disruptive for mounted volumes. Nonetheless you can not create new volume, snapshot or move a Pod.
 
 ## OpenShift Web Console Migration Steps
