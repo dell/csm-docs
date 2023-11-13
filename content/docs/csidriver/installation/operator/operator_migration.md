@@ -18,14 +18,23 @@ description: >
 
 ## Migration Steps
 
-* Step 1: Backup the CRD to save the settings used
-* Step 2: Map and update the settings in CRD in step1 to the relevant CRD in CSM Operator
-* Step 3: Keep the secret and namespace for the driver
-* Step 4: Keep the Storage Class and Volume Snapshot Class
-* Step 5: Uninstall the CRD from the CSI Operator
-* Step 6: Uninstall the CSI Operator itself
-* Step 7: Install the CSM Operator
-* Step 8: Install the CRD updated in Step 2
+1. Save the CR yaml file of the current CSI driver to preserve the settings. Use the following commands in your cluster to get the CR:
+  ```
+      kubectl -n <namespace> get <CRD_kind>
+      kubectl -n <namespace> get <CRD_kind>/<CR_name> -o yaml
+  ```
+  Example for CSI Unity:
+  ```
+      kubectl -n openshift-operators get CSIUnity
+      kubectl -n openshift-operators get CSIUnity/test-unity -o yaml
+  ```
+2. Map and update the settings from the CR in step 1 to the relevant CSM Operator CR
+3. Keep the secret and namespace for the driver intact on the cluster
+4. Keep the Storage Classes and Volume Snapshot Classes intact on the cluster
+5. Uninstall the CR from the CSI Operator
+6. Uninstall the CSI Operator itself
+7. Install the CSM Operator
+8. Install the CR updated in step 2
 >NOTE: Uninstallation of the driver and the Operator is non-disruptive for mounted volumes. Nonetheless you can not create new volume, snapshot or move a Pod.
 
 ## OpenShift Web Console Migration Steps
