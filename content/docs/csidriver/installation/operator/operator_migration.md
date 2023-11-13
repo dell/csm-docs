@@ -15,6 +15,7 @@ description: >
 | Unity XT      |    [unity_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/unity_v270_k8s_127.yaml)    |     [storage_csm_unity_v280.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v280.yaml)       |
 | PowerFlex  |     [vxflex_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/vxflex_v270_k8s_127.yaml)       |      [storage_csm_powerflex_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v290.yaml)      |
 {{</table>}}
+>NOTE: Sample files refer to the latest version for each platform. If you do not want to upgrade, please find your preferred version in the linked [csm-operator repo](https://github.com/dell/csm-operator/blob/main/samples).
 
 ## Migration Steps
 
@@ -34,11 +35,11 @@ description: >
 5. Uninstall the CR from the CSI Operator
     - Instructions can be found [here](../../../../csidriver/uninstall/#uninstall-a-csi-driver-installed-via-dell-csi-operator)
 6. Uninstall the CSI Operator itself
-    - Instructions can be found [here](../../../../deployment/csmoperator/#installation)
-7. Install the CSM Operator
     - Instructions can be found [here](../../../../deployment/csmoperator/#uninstall)
+7. Install the CSM Operator
+    - Instructions can be found [here](../../../../deployment/csmoperator/#installation)
 8. Install the CR updated in step 2
-    - Instructions can be found [here](../)
+    - Instructions can be found [here](../#installing-csi-driver-via-operator)
 >NOTE: Uninstallation of the driver and the Operator is non-disruptive for mounted volumes. Nonetheless you can not create new volume, snapshot or move a Pod.
 
 ## OpenShift Web Console Migration Steps
