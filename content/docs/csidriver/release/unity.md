@@ -7,6 +7,7 @@ description: Release notes for Unity XT CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
