@@ -33,6 +33,10 @@ make install-nix
 
 ## Running Cert-CSI
 
+> Log files are located in the `logs` directory in the working directory of cert-csi.\
+> Report files are located in `$HOME/.cert-csi/reports` directory.\
+> Database (SQLite) file for functional test suites is `cert-csi-functional.db` in the working directory of cert-csi.
+
 To get information on how to use the program, you can use built-in help. If you're using a UNIX-like system and enabled _auto-completion feature_ while installing the tool, then you can use shell's built-in auto-completion to navigate through program's subcommands and flags interactively by just pressing TAB.
 
 To run cert-csi, you have to point your environment to a kube cluster. This allows you to receive dynamically formatted suggestions from your cluster.
@@ -89,9 +93,7 @@ Optional Params:
 
 ## Functional Tests
 
-### Running Individual Suites
 #### Volume/PVC Creation
-##### Workflow
 1. Creates namespace `functional-test` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
@@ -110,7 +112,6 @@ Optional Params:
 ```
 
 #### Volume/PVC Deletion
-##### Workflow
 1. Deletes the specified Persistent Volume Claim in the specified Namespace.
 
 To run volume delete test suite, run the command:
@@ -121,7 +122,6 @@ cert-csi functional-test volume-deletion --pvc-name <pvc-name> --pvc-namespace <
 ```
 
 #### Pod Provisioning
-##### Workflow
 1. Creates namespace `functional-test` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. Creates Pods to consume the Persistent Volume Claims.
@@ -141,7 +141,6 @@ Optional Params:
 ```
 
 #### Pod Deletion
-##### Workflow
 1. Deletes the specified Pod in the specified Namespace.
 2. Deletes the Persistent Volume Claim(s) consumed by the Pod.
 3. Waits for the volume attachments associated with the Persistent Volume(s) to be removed.
@@ -162,7 +161,6 @@ cert-csi functional-test clone-volume-deletion
 ```
 
 #### Multi Attach Volume Tests
-##### Workflow
 1. Creates namespace `functional-test` where resources will be created.
 2. Creates Persistent Volume Claim.
 3. Creates Pod to consume the Persistent Volume Claim.
@@ -183,14 +181,22 @@ cert-csi functional-test multi-attach-vol --sc <storage-class>
 ```
 
 #### Ephemeral volumes suite
+1. Creates namespace `functional-test` where resources will be created.
+2. Creates Pods with one ephemeral inline volume each.
+3. Waits for Pods to be in the Ready state.
+4. Writes data to volume on each Pod.
+5. Verifies the checksum of the data.
+
+> This suite does not delete resources on success.
 
 To run ephemeral volume test suite, run the command:
 ```
 cert-csi functional-test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
+--driver : Name of driver (e.g., csi-vxflexos.dellemc.com. Run `kubectl get csidriver` to see installed drivers)
 --pods : Number of pods to create 
 --pod-name : To create pods with custom name
 --attr : CSI volume attributes file name
---fs-type: FS Type can be specified (ext4, xfs, etc. Default determined by driver.)
+--fs-type: FS Type can be specified (ext4, xfs, etc. Default determined by driver)
 ```
 Sample ephemeral-config.properties (key/value pair)
 
@@ -244,13 +250,25 @@ Sample ephemeral-config.properties (key/value pair)
    {{< /tabs >}}
 
 #### Storage Capacity Tracking Suite
+1. Creates namespace `functional-test` where resources will be created.
+2. Creates a duplicate of the provided storge class using prefix `capacity-tracking`.
+3. Waits for the associated CSIStorageCapacity object to be created.
+4. Deletes the duplicate storge class.
+5. Waits for the associated CSIStorageCapacity to be deleted.
+6. Sets the capacity of the CSIStorageCapacity of the provided storage class to zero.
+7. Creates Pod with a volume using the provided storage class.
+8. Verifies that the Pod is in the Pending state.
+9. Waits for storage capacity to be polled by the driver.
+10. Waits for Pod to be Running.
+
+> Storage class must use volume binding mode `WaitForFirstConsumer`.\
+> This suite does not delete resources on success.
 
 To run storage capacity tracking test suite, run the command:
 ```bash
-
-cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace> --pi <poll-interval>
-Optional Params:
+cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace>
 --vs : volume size to be created
+--pi : poll interval for storage provisioner (default: 5m0s)
 ```
 
 ### Other Options
@@ -259,30 +277,19 @@ Optional Params:
 
 To generate tabular report from the database, run the command:
 ```bash
-cert-csi -db <db_path> functional-report -tabular
-Example: cert-csi -db ./test.db functional-report -tabular
+cert-csi -db ./cert-csi-functional.db functional-report -tabular
 ```
-> Note: DB is mandatory parameter
+
+The report will be in the `$HOME/.cert-csi/reports` directory.
 
 #### Generating XML report from DB
 
 To generate XML report from the database, run the command:
 ```bash
-cert-csi -db <db_path> functional-report -xml
-Example: cert-csi -db ./test.db functional-report -xml
+cert-csi -db ./cert-csi-functional.db functional-report -xml
 ```
-> Note: DB is mandatory parameter
 
-#### Including Array configuration file 
-
-```bash
-# Array properties sample (array-config.properties)
-arrayIPs: 192.168.1.44
-name: Unity
-user: root
-password: test-password
-arrayIds: arr-1
-```
+The report will be in the `$HOME/.cert-csi/reports` directory.
 
 ### Screenshots
 
@@ -297,7 +304,7 @@ All Kubernetes end to end tests require that you provide the driver config based
  ```
 
 ### Running kubernetes end-to-end tests
-
+todo
 To run kubernetes end-to-end tests, run the command:
 ```bash
 
