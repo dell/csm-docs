@@ -15,7 +15,7 @@ description: >
 | Unity XT      |    [unity_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/unity_v270_k8s_127.yaml)    |     [storage_csm_unity_v280.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_unity_v280.yaml)       |
 | PowerFlex  |     [vxflex_v270_k8s_127.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/vxflex_v270_k8s_127.yaml)       |      [storage_csm_powerflex_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v290.yaml)      |
 {{</table>}}
->NOTE: Sample files refer to the latest version for each platform. If you do not want to upgrade, please find your preferred version in the linked [csm-operator repo](https://github.com/dell/csm-operator/blob/main/samples).
+>NOTE: Sample files refer to the latest version for each platform. If you do not want to upgrade, please find your preferred version in the [csm-operator repository](https://github.com/dell/csm-operator/blob/main/samples).
 
 ## Migration Steps
 
