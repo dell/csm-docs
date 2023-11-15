@@ -166,6 +166,8 @@ Follow this procedure to set up PowerPath for Linux:
 - `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
 - Start the PowerPath service using `systemctl start PowerPath`
 
+>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
+
 
 ### Auto RDM for vSphere over FC requirements
 
