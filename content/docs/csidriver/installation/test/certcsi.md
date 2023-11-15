@@ -16,7 +16,7 @@ make build
 
 You can also build a docker container image by running this command:
 ```bash
-docker build -t cert-csi . 
+make docker
 ```
 
 If you want to collect csi-driver resource usage metrics, then please provide the namespace where it can be found and install the metric-server using this command (kubectl is required):
