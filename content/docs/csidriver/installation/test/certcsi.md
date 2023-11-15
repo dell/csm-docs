@@ -152,7 +152,7 @@ cert-csi functional-test pod-deletion --pod-name <pod-name> --pod-namespace <nam
 --pod-namespace : Pod namespace where pod is present
 ```
 
-#### Running Cloned Volume deletion suite
+#### Cloned Volume deletion suite
 ##### todo
 To run cloned volume deletion test suite, run the command:
 ```bash
@@ -338,41 +338,81 @@ All performance tests require that you provide a storage class that you want to 
 ... --sc <sc1> --sc <sc2> ...
 ```
 
-### Running Individual Suites 
-#### Running Volume Creation test suite
+#### Volume Creation test suite
+1. Creates the namespace `vcs-test-*` where resources will be created.
+2. Creates Persistent Volume Claims.
+3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
 
 To run volume creation test suite, run the command:
 ```bash
 cert-csi test volume-creation --sc <storage class> -n 25
 ```
 
+Run `cert-csi test volume-creation -h` for more options.
+
 #### Running Provisioning test suite
+1. Creates the namespace `prov-test-*` where resources will be created.
+2. Creates Persistent Volume Claims.
+3. Creates Pods to consume the Persistent Volume Claims.
+4. Waits for Pods to be in the Ready state.
 
 To run volume provisioning test suite, run the command:
 ```bash
 cert-csi test provisioning --sc <storage class> --podNum 1 --volNum 10
 ```
 
+Run `cert-csi test provisioning -h` for more options.
+
 #### Running Scalability test suite
+1. Creates the namespace `scale-test-*` where resources will be created.
+2. Creates a StatefulSet.
+3. Scales up the StatefulSet to the number of replicas.
+4. Scales down the StatefulSet to zero.
 
 To run scalability test suite, run the command:
 ```bash
 cert-csi test scaling --sc <storage class> --replicas 5
 ```
 
+Run `cert-csi test scaling -h` for more options.
+
 #### Running VolumeIO test suite
+1. Creates the namespace `volumeio-test-*` where resources will be created.
+2. Creates n Persistent Volume Claims specified by `chainNumber`.
+3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
+4. For each Persistent Volume Claim, executes the following workflow concurrently specified by `chainLength`:
+   1. Creates a Pod to consume the Persistent Volume Claim.
+   2. Writes data to the volume and verifies the checksum of the data.
+   3. Deletes the Pod.
+   4. Waits for the associated Volume Attachment to be deleted.
 
 To run volumeIO test suite, run the command:
 ```bash
 cert-csi test vio --sc <storage class> --chainNumber 5 --chainLength 20
 ```
 
+Run `cert-csi test vio -h` for more options.
+
 #### Running Snap test suite
+1. Creates the namespace `snap-test-*` where resources will be created.
+2. Creates Persistent Volume Claim.
+3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claim to be bound to Persistent Volumes.
+4. Create Pod to consume the Persistent Volume Claim.
+5. Writes data to the volume.
+6. Deletes the Pod.
+7. Creates a VolumeSnapshot from the Persistent Volume Claim.
+8. Waits for the VolumeSnapshot to be Running.
+9. Creates a new Persistent Volume Claim from the VolumeSnapshot.
+10. Creates a new Pod to consume the new Persistent Volume Claim.
+11. Verifies the checksum of the data.
+
 
 To run volume snapshot test suite, run the command:
 ```bash
 cert-csi test snap --sc <storage class> --vsc <volume snapshot class> 
 ```
+
+Run `cert-csi test snap -h` for more options.
 
 #### Running Multi-attach volume suite
 
