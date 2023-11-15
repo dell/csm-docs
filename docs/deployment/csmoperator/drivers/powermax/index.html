@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/drivers/powermax/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-09-20T19:05:29+05:30" />
+<meta property="article:modified_time" content="2023-11-15T12:02:28+05:30" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2023-09-20T19:05:29+05:30" />
-<meta itemprop="wordCount" content="2934">
+<meta itemprop="dateModified" content="2023-11-15T12:02:28+05:30" />
+<meta itemprop="wordCount" content="2954">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Installing Dell CSI Driver for PowerMax via Dell CSM Operator
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0922c21c75ed096c4d7ed9b8b07ec8e7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7c6b45cad3d21dd24d20741dd887be76.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0922c21c75ed096c4d7ed9b8b07ec8e7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7c6b45cad3d21dd24d20741dd887be76.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -859,6 +859,9 @@ Alternatively, you can check the status of the multipath service by entering the
 <li><code>Untar</code> the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using <code>rpm -ivh DellEMCPower.LINUX-&lt;version&gt;-&lt;build&gt;.&lt;platform&gt;.x86_64.rpm</code></li>
 <li>Start the PowerPath service using <code>systemctl start PowerPath</code></li>
 </ul>
+<blockquote>
+<p>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.</p>
+</blockquote>
 <h3 id="auto-rdm-for-vsphere-over-fc-requirements">Auto RDM for vSphere over FC requirements</h3>
 <p>The CSI Driver for Dell PowerMax supports auto RDM for vSphere over FC. These requirements are applicable for the clusters deployed on ESX/ESXi using virtualized environement.</p>
 <p>Set up the environment as follows:</p>

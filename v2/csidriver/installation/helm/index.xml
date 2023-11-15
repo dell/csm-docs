@@ -727,6 +727,9 @@ These values can be obtained using base64 encoding as described in the following
 &lt;li&gt;&lt;code&gt;Untar&lt;/code&gt; the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using &lt;code&gt;rpm -ivh DellEMCPower.LINUX-&amp;lt;version&amp;gt;-&amp;lt;build&amp;gt;.&amp;lt;platform&amp;gt;.x86_64.rpm&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Start the PowerPath service using &lt;code&gt;systemctl start PowerPath&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;optional-volume-snapshot-requirements&#34;&gt;(Optional) Volume Snapshot Requirements&lt;/h3&gt;
 &lt;p&gt;For detailed snapshot setup procedure, &lt;a href=&#34;../../../../snapshots/#optional-volume-snapshot-requirements&#34;&gt;click here.&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;optional-replication-feature-requirements&#34;&gt;(Optional) Replication feature Requirements&lt;/h3&gt;
