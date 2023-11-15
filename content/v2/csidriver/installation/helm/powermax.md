@@ -159,7 +159,7 @@ Set up the PowerPath for Linux as follows:
 - `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
 - Start the PowerPath service using `systemctl start PowerPath`
 
->Note: Do not install EMC PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
+>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
 
 ### (Optional) Volume Snapshot Requirements
   For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
