@@ -18,13 +18,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/csidriver/installation/operator/powermax/" /><meta property="article:section" content="v1" />
 
-<meta property="article:modified_time" content="2023-09-20T19:05:29+05:30" />
+<meta property="article:modified_time" content="2023-11-15T12:02:28+05:30" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Installing CSI Driver for PowerMax via Operator
 ">
-<meta itemprop="dateModified" content="2023-09-20T19:05:29+05:30" />
-<meta itemprop="wordCount" content="3102">
+<meta itemprop="dateModified" content="2023-11-15T12:02:28+05:30" />
+<meta itemprop="wordCount" content="3122">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Installing CSI Driver for PowerMax via Operator
@@ -107,7 +107,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0922c21c75ed096c4d7ed9b8b07ec8e7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7c6b45cad3d21dd24d20741dd887be76.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -129,7 +129,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.0922c21c75ed096c4d7ed9b8b07ec8e7.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.7c6b45cad3d21dd24d20741dd887be76.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -795,6 +795,9 @@ Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supp
 <li><code>Untar</code> the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using <code>rpm -ivh DellEMCPower.LINUX-&lt;version&gt;-&lt;build&gt;.&lt;platform&gt;.x86_64.rpm</code></li>
 <li>Start the PowerPath service using <code>systemctl start PowerPath</code></li>
 </ul>
+<blockquote>
+<p>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.</p>
+</blockquote>
 <h4 id="create-secret-for-client-side-tls-verification-optional">Create secret for client-side TLS verification (Optional)</h4>
 <p>Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret <a href="../../helm/powermax#certificate-validation-for-unisphere-rest-api-calls">here</a>.</p>
 <h3 id="install-driver">Install Driver</h3>
