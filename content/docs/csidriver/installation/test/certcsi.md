@@ -91,161 +91,6 @@ Optional Params:
    --path: path to folder where reports will be created (if not specified ~/.cert-csi/ will be used)
 ```
 
-## Functional Tests
-
-#### Volume/PVC Creation
-1. Creates namespace `functional-test` where resources will be created.
-2. Creates Persistent Volume Claims.
-3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
-Otherwise, the Persistent Volume Claims could be in a non-Bound status but the suite will succeed.
-
-> This suite does not delete resources on success.
-
-To run volume or PVC creation test suite, run the command:
-```
-cert-csi functional-test volume-creation --sc <storage class> -n 5
-Optional Params:
---custom-name : To give custom name for PVC while creating only 1 PVC
---size : To give custom size, possible values for size in Gi/Mi
---access-mode : To set custom access-modes, possible values - ReadWriteOnce,ReadOnlyMany and ReadWriteMany
---block : To create raw block volumes
-```
-
-#### Volume/PVC Deletion
-1. Deletes the specified Persistent Volume Claim in the specified Namespace.
-
-To run volume delete test suite, run the command:
-```
-cert-csi functional-test volume-deletion --pvc-name <pvc-name> --pvc-namespace <namespace>
---pvc-name value : PVC name to delete
---pvc-namespace : PVC namespace where PVC is present
-```
-
-#### Pod Provisioning
-1. Creates namespace `functional-test` where resources will be created.
-2. Creates Persistent Volume Claims.
-3. Creates Pods to consume the Persistent Volume Claims.
-4. Waits for Pods to be in the Ready state.
-
-> This suite does not delete resources on success.
-
-To run volume provisioning or pod creation test suite, run the command:
-```
-cert-csi functional-test provisioning --sc <storage class>
-Optional Params:
---volumeNumber : number of volumes to attach to each pod 
---podNumber : number of pod to create
---podName : To give custom name for pod while creating only 1 pod
---block : To create raw block volumes and attach it to pods
---vol-access-mode: To set volume access modes 
-```
-
-#### Pod Deletion
-1. Deletes the specified Pod in the specified Namespace.
-2. Deletes the Persistent Volume Claim(s) consumed by the Pod.
-3. Waits for the volume attachments associated with the Persistent Volume(s) to be removed.
-
-To run pod deletion test suite, run the command:
-```
-cert-csi functional-test pod-deletion --pod-name <pod-name> --pod-namespace <namespace>
---pod-name : Pod name to delete
---pod-namespace : Pod namespace where pod is present
-```
-
-#### Cloned Volume deletion suite
-##### todo
-To run cloned volume deletion test suite, run the command:
-```bash
-cert-csi functional-test clone-volume-deletion
---clone-volume-name : Volume name to delete
-```
-
-#### Multi Attach Volume Tests
-1. Creates namespace `functional-test` where resources will be created.
-2. Creates Persistent Volume Claim.
-3. Creates Pod to consume the Persistent Volume Claim.
-4. Waits for Pod to be in the Ready state.
-5. Creates additional Pods to consume the same Persistent Volume Claim.
-6. Waits for Pods to be in the Ready state.
-7. Writes data to the volume on the original Pod.
-8. Verifies that the checksum of the data on the original Pod matches the checksums of the data on the additional Pods.
-
-> This suite does not delete resources on success.\
-> This suite requires an NFS storage class or the `--block` argument.
-
-To run multi-attach volume test suite, run the command:
-```bash
-cert-csi functional-test multi-attach-vol --sc <storage-class>
---pods : Number of pods to create
---block : To create raw block volume 
-```
-
-#### Ephemeral volumes suite
-1. Creates namespace `functional-test` where resources will be created.
-2. Creates Pods with one ephemeral inline volume each.
-3. Waits for Pods to be in the Ready state.
-4. Writes data to the volume on each Pod.
-5. Verifies the checksum of the data.
-
-> This suite does not delete resources on success.
-
-To run ephemeral volume test suite, run the command:
-```bash
-cert-csi functional-test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
---driver : Name of driver (e.g., csi-vxflexos.dellemc.com. Run `kubectl get csidriver` to see installed drivers)
---attr : CSI volume attributes file name
-```
-Sample ephemeral-config.properties (key/value pair)
-
-   {{< tabs name="volume-attributes-examples" >}}
-   {{% tab name="CSI PowerFlex" %}}
-
-   ```bash
-   volumeName: "my-ephemeral-vol"
-   size: "10Gi"
-   storagepool: "sample"
-   systemID: "sample"
-   ```
-
-   {{% /tab %}}
-   {{% tab name="CSI PowerScale" %}}
-
-   ```bash
-   size: "10Gi"
-   ClusterName: "sample"
-   AccessZone: "sample"
-   IsiPath: "/ifs/data/sample"
-   IsiVolumePathPermissions: "0777"
-   AzServiceIP: "192.168.2.1"
-   ```
-
-   {{% /tab %}}
-   {{% tab name="CSI PowerStore" %}}
-
-   ```bash
-   size: "10Gi"
-   arrayID: "sample"
-   nasName: "sample"
-   nfsAcls: "0777"
-   ```
-
-   {{% /tab %}}
-   {{% tab name="CSI Unity" %}}
-
-   ```bash
-   size: "10Gi"
-   arrayID: "sample"
-   protocol: iSCSI
-   thinProvisioned: "true"
-   isDataReductionEnabled: "false"
-   tieringPolicy: "1"
-   storagePool: pool_2
-   nasName: "sample"
-   ```
-
-   {{% /tab %}}
-   {{< /tabs >}}
-
 #### Storage Capacity Tracking Suite
 1. Creates namespace `functional-test` where resources will be created.
 2. Creates a duplicate of the provided storge class using prefix `capacity-tracking`.
@@ -264,8 +109,6 @@ Sample ephemeral-config.properties (key/value pair)
 To run storage capacity tracking test suite, run the command:
 ```bash
 cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace>
---vs : volume size to be created
---pi : poll interval for storage provisioner (default: 5m0s)
 ```
 
 ### Other Options
@@ -327,13 +170,6 @@ cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config> 
 
    ./cert-csi k8s-e2e --config "/root/.kube/config" --driver-config "/root/e2e_config/config-iscsi.yaml" --focus "External.Storage.*"  --timeout "2h" --version "v1.25.0" --focus-file "capacity.go"
    ```
-
-## Performance Tests
-
-All performance tests require that you provide a storage class that you want to test. You can provide multiple storage classes in one command. For example, 
-```bash
-... --sc <sc1> --sc <sc2> ...
-```
 
 #### Volume Creation test suite
 1. Creates the namespace `vcs-test-*` where resources will be created.
@@ -535,6 +371,8 @@ To run the ephemeral volume test suite, run the command:
 cert-csi test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
 ```
 
+Run `cert-csi test ephemeral-volume -h` for more options.
+
 > `--driver` is the name of a CSI Driver from the output of `kubectl get csidriver` (e.g, csi-vxflexos.dellemc.com).
 > This suite does not delete resources on success.
 
@@ -587,6 +425,28 @@ Sample ephemeral-config.properties (key/value pair)
 
    {{% /tab %}}
    {{< /tabs >}}
+
+#### Storage Capacity Tracking Suite
+1. Creates namespace `functional-test` where resources will be created.
+2. Creates a duplicate of the provided storge class using prefix `capacity-tracking`.
+3. Waits for the associated CSIStorageCapacity object to be created.
+4. Deletes the duplicate storge class.
+5. Waits for the associated CSIStorageCapacity to be deleted.
+6. Sets the capacity of the CSIStorageCapacity of the provided storage class to zero.
+7. Creates Pod with a volume using the provided storage class.
+8. Verifies that the Pod is in the Pending state.
+9. Waits for storage capacity to be polled by the driver.
+10. Waits for Pod to be Running.
+
+> Storage class must use volume binding mode `WaitForFirstConsumer`.\
+> This suite does not delete resources on success.
+
+To run storage capacity tracking test suite, run the command:
+```bash
+cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace>
+```
+
+Run `cert-csi test capacity-tracking -h` for more options.
 
 ### Running Longevity mode
 
