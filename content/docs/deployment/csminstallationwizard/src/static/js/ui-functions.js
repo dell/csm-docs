@@ -469,8 +469,11 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 		case "1.8.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V180;
 			break;
+		case "1.8.0":
+		helmChartVersion = CONSTANTS.CSM_HELM_V190;
+		break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V180;
+			helmChartVersion = CONSTANTS.CSM_HELM_V190;
 			break;
 	}
 	$("#command-text-area").show();
