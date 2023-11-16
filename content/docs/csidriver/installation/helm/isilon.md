@@ -204,6 +204,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | ISI_PRIV_NS_IFS_ACCESS | Read Only  |
    | ISI_PRIV_IFS_BACKUP    | Read Only  |
    | ISI_PRIV_SYNCIQ        | Read Write |
+   | ISI_PRIV_STATISTICS    | Read only  |
 
 Create isilon-creds secret using the following command:
   <br/> `kubectl create secret generic isilon-creds -n isilon --from-file=config=secret.yaml`
