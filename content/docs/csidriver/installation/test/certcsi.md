@@ -7,54 +7,127 @@ description: Tool to validate Dell CSI Drivers
 Cert-CSI is a tool to validate Dell CSI Drivers. It contains various test suites to validate the drivers. 
 
 ## Installation
-To install this tool you can download one of binary files located in [RELEASES](https://github.com/dell/cert-csi/releases)
 
-You can build the tool by cloning the repository and running this command:
-```bash
-make build 
-```
+The recommended methods of installing `cert-csi` are downloading the exectuble from the latest GitHub Release or pulling the latest container image.
 
-You can also build a docker container image by running this command:
-```bash
-make docker
-```
+> The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
 
-If you want to collect csi-driver resource usage metrics, then please provide the namespace where it can be found and install the metric-server using this command (kubectl is required):
+### Download Release (Linux)
+
+1. Download the latest release of the cert-csi zip file.
 
 ```bash
-make install-ms
+curl -LO https://github.com/dell/cert-csi/releases/download/v1.3.0/cert-csi-v1.3.0.zip
 ```
-[FOR UNIX] If you want to build and install the tool to your $PATH and enable the **auto-completion** feature, then run this command:
+
+2. Unzip the file.
+
+``` bash
+unzip cert-csi-v1.3.0.zip
+chmod +x ./cert-csi-v1.3.0
+```
+
+3. Install cert-csi-v1.3.0 as cert-csi.
 
 ```bash
-make install-nix
+sudo install -o root -g root -m 0755 cert-csi-v1.3.0 /usr/local/bin/cert-csi
 ```
-> Alternatively, you can install the metric-server by following the instructions at https://github.com/kubernetes-incubator/metrics-server
+
+If you do not have root access on the target system, you can still install cert-csi to the ~/.local/bin directory:
+
+```bash
+chmod +x cert-csi-v1.3.0
+mkdir -p ~/.local/bin
+mv ./cert-csi-v1.3.0 ~/.local/bin/cert-csi
+# and then append (or prepend) ~/.local/bin to $PATH
+```
+
+### Pull The Container Image
+
+   {{< tabs name="pulling-cert-csi-image" >}}
+   {{% tab name="Docker" %}}
+
+   ```bash
+      docker pull dellemc/cert-csi:v1.3.0
+   ```
+
+   {{% /tab %}}
+   {{% tab name="Podman" %}}
+
+   ```bash
+      podman pull dellemc/cert-csi:v1.3.0
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+### Building Locally
+#### Prerequisites
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Go](https://go.dev/doc/install) (If buidling the executable)
+- Podman or Docker
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/dell/cert-csi.git && cd cert-csi
+```
+
+2. Build cert-csi
+
+{{< tabs name="build-cert-csi" >}}
+{{% tab name="Executable" %}}
+
+```bash
+   make build          # the cert-csi executable will be in the working directory
+   chmod +x ./cert-csi # if building on *nix machine
+```
+
+{{% /tab %}}
+{{% tab name="Container Image" %}}
+
+```bash
+  make docker # uses podman if available, otherwise uses docker
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Running Cert-CSI
 
+{{< tabs name="running-cert-csi" >}}
+{{% tab name="Executable" %}}
+```bash
+   cert-csi -h
+```
+{{% /tab %}}
+{{% tab name="Docker" %}}
+```bash
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi -h
+```
+{{% /tab %}}
+{{% tab name="Podman" %}}
+```bash
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi -h
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 > Log files are located in the `logs` directory in the working directory of cert-csi.\
-> Report files are located in `$HOME/.cert-csi/reports` directory.\
+> Report files are located in the default `$HOME/.cert-csi/reports` directory.\
+> Database (SQLite) file for test suites is `<storage-class-name>.db` in the working directory of cert-csi.\
 > Database (SQLite) file for functional test suites is `cert-csi-functional.db` in the working directory of cert-csi.
 
-To get information on how to use the program, you can use built-in help. If you're using a UNIX-like system and enabled _auto-completion feature_ while installing the tool, then you can use shell's built-in auto-completion to navigate through program's subcommands and flags interactively by just pressing TAB.
+> NOTE: If using the container image, these files will be inside the container. If you are interested in these files, it is recommended to use the exectuable.
 
-To run cert-csi, you have to point your environment to a kube cluster. This allows you to receive dynamically formatted suggestions from your cluster.
-For example if you press TAB while passing --storageclass (or --sc) argument, the tool will parse all existing Storage Classes from your cluster and suggest them as an input for you. 
+## Run All Test Suites
 
-> To run a docker container your command should look something like this
-> ```bash
->
->   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi <usual program arguments>
->   ```
-
-## Driver Certification 
-
-You can use cert-csi to launch a certification test run against multiple storage classes to check if the driver adheres to advertised capabilities. 
+You can use cert-csi to launch a test run against multiple storage classes to check if the driver adheres to advertised capabilities. 
 
 ### Preparing Config
 
-To run the certification test you need to provide `.yaml` config with storage classes and their capabilities. You can use `example-certify-config.yaml` as an example. 
+To run the test suites you need to provide `.yaml` config with storage classes and their capabilities. You can use `example-certify-config.yaml` as an example. 
 
 Example:
 ```yaml
@@ -66,11 +139,11 @@ storageClasses:
     clone: # is volume cloning supported (true or false)
     snapshot: # is volume snapshotting supported (true or false)
     RWX: # is ReadWriteMany volume access mode supported for non RawBlock volumes (true or false)
-    volumeHealth: false # set this to enable the execution of the VolumeHealthMetricsSuite.
+    volumeHealth: true # set this to enable the execution of the VolumeHealthMetricsSuite.
     # Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar and pass the required arguments.
-    VGS: false # set this to enable the execution of the VolumeGroupSnapSuite.
+    VGS: true # set this to enable the execution of the VolumeGroupSnapSuite.
     # Additionally, make sure to provide the necessary required arguments such as volumeSnapshotClass, vgs-volume-label, and any others as needed.
-    RWOP: false # set this to enable the execution of the MultiAttachSuite with the AccessMode set to ReadWriteOncePod.
+    RWOP: true # set this to enable the execution of the MultiAttachSuite with the AccessMode set to ReadWriteOncePod.
     ephemeral: # if exists, then run EphemeralVolumeSuite
       driver: # driver name for EphemeralVolumeSuite
       fstype: # fstype for EphemeralVolumeSuite
@@ -81,55 +154,22 @@ storageClasses:
 
 ### Launching Certification Test Run
 
+> NOTE: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
+
 After preparing a certification configuration file, you can launch certification by running 
-```
+```bash
 cert-csi certify --cert-config <path-to-config>
 Optional Params:
    --vsc: volume snapshot class, required if you specified snapshot capability
-   --timeout: set the timeout value for certification suites
-   --no-metrics: disables metrics aggregation (set if you encounter k8s performance issues)
-   --path: path to folder where reports will be created (if not specified ~/.cert-csi/ will be used)
 ```
 
-#### Storage Capacity Tracking Suite
-1. Creates namespace `functional-test` where resources will be created.
-2. Creates a duplicate of the provided storge class using prefix `capacity-tracking`.
-3. Waits for the associated CSIStorageCapacity object to be created.
-4. Deletes the duplicate storge class.
-5. Waits for the associated CSIStorageCapacity to be deleted.
-6. Sets the capacity of the CSIStorageCapacity of the provided storage class to zero.
-7. Creates Pod with a volume using the provided storage class.
-8. Verifies that the Pod is in the Pending state.
-9. Waits for storage capacity to be polled by the driver.
-10. Waits for Pod to be Running.
+If Snapshot capabilities are enabled, use the `--vsc` argument to specify the Volume Snapshot Class.
 
-> Storage class must use volume binding mode `WaitForFirstConsumer`.\
-> This suite does not delete resources on success.
-
-To run storage capacity tracking test suite, run the command:
 ```bash
-cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace>
+cert-csi certify --cert-config <path-to-config> --vsc <volume-snapshot-class>
 ```
 
-### Other Options
-
-#### Generating tabular report from DB
-
-To generate tabular report from the database, run the command:
-```bash
-cert-csi -db ./cert-csi-functional.db functional-report -tabular
-```
-
-The report will be in the `$HOME/.cert-csi/reports` directory.
-
-#### Generating XML report from DB
-
-To generate XML report from the database, run the command:
-```bash
-cert-csi -db ./cert-csi-functional.db functional-report -xml
-```
-
-The report will be in the `$HOME/.cert-csi/reports` directory.
+Run `cert-csi certify -h` for more options.
 
 ### Screenshots
 
@@ -171,6 +211,10 @@ cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config> 
    ./cert-csi k8s-e2e --config "/root/.kube/config" --driver-config "/root/e2e_config/config-iscsi.yaml" --focus "External.Storage.*"  --timeout "2h" --version "v1.25.0" --focus-file "capacity.go"
    ```
 
+### Running Invidual Test Suites
+
+> NOTE: For testing/debugging purposes, it can useful to use the `--no-cleanup` flag so resources do not get deleted.
+
 #### Volume Creation test suite
 1. Creates the namespace `vcs-test-*` where resources will be created.
 2. Creates Persistent Volume Claims.
@@ -178,7 +222,7 @@ cert-csi k8s-e2e --config <kube config> --driver-config <path to driver config> 
 
 To run volume creation test suite, run the command:
 ```bash
-cert-csi test volume-creation --sc <storage class> -n 25
+cert-csi test volume-creation --sc <storage class>
 ```
 
 Run `cert-csi test volume-creation -h` for more options.
@@ -191,7 +235,7 @@ Run `cert-csi test volume-creation -h` for more options.
 
 To run volume provisioning test suite, run the command:
 ```bash
-cert-csi test provisioning --sc <storage class> --podNum 1 --volNum 10
+cert-csi test provisioning --sc <storage class>
 ```
 
 Run `cert-csi test provisioning -h` for more options.
@@ -199,12 +243,12 @@ Run `cert-csi test provisioning -h` for more options.
 #### Running Scalability test suite
 1. Creates the namespace `scale-test-*` where resources will be created.
 2. Creates a StatefulSet.
-3. Scales up the StatefulSet to the number of replicas.
+3. Scales up the StatefulSet.
 4. Scales down the StatefulSet to zero.
 
 To run scalability test suite, run the command:
 ```bash
-cert-csi test scaling --sc <storage class> --replicas 5
+cert-csi test scaling --sc <storage class>
 ```
 
 Run `cert-csi test scaling -h` for more options.
@@ -221,7 +265,7 @@ Run `cert-csi test scaling -h` for more options.
 
 To run volumeIO test suite, run the command:
 ```bash
-cert-csi test vio --sc <storage class> --chainNumber 5 --chainLength 20
+cert-csi test vio --sc <storage class> --chainNumber 2 --chainLength 2
 ```
 
 Run `cert-csi test vio -h` for more options.
@@ -302,7 +346,7 @@ Run `cert-csi test replication -h` for more options.
 
 To run volume cloning test suite, run the command:
 ```bash
-cert-csi test clone-volume --sc <storage class> --pn 1 --vn 5
+cert-csi test clone-volume --sc <storage class>
 ```
 
 Run `cert-csi test clone-volume -h` for more options.
@@ -319,7 +363,7 @@ Run `cert-csi test clone-volume -h` for more options.
 
 To run volume expansion test, run the command:
 ```bash
-cert-csi test expansion --sc <storage class> --pn 1 --vn 5
+cert-csi test expansion --sc <storage class>
 ```
 
 Run `cert-csi test expansion -h` for more options.
@@ -467,6 +511,16 @@ Report types:
 --txt: performance txt report
 --xml: junit compatible xml report, contains basic run infomation
 --tabular: tidy html report with basic run information
+```
+
+To generate tabular report from the database, run the command:
+```bash
+cert-csi -db ./cert-csi-functional.db functional-report -tabular
+```
+
+To generate XML report from the database, run the command:
+```bash
+cert-csi -db ./cert-csi-functional.db functional-report -xml
 ```
 
 #### Customizing report folder
