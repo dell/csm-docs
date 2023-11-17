@@ -175,7 +175,7 @@ Use the below command to replace or update the secret:
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
 | version | Set to verify the values file version matches driver version and used to pull the image as part of the image name. | Yes | 2.9.0 |
 | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
-| images.powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | dellemc/sdc:4.5 |
+| images.powerflexSdc | Set to give the location of the SDC image used if automatic SDC deployment is being utilized. | Yes | dellemc/sdc:3.6.1 |
 | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. | No | 0 |
 | logLevel | CSI driver log level. Allowed values: "error", "warn"/"warning", "info", "debug". | Yes | "debug" |
 | logFormat | CSI driver log format. Allowed values: "TEXT" or "JSON". | Yes | "TEXT" |
