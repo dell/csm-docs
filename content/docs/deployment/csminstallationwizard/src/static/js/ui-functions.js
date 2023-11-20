@@ -423,7 +423,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".storageArrays").hide();
 				$(".managedArrays").show();
 				$(".snapshot-feature").hide();
-				$(".vol-name-prefix").hide();
 				$(".transport-protocol").show();
 				$(".resizer").hide();
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERMAX_LABEL_VALUE;
@@ -470,8 +469,11 @@ function displayCommands(releaseNameValue, commandTitleValue, commandNoteValue, 
 		case "1.8.0":
 			helmChartVersion = CONSTANTS.CSM_HELM_V180;
 			break;
+		case "1.9.0":
+			helmChartVersion = CONSTANTS.CSM_HELM_V190;
+			break;
 		default:
-			helmChartVersion = CONSTANTS.CSM_HELM_V180;
+			helmChartVersion = CONSTANTS.CSM_HELM_V190;
 			break;
 	}
 	$("#command-text-area").show();

@@ -69,7 +69,8 @@ const CONSTANTS = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V170: "1.0.0",
-	CSM_HELM_V180: "1.1.0"
+	CSM_HELM_V180: "1.1.0",
+	CSM_HELM_V190: "1.2.0",
 };
 
 describe("GIVEN onAuthorizationChange function", () => {

@@ -7,6 +7,7 @@ on:
     branches: [ main, release-* ]
 jobs:
   build-test:
+      permissions: write-all
       name: Build & Run Unit Test
       runs-on: ubuntu-latest
       steps:
