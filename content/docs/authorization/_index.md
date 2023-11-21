@@ -33,9 +33,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes    | 1.25, 1.26, 1.27 |
-| RHEL          |     7.x, 8.x     |
-| CentOS        |     7.8, 7.9     |
+| Kubernetes    | 1.26, 1.27, 1.28 |
 {{</table>}}
 
 ## Supported Storage Platforms
@@ -43,7 +41,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex | PowerScale |
 |---------------|:----------------:|:-------------------:|:----------------:|
-| Storage Array |PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx,<br> Unisphere 10.0, 10.0.1|    3.5.x, 3.6.x    | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5 |
+| Storage Array |PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx,<br> Unisphere 10.0, 10.0.1|    3.6.x, 4.0.x, 4.5    | OneFS 9.5.0.5, 9.5.0.6 |
 {{</table>}}
 
 ## Supported CSI Drivers
