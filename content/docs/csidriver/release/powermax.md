@@ -12,6 +12,7 @@ description: Release notes for PowerMax CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
@@ -22,8 +23,8 @@ description: Release notes for PowerMax CSI driver
 
 ### Fixed Issues
 
-- [#983 - [BUG]: storageCapacity can be set in unsupported CSI Powermax with CSM Operator](https://github.com/dell/csm/issues/983)
 - [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
+- [#983 - [BUG]: storageCapacity can be set in unsupported CSI Powermax with CSM Operator](https://github.com/dell/csm/issues/983)
 
 ### Known Issues
 

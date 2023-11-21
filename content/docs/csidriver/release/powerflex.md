@@ -5,6 +5,7 @@ description: Release notes for PowerFlex CSI driver
 
 ## Release Notes - CSI PowerFlex v2.9.0
 
+
 ### New Features/Changes
 
 - [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
@@ -16,6 +17,7 @@ description: Release notes for PowerFlex CSI driver
 
 - [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
 - [#1020 - [BUG]: SDC Rename ](https://github.com/dell/csm/issues/1020)
+- [#1030 - [BUG]: Comment out duplicate entries in the sample secret.yaml file](https://github.com/dell/csm/issues/1030)
 
 ### Known Issues
 
