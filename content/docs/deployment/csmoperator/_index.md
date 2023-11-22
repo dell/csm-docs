@@ -33,6 +33,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
 | CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
 | CSI PowerStore     | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
+| CSI PowerMax       | 2.9.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
@@ -138,7 +139,7 @@ To build an offline bundle, the following steps are needed:
 git clone -b v1.3.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
-3. Run the `csi-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
+3. Run the `csm-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
 ```bash
 bash scripts/csm-offline-bundle.sh -c
 ```
@@ -163,7 +164,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    dellemc/csi-isilon:v2.8.0
    dellemc/csi-metadata-retriever:v1.5.0
    dellemc/csipowermax-reverseproxy:v2.6.0
-   dellemc/csi-powermax:v2.8.0
+   dellemc/csi-powermax:v2.9.0
    dellemc/csi-powerstore:v2.8.0
    dellemc/csi-unity:v2.8.0
    dellemc/csi-vxflexos:v2.8.0
@@ -375,7 +376,7 @@ The following notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field.
    ```yaml
       driver:
-        configVersion: v2.8.0
+        configVersion: v2.9.0
    ```
 
 ## Custom Resource Definitions

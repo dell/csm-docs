@@ -302,13 +302,13 @@ controllerCount: 2
 
 >**NOTE:** The default value for controllerCount is 2. It is recommended to not change this unless really required. Also, if the controller count is greater than the number of available nodes (where the pods can be scheduled), some controller pods will remain in a Pending state.
 
-If you are using the `dell-csi-operator`, adjust the following value in your Custom Resource manifest
+If you are using the Dell CSM Operator, the value to adjust is: 
 
 ```yaml
 replicas: 2  
 ```
 
-For more details about configuring Controller HA using the Dell CSI Operator, refer to the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).
+For more details about configuring Controller HA using the Dell CSM Operator, see the [Dell CSM Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).
 
 ## CSI Ephemeral Inline Volume
 

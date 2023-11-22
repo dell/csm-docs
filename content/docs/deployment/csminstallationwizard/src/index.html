@@ -68,11 +68,11 @@
 
                 <!-- main content starts -->
                 <div id="main">
-                  <div class="was-validated row mb-4 image-repository">
+                  <div id="image-repository" class="was-validated row mb-4 image-repository" style="display: none;">
                     <label for="image-repository" class="col-sm-2 col-form-label" data-bs-toggle="tooltip" data-bs-placement="right" title="Specify the registry from where the image should be pulled" style="width: 150px;">Image Repository</label>
                     <div class="col-sm-9"></div>
                     <div class="col-sm-3">
-                      <input class="form-control input-lg" type="text" id="image-repository" placeholder="dellemc"  oninput="validateInput(validateForm, CONSTANTS)" required>
+                      <input class="form-control input-lg" type="text" id="image-repository" placeholder="dellemc"  onchange="onCSMVersionChange();" oninput="validateInput(validateForm, CONSTANTS)" required>
                     </div>
                     <div class="col-sm-4">
                       <div class="row mt-1">
@@ -86,8 +86,8 @@
                     <div class="col-sm-3">
                       <select id="csm-version" class="form-select" onchange="onCSMVersionChange(); validateInput(validateForm, CONSTANTS)" required>
                         <option value="1.7.0">CSM 1.7</option>
-                        <option value="1.8.0" selected>CSM 1.8</option>
-                        <option value="1.9.0">CSM 1.9</option>
+                        <option value="1.8.0">CSM 1.8</option>
+                        <option value="1.9.0" selected>CSM 1.9</option>
                       </select>
                     </div>
                   </div>

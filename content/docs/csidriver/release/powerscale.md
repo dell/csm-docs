@@ -7,7 +7,6 @@ description: Release notes for PowerScale CSI driver
 ## Release Notes - CSI Driver for PowerScale v2.9.0
 
 
-
 ### New Features/Changes
 
 - [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)

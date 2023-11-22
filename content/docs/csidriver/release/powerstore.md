@@ -3,9 +3,7 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.8.0
-
-
+## Release Notes - CSI PowerStore v2.9.0
 
 
 ### New Features/Changes
@@ -17,8 +15,8 @@ description: Release notes for PowerStore CSI driver
 
 ### Fixed Issues
 
-- [#1006 - [BUG]: Too many login sessions in gopowerstore client causes unexpected session termination in UI](https://github.com/dell/csm/issues/1006)
 - [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
+- [#1006 - [BUG]: Too many login sessions in gopowerstore client causes unexpected session termination in UI](https://github.com/dell/csm/issues/1006)
 
 ### Known Issues
 
