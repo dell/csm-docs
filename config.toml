@@ -16,7 +16,7 @@ defaultContentLanguage = "en"
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
-disableKinds = ["taxonomy", "taxonomyTerm"]
+disableKinds = ["taxonomy", "taxonomyTerm", "categories", "tags"]
 
 # Highlighting config
 pygmentsCodeFences = true
