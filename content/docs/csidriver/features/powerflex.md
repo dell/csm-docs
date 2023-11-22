@@ -283,7 +283,7 @@ allowedTopologies:
 ```
 For additional information, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
-> *NOTE*: In the manifest file of the Dell CSI operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
+> *NOTE*: In the manifest file of the Dell CSM operator, topology can be enabled by specifying the system name or _systemid_ in the allowed topologies field. _Volumebindingmode_ is also set to _WaitForFirstConsumer_ by default.
 
 ## Controller HA   
 
@@ -295,7 +295,7 @@ in your values file to the desired number of controller pods. By default, the dr
 
 > *NOTE:* If the controller count is greater than the number of available nodes, excess controller pods will be stuck in a pending state. 
 
-If you are using the Dell CSI Operator, the value to adjust is:  
+If you are using the Dell CSM Operator, the value to adjust is:  
 ```yaml  
 replicas: 1  
 ```
@@ -373,7 +373,7 @@ controller:
 ```
 > *NOTE:* Tolerations/selectors work the same way for node pods.   
 
-For configuring Controller HA on the Dell CSI Operator, please refer to the [Dell CSI Operator documentation](../../installation/operator/#custom-resource-specification).  
+For configuring Controller HA on the Dell CSM Operator, please refer to the [Dell CSM Operator documentation](../../../deployment/csmoperator/#custom-resource-specification).  
 
 ## SDC Deployment
 

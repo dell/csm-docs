@@ -5,17 +5,7 @@ description: Release notes for Dell CSI Operator
 
 ## Release Notes - Dell CSI Operator 1.12.0
 {{% pageinfo color="primary" %}}
-The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use [CSM Operator](../../../deployment/csmoperator) going forward.
-
-Please follow the steps below to migrate from Dell CSI Operator to CSM Operator
-* Step1: Backup the CRD to save the settings used
-* Step2: Map and update the settings in CRD in step1 to the relevant CRD in CSM Operator
-* Step3: Keep the secret and namespace for the driver
-* Step4: Keep the Storage Class and Volume Snapshot Class
-* Step5: Uninstall the CRD from the CSI Operator
-* Step6: Uninstall the CSI Operator itself
-* Step7: Install the CSM Operator
-* Step8: Install the CRD updated in Step 2
+The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with [Dell CSM Operator](https://dell.github.io/csm-docs/docs/deployment/csmoperator/). If you are currently using Dell CSI Operator, refer to the [operator migration documentation](https://dell.github.io/csm-docs/docs/csidriver/installation/operator/operator_migration/) to migrate from Dell CSI Operator to Dell CSM Operator.
 
 {{% /pageinfo %}}
 
