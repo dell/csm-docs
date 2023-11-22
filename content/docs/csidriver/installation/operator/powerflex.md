@@ -242,7 +242,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
               value: "0"
 
         initContainers:
-          - image: dellemc/sdc:3.6.1
+          - image: dellemc/sdc:4.5
             imagePullPolicy: IfNotPresent
             name: sdc
             envs:

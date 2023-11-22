@@ -164,8 +164,6 @@ Use the below command to replace or update the secret:
    ```bash
    cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.9.0/charts/csi-vxflexos/values.yaml
    ```  
-   >Note: To connect to a PowerFlex 4.5 array, edit the powerflexSdc parameter in your values.yaml file to use dellemc/sdc:4.5:  
-   >`powerflexSdc: dellemc/sdc:4.5`
 
 8. If you are using custom images, check the fields under `images` in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository.
 
