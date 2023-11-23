@@ -916,7 +916,7 @@ dellctl images --component csm-authorization
 ```
 ```
 Driver/Module Image                             Supported Orchestrator Versions Sidecar Images
-dellemc/csm-authorization-sidecar:v1.8.0        k8s1.28,k8s1.27,k8s1.26         jetstack/cert-manager-cainjector:v1.6.1
+dellemc/csm-authorization-sidecar:v1.9.0        k8s1.28,k8s1.27,k8s1.26         jetstack/cert-manager-cainjector:v1.6.1
                                                                                 jetstack/cert-manager-controller:v1.6.1
                                                                                 jetstack/cert-manager-webhook:v1.6.1
                                                                                 ingress-nginx/controller:v1.4.0
