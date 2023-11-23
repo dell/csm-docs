@@ -134,7 +134,7 @@ csi-powermax:
 ##########################################
 csi-vxflexos:
   enabled: $POWERFLEX_ENABLED
-  version: v2.8.0
+  version: v2.9.0
   certSecretCount: $CERT_SECRET_COUNT
   controller:
     replication:
