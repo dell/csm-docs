@@ -30,16 +30,16 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
    [...More on installation instructions](csminstallationwizard)
   {{< /card >}}
    {{< card header="[Dell CSI Drivers Installation via offline installer](../csidriver/installation/offline)"
-          footer="[Offline installation for all drivers](../csidriver/installation/offline)">}}
-  Both Helm and Dell CSI opetor supports offline installation of the Dell CSI Storage Providers via `csi-offline-bundle.sh` script by creating a usable package.
+          footer="[Offline installation for all drivers](../csidriver/installation/offline) [Offline installation with Operator](csmoperator/#offline-bundle-installation-on-a-cluster-without-olm)">}}
+  Both Helm and Dell CSM operator supports offline installation of the Dell CSI Storage Providers via `csi-offline-bundle.sh` or `csm-offline-bundle.sh` script, respectively, by creating a usable package.
    [...More on installation instructions](../csidriver/installation/offline)
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
-  {{< card header="[Dell CSI Drivers Installation via operator](../csidriver/installation/operator)"
-          footer="Installs [PowerStore](../csidriver/installation/operator/powerstore/) [PowerMax](../csidriver/installation/operator/powermax/) [PowerScale](../csidriver/installation/operator/isilon/) [PowerFlex](../csidriver/installation/operator/powerflex/) [Unity XT](../csidriver/installation/operator/unity/)">}}
-   Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
-   [...More on installation instructions](../csidriver/installation/operator)
+  {{< card header="[Dell CSI Drivers Installation via operator](csmoperator/drivers/)"
+          footer="Installs [PowerStore](csmoperator/drivers/powerstore/) [PowerMax](csmoperator/drivers/powermax/) [PowerScale](csmoperator/drivers/powerscale/) [PowerFlex](csmoperator/drivers/powerflex/) [Unity XT](csmoperator/drivers/unity/)">}}
+   Dell CSM Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
+   [...More on installation instructions](../deployment/csmoperator)
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}

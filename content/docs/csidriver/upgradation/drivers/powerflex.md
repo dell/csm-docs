@@ -8,7 +8,7 @@ weight: 1
 Description: Upgrade PowerFlex CSI driver
 ---
 
-You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSI Operator.
+You can upgrade the CSI Driver for Dell PowerFlex using Helm or Dell CSM Operator.
 
 ## Update Driver from v2.8.0 to v2.9.0 using Helm
 **Steps**

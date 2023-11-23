@@ -139,7 +139,7 @@ To build an offline bundle, the following steps are needed:
 git clone -b v1.3.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
-3. Run the `csi-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
+3. Run the `csm-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
 ```bash
 bash scripts/csm-offline-bundle.sh -c
 ```
