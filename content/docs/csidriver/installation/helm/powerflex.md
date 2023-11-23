@@ -22,7 +22,7 @@ The node section of the Helm chart installs the following component in a _Daemon
 
 The following are requirements that must be met before installing the CSI Driver for Dell PowerFlex:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
-- Install Helm 3
+- Install Helm 3.x
 - Enable Zero Padding on PowerFlex
 - Mount propagation is enabled on container runtime that is being used
 - Install PowerFlex Storage Data Client 
@@ -32,13 +32,13 @@ The following are requirements that must be met before installing the CSI Driver
 - If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../troubleshooting/powerflex) for details
 
 
-### Install Helm 3.0
+### Install Helm 3.x
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerFlex.
+Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerFlex.
 
 **Steps**
 
-  Run the command to install Helm 3.0.
+  Run the command to install Helm 3.x.
   ```bash
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
@@ -164,8 +164,6 @@ Use the below command to replace or update the secret:
    ```bash
    cd dell-csi-helm-installer && wget -O myvalues.yaml https://github.com/dell/helm-charts/raw/csi-vxflexos-2.9.0/charts/csi-vxflexos/values.yaml
    ```  
-   >Note: To connect to a PowerFlex 4.5 array, edit the powerflexSdc parameter in your values.yaml file to use dellemc/sdc:4.5:  
-   >`powerflexSdc: dellemc/sdc:4.5`
 
 8. If you are using custom images, check the fields under `images` in `my-vxflexos-settings.yaml` to make sure that they are pointing to the correct image repository.
 

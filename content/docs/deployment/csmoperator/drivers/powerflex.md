@@ -31,22 +31,19 @@ kubectl get csm --all-namespaces
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note: 
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
     - **If not using sidecar**, leave the enabled field set to false.
-##### Example CR:  [samples/storage_csm_powerflex_v280.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v280.yaml)
+##### Example CR:  [samples/storage_csm_powerflex_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v290.yaml)
 ```yaml
     sideCars:
     # sdc-monitor is disabled by default, due to high CPU usage 
       - name: sdc-monitor
         enabled: false
-        image: dellemc/sdc:3.6.1
+        image: dellemc/sdc:4.5
         envs:
         - name: HOST_PID
           value: "1"
         - name: MDM
           value: "10.xx.xx.xx,10.xx.xx.xx" #provide the same MDM value from secret
 ```  
-
-   >Note: To connect to a PowerFlex 4.5 array, edit the initContainers.image parameter in your samples file to use dellemc/sdc:4.5:  
-   >`- image: dellemc/sdc:4.5`
 
 #### Manual SDC Deployment
 

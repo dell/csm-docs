@@ -21,7 +21,7 @@ The node section of the Helm chart installs the following component in a _Daemon
 
 The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
-- Install Helm 3
+- Install Helm 3.x
 - If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP or NVMe/FC configuration.
 > You can use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, but you do not need all the four.
 
@@ -33,13 +33,13 @@ The following are requirements to be met before installing the CSI Driver for De
 - You can access your cluster with kubectl and helm.
 - Ensure that your nodes support mounting NFS volumes. 
 
-### Install Helm 3.0
+### Install Helm 3.x
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerStore.
+Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerStore.
 
 **Steps**
 
-  Run the command to install Helm 3.0.
+  Run the command to install Helm 3.x.
   ```bash
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
