@@ -27,12 +27,12 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
 | CSI PowerScale     | 2.6.0   | ✔ 1.6.0           | ✔ 1.4.0        | ✔ 1.5.0           | ❌            |
+| CSI PowerFlex      | 2.9.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
-| CSI PowerFlex      | 2.6.0   | ✔ 1.6.0           | ❌             | ✔ 1.4.0           | ❌            |
+| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
 | CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
-| CSI PowerStore     | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI PowerMax       | 2.9.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
@@ -181,7 +181,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    otel/opentelemetry-collector:0.42.0
    registry.k8s.io/sig-storage/csi-attacher:v4.4.2
    registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.10.0
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.2
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1
    registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
    registry.k8s.io/sig-storage/csi-resizer:v1.9.2
    registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
