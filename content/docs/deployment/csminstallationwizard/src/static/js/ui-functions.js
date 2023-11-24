@@ -369,7 +369,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".vgsnapshot").hide();
 				$(".resizer").hide();
 				$(".snapshot-feature").hide();
-				$(".vol-name-prefix").hide();
 				$(".fsGroupPolicy").show();
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSTORE_LABEL_VALUE;
 			}
