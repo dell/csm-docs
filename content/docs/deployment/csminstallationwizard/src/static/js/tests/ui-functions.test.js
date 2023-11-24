@@ -606,7 +606,7 @@ describe("GIVEN displayModules function", () => {
 		expect($(".image-repository").css("display")).toEqual("none");
 		expect($(".cert-manager").css("display")).toEqual("none");
 		expect($(".resizer").css("display")).toEqual("none");
-		expect($(".vol-name-prefix").css("display")).toEqual("none");
+		expect($(".vol-name-prefix").css("display")).toEqual("block");
 		expect($(".snapshot-feature").css("display")).toEqual("none");
 		expect($(".fsGroupPolicy").css("display")).toEqual("block");
 		expect($(".resiliency").css("display")).toEqual("none");
