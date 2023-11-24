@@ -163,12 +163,12 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 
    dellemc/csi-isilon:v2.9.0
    dellemc/csi-metadata-retriever:v1.6.0
-   dellemc/csipowermax-reverseproxy:v2.6.0
+   dellemc/csipowermax-reverseproxy:v2.8.0
    dellemc/csi-powermax:v2.9.0
    dellemc/csi-powerstore:v2.9.0
    dellemc/csi-unity:v2.9.0
    dellemc/csi-vxflexos:v2.9.0
-   dellemc/csm-authorization-sidecar:v1.8.0
+   dellemc/csm-authorization-sidecar:v1.7.0
    dellemc/csm-metrics-powerflex:v1.7.0
    dellemc/csm-metrics-powerscale:v1.4.0
    dellemc/csm-topology:v1.7.0
