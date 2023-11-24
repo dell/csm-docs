@@ -138,6 +138,7 @@ kubectl get csm --all-namespaces
    | X_CSI_ISI_AUTOPROBE | To enable auto probing for driver | No | true |
    | X_CSI_ISI_NO_PROBE_ON_START | Indicates whether the controller/node should probe during initialization | Yes | |
    | X_CSI_ISI_VOLUME_PATH_PERMISSIONS | The permissions for isi volume directory path | Yes | 0777 |
+   | X_CSI_ISI_AUTH_TYPE | Indicates the authentication method to be used. If set to 1 then it follows as session-based authentication else basic authentication. If CSM Authorization is enabled, this value must be set to 1. | No | 0 |
    | ***Controller parameters*** |
    | X_CSI_MODE   | Driver starting mode  | No | controller |
    | X_CSI_ISI_ACCESS_ZONE | Name of the access zone a volume can be created in | No | System |
@@ -146,7 +147,7 @@ kubectl get csm --all-namespaces
    | X_CSI_MAX_VOLUMES_PER_NODE | Specify the default value for the maximum number of volumes that the controller can publish to the node | Yes | 0 |
    | X_CSI_MODE   | Driver starting mode  | No | node |
 
-4. Execute the following command to create PowerScale custom resource:
+5. Execute the following command to create PowerScale custom resource:
 
     ```bash
     kubectl create -f <input_sample_file.yaml>
@@ -154,7 +155,7 @@ kubectl get csm --all-namespaces
 
     This command will deploy the CSI-PowerScale driver in the namespace specified in the input YAML file.
 
-5. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
+6. [Verify the CSI Driver installation](../#verifying-the-driver-installation)
 
 **Note** :
 
