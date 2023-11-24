@@ -392,7 +392,6 @@ function displayModules(installationType, driverName, CONSTANTS_PARAM) {
 				$(".cert-manager").hide();
 				$(".resizer").hide();
 				$(".snapshot-feature").hide();
-				$(".vol-name-prefix").hide();
 				document.getElementById("label-value").value = CONSTANTS_PARAM.POWERSCALE_LABEL_VALUE;
 			}
 			break;
