@@ -93,6 +93,14 @@ git clone https://github.com/dell/cert-csi.git && cd cert-csi
 {{% /tab %}}
 {{< /tabs >}}
 
+### Optional
+
+If you want to collect csi-driver resource usage metrics, then please provide the namespace where it can be found and install the metric-server using this command (kubectl is required):
+
+```bash
+make install-ms
+```
+
 ## Running Cert-CSI
 
 {{< tabs name="running-cert-csi" >}}
@@ -371,41 +379,6 @@ Run `cert-csi certify -h` for more options.
 
 > NOTE: For testing/debugging purposes, it can useful to use the `--no-cleanup` flag so resources do not get deleted.
 
-#### Volume Creation
-1. Creates the namespace `vcs-test-*` where resources will be created.
-2. Creates Persistent Volume Claims.
-3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
-
-```bash
-cert-csi test volume-creation --sc <storage class>
-```
-
-Run `cert-csi test volume-creation -h` for more options.
-
-#### Volume Provisioning
-1. Creates the namespace `prov-test-*` where resources will be created.
-2. Creates Persistent Volume Claims.
-3. Creates Pods to consume the Persistent Volume Claims.
-4. Waits for Pods to be in the Ready state.
-
-```bash
-cert-csi test provisioning --sc <storage class>
-```
-
-Run `cert-csi test provisioning -h` for more options.
-
-#### Scalability
-1. Creates the namespace `scale-test-*` where resources will be created.
-2. Creates a StatefulSet.
-3. Scales up the StatefulSet.
-4. Scales down the StatefulSet to zero.
-
-```bash
-cert-csi test scaling --sc <storage class>
-```
-
-Run `cert-csi test scaling -h` for more options.
-
 #### Volume I/O
 1. Creates the namespace `volumeio-test-*` where resources will be created.
 2. Creates Persistent Volume Claims.
@@ -421,6 +394,18 @@ cert-csi test vio --sc <storage class>
 ```
 
 Run `cert-csi test vio -h` for more options.
+
+#### Scalability
+1. Creates the namespace `scale-test-*` where resources will be created.
+2. Creates a StatefulSet.
+3. Scales up the StatefulSet.
+4. Scales down the StatefulSet to zero.
+
+```bash
+cert-csi test scaling --sc <storage class>
+```
+
+Run `cert-csi test scaling -h` for more options.
 
 #### Snapshots
 1. Creates the namespace `snap-test-*` where resources will be created.
