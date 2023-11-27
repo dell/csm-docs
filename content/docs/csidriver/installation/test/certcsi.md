@@ -65,7 +65,7 @@ mv ./cert-csi-v1.3.0 ~/.local/bin/cert-csi
 #### Prerequisites
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Go](https://go.dev/doc/install) (If buidling the executable)
-- Podman or Docker
+- Podman or Docker (If building the container image)
 
 1. Clone the repository
 
@@ -129,7 +129,7 @@ You can use cert-csi to launch a test run against multiple storage classes to ch
 
 To run the test suites you need to provide `.yaml` config with storage classes and their capabilities. You can use `example-certify-config.yaml` as an example. 
 
-Example:
+Template:
 ```yaml
 storageClasses:
   - name: # storage-class-name (ex. powerstore)
@@ -144,19 +144,214 @@ storageClasses:
     VGS: # set this to enable the execution of the VolumeGroupSnapSuite (true or false)
     # Additionally, make sure to provide the necessary required arguments such as volumeSnapshotClass, vgs-volume-label, and any others as needed.
     RWOP: # set this to enable the execution of the MultiAttachSuite with the AccessMode set to ReadWriteOncePod (true or false)
-    ephemeral: # if exists, then run EphemeralVolumeSuite
+    ephemeral: # if exists, then run EphemeralVolumeSuite. See the Ephemeral Volumes suite section for example Volume Attributes
       driver: # driver name for EphemeralVolumeSuite (e.g., csi-vxflexos.dellemc.com)
       fstype: # fstype for EphemeralVolumeSuite
-      volumeAttributes: # volume attrs for EphemeralVolumeSuite. 
+      volumeAttributes: # volume attrs for EphemeralVolumeSuite.
         attr1: # volume attr for EphemeralVolumeSuite
         attr2: # volume attr for EphemeralVolumeSuite
+    capacityTracking:
+      driverNamespace: # namepsace where driver is installed
+      pollInterval:    # duration to poll capacity (e.g., 2m)  
 ```
 
-### Launching Certification Test Run
+Driver specific examples:
+
+   {{< tabs name="cerity-config-examples" >}}
+   {{% tab name="CSI PowerFlex" %}}
+
+```yaml
+storageClasses:
+  - name: vxflexos
+    minSize: 8Gi
+    rawBlock: true
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: false
+    ephemeral:
+      driver: csi-powerstore.dellemc.com
+      fstype: ext4
+      volumeAttributes:
+        volumeName: "my-ephemeral-vol"
+        size: "8Gi"
+        storagepool: "sample"
+        systemID: "sample"
+  - name: vxflexos-nfs
+    minSize: 8Gi
+    rawBlock: false
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: true
+    RWOP: true
+    ephemeral:
+      driver: csi-vxflexos.dellemc.com
+      fstype: "nfs"
+      volumeAttributes:
+        volumeName: "my-ephemeral-vol"
+        size: "8Gi"
+        storagepool: "sample"
+        systemID: "sample"
+    capacityTracking:
+      driverNamespace: powerstore
+      pollInterval: 2m
+```
+
+   {{% /tab %}}
+   {{% tab name="CSI PowerScale" %}}
+
+```yaml
+storageClasses:
+  - name: isilon
+    minSize: 8Gi
+    rawBlock: false
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: false
+    ephemeral:
+      driver: csi-isilon.dellemc.com
+      fstype: nfs
+      volumeAttributes:
+        size: "10Gi"
+        ClusterName: "sample"
+        AccessZone: "sample"
+        IsiPath: "/ifs/data/sample"
+        IsiVolumePathPermissions: "0777"
+        AzServiceIP: "192.168.2.1"
+```
+
+   {{% tab name="CSI PowerMax" %}}
+
+```yaml
+storageClasses:
+  - name: powermax-iscsi
+    minSize: 5Gi
+    rawBlock: true
+    expansion: true
+    clone: true
+    snapshot: true
+    capacityTracking:
+      driverNamespace: powerstore
+      pollInterval: 2m
+  - name: powermax-nfs
+    minSize: 5Gi
+    rawBlock: false
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: true
+    RWOP: true
+    capacityTracking:
+      driverNamespace: powerstore
+      pollInterval: 2m
+```
+
+   {{% /tab %}}
+
+   {{% /tab %}}
+   {{% tab name="CSI PowerStore" %}}
+
+```yaml
+storageClasses:
+  - name: powerstore
+    minSize: 5Gi
+    rawBlock: true
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: false
+    ephemeral:
+      driver: csi-powerstore.dellemc.com
+      fstype: ext4
+      volumeAttributes:
+        arrayID: "arrayid"
+        protocol: iSCSI
+        size: 5Gi
+  - name: powerstore-nfs
+    minSize: 5Gi
+    rawBlock: false
+    expansion: true
+    clone: true
+    snapshot: true
+    RWX: true
+    RWOP: true
+    ephemeral:
+      driver: csi-powerstore.dellemc.com
+      fstype: "nfs"
+      volumeAttributes:
+        arrayID: "arrayid"
+        protocol: NFS
+        size: 5Gi
+        nasName: "nas-server"
+    capacityTracking:
+      driverNamespace: powerstore
+      pollInterval: 2m
+```
+
+   {{% /tab %}}
+   {{% tab name="CSI Unity" %}}
+
+```yaml
+storageClasses:
+  - name: unity-iscsi
+    minSize: 3Gi
+    rawBlock: true
+    expansion: true
+    clone: false
+    snapshot: true
+    RWX: false
+    ephemeral:
+      driver: csi-unity.dellemc.com
+      fstype: ext4
+      volumeAttributes:
+        arrayId: "array-id"
+        storagePool: pool-name
+        protocol: NFS
+        size: 5Gi
+  - name: unity-nfs
+    minSize: 3Gi
+    rawBlock: false
+    expansion: true
+    clone: false
+    snapshot: true
+    RWX: true
+    RWOP: true
+    ephemeral:
+      driver: csi-unity.dellemc.com
+      fstype: "nfs"
+      volumeAttributes:
+        arrayId: "array-id"
+        storagePool: pool-name
+        protocol: NFS
+        size: 5Gi
+        nasServer: "nas-server"
+        nasName: "nas-name"
+    capacityTracking:
+      driverNamespace: unity
+      pollInterval: 2m
+```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+### Launching Test Run
+1. Executes the [VolumeIO](#volume-io) suite.
+2. Executes the [Scaling](#scalability) suite.
+3. If `storageClasses.clone` is `true`, executes the [Volume Cloning](#volume-cloning) suite.
+4. If `storageClasses.expansion` is `true`, executes the [Volume Expansion](#volume-expansion) suite.
+5. If `storageClasses.expansion` is `true` and `storageClasses.rawBlock` is `true`, executes the [Volume Expansion](#volume-expansion) suite with raw block volumes.
+6. If `storageClasses.snapshot` is `true`, exeuctes the [Snapshot](#snapshots) suite and the [Replication](#replication) suite.
+7. If `storageClasses.rawBlock` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite with raw block volumes.
+8. If `storageClasses.rwx` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite. (Storgae Class must be NFS.)
+9. If `storageClasses.volumeHealth` is `true`, executes the [Volume Health Metrics](#volume-health-metrics) suite.
+10. If `storageClasses.rwop` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite with the volume access mode `ReadWriteOncePod`.
+11. If `storageClasses.ephemeral` exists, executes the [Ephemeral Volumes](#ephemeral-volumes) suite.
+12. If `storageClasses.vgs` is `true`, executes the [Volume Group Snapshot]() suite. #todo
+13. If `storageClasses.capacityTracking` exists, exeuctes the [Storage Class Capacity Tracking](#storage-capacity-tracking) suite.
 
 > NOTE: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
-
-If Snapshot capabilities are enabled, use the `--vsc` argument to specify the Volume Snapshot Class.
 
 ```bash
 cert-csi certify --cert-config <path-to-config> --vsc <volume-snapshot-class>
@@ -176,45 +371,42 @@ Run `cert-csi certify -h` for more options.
 
 > NOTE: For testing/debugging purposes, it can useful to use the `--no-cleanup` flag so resources do not get deleted.
 
-#### Volume Creation test suite
+#### Volume Creation
 1. Creates the namespace `vcs-test-*` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
 
-To run volume creation test suite, run the command:
 ```bash
 cert-csi test volume-creation --sc <storage class>
 ```
 
 Run `cert-csi test volume-creation -h` for more options.
 
-#### Running Provisioning test suite
+#### Volume Provisioning
 1. Creates the namespace `prov-test-*` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. Creates Pods to consume the Persistent Volume Claims.
 4. Waits for Pods to be in the Ready state.
 
-To run volume provisioning test suite, run the command:
 ```bash
 cert-csi test provisioning --sc <storage class>
 ```
 
 Run `cert-csi test provisioning -h` for more options.
 
-#### Running Scalability test suite
+#### Scalability
 1. Creates the namespace `scale-test-*` where resources will be created.
 2. Creates a StatefulSet.
 3. Scales up the StatefulSet.
 4. Scales down the StatefulSet to zero.
 
-To run scalability test suite, run the command:
 ```bash
 cert-csi test scaling --sc <storage class>
 ```
 
 Run `cert-csi test scaling -h` for more options.
 
-#### Running VolumeIO test suite
+#### Volume I/O
 1. Creates the namespace `volumeio-test-*` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claims to be bound to Persistent Volumes.
@@ -224,14 +416,13 @@ Run `cert-csi test scaling -h` for more options.
    3. Deletes the Pod.
    4. Waits for the associated Volume Attachment to be deleted.
 
-To run volumeIO test suite, run the command:
 ```bash
 cert-csi test vio --sc <storage class>
 ```
 
 Run `cert-csi test vio -h` for more options.
 
-#### Running Snap test suite
+#### Snapshots
 1. Creates the namespace `snap-test-*` where resources will be created.
 2. Creates Persistent Volume Claim.
 3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claim to be bound to Persistent Volumes.
@@ -244,15 +435,23 @@ Run `cert-csi test vio -h` for more options.
 10. Creates a new Pod to consume the new Persistent Volume Claim.
 11. Verifies the checksum of the data.
 
-
-To run volume snapshot test suite, run the command:
 ```bash
 cert-csi test snap --sc <storage class> --vsc <volume snapshot class> 
 ```
 
 Run `cert-csi test snap -h` for more options.
 
-#### Running Multi-attach volume suite
+#### Volume Group Snapshots
+1. Creates the namespace `vgs-snap-test-*` where resources will be created.
+2. Creates Persistent Volume Claims.
+3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claim to be bound to Persistent Volumes.
+4. Create Pods to consume the Persistent Volume Claims.
+5. Creates Volume Group Snapshot.
+6. Waits for Volume Group Snapshot state to be COMPLETE.
+
+> Note: Volume Group Snapshots are only supported by CSI PowerFlex and CSI PowerStore.
+
+#### Multi-Attach Volume
 1. Creates the namespace `mas-test-*` where resources will be created.
 2. Creates Persistent Volume Claim.
 3. Creates Pod to consume the Persistent Volume Claim.
@@ -261,14 +460,11 @@ Run `cert-csi test snap -h` for more options.
 6. Watis for Pods to be in the Ready state.
 7. Writes data to the volumes on the Pods and verifies checksum of the data.
 
-To run multi-attach volume test suite, run the command: 
 ```bash
 cert-csi test multi-attach-vol --sc <storage class>
 ```
 
 > The storage class must be an NFS storage class. Otherwise, raw block volumes must be used.
-
-To run multi-attach volume test suite with raw block volumes, run the command:
 
 ```bash
 cert-csi test multi-attach-vol --sc <storage class> --block
@@ -276,7 +472,7 @@ cert-csi test multi-attach-vol --sc <storage class> --block
 
 Run `cert-csi test multi-attach-vol -h` for more options.
 
-#### Running Replication test suite
+#### Replication
 1. Creates the namespace `replication-suite-*` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. Create Pods to consume the Persistent Volume Claims.
@@ -288,15 +484,13 @@ Run `cert-csi test multi-attach-vol -h` for more options.
 9. Waits for Pods to be in the Ready state.
 10. Verifies the replication group name on ersistent Volume Claims.
 
-To run replication test suite, run the command:
 ```bash
-
 cert-csi test replication --sc <storage class> --vsc <snapshot class> 
 ```
 
 Run `cert-csi test replication -h` for more options.
 
-#### Running Volume Cloning test suite
+#### Volume Cloning
 1. Creates the namespace `clonevolume-suite-*` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. Create Pods to consume the Persistent Volume Claims.
@@ -305,14 +499,13 @@ Run `cert-csi test replication -h` for more options.
 6. Create Pods to consume the Persistent Volume Claims.
 7. Waits for Pods to be in the Ready state.
 
-To run volume cloning test suite, run the command:
 ```bash
 cert-csi test clone-volume --sc <storage class>
 ```
 
 Run `cert-csi test clone-volume -h` for more options.
 
-#### Running Volume Expansion test suite
+#### Volume Expansion
 1. Creates the namespace `volume-expansion-suite-*` where resources will be created.
 2. Creates Persistent Volume Claims.
 3. Create Pods to consume the Persistent Volume Claims.
@@ -322,14 +515,13 @@ Run `cert-csi test clone-volume -h` for more options.
 
 > Raw block volumes cannot be verified since there is no filesystem.
 
-To run volume expansion test, run the command:
 ```bash
 cert-csi test expansion --sc <storage class>
 ```
 
 Run `cert-csi test expansion -h` for more options.
 
-#### Running Blocksnap suite
+#### Blocksnap suite
 1. Creates the namespace `block-snap-test-*` where resources will be created.
 2. Creates Persistent Volume Claim.
 3. If the specified storage class binding mode is not `WaitForFirstConsumer`, waits for Persistent Volume Claim to be bound to Persistent Volumes.
@@ -341,21 +533,19 @@ Run `cert-csi test expansion -h` for more options.
 8. Creates Pod to consume the Persistent Volume Claim.
 9. Mounts the raw block volume and verifes the checksum of the data.
 
-To run block snapshot test suite, run the command:
 ```bash
 cert-csi test blocksnap --sc <storageClass> --vsc <snapshotclass>
 ```
 
 Run `cert-csi test blocksnap -h` for more options.
 
-#### Volume Health Metric Suite
+#### Volume Health Metrics
 1. Creates the namespace `volume-health-metrics-*` where resources will be created.
 2. Creates Persistent Volume Claim.
 3. Creates Pod to consume the Persistent Volume Claim.
 4. Waits for Pod to be in the Ready state.
 4. Veries that ControllerGetVolume and NodeGetVolumeStats are being executed in the controller and node pods, respectively.
 
-To run the volume health metric test suite, run the command:
 ```bash
 cert-csi test volumehealthmetrics --sc <storage-class> --driver-ns <driver-namespace>
 ```
@@ -364,14 +554,13 @@ Run `cert-csi test volumehealthmetrics -h` for more options.
 
 > Note: Make sure to enable healthMonitor for the driver's controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.
 
-#### Ephemeral volumes suite
+#### Ephemeral Volumes
 1. Creates namespace `functional-test` where resources will be created.
 2. Creates Pods with one ephemeral inline volume each.
 3. Waits for Pods to be in the Ready state.
 4. Writes data to the volume on each Pod.
 5. Verifies the checksum of the data.
 
-To run the ephemeral volume test suite, run the command:
 ```bash
 cert-csi test ephemeral-volume --driver <driver-name> --attr ephemeral-config.properties
 ```
@@ -385,7 +574,7 @@ Sample ephemeral-config.properties (key/value pair)
    {{< tabs name="volume-attributes-examples" >}}
    {{% tab name="CSI PowerFlex" %}}
 
-   ```bash
+   ```yaml
    volumeName: "my-ephemeral-vol"
    size: "10Gi"
    storagepool: "sample"
@@ -395,7 +584,7 @@ Sample ephemeral-config.properties (key/value pair)
    {{% /tab %}}
    {{% tab name="CSI PowerScale" %}}
 
-   ```bash
+   ```yaml
    size: "10Gi"
    ClusterName: "sample"
    AccessZone: "sample"
@@ -407,7 +596,7 @@ Sample ephemeral-config.properties (key/value pair)
    {{% /tab %}}
    {{% tab name="CSI PowerStore" %}}
 
-   ```bash
+   ```yaml
    size: "10Gi"
    arrayID: "sample"
    nasName: "sample"
@@ -417,7 +606,7 @@ Sample ephemeral-config.properties (key/value pair)
    {{% /tab %}}
    {{% tab name="CSI Unity" %}}
 
-   ```bash
+   ```yaml
    size: "10Gi"
    arrayID: "sample"
    protocol: iSCSI
@@ -431,7 +620,7 @@ Sample ephemeral-config.properties (key/value pair)
    {{% /tab %}}
    {{< /tabs >}}
 
-#### Storage Capacity Tracking Suite
+#### Storage Capacity Tracking
 1. Creates namespace `functional-test` where resources will be created.
 2. Creates a duplicate of the provided storge class using prefix `capacity-tracking`.
 3. Waits for the associated CSIStorageCapacity object to be created.
@@ -446,7 +635,6 @@ Sample ephemeral-config.properties (key/value pair)
 > Storage class must use volume binding mode `WaitForFirstConsumer`.\
 > This suite does not delete resources on success.
 
-To run storage capacity tracking test suite, run the command:
 ```bash
 cert-csi functional-test capacity-tracking --sc <storage-class> --drns <driver-namespace>
 ```
@@ -455,9 +643,8 @@ Run `cert-csi test capacity-tracking -h` for more options.
 
 ### Running Longevity mode
 
-To run longevity test suite, run the command:
 ```bash
-cert-csi test <any of previous tests> --sc <storage class> --longevity <number of iterations>
+cert-csi test <suite-name> --sc <storage class> --longevity <number of iterations>
 ```
 
 ## Kubernetes End-To-End Tests
