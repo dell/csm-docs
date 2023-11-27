@@ -225,7 +225,6 @@ function onRenameSDCChange(driverName, CONSTANTS_PARAM) {
 }
 
 const hideImageRepo = (csmVersion) => {
-	console.log("cs",csmVersion)
 	if (csmVersion === "1.8.0" || csmVersion === "1.7.0"){
 		$(".image-repository").show();
 	} else {
