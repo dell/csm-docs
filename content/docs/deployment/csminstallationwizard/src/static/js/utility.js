@@ -156,6 +156,5 @@ if (typeof exports !== 'undefined') {
 		validateForm,
 		setMap,
 		setDefaultValues,
-		onCSMVersionChange,
 	};
 }
