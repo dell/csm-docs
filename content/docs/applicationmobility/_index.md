@@ -6,6 +6,8 @@ Description: >
   Application Mobility
 ---
 
+{{% pageinfo color="primary" %}} The CSM Application Mobility Helm deployment is only available for tech-preview and it will not be maintained in future releases. {{% /pageinfo %}}
+
 >> NOTE: This tech-preview release is not intended for use in production environment.
 
 >> NOTE: Application Mobility requires a time-based license. See [Deployment](./deployment) for instructions.
