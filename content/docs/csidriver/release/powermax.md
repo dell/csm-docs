@@ -13,8 +13,10 @@ description: Release notes for PowerMax CSI driver
 
 
 
+
 ### New Features/Changes
 
+- [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
 - [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
 - [#991 - [FEATURE]:Remove linked proxy mode for PowerMax](https://github.com/dell/csm/issues/991)
 - [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
@@ -24,7 +26,10 @@ description: Release notes for PowerMax CSI driver
 ### Fixed Issues
 
 - [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
+- [#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.](https://github.com/dell/csm/issues/1056)
 - [#983 - [BUG]: storageCapacity can be set in unsupported CSI Powermax with CSM Operator](https://github.com/dell/csm/issues/983)
+- [#1051 - [BUG]: make docker command is failing with error ](https://github.com/dell/csm/issues/1051)
+- [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
 
 ### Known Issues
 
