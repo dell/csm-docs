@@ -230,6 +230,7 @@ csi-vxflexos:
   storageCapacity:
     enabled: $STORAGE_CAPACITY_ENABLED
   enableQuota: $QUOTA_ENABLED
+  externalAccess:
   monitor:
     enabled: $MONITOR_ENABLED
   vgsnapshotter:
