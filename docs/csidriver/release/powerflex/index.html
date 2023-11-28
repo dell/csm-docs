@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/powerflex/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-09-20T19:05:29+05:30" />
+<meta property="article:modified_time" content="2023-11-28T12:36:03+05:30" />
 
 <meta itemprop="name" content="PowerFlex">
 <meta itemprop="description" content="Release notes for PowerFlex CSI driver">
-<meta itemprop="dateModified" content="2023-09-20T19:05:29+05:30" />
-<meta itemprop="wordCount" content="444">
+<meta itemprop="dateModified" content="2023-11-28T12:36:03+05:30" />
+<meta itemprop="wordCount" content="474">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerFlex"/>
 <meta name="twitter:description" content="Release notes for PowerFlex CSI driver"/>
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4097ae20cfcbeb77d6d2c9a077e933c2.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.10bd37b7a7c0687f6404a537b36f38a3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -125,7 +125,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.4097ae20cfcbeb77d6d2c9a077e933c2.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.10bd37b7a7c0687f6404a537b36f38a3.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -756,6 +756,10 @@
 <tr>
 <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
 <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
+</tr>
+<tr>
+<td>The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version.</td>
+<td>Describe the driver pod using <code>kubectl describe pod $podname -n vxflexos</code> to ensure v2.8.0 is installed.</td>
 </tr>
 </tbody>
 </table>
