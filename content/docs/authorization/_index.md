@@ -59,21 +59,8 @@ CSM for Authorization supports the following CSI drivers and versions.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
 ## Authorization Components Support Matrix
-CSM for Authorization consists of 2 components - the Authorization sidecar and the Authorization proxy server.  It is important that the version of the Authorization sidecar image maps to a supported version of the Authorization proxy server.
+CSM for Authorization consists of 2 components - the Authorization sidecar bundled with the driver and the Authorization proxy server to validate the access. It is important to note that the sidecar is backward compatible with older proxy versions. Still, keeping the sidecar and proxy server with similar versions is advised.
 
-{{<table "table table-striped table-bordered table-sm">}}
-| Authorization Sidecar Image Tag | Authorization Proxy Server Version |
-| ------------------------------- | ---------------------------------- |
-| dellemc/csm-authorization-sidecar:v1.0.0 | v1.0.0, v1.1.0 |
-| dellemc/csm-authorization-sidecar:v1.2.0 | v1.1.0, v1.2.0 |
-| dellemc/csm-authorization-sidecar:v1.3.0 | v1.1.0, v1.2.0, v1.3.0 |
-| dellemc/csm-authorization-sidecar:v1.4.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0 |
-| dellemc/csm-authorization-sidecar:v1.5.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0 |
-| dellemc/csm-authorization-sidecar:v1.5.1 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1 |
-| dellemc/csm-authorization-sidecar:v1.6.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1, v1.6.0 |
-| dellemc/csm-authorization-sidecar:v1.7.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1, v1.6.0, v1.7.0 |
-| dellemc/csm-authorization-sidecar:v1.8.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1, v1.6.0, v1.7.0, v1.8.0 |
-{{</table>}}
 ## Roles and Responsibilities
 
 The CSM for Authorization CLI can be executed in the context of the following roles:
