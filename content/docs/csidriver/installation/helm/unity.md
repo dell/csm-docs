@@ -6,20 +6,6 @@ description: >
 
 The CSI Driver for Dell Unity XT can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
 
-The controller section of the Helm chart installs the following components in a _Deployment_:
-
-- CSI Driver for Unity XT
-- Kubernetes External Provisioner, which provisions the volumes
-- Kubernetes External Attacher, which attaches the volumes to the containers
-- Kubernetes External Snapshotter, which provides snapshot support
-- Kubernetes External Resizer, which resizes the volume
-- Kubernetes External Health Monitor, which provides volume health status
-
-The node section of the Helm chart installs the following component in a _DaemonSet_:
-
-- CSI Driver for Unity XT
-- Kubernetes Node Registrar, which handles the driver registration
-
 ## Prerequisites
 
 Before you install CSI Driver for Unity XT, verify the requirements that are mentioned in this topic are installed and configured.

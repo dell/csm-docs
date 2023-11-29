@@ -6,17 +6,6 @@ description: >
 
 The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer).
 
-The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
-- CSI Driver for Dell PowerStore
-- Kubernetes External Provisioner, which provisions the volumes
-- Kubernetes External Attacher, which attaches the volumes to the containers
-- (Optional) Kubernetes External Snapshotter, which provides snapshot support
-- (Optional) Kubernetes External Resizer, which resizes the volume
-
-The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
-- CSI Driver for Dell PowerStore
-- Kubernetes Node Registrar, which handles the driver registration
-
 ## Prerequisites
 
 The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
