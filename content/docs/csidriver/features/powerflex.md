@@ -907,6 +907,20 @@ allowedTopologies:
       values:
         - "true"
 ```
+## Configuring custom access to NFS exports
+
+CSI PowerFlex driver Version 2.9.0 and later supports the ability to configure NFS access to nodes that use dedicated storage networks.
+
+To enable this feature you need to specify `externalAccess` parameter in your helm `values.yaml` file or `X_CSI_POWERFLEX_EXTERNAL_ACCESS` variable when creating CustomResource using an operator.
+
+The value of that parameter is added as an additional entry to NFS Export host access.
+
+For example the following notation:
+```yaml
+externalAccess: "10.0.0.0/24"
+```
+
+This means that we allow for NFS Export created by driver to be consumed by address range `10.0.0.0-10.0.0.255`.
 
 ## Storage Capacity Tracking
 CSI-PowerFlex driver version 2.8.0 and above supports Storage Capacity Tracking.
