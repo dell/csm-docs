@@ -30,7 +30,7 @@ description: >
       kubectl -n openshift-operators get CSIUnity/test-unity -o yaml
   ```
 2. Map and update the settings from the CR in step 1 to the relevant CSM Operator CR
-    - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver
+    - As the yaml content may differ, ensure the values held in the step 1 CR backup are present in the new CR before installing the new driver. CR Samples table provided above can be used to compare and map the differences in attributes between Dell CSI Operator and CSM Operator CRs
         - Ex: spec.driver.fsGroupPolicy in [PowerMax 2.6 for CSI Operator](https://github.com/dell/dell-csi-operator/blob/main/samples/powermax_v260_k8s_126.yaml#L17C5-L17C18) maps to spec.driver.csiDriverSpec.fSGroupPolicy in [PowerMax 2.6 for CSM Operator](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powermax_v260.yaml#L28C7-L28C20)
 3. Retain (or do not delete) the secret, namespace, storage classes, and volume snapshot classes from the original deployment as they will be re-used in the CSM operator deployment
 4. Uninstall the CR from the CSI Operator

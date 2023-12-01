@@ -138,17 +138,6 @@ function setDefaultValues(defaultValuesParam, csmMapValues) {
 
 }
 
-function onCSMVersionChange() {
-    var selectedVersion = document.getElementById('csm-version').value;
-    var imageRepoSection = document.getElementById('image-repository');
-
-    if (selectedVersion === '1.8.0' || selectedVersion === '1.7.0') {
-        imageRepoSection.style.display = '';
-    } else {
-        imageRepoSection.style.display = 'none';
-    }
-}
-
 function setMap(str) {
 	const testMap = new Map();
 	var keyValues = str.split('\n');
@@ -167,6 +156,5 @@ if (typeof exports !== 'undefined') {
 		validateForm,
 		setMap,
 		setDefaultValues,
-		onCSMVersionChange,
 	};
 }
