@@ -90,7 +90,7 @@ bash scripts/csm-offline-bundle.sh -c
    dellemc/csi-powerstore:v2.9.0
    dellemc/csi-unity:v2.8.0
    dellemc/csi-vxflexos:v2.9.0
-   dellemc/csm-authorization-sidecar:v1.7.0
+   dellemc/csm-authorization-sidecar:v1.9.0
    dellemc/csm-metrics-powerflex:v1.5.0
    dellemc/csm-metrics-powerscale:v1.2.0
    dellemc/csm-topology:v1.5.0

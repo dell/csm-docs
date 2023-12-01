@@ -19,7 +19,7 @@ csi-powerstore:
     # CSM sidecars
     replication: dellemc/dell-csi-replicator:v1.6.0
     vgsnapshotter: dellemc/csi-volumegroup-snapshotter:v1.4.0
-    podmon: dellemc/podmon:v1.7.0
+    podmon: dellemc/podmon:v1.8.0
     metadataretriever: dellemc/csi-metadata-retriever:v1.6.0
   ## Controller ATTRIBUTES
   controller:
@@ -182,8 +182,8 @@ csi-vxflexos:
     # CSM sidecars
     replication: dellemc/dell-csi-replicator:v1.6.0
     vgsnapshotter: dellemc/csi-volumegroup-snapshotter:v1.4.0
-    podmon: dellemc/podmon:v1.7.0
-    authorization: dellemc/csm-authorization-sidecar:v1.8.0
+    podmon: dellemc/podmon:v1.8.0
+    authorization: dellemc/csm-authorization-sidecar:v1.9.0
   certSecretCount: $CERT_SECRET_COUNT
   controller:
     replication:
@@ -261,7 +261,7 @@ csi-isilon:
     # CSM sidecars
     replication: dellemc/dell-csi-replicator:v1.6.0
     podmon: dellemc/podmon:v1.8.0
-    authorization: dellemc/csm-authorization-sidecar:v1.8.0
+    authorization: dellemc/csm-authorization-sidecar:v1.9.0
     metadataretriever: dellemc/csi-metadata-retriever:v1.4.0
     encryption: dellemc/csm-encryption:v0.3.0
 
@@ -345,7 +345,7 @@ csi-unity:
     registrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.0
     healthmonitor: registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.10.0
     # CSM sidecars
-    podmon: dellemc/podmon:v1.7.0
+    podmon: dellemc/podmon:v1.8.0
   certSecretCount: $CERT_SECRET_COUNT
   fsGroupPolicy: $FSGROUP_POLICY
   controller:
