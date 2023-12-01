@@ -70,7 +70,7 @@ mv ./cert-csi-v1.3.0 ~/.local/bin/cert-csi
 1. Clone the repository
 
 ```bash
-git clone https://github.com/dell/cert-csi.git && cd cert-csi
+git clone -b "v1.3.0" https://github.com/dell/cert-csi.git && cd cert-csi
 ```
 
 2. Build cert-csi
