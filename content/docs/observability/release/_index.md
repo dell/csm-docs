@@ -12,6 +12,7 @@ Description: >
 
 
 
+
 ### New Features/Changes
 
 - [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
@@ -20,6 +21,5 @@ Description: >
 
 ### Fixed Issues
 
-- [#1007 - [BUG]: Run each metrics gatherer in a separate goroutine](https://github.com/dell/csm/issues/1007)
 
 ### Known Issues
