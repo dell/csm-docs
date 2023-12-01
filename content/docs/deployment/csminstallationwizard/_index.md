@@ -15,6 +15,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 | ------------------ | --------- | ------ | --------- |
 | CSI PowerStore     | 2.8.0     |✔️      |✔️        |
 | CSI PowerStore     | 2.7.0     |✔️      |✔️        |
+| CSI PowerMax       | 2.9.0     |✔️      |✔️        |
 | CSI PowerMax       | 2.8.0     |✔️      |✔️        |
 | CSI PowerMax       | 2.7.0     |✔️      |✔️        |           
 | CSI PowerFlex      | 2.8.0     |✔️      |❌        | 
