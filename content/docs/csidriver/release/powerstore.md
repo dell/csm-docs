@@ -7,19 +7,22 @@ description: Release notes for PowerStore CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
+- [#947 - [FEATURE]: K8s 1.28 support ](https://github.com/dell/csm/issues/947)
+- [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
 - [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
 - [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
-- [#1012 - [FEATURE]: CSM 1.9 release specific changes](https://github.com/dell/csm/issues/1012)
 - [#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM](https://github.com/dell/csm/issues/1031)
 
 ### Fixed Issues
 
 - [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
-- [#1006 - [BUG]: Too many login sessions in gopowerstore client causes unexpected session termination in UI](https://github.com/dell/csm/issues/1006)
 - [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
+- [#1006 - [BUG]: Too many login sessions in gopowerstore client causes unexpected session termination in UI](https://github.com/dell/csm/issues/1006)
+- [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
 
 ### Known Issues
 

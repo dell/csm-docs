@@ -14,22 +14,27 @@ description: Release notes for PowerMax CSI driver
 
 
 
+
 ### New Features/Changes
 
 - [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
+- [#947 - [FEATURE]: K8s 1.28 support ](https://github.com/dell/csm/issues/947)
+- [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
 - [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
 - [#991 - [FEATURE]:Remove linked proxy mode for PowerMax](https://github.com/dell/csm/issues/991)
 - [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
-- [#1012 - [FEATURE]: CSM 1.9 release specific changes](https://github.com/dell/csm/issues/1012)
-- [#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM](https://github.com/dell/csm/issues/1031)
+- [#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 ](https://github.com/dell/csm/issues/1062)
 
 ### Fixed Issues
 
-- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
-- [#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.](https://github.com/dell/csm/issues/1056)
 - [#983 - [BUG]: storageCapacity can be set in unsupported CSI Powermax with CSM Operator](https://github.com/dell/csm/issues/983)
+- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
+- [#1037 - [BUG]: Document instructions update: Either Multi-Path or the Power-Path software should be enabled for PowerMax ](https://github.com/dell/csm/issues/1037)
 - [#1051 - [BUG]: make docker command is failing with error ](https://github.com/dell/csm/issues/1051)
 - [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
+- [#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.](https://github.com/dell/csm/issues/1056)
+- [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
+- [#1064 - [BUG]: Github actions has to be updated for PowerMax ](https://github.com/dell/csm/issues/1064)
 
 ### Known Issues
 
