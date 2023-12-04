@@ -631,6 +631,18 @@ Run `cert-csi test capacity-tracking -h` for more options.
 ```bash
 cert-csi test <suite-name> --sc <storage class> --longevity <number of iterations>
 ```
+### Use configurable container images
+
+To use custom images for creating containers pass an image config YAML file as an argument. The YAML file should have linux(test) and postgres images name with their corresponding image URL. For example
+
+Example:
+```yaml
+images:
+  - test: "docker.io/centos:centos7" # change this to your url
+    postgres: "docker.io/bitnami/postgresql:11.8.0-debian-10-r72" # change this to your url
+```
+To use this feature, run cert-csi with the option `--image-config /path/to/config.yaml` along with any other arguments.
+
 
 ## Kubernetes End-To-End Tests
 All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..
