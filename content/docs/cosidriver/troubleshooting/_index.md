@@ -16,8 +16,17 @@ kubectl logs <driver pod> -n dell-cosi
 Additionaly check kubernetes resources:
 
 ```bash
+kubectl get bucketclaim -n dell-cosi
+```
+```bash
 kubectl get buckets
 ```
 ```bash
-kubectl get bucketclaim -n dell-cosi
+kubectl get bucketaccessclass
+```
+```bash
+kubectl get bucketclass
+```
+```bash
+kubectl get bucketaccess
 ```
