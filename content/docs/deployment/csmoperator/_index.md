@@ -26,7 +26,7 @@ The table below lists the driver and modules versions installable with the CSM O
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
 | CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
-| CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0            |
+| CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
 | CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
@@ -36,9 +36,9 @@ The table below lists the driver and modules versions installable with the CSM O
 | CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ❌            |
 | CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
+| CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.7.0   | ❌                | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
 
 >NOTE:
 >- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples).
