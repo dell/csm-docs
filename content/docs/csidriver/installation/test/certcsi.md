@@ -368,6 +368,8 @@ storageClasses:
 
 > NOTE: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
 
+> NOTE: If you are using CSI PowerScale with [SmartQuotas](../../../features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage. Set `storageClasses.expansion` to `false` to skip this suite.
+
 ```bash
 cert-csi certify --cert-config <path-to-config> --vsc <volume-snapshot-class>
 ```
@@ -522,6 +524,8 @@ Run `cert-csi test clone-volume -h` for more options.
 6. Verifies that the volumes mounted to the Pods were expanded.
 
 > Raw block volumes cannot be verified since there is no filesystem.
+
+> If you are using CSI PowerScale with [SmartQuotas](../../../features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage.
 
 ```bash
 cert-csi test expansion --sc <storage class>
