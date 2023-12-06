@@ -693,7 +693,7 @@ Once the volume gets created, the ControllerPublishVolume will set the QoS limit
 
 Starting with version 2.6, the CSI driver for PowerFlex will support renaming of SDCs. To use this feature, the node section of values.yaml should have renameSDC keys enabled with a prefix value.
 
-To enable renaming of SDC, make the following edits to [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
+To enable renaming of SDC, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
 ```yaml
 # "node" allows to configure node specific parameters
 node:
@@ -730,7 +730,7 @@ Based on these two keys, there are certain scenarios on which the driver is goin
 Starting with version 2.6, the CSI Driver for PowerFlex will support pre-approving SDC by GUID.
 CSI PowerFlex driver will detect the SDC mode set on the PowerFlex array and will request SDC approval from the array prior to publishing a volume. This is specific to each SDC.
 
-To request SDC approval for GUID, make the following edits to [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
+To request SDC approval for GUID, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
 ```yaml
 # "node" allows to configure node specific parameters
 node:
@@ -824,7 +824,7 @@ allowedTopologies:
     - "true"
 ```
 
-[`helm/csi-vxflexos/values.yaml`](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml)
+[`helm/csi-vxflexos/values.yaml`](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml)
 ```yaml
 ...
 enableQuota: false
@@ -834,7 +834,7 @@ enableQuota: false
 ## Usage of Quotas to Limit Storage Consumption for NFS volumes
 Starting with version 2.8, the CSI driver for PowerFlex will support enabling tree quotas for limiting capacity for NFS volumes. To use the quota feature user can specify the boolean value `enableQuota` in values.yaml.
 
-To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/csi-powerflex/blob/main/helm/csi-vxflexos/values.yaml) file:
+To enable quota for NFS volumes, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
 ```yaml
 ...
 ...
