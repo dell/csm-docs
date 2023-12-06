@@ -185,7 +185,7 @@ Set up the environment as follows:
 CSI PowerMax ReverseProxy is a component that will be installed with the CSI PowerMax driver. For more details on this feature, see the related [documentation](https://dell.github.io/csm-docs/docs/csidriver/features/powermax/#csi-powermax-reverse-proxy).
 
 #### Pre-requisites
-Create a TLS secret that holds an SSL certificate and a private key which is required by the reverse proxy server.
+Create a TLS secret that holds an SSL certificate and a private key. This is required by the reverse proxy server.
 Use a tool such as `openssl` to generate this secret using the example below:
 
 ```bash
