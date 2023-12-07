@@ -4,11 +4,6 @@ linktitle: ObjectScale
 weight: 1
 Description: Code features for ObjectScale COSI Driver
 ---
-
-> **Notational Conventions**
->
-> The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" are to be interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119) (Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997).
-
 Fields are specified by their path. Consider the following examples:
 
 1. Field specified by the following path `spec.authenticationType=IAM` is reflected in their resources YAML as the following:

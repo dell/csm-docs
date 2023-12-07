@@ -10,10 +10,6 @@ The COSI Driver for Dell ObjectScale can be deployed by using the provided Helm 
 The Helm chart installs the following components in a _Deployment_ in the specified namespace:
 - COSI Driver for ObjectScale
 
-> **Notational Conventions**
->
-> The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" are to be interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119) (Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997).
-
 ## Dependencies
 
 Installing any of the CSI Driver components using Helm requires a few utilities to be installed on the system running the installation.
