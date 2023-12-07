@@ -81,7 +81,7 @@ It is advised to comply with the support matrices (links below) and not deviate 
 - [Dell Container Storage Module for Observability](../../observability/#supported-operating-systemscontainer-orchestrator-platforms)
 - [Dell Container Storage Module for Replication](../../replication/#supported-operating-systemscontainer-orchestrator-platforms)
 - [Dell Container Storage Module for Resiliency](../../resiliency#supported-operating-systemscontainer-orchestrator-platforms)
-- [Dell CSI Drivers](../csidriver/#supported-operating-systemscontainer-orchestrator-platforms)
+- [Dell CSI Drivers](../../csidriver/#supported-operating-systemscontainer-orchestrator-platforms)
 
 ### Can I run Container Storage Modules in a production environment?
 As of CSM 1.0, the Container Storage Modules are GA and ready for production systems.
