@@ -59,7 +59,7 @@ CSM for Authorization supports the following CSI drivers and versions.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
 ## Authorization Components Support Matrix
-CSM for Authorization consists of 2 components - the Authorization sidecar bundled with the driver and the Authorization proxy server to validate the access. It is important to note that the sidecar is backward compatible with older proxy versions. Still, keeping the sidecar and proxy server with similar versions is advised.
+CSM for Authorization consists of 2 components - The authorization sidecar, bundled with the driver, communicates with the Authorization proxy server to validate access to Storage platforms. The authorization sidecar is backward compatible with older Authorization proxy server versions. However, it is highly recommended to have the Authorization proxy server and sidecar installed from the same release of CSM.
 
 ## Roles and Responsibilities
 
