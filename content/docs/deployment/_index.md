@@ -2,7 +2,7 @@
 title: "Deployment"
 linkTitle: "Deployment"
 no_list: true
-description: Deployment of CSM for Replication
+description: Deployment of CSM
 weight: 1
 ---
 
@@ -36,33 +36,26 @@ The Container Storage Modules and the required CSI Drivers can each be deployed 
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
-  {{< card header="[Dell CSI Drivers Installation via operator](csmoperator/drivers/)"
-          footer="Installs [PowerStore](csmoperator/drivers/powerstore/) [PowerMax](csmoperator/drivers/powermax/) [PowerScale](csmoperator/drivers/powerscale/) [PowerFlex](csmoperator/drivers/powerflex/) [Unity XT](csmoperator/drivers/unity/)">}}
-   Dell CSM Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
-   [...More on installation instructions](../deployment/csmoperator)
-  {{< /card >}}
-{{< /cardpane >}}
-{{< cardpane >}}
   {{< card header="[Dell Container Storage Module for Observability](../observability/deployment)"
           footer="Installs Observability Module">}}
-  CSM for Observability can be deployed either via Helm or  CSM for Observability Installer or CSM for Observability Offline Installer
+  CSM for Observability can be deployed either via Helm/CSM operator/CSM for Observability Installer/CSM for Observability Offline Installer
   [...More on installation instructions](../observability/deployment)
   {{< /card >}}
    {{< card header="[Dell Container Storage Module for Authorization](../authorization/deployment)"
           footer="Installs Authorization Module">}}
-  CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms. 
+  CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms or CSM operator. 
   [...More on installation instructions](../authorization/deployment)
   {{< /card >}}
 {{< /cardpane >}}
 {{< cardpane >}}
   {{< card header="[Dell Container Storage Module for Resiliency](../resiliency/deployment)"
           footer="Installs Resiliency Module">}}
-  CSI drivers that support Helm chart installation allow CSM for Resiliency to be _optionally_ installed by variables in the chart. It can be updated via _podmon_ block specified in the _values.yaml_ 
+  CSI drivers that support Helm chart installation allow CSM for Resiliency to be _optionally_ installed by variables in the chart. It can be updated via _podmon_ block specified in the _values.yaml_. It can be installed via CSM operator as well. 
   [...More on installation instructions](../resiliency/deployment)
   {{< /card >}}
    {{< card header="[Dell Container Storage Module for Replication](../replication/deployment)"
           footer="Installs Replication Module">}}
-  Replication module can be installed by installing repctl,Container Storage Modules (CSM) for Replication Controller,CSI driver after enabling replication.
+  Replication module can be installed by installing repctl,Container Storage Modules (CSM) for Replication Controller,CSI driver after enabling replication. It can be installed via CSM operator as well.
    [...More on installation instructions](../replication/deployment)
   {{< /card >}}
 {{< /cardpane >}}

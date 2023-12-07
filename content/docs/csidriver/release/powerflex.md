@@ -6,8 +6,10 @@ description: Release notes for PowerFlex CSI driver
 ## Release Notes - CSI PowerFlex v2.9.0
 
 
+
 ### New Features/Changes
 
+- [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
 - [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
 - [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
 - [#1012 - [FEATURE]: CSM 1.9 release specific changes](https://github.com/dell/csm/issues/1012)
@@ -16,8 +18,9 @@ description: Release notes for PowerFlex CSI driver
 ### Fixed Issues
 
 - [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
-- [#1020 - [BUG]: SDC Rename ](https://github.com/dell/csm/issues/1020)
+- [#1020 - [BUG]: CSI-PowerFlex: SDC Rename fails when configuring multiple arrays in the secret](https://github.com/dell/csm/issues/1020)
 - [#1030 - [BUG]: Comment out duplicate entries in the sample secret.yaml file](https://github.com/dell/csm/issues/1030)
+- [#1050 - [BUG]: NFS Export gets deleted when one pod is deleted from the multiple pods consuming the same PowerFlex RWX NFS volume](https://github.com/dell/csm/issues/1050)
 - [#1054 - [BUG]: The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version](https://github.com/dell/csm/issues/1054)
 
 ### Known Issues

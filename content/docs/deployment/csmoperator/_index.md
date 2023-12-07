@@ -24,21 +24,21 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.9.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.7.0       |
+| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
-| CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0            |
-| CSI PowerFlex      | 2.9.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.7.0       |
+| CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
+| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
-| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
+| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
 | CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
-| CSI PowerMax       | 2.9.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.7.0           | ❌            |
+| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ❌            |
 | CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
+| CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.7.0   | ❌                | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
 
 >NOTE:
 >- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples).
@@ -168,7 +168,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    dellemc/csi-powerstore:v2.9.0
    dellemc/csi-unity:v2.9.0
    dellemc/csi-vxflexos:v2.9.0
-   dellemc/csm-authorization-sidecar:v1.7.0
+   dellemc/csm-authorization-sidecar:v1.9.0
    dellemc/csm-metrics-powerflex:v1.7.0
    dellemc/csm-metrics-powerscale:v1.4.0
    dellemc/csm-topology:v1.7.0

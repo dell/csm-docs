@@ -8,7 +8,11 @@ Cert-CSI is a tool to validate Dell CSI Drivers. It contains various test suites
 
 ## Installation
 
-The recommended methods of installing `cert-csi` are downloading the exectuble from the latest GitHub Release or pulling the latest container image.
+There are three methods of installing `cert-csi`.
+
+1. [Download the executable from the latest GitHub release](#download-release-linux).
+2. [Pull the container image from DockerHub](#pull-the-container-image).
+3. [Build the exectuable or container image locally](#building-locally).
 
 > The exectuable from the GitHub Release only supports Linux. For non-Linux users, you must build the `cert-csi` executable [locally](#building-locally).
 
@@ -70,7 +74,7 @@ mv ./cert-csi-v1.3.0 ~/.local/bin/cert-csi
 1. Clone the repository
 
 ```bash
-git clone https://github.com/dell/cert-csi.git && cd cert-csi
+git clone -b "v1.3.0" https://github.com/dell/cert-csi.git && cd cert-csi
 ```
 
 2. Build cert-csi
@@ -87,7 +91,8 @@ git clone https://github.com/dell/cert-csi.git && cd cert-csi
 {{% tab name="Container Image" %}}
 
 ```bash
-  make docker # uses podman if available, otherwise uses docker
+  # uses podman if available, otherwise uses docker. The resulting image is tagged cert-csi:latest
+  make docker
 ```
 
 {{% /tab %}}
@@ -106,21 +111,23 @@ make install-ms
 {{< tabs name="running-cert-csi" >}}
 {{% tab name="Executable" %}}
 ```bash
-   cert-csi -h
+   cert-csi --help
 ```
 {{% /tab %}}
 {{% tab name="Docker" %}}
 ```bash
-   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi -h
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.0 --help
 ```
 {{% /tab %}}
 {{% tab name="Podman" %}}
 ```bash
-   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi -h
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config dellemc/cert-csi:v1.3.0 --help
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+> The following sections showing how to execute the various test suites use the executable for brevity. For executions requiring special behavior, such as mounting file arguments into the container image, it will be noted for the relevant command.
 
 > Log files are located in the `logs` directory in the working directory of cert-csi.\
 > Report files are located in the default `$HOME/.cert-csi/reports` directory.\
@@ -356,10 +363,12 @@ storageClasses:
 9. If `storageClasses.volumeHealth` is `true`, executes the [Volume Health Metrics](#volume-health-metrics) suite.
 10. If `storageClasses.rwop` is `true`, executes the [Multi-Attach Volume](#multi-attach-volume) suite with the volume access mode `ReadWriteOncePod`.
 11. If `storageClasses.ephemeral` exists, executes the [Ephemeral Volumes](#ephemeral-volumes) suite.
-12. If `storageClasses.vgs` is `true`, executes the [Volume Group Snapshot]() suite. #todo
+12. If `storageClasses.vgs` is `true`, executes the [Volume Group Snapshot]() suite.
 13. If `storageClasses.capacityTracking` exists, exeuctes the [Storage Class Capacity Tracking](#storage-capacity-tracking) suite.
 
 > NOTE: For testing/debugging purposes, it can be useful to use the `--no-cleanup` so resources do not get deleted.
+
+> NOTE: If you are using CSI PowerScale with [SmartQuotas](../../../features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage. Set `storageClasses.expansion` to `false` to skip this suite.
 
 ```bash
 cert-csi certify --cert-config <path-to-config> --vsc <volume-snapshot-class>
@@ -374,6 +383,22 @@ Optional Params:
 ```
 
 Run `cert-csi certify -h` for more options.
+
+If you are using the container image, the `cert-config` file must be mounted into the container. Assuming your `cert-config` file is `/home/user/example-certify-config.yaml`, here are examples of how to exeucte this suite with the container image.
+
+{{< tabs name="running-container-certify" >}}
+{{% tab name="Docker" %}}
+```bash
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+```
+{{% /tab %}}
+{{% tab name="Podman" %}}
+```bash
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/example-certify-config.yaml:/example-certify-config.yaml dellemc/cert-csi:v1.3.0 certify --cert-config /example-certify-config.yaml --vsc <volume-snapshot-class>
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Running Invidual Test Suites
 
@@ -500,6 +525,8 @@ Run `cert-csi test clone-volume -h` for more options.
 
 > Raw block volumes cannot be verified since there is no filesystem.
 
+> If you are using CSI PowerScale with [SmartQuotas](../../../features/powerscale/#usage-of-smartquotas-to-limit-storage-consumption) disabled, the `Volume Expansion` suite is expected to timeout due to the way PowerScale provisions storage.
+
 ```bash
 cert-csi test expansion --sc <storage class>
 ```
@@ -554,6 +581,22 @@ Run `cert-csi test ephemeral-volume -h` for more options.
 
 > `--driver` is the name of a CSI Driver from the output of `kubectl get csidriver` (e.g, csi-vxflexos.dellemc.com).
 > This suite does not delete resources on success.
+
+If you are using the container image, the `attr` file must be mounted into the container. Assuming your `attr` file is `/home/user/ephemeral-config.properties`, here are examples of how to exeucte this suite with the container image.
+
+{{< tabs name="running-container-ephemeral-volume" >}}
+{{% tab name="Docker" %}}
+```bash
+   docker run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+```
+{{% /tab %}}
+{{% tab name="Podman" %}}
+```bash
+   podman run --rm -it -v ~/.kube/config:/root/.kube/config -v /home/user/ephemeral-config.properties:/ephemeral-config.properties dellemc/cert-csi:v1.3.0 test ephemeral-volume --driver <driver-name> --attr /ephemeral-config.properties
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Sample ephemeral-config.properties (key/value pair)
    {{< tabs name="volume-attributes-examples" >}}
@@ -631,6 +674,18 @@ Run `cert-csi test capacity-tracking -h` for more options.
 ```bash
 cert-csi test <suite-name> --sc <storage class> --longevity <number of iterations>
 ```
+### Use configurable container images
+
+To use custom images for creating containers pass an image config YAML file as an argument. The YAML file should have linux(test) and postgres images name with their corresponding image URL. For example
+
+Example:
+```yaml
+images:
+  - test: "docker.io/centos:centos7" # change this to your url
+    postgres: "docker.io/bitnami/postgresql:11.8.0-debian-10-r72" # change this to your url
+```
+To use this feature, run cert-csi with the option `--image-config /path/to/config.yaml` along with any other arguments.
+
 
 ## Kubernetes End-To-End Tests
 All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..
@@ -639,7 +694,6 @@ All Kubernetes end to end tests require that you provide the driver config based
  ```
 
 ### Running kubernetes end-to-end tests
-todo
 To run kubernetes end-to-end tests, run the command:
 ```bash
 

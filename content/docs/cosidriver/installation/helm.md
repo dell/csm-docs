@@ -34,7 +34,7 @@ Installing any of the CSI Driver components using Helm requires a few utilities 
 1. Run `git clone -b main https://github.com/dell/helm-charts.git` to clone the git repository.
 2. Ensure that you have created the namespace where you want to install the driver. You can run `kubectl create namespace dell-cosi` to create a new one. The use of _dell-cosi_  as the namespace is just an example. You can choose any name for the namespace.
 3. Copy the _charts/cosi/values.yaml_ into a new location with name _my-cosi-values.yaml_, to customize settings for installation.
-4. Create new file called _my-cosi-configuration.yaml_, and copy the settings available in the [Configuration File](./configuration_file.md) page.
+4. Create new file called _my-cosi-configuration.yaml_, and copy the settings available in the [Configuration File](../configuration_file/) page.
 5. Edit *my-cosi-values.yaml* to set the following parameters for your installation:
    The following table lists the primary configurable parameters of the COSI driver Helm chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/master/charts/cosi/values.yaml) file in this repository.
 
