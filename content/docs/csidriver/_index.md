@@ -25,11 +25,12 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Rancher Kubernetes Engine | 1.4.x|          1.4.x      |        1.4.x     |         1.4.x     |      1.4.x       |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  | yes  |   yes      |        yes        |      yes         |
 | Kubernetes K3s Engine on Debian OS |     no    |  no   |      1.26, 1.27, 1.28  |        no         |        no        |
-| OS dependencies | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | - |    iscsi-initiator-utils<br>multipathd<br>nfs-utils | nfs-utils | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
+| OS dependencies | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | [SDC](https://www.dell.com/support/home/en-us/product-support/product/scaleio/drivers) |    iscsi-initiator-utils<br>multipathd<br>nfs-utils | nfs-utils | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
 {{</table>}}
 
 > Notes:
 > * The required OS dependencies are only for the protocol needed (e.g. if NVMe isn't the storage access protocol then nvme-cli is not required).
+> * The base OS tested by Dell Technologies are Red Hat Enterprise Linux, Red Hat CoreOS, SUSE Linux Enterprise Server.
 > * The host operating system/version being used must align with what each Dell Storage platform supports. Please visit [E-Lab Navigator](https://elabnavigator.dell.com/eln/modernHomeSSM) for specific Dell Storage platform host operating system level support matrices.
 
 ### CSI Driver Capabilities
