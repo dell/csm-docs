@@ -8,11 +8,12 @@ description: Release notes for PowerStore CSI driver
 
 
 
+
 ### New Features/Changes
 
-- [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
-- [#947 - [FEATURE]: K8s 1.28 support ](https://github.com/dell/csm/issues/947)
+- [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
 - [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
+- [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
 - [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
 - [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
 - [#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM](https://github.com/dell/csm/issues/1031)
