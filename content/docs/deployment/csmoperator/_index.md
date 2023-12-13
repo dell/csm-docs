@@ -24,16 +24,16 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.8.0       |
+| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
-| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.8.0       |
+| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
 | CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
 | CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
-| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ❌            |
+| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ❌            |
 | CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
 | CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
@@ -172,8 +172,8 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    dellemc/csm-metrics-powerflex:v1.7.0
    dellemc/csm-metrics-powerscale:v1.4.0
    dellemc/csm-topology:v1.7.0
-   dellemc/dell-csi-replicator:v1.6.0
-   dellemc/dell-replication-controller:v1.6.0
+   dellemc/dell-csi-replicator:v1.7.0
+   dellemc/dell-replication-controller:v1.7.0
    dellemc/sdc:4.5
    docker.io/dellemc/dell-csm-operator:v1.4.0
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
