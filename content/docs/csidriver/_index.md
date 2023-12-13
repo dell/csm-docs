@@ -24,7 +24,6 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | VMware Tanzu  |        no        |          no         |        NFS       |         NFS       |      NFS,iSCSI   |
 | Rancher Kubernetes Engine | 1.4.x|          1.4.x      |        1.4.x     |         1.4.x     |      1.4.x       |
 | Amazon Elastic Kubernetes Service<br> Anywhere | yes  | yes  |   yes      |        yes        |      yes         |
-| Kubernetes K3s Engine on Debian OS |     no    |  no   |      1.26, 1.27, 1.28  |        no         |        no        |
 | OS dependencies | iscsi-initiator-utils<br>multipathd or powerpath<br>nvme-cli<br>nfs-utils | - |    iscsi-initiator-utils<br>multipathd<br>nfs-utils | nfs-utils | iscsi-initiator-utils<br>multipathd<br>nvme-cli<br>nfs-utils |
 {{</table>}}
 
@@ -75,4 +74,12 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Thin / Thick provisioning | Thin | Thin               | Thin/Thick       | N/A              | Thin             |
 | Platform-specific configurable settings | Service Level selection<br>iSCSI CHAP | - | Host IO Limit<br>Tiering Policy<br>NFS Host IO size<br>Snapshot Retention duration | Access Zone<br>NFS version (3 or 4);Configurable Export IPs | iSCSI CHAP |
 | Auto RDM(vSphere)  | Yes(over FC) | N/A               | N/A              | N/A              | N/A              |
+{{</table>}}
+
+### Community Qualified Platforms
+{{<table "table table-striped table-bordered table-sm">}}
+| cert-csi results                                       | OS         | CO               | Storage Platform        | Protocol  | CSM        |
+|--------------------------------------------------------|:----------:|:----------------:|:-----------------------:|:---------:|:----------:|
+| [Ticket 1079](https://github.com/dell/csm/issues/1079) | Debian 10  | K3s v1.24.7+k3s1 | Unity VSA 5.3.1.0.5.008 | iSCSI     | CSI v1.8.0 |
+
 {{</table>}}
