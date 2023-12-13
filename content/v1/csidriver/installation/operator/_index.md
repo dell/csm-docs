@@ -7,7 +7,7 @@ description: >
 ---
 
 {{% pageinfo color="primary" %}}
-The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use [CSM Operator](../../../deployment/csmoperator) going forward.
+The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with [Dell CSM Operator](https://dell.github.io/csm-docs/docs/deployment/csmoperator/). If you are currently using Dell CSI Operator, refer to the [operator migration documentation](https://dell.github.io/csm-docs/docs/csidriver/installation/operator/operator_migration/) to migrate from Dell CSI Operator to Dell CSM Operator.
 {{% /pageinfo %}}
 
 The Dell CSI Operator is a Kubernetes Operator, which can be used to install and manage the CSI Drivers provided by Dell for various storage platforms. This operator is available as a community operator for upstream Kubernetes and can be deployed using OperatorHub.io. It is also available as a certified operator for OpenShift clusters and can be deployed using the OpenShift Container Platform. Both these methods of installation use OLM (Operator Lifecycle Manager).  The operator can also be deployed manually.
@@ -35,7 +35,7 @@ If you have installed an old version of the `dell-csi-operator` which was availa
 | ------------------ | --------- | -------------- | -------------------- | --------------------- |
 | CSI PowerMax       | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerMax       | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
-| CSI PowerMax       | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12 EUS, 4.12  |
+| CSI PowerMax       | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12, 4.12 EUS  |
 | CSI PowerFlex      | 2.5.0     | v2.5.0         | 1.23, 1.24, 1.25     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerFlex      | 2.6.0     | v2.6.0         | 1.24, 1.25, 1.26     | 4.10, 4.10 EUS, 4.11  |
 | CSI PowerFlex      | 2.7.0     | v2.7.0         | 1.25, 1.26, 1.27     | 4.11, 4.12 EUS, 4.12  |
@@ -206,8 +206,8 @@ Or
   {driver name}_{driver version}_ops_{OpenShift version}.yaml
 ```
 For e.g.
-* samples/powermax_v270_k8s_126.yaml* <- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.26 cluster  
-* samples/powermax_v270_ops_411.yaml* <- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.11 cluster
+* samples/powermax_v270_k8s_127.yaml* <- To install CSI PowerMax driver v2.7.0 on a Kubernetes 1.27 cluster  
+* samples/powermax_v270_ops_412.yaml* <- To install CSI PowerMax driver v2.7.0 on an OpenShift 4.12 cluster
 
 Copy the correct sample file and edit the mandatory & any optional parameters specific to your driver installation by following the instructions [here](#modify-the-driver-specification)  
 >NOTE: A detailed explanation of the various mandatory and optional fields in the CustomResource is available [here](#custom-resource-specification). Please make sure to read through and understand the various fields.

@@ -13,34 +13,21 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
   ```bash
   kubectl create namespace karavi
   ```
-- [Install cert-manager with Helm](https://cert-manager.io/docs/installation/helm/)
-    1. Add the Helm repository
-        ```bash
-        helm repo add jetstack https://charts.jetstack.io
-        ```
-    2. Update your local Helm chart repository cache
-        ```bash
-        helm repo update
-        ```
-    3. Install cert-manager in the namespace `karavi`
-        ```bash
-        helm install \
-          cert-manager jetstack/cert-manager \
-          --namespace karavi \
-          --version v1.10.0 \
-          --set installCRDs=true
-        ```
-    4. Verify installation
-        ```bash
-        kubectl get pod -n karavi
-        ```
-        ```
-        NAME                                      READY   STATUS    RESTARTS        AGE
-        cert-manager-7b45d477c8-z28sq             1/1     Running   0               2m2s
-        cert-manager-cainjector-86f7f4749-mdz7c   1/1     Running   0               2m2s
-        cert-manager-webhook-66c85f8577-c7hxx     1/1     Running   0               2m2s
-        ```
+- Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/main/samples). If cert-manager has already been installed, don't enable it.
+  - Scenario 1: Deploy one supported CSI Driver and enable Observability module
+    - If you enable `metrics-powerscale` or `metrics-powerflex`, must enable `otel-collector` as well.
+    
+  - Scenario 2: Deploy multiple supported CSI Drivers and enable Observability module
+    - When deploying the first driver, enable all components of Observability module in the CR. 
+    - For the following drivers, only enable the metrics service, and remove `topology` and `otel-collector` sections from the CR.
+    - The CR created at first must be deleted at last.
+    - 
+Note: pods in the `karavi` namespace will be in the ContainerCreating state until certificates are successfully created as described in the next step.
+
 - Create certificates
+
+  Note: you may need to wait for the cert-manager pods to be 60-90 seconds old to successfully create certificates without an x509 error. See the [cert-manager documentation](https://cert-manager.io/docs/concepts/webhook/#webhook-connection-problems-shortly-after-cert-manager-installation) for more information.
+  
     - Option 1: Self-signed certificates
 		1. A Sample certificates manifest can be found at `samples/observability/selfsigned-cert.yaml`.
 		2. Create certificates
@@ -54,11 +41,3 @@ The CSM Observability module for supported Dell CSI Drivers can be installed via
       ```bash
       kubectl create -f custom-cert.yaml
       ```
-- Enable Observability module and components in [sample manifests](https://github.com/dell/csm-operator/tree/main/samples)
-    - Scenario 1: Deploy one supported CSI Driver and enable Observability module
-      - If you enable `metrics-powerscale` or `metrics-powerflex`, must enable `otel-collector` as well.
-    
-    - Scenario 2: Deploy multiple supported CSI Drivers and enable Observability module
-      - When deploying the first driver, enable all components of Observability module in the CR. 
-      - For the following drivers, only enable the metrics service, and remove `topology` and `otel-collector` sections from the CR.
-      - The CR created at first must be deleted at last.

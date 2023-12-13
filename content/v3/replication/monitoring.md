@@ -6,14 +6,14 @@ description: >
   DellCSIReplicationGroup Monitoring
 ---
 
-The dell-csm-replicator supports monitoring of DellCSIReplicationGroup Custom Resources (CRs).
+The dell-csm-replicator supports monitoring of `DellCSIReplicationGroup` Custom Resources (CRs).
 
 Each RG is polled at a pre-defined interval and for each RG, a gRPC call is made to the driver which returns the status of 
 the protection group on the array. 
 
 If an RG doesn't have any PVs associated with it, the driver will not receive any monitoring request for that RG.
 
-This status can be obtained from the RG as under:
+This status can be obtained from the RG using a standard `kubectl get` call on the resource name:
 
 ```
 NAME                                                 AGE     STATE   LINK STATE     LAST LINKSTATE UPDATE

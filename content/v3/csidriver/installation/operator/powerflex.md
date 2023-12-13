@@ -14,7 +14,7 @@ There are sample manifests provided which can be edited to do an easy installati
 Kubernetes Operators make it easy to deploy and manage the entire lifecycle of complex Kubernetes applications. Operators use Custom Resource Definitions (CRD) which represents the application and use custom controllers to manage them.
 
 ### Prerequisites:
-- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../troubleshooting/powerflex.md) for details
+- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../troubleshooting/powerflex) for details
 #### SDC Deployment for Operator 
 - This feature deploys the sdc kernel modules on all nodes with the help of an init container.
 - For non-supported versions of the OS also do the manual SDC deployment steps given below. Refer to https://hub.docker.com/r/dellemc/sdc for supported versions.
@@ -43,7 +43,7 @@ Kubernetes Operators make it easy to deploy and manage the entire lifecycle of c
   - Optionally, enable sdc monitor by uncommenting the section for sidecar in manifest yaml. Please note the following: 
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
     - **If not using sidecar**, please leave this commented out -- otherwise, the empty fields will cause errors.
-##### Example CR:  [config/samples/vxflex_v250_ops_411.yaml](https://github.com/dell/dell-csi-operator/blob/master/samples/vxflex_v250_ops_411.yaml)
+##### Example CR:  [config/samples/vxflex_v260_ops_411.yaml](https://github.com/dell/dell-csi-operator/blob/main/samples/vxflex_v260_ops_411.yaml)
 ```yaml
         sideCars:
     # Comment the following section if you don't want to run the monitoring sidecar
@@ -161,13 +161,13 @@ metadata:
   namespace: test-vxflexos
 spec:
   driver:
-    configVersion: v2.5.0
+    configVersion: v2.6.0
     replicas: 1
     dnsPolicy: ClusterFirstWithHostNet
     forceUpdate: false
     fsGroupPolicy: File
     common:
-      image: "dellemc/csi-vxflexos:v2.5.0"
+      image: "dellemc/csi-vxflexos:v2.6.0"
       imagePullPolicy: IfNotPresent
       envs:
         - name: X_CSI_VXFLEXOS_ENABLELISTVOLUMESNAPSHOT
