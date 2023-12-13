@@ -12,17 +12,17 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
 Note that the deployment of the driver using the operator does not use any Helm charts and the installation and configuration parameters will be slightly different from the one specified via the Helm installer.
 
-**Note**: MKE (Mirantis Kubernetes Engine) does not support the installation of CSI-PowerStore via Operator.
-
 ### Listing installed drivers with the ContainerStorageModule CRD
 User can query for all Dell CSI drivers using the following command:
-`kubectl get csm --all-namespaces`
+```bash
+kubectl get csm --all-namespaces
+```
 
 
 ### Prerequisite
 
 1. Create namespace.
-   Execute `kubectl create namespace test-powerstore` to create the test-powerstore namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'test-powerstore'.
+   Execute `kubectl create namespace powerstore` to create the powerstore namespace (if not already present). Note that the namespace can be any user-defined name, in this example, we assume that the namespace is 'powerstore'.
 
 2. Create a file called `config.yaml` that has Powerstore array connection details with the following content
    ```yaml
@@ -40,7 +40,9 @@ User can query for all Dell CSI drivers using the following command:
    ```
    Change the parameters with relevant values for your PowerStore array. 
    Add more blocks similar to above for each PowerStore array if necessary.
-           
+   ### User Privileges
+   The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
+
 3. Create Kubernetes secret: 
 
    Create a file called `secret.yaml` in same folder as `config.yaml` with following content
@@ -48,8 +50,8 @@ User can query for all Dell CSI drivers using the following command:
    apiVersion: v1
    kind: Secret
    metadata:
-      name: test-powerstore-config
-      namespace: test-powerstore
+      name: powerstore-config
+      namespace: powerstore
    type: Opaque
    data:
       config: CONFIG_YAML
@@ -57,6 +59,7 @@ User can query for all Dell CSI drivers using the following command:
 
    Combine both files and create Kubernetes secret by running the following command:
    ```bash
+
    sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
    ```
 
@@ -72,7 +75,7 @@ User can query for all Dell CSI drivers using the following command:
   | Parameter | Description | Required | Default |
 | --------- | ----------- | -------- |-------- |
 | replicas | Controls the number of controller pods you deploy. If the number of controller pods is greater than the number of available nodes, the excess pods will be in pending state until new nodes are available for scheduling. Default is 2 which allows for Controller high availability. | Yes | 2 |
-| namespace | Specifies namespace where the driver will be installed | Yes | "test-powerstore" |
+| namespace | Specifies namespace where the driver will be installed | Yes | "powerstore" |
 | fsGroupPolicy | Defines which FS Group policy mode to be used. Supported modes `None, File and ReadWriteOnceWithFSType` | No |"ReadWriteOnceWithFSType"|
 | storageCapacity | Enable/Disable storage capacity tracking feature | No | false |
 | ***Common parameters for node and controller*** |
@@ -84,8 +87,16 @@ User can query for all Dell CSI drivers using the following command:
 | ***Node parameters*** |
 | X_CSI_POWERSTORE_ENABLE_CHAP | Set to true if you want to enable iSCSI CHAP feature | No | false |
 
-4.  Execute the following command to create PowerStore custom resource:`kubectl create -f <input_sample_file.yaml>`. This command will deploy the CSI PowerStore driver in the namespace specified in the input YAML file
-      - Next, the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n <driver-namespace>`
+4.  Execute the following command to create PowerStore custom resource:
+   ```bash
+   kubectl create -f <input_sample_file.yaml>
+   ```
+   This command will deploy the CSI PowerStore driver in the namespace specified in the input YAML file.
+      
+   - Next, the driver should be installed, you can check the condition of driver pods by running 
+      ```bash
+      kubectl get all -n <driver-namespace>
+      ```
 
 5.  [Verify the CSI Driver installation](../#verifying-the-driver-installation)
     

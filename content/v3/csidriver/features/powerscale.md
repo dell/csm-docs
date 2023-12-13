@@ -304,7 +304,7 @@ controllerCount: 2
 
 If you are using the `dell-csi-operator`, adjust the following value in your Custom Resource manifest
 
-```bash
+```yaml
 replicas: 2  
 ```
 

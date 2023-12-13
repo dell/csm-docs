@@ -393,19 +393,28 @@ To manage multiple arrays you need to create an array connection configuration t
 
 ### Creating array configuration
 
-There is a sample yaml file in the samples folder under the top-level directory called `config.yaml` with the following content:
+There is a sample yaml file in the samples folder called `secret.yaml` with the following content:
  ```yaml
-  # Username for accessing PowerFlex system.	
-- username: "admin"
-  # Password for accessing PowerFlex system.	
+  # Username for accessing PowerFlex system.
+  # If authorization is enabled, username will be ignored.
+  - username: "admin"
+  # Password for accessing PowerFlex system.
+  # If authorization is enabled, password will be ignored.
   password: "password"
-  # System name/ID of PowerFlex system.	
-  systemID: "ID1"
+  # PowerFlex system name or ID.	
+  # Required: true
+  systemID: "1a99aa999999aa9a"
+  # Required: false
+  # Previous names used in secret of PowerFlex system. Only needed if PowerFlex System Name has been changed by user 
+  # and old resources are still based on the old name. 
+  allSystemNames: "pflex-1,pflex-2"
   # REST API gateway HTTPS endpoint for PowerFlex system.
+  # If authorization is enabled, endpoint should be the HTTPS localhost endpoint that 
+  # the authorization sidecar will listen on
   endpoint: "https://127.0.0.1"
-  # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
-  # Allowed values: true or false
-  # Default value: true
+    # Determines if the driver is going to validate certs while connecting to PowerFlex REST API interface.
+    # Allowed values: true or false
+    # Default value: true
   skipCertificateValidation: true 
   # indicates if this array is the default array
   # needed for backwards compatibility
@@ -414,20 +423,27 @@ There is a sample yaml file in the samples folder under the top-level directory 
   isDefault: true
   # defines the MDM(s) that SDC should register with on start.
   # Allowed values:  a list of IP addresses or hostnames separated by comma.
-  # Default value: none 
+  # Default value: none
   mdm: "10.0.0.1,10.0.0.2"
+  # Defines all system names used to create powerflex volumes
+  # Required: false
+  # Default value: none
+  AllSystemNames: "name1,name2"
 - username: "admin"
   password: "Password123"
-  systemID: "ID2"
+  systemID: "2b11bb111111bb1b"
   endpoint: "https://127.0.0.2"
   skipCertificateValidation: true 
   mdm: "10.0.0.3,10.0.0.4"
+  AllSystemNames: "name1,name2"
  ```
+The systemID can be found by displaying system level information, which is outlined [here](https://infohub.delltechnologies.com/l/powerflex-rest-api-introduction/system-information)
+
 Here we specify that we want the CSI driver to manage two arrays: one with an IP `127.0.0.1` and the other with an IP `127.0.0.2`.
 
 To use this config we need to create a Kubernetes secret from it. To do so, run the following command:
 
-`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=config.yaml`
+`kubectl create secret generic vxflexos-config -n vxflexos --from-file=config=secret.yaml`
 
 ## Dynamic Array Configuration
 
@@ -642,23 +658,85 @@ To accomplish this, two new parameters are introduced in the storage class: band
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-name: vxflexos
-annotations:
-storageclass.kubernetes.io/is-default-class: "true"
+    name: vxflexos
+    annotations:
+        storageclass.kubernetes.io/is-default-class: "true"
 provisioner: csi-vxflexos.dellemc.com
 reclaimPolicy: Delete
 allowVolumeExpansion: true
 parameters:
-storagepool: <STORAGE_POOL> # Insert Storage pool
-systemID: <SYSTEM_ID> # Insert System ID
-bandwidthLimitInKbps: <BANDWIDTH_LIMIT_IN_KBPS> # Insert bandwidth limit in Kbps
-iopsLimit: <IOPS_LIMIT> # Insert iops limit
-csi.storage.k8s.io/fstype: ext4
+    storagepool: "pool2" # Insert Storage pool
+    systemID: <SYSTEM_ID> # Insert System ID
+    bandwidthLimitInKbps: "10240" # Insert bandwidth limit in Kbps
+    iopsLimit: "11" # Insert iops limit
+    csi.storage.k8s.io/fstype: ext4
 volumeBindingMode: WaitForFirstConsumer
 allowedTopologies:
-- matchLabelExpressions:
-    - key: csi-vxflexos.dellemc.com/<SYSTEM_ID> # Insert System ID
-      values:
-        - csi-vxflexos.dellemc.com
+  - matchLabelExpressions:
+      - key: csi-vxflexos.dellemc.com/<SYSTEM_ID> # Insert System ID
+        values:
+          - csi-vxflexos.dellemc.com
 ```
 Once the volume gets created, the ControllerPublishVolume will set the QoS limits for the volumes mapped to SDC.
+
+## Rename SDC
+
+Starting with version 2.6, the CSI driver for PowerFlex will support renaming of SDCs. To use this feature, the node section of values.yaml should have renameSDC keys enabled with a prefix value.
+
+To enable renaming of SDC, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
+```yaml
+# "node" allows to configure node specific parameters
+node:
+   ...
+   ...
+
+  # "renameSDC" defines the rename operation for SDC
+  # Default value: None
+  renameSDC:
+    # enabled: Enable/Disable rename of SDC
+    # Allowed values:
+    #   true: enable renaming
+    #   false: disable renaming
+    # Default value: "false"
+    enabled: false
+    # "prefix" defines a string for the new name of the SDC.
+    # "prefix" + "worker_node_hostname" should not exceed 31 chars.
+    # Default value: none
+    # Examples: "rhel-sdc", "sdc-test"
+    prefix: "sdc-test"
+```
+The renameSDC section is going to be used by the Node Service, it has two keys enabled and prefix:
+* `enabled`: Boolean variable that specifies if the renaming for SDC is to be carried out or not. If true then the driver will perform the rename operation. By default, its value will be false.
+* `prefix`: string variable that is used to set the prefix for SDC name.
+
+Based on these two keys, there are certain scenarios on which the driver is going to perform the rename SDC operation:
+* If enabled and prefix given then set the prefix+worker_node_name for SDC name.
+* If enabled and prefix not given then set worker_node_name for SDC name.
+
+> NOTE: name of the SDC cannot be more than 31 characters, hence the prefix given and the worker node hostname name taken should be such that the total length does not exceed 31 character limit. 
+
+## Pre-approving SDC by GUID
+
+Starting with version 2.6, the CSI Driver for PowerFlex will support pre-approving SDC by GUID.
+CSI PowerFlex driver will detect the SDC mode set on the PowerFlex array and will request SDC approval from the array prior to publishing a volume. This is specific to each SDC.
+
+To request SDC approval for GUID, make the following edits to [values.yaml](https://github.com/dell/helm-charts/blob/main/charts/csi-vxflexos/values.yaml) file:
+```yaml
+# "node" allows to configure node specific parameters
+node:
+  ...
+  ...
+
+  # "approveSDC" defines the approve operation for SDC
+  # Default value: None
+  approveSDC:
+    # enabled: Enable/Disable SDC approval
+    #Allowed values:
+    #  true: Driver will attempt to approve restricted SDC by GUID during setup
+    #  false: Driver will not attempt to approve restricted SDC by GUID during setup
+    # Default value: false
+    enabled: false
+```
+> NOTE: Currently, the CSI-PowerFlex driver only supports GUID for the restricted SDC mode.
+
+If SDC approval is denied, then provisioning of the volume will not be attempted and an appropriate error message is reported in the logs/events so the user is informed.

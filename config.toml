@@ -16,7 +16,7 @@ defaultContentLanguage = "en"
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
-disableKinds = ["taxonomy", "taxonomyTerm"]
+disableKinds = ["taxonomy", "taxonomyTerm", "term"]
 
 # Highlighting config
 pygmentsCodeFences = true
@@ -172,19 +172,19 @@ enable = false
 #	icon = "fa fa-envelope"
 #        desc = "Discuss development issues around the project"
 [[params.versions]]
-  version = "Current(v1.8.0)"
+  version = "Current(v1.9.0)"
   url = "https://dell.github.io/csm-docs/docs/"
 
 [[params.versions]]
-  version = "v1.7.1"
+  version = "v1.8.0"
   url = "https://dell.github.io/csm-docs/v1"
 
 [[params.versions]]
-  version = "v1.6.1"
+  version = "v1.7.1"
   url = "https://dell.github.io/csm-docs/v2"
 
 [[params.versions]]
-  version = "v1.5.1"
+  version = "v1.6.1"
   url = "https://dell.github.io/csm-docs/v3"  
 
 [[menu.main]]

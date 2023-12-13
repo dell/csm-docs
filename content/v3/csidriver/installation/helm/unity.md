@@ -60,7 +60,7 @@ If you use the iSCSI protocol, set up the iSCSI initiators as follows:
   To do this, run the `systemctl enable --now iscsid` command.
 - Ensure that the unique initiator name is set in _/etc/iscsi/initiatorname.iscsi_.
 
-For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/zh-tw/products/storage/technical-support/docu5128.pdf).
+For more information about configuring iSCSI, see [Dell Host Connectivity guide](https://www.delltechnologies.com/asset/en-us/products/storage/technical-support/docu5128.pdf).
 
 ### Linux multipathing requirements
 Dell Unity XT supports Linux multipathing. Configure Linux multipathing before installing the CSI Driver for Dell
@@ -88,7 +88,7 @@ Install CSI Driver for Unity XT using this procedure.
 
 *Before you begin*
 
- * You must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.5.0 https://github.com/dell/csi-unity.git```, as a pre-requisite for running this procedure.
+ * As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command ```git clone -b v2.6.0 https://github.com/dell/csi-unity.git```.
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
    
@@ -101,14 +101,14 @@ Procedure
     **Note**: 
       * ArrayId corresponds to the serial number of Unity XT array.
       * Unity XT Array username must have role as Storage Administrator to be able to perform CRUD operations.
-      * If the user is using complex K8s version like "v1.21.3-mirantis-1", use below kubeVersion check in helm/csi-unity/Chart.yaml file.
-            kubeVersion: ">= 1.21.0-0 < 1.26.0-0"
+      * If the user is using a complex K8s version like "v1.24.6-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
+            kubeVersion: ">= 1.24.0-0 < 1.27.0-0"
 
 2. Copy the `helm/csi-unity/values.yaml` into a file named `myvalues.yaml` in the same directory of `csi-install.sh`, to customize settings for installation.
 
 3. Edit `myvalues.yaml` to set the following parameters for your installation:
    
-    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/csi-unity/blob/master/helm/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/main/charts/csi-unity/values.yaml) file in this repository.
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
@@ -239,43 +239,7 @@ Procedure
       **Note:**
       * Parameters "allowRWOMultiPodAccess" and "syncNodeInfoInterval" have been enabled for configuration in values.yaml and this helps users to dynamically change these values without the need for driver re-installation.
 
-6. Setup for snapshots.
-         
-   Applicable only if you decided to enable snapshot feature in `values.yaml`
-
-    ```yaml
-    controller:
-      snapshot:
-        enabled: true
-    ```
-
-   In order to use the Kubernetes Volume Snapshot feature, you must ensure the following components have been deployed on your Kubernetes cluster
-
-    #### Volume Snapshot CRD's
-    The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Use [v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/client/config/crd) for the installation.
-
-    #### Volume Snapshot Controller
-    The CSI external-snapshotter sidecar is split into two controllers:
-    - A common snapshot controller
-    - A CSI external-snapshotter sidecar
-
-    Use [v6.1.x](https://github.com/kubernetes-csi/external-snapshotter/tree/v6.1.0/deploy/kubernetes/snapshot-controller) for the installation.
-
-    #### Installation example 
-
-    You can install CRDs and default snapshot controller by running following commands:
-    ```bash
-    git clone https://github.com/kubernetes-csi/external-snapshotter/
-    cd ./external-snapshotter
-    git checkout release-<your-version>
-    kubectl kustomize client/config/crd | kubectl create -f -
-    kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
-    ```
-
-    **Note**:
-    - It is recommended to use 6.1.x version of snapshotter/snapshot-controller.
-    - The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.
-
+6. For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
               
 
 7. Run the `./csi-install.sh --namespace unity --values ./myvalues.yaml` command to proceed with the installation using bash script.

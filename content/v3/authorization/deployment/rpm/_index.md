@@ -38,7 +38,7 @@ yum install -y container-selinux
 
 For environments where `yum` will not work, obtain the supported version of container-selinux for your OS version and install it.
 
-The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [https://centos.pkgs.org/7/centos-extras-x86_64/](https://centos.pkgs.org/7/centos-extras-x86_64/) and [https://centos.pkgs.org/8/centos-appstream-x86_64/](https://centos.pkgs.org/8/centos-appstream-x86_64/), respectively.
+The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [https://centos.pkgs.org/7/centos-extras-x86_64/](https://centos.pkgs.org/7/centos-extras-x86_64/) and [https://centos.pkgs.org/8-stream/centos-appstream-x86_64/](https://centos.pkgs.org/8-stream/centos-appstream-x86_64/), respectively.
 
 ## Deploying the CSM Authorization Proxy Server
 
@@ -127,6 +127,16 @@ A Storage Administrator can execute the shell script, install_karavi_auth.sh as 
     cd karavi_authorization_<version>
     sh install_karavi_auth.sh
     ```
+
+  As an option, on version 1.6.0, the Nodeports for the ingress controller can be specified:
+
+  ```
+  sh install_karavi_auth.sh --traefik_web_port <web port number> --traefik_websecure_port <websecure port number>
+
+  Ex.:
+
+  sh install_karavi_auth.sh --traefik_web_port 30001 --traefik_websecure_port 30002
+  
 
 5. After installation, application data will be stored on the system under `/var/lib/rancher/k3s/storage/`.
 

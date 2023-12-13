@@ -6,6 +6,10 @@ description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization RPM deployment
 ---
 
+{{% pageinfo color="primary" %}}
+The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.
+{{% /pageinfo %}}
+
 This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:
 - Deploying the CSM for Authorization proxy server, to be controlled by storage administrators
 - Configuring one to many [supported](../../../authorization#supported-csi-drivers) Dell CSI drivers with CSM for Authorization
@@ -34,7 +38,7 @@ yum install -y container-selinux
 
 For environments where `yum` will not work, obtain the supported version of container-selinux for your OS version and install it.
 
-The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [https://centos.pkgs.org/7/centos-extras-x86_64/](https://centos.pkgs.org/7/centos-extras-x86_64/) and [https://centos.pkgs.org/8/centos-appstream-x86_64/](https://centos.pkgs.org/8/centos-appstream-x86_64/), respectively.
+The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from [https://centos.pkgs.org/7/centos-extras-x86_64/](https://centos.pkgs.org/7/centos-extras-x86_64/) and [https://centos.pkgs.org/8-stream/centos-appstream-x86_64/](https://centos.pkgs.org/8-stream/centos-appstream-x86_64/), respectively.
 
 ## Deploying the CSM Authorization Proxy Server
 

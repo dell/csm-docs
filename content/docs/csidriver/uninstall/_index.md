@@ -29,14 +29,7 @@ Options:
   -h                         Help
 ```
 
-## Uninstall a CSI driver installed via Dell CSI Operator
+## Uninstall a CSI driver installed via Dell CSM Operator
 
-For uninstalling any CSI drivers deployed by the Dell CSI Operator, just delete the respective Custom Resources.  
-This can be done using OperatorHub GUI by deleting the CR or via kubectl.
-    
-For example - To uninstall the driver installed via the operator, delete the Custom Resource(CR)
+For uninstalling any CSI drivers deployed by the Dell CSM Operator, refer to instructions [here](../../deployment/csmoperator/drivers/#uninstall-csi-driver)
 
-#Replace driver-type, driver-name and driver-namespace with their respective values
-```bash
-kubectl delete <driver-type>/<driver-name> -n <driver-namespace>
-```

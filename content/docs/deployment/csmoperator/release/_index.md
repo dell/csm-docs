@@ -6,22 +6,29 @@ Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
 
-## Release Notes - Container Storage Modules Operator v1.3.0
+## Release Notes - Container Storage Modules Operator v1.4.0
+
+
+
+
+
 
 
 
 ### New Features/Changes
 
-- [#724 - [FEATURE]: CSM support for Openshift 4.13](https://github.com/dell/csm/issues/724)
-- [#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking](https://github.com/dell/csm/issues/876)
-- [#939 - [FEATURE]: Add support for Offline Install of CSM Operator in non OLM environment](https://github.com/dell/csm/issues/939)
-- [#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits](https://github.com/dell/csm/issues/878)
-- [#922 - [FEATURE]: Use ubi9 micro as base image](https://github.com/dell/csm/issues/922)
-- [#955 - [FEATURE]: CSI Unity XT Driver: Add upgrade support to the CSM Operator](https://github.com/dell/csm/issues/955)
+- [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
+- [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
+- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
+- [#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 ](https://github.com/dell/csm/issues/1062)
 
 ### Fixed Issues
 
-- [#898 - [BUG]: Unable to pull podmon image from local repository for offline install](https://github.com/dell/csm/issues/898)
+- [#975 - [BUG]: Not able to take volumesnapshots  ](https://github.com/dell/csm/issues/975)
+- [#982 - [BUG]: Update resources limits for controller-manager to fix OOMKilled error](https://github.com/dell/csm/issues/982)
+- [#988 - [BUG]: CSM Operator fails to install CSM Replication on the remote cluster](https://github.com/dell/csm/issues/988)
+- [#989 - [BUG]: Allow volume prefix to be set via CSM operator](https://github.com/dell/csm/issues/989)
+- [#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator](https://github.com/dell/csm/issues/990)
 
 ### Known Issues
 There are no known issues in this release.

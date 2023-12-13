@@ -33,9 +33,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS | Supported Versions |
 |-|-|
-| Kubernetes    | 1.25, 1.26, 1.27 |
-| RHEL          |     7.x, 8.x     |
-| CentOS        |     7.8, 7.9     |
+| Kubernetes    | 1.26, 1.27, 1.28 |
 {{</table>}}
 
 ## Supported Storage Platforms
@@ -43,7 +41,7 @@ The following diagram shows a high-level overview of CSM for Authorization with 
 {{<table "table table-striped table-bordered table-sm">}}
 |               | PowerMax         | PowerFlex | PowerScale |
 |---------------|:----------------:|:-------------------:|:----------------:|
-| Storage Array |PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx,<br> Unisphere 10.0, 10.0.1|    3.5.x, 3.6.x    | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5 |
+| Storage Array |PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) , PowerMaxOS 10.1 (6079)<br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx,<br> Unisphere 10.0, 10.0.1, 10.1|    3.6.x, 4.0.x, 4.5    | OneFS 9.5.0.5, 9.5.0.6 |
 {{</table>}}
 
 ## Supported CSI Drivers
@@ -61,21 +59,8 @@ CSM for Authorization supports the following CSI drivers and versions.
 To resolve this, please refer to our [troubleshooting guide](./troubleshooting) on the topic.
 
 ## Authorization Components Support Matrix
-CSM for Authorization consists of 2 components - the Authorization sidecar and the Authorization proxy server.  It is important that the version of the Authorization sidecar image maps to a supported version of the Authorization proxy server.
+CSM for Authorization consists of 2 components - The authorization sidecar, bundled with the driver, communicates with the Authorization proxy server to validate access to Storage platforms. The authorization sidecar is backward compatible with older Authorization proxy server versions. However, it is highly recommended to have the Authorization proxy server and sidecar installed from the same release of CSM.
 
-{{<table "table table-striped table-bordered table-sm">}}
-| Authorization Sidecar Image Tag | Authorization Proxy Server Version |
-| ------------------------------- | ---------------------------------- |
-| dellemc/csm-authorization-sidecar:v1.0.0 | v1.0.0, v1.1.0 |
-| dellemc/csm-authorization-sidecar:v1.2.0 | v1.1.0, v1.2.0 |
-| dellemc/csm-authorization-sidecar:v1.3.0 | v1.1.0, v1.2.0, v1.3.0 |
-| dellemc/csm-authorization-sidecar:v1.4.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0 |
-| dellemc/csm-authorization-sidecar:v1.5.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0 |
-| dellemc/csm-authorization-sidecar:v1.5.1 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1 |
-| dellemc/csm-authorization-sidecar:v1.6.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1, v1.6.0 |
-| dellemc/csm-authorization-sidecar:v1.7.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1, v1.6.0, v1.7.0 |
-| dellemc/csm-authorization-sidecar:v1.8.0 | v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0, v1.5.1, v1.6.0, v1.7.0, v1.8.0 |
-{{</table>}}
 ## Roles and Responsibilities
 
 The CSM for Authorization CLI can be executed in the context of the following roles:

@@ -39,8 +39,10 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
 **Steps**
 
-  Run the `curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash` command to install Helm 3.0.
-
+  Run the command to install Helm 3.0.
+  ```bash
+  curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  ```
 ### Fibre Channel requirements
 
 Dell PowerStore supports Fibre Channel communication. If you use the Fibre Channel protocol, ensure that the
@@ -66,7 +68,9 @@ For information about configuring iSCSI, see _Dell PowerStore documentation_ on 
 
 If you want to use the protocol, set up the NVMe initiators as follows:
 - The driver requires NVMe management command-line interface (nvme-cli) to use configure, edit, view or start the NVMe client and target. The nvme-cli utility provides a command-line and interactive shell option. The NVMe CLI tool is installed in the host using the below command.
-`sudo apt install nvme-cli`
+```bash
+sudo apt install nvme-cli
+```
 
 **Requirements for NVMeTCP**
 - Modules including the nvme, nvme_core, nvme_fabrics, and nvme_tcp are required for using NVMe over Fabrics using TCP. Load the NVMe and NVMe-OF Modules using the below commands:
@@ -103,28 +107,28 @@ To enable this feature, add the below block to the driver manifest before instal
 health monitor sidecar. To get the volume health state value under controller should be set to true as seen below. To get the
 volume stats value under node should be set to true.
    ```yaml
-controller:
-  healthMonitor:
-    # enabled: Enable/Disable health monitor of CSI volumes
-    # Allowed values:
-    #   true: enable checking of health condition of CSI volumes
-    #   false: disable checking of health condition of CSI volumes
-    # Default value: None
-    enabled: false
-    # interval: Interval of monitoring volume health condition
-    # Allowed values: Number followed by unit (s,m,h)
-    # Examples: 60s, 5m, 1h
-    # Default value: 60s
-    interval: 60s
+    controller:
+      healthMonitor:
+        # enabled: Enable/Disable health monitor of CSI volumes
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: None
+        enabled: false
+        # interval: Interval of monitoring volume health condition
+        # Allowed values: Number followed by unit (s,m,h)
+        # Examples: 60s, 5m, 1h
+        # Default value: 60s
+        interval: 60s
 
-node:
-  healthMonitor:
-    # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
-    # Allowed values:
-    #   true: enable checking of health condition of CSI volumes
-    #   false: disable checking of health condition of CSI volumes
-    # Default value: None
-    enabled: false
+    node:
+      healthMonitor:
+        # enabled: Enable/Disable health monitor of CSI volumes- volume usage, volume condition
+        # Allowed values:
+        #   true: enable checking of health condition of CSI volumes
+        #   false: disable checking of health condition of CSI volumes
+        # Default value: None
+        enabled: false
    ```
 ### (Optional) Replication feature Requirements
 
@@ -143,7 +147,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.6.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.7.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
@@ -158,11 +162,20 @@ CRDs should be configured during replication prepare stage with repctl as descri
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
     Add more blocks similar to above for each PowerStore array if necessary. 
-4. Create the secret by running ```kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml```
+    ### User Privileges
+    The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
+
+4. Create the secret by running 
+   ```bash
+   kubectl create secret generic powerstore-config -n csi-powerstore --from-file=config=secret.yaml
+   ```
 5. Create storage classes using ones from `samples/storageclass` folder as an example and apply them to the Kubernetes cluster by running `kubectl create -f <path_to_storageclass_file>`
    
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
-6. Copy the default values.yaml file `cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml`
+6. Copy the default values.yaml file 
+   ```bash
+   cd dell-csi-helm-installer && cp ../helm/csi-powerstore/values.yaml ./my-powerstore-settings.yaml
+   ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 
 | Parameter | Description | Required | Default |
@@ -189,14 +202,19 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.nodeSelector | Defines what nodes would be selected for pods of node daemonset | Yes | " " |
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-| controller.vgsnapshot.enabled | To enable or disable the volume group snapshot feature | No | "true" |
+| controller.vgsnapshot.enabled | Allows to enable/disable the volume group snapshot feature | No | "true" |
 | images.driverRepository | To use an image from custom repository | No | dockerhub |
 | version | To use any driver version | No | Latest driver version |
 | allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
-| storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true
+| storageCapacity.enabled | Allows to enable/disable storage capacity tracking feature | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
+| podmon.enabled | Allows to enable/disable [Resiliency](../../../../resiliency/deployment#powerstore-specific-recommendations) feature | No | false
+| podmon.image | Sidecar image for resiliency | No | -
 
-8. Install the driver using `csi-install.sh` bash script by running `./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml` 
+8. Install the driver using `csi-install.sh` bash script by running 
+   ```bash
+   ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml
+   ``` 
    - After that the driver should be installed, you can check the condition of driver pods by running `kubectl get all -n csi-powerstore` 
 
 *NOTE:* 
@@ -227,20 +245,20 @@ There are samples storage class yaml files available under `samples/storageclass
 - *csi.storage.k8s.io/fstype*: specifies what filesystem type driver should use, possible variants `ext3`, `ext4`, `xfs`, `nfs`, if not specified driver will use `ext4` by default.
 - *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 - *allowedTopologies* (Optional): If you want you can also add topology constraints.
-```yaml
-allowedTopologies:
-  - matchLabelExpressions: 
-      - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
-# replace "-iscsi" with "-fc", "-nvmetcp" or "-nvmefc" or "-nfs" at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts
-# replace "12.34.56.78" with PowerStore endpoint IP
-        values:
-          - "true"
-```
+    ```yaml
+    allowedTopologies:
+      - matchLabelExpressions: 
+          - key: csi-powerstore.dellemc.com/12.34.56.78-iscsi
+      # replace "-iscsi" with "-fc", "-nvmetcp" or "-nvmefc" or "-nfs" at the end to use FC, NVMeTCP, NVMeFC or NFS enabled hosts
+      # replace "12.34.56.78" with PowerStore endpoint IP
+            values:
+              - "true"
+    ```
 
 2. Create your storage class by using `kubectl`:
-```bash
-kubectl create -f <path_to_storageclass_file>
-```
+    ```bash
+    kubectl create -f <path_to_storageclass_file>
+    ```
 
 *NOTE:* Deleting a storage class has no impact on a running Pod with mounted PVCs. You cannot provision new PVCs until at least one storage class is newly created.
 
@@ -264,7 +282,7 @@ As part of driver installation, a ConfigMap with the name `powerstore-config-par
 Users can set the default log level by specifying log level to `logLevel` and log format to `logFormat` attribute in `my-powerstore-settings.yaml` during driver installation.
 
 To change the log level or log format dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade
 ```

@@ -16,7 +16,7 @@ This section outlines the metrics collected by the Container Storage Modules (CS
 
 Storage system I/O performance metrics (IOPS, bandwidth, latency) are available by default and broken down by storage group and volume.
 
-To disable these metrics, set the ```performanceMetricsEnabled``` field under ```karaviMetricsPowermax``` to false in helm/values.yaml.
+To disable these metrics, set the ```performanceMetricsEnabled``` field under ```karaviMetricsPowerMax``` to false in helm/values.yaml.
 
 The following I/O performance metrics are available from the OpenTelemetry collector endpoint. Please see the [CSM for Observability](../../) for more information on deploying and configuring the OpenTelemetry collector.
 
@@ -40,7 +40,7 @@ The following I/O performance metrics are available from the OpenTelemetry colle
 
 Provides visibility into the total, used, and available capacity for a storage class and associated underlying storage construct.
 
-To disable these metrics, set the ```capacityMetricsEnabled``` field under ```karaviMetricsPowermax``` to false in helm/values.yaml.
+To disable these metrics, set the ```capacityMetricsEnabled``` field under ```karaviMetricsPowerMax``` to false in helm/values.yaml.
 
 The following storage capacity metrics are available from the OpenTelemetry collector endpoint. Please see the [CSM for Observability](../../) for more information on deploying and configuring the OpenTelemetry collector.
 

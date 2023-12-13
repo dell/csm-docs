@@ -16,7 +16,7 @@ Each cluster should be assigned the unique identifier `clusterId`. The rules for
 * must begin and end with an alphanumeric character ([a-z, 0-9, A-Z])
 * could contain dashes (-), underscores (_), dots (.), and alphanumerics between
 * must be unique across clusters
-``
+
 ### Single Cluster Replication
 
 #### Cluster Configuration
@@ -38,7 +38,7 @@ Note that the `targets` parameter is left empty since we don't require any targe
 This also means that you don't need to create any Secrets that contain connection information to such clusters, since in this use case, we
 are limited to a single cluster.
 
-You can find more info about configs and secrets for cluster communication in [configmaps-secrets](../deployment/configmap-secrets/)
+You can find more info about configs and secrets for cluster communication in [configmaps-secrets](../deployment/configmap-secrets/).
 
 #### Storage Class Configuration
 
@@ -48,14 +48,12 @@ be set to `self` to indicate that we want to replicate the volume inside the cur
 
 Also, you would need to create another storage class in the same cluster that would serve as a `target` storage class. This means that all replicated volumes would be derived from it. Its `replication.storage.dell.com/remoteClusterID` parameter should be also set to `self`.
 
-You can find out more about replication StorageClasses and replication specific parameters in [storageclasses](../deployment/storageclasses)
+You can find out more about replication StorageClasses and replication specific parameters in [storageclasses](../deployment/storageclasses).
 
 #### Replicated Resources
 
 When creating PersistentVolumeClaims using StorageClass for a single cluster replication, replicated resources (PersistentVolumes,
-ReplicationGroups) would be created in the same cluster with the `replicated-` prefix added to them.
-
-Example:
+ReplicationGroups) would be created in the same cluster with the `replicated-` prefix added to them. For example:
 ```shell
 $ kubectl get pv 
 NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
@@ -72,7 +70,7 @@ rg-240721b0-12fb-4151-8dd8-94794ae2493e              34s   Ready   SYNCHRONIZED 
 #### Cluster Configuration
 
 Similar to a single cluster scenario, you need to create ConfigMap, but this time you need to provide at least one target
-cluster. You can provide as many as you like but be mindful that a single volume can be replicated to only one of them.
+cluster. You can provide as many as you like, but be mindful that a single volume can be replicated to only one of them.
 
 For example:
 ```yaml
@@ -91,7 +89,7 @@ metadata:
 ```
 Note that target cluster information contains a field called `secretRef`. This field points to a secret available in the current cluster that contains connection information of `cluster-B` in the form of a kubeconfig file.
 
-You can find more information about how to create such secrets in [configmaps-secrets](../deployment/configmap-secrets/#communication-between-clusters)
+You can find more information about how to create such secrets in [configmaps-secrets](../deployment/configmap-secrets/#communication-between-clusters).
 
 #### Storage Class Configuration
 
@@ -102,14 +100,12 @@ want to replicate your volumes.
 For multi-cluster replication, we can choose one of the target cluster ids we specified in
 ConfigMap. In our example replication parameter, the target cluster id should be equal to `cluster-B`.
 
-You can find more information about other replication parameters available in storage classes [here](../deployment/storageclasses/#common-parameters)
+You can find more information about other replication parameters available in storage classes [here](../deployment/storageclasses/#common-parameters).
 
 #### Replicated Resources
 
 When creating PersistentVolumeClaims using StorageClass for a multi-cluster replication, replicated resources would be
-created in both `source` and `target` clusters under the same names.
-
-Example:
+created in both `source` and `target` clusters under the same names. For example:
 
 ```shell
 [CLUSTER-A]

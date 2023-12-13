@@ -6,22 +6,11 @@ description: >
 
 The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-powerstore/tree/master/dell-csi-helm-installer).
 
-The controller section of the Helm chart installs the following components in a _Deployment_ in the specified namespace:
-- CSI Driver for Dell PowerStore
-- Kubernetes External Provisioner, which provisions the volumes
-- Kubernetes External Attacher, which attaches the volumes to the containers
-- (Optional) Kubernetes External Snapshotter, which provides snapshot support
-- (Optional) Kubernetes External Resizer, which resizes the volume
-
-The node section of the Helm chart installs the following component in a _DaemonSet_ in the specified namespace:
-- CSI Driver for Dell PowerStore
-- Kubernetes Node Registrar, which handles the driver registration
-
 ## Prerequisites
 
 The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
 - Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
-- Install Helm 3
+- Install Helm 3.x
 - If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP or NVMe/FC configuration.
 > You can use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, but you do not need all the four.
 
@@ -33,13 +22,13 @@ The following are requirements to be met before installing the CSI Driver for De
 - You can access your cluster with kubectl and helm.
 - Ensure that your nodes support mounting NFS volumes. 
 
-### Install Helm 3.0
+### Install Helm 3.x
 
-Install Helm 3.0 on the master node before you install the CSI Driver for Dell PowerStore.
+Install Helm 3.x on the master node before you install the CSI Driver for Dell PowerStore.
 
 **Steps**
 
-  Run the command to install Helm 3.0.
+  Run the command to install Helm 3.x.
   ```bash
   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   ```
@@ -147,7 +136,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 ## Install the Driver
 
 **Steps**
-1. Run `git clone -b v2.8.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
+1. Run `git clone -b v2.9.0 https://github.com/dell/csi-powerstore.git` to clone the git repository.
 2. Ensure that you have created namespace where you want to install the driver. You can run `kubectl create namespace csi-powerstore` to create a new one. "csi-powerstore" is just an example. You can choose any name for the namespace.
    But make sure to align to the same namespace during the whole installation.
 3. Edit `samples/secret/secret.yaml` file and configure connection information for your PowerStore arrays changing following parameters:
@@ -161,7 +150,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 	- *nfsAcls* (Optional): defines permissions - POSIX mode bits or NFSv4 ACLs, to be set on NFS target mount directory.
 	             NFSv4 ACls are supported for NFSv4 shares on NFSv4 enabled NAS servers only. POSIX ACLs are not supported and only POSIX mode bits are supported for NFSv3 shares.
     
-    Add more blocks similar to above for each PowerStore array if necessary. 
+    Add more blocks similar to above for each PowerStore array if necessary. If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
     ### User Privileges
     The username specified in `secret.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 
@@ -174,12 +163,13 @@ CRDs should be configured during replication prepare stage with repctl as descri
     > If you do not specify `arrayID` parameter in the storage class then the array that was specified as the default would be used for provisioning volumes.
 6. Download the default values.yaml file 
    ```bash
-   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.8.0/charts/csi-powerstore/values.yaml
+   cd dell-csi-helm-installer && wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.9.0/charts/csi-powerstore/values.yaml
    ```
 7. Edit the newly created values file and provide values for the following parameters `vi my-powerstore-settings.yaml`:
 
 | Parameter | Description | Required | Default |
 |-----------|-------------|----------|---------|
+| images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
 | logLevel | Defines CSI driver log level | No | "debug" |
 | logFormat | Defines CSI driver log format | No | "JSON" |
 | externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
@@ -204,13 +194,11 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | node.tolerations  | Defines tolerations that would be applied to node daemonset | Yes | " " |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
 | controller.vgsnapshot.enabled | Allows to enable/disable the volume group snapshot feature | No | "true" |
-| images.driverRepository | To use an image from custom repository | No | dockerhub |
 | version | To use any driver version | No | Latest driver version |
 | allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
 | storageCapacity.enabled | Allows to enable/disable storage capacity tracking feature | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
 | podmon.enabled | Allows to enable/disable [Resiliency](../../../../resiliency/deployment#powerstore-specific-recommendations) feature | No | false
-| podmon.image | Sidecar image for resiliency | No | -
 
 8. Install the driver using `csi-install.sh` bash script by running 
    ```bash

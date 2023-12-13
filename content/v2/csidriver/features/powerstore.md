@@ -416,7 +416,10 @@ allowedTopologies:
 
 This example matches all nodes where the driver has a connection to PowerStore with an IP of `127.0.0.1` via FibreChannel. Similar examples can be found in mentioned folder for NFS, iSCSI and NVMe.
 
-You can check what labels your nodes contain by running `kubectl get nodes --show-labels`
+You can check what labels your nodes contain by running 
+```bash
+kubectl get nodes --show-labels
+```
 
 >Notice that `volumeBindingMode:` is set to `WaitForFirstConsumer` this is required for the topology feature to work.
 
@@ -474,6 +477,7 @@ data:
 
 Apply the secret by running following command: 
 ```bash
+
 sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
 ```
 
@@ -524,6 +528,7 @@ CSI PowerStore driver version 1.3.0 and later supports the ability to detect cha
 
 To do so just change your configuration file `config.yaml` and apply it again using the following command:
 ```bash
+
 sed "s/CONFIG_YAML/`cat config.yaml | base64 -w0`/g" secret.yaml | kubectl apply -f -
 ```
 
@@ -589,7 +594,7 @@ As part of driver installation, a ConfigMap with the name `powerstore-config-par
 Users can set the default log level by specifying log level to `logLevel` and log format to `logFormat` attribute in `my-powerstore-settings.yaml` during driver installation.
 
 To change the log level or log format dynamically to a different value user can edit the same values.yaml, and run the following command
-```
+```bash
 cd dell-csi-helm-installer
 ./csi-install.sh --namespace csi-powerstore --values ./my-powerstore-settings.yaml --upgrade
 ```
@@ -601,7 +606,7 @@ Note: here `my-powerstore-settings.yaml` is a `values.yaml` file which user has 
 As part of driver installation, a ConfigMap with the name `powerstore-config-params` is created using the manifest located in the sample file. This ConfigMap contains attributes `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver and `CSI_LOG_FORMAT` which specifies the current log format of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `powerstore-config-params` and update `CSI_LOG_LEVEL` to the desired log level and `CSI_LOG_FORMAT` to the desired log format.
-```
+```bash
 kubectl edit configmap -n csi-powerstore powerstore-config-params
 ```
 
@@ -624,7 +629,9 @@ Starting from version 2.1, CSI Driver for Powerstore now supports a new access m
 Prerequisites
 
 1. Enable the ReadWriteOncePod feature gate for kube-apiserver, kube-scheduler, and kubelet as ReadWriteOncePod access mode is in alpha for Kubernetes v1.22 and is supported only for CSI volumes. You can enable the feature by setting command-line argument:
-`--feature-gates="...,ReadWriteOncePod=true"`
+```bash
+--feature-gates="...,ReadWriteOncePod=true"
+```
 
 2. Create a PVC with access mode set to ReadWriteOncePod like shown in the sample below
 ```yaml

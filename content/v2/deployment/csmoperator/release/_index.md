@@ -5,16 +5,26 @@ weight: 5
 Description: >
   Release notes for Dell Container Storage Modules Operator
 ---
+{{% pageinfo color="primary" %}}
+CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
+{{% /pageinfo %}}
 
-## Release Notes - Container Storage Modules Operator v1.1.0
+## Release Notes - Container Storage Modules Operator v1.2.0
 
 ### New Features/Changes
-- [Added support for CSI PowerStore Driver](https://github.com/dell/csm/issues/613)
-- [Added support for Kubernetes 1.26](https://github.com/dell/csm/issues/597)
+- [Added support for CSI Unity XT Driver](https://github.com/dell/csm/issues/756)
+- [Added support for PowerMax Driver](https://github.com/dell/csm/issues/769)
+- [Added Replication Support for PowerFlex driver](https://github.com/dell/csm/issues/821)
+- [CSM Operator: Support install of Resiliency module](https://github.com/dell/csm/issues/739)
+- [Migrated image registry from k8s.gcr.io to registry.k8s.io](https://github.com/dell/csm/issues/744)
+- [Added support for OpenShift 4.12](https://github.com/dell/csm/issues/571)
+- [Added support for Kubernetes 1.27](https://github.com/dell/csm/issues/761)
 
 
 ### Fixed Issues
-[Fix for CSM Authorization CRD in the CSM Operator not able to custom configurations](https://github.com/dell/csm/issues/633)
+- [CSM object goes into failed state when deployments are getting scaled down/up](https://github.com/dell/csm/issues/816)
+- [Install issues of the Replication module have been fixed](https://github.com/dell/csm/issues/788)
+
 
 ### Known Issues
-CSM object does not track available deployment count when down scaling to n-1 , where n is number of nodes.
+There are no known issues in this release.

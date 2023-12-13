@@ -347,7 +347,7 @@ To create `NFS` volume you need to provide `nasName:` parameters that point to t
 
  The CSI PowerStore driver version 1.2 and later introduces the controller HA feature. Instead of StatefulSet, controller pods are deployed as a Deployment.
 
-By default number of replicas is set to 2, you can set `controller.replicas` parameter to 1 in `my-powerstore-settings.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change `replicas` parameter in `spec.driver` section in your PowerStore Custom Resource.
+By default number of replicas is set to 2, you can set `controller.replicas` parameter to 1 in `my-powerstore-settings.yaml` if you want to disable controller HA for your installation. When installing via Operator you can change `replicas` parameter in `spec.driver.csiDriverSpec` section in your PowerStore Custom Resource.
 
 When multiple replicas of controller pods are in the cluster, each sidecar (attacher, provisioner, resizer, snapshotter) tries to get a lease so only one instance of each sidecar would be active in the cluster at a time. 
 
@@ -760,7 +760,5 @@ If such a node is not available, the pods stay in Pending state. This means they
 Without storage capacity tracking, pods get scheduled on a node satisfying the topology constraints. If the required capacity is not available, volume attachment to the pods fails, and pods remain in ContainerCreating state. Storage capacity tracking eliminates unnecessary scheduling of pods when there is insufficient capacity.
 
 The attribute `storageCapacity.enabled` in `my-powerstore-settings.yaml` can be used to enabled/disabled the feature during driver installation .
-To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample files provided [here](https://github.com/dell/dell-csi-operator/tree/master/samples) by editing the `capacity-poll-interval` argument present in the `provisioner` sidecar.
+To configure how often driver checks for changed capacity set `storageCapacity.pollInterval` attribute. In case of driver installed via operator, this interval can be configured in the sample files provided [here](https://github.com/dell/csm-operator/tree/main/samples) by editing the `capacity-poll-interval` argument present in the `provisioner` sidecar.
 
-**Note:**
->This feature requires kubernetes v1.24 and above and will be automatically disabled in lower version of kubernetes.

@@ -425,6 +425,17 @@ kubectl get nodes --show-labels
 
 For any additional information about the topology, see the [Kubernetes Topology documentation](https://kubernetes-csi.github.io/docs/topology.html).
 
+## Volume Limits
+
+The CSI Driver for Dell PowerStore allows users to specify the maximum number of PowerStore volumes that can be used in a node.
+
+The user can set the volume limit for a node by creating a node label `max-powerstore-volumes-per-node` and specifying the volume limit for that node.
+<br/> `kubectl label node <node_name> max-powerstore-volumes-per-node=<volume_limit>`
+
+The user can also set the volume limit for all the nodes in the cluster by specifying the same value for the `maxPowerstoreVolumesPerNode` attribute in values.yaml during Helm installation. In the case of driver installed via the operator, this attribute can be modified in the sample yaml file for PowerStore, which is located at https://github.com/dell/csm-operator/blob/main/samples/ by editing the `X_CSI_POWERSTORE_MAX_VOLUMES_PER_NODE` parameter.
+
+>**NOTE:** <br>The default value of `maxPowerstoreVolumesPerNode` is 0. <br>If `maxPowerstoreVolumesPerNode` is set to zero, then CO shall decide how many volumes of this type can be published by the controller to the node.<br><br>The volume limit specified in the `maxPowerstoreVolumesPerNode` attribute is applicable to all the nodes in the cluster for which the node label `max-powerstore-volumes-per-node` is not set.
+
 
 ## Reuse PowerStore hostname 
 
@@ -709,9 +720,9 @@ metadata:
   name: pvc1
   namespace: default
   labels:
-    description: DB-volume
-    appliance_id: A1
-    volume_group_id: f5f9dbbd-d12f-463e-becb-2e6d0a85405e
+    csi.dell.com/description: DB-volume
+    csi.dell.com/appliance_id: A1
+    csi.dell.com/volume_group_id: f5f9dbbd-d12f-463e-becb-2e6d0a85405e
 spec:
   accessModes:
   - ReadWriteOnce
@@ -728,7 +739,7 @@ This is the list of all the attributes supported by PowerStore CSI driver:
 
 | Block Volume | NFS Volume |
 | --- | --- |
-| description <br /> appliance_id <br /> volume_group_id <br /> protection_policy_id <br /> performance_policy_id <br /> app_type <br /> app_type_other <br />  <br />  <br />  <br />  <br />  <br /> | description <br /> config_type <br /> access_policy <br /> locking_policy <br /> folder_rename_policy <br /> is_async_mtime_enabled <br /> protection_policy_id <br /> file_events_publishing_mode <br /> host_io_size <br /> flr_attributes.flr_create.mode <br /> flr_attributes.flr_create.default_retention <br /> flr_attributes.flr_create.maximum_retention <br /> flr_attributes.flr_create.minimum_retention |
+| csi.dell.com/description <br /> csi.dell.com/appliance_id <br /> csi.dell.com/volume_group_id <br /> csi.dell.com/protection_policy_id <br /> csi.dell.com/performance_policy_id <br /> csi.dell.com/app_type <br /> csi.dell.com/app_type_other <br />  <br />  <br />  <br />  <br />  <br /> | csi.dell.com/description <br /> csi.dell.com/config_type <br /> csi.dell.com/access_policy <br /> csi.dell.com/locking_policy <br /> csi.dell.com/folder_rename_policy <br /> csi.dell.com/is_async_mtime_enabled <br /> csi.dell.com/protection_policy_id <br /> csi.dell.com/file_events_publishing_mode <br /> csi.dell.com/host_io_size <br /> csi.dell.com/flr_attributes.flr_create.mode <br /> csi.dell.com/flr_attributes.flr_create.default_retention <br /> csi.dell.com/flr_attributes.flr_create.maximum_retention <br /> csi.dell.com/flr_attributes.flr_create.minimum_retention |
 
 <br>  
 
@@ -737,6 +748,8 @@ This is the list of all the attributes supported by PowerStore CSI driver:
 >Make sure that the attributes specified are supported by the version of PowerStore array used. 
 
 >Configurable Volume Attributes feature is supported with Helm.
+
+>Prefix `csi.dell.com/` has been added to the attributes from CSI PowerStore driver version 2.8.0
 
 ## Storage Capacity Tracking
 CSI PowerStore driver version 2.5.0 and above supports Storage Capacity Tracking.
