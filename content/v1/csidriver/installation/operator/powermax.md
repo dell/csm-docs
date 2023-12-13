@@ -85,6 +85,8 @@ Follow this procedure to set up PowerPath for Linux:
 - `Untar` the PowerPath archive, Copy the RPM package into a temporary folder and Install PowerPath using `rpm -ivh DellEMCPower.LINUX-<version>-<build>.<platform>.x86_64.rpm`
 - Start the PowerPath service using `systemctl start PowerPath`
 
+>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
+
 #### Create secret for client-side TLS verification (Optional)
 Create a secret named powermax-certs in the namespace where the CSI PowerMax driver will be installed. This is an optional step and is only required if you are setting the env variable X_CSI_POWERMAX_SKIP_CERTIFICATE_VALIDATION to false. See the detailed documentation on how to create this secret [here](../../helm/powermax#certificate-validation-for-unisphere-rest-api-calls).
 
@@ -127,6 +129,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | --------- | ----------- | -------- |-------- |
    | replicas | Controls the number of controller Pods you deploy. If controller Pods are greater than the number of available nodes, excess Pods will become stuck in pending. The default is 2 which allows for Controller high availability. | Yes | 2 |
    | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
+   | storageCapacity | Helps the scheduler to schedule the pod on a node satisfying the topology constraints, only if the requested capacity is available on the storage array | - | true |
    | ***Common parameters for node and controller*** |
    | X_CSI_K8S_CLUSTER_PREFIX | Define a prefix that is appended to all resources created in the array; unique per K8s/CSI deployment; max length - 3 characters | Yes | XYZ |
    | X_CSI_POWERMAX_ENDPOINT | IP address of the Unisphere for PowerMax | Yes | https://0.0.0.0:8443 |
@@ -146,6 +149,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | ***Node parameters***|
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
    | X_CSI_TOPOLOGY_CONTROL_ENABLED | Enable/Disabe topology control. It filters out arrays, associated transport protocol available to each node and creates topology keys based on any such user input. | No | false |
+   | X_CSI_MAX_VOLUMES_PER_NODE | Enable volume limits. It specifies the maximum number of volumes that can be created on a node. | Yes | 0 |
    
 5. Execute the following command to create the PowerMax custom resource:`kubectl create -f <input_sample_file.yaml>`. The above command will deploy the CSI-PowerMax driver.
 

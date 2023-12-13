@@ -13,7 +13,7 @@ Replication enabled storage classes are always created in pairs within/across cl
 Before provisioning replicated volumes, make sure that these pairs of storage classes are created properly.
 
 ### Common Parameters
-There are 3 mandatory key/value pairs which should always be present in the storage class parameters -
+There are 3 mandatory key/value pairs which should always be present in the storage class parameters:
 ```yaml
 replication.storage.dell.com/isReplicationEnabled: 'true'
 replication.storage.dell.com/remoteClusterID: <RemoteClusterId>
@@ -22,20 +22,24 @@ replication.storage.dell.com/remoteStorageClassName: <RemoteScName>
 
 #### remoteClusterID
 This should contain the Cluster ID of the remote cluster where the replicated volume is going to be created.
-In case of a single stretched cluster, it should be always set to `self`
+In the case of a single stretched cluster, it should be always set to `self`.
 
 #### remoteStorageClassName
 This should contain the name of the storage class on the remote cluster which is used to create the remote `PersistentVolume`.
->Note: You still need to create a pair of storage classes even while using a single stretched cluster
+>**_NOTE_**: You still need to create a pair of storage classes even while using a single stretched cluster.
 
 ### Driver specific parameters
+<<<<<<< Updated upstream
 Please refer to the driver specific sections for [PowerMax](../powermax/#creating-storage-classes), [PowerStore](../powerstore/#creating-storage-classes), [PowerScale](../powerscale/#creating-storage-classes) or [Unity](../unity/#creating-storage-classes) for a detailed list of parameters.
+=======
+Please refer to the driver specific sections for [PowerMax](../powermax/#creating-storage-classes), [PowerStore](../powerstore/#creating-storage-classes), [PowerScale](../powerscale/#creating-storage-classes) or [PowerFlex](../powerflex#creating-storage-classes) for a detailed list of parameters.
+>>>>>>> Stashed changes
 
 ### PV sync Deletion
 
 The dell-csm-replicator supports 'sync deletion' of replicated PV resources i.e when a replication enabled PV is deleted its corresponding source or target PV can also be deleted. 
 
-The decision to whether or not sync delete the corresponding PV depends on a Storage Class parameter which can be configured by the user. 
+The decision to whether or not sync delete the corresponding PV depends on a Storage Class parameter which can be configured by the user: 
 
 ```
 replication.storage.dell.com/remotePVRetentionPolicy: 'delete' | 'retain'
@@ -66,7 +70,7 @@ By default, if the remoteRGRetentionPolicy is not specified in the Storage Class
 
 ### Example
 If you are setting up replication between two clusters with ClusterID set to Cluster A & Cluster B,
-then the storage class definitions in both the clusters would look like -
+then the storage class definitions in both the clusters would look like:
 
 #### Cluster A
 ```yaml

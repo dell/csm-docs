@@ -13,14 +13,14 @@ Before you begin, make sure you have the repctl tool available.
 
 You can download a pre-built repctl binary from our [Releases](https://github.com/dell/csm-replication/releases) page.
 ```shell
-wget https://github.com/dell/csm-replication/releases/download/v1.4.0/repctl-linux-amd64
+wget https://github.com/dell/csm-replication/releases/download/v1.5.0/repctl-linux-amd64
 mv repctl-linux-amd64 repctl
 chmod +x repctl
 ```
 
 Alternately, if you want to build the binary yourself, you can follow these steps:
 ```shell
-git clone -b v1.4.0 https://github.com/dell/csm-replication.git
+git clone -b v1.5.0 https://github.com/dell/csm-replication.git
 cd csm-replication/repctl
 make build
 ```
@@ -33,6 +33,7 @@ You can start using Container Storage Modules (CSM) for Replication with help fr
 1. Prepare admin Kubernetes clusters configs
 2. Add admin configs as clusters to `repctl`:
       ```shell
+
       ./repctl cluster add -f "/root/.kube/config-1","/root/.kube/config-2" -n "cluster-1","cluster-2"
       ```
    > **_NOTE:_**  If using a single Kubernetes cluster in a stretched configuration there will be only one cluster.
@@ -56,11 +57,13 @@ You can start using Container Storage Modules (CSM) for Replication with help fr
    > **_NOTE:_**  `clusterID` should match names you gave to clusters in step 2
 6. Create replication storage classes using config:
       ```shell
+
       ./repctl create sc --from-config ./examples/<storage>_example_values.yaml
       ```
 7. Install CSI driver for your chosen storage in source cluster and provision replicated volumes
 8. (optional) Create PVCs on target cluster from Replication Group:
       ```shell
+      
       ./repctl create pvc --rg <rg-name> -t <target-namespace> --dry-run=false
       ```
 

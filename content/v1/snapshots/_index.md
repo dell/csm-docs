@@ -65,7 +65,7 @@ You can install CRDs and the default snapshot controller by running the followin
 ```bash
 git clone https://github.com/kubernetes-csi/external-snapshotter/
 cd ./external-snapshotter
-git checkout release-6.2.0
+git checkout release-6.2
 kubectl kustomize client/config/crd | kubectl create -f -
 kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
 ```

@@ -9,11 +9,11 @@ description: Installation of CSM for Replication using script (Helm chart)
 > **_NOTE:_**  These steps should be repeated on all Kubernetes clusters where you want to configure replication.
 
 ```shell
-git clone -b v1.5.0 https://github.com/dell/csm-replication.git
+git clone -b v1.6.0 https://github.com/dell/csm-replication.git
 cd csm-replication
 kubectl create ns dell-replication-controller
-# Copy and  modify values.yaml file if you wish to customize your deployment in any way
-cp ./helm/csm-replication/values.yaml ./myvalues.yaml
+# Download and modify the default values.yaml file if you wish to customize your deployment in any way
+wget -O myvalues.yaml https://raw.githubusercontent.com/dell/helm-charts/csm-replication-1.6.0/charts/csm-replication/values.yaml
 bash scripts/install.sh --values ./myvalues.yaml
 ```
 >Note: Current installation method allows you to specify custom `<FQDN>:<IP>` entries to be appended to controller's `/etc/hosts` file. It can be useful if controller is being deployed in private environment where DNS is not set up properly, but kubernetes clusters use FQDN as API server's address.

@@ -19,12 +19,12 @@ CSM for Replication provides the following capabilities:
 | Capability                                                                                                                          | PowerMax | PowerStore | PowerScale | PowerFlex | Unity |
 | ----------------------------------------------------------------------------------------------------------------------------------- | :------: | :--------: | :--------: | :-------: | :---: |
 | Replicate data using native storage array based replication                                                                         |   yes    |    yes     |    yes     |    yes    |  no   |
-| Asynchronous file volume replication                                                                                                |   no    |     no     |    yes     |    no     |  no   |
+| Asynchronous file volume replication                                                                                                |   no     |     no     |    yes     |    no     |  no   |
 | Asynchronous block volume replication                                                                                               |   yes    |    yes     |    n/a     |    yes    |  no   |
-| Synchronous file volume replication                                                                                                 |   no    |     no     |     no     |    no     |  no   |
+| Synchronous file volume replication                                                                                                 |   no     |     no     |     no     |    no     |  no   |
 | Synchronous block volume replication                                                                                                |   yes    |     no     |    n/a     |    no     |  no   |
 | Active-Active (Metro) block volume replication                                                                                      |   yes    |     no     |    n/a     |    no     |  no   |
-| Active-Active (Metro) file volume replication                                                                                       |   no    |     no     |     no     |    no     |  no   |
+| Active-Active (Metro) file volume replication                                                                                       |   no     |     no     |     no     |    no     |  no   |
 | Create `PersistentVolume` objects in the cluster representing the replicated volume                                                 |   yes    |    yes     |    yes     |    yes    |  no   |
 | Create `DellCSIReplicationGroup` objects in the cluster                                                                             |   yes    |    yes     |    yes     |    yes    |  no   |
 | Failover & Reprotect applications using the replicated volumes                                                                      |   yes    |    yes     |    yes     |    yes    |  no   |
@@ -38,8 +38,8 @@ CSM for Replication provides the following capabilities:
 {{<table "table table-striped table-bordered table-sm">}}
 | COP/OS            | PowerMax         | PowerStore       | PowerScale       | PowerFlex        |
 | ----------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| Kubernetes        | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 | 1.24, 1.25, 1.26 |
-| Red Hat OpenShift | 4.10, 4.11       | 4.10, 4.11       | 4.10, 4.11       | 4.10, 4.11       |
+| Kubernetes        | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27 | 1.25, 1.26, 1.27 |
+| Red Hat OpenShift | 4.11, 4.12       | 4.11, 4.12       | 4.11, 4.12       | 4.11, 4.12       |
 | RHEL              | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         | 7.x, 8.x         |
 | CentOS            | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         | 7.8, 7.9         |
 | Ubuntu            | 20.04            | 20.04            | 20.04            | 20.04            |
@@ -49,23 +49,10 @@ CSM for Replication provides the following capabilities:
 ## Supported Storage Platforms
 
 {{<table "table table-striped table-bordered table-sm">}}
-|               |                                                 PowerMax                                                 |                  PowerStore                  |               PowerScale                | PowerFlex |
-| ------------- | :------------------------------------------------------------------------------------------------------: | :------------------------------------------: | :-------------------------------------: | :-------: |
-| Storage Array | PowerMax 2000/8000 <br> PowerMax 2500/8500 <br> 5978.479.479, 5978.711.711, 6079.xxx.xxx, Unisphere 10.0 | 1.0.x, <br> 2.0.x, 2.1.x, <br> 3.0, 3.2, 3.5 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 3.6.x, 4.0|
+|               |                                                 PowerMax                                                 |                  PowerStore                  |               PowerScale                     | PowerFlex |
+| ------------- | :------------------------------------------------------------------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :-------: |
+| Storage Array | PowerMax 2500/8500 PowerMaxOS 10 (6079) , PowerMaxOS 10.0.1 (6079) <br> PowerMax 2000/8000 - 5978.711.xxx, 5978.479.xxx <br> Unisphere 10.0,10.0.1 | 1.0.x, <br> 2.0.x, 2.1.x, <br> 3.0, 3.2, 3.5 | OneFS 8.1, 8.2, 9.0, 9.1, 9.2, 9.3, 9.4 | 3.6.x, 4.0|
 {{</table>}}
-
-## Supported CSI Drivers
-
-CSM for Replication supports the following CSI drivers and versions.
-{{<table "table table-striped table-bordered table-sm">}}
-| Storage Array                  | CSI Driver                                               | Supported Versions |
-| ------------------------------ | -------------------------------------------------------- | ------------------ |
-| CSI Driver for Dell PowerMax   | [csi-powermax](https://github.com/dell/csi-powermax)     | v2.0 +             |
-| CSI Driver for Dell PowerStore | [csi-powerstore](https://github.com/dell/csi-powerstore) | v2.0 +             |
-| CSI Driver for Dell PowerScale | [csi-powerscale](https://github.com/dell/csi-powerscale) | v2.2 +             |
-| CSI Driver for Dell PowerFlex  | [csi-powerflex](https://github.com/dell/csi-powerflex)   | v2.6 +             |
-{{</table>}}
-For compatibility with storage arrays please refer to corresponding [CSI drivers](../csidriver/#features-and-capabilities)
 
 ## Details
 

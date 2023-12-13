@@ -5,7 +5,10 @@ description: >
 ---
 {{% pageinfo color="primary" %}}
 The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use [CSM Operator](../../../../deployment/csmoperator) going forward.
+<<<<<<< Updated upstream
 CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
+=======
+>>>>>>> Stashed changes
 {{% /pageinfo %}}
 
 
@@ -171,7 +174,7 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
       namespace: test-vxflexos
     spec:
       driver:
-        configVersion: v2.6.0
+        configVersion: v2.7.0
         replicas: 1
         dnsPolicy: ClusterFirstWithHostNet
         forceUpdate: false
@@ -223,8 +226,16 @@ For detailed PowerFlex installation procedure, see the _Dell PowerFlex Deploymen
             - name: X_CSI_HEALTH_MONITOR_ENABLED
               value: "false"
 
+            # X_CSI_MAX_VOLUMES_PER_NODE: Defines the maximum PowerFlex volumes that can be created per node
+            # Allowed values: Any value greater than or equal to 0
+            # If value is 0 then the orchestrator decides how many volumes can be published by the controller to
+            # the node
+            # Default value: "0"
+            - name: X_CSI_MAX_VOLUMES_PER_NODE
+              value: "0"
+
         initContainers:
-          - image: dellemc/sdc:3.6.0.6
+          - image: dellemc/sdc:3.6.1
             imagePullPolicy: IfNotPresent
             name: sdc
             envs:

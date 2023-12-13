@@ -25,7 +25,7 @@ This issue can arise when the topology service manifest is updated to expose the
 
 A user who tries to connect to `karavi-topology` on any browser may receive an error/warning message about the certificate. The message may vary depending on the browser. For instance, in Internet Explorer, you'll see:
 
-```console
+```
 There is a problem with this website's security certificate. 
 The security certificate presented by this website was not
 issued by a trusted certificate authority
@@ -38,7 +38,9 @@ While this certificate problem may indicate an attempt to fool you or intercept 
 A user who tries to connect to `karavi-topology` by using `curl` may receive the following warning or error message:
 
 ```console
-[root@:~]$ curl -v https://<karavi-topology-cluster-IP>:<port?/query
+curl -v https://<karavi-topology-cluster-IP>:<port?/query
+```
+```
 *   Trying ***********...
 * TCP_NODELAY set
 * Connected to *********** (***********) port 31433 (#0)
@@ -70,7 +72,9 @@ how to fix it, please visit the web page mentioned above.
 Due to the error above, the client pings the topology server with a **TLS handshake error** which is logged in `karavi-topology` pod. For instance,
 
 ```console
-[root@:~]$ kubectl  logs  -n powerflex karavi-topology-5d4669d6dd-trzxw
+kubectl  logs  -n powerflex karavi-topology-5d4669d6dd-trzxw
+```
+```
 2021/04/27 09:38:28 Set DriverNames to [csi-vxflexos.dellemc.com]
 2021/04/28 07:15:05 http: TLS handshake error from 10.42.0.0:58450: local error: tls: bad record MAC
 2021/04/28 07:16:14 http: TLS handshake error from 10.42.0.0:55311: local error: tls: bad record MAC
@@ -85,7 +89,10 @@ To resolve this issue, we need to configure the client to be aware of the karavi
 If we supplied a custom certificate during installing karavi-topology, we can simply open the `.crt` and copy the text. However, if it was assigned by cert-manager, you can get a copy of the certificate by running the following `kubectl` command on the clusters.
 
 ```console
-[root@:~]$ kubectl -n <namespace> get secret karavi-topology-tls -o jsonpath='{.data.tls\.crt}' | base64 -d
+
+kubectl -n <namespace> get secret karavi-topology-tls -o jsonpath='{.data.tls\.crt}' | base64 -d
+```
+```
 -----BEGIN CERTIFICATE-----
 RaNDOMcErTifCATeRaNDOMcErTifCATe..RaNDOMcErTifCATe
 RaNDOMcErTifCATe..RaNDOMcErTifCATeRaNDOMcErTifCATe
@@ -232,6 +239,8 @@ CSM for Observability is instrumented to report trace data to [Zipkin](https://z
 Check the pods in the CSM for Observability namespace. If the pod starting with 'karavi-observability-cert-manager-cainjector-*' is in 'CrashLoopBackOff' or 'Error" stage with a number of restarts, check if the logs for that pod show the below error:
 ```console
 kubectl logs -n $namespace $cert-manager-cainjector-podname
+```
+```
 error registering secret controller: no matches for kind "MutatingWebhookConfiguration" in version "admissionregistration.k8s.io/v1beta1"
 ```
 
@@ -241,7 +250,9 @@ If the Kubernetes cluster version is 1.22.2 (or higher), this error is due to an
 
 The warning can arise when a self-signed certificate for otel-collector is issued. It takes a few minutes or less for the signed certificate to generate and be consumed in the namespace. Once the certificate is consumed, the FailedMount warnings are resolved and the containers start properly. 
 ```console
-[root@:~]$ kubectl describe pod -n $namespace $pod
+kubectl describe pod -n $namespace $pod
+```
+```
 MountVolume.SetUp failed for volume "tls-secret" : secret "otel-collector-tls" not found
 Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached volumes=[vxflexos-config-params vxflexos-config tls-secret karavi-metrics-powerflex-configmap kube-api-access-4fqgl karavi-authorization-config proxy-server-root-certificate]: timed out waiting for the condition
 ```
@@ -249,12 +260,24 @@ Unable to attach or mount volumes: unmounted volumes=[tls-secret], unattached vo
 ### Why do I see 'Failed calling webhook' error when reinstalling CSM for Observability?
 This warning can occur when a user uninstalls Observability by deleting the Kubernetes namespace before properly cleaning up by running `helm delete` on the Observability Helm installation. This results in the credential manager failing to properly integrate with Observability on future installations. The user may see the following error in the module pods upon reinstallation:
 
-```console
+```
 Error: INSTALLATION FAILED: failed to create resource: Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://karavi-observability-cert-manager-webhook.karavi-observability.svc:443/mutate?timeout=10s": dial tcp 10.106.44.80:443: connect: connection refused
 ```
 
 To resolve this, leave the CSM namespace in place after a failed installation, and run the below command:
 
- `helm delete karavi-observability --namespace [CSM_NAMESPACE]`
+```bash
+helm delete karavi-observability --namespace [CSM_NAMESPACE]
+```
 
+<<<<<<< Updated upstream
 Then delete the namespace `kubectl delete ns [CSM_NAMESPACE]`. Wait until namespace is fully deleted, recreate the namespace, and reinstall Observability again. 
+=======
+Then delete the namespace `kubectl delete ns [CSM_NAMESPACE]`. Wait until namespace is fully deleted, recreate the namespace, and reinstall Observability again.
+
+### Other issues and workarounds
+
+| Symptoms | Prevention, Resolution or Workaround |
+| --- | --- |
+| karavi-metrics pod crashes for all the supported platforms whenever there are PVs without claim in the cluster | Work around is to create PVCs using the PVs which are not in bound state or delete the PVs without claims |
+>>>>>>> Stashed changes
