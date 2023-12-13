@@ -94,8 +94,8 @@ bash scripts/csm-offline-bundle.sh -c
    dellemc/csm-metrics-powerflex:v1.5.0
    dellemc/csm-metrics-powerscale:v1.2.0
    dellemc/csm-topology:v1.5.0
-   dellemc/dell-csi-replicator:v1.6.0
-   dellemc/dell-replication-controller:v1.6.0
+   dellemc/dell-csi-replicator:v1.7.0
+   dellemc/dell-replication-controller:v1.7.0
    dellemc/sdc:4.5
    docker.io/dellemc/dell-csm-operator:v1.3.0
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
