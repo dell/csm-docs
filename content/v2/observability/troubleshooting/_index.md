@@ -270,14 +270,11 @@ To resolve this, leave the CSM namespace in place after a failed installation, a
 helm delete karavi-observability --namespace [CSM_NAMESPACE]
 ```
 
-<<<<<<< Updated upstream
-Then delete the namespace `kubectl delete ns [CSM_NAMESPACE]`. Wait until namespace is fully deleted, recreate the namespace, and reinstall Observability again. 
-=======
 Then delete the namespace `kubectl delete ns [CSM_NAMESPACE]`. Wait until namespace is fully deleted, recreate the namespace, and reinstall Observability again.
+
 
 ### Other issues and workarounds
 
 | Symptoms | Prevention, Resolution or Workaround |
 | --- | --- |
 | karavi-metrics pod crashes for all the supported platforms whenever there are PVs without claim in the cluster | Work around is to create PVCs using the PVs which are not in bound state or delete the PVs without claims |
->>>>>>> Stashed changes

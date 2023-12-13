@@ -1,12 +1,12 @@
 ---
-title: Deployment
-linktitle: Deployment 
+title: Helm
+linktitle: Helm 
 weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Resiliency installation
 ---
 
-CSM for Resiliency is installed as part of the Dell CSI driver installation. The drivers can be installed either by a _helm chart_ or by the _Dell CSI Operator_. Currently, only _Helm chart_ installation is supported.
+CSM for Resiliency is installed as part of the Dell CSI driver installation.
 
 For information on the PowerFlex CSI driver, see [PowerFlex CSI Driver](https://github.com/dell/csi-powerflex).
 
@@ -26,7 +26,6 @@ The drivers that support Helm chart installation allow CSM for Resiliency to be 
 # Enable this feature only after contact support for additional information
 podmon:
   enabled: true
-  image: dellemc/podmon:v1.3.0
   controller:
     args:
       - "--csisock=unix:/var/run/csi/csi.sock"
@@ -50,7 +49,7 @@ podmon:
 
 To install CSM for Resiliency with the driver, the following changes are required:
 1. Enable CSM for Resiliency by changing the podmon.enabled boolean to true. This will enable both controller-podmon and node-podmon.
-2. Specify the podmon image to be used as podmon.image.
+2. If you need to change the registry, specify the podmon image to be used in `images.podmon`
 3. Specify arguments to controller-podmon in the podmon.controller.args block. See "Podmon Arguments" below. Note that some arguments are required. Note that the arguments supplied to controller-podmon are different from those supplied to node-podmon.
 4. Specify arguments to node-podmon in the podmon.node.args block. See "Podmon Arguments" below. Note that some arguments are required. Note that the arguments supplied to controller-podmon are different from those supplied to node-podmon.
 
@@ -59,7 +58,6 @@ To install CSM for Resiliency with the driver, the following changes are require
 | Argument | Required | Description | Applicability |
 |-|-|-|-|
 | enabled | Required | Boolean "true" enables CSM for Resiliency installation with the driver in a helm installation. | top level |
-| image | Required | Must be set to a repository where the podmon image can be pulled. | controller & node |
 | mode | Required | Must be set to "controller" for controller-podmon and "node" for node-podmon. | controller & node |
 | csisock | Required | This should be left as set in the helm template for the driver. For controller: <br> `-csisock=unix:/var/run/csi/csi.sock` <br> For node it will vary depending on the driver's identity: <br> `-csisock=unix:/var/lib/kubelet/plugins`<br>`/vxflexos.emc.dell.com/csi_sock` | controller & node |
 | leaderelection | Required | Boolean value that should be set true for controller and false for node. The default value is true. | controller & node |
@@ -79,7 +77,6 @@ Here is a typical installation used for testing:
 
 ```yaml
 podmon:
-  image: dellemc/podmon
   enabled: true
   controller:
     args:
@@ -110,7 +107,6 @@ Here is a typical installation used for testing:
 
 ```yaml
 podmon:
-   image: dellemc/podmon
    enabled: true
    controller:
      args:
@@ -141,7 +137,6 @@ Here is a typical installation used for testing:
 
 ```yaml
 podmon:
-  image: dellemc/podmon
   enabled: true
   controller:
     args:
@@ -174,7 +169,6 @@ Here is a typical installation used for testing:
 ```yaml
 podmon:
   enabled: true
-  image: dellemc/podmon
   controller:
     args:
       - "--csisock=unix:/var/run/csi/csi.sock"

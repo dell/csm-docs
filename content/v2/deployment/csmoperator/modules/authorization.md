@@ -148,11 +148,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 
 1. Follow all the [prerequisites](#prerequisite).
 
-<<<<<<< Updated upstream
-2. Create a CR (Custom Resource) for Authorization using the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v160.yaml). This file can be modified to use custom parameters if needed.
-=======
-2. Create a CR (Custom Resource) for Authorization using the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v170.yaml). This file can be modified to use custom parameters if needed.
->>>>>>> Stashed changes
+2. Create a CR (Custom Resource) for Authorization using the sample file provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/csm_authorization_proxy_server_v190.yaml). This file can be modified to use custom parameters if needed.
 
 3. Users should configure the parameters in the CR. This table lists the primary configurable parameters of the Authorization Proxy Server and their default values:
 

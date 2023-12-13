@@ -13,7 +13,7 @@ Dell CSM Operator has been tested and qualified on Upstream Kubernetes and OpenS
 
 | Kubernetes Version         | OpenShift Version    |
 | -------------------------- | -------------------- |
-| 1.25, 1.26, 1.27           | 4.12, 4.12 EUS, 4.13 |
+| 1.26, 1.27, 1.28           | 4.13, 4.14           |
 
 >NOTE:
 >- Authorization module is only supported on Kubernetes platforms.
@@ -24,20 +24,21 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
+| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
-| CSI PowerScale     | 2.6.0   | ✔ 1.6.0           | ✔ 1.4.0        | ✔ 1.5.0           | ❌            |
+| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ✔ 1.8.0       |
 | CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
-| CSI PowerFlex      | 2.6.0   | ✔ 1.6.0           | ❌             | ✔ 1.4.0           | ❌            |
+| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
 | CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
-| CSI PowerStore     | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
+| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.6.0        | ✔ 1.7.0           | ❌            |
 | CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
+| CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.7.0   | ❌                | ❌             | ❌                | ❌            |
-| CSI Unity XT       | 2.6.0   | ❌                | ❌             | ❌                | ❌            |
 
 >NOTE:
 >- Refer to sample files [here](https://github.com/dell/csm-operator/tree/main/samples).
@@ -63,11 +64,26 @@ The installation process involves the creation of a `Subscription` object either
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.3.0 https://github.com/dell/csm-operator.git
+git clone -b v1.4.0 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
-4. (Optional) If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
-5. Run `bash scripts/install.sh` to install the operator.
+4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
+5. _(Optional)_ If **CSM Replication** is planned for use and will be deployed using two clusters in an environment where the DNS is not configured, and cluster API endpoints are FQDNs, in order to resolve queries to remote API endpoints, it is necessary to edit the `deploy/operator.yaml` file and add the `hostAliases` field and associated `<FQDN>:<IP>` mappings to the CSM Operator Controller Manager Deployment under `spec.template.spec`. More information on host aliases can be found, [here](https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/).
+    ```yaml
+    # example config
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: dell-csm-operator-controller-manager
+    spec:
+      template:
+        spec:
+          hostAliases:
+          - hostnames:
+            - "remote.FQDN"
+            ip: "255.255.255.1"
+    ```
+6. Run `bash scripts/install.sh` to install the operator.
 
 >NOTE: Dell CSM Operator will be installed in the `dell-csm-operator` namespace.
 
@@ -120,10 +136,10 @@ This needs to be performed on a Linux system with access to the Internet as a gi
 To build an offline bundle, the following steps are needed:
 1. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.3.0 https://github.com/dell/csm-operator.git
+git clone -b v1.4.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
-3. Run the `csi-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
+3. Run the `csm-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
 ```bash
 bash scripts/csm-offline-bundle.sh -c
 ```
@@ -145,30 +161,30 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.8.0
-   dellemc/csi-metadata-retriever:v1.5.0
-   dellemc/csipowermax-reverseproxy:v2.6.0
-   dellemc/csi-powermax:v2.8.0
-   dellemc/csi-powerstore:v2.8.0
-   dellemc/csi-unity:v2.8.0
-   dellemc/csi-vxflexos:v2.8.0
-   dellemc/csm-authorization-sidecar:v1.7.0
-   dellemc/csm-metrics-powerflex:v1.5.0
-   dellemc/csm-metrics-powerscale:v1.2.0
-   dellemc/csm-topology:v1.5.0
+   dellemc/csi-isilon:v2.9.0
+   dellemc/csi-metadata-retriever:v1.6.0
+   dellemc/csipowermax-reverseproxy:v2.8.0
+   dellemc/csi-powermax:v2.9.0
+   dellemc/csi-powerstore:v2.9.0
+   dellemc/csi-unity:v2.9.0
+   dellemc/csi-vxflexos:v2.9.0
+   dellemc/csm-authorization-sidecar:v1.9.0
+   dellemc/csm-metrics-powerflex:v1.7.0
+   dellemc/csm-metrics-powerscale:v1.4.0
+   dellemc/csm-topology:v1.7.0
    dellemc/dell-csi-replicator:v1.6.0
    dellemc/dell-replication-controller:v1.6.0
-   dellemc/sdc:3.6.1
-   docker.io/dellemc/dell-csm-operator:v1.3.0
+   dellemc/sdc:4.5
+   docker.io/dellemc/dell-csm-operator:v1.4.0
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
-   registry.k8s.io/sig-storage/csi-attacher:v4.3.0
-   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.9.0
-   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.8.0
-   registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
-   registry.k8s.io/sig-storage/csi-resizer:v1.8.0
-   registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
+   registry.k8s.io/sig-storage/csi-attacher:v4.4.2
+   registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.10.0
+   registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.2
+   registry.k8s.io/sig-storage/csi-provisioner:v3.6.2
+   registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+   registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 
 *
 * Copying necessary files
@@ -249,32 +265,32 @@ Preparing a offline bundle for installation
 *
 * Loading docker images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.8.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.8.0
+Loaded image: docker.io/dellemc/csi-powerstore:v2.9.0
+Loaded image: docker.io/dellemc/csi-isilon:v2.9.0
 ...
 ...
-Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.8.0
-Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
+Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.9.2
+Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 
 *
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v2.8.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
-   dellemc/csi-metadata-retriever:v1.5.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
+   dellemc/csi-isilon:v2.9.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.9.0
+   dellemc/csi-metadata-retriever:v1.6.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
    ...
    ...
-   registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
-   registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v6.2.2
+   registry.k8s.io/sig-storage/csi-resizer:v1.9.2 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.9.2
+   registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v6.3.2
 
 *
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: dellemc/csi-isilon:v2.8.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.8.0
-   changing: dellemc/csi-metadata-retriever:v1.5.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.5.0
+   changing: dellemc/csi-isilon:v2.9.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.9.0
+   changing: dellemc/csi-metadata-retriever:v1.6.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
    ...
    ...
-   changing: registry.k8s.io/sig-storage/csi-resizer:v1.8.0 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.8.0
-   changing: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v6.2.2
+   changing: registry.k8s.io/sig-storage/csi-resizer:v1.9.2 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.9.2
+   changing: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2 -> localregistry:5000/dell-csm-operator/csi-snapshotter:v6.3.2
 
 *
 * Complete
@@ -326,7 +342,7 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 #### Using Installation Script
 1. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.3.0 https://github.com/dell/csm-operator.git
+git clone -b v1.4.0 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
@@ -360,7 +376,7 @@ The following notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field.
    ```yaml
       driver:
-        configVersion: v2.8.0
+        configVersion: v2.9.0
    ```
 
 ## Custom Resource Definitions

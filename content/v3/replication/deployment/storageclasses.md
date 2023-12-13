@@ -29,11 +29,8 @@ This should contain the name of the storage class on the remote cluster which is
 >**_NOTE_**: You still need to create a pair of storage classes even while using a single stretched cluster.
 
 ### Driver specific parameters
-<<<<<<< Updated upstream
-Please refer to the driver specific sections for [PowerMax](../powermax/#creating-storage-classes), [PowerStore](../powerstore/#creating-storage-classes), [PowerScale](../powerscale/#creating-storage-classes) or [Unity](../unity/#creating-storage-classes) for a detailed list of parameters.
-=======
+
 Please refer to the driver specific sections for [PowerMax](../powermax/#creating-storage-classes), [PowerStore](../powerstore/#creating-storage-classes), [PowerScale](../powerscale/#creating-storage-classes) or [PowerFlex](../powerflex#creating-storage-classes) for a detailed list of parameters.
->>>>>>> Stashed changes
 
 ### PV sync Deletion
 

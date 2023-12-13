@@ -40,6 +40,9 @@ kubectl get csm --all-namespaces
    ```
    Change the parameters with relevant values for your PowerStore array. 
    Add more blocks similar to above for each PowerStore array if necessary.
+
+   If replication feature is enabled, ensure the secret includes all the PowerStore arrays involved in replication.
+
    ### User Privileges
    The username specified in `config.yaml` must be from the authentication providers of PowerStore. The user must have the correct user role to perform the actions. The minimum requirement is **Storage Operator**.
 

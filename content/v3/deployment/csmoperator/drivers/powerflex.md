@@ -29,11 +29,9 @@ User can query for all Dell CSI drivers using this command:
   - Optionally, enable sdc monitor by setting the enable flag for the sdc-monitor to true. Please note: 
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
     - **If not using sidecar**, leave the enabled field set to false.
-<<<<<<< Updated upstream
-##### Example CR:  [samples/storage_csm_powerflex_v240.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v240.yaml)
-=======
+
 ##### Example CR:  [samples/storage_csm_powerflex_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v290.yaml)
->>>>>>> Stashed changes
+
 ```yaml
     sideCars:
     # sdc-monitor is disabled by default, due to high CPU usage 

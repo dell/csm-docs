@@ -6,20 +6,6 @@ description: >
 
 The CSI Driver for Dell Unity XT can be deployed by using the provided Helm v3 charts and installation scripts on both Kubernetes and OpenShift platforms. For more detailed information on the installation scripts, review the script [documentation](https://github.com/dell/csi-unity/tree/master/dell-csi-helm-installer).
 
-The controller section of the Helm chart installs the following components in a _Deployment_:
-
-- CSI Driver for Unity XT
-- Kubernetes External Provisioner, which provisions the volumes
-- Kubernetes External Attacher, which attaches the volumes to the containers
-- Kubernetes External Snapshotter, which provides snapshot support
-- Kubernetes External Resizer, which resizes the volume
-- Kubernetes External Health Monitor, which provides volume health status
-
-The node section of the Helm chart installs the following component in a _DaemonSet_:
-
-- CSI Driver for Unity XT
-- Kubernetes Node Registrar, which handles the driver registration
-
 ## Prerequisites
 
 Before you install CSI Driver for Unity XT, verify the requirements that are mentioned in this topic are installed and configured.
@@ -92,7 +78,7 @@ Install CSI Driver for Unity XT using this procedure.
 
  * As a pre-requisite for running this procedure, you must have the downloaded files, including the Helm chart from the source [git repository](https://github.com/dell/csi-unity) with the command 
    ```bash
-   git clone -b v2.8.0 https://github.com/dell/csi-unity.git
+   git clone -b v2.9.0 https://github.com/dell/csi-unity.git
    ```
  * In the top-level dell-csi-helm-installer directory, there should be two scripts, `csi-install.sh` and `csi-uninstall.sh`.
  * Ensure _unity_ namespace exists in Kubernetes cluster. Use the `kubectl create namespace unity` command to create the namespace if the namespace is not present.
@@ -112,15 +98,16 @@ Procedure
 2. Get the required values.yaml using the command below:
 
 ```bash
-cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.8.0/charts/csi-unity/values.yaml
+cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/dell/helm-charts/raw/csi-unity-2.9.0/charts/csi-unity/values.yaml
 ```
 
 3. Edit `values.yaml` to set the following parameters for your installation:
    
-    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.8.0/charts/csi-unity/values.yaml) file in this repository.
+    The following table lists the primary configurable parameters of the Unity XT driver chart and their default values. More detailed information can be found in the [`values.yaml`](https://github.com/dell/helm-charts/blob/csi-unity-2.9.0/charts/csi-unity/values.yaml) file in this repository.
     
     | Parameter | Description | Required | Default |
     | --------- | ----------- | -------- |-------- |
+    | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
     | logLevel | LogLevel is used to set the logging level of the driver | No | info |
     | allowRWOMultiPodAccess | Flag to enable multiple pods to use the same PVC on the same node with RWO access mode. | No | false |
     | kubeletConfigDir | Specify kubelet config dir path | Yes | /var/lib/kubelet |
@@ -129,7 +116,6 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
     | certSecretCount | Represents the number of certificate secrets, which the user is going to create for SSL authentication. (unity-cert-0..unity-cert-n). The minimum value should be 1. | No | 1 |
     | imagePullPolicy |  The default pull policy is IfNotPresent which causes the Kubelet to skip pulling an image if it already exists. | Yes | IfNotPresent |
     | podmon.enabled | service to monitor failing jobs and notify | No | false |
-    | podmon.image| pod man image name | No | - |
     | tenantName | Tenant name added while adding host entry to the array | No |  |
     | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
     | storageCapacity.enabled | Enable/Disable storage capacity tracking | No | true |
@@ -341,7 +327,7 @@ cd dell-csi-helm-installer && wget -O my-unity-settings.yaml https://github.com/
    **Syntax**:
    ```bash
 
-   git clone -b csi-unity-2.8.0 https://github.com/dell/helm-charts
+   git clone -b csi-unity-2.9.0 https://github.com/dell/helm-charts
 
    helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
 

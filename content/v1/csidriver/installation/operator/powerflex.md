@@ -4,11 +4,8 @@ description: >
   Installing CSI Driver for PowerFlex via Operator
 ---
 {{% pageinfo color="primary" %}}
-The Dell CSI Operator is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use [CSM Operator](../../../../deployment/csmoperator) going forward.
-<<<<<<< Updated upstream
+The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with [Dell CSM Operator](https://dell.github.io/csm-docs/docs/deployment/csmoperator/). If you are currently using Dell CSI Operator, refer to the [operator migration documentation](https://dell.github.io/csm-docs/docs/csidriver/installation/operator/operator_migration/) to migrate from Dell CSI Operator to Dell CSM Operator.
 CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.
-=======
->>>>>>> Stashed changes
 {{% /pageinfo %}}
 
 

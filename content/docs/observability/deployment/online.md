@@ -6,10 +6,6 @@ description: >
   Dell Container Storage Modules (CSM) for Observability Installer
 ---
 
-{{% pageinfo color="primary" %}}
-The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.
-{{% /pageinfo %}}
-
 <!--
 Copyright (c) 2020-2023 Dell Inc., or its subsidiaries. All Rights Reserved.
 
@@ -39,7 +35,7 @@ If the Authorization module is enabled for the CSI drivers installed in the same
 
 ## Prerequisites
 
-- Helm 3.3
+- Helm 3.x
 - The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
 
 ## Online Installer

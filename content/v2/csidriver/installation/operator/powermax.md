@@ -206,8 +206,7 @@ Use a tool such as `openssl` to generate this secret using the example below:
 openssl genrsa -out tls.key 2048
 openssl req -new -x509 -sha256 -key tls.key -out tls.crt -days 3650
 kubectl create secret -n <namespace> tls revproxy-certs --cert=tls.crt --key=tls.key
-kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --
-key=tls.key
+kubectl create secret -n <namespace> tls csirevproxy-tls-secret --cert=tls.crt --key=tls.key
 ```
 
 #### Set the following parameters in the CSI PowerMaxReverseProxy Spec
