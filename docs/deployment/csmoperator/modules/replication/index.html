@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/deployment/csmoperator/modules/replication/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-10-09T08:48:21-05:00" />
+<meta property="article:modified_time" content="2023-12-13T15:02:38-04:00" />
 
 <meta itemprop="name" content="Replication">
 <meta itemprop="description" content="Installing Replication via Dell CSM Operator
 ">
-<meta itemprop="dateModified" content="2023-10-09T08:48:21-05:00" />
+<meta itemprop="dateModified" content="2023-12-13T15:02:38-04:00" />
 <meta itemprop="wordCount" content="565">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Replication"/>
 <meta name="twitter:description" content="Installing Replication via Dell CSM Operator
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.47027c6667f469dd7c2010c442b2b083.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.74018d866caf86ef733fcbee842b7853.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.47027c6667f469dd7c2010c442b2b083.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.74018d866caf86ef733fcbee842b7853.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -707,11 +707,11 @@ This change will need to be made to the /etc/hosts file on:</p>
 </ul>
 <h3 id="cloning-the-github-repository-and-building-repctl">Cloning the GitHub Repository and Building repctl</h3>
 <p>The <a href="https://github.com/dell/csm-replication.git">csm-replication</a> GitHub repository is cloned to your source cluster as part of the installation. On your source cluster run the following to clone and build the repctl tool:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.6.0 https://github.com/dell/csm-replication.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.7.0 https://github.com/dell/csm-replication.git
 </span></span><span style="display:flex;"><span><span style="color:#204a87">cd</span> csm-replication/repctl
 </span></span><span style="display:flex;"><span>make build
 </span></span></code></pre></div><p>Alternately, you can download a pre-built repctl binary from our <a href="https://github.com/dell/csm-replication/releases">Releases</a> page.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://github.com/dell/csm-replication/releases/download/v1.6.0/repctl-linux-amd64
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://github.com/dell/csm-replication/releases/download/v1.7.0/repctl-linux-amd64
 </span></span><span style="display:flex;"><span>mv repctl-linux-amd64 repctl
 </span></span><span style="display:flex;"><span>chmod +x repctl
 </span></span></code></pre></div><p>The rest of the instructions will assume that your current working directory is the csm-replication/repctl directory.</p>

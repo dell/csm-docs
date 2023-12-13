@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.47027c6667f469dd7c2010c442b2b083.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.74018d866caf86ef733fcbee842b7853.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.47027c6667f469dd7c2010c442b2b083.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.74018d866caf86ef733fcbee842b7853.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -615,7 +615,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csm-replication-160">Release Notes - CSM Replication 1.6.0</a>
+    <li><a href="#release-notes---csm-replication-170">Release Notes - CSM Replication 1.7.0</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -671,7 +671,7 @@
 	<h1>Release notes</h1>
      
 	
-	<h2 id="release-notes---csm-replication-160">Release Notes - CSM Replication 1.6.0</h2>
+	<h2 id="release-notes---csm-replication-170">Release Notes - CSM Replication 1.7.0</h2>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
 <li><a href="https://github.com/dell/csm/issues/947">#947 - [FEATURE]: Support for Kubernetes 1.28</a></li>
@@ -686,20 +686,6 @@
 <li><a href="https://github.com/dell/csm/issues/1002">#1002 - [BUG]: CSM Replication - secret file requirement for both sites not documented </a></li>
 </ul>
 <h3 id="known-issues">Known Issues</h3>
-<table>
-<thead>
-<tr>
-<th>Github ID</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/dell/csm/issues/753">753</a></td>
-<td><strong>PowerScale:</strong> When Persistent Volumes (PVs) are created with quota enabled on CSM versions 1.6.0 and before, an incorrect quota gets set for the target side read-only PVs/directories based on the consumed non-zero source size instead of the assigned quota of the source. This can create issues when the user performs failover and wants to write data to the failed over site. If lower quota limit is set, no new writes can be performed on the target side post failover. <br /> <strong>Workaround</strong> using PowerScale cluster CLI or UI: <br /> For each Persistent Volume on the source kubernetes cluster, <br /> 1. Get the quota assigned for the directory on the source PowerScale cluster. The path to the directory information can be obtained from the specification field of the Persistent Volume object. <br /> 2. Verify the quota of the target directory on the target PowerScale cluster. If incorrect quota is set, update the quota on the target directory with the same information as on the source. If no quota is set, create a quota for the target directory.</td>
-</tr>
-</tbody>
-</table>
 
         <div class="section-index">
     
