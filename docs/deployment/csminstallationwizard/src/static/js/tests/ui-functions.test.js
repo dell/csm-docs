@@ -69,7 +69,8 @@ const CONSTANTS = {
 	HELM: "helm",
 	OPERATOR: "operator",
 	CSM_HELM_V170: "1.0.0",
-	CSM_HELM_V180: "1.1.0"
+	CSM_HELM_V180: "1.1.0",
+	CSM_HELM_V190: "1.2.0",
 };
 
 describe("GIVEN onAuthorizationChange function", () => {
@@ -605,7 +606,7 @@ describe("GIVEN displayModules function", () => {
 		expect($(".image-repository").css("display")).toEqual("none");
 		expect($(".cert-manager").css("display")).toEqual("none");
 		expect($(".resizer").css("display")).toEqual("none");
-		expect($(".vol-name-prefix").css("display")).toEqual("none");
+		expect($(".vol-name-prefix").css("display")).toEqual("block");
 		expect($(".snapshot-feature").css("display")).toEqual("none");
 		expect($(".fsGroupPolicy").css("display")).toEqual("block");
 		expect($(".resiliency").css("display")).toEqual("none");
@@ -636,7 +637,7 @@ describe("GIVEN displayModules function", () => {
 		expect($(".image-repository").css("display")).toEqual("none");
 		expect($(".cert-manager").css("display")).toEqual("none");
 		expect($(".resizer").css("display")).toEqual("none");
-		expect($(".vol-name-prefix").css("display")).toEqual("none");
+		expect($(".vol-name-prefix").css("display")).toEqual("block");
 		expect($(".snapshot-feature").css("display")).toEqual("none");
 		expect($(".fsGroupPolicy").css("display")).toEqual("block");
 		expect($(".resiliency").css("display")).toEqual("none");

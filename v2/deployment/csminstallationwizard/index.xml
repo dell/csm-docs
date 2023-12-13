@@ -14,5 +14,39 @@
       
     
     
+    <item>
+      <title>V2: Release Notes</title>
+      <link>https://dell.github.io/csm-docs/v2/deployment/csminstallationwizard/release_notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v2/deployment/csminstallationwizard/release_notes/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;release-notes---csm-installation-wizard-101&#34;&gt;Release Notes - CSM Installation Wizard 1.0.1&lt;/h2&gt;
+&lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/698&#34;&gt;Added support for the CSI-PowerStore, CSI-PowerMax, CSI-PowerScale, CSI-PowerFlex, CSI-Unity and the supported modules for helm installation &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
+&lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Workaround&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Tolerations required by the Resiliency module are commented out in the generated values.yaml file when Resiliency module is selected&lt;/td&gt;
+&lt;td&gt;If Resiliency is selected, the commented tolerations in the generated values.yaml file must be manually uncommented. The issue has been created at &lt;a href=&#34;https://github.com/dell/csm/issues/866&#34;&gt;https://github.com/dell/csm/issues/866&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
   </channel>
 </rss>

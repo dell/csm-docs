@@ -30,19 +30,19 @@
 &lt;li&gt;External Volume Snapshot Controller&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;volume-snapshot-crds&#34;&gt;Volume Snapshot CRD&amp;rsquo;s&lt;/h3&gt;
-&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/client/config/crd&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Kubernetes Volume Snapshot CRDs can be obtained and installed from the external-snapshotter project on Github. Manifests are available &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/client/config/crd&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;volume-snapshot-controller&#34;&gt;Volume Snapshot Controller&lt;/h3&gt;
 &lt;p&gt;The CSI external-snapshotter sidecar is split into two controllers:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;A common snapshot controller&lt;/li&gt;
 &lt;li&gt;A CSI external-snapshotter sidecar&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v5.0.1/deploy/kubernetes/snapshot-controller&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The common snapshot controller must be installed only once in the cluster irrespective of the number of CSI drivers installed in the cluster. On OpenShift clusters, the common snapshot-controller is pre-installed. In the clusters where it is not present, it can be installed using &lt;code&gt;kubectl&lt;/code&gt; and the manifests are available &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v6.2.1/deploy/kubernetes/snapshot-controller&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The manifests available on GitHub install the snapshotter image:
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v5.0.1&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v5.0.1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://quay.io/repository/k8scsi/csi-snapshotter?tag=v6.2.1&amp;amp;tab=tags&#34;&gt;quay.io/k8scsi/csi-snapshotter:v6.2.1&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;The CSI external-snapshotter sidecar is still installed along with the driver and does not involve any extra configuration.&lt;/li&gt;
@@ -56,10 +56,12 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f deploy/kubernetes/snapshot-controller
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It is recommended to use 6.0.x version of snapshotter/snapshot-controller.&lt;/li&gt;
+&lt;li&gt;It is recommended to use 6.2.1 version of snapshotter/snapshot-controller.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;installing-csi-driver-via-operator&#34;&gt;Installing CSI Driver via Operator&lt;/h2&gt;
-&lt;p&gt;Refer &lt;a href=&#34;../drivers/powerscale&#34;&gt;PowerScale Driver&lt;/a&gt; to install the driver via Operator&lt;/p&gt;
+&lt;p&gt;Refer &lt;a href=&#34;../drivers/powerscale&#34;&gt;PowerScale Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
+Refer &lt;a href=&#34;../drivers/powerflex&#34;&gt;PowerFlex Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;
+Refer &lt;a href=&#34;../drivers/powerstore&#34;&gt;PowerStore Driver&lt;/a&gt; to install the driver via Operator &lt;br&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are using an OLM based installation, example manifests are available in &lt;code&gt;OperatorHub&lt;/code&gt; UI.
 You can edit these manifests and install the driver using the &lt;code&gt;OperatorHub&lt;/code&gt; UI.&lt;/p&gt;
@@ -92,7 +94,7 @@ $ kubectl edit csm/powerscale -n &amp;lt;driver-namespace&amp;gt;
 &lt;ol&gt;
 &lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field if required.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.3.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.6.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Do not try to update the operator by modifying the original &lt;code&gt;CustomResource&lt;/code&gt; manifest file and running the &lt;code&gt;kubectl apply -f&lt;/code&gt; command. As part of the driver installation, the Operator sets some annotations on the &lt;code&gt;CustomResource&lt;/code&gt; object which are further utilized in some workflows (like detecting upgrade of drivers). If you run the &lt;code&gt;kubectl apply -f&lt;/code&gt; command to update the driver, these annotations are overwritten and this may lead to failures.&lt;/li&gt;
 &lt;/ol&gt;
@@ -189,18 +191,16 @@ Events
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v100&#34;&gt;Release Notes - Container Storage Modules Operator v1.0.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v110&#34;&gt;Release Notes - Container Storage Modules Operator v1.1.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/477&#34;&gt;Added support for CSI PowerFlex Driver&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/488&#34;&gt;Added support for CSM Observability Module&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/478&#34;&gt;Added support to Kubernetes 1.25&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/480&#34;&gt;Added support for OpenShift 4.11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/613&#34;&gt;Added support for CSI PowerStore Driver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/597&#34;&gt;Added support for Kubernetes 1.26&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/633&#34;&gt;Fix for CSM Authorization CRD in the CSM Operator not able to custom configurations&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
+&lt;p&gt;CSM object does not track available deployment count when down scaling to n-1 , where n is number of nodes.&lt;/p&gt;
 
       </description>
     </item>

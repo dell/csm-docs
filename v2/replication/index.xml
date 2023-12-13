@@ -207,15 +207,15 @@ be set to &lt;code&gt;self&lt;/code&gt; to indicate that we want to replicate th
 &lt;h4 id=&#34;replicated-resources&#34;&gt;Replicated Resources&lt;/h4&gt;
 &lt;p&gt;When creating PersistentVolumeClaims using StorageClass for a single cluster replication, replicated resources (PersistentVolumes,
 ReplicationGroups) would be created in the same cluster with the &lt;code&gt;replicated-&lt;/code&gt; prefix added to them. For example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ kubectl get pv 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;replicated-csivol-06d51bfcc5   3Gi        RWO            Retain           Available   powerstore-replication-tgt   23s
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ kubectl get rg
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME                                                 AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;replicated-rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:23:18Z
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rg-240721b0-12fb-4151-8dd8-94794ae2493e              34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;multiple-cluster-replication&#34;&gt;Multiple Cluster Replication&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pv 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
+csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
+replicated-csivol-06d51bfcc5   3Gi        RWO            Retain           Available   powerstore-replication-tgt   23s
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get rg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                                                 AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
+replicated-rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:23:18Z
+rg-240721b0-12fb-4151-8dd8-94794ae2493e              34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;multiple-cluster-replication&#34;&gt;Multiple Cluster Replication&lt;/h3&gt;
 &lt;h4 id=&#34;cluster-configuration-1&#34;&gt;Cluster Configuration&lt;/h4&gt;
 &lt;p&gt;Similar to a single cluster scenario, you need to create ConfigMap, but this time you need to provide at least one target
 cluster. You can provide as many as you like, but be mindful that a single volume can be replicated to only one of them.&lt;/p&gt;
@@ -244,21 +244,25 @@ ConfigMap. In our example replication parameter, the target cluster id should be
 &lt;h4 id=&#34;replicated-resources-1&#34;&gt;Replicated Resources&lt;/h4&gt;
 &lt;p&gt;When creating PersistentVolumeClaims using StorageClass for a multi-cluster replication, replicated resources would be
 created in both &lt;code&gt;source&lt;/code&gt; and &lt;code&gt;target&lt;/code&gt; clusters under the same names. For example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CLUSTER-A&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ kubectl get pv
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ kubectl get rg
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CLUSTER-B&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ kubectl get pv
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS          STORAGECLASS                 AGE
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;csivol-06d51bfcc5              3Gi        RWO            Retain           Available       powerstore-replication       18s
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ kubectl get rg
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rg-240721b0-12fb-4151-8dd8-94794ae2493e   30s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[CLUSTER-A]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      STORAGECLASS                 AGE
+csivol-06d51bfcc5              3Gi        RWO            Retain           Bound       powerstore-replication       23s
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get rg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
+rg-240721b0-12fb-4151-8dd8-94794ae2493e   34s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;[CLUSTER-B]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                           CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS          STORAGECLASS                 AGE
+csivol-06d51bfcc5              3Gi        RWO            Retain           Available       powerstore-replication       18s
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get rg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                                      AGE   STATE   LINK STATE     LAST LINKSTATE UPDATE
+rg-240721b0-12fb-4151-8dd8-94794ae2493e   30s   Ready   SYNCHRONIZED   2021-08-03T11:22:18Z
+&lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
     
@@ -275,32 +279,23 @@ created in both &lt;code&gt;source&lt;/code&gt; and &lt;code&gt;target&lt;/code&
 &lt;p&gt;Once the &lt;code&gt;DellCSIReplicationGroup&lt;/code&gt; &amp;amp; &lt;code&gt;PersistentVolume&lt;/code&gt; objects have been replicated across clusters (or within the same cluster), users can exercise the general Disaster Recovery workflows.&lt;/p&gt;
 &lt;h3 id=&#34;planned-migration-to-the-target-clusterarray&#34;&gt;Planned Migration to the target cluster/array&lt;/h3&gt;
 &lt;p&gt;This scenario is the typical choice when you want to try your disaster recovery plan or you need to switch activities from one site to another:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;a. Execute &amp;quot;failover&amp;quot; action on selected ReplicationGroup using the cluster name
-
-    ./repctl --rg rg-id failover --target target-cluster-name
-    
-b. Execute &amp;quot;reprotect&amp;quot; action on selected ReplicationGroup which will resume the replication from new &amp;quot;source&amp;quot;
-
-    ./repctl --rg rg-id reprotect --at new-source-cluster-name
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;../state_changes1.png&#34; alt=&#34;state_changes1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;a. Execute &amp;ldquo;failover&amp;rdquo; action on selected ReplicationGroup using the cluster name&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id failover --target target-cluster-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;b. Execute &amp;ldquo;reprotect&amp;rdquo; action on selected ReplicationGroup which will resume the replication from new &amp;ldquo;source&amp;rdquo;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id reprotect --at new-source-cluster-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../state_changes1.png&#34; alt=&#34;state_changes1&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;unplanned-migration-to-the-target-clusterarray&#34;&gt;Unplanned Migration to the target cluster/array&lt;/h3&gt;
 &lt;p&gt;This scenario is the typical choice when a site goes down:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;a. Execute &amp;quot;failover&amp;quot; action on selected ReplicationGroup using the cluster name 
-
-    ./repctl --rg rg-id failover --target target-cluster-name --unplanned
-
-b. Execute &amp;quot;swap&amp;quot; action on selected ReplicationGroup which would swap personalities of R1 and R2 (only applicable for PowerMax driver)
-
-    ./repctl --rg rg-id swap --at target-cluster-name
-
-**Note:** Unplanned migration usually happens when the original &amp;quot;source&amp;quot; cluster is unavailable. The following action makes sense when the cluster is back.
-
-c. Execute &amp;quot;reprotect&amp;quot; action on selected ReplicationGroup which will resume the replication.
-
-    ./repctl --rg rg-id reprotect --at new-source-cluster-name
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;../state_changes2.png&#34; alt=&#34;state_changes2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;a. Execute &amp;ldquo;failover&amp;rdquo; action on selected ReplicationGroup using the cluster name&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id failover --target target-cluster-name --unplanned 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;b. Execute &amp;ldquo;swap&amp;rdquo; action on selected ReplicationGroup which would swap personalities of R1 and R2 (only applicable for PowerMax driver)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id swap --at target-cluster-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Unplanned migration usually happens when the original &amp;ldquo;source&amp;rdquo; cluster is unavailable. The following action makes sense when the cluster is back.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;c. Execute &amp;ldquo;reprotect&amp;rdquo; action on selected ReplicationGroup which will resume the replication.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; ./repctl --rg rg-id reprotect --at new-source-cluster-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../state_changes2.png&#34; alt=&#34;state_changes2&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: When users do Failover and Failback, the tests pods on the source cluster may go &amp;ldquo;CrashLoopOff&amp;rdquo; state since it will try to remount the same volume which is already mounted. To get around this problem, bring down the number of replicas to 0 and then after that is done, bring it up to 1.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -531,7 +526,13 @@ The following table lists the supported maintenance actions and the equivalent o
 &lt;p&gt;If you wish to use &lt;code&gt;kubectl&lt;/code&gt; to perform actions, then use kubectl edit/patch operations and set the &lt;code&gt;action&lt;/code&gt; field in the Custom Resource.
 While performing site-specific actions, please consult each driver&amp;rsquo;s documentation to get an exhaustive list of all the supported actions.&lt;/p&gt;
 &lt;p&gt;For a brief guide on using actions for various DR workflows, please refer to this &lt;a href=&#34;../disaster-recovery&#34;&gt;document&lt;/a&gt;.&lt;/p&gt;
-
+&lt;h3 id=&#34;deleting-replication-groups&#34;&gt;Deleting Replication Groups&lt;/h3&gt;
+&lt;p&gt;To delete a replication group from a cluster, the group must be empty. This
+means that all associated replication pairs must have been deleted/removed.&lt;/p&gt;
+&lt;p&gt;This command will delete the empty replication group from the cluster and the
+associated replication group from the backend array.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  kubectl delete rg &amp;lt;rg-id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     
@@ -765,14 +766,11 @@ The name of the StorageClass resource that is created as the &amp;ldquo;target&a
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-replication-140&#34;&gt;Release Notes - CSM Replication 1.4.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-replication-150&#34;&gt;Release Notes - CSM Replication 1.5.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/558&#34;&gt;PowerScale - Implement Failback functionality&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/532&#34;&gt;PowerScale - Implement Reprotect functionality&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/573&#34;&gt;PowerScale - SyncIQ policy improvements&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/618&#34;&gt;PowerFlex - Initial Replication Support&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/432&#34;&gt;Replication APIs to be moved from alpha phase&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/665&#34;&gt;Target Backend Volume Deletion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/790&#34;&gt;Base Image Updated to ubi-micro&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -784,8 +782,8 @@ The name of the StorageClass resource that is created as the &amp;ldquo;target&a
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/523&#34;&gt;523&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; Artifacts are not properly cleaned after deletion.&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/782&#34;&gt;782&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; Target NFS exports are not deleted even though target directories are deleted&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -836,7 +834,9 @@ controller, because different versions could be incompatible with each other.&lt
 &lt;ol&gt;
 &lt;li&gt;Update the &lt;code&gt;controller.replication.image&lt;/code&gt; value in the values files to reference the new CSM Replication sidecar image.&lt;/li&gt;
 &lt;li&gt;Run the csi-install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running: &lt;br&gt;
-&lt;code&gt;cd ../dell-csi-helm-installer &amp;amp;&amp;amp; ./csi-install.sh --namespace &amp;lt;your-namespace&amp;gt; --values ./myvalues.yaml --upgrade&lt;/code&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ../dell-csi-helm-installer &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./csi-install.sh --namespace &amp;lt;your-namespace&amp;gt; --values ./myvalues.yaml --upgrade
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
@@ -851,8 +851,8 @@ controller, because different versions could be incompatible with each other.&lt
 &lt;/ol&gt;
 &lt;h2 id=&#34;updating-csm-replication-controller&#34;&gt;Updating CSM Replication controller&lt;/h2&gt;
 &lt;p&gt;Make sure the appropriate release branch is available on the machine performing the upgrade by running:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git clone -b &amp;lt;release-branch&amp;gt; https://github.com/dell/csm-replication.git&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&#34;upgrading-with-helm&#34;&gt;Upgrading with Helm&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.5.0 https://github.com/dell/csm-replication.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;upgrading-with-helm&#34;&gt;Upgrading with Helm&lt;/h3&gt;
 &lt;p&gt;This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or &lt;code&gt;repctl&lt;/code&gt; please use &lt;a href=&#34;#upgrading-with-repctl&#34;&gt;upgrading with repctl&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -861,14 +861,16 @@ controller, because different versions could be incompatible with each other.&lt
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Run the install script with the option &lt;code&gt;--upgrade&lt;/code&gt; by running:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;cd ./scripts &amp;amp;&amp;amp; ./install.sh --values ./myvalues.yaml --upgrade&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./scripts &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./install.sh --values ./myvalues.yaml --upgrade
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Run the same command on the second Kubernetes cluster if you use multi-cluster replication topology.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Upgrade won&amp;rsquo;t override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using &lt;code&gt;kubectl edit cm -n dell-replication-controller dell-replication-controller-config&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Upgrade won&amp;rsquo;t override currently existing ConfigMap, even if you change templated values in myvalues.yaml file. If you want to change the logLevel - edit ConfigMap from within the cluster using
+&lt;code&gt;bash  kubectl edit cm -n dell-replication-controller dell-replication-controller-config   &lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;upgrading-with-repctl&#34;&gt;Upgrading with repctl&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -881,13 +883,13 @@ controller, because different versions could be incompatible with each other.&lt
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Apply said manifest using the usual &lt;code&gt;repctl create&lt;/code&gt; command like so:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;./repctl create -f ../deploy/controller.yaml&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The output should have this line &lt;code&gt;Successfully updated existing deployment: dell-replication-controller-manager&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./repctl create -f ../deploy/controller.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The output should have this line &lt;code&gt;Successfully updated existing deployment: dell-replication-controller-manager&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Check if everything is OK by querying your Kubernetes clusters using &lt;code&gt;kubectl&lt;/code&gt; using a &lt;code&gt;kubectl get&lt;/code&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;kubectl get pods -n dell-replication-controller&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Your pods should be &lt;code&gt;READY&lt;/code&gt; and &lt;code&gt;RUNNING&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods -n dell-replication-controller&lt;span style=&#34;color:#4e9a06&#34;&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Your pods should be &lt;code&gt;READY&lt;/code&gt; and &lt;code&gt;RUNNING&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;replication-crd-version-update&#34;&gt;Replication CRD version update&lt;/h3&gt;

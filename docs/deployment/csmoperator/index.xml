@@ -72,7 +72,7 @@ For example - If the name of the installed PowerScale driver is powerscale, then
 &lt;ol&gt;
 &lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field if required.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.8.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.9.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Do not try to update the operator by modifying the original &lt;code&gt;CustomResource&lt;/code&gt; manifest file and running the &lt;code&gt;kubectl apply -f&lt;/code&gt; command. As part of the driver installation, the Operator sets some annotations on the &lt;code&gt;CustomResource&lt;/code&gt; object which are further utilized in some workflows (like detecting upgrade of drivers). If you run the &lt;code&gt;kubectl apply -f&lt;/code&gt; command to update the driver, these annotations are overwritten and this may lead to failures.&lt;/li&gt;
 &lt;/ol&gt;
@@ -118,7 +118,7 @@ The steps include:&lt;/p&gt;
         
         &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator&#34;&gt;Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#why-does-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui&#34;&gt;Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#why-do-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui&#34;&gt;Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#how-can-i-view-detailed-logs-for-the-csm-operator&#34;&gt;How can I view detailed logs for the CSM Operator?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#my-dell-csi-driver-install-failed-how-do-i-fix-it&#34;&gt;My Dell CSI Driver install failed. How do I fix it?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host&#34;&gt;My CSM Replication install fails to validate replication prechecks with &amp;rsquo;no such host&amp;rsquo;.&lt;/a&gt;&lt;/li&gt;
@@ -184,19 +184,21 @@ Events
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v130&#34;&gt;Release Notes - Container Storage Modules Operator v1.3.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v140&#34;&gt;Release Notes - Container Storage Modules Operator v1.4.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/876&#34;&gt;#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/939&#34;&gt;#939 - [FEATURE]: Add support for Offline Install of CSM Operator in non OLM environment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/878&#34;&gt;#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/955&#34;&gt;#955 - [FEATURE]: CSI Unity XT Driver: Add upgrade support to the CSM Operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/898&#34;&gt;#898 - [BUG]: Unable to pull podmon image from local repository for offline install&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/975&#34;&gt;#975 - [BUG]: Not able to take volumesnapshots  &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/982&#34;&gt;#982 - [BUG]: Update resources limits for controller-manager to fix OOMKilled error&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/988&#34;&gt;#988 - [BUG]: CSM Operator fails to install CSM Replication on the remote cluster&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/989&#34;&gt;#989 - [BUG]: Allow volume prefix to be set via CSM operator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/990&#34;&gt;#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;

@@ -72,7 +72,7 @@ For example - If the name of the installed PowerScale driver is powerscale, then
 &lt;ol&gt;
 &lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field if required.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.7.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.8.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;Do not try to update the operator by modifying the original &lt;code&gt;CustomResource&lt;/code&gt; manifest file and running the &lt;code&gt;kubectl apply -f&lt;/code&gt; command. As part of the driver installation, the Operator sets some annotations on the &lt;code&gt;CustomResource&lt;/code&gt; object which are further utilized in some workflows (like detecting upgrade of drivers). If you run the &lt;code&gt;kubectl apply -f&lt;/code&gt; command to update the driver, these annotations are overwritten and this may lead to failures.&lt;/li&gt;
 &lt;/ol&gt;
@@ -121,11 +121,12 @@ The steps include:&lt;/p&gt;
 &lt;li&gt;&lt;a href=&#34;#why-does-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui&#34;&gt;Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#how-can-i-view-detailed-logs-for-the-csm-operator&#34;&gt;How can I view detailed logs for the CSM Operator?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#my-dell-csi-driver-install-failed-how-do-i-fix-it&#34;&gt;My Dell CSI Driver install failed. How do I fix it?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host&#34;&gt;My CSM Replication install fails to validate replication prechecks with &amp;rsquo;no such host&amp;rsquo;.&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;can-csm-operator-manage-existing-drivers-installed-using-helm-charts-or-the-dell-csi-operator&#34;&gt;Can CSM Operator manage existing drivers installed using Helm charts or the Dell CSI Operator?&lt;/h3&gt;
 &lt;p&gt;The Dell CSM Operator is unable to manage any existing driver installed using Helm charts or the Dell CSI Operator. If you already have installed one of the Dell CSI driver in your cluster and  want to use the CSM operator based deployment, uninstall the driver and then redeploy the driver via Dell CSM Operator&lt;/p&gt;
-&lt;h3 id=&#34;why-does-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui&#34;&gt;Why does some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?&lt;/h3&gt;
-&lt;p&gt;The Dell CSM Operator is not fully compliant with the OperatorHub React UI elements.Due to this, some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use &lt;code&gt;kubectl/oc&lt;/code&gt; commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Dell CSM Operator.&lt;/p&gt;
+&lt;h3 id=&#34;why-do-some-of-the-custom-resource-fields-show-up-as-invalid-or-unsupported-in-the-operatorhub-gui&#34;&gt;Why do some of the Custom Resource fields show up as invalid or unsupported in the OperatorHub GUI?&lt;/h3&gt;
+&lt;p&gt;The Dell CSM Operator is not fully compliant with the OperatorHub React UI elements. Due to this, some of the Custom Resource fields may show up as invalid or unsupported in the OperatorHub GUI. To get around this problem, use &lt;code&gt;kubectl/oc&lt;/code&gt; commands to get details about the Custom Resource(CR). This issue will be fixed in the upcoming releases of the Dell CSM Operator.&lt;/p&gt;
 &lt;h3 id=&#34;how-can-i-view-detailed-logs-for-the-csm-operator&#34;&gt;How can I view detailed logs for the CSM Operator?&lt;/h3&gt;
 &lt;p&gt;Detailed logs of the CSM Operator can be displayed using the following command:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;kubectl logs &amp;lt;csm-operator-controller-podname&amp;gt; -n &amp;lt;namespace&amp;gt;
@@ -156,7 +157,21 @@ Events
 &lt;li&gt;Incorrect driver Spec env, args for containers&lt;/li&gt;
 &lt;li&gt;Incorrect RBAC permissions&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;h3 id=&#34;my-csm-replication-install-fails-to-validate-replication-prechecks-with-no-such-host&#34;&gt;My CSM Replication install fails to validate replication prechecks with &amp;rsquo;no such host&#39;.&lt;/h3&gt;
+&lt;p&gt;In replication environments that utilize more than one cluster, and utilize FQDNs to reference API endpoints, it is highly recommended that the DNS be configured to resolve requests involving the FQDN to the appropriate cluster.&lt;/p&gt;
+&lt;p&gt;If for some reason it is not possible to configure the DNS, the /etc/hosts file should be updated to map the FQDN to the appropriate IP. This change will need to be made to the /etc/hosts file on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The bastion node(s) (or wherever &lt;code&gt;repctl&lt;/code&gt; is used).&lt;/li&gt;
+&lt;li&gt;Either the CSM Operator Deployment or ClusterServiceVersion custom resource if using an Operator Lifecycle Manager (such as with an OperatorHub install).&lt;/li&gt;
+&lt;li&gt;Both dell-replication-controller-manager deployments.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To update the ClusterServiceVersion, execute the command below, replacing the fields for the remote cluster&amp;rsquo;s FQDN and IP.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch clusterserviceversions.operators.coreos.com -n &amp;lt;operator-namespace&amp;gt; dell-csm-operator-certified.v1.3.0 &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;json -p&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[{&amp;#34;op&amp;#34;: &amp;#34;add&amp;#34;, &amp;#34;path&amp;#34;: &amp;#34;/spec/install/spec/deployments/0/spec/template/spec/hostAliases&amp;#34;, &amp;#34;value&amp;#34;: [{&amp;#34;ip&amp;#34;:&amp;#34;&amp;lt;remote-IP&amp;gt;&amp;#34;,&amp;#34;hostnames&amp;#34;:[&amp;#34;&amp;lt;remote-FQDN&amp;gt;&amp;#34;]}]}]&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To update the dell-replication-controller-manager deployment, execute the command below, replacing the fields for the remote cluster&amp;rsquo;s FQDN and IP. Make sure to update the deployment on both the primary and disaster recovery clusters.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl patch deployment -n dell-replication-controller dell-replication-controller-manager &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;-p &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;{&amp;#34;spec&amp;#34;:{&amp;#34;template&amp;#34;:{&amp;#34;spec&amp;#34;:{&amp;#34;hostAliases&amp;#34;:[{&amp;#34;hostnames&amp;#34;:[&amp;#34;&amp;lt;remote-FQDN&amp;gt;&amp;#34;],&amp;#34;ip&amp;#34;:&amp;#34;&amp;lt;remote-IP&amp;gt;&amp;#34;}]}}}}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     
@@ -169,28 +184,19 @@ Events
       <description>
         
         
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;CSM 1.7.1 is applicable to helm based installations of PowerFlex driver.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;h2 id=&#34;release-notes---container-storage-modules-operator-v120&#34;&gt;Release Notes - Container Storage Modules Operator v1.2.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---container-storage-modules-operator-v130&#34;&gt;Release Notes - Container Storage Modules Operator v1.3.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/756&#34;&gt;Added support for CSI Unity XT Driver&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/769&#34;&gt;Added support for PowerMax Driver&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/821&#34;&gt;Added Replication Support for PowerFlex driver&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/739&#34;&gt;CSM Operator: Support install of Resiliency module&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/744&#34;&gt;Migrated image registry from k8s.gcr.io to registry.k8s.io&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/571&#34;&gt;Added support for OpenShift 4.12&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/761&#34;&gt;Added support for Kubernetes 1.27&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/876&#34;&gt;#876 - [FEATURE]: CSI 1.5 spec support -StorageCapacityTracking&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/939&#34;&gt;#939 - [FEATURE]: Add support for Offline Install of CSM Operator in non OLM environment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/878&#34;&gt;#878 - [FEATURE]: CSI 1.5 spec support: Implement Volume Limits&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/955&#34;&gt;#955 - [FEATURE]: CSI Unity XT Driver: Add upgrade support to the CSM Operator&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/816&#34;&gt;CSM object goes into failed state when deployments are getting scaled down/up&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/788&#34;&gt;Install issues of the Replication module have been fixed&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/898&#34;&gt;#898 - [BUG]: Unable to pull podmon image from local repository for offline install&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;

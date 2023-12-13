@@ -32,29 +32,32 @@ Volume Group Snapshot supports PowerFlex and PowerStore driver.&lt;/p&gt;
 &lt;p&gt;The only pre-requisite required is the external-snapshotter, which is available &lt;a href=&#34;https://github.com/kubernetes-csi/external-snapshotter/tree/v4.1.1&#34;&gt;here&lt;/a&gt;. Version 4.1+ is required. This is also required for the driver, so if the driver has already been installed, this pre-requisite should already be fulfilled as well.&lt;/p&gt;
 &lt;p&gt;The external-snapshotter is split into two controllers, the common snapshot controller and a CSI external-snapshotter sidecar. The common snapshot controller must be installed only once per cluster.&lt;/p&gt;
 &lt;p&gt;Here are sample instructions on installing the external-snapshotter CRDs:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
-cd ./external-snapshotter
-git checkout release-&amp;lt;your-version&amp;gt;
-kubectl create -f client/config/crd
-kubectl create -f deploy/kubernetes/snapshot-controller
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2-install-vgs-crd&#34;&gt;2. Install VGS CRD&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/kubernetes-csi/external-snapshotter/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; ./external-snapshotter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git checkout release-&amp;lt;your-version&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f client/config/crd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create -f deploy/kubernetes/snapshot-controller
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-install-vgs-crd&#34;&gt;2. Install VGS CRD&lt;/h3&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;IMPORTANT: delete previous v1aplha2 version of CRD and vgs resources created using alpha version.
 	   Snapshots on array will remain if memberReclaimPolicy=retain was used.
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you want to install the VGS CRD from a pre-generated yaml, you can do so with this command (run in top-level folder):&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/dell/csi-volumegroup-snapshotter.git
-cd csi-volumegroup-snapshotter
-kubectl apply -f config/crd/vgs-install.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you want to create your own CRD for installation with Kustomize, then the command &lt;code&gt;make install&lt;/code&gt; can be used to create and install the Custom Resource Definitions in your Kubernetes cluster.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/dell/csi-volumegroup-snapshotter.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; csi-volumegroup-snapshotter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply -f config/crd/vgs-install.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you want to create your own CRD for installation with Kustomize, then the command &lt;code&gt;make install&lt;/code&gt; can be used to create and install the Custom Resource Definitions in your Kubernetes cluster.&lt;/p&gt;
 &lt;h3 id=&#34;3-deploy-vgs-in-csi-driver-with-helm-chart-parameters&#34;&gt;3. Deploy VGS in CSI Driver with Helm Chart Parameters&lt;/h3&gt;
 &lt;p&gt;The drivers that support Helm chart deployment allow the CSM Volume Group Snapshotter to be &lt;em&gt;optionally&lt;/em&gt; deployed
 by variables in the chart. There is a &lt;em&gt;vgsnapshotter&lt;/em&gt; block specified in the &lt;em&gt;values.yaml&lt;/em&gt; file of the chart that will look similar this default text:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# volume group snapshotter(vgsnapshotter) details
-# These options control the running of the vgsnapshotter container
-vgsnapshotter:
-  enabled: false
-  image: 
- 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To deploy CSM Volume Group Snapshotter with the driver, these changes are required:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# volume group snapshotter(vgsnapshotter) details&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# These options control the running of the vgsnapshotter container&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;vgsnapshotter&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: It is recommended you set controllerCount to 1 in your &lt;a href=&#34;https://github.com/dell/csi-powerflex/blob/fea900ff9b528837714c215af0e7e340a8773e94/helm/csi-vxflexos/values.yaml#L132&#34;&gt;values file&lt;/a&gt;, to avoid duplicate vgs controllers running&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To deploy CSM Volume Group Snapshotter with the driver, these changes are required:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Enable CSM Volume Group Snapshotter by changing the vgsnapshotter.enabled boolean to true.&lt;/li&gt;
 &lt;li&gt;In the vgsnapshotter.image field, put the location of the image you created, or link to the one already built (such as the one on DockerHub, &lt;code&gt;dellemc/csi-volumegroup-snapshotter:v1.2.0&lt;/code&gt;).&lt;/li&gt;

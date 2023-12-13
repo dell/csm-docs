@@ -424,26 +424,6 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;
-&lt;h2 id=&#34;release-notes---csm-application-mobility-020&#34;&gt;Release Notes - CSM Application Mobility 0.2.0&lt;/h2&gt;
-&lt;h3 id=&#34;new-featureschanges-1&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/551&#34;&gt;Scheduled Backups for Application Mobility&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues-1&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
-&lt;h3 id=&#34;known-issues-1&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
-&lt;h2 id=&#34;release-notes---csm-application-mobility-010&#34;&gt;Release Notes - CSM Application Mobility 0.1.0&lt;/h2&gt;
-&lt;h3 id=&#34;new-featureschanges-2&#34;&gt;New Features/Changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/449&#34;&gt;Technical preview release&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Clone stateful application workloads and application data to other clusters, either on-premise or in the cloud&lt;/li&gt;
-&lt;li&gt;Supports Restic as a data mover for application data&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;fixed-issues-2&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;p&gt;There are no fixed issues in this release.&lt;/p&gt;
-&lt;h3 id=&#34;known-issues-2&#34;&gt;Known Issues&lt;/h3&gt;
-&lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
       </description>
     </item>

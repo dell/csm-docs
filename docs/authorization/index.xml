@@ -1172,13 +1172,13 @@ time=&amp;#34;2022-06-30T17:38:32Z&amp;#34; level=fatal msg=&amp;#34;grpc failed
         &lt;h2 id=&#34;release-notes---csm-authorization-180&#34;&gt;Release Notes - CSM Authorization 1.8.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/922&#34;&gt;#922 - [FEATURE]: Use ubi9 micro as base image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1066&#34;&gt;#1066 - [FEATURE]: Support for Openshift 4.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/996&#34;&gt;#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1031&#34;&gt;#1031 - [FEATURE]: Update to the latest UBI Micro image for CSM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1062&#34;&gt;#1062 - [FEATURE]: CSM PowerMax: Support PowerMax v10.1 &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/895&#34;&gt;#895 - [BUG]: Update CSM Authorization karavictl CLI flag descriptions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;p&gt;There are no known issues in this release.&lt;/p&gt;
 
