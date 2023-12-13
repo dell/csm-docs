@@ -40,8 +40,6 @@ This script does the following:
 - After that, it uses that PVC as the data source to create a new PVC and mounts it on the same container. It checks if the file that existed in the source PVC also exists in the new PVC, calculates its checksum, and compares it to the checksum previously calculated.
 - Finally, it cleans up all the resources that are created as part of the test.
 
-> This is not supported for replicated volumes.
-
 #### Snapshot test
 
 Use this procedure to perform a snapshot test.
@@ -91,7 +89,7 @@ Application prefix is the name of the application that can be used to group the 
 
 Use this procedure to consume existing volumes with static provisioning.
 
-1. Open your Unisphere for PowerMax, and take a note of volume-id.
+1. Open your Unisphere for Powermax, and take a note of volume-id.
 2. Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.
 3. In the following example, storage class is assumed as 'powermax', cluster prefix as 'ABC' and volume's internal name as '00001', array ID as '000000000001', volume ID as '1abc23456'. The volume-handle should be in the format of `csi`-`clusterPrefix`-`volumeNamePrefix`-`id`-`arrayID`-`volumeID`.
 

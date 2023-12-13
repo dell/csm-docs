@@ -11,23 +11,23 @@ description: >
 
 Container Storage Modules (CSM) for Replication project consists of the following components:
 
-* DellCSIReplicationGroup - A Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-* CSM Replication controller which replicates the resources across(or within) Kubernetes clusters.
-* CSM Replication sidecar container which is part of the CSI driver controller pod
-* repctl - Multi cluster Kubernetes client for managing replication related objects
+* `DellCSIReplicationGroup`, a Kubernetes [Custom Resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+* CSM Replication controller which replicates the resources across (or within) Kubernetes clusters.
+* CSM Replication sidecar container which is part of each CSI driver controller pod.
+* repctl - Multi cluster Kubernetes client for managing replication related objects.
 
 ### DellCSIReplicationGroup
 `DellCSIReplicationGroup` (RG) is a cluster scoped Custom Resource that represents a protection group on the backend storage array.
 It is used to group volumes with the same replication related properties together.
 `DellCSIReplicationGroup`'s spec contains an _action_ field which can be used to perform replication related operations on the backing protection groups on the storage arrays.
-This includes operations like _Failover_, _Reprotect_, _Suspend_, _Synchronize_ e.t.c.
+This includes operations like _Failover_, _Reprotect_, _Suspend_, _Synchronize_, etc.
 Any replication related operation is always carried out on all the volumes present in the group.
 
 #### Specification
 
 ```yaml
 kind: DellCSIReplicationGroup
-apiVersion: replication.storage.dell.com/v1alpha1
+apiVersion: replication.storage.dell.com/v1
 metadata:
   name: rg-e6be24c0-145d-4b62-8674-639282ebdd13
 spec:
@@ -72,16 +72,16 @@ status:
     state: Ready
 ```
 
-Here is a diagram representing how the _state_ of the CustomResource changes based on actions
+Here is a diagram representing how the _state_ of the CustomResource changes based on actions:
 ![state](../state.png)
 
 
-### CSM Replication sidecar
+### CSM Replication Sidecar
 ![sidecar](../sidecar.png)
 
-CSM Replication sidecar is deployed as sidecar container in the CSI driver controller pod. This container is similar to Kubernetes CSI Sidecar
+CSM Replication sidecar is deployed as sidecar container in _each_ CSI driver's controller pod. This container is similar to Kubernetes CSI Sidecar
 [containers](https://kubernetes-csi.github.io/docs/sidecar-containers.html) and runs a Controller Manager
-which manages the following controllers -
+which manages the following controllers:
 * PersistentVolume(PV) Controller
 * PersistentVolumeClaim(PVC) Controller
 * DellCSIReplicationGroup(RG) Controller
@@ -103,7 +103,7 @@ It is primarily responsible for the following:
 ![common](../common.png)
 
 CSM Replication Controller is a Kubernetes application deployed independently of CSI drivers and is responsible for
-the communication between Kubernetes clusters.
+the communication between Kubernetes clusters. _One_ CSM Replication Controller manages replication operations for _all_ CSI driver installations on the Kubernetes cluster. 
 
 The details about the clusters it needs to connect to are provided in the form of a ConfigMap with references to secrets
 containing the details(KubeConfig/ServiceAccount tokens) required to connect to the respective clusters.
@@ -115,16 +115,16 @@ It consists of Controller Manager which manages the following controllers:
 
 The PV controller is responsible for creating PV objects (representing the replicated volumes on the backend storage array) in the remote
 Kubernetes cluster.
-This controller also enables deletion of the remote PV object in case it is desired by propagating the deletion request across clusters.
+This controller also enables deletion of the remote PV object, if enabled through the storage class' `RemotePVRetentionPolicy`, by propagating the deletion request across clusters.
 
 Similarly, the RG controller is responsible for creating RG objects in the remote Kubernetes cluster. These RG objects represent the
-remote protection groups on the backend storage array. This controller can also propagate the deletion request of RG objects across clusters.
+remote protection groups on the backend storage array. This controller can also propagate the deletion request of RG objects across clusters, if enabled through the storage class' `RemoteRGRetentionPolicy`.
 
 Both the PV & RG objects in the remote cluster have extra metadata associated with them in form of annotations & labels. This metadata includes
 information about the respective objects in the source cluster.
 
 The PVC objects are never replicated across the clusters. Instead, the remote PV objects have annotations related to the
-source PVC objects. This information can be easily used to create the PVCs whenever required using `repctl` or even `kubectl`
+source PVC objects. This information can be easily used to create the PVCs whenever required using `repctl` or `kubectl`.
 
 ### Supported Cluster Topologies
 Click [here](../cluster-topologies) for details for the various types of supported cluster topologies

@@ -42,7 +42,7 @@ CSM for Resiliency provides the following capabilities:
 | COP/OS            | Supported Versions |
 | ----------------- | :----------------: |
 | Kubernetes        | 1.25, 1.26, 1.27   |
-| Red Hat OpenShift |     4.11, 4.12     |
+| Red Hat OpenShift |     4.11, 4.12, 4.13     |
 | RHEL              |     7.x, 8.x       |
 | CentOS            |     7.8, 7.9       |
 {{</table>}}

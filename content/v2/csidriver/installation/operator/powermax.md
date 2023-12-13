@@ -3,6 +3,11 @@ title: PowerMax
 description: >
   Installing CSI Driver for PowerMax via Operator
 ---
+{{% pageinfo color="primary" %}}
+The Dell CSI Operator is no longer actively maintained or supported. Dell CSI Operator has been replaced with [Dell CSM Operator](https://dell.github.io/csm-docs/docs/deployment/csmoperator/). If you are currently using Dell CSI Operator, refer to the [operator migration documentation](https://dell.github.io/csm-docs/docs/csidriver/installation/operator/operator_migration/) to migrate from Dell CSI Operator to Dell CSM Operator.
+
+{{% /pageinfo %}}
+{{% pageinfo color="primary" %}} Linked Proxy mode for CSI reverse proxy is no longer actively maintained or supported. It will be deprecated in CSM 1.9. It is highly recommended that you use stand alone mode going forward. {{% /pageinfo %}}
 
 ## Installing CSI Driver for PowerMax via Operator
 
@@ -46,8 +51,10 @@ Set up the environment as follows:
 
 - Add all FC array ports zoned to the ESX/ESXis to a port group where the cluster is hosted .
 
-- Add initiators from all ESX/ESXis to a host(initiator group) where the cluster is hosted.
+- Add initiators from all ESX/ESXis to a host(initiator group)/host group(cascaded initiator group) where the cluster is hosted.
 - Create a secret which contains vCenter privileges. Follow the steps [here](#support-for-auto-rdm-for-vsphere-over-fc) to create the same. 
+
+>Note: Hostgroups support with vSphere environment will be only available on csm-operator.
 
 #### Linux multipathing requirements
 
@@ -91,22 +98,22 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    Create a file called powermax-creds.yaml with the following content:
      ```yaml
         apiVersion: v1
-          kind: Secret
-          metadata:
+        kind: Secret
+        metadata:
           name: powermax-creds
             # Replace driver-namespace with the namespace where driver is being deployed
-            namespace: <driver-namespace>
-          type: Opaque
-          data:
-            # set username to the base64 encoded username
-            username: <base64 username>
-            # set password to the base64 encoded password
-            password: <base64 password>
+          namespace: <driver-namespace>
+        type: Opaque
+        data:
+          # set username to the base64 encoded username
+          username: <base64 username>
+          # set password to the base64 encoded password
+          password: <base64 password>
           # Uncomment the following key if you wish to use ISCSI CHAP authentication (v1.3.0 onwards)
           # chapsecret: <base64 CHAP secret>
      ```
    Replace the values for the username and password parameters. These values can be obtained using base64 encoding as described in the following example:
-   ```
+   ```BASH
    echo -n "myusername" | base64
    echo -n "mypassword" | base64
    # If mychapsecret is the ISCSI CHAP secret
@@ -135,7 +142,7 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
    | X_CSI_HEALTH_MONITOR_ENABLED | Enable/Disable health monitor of CSI volumes from Controller and Node plugin. Provides details of volume status, usage and volume condition. As a prerequisite, external-health-monitor sidecar section should be uncommented in samples which would install the sidecar | No | false |
    | X_CSI_VSPHERE_ENABLED | Enable VMware virtualized environment support via RDM | No | false |
    | X_CSI_VSPHERE_PORTGROUP | Existing portGroup that driver will use for vSphere | Yes | "" |
-   | X_CSI_VSPHERE_HOSTGROUP | Existing host(initiator group) that driver will use for vSphere | Yes | "" |
+   | X_CSI_VSPHERE_HOSTNAME | Existing host(initiator group)/host group(cascaded initiator group) that driver will use for vSphere | Yes | "" |
    | X_CSI_VCenter_HOST | URL/endpoint of the vCenter where all the ESX are present | Yes | "" |
    | ***Node parameters***|
    | X_CSI_POWERMAX_ISCSI_ENABLE_CHAP | Enable ISCSI CHAP authentication. For more details on this feature see the related [documentation](../../../features/powermax/#iscsi-chap) | No | false |
@@ -146,18 +153,19 @@ Create a secret named powermax-certs in the namespace where the CSI PowerMax dri
 **Note** - If CSI driver is getting installed using OCP UI , create these two configmaps manually using the command `oc create -f <configfilename>`
 1. Configmap name powermax-config-params
      ```yaml
-	    apiVersion: v1
-        kind: ConfigMap
-        metadata:
-          name: powermax-config-params
-          namespace: test-powermax
-        data:
-          driver-config-params.yaml: |
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+         name: powermax-config-params
+         namespace: test-powermax
+      data:
+         driver-config-params.yaml: |
             CSI_LOG_LEVEL: "debug"
             CSI_LOG_FORMAT: "JSON"
      ```
  2. Configmap name node-topology-config
      ```yaml
+        apiVersion: v1
         kind: ConfigMap
         metadata:
           name: node-topology-config
@@ -242,16 +250,15 @@ spec:
     standAloneConfig: # Set mode to "StandAlone" in order to use this config
        storageArrays:
           - storageArrayId: "000000000001"
-             # Unisphere server managing the PowerMax array
+            # Unisphere server managing the PowerMax array
             primaryURL: https://unisphere-1-addr:8443
-             # proxyCredentialSecrets are used by the clients of the proxy to connect to it
-             # If using proxy in the stand alone mode, then the driver must be provided the
-             # same secret.
-             # The format of the proxy credential secret are exactly the same as the unisphere credential secret
-             # For using the proxy with the driver, use the same proxy credential secrets for
-             # all the managed storage arrays
+            # proxyCredentialSecrets are used by the clients of the proxy to connect to it
+            # If using proxy in the stand alone mode, then the driver must be provided the same secret.
+            # The format of the proxy credential secret are exactly the same as the unisphere credential secret
+            # For using the proxy with the driver, use the same proxy credential secrets for
+            # all the managed storage arrays
             proxyCredentialSecrets:
-	      - proxy-creds
+	           - proxy-creds
           - storageArrayId: "000000000002"
             primaryURL: https://unisphere-2-addr:8443
              # An optional backup Unisphere server managing the same array
@@ -262,7 +269,7 @@ spec:
                - proxy-creds
        managementServers:
           - url: https://unisphere-1-addr:8443
-             # Secret containing the credentials of the Unisphere server
+            # Secret containing the credentials of the Unisphere server
             arrayCredentialSecret: unsiphere-1-creds
             skipCertificateValidation: true
           - url: https://unisphere-2-addr:8443
@@ -277,14 +284,14 @@ spec:
 #### Installation
 Copy the sample file - `powermax_reverseproxy.yaml` from the `samples` folder or use the sample available in the `OperatorHub` UI  
 Edit and input all required parameters and then use the `OperatorHub` UI or run the following command to install the CSI PowerMax Reverse Proxy service:
-
-    kubectl create -f powermax_reverseproxy.yaml
-
+```bash
+  kubectl create -f powermax_reverseproxy.yaml
+```
 You can query for the deployment and service created as part of the installation using the following commands:
-  
-    kubectl get deployment -n <namespace>
-    kubectl get svc -n <namespace>
-
+```bash  
+  kubectl get deployment -n <namespace>
+  kubectl get svc -n <namespace>
+```
 There is a new sample file - `powermax_revproxy_standalone_with_driver.yaml` in the `samples` folder which enables installation of
 CSI PowerMax ReverseProxy in `StandAlone` mode along with the CSI PowerMax driver. This mode enables the CSI PowerMax driver to connect
 to multiple Unisphere servers for managing multiple PowerMax arrays. Please follow the same steps described above to install ReverseProxy
@@ -298,7 +305,7 @@ This feature is introduced in CSI Driver for powermax version 2.0.0.
 As part of driver installation, a ConfigMap with the name `powermax-config-params` is created using the manifest located in the sample file. This ConfigMap contains an attribute `CSI_LOG_LEVEL` which specifies the current log level of the CSI driver. To set the default/initial log level user can set this field during driver installation.
 
 To update the log level dynamically user has to edit the ConfigMap `powermax-config-params` and update `CSI_LOG_LEVEL` to the desired log level.
-```
+```bash
 kubectl edit configmap -n powermax powermax-config-params
 ```  
 ###  Sample  CRD file for  powermax  
@@ -316,7 +323,7 @@ Volume Health Monitoring feature is optional and by default this feature is disa
 
 To enable this feature, set  `X_CSI_HEALTH_MONITOR_ENABLED` to `true` in the driver manifest under controller and node section. Also, install the `external-health-monitor` from `sideCars` section for controller plugin.
 To get the volume health state `value` under controller should be set to true as seen below. To get the volume stats `value` under node should be set to true.
-```   
+```yaml   
      # Install the 'external-health-monitor' sidecar accordingly.
         # Allowed values:
         #   true: enable checking of health condition of CSI volumes
@@ -349,7 +356,7 @@ X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node 
 
 1. To enable this feature, set  `X_CSI_TOPOLOGY_CONTROL_ENABLED` to `true` in the driver manifest under node section. 
 
-```
+```yaml
    # X_CSI_TOPOLOGY_CONTROL_ENABLED provides a way to filter topology keys on a node based on array and transport protocol
         # if enabled, user can create custom topology keys by editing node-topology-config configmap.
         # Allowed values:
@@ -382,7 +389,7 @@ Support for auto RDM for vSphere over FC feature is optional and by default this
 
 To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver manifest under controller and node section. 
 
-```
+```yaml
 # VMware/vSphere virtualization support
         # set X_CSI_VSPHERE_ENABLED to true, if you to enable VMware virtualized environment support via RDM
         # Allowed values:
@@ -397,16 +404,16 @@ To enable this feature, set  `X_CSI_VSPHERE_ENABLED` to `true` in the driver man
         # Default value: "" <empty>
         - name: "X_CSI_VSPHERE_PORTGROUP"
           value: ""
-        # X_CSI_VSPHERE_HOSTGROUP: An existing host(initiator group) that driver will use for vSphere
-        # this hostGroup should contain initiators from all the ESXs/ESXi host where the cluster is deployed
-        # recommended format: csi-x-VC-HG, x can be anything of user choice
-        # Allowed value: valid existing host on the array
+        # X_CSI_VSPHERE_HOSTNAME: An existing host(initiator group)/ host group(cascaded intiator group) that driver will use for vSphere
+        # this host/host group should contain initiators from all the ESXs/ESXi host where the cluster is deployed
+        # recommended format: csi-x-VC-HN, x can be anything of user choice
+        # Allowed value: valid existing host(initiator group)/ host group(cascaded intiator group) on the array
         # Default value: "" <empty>
-        - name: "X_CSI_VSPHERE_HOSTGROUP"
+        - name: "X_CSI_VSPHERE_HOSTNAME"
           value: ""
 ```
 Edit the section in the driver manifest having the sample for the following `Secret` with required values.
-```
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:

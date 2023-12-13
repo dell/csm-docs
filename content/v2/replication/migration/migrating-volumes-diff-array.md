@@ -16,7 +16,9 @@ This feature needs to be planned in a controlled host environment.
 
 If the user have native multipathing, the user has to run multipath list commands on all nodes to ensure that there are no faulty paths on the host. If any faulty paths exist, the user has to flush the paths, and have a clean setup before migration is triggered using the following command:
 
-`rescan-scsi-bus.sh --remove`
+```bash
+rescan-scsi-bus.sh --remove
+```
 
 #### On Storage Array 
 
@@ -28,7 +30,9 @@ User need to ensure that migration group CRD is installed.
 
 To install CRD, user can run the command as below:
 
-`kubectl create -f deploy/replicationcrds.all.yaml`
+```bash
+kubectl create -f deploy/replicationcrds.all.yaml
+```
 
 ## Support Matrix
 
@@ -106,7 +110,7 @@ metadata:
   # Default value: pmax-migration
   name: pmax-migration
 spec:
-  # driverName: exact name of CSI Powermax driver
+  # driverName: exact name of CSI PowerMax driver
   driverName: "csi-powermax.dellemc.com"
   # sourceID: source ArrayID
   sourceID: "000000001234"
@@ -117,11 +121,15 @@ spec:
  ```   
  To create the migration group, use the below command:
 
- `kubectl -create -f <manifest.yaml>`
+ ```bash
+kubectl -create -f <manifest.yaml>
+```
 
 After completion of migration, the migration group comes to deleting state after which the admin can manually delete the migration group with the below command:
 
-`kubectl -delete -f <manifest.yaml>` 
+```bash
+kubectl -delete -f <manifest.yaml>
+``` 
 
 ## Post migration 
 

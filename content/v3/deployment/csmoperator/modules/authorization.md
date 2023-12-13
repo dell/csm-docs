@@ -144,9 +144,6 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | --------- | ----------- | -------- |-------- |
    | **authorization** | This section configures the CSM-Authorization components. | - | - |
    | PROXY_HOST | The hostname to configure the self-signed certificate (if applicable), and the proxy, tenant, role, and storage service Ingresses. | Yes | csm-authorization.com |
-   | AUTHORIZATION_LOG_LEVEL | CSM Authorization log level. Allowed values: “error”, “warn”/“warning”, “info”, “debug”. | Yes | debug |
-   | AUTHORIZATION_ZIPKIN_COLLECTORURI | The URI of the Zipkin instance to export traces. | No | - |
-   | AUTHORIZATION_ZIPKIN_PROBABILITY | The ratio of traces to export. | No | - |
    | PROXY_INGRESS_CLASSNAME | The ingressClassName of the proxy-service Ingress. | Yes | nginx |
    | PROXY_INGRESS_HOSTS | Additional host rules to be applied to the proxy-service Ingress.  | No | authorization-ingress-nginx-controller.authorization.svc.cluster.local |
    | TENANT_INGRESS_CLASSNAME | The ingressClassName of the tenant-service Ingress. | Yes | nginx |
@@ -157,6 +154,15 @@ To deploy the Operator, follow the instructions available [here](../../#installa
    | enabled | Enable/Disable deployment of the NGINX Ingress Controller. Set to false if you already have an Ingress Controller installed. | No | true |
    | **cert-manager** | This section configures the enablement of cert-manager. | - | - |
    | enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
+
+**Optional:**
+To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
+
+  Add the Zipkin values to the configMap:
+  ```
+  ZIPKIN_URI: "http://PROXY_HOST:9411/api/v2/spans"
+  ZIPKIN_PROBABILITY: "1.0"
+  ```
 
 4. Execute this command to create the Authorization CR:
 
@@ -171,11 +177,16 @@ To deploy the Operator, follow the instructions available [here](../../#installa
 
     `kubectl create secret tls karavi-auth-tls -n authorization --key <location-of-private-key-file> --cert <location-of-certificate-file>`
 
-    If using a self-signed certificate, prepare `samples/authorization/certificate.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v150.yaml). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
+    If using a self-signed certificate, prepare `samples/authorization/certificate.yaml` provided [here](https://github.com/dell/csm-operator/blob/main/samples/authorization/certificate_v160.yaml). An entry for each hostname specified in the CR must be added under `dnsNames` for the certificate to be valid for each Ingress. 
 
     Use this command to create the `karavi-auth-tls` secret:
 
     `kubectl create -f samples/authorization/certificate.yaml`
+
+### Verify Installation of the CSM Authorization Proxy Server
+Once the Authorization CR is created, you can verify the installation as mentioned below:
+
+  `kubectl describe csm/<name-of-custom-resource> -n <namespace>`
 
 ### Install Karavictl
 
