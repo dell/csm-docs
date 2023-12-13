@@ -30,7 +30,7 @@ User can query for all Dell CSI drivers using this command:
     - **If using sidecar**, you will need to edit the value fields under the HOST_PID and MDM fields by filling the empty quotes with host PID and the MDM IPs. 
     - **If not using sidecar**, leave the enabled field set to false.
 
-##### Example CR:  [samples/storage_csm_powerflex_v290.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v290.yaml)
+##### Example CR:  [samples/storage_csm_powerflex_v270.yaml](https://github.com/dell/csm-operator/blob/main/samples/storage_csm_powerflex_v270.yaml)
 
 ```yaml
     sideCars:
