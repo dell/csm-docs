@@ -168,6 +168,7 @@ Set up the PowerPath for Linux as follows:
   ```bash
    systemctl start PowerPath
   ```
+>Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
 
 ### (Optional) Volume Snapshot Requirements
   For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
