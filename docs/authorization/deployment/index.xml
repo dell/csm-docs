@@ -53,7 +53,7 @@
 &lt;p&gt;yum install -y container-selinux&lt;/p&gt;
 &lt;h3 id=&#34;dark-sites&#34;&gt;Dark Sites&lt;/h3&gt;
 &lt;p&gt;For environments where &lt;code&gt;yum&lt;/code&gt; will not work, obtain the supported version of container-selinux for your OS version and install it.&lt;/p&gt;
-&lt;p&gt;The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from &lt;a href=&#34;https://centos.pkgs.org/7/centos-extras-x86_64/&#34;&gt;https://centos.pkgs.org/7/centos-extras-x86_64/&lt;/a&gt; and &lt;a href=&#34;https://centos.pkgs.org/8/centos-appstream-x86_64/&#34;&gt;https://centos.pkgs.org/8/centos-appstream-x86_64/&lt;/a&gt;, respectively.&lt;/p&gt;
+&lt;p&gt;The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from &lt;a href=&#34;https://centos.pkgs.org/7/centos-extras-x86_64/&#34;&gt;https://centos.pkgs.org/7/centos-extras-x86_64/&lt;/a&gt; and &lt;a href=&#34;https://centos.pkgs.org/8-stream/centos-appstream-x86_64/&#34;&gt;https://centos.pkgs.org/8-stream/centos-appstream-x86_64/&lt;/a&gt;, respectively.&lt;/p&gt;
 &lt;h2 id=&#34;deploying-the-csm-authorization-proxy-server&#34;&gt;Deploying the CSM Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.&lt;/p&gt;
 &lt;p&gt;The CSM for Authorization proxy server is installed using a shell script after extracting from a tar archive.&lt;/p&gt;

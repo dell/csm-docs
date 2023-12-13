@@ -23,7 +23,14 @@
       <description>
         
         
-        &lt;p&gt;This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization RPM will be deprecated in a future release. It is highly recommended that you use CSM Authorization Helm deployment or CSM Operator going forward.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;This section outlines the deployment steps for Container Storage Modules (CSM) for Authorization.  The deployment of CSM for Authorization is handled in 2 parts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Deploying the CSM for Authorization proxy server, to be controlled by storage administrators&lt;/li&gt;
 &lt;li&gt;Configuring one to many &lt;a href=&#34;../../../authorization#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers with CSM for Authorization&lt;/li&gt;
@@ -46,7 +53,7 @@
 &lt;p&gt;yum install -y container-selinux&lt;/p&gt;
 &lt;h3 id=&#34;dark-sites&#34;&gt;Dark Sites&lt;/h3&gt;
 &lt;p&gt;For environments where &lt;code&gt;yum&lt;/code&gt; will not work, obtain the supported version of container-selinux for your OS version and install it.&lt;/p&gt;
-&lt;p&gt;The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from &lt;a href=&#34;https://centos.pkgs.org/7/centos-extras-x86_64/&#34;&gt;https://centos.pkgs.org/7/centos-extras-x86_64/&lt;/a&gt; and &lt;a href=&#34;https://centos.pkgs.org/8/centos-appstream-x86_64/&#34;&gt;https://centos.pkgs.org/8/centos-appstream-x86_64/&lt;/a&gt;, respectively.&lt;/p&gt;
+&lt;p&gt;The container-selinux RPMs for CentOS/RedHat 7 and 8 can be downloaded from &lt;a href=&#34;https://centos.pkgs.org/7/centos-extras-x86_64/&#34;&gt;https://centos.pkgs.org/7/centos-extras-x86_64/&lt;/a&gt; and &lt;a href=&#34;https://centos.pkgs.org/8-stream/centos-appstream-x86_64/&#34;&gt;https://centos.pkgs.org/8-stream/centos-appstream-x86_64/&lt;/a&gt;, respectively.&lt;/p&gt;
 &lt;h2 id=&#34;deploying-the-csm-authorization-proxy-server&#34;&gt;Deploying the CSM Authorization Proxy Server&lt;/h2&gt;
 &lt;p&gt;The first part of deploying CSM for Authorization is installing the proxy server.  This activity and the administration of the proxy server will be owned by the storage administrator.&lt;/p&gt;
 &lt;p&gt;The CSM for Authorization proxy server is installed using a shell script after extracting from a tar archive.&lt;/p&gt;
@@ -175,7 +182,14 @@ This allows CSM for Authorization to be installed in network-restricted environm
       <description>
         
         
-        &lt;p&gt;CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.&lt;/p&gt;
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;The CSM Authorization karavictl CLI is no longer actively maintained or supported. It will be deprecated in CSM 2.0.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;CSM Authorization can be installed by using the provided Helm v3 charts on Kubernetes platforms.&lt;/p&gt;
 &lt;p&gt;The following CSM Authorization components are installed in the specified namespace:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;proxy-service, which forwards requests from the CSI Driver to the backend storage array&lt;/li&gt;

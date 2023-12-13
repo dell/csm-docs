@@ -766,27 +766,18 @@ The name of the StorageClass resource that is created as the &amp;ldquo;target&a
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csm-replication-150&#34;&gt;Release Notes - CSM Replication 1.5.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csm-replication-160&#34;&gt;Release Notes - CSM Replication 1.6.0&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/665&#34;&gt;Target Backend Volume Deletion&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/790&#34;&gt;Base Image Updated to ubi-micro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/724&#34;&gt;#724 - [FEATURE]: CSM support for Openshift 4.13&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/877&#34;&gt;#877 - [FEATURE]: Make standalone helm chart available from helm repository : https://dell.github.io/dell/helm-charts&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Github ID&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/782&#34;&gt;782&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;PowerScale:&lt;/strong&gt; Target NFS exports are not deleted even though target directories are deleted&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/916&#34;&gt;#916 - [BUG]: Remove references to deprecated io/ioutil package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/928&#34;&gt;#928 - [BUG]: PowerStore Replication - Delete RG request hangs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/968&#34;&gt;#968 - [BUG]: Creating StorageClass for replication failed with unmarshal error&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -851,7 +842,7 @@ controller, because different versions could be incompatible with each other.&lt
 &lt;/ol&gt;
 &lt;h2 id=&#34;updating-csm-replication-controller&#34;&gt;Updating CSM Replication controller&lt;/h2&gt;
 &lt;p&gt;Make sure the appropriate release branch is available on the machine performing the upgrade by running:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.5.0 https://github.com/dell/csm-replication.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.6.0 https://github.com/dell/csm-replication.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;upgrading-with-helm&#34;&gt;Upgrading with Helm&lt;/h3&gt;
 &lt;p&gt;This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or &lt;code&gt;repctl&lt;/code&gt; please use &lt;a href=&#34;#upgrading-with-repctl&#34;&gt;upgrading with repctl&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Steps&lt;/strong&gt;&lt;/p&gt;
@@ -897,6 +888,7 @@ controller, because different versions could be incompatible with each other.&lt
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: Do not update the CRD as part of upgrade. An &lt;code&gt;init container&lt;/code&gt; included in the replication controller pod takes care of updating existing CRD and CR versions.&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;Starting from CSM Replication v1.6.0, the &lt;code&gt;init container&lt;/code&gt; has been removed. Therefore, when upgrading from versions older than v1.4.0 to v1.6.0 or any later versions, it is mandatory to perform an intermediate upgrade to either v1.4.0 or v1.5.0 before proceeding with any further upgrades.&lt;/p&gt;
 
       </description>
     </item>

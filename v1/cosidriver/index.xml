@@ -1,0 +1,114 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Technologies – COSI Driver</title>
+    <link>https://dell.github.io/csm-docs/v1/cosidriver/</link>
+    <description>Recent content in COSI Driver on Dell Technologies</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="https://dell.github.io/csm-docs/v1/cosidriver/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1: Features</title>
+      <link>https://dell.github.io/csm-docs/v1/cosidriver/features/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/cosidriver/features/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;objectscale&#34;&gt;ObjectScale&lt;/h2&gt;
+
+
+
+
+
+&lt;table class=&#34;table table-striped table-bordered table-sm&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;Area&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;Core Features&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Implementation level&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Status&lt;/th&gt;
+&lt;th&gt;Details&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Provisioning&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Create Bucket&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Minimum Viable Product&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;✅ Done&lt;/td&gt;
+&lt;td&gt;Bucket is created using default settings.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Brownfield provisioning&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;✅ Done&lt;/td&gt;
+&lt;td&gt;Bucket is created based on existing bucket in Object Storage Provisioner.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Advanced provisioning&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;📝 Design draft&lt;/td&gt;
+&lt;td&gt;Extra (non-default) parameters for bucket provisioning are controlled from the BucketClass.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Delete Bucket&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Minimum Viable Product&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;✅ Done&lt;/td&gt;
+&lt;td&gt;Bucket is deleted.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Access Management&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Grant Bucket Access&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Minimum Viable Product&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;✅ Done&lt;/td&gt;
+&lt;td&gt;Full access is granted for given bucket.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Advanced permissions&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;📝 Design draft&lt;/td&gt;
+&lt;td&gt;More control over permission is done through BucketAccessClass.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;em&gt;Revoke Bucket Access&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Minimum Viable Product&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;✅ Done&lt;/td&gt;
+&lt;td&gt;Access is revoked.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1: Installation</title>
+      <link>https://dell.github.io/csm-docs/v1/cosidriver/installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v1/cosidriver/installation/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

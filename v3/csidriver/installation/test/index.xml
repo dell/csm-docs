@@ -15,6 +15,300 @@
     
     
     <item>
+      <title>V3: Cert-CSI</title>
+      <link>https://dell.github.io/csm-docs/v3/csidriver/installation/test/certcsi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/v3/csidriver/installation/test/certcsi/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Cert-CSI is a tool to validate Dell CSI Drivers. It contains various test suites to validate the drivers.&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;To install this tool you can download one of binary files located in &lt;a href=&#34;https://github.com/dell/cert-csi/releases&#34;&gt;RELEASES&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can build the tool by cloning the repository and running this command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make build 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also build a docker container image by running this command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker build -t cert-csi . 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you want to collect csi-driver resource usage metrics, then please provide the namespace where it can be found and install the metric-server using this command (kubectl is required):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make install-ms
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;[FOR UNIX] If you want to build and install the tool to your $PATH and enable the &lt;strong&gt;auto-completion&lt;/strong&gt; feature, then run this command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make install-nix
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Alternatively, you can install the metric-server by following the instructions at &lt;a href=&#34;https://github.com/kubernetes-incubator/metrics-server&#34;&gt;https://github.com/kubernetes-incubator/metrics-server&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;running-cert-csi&#34;&gt;Running Cert-CSI&lt;/h2&gt;
+&lt;p&gt;To get information on how to use the program, you can use built-in help. If you&amp;rsquo;re using a UNIX-like system and enabled &lt;em&gt;auto-completion feature&lt;/em&gt; while installing the tool, then you can use shell&amp;rsquo;s built-in auto-completion to navigate through program&amp;rsquo;s subcommands and flags interactively by just pressing TAB.&lt;/p&gt;
+&lt;p&gt;To run cert-csi, you have to point your environment to a kube cluster. This allows you to receive dynamically formatted suggestions from your cluster.
+For example if you press TAB while passing &amp;ndash;storageclass (or &amp;ndash;sc) argument, the tool will parse all existing Storage Classes from your cluster and suggest them as an input for you.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To run a docker container your command should look something like this
+&lt;code&gt;docker run --rm -it -v ~/.kube/config:/root/.kube/config -v $(pwd):/app/cert-csi cert-csi &amp;lt;usual program arguments&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;driver-certification&#34;&gt;Driver Certification&lt;/h2&gt;
+&lt;p&gt;You can use cert-csi to launch a certification test run against multiple storage classes to check if the driver adheres to advertised capabilities.&lt;/p&gt;
+&lt;h3 id=&#34;preparing-config&#34;&gt;Preparing Config&lt;/h3&gt;
+&lt;p&gt;To run the certification test you need to provide &lt;code&gt;.yaml&lt;/code&gt; config with storage classes and their capabilities. You can use &lt;code&gt;example-certify-config.yaml&lt;/code&gt; as an example.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;storageClasses&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# storage-class-name (ex. powerstore)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;minSize&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# minimal size for your sc (ex. 1Gi)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;rawBlock&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# is Raw Block supported (true or false)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;expansion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# is volume expansion supported (true or false)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;clone&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# is volume cloning supported (true or false)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;snapshot&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# is volume snapshotting supported (true or false)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;RWX&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# is ReadWriteMany volume access mode supported for non RawBlock volumes (true or false)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeHealth&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# set this to enable the execution of the VolumeHealthMetricsSuite.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Make sure to enable healthMonitor for the driver&amp;#39;s controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar and pass the required arguments.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;VGS&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# set this to enable the execution of the VolumeGroupSnapSuite.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Additionally, make sure to provide the necessary required arguments such as volumeSnapshotClass, vgs-volume-label, and any others as needed.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;RWOP&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# set this to enable the execution of the MultiAttachSuite with the AccessMode set to ReadWriteOncePod.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ephemeral&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# if exists, then run EphemeralVolumeSuite&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# driver name for EphemeralVolumeSuite&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;fstype&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# fstype for EphemeralVolumeSuite&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeAttributes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# volume attrs for EphemeralVolumeSuite. &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;attr1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# volume attr for EphemeralVolumeSuite&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;attr2&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# volume attr for EphemeralVolumeSuite&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;launching-certification-test-run&#34;&gt;Launching Certification Test Run&lt;/h3&gt;
+&lt;p&gt;After preparing a certification configuration file, you can launch certification by running&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi certify --cert-config &amp;lt;path-to-config&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Optional Params:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   --vsc: volume snapshot class, required &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; you specified snapshot capability
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   --timeout: &lt;span style=&#34;color:#204a87&#34;&gt;set&lt;/span&gt; the timeout value &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; certification suites
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   --no-metrics: disables metrics aggregation &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;set&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; you encounter k8s performance issues&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   --path: path to folder where reports will be created &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; not specified ~/.cert-csi/ will be used&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;functional-tests&#34;&gt;Functional Tests&lt;/h2&gt;
+&lt;h3 id=&#34;running-individual-suites&#34;&gt;Running Individual Suites&lt;/h3&gt;
+&lt;h4 id=&#34;volumepvc-creation&#34;&gt;Volume/PVC Creation&lt;/h4&gt;
+&lt;p&gt;To run volume or PVC creation test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test volume-creation --sc &amp;lt;storage class&amp;gt; -n &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Optional Params:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--custom-name : To give custom name &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; PVC &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;while&lt;/span&gt; creating only &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; PVC
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--size : To give custom size, possible values &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; size in Gi/Mi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--access-mode : To &lt;span style=&#34;color:#204a87&#34;&gt;set&lt;/span&gt; custom access-modes, possible values - ReadWriteOnce,ReadOnlyMany and ReadWriteMany
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--block : To create raw block volumes
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;provisioningpod-creation&#34;&gt;Provisioning/Pod creation&lt;/h4&gt;
+&lt;p&gt;To run volume provisioning or pod creation test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test provisioning --sc &amp;lt;storage class&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Optional Params:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--volumeNumber : number of volumes to attach to each pod 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--podNumber : number of pod to create
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--podName : To give custom name &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; pod &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;while&lt;/span&gt; creating only &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; pod
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--block : To create raw block volumes and attach it to pods
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--vol-access-mode: To &lt;span style=&#34;color:#204a87&#34;&gt;set&lt;/span&gt; volume access modes 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-volume-deletion-suite&#34;&gt;Running Volume Deletion suite&lt;/h4&gt;
+&lt;p&gt;To run volume delete test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test volume-deletion
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pvc-name value : PVC name to delete
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pvc-namespace : PVC namespace where PVC is present
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-pod-deletion-suite&#34;&gt;Running Pod Deletion suite&lt;/h4&gt;
+&lt;p&gt;To run pod deletion test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test pod-deletion
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pod-name : Pod name to delete
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pod-namespace : Pod namespace where pod is present
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-cloned-volume-deletion-suite&#34;&gt;Running Cloned Volume deletion suite&lt;/h4&gt;
+&lt;p&gt;To run cloned volume deletion test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test clone-volume-deletion
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--clone-volume-name : Volume name to delete
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;multi-attach-volume-tests&#34;&gt;Multi Attach Volume Tests&lt;/h4&gt;
+&lt;p&gt;To run multi-attach volume test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test multi-attach-vol --sc &amp;lt;storage-class&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pods : Number of pods to create
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--block : To create raw block volume 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;ephemeral-volumes-suite&#34;&gt;Ephemeral volumes suite&lt;/h4&gt;
+&lt;p&gt;To run ephemeral volume test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test ephemeral-volume --driver &amp;lt;driver-name&amp;gt; --attr ephemeral-config.properties
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pods : Number of pods to create 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pod-name : To create pods with custom name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--attr : CSI volume attributes file name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--fs-type: FS Type can be specified
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sample ephemeral-config.properties &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;key/value pair&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;arrayId&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;arr1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;protocol&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;iSCSI
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;5Gi
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;storage-capacity-tracking-suite&#34;&gt;Storage Capacity Tracking Suite&lt;/h4&gt;
+&lt;p&gt;To run storage capacity tracking test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi functional-test capacity-tracking --sc &amp;lt;storage-class&amp;gt; --drns &amp;lt;driver-namespace&amp;gt; --pi &amp;lt;poll-interval&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Optional Params:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--vs : volume size to be created
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;other-options&#34;&gt;Other Options&lt;/h3&gt;
+&lt;h4 id=&#34;generating-tabular-report-from-db&#34;&gt;Generating tabular report from DB&lt;/h4&gt;
+&lt;p&gt;To generate tabular report from the database, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi -db &amp;lt;db_path&amp;gt; functional-report -tabular
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Example: cert-csi -db ./test.db functional-report -tabular
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: DB is mandatory parameter&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;generating-xml-report-from-db&#34;&gt;Generating XML report from DB&lt;/h4&gt;
+&lt;p&gt;To generate XML report from the database, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi -db &amp;lt;db_path&amp;gt; functional-report -xml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Example: cert-csi -db ./test.db functional-report -xml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: DB is mandatory parameter&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;including-array-configuration-file&#34;&gt;Including Array configuration file&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Array properties sample (array-config.properties)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;arrayIPs: 192.168.1.44
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;name: Unity
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;user: root
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;password: test-password
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;arrayIds: arr-1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h3&gt;
+&lt;p&gt;Tabular Report example&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../img/tabularReport.png&#34; alt=&#34;img9&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;kubernetes-end-to-end-tests&#34;&gt;Kubernetes End-To-End Tests&lt;/h2&gt;
+&lt;p&gt;All Kubernetes end to end tests require that you provide the driver config based on the storage class you want to test and the version of the kubernetes you want to test against. These are the mandatory parameters that you can provide in command like..
+&lt;code&gt;--driver-config &amp;lt;path of driver config file&amp;gt; and --version &amp;quot;v1.25.0&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;running-kubernetes-end-to-end-tests&#34;&gt;Running kubernetes end-to-end tests&lt;/h3&gt;
+&lt;p&gt;To run kubernetes end-to-end tests, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi k8s-e2e --config &amp;lt;kube config&amp;gt; --driver-config &amp;lt;path to driver config&amp;gt;  --focus &amp;lt;regx pattern to focus Ex: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;External.Storage.*&amp;#34;&lt;/span&gt; &amp;gt;  --timeout &amp;lt;timeout Ex: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2h&amp;#34;&lt;/span&gt;&amp;gt; --version &amp;lt; version of k8s Ex: &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt;&amp;gt; --skip-tests &amp;lt;skip these steps mentioned in file&amp;gt; --skip &amp;lt;regx pattern to skip tests Ex:&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Generic Ephemeral-volume|(block volmode)&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;kubernetes-end-to-end-reporting&#34;&gt;Kubernetes end-to-end reporting&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;All the reports generated by kubernetes end-to-end tests will be under &lt;code&gt;$HOME/reports&lt;/code&gt; directory by default if user doesn&amp;rsquo;t mention the report path.&lt;/li&gt;
+&lt;li&gt;Kubernetes end to end tests Execution log file will be placed under &lt;code&gt;$HOME/reports/execution_[storage class name].log&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Cert-CSI logs will be present in the execution directory &lt;code&gt;info.log&lt;/code&gt; , &lt;code&gt;error.log&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;test-config-files-format&#34;&gt;Test config files format&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;driver-confighttpsgithubcomdellcert-csiblobmainpkgutilstestdataconfig-nfsyaml&#34;&gt;&lt;a href=&#34;https://github.com/dell/cert-csi/blob/main/pkg/utils/testdata/config-nfs.yaml&#34;&gt;driver-config&lt;/a&gt;&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;ignore-testshttpsgithubcomdellcert-csiblobmainpkgutilsignoreyaml&#34;&gt;&lt;a href=&#34;https://github.com/dell/cert-csi/blob/main/pkg/utils/ignore.yaml&#34;&gt;ignore-tests&lt;/a&gt;&lt;/h4&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;example-commands&#34;&gt;Example Commands&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi k8s-e2e --config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config&amp;#34;&lt;/span&gt; --driver-config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/e2e_config/config-nfs.yaml&amp;#34;&lt;/span&gt;  --focus &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;External.Storage.*&amp;#34;&lt;/span&gt;  --timeout &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2h&amp;#34;&lt;/span&gt; --version &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt; --skip-tests &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/e2e_config/ignore.yaml&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./cert-csi k8s-e2e --config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/.kube/config&amp;#34;&lt;/span&gt; --driver-config &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/root/e2e_config/config-iscsi.yaml&amp;#34;&lt;/span&gt; --focus &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;External.Storage.*&amp;#34;&lt;/span&gt;  --timeout &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2h&amp;#34;&lt;/span&gt; --version &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1.25.0&amp;#34;&lt;/span&gt; --focus-file &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;capacity.go&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;performance-tests&#34;&gt;Performance Tests&lt;/h2&gt;
+&lt;p&gt;All performance tests require that you provide a storage class that you want to test. You can provide multiple storage classes in one command. For example, &lt;code&gt;... --sc &amp;lt;sc1&amp;gt; --sc &amp;lt;sc2&amp;gt; ...&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;running-individual-suites-1&#34;&gt;Running Individual Suites&lt;/h3&gt;
+&lt;h4 id=&#34;running-volume-creation-test-suite&#34;&gt;Running Volume Creation test suite&lt;/h4&gt;
+&lt;p&gt;To run volume creation test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; volume-creation --sc &amp;lt;storage class&amp;gt; -n &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;25&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-provisioning-test-suite&#34;&gt;Running Provisioning test suite&lt;/h4&gt;
+&lt;p&gt;To run volume provisioning test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; provisioning --sc &amp;lt;storage class&amp;gt; --podNum &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --volNum &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-scalability-test-suite&#34;&gt;Running Scalability test suite&lt;/h4&gt;
+&lt;p&gt;To run scalability test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; scaling --sc &amp;lt;storage class&amp;gt; --replicas &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-volumeio-test-suite&#34;&gt;Running VolumeIO test suite&lt;/h4&gt;
+&lt;p&gt;To run volumeIO test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; vio --sc &amp;lt;storage class&amp;gt; --chainNumber &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; --chainLength &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-snap-test-suite&#34;&gt;Running Snap test suite&lt;/h4&gt;
+&lt;p&gt;To run volume snapshot test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; snap --sc &amp;lt;storage class&amp;gt; --vsc &amp;lt;volume snapshot class&amp;gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-multi-attach-volume-suite&#34;&gt;Running Multi-attach volume suite&lt;/h4&gt;
+&lt;p&gt;To run multi-attach volume test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; multi-attach-vol --sc &amp;lt;storage class&amp;gt; --podNum &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; multi-attach-vol --sc &amp;lt;storage class&amp;gt; --podNum &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt; --block &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# to use raw block volumes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-replication-test-suite&#34;&gt;Running Replication test suite&lt;/h4&gt;
+&lt;p&gt;To run replication test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; replication --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; --vsc &amp;lt;snapshot class&amp;gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-volume-cloning-test-suite&#34;&gt;Running Volume Cloning test suite&lt;/h4&gt;
+&lt;p&gt;To run volume cloning test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; clone-volume --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-volume-expansion-test-suite&#34;&gt;Running Volume Expansion test suite&lt;/h4&gt;
+&lt;p&gt;To run volume expansion test, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; expansion --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; --iSize 8Gi --expSize 16Gi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; expansion --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# `iSize` and `expSize` default to 3Gi and 6Gi respectively&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; expansion --sc &amp;lt;storage class&amp;gt; --pn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; --vn &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt; --block &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# to create block volumes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-blocksnap-suite&#34;&gt;Running Blocksnap suite&lt;/h4&gt;
+&lt;p&gt;To run block snapshot test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; blocksnap --sc &amp;lt;storageClass&amp;gt; --vsc &amp;lt;snapshotclass&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;volume-health-metric-suite&#34;&gt;Volume Health Metric Suite&lt;/h4&gt;
+&lt;p&gt;To run the volume health metric test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; volumehealthmetrics --sc &amp;lt;storage-class&amp;gt; --driver-ns &amp;lt;driver-namespace&amp;gt; --podNum &amp;lt;number-of-pods&amp;gt; --volNum &amp;lt;number-of-volumes&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: Make sure to enable healthMonitor for the driver&amp;rsquo;s controller and node pods before running this suite. It is recommended to use a smaller interval time for this sidecar.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;ephemeral-volumes-suite-1&#34;&gt;Ephemeral volumes suite&lt;/h4&gt;
+&lt;p&gt;To run the ephemeral volume test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; ephemeral-volume --driver &amp;lt;driver-name&amp;gt; --attr ephemeral-config.properties
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pods : Number of pods to create 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--pod-name : Create pods with custom name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--attr : File name &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; the CSI volume attributes file &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;required&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--fs-type: FS Type
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sample ephemeral-config.properties &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;key/value pair&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;arrayId&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;arr1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;protocol&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;iSCSI
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;5Gi
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;running-longevity-mode&#34;&gt;Running Longevity mode&lt;/h3&gt;
+&lt;p&gt;To run longevity test suite, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; &amp;lt;any of previous tests&amp;gt; --sc &amp;lt;storage class&amp;gt; --longevity &amp;lt;number of iterations&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;interacting-with-db&#34;&gt;Interacting with DB&lt;/h3&gt;
+&lt;h4 id=&#34;generating-report-from-runs-without-running-tests&#34;&gt;Generating report from runs without running tests&lt;/h4&gt;
+&lt;p&gt;To generate test report from the database, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi --db &amp;lt;path/to/.db&amp;gt; report --testrun &amp;lt;test-run-name&amp;gt; --html --txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Report types:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--html: performance html report
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--txt: performance txt report
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--xml: junit compatible xml report, contains basic run infomation
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--tabular: tidy html report with basic run information
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;customizing-report-folder&#34;&gt;Customizing report folder&lt;/h4&gt;
+&lt;p&gt;To specify test report folder path, use &amp;ndash;path option as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi --db &amp;lt;path/to/.db&amp;gt; report --testrun &amp;lt;test-run-name&amp;gt; --path &amp;lt;path-to-folder&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Options:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--path: path to folder where reports will be created &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; not specified ~/.cert-csi/ will be used&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;generating-report-from-multiple-databases-and-test-runs&#34;&gt;Generating report from multiple databases and test runs&lt;/h4&gt;
+&lt;p&gt;To generate report from multiple databases, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi report --tr &amp;lt;db-path&amp;gt;:&amp;lt;test-run-name&amp;gt; --tr ... --tabular --xml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Supported report types: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--xml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;--tabular
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;listing-all-known-test-runs&#34;&gt;Listing all known test runs&lt;/h4&gt;
+&lt;p&gt;To list all test runs, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi --db &amp;lt;path/to/.db&amp;gt; list test-runs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;other-options-1&#34;&gt;Other options&lt;/h3&gt;
+&lt;h4 id=&#34;customizing-report-folder-1&#34;&gt;Customizing report folder&lt;/h4&gt;
+&lt;p&gt;To specify test report folder path, use &amp;ndash;path option as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &amp;lt;command&amp;gt; --path &amp;lt;path-to-folder&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Commands:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; &amp;lt;any-subcommand&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    certify
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    report
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-with-enabled-driver-resource-usage-metrics&#34;&gt;Running with enabled driver resource usage metrics&lt;/h4&gt;
+&lt;p&gt;To run tests with driver resource usage metrics enabled, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; suite&amp;gt; --sc &amp;lt;storage class&amp;gt; &amp;lt;...&amp;gt; --ns &amp;lt;driver namespace&amp;gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;running-custom-hooks-from-program&#34;&gt;Running custom hooks from program&lt;/h4&gt;
+&lt;p&gt;To run tests with custom hooks, run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-csi &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; suite&amp;gt; --sc &amp;lt;storage class&amp;gt; &amp;lt;...&amp;gt; --sh ./hooks/start.sh --rh ./hooks/ready.sh --fh ./hooks/finish.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;screenshots-1&#34;&gt;Screenshots&lt;/h2&gt;
+&lt;h3 id=&#34;running-provisioning-test&#34;&gt;Running provisioning test&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;../img/unifiedTest.png&#34; alt=&#34;img1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;You can interrupt the application by sending an interruption signal (for example pressing Ctrl + C).
+It will stop polling and try to cleanup resources.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../img/interruptTest.png&#34; alt=&#34;img2&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;running-scaling-test&#34;&gt;Running scaling test&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;../img/scaling.PNG&#34; alt=&#34;img3&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;listing-available-test-runs&#34;&gt;Listing available test runs&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;../img/listRuns.png&#34; alt=&#34;img4&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;running-longevity-mode-1&#34;&gt;Running longevity mode&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;../img/longevity.png&#34; alt=&#34;img5&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;multi-db-tabular-report-example&#34;&gt;Multi DB Tabular report example&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;../img/multiDBTabularReport.png&#34; alt=&#34;img6&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Text report example&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../img/textReport.png&#34; alt=&#34;img7&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;html-report-example&#34;&gt;HTML report example&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;../img/HTMLReport.png&#34; alt=&#34;img8&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;resource-usage-example-chart&#34;&gt;Resource usage example chart&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;../img/resourceUsage.png&#34; alt=&#34;img9&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>V3: Test PowerFlex CSI Driver</title>
       <link>https://dell.github.io/csm-docs/v3/csidriver/installation/test/powerflex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -194,9 +488,6 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;li&gt;After that, it uses that PVC as the data source to create a new PVC and mounts it on the same container. It checks if the file that existed in the source PVC also exists in the new PVC, calculates its checksum, and compares it to the checksum previously calculated.&lt;/li&gt;
 &lt;li&gt;Finally, it cleans up all the resources that are created as part of the test.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is not supported for replicated volumes.&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;h4 id=&#34;snapshot-test&#34;&gt;Snapshot test&lt;/h4&gt;
 &lt;p&gt;Use this procedure to perform a snapshot test.&lt;/p&gt;
 &lt;ol&gt;
@@ -244,7 +535,7 @@ to create instance of &lt;em&gt;VolumeSnapshotClass&lt;/em&gt; from one of defau
 &lt;h2 id=&#34;consuming-existing-volumes-with-static-provisioning&#34;&gt;Consuming existing volumes with static provisioning&lt;/h2&gt;
 &lt;p&gt;Use this procedure to consume existing volumes with static provisioning.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Open your Unisphere for PowerMax, and take a note of volume-id.&lt;/li&gt;
+&lt;li&gt;Open your Unisphere for Powermax, and take a note of volume-id.&lt;/li&gt;
 &lt;li&gt;Create PersistentVolume and use this volume-id as a volumeHandle in the manifest. Modify other parameters according to your needs.&lt;/li&gt;
 &lt;li&gt;In the following example, storage class is assumed as &amp;lsquo;powermax&amp;rsquo;, cluster prefix as &amp;lsquo;ABC&amp;rsquo; and volume&amp;rsquo;s internal name as &amp;lsquo;00001&amp;rsquo;, array ID as &amp;lsquo;000000000001&amp;rsquo;, volume ID as &amp;lsquo;1abc23456&amp;rsquo;. The volume-handle should be in the format of &lt;code&gt;csi&lt;/code&gt;-&lt;code&gt;clusterPrefix&lt;/code&gt;-&lt;code&gt;volumeNamePrefix&lt;/code&gt;-&lt;code&gt;id&lt;/code&gt;-&lt;code&gt;arrayID&lt;/code&gt;-&lt;code&gt;volumeID&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;

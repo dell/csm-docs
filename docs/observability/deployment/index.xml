@@ -26,7 +26,7 @@
         &lt;p&gt;The Container Storage Modules (CSM) for Observability Helm chart bootstraps an Observability deployment on a Kubernetes cluster using the Helm package manager.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Helm 3.3&lt;/li&gt;
+&lt;li&gt;Helm 3.x&lt;/li&gt;
 &lt;li&gt;The deployment of one or more &lt;a href=&#34;../../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;install-the-csm-for-observability-helm-chart&#34;&gt;Install the CSM for Observability Helm Chart&lt;/h2&gt;
@@ -585,7 +585,7 @@ You may obtain a copy of the License at
 &lt;/ul&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Helm 3.3&lt;/li&gt;
+&lt;li&gt;Helm 3.x&lt;/li&gt;
 &lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;online-installer&#34;&gt;Online Installer&lt;/h2&gt;
@@ -742,7 +742,7 @@ The following example will install CSM for Observability into the CSM namespace.
         &lt;p&gt;The following instructions can be followed when a Helm chart will be installed in an environment that does not have an Internet connection and will be unable to download the Helm chart and related Docker images.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Helm 3.3&lt;/li&gt;
+&lt;li&gt;Helm 3.x&lt;/li&gt;
 &lt;li&gt;The deployment of one or more &lt;a href=&#34;../#supported-csi-drivers&#34;&gt;supported&lt;/a&gt; Dell CSI drivers&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
@@ -936,6 +936,22 @@ The following example will install CSM for Observability into the CSM namespace.
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;TEST SUITE: None
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Operator</title>
+      <link>https://dell.github.io/csm-docs/docs/observability/deployment/operator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dell.github.io/csm-docs/docs/observability/deployment/operator/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The CSM Observability module for supported Dell CSI Drivers can be installed via the Dell CSM Operator.
+To deploy the Operator, follow the instructions available &lt;a href=&#34;../../../deployment/csmoperator/#installation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To install CSM Observability via the Dell CSM Operator, follow the instructions &lt;a href=&#34;../../../deployment/csmoperator/modules/observability&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>

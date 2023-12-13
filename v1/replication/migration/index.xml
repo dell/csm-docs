@@ -25,7 +25,7 @@
         
         &lt;p&gt;User can migrate existing pre-provisioned volumes to another storage array by using the array migration feature.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: Currently only migration of standalone volumes is supported.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/em&gt;: Currently only migration of standalone block volumes is supported.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;This feature needs to be planned in a controlled host environment.&lt;/p&gt;
