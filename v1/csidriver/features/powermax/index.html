@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/v1/csidriver/features/powermax/" /><meta property="article:section" content="v1" />
 
-<meta property="article:modified_time" content="2023-12-13T23:10:42+05:30" />
+<meta property="article:modified_time" content="2023-12-18T12:50:03+05:30" />
 
 <meta itemprop="name" content="PowerMax">
 <meta itemprop="description" content="Code features for PowerMax Driver">
-<meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
-<meta itemprop="wordCount" content="4460">
+<meta itemprop="dateModified" content="2023-12-18T12:50:03+05:30" />
+<meta itemprop="wordCount" content="4470">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PowerMax"/>
 <meta name="twitter:description" content="Code features for PowerMax Driver"/>
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.74018d866caf86ef733fcbee842b7853.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.eb8e1c38c45f6f8867ee9fd8e4ffb049.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.74018d866caf86ef733fcbee842b7853.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.eb8e1c38c45f6f8867ee9fd8e4ffb049.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -760,6 +760,9 @@ to configure the driver and ReverseProxy, see the relevant section <a href="../.
 </span></span></span></code></pre></div><blockquote>
 <p>Note: From v1.7, the CSI PowerMax driver installation process will no longer create VolumeSnapshotClass.
 If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the <em>csi-powermax/samples/volumesnapshotclass</em> folder</p>
+</blockquote>
+<blockquote>
+<p>Note: Snapshot for FIle in PowerMax is currently not supported.</p>
 </blockquote>
 <h3 id="creating-volume-snapshots">Creating Volume Snapshots</h3>
 <p>The following is a sample manifest for creating a Volume Snapshot using the <strong>v1</strong> snapshot APIs:</p>

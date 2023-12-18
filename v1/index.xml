@@ -2630,6 +2630,9 @@ to configure the driver and ReverseProxy, see the relevant section &lt;a href=&#
 &lt;p&gt;Note: From v1.7, the CSI PowerMax driver installation process will no longer create VolumeSnapshotClass.
 If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the &lt;em&gt;csi-powermax/samples/volumesnapshotclass&lt;/em&gt; folder&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Snapshot for FIle in PowerMax is currently not supported.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;creating-volume-snapshots&#34;&gt;Creating Volume Snapshots&lt;/h3&gt;
 &lt;p&gt;The following is a sample manifest for creating a Volume Snapshot using the &lt;strong&gt;v1&lt;/strong&gt; snapshot APIs:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;snapshot.storage.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
