@@ -30,6 +30,8 @@ snapshot:
 >Note: From v1.7, the CSI PowerMax driver installation process will no longer create VolumeSnapshotClass. 
 > If you want to create VolumeSnapshots, then create a VolumeSnapshotClass using the sample provided in the _csi-powermax/samples/volumesnapshotclass_ folder
 
+>Note: Snapshots for File in PowerMax is currently not supported. 
+
 ### Creating Volume Snapshots
 The following is a sample manifest for creating a Volume Snapshot using the **v1** snapshot APIs:
 ```yaml
