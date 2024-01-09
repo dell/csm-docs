@@ -3,7 +3,7 @@ title: PowerMax
 description: Release notes for PowerMax CSI driver
 ---
 
-## Release Notes - CSI PowerMax v2.9.0
+## Release Notes - CSI PowerMax v2.10.0
 
 >Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.
 

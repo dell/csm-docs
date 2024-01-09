@@ -191,7 +191,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 
 **Steps**
 
-1. Run `git clone -b v2.9.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
+1. Run `git clone -b v2.10.0 https://github.com/dell/csi-powermax.git` to clone the git repository. This will include the Helm charts and dell-csi-helm-installer scripts.
 2. Ensure that you have created a namespace where you want to install the driver. You can run `kubectl create namespace powermax` to create a new one 
 3. Edit the `samples/secret/secret.yaml` file,to point to the correct namespace, and replace the values for the username and password parameters.
     These values can be obtained using base64 encoding as described in the following example:
@@ -206,7 +206,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
     ```
 5. Download the default values.yaml file 
     ```bash
-    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.9.0/charts/csi-powermax/values.yaml
+    cd dell-csi-helm-installer && wget -O my-powermax-settings.yaml https://github.com/dell/helm-charts/raw/csi-powermax-2.10.0/charts/csi-powermax/values.yaml
     ```
 6. Ensure the unisphere have 10.0 REST endpoint support by clicking on Unisphere -> Help (?) -> About in Unisphere for PowerMax GUI.
 7. Edit the newly created file and provide values for the following parameters 
@@ -247,7 +247,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | powerMaxDebug | Enables low level and http traffic logging between the CSI driver and Unisphere. Don't enable this unless asked to do so by the support team. | No | false |
 | enableCHAP | Determine if the driver is going to configure SCSI node databases on the nodes with the CHAP credentials. If enabled, the CHAP secret must be provided in the credentials secret and set to the key "chapsecret" | No | false |
 | fsGroupPolicy | Defines which FS Group policy mode to be used, Supported modes `None, File and ReadWriteOnceWithFSType` | No | "ReadWriteOnceWithFSType" |
-| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.9.0 | 
+| version | Current version of the driver. Don't modify this value as this value will be used by the install script. | Yes | v2.10.0 | 
 | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" || driverRepository | Defines the registry of the container image used for the driver. | Yes | dellemc |
 | maxPowerMaxVolumesPerNode | Specifies the maximum number of volume that can be created on a node. | Yes| 0 |
 | **controller** | Allows configuration of the controller-specific parameters.| - | - |
