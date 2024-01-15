@@ -40,12 +40,12 @@ The CSI Drivers by Dell implement an interface between [CSI](https://kubernetes-
 | Static Provisioning      | yes      | yes       | yes       | yes        | yes        |
 | Dynamic Provisioning     | yes      | yes       | yes       | yes        | yes        |
 | Expand Persistent Volume | yes      | yes       | yes       | yes        | yes        |
-| Create VolumeSnapshot    | yes      | yes       | yes       | yes        | yes        |
-| Create Volume from Snapshot | yes   | yes       | yes       | yes        | yes        |
-| Delete Snapshot          | yes      | yes       | yes       | yes        | yes        |
+| Create VolumeSnapshot    | yes for LUN<br>no for NFS | yes       | yes       | yes        | yes        |
+| Create Volume from Snapshot | yes for LUN<br>no for NFS | yes       | yes       | yes        | yes        |
+| Delete Snapshot          | yes for LUN<br>no for NFS | yes       | yes       | yes        | yes        |
 | [Access Mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) for [volumeMode: Filesystem](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#volume-mode)| RWO, RWOP<br><br>ROX, RWX **with NFS ONLY**| RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** | RWO, ROX, RWOP<br><br>RWX  **with NFS ONLY** | RWO, RWX, ROX, RWOP | RWO, RWOP<br><br>ROX, RWX **with NFS ONLY** |
 | Access Mode for `volumeMode: Block`| RWO, RWX, ROX, RWOP | RWO, RWX, ROX, RWOP |RWO, RWX, ROX, RWOP |Not Supported | RWO, RWX, ROX, RWOP |
-| CSI Volume Cloning       | yes      | yes       | yes       | yes        | yes        |
+| CSI Volume Cloning       | yes for LUN<br>no for NFS       | yes       | yes       | yes        | yes        |
 | CSI Raw Block Volume     | yes      | yes       | yes       | no         | yes        |
 | CSI Ephemeral Volume     | no       | yes       | yes       | yes        | yes        |
 | Topology                 | yes      | yes       | yes       | yes        | yes        |
