@@ -9,14 +9,13 @@ description: Release notes for CSM Installation Wizard
 
 
 
+
 ### New Features/Changes
 
-- [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
-- [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
+- [#1091 - [FEATURE]: CSM 1.10 release specific changes](https://github.com/dell/csm/issues/1091)
 
 ### Fixed Issues
 
-- [#1022 - [BUG]: CSM Installation wizard is issuing the warnings that are false positives ](https://github.com/dell/csm/issues/1022)
 
 ### Known Issues
 
