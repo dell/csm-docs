@@ -82,6 +82,10 @@
 &lt;td&gt;The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version.&lt;/td&gt;
 &lt;td&gt;Describe the driver pod using &lt;code&gt;kubectl describe pod $podname -n vxflexos&lt;/code&gt; to ensure v2.8.0 is installed.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
@@ -159,6 +163,10 @@
 &lt;tr&gt;
 &lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1070&#34;&gt;Node stage is failing with error &amp;ldquo;wwn for FC device not found&amp;rdquo;&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;This is an intermittent issue, rebooting the node will resolve this issue&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -238,6 +246,10 @@
 &lt;tr&gt;
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
 &lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -380,6 +392,10 @@
 &lt;tr&gt;
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
 &lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

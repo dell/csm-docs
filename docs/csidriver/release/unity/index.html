@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/unity/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-12-13T23:10:42+05:30" />
+<meta property="article:modified_time" content="2024-01-23T13:19:56+05:30" />
 
 <meta itemprop="name" content="Unity XT">
 <meta itemprop="description" content="Release notes for Unity XT CSI driver">
-<meta itemprop="dateModified" content="2023-12-13T23:10:42+05:30" />
-<meta itemprop="wordCount" content="542">
+<meta itemprop="dateModified" content="2024-01-23T13:19:56+05:30" />
+<meta itemprop="wordCount" content="569">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Unity XT"/>
 <meta name="twitter:description" content="Release notes for Unity XT CSI driver"/>
 
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.21d5484aac0f0a863c7109e8ad5fa5b6.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6464059c32d75250a5ce4cb68e3a8123.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.21d5484aac0f0a863c7109e8ad5fa5b6.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.6464059c32d75250a5ce4cb68e3a8123.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -720,6 +720,10 @@
 <tr>
 <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
 <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
+</tr>
+<tr>
+<td>Standby controller pod is in crashloopbackoff state</td>
+<td>Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
 </tr>
 </tbody>
 </table>
