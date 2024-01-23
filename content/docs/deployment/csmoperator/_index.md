@@ -64,7 +64,7 @@ The installation process involves the creation of a `Subscription` object either
 1. Install volume snapshot CRDs. For detailed snapshot setup procedure, [click here](../../snapshots/#volume-snapshot-feature).
 2. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.4.0 https://github.com/dell/csm-operator.git
+git clone -b v1.4.1 https://github.com/dell/csm-operator.git
 ```
 3. `cd csm-operator`
 4. _(Optional)_ If using a local Docker image, edit the `deploy/operator.yaml` file and set the image name for the CSM Operator Deployment.
@@ -136,7 +136,7 @@ This needs to be performed on a Linux system with access to the Internet as a gi
 To build an offline bundle, the following steps are needed:
 1. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.4.0 https://github.com/dell/csm-operator.git
+git clone -b v1.4.1 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. Run the `csm-offline-bundle.sh` script which will be found in the `scripts` directory with an argument of `-c` in order to create an offline bundle
@@ -175,7 +175,7 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
    dellemc/dell-csi-replicator:v1.7.0
    dellemc/dell-replication-controller:v1.7.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.4.0
+   docker.io/dellemc/dell-csm-operator:v1.4.1
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
@@ -342,7 +342,7 @@ The `Update approval` (**`InstallPlan`** in OLM terms) strategy plays a role whi
 #### Using Installation Script
 1. Clone and checkout the required csm-operator version using
 ```bash
-git clone -b v1.4.0 https://github.com/dell/csm-operator.git
+git clone -b v1.4.1 https://github.com/dell/csm-operator.git
 ```
 2. `cd csm-operator`
 3. Execute `bash scripts/install.sh --upgrade`  . This command will install the latest version of the operator.
