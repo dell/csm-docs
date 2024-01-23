@@ -1,17 +1,10 @@
 ---
-title: Deployment
-linktitle: Deployment 
+title: Observability
+linktitle: Deployment of Observability via helm
 weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Observability Deployment
 ---
-
-CSM for Observability can be deployed in one of four ways:  
-
-- [Helm](./helm)
-- [CSM for Observability Installer](./online)
-- [CSM for Observability Offline Installer](./offline)
-- [Operator](./operator)
 
 ## Post Installation Dependencies
 

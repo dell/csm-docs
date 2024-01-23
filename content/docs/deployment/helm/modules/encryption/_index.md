@@ -1,5 +1,5 @@
 ---
-title: "Deployment of encryption via helm"
+title: "Encryption"
 linkTitle: "Deployment of encryption via helm"
 weight: 1
 Description: >

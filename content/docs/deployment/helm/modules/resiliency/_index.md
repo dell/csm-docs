@@ -1,5 +1,5 @@
 ---
-title: Deployment of resiliency via helm
+title: Resiliency
 linktitle: Deployment of resiliency via helm 
 weight: 3
 description: >

@@ -1,5 +1,5 @@
 ---
-title: "Deployment of application mobility via helm"
+title: "Applicationmobility"
 linkTitle: "Deployment of application mobility via helm"
 weight: 1
 Description: >
