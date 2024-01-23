@@ -34,5 +34,5 @@ You can upgrade the CSI Driver for Dell PowerScale using Helm or Dell CSM Operat
 
 **Note:** Upgrading the Operator does not upgrade the CSI Driver.
 
-1. Please upgrade the Dell CSM Operator by following [here](../../../../deployment/csmoperator/#upgrade)
-2. Once the operator is upgraded, to upgrade the driver, refer [here](../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator)
+1. Please upgrade the Dell CSM Operator by following [here](../../../../../../deployment/csmoperator/#upgrade)
+2. Once the operator is upgraded, to upgrade the driver, refer [here](../../../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator)

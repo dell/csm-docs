@@ -9,15 +9,15 @@ The CSI Driver for Dell PowerScale can be deployed by using the provided Helm v3
 
 The following are requirements to be met before installing the CSI Driver for Dell PowerScale:
 
-- Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
+- Install Kubernetes or OpenShift (see [supported versions](../../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
 - Mount propagation is enabled on container runtime that is being used
 - `nfs-utils` package must be installed on nodes that will mount volumes
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
-- If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../replication/deployment/) first
-- If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../resiliency/deployment/) first
-- If enabling Encryption, please refer to the [Encryption deployment steps](../../../../secure/encryption/deployment/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/authorization/) first
+- If enabling CSM for Replication, please refer to the [Replication deployment steps](../../../../../deployment/helm/modules/replication/) first
+- If enabling CSM for Resiliency, please refer to the [Resiliency deployment steps](../../../../../deployment/helm/modules/resiliency/) first
+- If enabling Encryption, please refer to the [Encryption deployment steps](../../../../../deployment/helm/modules/encryption/) first
 
 ### Install Helm 3.0
 
@@ -33,7 +33,7 @@ Install Helm 3.0 on the master node before you install the CSI Driver for Dell P
 
 ### (Optional) Volume Snapshot Requirements
 
-  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
+  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### (Optional) Volume Health Monitoring
 
@@ -107,7 +107,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
    | logLevel | CSI driver log level | No | "debug" |
    | certSecretCount | Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
-   | [allowedNetworks](../../../features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
+   | [allowedNetworks](../../../../../features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
    | maxIsilonVolumesPerNode | Defines the default value for a maximum number of volumes that the controller can publish to the node. If the value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which node label 'max-isilon-volumes-per-node' is not set. | Yes | 0 |
    | imagePullPolicy | Defines the policy to determine if the image should be pulled prior to starting the container | Yes | IfNotPresent |
    | verbose | Indicates what content of the OneFS REST API message should be logged in debug level logs | Yes | 1 |
@@ -146,13 +146,13 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | ignoreUnresolvableHosts | Allows new host to add to existing export list though any of the existing hosts from the same exports are unresolvable/doesn't exist anymore. | No | false |
    | noProbeOnStart | Define whether the controller/node plugin should probe all the PowerScale clusters during driver initialization | No | false |
    | autoProbe | Specify if automatically probe the PowerScale cluster if not done already during CSI calls | No | true |
-   | **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
+   | **authorization** | [Authorization](../../../../../deployment/helm/modules/authorization/) is an optional feature to apply credential shielding of the backend PowerScale. | - | - |
    | enabled                  | A boolean that enables/disables authorization feature. If enabled, isiAuthType must be set to 1. |  No      |   false   |
    | proxyHost | Hostname of the csm-authorization server. | No | Empty |
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
-   | **podmon**               | [Podmon](../../../../resiliency/deployment) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
+   | **podmon**               | [Podmon](../../../../../deployment/helm/modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-   | **encryption** | [Encryption](../../../../secure/encryption/deployment) is an optional feature to apply encryption to CSI volumes. | - | - |
+   | **encryption** | [Encryption](.../../../../../deployment/helm/modules/encryption/) is an optional feature to apply encryption to CSI volumes. | - | - |
    | enabled        | A boolean that enables/disables Encryption feature. | No | false |
 
    *NOTE:*
@@ -200,7 +200,7 @@ Create isilon-creds secret using the following command:
    - If any key/value is present in all *my-isilon-settings.yaml*, *secret*, and storageClass, then the values provided in storageClass parameters take precedence.
    - The user has to validate the yaml syntax and array-related key/values while replacing or appending the isilon-creds secret. The driver will continue to use previous values in case of an error found in the yaml file.
    - For the key isiIP/endpoint, the user can give either IP address or FQDN. Also, the user can prefix 'https' (For example, https://192.168.1.1) with the value.
-   - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../authorization) is enabled.
+   - The *isilon-creds* secret has a *mountEndpoint* parameter which should only be updated and used when [Authorization](../../../../../authorization) is enabled.
 
 7. Install OneFS CA certificates by following the instructions from the next section, if you want to validate OneFS API server's certificates. If not, create an empty secret using the following command and an empty secret must be created for the successful installation of CSI Driver for Dell PowerScale.
     ```bash

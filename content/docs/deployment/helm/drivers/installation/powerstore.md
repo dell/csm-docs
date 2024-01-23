@@ -9,7 +9,7 @@ The CSI Driver for Dell PowerStore can be deployed by using the provided Helm v3
 ## Prerequisites
 
 The following are requirements to be met before installing the CSI Driver for Dell PowerStore:
-- Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
+- Install Kubernetes or OpenShift (see [supported versions](../../../../../csidriver/#features-and-capabilities))
 - Install Helm 3.x
 - If you plan to use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, refer to either _Fibre Channel requirements_ or _Set up the iSCSI Initiator_ or _Set up the NVMe Initiator_ sections below. You can use NFS volumes without FC or iSCSI or NVMe/TCP or NVMe/FC configuration.
 > You can use either the Fibre Channel or iSCSI or NVMe/TCP or NVMe/FC protocol, but you do not need all the four.
@@ -87,7 +87,7 @@ Set up Linux multipathing as follows:
 - Ensure that the multipath command for `multipath.conf` is available on all Kubernetes nodes.
 
 ### (Optional) Volume Snapshot Requirements
-  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
+  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### Volume Health Monitoring
 
@@ -131,7 +131,7 @@ replication:
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in csm-replication git repo for the installation.
 
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../../../deployment/helm/modules/replication/install-repctl)
 
 ## Install the Driver
 
@@ -198,7 +198,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | allowAutoRoundOffFilesystemSize | Allows the controller to round off filesystem to 3Gi which is the minimum supported value | No | false |
 | storageCapacity.enabled | Allows to enable/disable storage capacity tracking feature | No | true
 | storageCapacity.pollInterval | Configure how often the driver checks for changed capacity | No | 5m
-| podmon.enabled | Allows to enable/disable [Resiliency](../../../../resiliency/deployment#powerstore-specific-recommendations) feature | No | false
+| podmon.enabled | Allows to enable/disable [Resiliency](../../../../../../deployment/helm/modules/resiliency#powerstore-specific-recommendations) feature | No | false
 
 8. Install the driver using `csi-install.sh` bash script by running 
    ```bash

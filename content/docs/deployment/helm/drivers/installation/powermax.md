@@ -10,7 +10,7 @@ CSI Driver for Dell PowerMax can be deployed by using the provided Helm v3 chart
 ## Prerequisites
 
 The following requirements must be met before installing CSI Driver for Dell PowerMax:
-- Install Kubernetes or OpenShift (see [supported versions](../../../../csidriver/#features-and-capabilities))
+- Install Kubernetes or OpenShift (see [supported versions](../../../../../csidriver/#features-and-capabilities))
 - Install Helm 3
 - Fibre Channel requirements
 - iSCSI requirements
@@ -20,7 +20,7 @@ The following requirements must be met before installing CSI Driver for Dell Pow
 - Mount propagation is enabled on container runtime that is being used
 - Linux multipathing requirements
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
-- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../authorization/deployment/) first
+- If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/authorization/) first
 - If using Powerpath , install the PowerPath for Linux requirements
 
 ### Prerequisite for CSI Reverse Proxy
@@ -171,7 +171,7 @@ Set up the PowerPath for Linux as follows:
 >Note: Do not install Dell PowerPath if multi-path software is already installed, as they cannot co-exist with native multi-path software.
 
 ### (Optional) Volume Snapshot Requirements
-  For detailed snapshot setup procedure, [click here.](../../../../snapshots/#optional-volume-snapshot-requirements)
+  For detailed snapshot setup procedure, [click here.](../../../../../snapshots/#optional-volume-snapshot-requirements)
 
 ### (Optional) Replication feature Requirements
 
@@ -185,7 +185,7 @@ replication:
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
 
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../../deployment/helm/modules/replication/install-repctl)
 
 ## Install the Driver
 
@@ -273,16 +273,16 @@ CRDs should be configured during replication prepare stage with repctl as descri
 | selfSignedCert | Set selfSignedCert to use a self-signed certificate | No | true |
 | certificateFile | certificateFile has tls.key content in encoded format | No | tls.crt.encoded64 |
 | privateKeyFile | privateKeyFile has tls.key content in encoded format | No | tls.key.encoded64 |
-| **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerMax. | - | - |
+| **authorization** | [Authorization](../../../../../deployment/helm/modules/authorization/) is an optional feature to apply credential shielding of the backend PowerMax. | - | - |
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
-| **migration** | [Migration](../../../../replication/migration/migrating-volumes-same-array) is an optional feature to enable migration between storage classes | - | - |
+| **migration** | [Migration](../../../../../replication/migration/migrating-volumes-same-array) is an optional feature to enable migration between storage classes | - | - |
 | enabled                  | A boolean that enables/disables migration feature. |  No      |   false   |
 | image | Image for dell-csi-migrator sidecar. | No | " " |
 | nodeRescanSidecarImage | Image for node rescan sidecar which rescans nodes for identifying new paths. | No | " " |
 | migrationPrefix | enables migration sidecar to read required information from the storage class fields | No | migration.storage.dell.com |
-| **replication** | [Replication](../../../../replication/deployment) is an optional feature to enable replication & disaster recovery capabilities of PowerMax to Kubernetes clusters.| - | - |
+| **replication** | [Replication](../../../../../deployment/helm/modules/replication/) is an optional feature to enable replication & disaster recovery capabilities of PowerMax to Kubernetes clusters.| - | - |
 | enabled                  | A boolean that enables/disables replication feature. |  No      |   false   |
 | replicationContextPrefix | enables side cars to read required information from the volume context | No | powermax |
 | replicationPrefix | Determine if replication is enabled | No | replication.storage.dell.com |
