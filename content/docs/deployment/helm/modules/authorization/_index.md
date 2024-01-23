@@ -1,6 +1,6 @@
 ---
 title: Authorization
-linktitle: Deployment of authorization via helm
+linktitle: Authorization
 description: >
   Dell Technologies (Dell) Container Storage Modules (CSM) for Authorization Helm deployment
 ---

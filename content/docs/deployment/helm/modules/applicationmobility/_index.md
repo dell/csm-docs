@@ -1,9 +1,9 @@
 ---
-title: "Applicationmobility"
-linkTitle: "Deployment of application mobility via helm"
+title: "ApplicationMobility"
+linkTitle: "ApplicationMobility"
 weight: 1
 Description: >
-  Deployment
+  Deployment of application mobility via helm
 ---
 
 ## Pre-requisites
