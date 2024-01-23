@@ -1,6 +1,6 @@
 ---
-title: Offline Installer
-linktitle: Offline Installer
+title: Offline Installer for Observability
+linktitle: Offline Installer for Observability
 weight: 3
 description: >
   Dell Container Storage Modules (CSM) for Observability Offline Installer

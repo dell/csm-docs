@@ -1,6 +1,6 @@
 ---
-title: "Deployment"
-linkTitle: "Deployment"
+title: "Deployment of application mobility via helm"
+linkTitle: "Deployment of application mobility via helm"
 weight: 1
 Description: >
   Deployment
