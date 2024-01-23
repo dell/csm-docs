@@ -1,7 +1,7 @@
 ---
-title: "Installation"
-linkTitle: "Installation"
-weight: 2
+title: "Helm"
+linkTitle: "Helm"
+weight: 3
 description: Methods to install CSI Drivers
 tags: 
  - install

@@ -1,7 +1,7 @@
 ---
 title: "Uninstallation"
 linkTitle: "Uninstallation"
-weight: 3
+weight: 2
 description: Methods to uninstall Dell CSI Driver
 ---
 
