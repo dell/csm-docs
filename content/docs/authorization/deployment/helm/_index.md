@@ -89,7 +89,10 @@ The following third-party components are optionally installed in the specified n
 | **redis**           | This section configures Redis.              | -        | -       |
 | redis.images.redis | The image to use for Redis. | Yes | redis:6.0.8-alpine |
 | redis.images.commander | The image to use for Redis Commander. | Yes | rediscommander/redis-commander:latest |
-| redis.storageClass | The storage class for Redis to use for persistence. If not supplied, the default storage class is used. | No | - |
+| redis.storageClass | The storage class for Redis to use for persistence. If not supplied, a locally provisioned volume is used. | No | - |
+
+  >__Note__:  
+  > - If you specify `redis.storageClass`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization.
 
 6. Install the driver using `helm`:
 
