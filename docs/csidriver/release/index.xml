@@ -328,6 +328,10 @@
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs, and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
 &lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with Kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).&lt;/td&gt;
+&lt;td&gt;This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
