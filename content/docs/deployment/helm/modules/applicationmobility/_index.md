@@ -3,7 +3,7 @@ title: "ApplicationMobility"
 linkTitle: "ApplicationMobility"
 weight: 1
 Description: >
-  Deployment of application mobility via helm
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Application mobility Helm deployment
 ---
 
 ## Pre-requisites

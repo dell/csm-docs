@@ -36,7 +36,7 @@ If the Authorization module is enabled for the CSI drivers installed in the same
 ## Prerequisites
 
 - Helm 3.x
-- The deployment of one or more [supported](../#supported-csi-drivers) Dell CSI drivers
+- The deployment of one or more supported Dell CSI drivers
 
 ## Online Installer
 
@@ -101,7 +101,7 @@ To perform an online installation of CSM for Observability, the following steps 
 3. Execute the installation script.
     The following example will install CSM for Observability into the CSM namespace.
 
-    A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../helm#configuration).
+    A sample values.yaml file is located [here](https://github.com/dell/helm-charts/blob/main/charts/karavi-observability/values.yaml). This can be copied into a file named `myvalues.yaml` and modified accordingly for the installer command below. Configuration options are outlined in the [Helm chart deployment section](../deployment#configuration).
 
     __Note:__
     - The default `values.yaml` is configured to deploy the CSM for Observability Topology service on install.

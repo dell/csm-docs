@@ -3,7 +3,7 @@ title: Observability
 linktitle: Observability
 weight: 3
 description: >
-  Dell Container Storage Modules (CSM) for Observability Deployment
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Observability Helm deployment
 ---
 
 ## Post Installation Dependencies
@@ -561,7 +561,7 @@ In this case all storage system requests made by CSM for Observability will not 
    ```
 
 3. Copy the configmap `powermax-reverseproxy-config` from the CSI Driver for Dell PowerMax namespace to the CSM namespace.  
-   __Note:__ Observability for PowerMax works only with [CSI PowerMax driver with Proxy in StandAlone mode](../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode).
+   
    ```console
 
    kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -

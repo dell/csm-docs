@@ -148,7 +148,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     kubectl get secret [VXFLEXOS-CONFIG] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [VXFLEXOS-CONFIG]/name: vxflexos-config/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform these steps:
+    If [CSM for Authorization is enabled](../../../deployment/helm/modules/authorization#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerFlex, perform these steps:
 
     ```bash
 
@@ -191,7 +191,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     kubectl get secret [ISILON-CREDS] -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/name: [ISILON-CREDS]/name: isilon-creds/' | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
     ```
 
-    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
+    If [CSM for Authorization is enabled](../../../deployment/helm/modules/authorization#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerScale, perform these steps:
 
     ```bash
 
@@ -213,7 +213,6 @@ To perform an offline installation of a Helm chart, the following steps should b
     __CSI Driver for PowerMax:__
 
     Copy the configmap from the CSI Driver for Dell PowerMax namespace to the CSM namespace.
-    __Note:__ Observability for PowerMax works only with [CSI PowerMax driver with Proxy in StandAlone mode](../../../csidriver/installation/helm/powermax/#csi-powermax-driver-with-proxy-in-standalone-mode).
     ```bash
 
     kubectl get configmap powermax-reverseproxy-config -n [CSI_DRIVER_NAMESPACE] -o yaml | sed 's/namespace: [CSI_DRIVER_NAMESPACE]/namespace: [CSM_NAMESPACE]/' | kubectl create -f -
@@ -243,7 +242,7 @@ To perform an offline installation of a Helm chart, the following steps should b
     done
     ```
 
-    If [CSM for Authorization is enabled](../../../authorization/deployment/#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
+    If [CSM for Authorization is enabled](../../../deployment/helm/modules/authorization#configuring-a-dell-csi-driver-with-csm-for-authorization) for CSI PowerMax, perform these steps:
 
     ```bash
 

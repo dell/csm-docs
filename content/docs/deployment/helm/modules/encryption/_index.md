@@ -3,7 +3,7 @@ title: "Encryption"
 linkTitle: "Encryption"
 weight: 1
 Description: >
-  Deployment of encryption via helm
+  Dell Technologies (Dell) Container Storage Modules (CSM) for Encryption Helm deployment
 ---
 Encryption for Dell Container Storage Modules is enabled via the Dell CSI driver installation. The drivers can be installed either by a Helm chart or by the Dell CSM Operator. 
 In the tech preview release, Encryption can only be enabled via Helm chart installation.

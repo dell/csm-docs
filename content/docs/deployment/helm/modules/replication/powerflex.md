@@ -67,7 +67,7 @@ You can leave other parameters like `replicationContextPrefix`, and `replication
 After enabling the replication module you can continue to install the CSI driver
 for PowerFlex following the usual installation procedure, just ensure you've added
 the array information for all of the arrays being used in the
-[secret](../../../csidriver/installation/helm/powerflex#install-the-driver).
+[secret](../../../drivers/installation/powerflex#install-the-driver).
 
 > **_NOTE:_** You need to install your driver on all clusters where you want to use
 replication. Both arrays must be accessible from each cluster.

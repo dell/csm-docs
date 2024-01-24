@@ -34,6 +34,6 @@ To upgrade the driver from csi-unity v2.9.0 to csi-unity v2.10.0
 **Note:**
 Upgrading the Operator does not upgrade the CSI Driver.
 
-1. Upgrade the Dell CSM Operator by following [here](../../../../../../deployment/csmoperator/#to-upgrade-dell-csm-operator-perform-the-following-steps)
-2. Once the operator is upgraded, to upgrade the driver, refer [here](../../../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator)
+1. Upgrade the Dell CSM Operator by following [here](../../../../../deployment/csmoperator/#to-upgrade-dell-csm-operator-perform-the-following-steps)
+2. Once the operator is upgraded, to upgrade the driver, refer [here](../../../../../deployment/csmoperator/#upgrade-driver-using-dell-csm-operator)
 
