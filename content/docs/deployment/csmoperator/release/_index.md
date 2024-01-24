@@ -31,7 +31,6 @@ Description: >
 - [#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator](https://github.com/dell/csm/issues/990)
 
 ### Known Issues
-There are no known issues in this release.
 
 | Issue | Workaround |
 |-------|------------|
