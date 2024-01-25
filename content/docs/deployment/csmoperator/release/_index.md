@@ -29,9 +29,9 @@ Description: >
 - [#988 - [BUG]: CSM Operator fails to install CSM Replication on the remote cluster](https://github.com/dell/csm/issues/988)
 - [#989 - [BUG]: Allow volume prefix to be set via CSM operator](https://github.com/dell/csm/issues/989)
 - [#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator](https://github.com/dell/csm/issues/990)
+- [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
 
 ### Known Issues
-
 | Issue | Workaround |
 |-------|------------|
 | The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io. | We recommend manually updating the images of sideCars in the sample YAML file, for example, `storage_csm_powerflex_v291.yaml`, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:

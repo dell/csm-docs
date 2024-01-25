@@ -3,7 +3,7 @@ title: Unity XT
 description: Release notes for Unity XT CSI driver
 ---
 
-## Release Notes - CSI Unity XT v2.9.0
+## Release Notes - CSI Unity XT v2.9.1
 
 
 
@@ -20,6 +20,7 @@ description: Release notes for Unity XT CSI driver
 ### Fixed Issues
 
 - [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
+- [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
 
 ### Known Issues
 

@@ -24,19 +24,19 @@ The table below lists the driver and modules versions installable with the CSM O
 
 | CSI Driver         | Version | CSM Authorization | CSM Replication | CSM Observability | CSM Resiliency |
 | ------------------ |---------|-------------------|-----------------|-------------------|----------------|
-| CSI PowerScale     | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
+| CSI PowerScale     | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ✔ 1.8.1       |
 | CSI PowerScale     | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerScale     | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
-| CSI PowerFlex      | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ✔ 1.8.0       |
+| CSI PowerFlex      | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ✔ 1.8.1       |
 | CSI PowerFlex      | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ✔ 1.7.0       |
 | CSI PowerFlex      | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ✔ 1.5.0           | ✔ 1.6.0       |
-| CSI PowerStore     | 2.9.0   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
+| CSI PowerStore     | 2.9.1   | ❌                | ❌             | ❌                | ✔ 1.8.0       |
 | CSI PowerStore     | 2.8.0   | ❌                | ❌             | ❌                | ✔ 1.7.0       |
 | CSI PowerStore     | 2.7.0   | ❌                | ❌             | ❌                | ✔ 1.6.0       |
-| CSI PowerMax       | 2.9.0   | ✔ 1.9.0           | ✔ 1.7.0        | ✔ 1.7.0           | ❌            |
+| CSI PowerMax       | 2.9.1   | ✔ 1.9.1           | ✔ 1.7.1        | ✔ 1.7.0           | ❌            |
 | CSI PowerMax       | 2.8.0   | ✔ 1.8.0           | ✔ 1.6.0        | ✔ 1.6.0           | ❌            |
 | CSI PowerMax       | 2.7.0   | ✔ 1.7.0           | ✔ 1.5.0        | ❌                | ❌            |
-| CSI Unity XT       | 2.9.0   | ❌                | ❌             | ❌                | ❌            |
+| CSI Unity XT       | 2.9.1   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.8.0   | ❌                | ❌             | ❌                | ❌            |
 | CSI Unity XT       | 2.7.0   | ❌                | ❌             | ❌                | ❌            |
 
@@ -161,14 +161,14 @@ Here is the output of a request to build an offline bundle for the Dell CSM Oper
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.9.0
-   dellemc/csi-metadata-retriever:v1.6.0
-   dellemc/csipowermax-reverseproxy:v2.8.0
-   dellemc/csi-powermax:v2.9.0
-   dellemc/csi-powerstore:v2.9.0
-   dellemc/csi-unity:v2.9.0
-   dellemc/csi-vxflexos:v2.9.0
-   dellemc/csm-authorization-sidecar:v1.9.0
+   dellemc/csi-isilon:v2.9.1
+   dellemc/csi-metadata-retriever:v1.6.1
+   dellemc/csipowermax-reverseproxy:v2.8.1
+   dellemc/csi-powermax:v2.9.1
+   dellemc/csi-powerstore:v2.9.1
+   dellemc/csi-unity:v2.9.1
+   dellemc/csi-vxflexos:v2.9.1
+   dellemc/csm-authorization-sidecar:v1.9.1
    dellemc/csm-metrics-powerflex:v1.7.0
    dellemc/csm-metrics-powerscale:v1.4.0
    dellemc/csm-topology:v1.7.0
@@ -265,8 +265,8 @@ Preparing a offline bundle for installation
 *
 * Loading docker images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.9.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.9.0
+Loaded image: docker.io/dellemc/csi-powerstore:v2.9.1
+Loaded image: docker.io/dellemc/csi-isilon:v2.9.1
 ...
 ...
 Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.9.2
@@ -275,7 +275,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 *
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v2.9.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.9.0
+   dellemc/csi-isilon:v2.9.1 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.9.1
    dellemc/csi-metadata-retriever:v1.6.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
    ...
    ...
@@ -285,8 +285,8 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 *
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: dellemc/csi-isilon:v2.9.0 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.9.0
-   changing: dellemc/csi-metadata-retriever:v1.6.0 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
+   changing: dellemc/csi-isilon:v2.9.1 -> localregistry:5000/dell-csm-operator/csi-isilon:v2.9.1
+   changing: dellemc/csi-metadata-retriever:v1.6.1 -> localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.1
    ...
    ...
    changing: registry.k8s.io/sig-storage/csi-resizer:v1.9.2 -> localregistry:5000/dell-csm-operator/csi-resizer:v1.9.2
@@ -376,7 +376,7 @@ The following notes explain some of the general items to take care of.
 1. If you are trying to upgrade the CSI driver from an older version, make sure to modify the _configVersion_ field.
    ```yaml
       driver:
-        configVersion: v2.9.0
+        configVersion: v2.9.1
    ```
 
 ## Custom Resource Definitions

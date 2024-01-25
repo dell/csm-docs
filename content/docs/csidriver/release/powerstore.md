@@ -3,7 +3,7 @@ title: PowerStore
 description: Release notes for PowerStore CSI driver
 ---
 
-## Release Notes - CSI PowerStore v2.9.0
+## Release Notes - CSI PowerStore v2.9.1
 
 
 
@@ -24,6 +24,7 @@ description: Release notes for PowerStore CSI driver
 - [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
 - [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
 - [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
+- [#1108 - [BUG]: Volumes failing to mount when customer using NVMeTCP on Powerstore](https://github.com/dell/csm/issues/1108)
 
 ### Known Issues
 
