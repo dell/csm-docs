@@ -13,13 +13,13 @@ the rest of the deployment process is described in the correspondent [CSI driver
 
 ## Vault Server
 
-Hashicorp Vault must be [pre-configured](../vault) to support Encryption. The Vault server's IP address and port must be accessible 
+Hashicorp Vault must be [pre-configured](vault) to support Encryption. The Vault server's IP address and port must be accessible 
 from the Kubernetes cluster where the CSI driver is to be deployed.
 
 ## Rekey Controller
 
 The Encryption Rekey CRD Controller is an optional component that, if installed, allows encrypted volumes rekeying in a
-Kubernetes cluster. Please refer to [Rekey Configuration](../rekey) for the Rekey Controller installation details.
+Kubernetes cluster. Please refer to [Rekey Configuration](rekey) for the Rekey Controller installation details.
 
 ## Helm Chart Values
 
@@ -106,7 +106,7 @@ A secret with the AppRole credentials used by Encryption to authenticate to the 
 
 > Set `role_id` and `secret_id` to the values provided by the Vault server administrator.
 
-> If a self-managed test Vault instance is used, generate role ID and secret ID following [these steps](../vault/#set-role-id-and-secret-id-to-the-role).
+> If a self-managed test Vault instance is used, generate role ID and secret ID following [these steps](vault/#set-role-id-and-secret-id-to-the-role).
 
 ```shell
 cat >auth.json <<EOF

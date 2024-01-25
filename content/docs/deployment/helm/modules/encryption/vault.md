@@ -41,7 +41,7 @@ Create server certificate signed by the CA:
 
 > Replace `<external IP>` with an IP address by which Encryption can reach the Vault server. 
 This may be the address of the Docker host where the Vault server will be running. 
-The same address should be used for `vault_addr` in [vault-client-conf](../deployment#configmap-vault-client-conf).
+The same address should be used for `vault_addr` in [vault-client-conf](../#configmap-vault-client-conf).
 
 ```shell
 cat > cert.ext <<EOF
@@ -224,7 +224,7 @@ vault write auth/approle/role/dea-role/role-id role_id=demo-role-id
 vault write auth/approle/role/dea-role/custom-secret-id secret_id=demo-secret-id
 ```
 
-> Secret ID has an expiration time after which it becomes invalid resulting in [authorization failure](../troubleshooting#expired-approle-secret-id).
+> Secret ID has an expiration time after which it becomes invalid resulting in [authorization failure](../../../../secure/encryption/troubleshooting#expired-approle-secret-id).
 > The expiration time for new secret IDs can be set in `secret_id_ttl` parameter when [the role is created](#create-a-role) or later on using
 > `vault write auth/approle/role/dea-role/secret-id-ttl secret_id_ttl=24h`.
 
