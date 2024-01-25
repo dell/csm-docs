@@ -11,24 +11,9 @@ description: Release notes for PowerFlex CSI driver
 
 ### New Features/Changes
 
-- [#947 - [FEATURE]: Support for Kubernetes 1.28](https://github.com/dell/csm/issues/947)
-- [#1066 - [FEATURE]: Support for Openshift 4.14](https://github.com/dell/csm/issues/1066)
-- [#1067 - [FEATURE]: Support For PowerFlex 4.5](https://github.com/dell/csm/issues/1067)
-- [#851 - [FEATURE]: Helm Chart Enhancement - Container Images Configurable in values.yaml](https://github.com/dell/csm/issues/851)
-- [#905 - [FEATURE]: Add support for CSI Spec 1.6](https://github.com/dell/csm/issues/905)
-- [#996 - [FEATURE]: Dell CSI to Dell CSM Operator Migration Process](https://github.com/dell/csm/issues/996)
 
 ### Fixed Issues
 
-- [#1011 - [BUG]: PowerFlex RWX volume no option to configure the nfs export host access ip address.](https://github.com/dell/csm/issues/1011)
-- [#1014 - [BUG]: Missing error check for os.Stat call during volume publish](https://github.com/dell/csm/issues/1014)
-- [#1020 - [BUG]: CSI-PowerFlex: SDC Rename fails when configuring multiple arrays in the secret](https://github.com/dell/csm/issues/1020)
-- [#1030 - [BUG]: Comment out duplicate entries in the sample secret.yaml file](https://github.com/dell/csm/issues/1030)
-- [#1050 - [BUG]: NFS Export gets deleted when one pod is deleted from the multiple pods consuming the same PowerFlex RWX NFS volume](https://github.com/dell/csm/issues/1050)
-- [#1054 - [BUG]:  The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version.](https://github.com/dell/csm/issues/1054)
-- [#1057 - [BUG]: CSI Driver - issue with creation volume from 1 of the worker nodes](https://github.com/dell/csm/issues/1057)
-- [#1058 - [BUG]: CSI Health monitor for Node missing for CSM PowerFlex in Operator samples](https://github.com/dell/csm/issues/1058)
-- [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
 - [#1086 - [BUG]: PowerFlex driver fails to start on RKE](https://github.com/dell/csm/issues/1086)
 - [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
 
