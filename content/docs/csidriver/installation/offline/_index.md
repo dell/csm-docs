@@ -83,8 +83,8 @@ bash scripts/csm-offline-bundle.sh -c
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.8.1
-   dellemc/csi-metadata-retriever:v1.6.0
+   dellemc/csi-isilon:v2.9.1
+   dellemc/csi-metadata-retriever:v1.6.1
    dellemc/csipowermax-reverseproxy:v2.8.1
    dellemc/csi-powermax:v2.9.1
    dellemc/csi-powerstore:v2.9.1
