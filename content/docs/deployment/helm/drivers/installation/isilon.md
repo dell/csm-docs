@@ -88,7 +88,7 @@ replication:
 
 The CRDs for replication can be obtained and installed from the csm-replication project on Github. Use `csm-replication/deploy/replicationcrds.all.yaml` located in the csm-replication git repo for the installation.
 
-CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../replication/deployment/install-repctl)
+CRDs should be configured during replication prepare stage with repctl as described in [install-repctl](../../../../helm/modules/replication/install-repctl)
 
 ## Install the Driver
 
@@ -107,7 +107,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | images | List all the images used by the CSI driver and CSM. If you use a private repository, change the registries accordingly. | Yes | "" |
    | logLevel | CSI driver log level | No | "debug" |
    | certSecretCount | Defines the number of certificate secrets, which the user is going to create for SSL authentication. (isilon-cert-0..isilon-cert-(n-1)); Minimum value should be 1.| Yes | 1 |
-   | [allowedNetworks](../../../../../features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
+   | [allowedNetworks](../../../../../csidriver/features/powerscale/#support-custom-networks-for-nfs-io-traffic) | Defines the list of networks that can be used for NFS I/O traffic, CIDR format must be used. | No | [ ] |
    | maxIsilonVolumesPerNode | Defines the default value for a maximum number of volumes that the controller can publish to the node. If the value is zero CO SHALL decide how many volumes of this type can be published by the controller to the node. This limit is applicable to all the nodes in the cluster for which node label 'max-isilon-volumes-per-node' is not set. | Yes | 0 |
    | imagePullPolicy | Defines the policy to determine if the image should be pulled prior to starting the container | Yes | IfNotPresent |
    | verbose | Indicates what content of the OneFS REST API message should be logged in debug level logs | Yes | 1 |
@@ -152,7 +152,7 @@ CRDs should be configured during replication prepare stage with repctl as descri
    | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
    | **podmon**               | [Podmon](../../../../../deployment/helm/modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
    | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-   | **encryption** | [Encryption](.../../../../../deployment/helm/modules/encryption/) is an optional feature to apply encryption to CSI volumes. | - | - |
+   | **encryption** | [Encryption](.../../../../../modules/encryption/) is an optional feature to apply encryption to CSI volumes. | - | - |
    | enabled        | A boolean that enables/disables Encryption feature. | No | false |
 
    *NOTE:*

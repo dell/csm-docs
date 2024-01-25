@@ -7,7 +7,7 @@ Description: >
 ---
 
 ## Pre-requisites
-- [Request a License for Application Mobility](../../license/)
+- [Request a License for Application Mobility](../../../../license/)
 - Object store bucket accessible by both the source and target clusters
 
 ## Installation

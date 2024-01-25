@@ -18,7 +18,7 @@ The following are requirements that must be met before installing the CSI Driver
 - If using Snapshot feature, satisfy all Volume Snapshot requirements
 - A user must exist on the array with a role _>= FrontEndConfigure_
 - If enabling CSM for Authorization, please refer to the [Authorization deployment steps](../../../../../deployment/helm/modules/authorization/) first
-- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../troubleshooting/powerflex) for details
+- If multipath is configured, ensure CSI-PowerFlex volumes are blacklisted by multipathd. See [troubleshooting section](../../../../../csidriver/troubleshooting/powerflex) for details
 
 
 ### Install Helm 3.x
@@ -136,15 +136,15 @@ Use the below command to replace or update the secret:
 *NOTE:* 
 
 - The user needs to validate the YAML syntax and array-related key/values while replacing the vxflexos-creds secret.
-- If you want to create a new array or update the MDM values in the secret, you will need to reinstall the driver. If you change other details, such as login information, the secret will dynamically update -- see [dynamic-array-configuration](../../../features/powerflex#dynamic-array-configuration) for more details.
+- If you want to create a new array or update the MDM values in the secret, you will need to reinstall the driver. If you change other details, such as login information, the secret will dynamically update -- see [dynamic-array-configuration](../../../../../csidriver/features/powerflex#dynamic-array-configuration) for more details.
 - Old `json` format of the array configuration file is still supported in this release. If you already have your configuration in `json` format, you may continue to maintain it or you may transfer this configuration to `yaml`format and replace/update the secret.  
 - "insecure" parameter has been changed to "skipCertificateValidation" as insecure is deprecated and will be removed from use in config.yaml or secret.yaml in a future release. Users can continue to use any one of "insecure" or "skipCertificateValidation" for now. The driver would return an error if both parameters are used.
-- Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../../../features/powerflex#dynamic-logging-configuration) section in Features for more information.
+- Please note that log configuration parameters from v1.5 will no longer work in v2.0 and higher. Please refer to the [Dynamic Logging Configuration](../../../../../csidriver/features/powerflex#dynamic-logging-configuration) section in Features for more information.
 - If the user is using complex K8s version like "v1.21.3-mirantis-1", use this kubeVersion check in helm/csi-unity/Chart.yaml file.
            kubeVersion: ">= 1.21.0-0 < 1.29.0-0"
 	   
 	   
-5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../../../features/powerflex#dynamic-logging-configuration) section in Features.  
+5. Default logging options are set during Helm install. To see possible configuration options, see the [Dynamic Logging Configuration](../../../../../csidriver/features/powerflex#dynamic-logging-configuration) section in Features.  
 
 6. If using automated SDC deployment:
    - Check the SDC container image is the correct version for your version of PowerFlex. 
@@ -175,9 +175,9 @@ Use the below command to replace or update the secret:
 | allowRWOMultiPodAccess | Setting allowRWOMultiPodAccess to "true" will allow multiple pods on the same node to access the same RWO volume. This behavior conflicts with the CSI specification version 1.3. NodePublishVolume description that requires an error to be returned in this case. However, some other CSI drivers support this behavior and some customers desire this behavior. Customers use this option at their own risk. | Yes | false |
 | enableQuota | A boolean that, when enabled, will set quota limit for a newly provisioned NFS volume. | No | false |
 | externalAccess | Defines additional entries for hostAccess of NFS volumes, single IP address and subnet are valid entries | No | " " |
-| **controller**           | This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](../../../features/powerflex#controller-ha) for Powerflex specifics.              | -        | -       |
+| **controller**           | This section allows the configuration of controller-specific parameters. To maximize the number of available nodes for controller pods, see this section. For more details on the new controller pod configurations, see the [Features section](../../../../../csidriver/features/powerflex#controller-ha) for Powerflex specifics.              | -        | -       |
 | volumeNamePrefix | Set so that volumes created by the driver have a default prefix. If one PowerFlex/VxFlex OS system is servicing several different Kubernetes installations or users, these prefixes help you distinguish them. | Yes | "k8s" |
-| controllerCount | Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the "controller" section in your values.yaml. For more details on the new controller pod configurations, see the [Features section](../../../../../features/powerflex#controller-ha) for Powerflex specifics. | Yes | 2 |
+| controllerCount | Set to deploy multiple controller instances. If the controller count is greater than the number of available nodes, excess pods remain in a pending state. It should be greater than 0. You can increase the number of available nodes by configuring the "controller" section in your values.yaml. For more details on the new controller pod configurations, see the [Features section](../../../../../csidriver/features/powerflex#controller-ha) for Powerflex specifics. | Yes | 2 |
 | snapshot.enabled | A boolean that enable/disable volume snapshot feature. | No | true |
 | resizer.enabled | A boolean that enable/disable volume expansion feature. | No | true |
 | nodeSelector             | Defines what nodes would be selected for pods of controller deployment. Leave as blank to use all nodes. Uncomment this section to deploy on master nodes exclusively.                                                                                                                                                                                                                                         | Yes     | " "     |
@@ -203,9 +203,9 @@ Use the below command to replace or update the secret:
 | **vgsnapshotter** | This section allows the configuration of the volume group snapshotter(vgsnapshotter) pod.  | - | - |
 | enabled | A boolean that enable/disable vg snapshotter feature. | No | false |
 | image | Image for vg snapshotter. | No | " " |
-| **podmon**               | [Podmon](../../../../../deployment/helm/modules/authorization/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
+| **podmon**               | [Podmon](../../../../../deployment/helm/modules/resiliency/) is an optional feature to enable application pods to be resilient to node failure.  |  -        |  -       |
 | enabled                  | A boolean that enables/disables podmon feature. |  No      |   false   |
-| **authorization** | [Authorization](../../../../authorization/deployment) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
+| **authorization** | [Authorization](./../../../../deployment/helm/modules/authorization/) is an optional feature to apply credential shielding of the backend PowerFlex. | - | - |
 | enabled                  | A boolean that enables/disables authorization feature. |  No      |   false   |
 | proxyHost | Hostname of the csm-authorization server. | No | Empty |
 | skipCertificateValidation | A boolean that enables/disables certificate validation of the csm-authorization proxy server. | No | true |
@@ -219,7 +219,7 @@ Alternatively, to do a helm install solely with Helm charts (without shell scrip
 - Install script will validate MDM IP(s) in `vxflexos-config` secret and creates a new field consumed by the init container and sdc-monitor container
 - This install script also runs the `verify.sh` script. You will be prompted to enter the credentials for each of the Kubernetes nodes. 
   The `verify.sh` script needs the credentials to check if SDC has been configured on all nodes. 
-- It is mandatory to run install script after changes to MDM configuration in `vxflexos-config` secret. Refer [dynamic-array-configuration](../../../../../features/powerflex#dynamic-array-configuration)
+- It is mandatory to run install script after changes to MDM configuration in `vxflexos-config` secret. Refer [dynamic-array-configuration](../../../../../csidriver/features/powerflex#dynamic-array-configuration)
 - If an extended Kubernetes version is being used (e.g. `v1.21.3-mirantis-1`) and is failing the version check in Helm even though it falls in the allowed range, then you must go into `helm/csi-vxflexos/Chart.yaml` and replace the standard `kubeVersion` check with the commented-out alternative. *Please note* that this will also allow the use of pre-release alpha and beta versions of Kubernetes, which is not supported.
   
 - (Optional) Enable additional Mount Options - A user is able to specify additional mount options as needed for the driver. 
