@@ -97,7 +97,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
     ```terminal
     helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
-    Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.2.0 -f values.yaml
+    Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.2.1 -f values.yaml
     ```
 
 ## Installation Using Operator
