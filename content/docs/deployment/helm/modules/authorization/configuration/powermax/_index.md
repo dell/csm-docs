@@ -67,7 +67,7 @@ Create the karavi-authorization-config secret using this command:
     
     - Update `images.authorization` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
-    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server.
+    - Update `authorization.proxyHost` to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
     
     - Update `authorization.skipCertificateValidation` to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 
@@ -110,7 +110,7 @@ Create the karavi-authorization-config secret using this command:
 
     - Update the `image` to the image of the CSM Authorization sidecar. In most cases, you can leave the default value.
 
-    - Update the `PROXY_HOST` environment value to the hostname of the CSM Authorization Proxy Server.
+    - Update the `PROXY_HOST` environment value to the hostname of the CSM Authorization Proxy Server. `csm-authorization.com` is a placeholder for the proxyHost. See the administrator of CSM for Authorization for the correct value.
 
     - Update the `SKIP_CERTIFICATE_VALIDATION` environment value to `true` or `false` depending on if you want to disable or enable certificate validation of the CSM Authorization Proxy Server.
 

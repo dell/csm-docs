@@ -14,9 +14,23 @@ The storage administrator must first configure Authorization with the following 
 - Roles
 - Role bindings
 
+The address of the Authorization proxy-server must be specified when executing `karavictl`.
+
+For the `RPM deployment`, the address is the DNS-hostname of the machine where the RPM is installed.
+
+For the `Helm/Operator deployment`, the address is exposed via LoadBalancer/NodePort by the Ingress Controller consuming the proxy-server Ingress. By default, this is the NGINX Ingress Controller.
+
+```
+# kubectl -n authorization get ingress
+NAME           CLASS   HOSTS                                 ADDRESS   PORTS     AGE
+proxy-server   nginx   csm-authorization.com,<other hosts>             80, 443   2m35s
+# kubectl -n authorization get service
+NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+authorization-ingress-nginx-controller             LoadBalancer   10.105.85.204    <pending>     80:30162/TCP,443:32635/TCP   30s
+```
+
 >__Note__:
-> - The address of the Authorization proxy-server must be specified when executing `karavictl`. For the `RPM deployment`, the address is the DNS-hostname of the machine where the RPM
-is installed. For the `Helm/Operator deployment`, the address is the Ingress host of the `proxy-server` with the port of the exposed Ingress Controller.
+In clusters where there is no integrated LoadBalancer, the `EXTERNAL-IP` field is `<pending>`, so you must use the NodePort address.
 
 ### Configuring Admin Token
 
