@@ -32,4 +32,38 @@ Description: >
 - [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
 
 ### Known Issues
-There are no known issues in this release.
+| Issue | Workaround |
+|-------|------------|
+| The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io. | We recommend manually updating the images of sideCars in the sample YAML file, for example, `storage_csm_powerflex_v291.yaml`, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:
+
+  ```yaml
+  sideCars:
+    # 'k8s' represents a string prepended to each volume created by the CSI driver
+    - name: provisioner
+      image: <localregistry>/csi-provisioner:v3.6.2
+      args: ["--volume-name-prefix=k8s"]
+    - name: attacher
+      image: <localregistry>/csi-attacher:v4.4.2
+    - name: registrar
+      image: <localregistry>/csi-node-driver-registrar:v2.9.1
+    - name: resizer
+      image: <localregistry>/csi-resizer:v1.9.2
+    - name: snapshotter
+      image: <localregistry>/csi-snapshotter:v6.3.2
+
+    # sdc-monitor is disabled by default, due to high CPU usage
+    - name: sdc-monitor
+      enabled: false
+      image: <localregistry>/sdc:4.5
+      envs:
+        - name: HOST_PID
+          value: "1"
+        - name: MDM
+          value: "10.xx.xx.xx,10.xx.xx.xx" # Do not add mdm value here if it is present in secret
+
+    # health monitor is disabled by default, refer to driver documentation before enabling it
+    # Also set the env variable controller.envs.X_CSI_HEALTH_MONITOR_ENABLED to "true".
+    - name: csi-external-health-monitor-controller
+      enabled: false
+      image: <localregistry>/csi-external-health-monitor-controller:v0.10.0
+      args: ["--monitor-interval=60s"]
