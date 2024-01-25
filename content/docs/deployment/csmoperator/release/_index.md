@@ -34,7 +34,7 @@ Description: >
 
 | Issue | Workaround |
 |-------|------------|
-| The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io. | We recommend manually updating the images of sideCars in the sample YAML file, for example, ` `storage_csm_powerflex_v291.yaml`, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:
+| The images of sideCars are currently missing in the sample YAMLs in the offline bundle. As a consequence, the csm-operator is pulling them from registry.k8s.io. | We recommend manually updating the images of sideCars in the sample YAML file, for example, `storage_csm_powerflex_v291.yaml`, before proceeding with the driver installation. Here is an example snippet for the sideCars section in the YAML file:
 
   ```yaml
   sideCars:
