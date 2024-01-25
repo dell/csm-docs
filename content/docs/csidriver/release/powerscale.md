@@ -27,6 +27,8 @@ description: Release notes for PowerScale CSI driver
 - [#1046 - [BUG]:Is cert-csi expansion expected to successfully run with enableQuota: false on PowerScale?](https://github.com/dell/csm/issues/1046)
 - [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
 - [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
+- [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
+- [#1114 - [BUG]: Version in Label section of PowerScale v2.9.0 driver is incorrect](https://github.com/dell/csm/issues/1114 )
 
 ### Known Issues
 

@@ -31,6 +31,8 @@ description: Release notes for PowerMax CSI driver
 - [#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)](https://github.com/dell/csm/issues/1053)
 - [#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.](https://github.com/dell/csm/issues/1056)
 - [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
+- [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
+
 
 ### Known Issues
 
