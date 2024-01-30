@@ -23,10 +23,10 @@ For the `Helm/Operator deployment`, the address is exposed via LoadBalancer/Node
 ```
 # kubectl -n authorization get ingress
 NAME           CLASS   HOSTS                                 ADDRESS   PORTS     AGE
-proxy-server   nginx   csm-authorization.com,<other hosts>             80, 443   2m35s
+proxy-server   nginx   csm-authorization.com,<other hosts>             00, 000   2m35s
 # kubectl -n authorization get service
 NAME                                               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-authorization-ingress-nginx-controller             LoadBalancer   10.105.85.204    <pending>     80:30162/TCP,443:32635/TCP   30s
+authorization-ingress-nginx-controller             LoadBalancer   00.000.000.000    <pending>     00:00000/TCP,000:00000/TCP   30s
 ```
 
 >__Note__:
