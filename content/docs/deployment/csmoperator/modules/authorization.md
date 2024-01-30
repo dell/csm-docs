@@ -80,6 +80,9 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
    | **cert-manager** | This section configures the enablement of cert-manager. | - | - |
    | enabled | Enable/Disable deployment of cert-manager. Set to false if you already have cert-manager installed. | No | true |
 
+>__Note__:  
+> - If you specify `REDIS_STORAGE_CLASS`, the storage class must NOT be provisioned by the Dell CSI Driver to be configured with this installation of CSM Authorization.
+
 **Optional:**
 To enable reporting of trace data with [Zipkin](https://zipkin.io/), use the `csm-config-params` configMap in the sample CR or dynamically by editing the configMap.
 
