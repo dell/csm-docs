@@ -29,7 +29,6 @@ description: Release notes for PowerFlex CSI driver
 - [#1057 - [BUG]: CSI Driver - issue with creation volume from 1 of the worker nodes](https://github.com/dell/csm/issues/1057)
 - [#1058 - [BUG]: CSI Health monitor for Node missing for CSM PowerFlex in Operator samples](https://github.com/dell/csm/issues/1058)
 - [#1061 - [BUG]: Golint is not installing with go get command](https://github.com/dell/csm/issues/1061)
-- [#1086 - [BUG]: PowerFlex driver fails to start on RKE](https://github.com/dell/csm/issues/1086)
 - [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
 
 
