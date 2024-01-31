@@ -30,6 +30,9 @@ Description: >
 - [#989 - [BUG]: Allow volume prefix to be set via CSM operator](https://github.com/dell/csm/issues/989)
 - [#990 - [BUG]: X_CSI_AUTH_TYPE cannot be set in CSM Operator](https://github.com/dell/csm/issues/990)
 - [#1110 - [BUG]: Multi Controller defect - sidecars timeout](https://github.com/dell/csm/issues/1110)
+- [#1117 - [BUG]: Operator crashes when deployed from OpenShift with OLM](https://github.com/dell/csm/issues/1117)
+- [#1120 - [BUG]: Skip Certificate Validation is not propagated to Authorization module in CSM Operator](https://github.com/dell/csm/issues/1120)
+- [#1122 - [BUG]: CSM Operator does not calculate status correctly when module is deployed with driver](https://github.com/dell/csm/issues/1122)
 
 ### Known Issues
 | Issue | Workaround |
