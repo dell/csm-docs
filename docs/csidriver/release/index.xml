@@ -23,7 +23,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerflex-v290&#34;&gt;Release Notes - CSI PowerFlex v2.9.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerflex-v291&#34;&gt;Release Notes - CSI PowerFlex v2.9.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
@@ -44,6 +44,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1057&#34;&gt;#1057 - [BUG]: CSI Driver - issue with creation volume from 1 of the worker nodes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1058&#34;&gt;#1058 - [BUG]: CSI Health monitor for Node missing for CSM PowerFlex in Operator samples&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -72,7 +73,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error &lt;code&gt;&amp;quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;quot;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label &lt;code&gt;security.openshift.io/csi-ephemeral-volume-profile&lt;/code&gt; in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-vxflexos-2.9.0/charts/csi-vxflexos/templates/csidriver.yaml&#34;&gt;csidriver.yaml&lt;/a&gt; file with the required security profile value should be provided. Follow &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;OpenShift 4.13 documentation for CSI Ephemeral Volumes&lt;/a&gt; for more information.&lt;/td&gt;
+&lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label &lt;code&gt;security.openshift.io/csi-ephemeral-volume-profile&lt;/code&gt; in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-vxflexos-2.9.1/charts/csi-vxflexos/templates/csidriver.yaml&#34;&gt;csidriver.yaml&lt;/a&gt; file with the required security profile value should be provided. Follow &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;OpenShift 4.13 documentation for CSI Ephemeral Volumes&lt;/a&gt; for more information.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
@@ -81,10 +82,6 @@
 &lt;tr&gt;
 &lt;td&gt;The PowerFlex Dockerfile is incorrectly labeling the version as 2.7.0 for the 2.8.0 version.&lt;/td&gt;
 &lt;td&gt;Describe the driver pod using &lt;code&gt;kubectl describe pod $podname -n vxflexos&lt;/code&gt; to ensure v2.8.0 is installed.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
-&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -105,7 +102,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powermax-v290&#34;&gt;Release Notes - CSI PowerMax v2.9.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powermax-v291&#34;&gt;Release Notes - CSI PowerMax v2.9.1&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note: Auto SRDF group creation is currently not supported in PowerMaxOS 10.1 (6079) Arrays.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -134,6 +131,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1056&#34;&gt;#1056 - [BUG]: Missing runtime dependencies reference in PowerMax README file.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -164,10 +162,6 @@
 &lt;td&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1070&#34;&gt;Node stage is failing with error &amp;ldquo;wwn for FC device not found&amp;rdquo;&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;This is an intermittent issue, rebooting the node will resolve this issue&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
-&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note:&lt;/h3&gt;
@@ -187,7 +181,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v290&#34;&gt;Release Notes - CSI Driver for PowerScale v2.9.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-driver-for-powerscale-v291&#34;&gt;Release Notes - CSI Driver for PowerScale v2.9.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
@@ -205,6 +199,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1046&#34;&gt;#1046 - [BUG]:Is cert-csi expansion expected to successfully run with enableQuota: false on PowerScale?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -217,7 +212,7 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Storage capacity tracking does not return &lt;code&gt;MaximumVolumeSize&lt;/code&gt; parameter. PowerScale is purely NFS based meaning it has no actual volumes. Therefore &lt;code&gt;MaximumVolumeSize&lt;/code&gt; cannot be implemented if there is no volume creation.&lt;/td&gt;
-&lt;td&gt;CSI PowerScale 2.9.0 is compliant with CSI 1.6 specification since the field &lt;code&gt;MaximumVolumeSize&lt;/code&gt; is optional.&lt;/td&gt;
+&lt;td&gt;CSI PowerScale 2.9.1 is compliant with CSI 1.6 specification since the field &lt;code&gt;MaximumVolumeSize&lt;/code&gt; is optional.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;If the length of the nodeID exceeds 128 characters, the driver fails to update the CSINode object and installation fails. This is due to a limitation set by CSI spec which doesn&amp;rsquo;t allow nodeID to be greater than 128 characters.&lt;/td&gt;
@@ -247,10 +242,6 @@
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
 &lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
-&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;note&#34;&gt;Note&lt;/h3&gt;
@@ -270,7 +261,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-powerstore-v290&#34;&gt;Release Notes - CSI PowerStore v2.9.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-powerstore-v291&#34;&gt;Release Notes - CSI PowerStore v2.9.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
@@ -286,6 +277,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1053&#34;&gt;#1053 - [BUG]: make gosec is erroring out - Repos PowerMax,PowerStore,PowerScale (gosec is installed)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1061&#34;&gt;#1061 - [BUG]: Golint is not installing with go get command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1108&#34;&gt;#1108 - [BUG]: Volumes failing to mount when customer using NVMeTCP on Powerstore&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -351,7 +343,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;release-notes---csi-unity-xt-v290&#34;&gt;Release Notes - CSI Unity XT v2.9.0&lt;/h2&gt;
+        &lt;h2 id=&#34;release-notes---csi-unity-xt-v291&#34;&gt;Release Notes - CSI Unity XT v2.9.1&lt;/h2&gt;
 &lt;h3 id=&#34;new-featureschanges&#34;&gt;New Features/Changes&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/947&#34;&gt;#947 - [FEATURE]: Support for Kubernetes 1.28&lt;/a&gt;&lt;/li&gt;
@@ -363,6 +355,7 @@
 &lt;h3 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1014&#34;&gt;#1014 - [BUG]: Missing error check for os.Stat call during volume publish&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dell/csm/issues/1110&#34;&gt;#1110 - [BUG]: Multi Controller defect - sidecars timeout&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;known-issues&#34;&gt;Known Issues&lt;/h3&gt;
 &lt;table&gt;
@@ -396,10 +389,6 @@
 &lt;tr&gt;
 &lt;td&gt;If the volume limit is exhausted and there are pending pods and PVCs due to &lt;code&gt;exceed max volume count&lt;/code&gt;, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.&lt;/td&gt;
 &lt;td&gt;It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/95911&#34;&gt;https://github.com/kubernetes/kubernetes/issues/95911&lt;/a&gt; with the same behavior.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
-&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

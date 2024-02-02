@@ -123,10 +123,13 @@
 &lt;td&gt;A CSI ephemeral pod may not get created in OpenShift 4.13 and fail with the error &lt;code&gt;&amp;quot;error when creating pod: the pod uses an inline volume provided by CSIDriver csi-vxflexos.dellemc.com, and the namespace has a pod security enforcement level that is lower than privileged.&amp;quot;&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;This issue occurs because OpenShift 4.13 introduced the CSI Volume Admission plugin to restrict the use of a CSI driver capable of provisioning CSI ephemeral volumes during pod admission. Therefore, an additional label &lt;code&gt;security.openshift.io/csi-ephemeral-volume-profile&lt;/code&gt; in &lt;a href=&#34;https://github.com/dell/helm-charts/blob/csi-vxflexos-2.8.0/charts/csi-vxflexos/templates/csidriver.yaml&#34;&gt;csidriver.yaml&lt;/a&gt; file with the required security profile value should be provided. Follow &lt;a href=&#34;https://docs.openshift.com/container-platform/4.13/storage/container_storage_interface/ephemeral-storage-csi-inline.html&#34;&gt;OpenShift 4.13 documentation for CSI Ephemeral Volumes&lt;/a&gt; for more information.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: &lt;code&gt;vxflexos-controller-*&lt;/code&gt; is the controller pod that acquires leader lease&lt;/p&gt;
 &lt;/blockquote&gt;
 
       </description>
@@ -205,6 +208,10 @@
 &lt;td&gt;Volume mount is failing on few OS(ex:VMware Virtual Platform) during node publish with error &lt;code&gt;wrong fs type, bad option, bad superblock&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;1. Check the multipath configuration(if enabled) 2. Edit Vm Advanced settings-&amp;gt;hardware and add the param &lt;code&gt;disk.enableUUID=true&lt;/code&gt; and reboot the node&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -273,6 +280,10 @@
 &lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.22.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1&lt;/td&gt;
 &lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-isilon/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -327,6 +338,30 @@
 &lt;tr&gt;
 &lt;td&gt;Driver install or upgrade fails because of an incompatible Kubernetes version, even though the version seems to be within the range of compatibility. For example: Error: UPGRADE FAILED: chart requires kubeVersion: &amp;gt;= 1.22.0 &amp;lt; 1.25.0 which is incompatible with Kubernetes V1.22.11-mirantis-1&lt;/td&gt;
 &lt;td&gt;If you are using an extended Kubernetes version, please see the &lt;a href=&#34;https://github.com/dell/helm-charts/blob/main/charts/csi-powerstore/Chart.yaml&#34;&gt;helm Chart&lt;/a&gt; and use the alternate kubeVersion check that is provided in the comments. Please note that this is not meant to be used to enable the use of pre-release alpha and beta versions, which is not supported.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;If two separate networks are configured for ISCSI and NVMeTCP, the driver may encounter difficulty identifying the second network (e.g., NVMeTCP).&lt;/td&gt;
+&lt;td&gt;This is a known issue, and the workaround involves creating a single network on the array to serve both ISCSI and NVMeTCP purposes.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unable to provision PVC&amp;rsquo;s via driver&lt;/td&gt;
+&lt;td&gt;Ensure that the NAS name matches the one provided on the array side.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unable to install or upgrade the driver&lt;/td&gt;
+&lt;td&gt;Ensure  that the firewall is configured to grant adequate permissions for downloading images from the registry.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Faulty paths in the multipath&lt;/td&gt;
+&lt;td&gt;Ensure that the configuration of the multipath is correct and connectivity to the underlying hardware is intact.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unable to install or upgrade the driver due to minimum Kubernetes version or Openshift version&lt;/td&gt;
+&lt;td&gt;Currently CSM only supports n, n-1, n-2 version of Kubernetes and Openshift, if you still wanted to continue with existing version update the &lt;code&gt;verify.sh&lt;/code&gt; to continue.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Volumes are not getting deleted on the array when PV&amp;rsquo;s are deleted&lt;/td&gt;
+&lt;td&gt;Ensure &lt;code&gt;persistentVolumeReclaimPolicy&lt;/code&gt; is set to Delete.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -383,6 +418,10 @@
 &lt;tr&gt;
 &lt;td&gt;When a node goes down, the block volumes attached to the node cannot be attached to another node&lt;/td&gt;
 &lt;td&gt;1. Force delete the pod running on the node that went down &lt;br /&gt; 2. Delete the VolumeAttachment to the node that went down. &lt;br /&gt; Now the volume can be attached to the new node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Standby controller pod is in crashloopbackoff state&lt;/td&gt;
+&lt;td&gt;Scale down the replica count of the controller pod&amp;rsquo;s deployment to 1 using &lt;code&gt;kubectl scale deployment &amp;lt;deployment_name&amp;gt; --replicas=1 -n &amp;lt;driver_namespace&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

@@ -40,7 +40,7 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerStore&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;/tr&gt;
@@ -58,7 +58,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerMax&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;/tr&gt;
@@ -76,7 +76,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
 &lt;/tr&gt;
@@ -94,7 +94,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;/tr&gt;
@@ -112,7 +112,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI Unity XT&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
 &lt;td&gt;✔️&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
 &lt;/tr&gt;
@@ -148,11 +148,11 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSM Replication&lt;/td&gt;
-&lt;td&gt;1.7.0&lt;/td&gt;
+&lt;td&gt;1.7.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSM Resiliency&lt;/td&gt;
-&lt;td&gt;1.7.0&lt;/td&gt;
+&lt;td&gt;1.8.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -216,7 +216,7 @@ helm repo update
 &lt;p&gt;Install the Helm chart.&lt;/p&gt;
 &lt;p&gt;On your terminal, run this command:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-terminal&#34; data-lang=&#34;terminal&#34;&gt;helm install &amp;lt;release-name&amp;gt; dell/container-storage-modules -n &amp;lt;namespace&amp;gt; --version &amp;lt;container-storage-module chart-version&amp;gt; -f &amp;lt;values.yaml location&amp;gt;
-Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.1.0 -f values.yaml
+Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.2.1 -f values.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;installation-using-operator&#34;&gt;Installation Using Operator&lt;/h2&gt;
@@ -303,11 +303,11 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
+&lt;td&gt;✔ 1.9.1&lt;/td&gt;
+&lt;td&gt;✔ 1.7.1&lt;/td&gt;
 &lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
+&lt;td&gt;✔ 1.8.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerScale&lt;/td&gt;
@@ -327,11 +327,11 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerFlex&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
+&lt;td&gt;✔ 1.9.1&lt;/td&gt;
+&lt;td&gt;✔ 1.7.1&lt;/td&gt;
 &lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;✔ 1.7.0&lt;/td&gt;
-&lt;td&gt;✔ 1.8.0&lt;/td&gt;
+&lt;td&gt;✔ 1.8.1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerFlex&lt;/td&gt;
@@ -351,7 +351,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerStore&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
@@ -375,9 +375,9 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI PowerMax&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.9.0&lt;/td&gt;
-&lt;td&gt;✔ 1.7.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
+&lt;td&gt;✔ 1.9.1&lt;/td&gt;
+&lt;td&gt;✔ 1.7.1&lt;/td&gt;
 &lt;td&gt;✔ 1.7.0&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
 &lt;/tr&gt;
@@ -399,7 +399,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CSI Unity XT&lt;/td&gt;
-&lt;td&gt;2.9.0&lt;/td&gt;
+&lt;td&gt;2.9.1&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
 &lt;td&gt;❌&lt;/td&gt;
@@ -448,7 +448,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;li&gt;Install volume snapshot CRDs. For detailed snapshot setup procedure, &lt;a href=&#34;../../snapshots/#volume-snapshot-feature&#34;&gt;click here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.0 https://github.com/dell/csm-operator.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.1 https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;(Optional)&lt;/em&gt; If using a local Docker image, edit the &lt;code&gt;deploy/operator.yaml&lt;/code&gt; file and set the image name for the CSM Operator Deployment.&lt;/li&gt;
@@ -561,7 +561,7 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 &lt;ol&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.0 https://github.com/dell/csm-operator.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.1 https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Run the &lt;code&gt;csm-offline-bundle.sh&lt;/code&gt; script which will be found in the &lt;code&gt;scripts&lt;/code&gt; directory with an argument of &lt;code&gt;-c&lt;/code&gt; in order to create an offline bundle&lt;/li&gt;
@@ -584,21 +584,21 @@ Example: helm install powerstore dell/container-storage-modules -n csi-powerstor
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.9.0
-   dellemc/csi-metadata-retriever:v1.6.0
-   dellemc/csipowermax-reverseproxy:v2.8.0
-   dellemc/csi-powermax:v2.9.0
-   dellemc/csi-powerstore:v2.9.0
-   dellemc/csi-unity:v2.9.0
-   dellemc/csi-vxflexos:v2.9.0
-   dellemc/csm-authorization-sidecar:v1.9.0
+   dellemc/csi-isilon:v2.9.1
+   dellemc/csi-metadata-retriever:v1.6.1
+   dellemc/csipowermax-reverseproxy:v2.8.1
+   dellemc/csi-powermax:v2.9.1
+   dellemc/csi-powerstore:v2.9.1
+   dellemc/csi-unity:v2.9.1
+   dellemc/csi-vxflexos:v2.9.1
+   dellemc/csm-authorization-sidecar:v1.9.1
    dellemc/csm-metrics-powerflex:v1.7.0
    dellemc/csm-metrics-powerscale:v1.4.0
    dellemc/csm-topology:v1.7.0
    dellemc/dell-csi-replicator:v1.7.0
    dellemc/dell-replication-controller:v1.7.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.4.0
+   docker.io/dellemc/dell-csm-operator:v1.4.1
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
@@ -677,8 +677,8 @@ dell-csm-operator-bundle/LICENSE
 *
 * Loading docker images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.9.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.9.0
+Loaded image: docker.io/dellemc/csi-powerstore:v2.9.1
+Loaded image: docker.io/dellemc/csi-isilon:v2.9.1
 ...
 ...
 Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.9.2
@@ -687,7 +687,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 *
 * Tagging and pushing images
 
-   dellemc/csi-isilon:v2.9.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.9.0
+   dellemc/csi-isilon:v2.9.1 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.9.1
    dellemc/csi-metadata-retriever:v1.6.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
    ...
    ...
@@ -697,8 +697,8 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 *
 * Preparing files within /root/dell-csm-operator-bundle
 
-   changing: dellemc/csi-isilon:v2.9.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.9.0
-   changing: dellemc/csi-metadata-retriever:v1.6.0 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.0
+   changing: dellemc/csi-isilon:v2.9.1 -&amp;gt; localregistry:5000/dell-csm-operator/csi-isilon:v2.9.1
+   changing: dellemc/csi-metadata-retriever:v1.6.1 -&amp;gt; localregistry:5000/dell-csm-operator/csi-metadata-retriever:v1.6.1
    ...
    ...
    changing: registry.k8s.io/sig-storage/csi-resizer:v1.9.2 -&amp;gt; localregistry:5000/dell-csm-operator/csi-resizer:v1.9.2
@@ -763,7 +763,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2
 &lt;ol&gt;
 &lt;li&gt;Clone and checkout the required csm-operator version using&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.0 https://github.com/dell/csm-operator.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone -b v1.4.1 https://github.com/dell/csm-operator.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;code&gt;cd csm-operator&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Execute &lt;code&gt;bash scripts/install.sh --upgrade&lt;/code&gt;  . This command will install the latest version of the operator.&lt;/li&gt;
@@ -793,7 +793,7 @@ The following notes explain some of the general items to take care of.&lt;/li&gt
 &lt;ol&gt;
 &lt;li&gt;If you are trying to upgrade the CSI driver from an older version, make sure to modify the &lt;em&gt;configVersion&lt;/em&gt; field.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.9.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;configVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v2.9.1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h2&gt;

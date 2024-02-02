@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.121.2">
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,12 +18,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/replication/upgrade/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-12-13T15:02:38-04:00" />
+<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
 
 <meta itemprop="name" content="Upgrade">
 <meta itemprop="description" content="Upgrade guide
 ">
-<meta itemprop="dateModified" content="2023-12-13T15:02:38-04:00" />
+<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
 <meta itemprop="wordCount" content="716">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Upgrade"/>
 <meta name="twitter:description" content="Upgrade guide
@@ -84,7 +84,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -106,7 +106,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -128,7 +128,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -716,7 +716,7 @@ controller, because different versions could be incompatible with each other.</p
 </ol>
 <h2 id="updating-csm-replication-controller">Updating CSM Replication controller</h2>
 <p>Make sure the appropriate release branch is available on the machine performing the upgrade by running:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.7.0 https://github.com/dell/csm-replication.git
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone -b v1.7.1 https://github.com/dell/csm-replication.git
 </span></span></code></pre></div><h3 id="upgrading-with-helm">Upgrading with Helm</h3>
 <p>This option will only work if you have previously installed replication via Helm chart, available since version 1.1. If you used simple manifest or <code>repctl</code> please use <a href="#upgrading-with-repctl">upgrading with repctl</a></p>
 <p><strong>Steps</strong></p>

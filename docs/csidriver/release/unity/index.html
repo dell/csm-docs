@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.121.2">
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="robots" content="index, follow">
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -16,12 +16,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dell.github.io/csm-docs/docs/csidriver/release/unity/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2024-01-23T13:19:56+05:30" />
+<meta property="article:modified_time" content="2024-02-02T12:19:38+05:30" />
 
 <meta itemprop="name" content="Unity XT">
 <meta itemprop="description" content="Release notes for Unity XT CSI driver">
-<meta itemprop="dateModified" content="2024-01-23T13:19:56+05:30" />
-<meta itemprop="wordCount" content="569">
+<meta itemprop="dateModified" content="2024-02-02T12:19:38+05:30" />
+<meta itemprop="wordCount" content="551">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Unity XT"/>
 <meta name="twitter:description" content="Release notes for Unity XT CSI driver"/>
 
@@ -80,7 +80,7 @@
 	
 	
 	
-	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.0)</a>
+	<a class="dropdown-item" href="https://dell.github.io/csm-docs/docs/">Current(v1.9.1)</a>
 	
 	<a class="dropdown-item" href="https://dell.github.io/csm-docs/v1">v1.8.0</a>
 	
@@ -102,7 +102,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -124,7 +124,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/csm-docs/offline-search-index.7a3f421b812ad475ba59b258a3829232.json"
+  data-offline-search-index-json-src="/csm-docs/offline-search-index.a0524863f1063f9e39caf0f2eec462a0.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -615,7 +615,7 @@
 
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#release-notes---csi-unity-xt-v290">Release Notes - CSI Unity XT v2.9.0</a>
+    <li><a href="#release-notes---csi-unity-xt-v291">Release Notes - CSI Unity XT v2.9.1</a>
       <ul>
         <li><a href="#new-featureschanges">New Features/Changes</a></li>
         <li><a href="#fixed-issues">Fixed Issues</a></li>
@@ -675,7 +675,7 @@
 	<h1>Unity XT</h1>
 
 	       
-	<h2 id="release-notes---csi-unity-xt-v290">Release Notes - CSI Unity XT v2.9.0</h2>
+	<h2 id="release-notes---csi-unity-xt-v291">Release Notes - CSI Unity XT v2.9.1</h2>
 <h3 id="new-featureschanges">New Features/Changes</h3>
 <ul>
 <li><a href="https://github.com/dell/csm/issues/947">#947 - [FEATURE]: Support for Kubernetes 1.28</a></li>
@@ -687,6 +687,7 @@
 <h3 id="fixed-issues">Fixed Issues</h3>
 <ul>
 <li><a href="https://github.com/dell/csm/issues/1014">#1014 - [BUG]: Missing error check for os.Stat call during volume publish</a></li>
+<li><a href="https://github.com/dell/csm/issues/1110">#1110 - [BUG]: Multi Controller defect - sidecars timeout</a></li>
 </ul>
 <h3 id="known-issues">Known Issues</h3>
 <table>
@@ -720,10 +721,6 @@
 <tr>
 <td>If the volume limit is exhausted and there are pending pods and PVCs due to <code>exceed max volume count</code>, the pending PVCs will be bound to PVs and the pending pods will be scheduled to nodes when the driver pods are restarted.</td>
 <td>It is advised not to have any pending pods or PVCs once the volume limit per node is exhausted on a CSI Driver. There is an open issue reported with kubenetes at <a href="https://github.com/kubernetes/kubernetes/issues/95911">https://github.com/kubernetes/kubernetes/issues/95911</a> with the same behavior.</td>
-</tr>
-<tr>
-<td>Standby controller pod is in crashloopbackoff state</td>
-<td>Scale down the replica count of the controller pod&rsquo;s deployment to 1 using <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=1 -n &lt;driver_namespace&gt;</code></td>
 </tr>
 </tbody>
 </table>
