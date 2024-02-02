@@ -13,19 +13,19 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
 | CSI Driver         | Version   | Helm   | Operator  |
 | ------------------ | --------- | ------ | --------- |
-| CSI PowerStore     | 2.9.0     |✔️      |✔️        |
+| CSI PowerStore     | 2.9.1     |✔️      |✔️        |
 | CSI PowerStore     | 2.8.0     |✔️      |✔️        |
 | CSI PowerStore     | 2.7.0     |✔️      |✔️        |
-| CSI PowerMax       | 2.9.0     |✔️      |✔️        |
+| CSI PowerMax       | 2.9.1     |✔️      |✔️        |
 | CSI PowerMax       | 2.8.0     |✔️      |✔️        |
 | CSI PowerMax       | 2.7.0     |✔️      |✔️        |
-| CSI PowerFlex      | 2.9.0     |✔️      |❌        |
+| CSI PowerFlex      | 2.9.1     |✔️      |❌        |
 | CSI PowerFlex      | 2.8.0     |✔️      |❌        | 
 | CSI PowerFlex      | 2.7.0     |✔️      |❌        | 
-| CSI PowerScale     | 2.9.0     |✔️      |✔️        |
+| CSI PowerScale     | 2.9.1     |✔️      |✔️        |
 | CSI PowerScale     | 2.8.0     |✔️      |✔️        | 
 | CSI PowerScale     | 2.7.0     |✔️      |✔️        | 
-| CSI Unity XT       | 2.9.0     |✔️      |❌        |
+| CSI Unity XT       | 2.9.1     |✔️      |❌        |
 | CSI Unity XT       | 2.8.0     |✔️      |❌        | 
 | CSI Unity XT       | 2.7.0     |✔️      |❌        | 
 
@@ -36,8 +36,8 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 | CSM Modules          | Version   | 
 | ---------------------| --------- | 
 | CSM Observability    | 1.7.0     |
-| CSM Replication      | 1.7.0     |
-| CSM Resiliency       | 1.7.0     |
+| CSM Replication      | 1.7.1     |
+| CSM Resiliency       | 1.8.1     |
 
 ## Installation
 
@@ -97,7 +97,7 @@ The [Dell Container Storage Modules Installation Wizard](./src/index.html) is a 
 
     ```terminal
     helm install <release-name> dell/container-storage-modules -n <namespace> --version <container-storage-module chart-version> -f <values.yaml location>
-    Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.1.0 -f values.yaml
+    Example: helm install powerstore dell/container-storage-modules -n csi-powerstore --version 1.2.1 -f values.yaml
     ```
 
 ## Installation Using Operator
