@@ -289,8 +289,7 @@ spec:
 
 ## Controller HA
 
-CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of the controller pod. At any time, only one controller pod is active(leader), and the rest are on standby.
-In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`.
+CSI PowerScale driver version 1.4.0 and later supports running multiple replicas of the controller pod. Leader election is only applicable for all sidecar containers and driver container will be running in all controller pods. In case of a failure, one of the standby pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`.
 
 Additionally by leveraging `pod anti-affinity`, no two-controller pods are ever scheduled on the same node.
 

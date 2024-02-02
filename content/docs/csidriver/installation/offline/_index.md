@@ -83,21 +83,21 @@ bash scripts/csm-offline-bundle.sh -c
 *
 * Pulling and saving container images
 
-   dellemc/csi-isilon:v2.8.0
-   dellemc/csi-metadata-retriever:v1.6.0
-   dellemc/csipowermax-reverseproxy:v2.6.0
-   dellemc/csi-powermax:v2.9.0
-   dellemc/csi-powerstore:v2.9.0
-   dellemc/csi-unity:v2.8.0
-   dellemc/csi-vxflexos:v2.9.0
-   dellemc/csm-authorization-sidecar:v1.9.0
+   dellemc/csi-isilon:v2.9.1
+   dellemc/csi-metadata-retriever:v1.6.1
+   dellemc/csipowermax-reverseproxy:v2.8.1
+   dellemc/csi-powermax:v2.9.1
+   dellemc/csi-powerstore:v2.9.1
+   dellemc/csi-unity:v2.8.1
+   dellemc/csi-vxflexos:v2.9.1
+   dellemc/csm-authorization-sidecar:v1.9.1
    dellemc/csm-metrics-powerflex:v1.5.0
    dellemc/csm-metrics-powerscale:v1.2.0
    dellemc/csm-topology:v1.5.0
-   dellemc/dell-csi-replicator:v1.7.0
+   dellemc/dell-csi-replicator:v1.7.1
    dellemc/dell-replication-controller:v1.7.0
    dellemc/sdc:4.5
-   docker.io/dellemc/dell-csm-operator:v1.3.0
+   docker.io/dellemc/dell-csm-operator:v1.4.1
    gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
    nginxinc/nginx-unprivileged:1.20
    otel/opentelemetry-collector:0.42.0
@@ -186,8 +186,8 @@ Preparing a offline bundle for installation
 *
 * Loading docker images
 
-Loaded image: docker.io/dellemc/csi-powerstore:v2.9.0
-Loaded image: docker.io/dellemc/csi-isilon:v2.8.0
+Loaded image: docker.io/dellemc/csi-powerstore:v2.9.1
+Loaded image: docker.io/dellemc/csi-isilon:v2.9.1
 ...
 ...
 Loaded image: registry.k8s.io/sig-storage/csi-resizer:v1.8.0

@@ -311,7 +311,8 @@ For example, if `nodeNameTemplate` is _abc-%foo%-hostname_ and nodename is _work
 
 ## Controller HA
 
-Starting with version 1.5, the CSI PowerMax driver supports running multiple replicas of the controller Pod. At any time, only one controller Pod is active(leader), and the rest are on standby. In case of a failure, one of the standby Pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`. Additionally by leveraging `pod anti-affinity`, no two-controller Pods are ever scheduled on the same node.
+Starting with version 1.5, the CSI PowerMax driver supports running multiple replicas of the controller Pod.
+Leader election is only applicable for all sidecar containers and driver container will be running in all controller pods . In case of a failure, one of the standby Pods becomes active and takes the position of leader. This is achieved by using native leader election mechanisms utilizing `kubernetes leases`. Additionally by leveraging `pod anti-affinity`, no two-controller Pods are ever scheduled on the same node.
 
 To increase or decrease the number of controller Pods, edit the following value in `values.yaml` file:
 ```yaml
