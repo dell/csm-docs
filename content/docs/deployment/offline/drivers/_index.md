@@ -220,7 +220,7 @@ Loaded image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
 
 ### Perform either a Helm installation or Operator installation
 
-Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via [Helm](../../../deployment/helm/drivers/installation) or [Operator](../../../deployment/csmoperator/#installation)..
+Now that the required images are available and the Helm Charts/Operator configuration updated, you can proceed by following the usual installation procedure as documented either via [Helm](../../../deployment/helm/drivers/installation) or [Operator](../../../deployment/csmoperator/#installation).
 
 *NOTES:* 
 1. Offline bundle installation is only supported with manual installs i.e. without using Operator Lifecycle Manager.
